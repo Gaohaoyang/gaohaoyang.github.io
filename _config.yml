@@ -14,9 +14,9 @@ github_username:  jekyll
 markdown: kramdown
 
 # highlight
-# highlighter: pygments
+highlighter: pygments
 # highlighter: rouge
-highlighter: false
+# highlighter: false
 
 # this is the old style
 # pygments: true 
