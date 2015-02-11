@@ -17,6 +17,9 @@ markdown: kramdown
 # 本地用rouge, github上用pygments
 # highlighter: pygments
 # highlighter: rouge
-# highlighter: false
+highlighter: false
 
-# lsi: true
+comments :
+    provider : duoshuo
+    duoshuo : 
+      short_name : hygblog
