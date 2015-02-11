@@ -19,4 +19,4 @@ markdown: kramdown
 highlighter: rouge
 # highlighter: false
 
-lsi: true
+# lsi: true
