@@ -18,8 +18,3 @@ markdown: kramdown
 highlighter: pygments
 # highlighter: rouge
 # highlighter: false
-
-comments :
-    provider : duoshuo
-    duoshuo : 
-      short_name : hygblog
