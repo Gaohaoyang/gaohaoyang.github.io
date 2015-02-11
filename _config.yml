@@ -1,6 +1,6 @@
 # Site settings
-title: HY Blog
-email: gaohaohaoyang126@126.com
+title: Hyg Blog
+email: gaohaoyang126@126.com
 description: > # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
@@ -14,9 +14,9 @@ github_username:  Gaohaoyang
 markdown: kramdown
 
 # highlight
+# 本地用rouge, github上用pygments
 # highlighter: pygments
-# highlighter: rouge
-highlighter: false
+highlighter: rouge
+# highlighter: false
 
-# this is the old style
-# pygments: true 
+lsi: true
