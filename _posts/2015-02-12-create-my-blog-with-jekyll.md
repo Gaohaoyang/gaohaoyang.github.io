@@ -16,8 +16,8 @@ categories: 前端 jekyll
 ruby官网下载安装：https://www.ruby-lang.org/en/downloads/  
 安装完成后配置环境变量
 
-在命令提示符中，得到ruby版本号
-123432
+在命令提示符中，得到ruby版本号   
+![ruby-v]({{ "/css/pics/ruby-v.png" | prepend: site.baseurl }})
 
 
 ##后续
