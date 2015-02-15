@@ -28,5 +28,17 @@
     })();
   </script>
 <!-- 多说公共JS代码 end -->
+
+<!-- 在新窗口中打开 -->
+  <script type="text/javascript">
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+          $(this).attr('target', '_blank');
+      });
+    }
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
+  </script>
   </body>
 </html>
