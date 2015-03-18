@@ -3,6 +3,7 @@ layout: post
 title:  "Jekyll搭建静态博客"
 date:   2015-02-15 22:14:54
 categories: 前端 jekyll
+meta: Jekyll Github 搭建静态博客 blog 高浩阳
 ---
 
 ##序
