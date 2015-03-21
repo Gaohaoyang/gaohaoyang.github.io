@@ -27,6 +27,7 @@ I teached her [Boostrap](http://www.bootcss.com/) this afternoon. She has alread
 She seems to like Web Pages Design. Though she used to be a Graphic Designer. And now, she really works hard.
 
 -----------
+***********
 
 At last I'll show the works that we did together in 2 hours. It's unfinished. I guess she will do it later. It's a nice weekend, isn't it?   
 
