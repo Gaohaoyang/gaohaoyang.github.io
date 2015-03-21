@@ -7,7 +7,7 @@ excerpt: 仿造知乎zhihu，今天教女朋友编程，仿造知乎做了一个
 ---
 
 My girlfriend is learning html and css recently. I told her to follow the video. Here, I recommend a video in Chinese that suite for new learners. The name of course is Getting HTML web pages dev in 8 hours ( 8小时学会HTML网页开发 ) . I watched this video at very first time. The teacher named Eighteen Swallows ( 燕十八 ) . He teached very clear even himself being on screen to show what is float or box-model.    
-![燕十八](http://7q5cdt.com1.z0.glb.clouddn.com/teach-girlfriend-html-18swallows.png)
+> ![燕十八](http://7q5cdt.com1.z0.glb.clouddn.com/teach-girlfriend-html-18swallows.png)
 
 > Here is the site of the free online video.   
 > [http://study.163.com/course/courseMain.htm?courseId=432008](http://study.163.com/course/courseMain.htm?courseId=432008)    
@@ -18,7 +18,7 @@ Now I'll tell something happend today. She has watched the video above, and know
 
 We determined to copy the pages on [Zhihu](http://zhihu.com)   
 Like this:   
-![知乎zhihu](http://7q5cdt.com1.z0.glb.clouddn.com/teach-girlfriend-html-zhihu.jpg)   
+> ![知乎zhihu](http://7q5cdt.com1.z0.glb.clouddn.com/teach-girlfriend-html-zhihu.jpg)   
 
 I teached her [Boostrap](http://www.bootcss.com/) this afternoon. She has already got to read the docs and can code simple statics pages.   
 
@@ -29,4 +29,4 @@ At last I'll show the works that we did together in 2 hours. It's unfinished. I 
 > [to see Copy Zhihu, click here](http://gaohaoyang.github.io/works/bootstrap-zhihu/)   
 
 screenshot of copy Zhihu
-![Copy Zhihu](http://7q5cdt.com1.z0.glb.clouddn.com/teach-girlfriend-html-copyZhihu.jpg)
+> ![Copy Zhihu](http://7q5cdt.com1.z0.glb.clouddn.com/teach-girlfriend-html-copyZhihu.jpg)
