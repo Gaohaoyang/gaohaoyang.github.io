@@ -37,4 +37,4 @@ At last I'll show the works that we did together in 2 hours. It's unfinished. I 
 > [*to see Copy Zhihu, click here*](http://gaohaoyang.github.io/works/bootstrap-zhihu/)   
 
 screenshot of copy Zhihu
-![Copy Zhihu](http://7q5cdt.com1.z0.glb.clouddn.com/teach-girlfriend-html-copyZhihu.jpg)
+![Copy Zhihu](http://7q5cdt.com1.z0.glb.clouddn.com/teach-girlfriend-html-CopyZhihu.jpg)
