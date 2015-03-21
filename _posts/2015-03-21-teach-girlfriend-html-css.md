@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  "Teach Girlfriend make a Web Pages like Zhihu"
+title:  "Teach Girlfriend to make a Web Pages like Zhihu"
 date:   2015-03-21 15:14:54
 categories: bootstrap zhihu
 excerpt: Girlfriend learning write code to copy zhihu 仿造知乎zhihu，今天教女朋友编程，仿造知乎做了一个页面，使用了bootstrap, html, css
 ---
 
 My girlfriend is learning html and css recently. I told her to follow the video. Here, I recommend a video in Chinese that suite for new learners. The name of course is Getting HTML web pages dev in 8 hours ( 8小时学会HTML网页开发 ) . I watched this video at very first time. The teacher named Eighteen Swallows ( 燕十八 ) . He teached very clear even himself being on screen to show what is float or box-model.    
-![燕十八](http://7q5cdt.com1.z0.glb.clouddn.com/teach-girlfriend-html-18swallows.png)
+<!-- ![燕十八](http://7q5cdt.com1.z0.glb.clouddn.com/teach-girlfriend-html-18swallows.png) -->
 
 > Here is the site of the free online video.   
 > [http://study.163.com/course/courseMain.htm?courseId=432008](http://study.163.com/course/courseMain.htm?courseId=432008)    
@@ -34,7 +34,7 @@ She seems to like Web Pages Design. Though she used to be a Graphic Designer. An
 
 At last I'll show the works that we did together in 2 hours. It's unfinished. I guess she will do it later. It's a nice weekend, isn't it?   
 
-> *[to see Copy Zhihu, click here](http://gaohaoyang.github.io/works/bootstrap-zhihu/)*   
+> [*to see Copy Zhihu, click here*](http://gaohaoyang.github.io/works/bootstrap-zhihu/)   
 
 screenshot of copy Zhihu
 ![Copy Zhihu](http://7q5cdt.com1.z0.glb.clouddn.com/teach-girlfriend-html-copyZhihu.jpg)
