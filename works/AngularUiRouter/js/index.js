@@ -20,7 +20,14 @@ angular.module('routerApp', ['ui.router'])
 		            'main@index':{
 		            	templateUrl: 'templates/home.html'
 		            }
-
 		        }
+		    })
+		    .state('index.blog', {
+		    	url: '/blog',
+		    	views:{
+		    		'main@index':{
+		    			templateUrl:'templates/blogs.html'
+		    		}
+		    	}
 		    });
 });
