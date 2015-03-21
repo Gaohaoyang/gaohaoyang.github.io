@@ -13,12 +13,11 @@ My girlfriend is learning html and css recently. I told her to follow the video.
 > [http://study.163.com/course/courseMain.htm?courseId=432008](http://study.163.com/course/courseMain.htm?courseId=432008)    
 
 > I did the detailed note about this course. You can read here [http://wenku.baidu.com/view/aa136099f90f76c660371a35](http://wenku.baidu.com/view/aa136099f90f76c660371a35)
-
-
+   
+   
 -----------   
-
-
-
+   
+   
 Now I'll tell something happend today. She has watched the video above, and knows a little on BootStrap. So she wants to do some pages with BootStrap.    
 
 We determined to copy the pages on [Zhihu](http://zhihu.com)   
@@ -28,12 +27,11 @@ Like this:
 I teached her [Boostrap](http://www.bootcss.com/) this afternoon. She has already got to read the docs and can code simple statics pages.   
 
 She seems to like Web Pages Design. Though she used to be a Graphic Designer. And now, she really works hard.
-
-
+   
+   
 -----------   
-
-
-
+   
+   
 At last I'll show the works that we did together in 2 hours. It's unfinished. I guess she will do it later. It's a nice weekend, isn't it?   
 
 > *[to see Copy Zhihu, click here](http://gaohaoyang.github.io/works/bootstrap-zhihu/)*   
