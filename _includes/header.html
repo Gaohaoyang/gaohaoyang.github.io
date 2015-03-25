@@ -1,26 +1,7 @@
 <header>
-  <!-- <div class="wrapper">
-    <a class="site-title" href="{{ site.baseurl }}/">{{ site.title }}</a>
-    <nav class="site-nav">
-      <a href="#" class="menu-icon">
-        <svg viewBox="0 0 18 15">
-          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
-          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
-          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
-        </svg>
-      </a>
-      <div class="trigger">
-        {% for page in site.pages %}
-          {% if page.title %}
-            <a class="page-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
-          {% endif %}
-        {% endfor %}
-      </div>
-    </nav>
-  </div> -->
 
 <!-- navbar -->
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-inverse">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -30,28 +11,41 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{{ site.baseurl }}">{{ site.title }}</a>
+      <a class="navbar-brand" href="{{ site.baseurl }}/">{{ site.title }}</a>
     </div>
-
+    <p class="navbar-text">Front-end Dev Engineer</p>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
-      </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
+
+        {% if page.url == "/index.html" %}
+          <li class="active">
+          {% else %}
+          <li>
+        {% endif %}
+          <a href="{{ site.baseurl }}/">Blog</a></li>
+
+        <!-- {% for p in site.pages %}
+          {% if p.title %}
+          {% if p.url == page.url %}
+          <li class="active">
+          {% else %}
+          <li>
+          {% endif %}
+            <a href="{{ p.url }}"><span class="glyphicon {{ p.icon }}"></span> {{ p.title }}</a>
+          </li>
+          {% endif %}
+        {% endfor %} -->
+        {% for p in site.pages %}
+          {% if p.title %}
+            {% if p.url == page.url %}
+              <li class="active">
+              {% else %}
+              <li>
+            {% endif %}
+            <a href="{{ p.url | prepend: site.baseurl }}">{{ p.title }}</a></li>
+          {% endif %}
+        {% endfor %}
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
