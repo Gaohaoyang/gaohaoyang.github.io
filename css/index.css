@@ -1,0 +1,9 @@
+*{
+    font-family: Lato,'Microsoft YaHei', 'SimHei', sans-serif;
+}
+body {
+	background-color: #eee;
+}
+body>.container{
+	background-color: white;
+}

@@ -12,7 +12,8 @@ My girlfriend is learning html and css recently. I told her to follow the video.
 > Here is the site of the free online video.   
 > [http://study.163.com/course/courseMain.htm?courseId=432008](http://study.163.com/course/courseMain.htm?courseId=432008)    
 
-> I did the detailed note about this course. You can read here [http://wenku.baidu.com/view/aa136099f90f76c660371a35](http://wenku.baidu.com/view/aa136099f90f76c660371a35)   
+> I did the detailed note about this course. You can read here 
+> [http://wenku.baidu.com/view/aa136099f90f76c660371a35](http://wenku.baidu.com/view/aa136099f90f76c660371a35)   
 
 <br>
 <br>
