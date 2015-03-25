@@ -1,7 +1,7 @@
 <header>
 
 <!-- navbar -->
-  <nav class="navbar navbar-inverse">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -23,19 +23,8 @@
           {% else %}
           <li>
         {% endif %}
-          <a href="{{ site.baseurl }}/">Blog</a></li>
+          <a href="{{ site.baseurl }}/"><span class="glyphicon glyphicon-th-large"></span> Blog</a></li>
 
-        <!-- {% for p in site.pages %}
-          {% if p.title %}
-          {% if p.url == page.url %}
-          <li class="active">
-          {% else %}
-          <li>
-          {% endif %}
-            <a href="{{ p.url }}"><span class="glyphicon {{ p.icon }}"></span> {{ p.title }}</a>
-          </li>
-          {% endif %}
-        {% endfor %} -->
         {% for p in site.pages %}
           {% if p.title %}
             {% if p.url == page.url %}
@@ -43,7 +32,7 @@
               {% else %}
               <li>
             {% endif %}
-            <a href="{{ p.url | prepend: site.baseurl }}">{{ p.title }}</a></li>
+            <a href="{{ p.url | prepend: site.baseurl }}"><span class="glyphicon {{ p.icon }}"></span> {{ p.title }}</a></li>
           {% endif %}
         {% endfor %}
       </ul>
