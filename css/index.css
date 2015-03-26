@@ -2,8 +2,9 @@
     font-family: Lato,'Microsoft YaHei', 'SimHei', sans-serif;
 }
 body {
-	background-color: #eee;
+	/* background-color: #eee; */
+	background-image: url("/css/pics/canvas_bg.jpg");
 }
-body>.container{
-	background-color: white;
+.container-bg{
+	background-color: #f8f8fd;
 }
