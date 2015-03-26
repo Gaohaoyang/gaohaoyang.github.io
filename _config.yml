@@ -11,6 +11,7 @@ description: 浩阳的博客，前端设计爱好者
 # url: "http://yourdomain.com" # the base hostname & protocol for your site
 # twitter_username: jekyllrb
 github_username:  Gaohaoyang
+permalink: /:year/:month/:day/:title/
 
 # Build settings
 markdown: kramdown

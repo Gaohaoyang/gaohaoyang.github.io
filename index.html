@@ -4,50 +4,44 @@ layout: default
 <div class="row">
   <div class="col-sm-9">
     
-
     <!-- small button -->
     <p class="pull-right visible-xs">
       <button>toggle</button>
     </p>
-
     <h1>Posts</h1>
-    <ul class="list-group">
+    <ul class="list-group my-post-list">
       {% for post in site.posts %}
         <li class="list-group-item">
           <h2>
           <a class="" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
           </h2>
           <span class="">{{ post.date | date: "%b %-d, %Y" }}</span>
-          
+         
         </li>
       {% endfor %}
     </ul>
-
   </div>
-
   <div class="col-sm-3">
-
-    <div class="panel panel-default">
-      <div class="panel-heading"><h4><strong>Categories</strong></h4></div>
-     <!--  <div class="panel-body">
-       <p>...</p>
-     </div> -->
-
-      <!-- List group -->
-      <div class="list-group">
-        <a href="#" class="list-group-item active">
-          Cras justo odio
-        </a>
-        <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-        <a href="#" class="list-group-item">Morbi leo risus</a>
-        <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-        <a href="#" class="list-group-item">Vestibulum at eros</a>
-      </div>
-    </div>
-
-    
+    <div class="shadow-corner-curl">
+      <ul class="">
+        <li class="my-list-header">
+          Categories
+        </li>
+        <li class="my-list-item">
+          <a href="">All<span class="my-badge"> {{site.categories | size}}</span>
+          </a>
+        </li>
+        {% for category in site.categories %}
+          <li class="my-list-item">
+            <a href="">
+            {{ category | first }} <span class="my-badge">{{ category | last | size }}</span>
+            </a>
+          </li>
+        
+      {% endfor %}
+    </ul>
   </div>
 </div>
-
-  <!-- <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p> -->
+</div>
+<!-- <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p> -->
 </div>

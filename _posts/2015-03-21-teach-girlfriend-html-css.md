@@ -2,7 +2,7 @@
 layout: post
 title:  "Teach Girlfriend to make a Web Pages like Zhihu"
 date:   2015-03-21 15:14:54
-categories: bootstrap zhihu
+categories: Bootstrap
 excerpt: Girlfriend learning write code to copy zhihu 仿造知乎zhihu，今天教女朋友编程，仿造知乎做了一个页面，使用了bootstrap, html, css
 ---
 

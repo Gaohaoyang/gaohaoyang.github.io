@@ -1,10 +1,107 @@
-*{
-    font-family: Lato,'Microsoft YaHei', 'SimHei', sans-serif;
-}
+/* commom */
 body {
 	/* background-color: #eee; */
-	background-image: url("/css/pics/canvas_bg.jpg");
+	background-image: url(http://7q5cdt.com1.z0.glb.clouddn.com/bg-canvas_bg.jpg);
+    font-family: 'Microsoft YaHei', 'SimHei', sans-serif;
 }
-.container-bg{
+ul{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+a:link {color: #003}		/* 未访问的链接 */
+a:visited {color: #669}	/* 已访问的链接 */
+a:hover {color: #336;text-decoration: none;}	/* 鼠标移动到链接上 */
+a:active {color: #99b}	/* 选定的链接 */
+
+/* navbar */
+nav{
+	box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+	-moz-box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+	-o-box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* index main */
+.my-post-list h2{
+	font-size: 20px;
+}
+.my-bg{
 	background-color: #f8f8fd;
+}
+
+/* list */
+.my-list-header {
+	padding: 12px 12px;
+	border-bottom: 1px solid #c0c0c0;
+	font-size: 16px;
+	font-weight: bold;
+}
+.my-list-item{
+	padding:8px 15px; 
+	border-bottom:1px solid #ddd; 
+
+}
+.my-list-item .my-badge{
+	font-size: 12px;
+	font-weight: bold;
+	color: #fff;
+	background-color: #999;
+	padding: 0px 7px 1px 8px;
+	border-radius: 9px;
+	float: right;
+}
+
+/* shadow */
+.shadow-corner-curl{
+	margin:30px 0 0 0;
+	position: relative;
+	background-color:#f8f8fd; 
+	box-shadow: 0 1px 4px rgba(0,0,0,0.3),0 0 20px rgba(0,0,0,0.1) inset;
+	-webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.3),0 0 20px rgba(0,0,0,0.1) inset;
+	-moz-box-shadow: 0 1px 4px rgba(0,0,0,0.3),0 0 20px rgba(0,0,0,0.1) inset;
+	-o-box-shadow: 0 1px 4px rgba(0,0,0,0.3),0 0 20px rgba(0,0,0,0.1) inset;
+}
+.shadow-corner-curl:before{
+	content:"";
+	position: absolute;
+	z-index: -5;
+	width: 90%;
+	height:76%;
+	left: 15px;
+	bottom: 8px;
+	background: transparent;
+	box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+	-webkit-box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+	-moz-box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+	-o-box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+
+	/* 向左倾斜12度，再旋转4度 */
+	transform:skew(-10deg) rotate(-4deg);
+	-webkit-transform:skew(-10deg) rotate(-4deg);
+	-moz-transform:skew(-10deg) rotate(-4deg);
+	-o-transform:skew(-10deg) rotate(-4deg);
+	-ms-transform:skew(-10deg) rotate(-4deg);
+}
+.shadow-corner-curl:after{
+	content:"";
+	position: absolute;
+	z-index: -5;
+	width: 90%;
+	height:76%;
+	right: 15px;
+	bottom: 8px;
+	background: transparent;
+	box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+	-webkit-box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+	-moz-box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+	-o-box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+
+	/* 向左倾斜12度，再旋转4度 */
+	transform:skew(10deg) rotate(4deg);
+	-webkit-transform:skew(10deg) rotate(4deg);
+	-moz-transform:skew(10deg) rotate(4deg);
+	-o-transform:skew(10deg) rotate(4deg);
+	-ms-transform:skew(10deg) rotate(4deg);
 }
