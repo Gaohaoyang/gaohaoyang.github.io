@@ -3,36 +3,41 @@ layout: default
 ---
 <div class="row">
   <div class="col-sm-9">
-    
-    <!-- small button -->
-    <p class="pull-right visible-xs">
-      <button>toggle</button>
-    </p>
-    <h1>Posts</h1>
-    <ul class="list-group my-post-list">
-      {% for post in site.posts %}
-        <li class="list-group-item">
-          <h2>
-          <a class="" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-          </h2>
-          <span class="">{{ post.date | date: "%b %-d, %Y" }}</span>
-         
+    <div class="post-area">
+      <!-- small button -->
+      <p class="pull-right visible-xs">
+        <button>toggle</button>
+      </p>
+
+      <ul class="">
+        <li class="post-list-header">
+          Posts
         </li>
-      {% endfor %}
-    </ul>
+        {% for post in site.posts %}
+          <li class="post-list-item">
+            <h2>
+              <a class="" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+            </h2>
+            <span class="">{{ post.date | date: "%b %-d, %Y" }}</span>
+           
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
+
   <div class="col-sm-3">
     <div class="shadow-corner-curl">
       <ul class="">
-        <li class="my-list-header">
+        <li class="categories-list-header">
           Categories
         </li>
-        <li class="my-list-item">
+        <li class="categories-list-item">
           <a href="">All<span class="my-badge"> {{site.categories | size}}</span>
           </a>
         </li>
         {% for category in site.categories %}
-          <li class="my-list-item">
+          <li class="categories-list-item">
             <a href="">
             {{ category | first }} <span class="my-badge">{{ category | last | size }}</span>
             </a>

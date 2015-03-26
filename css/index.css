@@ -10,7 +10,7 @@ ul{
 	padding: 0;
 }
 
-a:link {color: #003}		/* 未访问的链接 */
+a:link {color: #005}		/* 未访问的链接 */
 a:visited {color: #669}	/* 已访问的链接 */
 a:hover {color: #336;text-decoration: none;}	/* 鼠标移动到链接上 */
 a:active {color: #99b}	/* 选定的链接 */
@@ -24,26 +24,45 @@ nav{
 }
 
 /* index main */
-.my-post-list h2{
-	font-size: 20px;
+.post-area{
+	margin: 20px 0 0 0;
+	background-color:#f8f8fd;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 20px rgba(0,0,0,0.1) inset;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 20px rgba(0,0,0,0.1) inset;
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 20px rgba(0,0,0,0.1) inset;
+	-o-box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 20px rgba(0,0,0,0.1) inset;
 }
-.my-bg{
-	background-color: #f8f8fd;
+.post-list-header{
+	padding: 15px 30px;
+	border-bottom: 1px solid #c0c0c0;
+	font-size: 30px;
+	font-weight: bold;
+}
+.post-list-item{
+	padding:8px 30px 10px 30px; 
+	border-bottom:1px solid #ddd; 
+}
+.post-list-item h2{
+	font-size: 20px;
+	margin: 8px 0 8px 0;
+	padding: 0;
 }
 
-/* list */
-.my-list-header {
-	padding: 12px 12px;
+/* categories list */
+.categories-list-header {
+	padding: 12px 15px;
 	border-bottom: 1px solid #c0c0c0;
 	font-size: 16px;
 	font-weight: bold;
 }
-.my-list-item{
+.categories-list-item{
 	padding:8px 15px; 
 	border-bottom:1px solid #ddd; 
-
 }
-.my-list-item .my-badge{
+.categories-list-item:hover{
+	/* background-color: black; */
+}
+.categories-list-item .my-badge{
 	font-size: 12px;
 	font-weight: bold;
 	color: #fff;
@@ -55,22 +74,22 @@ nav{
 
 /* shadow */
 .shadow-corner-curl{
-	margin:30px 0 0 0;
+	margin:20px 0 0 0;
 	position: relative;
 	background-color:#f8f8fd; 
-	box-shadow: 0 1px 4px rgba(0,0,0,0.3),0 0 20px rgba(0,0,0,0.1) inset;
-	-webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.3),0 0 20px rgba(0,0,0,0.1) inset;
-	-moz-box-shadow: 0 1px 4px rgba(0,0,0,0.3),0 0 20px rgba(0,0,0,0.1) inset;
-	-o-box-shadow: 0 1px 4px rgba(0,0,0,0.3),0 0 20px rgba(0,0,0,0.1) inset;
+	box-shadow: 0 1px 5px rgba(0,0,0,0.4),0 0 20px rgba(0,0,0,0.1) inset;
+	-webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.4),0 0 20px rgba(0,0,0,0.1) inset;
+	-moz-box-shadow: 0 1px 5px rgba(0,0,0,0.4),0 0 20px rgba(0,0,0,0.1) inset;
+	-o-box-shadow: 0 1px 5px rgba(0,0,0,0.4),0 0 20px rgba(0,0,0,0.1) inset;
 }
 .shadow-corner-curl:before{
 	content:"";
 	position: absolute;
 	z-index: -5;
-	width: 90%;
-	height:76%;
-	left: 15px;
-	bottom: 8px;
+	width: 70%;
+	height:70%;
+	left: 10px;
+	bottom: 9px;
 	background: transparent;
 	box-shadow: 0 8px 20px rgba(0,0,0,0.6);
 	-webkit-box-shadow: 0 8px 20px rgba(0,0,0,0.6);
@@ -78,20 +97,20 @@ nav{
 	-o-box-shadow: 0 8px 20px rgba(0,0,0,0.6);
 
 	/* 向左倾斜12度，再旋转4度 */
-	transform:skew(-10deg) rotate(-4deg);
-	-webkit-transform:skew(-10deg) rotate(-4deg);
-	-moz-transform:skew(-10deg) rotate(-4deg);
-	-o-transform:skew(-10deg) rotate(-4deg);
-	-ms-transform:skew(-10deg) rotate(-4deg);
+	transform:skew(-11deg) rotate(-4deg);
+	-webkit-transform:skew(-11deg) rotate(-4deg);
+	-moz-transform:skew(-11deg) rotate(-4deg);
+	-o-transform:skew(-11deg) rotate(-4deg);
+	-ms-transform:skew(-11deg) rotate(-4deg);
 }
 .shadow-corner-curl:after{
 	content:"";
 	position: absolute;
 	z-index: -5;
-	width: 90%;
-	height:76%;
-	right: 15px;
-	bottom: 8px;
+	width: 70%;
+	height:70%;
+	right: 10px;
+	bottom: 9px;
 	background: transparent;
 	box-shadow: 0 8px 20px rgba(0,0,0,0.6);
 	-webkit-box-shadow: 0 8px 20px rgba(0,0,0,0.6);
@@ -99,9 +118,9 @@ nav{
 	-o-box-shadow: 0 8px 20px rgba(0,0,0,0.6);
 
 	/* 向左倾斜12度，再旋转4度 */
-	transform:skew(10deg) rotate(4deg);
-	-webkit-transform:skew(10deg) rotate(4deg);
-	-moz-transform:skew(10deg) rotate(4deg);
-	-o-transform:skew(10deg) rotate(4deg);
-	-ms-transform:skew(10deg) rotate(4deg);
+	transform:skew(11deg) rotate(4deg);
+	-webkit-transform:skew(11deg) rotate(4deg);
+	-moz-transform:skew(11deg) rotate(4deg);
+	-o-transform:skew(11deg) rotate(4deg);
+	-ms-transform:skew(11deg) rotate(4deg);
 }
