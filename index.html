@@ -27,26 +27,21 @@ layout: default
   </div>
 
   <div class="col-sm-3">
-    <div class="shadow-corner-curl">
-      <ul class="">
-        <li class="categories-list-header">
-          Categories
-        </li>
-        <li class="categories-list-item">
-          <a href="">All<span class="my-badge"> {{site.categories | size}}</span>
-          </a>
-        </li>
-        {% for category in site.categories %}
-          <li class="categories-list-item">
-            <a href="">
-            {{ category | first }} <span class="my-badge">{{ category | last | size }}</span>
+        <div class="shadow-corner-curl">
+
+            <div class="categories-list-header">
+              Categories
+            </div>
+           
+            <a href="#" class="categories-list-item">
+            All<span class="my-badge"> {{site.categories | size}}</span>
             </a>
-          </li>
-        
-      {% endfor %}
-    </ul>
+            {% for category in site.categories %}
+              <a href="#" class="categories-list-item">
+                {{ category | first }} <span class="my-badge">{{ category | last | size }}</span>
+              </a>
+            {% endfor %}
+          </div>
+        </div>
   </div>
-</div>
-</div>
-<!-- <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p> -->
 </div>
