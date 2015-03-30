@@ -32,10 +32,10 @@ nav{
 .post-area{
 	
 	background-color:#f8f8fd;
-	box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 20px rgba(0,0,0,0.1) inset;
-	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 20px rgba(0,0,0,0.1) inset;
-	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 20px rgba(0,0,0,0.1) inset;
-	-o-box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 20px rgba(0,0,0,0.1) inset;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
+	-o-box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
 }
 .post-list-header{
 	padding: 15px 30px;
@@ -44,8 +44,17 @@ nav{
 	font-weight: bold;
 }
 .post-list-item{
+	display: block;
 	padding:8px 30px 10px 30px; 
-	border-bottom:1px solid #ddd; 
+	border-bottom:1px solid #ddd;
+
+	transition:0.4s ease; 
+	-webkit-transition:0.4s ease;
+	-moz-transition:0.4s ease;
+	-o-transition:0.4s ease;
+}
+.post-list-item:last-of-type{
+	border-bottom: none;
 }
 .post-list-item h2{
 	font-size: 20px;
@@ -54,8 +63,8 @@ nav{
 }
 
 .post-list-item:hover{
-	background-color: rgba(0,0,10,0.075);
-	color: #983;
+	background-color: rgba(0,0,6,0.05);
+	
 }
 
 
@@ -90,7 +99,7 @@ nav{
 	font-weight: bold;
 	color: #fff;
 	background-color: #999;
-	padding: 0px 7px 1px 8px;
+	padding: 0px 7px 1px 7px;
 	border-radius: 9px;
 	float: right;
 	transition:0.4s ease;

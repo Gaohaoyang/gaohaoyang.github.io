@@ -9,20 +9,18 @@ layout: default
         <button>toggle</button>
       </p>
 
-      <ul class="">
-        <li class="post-list-header">
+        <div class="post-list-header">
           Posts
-        </li>
+        </div>
         {% for post in site.posts %}
-          <li class="post-list-item">
+          <a class="post-list-item" href="{{ post.url | prepend: site.baseurl }}">
             <h2>
-              <a class="" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+              {{ post.title }}
             </h2>
             <span class="">{{ post.date | date: "%b %-d, %Y" }}</span>
            
-          </li>
+          </a>
         {% endfor %}
-      </ul>
     </div>
   </div>
 
