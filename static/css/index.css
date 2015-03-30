@@ -9,10 +9,10 @@ ul{
 	padding: 0;
 }
 
-a:link {color: #005}		/* 未访问的链接 */
-a:visited {color: #669}	/* 已访问的链接 */
-a:hover {color: #336;text-decoration: none;}	/* 鼠标移动到链接上 */
-a:active {color: #99b}	/* 选定的链接 */
+.main a:link {color: #005}		/* 未访问的链接 */
+.main a:visited {color: #669}	/* 已访问的链接 */
+.main a:hover {color: #336;text-decoration: none;}	/* 鼠标移动到链接上 */
+.main a:active {color: #99b}	/* 选定的链接 */
 
 /* navbar */
 nav{
@@ -20,6 +20,8 @@ nav{
 	-webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.5);
 	-moz-box-shadow: 0 2px 4px rgba(0,0,0,0.5);
 	-o-box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+
+	border-radius: 0;
 }
 .navbar-nav li{
 	width: 95px;
@@ -50,6 +52,13 @@ nav{
 	margin: 8px 0 8px 0;
 	padding: 0;
 }
+
+.post-list-item:hover{
+	background-color: rgba(0,0,10,0.075);
+	color: #983;
+}
+
+
 
 /* categories list */
 .categories-list-header {
@@ -152,11 +161,23 @@ nav{
 
 /* footer */
 footer{
-	min-height: 50px;
-	margin-top: 30px;
+	height: 50px;
+	line-height: 50px;
+	margin-top: 80px;
 	background: #3f4850;
-	color: #ddd;
-	vertical-align: center;
+	color: #aaa;
+	text-align: center;
+	box-shadow: 0 -2px 4px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0 -2px 4px rgba(0,0,0,0.5);
+	-moz-box-shadow: 0 -2px 4px rgba(0,0,0,0.5);
+	-o-box-shadow: 0 -2px 4px rgba(0,0,0,0.5);
+}
+footer a:link {color: #aaa}		/* 未访问的链接 */
+footer a:visited {color: #888}	/* 已访问的链接 */
+footer a:hover {color: #bbb;text-decoration: none;}	/* 鼠标移动到链接上 */
+footer a:active {color: #bbb}	/* 选定的链接 */
+footer .point{
+	margin: 0 8px;
 }
 /**
  * Icons
