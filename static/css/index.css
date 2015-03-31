@@ -67,9 +67,13 @@ nav{
 	
 }
 
-.posts-in-categories{
+/* .posts-in-categories{
 	display: none;
 }
+
+.post-list-body>:not(div[post-cate=All]){
+	display: none;
+} */
 
 
 

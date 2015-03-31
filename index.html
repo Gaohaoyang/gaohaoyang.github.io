@@ -15,7 +15,7 @@ layout: default
 
         <div class="post-list-body">
           
-          <div class="all-posts">
+          <div class="all-posts" post-cate="All">
              {% for post in site.posts %}
               <a class="post-list-item" href="{{ post.url | prepend: site.baseurl }}">
                 <h2>
@@ -26,7 +26,7 @@ layout: default
             {% endfor %}
           </div>
 
-          <div class="posts-in-categories">
+          <!-- <div class="posts-in-categories"> -->
             {% for category in site.categories %}
               <div post-cate="{{category | first}}">
                 {% for posts in category  %}
@@ -44,7 +44,7 @@ layout: default
               </div>
             {% endfor %}
             
-          </div>
+          <!-- </div> -->
 
         </div>
 

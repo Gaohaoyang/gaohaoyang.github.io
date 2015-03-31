@@ -43,25 +43,14 @@ function fixFooter(footerHeight,footerMarginTop) {
 }*/
 
 function categoryDisplay() {
+    /*only show All*/
+    $('.post-list-body>div[post-cate!=All]').hide();
+    /*show category when click categories list*/
     $('.categories-list-item').click(function() {
-        var cate = $(this).attr('cate');
-        console.log(cate);
-
-        /*if (cate == 'All') {
-            $('.posts-in-categories').hide();
-            $('.all-posts').show(300);
-        }else{
-            $('.all-posts').hide();
-
-
-            $('.posts-in-categories>div[post-cate!='+cate+']').hide();
-            $('.posts-in-categories>div[post-cate='+cate+']').show();
-
-            
-
-            $('.posts-in-categories').show(300);
-        }*/
-
+        var cate = $(this).attr('cate');//get category's name
         
+        $('.post-list-body>div[post-cate!='+cate+']').hide(300);
+        $('.post-list-body>div[post-cate='+cate+']').show(300);
+
     });
 }
