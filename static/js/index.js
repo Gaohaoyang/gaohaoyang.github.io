@@ -1,7 +1,8 @@
 $(document).ready(function() {
 
-
     fixFooterInit();
+
+    categoryDisplay();
 
 });
 
@@ -33,10 +34,34 @@ function fixFooter(footerHeight,footerMarginTop) {
 * there is a throb of the footer.
 * So the code below I don't use now.
 */
-function getFooterMarginTop() {
+/*function getFooterMarginTop() {
     var margintop = $('footer').css('marginTop');
     var patt = new RegExp("[0-9]*");
     var re = patt.exec(margintop);
     console.log(re[0]);
     return re[0];
+}*/
+
+function categoryDisplay() {
+    $('.categories-list-item').click(function() {
+        var cate = $(this).attr('cate');
+        console.log(cate);
+
+        /*if (cate == 'All') {
+            $('.posts-in-categories').hide();
+            $('.all-posts').show(300);
+        }else{
+            $('.all-posts').hide();
+
+
+            $('.posts-in-categories>div[post-cate!='+cate+']').hide();
+            $('.posts-in-categories>div[post-cate='+cate+']').show();
+
+            
+
+            $('.posts-in-categories').show(300);
+        }*/
+
+        
+    });
 }
