@@ -231,4 +231,6 @@ blockquote:last-child {
     margin-bottom: 0;
 }
 
-
+.comment{
+	margin-top: 20px;
+}
