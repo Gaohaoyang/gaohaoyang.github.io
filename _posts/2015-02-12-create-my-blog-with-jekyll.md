@@ -58,7 +58,8 @@ watch为了检测文件夹内的变化，即修改后不需要重新启动jekyll
 访问   
 http://localhost:4000/   
 ![browser]({{"/css/pics/browser.png"}})   
-详细文章页面
+
+详细文章页面   
 ![browser2]({{"/css/pics/browser2.png"}})  
 
 ##后续
