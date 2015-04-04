@@ -3,7 +3,7 @@ layout: post
 title:  "代码校验工具 SublimeLinter 的安装与使用"
 date:   2015-03-26 15:14:54
 categories: Sublime
-excerpt: 代码校验工具sublimeLinter的安装与使用，JSLinter的安装与使用
+excerpt: 代码校验工具sublimeLinter的安装与使用，jshint的安装与使用，JavaScript语法检查校验，JavaScript语法提示
 ---
 
 ## 序   
