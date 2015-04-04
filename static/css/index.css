@@ -1,7 +1,10 @@
 /**
  * Reset some basic elements
  */
-
+pre{
+	padding: 0;
+	background: none;
+}
 
 /* commom */
 body {
