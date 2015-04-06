@@ -127,7 +127,7 @@ excerpt: JavaScript 算法，typeof instanceof Object.prototype.toString.apply()
 
 理清思路我们可以分为以下步骤：   
 
-1. 判断传入的参数是否为数组 (使用 instanceof 方法)
+1. 判断传入的参数是否为数组 (使用 `instanceof` 方法)
 2. 检查两个数组长度是否一致
 3. 分别判断数组内元素的基本数据类型 (使用 `typeof` 方法)
 4. 因为 `typeof` 只能检查基本数据类型，对于 `null`, `Date`, `window` 返回的都是 `object`，所以使用 `Object.prototype.toString.apply()` 来检查这些对象类型，其返回值为：`'[object Null]'`, `'[object Date]'`, `'[object global]'`
