@@ -10,7 +10,7 @@ $(document).ready(function() {
  * @param  {[type]} ) {fixFooterInit();} 固定Footer栏
  * @return {[type]}   
  */
-$('window').load(function() {
+$(window).load(function() {
     fixFooterInit();
 });
 
