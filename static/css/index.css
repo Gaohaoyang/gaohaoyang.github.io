@@ -6,6 +6,10 @@ pre{
 	background: none;
 }
 
+pre code{
+	font-size: 14px;
+}
+
 /* commom */
 body {
 	background-image: url(http://7q5cdt.com1.z0.glb.clouddn.com/bg-canvas_bg.jpg);
