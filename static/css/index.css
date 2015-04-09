@@ -138,8 +138,8 @@ nav{
 	z-index: -5;
 	width: 70%;
 	height:70%;
-	left: 10px;
-	bottom: 9px;
+	left: 5%;
+	bottom: 3%;
 	background: transparent;
 	-webkit-box-shadow: 0 8px 20px rgba(0,0,0,0.6);
 	-moz-box-shadow: 0 8px 20px rgba(0,0,0,0.6);
@@ -159,8 +159,8 @@ nav{
 	z-index: -5;
 	width: 70%;
 	height:70%;
-	right: 10px;
-	bottom: 9px;
+	right: 5%;
+	bottom: 3%;
 	background: transparent;
 	-webkit-box-shadow: 0 8px 20px rgba(0,0,0,0.6);
 	-moz-box-shadow: 0 8px 20px rgba(0,0,0,0.6);
@@ -275,4 +275,29 @@ blockquote:last-child {
 	width: 13px;
 	border-bottom: 13px solid #bbb;
 	background-color: #7f7f7f;
+}
+
+/**
+ * page-content
+ */
+.page-content table{
+	border-top: 1px dashed #999;
+	border-bottom: 1px dashed #999;
+	margin: 20px 0;
+}
+.page-content table tr{
+	/* line-height: 36px; */
+	/* margin: 5px; */
+}
+.page-content table tr td{
+	padding: 6px 10px;
+	/* margin: 10px 0; */
+	vertical-align: top;
+
+}
+.page-content table tr td:first-of-type{
+	padding: 6px 0 6px 10px;
+	width: 124px;
+	border-right: 1px dashed #aaa; 
+	text-align: center;
 }
