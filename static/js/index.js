@@ -1,18 +1,21 @@
-
+/**
+ * 页面ready方法
+ */
 $(document).ready(function() {
 
     categoryDisplay();
+    backToTop();
 
 });
 
 /**
  * load方法，页面的加载完成后触发
- * @param  {[type]} ) {fixFooterInit();} 固定Footer栏
- * @return {[type]}   
+ * {fixFooterInit();} 固定Footer栏
  */
 $(window).load(function() {
     fixFooterInit();
 });
+
 
 /**
  * 固定底栏的初始化方法
@@ -22,13 +25,13 @@ $(window).load(function() {
  */
 function fixFooterInit() {
     var footerHeight = $('footer').outerHeight();
-    var footerMarginTop = getFooterMarginTop()-0;//类型转换
+    var footerMarginTop = getFooterMarginTop() - 0; //类型转换
     // var footerMarginTop = 80;
-    
-    fixFooter(footerHeight,footerMarginTop);//fix footer at the beginning
 
-    $(window).resize(function() {           //when resize window, footer can auto get the postion
-        fixFooter(footerHeight,footerMarginTop);
+    fixFooter(footerHeight, footerMarginTop); //fix footer at the beginning
+
+    $(window).resize(function() { //when resize window, footer can auto get the postion
+        fixFooter(footerHeight, footerMarginTop);
     });
 }
 
@@ -38,7 +41,7 @@ function fixFooterInit() {
  * @param  {number} footerMarginTop 底栏MarginTop
  * @return {[type]}                 [description]
  */
-function fixFooter(footerHeight,footerMarginTop) {
+function fixFooter(footerHeight, footerMarginTop) {
     var windowHeight = $(window).height();
     var contentHeight = $('body>.container').outerHeight() + $('body>.container').offset().top + footerHeight + footerMarginTop;
     // console.log("window---"+windowHeight);
@@ -83,10 +86,35 @@ function categoryDisplay() {
     $('.post-list-body>div[post-cate!=All]').hide();
     /*show category when click categories list*/
     $('.categories-list-item').click(function() {
-        var cate = $(this).attr('cate');//get category's name
-        
-        $('.post-list-body>div[post-cate!='+cate+']').hide(250);
-        $('.post-list-body>div[post-cate='+cate+']').show(400);
+        var cate = $(this).attr('cate'); //get category's name
 
+        $('.post-list-body>div[post-cate!=' + cate + ']').hide(250);
+        $('.post-list-body>div[post-cate=' + cate + ']').show(400);
+
+    });
+}
+
+/**
+ * 回到顶部
+ */
+function backToTop() {
+    //滚页面才显示返回顶部
+    $(window).scroll(function() {
+        if ($(window).scrollTop() > 100) {
+            $("#top").fadeIn(500);
+        } else {
+            $("#top").fadeOut(500);
+        }
+    });
+    //点击回到顶部
+    $("#top").click(function() {
+        $("body").animate({
+            scrollTop: "0"
+        }, 500);
+    });
+
+    //初始化tip
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip();
     });
 }
