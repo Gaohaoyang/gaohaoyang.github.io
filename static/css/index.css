@@ -281,8 +281,8 @@ blockquote:last-child {
  * page-content
  */
 .page-content table{
-	border-top: 1px dashed #999;
-	border-bottom: 1px dashed #999;
+	border-top: 1px dashed #ddd;
+	border-bottom: 1px dashed #ddd;
 	margin: 20px 0;
 }
 .page-content table tr{
@@ -296,8 +296,15 @@ blockquote:last-child {
 
 }
 .page-content table tr td:first-of-type{
-	padding: 6px 0 6px 10px;
+	padding: 6px 10px 6px 10px;
 	width: 124px;
-	border-right: 1px dashed #aaa; 
-	text-align: center;
+	border-right: 1px dashed #ddd; 
+	text-align: right;
+}
+
+/**
+ * demo
+ */
+.demo-block{
+	background: #bbb;
 }
