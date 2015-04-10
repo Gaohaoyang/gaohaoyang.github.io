@@ -304,7 +304,66 @@ blockquote:last-child {
 
 /**
  * demo
+ * 瀑布流
+ * 使用多栏布局
  */
-.demo-block{
-	background: #bbb;
+#fall{
+	-webkit-column-width:349px;
+	-moz-column-width:349px;
+	-o-column-width:349px;
+	-ms-column-width:349px;
 }
+#fall a:link {color: #005}		/* 未访问的链接 */
+#fall a:visited {color: #669}	/* 已访问的链接 */
+#fall a:hover {color: #336;text-decoration: none;}	/* 鼠标移动到链接上 */
+#fall a:active {color: #99b}	/* 选定的链接 */
+
+#fall .box{
+	padding: 10px 0 15px 5px;
+}
+
+#fall .box .block{
+	width: 342px;
+	position: relative;
+	/* padding: 10px; */
+	/* border:1px solid #ccc; */
+	-webkit-box-shadow: 0 0 5px rgba(0,0,0,0.6),0 0 20px rgba(0,0,0,0.1) inset;
+	-moz-box-shadow: 0 0 5px rgba(0,0,0,0.6),0 0 20px rgba(0,0,0,0.1) inset;
+	-o-box-shadow: 0 0 5px rgba(0,0,0,0.6),0 0 20px rgba(0,0,0,0.1) inset;
+	box-shadow: 0 0 5px rgba(0,0,0,0.6),0 0 20px rgba(0,0,0,0.1) inset;
+}
+
+#fall .box .block img{
+	display: block;
+	width: 342px;
+	height: auto;
+}
+
+#fall .box .block .block-body{
+	padding: 10px 14px;
+}
+#fall .box .block .block-body .head{
+	font-size: 18px;
+	padding-bottom: 8px;
+}
+#fall .box .block .block-body .description{
+	border-top: 1px dotted #ccc;
+	padding-top: 6px;
+	font-size: 14px;
+}
+
+/* #fall .box .block:after,#fall .box .block:after{
+	content: '';
+	background-color: red;
+	position: absolute;
+	z-index: -1;
+	top: 50%;
+	bottom: 0;
+	left:10px;
+	right: 10px;
+	-webkit-box-shadow: 0 0 20px rgba(0,0,0,0.9);
+	-moz-box-shadow: 0 0 20px rgba(0,0,0,0.9);
+	-o-box-shadow: 0 0 20px rgba(0,0,0,0.9);
+	box-shadow: 0 0 20px rgba(0,0,0,0.9);
+	border-radius: 100px/10px;
+} */
