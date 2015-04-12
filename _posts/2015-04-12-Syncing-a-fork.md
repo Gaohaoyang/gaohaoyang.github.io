@@ -23,17 +23,21 @@ excerpt: fork 了之后同步，fork了别人的代码，保持远程同步。
 
 * 给 fork 配置一个 remote   
 
-* 主要使用 `git remote -v` 查看远程状态。
+* 主要使用 `git remote -v` 查看远程状态。   
+
 
 	git remote -v
 	# origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)
 	# origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)
 
-* 确定一个将被同步给 fork 远程的上游仓库    
+
+* 确定一个将被同步给 fork 远程的上游仓库      
+
 
 	git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git
 
-* 再次查看状态确认是否配置成功。
+
+* 再次查看状态确认是否配置成功。   
 
 	git remote -v
 	# origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)
@@ -46,7 +50,7 @@ excerpt: fork 了之后同步，fork了别人的代码，保持远程同步。
 ### Syncing a fork
 
 * 从上游仓库 fetch 分支和提交点，传送到本地，并会被存储在一个本地分支 upstream/master   
-`git fetch upstream`
+`git fetch upstream`    
 
 	git fetch upstream
 	# remote: Counting objects: 75, done.
@@ -57,13 +61,13 @@ excerpt: fork 了之后同步，fork了别人的代码，保持远程同步。
 	#  * [new branch]      master     -> upstream/master
 
 * 切换到本地主分支(如果不在的话)    
-`git checkout master`
+`git checkout master`    
 
 	git checkout master
 	# Switched to branch 'master'
 
 * 把 upstream/master 分支合并到本地 master 上，这样就完成了同步，并且不会丢掉本地修改的内容。    
-`git merge upstream/master` 
+`git merge upstream/master`      
 
 	git merge upstream/master
 	# Updating a422352..5fdff0f
