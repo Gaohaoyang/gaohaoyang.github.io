@@ -31,7 +31,7 @@ excerpt: fork 了之后同步，fork了别人的代码，保持远程同步。
 # origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)
 </code></pre>
 
-* 确定一个将被同步给 fork 远程的上游仓库      
+* 添加一个将被同步给 fork 远程的上游仓库      
 
 
 <pre><code>git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git
