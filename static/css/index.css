@@ -312,19 +312,24 @@ blockquote:last-child {
 	-moz-column-width:349px;
 	-o-column-width:349px;
 	-ms-column-width:349px;
+
+	-moz-column-gap:10px;		/* Firefox */
+	-webkit-column-gap:10px;	/* Safari 和 Chrome */
+	column-gap:10px;
 }
 #fall a:link {color: #005}		/* 未访问的链接 */
 #fall a:visited {color: #669}	/* 已访问的链接 */
 #fall a:hover {color: #336;text-decoration: none;}	/* 鼠标移动到链接上 */
 #fall a:active {color: #99b}	/* 选定的链接 */
 
-#fall .box{
-	padding: 10px 0 15px 5px;
+#fall {
+	/*padding: 10px 0 15px 5px;*/
 	/* position: relative; */
 	/*z-index: 1;*/
 }
 
-#fall .box .block{
+#fall  .block{
+	margin: 2px 2px 20px 2px;
 	width: 342px;
 	position: relative;
 	/*z-index: 1;*/
@@ -335,26 +340,26 @@ blockquote:last-child {
 	box-shadow: 0 0 5px rgba(0,0,0,0.6),0 0 20px rgba(0,0,0,0.1) inset;
 }
 
-#fall .box .block img{
+#fall  .block img{
 	display: block;
 	width: 342px;
 	height: auto;
 }
 
-#fall .box .block .block-body{
+#fall  .block .block-body{
 	padding: 10px 14px;
 }
-#fall .box .block .block-body .head{
+#fall  .block .block-body .head{
 	font-size: 18px;
 	padding-bottom: 8px;
 }
-#fall .box .block .block-body .description {
+#fall  .block .block-body .description {
 	border-top: 1px dotted #ccc;
 	padding-top: 6px;
 	font-size: 14px;
 }
 
-/* #fall .box .block:after,#fall .box .block:after {
+/* #fall  .block:after,#fall  .block:after {
 	content: '';
 	background-color: red;
 	position: absolute;
