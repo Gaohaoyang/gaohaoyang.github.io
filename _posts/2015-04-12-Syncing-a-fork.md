@@ -34,7 +34,7 @@ excerpt: fork 了之后同步，fork了别人的代码，保持远程同步。
 
 ### Syncing a fork
 
-* 从上游仓库 fetch 分支和提交点，给master提交将会被存储在一个本地分支 upstream/master   
+* 从上游仓库 fetch 分支和提交点，提交给本地 master，并会被存储在一个本地分支 upstream/master   
 `git fetch upstream`
 
 * 切换到本地主分支(如果不在的话)    

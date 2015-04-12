@@ -320,12 +320,14 @@ blockquote:last-child {
 
 #fall .box{
 	padding: 10px 0 15px 5px;
+	/* position: relative; */
+	/*z-index: 1;*/
 }
 
 #fall .box .block{
 	width: 342px;
 	position: relative;
-	/* padding: 10px; */
+	/*z-index: 1;*/
 	/* border:1px solid #ccc; */
 	-webkit-box-shadow: 0 0 5px rgba(0,0,0,0.6),0 0 20px rgba(0,0,0,0.1) inset;
 	-moz-box-shadow: 0 0 5px rgba(0,0,0,0.6),0 0 20px rgba(0,0,0,0.1) inset;
@@ -346,13 +348,13 @@ blockquote:last-child {
 	font-size: 18px;
 	padding-bottom: 8px;
 }
-#fall .box .block .block-body .description{
+#fall .box .block .block-body .description {
 	border-top: 1px dotted #ccc;
 	padding-top: 6px;
 	font-size: 14px;
 }
 
-/* #fall .box .block:after,#fall .box .block:after{
+/* #fall .box .block:after,#fall .box .block:after {
 	content: '';
 	background-color: red;
 	position: absolute;
