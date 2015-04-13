@@ -1,6 +1,11 @@
 /**
  * Reset some basic elements
  */
+/* commom */
+body {
+	background-image: url(http://7q5cdt.com1.z0.glb.clouddn.com/bg-canvas_bg.jpg);
+    font-family: 'Microsoft YaHei', 'SimHei', sans-serif;
+}
 pre{
 	padding: 0;
 	background: none;
@@ -10,10 +15,19 @@ pre code{
 	font-size: 14px;
 }
 
-/* commom */
-body {
-	background-image: url(http://7q5cdt.com1.z0.glb.clouddn.com/bg-canvas_bg.jpg);
-    font-family: 'Microsoft YaHei', 'SimHei', sans-serif;
+table{
+	border-top:2px solid #aaa;
+	border-bottom: 2px solid #aaa;
+	margin: 8px 0;
+}
+table thead{
+	border-bottom: 1px solid #aaa;
+}
+table th{
+	padding: 2px 10px;
+}
+table td{
+	padding: 2px 10px;
 }
 
 
