@@ -229,12 +229,12 @@ footer .point{
  * Blockquotes
  */
 blockquote {
-    color: #828282;
-    border-left: 4px solid #CDCDCD;
+    color: #444;
+    border-left: 5px solid #D6DBDF;
     padding-left: 15px;
     font-size: 16px;
-    letter-spacing: -1px;
-    font-style: italic;
+    background: rgba(112,138,153,.1);
+    /*font-style: italic;*/
 }
 blockquote:last-child {
     margin-bottom: 0;
