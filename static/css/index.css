@@ -153,8 +153,8 @@ nav{
 	z-index: -5;
 	width: 70%;
 	height:70%;
-	left: 5%;
-	bottom: 3%;
+	left: 6%;
+	bottom: 2%;
 	background: transparent;
 	-webkit-box-shadow: 0 8px 20px rgba(0,0,0,0.6);
 	-moz-box-shadow: 0 8px 20px rgba(0,0,0,0.6);
@@ -174,8 +174,8 @@ nav{
 	z-index: -5;
 	width: 70%;
 	height:70%;
-	right: 5%;
-	bottom: 3%;
+	right: 6%;
+	bottom: 2%;
 	background: transparent;
 	-webkit-box-shadow: 0 8px 20px rgba(0,0,0,0.6);
 	-moz-box-shadow: 0 8px 20px rgba(0,0,0,0.6);
