@@ -28,6 +28,7 @@ table th{
 }
 table td{
 	padding: 2px 10px;
+	vertical-align: top;
 }
 
 
