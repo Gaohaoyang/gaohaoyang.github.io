@@ -153,7 +153,7 @@ nav{
 	z-index: -5;
 	width: 70%;
 	height:70%;
-	left: 6%;
+	left: 9%;
 	bottom: 2%;
 	background: transparent;
 	-webkit-box-shadow: 0 8px 20px rgba(0,0,0,0.6);
@@ -174,7 +174,7 @@ nav{
 	z-index: -5;
 	width: 70%;
 	height:70%;
-	right: 6%;
+	right: 9%;
 	bottom: 2%;
 	background: transparent;
 	-webkit-box-shadow: 0 8px 20px rgba(0,0,0,0.6);
@@ -300,19 +300,13 @@ blockquote:last-child {
 	border-bottom: 1px dashed #ddd;
 	margin: 20px 0;
 }
-.page-content table tr{
-	/* line-height: 36px; */
-	/* margin: 5px; */
-}
 .page-content table tr td{
 	padding: 6px 10px;
-	/* margin: 10px 0; */
 	vertical-align: top;
 
 }
 .page-content table tr td:first-of-type{
 	padding: 6px 10px 6px 10px;
-	width: 124px;
 	border-right: 1px dashed #ddd; 
 	text-align: right;
 }
@@ -389,3 +383,42 @@ blockquote:last-child {
 	box-shadow: 0 0 20px rgba(0,0,0,0.9);
 	border-radius: 100px/10px;
 } */
+
+/**
+ * 文章目录相关
+ */
+#markdown-toc {
+	display: none;
+}
+#content a:link {color: #666}		/* 未访问的链接 */
+#content a:visited {color: #666}	/* 已访问的链接 */
+#content a:hover {color: #336;text-decoration: none;}	/* 鼠标移动到链接上 */
+#content a:active {color: #99b}	/* 选定的链接 */
+
+#content{
+	max-width: 292px;
+}
+#content .content-text{
+	padding: 10px 0; 
+}
+#content ul{
+	padding-left: 30px;
+}
+#content ul li{
+	/*list-style: none;*/
+	font-size: 15px;
+	line-height: 25px;
+}
+.shadow-bottom-center{
+	background-color:#f8f8fd; 
+	-webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.4),0 0 20px rgba(0,0,0,0.1) inset;
+	-moz-box-shadow: 0 1px 5px rgba(0,0,0,0.4),0 0 20px rgba(0,0,0,0.1) inset;
+	-o-box-shadow: 0 1px 5px rgba(0,0,0,0.4),0 0 20px rgba(0,0,0,0.1) inset;
+	box-shadow: 0 1px 5px rgba(0,0,0,0.4),0 0 20px rgba(0,0,0,0.1) inset;
+}
+
+#myAffix .affix{
+	position: fixed;
+	top:30px;
+	width: 263px;
+}

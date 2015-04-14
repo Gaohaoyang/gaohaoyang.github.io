@@ -6,6 +6,10 @@ categories: Bootstrap
 excerpt: Girlfriend learning write code to copy zhihu 仿造知乎zhihu，今天教女朋友编程，仿造知乎做了一个页面，使用了bootstrap, html, css
 ---
 
+* content
+{:toc}
+
+
 My girlfriend is learning html and css recently. I told her to follow the video. Here, I recommend a video in Chinese that suite for new learners. The name of course is Getting HTML web pages dev in 8 hours ( 8小时学会HTML网页开发 ) . I watched this video at very first time. The teacher named Eighteen Swallows ( 燕十八 ) . He teached very clear even himself being on screen to show what is float or box-model.    
 <!-- ![燕十八](http://7q5cdt.com1.z0.glb.clouddn.com/teach-girlfriend-html-18swallows.png) -->
 

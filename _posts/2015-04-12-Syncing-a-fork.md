@@ -6,6 +6,10 @@ categories: GitHub
 excerpt: fork 了之后同步，fork了别人的代码，保持远程同步。
 ---
 
+* content
+{:toc}
+
+
 ## 如何使用搜索引擎
 
 其实这个问题并不难，我又被坑了。百度搜的东西不靠谱啊，以后这种问题一定要用**英文**在 [Google](http://www.google.com) 或者 [Bing](http://cn.bing.com/) 上搜索，这样才能搜到原汁原味的答案。就当是一个教训吧。   
