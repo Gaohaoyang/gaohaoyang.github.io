@@ -418,7 +418,6 @@ blockquote:last-child {
 }
 
 #myAffix .affix{
-	position: fixed;
-	top:30px;
-	width: 263px;
+	top:-20px;
+	bottom: 0px;
 }
