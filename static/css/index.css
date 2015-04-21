@@ -387,9 +387,12 @@ blockquote:last-child {
 /**
  * 文章目录相关
  */
-#markdown-toc {
-	display: none;
+@media screen and (min-width: 768px){
+	#markdown-toc {
+		display: none;
+	}
 }
+
 #content a:link {color: #666}		/* 未访问的链接 */
 #content a:visited {color: #666}	/* 已访问的链接 */
 #content a:hover {color: #336;text-decoration: none;}	/* 鼠标移动到链接上 */
