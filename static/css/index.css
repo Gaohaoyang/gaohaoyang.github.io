@@ -231,6 +231,15 @@ footer .point{
 	line-height: 1.5;
 	/* -webkit-text-size-adjust: 100%; */
 }
+
+@media screen and (max-width: 768px){
+	.post{
+		padding:10px 10px;
+		font-size: 14px;
+		line-height: 1.3;
+	}
+}
+
 .post img{
 	max-width: 100%;
     vertical-align: middle;
@@ -317,32 +326,84 @@ blockquote:last-child {
  * 使用多栏布局
  */
 #fall{
+	font-size: 0;
+	text-align: center;
+	/*margin: 0 auto;*/
+	/*background-color: #ddd;*/
+
+}
+#fall ul{
+	margin: 5px 5px 0 5px;
+	padding: 0;
+	width: 260px;
+	/*background-color: red;*/
+	display: inline-block;
+	vertical-align: top;
+	/*float: left;*/
+
+	
+}
+@media screen and (max-width: 480px){
+	#fall ul{
+		width: auto;
+	}
+}
+#fall li{
+	margin: 0 0 10px 0;
+	padding: 0;
+	list-style-type: none;
+	font-size: 14px;
+
+	-webkit-box-shadow: 0 0 5px rgba(0,0,0,0.6),0 0 20px rgba(0,0,0,0.1) inset;
+	-moz-box-shadow: 0 0 5px rgba(0,0,0,0.6),0 0 20px rgba(0,0,0,0.1) inset;
+	-o-box-shadow: 0 0 5px rgba(0,0,0,0.6),0 0 20px rgba(0,0,0,0.1) inset;
+	box-shadow: 0 0 5px rgba(0,0,0,0.6),0 0 20px rgba(0,0,0,0.1) inset;
+}
+#fall li p{
+	margin: 0;
+}
+#fall .head{
+	font-size: 16px;
+	text-align: left;
+	margin: 0 10px;
+	padding: 10px 0 5px 0;
+	border-bottom: 1px dotted #ddd;
+}
+#fall .description{
+	text-align: left;
+	padding: 5px 10px 10px 10px;
+	text-indent: 2em;
+}
+/**
+ * ------------
+ */
+/* #fall{
 	-webkit-column-width:349px;
 	-moz-column-width:349px;
 	-o-column-width:349px;
 	-ms-column-width:349px;
 
-	-moz-column-gap:10px;		/* Firefox */
-	-webkit-column-gap:10px;	/* Safari 和 Chrome */
+	-moz-column-gap:10px;		Firefox
+	-webkit-column-gap:10px;	Safari 和 Chrome
 	column-gap:10px;
-}
-#fall a:link {color: #005}		/* 未访问的链接 */
-#fall a:visited {color: #669}	/* 已访问的链接 */
-#fall a:hover {color: #336;text-decoration: none;}	/* 鼠标移动到链接上 */
-#fall a:active {color: #99b}	/* 选定的链接 */
+} */
+#fall a:link {color: #7676AC}		/* 未访问的链接 */
+#fall a:visited {color: #715584}	/* 已访问的链接 */
+#fall a:hover {color: #5989AD;text-decoration: none;}	/* 鼠标移动到链接上 */
+#fall a:active {color: #91C3CF}	/* 选定的链接 */
 
-#fall {
-	/*padding: 10px 0 15px 5px;*/
-	/* position: relative; */
-	/*z-index: 1;*/
+/* #fall {
+	padding: 10px 0 15px 5px;
+	position: relative;
+	z-index: 1;
 }
 
 #fall  .block{
 	margin: 2px 2px 20px 2px;
 	width: 342px;
 	position: relative;
-	/*z-index: 1;*/
-	/* border:1px solid #ccc; */
+	z-index: 1;
+	border:1px solid #ccc;
 	-webkit-box-shadow: 0 0 5px rgba(0,0,0,0.6),0 0 20px rgba(0,0,0,0.1) inset;
 	-moz-box-shadow: 0 0 5px rgba(0,0,0,0.6),0 0 20px rgba(0,0,0,0.1) inset;
 	-o-box-shadow: 0 0 5px rgba(0,0,0,0.6),0 0 20px rgba(0,0,0,0.1) inset;
@@ -366,7 +427,7 @@ blockquote:last-child {
 	border-top: 1px dotted #ccc;
 	padding-top: 6px;
 	font-size: 14px;
-}
+} */
 
 /* #fall  .block:after,#fall  .block:after {
 	content: '';
