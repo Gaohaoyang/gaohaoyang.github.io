@@ -6,6 +6,9 @@ body {
 	background-image: url(http://7q5cdt.com1.z0.glb.clouddn.com/bg-canvas_bg.jpg);
     font-family: 'Microsoft YaHei', 'SimHei', sans-serif;
 }
+p{
+	text-indent: 2em;
+}
 pre{
 	padding: 0;
 	background: none;
