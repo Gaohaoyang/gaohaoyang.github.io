@@ -26,7 +26,7 @@ icon: glyphicon-heart
 * email: [gaohaoyang126@126.com](mailto:{{ site.email }})
 * QQ: 793940046
 * Weibo: [Haoyang](http://weibo.com/3115521wh)
-* 知乎: [Gaohaoyang](http://www.zhihu.com/people/gao-hao-yang-7)
+* 知乎: [Gaohaoyang](http://www.zhihu.com/people/gaohaoyang)
 * 豆瓣: [Gaohaoyang](http://www.douban.com/people/42525035/)
 * 豆瓣音乐人：[浩阳的小站](http://site.douban.com/haoyangaiyinyue/)
 
