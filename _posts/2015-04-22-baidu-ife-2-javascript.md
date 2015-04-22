@@ -155,6 +155,17 @@ IE8,9不支持 `async`
 
 ## JavaScript数据类型及语言基础
 
+最新的 ECMAScript 标准定义了 7 种数据类型:
+
+* 6 种 原始类型:
+    * Boolean
+    * Null
+    * Undefined
+    * Number
+    * String
+    * Symbol (new in ECMAScript 6)
+* 和 Object
+
 ---
 
 感觉任务2好难，加油啊！
