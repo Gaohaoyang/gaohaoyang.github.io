@@ -166,6 +166,20 @@ IE8,9不支持 `async`
     * Symbol (new in ECMAScript 6)
 * 和 Object
 
+一个没有被赋值的变量会有个默认值 undefined
+
+null 与 undefined 的不同点：
+
+<pre><code class="javascript">typeof null        // object (bug in ECMAScript, should be null)
+typeof undefined   // undefined
+null === undefined // false
+null  == undefined // true
+</code></pre>
+
+Number 数字类型，它并没有为整数给出一种特定的类型。除了能够表示浮点数外，还有一些带符号的值：+Infinity，-Infinity 和 NaN (非数值，Not-a-Number)。
+
+
+
 ---
 
 感觉任务2好难，加油啊！
