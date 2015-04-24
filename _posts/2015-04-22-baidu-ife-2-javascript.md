@@ -203,6 +203,19 @@ NaN与任何值都不相等，包括自身。应当使用 `x != x` 来判断，�
         return typeof fn === "function";
     }
 
+## 数组类型
+
+在 ECMAScript5 中，可以直接使用 `Array.isArray()` 来判断数组。
+
+    Array.isArray([]);  //true
+    Array.isArray({});  //false
+
+我看《JavaScript权威指南上》没有推荐使用 `instanceof`，因为可能会有多窗体(frame)存在。
+
+> 这样每一个窗口都有一个自己的 JavaScript 环境，有自己的全局对象。并且每个全局对象都有自己的一组构造函数。因此一个窗体中的对象不可能是另外窗体中的构造函数的实例。
+
+所以采用了上述我写的那样的代码
+
 
 
 ---
