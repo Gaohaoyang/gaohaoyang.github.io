@@ -10,7 +10,7 @@ You can visit [here](http://gaohaoyang.github.io) to see this blog.
 
 博客访问地址：[点击这里](http://gaohaoyang.github.io)
 
----
+<!--
 
 ## 被引用信息
 
@@ -21,6 +21,6 @@ You can visit [here](http://gaohaoyang.github.io) to see this blog.
 没有注明来源的人：
 
 * [yangshuailing](http://yangshuailing.github.io/com/)
-* [huapu728](http://huapu728.github.io/)
+* [huapu728](http://huapu728.github.io/) -->
 
 
