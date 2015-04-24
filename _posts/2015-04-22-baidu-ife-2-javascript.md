@@ -155,7 +155,7 @@ IE8,9不支持 `async`
 
 ## JavaScript数据类型及语言基础
 
-### 类型概要
+### 数据类型概要
 
 最新的 ECMAScript 标准定义了 7 种数据类型:
 
@@ -168,11 +168,12 @@ IE8,9不支持 `async`
     * Symbol (new in ECMAScript 6)
 * 和 Object
 
-### 
+---
 
-一个没有被赋值的变量会有个默认值 undefined
+### 一些要点
 
-null 与 undefined 的不同点：
+* 一个没有被赋值的变量会有个默认值 undefined
+* null 与 undefined 的不同点：
 
 <pre><code class="javascript">typeof null        // object (bug in ECMAScript, should be null)
 typeof undefined   // undefined
@@ -180,7 +181,27 @@ null === undefined // false
 null  == undefined // true
 </code></pre>
 
-Number 数字类型，它并没有为整数给出一种特定的类型。除了能够表示浮点数外，还有一些带符号的值：+Infinity，-Infinity 和 NaN (非数值，Not-a-Number)。
+typeof null 返回 object
+
+* Number 数字类型，它并没有为整数给出一种特定的类型。除了能够表示浮点数外，还有一些带符号的值：+Infinity，-Infinity 和 NaN (非数值，Not-a-Number)。
+
+NaN与任何值都不相等，包括自身。应当使用 `x != x` 来判断，当且仅当 x 为 NaN 的时候，表达式的结果才为 `true`。相似的函数有 `isNaN()`, `isFinite()`。
+
+* 数组直接量的语法允许有可选的结尾逗号，故 `[,,]` 只有两个元素而非三个。
+
+---
+
+### 实践判断各种数据类型的方法
+
+    // 判断arr是否为一个数组，返回一个bool值
+    function isArray(arr) {
+        return typeof arr === "object" && Object.prototype.toString.call(arr) === "[object Array]";
+    }
+
+    // 判断fn是否为一个函数，返回一个bool值
+    function isFunction(fn) {
+        return typeof fn === "function";
+    }
 
 
 
