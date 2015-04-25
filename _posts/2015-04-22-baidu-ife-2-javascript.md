@@ -78,7 +78,7 @@ JavaScript 代码在网页读取到该语句的时候就会执行。
 
 ---
 
-### JavaScript 的性能优化：加载和执行
+#### JavaScript 的性能优化：加载和执行
 
 * 扩展阅读：[JavaScript 的性能优化：加载和执行](http://www.ibm.com/developerworks/cn/web/1308_caiys_jsload/index.html)
 
@@ -218,9 +218,7 @@ NaN与任何值都不相等，包括自身。应当使用 `x != x` 来判断，�
 
 ---
 
-### 值类型和引用类型，对象的读取、遍历方式，深度克隆
-
-#### 值类型和引用类型的区别
+### 值类型和引用类型的区别
 
 声明一个值类型变量，编译器会在栈上分配一个空间，这个空间对应着该值类型变量，空间里存储的就是该变量的值。引用类型的实例分配在堆上，新建一个引用类型实例，得到的变量值对应的是该实例的内存分配地址，这就像您的银行账号一样。
 
@@ -229,14 +227,150 @@ JavaScript中原始值包括：undefined，null布尔值，数字和字符串。
 >* 原始值是不可更改的。对象的值是可修改的。
 >* 原始值的比较是值的比较。对象的比较并非值的比较。对象的值都是引用，对象的比较均是引用的比较，当且仅当他们都引用同一个基对象时，他们才相等。
 
-#### 对象的读取、遍历方式
+---
+
+### 对象的读取、遍历方式
 
 参考：[JavaScript 指南-使用对象](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Working_with_Objects)
 
+* 对象
+
+在javascript中，一个对象可以是一个单独的拥有属性和类型的实体。我们拿它和一个杯子做下类比。一个杯子是一个对象(物体)，拥有属性。杯子有颜色，图案，重量，由什么材质构成等等。同样，javascript对象也有属性来定义它的特征。
+
+* 属性
+
+一个 javascript 对象有很多属性。一个对象的属性可以被解释成一个附加到对象上的变量。对象的属性和普通的 javascript 变量基本没什么区别，仅仅是属性属于某个对象。属性定义了对象的特征(译注：动态语言面向对象的鸭子类型)。你可以通过点符号来访问一个对象的属性。JavaScript 对象的属性也可以通过方括号访问。
+
+* 枚举
+
+你可以在 `for...in` 语句中使用方括号标记以枚举一个对象的所有属性。为了展示它如何工作，下面的函数当你将对象及其名称作为参数传入时，显示对象的属性：
+
+    function showProps(obj, objName) {
+      var result = "";
+      for (var i in obj) {
+        if (obj.hasOwnProperty(i)) {
+            result += objName + "." + i + " = " + obj[i] + "\n";
+        }
+      }
+      return result;
+    }
+
+    var srcObj = {
+        a: 1,
+        b: {
+            b1: ["hello", "hi"],
+            b2: "JavaScript"
+        }
+    };
+
+    console.log(showProps(srcObj,'srcObj'));
+
+console:
+
+    srcObj.a = 2
+    srcObj.b = [object Object]
+
+这里使用 `hasOwnProperty()` 是为了确保是自己的属性而非继承的属性。
+
+可以如下写，跳过这个对象的方法：
+
+    function showPropsWithoutFun(obj, objName) {
+        var result = "";
+        for (var i in obj) {
+            if (!obj.hasOwnProperty(i)) {       //跳过继承属性
+                continue;
+            }
+            if (typeof obj[i] === "function") { //跳过这个对象的方法
+                continue;
+            }
+            result += objName + "." + i + "=" + obj[i] + "\n";
+        }
+        return result;
+    }
+
+相关的方法还有：`Object.keys()`, `Object.getOwnPropertyNames()`
+
+`Object.keys()` 方法会返回一个由给定对象的所有可枚举自身属性的属性名组成的数组，数组中属性名的排列顺序和使用for-in循环遍历该对象时返回的顺序一致（两者的主要区别是 for-in 还会遍历出一个对象从其原型链上继承到的可枚举属性）。
+
+`Object.getOwnPropertyNames()` 方法返回一个由指定对象的所有自身属性的属性名（包括不可枚举属性）组成的数组。
+
+* 创建对象
+
+创建对象的方式有三种：使用对象初始化器，使用构造函数，使用 `Object.create()` 方法。
+
+`Object.create()` 方法创建一个拥有指定原型和若干个指定属性的对象。
+
+* 继承
+
+所有的 JavaScript 对象继承于至少一个对象。被继承的对象被称作原型，并且继承的属性可能通过构造函数的 prototype 对象找到。
+
+* 定义方法
+
+一个方法 是关联到某个对象的函数，或者简单地说，一个方法是一个值为某个函数的对象属性。定义方法就象定义普通的函数，除了它们必须被赋给对象的某个属性。例如：
+
+    objectName.methodname = function_name;
+
+    var myObj = {
+      myMethod: function(params) {
+        // ...do something
+      }
+    };
 
 ---
 
-感觉任务2好难，加油啊！
+#### 深度克隆
+
+了解值类型和引用类型的区别，了解各种对象的读取、遍历方式，并在util.js中实现以下方法：
+
+    // 使用递归来实现一个深度克隆，可以复制一个目标对象，返回一个完整拷贝
+    // 被复制的对象类型会被限制为数字、字符串、布尔、日期、数组、Object对象。不会包含函数、正则对象等
+    function cloneObject(src) {
+        // your implement
+    }
+
+    // 测试用例：
+    var srcObj = {
+        a: 1,
+        b: {
+            b1: ["hello", "hi"],
+            b2: "JavaScript"
+        }
+    };
+    var abObj = srcObj;
+    var tarObj = cloneObject(srcObj);
+
+    srcObj.a = 2;
+    srcObj.b.b1[0] = "Hello";
+
+    console.log(abObj.a);
+    console.log(abObj.b.b1[0]);
+
+    console.log(tarObj.a);      // 1
+    console.log(tarObj.b.b1[0]);    // "hello"
+
+参考：
+
+* [白话简单克隆和深度克隆](http://blog.csdn.net/java2000_net/article/details/3014934) 介绍什么是深度克隆，用羊圈和羊的图，简单深刻。
+* [javascript克隆对象深度介绍](http://www.jb51.net/article/32015.htm) 这个代码写的太妙了，可惜找不到源地址了，都是转载来转载去的，要是你知道源地址，请留言告诉我。
+
+浅度克隆：基本类型为值传递，对象仍为引用传递。 
+
+深度克隆：所有元素或属性均完全克隆，并于原引用类型完全独立，即，在后面修改对象的属性的时候，原对象不会被修改。 
+
+思路：深度克隆复制目标对象，那么就需要枚举这个对象。
+
+1. 判断当前属性是否是引用类型，如果是数组或者对象，创建响应类型变量。
+2. 枚举对象内所有属性。
+3. 使用 `hasOwnProperty()` 方法，排除继承的属性。
+4. 给新的对象相应位置赋值，若当前属性为引用类型（数组或对象）递归本方法。直到内部的值类型。
+5. 返回新的对象。
+
+* **我的代码实现：**
+
+---
+
+
+加油！今天弄懂了对象的一些知识，明白了深度克隆是什么了。
 
 未完待续
 
