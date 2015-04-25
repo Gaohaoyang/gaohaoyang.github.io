@@ -235,7 +235,9 @@ footer .point{
 	/* -webkit-text-size-adjust: 100%; */
 }
 
-
+.post h4{
+	font-weight: bold;
+}
 
 .post img{
 	max-width: 100%;
