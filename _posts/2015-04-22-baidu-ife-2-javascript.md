@@ -365,7 +365,27 @@ console:
 4. 给新的对象相应位置赋值，若当前属性为引用类型（数组或对象）递归本方法。直到内部的值类型。
 5. 返回新的对象。
 
-* **我的代码实现：**
+**我的代码实现：**   
+
+    function cloneObject(src) {
+        // your implement
+        var o; //result
+        if (Object.prototype.toString.call(src) === "[object Array]") {
+            o = []; //判断是否是数组，并赋初始值
+        } else {
+            o = {};
+        }
+        for (var i in src) { //遍历这个对象
+            if (src.hasOwnProperty(i)) { //排出继承属性
+                if (typeof src[i] === "object") {
+                    o[i] = cloneObject(src[i]); //递归赋值
+                } else {
+                    o[i] = src[i]; //直接赋值
+                }
+            }
+        }
+        return o;
+    }
 
 ---
 
