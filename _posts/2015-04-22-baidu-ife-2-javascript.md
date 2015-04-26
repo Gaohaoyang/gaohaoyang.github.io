@@ -506,16 +506,89 @@ some | 如果数组中至少有一个元素满足参数函数的测试，则返�
 
 **思路：**
 
-对于 `simpleTrim()` 做两次循环，从前面开始和从后面开始。遇到空格和Tab用 `replace()` 用空字符串替代。
+对于 `simpleTrim()` 做两次循环，从前面开始和从后面开始。遇到空格和Tab跳出，最后用 `slice()` 取出子字符串。
+
+对于 `trim()` 使用正则表达式。
 
 **实现：**
 
+    function simpleTrim(str) {
+        var i;
+        var j;
+        for (i = 0; i < str.length; i++) { //从头遍历字符串
+            if (str.charAt(i) != " " && str.charAt(i) != "\t") { //当不为空的时候
+                break; //跳出循环
+            }
+        }
+        for (j = str.length - 1; j >= 0; j--) {
+            if (str.charAt(j) != " " && str.charAt(j) != "\t") { //当不为空的时候
+                break; //跳出循环
+            }
+        }
+        return str.slice(i, j + 1); //返回子字符串
+    }
+
+    function trim(str) {
+        return str.replace(/^\s+|\s+$/g, '');
+    }
+
+关于正则表达式：
+
+上面的思路是匹配开头和结尾的空白字符，并全局匹配。
+
+* `^`：匹配字符串的开头，在多行检索中，匹配一行的开头。
+* `$`：匹配字符串的结尾，在多行检索中，匹配一行的结尾。
+* `|`：选择，匹配的是该符号左边的子表达式或右边的子表达式。
+* `\s`：任何 Unicode 空白符。
+* `g`：执行一个全局匹配，简言之，即找到所有匹配，而不是找到第一个之后就停止。
+
+以上来自 JavaScript权威指南（犀牛书），感觉这里面将的正则表达式还不错。
 
 **相关方法和知识点：**
+
+* String 对象属性
+
+属性 | 描述
+----|----
+constructor | 对创建该对象的函数的引用
+length | 字符串的长度
+prototype  | 允许您向对象添加属性和方法
+
+* String 对象方法
+
+方法 | 描述
+-----|---
+charAt()  |  返回在指定位置的字符。
+charCodeAt()  |  返回在指定的位置的字符的 Unicode 编码。
+concat()  |  连接字符串。
+indexOf() |  检索字符串。
+lastIndexOf()  | 从后向前搜索字符串。
+localeCompare() | 用本地特定的顺序来比较两个字符串。
+match()| 找到一个或多个正则表达式的匹配。
+replace() |  替换与正则表达式匹配的子串。
+search()  |  检索与正则表达式相匹配的值。
+slice()| 提取字符串的片断，并在新的字符串中返回被提取的部分。
+split()| 把字符串分割为字符串数组。
+substr()  |  从起始索引号提取字符串中指定数目的字符。
+substring() |提取字符串中两个指定的索引号之间的字符。
+toLowerCase() |  把字符串转换为小写。
+toUpperCase()  | 把字符串转换为大写。
+toString() | 返回字符串。
+valueOf()  | 返回某个字符串对象的原始值。
+
+* 静态方法
+
+`String.fromCharCode()` 使用作为参数传入的字符编码创建一个新的字符串。
+
+* HTML方法
+
+由于不是标准方法，这里就不列举了。
 
 ---
 
 ### 遍历数组，使每一个元素执行 `fn` 函数
+
+**要求：**
 
     // 实现一个遍历数组的方法，针对数组中每一个元素执行fn函数，并将数组索引和元素作为参数传递
     function each(arr, fn) {
@@ -538,9 +611,23 @@ some | 如果数组中至少有一个元素满足参数函数的测试，则返�
     }
     each(arr, output);  // 0:java, 1:c, 2:php, 3:html
 
+**分析：**
+
+这个任务有点像 `ECMAScript5` 中新增的数组方法：`forEach()`。还有一点这里的参数 index 是可选形参，保证第一个参数 item 能正常传入就行了，代码非常简单，如下：
+
+**实现：**
+
+    function each(arr, fn) {
+        for(var i in arr){
+            fn(arr[i],i);
+        }
+    }
+
 ---
 
-### 获取第一层元素个数
+### 获取对象中第一层元素个数
+
+**要求：**
 
     // 获取一个对象里面第一层元素的数量，返回一个整数
     function getObjectLength(obj) {}
@@ -555,6 +642,34 @@ some | 如果数组中至少有一个元素满足参数函数的测试，则返�
         }
     };
     console.log(getObjectLength(obj)); // 3
+
+**实现：**
+
+    function getObjectLength(obj) {
+        return Object.keys(obj).length;
+    }
+
+这个自己写的比较简单，不知道可以这样写不。其中 `Object.keys(o)` 为 Object 的一个静态方法，参数是一个对象，返回一个包含o的所有可枚举自有（非继承）属性名字的数组。
+
+---
+
+### 使用正则表达式判断邮箱和手机号
+
+**要求：**
+
+    // 判断是否为邮箱地址
+    function isEmail(emailStr) {
+        // your implement
+    }
+
+    // 判断是否为手机号
+    function isMobilePhone(phone) {
+        // your implement
+    }
+
+**分析：**
+
+**实现：**
 
 加油！
 
