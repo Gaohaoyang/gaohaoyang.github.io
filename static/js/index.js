@@ -6,7 +6,6 @@ $(document).ready(function() {
     categoryDisplay();
     generateContent();
     backToTop();
-
 });
 
 /**
@@ -34,6 +33,12 @@ function fixFooterInit() {
     $(window).resize(function() { //when resize window, footer can auto get the postion
         fixFooter(footerHeight, footerMarginTop);
     });
+
+    /*    $('body').click(function() {
+        fixFooter(footerHeight, footerMarginTop);
+    });*/
+
+
 }
 
 /**
@@ -54,7 +59,7 @@ function fixFooter(footerHeight, footerMarginTop) {
     // console.log("$('body>.container').offset().top----"+$('body>.container').offset().top);
     // console.log("footerHeight---"+footerHeight);
     // console.log("footerMarginTop---"+footerMarginTop);
-    // console.log(contentHeight);
+    console.log(contentHeight);
     if (contentHeight < windowHeight) {
         $('footer').addClass('navbar-fixed-bottom');
     } else {
@@ -91,7 +96,6 @@ function categoryDisplay() {
 
         $('.post-list-body>div[post-cate!=' + cate + ']').hide(250);
         $('.post-list-body>div[post-cate=' + cate + ']').show(400);
-
     });
 }
 

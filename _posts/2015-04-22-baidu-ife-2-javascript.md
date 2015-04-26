@@ -348,7 +348,7 @@ console:
     console.log(tarObj.a);      // 1
     console.log(tarObj.b.b1[0]);    // "hello"
 
-参考：
+**参考：**
 
 * [白话简单克隆和深度克隆](http://blog.csdn.net/java2000_net/article/details/3014934) 介绍什么是深度克隆，用羊圈和羊的图，简单深刻。
 * [javascript克隆对象深度介绍](http://www.jb51.net/article/32015.htm) 这个代码写的太妙了，可惜找不到源地址了，都是转载来转载去的，要是你知道源地址，请留言告诉我。
@@ -357,7 +357,7 @@ console:
 
 深度克隆：所有元素或属性均完全克隆，并于原引用类型完全独立，即，在后面修改对象的属性的时候，原对象不会被修改。 
 
-思路：深度克隆复制目标对象，那么就需要枚举这个对象。
+**思路：**深度克隆复制目标对象，那么就需要枚举这个对象。
 
 1. 判断当前属性是否是引用类型，如果是数组或者对象，创建响应类型变量。
 2. 枚举对象内所有属性。
@@ -389,8 +389,174 @@ console:
 
 ---
 
+### 对数组进行去重
 
-加油！今天弄懂了对象的一些知识，明白了深度克隆是什么了。
+**参考：**
+
+* [MDN Array](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array)
+* [JavaScript Array 对象 w3school](http://www.w3school.com.cn/jsref/jsref_obj_array.asp)
+
+**要求：**
+
+    // 对数组进行去重操作，只考虑数组中元素为数字或字符串，返回一个去重后的数组
+    function uniqArray(arr) {
+        // your implement
+    }
+
+    // 使用示例
+    var a = [1, 3, 5, 7, 5, 3];
+    var b = uniqArray(a);
+    console.log(b); // [1, 3, 5, 7]
+
+**思路：**
+
+1. 新建一个空数组
+2. 遍历原数组
+3. 若新数组中不存在当前元素，将其 `push` 入新数组中
+4. 返回新数组
+
+**实现：**
+
+    // 对数组进行去重操作，只考虑数组中元素为数字或字符串，返回一个去重后的数组
+    function uniqArray(arr) {
+        var newArr = [];    //创建空数组
+        for (var i in arr) {    //遍历旧数组
+            if (newArr.indexOf(arr[i]) == -1) {//如果新数组中不存在当前元素
+                newArr.push(arr[i]);//新数组中加入当前元素
+            }
+        }
+        return newArr;
+    }
+
+**相关方法与知识点：**
+
+* Array 对象属性
+
+属性  | 描述
+---|---
+constructor | 返回对创建此对象的数组函数的引用。
+length  | 设置或返回数组中元素的数目。
+prototype  |  使您有能力向对象添加属性和方法。
+
+* Mutator 方法，这些方法可以改变数组自身
+
+方法 | 描述
+-------------|-----------
+pop | 移除数组的最后一个元素，返回值是被删除的元素。
+push | 在数组的末尾添加一个或者多个元素，返回值是新的数组的长度。
+reverse | 颠倒数组中元素的顺序，原先第一个元素现在变成最后一个，同样原先的最后一个元素变成了现在的第一个，也就是数组的索引发生了变化。
+shift | 删除数组的第一个元素，返回值是删除的元素。
+sort | 对数组中的元素进行排序。
+splice | 添加或删除数组中的一个或多个元素。
+unshift | 添加一个或者多个元素在数组的开头，返回值是新的数组的长度。
+
+* Accessor 方法，这些过程不改变数组自身 These methods do not modify the array and return some representation of the array.
+
+方法|描述
+----|--------
+concat | 返回一个包含此数组和其他数组和/或值的结合的新数组
+indexOf | 返回第一个与给定参数相等的数组元素的索引，没有找到则返回-1。
+join | 将所有的数组元素连接成一个字符串。
+lastIndexOf | 返回在数组中搜索到的与给定参数相等的元素的最后（最大）索引。
+slice | 返回数组中的一段。
+toSource | Returns an array literal representing the specified array; you can use this value to create a new array. Overrides the Object.toSource method.
+toString | 返回代表该数组及其元素的字符,重写Object.toString 过程.
+valueOf | Returns the primitive value of the array. Overrides the Object.valueOf method.
+
+* 循环（迭代）过程
+
+方法 | 描述
+---|----
+filter | 对数组中的每一个元素调用参数中指定的过滤函数，并将对于过滤函数返回值为true的那些数组元素集合为新的数组返回。
+forEach | 对数组的每一个元素依次调用参数中指定的函数。
+every | 如果数组中每一个元素都满足参数中提供的测试函数，则返回真。
+map | Creates a new array with the results of calling a provided function on every element in this array.
+some | 如果数组中至少有一个元素满足参数函数的测试，则返回true。
+
+---
+
+### 实现 `trim()`
+
+**参考：**
+
+* [String MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String)
+* [JavaScript String 对象 W3school](http://www.w3school.com.cn/jsref/jsref_obj_string.asp)
+
+**要求：**
+
+    // 中级班同学跳过此题
+    // 实现一个简单的trim函数，用于去除一个字符串，头部和尾部的空白字符
+    // 假定空白字符只有半角空格、Tab
+    // 练习通过循环，以及字符串的一些基本方法，分别扫描字符串str头部和尾部是否有连续的空白字符，并且删掉他们，最后返回一个完成去除的字符串
+    function simpleTrim(str) {
+        // your implement
+    }
+
+    // 很多同学肯定对于上面的代码看不下去，接下来，我们真正实现一个trim
+    // 对字符串头尾进行空格字符的去除、包括全角半角空格、Tab等，返回一个字符串
+    // 尝试使用一行简洁的正则表达式完成该题目
+    function trim(str) {
+        // your implement
+    }
+
+    // 使用示例
+    var str = '   hi!  ';
+    str = trim(str);
+    console.log(str); // 'hi!'
+
+**思路：**
+
+对于 `simpleTrim()` 做两次循环，从前面开始和从后面开始。遇到空格和Tab用 `replace()` 用空字符串替代。
+
+**实现：**
+
+
+**相关方法和知识点：**
+
+---
+
+### 遍历数组，使每一个元素执行 `fn` 函数
+
+    // 实现一个遍历数组的方法，针对数组中每一个元素执行fn函数，并将数组索引和元素作为参数传递
+    function each(arr, fn) {
+        // your implement
+    }
+
+    // 其中fn函数可以接受两个参数：item和index
+
+    // 使用示例
+    var arr = ['java', 'c', 'php', 'html'];
+    function output(item) {
+        console.log(item)
+    }
+    each(arr, output);  // java, c, php, html
+
+    // 使用示例
+    var arr = ['java', 'c', 'php', 'html'];
+    function output(item, index) {
+        console.log(index + ': ' + item)
+    }
+    each(arr, output);  // 0:java, 1:c, 2:php, 3:html
+
+---
+
+### 获取第一层元素个数
+
+    // 获取一个对象里面第一层元素的数量，返回一个整数
+    function getObjectLength(obj) {}
+
+    // 使用示例
+    var obj = {
+        a: 1,
+        b: 2,
+        c: {
+            c1: 3,
+            c2: 4
+        }
+    };
+    console.log(getObjectLength(obj)); // 3
+
+加油！
 
 未完待续
 
