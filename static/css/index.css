@@ -19,15 +19,20 @@ pre code{
 }
 
 table{
-	border-top:2px solid #aaa;
-	border-bottom: 2px solid #aaa;
+	border-top:2px solid #777;
+	border-bottom: 2px solid #777;
 	margin: 8px 0;
 }
 table thead{
-	border-bottom: 1px solid #aaa;
+	border-bottom: 1px dashed #777;
+	background-color: #aaa;
+	color:#fff;
 }
 table th{
 	padding: 2px 10px;
+}
+table tr:nth-child(2n){
+	background-color: #E5EAED;
 }
 table td{
 	padding: 2px 10px;
