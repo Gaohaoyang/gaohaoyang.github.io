@@ -786,12 +786,43 @@ $   |匹配输入/字符串的结尾。如果多行（multiline）标志被设�
 
 对于element本身如果没有样式类，那么使用Element的className属性获取的是空字符串，则直接添加新的样式类字符串即可。对于已经有了样式类的元素，获取到原有的样式类后，在后面添加一个空格，再添加新的样式类即可。
 
+`removeClass()`
+
+获取原始的样式，然后用正则表达式去匹配这个要删掉的样式，由于是动态的正则表达式，所以要用正则的构造函数 `RegExp()` 来创建，并且使用 `\b` 来确定单词边界。匹配好后用空字符串替换被匹配的样式类即可。
+
+`isSiblingNode()`
+
+直接判断两个父节点是不是相同
+
+`getPosition()`
+
+`offsetTop`, `offsetLeft` 都是相对于最近一个有定位的父元素，如果都没有那么就是相对于 body 的偏移位置。
+
+`offsetParent` 是寻找最近一个有定位的父级元素，如果没有，那么找到 body 元素。
+
+所以这道题需要先寻找有定位的父级元素，如果都没有，那么就是相对于 body 的偏移了，可以直接使用 `offsetTop`, `offsetLeft`。
+
+如果有定位的父级元素不是 body，是 A 元素，那么再寻找 A 元素的最近的有定位的父级元素，如果没有，就是相对于 body 的定位，这时，所求偏移量就是 A 的偏移量加所求元素相对于 A 的偏移量。如果 A 还有已经定位的父级元素，就继续去推，直到找到 body 为止。
+
+这里可能要用到一个递归算法。
+
 **实现：**
 
     // 为element增加一个样式名为newClassName的新样式
     function addClass(element, newClassName) {
         var oldClassName = element.className; //获取旧的样式类
         element.className = oldClassName === "" ? newClassName : oldClassName + " " + newClassName;
+    }
+
+    // 移除element中的样式oldClassName
+    function removeClass(element, oldClassName) {
+        var originClassName = element.className; //获取原先的样式类
+        var pattern = new RegExp("\\b" + oldClassName + "\\b"); //使用构造函数构造动态的正则表达式
+        element.className = originClassName.replace(pattern, '');
+    }
+
+    function isSiblingNode(element, siblingNode) {
+        return element.parentNode === siblingNode.parentNode;
     }
 
 ---
