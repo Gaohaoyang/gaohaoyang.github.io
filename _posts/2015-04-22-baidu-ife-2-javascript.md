@@ -12,6 +12,8 @@ excerpt: 百度前端学院基础课程 JavaScript 相关。
 
 ## 任务
 
+掌握JavaScript基础知识，能够使用JavaScript编写一些复杂度不大的交互功能。
+
 **任务：** [JavaScript基础](https://github.com/Gaohaoyang/ife/tree/master/task/task0002)   
 
 做完任务一的时候深深地感觉到自己的基础非常的薄弱，在这里再次感谢一下百度前端技术学院，做任务的时候深刻理解了自己平时掌握不牢固的内容，比如浮动、BFC、等高布局等。继续加油吧！
@@ -653,7 +655,7 @@ valueOf()  | 返回某个字符串对象的原始值。
 
 ---
 
-### 使用正则表达式判断邮箱和手机号
+### 正则表达式
 
 **要求：**
 
@@ -669,7 +671,75 @@ valueOf()  | 返回某个字符串对象的原始值。
 
 **分析：**
 
+邮箱由（数字字母，点），数字字母组合，@符号，数字字母，（点，数字字母）。其中两个小括号都是任意个数的。并且开头和结尾都是字母。
+
+手机号是11位组成的，有时候会在前面加国际区号的前缀，如中国：+86。查阅相关资料后发现区号最多4位。[国际电话区号_百度百科](http://baike.baidu.com/link?url=2nwM_XyoKXLNPxk0-uDwGT4SxIFncXy7dqB3VbsH3tSaueYRri3CYOWWF9qb84zUqeKkq9uTF2YfetoiyJVm7_)
+
+并且手机号最多就是11位，其他国家有用8位的，也有用7位，10位的都有。最短是7位，最长是11位。
+
 **实现：**
+
+    // 判断是否为邮箱地址
+    function isEmail(emailStr) {
+        var pattern = /^(\w+\.)*\w+@\w+(\.\w+)+$/;
+        return pattern.test(emailStr);
+    }
+
+    // 判断是否为手机号
+    function isMobilePhone(phone) {
+        var pattern = /^(\+\d{1,4})?\d{7,11}$/;
+        return pattern.test(phone);
+    }
+
+**相关方法和知识点：**
+
+* 参考：[RegExp MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp#Special_characters_in_regular_expressions)
+* 正则表达式修饰符：
+
+字符 | 含义
+---|---
+g | 全局匹配
+i | 忽略大小写
+m | 让开始和结束字符（^ 和 $）工作在多行模式（也就是，^ 和 $ 可以匹配字符串中每一行的开始和结束（行是由 \n 或 \r 分割的），而不只是整个输入字符串的最开始和最末尾处。
+
+* 字符类别
+
+字符 |  含义
+---|---
+[...]|方括号内的任意字符
+[^...]|不在方括号内的任意字符
+. | （点号，小数点）匹配任意单个字符，但是换行符除外，包括：\n \r \u2028 或 \u2029。<br><br>需要注意的是，m 多行（multiline）标志不会改变点号的表现。因此为了匹配多行中的字符集，可使用[^] （当然你不是打算用在旧版本 IE 中），它将会匹配任意字符，包括换行符<br><br>例如，/.y/ 匹配 "yes make my day" 中的 "my" 和 "ay"，但是不匹配 "yes"。
+\d | 匹配基本拉丁字母表（basic Latin alphabet）中的一个数字字符。等价于[0-9]。<br><br>例如，/\d/ 或 /[0-9]/ 匹配 "B2 is the suite number." 中的 '2'。 
+\D | 匹配任意一个不是基本拉丁字母表中数字的字符。等价于[^0-9]。<br><br>例如，/\D/ 或 /[^0-9]/ 匹配 "B2 is the suite number." 中的 'B'。
+\w | 匹配任意来自基本拉丁字母表中的字母数字字符，还包括下划线。等价于 [A-Za-z0-9_]。<br><br>例如，/\w/ 匹配 "apple" 中的 'a'，"$5.28" 中的 '5' 和 "3D" 中的 '3'。
+\W | 匹配任意不是基本拉丁字母表中单词（字母数字下划线）字符的字符。等价于 [^A-Za-z0-9_]。<br><br>例如，/\W/ 或 /[^A-Za-z0-9_]/ 匹配 "50%" 中的 '%'。
+\s | 匹配一个空白符，包括空格、制表符、换页符、换行符和其他 Unicode 空格。<br><br>等价于 [ \f\n\r\t\v​\u00a0\u1680​\u180e\u2000​\u2001\u2002​\u2003\u2004​ \u2005\u2006​\u2007\u2008​\u2009\u200a​\u2028\u2029​​\u202f\u205f​ \u3000]。<br><br>例如 /\s\w*/ 匹配 "foo bar" 中的 ' bar'。
+\S | 匹配一个非空白符。等价于 [^ \f\n\r\t\v​\u00a0\u1680​\u180e\u2000​\u2001\u2002​\u2003\u2004​ \u2005\u2006​\u2007\u2008​\u2009\u200a​\u2028\u2029​\u202f\u205f​\u3000]。<br><br>例如，/\S\w*/ 匹配 "foo bar" 中的 'foo'。
+[\b] | 匹配一个退格符（backspace）（不要与 \b 混淆）
+
+* 直接量字符
+
+字符| 匹配
+---|---
+数字和字母字符|自身
+\t | 匹配一个水平制表符（tab）
+\r | 匹配一个回车符（carriage return）
+\n | 匹配一个换行符（linefeed）
+\v | 匹配一个垂直制表符（vertical tab）
+\f | 匹配一个换页符（form-feed）
+\0 | 匹配一个 NUL 字符。不要在此后面跟小数点。
+\cX |X 是 A - Z 的一个字母。匹配字符串中的一个控制字符。<br><br>例如，/\cM/ 匹配字符串中的 control-M。
+\xhh  |  匹配编码为 hh （两个十六进制数字）的字符。
+\uhhhh | 匹配 Unicode 值为 hhhh （四个十六进制数字）的字符。
+
+* 边界
+
+字符|  含义
+---|---
+^  |匹配输入/字符串的开始。如果多行（multiline）标志被设为 true，该字符也会匹配一个断行（line break）符后的开始处。<br><br>例如，/^A/ 不匹配 "an A" 中的 "A"，但匹配 "An A" 中的 "A"。
+$   |匹配输入/字符串的结尾。如果多行（multiline）标志被设为 true，该字符也会匹配一个断行（line break）符的前的结尾处。<br><br>例如，/t$/ 不匹配 "eater" 中的 "t"，但匹配 "eat" 中的 "t"。
+\b  |匹配一个零宽单词边界（zero-width word boundary），如一个字母与一个空格之间。 （不要和 [\b] 混淆）<br><br>例如，/\bno/ 匹配 "at noon" 中的 "no"，/ly\b/ 匹配 "possibly yesterday." 中的 "ly"。
+\B  |匹配一个零宽非单词边界（zero-width non-word boundary），如两个字母之间或两个空格之间。<br><br>例如，/\Bon/ 匹配 "at noon" 中的 "on"，/ye\B/ 匹配 "possibly yesterday." 中的 "ye"。
 
 加油！
 
