@@ -741,6 +741,87 @@ $   |匹配输入/字符串的结尾。如果多行（multiline）标志被设�
 \b  |匹配一个零宽单词边界（zero-width word boundary），如一个字母与一个空格之间。 （不要和 [\b] 混淆）<br><br>例如，/\bno/ 匹配 "at noon" 中的 "no"，/ly\b/ 匹配 "possibly yesterday." 中的 "ly"。
 \B  |匹配一个零宽非单词边界（zero-width non-word boundary），如两个字母之间或两个空格之间。<br><br>例如，/\Bon/ 匹配 "at noon" 中的 "on"，/ye\B/ 匹配 "possibly yesterday." 中的 "ye"。
 
+---
+
+## DOM
+
+参考：
+
+* [HTML DOM 教程 W3C](http://www.w3school.com.cn/htmldom/index.asp)
+* [JavaScript HTML DOM W3C](http://www.w3school.com.cn/js/js_htmldom.asp)
+* [参考手册-HTML DOM Document 对象](http://www.w3school.com.cn/jsref/dom_obj_document.asp)
+* [参考手册-HTML DOM Element 对象](http://www.w3school.com.cn/jsref/dom_obj_all.asp)
+
+---
+
+### 基本任务
+
+**任务：**
+
+先来一些简单的，在你的util.js中完成以下任务：
+
+    // 为element增加一个样式名为newClassName的新样式
+    function addClass(element, newClassName) {
+        // your implement
+    }
+
+    // 移除element中的样式oldClassName
+    function removeClass(element, oldClassName) {
+        // your implement
+    }
+
+    // 判断siblingNode和element是否为同一个父元素下的同一级的元素，返回bool值
+    function isSiblingNode(element, siblingNode) {
+        // your implement
+    }
+
+    // 获取element相对于浏览器窗口的位置，返回一个对象{x, y}
+    function getPosition(element) {
+        // your implement
+    }
+
+**思路：**
+
+`addClass()`
+
+对于element本身如果没有样式类，那么使用Element的className属性获取的是空字符串，则直接添加新的样式类字符串即可。对于已经有了样式类的元素，获取到原有的样式类后，在后面添加一个空格，再添加新的样式类即可。
+
+**实现：**
+
+    // 为element增加一个样式名为newClassName的新样式
+    function addClass(element, newClassName) {
+        var oldClassName = element.className; //获取旧的样式类
+        element.className = oldClassName === "" ? newClassName : oldClassName + " " + newClassName;
+    }
+
+---
+
+### mini $
+
+接下来挑战一个mini $，它和之前的$是不兼容的，它应该是document.querySelector的功能子集，在不直接使用document.querySelector的情况下，在你的util.js中完成以下任务：
+
+    // 实现一个简单的Query
+    function $(selector) {
+
+    }
+
+    // 可以通过id获取DOM对象，通过#标示，例如
+    $("#adom"); // 返回id为adom的DOM对象
+
+    // 可以通过tagName获取DOM对象，例如
+    $("a"); // 返回第一个<a>对象
+
+    // 可以通过样式名称获取DOM对象，例如
+    $(".classa"); // 返回第一个样式定义包含classa的对象
+
+    // 可以通过attribute匹配获取DOM对象，例如
+    $("[data-log]"); // 返回第一个包含属性data-log的对象
+
+    $("[data-time=2015]"); // 返回第一个包含属性data-time且值为2015的对象
+
+    // 可以通过简单的组合提高查询便利性，例如
+    $("#adom .classa"); // 返回id为adom的DOM所包含的所有子节点中，第一个样式定义包含classa的对象
+
 加油！
 
 未完待续
