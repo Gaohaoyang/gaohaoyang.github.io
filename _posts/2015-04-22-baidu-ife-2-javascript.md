@@ -817,8 +817,9 @@ $   |匹配输入/字符串的结尾。如果多行（multiline）标志被设�
 
     简单的说就是：FF、Opera 和 IE 浏览器认为在客户端浏览器展示的页面的内容对应于整个 HTML，所以使用 `document.documentElement`来代表，相应的滚动距离则通过 `document.documentElement.scrollLeft` 和 `document.documentElement.scrollTop` 来获取，而 Safari 和 Chrome 浏览器则认为页面开始于 body 部分，从而相应的滚动距离用 `document.body.scrollLeft` 和 `document.body.scrollTop` 来获取。另外需要注意的是，FF 和 IE 的 quirks mode（兼容模式）下是用 `document.body` 来获取的。
 
-    针对跨浏览器的解决方案则可简单的用如下代码获取：
+    documentElement 对应的是 html 标签，而 body 对应的是 body 标签
 
+    针对跨浏览器的解决方案则可简单的用如下代码获取：
 
         var scrollLeft = Math.max(document.documentElement.scrollLeft, document.body.scrollLeft); 
         var scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop); 
@@ -853,6 +854,8 @@ $   |匹配输入/字符串的结尾。如果多行（multiline）标志被设�
 
 ### mini $
 
+**任务：**
+
 接下来挑战一个mini $，它和之前的$是不兼容的，它应该是document.querySelector的功能子集，在不直接使用document.querySelector的情况下，在你的util.js中完成以下任务：
 
     // 实现一个简单的Query
@@ -876,6 +879,19 @@ $   |匹配输入/字符串的结尾。如果多行（multiline）标志被设�
 
     // 可以通过简单的组合提高查询便利性，例如
     $("#adom .classa"); // 返回id为adom的DOM所包含的所有子节点中，第一个样式定义包含classa的对象
+
+**参考：**
+
+* [Sizzle选择器](http://www.imooc.com/code/4477)
+* [Sizzle引擎--原理与实践（一）](http://www.cnblogs.com/xesam/archive/2012/02/15/2352466.html)
+* [Sizzle是怎样工作的](http://www.cnblogs.com/rubylouvre/archive/2011/01/24/1942818.html)
+
+**思路：**
+
+1. 通过空格拆分参数 selector，因为可能是组合查询。拆分为数组 selectorArr
+2. 遍历 selectorArr，条件判断各种情况。
+3. 得到节点的 Element 对象后，以这个对象为父节点，继续下一层的判断。
+
 
 加油！
 
