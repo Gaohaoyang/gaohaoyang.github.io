@@ -34,7 +34,9 @@ icon: glyphicon-heart
 
 ### 关于本站   
 
-2015.4.24 | 目前我在学习百度前端技术学院的任务，学的过程中感觉自己之前搭建博客的代码写的太烂太乱了。学完之后一定会全部重构一下的。不再使用 BootStrap 了，自己写一些相应式的布局，自己模块化构建 js 代码，争取在7月之前完成。
+这个博客主要用于记录一下前端路上的风景。
+
+2015.4.24 | 目前我在学习百度前端技术学院的任务，学的过程中感觉自己之前搭建博客的代码写的太烂太乱了。学完之后一定会全部重构一下的。不再使用 BootStrap 了，自己写一些响应式的布局，自己模块化构建 js 代码，争取在7月之前完成。
 2015.4.14  |  给博客添加了侧边的目录。主要使用了 BootStrap 的 [Affix](http://v3.bootcss.com/javascript/#affix) 插件。
 2015.4.8      |  本博客迎来第一条评论！在文章 [判断两个数组是否相似 (arraysSimilar)](http://gaohaoyang.github.io/2015/04/06/arrays-similar/) 下，来自慕课网的老师 [Bosn](http://www.imooc.com/space/teacher/id/1159332) 说虽然代码长了些，但思路清晰。同时博客添加了返回顶部按钮。
 2015.3	       |  增加了底栏的自适应内容高度的效果。不会因为页面内容太少而紧挨着内容。首页添加了文章分类切换的动画。使用 [HighLightJS](https://highlightjs.org/) 进行代码高亮，放弃了 jekyll 推荐的 pygments，HighLightJS 配合 MarkDown 书写太方便了，直接缩进一下就被解释为代码了。
@@ -44,6 +46,16 @@ icon: glyphicon-heart
 2014.11         |  学习 Git 的时候接触到 GitHub 从而了解了 [GitHub Pages](http://pages.github.com/) 于是尝试自己用 jekyll 建一个博客。   
 2014.5          |  尝试过使用 WordPress 在京东云擎上建站，当时建好后比较卡，不了了之了。
 
-通过搭建这个静态博客，学到最多的就是 Git 的语法了，现在对 Git 的操作越来越熟练了。    
+通过搭建这个静态博客，学到最多的就是 Git 的语法了，现在对 Git 的操作越来越熟练了。  
+
+---
+
+#### 友情链接
+
+[羡辙杂俎](http://zhangwenli.com/blog)
+
+Comment below to exchange link with me.  
+
+---
 
 只要有空一定会更新的！
