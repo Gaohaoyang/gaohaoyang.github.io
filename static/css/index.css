@@ -7,7 +7,7 @@ body {
     font-family: 'Microsoft YaHei', 'SimHei', sans-serif;
 }
 p{
-	/*text-indent: 2em;*/
+	text-indent: 2em;
 }
 pre{
 	padding: 0;
