@@ -892,6 +892,166 @@ $   |匹配输入/字符串的结尾。如果多行（multiline）标志被设�
 2. 遍历 selectorArr，条件判断各种情况。
 3. 得到节点的 Element 对象后，以这个对象为父节点，继续下一层的判断。
 
+**实现：**
+
+    //多个选择器有点难到我了，看了一些资料觉得思路应该如下：
+    //1.如果存在#，直接从#开始向后查
+    //2.如果存在tag直接找到所有的tag然后向后查
+    //3.样式类，属性，从后向前查，得到它所有的父节点名称，去筛选匹配
+    //以上的做法有点太复杂，我还是做一个简单的正向匹配吧。
+    function $(selector) {
+
+        if (!selector) {
+            return null;
+        }
+
+        if (selector == document) {
+            return document;
+        }
+
+        selector = selector.trim();
+        if (selector.indexOf(" ") !== -1) { //若存在空格
+            var selectorArr = selector.split(/\s+/); //拆成数组
+
+            var rootScope = myQuery(selectorArr[0]); //第一次的查找范围
+            var i = null;
+            var j = null;
+            var result = [];
+            //循环选择器中的每一个元素
+            for (i = 1; i < selectorArr.length; i++) {
+                for (j = 0; j < rootScope.length; j++) {
+                    result.push(myQuery(selectorArr[i], rootScope[j]));
+                }
+                // rootScope = result;
+                // 目前这个方法还有bug
+            }
+            return result[0][0];
+        } else { //只有一个，直接查询
+            return myQuery(selector, document)[0];
+        }
+    }
+
+    /**
+     * 针对一个内容查找结果 success
+     * @param  {String} selector 选择器内容
+     * @param  {Element} root    根节点元素
+     * @return {NodeList数组}    节点列表，可能是多个节点也可能是一个
+     */
+    function myQuery(selector, root) {
+        var signal = selector[0]; //
+        var allChildren = null;
+        var content = selector.substr(1);
+        var currAttr = null;
+        var result = [];
+        root = root || document; //若没有给root，赋值document
+        switch (signal) {
+            case "#":
+                result.push(document.getElementById(content));
+                break;
+            case ".":
+                allChildren = root.getElementsByTagName("*");
+                // var pattern0 = new RegExp("\\b" + content + "\\b");
+                for (i = 0; i < allChildren.length; i++) {
+                    currAttr = allChildren[i].getAttribute("class");
+                    if (currAttr !== null) {
+                        var currAttrsArr = currAttr.split(/\s+/);
+                        console.log(currAttr);
+                        for (j = 0; j < currAttrsArr.length; j++) {
+                            if (content === currAttrsArr[j]) {
+                                result.push(allChildren[i]);
+                                console.log(result);
+                            }
+                        }
+                    }
+                }
+                break;
+            case "[": //属性选择
+                if (content.search("=") == -1) { //只有属性，没有值
+                    allChildren = root.getElementsByTagName("*");
+                    for (i = 0; i < allChildren.length; i++) {
+                        if (allChildren[i].getAttribute(selector.slice(1, -1)) !== null) {
+                            result.push(allChildren[i]);
+                        }
+                    }
+                } else { //既有属性，又有值
+                    allChildren = root.getElementsByTagName("*");
+                    var pattern = /\[(\w+)\s*\=\s*(\w+)\]/; //为了分离等号前后的内容
+                    var cut = selector.match(pattern); //分离后的结果，为数组
+                    var key = cut[1]; //键
+                    var value = cut[2]; //值
+                    for (i = 0; i < allChildren.length; i++) {
+                        if (allChildren[i].getAttribute(key) == value) {
+                            result.push(allChildren[i]);
+                        }
+                    }
+                }
+                break;
+            default: //tag
+                result = root.getElementsByTagName(selector);
+                break;
+        }
+        return result;
+    }
+
+---
+
+## 事件
+
+### 绑定注册事件与移除事件
+
+**任务与实现：**
+
+    // 给一个element绑定一个针对event事件的响应，响应函数为listener
+    function addEvent(element, event, listener) {
+        if (element.addEventListener) {
+            element.addEventListener(event,listener);
+        } else if(element.attachEvent){
+            element.attachEvent("on"+event,listener);
+        }
+    }
+
+    // 移除element对象对于event事件发生时执行listener的响应
+    function removeEvent(element, event, listener) {
+        if (element.removeEventListenr) {
+            element.removeEventListenr(event,listener);
+        } else if(element.detachEvent){
+            element.detachEvent("on"+event,listener);
+        }
+    }
+
+**相关说明：**
+
+IE8+ 支持 `addEventListener()`。IE8 以下的版本使用 `attachEvent()`。
+
+* `attachEvent()` 不支持时间捕获。
+* `attachEvent()` 第一个参数事件处理程序属性名使用前缀 on。
+* `attachEvent()` 允许相同的事件处理程序函数注册多次。
+
+---
+
+### click 与 enter 键事件绑定
+
+**任务与实现：**
+
+    // 实现对click事件的绑定
+    function addClickEvent(element, listener) {
+        addEvent(element, "click", listener);
+    }
+
+    // 实现对于按Enter键时的事件绑定
+    function addEnterEvent(element, listener) {
+        addEvent(element, "keydown", function(event) {
+            if (event.keyCode == 13) {
+                listener();
+            }
+        });
+    }
+
+**相关说明：**
+
+这里我直接使用了上一个任务写好的 `addEvent()` 函数。这样可以简化代码，并有良好的兼容性。
+
+enter 键的 keyCode 为 13。
 
 加油！
 
