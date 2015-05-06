@@ -1053,6 +1053,105 @@ IE8+ 支持 `addEventListener()`。IE8 以下的版本使用 `attachEvent()`。
 
 enter 键的 keyCode 为 13。
 
+---
+
+### 事件代理
+
+**参考：**
+
+* [javascript事件代理（委托）](http://www.cnblogs.com/Aralic/p/4446030.html)
+* [JS - 事件代理](http://www.cnblogs.com/leo388/p/4461579.html)
+
+**任务与实现：**
+
+    function delegateEvent(element, tag, eventName, listener) {
+        element['on' + eventName] = function(ev) {
+            var e = ev || window.event;
+            var target = e.target || e.srcElement;
+            if (target.nodeName.toLowerCase() === tag) {
+                target['on' + eventName] = listener;
+            }
+        };
+    }
+
+---
+
+## BOM
+
+**任务与实现：**
+
+    // 判断是否为IE浏览器，返回-1或者版本号
+    function isIE() {
+        var s = navigator.userAgent.toLowerCase();
+        console.log(s);
+        //ie10的信息：
+        //mozilla/5.0 (compatible; msie 10.0; windows nt 6.2; trident/6.0)
+        //ie11的信息：
+        //mozilla/5.0 (windows nt 6.1; trident/7.0; slcc2; .net clr 2.0.50727; .net clr 3.5.30729; .net clr 3.0.30729; media center pc 6.0; .net4.0c; .net4.0e; infopath.2; rv:11.0) like gecko
+        var ie = s.match(/rv:([\d.]+)/) || s.match(/msie ([\d.]+)/);
+        if(ie) {
+            return ie[1];
+        } else {
+            return -1;
+        }
+    }
+
+    // 设置cookie
+    function setCookie(cookieName, cookieValue, expiredays) {
+        var cookie = cookieName + "=" + encodeURIComponent(cookieValue);
+        if (typeof expiredays === "number") {
+            cookie += ";max-age=" + (expiredays * 60 * 60 * 24);
+        }
+        document.cookie = cookie;
+    }
+
+    // 获取cookie值
+    function getCookie(cookieName) {
+        var cookie = {};
+        var all = document.cookie;
+        if (all==="") {
+            return cookie;
+        }
+        var list = all.split("; ");
+        for (var i = 0; i < list.length; i++) {
+            var p = list[i].indexOf("=");
+            var name = list[i].substr(0, p);
+            var value = list[i].substr(p + 1);
+            value = decodeURIComponent(value);
+            cookie[name] = value;
+        }
+        return cookie;
+    }
+
+* 参考自：JavaScript权威指南
+
+---
+
+## Ajax
+
+**任务：**
+
+    // 学习Ajax，并尝试自己封装一个Ajax方法。实现如下方法：
+    function ajax(url, options) {
+        // your implement
+    }
+
+    // 使用示例：
+    ajax(
+        'http://localhost:8080/server/ajaxtest', 
+        {
+            data: {
+                name: 'simon',
+                password: '123456'
+            },
+            onsuccess: function (responseText, xhr) {
+                console.log(responseText);
+            }
+        }
+    );　
+
+**实现：**
+
 加油！
 
 未完待续
