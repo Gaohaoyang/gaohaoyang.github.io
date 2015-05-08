@@ -1156,6 +1156,7 @@ enter 键的 keyCode 为 13。
 ---
 
 * [JS图片切换[左右切换][带说明]](http://www.itxueyuan.org/view/6323.html)
+* [oninput 事件](http://help.dottoro.com/ljhxklln.php)
 
 加油！
 
