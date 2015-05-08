@@ -1152,6 +1152,10 @@ enter 键的 keyCode 为 13。
 
 **实现：**
 
+---
+
+[oninput 事件](http://help.dottoro.com/ljhxklln.php)
+
 加油！
 
 未完待续
