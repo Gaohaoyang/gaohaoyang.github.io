@@ -1152,11 +1152,20 @@ enter 键的 keyCode 为 13。
 
 **实现：**
 
+最近比较忙，任务已经做完，但是相关知识点还没来得及整理。
 
 ---
 
 * [JS图片切换[左右切换][带说明]](http://www.itxueyuan.org/view/6323.html)
 * [oninput 事件](http://help.dottoro.com/ljhxklln.php)
+
+
+---
+
+## 最终作品
+
+* [代码](https://github.com/Gaohaoyang/ife/tree/master/task/task0002/work/Gaohaoyang)
+* [在线 Demo](http://gaohaoyang.github.io/ife/task/task0002/work/Gaohaoyang/index.html)
 
 加油！
 
