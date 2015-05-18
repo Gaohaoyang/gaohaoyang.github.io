@@ -13,6 +13,8 @@ excerpt: 记录一些好用的前端工具和框架。
 
 ---
 
+## 色彩与图标
+
 ### CSS滤镜
 
 * [Filter Effects](http://www.cssreflex.com/css-generators/filter)
@@ -59,5 +61,35 @@ excerpt: 记录一些好用的前端工具和框架。
 
 可以看到第一幅图中的 51, 51, 51 变成了 #333333。
 
+---
 
+### 配色
+
+* [nipponcolors](http://nipponcolors.com/)
+    
+    日本的一个配色网站。罗列了很多不饱和经典的颜色，当然，自己选配还是很重要的。
+
+    ![nipponcolors](http://7q5cdt.com1.z0.glb.clouddn.com/blog-chooseColor.png)
+
+* [Adobe Color CC](https://color.adobe.com/zh/explore/most-popular/?time=all)
+    
+    Adobe 出的在线配色工具，里面有些现成的配色方案还是很不错的。
+
+    ![Adobe Color CC](http://7q5cdt.com1.z0.glb.clouddn.com/blog-adobeColorCC.png)
+
+* [paletton](http://paletton.com/)
+
+    提供了各种预览模式，可以在模板网站中预览，在色块中预览。
+
+    ![paletton](http://7q5cdt.com1.z0.glb.clouddn.com/blog-paletton.png)
+
+---
+
+### 图标
+
+* [easyicon](http://www.easyicon.net/)
+
+    对中文的搜索支持很好。实际上它是先把中文翻译为英文再搜索的。
+
+    ![easyicon](http://7q5cdt.com1.z0.glb.clouddn.com/blog-icon.png)
 
