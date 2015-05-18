@@ -37,7 +37,7 @@ icon: glyphicon-heart
 这个博客主要用于记录一下前端路上的风景。
 
 2015.4.24 | 目前我在学习百度前端技术学院的任务，学的过程中感觉自己之前搭建博客的代码写的太烂太乱了。学完之后一定会全部重构一下的。不再使用 BootStrap 了，自己写一些响应式的布局，自己模块化构建 js 代码，争取在7月之前完成。
-2015.4.14  |  给博客添加了侧边的目录。主要使用了 BootStrap 的 [Affix](http://v3.bootcss.com/javascript/#affix) 插件。
+2015.4.14  |  给博客添加了侧边的目录。主要使用了 BootStrap 的 [Affix](http://v3.bootcss.com/javascript/#affix) 插件。后来又弃用了这个插件，有bug。
 2015.4.8      |  本博客迎来第一条评论！在文章 [判断两个数组是否相似 (arraysSimilar)](http://gaohaoyang.github.io/2015/04/06/arrays-similar/) 下，来自慕课网的老师 [Bosn](http://www.imooc.com/space/teacher/id/1159332) 说虽然代码长了些，但思路清晰。同时博客添加了返回顶部按钮。
 2015.3	       |  增加了底栏的自适应内容高度的效果。不会因为页面内容太少而紧挨着内容。首页添加了文章分类切换的动画。使用 [HighLightJS](https://highlightjs.org/) 进行代码高亮，放弃了 jekyll 推荐的 pygments，HighLightJS 配合 MarkDown 书写太方便了，直接缩进一下就被解释为代码了。
 2015.2	       |  给分页列表加 css3 的阴影效果，事先有一个相关的 [阴影demo](http://gaohaoyang.github.io/shadow-demo-css3/) 练习，这里感谢慕课网 [CSS3图片阴影效果](http://www.imooc.com/learn/240) 的课程。
