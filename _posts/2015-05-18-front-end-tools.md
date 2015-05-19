@@ -93,5 +93,18 @@ excerpt: 记录一些好用的前端工具和框架。
 
     ![easyicon](http://7q5cdt.com1.z0.glb.clouddn.com/blog-icon.png)
 
+---
+
+## 数据处理
+
+### Json
+
+* [json editor](http://braincast.nl/samples/jsoneditor/)
+
+    将json数据输入进去，会生成一个树形的结构，方便查看每个节点。
+
+    ![jsoneditor](http://7q5cdt.com1.z0.glb.clouddn.com/blog-json.png)
+
+---
 
 本文不定期更新。
