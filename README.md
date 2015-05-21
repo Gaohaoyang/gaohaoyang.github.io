@@ -10,6 +10,8 @@ You can visit [here](http://gaohaoyang.github.io) to see this blog.
 
 博客访问地址：[点击这里](http://gaohaoyang.github.io)
 
+**使用时请注明模板来源:  Jekyll theme by [Gaohaoyang](https://github.com/Gaohaoyang/gaohaoyang.github.io)**
+
 <!--
 
 ## 被引用信息
