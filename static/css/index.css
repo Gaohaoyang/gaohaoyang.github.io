@@ -60,6 +60,9 @@ nav{
 }
 
 /* index main */
+.main{
+	min-height: 800px;
+}
 .post-area{
 	
 	background-color:#f8f8fd;
@@ -204,7 +207,6 @@ footer{
 	line-height: 50px;
 	margin-top: 80px;
 	background: #3f4850;
-	display: none;
 	color: #aaa;
 	text-align: center;
 
