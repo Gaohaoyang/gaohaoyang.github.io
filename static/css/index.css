@@ -339,9 +339,9 @@ blockquote:last-child {
 
 }
 #fall ul{
-	margin: 5px 5px 0 5px;
+	margin: 0 10px;
 	padding: 0;
-	width: 260px;
+	width: 240px;
 	/*background-color: red;*/
 	display: inline-block;
 	vertical-align: top;
@@ -349,13 +349,19 @@ blockquote:last-child {
 
 	
 }
-@media screen and (max-width: 480px){
+
+@media screen and (max-width: 1200px) { 
+	#fall ul{
+		width: 210px;
+	}
+}
+@media screen and (max-width: 991px){
 	#fall ul{
 		width: auto;
 	}
 }
 #fall li{
-	margin: 0 0 10px 0;
+	margin: 0 0 20px 0;
 	padding: 0;
 	list-style-type: none;
 	font-size: 14px;
@@ -374,6 +380,7 @@ blockquote:last-child {
 	margin: 0 10px;
 	padding: 10px 0 5px 0;
 	border-bottom: 1px dotted #ddd;
+	font-weight: bold;
 }
 #fall .description{
 	text-align: left;
@@ -492,7 +499,7 @@ blockquote:last-child {
 	bottom: 0px;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 1200px){
 	.post{
 		padding:10px 10px;
 		font-size: 14px;
