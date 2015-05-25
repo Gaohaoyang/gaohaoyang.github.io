@@ -1323,6 +1323,58 @@ enter 键的 keyCode 为 13。
 * [代码](https://github.com/Gaohaoyang/ife/tree/master/task/task0002/work/Gaohaoyang)
 * [在线demo](http://gaohaoyang.github.io/ife/task/task0002/work/Gaohaoyang/task0002_3.html)
 
+### 关于变速运动
+
+评论中有人问到运动部分为什么这样写，下面我讲一下吧。
+
+    function startMove(target) {
+        clearInterval(timerInner);
+        timerInner = setInterval(function() {
+            var speed = (target - imgListDiv.offsetLeft) / 6;
+            speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+
+            imgListDiv.style.left = imgListDiv.offsetLeft + speed + "px";
+        }, 30);
+    }
+
+上面是运动部分代码。
+
+* 参数 `target` 是运动终点的位置。
+* 首先停止计时器，为了避免上一次调用方法时，计时器没有关闭带来的干扰。
+
+      clearInterval(timerInner);
+
+* 下面开始开启计时器，每隔 30ms 执行一次内部的函数。
+
+* 变速运动
+
+      var speed = (target - imgListDiv.offsetLeft) / 6;
+
+    逐渐变慢，最后停止，距离越远速度越大，速度由距离决定
+
+    速度=(目标值-当前值)/缩放系数
+
+    这样写的原因就是为了让它做缓冲运动，而不是匀速运动，这样给用户带来的交互感觉会更好。
+
+* 速度取整
+
+      speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+
+    像素不能是小数，所以速度大于0的时候，向上取整。速度小于0时，向下取整
+
+* 最后关于运动终止条件。
+
+      imgListDiv.style.left = imgListDiv.offsetLeft + speed + "px";
+
+    由这一行可以看出，`imgListDiv.style.left` 在不断增大，即 `imgListDiv.offsetLeft` 在不断增大。这两个是相同的属性，只不过一个是在赋值时使用，第二个是在取值时使用。
+
+    再看这行代码，由于这部分是每个30ms执行一次的，所以继续执行到这里。
+
+      var speed = (target - imgListDiv.offsetLeft) / 6;
+
+    当不断增大的 `imgListDiv.offsetLeft` 等于 `target` 时，`speed` 为0。宏观表现为不再运动，这便是运动终止的状态，但是这里的方法还是不断在执行，每个30ms在执行。
+
+
 ---
 
 ## 练习4：输入框即时提示
