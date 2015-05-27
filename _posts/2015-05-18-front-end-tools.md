@@ -93,6 +93,12 @@ excerpt: 记录一些好用的前端工具和框架。
 
     ![easyicon](http://7q5cdt.com1.z0.glb.clouddn.com/blog-icon.png)
 
+* [Font-Awesome](http://fortawesome.github.io/Font-Awesome/icons/)
+
+    比上面介绍的那个好用的多，字体图标，不需要考虑像素大小，全部是矢量图。并且图标精美。如果不使用 BootStrap，单独添加图标的话，这一套图标在合适不过了。
+
+    ![Font-Awesome](http://7q5cdt.com1.z0.glb.clouddn.com/blog-font awesome.png)
+
 ---
 
 ## 数据处理
