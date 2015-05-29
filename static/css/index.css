@@ -6,8 +6,8 @@ body {
 	background-image: url(http://7q5cdt.com1.z0.glb.clouddn.com/bg-canvas_bg.jpg);
     font-family: 'Microsoft YaHei', 'SimHei', sans-serif;
 }
-p{
-	text-indent: 2em;
+article p{
+	/*text-indent: 2em;*/
 }
 pre{
 	padding: 0;
@@ -60,6 +60,9 @@ nav{
 }
 
 /* index main */
+.main{
+	min-height: 800px;
+}
 .post-area{
 	
 	background-color:#f8f8fd;
@@ -204,7 +207,6 @@ footer{
 	line-height: 50px;
 	margin-top: 80px;
 	background: #3f4850;
-	display: none;
 	color: #aaa;
 	text-align: center;
 
@@ -337,9 +339,9 @@ blockquote:last-child {
 
 }
 #fall ul{
-	margin: 5px 5px 0 5px;
+	margin: 0 10px;
 	padding: 0;
-	width: 260px;
+	width: 240px;
 	/*background-color: red;*/
 	display: inline-block;
 	vertical-align: top;
@@ -347,13 +349,19 @@ blockquote:last-child {
 
 	
 }
-@media screen and (max-width: 480px){
+
+@media screen and (max-width: 1200px) { 
+	#fall ul{
+		width: 210px;
+	}
+}
+@media screen and (max-width: 991px){
 	#fall ul{
 		width: auto;
 	}
 }
 #fall li{
-	margin: 0 0 10px 0;
+	margin: 0 0 20px 0;
 	padding: 0;
 	list-style-type: none;
 	font-size: 14px;
@@ -362,6 +370,23 @@ blockquote:last-child {
 	-moz-box-shadow: 0 0 5px rgba(0,0,0,0.6),0 0 20px rgba(0,0,0,0.1) inset;
 	-o-box-shadow: 0 0 5px rgba(0,0,0,0.6),0 0 20px rgba(0,0,0,0.1) inset;
 	box-shadow: 0 0 5px rgba(0,0,0,0.6),0 0 20px rgba(0,0,0,0.1) inset;
+
+	transition:0.1s ease-out; 
+	-webkit-transition:0.1s ease-out;
+	-moz-transition:0.1s ease-out;
+	-o-transition:0.1s ease-out;
+}
+#fall li:hover{
+	-webkit-box-shadow: 0 0 12px rgba(0,0,0,0.8),0 0 20px rgba(0,0,0,0.1) inset;
+	-moz-box-shadow: 0 0 12px rgba(0,0,0,0.8),0 0 20px rgba(0,0,0,0.1) inset;
+	-o-box-shadow: 0 0 12px rgba(0,0,0,0.8),0 0 20px rgba(0,0,0,0.1) inset;
+	box-shadow: 0 0 12px rgba(0,0,0,0.8),0 0 20px rgba(0,0,0,0.1) inset;
+
+	-webkit-transform: scale(1.05);
+	-moz-transform: scale(1.05);
+	-o-transform: scale(1.05);
+	-ms-transform: scale(1.05);
+	transform: scale(1.05);
 }
 #fall li p{
 	margin: 0;
@@ -372,82 +397,17 @@ blockquote:last-child {
 	margin: 0 10px;
 	padding: 10px 0 5px 0;
 	border-bottom: 1px dotted #ddd;
+	font-weight: bold;
 }
 #fall .description{
 	text-align: left;
 	padding: 5px 10px 10px 10px;
 	text-indent: 2em;
 }
-/**
- * ------------
- */
-/* #fall{
-	-webkit-column-width:349px;
-	-moz-column-width:349px;
-	-o-column-width:349px;
-	-ms-column-width:349px;
-
-	-moz-column-gap:10px;		Firefox
-	-webkit-column-gap:10px;	Safari 和 Chrome
-	column-gap:10px;
-} */
 #fall a:link {color: #7676AC}		/* 未访问的链接 */
 #fall a:visited {color: #715584}	/* 已访问的链接 */
 #fall a:hover {color: #5989AD;text-decoration: none;}	/* 鼠标移动到链接上 */
 #fall a:active {color: #91C3CF}	/* 选定的链接 */
-
-/* #fall {
-	padding: 10px 0 15px 5px;
-	position: relative;
-	z-index: 1;
-}
-
-#fall  .block{
-	margin: 2px 2px 20px 2px;
-	width: 342px;
-	position: relative;
-	z-index: 1;
-	border:1px solid #ccc;
-	-webkit-box-shadow: 0 0 5px rgba(0,0,0,0.6),0 0 20px rgba(0,0,0,0.1) inset;
-	-moz-box-shadow: 0 0 5px rgba(0,0,0,0.6),0 0 20px rgba(0,0,0,0.1) inset;
-	-o-box-shadow: 0 0 5px rgba(0,0,0,0.6),0 0 20px rgba(0,0,0,0.1) inset;
-	box-shadow: 0 0 5px rgba(0,0,0,0.6),0 0 20px rgba(0,0,0,0.1) inset;
-}
-
-#fall  .block img{
-	display: block;
-	width: 342px;
-	height: auto;
-}
-
-#fall  .block .block-body{
-	padding: 10px 14px;
-}
-#fall  .block .block-body .head{
-	font-size: 18px;
-	padding-bottom: 8px;
-}
-#fall  .block .block-body .description {
-	border-top: 1px dotted #ccc;
-	padding-top: 6px;
-	font-size: 14px;
-} */
-
-/* #fall  .block:after,#fall  .block:after {
-	content: '';
-	background-color: red;
-	position: absolute;
-	z-index: -1;
-	top: 50%;
-	bottom: 0;
-	left:10px;
-	right: 10px;
-	-webkit-box-shadow: 0 0 20px rgba(0,0,0,0.9);
-	-moz-box-shadow: 0 0 20px rgba(0,0,0,0.9);
-	-o-box-shadow: 0 0 20px rgba(0,0,0,0.9);
-	box-shadow: 0 0 20px rgba(0,0,0,0.9);
-	border-radius: 100px/10px;
-} */
 
 /**
  * 文章目录相关
@@ -490,7 +450,7 @@ blockquote:last-child {
 	bottom: 0px;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 1200px){
 	.post{
 		padding:10px 10px;
 		font-size: 14px;
