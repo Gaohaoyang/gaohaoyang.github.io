@@ -1483,4 +1483,12 @@ var suggestData = ['Simon', 'Erik', 'Kener'];
 * [代码](https://github.com/Gaohaoyang/ife/tree/master/task/task0002/work/Gaohaoyang)
 * [在线 Demo](http://gaohaoyang.github.io/ife/task/task0002/work/Gaohaoyang/index.html)
 
+---
+
+## Update
+
+**2015/06/01**
+
+* [导师的参考答案](https://github.com/hushicai/ife-task0002)
+
 加油！向着下一个目标前进！
