@@ -1491,4 +1491,6 @@ var suggestData = ['Simon', 'Erik', 'Kener'];
 
 * [导师的参考答案](https://github.com/hushicai/ife-task0002)
 
+---
+
 加油！向着下一个目标前进！
