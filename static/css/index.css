@@ -453,8 +453,8 @@ blockquote:last-child {
 @media screen and (max-width: 1200px){
 	.post{
 		padding:10px 10px;
-		font-size: 14px;
-		line-height: 1.3;
+		font-size: 15px;
+		line-height: 1.4;
 	}
 	blockquote {
 		border-left: 3px solid #D6DBDF;
