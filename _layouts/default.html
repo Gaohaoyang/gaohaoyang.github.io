@@ -44,6 +44,7 @@
           $(this).attr('target', '_blank');
       });
     }
+    //每次在有DOM插入时触发
     $(document).bind('DOMNodeInserted', function(event) {
       addBlankTargetForLinks();
     });
