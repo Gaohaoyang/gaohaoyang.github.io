@@ -167,3 +167,137 @@ Function 中前面的参数为后面函数体的形参，最后一个参数为�
 ### 对比
 
 ![函数对比](http://7q5cdt.com1.z0.glb.clouddn.com/blog-function.png)
+
+---
+
+## 函数属性 & arguments
+
+### 函数属性 & arguments
+
+    function foo(x, y, z) {
+        arguments.length; // 2
+        arguments[0]; // 1
+        arguments[0] = 10;
+        x; // change to 10
+
+        arguments[2] = 100;
+        z; // still undefined!!!
+        arguments.callee === foo; // true
+    }
+
+    foo(1, 2);
+    foo.length; // 3
+    foo.name; //"foo"
+
+* `foo.name` 函数名
+* `foo.length` 形参个数
+* `arguments.length` 实参个数
+
+未传参数时，arguments[i] 相应的位置仍然是 undefined。
+
+严格模式下，代码中的改变实参失效。即 x 仍为 1。同时 callee 属性失效。
+
+* 关于 `callee`
+
+    callee 属性的初始值就是正被执行的 Function 对象。 
+
+    callee 属性是 arguments 对象的一个成员，它表示对函数对象本身的引用，这有利于匿名函数的递归或者保证函数的封装性，例如下边示例的递归计算1到n的自然数之和。而该属性仅当相关函数正在执行时才可用。还有需要注意的是callee拥有length属性，这个属性有时用于验证还是比较好的。
+
+    arguments.length是实参长度，arguments.callee.length是形参长度，由此可以判断调用时形参长度是否和实参长度一致。 
+
+---
+
+### apply/call 方法（浏览器）
+
+    function foo(x, y) {
+        console.log(x, y, this);
+    }
+
+    foo.call(100, 1, 2); //1 2 Number {[[PrimitiveValue]]: 100}
+    foo.apply(true, [3, 4]); //3 4 Boolean {[[PrimitiveValue]]: true}
+    foo.apply(null); //undefined undefined Window
+    foo.apply(undefined); //undefined undefined Window
+
+* call/apply 的作用：调用一个对象的一个方法，以另一个对象替换当前对象(其实就是更改对象的内部指针，即改变对象的this指向的内容)。 
+* call/apply 的第一个参数为对象，即使不是对象，也会被包装为对象。
+* call 为扁平化传参，apply 后面的参数为数组
+* 传入 null/undefined 时，实际为 Window 对象
+* 在严格模式下：上述代码最后两行分别输出 `null`, `undefined`
+
+---
+
+### bind 方法
+
+`bind` 是 ES5 中提出的方法，所以浏览器支持为 IE9+ 及现代浏览器。
+
+    this.x = 9;
+    var module = {
+        x: 81,
+        getX: function() {
+            return console.log(this.x);
+        }
+    };
+
+    module.getX(); //81
+
+    var getX = module.getX;
+    getX(); //9
+
+    var boundGetX = getX.bind(module);
+    boundGetX(); //81
+
+`bind` 主要用于改变函数中的 `this`
+
+* `module.getX(); ` 直接通过对象调用自己的方法，结果是 81
+* `var getX = module.getX;` 将这个方法赋值给一个全局变量，这时 this 指向了 Window，所以结果为 9
+* `var boundGetX = getX.bind(module);` 使用 bind 绑定了自己的对象，这样 this 仍然指向 module 对象，所以结果为 81
+
+---
+
+#### bind 与 currying
+
+bind 可以使函数柯里化，那么什么是柯里化？
+
+> 在计算机科学中，柯里化（Currying）是把接受多个参数的函数变换成接受一个单一参数(最初函数的第一个参数)的函数，并且返回接受余下的参数且返回结果的新函数的技术。这个技术由 Christopher Strachey 以逻辑学家 Haskell Curry 命名的，尽管它是 Moses Schnfinkel 和 Gottlob Frege 发明的。
+
+    function add(a, b, c) {
+        return a + b + c;
+    }
+
+    var func = add.bind(undefined, 100);
+    func(1, 2); //103
+
+    var func2 = func.bind(undefined, 200);
+    func2(10); //310
+
+add 函数拥有 3 个参数。我们想先传入一个参数，再去传其他参数。
+
+`var func = add.bind(undefined, 100);` add 函数对象调用 bind 方法，由于不需要将 this 指向原来的 add 函数对象，所以第一个参数写为 undefined 或 null。第二个参数 100 传给了 add 函数中的形参 a，并赋值给一个新的函数对象 func。
+
+这时，`func(1, 2)` 即相当于传入后两个参数，所以结果为 103。
+
+同理，基于 func 可以创造一个函数 func2。它只用传最后一个参数。
+
+---
+
+#### bind 与 new
+
+    function foo() {
+        this.b = 100;
+        return this.a;
+    }
+
+    console.log(foo()); //undefined
+
+    var func = foo.bind({
+        a: 1
+    });
+
+    console.log(func()); //1
+    console.log(new func()); //foo {b: 100}
+
+对于使用了 `new func()` 这种方式创建对象，其返回值为一个对象。
+
+而原函数 foo 的返回值不是对象，所以会直接忽视这个 return 方法。而是变为 `return this;`。并且 this 会被初始化为一个空对象，这个空对象的原型指向 foo.prototype。所以后面的 bind 是不起作用的。
+
+这里面这个 this 对象包含一个属性 `b = 100`。所以返回的是对象 `{b: 100}`。
