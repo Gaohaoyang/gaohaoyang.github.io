@@ -134,12 +134,10 @@ excerpt: JavaScript closure 闭包
 > from 维基百科
 
 * 闭包的优点
-
     * 灵活和方便
     * 封装
 
 * 缺点
-
     * 空间浪费
     * 内存泄露
     * 性能消耗
