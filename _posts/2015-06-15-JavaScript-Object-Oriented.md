@@ -52,6 +52,54 @@ prototype 是函数对象上预设的对象属性。
 
 ### 例
 
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    Person.prototype.LEGS_NUM = 2;
+    Person.prototype.ARMS_NUM = 2;
+
+    Person.prototype.hi = function() {
+        console.log('Hi, my name is ' + this.name + ". I'm " + this.age + ' years old now');
+    };
+
+    Person.prototype.walking = function() {
+        console.log(this.name + ' is walking...');
+    };
+
+    function Student(name, age, className) {
+        Person.call(this, name, age); //使 Person 中的 this 指向 Student
+        this.className = className;
+    }
+
+    Student.prototype = Object.create(Person.prototype);
+    Student.prototype.constructor = Student;
+
+    Student.prototype.hi = function() {
+        console.log('Hi, my name is ' + this.name + ". I'm " + this.age + ' years old now, and from ' + this.className + ".");
+    };
+
+    Student.prototype.learn = function(subject) {
+        console.log(this.name + ' is learning ' + subject + ' at ' + this.className + '.');
+    }
+
+    //test
+    var gao = new Student('Gao', '24', 'Class 3123');
+    console.log(gao); // 这个对象的具体内容见下图
+    gao.hi(); //Hi, my name is Gao. I'm 24 years old now, and from Class 3123.
+    gao.LEGS_NUM; //2
+    gao.walking(); //Gao is walking...
+    gao.learn('JavaScript'); //Gao is learning JavaScript at Class 3123.
+
+gao 对象的内容：
+
+![Object](http://7q5cdt.com1.z0.glb.clouddn.com/blog-oop-gao.png)
+
+* `Object.create(arg)` 创建一个空对象，并且这个对象的原型指向参数 `arg`。
+* `Student.prototype.constructor = Student` 为了保证一致性，否则 constructor 指向 Person。
+
+
 <!-- ## 理解对象
 
 我们先创建一个 Object 实例，然后添加属性和方法，如下：
