@@ -320,11 +320,67 @@ JavaScript 中的 prototype 是对象，在运行的时候可以修改。
 
 ## 抽象类
 
-在构造器中 throw new Error(''); 抛异常。这样防止这个类被直接调用。
+在构造器中 `throw new Error('');` 抛异常。这样防止这个类被直接调用。
+
+    function DetectorBase() {
+        throw new Error('Abstract class can not be invoked directly!');
+    }
+
+    DetectorBase.detect = function() {
+        console.log('Detection starting...');
+    }
+    DetectorBase.stop = function() {
+        console.log('Detection stopped.');
+    };
+    DetectorBase.init = function() {
+        throw new Error('Error');
+    }
+
+    var d = new DetectorBase();// Uncaught Error: Abstract class can not be invoked directly!
+
+    function LinkDetector() {}
+    LinkDetector.prototype = Object.create(DetectorBase.prototype);
+    LinkDetector.prototype.constructor = LinkDetector;
+
+    var l = new LinkDetector();
+    console.log(l); //LinkDetector {}__proto__: LinkDetector
+    l.detect(); //Uncaught TypeError: l.detect is not a function
+    l.init(); //Uncaught TypeError: l.init is not a function
+
+`var d = new DetectorBase();` 是不能实例化的，会报错
+
+`l.detect();` 但是这个为什么报错我就不知道了。
+
+已经在原课程下提问了，期待老师的讲解。 [抽象类中子类为什么不能调用父类的非抽象方法？](http://www.imooc.com/qadetail/82732)
 
 ---
 
 ## 模块化
 
+    var moduleA;
+    moduleA = function() {
+        var prop = 1;
 
+        function func() {}
+        
+        return {
+            func: func,
+            prop: prop
+        };
+    }(); // 立即执行匿名函数
+
+prop，func 不会被泄露到全局作用域。
+
+或者另一种写法，使用 new
+
+    moduleA = new function() {
+        var prop = 1;
+
+        function func() {}
+        
+        this.func = func;
+        this.prop = prop;
+    }
+
+更复杂的可以使用 Sea.js Kissy Require.js 模块化工具。
 
