@@ -119,7 +119,7 @@ excerpt: 记录一些好用的前端工具和框架。
 
 * [reveal.js](https://github.com/hakimel/reveal.js)
 
-    在网页上展示 slides 幻灯片，太酷了。
+    在网页上展示 slides 幻灯片，太酷了。针对不会代码的人还有一个在线编辑器：[http://slides.com](http://slides.com)
 
     ![reveal](http://7q5cdt.com1.z0.glb.clouddn.com/blog-revealjs.png)
 
