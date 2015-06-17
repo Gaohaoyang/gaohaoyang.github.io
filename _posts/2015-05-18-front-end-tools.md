@@ -113,4 +113,14 @@ excerpt: 记录一些好用的前端工具和框架。
 
 ---
 
+## 展示
+
+### reveal.js
+
+* [reveal.js](https://github.com/hakimel/reveal.js)
+
+    在网页上展示 slides 幻灯片，太酷了。
+
+    ![reveal](http://7q5cdt.com1.z0.glb.clouddn.com/blog-revealjs.png)
+
 本文不定期更新。
