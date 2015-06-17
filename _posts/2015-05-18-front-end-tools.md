@@ -19,15 +19,15 @@ excerpt: 记录一些好用的前端工具和框架。
 
 * [Filter Effects](http://www.cssreflex.com/css-generators/filter)
 
-界面：
+    界面：
 
-![Filter Effects](http://7q5cdt.com1.z0.glb.clouddn.com/blog-filter.png)
+    ![Filter Effects](http://7q5cdt.com1.z0.glb.clouddn.com/blog-filter.png)
 
-有各种各样的滤镜效果，可以直接调节参数观察变化。
+    有各种各样的滤镜效果，可以直接调节参数观察变化。
 
-值得一提的是，这个网站还有很多其他 css 生成器。
+    值得一提的是，这个网站还有很多其他 css 生成器。
 
-比如：Border Image, Border Radius, Box Shadow, Filter Effects, Multi-Column, Outline Border, Overflow(x,y), RGBa, Text Rotate, Text Shadow, Textarea Resize, Transform
+    比如：Border Image, Border Radius, Box Shadow, Filter Effects, Multi-Column, Outline Border, Overflow(x,y), RGBa, Text Rotate, Text Shadow, Textarea Resize, Transform
 
 * 可以访问这里去使用这些 css 生成器：[CSS Generators](http://www.cssreflex.com/css-generators/)
 
@@ -37,11 +37,11 @@ excerpt: 记录一些好用的前端工具和框架。
 
 * [Ultimate CSS Gradient Generator](http://www.colorzilla.com/gradient-editor/)
 
-界面如下图：
+    界面如下图：
 
-![Ultimate CSS Gradient Generator](http://7q5cdt.com1.z0.glb.clouddn.com/blog-color-gradient.png)
+    ![Ultimate CSS Gradient Generator](http://7q5cdt.com1.z0.glb.clouddn.com/blog-color-gradient.png)
 
-目前 css 写渐变还很复杂，但是用了这个工具简直太方便了，直接生成 css 代码，还能兼容 ie。
+    目前 css 写渐变还很复杂，但是用了这个工具简直太方便了，直接生成 css 代码，还能兼容 ie。
 
 ---
 
