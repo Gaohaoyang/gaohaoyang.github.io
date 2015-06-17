@@ -411,3 +411,10 @@ prop，func 不会被泄露到全局作用域。
 
 更复杂的可以使用 Sea.js Kissy Require.js 模块化工具。
 
+---
+
+最后补充一点设计模式相关的资料，我还没有来得及看的：
+
+* [学用 JavaScript 设计模式](http://www.oschina.net/translate/learning-javascript-design-patterns)
+* [常用的Javascript设计模式](http://blog.jobbole.com/29454/)
+* [JavaScript设计模式深入分析](http://developer.51cto.com/art/201109/288650_all.htm)
