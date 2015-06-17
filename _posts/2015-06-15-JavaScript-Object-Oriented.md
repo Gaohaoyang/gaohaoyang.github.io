@@ -353,6 +353,33 @@ JavaScript 中的 prototype 是对象，在运行的时候可以修改。
 
 已经在原课程下提问了，期待老师的讲解。 [抽象类中子类为什么不能调用父类的非抽象方法？](http://www.imooc.com/qadetail/82732)
 
+问题已经解决了，应该是老师当时的课件写错了，应该再基类中将这两个方法写在其原型 prototype 上。如下：
+
+    function DetectorBase() {
+        throw new Error('Abstract class can not be invoked directly!');
+    }
+
+    DetectorBase.prototype.detect = function() {
+        console.log('Detection starting...');
+    };
+    DetectorBase.prototype.stop = function() {
+        console.log('Detection stopped.');
+    };
+    DetectorBase.prototype.init = function() {
+        throw new Error('Error');
+    };
+
+    // var d = new DetectorBase();// Uncaught Error: Abstract class can not be invoked directly!
+
+    function LinkDetector() {}
+    LinkDetector.prototype = Object.create(DetectorBase.prototype);
+    LinkDetector.prototype.constructor = LinkDetector;
+
+    var l = new LinkDetector();
+    console.log(l); //LinkDetector {}__proto__: LinkDetector
+    l.detect(); //Detection starting...
+    l.init(); //Uncaught Error: Error
+
 ---
 
 ## 模块化
