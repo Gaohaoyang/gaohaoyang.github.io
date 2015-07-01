@@ -121,6 +121,8 @@ excerpt: 记录一些好用的前端工具和框架。
 
     在网页上展示 slides 幻灯片，太酷了。针对不会代码的人还有一个在线编辑器：[http://slides.com](http://slides.com)
 
+    还有一个新手入门教程：[Reveal.js Tutorial-Reveal.js for Beginners](http://htmlcheats.com/reveal-js/reveal-js-tutorial-reveal-js-for-beginners/)
+    
     ![reveal](http://7q5cdt.com1.z0.glb.clouddn.com/blog-revealjs.png)
 
 本文不定期更新。
