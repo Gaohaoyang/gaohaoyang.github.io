@@ -1152,6 +1152,39 @@ enter 键的 keyCode 为 13。
 
 ---
 
+### sessionStorage、localStorage 和 cookie 之间的区别
+
+* **共同点**
+
+    都是保存在浏览器端，且同源的。都是键值对存储。
+
+* **区别**
+
+    特性 | Cookie | localStorage | sessionStorage
+    -----|-------|--------------|---------
+    数据的声明周期 | 一般由服务器生成，可设置失效时间。如果在浏览器端生成Cookie，默认是关闭浏览器后失效 | 除非被清除，否则永久保存 | 仅在当前会话下有效，关闭页面或浏览器后被清除
+    存放数据大小 | 4K左右 | 一般为5MB | 同左
+    与服务器端通信 | 每次都会携带在HTTP头中，如果使用cookie保存过多数据会带来性能问题 | 仅在客户端（即浏览器）中保存，不参与和服务器的通信 | 同左
+    易用性 | 需要程序员自己封装，源生的Cookie接口不友好 | 源生接口可以接受，亦可再次封装来对Object和Array有更好的支持 | 同左
+
+* **应用场景**
+
+    每个 HTTP 请求都会带着 Cookie 信息，所以 Cookie 应当简单，比如判断用户是否登陆。
+
+    localStorage 接替 Cookie 管理购物车，同时也可以存储 HTML5 游戏的一些本地数据。
+
+    sessionStorage 在表单内容较多的时候，为了优化用户体验，按步骤分页引导填写，这时使用sessionStorage 就发挥了作用。
+    
+* **安全性**
+
+    cookie 中最好不要放置任何明文的东西。两个 storage的数据提交后在服务端一定要校验
+
+**参考：**
+
+* [详说 Cookie, LocalStorage 与 SessionStorage](http://jerryzou.com/posts/cookie-and-web-storage/)
+
+---
+
 ## Ajax
 
 **任务：**
@@ -1513,6 +1546,7 @@ var suggestData = ['Simon', 'Erik', 'Kener'];
 **2015/06/01**
 
 * [导师的参考答案](https://github.com/hushicai/ife-task0002)
+* [review](https://github.com/baidu-ife/ife/tree/master/task/task0002/review)
 
 ---
 
