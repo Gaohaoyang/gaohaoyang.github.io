@@ -312,7 +312,7 @@ console:
 
 * 创建对象
 
-创建对象的方式有三种：使用对象初始化器，使用构造函数，使用 `Object.create()` 方法。
+创建对象的方式有三种：对象直接量，关键字 `new`，使用 `Object.create()` 方法。
 
 `Object.create()` 方法创建一个拥有指定原型和若干个指定属性的对象。
 
@@ -366,7 +366,12 @@ console:
 
 **参考：**
 
-* [白话简单克隆和深度克隆](http://blog.csdn.net/java2000_net/article/details/3014934) 介绍什么是深度克隆，用羊圈和羊的图，简单深刻。
+* [白话简单克隆和深度克隆](http://blog.csdn.net/java2000_net/article/details/3014934) 介绍什么是深度克隆，用羊圈和羊的图，简单深刻。如下图：
+
+![简单克隆](http://p.blog.csdn.net/images/p_blog_csdn_net/java2000_net/EntryImages/20081004/%E7%AE%80%E5%8D%95%E5%85%8B%E9%9A%86.PNG)
+![深度克隆](http://p.blog.csdn.net/images/p_blog_csdn_net/java2000_net/EntryImages/20081004/%E6%B7%B1%E5%BA%A6%E5%85%8B%E9%9A%86.PNG)
+
+
 * [javascript克隆对象深度介绍](http://www.jb51.net/article/32015.htm) 这个代码写的太妙了，可惜找不到源地址了，都是转载来转载去的，要是你知道源地址，请留言告诉我。
 
 浅度克隆：基本类型为值传递，对象仍为引用传递。 
@@ -375,7 +380,7 @@ console:
 
 **思路：**深度克隆复制目标对象，那么就需要枚举这个对象。
 
-1. 判断当前属性是否是引用类型，如果是数组或者对象，创建响应类型变量。
+1. 判断当前属性是否是引用类型，如果是数组或者对象，创建相应类型变量。
 2. 枚举对象内所有属性。
 3. 使用 `hasOwnProperty()` 方法，排除继承的属性。
 4. 给新的对象相应位置赋值，若当前属性为引用类型（数组或对象）递归本方法。直到内部的值类型。
@@ -1044,7 +1049,7 @@ $   |匹配输入/字符串的结尾。如果多行（multiline）标志被设�
 
 IE8+ 支持 `addEventListener()`。IE8 以下的版本使用 `attachEvent()`。
 
-* `attachEvent()` 不支持时间捕获。
+* `attachEvent()` 不支持事件捕获。
 * `attachEvent()` 第一个参数事件处理程序属性名使用前缀 on。
 * `attachEvent()` 允许相同的事件处理程序函数注册多次。
 
