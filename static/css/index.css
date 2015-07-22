@@ -101,6 +101,14 @@ nav{
 	
 }
 
+.paginator{
+	border-top:1px solid #ddd;
+	text-align: center;
+	padding: 15px 20px;
+}
+.paginator a{
+	margin: 0 12px;
+}
 
 /* categories list */
 .categories-list-header {

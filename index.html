@@ -14,14 +14,40 @@ layout: default
       <div class="post-list-body">
         
         <div class="all-posts" post-cate="All">
-          {% for post in site.posts %}
+          {% for post in paginator.posts %}
             <a class="post-list-item" href="{{ post.url | prepend: site.baseurl }}">
               <h2>
               {{ post.title }}
               </h2>
               <span class="">{{ post.date | date: "%b %-d, %Y" }}</span>
             </a>
+
+
+
           {% endfor %}
+          <!-- 分页 -->
+      <div class="paginator">
+              {% if paginator.total_pages > 1 %}
+              <!-- 分页代码 -->
+              {% if paginator.previous_page %}
+            <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">上一页</a>
+        {% endif %}
+
+        {% for page in (1..paginator.total_pages) %}
+            {% if page == paginator.page %}
+              <span class="active">{{ page }}</span>
+            {% elsif page == 1 %}
+              <a href="{{ '/index.html' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
+            {% else %}
+              <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if paginator.next_page %}
+            <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">下一页</a>
+        {% endif %}
+              {% endif %}
+      </div>
         </div>
         <!-- <div class="posts-in-categories"> -->
         {% for category in site.categories %}
@@ -43,6 +69,9 @@ layout: default
         
         <!-- </div> -->
       </div>
+      
+
+     
     </div>
   </div>
   <div class="col-sm-3">
