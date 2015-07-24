@@ -7,7 +7,7 @@ icon: glyphicon-heart
 
 ### 关于我
 
-> 2015年我将步入找工作的大潮，希望做一个前端开发工程师。 **[在线简历](http://gaohaoyang.github.io/cv/)**
+> 2015年我将步入找工作的大潮，希望做一个前端开发工程师。 **[在线简历 Online CV](http://gaohaoyang.github.io/cv/)**
 
 在校硕士研究生一枚，就读于西安交通大学软件工程专业，2016年毕业。   
 
