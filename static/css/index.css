@@ -107,7 +107,13 @@ nav{
 	padding: 15px 20px;
 }
 .paginator a{
+	/*display: inline-block;*/
 	margin: 0 12px;
+}
+.paginator .active{
+	margin: 0 12px;
+	color:#2E2435;
+	font-weight: bold;
 }
 
 /* categories list */
