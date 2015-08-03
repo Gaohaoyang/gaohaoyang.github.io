@@ -16,7 +16,7 @@ permalink: /:year/:month/:day/:title/
 # Build settings
 markdown: kramdown
 
-paginate: 4
+paginate: 10
 paginate_path: "page:num"
 
 # highlight
