@@ -58,7 +58,7 @@ layout: default
             {% for posts in category  %}
               {% for post in posts %}
                 {% if post.url %}
-                  <a href="{{ post.url }}" class="post-list-item">
+                  <a href="{{ post.url | prepend: site.baseurl }}" class="post-list-item">
                     <h2>
                     {{ post.title }}
                     </h2>
