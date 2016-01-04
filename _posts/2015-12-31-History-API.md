@@ -59,25 +59,19 @@ excerpt: History Api 用法, pushState, replaceState
 
     在历史记录中后退
     
-    ```js
-    history.back();
-    ```
+        history.back();
 
 * `forward()`
 
     在历史记录中前进
 
-    ```js
-    history.forward();
-    ```
+        history.forward();
 
 * `go()`
 
     移动到指定的历史记录点
 
-    ```js
-    history.go(-1);
-    ```
+        history.go(-1);
 
     通过指定一个相对于当前页面位置的数值，你可以使用go()方法从当前会话的历史记录中加载页面（当前页面位置索引值为0，上一页就是-1，下一页为1）。
 
@@ -107,16 +101,12 @@ HTML5 引进了`history.pushState()`方法和`history.replaceState()`方法，�
 
     例如，我们有这样一段代码：
     
-    ```html
-    <button id="push1">pushState()</button>
-    ```
+        <button id="push1">pushState()</button>
 
-    ```js
-    document.querySelector('#push1').addEventListener('click', function() {
-        history.pushState('abc','pushStatePageTitle','pushState.html');
-        document.querySelector('#length').innerHTML = history.length;//重新读取历史长度
-    });
-    ```
+        document.querySelector('#push1').addEventListener('click', function() {
+            history.pushState('abc','pushStatePageTitle','pushState.html');
+            document.querySelector('#length').innerHTML = history.length;//重新读取历史长度
+        });
 
     当点击按钮的时候，页面不会刷新，但`url`地址的最后已经变为`pushState.html`。这一点非常像`hash`的作用，但比`hash`更优雅。
     
@@ -146,12 +136,11 @@ Pjax的原理十分简单。
 
 每当同一个文档的浏览历史（即history对象）出现变化时，会触发`window.onpopstate`事件。
 
-```js
-window.onpopstate = function(event) {
-    console.log(event.state);
-    console.log(location);
-};
-```
+    window.onpopstate = function(event) {
+        console.log(event.state);
+        console.log(location);
+    };
+
 这样在用户点击前进后退时也可以很好的监听url，来做相应的页面渲染。
 
 若用户刷新了页面，但没有相应的页面资源，这时页面就会显示不存在。所以我认为较好的方法是在写`pushState()`第三个参数的时候，写为`?a=1`这样的参数形式。[History.js](https://github.com/browserstate/history.js) 也是这么写的。但是这样应该会多一次请求。也许使用 nodeJS 作为中间层会好一些吧。
