@@ -16,7 +16,8 @@
         <ul class="social-media-list">
           {% if site.github_username %}
           <li>
-            {% include icon-github.html username=site.github_username %}
+            <!-- {% include icon-github.html username=site.github_username %} -->
+            <a href="{{site.github_url}}"><i class="fa fa-github"></i><span class="username">{{ site.github_username }}</span></a>
           </li>
           {% endif %}
 
