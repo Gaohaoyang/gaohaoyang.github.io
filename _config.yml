@@ -23,7 +23,10 @@ github_url: "https://github.com/Gaohaoyang"
 
 # Build settings
 markdown: kramdown
+
 kramdown:
-  input:         GFM
-  auto_ids:      true
-  auto_id_prefix: 'id-'
+  input: GFM
+  syntax_highlighter: rouge
+
+# port
+# port: 1234
