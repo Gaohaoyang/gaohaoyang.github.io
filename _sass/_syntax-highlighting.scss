@@ -1,18 +1,27 @@
 /**
  * Syntax highlighting styles
  */
- pre {
+code{
+    padding: 2px 4px;
+    font-size: 90%;
+    border-radius: 3px;
+    color: #000;
+    background-color: rgba(0, 0, 0, 0.06);
+}
+
+pre {
      padding: 8px 12px;
      overflow-x: auto;
      > code {
         font-family: Menlo,Monaco,"Microsoft YaHei Mono",Consolas,"Courier New",monospace,sans-serif;
         font-size: 14px;
+        color:#d1d1c9;
      }
 }
 
 .highlight {
     border-radius: 3px;
-    color:#d1d1c9;
+
     background: #272822;
     .hll { background-color: #272822; }
     .c { color: #75715e } /* Comment */
