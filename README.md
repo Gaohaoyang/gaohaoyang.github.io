@@ -10,3 +10,16 @@
 然后将代码转移到 gaohaoyang.github.io 这个仓库中，继续维护。
 
 我要带来更好的 jekyll 主题。
+
+参考
+
+* Jekyll/Liquid API 语法文档https://alfred-sun.github.io/blog/2015/01/10/jekyll-liquid-syntax-documentation/
+* Liquid for Designers https://github.com/Shopify/liquid/wiki/Liquid-for-Designers
+* Additional filters https://docs.shopify.com/themes/liquid/filters/additional-filters
+
+功能比较完善，做的比较好的博客主题：
+
+* http://alfred-sun.github.io/
+* http://liuyuping459.github.io/
+* http://vjudge1.github.io/
+* http://liberize.me/

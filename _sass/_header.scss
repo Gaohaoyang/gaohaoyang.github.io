@@ -1,4 +1,36 @@
-header{
+header {
     background: #222;
-    height: 50px;
+    height: 52px;
+    color: #9d9d9d;
+    box-shadow: 0 2px 4px 1px rgba(0,0,0,0.5);
+    a {
+        color: #9d9d9d;
+        -webkit-transition: 0.2s ease;
+        transition: 0.2s ease;
+        &:hover {
+            color: #fff;
+        }
+    }
+    .wrapper {
+        width: 1140px;
+        margin: 0 auto;
+        line-height: 52px;
+        .brand {
+            font-size: 18px;
+        }
+        small {
+            margin-left: 26px;
+            font-size: 14px;
+        }
+        nav {
+            float: right;
+            font-size: 14px;
+            /* display: inline-block;*/
+            ul {
+                li {
+                    display: inline-block;
+                }
+            }
+        }
+    }
 }

@@ -1,7 +1,21 @@
-body,html,div,header,footer,nav,ul,li{
+body,
+html,
+div,
+header,
+footer,
+nav,
+ul,
+li {
     padding: 0;
     margin: 0;
 }
-li{
+body {
+    font-family: 'Microsoft YaHei','Helvetica Neue',Helvetica,Arial,sans-serif;
+    background-image: url(http://ww3.sinaimg.cn/large/7011d6cfjw1f1yyk5xe1sj203h03d742.jpg);
+}
+li {
+    list-style: none;
+}
+a {
     text-decoration: none;
 }
