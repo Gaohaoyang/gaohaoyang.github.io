@@ -2,8 +2,8 @@
     <div class="wrapper">
         <a href="{{ site.baseurl }}/" class="brand">{{ site.title }}</a>
         <small>{{site.brief-intro}}</small>
-        <button class="active menu"><i class="fa fa-bars"></i></button>
-        <nav>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
             <ul>
                 <li>
                     {% if page.url == '/' %}

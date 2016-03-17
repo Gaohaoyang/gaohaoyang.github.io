@@ -95,6 +95,7 @@ header {
             margin: 0 auto;
             line-height: 48px;
             position: relative;
+            z-index: 101;
             .brand {
                 font-size: 16px;
             }
@@ -105,30 +106,32 @@ header {
             .menu{
                 display: inline-block;
                 position: absolute;
+                z-index: -102;
                 right: 0;
                 top:10px;
                 padding: 5px 10px;
-                // margin-top: 5px;
-                // height: 20px;
-                // width: 25px;
                 background: #333;
                 border: 1px solid #333;
                 border-radius: 4px;
                 color: #c9c9c9;
                 font-size: 17px;
-                // line-height: 48px;
+                -webkit-transition: 0.4s ease;
+                transition: 0.4s ease;
             }
             >.active{
                 background: #000;
                 color: #fff;
             }
             nav {
-                // float: right;
+                position: absolute;
+                z-index: 100;
+                right:0;
+                top:47px;
                 text-align: center;
-                // line-height: 48px;
+                display: none;
+                -webkit-transition: 0.4s ease;
+                transition: 0.4s ease;
                 ul {
-                    margin-top: 48px;
-                    // display: none;
                     background: #222;
                     border-radius: 0 0 4px 4px;
                     box-shadow: 0px 3px 4px 1px rgba(0,0,0,0.5);
