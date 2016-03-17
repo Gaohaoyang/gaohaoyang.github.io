@@ -137,11 +137,12 @@ function generateContent() {
         $('#myArticle').removeClass('col-sm-9').addClass('col-sm-12');
     } else {
         $('#content .content-text').html('<ul>' + $('#markdown-toc').html() + '</ul>');
-        /*   //数据加载完成后，加固定边栏
+        //数据加载完成后，加固定边栏
         $('#myAffix').attr({
             'data-spy': 'affix',
-            'data-offset': '50'
-        });*/
+            'data-offset': '10'
+        });
+        $('#myAffix').width($('#myAffix').parent().width());
     }
     console.log("myAffix!!!");
 }
