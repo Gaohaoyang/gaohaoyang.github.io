@@ -29,13 +29,43 @@
         <small>{{site.brief-intro}}</small>
         <nav>
             <ul>
-                <li><a href="{{site.baseurl}}/"><i class="fa fa-home"></i>Home</a></li>
+                <li>
+                    {% if page.url == '/' %}
+                    <a class="active" href="{{site.baseurl}}/">
+                        {% else %}
+                    <a href="{{site.baseurl}}/">
+                    {% endif %}
+                        <i class="fa fa-home"></i>Home
+                    </a>
+                </li>
+
                 {% for my_page in site.pages %}
-                  {% if my_page.title %}
-                  <li><a href="{{ my_page.url | prepend: site.baseurl }}"><i class="fa fa-{{my_page.icon}}"></i>{{ my_page.title }}</a></li>
-                  {% endif %}
+                    {% if my_page.title %}
+                    <li>
+                        {% if my_page.url == page.url %}
+                        <a class="active" href="{{ my_page.url | prepend: site.baseurl }}">
+                            {% else %}
+                        <a href="{{ my_page.url | prepend: site.baseurl }}">
+                        {% endif %}
+                            <i class="fa fa-{{my_page.icon}}"></i>{{ my_page.title }}
+                        </a>
+                    </li>
+                    {% endif %}
                 {% endfor %}
             </ul>
         </nav>
     </div>
 </header>
+
+
+{% for p in site.pages %}
+          {% if p.title %}
+            {% if p.url == page.url %}
+              <li class="active">
+              {% else %}
+              <li>
+            {% endif %}
+            <a href="{{ p.url | prepend: site.baseurl }}"><span class="glyphicon {{ p.icon }}"></span> {{ p.title }}</a></li>
+          {% endif %}
+        {% endfor %}
+aaaaaaaa{{page.url}}

@@ -24,11 +24,29 @@ header {
         }
         nav {
             float: right;
-            font-size: 14px;
-            /* display: inline-block;*/
             ul {
+                font-size: 0;
                 li {
+                    font-size: 14px;
                     display: inline-block;
+                    -webkit-transition: 0.2s ease;
+                    transition: 0.2s ease;
+                    a {
+                        display: inline-block;
+                        padding: 0 10px;
+                        height: 52px;
+                        &:hover {
+                            background-color: #000;
+                        }
+                        i {
+                            margin-right: 5px;
+                        }
+                    }
+                    .active {
+                        color: #fff;
+                        background-color: #000;
+                        box-shadow: 0 25px 25px -15px rgba(255,255,255,0.93);
+                    }
                 }
             }
         }
