@@ -23,3 +23,4 @@
 * http://liuyuping459.github.io/
 * http://vjudge1.github.io/
 * http://liberize.me/
+* http://huangxuan.me/

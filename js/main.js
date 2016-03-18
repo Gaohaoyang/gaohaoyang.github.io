@@ -4,13 +4,13 @@
 /* jshint asi:true */
 
 /////////////////////////header////////////////////////////
-headerFun();
+headerFun()
 
 /**
  * header function
  */
 function headerFun() {
-    _clickMenu();
+    _clickMenu()
 }
 
 /**
@@ -18,7 +18,7 @@ function headerFun() {
  */
 function _clickMenu() {
     var menuBtn = document.querySelector('#headerMenu')
-    var nav =  document.querySelector('#headerNav')
+    var nav = document.querySelector('#headerNav')
     menuBtn.onclick = function(e) {
         e.stopPropagation()
         if (menuBtn.classList.contains('active')) {
@@ -31,8 +31,10 @@ function _clickMenu() {
             menuBtn.classList.add('active')
         }
     }
-    document.querySelector('body').onclick = function () {
-        nav.style.display = 'none'
-        menuBtn.classList.remove('active')
+    if (window.innerWidth <= 770) {
+        document.querySelector('body').onclick = function() {
+            nav.style.display = 'none'
+            menuBtn.classList.remove('active')
+        }
     }
 }
