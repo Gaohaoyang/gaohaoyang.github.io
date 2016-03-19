@@ -19,7 +19,7 @@ url: "http://yourdomain.com" # the base hostname & protocol for your site
 permalink: /:year/:month/:day/:title/
 
 # other links
-twitter_username: jekyllrb
+twitter_username:
 
 github_username:  Gaohaoyang
 github_url: "https://github.com/Gaohaoyang"
@@ -33,3 +33,6 @@ kramdown:
 
 # port
 # port: 1234
+
+category_dir: category/
+tag_dir: tag/

@@ -3,6 +3,7 @@ header {
     height: 52px;
     color: #9d9d9d;
     box-shadow: 0 2px 4px 1px rgba(0,0,0,0.5);
+    margin-bottom: 20px;
     a {
         color: #9d9d9d;
         -webkit-transition: 0.2s ease;
@@ -29,7 +30,10 @@ header {
             float: right;
             ul {
                 font-size: 0;
+                margin: 0;
+                padding: 0;
                 li {
+                    list-style: none;
                     font-size: 14px;
                     display: inline-block;
                     -webkit-transition: 0.2s ease;

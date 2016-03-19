@@ -3,19 +3,59 @@ layout: post
 title:  "对本博客主题的改版"
 date:   2016-03-12 11:40:18 +0800
 categories: jekyll
-tags: jekyll 端口 markdown
+tags: jekyll 端口 markdown Foxit
+author: Haoyang Gao
 ---
 
 * content
 {:toc}
 
 
+## 二级标题
+
+### 三级标题
+
+#### 四级标题
+
+##### 五级标题
+
+###### 六级标题
+
+* 列表
+* 而
+* 阿斯顿发生地方
+
+1. 有序列表
+2. 阿斯顿发生地方
+1. 阿斯顿发生地方
+
+> 引用sdafsadfasdf
+> afsdkhljksdhlfjkahsdljkfh
+
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
+```js
+var aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa = 166666666666fffffffffffffffffffffffffffffffffffffff66666660;
+```
+
+    代码吗？阿斯顿发生地方
+    sdfsdfdsfsdsdfsdf
+
+---
+
+
 ## 改版重构说明
 
 * 使用 GitHub 风格的代码块 Markdown 写法 (Fenced code blocks)。即 GFM(github flavored markdown) 的方式。
 
-Jekyll 已经升级至 3.1.2（2016-03），其中有一些新的要注意的地方，比如官网上说使用了 `Rouge` 去做代码高亮而不是默认的 `Pygments`，因为 `Jekyll` 本身是基于 Ruby 的，因此我看到官方说希望不再使用基于 Python 的 `Pygments` 了，而是都使用基于 Ruby 的代码。详情见官网升级说明 [syntax-highlighter-changed](https://jekyllrb.com/docs/upgrading/2-to-3/#syntax-highlighter-changed)。
-
+    Jekyll 已经升级至 3.1.2（2016-03），其中有一些新的要注意的地方，比如官网上说使用了 `Rouge` 去做代码高亮而不是默认的 `Pygments`，因为 `Jekyll` 本身是基于 Ruby 的，因此我看到官方说希望不再使用基于 Python 的 `Pygments` 了，而是都使用基于 Ruby 的代码。详情见官网升级说明 [syntax-highlighter-changed](https://jekyllrb.com/docs/upgrading/2-to-3/#syntax-highlighter-changed)。
+* 添加归档
+* 添加标签
+* 添加分类页
 
 
 
