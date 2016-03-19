@@ -39,6 +39,7 @@
         }
     }
     .sidebar-wrap{
+        // position: fixed;
         overflow: hidden;
         width: 24%;
         padding:2px;
@@ -60,6 +61,7 @@
         hyphens: auto;
         >div {
             padding: 12px 15px;
+            margin-right: -10px;
             border-bottom: 1px solid #c0c0c0;
             font-size: 16px;
             font-weight: bold;
@@ -67,8 +69,11 @@
         ul {
             font-size: 14px;
             line-height: 1.5;
-            // margin-left: 0;
             padding-left: 30px;
+            code{
+                font-size: 80%;
+                padding: 0 3px;
+            }
         }
     }
     .content {
@@ -90,4 +95,8 @@
             }
         }
     }
+}
+
+#markdown-toc{
+    display: none
 }
