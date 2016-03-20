@@ -18,6 +18,7 @@ function generateContent() {
             aTags[i].setAttribute('class', 'scroll')
         }
 
+        // 将内容转移
         var contentHtml = contentToc.innerHTML
         var sideContentUl = document.querySelector('#content-side')
         sideContentUl.innerHTML = contentHtml
