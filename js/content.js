@@ -67,7 +67,4 @@ function controlHeight() {
     var contentMaxHeight = windowHeight - similarDivHeight - 77-60
 
     contentUl.style.maxHeight = contentMaxHeight + 'px'
-    console.log(similarDivHeight);
-    console.log(windowHeight);
-
 }
