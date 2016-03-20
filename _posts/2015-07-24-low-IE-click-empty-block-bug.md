@@ -3,6 +3,7 @@ layout: post
 title:  "在低版本 IE 中点击空 block 元素的问题"
 date:   2015-07-24 00:06:05
 categories: CSS
+tags: IE CSS
 excerpt: 低版本IE的bug和兼容性，点击空块级元素时
 ---
 

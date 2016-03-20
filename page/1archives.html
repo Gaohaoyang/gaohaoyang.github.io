@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: Archive
 permalink: /archive/
 icon: archive
@@ -7,37 +7,44 @@ icon: archive
 
 <!-- <h1>Archive of posts with {{ page.type }} '{{ page.title }}'</h1> -->
 
-<ul>
-  {% for post in site.posts %}
 
-    {% unless post.next %}
-      <h2>{{ post.date | date: '%Y' }}</h2>
-    {% else %}
-      {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
-      {% capture nyear %}{{ post.next.date | date: '%Y' }}{% endcapture %}
-      {% if year != nyear %}
-        <h2>{{ post.date | date: '%Y' }}</h2>
-      {% endif %}
-    {% endunless %}
+<div class="page">
+    <div class="left">
+        <h1>{{page.title}}</h1>
+        <hr>
+        <ul>
+          {% for post in site.posts %}
 
-    <li>
-        {{ post.date | date:"%F" }} {{ post.date | date: "%A" }}
-        <a href="{{ post.url }}">{{ post.title }}</a>
-        Cate:
-        {% for cate in post.categories %}
-        <span>{{cate}}</span>
-        {% endfor %}
-        Tags:
-        {% for tag in post.tags %}
-        <span>{{tag}}</span>
-        {% endfor %}
+            {% unless post.next %}
+              <h2>{{ post.date | date: '%Y' }}</h2>
+            {% else %}
+              {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
+              {% capture nyear %}{{ post.next.date | date: '%Y' }}{% endcapture %}
+              {% if year != nyear %}
+                <h2>{{ post.date | date: '%Y' }}</h2>
+              {% endif %}
+            {% endunless %}
 
-    </li>
+            <li>
+                <time>
+                {{ post.date | date:"%F" }} {{ post.date | date: "%a" }}.
+                </time>
+                <a class="title" href="{{ post.url }}">{{ post.title }}</a>
 
-  {% endfor %}
-</ul>
+                {% include category.html %}
+                {% include tag.html %}
+            </li>
 
-<hr>
+          {% endfor %}
+        </ul>
+    </div>
+    <div class="right">
+        <div class="side">aaa</div>
+        <div class="side">bbbb</div>
+    </div>
+</div>
+
+
 
 <!-- <ul class="posts">
   {% for post in site.posts %}

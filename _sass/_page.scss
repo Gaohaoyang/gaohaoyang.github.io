@@ -1,0 +1,83 @@
+.page {
+    width: 1140px;
+    margin: 0 auto;
+    position: relative;
+    .left {
+        width: 840px;
+        padding: 20px 30px;
+        line-height: 1.6;
+        font-size: 16px;
+        background-color: #f8f8fd;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
+        >h1 {
+            margin-bottom: -10px;
+        }
+        ul {
+            >h2 {
+                margin-left: -40px;
+                color: #6a6b6b;
+            }
+            li {
+                color: #888888;
+                time {
+                    display: inline-block;
+                    width: 135px;
+                }
+                .title {
+                    font-weight: bold;
+                    color: #223253;
+                    transition: 0.3s ease;
+                    &:hover {
+                        color: #4d6dad;
+                    }
+                }
+                i{
+                    margin-right: 5px;
+                }
+                .categories {
+                    padding: 0 15px;
+                    i{
+                        color: #9e9d9d;
+                    }
+                    a{
+                        // border: 1px solid #aaa;
+                        padding: 0 5px;
+                        background-color: #9e9d9d;
+                        color: #fff;
+                        font-size: 80%;
+                        transition: 0.3s ease;
+                        &:hover {
+                            background-color: #b6b6b9;
+                            // color: #4d6dad;
+                        }
+                    }
+                }
+                .pageTag {
+                    i{
+                        color: #c6cbe9;
+                    }
+                    a{
+                        // border: 1px solid #aaa;
+                        padding: 0 5px;
+                        background-color: #c6cbe9;
+                        border-radius: 4px;
+                        color: #fff;
+                        font-size: 80%;
+                        transition: 0.3s ease;
+                        &:hover {
+                            background-color: #c0ddc7;
+                            // color: #4d6dad;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .right {
+        position: absolute;
+        left:860px;
+        top: 0;
+        background: red;
+        .side {}
+    }
+}
