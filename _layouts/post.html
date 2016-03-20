@@ -91,7 +91,8 @@ layout: default
             <div>
                 Content
             </div>
-            <ul id="content-side">
+            <ul id="content-side" class="content-ul">
+                <li><i class="fa fa-spinner fa-pulse"></i></li>
             </ul>
         </div>
         <div class="related-post sidebar">
@@ -124,3 +125,6 @@ layout: default
         </div>
     </div>
 </div>
+
+<script src="{{ "/js/scroll.min.js " | prepend: site.baseurl }}" charset="utf-8"></script>
+<script src="{{ "/js/content.js " | prepend: site.baseurl }}" charset="utf-8"></script>

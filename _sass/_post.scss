@@ -4,7 +4,7 @@
     overflow: hidden;
     padding: 5px;
     .post {
-        width: 68%;
+        width: 776px;
         float: left;
         padding: 20px 30px;
         margin-right: 20px;
@@ -39,14 +39,18 @@
         }
     }
     .sidebar-wrap{
-        // position: fixed;
         overflow: hidden;
-        width: 24%;
+        width: 273px;
         padding:2px;
+    }
+    .fixed{
+        position: fixed;
+        right: 267px;
+        top:20px;
     }
     .sidebar {
         // margin-left: 20px;
-        padding-right: 10px;
+        // padding-right: 10px;
         padding-bottom: 1px;
         background-color: #f8f8fd;
         box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.3), 0 0 30px rgba(10, 10, 0, 0.1) inset;
@@ -84,6 +88,9 @@
             &:hover {
                 color: #223253;
             }
+        }
+        .content-ul{
+            overflow-y: auto;
         }
     }
     .related-post {
