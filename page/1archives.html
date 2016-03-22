@@ -16,12 +16,12 @@ icon: archive
           {% for post in site.posts %}
 
             {% unless post.next %}
-              <h2>{{ post.date | date: '%Y' }}</h2>
+              <h2 id="y{{ post.date | date: '%Y' }}">{{ post.date | date: '%Y' }}</h2>
             {% else %}
               {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
               {% capture nyear %}{{ post.next.date | date: '%Y' }}{% endcapture %}
               {% if year != nyear %}
-                <h2>{{ post.date | date: '%Y' }}</h2>
+                <h2 id="y{{ post.date | date: '%Y' }}">{{ post.date | date: '%Y' }}</h2>
               {% endif %}
             {% endunless %}
 
@@ -39,18 +39,32 @@ icon: archive
         </ul>
     </div>
     <div class="right">
-        <div class="side">aaa</div>
-        <div class="side">bbbb</div>
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    Content
+                </div>
+                <ul id="content-side" class="content-ul">
+                    {% for post in site.posts %}
+
+                      {% unless post.next %}
+                        <li><a class="scroll" href="#y{{ post.date | date: '%Y' }}">{{ post.date | date: '%Y' }}</a></li>
+                      {% else %}
+                        {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
+                        {% capture nyear %}{{ post.next.date | date: '%Y' }}{% endcapture %}
+                        {% if year != nyear %}
+                          <li><a class="scroll" href="#y{{ post.date | date: '%Y' }}">{{ post.date | date: '%Y' }}</a></li>
+                        {% endif %}
+                      {% endunless %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
     </div>
 </div>
-
-
-
-<!-- <ul class="posts">
-  {% for post in site.posts %}
-    <li>
-      <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
-      <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-    </li>
-  {% endfor %}
-</ul> -->
+<script src="{{ "/js/scroll.min.js " | prepend: site.baseurl }}" charset="utf-8"></script>
+<script src="{{ "/js/pageContent.js " | prepend: site.baseurl }}" charset="utf-8"></script>

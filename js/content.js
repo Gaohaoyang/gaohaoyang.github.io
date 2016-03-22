@@ -1,9 +1,10 @@
 /* jshint asi:true */
 /////////////////////////content////////////////////////////
 generateContent()
-    /**
-     * [generateContent description]
-     */
+
+/**
+ * [generateContent description]
+ */
 function generateContent() {
     var contentToc = document.querySelector('#markdown-toc')
 
@@ -32,11 +33,12 @@ function generateContent() {
 }
 
 fixSidebar()
-    /**
-     * [fixSidebar description]
-     * 滚轮滚到一定位置时，将 sidebar-wrap 添加 fixed 样式
-     * 反之，取消样式
-     */
+
+/**
+ * [fixSidebar description]
+ * 滚轮滚到一定位置时，将 sidebar-wrap 添加 fixed 样式
+ * 反之，取消样式
+ */
 function fixSidebar() {
     var sidebarWrap = document.querySelector('.sidebar-wrap')
     window.onscroll = function() {
@@ -45,13 +47,14 @@ function fixSidebar() {
             sidebarWrap.classList.add('fixed')
         }
         var scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop)
-        if (scrollTop<78) {
+        if (scrollTop < 78) {
             sidebarWrap.classList.remove('fixed')
         }
     }
 }
 
 controlHeight()
+
 /**
  * [controlHeight description]
  * 控制 sidebar 的高度
@@ -64,7 +67,7 @@ function controlHeight() {
     var contentUl = document.querySelector('.content-ul')
     var similarDivHeight = similarDiv.offsetHeight
     var windowHeight = window.innerHeight
-    var contentMaxHeight = windowHeight - similarDivHeight - 77-60
+    var contentMaxHeight = windowHeight - similarDivHeight - 77 - 60
 
     contentUl.style.maxHeight = contentMaxHeight + 'px'
 }

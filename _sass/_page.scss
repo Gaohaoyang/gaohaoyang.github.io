@@ -31,15 +31,15 @@
                         color: #4d6dad;
                     }
                 }
-                i{
+                i {
                     margin-right: 5px;
                 }
                 .categories {
                     padding: 0 15px;
-                    i{
+                    i {
                         color: #9e9d9d;
                     }
-                    a{
+                    a {
                         // border: 1px solid #aaa;
                         padding: 0 5px;
                         background-color: #9e9d9d;
@@ -53,10 +53,10 @@
                     }
                 }
                 .pageTag {
-                    i{
+                    i {
                         color: #c6cbe9;
                     }
-                    a{
+                    a {
                         // border: 1px solid #aaa;
                         padding: 0 5px;
                         background-color: #c6cbe9;
@@ -73,11 +73,45 @@
             }
         }
     }
+    .fixed{
+        position: fixed;
+        top:20px;
+    }
     .right {
         position: absolute;
-        left:860px;
+        left: 860px;
         top: 0;
-        background: red;
-        .side {}
+        .side {
+            box-sizing: border-box;
+            width: 270px;
+            background-color: #f8f8fd;
+            box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.3), 0 0 30px rgba(10, 10, 0, 0.1) inset;
+            padding-bottom: 1px;
+            -ms-word-break: break-all;
+            word-break: break-all;
+            /* Non standard for webkit */
+            word-break: break-word;
+            -webkit-hyphens: auto;
+            -moz-hyphens: auto;
+            -ms-hyphens: auto;
+            hyphens: auto;
+            >div {
+                padding: 12px 15px;
+                // margin-right: -10px;
+                border-bottom: 1px solid #c0c0c0;
+                font-size: 16px;
+                font-weight: bold;
+            }
+            a {
+                color: #4d6dad;
+                transition: 0.5s ease;
+                &:hover {
+                    color: #223253;
+                }
+            }
+        }
+        .content-ul {
+            overflow-y: auto;
+        }
     }
 }
