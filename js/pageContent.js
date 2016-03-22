@@ -7,13 +7,14 @@
  */
 (function fixSidebar() {
     var sidebarWrap = document.querySelector('.right>.wrap')
+    sidebarWrap.style.width = sidebarWrap.offsetWidth+"px"
     window.onscroll = function() {
         var sidebarWrapTop = sidebarWrap.getBoundingClientRect().top
         if (sidebarWrapTop < 21) {
             sidebarWrap.classList.add('fixed')
         }
         var scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop)
-        if (scrollTop < 78) {
+        if (scrollTop < 77) {
             sidebarWrap.classList.remove('fixed')
         }
     }
