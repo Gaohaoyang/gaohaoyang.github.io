@@ -7,7 +7,7 @@
  */
 (function fixSidebar() {
     var sidebarWrap = document.querySelector('.right>.wrap')
-    sidebarWrap.style.width = sidebarWrap.offsetWidth+"px"
+    sidebarWrap.style.width = sidebarWrap.offsetWidth + "px"
     window.onscroll = function() {
         var sidebarWrapTop = sidebarWrap.getBoundingClientRect().top
         if (sidebarWrapTop < 21) {
