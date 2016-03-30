@@ -7,6 +7,8 @@
  */
 (function fixSidebar() {
     var sidebarWrap = document.querySelector('.right>.wrap')
+
+    //fix 之后百分比宽度会失效，这里用js赋予宽度
     sidebarWrap.style.width = sidebarWrap.offsetWidth + "px"
     window.onscroll = function() {
         var sidebarWrapTop = sidebarWrap.getBoundingClientRect().top
