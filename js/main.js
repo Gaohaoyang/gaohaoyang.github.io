@@ -4,19 +4,10 @@
 /* jshint asi:true */
 
 /////////////////////////header////////////////////////////
-headerFun()
-
-/**
- * header function
- */
-function headerFun() {
-    _clickMenu()
-}
-
 /**
  * clickMenu
  */
-function _clickMenu() {
+(function _clickMenu() {
     var menuBtn = document.querySelector('#headerMenu')
     var nav = document.querySelector('#headerNav')
     menuBtn.onclick = function(e) {
@@ -37,4 +28,4 @@ function _clickMenu() {
             menuBtn.classList.remove('active')
         }
     }
-}
+})();
