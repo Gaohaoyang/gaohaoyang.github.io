@@ -65,6 +65,7 @@
                         color: #c6cbe9;
                     }
                     a {
+
                         // border: 1px solid #aaa;
                         padding: 0 5px;
                         background-color: #c6cbe9;
@@ -83,6 +84,9 @@
     .fixed {
         position: fixed;
         top: 20px;
+    }
+    .anchor{
+        display: none;
     }
     .right {
         float: left;
@@ -104,6 +108,7 @@
             hyphens: auto;
             >div {
                 padding: 12px 15px;
+
                 // margin-right: -10px;
                 border-bottom: 1px solid #c0c0c0;
                 font-size: 16px;
@@ -119,6 +124,7 @@
         }
         .content-ul {
             overflow-y: auto;
+            padding-right: 10px;
         }
     }
 }
@@ -143,6 +149,7 @@
                 padding-left: 20px;
                 >h2 {
                     font-size: 20px;
+
                     // margin: 0;
                     margin-left: -20px;
                 }
@@ -159,79 +166,49 @@
                     .categories {
                         font-size: 12px;
                         padding-left: 0;
-                        padding-right: 10px;///////////last time I was here
-                        a {
-                            padding: 0 5px;
-                            background-color: #9e9d9d;
-                            color: #fff;
-                            font-size: 80%;
-                            transition: 0.3s ease;
-                            &:hover {
-                                background-color: #b6b6b9;
-                            }
-                        }
-                    }
-                    .pageTag {
-                        i {
-                            color: #c6cbe9;
-                        }
-                        a {
-                            // border: 1px solid #aaa;
-                            padding: 0 5px;
-                            background-color: #c6cbe9;
-                            border-radius: 4px;
-                            color: #fff;
-                            font-size: 80%;
-                            transition: 0.3s ease;
-                            &:hover {
-                                background-color: #c0ddc7;
-                            }
-                        }
+                        padding-right: 10px;
                     }
                 }
             }
         }
-        .fixed {
+        .anchor {
+            display: block;
+            visibility: visible;
             position: fixed;
-            top: 20px;
+            top: 76px;
+            right: 2.5%;
+            padding: 5px 10px;
+            color: #333;
+            font-size: 15px;
+            background-color: #f8f8fd;
+            box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.3), 0 0 30px rgba(10, 10, 0, 0.1) inset;
+            // z-index: 200;
+        }
+        .anchor-hide{
+            transition: 0.1s ease;
+            visibility: hidden;
         }
         .right {
-            display: none;
-            float: left;
-            width: 25%;
-            padding-left: 20px;
-            top: 0;
-            .side {
-                box-sizing: border-box;
-                background-color: #f8f8fd;
-                box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.3), 0 0 30px rgba(10, 10, 0, 0.1) inset;
-                padding-bottom: 1px;
-                -ms-word-break: break-all;
-                word-break: break-all;
-                /* Non standard for webkit */
-                word-break: break-word;
-                -webkit-hyphens: auto;
-                -moz-hyphens: auto;
-                -ms-hyphens: auto;
-                hyphens: auto;
-                >div {
-                    padding: 12px 15px;
-                    // margin-right: -10px;
-                    border-bottom: 1px solid #c0c0c0;
-                    font-size: 16px;
-                    font-weight: bold;
-                }
-                a {
-                    color: #4d6dad;
-                    transition: 0.5s ease;
-                    &:hover {
-                        color: #223253;
-                    }
-                }
-            }
-            .content-ul {
-                overflow-y: auto;
-            }
+            visibility: hidden;
+            // display: none;
+            position: fixed;
+            // z-index: 190;
+            float: none;
+            width: auto;
+            max-width: 95%;
+            padding: 0;
+            top: 76px;
+            right: 2.5%;
+
+            opacity: 0;
+            transform-origin: 100% 0%;
+            transform: scale(0.1);
+            transition: 0.15s ease;
+        }
+        .right-show{
+            visibility: visible;;
+            opacity: 1;
+            transform: scale(1);
         }
     }
 }

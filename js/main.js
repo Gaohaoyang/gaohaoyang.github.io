@@ -7,7 +7,7 @@
 /**
  * clickMenu
  */
-(function _clickMenu() {
+(function() {
     var menuBtn = document.querySelector('#headerMenu')
     var nav = document.querySelector('#headerNav')
     menuBtn.onclick = function(e) {
@@ -23,9 +23,9 @@
         }
     }
     if (window.innerWidth <= 770) {
-        document.querySelector('body').onclick = function() {
+        document.querySelector('body').addEventListener('click', function() {
             nav.style.display = 'none'
             menuBtn.classList.remove('active')
-        }
+        })
     }
-})();
+}());
