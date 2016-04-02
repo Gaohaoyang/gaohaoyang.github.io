@@ -25,6 +25,8 @@
     }
 }());
 
+
+//-------------mobile--------------
 /**
  * 屏幕宽度小于770px时，点击锚点按钮，弹出目录框
  * @param  {[type]} function( [description]
@@ -49,5 +51,27 @@
             rightDiv.classList.remove('right-show')
             anchorBtn.classList.remove('anchor-hide')
         })
+
+        ancherPostion(anchorBtn, rightDiv)
     }
 }());
+
+/**
+ * 目录锚的位置固定
+ */
+function ancherPostion(anchorBtn, rightDiv) {
+    window.addEventListener('scroll', function() {
+        // console.log('scroll');
+        var top = anchorBtn.getBoundingClientRect().top
+            // console.log(top);
+        var scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+        console.log(scrollTop);
+        if (scrollTop > 50) {
+            anchorBtn.style.top = '20px'
+            rightDiv.style.top = '20px'
+        } else {
+            anchorBtn.style.top = '76px'
+            rightDiv.style.top = '76px'
+        }
+    })
+}
