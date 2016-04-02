@@ -127,15 +127,23 @@ header {
                 background: #000;
                 color: #fff;
             }
+            .nav-show{
+                visibility: visible;
+                transform: scale(1);
+                opacity: 1;
+            }
             nav {
                 position: absolute;
                 z-index: 100;
                 right:0;
                 top:47px;
                 text-align: center;
-                display: none;
-                -webkit-transition: 0.4s ease;
-                transition: 0.4s ease;
+
+                visibility: hidden;
+                transform-origin: 100% 0%;
+                transform: scale(0.1);
+                opacity: 0;
+                transition: 0.2s cubic-bezier(0.5, 0.1, 0.51, 1.38);
                 ul {
                     background: #222;
                     border-radius: 0 0 4px 4px;
