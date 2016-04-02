@@ -53,6 +53,7 @@
         })
 
         ancherPostion(anchorBtn, rightDiv)
+        setContentMaxHeight()
     }
 }());
 
@@ -65,7 +66,6 @@ function ancherPostion(anchorBtn, rightDiv) {
         var top = anchorBtn.getBoundingClientRect().top
             // console.log(top);
         var scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop)
-        console.log(scrollTop);
         if (scrollTop > 50) {
             anchorBtn.style.top = '20px'
             rightDiv.style.top = '20px'
@@ -74,4 +74,14 @@ function ancherPostion(anchorBtn, rightDiv) {
             rightDiv.style.top = '76px'
         }
     })
+}
+
+/**
+ * 设置目录最大高度
+ */
+function setContentMaxHeight() {
+    var windowHeight = window.innerHeight
+    var contentUl = document.querySelector('.content-ul')
+    var contentMaxHeight = windowHeight-180
+    contentUl.style.maxHeight = contentMaxHeight + 'px'
 }
