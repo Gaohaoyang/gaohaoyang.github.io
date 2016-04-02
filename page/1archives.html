@@ -48,18 +48,16 @@ icon: archive
                     Content
                 </div>
                 <ul id="content-side" class="content-ul">
-                    {% for post in site.posts %}
-
-                      {% unless post.next %}
-                        <li><a class="scroll" href="#y{{ post.date | date: '%Y' }}">{{ post.date | date: '%Y' }}</a></li>
-                      {% else %}
-                        {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
-                        {% capture nyear %}{{ post.next.date | date: '%Y' }}{% endcapture %}
-                        {% if year != nyear %}
-                          <li><a class="scroll" href="#y{{ post.date | date: '%Y' }}">{{ post.date | date: '%Y' }}</a></li>
-                        {% endif %}
-                      {% endunless %}
-                    {% endfor %}
+                    {% assign counter = 0 %}
+                        {% for post in site.posts %}
+                          {% assign thisyear = post.date | date: "%Y" %}
+                          {% assign prevyear = post.previous.date | date: "%Y" %}
+                          {% assign counter = counter | plus: 1 %}
+                          {% if thisyear != prevyear %}
+                            <li><a class="scroll" href="#y{{ post.date | date: '%Y' }}">{{ thisyear }} ({{ counter }})</a></li>
+                            {% assign counter = 0 %}
+                          {% endif %}
+                        {% endfor %}
                 </ul>
             </div>
             <!-- 其他div框放到这里 -->

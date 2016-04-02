@@ -24,3 +24,8 @@
 * http://vjudge1.github.io/
 * http://liberize.me/
 * http://huangxuan.me/
+
+others
+
+* https://help.github.com/articles/changing-author-info/
+* https://help.github.com/articles/remove-sensitive-data/
