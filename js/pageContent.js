@@ -22,8 +22,19 @@
                 sidebarWrap.classList.remove('fixed')
             }
         }
+        setContentMaxHeightInPC()
     }
 }());
+
+/**
+ * 设置目录最大高度
+ */
+function setContentMaxHeightInPC() {
+    var windowHeight = window.innerHeight
+    var contentUl = document.querySelector('.content-ul')
+    var contentMaxHeight = windowHeight-77-60
+    contentUl.style.maxHeight = contentMaxHeight + 'px'
+}
 
 
 //-------------mobile--------------
