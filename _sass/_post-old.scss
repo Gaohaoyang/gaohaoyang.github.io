@@ -1,0 +1,109 @@
+.post-page {
+    width: 1140px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 5px;
+    .post {
+        width: 836px;
+        float: left;
+        padding: 20px 30px;
+        margin-right: 20px;
+        line-height: 1.6;
+        font-size: 16px;
+        background-color: #f8f8fd;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
+        >h1 {
+            margin-bottom: 0;
+        }
+        .label {
+            // max-width:     500px;
+            overflow: hidden;
+            .label-card {
+                float: left;
+                .point {
+                    padding: 0 10px;
+                    color: #9d9d9d;
+                }
+                i {
+                    padding-right: 5px;
+                    color: #6b6a6a;
+                }
+            }
+        }
+        a {
+            color: #4d6dad;
+            transition: 0.5s ease;
+            &:hover {
+                color: #223253;
+            }
+        }
+    }
+    .sidebar-wrap{
+        overflow: hidden;
+        width: 273px;
+        padding:2px;
+    }
+    .fixed{
+        position: fixed;
+        right: 266px;
+        top:20px;
+    }
+    .sidebar {
+        // margin-left: 20px;
+        // padding-right: 10px;
+        padding-bottom: 1px;
+        background-color: #f8f8fd;
+        box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.3), 0 0 30px rgba(10, 10, 0, 0.1) inset;
+
+        -ms-word-break: break-all;
+        word-break: break-all;
+        /* Non standard for webkit */
+        word-break: break-word;
+        -webkit-hyphens: auto;
+        -moz-hyphens: auto;
+        -ms-hyphens: auto;
+        hyphens: auto;
+        >div {
+            padding: 12px 15px;
+            margin-right: -10px;
+            border-bottom: 1px solid #c0c0c0;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        ul {
+            font-size: 14px;
+            line-height: 1.5;
+            padding-left: 30px;
+            code{
+                font-size: 80%;
+                padding: 0 3px;
+            }
+        }
+    }
+    .content {
+        margin-bottom: 20px;
+        a {
+            color: #4d6dad;
+            transition: 0.5s ease;
+            &:hover {
+                color: #223253;
+            }
+        }
+        .content-ul{
+            overflow-y: auto;
+        }
+    }
+    .related-post {
+        a {
+            color: #4d6dad;
+            transition: 0.5s ease;
+            &:hover {
+                color: #223253;
+            }
+        }
+    }
+}
+
+#markdown-toc{
+    display: none
+}
