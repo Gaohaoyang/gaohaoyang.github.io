@@ -2,7 +2,7 @@
 layout: default
 ---
 
-<div class="home">
+<!--<div class="home">
 
   <h1 class="page-heading">Posts</h1>
 
@@ -20,4 +20,44 @@ layout: default
 
   <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
 
+</div>-->
+
+<div class="page clearfix">
+    <div class="left">
+        <h1>Welcome to HyG's Blog!</h1>
+        <hr>
+        <ul>
+            {% for post in site.posts %}
+              <li>
+                <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+
+                <h2>
+                  <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+                </h2>
+                <div>
+                    {{post.excerpt}}
+                </div>
+              </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    Content
+                </div>
+                <ul id="content-side" class="content-ul">
+
+                </ul>
+            </div>
+            <!-- 其他div框放到这里 -->
+            <div class="side">bbbb</div>
+        </div>
+    </div>
 </div>
+<!-- <script src="{{ "/js/scroll.min.js " | prepend: site.baseurl }}" charset="utf-8"></script> -->
+<script src="{{ "/js/pageContent.js " | prepend: site.baseurl }}" charset="utf-8"></script>

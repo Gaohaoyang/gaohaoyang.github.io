@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "对本博客主题的改版"
+title:  "对这个博客主题的改版和重构"
 date:   2016-03-12 11:40:18 +0800
 categories: jekyll
 tags: jekyll 端口 markdown Foxit
@@ -9,6 +9,14 @@ author: Haoyang Gao
 
 * content
 {:toc}
+
+本文主要说明对这个博客主题的改版和代码重构的过程。这个简洁高雅的博客主题受到了很多朋友的喜欢。在写第一版界面时，我对前端并不是很熟悉，对`Jekyll`也不熟悉。现在距离当时也一年了，对自己当时写的代码也不太满意了，做一下代码重构和改版吧。
+
+主要想做这些事情有：添加归档，添加标签，添加分类页面，主页显示文章摘要，代码去除 jQuery 和 BootStrap，优化移动端显示，将所有变量写入配置文件`_config.yml`中等。再优化一些细节吧。希望更多人会喜欢。
+
+
+
+
 
 
 ## 二级标题
@@ -20,6 +28,15 @@ author: Haoyang Gao
 ##### 五级标题
 
 ###### 六级标题
+
+afsdddddddddddddddddddddddddddddddddddddddddddd
+
+
+
+
+
+
+
 
 * 列表
 * 而

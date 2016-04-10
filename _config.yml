@@ -36,3 +36,6 @@ kramdown:
 
 category_dir: category/
 tag_dir: tag/
+
+#excerpt
+excerpt_separator: "\n\n\n\n"
