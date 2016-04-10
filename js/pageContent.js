@@ -96,3 +96,6 @@ function setContentMaxHeight() {
     var contentMaxHeight = windowHeight-180
     contentUl.style.maxHeight = contentMaxHeight + 'px'
 }
+
+//-------------post Content----------------------
+//将Content内容转移
