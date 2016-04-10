@@ -1,11 +1,9 @@
-#markdown-toc{
-    display: none
+#markdown-toc {
+    display: none;
 }
-
 .page[post] {
     .label {
         margin-top: 16px;
-        // max-width:     500px;
         overflow: hidden;
         .label-card {
             float: left;
@@ -27,102 +25,37 @@
             background-color: #f4efeb;
         }
     }
-    //here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     .left {
         ul {
             >h2 {
-                margin-left: -40px;
                 color: #333;
             }
             li {
                 color: #333;
-                time {
-                    display: inline-block;
-                    width: 135px;
-                }
-                .title {
-                    font-weight: bold;
-                    color: #223253;
-                    transition: 0.3s ease;
-                    &:hover {
-                        color: #4d6dad;
-                    }
-                }
-                i {
-                    margin-right: 5px;
-                }
-                .categories {
-                    padding: 0 15px;
-                    i {
-                        color: #9e9d9d;
-                    }
-
-                }
-                .pageTag {
-                    i {
-                        color: #c6cbe9;
-                    }
-                    a {
-
-                        // border: 1px solid #aaa;
-                        padding: 0 5px;
-                        background-color: #c6cbe9;
-                        border-radius: 4px;
-                        color: #fff;
-                        font-size: 80%;
-                        transition: 0.3s ease;
-                        &:hover {
-                            background-color: #c0ddc7;
-                        }
-                    }
-                }
+                margin: 0;
             }
         }
     }
-    .fixed {
-        position: fixed;
-        top: 20px;
-    }
-    .anchor{
-        display: none;
-    }
-    .right {
-        float: left;
-        width: 25%;
-        padding-left: 20px;
-        top: 0;
-        .side {
-            box-sizing: border-box;
-            background-color: #f8f8fd;
-            box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.3), 0 0 30px rgba(10, 10, 0, 0.1) inset;
-            padding-bottom: 1px;
-            -ms-word-break: break-all;
-            word-break: break-all;
-            /* Non standard for webkit */
-            word-break: break-word;
-            -webkit-hyphens: auto;
-            -moz-hyphens: auto;
-            -ms-hyphens: auto;
-            hyphens: auto;
-            >div {
-                padding: 12px 15px;
-
-                // margin-right: -10px;
-                border-bottom: 1px solid #c0c0c0;
+}
+@media screen and (max-width: 770px) {
+    .page[post] {
+        .left {
+            font-size: 15px;
+            h2 {
+                font-size: 24px;
+            }
+            h3 {
+                font-size: 20px;
+            }
+            h4 {
+                font-size: 18px;
+            }
+            h5 {
                 font-size: 16px;
-                font-weight: bold;
             }
-            a {
-                color: #4d6dad;
-                transition: 0.5s ease;
-                &:hover {
-                    color: #223253;
-                }
+            h6{
+                font-size: 15px;
             }
-        }
-        .content-ul {
-            overflow-y: auto;
-            padding-right: 10px;
         }
     }
 }
