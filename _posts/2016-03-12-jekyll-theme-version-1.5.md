@@ -10,59 +10,11 @@ author: Haoyang Gao
 * content
 {:toc}
 
-本文主要说明对这个博客主题的改版和代码重构的过程。这个简洁高雅的博客主题受到了很多朋友的喜欢。在写第一版界面时，我对前端并不是很熟悉，对`Jekyll`也不熟悉。现在距离当时也一年了，对自己当时写的代码也不太满意了，做一下代码重构和改版吧。
+本文主要说明对这个博客主题的改版和代码重构的过程。这个简洁高雅的博客主题受到了很多朋友的喜欢。在写第一版界面时，我对前端并不是很熟悉，对`Jekyll`也不熟悉。现在距离当时也一年了，对自己当时写的代码也不太满意了，同时`Jekyll`如今也已经升级了，目前最新版为3.1.2。因此我在临近毕业尚未入职前做一下博客主题的代码重构和改版吧。
 
 主要想做这些事情有：添加归档，添加标签，添加分类页面，主页显示文章摘要，代码去除 jQuery 和 BootStrap，优化移动端显示，将所有变量写入配置文件`_config.yml`中等。再优化一些细节吧。希望更多人会喜欢。
 
 
-
-
-
-
-## 二级标题
-
-### 三级标题
-
-#### 四级标题
-
-##### 五级标题
-
-###### 六级标题
-
-afsdddddddddddddddddddddddddddddddddddddddddddd
-
-
-
-
-
-
-
-
-* 列表
-* 而
-* 阿斯顿发生地方
-
-1. 有序列表
-2. 阿斯顿发生地方
-1. 阿斯顿发生地方
-
-> 引用sdafsadfasdf
-> afsdkhljksdhlfjkahsdljkfh
-
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-
-```js
-var aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa = 166666666666fffffffffffffffffffffffffffffffffffffff66666660;
-```
-
-    代码吗？阿斯顿发生地方
-    sdfsdfdsfsdsdfsdf
-
----
 
 
 ## 改版重构说明
@@ -75,6 +27,8 @@ var aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 * 添加分类页
 
 
+
+## rubyGem无法访问，证书问题
 
 ## 被 Foxit pdf reader 占用4000端口
 
