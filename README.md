@@ -29,3 +29,7 @@ others
 
 * https://help.github.com/articles/changing-author-info/
 * https://help.github.com/articles/remove-sensitive-data/
+
+知识共享
+
+* http://creativecommons.org/choose/results-one?license_code=by-nc-sa&amp;jurisdiction=cn&amp;version=3.0&amp;lang=zh
