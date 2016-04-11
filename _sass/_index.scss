@@ -24,7 +24,7 @@
                         float: left;
                         margin-right: 15px;
                         i {
-                            padding-right: 0px;
+                            padding-right: 0;
                             margin-right: 3px;
                             color: #6b6a6a;
                         }
@@ -60,8 +60,73 @@
                 padding: 0 5px;
             }
             .disable {
-                color:#cbcbcb;
+                color: #cbcbcb;
             }
+        }
+    }
+    .right {
+        .wrap {
+            .side {
+                margin-bottom: 20px;
+                padding-bottom: 0;
+                i {
+                    margin-right: 3px;
+                }
+                .content-ul[cate] {
+                    overflow: hidden;
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+                    li {
+                        a {
+                            display: block;
+                            width: 100%;
+                            padding: 2px 0;
+                            border-bottom: 1px solid #eee;
+                            &:hover{
+                                background-color: #dbdfee;
+                                .badge{
+                                    background-color: #dbdfee;
+//                                     transform: scaleX(1) scaleY(1) scaleZ(1.2) rotateX(0deg) rotateY(360deg) rotateZ(360deg);
+// -moz-transform: scaleX(1) scaleY(1) scaleZ(1.2) rotateX(0deg) rotateY(360deg) rotateZ(360deg);
+// -webkit-transform: scaleX(1) scaleY(1) scaleZ(1.2) rotateX(0deg) rotateY(360deg) rotateZ(360deg);
+// -o-transform: scaleX(1) scaleY(1) scaleZ(1.2) rotateX(0deg) rotateY(360deg) rotateZ(360deg);
+// -ms-transform: scaleX(1) scaleY(1) scaleZ(1.2) rotateX(0deg) rotateY(360deg) rotateZ(360deg);
+// perspective: 1000px;-webkit-perspective: 1000px; perspective-origin: 50% 50%; -webkit-perspective-origin: 50% 50%;
+                                    transform: scale(1.2) rotate(360deg);
+                                }
+                            }
+                            .name{
+                                padding-left: 15px;
+                            }
+                            .badge{
+                                display: block;
+                                // width: 20px;
+                                float: right;
+                                text-align: center;
+                                margin-right: 15px;
+                                margin-top: 3px;
+                                padding:0 10px;
+                                font-size: 12px;
+                                color: #fff;
+                                background-color: #bbb;
+                                border-radius: 50%;
+                                transition: 0.5s ease-in-out;
+                            }
+                        }
+                        &:last-of-type a{
+                            border: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 770px) {
+    .page[index] {
+        .left ul li h2 {
+            font-size: 24px;
         }
     }
 }

@@ -65,23 +65,51 @@ layout: default
           {% endif %}
         </div>
     </div>
-    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <!-- <button class="anchor"><i class="fa fa-anchor"></i></button> -->
     <div class="right">
         <div class="wrap">
 
             <!-- Content -->
-            <div class="side content">
+            <div class="side ">
                 <div>
-                    Content
+                    <i class="fa fa-th-list"></i>
+                    Categories
                 </div>
-                <ul id="content-side" class="content-ul">
-
+                <ul class="content-ul" cate>
+                    {% for category in site.categories order:ascending %}
+                    <li>
+                        <a href="{{ root_url }}/{{ site.category_dir }}#{{ category | first }}" class="categories-list-item" cate="{{ category | first }}">
+                            <span class="name">
+                                {{ category | first }}
+                            </span>
+                            <span class="badge">{{ category | last | size }}</span>
+                        </a>
+                    </li>
+                    {% endfor %}
                 </ul>
             </div>
             <!-- 其他div框放到这里 -->
-            <div class="side">bbbb</div>
+            <div class="side">
+                <div>
+                    <i class="fa fa-tags"></i>
+                    Tags
+                </div>
+                <ul  class="content-ul">
+
+                </ul>
+            </div>
+
+            <div class="side">
+                <div>
+                    <i class="fa fa-external-link"></i>
+                    Links
+                </div>
+                <ul  class="content-ul">
+
+                </ul>
+            </div>
         </div>
     </div>
 </div>
 <!-- <script src="{{ "/js/scroll.min.js " | prepend: site.baseurl }}" charset="utf-8"></script> -->
-<script src="{{ "/js/pageContent.js " | prepend: site.baseurl }}" charset="utf-8"></script>
+<!-- <script src="{{ "/js/pageContent.js " | prepend: site.baseurl }}" charset="utf-8"></script> -->
