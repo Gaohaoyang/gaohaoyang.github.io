@@ -72,6 +72,7 @@
                 i {
                     margin-right: 3px;
                 }
+
                 .content-ul[cate] {
                     overflow: hidden;
                     list-style: none;
@@ -83,30 +84,25 @@
                             width: 100%;
                             padding: 2px 0;
                             border-bottom: 1px solid #eee;
-                            &:hover{
+                            &:hover {
                                 background-color: #dbdfee;
-                                .badge{
+                                .badge {
                                     background-color: #dbdfee;
-//                                     transform: scaleX(1) scaleY(1) scaleZ(1.2) rotateX(0deg) rotateY(360deg) rotateZ(360deg);
-// -moz-transform: scaleX(1) scaleY(1) scaleZ(1.2) rotateX(0deg) rotateY(360deg) rotateZ(360deg);
-// -webkit-transform: scaleX(1) scaleY(1) scaleZ(1.2) rotateX(0deg) rotateY(360deg) rotateZ(360deg);
-// -o-transform: scaleX(1) scaleY(1) scaleZ(1.2) rotateX(0deg) rotateY(360deg) rotateZ(360deg);
-// -ms-transform: scaleX(1) scaleY(1) scaleZ(1.2) rotateX(0deg) rotateY(360deg) rotateZ(360deg);
-// perspective: 1000px;-webkit-perspective: 1000px; perspective-origin: 50% 50%; -webkit-perspective-origin: 50% 50%;
                                     transform: scale(1.2) rotate(360deg);
                                 }
                             }
-                            .name{
+                            .name {
                                 padding-left: 15px;
                             }
-                            .badge{
+                            .badge {
                                 display: block;
+
                                 // width: 20px;
                                 float: right;
                                 text-align: center;
                                 margin-right: 15px;
                                 margin-top: 3px;
-                                padding:0 10px;
+                                padding: 0 10px;
                                 font-size: 12px;
                                 color: #fff;
                                 background-color: #bbb;
@@ -114,8 +110,18 @@
                                 transition: 0.5s ease-in-out;
                             }
                         }
-                        &:last-of-type a{
+                        &:last-of-type a {
                             border: none;
+                        }
+                    }
+                }
+                .tags-cloud{
+                    font-weight: normal;
+                    a{
+                        padding: 0 3px;
+                        border-radius: 5px;
+                        &:hover{
+                            background-color: #f0e7ce;
                         }
                     }
                 }
