@@ -3,8 +3,7 @@ layout: post
 title:  "前端处理动态 url 和 pushStatus 的使用"
 date:   2015-12-31 23:06:05
 categories: JavaScript
-tags: JavaScript Ajax URL
-excerpt: History Api 用法, pushState, replaceState
+tags: JavaScript Ajax URL HistoryApi pushState pjax
 ---
 
 * content
@@ -20,6 +19,9 @@ excerpt: History Api 用法, pushState, replaceState
 * 使用前端模板引擎 handlebars 解决动态操作将 html 拼接在 js 中的问题
 
 但最近写了一个项目类似知乎这样的多页网站。前端 url 的处理让我觉得不够优雅。我使用的是 hash 的方式处理动态 url 的，为此我专门在知乎上提了一个问题：[前端如何处理动态url？](https://www.zhihu.com/question/38802932)
+
+
+
 
 这里我将问题描述如下：
 

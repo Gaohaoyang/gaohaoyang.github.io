@@ -3,13 +3,17 @@ layout: post
 title:  "JavaScript 中的 this"
 date:   2015-06-12 14:06:05
 categories: JavaScript
-excerpt: JavaScript this
+tags: JavaScript 慕课网 this ife
 ---
 
 * content
 {:toc}
 
-本文为慕课网 [JavaScript深入浅出](http://www.imooc.com/learn/277) 笔记。
+本文为慕课网 [JavaScript深入浅出](http://www.imooc.com/learn/277) JavaScript 中的 this笔记。
+
+
+
+
 
 ## 全局的 this
 
@@ -172,7 +176,3 @@ new MyClass() 的时候，MyClass()中的 this 会指向一个空对象，这个
     console.log(o.f(), o.g()); // 37, test
 
 绑定之后再调用时，仍然会按绑定时的内容走，所以 o.g() 结果是 test
-
-
-
-

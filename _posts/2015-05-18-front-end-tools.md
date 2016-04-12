@@ -2,7 +2,8 @@
 layout: post
 title:  "前端的一些资料和工具"
 date:   2015-05-18 14:06:05
-categories: Front-end
+categories: Tools
+tags: tools CSS reveal 配色
 excerpt: 记录一些好用的前端工具和框架。
 ---
 
@@ -66,13 +67,13 @@ excerpt: 记录一些好用的前端工具和框架。
 ### 配色
 
 * [nipponcolors](http://nipponcolors.com/)
-    
+
     日本的一个配色网站。罗列了很多不饱和经典的颜色，当然，自己选配还是很重要的。
 
     ![nipponcolors](http://7q5cdt.com1.z0.glb.clouddn.com/blog-chooseColor.png)
 
 * [Adobe Color CC](https://color.adobe.com/zh/explore/most-popular/?time=all)
-    
+
     Adobe 出的在线配色工具，里面有些现成的配色方案还是很不错的。
 
     ![Adobe Color CC](http://7q5cdt.com1.z0.glb.clouddn.com/blog-adobeColorCC.png)
@@ -128,7 +129,7 @@ excerpt: 记录一些好用的前端工具和框架。
     在网页上展示 slides 幻灯片，太酷了。针对不会代码的人还有一个在线编辑器：[http://slides.com](http://slides.com)
 
     还有一个新手入门教程：[Reveal.js Tutorial-Reveal.js for Beginners](http://htmlcheats.com/reveal-js/reveal-js-tutorial-reveal-js-for-beginners/)
-    
+
     ![reveal](http://7q5cdt.com1.z0.glb.clouddn.com/blog-revealjs.png)
 
 本文不定期更新。

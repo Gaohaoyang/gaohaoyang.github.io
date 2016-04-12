@@ -3,13 +3,17 @@ layout: post
 title:  "JavaScript 函数"
 date:   2015-06-11 14:06:05
 categories: JavaScript
-excerpt: JavaScript 函数
+tags: JavaScript 函数 慕课网 ife
 ---
 
 * content
 {:toc}
 
-本文为慕课网 [JavaScript深入浅出](http://www.imooc.com/learn/277) 笔记。
+本文为慕课网 [JavaScript深入浅出](http://www.imooc.com/learn/277) JavaScript 函数笔记。
+
+
+
+
 
 ## 概念
 
@@ -42,7 +46,7 @@ JS中的函数也是对象，所以JS函数可以像其它对象那样操作和�
 ### 调用方式
 
 * 直接调用
-    
+
         foo();
 
 * 对象方法
@@ -62,7 +66,7 @@ JS中的函数也是对象，所以JS函数可以像其它对象那样操作和�
 ## 函数声明与函数表达式
 
 ### 函数声明
-    
+
 就是对函数进行普通的声明
 
     function add(a, b) {
@@ -199,11 +203,11 @@ Function 中前面的参数为后面函数体的形参，最后一个参数为�
 
 * 关于 `callee`
 
-    callee 属性的初始值就是正被执行的 Function 对象。 
+    callee 属性的初始值就是正被执行的 Function 对象。
 
     callee 属性是 arguments 对象的一个成员，它表示对函数对象本身的引用，这有利于匿名函数的递归或者保证函数的封装性，例如下边示例的递归计算1到n的自然数之和。而该属性仅当相关函数正在执行时才可用。还有需要注意的是callee拥有length属性，这个属性有时用于验证还是比较好的。
 
-    arguments.length是实参长度，arguments.callee.length是形参长度，由此可以判断调用时形参长度是否和实参长度一致。 
+    arguments.length是实参长度，arguments.callee.length是形参长度，由此可以判断调用时形参长度是否和实参长度一致。
 
 ---
 
@@ -218,7 +222,7 @@ Function 中前面的参数为后面函数体的形参，最后一个参数为�
     foo.apply(null); //undefined undefined Window
     foo.apply(undefined); //undefined undefined Window
 
-* call/apply 的作用：调用一个对象的一个方法，以另一个对象替换当前对象(其实就是更改对象的内部指针，即改变对象的this指向的内容)。 
+* call/apply 的作用：调用一个对象的一个方法，以另一个对象替换当前对象(其实就是更改对象的内部指针，即改变对象的this指向的内容)。
 * call/apply 的第一个参数为对象，即使不是对象，也会被包装为对象。
 * call 为扁平化传参，apply 后面的参数为数组
 * 传入 null/undefined 时，实际为 Window 对象

@@ -3,13 +3,17 @@ layout: post
 title:  "JavaScript 面向对象"
 date:   2015-06-15 14:06:05
 categories: JavaScript
-excerpt: JavaScript 面向对象的技术
+tags: JavaScript 面向对象 慕课网 ife
 ---
 
 * content
 {:toc}
 
-本文为慕课网 [JavaScript深入浅出](http://www.imooc.com/learn/277) 笔记。
+本文为慕课网 [JavaScript深入浅出](http://www.imooc.com/learn/277)  JavaScript 面向对象笔记。
+
+
+
+
 
 ## 概念
 
@@ -134,7 +138,7 @@ JavaScript 中的 prototype 是对象，在运行的时候可以修改。
     // 给 prototype 添加或删除一些属性
     Student.prototype.x = 101;
     console.log(gao.x); //101
-    
+
     // 直接修改 prototype 属性
     Student.prototype = {
         y: 2
@@ -389,7 +393,7 @@ JavaScript 中的 prototype 是对象，在运行的时候可以修改。
         var prop = 1;
 
         function func() {}
-        
+
         return {
             func: func,
             prop: prop
@@ -404,7 +408,7 @@ prop，func 不会被泄露到全局作用域。
         var prop = 1;
 
         function func() {}
-        
+
         this.func = func;
         this.prop = prop;
     }

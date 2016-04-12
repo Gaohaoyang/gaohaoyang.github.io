@@ -2,8 +2,8 @@
 layout: post
 title:  "联想服务前端实习面试经历"
 date:   2015-06-1 14:06:05
-categories: Front-end
-excerpt: 记录一下第一次面试成功的经历，联想服务前端实习
+categories: Interview
+tags: 面试 Lenovo 实习 JavaScript
 ---
 
 * content
@@ -16,6 +16,10 @@ excerpt: 记录一下第一次面试成功的经历，联想服务前端实习
 首先在我们机房的楼下看到了宣传海报，5.28 有一个联想服务的宣讲会，我看到有前端工程师的岗位，想试试自己的水平如何，就去听了宣讲会。
 
 到了宣讲会现场，人不少，我坐在最后一排。开始就是一些介绍。包括 Future Leader 的介绍等。
+
+
+
+
 
 * [联想服务2015 Future leader实习生招聘](http://job.xjtu.edu.cn/jobsHtml/153824064.html) 这是相关信息。
 
@@ -133,5 +137,3 @@ Boss说我回答问题时候有点喜欢先介绍一堆背景，自己探索的�
 嗯，最后，Boss 说他这关也问题不大，通过了，希望在北京能见到我。稍后 Hr 会联系我具体的实习事宜。
 
 End
-
-

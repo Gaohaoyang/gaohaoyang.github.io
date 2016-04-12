@@ -3,13 +3,17 @@ layout: post
 title:  "JavaScript 中的闭包"
 date:   2015-06-14 14:06:05
 categories: JavaScript
-excerpt: JavaScript closure 闭包
+tags: JavaScript 闭包 慕课网 ife
 ---
 
 * content
 {:toc}
 
-本文为慕课网 [JavaScript深入浅出](http://www.imooc.com/learn/277) 笔记。
+本文为慕课网 [JavaScript深入浅出](http://www.imooc.com/learn/277) JavaScript 中的闭包笔记。
+
+
+
+
 
 ## 闭包的例子
 
@@ -129,7 +133,7 @@ excerpt: JavaScript closure 闭包
 
 > * 在计算机科学中，闭包（也称词法闭包或函数闭包）是指一个函数或函数的引用，与一个引用环境绑定在一起。这个引用环境是一个存储该函数每个非局部变量（也叫自由变量）的表。
 >
-> * 闭包，不同于一般的函数，它允许一个函数在立即词法作用域外调用时，仍可访问非本地变量。 
+> * 闭包，不同于一般的函数，它允许一个函数在立即词法作用域外调用时，仍可访问非本地变量。
 >
 > from 维基百科
 
