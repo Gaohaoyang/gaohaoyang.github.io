@@ -91,6 +91,7 @@
                     margin: 0;
                     padding: 0;
                     li {
+                        font-size: 14px;
                         a {
                             display: block;
                             width: 100%;
@@ -125,6 +126,13 @@
                         &:last-of-type a {
                             border: none;
                         }
+                    }
+                }
+                .content-ul[recent]{
+                    padding-bottom: 16px;
+                    li{
+                        color:#aaa;
+                        font-size: 14px;
                     }
                 }
                 .tags-cloud {
