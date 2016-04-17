@@ -1,5 +1,13 @@
 .page[demo] {
     .left {
         width: 100%;
+        .card-wrap {
+            width: 25%;
+            padding: 10px;
+            // box-sizing: border-box;
+            float: left;
+            background: red;
+        }
     }
+
 }
