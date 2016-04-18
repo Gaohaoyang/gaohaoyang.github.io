@@ -42,6 +42,9 @@ author: Haoyang Gao
 
     我觉得太重了，没必要使用这两个库，使用原生 JavaScript 和 CSS就可以做到一样的效果，代码量大大减轻，载入速度略有提高。
 
+* **重写了demo页的瀑布流布局**
+
+    改变数据写死的方式，将数据用 json 格式录入，由 JavaScript 拼接为 HTML 代码。同时，使用 [Masonry](http://masonry.desandro.com/)，重写了瀑布流布局。
 
 下面列举一些可能遇到的问题，至少我是遇到了：
 
