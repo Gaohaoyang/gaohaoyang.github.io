@@ -8,11 +8,6 @@
 # Site settings
 title: HyG
 brief-intro: Front-end Dev Engineer
-email: your-email@domain.com
-description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site
 
@@ -20,9 +15,14 @@ permalink: /:year/:month/:day/:title/
 
 # other links
 twitter_username:
-
+facebook_username:
 github_username:  Gaohaoyang
-github_url: "https://github.com/Gaohaoyang"
+email: gaohaoyang126@126.com
+weibo_username: 3115521wh
+zhihu_username: gaohaoyang
+
+description_footer: 这里记录我前端之旅的沿途风景，一路牛逼！
+
 
 # Build settings
 markdown: kramdown

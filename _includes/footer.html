@@ -1,10 +1,50 @@
 <footer class="site-footer">
 
+
   <div class="wrapper">
+        <p class="contact">
+            Contact me at:
+            {% if site.github_username %}
+            <a href="https://github.com/{{site.github_username}}">G</a>
+            {% endif %}
 
-    <h2 class="footer-heading">{{ site.title }}</h2>
+            {% if site.email %}
+            <a href="mailto:{{site.email}}">E</a>
+            {% endif %}
 
-    <div class="footer-col-wrapper">
+            {% if site.weibo_username %}
+            <a href="https://github.com/{{site.weibo_username}}">W</a>
+            {% endif %}
+
+            {% if site.zhihu_username %}
+            <a href="https://github.com/{{site.zhihu_username}}">Z</a>
+            {% endif %}
+
+            {% if site.twitter_username %}
+            <a href="https://github.com/{{site.twitter_username}}">T</a>
+            {% endif %}
+
+            {% if site.facebook_username %}
+            <a href="https://github.com/{{site.facebook_username}}">W</a>
+            {% endif %}
+        </p>
+        <p class="description">
+            {% if site.description_footer %}
+            {{site.description_footer}}
+            {% endif %}
+        </p>
+        <p>
+            <span>
+                Site powered by <a href="#">Jekyll</a> & <a href="#">Github Pages</a>.
+            </span>
+            <span>
+                Theme designed by <a href="#">HyG</a>.
+            </span>
+        </p>
+
+    <!-- <h2 class="footer-heading">{{ site.title }}</h2> -->
+
+    <!-- <div class="footer-col-wrapper">
       <div class="footer-col footer-col-1">
         <ul class="contact-list">
           <li>{{ site.title }}</li>
@@ -30,8 +70,8 @@
       <div class="footer-col footer-col-3">
         <p>{{ site.description }}</p>
       </div>
-    </div>
+    </div> -->
 
   </div>
-<script src="{{ "/js/main.js " | prepend: site.baseurl }}" charset="utf-8"></script>
 </footer>
+<script src="{{ "/js/main.js " | prepend: site.baseurl }}" charset="utf-8"></script>
