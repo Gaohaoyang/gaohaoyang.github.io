@@ -2,75 +2,45 @@
 
 
   <div class="wrapper">
+      <p class="description">
+          {% if site.description_footer %}
+          {{site.description_footer}}
+          {% endif %}
+      </p>
         <p class="contact">
             Contact me at:
             {% if site.github_username %}
-            <a href="https://github.com/{{site.github_username}}">G</a>
+            <a href="https://github.com/{{site.github_username}}"><i class="fa fa-github" aria-hidden="true"></i></a>
             {% endif %}
 
             {% if site.email %}
-            <a href="mailto:{{site.email}}">E</a>
+            <a href="mailto:{{site.email}}"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
             {% endif %}
 
             {% if site.weibo_username %}
-            <a href="https://github.com/{{site.weibo_username}}">W</a>
+            <a href="http://weibo.com/{{site.weibo_username}}"><i class="fa fa-weibo" aria-hidden="true"></i></a>
             {% endif %}
 
             {% if site.zhihu_username %}
-            <a href="https://github.com/{{site.zhihu_username}}">Z</a>
+            <a href="https://www.zhihu.com/people/{{site.zhihu_username}}"><i class="iconfont">&#xe829;</i></a>
             {% endif %}
 
             {% if site.twitter_username %}
-            <a href="https://github.com/{{site.twitter_username}}">T</a>
+            <a href="https://twitter.com/{{site.twitter_username}}"><i class="fa fa-twitter" aria-hidden="true"></i></a>
             {% endif %}
 
             {% if site.facebook_username %}
-            <a href="https://github.com/{{site.facebook_username}}">W</a>
+            <a href="https://www.facebook.com/{{site.facebook_username}}"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
             {% endif %}
         </p>
-        <p class="description">
-            {% if site.description_footer %}
-            {{site.description_footer}}
-            {% endif %}
-        </p>
-        <p>
+        <p class="power">
             <span>
-                Site powered by <a href="#">Jekyll</a> & <a href="#">Github Pages</a>.
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
             </span>
             <span>
-                Theme designed by <a href="#">HyG</a>.
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
             </span>
         </p>
-
-    <!-- <h2 class="footer-heading">{{ site.title }}</h2> -->
-
-    <!-- <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li>{{ site.title }}</li>
-          <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col footer-col-2">
-        <ul class="social-media-list">
-          {% if site.github_username %}
-          <li>
-            <a href="{{site.github_url}}"><i class="fa fa-github"></i><span class="username">{{ site.github_username }}</span></a>
-          </li>
-          {% endif %}
-
-          {% if site.twitter_username %}
-          <li>
-          </li>
-          {% endif %}
-        </ul>
-      </div>
-
-      <div class="footer-col footer-col-3">
-        <p>{{ site.description }}</p>
-      </div>
-    </div> -->
 
   </div>
 </footer>

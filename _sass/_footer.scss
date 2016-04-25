@@ -13,8 +13,25 @@
             line-height: 1.6;
         }
         .contact{
+            display:inline-block;
             a{
-                color:#bbb;
+                color:#ccc;
+                transition: 0.3s ease;
+                &:hover{
+                    color:#fff;
+                }
+                i{
+                    margin:0 5px;
+                    font-size: 20px;
+                }
+            }
+        }
+        .description{
+            display: inline-block;
+        }
+        .power{
+            a{
+                color:#8F90C5;
                 transition: 0.3s ease;
                 &:hover{
                     color:#fff;
