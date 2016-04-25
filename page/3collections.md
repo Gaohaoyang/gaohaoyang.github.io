@@ -31,11 +31,11 @@ icon: bookmark
 
 * [jssor](http://www.jssor.com/)
 
-图片轮播图其 GitHub 地址 [jssor/slider](https://github.com/jssor/slider)
+    图片轮播图其 GitHub 地址 [jssor/slider](https://github.com/jssor/slider)
 
 * [cssslider](http://cssslider.com/)
 
-纯 CSS 的图片轮播图。
+    纯 CSS 的图片轮播图。
 
 ## 框架
 
