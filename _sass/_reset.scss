@@ -10,7 +10,7 @@ h2,
 h3,
 h4,
 h5,
-h6{
+h6 {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -23,10 +23,16 @@ h5,
 h6 {
     font-weight: normal;
 }
+html {
+    height: 100%;
+}
 body {
     font-family: 'Microsoft YaHei','Helvetica Neue',Helvetica,Arial,sans-serif;
     color: #333;
     background-image: url(http://ww3.sinaimg.cn/large/7011d6cfjw1f1yyk5xe1sj203h03d742.jpg);
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 160px;
 }
 a {
     text-decoration: none;
@@ -40,6 +46,7 @@ hr {
     border-top: 1px solid #eee;
     margin: 20px 0;
 }
+
 ///////////
 h1 {
     font-size: 36px;
@@ -54,13 +61,17 @@ h3 {
 h4 {
     font-size: 22px;
 }
-h5{
+h5 {
     font-size: 20px;
 }
-h6{
+h6 {
     font-size: 18px;
 }
-h2,h3,h4,h5,h6{
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin: 20px 0 10px;
 }
 blockquote {
@@ -99,9 +110,9 @@ table {
         padding: 2px 10px;
     }
 }
-p{
+p {
     margin: 0 0 10px;
 }
-img{
+img {
     max-width: 100%;
 }

@@ -1,40 +1,46 @@
 .site-footer {
-    margin-top: 50px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    text-align: center;
+    // margin-top: 50px;
     background-color: #2b2b3c;
     box-shadow: 0 -2px 4px 1px rgba(0,0,0,0.5);
-    color:#bbb;
-    .wrapper{
-        width:1140px;
+    color: #bbb;
+    .wrapper {
+        width: 1140px;
         margin: 0 auto;
         padding: 15px 0;
         text-align: center;
-        p{
+        p {
             margin: 0;
             line-height: 1.6;
         }
-        .contact{
-            display:inline-block;
-            a{
-                color:#ccc;
+        .contact {
+            display: inline-block;
+            a {
+                color: #ccc;
                 transition: 0.3s ease;
-                &:hover{
-                    color:#fff;
+                &:hover {
+                    color: #fff;
                 }
-                i{
-                    margin:0 5px;
+                i {
+                    margin: 0 5px;
                     font-size: 20px;
                 }
             }
         }
-        .description{
+        .description {
             display: inline-block;
         }
-        .power{
-            a{
-                color:#8F90C5;
+        .power {
+            a {
+                color: #8F90C5;
                 transition: 0.3s ease;
-                &:hover{
-                    color:#fff;
+                &:hover {
+                    color: #fff;
                 }
             }
         }
@@ -42,15 +48,15 @@
 }
 @media screen and (max-width:1200px) and (min-width: 770px) {
     .site-footer {
-        .wrapper{
-            width:90%;
+        .wrapper {
+            width: 90%;
         }
     }
 }
 @media screen and (max-width: 770px) {
     .site-footer {
-        .wrapper{
-            width:90%;
+        .wrapper {
+            width: 90%;
         }
     }
 }
