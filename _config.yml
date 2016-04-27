@@ -23,6 +23,11 @@ zhihu_username: gaohaoyang
 
 description_footer: 本站记录我前端之旅的沿途风景！
 
+# comments
+# two ways to comment, only choose one, and use your own short name
+# 两种评论插件，选一个就好了，使用自己的 short_name
+duoshuo_shortname: #hygblog
+disqus_shortname: gaohaoyang
 
 # Build settings
 markdown: kramdown
@@ -34,18 +39,13 @@ kramdown:
 # port
 # port: 1234
 
+# url
 category_dir: category/
 tag_dir: tag/
 
-#excerpt
+# excerpt
 excerpt_separator: "\n\n\n\n"
 
-#paginate
+# paginate
 gems: [jekyll-paginate]
 paginate: 5
-
-#comments
-#two ways to comment, only choose one, and use your own short name
-#两种评论插件，选一个就好了，使用自己的 short_name
-duoshuo_shortname: #hygblog
-disqus_shortname: gaohaoyang
