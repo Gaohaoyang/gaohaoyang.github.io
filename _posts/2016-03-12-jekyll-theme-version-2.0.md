@@ -46,6 +46,10 @@ author: Haoyang Gao
 
     改变数据写死的方式，将数据用 json 格式录入，由 JavaScript 拼接为 HTML 代码。同时，使用 [Masonry](http://masonry.desandro.com/)，重写了瀑布流布局。
 
+* **简化评论配置，支持 多说 和 disqus**
+
+    在`_config.yml`中评论配置直接添加自己的`short_name`，评论就能正常使用了。
+
 下面列举一些可能遇到的问题，至少我是遇到了：
 
 ## RubyGems 无法访问，SSL 证书问题

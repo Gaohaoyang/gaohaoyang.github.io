@@ -117,7 +117,7 @@ s.setAttribute('data-timestamp', +new Date());
  * target _blank
  */
 (function() {
-    var aTags = document.querySelectorAll('a')
+    var aTags = document.querySelectorAll('.left a')
     for (var i = 0; i < aTags.length; i++) {
         aTags[i].setAttribute('target', '_blank')
     }
