@@ -2,8 +2,7 @@
 
 随着 jekyll 的版本升级，同时我也想重构我的旧版博客主题，因此在这个月对博客进行了重构加改版，这个仓库存放我的新博客，并且我也会一直使用这个主题。目前基本改版完成，后续可能还会有些细节上的修补。
 
-博客访问地址：[http://gaohaoyang.github.io/](http://gaohaoyang.github.io/)。若您喜欢这个新的博客主题，请给我个star以示鼓励吧，欢迎使用。
-
+**博客访问地址：[http://gaohaoyang.github.io/](http://gaohaoyang.github.io/)**。若您喜欢这个新的博客主题，请给我个star以示鼓励吧，欢迎大家使用。
 
 
 ## 预览图
@@ -98,6 +97,23 @@ disqus_shortname: xxx
 微信
 
 ![wechat](http://ww2.sinaimg.cn/large/7011d6cfjw1f3bkdw3bslj206z06q3z6.jpg)
+
+## update log
+
+### 2016.4.27 v2.0.0
+
+* [^] 基于 jekyll 3.1.2 重构了所有代码，去除了 jQuery 和 BootStrap，是的加载速度更快
+* [+] 主页添加了摘要
+* [+] 主页添加了近期文章、分类列表和标签云
+* [+] 主页导航区做了视觉优化，阴影效果
+* [+] 增加了归档、标签和分类页面
+* [+] 增加了收藏页面
+* [+] 评论插件可以选择 disqus 或 多说，直接在`_config.yml`中修改
+* [+] 适配移动端
+* [+] 页面滚动时，文章目录固定在右侧
+* [+] 页面内容较少时，固定 footer 在页面底部
+* [^] 使用 GitHub 风格的代码高亮写法，即```的写法
+* [^] 使用 Masonry 重写了 Demo 页中的瀑布流布局，响应式交互体验更好
 
 ## License
 
