@@ -2,8 +2,6 @@
 
 随着 jekyll 的版本升级，同时我也想重构我的旧版博客主题，因此在这个月对博客进行了重构加改版，这个仓库存放我的新博客，并且我也会一直使用这个主题。目前基本改版完成，后续可能还会有些细节上的修补。
 
-关于旧版博客，我不在维护，同时我把代码转移到了另一个仓库，见 [Gaohaoyang/old-blog](https://github.com/Gaohaoyang/old-blog)。
-
 博客访问地址：[http://gaohaoyang.github.io/](http://gaohaoyang.github.io/)。若您喜欢这个新的博客主题，请给我个star以示鼓励吧，欢迎使用。
 
 
@@ -85,6 +83,9 @@ disqus_shortname: xxx
 
 欢迎使用这个主题，使用时请保留 footer 上的模板主题来源。Theme designed by [HyG](https://github.com/gaohaoyang).
 ![footer](http://ww3.sinaimg.cn/large/7011d6cfjw1f3bepd8002j20hl02ct95.jpg)
+
+关于旧版博客，我不在维护，同时我把代码转移到了另一个仓库，见 [Gaohaoyang/old-blog](https://github.com/Gaohaoyang/old-blog)。
+
 
 ## License
 
