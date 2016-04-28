@@ -98,6 +98,9 @@ disqus_shortname: xxx
 
 ![wechat](http://ww2.sinaimg.cn/large/7011d6cfjw1f3bkdw3bslj206z06q3z6.jpg)
 
+感谢捐助的小伙伴！！！
+* 2016.04.28 收到 魏楚阳_Brian ¥2 捐赠
+
 ## update log
 
 ### 2016.4.27 v2.0.0
