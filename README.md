@@ -103,6 +103,12 @@ disqus_shortname: xxx
 
 ## update log
 
+<!-- ### 2016
+
+* [^] 优化代码，将页面中的大段评论相关代码抽离出来，放入`comments.html`
+* [+] 添加百度统计和Google分析代码，在`_config.yml`中配置相关参数即可
+ -->
+
 ### 2016.4.27 v2.0.0
 
 * [^] 基于 jekyll 3.1.2 重构了所有代码，去除了 jQuery 和 BootStrap，是的加载速度更快
