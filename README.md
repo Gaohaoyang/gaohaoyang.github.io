@@ -71,7 +71,7 @@ disqus_shortname: xxx
 
 ![light](http://ww3.sinaimg.cn/large/7011d6cfjw1f3be6y4vp3j209i02rweg.jpg)
 
-可以看到导航按钮高亮时，下面的阴影效果，我把这个称谓灯泡效果。
+可以看到导航按钮高亮时，下面的阴影效果，我把这个称为灯泡效果。
 
 ### 移动端适配
 
@@ -84,7 +84,7 @@ disqus_shortname: xxx
 **欢迎使用这个主题，使用时请保留 footer 上的模板主题来源。**Theme designed by [HyG](https://github.com/gaohaoyang).
 ![footer](http://ww3.sinaimg.cn/large/7011d6cfjw1f3bepd8002j20hl02ct95.jpg)
 
-关于旧版博客，我不在维护，同时我把代码转移到了另一个仓库，见 [Gaohaoyang/old-blog](https://github.com/Gaohaoyang/old-blog)。
+关于旧版博客，我不再维护，同时我把代码转移到了另一个仓库，见 [Gaohaoyang/old-blog](https://github.com/Gaohaoyang/old-blog)。
 
 ## 捐助 donate
 
