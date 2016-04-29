@@ -29,6 +29,13 @@ description_footer: 本站记录我前端之旅的沿途风景！
 duoshuo_shortname: #hygblog
 disqus_shortname: gaohaoyang
 
+# statistic analysis 统计代码
+# 百度统计 id，将统计代码替换为自己的百度统计id，即
+# hm.src = "//hm.baidu.com/hm.js?xxxxxxxxxxxx";
+# xxxxx字符串
+baidu_tongji_id: cf8506e0ef223e57ff6239944e5d46a4
+google_analytics_id: UA-72449510-4 # google 分析追踪id
+
 # Build settings
 markdown: kramdown
 
