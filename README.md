@@ -9,12 +9,33 @@
 * [预览图](#预览图)
 * [各部分详情](#各部分详情)
     * [主页 Home](#主页-home)
-    * [归档 Archives](归档-archives)
-    * [分类 Categories](#分类-categories)
-    * []
+    * [归档页 Archives](#归档页-archives)
+    * [分类页 Categories](#分类页-categories)
+    * [标签页 Tags](#标签页-tags)
+    * [收藏页 Collections](#收藏页-collections)
+    * [展示页 Demo](#展示页-demo)
+    * [关于页 About](#关于页-about)
+    * [评论](#评论)
+    * [目录 Contents](#目录-contents)
+    * [代码高亮](#代码高亮)
+    * [灯泡效果](#灯泡效果)
+    * [移动端适配](#移动端适配)
+    * [Footer](#footer)
+    * [统计](#统计)
+* [博客主题使用方法](#博客主题使用方法)
+    * [1. 安装 ruby 和 jekyll 环境](#1-安装-ruby-和-jekyll-环境)
+    * [2. 复制博客主题代码](#2-复制博客主题代码)
+    * [3. 修改参数](#3-修改参数)
+        * [基本信息](#基本信息)
+        * [链接信息](#链接信息)
+        * [评论信息](#评论信息)
+        * [统计信息](#统计信息)
+    * [4. 写文章](#4-写文章)
+    * [5. 本地运行](#5-本地运行)
+    * [6. 发布到 GitHub](#6-发布到-github)
 * [捐助](#捐助)
 * [Update Log](#Update-Log)
-
+* [License](#license)
 
 ## 预览图
 
@@ -260,7 +281,9 @@ Configuration file: E:/GitWorkSpace/blog/_config.yml
 
 在本地访问 localhost:4000 即可看到博客主页。
 
-若安装了 Foxit 福昕pdf阅读器可能会占用4000端口，关闭Foxit服务或切换 jekyll 端口即可解决。详情见文章：[对这个 jekyll 博客主题的改版和重构](http://gaohaoyang.github.io/2016/03/12/jekyll-theme-version-2.0/)
+若安装了 Foxit 福昕pdf阅读器可能会占用4000端口，关闭 Foxit服务 或切换 jekyll 端口即可解决。详情见文章：[对这个 jekyll 博客主题的改版和重构](http://gaohaoyang.github.io/2016/03/12/jekyll-theme-version-2.0/)
+
+若正在使用全局代理，可能会报错502，关闭全局代理即可。
 
 ### 6. 发布到 GitHub
 
@@ -295,7 +318,7 @@ Configuration file: E:/GitWorkSpace/blog/_config.yml
 
 ### 2016.4.27 v2.0.0
 
-* `[^]` 基于 jekyll 3.1.2 重构了所有代码，去除了 jQuery 和 BootStrap，是的加载速度更快
+* `[^]` 基于 jekyll 3.1.2 重构了所有代码
 * `[+]` 主页添加了摘要，在正文中使用4个换行符来分割，可在`_config.yml`中修改
 * `[+]` 主页添加了近期文章、分类列表和标签云
 * `[+]` 主页导航区做了视觉优化，阴影效果
@@ -307,6 +330,7 @@ Configuration file: E:/GitWorkSpace/blog/_config.yml
 * `[+]` 页面内容较少时，固定 footer 在页面底部
 * `[^]` 使用 GitHub 风格的代码高亮写法，即```的写法
 * `[^]` 使用 Masonry 重写了 Demo 页中的瀑布流布局，响应式交互体验更好
+* `[-]` 去除了 jQuery 和 BootStrap，使得加载速度更快，去除了 HighLight.js 代码高亮插件
 
 ## License
 
