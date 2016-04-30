@@ -165,6 +165,8 @@ gem install jekyll
 
 #### 基本信息
 
+主要用于网站头部header。
+
 ```yml
 # Site settings
 title: HyG
@@ -174,6 +176,8 @@ url: "http://gaohaoyang.github.io" # the base hostname & protocol for your site
 ```
 
 #### 链接信息
+
+主要用于网站底部footer。
 
 ```yml
 # other links
