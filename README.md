@@ -137,7 +137,7 @@ google_analytics_id: UA-xxxxxxxx # google 分析追踪id
 
 ### 1. 安装 ruby 和 jekyll 环境
 
-这一步和第5步主要是为了让博客系统在本地跑起来，如果不想再本地运行，可以无视这两步，但我还是强烈建议试着先在本地跑起来，没有什么问题后再推送的 GitHub 上。
+这一步和第5步主要是为了让博客系统在本地跑起来，如果不想在本地运行，可以无视这两步，但我还是强烈建议试着先在本地跑起来，没有什么问题后再推送的 GitHub 上。
 
 Windows 用户可以直接使用 [RubyInstaller](http://rubyinstaller.org/) 安装 ruby 环境。后续的操作中可能还会提示安装 DevKit，根据提示操作即可。
 
