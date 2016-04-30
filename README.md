@@ -7,6 +7,13 @@
 ## 目录
 
 * [预览图](#预览图)
+* [各部分详情](#各部分详情)
+    * [主页 Home](#主页-home)
+    * [归档 Archives](归档-archives)
+    * [分类 Categories](#分类-categories)
+    * []
+* [捐助](#捐助)
+* [Update Log](#Update-Log)
 
 
 ## 预览图
@@ -25,27 +32,27 @@
 
 主页默认展示5篇文章的摘要部分，用户点击标题或阅读全文后进入文章页。右侧为近期文章、分类和标签3块区域，用户可以继续在这部分添加区域，只需修改`index.html`即可。
 
-### 归档 Archives
+### 归档页 Archives
 
 按照年份归档文章。
 
-### 分类 Categories
+### 分类页 Categories
 
 按照文章的分类，显示文章。
 
-### 标签 Tags
+### 标签页 Tags
 
 按照文章的标签显示文章。
 
-### 收藏 Collections
+### 收藏页 Collections
 
 本页是用`markdown`写的，用户可以收藏自己喜欢的文章链接。
 
-### 展示 Demo
+### 展示页 Demo
 
 使用 [Masonry](http://masonry.desandro.com/) 重写了瀑布流布局，响应式布局，更好的交互体验。
 
-### 关于 About
+### 关于页 About
 
 对个人和对本站的介绍，使用`markdown`写的。
 
@@ -90,6 +97,175 @@ disqus_shortname: xxx
 
 关于旧版博客，我不再维护，同时我把代码转移到了另一个仓库，见 [Gaohaoyang/old-blog](https://github.com/Gaohaoyang/old-blog)。
 
+### 统计
+
+博客支持百度统计和 Google Analytics，只需在`_config.yml`中配置响应的id即可，代码如下。
+
+```yml
+# statistic analysis 统计代码
+# 百度统计 id，将统计代码替换为自己的百度统计id，即
+# hm.src = "//hm.baidu.com/hm.js?xxxxxxxxxxxx";
+# xxxxx字符串
+baidu_tongji_id: xxxxxxxxxxxx
+google_analytics_id: UA-xxxxxxxx # google 分析追踪id
+```
+
+## 博客主题使用方法
+
+欢迎使用这个主题，以下简单说一下使用方法。
+
+### 1. 安装 ruby 和 jekyll 环境
+
+这一步和第5步主要是为了让博客系统在本地跑起来，如果不想再本地运行，可以无视这两步，但我还是强烈建议试着先在本地跑起来，没有什么问题后再推送的 GitHub 上。
+
+Windows 用户可以直接使用 [RubyInstaller](http://rubyinstaller.org/) 安装 ruby 环境。后续的操作中可能还会提示安装 DevKit，根据提示操作即可。
+
+建议使用 [RubyGems 镜像- Ruby China](https://gems.ruby-china.org/) 安装 jekyll。
+
+安装 jekyll 命令如下
+
+```
+gem install jekyll
+```
+
+详情可以查看 jekyll 官网。[https://jekyllrb.com/](https://jekyllrb.com/) 或 中文翻译版 jekyll 官网[http://jekyllcn.com/](http://jekyllcn.com/) （中文文档翻译落后于英文官网，有兴趣有时间的小伙伴可以参与翻译，为开源世界贡献一份力哦~）
+
+![jekyll logo](http://jekyllcn.com/img/logo-2x.png)
+
+### 2. 复制博客主题代码
+
+可以直接 clone 、下载 或 fork 这个仓库的代码即可
+
+### 3. 修改参数
+
+主要修改 `_config.yml` 中的参数和自己的网站小图`favicon.ico`
+
+`_config.yml`文件中
+
+#### 基本信息
+
+```yml
+# Site settings
+title: HyG
+brief-intro: Front-end Dev Engineer
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://gaohaoyang.github.io" # the base hostname & protocol for your site
+```
+
+#### 链接信息
+
+```yml
+# other links
+twitter_username: gaohaoyang126
+facebook_username: gaohaoyang.water
+github_username:  Gaohaoyang
+email: gaohaoyang126@126.com
+weibo_username: 3115521wh
+zhihu_username: gaohaoyang
+
+description_footer: 本站记录我前端之旅的沿途风景！
+```
+
+#### 评论信息
+
+获取`short_name`的方法：
+
+访问 https://disqus.com/ 或 http://duoshuo.com/ 根据提示操作即可。
+
+```yml
+# comments
+# two ways to comment, only choose one, and use your own short name
+# 两种评论插件，选一个就好了，使用自己的 short_name
+duoshuo_shortname: #hygblog
+disqus_shortname: gaohaoyang
+```
+
+运行成功后，可以在 disqus 或 多说 的后台管理页看到相关信息。
+
+#### 统计信息
+
+获取 百度统计id 或 Google Analytics id 的方法：
+
+访问 http://tongji.baidu.com/ 或 https://www.google.com/analytics/ 根据提示操作即可。当然，如果不想添加统计信息，这两个参数可以不填。
+
+```yml
+# statistic analysis 统计代码
+# 百度统计 id，将统计代码替换为自己的百度统计id，即
+# hm.src = "//hm.baidu.com/hm.js?xxxxxxxxxxxx";
+# xxxxx字符串
+baidu_tongji_id: cf8506e0ef223e57ff6239944e5d46a4
+google_analytics_id: UA-72449510-4 # google 分析追踪id
+```
+
+成功后，进入自己的百度统计或 Google Analytics 后台管理，即可看到网站的访问量、访客等相关信息。
+
+### 4. 写文章
+
+`_posts`目录下存放文章信息，文章头部注明 layout(布局)、title、date、categories、tags、author(可选)，如下：
+
+```
+---
+layout: post
+title:  "对这个 jekyll 博客主题的改版和重构"
+date:   2016-03-12 11:40:18 +0800
+categories: jekyll
+tags: jekyll 端口 markdown Foxit RubyGems HTML CSS
+author: Haoyang Gao
+---
+```
+
+下面这两行代码为产生目录时使用
+```
+* content
+{:toc}
+```
+
+文章中存在的4次换行为摘要分割符，换行前的内容会以摘要的形式显示在主页Home上，进入文章页不影响。
+
+换行符的设置见配置文件`_config.yml`的 excerpt，如下：
+
+```yml
+# excerpt
+excerpt_separator: "\n\n\n\n"
+```
+
+使用 markdown 语法写文章。
+
+代码风格与 GitHub 上 README 或 issue 中的一致。使用3个```的方式。
+
+### 5. 本地运行
+
+本地执行
+
+```
+jekyll s
+```
+
+显示
+
+```
+Configuration file: E:/GitWorkSpace/blog/_config.yml
+            Source: E:/GitWorkSpace/blog
+       Destination: E:/GitWorkSpace/blog/_site
+ Incremental build: disabled. Enable with --incremental
+      Generating...
+                    done in 6.33 seconds.
+  Please add the following to your Gemfile to avoid polling for changes:
+    gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+ Auto-regeneration: enabled for 'E:/GitWorkSpace/blog'
+Configuration file: E:/GitWorkSpace/blog/_config.yml
+    Server address: http://127.0.0.1:4000/
+  Server running... press ctrl-c to stop.
+```
+
+在本地访问 localhost:4000 即可看到博客主页。
+
+若安装了 Foxit 福昕pdf阅读器可能会占用4000端口，关闭Foxit服务或切换 jekyll 端口即可解决。详情见文章：[对这个 jekyll 博客主题的改版和重构](http://gaohaoyang.github.io/2016/03/12/jekyll-theme-version-2.0/)
+
+### 6. 发布到 GitHub
+
+没什么问题，推送到自己的博客仓库即可。
+
 ## 捐助 donate
 
 您也可以捐助我喝杯咖啡！感谢！
@@ -108,28 +284,29 @@ disqus_shortname: xxx
 * 2016.04.28 收到 魏楚阳_Brian ¥2 捐赠
 * 2016.04.29 收到 北归 ¥10 捐赠
 
-## update log
+## Update Log
 
-<!-- ### 2016
+### 2016.4.30
 
-* [^] 优化代码，将页面中的大段评论相关代码抽离出来，放入`comments.html`
-* [+] 添加百度统计和Google分析代码，在`_config.yml`中配置相关参数即可
- -->
+* `[^]` 优化代码，将页面中的大段评论相关代码抽离出来，放入`comments.html`
+* `[+]` 添加百度统计和Google分析代码，在`_config.yml`中配置相关参数即可
+* `[+]` 更新文档，添加博客主题使用方法，便于上手
+
 
 ### 2016.4.27 v2.0.0
 
-* [^] 基于 jekyll 3.1.2 重构了所有代码，去除了 jQuery 和 BootStrap，是的加载速度更快
-* [+] 主页添加了摘要，在正文中使用4个换行符来分割，可在`_config.yml`中修改
-* [+] 主页添加了近期文章、分类列表和标签云
-* [+] 主页导航区做了视觉优化，阴影效果
-* [+] 增加了归档、标签和分类页面
-* [+] 增加了收藏页面
-* [+] 评论插件可以选择 disqus 或 多说，直接在`_config.yml`中修改
-* [+] 适配移动端
-* [+] 页面滚动时，文章目录固定在右侧
-* [+] 页面内容较少时，固定 footer 在页面底部
-* [^] 使用 GitHub 风格的代码高亮写法，即```的写法
-* [^] 使用 Masonry 重写了 Demo 页中的瀑布流布局，响应式交互体验更好
+* `[^]` 基于 jekyll 3.1.2 重构了所有代码，去除了 jQuery 和 BootStrap，是的加载速度更快
+* `[+]` 主页添加了摘要，在正文中使用4个换行符来分割，可在`_config.yml`中修改
+* `[+]` 主页添加了近期文章、分类列表和标签云
+* `[+]` 主页导航区做了视觉优化，阴影效果
+* `[+]` 增加了归档、标签和分类页面
+* `[+]` 增加了收藏页面
+* `[+]` 评论插件可以选择 disqus 或 多说，直接在`_config.yml`中修改
+* `[+]` 适配移动端
+* `[+]` 页面滚动时，文章目录固定在右侧
+* `[+]` 页面内容较少时，固定 footer 在页面底部
+* `[^]` 使用 GitHub 风格的代码高亮写法，即```的写法
+* `[^]` 使用 Masonry 重写了 Demo 页中的瀑布流布局，响应式交互体验更好
 
 ## License
 
