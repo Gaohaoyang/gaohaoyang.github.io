@@ -82,10 +82,7 @@
             }
         }
     }
-    .fixed {
-        position: fixed;
-        top: 20px;
-    }
+
     .anchor{
         display: none;
     }
@@ -94,6 +91,14 @@
         width: 25%;
         padding-left: 20px;
         top: 0;
+        .fixed {
+            position: fixed;
+            top: 20px;
+        }
+        .scroll-bottom{
+            position: absolute;
+            bottom:160px;
+        }
         .side {
             box-sizing: border-box;
             background-color: #f8f8fd;

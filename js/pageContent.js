@@ -13,18 +13,30 @@
         //fix 之后百分比宽度会失效，这里用js赋予宽度
         sidebarWrap.style.width = sidebarWrap.offsetWidth + "px"
         window.onscroll = function() {
-            var sidebarWrapTop = sidebarWrap.getBoundingClientRect().top
-            if (sidebarWrapTop < 21) {
-                sidebarWrap.classList.add('fixed')
-            }
+
+            // 页面顶部滚进去的距离
             var scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop)
-            if (scrollTop < 77) {
+
+
+            // 页面底部滚进去的距离
+            var htmlHeight = Math.max(document.body.clientHeight, document.documentElement.clientHeight)
+                // console.log(htmlHeight);
+            var scrollBottom = htmlHeight - window.innerHeight - scrollTop
+
+            if (scrollTop < 53) {
                 sidebarWrap.classList.remove('fixed')
+                sidebarWrap.classList.remove('scroll-bottom')
+            } else if (scrollBottom >= (160 - 38)) {
+                sidebarWrap.classList.remove('scroll-bottom')
+                sidebarWrap.classList.add('fixed')
+            } else if (isMaxHeight()) { //content 达到maxHeight
+                sidebarWrap.classList.remove('fixed')
+                sidebarWrap.classList.add('scroll-bottom')
             }
         }
-        setContentMaxHeightInPC()//设置目录最大高度(PC端)
+        setContentMaxHeightInPC() //设置目录最大高度(PC端)
     }
-    moveTOC()//将Content内容转移
+    moveTOC() //将Content内容转移
 }());
 
 /**
@@ -33,8 +45,22 @@
 function setContentMaxHeightInPC() {
     var windowHeight = window.innerHeight
     var contentUl = document.querySelector('.content-ul')
-    var contentMaxHeight = windowHeight-77-60
+    var contentMaxHeight = windowHeight - 77 - 60
     contentUl.style.maxHeight = contentMaxHeight + 'px'
+}
+
+/**
+ * 达到最大高度
+ * @return {Boolean} [description]
+ */
+function isMaxHeight() {
+    var windowHeight = window.innerHeight
+    var contentUl = document.querySelector('.content-ul')
+    var contentMaxHeight = windowHeight - 77 - 60
+    var contentHeight = contentUl.offsetHeight
+    return contentMaxHeight === contentHeight
+        // console.log(contentMaxHeight);
+        // console.log(contentHeight);
 }
 
 
@@ -64,8 +90,8 @@ function setContentMaxHeightInPC() {
             anchorBtn.classList.remove('anchor-hide')
         })
 
-        ancherPostion(anchorBtn, rightDiv)//目录锚的位置固定
-        setContentMaxHeight()//设置目录最大高度
+        ancherPostion(anchorBtn, rightDiv) //目录锚的位置固定
+        setContentMaxHeight() //设置目录最大高度
     }
 }());
 
@@ -94,17 +120,17 @@ function ancherPostion(anchorBtn, rightDiv) {
 function setContentMaxHeight() {
     var windowHeight = window.innerHeight
     var contentUl = document.querySelector('.content-ul')
-    var contentMaxHeight = windowHeight-180
+    var contentMaxHeight = windowHeight - 180
     contentUl.style.maxHeight = contentMaxHeight + 'px'
 }
 
 //-------------post Content----------------------
 //将Content内容转移
 function moveTOC() {
-    if (document.querySelector('#markdown-toc')!==null) {
+    if (document.querySelector('#markdown-toc') !== null) {
         var TOCString = document.querySelector('#markdown-toc').innerHTML
         var contentUl = document.querySelector('#content-side')
-        contentUl.insertAdjacentHTML('afterbegin', TOCString)//插入字符串
+        contentUl.insertAdjacentHTML('afterbegin', TOCString) //插入字符串
 
         //添加scroll样式，为了平滑滚动
         //add class "scroll", for smooth scroll
@@ -115,7 +141,7 @@ function moveTOC() {
         //     console.log(this);
         // })
         for (var i = 0; i < aTags.length; i++) {
-            if(!aTags[i].classList.contains('scroll')){
+            if (!aTags[i].classList.contains('scroll')) {
                 aTags[i].classList.add('scroll')
             }
         }
