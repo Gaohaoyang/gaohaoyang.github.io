@@ -318,6 +318,7 @@ Configuration file: E:/GitWorkSpace/blog/_config.yml
 * `[^]` 优化代码，将页面中的大段评论相关代码抽离出来，放入`comments.html`
 * `[+]` 添加百度统计和Google分析代码，在`_config.yml`中配置相关参数即可
 * `[+]` 更新文档，添加博客主题使用方法，便于上手
+* `[+]` 添加了`favicon.ico`
 * `[^]` 修复 bug，目录太长时，滚动到最底部时隐藏到footer下面。修复后长目录在滚动到底部时使用`position:absolute`
 
 
