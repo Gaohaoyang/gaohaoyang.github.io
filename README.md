@@ -319,6 +319,7 @@ Configuration file: E:/GitWorkSpace/blog/_config.yml
 * `[+]` 添加百度统计和Google分析代码，在`_config.yml`中配置相关参数即可
 * `[+]` 更新文档，添加博客主题使用方法，便于上手
 * `[^]` 修复 bug，目录太长时，滚动到最底部时隐藏到footer下面。修复后长目录在滚动到底部时使用`position:absolute`
+* `[^]` 修改目录区的滚动条样式（仅针对`webkit`内核浏览器）
 
 
 ### 2016.4.27 v2.0.0
