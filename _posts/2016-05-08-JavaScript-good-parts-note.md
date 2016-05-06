@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "JavaScript 语言精粹笔记"
-date:   2016-05-05 11:40:18 +0800
+// date:   2016-05-12 11:40:18 +0800
 categories: JavaScript
 tags: JavaScript
 ---
