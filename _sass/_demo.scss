@@ -1,6 +1,14 @@
 .page[demo] {
     .left {
         width: 100%;
+        a {
+            color: #4d6dad;
+            transition: 0.5s ease;
+            &:hover {
+                color: #223253;
+                background-color: #f4efeb;
+            }
+        }
         .grid {
             margin: 0 auto;
             /* clearfix */
@@ -19,29 +27,20 @@
                 -webkit-transition: 0.5s ease;
                 -moz-transition: 0.5s ease;
                 -o-transition: 0.5s ease;
-
                 -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
                 -moz-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
                 box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
                 &:hover {
-                    -webkit-box-shadow:0 2px 30px -1px rgba(0, 0, 0, 0.6), inset 0 0 87px 0 rgba(184, 184, 184, 0.13);
-                    -moz-box-shadow:0 2px 30px -1px rgba(0, 0, 0, 0.6), inset 0 0 87px 0 rgba(184, 184, 184, 0.13);
-                    box-shadow:0 2px 30px -1px rgba(0, 0, 0, 0.6), inset 0 0 87px 0 rgba(184, 184, 184, 0.13);
+                    -webkit-box-shadow: 0 2px 30px -1px rgba(0, 0, 0, 0.6), inset 0 0 87px 0 rgba(184, 184, 184, 0.13);
+                    -moz-box-shadow: 0 2px 30px -1px rgba(0, 0, 0, 0.6), inset 0 0 87px 0 rgba(184, 184, 184, 0.13);
+                    box-shadow: 0 2px 30px -1px rgba(0, 0, 0, 0.6), inset 0 0 87px 0 rgba(184, 184, 184, 0.13);
                 }
-                .a-img{
+                .a-img {
                     color: #fff;
                     // transition: 0.5s ease;
                     &:hover {
                         color: #fff;
                         background-color: #fff;
-                    }
-                }
-                a {
-                    color: #4d6dad;
-                    transition: 0.5s ease;
-                    &:hover {
-                        color: #223253;
-                        background-color: #f4efeb;
                     }
                 }
                 .demo-title {
