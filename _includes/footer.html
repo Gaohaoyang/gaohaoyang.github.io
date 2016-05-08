@@ -1,37 +1,22 @@
 <footer class="site-footer">
 
 
-  <div class="wrapper">
-      <p class="description">
-          {% if site.description_footer %}
-          {{site.description_footer}}
-          {% endif %}
-      </p>
+    <div class="wrapper">
+
+        <p class="description">
+            {% if site.description_footer %} {{site.description_footer}} {% endif %}
+        </p>
         <p class="contact">
-            Contact me at:
-            {% if site.github_username %}
-            <a href="https://github.com/{{site.github_username}}"><i class="fa fa-github" aria-hidden="true"></i></a>
-            {% endif %}
-
-            {% if site.email %}
-            <a href="mailto:{{site.email}}"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
-            {% endif %}
-
-            {% if site.weibo_username %}
-            <a href="http://weibo.com/{{site.weibo_username}}"><i class="fa fa-weibo" aria-hidden="true"></i></a>
-            {% endif %}
-
-            {% if site.zhihu_username %}
-            <a href="https://www.zhihu.com/people/{{site.zhihu_username}}"><i class="iconfont">&#xe829;</i></a>
-            {% endif %}
-
-            {% if site.twitter_username %}
-            <a href="https://twitter.com/{{site.twitter_username}}"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            {% endif %}
-
-            {% if site.facebook_username %}
-            <a href="https://www.facebook.com/{{site.facebook_username}}"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
-            {% endif %}
+            Contact me at: {% if site.github_username %}
+            <a href="https://github.com/{{site.github_username}}"><i class="fa fa-github" aria-hidden="true"></i></a> {% endif %} {% if site.email %}
+            <a href="mailto:{{site.email}}"><i class="fa fa-envelope-o" aria-hidden="true"></i></a> {% endif %} {% if site.weibo_username %}
+            <a href="http://weibo.com/{{site.weibo_username}}"><i class="fa fa-weibo" aria-hidden="true"></i></a> {% endif %} {% if site.zhihu_username %}
+            <a href="https://www.zhihu.com/people/{{site.zhihu_username}}"><i class="iconfont">&#xe829;</i></a> {% endif %} {% if site.twitter_username %}
+            <a href="https://twitter.com/{{site.twitter_username}}"><i class="fa fa-twitter" aria-hidden="true"></i></a> {% endif %} {% if site.facebook_username %}
+            <a href="https://www.facebook.com/{{site.facebook_username}}"><i class="fa fa-facebook-official" aria-hidden="true"></i></a> {% endif %}
+        </p>
+        <p>
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
         </p>
         <p class="power">
             <span>
@@ -41,7 +26,7 @@
                 Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
             </span>
         </p>
-
-  </div>
+    </div>
 </footer>
-<script src="{{ "/js/main.js " | prepend: site.baseurl }}" charset="utf-8"></script>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="{{ " /js/main.js " | prepend: site.baseurl }}" charset="utf-8"></script>
