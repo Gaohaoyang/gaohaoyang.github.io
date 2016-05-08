@@ -23,6 +23,9 @@
         >h1 {
             margin-bottom: -10px;
         }
+        a:not([title]){
+            word-break: break-all;
+        }
         ul {
             >h2 {
                 margin-left: -40px;
