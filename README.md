@@ -307,6 +307,7 @@ Configuration file: E:/GitWorkSpace/blog/_config.yml
 
 感谢捐助的小伙伴！！！
 
+* 2016.05.08 收到 1057 ¥10.57 捐赠
 * 2016.05.07 收到 吴林 ¥2 捐赠
 * 2016.04.29 收到 北归 ¥10 捐赠
 * 2016.04.28 收到 魏楚阳_Brian ¥2 捐赠
@@ -324,7 +325,7 @@ Configuration file: E:/GitWorkSpace/blog/_config.yml
 * `[^]` 修复 bug，目录太长时，滚动到最底部时隐藏到footer下面。修复后长目录在滚动到底部时使用`position:absolute`
 * `[^]` 修改目录区的滚动条样式（仅针对`webkit`内核浏览器）
 * `[^]` 修改 demo 页中 disqus 评论区 a 标签的颜色 bug，修改 blockqoute 中 p 标签的 margin
-
+* `[+]` 添加不蒜子计数功能，在footer上显示访问量
 
 ### 2016.4.27 v2.0.0
 
