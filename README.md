@@ -316,7 +316,7 @@ Configuration file: E:/GitWorkSpace/blog/_config.yml
 
 ## Update Log
 
-### 2016.4-5
+### 2016.5.11 v2.0.1
 
 * `[^]` 优化代码，将页面中的大段评论相关代码抽离出来，放入`comments.html`
 * `[+]` 添加百度统计和Google分析代码，在`_config.yml`中配置相关参数即可
@@ -326,6 +326,7 @@ Configuration file: E:/GitWorkSpace/blog/_config.yml
 * `[^]` 修改目录区的滚动条样式（仅针对`webkit`内核浏览器）
 * `[^]` 修改 demo 页中 disqus 评论区 a 标签的颜色 bug，修改 blockqoute 中 p 标签的 margin
 * `[+]` 添加不蒜子计数功能，在footer上显示访问量
+* `[+]` 添加回到顶部功能
 
 ### 2016.4.27 v2.0.0
 
