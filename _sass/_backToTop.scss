@@ -22,6 +22,9 @@
 .back-to-top-show{
     visibility: visible;
     opacity: 0.7;
+    &:hover{
+        opacity: 1
+    }
 }
 @media screen and (max-width:1200px) and (min-width: 770px) {
     .back-to-top {
