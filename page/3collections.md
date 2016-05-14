@@ -55,9 +55,9 @@ icon: bookmark
 * [Webpack傻瓜指南（二）开发和部署技巧 -前端外刊评论 知乎专栏](http://zhuanlan.zhihu.com/FrontendMagazine/20397902)
 
 * [Webpack傻瓜指南（三）和React配合开发 -前端外刊评论 知乎专栏](http://zhuanlan.zhihu.com/FrontendMagazine/20522487)
-    
+
     上述傻瓜指南的原始出处 [https://github.com/vikingmute/webpack-for-fools](https://github.com/vikingmute/webpack-for-fools) Webpack傻瓜式指南
-    
+
 * [Webpack，101入门体验 -Yika](http://www.html-js.com/article/3009)
 
 * [Webpack 入门指迷 -题叶](https://segmentfault.com/a/1190000002551952)
@@ -153,6 +153,10 @@ Syntax Theme: Atom Dark or One Dark
     新建 tab 时，显示 dribbble 上的精选作品。
 
 ## Other blogs
+
+* [Xcat Liu http://blog.xcatliu.com/](http://blog.xcatliu.com/)
+
+    Microsoft Software Engineer II, Meituan Senior Front-End Engineer
 
 * [极限前端 http://ouvens.github.io/](http://ouvens.github.io/)
 
