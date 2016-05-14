@@ -54,7 +54,7 @@ icon: bookmark
 
 * [Webpack傻瓜指南（三）和React配合开发 -前端外刊评论 知乎专栏](http://zhuanlan.zhihu.com/FrontendMagazine/20522487)
     
-    上述傻瓜指南的原始出处 https://github.com/vikingmute/webpack-for-fools Webpack傻瓜式指南
+    上述傻瓜指南的原始出处 [https://github.com/vikingmute/webpack-for-fools](https://github.com/vikingmute/webpack-for-fools) Webpack傻瓜式指南
     
 * [Webpack，101入门体验 -Yika](http://www.html-js.com/article/3009)
 
