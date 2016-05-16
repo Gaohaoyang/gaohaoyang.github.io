@@ -154,6 +154,10 @@ Syntax Theme: Atom Dark or One Dark
 
 ## Other blogs
 
+* [小胡子哥 http://www.barretlee.com/](http://www.barretlee.com/)
+
+    李靖，阿里巴巴。
+
 * [Xcat Liu http://blog.xcatliu.com/](http://blog.xcatliu.com/)
 
     Microsoft Software Engineer II, Meituan Senior Front-End Engineer
