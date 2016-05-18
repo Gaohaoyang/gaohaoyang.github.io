@@ -125,7 +125,6 @@ console.log(stooge.firstName || 'Joe'); // Haoyang
 console.log(stooge.age || 25); // 25
 ```
 
-
 ### 更新
 
 ### 引用
