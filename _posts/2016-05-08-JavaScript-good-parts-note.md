@@ -94,9 +94,48 @@ for (myvar in obj) {
 `||` | 逻辑或
 `?:` | 三目
 
+## 对象
+
+### 对象字面量
+
+一个对象字面量就是包围在一对花括号中的零或多个“名/值”对。
+
+```js
+var empty_object = {}
+
+var stooge = {
+    firstName: 'Haoyang',
+    lastName: 'Gao'
+}
+```
+
+### 检索
+
+```js
+console.log(stooge.firstName); // Haoyang
+console.log(stooge['firstName']); // Haoyang
+```
+
+不存在的属性返回`undefined`。
+
+使用`||`来填充默认值。
+
+```js
+console.log(stooge.firstName || 'Joe'); // Haoyang
+console.log(stooge.age || 25); // 25
+```
 
 
+### 更新
 
-### 字面量
+### 引用
 
-### 函数
+### 原型
+
+### 反射
+
+### 枚举
+
+### 删除
+
+### 减少全局变量污染
