@@ -8,7 +8,7 @@ icon: bookmark
 * content
 {:toc}
 
-## 前端工具
+## 工具
 
 * [box-shadow generator](http://www.cssmatic.com/box-shadow)
 
@@ -27,7 +27,9 @@ icon: bookmark
     CSS3 生成器
 
 
-## ES2015
+## 编程语言
+
+### ES2015
 
 * [http://www.ecma-international.org/ecma-262/6.0/](http://www.ecma-international.org/ecma-262/6.0/)
 
@@ -39,22 +41,32 @@ icon: bookmark
 
 * [《ECMAScript 6入门》 -阮一峰](https://github.com/ruanyf/es6tutorial)
 
+* [EcmaScript6 全规范（含node） -ouvens](https://github.com/ouvens/es6-code-style-guide)
 
-## 类库与插件
+### NodeJS
 
-* [Masonry](http://masonry.desandro.com/)
+* [七天学会NodeJS -Nanqiao Deng](https://nqdeng.github.io/7-days-nodejs)
 
-    瀑布流布局库。
+## 框架&脚手架
 
-* [jssor](http://www.jssor.com/)
+### webpack
 
-    图片轮播图其 GitHub 地址 [jssor/slider](https://github.com/jssor/slider)
+* [Webpack 中文指南 -赵达](https://www.gitbook.com/book/zhaoda/webpack/details)
 
-* [cssslider](http://cssslider.com/)
+* [Webpack傻瓜式指南（一） -前端外刊评论 知乎专栏](http://zhuanlan.zhihu.com/FrontendMagazine/20367175)
 
-    纯 CSS 的图片轮播图。
+* [Webpack傻瓜指南（二）开发和部署技巧 -前端外刊评论 知乎专栏](http://zhuanlan.zhihu.com/FrontendMagazine/20397902)
 
-## 框架
+* [Webpack傻瓜指南（三）和React配合开发 -前端外刊评论 知乎专栏](http://zhuanlan.zhihu.com/FrontendMagazine/20522487)
+
+    上述傻瓜指南的原始出处 [https://github.com/vikingmute/webpack-for-fools](https://github.com/vikingmute/webpack-for-fools) Webpack傻瓜式指南
+
+* [Webpack，101入门体验 -Yika](http://www.html-js.com/article/3009)
+
+* [Webpack 入门指迷 -题叶](https://segmentfault.com/a/1190000002551952)
+
+* [https://webpack.github.io/ Webpack 官网](https://webpack.github.io/)
+
 
 ### Vue
 
@@ -70,6 +82,20 @@ icon: bookmark
 
 * [深入理解 React -Thinking in React 中文版](http://reactjs.cn/react/docs/thinking-in-react.html)
 * [Thinking in React](http://facebook.github.io/react/docs/thinking-in-react.html)
+
+## 类库与插件
+
+* [Masonry](http://masonry.desandro.com/)
+
+    瀑布流布局库。
+
+* [jssor](http://www.jssor.com/)
+
+    图片轮播图其 GitHub 地址 [jssor/slider](https://github.com/jssor/slider)
+
+* [cssslider](http://cssslider.com/)
+
+    纯 CSS 的图片轮播图。
 
 ## 模块化
 
@@ -130,6 +156,18 @@ Syntax Theme: Atom Dark or One Dark
     新建 tab 时，显示 dribbble 上的精选作品。
 
 ## Other blogs
+
+* [小胡子哥 http://www.barretlee.com/](http://www.barretlee.com/)
+
+    李靖，阿里巴巴。
+
+* [Xcat Liu http://blog.xcatliu.com/](http://blog.xcatliu.com/)
+
+    Microsoft Software Engineer II, Meituan Senior Front-End Engineer
+
+* [极限前端 http://ouvens.github.io/](http://ouvens.github.io/)
+
+    Ouvenzhang, 前端工程师，对前端领域的技术知识具有较高的职业能力和探究精神。对响应式页面设计、工程构建组件化、mv*设计实现、前端优化、ES6开发体系等有深入的研究与项目实践。来自腾讯科技。
 
 * [凳子_Joinery 邓智容  http://www.dengzhr.com/](http://www.dengzhr.com/)
 
