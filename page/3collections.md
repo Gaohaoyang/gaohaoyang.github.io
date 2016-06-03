@@ -157,7 +157,7 @@ Syntax Theme: Atom Dark or One Dark
 
 ## Other blogs
 
-* [码志](https://mazhuang.org/)
+* [码志 https://mazhuang.org/](https://mazhuang.org/)
 
     我是马壮，码而生，码而立。就职sogou。
 
