@@ -117,7 +117,7 @@ for (myvar in obj) {
 
 对象是属性的容器，每一个属性都拥有名字和值。属性的名字可以是包含空字符串在内的任意字符串。属性的值可以是除`undefined`值之外的任何值。
 
-JavaScript 包含一种原型链的特性，允许对象继承另一个对象的属性。正确地使用它能减少对象初始化时小韩的时间和内存。
+JavaScript 包含一种原型链的特性，允许对象继承另一个对象的属性。正确地使用它能减少对象初始化时消耗的时间和内存。
 
 ### 对象字面量
 
@@ -150,9 +150,45 @@ console.log(stooge.age || 25); // 25
 
 ### 更新
 
+直接使用赋值语句更新，若不存在这个属性，则作为扩充操作。
+
+```js
+stooge.firstName = 'aaa'
+stooge.nickName = 'peip'
+console.log(stooge) //Object {firstName: "aaa", lastName: "Gao", nickName: "peip"}
+```
+
 ### 引用
 
+对象通过引用来传递他们永远不会被复制。
+
+```js
+var x = stooge
+x.hair = 'black'
+stooge.hair //"black"
+```
+
 ### 原型
+
+每一个对象都连接到一个原型对象，并且它可以从中继承属性。所有通过字面量创建的对象都连接到`Object.prototype`，它是JavaScript中的标配对象。
+
+可以使用`Object.create()`方法创建一个使用原对象作为其原型的新对象。
+
+```js
+var anotherStooge = Object.create(stooge)
+anotherStooge.firstName //"aaa"
+anotherStooge.firstName = 'bbb'
+anotherStooge.firstName //"bbb"
+anotherStooge.hair //"black"
+```
+
+新对象先查找自己的属性，若不存在则会向原型方向查找。
+
+![](http://ww1.sinaimg.cn/large/7011d6cfjw1f4ieu7focqj207h05caaf.jpg)
+
+当我们对某个对象作出改变时，不会触及该对象的原型。
+
+原型关系是一种动态关系。如果我们添加一个新的属性到原型中，该属性会立即对所有基于该原型创建的对象可见。
 
 ### 反射
 
