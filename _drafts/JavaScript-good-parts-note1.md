@@ -192,8 +192,86 @@ anotherStooge.hair //"black"
 
 ### 反射
 
+在计算机科学中，反射是指计算机程序在运行时（Run time）可以访问、检测和修改它本身状态或行为的一种能力。
+
+检查对象并确定对象有什么属性是很容易的事情，只要试着去检索该属性并验证取得的值。
+
+`typeof`用来确定对象属性的类型。
+
+`hasOwnProperty`，若对象拥有独有的属性，它将返回`true`。不会检查原型链。
+
 ### 枚举
+
+使用`for in`可以遍历一个对象中的所有属性名，包括原型链上的属性名。可以使用`hasOwnProperty`过滤原型链上的属性，使用`typeof`来排除函数。
+
+```js
+for (var name in anotherStooge) {
+    if (anotherStooge.hasOwnProperty(name) && typeof anotherStooge[name] !== 'function') {
+        console.log(name + '--->' + anotherStooge[name])
+    }
+}
+// firstName--->bbb
+```
+
+属性名是无序的，若想保持顺序应使用数组和`for`循环。
 
 ### 删除
 
+`delete`可以用来删除对象的属性。若对象包含该属性，则会被移除。它不会触及原型链中的任何对象。
+
+```js
+anotherStooge.firstName //"bbb"
+delete anotherStooge.firstName
+anotherStooge.firstName //"aaa"
+```
+
 ### 减少全局变量污染
+
+JavaScript 可以随意的定义全局变量来容纳应用的所有资源。但这会削弱程序的灵活性，应避免使用全局变量。
+
+最小化使用全局变量的方法之一是为应用只创建一个唯一的全局变量。
+
+```js
+var MYAPP = {}
+
+MYAPP.stooge = {
+    //...
+}
+
+MYAPP.flight = {
+    //...
+}
+```
+下一章将使用闭包来进行信息隐藏，是另一种有效减少全局污染的方法。
+
+## 函数
+
+### 函数对象
+
+### 函数字面量
+
+### 调用
+
+### 参数
+
+### 返回
+
+### 异常
+
+### 扩充类型的功能
+
+### 递归
+
+### 作用域
+
+### 闭包
+
+### 回调
+
+### 模块
+
+### 级联
+
+### 柯里化
+
+### 记忆
