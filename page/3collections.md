@@ -130,6 +130,7 @@ icon: bookmark
 * active-power-mode
 * atom-terminal-panel
 * linter-scss-linter
+* atom-ternjs
 
 常用的主题：
 
