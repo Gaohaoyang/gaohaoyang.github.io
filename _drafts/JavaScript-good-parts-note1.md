@@ -2,7 +2,7 @@
 layout: post
 title:  "JavaScript 语言精粹笔记1-语法、对象、函数"
 categories: JavaScript
-tags: JavaScript 对象 函数
+tags: JavaScript 对象 函数 this
 ---
 
 * content
@@ -282,15 +282,93 @@ var add = function(a, b) {
 
 实参和形参个数不匹配时，不会有运行时错误。实参过多时，超出的实参被忽略。形参过多时，缺失的值被替换为`undefined`。
 
+下面的内容也可以参考我以前的博文 [JavaScript 中的 this](http://gaohaoyang.github.io/2015/06/12/JavaScript-this/)
+
 #### 方法调用模式
 
 当一个函数被保存为对象的一个属性时，我们称它为一个方法。当一个方法被调用时，`this`被绑定到该对象。
 
+```js
+var myObject = {
+    value: 0,
+    increment: function(inc) {
+        this.value += typeof inc === 'number' ? inc : 1
+    }
+}
+
+myObject.increment()
+console.log(myObject.value) //1
+
+myObject.increment(3)
+console.log(myObject.value) //4
+```
+
 #### 函数调用模式
+
+当一个函数并非一个对象的属性时，那么它就是被当做一个函数来调用的。
+
+此时`this`被绑定到全局对象。即时是内部函数也会将`this`绑定到全局对象。
+
+可以在函数内创建一个属性并赋值为`this`来解决这个问题。如下：
+
+```js
+var add = function(a, b) {
+    return a + b
+}
+
+myObject.double = function() {
+    var that = this
+    var helper = function() {
+        that.value = add(that.value, that.value)
+    }
+    helper()
+}
+
+myObject.double()
+console.log(myObject.value) //8
+```
 
 #### 构造器调用模式
 
+JavaScript是一门基于原型继承的语言。对象可以直接从其他对象继承属性。该语言是无类型的。
+
+如果在一个函数前面带上`new`来调用，那么背地里将会创建一个连接到该函数的`prototype`成员的新对象，同时`this`会被绑定到那个新对象上。
+
+```js
+//创建构造器函数
+var Quo = function(string) {
+    this.status = string
+}
+
+//给Que的所有实例提供一个公共方法
+Quo.prototype.getStatus = function() {
+    return this.status
+}
+
+//实例化
+var myQuo = new Quo('confused')
+
+console.log(myQuo.getStatus()) //confused
+```
+
+书中不推荐这种形式的构造器函数，下一章有更好的解决方案。
+
 #### Apply 调用模式
+
+`apply`方法让我们构建一个参数数组传递给调用函数。他也允许我们选择`this`的值。`apply`方法接受两个参数，第一个是要绑定给`this`的值，第二个是参数数组。
+
+```js
+var arr = [3, 4]
+var sum = add.apply(null, arr)
+console.log(sum) //7
+
+var statusObject = {
+    status: 'hello'
+}
+
+var status = Quo.prototype.getStatus.apply(statusObject)
+console.log(status) //hello
+```
 
 ### 参数
 
