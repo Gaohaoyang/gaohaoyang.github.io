@@ -13,6 +13,7 @@ tags:  对象 函数 this 闭包 面向对象 作用域
 
 
 
+![](https://img3.doubanio.com/lpic/s3651235.jpg)
 
 原书中第一章为精华，做了一些周边介绍，略去。
 
