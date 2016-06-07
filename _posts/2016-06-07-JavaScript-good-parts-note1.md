@@ -2,7 +2,7 @@
 layout: post
 title:  "JavaScript 语言精粹笔记1-语法、对象、函数"
 categories: JavaScript
-tags: JavaScript 对象 函数 this
+tags:  对象 函数 this 闭包 面向对象 作用域
 ---
 
 * content
@@ -372,24 +372,197 @@ console.log(status) //hello
 
 ### 参数
 
+当函数被调用时，会得到一个`arguments`数组。通过此参数可以访问所有它被调用时传递给它的参数列表，包括那些没有被分配给函数声明时定义的形参的多余参数。这使得编写一个无须指定参数个数的函数成为可能。
+
+```js
+var sum = function() {
+    var i, sum = 0
+    for (i = 0; i < arguments.length; i++) {
+        sum += arguments[i]
+    }
+    return sum
+}
+console.log(sum(1, 2, 3, 4, 5, 6, 7, 8, 9)) //45
+```
+
+因语言的设计错误，`arguments`并不是一个真正的数组。是一个“类似数组”的对象。有`length`属性，但没有任何数组的方法。
+
 ### 返回
+
+函数执行时遇到关闭函数体的`}`时结束。然后把控制权交还给调用该函数的程序。
+
+`return`可以使函数提前返回，不在执行余下的语句。
+
+函数总是会返回一个值，若没有指定，则返回`undefined`。
+
+若函数调用时在前面加上了`new`前缀，且返回值不是一个对象的时候，则返回`this`（该新对象）。
 
 ### 异常
 
+异常是干扰程序的正常流畅的不寻常的事故。
+
+```js
+var add2 = function(a, b) {
+    if (typeof a !== 'number' || typeof b !== 'number') {
+        throw {
+            name: 'TypeError',
+            message: 'add needs numbers'
+        }
+    }
+    return a + b
+}
+console.log(add2(2, 3)) //5
+console.log(add2('a', 6))
+```
+
+![](http://ww1.sinaimg.cn/large/7011d6cfjw1f4mprafcvhj20ml00xjrj.jpg)
+
+`throw`语句中断函数的执行。抛出一个`exception`对象，该对象包含一个用来识别异常类型的`name`属性和一个描述性的`message`属性。也可以自定义其他属性。
+
+```js
+var try_it = function() {
+    try {
+        add2('a')
+    } catch (e) {
+        console.log(e.name + ': ' + e.message)
+    }
+}
+try_it() //TypeError: add needs numbers
+```
+
+如果在`try`代码块内抛出一个异常，控制权就会跳转到它的`catch`语句中。
+
 ### 扩充类型的功能
+
+JavaScript 允许给语言的基本类型扩充功能。通过`Object.prototype`添加方法，可以让该方法对所有对象都适用。
+
+```js
+// 先添加方法使得该方法对所有函数可用
+Function.prototype.method = function(name, func) {
+    this.prototype[name] = func
+    return this
+}
+
+//添加一个取整方法
+Number.method('integer', function() {
+    return Math[this < 0 ? 'ceil' : 'floor'](this)
+})
+console.log((-10 / 3).integer()) //-3
+
+//添加 trim()
+String.method('trim', function() {
+    return this.replace(/^\s+|\s+$/g, '')
+})
+console.log('  hello alibaba  '.trim()) //hello alibaba
+```
+
+JavaScript 原型继承是动态的，因此新的方法立刻被赋予到所有的对象实例上，即使对象实例是在方法被增加之前就创建好了。
 
 ### 递归
 
+递归函数就是会直接或者间接地调用自身的一种函数。
+
+```js
+var walkTheDom = function walk(node, func) {
+    func(node)
+    node = node.firstChild
+    while (node) {
+        walk(node, func)
+        node = node.nextSibling
+    }
+}
+
+var getElementsByAttribute = function(att, value) {
+    var results = []
+    walkTheDom(document.body, function(node) {
+        var actual = node.nodeType === 1 && node.getAttribute(att)
+        if (typeof actual === 'string' && (actual === value || typeof value !== 'string')) {
+            results.push(node)
+        }
+    })
+    return results
+}
+
+//在知乎主页上操作
+console.log(getElementsByAttribute('data-za-module', 'AnswerItem'))
+//得到下列数据
+//[div.feed-content, div.feed-content, div.feed-content, div.feed-content, div.feed-content, div.feed-content, div.feed-content]
+```
+
 ### 作用域
+
+作用域控制着变量与参数的可见性及生命周期。它减少了名称冲突，并提供了自动内存管理。
+
+无块级作用域。
+
+有函数作用域。
+
+建议在函数体的顶部声明函数中可能用到的所有变量。
 
 ### 闭包
 
+作用域的好处是内部函数可以访问定义他们的外部函数的参数和变量（除了`this`和`arguments`）。
+
+```js
+var quo = function(status) {
+    return {
+        get_status: function() {
+            return status
+        }
+    }
+}
+
+var myQuo = quo('amazed')
+console.log(myQuo.get_status()) //amazed
+```
+狭义的说，返回的那个对象即闭包，它里面的方法可以访问它被创建时所处的上下文环境。
+
+避免在循环中创建函数，容易引起混淆。可以现在循环之外创建一个辅助函数，让辅助函数在返回一个绑定了当前`i`值的函数，这样就不会导致混淆了。
+
 ### 回调
+
+将一个函数作为参数，一旦接收到响应，再调用这个函数。
 
 ### 模块
 
+可以用函数和闭包构造模块。
+
+模块模式的一般形式是：一个定义了私有变量和函数的函数；利用闭包创建可以访问私有变量和函数的特权函数；最后返回这个特权函数，或者把他们保存到一个可访问到的地方。
+
+```js
+var numberCal = (function() {
+    var half = function(n) {
+        return n / 2
+    }
+    var double = function(n) {
+        return n * 2
+    }
+    var tribble = function(n) {
+        return n * 3
+    }
+    return {
+        half: half,
+        double: double,
+        tribble: tribble
+    }
+}())
+
+console.log(numberCal.half(5)) //2.5
+console.log(numberCal.half(6)) //3
+console.log(numberCal.double(7)) //14
+console.log(numberCal.tribble(7)) //21
+```
+
 ### 级联
+
+如果让方法返回`this`而不是默认的`undefined`，就可以启用级联，即连续调用。
 
 ### 柯里化
 
+柯里化允许我们把函数与传递给它的参数相结合，产生出一个新的函数。
+
+详情见以前的博文 [JavaScript 函数 -bind 与 currying](http://gaohaoyang.github.io/2015/06/11/JavaScript-function/#bind--currying)。
+
 ### 记忆
+
+函数可以将先前操作的结果记录在某个对象里，从而避免无谓的重复运算。这种优化被称为记忆（memoization）。
