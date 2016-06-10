@@ -132,18 +132,30 @@ function moveTOC() {
         var contentUl = document.querySelector('#content-side')
         contentUl.insertAdjacentHTML('afterbegin', TOCString) //插入字符串
 
-        //添加scroll样式，为了平滑滚动
-        //add class "scroll", for smooth scroll
-        var aTags = document.querySelectorAll('#content-side a')
+        if (!isAndroidWechatBrowser()) {
 
-        //add class for everyone
-        // aTags.forEach(function () {
-        //     console.log(this);
-        // })
-        for (var i = 0; i < aTags.length; i++) {
-            if (!aTags[i].classList.contains('scroll')) {
-                aTags[i].classList.add('scroll')
+            //添加scroll样式，为了平滑滚动
+            //add class "scroll", for smooth scroll
+            var aTags = document.querySelectorAll('#content-side a')
+
+            //add class for everyone
+            // aTags.forEach(function () {
+            //     console.log(this);
+            // })
+            for (var i = 0; i < aTags.length; i++) {
+                if (!aTags[i].classList.contains('scroll')) {
+                    aTags[i].classList.add('scroll')
+                }
             }
         }
     }
+}
+
+/**
+ * 判断安卓版微信浏览器
+ * @return {Boolean} [description]
+ */
+function isAndroidWechatBrowser() {
+    var ua = navigator.userAgent.toLowerCase()
+    return /micromessenger/.test(ua) && /android/.test(ua2)
 }
