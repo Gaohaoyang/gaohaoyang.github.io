@@ -132,7 +132,7 @@ function moveTOC() {
         var contentUl = document.querySelector('#content-side')
         contentUl.insertAdjacentHTML('afterbegin', TOCString) //插入字符串
 
-        if (!isAndroidWechatBrowser()) {
+        // if (!isAndroidWechatBrowser()) {
 
             //添加scroll样式，为了平滑滚动
             //add class "scroll", for smooth scroll
@@ -147,7 +147,7 @@ function moveTOC() {
                     aTags[i].classList.add('scroll')
                 }
             }
-        }
+        // }
     }
 }
 
