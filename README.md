@@ -316,6 +316,10 @@ Configuration file: E:/GitWorkSpace/blog/_config.yml
 
 ## Update Log
 
+### 2016.6.13
+
+* `[^]` 修复标签云算法中被除数为零的 bug。[#26](https://github.com/Gaohaoyang/gaohaoyang.github.io/issues/26), [#28](https://github.com/Gaohaoyang/gaohaoyang.github.io/issues/28), [#30](https://github.com/Gaohaoyang/gaohaoyang.github.io/issues/30)
+
 ### 2016.5.11 v2.0.1
 
 * `[^]` 优化代码，将页面中的大段评论相关代码抽离出来，放入`comments.html`
