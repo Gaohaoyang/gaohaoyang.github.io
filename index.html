@@ -116,7 +116,12 @@ layout: default
                         {% assign min = tag[1].size %}
                       {% endif %}
                     {% endfor %}
-                    {% assign diff = max | minus: min %}
+
+                    {% if max == min %}
+                        {% assign diff = 1 %}
+                    {% else %}    
+                        {% assign diff = max | minus: min %}
+                    {% endif %}
 
                     {% for tag in site.tags %}
                       {% assign temp = tag[1].size | minus: min | times: 36 | divided_by: diff %}
