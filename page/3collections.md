@@ -28,6 +28,8 @@ icon: bookmark
 
 * [图床 https://sm.ms/](https://sm.ms/)
 
+    有 API 可用。
+
 * [新浪微博图床 Chrome扩展](https://github.com/Suxiaogang/WeiboPicBed)
 
 
