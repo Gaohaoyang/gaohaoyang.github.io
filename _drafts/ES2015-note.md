@@ -2,7 +2,7 @@
 layout: post
 title:  "ES2015学习笔记1-babel、let和const、变量解构赋值、字符串、正则、数值"
 categories: JavaScript
-tags:  ES2015
+tags:  ES2015 babel
 ---
 
 * content
@@ -55,6 +55,8 @@ babel src --out-dir lib
 babel src -d lib
 ```
 
+但这很麻烦，并且并不是一个很好的解决方案，请看下一节项目内运行 babel-cli。
+
 ### 在项目内运行 babel-cli
 
 初始化项目
@@ -96,14 +98,108 @@ npm install --save-dev babel-cli
 }
 ```
 
+此时在终端里运行
+
+```sh
+npm run build
+```
+
+还不能成功编译，因为没有配置`.babelrc`文件。
+
 ### 配置`.babelrc`
 
-## let和const
+通过配置`.babelrc`来告诉 babel 来做什么。
+
+在项目的根路径下创建`.babelrc`文件。然后输入以下内容作为开始：
+
+```json
+{
+    "presets": [],
+    "plugins": []
+}
+```
+
+为了让 babel 将 ES2015 转化为 ES5，我们要安装如下：
+
+```sh
+npm install --save-dev babel-preset-es2015
+```
+
+安装完成后在`.babelrc`中添加参数：
+
+```diff
+{
+    "presets": [
++       "es2015"
+    ],
+    "plugins": []
+}
+```
+
+现在在项目`src/main.js`中写一些 ES2015 的代码试试吧。
+
+```js
+let a = 1
+```
+
+在终端中输入命令
+
+```sh
+npm run build
+```
+
+执行后终端中显示：
+
+```
+> learn-es6@1.0.0 build c:\gitWorkSpace\learn-es6
+> babel src -d lib
+```
+
+然后可以看到目录中出现了`lib/main.js`
+
+```js
+"use strict";
+
+var a = 1;
+```
+
+即编译成功。
+
+### 配置`.jshintrc`
+
+若编辑器中安装了 jshint 语法检查的插件。默认对于 ES2015 的代码可能会报错或者警告，看着可能会不爽。我们可以在配置文件中将它设置为允许 ES2015 的模式。
+
+在项目根目录下创建文件`.jshintrc`。内容如下：
+
+```json
+{
+    "asi": true,
+    "esversion": 2015
+}
+```
+
+上述文件我分别设置了，使用无分号模式，es 版本使用 2015。
+
+关于`.jshintrc`的更详细配置可以参见官方示例：[https://github.com/jshint/jshint/blob/master/examples/.jshintrc](https://github.com/jshint/jshint/blob/master/examples/.jshintrc)
+
+好，babel 就说到这里，下面开始进入真正的 ES2015 的学习！
+
+## `let` 和 `const`
+
+### `let`
+
+#### 基本用法
+
+用于声明变量，用法类似于`var`，但声明的变量值再`let`所在的代码块内有效。
+
+
+
+### `const`
 
 ## 变量解构赋值
 
-##字符串
+## 字符串
 
-##正则
+## 正则
 
-##数值
+## 数值
