@@ -26,6 +26,10 @@ icon: bookmark
 
     CSS3 生成器
 
+* [图床 https://sm.ms/](https://sm.ms/)
+
+* [新浪微博图床 Chrome扩展](https://github.com/Suxiaogang/WeiboPicBed)
+
 
 ## 编程语言
 
