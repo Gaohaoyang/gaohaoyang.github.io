@@ -183,13 +183,96 @@ console.log(a); //1
 console.log(b); //undefined
 ```
 
-另一种情况是不完全解构，即等号左边的模式，只匹配一部分的等号右边的数组。这种情况下，解构依然可以成功。
+另一种情况是不完全解构，即等号左边的模式，只匹配一部分的等号右边的数组。这种情况下，解构依然可以成功。如下：
 
+```js
+let [a, b] = [1]
+console.log(a); //1
+console.log(b); //undefined
 
+let [c, [d]] = [4, [5, 6], 7]
+console.log(c); //4
+console.log(d); //5
+```
+
+如果等号的右边不是数组（或者严格地说，不是可遍历的结构，参见《Iterator》一章），那么将会报错。
+
+解构赋值不仅适用于var命令，也适用于let和const命令。
 
 #### 默认值
 
+解构赋值允许指定默认值。
+
+```js
+let [foo = true] = [];
+console.log(foo); //true
+
+let [x, y = 'b'] = ['a']; // x='a', y='b'
+let [x2, y2 = 'b'] = ['a', undefined]; // x2='a', y2='b'
+```
+
+注意，ES6 内部使用严格相等运算符（`===`），判断一个位置是否有值。所以，如果一个数组成员不严格等于`undefined`，默认值是不会生效的。
+
+如果默认值是一个表达式，那么这个表达式是惰性求值的，即只有在用到的时候，才会求值。
+
+```js
+function f() {
+    console.log('aaa');
+}
+
+let [x = f()] = [1];
+// x = 1
+```
+
+上述代码的`f()`根本不会执行。因为`x`能取到值。
+
+默认值可以引用解构赋值的其他变量，但该变量必须已经声明。
+
 ### 对象的解构赋值
+
+解构不仅可以用于数组，还可以用于对象。
+
+```js
+let { foo, bar } = { foo: "aaa", bar: "bbb" }
+foo // "aaa"
+bar // "bbb"
+```
+
+对象的解构与数组有一个重要的不同。数组的元素是按次序排列的，变量的取值由它的位置决定；而对象的属性没有次序，变量必须与属性同名，才能取到正确的值。
+
+```js
+let { bar, foo } = { foo: "aaa", bar: "bbb" };
+foo // "aaa"
+bar // "bbb"
+
+let { baz } = { foo: "aaa", bar: "bbb" };
+baz // undefined
+```
+
+如果变量名与属性名不一致，必须写成下面这样。
+
+```js
+var { foo: baz } = { foo: "aaa", bar: "bbb" };
+baz // "aaa"
+
+let obj = { first: 'hello', last: 'world' };
+let { first: f, last: l } = obj;
+f // 'hello'
+l // 'world'
+```
+
+也就是说，对象的解构赋值的内部机制，是先找到同名属性，然后再赋给对应的变量。真正被赋值的是后者，而不是前者。
+
+```js
+var { foo: baz } = { foo: "aaa", bar: "bbb" };
+baz // "aaa"
+foo // error: foo is not defined
+```
+
+对于let和const来说，变量不能重新声明，所以一旦赋值的变量以前声明过，就会报错。
+
+和数组一样，解构也可以用于嵌套结构的对象。
+
 
 ### 字符串的解构赋值
 
