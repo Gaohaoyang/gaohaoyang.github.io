@@ -34,6 +34,7 @@ layout: default
         {{content}}
         </article>
         <hr>
+
         {% assign hasSimilar = '' %}
         {% for post in site.related_posts %}
             {% assign postHasSimilar = false %}
@@ -61,6 +62,7 @@ layout: default
             </ul>
         {% endif %}
 
+        {% include previousAndNext.html %}
 
         <h2 id="comments">Comments</h2>
         {% include comments.html %}

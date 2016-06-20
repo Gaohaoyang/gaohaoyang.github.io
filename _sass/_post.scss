@@ -36,6 +36,27 @@
                 margin: 0;
             }
         }
+        // .post-recent {
+        //     width: 100%;
+        //     overflow: hidden;
+        //     padding: 4px;
+        //     .pre{
+        //         width: 49%;
+        //         float: left;
+        //     }
+        //     .nex{
+        //         width: 49%;
+        //         float: right;
+        //         text-align: right;
+        //     }
+        //     p {
+        //         min-height: 70px;
+        //         box-sizing: border-box;
+        //         padding: 10px;
+        //         background-color: #fff;
+        //         box-shadow: 0 0 4px 0px rgba(0,0,0,0.15);
+        //     }
+        // }
     }
 }
 @media screen and (max-width: 770px) {
@@ -54,7 +75,7 @@
             h5 {
                 font-size: 16px;
             }
-            h6{
+            h6 {
                 font-size: 15px;
             }
         }
