@@ -319,6 +319,7 @@ Configuration file: E:/GitWorkSpace/blog/_config.yml
 ### 2016.6.20
 
 * `[+]` 在文章页中添加上一篇和下一篇文章链接。
+* `[^]` 修改 font-family 顺序，避免微软雅黑将单引号解析为全角。
 * `[^]` 修复标签云算法中被除数为零的 bug。[#26](https://github.com/Gaohaoyang/gaohaoyang.github.io/issues/26), [#28](https://github.com/Gaohaoyang/gaohaoyang.github.io/issues/28), [#30](https://github.com/Gaohaoyang/gaohaoyang.github.io/issues/30)
 
 ### 2016.5.11 v2.0.1
