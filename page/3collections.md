@@ -35,6 +35,14 @@ icon: bookmark
 
 ## 编程语言
 
+### JavaScript
+
+* [You Don't Know JS (book series)](https://github.com/getify/You-Dont-Know-JS)
+
+* [JavaScript 秘密花园](http://bonsaiden.github.io/JavaScript-Garden/zh/)
+
+* [JavaScript 设计模式 系列 AlloyTeam](http://www.alloyteam.com/2012/10/common-javascript-design-patterns/)
+
 ### ES2015
 
 * [http://www.ecma-international.org/ecma-262/6.0/](http://www.ecma-international.org/ecma-262/6.0/)
@@ -88,6 +96,10 @@ icon: bookmark
 
 * [深入理解 React -Thinking in React 中文版](http://reactjs.cn/react/docs/thinking-in-react.html)
 * [Thinking in React](http://facebook.github.io/react/docs/thinking-in-react.html)
+
+### 测试
+
+* [测试框架 Mocha 实例教程 阮一峰](http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html)
 
 ## 类库与插件
 

@@ -113,7 +113,7 @@ disqus_shortname: xxx
 
 ### Footer
 
-**欢迎使用这个主题，使用时请保留 footer 上的模板主题来源。**Theme designed by [HyG](https://github.com/gaohaoyang).
+**欢迎使用这个主题，使用时请保留 footer 上的模板主题来源。** Theme designed by [HyG](https://github.com/gaohaoyang).
 ![footer](http://ww3.sinaimg.cn/large/7011d6cfjw1f3bepd8002j20hl02ct95.jpg)
 
 关于旧版博客，我不再维护，同时我把代码转移到了另一个仓库，见 [Gaohaoyang/old-blog](https://github.com/Gaohaoyang/old-blog)。
@@ -150,6 +150,10 @@ gem install jekyll
 ```
 
 详情可以查看 jekyll 官网。[https://jekyllrb.com/](https://jekyllrb.com/) 或 中文翻译版 jekyll 官网[http://jekyllcn.com/](http://jekyllcn.com/) （中文文档翻译落后于英文官网，有兴趣有时间的小伙伴可以参与翻译，为开源世界贡献一份力哦~）
+
+在 mac OS X El Capitan 系统下安装可能会出现问题，解决方案详情见 jekyll 官网: [ https://jekyllrb.com/docs/troubleshooting/#jekyll-amp-mac-os-x-1011]( https://jekyllrb.com/docs/troubleshooting/#jekyll-amp-mac-os-x-1011)
+
+对 jekyll 本身感兴趣的同学可以看看 jekyll 源码: [https://github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)
 
 ![jekyll logo](http://jekyllcn.com/img/logo-2x.png)
 
@@ -256,7 +260,7 @@ excerpt_separator: "\n\n\n\n"
 
 使用 markdown 语法写文章。
 
-代码风格与 GitHub 上 README 或 issue 中的一致。使用3个```的方式。
+代码风格与 GitHub 上 README 或 issue 中的一致。使用3个\`\`\`的方式。
 
 ### 5. 本地运行
 
