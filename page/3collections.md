@@ -181,6 +181,10 @@ Syntax Theme: Atom Dark or One Dark
 
 ## Other blogs
 
+* [Jerry Qu](https://imququ.com/)
+
+    JerryQu，奇虎 360，前端开发，前百度前端。
+
 * [码志 https://mazhuang.org/](https://mazhuang.org/)
 
     我是马壮，码而生，码而立。就职sogou。
