@@ -121,6 +121,8 @@ icon: bookmark
 * [后端程序员的 JavaScript 之旅 - 模块化（二）](http://lishaopeng.com/2016/02/11/js-module2/)
 * [后端程序员的 JavaScript 之旅 - 模块化（三）](http://lishaopeng.com/2016/02/19/js-module3/)
 
+* [CommonJS 规范 -来自 阮一峰 JavaScript 标准参考教程(alpha)](http://javascript.ruanyifeng.com/nodejs/module.html)
+
 ## 技巧
 
 * [将footer固定在页面底部的实现方法](https://segmentfault.com/a/1190000004453249)
