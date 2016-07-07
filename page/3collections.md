@@ -97,6 +97,12 @@ icon: bookmark
 * [深入理解 React -Thinking in React 中文版](http://reactjs.cn/react/docs/thinking-in-react.html)
 * [Thinking in React](http://facebook.github.io/react/docs/thinking-in-react.html)
 
+### AngularJS
+
+* [AngularJS入门教程——AngularJS中文社区提供](https://github.com/zensh/AngularjsTutorial_cn)
+
+* [http://www.runoob.com/angularjs/angularjs-tutorial.html](http://www.runoob.com/angularjs/angularjs-tutorial.html)
+
 ### 测试
 
 * [测试框架 Mocha 实例教程 阮一峰](http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html)
