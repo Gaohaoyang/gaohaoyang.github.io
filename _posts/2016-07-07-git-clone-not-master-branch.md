@@ -1,16 +1,19 @@
+---
+layout: post
+title:  "Git 如何 clone 非 master 分支的代码"
+categories: GitHub
+tags:  Git GitHub 分支
+---
 
-
-
-
-
-
+* content
+{:toc}
 
 ## 问题描述
 
 我们每次使用命令
 
 ```
-git clone git@gitlab.alibaba-inc.com:xxxxx.git
+git clone git@gitlab.xxx.com:xxxxx.git
 ```
 
 默认 clone 的是这个仓库的 master 分支。如果最新的代码不在 master 分支上，该如何拿到呢？如下图所示，最新的代码可能在`daily/1.4.1`分支上，我们希望拿到这个分支上的代码。
@@ -18,8 +21,7 @@ git clone git@gitlab.alibaba-inc.com:xxxxx.git
 
 
 
-
-![_2016_07_07_15_13_13](http://img4.tbcdn.cn/L1/461/1/7f07c8f6deef169ef6be5103bbd3e932f8676bb1)
+![7f07c8f6deef169ef6be5103bbd3e932f8676bb1.png](https://ooo.0o0.ooo/2016/07/07/577e349ab42ed.png)
 
 ## 解决方案
 
