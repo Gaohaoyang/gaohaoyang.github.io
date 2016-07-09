@@ -105,7 +105,9 @@ icon: bookmark
 
 * [AngularJS入门教程——AngularJS中文社区提供](https://github.com/zensh/AngularjsTutorial_cn)
 
-* [AngularJS 教程 | 菜鸟教程](http://www.runoob.com/angularjs/angularjs-tutorial.html)
+* [AngularJS 教程 \| 菜鸟教程](http://www.runoob.com/angularjs/angularjs-tutorial.html)
+
+    类似 w3school 的入门 AngularJS 教程。
 
 ### 测试
 
