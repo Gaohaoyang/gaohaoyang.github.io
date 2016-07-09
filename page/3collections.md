@@ -105,7 +105,7 @@ icon: bookmark
 
 * [AngularJS入门教程——AngularJS中文社区提供](https://github.com/zensh/AngularjsTutorial_cn)
 
-* [http://www.runoob.com/angularjs/angularjs-tutorial.html](http://www.runoob.com/angularjs/angularjs-tutorial.html)
+* [AngularJS 教程 | 菜鸟教程](http://www.runoob.com/angularjs/angularjs-tutorial.html)
 
 ### 测试
 
