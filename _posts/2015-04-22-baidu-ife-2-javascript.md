@@ -1257,7 +1257,7 @@ function ajax(url, options) {
     var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
 
     // 发送请求
-    oXhr.open(options.type, url, true);
+    xhr.open(options.type, url, true);
     if (options.type == 'GET') {
         oXhr.send(null);
     } else {
