@@ -32,6 +32,7 @@ icon: bookmark
 
 * [新浪微博图床 Chrome扩展](https://github.com/Suxiaogang/WeiboPicBed)
 
+* [Unix 时间戳 Unix timestamp](http://tool.chinaz.com/Tools/unixtime.aspx)
 
 ## 编程语言
 
@@ -102,6 +103,8 @@ icon: bookmark
 * [Thinking in React](http://facebook.github.io/react/docs/thinking-in-react.html)
 
 ### AngularJS
+
+* [AngularJS api 官网](https://docs.angularjs.org/api)
 
 * [AngularJS入门教程——AngularJS中文社区提供](https://github.com/zensh/AngularjsTutorial_cn)
 

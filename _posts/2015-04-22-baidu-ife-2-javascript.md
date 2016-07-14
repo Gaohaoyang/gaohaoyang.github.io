@@ -1259,10 +1259,10 @@ function ajax(url, options) {
     // 发送请求
     xhr.open(options.type, url, true);
     if (options.type == 'GET') {
-        oXhr.send(null);
+        xhr.send(null);
     } else {
-        oXhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        oXhr.send(dataResult);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.send(dataResult);
     }
 
     // readyState
