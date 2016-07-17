@@ -198,6 +198,10 @@ Syntax Theme: Atom Dark or One Dark
 
 ## Other blogs
 
+* [进击的马斯特 http://pinkyjie.com/](http://pinkyjie.com/)
+
+    马斯特，87年生人，爱溜冰的码农。技术： Javascript、Python、Mac、iOS
+
 * [Jerry Qu](https://imququ.com/)
 
     JerryQu，奇虎 360，前端开发，前百度前端。
