@@ -301,14 +301,14 @@ Configuration file: E:/GitWorkSpace/blog/_config.yml
 
 您也可以捐助我喝杯咖啡！感谢！
 
-PayPal
+<!-- PayPal
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="Q44JFSYQXBFL2">
 <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_cc_147x47.png" border="0" name="submit" alt="PayPal——最安全便捷的在线支付方式！">
 <img alt="" border="0" src="https://www.paypalobjects.com/zh_XC/i/scr/pixel.gif" width="1" height="1">
-</form><br>     
+</form><br>      -->
 
 支付宝
 
