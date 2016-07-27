@@ -310,14 +310,9 @@ Configuration file: E:/GitWorkSpace/blog/_config.yml
 <img alt="" border="0" src="https://www.paypalobjects.com/zh_XC/i/scr/pixel.gif" width="1" height="1">
 </form><br>      -->
 
-支付宝
-
-![alipay](http://ww2.sinaimg.cn/large/7011d6cfjw1f3bk8ikzoij20740743z5.jpg)
-
-微信
-
-![wechat](http://ww2.sinaimg.cn/large/7011d6cfjw1f3bkdw3bslj206z06q3z6.jpg)
-
+支付宝 | 微信支付 | PayPal
+ :---: | :---: | :---:
+![alipay](http://ww2.sinaimg.cn/large/7011d6cfjw1f3bk8ikzoij20740743z5.jpg) | ![wechat](http://ww2.sinaimg.cn/large/7011d6cfjw1f3bkdw3bslj206z06q3z6.jpg) | [![PayPal](https://www.paypalobjects.com/webstatic/paypalme/images/pp_logo_small.png)   Donate via PayPal ](https://www.paypal.me/gaohaoyang)
 
 
 
