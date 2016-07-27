@@ -312,7 +312,7 @@ Configuration file: E:/GitWorkSpace/blog/_config.yml
 
 支付宝 | 微信支付 | PayPal
  :---: | :---: | :---:
-![alipay](http://ww2.sinaimg.cn/large/7011d6cfjw1f3bk8ikzoij20740743z5.jpg) | ![wechat](http://ww2.sinaimg.cn/large/7011d6cfjw1f3bkdw3bslj206z06q3z6.jpg) | [![PayPal](https://www.paypalobjects.com/webstatic/paypalme/images/pp_logo_small.png)   Donate via PayPal ](https://www.paypal.me/gaohaoyang)
+![alipay](http://ww2.sinaimg.cn/large/7011d6cfjw1f3bk8ikzoij20740743z5.jpg) | ![wechat](http://ww2.sinaimg.cn/large/7011d6cfjw1f3bkdw3bslj206z06q3z6.jpg) | [![PayPal](https://www.paypalobjects.com/webstatic/paypalme/images/pp_logo_small.png)<br>Donate via PayPal ](https://www.paypal.me/gaohaoyang)
 
 
 
