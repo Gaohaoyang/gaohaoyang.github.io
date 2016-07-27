@@ -4,26 +4,26 @@ With the escalation of jekyll version, but I also want to reconstruct my older b
 
 **My Blog Url: [http://gaohaoyang.github.io/](http://gaohaoyang.github.io/)**. If you like this theme, you can give me a star to encourage me. Welcome everyone to use it.
 
-## 目录
+## Content
 
-* [预览图](#预览图)
-* [各部分详情](#各部分详情)
-    * [主页 Home](#主页-home)
-    * [归档页 Archives](#归档页-archives)
-    * [分类页 Categories](#分类页-categories)
-    * [标签页 Tags](#标签页-tags)
-    * [收藏页 Collections](#收藏页-collections)
-    * [展示页 Demo](#展示页-demo)
-    * [关于页 About](#关于页-about)
-    * [评论](#评论)
-    * [目录 Contents](#目录-contents)
-    * [代码高亮](#代码高亮)
-    * [灯泡效果](#灯泡效果)
-    * [移动端适配](#移动端适配)
+* [Preview](#preview)
+* [Page Details](#details)
+    * [Home](#home)
+    * [Archives](#archives)
+    * [Categories](#categories)
+    * [Tags](#tags)
+    * [Collections](#collections)
+    * [Demo](#demo)
+    * [About](#about)
+    * [Comments](#comments)
+    * [Post Contents](#post-contents)
+    * [Code Highlight](#code-highlight)
+    * [Light Shadow](#light-shadow)
+    * [Mobile Adaptation](#mobile-adaptation)
     * [Footer](#footer)
-    * [统计](#统计)
-* [博客主题使用方法](#博客主题使用方法)
-    * [1. 安装 ruby 和 jekyll 环境](#1-安装-ruby-和-jekyll-环境)
+    * [Statistical Analysis](#statistical-analysis)
+* [Usage](#usage)
+    * [1. install ruby and jekyll environment](#1-install-ruby-and-jekyll-environment)
     * [2. 复制博客主题代码](#2-复制博客主题代码)
     * [3. 修改参数](#3-修改参数)
         * [基本信息](#基本信息)
@@ -310,15 +310,9 @@ Configuration file: E:/GitWorkSpace/blog/_config.yml
 <img alt="" border="0" src="https://www.paypalobjects.com/zh_XC/i/scr/pixel.gif" width="1" height="1">
 </form><br>      -->
 
-支付宝
-
-![alipay](http://ww2.sinaimg.cn/large/7011d6cfjw1f3bk8ikzoij20740743z5.jpg)
-
-微信
-
-![wechat](http://ww2.sinaimg.cn/large/7011d6cfjw1f3bkdw3bslj206z06q3z6.jpg)
-
-
+支付宝 | 微信支付 | PayPal
+ :---: | :---: | :---:
+![alipay](http://ww2.sinaimg.cn/large/7011d6cfjw1f3bk8ikzoij20740743z5.jpg) | ![wechat](http://ww2.sinaimg.cn/large/7011d6cfjw1f3bkdw3bslj206z06q3z6.jpg) | [![PayPal](https://www.paypalobjects.com/webstatic/paypalme/images/pp_logo_small.png)<br>Donate via PayPal ](https://www.paypal.me/gaohaoyang)
 
 
 
