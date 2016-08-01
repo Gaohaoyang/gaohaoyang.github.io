@@ -7,7 +7,7 @@ With the escalation of jekyll version, but I also want to reconstruct my older b
 ## Content
 
 * [Preview](#preview)
-* [Page Details](#details)
+* [Page Details](#page-details)
     * [Home](#home)
     * [Archives](#archives)
     * [Categories](#categories)
@@ -23,45 +23,45 @@ With the escalation of jekyll version, but I also want to reconstruct my older b
     * [Footer](#footer)
     * [Statistical Analysis](#statistical-analysis)
 * [Usage](#usage)
-    * [1. install ruby and jekyll environment](#1-install-ruby-and-jekyll-environment)
-    * [2. 复制博客主题代码](#2-复制博客主题代码)
-    * [3. 修改参数](#3-修改参数)
-        * [基本信息](#基本信息)
-        * [链接信息](#链接信息)
-        * [评论信息](#评论信息)
-        * [统计信息](#统计信息)
-    * [4. 写文章](#4-写文章)
-    * [5. 本地运行](#5-本地运行)
-    * [6. 发布到 GitHub](#6-发布到-github)
-* [捐助 donate](#捐助-donate)
+    * [1. Install ruby and jekyll environment](#1-install-ruby-and-jekyll-environment)
+    * [2. Copy theme code](#2-copy-theme-code)
+    * [3. Change parameter](#3-change-parameter)
+        * [Basic info](#basic-info)
+        * [Link info](#link-info)
+        * [Comments info](#comments-info)
+        * [Statistical analysis info](#statistical-analysis-info)
+    * [4. Write post](#4-write-post)
+    * [5. Local launch](#5-local-launch)
+    * [6. Push to GitHub](#6-push-to-github)
+* [Donate](#donate)
 * [Update Log](#update-log)
 * [License](#license)
 
-## 预览图
+## Preview
 
-先上预览图：
+First of all, let's see previews.
 
-主页
+Index Page
 ![index](http://ww3.sinaimg.cn/large/7011d6cfjw1f3bdli86awj211k0oyqen.jpg)
 
-文章页
+Post Page
 ![post](http://ww4.sinaimg.cn/large/7011d6cfjw1f3bdmzb9v6j210p0j7gwn.jpg)
 
-## 各部分详情
+## Page Details
 
-### 主页 Home
+### Home
 
-主页默认展示5篇文章的摘要部分，用户点击标题或阅读全文后进入文章页。右侧为近期文章、分类和标签3块区域，用户可以继续在这部分添加区域，只需修改`index.html`即可。
+Index page show 5 posts excerpt as a default. Readers can click article title or read more button to see full post. There are recent posts area, categories area and tags area at the right part of the index page. You can also add an area at this part, if you change the file `index.html`.
 
-### 归档页 Archives
+### Archives
 
-按照年份归档文章。
+Archive post according to the year.
 
-### 分类页 Categories
+### Categories
 
-按照文章的分类，显示文章。
+Show posts according to the category.
 
-### 标签页 Tags
+### Tags
 
 按照文章的标签显示文章。
 
