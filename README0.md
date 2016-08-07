@@ -63,41 +63,41 @@ Show posts according to the category.
 
 ### Tags
 
-按照文章的标签显示文章。
+Show posts according to the tags.
 
-### 收藏页 Collections
+### Collections
 
-本页是用`markdown`写的，用户可以收藏自己喜欢的文章链接。
+The user can collect their favorite article links with `markdown` syntax.
 
-### 展示页 Demo
+### Demo
 
-使用 [Masonry](http://masonry.desandro.com/) 重写了瀑布流布局，响应式布局，更好的交互体验。
+I use *[Masonry](http://masonry.desandro.com/)* to rewrite the waterfall responsive layout. Better interactive experience.
 
-### 关于页 About
+### About
 
-对个人和对本站的介绍，使用`markdown`写的。
+The user can write some introduction about theirselves and their site with `markdown` syntax.
 
-### 评论
+### Comments
 
-支持 [多说评论](http://duoshuo.com/) 和 [disqus](https://disqus.com/) 评论。
+This theme supports both [disqus](https://disqus.com/) and [多说评论 duoshuo comments](http://duoshuo.com/). It's very easy to config your comments module.
 
-只需要在 `_config.yml` 修改相应的配置`short_name`即可，如下：
+The only thing you need do is to change the `short_name` in the file `_config.yml`. As follows.
 
 ```yml
 # comments
 # two ways to comment, only choose one, and use your own short name
-# 两种评论插件，选一个就好了，使用自己的 short_name
 duoshuo_shortname: #xxx
 disqus_shortname: xxx
 ```
 
-### 目录 Contents
+### Post Contents
 
-页面滚动时目录固定在屏幕右侧，若目录高度超出屏幕高度，目录产生滚动条。
+The post contents is fixed at the right side while page is scrolling. There will be a scroll bar on contents while it is outside the window height.
 
-### 代码高亮
+### Code Highlight
 
-随着 jekyll 的升级，目前代码高亮使用风格与 github 上的 markdown 写法一致。
+While the jekyll is update to 3.x.x, you can use github flavored markdown to write code.  
+More info to see [syntax-highlighter-changed](https://jekyllrb.com/docs/upgrading/2-to-3/#syntax-highlighter-changed).
 
 ### 灯泡效果
 
