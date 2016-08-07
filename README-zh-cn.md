@@ -1,103 +1,103 @@
-# About this Cool Concise Jekyll Blog Theme
+# 关于这个简洁明快的博客主题
 
-With the escalation of jekyll version, but I also want to reconstruct my older blog theme, so I did reconstruction and added some features recently. My new blog theme will still be stored in this repository. I will also use this theme in the future. Now I have done basically, then I will focus on issues that users opend to make theme better.
+随着 jekyll 的版本升级，同时我也想重构我的旧版博客主题，因此在这个月对博客进行了重构加改版，这个仓库存放我的新博客，并且我也会一直使用这个主题。目前基本改版完成，后续可能还会有些细节上的修补。
 
-**My Blog Url: [http://gaohaoyang.github.io/](http://gaohaoyang.github.io/)**. If you like this theme, you can give me a star to encourage me. Welcome everyone to use it.
+**博客访问地址：[http://gaohaoyang.github.io/](http://gaohaoyang.github.io/)**。若您喜欢这个新的博客主题，请给我个star以示鼓励吧，欢迎大家使用。
 
-## Content
+## 目录
 
-* [Preview](#preview)
-* [Page Details](#page-details)
-    * [Home](#home)
-    * [Archives](#archives)
-    * [Categories](#categories)
-    * [Tags](#tags)
-    * [Collections](#collections)
-    * [Demo](#demo)
-    * [About](#about)
-    * [Comments](#comments)
-    * [Post Contents](#post-contents)
-    * [Code Highlight](#code-highlight)
-    * [Light Shadow](#light-shadow)
-    * [Mobile Adaptation](#mobile-adaptation)
+* [预览图](#预览图)
+* [各部分详情](#各部分详情)
+    * [主页 Home](#主页-home)
+    * [归档页 Archives](#归档页-archives)
+    * [分类页 Categories](#分类页-categories)
+    * [标签页 Tags](#标签页-tags)
+    * [收藏页 Collections](#收藏页-collections)
+    * [展示页 Demo](#展示页-demo)
+    * [关于页 About](#关于页-about)
+    * [评论](#评论)
+    * [目录 Contents](#目录-contents)
+    * [代码高亮](#代码高亮)
+    * [灯泡效果](#灯泡效果)
+    * [移动端适配](#移动端适配)
     * [Footer](#footer)
-    * [Statistical Analysis](#statistical-analysis)
-* [Usage](#usage)
-    * [1. Install ruby and jekyll environment](#1-install-ruby-and-jekyll-environment)
-    * [2. Copy theme code](#2-copy-theme-code)
-    * [3. Change parameter](#3-change-parameter)
-        * [Basic info](#basic-info)
-        * [Link info](#link-info)
-        * [Comments info](#comments-info)
-        * [Statistical analysis info](#statistical-analysis-info)
-    * [4. Write post](#4-write-post)
-    * [5. Local launch](#5-local-launch)
-    * [6. Push to GitHub](#6-push-to-github)
-* [Donate](#donate)
+    * [统计](#统计)
+* [博客主题使用方法](#博客主题使用方法)
+    * [1. 安装 ruby 和 jekyll 环境](#1-安装-ruby-和-jekyll-环境)
+    * [2. 复制博客主题代码](#2-复制博客主题代码)
+    * [3. 修改参数](#3-修改参数)
+        * [基本信息](#基本信息)
+        * [链接信息](#链接信息)
+        * [评论信息](#评论信息)
+        * [统计信息](#统计信息)
+    * [4. 写文章](#4-写文章)
+    * [5. 本地运行](#5-本地运行)
+    * [6. 发布到 GitHub](#6-发布到-github)
+* [捐助 donate](#捐助-donate)
 * [Update Log](#update-log)
 * [License](#license)
 
-## Preview
+## 预览图
 
-First of all, let's see previews.
+先上预览图：
 
-Index Page
+主页
 ![index](http://ww3.sinaimg.cn/large/7011d6cfjw1f3bdli86awj211k0oyqen.jpg)
 
-Post Page
+文章页
 ![post](http://ww4.sinaimg.cn/large/7011d6cfjw1f3bdmzb9v6j210p0j7gwn.jpg)
 
-## Page Details
+## 各部分详情
 
-### Home
+### 主页 Home
 
-Index page show 5 posts excerpt as a default. Readers can click article title or read more button to see full post. There are recent posts area, categories area and tags area at the right part of the index page. You can also add an area at this part, if you change the file `index.html`.
+主页默认展示5篇文章的摘要部分，用户点击标题或阅读全文后进入文章页。右侧为近期文章、分类和标签3块区域，用户可以继续在这部分添加区域，只需修改`index.html`即可。
 
-### Archives
+### 归档页 Archives
 
-Archive post according to the year.
+按照年份归档文章。
 
-### Categories
+### 分类页 Categories
 
-Show posts according to the category.
+按照文章的分类，显示文章。
 
-### Tags
+### 标签页 Tags
 
-Show posts according to the tags.
+按照文章的标签显示文章。
 
-### Collections
+### 收藏页 Collections
 
-The user can collect their favorite article links with `markdown` syntax.
+本页是用`markdown`写的，用户可以收藏自己喜欢的文章链接。
 
-### Demo
+### 展示页 Demo
 
-I use *[Masonry](http://masonry.desandro.com/)* to rewrite the waterfall responsive layout. Better interactive experience.
+使用 [Masonry](http://masonry.desandro.com/) 重写了瀑布流布局，响应式布局，更好的交互体验。
 
-### About
+### 关于页 About
 
-The user can write some introduction about theirselves and their site with `markdown` syntax.
+对个人和对本站的介绍，使用`markdown`写的。
 
-### Comments
+### 评论
 
-This theme supports both [disqus](https://disqus.com/) and [多说评论 duoshuo comments](http://duoshuo.com/). It's very easy to config your comments module.
+支持 [多说评论](http://duoshuo.com/) 和 [disqus](https://disqus.com/) 评论。
 
-The only thing you need do is to change the `short_name` in the file `_config.yml`. As follows.
+只需要在 `_config.yml` 修改相应的配置`short_name`即可，如下：
 
 ```yml
 # comments
 # two ways to comment, only choose one, and use your own short name
+# 两种评论插件，选一个就好了，使用自己的 short_name
 duoshuo_shortname: #xxx
 disqus_shortname: xxx
 ```
 
-### Post Contents
+### 目录 Contents
 
-The post contents is fixed at the right side while page is scrolling. There will be a scroll bar on contents while it is outside the window height.
+页面滚动时目录固定在屏幕右侧，若目录高度超出屏幕高度，目录产生滚动条。
 
-### Code Highlight
+### 代码高亮
 
-While the jekyll is update to 3.x.x, you can use github flavored markdown to write code.  
-More info to see [syntax-highlighter-changed](https://jekyllrb.com/docs/upgrading/2-to-3/#syntax-highlighter-changed).
+随着 jekyll 的升级，目前代码高亮使用风格与 github 上的 markdown 写法一致。
 
 ### 灯泡效果
 
@@ -115,8 +115,6 @@ More info to see [syntax-highlighter-changed](https://jekyllrb.com/docs/upgradin
 
 **欢迎使用这个主题，使用时请保留 footer 上的模板主题来源。** Theme designed by [HyG](https://github.com/gaohaoyang).
 ![footer](http://ww3.sinaimg.cn/large/7011d6cfjw1f3bepd8002j20hl02ct95.jpg)
-
-关于旧版博客，我不再维护，同时我把代码转移到了另一个仓库，见 [Gaohaoyang/old-blog](https://github.com/Gaohaoyang/old-blog)。
 
 ### 统计
 
@@ -191,6 +189,8 @@ github_username:  Gaohaoyang
 email: gaohaoyang126@126.com
 weibo_username: 3115521wh
 zhihu_username: gaohaoyang
+linkedIn_username: gaohaoyang
+dribbble_username: 
 
 description_footer: 本站记录我前端之旅的沿途风景！
 ```
@@ -316,6 +316,7 @@ Configuration file: E:/GitWorkSpace/blog/_config.yml
 
 
 
+
 感谢捐助的小伙伴！！！
 
 * 2016.07.25 收到 邓炳初 ¥6.66 捐赠
@@ -363,6 +364,8 @@ Configuration file: E:/GitWorkSpace/blog/_config.yml
 * `[^]` 使用 GitHub 风格的代码高亮写法，即\`\`\`的写法，去除`highlight.js`代码高亮插件的使用
 * `[^]` 使用 Masonry 重写了 Demo 页中的瀑布流布局，响应式交互体验更好
 * `[-]` 去除了 jQuery 和 BootStrap，使得加载速度更快
+
+关于旧版博客，我不再维护，同时我把代码转移到了另一个仓库，见 [Gaohaoyang/old-blog](https://github.com/Gaohaoyang/old-blog)。
 
 ## License
 
