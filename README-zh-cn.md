@@ -1,4 +1,4 @@
-# 关于这个简洁明快的博客主题
+# 关于这个简洁明快的博客主题 🤘🤘🤘
 
 随着 jekyll 的版本升级，同时我也想重构我的旧版博客主题，因此在这个月对博客进行了重构加改版，这个仓库存放我的新博客，并且我也会一直使用这个主题。目前基本改版完成，后续可能还会有些细节上的修补。
 
@@ -190,7 +190,7 @@ email: gaohaoyang126@126.com
 weibo_username: 3115521wh
 zhihu_username: gaohaoyang
 linkedIn_username: gaohaoyang
-dribbble_username: 
+dribbble_username:
 
 description_footer: 本站记录我前端之旅的沿途风景！
 ```
