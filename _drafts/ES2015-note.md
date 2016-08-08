@@ -255,6 +255,11 @@ baz // undefined
 var { foo: baz } = { foo: "aaa", bar: "bbb" };
 baz // "aaa"
 
+//转化为如下代码：
+var _foo$bar2 = { foo: "aaa", bar: "bbb" };
+var baz = _foo$bar2.foo;
+
+
 let obj = { first: 'hello', last: 'world' };
 let { first: f, last: l } = obj;
 f // 'hello'
@@ -269,16 +274,55 @@ baz // "aaa"
 foo // error: foo is not defined
 ```
 
-对于let和const来说，变量不能重新声明，所以一旦赋值的变量以前声明过，就会报错。
+对于 let 和 const 来说，变量不能重新声明，所以一旦赋值的变量以前声明过，就会报错。
 
 和数组一样，解构也可以用于嵌套结构的对象。
 
+对象的解构也可以指定默认值。默认值生效的条件是，对象的属性值严格等于`undefined`。
+
+```js
+var {x = 3} = {x: undefined};
+x // 3
+
+var {x = 3} = {x: null};
+x // null
+```
+
+如果解构失败，变量的值等于`undefined`。
+
+```js
+var {foo} = {bar: 'baz'};
+foo // undefined
+```
 
 ### 字符串的解构赋值
 
+字符串也可以解构赋值。字符串被转换为一个类似数组的对象。
+
+```js
+const [a, b, c, d, e] = 'hello';
+a // "h"
+b // "e"
+c // "l"
+d // "l"
+e // "o"
+```
+
 ### 数值和布尔值的解构赋值
 
+解构赋值时，如果等号右边是数值和布尔值，则会先转为对象。
+
 ### 函数参数的解构赋值
+
+函数的参数也可以使用解构赋值。
+
+```js
+function add([x, y]){
+  return x + y;
+}
+
+add([1, 2]); // 3
+```
 
 ### 圆括号问题
 
