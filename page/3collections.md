@@ -38,6 +38,8 @@ icon: bookmark
 
 ### JavaScript
 
+* [JavaScript 标准参考教程（alpha） -阮一峰](http://javascript.ruanyifeng.com/)
+
 * [You Don't Know JS (book series)](https://github.com/getify/You-Dont-Know-JS)
 
 * [You Don't Need jQuery](https://github.com/oneuijs/You-Dont-Need-jQuery/blob/master/README.zh-CN.md)
