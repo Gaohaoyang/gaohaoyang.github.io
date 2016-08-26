@@ -304,7 +304,8 @@ You can also donate me for a coffee, and I'll do better. Thanks.
 
 Thanks these friends!!!
 
-* 2016.08.10 received ¥4.40 
+* 2016.08.25 received Erlend Aakre $2.50
+* 2016.08.10 received ¥4.40
 * 2016.07.25 received 邓炳初 ¥6.66
 * 2016.07.11 received 彦风 ¥6.66
 * 2016.07.07 received Klci ¥2.50
