@@ -108,6 +108,10 @@ icon: bookmark
 
 ### AngularJS
 
+- [学习AngularJS 1.x -Harry<harry@andtoo.net>](https://hairui219.gitbooks.io/learning_angular/content/zh/index.html)
+
+    本书是作者 [Harry](https://github.com/hairui219) 在学习和应用AngularJS 1.x 的过程中的资料梳理。希望能对大家学习AngularJS有一定帮助……
+
 * [AngularJS api 官网](https://docs.angularjs.org/api)
 
 * [AngularJS入门教程——AngularJS中文社区提供](https://github.com/zensh/AngularjsTutorial_cn)
