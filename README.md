@@ -298,12 +298,13 @@ If there is nothing wrong, push code to your github!
 
 You can also donate me for a coffee, and I'll do better. Thanks.
 
- PayPal| Wechat Pay | Alipay
- :---: | :---: | :---:
- [![PayPal](https://www.paypalobjects.com/webstatic/paypalme/images/pp_logo_small.png)<br>Donate via PayPal ](https://www.paypal.me/gaohaoyang)| ![wechat](http://ww2.sinaimg.cn/large/7011d6cfjw1f3bkdw3bslj206z06q3z6.jpg) | ![alipay](http://ww2.sinaimg.cn/large/7011d6cfjw1f3bk8ikzoij20740743z5.jpg)
+|                                                                     PayPal                                                                     |                                 Wechat Pay                                  |                                   Alipay                                    |
+|:----------------------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------:|:---------------------------------------------------------------------------:|
+| [![PayPal](https://www.paypalobjects.com/webstatic/paypalme/images/pp_logo_small.png)<br>Donate via PayPal ](https://www.paypal.me/gaohaoyang) | ![wechat](http://ww2.sinaimg.cn/large/7011d6cfjw1f3bkdw3bslj206z06q3z6.jpg) | ![alipay](http://ww2.sinaimg.cn/large/7011d6cfjw1f3bk8ikzoij20740743z5.jpg) |
 
 Thanks these friends!!!
 
+* 2016.09.25 received 鑫 ¥6.66
 * 2016.08.25 received Erlend Aakre $2.50
 * 2016.08.10 received ¥4.40
 * 2016.07.25 received 邓炳初 ¥6.66
