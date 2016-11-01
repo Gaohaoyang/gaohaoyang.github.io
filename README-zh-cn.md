@@ -319,7 +319,8 @@ Configuration file: E:/GitWorkSpace/blog/_config.yml
 
 感谢捐助的小伙伴！！！
 
-
+* 2016.10.24 收到 奇峰 ¥6.66
+* 2016.10.21 收到 旭廷 ¥10.00
 * 2016.09.24 收到 鑫 ¥6.66
 * 2016.08.25 收到 Erlend Aakre $2.50
 * 2016.08.10 收到 ¥4.40
@@ -331,7 +332,6 @@ Configuration file: E:/GitWorkSpace/blog/_config.yml
 * 2016.04.29 收到 北归 ¥10
 * 2016.04.28 收到 魏楚阳_Brian ¥2
 * 2016.04.28 收到 薛彬 ¥8.8
-
 
 ## Update Log
 
