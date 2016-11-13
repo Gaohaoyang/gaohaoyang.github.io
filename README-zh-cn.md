@@ -315,9 +315,10 @@ Configuration file: E:/GitWorkSpace/blog/_config.yml
 | ![alipay](http://ww2.sinaimg.cn/large/7011d6cfjw1f3bk8ikzoij20740743z5.jpg) | ![wechat](http://ww2.sinaimg.cn/large/7011d6cfjw1f3bkdw3bslj206z06q3z6.jpg) | [![PayPal](https://www.paypalobjects.com/webstatic/paypalme/images/pp_logo_small.png)<br>Donate via PayPal ](https://www.paypal.me/gaohaoyang) |
 
 
+[![Coffee Pay](http://cp.alibaba.net/projects/581aec0b307c5c6412fff933/badge)](http://cp.alibaba.net/donates?id=581aec0b307c5c6412fff933)
 
 
-感谢捐助的小伙伴！！！
+感谢捐赠的小伙伴！！！
 
 * 2016.10.24 收到 奇峰 ¥6.66
 * 2016.10.21 收到 旭廷 ¥10.00

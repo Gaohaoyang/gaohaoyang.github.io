@@ -302,6 +302,8 @@ You can also donate me for a coffee, and I'll do better. Thanks.
 |:----------------------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------:|:---------------------------------------------------------------------------:|
 | [![PayPal](https://www.paypalobjects.com/webstatic/paypalme/images/pp_logo_small.png)<br>Donate via PayPal ](https://www.paypal.me/gaohaoyang) | ![wechat](http://ww2.sinaimg.cn/large/7011d6cfjw1f3bkdw3bslj206z06q3z6.jpg) | ![alipay](http://ww2.sinaimg.cn/large/7011d6cfjw1f3bk8ikzoij20740743z5.jpg) |
 
+[![Coffee Pay](http://cp.alibaba.net/projects/581aec0b307c5c6412fff933/badge)](http://cp.alibaba.net/donates?id=581aec0b307c5c6412fff933)
+
 Thanks these friends!!!
 
 * 2016.10.24 received 奇峰 ¥6.66
