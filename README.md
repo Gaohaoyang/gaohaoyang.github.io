@@ -306,11 +306,13 @@ You can also donate me for a coffee, and I'll do better. Thanks.
 
 Thanks these friends!!!
 
+
+* 2016.11.16 received Wechat user ¥1.00
 * 2016.10.24 received 奇峰 ¥6.66
 * 2016.10.21 received 旭廷 ¥10.00
 * 2016.09.25 received 鑫 ¥6.66
 * 2016.08.25 received Erlend Aakre $2.50
-* 2016.08.10 received ¥4.40
+* 2016.08.10 received Wechat user ¥4.40
 * 2016.07.25 received 邓炳初 ¥6.66
 * 2016.07.11 received 彦风 ¥6.66
 * 2016.07.07 received Klci ¥2.50

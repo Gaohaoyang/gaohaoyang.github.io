@@ -34,6 +34,7 @@
                     -webkit-box-shadow: 0 2px 30px -1px rgba(0, 0, 0, 0.6), inset 0 0 87px 0 rgba(184, 184, 184, 0.13);
                     -moz-box-shadow: 0 2px 30px -1px rgba(0, 0, 0, 0.6), inset 0 0 87px 0 rgba(184, 184, 184, 0.13);
                     box-shadow: 0 2px 30px -1px rgba(0, 0, 0, 0.6), inset 0 0 87px 0 rgba(184, 184, 184, 0.13);
+
                 }
                 .a-img {
                     color: #fff;
@@ -56,4 +57,9 @@
             }
         }
     }
+}
+.deep{
+    transition: .32s cubic-bezier(0.46, 0.03, 0.52, 0.96);
+    transform-style: preserve-3d;
+    transform: perspective(1600px) rotateX(14deg) translateZ(-200px);
 }

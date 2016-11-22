@@ -52,3 +52,9 @@
     //     window.scrollTo(0,0)
     // })
 }());
+
+
+//////////////////////////hover on demo//////////////////////////////
+(function() {
+    var demoItems = document.querySelectorAll('.grid-item')
+}());
