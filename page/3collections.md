@@ -62,6 +62,10 @@ icon: bookmark
 
     ES2015规范
 
+- [http://es6katas.org/](http://es6katas.org/)
+
+    Learn ES6 by doing it. Fix failing tests. Keep all learnings.
+
 * [30分钟掌握ES6/ES2015核心内容（上）](http://segmentfault.com/a/1190000004365693)
 
 * [30分钟掌握ES6/ES2015核心内容（下）](http://segmentfault.com/a/1190000004368132)
