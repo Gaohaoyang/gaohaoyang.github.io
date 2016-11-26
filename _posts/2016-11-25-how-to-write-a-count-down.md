@@ -58,7 +58,7 @@ let getRemainTime = (endTime, deviceTime, serverTime) => {
 }
 ```
 
-获取服务器时间可以使用 mtop 接口 `mtop.common.getTimestamp`
+<del>获取服务器时间可以使用 mtop 接口 `mtop.common.getTimestamp` </del>
 
 然后可以通过下面的方式来使用：
 
