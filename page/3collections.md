@@ -218,6 +218,8 @@ Syntax Theme: Atom Dark or One Dark
 
 ## Other blogs
 
+- [COLORFUL xiaoa](http://www.xiaoa.name/)
+
 * [进击的马斯特 http://pinkyjie.com/](http://pinkyjie.com/)
 
     马斯特，87年生人，爱溜冰的码农。技术： Javascript、Python、Mac、iOS
