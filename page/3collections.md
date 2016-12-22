@@ -158,6 +158,7 @@ type: page
 
 ## 技巧
 
+- [<head> Cheat Sheet](http://gethead.info/)
 * [将footer固定在页面底部的实现方法](https://segmentfault.com/a/1190000004453249)
 
 
