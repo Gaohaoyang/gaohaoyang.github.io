@@ -311,6 +311,7 @@ You can also donate me for a coffee, and I'll do better. Thanks.
 
 Thanks these friends!!!
 
+* 2017.01.15 received Wechat user ¥6.66
 * 2016.12.17 received HitNoah ¥12.00
 * 2016.12.09 received 情融 ¥6.60
 * 2016.11.25 received Wechat user ¥6.66
