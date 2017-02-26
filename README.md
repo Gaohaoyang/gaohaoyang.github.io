@@ -311,6 +311,8 @@ You can also donate me for a coffee, and I'll do better. Thanks.
 
 Thanks these friends!!!
 
+* 2017.02.26 received 兰缘小妖 ¥10.00
+* 2017.02.25 received Wechat user ¥6.66
 * 2017.02.22 received Wechat user ¥6.66
 * 2017.02.15 received Wechat user ¥10.00
 * 2017.02.06 received Light ¥10.24
