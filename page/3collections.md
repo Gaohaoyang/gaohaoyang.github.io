@@ -154,6 +154,14 @@ type: page
 
     纯 CSS 的图片轮播图。
 
+- [gumshoe](https://github.com/cferdinandi/gumshoe)
+
+    A simple, framework-agnostic scrollspy script.
+
+- [smooth-scroll](https://github.com/cferdinandi/smooth-scroll)
+
+  A simple vanilla JS script to animate scrolling to anchor links.
+
 ## 模块化
 
 * [后端程序员的 JavaScript 之旅 - 模块化（一）](http://lishaopeng.com/2016/02/05/js-module/)
