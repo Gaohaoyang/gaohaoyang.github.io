@@ -143,11 +143,16 @@ function moveTOC() {
             //     console.log(this);
             // })
             for (var i = 0; i < aTags.length; i++) {
-                if (!aTags[i].classList.contains('scroll')) {
-                    aTags[i].classList.add('scroll')
+                // if (!aTags[i].classList.contains('scroll')) {
+                //     aTags[i].classList.add('scroll')
+                // }
+                if (!aTags[i].hasAttribute('data-scroll')) {
+                  aTags[i].setAttribute('data-scroll','');
                 }
+
             }
         // }
+
     }
 }
 

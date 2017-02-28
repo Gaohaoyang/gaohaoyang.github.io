@@ -47,7 +47,7 @@ type: page
                 <ul id="content-side" class="content-ul">
                     {% for tag in sortedtags %}
                     <li>
-                        <a class="scroll" href="#{{ tag }}">
+                        <a data-scroll href="#{{ tag }}">
                             {{ tag }} ({{ site.tags[tag].size }})
                         </a>
                     </li>

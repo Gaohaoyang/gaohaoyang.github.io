@@ -44,7 +44,7 @@ type: page
                 <ul id="content-side" class="content-ul">
                     {% for category in site.categories%}
                         <li>
-                            <a class="scroll" href="#{{ category | first }}">
+                            <a data-scroll href="#{{ category | first }}">
                                 {{ category | first }} ({{ category | last | size }})
                             </a>
                         </li>

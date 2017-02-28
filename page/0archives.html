@@ -55,7 +55,7 @@ type: page
                           {% assign prevyear = post.previous.date | date: "%Y" %}
                           {% assign counter = counter | plus: 1 %}
                           {% if thisyear != prevyear %}
-                            <li><a class="scroll" href="#y{{ post.date | date: '%Y' }}">{{ thisyear }} ({{ counter }})</a></li>
+                            <li><a data-scroll href="#y{{ post.date | date: '%Y' }}">{{ thisyear }} ({{ counter }})</a></li>
                             {% assign counter = 0 %}
                           {% endif %}
                         {% endfor %}
