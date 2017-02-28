@@ -349,6 +349,10 @@ Configuration file: E:/GitWorkSpace/blog/_config.yml
 
 ## Update Log
 
+### 2017.2.28
+
+- `[^]` 修复目录滚动 bug [#22](https://github.com/Gaohaoyang/gaohaoyang.github.io/issues/22), [#48](https://github.com/Gaohaoyang/gaohaoyang.github.io/issues/48)
+
 ### 2016.6.20
 
 * `[+]` 在文章页中添加上一篇和下一篇文章链接。

@@ -339,6 +339,10 @@ Thanks these friends!!!
 
 ## Update Log
 
+### 2017.2.28
+
+- `[^]` fix smoothScroll bug in Tencent webview like wechat and qq.  [#22](https://github.com/Gaohaoyang/gaohaoyang.github.io/issues/22), [#48](https://github.com/Gaohaoyang/gaohaoyang.github.io/issues/48)
+
 ### 2016.6.20
 
 * `[+]` Add next post and previous post link in post page.
