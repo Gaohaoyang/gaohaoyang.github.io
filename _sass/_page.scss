@@ -222,9 +222,16 @@
             transition: 0.2s cubic-bezier(0.5, 0.1, 0.51, 1.38);
         }
         .right-show {
+            z-index: 999;
             visibility: visible;
             opacity: 1;
             transform: scale(1);
+            .content-ul{
+              margin-bottom: 0;
+              >li:last-of-type{
+                margin-bottom: 16px;
+              }
+            }
         }
     }
 }
