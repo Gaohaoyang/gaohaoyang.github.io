@@ -236,7 +236,7 @@ google_analytics_id: UA-72449510-4 # google 分析追踪id
 
 ### 4. 写文章
 
-`_posts`目录下存放文章信息，文章头部注明 layout(布局)、title、date、categories、tags、author(可选)，如下：
+`_posts`目录下存放文章信息，文章头部注明 layout(布局)、title、date、categories、tags、author(可选)、mathjax(可选，点击[这里](https://www.mathjax.org/)查看更多关于`Mathjax`)，如下：
 
 ```
 ---
@@ -246,6 +246,7 @@ date:   2016-03-12 11:40:18 +0800
 categories: jekyll
 tags: jekyll 端口 markdown Foxit RubyGems HTML CSS
 author: Haoyang Gao
+mathjax: true
 ---
 ```
 
