@@ -311,6 +311,7 @@ You can also donate me for a coffee, and I'll do better. Thanks.
 
 Thanks these friends!!!
 
+* 2017.03.04 received 史莱姆 ¥9.90
 * 2017.03.02 received 梦想小熊 ¥6.66
 * 2017.02.27 received 夏友杰 ¥6.66
 * 2017.02.26 received 兰缘小妖 ¥10.00
