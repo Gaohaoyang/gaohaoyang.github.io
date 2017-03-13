@@ -170,11 +170,11 @@ type: page
 
 * [CommonJS 规范 -来自 阮一峰 JavaScript 标准参考教程(alpha)](http://javascript.ruanyifeng.com/nodejs/module.html)
 
-## 技巧
+## other articles
 
 - [<head> Cheat Sheet](http://gethead.info/)
 * [将footer固定在页面底部的实现方法](https://segmentfault.com/a/1190000004453249)
-
+- [HTML5 视频 By Pete LePage](https://www.html5rocks.com/zh/tutorials/video/basics/)
 
 ## 编辑器
 
