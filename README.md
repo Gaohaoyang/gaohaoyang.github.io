@@ -237,7 +237,7 @@ When you done, you can see UV, PV, location etc. info at your own Google Analyti
 
 ### 4. Write post
 
-You can write posts at folder `_posts`. At the beginning of the post, you should declare layout、title、date、categories、tags、author(optional) info.
+You can write posts at folder `_posts`. At the beginning of the post, you should declare layout、title、date、categories、tags、author(optional) info、mathjax(optional，click [here](https://www.mathjax.org/) for more detail about `Mathjax`).
 
 ```
 ---
@@ -247,6 +247,7 @@ date:   2016-03-12 11:40:18 +0800
 categories: jekyll
 tags: jekyll 端口 markdown Foxit RubyGems HTML CSS
 author: Haoyang Gao
+mathjax: true
 ---
 ```
 
