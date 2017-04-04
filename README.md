@@ -312,6 +312,7 @@ You can also donate me for a coffee, and I'll do better. Thanks.
 
 Thanks these friends!!!
 
+* 2017.04.01 received Elvin Zeng ¥6.66
 * 2017.03.13 received Wechat user ¥6.66
 * 2017.03.04 received 史莱姆 ¥9.90
 * 2017.03.02 received 梦想小熊 ¥6.66
