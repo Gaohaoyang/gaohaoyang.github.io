@@ -323,6 +323,7 @@ Configuration file: E:/GitWorkSpace/blog/_config.yml
 
 感谢捐赠的小伙伴！！！
 
+* 2017.04.11 收到 Wechat user ¥4.00
 * 2017.04.01 收到 Elvin Zeng ¥6.66
 * 2017.03.13 收到 微信用户 ¥6.66
 * 2017.03.04 收到 史莱姆 ¥9.90
