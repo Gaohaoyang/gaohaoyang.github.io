@@ -79,7 +79,9 @@ layout: default
                     Content
                 </div>
                 <ul id="content-side" class="content-ul">
+                    {% if hasSimilar.size > 0 %}
                     <li><a href="#similar_posts">Similar Posts</a></li>
+                    {% endif %}
                     <li><a href="#comments">Comments</a></li>
                 </ul>
             </div>
