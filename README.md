@@ -104,7 +104,7 @@ The post contents is fixed at the right side while page is scrolling. There will
 
 ### Code Highlight
 
-While the jekyll is update to 3.x.x, you can use github flavored markdown to write code.  
+While the jekyll is update to 3.x.x, you can use github flavored markdown to write code.
 
 More info to see [syntax-highlighter-changed](https://jekyllrb.com/docs/upgrading/2-to-3/#syntax-highlighter-changed).
 
@@ -312,6 +312,7 @@ You can also donate me for a coffee, and I'll do better. Thanks.
 
 Thanks these friends!!!
 
+* 2017.05.25 received Wechat user ¥1.00
 * 2017.05.19 received 风之筝 ¥6.66
 * 2017.05.16 received 张驰 ¥6.00
 * 2017.05.03 received 希成 ¥6.66
