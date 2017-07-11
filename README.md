@@ -312,6 +312,9 @@ You can also donate me for a coffee, and I'll do better. Thanks.
 
 Thanks these friends!!!
 
+* 2017.07.02 received Wechat user ¥9.99
+* 2017.06.20 received Wechat user ¥2.22
+* 2017.06.19 received Wechat user ¥6.66
 * 2017.05.25 received Wechat user ¥1.00
 * 2017.05.19 received 风之筝 ¥6.66
 * 2017.05.16 received 张驰 ¥6.00
