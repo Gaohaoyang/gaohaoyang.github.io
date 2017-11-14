@@ -13,6 +13,7 @@
         ds.async = true;
         ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
         ds.charset = 'UTF-8';
+        ds.lang = 'ko';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
 </script>
@@ -20,7 +21,9 @@
 {% endif %}
 
 {% if site.disqus_shortname %}
-<div id="disqus_thread"></div>
+<div id="disqus_thread">
+  
+</div>
 <script>
     /**
      * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.

@@ -7,7 +7,9 @@
             {% if site.description_footer %} {{site.description_footer}} {% endif %}
         </p>
         <p class="contact">
-            Contact me at: {% if site.github_username %}
+            <!-- Contact me at:  -->
+            {% if site.github_username %}
+            <span>Tel : 010-3563-4596</span>
             <a href="https://github.com/{{site.github_username}}" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a> {% endif %} {% if site.email %}
             <a href="mailto:{{site.email}}" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a> {% endif %} {% if site.weibo_username %}
             <a href="http://weibo.com/{{site.weibo_username}}" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a> {% endif %} {% if site.zhihu_username %}
@@ -18,7 +20,7 @@
             <a href=" https://dribbble.com/{{site.dribbble_username}}" title="Dribbble"><i class="fa fa-dribbble" aria-hidden="true"></i></a> {% endif %}
         </p>
         <p>
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+             총 방문객 수<span id="busuanzi_value_site_pv"> </span>명，현재 접속자 수<span id="busuanzi_value_site_uv"> </span>명，오늘 하루 방문객 수<span id="busuanzi_value_page_pv"> </span>명
         </p>
         <p class="power">
             <span>
