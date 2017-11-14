@@ -1,4 +1,4 @@
----
+﻿---
 layout: page
 title: Collections
 permalink: /collection/
@@ -9,11 +9,9 @@ type: page
 * content
 {:toc}
 
-## 工具
+## 공구
 
 * [box-shadow generator](http://www.cssmatic.com/box-shadow)
-
-    生成 box-shadow 的工具。
 
 * [gradient-generator](http://www.cssmatic.com/gradient-generator)
 
@@ -45,7 +43,7 @@ type: page
 - [google fonts](https://fonts.google.com/)
   - [Google Fonts 加速代理](https://fengmk2.com/blog/2016/google-fonts-mirror)
 
-## 编程语言
+## 프로그래밍 언어
 
 ### JavaScript
 
@@ -88,7 +86,7 @@ type: page
 
 * [七天学会NodeJS -Nanqiao Deng](https://nqdeng.github.io/7-days-nodejs)
 
-## 框架&脚手架
+## 틀 & 비계
 
 ### webpack
 
@@ -138,11 +136,11 @@ type: page
 
     类似 w3school 的入门 AngularJS 教程。
 
-### 测试
+### 테스트
 
 * [测试框架 Mocha 实例教程 阮一峰](http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html)
 
-## 类库与插件
+## 블루앤플러그인
 
 * [Masonry](http://masonry.desandro.com/)
 
@@ -164,7 +162,7 @@ type: page
 
   A simple vanilla JS script to animate scrolling to anchor links.
 
-## 模块化
+## 모듈화
 
 * [后端程序员的 JavaScript 之旅 - 模块化（一）](http://lishaopeng.com/2016/02/05/js-module/)
 * [后端程序员的 JavaScript 之旅 - 模块化（二）](http://lishaopeng.com/2016/02/11/js-module2/)
@@ -178,7 +176,7 @@ type: page
 * [将footer固定在页面底部的实现方法](https://segmentfault.com/a/1190000004453249)
 - [HTML5 视频 By Pete LePage](https://www.html5rocks.com/zh/tutorials/video/basics/)
 
-## 编辑器
+## 편집기
 
 ### Atom 中常用插件
 
@@ -272,7 +270,7 @@ Syntax Theme: Atom Dark or One Dark
 
 * [JS前端开发群月报 -豪情等人维护](http://www.kancloud.cn/jsfront/month/82796)
 
-## 交互设计相关
+## 설계도 연결?
 
 - [Framer](https://framerjs.com/)
 
@@ -290,6 +288,6 @@ Syntax Theme: Atom Dark or One Dark
 
     首页的卡片翻动效果非常赞。
 
-## Comments
+//## Comments
 
-{% include comments.html %}
+//{% include comments.html %}
