@@ -9,7 +9,7 @@ type: page
 * content
 {:toc}
 
-## 공구
+## converter
 
 * [box-shadow generator](http://www.cssmatic.com/box-shadow)
 
@@ -18,24 +18,25 @@ type: page
 * [Ultimate CSS Gradient Generator](http://www.colorzilla.com/gradient-editor/)
 
 * [CSS Generators -CSSREFLEX](http://www.cssreflex.com/css-generators/)
-
+	css로 만드는 기술들
 - [tiny png](https://tinypng.com/)
-	
     웹용 이미지 용량 줄이기(이미지 업로드 용량 제한있음)
 
 * [图床 https://sm.ms/](https://sm.ms/)
-
 	??
 
 * [新浪微博图床 Chrome扩展](https://github.com/Suxiaogang/WeiboPicBed)
+	??
 
 * [Unix 时间戳 Unix timestamp](http://tool.chinaz.com/Tools/unixtime.aspx)
+	datetime 변환?
 
 - [在线正则表达式匹配](https://regex101.com/)
-    - 这个功能更强大一点，能清楚的区分出贪婪和懒惰正则。
-- [http://regexr.com/](http://regexr.com/)
+	정규식 검사
 
+- [http://regexr.com/](http://regexr.com/)
 	정규식
+
 - [google fonts](https://fonts.google.com/)
   - [Google Fonts 加速代理](https://fengmk2.com/blog/2016/google-fonts-mirror)
 
@@ -44,43 +45,36 @@ type: page
 ### JavaScript
 
 * [JavaScript 标准参考教程（alpha） -阮一峰](http://javascript.ruanyifeng.com/)
+	자바스크립트 강의서 인데 중국판
 
 * [JavaScript Promise迷你书 -azu](http://liubin.org/promises-book/)
+	자바스크립트의 promise에 대하여
 
 * [You Don't Know JS (book series)](https://github.com/getify/You-Dont-Know-JS)
+	자바스크립트 강의서 git의 책버전
 
 * [You Don't Need jQuery](https://github.com/oneuijs/You-Dont-Need-jQuery/blob/master/README.zh-CN.md)
-
-    前端发展很快，现代浏览器原生 API 已经足够好用。我们并不需要为了操作 DOM、Event 等再学习一下 jQuery 的 API。同时由于 React、Angular、Vue 等框架的流行，直接操作 DOM 不再是好的模式，jQuery 使用场景大大减少。本项目总结了大部分 jQuery API 替代的方法，暂时只支持 IE10+ 以上浏览器。
+	자바스크립트 기능별 설명(한국어)
 
 - [YOU MIGHT NOT NEED JQUERY PLUGINS](http://youmightnotneedjqueryplugins.com/)
+	익플 8~10까지 지원되는 심플한 기능
+    
+* [JavaScript 秘密花园](http://bonsaiden.github.io/JavaScript-Garden/ko/)
+	자바스크립틔 강의서 
+    
 
-* [JavaScript 秘密花园](http://bonsaiden.github.io/JavaScript-Garden/zh/)
-
-* [JavaScript 设计模式 系列 AlloyTeam](http://www.alloyteam.com/2012/10/common-javascript-design-patterns/)
 
 ### ES2015
 
-- [https://tc39.github.io/ecma262/](https://tc39.github.io/ecma262/)
-* [http://www.ecma-international.org/ecma-262/6.0/](http://www.ecma-international.org/ecma-262/6.0/)
-
-    ES2015规范
-
 - [http://es6katas.org/](http://es6katas.org/)
-
-    Learn ES6 by doing it. Fix failing tests. Keep all learnings.
+es6변환 및 학습?
 
 * [30分钟掌握ES6/ES2015核心内容（上）](http://segmentfault.com/a/1190000004365693)
+30분동안 배우는 ES6/ES2015 핵심내용(상편)_중국어
 
 * [30分钟掌握ES6/ES2015核心内容（下）](http://segmentfault.com/a/1190000004368132)
+30분동안 배우는 ES6/ES2015 핵심내용(하편)_중국어
 
-* [《ECMAScript 6入门》 -阮一峰](https://github.com/ruanyf/es6tutorial)
-
-* [EcmaScript6 全规范（含node） -ouvens](https://github.com/ouvens/es6-code-style-guide)
-
-### NodeJS
-
-* [七天学会NodeJS -Nanqiao Deng](https://nqdeng.github.io/7-days-nodejs)
 
 ## 틀 & 비계
 
@@ -228,43 +222,6 @@ Syntax Theme: Chester Atom
 
     新建 tab 时，显示 dribbble 上的精选作品。
 
-## Other blogs
-
-- [COLORFUL xiaoa](http://www.xiaoa.name/)
-
-* [进击的马斯特 http://pinkyjie.com/](http://pinkyjie.com/)
-
-    马斯特，87年生人，爱溜冰的码农。技术： Javascript、Python、Mac、iOS
-
-* [Jerry Qu](https://imququ.com/)
-
-    JerryQu，奇虎 360，前端开发，前百度前端。
-
-* [码志 https://mazhuang.org/](https://mazhuang.org/)
-
-    我是马壮，码而生，码而立。就职sogou。
-
-* [小胡子哥 http://www.barretlee.com/](http://www.barretlee.com/)
-
-    李靖，阿里巴巴。
-
-* [Xcat Liu http://blog.xcatliu.com/](http://blog.xcatliu.com/)
-
-    Microsoft Software Engineer II, Meituan Senior Front-End Engineer
-
-* [极限前端 http://ouvens.github.io/](http://ouvens.github.io/)
-
-    Ouvenzhang, 前端工程师，对前端领域的技术知识具有较高的职业能力和探究精神。对响应式页面设计、工程构建组件化、mv*设计实现、前端优化、ES6开发体系等有深入的研究与项目实践。来自腾讯科技。
-
-* [凳子_Joinery 邓智容  http://www.dengzhr.com/](http://www.dengzhr.com/)
-
-* [赵达的个人网站 腾讯高级前端开发工程师](http://zhaoda.net/)
-
-* [Randy](http://djyde.github.io/)
-
-    95年出生的全栈。卢涛南，英文名 Randy，用 djyde 这个ID混迹于网络。
-
-* [JS前端开发群月报 -豪情等人维护](http://www.kancloud.cn/jsfront/month/82796)
 
 ## 설계도 연결?
 
