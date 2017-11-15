@@ -96,7 +96,7 @@ function isMaxHeight() {
 }());
 
 /**
- * 目录锚的位置固定
+ * 고정된 위치 고정
  */
 function ancherPostion(anchorBtn, rightDiv) {
     window.addEventListener('scroll', function() {
@@ -115,7 +115,7 @@ function ancherPostion(anchorBtn, rightDiv) {
 }
 
 /**
- * 设置目录最大高度
+ * 设置目录最大高度  목록의 최대 높이를 설치하다?
  */
 function setContentMaxHeight() {
     var windowHeight = window.innerHeight
