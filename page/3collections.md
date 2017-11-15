@@ -15,23 +15,17 @@ type: page
 
 * [gradient-generator](http://www.cssmatic.com/gradient-generator)
 
-    渐变生成器。
-
 * [Ultimate CSS Gradient Generator](http://www.colorzilla.com/gradient-editor/)
-
-    也是渐变生成器
 
 * [CSS Generators -CSSREFLEX](http://www.cssreflex.com/css-generators/)
 
-    CSS3 生成器
-
 - [tiny png](https://tinypng.com/)
-
-    用于压缩 png 或 jpg 的在线工具
+	
+    웹용 이미지 용량 줄이기(이미지 업로드 용량 제한있음)
 
 * [图床 https://sm.ms/](https://sm.ms/)
 
-    有 API 可用。
+	??
 
 * [新浪微博图床 Chrome扩展](https://github.com/Suxiaogang/WeiboPicBed)
 
@@ -40,6 +34,8 @@ type: page
 - [在线正则表达式匹配](https://regex101.com/)
     - 这个功能更强大一点，能清楚的区分出贪婪和懒惰正则。
 - [http://regexr.com/](http://regexr.com/)
+
+	정규식
 - [google fonts](https://fonts.google.com/)
   - [Google Fonts 加速代理](https://fengmk2.com/blog/2016/google-fonts-mirror)
 
@@ -178,7 +174,7 @@ type: page
 
 ## 편집기
 
-### Atom 中常用插件
+### Atom 
 
 * auto-beautify
 * autoprefixer
@@ -205,11 +201,11 @@ type: page
 * autocomplete-paths 自动补充路径
 * symbols-tree-view A symbol treeview like taglist
 
-常用的主题：
+테마：
 
 UI Theme: One Dark
 
-Syntax Theme: Atom Dark or One Dark
+Syntax Theme: Chester Atom
 
 ## GitBook 及其插件
 
@@ -220,7 +216,7 @@ Syntax Theme: Atom Dark or One Dark
 
     <!-- ![](http://ww4.sinaimg.cn/large/7011d6cfjw1f08kmplbj1j20gn05l0tk.jpg) -->
 
-## Chrome 插件
+## Chrome 확장프로그램
 - [Octotree](https://chrome.google.com/webstore/detail/octotree/bkhaagjahfmjljalopjnoealnfndnagc)
 
     - Code tree for GitHub and GitLab
