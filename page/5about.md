@@ -20,7 +20,7 @@ type: page
 
 ## 연락처
 
-* GitHub：[Grudwnok123](https://github.com/rudwnok123)
+* GitHub：[rudwnok123](https://github.com/rudwnok123)
 * email：rudwnok123@naver.com
 * [知乎](https://www.zhihu.com/people/gaohaoyang)
 
