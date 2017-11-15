@@ -18,24 +18,31 @@ type: page
 * [Ultimate CSS Gradient Generator](http://www.colorzilla.com/gradient-editor/)
 
 * [CSS Generators -CSSREFLEX](http://www.cssreflex.com/css-generators/)
+
 	css로 만드는 기술들
 - [tiny png](https://tinypng.com/)
+    
     웹용 이미지 용량 줄이기(이미지 업로드 용량 제한있음)
 
 * [图床 https://sm.ms/](https://sm.ms/)
-	??
+	
+    ??
 
 * [新浪微博图床 Chrome扩展](https://github.com/Suxiaogang/WeiboPicBed)
-	??
+	
+    ??
 
 * [Unix 时间戳 Unix timestamp](http://tool.chinaz.com/Tools/unixtime.aspx)
-	datetime 변환?
+	
+    datetime 변환?
 
 - [在线正则表达式匹配](https://regex101.com/)
-	정규식 검사
+	
+    정규식 검사
 
 - [http://regexr.com/](http://regexr.com/)
-	정규식
+	
+    정규식
 
 - [google fonts](https://fonts.google.com/)
   - [Google Fonts 加速代理](https://fengmk2.com/blog/2016/google-fonts-mirror)
@@ -45,22 +52,28 @@ type: page
 ### JavaScript
 
 * [JavaScript 标准参考教程（alpha） -阮一峰](http://javascript.ruanyifeng.com/)
-	자바스크립트 강의서 인데 중국판
+	
+    자바스크립트 강의서 인데 중국판
 
 * [JavaScript Promise迷你书 -azu](http://liubin.org/promises-book/)
-	자바스크립트의 promise에 대하여
+	
+    자바스크립트의 promise에 대하여
 
 * [You Don't Know JS (book series)](https://github.com/getify/You-Dont-Know-JS)
-	자바스크립트 강의서 git의 책버전
+	
+    자바스크립트 강의서 git의 책버전
 
 * [You Don't Need jQuery](https://github.com/oneuijs/You-Dont-Need-jQuery/blob/master/README.zh-CN.md)
-	자바스크립트 기능별 설명(한국어)
+	
+    자바스크립트 기능별 설명(한국어)
 
 - [YOU MIGHT NOT NEED JQUERY PLUGINS](http://youmightnotneedjqueryplugins.com/)
-	익플 8~10까지 지원되는 심플한 기능
+	
+    익플 8~10까지 지원되는 심플한 기능
     
 * [JavaScript 秘密花园](http://bonsaiden.github.io/JavaScript-Garden/ko/)
-	자바스크립틔 강의서 
+	
+    자바스크립틔 강의서 
     
 
 
