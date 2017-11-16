@@ -249,7 +249,7 @@ Syntax Theme: Chester Atom
 
 ### blog
 
-http://byjade.tistory.com/15
+[http://byjade.tistory.com/15](http://byjade.tistory.com/15)
 퍼블리셔 팁들
 
 <!--## Comments-->
