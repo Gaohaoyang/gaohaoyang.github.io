@@ -247,10 +247,10 @@ Syntax Theme: Chester Atom
 
     首页的卡片翻动效果非常赞。
 
-### blog
+## blog
 
 [http://byjade.tistory.com/15](http://byjade.tistory.com/15)
-퍼블리셔 팁들
+	퍼블리셔 팁들
 
 <!--## Comments-->
 
