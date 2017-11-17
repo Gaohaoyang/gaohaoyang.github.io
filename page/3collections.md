@@ -248,7 +248,8 @@ Syntax Theme: Chester Atom
     首页的卡片翻动效果非常赞。
 
 ## blog
-
+[http://allthatcode.com/](http://allthatcode.com/) 
+	딩스님 블로그
 [http://byjade.tistory.com/15](http://byjade.tistory.com/15)
 	퍼블리셔 팁들
 
