@@ -8,7 +8,7 @@ type: page
 
 * content
 {:toc}
-
+## ※이하의 링크들은 기존 jekll 테마에 있던 링크들입니다. 제 개인적인 링크들은 etc category의 xmind tag에 있습니다. 
 ## converter
 
 * [box-shadow generator](http://www.cssmatic.com/box-shadow)
@@ -116,7 +116,7 @@ es6변환 및 학습?
 ### React
 
 * [深入理解 React -Thinking in React 中文版](http://reactjs.cn/react/docs/thinking-in-react.html)
-* [Thinking in React](http://facebook.github.io/react/docs/thinking-in-react.html)
+* [React 공식문서](https://reactjs.org/)
 
 ### AngularJS
 
