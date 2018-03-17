@@ -7,7 +7,7 @@
 
 # Site settings
 title: Lee kyoung ju
-brief-intro: Front-end Dev Engineer
+brief-intro: Publisher & Beginner Front-end 
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://rudwnok123.github.io" # the base hostname & protocol for your site
 
@@ -32,7 +32,7 @@ duoshuo_shortname: #hygblog
 disqus_shortname: gaohaoyang
 
 # Disqus
-dicus-idefifier: rudwnok123-github-tio # add your disqus idenfifier
+dicus-idefifier: rudwnok123-github-io # add your disqus idenfifier
 
 # statistic analysis 统计代码
 # 百度统计 id，将统计代码替换为自己的百度统计id，即
