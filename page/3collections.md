@@ -9,7 +9,7 @@ type: page
 * content
 {:toc}
 
-※ 이하의 링크들은 기존 jekll 테마에 있던 링크들입니다. 제 개인적인 링크들은 categories->etc의 xmind tag에 있습니다. 
+※ 이하의 링크들은 기존 jekyll 테마에 있던 링크들입니다. 제 개인적인 링크들은 categories->etc의 xmind tag에 있습니다. 
 
 [codepen 바로가기](https://codepen.io/rudwnok/)
 
@@ -254,6 +254,7 @@ Syntax Theme: Chester Atom
 ## blog
 [http://allthatcode.com/](http://allthatcode.com/) 
 	딩스님 블로그
+    
 [http://byjade.tistory.com/15](http://byjade.tistory.com/15)
 	퍼블리셔 팁들
 
