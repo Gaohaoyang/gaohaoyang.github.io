@@ -9,7 +9,8 @@ type: page
 * content
 {:toc}
 
-==※ 이하의 링크들은 기존 jekll 테마에 있던 링크들입니다. 제 개인적인 링크들은 categories->etc의 xmind tag에 있습니다. ==
+※ 이하의 링크들은 기존 jekll 테마에 있던 링크들입니다. 제 개인적인 링크들은 categories->etc의 xmind tag에 있습니다. 
+[codepen 바로가기](https://codepen.io/rudwnok/)
 ## converter
 
 * [box-shadow generator](http://www.cssmatic.com/box-shadow)
