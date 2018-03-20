@@ -10,7 +10,7 @@ type: page
 {:toc}
 
 ## About me
-
+[개인 도메인](http://6thfinger.com/portpolio/)
 
 
 ## 연혁
