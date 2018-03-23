@@ -12,6 +12,7 @@ type: page
 ※ 이하의 링크들은 기존 jekyll 테마에 있던 링크들입니다. 제 개인적인 링크들은 categories->etc의 xmind tag에 있습니다. 
 
 [codepen 바로가기](https://codepen.io/rudwnok/)
+[xmind링크 ](https://www.xmind.net/m/qUcW)
 
 ## converter
 
