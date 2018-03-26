@@ -11,7 +11,8 @@ type: page
 
 ## About me
 [개인 도메인](http://6thfinger.com/portpolio/)
-
+[codepen 바로가기](https://codepen.io/rudwnok/)
+[xmind링크 ](https://www.xmind.net/m/qUcW)
 
 ## 연혁
 
