@@ -11,6 +11,7 @@ tags: script
 <script defer src="extern.js"></script>
 ```
 ![이미지 테스트](https://postimg.org/image/vt6jlty07/)
+
 `
 async :
 웹페이지 파싱과 외부 스크립트 파일의 다운로드가 동시에 진행된다. 스크립트는 다운로드 완료 직후 실행된다. IE9 이하 버전은 지원하지 않는다.
