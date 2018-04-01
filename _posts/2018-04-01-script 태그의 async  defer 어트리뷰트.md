@@ -10,7 +10,7 @@ tags: script
 <script async src="extern.js"></script>
 <script defer src="extern.js"></script>
 ```
-![이미지 테스트](https://postimg.org/image/vt6jlty07/)
+![이미지 테스트](https://s31.postimg.org/3t2g1jujv/script-execution.jpg)
 
 `
 async :
