@@ -40,14 +40,19 @@ https://www.xmind.net/m/qUcW)
 
 ## 실무 프로젝트 개발
 
-* 아임유어팬 하이브리드 앱 4페이지( 모바일 100% ) - 3day
+* 아임유어팬 하이브리드 앱 4페이지( 모바일 100% ) - 3day 
 * 하이투자증권 이벤트페이지 2월분( 웹 90%, 모바일 80% ) - 5day
-* 팔복예술공장 ( 메인페이지 웹 100% ) - 0.7day
-* 전라북도착한가격업소 - 접근성 검사 참여
+* 팔복예술공장 ( 메인페이지 웹 100% ) - 0.7day 
+[http://www.palbokart.kr/]
+* 전라북도착한가격업소 - 접근성 검사 참여 [http://jbgoodprice.jeonbuk.go.kr/main.html]
 * 움채 사이트 ( 메인페이지 웹 100% ) - 1.5day
+[http://www.jangsuae.com/]
 * 옥동석재산업 사이트 ( 메인페이지 웹 100% ) - 1.5day
+[http://www.okdong.co.kr/]
 * 미생물센터 사이트 ( 메인페이지 웹 100% 코딩 ) - 1.5day
+[http://www.ciam.or.kr/]
 * 조일기석 사이트 ( 메인페이지 웹 100% 코딩 ) - 1.5day
+[http://www.joilbaduk.com/]
 
 ## 기타 교육이수
 
