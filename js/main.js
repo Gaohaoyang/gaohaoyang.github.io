@@ -13,13 +13,8 @@
     var nav = document.querySelector('#headerNav')
     menuBtn.onclick = function(e) {
       e.stopPropagation()
-      if (menuBtn.classList.contains('active')) {
-        menuBtn.classList.remove('active')
-        nav.classList.remove('nav-show')
-      } else {
-        nav.classList.add('nav-show')
-        menuBtn.classList.add('active')
-      }
+      menuBtn.classList.toggle('active')
+      nav.classList.toggle('nav-show')
     }
     document.querySelector('body').addEventListener('click', function() {
       nav.classList.remove('nav-show')
