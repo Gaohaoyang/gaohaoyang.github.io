@@ -14,7 +14,11 @@ type: page
 
 [codepen 바로가기](https://codepen.io/rudwnok/)
 
+<<<<<<< HEAD
 **[xmind링크 바로가기](https://www.xmind.net/m/du93)** : 제가 17년 5월부터 공부하며 또는 실무하며 참고하거나 찾아본 사이트 들입니다.
+=======
+**[xmind링크 바로가기](https://www.xmind.net/m/5gtw)** : 제가 17년 5월부터 공부하며 또는 실무하며 참고하거나 찾아본 사이트 들입니다.
+>>>>>>> 225c893a8a8689044e4c29248ffa87aa3eba7e53
 
 ## 연혁
 
