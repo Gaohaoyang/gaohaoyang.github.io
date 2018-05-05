@@ -6,7 +6,7 @@ categories: explanation
 tags: vscode ftp
 ---
 
-#vscode에서 ftp연결하기 
+# vscode에서 ftp연결하기 
 
 1. 확장프로그램에서 ftp-simple 다운. 
 
