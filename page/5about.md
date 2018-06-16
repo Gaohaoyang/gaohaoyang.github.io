@@ -69,6 +69,6 @@ type: page
 
 
 
-<!--## Comments-->
+## Comments
 
-<!--{% include comments.html %}-->
+{% include comments.html %}
