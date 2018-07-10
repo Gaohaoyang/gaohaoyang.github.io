@@ -144,22 +144,24 @@
  * @return {[type]} [description]
  */
 function contentInit(content) {
-  // var htmlArr = [];
-  // for (var i = 0; i < content.length; i++) {
-  //     htmlArr.push('<div class="grid-item">')
-  //     htmlArr.push('<a class="a-img" href="'+content[i].demo_link+'">')
-  //     htmlArr.push('<img src="'+content[i].img_link+'">')
-  //     htmlArr.push('</a>')
-  //     htmlArr.push('<h3 class="demo-title">')
-  //     htmlArr.push('<a href="'+content[i].demo_link+'">'+content[i].title+'</a>')
-  //     htmlArr.push('</h3>')
-  //     htmlArr.push('<p>主要技术：'+content[i].core_tech+'</p>')
-  //     htmlArr.push('<p>'+content[i].description)
-  //     htmlArr.push('<a href="'+content[i].code_link+'">源代码 <i class="fa fa-code" aria-hidden="true"></i></a>')
-  //     htmlArr.push('</p>')
-  //     htmlArr.push('</div>')
-  // }
-  // var htmlStr = htmlArr.join('')
+  //여기머지
+  var htmlArr = [];
+  for (var i = 0; i < content.length; i++) {
+      htmlArr.push('<div class="grid-item">')
+      htmlArr.push('<a class="a-img" href="'+content[i].demo_link+'">')
+      htmlArr.push('<img src="'+content[i].img_link+'">')
+      htmlArr.push('</a>')
+      htmlArr.push('<h3 class="demo-title">')
+      htmlArr.push('<a href="'+content[i].demo_link+'">'+content[i].title+'</a>')
+      htmlArr.push('</h3>')
+      htmlArr.push('<p>主要技术：'+content[i].core_tech+'</p>')
+      htmlArr.push('<p>'+content[i].description)
+      htmlArr.push('<a href="'+content[i].code_link+'">源代码 <i class="fa fa-code" aria-hidden="true"></i></a>')
+      htmlArr.push('</p>')
+      htmlArr.push('</div>')
+  }
+  var htmlStr = htmlArr.join('')
+  //
   var htmlStr = ''
   for (var i = 0; i < content.length; i++) {
     htmlStr += '<div class="grid-item">' + '   <a class="a-img" href="' + content[i].demo_link + '">' + '       <img src="' + content[i].img_link + '">' + '   </a>' + '   <h3 class="demo-title">' + '       <a href="' + content[i].demo_link + '">' + content[i].title + '</a>' + '   </h3>' + '   <p>主要技术：' + content[i].core_tech + '</p>' + '   <p>' + content[i].description + '       <a href="' + content[i].code_link + '">源代码 <i class="fa fa-code" aria-hidden="true"></i></a>' + '   </p>' + '</div>'
