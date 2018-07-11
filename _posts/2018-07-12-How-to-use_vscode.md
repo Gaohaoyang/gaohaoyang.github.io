@@ -16,7 +16,7 @@ tags: vscode
 4. git
 
 ### ui 설명
-![Alt text](../img/diablo-3-hd-logo.jpg)
+![Alt text](/img/diablo-3-hd-logo.jpg)
 
 
 {% include comments.html %}
