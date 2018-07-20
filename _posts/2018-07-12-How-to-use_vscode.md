@@ -16,6 +16,8 @@ tags: vscode
 
 - 외국 또는 국내 프론트엔드 개발자가 많이 쓰는 툴입니다.
 [인텔리제이와 vscode 스펙 비교글](https://www.slant.co/versus/1958/5982/~intellij-idea_vs_visual-studio-code)
+[해외 개발자 사용 사례 - 노마드 코더의 니콜라스(유튜브 채널로 이동합니다)](https://www.youtube.com/channel/UCUpJs89fSBXNolQGOYKn0YQ/videos)
+[국내 개발자 사용 사례 - 벨로퍼트님(유튜브 채널로 이동합니다)](https://www.youtube.com/channel/UCmMgRlN-3GKQ_CH7cOtLdvg/videos)
 
 
 - 내장 터미널과 젠코딩을 기본적으로 포함하고 있으며, 무료이지만 다양한 패키지들로 다른 유료 툴 (jetbrain제품들 : intellij, webstorm 등등)들과 비교하여 뒤쳐지지 않습니다. (업데이트로 jetbrain제품들의 기능이 추가되는 중입니다.)
