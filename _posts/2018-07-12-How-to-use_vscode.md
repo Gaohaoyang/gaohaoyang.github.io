@@ -114,7 +114,7 @@ css인 경우 클래스로 인식한다.
 [설명](https://rudwnok123.github.io/2018/03/19/vscode-%ED%8C%A8%ED%82%A4%EC%A7%80-%EC%A0%80%EC%9E%A5%ED%95%98%EA%B8%B0/) : 작성중..
 
 #### simple-ftp로 ftp연결 
-[보러가기](https://rudwnok123.github.io/2018/05/06/vscode-ftp%EC%97%B0%EA%B2%B0/) : 수정중..D:\rudwn\code\rudwnok123.github.io\_config.yml
+[보러가기](https://rudwnok123.github.io/2018/05/06/vscode-ftp%EC%97%B0%EA%B2%B0/) : 수정중..
 
 - 패키지를 받을 시 git history나 git lens등 다양한 git 관련 기능을 사용할 수 있습니다. 
 
