@@ -15,8 +15,11 @@ tags: vscode
 - vscode 는 마이크로소프트가 제작한 툴입니다. (요새 마소 열일 하는거 아시죠? 깃허브도 먹었고..)
 
 - 외국 또는 국내 프론트엔드 개발자가 많이 쓰는 툴입니다.
+
 [인텔리제이와 vscode 스펙 비교글](https://www.slant.co/versus/1958/5982/~intellij-idea_vs_visual-studio-code)
+
 [해외 개발자 사용 사례 - 노마드 코더의 니콜라스(유튜브 채널로 이동합니다)](https://www.youtube.com/channel/UCUpJs89fSBXNolQGOYKn0YQ/videos)
+
 [국내 개발자 사용 사례 - 벨로퍼트님(유튜브 채널로 이동합니다)](https://www.youtube.com/channel/UCmMgRlN-3GKQ_CH7cOtLdvg/videos)
 
 
