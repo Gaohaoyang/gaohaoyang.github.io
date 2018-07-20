@@ -9,14 +9,16 @@ tags: vscode
 * content
 {:toc}
 
-## visual studio code (이하 vscode)
+## visual studio code 소개하기
+이하 vscode
 [설치하기](https://code.visualstudio.com/)
 
 - vscode 는 마이크로소프트가 제작한 툴입니다. (요새 마소 열일 하는거 아시죠? 깃허브도 먹었고..)
 
 - 외국 또는 국내 프론트엔드 개발자가 많이 쓰는 툴입니다.
 
-[인텔리제이와 vscode 스펙 비교글](https://www.slant.co/versus/1958/5982/~intellij-idea_vs_visual-studio-code)
+[인텔리제이와 vscode 스펙 비교글 참고](https://www.slant.co/versus/1958/5982/~intellij-idea_vs_visual-studio-code)
+(~~유료와 무료를 비교하긴 그렇지만 유료만큼 좋다는것을 의미합니다.~~)
 
 [해외 개발자 사용 사례 - 노마드 코더의 니콜라스님(유튜브 채널로 이동합니다)](https://www.youtube.com/channel/UCUpJs89fSBXNolQGOYKn0YQ/videos)
 
@@ -55,10 +57,11 @@ tags: vscode
 
 ##### 개요
 ![Alt text](/img/filter.png)
-탐색기에서 아래쪽의 개요를 이용하여 전체 구조를 볼 수 있습니다.
-js인 경우 변수와 함수로 구분되며, 전역변수가 맨 밑에 위치합니다. 
-html인 경우 태그로 인식합니다. 
-css인 경우 클래스로 인식합니다. 
+
+- 탐색기에서 아래쪽의 개요를 이용하여 전체 구조를 볼 수 있습니다.
+  - js인 경우 변수와 함수로 구분되며, 전역변수가 맨 밑에 위치합니다. 
+  - html인 경우 태그로 인식합니다. 
+  - css인 경우 클래스로 인식합니다. 
 
 
 ### 2. 단축키 및 셋팅
