@@ -28,8 +28,8 @@ description_footer: 学习资料汇总
 # comments
 # two ways to comment, only choose one, and use your own short name
 # 两种评论插件，选一个就好了，使用自己的 short_name
-duoshuo_shortname: #hygblog
-disqus_shortname: wangqiwen
+#duoshuo_shortname: #hygblog
+disqus_shortname: wqw547243068
 
 # statistic analysis 统计代码
 # 百度统计 id，将统计代码替换为自己的百度统计id，即
