@@ -26,6 +26,7 @@ tags: vscode
 
 
 - 내장 터미널과 젠코딩을 기본적으로 포함하고 있으며, 무료이지만 다양한 패키지들로 다른 유료 툴 (jetbrain제품들 : intellij, webstorm 등등)들과 비교하여 뒤쳐지지 않습니다. (업데이트로 jetbrain제품들의 기능이 추가되는 중입니다.)
+  **[젠코딩 문법 보기](https://docs.emmet.io/cheat-sheet/)**
 ![Alt text](/img/vs_vscode.png)
 **(좌:인텔리제이 우:vscode)**
 
@@ -113,6 +114,7 @@ tags: vscode
 - 열린 파일의 경로로 터미널 경로 잡아주기 ctrl + alt + o
 - 전체 ui 사이즈 조절 ctrl +,-
 - ctrl + g 입력한 라인으로 커서 이동하기
+- 기타 기본적인 웹 단축키(ctrl + w, ctrl + shit + t, ctrl + tab 같은 것들 )은 다 됩니다. 
 
 
 ### 3. 패키지
@@ -124,13 +126,15 @@ tags: vscode
 #### simple-ftp로 ftp연결 
 [보러가기](https://rudwnok123.github.io/2018/05/06/vscode-ftp%EC%97%B0%EA%B2%B0/) : 수정중..
 
-- 패키지를 받을 시 git history나 git lens등 다양한 git 관련 기능을 사용할 수 있습니다. 
+
 
 ### 4. git
 ![Alt text](/img/git_remote.png)
 기본적인 git 명령어: add, push, pull, commit 같은건 내장된 터미널 상에서 할수있고,
 자체적으로 소스트리와 github desktop처럼 ui에서 push, pull, commit을 지원한다. 연결된 레포가 있다면 왼쪽 사이드 방의 가지모양에서 소스제어 공급자 아래에 목록이 생깁니다. 
 연결된 파일을 수정하게 되면 수정한 것이 변경 내용에 뜨고 커밋메시지를 입력후 빨간색 표시를 눌러 push(등등 목록이 나온다.)를 할 수 있습니다.
+
+- 패키지를 받을 시 git history나 git lens등 다양한 git 관련 기능을 사용할 수 있습니다. 
 
 **git 자체의 명령어나 데이터 이동에 대한 건 심오한 내용이라 여기선 다루지 않습니다**
 
@@ -140,7 +144,15 @@ tags: vscode
 - 무료. 패키지 종류가 많다. 단축키화는 불편한듯.. ftp연결은 vscode보다 낫다. 패키지 설치시 무거워짐
 
 #### editplus 
-- 기본적으로 유료. ftp관리 편함 
+- 기본적으로 유료(무료로 할시 30일 사용 가능). ftp관리 편함 
+
+#### Nodepad++
+
+#### sublimeText
+
+##### 기타 미사용 에디터
+- 브라켓
+- 인텔리제이(설치는 되있으나..)
 
 -- 추가 작성중
 
