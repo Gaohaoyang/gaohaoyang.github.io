@@ -100,8 +100,10 @@ tags: vscode
 - f1의 기능 : 설치된 패키지 및 내부 기능을 사용할수있습니다. 
   - wrapping : 선택된 것의 앞뒤로 태그 추가 기능  //젠코딩의 기능입니다.
   - theme : 테마 선택
-  - sync, simple-ftp 등등
+  - sync, simple-ftp, live server, emmet 등등
+  - 
   - f1을 누른후 백스페이스로 > 지운후에는 파일명을 검색 할수 있습니다.(확장자로도 가능)
+  
 
 - 터미널 열기 ctrl + `
 - 라인정렬 ctrl + k,f & ctrl + k,d & shift + alt + f
