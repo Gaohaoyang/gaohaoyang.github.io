@@ -97,6 +97,26 @@ tags: vscode
     "command": "extension.inBrowser",
     "when": "editorTextFocus"
   },
+  {
+    "key": "end",
+    "command": "list.focusLast",
+    "when": "listFocus && !inputFocus"
+  },
+  {//이하 ; 으로 end대신하기(라인의 맨끝으로 가는 end가 너무 멀어 ;키로 대체)
+    "key": "end",
+    "command": "-list.focusLast",
+    "when": "listFocus && !inputFocus"
+  },
+  {
+    "key": "ctrl+oem_1",
+    "command": "cursorEnd",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "end",
+    "command": "cursorEnd",
+    "when": "textInputFocus"
+  },
 ]
 ```
 - f1의 기능 : 설치된 패키지 및 내부 기능을 사용할수있습니다. 
