@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "学习 | 如何学习数学和科学-1"
-date:   
+date:   2018-04-22
 categories: 成长
 tags: 学习之道
 author: HYL

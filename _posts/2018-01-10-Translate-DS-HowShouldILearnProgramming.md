@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "编程 | 我该怎么样学习编程呢？"
-date:   
+date:   2018-01-10
 categories: 编程
 tags: 学习编程
 author: HYL

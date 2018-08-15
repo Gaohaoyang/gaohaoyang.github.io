@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "练太极 | 练太极是一种享受 - 5"
-date:   
+date:   2018-06-30
 categories: 生活
 tags: 太极
 author: HYL

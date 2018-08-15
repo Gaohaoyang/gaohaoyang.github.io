@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "洞见 | 如何平衡做自己喜欢的事情和挣钱工作"
-date:   
+date:   2018-06-26
 categories: 成长
 tags: 平衡
 author: HYL

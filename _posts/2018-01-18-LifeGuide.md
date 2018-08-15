@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "生活 | 习惯指南"
-date:   
+date:   2018-01-18
 categories: 生活
 tags: 习惯
 author: HYL

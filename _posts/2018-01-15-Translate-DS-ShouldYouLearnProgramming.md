@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "编程 | 你应该学习编程吗？是的。"
-date:   
+date:   2018-01-15
 categories: 编程
 tags: 学习编程
 author: HYL

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "画画 | 色彩基础"
-date:   
+date:   2018-05-03
 categories: 成长
 tags: 画画
 author: HYL

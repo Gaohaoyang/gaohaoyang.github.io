@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "编程 | 如何学习JavaScript"
-date:   
+date:   2018-01-16
 categories: 编程
 tags: 学习编程
 author: HYL
