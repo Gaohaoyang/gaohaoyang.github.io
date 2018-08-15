@@ -1,9 +1,12 @@
 ---
-layout:     post
-title:      美食 | 原味曲奇饼
-category: blog
-description: 解锁曲奇饼
+layout: post
+title:  "美食 | 原味曲奇饼"
+date:   
+categories: 生活
+tags: 美食
+author: HYL
 ---
+
 两年前买烤箱的时候，想过何时可以烤曲奇饼。可是看烤曲奇饼还要称重啥的，觉得麻烦，一直搁着没做。
 
 今年看[博主熊燕姐](https://weibo.com/u/1684864783?topnav=1&wvr=6&topsug=1) 推荐她新认识的朋友，

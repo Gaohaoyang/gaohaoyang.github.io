@@ -1,10 +1,11 @@
 ---
-layout:     post
-title:      线上参与 | 上海 ZoomQuiet 小型分享
-category: blog
-description: 后半程参与，最大的感触是不要轻易说你对某事感兴趣，如果说了，那么请以正确姿态感兴趣
+layout: post
+title:  "线上参与 | 上海 ZoomQuiet 小型分享"
+date:   
+categories: 成长
+tags: 分享
+author: HYL
 ---
-
 
 ## TOP3 
 

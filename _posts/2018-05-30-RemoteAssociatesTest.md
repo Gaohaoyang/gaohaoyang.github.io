@@ -1,10 +1,11 @@
 ---
-layout:    post
-title:     写作 | 远距联想能力
-category:  blog
-description: 你的远距联想能力提高了，你的文章就妙了。
+layout: post
+title:  "写作 | 远距联想能力"
+date:   
+categories: 成长
+tags: 写作
+author: HYL
 ---
-
 远距联想测试，英文全称为“Remote Associate Test",维基百科上是这么解释的：
 
 > The Remote Associates Test (RAT) is a creativity test used to determine a human's creative potential. The test typically lasts forty minutes and consists of thirty to forty questions each of which consists of three common stimulus words that appear to be unrelated. The person being tested must think of a fourth word that is somehow related to each of the first three words. Scores are calculated based on the number of correct questions.

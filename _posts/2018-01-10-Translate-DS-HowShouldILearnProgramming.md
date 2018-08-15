@@ -1,10 +1,11 @@
 ---
-layout:     post
-title:      编程 | 我该怎么样学习编程呢？
-category: blog
-description: 编程啊？好高深。。。？我不会。。，我要不要学。。当然要
+layout: post
+title:  "编程 | 我该怎么样学习编程呢？"
+date:   
+categories: 编程
+tags: 学习编程
+author: HYL
 ---
- 
  
  在这个信息社会，如果我问你，你要学习编程吗？你也许会说，编程啊？好高深。。。？我不会。。。，那你要不要学呢？当然要。问题是我该怎么学呢？
  

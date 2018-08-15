@@ -1,8 +1,10 @@
 ---
-layout:    post
-title: 太极 | 练太极是一种享受 1
-category:  blog
-description: 柔中带劲，节节生风
+layout: post
+title:  "太极 | 练太极是一种享受 1"
+date:   
+categories: 生活
+tags: 太极
+author: HYL
 ---
 
 “练太极是一种享受”，第一节课，王老师对我们说。

@@ -1,9 +1,10 @@
 ---
-layout:     post
-title:      洞见 | 如何平衡做自己喜欢的事情和挣钱工作
-category: blog
-description: 不要让工作占据你的生活。不要让艺术成为你唯一的收入来源。让他们保持本来的样子，然后努力平衡这两个，你会过得幸福。
-
+layout: post
+title:  "洞见 | 如何平衡做自己喜欢的事情和挣钱工作"
+date:   
+categories: 成长
+tags: 平衡
+author: HYL
 ---
 
 觉得博主Derek Sivers这篇文章挺不错的，翻译出来，告诉自己，也分享给大家。

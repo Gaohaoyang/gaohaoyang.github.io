@@ -1,8 +1,10 @@
 ---
-layout:    post
-title:     读书笔记 | 我们赖以生存的隐喻-2
-category:  blog
-description: 隐喻性概念的系统性
+layout: post
+title:  "读书笔记 | 我们赖以生存的隐喻-2"
+date:   
+categories: 成长
+tags: 读书
+author: HYL
 ---
 
 为了搞清楚日常语言中隐喻性表达是如何揭示建构我们日常行为的概念的隐喻属性，我们来举个例子，“时间就是金钱”这个隐喻性概念。

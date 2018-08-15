@@ -1,8 +1,10 @@
 ---
-layout:    post
-title: 美食 | 炒蛏子红薯粉丝
-category:  blog
-description: 好吃极了
+layout: post
+title:  "美食 | 炒蛏子红薯粉丝"
+date:   
+categories: 生活
+tags: 美食
+author: HYL
 ---
 
 妈妈做的一道极其家常美味的炒蛏子红薯粉丝。

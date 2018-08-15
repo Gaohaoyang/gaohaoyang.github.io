@@ -1,8 +1,10 @@
 ---
-layout:    post
-title:     读书笔记 | 我们赖以生存的隐喻-1
-category:  blog
-description: 隐喻，是我们赖以生存的概念。
+layout: post
+title:  "读书笔记 | 我们赖以生存的隐喻-1"
+date:   
+categories: 成长
+tags: 读书
+author: HYL
 ---
 
 隐喻，是我们的概念系统，是我们赖以生存的概念。

@@ -1,10 +1,11 @@
 ---
-layout:     post
-title:      编程 | 你应该学习编程吗？是的。
-category: blog
-description: 她说的是自立。如果你有一个想法，不管是歌曲或者app，你需要掌握一些基本的技巧，这样才能把想法变成现实。不是么？
+layout: post
+title:  "编程 | 你应该学习编程吗？是的。"
+date:   
+categories: 编程
+tags: 学习编程
+author: HYL
 ---
-
 
 # 你应该学习编程吗？是的。
 

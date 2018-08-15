@@ -1,10 +1,11 @@
 ---
-layout:    post
-title:     行走 | 走过的地方
-category:  blog
-description: 走过的地方
+layout: post
+title:  "行走 | 走过的地方"
+date:   
+categories: 旅行
+tags: 旅行
+author: HYL
 ---
-
 
 ## 国内
 

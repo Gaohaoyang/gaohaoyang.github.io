@@ -1,8 +1,10 @@
 ---
-layout:     post
-title: 美食 | 烤一个欧式面包
-category: blog
-description: 你也来动手做做吧，五一五一，劳动劳动，小幸运就来啦。
+layout: post
+title:  "美食 | 烤一个欧式面包"
+date:   
+categories: 生活
+tags: 美食
+author: HYL
 ---
 
 自己烤的面包虽然没有卖相，但是付出了心血和劳动的果实，吃着就是香啊。

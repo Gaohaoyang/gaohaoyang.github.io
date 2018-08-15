@@ -1,8 +1,10 @@
 ---
-layout:     post
-title:      读书笔记 | 我们赖以生存的隐喻-6
-category: blog
-description: 隐喻连贯性的挑战
+layout: post
+title:  "读书笔记 | 我们赖以生存的隐喻-6"
+date:   
+categories: 成长
+tags: 读书
+author: HYL
 ---
 
 

@@ -1,10 +1,11 @@
 ---
-layout:     post
-title:      生活 | 习惯指南
-category: blog
-description: 记录一些接触到的理念，践行这些习惯指南：）
+layout: post
+title:  "生活 | 习惯指南"
+date:   
+categories: 生活
+tags: 习惯
+author: HYL
 ---
-
 ## 生活篇
 
 > Less is more. 

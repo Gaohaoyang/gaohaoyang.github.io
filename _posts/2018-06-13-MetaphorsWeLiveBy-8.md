@@ -1,8 +1,10 @@
 ---
-layout:     post
-title:      读书笔记 | 我们赖以生存的隐喻-8
-category: blog
-description: 小结
+layout: post
+title:  "读书笔记 | 我们赖以生存的隐喻 小结"
+date:   
+categories: 成长
+tags: 读书
+author: HYL
 ---
 
 

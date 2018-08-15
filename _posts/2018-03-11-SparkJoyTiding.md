@@ -1,10 +1,11 @@
 ---
-layout:    post
-title:     电影 | 怦然心动的人生整理魔法
-category:  blog
-description: 套用电影里的一句话，“整理是一场祭祀",“它是将你的零碎人生拼接完整”
+layout: post
+title:  "电影 | 怦然心动的人生整理魔法"
+date:   
+categories: 电影
+tags: 电影
+author: HYL
 ---
-
 
 
 ## 缘起，阳春二三月

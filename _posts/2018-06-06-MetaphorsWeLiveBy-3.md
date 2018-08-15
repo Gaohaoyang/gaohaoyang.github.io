@@ -1,8 +1,10 @@
 ---
-layout:    post
-title:     读书笔记 | 我们赖以生存的隐喻-3
-category:  blog
-description: 方位隐喻
+layout: post
+title:  "读书笔记 | 我们赖以生存的隐喻-3"
+date:   
+categories: 成长
+tags: 读书
+author: HYL
 ---
 
 明天又是一年一度的高考了，今天看到微信公号提到的浙江省高考改革试点第 2 年，考生只需要考 3 门就可以了，那就是语文，数学和英语，甚是为广大考生感到高兴。

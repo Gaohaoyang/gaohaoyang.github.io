@@ -1,8 +1,10 @@
 ---
-layout:     post
-title:      电影 | 小森林
-category: blog
-description: 简单的劳动日常，对大自然馈赠敬畏，逃避与面对，假装努力与积极诚实，治愈系的电影 
+layout: post
+title:  "电影 | 小森林"
+date:   
+categories: 电影
+tags: 电影
+author: HYL
 ---
 
 如果说, 你想看一部风光秀美的乡村片，那么小森林我要推荐给你；

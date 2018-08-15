@@ -1,8 +1,10 @@
 ---
-layout:     post
-title:      练太极 | 练太极是一种享受 - 5
-category: blog
-description: 好好体会基本功
+layout: post
+title:  "练太极 | 练太极是一种享受 - 5"
+date:   
+categories: 生活
+tags: 太极
+author: HYL
 ---
 
 微晴的天气，不太热，水上餐厅微风习习。

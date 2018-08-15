@@ -1,8 +1,10 @@
 ---
-layout:     post
-title:      读书笔记 | 我们赖以生存的隐喻-7
-category: blog
-description: 来，更多例子了解
+layout: post
+title:  "读书笔记 | 我们赖以生存的隐喻-7"
+date:   
+categories: 成长
+tags: 读书
+author: HYL
 ---
 
 今天早上听新闻，很多大学实行自主招生，比如清华，北大和浙大，考生高考考完了，还要参加名校的考试，有笔试和面试等。有些学校还会要求考和本专业相关的一些科目，

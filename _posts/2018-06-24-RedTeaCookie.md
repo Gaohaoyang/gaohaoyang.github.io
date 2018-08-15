@@ -1,8 +1,10 @@
 ---
-layout:     post
-title:      美食 | 红茶曲奇
-category: blog
-description: 浓浓的黄油香
+layout: post
+title:  "美食 | 红茶曲奇"
+date:   
+categories: 生活
+tags: 美食
+author: HYL
 ---
 
 周末花一点点时间做红茶曲奇，获得一个小小的幸福感～～

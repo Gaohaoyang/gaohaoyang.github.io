@@ -1,10 +1,11 @@
 ---
-layout:     post
-title:     编程 | 如何学习JavaScript
-category: blog
-description: 学习没有捷径，有的就是笨方法。吓到了吧，没错，这可是大实话呢
+layout: post
+title:  "编程 | 如何学习JavaScript"
+date:   
+categories: 编程
+tags: 学习编程
+author: HYL
 ---
-
 
 我提到我最近在学的JavaScript,人们问我怎么学，有什么可推荐的。下面这是我2016年学习的经验和最好的建议。
 

@@ -1,10 +1,11 @@
 ---
-layout:     post
-title:      练太极 | 练太极是一种享受 - 4
-category: blog
-description: 站桩
+layout: post
+title:  "练太极 | 练太极是一种享受 - 4"
+date:   
+categories: 生活
+tags: 太极
+author: HYL
 ---
-
 
 站桩啊，是太极里面最基本的。
 

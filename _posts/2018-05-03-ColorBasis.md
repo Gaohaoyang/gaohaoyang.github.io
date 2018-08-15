@@ -1,10 +1,11 @@
 ---
-layout:    post
-title: 画画 | 色彩基础
-category:  blog
-description: 每个人从小学开始就应该学习色彩基础，因为生活中它太实用了
+layout: post
+title:  "画画 | 色彩基础"
+date:   
+categories: 成长
+tags: 画画
+author: HYL
 ---
-
 
  穿着大红衣服的圣诞老公公，挂着白色的胡子，背着一大麻袋礼物，来到了一户人家里。这户人家正忙着装点一颗圣诞树，墨绿墨绿的...
 

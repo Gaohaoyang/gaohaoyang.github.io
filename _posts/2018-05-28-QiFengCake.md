@@ -1,8 +1,10 @@
 ---
-layout:     post
-title:      美食 | 戚风蛋糕
-category: blog
-description: 戚风蛋糕不难，难的是蛋白的打发。 
+layout: post
+title:  "美食 | 戚风蛋糕"
+date:   
+categories: 生活
+tags: 美食
+author: HYL
 ---
 
 今年做了5次戚风蛋糕了，前几次都没发起，扁扁的，难得上上周日像样了一次，赶紧配方写下来啦。

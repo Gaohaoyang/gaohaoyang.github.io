@@ -1,10 +1,11 @@
 ---
-layout:     post
-title:      日常 | 封道换路线所思
-category: blog
-description: 平常走的道封了，换了一条新的路，心情不同了
+layout: post
+title:  "日常 | 封道换路线所思"
+date:   
+categories: 生活
+tags: 日常
+author: HYL
 ---
-
 明州大桥从去年开始，就是各种修修补补，要不就是左道封，就是右道封，再不然就是引桥封，好不容易快修完了吧，今天下午同事说平常的江南互通封了。
 
 想想，那该如何绕回家呢？

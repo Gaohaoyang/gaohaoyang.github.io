@@ -1,8 +1,10 @@
 ---
-layout:    post
-title:     读书笔记 | 我们赖以生存的隐喻-4
-category:  blog
-description: 本体隐喻, 拟人
+layout: post
+title:  "读书笔记 | 我们赖以生存的隐喻-4"
+date:   
+categories: 成长
+tags: 读书
+author: HYL
 ---
 
 ## 实体和物质隐喻
