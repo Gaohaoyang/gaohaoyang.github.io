@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "读书笔记 | 我们赖以生存的隐喻 小结"
-date:   
+date:   2018-06-13
 categories: 成长
 tags: 读书
 author: HYL
