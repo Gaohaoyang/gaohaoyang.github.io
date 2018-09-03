@@ -12,7 +12,7 @@ tags: 学习
 
 author: HYL
 
-\---
+---
 
 ​	周末在哪里，在干什么，基本反映了一个人的精神状态和未来的发展潜力。这句话看起来有理也看起来无理。未来的发展潜力可以凭周末来衡量？
 
@@ -99,8 +99,6 @@ TI采用当地俱乐部结构，每个俱乐部有20到40个成员。会议每�
 
 
 
-### 
-
 
 
 
@@ -109,17 +107,18 @@ TI采用当地俱乐部结构，每个俱乐部有20到40个成员。会议每�
 
 
 
-## 
 
 
 
-[^https://en.wikipedia.org/wiki/Toastmasters_International]: 
+[^https://en.wikipedia.org/wiki/Toastmasters_International]: 维基介绍
 
 
 
 
 
 ## Change Log
+
+- 20180903 
 
 
 
