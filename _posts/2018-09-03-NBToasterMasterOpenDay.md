@@ -110,7 +110,7 @@ TI采用当地俱乐部结构，每个俱乐部有20到40个成员。会议每�
 
 
 
-[^https://en.wikipedia.org/wiki/Toastmasters_International]: 维基介绍
+[维基介绍](https://en.wikipedia.org/wiki/Toastmasters_International)
 
 
 
