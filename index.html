@@ -64,6 +64,42 @@ layout: default
             <span class="next disable"><i class="fa fa-angle-double-right"></i></span>
           {% endif %}
         </div>
+        <div class="pagejump" style="text-align: center;">	
+		<input id="pagejumptext" placeholder="jump to..." style="text-align: center;width: 8%;background-color: white;" onkeydown="if(event.keyCode==13) {onPressEnter()}"> 
+		<script>
+		function isNum(val){
+    			if(val === "" || val ==null){
+        			return false;
+    			}
+    			if(!isNaN(val)){
+        			return true;
+    			}
+    			else{
+        			return false;
+    			}
+		}     	
+		</script>
+		<script>
+		function onPressEnter(){
+			var pageid = document.getElementById("pagejumptext").value
+			if(isNum(pageid)==false){
+				alert("Invalid Page Number!")
+				return
+			}
+			number = parseInt(pageid)
+			minn = 1
+			maxn = {{paginator.total_pages}}
+			if(number < minn)
+				number = minn
+			if(number > maxn)
+				number = maxn
+			if(number == 1)
+				location.href='/'
+			else 
+				location.href='/page'+number.toString()
+		}
+		</script>
+	</div>
     </div>
     <!-- <button class="anchor"><i class="fa fa-anchor"></i></button> -->
     <div class="right">
