@@ -10,7 +10,7 @@ mathjax: true
 [Facebook田渊栋：博士五年之后五年的总结](https://mp.weixin.qq.com/s?__biz=MzAxMzc2NDAxOQ==&mid=2650369213&idx=1&sn=9045f9948df77cb722ef2873d5466f40&chksm=83905861b4e7d177f0e320ca5497615a2ce777556e9c6d59503398d1dc2bc824a4adb5af60a2&mpshare=1&scene=1&srcid=1016J1NUjbZDjbPIH5PyFk49#rd)
 >编者按：田渊栋，在硅谷年轻一代华人工程师和计算机科研工作者中具有不小的知名度。身为Facebook人工智能研究院研究员的他在专注科研的同时，一直笔耕不辍。他的文章具有深邃的思想，又兼具可读性。五年前，他在知乎上分享的文章《[博士五年总结](https://zhuanlan.zhihu.com/p/30656493)》曾引起关注；五年后，他再用《博士五年之后五年的总结》系列文章，回顾了博士毕业五年，在硅谷从谷歌无人驾驶转到Facebook人工智能研究院的所思与所得。本文汇总了该系列文章的前言、其一、其二和其三。
 
-![田渊栋](https://mmbiz.qpic.cn/mmbiz_jpg/I40IBicG0iaZ8g8vHP3mFfomPIiccpLtb9zS70mk7PPq2IsTpNnmfKiaklUQQ4yygbtBpU3mH3qTuew0NsvNXZ3n9g/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![田渊栋](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540311926&di=12baf040b450b7a8b3c7db669f6b8664&imgtype=jpg&er=1&src=http%3A%2F%2Fn1.itc.cn%2Fimg8%2Fwb%2Frecom%2F2017%2F03%2F20%2F149001635398878036.JPEG)
 
 <h1 align="center">前 言</h1>
 
