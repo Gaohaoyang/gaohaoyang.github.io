@@ -58,3 +58,8 @@ excerpt_separator: "\n\n\n\n"
 # paginate
 gems: [jekyll-paginate]
 paginate: 6
+
+
+#解决发表当前时间文章后因8小时时差而不能即时显示(被判定为未来时间的文章)的问题
+future: --true
+#或使用 timezone: Asia/Shanghai 解决
