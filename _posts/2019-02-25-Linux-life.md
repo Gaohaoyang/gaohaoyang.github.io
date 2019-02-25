@@ -7,6 +7,8 @@ tags: Linux
 excerpt: Linux之父的传记。
 mathjax: true
 ---
+* content
+{:toc}
 
 摘自地址：[Linus，一生只为寻找欢笑（完全版）](https://www.oschina.net/news/72562/linus-smell)
 
