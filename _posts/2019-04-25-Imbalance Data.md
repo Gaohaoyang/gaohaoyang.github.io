@@ -47,7 +47,7 @@ mathjax: true
 
 一个拙劣但准确的解决方案
 
-```
+```python
 def disease_screen(patient_data):
     # 忽略 patient_data
     return 'No Disease.'
@@ -78,7 +78,7 @@ def disease_screen(patient_data):
 这个数据集最初被生成用于模拟心理实验结果，但是对于我们非常有用，因为它的规模便于处理并且包含不平衡类别
 
 导入第三方依赖库并读取数据
-```
+```python
 import pandas as pd
 import numpy as np
 
@@ -113,7 +113,7 @@ df.head()
 
 每个类别的数量
 
-```
+```python
 df['balance'].value_counts()
 # R    288
 # L    288
@@ -127,7 +127,7 @@ df['balance'].value_counts()
 
 转变成二值分类
 
-```
+```python
 # 转换为二值分类
 df['balance'] = [1 if b=='B' else 0 for b in df.balance]
 
@@ -148,7 +148,7 @@ df['balance'].value_counts()
 
 导入算法和准确度度量模块
 
-```
+```python
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 ```
@@ -157,7 +157,7 @@ from sklearn.metrics import accuracy_score
 
 在不平衡数据上训练一个模型
 
-```
+```python
 # 分离输入特征 (X) 和目标变量 (y)
 y = df.balance
 X = df.drop('balance', axis=1)
@@ -167,13 +167,13 @@ clf_0 = LogisticRegression().fit(X, y)
 
 # 在训练集上预测
 pred_y_0 = clf_0.predict(X)
-```
+```python
 
 如上所述，许多机器学习算法被设计为在默认情况下最大化总体准确率。
 
 我们可以证实这一点：
 
-```
+```python
 # 准确率是怎样的?
 print( accuracy_score(pred_y_0, y) )
 # 0.9216
@@ -181,7 +181,7 @@ print( accuracy_score(pred_y_0, y) )
 
 因此我们的模型拥有 92% 的总体准确率，但是这是因为它只预测了一个类别吗？
 
-```
+```python
 # 我们应该兴奋吗?
 print( np.unique( pred_y_0 ) )
 # [0]
@@ -201,7 +201,7 @@ print( np.unique( pred_y_0 ) )
 
 重采样模块
 
-```
+```python
 from sklearn.utils import resample
 ```
 
@@ -215,7 +215,7 @@ from sklearn.utils import resample
 
 上采样少数类别
 
-```
+```python
 #  分离多数和少数类别
 df_majority = df[df.balance==0]
 df_minority = df[df.balance==1]
@@ -242,7 +242,7 @@ df_upsampled.balance.value_counts()
 
 在上采样后的数据集上训练模型
 
-```
+```python
 # 分离输入特征 (X) 和目标变量 (y)
 y = df_upsampled.balance
 X = df_upsampled.drop('balance', axis=1)
@@ -280,7 +280,7 @@ print( accuracy_score(y, pred_y_1) )
 
 下采样多数类别
 
-```
+```python
 # 分离多数类别和少数类别
 df_majority = df[df.balance==0]
 df_minority = df[df.balance==1]
@@ -307,7 +307,7 @@ df_downsampled.balance.value_counts()
 
 在下采样后的数据集上训练模型
 
-```
+```python
 # Separate input features (X) and target variable (y)
 y = df_downsampled.balance
 X = df_downsampled.drop('balance', axis=1)
@@ -347,7 +347,7 @@ print( accuracy_score(y, pred_y_2) )
 
 ROC 曲线下面积
 
-```
+```python
 from sklearn.metrics import roc_auc_score
 ```
 
@@ -356,7 +356,7 @@ from sklearn.metrics import roc_auc_score
 
 获取类别概率
 
-```
+```python
 # Predict class probabilities
 prob_y_2 = clf_2.predict_proba(X)
 
@@ -376,7 +376,7 @@ prob_y_2[:5] # Example
 下采样后数据集上训练的模型的 AUROC
 Python
 
-```
+```python
 print( roc_auc_score(y, prob_y_2) )
 # 0.568096626406
 ```
@@ -385,7 +385,7 @@ print( roc_auc_score(y, prob_y_2) )
 
 不平衡数据集上训练的模型的 AUROC
 
-```
+```python
 prob_y_0 = clf_0.predict_proba(X)
 prob_y_0 = [p[1] for p in prob_y_0]
 
@@ -407,7 +407,7 @@ print( roc_auc_score(y, prob_y_0) )
 
 支持向量机
 
-```
+```python
 from sklearn.svm import SVC
 ```
 
@@ -420,7 +420,7 @@ from sklearn.svm import SVC
 
 SVM 在不平衡数据集上训练惩罚性-SVM
 
-```
+```python
 # 分离输入特征 (X) 和目标变量 (y)
 y = df.balance
 X = df.drop('balance', axis=1)
@@ -460,7 +460,7 @@ print( roc_auc_score(y, prob_y_3) )
 
 随机森林
 
-```
+```python
 from sklearn.ensemble import RandomForestClassifier
 ```
 
@@ -468,7 +468,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 在不平衡数据集上训练随机森林
 
-```
+```python
 # 分离输入特征 (X) 和目标变量 (y)
 y = df.balance
 X = df.drop('balance', axis=1)
