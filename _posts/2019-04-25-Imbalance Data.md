@@ -167,7 +167,7 @@ clf_0 = LogisticRegression().fit(X, y)
 
 # 在训练集上预测
 pred_y_0 = clf_0.predict(X)
-```python
+```
 
 如上所述，许多机器学习算法被设计为在默认情况下最大化总体准确率。
 
