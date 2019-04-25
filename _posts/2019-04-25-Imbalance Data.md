@@ -539,8 +539,8 @@ print( roc_auc_score(y, prob_y_4) )
 
 这些策略受[没有免费的午餐定理](http://elitedatascience.com/machine-learning-algorithms)支配，你应该尝试使用其中几种方法，并根据测试集的结果来决定你的问题的最佳解决方案。
 
-如果你喜欢本指南，我们邀请你注册我们的 **[7天免费应用机器学习速成课](http://elitedatascience.com/)**。我们会分享在我们博客中找不到的课程，当我们发布类似本教程的新教程时我们会给你发送通知。
+----
+【2019-04-25】Google colab上的[代码实现](https://colab.research.google.com/drive/1Wv9NaOKrQCQbahFDM_I-ML2Lp6BqURxx#scrollTo=AqjCU2X74RUF)
 
----
+😁
 
-> [掘金翻译计划](https://github.com/xitu/gold-miner) 是一个翻译优质互联网技术文章的社区，文章来源为 [掘金](https://juejin.im) 上的英文分享文章。内容覆盖 [Android](https://github.com/xitu/gold-miner#android)、[iOS](https://github.com/xitu/gold-miner#ios)、[React](https://github.com/xitu/gold-miner#react)、[前端](https://github.com/xitu/gold-miner#前端)、[后端](https://github.com/xitu/gold-miner#后端)、[产品](https://github.com/xitu/gold-miner#产品)、[设计](https://github.com/xitu/gold-miner#设计) 等领域，想要查看更多优质译文请持续关注 [掘金翻译计划](https://github.com/xitu/gold-miner)。
