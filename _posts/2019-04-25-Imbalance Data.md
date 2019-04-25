@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "谈谈我的三观"
+title:  "如何处理机器学习中的不平衡类别"
 date:   2019-03-17 21:05:00
-categories: 思想
-tags: 三观 技术
-excerpt: 陈皓的感想。
+categories: 机器学习
+tags: 机器学习 不平衡
+excerpt: 技术文章
 mathjax: true
 ---
 
