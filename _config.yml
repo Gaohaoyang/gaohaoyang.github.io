@@ -37,7 +37,8 @@ duoshuo_shortname: wqw547243068
 # xxxxx字符串
 baidu_tongji_id: 0600ccce38264ecba9a3c1b652c83b75
 #baidu_tongji_id: cf8506e0ef223e57ff6239944e5d46a4
-google_analytics_id: UA-72449510-4 # google 分析追踪id
+google_analytics_id: UA-139247575-1 # google 分析追踪id
+
 
 # Build settings
 markdown: kramdown
