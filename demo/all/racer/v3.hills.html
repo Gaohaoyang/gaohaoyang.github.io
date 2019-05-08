@@ -1,0 +1,419 @@
+<!DOCTYPE html> 
+
+<html>
+<head>
+  <title>Javascript Racer - v3 (hills)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link href="common.css" rel="stylesheet" type="text/css" />
+</head> 
+
+<body> 
+
+  <table id="controls">
+    <tr>
+      <td colspan="2">
+        <a href='v1.straight.html'>straight</a> |
+        <a href='v2.curves.html'>curves</a>     |
+        <a href='v3.hills.html'>hills</a>       |
+        <a href='v4.final.html'>final</a>
+      </td>
+    </tr>
+    <tr><td id="fps" colspan="2" align="right"></td></tr>
+    <tr>
+      <th><label for="resolution">Resolution :</label></th>
+      <td>
+        <select id="resolution" style="width:100%">
+          <option value='fine'>Fine (1280x960)</option>
+          <option selected value='high'>High (1024x768)</option>
+          <option value='medium'>Medium (640x480)</option>
+          <option value='low'>Low (480x360)</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th><label for="lanes">Lanes :</label></th>
+      <td>
+        <select id="lanes">
+          <option>1</option>
+          <option>2</option>
+          <option selected>3</option>
+          <option>4</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th><label for="roadWidth">Road Width (<span id="currentRoadWidth"></span>) :</label></th>
+      <td><input id="roadWidth" type='range' min='500' max='3000' title="integer (500-3000)"></td>
+    </tr>
+    <tr>
+      <th><label for="cameraHeight">CameraHeight (<span id="currentCameraHeight"></span>) :</label></th>
+      <td><input id="cameraHeight" type='range' min='500' max='5000' title="integer (500-5000)"></td>
+    </tr>
+    <tr>
+      <th><label for="drawDistance">Draw Distance (<span id="currentDrawDistance"></span>) :</label></th>
+      <td><input id="drawDistance" type='range' min='100' max='500' title="integer (100-500)"></td>
+    </tr>
+    <tr>
+      <th><label for="fieldOfView">Field of View (<span id="currentFieldOfView"></span>) :</label></th>
+      <td><input id="fieldOfView" type='range' min='80' max='140' title="integer (80-140)"></td>
+    </tr>
+    <tr>
+      <th><label for="fogDensity">Fog Density (<span id="currentFogDensity"></span>) :</label></th>
+      <td><input id="fogDensity" type='range' min='0' max='50' title="integer (0-50)"></td>
+    </tr>
+  </table>
+
+  <div id='instructions'>
+    <p>Use the <b>arrow keys</b> to drive the car.</p>
+  </div>
+
+  <div id="racer">
+    <canvas id="canvas">
+      Sorry, this example cannot be run because your browser does not support the &lt;canvas&gt; element
+    </canvas>
+    Loading...
+  </div>
+
+  <audio id='music'>
+    <source src="music/racer.ogg">
+    <source src="music/racer.mp3">
+  </audio>
+  <span id="mute"></span>
+
+  <script src="stats.js"></script>
+  <script src="common.js"></script>
+  <script>
+
+    var fps           = 60;                      // how many 'update' frames per second
+    var step          = 1/fps;                   // how long is each frame (in seconds)
+    var width         = 1024;                    // logical canvas width
+    var height        = 768;                     // logical canvas height
+    var centrifugal   = 0.3;                     // centrifugal force multiplier when going around curves
+    var offRoadDecel  = 0.99;                    // speed multiplier when off road (e.g. you lose 2% speed each update frame)
+    var skySpeed      = 0.001;                   // background sky layer scroll speed when going around curve (or up hill)
+    var hillSpeed     = 0.002;                   // background hill layer scroll speed when going around curve (or up hill)
+    var treeSpeed     = 0.003;                   // background tree layer scroll speed when going around curve (or up hill)
+    var skyOffset     = 0;                       // current sky scroll offset
+    var hillOffset    = 0;                       // current hill scroll offset
+    var treeOffset    = 0;                       // current tree scroll offset
+    var segments      = [];                      // array of road segments
+    var stats         = Game.stats('fps');       // mr.doobs FPS counter
+    var canvas        = Dom.get('canvas');       // our canvas...
+    var ctx           = canvas.getContext('2d'); // ...and its drawing context
+    var background    = null;                    // our background image (loaded below)
+    var sprites       = null;                    // our spritesheet (loaded below)
+    var resolution    = null;                    // scaling factor to provide resolution independence (computed)
+    var roadWidth     = 2000;                    // actually half the roads width, easier math if the road spans from -roadWidth to +roadWidth
+    var segmentLength = 200;                     // length of a single segment
+    var rumbleLength  = 3;                       // number of segments per red/white rumble strip
+    var trackLength   = null;                    // z length of entire track (computed)
+    var lanes         = 3;                       // number of lanes
+    var fieldOfView   = 100;                     // angle (degrees) for field of view
+    var cameraHeight  = 1000;                    // z height of camera
+    var cameraDepth   = null;                    // z distance camera is from screen (computed)
+    var drawDistance  = 300;                     // number of segments to draw
+    var playerX       = 0;                       // player x offset from center of road (-1 to 1 to stay independent of roadWidth)
+    var playerZ       = null;                    // player relative z distance from camera (computed)
+    var fogDensity    = 5;                       // exponential fog density
+    var position      = 0;                       // current camera Z position (add playerZ to get player's absolute Z position)
+    var speed         = 0;                       // current speed
+    var maxSpeed      = segmentLength/step;      // top speed (ensure we can't move more than 1 segment in a single frame to make collision detection easier)
+    var accel         =  maxSpeed/5;             // acceleration rate - tuned until it 'felt' right
+    var breaking      = -maxSpeed;               // deceleration rate when braking
+    var decel         = -maxSpeed/5;             // 'natural' deceleration rate when neither accelerating, nor braking
+    var offRoadDecel  = -maxSpeed/2;             // off road deceleration is somewhere in between
+    var offRoadLimit  =  maxSpeed/4;             // limit when off road deceleration no longer applies (e.g. you can always go at least this speed even when off road)
+
+    var keyLeft       = false;
+    var keyRight      = false;
+    var keyFaster     = false;
+    var keySlower     = false;
+
+    //=========================================================================
+    // UPDATE THE GAME WORLD
+    //=========================================================================
+
+    function update(dt) {
+
+      var playerSegment = findSegment(position+playerZ);
+      var speedPercent  = speed/maxSpeed;
+      var dx            = dt * 2 * speedPercent; // at top speed, should be able to cross from left to right (-1 to 1) in 1 second
+
+      position = Util.increase(position, dt * speed, trackLength);
+
+      skyOffset  = Util.increase(skyOffset,  skySpeed  * playerSegment.curve * speedPercent, 1);
+      hillOffset = Util.increase(hillOffset, hillSpeed * playerSegment.curve * speedPercent, 1);
+      treeOffset = Util.increase(treeOffset, treeSpeed * playerSegment.curve * speedPercent, 1);
+
+      if (keyLeft)
+        playerX = playerX - dx;
+      else if (keyRight)
+        playerX = playerX + dx;
+
+      playerX = playerX - (dx * speedPercent * playerSegment.curve * centrifugal);
+
+      if (keyFaster)
+        speed = Util.accelerate(speed, accel, dt);
+      else if (keySlower)
+        speed = Util.accelerate(speed, breaking, dt);
+      else
+        speed = Util.accelerate(speed, decel, dt);
+
+      if (((playerX < -1) || (playerX > 1)) && (speed > offRoadLimit))
+        speed = Util.accelerate(speed, offRoadDecel, dt);
+
+      playerX = Util.limit(playerX, -2, 2);     // dont ever let it go too far out of bounds
+      speed   = Util.limit(speed, 0, maxSpeed); // or exceed maxSpeed
+
+    }
+
+    //=========================================================================
+    // RENDER THE GAME WORLD
+    //=========================================================================
+
+    function render() {
+
+      var baseSegment   = findSegment(position);
+      var basePercent   = Util.percentRemaining(position, segmentLength);
+      var playerSegment = findSegment(position+playerZ);
+      var playerPercent = Util.percentRemaining(position+playerZ, segmentLength);
+      var playerY       = Util.interpolate(playerSegment.p1.world.y, playerSegment.p2.world.y, playerPercent);
+      var maxy          = height;
+
+      var x  = 0;
+      var dx = - (baseSegment.curve * basePercent);
+
+      ctx.clearRect(0, 0, width, height);
+
+      Render.background(ctx, background, width, height, BACKGROUND.SKY,   skyOffset,  resolution * skySpeed  * playerY);
+      Render.background(ctx, background, width, height, BACKGROUND.HILLS, hillOffset, resolution * hillSpeed * playerY);
+      Render.background(ctx, background, width, height, BACKGROUND.TREES, treeOffset, resolution * treeSpeed * playerY);
+
+      var n, segment;
+
+      for(n = 0 ; n < drawDistance ; n++) {
+
+        segment        = segments[(baseSegment.index + n) % segments.length];
+        segment.looped = segment.index < baseSegment.index;
+        segment.fog    = Util.exponentialFog(n/drawDistance, fogDensity);
+
+        Util.project(segment.p1, (playerX * roadWidth) - x,      playerY + cameraHeight, position - (segment.looped ? trackLength : 0), cameraDepth, width, height, roadWidth);
+        Util.project(segment.p2, (playerX * roadWidth) - x - dx, playerY + cameraHeight, position - (segment.looped ? trackLength : 0), cameraDepth, width, height, roadWidth);
+
+        x  = x + dx;
+        dx = dx + segment.curve;
+
+        if ((segment.p1.camera.z <= cameraDepth)         || // behind us
+            (segment.p2.screen.y >= segment.p1.screen.y) || // back face cull
+            (segment.p2.screen.y >= maxy))                  // clip by (already rendered) segment
+          continue;
+
+        Render.segment(ctx, width, lanes,
+                       segment.p1.screen.x,
+                       segment.p1.screen.y,
+                       segment.p1.screen.w,
+                       segment.p2.screen.x,
+                       segment.p2.screen.y,
+                       segment.p2.screen.w,
+                       segment.fog,
+                       segment.color);
+
+        maxy = segment.p2.screen.y;
+      }
+
+      Render.player(ctx, width, height, resolution, roadWidth, sprites, speed/maxSpeed,
+                    cameraDepth/playerZ,
+                    width/2,
+                    (height/2) - (cameraDepth/playerZ * Util.interpolate(playerSegment.p1.camera.y, playerSegment.p2.camera.y, playerPercent) * height/2),
+                    speed * (keyLeft ? -1 : keyRight ? 1 : 0),
+                    playerSegment.p2.world.y - playerSegment.p1.world.y);
+    }
+
+    //=========================================================================
+    // BUILD ROAD GEOMETRY
+    //=========================================================================
+
+    function lastY() { return (segments.length == 0) ? 0 : segments[segments.length-1].p2.world.y; }
+
+    function addSegment(curve, y) {
+      var n = segments.length;
+      segments.push({
+         index: n,
+            p1: { world: { y: lastY(), z:  n   *segmentLength }, camera: {}, screen: {} },
+            p2: { world: { y: y,       z: (n+1)*segmentLength }, camera: {}, screen: {} },
+         curve: curve,
+         color: Math.floor(n/rumbleLength)%2 ? COLORS.DARK : COLORS.LIGHT
+      });
+    }
+
+    function addRoad(enter, hold, leave, curve, y) {
+      var startY   = lastY();
+      var endY     = startY + (Util.toInt(y, 0) * segmentLength);
+      var n, total = enter + hold + leave;
+      for(n = 0 ; n < enter ; n++)
+        addSegment(Util.easeIn(0, curve, n/enter), Util.easeInOut(startY, endY, n/total));
+      for(n = 0 ; n < hold  ; n++)
+        addSegment(curve, Util.easeInOut(startY, endY, (enter+n)/total));
+      for(n = 0 ; n < leave ; n++)
+        addSegment(Util.easeInOut(curve, 0, n/leave), Util.easeInOut(startY, endY, (enter+hold+n)/total));
+    }
+
+    var ROAD = {
+      LENGTH: { NONE: 0, SHORT:  25, MEDIUM:  50, LONG:  100 },
+      HILL:   { NONE: 0, LOW:    20, MEDIUM:  40, HIGH:   60 },
+      CURVE:  { NONE: 0, EASY:    2, MEDIUM:   4, HARD:    6 }
+    };
+
+    function addStraight(num) {
+      num = num || ROAD.LENGTH.MEDIUM;
+      addRoad(num, num, num, 0, 0);
+    }
+
+    function addHill(num, height) {
+      num    = num    || ROAD.LENGTH.MEDIUM;
+      height = height || ROAD.HILL.MEDIUM;
+      addRoad(num, num, num, 0, height);
+    }
+
+    function addCurve(num, curve, height) {
+      num    = num    || ROAD.LENGTH.MEDIUM;
+      curve  = curve  || ROAD.CURVE.MEDIUM;
+      height = height || ROAD.HILL.NONE;
+      addRoad(num, num, num, curve, height);
+    }
+        
+    function addLowRollingHills(num, height) {
+      num    = num    || ROAD.LENGTH.SHORT;
+      height = height || ROAD.HILL.LOW;
+      addRoad(num, num, num,  0,  height/2);
+      addRoad(num, num, num,  0, -height);
+      addRoad(num, num, num,  0,  height);
+      addRoad(num, num, num,  0,  0);
+      addRoad(num, num, num,  0,  height/2);
+      addRoad(num, num, num,  0,  0);
+    }
+
+    function addSCurves() {
+      addRoad(ROAD.LENGTH.MEDIUM, ROAD.LENGTH.MEDIUM, ROAD.LENGTH.MEDIUM,  -ROAD.CURVE.EASY,    ROAD.HILL.NONE);
+      addRoad(ROAD.LENGTH.MEDIUM, ROAD.LENGTH.MEDIUM, ROAD.LENGTH.MEDIUM,   ROAD.CURVE.MEDIUM,  ROAD.HILL.MEDIUM);
+      addRoad(ROAD.LENGTH.MEDIUM, ROAD.LENGTH.MEDIUM, ROAD.LENGTH.MEDIUM,   ROAD.CURVE.EASY,   -ROAD.HILL.LOW);
+      addRoad(ROAD.LENGTH.MEDIUM, ROAD.LENGTH.MEDIUM, ROAD.LENGTH.MEDIUM,  -ROAD.CURVE.EASY,    ROAD.HILL.MEDIUM);
+      addRoad(ROAD.LENGTH.MEDIUM, ROAD.LENGTH.MEDIUM, ROAD.LENGTH.MEDIUM,  -ROAD.CURVE.MEDIUM, -ROAD.HILL.MEDIUM);
+    }
+
+    function addDownhillToEnd(num) {
+      num = num || 200;
+      addRoad(num, num, num, -ROAD.CURVE.EASY, -lastY()/segmentLength);
+    }
+
+    function resetRoad() {
+      segments = [];
+
+      addStraight(ROAD.LENGTH.SHORT/2);
+      addHill(ROAD.LENGTH.SHORT, ROAD.HILL.LOW);
+      addLowRollingHills();
+      addCurve(ROAD.LENGTH.MEDIUM, ROAD.CURVE.MEDIUM, ROAD.HILL.LOW);
+      addLowRollingHills();
+      addCurve(ROAD.LENGTH.LONG, ROAD.CURVE.MEDIUM, ROAD.HILL.MEDIUM);
+      addStraight();
+      addCurve(ROAD.LENGTH.LONG, -ROAD.CURVE.MEDIUM, ROAD.HILL.MEDIUM);
+      addHill(ROAD.LENGTH.LONG, ROAD.HILL.HIGH);
+      addCurve(ROAD.LENGTH.LONG, ROAD.CURVE.MEDIUM, -ROAD.HILL.LOW);
+      addHill(ROAD.LENGTH.LONG, -ROAD.HILL.MEDIUM);
+      addStraight();
+      addDownhillToEnd();
+
+      segments[findSegment(playerZ).index + 2].color = COLORS.START;
+      segments[findSegment(playerZ).index + 3].color = COLORS.START;
+      for(var n = 0 ; n < rumbleLength ; n++)
+        segments[segments.length-1-n].color       = COLORS.FINISH;
+
+      trackLength = segments.length * segmentLength;
+    }
+
+    function findSegment(z) {
+      return segments[Math.floor(z/segmentLength) % segments.length]; 
+    }
+
+    //=========================================================================
+    // THE GAME LOOP
+    //=========================================================================
+
+    Game.run({
+      canvas: canvas, render: render, update: update, stats: stats, step: step,
+      images: ["background", "sprites"],
+      keys: [
+        { keys: [KEY.LEFT,  KEY.A], mode: 'down', action: function() { keyLeft   = true;  } },
+        { keys: [KEY.RIGHT, KEY.D], mode: 'down', action: function() { keyRight  = true;  } },
+        { keys: [KEY.UP,    KEY.W], mode: 'down', action: function() { keyFaster = true;  } },
+        { keys: [KEY.DOWN,  KEY.S], mode: 'down', action: function() { keySlower = true;  } },
+        { keys: [KEY.LEFT,  KEY.A], mode: 'up',   action: function() { keyLeft   = false; } },
+        { keys: [KEY.RIGHT, KEY.D], mode: 'up',   action: function() { keyRight  = false; } },
+        { keys: [KEY.UP,    KEY.W], mode: 'up',   action: function() { keyFaster = false; } },
+        { keys: [KEY.DOWN,  KEY.S], mode: 'up',   action: function() { keySlower = false; } }
+      ],
+      ready: function(images) {
+        background = images[0];
+        sprites    = images[1];
+        reset();
+      }
+    });
+
+    function reset(options) {
+      options       = options || {};
+      canvas.width  = width  = Util.toInt(options.width,          width);
+      canvas.height = height = Util.toInt(options.height,         height);
+      lanes                  = Util.toInt(options.lanes,          lanes);
+      roadWidth              = Util.toInt(options.roadWidth,      roadWidth);
+      cameraHeight           = Util.toInt(options.cameraHeight,   cameraHeight);
+      drawDistance           = Util.toInt(options.drawDistance,   drawDistance);
+      fogDensity             = Util.toInt(options.fogDensity,     fogDensity);
+      fieldOfView            = Util.toInt(options.fieldOfView,    fieldOfView);
+      segmentLength          = Util.toInt(options.segmentLength,  segmentLength);
+      rumbleLength           = Util.toInt(options.rumbleLength,   rumbleLength);
+      cameraDepth            = 1 / Math.tan((fieldOfView/2) * Math.PI/180);
+      playerZ                = (cameraHeight * cameraDepth);
+      resolution             = height/480;
+      refreshTweakUI();
+
+      if ((segments.length==0) || (options.segmentLength) || (options.rumbleLength))
+        resetRoad(); // only rebuild road when necessary
+    }
+
+    //=========================================================================
+    // TWEAK UI HANDLERS
+    //=========================================================================
+
+    Dom.on('resolution', 'change', function(ev) {
+      var w, h, ratio;
+      switch(ev.target.options[ev.target.selectedIndex].value) {
+        case 'fine':   w = 1280; h = 960;  ratio=w/width; break;
+        case 'high':   w = 1024; h = 768;  ratio=w/width; break;
+        case 'medium': w = 640;  h = 480;  ratio=w/width; break;
+        case 'low':    w = 480;  h = 360;  ratio=w/width; break;
+      }
+      reset({ width: w, height: h })
+      Dom.blur(ev);
+    });
+
+    Dom.on('lanes',          'change', function(ev) { Dom.blur(ev); reset({ lanes:         ev.target.options[ev.target.selectedIndex].value }); });
+    Dom.on('roadWidth',      'change', function(ev) { Dom.blur(ev); reset({ roadWidth:     Util.limit(Util.toInt(ev.target.value), Util.toInt(ev.target.getAttribute('min')), Util.toInt(ev.target.getAttribute('max'))) }); });
+    Dom.on('cameraHeight',   'change', function(ev) { Dom.blur(ev); reset({ cameraHeight:  Util.limit(Util.toInt(ev.target.value), Util.toInt(ev.target.getAttribute('min')), Util.toInt(ev.target.getAttribute('max'))) }); });
+    Dom.on('drawDistance',   'change', function(ev) { Dom.blur(ev); reset({ drawDistance:  Util.limit(Util.toInt(ev.target.value), Util.toInt(ev.target.getAttribute('min')), Util.toInt(ev.target.getAttribute('max'))) }); });
+    Dom.on('fieldOfView',    'change', function(ev) { Dom.blur(ev); reset({ fieldOfView:   Util.limit(Util.toInt(ev.target.value), Util.toInt(ev.target.getAttribute('min')), Util.toInt(ev.target.getAttribute('max'))) }); });
+    Dom.on('fogDensity',     'change', function(ev) { Dom.blur(ev); reset({ fogDensity:    Util.limit(Util.toInt(ev.target.value), Util.toInt(ev.target.getAttribute('min')), Util.toInt(ev.target.getAttribute('max'))) }); });
+
+    function refreshTweakUI() {
+      Dom.get('lanes').selectedIndex = lanes-1;
+      Dom.get('currentRoadWidth').innerHTML      = Dom.get('roadWidth').value      = roadWidth;
+      Dom.get('currentCameraHeight').innerHTML   = Dom.get('cameraHeight').value   = cameraHeight;
+      Dom.get('currentDrawDistance').innerHTML   = Dom.get('drawDistance').value   = drawDistance;
+      Dom.get('currentFieldOfView').innerHTML    = Dom.get('fieldOfView').value    = fieldOfView;
+      Dom.get('currentFogDensity').innerHTML     = Dom.get('fogDensity').value     = fogDensity;
+    }
+
+    //=========================================================================
+
+  </script>
+
+</body> 

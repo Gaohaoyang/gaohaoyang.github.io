@@ -1,0 +1,159 @@
+<html>
+<head>
+ <script src="tf.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script>
+$("input").change(function(e) {
+
+    for (var i = 0; i < e.originalEvent.target.files.length; i++) {
+        
+        var file = e.originalEvent.target.files[i];
+        
+        var img = document.createElement("img");
+        var reader = new FileReader();
+        reader.onloadend = function() {
+             img.src = reader.result;
+        }
+        reader.readAsDataURL(file);
+        $("input").after(img);
+    }
+});
+</script>
+<style>
+#status
+{ font-family: Geneva, Tahoma, Verdana, sans-serif;}
+
+#img
+{border-radius: 5%;}
+
+#lnk
+{ text-decoration: none; }
+
+#header
+{ font-family:  Verdana, sans-serif; font-size: 30px;}
+</style>
+
+</head>
+
+<body>
+<div id="header">Fast Style Transfer </div>
+<center> <canvas id="content" width="256" height="256" style="border:1px solid #9ca0a8; border-radius:5%;">
+</canvas> 
+<canvas id="combined" width="256" height="256" style="border:1px solid #9ca0a8; border-radius:5%;">
+</canvas> </center>
+
+<center style="padding:20px">
+<div id ="status">Click Image to load its model </div>
+<center>
+<center>
+<div style="padding:20px" style="border:1px solid #000000;">
+    <a id = "lnk" onclick="loadModel('style1/model.json')" href="#"> <img id = "img" src="images/style1.jpg" width = "50" height="50" > </a>
+    <a id = "lnk" onclick="loadModel('style2/model.json')" href="#"> <img id = "img" src="images/style2.jpg" width = "50" height="50"> </a>
+    <a id = "lnk" onclick="loadModel('style3/model.json')" href="#"> <img id = "img" src="images/style3.jpg" width = "50" height="50"> </a>
+    <a id = "lnk" onclick="loadModel('style4/model.json')" href="#"> <img id = "img" src="images/style4.jpg" width = "50" height="50"> </a>
+    <a id = "lnk" onclick="loadModel('style5/model.json')" href="#"> <img id = "img" src="images/style5.jpg" width = "50" height="50"> </a>
+
+</div>
+</center>
+<script>
+
+
+
+function preprocess(imgData)
+{
+return tf.tidy(()=>{
+    let tensor = tf.fromPixels(imgData).toFloat() ;
+
+    const offset = tf.scalar(127.5);
+    // Normalize the image 
+    const normalized = tensor.sub(offset).div(offset);
+  
+    //We add a dimension to get a batch shape 
+    const batched = normalized.expandDims(0)
+    return batched
+})
+}
+
+function deprocess(x)
+{ 
+
+return tf.tidy(()=>{
+    const offset = tf.scalar(127.5);
+    // Normalize the image 
+    const denormalized = x.mul(offset).add(offset).toInt();
+    const reduced = denormalized.squeeze()
+    return reduced
+})
+}
+
+
+function toPixels(tensor, canvas) {
+    const ctx = canvas.getContext('2d');
+    const [height, width] = tensor.shape;
+
+    const buffer = new Uint8ClampedArray(width * height * 4)
+    const imageData = new ImageData(width, height);
+    const data = tensor.dataSync();
+    var cnt = 0;
+    for(var y = 0; y < height; y++) {
+        for(var x = 0; x < width; x++) {
+            var pos = (y * width + x) * 4; // position in buffer based on x and y
+            buffer[pos  ] = data[cnt]           // some R value [0, 255]
+            buffer[pos+1] = data[cnt+1]           // some G value
+            buffer[pos+2] = data[cnt+2]           // some B value
+            buffer[pos+3] = 255;           // set alpha channel
+            cnt+=3
+        }
+    }
+    imageData.data.set(buffer)
+
+    ctx.putImageData(imageData, 0, 0);
+}
+
+async function createImg(path)
+{
+  return await new Promise((resolve, reject) => {
+  let i = new Image();
+  i.onload = () => resolve(i);
+  i.onerror = reject;
+  i.crossOrigin = 'anonymous';
+  i.src = path;
+  i.width = 256;
+  i.height = 256;
+  })
+  
+}
+
+async function createModel(path)
+{
+    let model = await tf.loadModel(path)
+    return model
+}
+
+async function loadModel(path = 'style1/model.json')
+{
+    var lbl = document.getElementById("status");
+    lbl.innerText = "Model Loading ..." 
+    let canvas = document.getElementById("combined");
+    let cT = preprocess(cImg)
+    const model = await createModel(path)
+    z = model.predict(cT)
+    toPixels(deprocess(z), canvas) 
+    lbl.innerText = "Model Created ..."
+}
+
+async function initialize()
+{
+    var c1 = document.getElementById("content");
+    cImg = await createImg('rose.jpg')
+    var ctx1 = c1.getContext('2d');
+    ctx1.drawImage(cImg,0,0,cImg.width,cImg.width);
+}
+
+var cImg;
+initialize()
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Face Segmentation</title>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+<!-- Load TensorFlow.js -->
+<script src="tf.min.js"> </script>
+
+</head>
+
+<body>
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+  <!-- Brand/logo -->
+  <a class="navbar-brand" href="#"><h1>Webcam Reconstruction</h1></a>
+</nav>
+
+<div class="container-fluid">
+  <blockquote class="blockquote text-justify" style="margin:30px;">
+     <p>
+       A simple implementation of face reconstruction using pix2pix. It was trained on this <a href="http://www.mut1ny.com/face-headsegmentation-dataset">dataset</a>.
+       Press the start button to launch the process <button type="button" id = 'start' class="btn btn-outline-primary" onclick ='startPred()' disabled>Start</button> 
+
+     </p>
+     <footer class="blockquote-footer">ZAID ALYAFEAI</footer>
+  </blockquote>
+</div>
+
+<div class="d-flex justify-content-center align-items-center">
+  <video id="video" width = "500" height="500" playsinline style="display:none;"></video>
+  <canvas id="canvas" width = "500" height="500" ></canvas>
+  <canvas id="sCanvas" width = "500" height="500" ></canvas>
+  <canvas id="gCanvas" width = "500" height="500" ></canvas>
+</div>
+<script type="text/javascript" src = 'segment.js'>
+</script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Poser 1 </title>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+<!-- Load TensorFlow.js -->
+    <script src="https://unpkg.com/@tensorflow/tfjs"></script>
+    <!-- Load Posenet -->
+    <script src="https://unpkg.com/@tensorflow-models/posenet">
+    </script>
+
+    <script type="text/javascript">
+	    function isAndroid() {
+  return /Android/i.test(navigator.userAgent);
+}
+
+function isiOS() {
+  return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
+function isMobile() {
+  return isAndroid() || isiOS();
+}
+      
+const videoWidth = 500;
+const videoHeight = 500;
+const color = 'aqua';		    
+ async function setupCamera() {
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    alert(
+        'Browser API navigator.mediaDevices.getUserMedia not available');
+  }
+
+  const video = document.getElementById('video');
+
+  const mobile = isMobile();
+  try{
+  const stream = await navigator.mediaDevices.getUserMedia({
+    'audio': false,
+    'video': {
+      facingMode: 'user',
+      width: mobile ? undefined : videoWidth,
+      height: mobile ? undefined : videoHeight,
+    },
+  });
+  
+  video.srcObject = stream;
+}catch(err){alert(err)}
+  return new Promise((resolve) => {
+    video.onloadedmetadata = () => {
+      resolve(video);
+    };
+  });
+}
+
+async function loadVideo() {
+  
+  const video = await setupCamera();
+	  video.play();
+	  const net = await posenet.load(0.75);
+	  detectPoseInRealTime(video, net);
+}
+	    
+function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
+  let keys = [0.0,0.0,0.0,0.0]; 
+	let j = 0;	
+  for (let i = 1; i < 3; i++) {
+    const keypoint = keypoints[i];
+    if (keypoint.score < minConfidence) {
+      continue;
+    }
+
+    const {y, x} = keypoint.position;
+	  keys[j++]= x; keys[j++]=y;   
+    drawPoint(ctx, y * scale, x * scale, 10, color);
+  }
+	SetCoord(keys);
+	checkInside(keys)
+	drawSquare(ctx, currI,currJ);
+}
+function SetCoord(keys)
+{
+     for(var i= 0 ; i < keys.length;  i++ )
+     {
+       const lbl = 'l'+i; 
+       let el = document.getElementById(lbl)
+       el.innerHTML = keys[i]
+
+     }
+}
+	   	    
+function drawPoint(ctx, y, x, r, color) {
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, 2 * Math.PI);
+  ctx.fillStyle = color;
+  ctx.fill();
+}
+	    
+	    function drawSquare(ctx, i,j){
+let x = i * L; 
+let y = j * L; 
+ctx.fillStyle = 'rgba(225,0,0,0.5)'	    
+ctx.fillRect(x,y,L,L);
+}
+
+function checkInside(keys){
+const f = convertToLbl(keys[0],keys[1]);
+const l = convertToLbl(keys[2],keys[3]); 
+const nexI = Math.floor(Math.random() * 3 +1); 
+const nexJ = Math.floor(Math.random() * 3 +1); 
+	
+if((f[0] == currI &&  f[1] == currJ) || (l[0] == currI && l[1] == currJ ))
+{currI = nexI; currJ = nexJ}
+}
+function convertToLbl(x,y){
+    const p = [0,0];
+    p[0] = Math.floor(x / L);
+    p[1] = Math.floor(y / L);
+    return p
+}
+	    var L ;
+	    var currI= 1;
+	    var currJ= 1;
+function detectPoseInRealTime(video, net) {
+  const canvas = document.getElementById('output');
+  const ctx = canvas.getContext('2d');
+  // since images are being fed from a webcam
+  const flipHorizontal = true;
+
+  canvas.width = videoWidth;
+  canvas.height = videoHeight;
+L = videoWidth / 5; 
+async function poseDetectionFrame() {
+    // Scale an image down to a certain factor. Too large of an image will slow
+    // down the GPU
+
+    const imageScaleFactor = 0.3;
+    const outputStride = 16;
+    let poses = [];
+    let minPoseConfidence = 0.1;
+    let minPartConfidence = 0.5; 
+	const pose = await net.estimateSinglePose(
+	    video, imageScaleFactor, flipHorizontal, outputStride)
+	
+	
+	
+	poses.push(pose);
+      ctx.clearRect(0, 0, videoWidth, videoHeight); 
+    ctx.save();
+      ctx.scale(-1, 1);
+      ctx.translate(-videoWidth, 0);
+      ctx.drawImage(video, 0, 0, videoWidth, videoHeight);
+      ctx.restore();
+    // For each pose (i.e. person) detected in an image, loop through the poses
+    // and draw the resulting skeleton and keypoints if over certain confidence
+    // scores
+    poses.forEach(({score, keypoints}) => {
+      if (score >= minPoseConfidence) {
+          drawKeypoints(keypoints, minPartConfidence, ctx);
+	  //  drawSkeleton(keypoints, minPartConfidence, ctx);  
+        }
+    });
+    requestAnimationFrame(poseDetectionFrame);
+  }
+
+  poseDetectionFrame();
+}
+
+	    
+    </script>
+    
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+  <!-- Brand/logo -->
+  <a class="navbar-brand" href="#"><h1>POS<small>ER </small></h1></a>
+  </nav>
+<div class="container-fluid"> 
+
+<blockquote class="blockquote text-justify" style="margin:30px;">
+	<p> Poser is a simple tool that uses the pose estimators network.</p>
+    <footer class="blockquote-footer">ZAID ALYAFEAI</footer>
+  </blockquote>
+</div>
+
+<div class="container-fluid text-center">
+<video id="video" width = "500" height="500" playsinline style="display:none;">
+        </video>
+	<canvas id="output"></canvas>
+	<table class="table table-dark">
+    <thead>
+      <tr>
+        <th>point</th>
+        <th>x</th>
+        <th>y</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Right</td>
+        <td id="l0">0.0</td>
+        <td id="l1">0.0</td>
+      </tr>
+       <tr>
+        <td>Left</td>
+        <td id="l2">0.0</td>
+        <td id="l3">0.0</td>
+      </tr>
+    </tbody>
+    <table>
+	<div class="btn-group" style ='margin-left:140px; margin-top:55px; '>
+		
+  <button type="button" class="btn btn-outline-primary" onclick ='loadVideo()'>Start Video</button>
+    </div>   
+</div>
+ 
+</body>
+</html>

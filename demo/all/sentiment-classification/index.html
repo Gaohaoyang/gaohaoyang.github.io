@@ -1,0 +1,100 @@
+<meta charset="UTF-8">
+<html>
+<head>
+ <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.8.0"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<script>
+
+
+function process(txt)
+{
+    out = txt.replace(/[^a-zA-Z0-9\s]/, '')
+    out = out.trim().split(/\s+/)
+    for (var i = 0 ; i < out.length ; i++)
+    	out[i] = out[i].toLowerCase()
+    return out
+}
+
+async function loadDict()
+{
+  await $.ajax({
+  url: 'dict.csv',
+  dataType: 'text',}).done(success);
+}
+
+function success(data)
+{
+    var wd_idx = new Object();
+    lst = data.split(/\r?\n|\r/)
+
+    for(var i = 0 ; i < lst.length ;i++){
+        key = (lst[i]).split(',')[0]
+        value = (lst[i]).split(',')[1]
+        
+        if(key == "")
+            continue
+        wd_idx[key] = parseInt(value)
+        
+    }
+    
+    word_index = wd_idx
+}
+
+function create_sequences(txt)
+{
+    max_tokens = 40 
+    tokens = []
+    words = process(txt)
+    seq = Array.from(Array(max_tokens), () => 0) 
+    start = max_tokens-words.length
+    for(var i= 0 ; i< words.length ; i++)
+    {
+        if (Object.keys(word_index).includes(words[i])){
+            seq[i+start] = word_index[words[i]]
+        }    
+        
+    }
+    return seq
+}
+
+
+async function init()
+{
+    document.getElementById('status').innerHTML = 'Loading model ...'
+    console.log('Start loading dicionary')
+    await loadDict()
+    console.log('Finish loading dicionary')
+    console.log('Start loading model') 
+    model = await tf.loadModel('model/model.json')
+    document.getElementById('status').innerHTML = 'Model loaded'
+    console.log('Finish loading model') 
+}
+
+function classify()
+ {
+    const txt  = document.getElementById("txt").value
+    const seq = create_sequences(txt) 
+    let input = tf.tensor(seq)
+    input = input.expandDims(0)
+    pred = model.predict(input)
+    result = pred.dataSync()[0]
+    if (result > 0.5)
+     document.getElementById('result').innerHTML = 'Positive'
+    else 
+     document.getElementById('result').innerHTML = 'Negative'
+ }
+var model ; 
+var word_index = undefined
+window.onload = function (){
+  init()
+}
+
+</script>
+ <body>
+  <p id = "status"></p>
+  <p>Enter a movie review for instance 'awesome/horrible movie' </p> <br>
+  <input id = 'txt' type="text" name="username"> <button onclick = "classify()" >Classify</button><br>
+  <p id = "result"></p>
+</body>
+</html>

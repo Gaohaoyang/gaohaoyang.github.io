@@ -1,0 +1,10 @@
+drums
+sun
+laptop
+anvil
+baseball_bat
+ladder
+eyeglasses
+grapes
+book
+dumbbell

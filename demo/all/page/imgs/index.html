@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="main.css">
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+</head>
+<body>
+
+<h1 class = "sec">Projects </h1>
+<hr>
+
+<h2 class = "subsec">Fast pix2pix in the Browser <span class = 'LINK'><a href = "https://goo.gl/oXk2qV">[CODE]</a></span> <span class = 'LINK'><a href = "https://goo.gl/rJE1uP">[DEMO]</a></span></h2>
+<p> The main purpose of this project is to create a web applications for quick image to image translation.  The implementation is based
+    on the paper. The user can draw a sketch or a semantic map to the left and the application will render it to a real image on the right canvas. 
+    The model was trained using Tensorflow and converted to a web application using Tensorflow.js. 
+</p>
+
+<video controls><source src="videos/pix2pix.mp4" type="video/mp4"></video>
+
+<h2 class = "subsec" >Real Time Face Segmentation <span class = 'LINK'><a href = "https://goo.gl/mE9Tsi">[CODE]</a></span> <span class = 'LINK'><a href = "https://goo.gl/qp3EMg">[DEMO]</a></span> </h2>
+<p> The main purpose of this project is to design an application to make face segmentation directly from the webcam. The basic model is a U-Net 
+    model extracted from pix2pix trained on this faces dataset. To make sure that the model runs in real time the model was trained with less
+    parameters and more augmented dataset.  
+</p>
+
+<video controls><source src="videos/segmentation.mp4" type="video/mp4"></video>
+
+
+<h2 class = "subsec">Webcam Image Reconstruction <span class = 'LINK'><a href = "https://goo.gl/SAhkoE">[CODE]</a></span> <span class = 'LINK'><a href = "https://goo.gl/ZJAhev">[DEMO]</a></span></h2>
+<p> In this project the model takes live feed from the webcam and tries to reconstuct the original image. It is based on two models. The first 
+    model is based on the face semgnetation project; so basically it creates face segmentation. The second model was trained on a celebrity dataset
+    where the input is a segmented face and the output is a celebirty face. 
+</p>
+
+<video controls><source src="videos/reconstruction.mp4" type="video/mp4"></video>
+
+
+<h2 class = "subsec">Sketcher <span class = 'LINK'><a href = "https://goo.gl/uqsznz">[CODE]</a></span> <span class = 'LINK'><a href = "https://goo.gl/crTzY9">[DEMO]</a></span></h2>
+<p> This projects is designed to recognize drawings in real time. The user draws a shape in the canvas and the model will predict the top 5 
+    objects that match the drawing. It was trained on 100 classes taken from the quick draw dataset. 
+</p>
+
+<video controls><source src="videos/sketcher.mp4" type="video/mp4"></video>
+
+<h2 class = "subsec">Texter <span class = 'LINK'><a href = "https://goo.gl/jzd1Qb">[CODE]</a></span> <span class = 'LINK'><a href = "https://goo.gl/TnD2Np">[DEMO]</a></span></h2>
+<p> This projects is designed to recognize latex symbols in real time. The user draws a shape in the canvas and the model will predict the top 5 
+    objects that match the drawing. It was trained on 369  classes taken from this <a href="https://github.com/MartinThoma/HASY">dataset</a>. 
+</p>
+
+<video controls><source src="videos/texter.webm" type="video/mp4"></video>
+
+
+<h1 class = "sec">Tutorials </h1>
+<hr>
+
+<h2 class = "subsec">A Gentle Introduction to Tensorflow.js <span class = 'LINK'><a href = "https://goo.gl/Ezu1SU">[LINK]</a></span></h2>
+<p>A complete walk-through on how to create machine learning models in the browser. The new Tensorflow.js library from Google opens new possibities
+    for developers to start training and deploying machine learning models using javascript. 
+
+</p>
+
+<h2 class = "subsec">Train a model in colab with tf.keras and run in the browser with Tensorflow.js <span class = 'LINK'><a href = "https://goo.gl/BYv8Ez">[LINK]</a></span></h2>
+<p>In this tutorial I explain how to train a model in colab then deploy it in the browser with Tensorflow.js. 
+</p>
+
+<h2 class = "subsec">Sentiment Classification from Keras to the Browser <span class = 'LINK'><a href = "https://goo.gl/fsYsv2">[LINK]</a></span></h2>
+<p>In this tutorial I explain how to make a sentiment classification in keras then deploy it in the browser using Tensorflow.js. 
+
+</p>
+
+<h2 class = "subsec">Train, Test and Deploy ML models in the Browser using One Notebook <span class = 'LINK'><a href = "https://goo.gl/Yyhp1t">[LINK]</a></span></h2>
+<p>In this tutorial I explain how to create anotebook on google colab. The notebook explores the possiblitiy of training, testing and deploying a model 
+    a model in the browser without leaving the notebook.
+</p>
+
+<h2 class = "subsec">Fast pix2pix in the Browser <span class = 'LINK'><a href = "https://goo.gl/gQAdMh">[LINK]</a></span></h2>
+<p>In this tutorial I explain how created the fast pix2pix application. It gives a compete walk-though of training the porting the model to the 
+    browser. 
+
+</p>
+
+<h1 class = "sec">Notebooks</h1>
+<hr>
+<h2 class = "subsec">Training pix2pix <span class = 'LINK'><a href = "https://goo.gl/rS5pXV">[LINK]</a></span></h2>
+<p> This notebook shows a simple pipeline for training pix2pix on a simple dataset. 
+
+</p>
+
+<h2 class = "subsec">One Place <span class = 'LINK'><a href = "https://goo.gl/RHHm9p">[LINK]</a></span></h2>
+<p> This notebook shows how to train, test then deploy models in the browser directly from one notebook.  
+
+</p>
+
+<h2 class = "subsec">TPU vs GPU <span class = 'LINK'><a href = "https://goo.gl/yJYQWc">[LINK]</a></span></h2>
+<p> Google recently allowed training on TPUs for free on colab. This notebook explains how to enable TPU training. Also, it reports some 
+    benchmarks using mnist dataset by comparing TPU and GPU performance.   
+</p>
+
+<h2 class = "subsec">Keras Custom Generator <span class = 'LINK'><a href = "https://goo.gl/Np9sND">[LINK]</a></span></h2>
+<p> This notebook shows to create a custom data genertor in keras.  
+</p>
+
+
+<h1 class = "sec">Math Notes </h1>
+<hr>
+<h2 class = "subsec">Probability Notes <span class = 'LINK'><a href = "https://goo.gl/8bHFEU">[LINK]</a></span></h2>
+<p> A summary of the probability course by MIT.  
+</p>
+
+<h2 class = "subsec">Advanced Integration Techniques <span class = 'LINK'><a href = "https://goo.gl/C6A2tc">[LINK]</a></span></h2>
+<p> A book exploring different approaches to solve advanced integrals. 
+</p>
+</body>
+</html>

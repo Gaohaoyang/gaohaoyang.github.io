@@ -1,0 +1,121 @@
+.subsec{
+    font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 30px;
+    padding-bottom: 20px;
+    font-weight: normal;
+}
+
+span{
+    font-family: Georgia, serif;
+    font-size: 20px;
+    padding-bottom: 20px;
+    font-weight: bold;
+}
+
+.sec{
+    font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 40px;
+    padding-top: 20px;
+}
+
+.LINK{
+    font-size: 15px;
+}
+p{
+    font-family: Georgia, serif;
+    line-height: 200%;
+    font-size: 18px;
+    padding-bottom: 20px;
+    text-align: justify;
+}
+
+body{
+    padding-left: 15%;
+    padding-right:15%;
+}
+
+video{
+    width:80%;
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block
+}
+
+img{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 80%;
+}
+
+p > a:hover{
+    color: #d9d9d9;
+    text-decoration:  underline;
+}
+
+ul {
+    padding:0;
+    list-style: none;
+}
+.footer-social-icons {
+    display:block;
+}
+.social-icon {
+    color: #fff;
+}
+ul.social-icons {
+    margin-top: 10px;
+}
+.social-icons li {
+    vertical-align: top;
+    display: inline;
+    height: 100px;
+}
+.social-icons a {
+    color: #fff;
+    text-decoration: none;
+}
+.fa-facebook {
+    padding:10px 14px;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    transition: .5s;
+    background-color: #322f30;
+}
+.fa-facebook:hover {
+    background-color: #3d5b99;
+}
+.fa-twitter {
+    padding:10px 12px;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    transition: .5s;
+    background-color: #322f30;
+}
+.fa-twitter:hover {
+    background-color: #00aced;
+}
+
+.fa-github {
+    padding:10px 12px;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    transition: .5s;
+    background-color: #322f30;
+}
+.fa-github:hover {
+    background-color: #e25714;
+}
+
+.footer-social-icons{
+    margin-left: auto;
+    margin-right: auto;
+    display: block
+ }
