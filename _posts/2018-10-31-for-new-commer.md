@@ -26,7 +26,7 @@ AI初学者不要过于迷信企业项目，忽略基本功的学习，不要mni
 - ③多看多动手多做笔记，构建自己的知识体系。
 
 ## [停止学习框架，专注基础知识](https://ai.yanxishe.com/page/blogDetail/10548)
-
+- 【2019-05-08】[Stop Learning Frameworks](https://sizovs.net/2018/12/17/stop-learning-frameworks/)
 ### 观点：直接学tensorflow、pytorch，别学数学+python了
 - 我们每天学习编程语言、框架和库。我们知道的工具越新越好。但这一切都是在浪费时间！
 - 时间是我们拥有的最宝贵的资源。时间是有限的，不可更新的，并且是你不能买到的。
