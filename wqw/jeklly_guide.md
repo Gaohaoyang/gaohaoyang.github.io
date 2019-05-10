@@ -2,6 +2,7 @@
 
 ## 配置
 - [Jekyll 语法简单笔记](http://github.tiankonguse.com/blog/2014/11/10/jekyll-study.html)
+
 ### 文件介绍
 
 **_config.yml**
