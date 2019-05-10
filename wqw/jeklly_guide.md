@@ -400,7 +400,7 @@ page.title
 [Liquid](https://github.com/Shopify/liquid/wiki)是 Ruby 的一个模版引擎库，Jekyll中用到的Liquid标记有两种：**输出**和**标签**。
 
 - Output 标记：变成文本输出，被2层成对的花括号包住，如：`{{content}}`
-- Tag 标记：执行命令，被成对的花括号和百分号包住，如：`{%command%}`
+- Tag 标记：执行命令，被成对的花括号和百分号包住，如：`{ %command% }`
 
 ### Jekyll 输出 Output
 
