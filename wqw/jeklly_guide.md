@@ -344,7 +344,7 @@ page.title
 - **content**： 用在模板文件中，该变量包含页面的子视图，用于引入子节点的内容；不能在 post 和 page 文件中使用
 - **paginator**： 分页信息，需要事先设定 site 中的`paginate`值，参考[Pagination](http://jekyllrb.com/docs/pagination/)
 
-注意：`post`变量仅作用于`for`循环内部，如`{%forpostinsite.posts%}`。假如需要访问当前正在渲染的文章页面的变量，就要用`page`变量代替 post 对象。比如，post 的 title 变量，要通过`page.title`来访问。
+注意：`post`变量仅作用于`for`循环内部，如`{%  forpostinsite  .posts %}`。假如需要访问当前正在渲染的文章页面的变量，就要用`page`变量代替 post 对象。比如，post 的 title 变量，要通过`page.title`来访问。
 
 #### site 下的变量
 
