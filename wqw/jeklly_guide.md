@@ -2,6 +2,7 @@
 
 ## 配置
 - [Jekyll 语法简单笔记](http://github.tiankonguse.com/blog/2014/11/10/jekyll-study.html)
+
 ### 文件介绍
 
 **_config.yml**
@@ -343,7 +344,7 @@ page.title
 - **content**： 用在模板文件中，该变量包含页面的子视图，用于引入子节点的内容；不能在 post 和 page 文件中使用
 - **paginator**： 分页信息，需要事先设定 site 中的`paginate`值，参考[Pagination](http://jekyllrb.com/docs/pagination/)
 
-注意：`post`变量仅作用于`for`循环内部，如`{%forpostinsite.posts%}`。假如需要访问当前正在渲染的文章页面的变量，就要用`page`变量代替 post 对象。比如，post 的 title 变量，要通过`page.title`来访问。
+注意：`post`变量仅作用于`for`循环内部，如`{ % forpostinsite--.posts % }`。假如需要访问当前正在渲染的文章页面的变量，就要用`page`变量代替 post 对象。比如，post 的 title 变量，要通过`page.title`来访问。
 
 #### site 下的变量
 
@@ -399,7 +400,7 @@ page.title
 [Liquid](https://github.com/Shopify/liquid/wiki)是 Ruby 的一个模版引擎库，Jekyll中用到的Liquid标记有两种：**输出**和**标签**。
 
 - Output 标记：变成文本输出，被2层成对的花括号包住，如：`{{content}}`
-- Tag 标记：执行命令，被成对的花括号和百分号包住，如：`{%command%}`
+- Tag 标记：执行命令，被成对的花括号和百分号包住，如：`{ %command% }`
 
 ### Jekyll 输出 Output
 
