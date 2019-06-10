@@ -13,8 +13,11 @@ mathjax: true
 
 
 > * 全文地址：[【完整版】人类唯一的出路：变成人工智能](https://mp.weixin.qq.com/s?__biz=MjM5ODY2OTQyNg==&mid=2649768466&idx=1&sn=b6b1720b7a2243ab3907c58d2b22a602&chksm=bec3df0f89b456198c4960da99e46075f2bef121320f52a805b19f9143f5c083f6bac9430e97&token=832591528&lang=zh_CN#rd)
-> * 原文地址：[英文版](https://waitbutwhy.com/2017/04/neuralink.html)
+> * 原文地址：[英文版-
+Neuralink and the Brain’s Magical Future](https://waitbutwhy.com/2017/04/neuralink.html)
 > * Word文档版：[腾讯文档](https://share.weiyun.com/5y4D89d)
+
+- ![](https://28oa9i1t08037ue3m1l0i861-wpengine.netdna-ssl.com/wp-content/uploads/2015/03/Logo-sometimes-Pixelmator-577.png)
 
 # 引言
 Tim Urban，之前火热的文章《为什么有很多名人让人们警惕人工智能》也是出自他手，英文原文刊载于waitbutwhy.com，点击文末的阅读原文可以跳转到原文链接。
