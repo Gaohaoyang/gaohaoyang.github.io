@@ -3,7 +3,7 @@ layout: post
 title:  "Linux之父：一生只为寻找欢笑"
 date:   2019-02-25 21:05:00
 categories: Linux
-tags: Linux
+tags: Linux Linus 天才 人生意义
 excerpt: Linux之父的传记。
 mathjax: true
 ---
