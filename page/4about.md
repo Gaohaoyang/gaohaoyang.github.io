@@ -11,7 +11,6 @@ type: page
 
 ## 关于我
 
-<iframe src="https://githubbadge.appspot.com/gaohaoyang?s=1" style="border: 0;height: 142px;width: 200px;overflow: hidden;" frameBorder="0"></iframe>
 
 BAT江湖混迹多年，兴趣广泛。
 
@@ -21,11 +20,12 @@ BAT江湖混迹多年，兴趣广泛。
 
 工作内容上，从推荐系统、Hadoop/Hive，到数据挖掘、机器学习，再到深度学习、聊天机器人、计算机视觉和自然语言处理等。
 
-崇尚终身学习
+> 崇尚终身学习,自律更自由，平凡不平庸
 
 ## 相关项目
 
 讲过的AI课程
+
 - 大数据文摘+清华+SoAI共同承办的AI培训班：[The School of AI Beijing](https://wqw547243068.github.io/school-of-ai-beijing)
 - 雷锋网上开的Python入门AI课程：[有趣的Python](https://wqw547243068.github.io/Python-learning)
 
@@ -47,12 +47,15 @@ BAT江湖混迹多年，兴趣广泛。
 ## 友情链接
 
 [羡辙杂俎](http://zhangwenli.com/blog) \| [Anotherhome](https://www.anotherhome.net) \| [Reverland](http://reverland.org/) \| [ZhiLi](http://lizhipower.github.io/) \| [Simmer](http://simmer-jun.github.io/) \| [awthink](http://awthink.net/) \| [Aralic](http://aralic.github.io/) \| [zchen9](http://www.chen9.info/) \| [wuhuaji](http://wuhuaji.me/) \| [lisheng](http://www.lishengcn.cn/) \| [薛彬XueBin](http://axuebin.com/blog/) \| [TBOOX](http://www.tboox.org/cn/) \|  [Ling](http://linglinyp.com/)
+
 ## 访问统计
 
 <!-- 访问统计可视化工具 -->
-            <div class="side">
-                <script type="text/javascript" src="//rf.revolvermaps.com/0/0/1.js?i=5hf0y373y6n&amp;s=350&amp;m=7&amp;v=true&amp;r=false&amp;b=000000&amp;n=false&amp;c=ff0000" async="async"></script>
-            </div>
+
+<div class="side">
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/1.js?i=5hf0y373y6n&amp;s=350&amp;m=7&amp;v=true&amp;r=false&amp;b=000000&amp;n=false&amp;c=ff0000" async="async"></script>
+</div>
+
 
 ## Comments
 
