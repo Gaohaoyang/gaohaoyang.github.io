@@ -25,7 +25,9 @@ mathjax: true
    - 人的认知局限性，邓宁克鲁格效应
    ![心理学效应](http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20181201/04d70d0af13f49e48b607b2cab4a66b2.webp)
    - 承认吧，人生来就是孤独的
-   - <iframe src="https://www.365yg.com/a6641087299998188035#mid=5543467706" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="100%"> </iframe>
+
+<iframe src="https://www.365yg.com/a6641087299998188035#mid=5543467706" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="100%"> </iframe>
+   
    
    <iframe src="http://open.iqiyi.com/developer/player_js/coopPlayerIndex.html?vid=e373f073c74ff3db29e79a7690d68fdd&tvId=35371019209&accessToken=2.f22860a2479ad60d8da7697274de9346&appKey=3955c3425820435e86d0f4cdfe56f5e7&appId=1368&height=100%&width=100%" frameborder="0" allowfullscreen="true" width="100%" height="100%"></iframe>
    
