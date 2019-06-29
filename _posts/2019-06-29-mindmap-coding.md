@@ -3,7 +3,7 @@ layout: post
 title:  "计算机知识点汇总-脑图笔记"
 date:   2019-06-29 21:55:00
 categories: IT技能
-tags: 计算机 Linux Shell Python 编程
+tags: 计算机 Linux Shell Python 编程 Numpy Pandas Matplotlib SQL 数据挖掘 机器学习 Web
 excerpt: 汇总数林觅风的IT技能笔记，方便回复、巩固知识点
 mathjax: true
 ---
@@ -12,8 +12,7 @@ mathjax: true
 {:toc}
 
 
-> * [人为什么会拖延](https://waitbutwhy.com/cn/%e4%ba%ba%e4%b8%ba%e4%bb%80%e4%b9%88%e4%bc%9a%e6%8b%96%e5%bb%b6)
-> * [如何打败拖延症](https://waitbutwhy.com/cn/%e5%a6%82%e4%bd%95%e6%89%93%e8%b4%a5%e6%8b%96%e5%bb%b6%e7%97%87)
+> * [数林觅风](https://woaielf.github.io/)
 
 - ![](https://28oa9i1t08037ue3m1l0i861-wpengine.netdna-ssl.com/wp-content/uploads/2015/03/Logo-sometimes-Pixelmator-577.png)
 
@@ -31,14 +30,16 @@ mathjax: true
       - ❥ 进入公众号目录「导图下载」
 
 
-### ▍1.导图一览
+### 导图一览
+
 **先看一下本文所有思维导图：**
 【小视频】
 
 P.S.由于平台对图片有一定程度的压缩，**建议下载高清原图，放大后阅读**。
 
 
-### ▍2.如何阅读
+### 如何阅读
+
 ![rules](https://raw.githubusercontent.com/woaielf/woaielf.github.io/master/_posts/media/15233609547427/rules.png)
 
 对于基础较为薄弱的朋友，建议配合参考书目学习，更重要的是项目实战练习，**把思维导图作为辅助梳理逻辑的工具**。
@@ -64,6 +65,7 @@ P.S.由于平台对图片有一定程度的压缩，**建议下载高清原图�
 ## Python知识点
 
 **17 幅思维导图，主要就 Python 核心基础知识进行了细致梳理**。无论你是编程初学者，还是经验丰富的程序员，都可以通过这些图**快速了解或回忆 Python 编程中最重要的概念**。
+
 **1 计算机基础**
 ![1](https://raw.githubusercontent.com/woaielf/woaielf.github.io/master/_posts/media/15233609547427/1.png)
 
@@ -124,6 +126,7 @@ P.S.由于平台对图片有一定程度的压缩，**建议下载高清原图�
 ![](https://raw.githubusercontent.com/woaielf/woaielf.github.io/master/_posts/Pic/1706/170613-15.png)
 
 ### 14 张思维导图
+
 #### 基础知识
 
 ![](https://raw.githubusercontent.com/woaielf/woaielf.github.io/master/_posts/Pic/1706/170613-1.png)
@@ -299,9 +302,6 @@ Reference
 
 ![](https://raw.githubusercontent.com/woaielf/woaielf.github.io/master/_posts/Pic/1703/170331-1.png)
 ![](https://raw.githubusercontent.com/woaielf/woaielf.github.io/master/_posts/Pic/1703/170331-2.png)
-
-
-
 
 
 ## 机器学习
