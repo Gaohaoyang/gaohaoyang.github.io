@@ -11,21 +11,24 @@ mathjax: true
 * content
 {:toc}
 
-
+参考文章：
 > * [如何选择你的人生伴侣-上](https://waitbutwhy.com/cn/%e5%a6%82%e4%bd%95%e9%80%89%e6%8b%a9%e4%bd%a0%e7%9a%84%e4%ba%ba%e7%94%9f%e4%bc%b4%e4%be%a3)
 > * [如何选择你的人生伴侣-下](https://waitbutwhy.com/cn/%e5%a6%82%e4%bd%95%e9%80%89%e6%8b%a9%e4%bd%a0%e7%9a%84%e4%ba%ba%e7%94%9f%e4%bc%b4%e4%be%a3ii)
 > * [为什么我们会和错误的人结婚](https://mp.weixin.qq.com/s?src=3&timestamp=1561778791&ver=1&signature=9ag*xguoRmAliXhngLuWynw3uS7X*XcmqveT5ljpFBhjgLwqOFkSFbj08kL2TcCnStkAnDeiRbRen5uaqPxC1a2wvyNB8UWDAMJOFdYDWWyffTks4ZW3kkJfX7TrmVx-JcFSZgI1XE75GLunV2x6qfsSOdQeqH9WjWN0Atzl14Y=)
+
 - ![](https://28oa9i1t08037ue3m1l0i861-wpengine.netdna-ssl.com/wp-content/uploads/2015/03/Logo-sometimes-Pixelmator-577.png)
 
 # 如何选择你的人生伴侣
+
 ## 引言
 - 阅读之前请先看一张图和一个视频
    - 人的认知局限性，邓宁克鲁格效应
    ![心理学效应](http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20181201/04d70d0af13f49e48b607b2cab4a66b2.webp)
    - 承认吧，人生来就是孤独的
-   - <iframe src="https://www.365yg.com/a6641087299998188035#mid=5543467706" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+   - <iframe src="https://www.365yg.com/a6641087299998188035#mid=5543467706" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="100%"> </iframe>
    
    <iframe src="http://open.iqiyi.com/developer/player_js/coopPlayerIndex.html?vid=e373f073c74ff3db29e79a7690d68fdd&tvId=35371019209&accessToken=2.f22860a2479ad60d8da7697274de9346&appKey=3955c3425820435e86d0f4cdfe56f5e7&appId=1368&height=100%&width=100%" frameborder="0" allowfullscreen="true" width="100%" height="100%"></iframe>
+   
 ## 第一部分
 
 ### 情人节的含义
