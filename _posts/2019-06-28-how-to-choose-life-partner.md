@@ -13,8 +13,8 @@ mathjax: true
 
 
 > * [如何选择你的人生伴侣-上](https://waitbutwhy.com/cn/%e5%a6%82%e4%bd%95%e9%80%89%e6%8b%a9%e4%bd%a0%e7%9a%84%e4%ba%ba%e7%94%9f%e4%bc%b4%e4%be%a3)
-* [如何选择你的人生伴侣-下](https://waitbutwhy.com/cn/%e5%a6%82%e4%bd%95%e9%80%89%e6%8b%a9%e4%bd%a0%e7%9a%84%e4%ba%ba%e7%94%9f%e4%bc%b4%e4%be%a3ii)
-* [为什么我们会和错误的人结婚](https://mp.weixin.qq.com/s?src=3&timestamp=1561778791&ver=1&signature=9ag*xguoRmAliXhngLuWynw3uS7X*XcmqveT5ljpFBhjgLwqOFkSFbj08kL2TcCnStkAnDeiRbRen5uaqPxC1a2wvyNB8UWDAMJOFdYDWWyffTks4ZW3kkJfX7TrmVx-JcFSZgI1XE75GLunV2x6qfsSOdQeqH9WjWN0Atzl14Y=)
+> * [如何选择你的人生伴侣-下](https://waitbutwhy.com/cn/%e5%a6%82%e4%bd%95%e9%80%89%e6%8b%a9%e4%bd%a0%e7%9a%84%e4%ba%ba%e7%94%9f%e4%bc%b4%e4%be%a3ii)
+> * [为什么我们会和错误的人结婚](https://mp.weixin.qq.com/s?src=3&timestamp=1561778791&ver=1&signature=9ag*xguoRmAliXhngLuWynw3uS7X*XcmqveT5ljpFBhjgLwqOFkSFbj08kL2TcCnStkAnDeiRbRen5uaqPxC1a2wvyNB8UWDAMJOFdYDWWyffTks4ZW3kkJfX7TrmVx-JcFSZgI1XE75GLunV2x6qfsSOdQeqH9WjWN0Atzl14Y=)
 - ![](https://28oa9i1t08037ue3m1l0i861-wpengine.netdna-ssl.com/wp-content/uploads/2015/03/Logo-sometimes-Pixelmator-577.png)
 
 # 如何选择你的人生伴侣
@@ -267,6 +267,7 @@ mathjax: true
 最后，无论情人节做了多么浪漫的事情，都祝今年情人节快乐，请不要忘记，那些平淡的日子其实比情人节更加重要。
 
 ## 第三部分
+![](http://mmbiz.qpic.cn/mmbiz_jpg/ERvU7WA6iaib3FZaE3lUrQ8Uc3puicGqZYKUzDlj4ZC8K1zuP9iawNpEgOEOcADlhBbtNBW7BEicibUAQ7cy044lvwRw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
 原文来自[纽约时报](http://www.nytimes.com/2016/05/29/opinion/sunday/why-you-will-marry-the-wrong-person.html?_r=0)
 
 这是我们最怕发生的事情之一。我们会竭尽全力避免。
