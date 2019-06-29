@@ -14,8 +14,6 @@ mathjax: true
 
 > * [数林觅风](https://woaielf.github.io/)
 
-- ![](https://28oa9i1t08037ue3m1l0i861-wpengine.netdna-ssl.com/wp-content/uploads/2015/03/Logo-sometimes-Pixelmator-577.png)
-
 # IT技能知识点汇总
 
 ## 导读
