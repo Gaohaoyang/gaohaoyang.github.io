@@ -26,10 +26,8 @@ mathjax: true
    ![心理学效应](http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20181201/04d70d0af13f49e48b607b2cab4a66b2.webp)
    - 承认吧，人生来就是孤独的
 
-<iframe src="https://www.365yg.com/a6641087299998188035#mid=5543467706" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="800"> </iframe>
+<iframe src="https://www.365yg.com/a6641087299998188035#mid=5543467706" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="900" height="600"> </iframe>
    
-   
-   <iframe src="http://open.iqiyi.com/developer/player_js/coopPlayerIndex.html?vid=e373f073c74ff3db29e79a7690d68fdd&tvId=35371019209&accessToken=2.f22860a2479ad60d8da7697274de9346&appKey=3955c3425820435e86d0f4cdfe56f5e7&appId=1368&height=100%&width=100%" frameborder="0" allowfullscreen="true" width="100%" height="100%"></iframe>
    
 ## 第一部分
 
@@ -279,7 +277,9 @@ mathjax: true
 最后，无论情人节做了多么浪漫的事情，都祝今年情人节快乐，请不要忘记，那些平淡的日子其实比情人节更加重要。
 
 ## 第三部分
+
 ![](http://mmbiz.qpic.cn/mmbiz_jpg/ERvU7WA6iaib3FZaE3lUrQ8Uc3puicGqZYKUzDlj4ZC8K1zuP9iawNpEgOEOcADlhBbtNBW7BEicibUAQ7cy044lvwRw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+
 原文来自[纽约时报](http://www.nytimes.com/2016/05/29/opinion/sunday/why-you-will-marry-the-wrong-person.html?_r=0)
 
 这是我们最怕发生的事情之一。我们会竭尽全力避免。
