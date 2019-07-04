@@ -2,7 +2,7 @@
 layout: post
 title:  "闲话神经网络"
 date:   2018-12-09 22:44:00
-categories: 王奇文
+categories: 深度学习
 tags: 神经网络  人工智能  AI  机器学习  ML  表示学习
 excerpt: 整理神经网络的点点滴滴，思考背后的关联。
 mathjax: true
