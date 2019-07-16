@@ -3,7 +3,7 @@ layout: post
 title:  "经典算法总结"
 categories: 算法
 tags:  数据结构 算法 KMP Morris 二叉树 字符串
-author: [风之筝](https://ghh3809.github.io/2018/08/06/morris-traversal/)
+author: 风之筝
 excerpt: 有哪些经典算法让人拍手称快、赞叹不已？
 mathjax: true
 ---
@@ -503,7 +503,7 @@ public void levelTraversal(TreeNode root) {
 很显然，无论哪种遍历方式，一个节点最多只可能被访问两次，因此其时间复杂度均为`O(n)`。而由于借助了栈和队列这样的辅助数据结构，其空间复杂度与树高有直接关系，因此其空间复杂度为最好和平均`O(logn)`，最差`O(n)`，与递归方式的实现相同。
 
 ## Morris遍历
-
+- 摘自：[风之筝](https://ghh3809.github.io/2018/08/06/morris-traversal/)
 ### 主要思想
 
 Morris遍历方法打破了一般遍历思想上的“禁锢”，通过临时对子节点引用的修改来实现“后继”节点的保存，之后再次遍历到时可以恢复树的结构，以此仅仅通过`O(1)`的空间实现树的遍历。没错，这又是KMP算法里面的Morris发明的（为什么别人可以这么聪明……）
