@@ -3,7 +3,7 @@ layout: post
 title:  "经典算法总结"
 categories: 算法
 tags:  数据结构 算法 KMP Morris 二叉树 字符串
-author: 风之筝
+author: [风之筝](https://ghh3809.github.io/2018/08/06/morris-traversal/)
 excerpt: 有哪些经典算法让人拍手称快、赞叹不已？
 mathjax: true
 ---
