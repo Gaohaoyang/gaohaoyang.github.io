@@ -4,6 +4,8 @@ title:  "经典算法总结"
 categories: 算法
 tags:  算法 KMP Morris
 author: 风之筝
+excerpt: 有哪些经典算法让人拍手称快、赞叹不已？
+mathjax: true
 ---
 
 * content
