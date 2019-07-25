@@ -30,7 +30,11 @@ comments: true
 # two ways to comment, only choose one, and use your own short name
 # 两种评论插件，选一个就好了，使用自己的 short_name
 #duoshuo_shortname: wqw547243068
-disqus_shortname: wqw # [2019-04-29]vpn，通过google账号申请，https://wqw.disqus.com/admin/install/platforms/jekyll/
+#disqus_shortname: wqw # [2019-04-29]vpn，通过google账号申请，https://wqw.disqus.com/admin/install/platforms/jekyll/
+# 【2019-07-25】韩国来必力评论系统 Support for LiveRe comments system.
+# You can get your uid from https://livere.com/insight/myCode (General web site)
+livere_uid: MTAyMC80NTU2OC8yMjA3OQ==
+
 
 # statistic analysis 统计代码
 # 百度统计 id，将统计代码替换为自己的百度统计id，即
