@@ -12,11 +12,12 @@ type: page
 ## 关于我
 
 - [你好，我是码农！](https://mp.weixin.qq.com/s?__biz=MjM5ODY2OTQyNg==&mid=502284435&idx=1&sn=b40f727830cae264e65c29c75f75ee70&chksm=3ec3dd8e09b45498b3bc2efccc3fe52a2f79e8f424774dc4afaedb84b3bfc0954968b7a678de&mpshare=1&scene=23&srcid&sharer_sharetime=1564480271727&sharer_shareid=b8d409494a5439418f4a89712efcd92a%23rd)
-- 普通程序猿，些许爱好。
+- 普通程序猿，些许爱好，容易沉浸在自己的世界里，发发呆，于是有了公众号（[鹤啸九天](http://mp.weixin.qq.com/mp/homepage?__biz=MjM5ODY2OTQyNg==&hid=1&sn=259f54743846ee6be7585e06be6e267e&scene=18%23wechat_redirect)）和这个技术博客
    - 动静结合
       - 动：长跑、游泳、爬山
       - 静：诗词书画，一颗伪文艺的心
 - BAT江湖混迹多年，工作内容上
+
 ```从推荐系统、Hadoop/Hive，到数据挖掘、机器学习，再到深度学习、聊天机器人、计算机视觉和自然语言处理等。```
 
 > 崇尚终身学习,自律更自由，平凡不平庸
