@@ -14,25 +14,35 @@ mathjax: true
 # 视频资源
 ## 思维哲学
 ### 知行合一-王阳明
-- [90分钟看完《知行合一王阳明》观传奇人生是怎样炼成的！](https://www.365yg.com/a6679033057569145357#mid=1626597192389645)
-- <iframe src="https://www.365yg.com/a6679033057569145357#mid=1626597192389645" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- [90分钟看完《知行合一王阳明》观传奇人生是怎样炼成的！](https://www.365yg.com/a6679033057569145357#mid=1626597192389645)，[B站](https://www.bilibili.com/video/av19156453?from=search&seid=318296673017896441)
 
 <iframe src="//player.bilibili.com/player.html?aid=19156453&cid=31366860&page=1" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 ## 社会体系
 
-- 反映社会的短片：[Dinner for few](http://www.365yg.com/a6604023738310590980/#mid=1605851765491715)
-- <iframe src="http://www.365yg.com/a6604023738310590980/#mid=1605851765491715" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- 反映社会的短片：[Dinner for few](http://www.365yg.com/a6604023738310590980/#mid=1605851765491715),[B站](https://www.bilibili.com/video/av36040687/?p=2)
+
+<iframe src="//player.bilibili.com/player.html?aid=36040687&cid=63346561&page=2" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 ## 自我
-- [承认吧，人生来就是孤独的](https://www.365yg.com/a6641087299998188035#mid=5543467706)
-- <iframe src="https://www.365yg.com/a6641087299998188035#mid=5543467706" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- [承认吧，人生来就是孤独的](https://www.365yg.com/a6641087299998188035#mid=5543467706)，[B站](https://www.bilibili.com/video/av39370474?from=search&seid=8373277070703221652)
 
-## 经济
+<iframe src="//player.bilibili.com/player.html?aid=39370474&cid=69181558&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
-- [银行与货币系统真相](https://v.qq.com/x/page/h0128ecsb8f.html)
+## 金融
+
+- [银行与货币系统真相](https://v.qq.com/x/page/h0128ecsb8f.html)，[B站](https://www.bilibili.com/video/av34885331?from=search&seid=866506507557189883)
+
+<iframe src="//player.bilibili.com/player.html?aid=34885331&cid=61111234&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
 - 【2018-11-25】万维财经经济学视频[系列](https://www.365yg.com/c/user/51414569980/),覆盖经济规律、通货膨胀、货币等，通俗易懂，如：[经济机器是怎样运行的](http://www.365yg.com/i6617283549709992455/#mid=51415239994)
 - 【2019-03-07】2008年金融危机的电影[大空头](https://www.365yg.com/a6624281300087865859#mid=1556765139678210)
+
+- 华尔街-9集，[B站](hhttps://www.bilibili.com/video/av3571976)
+<iframe src="//player.bilibili.com/player.html?aid=3571976&cid=5695381&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+- 比特币：所谓的货币终结（2015）【全】,[B站](https://www.bilibili.com/video/av30760224)
+<iframe src="//player.bilibili.com/player.html?aid=30760224&cid=53698092&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 ## 科学
 - 【2018--3-17】美丽心灵（博弈论创始人，纳什）+ [万物理论](https://pan.baidu.com/s/1HdrJpd-OXp371A8m9PI_Eg)(霍金)
@@ -42,10 +52,24 @@ mathjax: true
 
 ## 互联网
 
+### 行业观察
+
+- 互联网时代-10集纪录片，[B站](https://www.bilibili.com/video/av1502036)
+<iframe src="//player.bilibili.com/player.html?aid=1502036&cid=2238549&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+- 大数据时代-5集纪录片,[B站](https://www.bilibili.com/video/av57503095?from=search&seid=1412904549370473421)
+<iframe src="//player.bilibili.com/player.html?aid=57503095&cid=100384260&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+- 其它
+
+### 大公司
 - 【2019-07-26】阿里纪录片，[扬子江大鳄](https://www.bilibili.com/video/av10740662/)
 <iframe src="//player.bilibili.com/player.html?aid=10740662&cid=17720293&page=1" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 - 马云和永远的阿里：Dream maker
 <iframe src="//player.bilibili.com/player.html?aid=5232102&cid=8503492&page=1" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+
+## 历史
+- 孙子兵法-10集纪录片，[B站](https://www.bilibili.com/video/av1968639)
+<iframe src="//player.bilibili.com/player.html?aid=1968639&cid=5838714&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 
 
