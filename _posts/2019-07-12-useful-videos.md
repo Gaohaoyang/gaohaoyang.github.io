@@ -15,16 +15,18 @@ mathjax: true
 ## 思维哲学
 ### 知行合一-王阳明
 - [90分钟看完《知行合一王阳明》观传奇人生是怎样炼成的！](https://www.365yg.com/a6679033057569145357#mid=1626597192389645)
-- <iframe src="https://www.365yg.com/a6679033057569145357#mid=1626597192389645" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- <iframe src="https://www.365yg.com/a6679033057569145357#mid=1626597192389645" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+<iframe src="//player.bilibili.com/player.html?aid=19156453&cid=31366860&page=1" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 ## 社会体系
 
 - 反映社会的短片：[Dinner for few](http://www.365yg.com/a6604023738310590980/#mid=1605851765491715)
-- <iframe src="http://www.365yg.com/a6604023738310590980/#mid=1605851765491715" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- <iframe src="http://www.365yg.com/a6604023738310590980/#mid=1605851765491715" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 ## 自我
 - [承认吧，人生来就是孤独的](https://www.365yg.com/a6641087299998188035#mid=5543467706)
-- <iframe src="https://www.365yg.com/a6641087299998188035#mid=5543467706" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- <iframe src="https://www.365yg.com/a6641087299998188035#mid=5543467706" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 ## 经济
 
@@ -43,7 +45,7 @@ mathjax: true
 - 【2019-07-26】阿里纪录片，[扬子江大鳄](https://www.bilibili.com/video/av10740662/)
 <iframe src="//player.bilibili.com/player.html?aid=10740662&cid=17720293&page=1" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 - 马云和永远的阿里：Dream maker
-<iframe src="//player.bilibili.com/player.html?aid=5232102&cid=8503492&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=5232102&cid=8503492&page=1" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
 
