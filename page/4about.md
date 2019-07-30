@@ -33,7 +33,8 @@ BAT江湖混迹多年，兴趣广泛。
 ## 联系我
 
 * GitHub：[wqw](https://github.com/wqw547243068)
-* email：wqw547243068@{163,google}.com
+* Email：wqw547243068@{163,gmail}.com
+* [知乎](https://www.zhihu.com/people/wangqiwen/activities)
 
 
 ## 关于本站
@@ -42,7 +43,7 @@ BAT江湖混迹多年，兴趣广泛。
 
 ~欢迎使用~
 
-欢迎大家提一些对本站主题的建议，可以直接在下面留言或者新建一个 [Issue](https://github.com/Gaohaoyang/gaohaoyang.github.io/issues)。
+欢迎大家提一些对本站主题的建议，可以直接在下面留言或者新建一个 [Issue](https://github.com/wqw547243068/wqw547243068.github.io/issues)。
 
 
 ## 友情链接
