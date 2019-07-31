@@ -12,8 +12,8 @@ mathjax: true
 {:toc}
 
 # [哈佛幸福课笔记（总23集完）](https://zhuanlan.zhihu.com/p/24680966)
-
-链接： 网易公开课, [哈佛大学公开课：幸福课_全23集](http://open.163.com/special/sp/positivepsychology.html)
+- [哈佛幸福课学习笔记与行动指南](http://blog.sina.com.cn/s/blog_4c71a50a01014c64.html)
+- 链接： 网易公开课, [哈佛大学公开课：幸福课_全23集](http://open.163.com/special/sp/positivepsychology.html)
 
 讲师：TalBen Shahar （学位：心理学硕士、哲学组织和行为学博士）
 
