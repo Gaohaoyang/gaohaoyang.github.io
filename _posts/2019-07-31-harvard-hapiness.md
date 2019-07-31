@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "哈佛大学：什么是幸福"
+title:  "哈佛大学：什么是幸福-积极心理学"
 date:   2019-07-31 18:18:00
 categories: 读书笔记
 tags: 哈佛大学 幸福 心理学
-excerpt: 一本讲公司如何发展起来的书籍
+excerpt: 哈佛大学的一门积极心理学课程，如何自我控制，让生活越来越美好
 mathjax: true
 ---
 
@@ -22,6 +22,8 @@ mathjax: true
 一句话评价的话，哈佛幸福课是积极心理学的精华和浓缩，是获取幸福最有效、最实际、最可行的指南。
 
 ![](https://pic2.zhimg.com/80/76e7e7477011fb4beea9f3b9e9a81b7a_hd.jpg)
+
+![](https://pic3.zhimg.com/80/v2-e14f2a9a53faa77aae2eefdbf89791cb_hd.jpg)
 
 课程列表：
 ```
