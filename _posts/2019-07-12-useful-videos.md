@@ -29,6 +29,10 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=39370474&cid=69181558&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+- 网易云课堂，作者在TED的演讲：拖延症，文字版，[拖延症解析](https://wqw547243068.github.io/2019/06/26/why-delay)
+
+<object width="100%" height="600"><param name="movie" value="//open.163.com/openplayer/-MBHQSM52F-MBI15O7QE-http://open-image.nosdn.127.net/a594ecedc63e4f77b6efeaa962e8fd01.jpg-openPlayer.swf?isUserAutoPlay=1"></param><param name="allowScriptAccess" value="always"></param><param name="wmode" value="transparent"></param><embed src="//open.163.com/openplayer/-MBHQSM52F-MBI15O7QE-http://open-image.nosdn.127.net/a594ecedc63e4f77b6efeaa962e8fd01.jpg-openPlayer.swf?isUserAutoPlay=1" type="application/x-shockwave-flash" width="640" height="360" allowFullScreen="true" wmode="transparent" allowScriptAccess="always"></embed></object>
+
 ## 金融
 
 - [银行与货币系统真相](https://v.qq.com/x/page/h0128ecsb8f.html)，[B站](https://www.bilibili.com/video/av34885331?from=search&seid=866506507557189883)
@@ -47,10 +51,18 @@ mathjax: true
 ## 科学
 - 【2018--3-17】美丽心灵（博弈论创始人，纳什）+ [万物理论](https://pan.baidu.com/s/1HdrJpd-OXp371A8m9PI_Eg)(霍金)
 - 【2018-12-16】印度拉马努金传记[知无涯者](https://www.iqiyi.com/v_19rra55zk8.html?vfm=2008_aldbd)，Will Hunting [心灵捕手](https://www.bilibili.com/video/av22771407?from=search&seid=2102098560566397389)
-- 【2018-11-25】马云励志演讲：[最伟大的成功](https://www.365yg.com/a6623610909505880584#mid=1561866780362754)
 
+## 数学
+- 【2019-07-31】三棕一蓝产品-[线性代数本质](https://www.bilibili.com/video/av6731067/)
+
+<iframe src="//player.bilibili.com/player.html?aid=6731067&cid=8503492&page=1" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+- 【2019-07-31】三棕一蓝产品-[微积分本质](https://www.bilibili.com/video/av24325548)
+
+<iframe src="//player.bilibili.com/player.html?aid=24325548&cid=8503492&page=1" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 ## 互联网
+- 【2018-11-25】马云励志演讲：[最伟大的成功](https://www.365yg.com/a6623610909505880584#mid=1561866780362754)
 
 ### 行业观察
 
