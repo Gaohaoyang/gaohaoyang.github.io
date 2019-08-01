@@ -36,6 +36,7 @@ type: page
 * Email：wqw547243068@{163,gmail}.com
 * [知乎](https://www.zhihu.com/people/wangqiwen/activities)
 
+![](https://github.com/wqw547243068/wqw547243068.github.io/blob/master/wqw/fig/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0.jpg?)
 
 ## 关于本站
 
@@ -44,6 +45,7 @@ type: page
 ~欢迎使用~
 
 欢迎大家提一些对本站主题的建议，可以直接在下面留言或者新建一个 [Issue](https://github.com/wqw547243068/wqw547243068.github.io/issues)。
+
 
 
 ## 友情链接
