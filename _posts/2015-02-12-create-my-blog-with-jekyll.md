@@ -76,6 +76,7 @@ print "hello"
 - 来必力
 
 <!-- 来必力City版安装代码 -->
+<div>
     <script type="text/javascript">
            (function(d, s) {
                var j, e = d.getElementsByTagName(s)[0];
@@ -87,6 +88,7 @@ print "hello"
            })(document, 'script');
    </script>
    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
 <!-- City版安装代码已完成 -->
 
 ## 搭建过程
