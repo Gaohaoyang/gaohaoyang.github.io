@@ -13,8 +13,9 @@ tags: jekyll RubyGems
 
 ---
 【2019-04-29】嵌入视频实验
+
 - 超级工程
-<iframe src="//player.bilibili.com/player.html?aid=26722471&cid=45968926&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=26722471&cid=45968926&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
 ---
 
@@ -157,3 +158,6 @@ Done installing documentation for hitimes after 1 seconds
 
 
 关于，[hitimes](https://rubygems.org/gems/hitimes/versions/1.2.2) 是一个快速的高效的定时器解决方案库，详情可以去官网查看。
+
+
+
