@@ -12,6 +12,7 @@ tags: jekyll RubyGems
 
 一直以来都想搭建一个自己的博客，但是近半年做项目太忙，再加上教研室的网络很坑爹，所以也一直没顾得上。之前用过 WordPress 托管在免费的京东云擎上，但是速度太慢。在知乎上看到一些相关的内容，于是选择了在github上用jekyll搭建博客。
 
+## 视屏嵌入
 ---
 【2019-04-29】嵌入视频实验
 
@@ -19,6 +20,13 @@ tags: jekyll RubyGems
 <iframe src="//player.bilibili.com/player.html?aid=26722471&cid=45968926&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
 ---
+
+## 脑图嵌入
+- processon
+
+<iframe id="embed_dom" name="embed_dom" frameborder="0" style="display:block;width:525px; height:245px;" src="https://www.processon.com/embed/mind/581dee8ee4b0c6fe57213cd9"></iframe>
+
+
 
 ## 搭建过程
 
