@@ -10,18 +10,50 @@ tags: jekyll RubyGems
 * content
 {:toc}
 
-一直以来都想搭建一个自己的博客，但是近半年做项目太忙，再加上教研室的网络很坑爹，所以也一直没顾得上。之前用过 WordPress 托管在免费的京东云擎上，但是速度太慢。在知乎上看到一些相关的内容，于是选择了在github上用jekyll搭建博客。
+## 简介
+- 使用jekyll搭建github静态页面
+- 汇总各类小技巧
 
-## 视屏嵌入
+## 技巧汇总
+
+### 编辑功能
+- 注释
+
+> 注释在此。。。
+
+- 代码高亮
+
+```python
+import os
+print "hello"
+```
+
+- **加粗**, *斜体*
+- <font color='green'>彩色字体</font>
+
+
+### 图片嵌入
+
+- 默认方法
+   - ![](https://img3.doubanio.com/lpic/s28012945.jpg)
+- 限制大小
+   - <img src="https://img3.doubanio.com/lpic/s28012945.jpg" height="100%" width="300" />
+
+
+
+### 视屏嵌入
 ---
-【2019-04-29】嵌入视频实验
+【2019-04-29】嵌入视频
 
 - 超级工程
 <iframe src="//player.bilibili.com/player.html?aid=26722471&cid=45968926&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
+- [网易云课堂](http://open.163.com/movie/2006/1/1/9/M6HV755O6_M6HV8DF19.html)
+<object width="640" height="360"><param name="movie" value="//open.163.com/openplayer/-M6HV755O6-M6HV8DF19-http://open-image.nosdn.127.net/a5954850efaf429189dd8247a999be22.jpg-openPlayer.swf?isUserAutoPlay=1"></param><param name="allowScriptAccess" value="always"></param><param name="wmode" value="transparent"></param><embed src="//open.163.com/openplayer/-M6HV755O6-M6HV8DF19-http://open-image.nosdn.127.net/a5954850efaf429189dd8247a999be22.jpg-openPlayer.swf?isUserAutoPlay=1" type="application/x-shockwave-flash" width="640" height="360" allowFullScreen="true" wmode="transparent" allowScriptAccess="always"></embed></object>
+
 ---
 
-## 脑图嵌入
+### 脑图嵌入
 - processon
 
 <iframe id="embed_dom" name="embed_dom" frameborder="0" style="display:block;width:700px; height:900px;" src="https://www.processon.com/embed/mind/581dee8ee4b0c6fe57213cd9"></iframe>
@@ -30,6 +62,32 @@ tags: jekyll RubyGems
    - 【2019-08-02】[xmind图](https://www.xmind.net/m/YPMsKe/#)
 <iframe src='https://www.xmind.net/embed/YPMsKe/' width='750' height='540' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
 
+<iframe src='https://www.xmind.net/embed/T9Nm/' width='750' height='540' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
+
+### 访问统计
+- 国外的插件
+<script type="text/javascript" src="//rf.revolvermaps.com/0/0/1.js?i=5q2837r7gjo&amp;s=265&amp;m=7&amp;v=true&amp;r=false&amp;b=000000&amp;n=false&amp;c=ff0000" async="async"></script>
+
+
+### 评论插件
+
+- 来必力
+
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80NTU2OC8yMjA3OQ==">
+    <script type="text/javascript">
+           (function(d, s) {
+               var j, e = d.getElementsByTagName(s)[0];
+               if (typeof LivereTower === 'function') { return; }
+               j = d.createElement(s);
+               j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+               j.async = true;
+               e.parentNode.insertBefore(j, e);
+           })(document, 'script');
+   </script>
+        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
 
 ## 搭建过程
 
@@ -38,11 +96,9 @@ tags: jekyll RubyGems
 
 ### 安装Ruby
 
-ruby官网下载安装：[https://www.ruby-lang.org/en/downloads/](https://www.ruby-lang.org/en/downloads/)
-
-安装完成后配置环境变量
-
-在命令提示符中，得到ruby版本号，如下图，即安装成功
+- ruby官网下载安装：[https://www.ruby-lang.org/en/downloads/](https://www.ruby-lang.org/en/downloads/)
+- 安装完成后配置环境变量
+- 在命令提示符中，得到ruby版本号，如下图，即安装成功
 
 ![](http://ww4.sinaimg.cn/large/7011d6cfjw1f2ue0e393vj20cu00t748.jpg)
 
