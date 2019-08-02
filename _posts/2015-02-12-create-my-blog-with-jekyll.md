@@ -13,8 +13,8 @@ tags: jekyll RubyGems
 
 ---
 【2019-04-29】嵌入视频实验
-
-<iframe width="560" height="315" src="https://www.bilibili.com/video/av16001891?zw" frameborder="0"></iframe>
+- 超级工程
+<iframe src="//player.bilibili.com/player.html?aid=26722471&cid=45968926&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 ---
 
