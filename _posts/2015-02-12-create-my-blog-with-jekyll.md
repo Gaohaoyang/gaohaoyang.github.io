@@ -40,7 +40,18 @@ print "hello"
 - 限制大小
    - <img src="https://img3.doubanio.com/lpic/s28012945.jpg" height="100%" width="100" />
 
+### Markdown使用
+* [github官方markdown指南](https://guides.github.com/features/mastering-markdown/ "英文版")
+* [github readme语法简介](http://blog.csdn.net/guodongxiaren/article/details/23690801?utm_source=tuicool&utm_medium=referral "跟一般markdown语法不同")，【2018-6-10】[github page jeklly主题](https://github.com/Gaohaoyang/gaohaoyang.github.io/blob/master/README-zh-cn.md)，【2019-04-29】[Jeklly主题大全](http://jekyllthemes.org/)
+* [MarkDown语法笔记（完整版）](http://blog.csdn.net/witnessai1/article/details/52551362)
+* [马克飞象markdown语法在线测试](https://maxiang.io/ "可以在线测试MD语言！")
 
+### 公式嵌入
+* [Latex在线调试](https://latexbase.com/)，[吴文中数学公式编辑器](http://latex.91maths.com/)，公式在线编辑，所见所得，支持图片输出
+* github自带公式显示
+$$f \left( x _ { n + 1 } \right) - f \left( x _ { n } \right) = f ^ { \prime } \left( x _ { n } \right) \left( x _ { n + 1 } - x _ { n } \right)$$
+- 知乎提供公式生成图片服务：https://www.zhihu.com/equation?tex=y+%3D+%5Cphi%28%5Csum+W_%7Bij%7DX_j+%2B+b%29+
+![](https://www.zhihu.com/equation?tex=y+%3D+%5Cphi%28%5Csum+W_%7Bij%7DX_j+%2B+b%29+)
 
 ### 视屏嵌入
 ---
