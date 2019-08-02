@@ -27,7 +27,8 @@ tags: jekyll RubyGems
 import os
 print "hello"
 ```
-
+- 字体大小
+   - <font size=2>二号字尺寸式样 </font> 
 - **加粗**, *斜体*
 - <font color='green'>彩色字体</font>
 
@@ -37,7 +38,7 @@ print "hello"
 - 默认方法
    - ![](https://img3.doubanio.com/lpic/s28012945.jpg)
 - 限制大小
-   - <img src="https://img3.doubanio.com/lpic/s28012945.jpg" height="100%" width="300" />
+   - <img src="https://img3.doubanio.com/lpic/s28012945.jpg" height="100%" width="100" />
 
 
 
@@ -66,6 +67,7 @@ print "hello"
 
 ### 访问统计
 - 国外的插件
+
 <script type="text/javascript" src="//rf.revolvermaps.com/0/0/1.js?i=5q2837r7gjo&amp;s=265&amp;m=7&amp;v=true&amp;r=false&amp;b=000000&amp;n=false&amp;c=ff0000" async="async"></script>
 
 
@@ -74,7 +76,6 @@ print "hello"
 - 来必力
 
 <!-- 来必力City版安装代码 -->
-<div id="lv-container" data-id="city" data-uid="MTAyMC80NTU2OC8yMjA3OQ==">
     <script type="text/javascript">
            (function(d, s) {
                var j, e = d.getElementsByTagName(s)[0];
@@ -85,8 +86,7 @@ print "hello"
                e.parentNode.insertBefore(j, e);
            })(document, 'script');
    </script>
-        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-</div>
+   <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
 <!-- City版安装代码已完成 -->
 
 ## 搭建过程
