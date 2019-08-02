@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Jekyll 搭建静态博客"
+title:  "Jekyll静态博客编辑功能汇总"
 date:   2015-02-15 22:14:54
 categories: jekyll
 excerpt: "jekyll用法汇总"
@@ -24,8 +24,11 @@ tags: jekyll RubyGems
 ## 脑图嵌入
 - processon
 
-<iframe id="embed_dom" name="embed_dom" frameborder="0" style="display:block;width:525px; height:245px;" src="https://www.processon.com/embed/mind/581dee8ee4b0c6fe57213cd9"></iframe>
+<iframe id="embed_dom" name="embed_dom" frameborder="0" style="display:block;width:700px; height:900px;" src="https://www.processon.com/embed/mind/581dee8ee4b0c6fe57213cd9"></iframe>
 
+- xmind脑图
+   - 【2019-08-02】[xmind图](https://www.xmind.net/m/YPMsKe/#)
+<iframe src='https://www.xmind.net/embed/YPMsKe/' width='750' height='540' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
 
 
 ## 搭建过程
