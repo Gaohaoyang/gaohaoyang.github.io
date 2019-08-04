@@ -36,14 +36,14 @@ type: page
 * Email：wqw547243068@{163,gmail}.com
 * [知乎](https://www.zhihu.com/people/wangqiwen/activities)
 
+<img src="https://github.com/wqw547243068/wqw547243068.github.io/blob/master/wqw/fig/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0.jpg" height="100%" width="500" />
 
 ## 关于本站
 
-**若您想使用这个 jekyll 博客主题，请访问：[https://github.com/Gaohaoyang/gaohaoyang.github.io](https://github.com/Gaohaoyang/gaohaoyang.github.io)**
-
-~欢迎使用~
+若想使用这个jekyll博客主题，请访问：[Gaohaoyang](https://github.com/Gaohaoyang/gaohaoyang.github.io)
 
 欢迎大家提一些对本站主题的建议，可以直接在下面留言或者新建一个 [Issue](https://github.com/wqw547243068/wqw547243068.github.io/issues)。
+
 
 
 ## 友情链接

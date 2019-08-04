@@ -1,22 +1,106 @@
 ---
 layout: post
-title:  "Jekyll 搭建静态博客"
+title:  "Jekyll静态博客编辑功能汇总"
 date:   2015-02-15 22:14:54
 categories: jekyll
+excerpt: "jekyll用法汇总"
 tags: jekyll RubyGems
 ---
 
 * content
 {:toc}
 
-一直以来都想搭建一个自己的博客，但是近半年做项目太忙，再加上教研室的网络很坑爹，所以也一直没顾得上。之前用过 WordPress 托管在免费的京东云擎上，但是速度太慢。在知乎上看到一些相关的内容，于是选择了在github上用jekyll搭建博客。
+## 简介
+- 使用jekyll搭建github静态页面
+- 汇总各类小技巧
+
+## 技巧汇总
+
+### 编辑功能
+- 注释
+
+> 注释在此。。。
+
+- 代码高亮
+
+```python
+import os
+print "hello"
+```
+- 字体大小
+   - <font size=2>二号字尺寸式样 </font> 
+- **加粗**, *斜体*
+- <font color='green'>彩色字体</font>
+
+
+### 图片嵌入
+
+- 默认方法
+   - ![](https://img3.doubanio.com/lpic/s28012945.jpg)
+- 限制大小
+   - <img src="https://img3.doubanio.com/lpic/s28012945.jpg" height="100%" width="100" />
+
+### Markdown使用
+* [github官方markdown指南](https://guides.github.com/features/mastering-markdown/ "英文版")
+* [github readme语法简介](http://blog.csdn.net/guodongxiaren/article/details/23690801?utm_source=tuicool&utm_medium=referral "跟一般markdown语法不同")，【2018-6-10】[github page jeklly主题](https://github.com/Gaohaoyang/gaohaoyang.github.io/blob/master/README-zh-cn.md)，【2019-04-29】[Jeklly主题大全](http://jekyllthemes.org/)
+* [MarkDown语法笔记（完整版）](http://blog.csdn.net/witnessai1/article/details/52551362)
+* [马克飞象markdown语法在线测试](https://maxiang.io/ "可以在线测试MD语言！")
+
+### 公式嵌入
+* [Latex在线调试](https://latexbase.com/)，[吴文中数学公式编辑器](http://latex.91maths.com/)，公式在线编辑，所见所得，支持图片输出
+* github自带公式显示
+$$f \left( x _ { n + 1 } \right) - f \left( x _ { n } \right) = f ^ { \prime } \left( x _ { n } \right) \left( x _ { n + 1 } - x _ { n } \right)$$
+- 知乎提供公式生成图片服务：https://www.zhihu.com/equation?tex=y+%3D+%5Cphi%28%5Csum+W_%7Bij%7DX_j+%2B+b%29+
+![](https://www.zhihu.com/equation?tex=y+%3D+%5Cphi%28%5Csum+W_%7Bij%7DX_j+%2B+b%29+)
+
+### 视屏嵌入
+---
+【2019-04-29】嵌入视频
+
+- 超级工程
+<iframe src="//player.bilibili.com/player.html?aid=26722471&cid=45968926&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+
+- [网易云课堂](http://open.163.com/movie/2006/1/1/9/M6HV755O6_M6HV8DF19.html)
+<object width="640" height="360"><param name="movie" value="//open.163.com/openplayer/-M6HV755O6-M6HV8DF19-http://open-image.nosdn.127.net/a5954850efaf429189dd8247a999be22.jpg-openPlayer.swf?isUserAutoPlay=1"></param><param name="allowScriptAccess" value="always"></param><param name="wmode" value="transparent"></param><embed src="//open.163.com/openplayer/-M6HV755O6-M6HV8DF19-http://open-image.nosdn.127.net/a5954850efaf429189dd8247a999be22.jpg-openPlayer.swf?isUserAutoPlay=1" type="application/x-shockwave-flash" width="640" height="360" allowFullScreen="true" wmode="transparent" allowScriptAccess="always"></embed></object>
 
 ---
-【2019-04-29】嵌入视频实验
 
-<iframe width="560" height="315" src="https://www.bilibili.com/video/av16001891?zw" frameborder="0"></iframe>
+### 脑图嵌入
+- processon
 
----
+<iframe id="embed_dom" name="embed_dom" frameborder="0" style="display:block;width:700px; height:900px;" src="https://www.processon.com/embed/mind/581dee8ee4b0c6fe57213cd9"></iframe>
+
+- xmind脑图
+   - 【2019-08-02】[xmind图](https://www.xmind.net/m/YPMsKe/#)
+<iframe src='https://www.xmind.net/embed/YPMsKe/' width='750' height='540' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
+
+<iframe src='https://www.xmind.net/embed/T9Nm/' width='750' height='540' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
+
+### 访问统计
+- 国外的插件
+
+<script type="text/javascript" src="//rf.revolvermaps.com/0/0/1.js?i=5q2837r7gjo&amp;s=265&amp;m=7&amp;v=true&amp;r=false&amp;b=000000&amp;n=false&amp;c=ff0000" async="async"></script>
+
+
+### 评论插件
+
+- 来必力
+
+<!-- 来必力City版安装代码 -->
+<div>
+    <script type="text/javascript">
+           (function(d, s) {
+               var j, e = d.getElementsByTagName(s)[0];
+               if (typeof LivereTower === 'function') { return; }
+               j = d.createElement(s);
+               j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+               j.async = true;
+               e.parentNode.insertBefore(j, e);
+           })(document, 'script');
+   </script>
+   <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
 
 ## 搭建过程
 
@@ -25,11 +109,9 @@ tags: jekyll RubyGems
 
 ### 安装Ruby
 
-ruby官网下载安装：[https://www.ruby-lang.org/en/downloads/](https://www.ruby-lang.org/en/downloads/)
-
-安装完成后配置环境变量
-
-在命令提示符中，得到ruby版本号，如下图，即安装成功
+- ruby官网下载安装：[https://www.ruby-lang.org/en/downloads/](https://www.ruby-lang.org/en/downloads/)
+- 安装完成后配置环境变量
+- 在命令提示符中，得到ruby版本号，如下图，即安装成功
 
 ![](http://ww4.sinaimg.cn/large/7011d6cfjw1f2ue0e393vj20cu00t748.jpg)
 
@@ -157,3 +239,6 @@ Done installing documentation for hitimes after 1 seconds
 
 
 关于，[hitimes](https://rubygems.org/gems/hitimes/versions/1.2.2) 是一个快速的高效的定时器解决方案库，详情可以去官网查看。
+
+
+

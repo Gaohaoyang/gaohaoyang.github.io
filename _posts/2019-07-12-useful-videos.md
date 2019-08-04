@@ -24,10 +24,18 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=36040687&cid=63346561&page=2" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
-## 自我
+## 自我剖析
 - [承认吧，人生来就是孤独的](https://www.365yg.com/a6641087299998188035#mid=5543467706)，[B站](https://www.bilibili.com/video/av39370474?from=search&seid=8373277070703221652)
 
 <iframe src="//player.bilibili.com/player.html?aid=39370474&cid=69181558&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+- 网易云课堂，作者在TED的演讲：拖延症，文字版，[拖延症解析](https://wqw547243068.github.io/2019/06/26/why-delay)
+
+<object width="100%" height="600"><param name="movie" value="//open.163.com/openplayer/-MBHQSM52F-MBI15O7QE-http://open-image.nosdn.127.net/a594ecedc63e4f77b6efeaa962e8fd01.jpg-openPlayer.swf?isUserAutoPlay=1"></param><param name="allowScriptAccess" value="always"></param><param name="wmode" value="transparent"></param><embed src="//open.163.com/openplayer/-MBHQSM52F-MBI15O7QE-http://open-image.nosdn.127.net/a594ecedc63e4f77b6efeaa962e8fd01.jpg-openPlayer.swf?isUserAutoPlay=1" type="application/x-shockwave-flash" width="640" height="360" allowFullScreen="true" wmode="transparent" allowScriptAccess="always"></embed></object>
+
+- 【2019-07-31】[哈佛大学：什么是积极心理学？](http://open.163.com/movie/2006/1/1/9/M6HV755O6_M6HV8DF19.html)，更多参考：[哈佛大学-幸福课系列](http://open.163.com/special/opencourse/positivepsychology.html)
+
+<object width="100%" height="600"><param name="movie" value="//open.163.com/openplayer/-M6HV755O6-M6HV8DF19-http://open-image.nosdn.127.net/a5954850efaf429189dd8247a999be22.jpg-openPlayer.swf?isUserAutoPlay=1"></param><param name="allowScriptAccess" value="always"></param><param name="wmode" value="transparent"></param><embed src="//open.163.com/openplayer/-M6HV755O6-M6HV8DF19-http://open-image.nosdn.127.net/a5954850efaf429189dd8247a999be22.jpg-openPlayer.swf?isUserAutoPlay=1" type="application/x-shockwave-flash" width="640" height="360" allowFullScreen="true" wmode="transparent" allowScriptAccess="always"></embed></object>
 
 ## 金融
 
@@ -47,10 +55,18 @@ mathjax: true
 ## 科学
 - 【2018--3-17】美丽心灵（博弈论创始人，纳什）+ [万物理论](https://pan.baidu.com/s/1HdrJpd-OXp371A8m9PI_Eg)(霍金)
 - 【2018-12-16】印度拉马努金传记[知无涯者](https://www.iqiyi.com/v_19rra55zk8.html?vfm=2008_aldbd)，Will Hunting [心灵捕手](https://www.bilibili.com/video/av22771407?from=search&seid=2102098560566397389)
-- 【2018-11-25】马云励志演讲：[最伟大的成功](https://www.365yg.com/a6623610909505880584#mid=1561866780362754)
 
+## 数学
+- 【2019-07-31】三棕一蓝产品-[线性代数本质](https://www.bilibili.com/video/av6731067/)
+
+<iframe src="//player.bilibili.com/player.html?aid=6731067&cid=8503492&page=1" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+- 【2019-07-31】三棕一蓝产品-[微积分本质](https://www.bilibili.com/video/av24325548)
+
+<iframe src="//player.bilibili.com/player.html?aid=24325548&cid=8503492&page=1" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 ## 互联网
+- 【2018-11-25】马云励志演讲：[最伟大的成功](https://www.365yg.com/a6623610909505880584#mid=1561866780362754)
 
 ### 行业观察
 
@@ -58,6 +74,9 @@ mathjax: true
 <iframe src="//player.bilibili.com/player.html?aid=1502036&cid=2238549&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 - 大数据时代-5集纪录片,[B站](https://www.bilibili.com/video/av57503095?from=search&seid=1412904549370473421)
 <iframe src="//player.bilibili.com/player.html?aid=57503095&cid=100384260&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- [超级工程](https://www.bilibili.com/video/av26722471?from=search&seid=6411515736557949839)，14集纪录片
+<iframe src="//player.bilibili.com/player.html?aid=26722471&cid=45968926&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 - 其它
 
 ### 大公司
