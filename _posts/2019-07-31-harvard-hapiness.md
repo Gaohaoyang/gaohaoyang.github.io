@@ -74,10 +74,11 @@ mathjax: true
 
 3. 米开朗基罗雕出大卫，只是凿去多余的石头，而我们应该凿去完美主义。
 
-4. Thoreau says,Soul grows more by subtraction than by addition.  梭罗说，减法比加法更能使灵魂成长。
+4. Thoreau says,Soul grows more by subtraction than by addition.  
+- 梭罗说，减法比加法更能使灵魂成长。
 
 5. Peter Drucker :The most common source of mistake in management decisions is the emphasis on finding the right answer rather than the right question.
-彼得 德鲁克（管理学之父）：管理决策中最常见的毛病就是只强调寻找正确答案，而忽视了寻找真正的问题所在。
+- 彼得 德鲁克（管理学之父）：管理决策中最常见的毛病就是只强调寻找正确答案，而忽视了寻找真正的问题所在。
 
 6. 哈佛的一个心理学家追踪一个班上的学生，发现其中有一小部分人异常卓越。他们与其他人的区别仅有两点：
 - 完全相信自己，即自信。 
@@ -128,7 +129,9 @@ mathjax: true
 ## 第3课 幸福是一种随机现象吗？
 
 1.David Henry Thoreau 在20世纪40年代写到：
->Most men lead lives of quiet desperation. 大多数人悄无声息地过着绝望的生活。
+>Most men lead lives of quiet desperation.
+>
+>大多数人悄无声息地过着绝望的生活。
 
 2.Pink Floyd ：People are comfortably numb. 人们惯于惬意的麻木。
 
@@ -171,7 +174,9 @@ Abraham Maslow 亚伯拉罕 马斯洛 的 “growing-tip statistics生长锥统�
 
 7.嗜酒者互诫协会AA运动（Alcoholics Anonymous）的官方口号：
 
->God,grant me the serenity to accept the things I can not change,the courage to change the things I can change，and the wisdom to know the difference.主，请赐予我平静,以接受不能改变之事；赐予我勇气，以改变可改变之事；赐予我智慧以识别两者的不同。
+>God,grant me the serenity to accept the things I can not change,the courage to change the things I can change，and the wisdom to know the difference.
+>
+>主，请赐予我平静,以接受不能改变之事；赐予我勇气，以改变可改变之事；赐予我智慧以识别两者的不同。
 
 8.每天都提醒自己一到两次，要允许自己做凡人，也同样允许别人做凡人。
 
@@ -186,7 +191,9 @@ Abraham Maslow 亚伯拉罕 马斯洛 的 “growing-tip statistics生长锥统�
 4.有很多研究显示，自助或追求幸福，将使我们对他人更加豁达和宽厚。助人亦是帮助自己。
 
 5. 圣雄甘地（印度现代民族解放运动的著名领袖，现代民族资产阶级政治学说——甘地主义的创始人）在自传《My experiments with truth》中说到：
->Be the change you want to see in the world.在改变世界之前，先改变自己.
+>Be the change you want to see in the world.
+>
+>在改变世界之前，先改变自己.
 
 6.人们往往跟着你做，而非按你说的做。
 
@@ -211,6 +218,7 @@ Abraham Maslow 亚伯拉罕 马斯洛 的 “growing-tip statistics生长锥统�
 
 3.拿破仑在《思考致富》中写到:
 >Whatever your mind can conceive and believe,it can achieve.
+>
 >任何你心里想的，相信的都会实现。
 
 4.`吸引力法则`：把你所想象到的任何东西，所相信的事物吸引到你身边，并从中能汲取强大的信念。
@@ -286,6 +294,7 @@ Abraham Maslow 亚伯拉罕 马斯洛 的 “growing-tip statistics生长锥统�
 
 7.Soren Kierkegaard：
 >To dare is to lose one's footing momentarily,not to dare is to lose oneself
+>
 >敢于尝试只会暂时失去立足处，不敢尝试将失去自我。
 
 8.成功三要素：
@@ -300,6 +309,7 @@ Abraham Maslow 亚伯拉罕 马斯洛 的 “growing-tip statistics生长锥统�
 11.Tal老师的一段自白：
 
 >You know,I have a mild case of ADD,which is great.You know why,because it actually forces me to only study things that I love,things that I care about.Because anything else,my concentration just goes away.So it's like I have an internal mechanism that force me to focus on the ultimate currency.on things that make me happy.and I only study things that I'm passionate about.It's wonderful.
+>
 >我有轻微的注意力缺损症，这太棒了。因为它迫使我只去学习我最爱最关注的东西。因为面对其它的事情我无法集中。所以我就像有一个内置体系强迫自己专注于最重要的事。专注于让我开心的事。我只学习我热爱的东西。这太棒 了。
 
 ## 第8课 感激
@@ -444,6 +454,7 @@ Abraham Maslow 亚伯拉罕 马斯洛 的 “growing-tip statistics生长锥统�
 一个人成长的过程，就是舒适区不断扩大的过程，每次你去尝试新的挑战，你就能对一件新的事情感觉适应和舒服，不再紧张害怕。所以，如果有什么事情让你感觉不舒服，让你感觉紧张，不要回避它，做你应该做的事情，不要做你想做的事情。突破了，你就又长大一圈；退缩了，你就还呆在以前的小圈子里。
 
 >最让你不舒服的话，是对你最有帮助的话；
+>
 >最让你不舒服的人，是你最该感谢的人。
 
 如果你每天都做一件让自己不舒服的事情，一年下来，你就能获得脱胎换骨的改变。改变来自于舒适区的扩展。
@@ -507,6 +518,7 @@ Abraham Maslow 亚伯拉罕 马斯洛 的 “growing-tip statistics生长锥统�
 
 10.本质上目标与你们的个人兴趣、热情和价值观一致，即你打心眼所关心的事物。
 >Life is too short to do what I have to do ,It's barely enough to do what I want to do.And the sooner we start that want-to,the better.
+>
 >生命短暂，随意敷衍太可惜。这辈子刚好够做自己想做的事。越早行动起来越好。
 
 ## 第13课 面对压力
@@ -885,6 +897,7 @@ J.P Morgen说过：我可以一年工作九个月，但不能工作12个月。�
 
 9.Pal老师最后送大家的话：
 >So each time you go to one of those wonderful places ,exotic or otherwise,remember to simplify, remember to take care of yourself,remember to exercise,remember to assert yourself and say no when appropriate，remember to cultivate your relationships,remember what it is that is really really important for you in your life.
+>
 >无论去哪里，要记住简化问题，记住照顾自己，要锻炼，要果断坚决，在适当的时候说不,经营你的感情,记住你的生命中什么才是真正最重要的东西。
 
 ## 附录
