@@ -3,7 +3,9 @@ layout: default
 ---
 
 <div class="page clearfix" post>
+    <!-- 左侧布局 -->
     <div class="left">
+        <!-- 文章标题，page是全局变量 -->
         <h1>{{page.title}}</h1>
         <div class="label">
 
@@ -30,13 +32,14 @@ layout: default
 
         </div>
         
-        
+        <!-- 文章内容 -->
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         {{content}}
         </article>
         <hr>
         
+        <!-- 相关文章推荐 -->
         {% assign hasSimilar = '' %}
         {% for post in site.related_posts %}
             {% assign postHasSimilar = false %}
@@ -63,9 +66,9 @@ layout: default
         {% if hasSimilar.size > 0 %}
             </ul>
         {% endif %}
-
+        <!-- 翻页 -->
         {% include previousAndNext.html %}
-
+        <!-- 评论区 -->
         <h2 id="comments">Comments</h2>
         {% include comments.html %}
 
@@ -74,8 +77,13 @@ layout: default
     <button class="anchor"><i class="fa fa-anchor"></i></button>
     <div class="right">
         <div class="wrap">
+            
+            <!-- 公众号区 -->
+            <div class="side">
+                <img src="https://github.com/wqw547243068/wqw547243068.github.io/blob/master/wqw/fig/wqw.png" alt="欢迎关注鹤啸九天" />
+            </div>
 
-            <!-- Content -->
+            <!-- Content目录区 -->
             <div class="side content">
                 <div>
                     Content
