@@ -23,7 +23,7 @@ type: page
 > 崇尚终身学习,自律更自由，平凡不平庸
 
  <div>My Moment (微信公众号)</div>
-   <img src="https://raw.githubusercontent.com/wqw547243068/wangqiwen/master/other/figure/wqw.png" alt="欢迎关注鹤啸九天" />
+   <img src="https://raw.githubusercontent.com/wqw547243068/wangqiwen/master/other/figure/wqw.png" alt="欢迎关注鹤啸九天" height="200" width="200" />
 
 ## 相关项目
 
