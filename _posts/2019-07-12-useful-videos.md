@@ -94,9 +94,8 @@ mathjax: true
 
 - 电影：中国合伙人
 - 综艺节目：[合伙中国人](https://v.qq.com/x/search/?q=%E5%90%88%E4%BC%99%E4%B8%AD%E5%9B%BD%E4%BA%BA%E7%AC%AC3%E5%AD%A3&stag=9)
-
-<iframe height=498 width=510 src='http://player.youku.com/embed/XMjg3NjI4MjUyNA==' frameborder=0 'allowfullscreen'></iframe>
-
+   - [90后遭投资人痛批](https://v.youku.com/v_show/id_XMjg3NjI4MDM2NA==.html?spm=a2h0j.11185381.listitem_page1.5!11~A&&s=48efbfbd3b535eefbfbd)
+<iframe height="600" width="100%" src="http://player.youku.com/embed/XMjg3NjI4MDM2NA==" frameborder="0" "allowfullscreen"></iframe>
 
 
 ## 历史
