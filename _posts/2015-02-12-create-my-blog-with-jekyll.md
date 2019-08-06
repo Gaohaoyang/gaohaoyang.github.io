@@ -85,6 +85,7 @@ $$f \left( x _ { n + 1 } \right) - f \left( x _ { n } \right) = f ^ { \prime } \
 ### 评论插件
 
 - 来必力
+
 ```html
 <!-- 来必力City版安装代码 -->
 <div>
@@ -106,6 +107,7 @@ $$f \left( x _ { n + 1 } \right) - f \left( x _ { n } \right) = f ^ { \prime } \
 ### 分享插件
 
 - 采用百度分享
+
 ```html
 <div class="bdsharebuttonbox">
     <a href="#" class="bds_more" data-cmd="more"></a>
@@ -125,6 +127,7 @@ $$f \left( x _ { n + 1 } \right) - f \left( x _ { n } \right) = f ^ { \prime } \
    - 下载css文件，保存到jekyll里的css/myrewards.css
    - 准备支付二维码图片，放到自定义文件夹里，如wqw/fig/wqw.png
    - _include/head.html添加css文件：（注意：需要修改主目录地址）
+   
 ```html
 <link href="{{ "/css/myreward.css " | prepend: site.baseurl }}" rel="stylesheet" type="text/css">
 _layout/post.html添加插件
