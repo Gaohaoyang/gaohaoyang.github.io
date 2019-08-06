@@ -13,7 +13,10 @@
     <link rel="stylesheet" href="{{ "/css/main.css " | prepend: site.baseurl }}">
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml " | prepend: site.baseurl | prepend: site.url }}">
-
+    
+    <!-- [2019-08-06]打赏功能 -->
+    <link  href="/assets/css/myreward.css" rel="stylesheet"  type="text/css"> 
+    
 {% if site.baidu_tongji_id %}
     <script>
     // 百度统计代码
