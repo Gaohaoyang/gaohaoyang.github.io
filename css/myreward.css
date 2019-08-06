@@ -1,0 +1,176 @@
+
+*,*:before,*:after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box
+}
+
+.reward {
+	padding: 5px 0
+}
+
+.reward .reward-notice {
+	font-size: 14px;
+	line-height: 14px;
+	margin: 15px auto;
+	text-align: center
+}
+
+.reward .reward-button {
+	font-size: 28px;
+	line-height: 58px;
+	position: relative;
+	display: block;
+	width: 60px;
+	height: 60px;
+	margin: 0 auto;
+	padding: 0;
+	-webkit-user-select: none;
+	text-align: center;
+	vertical-align: middle;
+	color: #fff;
+	border: 1px solid #f1b60e;
+	border-radius: 50%;
+	background: #fccd60;
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0,#fccd60),color-stop(100%,#fbae12),color-stop(100%,#2989d8),color-stop(100%,#207cca));
+	background: -webkit-linear-gradient(top,#fccd60 0,#fbae12 100%,#2989d8 100%,#207cca 100%);
+	background: linear-gradient(to bottom,#fccd60 0,#fbae12 100%,#2989d8 100%,#207cca 100%)
+}
+
+.reward .reward-code {
+	position: absolute;
+	top: -220px;
+	left: 50%;
+	display: none;
+	width: 350px;
+	height: 200px;
+	margin-left: -175px;
+	padding: 15px;
+	border: 1px solid #e6e6e6;
+	background: #fff;
+	box-shadow: 0 1px 1px 1px #efefef
+}
+
+.reward .reward-button:hover .reward-code {
+	display: block
+}
+
+.reward .reward-code span {
+	display: inline-block;
+	width: 150px;
+	height: 150px
+}
+
+.reward .reward-code span.alipay-code {
+	float: left;
+}
+
+.reward .reward-code span.alipay-code a {
+	padding: 0
+}
+
+.reward .reward-code span.wechat-code {
+	float: right;
+}
+
+.reward .reward-code img {
+	display: inline-block;
+	float: left;
+	width: 150px;
+	height: 150px;
+	margin: 0 auto;
+	border: 0
+}
+
+.reward .reward-code b {
+	font-size: 14px;
+	line-height: 26px;
+	display: block;
+	margin: 0;
+	text-align: center;
+	color: #666
+}
+
+.reward .reward-code b.notice {
+	line-height: 2rem;
+	margin-top: -1rem;
+	color: #999
+}
+
+.reward .reward-code:after,.reward .reward-code:before {
+	position: absolute;
+	content: '';
+	border: 10px solid transparent
+}
+
+.reward .reward-code:after {
+	bottom: -19px;
+	left: 50%;
+	margin-left: -10px;
+	border-top-color: #fff
+}
+
+.reward .reward-code:before {
+	bottom: -20px;
+	left: 50%;
+	margin-left: -10px;
+	border-top-color: #e6e6e6
+}
+
+.dashang{display:inline-block;background-color: #00a8e6;border-radius: 4px;color: #fff;display: block;font-family: serif;line-height:25px;padding:10px;text-align:center;text-decoration:none;border-radius:4px;font-size:16px;transition: all 0.3s;width: 120px;margin: 5px auto;padding: 5px;font-family: 'serif';}
+.hide_box{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
+.shang_box{
+	width:500px;
+	height:500px;
+	padding:10px;
+	background-color:#fff;border-radius:10px;
+	position:fixed;
+	z-index:1000;left:50%;top:55%;
+	margin-left:-280px;margin-top:-280px;
+	border:1px dotted #dedede;
+	display:none;
+}
+.shang_box img{border:none;border-width:0;}
+.dashang:hover{opacity:0.8;padding:15px;font-size:18px;}
+.shang_close{float:right;display:inline-block;}
+.shang_logo{display:block;text-align:center;margin:20px auto;}
+.shang_tit{width: 100%;height: 75px;text-align: center;line-height: 66px;color: #a3a3a3;font-size: 16px;background: url(/assets/img/social/cy-reward-title-bg.jpg);font-family: 'Microsoft YaHei';margin-top: 7px;margin-left:-20px;}
+.shang_tit p{color:#a3a3a3;text-align:center;font-size:16px;marign:0 auto}
+.shang_payimg{width:150px;padding:10px;margin:0 auto;border-radius:3px;height:150px;}
+.shang_payimg img{display:block;text-align:center;width:150px;height:150px; }
+.pay_explain{text-align:center;margin:10px auto;font-size:12px;color:#545454;}
+.radiobox{width: 16px;height: 16px;background: url(/assets/img/social/radio2.jpg);display: block;float: left;margin-top: 5px;margin-right: 14px;}
+.checked .radiobox{background:url(/assets/img/social/radio1.jpg);}
+.shang_payselect{text-align:center;margin:0 auto;margin-top:40px;cursor:pointer;height:60px;width:280px;}
+.shang_payselect .pay_item{display:inline-block;margin-right:10px;float:left;}
+.shang_info{clear:both;}
+.shang_info p,.shang_info a{color:#C3C3C3;text-align:center;font-size:12px;text-decoration:none;line-height:2em;}
+
+.contactme{
+	margin: 10px auto 0;
+	border-radius: 4px;
+	border: 1px solid #1bb3e9;
+    color: #1bb3e9;
+    display: block;
+	text-align: center;
+    font-family: "KaiTi";
+    line-height: 25px;
+	padding-left: 20px;
+	padding-right: 20px;
+	width: 100px;
+}
+
+.zanzhume{
+	margin: 40px auto 0;
+	border-radius: 4px;
+	border: 1px solid #1bb3e9;
+    color: #1bb3e9;
+    display: block;
+	text-align: center;
+    font-family: "KaiTi";
+    line-height: 25px;
+	padding-left: 20px;
+	padding-right: 20px;
+	width: 100px;
+}
