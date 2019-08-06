@@ -26,7 +26,8 @@ mathjax: true
    ![心理学效应](http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20181201/04d70d0af13f49e48b607b2cab4a66b2.webp)
    - 承认吧，人生来就是孤独的
 
-<iframe src="https://www.365yg.com/a6641087299998188035#mid=5543467706" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="900" height="600"> </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=39370474&cid=69181558&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+
    
    
 ## 第一部分 如何选择人生伴侣
