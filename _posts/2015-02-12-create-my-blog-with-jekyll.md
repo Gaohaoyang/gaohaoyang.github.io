@@ -85,7 +85,7 @@ $$f \left( x _ { n + 1 } \right) - f \left( x _ { n } \right) = f ^ { \prime } \
 ### 评论插件
 
 - 来必力
-
+```html
 <!-- 来必力City版安装代码 -->
 <div>
     <script type="text/javascript">
@@ -101,11 +101,12 @@ $$f \left( x _ { n + 1 } \right) - f \left( x _ { n } \right) = f ^ { \prime } \
    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
 </div>
 <!-- City版安装代码已完成 -->
+```
 
 ### 分享插件
 
 - 采用百度分享
-
+```html
 <div class="bdsharebuttonbox">
     <a href="#" class="bds_more" data-cmd="more"></a>
     <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
@@ -115,7 +116,27 @@ $$f \left( x _ { n + 1 } \right) - f \left( x _ { n } \right) = f ^ { \prime } \
 </div>
 <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"鹤啸九天的技术博客","bdMini":"2","bdMiniList":false,"bdPic":"http://news.zx123.cn/uploadfile/news68/1800961ad02811e7b1c400163e010ef1.jpg","bdStyle":"0","bdSize":"32"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"32"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
 </script>
+```
 
+## 打赏
+
+- 参考：[jekyll下添加打赏功能](http://www.twistedwg.com/2018/05/06/jekyll-reward.html)
+- 步骤：
+   - 下载css文件，保存到jekyll里的css/myrewards.css
+   - 准备支付二维码图片，放到自定义文件夹里，如wqw/fig/wqw.png
+   - _include/head.html添加css文件：（注意：需要修改主目录地址）
+```html
+<link href="{{ "/css/myreward.css " | prepend: site.baseurl }}" rel="stylesheet" type="text/css">
+_layout/post.html添加插件
+    <!-- 【2019-08-06】打赏功能,  http://www.twistedwg.com/2018/05/06/jekyll-reward.html-->
+    <div class="reward">
+		<div class="reward-button">赏 <span class="reward-code">
+			<span class="alipay-code"> <img class="alipay-img wdp-appear" src="/assets/wqw/fig/alipay.png"><b>支付宝打赏</b> </span>
+			<span class="wechat-code"> <img class="wechat-img wdp-appear" src="/assets/wqw/fig/wechatpay.png"><b>微信打赏</b> </span> </span>
+		</div>
+		<p class="reward-notice">您的打赏是对我最大的鼓励！</p>
+	</div>
+```
 
 ## 搭建过程
 
