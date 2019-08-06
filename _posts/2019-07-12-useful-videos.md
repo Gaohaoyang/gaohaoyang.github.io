@@ -90,6 +90,14 @@ mathjax: true
 <iframe src="//player.bilibili.com/player.html?aid=5232102&cid=8503492&page=1" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
+## 创业
+
+- 电影：中国合伙人
+- 综艺节目：[合伙中国人](https://v.qq.com/x/search/?q=%E5%90%88%E4%BC%99%E4%B8%AD%E5%9B%BD%E4%BA%BA%E7%AC%AC3%E5%AD%A3&stag=9)
+<iframe height=498 width=510 src='http://player.youku.com/embed/XMjg3NjI4MjUyNA==' frameborder=0 'allowfullscreen'></iframe>
+
+
+
 ## 历史
 - 孙子兵法-10集纪录片，[B站](https://www.bilibili.com/video/av1968639)
 <iframe src="//player.bilibili.com/player.html?aid=1968639&cid=5838714&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
