@@ -139,7 +139,7 @@ $$f \left( x _ { n + 1 } \right) - f \left( x _ { n } \right) = f ^ { \prime } \
 </script>
 ```
 
-## 打赏
+### 打赏
 
 - 参考：[jekyll下添加打赏功能](http://www.twistedwg.com/2018/05/06/jekyll-reward.html)
 - 步骤：
@@ -159,6 +159,14 @@ _layout/post.html添加插件
 		<p class="reward-notice">您的打赏是对我最大的鼓励！</p>
 	</div>
 ```
+
+### 文档搜索
+
+- [Jekyll 静态博客实现搜索功能](https://juejin.im/post/5aa7d9c6f265da23866f918e)
+   - 提前安装[Simple-Jekyll-Search](https://github.com/christian-fei/Simple-Jekyll-Search)
+![](https://user-gold-cdn.xitu.io/2018/3/13/1621faaa92d3cae7?imageslim)
+
+
 
 ## 搭建过程
 
