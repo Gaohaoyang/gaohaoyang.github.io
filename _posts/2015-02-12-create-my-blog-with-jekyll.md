@@ -17,6 +17,13 @@ tags: jekyll markdown 插件 github
 
 ## 技巧汇总
 
+### Markdown使用
+* [github官方markdown指南](https://guides.github.com/features/mastering-markdown/ "英文版")
+* [github readme语法简介](http://blog.csdn.net/guodongxiaren/article/details/23690801?utm_source=tuicool&utm_medium=referral "跟一般markdown语法不同")
+* [MarkDown语法笔记（完整版）](http://blog.csdn.net/witnessai1/article/details/52551362)
+* [马克飞象markdown语法在线测试](https://maxiang.io/ "可以在线测试MD语言！")
+
+
 ### 编辑功能
 - 注释
 
@@ -40,12 +47,6 @@ print "hello"
    - ![](https://img3.doubanio.com/lpic/s28012945.jpg)
 - 限制大小
    - <img src="https://img3.doubanio.com/lpic/s28012945.jpg" height="100%" width="100" />
-
-### Markdown使用
-* [github官方markdown指南](https://guides.github.com/features/mastering-markdown/ "英文版")
-* [github readme语法简介](http://blog.csdn.net/guodongxiaren/article/details/23690801?utm_source=tuicool&utm_medium=referral "跟一般markdown语法不同")
-* [MarkDown语法笔记（完整版）](http://blog.csdn.net/witnessai1/article/details/52551362)
-* [马克飞象markdown语法在线测试](https://maxiang.io/ "可以在线测试MD语言！")
 
 
 ### 公式嵌入
@@ -195,7 +196,7 @@ Jekyll 的全局配置文件。
 对于网站的头部，底部，侧栏等公共部分，为了维护方便，我们可能想提取出来单独编写，然后使用的时候包含进去即可。  
 这时我们可以把那些公共部分放在这个目录下，使用时只需要引入即可。
 
-```ruby
+```
 { % include filename % }
 ```
 
