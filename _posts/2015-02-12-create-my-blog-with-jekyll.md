@@ -3,8 +3,8 @@ layout: post
 title:  "Jekyll静态博客编辑功能汇总"
 date:   2015-02-15 22:14:54
 categories: jekyll
-excerpt: "jekyll用法汇总"
-tags: jekyll RubyGems
+excerpt: "jekyll用法汇总" 
+tags: jekyll markdown 插件 github
 ---
 
 * content
@@ -175,10 +175,8 @@ _layout/post.html添加插件
 - 【2018-6-10】[github page jeklly主题](https://github.com/Gaohaoyang/gaohaoyang.github.io/blob/master/README-zh-cn.md)
 - 【2019-04-29】[Jeklly主题大全](http://jekyllthemes.org/)
 
-# [Jekyll](https://jekyllrb.com/)中的配置和模板语法
+- [Jekyll](https://jekyllrb.com/)中的配置和模板语法
 
-## 配置
-- [Jekyll 语法简单笔记](http://github.tiankonguse.com/blog/2014/11/10/jekyll-study.html)
 
 ### 文件介绍
 
@@ -226,6 +224,7 @@ page 变量: 包含的是当前渲染的page或post的所有可以接触得到�
 ```markdown
 ---
 layout: post
+
 ---
 ```
 
@@ -403,6 +402,7 @@ permalink: pretty    # => /2009/04/29/slap-chop/index.html
 | **pretty**      | `/:categories/:year/:month/:day/:title/`     |
 | **none**        | `/:categories/:title.html`                   |
 
+
 ### 分页
 
 通常我们都不想把所有的 Post 都放在一页显示，而是要分成多页显示。好在 Jekyll 支持分页显示，通过`paginate`和`paginate_path`两个变量来设置每页显示的数量和分页 HTML 的 URL 路径。
@@ -469,7 +469,7 @@ defaults:
 
 ## Jekyll 模板、变量
 
-Jekyll 模板实际上分两部分：一部分是头部定义，另一部分是[Liquid 语法](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers)。
+- Jekyll 模板实际上分两部分：一部分是头部定义，另一部分是[Liquid 语法](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers)。
 
 ### 头部定义
 
@@ -485,6 +485,7 @@ description: description
 published:  true   # default true 设置 “false” 后，文章不会显示
 permalink:  /:categories/:year/:month/:day/:title.html  # 覆盖全局变量设定的文章发布格式
 ---
+
 ```
 
 注意：如果文本文件使用的是`utf-8`编码，那么必须确保文件中不存在`BOM`头部字符，尤其是当 Jekyll 运行在 Windows 平台上。
@@ -500,7 +501,7 @@ page.title
 
 这些自定义的变量将会被传递给 Liquid 模板引擎用于转换文本文件，例如，你可以用上面定义的 “title” 变量在 layout 中设置页面的标题：
 
-```
+```html
 <!DOCTYPE HTML>
 <html>
   <head>
@@ -574,7 +575,7 @@ page.title
 
 ## Liquid 语法
 
-[Liquid](https://github.com/Shopify/liquid/wiki)是 Ruby 的一个模版引擎库，Jekyll中用到的Liquid标记有两种：**输出**和**标签**。
+- [Liquid](https://github.com/Shopify/liquid/wiki)是 Ruby 的一个模版引擎库，Jekyll中用到的Liquid标记有两种：**输出**和**标签**。
 
 - Output 标记：变成文本输出，被2层成对的花括号包住，如：`{{content}}`
 - Tag 标记：执行命令，被成对的花括号和百分号包住，如：`{ %command% }`
@@ -887,6 +888,7 @@ forloop.last        # => is this the last iteration ?
 ```
 
 ---
+
 
 ## 其他模板语句
 
