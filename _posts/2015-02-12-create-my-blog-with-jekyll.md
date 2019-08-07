@@ -11,8 +11,15 @@ tags: jekyll RubyGems
 {:toc}
 
 ## 简介
+
 - 使用jekyll搭建github静态页面
 - 汇总各类小技巧
+
+## Jekyll语法
+
+- [Jekyll 语法简单笔记](http://github.tiankonguse.com/blog/2014/11/10/jekyll-study.html)
+- 【2018-6-10】[github page jeklly主题](https://github.com/Gaohaoyang/gaohaoyang.github.io/blob/master/README-zh-cn.md)
+- 【2019-04-29】[Jeklly主题大全](http://jekyllthemes.org/)
 
 ## 技巧汇总
 
@@ -42,9 +49,10 @@ print "hello"
 
 ### Markdown使用
 * [github官方markdown指南](https://guides.github.com/features/mastering-markdown/ "英文版")
-* [github readme语法简介](http://blog.csdn.net/guodongxiaren/article/details/23690801?utm_source=tuicool&utm_medium=referral "跟一般markdown语法不同")，【2018-6-10】[github page jeklly主题](https://github.com/Gaohaoyang/gaohaoyang.github.io/blob/master/README-zh-cn.md)，【2019-04-29】[Jeklly主题大全](http://jekyllthemes.org/)
+* [github readme语法简介](http://blog.csdn.net/guodongxiaren/article/details/23690801?utm_source=tuicool&utm_medium=referral "跟一般markdown语法不同")
 * [MarkDown语法笔记（完整版）](http://blog.csdn.net/witnessai1/article/details/52551362)
 * [马克飞象markdown语法在线测试](https://maxiang.io/ "可以在线测试MD语言！")
+
 
 ### 公式嵌入
 * [Latex在线调试](https://latexbase.com/)，[吴文中数学公式编辑器](http://latex.91maths.com/)，公式在线编辑，所见所得，支持图片输出
