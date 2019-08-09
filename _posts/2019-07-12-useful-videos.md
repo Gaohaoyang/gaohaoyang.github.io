@@ -12,13 +12,15 @@ mathjax: true
 {:toc}
 
 # 视频资源
+
 ## 思维哲学
+
 ### 知行合一-王阳明
 - [90分钟看完《知行合一王阳明》观传奇人生是怎样炼成的！](https://www.365yg.com/a6679033057569145357#mid=1626597192389645)，[B站](https://www.bilibili.com/video/av19156453?from=search&seid=318296673017896441)
 
 <iframe src="//player.bilibili.com/player.html?aid=19156453&cid=31366860&page=1" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
-## 社会体系
+## 社会
 
 - 反映社会的短片：[Dinner for few](http://www.365yg.com/a6604023738310590980/#mid=1605851765491715),[B站](https://www.bilibili.com/video/av36040687/?p=2)
    - 《少数人的晚餐》在250多个国际电影节上放映，并赢得了78个奖项，它是2015年获得奥斯卡金像奖的60种动画短片之一.
@@ -77,6 +79,25 @@ mathjax: true
 - [哈佛大学公开课：幸福课23集全, B站地址](https://www.bilibili.com/video/av3404845?from=search&seid=11825973534163108832)
 
 <iframe src="//player.bilibili.com/player.html?aid=3404845&cid=5396573&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="600"> </iframe>
+
+
+## 纪录片
+
+- 【2019-08-09】反应社会阶级差距的纪录片
+   - [56up](https://www.bilibili.com/video/av25446605?from=search&seid=17957810370452180618)
+   
+   <iframe src="//player.bilibili.com/player.html?aid=25446605&cid=43196158&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+   
+   - 穷富翁大作战,[第一季](https://www.bilibili.com/video/av2884835?from=search&seid=930398290238770510), [第二季](https://www.bilibili.com/video/av12560324)
+   
+ <iframe src="//player.bilibili.com/player.html?aid=2884835&cid=4507553&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+      
+   - 人间世,[爱奇艺](https://www.iqiyi.com/v_19rrm476o8.html) 
+   
+   - [子非鱼](https://www.bilibili.com/video/av39716374/)
+
+<iframe src="//player.bilibili.com/player.html?aid=39716374&cid=69770039&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 
 ## 金融
 
