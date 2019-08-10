@@ -495,9 +495,13 @@ mathjax: true
 >一旦遇到合适的人，什么标准都不是标准
 
 韩国Solfa TV做了个社会实验：`1 VS 40 相亲，能找到对的人吗？`，邀请一位男生与 40 位女生同时相亲，通过群聊的形式，男生提出各种问题，不符合的女生就离场，可在不断严苛的限制条件下，真的能找到最合适自己的人吗？
+
 - [男版](https://www.bilibili.com/video/av23785599?zw)
+
 <iframe src="//player.bilibili.com/player.html?aid=23785599&cid=39766775&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+
 - [女版](https://www.bilibili.com/video/av15000343)
+
 <iframe src="//player.bilibili.com/player.html?aid=15000343&cid=24433607&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
 所以，不要列太多条条框框，尤其是外在条件，多从内心去判断。
