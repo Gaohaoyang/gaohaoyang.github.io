@@ -76,6 +76,11 @@ type: page
       </script>
 </div>
 
+## 其它
+
+- 文章质量不好？
+
+![](https://static.segmentfault.com/v-5d2ffc9a/global/img/404.svg)
 
 ## Comments
 
