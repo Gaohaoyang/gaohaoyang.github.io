@@ -66,6 +66,7 @@ type: page
 - [数林觅风](https://woaielf.github.io/) \| [wangqiwen](https://github.com/wqw547243068)
 - 精华博客
    - [Jay Alammar](https://jalammar.github.io/), word2vec,bert,transformer可视化解释系列精品文章
+   - 左耳朵耗子的[酷壳](https://coolshell.cn/)
 
 ## 访问统计
 
