@@ -63,7 +63,12 @@ type: page
 
 ## 友情链接
 
-- [数林觅风](https://woaielf.github.io/) \| [wangqiwen](https://github.com/wqw547243068)
+-  [wangqiwen](https://github.com/wqw547243068) \| [新浪博客](http://blog.sina.com.cn/s/articlelist_1232977597_0_1.html) \| [QQ Zone](https://user.qzone.qq.com/547243068)
+- 资料汇总
+   - [数林觅风](https://woaielf.github.io/)
+- 精华博客
+   - [Jay Alammar](https://jalammar.github.io/), word2vec,bert,transformer可视化解释系列精品文章
+   - 左耳朵耗子的[酷壳](https://coolshell.cn/)
 
 ## 访问统计
 
@@ -74,6 +79,11 @@ type: page
       </script>
 </div>
 
+## 其它
+
+- 文章质量不好？
+
+![](https://static.segmentfault.com/v-5d2ffc9a/global/img/404.svg)
 
 ## Comments
 

@@ -1,5 +1,7 @@
 # [Jekyll](https://jekyllrb.com/)中的配置和模板语法
 
+【2019-08-11】注意：这个文件不能恢复成md后缀，否则整个站点出错，如文章无法更新！
+
 ## 配置
 - [Jekyll 语法简单笔记](http://github.tiankonguse.com/blog/2014/11/10/jekyll-study.html)
 
