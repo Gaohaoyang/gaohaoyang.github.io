@@ -69,6 +69,7 @@ type: page
 - 精华博客
    - [Jay Alammar](https://jalammar.github.io/), word2vec,bert,transformer可视化解释系列精品文章
    - 左耳朵耗子的[酷壳](https://coolshell.cn/)
+   - [行者无疆始于足下](http://cnlox.is-programmer.com/posts/43206.html#comments)
 
 ## 访问统计
 
