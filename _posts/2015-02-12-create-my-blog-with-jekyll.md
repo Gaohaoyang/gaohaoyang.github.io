@@ -2,7 +2,7 @@
 layout: post
 title:  "Jekyll编辑功能汇总"
 date:   2015-02-15 22:14:54
-categories: jekyll
+categories: 技术工具
 excerpt: "jekyll用法汇总" 
 tags: jekyll markdown 插件 github
 ---

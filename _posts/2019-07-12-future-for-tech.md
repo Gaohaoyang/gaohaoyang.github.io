@@ -2,7 +2,7 @@
 layout: post
 title:  "技术人员的发展之路"
 date:   2019-07-12 15:17:00
-categories: 思想
+categories: 人生规划
 tags: 三观 技术 陈皓
 excerpt: 陈皓的心得，技术人员如何规划未来，中年危机如何破解？值得深思，反复研读
 mathjax: true

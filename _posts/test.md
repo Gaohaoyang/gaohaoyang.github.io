@@ -1,3 +1,18 @@
+---
+layout: post
+title:  "Python语言的问题"
+date:   2019-08-17 11:47:00
+categories: 编程技能
+excerpt : 历数python语言的种种不是
+tags: Python 编程语言
+mathjax: true
+---
+
+* content
+{:toc}
+
+
+
 <p align="center"><img src="/images/logo.png" alt=""></p>
 <h1 align="center">What the f*ck Python! 🐍</h1>
 <p align="center">一些有趣且鲜为人知的 Python 特性.</p>
@@ -2436,3 +2451,49 @@ nan
 
 [996.icu-url]: https://996.icu
 [996.icu-image]: https://img.shields.io/badge/link-996.icu-red.svg
+
+
+```python
+function [K]=create_key(K0)
+%创建16个子密钥，K0为密文（二进制），K为输出的所有密钥
+%cycle为循环左移位数表
+cycle=[1 1 2 2 2 2 2 2 1 2 2 2 2 2 2 1];
+%replaceC0，replaceD0，分别为置换选择矩阵C0 ，D0；replace0为置换选择二矩阵
+replaceC0=[57 49 41 33 25 17 9 1 58 50 42 34 26 18
+10 2 59 51 43 35 27 19 11 3 60 52 44 36];
+replaceD0=[63 55 47 39 31 23 15 7 62 54 46 38 30 22
+14 6 61 53 45 37 29 21 13 5 28 20 12 4];
+replace0=[14 17 11 24 1 5 3 28 15 6 21 10
+23 19 12, 4 26 8 16 7 27 20 13 2
+41 52 31 37 47 55 30 40 51 45 33 48
+44 49 39 56 34 53 46 42 50 36 29 32];
+%将初始输入矩阵变成向量，方便运算
+replaceC1=reshape(replaceC0',1,28);
+replaceD1=reshape(replaceD0',1,28);
+replace2=reshape(replace0',1,48);
+%================================开始==================================
+%置换选择一，以求得C0，D0,开始计算16个子密钥
+for i=1:28
+    C0(i)=K0(replaceC1(i));
+    D0(i)=K0(replaceD1(i));
+end
+%对C0，D0进行循环左移位，求得C1，D1
+C(1,1:28-cycle(1))=C0(1,cycle(1)+1:28);
+C(1,28-cycle(1)+1:28)=C0(1,1:cycle(1));
+D(1,1:28-cycle(1))=D0(1,cycle(1)+1:28);
+D(1,28-cycle(1)+1:28)=D0(1,1:cycle(1));
+CD(1,:)=[C(1,:) D(1,:)];  %合并两部分二进制串
+for j=1:48
+    K(1,j)=CD(1,replace2(j));  %置换选择2
+end
+for i=2:16
+    C(i,1:28-cycle(i))=C(i-1,cycle(i)+1:28);
+    C(i,28-cycle(i)+1:28)=C(i-1,1:cycle(i));
+    D(i,1:28-cycle(i))=D(i-1,cycle(i)+1:28);
+    D(i,28-cycle(i)+1:28)=D(i-1,1:cycle(i));
+    CD(i,:)=[C(i,:) D(i,:)];  %合并两部分二进制串
+    for j=1:48
+        K(i,j)=CD(i,replace2(j));  %置换选择2
+    end
+end
+```

@@ -2,7 +2,7 @@
 layout: post
 title:  "如何选择人生伴侣"
 date:   2019-06-28 14:42:00
-categories: 选择
+categories: 人生规划
 tags: 人生伴侣 三观 选择
 excerpt: 如何过好这一生
 mathjax: true

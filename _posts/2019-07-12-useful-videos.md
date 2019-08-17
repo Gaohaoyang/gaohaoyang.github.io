@@ -2,8 +2,8 @@
 layout: post
 title:  "优质视频资源汇总"
 date:   2019-07-12 23:08:00
-categories: 思想
-tags: 王阳明 视频 人生 思考
+categories: 视频
+tags: 王阳明 人生意义 思考 财经 哲学 科技
 excerpt: 汇总优质视频，启发思考，开阔视野
 mathjax: true
 ---
@@ -80,6 +80,33 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=3404845&cid=5396573&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="600"> </iframe>
 
+- Powers of Ten (1977), [十的力量](https://www.bilibili.com/video/av8816645)，直观感受自己的渺小，
+
+<iframe src="//player.bilibili.com/player.html?aid=8816645&cid=14544558&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="600"> </iframe>
+
+- 宇宙到底有多大？从普朗克长度到宇宙的大小，横跨60个零的冒险
+
+<iframe src="//player.bilibili.com/player.html?aid=12826240&cid=21080276&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="600"> </iframe>
+
+- [从一维空间到十维空间，你看得懂吗？](https://www.bilibili.com/video/av2894797)
+   - 系列纪录片[形象展示-让你理解四维至十维空间](https://www.bilibili.com/video/av18357374/?p=1)
+|维度|解释1|解释2|比喻|
+|0维|点|奇点不解释|-|
+|一维|线|理论上不存在文明，极不稳定，容易膨胀成2或者坍塌成0|线|线的世界|
+|二维|面|有最低形态的文明，拥有的物理性质极少，很少能出现化学反应|我的纸片人老婆的世界|
+|三维|体|平面的卷曲；当前人类认为所处维度，物理性质部分已知，通常文明演化性比2高|我的世界（二维的卷曲）|
+|四维|重复|单条时间线；将陷入类似“纪念碑谷”的不科学的透视性质，这个世界不存在规则物体|我在明天开枪打死了一只鸟|
+|五维|全部|多条时间线；秉承前者，宇宙一切可视，这使得这个维度的文明进化的比较快|我在明天开枪打死了一只鸟，我在明天开枪打死了一只驴，我在明天开枪打死了一只鹿……（无限的时间线分支）|
+|六维|宏观世界|时间线之间的卷曲；宏粒子在这个世界存在实体，文明进步神速|打死鸟的我与打死驴的我进行了会面（五维的卷曲）|
+|七维|显现|将六维看做一个点，这个点所存在的维度；所有隐藏的物质都存在实体|光速为30km/s的宇宙中所有的前六维集合所存在的维度|
+|八维|虫洞|七维中多个点（多个平行宇宙大爆炸产生的平行宇宙）形成的线、面；此时的虫洞可以扩张到容纳文明进入的程度|存在光速为30km/s的前七维和光速1km/s的前七维等多个互不干涉的前七维组成的维度|
+|九维|空间|八维的卷曲（“立体的八维”）；当前维度可以肆意的制造虫洞|光速30km/s的七维中的我与光速1km/s的七维中的我进行了会面（八维的卷曲）|
+|十维|时间|将九维看成一个点，这个点存在的空间；时间也存在实体|所有可能性的集合所存在的维度|
+|十维以上|无法描述|-|-|
+
+因为十维已经是“穷尽所有可能性”了，所以无法找到另一个十维的点，连成线了。所以无法继续循环。所谓的十二维度，是将“零维”算进去，并且将视频里八维的“线”和“面”分成两个维度（七：点，七点五：线，八：面）。
+
+<iframe src="//player.bilibili.com/player.html?aid=2894797&cid=4523684&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="600"> </iframe>
 
 ## 纪录片
 

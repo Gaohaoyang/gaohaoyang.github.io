@@ -2,7 +2,7 @@
 layout: post
 title:  "没有企业项目经验怎么办？"
 date:   2018-10-31 20:08:00
-categories: Sublime
+categories: 人生规划
 excerpt : AI初学者不要过于迷信企业项目，忽略基本功的学习，不要mnist都没研究透彻就嫌简单，直奔难度更大的resnet，好高骛远，得不偿失，学东西请务必戒骄戒躁，一步一个脚印，才能越走越远。企业项目的事实跟你想象的大不一样
 tags: 实习 应届生 AI
 ---

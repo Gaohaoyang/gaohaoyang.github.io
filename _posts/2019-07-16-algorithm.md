@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "经典算法总结"
-categories: 算法
+categories: 计算机基础
 tags:  数据结构 算法 KMP Morris 二叉树 字符串
 author: 风之筝
 excerpt: 有哪些经典算法让人拍手称快、赞叹不已？
