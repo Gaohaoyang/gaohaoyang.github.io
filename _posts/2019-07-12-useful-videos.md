@@ -196,7 +196,7 @@ mathjax: true
 
 - [人工智能](https://v.youku.com/v_show/id_XMzM3Nzk0MjQ4.html?refer=seo_operation.liuxiao.liux_00003303_3000_Qzu6ve_19042900)
 
-<iframe height=498 width=510 src=“http://player.youku.com/embed/XMzM3Nzk0MjQ4” frameborder=0 allowfullscreen=1></iframe>
+<iframe height=498 width=510 src=“http://player.youku.com/embed/XMzM3Nzk0MjQ4” frameborder=0 allowfullscreen="true"></iframe>
 
 
 ## 创业
@@ -205,11 +205,12 @@ mathjax: true
 - 综艺节目：[合伙中国人](https://v.qq.com/x/search/?q=%E5%90%88%E4%BC%99%E4%B8%AD%E5%9B%BD%E4%BA%BA%E7%AC%AC3%E5%AD%A3&stag=9)
    - [90后遭投资人痛批](https://v.youku.com/v_show/id_XMjg3NjI4MDM2NA==.html?spm=a2h0j.11185381.listitem_page1.5!11~A&&s=48efbfbd3b535eefbfbd)
 
-<iframe height="600" width="100%" src="http://player.youku.com/embed/XMjg3NjI4MDM2NA==" frameborder="0" allowfullscreen=1></iframe>
+<iframe src="http://player.youku.com/embed/XMjg3NjI4MDM2NA==" frameborder="0" allowfullscreen=“true” height="600" width="100%" ></iframe>
 
 
 ## 历史
 - 孙子兵法-10集纪录片，[B站](https://www.bilibili.com/video/av1968639)
+
 <iframe src="//player.bilibili.com/player.html?aid=1968639&cid=5838714&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
