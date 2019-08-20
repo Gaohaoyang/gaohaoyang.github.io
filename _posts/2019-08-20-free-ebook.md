@@ -2,7 +2,7 @@
 layout: post
 title:  "电子书资源汇总"
 date:   2019-08-20 20:30:00
-categories: 资料
+categories: 资料汇总
 tags: 电子书
 excerpt: 汇总各类电子书资源
 mathjax: true
