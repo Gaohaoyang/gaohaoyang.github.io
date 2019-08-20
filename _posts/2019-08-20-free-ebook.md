@@ -1,5 +1,18 @@
+---
+layout: post
+title:  "电子书资源汇总"
+date:   2019-08-20 20:30:00
+categories: 资料
+tags: 电子书
+excerpt: 汇总各类电子书资源
+mathjax: true
+---
+
+* content
+{:toc}
 
 - [《科技爱好者周刊》](https://github.com/ruanyf/weekly)收集的免费书籍汇总。
+- [摘自地址](https://github.com/ruanyf/free-books)
 
 ## 目录
 
