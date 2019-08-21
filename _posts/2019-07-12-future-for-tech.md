@@ -31,9 +31,6 @@ coding
 
 ![](https://img1.tuicool.com/FZbM7nM.jpg!web)
 
-ui
-
-![](https://img0.tuicool.com/auA3YzV.jpg)
 
 
 # [阿里员工焦虑发帖：35岁如果还在写代码，真的完了！](https://mp.weixin.qq.com/s?__biz=MzU3MTYyNjk0MA==&mid=2247484676&idx=1&sn=04c81a258904c90aaa6ccb879353d76d&chksm=fcdc01d7cbab88c18b0d054f92e7d435e9242ff8f40f5bf566c098096b2aa28b17e2a8f51ffd&mpshare=1&scene=23&srcid=0820r0bheYEr0sh0MZ3CMqYQ&sharer_sharetime=1566357089427&sharer_shareid=b8d409494a5439418f4a89712efcd92a%23rd)
