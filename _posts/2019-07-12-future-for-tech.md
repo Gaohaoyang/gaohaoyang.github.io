@@ -25,7 +25,7 @@ mathjax: true
 
 |角色|程序猿|产品经理|运维|设计|市场|测试|销售|运营|媒介|HR|
 |---|---|---|---|---|---|---|---|---|---|---|
-|路线|![](https://img1.tuicool.com/FZbM7nM.jpg)|![](https://img1.tuicool.com/3amyAva.jpg)|![](https://img0.tuicool.com/FFFza2B.jpg)|![](https://img0.tuicool.com/auA3YzV.jpg!web)|![](https://img0.tuicool.com/IFnEzyQ.jpg)|![](https://img2.tuicool.com/YRveEni.jpg!web)|![](https://img1.tuicool.com/BVfMnaJ.jpg!web)|![](https://img1.tuicool.com/I7ja6nr.jpg!web)|![](https://img1.tuicool.com/EnauquR.jpg!web)|![](https://img0.tuicool.com/A7z2y2r.jpg!web)|
+|路线|![](https://img1.tuicool.com/FZbM7nM.jpg!web)|![](https://img1.tuicool.com/3amyAva.jpg!web)|![](https://img0.tuicool.com/FFFza2B.jpg!web)|![](https://img0.tuicool.com/auA3YzV.jpg!web)|![](https://img0.tuicool.com/IFnEzyQ.jpg!web)|![](https://img2.tuicool.com/YRveEni.jpg!web)|![](https://img1.tuicool.com/BVfMnaJ.jpg!web)|![](https://img1.tuicool.com/I7ja6nr.jpg!web)|![](https://img1.tuicool.com/EnauquR.jpg!web)|![](https://img0.tuicool.com/A7z2y2r.jpg!web)|
 
 # [阿里员工焦虑发帖：35岁如果还在写代码，真的完了！](https://mp.weixin.qq.com/s?__biz=MzU3MTYyNjk0MA==&mid=2247484676&idx=1&sn=04c81a258904c90aaa6ccb879353d76d&chksm=fcdc01d7cbab88c18b0d054f92e7d435e9242ff8f40f5bf566c098096b2aa28b17e2a8f51ffd&mpshare=1&scene=23&srcid=0820r0bheYEr0sh0MZ3CMqYQ&sharer_sharetime=1566357089427&sharer_shareid=b8d409494a5439418f4a89712efcd92a%23rd)
 - 脉脉上看到一位阿里员工发帖称：
