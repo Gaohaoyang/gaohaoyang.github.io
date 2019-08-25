@@ -167,7 +167,10 @@ mathjax: true
 - [超级工程](https://www.bilibili.com/video/av26722471?from=search&seid=6411515736557949839)，14集纪录片
 <iframe src="//player.bilibili.com/player.html?aid=26722471&cid=45968926&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+
 - 其它
+
+
 
 ### 大公司
 - 【2019-07-26】阿里纪录片，[扬子江大鳄](https://www.bilibili.com/video/av10740662/)
@@ -175,17 +178,39 @@ mathjax: true
 - 马云和永远的阿里：Dream maker
 <iframe src="//player.bilibili.com/player.html?aid=5232102&cid=8503492&page=1" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+## 科幻
+
+- [20部经典科幻电影](https://baijiahao.baidu.com/s?id=1613670574319500845&wfr=spider&for=pc)
+- 超体,[视频地址](http://www.yakuhd.com/programs/325269.html)
+   - 类人猿在河边喝水，这个时候它的大脑开发度只有1%
+   - 露西的细胞被这些蓝色晶体改造了，这个时候她的大脑开发到了20%，她不在感到疼痛，没有恐惧，也没有了感情，她也可以控制自己的新陈代谢，也可以控制电波，可以搜索别人的记忆
+   - 在飞机上，露西的大脑已经开发到30%，她的细胞已经有了自主意识，已经开始慢慢从她的身体分解出来，直到全部分解
+   - 镜头一转，露西在医院醒了过来，此时她的大脑已经开到了50%，整个世界在她的眼里都是碎片信息流，她可以任意调取自己想要的资料。
+   - 很快她的大脑开发到了80%，并且制造出了新一代的计算机，只是看起来有一些怪异。她还可以随意穿越，可以将世界暂停和快进，以及后退
+   - 开发到99%的时候，她回到了天地混沌，宇宙刚刚形成的时候！
+   - 终于，她的大脑开发到了100%，砰......
+   
+   ![](https://hiphotos.baidu.com/feed/pic/item/b8389b504fc2d562cbe5c9feeb1190ef76c66c37.jpg)
+   
+![](https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1187071741,31245207&fm=173&s=8CD2E90207A83CBE8711248503008082&w=640&h=305&img.JPEG)
+
+- [人工智能](https://v.youku.com/v_show/id_XMzM3Nzk0MjQ4.html?refer=seo_operation.liuxiao.liux_00003303_3000_Qzu6ve_19042900)
+
+<iframe height=498 width=510 src=“http://player.youku.com/embed/XMzM3Nzk0MjQ4” frameborder=0 allowfullscreen="true"></iframe>
+
 
 ## 创业
 
 - 电影：中国合伙人
 - 综艺节目：[合伙中国人](https://v.qq.com/x/search/?q=%E5%90%88%E4%BC%99%E4%B8%AD%E5%9B%BD%E4%BA%BA%E7%AC%AC3%E5%AD%A3&stag=9)
    - [90后遭投资人痛批](https://v.youku.com/v_show/id_XMjg3NjI4MDM2NA==.html?spm=a2h0j.11185381.listitem_page1.5!11~A&&s=48efbfbd3b535eefbfbd)
-<iframe height="600" width="100%" src="http://player.youku.com/embed/XMjg3NjI4MDM2NA==" frameborder="0" "allowfullscreen"></iframe>
+
+<iframe src="http://player.youku.com/embed/XMjg3NjI4MDM2NA==" frameborder="0" allowfullscreen=“true” height="600" width="100%" ></iframe>
 
 
 ## 历史
 - 孙子兵法-10集纪录片，[B站](https://www.bilibili.com/video/av1968639)
+
 <iframe src="//player.bilibili.com/player.html?aid=1968639&cid=5838714&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
