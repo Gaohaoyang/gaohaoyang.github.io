@@ -16,8 +16,19 @@ mathjax: true
 ## 五大流派
 
 - [机器学习五大流派](https://blog.csdn.net/rogerchen1983/article/details/79681463)
+
+|流派|icon|起源|核心思想|问题|代表算法|代表应用|代表人物|备注|
+|---|---|----|----|----|----|----|----|---|
+|符号主义（Symbolists）|![](https://static.oschina.net/uploads/space/2018/0324/203316_hYqk_876354.png)|逻辑学、哲学|认知即计算，通过对符号的演绎和逆演绎进行结果预测|知识结构|逆演绎算法（Inverse deduction）|知识图谱|Tom Mitchell、Steve Muggleton、Ross Quinlan ![](https://static.oschina.net/uploads/space/2018/0324/203328_KZrE_876354.png)|-|
+|贝叶斯派（Bayesians）|![](https://static.oschina.net/uploads/space/2018/0324/203340_Ncci_876354.png)|统计学|主观概率估计，发生概率修正，最优决策|不确定性|概率推理（Probabilistic inference）|反垃圾邮件、概率预测|David Heckerman、Judea Pearl、Michael Jordan ![](https://static.oschina.net/uploads/space/2018/0324/203348_Qjdz_876354.png)||
+|联结主义（Connectionist）|![](https://static.oschina.net/uploads/space/2018/0324/203358_CsS2_876354.png)|神经科学|对大脑进行仿真|信度分配|反向传播算法（Backpropagation）、深度学习（Deep learning）|机器视觉、语音识别|Yann LeCun、Geoff Hinton、Yoshua Bengio ![](https://static.oschina.net/uploads/space/2018/0324/203405_LC6Y_876354.png)||
+|进化主义（Evolutionaries）|![](https://static.oschina.net/uploads/space/2018/0324/203415_lLEl_876354.png)|进化生物学|对进化进行模拟，使用遗传算法和遗传编程|结构发现|基因编程（Genetic programming）|海星机器人|John Koda、John Holland、Hod Lipson ![](https://static.oschina.net/uploads/space/2018/0324/203424_CDH2_876354.png)||
+|行为类比主义（Analogizer）|![](https://static.oschina.net/uploads/space/2018/0324/203434_yPJW_876354.png)|心理学|新旧知识间的相似性|相似性|核机器（Kernel machines）、近邻算法（Nearest Neightor）|Netflix推荐系统| Peter Hart、Vladimir Vapnik、Douglas Hofstadter ![](https://static.oschina.net/uploads/space/2018/0324/203441_iuTw_876354.png)||
+
 - [三张图读懂机器学习：基本概念、五大流派与九种常见算法](https://zhuanlan.zhihu.com/p/26512893)
+   - 从20世纪80年代开始，机器学习五大流派不断演化，各个阶段都有相应的主导流派：
 ![](https://static.oschina.net/uploads/space/2018/0324/203514_GMM0_876354.png)
+   - 华盛顿大学教授 Pedro Domingos 曾详细地对机器学习领域的五大流派进行了详细的盘点，写了34页的PPT，各个流派的核心思想和演化过程进行了详细的介绍
 
 
 # 周志华《机器学习》笔记
