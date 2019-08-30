@@ -11,6 +11,15 @@ mathjax: true
 * content
 {:toc}
 
+# 机器学习总结
+
+## 五大流派
+
+- [机器学习五大流派](https://blog.csdn.net/rogerchen1983/article/details/79681463)
+- [三张图读懂机器学习：基本概念、五大流派与九种常见算法](https://zhuanlan.zhihu.com/p/26512893)
+![](https://static.oschina.net/uploads/space/2018/0324/203514_GMM0_876354.png)
+
+
 # 周志华《机器学习》笔记
 
 - 摘自：[github](https://github.com/Vay-keen/Machine-learning-learning-notes)
