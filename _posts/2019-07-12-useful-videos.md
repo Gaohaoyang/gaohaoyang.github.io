@@ -63,6 +63,12 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=36040687&cid=63346561&page=2" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+
+- V字仇杀队，[在线观看](http://www.caomintv.com/dianying/play/45147-1-1.html)
+
+![](https://pic4.zhimg.com/80/f821e100da62fa4c397e10a0333c8521_hd.jpg)
+
+
 ## 自我剖析
 - [承认吧，人生来就是孤独的](https://www.365yg.com/a6641087299998188035#mid=5543467706)，[B站](https://www.bilibili.com/video/av39370474?from=search&seid=8373277070703221652)
 
