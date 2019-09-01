@@ -3,7 +3,7 @@ layout: post
 title:  "机器学习笔记"
 date:   2019-08-22 15:50:00
 categories: 资料汇总
-tags: 机器学习 周志华 深度学习 西瓜书
+tags: 机器学习 周志华 深度学习 西瓜书 李宏毅
 excerpt: 汇总各类机器学习资料
 mathjax: true
 ---
@@ -29,6 +29,9 @@ mathjax: true
    - 从20世纪80年代开始，机器学习五大流派不断演化，各个阶段都有相应的主导流派：
 ![](https://static.oschina.net/uploads/space/2018/0324/203514_GMM0_876354.png)
    - 华盛顿大学教授 Pedro Domingos 曾详细地对机器学习领域的五大流派进行了详细的盘点，写了34页的PPT，各个流派的核心思想和演化过程进行了详细的介绍
+
+# 李宏毅课程学习笔记
+- [在线笔记](https://datawhalechina.github.io/leeml-notes/#/)
 
 
 # 周志华《机器学习》笔记
