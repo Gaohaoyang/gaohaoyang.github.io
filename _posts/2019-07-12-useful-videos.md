@@ -220,4 +220,7 @@ mathjax: true
 <iframe src="//player.bilibili.com/player.html?aid=1968639&cid=5838714&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
+## 娱乐
+
+- 【2019-09-01】IT码农转型说相声，[80后脱口秀韦若琛合集](https://www.ixigua.com/i6730450427185201671/)
 
