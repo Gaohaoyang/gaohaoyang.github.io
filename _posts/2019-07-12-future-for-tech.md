@@ -11,6 +11,10 @@ mathjax: true
 * content
 {:toc}
 
+- WaitButWhy: [How to Pick a Career](https://waitbutwhy.com/2018/04/picking-career.html)
+
+![](https://28oa9i1t08037ue3m1l0i861-wpengine.netdna-ssl.com/wp-content/uploads/2018/04/Life-path.png)
+
 #  [三年升高工，七年做架构，十年送外卖](https://mp.weixin.qq.com/s/19HOV6jCjzvwIL307MWaDw) 
 
 前段时间虎扑上有一篇热帖，叫《一年前我月薪两万被叫老总，如今35岁在美团送外卖》，讲的是一个新媒体公司从业者人到中年的人生境遇，互联网行业里一直有一种说法，叫做“互联网公司没有35岁以上的中年人”，那过了35岁的互联网人都去哪儿了呢？
