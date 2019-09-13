@@ -174,10 +174,6 @@ mathjax: true
 <iframe src="//player.bilibili.com/player.html?aid=26722471&cid=45968926&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
-- 其它
-
-
-
 ### 大公司
 - 【2019-07-26】阿里纪录片，[扬子江大鳄](https://www.bilibili.com/video/av10740662/)
 <iframe src="//player.bilibili.com/player.html?aid=10740662&cid=17720293&page=1" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
@@ -224,3 +220,16 @@ mathjax: true
 
 - 【2019-09-01】IT码农转型说相声，[80后脱口秀韦若琛合集](https://www.ixigua.com/i6730450427185201671/)
 
+
+
+## 百科知识
+
+- 【20190-09-13】回形针制作的系列科普视频
+   - [如何用机器人打销售电话？](https://www.bilibili.com/video/av37362322)
+   - [如何科学制造降雨](https://www.bilibili.com/video/av67286738)
+   - [你的手机是如何拍照的](https://www.bilibili.com/video/av50280224)
+   - [如何成为钓鱼高手](https://www.bilibili.com/video/av60448298)
+   - [如何为13亿人调度车辆](https://www.bilibili.com/video/av42125169)
+   - [固态硬盘到底好在哪儿](https://www.bilibili.com/video/av61437877)，[中国网盘为什么这么难用](https://www.bilibili.com/video/av58647793)
+   - [别再问我什么是BT种子](https://www.bilibili.com/video/av57748098)
+   - [APP如何知道你想买什么](https://www.bilibili.com/video/av40891962)
