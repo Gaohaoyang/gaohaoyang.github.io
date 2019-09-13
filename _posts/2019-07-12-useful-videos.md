@@ -224,7 +224,7 @@ mathjax: true
 
 ## 百科知识
 
-- 【20190-09-13】回形针制作的系列科普视频
+- 【20190-09-13】回形针制作的系列科普视频, 混乱博物馆的[5G背后的两个男人](https://www.bilibili.com/video/av62773215)
    - [如何用机器人打销售电话？](https://www.bilibili.com/video/av37362322)
    - [如何科学制造降雨](https://www.bilibili.com/video/av67286738)
    - [你的手机是如何拍照的](https://www.bilibili.com/video/av50280224)
@@ -233,3 +233,4 @@ mathjax: true
    - [固态硬盘到底好在哪儿](https://www.bilibili.com/video/av61437877)，[中国网盘为什么这么难用](https://www.bilibili.com/video/av58647793)
    - [别再问我什么是BT种子](https://www.bilibili.com/video/av57748098)
    - [APP如何知道你想买什么](https://www.bilibili.com/video/av40891962)
+   
