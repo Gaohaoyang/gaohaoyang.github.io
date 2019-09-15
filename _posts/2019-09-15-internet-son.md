@@ -13,7 +13,7 @@ mathjax: true
 
 摘自：2014年09月08日, [互联网之子 – AARON SWARTZ](https://coolshell.cn/articles/11928.html)
  
- ## Aaron_Swartz
+## Aaron_Swartz
  
  ![](https://coolshell.cn/wp-content/uploads/2014/09/Aaron_Swartz_profile-216x300.jpg)
 
