@@ -162,6 +162,11 @@ mathjax: true
 <iframe src="//player.bilibili.com/player.html?aid=24325548&cid=8503492&page=1" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 ## 互联网
+
+- 纪录片：[互联网](https://www.bilibili.com/video)
+- [互联网之父讲解互联网是如何工作的](https://www.bilibili.com/video/av47892907)，八集
+- [走进暗网](https://www.bilibili.com/bangumi/play/ep120838/)
+- [互联网之子The Internet's Own Boy: The Story of Aaron Swartz](https://www.bilibili.com/video/av16549975)
 - 【2018-11-25】马云励志演讲：[最伟大的成功](https://www.365yg.com/a6623610909505880584#mid=1561866780362754)
 
 ### 行业观察
@@ -200,9 +205,18 @@ mathjax: true
 
 <iframe height=498 width=510 src=“http://player.youku.com/embed/XMzM3Nzk0MjQ4” frameborder=0 allowfullscreen="true"></iframe>
 
+## 健康
+
+- [健身的真相](https://www.bilibili.com/bangumi/play/ep260720/)
+- 【2019-09-15】[急诊室故事两季全（共36集）](https://www.bilibili.com/video/av28138937)
+
+<iframe src="//player.bilibili.com/player.html?aid=28138937&cid=48601458&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+- [生门](https://www.iqiyi.com/a_19rrh1d75x.html?vfm=2008_aldbd)，武汉大学中南医院纪实，第一集[产科](https://www.bilibili.com/video/av42427215/?spm_id_from=333.788.videocard.6)，类似纪录片人间世
 
 ## 创业
 
+- [硅谷大佬](https://www.bilibili.com/video/av10418675)6集
 - 电影：中国合伙人
 - 综艺节目：[合伙中国人](https://v.qq.com/x/search/?q=%E5%90%88%E4%BC%99%E4%B8%AD%E5%9B%BD%E4%BA%BA%E7%AC%AC3%E5%AD%A3&stag=9)
    - [90后遭投资人痛批](https://v.youku.com/v_show/id_XMjg3NjI4MDM2NA==.html?spm=a2h0j.11185381.listitem_page1.5!11~A&&s=48efbfbd3b535eefbfbd)
@@ -216,9 +230,12 @@ mathjax: true
 <iframe src="//player.bilibili.com/player.html?aid=1968639&cid=5838714&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
-## 娱乐
+## 文娱
 
 - 【2019-09-01】IT码农转型说相声，[80后脱口秀韦若琛合集](https://www.ixigua.com/i6730450427185201671/)
+- 【2019-09-15】CCTV纪录片：[世界上的另一个我](https://www.bilibili.com/video/av9976667)，记录世界各地的90后生活
+
+<iframe src="//player.bilibili.com/player.html?aid=9976667&cid=16492452&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
 
 
