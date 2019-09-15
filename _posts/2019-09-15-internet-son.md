@@ -2,9 +2,9 @@
 layout: post
 title:  "互联网之子"
 date:   2019-09-15 17:06:00
-categories: 文史哲
-tags: 丘成桐 数学 人文
-excerpt: 人文与数学的前后关系
+categories: 互联网
+tags: 互联网 MIT Aaron_Swartz
+excerpt: 一个计算机天才的理想道路
 mathjax: true
 ---
 
@@ -13,6 +13,7 @@ mathjax: true
 
 摘自：2014年09月08日, [互联网之子 – AARON SWARTZ](https://coolshell.cn/articles/11928.html)
  
+ ## 天才Aaron_Swartz
  ![](https://coolshell.cn/wp-content/uploads/2014/09/Aaron_Swartz_profile-216x300.jpg)
 
 Aaron_Swartz
@@ -24,6 +25,8 @@ Aaron_Swartz
 - 14岁的时候，他就成为了[RSS1.0](http://en.wikipedia.org/wiki/RSS)的开发组的一员。（后来，他和 [John Gruber](http://en.wikipedia.org/wiki/John_Gruber)一起开发了Markdown）
 - 15岁的时候，进入W3C的 [RDF](http://en.wikipedia.org/wiki/Resource_Description_Framework) 核心工作组，并写了RFC3870——这个文档描述了一个新的media type – “[RDF/XML](http://en.wikipedia.org/wiki/RDF/XML)“，用于定义互联网上的“[语义网络](http://en.wikipedia.org/wiki/Semantic_Web)”
 - 17岁进入斯坦福大学，1年半后，18岁的时候因为受不了教条式的教育缀学，并通过Y Combinator公司的夏季创办人计划成立`Infogami`软件公司，在那里，他设想了一个Wiki平台来实现他的Internet Open Library——一个开放的网络图书馆。并写了著名的`web.py` 开发框架。但他觉得自己太年轻，还要有一个合伙人，于是Y Combinator建议他和`Reddit`合并。于是他在19岁的时候成了Reddit的创始人。虽然Reddit不挣钱，但是相当火，当他20岁的时候（2006年10月），他们把Reddit卖给了[Condé Nast](http://en.wikipedia.org/wiki/Cond%C3%A9_Nast_Publications)出版社，据说挣到了百万美金。然后，他去了这家出版社工作，受不了办公室的那种工作环境，2007年1月离职。
+
+## 陨落
 
 但是，你能想得到这么天才的一个人，于2013年1月11日自杀了么？那年他才26岁。
 
@@ -98,13 +101,6 @@ Aaron死了以后，Aaron朋友和合作者，哈佛大学法学院教授Laurenc
 
 >“我之所以上了新闻，是因为我们的实验成功了，而这就是为什么 Aaron 做的事有那么重要……这个宇宙中的真理不是只有那些政策制定者曾经弄清楚过的，比如应该限速多少，它还包括那些能让你的孩子，不会因胰腺癌而死的研究。如果没有访问阅读权，那个能解决你的问题的人，可能就永远找不到答案。”
 
- 
-
-- 强烈推荐纪录片——《[互联网之子](https://www.bilibili.com/video/av16549975)》，[The Internet's Own Boy: The Story of Aaron Swartz](https://www.bilibili.com/video/av16549975)
-
-<iframe src="//player.bilibili.com/player.html?aid=av28065959&cid=26994578&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
- 
-
 Aaron说的一句话让我挺有感触的——
 >相信你应该真的每时每刻都问自己，现在这世界有什么最重要的事是我能参与去做的？
 >
@@ -113,4 +109,15 @@ Aaron说的一句话让我挺有感触的——
  
 ![](https://coolshell.cn/wp-content/uploads/2014/09/aaron_swartz__freedom_fighter_by_caq_qoq-d5rzbi8.jpg)
 
-延伸阅读：[偷了世界的程序员](https://coolshell.cn/articles/3363.html)
+## 附录
+
+- 强烈推荐纪录片——《[互联网之子](https://www.bilibili.com/video/av16549975)》，[The Internet's Own Boy: The Story of Aaron Swartz](https://www.bilibili.com/video/av16549975)
+
+<iframe src="//player.bilibili.com/player.html?aid=av28065959&cid=26994578&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+ 
+
+
+- [第四公民](https://www.bilibili.com/video/av24623314)
+
+<iframe src="//player.bilibili.com/player.html?aid=24623314&cid=41383308&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+
