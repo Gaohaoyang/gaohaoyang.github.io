@@ -13,10 +13,13 @@ mathjax: true
 
 摘自：2014年09月08日, [互联网之子 – AARON SWARTZ](https://coolshell.cn/articles/11928.html)
  
- ## 天才Aaron_Swartz
+ ## Aaron_Swartz
+ 
  ![](https://coolshell.cn/wp-content/uploads/2014/09/Aaron_Swartz_profile-216x300.jpg)
 
 Aaron_Swartz
+
+## 成长
 
 1986年11月8日，有个叫Aaron Swartz的人在美国芝加哥伊利诺伊州出生。因为他父母创办了一个软件公司，所以，Aaron在3岁的时候就接触到了电脑，然后就着迷了。
 
