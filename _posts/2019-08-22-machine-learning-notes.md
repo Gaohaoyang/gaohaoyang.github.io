@@ -30,19 +30,54 @@ mathjax: true
 ![](https://static.oschina.net/uploads/space/2018/0324/203514_GMM0_876354.png)
    - 华盛顿大学教授 Pedro Domingos 曾详细地对机器学习领域的五大流派进行了详细的盘点，写了34页的PPT，各个流派的核心思想和演化过程进行了详细的介绍
 
-# 李宏毅课程学习笔记
+# 机器学习课程
+
+## 李宏毅课程学习笔记
 - [在线笔记](https://datawhalechina.github.io/leeml-notes/#/)
+- 李宏毅，机器学习,[机器学习-李宏毅(2019) Machine Learning](https://www.bilibili.com/video/av35932863)
+
+<iframe src="//player.bilibili.com/player.html?aid=35932863&cid=63063540&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 - 李宏毅, [官网ppt](http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML19.html), B站-[深度学习19（完整版）](https://www.bilibili.com/video/av48285039?from=search&seid=14527875274908336293)，一共94节
 
 <iframe src="//player.bilibili.com/player.html?aid=48285039&cid=84577011&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
-# Google机器学习速成课
+
+## Google机器学习速成课
 
 - [Google Machine Learning Crash Course](https://developers.google.cn/machine-learning/crash-course/)
 - B站地址, [google机器学习速成(基于tensorflow API)](https://www.bilibili.com/video/av58945047/?p=5)
 
 <iframe src="//player.bilibili.com/player.html?aid=58945047&cid=102752327&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
+# 深度学习
+
+## 斯坦佛-吴恩达
+
+- [斯坦福课程CS230：Andrew Ng深度学习(Autumn 2018)](https://www.bilibili.com/video/av47055599)
+
+<iframe src="//player.bilibili.com/player.html?aid=47055599&cid=82415548&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+
+# 强化学习
+
+## 李宏毅
+
+- [李宏毅深度强化学习(国语)课程(2018)](https://www.bilibili.com/video/av24724071)
+
+<iframe src="//player.bilibili.com/player.html?aid=24724071&cid=41583402&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+## 伯克利
+
+- [伯克利课程：深度强化学习(2017) by Sergey Levine](https://www.bilibili.com/video/av21501169)
+
+<iframe src="//player.bilibili.com/player.html?aid=21501169&cid=35381922&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+## 斯坦福
+
+- [2019斯坦福大学最新强化学习课程：CS234](https://www.bilibili.com/video/av47812079), [Youtube](https://www.youtube.com/watch?v=buptHUzDKcE&list=PLoROMvodv4rOSOPzutgyCTapiGlY2Nd8u&index=5)
+
+<iframe src="//player.bilibili.com/player.html?aid=47812079&cid=85917443&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
 # 周志华《机器学习》笔记
