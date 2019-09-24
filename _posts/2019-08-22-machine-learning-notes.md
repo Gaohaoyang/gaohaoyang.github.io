@@ -32,6 +32,17 @@ mathjax: true
 
 # 李宏毅课程学习笔记
 - [在线笔记](https://datawhalechina.github.io/leeml-notes/#/)
+- 李宏毅, [官网ppt](http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML19.html), B站-[深度学习19（完整版）](https://www.bilibili.com/video/av48285039?from=search&seid=14527875274908336293)，一共94节
+
+<iframe src="//player.bilibili.com/player.html?aid=48285039&cid=84577011&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+
+# Google机器学习速成课
+
+- [Google Machine Learning Crash Course](https://developers.google.cn/machine-learning/crash-course/)
+- B站地址, [google机器学习速成(基于tensorflow API)](https://www.bilibili.com/video/av58945047/?p=5)
+
+<iframe src="//player.bilibili.com/player.html?aid=58945047&cid=102752327&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+
 
 
 # 周志华《机器学习》笔记
