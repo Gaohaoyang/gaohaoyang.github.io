@@ -35,6 +35,7 @@ coding path
 
 ![](https://img1.tuicool.com/FZbM7nM.jpg)
 
+![](https://28oa9i1t08037ue3m1l0i861-wpengine.netdna-ssl.com/wp-content/uploads/2018/04/Life-path.png)
 
 
 
