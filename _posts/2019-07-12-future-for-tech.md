@@ -29,13 +29,13 @@ mathjax: true
 
 |角色|程序猿|产品经理|运维|设计|市场|测试|销售|运营|媒介|HR|
 |---|---|---|---|---|---|---|---|---|---|---|
-|路线|![](https://img1.tuicool.com/FZbM7nM.jpg)|![](https://img1.tuicool.com/3amyAva.jpg)|![](https://img0.tuicool.com/FFFza2B.jpg)|![](https://img0.tuicool.com/auA3YzV.jpg)|![](https://img0.tuicool.com/IFnEzyQ.jpg)|![](https://img2.tuicool.com/YRveEni.jpg)|![](https://img1.tuicool.com/BVfMnaJ.jpg)|![](https://img1.tuicool.com/I7ja6nr.jpg)|![](https://img1.tuicool.com/EnauquR.jpg)|![](https://img0.tuicool.com/A7z2y2r.jpg)|
+|路线|![](https://img1.tuicool.com/FZbM7nM.jpg)|![](https://inews.gtimg.com/newsapp_match/0/10034173438/0)|![](https://img0.tuicool.com/FFFza2B.jpg)|![](https://img0.tuicool.com/auA3YzV.jpg)|![](https://img0.tuicool.com/IFnEzyQ.jpg)|![](https://img2.tuicool.com/YRveEni.jpg)|![](https://img1.tuicool.com/BVfMnaJ.jpg)|![](https://img1.tuicool.com/I7ja6nr.jpg)|![](https://img1.tuicool.com/EnauquR.jpg)|![](https://img0.tuicool.com/A7z2y2r.jpg)|
 
 coding path
 
 ![](https://img1.tuicool.com/FZbM7nM.jpg)
 
-![](https://28oa9i1t08037ue3m1l0i861-wpengine.netdna-ssl.com/wp-content/uploads/2018/04/Life-path.png)
+![](https://inews.gtimg.com/newsapp_match/0/10034173438/0)
 
 
 
