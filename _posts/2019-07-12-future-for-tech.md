@@ -29,11 +29,11 @@ mathjax: true
 
 |角色|程序猿|产品经理|运维|设计|市场|测试|销售|运营|媒介|HR|
 |---|---|---|---|---|---|---|---|---|---|---|
-|路线|![](https://img1.tuicool.com/FZbM7nM.jpg!web)|![](https://img1.tuicool.com/3amyAva.jpg!web)|![](https://img0.tuicool.com/FFFza2B.jpg!web)|![](https://img0.tuicool.com/auA3YzV.jpg!web)|![](https://img0.tuicool.com/IFnEzyQ.jpg!web)|![](https://img2.tuicool.com/YRveEni.jpg!web)|![](https://img1.tuicool.com/BVfMnaJ.jpg!web)|![](https://img1.tuicool.com/I7ja6nr.jpg!web)|![](https://img1.tuicool.com/EnauquR.jpg!web)|![](https://img0.tuicool.com/A7z2y2r.jpg!web)|
+|路线|![](https://img1.tuicool.com/FZbM7nM.jpg!web)|![](https://img1.tuicool.com/3amyAva.jpg!web)|![](https://img0.tuicool.com/FFFza2B.jpg)|![](https://img0.tuicool.com/auA3YzV.jpg)|![](https://img0.tuicool.com/IFnEzyQ.jpg)|![](https://img2.tuicool.com/YRveEni.jpg)|![](https://img1.tuicool.com/BVfMnaJ.jpg)|![](https://img1.tuicool.com/I7ja6nr.jpg)|![](https://img1.tuicool.com/EnauquR.jpg)|![](https://img0.tuicool.com/A7z2y2r.jpg)|
 
 coding
 
-![](https://img1.tuicool.com/FZbM7nM.jpg!web)
+![](https://img1.tuicool.com/FZbM7nM.jpg)
 
 
 
