@@ -17,6 +17,7 @@ mathjax: true
 
 #  [三年升高工，七年做架构，十年送外卖](https://mp.weixin.qq.com/s/19HOV6jCjzvwIL307MWaDw) 
 
+- [三年升高工，七年做架构，十年送外卖](https://new.qq.com/omn/20190817/20190817A04XPI00.html)
 前段时间虎扑上有一篇热帖，叫《一年前我月薪两万被叫老总，如今35岁在美团送外卖》，讲的是一个新媒体公司从业者人到中年的人生境遇，互联网行业里一直有一种说法，叫做“互联网公司没有35岁以上的中年人”，那过了35岁的互联网人都去哪儿了呢？
 
 今天我们就帮大家畅想一下，互联网人25岁到35岁的职业发展之路
@@ -29,14 +30,11 @@ mathjax: true
 
 |角色|程序猿|产品经理|运维|设计|市场|测试|销售|运营|媒介|HR|
 |---|---|---|---|---|---|---|---|---|---|---|
-|路线|![](https://img1.tuicool.com/FZbM7nM.jpg)|![](https://inews.gtimg.com/newsapp_match/0/10034173438/0)|![](https://img0.tuicool.com/FFFza2B.jpg)|![](https://img0.tuicool.com/auA3YzV.jpg)|![](https://img0.tuicool.com/IFnEzyQ.jpg)|![](https://img2.tuicool.com/YRveEni.jpg)|![](https://img1.tuicool.com/BVfMnaJ.jpg)|![](https://img1.tuicool.com/I7ja6nr.jpg)|![](https://img1.tuicool.com/EnauquR.jpg)|![](https://img0.tuicool.com/A7z2y2r.jpg)|
+|路线|![](https://inews.gtimg.com/newsapp_match/0/10034173437/0)|![](https://inews.gtimg.com/newsapp_match/0/10034173438/0)|![](https://inews.gtimg.com/newsapp_match/0/10034173439/0)|![](https://inews.gtimg.com/newsapp_match/0/10034173440/0)|![](https://inews.gtimg.com/newsapp_match/0/10034173441/0)|![](https://inews.gtimg.com/newsapp_match/0/10034173442/0)|![](https://inews.gtimg.com/newsapp_match/0/10034173443/0)|![](https://inews.gtimg.com/newsapp_match/0/10034173444/0)|![](https://inews.gtimg.com/newsapp_match/0/10034173445/0)|![](https://inews.gtimg.com/newsapp_match/0/10034173446/0)|
 
 coding path
 
-![](https://img1.tuicool.com/FZbM7nM.jpg)
-
-![](https://inews.gtimg.com/newsapp_match/0/10034173438/0)
-
+![](https://inews.gtimg.com/newsapp_match/0/10034173437/0)
 
 
 # [阿里员工焦虑发帖：35岁如果还在写代码，真的完了！](https://mp.weixin.qq.com/s?__biz=MzU3MTYyNjk0MA==&mid=2247484676&idx=1&sn=04c81a258904c90aaa6ccb879353d76d&chksm=fcdc01d7cbab88c18b0d054f92e7d435e9242ff8f40f5bf566c098096b2aa28b17e2a8f51ffd&mpshare=1&scene=23&srcid=0820r0bheYEr0sh0MZ3CMqYQ&sharer_sharetime=1566357089427&sharer_shareid=b8d409494a5439418f4a89712efcd92a%23rd)
