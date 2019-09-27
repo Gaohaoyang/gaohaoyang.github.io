@@ -32,6 +32,14 @@ mathjax: true
 
 # 机器学习课程
 
+## 机器学习白板推导
+
+- [B站合集](https://space.bilibili.com/97068901)
+- [Github地址](https://github.com/shuhuai007/Machine-Learning-Session)，含pdf版本
+- 如：[变分法](https://www.bilibili.com/video/av64759427)
+
+<iframe src="//player.bilibili.com/player.html?aid=64759427&cid=112415221&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 ## 李宏毅课程学习笔记
 - [在线笔记](https://datawhalechina.github.io/leeml-notes/#/)
 - 李宏毅，机器学习,[机器学习-李宏毅(2019) Machine Learning](https://www.bilibili.com/video/av35932863)
