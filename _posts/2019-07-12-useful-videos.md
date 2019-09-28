@@ -149,6 +149,11 @@ mathjax: true
 <iframe src="//player.bilibili.com/player.html?aid=30760224&cid=53698092&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 ## 科学
+
+- 【2019-09-28】[觉者：梁冬对话华大基因CEO尹烨](https://www.bilibili.com/video/av19676456),[科学的尽头是神学！梁冬对话尹哗！](https://www.ixigua.com/i6741324581925028355/)
+
+<iframe src="//player.bilibili.com/player.html?aid=19676456&cid=32083799&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 - 【2018--3-17】美丽心灵（博弈论创始人，纳什）+ [万物理论](https://pan.baidu.com/s/1HdrJpd-OXp371A8m9PI_Eg)(霍金)
 - 【2018-12-16】印度拉马努金传记[知无涯者](https://www.iqiyi.com/v_19rra55zk8.html?vfm=2008_aldbd)，Will Hunting [心灵捕手](https://www.bilibili.com/video/av22771407?from=search&seid=2102098560566397389)
 
