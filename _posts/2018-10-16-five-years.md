@@ -574,6 +574,9 @@ CMU要求答辩委员会需要有三个CMU老师和一个学校外的。除了�
 
 - 2019-07-19, 陈天奇
 
+![](https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/YicUhk5aAGtCCyApozARN1Rd3P2HVwibWsOjz3lUf0vYtts8RD32FJImFNUjDm7O3ql9wYXV3A38rdqn7vX30m2A/640?wx_fmt=png&wxfrom=5&wx_lazy=1)
+
+
 十年前，MSRA的夏天，刚开始尝试机器学习研究的我面对科研巨大的不确定性，感到最多的是困惑和迷茫。十年之后，即将跨出下一步的时候，未来依然是如此不确定，但是期待又更多了一些。这其中的变化也带着这十年经历的影子。
 
 ## 起始： 科研是什么
