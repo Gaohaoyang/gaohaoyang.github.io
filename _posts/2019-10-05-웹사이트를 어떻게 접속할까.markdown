@@ -1,11 +1,9 @@
 ---
 layout: post
-title:  "hello jekyll!"
-date:   2015-02-10 15:14:54
-categories: jekyll
-tags: jekyll
-excerpt: 
-mathjax: true
+title:  "웹사이트에 어떻게 접속할까?"
+categories: Network
+tags: 效率 vscode markdown
+author: min
 ---
 웹사이트에 어떻게 접속할까?
 ----------------
