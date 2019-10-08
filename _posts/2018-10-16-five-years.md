@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Facebook田渊栋：博士毕业五年总结"
+title:  "博士经验总结"
 date:   2018-10-16 23:00:00
 categories: 大人物
-tags: 田渊栋 博士 Facebook 李沐
+tags: 田渊栋 博士 Facebook 李沐 陈天奇
 excerpt: 值得深思的好文章，现任Facebook人工智能研究院（FAIR LAB）研究员/研究经理，前Google无人驾驶部门软件工程师。本科和硕士毕业于上海交通大学，并在卡内基梅隆大学获得机器人方向博士学位。
 mathjax: true
 ---
@@ -570,7 +570,7 @@ CMU要求答辩委员会需要有三个CMU老师和一个学校外的。除了�
 更重要的是理想和情怀。人一生要工作五十年，为什么不花五年来追求下理想和情怀呢？
 
 
-# [机器学习科研的十年](https://zhuanlan.zhihu.com/p/74249758)
+# 陈天奇：[机器学习科研的十年](https://zhuanlan.zhihu.com/p/74249758)
 
 - 2019-07-19, 陈天奇
 
