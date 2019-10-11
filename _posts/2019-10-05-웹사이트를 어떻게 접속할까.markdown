@@ -1,0 +1,23 @@
+---
+layout: post
+title:  "웹사이트에 어떻게 접속할까?"
+categories: Network
+tags: 效率 vscode markdown
+author: min
+---
+웹사이트에 어떻게 접속할까?
+----------------
+1. 브라우저에 접속하고 싶은 도메인을 검색(도메인 == 컴퓨터 호스트명)
+2. DNS 서버가 도메인을 IP주소로 메핑
+    * DHCP로 인터넷을 접속하는 경우 DHCP 서버에서 가장 가까운 DNS 서버의 ip 주소를 알아냄
+    * DNS 서버로 부터 도메인을 통해 IP요청 
+3. TCP 연결 & 연결 종료
+ 
+- ![Image Alt 텍스트]({{site.url}}/assets/images/handshake.png )
+
+3 way handshake를 통해 client와 서버간의 연결하면 웹사이트의 접속이 된다. 이후 4 way handshaking을 통해 연결을 종료한다. 
+연결보다 종료가 한번의 과정이 추가된 이유는 앱 종료 요청을 받았다는 ACK 뿐만 아니라 
+실질적으로 앱이 완전히 종료되었다는 FIN을 보내는 과정이 추가되어서~
+
+
+   
