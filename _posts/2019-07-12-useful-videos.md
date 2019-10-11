@@ -71,7 +71,9 @@ mathjax: true
 - 【2019-09-29】《罪恶之家》是艾斯林·沃什执导的推理惊悚电影，由大卫·休里斯、苏菲·兰道尔共同演出。主要讲述一位探长为了调查一个年轻女工的自杀案件，登门拜访即将被封为爵士的亚瑟·伯灵的家庭，最后证明伯灵一家的每一个人都要对这个女工的死负责的故事
    - [罪恶之家](https://www.ixigua.com/i6736781851815330318/)电影解说
 
+- [富爸爸 罗伯特·清崎【2019】你有没有被教育成穷人(中英字幕)](https://www.bilibili.com/video/av59164780/?spm_id_from=333.788.videocard.4)
 
+<iframe src="//player.bilibili.com/player.html?aid=59164780&cid=103116268&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
 ## 自我剖析
