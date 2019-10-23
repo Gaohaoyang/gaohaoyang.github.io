@@ -16,29 +16,31 @@ mathjax: true
 
 原文链接：[Visual Information Theory](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com)
 
-我喜欢有一种全新的方式来思考世界的感觉。当有一些模糊的想法被转化为一个具体的概念时，我特别喜欢。信息论就是一个很好的例子。
+我喜欢用新的方式去思考世界，尤其是将一些模糊的想法形式化成具体的概念。比如，信息论。 
 
-信息论为我们提供了用于描述许多事物的精确语言。我是如何确定的？了解问题A的答案多少能告诉我问题B的答案？一组信仰与另一组信仰有多相似？从小的我就已经有了这些非正式的想法，但是信息论用强大的思想准确地描述了它们。这些想法有各种各样的应用，从数据压缩到量子物理，到机器学习，以及介于两者之间的广阔领域。
+`信息论`提供一种描述事务确定性的语言，比如某人多么善变？知道问题A对于知道问题B有什么帮助？一些想法和另一些想法有多么相似？小孩时，我就有一些粗略想法，但是信息论把这些问题抽象成具体而强大的概念。不管是从数据压缩，量子物理还是机器学习，以及其他很多和这三者有关的领域，信息论的概念都有着大量应用。 
 
-不幸的是，信息论似乎有点令人生畏。我认为这应该没有任何理由。事实上，许多核心思想可以在视觉上完全解释！
+不幸的是很多人认为信息论挺难，其实并不是，可能是有些书写的太糟糕了，实际上完全可以用可视化的方法说清楚。
 
 ## 可视化概率分布
 
-在我们深入研究信息论之前，让我们考虑如何可视化简单的概率分布。我们稍后会需要这个，现在解决这个问题很容易。作为奖励，这些可视化概率的技巧本身就非常有用！
+深入研究信息论之前，思考下如何可视化简单的概率分布。
 
-我在加利福尼亚。有时下雨，但大多时候都是晴天！我们可以说晴天的概率是75％。这很容易做到：
+比如加利福尼亚有时下雨，但大多都是晴天，也就是说晴天的概率是75％。
 
 ![img](https://colah.github.io/posts/2015-09-Visual-Information/img/prob-1D-rain.png)
 
-大多数时候，我都穿着T恤，但有时候我会穿外套。假设我穿外套的概率是38％。所以作图也很容易！
+大多数时候，我都穿着T恤，但有时候会穿外套。假设穿外套的概率是38％。
 
 ![img](https://colah.github.io/posts/2015-09-Visual-Information/img/prob-1D-coat.png)
 
-如果我想同时可视化这两个事件怎么办？如果他们不相关，我们会很容易 - 如果他们是我们所谓的独立。例如，今天我穿T恤或雨衣是不是真的与下周的天气相互作用。我们可以通过对一个变量使用一个轴而为另一个变量使用一个来绘制它：
+怎么同时可视化这两个事件？如果不相关，很容易，独立即可。例如，今天我穿T恤或雨衣是不是真的与下周的天气相互作用。可以用轴代表不同因素：
 
 ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/prob-2D-independent-rain.png)
 
-注意垂直线和水平线一直通过。*这就是独立的样子！* [1](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fn1)我穿着外套的概率不会随着一周内会下雨这一事实而改变。换句话说，我穿着外套并且下周会下雨的概率只是我穿着外套的概率，是下雨的概率。他们互不相关。
+注意垂直线和水平线一直通过。*这就是独立的样子！* [1](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fn1)
+
+穿外套的概率不会随着一周内会下雨这一事实而改变。换句话说，我穿着外套并且下周会下雨的概率只是我穿着外套的概率，是下雨的概率。他们互不相关。
 
 当变量相互作用时，特定变量的概率和其他变量的概率都会丢失。我穿着外套并且下雨的可能性很大，因为变量是相关的，它们使对方更有可能。更有可能的是，我在下雨的那天穿着外套，而不是我在一天穿外套的可能性，而在其他一些随机的日子下雨。
 
@@ -54,11 +56,11 @@ mathjax: true
 
 下雨的几率是25％。如果下雨，我有75％的机会穿上外套。因此，下雨和我穿着外套的概率是25％的75％，大约是19％。下雨的概率乘以我穿着外套下雨的概率，是下雨时我穿外套的概率。我们写这个：
 
-**p(rain,coat)=p(rain)⋅p(coat | rain)**
+> p(rain,coat) = p(rain)⋅p(coat | rain) 
 
 这是概率论最基本身份之一：
 
-**p(x,y)=p(x)⋅p(y|x)**
+> p(x,y) = p(x)⋅p(y|x)
 
 我们将分配*考虑在内*，将其分解为两件产品。首先，我们看一个变量（如天气）将采取某个值的概率。然后我们看一下另一个变量（如我的衣服）在第一个变量上采用某个值的概率。
 
@@ -66,7 +68,7 @@ mathjax: true
 
 我们来看一个例子吧。如果我们选择一个随机的日子，那么我有38％的机会穿着外套。如果我们知道我穿着外套，下雨的可能性有多大？嗯，我更有可能在雨中穿一件外套而不是在阳光下，但在加利福尼亚州下雨很少见，所以它有50％的可能性在下雨。因此，下雨和我穿外套的可能性是我穿着外套的概率（38％），如果我穿着外套（50％）是下雨的可能性的概率是约19％。
 
-**p(rain,coat)=p(coat)⋅p(rain | coat)**
+> p(rain,coat)=p(coat)⋅p(rain | coat)
 
 这为我们提供了一种完全相同概率分布的可视化方法。
 
@@ -76,9 +78,9 @@ mathjax: true
 
 （您可能听说过贝叶斯定理。如果您愿意，您可以将其视为在这两种显示概率分布的不同方式之间进行转换的方式！）
 
-## 旁白：辛普森的悖论
+## 旁白：`辛普森悖论`
 
-用于可视化概率分布的这些技巧是否真的有用？我认为他们是有用的！！我们将它们用于可视化信息论之前还需要一段时间，所以我想继续研究它并用它们来探索辛普森的悖论。辛普森的悖论是一个非常不直观的统计情况。在直观的层面上真的很难理解。迈克尔·尼尔森写了一篇可爱的文章“ [重塑诠释”](http://michaelnielsen.org/reinventing_explanation/)，探讨了不同的解释方法。我想尝试自己解释它，使用我们在上一节中创造的技巧。
+用于可视化概率分布的这些技巧是否真的有用？我认为有用！将它们用于可视化信息论之前还需要一段时间，所以我想继续研究它并用它们来探索`辛普森悖论`。辛普森悖论是一个非常不直观的统计情况。在直观的层面上真的很难理解。迈克尔·尼尔森写了一篇可爱的文章[重塑诠释](http://michaelnielsen.org/reinventing_explanation/)，探讨了不同的解释方法。我想尝试自己解释它，使用我们在上一节中创造的技巧。
 
 测试了两种肾结石治疗方法。一半患者接受治疗A而另一半接受治疗B。接受治疗B的患者比接受治疗A的患者更有可能存活。
 
@@ -138,7 +140,7 @@ mathjax: true
 
 ![img](https://colah.github.io/posts/2015-09-Visual-Information/img/NewCode.png)
 
-（您可能想知道：为什么不将1本身用作代码字？悲伤的是，当我们解码编码的字符串时，这会导致歧义。我们将在稍后讨论这个问题。）
+>（您可能想知道：为什么不将1本身用作代码字？悲伤的是，当我们解码编码的字符串时，这会导致歧义。我们将在稍后讨论这个问题。）
 
 事实证明，这段代码是最好的代码。对于这种分布，没有代码可以为我们提供小于1.75位的平均代码字长度。
 
@@ -240,7 +242,7 @@ mathjax: true
 
 早些时候，我们讨论了如何从一个特定的概率分布中获得平均消息来传递事件的短暂性的基本限制，p。 这个限制，即使用最佳代码的平均消息长度，称为p的熵，H(p)。 现在我们知道了代码字的最佳长度，实际上我们可以计算它！
 
-H(p)=∑p(x)log2⁡(1/p(x))
+> H(p)=∑p(x)log2⁡(1/p(x))
 
 *（人们经常使用标识 H(p)=−∑p(x)log2⁡(p(x)) 改写成 log⁡(1/a)=−log⁡(a).我认为前者更直观，并将继续在本文中使用它。）*
 
@@ -271,7 +273,6 @@ H(p)=∑p(x)log2⁡(1/p(x))
 为了降低通信成本，我让Alice使用自己的代码。令我宽慰的是，这降低了她的平均消息长度。但它引入了一个新问题：有时Bob会不小心使用Alice的代码。令人惊讶的是，鲍勃不小心使用Alice的代码而Alice使用了Bob的代码，这样会更糟糕！
 
 那么，现在我们有四种可能性：
-
 - Bob使用他自己的代码H(p)=1.75 bits
 - Alice使用Bob的代码Hp(q)=2.25 bits
 - Alice使用自己的代码H(q)=1.75 bits
@@ -299,7 +300,7 @@ H(p)=∑p(x)log2⁡(1/p(x))
 
 我们将这种差异称为Kullback-Leibler分歧，或KL分歧。p相对于q，Dq(p)，[5](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fn5) 的KL偏差定义为：[6](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fn6)
 
-Dq(p)=Hq(p)−H(p)
+> Dq(p)=Hq(p)−H(p)
 
 关于KL分歧的真正好处在于它就像两个分布之间的距离。它可以量化分布间的不同！ （如果你认真对待这个想法，最终会得到信息几何。）
 
@@ -323,7 +324,7 @@ Dq(p)=Hq(p)−H(p)
 
 我们称之为X和Y的联合熵
 
->H(X,Y)=∑x,yp(x,y)log2⁡(1p(x,y))
+> H(X,Y)=∑x,yp(x,y)log2⁡(1p(x,y))
 
 这与我们的正常定义完全相同，除了是两个变量而不是一个变量之外。
 
@@ -343,7 +344,7 @@ Dq(p)=Hq(p)−H(p)
 
 我们称之为条件熵。如果你把它形式化成一个方程，你会得到：
 
->H(X|Y)=∑yp(y)∑xp(x|y)log2⁡(1p(x|y))=∑x,yp(x,y)log2⁡(1p(x|y))
+> H(X|Y)=∑yp(y)∑xp(x|y)log2⁡(1p(x|y))=∑x,yp(x,y)log2⁡(1p(x|y))
 
 ## 互信息
 
@@ -445,25 +446,16 @@ Cover & Thomas的信息论元素似乎是标准参考。我发现这很有用。
 
 最后，感谢那些发现错误和遗漏的读者。 特别感谢Connor Zwick，Kai Arulkumaran，Jonathan Heusser，Otavio Good和一位匿名评论者。
 
-------
 
-1. 用这个来可视化朴素的贝叶斯分类器很有趣，它们假设独立......[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref1)
-
-2. 但非常低效！ 如果我们在代码中使用了额外的符号，那么只在代码字的末尾使用它就会是一种可怕的浪费。[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref2)
-
-3. 我在这里作弊。 我一直在使用底数为2的指数，这不是真的，我将切换到自然指数。 这节省了我们在证明中有很多log(2)s，并阅读体验更好。[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref3)
-
-4. 注意，这种交叉熵的表示法是非标准的。 通常的表示法是H(p,q)。 由于两个原因，这种表示法很糟糕。 首先，联合熵也用完全相同的符号。 其次，它使得交叉熵看起来像是对称的。 这太荒谬了，我将用Hq(p）来代替。[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref4)
-
-5. 也是非标准的表示法。[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref5)
-
-6. 如果扩展KL分歧的定义，你得到：Dq(p)=∑p(x)log2⁡(p(x)/q(x)) 这可能看起来有点奇怪。 我们该怎么解释呢？ 那么，log2⁡(p(x)/q(x))就是为q优化的代码和为p优化的代码将使用多少位之间的差异 表示x。 表达式作为整体是两个代码将使用多少位的预期差异。[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref6)
-
-7. 这构建了Raymond W. Yeung论文中对信息理论的集合解释 [A New Outlook on Shannon’s Information Measures](http://www.cnd.mcgill.ca/~ivan/it_ineq_script/Raymond%20Yeung%20papers/A%20New%20Outlook%20on%20Shannon%E2%80%99s%20Information%20Measures%2000079902.pdf).[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref7)
-
-8. 如果扩展互信息的定义，您会得到：
-
-   I(X,Y)=∑p(x,y)log2⁡(p(x,y)/(p(x)p(y)))
+- 1. 用这个来可视化朴素的贝叶斯分类器很有趣，它们假设独立......[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref1)
+- 2. 但非常低效！ 如果我们在代码中使用了额外的符号，那么只在代码字的末尾使用它就会是一种可怕的浪费。[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref2)
+- 3. 我在这里作弊。 我一直在使用底数为2的指数，这不是真的，我将切换到自然指数。 这节省了我们在证明中有很多log(2)s，并阅读体验更好。[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref3)
+- 4. 注意，这种交叉熵的表示法是非标准的。 通常的表示法是H(p,q)。 由于两个原因，这种表示法很糟糕。 首先，联合熵也用完全相同的符号。 其次，它使得交叉熵看起来像是对称的。 这太荒谬了，我将用Hq(p）来代替。[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref4)
+- 5. 也是非标准的表示法。[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref5)
+- 6. 如果扩展KL分歧的定义，你得到：Dq(p)=∑p(x)log2⁡(p(x)/q(x)) 这可能看起来有点奇怪。 我们该怎么解释呢？ 那么，log2⁡(p(x)/q(x))就是为q优化的代码和为p优化的代码将使用多少位之间的差异 表示x。 表达式作为整体是两个代码将使用多少位的预期差异。[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref6)
+- 7. 这构建了Raymond W. Yeung论文中对信息理论的集合解释 [A New Outlook on Shannon’s Information Measures](http://www.cnd.mcgill.ca/~ivan/it_ineq_script/Raymond%20Yeung%20papers/A%20New%20Outlook%20on%20Shannon%E2%80%99s%20Information%20Measures%2000079902.pdf).[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref7)
+- 8. 如果扩展互信息的定义，您会得到：
+> I(X,Y)=∑p(x,y)log2⁡(p(x,y)/(p(x)p(y)))
 
    这看起来像 KL 分歧！
 
@@ -472,11 +464,8 @@ Cover & Thomas的信息论元素似乎是标准参考。我发现这很有用。
    一种很有趣的方法是把一个分布和它的朴素近似之间的比例画出来:
 
    ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/mutual-visual-eq.png)
-
-
-9. 有一整个量子信息论领域。 我对这个问题一无所知，但我敢打赌，基于Michael的其他工作，Michael Nielsen和Issac Chuang的Quantum Computation和Quantum Information是一个很好的介绍。[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref9)
-
-10. 作为一个对统计物理一无所知的人，我会非常紧张地试图勾勒出与我所理解的信息论的联系。
+- 9. 有一整个量子信息论领域。 我对这个问题一无所知，但我敢打赌，基于Michael的其他工作，Michael Nielsen和Issac Chuang的Quantum Computation和Quantum Information是一个很好的介绍。[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref9)
+- 10. 作为一个对统计物理一无所知的人，我会非常紧张地试图勾勒出与我所理解的信息论的联系。
 
 	在Shannon发现信息论之后，许多人注意到热力学方程和信息论方程之间存在可疑的相似性。E.T. Jaynes 发现了一个非常深刻和有原则的联系。 假设您有一些系统，并进行一些测量，如压力和温度。 您认为系统的特定状态是多大概率？ Jaynes建议我们应该假设概率分布，在我们测量条件的约束下，它最大化熵。 （请注意，这个“最大熵原理”比物理学更为普遍！）也就是说，我们应该假设具有最未知信息的可能性。 从这个角度可以得出许多结果。
 
@@ -484,13 +473,13 @@ Cover & Thomas的信息论元素似乎是标准参考。我发现这很有用。
 
     如果您对这种联系感兴趣但又不想完成论文的原始工作，那么Cover＆Thomas中有一个部分可以从马尔可夫链中获得热力学第二定律的统计版本！[↩](https://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref10)
 
-11. 信息理论与赌博之间的联系最初是由约翰凯利在他的论文“[信息率的新解释](http://www.princeton.edu/~wbialek/rome/refs/kelly_56.pdf)”中提出的。 这是一篇非常容易阅读的论文，虽然它需要我们在本文中没有提出的一些想法。
+- 11. 信息理论与赌博之间的联系最初是由约翰凯利在他的论文“[信息率的新解释](http://www.princeton.edu/~wbialek/rome/refs/kelly_56.pdf)”中提出的。 这是一篇非常容易阅读的论文，虽然它需要我们在本文中没有提出的一些想法。
 
     凯利对他的工作有一个有趣的动机。 他注意到熵正在许多成本函数中使用，这些函数与编码信息无关，并且需要一些原则性的原因。 在写这篇文章的时候，我也被同样的事情所困扰，并且非常感谢凯利的工作作为一个额外的视角。 也就是说，我并不觉得它完全令人信服：凯利只是因为他考虑了迭代投注，每次投注重新投入所有资金。 不同的设置不会导致熵。
 
     关于凯利在博彩和信息理论之间联系的一个很好的讨论可以在信息理论的标准参考资料中找到，即Cover＆Thomas的“信息理论要素”。[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref11)
 
-12. 它并没有解决这个问题，但我无法抗拒为KL分歧提供进一步的防御。
+- 12. 它并没有解决这个问题，但我无法抗拒为KL分歧提供进一步的防御。
 
     有一个结果，盖斯和托马斯称斯坦因的引理，虽然它似乎与通常称为斯坦因引理的结果无关。从高层次来看，它是这样的：
 
