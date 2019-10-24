@@ -174,11 +174,11 @@ $$
 
 下雨的几率是25％。如果下雨，我有75％的机会穿上外套。因此，下雨和我穿着外套的概率是25％的75％，大约是19％。下雨的概率乘以我穿着外套下雨的概率，是下雨时我穿外套的概率。我们写这个：
 
-> p(rain,coat) = p(rain)⋅p(coat | rain) 
+> p(rain,coat) = p(rain) ⋅ p(coat \| rain) 
 
 这是概率论最基本身份之一：
 
-> p(x,y) = p(x)⋅p(y|x)
+> p(x,y) = p(x) ⋅ p(y \| x)
 
 我们将分配*考虑在内*，将其分解为两件产品。首先，我们看一个变量（如天气）将采取某个值的概率。然后我们看一下另一个变量（如我的衣服）在第一个变量上采用某个值的概率。
 
@@ -186,7 +186,7 @@ $$
 
 我们来看一个例子吧。如果我们选择一个随机的日子，那么我有38％的机会穿着外套。如果我们知道我穿着外套，下雨的可能性有多大？嗯，我更有可能在雨中穿一件外套而不是在阳光下，但在加利福尼亚州下雨很少见，所以它有50％的可能性在下雨。因此，下雨和我穿外套的可能性是我穿着外套的概率（38％），如果我穿着外套（50％）是下雨的可能性的概率是约19％。
 
-> p(rain,coat)=p(coat)⋅p(rain | coat)
+> p(rain,coat)=p(coat) ⋅ p(rain \| coat)
 
 这为我们提供了一种完全相同概率分布的可视化方法。
 
@@ -391,10 +391,10 @@ $$
 为了降低通信成本，我让Alice使用自己的代码。令我宽慰的是，这降低了她的平均消息长度。但它引入了一个新问题：有时Bob会不小心使用Alice的代码。令人惊讶的是，鲍勃不小心使用Alice的代码而Alice使用了Bob的代码，这样会更糟糕！
 
 那么，现在我们有四种可能性：
-- Bob使用他自己的代码H(p)=1.75 bits
-- Alice使用Bob的代码Hp(q)=2.25 bits
-- Alice使用自己的代码H(q)=1.75 bits
-- Bob使用Alice的代码Hq(p)=2.375 bits
+- Bob使用他自己的代码 H(p)=1.75 bits
+- Alice使用Bob的代码 Hp(q)=2.25 bits
+- Alice使用自己的代码 H(q)=1.75 bits
+- Bob使用Alice的代码 Hq(p)=2.375 bits
 
 这不一定像人们想象的那样直观。例如，我们可以看到Hp(q)≠Hq(p)。有什么方法可以看出这四个值如何相互关联？
 
@@ -402,7 +402,7 @@ $$
 
 ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/CrossEntropyCompare.png)
 
-你能明白为什么Hp(q)≠Hq(p)吗？ Hq(p)很大，因为在p下有一个非常常见的事件（蓝色）但得到一个长代码，因为它在q下非常罕见。 另一方面，q下的常见事件在p下较不常见，但差别不那么大，因此Hp(q) 不那么高。
+你能明白为什么Hp(q) ≠ Hq(p)吗？ Hq(p)很大，因为在p下有一个非常常见的事件（蓝色）但得到一个长代码，因为它在q下非常罕见。 另一方面，q下的常见事件在p下较不常见，但差别不那么大，因此Hp(q) 不那么高。
 
 交叉熵不是对称的。
 
@@ -418,7 +418,7 @@ $$
 
 我们将这种差异称为Kullback-Leibler分歧，或KL分歧。p相对于q，Dq(p)，[5](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fn5) 的KL偏差定义为：[6](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fn6)
 
-> Dq(p)=Hq(p)−H(p)
+> Dq(p) = Hq(p)−H(p)
 
 关于KL分歧的真正好处在于它就像两个分布之间的距离。它可以量化分布间的不同！ （如果你认真对待这个想法，最终会得到信息几何。）
 
@@ -462,7 +462,7 @@ $$
 
 我们称之为条件熵。如果你把它形式化成一个方程，你会得到：
 
-> H(X|Y)=∑yp(y)∑xp(x|y)log2⁡(1p(x|y))=∑x,yp(x,y)log2⁡(1p(x|y))
+> H(X\|Y)=∑yp(y)∑xp(x\|y)log2⁡(1p(x\|y))=∑x,yp(x,y)log2⁡(1p(x\|y))
 
 ## 互信息
 
@@ -480,11 +480,11 @@ $$
 
 这听起来有点复杂，但是当我们从条形图的角度来考虑时，它非常简单。H(X|Y) 是我们需要发送以将X发送给已经知道Y的人的信息，X中的信息不在Y中。从可视化来看，这意味着H(X|Y)是H(X)条的一部分，它与H(Y)不重叠。
 
-您现在可以从下图中读取不等式H(X,Y)≥H(X)≥H(X|Y)。
+您现在可以从下图中读取不等式H(X,Y)≥H(X)≥H(X\|Y)。
 
 ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/Hxy-info-4.png)
 
-另一个标识是H(X,Y)=H(Y)+H(X|Y)。 也就是说，X和Y中的信息是 Y中的信息加上X不在Y中的信息。
+另一个标识是H(X,Y)=H(Y)+H(X\|Y)。 也就是说，X和Y中的信息是 Y中的信息加上X不在Y中的信息。
 
 ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/Hxy-overview-sum.png)
 
