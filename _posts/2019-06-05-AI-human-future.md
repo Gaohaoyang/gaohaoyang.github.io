@@ -3,7 +3,7 @@ layout: post
 title:  "【完整版】人类唯一的出路：变成人工智能"
 date:   2019-06-04 23:41:00
 categories: 人工智能
-tags: 人工智能 AI 人类简史
+tags: 人工智能 AI 人类简史 人文 哲学 康德 汉字屋 清华大学 天机 自行车 AGI 类脑 类机
 excerpt: 深度思考
 mathjax: true
 ---
