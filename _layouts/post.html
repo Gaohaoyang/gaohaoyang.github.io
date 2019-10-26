@@ -108,22 +108,6 @@ layout: default
         <h2 id="comments">Comments</h2>
         {% include comments.html %}
 	
-	<!-- Gitment评论插件: https://frankjkl.github.io/2019/01/08/blogbuild-%E5%9C%A8Jekyll%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0gitment%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/ -->
-	<div id="gitmentContainer"></div>
-	<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-	<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-	<script>
-	var gitment = new Gitment({
-	    id : '{{ page.date }}',
-	    owner: 'wqw547243068',
-	    repo: 'wqw547243068.github.io',
-	    oauth: {
-		client_id: 'a34109f2e38d41848408',
-		client_secret: 'f160d63b9c327b3b4ba6a7df973e6a3b7902827d',
-	    },
-	});
-	gitment.render('gitmentContainer');
-	</script>
 	
     </div>
     <button class="anchor"><i class="fa fa-anchor"></i></button>
