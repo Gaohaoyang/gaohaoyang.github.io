@@ -83,6 +83,20 @@
 </div>
 <!-- City版安装代码已完成 -->
 
-
+<!-- Gitment评论插件 -->
+<div id="gitmentContainer"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+    owner: 'wqw547243068',
+    repo: 'wqw547243068.github.io',
+    oauth: {
+        client_id: 'a34109f2e38d41848408',
+        client_secret: 'f160d63b9c327b3b4ba6a7df973e6a3b7902827d',
+    },
+});
+gitment.render('gitmentContainer');
+</script>
 
 
