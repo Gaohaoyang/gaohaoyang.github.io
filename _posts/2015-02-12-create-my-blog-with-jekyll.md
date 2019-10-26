@@ -90,13 +90,14 @@ $$f \left( x _ { n + 1 } \right) - f \left( x _ { n } \right) = f ^ { \prime } \
 
 ### 脑图嵌入
 - processon
+
 ```html
 <iframe id="embed_dom" name="embed_dom" frameborder="0" style="display:block;width:700px; height:900px;" src="https://www.processon.com/embed/mind/581dee8ee4b0c6fe57213cd9"></iframe>
 ```
 
 - xmind脑图
    - 【2019-08-02】[xmind图](https://www.xmind.net/m/YPMsKe/#)
-   
+
 ```html
 <iframe src='https://www.xmind.net/embed/YPMsKe/' width='750' height='540' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
 ```
@@ -156,8 +157,6 @@ Authorization Callback URL: https://frankjkl.github.io //一定要写自己Githu
 注册成功后会得到`Client ID`和`Client Secret`
 
 
-
-
 ##### 2、在jekyll博客调用gitment
 
 如gitment项目页Readme所示，在你需要添加评论系统的地方，一般是`_layout/`目录下的 `post.html`, 添加一下代码
@@ -190,7 +189,7 @@ gitment.render('container')
 
 1. 上面第2步代码添加成功并上传后，你就可以在你的博文页下面看到一个评论框，还有看到以下错误`Error: Comments Not Initialized`，提示该篇博文的评论系统还没初始化
 
-   ![1546944230319](/assert/1546944230319.png)
+   ![1546944230319](https://frankjkl.github.io/assert/1546944230319.png)
 
 2. 点击`Login with GitHub`后，使用自己的github账号（必须跟第二步owner用户名相同的账号）登录后，就可以在上面错误信息处看到一个`Initialize Comments`的按钮
 
@@ -198,7 +197,7 @@ gitment.render('container')
 
 3. 点击`Initialize Comments`按钮后，就可以开始对该篇博文开始评论了， 同时也可以在对应的github仓库看到相应的issue
 
-   ![1546944090342](/assert/1546944090342.png)
+   ![1546944090342](https://frankjkl.github.io/assert/1546944090342.png)
 
 
 
@@ -209,7 +208,6 @@ gitment.render('container')
 owner或者repo配置错误了，照着第二步来就好，网页端生成后如下
 
 ```javascript
-...
 <script>
     var gitment = new Gitment({
         id: '\{\{ page.date \}\}', #\为转义字符，应用时需要删掉
@@ -222,7 +220,6 @@ owner或者repo配置错误了，照着第二步来就好，网页端生成后�
     })
     gitment.render('container')
 </script>
-...
 ```
 
 
@@ -265,7 +262,7 @@ owner或者repo配置错误了，照着第二步来就好，网页端生成后�
 
 **发生时间：**评论的初始化时
 
-原因：由于gitment的评论是基于GitHub issue的，所以评论初始化时，会生成文章对应的issue，以及通过https://jjeejj.github.io/js/gitment.js生成issue的label。其中的labels有两个，一个是gitment，另一个就是文章的URL，但是label的最大长度限制是50个字符，而我们的URL中包含域名与文章名，有时会超出限制。所以才会发生validation failed
+原因：由于gitment的评论是基于GitHub issue的，所以评论初始化时，会生成文章对应的issue，以及通过https://jjeejj.github.io/js/gitment.js 生成issue的label。其中的labels有两个，一个是gitment，另一个就是文章的URL，但是label的最大长度限制是50个字符，而我们的URL中包含域名与文章名，有时会超出限制。所以才会发生validation failed
 
 **解决：**
 
