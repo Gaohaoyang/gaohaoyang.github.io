@@ -245,6 +245,10 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=66583807&cid=116735636&page=3" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+- 【2019-10-26】俄罗斯拍摄的纪录片《[中国的重生](https://www.bilibili.com/video/av69780746)》，彩色开国大典
+
+<iframe src="//player.bilibili.com/player.html?aid=69780746&cid=120921841&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 ## 文娱
 
 - 【2019-09-01】IT码农转型说相声，[80后脱口秀韦若琛合集](https://www.ixigua.com/i6730450427185201671/)
