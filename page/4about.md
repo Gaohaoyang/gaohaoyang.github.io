@@ -39,7 +39,7 @@ type: page
 * Email：wqw547243068@{163,gmail}.com
 * [知乎](https://www.zhihu.com/people/wangqiwen/activities)
 
-<img src="https://github.com/wqw547243068/wqw547243068.github.io/blob/master/wqw/fig/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0.jpg" height="100%" width="500" />
+![](https://github.com/wqw547243068/wqw547243068.github.io/raw/master/wqw/fig/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0.jpg)
 
 ## 关于本站
 
