@@ -92,11 +92,11 @@
 <script>
 var gitment = new Gitment({
     id : '{{ page.date }}',
-    owner: '{ {site.github_username} }',
-    repo: '{ {site.comment_gitalk_repo} }',
+    owner: '{{site.github_username}}',
+    repo: '{{site.comment_gitalk_repo}}',
     oauth: {
-        client_id: '{ {site.comment_gitalk_clientId} }',
-        client_secret: '{ {site.comment_gitalk_clientSecret} }',
+        client_id: '{{site.comment_gitalk_clientId}}',
+        client_secret: '{{site.comment_gitalk_clientSecret}}',
     },
 });
 gitment.render('gitmentContainer');
@@ -110,11 +110,11 @@ gitment.render('gitmentContainer');
 <script>
     var gitalk  = new Gitalk ({
         id: window.location.pathname,   // Ensure uniqueness and length less than 50
-        clientID: '{ {site.comment_gitalk_clientId} }',
-        clientSecret: '{ {site.comment_gitalk_clientSecret} }',
-        repo: '{ {site.comment_gitalk_repo} }',
-        owner: '{ {site.github_username} }',
-        admin: ['{ {site.github_username} }'],
+        clientID: '{{site.comment_gitalk_clientId}}',
+        clientSecret: '{{site.comment_gitalk_clientSecret}}',
+        repo: '{{site.comment_gitalk_repo}}',
+        owner: '{{site.github_username}}',
+        admin: ['{{site.github_username}}'],
 	distractionFreeMode: True  // Facebook-like distraction free mode
     })
     gitalk.render('gitalk-container')
