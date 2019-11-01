@@ -35,6 +35,15 @@ comments: true
 # You can get your uid from https://livere.com/insight/myCode (General web site)
 livere_uid: MTAyMC80NTU2OC8yMjA3OQ==
 
+# [2019-10-30]
+
+# [2019-11-01]gittalk评论插件， https://aerolith.ink/2018/08/25/Gitalk/
+
+# Gitalk settings
+comment_gitalk_clientId: a34109f2e38d41848408
+comment_gitalk_clientSecret: f160d63b9c327b3b4ba6a7df973e6a3b7902827d
+comment_gitalk_repo: wqw547243068.github.io
+github_username: wqw547243068
 
 # statistic analysis 统计代码
 # 百度统计 id，将统计代码替换为自己的百度统计id，即
