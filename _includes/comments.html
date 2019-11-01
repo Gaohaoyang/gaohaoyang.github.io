@@ -92,11 +92,11 @@
 <script>
 var gitment = new Gitment({
     id : '{{ page.date }}',
-    owner: 'wqw547243068',
-    repo: 'wqw547243068.github.io',
+    owner: '{ {site.github_username} }',
+    repo: '{ {site.comment_gitalk_repo} }',
     oauth: {
-        client_id: 'a34109f2e38d41848408',
-        client_secret: 'f160d63b9c327b3b4ba6a7df973e6a3b7902827d',
+        client_id: '{ {site.comment_gitalk_clientId} }',
+        client_secret: '{ {site.comment_gitalk_clientSecret} }',
     },
 });
 gitment.render('gitmentContainer');
@@ -115,7 +115,7 @@ gitment.render('gitmentContainer');
         repo: '{ {site.comment_gitalk_repo} }',
         owner: '{ {site.github_username} }',
         admin: ['{ {site.github_username} }'],
-		    distractionFreeMode: false  // Facebook-like distraction free mode
+	distractionFreeMode: True  // Facebook-like distraction free mode
     })
     gitalk.render('gitalk-container')
 </script> 
