@@ -165,7 +165,7 @@ layout: default
                 </div>
                 <ul  class="content-ul">
                     {% for s in site.useful_urls %}
-                      <p><a href="{{s[1]}}">{{s[0]}}</a>：{{s[2]}}
+                      <li><a href="{{s.url}}">{{s.name}}</a>：{{s.desc}}</li>
                     {% endfor %}
                 </ul>
             </div>

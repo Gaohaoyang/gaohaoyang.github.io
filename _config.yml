@@ -77,9 +77,20 @@ paginate: 6
 
 
 # useful websites
-useful_urls: [
-  ['数林觅风' , 'https://woaielf.github.io/', '精美脑图笔记'],
-  ['Jay Alammar' , 'https://jalammar.github.io/', '【精品】图解系列'],
-  ['左耳朵耗子', 'https://coolshell.cn', '酷壳'],
-  ['hht', 'https://xhhszc.github.io', '实践']
-]
+useful_urls:
+  - 
+    name : 数林觅风
+    url : https://woaielf.github.io/
+    desc : 精美脑图笔记
+  - 
+    name : Jay Alammar
+    url : https://jalammar.github.io/
+    desc : 【精品】图解系列
+  - 
+    name : 酷壳
+    url : https://coolshell.cn
+    desc : 左耳朵耗子
+  - 
+    name : hht
+    url : https://xhhszc.github.io
+    desc : 实践
