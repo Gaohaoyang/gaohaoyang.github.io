@@ -4,11 +4,10 @@
   {% include head.html %}
 
   <body>
-
     {% include header.html %}
 
         {{ content }}
-
+        
     {% include footer.html %}
     {% include backToTop.html %}
     <script src="{{ " /js/main.js " | prepend: site.baseurl }}" charset="utf-8"></script>
@@ -22,30 +21,5 @@
     </script>
     <!-- <script src="{{ " /js/scroll.min.js " | prepend: site.baseurl }}" charset="utf-8"></script> -->
   </body>
-
-<!-- [2019-08-07]搜索框 -->
-<!-- HTML elements for search -->
-<input type="text" id="search-input" placeholder="Search blog posts..">
-<ul id="results-container"></ul>
-
-<!-- script pointing to jekyll-search.js -->
-<script src="{{ site.baseurl }}/js/simple-jekyll-search.min.js"></script>
-
-<!-- <script src="https://cdn.rawgit.com/christian-fei/Simple-Jekyll-Search/master/dest/simple-jekyll-search.min.js"></script> -->
-
-  <!-- [2019-08-07]搜索框 -->
-    <script>
-      window.simpleJekyllSearch = new SimpleJekyllSearch({
-        searchInput: document.getElementById('search-input'),
-        resultsContainer: document.getElementById('results-container'),
-        json: '{{ site.baseurl }}/search.json',
-        searchResultTemplate: '<li><a href="{url}?query={query}" title="{desc}">{title}</a></li>',
-        noResultsText: 'No results found',
-        limit: 10,
-        fuzzy: false,
-        exclude: ['Welcome']
-      })
-    </script>
-
   
 </html>

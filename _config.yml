@@ -17,6 +17,7 @@ permalink: /:year/:month/:day/:title/
 twitter_username: wqw547243068
 facebook_username: wqw547243068@163.com
 github_username:  wqw547243068
+github_home:  http://wqw547243068.github.com
 email: wqw547243068@163.com
 weibo_username: u/1232977597
 zhihu_username: wangqiwen
@@ -43,7 +44,6 @@ livere_uid: MTAyMC80NTU2OC8yMjA3OQ==
 comment_gitalk_clientId: a34109f2e38d41848408
 comment_gitalk_clientSecret: f160d63b9c327b3b4ba6a7df973e6a3b7902827d
 comment_gitalk_repo: wqw547243068.github.io
-github_username: wqw547243068
 
 # statistic analysis 统计代码
 # 百度统计 id，将统计代码替换为自己的百度统计id，即
@@ -74,3 +74,12 @@ excerpt_separator: "\n\n\n\n"
 # paginate
 gems: [jekyll-paginate]
 paginate: 6
+
+
+# useful websites
+useful_urls: [
+  ['数林觅风' , 'https://woaielf.github.io/', '精美脑图笔记'],
+  ['Jay Alammar' , 'https://jalammar.github.io/', '【精品】图解系列'],
+  ['左耳朵耗子', 'https://coolshell.cn', '酷壳'],
+  ['hht', 'https://xhhszc.github.io', '实践']
+]

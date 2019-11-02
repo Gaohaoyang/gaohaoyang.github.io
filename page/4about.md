@@ -78,11 +78,7 @@ type: page
 ## 访问统计
 
 <!-- 访问统计可视化工具 -->
-
-<div class="side">
-      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/1.js?i=5q2837r7gjo&amp;s=350&amp;m=7&amp;v=true&amp;r=false&amp;b=000000&amp;n=false&amp;c=ff0000" async="async">
-      </script>
-</div>
+{% include tool_visit.html %}
 
 ## 其它
 

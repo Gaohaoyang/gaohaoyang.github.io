@@ -32,28 +32,13 @@ layout: default
 
         </div>
         
-<!-- [2019-08-05]百度分享插件, 失效 -->
-<div class="bdsharebuttonbox">
-    <a href="#" class="bds_more" data-cmd="more"></a>
-    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
-    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
-    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-</div>
-<script>
-    window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"{{ post.title }}","bdMini":"2","bdMiniList":false,"bdPic":"http://news.zx123.cn/uploadfile/news68/1800961ad02811e7b1c400163e010ef1.jpg","bdStyle":"0","bdSize":"32"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"32"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-</script>
-        
         <!-- 文章内容 -->
         <hr>
-        <article itemscope itemtype="http://schema.org/BlogPosting">
-        {{content}}
-        </article>
+            <article itemscope itemtype="http://schema.org/BlogPosting">
+                {{content}}
+            </article>
         <hr>
         <h2 id="share">Share</h2>
-        
-<script>
-    window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"{{ post.title }}","bdMini":"2","bdMiniList":false,"bdPic":"http://news.zx123.cn/uploadfile/news68/1800961ad02811e7b1c400163e010ef1.jpg","bdStyle":"0","bdSize":"32"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"32"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-</script>
        
         <!-- 打赏 -->
         {% include tool_award.html %}
@@ -85,22 +70,21 @@ layout: default
             </ul>
         {% endif %}
 	
-	
         <!-- 翻页 -->
         {% include previousAndNext.html %}
-	
 	
         <!-- 评论区 -->
         <h2 id="comments">Comments</h2>
         {% include comments.html %}
-	
 	
     </div>
     <button class="anchor"><i class="fa fa-anchor"></i></button>
     <!-- 右侧工具栏 -->
     <div class="right">
         <!-- 搜索框 -->
-	    {% include tool_search.html %}
+        {% include tool_search.html %}
+        <!-- 访问可视化 -->
+        {% include tool_visit.html %}
         <div class="wrap">
             <!-- Content目录区 -->
             <div class="side content">
@@ -114,17 +98,11 @@ layout: default
                     <li><a href="#comments">Comments</a></li>
                 </ul>
             </div>
-            
-            <!-- 其他div框放到这里 -->
-            
             <!-- 公众号区 -->
-            <div class="side content">
-                <div>My Moment ( 微信公众号 )</div>
-                <img src="https://raw.githubusercontent.com/wqw547243068/wangqiwen/master/other/figure/wqw.png" alt="欢迎关注鹤啸九天" />
-	    </div>
-            
-            
+            {% include tool_moment.html %}
+            <!-- 其他div框放到这里 -->
             <!-- <div class="side">bbbb</div> -->
+            
         </div>
 
     </div>
