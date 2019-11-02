@@ -186,6 +186,14 @@ mathjax: true
 
 # 万物的本质
 
+## 什么是弦理论
+
+弦理论是在发展中理论物理的一个分支。是一个量子力学与广义相对论的万有理论。它的核心在于用一段段“能量弦线”作为一种基本单位来解释宇宙中的微观粒子的组成，而弦的不同震动模式也对应着不同的基本粒子。
+
+什么是弦理论？[Youtube](https://www.youtube.com/channel/UCShHFwKyhcDo3g7hr4f1R8A), [B站](https://www.bilibili.com/video/av73865746)
+
+<iframe src="//player.bilibili.com/player.html?aid=73865746&cid=126353505&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+
 ## [万物的本质：一切都是虚空](http://baijiahao.baidu.com/s?id=1648083245868724035&wfr=spider&for=pc)
 
 每天，我们都在忙忙碌碌工作，我们吃饭，坐车上班，在办公室用电脑办公，下班回家坐沙发上看电视，晚上躺在床上惬意地睡个觉。
