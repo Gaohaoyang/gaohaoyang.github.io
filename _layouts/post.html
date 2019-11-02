@@ -55,15 +55,8 @@ layout: default
     window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"{{ post.title }}","bdMini":"2","bdMiniList":false,"bdPic":"http://news.zx123.cn/uploadfile/news68/1800961ad02811e7b1c400163e010ef1.jpg","bdStyle":"0","bdSize":"32"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"32"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
 </script>
        
-    <!-- 【2019-08-06】打赏功能,  http://www.twistedwg.com/2018/05/06/jekyll-reward.html-->
-    <div class="reward">
-		<div class="reward-button">赏 <span class="reward-code">
-			<span class="alipay-code"> <img class="alipay-img wdp-appear" src="/wqw/fig/alipay.png"><b>支付宝打赏</b> </span>
-			<span class="wechat-code"> <img class="wechat-img wdp-appear" src="/wqw/fig/wechatpay.png"><b>微信打赏</b> </span> </span>
-		</div>
-		<p class="reward-notice">您的打赏是对我最大的鼓励！</p>
-	</div>
-        
+        <!-- 打赏 -->
+        {% include tool_award.html %}
         <!-- 相关文章推荐 -->
         {% assign hasSimilar = '' %}
         {% for post in site.related_posts %}
@@ -104,17 +97,10 @@ layout: default
 	
     </div>
     <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <!-- 右侧工具栏 -->
     <div class="right">
-	  <div>
-<!-- [2019-08-07]搜索框 -->
-<!-- HTML elements for search -->
-<input type="text" id="search-input" placeholder="Search blog posts..">
-<ul id="results-container"></ul>
-<!-- script pointing to jekyll-search.js -->
-<script src="{{ site.baseurl }}/js/simple-jekyll-search.min.js"></script>
-<!-- or -->
-<!-- <script src="https://cdn.rawgit.com/christian-fei/Simple-Jekyll-Search/master/dest/simple-jekyll-search.min.js"></script> -->
-	    </div>
+        <!-- 搜索框 -->
+	    {% include tool_search.html %}
         <div class="wrap">
             <!-- Content目录区 -->
             <div class="side content">
