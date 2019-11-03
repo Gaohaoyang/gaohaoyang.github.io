@@ -20,6 +20,21 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=19156453&cid=31366860&page=1" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+## 宗教
+
+- 【2019-11-03】佛教纪录片[《古道清凉 The Ancient Path To Enlightenment》](http://www.jiluhome.cn/the-ancient-path-to-enlightenment.html), 视频地址：[上](https://v.youku.com/v_show/id_XMTM2MDQyNDY1Mg==.html), [下](https://v.youku.com/v_show/id_XMTM2MDYwMzAxMg==.html)
+- 辽宁海城大悲寺僧团根据佛制戒律、常住规约，以行脚十九年来走过辽宁、北京、天津、河北、内蒙古、山西、陕西等北方五省两市，行程6000余公里，修行二时头陀的历史资料，整理制作了全面记录当代头陀僧真实修行生活和佛教戒律概貌的佛教系列纪录片——《古道清凉》
+
+![](http://images.jiluhome.cn/wp-content/uploads/2016/10/1-14.jpg)
+
+![](http://images.jiluhome.cn/wp-content/uploads/2016/10/6-4.jpg)
+
+![](http://images.jiluhome.cn/wp-content/uploads/2016/10/7-4.jpg)
+
+<iframe height=498 width=510 src='http://player.youku.com/embed/XMTM2MDQyNDY1Mg==' frameborder=0 'allowfullscreen'></iframe>
+
+<iframe height=498 width=510 src='http://player.youku.com/embed/XMTM2MDYwMzAxMg==' frameborder=0 'allowfullscreen'></iframe>
+
 ## 社会
 
 - 反映社会的短片：[Dinner for few](http://www.365yg.com/a6604023738310590980/#mid=1605851765491715),[B站](https://www.bilibili.com/video/av36040687/?p=2)
