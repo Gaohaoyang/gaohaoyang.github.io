@@ -31,9 +31,11 @@ mathjax: true
 
 ![](http://images.jiluhome.cn/wp-content/uploads/2016/10/7-4.jpg)
 
-<iframe height=498 width=510 src='http://player.youku.com/embed/XMTM2MDQyNDY1Mg==' frameborder=0 'allowfullscreen'></iframe>
+上集：
+<iframe src="http://player.youku.com/embed/XMTM2MDQyNDY1Mg==" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+下集：
+<iframe src="http://player.youku.com/embed/XMTM2MDYwMzAxMg==" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
-<iframe height=498 width=510 src='http://player.youku.com/embed/XMTM2MDYwMzAxMg==' frameborder=0 'allowfullscreen'></iframe>
 
 ## 社会
 
