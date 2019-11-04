@@ -1,17 +1,3 @@
-  <!-- [2019-08-07]搜索框 -->
-  <script>
-    window.simpleJekyllSearch = new SimpleJekyllSearch({
-      searchInput: document.getElementById('search-input'),
-      resultsContainer: document.getElementById('results-container'),
-      json: '{{ site.baseurl }}/search.json',
-      searchResultTemplate: '<li><a href="{url}?query={query}" title="{desc}">{title}</a></li>',
-      noResultsText: 'No results found',
-      limit: 10,
-      fuzzy: false,
-      exclude: ['Welcome']
-    })
-  </script>
-        
 <div>
     <!-- HTML elements for search -->
     <input type="text" id="search-input" placeholder="Search blog posts..">
