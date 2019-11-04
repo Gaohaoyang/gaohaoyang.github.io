@@ -156,18 +156,9 @@ layout: default
                       <a href="{{ root_url }}/{{ site.tag_dir }}#{{ tag[0] }}" style="font-size: {{ size }}pt; color: #{{ color }}{{ color }}{{ color }};">{{ tag[0] }}</a>
                     {% endfor %}
                 </div>
-            </div>
 
-            <div class="side">
-                <div>
-                    <i class="fa fa-external-link"></i>
-                    Links
-                </div>
-                <ul  class="content-ul">
-                    {% for s in site.useful_urls %}
-                      <li><a href="{{s.url}}">{{s.name}}</a>：{{s.desc}}</li>
-                    {% endfor %}
-                </ul>
+		{% include tool_links.html %}
+		
             </div>
         </div>
     </div>
