@@ -38,11 +38,13 @@ layout: default
                 {{content}}
             </article>
         <hr>
-        <h2 id="share">Share</h2>
-        {% include tool_share.html %}
-	    
+        
         <!-- 打赏 -->
         {% include tool_award.html %}
+	
+	<!-- 分享工具 -->
+	<h2 id="share">Share</h2>
+        {% include tool_share.html %}
         <!-- 相关文章推荐 -->
         {% assign hasSimilar = '' %}
         {% for post in site.related_posts %}
