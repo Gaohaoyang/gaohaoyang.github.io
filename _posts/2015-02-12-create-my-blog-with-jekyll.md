@@ -114,6 +114,7 @@ $$f \left( x _ { n + 1 } \right) - f \left( x _ { n } \right) = f ^ { \prime } \
 ```
 
 - [不蒜子](http://busuanzi.ibruce.info/) 静态站点统计, 两行代码搞定
+![](http://busuanzi.ibruce.info/images/garlic.png)
 
 ```html
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
