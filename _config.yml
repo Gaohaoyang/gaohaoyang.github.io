@@ -79,17 +79,57 @@ paginate: 6
 # useful websites
 useful_urls:
   - 
-    name : 数林觅风
-    url : https://woaielf.github.io/
-    desc : 精美脑图笔记
+    name : waitbutwhy
+    url : https://waitbutwhy.com/
+    desc : 国外知名科技博主
+  -
+    name : 3blue1brown
+    url : http://www.3blue1brown.com/
+    desc : 优质数学教学视频
+  -
+    name : Google AI Lab
+    url : https://aiexperiments.withgoogle.com/
+    desc : 汇总各种有意思的demo
+  -
+    name : Yann Lecun(杨立昆)
+    url : http://yann.lecun.com/
+    desc : 三巨头之一
+  -
+    name : Andrej Karpathy
+    url : http://karpathy.github.io/
+    desc : 深度学习界的AK47
   - 
     name : Jay Alammar
     url : https://jalammar.github.io/
     desc : 【精品】图解系列
+  -
+    name : 李宏毅 (Hung-yi Lee)
+    url : http://speech.ee.ntu.edu.tw/~tlkagk/
+    desc : 台大教授
+  -
+    name : Colah’s Blog
+    url : http://colah.github.io/
+    desc : 精品文章
+  -
+    name : Sota技术汇总
+    url : https://www.stateoftheart.ai/
+    desc : AI领域state-of-art技术汇总
+  - 
+    name : Sota代码
+    url : https://paperswithcode.com/sota
+    desc : 各领域效果最佳论文及代码
+  -
+    name : Tensorflow中国社区
+    url : https://www.tensorflowers.cn/
+    desc : 谷歌组织的TF社区
   - 
     name : 酷壳
     url : https://coolshell.cn
     desc : 左耳朵耗子
+  - 
+    name : 数林觅风
+    url : https://woaielf.github.io/
+    desc : 精美脑图笔记
   - 
     name : hht
     url : https://xhhszc.github.io
