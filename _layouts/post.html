@@ -45,9 +45,7 @@ layout: default
 	<!-- 分享工具 -->
 	<h2 id="share">Share</h2>
         {% include tool_share.html %}
-	
-        <!-- 相关文章推荐 -->
-	<h2 id="comments">Related Posts</h2>
+
         {% assign hasSimilar = '' %}
         {% for post in site.related_posts %}
             {% assign postHasSimilar = false %}
@@ -74,7 +72,8 @@ layout: default
         {% if hasSimilar.size > 0 %}
             </ul>
         {% endif %}
-	
+	<!-- 相关文章推荐 -->
+	<h2 id="comments">Related Posts</h2>
         <!-- 翻页 -->
         {% include previousAndNext.html %}
 	
