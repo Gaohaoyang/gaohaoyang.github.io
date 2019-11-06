@@ -90,6 +90,3 @@ type: page
 ![](https://static.segmentfault.com/v-5d2ffc9a/global/img/404.svg)
 
 
-## Comments
-
-{% include comments.html %}
