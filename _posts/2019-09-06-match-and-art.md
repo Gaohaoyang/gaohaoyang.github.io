@@ -11,6 +11,78 @@ mathjax: true
 * content
 {:toc}
 
+# 数学大师
+
+- [一张图让你读懂：为何他会成为数学系所有学生的噩梦](https://www.toutiao.com/a6756016099625550343/?timestamp=1573015520&app=news_article_lite&group_id=6756016099625550343&req_id=201911061245190100260770880BC2E150)
+
+![](http://p3.pstatp.com/large/pgc-image/cc401376250e4580afd0719d232f6c06)
+
+在漫漫的人类历史长河中
+
+各个伟大的数学家
+
+犹如布满“数学星空”中的星群
+
+他们追求最高的精确
+
+最合理的逻辑
+
+用生命燃烧真理
+
+然而在这一群数学天才中
+
+却只有“上帝之子”欧拉
+
+曾“偷取”上帝之语
+
+在人类文明中
+
+迸发出惊人的智慧光辉
+
+![](http://p1.pstatp.com/large/pgc-image/ecd74fe846a9465fbf6abc4598c41284)
+![](http://p1.pstatp.com/large/pgc-image/c37b4e970b1c43c5a98acf0576d1ec26)
+![](http://p1.pstatp.com/large/pgc-image/e5dcfcd16f804015b0e66b54e40b4d1e)
+![](http://p1.pstatp.com/large/pgc-image/32130edf72b44ed9a17994ca6b83f3c7)
+- 欧拉定理
+![](http://p1.pstatp.com/large/pgc-image/6cc0058c19574cce965d541fbe8ba53f)
+
+![](http://p3.pstatp.com/large/pgc-image/06b6d4b3971a4bf69774de03d3ca732f)
+- 欧拉常数
+![](http://p1.pstatp.com/large/pgc-image/a890a8a8a7144ff3bab23ea0d2505cb0)
+![](http://p1.pstatp.com/large/pgc-image/21727682928e4c8d9e6018bc2f80e791)
+- 欧拉定理
+![](http://p3.pstatp.com/large/pgc-image/1779a9cf573c4d2a85ff9a35f58aa347)
+![](http://p1.pstatp.com/large/pgc-image/18b1f396074e4ae8bbbca7f53d5df5b3)
+- 欧拉角
+![](http://p1.pstatp.com/large/pgc-image/6c57a1cfc96240bb986c57afb14b0c3d)
+![](http://p1.pstatp.com/large/pgc-image/d77a058814b64744b5d7e8acd6e72159)
+- 定义符号
+![](http://p3.pstatp.com/large/pgc-image/9da9bb7c13c74072b26fa51254c93d87)
+![](http://p3.pstatp.com/large/pgc-image/324292149bc74f5ea42f1de5602fcce1)
+![](http://p1.pstatp.com/large/pgc-image/b9075fcdea944ccf8f80d21fc1b115b8)
+![](http://p1.pstatp.com/large/pgc-image/3b2115dcc3674d348edad6feba33da6d)
+![](http://p3.pstatp.com/large/pgc-image/912d4c51b3774995af4098a0474bcde7)
+![](http://p3.pstatp.com/large/pgc-image/40691719032641d4a6c1a7016c437f32)
+- 欧拉公式
+![](http://p1.pstatp.com/large/pgc-image/db41dd4b7e7d4005bdd8cbf9a6b3ea0e)
+![](http://p3.pstatp.com/large/pgc-image/64e81ce015e84f9e8ebf619ba94b44c8)
+![](http://p3.pstatp.com/large/pgc-image/3d6d34b261fe4adb82557d3b1a49b073)
+![](http://p1.pstatp.com/large/pgc-image/e152dd6491ba424cb814bc6b4e725158)
+
+欧拉是我们所有人的导师。
+
+不仅仅是因为，每一个进入学校接受教育的人，都要学习，他所创造的数学知识。
+
+更是因为，他用苦难而光辉的一生，教导人们如何做人，如何做学问，如何生存。
+
+在极少天赋异禀的天才之中，我们很难再有机会见到，像欧拉这般，一生勤勉，为学术失明，却不曾因此，而停止前进的步伐。
+
+甚至用尽最后一刻，去照亮人类数学文明的每一个角落。
+
+而这个犹如上帝语言的e^iπ+1=0，是一个代表“潜心修炼，理性思索”的数学符号，将持续引领一批批优秀的数学科研工作者，继续前行。
+
+# 丘成桐：数理与人文
+
 - 摘自：[丘成桐：数理与人文-原创完整版](https://mp.weixin.qq.com/s?__biz=MzIwNTE1NTQ3OA==&mid=2671644342&idx=1&sn=211eaf328faab9aa8c1c393d516e592d&chksm=8dff934fba881a59b2622d316b8154a818de458e9f4d6535c8535e39eff2092b7b010e6ebe64&mpshare=1&scene=23&srcid=0905jde0aj0t0TWkACitMpgC&sharer_sharetime=1567734827129&sharer_shareid=b8d409494a5439418f4a89712efcd92a%23rd)
 
 ![](https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike272%2C5%2C5%2C272%2C90/sign=815edba46959252db71a155655f2685e/902397dda144ad340125be39d9a20cf430ad85f1.jpg)
