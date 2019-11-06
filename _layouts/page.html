@@ -1,17 +1,24 @@
 ---
 layout: default
 ---
-
+<!-- 适配其它markdown页面 -->
 <div class="page clearfix" post>
     <div class="left">
         <h1>{{page.title}}</h1>
         <hr>
         {{content}}
+        <!-- 打赏 -->
+        {% include tool_award.html %}
+        <!-- 分享工具 -->
+	    <h2 id="share">Share</h2>
+        {% include tool_share.html %}
     </div>
     <button class="anchor"><i class="fa fa-anchor"></i></button>
     <div class="right">
         <!-- 搜索框 -->
         {% include tool_search.html %}
+        <!-- 访问可视化 -->
+        {% include tool_visit.html %}
         <div class="wrap">
 
             <!-- Content -->
@@ -22,8 +29,9 @@ layout: default
                 <ul id="content-side" class="content-ul">
                 </ul>
             </div>
+            <!-- 公众号区 -->
+            {% include tool_moment.html %}
             <!-- 其他div框放到这里 -->
-            {% include tool_visit.html %}
             <!-- <div class="side">bbbb</div> -->
         </div>
     </div>
