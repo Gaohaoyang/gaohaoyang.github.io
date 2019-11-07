@@ -237,7 +237,13 @@ mathjax: true
 
 - [人工智能](https://v.youku.com/v_show/id_XMzM3Nzk0MjQ4.html?refer=seo_operation.liuxiao.liux_00003303_3000_Qzu6ve_19042900)
 
-<iframe height=498 width=510 src=“http://player.youku.com/embed/XMzM3Nzk0MjQ4” frameborder=0 allowfullscreen="true"></iframe>
+<iframe height=498 width=510 src="http://player.youku.com/embed/XMzM3Nzk0MjQ4" frameborder=0 allowfullscreen="true"></iframe>
+
+<iframe src="http://player.youku.com/embed/XMzM3Nzk0MjQ4" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+- [【拳头说书】9分钟解读刘慈欣《流浪地球》原著](https://www.bilibili.com/video/av41214971)
+
+<iframe src="//player.bilibili.com/player.html?aid=41214971&cid=72388155&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 ## 健康
 
