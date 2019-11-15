@@ -118,6 +118,10 @@ useful_urls:
     name : Sota代码
     url : https://paperswithcode.com/sota
     desc : 各领域效果最佳论文及代码
+  - 
+    name : Neurohive
+    url : https://neurohive.io/en/
+    desc : AI领域最新数据集+Sota效果
   -
     name : Tensorflow中国社区
     url : https://www.tensorflowers.cn/
