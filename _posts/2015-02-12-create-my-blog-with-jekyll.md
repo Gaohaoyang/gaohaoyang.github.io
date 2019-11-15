@@ -341,6 +341,10 @@ _layout/post.html添加插件
 ![](https://user-gold-cdn.xitu.io/2018/3/13/1621faaa92d3cae7?imageslim)
 
 
+### 加地图插件
+
+- [如何加百度地图插件](http://www.shejidaren.com/tian-jia-baidu-di-tu-dai-ma.html)
+
 ## Jekyll语法
 
 - [Jekyll 语法简单笔记](http://github.tiankonguse.com/blog/2014/11/10/jekyll-study.html)
