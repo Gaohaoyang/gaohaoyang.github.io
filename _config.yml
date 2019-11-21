@@ -119,6 +119,10 @@ useful_urls:
     url : http://colah.github.io/
     desc : 精品文章
   -
+    name : 深度学习前沿笔记
+    url : https://zhuanlan.zhihu.com/c_188941548
+    desc : 张俊林的优质专栏
+  -
     name : Sota技术汇总
     url : https://www.stateoftheart.ai/
     desc : AI领域state-of-art技术汇总
