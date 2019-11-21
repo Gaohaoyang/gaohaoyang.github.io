@@ -79,7 +79,7 @@ paginate: 6
 # useful websites
 useful_urls:
   - 
-    name : waitbutwhy
+    name : WaitButWhy
     url : https://waitbutwhy.com/
     desc : 国外知名科技博主
   -
@@ -94,6 +94,10 @@ useful_urls:
     name : Polo club
     url : https://poloclub.github.io/
     desc : Human-Centered AI of Georgia Tech, 各类AI可视化工作，含GAN Lab
+  - 
+    name : MANA
+    url : http://manaai.cn/
+    desc : AI算法市场
   -
     name : Yann Lecun(杨立昆)
     url : http://yann.lecun.com/
