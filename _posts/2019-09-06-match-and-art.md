@@ -412,4 +412,49 @@ mathjax: true
 
 在我看来，罗丹教导我们的，何止是艺术，他每一句话都可用在科研的创新上，我们用我们真摰纯朴的感情去找寻大自然的美丽，大自然的真实。我们都感谢以前的大师，我们在他们的肩膀上向前摸索，但我们也知道他们的道路不是唯一的，让我们勇往直前，建立我们自己了解大自然的道路！
 
+# [动图演示数学之美](https://www.toutiao.com/a6761755895421469195/?timestamp=1574431644&app=news_article_lite&group_id=6761755895421469195&req_id=20191122220723010012065149084A006D)
+
+学数学，就要看动图！
+
+所以今天准备了又17张动图，来满足各位欣赏数学之美！
+
+- 1. 圆周率π
+   - ![](http://p9.pstatp.com/large/pgc-image/575d65adf68c460885017a99cfc0a348)
+- 2. 正弦、余弦空间显示
+   - ![](http://p3.pstatp.com/large/pgc-image/ceebdefe879347b49833aaf9c4855dce)
+- 3. 绘制椭圆
+   - ![](http://p3.pstatp.com/large/pgc-image/a8c5cf5d4d234ce0a691d8e4f699c206)
+- 4. 分形
+   - ![](http://p1.pstatp.com/large/pgc-image/29a570134acc4882b3db1bcdf2b42ae8)
+- 5. 心形线
+   - ![](http://p3.pstatp.com/large/pgc-image/8811b42cc52f4d1d88bb970c5cfd6142)
+- 6. 直线在双曲面上的运动
+   - ![](http://p1.pstatp.com/large/pgc-image/f25d905155e243b7a052618e3635016a)
+- 7. 多边形的外角之和总是等于 360 度
+   - ![](http://p3.pstatp.com/large/pgc-image/e3945ec526664cfd990bbf4e8317bc72)
+- 8. 正、余弦关系
+   - ![](http://p1.pstatp.com/large/pgc-image/cdfd8b2ef2504222882375c3c3c16fb8)
+- 9. 正、余弦——三角函数
+   - ![](http://p3.pstatp.com/large/pgc-image/ed1ebd36b4a54599a8439a7f58e974ce)
+- 10. 从左到右，依次删除这个数字中的位数
+   - 留下的数字仍然是质数
+   - ![](http://p3.pstatp.com/large/pgc-image/f7a226c6df1943868fd22484d5803a93)
+- 11. 使用“FOIL”轻松的解决二项式乘法
+   - ![](http://p9.pstatp.com/large/pgc-image/374334a4d2364949959ed79ecd66320a)
+- 12. 无限正方形
+   - ![](http://p3.pstatp.com/large/pgc-image/9e7e7c876d2e42e69139bde1ddc11432)
+- 13. 矩阵转置的可视化表示
+   - ![](http://p3.pstatp.com/large/pgc-image/a4786242a9c9494c8522c28586d3d8f2)
+- 14. 平面和圆环面的一种特殊交线:
+   - Villarceau circles
+   - ![](http://p9.pstatp.com/large/pgc-image/5d504df96d344b428254642c5edaf2f7)
+- 15. 积分近似
+   - ![](http://p1.pstatp.com/large/pgc-image/80f6e6be693047aea320e05665f7963c)
+- 16. 正切的可视化表现
+   - ![](http://p9.pstatp.com/large/pgc-image/1b77a7fb612e440a84385d487871de90)
+- 17. 高斯尺规作图17边形
+   - ![](http://p1.pstatp.com/large/pgc-image/6e53f239fe6043a989ce12822605fa83)
+
+
+
 
