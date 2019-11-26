@@ -147,6 +147,10 @@ useful_urls:
     url : https://coolshell.cn
     desc : 左耳朵耗子
   - 
+    name : 莫烦系列教程
+    url : https://morvanzhou.github.io/
+    desc : Python、ML、RL等教程
+  - 
     name : 数林觅风
     url : https://woaielf.github.io/
     desc : 精美脑图笔记
