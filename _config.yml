@@ -119,6 +119,10 @@ useful_urls:
     url : http://colah.github.io/
     desc : 精品文章
   -
+    name : RL入门资料
+    url : https://simoninithomas.github.io/Deep_reinforcement_learning_Course/
+    desc : Deep Reinforcement Learning from beginner to expert
+  -
     name : 深度学习前沿笔记
     url : https://zhuanlan.zhihu.com/c_188941548
     desc : 张俊林的优质专栏
