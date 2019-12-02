@@ -13,6 +13,18 @@ mathjax: true
 
 # 视频资源
 
+
+## 励志
+
+- 【2019-12-2】[不负此生](https://www.bilibili.com/video/av40885499)，愿你不辜负自己.
+   - 人生不过三万天，你要怎样度过这一生。希望你回望过往，依然能够心怀壮阔，愿你能不负此生、莫负自己。
+
+<iframe src="//player.bilibili.com/player.html?aid=40885499&cid=71807757&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+- [别懒惰久了，努力一下便以为是拼命?](https://www.bilibili.com/video/av46644313)
+
+<iframe src="//player.bilibili.com/player.html?aid=46644313&cid=81710824&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 ## 思维哲学
 
 ### 知行合一-王阳明
@@ -288,7 +300,6 @@ mathjax: true
 - 【2019-09-15】CCTV纪录片：[世界上的另一个我](https://www.bilibili.com/video/av9976667)，记录世界各地的90后生活
 
 <iframe src="//player.bilibili.com/player.html?aid=9976667&cid=16492452&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
-
 
 
 ## 百科知识
