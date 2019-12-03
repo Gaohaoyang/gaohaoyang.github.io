@@ -720,7 +720,6 @@ CMU要求答辩委员会需要有三个CMU老师和一个学校外的。除了�
 陈天奇认为现在的大学生正处于自己最美好的年龄，可以自己努力的去尝试一些突破自己上限的事情。“锐气+无知+时间”是最佳的组合，虽然焦虑会一直存在，但是拥抱未知，拥有锐气，敢于尝试，就能够尽力做到最好。
 
 
-
 ## 三、选择与放弃
 
 从硕士毕业到进入博士学习，陈天奇感触最深的地方在于：<font color='blue'>懂得放弃比知道自己想要什么更重要</font>。陈天奇觉得，现在的大家拥有更好的资源，有更多的资本去做自己想做的事情，那么大家可以放弃一些自己觉得不重要的事情，不留遗憾，全力以赴地在自己最感兴趣的方向上努力，尝试去挑战自己，在未来就有可能会做得更好，收获更多的回报。
@@ -750,7 +749,7 @@ CMU要求答辩委员会需要有三个CMU老师和一个学校外的。除了�
 > 在这次演讲中，我将介绍一种新的方法，它使用机器学习来自动化系统优化。我将在围绕深度学习部署问题这个场景介绍我们的方法。首先，我将讨论如何设计一种针对可迁移的统计成本模型的不变表示，并将这些表示应用于深度学习应用中的张量优化程序。然后，我将描述我们为支持各种硬件后端所做的系统改进。TVM，我们的端到端系统，提供跨硬件后端性能，与最先进的、手工调优的深度学习框架竞争。最后，我将讨论如何推广我们的方法来共同对模型、系统和硬件进行全堆栈优化，以及如何构建支持智能应用的终生演化的系统。
 
 
-## [A Survival Guide to a PhD](https://karpathy.github.io/2016/09/07/phd/)
+# [A Survival Guide to a PhD](https://karpathy.github.io/2016/09/07/phd/)
 
 - [Andrej Karpathy：计算机科学博士的生存指南](https://www.jiqizhixin.com/articles/2016-09-12-9)
 
@@ -760,7 +759,7 @@ This guide is patterned after my “[Doing well in your courses](https://cs.stan
 
 ![](https://karpathy.github.io/assets/phd/phds.jpg)
 
-### Preliminaries
+## Preliminaries
 
 First, should you want to get a PhD? I was in a fortunate position of knowing since young age that I really wanted a PhD. Unfortunately it wasn’t for any very well-thought-through considerations: First, I really liked school and learning things and I wanted to learn as much as possible, and second, I really wanted to be like Gordon Freeman from the game Half-Life (who has a PhD from MIT in theoretical physics). I loved that game. But what if you’re more sensible in making your life’s decisions? Should you want to do a PhD? There’s a very nice [Quora thread](https://www.quora.com/I-got-a-job-offer-from-Google-Facebook-Microsoft-and-I-also-got-accepted-into-the-PhD-in-Computer-Science-program-at-MIT-Stanford-Berkeley-What-factors-should-I-consider-while-making-a-choice-between-the-two) and in the summary of considerations that follows I’ll borrow/restate several from Justin/Ben/others there. I’ll assume that the second option you are considering is joining a medium-large company (which is likely most common). Ask yourself if you find the following properties appealing:
 - Freedom. A PhD will offer you a lot of freedom in the topics you wish to pursue and learn about. You’re in charge. Of course, you’ll have an adviser who will impose some constraints but in general you’ll have much more freedom than you might find elsewhere.
@@ -782,7 +781,7 @@ Getting into a PhD program: references, references, references. Great, you’ve 
 
 Picking the school. Once you get into some PhD programs, how do you pick the school? It’s easy, join Stanford! Just kidding. More seriously, your dream school should 1) be a top school (not because it looks good on your resume/CV but because of feedback loops; top schools attract other top people, many of whom you will get to know and work with) 2) have a few potential advisers you would want to work with. I really do mean the “few” part - this is very important and provides a safety cushion for you if things don’t work out with your top choice for any one of hundreds of reasons - things in many cases outside of your control, e.g. your dream professor leaves, moves, or spontaneously disappears, and 3) be in a good environment physically. I don’t think new admits appreciate this enough: you will spend 5+ years of your really good years living near the school campus. Trust me, this is a long time and your life will consist of much more than just research.
 
-### Adviser
+## Adviser
 
 ![](https://karpathy.github.io/assets/phd/adviser.gif)
 
@@ -802,7 +801,7 @@ Impressing an adviser. The adviser-student matching process is sometimes compare
 
 Consider the entire lab. Another important point to realize is that you’ll be seeing your adviser maybe once a week but you’ll be seeing most of their students every single day in the lab and they will go on to become your closest friends. In most cases you will also end up collaborating with some of the senior PhD students or postdocs and they will play a role very similar to that of your adviser. The postdocs, in particular, are professors-in-training and they will likely be eager to work with you as they are trying to gain advising experience they can point to for their academic job search. Therefore, you want to make sure the entire group has people you can get along with, people you respect and who you can work with closely on research projects.
 
-### Research topics
+## Research topics
 
 ![](https://karpathy.github.io/assets/phd/arxiv-papers.png)
 
@@ -839,7 +838,7 @@ Resistance. I’d like to also mention that your adviser is by no means infallib
 
 Don’t play the game. Finally, I’d like to challenge you to think of a PhD as more than just a sequence of papers. You’re not a paper writer. You’re a member of a research community and your goal is to push the field forward. Papers are one common way of doing that but I would encourage you to look beyond the established academic game. Think for yourself and from first principles. Do things others don’t do but should. Step off the treadmill that has been put before you. I tried to do some of this myself throughout my PhD. This blog is an example - it allows me communicate things that wouldn’t ordinarily go into papers. The ImageNet human reference experiments are an example - I felt strongly that it was important for the field to know the ballpark human accuracy on ILSVRC so I took a few weeks off and evaluated it. The academic search tools (e.g. arxiv-sanity) are an example - I felt continuously frustrated by the inefficiency of finding papers in the literature and I released and maintain the site in hopes that it can be useful to others. Teaching CS231n twice is an example - I put much more effort into it than is rationally advisable for a PhD student who should be doing research, but I felt that the field was held back if people couldn’t efficiently learn about the topic and enter. A lot of my PhD endeavors have likely come at a cost in standard academic metrics (e.g. h-index, or number of publications in top venues) but I did them anyway, I would do it the same way again, and here I am encouraging others to as well. To add a pitch of salt and wash down the ideology a bit, based on several past discussions with my friends and colleagues I know that this view is contentious and that many would disagree.
 
-### Writing papers
+## Writing papers
 
 ![](https://karpathy.github.io/assets/phd/latex.png)
 
@@ -867,7 +866,7 @@ An internal deadlines 2 weeks prior. Not many labs do this, but luckily Fei-Fei 
 
 Another great resource on this topic is [Tips for Writing Technical Papers](https://cs.stanford.edu/people/widom/paper-writing.html) from Jennifer Widom.
 
-### Writing code
+## Writing code
 
 ![](https://karpathy.github.io/assets/phd/code.jpg)
 
@@ -877,7 +876,7 @@ Release your code. It’s a somewhat surprising fact but you can get away with p
 
 Think of the future you. Make sure to document all your code very well for yourself. I guarantee you that you will come back to your code base a few months later (e.g. to do a few more experiments for the camera ready version of the paper), and you will feel completely lost in it. I got into the habit of creating very thorough readme.txt files in all my repos (for my personal use) as notes to future self on how the code works, how to run it, etc.
 
-### Giving talks
+## Giving talks
 
 ![](https://karpathy.github.io/assets/phd/talk.jpg)
 
@@ -899,7 +898,7 @@ Pitfall: formulaic talks. I might be a special case but I’m always a fan of no
 
 Observe and learn. Ultimately, the best way to become better at giving talks (as it is with writing papers too) is to make conscious effort to pay attention to what great (and not so great) speakers do and build a binary classifier in your mind. Don’t just enjoy talks; analyze them, break them down, learn from them. Additionally, pay close attention to the audience and their reactions. Sometimes a speaker will put up a complex table with many numbers and you will notice half of the audience immediately look down on their phone and open Facebook. Build an internal classifier of the events that cause this to happen and avoid them in your talks.
 
-### Attending conferences
+## Attending conferences
 
 ![](https://karpathy.github.io/assets/phd/posters.jpg)
 
@@ -913,7 +912,7 @@ The real action is in the hallways. The speed of innovation (especially in Machi
 
 >It is said that there are three stages to a PhD. In the first stage you look at a related paper’s reference section and you haven’t read most of the papers. In the second stage you recognize all the papers. In the third stage you’ve shared a beer with all the first authors of all the papers.
 
-### Closing thoughts
+## Closing thoughts
 
 I can’t find the quote anymore but I heard Sam Altman of YC say that there are no shortcuts or cheats when it comes to building a startup. You can’t expect to win in the long run by somehow gaming the system or putting up false appearances. I think that the same applies in academia. Ultimately you’re trying to do good research and push the field forward and if you try to game any of the proxy metrics you won’t be successful in the long run. This is especially so because academia is in fact surprisingly small and highly interconnected, so anything shady you try to do to pad your academic resume (e.g. self-citing a lot, publishing the same idea multiple times with small remixes, resubmitting the same rejected paper over and over again with no changes, conveniently trying to leave out some baselines etc.) will eventually catch up with you and you will not be successful.
 
@@ -942,16 +941,16 @@ So at the end of the day it’s quite simple. Do good work, communicate it prope
 那么什么才是好的想法呢？我理解这个”好“字，至少有两个层面的意义。
 
 ### 学科发展角度的”好“
-学术研究本质是对未知领域的探索，是对开放问题的答案的追寻。所以从推动学科发展的角度，评判什么是好的研究想法的标准，首先就在一个“新”字。
+学术研究本质是**对未知领域的探索，是对开放问题的答案的追寻**。所以从推动学科发展的角度，评判什么是好的研究想法的标准，首先就在一个“<font color='red'>新</font>”字。
 
-过去有个说法，人工智能学科有个魔咒，凡是人工智能被解决（或者有解决方案）的部分，就不再被认为代表“人类智能”。计算机视觉、自然语言处理、机器学习、机器人之所以还被列为人工智能主要方向，也许正是因为它们尚未被解决，尚能代表“人类智能”的尊严。而我们要开展创新研究，就是要提出新的想法解决这些问题。这其中的”新“字，可以体现在提出新的问题和任务，探索新的解决思路，提出新的算法技术，实现新的工具系统等。
+过去有个说法，人工智能学科有个魔咒，<font color='blue'>凡是人工智能被解决（或者有解决方案）的部分，就不再被认为代表“人类智能”</font>。计算机视觉、自然语言处理、机器学习、机器人之所以还被列为人工智能主要方向，也许正是因为它们尚未被解决，尚能代表“人类智能”的尊严。而我们要开展创新研究，就是要提出新的想法解决这些问题。这其中的”新“字，可以体现在提出新的问题和任务，探索新的解决思路，提出新的算法技术，实现新的工具系统等。
 
 在保证”新“的基础上，研究想法好不好，那就看它对推动学科发展的助力有多大。深度学习之所以拥有如此显赫的影响力，就在于它对于人工智能自然语言处理、语音识别、计算机视觉等各重要方向都产生了革命性的影响，彻底改变了对无结构信号（语音、图像、文本）的语义表示的技术路线。
 
 ### 研究实践角度的”好“
 那是不是想法只要够”新“就好呢？是不是越新越好呢？我认为应该还不是。因为，只有能做得出来的想法才有资格被分析好不好。所以，从研究实践角度，还需要考虑研究想法的可实现性和可验证性。
-
-可实现性，体现在该想法是否有足够的数学或机器学习工具支持实现。可验证性，体现在该想法是否有合适的数据集合和广泛接受的评价标准。很多民间科学家的想法之所以得不到学术界的认同，就是因为这些想法往往缺乏可实现性和可验证性，只停留在天马行空的纸面，只是些虚无缥缈的理念。
+- 可实现性，体现在该想法是否有足够的数学或机器学习工具支持实现。
+- 可验证性，体现在该想法是否有合适的数据集合和广泛接受的评价标准。很多民间科学家的想法之所以得不到学术界的认同，就是因为这些想法往往缺乏可实现性和可验证性，只停留在天马行空的纸面，只是些虚无缥缈的理念。
 
 ## 好的研究想法从哪里来
 想法好还是不好，并不是非黑即白的二分问题，而是像光谱一样呈连续分布，因时而异，因人而宜。计算机科技领域的发展既有积累的过程，也有跃迁的奇点，积累量变才会产生质变，吃第三个馒头饱了，也是因为前面两个馒头打底。
@@ -961,9 +960,9 @@ So at the end of the day it’s quite simple. Do good work, communicate it prope
 那么，好的研究想法从哪里来呢？我总结，首先要有区分研究想法好与不好的能力，这需要深入全面了解所在研究方向的历史与现状，具体就是对学科文献的全面掌握。人是最善于学习的动物，完全可以将既有文献中不同时期研究工作的想法作为学习对象，通过了解它们提出后对学科发展的影响——具体体现在论文引用、学术评价情况等各方面——建立对研究想法好与不好的评价模型。我们很难条分缕析完美地列出区分好与不好想法的所有特征向量，但人脑强大的学习能力，只要给予足够的输入数据，就可以在神经网络中自动学习建立判别的模型，鉴古知今，见微知著，这也许就是常说的学术洞察力。
 
 做过一些研究的同学会有感受，仅阅读自己研究方向的文献，新想法还是不会特别多。这是因为，读到的都是该研究问题已经完成时的想法，它们本身无法启发新的想法。如何产生新的想法呢？我总结有三种可行的基本途径：
-- 实践法。即在研究任务上实现已有最好的算法，通过分析实验结果，例如发现这些算法计算复杂度特别高、训练收敛特别慢，或者发现该算法的错误样例呈现明显的规律，都可以启发你改进已有算法的思路。现在很多自然语言处理任务的Leaderboard上的最新算法，就是通过分析错误样例来有针对性改进算法的 [1]。
-- 类比法。即将研究问题与其他任务建立类比联系，调研其他相似任务上最新的有效思想、算法或工具，通过合理的转换迁移，运用到当前的研究问题上来。例如，当初注意力机制在神经网络机器翻译中大获成功，当时主要是在词级别建立注意力，后来我们课题组的林衍凯和沈世奇提出建立句子级别的注意力解决关系抽取的远程监督训练数据的标注噪音问题 [2]，这就是一种类比的做法。
-- 组合法。即将新的研究问题分解为若干已被较好解决的子问题，通过有机地组合这些子问题上的最好做法，建立对新的研究问题的解决方案。例如，我们提出的融合知识图谱的预训练语言模型，就是将BERT和TransE等已有算法融合起来建立的新模型 [3]。
+- <font color='green'>实践法</fonnnt>。即在研究任务上实现已有最好的算法，通过分析实验结果，例如发现这些算法计算复杂度特别高、训练收敛特别慢，或者发现该算法的错误样例呈现明显的规律，都可以启发你改进已有算法的思路。现在很多自然语言处理任务的Leaderboard上的最新算法，就是通过分析错误样例来有针对性改进算法的 [1]。
+- <font color='green'>类比法</font>。即将研究问题与其他任务建立类比联系，调研其他相似任务上最新的有效思想、算法或工具，通过合理的转换迁移，运用到当前的研究问题上来。例如，当初注意力机制在神经网络机器翻译中大获成功，当时主要是在词级别建立注意力，后来我们课题组的林衍凯和沈世奇提出建立句子级别的注意力解决关系抽取的远程监督训练数据的标注噪音问题<sup>[2]</sup>，这就是一种类比的做法。
+- <font color='green'>组合法</font>。即将新的研究问题分解为若干已被较好解决的子问题，通过有机地组合这些子问题上的最好做法，建立对新的研究问题的解决方案。例如，我们提出的融合知识图谱的预训练语言模型，就是将BERT和TransE等已有算法融合起来建立的新模型<sup>[3]</sup>。
 
 正如武侠中的最高境界是无招胜有招，好的研究想法并不拘泥于以上的路径，很多时候是在研究者对研究问题深刻认知的基础上，综合丰富的研究阅历和聪明才智产生”顿悟“的结果。这对初学者而言恐怕还很难一窥门径，需要从基本功做起，经过大量科研实践训练后，才能有登堂入室之感。
 
