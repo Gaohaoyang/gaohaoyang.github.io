@@ -111,6 +111,10 @@ useful_urls:
     url : https://jalammar.github.io/
     desc : 【精品】图解系列
   -
+    name : Sebastian Ruder
+    url : https://ruder.io/
+    desc : DeepMind成员的最新技术跟进
+  -
     name : 李宏毅 (Hung-yi Lee)
     url : http://speech.ee.ntu.edu.tw/~tlkagk/
     desc : 台大教授
