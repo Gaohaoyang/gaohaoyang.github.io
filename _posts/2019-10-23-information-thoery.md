@@ -55,6 +55,10 @@ $$
 
 ### `互信息`
 
+- 在概率论和信息论中，两个随机变量的互信息（mutual Information，简称MI）或转移信息（transinformation）是变量间相互依赖性的量度。 不同于相关系数，互信息并不局限于实值随机变量，它更加一般且决定着联合分布p(X,Y) 和分解的边缘分布的乘积p(X)p(Y) 的相似程度。
+   - [信息论：熵与互信息](https://my.oschina.net/u/3579120/blog/1508147)
+![](https://static.oschina.net/uploads/img/201708/14005354_faKf.png)
+
 $$
 I(X,Y) = \sum_{y \in Y} \sum_{x \in X} p(x,y) log( \frac{p(x,y)}{p(x)p(y)})
 $$

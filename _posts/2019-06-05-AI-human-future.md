@@ -3,7 +3,7 @@ layout: post
 title:  "人工智能及未来畅想"
 date:   2019-06-04 23:41:00
 categories: 人工智能
-tags: 人工智能 AI 人类简史 人文 哲学 康德 汉字屋 清华大学 天机 自行车 AGI 类脑 类机
+tags: 人工智能 AI 人类简史 人文 哲学 康德 汉字屋 清华大学 天机 自行车 AGI 类脑 类机 waitbutwhy
 excerpt: 深度思考
 mathjax: true
 ---
@@ -18,6 +18,8 @@ Neuralink and the Brain’s Magical Future](https://waitbutwhy.com/2017/04/neura
 > * Word文档版：[腾讯文档](https://share.weiyun.com/5y4D89d)
 
 - ![](https://28oa9i1t08037ue3m1l0i861-wpengine.netdna-ssl.com/wp-content/uploads/2015/03/Logo-sometimes-Pixelmator-577.png)
+
+- 【2019-11-13】[综述：全面介绍脑连接研究的方法学](https://mp.weixin.qq.com/s?__biz=MzI2ODEyOTE3OQ==&mid=2649569369&idx=1&sn=210bb5d90c308ff5072fabb6645c85b9&chksm=f2eddeadc59a57bb7192738d35d5d4f8a078f7c20038c9bcce3183ce308fa3be74d10476ad5a&mpshare=1&scene=23&srcid&sharer_sharetime=1573616516238&sharer_shareid=b8d409494a5439418f4a89712efcd92a%23rd)
 
 # 人类唯一的出路：变成人工智能
 Tim Urban，之前火热的文章《为什么有很多名人让人们警惕人工智能》也是出自他手，英文原文刊载于waitbutwhy.com，点击文末的阅读原文可以跳转到原文链接。
@@ -34,6 +36,8 @@ Tim Urban，之前火热的文章《为什么有很多名人让人们警惕人�
 - 第六章：大融合（约10000字）人类唯一的出路：变成人工智能
 
 注：原文请看:[【完整版】人类唯一的出路：变成人工智能](https://mp.weixin.qq.com/s?__biz=MjM5ODY2OTQyNg==&mid=2649768466&idx=1&sn=b6b1720b7a2243ab3907c58d2b22a602&chksm=bec3df0f89b456198c4960da99e46075f2bef121320f52a805b19f9143f5c083f6bac9430e97&token=832591528&lang=zh_CN#rd)
+
+- 60页的打印版下载，[链接](https://share.weiyun.com/5rFS3oT) 密码：tvr5sa
  
 # 人工智能哲学笔记
 

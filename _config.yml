@@ -79,7 +79,7 @@ paginate: 6
 # useful websites
 useful_urls:
   - 
-    name : waitbutwhy
+    name : WaitButWhy
     url : https://waitbutwhy.com/
     desc : 国外知名科技博主
   -
@@ -90,6 +90,14 @@ useful_urls:
     name : Google AI Lab
     url : https://aiexperiments.withgoogle.com/
     desc : 汇总各种有意思的demo
+  - 
+    name : Polo club
+    url : https://poloclub.github.io/
+    desc : Human-Centered AI of Georgia Tech, 各类AI可视化工作，含GAN Lab
+  - 
+    name : MANA
+    url : http://manaai.cn/
+    desc : AI算法市场
   -
     name : Yann Lecun(杨立昆)
     url : http://yann.lecun.com/
@@ -103,6 +111,10 @@ useful_urls:
     url : https://jalammar.github.io/
     desc : 【精品】图解系列
   -
+    name : Sebastian Ruder
+    url : https://ruder.io/
+    desc : DeepMind成员的最新技术跟进
+  -
     name : 李宏毅 (Hung-yi Lee)
     url : http://speech.ee.ntu.edu.tw/~tlkagk/
     desc : 台大教授
@@ -111,6 +123,14 @@ useful_urls:
     url : http://colah.github.io/
     desc : 精品文章
   -
+    name : RL入门资料
+    url : https://simoninithomas.github.io/Deep_reinforcement_learning_Course/
+    desc : Deep Reinforcement Learning from beginner to expert
+  -
+    name : 深度学习前沿笔记
+    url : https://zhuanlan.zhihu.com/c_188941548
+    desc : 张俊林的优质专栏
+  -
     name : Sota技术汇总
     url : https://www.stateoftheart.ai/
     desc : AI领域state-of-art技术汇总
@@ -118,6 +138,10 @@ useful_urls:
     name : Sota代码
     url : https://paperswithcode.com/sota
     desc : 各领域效果最佳论文及代码
+  - 
+    name : Neurohive
+    url : https://neurohive.io/en/
+    desc : AI领域最新数据集+Sota效果（俄罗斯）
   -
     name : Tensorflow中国社区
     url : https://www.tensorflowers.cn/
@@ -126,6 +150,10 @@ useful_urls:
     name : 酷壳
     url : https://coolshell.cn
     desc : 左耳朵耗子
+  - 
+    name : 莫烦系列教程
+    url : https://morvanzhou.github.io/
+    desc : Python、ML、RL等教程
   - 
     name : 数林觅风
     url : https://woaielf.github.io/
