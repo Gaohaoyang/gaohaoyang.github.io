@@ -301,6 +301,13 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=9976667&cid=16492452&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
+- 【2019-12-4】[神灯](https://www.bilibili.com/video/av33142273/)，恶搞人工客服
+
+<iframe src="//player.bilibili.com/player.html?aid=33142273&cid=58008769&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+
+- [NLP为什么难](https://www.bilibili.com/video/av78081138/)
+
+<iframe src="//player.bilibili.com/player.html?aid=78081138&cid=133593218&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 ## 百科知识
 
