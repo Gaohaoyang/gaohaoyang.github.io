@@ -181,6 +181,7 @@ coding path
 - 细分市场
    - 如果你只能进入一个成熟市场，那么记得给自己确立一个细分的定位。
 
+![](https://images2015.cnblogs.com/blog/1025005/201609/1025005-20160924130517527-77531971.png)
 
 源自：[程序猿跳槽全攻略-笔记](https://www.cnblogs.com/coderland/p/5903051.html)
 
