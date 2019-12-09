@@ -122,6 +122,10 @@ useful_urls:
     name : Colah’s Blog
     url : http://colah.github.io/
     desc : 精品文章
+  - 
+    name : 爱可可
+    url : https://weibo.com/fly51fly
+    desc : 微博大V，实时更新最新技术
   -
     name : RL入门资料
     url : https://simoninithomas.github.io/Deep_reinforcement_learning_Course/
