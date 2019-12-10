@@ -7,7 +7,23 @@ featured-img: sleek
 
 # Transformer学习笔记
 
-- 摘自：[Transformer模型的PyTorch实现](https://luozhouyang.github.io/transformer/)
+
+- [The Annotated Transformer](http://nlp.seas.harvard.edu/2018/04/03/attention.html),Harvard NLP出品，含pytorch版代码实现
+- [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/)
+- [Transformer模型的PyTorch实现](https://luozhouyang.github.io/transformer/),[A PyTorch implementation of the Transformer model in "Attention is All You Need"](https://github.com/jadore801120/attention-is-all-you-need-pytorch)
+
+
+## 图解Transformer
+- [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/)
+- [jalammar github repo](https://github.com/jalammar/jalammar.github.io/blob/master/_posts/2018-06-27-illustrated-transformer.md)
+![](https://jalammar.github.io/images/t/transformer_resideual_layer_norm_3.png)
+
+![](https://camo.githubusercontent.com/88e8f36ce61dedfd2491885b8df2f68c4d1f92f5/687474703a2f2f696d6775722e636f6d2f316b72463252362e706e67)
+
+
+
+
+## [Transformer模型的PyTorch实现](https://luozhouyang.github.io/transformer/)
 
 Google 2017年的论文 [Attention is all you need](https://arxiv.org/abs/1706.03762) 阐释了什么叫做大道至简！该论文提出了**Transformer**模型，完全基于**Attention mechanism**，抛弃了传统的**RNN**和**CNN**。
 
