@@ -289,6 +289,15 @@ mathjax: true
 - 【2019-10-13】[中国历史年表](https://www.bilibili.com/video/av66583807?from=search&seid=10290663082694934788)，10分钟从上古之战到溥仪退位，中国历史年表超燃影视化混剪
 
 <iframe src="//player.bilibili.com/player.html?aid=66583807&cid=116735636&page=3" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- 【2019-12-11】[大型人文历史纪录片《苏东坡》6集全](https://www.bilibili.com/video/av12305983)
+
+<iframe src="//player.bilibili.com/player.html?aid=12305983&cid=20775710&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- [陆毅版电视剧苏东坡诗系列](https://www.bilibili.com/video/av3573999)
+
+<iframe src="//player.bilibili.com/player.html?aid=3573999&cid=5707455&page=4" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- MV说尽苏轼这一生:[一如这摸样]](https://www.bilibili.com/video/av63131519)
+
+<iframe src="//player.bilibili.com/player.html?aid=63131519&cid=109646986&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 - 【2019-10-26】俄罗斯拍摄的纪录片《[中国的重生](https://www.bilibili.com/video/av69780746)》，彩色开国大典
 
@@ -312,6 +321,33 @@ mathjax: true
 - [从前有一匹马叫“代码”](https://www.bilibili.com/video/av75765022)
 
 <iframe src="//player.bilibili.com/player.html?aid=75765022&cid=129612934&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+## 音乐舞蹈
+
+- 【2019-12-11】[长安幻世绘](https://www.bilibili.com/video/av71471753)
+
+<iframe src="//player.bilibili.com/player.html?aid=71471753&cid=123840866&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+- [中国唱诗班国风动漫系列](https://www.bilibili.com/bangumi/play/ep115520/)，《识途》《春困》《元日》《相思》《红豆》《一生至爱》《饮湖上初晴后雨》《雨之歌》《游子吟》
+   - [棠梨煎雪](https://www.bilibili.com/video/av47400863)，[燕归巢](https://www.bilibili.com/video/av44744004)
+
+<iframe src="//player.bilibili.com/player.html?aid=47400863&cid=83018641&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+<iframe src="//player.bilibili.com/player.html?aid=44744004&cid=78327121&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- [采薇](https://www.bilibili.com/video/av67376352)
+<iframe src="//player.bilibili.com/player.html?aid=67376352&cid=116823328&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+- [木偶舞蹈](https://www.bilibili.com/video/av34204724)
+
+<iframe src="//player.bilibili.com/player.html?aid=34204724&cid=59918607&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+- [东京恐怖舞蹈](https://www.bilibili.com/video/av1673388)
+
+<iframe src="//player.bilibili.com/player.html?aid=1673388&cid=2550221&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+- [琵琶语【不一样的古风】](https://www.bilibili.com/video/av1263165),挪威的Quick Crew组合
+
+<iframe src="//player.bilibili.com/player.html?aid=1263165&cid=1922891&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
 ## 百科知识
