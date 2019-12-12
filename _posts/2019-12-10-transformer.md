@@ -54,7 +54,7 @@ featured-img: sleek
 作者：[Transformer模型学习](https://www.jianshu.com/p/04b6dd396d62)
 
 ## 图解Transformer
-- [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/)
+- [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/),中文翻译：[BERT大火却不懂Transformer？](https://zhuanlan.zhihu.com/p/54523019)
 - [jalammar github repo](https://github.com/jalammar/jalammar.github.io/blob/master/_posts/2018-06-27-illustrated-transformer.md)
 ![](https://jalammar.github.io/images/t/transformer_resideual_layer_norm_3.png)
 
@@ -65,43 +65,34 @@ featured-img: sleek
 
 ## [Transformer模型的PyTorch实现](https://luozhouyang.github.io/transformer/)
 
-Google 2017年的论文 [Attention is all you need](https://arxiv.org/abs/1706.03762) 阐释了什么叫做大道至简！该论文提出了**Transformer**模型，完全基于**Attention mechanism**，抛弃了传统的**RNN**和**CNN**。
-
-我们根据论文的结构图，一步一步使用 [PyTorch](https://github.com/pytoch/pytorch) 实现这个**Transformer**模型。
+- Google 2017年的论文 [Attention is all you need](https://arxiv.org/abs/1706.03762) 阐释了什么叫做大道至简！该论文提出了**Transformer**模型，完全基于**Attention mechanism**，抛弃了传统的**RNN**和**CNN**。
+- 我们根据论文的结构图，一步一步使用 [PyTorch](https://github.com/pytoch/pytorch) 实现这个**Transformer**模型。
 
 ## Transformer架构
 
-首先看一下transformer的结构图：  
+- 首先看一下transformer的结构图：  
 ![transformer_architecture](http://blog.stupidme.me/wp-content/uploads/2018/09/transformer.jpg)  
 
 解释一下这个结构图。首先，**Transformer**模型也是使用经典的**encoer-decoder**架构，由encoder和decoder两部分组成。
-
-上图的左半边用`Nx`框出来的，就是我们的encoder的一层。encoder一共有6层这样的结构。
-
-上图的右半边用`Nx`框出来的，就是我们的decoder的一层。decoder一共有6层这样的结构。
-
-输入序列经过**word embedding**和**positional encoding**相加后，输入到encoder。
-
-输出序列经过**word embedding**和**positional encoding**相加后，输入到decoder。
-
-最后，decoder输出的结果，经过一个线性层，然后计算softmax。
+- 上图的左半边用`Nx`框出来的，就是我们的encoder的一层。encoder一共有6层这样的结构。
+- 上图的右半边用`Nx`框出来的，就是我们的decoder的一层。decoder一共有6层这样的结构。
+- 输入序列经过**word embedding**和**positional encoding**相加后，输入到encoder。
+- 输出序列经过**word embedding**和**positional encoding**相加后，输入到decoder。
+- 最后，decoder输出的结果，经过一个线性层，然后计算softmax。
 
 **word embedding**和**positional encoding**我后面会解释。我们首先详细地分析一下encoder和decoder的每一层是怎么样的。
 
 ## Encoder
 
 encoder由6层相同的层组成，每一层分别由两部分组成：
-
-* 第一部分是一个**multi-head self-attention mechanism**
-* 第二部分是一个**position-wise feed-forward network**，是一个全连接层
-
+- * 第一部分是一个**multi-head self-attention mechanism**
+- * 第二部分是一个**position-wise feed-forward network**，是一个全连接层
 两个部分，都有一个　**残差连接(residual connection)**，然后接着一个**Layer Normalization**。
 
 如果你是一个新手，你可能会问：
-
-* multi-head self-attention 是什么呢？
-* 参差结构是什么呢？
-* Layer Normalization又是什么？
+- * multi-head self-attention 是什么呢？
+- * 参差结构是什么呢？
+- * Layer Normalization又是什么？
 
 这些问题我们在后面会一一解答。
 
