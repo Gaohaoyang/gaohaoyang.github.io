@@ -123,6 +123,10 @@ useful_urls:
     url : http://colah.github.io/
     desc : 精品文章
   - 
+    name : Floydhub
+    url : https://blog.floydhub.com/
+    desc : Floydhub技术博客
+  - 
     name : 爱可可
     url : https://weibo.com/fly51fly
     desc : 微博大V，实时更新最新技术
