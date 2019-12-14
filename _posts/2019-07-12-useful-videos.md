@@ -324,9 +324,22 @@ mathjax: true
 
 ## 音乐舞蹈
 
+- 【2019-12-14】[碰碰彭碰彭](https://space.bilibili.com/15960317)法国街头古筝表演，带着古筝曲旅行系列：[赤伶](https://www.bilibili.com/video/av52853616)，[芒种](https://www.bilibili.com/video/av66929315)，[琵琶行](https://www.bilibili.com/video/av47721380)，[左手指月](https://www.bilibili.com/video/av77421571)，[好汉歌](https://www.bilibili.com/video/av78404421)，[刀剑如梦-郎朗](https://www.bilibili.com/video/av71998231)
+
+<iframe src="//player.bilibili.com/player.html?aid=52853616&cid=92476407&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+<iframe src="//player.bilibili.com/player.html?aid=66929315&cid=116000199&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+<iframe src="//player.bilibili.com/player.html?aid=77421571&cid=132301424&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 - 【2019-12-11】[长安幻世绘](https://www.bilibili.com/video/av71471753)
 
 <iframe src="//player.bilibili.com/player.html?aid=71471753&cid=123840866&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- 古琴诊所，[陈情令](https://www.bilibili.com/video/av61013632),[左手指月](https://www.bilibili.com/video/av34931946)
+
+<iframe src="//player.bilibili.com/player.html?aid=61013632&cid=106159328&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+<iframe src="//player.bilibili.com/player.html?aid=34931946&cid=61198348&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 - [中国唱诗班国风动漫系列](https://www.bilibili.com/bangumi/play/ep115520/)，《识途》《春困》《元日》《相思》《红豆》《一生至爱》《饮湖上初晴后雨》《雨之歌》《游子吟》
    - [棠梨煎雪](https://www.bilibili.com/video/av47400863)，[燕归巢](https://www.bilibili.com/video/av44744004)
