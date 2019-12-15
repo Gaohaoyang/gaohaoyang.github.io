@@ -104,6 +104,28 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=59164780&cid=103116268&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+- 【2019-08-09】反应社会阶级差距的纪录片
+   - [56up](https://www.bilibili.com/video/av25446605?from=search&seid=17957810370452180618)，又称人生七年
+   
+   <iframe src="//player.bilibili.com/player.html?aid=25446605&cid=43196158&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+   - BBC Why Poverty.[为什么穷系列纪录片](https://www.youtube.com/watch?v=jRXqdSG4XWQ&list=PLJqVTGbqn7eyF4oVL8Nbg7l8IOKuaciAI), 2012
+   - 穷富翁大作战,[第一季](https://www.bilibili.com/video/av2884835?from=search&seid=930398290238770510), [第二季](https://www.bilibili.com/video/av12560324)
+   
+ <iframe src="//player.bilibili.com/player.html?aid=2884835&cid=4507553&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+   - 国产，郑琼的[出路](https://www.bilibili.com/video/av31131429)，导演用6年时间跟拍了3个不同阶层孩子在社会上的挣扎。在弱肉强食的社会法则面前，孩子教育的决定性因素不是学区房，而是父母的言传身教。[正片](https://www.youtube.com/watch?v=H3Zk1WKc87M)
+<iframe src="//player.bilibili.com/player.html?aid=31131429&cid=54380597&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+   - 人间世,[爱奇艺](https://www.iqiyi.com/v_19rrm476o8.html) 
+   
+   - [子非鱼](https://www.bilibili.com/video/av39716374/)
+
+<iframe src="//player.bilibili.com/player.html?aid=39716374&cid=69770039&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+- 2016年出品的纪录片，《[谈婚论嫁](https://www.bilibili.com/bangumi/play/ep151089)》，国内首部80后情感纪录片。15对主人公跟踪拍摄，100对夫妻真情访谈，425天生活真实记录。全片共5集，每集24分钟，从剩女相亲到裸婚闪婚，从异地长跑到跨国网恋，从走上红毯到生死相依，记录他们的故事，分享婚姻的智慧
+
+<iframe frameborder="0" src="https://v.qq.com/txp/iframe/player.html?vid=q0019q00vsg" allowFullScreen="true"></iframe>
+
+- [中国剩女：一起来看看她们是如何被剩下的](https://www.youtube.com/watch?v=bfjk7ras4ic)
 
 ## 自我剖析
 - [承认吧，人生来就是孤独的](https://www.365yg.com/a6641087299998188035#mid=5543467706)，[B站](https://www.bilibili.com/video/av39370474?from=search&seid=8373277070703221652)
@@ -151,26 +173,10 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=2894797&cid=4523684&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="600"> </iframe>
 
-## 纪录片
+## 地理文化
 
-- 【2019-08-09】反应社会阶级差距的纪录片
-   - [56up](https://www.bilibili.com/video/av25446605?from=search&seid=17957810370452180618)
-   
-   <iframe src="//player.bilibili.com/player.html?aid=25446605&cid=43196158&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
-   
-   - 穷富翁大作战,[第一季](https://www.bilibili.com/video/av2884835?from=search&seid=930398290238770510), [第二季](https://www.bilibili.com/video/av12560324)
-   
- <iframe src="//player.bilibili.com/player.html?aid=2884835&cid=4507553&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
-      
-   - 人间世,[爱奇艺](https://www.iqiyi.com/v_19rrm476o8.html) 
-   
-   - [子非鱼](https://www.bilibili.com/video/av39716374/)
-
-<iframe src="//player.bilibili.com/player.html?aid=39716374&cid=69770039&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
-
-- 2016年出品的纪录片，《[谈婚论嫁](https://www.bilibili.com/bangumi/play/ep151089)》，国内首部80后情感纪录片。15对主人公跟踪拍摄，100对夫妻真情访谈，425天生活真实记录。全片共5集，每集24分钟，从剩女相亲到裸婚闪婚，从异地长跑到跨国网恋，从走上红毯到生死相依，记录他们的故事，分享婚姻的智慧
-
-<iframe frameborder="0" src="https://v.qq.com/txp/iframe/player.html?vid=q0019q00vsg" allowFullScreen="true"></iframe>
+- [隐秘中国](https://www.bilibili.com/bangumi/play/ep244420)，三集
+- [浮生一日](https://www.bilibili.com/bangumi/play/ss20654)，2011年，由摩根·史柏路克执导的纪录片，讲述了众多迷人嘉宾们的浮生一日。每一集，都跟随一位值得关注的嘉宾，了解他这一天24小时的生活。听听他们对生活的感悟，看看这些与众不同的嘉宾们，是如果度过他们生命中每一个普通的日子
 
 ## 金融
 
@@ -378,3 +384,8 @@ mathjax: true
    - [别再问我什么是BT种子](https://www.bilibili.com/video/av57748098)
    - [APP如何知道你想买什么](https://www.bilibili.com/video/av40891962)
    
+
+## 大自然
+
+- 美到窒息！【纪录片】2012《[时间的风景](https://www.bilibili.com/video/av13614491)》TimeScapes(原版为4K蓝光6声道),影片采用慢镜头与定时拍摄的摄影技术，向我们展示了美国西南部陆地、人文以及野外令人惊叹的瑰丽景色。为拍摄本影片，劳开着他的丰田敞篷小卡车奔走于美国西南部，历时两年。
+- [生命](https://www.bilibili.com/bangumi/play/ss20387),2009年是达尔文诞辰二百周年，也是《物种起源》发表150周年。为了进行纪念，本片力图展现自然界缤纷物种的多样性，和它们为适应环境而进化出的各种神奇生存本领。
