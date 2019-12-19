@@ -94,6 +94,10 @@ useful_urls:
     name : Polo club
     url : https://poloclub.github.io/
     desc : Human-Centered AI of Georgia Tech, 各类AI可视化工作，含GAN Lab
+  -
+    name : Lingdong
+    url : https://lingdong.works/
+    desc : CMU在读学生Lingdong的项目集合,含文言文写代码
   - 
     name : MANA
     url : http://manaai.cn/
