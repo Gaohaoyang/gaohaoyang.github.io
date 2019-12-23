@@ -313,6 +313,9 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=69780746&cid=120921841&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+- 【2019-12-23】[寻找手艺](https://www.bilibili.com/video/av15366522)（短片45集）2017, 张景,记录中国消失的传统手工，类似卖房做动画的《[魁拔](https://www.bilibili.com/bangumi/play/ss6166/?from=search&seid=10368667458390022961)》
+
+
 ## 文娱
 
 - 【2019-09-01】IT码农转型说相声，[80后脱口秀韦若琛合集](https://www.ixigua.com/i6730450427185201671/)
