@@ -3,7 +3,7 @@ layout: post
 title:  "生命科学的终极讨论"
 date:   2019-09-28 09:30:00
 categories: 自然科学
-tags: 梁冬 华大基因 生命 自然 宇宙 神学
+tags: 梁冬 华大基因 生命 自然 宇宙 神学 中医 西医
 excerpt: 生命是什么，人类是地球统治者吗，科学的尽头是神学吗？
 mathjax: true
 ---
