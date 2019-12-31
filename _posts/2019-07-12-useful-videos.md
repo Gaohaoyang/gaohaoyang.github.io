@@ -212,6 +212,11 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=24325548&cid=8503492&page=1" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+- 【2019-12-29】[数学纪录片《维度：数学漫步》完整版](https://www.bilibili.com/video/av69814313)，声音小，字幕小，[分集版本](https://www.bilibili.com/video/av13970195)效果更好, [官方网站](http://www.dimensions-math.org/Dim_ZH_si.htm)
+
+<iframe src="//player.bilibili.com/player.html?aid=13970195&cid=22819169&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+
 ## 互联网
 
 - 纪录片：[互联网](https://www.bilibili.com/video)
@@ -334,6 +339,11 @@ mathjax: true
 - [从前有一匹马叫“代码”](https://www.bilibili.com/video/av75765022)
 
 <iframe src="//player.bilibili.com/player.html?aid=75765022&cid=129612934&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- 【2019-12-29】华为趣味广告：[mate 30 AI翻译功能](https://www.bilibili.com/video/av45959094)，[Mate 20 最新登月搞笑广告](https://www.bilibili.com/video/av36134951)，[土拨鼠的逃生新技巧](https://www.bilibili.com/video/av37383911)
+
+<iframe src="//player.bilibili.com/player.html?aid=36134951&cid=63435427&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+
 
 ## 音乐舞蹈
 
@@ -375,6 +385,8 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=1263165&cid=1922891&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+- 【2019-12-29】[VR-3D绘画：以空气为画布，勾勒出了炫酷惊艳的三维画面](https://www.bilibili.com/video/av70059116)
+<iframe src="//player.bilibili.com/player.html?aid=70059116&cid=121380459&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 ## 百科知识
 
