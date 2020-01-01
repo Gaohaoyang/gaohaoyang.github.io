@@ -280,6 +280,9 @@ mathjax: true
 ## 健康
 
 - [健身的真相](https://www.bilibili.com/bangumi/play/ep260720/)
+- [5个动作，让你在四周内塑造出美好身形](https://www.bilibili.com/video/av81484854)
+<iframe src="//player.bilibili.com/player.html?aid=81484854&cid=139443453&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 - 【2019-09-15】[急诊室故事两季全（共36集）](https://www.bilibili.com/video/av28138937)
 
 <iframe src="//player.bilibili.com/player.html?aid=28138937&cid=48601458&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
