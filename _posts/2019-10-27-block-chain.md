@@ -443,3 +443,14 @@ mathjax: true
 * IBM Bluemix Blockchain 托管服务，免费部署 4 节点 fabric 区块链网络，功能比上者更强，提供 APIs 调用 https://console.ng.bluemix.net/catalog/services/blockchain
 
 
+## Pi
+- [2019最火的手机挖矿Pi](https://zhuanlan.zhihu.com/p/86726105)
+
+![](https://pic1.zhimg.com/80/v2-a29666a78c59ddbd123a39f789ec421c_hd.jpg)
+
+
+# 结束
+
+
+
+
