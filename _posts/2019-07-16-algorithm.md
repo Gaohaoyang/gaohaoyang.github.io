@@ -11,8 +11,14 @@ mathjax: true
 * content
 {:toc}
 
-# 注
+# 说明
 - 本栏目汇总各类经典的基础算法
+
+# 数据结构与算法
+
+- 【2020-1-2】[清华大学邓俊辉](https://dsa.cs.tsinghua.edu.cn/~deng/ds/dsacpp/)数据结构,[视频](https://www.bilibili.com/video/av81804191)
+
+<iframe src="//player.bilibili.com/player.html?aid=81804191&cid=139968407&page=24" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
 ## 串匹配算法
