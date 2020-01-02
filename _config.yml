@@ -166,6 +166,10 @@ useful_urls:
     name : 莫烦系列教程
     url : https://morvanzhou.github.io/
     desc : Python、ML、RL等教程
+  -
+    name : 黄海广博士的学习总结(github)
+    url : https://github.com/fengdu78
+    desc : 机器学习、深度学习课程总结及完整资料
   - 
     name : 数林觅风
     url : https://woaielf.github.io/
