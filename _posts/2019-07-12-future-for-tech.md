@@ -808,6 +808,8 @@ ps：和自由职业有关的书也有不少，比如说最近几年比较火的
 ### 出书
 - [猫小蓟的画花笔记](https://www.douban.com/note/285378114/), 画画→上传到网上→出版社关注→出书
 
+![](https://img1.doubanio.com/view/note/large/public/p9004668.jpg)
+
 # 结束
 
 
