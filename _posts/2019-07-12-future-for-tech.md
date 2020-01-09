@@ -606,6 +606,8 @@ Leadership也有范围的，比如，身边的朋友，工作中的团队/部分
 
 # 自由职业
 
+## 转行
+- 【2020-1-9】[30岁那年转行，离开通信拥抱互联网](https://mp.weixin.qq.com/s?__biz=MzUzNzYxMzAxMA==&mid=2247483673&idx=1&sn=6be9ac2eebc71fba6275d63115eb1d0d&chksm=fae506a4cd928fb240fe1382dd81bee6def2e4434496738419a5f9f1940eff90794eab3dfb25&scene=21#wechat_redirect)
 
 ## [自由职业，你准备好了吗？ | 很多人的必经之路](https://mp.weixin.qq.com/s?__biz=MzI5NjQxMjkxMg==&mid=2247484380&idx=1&sn=0caf245dc346961ac7406cd3d2b31809&chksm=ec45f043db327955a3116b0f48c86e5b893a0e3c8a94ef910ba2933a823789e38692db9e1ccd&mpshare=1&scene=23&srcid&sharer_sharetime=1577682839914&sharer_shareid=b8d409494a5439418f4a89712efcd92a%23rd)
 
@@ -705,8 +707,6 @@ ps：和自由职业有关的书也有不少，比如说最近几年比较火的
 
 
 ## [我体验了一把自由职业，比996苦多了](https://zhuanlan.zhihu.com/p/63106151)
-
-
 
 一个选择了不上班的普通人，在寻找自由的道路上，会遇到什么问题？
 - （1）29岁的紫祺，是大名鼎鼎的“第一批90后”。在她不算长的就业生涯里，没有一份工作能坚持满一年。
