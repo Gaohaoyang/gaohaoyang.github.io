@@ -22,7 +22,7 @@ mathjax: true
 # 神经网络发展历史
 
 先看看这几张图：
-![history](https://github.com/wqw547243068/wqw547243068.github.io/raw/master/wqw/fig/nn_history.jpg)
+![history](https://github.com/wqw547243068/wqw547243068.github.io/blob/master/wqw/fig/nn_history.jpg)
 ![history](https://github.com/wqw547243068/wqw547243068.github.io/raw/master/wqw/fig/figure1_ANN_history.jpg)
 
 神经网络三次兴起：
