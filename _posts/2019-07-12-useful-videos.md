@@ -25,6 +25,10 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=46644313&cid=81710824&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+- 【2020-1-11】[请不要浪费宝贵的时间](https://www.bilibili.com/video/av81499701)
+
+<iframe src="//player.bilibili.com/player.html?aid=81499701&cid=139469096&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 ## 思维哲学
 
 ### 知行合一-王阳明
