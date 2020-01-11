@@ -52,7 +52,7 @@ print "hello"
 ### 公式嵌入
 * [Latex在线调试](https://latexbase.com/)，[吴文中数学公式编辑器](http://latex.91maths.com/)，公式在线编辑，所见所得，支持图片输出
 
-- Github自带公式显示LaTeX
+- Github自带公式显示LaTeX，[LATEX数学公式基本语法](https://www.cnblogs.com/houkai/p/3399646.html)
 
 $$f \left( x _ { n + 1 } \right) - f \left( x _ { n } \right) = f ^ { \prime } \left( x _ { n } \right) \left( x _ { n + 1 } - x _ { n } \right)$$
 
