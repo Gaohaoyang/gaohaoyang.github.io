@@ -23,6 +23,7 @@ mathjax: true
 
 先看看这几张图：
 ![history](https://raw.githubusercontent.com/wqw547243068/wqw547243068.github.io/master/wqw/fig/nn_history.jpg)
+
 ![history](https://raw.githubusercontent.com/wqw547243068/wqw547243068.github.io/master/wqw/fig/figure1_ANN_history.jpg)
 
 神经网络三次兴起：
