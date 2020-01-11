@@ -22,8 +22,8 @@ mathjax: true
 # 神经网络发展历史
 
 先看看这几张图：
-![history](https://github.com/wqw547243068/wqw547243068.github.io/blob/master/wqw/fig/nn_history.jpg)
-![history](https://github.com/wqw547243068/wqw547243068.github.io/raw/master/wqw/fig/figure1_ANN_history.jpg)
+![history](https://raw.githubusercontent.com/wqw547243068/wqw547243068.github.io/master/wqw/fig/nn_history.jpg)
+![history](https://raw.githubusercontent.com/wqw547243068/wqw547243068.github.io/master/wqw/fig/figure1_ANN_history.jpg)
 
 神经网络三次兴起：
 - 第一次，`控制论`时代，1958年，感知器诞生，能分类，但解决不了异或问题；
@@ -72,8 +72,7 @@ mathjax: true
    - <iframe src="//player.bilibili.com/player.html?aid=33138973&cid=58003723&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 - 相关视频：《线性代数本质》、《微积分》等
 - 三棕一蓝很优秀，很无私，赞一个！
-![3brown1blue](https://github.com/wqw547243068/wqw547243068.github.io/raw/master/wqw/fig/3brown1blue.png)
-
+![3brown1blue](https://raw.githubusercontent.com/wqw547243068/wqw547243068.github.io/master/wqw/fig/3brown1blue.png)
 
 ## 隐含层有什么用？
 
