@@ -23,6 +23,7 @@ mathjax: true
 
 ## 引言
 - 2019年9月出版，作者[林安](https://www.douban.com/people/xtutux/)
+
 <img src="https://img3.doubanio.com/view/thing_review/l/public/3525520.webp" height="100%" width="300" />
 
 - 注意：不是”只上班、不工作”——想摸鱼是吗？o(*￣︶￣*)o
