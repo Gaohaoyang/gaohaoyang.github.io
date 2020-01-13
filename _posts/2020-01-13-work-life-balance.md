@@ -11,6 +11,11 @@ mathjax: true
 * content
 {:toc}
 
+# 背景
+
+- 2019年，996ICU异军突起，短时间内冲上了github第一名，可见国内上班族对工作强度的怨念有多深
+- 难道只能忍受吗，能不能做些改变？
+
 # 工作生活如何平衡
 - 占坑
 
@@ -25,6 +30,14 @@ mathjax: true
    - 打卡充数不干活白拿钱，看似好，细想一下消耗一生
 - 通过20几个人的真实案例，解释什么是工作，什么是上班，怎么样才能不上班，怎样的人生才有意义，给大家启发
    - 班可以不坐，活要干，干有意义的活，自由支配时间选择地点
+- 资料
+   - 豆瓣帖子：[采访100个不上班的人：“我只是想和别人不一样”](https://book.douban.com/review/10588140/)
+      - ![](https://img1.doubanio.com/view/thing_review/l/public/3525518.webp)
+   - B站视频：[【100个不上班的人】旅行博主：那个睡陌生人家沙发，睡上电视的女孩](https://www.bilibili.com/video/av69166304)
+      - ![](https://img1.doubanio.com/view/thing_review/l/public/3525519.webp)
+      - <iframe src="//player.bilibili.com/player.html?aid=69166304&cid=119869704&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+
 
 ## 目录
 
