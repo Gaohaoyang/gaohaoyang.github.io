@@ -23,8 +23,7 @@ mathjax: true
 
 ## 引言
 - 2019年9月出版，作者林安
-
-![](https://img9.doubanio.com/view/subject/l/public/s33488846.jpg)
+<img src="https://img9.doubanio.com/view/subject/l/public/s33488846.jpg" height="100%" width="300" />
 
 - 注意：不是”只上班、不工作”——想摸鱼是吗？o(*￣︶￣*)o
    - 打卡充数不干活白拿钱，看似好，细想一下消耗一生
