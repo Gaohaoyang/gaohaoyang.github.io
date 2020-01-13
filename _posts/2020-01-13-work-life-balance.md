@@ -1,10 +1,10 @@
 ---
 layout: post
 title:  "【读书笔记】只工作、不上班"
-date:   2019-09-06 10:29:00
-categories: 文史哲
-tags: 丘成桐 数学 人文
-excerpt: 人文与数学的前后关系
+date:   2020-01-13 10:29:00
+categories: 读书笔记
+tags: 工作 996 斜杠青年
+excerpt: “只上班、不工作”还是“只工作、不上班”？
 mathjax: true
 ---
 
