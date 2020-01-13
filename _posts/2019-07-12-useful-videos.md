@@ -309,6 +309,12 @@ mathjax: true
 - 【2019-12-31】创客兄弟：以创客的奋斗故事为主线，其中摒弃山寨手机等低端电子产品，到研发人工智能产品的场景，与华强北商业街的转型升级相呼应
 ![](https://pics6.baidu.com/feed/024f78f0f736afc346ff177f703432c1b64512ef.jpeg?token=2a3eeccbe1a11a2d8eb656ddc79940fa&s=BA9305CD4B6011074051942D0300E043)
 - [2019我赚钱了](https://mp.weixin.qq.com/s/AbjlrLWdQQRXAD_fFWbIBA)
+- 【2020-1-13】只工作、不上班
+   - 豆瓣帖子：[采访100个不上班的人：“我只是想和别人不一样”](https://book.douban.com/review/10588140/)
+      - ![](https://img1.doubanio.com/view/thing_review/l/public/3525518.webp)
+   - B站视频：[【100个不上班的人】](https://space.bilibili.com/18937939), [旅行博主：那个睡陌生人家沙发，睡上电视的女孩](https://www.bilibili.com/video/av69166304)
+      - ![](https://img1.doubanio.com/view/thing_review/l/public/3525519.webp)
+      - <iframe src="//player.bilibili.com/player.html?aid=69166304&cid=119869704&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 ## 历史
 - 孙子兵法-10集纪录片，[B站](https://www.bilibili.com/video/av1968639)
