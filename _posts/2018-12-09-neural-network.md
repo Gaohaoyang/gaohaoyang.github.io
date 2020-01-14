@@ -22,6 +22,7 @@ mathjax: true
 # 神经网络发展历史
 
 先看看这几张图：
+
 ![history](https://raw.githubusercontent.com/wqw547243068/wqw547243068.github.io/master/wqw/fig/nn_history.jpg)
 
 ![history](https://raw.githubusercontent.com/wqw547243068/wqw547243068.github.io/master/wqw/fig/figure1_ANN_history.jpg)
@@ -116,7 +117,8 @@ mathjax: true
 刚才是从人的感性角度来理解，这次换成无感情的物理角度。([神经网络隐含层的物理含义](https://blog.csdn.net/qq_22690765/article/details/75050943))
 
 多层神经网络，将原始输入数据在隐含层上做了多个二分类，隐含层有多少个神经元，就有多少个分类。
-![lr_nn](../wqw/fig/lr_nn.png)
+
+![lr_nn](https://raw.githubusercontent.com/wqw547243068/wqw547243068.github.io/master/wqw/fig/lr_nn.png)
 
 > 注：源自Youtube上的一个优秀的教学视频：[A Friendly Introduction to Machine Learning](https://www.youtube.com/watch?v=IpGxLWOIZy4)
 
@@ -183,7 +185,7 @@ Andrej karparthy的[ConvNetJS](https://cs.stanford.edu/people/karpathy/convnetjs
    - 右侧是神经网络各层学习到的分类面
 - 分析：越往后，分类面越简洁、清晰（低维线性不可分映射到高维空间，使其线性可分）
 
-![convjs](../wqw/fig/convjs.gif)
+![convjs](https://raw.githubusercontent.com/wqw547243068/wqw547243068.github.io/master/wqw/fig/convjs.gif)
 
 ### 案例二： Playground
 
@@ -193,7 +195,7 @@ Andrej karparthy的[ConvNetJS](https://cs.stanford.edu/people/karpathy/convnetjs
 
 动图：
 
-![playground](../wqw/fig/playground.gif)
+![playground](https://raw.githubusercontent.com/wqw547243068/wqw547243068.github.io/master/wqw/fig/playground.gif)
 
 分析：
 - 第一个隐含层只是完成简单的二分类，第二个隐含层将前面的分类面组合起来，形成复杂的分类面，最终在输出层将两类数据完美的分开。
