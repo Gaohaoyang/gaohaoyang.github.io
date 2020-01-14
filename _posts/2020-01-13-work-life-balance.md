@@ -35,7 +35,7 @@ mathjax: true
       - ![](https://img1.doubanio.com/view/thing_review/l/public/3525518.webp)
    - B站视频：[【100个不上班的人】](https://space.bilibili.com/18937939), [旅行博主：那个睡陌生人家沙发，睡上电视的女孩](https://www.bilibili.com/video/av69166304)
       - ![](https://img1.doubanio.com/view/thing_review/l/public/3525519.webp)
-      - <iframe src="//player.bilibili.com/player.html?aid=69166304&cid=119869704&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=69166304&cid=119869704&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
 
