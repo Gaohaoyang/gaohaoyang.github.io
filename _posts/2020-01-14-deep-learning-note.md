@@ -229,13 +229,13 @@ mathjax: true
    - 老实说，这一步挺难，从读书，查资料，消化理解，到做ppt，平均每个章节花费我4-8小时，甚至更多时间，几个月时间没有周末。
 
 如果真的想学深度学习，建议自己尝试着给别人讲，组建学习小组，一起分享
-- 子曰：赠人玫瑰，手留余香
-- 子又曰：一个人走得快，一群人走得远
+- 子曰：<font color='green'>赠人玫瑰，手留余香</font>
+- 子又曰：<font color='green'>一个人走得快，一群人走得远</font>
 
 ![](https://static.leiphone.com/uploads/new/article/740_740/201708/5992632a07c07.png?imageMogr2/format/jpg/quality/90)
 
 关于留存率的另一个经典概念：`艾宾浩斯遗忘曲线`告诉我们：
->接触信息后，20min、1h会急剧下降到58%，一周后25%
+-  解除新的信息后，20min、1h会急剧下降到<font color='red' size='5'>58%</font>，一周后<font color='red' size='5'>25%</font>
 
 ![](https://static.leiphone.com/uploads/new/article/740_740/201708/599049430a227.jpg?imageMogr2/format/jpg/quality/90)
 
@@ -256,7 +256,7 @@ mathjax: true
 - 第五，深度学习能做什么。
 
 总体思路: 
-- 只提一些感性的认识，而不会去讲具体的细节。
+- <font color='blue'>只提一些感性的认识</font>，而不会去讲具体的细节，这样更容易理解记忆。
 - 如果大家想进一步了解，请踏实看书，学知识不要偷懒，不要偷懒，不要偷懒
    - **今天偷的懒，明天会加倍偿还**，<font color='blue'>这个时代在加速惩罚不学习的人</font>（地铁里教育机构的广告语，紧张不？焦虑售卖完毕）
 
