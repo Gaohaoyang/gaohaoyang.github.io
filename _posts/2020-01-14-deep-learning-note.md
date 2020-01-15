@@ -328,13 +328,15 @@ Ian Goodfellow的「`Deep learning`」这本书，久负盛名，号称是`AI圣
 
 ### 深度学习跟机器学习之间有什么关系
 
-![]https://static.leiphone.com/uploads/new/article/740_740/201708/59916ad702a6c.jpg?imageMogr2/format/jpg/quality/90)
+![](https://static.leiphone.com/uploads/new/article/740_740/201708/59916ad702a6c.jpg?imageMogr2/format/jpg/quality/90)
 
-<font color='blue'>深度学习源于机器学习，但是高于机器学习</font>。图里第二个是机器学习，DL是AI的一大分支，AI 还有其他的方法，这个只是其中的一个分支而已。
+<font color='blue'>深度学习源于机器学习，但是高于机器学习</font>
+
+图里第二个是机器学习，DL是AI的一大分支，AI 还有其他的方法，这个只是其中的一个分支而已。
 
 跟传统神经网络相比，深度学习的深度体现在复杂的网络结构上。那么怎样才叫复杂呢，一般在4到5层以上，因为传统的神经网络是在2到3层，比如BP网络，两到三层，超过的话就不好训练，也训练不出来，所以基本上只到4到5层左右，不会有太多。
 
-这是一张`韦恩图`，描述的各个概念之间的一些逻辑关系。这个就看的相对直观一些，最下面的红框里是`机器学习`，然后里面有一个流派叫`表示学习`，表示学习里面又有一个深度学习，层层嵌套的关系。
+这是一张`韦恩图`(Venn)，描述的各个概念之间的一些逻辑关系。这个就看的相对直观一些，最下面的红框里是`机器学习`，然后里面有一个流派叫`表示学习`，表示学习里面又有一个深度学习，层层嵌套的关系。
 
 ![](https://static.leiphone.com/uploads/new/article/740_740/201708/59916bcb96d51.jpg?imageMogr2/format/jpg/quality/90)
 
