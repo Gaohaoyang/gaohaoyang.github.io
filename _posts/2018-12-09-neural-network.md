@@ -295,8 +295,8 @@ Andrej karparthy的[ConvNetJS](https://cs.stanford.edu/people/karpathy/convnetjs
 # 神经网络可解释性
 
 上面只是简答的示例，有更复杂的案例吗？
-[The Building Blocks of Interpretability](https://distill.pub/2018/building-blocks/)（交互地址）
-[2分钟论文 | 用 谷歌「AI可解释性」 看懂机器学习](https://www.toutiao.com/a6534574654458167815/?tt_from=mobile_qq&utm_campaign=client_share&timestamp=1521592137&app=news_article&utm_source=mobile_qq&iid=28217844450&utm_medium=toutiao_android)
+- [The Building Blocks of Interpretability](https://distill.pub/2018/building-blocks/)（交互地址）
+- [2分钟论文 | 用 谷歌「AI可解释性」 看懂机器学习](https://www.toutiao.com/a6534574654458167815/?tt_from=mobile_qq&utm_campaign=client_share&timestamp=1521592137&app=news_article&utm_source=mobile_qq&iid=28217844450&utm_medium=toutiao_android)
 
 ![nn_ex](https://p9.pstatp.com/large/6ec80010113570eab547)
 
