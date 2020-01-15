@@ -33,9 +33,9 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=45247943&cid=79224469&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
-- 【2020-1-15】回形针出品：[Vol.112 区块链到底是什么？](https://v.qq.com/x/page/p30511d223r.html)
+- 【2020-1-15】回形针出品：[Vol.112 区块链到底是什么？](https://www.bilibili.com/video/av83366647)
 
-<iframe frameborder="0" src="https://v.qq.com/txp/iframe/player.html?vid=p30511d223r" allowFullScreen="true"   height="600" width="100%"></iframe>
+<iframe src="//player.bilibili.com/player.html?aid=83366647&cid=142619878&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 # 比特币
 
