@@ -126,13 +126,13 @@ Aaron说的一句话让我挺有感触的——
 
 ## 1 互联网，应该感谢他
 
-- 【2020-1-16】[光复互联网](https://mp.weixin.qq.com/s?__biz=MzIyMzU5MDA1Mw==&mid=2247489080&idx=1&sn=2f5a76f19ccadbd0596708dac20968db&chksm=e81ab5f2df6d3ce47fcd5cb306a6471137f585e7cfb03ecf06a067d8fa3ffd564260b2020573&token=1480150553&lang=zh_CN#rd)
+- 【2020-1-16】[光复互联网](https://www.huxiu.com/article/335926.html)
 
 大部分人知道乔布斯、扎克伯格、贝佐斯、马云、马化腾……
 
 只有很少的人知道蒂姆·伯纳斯·李（Tim Berners-Lee ）， 而他才是WEB真正的教父。
 
-![](https://mmbiz.qpic.cn/sz_mmbiz_png/fwMichPIGE0ibdPia2xpsicwXXGSWCDE3gAPsrbSibe5P4LbZ10wSHQcBsZSRPRacTp2bicy173mzbt7tckVKCBIS4xQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://img.huxiucdn.com/article/content/202001/14/102301370245.jpg?imageView2/2/w/1000/format/jpg/interlace/1/q/85)
 
 - 有了他，我们才有了现在的互联网；
 - 有了他，这些互联网巨头才能掌控亿万用户。
@@ -162,13 +162,11 @@ Aaron说的一句话让我挺有感触的——
 - 2019年，Google和YouTube因隐私问题被罚1.36亿美元和3400万美元。
 - …………
 
-![](https://mmbiz.qpic.cn/sz_mmbiz_png/fwMichPIGE0ibdPia2xpsicwXXGSWCDE3gAPnwTMXT2H263wNAd2icKeo3NVbz2tox9xPacyyNAIibKNXHRo528N3iaLQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://img.huxiucdn.com/article/content/202001/14/102301703731.jpg?imageView2/2/w/1000/format/jpg/interlace/1/q/85)
 
 互联网本来是想带来一个“更美好和联系更紧密的世界”，但今天的互联网已经完全背离了它的“去中心化”初衷，Tim Berners-Lee眼中微含泪水：“互联网已经演变成一个导致不公平和分裂的引擎，它被强大的力量所支配，任由其摆布。”
 
 因此，这位本来可以功成身退的“万维网之父”开始他的人生反击。
-
-
 
 性格随和的Tim Berners-Lee决定开发Web3.0（Solid），该项目的原则是“通过数据赋予个人权力”，这是下一代网络（去中心化互联网）的核心理念，其中数据由拥有者双向控制。
 - ❶恢复互联网平衡，让巨头不能再为所欲为；
@@ -197,7 +195,7 @@ Aaron说的一句话让我挺有感触的——
 
 超级规模的互联网公司已经没有机构可以制衡，长尾效应已经失效。
 
-![](https://mmbiz.qpic.cn/sz_mmbiz_png/fwMichPIGE0ibdPia2xpsicwXXGSWCDE3gAPV4plkR2kNIHiaMyU4LZDicVR4bFXzV0mGCvR1JjMq3pznibFDJBibXVIsg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://img.huxiucdn.com/article/content/202001/14/102301505166.jpg?imageView2/2/w/1000/format/jpg/interlace/1/q/851)
 
 特别是移动互联网+社交媒体的“叠加效应”，现在大型社交网站决定了用户看到什么、甚至决定了他们怎么思考、怎么行动。
 
@@ -217,7 +215,7 @@ Tim Berners-Lee强调道：“最可怕的，很多人可能都没有意识到�
 
 最开始的互联网创业者都有“数据库”情结，因为那是属于自己的据点。
 
-![](https://mmbiz.qpic.cn/sz_mmbiz_png/fwMichPIGE0ibdPia2xpsicwXXGSWCDE3gAPOqCEiaUqLuMDApd1tRbn1NQ9QJbmeho6ibslEE2WWwHatruiaP3K2tibPg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://img.huxiucdn.com/article/content/202001/14/102301112370.jpg?imageView2/2/w/1000/format/jpg/interlace/1/q/85)
 
 今天，大部分创业者抛弃了自己的阵地，更喜欢在用户登录时直接导入微信、QQ、微博、支付宝的开放接口，因为他们知道自己的服务没有办法吸引用户注册，从一开始，这些创业者就抛弃了理想。
  
@@ -257,7 +255,7 @@ Tim Berners-Lee强调道：“最可怕的，很多人可能都没有意识到�
 - ❸Google如果删掉了你的邮箱账号，你可能再也看不到李子柒的中国视频了。
 - ❹微信如果把你账号给删了，你还得厚着脸皮注册个小号把朋友加回来。
 
-![](https://mmbiz.qpic.cn/sz_mmbiz_png/fwMichPIGE0ibdPia2xpsicwXXGSWCDE3gAP8ZkTOS2MIeicL6N8fgw9etFnf9nRrNPxSSnQcnQL2xoguwodbDLib9CA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://img.huxiucdn.com/article/content/202001/14/102301422910.jpg?imageView2/2/w/1000/format/jpg/interlace/1/q/85)
 
 这些互联网企业都成了大数据行业的寡头垄断（包括被称为FANG的Facebook、Amazon、Netflix和Google)，扎克伯格、盖茨、贝索斯等人已经成为未来世界的数据大亨。
 
@@ -272,9 +270,6 @@ Tim Berners-Lee强调道：“最可怕的，很多人可能都没有意识到�
 
 或者说，现在大部分人类都成了互联网世界的“斯德哥尔摩综合征”患者。
 
-
-
-
 ## 6 权力垄断的互联网：连接的“幻象”
 
 除了互联网巨头的“数据垄断”，公权力也已经开始控制互联网。
@@ -287,7 +282,7 @@ Tim Berners-Lee强调道：“最可怕的，很多人可能都没有意识到�
 
 这也是为什么美伊关系紧张时，世界上最大的帝国主义国家,跟世界上最大的政教合一的神权共和国,在世界上最大的社会主义国家网络平台上,使用标准汉语进行外交缠斗。
 
-![](https://mmbiz.qpic.cn/sz_mmbiz_png/fwMichPIGE0ibdPia2xpsicwXXGSWCDE3gAP3Y5KqfsibBU9ppL4Vc5X1OsXKgCJtVFJ4W5MyUVLEW7jMia0h8YxW7PA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://img.huxiucdn.com/article/content/202001/14/102301664469.jpg?imageView2/2/w/1000/format/jpg/interlace/1/q/85)
 
 其实不仅仅是俄罗斯和伊朗，2019年12月13日，印度继续关闭阿萨姆邦和梅加拉亚邦互联网，声称此举是为了控制一项具有争议性且影响广泛的新公民条例的抗议。印度是世界第二大互联网市场，拥有6.5亿互联网用户，而阿萨姆邦和梅加拉亚邦拥有3200万用户。
 
@@ -310,14 +305,14 @@ Tim Berners-Lee强调道：“最可怕的，很多人可能都没有意识到�
 
 连互联网本来的样子都不知道，如何谈“光复互联网”。
 
-![](https://mmbiz.qpic.cn/sz_mmbiz_png/fwMichPIGE0ibdPia2xpsicwXXGSWCDE3gAPgiaIZlXOYegJhtoAicoluLRiaQ692Trr4mmpaonR296egKWx0CIxEXibEw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://img.huxiucdn.com/article/content/202001/14/102301996477.jpg?imageView2/2/w/1000/format/jpg/interlace/1/q/85)
 
 如果互联网这样发展下去，你有了孙子，他生活在苹果构架的一个APP场景之中，吃饭、理发、上学、医疗、坐车、买房、打老婆、搞婚外情……衣食住行什么都有，这是一个能满足他所有需求的世界，唯一他不知道的是，他生活在一个互联网公司构建的虚拟场景之中。他根本不知道，APP之外还有APP，局域网之外还有互联网。他们将生于苹果，并且死于苹果，苹果将是人终生的坟墓。
 
 
 我们这一代人还有反思的机会，但到了下一代，可能连这种反思的机会都没有，因为他们一出生就沉浸在一个互联网“缸中大脑”里面，在算法推荐中度过“充实的一生”，在“信息茧房”里幸福一辈子。
 
-![](https://mmbiz.qpic.cn/sz_mmbiz_png/fwMichPIGE0ibdPia2xpsicwXXGSWCDE3gAPv9TR53iaM70viau8IscVsYyRWibqLf6TULPgLXBV24Pm7icCMy8JD3uqog/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://img.huxiucdn.com/article/content/202001/14/102301635204.jpg?imageView2/2/w/1000/format/jpg/interlace/1/q/85)
 
 就算未来有一个NEO出现，当未来人类面临红蓝药丸选择时，会选择继续在矩阵中过完娱乐的一生，还是归依举步维艰互联网的原始之城？就算这些互联网公司随时可以将你格式化，只怕大部分人仍然愿意服从它们，这就是人类的悲剧，我们正在给自己制造囚笼。
 
