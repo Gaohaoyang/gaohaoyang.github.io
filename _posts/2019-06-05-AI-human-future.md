@@ -41,11 +41,15 @@ Tim Urban，之前火热的文章《为什么有很多名人让人们警惕人�
  
 # 实际案例
 
+![](https://mmbiz.qpic.cn/mmbiz_jpg/V1OJoKudbibamvvRKM6jYFt5Gf2wz9BHR92gRojGfZMFMR6ocnDNSicGKCfncAjtWClicU2rHDicmSt0OjibUFTLpjA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+
 - 【2020-1-16】浙江大学：[国内首例植入式脑机接口让“意念”控制机器臂](https://mp.weixin.qq.com/s/X58bAYMPGDtw-IC7aOcAZg)
    - 1月16日，浙江大学对外宣布“双脑计划”重要科研成果，求是高等研究院“脑机接口”团队与浙江大学医学院附属第二医院神经外科合作完成国内第一例植入式脑机接口临床研究，患者可以完全利用大脑运动皮层信号精准控制外部机械臂与机械手实现三维空间的运动，同时首次证明高龄患者利用植入式脑机接口进行复杂而有效的运动控制是可行的。
    - 除了吃喝、社交、娱乐外，这项最新成果将有助于肢体瘫痪患者进行运动功能重建，从而提高生活质量，未来也将对辅助运动功能、失能者功能重建、老年机能增强等更多领域产生积极影响。
 
-![](https://mmbiz.qpic.cn/mmbiz_jpg/V1OJoKudbibamvvRKM6jYFt5Gf2wz9BHR92gRojGfZMFMR6ocnDNSicGKCfncAjtWClicU2rHDicmSt0OjibUFTLpjA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+- 视频：
+
+<iframe src="//player.bilibili.com/player.html?aid=83746758&cid=143264316&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
 
