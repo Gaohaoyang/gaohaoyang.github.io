@@ -3,7 +3,7 @@ layout: post
 title:  Linux程序设计
 subtitle:   Linux程序开发
 date:   2019-12-20 15:43:00
-author:  wangqiwen
+author:  鹤啸九天
 categories: 编程语言
 tags: Linux 编程技能 操作系统 C/C++ MakeFile GCC
 excerpt: Linux程序开发
