@@ -5,6 +5,7 @@ date:   2020-01-14 12:44:00
 categories: 深度学习 机器学习
 tags: 神经网络  人工智能  AI  机器学习  ML  表示学习 AI圣经 读书笔记
 excerpt: 深度学习学习读书笔记汇总。
+author: 鹤啸九天
 mathjax: true
 ---
 
