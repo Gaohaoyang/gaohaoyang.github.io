@@ -566,7 +566,10 @@ ANN则是是从信息处理角度对人脑神经元网络进行抽象，目前�
 
 ## 类脑可以超越人脑吗？
 
-其实早在3年前，谷歌就曾在愚人节那天发布过一辆理想中的自动驾驶自行车。
+其实早在2016年，谷歌就曾在愚人节那天发布过一辆理想中的自动驾驶自行车。
+
+<iframe src="//player.bilibili.com/player.html?aid=11696654&cid=19323090&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- [无水印版](https://www.bilibili.com/video/av7135972)（中文字幕，无英文）
 
 在谷歌的想象中，这辆“自行车”不仅平衡力超高
 
@@ -577,6 +580,8 @@ ANN则是是从信息处理角度对人脑神经元网络进行抽象，目前�
 ![](https://images.tmtpost.com/uploads/images/2019/08/eb45d1790480037035f7d53a4b5a0428_1564647945.gif?imageMogr2/strip/interlace/1/quality/85/thumbnail/1400x763&ext=.gif)       
 
 但作为“愚人节视频“发布，也说明了这一技术的难点和不易实现。
+
+<iframe src="//player.bilibili.com/player.html?aid=36837684&cid=64694826&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 而在今天，清华施路平团队终于初步实现了这一想象。这样的黑科技似乎也带着一丝科幻色彩，让人畅想AGI到来的那天。
 
