@@ -35,8 +35,9 @@ Tim Urban，之前火热的文章《为什么有很多名人让人们警惕人�
 - 第五章：魔法纪元（约13000字）全脑接口实现后未来的人类会是怎样
 - 第六章：大融合（约10000字）人类唯一的出路：变成人工智能
 
-注：原文请看:[【完整版】人类唯一的出路：变成人工智能](https://mp.weixin.qq.com/s?__biz=MjM5ODY2OTQyNg==&mid=2649768466&idx=1&sn=b6b1720b7a2243ab3907c58d2b22a602&chksm=bec3df0f89b456198c4960da99e46075f2bef121320f52a805b19f9143f5c083f6bac9430e97&token=832591528&lang=zh_CN#rd)
-
+注：
+- 原文请看:[人类唯一的出路：变成人工智能](https://mp.weixin.qq.com/s?__biz=MjM5ODY2OTQyNg==&mid=2649768466&idx=1&sn=b6b1720b7a2243ab3907c58d2b22a602&chksm=bec3df0f89b456198c4960da99e46075f2bef121320f52a805b19f9143f5c083f6bac9430e97&token=832591528&lang=zh_CN#rd)，篇幅所限，不含第四章和第六章
+- [微云完整版](https://docs.qq.com/doc/DZlN3ZlBJS3pnSVBN)
 - 60页的打印版下载，[链接](https://share.weiyun.com/5rFS3oT) 密码：tvr5sa
  
 # 实际案例
