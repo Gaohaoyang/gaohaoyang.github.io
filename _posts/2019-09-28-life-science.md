@@ -767,6 +767,8 @@ mathjax: true
 
 ## 毒王蝙蝠
 
+![](http://a.hiphotos.baidu.com/zhidao/pic/item/6a600c338744ebf8b29ccd9adef9d72a6159a7a2.jpg)
+
 - 神奇的蝙蝠（[毒王蝙蝠，随身携带100多种病毒却不发作，原来它一直在“发烧”](https://baijiahao.baidu.com/s?id=1656952402844168416&wfr=spider&for=pc)）
    - 自然界总是不按常理出牌，蝙蝠属于哺乳动物，而哺乳动物的特点就是没有翅膀，不会飞翔（滑翔除外），然而<font color='blue'>蝙蝠是唯一会飞的哺乳动物。</font>
    - **蝙蝠的体温比其他哺乳动物更高**，和鸟类相似，达到了38-41摄氏度，相当于人类**高烧**状态。
