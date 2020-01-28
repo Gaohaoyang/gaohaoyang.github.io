@@ -736,14 +736,16 @@ mathjax: true
 
 # 病毒、细菌与真菌
 
+<img src="https://pic4.zhimg.com/50/1032786ae7bea04abcf01378e876585b_hd.jpg" data-rawwidth="640" data-rawheight="537" class="origin_image zh-lightbox-thumb" width="640" data-original="https://pic4.zhimg.com/1032786ae7bea04abcf01378e876585b_r.jpg"/>
+
 - `病毒`：艾滋、流感、乙肝，治疗用抗病毒药物
 - `细菌`：有完整的细胞结构，结核、伤寒和鼠疫，治疗用抗生素，即消炎药
 
-[知乎](https://www.zhihu.com/question/21149558/answer/17341688)Ares
 
-`细菌`、`真菌`和`病毒`的区别在于它们的结构
+## `细菌`、`真菌`和`病毒`的区别
 
-<img src="https://pic4.zhimg.com/50/1032786ae7bea04abcf01378e876585b_hd.jpg" data-rawwidth="640" data-rawheight="537" class="origin_image zh-lightbox-thumb" width="640" data-original="https://pic4.zhimg.com/1032786ae7bea04abcf01378e876585b_r.jpg"/>
+- 区别在于它们的结构
+   - 参考：[知乎](https://www.zhihu.com/question/21149558/answer/17341688)Ares
 
 - `病毒`：无完整细胞结构，含单一核酸（DNA或RNA）型
    - 病毒寄生在活细胞中，掠夺别人的营养生存，危害大，如爱滋病毒，生存在人体免疫细胞，破坏人体自身保护。
@@ -786,6 +788,25 @@ mathjax: true
    - 人类的出现打破了这个僵局，人类在狩猎、运输、宰杀野味的过程中，会接触到病毒，一旦病毒能够实现从动物到人类的传播，那么这种病毒将会在人群中传播
    ![](https://pics4.baidu.com/feed/6f061d950a7b0208a0a7bfbb114eedd5562cc898.jpeg?token=45773c251b11201dfa251f21e62997bf&s=00B0E8331F7076921F4110C503006020)
 
+- 蝙蝠本身就对大量病毒免疫，而且在飞行状态下体内温度能上升到40摄氏度杀死病毒，因此它成为了许多流行性传染病的源头
+   - 1、蝙蝠是超级毒王吗？
+      - 是的！<font color='blue'>蝙蝠存在了8800万年，几乎与恐龙是同时代。</font>
+   - 2、蝙蝠百毒不侵？
+      - 蝙蝠是病毒的自然宿主，作为全球携带病毒最多的动物之一，<font color='blue'>蝙蝠自己却百毒不侵。</font>
+   - 3、蝙蝠能携带多少病毒？
+      - 蝙蝠身上能携带**超过 100 多种**毒性极大、凶险无比的病毒，有埃博拉，狂犬病、SARS等。
+   - 4、蝙蝠为何携带病毒却不生病？
+      - <font color='blue'>蝙蝠逆天的免疫系统，强有力的防御功能，很难被异物伤害，病毒也无法对蝙蝠产生作用。</font>
+   - 5、蝙蝠有多少？
+      - 所有的哺乳类动物中，<font color='blue'>有 1/5 都是蝙蝠，第一大哺乳动物</font>
+   - 6、蝙蝠有翅膀吗？
+      - 蝙蝠没有翅膀，<font color='blue'>蝙蝠独特的飞行器官是翼手。</font>
+
+- [蝙蝠为啥会携带多数致命病毒](https://www.bilibili.com/video/av84801954)
+<iframe src="//player.bilibili.com/player.html?aid=84801954&cid=145024799&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+
+## 蝙蝠引起的病毒史
 
 ![](http://a.hiphotos.baidu.com/zhidao/pic/item/6a600c338744ebf8b29ccd9adef9d72a6159a7a2.jpg)
 
@@ -808,33 +829,19 @@ mathjax: true
 
 ![](https://pics5.baidu.com/feed/95eef01f3a292df51e06a0fbfbfc456636a8736e.jpeg?token=6c2ea42a0d5126decbd1d4711582f942&s=48CBA944423A8E755CE824930300C08A)
 
-- 蝙蝠本身就对大量病毒免疫，而且在飞行状态下体内温度能上升到40摄氏度杀死病毒，因此它成为了许多流行性传染病的源头
-   - 1、蝙蝠是超级毒王吗？
-      - 是的！<font color='blue'>蝙蝠存在了8800万年，几乎与恐龙是同时代。</font>
-   - 2、蝙蝠百毒不侵？
-      - 蝙蝠是病毒的自然宿主，作为全球携带病毒最多的动物之一，<font color='blue'>蝙蝠自己却百毒不侵。</font>
-   - 3、蝙蝠能携带多少病毒？
-      - 蝙蝠身上能携带**超过 100 多种**毒性极大、凶险无比的病毒，有埃博拉，狂犬病、SARS等。
-   - 4、蝙蝠为何携带病毒却不生病？
-      - <font color='blue'>蝙蝠逆天的免疫系统，强有力的防御功能，很难被异物伤害，病毒也无法对蝙蝠产生作用。</font>
-   - 5、蝙蝠有多少？
-      - 所有的哺乳类动物中，<font color='blue'>有 1/5 都是蝙蝠，第一大哺乳动物</font>
-   - 6、蝙蝠有翅膀吗？
-      - 蝙蝠没有翅膀，<font color='blue'>蝙蝠独特的飞行器官是翼手。</font>
 
-- [蝙蝠为啥会携带多数致命病毒](https://www.bilibili.com/video/av84801954)
-<iframe src="//player.bilibili.com/player.html?aid=84801954&cid=145024799&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
-
+## 人类 “骚扰” 蝙蝠
 
 - 尽管蝙蝠如此邪恶，但总有人敢吃蝙蝠！
    - 一碗蝙蝠汤，棺材会反光！
 
 ![](http://5b0988e595225.cdn.sohucs.com/images/20200125/dea67aadd6584b20a93e1d6d42549121.jpeg)
 
-- 为什么不消灭蝙蝠？
-   - 毒王已经很客气了，作为最大的哺乳动物群体，他们群居于荒山野岭的洞穴，晚上才出来，以水果、昆虫喂食，与人类交集不大
-   - 但人类不断扩张，占领他们的领地，导致感染到人类领地，有些人还吃蝙蝠！好奇害死猫
-   - 人类从来都不是地球之王，不要肆无忌惮的挥霍地球资源，毁灭其他物种！
+## 为什么不消灭蝙蝠？
+
+- 毒王已经很客气了，作为最大的哺乳动物群体，他们群居于荒山野岭的洞穴，晚上才出来，以水果、昆虫喂食，与人类交集不大
+- 但人类不断扩张，占领他们的领地，导致感染到人类领地，有些人还吃蝙蝠！好奇害死猫
+- 人类从来都不是地球之王，不要肆无忌惮的挥霍地球资源，毁灭其他物种！
 
 
 ## SARS
