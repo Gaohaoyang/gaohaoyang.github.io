@@ -767,7 +767,7 @@ mathjax: true
 
 ## 毒王蝙蝠
 
-![](http://a.hiphotos.baidu.com/zhidao/pic/item/6a600c338744ebf8b29ccd9adef9d72a6159a7a2.jpg)
+![](https://pic2.zhimg.com/v2-80070e25ef4e3923114bb4472722b021_1200x500.jpg)
 
 - 神奇的蝙蝠（[毒王蝙蝠，随身携带100多种病毒却不发作，原来它一直在“发烧”](https://baijiahao.baidu.com/s?id=1656952402844168416&wfr=spider&for=pc)）
    - 自然界总是不按常理出牌，蝙蝠属于哺乳动物，而哺乳动物的特点就是没有翅膀，不会飞翔（滑翔除外），然而<font color='blue'>蝙蝠是唯一会飞的哺乳动物。</font>
@@ -786,8 +786,10 @@ mathjax: true
    - 人类的出现打破了这个僵局，人类在狩猎、运输、宰杀野味的过程中，会接触到病毒，一旦病毒能够实现从动物到人类的传播，那么这种病毒将会在人群中传播
    ![](https://pics4.baidu.com/feed/6f061d950a7b0208a0a7bfbb114eedd5562cc898.jpeg?token=45773c251b11201dfa251f21e62997bf&s=00B0E8331F7076921F4110C503006020)
 
-- 尼帕、亨德拉、埃博拉、马尔堡、SARS这些近50年来出现的最致命病毒，携带者都是蝙蝠。
 
+![](http://a.hiphotos.baidu.com/zhidao/pic/item/6a600c338744ebf8b29ccd9adef9d72a6159a7a2.jpg)
+
+- 尼帕、亨德拉、埃博拉、马尔堡、SARS这些近50年来出现的最致命病毒，携带者都是蝙蝠。
 - 蝙蝠可能传播马尔堡病毒、严重急性呼吸综合征病毒(冠状病毒SARS-CoV)，亨德拉病毒、尼帕病毒和狂犬病毒。不能证明蝙蝠传播埃博拉病毒、中东呼吸综合征病毒(冠状病毒MERS-CoV)
 - `人畜共患病`（Zoonoses）是由动物引起的人类疾病。
    - 例如在英国，有一种与本土蝙蝠有关的人畜共患疾病，由一种新型狂犬病毒，即欧洲蝙蝠丽沙病毒(European Bat Lyssavirus，EBLV)引起，只在道本顿（Daubenton）的蝙蝠种群中发现。然而，与其他哺乳动物相比，世界范围内蝙蝠携带病毒的比例更高。
@@ -804,6 +806,7 @@ mathjax: true
 |武汉肺炎(新冠状病毒)|2020年|中国武汉|华南海鲜市场，据说是蝙蝠|扩散中|待定|
 |||||||
 
+![](https://pics5.baidu.com/feed/95eef01f3a292df51e06a0fbfbfc456636a8736e.jpeg?token=6c2ea42a0d5126decbd1d4711582f942&s=48CBA944423A8E755CE824930300C08A)
 
 - 蝙蝠本身就对大量病毒免疫，而且在飞行状态下体内温度能上升到40摄氏度杀死病毒，因此它成为了许多流行性传染病的源头
    - 1、蝙蝠是超级毒王吗？
@@ -818,8 +821,20 @@ mathjax: true
       - 所有的哺乳类动物中，<font color='blue'>有 1/5 都是蝙蝠，第一大哺乳动物</font>
    - 6、蝙蝠有翅膀吗？
       - 蝙蝠没有翅膀，<font color='blue'>蝙蝠独特的飞行器官是翼手。</font>
+
 - [蝙蝠为啥会携带多数致命病毒](https://www.bilibili.com/video/av84801954)
 <iframe src="//player.bilibili.com/player.html?aid=84801954&cid=145024799&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+
+- 尽管蝙蝠如此邪恶，但总有人敢吃蝙蝠！
+   - 一碗蝙蝠汤，棺材会反光！
+
+![](http://5b0988e595225.cdn.sohucs.com/images/20200125/dea67aadd6584b20a93e1d6d42549121.jpeg)
+
+- 为什么不消灭蝙蝠？
+   - 毒王已经很客气了，作为最大的哺乳动物群体，他们群居于荒山野岭的洞穴，晚上才出来，以水果、昆虫喂食，与人类交集不大
+   - 但人类不断扩张，占领他们的领地，导致感染到人类领地，有些人还吃蝙蝠！好奇害死猫
+   - 人类从来都不是地球之王，不要肆无忌惮的挥霍地球资源，毁灭其他物种！
 
 
 ## SARS
