@@ -833,6 +833,8 @@ mathjax: true
 - `人畜共患病`（Zoonoses）是由动物引起的人类疾病。
    - 例如在英国，有一种与本土蝙蝠有关的人畜共患疾病，由一种新型狂犬病毒，即欧洲蝙蝠丽沙病毒(European Bat Lyssavirus，EBLV)引起，只在道本顿（Daubenton）的蝙蝠种群中发现。然而，与其他哺乳动物相比，世界范围内蝙蝠携带病毒的比例更高。
 
+<img src="https://raw.githubusercontent.com/wqw547243068/wqw547243068.github.io/master/wqw/fig/wechat/bat.jpg" height="100%" width="500" />
+
 |病毒名|时间|地点|原因|影响|治疗|
 |---|---|---|---|---|---|
 |[马尔堡](https://baike.baidu.com/item/%E9%A9%AC%E5%B0%94%E5%A0%A1%E7%97%85%E6%AF%92/4543821) (Marburg)|1967年|1967年秋，西德马尔堡医学实验室，有31人发病，其中7人死亡；2004年非洲安哥拉|接触染有马尔堡病的猴子；唯一从蝙蝠(埃及Rousettus aegyptiacus)身上分离出来的丝状病毒，而蝙蝠被认为是其天然宿主|超过300人病发身亡,2005年内，病症个案以每天3%速度增加。这次爆发的发病死亡率维持高达10%，首五个月更高达20%|抗体治疗|
