@@ -875,6 +875,7 @@ mathjax: true
    - [凤凰卫视《冷暖人生：非典九年》](https://www.bilibili.com/video/av8054424)
    - [新加坡纪录片《平民英雄——SARS危机》](https://www.bilibili.com/video/av5204257)
    - [央视《新闻调查——北京：非典阻击战》](https://www.bilibili.com/video/av13799601)
+   - [2003年非典时期敢说真话的钟南山](https://www.bilibili.com/video/av85065534)
 <iframe src="//player.bilibili.com/player.html?aid=85333784&cid=145866210&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 - 中科院病毒所（传说中的`P4实验室`）·`石正丽`--[追踪SARS源头](https://www.bilibili.com/video/av84617328)
    - 中科院病毒所石正丽团队探索SRAS源头，经过十余年的研究，最终确定云南某处的某重蝙蝠携带的SRAS病毒经过各种重组、在果子狸等野生动物身上二次传播，最终进入到广东的酒楼餐馆而感染到人体，成为可以“人传人”的SARS病毒！
