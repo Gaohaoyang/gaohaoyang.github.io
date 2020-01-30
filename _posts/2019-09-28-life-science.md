@@ -863,10 +863,17 @@ mathjax: true
 - 但人类不断扩张，占领他们的领地，导致感染到人类领地，有些人还吃蝙蝠！好奇害死猫
 - 人类从来都不是地球之王，不要肆无忌惮的挥霍地球资源，毁灭其他物种！
 
+## 霍乱
+
+- [霍乱改变村庄的故事-The Story of Cholera](https://www.bilibili.com/video/av14272785?t=12)
+
+<iframe src="//player.bilibili.com/player.html?aid=14272785&cid=23295565&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 ## 埃博拉
 
 - [博拉病毒到底是怎么毒害非洲人民的？](https://www.bilibili.com/video/av30745091)
    - 埃博拉（Ebola virus）又译作伊波拉病毒。是一种十分罕见的病毒，1976年在苏丹南部和刚果（金）（旧称扎伊尔）的埃博拉河地区发现它的存在后，引起医学界的广泛关注和重视，“埃博拉”由此而得名。是一个用来称呼一群属于纤维病毒科埃博拉病毒属下数种病毒的通用术语。是一种能引起人类和灵长类动物产生埃博拉出血热的烈性传染病病毒，有很高的死亡率，在50%至90%之间，致死原因主要为中风、心肌梗塞、低血容量休克或多发性器官衰竭。
+   - [小女孩战胜埃博拉的故事-The Story of Ebola](https://www.bilibili.com/video/av14289647?t=384)
 
 <iframe src="//player.bilibili.com/player.html?aid=30745091&cid=53670420&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
