@@ -912,6 +912,19 @@ mathjax: true
 - [武汉协和医院医生家属3分钟演示#家庭版抗疫措施怎么做](https://www.bilibili.com/video/av85048389)
 <iframe src="//player.bilibili.com/player.html?aid=85048389&cid=145417016&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+- 【2020-1-30】上海医疗救治专家组组长、华山医院感染科主任：共产党员上，没有讨价还价！
+   - [张文宏：不能把医务人员当机器](https://www.pearvideo.com/video_1646989)，遇到困难，党员先上！
+   - [张文宏医生科普传染病知识](https://www.pearvideo.com/video_1646964)
+![](https://wenhui.whb.cn/u/cms/www/202001/29230613v3g9.jpg)
+![](https://wenhui.whb.cn/u/cms/www/202001/292306138ip2.jpg)
+- [上海医疗救治专家组组长：不能欺负听话的人, 一线岗位全部换上党员，没有讨价还价！](https://www.bilibili.com/video/av85648127?from=search&seid=16536846388848932291)
+<iframe src="//player.bilibili.com/player.html?aid=85648127&cid=146389957&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+- 张文宏：[人类如何抵抗传染病入侵](https://www.bilibili.com/video/av85738955)
+<iframe src="//player.bilibili.com/player.html?aid=85738955&cid=146549741&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+
+
 ### 真相在哪里
 
 - 网传版本
