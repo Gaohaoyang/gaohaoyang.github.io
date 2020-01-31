@@ -734,6 +734,17 @@ mathjax: true
 - [万物皆中药，地球中医造](https://mp.weixin.qq.com/s?__biz=MzU0OTk2NTYwMA==&mid=2247484619&idx=4&sn=a4a840eecf2e99b7899ce56948d3a071&chksm=fba69e84ccd117924a0b416073a731570ee15b647fc3c3b6eca39641c868b373f43846a6cdc6&mpshare=1&scene=23&srcid&sharer_sharetime=1578272811094&sharer_shareid=cfcd208495d565ef66e7dff9f98764da%23rd)
 
 
+# 细胞
+
+- [三十亿年的战争](https://www.bilibili.com/video/av21681483/)
+   - 病毒军团悄然来袭，面对重重防御，一手特洛伊木马成功潜入，人体细胞又黑化为病毒所用。细胞土崩瓦解之际，预警信息乘坐动力蛋白逃走，舍命发出警报，免疫系统终于放出最终兵器WBC号----一场进行了三十亿年的战争，最后鹿死谁手？ 为了发展而分裂，导致的双方抗争和进化，来着同源的细胞与病毒之间三十亿年的战争，永不停歇...
+
+<iframe src="//player.bilibili.com/player.html?aid=21681483&cid=35742294&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+- [解析人体经历感冒全过程](https://www.bilibili.com/video/av9148457/)
+
+<iframe src="//player.bilibili.com/player.html?aid=9148457&cid=15113944&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 # 病原体
 
 - 感染的病原体主要包括：
@@ -743,8 +754,6 @@ mathjax: true
    - `真菌`：真菌是微生物中的一个大类，为不含叶绿素的真核细胞，具有细胞壁和真正的细胞核，以寄生或腐生方式生存。
    - `寄生虫`：常见感染部位为中枢神经系统、肺脏及眼色素层
 <img src="https://pic4.zhimg.com/50/1032786ae7bea04abcf01378e876585b_hd.jpg" data-rawwidth="640" data-rawheight="537" class="origin_image zh-lightbox-thumb" width="640" data-original="https://pic4.zhimg.com/1032786ae7bea04abcf01378e876585b_r.jpg"/>
-
-
 
 
 ## `细菌`、`真菌`和`病毒`的区别
@@ -993,6 +1002,14 @@ mathjax: true
       - 日本是个好榜样，政府能力很弱，但民众普遍认知能力强。  正好应证了系统制度在预防爆发这件事上的作用是微弱的。
    - 集智俱乐部：[防控力度多大才能遏制疫情发展？ 网络动力学推演给你答案](https://mp.weixin.qq.com/s?__biz=MzIzMjQyNzQ5MA==&mid=2247501032&idx=1&sn=b89b7f9bd11177b8c128361f33a131b7&chksm=e8979e65dfe0177364713c43b91429f6b9abf997f7208673a681b1e14476aee4d63cc3e120ad&mpshare=1&scene=1&srcid=&sharer_sharetime=1580312889472&sharer_shareid=7dae32fd8651655d1c50ad70220e03c2&key=6dc1e3ec383dbb13348f413006b00ecf6f54c2e4433959ca3eb01d23467de36e1b02b5c09ebfe36657be7fc0faac1fbb50c547ea81ffd0a52af41921b765724e4e7ef6adb14468edda83a75ba08f4284&ascene=1&uin=OTY1NzE1MTYw&devicetype=Windows+10&version=6208006f&lang=zh_CN&exportkey=Aa9t4NJdRodkySJ9TUMidMs%3D&pass_ticket=pxLStZhEcoNoCGXeh7zlF8pY1D01jW8tL%2FIybVVo4Mf%2Fp9jtyTE6iX1aJkxKdEMf)
       - 关注由于人群迁徙引起的病毒传播和疫情扩散，根据经典论文提出的方法，采用截至 1 月 28 日的最新人流数据，预测人群迁徙背景下，疫情在多个城市二次爆发的风险，并尝试为多个地区的交通管制提供理论支持。
+
+
+# 医疗防护知识
+
+## 口罩
+
+- [只戴N95? 必看的全面口罩选购&佩戴技巧](https://www.bilibili.com/video/av84931918)
+<iframe src="//player.bilibili.com/player.html?aid=84931918&cid=145230963&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
 
