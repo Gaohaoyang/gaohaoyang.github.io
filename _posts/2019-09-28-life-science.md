@@ -388,6 +388,7 @@ mathjax: true
 那么，各方的分歧在哪儿？
 - 支持者：中医是传统文化精髓，上下五千年，老祖宗留下来的法宝，怎么能说质疑就质疑呢？西医治标，哪有问题医哪里，有偏颇，而中医治本，把人体当做整体看，阴阳调和。。。再说，身边有好多人就是通过中医治好病的，奥运会体育运动员通过拔火罐、针灸疗伤，还有屠呦呦的诺奖不就是中医的证明吗？
 - 反对者：中医的药方缺乏科学论证，没有双盲，没有正规的临床试验，何谈药效？理论基础建立在哲学（玄学）上，逻辑模糊，口口相传，怎么让人信服？
+   - 补充：随机试验、安慰剂试验、ab试验
 
 ### 支持中医
 - 青鹿中医：[中医是否科学？听听美国中医大夫怎么说](https://www.bilibili.com/video/av23177011)（美国人无为）
@@ -962,7 +963,8 @@ mathjax: true
 
 - 【2020-1-27】[中国新型冠状病毒肺炎疫情地级市图](http://jacky.ren/pneumonia/)，[github代码地址](https://github.com/lispczz/pneumonia)
 - [丁香园疫情地图](https://3g.dxy.cn/newh5/view/pneumonia_peopleapp)
-
+- [百度迁徙地图](https://qianxi.baidu.com/?from=shoubai#city=420100)
+- 个人制作：[全国疫情地图](https://www.dnablockchain.cn/news.htm)
 - [武汉协和医院医生家属3分钟演示#家庭版抗疫措施怎么做](https://www.bilibili.com/video/av85048389)
 <iframe src="//player.bilibili.com/player.html?aid=85048389&cid=145417016&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
