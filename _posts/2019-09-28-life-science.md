@@ -1097,6 +1097,7 @@ mathjax: true
 
 - [只戴N95? 必看的全面口罩选购&佩戴技巧](https://www.bilibili.com/video/av84931918)
 <iframe src="//player.bilibili.com/player.html?aid=84931918&cid=145230963&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 - 参考：[口罩为什么能防比PM2.5还小25倍的流感病毒？真没那么简单 ](https://www.sohu.com/a/224218547_634722)
 - <font color='purple'>防雾霾口罩是不是无法帮助我们抵御流感病毒了呢？</font>
    - 非也，有个物理概念叫做`气溶胶`：固体或者液体悬浮在空气中形成的分散系统，其中的颗粒物质的体积一般在0.01微米到10微米之间。
