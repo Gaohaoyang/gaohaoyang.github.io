@@ -986,7 +986,10 @@ mathjax: true
 
 - 【2020-1-27】[中国新型冠状病毒肺炎疫情地级市图](http://jacky.ren/pneumonia/)，[github代码地址](https://github.com/lispczz/pneumonia)
 - [丁香园疫情地图](https://3g.dxy.cn/newh5/view/pneumonia_peopleapp)
-
+- 【2020-2-5】[传染病防治计算机仿真](https://www.toutiao.com/i6789623276231459336/?tt_from=mobile_qq&utm_campaign=client_share&timestamp=1580883425&app=news_article&utm_source=mobile_qq&utm_medium=toutiao_android&req_id=2020020514170501002607721112AA844E&group_id=6789623276231459336), [Github代码](https://github.com/KikiLetGo/VirusBroadcast/tree/master/src)
+   - 《三体》中的一句话，再次提醒大家：“无知和弱小不是生存的最大障碍，傲慢才是。”
+   - ![](http://p1.pstatp.com/large/pgc-image/9391d2a4daf741bbaaaffcc669024d15)
+   
 - [武汉协和医院医生家属3分钟演示#家庭版抗疫措施怎么做](https://www.bilibili.com/video/av85048389)
 <iframe src="//player.bilibili.com/player.html?aid=85048389&cid=145417016&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
