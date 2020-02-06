@@ -1593,7 +1593,7 @@ infocmp vt100
 vt100|vt100-am|dec vt100 (w/advanced video),
     am, mc5i, msgr, xenl, xon,
     cols#80, it#8, lines#24, vt#3,
-    acsc=``aaffggjjkkllmmnnooppqqrrssttuuvvwwxxyyzz{{||}}~~,
+    acsc=``aaffggjjkkllmmnnooppqqrrssttuuvvwwxxyyzz\{\{\|\|\}\}~~,
     bel=^G, blink=\E[5m$<2>, bold=\E[1m$<2>,
     clear=\E[H\E[J$<50>, cr=^M, csr=\E[%i%p1%d;%p2%dr,
     cub=\E[%p1%dD, cub1=^H, cud=\E[%p1%dB, cud1=^J,
