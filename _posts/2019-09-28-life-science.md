@@ -1007,7 +1007,9 @@ mathjax: true
 - 张文宏：[人类如何抵抗传染病入侵](https://www.bilibili.com/video/av85738955)
 <iframe src="//player.bilibili.com/player.html?aid=85738955&cid=146549741&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+- 冠状病毒，传染病python仿真，[Urban policy in the time of Coronavirus](https://lexparsimon.github.io/coronavirus/)
 
+![](https://lexparsimon.github.io/images/coronavirus/corona_virus.jpg)
 
 ### 真相在哪里
 
