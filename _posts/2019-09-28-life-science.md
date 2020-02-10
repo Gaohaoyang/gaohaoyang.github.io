@@ -19,6 +19,14 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=21596719&cid=35576964&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
+## 什么是科学精神
+
+- 【2020-2-10】**科学精神**主要包括四个方面。
+   - `求是`精神：对未知事物进行探索，寻求规律。
+   - `怀疑`精神：就是不盲从，不迷信权威，但不怀疑一切。
+   - `实证`精神：不能靠主观来判断，具有重复性，能够被别人独立验证，能够做概率统计。有些经验是有效的，但经验并不能成为科学，必须有一个检验过程。
+   - `理性`精神：以证据为基础，通过严密的逻辑、理性的思维进行判断。
+- 要做到真的不容易
 
 ## 科学、哲学和宗教
 
