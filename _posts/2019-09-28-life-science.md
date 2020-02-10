@@ -1004,9 +1004,10 @@ mathjax: true
 - [上海医疗救治专家组组长：不能欺负听话的人, 一线岗位全部换上党员，没有讨价还价！](https://www.bilibili.com/video/av85648127?from=search&seid=16536846388848932291)
 <iframe src="//player.bilibili.com/player.html?aid=85648127&cid=146389957&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
-- 张文宏：[人类如何抵抗传染病入侵](https://www.bilibili.com/video/av85738955)
+- 2018-5-31，张文宏：[人类如何抵抗传染病入侵](https://www.bilibili.com/video/av85738955)
 <iframe src="//player.bilibili.com/player.html?aid=85738955&cid=146549741&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
-
+- 2020-1-18，张文宏：[疫情季也是流感季，让病毒不再肆虐，你必须知道的真相](https://www.bilibili.com/video/av87551022/)
+<iframe src="//player.bilibili.com/player.html?aid=87551022&cid=149604273&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 - 冠状病毒，传染病python仿真，[Urban policy in the time of Coronavirus](https://lexparsimon.github.io/coronavirus/)
 
 ![](https://lexparsimon.github.io/images/coronavirus/corona_virus.jpg)
