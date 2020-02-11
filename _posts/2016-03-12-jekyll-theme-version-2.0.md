@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Jekyll博客主题的改版和重构点"
+title:  "Jekyll博客诞生"
 date:   2016-03-12 11:40:18 +0800
 categories: 技术工具
 tags: jekyll 端口 markdown Foxit RubyGems HTML CSS
