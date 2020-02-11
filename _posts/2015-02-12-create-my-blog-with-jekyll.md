@@ -17,6 +17,9 @@ tags: jekyll markdown 插件 github
 
 ## 技巧汇总
 
+### jupyter notebook
+- 【2020-02-11】[Jekyll中支持Jupyter Notebook](https://www.jianshu.com/p/2857dba1c565)
+
 ### Markdown使用
 * [github官方markdown指南](https://guides.github.com/features/mastering-markdown/ "英文版")
 * [github readme语法简介](http://blog.csdn.net/guodongxiaren/article/details/23690801?utm_source=tuicool&utm_medium=referral "跟一般markdown语法不同")
