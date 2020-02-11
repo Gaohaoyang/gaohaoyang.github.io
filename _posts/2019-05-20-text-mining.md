@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "生活大爆炸台词分析"
+title:  "文本挖掘实战"
 date:   2019-05-20 13:00:00
 categories: 实战案例
 tags: 生活大爆炸 NLP 自然语言处理 台词 可视化
@@ -37,7 +37,7 @@ Mrs.Wolowitz—卡萝尔·安·苏希 饰
 Amy Farrah Fowler—Mayim Bialik 饰
 Priya—Aarti Mann 饰
 
-# 疫情地图
+# 任正非演讲稿分析
 
 - 新型
 
