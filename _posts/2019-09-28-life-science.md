@@ -615,6 +615,8 @@ mathjax: true
    - 补充：随机试验、安慰剂试验、ab试验
 
 ### 支持中医
+
+- 【2020-2-12】老中医对非典治疗方案的看法：[非典功臣邓铁涛骂谁是混蛋？](https://mp.weixin.qq.com/s/nVMv89gKPaaDukfpsn00Fg)
 - 青鹿中医：[中医是否科学？听听美国中医大夫怎么说](https://www.bilibili.com/video/av23177011)（美国人无为）
 <iframe src="//player.bilibili.com/player.html?aid=23177011&cid=38576021&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
