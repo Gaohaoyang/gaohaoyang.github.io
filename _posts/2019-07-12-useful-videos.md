@@ -340,6 +340,7 @@ mathjax: true
 
 - 【2019-12-23】[寻找手艺](https://www.bilibili.com/video/av15366522)（短片45集）2017, 张景,记录中国消失的传统手工，类似卖房做动画的《[魁拔](https://www.bilibili.com/bangumi/play/ss6166/?from=search&seid=10368667458390022961)》
 
+- 【2020-2-14】描写河南大饥荒的电影：[1942](https://v.youku.com/v_show/id_XMzA3MjExMzMxMg==)，类似《活着》
 
 ## 文娱
 
