@@ -958,6 +958,9 @@ mathjax: true
 
 ## 中医扑克牌
 
+- 刘夙博士 [-滇南风吹楠-](https://weibo.com/u/6384219300) 制作，[下载地址](https://github.com/benjaminsliu/logiccards),示例：
+
+![](https://ww1.sinaimg.cn/bmiddle/62e8b953ly1gb94hccb88j20rs12wthk.jpg)
 
 - 【2020-2-14】关于中医的论点解析，主要涉及几类误区：
    - 逻辑谬误
