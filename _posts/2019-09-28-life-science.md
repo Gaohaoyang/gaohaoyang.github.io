@@ -376,7 +376,7 @@ mathjax: true
 
 ## 人类医学发展史
 
-- 参考：[双盲实验 | 让有意无意的骗子现形](https://mp.weixin.qq.com/s/XQsOF2aqkaUCaP1PYzz-4A)
+- 参考：[双盲实验：让有意无意的骗子现形](https://mp.weixin.qq.com/s/XQsOF2aqkaUCaP1PYzz-4A)
 
 ### 传统临床医学
 
