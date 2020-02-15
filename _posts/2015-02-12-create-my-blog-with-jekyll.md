@@ -20,6 +20,46 @@ tags: jekyll markdown 插件 github
 ### jupyter notebook
 - 【2020-02-11】[Jekyll中支持Jupyter Notebook](https://www.jianshu.com/p/2857dba1c565)
 
+**方法一** 转成markdown文件
+- 将ipynb文件直接转成markdown文件
+- nbconvert 命令：
+```shell
+ipython nbconvert jekyll_test.ipynb --to markdown
+```
+- 注意：转换图片会保存到jekyll_test_files, 即nb名_files文件夹
+- 参考：[Linode: Display Jupyter Notebooks with Jekyll](https://www.linode.com/docs/applications/project-management/jupyter-notebook-on-jekyll/)
+
+**方法二** 自动转html
+- 用gem库：自动将ipynb转为html——更灵活
+   - [Github: Jekyll Jupyter Notebook plugin](https://github.com/red-data-tools/jekyll-jupyter-notebook)
+   - 安装命令：
+```shell
+gem install jekyll-jupyter-notebook
+```
+   - 改配置
+```shell
+# paginate 2020-2-15 增加jupyter文件自动转html功能
+gems: [jekyll-paginate,jekyll-jupyter-notebook]
+```
+
+- （1）直接生成html
+   - 将notebook文件放入到_post/文件夹内, 并保持2018-01-01-titile.ipynb 类似的格式. 在执行jekyll server后, 会将ipynb转换成html格式, 会生成/2018/01/01/title/index.html.
+- （2）嵌入markdown
+   - 注意：ipynb文件不能像上述一样放在_post内, 否则转换后不能使用
+   - 嵌入命令：
+
+```shell
+{% jupyter_notebook "/notebook/sample.ipynb" %}
+# 如果出问题，改成如下：
+{::nomarkdown}
+{% jupyter_notebook "/notebook/sample.ipynb" %}
+{:/nomarkdown}
+```
+
+- 出错：jekyll 3.8.5 | Error:  invalid byte sequence in GBK
+- 解决：设置编码
+
+
 ### Markdown使用
 * [github官方markdown指南](https://guides.github.com/features/mastering-markdown/ "英文版")
 * [github readme语法简介](http://blog.csdn.net/guodongxiaren/article/details/23690801?utm_source=tuicool&utm_medium=referral "跟一般markdown语法不同")
