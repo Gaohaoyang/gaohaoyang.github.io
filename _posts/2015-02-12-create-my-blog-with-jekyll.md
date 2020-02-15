@@ -49,7 +49,7 @@ plugins: [jekyll-paginate,jekyll-jupyter-notebook]
    - 嵌入命令：
 
 ```shell
-\{\% jupyter_notebook "/notebook/sample.ipynb" \%\}
+{% jupyter_notebook "/notebook/sample.ipynb" %}
 ```
 
 - 出错：jekyll 3.8.5 Error:  invalid byte sequence in GBK
