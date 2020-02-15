@@ -49,10 +49,10 @@ gems: [jekyll-paginate,jekyll-jupyter-notebook]
    - 嵌入命令：
 
 ```shell
-{% jupyter_notebook "/notebook/sample.ipynb" %}
+\{\% jupyter_notebook "/notebook/sample.ipynb" \%\}
 # 如果出问题，改成如下：
 {::nomarkdown}
-{% jupyter_notebook "/notebook/sample.ipynb" %}
+\{\% jupyter_notebook "/notebook/sample.ipynb" \%\}
 {:/nomarkdown}
 ```
 
