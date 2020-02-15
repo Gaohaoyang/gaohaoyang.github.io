@@ -29,7 +29,7 @@ ipython nbconvert jekyll_test.ipynb --to markdown
 - 注意：转换图片会保存到jekyll_test_files, 即nb名_files文件夹
 - 参考：[Linode: Display Jupyter Notebooks with Jekyll](https://www.linode.com/docs/applications/project-management/jupyter-notebook-on-jekyll/)
 
-**方法二** 自动转html
+**方法二** 自动转html——<font color='red'>实验失败！</font>
 - 用gem库：自动将ipynb转为html——更灵活
    - [Github: Jekyll Jupyter Notebook plugin](https://github.com/red-data-tools/jekyll-jupyter-notebook)
    - 安装命令：
@@ -53,7 +53,8 @@ plugins: [jekyll-paginate,jekyll-jupyter-notebook]
 ```
 
 - 出错：jekyll 3.8.5 Error:  invalid byte sequence in GBK
-- 解决：设置编码
+- 解决：设置编码, [Jekyll在Windows下面中文编码问题解决方案](https://www.cnblogs.com/aleda/articles/Jekyll-in-Windows-following-Chinese-encoding-problem-solutions.html)，引发原有文章编译问题
+- 结论：不管用！
 
 
 ### Markdown使用

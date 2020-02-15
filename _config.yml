@@ -71,8 +71,8 @@ tag_dir: tag/
 # excerpt
 excerpt_separator: "\n\n\n\n"
 
-# paginate 2020-2-15 增加jupyter文件自动转html功能
-plugins: [jekyll-paginate,jekyll-jupyter-notebook]
+# paginate 
+plugins: [jekyll-paginate]
 paginate: 10
 
 

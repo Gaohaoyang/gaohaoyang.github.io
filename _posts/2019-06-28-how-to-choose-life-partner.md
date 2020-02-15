@@ -28,8 +28,15 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=39370474&cid=69181558&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
-   
-   
+## 谈几段恋爱合适？
+
+- [单身狗速进！如何科学有效地脱单？](https://www.bilibili.com/video/av75629882)
+   - `最优停止问题`或`37%法则`，先谈37%*N次恋爱，再看后来者是否比前面优秀，据此决定是否结婚
+   - 应用前提：单向性，一次一个，只能选择一次，无法回头，如招聘（秘书问题）、租房、谈恋爱等情形
+<iframe src="//player.bilibili.com/player.html?aid=75629882&cid=129377172&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- [李永乐老师和西瓜妹现场解析：什么是爱情？如何寻找真命天子？](https://www.ixigua.com/i6618463993403015688/)
+<iframe src="https://www.ixigua.com/i6618463993403015688" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 ## 第一部分 如何选择人生伴侣
 
 ### 情人节的含义

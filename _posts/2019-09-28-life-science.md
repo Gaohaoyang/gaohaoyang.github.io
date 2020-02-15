@@ -1285,11 +1285,40 @@ mathjax: true
 - 【2020-1-27】[中国新型冠状病毒肺炎疫情地级市图](http://jacky.ren/pneumonia/)，[github代码地址](https://github.com/lispczz/pneumonia)
 - [丁香园疫情地图](https://3g.dxy.cn/newh5/view/pneumonia_peopleapp)
 - [百度迁徙地图](https://qianxi.baidu.com/?from=shoubai#city=420100)
-- 个人制作：[全国疫情地图](https://www.dnablockchain.cn/news.htm)
+- 个人制作：[全国疫情地图](https://www.dnablockchain.cn/news.htm)，[基本传染指数可视化](http://47.105.141.250/)
 - 【2020-2-5】[传染病防治计算机仿真](https://www.toutiao.com/i6789623276231459336/?tt_from=mobile_qq&utm_campaign=client_share&timestamp=1580883425&app=news_article&utm_source=mobile_qq&utm_medium=toutiao_android&req_id=2020020514170501002607721112AA844E&group_id=6789623276231459336), [Github代码](https://github.com/KikiLetGo/VirusBroadcast/tree/master/src)
    - 《三体》中的一句话，再次提醒大家：“无知和弱小不是生存的最大障碍，傲慢才是。”
    - ![](http://p1.pstatp.com/large/pgc-image/9391d2a4daf741bbaaaffcc669024d15)
-   
+- 【2020-2-15】[毕导THU](https://weibo.com/3905559211/ItSxBcSBP?type=comment)的流行病学模型：[简单算算，你宅在家里究竟能为抗击肺炎疫情做出多大贡献？](https://www.bilibili.com/video/av85508117)，病毒其实不可拍，你宅我宅它就挂；病毒其实不可怕，戴好口罩它也挂
+   - 传染病模型迭代发展：`SI` → `SIS` → `SIR` → `SEIR`
+   - 注解：
+      - 1、`S` 类，`易感者` (Susceptible)，指未得病者，但缺乏免疫能力，与感染者接触后容易受到感染；
+      - 2、`E` 类，`暴露者` (Exposed)，指接触过感染者，但暂无能力传染给其他人的人，对潜伏期长的传染病适用；
+      - 3、`I` 类，`感病者` (Infective)，指染上传染病的人，可以传播给 S 类成员，将其变为 E 类或 I 类成员；
+      - 4、`R` 类，`康复者` (Recovered)，指被隔离或因病愈而具有免疫力的人。如免疫期有限，R 类成员可以重新变为 S 类。
+   - 模型迭代，摘自知乎[酱紫君](https://www.zhihu.com/question/367466399/answer/982597090)
+      - `SI`：健康人感染后终身得病，如HIV
+         - 动力学方程：
+            - ![](https://www.zhihu.com/equation?tex=%5Cbegin%7Baligned%7D+%5Cfrac%7BdS%7D%7Bdt%7D+%26+%3D+-%5Cfrac%7B%5Cbeta+S+I%7D%7BN%7D+%5C%5C+%5Cfrac%7BdI%7D%7Bdt%7D+%26+%3D+%5Cfrac%7B%5Cbeta+S+I%7D%7BN%7D+%5Cend%7Baligned%7D)
+      - `SIS`：感染后可恢复，如普通流感, 得病→恢复→不断循环；流感非常容易变异, 没有能杜绝流感的体质存在
+         - ![](https://pic3.zhimg.com/80/v2-699b329f522cef25e09bf37a4e47cdd0_hd.jpg)
+         - 动力学方程
+            - ![](https://www.zhihu.com/equation?tex=%5Cbegin%7Baligned%7D+%5Cfrac%7BdS%7D%7Bdt%7D+%26+%3D+%5Cmu+N+-%5Cfrac%7B%5Cbeta+S+I%7D%7BN%7D+%2B+%5Cgamma+I+-+%5Cnu+S%5C%5C+%5Cfrac%7BdI%7D%7Bdt%7D+%26+%3D+%5Cfrac%7B%5Cbeta+S+I%7D%7BN%7D+-+%5Cgamma+I+-+%5Cnu+I+%5Cend%7Baligned%7D)
+      - `SIR`：急性传染病，发病非常快, 没有潜伏期, 发病后一段时间痊愈
+         - ![](https://pic4.zhimg.com/80/v2-1be5b22fb023f76211ed557fc4ed1719_hd.jpg)
+         - 动力学方程
+            - ![](https://www.zhihu.com/equation?tex=%5Cbegin%7Baligned%7D+%5Cfrac%7BdS%7D%7Bdt%7D+%26+%3D+%5Cmu+N+-%5Cfrac%7B%5Cbeta+S+I%7D%7BN%7D+-+%5Cnu+S%5C%5C+%5Cfrac%7BdI%7D%7Bdt%7D+%26+%3D+%5Cfrac%7B%5Cbeta+S+I%7D%7BN%7D+-+%5Cgamma+I+-+%5Cnu+I%5C%5C+%5Cfrac%7BdR%7D%7Bdt%7D+%26+%3D+%5Cgamma+I+-+%5Cnu+R+%5Cend%7Baligned%7D)
+      - `SEIR`：带潜伏期的恶性传染病，常规的传染病发病形式, 潜伏→感染→痊愈
+         - ![](https://pic1.zhimg.com/80/v2-a74df02dd21de877329a83366c4b8bf0_hd.jpg)
+         - 数学模型比较复杂, 且没有显式解, 一般用相轨线的方式来研究;也可以通过数值解法快速求解或拟合
+            - ![](https://www.zhihu.com/equation?tex=%5Cbegin%7Baligned%7D+%5Cfrac%7BdS%7D%7Bdt%7D+%26+%3D+%5Cmu+N+-+%5Cnu+S+-+%5Cfrac%7B%5Cbeta+SI%7D%7BN%7D%5C%5C+%5Cfrac%7BdE%7D%7Bdt%7D+%26+%3D+%5Cfrac%7B%5Cbeta+SI%7D%7BN%7D+-+%5Cnu+E+-+%5Csigma+E%5C%5C+%5Cfrac%7BdI%7D%7Bdt%7D+%26+%3D+%5Csigma+E+-+%5Cgamma+I+-+%5Cnu+I%5C%5C+%5Cfrac%7BdR%7D%7Bdt%7D+%26+%3D+%5Cgamma+I+-+%5Cnu+R+%5Cend%7Baligned%7D)
+      - SEIR 模型不是万能的
+         - 有的人潜伏期长, 有的人潜伏期短；
+         - 还有超级潜伏者/超级感染者, 整个一移动的灾难；
+         - 有的潜伏者可能就直接痊愈了, 变成了抵抗者；
+         - 方程并没有单独处理这些情况, 因为一定程度内这些异类都可以被扰动因子所包含
+      - 研究一个固定的模型加扰动比不断地往模型里加扰动项好研究的多的多
+<iframe src="//player.bilibili.com/player.html?aid=85508117&cid=146158152&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 - [武汉协和医院医生家属3分钟演示#家庭版抗疫措施怎么做](https://www.bilibili.com/video/av85048389)
 <iframe src="//player.bilibili.com/player.html?aid=85048389&cid=145417016&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
@@ -1310,6 +1339,9 @@ mathjax: true
 ![](https://lexparsimon.github.io/images/coronavirus/corona_virus.jpg)
 
 - 【2020-2-9】github项目：[新冠肺炎记忆](https://2019ncovmemory.github.io/nCovMemory/)，报道、非虚构与个人叙述（持续更新）
+- 【2020-2-15】毕导THU制作的关于新冠病毒论文解读，science、nature、柳叶刀、bio等科技期刊的关系
+   - [科学家光写论文不抗疫情？几分钟带你看完新冠病毒的所有论文](https://www.bilibili.com/video/av88290870)
+<iframe src="//player.bilibili.com/player.html?aid=88290870&cid=151707407&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 - [美国约翰·霍普金斯大学对新冠肺炎的看法](https://weibo.com/tv/v/It55EEbQ3?fid=1034:4469297708204065)，韩国电影[传染病](https://weibo.com/tv/v/IsVUpEN5H?fid=1034:4468941959921707)
 
 - 2018年05月31日，张文宏老师，北京cc讲堂，演讲现场问答环节，介绍各种传染病知识
