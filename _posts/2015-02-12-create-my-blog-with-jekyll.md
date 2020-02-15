@@ -39,7 +39,7 @@ gem install jekyll-jupyter-notebook
    - 改配置
 ```shell
 # paginate 2020-2-15 增加jupyter文件自动转html功能
-gems: [jekyll-paginate,jekyll-jupyter-notebook]
+plugins: [jekyll-paginate,jekyll-jupyter-notebook]
 ```
 
 - （1）直接生成html
@@ -50,13 +50,9 @@ gems: [jekyll-paginate,jekyll-jupyter-notebook]
 
 ```shell
 \{\% jupyter_notebook "/notebook/sample.ipynb" \%\}
-# 如果出问题，改成如下：
-{::nomarkdown}
-\{\% jupyter_notebook "/notebook/sample.ipynb" \%\}
-{:/nomarkdown}
 ```
 
-- 出错：jekyll 3.8.5 | Error:  invalid byte sequence in GBK
+- 出错：jekyll 3.8.5 Error:  invalid byte sequence in GBK
 - 解决：设置编码
 
 
