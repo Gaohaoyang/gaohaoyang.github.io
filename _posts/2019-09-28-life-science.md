@@ -1501,6 +1501,14 @@ mathjax: true
    - <iframe src="//player.bilibili.com/player.html?aid=70066211&cid=121395497&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 - 张文宏
 - 钟南山
+- 公益人[陈行甲](https://weibo.com/p/1005056223608350/home)
+   - 原恩施州巴东县委书记，他铁腕反腐：在他直接指挥的全县反腐风暴中，抓捕的官员和不法商人共87人，其中局长9人，直接牵出的县领导5个，包括县长、县委副书记等重要官员。
+   - 三种简单而又极其强烈的情感，支配着我的一生：对爱的渴望，对知识的渴求，对世人疾苦难以遏制的同情心。
+   - [湖北需要太多的“陈行甲”，而且不仅仅是湖北](https://baijiahao.baidu.com/s?id=1658587992331726709)
+   - [《我是演说家 第5季》【纯享】网红书记陈行甲《我的母亲》](https://www.bilibili.com/video/av45633719?from=search&seid=9739715247721549220)
+<iframe src="//player.bilibili.com/player.html?aid=45633719&cid=79900434&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+   - [中国一个县委书记的权力有多大？](https://www.bilibili.com/video/av78959099)
+   <iframe src="//player.bilibili.com/player.html?aid=78959099&cid=135044338&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 # 医疗防护知识
 
