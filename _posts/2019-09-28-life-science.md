@@ -1507,8 +1507,8 @@ mathjax: true
    - [湖北需要太多的“陈行甲”，而且不仅仅是湖北](https://baijiahao.baidu.com/s?id=1658587992331726709)
    - [《我是演说家 第5季》【纯享】网红书记陈行甲《我的母亲》](https://www.bilibili.com/video/av45633719?from=search&seid=9739715247721549220)
 <iframe src="//player.bilibili.com/player.html?aid=45633719&cid=79900434&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
-   - [中国一个县委书记的权力有多大？](https://www.bilibili.com/video/av78959099)
-   <iframe src="//player.bilibili.com/player.html?aid=78959099&cid=135044338&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+   - [舍得智慧讲堂 - 陈行甲](https://www.bilibili.com/video/av55480339/?spm_id_from=333.788.videocard.0)
+   <iframe src="//player.bilibili.com/player.html?aid=55480339&cid=97003021&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 # 医疗防护知识
 
