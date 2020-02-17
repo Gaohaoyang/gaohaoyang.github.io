@@ -12,6 +12,78 @@ mathjax: true
 * content
 {:toc}
 
+# NLP技能
+
+## 编辑距离
+
+- 【2020-2-17】[python-Levenshtein包的一些用法总结](https://www.cnblogs.com/laogao123/p/11309490.html)
+   - sudo pip install python-Levenshtein
+- 编辑距离使用方式如下：
+
+```python
+#! /usr/bin/python
+# -*- coding: utf8 -*-
+# @Time    : 2018/8/30 10:11
+# @Author  : yukang
+ 
+from Levenshtein import *
+ 
+# 个人总结的 关于 Levenshtein 所有函数的用法 和 注释
+apply_edit()  #根据第一个参数editops（）给出的操作权重，对第一个字符串基于第二个字符串进行相对于权重的操作
+distance() #计算2个字符串之间需要操作的绝对距离
+editops() #找到将一个字符串转换成另外一个字符串的所有编辑操作序列
+hamming() #计算2个字符串不同字符的个数，这2个字符串长度必须相同
+inverse() #用于反转所有的编辑操作序列
+jaro() #计算2个字符串的相识度，这个给与相同的字符更高的权重指数
+jaro_winkler() #计算2个字符串的相识度，相对于jaro 他给相识的字符串添加了更高的权重指数，所以得出的结果会相对jaro更大（%百分比比更大）
+matching_blocks() #找到他们不同的块和相同的块，从第六个开始相同，那么返回截止5-5不相同的1，第8个后面也开始相同所以返回8-8-1，相同后面进行对比不同，最后2个对比相同返回0
+median() #找到一个列表中所有字符串中相同的元素，并且将这些元素整合，找到最接近这些元素的值，可以不是字符串中的值。
+median_improve() #通过扰动来改进近似的广义中值字符串。
+opcodes() #给出所有第一个字符串转换成第二个字符串需要权重的操作和操作详情会给出一个列表，列表的值为元祖，每个元祖中有5个值
+    #[('delete', 0, 1, 0, 0), ('equal', 1, 3, 0, 2), ('insert', 3, 3, 2, 3), ('replace', 3, 4, 3, 4)]
+    #第一个值是需要修改的权重，例如第一个元祖是要删除的操作,2和3是第一个字符串需要改变的切片起始位和结束位，例如第一个元祖是删除第一字符串的0-1这个下标的元素
+    #4和5是第二个字符串需要改变的切片起始位和结束位，例如第一个元祖是删除第一字符串的0-0这个下标的元素，所以第二个不需要删除
+quickmedian() #最快的速度找到最相近元素出现最多从新匹配出的一个新的字符串
+ratio() #计算2个字符串的相似度，它是基于最小编辑距离
+seqratio() #计算两个字符串序列的相似率。
+setmedian() #找到一个字符串集的中位数(作为序列传递)。 取最接近的一个字符串进行传递，这个字符串必须是最接近所有字符串，并且返回的字符串始终是序列中的字符串之一。
+setratio() #计算两个字符串集的相似率(作为序列传递)。
+subtract_edit() #从序列中减去一个编辑子序列。看例子这个比较主要的还是可以将第一个源字符串进行改变，并且是基于第二个字符串的改变，最终目的是改变成和第二个字符串更相似甚至一样
+ 
+# print(hamming('Hello world!', 'Holly world!'))
+# print(jaro_winkler("yukangrtyu",'yukangrtyn'))
+# fixme = ['Levnhtein', 'Leveshein', 'Leenshten', 'Leveshtei', 'Lenshtein', 'Lvenstein', 'Levenhtin', 'evenshtei']
+# print(opcodes('spam', 'park'))
+# print(ratio('spam', 'spark'))
+# print(jaro_winkler('spam', 'spark'))
+# print(jaro('spam', 'spark'))
+# print(seqratio('spam', 'spark'))
+# print(seqratio(['newspaper', 'litter bin', 'tinny', 'antelope'],['caribou', 'sausage', 'gorn', 'woody']))
+# print(setratio(['newspaper', 'litter bin', 'tinny', 'antelope'],['caribou', 'sausage', 'gorn', 'woody']))
+# e = editops('man', 'scotsman')
+# e1 = e[:3]
+# bastard = apply_edit(e1, 'man', 'scotsman')
+# print(e)
+# print(e1)
+# print(bastard)
+# print(subtract_edit(e, e1))
+# print(apply_edit(subtract_edit(e, e1), bastard, 'scotsman'))
+ 
+def acquaintance(a,b):
+    for i in a:
+        item = {}
+        for j in b:
+            if ratio(u"%s"%i,u"%s"%j):
+                item[ratio(u"%s"%i,u"%s"%j)] = (i,j)
+        d = item[max(list(item.keys()))]
+        c = '"%s"和"%s"-最相似---匹配度为：%f'%(d[0],d[1],max(list(item.keys())))
+        print(c)
+ 
+a = ["你好",'hello,world','计算偏差大不大啊？','文本可以吗','请看这里']
+b = ['helloworld',"你好吗？",'可以吗','请这里','计算偏差大不大']
+acquaintance(a,b)
+```
+
 
 # Big Bang台词分析
 
