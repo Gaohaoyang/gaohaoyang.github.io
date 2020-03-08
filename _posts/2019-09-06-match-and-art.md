@@ -169,6 +169,12 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=75765022&cid=129612934&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+# 数学教学
+
+- 【2020-3-8】[Teaching kids real math with computers](https://www.ted.com/talks/conrad_wolfram_teaching_kids_real_math_with_computers#t-139494)
+
+<div style="max-width:854px"><div style="position:relative;height:0;padding-bottom:56.25%"><iframe src="https://embed.ted.com/talks/conrad_wolfram_teaching_kids_real_math_with_computers" width="854" height="480" style="position:absolute;left:0;top:0;width:100%;height:100%" frameborder="0" scrolling="no" allowfullscreen></iframe></div></div>
+
 # 丘成桐：数理与人文
 
 - 摘自：[丘成桐：数理与人文-原创完整版](https://mp.weixin.qq.com/s?__biz=MzIwNTE1NTQ3OA==&mid=2671644342&idx=1&sn=211eaf328faab9aa8c1c393d516e592d&chksm=8dff934fba881a59b2622d316b8154a818de458e9f4d6535c8535e39eff2092b7b010e6ebe64&mpshare=1&scene=23&srcid=0905jde0aj0t0TWkACitMpgC&sharer_sharetime=1567734827129&sharer_shareid=b8d409494a5439418f4a89712efcd92a%23rd)
