@@ -26,6 +26,9 @@ mathjax: true
 
 {% include wqw_object_detection.html %}
 
+<iframe src="https://nanonets.com/object-detection-with-tensorflowjs-demo/" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width='800' height='600'> </iframe>
+
+
 ## 资料
 
 - 更多[Demo地址](http://wqw547243068.github.io/demo)
