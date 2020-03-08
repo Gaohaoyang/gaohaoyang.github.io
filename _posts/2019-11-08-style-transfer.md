@@ -16,6 +16,31 @@ mathjax: true
 图像风格迁移科技树
 ![](https://pic4.zhimg.com/80/v2-526f16430324d3fbd8c07ff3d1c05c0b_hd.jpg)
 
+## Demo
+
+### fast-style
+- 图像风格迁移，[深度学习之风格迁移简介](http://melonteam.com/posts/shen_du_xue_xi_zhi_feng_ge_qian_yi_jian_jie/)
+   - ![](http://melonteam.com/image/shen_du_xue_xi_zhi_feng_ge_qian_yi_jian_jie/5489df3b2f1d117cbd275724697edda9ccadb0e92ba6d7c40dfb19c465378e01)
+   
+### fast style
+- Fast style transfer check [demo](https://wqw547243068.github.io/demo/fast-style/)
+
+![alt text](https://raw.githubusercontent.com/zaidalyafeai/zaidalyafeai.github.io/master/images/fast-style.PNG)
+
+### 风格化案例
+- 【2019-07-19】[图像风格迁移示例](https://reiinakano.github.io/arbitrary-image-stylization-tfjs)
+
+<iframe src="https://reiinakano.github.io/arbitrary-image-stylization-tfjs" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width='800' height='600'> </iframe>
+
+### Real Time style transfer 实时风格迁移
+Real Time style transfer check [demo](https://wqw547243068.github.io/demo/RST/)
+
+![alt text](https://raw.githubusercontent.com/zaidalyafeai/zaidalyafeai.github.io/master/images/rst.png)
+
+## 资料
+
+- 更多[Demo地址](http://wqw547243068.github.io/demo)
+
 # 风格迁移简介
 
 - [深度学习之风格迁移简介](http://melonteam.com/posts/shen_du_xue_xi_zhi_feng_ge_qian_yi_jian_jie/)

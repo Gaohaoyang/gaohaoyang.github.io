@@ -26,6 +26,9 @@ mathjax: true
 
 {% include wqw_object_detection.html %}
 
+## 资料
+
+- 更多[Demo地址](http://wqw547243068.github.io/demo)
 
 # 结束
 
