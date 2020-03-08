@@ -2,7 +2,7 @@
 layout: post
 title:  "风格迁移技术汇总"
 date:   2019-11-08 16:52:00
-categories: 资料汇总 
+categories: 计算机视觉
 tags: 深度学习 计算机视觉 GAN 
 excerpt: 图像风格迁移是什么原理？具体如何实施？可以迁移到文本吗？
 mathjax: true
