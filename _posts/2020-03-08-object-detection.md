@@ -20,6 +20,10 @@ mathjax: true
 
 ## 基于tensorflow.js的实时检测Demo
 
+- 参考：[In-browser real-time object detection with TensorFlow.js and React](https://github.com/juandes/tensorflowjs-objectdetection-tutorial)
+
+![](https://github.com/juandes/tensorflowjs-objectdetection-tutorial/raw/master/gif/1.gif)
+
 {% include wqw_object_detection.html %}
 
 
