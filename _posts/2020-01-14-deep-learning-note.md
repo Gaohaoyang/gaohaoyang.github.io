@@ -449,6 +449,15 @@ Ian Goodfellow的「`Deep learning`」这本书，久负盛名，号称是`AI圣
 - 还有大神们的众多门生，相继发明了word2vec和fasttext，李飞飞及高徒Andrej Karpathy（江湖人称AK47）。。。
 - 关系错综复杂，但数来数去也就那么几个人，“近亲繁殖”现象严重。
 
+**什么是神经网络？**
+
+- 【2020-3-9】三综一蓝对神经网络的视频介绍
+   - 深度学习之神经网络的结构：[part 1](https://www.bilibili.com/video/av15532370/?spm_id_from=333.788.videocard.0)，[part 2](https://www.bilibili.com/video/av16144388/?spm_id_from=333.788.videocard.0)，[part 3](https://www.bilibili.com/video/av16577449/?spm_id_from=333.788.videocard.0)
+
+<iframe src="//player.bilibili.com/player.html?aid=15532370&cid=25368631&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=16144388&cid=26347539&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=16577449&cid=27038097&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 ![](https://static.leiphone.com/uploads/new/article/740_740/201708/59917d26cc5b3.jpg?imageMogr2/format/jpg/quality/90)
 
 简单介绍一下前馈网络的一些基本结构。
@@ -463,11 +472,11 @@ Ian Goodfellow的「`Deep learning`」这本书，久负盛名，号称是`AI圣
    - 特点是训练时把上一次训练结果拿过来用，再决定下一步的训练。
    - 典型例子就是RNN，边走边看，回眸一笑百媚生。
 
-![](https://static.leiphone.com/uploads/new/article/740_740/201708/59917edecb2f0.jpg?imageMogr2/format/jpg/quality/90)
+![](https://static.leiphone.com/uploads/new/article/740_740/201708/59917edecb2f0.jpg)
 
 深度学习之所以兴起有三个因素：`海量的数据`、`计算能力`、`算法的突破`。算法里面主要有几个RBM、BP，这是优化版的BP，还有一些训练方法pre-train，加上一些激活函数的变化。
 
-![](https://static.leiphone.com/uploads/new/article/740_740/201708/59917f3316d6c.jpg?imageMogr2/format/jpg/quality/90)
+![](https://static.leiphone.com/uploads/new/article/740_740/201708/59917f3316d6c.jpg)
 
 数据因素
 - 机器学习经常提到Iris数据集，量级很小；
@@ -476,7 +485,7 @@ Ian Goodfellow的「`Deep learning`」这本书，久负盛名，号称是`AI圣
 
 可见，深度学习面临的问题会比之前复杂的多，数据也复杂得多。
 
-![](https://static.leiphone.com/uploads/new/article/740_740/201708/59917fb00d6e9.jpg?imageMogr2/format/jpg/quality/90)
+![](https://static.leiphone.com/uploads/new/article/740_740/201708/59917fb00d6e9.jpg)
 
 这个是MNIST的一个示例
 - Hinton说它是机器学习界的`果蝇`，生物实验里遗传实验，牺牲了无数的果蝇。
@@ -765,7 +774,11 @@ PCA的基本过程。PCA的思想是，原来一个矩阵有很多列，这些�
 
 ![](https://static.leiphone.com/uploads/new/article/740_740/201708/59a67100cf7e3.png?imageMogr2/format/jpg/quality/90)
 
-参考一些资料，比如说第一个是Essence of Linear Algebra，这是国外高手（[3Blue1Brown](http://www.3blue1brown.com/)，不盈利，接受捐助）制作的教学视频，可以去YouTube上看，bilibili上也有[中文翻译版](http://www.bilibili.com/video/av6081149/)，优酷也有了。这个教程非常好，全部用视频可视化方法直观讲解线性代数。第二个是[马同学高等数学](http://www.matongxue.com/madocs/247.html#/madoc)，几篇公众号文章也很好，跟3Blue1Brown不谋而合。看完这两个教程后，会有一种相见恨晚、醍醐灌顶、重新做人的感觉。下面是视频里的几个观点：
+参考一些资料，比如说第一个是Essence of Linear Algebra，这是国外高手（[3Blue1Brown](http://www.3blue1brown.com/)，不盈利，接受捐助）制作的教学视频，可以去YouTube上看，bilibili上也有[中文翻译版](http://www.bilibili.com/video/av6081149/)，优酷也有了。这个教程非常好，全部用视频可视化方法直观讲解线性代数。第二个是[马同学高等数学](http://www.matongxue.com/madocs/247.html#/madoc)，几篇公众号文章也很好，跟3Blue1Brown不谋而合。看完这两个教程后，会有一种相见恨晚、醍醐灌顶、重新做人的感觉。
+- [线性代数的本质（几何意义）Essence of linear algebra](https://www.bilibili.com/video/av6731067/)
+<iframe src="//player.bilibili.com/player.html?aid=6731067&cid=10959711&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width='800' height='600'> </iframe>
+
+下面是视频里的几个观点：
 
 ![](https://static.leiphone.com/uploads/new/article/740_740/201708/59a67187173da.png?imageMogr2/format/jpg/quality/90)
 
@@ -1046,6 +1059,9 @@ A是这个矩阵在对整个的方程的线性空间做变换，就是旋转。�
 ![](https://static.leiphone.com/uploads/new/article/740_740/201708/59a49c9c5bfd9.jpg?imageMogr2/format/jpg/quality/90)
 
 这是概率里面的几个重要概率。条件概率和全概率刚才已经说了，贝叶斯概率是基于这两个基础上的。
+
+- 【2020-3-9】[贝叶斯定理的简洁证明](https://www.bilibili.com/video/av84799859)
+<iframe src="//player.bilibili.com/player.html?aid=84799859&cid=145676706&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width='800' height='600'> </iframe>
 
 ![](https://static.leiphone.com/uploads/new/article/740_740/201708/59a49ca8a0e2c.jpg?imageMogr2/format/jpg/quality/90)
 
