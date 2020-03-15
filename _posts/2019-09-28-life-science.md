@@ -1569,6 +1569,8 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=84617328&cid=144730426&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+- [什么是真正的P4实验室](https://www.ixigua.com/i6801817327697396236/?logTag=BX7bliIdNRqrS2N0fDtjU)
+- 通过电影《[恐怖地带-Outbreak]()》片段认识[什么是P4实验室！](https://www.ixigua.com/i6793551255944823310/?logTag=h2yyUYrs7mg_B7v_7Ofik)
 
 ## 新型冠状病毒（2019-nCov）
 
