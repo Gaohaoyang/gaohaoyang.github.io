@@ -205,6 +205,8 @@ mathjax: true
 
 - 【2018--3-17】美丽心灵（博弈论创始人，纳什）+ [万物理论](https://pan.baidu.com/s/1HdrJpd-OXp371A8m9PI_Eg)(霍金)
 - 【2018-12-16】印度拉马努金传记[知无涯者](https://www.iqiyi.com/v_19rra55zk8.html?vfm=2008_aldbd)，Will Hunting [心灵捕手](https://www.bilibili.com/video/av22771407?from=search&seid=2102098560566397389)
+- 【2020-3-16】[爱因斯坦的思维](https://weibo.com/tv/v/Hy9LNec4b?fid=1034:4381404557964695)
+
 
 ## 数学
 
@@ -219,6 +221,8 @@ mathjax: true
 - 【2019-12-29】[数学纪录片《维度：数学漫步》完整版](https://www.bilibili.com/video/av69814313)，声音小，字幕小，[分集版本](https://www.bilibili.com/video/av13970195)效果更好, [官方网站](http://www.dimensions-math.org/Dim_ZH_si.htm)
 
 <iframe src="//player.bilibili.com/player.html?aid=13970195&cid=22819169&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+- 【2020-3-16】顶级数学纪录片：[神秘的混沌理论](https://weibo.com/tv/v/IyPMu7Zjj?fid=1034:4482698111025163)
 
 
 ## 互联网
@@ -356,7 +360,7 @@ mathjax: true
 - [NLP为什么难](https://www.bilibili.com/video/av78081138/)
 
 <iframe src="//player.bilibili.com/player.html?aid=78081138&cid=133593218&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
-
+- 【2020-3-16】[英语发展历史](https://weibo.com/tv/v/IyQr4fFBU?fid=1034:4483043784851458)
 - [从前有一匹马叫“代码”](https://www.bilibili.com/video/av75765022)
 
 <iframe src="//player.bilibili.com/player.html?aid=75765022&cid=129612934&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
