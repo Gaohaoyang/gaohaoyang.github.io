@@ -1632,6 +1632,8 @@ mathjax: true
 ![](https://lexparsimon.github.io/images/coronavirus/corona_virus.jpg)
 
 - 【2020-2-9】github项目：[新冠肺炎记忆](https://2019ncovmemory.github.io/nCovMemory/)，报道、非虚构与个人叙述（持续更新）
+- 【2020-3-29】[冠状病毒：突变进行时](https://zhuanlan.zhihu.com/p/120315232)，传播链和进化树[动图](https://nextstrain.org/ncov)
+   - ![](https://pic2.zhimg.com/80/v2-ecec5e0776607ee8b559a55e700297e9_720w.jpg)
 - 【2020-2-15】毕导THU制作的关于新冠病毒论文解读，science、nature、柳叶刀、bio等科技期刊的关系
    - [科学家光写论文不抗疫情？几分钟带你看完新冠病毒的所有论文](https://www.bilibili.com/video/av88290870)
 <iframe src="//player.bilibili.com/player.html?aid=88290870&cid=151707407&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
