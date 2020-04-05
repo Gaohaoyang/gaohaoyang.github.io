@@ -281,7 +281,7 @@ mathjax: true
 # IT快讯
 
 - 【2019-07-22】[神策数据核心技术王集鹄过世](http://baijiahao.baidu.com/s?id=1639729785381397020&wfr=spider&for=pc)：去年查出恶性肿瘤 生前与病魔斗争
-- 【2020-】司徒正美
+- 【2020-3-31】[技术大神“司徒正美”不幸离世，刚入职OPPO](https://tech.ifeng.com/c/7vI5xPxLnt9)
 
 
 # 结束
