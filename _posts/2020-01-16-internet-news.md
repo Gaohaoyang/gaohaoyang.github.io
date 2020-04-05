@@ -47,6 +47,22 @@ mathjax: true
 ![](http://www.sztspi.com/wp-content/uploads/2018/05/1527505235-1.jpeg)
 
 
+## 互联网金融
+
+- [315后，带血的高利贷完成了进化](https://mp.weixin.qq.com/s?__biz=MzI2MzE2NDczMw==&mid=2649736884&idx=1&sn=d5764a49b2e7bc7fd5f5caec449cd67c&chksm=f25b60e6c52ce9f081046a6d8c6fe75e88839563410f7854b3a9b37a871af09c5b18fcb13fb9&mpshare=1&scene=23&srcid=#rd)
+- [团贷网之死，高利贷团灭简史](https://mp.weixin.qq.com/s?__biz=MzI2MzE2NDczMw==&mid=2649736972&idx=1&sn=7aa1fd1a2d9d7d533ac9e4f04b3d3a22&chksm=f25b615ec52ce848254e1eaca8b347eb7d8425ef4b298924841e329dcb209c97f526b528f185&mpshare=1&scene=1&srcid=03292MyYb9IHIbKwejpg5238#rd)
+
+# 未来趋势
+
+- [未来十年会怎么发展](https://www.zhihu.com/question/20219836/answer/14445047)
+
+## [美团创始人王兴，现场做互联网演讲，信息量很大就问你服不服？](https://www.365yg.com/a6532811511293805059)
+
+- 四纵三横：
+   - 四纵：娱乐、信息、沟通、商务
+   - 三横：搜索、社交、移动互联网、物联网
+- 物联网、传感器将是下一波潮流。
+
 # 互联网公司
 
 ## 移动互联网两超三强
@@ -256,9 +272,16 @@ mathjax: true
 让我们来一起来玩一盘Captable的游戏…不，做一道“应用题”：以创业为起点、上市为终点，把一个创业公司成长过程中的每一次股份变化都汇总起来，看看这“股份拼骨图”是如何发生变化的？这里面究竟隐藏着什么样的玄机。
 
 
+## 创业案例
+
+### [一个二本毕业生的创业逆袭，要做市值千亿的企业级巨头](https://www.toutiao.com/i6810764831235244558)
+
+### [估值数亿的A轮公司倒闭了，90后CEO还患上肿瘤：创业（失败）到底是怎样的体验](https://mp.weixin.qq.com/s?__biz=MzAxOTM2NDU4Ng==&mid=2455715413&idx=1&sn=c87e61e932565711f777626b1c8931be&chksm=8c63b1d0bb1438c6fb8e4d2285d0fed4e1f5ad77c92c7181a25672cdfa9961bfea24f910f4a4&mpshare=1&scene=1&srcid=0901ka0LQmTL1C8GchuADTyp&sharer_sharetime=1567312086783&sharer_shareid=abefdff25047c434502420ca99eca734&key=034516426b2066d01f77e7ee141d250332eea51cda4b5215feb719029d7c2a0bfc83295cf2ad7157d5e89542d8ed4316aff4351f42eb7fa815a5b6dbd87075102e00d3c9c4997bc77705b9792fbfeee9&ascene=1&uin=OTY1NzE1MTYw&devicetype=Windows+10&version=62060833&lang=zh_CN&pass_ticket=eaz%2Fj4x3WcxBmQvGbcnrMgQ%2Fx%2FC%2FAgWiSp%2FQ1g2FvkNakTkY3F3liGH3lt4Q%2B6kW)
+
 # IT快讯
 
 - 【2019-07-22】[神策数据核心技术王集鹄过世](http://baijiahao.baidu.com/s?id=1639729785381397020&wfr=spider&for=pc)：去年查出恶性肿瘤 生前与病魔斗争
+- 【2020-】司徒正美
 
 
 # 结束
