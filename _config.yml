@@ -86,6 +86,10 @@ useful_urls:
     name : 3blue1brown
     url : http://www.3blue1brown.com/
     desc : 优质数学教学视频
+  - 
+    name : prajwalsouza可视化项目
+    url : https://prajwalsouza.github.io/
+    desc : 传染病可视化模拟
   -
     name : Google AI Lab
     url : https://aiexperiments.withgoogle.com/
@@ -126,6 +130,10 @@ useful_urls:
     name : Colah’s Blog
     url : http://colah.github.io/
     desc : 精品文章
+  - 
+    name : prajwalsouza可视化项目
+    url : https://prajwalsouza.github.io/
+    desc : 传染病可视化模拟
   - 
     name : Floydhub
     url : https://blog.floydhub.com/
