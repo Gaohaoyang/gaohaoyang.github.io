@@ -18,7 +18,10 @@ mathjax: true
 - 难道只能忍受吗，能不能做些改变？
 
 # 工作生活如何平衡
-- 占坑
+
+- 【2020-1-11】[请不要浪费宝贵的时间](https://www.bilibili.com/video/av81499701)
+
+<iframe src="//player.bilibili.com/player.html?aid=81499701&cid=139469096&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 # 书籍：只工作、不上班
 
