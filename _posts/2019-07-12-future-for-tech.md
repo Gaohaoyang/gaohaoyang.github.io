@@ -537,6 +537,7 @@ coding path
 # 写代码赚钱
 
 - 【2019-08-31】[写代码赚钱的路子](https://mp.weixin.qq.com/s?__biz=MzAxNjc1OTc2Mg==&mid=2653630305&idx=1&sn=92c21b99ead94dfa0ecc1e36547c13a4&chksm=803061dcb747e8ca5f4eab51cd96793fc8301749d9c774f85838f76719fd851f0f90091aebc3&mpshare=1&scene=23&srcid=&sharer_sharetime=1567125075551&sharer_shareid=b8d409494a5439418f4a89712efcd92a#rd),[awesome-indie](https://github.com/mezod/awesome-indie)
+- 【2020-4-14】[副业从工资2万到月入10万干货分享，程序员利用开源项目怎么做？](https://www.ixigua.com/pseries/6788522348078170636_6783611549769531908/?logTag=ebgQB1_5tvU9s6o0kwzSg)，自己写一个电商系统，被`码云`推荐，流量大涨，后端开源，前端收费，月入十万
 
 # [技术人员的发展之路](https://coolshell.cn/articles/17583.html)
 
