@@ -75,7 +75,12 @@ mathjax: true
 - 后记
 
 ## 读后感
-- 占坑
+
+- 【2020-4-14】`米斯特姚`：[副业从工资2万到月入10万干货分享，程序员利用开源项目怎么做？](https://www.ixigua.com/pseries/6788522348078170636_6783611549769531908/?logTag=ebgQB1_5tvU9s6o0kwzSg)，自己写一个电商系统，被`码云`推荐，流量大涨，后端开源，前端收费，月入十万
+
+<iframe src="https://www.ixigua.com/pseries/6788522348078170636_6783611549769531908/?logTag=ebgQB1_5tvU9s6o0kwzSg" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+
 
 
 
