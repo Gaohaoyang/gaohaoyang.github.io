@@ -15,6 +15,10 @@ mathjax: true
 # 目标检测背景
 
 - 计算机视觉领域的典型任务就是目标检测
+- 目标检测最新趋势：[deep_learning_object_detection](https://github.com/hoya012/deep_learning_object_detection)
+- 发展历史：
+![](https://github.com/hoya012/deep_learning_object_detection/raw/master/assets/deep_learning_object_detection_history.PNG)
+
 
 # 目标检测实践
 
