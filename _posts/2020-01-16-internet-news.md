@@ -159,8 +159,12 @@ mathjax: true
 
 ### 滴滴
 
-- 【2017-11】滴滴高管及组织架构图（[The Information](https://www.theinformation.com/)的网站）
+![](http://image.woshipm.com/wp-files/2018/12/c6T1nqYypeuN2dyUlB8Y.jpg)
+- 【2017-11】滴滴高管及组织架构图（[The Information](https://www.theinformation.com/)的网站）,[滴滴高管团队揭秘：多名投行人士把控关键职位](https://www.sohu.com/a/202890410_505837)
 ![](http://5b0988e595225.cdn.sohucs.com/images/20171107/4d3fe305bc4c48b69f31c0fa6206ba0f.jpeg)
+![](http://5b0988e595225.cdn.sohucs.com/images/20171107/4c7ba64390ae41af8ca20f2f639dba86.jpeg)
+![](http://5b0988e595225.cdn.sohucs.com/images/20171107/9b6a3d06964d405ea6eebec291ac2723.jpeg)
+![](http://5b0988e595225.cdn.sohucs.com/images/20171107/e2c78296f63247fb9897846d69964fd2.jpeg)
 - [一图看清滴滴出行组织架构迭代](https://baijiahao.baidu.com/s?id=1653052159174222815&wfr=spider&for=pc)
    - 【2019-2-3】组织架构变动
       - 网约车CTO`郄小虎`Tiger(qie`)，向`付强`汇报（虚线汇报张博）；
