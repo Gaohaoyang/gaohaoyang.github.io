@@ -229,7 +229,8 @@ coding path
       - 咨询卖专业知识，保险则是2C销售靠人脉变现，都是时间自由，两者的商业逻辑有点区别，不过基本都是个体单干，或成立一个小工作室
       - 中国保险业还在蓬勃发展中，未来选择这条路的会越来越多
 
-{% include wqw_sari.html %}
+{% include wqw_tech_life.html %}
+
 - 可视化（附代码）
 ```python
 #from example.commons import Faker
