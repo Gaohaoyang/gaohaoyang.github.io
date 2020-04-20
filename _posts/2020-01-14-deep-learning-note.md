@@ -1237,6 +1237,9 @@ a发生、b发生是有一定的依赖关系的。一般如果a、b、c完全是
       - （2）培养发现美的眼睛
          - 主动去接触和聆听客观事物，培养发现美的眼睛，扩大自己的好奇面，这样就能充分调动自我的主观能动性，把“茧”变成“网”。
 
+### 说人话的统计学
+
+- 【2018-5-20】【精华】[说人话的统计学-合集](https://mp.weixin.qq.com/s?__biz=MzAxMDA4NjU3OA==&mid=401048178&idx=1&sn=b8e79ee70f99fcc6a6c3f7c51c3c3f96&chksm=094693af3e311ab915b1a0675cdd05eec8a04125a12dd6f568105a1685438c7e3e9c8015ea6f&mpshare=1&scene=23&srcid=0710wjvWkpUbrUlCJqkEZQvd&sharer_sharetime=1587351730042&sharer_shareid=b8d409494a5439418f4a89712efcd92a#rd)，【2019-08-30】[统计之都](https://cosx.org/)
 
 ## 第四章 数值计算
 
