@@ -237,7 +237,7 @@ coding path
 #from example.commons import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Page, Pie
-# https://www.cnblogs.com/adam012019/p/11395666.html
+#https://www.cnblogs.com/adam012019/p/11395666.html
 
 my_data = [['小厂高管', 25], ['转销售', 20], ['大厂高P', 15], ['国企/事业单位', 15], ['美帝大厂养老', 10],  
          ['投资', 10],['咨询/保险', 5], ['自己当老板', 1]]
