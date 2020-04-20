@@ -232,6 +232,7 @@ coding path
 {% include wqw_tech_life.html %}
 
 - 可视化（附代码）
+
 ```python
 #from example.commons import Faker
 from pyecharts import options as opts
