@@ -415,9 +415,9 @@ mathjax: true
 
 - 【2020-4-22】张碧晨张杰演唱电影《我不是药神》主题曲《只要平凡》
    - [官方版MV](https://www.bilibili.com/video/BV18441127GN)
-<iframe src="//player.bilibili.com/player.html?aid=66087330&bvid=BV18441127GN&cid=114635093&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=66087330&bvid=BV18441127GN&cid=114635093&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
    - 童声合唱版《只要平凡》
-<iframe src="//player.bilibili.com/player.html?aid=36235774&bvid=BV1Nt41117Sc&cid=63612130&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=36235774&bvid=BV1Nt41117Sc&cid=63612130&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
 ## 百科知识
