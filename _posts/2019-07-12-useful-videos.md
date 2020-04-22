@@ -413,6 +413,13 @@ mathjax: true
 - 【2019-12-29】[VR-3D绘画：以空气为画布，勾勒出了炫酷惊艳的三维画面](https://www.bilibili.com/video/av70059116)
 <iframe src="//player.bilibili.com/player.html?aid=70059116&cid=121380459&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+- 【2020-4-22】张碧晨张杰演唱电影《我不是药神》主题曲《只要平凡》
+   - [官方版MV](https://www.bilibili.com/video/BV18441127GN)
+<iframe src="//player.bilibili.com/player.html?aid=66087330&bvid=BV18441127GN&cid=114635093&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+   - 童声合唱版《只要平凡》
+<iframe src="//player.bilibili.com/player.html?aid=36235774&bvid=BV1Nt41117Sc&cid=63612130&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
 ## 百科知识
 
 - 【20190-09-13】回形针制作的系列科普视频, 混乱博物馆的[5G背后的两个男人](https://www.bilibili.com/video/av62773215)
