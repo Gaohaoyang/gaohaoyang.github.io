@@ -18,6 +18,21 @@ mathjax: true
 - 目标检测最新趋势：[deep_learning_object_detection](https://github.com/hoya012/deep_learning_object_detection)
 - 发展历史：
 ![](https://github.com/hoya012/deep_learning_object_detection/raw/master/assets/deep_learning_object_detection_history.PNG)
+![](https://img-blog.csdnimg.cn/20200223212931503.png)
+- 【2020-4-23】技术总结
+![](https://pic1.zhimg.com/80/v2-0c98fb30a9e589fa164d99c50e6ca711_1440w.jpg)
+
+## 类型
+
+- 目标检测（Object Detection），在计算机视觉领域的任务就是给定一张图片，将图片中的物体识别并且框定出来。随着近年来的发展，其主要分成了两大类别，Two-Stage检测算法（以Faster R-CNN为代表）和以及One-Stage检测算法（以YOLO为代表）。
+   - PS：Multi-Stage检测算法的Selective Search、Feature extraction、Location regression、Class SVM等环节都是分开训练，操作繁杂而且效果不好，所以这里默认忽视。
+   - 参考：[目标检测算法综述](https://blog.csdn.net/liuxinnanshou/article/details/104467821)
+- One-Stage检测算法的初衷是提升速度，而Two-Stage中比较耗时就是proposal建议区域生成，所以索性One-Stage方法就是直接从图像建议区域提取特征进行分类和定位回归。
+   - 图像建议区域是直接从backbone的特征层中进行密集选取，所以一些one-stage算法也称为密集检测器。同时可以看出，one-stage主要处理的问题是：特征提取、分类和定位回归。即关键点全部在特征提取这一块上。
+  ![](https://img-blog.csdnimg.cn/202002232128149.png)
+- Two-Stage检测算法可以通过ROI pooling layer（以Faster R-CNN为例）进行结构划分，前部分提出可能存在目标的区域，后部分即目标分类和定位回归。结构如下
+   - two-stage主要处理的几个问题是：backbone进行特征提取、proposal建议区域的生成、分类和定位回归。
+![](https://img-blog.csdnimg.cn/2020022321273620.png)
 
 
 # 目标检测实践
