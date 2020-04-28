@@ -77,7 +77,7 @@ mathjax: true
 
 ### 控制主题、属性
 
-- （1）Copy机制
+- （1）`Copy机制`
   - 最初用于解决OOV问题
   - ACL2017的《Get To The Point:  Summarization with Pointer-Generator Networks》，借鉴point network模型
   - 思路：单词可以有两种来源：一种是通过普通seq2seq生成；另一种是从原文本拷贝过来。
@@ -87,7 +87,7 @@ mathjax: true
   - 效果：回答的相关性和流畅性更高
     - 问：“我老家是湖南的”
     - 答：我也是 → 我也是湖南的
-- （2）主题控制
+- （2）`主题控制`
   - 解决的问题：普通的seq2seq生成的内容，其实没有办法把控生成的语义信息
   - 思路：通过增加关键词信息，用关键词去影响生成回复的语义（主题）
     - 思路一：用关键词作为硬约束——<font color='blue'>一定出现</font>
@@ -104,7 +104,7 @@ mathjax: true
       - Emnlp 2018《A Syntactically Constrained Bidirectional-Asynchronous Approach for Emotional Conversation Generation》
       ![](https://upload-images.jianshu.io/upload_images/18270108-8bdb50b960dc2dae.jpg)
       - 先预测情感关键词与主题关键词，再生成文本
-- （3）属性控制
+- （3）`属性控制`
   - 避免出现负面情感或疑问句式的回应
   - 思路：学习到文本的属性信息（句式、情感信息），控制生成文本风格，使生成的回复更为可控
     - 思路一：直接融合属性信息
@@ -113,7 +113,7 @@ mathjax: true
       - Generating Informative Responses with Controlled Sentence Function
       - 条件变分编码器的网络结构去控制回复的句式，使模型生成一些更有信息量的回复
       - 约束中间隐变量z，使z更多地去编码句式属性的信息
-### 多样性
+### `多样性`
 - （4）改进Beam Search——提高回复多样性
   - 思路一：通过增加惩罚项
     - 如对同一组的第二、第三选项进行降权，从而避免每次搜索结果都来自于同一路径。对于权重的选择，可以通过强化学习得到；也可以通过设置参数、调整参数来得到
