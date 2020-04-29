@@ -162,6 +162,7 @@ mathjax: true
     - SeqGAN_Sequence Generative Adversarial Nets with Policy Gradient
     - 引入强化学习中的 Policy Gradient 来解决因为离散 token 生成前采样动作造成的不可微
     - SeqGAN 在 Oracle 和古诗生成任务上做了测试，回过头来看，效果只能说一般。但其开创性的将文本生成看做序列决策问题， 并且将 RL 和 GAN 进行了有机的结合
+    ![](https://tobiaslee.top/img/seqgan.png)
 - （2）LeakGAN
   - 交大继 SeqGAN 后的又一力作
   - SeqGAN的问题：
