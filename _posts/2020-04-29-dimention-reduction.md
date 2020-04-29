@@ -210,6 +210,12 @@ Diagram of k-fold cross-validation with k=4
 - 降维的目的在于寻找数据的“内在变量”,如图，丢弃掉数据之间你的公共信息（“A”的形状），发掘数据之间的变化信息（缩放尺度及旋转角度）。由于缩放尺度与旋转角度并非是线性分布的，因此更适合采用非线性降维方法。
 ![](https://img-blog.csdnimg.cn/20190401202159198.jpg)
 
+- [什么是流形？manifold](https://www.bilibili.com/video/BV145411x7vJ)
+<iframe src="//player.bilibili.com/player.html?aid=455350252&bvid=BV145411x7vJ&cid=181172271&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- [用t-SNE进行数据可视化-GoogleTechTalks出品](https://www.bilibili.com/video/BV1Ax411v7z5)
+<iframe src="//player.bilibili.com/player.html?aid=10560557&bvid=BV1Ax411v7z5&cid=17434638&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+
 ## 资料
 
 
