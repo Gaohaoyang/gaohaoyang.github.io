@@ -276,26 +276,26 @@ mathjax: true
    - （2）+、-则是Rh（D）血型系统，红细胞膜上存在D抗原，则为阳性，内没有容则为阴性。由于我国绝大部分人的红细胞膜上都具有D抗原，所以Rh血型一般都为阳性，熊猫血就是阴性血型了，尤其以AB型Rh阴性血最为稀少
    - 如A+就是 A血型Rh阳性
    - 血型表
-   - ![](https://pics4.baidu.com/feed/86d6277f9e2f0708cbfde7c34c0a209da801f229.jpeg?token=c37482c2890116a9d6ca513e7f1c2e1d&s=180A7433491ECCCC5879F0DB0100C0B3)
+   - ![](http://pb3.pstatp.com/large/pgc-image/929725eb9dd64b93818f37e9899c8080)
 - 什么是血型？
    - `血型`是指血液成分（包括红细胞、白细胞、血小板）表面的抗原类型。通常所说的血型是指红细胞膜上特异性抗原类型，每一种血型系统都是由遗传因子决定的，并且具有免疫学特性，这也是输血要以同型血为原则的原因。
-   - ![](https://pics7.baidu.com/feed/d788d43f8794a4c2db263f40a8da83d1ad6e3903.jpeg?token=f5c9337d8e9ffdf089e536b0e7466f68&s=4298CC22B6EF40A810D0DDDE010090A2)
+   - ![](http://pb3.pstatp.com/large/pgc-image/1dcb46aed30241c3bc3eb2536a4bb0c7)
 - 我国13.9538亿人口中（国家统计局2019年1月21日公布的2018年中国出生人口数据），哪种血型的人最多呢？
    - 据相关机构调查数据来看，我国血型的人群比例是A型血型：28%， B型血型：24%， O型血型：41%， AB型血型：7% ，A型血人口约3.9亿，b型血人口约3.35亿，O型血人口约5.72亿，AB型血人口约0.98亿。
    - 所以，从这个数据来看，以O型血的人群为最多，A型血次之，B型血第三，AB型最少。
-   - ![](https://pics6.baidu.com/feed/9e3df8dcd100baa156f999d7e13e2116c9fc2ebc.jpeg?token=3bb2731aa421efad1370948f575d1540&s=2797E6264B43574DC8B3A36C0300706F)
+   - ![](http://pb3.pstatp.com/large/pgc-image/196d51756df2471d94a67df302a6182a)
 - 血型地理分布
    - 在人口血型的分布上，四川、湖南、江西、上海等省市中A型血之人较多，黑龙江、内蒙古、吉林等省份则是B型血的人较多，我国东部，中部和南部的区域则以O型血人口为主，而且O型血呈现由华南地区到华北地区比例递减的趋势。
-   - ![](https://pics0.baidu.com/feed/b21c8701a18b87d60ac3372ea026b03c1f30fd35.jpeg?token=3fb55658d07cf1e67bb233e06671c1bd&s=E3C29F1A5BF2D0CE5058A046030030F3)
+   - ![](http://pb3.pstatp.com/large/pgc-image/060295169ce944b0878c3628716be2f7)
 - 血型与性格真的有关系吗？
    - 最先提出血型决定性格说法的是日本学者古川竹二。他于1927年就提出了这样的思想，并且认为
       - A型的人内向保守、多疑焦虑、富感情、缺乏果断性、容易灰心丧气等；
       - B型的人外向积极、善交际、感觉灵敏、轻诺言、好管闲事等；
       - O型的人胆大、好胜、喜欢指挥别人、自信、意志坚强、积极进取等；
       - AB型的人兼有A型和B型的特征。
-      - ![](https://pics3.baidu.com/feed/3b292df5e0fe992548dc3bf89286c6db8cb1717d.jpeg?token=90b263d34d94c98dbda612f858f92722&s=F536A177055ECDCC4AF505DB02008034)
+      - ![](http://pb3.pstatp.com/large/pgc-image/d66273ab087f4b248e159438a2b18760)
    - 没有什么实质性依据的所谓经验性论断，时至今日仍然没有原理和证据支撑。最多的O型有5.72亿人，这么多的人怎么可能会是某一类性格和气质？最少的AB型也有近1亿人，同样也不会偏向于某一类型性格和气质，所以将血型与性格强行挂钩的说法并没有让人信服的科学依据，人的性格和气质还是和人的行为习惯与生活环境的关系比较大。
-   - ![](https://pics4.baidu.com/feed/0b7b02087bf40ad1d0e7c6aff10289dba9ecce2a.jpeg?token=5bf40f0b7d14f5bff457223327840684&s=39B6C8124B205A8647FDFDFA0200E032)
+   - ![](http://pb3.pstatp.com/large/pgc-image/216b3ed3d36848cd99788be53a4cbb64)
 
 # 万物的本质
 
