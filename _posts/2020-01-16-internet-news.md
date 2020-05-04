@@ -121,6 +121,10 @@ mathjax: true
 
 ## 独角兽
 
+- 【2017-12-28】[对话程维：多数人只知道战争，却并不真正理解竞争](https://mp.weixin.qq.com/s?__biz=MzA3NDI0ODMzMw==&mid=2651302514&idx=1&sn=e013f57409e529da7cc58b938b241967&chksm=84f1b390b3863a865e67ad196f52c2821016548a135192b02799812d6b5e309d7c9288d43e8e&mpshare=1&srcid=1228Adn9akoxcTIW5pDQis0m&scene=21#wechat_redirect)
+- 【2016-12-15】[对话张一鸣：CEO为什么要把自己的喜好加到产品上](https://mp.weixin.qq.com/s?__biz=MzI0MjU2NTA1Mg==&mid=2247492353&amp;idx=1&amp;sn=694b84eae6f13b8e6d4dfaf5550dc012&source=41#wechat_redirect)
+- 【2017-6-21】[对话王兴：太多人关注边界，而不关注核心](https://mp.weixin.qq.com/s?__biz=MzA3NDI0ODMzMw==&mid=2651302476&idx=1&sn=c9f183fc410db9b9f45e49010be7eb79&chksm=84f1b3aeb3863ab8ab1bba131c3fd5f7cfad30ac75757ad4b16c8014f2550a1119a1a47164ab&scene=21#wechat_redirect)
+
 ### 什么是独角兽
 
 `独角兽`公司（Unicorn Companies）是指：成立不到 10 年，估值在 10 亿美元以上，且未在股票市场上市的科技创业公司。超级独角兽公司则是估值在 100 亿美元以上。
@@ -216,8 +220,7 @@ mathjax: true
 - 1、滴滴盈利乏力，虽然说资本喜欢短期不赚钱，长期能赚大钱的公司。但是从滴滴的老对手Uber来看，其在资本市场上的表现也不好。
 - 2、滴滴的核心是司机，但目前滴滴依然不能处理好自身和滴滴司机们的关系。现在滴滴司机们吐槽抽成高，赚钱少，所以很多司机就不出车。如果不出车的话，滴滴每日的订单量就会下来，到时候整体会受到影响。
 - 3、滴滴唯一一款盈利的顺风车产品下线，而现在滴滴又开始转向了人工智能技术，但其实明白人都知道，现在的人工智能就是一个炒作概念，要想真正的落地那困难太大了。前不久滴滴还说将在今年年底在上海实行无人驾驶呢？可现在还不是没了声音！
-
-
+ 
 
 ## [中国互联网公司亏损能力排行榜](https://www.huxiu.com/article/309051.html)
 
