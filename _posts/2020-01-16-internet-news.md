@@ -64,7 +64,7 @@ mathjax: true
 - 物联网、传感器将是下一波潮流。
 - 2015年在极客公园上的分享：[王兴：大连接下的商业](https://v.qq.com/x/page/z0171ecetg6.html)
 
-<iframe frameborder="0" src="https://v.qq.com/txp/iframe/player.html?vid=z0171ecetg6" allowFullScreen="true"></iframe>
+<iframe frameborder="0" src="https://v.qq.com/txp/iframe/player.html?vid=z0171ecetg6" allowFullScreen="true" height="600" width="100%"></iframe>
 
 ## 发展趋势
 
