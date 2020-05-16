@@ -141,6 +141,43 @@ mathjax: true
 - [中国剩女：一起来看看她们是如何被剩下的](https://www.youtube.com/watch?v=bfjk7ras4ic)
 
 ## 自我剖析
+
+- 【2020-5-16】《成功的原则》[中文完整版](https://www.bilibili.com/video/BV1Ab411J73x),[英文版本](https://www.bilibili.com/video/BV1Yb411371J)
+   - 1. 你必须自己思考真相是什么？
+      - * 犯错误，反思错误，总结出原因，改正错误
+      - * 跳出舒适圈，有勇气为此付出行动
+      - * 真相是取得良好结果的根本基础
+      - * 梦想+现实+决心=成功的生活
+   - 2.拥抱现实，应对现实
+      - * 克服(错误、问题、弱点)
+      - * 痛苦+反思=进步
+   - 3.五步流程
+      - * 制定目标(根据自身定目标)
+      - * 发现问题
+      - * 诊断问题(反思为什么会出现这种问题？)
+      - * 规划方案(找到处理的办法)
+      - * 执行方案
+      - 不断循环上述五个步骤
+   - 4.深渊
+      - * 客观面对失败
+      - * 平衡风险与回报
+   - 5.一切都是机器
+      - * 类似情境的重现
+      - * 每件事都因果关系的
+      - * 眼界放宽，从历史中找到规律
+   - 6.你的两大障碍
+      - * 自我意识障碍(不要太自以为是，敢于接受缺点)
+      - * 思维盲点障碍(接受不了自己认知以外的。每个人对事物、环境的理解不同，观点也不同。)
+   - 7.做到头脑极致开放
+      - * 不要只看对错，而是寻找真相
+      - * 不要看重结论，要学习不同视角，看问题的思路
+      - * 对不同观点的包容，才能发现自己看不见的问题，不是盲目听信
+   - 8.奋力拼搏
+   - 中文版
+<iframe src="//player.bilibili.com/player.html?aid=46828896&bvid=BV1Ab411J73x&cid=82024398&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+   - 英文版
+<iframe src="//player.bilibili.com/player.html?aid=50084312&bvid=BV1Yb411371J&cid=87672654&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+
 - [承认吧，人生来就是孤独的](https://www.365yg.com/a6641087299998188035#mid=5543467706)，[B站](https://www.bilibili.com/video/av39370474?from=search&seid=8373277070703221652)
 
 <iframe src="//player.bilibili.com/player.html?aid=39370474&cid=69181558&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
