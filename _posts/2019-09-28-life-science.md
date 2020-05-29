@@ -1509,6 +1509,8 @@ mathjax: true
    - **年年感染**型——流感病毒 IV，鼻病毒 RV；
    - **经常复发**型——疱疹病毒。
 
+
+
 ## 毒王蝙蝠
 
 ![](https://pic2.zhimg.com/v2-80070e25ef4e3923114bb4472722b021_1200x500.jpg)
@@ -1729,6 +1731,10 @@ mathjax: true
       - 5.人狂犬病潜伏期有10-20多年？（国际笑话）经过世界卫生组织研究，人狂犬病潜伏期间一般是2周到3个月，99%在一年内发作，超过1年已少见。
       - 6.猫狗体内的狂犬病毒可以一直潜伏，动物不发病但能传染你？（又一国际笑话）猫狗狂犬病潜伏期最长6个月，但通常猫狗狂犬病发作2-5天内100%死亡。很多国家的动物检疫中心在动物（疫区）入境时仅仅隔离你带的小狗6个月，如果狗没有发病，那么不仅仅证明狗没有狂犬病，连携带狂犬病毒都不可能。所以动物不存在长期潜伏或携带者，至于长期携带者更是笑谈，道理见上面的问题1与2。
    
+- 【2020-5-25】[狂犬病毒致死率100%，从未失手过](https://m.gmw.cn/toutiao/2020-04/29/content_1301188670.htm)
+   - 更多内容，点击以上链接
+![](https://imgm.gmw.cn/attachement/jpg/site215/20200429/6568504434110609849.jpg)
+
 <iframe src="//player.bilibili.com/player.html?aid=86240685&cid=147401925&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 <iframe src="//player.bilibili.com/player.html?aid=86428428&cid=147713281&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>

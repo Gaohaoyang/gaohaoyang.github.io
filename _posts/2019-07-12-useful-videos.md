@@ -252,6 +252,9 @@ mathjax: true
 - 【2018--3-17】美丽心灵（博弈论创始人，纳什）+ [万物理论](https://pan.baidu.com/s/1HdrJpd-OXp371A8m9PI_Eg)(霍金)
 - 【2018-12-16】印度拉马努金传记[知无涯者](https://www.iqiyi.com/v_19rra55zk8.html?vfm=2008_aldbd)，Will Hunting [心灵捕手](https://www.bilibili.com/video/av22771407?from=search&seid=2102098560566397389)
 - 【2020-3-16】[爱因斯坦的思维](https://weibo.com/tv/v/Hy9LNec4b?fid=1034:4381404557964695)
+- 【2020-5-29】纪念艾伦图灵的电影《模仿游戏》
+
+![](https://img-blog.csdn.net/2018061821395310)
 
 
 ## 数学
