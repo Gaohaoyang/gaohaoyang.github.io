@@ -100,6 +100,9 @@ mathjax: true
 - [MIT密码学 MIT 6.875, Cryptography Sp 2018](https://www.bilibili.com/video/BV1qt411L74p)
 <iframe src="//player.bilibili.com/player.html?aid=58961353&bvid=BV1qt411L74p&cid=102774363&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+- [《模仿游戏》人工智能之父阿兰图灵的一生](https://www.bilibili.com/video/BV1fW411F7AM)
+<iframe src="//player.bilibili.com/player.html?aid=25026545&bvid=BV1fW411F7AM&cid=42296927&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 # 结束
 
 
