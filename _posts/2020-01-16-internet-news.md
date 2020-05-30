@@ -386,6 +386,14 @@ mathjax: true
 
 ### [估值数亿的A轮公司倒闭了，90后CEO还患上肿瘤：创业（失败）到底是怎样的体验](https://mp.weixin.qq.com/s?__biz=MzAxOTM2NDU4Ng==&mid=2455715413&idx=1&sn=c87e61e932565711f777626b1c8931be&chksm=8c63b1d0bb1438c6fb8e4d2285d0fed4e1f5ad77c92c7181a25672cdfa9961bfea24f910f4a4&mpshare=1&scene=1&srcid=0901ka0LQmTL1C8GchuADTyp&sharer_sharetime=1567312086783&sharer_shareid=abefdff25047c434502420ca99eca734&key=034516426b2066d01f77e7ee141d250332eea51cda4b5215feb719029d7c2a0bfc83295cf2ad7157d5e89542d8ed4316aff4351f42eb7fa815a5b6dbd87075102e00d3c9c4997bc77705b9792fbfeee9&ascene=1&uin=OTY1NzE1MTYw&devicetype=Windows+10&version=62060833&lang=zh_CN&pass_ticket=eaz%2Fj4x3WcxBmQvGbcnrMgQ%2Fx%2FC%2FAgWiSp%2FQ1g2FvkNakTkY3F3liGH3lt4Q%2B6kW)
 
+### Hao123和雨林木风
+
+- [初中学历网管，李彦宏给他5000万，从白手起家到身家过亿](https://www.ixigua.com/i6818376929452753411/)
+- 广东兴宁出了两个学历不高的互联网牛人，李兴平和赖霖枫，都没上过大学
+   - 李兴平是hao123及4399创始人
+   - 赖霖枫是雨林木风和115网盘的创始人
+
+
 # IT快讯
 
 - 【2019-07-22】[神策数据核心技术王集鹄过世](http://baijiahao.baidu.com/s?id=1639729785381397020&wfr=spider&for=pc)：去年查出恶性肿瘤 生前与病魔斗争
