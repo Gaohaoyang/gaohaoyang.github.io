@@ -3,7 +3,7 @@ layout: post
 title:  "联邦学习"
 date:   2020-05-30 08:27:00
 categories: 机器学习
-tags: 机器学习 联邦学习
+tags: 机器学习 联邦学习 同态加密
 excerpt: 如何保护用户隐私的同时也能充分利用各类数据？
 author: 鹤啸九天
 mathjax: true

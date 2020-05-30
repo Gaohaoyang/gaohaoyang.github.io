@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "区块链技术汇总"
+title:  "区块链"
 date:   2019-10-27 22:53:00
 categories: 资料汇总
 tags: 区块链 比特币 张首晟

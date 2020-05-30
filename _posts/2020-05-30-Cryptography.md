@@ -3,8 +3,8 @@ layout: post
 title:  "密码学"
 date:   2020-05-30 00:13:00
 categories: 密码学
-tags: 密码学
-excerpt: 密码学知识，常见的加密、解码算法
+tags: 密码学 同态加密
+excerpt: 密码学知识，常见的加密、解码算法，对称密钥、非对称密钥和Hash散列
 author: 鹤啸九天
 mathjax: true
 ---

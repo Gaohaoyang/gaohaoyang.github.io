@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Transformer学习笔记
+title:  Transformer
 date:   2019-12-10 16:52:00
 categories: 深度学习 
 tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 

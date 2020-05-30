@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "特征工程学习笔记"
+title:  "特征工程"
 date:   2020-04-26 21:50:00
 categories: 机器学习
 tags: 深度学习 特征工程

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "深度学习笔记"
+title:  "深度学习"
 date:   2020-01-14 12:44:00
 categories: 深度学习 机器学习
 tags: 神经网络  人工智能  AI  机器学习  ML  表示学习 AI圣经 读书笔记

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "目标检测笔记"
+title:  "目标检测"
 date:   2020-03-08 18:30:00
 categories: 计算机视觉
 tags: 深度学习 计算机视觉 GAN 
