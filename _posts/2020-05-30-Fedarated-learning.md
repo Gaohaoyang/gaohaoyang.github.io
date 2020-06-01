@@ -155,6 +155,7 @@ mathjax: true
 
 - [2019年全球架构师峰会](https://archsummit.infoq.cn/2019/shenzhen/schedule)
 - 【InfoQ】[陈天健：基于联邦学习新技术连接数据孤岛](https://static001.geekbang.org/con/40/pdf/2790523233/file/%E9%99%88%E5%A4%A9%E5%81%A5-%E5%9F%BA%E4%BA%8E%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E6%96%B0%E6%8A%80%E6%9C%AF%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%AD%A4%E5%B2%9B.pdf)
+- 2019-12, [54页PPT全解联邦学习中的同态运算与密文传输](http://t.10jqka.com.cn/pid_128844464.shtml)
 - [联邦学习诞生1000天的真实现状](https:/www.leiphone.com/news/202004/rfPSGIjbS38DqTsm.html)
 - [联邦学习tensorflow工具包](https://www.tensorflow.org/federated?hl=zh-cn)
 - 书籍：杨强的《联邦学习》
