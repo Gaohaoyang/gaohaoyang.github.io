@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "如何平衡工作和生活？"
+title:  "如何平衡工作和生活？-How to trade off between work and life"
 date:   2020-01-13 10:29:00
 categories: 读书笔记
 tags: 工作 996 斜杠青年

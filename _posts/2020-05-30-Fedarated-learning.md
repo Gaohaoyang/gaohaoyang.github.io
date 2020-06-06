@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "联邦学习"
+title:  "联邦学习-Federated Learning"
 date:   2020-05-30 08:27:00
 categories: 机器学习
 tags: 机器学习 联邦学习 同态加密

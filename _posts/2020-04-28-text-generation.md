@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "文本生成"
+title:  "文本生成-Text Generation"
 date:   2020-04-28 21:39:00
 categories: 深度学习
 tags: 深度学习 NLP GAN Seq2seq

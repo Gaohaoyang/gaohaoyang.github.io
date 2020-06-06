@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "流形学习&降维"
+title:  "流形学习&降维-Manifold Learning&Dimention Reduction"
 date:   2020-04-29 14:21:00
 categories: 深度学习
 tags: 深度学习 流形学习 降维 无监督学习 维数灾难

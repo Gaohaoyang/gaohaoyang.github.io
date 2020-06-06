@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "博士经验总结"
+title:  "博士经验总结-Experience about Doctor's life"
 date:   2018-10-16 23:00:00
 categories: 大人物
 tags: 田渊栋 博士 Facebook 李沐 陈天奇

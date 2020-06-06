@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "可视化信息论"
+title:  "可视化信息论-Information Theory"
 date:   2019-10-23 16:53:00
 categories: 资料汇总
 tags: 信息论 熵 相对熵 交叉熵 互信息

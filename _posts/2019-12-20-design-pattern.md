@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  设计模式
+title:  设计模式-Design Pattern
 subtitle:   各类设计模式
 date:   2019-12-20 15:43:00
 author:  wangqiwen

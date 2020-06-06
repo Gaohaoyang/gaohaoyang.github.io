@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "互联网人的职业发展之路"
+title:  "互联网人的职业发展之路-Future for the tech"
 date:   2019-07-12 15:17:00
 categories: 人生规划
 tags: 三观 技术 陈皓

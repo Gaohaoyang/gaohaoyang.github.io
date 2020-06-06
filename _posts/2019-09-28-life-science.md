@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "生命科学的终极讨论"
+title:  "生命科学的终极讨论-Life Science"
 date:   2019-09-28 09:30:00
 categories: 自然科学
 tags: 梁冬 华大基因 生命 自然 宇宙 神学 中医 西医 病毒 细菌 真菌 SARS SARI 武汉肺炎 埃博拉 蝙蝠 血型

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "闲话神经网络"
+title:  "闲话神经网络-Neural Network"
 date:   2018-12-09 22:44:00
 categories: 深度学习
 tags: 神经网络  人工智能  AI  机器学习  ML  表示学习

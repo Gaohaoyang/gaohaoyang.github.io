@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "丘成桐：数理与人文"
+title:  "丘成桐：数理与人文-Maths and Art"
 date:   2019-09-06 10:29:00
 categories: 文史哲
 tags: 丘成桐 数学 人文

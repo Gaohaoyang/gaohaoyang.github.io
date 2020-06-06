@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "量子计算"
+title:  "量子计算-Quantum Computing"
 date:   2019-10-16 09:30:00
 categories: 自然科学
 tags: 量子计算机 量子纠缠 量子叠加 薛定谔的猫

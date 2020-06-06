@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "人工智能及未来畅想"
+title:  "人工智能及未来畅想-AI and Future"
 date:   2019-06-04 23:41:00
 categories: 人工智能
 tags: 人工智能 AI 人类简史 人文 哲学 康德 汉字屋 清华大学 天机 自行车 AGI 类脑 类机 waitbutwhy 脑机接口 张首晟
@@ -22,7 +22,8 @@ Neuralink and the Brain’s Magical Future](https://waitbutwhy.com/2017/04/neura
 - 【2019-11-13】[综述：全面介绍脑连接研究的方法学](https://mp.weixin.qq.com/s?__biz=MzI2ODEyOTE3OQ==&mid=2649569369&idx=1&sn=210bb5d90c308ff5072fabb6645c85b9&chksm=f2eddeadc59a57bb7192738d35d5d4f8a078f7c20038c9bcce3183ce308fa3be74d10476ad5a&mpshare=1&scene=23&srcid&sharer_sharetime=1573616516238&sharer_shareid=b8d409494a5439418f4a89712efcd92a%23rd)
 
 # 人类唯一的出路：变成人工智能
-Tim Urban，之前火热的文章《为什么有很多名人让人们警惕人工智能》也是出自他手，英文原文刊载于waitbutwhy.com，点击文末的阅读原文可以跳转到原文链接。
+
+- Tim Urban，之前火热的文章《为什么有很多名人让人们警惕人工智能》也是出自他手，英文原文刊载于waitbutwhy.com，点击文末的阅读原文可以跳转到原文链接。
 >Wait but Why的作者Tim Urban 是埃隆马斯克（特斯拉/SpaceX创始人）强烈推荐的科技博主。他写的AI文章是全世界转发量最高的。他的粉丝还包括：Facebook创始人马克扎克伯格，Facebook COO谢丽桑伯格等。Tim也是TED演讲平台上有史以来最受欢迎的演讲者之一
 
 在一个由人工智能和“其他所有生物”组成的未来， 人类只有一条出路：“变成人工智能。

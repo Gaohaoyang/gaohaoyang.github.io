@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "机器学习笔记"
+title:  "机器学习笔记-Machine Learning"
 date:   2019-08-22 15:50:00
 categories: 资料汇总
 tags: 机器学习 周志华 深度学习 西瓜书 李宏毅

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "如何处理机器学习中的不平衡类别"
+title:  "如何处理机器学习中的不平衡类别-How to handle imbalance data"
 date:   2019-04-25 20:12:00
 categories: 机器学习
 tags: 机器学习 不平衡

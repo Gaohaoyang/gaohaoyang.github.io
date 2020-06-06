@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "文本挖掘实战"
+title:  "文本挖掘实战-Text Mining Implementation"
 date:   2019-05-20 13:00:00
 categories: 实战案例
 tags: 生活大爆炸 NLP 自然语言处理 台词 可视化
