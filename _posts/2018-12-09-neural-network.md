@@ -16,7 +16,16 @@ mathjax: true
 - [梯度下降法](https://www.bilibili.com/video/av16144388)
 - [反向传播算法](https://www.bilibili.com/video/av16577449)
 
-让我们跟着 3Blue1Brown 从偏数学的角度来理解神经网络（原视频假设观众对神经网络没有任何背景知识）
+跟着3Blue1Brown从偏数学的角度来理解神经网络（原视频假设观众对神经网络没有任何背景知识）
+
+- 【2020-3-9】三综一蓝对神经网络的视频介绍
+   - 深度学习之神经网络的结构：[part 1](https://www.bilibili.com/video/av15532370/?spm_id_from=333.788.videocard.0)，[part 2](https://www.bilibili.com/video/av16144388/?spm_id_from=333.788.videocard.0)，[part 3](https://www.bilibili.com/video/av16577449/?spm_id_from=333.788.videocard.0)
+
+<iframe src="//player.bilibili.com/player.html?aid=15532370&cid=25368631&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=16144388&cid=26347539&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=16577449&cid=27038097&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+![](https://static.leiphone.com/uploads/new/article/740_740/201708/59917d26cc5b3.jpg?imageMogr2/format/jpg/quality/90)
 
 **目录**
 ---
@@ -56,24 +65,24 @@ mathjax: true
 
 **示例：一个用于数字手写识别的神经网络**
 
-![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/TIM截图20180701210407.png)
+![](https://pic4.zhimg.com/80/v2-b72bc2abcfd8a8605095c51df052a04f_720w.jpg)
+![](https://pic2.zhimg.com/80/v2-aabf8d8ece711ca0fb83278f61ada13d_720w.jpg)
 > 这个示例相当于深度学习领域中的 "Hello World".
 
 ## 神经元（隐藏单元）与隐藏层
 
 **神经元（隐藏单元）**
 - 简单来说，神经元可以理解为一个用来装数字的容器，而这个数称为激活值
+   - 图源自：[3Blue1Brown深度学习笔记 深度学习之神经网络的结构 Part 1 ver 2.0](https://zhuanlan.zhihu.com/p/33706018)
+- 需要强调的是，激活值的值域取决于使用的激活函数，大多数激活函数的值域都是**正值**
 
-  需要强调的是，激活值的值域取决于使用的激活函数，大多数激活函数的值域都是**正值**
-
-    ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/TIM截图20180701211429.png)
+    ![](https://pic3.zhimg.com/80/v2-2073a183c84c94729fe263c4ab49aa8a_720w.jpg)
     > 如果使用 sigmoid 激活函数，那么这个数字就在 0 到 1 之间；但通常来说，无论你使用哪种激活函数，这个数字都比较小
 
 
 - 输入层也可以看做是一组神经元，它的激活值就是输入本身
 
-    ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/TIM截图20180701211850.png)
-    ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/TIM截图20180701214914.png)
+    ![](https://pic2.zhimg.com/80/v2-5033a32d9b0dcb3a3fb8eb95877c8b8d_720w.jpg)
     > 基本的神经网络只能处理向量型的输入，所以需要将这个 28*28 的像素图（矩阵），重排成长为 784 的向量
     >
     > 如果使用卷积神经网络，则可以直接处理矩阵型的输入
@@ -82,12 +91,12 @@ mathjax: true
   > 如果使用了 `softmax` 函数，那么整个输出层可以看作每个类别的概率分布
 - 所谓的“**神经元被激活**”实际上就是它获得了一个较大的激活值
 
-    ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/TIM截图20180701212340.png)
+    ![](https://pic2.zhimg.com/80/v2-05e113aba89048ae25cc2d9a5e903eed_720w.jpg)
 
 **隐藏层**
 - 包含于输入层与输出层之间的网络层统称为“隐藏层”
 
-    ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/TIM截图20180701212657.png)
+    ![](https://pic2.zhimg.com/80/v2-55c32b0a4b87127a2a8624522acaae59_720w.jpg)
     > 在这个简单的网络中，有两个隐藏层，每层有 16 个神经元
     >
     > 为什么是两层和 16 个？——层数的大小与问题的复杂度有关，而神经元的数量目前来看是随机的——网络的结构在实验时有很大的调整余地
@@ -96,34 +105,34 @@ mathjax: true
 - 神经网络在运作的时候，隐藏层可以视为一个“黑箱”
 - 每一层的激活值将通过某种方式计算出下一层的激活值——神经网络处理信息的核心机制
 
-    ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/TIM截图20180701213151.png)
+    ![](https://pic4.zhimg.com/80/v2-9f720fdf056858c96162d6e53c80692b_720w.jpg)
     > 每一层被激活的神经元不同，（可能）会导致下一层被激活的神经元也不同
 
 **为什么神经网络的分层结构能起作用？**
 ---
 - 人在初识数字时是如何区分的？——**组合**数字的各个部分
 
-    ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/TIM截图20180702092532.png)
+    ![](https://pic2.zhimg.com/80/v2-37a1ee73e5f69d7b4a296342a48373bd_720w.jpg)
 
 - **在理想情况下**，我们希望神经网络倒数第二层中的各隐藏单元能对应上每个**基本笔画**（pattern）
 
-    ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/TIM截图20180702093050.png)
+    ![](https://pic4.zhimg.com/80/v2-d2be1b89eba286dea4ef30f1d64dc8af_720w.jpg)
     - 当输入是 9 或 8 这种**顶部带有圆圈**的数字时，某个神经元将被激活（激活值接近 1）
     - 不光是 9 和 8，所有顶部带有圆圈的图案都能激活这个隐藏单元
     - 这样从倒数第二层到输出层，我们的问题就简化成了“学习哪些部件能组合哪些数字”
 
 - 类似的，基本笔画也可以由更基础的部件构成
 
-    ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/TIM截图20180702094246.png)
+    ![](https://pic1.zhimg.com/80/v2-112c60fbea62771fa73ea9ba5f915fc8_720w.jpg)
     
 - **理想情况下**，神经网络的处理过程
 
-    ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/TIM截图20180702094455.png)
+    ![](https://pic4.zhimg.com/80/v2-9f720fdf056858c96162d6e53c80692b_720w.jpg)
     > 从输入层到输出层，**网络的抽象程度越来越高**
 
 **深度学习的本质：通过组合简单的概念来表达复杂的事物**
 ---
-- 神经网络是不是这么做的，我们不得而知（所以是一个“黑箱”），但大量实验表明：神经网络确实在做类似的工作——**通过组合简单的概念来表达复杂的事物**
+- 神经网络是不是这么做的，不得而知（所以是一个“黑箱”），但大量实验表明：神经网络确实在做类似的工作——**通过组合简单的概念来表达复杂的事物**
 
     ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/TIM截图20180702095428.png)
     > 语音识别：原始音频 → 音素 → 音节 → 单词
@@ -137,9 +146,8 @@ mathjax: true
 - 根据激活的含义，当激活值接近 1 时，表示该区域存在一条边，反之不存在
 - **怎样的数学公式能够表达出这个含义？**
 
-    ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/TIM截图20180702112135.png)
-    ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/TIM截图20180702113031.png)
-    ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/TIM截图20180702113631.png)
+    ![](https://pic3.zhimg.com/80/v2-2073a183c84c94729fe263c4ab49aa8a_720w.jpg)
+    ![](https://pic3.zhimg.com/80/v2-2073a183c84c94729fe263c4ab49aa8a_720w.jpg)
     - 考虑对所有输入单元加权求和
     - 图中每条连线关联一个权值：绿色表示正值，红色表示负值，颜色越暗表示越接近 0
     - 此时，只需将需要关注的像素区域对应的权值设为正，其余为 0
@@ -147,7 +155,7 @@ mathjax: true
     - 为了使隐藏单元真正被“激活”，加权和还需要经过某个**非线性函数**，也就是“激活函数”
     - 早期最常用的激活函数是 `sigmoid` 函数（又称 logistic/逻辑斯蒂曲线）
 
-        ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/TIM截图20180702114132.png)
+        ![](https://pic2.zhimg.com/80/v2-5033a32d9b0dcb3a3fb8eb95877c8b8d_720w.jpg)
         > 从 `sigmoid` 的角度看，它实际上在对加权和到底有多“正”进行打分
         
     - 但有时，可能加权和大于 10 时激活才有意义；
@@ -158,8 +166,7 @@ mathjax: true
 - 每个隐藏单元又会各自带有一个**偏置**
   > 偏置和权重统称为网络参数
 
-    ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/TIM截图20180702150309.png)
-    ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/TIM截图20180702151423.png)
+    ![](https://pic3.zhimg.com/80/v2-8b8b477a26b57064bf28004d1d1b3492_720w.jpg)
     > 每一层都带有自己的权重与偏置，这样一个小小的网络，就有 13002 个参数
 
 **权重与偏置的实际意义**
