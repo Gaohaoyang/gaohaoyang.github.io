@@ -738,27 +738,11 @@ mathjax: true
 
  - ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/公式_20180705190236.png)
  
- ```
- http://www.codecogs.com/eqnedit.php?latex=\begin{aligned}&space;\frac{\partial&space;C}{\partial&space;{\color{Red}&space;a_j^{(L)}}}=\frac{\partial&space;C({\color{Red}&space;a_j^{(L)}},y_j)}{\partial&space;{\color{Red}&space;a_j^{(L)}}}&space;\end{aligned}
- ```
-
  - ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/公式_20180705134851.png)
- 
- ```
- http://www.codecogs.com/eqnedit.php?latex=\begin{aligned}&space;\frac{\partial&space;C}{{\color{Red}&space;\partial&space;a_j^{(l)}}}={\color{Teal}\sum_{k=0}^{n_l-1}}&space;\frac{\partial&space;z_k^{(l&plus;1)}}{{\color{Red}&space;\partial&space;a_j^{(l)}}}&space;\frac{{\color{Blue}&space;\partial&space;a_k^{(l&plus;1)}}}{\partial&space;z_k^{(l&plus;1)}}&space;\frac{\partial&space;C}{{\color{Blue}&space;\partial&space;a_k^{(l&plus;1)}}}&space;\end{aligned}
-```
 
  - ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/公式_20180705154543.png)
- 
- ```
- http://www.codecogs.com/eqnedit.php?latex=\begin{aligned}&space;\frac{\partial&space;C}{{\color{Magenta}&space;\partial&space;w_{j,k}^{(l)}}}=\frac{\partial&space;z_j^{(l)}}{{\color{Magenta}&space;\partial&space;w_{j,k}^{(l)}}}\frac{{\color{Red}\partial&space;a_j^{(l)}}}{\partial&space;z_j^{(l)}}\frac{\partial&space;C}{{\color{Red}\partial&space;a_j^{(l)}}}&space;\end{aligned}
- ```
 
  - ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/公式_20180705154650.png)
- 
- ```
- http://www.codecogs.com/eqnedit.php?latex=\begin{aligned}&space;\frac{\partial&space;C}{{\color{Magenta}&space;\partial&space;b_{j}^{(l)}}}=\frac{\partial&space;z_j^{(l)}}{{\color{Magenta}&space;\partial&space;b_{j}^{(l)}}}\frac{{\color{Red}\partial&space;a_j^{(l)}}}{\partial&space;z_j^{(l)}}\frac{\partial&space;C}{{\color{Red}\partial&space;a_j^{(l)}}}&space;\end{aligned}
- ```
 
   > 其中，上标 `(l)` 表示网络的层次，`(L)` 表示输出层（最后一层）；下标 `j` 和 `k` 指示神经元的位置；
   >
@@ -768,9 +752,6 @@ mathjax: true
 
  - ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/公式_20180705190536.png)
  
- ```
- http://www.codecogs.com/eqnedit.php?latex=\begin{aligned}&space;\frac{\partial&space;C}{\partial&space;{\color{Red}&space;a_j^{(L)}}}&=\frac{\partial&space;C({\color{Red}&space;a_j^{(L)}},y_j)}{\partial&space;{\color{Red}&space;a_j^{(L)}}}&space;\\&space;&=\frac{\partial&space;\left&space;(&space;\frac{1}{2}({\color{Red}a_j^{(L)}}-y_j)^2&space;\right&space;)&space;}{\partial&space;{\color{Red}a_j^{(L)}}}={\color{Red}a_j^{(L)}}-y&space;\end{aligned}
- ```
   
   根据以上公式，就可以反向求出所有损失函数对所有参数的偏导了
 
@@ -779,28 +760,13 @@ mathjax: true
   在标量形式的基础上，修改下标即可
 
   - ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/公式_20180705190657.png)
-  
-  ```
-  http://www.codecogs.com/eqnedit.php?latex=\begin{aligned}&space;\frac{\partial&space;C}{&space;\partial&space;{\color{Red}&space;a_j^{(L)}}}=\frac{\partial&space;C({\color{Red}&space;a_j^{(L)}},y_j)}{\partial&space;{\color{Red}&space;a_j^{(L)}}}&space;\end{aligned}
-  ```
-  
- - ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/公式_20180705162428.png)
  
- ```
- http://www.codecogs.com/eqnedit.php?latex=\begin{aligned}&space;\frac{\partial&space;C}{{\color{Red}&space;\partial&space;a^{(l)}}}=\frac{\partial&space;z^{(l&plus;1)}}{{\color{Red}&space;\partial&space;a^{(l)}}}&space;\frac{{\color{Blue}&space;\partial&space;a^{(l&plus;1)}}}{\partial&space;z^{(l&plus;1)}}&space;\frac{\partial&space;C}{{\color{Blue}&space;\partial&space;a^{(l&plus;1)}}}&space;\end{aligned}
- ```
+ - ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/公式_20180705162428.png)
   
  - ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/公式_20180705162521.png)
- 
- ```
- http://www.codecogs.com/eqnedit.php?latex=\begin{aligned}&space;\frac{\partial&space;C}{{\color{Magenta}&space;\partial&space;w_{j}^{(l)}}}=\frac{\partial&space;z^{(l)}}{{\color{Magenta}&space;\partial&space;w_{j}^{(l)}}}\frac{{\color{Red}\partial&space;a^{(l)}}}{\partial&space;z^{(l)}}\frac{\partial&space;C}{{\color{Red}\partial&space;a^{(l)}}}&space;\end{aligned}
- ```
   
  - ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/blob/master/_assets/公式_20180705162633.png)
  
- ```
- http://www.codecogs.com/eqnedit.php?latex=\begin{aligned}&space;\frac{\partial&space;C}{{\color{Magenta}&space;\partial&space;b^{(l)}}}=\frac{\partial&space;z^{(l)}}{{\color{Magenta}&space;\partial&space;b^{(l)}}}\frac{{\color{Red}\partial&space;a^{(l)}}}{\partial&space;z^{(l)}}\frac{\partial&space;C}{{\color{Red}\partial&space;a^{(l)}}}&space;\end{aligned}
- ```
 
   **注意**：其中向量相乘都是以**按元素相乘**的形式，一般用 `⊙` 符号表示。
 
