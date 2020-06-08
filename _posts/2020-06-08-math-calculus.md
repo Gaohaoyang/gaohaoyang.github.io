@@ -62,9 +62,13 @@ mathjax: true
 - ...
 
 **微积分的三个中心思想：**
-1. 积分
-1. 微分
-1. 积分与微分（导数）的互逆
+- 1. 积分
+- 1. 微分
+- 1. 积分与微分（导数）的互逆
+
+![](http://qnimg.lovevivian.cn/video-weijifenbenzhi1.jpeg)
+![](http://qnimg.lovevivian.cn/video-weijifenbenzhi2.jpeg)
+![](http://qnimg.lovevivian.cn/video-weijifenbenzhi3.jpeg)
 
 **（几位）微积分之父**
 - 发现微积分：巴罗（Barrow）、牛顿（Newton）、莱布尼茨（Leibniz）
@@ -75,29 +79,29 @@ mathjax: true
 ## 推导圆的面积 - 积分的直观理解
 
 圆的面积公式：
-[![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/raw/master/_assets/公式_20180625144700.png)](http://www.codecogs.com/eqnedit.php?latex=Aera=\pi&space;R^2)
+[![](http://qnimg.lovevivian.cn/video-weijifenbenzhi1.jpeg)](http://www.codecogs.com/eqnedit.php?latex=Aera=\pi&space;R^2)
 
 **如何从积分的角度推导出圆的面积公式？**
 
-不同的划分方法会带来不同的积分公式，下面考虑将圆划分为大量的同心圆环，这种方法保留了圆的对称性。
+- 不同的划分方法会带来不同的积分公式，下面考虑将圆划分为大量的同心圆环，这种方法保留了圆的对称性。
 
 ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/raw/master/_assets/TIM截图20180625150305.png)
 
-考虑其中一个环的面积，可以将其看做一个“类矩形”
+- 考虑其中一个环的面积，可以将其看做一个“类矩形”
 
 ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/raw/master/_assets/TIM截图20180625150437.png)
 
-虽然这不是标准的矩形，但只要`dr`越小，它就越接近。它的面积可表示为：
+- 虽然这不是标准的矩形，但只要`dr`越小，它就越接近。它的面积可表示为：
 
 [![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/raw/master/_assets/公式_20180625205349.png)](http://www.codecogs.com/eqnedit.php?latex=area=2\pi&space;r\,dr)
 
-于是，圆的面积可以看作是这一系列矩形面积的叠加。
+- 于是，圆的面积可以看作是这一系列矩形面积的叠加。
 
 ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/raw/master/_assets/TIM截图20180625151928.png)
 
-这部分面积的求和可以等价于求“**函数`y = 2πr`图像在区间`[0, R]`下的面积**”。
+- 这部分面积的求和可以等价于求“**函数`y = 2πr`图像在区间`[0, R]`下的面积**”。
 
-这个推导的过程其实可以看作是对函数`y = 2πr`在`[0, R]`下的积分。
+- 这个推导的过程其实可以看作是对函数`y = 2πr`在`[0, R]`下的积分。
 
 ## 积分与导数
 
@@ -113,7 +117,7 @@ mathjax: true
 
 以抛物线 `f(x)=x^2` 为例。类似的，我们可以将这块区域划分成一系列细长的矩形。
 
-![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/raw/master/_assets/TIM截图20180625160257.png)
+![](http://qnimg.lovevivian.cn/video-weijifenbenzhi3.jpeg)
 
 将 `x` 增加 `dx`，增加的面积可以看做是一个长`f(x)`、宽`dx`的矩形，只要`dx`越小，这条窄带就越接近矩形。
 
@@ -204,12 +208,12 @@ mathjax: true
 - 此外，`x^2` 还有另一个更直接的含义：长为 `x` 的正方形的面积。
 - 假如给边长 `x` 一个微小的增量 `dx`，那么正方形的增量（变化量）是多少？
 
-    ![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/raw/master/_assets/TIM截图20180626211449.png)
+    ![](http://qnimg.lovevivian.cn/video-weijifenbenzhi4.jpeg)
 
 - 应该时刻记住的 `dx` 是一个微小的量——这意味着你可以**忽略所有次数高于 1 的 `dx` 项**——换言之，一个微小量的平方（或更高次方）是一个可以忽略的变化量
 - 由此，可以得到：
 
-    [![](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/raw/master/_assets/公式_20180626212536.png)](http://www.codecogs.com/eqnedit.php?latex=\begin{aligned}&space;&df=2xdx\\&space;\Rightarrow&space;&&space;\frac{df}{dx}=2x&space;\end{aligned})
+    [![](http://qnimg.lovevivian.cn/video-weijifenbenzhi5.jpeg)](http://www.codecogs.com/eqnedit.php?latex=\begin{aligned}&space;&df=2xdx\\&space;\Rightarrow&space;&&space;\frac{df}{dx}=2x&space;\end{aligned})
 
 - 上一节给出了 `f(x) = x^3` 导数的代数推导过程，这里也可以作为立方体体积来用几何的方式推导。
     
