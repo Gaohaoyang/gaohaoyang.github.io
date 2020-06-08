@@ -80,7 +80,7 @@ mathjax: true
 ## 推导圆的面积 - 积分的直观理解
 
 圆的面积公式：
-![](https://www.zhihu.com/equation?tex=Aera=\pi&space;R^2)
+![](https://www.zhihu.com/equation?tex=Aera=\piR^2)
 
 **如何从积分的角度推导出圆的面积公式？**
 
@@ -92,7 +92,7 @@ mathjax: true
 
 - 虽然这不是标准的矩形，但只要`dr`越小，它就越接近。它的面积可表示为：
 
-![](https://www.zhihu.com/equation?tex=area=2\pi&space;r\,dr)
+![](https://www.zhihu.com/equation?tex=area=2\pir\,dr)
 
 - 于是，圆的面积可以看作是这一系列矩形面积的叠加。
 
@@ -125,10 +125,10 @@ $$ \int_{a}^{b}f(x)dx $$
 
 通过这个矩形，可以得到 `A`、`f(x)` 与 `dx` 之间的关系：
 
-![](https://www.zhihu.com/equation?tex={\displaystyle&space;{\begin{aligned}&space;&&space;dA&space;\approx&space;f(x)dx&space;\\&space;\Rightarrow&space;&&space;\frac{dA}{dx}\approx&space;f(x)&space;\\&space;\Rightarrow&space;&&space;\frac{A(x&plus;dx)-A(x)}{dx}&space;\approx&space;f(x)&space;\end{aligned}}})
+![](https://www.zhihu.com/equation?tex={\displaystyle{\begin{aligned}dA\approxf(x)dx\\\Rightarrow\frac{dA}{dx}\approxf(x)\\\Rightarrow\frac{A(x+dx)-A(x)}{dx}\approxf(x)\end{aligned}}})
 
 $$
-{\displaystyle&space;{\begin{aligned}&space;&&space;dA&space;\approx&space;f(x)dx&space;\\&space;\Rightarrow&space;&&space;\frac{dA}{dx}\approx&space;f(x)&space;\\&space;\Rightarrow&space;&&space;\frac{A(x&plus;dx)-A(x)}{dx}&space;\approx&space;f(x)&space;\end{aligned}}}
+{\displaystyle{\begin{aligned}dA\approxf(x)dx\\\Rightarrow\frac{dA}{dx}\approxf(x)\\\Rightarrow&\frac{A(x+dx)-A(x)}{dx}\approxf(x)\end{aligned}}}
 $$
 
 这里引出了微积分中另一个重要的概念——**导数**。`dA/dx` 就是 "A 的导数"
@@ -176,7 +176,7 @@ $$
     - dt 非常非常小，无限逼近0；两点连线的斜率→某一个点的斜率。
     - 左上角长方形里的内容才是导数的完全体。
     - dt 逼近0时，后面两项就能完全忽略了
-        - ![](https://www.zhihu.com/equation?tex=\begin{aligned}&space;\frac{ds(t)}{dt}=\underbrace{\frac{s(t&plus;dt)-s(t)}{dt}}_{dt\rightarrow&space;0}&space;\end{aligned})
+        - ![](https://www.zhihu.com/equation?tex=\begin{aligned}\frac{ds(t)}{dt}=\underbrace{\frac{s(t+dt)-s(t)}{dt}}_{dt\rightarrow0}\end{aligned})
         - ![](http://qnimg.lovevivian.cn/video-weijifenbenzhi6.jpeg)
     > 严格的定义在[[7. 极限](#7-极限)]一章给出
 
@@ -187,7 +187,7 @@ $$
 **导数的计算**
 - 抛开求导公式，先来看一下面对一个实际的问题，该如何求解（在某一点处的）导数。
 - 对于 `s(t)=t^3` 在 `t=2` 处的导数，根据导数的定义，有
-    - ![](https://www.zhihu.com/equation?tex=\begin{aligned}&space;\frac{ds(t)}{dt}&space;&=\frac{s(t&plus;dt)-s(t)}{dt}\\&space;\Rightarrow&space;\frac{d(t^3)}{dt}&space;&=\frac{(t&plus;dt)^3-t^3}{dt}\\&space;&=\frac{t^3&plus;3t^2(dt)&plus;st(dt)^2&plus;(dt)^3-t^3}{dt}\\&space;&=3t^2&plus;3t(dt)&plus;(dt)^2&space;\end{aligned})
+    - ![](https://www.zhihu.com/equation?tex=\begin{aligned}\frac{ds(t)}{dt}\frac{s(t+dt)-s(t)}{dt}\\\Rightarrow\frac{d(t^3)}{dt}\frac{(t+dt)^3-t^3}{dt}\\\frac{t^3+3t^2(dt)+st(dt)^2+(dt)^3-t^3}{dt}\\3t^2+3t(dt)+(dt)^2\end{aligned})
 - 当 `dt` 趋向 0 时，后两项也会趋于 0，进而消去。代入 `t=2` 可以得到在该点处的导数为 12
 - 更一般的，称 `s'(t) = 3*t^2` 为 `s(t) = t^3` 的**导函数**。
 
@@ -216,7 +216,7 @@ $$
 
 - 应该时刻记住的 `dx` 是一个微小的量——这意味着你可以**忽略所有次数高于 1 的 `dx` 项**——换言之，一个微小量的平方（或更高次方）是一个可以忽略的变化量
 - 由此，可以得到：
-    - ![](https://www.zhihu.com/equation?tex=\begin{aligned}&space;&df=2xdx\\&space;\Rightarrow&space;&&space;\frac{df}{dx}=2x&space;\end{aligned})
+    - ![](https://www.zhihu.com/equation?tex=\begin{aligned}df=2xdx\\\Rightarrow\frac{df}{dx}=2x\end{aligned})
 
 - 上一节给出了 `f(x) = x^3` 导数的代数推导过程，这里也可以作为立方体体积来用几何的方式推导。
 - 示例
@@ -231,10 +231,10 @@ $$
     > 注意：这里的变化量不再是矩形的面积了，而是**矩形的高**
 
 - 通过简单的几何知识，可知矩形**高**的变化量为：
-    - ![](https://www.zhihu.com/equation?tex=d(\frac{1}{x})=-(\frac{1}{x}-\frac{1}{x&plus;dx}))
+    - ![](https://www.zhihu.com/equation?tex=d(\frac{1}{x})=-(\frac{1}{x}-\frac{1}{x+dx}))
 
 - 从而得到 `1/x` 的导数为：
-    - ![](https://www.zhihu.com/equation?tex=\begin{aligned}&space;&&space;d(\frac{1}{x})=\frac{-dx}{x^2&plus;xdx}&space;\\&space;\Rightarrow&space;&&space;\frac{d(\frac{1}{x})}{dx}=\frac{-1}{x^2&plus;xdx}=-\frac{1}{x^2}&space;\end{aligned})
+    - ![](https://www.zhihu.com/equation?tex=\begin{aligned}d(\frac{1}{x})=\frac{-dx}{x^2+xdx}\\\Rightarrow\frac{d(\frac{1}{x})}{dx}=\frac{-1}{x^2+xdx}=-\frac{1}{x^2}\end{aligned})
     
 **幂函数的导数**
 
@@ -262,7 +262,7 @@ $$
 
 - 根据三角函数的定义，有
 
-    ![](https://www.zhihu.com/equation?tex=\begin{aligned}&space;&d(\sin\theta)=\cos\theta\,d\theta\\\Rightarrow&space;&\frac{d(\sin\theta)}{d\theta}=\cos\theta&space;\end{aligned})
+    ![](https://www.zhihu.com/equation?tex=\begin{aligned}d(\sin\theta)=\cos\theta\,d\theta\\\Rightarrow\frac{d(\sin\theta)}{d\theta}=\cos\theta\end{aligned})
 
 
 # 直观理解链式法则
@@ -275,7 +275,7 @@ $$
 
 ## 加法法则
 
-- ![](https://www.zhihu.com/equation?tex=\begin{aligned}&space;&d(g(x)&plus;h(x))=\frac{dg}{dx}&plus;\frac{dh}{dx}\\&space;\end{aligned})
+- ![](https://www.zhihu.com/equation?tex=\begin{aligned}d(g(x)+h(x))=\frac{dg}{dx}+\frac{dh}{dx}\end{aligned})
 - ![](http://qnimg.lovevivian.cn/video-weijifenbenzhi15.jpeg)
 - ![](http://qnimg.lovevivian.cn/video-weijifenbenzhi16.jpeg)
 - ![](http://qnimg.lovevivian.cn/video-weijifenbenzhi17.jpeg)
@@ -286,7 +286,7 @@ $$
 
 “左乘**右导** + 右乘**左导**”：
 
-![](https://www.zhihu.com/equation?tex=\begin{aligned}&space;\frac{d}{dx}(g(x)h(x))=h(x)\frac{d\,g(x)}{dx}&plus;g(x)\frac{d\,h(x)}{dx}&space;\end{aligned})
+![](https://www.zhihu.com/equation?tex=\begin{aligned}\frac{d}{dx}(g(x)h(x))=h(x)\frac{d\,g(x)}{dx}+g(x)\frac{d\,h(x)}{dx}\end{aligned})
 
 > 在数学中，如果你要处理两项的乘积，用**面积**来理解会更方便
 
@@ -294,7 +294,7 @@ $$
 
 **链式法则**：
 
-![](https://www.zhihu.com/equation?tex=\begin{aligned}&space;\frac{d}{dx}g(h(x))=\frac{dg(h(x))}{dh(x)}\frac{dh(x)}{dx}=\frac{dg}{dh}\frac{dh}{dx}&space;\end{aligned})
+![](https://www.zhihu.com/equation?tex=\begin{aligned}\frac{d}{dx}g(h(x))=\frac{dg(h(x))}{dh(x)}\frac{dh(x)}{dx}=\frac{dg}{dh}\frac{dh}{dx}\end{aligned})
 
 ![](http://qnimg.lovevivian.cn/video-weijifenbenzhi19.jpeg)
 
@@ -312,7 +312,7 @@ $$
 **从`2^t`开始**：
 - 根据导数的定义，有
 
-    ![](https://www.zhihu.com/equation?tex=\begin{aligned}&space;\frac{d2^t}{dt}&space;&=\frac{2^{t&plus;dt}-2^t}{dt}\\&space;&=\frac{2^t2^{dt}-2^t}{dt}\\&space;&=2^t\cdot\frac{2^{dt}-1}{dt}\\&space;&=2^t\cdot&space;h&space;\end{aligned})
+    ![](https://www.zhihu.com/equation?tex=\begin{aligned}\frac{d2^t}{dt}=\frac{2^{t+dt}-2^t}{dt}=\frac{2^t2^{dt}-2^t}{dt}=2^t\cdot\frac{2^{dt}-1}{dt}=2^t\cdoth\end{aligned})
 
 - 当 `dt → 0` 时，`h` 趋向于一个常数 `0.6931...`
 - 也就是说，`2^t` 图像上各点处**切线的斜率 = 该点的函数值 * 一个常数**
@@ -337,7 +337,7 @@ $$
 - 有了自然常数 `e` 以及链式法则，就可以求出其他指数函数的导数了
 - 根据指数函数的性质与链式法则，有
 
-    ![](https://www.zhihu.com/equation?tex=\begin{aligned}&space;\frac{d(c^t)}{dt}&space;&=\frac{d(e^{\ln(c)t})}{dt}\\&space;&=\ln(c)e^{\ln(c)t}=\ln(c)c^t&space;\end{aligned})
+    ![](https://www.zhihu.com/equation?tex=\begin{aligned}\frac{d(c^t)}{dt}\frac{d(e^{\ln(c)t})}{dt}\\\ln(c)e^{\ln(c)t}=\ln(c)c^t\end{aligned})
 
 - 事实上，在微积分中，指数函数基本都是以 `e^ct` 的形式出现的，很少会直接使用 `c^t` 的形式
 
@@ -367,7 +367,7 @@ $$
 - 因为这里的曲线并不是一个函数图像，所以不能单纯对其求导——它不存在变量 x 的微小变化对函数值 y 的微小变化
 - 当然，如果我们的目标只是求 `dy/dx`，那么对等式两边同时求导可以解决：
 
-    ![](https://www.zhihu.com/equation?tex=\begin{aligned}&space;&d(x^2&plus;y^2)=d(5^2)\\\Rightarrow&space;&2xdx&plus;2ydy=0\\\Rightarrow&space;&\frac{dy}{dx}=\frac{-x}{y}&space;\end{aligned})
+    ![](https://www.zhihu.com/equation?tex=\begin{aligned}d(x^2+y^2)=d(5^2)\\\Rightarrow2xdx+2ydy=0\\\Rightarrow\frac{dy}{dx}=\frac{-x}{y}\end{aligned})
 
 - ![](http://qnimg.lovevivian.cn/video-weijifenbenzhi30.jpeg)
 
@@ -406,7 +406,7 @@ $$
 **示例 4：`ln(x)`的导数——从已有的导函数推算出其他函数的导函数**
 - 根据指数函数与对数函数的关系，有
 
-    ![](https://www.zhihu.com/equation?tex=\begin{aligned}&space;&y=\ln(x)\\\Rightarrow&space;&e^y=x\\\Rightarrow&space;&e^ydy=dx\\\Rightarrow&space;&\frac{dy}{dx}=\frac{1}{e^y}=\frac{1}{e^{\ln(x)}}=\frac{1}{x}\\\Rightarrow&space;&\frac{d\ln(x)}{dx}=\frac{1}{x}&space;\end{aligned})
+    ![](https://www.zhihu.com/equation?tex=\begin{aligned}y=\ln(x)\\\Rightarrow+e^y=x\\\Rightarrow+e^ydy=dx\\\Rightarrow\frac{dy}{dx}=\frac{1}{e^y}=\frac{1}{e^{\ln(x)}}=\frac{1}{x}\\\Rightarrow\frac{d\ln(x)}{dx}=\frac{1}{x}\end{aligned})
 
 **多元微积分**
 - 隐函数求导是**多元微积分**的入门。两者的要点是一样的，需要理解这多个变量是如何联系在一起变化的。
@@ -419,15 +419,15 @@ $$
 ## 导数的正式定义
 - 在[[2.2. 导数的定义与计算](#22-导数的定义与计算)]已经给出了导数的计算公式：
 
-    ![](https://www.zhihu.com/equation?tex=\begin{aligned}&space;\frac{df(x)}{dx}=\underbrace{\frac{f(x&plus;dx)-f(x)}{dx}}_{dx\rightarrow&space;0}&space;\end{aligned})
+    ![](https://www.zhihu.com/equation?tex=\begin{aligned}\frac{df(x)}{dx}=\underbrace{\frac{f(x+dx)-f(x)}{dx}}_{dx\rightarrow+0}\end{aligned})
 
     导数的正式定义：
 
-    ![](https://www.zhihu.com/equation?tex=\begin{aligned}&space;\frac{df(x)}{dx}=\lim_{\Delta&space;x&space;\to&space;0}\frac{f(x&plus;\Delta&space;x)-f(x)}{\Delta&space;x}&space;\end{aligned})
+    ![](https://www.zhihu.com/equation?tex=\begin{aligned}\frac{df(x)}{dx}=\lim_{\Deltax\to0}\frac{f(x+\Deltax)-f(x)}{\Deltax}\end{aligned})
     
     或
 
-    ![](https://www.zhihu.com/equation?tex=\begin{aligned}&space;\frac{df(x)}{dx}=\lim_{h&space;\to&space;0}\frac{f(x&plus;h)-f(x)}{h}&space;\end{aligned})
+    ![](https://www.zhihu.com/equation?tex=\begin{aligned}\frac{df(x)}{dx}=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}\end{aligned})
     
     > 为什么不用 `dx`？——`dx` 本身已经表达了求极限的含义——使用 `dx` 的表示容易将其理解成“无穷小的变化量”；**更正确的**解读应该是把它看做一个具体的、有限小的变化量，并时刻考虑 `dx → 0` 时的情况（[3. 用几何来求导](#3-用几何来求导)）。
     >
@@ -440,7 +440,7 @@ $$
 
 > 设函数`f(x)`在点`x0`的某一**去心邻域**内有定义，如果存在常数`a`，对于任意给定的正数`ϵ`，都`∃δ>0`，使不等式`|f(x)-a| < ϵ`在`|x-x0| ∈ (0,δ)`恒成立，那么`a`就叫做函数`f(x)`当`x→x0`时的极限，记作
 >
-> ![](https://www.zhihu.com/equation?tex=\begin{aligned}&space;\lim_{x&space;\to&space;x_0}f(x)=a&space;\end{aligned})
+> ![](https://www.zhihu.com/equation?tex=\begin{aligned}\lim_{x\tox_0}f(x)=a\end{aligned})
 
 - 右边的式子就是导数的正式定义。h 和 dx 是一回事。
 - dx 可以解读为一个具体的，有限小的变化量。随时考虑 dx 逼近于 0 时的情况。
@@ -475,17 +475,17 @@ $$
 
 - 洛必达法则：
 
-    ![](https://www.zhihu.com/equation?tex=\begin{aligned}&space;\lim_{x&space;\to&space;a}\frac{f(x)}{g(x)}=\lim_{x&space;\to&space;a}\frac{f%27(x)}{g%27(x)}=A&space;\end{aligned})
+    ![](https://www.zhihu.com/equation?tex=\begin{aligned}\lim_{x\toa}\frac{f(x)}{g(x)}=\lim_{x\toa}\frac{f%27(x)}{g%27(x)}=A\end{aligned})
     > 条件：1）`f(x)`和`g(x)`在点`a`处的极限都为 0；2）`f(x)`和`g(x)`在点`a`的某去心领域内可导，且`g'(x)!=0`；3）`A`可以为实数，也可以为`±∞`
     >
     > 注意，只要满足以上条件，洛必达法则是可以继续进行的
 
-    ![](https://www.zhihu.com/equation?tex=\begin{aligned}&space;\lim_{x&space;\to&space;a}\frac{f(x)}{g(x)}=\lim_{x&space;\to&space;a}\frac{f%27(x)}{g%27(x)}=\lim_{x&space;\to&space;a}\frac{f%27%27(x)}{g%27%27(x)}=...&space;\end{aligned})
+    ![](https://www.zhihu.com/equation?tex=\begin{aligned}\lim_{x\toa}\frac{f(x)}{g(x)}=\lim_{x\toa}\frac{f%27(x)}{g%27(x)}=\lim_{x\toa}\frac{f%27%27(x)}{g%27%27(x)}=...\end{aligned})
     
 
 - 这么看，实际上，求解导数的过程也是在使用洛必达法则
 
-    ![](https://www.zhihu.com/equation?tex=\begin{aligned}&space;\frac{df(x)}{dx}=\lim_{h&space;\to&space;0}\frac{f(x&plus;h)-f(x)}{h}&space;\end{aligned})
+    ![](https://www.zhihu.com/equation?tex=\begin{aligned}\frac{df(x)}{dx}=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}\end{aligned})
     > 分子分母在 `h→0` 处的极限都为 `0`
 
 
@@ -537,7 +537,7 @@ $$
 - 因为常数的导数为 0，所以在原函数的基础上加上任意常数，其导数不变——这意味着每个函数的原函数有无数个
 - 所以`v(t) = 8t - t^2`正确的原函数应该是
 
-    ![](https://www.zhihu.com/equation?tex=\begin{aligned}&space;s(t)=\int&space;v(t)dt=4t^2-\frac{1}{3}t^3&plus;C&space;\end{aligned})
+    ![](https://www.zhihu.com/equation?tex=\begin{aligned}s(t)=\intv(t)dt=4t^2-\frac{1}{3}t^3+C\end{aligned})
 
 - 从图像上来看，曲线上下移动并不会影响其在每一点的斜率
 
@@ -610,7 +610,7 @@ $$
 
 - 用符号表示为
     
-    ![](https://www.zhihu.com/equation?tex=\begin{aligned}&space;\underbrace{\frac{d(\frac{df}{dx})}{dx}=\frac{d(df)}{(dx)^2}=\frac{d^2f}{dx^2}}_{dx&space;\to&space;0}&space;\end{aligned})
+    ![](https://www.zhihu.com/equation?tex=\begin{aligned}\underbrace{\frac{d(\frac{df}{dx})}{dx}=\frac{d(df)}{(dx)^2}=\frac{d^2f}{dx^2}}_{dx\to0}\end{aligned})
     > 其实中间的写法才是最正确的，但为了书写方便，通常写成最右侧的形式
     
 - 一个理解二阶导数的现实示例就是加速度
@@ -702,11 +702,11 @@ $$
 ---
 - 函数`f(x)`在`x=0`处的泰勒多项式
 
-    ![](https://www.zhihu.com/equation?tex=\begin{aligned}&space;P(x)=f(0)&plus;\frac{f%27(0)}{1!}x&plus;\frac{f%27%27(0)}{2!}x^2&plus;\frac{f^{(3)}(0)}{3!}x^3&plus;\cdots&space;\end{aligned})
+    ![](https://www.zhihu.com/equation?tex=\begin{aligned}P(x)=f(0)+\frac{f%27(0)}{1!}x+\frac{f%27%27(0)}{2!}x^2+\frac{f^{(3)}(0)}{3!}x^3+\cdots\end{aligned})
 
 - 函数`f(x)`在`x=a`处的泰勒多项式
 
-    ![](https://www.zhihu.com/equation?tex=\begin{aligned}&space;P(x)=f(a)&plus;\frac{f%27(a)}{1!}(x-a)&plus;\frac{f%27%27(a)}{2!}(x-a)^2&plus;\frac{f^{(3)}(a)}{3!}(x-a)^3&plus;\cdots&space;\end{aligned})
+    ![](https://www.zhihu.com/equation?tex=\begin{aligned}P(x)=f(a)+\frac{f%27(a)}{1!}(x-a)+\frac{f%27%27(a)}{2!}(x-a)^2+\frac{f^{(3)}(a)}{3!}(x-a)^3+\cdots\end{aligned})
 
 **级数的概念**
 ---
