@@ -26,12 +26,13 @@ mathjax: true
 ![](https://upload-images.jianshu.io/upload_images/14911967-ddffac42b65f04d2.png?imageMogr2/auto-orient/strip|imageView2/2/w/883/format/webp)
 
 在上图的下面部分，训练用的输入和输出数据的embedding，都会先加上一个position encoding来补充一下位置信息。
-- `encoder`
+- `Encoder`
    - 途中左侧部分是encoder块，encoder中6层相同结构堆叠而成，在每层中又可以分为2个子层，底下一层是multihead self-attention层，上面是一个FC feed-forward层，每一个子层都有residual connection，，然后在进行Layer Normalization. 为了引入redisual connenction简化计算，每个层的输入维数和embedding层保持一致。
-- `decoder`
+- `Decoder`
    - 同样是一个6层的堆叠，每层有三个子层，其中底下两层都是multihead self-attention层，最底下一层是有mask的，只有当前位置之前的输入有效，中间层是encode和decode的连接层，输出的self-attention层和输入的encoder输出同时作为MSA的输入，实现encoder和decoder的连接，最上层和encoder的最上层是一样的，不在单说，每个子层都有有residual connection，和Layer Normalization
 
 ### 亮点
+
 - `Self Attention`
    - 传统的编解码结构中，将输入输入编码为一个定长语义编码，然后通过这个编码在生成对应的输出序列。它存在的一个问题在于：输入序列不论长短都会被编码成一个固定长度的向量表示，而解码则受限于该固定长度的向量表示
    - attention机制: encoder的输出不是一个语义向量，是一个语义向量的序列
@@ -49,6 +50,7 @@ mathjax: true
 
 
 ### 总结
+
 - 结构
 ![](https://upload-images.jianshu.io/upload_images/14911967-dec395c8d1d19f18.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp)
 - 训练过程
@@ -62,8 +64,6 @@ mathjax: true
 ![](https://jalammar.github.io/images/t/transformer_resideual_layer_norm_3.png)
 
 ![](https://camo.githubusercontent.com/88e8f36ce61dedfd2491885b8df2f68c4d1f92f5/687474703a2f2f696d6775722e636f6d2f316b72463252362e706e67)
-
-
 
 
 ## [Transformer模型的PyTorch实现](https://luozhouyang.github.io/transformer/)
@@ -112,6 +112,7 @@ encoder由6层相同的层组成，每一层分别由两部分组成：
 但是，decoder出现了一个新的东西**multi-head context-attention mechanism**。这个东西其实也不复杂，理解了**multi-head self-attention**你就可以理解**multi-head context-attention**。这个我们后面会讲解。
 
 ## Attention机制
+
 在讲清楚各种attention之前，我们得先把attention机制说清楚。
 
 通俗来说，**attention**是指，对于某个时刻的输出`y`，它在输入`x`上各个部分的注意力。这个注意力实际上可以理解为**权重**。
@@ -160,15 +161,15 @@ attention机制也可以分成很多种。[Attention? Attention!](https://lilian
 
 $$\text{Attention}(Q,K,V)=softmax(\frac{QK^T}{\sqrt d_k})V$$
 
-**scaled dot-product attention**和**dot-product attention**唯一的区别就是，**scaled dot-product attention**有一个缩放因子$$\frac{1}{\sqrt d_k}$$。
+**scaled dot-product attention**和**dot-product attention**唯一的区别就是，**scaled dot-product attention**有一个缩放因子$\frac{1}{\sqrt d_k}$。
 
-上面公式中的$$d_k$$表示的是K的维度，在论文里面，默认是`64`。
+上面公式中的$d_k$表示的是K的维度，在论文里面，默认是`64`。
 
-那么为什么需要加上这个缩放因子呢？论文里给出了解释：对于$$d_k$$很大的时候，点积得到的结果维度很大，使得结果处于softmax函数梯度很小的区域。
+那么为什么需要加上这个缩放因子呢？论文里给出了解释：对于$d_k$很大的时候，点积得到的结果维度很大，使得结果处于softmax函数梯度很小的区域。
 
 我们知道，梯度很小的情况，这对反向传播不利。为了克服这个负面影响，除以一个缩放因子，可以一定程度上减缓这种情况。
 
-为什么是$$\frac{1}{\sqrt d_k}$$呢？论文没有进一步说明。个人觉得你可以使用其他缩放因子，看看模型效果有没有提升。
+为什么是$\frac{1}{\sqrt d_k}$呢？论文没有进一步说明。个人觉得你可以使用其他缩放因子，看看模型效果有没有提升。
 
 论文也提供了一张很清晰的结构图，供大家参考：  
 ![scaled_dot_product_attention_arch](http://blog.stupidme.me/wp-content/uploads/2018/09/scaled_dot_product_attention_arch.png)  
@@ -179,7 +180,7 @@ $$\text{Attention}(Q,K,V)=softmax(\frac{QK^T}{\sqrt d_k})V$$
 * 在encoder的self-attention中，Q、K、V都来自同一个地方（相等），他们是上一层encoder的输出。对于第一层encoder，它们就是word embedding和positional encoding相加得到的输入。
 * 在decoder的self-attention中，Q、K、V都来自于同一个地方（相等），它们是上一层decoder的输出。对于第一层decoder，它们就是word embedding和positional encoding相加得到的输入。但是对于decoder，我们不希望它能获得下一个time step（即将来的信息），因此我们需要进行**sequence masking**。
 * 在encoder-decoder attention中，Q来自于decoder的上一层的输出，K和V来自于encoder的输出，K和V是一样的。
-* Q、K、V三者的维度一样，即 $$d_q=d_k=d_v$$。
+* Q、K、V三者的维度一样，即 $d_q=d_k=d_v$。
 
 上面scaled dot-product attention和decoder的self-attention都出现了**masking**这样一个东西。那么这个mask到底是什么呢？这两处的mask操作是一样的吗？这个问题在后面会有详细解释。
 
@@ -190,7 +191,6 @@ $$\text{Attention}(Q,K,V)=softmax(\frac{QK^T}{\sqrt d_k})V$$
 ```python
 import torch
 import torch.nn as nn
-
 
 class ScaledDotProductAttention(nn.Module):
     """Scaled dot-product attention mechanism."""
@@ -230,13 +230,13 @@ class ScaledDotProductAttention(nn.Module):
 
 ### Multi-head attention又是什么呢？
 
-理解了Scaled dot-product attention，Multi-head attention也很简单了。论文提到，他们发现将Q、K、V通过一个线性映射之后，分成 $$h$$ 份，对每一份进行**scaled dot-product attention**效果更好。然后，把各个部分的结果合并起来，再次经过线性映射，得到最终的输出。这就是所谓的**multi-head attention**。上面的超参数 $$h$$ 就是**heads**数量。论文默认是`8`。
+理解了Scaled dot-product attention，Multi-head attention也很简单了。论文提到，他们发现将Q、K、V通过一个线性映射之后，分成 $h$ 份，对每一份进行**scaled dot-product attention**效果更好。然后，把各个部分的结果合并起来，再次经过线性映射，得到最终的输出。这就是所谓的**multi-head attention**。上面的超参数 $$h$$ 就是**heads**数量。论文默认是`8`。
 
 下面是multi-head attention的结构图：  
 ![multi-head attention_architecture](http://blog.stupidme.me/wp-content/uploads/2018/09/multi_head_attention_arch.png)  
 *Figure 4: Multi-head attention architecture.*  
 
-值得注意的是，上面所说的**分成 $$h$$ 份**是在 $$d_k、d_q、d_v$$ 维度上面进行切分的。因此，进入到scaled dot-product attention的 $$d_k$$ 实际上等于未进入之前的 $$D_K/h$$ 。
+值得注意的是，上面所说的**分成 $h$ 份**是在 $d_k、d_q、d_v$ 维度上面进行切分的。因此，进入到scaled dot-product attention的 $d_k$ 实际上等于未进入之前的 $D_K/h$ 。
 
 Multi-head attention允许模型加入不同位置的表示子空间的信息。
 
@@ -246,11 +246,11 @@ $$\text{MultiHead}(Q,K,V) = \text{Concat}(\text{head}_ 1,\dots,\text{head}_ h)W^
 
 其中，
 
-$$\text{head}_ i = \text{Attention}(QW_i^Q,KW_i^K,VW_i^V)$$
+$\text{head}_ i = \text{Attention}(QW_i^Q,KW_i^K,VW_i^V)$
 
-论文里面，$$d_{model}=512$$，$$h=8$$。所以在scaled dot-product attention里面的
+论文里面，$d_{model}=512$，$h=8$。所以在scaled dot-product attention里面的
 
-$$d_q = d_k = d_v = d_{model}/h = 512/8 = 64$$
+$d_q = d_k = d_v = d_{model}/h = 512/8 = 64$
 
 ### Multi-head attention的实现
 
@@ -327,13 +327,13 @@ class MultiHeadAttention(nn.Module):
 ![residual_conn](http://blog.stupidme.me/wp-content/uploads/2018/09/residual_connection.png)  
 *Figure 5. Residual connection.*  
 
-假设网络中某个层对输入`x`作用后的输出是$$F(x)$$，那么增加**residual connection**之后，就变成了：
+假设网络中某个层对输入`x`作用后的输出是$F(x)$，那么增加**residual connection**之后，就变成了：
 
-$$F(x)+x$$
+$F(x)+x$
 
 这个`+x`操作就是一个**shortcut**。
 
-那么**残差结构**有什么好处呢？显而易见：因为增加了一项$x$，那么该层网络对x求偏导的时候，多了一个常数项$$1$$！所以在反向传播过程中，梯度连乘，也不会造成**梯度消失**！
+那么**残差结构**有什么好处呢？显而易见：因为增加了一项$x$，那么该层网络对x求偏导的时候，多了一个常数项$1$！所以在反向传播过程中，梯度连乘，也不会造成**梯度消失**！
 
 所以，代码实现residual connection很非常简单：
 
@@ -384,7 +384,7 @@ $$LN(x_i)=\alpha\times\frac{x_i-u_L}{\sqrt{\sigma_L^2+\epsilon}}+\beta$$
 
 ### Layer normalization的实现
 
-上述两个参数$$\alpha$$和$$\beta$$都是可学习参数。下面我们自己来实现Layer normalization(PyTorch已经实现啦！)。代码如下：
+上述两个参数$\alpha$和$\beta$都是可学习参数。下面我们自己来实现Layer normalization(PyTorch已经实现啦！)。代码如下：
 
 ```python
 import torch
@@ -429,12 +429,13 @@ class LayerNorm(nn.Module):
 现在终于轮到讲解mask了!mask顾名思义就是**掩码**，在我们这里的意思大概就是**对某些值进行掩盖，使其不产生效果**。
 
 需要说明的是，我们的Transformer模型里面涉及两种mask。分别是**padding mask**和**sequence mask**。其中后者我们已经在decoder的self-attention里面见过啦！
-
-其中，**padding mask**在所有的scaled dot-product attention里面都需要用到，而**sequence mask**只有在decoder的self-attention里面用到。
+- **padding mask**在所有的scaled dot-product attention里面都需要用到
+- **sequence mask**只有在decoder的self-attention里面用到。
 
 所以，我们之前**ScaledDotProductAttention**的`forward`方法里面的参数`attn_mask`在不同的地方会有不同的含义。这一点我们会在后面说明。
 
 ### Padding mask
+
 什么是**padding mask**呢？回想一下，我们的每个批次输入序列长度是不一样的！也就是说，我们要对输入序列进行**对齐**！具体来说，就是给在较短的序列后面填充`0`。因为这些填充的位置，其实是没什么意义的，所以我们的attention机制**不应该把注意力放在这些位置上**，所以我们需要进行一些处理。
 
 具体的做法是，**把这些位置的值加上一个非常大的负数(可以是负无穷)，这样的话，经过softmax，这些位置的概率就会接近0**！
@@ -494,17 +495,15 @@ def sequence_mask(seq):
 
 那么具体怎么做呢？论文的实现很有意思，使用正余弦函数。公式如下：
 
-
 $$PE(pos,2i) = sin(pos/10000^{2i/d_{model}}) $$
 
 $$PE(pos,2i+1) = cos(pos/10000^{2i/d_{model}})$$
 
-
 其中，`pos`是指词语在序列中的位置。可以看出，在**偶数位置，使用正弦编码，在奇数位置，使用余弦编码**。
 
-上面公式中的$$d_{model}$$是模型的维度，论文默认是`512`。
+上面公式中的$d_{model}$是模型的维度，论文默认是`512`。
 
-这个编码公式的意思就是：给定词语的位置$$\text{pos}$$，我们可以把它编码成$$d_{model}$$维的向量！也就是说，位置编码的每一个维度对应正弦曲线，波长构成了从$$2\pi$$到$$10000*2\pi$$的等比序列。
+这个编码公式的意思就是：给定词语的位置$\text{pos}$，我们可以把它编码成$d_{model}$维的向量！也就是说，位置编码的每一个维度对应正弦曲线，波长构成了从$2\pi$$到$$10000*2\pi$的等比序列。
 
 上面的位置编码是**绝对位置编码**。但是词语的**相对位置**也非常重要。这就是论文为什么要使用三角函数的原因！
 
@@ -515,11 +514,11 @@ $$sin(\alpha+\beta) = sin\alpha cos\beta + cos\alpha sin\beta$$
 $$cos(\alpha+\beta) = cos\alpha cos\beta - sin\alpha sin\beta$$
 
 
-上面的公式说明，对于词汇之间的位置偏移`k`，$$PE(pos+k)$$可以表示成$$PE(pos)$$和$$PE(k)$$的组合形式，这就是表达相对位置的能力！
+上面的公式说明，对于词汇之间的位置偏移`k`，$PE(pos+k)$可以表示成$PE(pos)$和$PE(k)$的组合形式，这就是表达相对位置的能力！
 
-以上就是$$PE$$的所有秘密。说完了positional encoding，那么我们还有一个与之处于同一地位的**word embedding**。
+以上就是$PE$的所有秘密。说完了positional encoding，那么我们还有一个与之处于同一地位的**word embedding**。
 
-**Word embedding**大家都很熟悉了，它是对序列中的词汇的编码，把每一个词汇编码成$$d_{model}$$维的向量！看到没有，**Postional encoding是对词汇的位置编码，word embedding是对词汇本身编码**！
+**Word embedding**大家都很熟悉了，它是对序列中的词汇的编码，把每一个词汇编码成$d_{model}$维的向量！看到没有，**Postional encoding是对词汇的位置编码，word embedding是对词汇本身编码**！
 
 所以，我更喜欢positional encoding的另外一个名字**Positional embedding**！
 
@@ -598,7 +597,7 @@ embedding = nn.Embedding(vocab_size, embedding_size, padding_idx=0)
 seq_embedding = seq_embedding(inputs)*np.sqrt(d_model)
 ```
 
-上面`vocab_size`就是词典的大小，`embedding_size`就是词嵌入的维度大小，论文里面就是等于$$d_{model}=512$$。所以word embedding矩阵就是一个`vocab_size`*`embedding_size`的二维张量。
+上面`vocab_size`就是词典的大小，`embedding_size`就是词嵌入的维度大小，论文里面就是等于$d_{model}=512$。所以word embedding矩阵就是一个`vocab_size`*`embedding_size`的二维张量。
 
 如果你想获取更详细的关于word embedding的信息，可以看我的另外一个文章[word2vec的笔记和实现](https://github.com/luozhouyang/machine-learning-notes/blob/master/word2vec.ipynb)。
 
@@ -609,7 +608,7 @@ $$FFN(x)=max(0,xW_1+b_1)W_2+b_2$$
 
 这个线性变换在不同的位置都表现地一样，并且在不同的层之间使用不同的参数。
 
-论文提到，这个公式还可以用两个核大小为1的一维卷积来解释，卷积的输入输出都是$$d_{model}=512$$，中间层的维度是$$d_{ff}=2048$$。
+论文提到，这个公式还可以用两个核大小为1的一维卷积来解释，卷积的输入输出都是$d_{model}=512$，中间层的维度是$d_{ff}=2048$。
 
 实现如下：
 
