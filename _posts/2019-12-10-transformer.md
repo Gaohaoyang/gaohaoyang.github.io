@@ -827,7 +827,14 @@ class Transformer(nn.Module):
 
 至此，Transformer模型已经实现了！
 
+# 改进
+
+- 【2020-6-7】[模型压缩95%，MIT韩松等人提出新型Lite Transformer](https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650789244&idx=3&sn=498864894b6e1d584a45017911ce233c&chksm=871a1102b06d98144d851133ead6bd4c69f90843d6ed5ef4ef46f56bfc3256d46f43f463b419&mpshare=1&scene=23&srcid&sharer_sharetime=1591760786074&sharer_shareid=b8d409494a5439418f4a89712efcd92a%23rd)
+
+# 参考资料
+
 ## 参考文章
+
 1.[为什么ResNet和DenseNet可以这么深？一文详解残差块为何有助于解决梯度弥散问题](https://zhuanlan.zhihu.com/p/28124810)  
 2.[GRADIENTS, BATCH NORMALIZATION AND LAYER NORMALIZATION](https://theneuralperspective.com/2016/10/27/gradient-topics/)  
 3.[The Annotated Transformer](http://nlp.seas.harvard.edu/2018/04/03/attention.html#position-wise-feed-forward-networks)  
@@ -839,11 +846,4 @@ class Transformer(nn.Module):
 1.[jadore801120/attention-is-all-you-need-pytorch](https://github.com/jadore801120/attention-is-all-you-need-pytorch)  
 2.[JayParks/transformer](https://github.com/JayParks/transformer)  
 
-## 联系我
 
-* Email: stupidme.me.lzy@gmail.com  
-* WeChat: luozhouyang0528  
-![](http://blog.stupidme.me/wp-content/uploads/2018/08/wechat.jpg)  
-
-* 个人公众号，你可能会感兴趣：  
-![](http://blog.stupidme.me/wp-content/uploads/2018/08/wechat_stupidmedotme_15.jpg)  
