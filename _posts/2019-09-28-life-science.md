@@ -1304,15 +1304,19 @@ mathjax: true
 
 ## 中医扑克牌
 
-- 刘夙博士 [-滇南风吹楠-](https://weibo.com/u/6384219300) 制作，[下载地址](https://github.com/benjaminsliu/logiccards),示例：
+- 刘夙博士 [-滇南风吹楠-](https://weibo.com/u/6384219300) 制作，[下载地址](https://github.com/benjaminsliu/logiccards)
+   - wiki百科：[刘夙的逻辑扑克](https://zh.m.wikibooks.org/zh-hans/%E5%88%98%E5%A4%99%E7%9A%84%E9%80%BB%E8%BE%91%E6%89%91%E5%85%8B)
+   - 分别从逻辑谬误（黑桃）、虚假事实（红桃）、心理偏差（方片）、民族主义（梅花）四个方面归纳了支持中医的一些常见观点，并逐一加以批驳
+   - [批中医扑克牌协同编辑](https://docs.zoho.com/sheet/published.do?rid=p2rrnf1ea0f3d0d844ae6a3459ad78c975dc1)
+- 示例：
 
 ![](https://ww1.sinaimg.cn/bmiddle/62e8b953ly1gb94hccb88j20rs12wthk.jpg)
 
 - 【2020-2-14】关于中医的论点解析，主要涉及几类误区：
-   - 逻辑谬误
-   - 民族主义
-   - 虚假事实
-   - 心理偏差
+   - 逻辑谬误：黑桃
+   - 民族主义：梅花
+   - 虚假事实：红桃
+   - 心理偏差：方片
 -  表格汇总如下：
 
 | **序号** | **牌面**   | **类别**   | **原文**  | **分析** | **一句话反驳**  |
