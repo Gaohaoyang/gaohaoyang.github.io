@@ -28,7 +28,8 @@ type: page
 ## 相关项目
 
 讲过的AI课程
-- 2017年在雷锋网上主讲的深度学习读书分享，[Deep Learning解读合辑-国庆特辑](https://mp.weixin.qq.com/s?__biz=MjM5ODU3OTIyOA==&mid=503183187&idx=1&sn=cf18a77ef1249b589c89e23e0ddcae9e&chksm=3ec1ca2009b64336d14cacc57a4dadd6f732af61cf29b6517df7c1387d5eedcd00837dab88e3&mpshare=1&scene=23&srcid=0323GE6Z7ms2jc4bvLqOiqHS%23rd)
+- 2017年在雷锋网上主讲的深度学习读书分享，[BAT资深算法工程师「Deep Learning」读书系列分享（一） | 分享总结](https://www.leiphone.com/news/201708/LEBNjZzvm0Q3Ipp0.html)
+   - ![](https://static.leiphone.com/uploads/new/article/740_740/201708/598fd35654561.jpg)
 - 大数据文摘+清华+SoAI共同承办的AI培训班：[The School of AI Beijing](https://wqw547243068.github.io/school-of-ai-beijing)
 ![](https://wqw547243068.github.io/school-of-ai-beijing/other/bdd_siraj.png)
 - 雷锋网上开的Python入门AI课程：[有趣的Python](https://wqw547243068.github.io/Python-learning)
@@ -62,23 +63,6 @@ type: page
 </script>
 
 
-## 友情链接
-
--  [wangqiwen](https://github.com/wqw547243068) \| [新浪博客](http://blog.sina.com.cn/s/articlelist_1232977597_0_1.html) \| [QQ Zone](https://user.qzone.qq.com/547243068)
-- 资料汇总
-   - [数林觅风](https://woaielf.github.io/)
-   - [hht](https://xhhszc.github.io/)
-- 精华博客
-   - [Jay Alammar](https://jalammar.github.io/), word2vec,bert,transformer可视化解释系列精品文章
-   - 左耳朵耗子的[酷壳](https://coolshell.cn/)
-   - [行者无疆始于足下](http://cnlox.is-programmer.com/posts/43206.html#comments)
-- 最新技术展望
-   - [StateOfTheArt.ai](https://www.stateoftheart.ai/)
-   - [Paper with code](https://paperswithcode.com/), [Browse state-of-the-art](https://paperswithcode.com/sota)
-
-
-{% include tool_links.html %}
-
 ## 访问统计
 
 <!-- 访问统计可视化工具 -->
@@ -97,4 +81,19 @@ type: page
 {% include tool_map.html %}
 
 
+## 友情链接
+
+-  [wangqiwen](https://github.com/wqw547243068) \| [新浪博客](http://blog.sina.com.cn/s/articlelist_1232977597_0_1.html) \| [QQ Zone](https://user.qzone.qq.com/547243068)
+- 资料汇总
+   - [数林觅风](https://woaielf.github.io/)
+   - [hht](https://xhhszc.github.io/)
+- 精华博客
+   - [Jay Alammar](https://jalammar.github.io/), word2vec,bert,transformer可视化解释系列精品文章
+   - 左耳朵耗子的[酷壳](https://coolshell.cn/)
+   - [行者无疆始于足下](http://cnlox.is-programmer.com/posts/43206.html#comments)
+- 最新技术展望
+   - [StateOfTheArt.ai](https://www.stateoftheart.ai/)
+   - [Paper with code](https://paperswithcode.com/), [Browse state-of-the-art](https://paperswithcode.com/sota)
+
+{% include tool_links.html %}
 
