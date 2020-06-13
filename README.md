@@ -1,3 +1,3 @@
-# my personal blog
+# Nam Tae Woo blog
 
 
