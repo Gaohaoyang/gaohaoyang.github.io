@@ -545,6 +545,16 @@ Tor 网络有其特有的加密方式--三层密钥加密。三层密钥的建�
 
 ![](https://lh4.googleusercontent.com/proxy/EN1X0ZQ7mvKappNqP3_Y9lqUnrjqH75z_y47wg-iUu9rif7qfVLQuQhzaurcskpriPnk5Cghe84tm-Hv-KDWjYPZsYV5CjZan2sc0fxFIPU2t6OEIojIWEElewJx61-ZM68wq57tn02Uiv0bRw_giMyJOA=s0-d)
 
+
+# 暗网相关电影
+
+- [解除好友2：暗网 Unfriended: Dark Web](https://www.yugaopian.cn/movie/26423), 美国 犯罪 恐怖 2018-07-20(美国)
+   - 电影解说：[刘老师说电影](https://www.bilibili.com/video/BV14e411x7Xw)
+   <iframe src="//player.bilibili.com/player.html?aid=242580459&bvid=BV14e411x7Xw&cid=172983940&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+   - 《解除好友2：暗 网》：[上集av35548009](https://www.bilibili.com/video/av35548009/), [中集av35658352](https://www.bilibili.com/video/av35658352/)，[下集av35601784](https://www.bilibili.com/video/av35601784/)
+- 《资本论》中有这样一个观点：
+>当利润达到10%的时候，他们将蠢蠢欲动； 当利润达到50%的时候，他们将铤而走险； 当利润达到100%的时候，他们敢于践踏人间的一切法律； 当利润达到300%的时候，他们敢于冒绞刑的危险。
+
 # 附录
 
 - [Flappy Bird 开发者 Dong Nguyen 为何要将游戏下架？](https://www.zhihu.com/question/22694547)
