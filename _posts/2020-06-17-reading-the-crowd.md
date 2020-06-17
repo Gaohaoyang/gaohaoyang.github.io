@@ -126,11 +126,11 @@ mathjax: true
 
 - 视频解说系列：[乌合之众｜群体心理学研究](https://www.bilibili.com/video/BV1H741157a2)
 
-<iframe src="//player.bilibili.com/player.html?aid=88157372&bvid=BV1H741157a2&cid=150608022&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="854" height="480"> </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=88157372&bvid=BV1H741157a2&cid=150608022&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 - [为什么人一抱团就会变傻：5分钟读完《乌合之众》](https://www.bilibili.com/video/BV1Qx411n7tz)
 
-<iframe src="//player.bilibili.com/player.html?aid=13266215&bvid=BV1Qx411n7tz&cid=21750956&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="854" height="480"> </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=13266215&bvid=BV1Qx411n7tz&cid=21750956&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 # 结束
 
