@@ -21,7 +21,7 @@ mathjax: true
 
 # 资料
 
-- 【2020-6-18】【深度学习基础】《[Deep Learning Fundamentals - YouTube](http://t.cn/A6LMwpnW)》
+- 【2020-6-18】【深度学习基础】《[Deep Learning Fundamentals - YouTube](http://t.cn/A6LMwpnW)》，[B站地址](https://www.bilibili.com/video/bv1jZ4y1H7yx)
 
 ## Challenges for Deep Learning towards Human-Level AI
 
