@@ -21,6 +21,8 @@ mathjax: true
 
 # 资料
 
+- 【2020-6-18】【深度学习基础】《[Deep Learning Fundamentals - YouTube](http://t.cn/A6LMwpnW)》
+
 ## Challenges for Deep Learning towards Human-Level AI
 
 - 【2018-11-8】蒙特利尔大学计算机科学与运筹学系教授Yoshua Bengio
