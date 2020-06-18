@@ -11,7 +11,6 @@ mathjax: true
 * content
 {:toc}
 
-# 说明
 - 本栏目汇总各类经典的基础算法
 
 # 数据结构与算法
@@ -19,6 +18,9 @@ mathjax: true
 - 【2020-1-2】[清华大学邓俊辉](https://dsa.cs.tsinghua.edu.cn/~deng/ds/dsacpp/)数据结构,[视频](https://www.bilibili.com/video/av81804191)
 
 <iframe src="//player.bilibili.com/player.html?aid=81804191&cid=139968407&page=24" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+- 【2020-6-18】快速刷题：[算法模板](https://github.com/greyireland/algorithm-pattern)，最科学的刷题方式，最快速的刷题路径，你值得拥有~ [Gitbook](https://greyireland.gitbook.io/algorithm-pattern/ru-men-pian/quickstart)
+![](https://camo.githubusercontent.com/dec4d9e996c2357647a28b995307e826531f994f/68747470733a2f2f696d672e667569626f6f6d2e636f6d2f696d672f6c656574636f64655f6578706c6f72652e706e67)
 
 
 ## 串匹配算法
