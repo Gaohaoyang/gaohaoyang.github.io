@@ -359,7 +359,30 @@ mathjax: true
 因为未上市或已退市，及本人漏记的互联网公司包括：
 >蚂蚁金服、字节跳动、滴滴、斗鱼、快手、蘑菇街、盛大、昆仑万维、多益、易车网、4399、游族网络、慧聪网、当当、世纪佳缘等。
 
-# 创业公司
+# 创业
+
+## 创业机会
+
+- [奇绩创坛（原YC中国)](https://www.miracleplus.com/)
+- 【2020-6-16】[陆奇在抖音直播](https://www.toutiao.com/a1669882024941571/)，分享在当下百年不遇的变局中，出现的创业机会和背后的部分逻辑
+- ![](https://p1-tt-ipv6.byteimg.com/img/tos-cn-i-0022/809eaf97b66848f785365606eaabc6bb~tplv-shrink:900:506.jpeg)
+- ![](https://p1-tt-ipv6.byteimg.com/img/tos-cn-i-0022/dfe3476441e943488e750a657c8bf0d8~tplv-shrink:900:506.jpeg)
+- ![](https://p1-tt-ipv6.byteimg.com/img/tos-cn-i-0022/d7f08f69adf84385afba9e708e9b9bd6~tplv-shrink:900:506.jpeg)
+- ![](https://p1-tt-ipv6.byteimg.com/img/tos-cn-i-0022/1d31d9c2c8014af4a1860c71d5f558ab~tplv-shrink:900:506.jpeg)
+- ![](https://p1-tt-ipv6.byteimg.com/img/tos-cn-i-0022/2a1a715330e2448dae77c9b23ee9b1f7~tplv-shrink:900:506.jpeg)
+- ![](https://p1-tt-ipv6.byteimg.com/img/tos-cn-i-0022/8e5410410dff496b816e9c756a81851f~tplv-shrink:900:506.jpeg)
+- ![](https://p1-tt-ipv6.byteimg.com/img/tos-cn-i-0022/6e0858bfad7c46b3ae18752327efafcc~tplv-shrink:900:506.jpeg)
+- ![](https://p1-tt-ipv6.byteimg.com/img/tos-cn-i-0022/8495d25887634cd4bb8283b577d85310~tplv-shrink:900:506.jpeg)
+- ![](https://p1-tt-ipv6.byteimg.com/img/tos-cn-i-0022/c38e5fa12d174c5aabc56c93ac9ed685~tplv-shrink:900:506.jpeg)
+
+
+### [陆奇：如何抓住技术趋势带来的商业机会？](https://www.lieyunwang.com/archives/460965)
+
+- 【2019-11-21】
+
+![](https://static.lieyunwang.com/upload2/file/201904/291454pyv2qu.jpg)
+
+
 
 ## 股权分配
 
