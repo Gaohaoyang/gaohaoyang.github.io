@@ -82,6 +82,10 @@ mathjax: true
 
 ![](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1583649836802&di=c888fcfb53bb4439095803128fbab220&imgtype=0&src=http%3A%2F%2Fimg3m0.ddimg.cn%2F26%2F10%2F1422015830-1_u_1.jpg)
 
+### 人类起源
+
+- 【2020-6-21】[我们的祖先原来是条鱼，人类的伟大进化史](https://www.ixigua.com/i6815550089914745351/)
+
 ## 第一期 技术本身是带有时代性的
 
 - [觉者：梁冬对话华大基因CEO尹烨](https://www.bilibili.com/video/av19676456)
