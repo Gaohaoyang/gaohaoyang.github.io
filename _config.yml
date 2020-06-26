@@ -179,6 +179,10 @@ useful_urls:
     url : https://morvanzhou.github.io/
     desc : Python、ML、RL等教程
   -
+    name : 全球架构师峰会
+    url : https://archsummit.infoq.cn/2019/shenzhen/
+    desc : 架构师领域技术交流
+  -
     name : 黄海广博士的学习总结(github)
     url : https://github.com/fengdu78
     desc : 机器学习、深度学习课程总结及完整资料
