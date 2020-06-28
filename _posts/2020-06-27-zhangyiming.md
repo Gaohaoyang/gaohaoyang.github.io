@@ -15,7 +15,7 @@ mathjax: true
 
 # 张一鸣介绍
 
-
+![](https://pic4.zhimg.com/80/v2-2d5985dc8b537b1168fac8ddd65e2a81_720w.jpg)
 
 # [我的大学四年收获及工作感悟](https://mp.weixin.qq.com/s?__biz=MzI5MDUyMDIxNA==&mid=2247499022&idx=3&sn=2e1a694887ffc8143c576528cbd83d00&chksm=ec1c10f7db6b99e12d67acd53e82dd105921f76a0fdaece22545a09fb45d9973748b58729867&mpshare=1&scene=23&srcid=&sharer_sharetime=1593217052407&sharer_shareid=b8d409494a5439418f4a89712efcd92a#rd)
 
