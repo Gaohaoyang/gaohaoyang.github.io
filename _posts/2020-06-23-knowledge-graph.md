@@ -3,7 +3,7 @@ layout: post
 title:  "知识图谱-Knowledge-Graph"
 date:   2020-06-23 21:14:00
 categories: 自然语言处理
-tags: 深度学习 NLP KG KB-QA
+tags: 深度学习 NLP KG KB-QA 知识图谱 表示学习 
 excerpt: 知识图谱（Knowledge Graph）发展历史，主要类型，前沿研究及应用场景等
 author: 鹤啸九天
 mathjax: true
