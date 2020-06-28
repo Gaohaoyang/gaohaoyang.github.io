@@ -23,12 +23,12 @@ type: page
 > 崇尚终身学习,自律更自由，平凡不平庸
 
  <div>My Moment (微信公众号)</div>
-   <img src="https://raw.githubusercontent.com/wqw547243068/wangqiwen/master/other/figure/wqw.png" alt="欢迎关注鹤啸九天" height="200" width="200" />
+   <img src="{{site.url}}/wqw/fig/wqw.png" alt="欢迎关注鹤啸九天" height="200" width="200" />
 
 ## 相关项目
 
 讲过的AI课程
-- 2017年在雷锋网上主讲的深度学习读书分享，[BAT资深算法工程师「Deep Learning」读书系列分享（一） | 分享总结](https://www.leiphone.com/news/201708/LEBNjZzvm0Q3Ipp0.html)
+- 2017年在雷锋网上主讲的深度学习读书分享，[BAT资深算法工程师「Deep Learning」读书系列分享（一） 分享总结](https://www.leiphone.com/news/201708/LEBNjZzvm0Q3Ipp0.html)
    - ![](https://static.leiphone.com/uploads/new/article/740_740/201708/598fd35654561.jpg)
 - 大数据文摘+清华+SoAI共同承办的AI培训班：[The School of AI Beijing](https://wqw547243068.github.io/school-of-ai-beijing)
 ![](https://wqw547243068.github.io/school-of-ai-beijing/other/bdd_siraj.png)
@@ -41,7 +41,7 @@ type: page
 * Email：wqw547243068@{163,gmail}.com
 * [知乎](https://www.zhihu.com/people/wangqiwen/activities)
 
-![](https://github.com/wqw547243068/wqw547243068.github.io/raw/master/wqw/fig/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0.jpg)
+![]({{site.url}}/wqw/fig/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0.jpg)
 
 ## 关于本站
 
@@ -76,7 +76,7 @@ type: page
 
 ## Location
 
-![](https://github.com/wqw547243068/wqw547243068.github.io/raw/master/wqw/fig/beijing_north.png)
+![]({{site.url}}/wqw/fig/beijing_north.png)
 
 {% include tool_map.html %}
 
