@@ -27,6 +27,12 @@ mathjax: true
 
 # 知识图谱
 
+- “知识图谱（Knowledge Graph）”的概念是由Google公司在2012年提出的[1]，指代其用于提升搜索引擎性能的知识库。
+- 知识图谱的出现是人工智能对知识需求所导致的必然结果，但其发展又得益于很多其他的研究领域，涉及专家系统、语言学、语义网、数据库，以及信息抽取等众多领域，是交叉融合的产物而非一脉相承
+  - 详见：[知识图谱发展概述](https://www.cnblogs.com/jtianwen2014/p/7678616.html)
+
+![](https://images2017.cnblogs.com/blog/706575/201710/706575-20171016200824396-1450295689.png)
+
 ## 定义
 
 - 定义[Wang, 2017]： 
@@ -74,6 +80,36 @@ mathjax: true
     - `关系路径推理`(Relation Path Reasoning)
     - `基于规则的推理`(RL-based Path Finding)
 
+# 表示学习
+
+## 基础知识
+
+- 【2016-1-19】[刘知远：面向大规模知识图谱的表示学习技术](http://www.cbdio.com/BigData/2016-03/03/content_4675344.htm)，讲座解析
+  - ![](http://www.cbdio.com/image/attachement/jpg/site2/20160303/94de80684e4418423b2e30.jpg)
+  - ![](http://www.cbdio.com/image/attachement/jpg/site2/20160303/94de80684e4418423b6406.jpg)
+  - ![](http://www.cbdio.com/image/attachement/jpg/site2/20160303/94de80684e4418423bdd06.jpg)
+  - ![](http://www.cbdio.com/image/attachement/jpg/site2/20160303/94de80684e4418423c221a.jpg)
+  - ![](http://www.cbdio.com/image/attachement/jpg/site2/20160303/94de80684e4418423c361c.jpg)
+  - TransH和TransR均为TransE代表扩展模型之一，其中TransH由MSRA研究者提出，TransR由清华实验室提出。
+    - TransE在实体预测任务能够达到47.1的准确率，而采用TransH和TransR，特别是TransR可以达到20%的提升。
+  - [基于 TransE TransH TransR和PTransE的知识图](https://www.helplib.cn/fansisi/KB2E)，[KB2E](https://www.github.com/thunlp/KB2E)代码实现
+
+## 关系推理
+
+- 基于知识图谱的关系推理的相关工作，大体分为三种方法：
+  - 首先是统计关系学习方法（SRL），如马尔科夫逻辑网络、贝叶斯网络，但这类方发需要设计相应的规则，因此没有很好的扩展性和泛化性；
+  - 嵌入式表示的方法，旨在将实体和关系映射为空间中的向量，通过空间中向量的运算来进行推理（如TransE），该方法取得了较好的准确率，但分布式表示的解释性不强，另外，较难实现并行计算；
+  - 基于关系路径特征的随机游走模型，该方法可以进行并行计算，具有较好的执行效率，但准确率与召回率相比嵌入式表示学习的方法存在劣势。
+
+## 问题思考
+
+- 目前已有的知识表示学习方法无法实现精确链接预测，有两个原因导致了这一现象的出现：
+  - ill-posed algebraic problem：一个方程组中的方程式个数远大于变量个数
+    - 解法：流形函数, M(h,r,t)=D2r用来代替$h_r+r=t_r$，应用Reproducing Kernel Hilbert Space (RKHS)映射到Hilbert空间，以更高效地表征流形
+      - ![](https://images2015.cnblogs.com/blog/706575/201706/706575-20170619113807148-873845996.png)
+  - adopting an overstrict geometric form。应用于h+r=t，所得到的尾实体几乎是一个点，这对于多对多关系而言显然是不正确的
+
+- 摘自：知识图谱表示学习与关系推理（2016-2017）：[（一）](https://www.cnblogs.com/jtianwen2014/p/7000190.html)，[（二）](https://www.cnblogs.com/jtianwen2014/p/7008228.html)，[（三）](https://www.cnblogs.com/jtianwen2014/p/7018872.html)，[ACL2016信息抽取与知识图谱相关论文掠影](https://www.cnblogs.com/jtianwen2014/p/6985214.html)
 
 # KB-QA
 
