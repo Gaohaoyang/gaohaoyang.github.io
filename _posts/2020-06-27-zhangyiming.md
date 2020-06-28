@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "张一鸣"
+title:  "名人传记：张一鸣"
 date:   2020-06-27 08:57:00
 categories: 大人物
 tags: 张一鸣 创业
