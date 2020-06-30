@@ -158,7 +158,12 @@ mathjax: true
   - 为表示推理过程，KQA Pro引入函数（function）和程序（program）两个概念。函数对应简单问题，程序对应复杂问题，将简单的函数组合成复杂的程序，从而解决复杂问题。
     - ![](http://p6-tt.byteimg.com/large/pgc-image/08a168a57ec644268e16264598f910aa?from=pc)
 
+## 常识推理
 
+- [“原子”因果常识图谱](https://www.hankcs.com/nlp/corpus/atomic-commonsense-knowledge-graph.html)
+  - AAAI19的论文(Sap et al. (2019))开源了一个包含87万条推理常识的知识图谱ATOMIC。相较于常见的基于本体论分类条目的知识图谱，该知识库专注于“如果…那么…”关系的知识。作者提出了9种类型的因果联系来区分原因-效果、主体-主题、自愿-非自愿、行动-心理状态。通过生成式训练，作者发现神经网络模型可以从该图谱中获取简单的常识推理能力。
+  - 另外，该团队在ACL19上的论文COMET则利用了该图谱训练GPT模型，该GPT模型又反过来生成了许多全新的且合理的知识，达到了图谱补全的效果。
+  - ![](https://wx1.sinaimg.cn/large/006Fmjmcly1g91wq3pvxkj30u012lh1q.jpg)
 
 ## 问题思考
 
