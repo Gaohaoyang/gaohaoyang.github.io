@@ -398,6 +398,24 @@ _layout/post.html添加插件
 
 - [如何加百度地图插件](http://www.shejidaren.com/tian-jia-baidu-di-tu-dai-ma.html)
 
+### Markdown写作
+
+- 制作文档
+   - [readthedocs](https://readthedocs.org/)，使用最广的文档服务，如Scrapy 文档，支持Restructed和Markdown语言，其Markdown支持通过mkdocs来实现
+- 制作电子书
+   - [gitbook](https://www.gitbook.com/)，利用Markdown写电子书的工具，并提供免费托管
+- 转ppt，常用工具：
+   - [reveal.js](https://github.com/hakimel/reveal.js), [Demo](http://lab.hakim.se/reveal-js/#/)
+   - [landslide](https://github.com/adamzap/landslide), [Demo](http://adamzap.com/misc/presentation.html#slide1)
+- 万能格式转换工具：[Pandoc](https://pandoc.org/)
+
+```shell
+pip install landslide # 下载
+landslide readme.md -i -o > slide.html # 转换
+```
+
+- 更多资料：[Markdown：让书写更美好](https://huwenchao.gitbooks.io/web-development-notes/content/workflow/markdown.html)
+
 ## Jekyll语法
 
 - [Jekyll 语法简单笔记](http://github.tiankonguse.com/blog/2014/11/10/jekyll-study.html)
