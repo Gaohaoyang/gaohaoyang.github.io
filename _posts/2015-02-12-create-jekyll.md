@@ -91,18 +91,20 @@ print "hello"
 - 【2020-6-20】如何插入自己的图片？[Jekyll博客中如何用相对路径来加载图片？](https://www.zhihu.com/question/31123165)
    - 不要在\_posts下面建立目录，在根目录,也就是 yourname.github.io/ 下面建立一个新目录pics放图片。
    - 然后引用即可。 
+   
 ```html
 <figure>
    <a><img src="{{site.url}}/pics/branch.png"></a>
 </figure>
+```
 
 或者：
 
 ![](pics/xxxx)
 
-```
 
 ### 公式嵌入
+
 * [Latex在线调试](https://latexbase.com/)，[吴文中数学公式编辑器](http://latex.91maths.com/)，公式在线编辑，所见所得，支持图片输出
 
 - Github自带公式显示LaTeX，[LATEX数学公式基本语法](https://www.cnblogs.com/houkai/p/3399646.html)
