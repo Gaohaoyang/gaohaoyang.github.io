@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "风格迁移-Style Transfer"
+title:  "图像识别-Image-Recognizer"
 date:   2019-11-08 16:52:00
 categories: 计算机视觉
 tags: 深度学习 计算机视觉 GAN 
@@ -10,6 +10,58 @@ mathjax: true
 
 * content
 {:toc}
+
+
+# 说明
+
+- 汇总计算机视觉的应用案例
+
+
+# OCR
+
+- `光学字符识别`(`OCR`,Optical Character Recognition)是指对文本资料进行扫描，然后对图像文件进行分析处理，获取文字及版面信息的过程。OCR技术非常专业，一般多是印刷、打印行业的从业人员使用，可以快速的将纸质资料转换为电子资料。
+- Tesseract的OCR引擎最先由HP实验室于1985年开始研发，至1995年时已经成为OCR业内最准确的三款识别引擎之一。
+- Tesseract目前已作为开源项目发布在Google Project，其最新版本3.0已经支持中文OCR，并提供了一个命令行工具。
+
+## 验证码识别
+
+- 验证码是一种区分用户是计算机还是人的公共全自动程序。可以防止：恶意破解密码、刷票、论坛灌水，有效防止某个黑客对某一个特定注册用户用特定程序暴力破解方式进行不断的登陆尝试，实际上用验证码是现在很多网站通行的方式。由于验证码可以由计算机生成并评判，但是必须只有人类才能解答，所以回答出问题的用户就可以被认为是人类。
+- 目前的验证码通常的种类及特点如下：
+   - （1）最基础的英文验证码：纯粹的英文与数字组合，白色背景，这是最容易实现OCR识别的验证码。
+   - （2）字体变形的英文验证码：可以通过简单的机器学习实现对英文与数字的识别，准确率较高。
+   - （3）加上扰乱背景线条的验证码：可以通过程序去除干扰线，准确率较高。
+   - （4）中文验证码：中文由于字体多样，形状多变，数量组合众多，实现起来难度较大，准确率不高。
+   - （5）中文字体变形验证码：准确率更低。
+   - （6）中英文混合验证码：非常考验OCR程序的判断能力，基本上识别起来非常有难度。
+   - （7）提问式验证码：这是需要OCR结合人工智能才能实现，目前基本上无法识别。
+   - （8）GIF动态图验证码：由于GIF图片是动态图，无法定位哪一帧是验证码，所以难度很大。
+   - （9）划动式验证码：虽然程序可以模拟人的操作，但是具体拖动到哪个位置很难处理。
+   - （10）视频验证码：目前OCR识别还未实现。
+   - （11）手机验证码：手机验证码实现自动化是很容易的，但是手机号码不那么容易获得。
+   - （12）印象验证码：目前无解。
+
+![](https://pic1.zhimg.com/80/v2-2b9748a5ca5498ba1955eec9a5b79db4_720w.jpg)
+
+- 附录：
+   - [利用Tesseract-OCR实现验证码识别](https://zhuanlan.zhihu.com/p/34530032)
+
+
+- 「Happy Captcha」，一款易于使用的 Java 验证码软件包，旨在花最短的时间，最少的代码量，实现 Web 站点的验证码功能。
+   - Captcha缩写含义：Completely Automated Public Turing test to tell Computers and Humans Apart
+- 效果图
+   - ![](https://pic3.zhimg.com/v2-971f594800cdd101950f916f92cb7b1e_b.webp)
+
+## GAN方法
+
+- 【2018-12-14】[基于GAN的验证码识别工具，0.5秒宣告验证码死刑！](https://baijiahao.baidu.com/s?id=1619803729564462538)
+   - 中英两国研究人员联合开发了一套基于GAN的验证码AI识别系统，能在0.5秒之内识别出验证码，从 实际测试结果看，可以说宣布了对验证码的“死刑判决”。
+      - ![](https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=280512761,907748494&fm=173&app=49&f=JPEG?w=640&h=273&s=0D30E51281D85DC04A55B0CB0000D0B3)
+      - [论文地址](http://www.lancaster.ac.uk/staff/wangz3/publications/ccs18.pdf)，博文介绍：[An A.I. cracks the internet’s squiggly letter bot test in 0.5 seconds](https://www.digitaltrends.com/cool-tech/ai-cracks-captcha-05-seconds/)
+   - 该系统已在不同的33个验证码系统中进行了成功测试，其中11个来自世界上最受欢迎的一些网站，包括eBay和维基百科等。
+   - 这种方法的新颖之处在于：使用生成对抗网络（GAN）来创建训练数据。不需要收集和标记数以百万计的验证码文本数据，只需要500组数据就可以成功学习。而且可以使用这些数据，来生成数百万甚至数十亿的合成训练数据，建立高性能的图像分类器。
+   - 结果显示，<font color='red'>该系统比迄今为止所见的任何验证码识别器系统的识别精度都高。</font>
+   - ![](https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1299396691,4195542946&fm=173&app=49&f=JPEG?w=640&h=416&s=A498E633795644CA4A6580DA0000C0B3)
+
 
 # [图像风格迁移(Neural Style)简史](https://zhuanlan.zhihu.com/p/26746283)
 
@@ -129,7 +181,8 @@ Johnson等人将论文的代码实现在[github](https://github.com/jcjohnson/fa
 ![](http://melonteam.com/image/shen_du_xue_xi_zhi_feng_ge_qian_yi_jian_jie/5489df3b2f1d117cbd275724697edda9ccadb0e92ba6d7c40dfb19c465378e01)
 ![](http://melonteam.com/image/shen_du_xue_xi_zhi_feng_ge_qian_yi_jian_jie/c628d678344dddaef81c122d33fcff1cd00d1d7f2b90834410492ae03bf005d4)
 
-2.3 总结
+### 2.3 总结
+
 网络训练一次即可，不像Gatys等人[1]的方法需要每次重新训练网络；
 可以实现实时的风格化滤镜：在Titan X GPU上处理一张512x512的图片可以达到20FPS。下图为fast-style-transfer与Gatys等人[1]方法的运行速度比较，包括了不同的图像大小，以及Gatys方法不同的迭代次数。
 
