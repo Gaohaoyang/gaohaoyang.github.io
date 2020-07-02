@@ -996,5 +996,13 @@ model.wv.most_similar(['责任'],topn=15)
 ```
 
 
+## 微信朋友圈分析
+
+
+- [分析代码](https://github.com/wqw547243068/wangqiwen/blob/master/demo/itchat/itchat-test.ipynb)
+
+
+
+
 
 
