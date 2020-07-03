@@ -121,7 +121,7 @@ mathjax: true
   - ![](http://www.cbdio.com/image/attachement/jpg/site2/20160303/94de80684e4418423c361c.jpg)
   - TransH和TransR均为TransE代表扩展模型之一，其中TransH由MSRA研究者提出，TransR由清华实验室提出。
     - TransE在实体预测任务能够达到47.1的准确率，而采用TransH和TransR，特别是TransR可以达到20%的提升。
-  - [基于 TransE TransH TransR和PTransE的知识图](https://www.helplib.cn/fansisi/KB2E)，[KB2E](https://www.github.com/thunlp/KB2E)代码实现
+  - [基于 TransE TransH TransR和PTransE的知识图](https://www.helplib.cn/fansisi/KB2E)，[KB2E](https://www.github.com/thunlp/KB2E)代码实现，[图嵌入的Translate模型汇总（TransE，TransH，TransR，TransD）](https://www.toutiao.com/i6844713516557926916/?tt_from=mobile_qq&utm_campaign=client_share&timestamp=1593739790&app=news_article&utm_source=mobile_qq&utm_medium=toutiao_android&use_new_style=1&req_id=202007030929500100260772033571AA0D&group_id=6844713516557926916)
 
 ## 关系推理
 
