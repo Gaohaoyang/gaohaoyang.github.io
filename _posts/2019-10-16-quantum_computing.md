@@ -11,6 +11,10 @@ mathjax: true
 * content
 {:toc}
 
+>- 遇事不决，量子力学；
+>- 解释不通，穿越时空；
+>- 脑洞不够，平行宇宙
+
 
 # [十分钟看懂现代量子计算机到底是什么](https://zhuanlan.zhihu.com/p/53896253)
 
