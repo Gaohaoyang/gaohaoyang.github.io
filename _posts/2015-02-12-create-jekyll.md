@@ -163,6 +163,7 @@ $$f \left( x _ { n + 1 } \right) - f \left( x _ { n } \right) = f ^ { \prime } \
 
 - 【2020-7-4】[draw.io](https://www.draw.io/)，[客户端版本下载](https://www.cnblogs.com/HGNET/p/11893280.html)
    - ![](https://tukuimg.bdstatic.com/scrop/468c0e017cdff12b6a2413b2c82c88a2.gif)
+   - 嵌入markdown文件时，转html格式，方便直接编辑，并与github同步！
 - 类似于Gliffy Diagrams for Confluence
 - 参考
    - [10款流程图工具](https://baijiahao.baidu.com/s?id=1668266730880239997)
