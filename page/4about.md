@@ -81,6 +81,20 @@ type: page
 {% include tool_map.html %}
 
 
+## 每日任务
+
+- 【2020-7-4】绘图软件 [draw.io](https://www.draw.io/)
+   - ![](https://tukuimg.bdstatic.com/scrop/468c0e017cdff12b6a2413b2c82c88a2.gif)
+- 类似于Gliffy Diagrams for Confluence
+- 参考
+   - [10款流程图工具](https://baijiahao.baidu.com/s?id=1668266730880239997)
+
+- atlassian家族之[trello](https://trello.com/)，我的[个人trello](https://trello.com/b/ZmU6ki20/%E6%AF%8F%E6%97%A5%E4%BB%BB%E5%8A%A1)
+- [我的confluence主页](https://wangqiwen.atlassian.net/wiki/spaces/WQW)
+
+
+<iframe src='https://trello.com/b/ZmU6ki20/%E6%AF%8F%E6%97%A5%E4%BB%BB%E5%8A%A1' width='750' height='540' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
+
 ## 友情链接
 
 -  [wangqiwen](https://github.com/wqw547243068) \| [新浪博客](http://blog.sina.com.cn/s/articlelist_1232977597_0_1.html) \| [QQ Zone](https://user.qzone.qq.com/547243068)
