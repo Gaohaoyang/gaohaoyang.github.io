@@ -162,9 +162,19 @@ $$f \left( x _ { n + 1 } \right) - f \left( x _ { n } \right) = f ^ { \prime } \
 ### 流程图
 
 - 【2020-7-4】[draw.io](https://www.draw.io/)
+   - ![](https://tukuimg.bdstatic.com/scrop/468c0e017cdff12b6a2413b2c82c88a2.gif)
+- 类似于Gliffy Diagrams for Confluence
+- 参考
+   - [10款流程图工具](https://baijiahao.baidu.com/s?id=1668266730880239997)
 
 
+### 任务管理
 
+- atlassian家族之[trello](https://trello.com/)，我的[个人trello](https://trello.com/b/ZmU6ki20/%E9%B9%A4%E5%95%B8%E4%B9%9D%E5%A4%A9)
+- [我的confluence主页](https://wangqiwen.atlassian.net/wiki/spaces/WQW)
+
+
+<iframe src='https://trello.com/b/ZmU6ki20/%E9%B9%A4%E5%95%B8%E4%B9%9D%E5%A4%A9' width='750' height='540' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
 
 ### 访问统计
 - 国外的插件
