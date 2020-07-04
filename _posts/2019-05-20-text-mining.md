@@ -14,6 +14,8 @@ mathjax: true
 
 # NLP技能
 
+- 汇总NLP技能
+
 ## 编辑距离
 
 - 【2020-2-17】[python-Levenshtein包的一些用法总结](https://www.cnblogs.com/laogao123/p/11309490.html)
