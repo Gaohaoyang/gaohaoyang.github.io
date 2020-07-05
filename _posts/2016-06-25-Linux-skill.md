@@ -208,7 +208,7 @@ jt -t grade3 -f fira -fs 13 -cellw 90% -ofs 11 -dfs 11 -T
 - 【2017-12-18】参考：[远程访问Jupyter Notebook](http://www.cnblogs.com/zhanglianbo/p/6109939.html)
 
 详细步骤如下：
-- 查看服务端ip：ifconfig | grep "inet " | grep -v 127.0.0.1，如ip=10.97.182.142
+- 查看服务端ip：ifconfig \| grep "inet " \| grep -v 127.0.0.1，如ip=10.97.182.142
 - 生成配置文件：
    - 服务端：jupyter notebook --generate-config
 - 打开ipython，生成密码：
