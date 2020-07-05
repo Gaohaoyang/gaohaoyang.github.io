@@ -164,6 +164,55 @@ x+y = z\\a=4
 - [牛逼哄哄的 Git 命令动画演示，一看就懂！](https://www.cnblogs.com/lzkwin/p/12658029.html)，[CS Visualized: Useful Git Commands](https://links.jianshu.com/go?to=https%3A%2F%2Fdev.to%2Flydiahallie%2Fcs-visualized-useful-git-commands-37p1)
 ![](https://tukuimg.bdstatic.com/scrop/80a43c9d8428273cc9cabe71256eb9ef.gif)
 
+## 基本概念
+
+- ![](https://bbsmax.ikafan.com/static/L3Byb3h5L2h0dHAvd3d3LnJ1YW55aWZlbmcuY29tL2Jsb2dpbWcvYXNzZXQvMjAxNS9iZzIwMTUxMjA5MDEucG5n.jpg)
+- [Git快速入门](https://www.cnblogs.com/polk6/p/git-introduce.html)
+   - ![](https://images2017.cnblogs.com/blog/153475/201710/153475-20171013183602293-822234036.png)
+- [Git文件状态流程图](https://blog.csdn.net/leyangjun/article/details/52540590)
+   - ![](https://img-blog.csdn.net/20160918100329572?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+
+## 常用命令
+
+- [阮一峰的常用git命令清单](http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html)
+- 常用命令如下：
+```shell
+#下载一个项目
+git clone [url]
+#添加所有你修改的文件到暂存区
+git add -A
+#把本地的备注提交到暂存区
+git commit -m"[message]对你修改过代码一个备注"
+#常用：
+git  pull orgin master # 将本地master拉取到远程仓库origin的master分支
+# 拉取远程仓库，并与本地仓库的代码合并
+git pull [remote]  [branch]
+git  pull orgin master # 将本地master拉取到远程仓库origin的master分支
+# 上传本地指定分支到远程仓库
+git push [remote] [branch]
+git push origin master # pull大致同理
+# 查看变更信息或者冲突
+git status
+# 查看提交的历史
+git log
+# 撤销本地修改
+#没有commit到暂存仓库的情况下：
+# 恢复之前上一次暂存区的所有文件到工作区
+git checkout 
+#或者恢复暂存区的指定的某个文件到本地工作区
+git checkout [file]
+# 在commit之后撤销修改的情况下：
+# 重置到上一次暂存区版本
+git reset --hard
+# 或者不管的情况下直接重新修改代码再commit一次
+# 或者通过使用git log查看版本号后回退到暂存区的某个版本
+git reset [版本号]
+```
+
+## 交互式学习
+
+- [可视化学习Git](http://marklodato.github.io/visual-git-guide/index-en.html)
+
 # 本文编辑器
 
 - [主流文本编辑器学习曲线](https://coolshell.cn/articles/3125.html)
