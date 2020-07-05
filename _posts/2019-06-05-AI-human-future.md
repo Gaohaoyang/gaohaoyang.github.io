@@ -3,7 +3,7 @@ layout: post
 title:  "人工智能及未来畅想-AI and Future"
 date:   2019-06-04 23:41:00
 categories: 人工智能
-tags: 人工智能 AI 人类简史 人文 哲学 康德 汉字屋 清华大学 天机 自行车 AGI 类脑 类机 waitbutwhy 脑机接口 张首晟
+tags: 人工智能 AI 人类简史 人文 哲学 康德 汉字屋 清华大学 天机 自行车 AGI 类脑 类机 waitbutwhy 脑机接口 张首晟 姚期智 高德纳 乔姆斯基
 excerpt: 深度思考
 mathjax: true
 ---
@@ -54,6 +54,64 @@ Neuralink and the Brain’s Magical Future](https://waitbutwhy.com/2017/04/neura
 <iframe src="//player.bilibili.com/player.html?aid=83746758&cid=143264316&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
+# [语言的对决：乔姆斯基攻防战](https://www.guokr.com/article/156457/)
+
+## 乔姆斯基
+
+![](https://bkimg.cdn.bcebos.com/pic/e850352ac65c10388ad37ce8b3119313b07e896f)
+
+- 艾弗拉姆·诺姆·乔姆斯基（Avram Noam Chomsky，1928年12月7日—），美国哲学家。是麻省理工学院语言学的荣誉退休教授。乔姆斯基的《句法结构》被认为是20世纪理论语言学研究上最伟大的贡献。
+
+
+## 攻防战
+
+- [愤怒的语言](https://www.guokr.com/article/156367/)：语言学家丹尼尔·埃弗雷特（Daniel Everett），前往偏远的亚马逊部落毗拉哈（Pirahã），去传播基督教。他原想把《圣经》翻译成当地语言，教毗拉哈人信仰上帝，结果反倒是自己放弃了信仰，不再笃信上帝，也开始质疑自己尊为圣人的语言学前辈，乔姆斯基。
+- 诺姆·乔姆斯基（Noam Chomsky）（右图），现代语言学学界领袖，20 世纪最富盛名、最具影响力的学者之一。乔氏及其 “普遍语法论” 执掌现代语言学长达半世纪之久。乔姆斯基认为，语言是人类特有的一种先天机制。2002 年，乔姆斯基在一篇与人合著的论文中提出（或者看似可以理解为），递归性是人类语言唯一至关重要的特性 。
+- 而埃弗雷特（左图）发现，毗拉哈语中不存在这种所谓的 “递归性”——毗拉哈人并不将语言单位互相套嵌，而是只讲简单的短句。也就是说，这种语言不符合现代语言学的一项基本原理。这一发现似乎足以颠覆整个语言学体系，事实也的确如此：2005 年，当埃弗雷特的论文发表时，引起巨大轰动，而他跟乔姆斯基的决斗，也就此开始。
+
+![](https://1-im.guokr.com/gkimage/z4/o7/fv/z4o7fv.png)
+
+## 资料
+
+- [20世纪最著名的100位心理学家](https://www.psychspace.com/psych/category-192)：[38 乔姆斯基 | Noam Chomsky](https://www.psychspace.com/psych/category-124)
+- [【纪录片】乔姆斯基：manufacture consent](https://www.bilibili.com/video/BV1i7411J7qZ)
+- [福柯、乔姆斯基的一场世纪辩论——关于人性、公正与权力](https://www.bilibili.com/video/BV1Ht411Y7Nd)
+- [诺姆·乔姆斯基访谈——语言与知识【中英文字幕】](https://www.bilibili.com/video/BV1ht411c79j)
+
+<iframe src="//player.bilibili.com/player.html?aid=61449523&bvid=BV1ht411c79j&cid=106886489&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+
+# [语文是一切科学之母](https://zhuanlan.zhihu.com/p/151675013)
+
+## 高德纳
+- [Donald Knuth](https://www-cs-faculty.stanford.edu/~knuth/)，高德纳，《[计算机程序与设计](http://www-cs-faculty.stanford.edu/~uno/taocp.html)》作者，计算科学之父
+   - 计算机科学技术中两个最基本的概念：“`算法`”(Algorithm)和“`数据结构`”(Data Structure)就是高德纳于 29 岁时提出来的
+   - 艺术是人类智慧的最高形式
+   - 高德纳是他的中文名，是 1977 年他访问中国之前所取的，命名者是姚储枫(姚期智的夫人，夫妇都是计算机科学家)。
+   - [计算机鼻祖-Donald Knuth（高德纳） 的传奇](https://blog.csdn.net/gatieme/article/details/25613645)
+
+![](http://5b0988e595225.cdn.sohucs.com/images/20180116/caa893f622634d1a8cf8e52f27a99bce.jpeg)
+
+## 艺术是最高境界
+
+人类的智慧分为几种境界，其中艺术是最高境界。
+- 第一重境界叫`技术`（techniques）。对于一个问题，能给出一个解法的人就算达到这个境界了。这样的人叫 technician（`技术工人`）。大部分程序员是这个级别的。
+- 第二重境界叫`科学`（science）。
+   - 经历了很多问题，提出了很多解法之后，技工可能会总结出一些规律，称之为`理论`（theory）。
+   - 每个 theory 的出发点是一些抽象描述物理世界的`公理`（axioms）。比如欧式几何这个理论有五个公理，就是记录在欧几里得老师的《`几何原本`》（Elements）里的。
+   - 从`公理`出发，大家可以按照逻辑可以导出很多`推论`（theorems）。很多推论恰好也符合对物理世界的描述。比如沿着欧式几何的公理，大家推导了两千多年，一些推理帮着人类把阿波罗发射到月亮上还能活着回来
+-  *数学真是tmd一个巧合啊* —— 没事没事，**语文才是科学之母**。
+- 严正声明，这不是玩笑 —— 20 世纪人类最伟大的科学发现是`哥德尔定理`。
+   - 用俗话说，就是沿着逻辑推导，推着推着一定会发现一个推论和之前的某个推论是相悖的，比如一个说老王家的鸡是公的，另一个说老王家的鸡是母的。
+   - 所以，真的，用数学计算出来的阿波罗轨迹能把人安全的带回来，真是一个奇迹 —— 说它是公的，它恰好就是公的。
+   - 什么样的程序员可以算是 scientist 呢？给定一个问题，能分析设计出**最优解法**的，而不是随便给一个解法了事的。
+- 第三重境界叫`哲学`（philosophy）。
+   - 小学思想品德课制造的一个误区是让人以为哲学是文科，其实哲学是理科。理工科的硕士研究生毕业之后的学位是 Master of Science。而博士研究生毕业之后就是 Ph.D. 了 —— Philosophy Doctor（哲学博士），也有人说是 permanent head damage，也有道理，不是悖论。
+   - 哲学是归纳了很多 theory 的人归纳出来的`原则`（principles），说的是怎么思考问题，可以归纳出好的 theories —— 别从公理出发刚推了没几步就出现悖论 —— 这tm多尴尬）。因为哲学是指导人们归纳 theory 的，所以我们说哲学原理（principles）是帮助我们拓展人类知识边界的工具。
+   - 什么样的程序员可以称为哲学家呢？有一套哲学思想叫 [Unix Philosophy](https://en.wikipedia.org/wiki/Unix_philosophy)。看进去就明白了。
+- 第四重境界叫`艺术`（art）。
+   - Paul Graham 有一本书叫《Hackers & Painters》，说的就是最高境界的程序员和画家一样。徐悲鸿画的马，大家都说好！而且每个人都能说出一些好的理由 —— 比如简练却生动、比如线条刚柔相济、比如动感十足。既然人人都能说出来的评价标准，恐怕算不上 theories，估计可以算 techniques。徐老师无疑是大家！他也明白自己不同寻常，可以他却没法把自己的高才总结成一些 theories 或者 techniques，让徒弟照着弄就能画出一样好看的马。
+   - 艺术家的直觉（英语叫 gut feeling，直译为猪肚和肥肠的感受）只可意会，不可言传。汉语里的“道可道非常道”，这个道不是 principles 而是 arts。老子不是哲学家，而是艺术家啊。
+   - 有些程序员，每次碰到一个难题，其猪肚和肥肠的都会有一些感受，照着这灵感做，总是没错，基本就是最优选择。如果他不是蒙的，那么他就算一个艺术家了。
 
 
 # 人工智能哲学笔记
