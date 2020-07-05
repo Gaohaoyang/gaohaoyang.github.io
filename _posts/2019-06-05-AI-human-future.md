@@ -73,7 +73,7 @@ Neuralink and the Brain’s Magical Future](https://waitbutwhy.com/2017/04/neura
 
 ## 资料
 
-- [20世纪最著名的100位心理学家](https://www.psychspace.com/psych/category-192)：[38 乔姆斯基 | Noam Chomsky](https://www.psychspace.com/psych/category-124)
+- [20世纪最著名的100位心理学家](https://www.psychspace.com/psych/category-192)：[38 乔姆斯基 Noam Chomsky](https://www.psychspace.com/psych/category-124)
 - [【纪录片】乔姆斯基：manufacture consent](https://www.bilibili.com/video/BV1i7411J7qZ)
 - [福柯、乔姆斯基的一场世纪辩论——关于人性、公正与权力](https://www.bilibili.com/video/BV1Ht411Y7Nd)
 - [诺姆·乔姆斯基访谈——语言与知识【中英文字幕】](https://www.bilibili.com/video/BV1ht411c79j)
