@@ -234,7 +234,7 @@ mathjax: true
 
 - 字节跳动的发展潜力到底有多大，是否有可能超过BAT? - [雑人的回答](https://www.zhihu.com/question/355576724/answer/1303375369)
 
-【2020-6-26】中信证券这个报告分为7个部分
+【2020-6-26】中信证券这个报告分为7个部分，[ppt地址](https://share.weiyun.com/jJcV8nc8)
 - 1. 字节跳动的成长速度有多快？
    - ![](https://pic3.zhimg.com/80/v2-1d7a911ecb747845b55ff8792a5513d8_720w.jpg)
 - 2. 字节跳动的高增长是动了谁的蛋糕？
