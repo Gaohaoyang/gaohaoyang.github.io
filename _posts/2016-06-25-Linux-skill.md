@@ -214,6 +214,8 @@ git reset [版本号]
 - [可视化学习Git](http://marklodato.github.io/visual-git-guide/index-en.html)
 - [交互式学习Git](https://learngitbranching.js.org/)
 
+![](https://user-images.githubusercontent.com/7308241/39848730-040bd09e-53df-11e8-964e-2d48f35a4355.gif)
+
 # 本文编辑器
 
 - [主流文本编辑器学习曲线](https://coolshell.cn/articles/3125.html)
