@@ -468,7 +468,7 @@ pie
 
 ![](https://images2015.cnblogs.com/blog/1025005/201609/1025005-20160924130517527-77531971.png)
 
-![](wqw/fig/职业画布.png)
+![]({{site.url}}/wqw/fig/职业画布.png)
 
 源自：[程序猿跳槽全攻略-笔记](https://www.cnblogs.com/coderland/p/5903051.html)
 
