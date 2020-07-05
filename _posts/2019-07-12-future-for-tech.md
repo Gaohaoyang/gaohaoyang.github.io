@@ -294,6 +294,10 @@ pie
    - 一个人的认知水平越高，明白自己不知道的事就越多，想法也越多，判断力会更科学，人生选择才会更正确。
    - 当上管理者虽然也避不开35岁危机，但至少能缓刑几年，待遇还能高一些，用这几年时间，可以去筹备新的职业方向。
 
+## 提升技术影响力
+
+{% include wqw_graph_tech_influence.html %}
+
 ## 如何转型做管理
 
 - 【2020-1-17】[35岁技术人如何转型做管理](https://www.toutiao.com/a6782729715607142916/?tt_from=mobile_qq&utm_campaign=client_share&timestamp=1579263050&app=news_article&utm_source=mobile_qq&utm_medium=toutiao_android&req_id=202001172010490100260770732B182DD9&group_id=6782729715607142916)
