@@ -212,6 +212,7 @@ git reset [版本号]
 ## 交互式学习
 
 - [可视化学习Git](http://marklodato.github.io/visual-git-guide/index-en.html)
+- [交互式学习Git](https://learngitbranching.js.org/)
 
 # 本文编辑器
 
