@@ -23,7 +23,7 @@ mathjax: true
    - 层次化建模
 - Transformer模型
 
-![](https://upload-images.jianshu.io/upload_images/14911967-ddffac42b65f04d2.png?imageMogr2/auto-orient/strip|imageView2/2/w/883/format/webp)
+![](https://upload-images.jianshu.io/upload_images/14911967-ddffac42b65f04d2.png)
 
 在上图的下面部分，训练用的输入和输出数据的embedding，都会先加上一个position encoding来补充一下位置信息。
 - `Encoder`
