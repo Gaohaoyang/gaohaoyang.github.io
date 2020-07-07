@@ -14,6 +14,8 @@ mathjax: true
 
 # 总结
 
+- 【2020-7-6】清华孙茂松：九歌多样化古典诗歌机器写作模型[MixPoet](http://nlp.csai.tsinghua.edu.cn/news/)开源
+
 # 文本生成方案
 
 生成一段对话回复的模型可以简单分为三类：
