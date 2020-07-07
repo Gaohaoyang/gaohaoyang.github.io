@@ -34,6 +34,8 @@ mathjax: true
     - 矩阵逐行散度的 Jacobian 的迹，就是它的逐行散度的散度。
 - 但需要注意只能在运算之后接上「迹」，在运算之前接「迹」是不行的，比如矩阵的迹的梯度不等于它的逐行散度。
 
+
+- 【2020-7-5】【1800页33章数学方法精要笔记——深入数学建模， 机器学习和深度学习的数学基础】'[Essentials of Mathematical Methods - online evolving book Essentials of Mathematical Methods: Foundations, Principles, and Algorithms](https://github.com/yangyutu/EssentialMath)' by Yuguang Yang
 - 【2020-7-6】【伦敦帝国学院《机器学习数学基础：多元微积分》课程】《[Mathematics for Machine Learning: Multivariate Calculus](https://www.coursera.org/learn/multivariate-calculus-machine-learning)》by Samuel J. Cooper, David Dye
     - [Mathematics for Machine Learning: Multivariate Calculus](https://www.coursera.org/learn/multivariate-calculus-machine-learning)
     - [Mathematics for Machine Learning: Linear Algebra](https://www.youtube.com/playlist?list=PLiiljHvN6z1_o1ztXTKWPrShrMrBLo5P3)
