@@ -35,6 +35,8 @@ mathjax: true
 - 但需要注意只能在运算之后接上「迹」，在运算之前接「迹」是不行的，比如矩阵的迹的梯度不等于它的逐行散度。
 
 - 【2020-7-6】【伦敦帝国学院《机器学习数学基础：多元微积分》课程】《[Mathematics for Machine Learning: Multivariate Calculus](https://www.coursera.org/learn/multivariate-calculus-machine-learning)》by Samuel J. Cooper, David Dye
+    - [Mathematics for Machine Learning: Multivariate Calculus](https://www.coursera.org/learn/multivariate-calculus-machine-learning)
+    - [Mathematics for Machine Learning: Linear Algebra](https://www.youtube.com/playlist?list=PLiiljHvN6z1_o1ztXTKWPrShrMrBLo5P3)
 
 
 # 导读
