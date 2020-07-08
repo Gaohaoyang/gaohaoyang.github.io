@@ -299,6 +299,21 @@ jt -t grade3 -f fira -fs 13 -cellw 90% -ofs 11 -dfs 11 -T
    - qtconsole ：一个可执行 IPython 的仿终端图形界面程序，相比 Python Shell 界面，qtconsole 可以直接显示代码生成的图形，实现多行代码输入执行，以及内置许多有用的功能和函数。
    - spyder ：一个使用Python语言、跨平台的、科学运算集成开发环境。
 - 加入环境变量
+   - 安装器若提示“`Do you wish the installer to prepend the Anaconda install location to PATH in your /home/<user>/.bash_profile ?`，建议输入“yes”。
+   - 如果输入“no”，则需要手动添加路径。添加 export PATH="/<anaconda_path>/bin:$PATH" 在 .bashrc 或者 .bash_profile 中。
+
+- 注意：
+   - 不要擅自在bash_profile中添加alias别名！会导致虚拟环境切换后python、pip转换失效
+
+```shell
+# anaconda 环境
+export PATH="~/anaconda3/bin:$PATH"
+# 以下语句不要添加！
+alias python='/home/wangqiwen004/anaconda3/bin/python'
+alias pip='/home/wangqiwen004/anaconda3/bin/pip'
+```
+
+- 注意：不要这样加！
 
 ### 常用命令
 
@@ -338,7 +353,6 @@ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/f
 conda config --set show_channel_urls yes
 
 ```
-
 
 
 # Linux工具
