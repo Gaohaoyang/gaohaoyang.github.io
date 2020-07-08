@@ -304,6 +304,7 @@ jt -t grade3 -f fira -fs 13 -cellw 90% -ofs 11 -dfs 11 -T
 
 - 汇总如下：
    -  [anaconda完全手册](https://www.jianshu.com/p/eaee1fadc1e9)
+
 ```shell
 activate # 切换到base环境
 activate learn # 切换到learn环境
