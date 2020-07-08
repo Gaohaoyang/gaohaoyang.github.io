@@ -304,19 +304,38 @@ jt -t grade3 -f fira -fs 13 -cellw 90% -ofs 11 -dfs 11 -T
 
 - 汇总如下：
    -  [anaconda完全手册](https://www.jianshu.com/p/eaee1fadc1e9)
+   - [Anaconda介绍、安装及使用教程](https://zhuanlan.zhihu.com/p/32925500)
 
 ```shell
+conda --version # 查看版本
 activate # 切换到base环境
 activate learn # 切换到learn环境
-conda create -n learn python=3 # 创建一个名为learn的环境并指定python版本为3(的最新版本)
-conda env list # 列出conda管理的所有环境
+conda create -n learn python=3 # 创建一个名为learn的环境并指定python版本为3(的最新版本，也可以是2.7、3.6等))
+conda create -n learn numpy matplotlib python=2.7 # 创建环境同时安装必要的包
+conda create --prefix="D:\\my_python\\envs\\my_py_env"  python=3.6.3 # 自定义虚拟环境
+conda create --name env_name --clone learn # 克隆环境 learn -> env_name
+conda env list # 列出conda管理的所有环境, conda info -e 
+source activate learn # linux下激活虚拟环境，windows下为：activate learn
+source deactivate # linux下关闭虚拟环境，windows下为：deactivate
 conda list # 列出当前环境的所有包
+conda list -n learn # 列出某环境下的所有包
 conda install requests #安装requests包, 同pip install
+conda install -n your_env_name [package] # 即可安装package到your_env_name中
 conda remove requests #卸载requets包
 conda remove -n learn --all # 删除learn环境及下属所有包
+conda remove --name learn  package_name  # 删除learn环境下某个包
 conda update requests # 更新requests包
+conda search pyqtgraph # 搜索包(模糊查找)
+conda search --full-name pyqtgraph # 精确查找
 conda env export > environment.yaml # 导出当前环境的包信息
 conda env create -f environment.yaml # 用配置文件创建新的虚拟环境
+
+# 添加Anaconda的TUNA镜像
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+# TUNA的help中镜像地址加有引号，需要去掉
+ 
+# 设置搜索时显示通道地址
+conda config --set show_channel_urls yes
 
 ```
 
