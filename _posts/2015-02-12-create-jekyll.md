@@ -161,10 +161,12 @@ $$f \left( x _ { n + 1 } \right) - f \left( x _ { n } \right) = f ^ { \prime } \
 
 ### 流程图
 
-- 【2020-7-4】[draw.io](https://www.draw.io/)，[客户端版本下载](https://www.cnblogs.com/HGNET/p/11893280.html)
+- 【2020-7-4】[draw.io](https://www.draw.io/)，[客户端版本下载](https://www.cnblogs.com/HGNET/p/11893280.html)，[Chrome APP插件](https://chrome.google.com/webstore/detail/drawio-desktop/pebppomjfocnoigkeepgbmcifnnlndla/related?hl=en-GB)
+   - [使用drawio进行画图真的很方便(WEB版/Chrome APP版/桌面版)](https://blog.csdn.net/dog250/article/details/89272808)
    - ![](https://tukuimg.bdstatic.com/scrop/468c0e017cdff12b6a2413b2c82c88a2.gif)
    - 嵌入markdown文件时，转html格式，方便直接编辑，并与github同步！
-- 类似于Gliffy Diagrams for Confluence
+- 类似于[Gliffy](https://www.gliffy.com/) Diagrams for Confluence，[Chrome插件下载地址](https://www.crx4chrome.com/crx/1601/)，[web版本](https://go.gliffy.com/go/html5/launch)
+- mac下的绘图软件omnigraffle，类似visio
 - 参考
    - [10款流程图工具](https://baijiahao.baidu.com/s?id=1668266730880239997)
 
