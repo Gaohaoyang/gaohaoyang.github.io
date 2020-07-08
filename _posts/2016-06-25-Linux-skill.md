@@ -288,6 +288,37 @@ jt -t grade3 -f fira -fs 13 -cellw 90% -ofs 11 -dfs 11 -T
    - source ~/wqw/bin/activate
    - nohup jupyter notebook --ip=`ifconfig eth | awk '/inet/{print $2}'` &>log.txt &
 
+# python开发环境
+
+## anaconda
+
+- 安装完成之后会多几个应用
+   - Anaconda Navigtor ：用于管理工具包和环境的图形用户界面，后续涉及的众多管理命令也可以在 Navigator 中手工实现。
+   - Jupyter notebook ：基于web的交互式计算环境，可以编辑易于人们阅读的文档，用于展示数据分析的过程。
+   - qtconsole ：一个可执行 IPython 的仿终端图形界面程序，相比 Python Shell 界面，qtconsole 可以直接显示代码生成的图形，实现多行代码输入执行，以及内置许多有用的功能和函数。
+   - spyder ：一个使用Python语言、跨平台的、科学运算集成开发环境。
+- 加入环境变量
+
+### 常用命令
+
+- 汇总如下：
+   -  [anaconda完全手册](https://www.jianshu.com/p/eaee1fadc1e9)
+```shell
+activate # 切换到base环境
+activate learn # 切换到learn环境
+conda create -n learn python=3 # 创建一个名为learn的环境并指定python版本为3(的最新版本)
+conda env list # 列出conda管理的所有环境
+conda list # 列出当前环境的所有包
+conda install requests #安装requests包, 同pip install
+conda remove requests #卸载requets包
+conda remove -n learn --all # 删除learn环境及下属所有包
+conda update requests # 更新requests包
+conda env export > environment.yaml # 导出当前环境的包信息
+conda env create -f environment.yaml # 用配置文件创建新的虚拟环境
+
+```
+
+
 
 # Linux工具
 
