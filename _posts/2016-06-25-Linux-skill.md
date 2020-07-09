@@ -311,6 +311,17 @@ export PATH="~/anaconda3/bin:$PATH"
 # 以下语句不要添加！
 alias python='/home/wangqiwen004/anaconda3/bin/python'
 alias pip='/home/wangqiwen004/anaconda3/bin/pip'
+# 如果仍然失效，强制使用变量切换
+sra(){
+    CONDA_ROOT="~/anaconda3"
+    env=$1
+    conda activate $env
+    export LD_LIBRARY_PATH="$CONDA_ROOT/envs/$env/lib:$LD_LIBRARY_PATH" 
+    export PATH=$CONDA_ROOT/envs/$env/bin:$PATH
+}
+alias srd='conda deactivate'
+# 激活的使用方法
+sra learn
 ```
 
 - 注意：不要这样加！
@@ -410,6 +421,12 @@ trusted-host=mirrors.aliyun.com
 #pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
 ```
+
+# 小项目
+
+## python健康打卡
+
+- 【2020-7-9】[python实现网页自动健康打卡以及腾讯文档打卡](https://blog.csdn.net/rglkt/article/details/105351363)
 
 
 
