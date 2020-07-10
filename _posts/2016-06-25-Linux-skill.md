@@ -341,8 +341,8 @@ conda create -n learn numpy matplotlib python=2.7 # 创建环境同时安装必�
 conda create --prefix="D:\\my_python\\envs\\my_py_env"  python=3.6.3 # 自定义虚拟环境
 conda create --name env_name --clone learn # 克隆环境 learn -> env_name
 conda env list # 列出conda管理的所有环境, conda info -e 
-source activate learn # linux下激活虚拟环境，windows下为：activate learn
-source deactivate # linux下关闭虚拟环境，windows下为：deactivate
+source activate learn # linux下激活虚拟环境conda activate，windows下为：activate learn
+source deactivate # linux下关闭虚拟环境conda deactivate，windows下为：deactivate
 conda list # 列出当前环境的所有包
 conda list -n learn # 列出某环境下的所有包
 conda install requests #安装requests包, 同pip install
