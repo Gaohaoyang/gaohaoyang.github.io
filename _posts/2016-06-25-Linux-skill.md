@@ -247,12 +247,15 @@ pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 - 代码：
 
 ```shell
+# 安装扩展插件
+pip install jupyter_contrib_nbextensions
 # 安装jupyter主题包
 pip install jupyterthemes
 #更新主题
 pip install --upgrade jupyterthemes 
 # 启用主题
 jt -t grade3 -f fira -fs 13 -cellw 90% -ofs 11 -dfs 11 -T 
+# 启动jupyter服务
 
 ```
 
