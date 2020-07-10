@@ -319,6 +319,35 @@ sra(){
     export LD_LIBRARY_PATH="$CONDA_ROOT/envs/$env/lib:$LD_LIBRARY_PATH" 
     export PATH=$CONDA_ROOT/envs/$env/bin:$PATH
 }
+# 【2020-7-10】以上方法不支持默认环境base的切换，优化如下：
+sra(){
+    CONDA_ROOT="~/anaconda3"
+    # 获取当前虚拟环境名称列表(不含base)
+    env_list=(`conda info -e | awk '{if($1!~/#|base/)printf $1" "}'`)
+    env=$1
+    conda activate $env
+    echo "env=$env, str=${env_list[@]}"
+    # 判断是否匹配已有环境名称
+    # echo "${env_list[@]}" | grep $env && echo "yes" || echo "no"
+    #[[ "$1" =~ "${env_str}" ]] && echo "yes" || echo "no"
+    #[[ ${env_list[@]/${env}/} != ${env_list[@]} ]] && {
+    res="no"
+    for i in ${env_list[@]}
+    do
+         [ "$i" == "$env" ] && res="yes"
+    done
+    [ $res == "yes" ] && {
+        echo "找到目标环境$env"
+        export LD_LIBRARY_PATH="$CONDA_ROOT/envs/$env/lib:$LD_LIBRARY_PATH"
+        export PATH=$CONDA_ROOT/envs/$env/bin:$PATH
+    }||{
+        echo "启用默认环境base"
+        env="base"
+        export LD_LIBRARY_PATH="$CONDA_ROOT/lib:$LD_LIBRARY_PATH"
+        export PATH=$CONDA_ROOT/bin:$PATH
+    }
+    echo "环境切换完毕: --> $env"
+}
 alias srd='conda deactivate'
 # 激活的使用方法
 sra learn
