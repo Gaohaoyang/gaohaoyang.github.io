@@ -263,7 +263,7 @@ GloVe 词向量是很常见的词向量学习方法，它学到的词表征可�
 ## 资料
 
 - [深度学习专项课程精炼图笔记](https://zhuanlan.zhihu.com/p/91178285)
-- 图片笔记百度云地址: https://pan.baidu.com/s/1M-PkTmecxHgoy_9lKrgLVQ 提取码: eh14
+- 图片笔记[百度云地址](https://pan.baidu.com/s/1M-PkTmecxHgoy_9lKrgLVQ)， 提取码: eh14
 - [吴恩达课程及视频笔记汇总](https://zhuanlan.zhihu.com/p/30870804)
 
 # 结束
