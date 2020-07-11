@@ -161,9 +161,7 @@ if test -f fred.c
 then
     ...
 fi
-
 #还可以写成下面这样
-
 if [ -f fred.c ]
 then
 ...
@@ -181,7 +179,6 @@ fi
 #### 2.6.3 控制结构
 
 ```shell
-
 if condition
 then 
     statements1
@@ -190,8 +187,6 @@ elif condition
 else
     statements3
 fi
-
-
 ```
 注意对百年来那个字符串进行比较时，最好使用`""`让变量初始化。
 
@@ -209,17 +204,14 @@ done
 示例：
 ```shell
 #!/bin/bash
-
 for file in $(ls f*.sh);
 do
     lpr $file
 done
 exit 0
-
 ```
 **while语句**
 ```shell
-
 while condition do
     statements
 done
@@ -230,7 +222,6 @@ done
 循环执行，直到满足条件
 
 ```shell
-
 until [[ condition ]]; do
     statements
 done
@@ -239,7 +230,6 @@ done
 **case语句**
 
 ```shell
-
 case variable in
     pattern [ | pattern ] ...) statements;;
     pattern [ | pattern ] ...) statements;;
@@ -252,7 +242,6 @@ esac
 使用示例:
 ```shell
 #!/bin/bash
-
 echo "Is it morning? Please answer yes or no"
 read timeofday
 
@@ -281,7 +270,6 @@ function_name()
 {
     statements
 }
-
 ```
 
 注意：当一个函数被调用时，脚本程序的位置参数($*、$@、$#、$1、$2等)会被替换为函数的参数。这也是读取传递给函数的参数的办法。当函数执行完毕后，参数会恢复为它们先前的值。
@@ -6147,7 +6135,7 @@ GCC编译分为4步；
 
 ## 1 make 的使用
 
-```shell
+```
 用法：make [选项] [目标] ...
 选项：
   -b, -m                      忽略兼容性。
@@ -6194,15 +6182,339 @@ GCC编译分为4步；
 
 该程序为 x86_64-pc-linux-gnu 编译
 报告错误到 <bug-make@gnu.org>
-
 ```
 
 ## 2 关于程序的编译与链接
 
 具体的过程可以参照:[C/C++ 的一个符号操作问题](https://wangpengcheng.github.io/2019/05/12/c_peator_problem/)
 
-编译时(.c->.o)：编译器需要的是语法正确，函数与变量的声明的正确。
-链接时(.o->exe):主要是链接函数和全局变量。
+- 编译时(.c->.o)：编译器需要的是语法正确，函数与变量的声明的正确。
+- 链接时(.o->exe):主要是链接函数和全局变量。
+
+
+## [Makefile快速入门](https://zhuanlan.zhihu.com/p/149346441)
+
+### 需求介绍
+
+首先，假设我们有如下几个代码文件：
+- `main.cpp functions.h function1.cpp function2.cpp `
+- （代码来自：[Using make and writing Makefile(in C++ or C)](https://www.youtube.com/watch%3Fv%3Daw9wHbFTnAQ)）。
+ 
+--- functions.h ---
+ 
+```c++
+// functions.h
+void print_hello();
+int factorial(int n);
+```
+ 
+--- function1.cpp ---
+ 
+```c++
+// function1.cpp
+#include "functions.h"
+int factorial(int n){
+    if (n!=1){
+        return n*factorial(n-1);
+    else return 1;
+}
+```
+ 
+--- function2.cpp ---
+ 
+```c++
+//function2.cpp
+#include<iostream>
+#include<>
+```
+ 
+--- main.cpp ---
+ 
+```c++
+//main.cpp
+# include<iostream>
+# include "functions.h"
+ 
+int main(){
+    print_hello();
+    std::cout << "this is main" << std::endl;
+    std::cout << "The factorial of 5 is " << factorial(5) << std::endl;
+    return 0;
+}
+```
+ 
+### 不用 makefile 如何编译？
+
+-----------------
+ 
+如果不用 makefile，则需要按照下面的方式编译上述代码：
+ 
+```shell
+g++ -c function1.cpp
+g++ -c function2.cpp
+g++ -c main.cpp
+g++ -o hello main.o function1.o function2.o
+```
+ 
+其中，`g++ -c function1.cpp` 会将源码编译成名为 `function1.o` 对象文件。如果不想采用默认的命名，也可以自定义文件名，例如：`g++ -c function1.cpp -o fun1.o`。
+ 
+也可以用一行命令整合编译、链接的步骤：
+ 
+```shell
+g++ -o hello main.cpp function1.cpp function2.cpp
+```
+ 
+这种方式有很多弊端，例如：
+- 1.  每次编译、链接都需要手动敲的很多命令。
+- 2.  当工程量很大时，编译整个工程需要花很久。而我们往往并不是每次都修改了所有源文件，因此希望程序自动编译那些被修改的源码，而没被修改的部分不要浪费时间重新编译。
+
+为了解决上述第一个问题，我们可以把所有编译需要的命令保存到文件中，编译时一键执行。针对第二个问题，我们希望有一个软件，自动检测哪些源文件被修改过，然后自动把它们挑出来选择性地编译。而 make 命令通过检测代码文件的时间戳，决定是否编译它。
+ 
+### 第一版 Makefile
+------------
+ 
+首先需要确定 Makefile 的名字，需要设置成 `Makefile` 或者 `makefile`，而不能是其它版本（`MakeFile, Make_file, makeFile,... `)。其次，需要注意的是 Makefile 是缩进敏感的，在行首一定不能随便打空格。下面我们看一下第一版 Makefile。
+ 
+```makefile
+# Makefile (井号为注释)
+all:
+        g++ -o hello main.cpp function1.cpp function2.cpp
+clean:
+        rm -rf *.o hello
+```
+ 
+（注意上面代码片段的缩进，是一个<tab>而不是4个或者8个空格。）
+- 其中 `all` 、`clean`的术语为 target，我也可以随意指定一个名字，例如 abc，真正执行编译的是它下面缩进行的命令。我们可以看到，这个命令和我们在命令行中手动敲的没有任何区别。因此，通过这个简单的 Makefile，就可以省去了每次手动敲命令的痛苦：只需要在命令行敲下 `make` 回车，即可完成编译。
+- `clean` 表示清除编译结果，它下方就是普通的命令行删除文件命令。命令行输入 `make` 将默认执行第一个 target （即 `all`）下方的命令；如要执行清理操作，则需要输入 `make clean`，指定执行 clean 这个 target 下方的命令。
+- 这个 Makefile 虽然可以省去敲命令的痛苦，却无法选择性编译源码。因为我们把所有源文件都一股脑塞进了一条命令，每次都要编译整个工程，很浪费时间。第二版 Makefile 将解决这个问题。
+ 
+### 第二版 Makefile
+------------
+ 
+既然我们希望能够选择性地编译源文件，就不能像上一节那样把所有源文件放在一条命令里编译了，而是要分开写：
+ 
+```makefile
+all: hello
+hello: main.o function1.o function2.o
+        g++ main.o function1.o function2.o -o hello
+main.o: main.cpp
+        g++ -c main.cpp
+function1.o: function1.cpp
+        g++ -c function1.cpp
+function2.o: function2.cpp
+        g++ -c function2.cpp
+clean:
+        rm -rf *.o hello
+```
+ 
+上面的 Makefile 包含了一条重要的语法：<target>:<dependencies>。即，目标：目标依赖的文件。
+ 
+顺着代码捋一下逻辑：
+- 1.  命令行输入 `make` ，将默认执行 all 这个 target；
+- 2.  而 all 这个 target 依赖于 hello，hello 在当前目录下并不存在，于是程序开始往下读取命令..……终于找到了 hello 这个 target；
+- 3.  正待执行 hello 这个 target 的时候，却发现它依赖于 main.o，function1.o，function2.o 这三个文件，而它们在当前目录下都不存在，于是程序继续向下执行；
+- 4.  遇到 main.o target，它依赖于 main.cpp。而 main.cpp 是当前目录下存在的文件，终于可以编译了，生成 main.o 对象文件。后面两个函数以此类推，都编译好之后，再回到 hello target，连接各种二进制文件，生成 hello 文件。
+
+第一次编译的时候，命令行会输出： 
+```shell
+g++ -c main.cpp
+g++ -c function1.cpp
+g++ -c function2.cpp
+g++ main.o function1.o function2.o -o hello
+```
+证明所有的源码都被编译了一遍。假如我们对 main.cpp 做一点修改，再重新 make（重新 make 前不要 make clean），则命令行只会显示：
+ 
+```shell
+g++ -c main.cpp
+g++ main.o function1.o function2.o -o hello
+```
+
+这样，我们就发挥出 Makefile 选择性编译的功能了。下面，将介绍如何在 Makefile 中声明变量（declare variable）。
+ 
+### 第三版 Makefile
+------------
+ 
+我们希望将需要反复输入的命令整合成变量，用到它们时直接用对应的变量替代，这样如果将来需要修改这些命令，则在定义它的位置改一行代码即可。
+ 
+```makefile
+CC = g++
+CFLAGS = -c -Wall
+LFLAGS = -Wall
+ 
+all: hello
+hello: main.o function1.o function2.o
+        $(CC) $(LFLAGS) main.o function1.o function2.o -o hello
+main.o: main.cpp
+        $(CC) $(CFLAGS) main.cpp
+function1.o: function1.cpp
+        $(CC) $(CFLAGS) function1.cpp
+function2.o: function2.cpp
+        $(CC) $(CFLAGS) function2.cpp
+clean:
+        rm -rf *.o hello
+```
+ 
+上面的 Makefile 中，开头定义了三个变量：CC，CFLAGS，和 LFLAGS。其中 CC 表示选择的编译器（也可以改成 gcc）；CFLAGS 表示编译选项，-c 即 g++ 中的 -c，-Wall 表示显示编译过程中遇到的所有 warning；LFLAGS 表示链接选项，它就不加 -c 了。这些名字都是自定义的，真正起作用的是它们保存的内容，因此只要后面的代码正确引用，将它们定义成阿猫阿狗都没问题。容易看出，引用变量名时需要用 $() 将其括起来，表示这是一个变量名。
+ 
+### 第四版 Makefile
+------------
+ 
+第三版的 Makefile 还是不够简洁，例如我们的 dependencies 中的内容，往往和 g++ 命令中的内容重复：
+```makefile
+hello: main.o function1.o function2.o
+        $(CC) $(LFLAGS) main.o function1.o function2.o -o hello
+```
+ 
+我们不想敲那么多字，能不能善用 <target>:<dependencies> 中的内容呢？这就需要引入下面几个特殊符号了（也正是这些特殊符号，把 Makefile 搞得像是天书，吓退了很多初学者）：$@ ，$<，$^。
+ 
+例如我们有 target: dependencies 对：`all: library.cpp main.cpp`
+- *   `$@` 指代 all ，即 target
+- *   `$<` 指代 library.cpp， 即第一个 dependency
+- *   `$^` 指代 library.cpp 和 main.cpp，即所有的 dependencies
+
+因此，本节开头的 Makefile 片段可以改为：
+ 
+```makefile
+hello: main.o function1.o function2.o
+        $(CC) $(LFLAGS) $^ -o $@
+```
+ 
+而第四版 Makefile 就是这样的：
+ 
+```makefile
+CC = g++
+CFLAGS = -c -Wall
+LFLAGS = -Wall
+ 
+all: hello
+hello: main.o function1.o function2.o
+        $(CC) $(LFLAGS) $^ -o $@
+main.o: main.cpp
+        $(CC) $(CFLAGS) $<
+function1.o: function1.cpp
+        $(CC) $(CFLAGS) $<
+function2.o: function2.cpp
+        $(CC) $(CFLAGS) $<
+clean:
+        rm -rf *.o hello
+```
+ 
+但是手动敲文件名还是有点麻烦，能不能自动检测目录下所有的 cpp 文件呢？此外 main.cpp 和 main.o 只差一个后缀，能不能自动生成对象文件的名字，将其设置为源文件名字后缀换成 .o 的形式？
+ 
+### 第五版 Makefile
+------------
+ 
+想要实现自动检测 cpp 文件，并且自动替换文件名后缀，需要引入两个新的命令：`patsubst` 和 `wildcard`。
+ 
+#### 5.1 wildcard
+ 
+`wildcard` 用于获取符合特定规则的文件名，例如下面的代码：
+
+```makefile
+SOURCE_DIR = . # 如果是当前目录，也可以不指定
+SOURCE\_FILE = $(wildcard $(SOURCE\_DIR)/*.cpp)
+target:
+        @echo $(SOURCE_FILE)
+```
+make 后发现，输出的为当前目录下所有的 .cpp 文件：
+ 
+```shell
+./function1.cpp ./function2.cpp ./main.cpp
+```
+ 
+其中 `@echo` 前加 `@`是为了避免命令回显，上文中 `make clean` 调用了 `rm -rf` 会在 terminal 中输出这行命令，如果在 rm 前加了 `@` 则不会输出了。
+ 
+#### 5.2 patsubst
+ 
+patsubst 应该是 pattern substitution 的缩写。用它可以方便地将 .cpp 文件的后缀换成 .o。它的基本语法是：$(patsubst 原模式，目标模式，文件列表)。运行下面的示例：
+ 
+```makefile
+SOURCES = main.cpp function1.cpp function2.cpp
+OBJS = $(patsubst %.cpp, %.o, $(SOURCES))
+target:
+        @echo $(SOURCES)
+        @echo $(OBJS)
+```
+ 
+输出的结果为：
+```
+main.cpp function1.cpp function2.cpp
+main.o function1.o function2.o
+```
+ 
+#### 5.3 综合两个命令
+ 
+综合上述两个命令，我们可以升级到第五版 Makefile：
+ 
+```makefile
+OBJS = $(patsubst %.cpp, %.o, $(wildcard *.cpp))
+CC = g++
+CFLAGS = -c -Wall
+LFLAGS = -Wall
+ 
+all: hello
+hello: $(OBJS)
+        $(CC) $(LFLAGS) $^ -o $@
+main.o: main.cpp
+        $(CC) $(CFLAGS) $< -o $@
+function1.o: function1.cpp
+        $(CC) $(CFLAGS) $< -o $@
+function2.o: function2.cpp
+        $(CC) $(CFLAGS) $< -o $@
+ 
+clean:
+        rm -rf *.o hello
+```
+ 
+然而这一版的 Makefile 还有提升空间，它的 main.o，function1.o，function2.o 使用的都是同一套模板，不过换了个名字而已。第六版的 Makefile 将处理这个问题。
+ 
+### 第六版 Makefile
+------------
+ 
+- 这里要用到 Static Pattern Rule，其语法为：
+    - targets: target-pattern: prereq-patterns
+- 其中 targets 不再是一个目标文件了，而是一组目标文件。而 target-pattern 则表示目标文件的特征。例如目标文件都是 .o 结尾的，那么就将其表示为 `%.o`，prereq-patterns (prerequisites) 表示依赖文件的特征，例如依赖文件都是 .cpp 结尾的，那么就将其表示为 `%.cpp`。
+- 通过上面的方式，可以对 targets 列表中任何一个元素，找到它对应的依赖文件，例如通过 targets 中的 main.o，可以锁定到 main.cpp。
+ 
+下面是第六版的 Makefile
+ 
+```makefile
+OBJS = $(patsubst %.cpp, %.o, $(wildcard *.cpp))
+CC = g++
+CFLAGS = -c -Wall
+LFLAGS = -Wall
+ 
+all: hello
+hello: $(OBJS)
+        $(CC) $(LFLAGS) $^ -o $@
+$(OBJS):%.o:%.cpp
+        $(CC) $(CFLAGS) $< -o $@
+ 
+clean:
+        rm -rf *.o hello
+```
+ 
+### 杂
+
+看到有的 Makefile 设置了 `-lm` 的 flag，查阅资料发现表示连街 math 库，因为代码中可能 `#include<math.h>` 。
+ 
+例如 `g++ -o out fun.cpp -lm`
+ 
+```makefile
+CC = g++
+LIBS = -lm
+out: fun.cpp
+        $(CC) -o $@ $^ $(LIBS)
+```
+ 
+### 总结
+--
+ 
+本文介绍了如何写 Makefile，主要的知识点有：
+*   在 Makefile 中定义变量并引用
+*   `$^，$@，$<` 的含义
+*   wildcard，patsubst 的用法
+*   static pattern rule：targets: target-pattern: prereq-patterns
 
 ## 3 Makefile介绍
 
@@ -6216,10 +6528,7 @@ GCC编译分为4步；
 target... : prerequisites ...
     command
     ...
-    ...
-
 #或者
-
 targets : prerequisites ; command
     command
 ...
@@ -6339,7 +6648,6 @@ clean :
 ## 4 Makefile总述
 
 Makefile主要包括内容
-
 - 显式规则:直接明文书写的规则
 - 隐式规则：自动推导出来的隐晦规则
 - 变量的定义:一系列字符串变量的定义
@@ -6347,7 +6655,6 @@ Makefile主要包括内容
 - 注释：脚本注释文件
 
 make查找当前目录下的文件顺序是：
-
 -  GNUmakefile
 -  makefile
 -  Makefile
@@ -6359,12 +6666,9 @@ makefile中可以使用`include`引入其它makefile文件
 
 ```makefile
 bar=a.mk b.mk c.mk e.mk 
-
 include foo.make *.mk $(bar)
-
 ```
 include的查找路径如下：
-
 - 存在`-I`或者`--include-dir`参数会在这个参数指定的目录下继续寻找
 - 存在`<prefix>/include`存在，make也会去寻找。
 
@@ -6406,7 +6710,6 @@ make与shell相同支持三种通配符号：
 例如：
 
 ```makefile
-
 print:*.c
     lpr -p $?
     touch print
@@ -6419,17 +6722,14 @@ print:*.c
 ### 5.4文件查询
 
 makefile中可以使用VPATH来指定文件查找目录。使用方法如下：
-
 - 1.vpath <pattern> <directories>:为符合模式<pattern>的文件指定搜索目录<directories>。
 - 2.vpath <pattern> ：清除符合模式<pattern>的文件的搜索目录。
 - vpath:清除所有已经被设置好了的文件搜索目录
 
 ```makefile
 #指定文件搜索在../headers和当前目录下，查找所有以`.h`结尾的文件
-
 vpath %.h ../headers
 #这里是先在foo中搜索，然后在blish,最后是bar
-
 vpath %.c foo:bar
 vpath % blish
 ```
@@ -6442,11 +6742,9 @@ makefile中可以使用`.PHONY:xxx`的方式来设置伪目标，类似于shell�
 ```makefile
 all:prog1 prog2 prog3
 .PHONY:all
-
 prog1:prog1.o utils.o
         cc -o prog1 prog1.o utils.o
 prog2:...
-
 #也可以使用伪目标作为依赖，实现操作如下
 cleanall : cleanobj cleandiff
     rm program
@@ -6454,7 +6752,6 @@ cleanobj:
     rm *.o
 cleandiff:
     rm *.diff
-
 ```
 因为makefile会将第一个目标作为默认目标，因此可以使用伪目标依赖，来实现makefile的多目标依赖。
 
@@ -6466,7 +6763,6 @@ cleandiff:
 <targets ...>: <target-pattern>: <prereq-patterns ...>
     <commands>
     ...
-
 ```
 target:定义了一系列目标，可以有通配符，是目标的集合
 target-pattern:指明了target的模式，也是目标集模式
@@ -6475,16 +6771,12 @@ prereq-patterns:是目标依赖模式对target-pattern的再次依赖定义
 使用示例：
 
 ```makefile
-
     objects = foo.o bar.o
     all: $(objects)
-
 #将后缀中的.o变为.c
-
 $(objects): %.o: %.c
     $(CC) -c $(CFLAGS) $< -o $@
     # $(CC) -c $(CFLAGS) foo.c bar.c -o foo.o bar.o
-
 ```
 
 ### 5.8 自动生成依赖性
@@ -6497,14 +6789,10 @@ gcc中可以使用-M编译选项开启自动依赖查找。
 ```makefile
 @echo 正在编译XXX模块
 #输出：正在编译XXX模块
-
 echo 正在编译XXX模块
 #输出：
-
 #    echo 正在编译XXX模块
-
 #   正在编译XXX模块
-
 ```
 
 可以在make后面带入参数`-n`或者`--just-print`，只执行显示命令，但是不会执行命令。方便对Makefile进行调试。
@@ -6516,12 +6804,10 @@ echo 正在编译XXX模块
 makefile中的命令会，一条一条的执行其后面的的命令，当需要上一命令结果应用在下一命令时，应该使用分号，分割相关命令。当命令相关联时，应该写在一行上。
 
 ```makefile
-
 exec:
     cd /home/
     pwd
 # 打印执行文件夹路径，cd无作用。
-
 exec:
     cd /home/;pwd
 # 打印 /home/ cd 有作用
@@ -6537,7 +6823,6 @@ make中命令错误会立即停止执行，因此需要，使用make clean进行
 subsystem:
     cd subdir && $(MAKE)
 #等价于
-
 subsystem:
     $(MAKE) -C subdir
 ```
@@ -6550,7 +6835,6 @@ subsystem:
 ### 6.5 定义命令包
 
 Makefile中可以使用相同命令序列来定义一个变量。以`define`开始,`endef`结束。例如:
-
 ```makefile
 define run-yacc
 yacc $(firstword $^)
@@ -6570,9 +6854,7 @@ makefile中的变量，可以是数字开头，但不应该含有`:`、`#`、`=`
 foo=c
 prog.o:prog.$(foo)
     $(foo)$(foo) -$(foo) prog.$(foo)
-
 #翻译结果
-
 prog.o : prog.c
     cc -c prog.c
 ```
@@ -6599,7 +6881,6 @@ makefile中的变量，不像c++需要预先声明，可以直接使用，只要
 ```
 foo:=a.o b.o c.o
 bar:=$(foo:.o=.c)
-
 #bar是a.c b.c c.c
 ```
 也可以使用静态模式进行替换。
@@ -6611,7 +6892,6 @@ x=y
 y=z
 a:=$($(x))
 #最终a的结果是z
-
 ```
 
 也可以进行多层次的嵌套。
@@ -6673,7 +6953,6 @@ test
 echo /usr/ba /usr/include/boost
 echo test2
 test2
-
 ```
 
 ### 7.9 模式变量
