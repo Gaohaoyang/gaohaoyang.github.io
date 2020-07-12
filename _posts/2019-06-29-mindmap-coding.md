@@ -2,7 +2,7 @@
 layout: post
 title:  "计算机知识点汇总-脑图笔记"
 date:   2019-06-29 21:55:00
-categories: 编程技能 计算机基础
+categories: 编程语言 计算机基础
 tags: 计算机 Linux Shell Python 编程 Numpy Pandas Matplotlib SQL 数据挖掘 机器学习 Web
 excerpt: 汇总数林觅风的IT技能笔记，方便回复、巩固知识点
 mathjax: true
