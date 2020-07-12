@@ -142,7 +142,7 @@ mathjax: true
  
 ### 1、**林雨峰为什么一定会反击？**
  
-在《[<天道>之「局」](https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMzI3MTQwOTAwMw%3D%3D%26mid%3D2247484540%26idx%3D1%26sn%3D35eba32a4a2290952bca3ca9aa4e5444%26chksm%3Deac30e78ddb4876ec18b2bebbc0c8bde1fffcab9cbb3a160c5080924192c24da3615019fbc65%26scene%3D21%23wechat_redirect)》略有提到乐圣公司“只有矛，没有盾“。其实，还得从林雨峰这个人和所处在当时的时代背景来谈。
+在《[<天道>之「局」](https://mp.weixin.qq.com/s%3F__biz%3DMzI3MTQwOTAwMw%3D%3D%26mid%3D2247484540%26idx%3D1%26sn%3D35eba32a4a2290952bca3ca9aa4e5444%26chksm%3Deac30e78ddb4876ec18b2bebbc0c8bde1fffcab9cbb3a160c5080924192c24da3615019fbc65%26scene%3D21%23wechat_redirect)》略有提到乐圣公司“只有矛，没有盾“。其实，还得从林雨峰这个人和所处在当时的时代背景来谈。
  
 1995年，改革开放不到20年，计划经济才刚刚从形式上结束没多久，市场经济刚刚开始发展，大量的人下海经商，那时候没有所谓的科学管理，靠的是一股子闯劲、勇气、敢打敢拼的精神，当然真正做成事的，肯定是有谋略的。
  
@@ -385,8 +385,6 @@ mathjax: true
  
 我们知道，这里边有些人由弱变强跃迁成功，有些人由强变弱,关系图如下——
  
-![](https://pic2.zhimg.com/50/v2-f80320aeeae10f085a02f2da22a45e7f_hd.jpg?source=1940ef5c)
- 
 ![](https://pic2.zhimg.com/80/v2-f80320aeeae10f085a02f2da22a45e7f_720w.jpg?source=1940ef5c)
  
 真正有意义的跃迁只有一位，即是肖亚文，另外两位（王明阳与芮小丹）都因故离世了，前者是因为选错了悟道的方式，做了一名强盗，后者是执着于成为救世主。林雨峰最后选了自杀。说明强弱有时也是可以变化的。这就是辨证逻辑。
@@ -437,7 +435,7 @@ mathjax: true
 **一、设「局」乐圣**
 ------------
  
-用我创造的驱动工具「[认知](https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMzI3MTQwOTAwMw%3D%3D%26mid%3D2247484160%26idx%3D1%26sn%3Da0a6c9f96952d3e0ea6b04c9ae9ce4d5%26chksm%3Deac30904ddb4801250a01d5d69e2b709a981cf21fb94ebcba1a9010db2cbfae5471f9acd56e0%26scene%3D21%23wechat_redirect)、[方法](https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMzI3MTQwOTAwMw%3D%3D%26mid%3D2247484174%26idx%3D1%26sn%3Da70171fa9601eb8d4e6e0a1346107eaa%26chksm%3Deac3090addb4801c5bb1f512eba524ac713fa747a08ec199eff90539fbeed39746f941aa9bf6%26scene%3D21%23wechat_redirect)、[技术](https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMzI3MTQwOTAwMw%3D%3D%26mid%3D2247484187%26idx%3D1%26sn%3D77e667d914cf494c7d542fa9f208c32c%26chksm%3Deac3091fddb480096c00488d7951cbbef7148b0f13c642afefc33e1bef2ffba40321eacefe64%26scene%3D21%23wechat_redirect)、[工具](https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMzI3MTQwOTAwMw%3D%3D%26mid%3D2247484200%26idx%3D1%26sn%3De35a04fc3e1e2fceb6c514783b4da88e%26chksm%3Deac3092cddb4803a958544c53768f4f2d919ac4188cca85ee33a45fa5c827a6e3af7c67016eb%26scene%3D21%23wechat_redirect)」来解决这「局」。
+用我创造的驱动工具「[认知](https://mp.weixin.qq.com/s%3F__biz%3DMzI3MTQwOTAwMw%3D%3D%26mid%3D2247484160%26idx%3D1%26sn%3Da0a6c9f96952d3e0ea6b04c9ae9ce4d5%26chksm%3Deac30904ddb4801250a01d5d69e2b709a981cf21fb94ebcba1a9010db2cbfae5471f9acd56e0%26scene%3D21%23wechat_redirect)、[方法](https://mp.weixin.qq.com/s%3F__biz%3DMzI3MTQwOTAwMw%3D%3D%26mid%3D2247484174%26idx%3D1%26sn%3Da70171fa9601eb8d4e6e0a1346107eaa%26chksm%3Deac3090addb4801c5bb1f512eba524ac713fa747a08ec199eff90539fbeed39746f941aa9bf6%26scene%3D21%23wechat_redirect)、[技术](https://mp.weixin.qq.com/s%3F__biz%3DMzI3MTQwOTAwMw%3D%3D%26mid%3D2247484187%26idx%3D1%26sn%3D77e667d914cf494c7d542fa9f208c32c%26chksm%3Deac3091fddb480096c00488d7951cbbef7148b0f13c642afefc33e1bef2ffba40321eacefe64%26scene%3D21%23wechat_redirect)、[工具](https://mp.weixin.qq.com/s%3F__biz%3DMzI3MTQwOTAwMw%3D%3D%26mid%3D2247484200%26idx%3D1%26sn%3De35a04fc3e1e2fceb6c514783b4da88e%26chksm%3Deac3092cddb4803a958544c53768f4f2d919ac4188cca85ee33a45fa5c827a6e3af7c67016eb%26scene%3D21%23wechat_redirect)」来解决这「局」。
  
 知己知彼，百战不殆。要设局乐圣，就需要对乐圣有根本的理解，我们来一一拆解乐圣这家公司。
  
@@ -462,8 +460,6 @@ mathjax: true
 **b、业务系统**
  
 剧中提供的信息相对有限，凭经验大致画出其大致的业务系统。其实有２种可能，一种是乐圣自己有生产体系，一种靠OEM生产。
- 
-![](https://pic3.zhimg.com/50/v2-266d1b6987e90aa9c35491b718a1d367_hd.jpg?source=1940ef5c)
  
 ![](https://pic3.zhimg.com/80/v2-266d1b6987e90aa9c35491b718a1d367_720w.jpg?source=1940ef5c)
  
@@ -648,7 +644,7 @@ B、资源
 - **——技术**。上面论述的以下问题的解决技术：如何控制公司的绝对话语权，才保证策划能坚定的贯彻？在公司的官司存亡之际，如何打官司？如何让乐圣察觉不出这是一个圈套？林雨峰一定会回击吗？叶、冯、刘如果全部退出怎么办？如何才能胜诉？
 - **——工具**。技术层面的每一个问题下面最终都呈现出了一个具体可落地的工具层面的具象，哪怕是一纸合同……，就不一一列举了。
  
-感受到「[认知](https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMzI3MTQwOTAwMw%3D%3D%26mid%3D2247484160%26idx%3D1%26sn%3Da0a6c9f96952d3e0ea6b04c9ae9ce4d5%26chksm%3Deac30904ddb4801250a01d5d69e2b709a981cf21fb94ebcba1a9010db2cbfae5471f9acd56e0%26scene%3D21%23wechat_redirect)、[方法](https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMzI3MTQwOTAwMw%3D%3D%26mid%3D2247484174%26idx%3D1%26sn%3Da70171fa9601eb8d4e6e0a1346107eaa%26chksm%3Deac3090addb4801c5bb1f512eba524ac713fa747a08ec199eff90539fbeed39746f941aa9bf6%26scene%3D21%23wechat_redirect)、[技术](https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMzI3MTQwOTAwMw%3D%3D%26mid%3D2247484187%26idx%3D1%26sn%3D77e667d914cf494c7d542fa9f208c32c%26chksm%3Deac3091fddb480096c00488d7951cbbef7148b0f13c642afefc33e1bef2ffba40321eacefe64%26scene%3D21%23wechat_redirect)、[工具](https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMzI3MTQwOTAwMw%3D%3D%26mid%3D2247484200%26idx%3D1%26sn%3De35a04fc3e1e2fceb6c514783b4da88e%26chksm%3Deac3092cddb4803a958544c53768f4f2d919ac4188cca85ee33a45fa5c827a6e3af7c67016eb%26scene%3D21%23wechat_redirect)」这个驱动的威力了吗？
+感受到「[认知](https://mp.weixin.qq.com/s%3F__biz%3DMzI3MTQwOTAwMw%3D%3D%26mid%3D2247484160%26idx%3D1%26sn%3Da0a6c9f96952d3e0ea6b04c9ae9ce4d5%26chksm%3Deac30904ddb4801250a01d5d69e2b709a981cf21fb94ebcba1a9010db2cbfae5471f9acd56e0%26scene%3D21%23wechat_redirect)、[方法](https://mp.weixin.qq.com/s%3F__biz%3DMzI3MTQwOTAwMw%3D%3D%26mid%3D2247484174%26idx%3D1%26sn%3Da70171fa9601eb8d4e6e0a1346107eaa%26chksm%3Deac3090addb4801c5bb1f512eba524ac713fa747a08ec199eff90539fbeed39746f941aa9bf6%26scene%3D21%23wechat_redirect)、[技术](https://mp.weixin.qq.com/s%3F__biz%3DMzI3MTQwOTAwMw%3D%3D%26mid%3D2247484187%26idx%3D1%26sn%3D77e667d914cf494c7d542fa9f208c32c%26chksm%3Deac3091fddb480096c00488d7951cbbef7148b0f13c642afefc33e1bef2ffba40321eacefe64%26scene%3D21%23wechat_redirect)、[工具](https://mp.weixin.qq.com/s%3F__biz%3DMzI3MTQwOTAwMw%3D%3D%26mid%3D2247484200%26idx%3D1%26sn%3De35a04fc3e1e2fceb6c514783b4da88e%26chksm%3Deac3092cddb4803a958544c53768f4f2d919ac4188cca85ee33a45fa5c827a6e3af7c67016eb%26scene%3D21%23wechat_redirect)」这个驱动的威力了吗？
  
 只是，我们都知道，对乐圣的这个局，不过也是一个局中局，丁元英在这盘棋里设置的局，是局中有局又有局……
  
