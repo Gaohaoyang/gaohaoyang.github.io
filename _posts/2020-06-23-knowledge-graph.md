@@ -33,6 +33,8 @@ mathjax: true
 
 ![](https://images2017.cnblogs.com/blog/706575/201710/706575-20171016200824396-1450295689.png)
 
+- 【2020-7-12】【ACL 2020知识图谱自然语言处理进展摘要】《[Knowledge Graphs in Natural Language Processing @ ACL 2020](https://towardsdatascience.com/knowledge-graphs-in-natural-language-processing-acl-2020-ebb1f0a6e0b1)》by Michael Galkin
+
 ## 历史
 
 - 知识图谱的发展简史
