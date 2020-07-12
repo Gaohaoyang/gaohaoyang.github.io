@@ -3,7 +3,7 @@ layout: post
 title:  "人工智能及未来畅想-AI and Future"
 date:   2019-06-04 23:41:00
 categories: 人工智能
-tags: 人工智能 AI 人类简史 人文 哲学 康德 汉字屋 清华大学 天机 自行车 AGI 类脑 类机 waitbutwhy 脑机接口 张首晟 姚期智 冯·诺依曼
+tags: 人工智能 AI 人类简史 人文 哲学 康德 汉字屋 清华大学 天机 自行车 AGI 类脑 类机 waitbutwhy 脑机接口 张首晟 姚期智 冯·诺依曼 天道
 excerpt: 深度思考
 mathjax: true
 ---
@@ -20,6 +20,9 @@ Neuralink and the Brain’s Magical Future](https://waitbutwhy.com/2017/04/neura
 - ![](https://28oa9i1t08037ue3m1l0i861-wpengine.netdna-ssl.com/wp-content/uploads/2015/03/Logo-sometimes-Pixelmator-577.png)
 
 - 【2019-11-13】[综述：全面介绍脑连接研究的方法学](https://mp.weixin.qq.com/s?__biz=MzI2ODEyOTE3OQ==&mid=2649569369&idx=1&sn=210bb5d90c308ff5072fabb6645c85b9&chksm=f2eddeadc59a57bb7192738d35d5d4f8a078f7c20038c9bcce3183ce308fa3be74d10476ad5a&mpshare=1&scene=23&srcid&sharer_sharetime=1573616516238&sharer_shareid=b8d409494a5439418f4a89712efcd92a%23rd)
+
+- 【2020-7-12】[天道](https://www.ixigua.com/6805386709845410318)：透视社会有三个层面：`技术`、`制度`和`文化`，小到一个人，大到一个国家、民族，任何一种命运，都是一种文化属性的产物，强势文化造就强者，弱势文化造就弱者。这是规律，也可以理解为天道，不以人的意志为转移。强势文化在武学里称之为秘笈，弱势文化因为易学、易懂和易用，就成了流行品种。文学影视是扒拉灵魂的艺术，如果文学影视能够破解更高思维空间的文化密码，那它的功效就在于启迪人的觉悟，震撼人的灵魂，这就是众生所需。就是功德、名利和市场。精神拯救的暴利，和毒品麻醉的暴利，完全等值
+
 
 # 人类唯一的出路：变成人工智能
 
