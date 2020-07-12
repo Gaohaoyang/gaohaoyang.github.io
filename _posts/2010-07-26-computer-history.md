@@ -2,7 +2,7 @@
 layout: post
 title:  "计算机发展史-Computer History"
 date:   2010-07-26 23:42:00
-categories: 编程语言
+categories: 计算机基础
 tags: 高德纳 乔姆斯基 图灵 冯·诺依曼 陈皓
 excerpt: 计算机发展历史，编程语言诞生过程，及几位关键人物
 mathjax: true
