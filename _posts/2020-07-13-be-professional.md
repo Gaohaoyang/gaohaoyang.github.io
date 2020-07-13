@@ -3,7 +3,7 @@ layout: post
 title:  "职业化要点-Points to Be More Professional"
 date:   2020-07-13 20:00:00
 categories: 软素质 团队管理
-tags: 工作效率 会议效率 舒适区 时间管理 二八定律
+tags: 工作效率 会议效率 舒适区 时间管理 二八定律 KPI OKR
 excerpt: 为什么有的人虽然工作十年，但实际上只有一年经验？
 author: 鹤啸九天
 mathjax: true
@@ -145,6 +145,15 @@ mathjax: true
       - 开会后，达成结论，明确时间点和责任人
    - ④项目中途有问题的，随时在群里反馈
 - 附：[如何开一场高效的会议](https://36kr.com/p/5125303.html)
+
+## 绩效设置
+
+- [什么是OKR四象限？](https://zhuanlan.zhihu.com/p/75657524)
+   - OKR：存在4个问题：（1）可视化效果差；（2）管理不够便捷；（3）底层逻辑问题；（4）内容不全面。
+      - ![](https://pic2.zhimg.com/80/v2-16b90cf8f462ba20901511eeeff5a7b9_720w.jpg)
+   - OPM：OPM是OKR+PM（Projectization Management，项目化管理）。OKR解决的是要到哪儿去以及对目标实现标准定义的问题，但要达成OKR还是需要通过Task执行层面来实现。
+      - ![](https://pic1.zhimg.com/80/v2-4e50dfc9b926160d33405195215343e4_720w.jpg)
+
 
 ## 如何写日报、周报
 
