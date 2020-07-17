@@ -129,6 +129,10 @@ PTMs-Papers:
 
 ## BERT服务
 
+### ES里的BERT索引
+
+- 【2020-7-11】ES开始支持embedding的BERT索引，[Elasticsearch遇上BERT：使用Elasticsearch和BERT构建搜索引擎](https://mp.weixin.qq.com/s/PzhdvwsR3ru2u_oVqSxxPQ)
+
 ### BERT-as-service
 
 - Google 已经公开了 TensorFlow 版本的预训练模型和代码，可以用于生成词向量，但是还有更简单的方法：直接调用封装好的库 bert-as-service 。
