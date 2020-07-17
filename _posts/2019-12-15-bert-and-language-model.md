@@ -24,7 +24,7 @@ mathjax: true
 
 - PTMs: Pre-trained-Models in NLP，[NLP预训练模型的全面总结(持续更新中)](https://github.com/loujie0822/Pre-trained-Models/blob/master/README.md)
 - 2020年3月18日，邱锡鹏老师发表了关于NLP预训练模型的综述《[Pre-trained Models for Natural Language Processing: A Survey](https://zhuanlan.zhihu.com/p/115014536?utm_source=qq&utm_medium=social&utm_oi=27211553832960#ref_1)》
-- 知乎文章1:  [全面总结！PTMs：NLP预训练模型](https://zhuanlan.zhihu.com/p/115014536)  ➡️➡️ [图片下载](https://github.com/loujie0822/Pre-trained-Models/blob/master/resources/PTMs.jpg)
+- 知乎文章1:  [全面总结！PTMs：NLP预训练模型](https://zhuanlan.zhihu.com/p/115014536)   ![图片下载](https://github.com/loujie0822/Pre-trained-Models/blob/master/resources/PTMs.jpg)
 - 知乎文章2：[nlp中的预训练语言模型总结](https://zhuanlan.zhihu.com/p/76912493)
 - 知乎文章3：[nlp中的词向量对比](https://zhuanlan.zhihu.com/p/56382372)
 
@@ -155,7 +155,7 @@ pip install bert-serving-client # 客户端，与服务端互相独立
     - TensorFlow 模型文件（bert_model.ckpt) 包含预训练模型的权重，模型文件有三个
     - 字典文件（vocab.txt) 记录词条与 id 的映射关系
     - 配置文件（bert_config.json ) 记录模型的超参数
-    
+
 #### 启动 BERT 服务
 
 - 使用 bert-serving-start 命令启动服务：
@@ -167,6 +167,7 @@ pip install bert-serving-client # 客户端，与服务端互相独立
 #### 在客户端获取句向量
 
 - 可以简单的使用以下代码获取语料的向量表示：
+
 ```python
 from bert_serving.client import BertClient
 bc = BertClient()
@@ -175,6 +176,7 @@ doc_vecs = bc.encode(['First do it', 'then do it right', 'then do it better'])
 - doc_vecs 是一个 numpy.ndarray ，它的每一行是一个固定长度的句子向量，长度由输入句子的最大长度决定。如果要指定长度，可以在启动服务使用 max_seq_len 参数，过长的句子会被从右端截断。
 
 - BERT 的另一个特性是可以获取一对句子的向量，句子之间使用 ||| 作为分隔，例如：
+
 ```python
 bc.encode(['First do it ||| then do it right'])
 ```
@@ -182,10 +184,12 @@ bc.encode(['First do it ||| then do it right'])
 #### 获取词向量
 
 - 启动服务时将参数 pooling_strategy 设置为 None ：
+
 ```shell
 bert-serving-start -pooling_strategy NONE -model_dir /tmp/english_L-12_H-768_A-12/
 ```
 - 这时的返回是语料中每个 token 对应 embedding 的矩阵
+
 ```python
 bc = BertClient()
 vec = bc.encode(['hey you', 'whats up?'])
@@ -202,6 +206,7 @@ vec[0][25]  # error, out of index!
 #### 远程调用 BERT 服务
 
 - 可以从一台机器上调用另一台机器的 BERT 服务：
+
 ```python
 # on another CPU machine
 from bert_serving.client import BertClient
@@ -217,10 +222,12 @@ bc.encode(['First do it', 'then do it right', 'then do it better'])
 - 处理中文是否要提前分词
     - 在计算中文向量时，可以直接输入整个句子不需要提前分词。因为 Chinese-BERT 中，语料是以字为单位处理的，因此对于中文语料来说输出的是字向量。
 - 举个例子，当用户输入：
+
 ```python
 bc.encode(['hey you', 'whats up?', '你好么？', '我 还 可以'])
 ```
 - 实际上，BERT 模型的输入是：
+
 ```
 tokens: [CLS] hey you [SEP]
 input_ids: 101 13153 8357 102 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
@@ -240,6 +247,7 @@ input_mask: 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 ```
 - 在英语中词条化后的 ##something 是什么
     - 当某个词在不在词典中时，使用最长子序列的方法进行词条化，例如：
+
 ```python
 input = "unaffable"
 tokenizer_output = ["un", "##aff", "##able"]
