@@ -22,7 +22,80 @@ mathjax: true
 
 ## 预训练语言模型
 
-- 占坑
+- PTMs: Pre-trained-Models in NLP，[NLP预训练模型的全面总结(持续更新中)](https://github.com/loujie0822/Pre-trained-Models/blob/master/README.md)
+- 2020年3月18日，邱锡鹏老师发表了关于NLP预训练模型的综述《[Pre-trained Models for Natural Language Processing: A Survey](https://zhuanlan.zhihu.com/p/115014536?utm_source=qq&utm_medium=social&utm_oi=27211553832960#ref_1)》
+- 知乎文章1:  [全面总结！PTMs：NLP预训练模型](https://zhuanlan.zhihu.com/p/115014536)  ➡️➡️ [图片下载](https://github.com/loujie0822/Pre-trained-Models/blob/master/resources/PTMs.jpg)
+- 知乎文章2：[nlp中的预训练语言模型总结](https://zhuanlan.zhihu.com/p/76912493)
+- 知乎文章3：[nlp中的词向量对比](https://zhuanlan.zhihu.com/p/56382372)
+
+<img src="https://pic3.zhimg.com/80/v2-0ace60ca3d843fc9b69c6965731f288e_720w.jpg" style="zoom:20%;" />
+
+- 对比分析，摘自：[论文笔记 - Pre-trained Models for Natural Language Processing](http://www.shuang0420.com/2020/05/07/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%20-%20Pre-trained%20Models%20for%20Natural%20Language%20Processing/)，[Pre-trained Models for Natural Language Processing: A Survey](https://arxiv.org/abs/2003.08271)
+   - LM（Language Modeling）是 NLP 中最常见的无监督任务，通常特指自回归或单向语言建模，BiLM 虽然结合了两个方向的语言模型，但只是两个方向的简单拼接，并不是真正意义上的双向语言模型。
+   - MLM（Masked Language Modeling）可以克服传统单向语言模型的缺陷，结合双向的信息，但是 [MASK] 的引入使得预训练和 fine-tune 之间出现 gap
+   - PLM（Permuted Language Modeling）则克服了这个问题，实现了双向语言模型和自回归模型的统一。
+   - DAE（Denoising Autoencoder）接受部分损坏的输入，并以恢复原始输入为目标。与 MLM 不同，DAE 会给输入额外加一些噪声。
+   - CTL（Contrastive Learning） 的原理是在对比中学习，其假设是一些 observed pairs of text 在语义上比随机采样的文本更为接近。CTL 比 LM 计算复杂度更低。
+- 综述从四个方面（Representation Types、Architectures、Pre-training Task Types、Extensions）对现有 PTMs (Pre-trained Models) 进行了系统分类，一幅图来概括全文精华：
+   - ![](http://images.shuang0420.com/images/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%20-%20Pre-trained%20Models%20for%20Natural%20Language%20Processing/taxonomy.png)
+
+### 1、论文汇总：
+
+PTMs-Papers:
+
+1. https://github.com/thunlp/PLMpapers
+2. https://github.com/tomohideshibata/BERT-related-papers
+3. https://github.com/cedrickchee/awesome-bert-nlp
+4. https://bertlang.unibocconi.it/
+5. https://github.com/jessevig/bertviz
+
+### 2. PTMs单模型解读
+
+1. 自监督学习：[Self-Supervised Learning 入门介绍](https://zhuanlan.zhihu.com/p/108625273)
+2. 自监督学习：[Self-supervised Learning 再次入门](https://zhuanlan.zhihu.com/p/108906502)
+3. 词向量总结：[nlp中的词向量对比：word2vec/glove/fastText/elmo/GPT/bert](https://zhuanlan.zhihu.com/p/56382372)
+4. 词向量总结：[从Word Embedding到Bert模型—自然语言处理中的预训练技术发展史](https://zhuanlan.zhihu.com/p/49271699)
+5. ELMo解读：[关于ELMo的若干问题整理记录](https://zhuanlan.zhihu.com/p/82602015)
+6. BERT解读： [Bert时代的创新：Bert应用模式比较及其它](https://zhuanlan.zhihu.com/p/65470719)
+7. XLNET解读：[XLNet:运行机制及和Bert的异同比较](https://zhuanlan.zhihu.com/p/70257427)
+8. XLNET解读：[XLnet：比Bert更强大的预训练模型](https://zhuanlan.zhihu.com/p/71759544)
+9. RoBERTa解读：[RoBERT: 没错，我就是能更强——更大数据规模和仔细调参下的最优BERT](https://zhuanlan.zhihu.com/p/75629127)
+10. 预训练语言模型总结：[nlp中的预训练语言模型总结(单向模型、BERT系列模型、XLNet)](https://zhuanlan.zhihu.com/p/76912493)
+11. 预训练语言模型总结：[8篇论文梳理BERT相关模型进展与反思](https://zhuanlan.zhihu.com/p/81157740)
+12. ELECTRA解读: [ELECTRA: 超越BERT, 19年最佳NLP预训练模型](https://zhuanlan.zhihu.com/p/89763176)
+13. 模型压缩 LayerDrop:[结构剪枝：要个4层的BERT有多难？](https://zhuanlan.zhihu.com/p/93207254)
+14. 模型压缩 BERT-of-Theseus:[bert-of-theseus，一个非常亲民的bert压缩方法](https://zhuanlan.zhihu.com/p/112787764)
+15. 模型压缩 TinyBERT:[比 Bert 体积更小速度更快的 TinyBERT](https://zhuanlan.zhihu.com/p/94359189)
+16. 模型压缩总结：[BERT 瘦身之路：Distillation，Quantization，Pruning](https://zhuanlan.zhihu.com/p/86900556)
+
+
+## 中文模型下载
+
+- 2019年，哈工大与讯飞出品：[Chinese-BERT-wwm](https://github.com/ymcui/Chinese-BERT-wwm)
+- 本目录中主要包含base模型，故我们不在模型简称中标注`base`字样。对于其他大小的模型会标注对应的标记（例如large）。
+
+* **`BERT-large模型`**：24-layer, 1024-hidden, 16-heads, 330M parameters  
+* **`BERT-base模型`**：12-layer, 768-hidden, 12-heads, 110M parameters  
+
+| 模型简称 | 语料 | Google下载 | 讯飞云下载 |
+| :------- | :--------- | :---------: | :---------: |
+| **`RBTL3, Chinese`** | **中文维基+<br/>通用数据<sup>[1]</sup>** | **[TensorFlow](https://drive.google.com/open?id=1Jzn1hYwmv0kXkfTeIvNT61Rn1IbRc-o8)**<br/>**[PyTorch](https://drive.google.com/open?id=1qs5OasLXXjOnR2XuGUh12NanUl0pkjEv)** | **[TensorFlow（密码vySW）](https://pan.iflytek.com:443/link/0DD18FAC080BAF75DBA28FB5C0047760)**<br/>**[PyTorch（密码rgCs）](https://pan.iflytek.com:443/link/7C6A513BED2D42170B6DBEE5A866FB3F)** |
+| **`RBT3, Chinese`** | **中文维基+<br/>通用数据<sup>[1]</sup>** | **[TensorFlow](https://drive.google.com/open?id=1-rvV0nBDvRCASbRz8M9Decc3_8Aw-2yi)**<br/>**[PyTorch](https://drive.google.com/open?id=1_LqmIxm8Nz1Abvlqb8QFZaxYo-TInOed)** | **[TensorFlow（密码b9nx）](https://pan.iflytek.com:443/link/275E5B46185C982D4AF5AC295E1651B6)**<br/>**[PyTorch（密码Yoep）](https://pan.iflytek.com:443/link/A094EB0A73B1E7209FEBC6C5CF7AEF27)** |
+| **`RoBERTa-wwm-ext-large, Chinese`** | **中文维基+<br/>通用数据<sup>[1]</sup>** | **[TensorFlow](https://drive.google.com/open?id=1dtad0FFzG11CBsawu8hvwwzU2R0FDI94)**<br/>**[PyTorch](https://drive.google.com/open?id=1-2vEZfIFCdM1-vJ3GD6DlSyKT4eVXMKq)** | **[TensorFlow（密码u6gC）](https://pan.iflytek.com:443/link/AC056611607108F33A744A0F56D0F6BE)**<br/>**[PyTorch（密码43eH）](https://pan.iflytek.com:443/link/9B46A0ABA70C568AAAFCD004B9A2C773)** |
+| **`RoBERTa-wwm-ext, Chinese`** | **中文维基+<br/>通用数据<sup>[1]</sup>** | **[TensorFlow](https://drive.google.com/open?id=1jMAKIJmPn7kADgD3yQZhpsqM-IRM1qZt)** <br/>**[PyTorch](https://drive.google.com/open?id=1eHM3l4fMo6DsQYGmey7UZGiTmQquHw25)** | **[TensorFlow（密码Xe1p）](https://pan.iflytek.com:443/link/98D11FAAF0F0DBCB094EE19CCDBC98BF)** <br/>**[PyTorch（密码waV5）](https://pan.iflytek.com:443/link/92ADD2C34C91F3B44E0EC97F101F89D8)**|
+| **`BERT-wwm-ext, Chinese`** | **中文维基+<br/>通用数据<sup>[1]</sup>** | **[TensorFlow](https://drive.google.com/open?id=1buMLEjdtrXE2c4G1rpsNGWEx7lUQ0RHi)** <br/>**[PyTorch](https://drive.google.com/open?id=1iNeYFhCBJWeUsIlnW_2K6SMwXkM4gLb_)** | **[TensorFlow（密码4cMG）](https://pan.iflytek.com:443/link/653637473FFF242C3869D77026C9BDB5)** <br/>**[PyTorch（密码XHu4）](https://pan.iflytek.com:443/link/B9ACE1C9F228A0F42242672EF6CE1721)** |
+| **`BERT-wwm, Chinese`** | **中文维基** | **[TensorFlow](https://drive.google.com/open?id=1RoTQsXp2hkQ1gSRVylRIJfQxJUgkfJMW)** <br/>**[PyTorch](https://drive.google.com/open?id=1AQitrjbvCWc51SYiLN-cJq4e0WiNN4KY)** | **[TensorFlow（密码07Xj）](https://pan.iflytek.com:443/link/A2483AD206EF85FD91569B498A3C3879)** <br/>**[PyTorch（密码hteX）](https://pan.iflytek.com:443/link/5DBDD89414E5B565D3322D6B7937DF47)** |
+| `BERT-base, Chinese`<sup>Google</sup> | 中文维基 | [Google Cloud](https://storage.googleapis.com/bert_models/2018_11_03/chinese_L-12_H-768_A-12.zip) | - |
+| `BERT-base, Multilingual Cased`<sup>Google</sup>  | 多语种维基 | [Google Cloud](https://storage.googleapis.com/bert_models/2018_11_23/multi_cased_L-12_H-768_A-12.zip) | - |
+| `BERT-base, Multilingual Uncased`<sup>Google</sup>  | 多语种维基 | [Google Cloud](https://storage.googleapis.com/bert_models/2018_11_03/multilingual_L-12_H-768_A-12.zip) | - |
+
+> [1] 通用数据包括：百科、新闻、问答等数据，总词数达5.4B，处理后的文本大小约10G
+
+以上预训练模型以TensorFlow版本的权重为准。
+对于PyTorch版本，我们使用的是由Huggingface出品的[PyTorch-Transformers 1.0](https://github.com/huggingface/pytorch-transformers)提供的转换脚本。
+如果使用的是其他版本，请自行进行权重转换。
+中国大陆境内建议使用讯飞云下载点，境外用户建议使用谷歌下载点，base模型文件大小约**400M**。 
+
 
 ## BERT
 
