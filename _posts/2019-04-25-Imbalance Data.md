@@ -37,7 +37,14 @@ mathjax: true
 
 ![How to Handle Imbalanced Classes in Machine Learning](https://elitedatascience.com/wp-content/uploads/2017/06/imbalanced-classes-feature-with-text.jpg)
 
-#### 直观的例子：疾病筛查案例
+
+# 汇总
+
+- 【2020-7-17】focal loss[论文](https://arxiv.org/abs/1708.02002)，[配套代码](https://github.com/Tony607/Focal_Loss_Keras)
+      - [非平衡数据集 focal loss 多类分类](https://www.yanxishe.com/TextTranslation/1646)
+
+
+## 直观的例子：疾病筛查案例
 
 > 一家研究医院要求你基于病人的生物输入来训练一个疾病检测模型。
 
@@ -68,7 +75,7 @@ def disease_screen(patient_data):
 
 这显然是一个问题，因为设计的许多机器学习算法是为了最大限度的提高整体准确率。本指南的其余部分将说明处理不平衡类别的不同策略。
 
-#### 我们开始之前的重要提示：
+## 我们开始之前的重要提示：
 
 首先，请注意，我们不会分离出一个独立的测试集，调整超参数或者实现交叉检验。换句话说，我们不打算遵循最佳做法 (在我们的[7 天速成课程](http://elitedatascience.com/)中有介绍)。
 
