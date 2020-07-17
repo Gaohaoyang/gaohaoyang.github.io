@@ -414,6 +414,68 @@ conda config --set show_channel_urls yes
 
 # Linux工具
 
+## 文件传输
+
+- 【2017-12-16】远程文件传输的几种方式：
+   - secureCRT、ftpxp客户端
+   - scp命令
+   - rsync命令
+   - ftp、http服务
+      - 【2018-1-4】python搭建简易web服务，可以下载文件
+         - 服务端：python -m SimpleHTTPServer 8088
+         - 客户端浏览器：http://uemc-train-srv00.gz01:8088/
+         - 参考：[三种Shell脚本编程中避免SFTP输入密码的方法](http://blog.csdn.net/hereiskxm/article/details/7861759)
+   - sftp服务
+   - szrz命令
+   - nc命令
+      - Linux网络工具中的“瑞士军刀”盛誉的netcat,能通过TCP和UDP在网络中读写数据
+      - (1) 检测端口是否可用：
+         - nc -v www.thanks.live 80
+      - （2）文件传输
+         - 接收端：nc -l 9995 > tmp
+         - 发送端：nc 10.200.0.79 9995 < send_file
+         - 注：端口范围(1024,65535)
+      - （3）聊天功能
+         - 类似文件传输操作步骤，去掉文件定向（<>）即可
+         - A：nc -l 9995
+         - B：nc 10.200.0.79 9995
+      - （4）telnet服务器（远程登录）
+         - 服务端：nc -l -p 9995 -e bash
+         - 客户端：nc 10.200.0.79 9995
+   - samba
+
+## 自动登录
+
+- [2018-3-26]自动登录鲁班测试机
+- 方法一：
+```shell
+#参考expect用法
+passwd="***"
+expect -c "
+        spawn ssh user@host -p 8022
+    expect {
+        \"*assword:\" {send \"$passwd\r\"; exp_continue }
+    }
+"```
+- 方法二：
+   - login.sh内容：
+```shell
+#!/usr/bin/expect -f
+set host luban@10.84.176.174
+set port 8022
+set pwd M95B8RBR
+ 
+spawn ssh "$host" -p $port
+set timeout 30
+expect "password:"
+send "$pwd\r"
+interact
+```
+   - 执行：expect login.sh
+   - 自动登录, ~/.bash_profile里配置别名即可一直使用
+   - alias luban='expect ~/login.sh'
+
+
 
 ## 自动编译安装python
 
