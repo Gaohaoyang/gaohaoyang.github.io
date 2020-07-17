@@ -42,6 +42,15 @@ mathjax: true
 
 - 【2020-7-17】focal loss[论文](https://arxiv.org/abs/1708.02002)，[配套代码](https://github.com/Tony607/Focal_Loss_Keras)
       - [非平衡数据集 focal loss 多类分类](https://www.yanxishe.com/TextTranslation/1646)
+      - [Focal Loss理解](https://www.cnblogs.com/king-lps/p/9497836.html)：降低了大量简单负样本在训练中所占的权重，也可理解为一种困难样本挖掘
+      - ![](https://images2018.cnblogs.com/blog/1055519/201808/1055519-20180818162755861-24998254.png)
+            - 普通的交叉熵对于正样本而言，输出概率越大损失越小。对于负样本而言，输出概率越小则损失越小。此时的损失函数在大量简单样本的迭代过程中比较缓慢且可能无法优化至最优
+      - ![](https://images2018.cnblogs.com/blog/1055519/201808/1055519-20180818174944824-933422059.png)
+      - ![](https://images2018.cnblogs.com/blog/1055519/201808/1055519-20180818174822290-765890427.png)
+      - ![](https://images2018.cnblogs.com/blog/1055519/201808/1055519-20180818170840882-453549240.png)
+            - 在原有的基础上加了一个因子，其中gamma>0使得减少易分类样本的损失。使得更关注于困难的、错分的样本。
+            - 只添加alpha虽然可以平衡正负样本的重要性，但是无法解决简单与困难样本的问题。
+            - gamma调节简单样本权重降低的速率，当gamma为0时即为交叉熵损失函数，当gamma增加时，调整因子的影响也在增加。实验发现gamma为2是最优。
 
 
 ## 直观的例子：疾病筛查案例
