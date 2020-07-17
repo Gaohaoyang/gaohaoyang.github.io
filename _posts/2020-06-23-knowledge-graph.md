@@ -45,7 +45,9 @@ mathjax: true
   - 2006年提出了链接数据概念，目标将互联网上所有数据建立关联，如姚明的页面出现他妻子叶莉，会给“叶莉”加一个链接，链接到叶莉这个页面。
   - 2012年Google率先提出了知识图谱，目的是提升整个搜索效果，从此知识图谱技术开始得到广泛学习和应用。
 - ![](http://5b0988e595225.cdn.sohucs.com/images/20180906/2cbe3385c1b74d2895626b0070c72b44.jpeg)
-  - 摘自：[知识图谱在贝壳找房的从0到1实践](https://www.sohu.com/a/252223730_499730)
+  - 摘自：
+    - [知识图谱在贝壳找房的从0到1实践](https://www.sohu.com/a/252223730_499730)
+    - 【2020-7-18】[贝壳找房技术文章合集](https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&__biz=MzU3OTY2MjQ2NQ==&scene=24&album_id=1431012302404534273&uin=&key=&devicetype=iMac+MacBookPro13%2C2+OSX+OSX+10.15.5+build(19F101)&version=12040110&lang=zh_CN&nettype=WIFI&ascene=14&fontScale=100&winzoom=1.000000)
 
 ## 定义
 
