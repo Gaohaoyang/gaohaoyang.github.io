@@ -24,8 +24,12 @@ mathjax: true
 
 ## 类型
 
-- 目标检测（Object Detection），在计算机视觉领域的任务就是给定一张图片，将图片中的物体识别并且框定出来。随着近年来的发展，其主要分成了两大类别，Two-Stage检测算法（以Faster R-CNN为代表）和以及One-Stage检测算法（以YOLO为代表）。
+- 目标检测（Object Detection），在计算机视觉领域的任务就是给定一张图片，将图片中的物体识别并且框定出来。
+  - object detection的算法主要可以分为两大类：two-stage detector和one-stage detector。
+    - One-Stage检测算法是指类似Faster RCNN，RFCN这样需要region proposal的检测算法，这类算法可以达到很高的准确率，但是速度较慢。虽然可以通过减少proposal的数量或降低输入图像的分辨率等方式达到提速，但是速度并没有质的提升。
+    - Two-Stage检测算法是指类似YOLO，SSD这样不需要region proposal，直接回归的检测算法，这类算法速度很快，但是准确率不如前者。
    - PS：Multi-Stage检测算法的Selective Search、Feature extraction、Location regression、Class SVM等环节都是分开训练，操作繁杂而且效果不好，所以这里默认忽视。
+   - focal loss的出发点也是希望one-stage detector可以达到two-stage detector的准确率，同时不影响原有的速度。
    - 参考：[目标检测算法综述](https://blog.csdn.net/liuxinnanshou/article/details/104467821)
 - One-Stage检测算法的初衷是提升速度，而Two-Stage中比较耗时就是proposal建议区域生成，所以索性One-Stage方法就是直接从图像建议区域提取特征进行分类和定位回归。
    - 图像建议区域是直接从backbone的特征层中进行密集选取，所以一些one-stage算法也称为密集检测器。同时可以看出，one-stage主要处理的问题是：特征提取、分类和定位回归。即关键点全部在特征提取这一块上。
