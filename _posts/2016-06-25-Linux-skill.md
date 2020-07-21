@@ -384,6 +384,7 @@ activate # 切换到base环境
 activate learn # 切换到learn环境
 conda create -n learn python=3 # 创建一个名为learn的环境并指定python版本为3(的最新版本，也可以是2.7、3.6等))
 conda create -n learn numpy matplotlib python=2.7 # 创建环境同时安装必要的包
+conda create -n py36_tf1 python=3.6 tensorflow==1.11 # [2020-7-21]
 conda create --prefix="D:\\my_python\\envs\\my_py_env"  python=3.6.3 # 自定义虚拟环境
 conda create --name env_name --clone learn # 克隆环境 learn -> env_name
 conda env list # 列出conda管理的所有环境, conda info -e 
