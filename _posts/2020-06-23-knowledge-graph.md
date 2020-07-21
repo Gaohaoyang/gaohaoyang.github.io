@@ -34,6 +34,7 @@ mathjax: true
 ![](https://images2017.cnblogs.com/blog/706575/201710/706575-20171016200824396-1450295689.png)
 
 - 【2020-7-12】【ACL 2020知识图谱自然语言处理进展摘要】《[Knowledge Graphs in Natural Language Processing @ ACL 2020](https://towardsdatascience.com/knowledge-graphs-in-natural-language-processing-acl-2020-ebb1f0a6e0b1)》by Michael Galkin
+- 【2020-7-21】[从ACL 2020看知识图谱进展](https://www.toutiao.com/i6851461937012851214/?tt_from=mobile_qq&utm_campaign=client_share&timestamp=1595263453&app=news_article&utm_source=mobile_qq&utm_medium=toutiao_android&use_new_style=1&req_id=202007210044120100270271372C1692E4&group_id=6851461937012851214)
 
 ## 历史
 
