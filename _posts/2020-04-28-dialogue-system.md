@@ -80,6 +80,54 @@ mathjax: true
 ### 端到端
 
 
+## DM
+
+- [多轮对话之对话管理(Dialog Management)](https://zhuanlan.zhihu.com/p/32716205)
+- 对话管理（Dialog Management, DM）控制着人机对话的过程，DM 根据对话历史信息，决定此刻对用户的反应。最常见的应用还是任务驱动的多轮对话，用户带着明确的目的如订餐、订票等，用户需求比较复杂，有很多限制条件，可能需要分多轮进行陈述，一方面，用户在对话过程中可以不断修改或完善自己的需求，另一方面，当用户的陈述的需求不够具体或明确的时候，机器也可以通过询问、澄清或确认来帮助用户找到满意的结果。
+- ![](https://picb.zhimg.com/80/v2-763da7952c607ed3065af3cacdd9c7d8_720w.jpg)
+- 对话管理的任务大致有下面一些：
+  - `对话状态维护`（dialog state tracking, `DST`）
+    - 维护 & 更新对话状态
+  - `生成系统决策`（dialog policy）`DP`
+    - 根据 DST 中的对话状态（DS），产生系统行为（dialog act），决定下一步做什么dialog act 可以表示观测到的用户输入（用户输入 -> DA，就是 NLU 的过程），以及系统的反馈行为（DA -> 系统反馈，就是 NLG 的过程）
+  - 作为接口与后端/任务模型进行交互
+  - 提供语义表达的期望值（expectations for interpretation）interpretation: 用户输入的 internal representation，包括 speech recognition 和 parsing/semantic representation 的结果
+
+对话引擎根据对话按对话由谁主导可以分为三种类型：
+- 系统主导
+  - 系统询问用户信息，用户回答，最终达到目标
+- 用户主导
+  - 用户主动提出问题或者诉求，系统回答问题或者满足用户的诉求
+- 混合
+  - 用户和系统在不同时刻交替主导对话过程，最终达到目标
+  - 有两种类型，一是用户/系统转移任何时候都可以主导权，这种比较困难，二是根据 prompt type 来实现主导权的移交
+  - Prompts 又分为：
+    -  open prompt（如 ‘How may I help you‘ 这种，用户可以回复任何内容 ）
+    - directive prompt（如 ‘Say yes to accept call, or no’ 这种，系统限制了用户的回复选择）
+
+
+对话管理的一些方法，主要有三大类：
+- （1）Structure-based Approaches
+  - Key phrase reactive
+    - 本质是关键词匹配，通常是通过捕捉用户最后一句话的关键词/关键短语来进行回应，比较知名的两个应用是 ELIZA 和 AIML。
+      - AIML（人工智能标记语言），[代码示例](https://github.com/Shuang0420/aiml)，支持 python3、中文、* 扩展
+  - Tree and FSM
+    - 把对话建模为通过树或者有限状态机（图结构）的路径。 相比于 simple reactive approach，这种方法融合了更多的上下文，能用一组有限的信息交换模板来完成对话的建模。
+    - 这种方法适用于：
+      - 系统主导
+      - 需要从用户收集特定信息
+      - 用户对每个问题的回答在有限集合中
+    - ![](https://pic2.zhimg.com/80/v2-1d52ccbfd607dd95c94a6f132181bf81_720w.jpg)
+  - …
+- （2）Principle-based Approaches
+  - Frame
+  - Information-State
+  - Plan
+  - …
+- （3）Statistical Approaches
+  - 这一类其实和上面两类有交叉…
+  - 重点提Reinforcement Learning
+
 
 ## 知识型对话
 
