@@ -21,8 +21,12 @@ mathjax: true
 
 ### 模型结构
 
-- 1，最左边的Wide模型其实就是LR模型。最右面Deep模型其实就是深度模型了。中间是两者结合的Wide&Deep模型，其输出单元接收的是左右两部分输出的拼接。
+
 ![](https://upload-images.jianshu.io/upload_images/3376541-60671b2e7bbd79cd.jpg)
+
+- 最左边的Wide模型其实就是LR模型。
+- 最右面Deep模型其实就是深度模型了。
+- 中间是两者结合的Wide&Deep模型，其输出单元接收的是左右两部分输出的拼接。
 
 - 输入部分
 
