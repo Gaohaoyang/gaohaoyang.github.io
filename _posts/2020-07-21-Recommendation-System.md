@@ -20,7 +20,8 @@ mathjax: true
 - 【2019-5-13】[推荐系统-重排序-CTR-Wide&Deep模型](https://www.jianshu.com/p/56c0d94214d7)
 
 ### 模型结构
-    - 1，最左边的Wide模型其实就是LR模型。最右面Deep模型其实就是深度模型了。中间是两者结合的Wide&Deep模型，其输出单元接收的是左右两部分输出的拼接。
+
+- 1，最左边的Wide模型其实就是LR模型。最右面Deep模型其实就是深度模型了。中间是两者结合的Wide&Deep模型，其输出单元接收的是左右两部分输出的拼接。
 ![](https://upload-images.jianshu.io/upload_images/3376541-60671b2e7bbd79cd.jpg)
 
 - 输入部分
@@ -65,6 +66,7 @@ tf.feature_column.embedding_column(categorical_column,
 - [TensorFlow Wide & Deep Learning Tutorial](https://github.com/tensorflow/tensorflow/blob/752dcb61ef7a8fd6555909dc37c1f2a2e5792227/tensorflow/docs_src/tutorials/wide_and_deep.md)
 
 ```python
+
 import tensorflow as tf
 
 gender = tf.feature_column.categorical_column_with_vocabulary_list(
@@ -127,6 +129,7 @@ crossed_columns = [
 ]
 ```
 - deep部分
+
 ```python
 deep_columns = [
     tf.feature_column.indicator_column(workclass),
@@ -144,6 +147,7 @@ deep_columns = [
 ]
 ```
 - wide&deep组合
+
 ```python
 import tempfile
 model_dir = tempfile.mkdtemp()
@@ -154,6 +158,7 @@ m = tf.estimator.DNNLinearCombinedClassifier(
     dnn_hidden_units=[100, 50])
 ```
 - 模型训练评估
+
 ```python
 import pandas as pd
 import urllib
@@ -223,7 +228,6 @@ print("model directory = %s" % model_dir)
 for key in sorted(results):
   print("%s: %s" % (key, results[key]))
 ```
-
 
 
 
