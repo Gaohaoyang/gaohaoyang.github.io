@@ -27,6 +27,11 @@ mathjax: true
    - ![](https://p1-tt-ipv6.byteimg.com/img/pgc-image/9811c9fff31a4fe282dbce591f7642b8~tplv-obj:745:306.image)
 
 
+## 图像3D化
+
+- 【2020-7-23】2D照片转3D的效果，代码：[3d-photo-inpainting](https://github.com/vt-vl-lab/3d-photo-inpainting)
+- ![](https://p1-tt-ipv6.byteimg.com/img/pgc-image/54a7f500dc92415f91e0766e2f74c45a~tplv-obj:340:424.image?from=post)
+
 
 # OCR
 
