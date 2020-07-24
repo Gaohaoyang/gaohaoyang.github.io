@@ -13,6 +13,124 @@ mathjax: true
 {:toc}
 
 
+# 机器学习方法论
+
+- 微软-ML算法指南：[pdf版下载地址](https://docs.microsoft.com/en-us/azure/machine-learning/machine-learning-algorithm-cheat-sheet)
+![微软算法](https://github.com/wqw547243068/wangqiwen/raw/master/%E5%BE%AE%E8%BD%AF-ML%E7%AE%97%E6%B3%95%E6%8C%87%E5%8D%97.png)
+   - 详细讲解[How to choose algorithms for Microsoft Azure Machine Learning](https://docs.microsoft.com/zh-cn/azure/machine-learning/studio/algorithm-choice)
+   - 【2020-7-15】新版
+   - ![](https://docs.microsoft.com/zh-cn/azure/machine-learning/media/algorithm-cheat-sheet/machine-learning-algorithm-cheat-sheet.svg)
+- [scikit-learn官方总结](http://scikit-learn.org/stable/tutorial/machine_learning_map/index.html#)，Scikit-learn Cookbook:[英文本](https://www.packtpub.com/big-data-and-business-intelligence/scikit-learn-cookbook),[中文译本](https://www.gitbook.com/book/wizardforcel/sklearn-cookbook/details)，[MarkDown格式](http://git.oschina.net/wizardforcel/sklearn-cb/blob/master/SUMMARY.md)。【2018-6-12】scikit-learn中文翻译版，[主页](http://sklearn.apachecn.org/),[scikit-learn网页版](http://sklearn.apachecn.org/cn/0.19.0/index.html)，[Github版](https://github.com/apachecn/scikit-learn-doc-zh),[wiki版](http://cwiki.apachecn.org/pages/viewpage.action?pageId=10030181),[视频版](http://i.youku.com/apachecn)。[sklearn库中文版完全手册下载](https://download.csdn.net/download/nndreamer/9823008)
+![算法对比](http://scikit-learn.org/stable/_static/ml_map.png)
+- 【2017-12-20】[Dlib机器学习指南](https://www.cnblogs.com/oloroso/p/6607888.html),方法选择：![svg图](http://dlib.net/ml_guide.svg),中文版,[dlib中文指南-图](http://images2015.cnblogs.com/blog/693958/201703/693958-20170323225348940-2043166934.png)
+
+
+# 机器学习流程
+
+
+## sklearn
+
+
+```python
+
+import pandas as pd
+from sklearn.cross_validation import train_test_split
+from sklearn.preprocessing import LabelEncoder
+
+# 加载数据集
+df = pd.read_csv('https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data', header=None)
+# Breast Cancer Wisconsin dataset
+
+X, y = df.values[:, 2:], df.values[:, 1]
+                                # y为字符型标签
+                                # 使用LabelEncoder类将其转换为0开始的数值型
+encoder = LabelEncoder()
+y = encoder.fit_transform(y)
+                    >>> encoder.transform(['M', 'B'])
+                    array([1, 0])
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.2, random_state=0)
+
+# 构建pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+from sklearn.linear_model import LogisticRegression
+
+from sklearn.pipeline import Pipeline
+
+pipe_lr = Pipeline([('sc', StandardScaler()),
+                    ('pca', PCA(n_components=2)),
+                    ('clf', LogisticRegression(random_state=1))
+                    ])
+pipe_lr.fit(X_train, y_train)
+print('Test accuracy: %.3f' % pipe_lr.score(X_test, y_test))
+                # Test accuracy: 0.947
+
+
+```
+
+
+## pipeline
+
+- pipeline这个词，应该来自linux。在linux体系下的各种命令工具的处理，支持pipeline，即管道机制，例如：
+
+```shell
+cat xxx | awk '{xxxx}' | sort | uniq
+```
+
+- pipeline是一种良好的接口规范，工具的功能有公共的接口规范，就像流水线一样，一步接着一步。机器学习的处理过程，也可以是pipeline。
+- 实际上scikit-learn开发了整套的pipeline机制，并封装到 sklearn.pipline命名空间下面。
+
+![](https://upload-images.jianshu.io/upload_images/18355921-427ac759ef4d9a0a)
+
+
+- PIPELINE
+    - [机器学习训练的PIPELINE机制](https://www.jianshu.com/p/49c93d6c0198)
+    - [机器学习pipeline总结](https://www.cnblogs.com/hannahzhao/p/11959326.html)，含代码和手写笔记
+    - ![](https://img2018.cnblogs.com/blog/1827468/201911/1827468-20191129175455462-21315450.jpg)
+- sklearn中把机器学习处理过程抽象为`estimator`，其中estimator都有fit方法，表示“喂”数据进行初始化or训练。
+- estimator有2种：
+    - 1、`特征变换`（transformer）
+        - 可以理解为特征工程，即：特征标准化、特征正则化、特征离散化、特征平滑、onehot编码等。该类型统一由一个transform方法，用于fit数据之后，输入新的数据，进行特征变换。
+    - 2、`预测器`（predictor）
+        - 即各种模型，所有模型fit进行训练之后，都要经过测试集进行predict所有，有一个predict的公共方法。
+- 上面的抽象的好处即可实现机器学习的pipeline，显然特征变换是可能并行的，通过FeatureUnion实现。特征变换在训练集、测试集之间都需要统一，所以pipeline可以达到模块化的目的。
+    - 特征变换往往需要并行化处理，即FeatureUnion所实现的功能
+    - pipeline还可以嵌套pipeline，整个机器学习处理流程就像流水工人一样
+    - 加上自动调参就完美了，sklearn的调参通过GridSearchCV实现，pipeline+gridsearch简直是绝配
+    - Pipeline对象接受二元tuple构成的list，每一个二元 tuple 中的第一个元素为 arbitrary identifier string，我们用以获取（access）Pipeline object 中的 individual elements，二元 tuple 中的第二个元素是 scikit-learn与之相适配的transformer 或者 estimator。
+
+- 举个NLP处理的例子：
+
+```python
+# 生成训练数据、测试数据
+X_train, X_test, y_train, y_test = train_test_split(X, y)
+# pipeline定义
+pipeline = Pipeline([ ('vect', CountVectorizer()), ('tfidf', TfidfTransformer()), ('clf', RandomForestClassifier())])
+# FeatureUnion的并行化处理
+pipeline = Pipeline([('features', FeatureUnion([ ('text_pipeline', Pipeline([ ('vect', CountVectorizer(tokenizer=tokenize)), ('tfidf', TfidfTransformer()) ])), ('findName', FineNameExtractor())])),('clf', RandomForestClassifier())])
+# train classifier
+pipeline.fit(X_train, y_train)
+# predict on test data
+y_pred = pipeline.predict(X_test)
+
+from sklearn.base import BaseEstimator, TransformerMixin
+
+class FineNameExtractor(BaseEstimator, TransformerMixin): 
+
+    def find_name(self, text): 
+        return True 
+
+    def fit(self, X, y=None): 
+        return self 
+
+    def transform(self, X): 
+        X_tagged = pd.Series(X).apply(self.find_name) 
+        return pd.DataFrame(X_tagged)
+
+```
+
+
+
 # 机器学习43条军规——谷歌
 
 - [原文地址](https://developers.google.com/machine-learning/guides/rules-of-ml/)
