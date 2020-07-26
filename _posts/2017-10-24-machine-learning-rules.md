@@ -3,7 +3,7 @@ layout: post
 title:  "【谷歌】机器学习43条军规-The-Rules-of-Machine Learning"
 date:   2017-10-24 18:32:00
 categories: 机器学习
-tags: 机器学习 谷歌 深度学习
+tags: 机器学习 谷歌 深度学习 pipeline
 author : Martin Zinkevich
 excerpt: 开始机器学习项目时，需要注意哪些问题，谷歌大师的经验总结
 mathjax: true
@@ -27,6 +27,17 @@ mathjax: true
 
 # 机器学习流程
 
+- 书籍：[用tensorflow生态系统搭建机器学习pipeline](https://www.toutiao.com/a1673252334929924)
+    - 了解构建机器学习管道的步骤
+    - 使用TensorFlow Extended中的组件构建管道
+    - 使用Apache Beam，Apache Airflow和Kubeflow Pipelines编排您的机器学习管道
+    - 使用TensorFlow数据验证和TensorFlow转换处理数据
+    - 使用TensorFlow模型分析来详细分析模型
+    - 检查模型性能的公平性和偏见
+    - 使用TensorFlow Serving或TensorFlow Lite为移动设备部署模型
+    - 学习保护隐私的机器学习技术
+
+![](https://p9-tt-ipv6.byteimg.com/img/pgc-image/996ce8d043b7495ebe6ecd1804d3d426~tplv-obj:616:802.image?from=post)
 
 ## sklearn
 
