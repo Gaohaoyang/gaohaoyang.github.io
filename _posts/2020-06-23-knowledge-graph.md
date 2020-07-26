@@ -128,6 +128,9 @@ mathjax: true
     - TransE在实体预测任务能够达到47.1的准确率，而采用TransH和TransR，特别是TransR可以达到20%的提升。
   - [基于 TransE TransH TransR和PTransE的知识图](https://www.helplib.cn/fansisi/KB2E)，[KB2E](https://www.github.com/thunlp/KB2E)代码实现，[图嵌入的Translate模型汇总（TransE，TransH，TransR，TransD）](https://www.toutiao.com/i6844713516557926916/?tt_from=mobile_qq&utm_campaign=client_share&timestamp=1593739790&app=news_article&utm_source=mobile_qq&utm_medium=toutiao_android&use_new_style=1&req_id=202007030929500100260772033571AA0D&group_id=6844713516557926916)
 
+- 【2020-7-26】斯坦福知识图谱多跳推理，[Multi-Hop Knowledge Graph Reasoning with Deep Reinforcement Learning](https://web.stanford.edu/class/cs520/abstracts/socher.pdf)
+
+
 ## 关系推理
 
 - 简单问答只需要识别出问题中的实体和关系，链接到知识图谱中，即可查出答案。
