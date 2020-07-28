@@ -213,6 +213,14 @@ Reference
 
 Pandas 提供了数据结构——DataFrame，可以高效的处理一些数据分析任务。我们日常分析的数据，大多是存储在类似 excel 的数据表中，Pandas 可以灵活的按列或行处理数据，几乎是最常用的工具了。
 
+- [Pandas按行按列遍历Dataframe的几种方式](https://blog.csdn.net/sinat_29675423/article/details/87972498)
+    - ![](https://img-blog.csdnimg.cn/20190227142817847.png)
+    - 简单对上面三种方法进行说明：
+        - iterrows(): 按行遍历，将DataFrame的每一行迭代为(index, Series)对，可以通过row[name]对元素进行访问。
+        - itertuples(): 按行遍历，将DataFrame的每一行迭代为元祖，可以通过row[name]对元素进行访问，比iterrows()效率高。
+        - iteritems():按列遍历，将DataFrame的每一列迭代为(列名, Series)对，可以通过row[index]对元素进行访问。
+
+
 ![](https://raw.githubusercontent.com/woaielf/woaielf.github.io/master/_posts/Pic/1704/170422-1.png)
 
 ![](https://raw.githubusercontent.com/woaielf/woaielf.github.io/master/_posts/Pic/1704/170422-2.png)
