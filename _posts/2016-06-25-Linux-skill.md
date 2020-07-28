@@ -413,6 +413,30 @@ conda config --set show_channel_urls yes
 ```
 
 
+### 问题解决
+
+- 使用conda install 安装各种包的时候速度很慢，参考：[conda install速度慢](https://blog.csdn.net/mojiewangday/article/details/105583026)
+- 解决
+   - 修改conda镜像路径
+   - 执行如下命令，更换仓库径路为清华镜像路径
+```
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+```
+   - 在自己用户目录C:\Users<你的用户名>下生成一个文件，名字为：~/.condarc
+```
+conda config --set show_channel_urls yes
+```
+   - 修改.condarc文件为如下:
+```
+channels:
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+show_channel_urls: true
+ssl_verify: true
+```
+   - 执行完上述三步，conda的镜像路径就更换完毕，如不放心可以 conda info 查看 channel URLs 信息已经更改。
+
+
 # Linux工具
 
 ## 文件传输
