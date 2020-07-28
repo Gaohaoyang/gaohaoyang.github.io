@@ -308,6 +308,48 @@ jt -t grade3 -f fira -fs 13 -cellw 90% -ofs 11 -dfs 11 -T
 
 # python开发环境
 
+
+## python编译安装
+
+- 代码如下：
+```shell
+# 下载python3
+src_file='https://www.python.org/ftp/python/3.8.3/Python-3.8.3.tgz'
+file_name="${src_file##*/}"
+install_dir=~/bin
+
+[ -e ${file_name} ]||{
+        wget ${src_file}
+        echo "下载完毕..."
+}&& echo "文件已存在, $file_name"
+# 解压
+tar zxvf ${file_name}
+echo "安装目录: $install_dir"
+# 安装
+new_dir=${file_name%.*}
+cd $new_dir
+./configure --prefix=${install_dir}/python38
+# 如果不设置安装目录prefix, 就会提示sudo权限
+make && make install
+echo "安装完毕，请设置环境变量"
+
+# 设置环境变量
+#vim ~/.bash_profile
+echo "
+alias python3='${install_dir}/python38/bin/python3.8'
+alias pip3='${install_dir}/python38/bin/pip3'
+" >> ~/.bash_profile
+
+echo '生效'
+source ~/.bash_profile
+
+echo '检测'
+python3 -c "print('hello world!')"
+pip3 list
+
+```
+
+
 ## anaconda
 
 - 下载
