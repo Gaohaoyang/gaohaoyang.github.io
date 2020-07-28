@@ -310,6 +310,15 @@ jt -t grade3 -f fira -fs 13 -cellw 90% -ofs 11 -dfs 11 -T
 
 ## anaconda
 
+- 下载
+```shell
+# 官方地址，慢
+wget https://repo.anaconda.com/archive/Anaconda3-2019.03-Linux-x86_64.sh
+# 清华地址: https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/
+wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-5.3.1-Linux-x86_64.sh
+bash Anaconda3-2019.03-Linux-x86_64.sh
+```
+
 - 安装完成之后会多几个应用
    - Anaconda Navigtor ：用于管理工具包和环境的图形用户界面，后续涉及的众多管理命令也可以在 Navigator 中手工实现。
    - Jupyter notebook ：基于web的交互式计算环境，可以编辑易于人们阅读的文档，用于展示数据分析的过程。
