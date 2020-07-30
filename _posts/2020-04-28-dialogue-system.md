@@ -3,7 +3,7 @@ layout: post
 title:  "对话系统-Dialogue System"
 date:   2020-04-28 21:45:00
 categories: 深度学习
-tags: 深度学习 NLP 对话系统 QA 多轮 闲聊
+tags: 深度学习 NLP 对话系统 QA 多轮 闲聊 沈向洋
 excerpt: 对话系统技术图谱
 author: 鹤啸九天
 mathjax: true
@@ -14,6 +14,19 @@ mathjax: true
 
 # 总结
 
+- 【2020-7-30】[沈向洋：从深度学习到深度理解](https://www.toutiao.com/i6854955754193945096/?tt_from=mobile_qq&utm_campaign=client_share&timestamp=1596065543&app=news_article&utm_source=mobile_qq&utm_medium=toutiao_android&use_new_style=1&req_id=2020073007322301014412006713A3E050&group_id=6854955754193945096)
+   - 现状：NLP需要更多参数，视觉需要更多层网络
+   - ![](http://p1-tt.byteimg.com/large/pgc-image/S69UvxE2u3vZ2C?from=pc)
+   - 这三个方面在实现robust AI时大有可为：
+      - 其一，构建大规模的强机器学习仿真器。不仅是游戏，还有自动驾驶等复杂系统。
+      - 其二，对于机器学习本质的深度理解。从优化功能开始，思考我们从里面真正学到的是什么。
+      - 其三，基于神经与符号的混合模型（Hybrid Neural/Symbolic Model for Robust AI）。——今天演讲的重点
+   - 雷蒙德微软研究院写了一篇论文，题目为《SOLOIST: Few-shot Task-Oriented Dialog with A Single Pre-trainedAuto-regressive Model》，文章中提出了一种新的方法，能够利用迁移学习进行高效地大规模构建面向任务的对话系统。
+   - 文章有两个亮点
+      - 其一是有个预训练模型GTG（Grounded Text generator）
+      - 其二是该方法实现了真正的会话学习。下面我主要讲讲GTG。
+   - ![](http://p1-tt.byteimg.com/large/pgc-image/S69UvxiDrKbqBH?from=pc)
+   - GTG模型与GPT模型对比也有比较大的优势：GPT是学习如何理解和生成自然语言，而GTG是学习预测对话状态，产生grounded responses（真实响应）来完成任务。
 
 # 现状
 
