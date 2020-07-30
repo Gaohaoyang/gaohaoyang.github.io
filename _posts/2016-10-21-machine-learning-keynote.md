@@ -223,11 +223,8 @@ _![](https://static.leiphone.com/uploads/new/article/740_740/201610/58098a477468
 > “其实机器学习的形态就是算法 \+ 数据。”
  
 但是这样的形态下，它有哪些局限性呢？主要分为 3 个大的方面和其他一些小方面：
- 
 *   局限 1：需要大量训练样本；
-    
 *   局限 2：难以适应环境变化；
-    
 *   局限 3：黑箱模型。
     
  
@@ -263,14 +260,12 @@ _![](https://static.leiphone.com/uploads/new/article/740_740/201610/58098a477468
 *   可重用
 *   可演进
 *   可了解
-    
- 
+
 ![](https://static.leiphone.com/uploads/new/article/740_740/201610/5809ded34aaf6.png?imageMogr2/format/jpg/quality/90)
  
 ![](https://static.leiphone.com/uploads/new/article/740_740/201610/58098c5e23ee3.jpg?imageMogr2/format/jpg/quality/90)
  
 规约需要能清楚地说明在做什么，主要有三种方式：
- 
 *   基于逻辑
 *   基于统计量
 *   技术与精简数据
@@ -280,7 +275,6 @@ _![](https://static.leiphone.com/uploads/new/article/740_740/201610/58098a477468
 ![](https://static.leiphone.com/uploads/new/article/740_740/201610/58098c618860d.jpg?imageMogr2/format/jpg/quality/90)
  
 我们可以看到，有了“学件”的框架以后，很多之前提到的局限可能都会迎刃而解：  
- 
 *   “可重用”的特性能够获取大量不同的样本；
 *   “可演进”的特性可以适应环境的变化；
 *   “可了解”的特性能有效地了解模型的能力；
@@ -298,7 +292,6 @@ _![](https://static.leiphone.com/uploads/new/article/740_740/201610/58098a477468
 ### 总结
  
 最后，对今天的报告内容进行一个总结，主要有下面几点：
- 
 *   深度学习可能有“冬天”，它只是机器学习的一种技术，总会出现更“潮”的新技术；
 *   机器学习不会有“冬天”，只要有分析数据的需求，就会用到机器学习；
 *   关于未来的思考：
@@ -309,6 +302,10 @@ _![](https://static.leiphone.com/uploads/new/article/740_740/201610/58098a477468
 如果要对未来这三点加上一个预测期限的话，分别是 5 年、10 年、15 年。
  
 ![](https://static.leiphone.com/uploads/new/article/740_740/201610/58098c88d09f1.jpg?imageMogr2/format/jpg/quality/90)
+
+
+
+
 
 ## 可解释性
 
