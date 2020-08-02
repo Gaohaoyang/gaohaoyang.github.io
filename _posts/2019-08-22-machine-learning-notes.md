@@ -63,6 +63,49 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=58945047&cid=102752327&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
+
+## PRML
+
+- 经典书籍：模式识别与机器学习
+- 目录
+
+![](https://pic2.zhimg.com/50/v2-e4de96860bf92eca425112054eaa1f57_hd.jpg)
+
+- PRML是模式识别和机器学习领域的经典著作，出版于2007年。该书作者 Christpher M. Bishop 是模式识别和机器学习领域的专家，其1995年所著的“Nerual Networks for Pattern Recognition”也是模式识别、人工神经网络领域的经典著作。
+- 将 Bishop 大神的 PRML 称为机器学习圣经一点也不为过，该书系统地介绍了模式识别和机器学习领域内详细的概念与基础。书中有对概率论基础知识的介绍，也有高阶的线性代数和多元微积分的内容，适合高校的研究生以及人工智能相关的从业人员学习。
+
+### 目录
+
+PRML 的主要内容：
+- 第一章是引子，用曲线拟合让读者对机器学习有个大概理解。
+- 第二章主要是介绍了一下基础的统计方面的知识，包括期望方差的计算、高斯分布的参数估计与理解、高斯分布的性质等。
+- 第三章和第四章主要在讲最基础的线性模型，并且展示了如何将其应用在分类和回归的场景下，贝叶斯方法是整本书的核心。
+- 第五章介绍了神经网络，在线性模型的基础上引入了多层感知机模型，即常说的 BP 网络。
+- 第六章讲的是核方法，核是两个样本的内积，也可以理解为某个希尔伯特空间中由内积定义的“距离”。主要讲了线性模型转成核表达的方式、核的构建以及高斯过程。
+- 第七章是向量机，向量机讲的是贝叶斯模型如何通过先验找到一个稀疏的模型。
+- 第八章是讲的图模型，对变量的独立性、隐变量和参数的区别（这个会在变分贝叶斯中体现）做了很好的阐释。
+- 第九章讲了混合模型和 EM 算法，涉及了隐变量的概念和 EM 算法等。
+- 第十章讲的是变分推断，解决了基于现在的模型的分布假设，推断参数难的问题。
+- 第十一章讲采样方法，介绍了不同采样方法的优缺点，并重点讲了MCMC采样。
+- 第十二章讲主成分分析，是考察多个变量间相关性一种多元统计方法，研究如何通过少数几个主成分来揭示多个变量间的内部结构。
+- 第十三章讲的是序列数据，序列数据的特点及马尔可夫假设等。
+- 第十四章讲的是 Ensemble，包括适应性的 boosting 最著名的 AdaBoost，以及一些其他的融合方法。
+
+### 配套代码
+
+- 源自[Github地址](https://github.com/ctgk/PRML)，目录如下：
+	- [ch1. Introduction](https://nbviewer.jupyter.org/github/ctgk/PRML/blob/master/notebooks/ch01_Introduction.ipynb)
+	- [ch2. Probability Distributions](https://nbviewer.jupyter.org/github/ctgk/PRML/blob/master/notebooks/ch02_Probability_Distributions.ipynb)
+	- [ch3. Linear Models for Regression](https://nbviewer.jupyter.org/github/ctgk/PRML/blob/master/notebooks/ch03_Linear_Models_for_Regression.ipynb)
+	- [ch4. Linear Models for Classification](https://nbviewer.jupyter.org/github/ctgk/PRML/blob/master/notebooks/ch04_Linear_Models_for_Classfication.ipynb)
+	- [ch5. Neural Networks](https://nbviewer.jupyter.org/github/ctgk/PRML/blob/master/notebooks/ch05_Neural_Networks.ipynb)
+	- [ch6. Kernel Methods](https://nbviewer.jupyter.org/github/ctgk/PRML/blob/master/notebooks/ch06_Kernel_Methods.ipynb)
+	- [ch7. Sparse Kernel Machines](https://nbviewer.jupyter.org/github/ctgk/PRML/blob/master/notebooks/ch07_Sparse_Kernel_Machines.ipynb)
+	- [ch9. Mixture Models and EM](https://nbviewer.jupyter.org/github/ctgk/PRML/blob/master/notebooks/ch09_Mixture_Models_and_EM.ipynb)
+	- [ch10. Approximate Inference](https://nbviewer.jupyter.org/github/ctgk/PRML/blob/master/notebooks/ch10_Approximate_Inference.ipynb)
+	- [ch11. Sampling Methods](https://nbviewer.jupyter.org/github/ctgk/PRML/blob/master/notebooks/ch11_Sampling_Methods.ipynb)
+	- [ch12. Continuous Latent Variables](https://nbviewer.jupyter.org/github/ctgk/PRML/blob/master/notebooks/ch12_Continuous_Latent_Variables.ipynb)
+
 # 深度学习
 
 ## 斯坦佛-吴恩达
