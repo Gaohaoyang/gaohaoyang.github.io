@@ -3,7 +3,7 @@ layout: post
 title:  "文本挖掘实战-Text Mining Implementation"
 date:   2019-05-20 13:00:00
 categories: 实战案例
-tags: 生活大爆炸 NLP 自然语言处理 台词 可视化
+tags: 生活大爆炸 NLP 自然语言处理 台词 可视化 身份证 华为 微信
 excerpt: 深入挖掘分析生活大爆炸（Big Bang）的台词信息，看看各个角色的常用词汇有哪些
 author: 鹤啸九天
 mathjax: true
@@ -1334,6 +1334,163 @@ if __name__ == '__main__':
 
 
 
+## 身份证解析
+
+- 【2020-8-3】从身份证号码中提取出生年月日、籍贯信息（具体到区/县）
+- 依赖文件
+    - user.txt：[name card_id]
+    - 行政区划表：身份证行政地区码对照表(2020版).xls, [下载地址](https://download.csdn.net/download/caishenye/12104214)
+- 代码如下：
+
+```python
+import pandas as pd
+from datetime import datetime
+ 
+class IDnumber(object):
+    '''身份证号码类'''
+ 
+    def __init__(self, adcode='-'):
+        #data.loc[:,['name']]
+        df = pd.read_excel(adcode)
+        df.head()
+        conf_dict = {'province':{}, 'address':{}}
+        for idx, item in df.iterrows():
+            #print(idx, item)
+            conf_dict['province'][str(item['pre2'])] = item['province']
+            conf_dict['address'][str(item['pre6'])] = '-'.join(map(str, [item['provincialLevel'], item['prefectureLevel'],item['countyDistrict']]))
+        print(conf_dict['province'])
+        #print(conf_dict['address'])
+        #类属性 IDnumber.address_codes 单元包含了身份证前6位的行政区划代码。
+        self.address_codes = conf_dict['address']
+        #类属性 IDnumber.provinces 单元包含了省级行政区划代码。
+        self.provinces = conf_dict['province']
+        #类属性 IDnumber.weights 储存乘法权重
+        self.weights = (7,9,10,5,8,4,2,1,6,3,7,9,10,5,8,4,2)
+        # 类属性 IDnumber.mod_codes 储存了余数和正确校验码的对应关系
+        self.mod_codes = {0:'1',1:'0',2:'X',3:'9',4:'8',5:'7',6:'6',7:'5',8:'4',9:'3',10:'2'}
+    
+    def extract(self,id=None, name='Null'):
+        self.id = id    # 身份证号
+        self.name = name # 姓名
+        self.native_place = self.get_native_place()	# 籍贯
+        if not self.native_place:
+            self.flag = False
+            return False
+        self.birthday = self.get_birthday()		# 出生日期
+        self.age = self.get_age()			#年龄
+        self.gender = self.get_gender()		# 性别
+        self.flag = False
+        if self.native_place and self.birthday and self.age and self.gender and self.check_CRC():
+            self.flag = True
+ 
+    def get_native_place(self):
+        """从身份证号中检查并获取籍贯"""
+        #print(ID_DIC[Num[0:2]+'0000'],ID_DIC[Num[0:4]+'00'],ID_DIC[Num[0:6]])
+        #result = { k:v for k,v in IDnumber.address_codes.items() if self.id[:6] == k }
+        #result = [IDnumber.address_codes.get(self.id[:2]+'0000','[空]'),
+        #    IDnumber.address_codes.get(self.id[:4]+'00','[空]'),
+        #    IDnumber.address_codes.get(self.id[:6],'[空]')]
+        try:
+            result = self.address_codes.get(self.id[:6], '[空]')
+        except Exception as err:
+            print(self.name, self.id, err)
+        if result in ('[空]'):
+            return False
+        return result
+ 
+    def get_birthday(self):
+        """从身份证号中检查并获取出生日期"""
+        try:
+            cur_y = datetime.now().year		#当前年
+            cur_m = datetime.now().month	#当前月
+            cur_d = datetime.now().day		#当前日
+            year = int(self.id[6:10])		#出生年
+            mon = int(self.id[10:12])		#出生月
+            day = int(self.id[12:14])		#出生日
+            if year not in range(cur_y-120,cur_y+1):    # 检查年份是否在120年内
+                print("出生年份不在120年之内。")
+                return False
+            if mon not in range(1,13):  # 检查月份
+                print("出生月份不合逻辑。")
+                return False
+            if day not in range(1,32):  # 检查日
+                print("出生日不合逻辑。")
+                return False
+            if mon == 2 and day > 29:  # 检查日
+                print("出生日期为2月30日或者31日。")
+                return False
+            if year % 400 != 0 and (year % 4 != 0 or year % 100 == 0):	# 非闰年时
+                if mon == 2 and day == 29 :
+                    print("出生于非闰年的2月29日。")
+                    return False
+            return self.id[6:10] + '-' + self.id[10:12] + '-' + self.id[12:14]
+        except:
+            print("校验出生日期时发现，出生日期中有非数字字符。")
+            return False
+ 
+    def get_age(self):
+        """从身份证号中检查并获取年龄"""
+        try:
+            cur_y = datetime.now().year		#当前年
+            cur_m = datetime.now().month	#当前月
+            cur_d = datetime.now().day		#当前日
+            year = int(self.id[6:10])		#出生年
+            mon = int(self.id[10:12])		#出生月
+            day = int(self.id[12:14])		#出生日
+            return cur_y - year -int((cur_m,cur_d) < (mon,day))
+        except:
+            print("计算年龄时发现出生日期内有非数字字符。")
+            return False
+ 
+    def get_gender(self):
+        "检查身份证号中的顺序码并获取性别"
+        try:
+            if int(self.id[14:17]) == 0:
+                print("顺序码为“000”。")
+                return False
+            return '男' if int(self.id[16:17]) % 2 != 0 else '女'
+        except:
+            print("顺序码中有非数字字符。")
+            return False
+ 
+    def check_CRC(self):
+        """检查校验码是否正确"""
+        try:
+            he = sum([self.weights[i] * int(self.id[i]) for i in range(0,17) if self.id[i]])
+            # 获取正确的校验码
+            crc_str = [self.mod_codes[i] for i in self.mod_codes if he % 11 == i][0]
+            if (self.id[-1] == 'x' and crc_str == 'X') or self.id[17] == crc_str:
+                return True
+            else:
+                print("校验码错误。最后一位是" + self.id[17] + "，应该是" + crc_str)
+                return False
+        except:
+            print("身份证号码前17位中有非数字字符,或者身份证号码长度不够18位。")
+            return False
+ 
+    def show(self):
+        """显示身份证是否存在，及有关信息"""
+        if self.flag == True:
+            #print("姓名：\t身份证：\t性别：\t出生日期：\t年龄：\t籍贯："
+            print("\t".join([self.name, self.id, self.gender, self.birthday, str(self.age), self.native_place]))
+        else:
+            # print("———————————————————————————————————")
+            print("{}的身份证号码{}不存在！".format(self.name, self.id))
+ 
+if __name__ == '__main__':
+    # 格式【name card_id】
+    data = pd.read_table('user.txt')
+    print(data)
+    # 下载地址: https://download.csdn.net/download/caishenye/12104214
+    adcode = './身份证行政地区码对照表(2020版).xls'
+    my_parse = IDnumber(adcode=adcode)
+    #tests = ['1234v31987061334778','999999195611283460','14445620181115001','421126198702042817']
+    tests = data.loc[:,['name','id']]
+    print(tests)
+    for m in tests.values.tolist():
+        res = my_parse.extract(name=m[0], id=m[1])
+        my_parse.show()
+```
 
 
 
