@@ -14,6 +14,7 @@ mathjax: true
 
 # 总结
 
+- [Innovating Faster on Personalization Algorithms at Netflix Using Interleaving](https://medium.com/netflix-techblog/interleaving-in-online-experiments-at-netflix-a04ee392ec55)
 
 # 数学知识
 
@@ -187,7 +188,10 @@ P(X<c) < α 其中X为检验统计量，c为临界值，α为显著性水平。
 
 # interleaving
 
-- 定性评估
+- abtest的好处是能够对多个策略的效果差异给出定量的评估，但是也存在一些问题，比如，如果两个策略的效果差异较小，abtest容易给出波动较大的结果，需要较长时间（一般是一周）才能判断结果，会导致效果迭代速度较慢。
+- 为了解决这个问题，采用interleaving效果评估方式作为补充。
+- Interleaving方式的好处是所需流量较小，灵敏度较高，一般24小时之内可以给出结论，但是它**只能给定性结论而不能给定量结论**。
+- Interleaving的基本思想是把两个策略的结果混合在一起，通过统计分析用户选择哪个策略的概率更大。具体列表混合的实现方式有多种。下面介绍比较简单使用的一种，叫Balanced方式。
 
 # 结束
 
