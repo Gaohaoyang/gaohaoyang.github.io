@@ -3,7 +3,7 @@ layout: post
 title:  BERT及预训练语言模型-BERT-and-Language-Model
 date:   2019-12-10 16:52:00
 categories: 深度学习 
-tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 
+tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏
 excerpt: 预训练语言模型及BERT知识点汇总
 mathjax: true
 ---
