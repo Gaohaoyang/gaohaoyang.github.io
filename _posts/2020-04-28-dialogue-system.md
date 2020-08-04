@@ -142,6 +142,33 @@ mathjax: true
   - 重点提Reinforcement Learning
 
 
+### 有限状态机FSM
+
+- 有限状态机（Finite-state machine, FSM），又称有限状态自动机，简称状态机，是表示有限个状态以及在这些状态之间的转移和动作等行为的数学模型。FSM是一种算法思想，简单而言，有限状态机由一组状态、一个初始状态、输入和根据输入及现有状态转换为下一个状态的转换函数组成。
+- [Transitions](https://github.com/pytransitions/transitions)
+- [Python的Transitions库实现有限状态机(FSM)](https://www.jianshu.com/p/decf86e0e420)
+
+```python
+from transitions.extensions import GraphMachine
+
+states = ['first', 'second']
+transitions = [
+    ['any_trigger', 'first', 'first'],
+    ['anything', '*', 'second'],
+]
+
+machine = GraphMachine(states=states, transitions=transitions, initial='first',
+                       auto_transitions=False, show_conditions=True)
+
+machine.get_graph().draw('fsm.png', prog='dot')
+from IPython.display import Image
+Image('fsm.png')
+```
+- 结果
+![](https://upload-images.jianshu.io/upload_images/618241-70acdf59c5f312c8.png)
+
+
+
 ## 知识型对话
 
 
