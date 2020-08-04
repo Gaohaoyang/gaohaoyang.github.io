@@ -113,17 +113,10 @@ saved_model_cli show --dir model_dir_path --all
 - [参考链接](https://zhuanlan.zhihu.com/p/55600911)
 - Tensorflow提供了一个Java API（本质上是Java封装了C++的动态库）, 允许在Java可以很方便的加载SavedModel, 并调用模型推理。
     - 添加依赖
-        - 在maven的pom.xml中添加依赖，此处tensorflow的版本最好与python训练版本一致。
-```xml
-<dependency>
-  <groupId>org.tensorflow</groupId>
-  <artifactId>tensorflow</artifactId>
-  <version>1.11.0</version>
-</dependency>
-```
+        - 在maven的pom.xml中添加依赖（如下A），此处tensorflow的版本最好与python训练版本一致。
     - Load & Predict
         - 加载模型，调用模型在线预测。以fast text模型为例
-        - 预测代码如下
+        - 预测代码（如下B）
     - Pros & Cons
         - Java 端和 Python 端调用模型推理，结果一致，可以满足基本使用
     - 适用场景
@@ -136,7 +129,18 @@ saved_model_cli show --dir model_dir_path --all
         - API 不在 Tensorflow稳定性保障范围内
         - 资料匮乏，google投入的维护少
 
-预测代码：
+A 依赖文件
+
+```xml
+<dependency>
+  <groupId>org.tensorflow</groupId>
+  <artifactId>tensorflow</artifactId>
+  <version>1.11.0</version>
+</dependency>
+```
+
+
+B 预测代码：
 
 ```java
 package model;
