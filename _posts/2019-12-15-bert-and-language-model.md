@@ -261,9 +261,144 @@ input = "unaffable"
 tokenizer_output = ["un", "##aff", "##able"]
 ```
 
+# 模型蒸馏
+ 
+- 模型压缩和加速四个技术是**设计高效小型网络**、**剪枝**、**量化**和**蒸馏**
+- 2015年，Hinton等人首次提出神经网络中的知识蒸馏(`Knowledge Distillation`, KD)技术/概念。较前者的一些工作，这是一个通用而简单的、不同的模型压缩技术。
+    - 论文：[Distilling the Knowledge in a Neural Network](https://arxiv.org/pdf/1503.02531.pdf)
+- ![](https://pic4.zhimg.com/v2-5ae8936f30eaef7f0d17d265adbd4fd1_1440w.jpg?source=172ae18b)
+- 蒸馏，就是知识蒸馏，将教师网络(teacher network)的知识迁移到学生网络(student network)上，使得学生网络的性能表现如教师网络一般，这样就可以愉快地将学生网络部署到移动手机和其它边缘设备上。
+    - 第一，利用大规模数据训练一个教师网络；
+    - 第二，利用大规模数据训练一个学生网络，这时候的损失函数由两部分组成：
+        - 一部分是拿教师和学生网络的输出logits计算蒸馏损失/KL散度，见[2]中的(4)式
+        - 一部分是拿学生网络的输出和数据标签计算交叉熵损失。
+- 通常会进行两种方向的蒸馏
+    - 一种是from deep and large to shallow and small network
+    - 另一种是from ensembles of classifiers to individual classifier。
+
+![](https://pic1.zhimg.com/80/v2-891ca916ce38cae61af55bd25f9f1694_720w.jpg)
+
+
+过去一直follow着transformer系列模型的进展，从BERT到GPT2再到XLNet。然而随着模型体积增大，线上性能也越来越差，所以决定开一条新线，开始follow模型压缩之模型蒸馏的故事线。
+ 
+Hinton在NIPS2014[\[1\]](https://zhuanlan.zhihu.com/p/71986772#ref_1)提出了`知识蒸馏`（Knowledge Distillation）的概念，旨在把一个大模型或者多个模型ensemble学到的知识迁移到另一个轻量级单模型上，方便部署。简单的说就是用新的小模型去学习大模型的预测结果，改变一下目标函数。听起来是不难，但在实践中小模型真的能拟合那么好吗？所以还是要多看看别人家的实验，掌握一些trick。
+ 
+## 0. 名词解释
+--------
+ 
+*   teacher - 原始模型或模型ensemble
+*   student - 新模型
+*   transfer set - 用来迁移teacher知识、训练student的数据集合
+*   soft target - teacher输出的预测结果（一般是softmax之后的概率）
+*   hard target - 样本原本的标签
+*   temperature - 蒸馏目标函数中的超参数
+*   born-again network - 蒸馏的一种，指student和teacher的结构和尺寸完全一样
+*   teacher annealing - 防止student的表现被teacher限制，在蒸馏时逐渐减少soft targets的权重
+ 
+## 1. 基本思想
+--------
+
+### 知识蒸馏方法
+
+- 第一步，训练Net-T；
+- 第二步，高温蒸馏：在高温T下，蒸馏Net-T的知识到Net-S
+
+- [知识蒸馏示意图](https://nervanasystems.github.io/distiller/knowledge_distillation.html)
+![](https://pic3.zhimg.com/80/v2-d01f5142d06aa27bc5e207831b5131d9_720w.jpg)
+
+### Teacher Model和Student Model
+
+- 知识蒸馏使用的是Teacher—Student模型，其中teacher是“知识”的输出者，student是“知识”的接受者。知识蒸馏的过程分为2个阶段:
+    - 原始模型训练: 训练"Teacher模型", 简称为Net-T，它的特点是模型相对复杂，也可以由多个分别训练的模型集成而成。我们对"Teacher模型"不作任何关于模型架构、参数量、是否集成方面的限制，唯一的要求就是，对于输入X, 其都能输出Y，其中Y经过softmax的映射，输出值对应相应类别的概率值。
+    - 精简模型训练: 训练"Student模型", 简称为Net-S，它是参数量较小、模型结构相对简单的单模型。同样的，对于输入X，其都能输出Y，Y经过softmax映射后同样能输出对应相应类别的概率值。
+### 知识蒸馏的关键点
+
+- 如果回归机器学习最最基础的理论，我们可以很清楚地意识到一点(而这一点往往在我们深入研究机器学习之后被忽略): 机器学习最根本的目的在于训练出在某个问题上泛化能力强的模型。
+    - 泛化能力强: 在某问题的所有数据上都能很好地反应输入和输出之间的关系，无论是训练数据，还是测试数据，还是任何属于该问题的未知数据。
+- 而现实中，由于我们不可能收集到某问题的所有数据来作为训练数据，并且新数据总是在源源不断的产生，因此我们只能退而求其次，训练目标变成在已有的训练数据集上建模输入和输出之间的关系。由于训练数据集是对真实数据分布情况的采样，训练数据集上的最优解往往会多少偏离真正的最优解(这里的讨论不考虑模型容量)。
+- 而在知识蒸馏时，由于我们已经有了一个泛化能力较强的Net-T，我们在利用Net-T来蒸馏训练Net-S时，可以直接让Net-S去学习Net-T的泛化能力。
+
+- 一个很直白且高效的迁移泛化能力的方法就是使用softmax层输出的类别的概率来作为“soft target”。
+    - 传统training过程(hard targets): 对ground truth求极大似然
+    - KD的training过程(soft targets): 用large model的class probabilities作为soft targets
+
+- softmax层的输出，除了正例之外，负标签也带有大量的信息，比如某些负标签对应的概率远远大于其他负标签。而在传统的训练过程(hard target)中，所有负标签都被统一对待。也就是说，KD的训练方式使得每个样本给Net-S带来的信息量大于传统的训练方式。
+
+- ![](https://pic2.zhimg.com/80/v2-a9e90626c5ac6f64a7e04c89f6ce3013_720w.jpg)
+
+### 1.1 为什么蒸馏可以work
+ 
+好模型的目标不是拟合训练数据，而是学习如何泛化到新的数据。所以蒸馏的目标是让student学习到teacher的泛化能力，理论上得到的结果会比单纯拟合训练数据的student要好。另外，对于分类任务，如果soft targets的熵比hard targets高，那显然student会学习到更多的信息。
+
+### 1.2 蒸馏时的softmax
+ 
+![[公式]](https://www.zhihu.com/equation?tex=q_i+%3D+%5Cfrac%7Bexp%28z_i%2FT%29%7D%7B%5Csum_%7Bj%7D%7Bexp%28z_j%2FT%29%7D%7D+%5C%5C)
+ 
+比之前的softmax多了一个参数T（temperature），T越大产生的概率分布越平滑。
+ 
+有两种蒸馏的目标函数：
+- 1.  只使用soft targets：在蒸馏时teacher使用新的softmax产生soft targets；student使用新的softmax在transfer set上学习，和teacher使用相同的T。
+- 2.  同时使用soft和hard targets：student的目标函数是hard target和soft target目标函数的加权平均，使用hard target时T=1，soft target时T和teacher的一样。Hinton的经验是给hard target的权重小一点。另外要注意的是，因为在求梯度（导数）时新的目标函数会导致梯度是以前的 ![[公式]](https://www.zhihu.com/equation?tex=1%2FT%5E2) ，所以要再乘上 ![[公式]](https://www.zhihu.com/equation?tex=T%5E2) ，不然T变了的话hard target不减小（T=1），但soft target会变。
+- 3.  直接用logits的MSE（是1的special case）
+
+### 1.3 温度代表了什么，如何选取合适的温度？
+
+- 温度: T就是温度
+    - ![](https://www.zhihu.com/equation?tex=q_%7Bi%7D%3D%5Cfrac%7B%5Cexp+%5Cleft%28z_%7Bi%7D+%2F+T%5Cright%29%7D%7B%5Csum_%7Bj%7D+%5Cexp+%5Cleft%28z_%7Bj%7D+%2F+T%5Cright%29%7D)
+    -  T越高，softmax的output probability distribution越趋于平滑，其分布的熵越大，负标签携带的信息会被相对地放大，模型训练将更加关注负标签。
+- 温度的高低改变的是Net-S训练过程中对负标签的关注程度: 温度较低时，对负标签的关注，尤其是那些显著低于平均值的负标签的关注较少；而温度较高时，负标签相关的值会相对增大，Net-S会相对多地关注到负标签。
+- 实际上，负标签中包含一定的信息，尤其是那些值显著高于平均值的负标签。但由于Net-T的训练过程决定了负标签部分比较noisy，并且负标签的值越低，其信息就越不可靠。因此温度的选取比较empirical，本质上就是在下面两件事之中取舍:
+    - 从有部分信息量的负标签中学习 --> 温度要高一些
+    - 防止受负标签中噪声的影响 -->温度要低一些
+- 总的来说，T的选择和Net-S的大小有关，Net-S参数量比较小的时候，相对比较低的温度就可以了（因为参数量小的模型不能capture all knowledge，所以可以适当忽略掉一些负标签的信息）
+
+## 2. 蒸馏经验
+--------
+ 
+### 2.1 Transfer Set和Soft target
+ 
+*   实验证实，Soft target可以起到正则化的作用（不用soft target的时候需要early stopping，用soft target后稳定收敛）
+*   数据过少的话无法完整表达teacher学到的知识，需要增加无监督数据（用teacher的预测作为标签）或进行数据增强，可以使用的方法有：1.增加\[MASK\]，2.用相同POS标签的词替换，2.随机n-gram采样，具体步骤参考文献2
+
+### 2.2 超参数T
+
+*   T越大越能学到teacher模型的泛化信息。比如MNIST在对2的手写图片分类时，可能给2分配0.9的置信度，3是1e-6，7是1e-9，从这个分布可以看出2和3有一定的相似度，因此这种时候可以调大T，让概率分布更平滑，展示teacher更多的泛化能力
+*   T可以尝试1～20之间
+ 
+### 2.3 BERT蒸馏
+ 
+*   蒸馏单BERT[\[2\]](https://zhuanlan.zhihu.com/p/71986772#ref_2)：模型架构：单层BiLSTM；目标函数：logits的MSE
+*   蒸馏Ensemble BERT[\[3\]](https://zhuanlan.zhihu.com/p/71986772#ref_3)：模型架构：BERT；目标函数：soft prob+hard prob；方法：MT-DNN。该论文用给每个任务训练多个MT-DNN，取soft target的平均，最后再训一个MT-DNN，效果比纯BERT好3.2%。但感觉该研究应该是刷榜的结晶，平常应该没人去训BERT ensemble吧。。
+*   BAM[\[4\]](https://zhuanlan.zhihu.com/p/71986772#ref_4)：Born-aging Multi-task。用多个任务的Single BERT，蒸馏MT BERT；目标函数：多任务loss的和；方法：在mini-batch中打乱多个任务的数据，任务采样概率为 ![[公式]](https://www.zhihu.com/equation?tex=%7CD_%5Ctau%7C%5E%7B0.75%7D) ，防止某个任务数据过多dominate模型、teacher annealing、layerwise-learning-rate，LR由输出层到输出层递减，因为前面的层需要学习到general features。最终student在大部分任务上超过teacher，而且上面提到的tricks也提供了不少帮助。文献4还不错，推荐阅读一下。
+*   TinyBERT[\[5\]](https://zhuanlan.zhihu.com/p/71986772#ref_5)：截止201910的SOTA。利用Two-stage方法，分别对预训练阶段和精调阶段的BERT进行蒸馏，并且不同层都设计了损失函数。与其他模型的对比如下：
+ 
+![](https://pic1.zhimg.com/80/v2-06423040ac6234d719d80cab1820adbb_720w.jpg)
+ 
+ 
+## 3. 总结
+------
+ 
+再重点强调一下，student学习的是teacher的泛化能力，而不是“过拟合训练数据”。
+ 
+目前读的论文不是很多，但个人感觉还是有些炼丹的感觉。文献2中的BERT蒸馏任务，虽然比无蒸馏条件下有将近5个点的提升，但作者没有研究到底是因为数据增多还是蒸馏带来的提升。而且仍然距BERT有很大的距离，虽然速度提升了，但效果并不能上线。文献3中虽然有了比BERT更好的效果，但并没有用轻量的结构，性能还是不变。
+ 
+接下来我会花时间读更多的论文，写新文章或把tricks加进这篇文章里，同学们有好的经验也可以说一下。
+
+补充一些资源，还没仔细看：
+1.  [dkozlov/awesome-knowledge-distillation](https://link.zhihu.com/?target=https%3A//github.com/dkozlov/awesome-knowledge-distillation)
+2.  [Distilling BERT Models with spaCy](https://link.zhihu.com/?target=http%3A//www.nlp.town/blog/distilling-bert/%3Futm_campaign%3DNLP%2520News%26utm_medium%3Demail%26utm_source%3DRevue%2520newsletter)
+3.  [DistilBERT](https://link.zhihu.com/?target=https%3A//medium.com/huggingface/distilbert-8cf3380435b5)
+4.  [Multilingual MiniBERT: Tsai et al. (EMNLP 2019)](https://link.zhihu.com/?target=https%3A//arxiv.org/pdf/1909.00100)
+
+
+
+
 # 资料
 
 - [Bert时代的创新（应用篇）：Bert在NLP各领域的应用进展](https://zhuanlan.zhihu.com/p/68446772)
+- 【2019-10-22】[【DL】模型蒸馏Distillation](https://zhuanlan.zhihu.com/p/71986772)
+- [从入门到放弃：深度学习中的模型蒸馏技术](https://zhuanlan.zhihu.com/p/93287223?from_voters_page=true)
+- [知识蒸馏(Knowledge Distillation) 经典之作](https://zhuanlan.zhihu.com/p/102038521)
 
 
 
