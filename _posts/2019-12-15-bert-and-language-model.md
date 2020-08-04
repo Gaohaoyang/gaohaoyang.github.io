@@ -262,7 +262,28 @@ tokenizer_output = ["un", "##aff", "##able"]
 ```
 
 # 模型蒸馏
- 
+
+
+## 背景
+
+![](https://pics3.baidu.com/feed/4b90f603738da977703daa3003be0a1c8718e394.jpeg)
+
+- 上图展示了很多基于 Transformer 的模型，模型下方的数字对应了模型的参数数量，单位是百万，可以看到这些模型变得越来越大。这些模型的体积也限制了其在现实世界中的使用，因为各方面因素：
+    - 这种模型的训练花费大量的金钱，需要使用昂贵的 GPU 服务器才能提供大规模的服务。
+    - 模型太大导致 inference 的时间也变长，不能用于一些实时性要求高的任务中。
+    - 现在有不少机器学习任务需要运行在终端上，例如智能手机，这种情况也必须使用轻量级的模型。
+- 基于以上的原因，不少研究开始针对 BERT 模型压缩进行，常见的模型压缩方法有以下几种：
+    - 模型蒸馏 Distillation，使用大模型的学到的知识训练小模型，从而让小模型具有大模型的泛化能力。
+    - 量化 Quantization，降低大模型的精度，减小模型。
+    - 剪枝 Pruning，去掉模型中作用比较小的连接。
+    - 参数共享，共享网络中部分参数，降低模型参数数量。
+- ALBERT 也是一种 BERT 压缩方法，主要是用了参数共享和矩阵分解的方法压缩 BERT，但是 ALBERT 只减少模型的参数，并不能减少其 inference 的时间。
+- 两种使用模型蒸馏压缩 BERT 的算法
+    - 第一种是 DistilBERT，将 12 层的 BERT-base 模型蒸馏到 6 层的 BERT 模型；
+    - 第二种是将 BERT 模型蒸馏到 BiLSTM 模型。
+- 更多内容：[BERT 模型蒸馏 Distillation BERT](https://baijiahao.baidu.com/s?id=1653807606350367881&wfr=spider&for=pc)
+
+
 - 模型压缩和加速四个技术是**设计高效小型网络**、**剪枝**、**量化**和**蒸馏**
 - 2015年，Hinton等人首次提出神经网络中的知识蒸馏(`Knowledge Distillation`, KD)技术/概念。较前者的一些工作，这是一个通用而简单的、不同的模型压缩技术。
     - 论文：[Distilling the Knowledge in a Neural Network](https://arxiv.org/pdf/1503.02531.pdf)
@@ -304,6 +325,7 @@ Hinton在NIPS2014[\[1\]](https://zhuanlan.zhihu.com/p/71986772#ref_1)提出了`�
 - 第二步，高温蒸馏：在高温T下，蒸馏Net-T的知识到Net-S
 
 - [知识蒸馏示意图](https://nervanasystems.github.io/distiller/knowledge_distillation.html)
+![](https://img-blog.csdn.net/20181015215000704?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hiaW53b3JsZA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 ![](https://pic3.zhimg.com/80/v2-d01f5142d06aa27bc5e207831b5131d9_720w.jpg)
 
 ### Teacher Model和Student Model
