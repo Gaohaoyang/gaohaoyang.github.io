@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "优化算法笔记"
+title:  "优化算法笔记-optimization"
 date:   2020-08-02 00:23:00
 categories: 机器学习
 tags: 最优化 梯度下降 牛顿法
