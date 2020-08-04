@@ -306,6 +306,20 @@ jt -t grade3 -f fira -fs 13 -cellw 90% -ofs 11 -dfs 11 -T
    - source ~/wqw/bin/activate
    - nohup jupyter notebook --ip=`ifconfig eth | awk '/inet/{print $2}'` &>log.txt &
 
+
+## 显示图片
+
+- 【2020-8-4】两种方法，代码如下：
+```python
+img_file = 'fsm.png'
+# （1）pillow包
+from PIL import Image
+Image.open(img_file)
+# （2）Ipython包
+from IPython.display import Image
+Image(img_file)
+```
+
 # python开发环境
 
 
