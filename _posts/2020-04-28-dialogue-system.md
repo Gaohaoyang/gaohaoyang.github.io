@@ -3,7 +3,7 @@ layout: post
 title:  "对话系统-Dialogue System"
 date:   2020-04-28 21:45:00
 categories: 深度学习
-tags: 深度学习 NLP 对话系统 QA 多轮 闲聊 沈向洋
+tags: 深度学习 NLP 对话系统 QA 多轮 闲聊 沈向洋 FSM 有限状态机
 excerpt: 对话系统技术图谱
 author: 鹤啸九天
 mathjax: true
@@ -144,7 +144,7 @@ mathjax: true
 
 ### 有限状态机FSM
 
-- 有限状态机（Finite-state machine, FSM），又称有限状态自动机，简称状态机，是表示有限个状态以及在这些状态之间的转移和动作等行为的数学模型。FSM是一种算法思想，简单而言，有限状态机由一组状态、一个初始状态、输入和根据输入及现有状态转换为下一个状态的转换函数组成。
+- `有限状态机`（Finite-state machine, `FSM`），又称有限状态自动机，简称状态机，是表示有限个状态以及在这些状态之间的转移和动作等行为的数学模型。FSM是一种算法思想，简单而言，有限状态机由一组状态、一个初始状态、输入和根据输入及现有状态转换为下一个状态的转换函数组成。
 
 - 在描述有限状态机时，状态、事件、转换和动作是经常会碰到的几个基本概念。
   - 状态（State）　指的是对象在其生命周期中的一种状况，处于某个特定状态中的对象必然会满足某些条件、执行某些动作或者是等待某些事件。
@@ -163,6 +163,13 @@ mathjax: true
 - [Python的Transitions库实现有限状态机(FSM)](https://www.jianshu.com/p/decf86e0e420)
 
 ![](https://upload-images.jianshu.io/upload_images/618241-70acdf59c5f312c8.png)
+
+- 安装方法
+
+```shell
+conda install transitions graphviz
+```
+
 
 - Machine示例
 
@@ -233,7 +240,7 @@ Image('fsm.png')
 
 **java版本**
 
-- [FAM-Java](https://gitlab.com/tengbai/fsm-java)，项目中共有4中状态机的实现方式。参考：[Java有限状态机4种实现对比](https://zhuanlan.zhihu.com/p/97442825)
+- [FSM-Java](https://gitlab.com/tengbai/fsm-java)，项目中共有4中状态机的实现方式。参考：[Java有限状态机4种实现对比](https://zhuanlan.zhihu.com/p/97442825)
   - 基于Switch语句实现的有限状态机，代码在master分支
   - 基于State模式实现的有限状态机。代码在state-pattern分支
   - 基于状态集合实现的有限状态机。代码在collection-state分支
@@ -244,11 +251,98 @@ Image('fsm.png')
 
 ## 知识型对话
 
-
+- 待补充
 
 ## 闲聊型对话
 
+- 待补充
 
+
+## 对话机器人工程实现
+
+- 各类聊天机器人框架
+
+### [Chatterbot](https://github.com/gunthercox/ChatterBot)
+
+![](https://camo.githubusercontent.com/b6aaad134a52f6a76001c91321fe81a2c889c45f/68747470733a2f2f692e696d6775722e636f6d2f623353436d47542e706e67)
+
+- 安装
+  - pip install chatterbot
+- 使用
+
+```python
+from chatterbot import ChatBot
+from chatterbot.trainers import ChatterBotCorpusTrainer
+
+chatbot = ChatBot('Ron Obvious')
+
+# Create a new trainer for the chatbot
+trainer = ChatterBotCorpusTrainer(chatbot)
+
+# Train the chatbot based on the english corpus
+trainer.train("chatterbot.corpus.english")
+
+# Get a response to an input statement
+chatbot.get_response("Hello, how are you today?")
+```
+
+An example of typical input would be something like this:
+
+>- user: Good morning! How are you doing?
+>- bot: I am doing very well, thank you for asking.
+>- user: You're welcome.
+>- bot: Do you like hats?
+
+
+### Rasa
+
+- Rasa是一个开源机器学习框架，用于构建上下文AI助手和聊天机器人。
+  - 安装：
+    - pip install rasa_nlu
+    - pip install rasa_core[tensorflow]
+- Rasa有两个主要模块：
+  - Rasa NLU ：用于理解用户消息，包括意图识别和实体识别，它会把用户的输入转换为结构化的数据。
+    - 支持不同的 Pipeline，其后端实现可支持spaCy、MITIE、MITIE + sklearn 以及 tensorflow，其中 spaCy 是官方推荐的，另外值得注意的是从 0.12 版本后，MITIE 就被列入 Deprecated 了。
+    - Rasa提供了数据标注平台: [rasa-nlu-trainer](https://rasahq.github.io/rasa-nlu-trainer/)
+  - Rasa Core：对话管理平台，用于举行对话和决定下一步做什么。Rasa Core是用于构建AI助手的对话引擎，是开源Rasa框架的一部分。
+    - 负责协调聊天机器人的各个模块，起到维护人机对话的结构和状态的作用。对话管理模块涉及到的关键技术包括对话行为识别、对话状态识别、对话策略学习以及行为预测、对话奖励等。
+    - Rasa消息响应过程
+      - ![](https://upload-images.jianshu.io/upload_images/3285850-ece175b3a873ff90)
+      - 首先，将用户输入的Message传递到Interpreter(NLU模块)，该模块负责识别Message中的"意图(intent)“和提取所有"实体”(entity)数据；
+      - 其次，Rasa Core会将Interpreter提取到的意图和识别传给Tracker对象，该对象的主要作用是跟踪会话状态(conversation state)；
+      - 第三，利用policy记录Tracker对象的当前状态，并选择执行相应的action，其中，这个action是被记录在Track对象中的；
+      - 最后，将执行action返回的结果输出即完成一次人机交互。
+    - Rasa Core包含两个内容： stories和domain。
+      - domain.yml：包括对话系统所适用的领域，包含意图集合，实体集合和相应集合，相当于大脑框架，指定了意图`intents`， 实体`entities`， 插槽`slots`以及动作`actions`。
+        - intents和entities与Rasa NLU模型训练样本中标记的一致。slot与标记的entities一致，actions为对话机器人对应用户的请求作出的动作。
+        - 此外，domain.yml中的templates部分针对utter_类型action定义了模板消息，便于对话机器人对相关动作自动回复。
+      - story.md：训练数据集合，原始对话在domain中的映射。
+        - Stories
+          - stories可以理解为对话的场景流程，需要告诉机器多轮场景是怎样的。Story样本数据就是Rasa Core对话系统要训练的样本，它描述了人机对话过程中可能出现的故事情节，通过对Stories样本和domain的训练得到人机对话系统所需的对话模型。
+          - Rasa Core中提供了rasa_core.visualize模块可视化故事，有利于掌握设计故事流程。
+
+- Rasa X是一个工具，可帮助您构建、改进和部署由Rasa框架提供支持的AI Assistants。 Rasa X包括用户界面和REST API。
+  - ![](https://upload-images.jianshu.io/upload_images/3285850-26dd1db4512e05ac)
+
+- 测试效果
+
+- 测试命令
+>python -m rasa_core.run -d models/chat1 -u models/nlu/model_20190820-105546
+- 参数解释;
+  - -d：modeldir 指定对话模型路径（即Rasa_core训练的模型路径）
+  - -u：Rasa NLU训练的模型路径
+  - --port：指定Rasa Core Web应用运行的端口号
+  - --credentials：指定通道（input channels）属性
+  - endpoints：用于指定Rasa Core连接其他web server的url地址，比如nlu web
+  - -o：指定log日志文件输出路径
+  - --debug：打印调试信息
+
+![](https://upload-images.jianshu.io/upload_images/3285850-e7e8222092a723d7)
+
+- 参考：
+  - [Rasa 聊天机器人框架使用](https://www.jianshu.com/p/ad11f5815447)
+  - Rasa官方文档： [Build contextual chatbots and AI assistants with Rasa](https://rasa.com/docs/rasa/)
+  - github地址：[RasaHQ/rasa](https://github.com/RasaHQ/rasa)
 
 
 ## 资料
