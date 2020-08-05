@@ -19,11 +19,42 @@ mathjax: true
 - 在机器学习的评估指标中，AUC是一个最常见也是最常用的指标之一。
 - AUC本身的定义是基于几何的，但是其意义十分重要，应用十分广泛。
 
+## 总结
+
+- auc只能用于binary classifier 评价
+- 分类器只需要计算出预测概率分数，不需要自己设置threshold。 一个threshold会算出一个点，一般会自动尝试所有threshold，最后形成一个曲线。以下就不考虑threshold。
+- Auc变化其实等价于左上角的面积（绿色部分）变化。 这个面积和两类数据的概率分布的重叠面积成正比 （容易分错类的部分）。 根各数据分布的重叠部分成正比。（这个数据不一定是原始数据，而是通过特征工程和模型高纬投影后的，各类数据分布）好的分类器，把两类分的很开，概率分布重叠小，左上面积小，auc大。最坏的情况是随机，概率分布完全重叠，auc是直线。
+- ![](https://pic3.zhimg.com/80/v2-ee0d1b124bae822d1e9bb5784d63e051_720w.jpg)
+    - 转自：知乎[xixihaha912](https://www.zhihu.com/question/39840928/answer/342874215)
+
+## ROC
+
+- 在试图弄懂AUC和ROC曲线之前，一定要彻底理解混淆矩阵的定义
+- 混淆矩阵中有着Positive、Negative、True、False的概念，其意义如下：
+    - 称预测类别为1的为Positive（阳性），预测类别为0的为Negative（阴性）。
+    - 预测正确的为True（真），预测错误的为False（伪）。
+- 对上述概念进行组合，就产生了如下的混淆矩阵：
+    - ![](https://pic1.zhimg.com/80/v2-a253b01cf7f141b9ad11eefdf3cf58d3_720w.jpg?source=1940ef5c)
+- 由此引出True Positive Rate（真阳率）、False Positive（伪阳率）两个概念
+    - ![](https://www.zhihu.com/equation?tex=TPRate%3D%5Cfrac%7BTP%7D%7BTP%2BFN%7D)
+- 其实TPRate就是TP除以TP所在的列，FPRate就是FP除以FP所在的列，二者意义如下：
+    - TPRate的意义是所有真实类别为1的样本中，预测类别为1的比例。
+    - FPRate的意义是所有真实类别为0的样本中，预测类别为1的比例。
+- AUC即ROC曲线下的面积，而ROC曲线的横轴是FPRate，纵轴是TPRate，当二者相等时，即y=x，如下图:
+    - ![](https://pic3.zhimg.com/80/v2-41b0ea9ac4ae69eb2b09ccb69d01e083_720w.jpg?source=1940ef5c)
+    - 分类器对于正例和负例毫无区分能力，和抛硬币没什么区别——最差情况
+    - 认为AUC的最小值为0.5（当然也存在预测相反这种极端的情况，AUC小于0.5，这种情况相当于分类器总是把对的说成错的，错的认为是对的，那么只要把预测类别取反，便得到了一个AUC大于0.5的分类器）
+- 希望得到的效果
+    - 对于真实类别为1的样本，分类器预测为1的概率（即TPRate），要大于真实类别为0而预测类别为1的概率（即FPRate），即y＞x
+    - ![](https://pic2.zhimg.com/80/v2-1dbbadf0c8c8d83aa9b1caafd98758a2_720w.jpg?source=1940ef5c)
+- 最理想：既没有真实类别为1而错分为0的样本——TPRate一直为1，也没有真实类别为0而错分为1的样本——FP rate一直为0，AUC为1，这便是AUC的极大值。
+    - 摘自：[如何理解机器学习和统计中的AUC？](https://www.zhihu.com/question/39840928/answer/241440370)
+
 ## AUC是什么
 
-在统计和机器学习中，常常用AUC来评估二分类模型的性能。AUC的全称是 area under the curve，即曲线下的面积。
-通常这里的曲线指的是[受试者操作曲线(Receiver operating characteristic, ROC)](https://en.wikipedia.org/wiki/Receiver_operating_characteristic)。
-相比于准确率、召回率、F1值等依赖于判决阈值的评估指标，AUC则没有这个问题。
+- 在统计和机器学习中，常常用AUC来评估二分类模型的性能。AUC的全称是 area under the curve，即曲线下的面积。
+- 通常这里的曲线指的是[受试者操作曲线(Receiver operating characteristic, ROC)](https://en.wikipedia.org/wiki/Receiver_operating_characteristic)。
+- 相比于准确率、召回率、F1值等依赖于判决阈值的评估指标，AUC则没有这个问题。
 
 ROC曲线早在第二次世界大战期间就被使用在电子工程和雷达工程当中，被用于军事目标检测。
 后来，ROC曲线也被应用到心理学、医学、机器学习和数据挖掘等领域的模型性能评估。
