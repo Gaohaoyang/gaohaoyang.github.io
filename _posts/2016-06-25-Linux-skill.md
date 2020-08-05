@@ -322,6 +322,8 @@ Image(img_file)
 
 # python开发环境
 
+- [Cython中def,cdef,cpdef的区别](https://www.cnblogs.com/lidyan/p/7474244.html)
+   - cpdef 函数让Cython产生一个 cdef 函数（使得从Cython进行快速的函数调用）和一个 def 函数（使得我们可以从Pyhton调用）。就允许的变量类型而言，cpdef 函数具有 cdef 和 def 函数的限制。
 
 ## python编译安装
 
