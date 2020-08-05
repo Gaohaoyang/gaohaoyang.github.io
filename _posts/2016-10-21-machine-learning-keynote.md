@@ -3,7 +3,7 @@ layout: post
 title:  "机器学习本质-The-Essense-of-Machine Learning"
 date:   2016-10-21 18:32:00
 categories: 机器学习
-tags: 机器学习 周志华 深度学习
+tags: 机器学习 周志华 通用逼近定理 归纳 演绎
 excerpt: 机器学习的本质到底是什么？有哪些优缺点，存在哪些局限性
 mathjax: true
 ---
@@ -15,6 +15,18 @@ mathjax: true
 
 - 机器学习的黑箱理论一直让人诟病，不放心
 - 那么，机器学习的本质到底是什么？怎么提升可解释性？
+
+- 【2020-8-5】机器学习的本质（摘自：[机器学习漫谈](https://tracholar.github.io/machine-learning/2017/12/07/machine-learning-talk.html)）
+    - 归纳法：机器学习本质上就是在做归纳推理，并且是不完全的归纳法
+        - 利用某种算法从数据中自动归纳出有意义的规律的一种方法
+        - 人类的推理方法大致可以分为两种
+            - 一种是`演绎`法：从一般到特殊
+            - 另一种是`归纳`法：从特殊到一般
+    - 函数拟合：监督学习本质上就是在函数拟合，而且很多模型可以拟合任意连续函数
+        - 分类和回归的区别在于拟合的目标变量y的取值构成的是无限集合（回归）还是有限集合（分类）
+        - 模型拟合能力，事实上已经有很多模型可以做到对任意连续函数做到任意精度的逼近。
+        - 通用逼近定理（[Universal approximation theorem](https://en.wikipedia.org/wiki/Universal_approximation_theorem)）：单隐层神经网络即可任意逼近闭集上的任意连续函数，只要隐层节点数量足够多
+
 
 ## 周志华：机器学习本质
 
