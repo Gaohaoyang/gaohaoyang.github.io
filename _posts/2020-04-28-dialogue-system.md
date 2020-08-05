@@ -146,15 +146,76 @@ mathjax: true
 
 - 有限状态机（Finite-state machine, FSM），又称有限状态自动机，简称状态机，是表示有限个状态以及在这些状态之间的转移和动作等行为的数学模型。FSM是一种算法思想，简单而言，有限状态机由一组状态、一个初始状态、输入和根据输入及现有状态转换为下一个状态的转换函数组成。
 
+- 在描述有限状态机时，状态、事件、转换和动作是经常会碰到的几个基本概念。
+  - 状态（State）　指的是对象在其生命周期中的一种状况，处于某个特定状态中的对象必然会满足某些条件、执行某些动作或者是等待某些事件。
+  - 事件（Event）　指的是在时间和空间上占有一定位置，并且对状态机来讲是有意义的那些事情。事件通常会引起状态的变迁，促使状态机从一种状态切换到另一种状态。
+  - 转换（Transition）　指的是两个状态之间的一种关系，表明对象将在第一个状态中执行一定的动作，并将在某个事件发生同时某个特定条件满足时进入第二个状态。
+  - 动作（Action）　指的是状态机中可以执行的那些原子操作，所谓原子操作指的是它们在运行的过程中不能被其他消息所中断，必须一直执行下去。
+
+- FSME是一个基于Qt的有限状态机工具，它能够让用户通过图形化的方式来对程序中所需要的状态机进行建模，并且还能够自动生成用C++或者Python实现的状态机框架代码。
+- 类似的还有[QFSM](http://qfsm.sourceforge.net/download.html)：A graphical tool for designing finite state machines
+- ![](https://www.ibm.com/developerworks/cn/linux/l-fsmachine/image/2.jpg)
+
+
 **Python版本**
 
 - [Transitions](https://github.com/pytransitions/transitions)
 - [Python的Transitions库实现有限状态机(FSM)](https://www.jianshu.com/p/decf86e0e420)
 
+![](https://upload-images.jianshu.io/upload_images/618241-70acdf59c5f312c8.png)
+
+- Machine示例
+
+```python
+from transitions import Machine
+
+# 定义模型
+class AModel(object):
+    def __init__(self):
+        self.sv = 0  # state variable of the model
+        self.conditions = {  # each state
+            'sA': 0,
+            'sB': 3,
+            'sC': 6,
+            'sD': 0,
+        }
+
+    def poll(self):
+        if self.sv >= self.conditions[self.state]:
+            self.next_state()  # go to next state
+        else:
+            getattr(self, 'to_%s' % self.state)()  # enter current state again
+
+    def on_enter(self):
+        print('entered state %s' % self.state)
+
+    def on_exit(self):
+        print('exited state %s' % self.state)
+
+
+# setup model and state machine
+model = AModel()
+
+# 状态集合 init transitions model 
+list_of_states = ['sA', 'sB', 'sC', 'sD']
+machine = Machine(model=model, states=list_of_states, initial='sA',
+                  ordered_transitions=True, before_state_change='on_exit',
+                  after_state_change='on_enter')
+
+# begin main
+for i in range(0, 10):
+    print('iter is: ' + str(i) + " -model state is:" +  model.state)
+    model.sv = i
+    model.poll()
+
+```
+- GraphMachine示例，可以画图
+
 ```python
 from transitions.extensions import GraphMachine
-
+# 定义状态集合
 states = ['first', 'second']
+# 定义转移集合
 transitions = [
     ['any_trigger', 'first', 'first'],
     ['anything', '*', 'second'],
@@ -162,7 +223,7 @@ transitions = [
 
 machine = GraphMachine(states=states, transitions=transitions, initial='first',
                        auto_transitions=False, show_conditions=True)
-
+# 绘制状态机
 machine.get_graph().draw('fsm.png', prog='dot')
 from IPython.display import Image
 Image('fsm.png')
