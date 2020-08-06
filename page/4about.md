@@ -40,6 +40,7 @@ type: page
 * GitHub：[wqw](https://github.com/wqw547243068)
 * Email：wqw547243068@{163,gmail}.com
 * [知乎](https://www.zhihu.com/people/wangqiwen/activities)
+* [CSDN](http://blog.csdn.net/wqw547243068)
 
 ![]({{site.url}}/wqw/fig/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0.jpg)
 
