@@ -14,6 +14,7 @@ mathjax: true
 
 # 总结
 
+- 【2020-8-6】联邦学习Python实践：[Federated Learning Demo in Python using Socket Programming](https://github.com/ahmedfgad/FederatedLearning)
 
 # 联邦学习介绍
 
