@@ -3,7 +3,7 @@ layout: post
 title:  "算法模型部署-Model Serving"
 date:   2020-08-04 16:52:00
 categories: 机器学习 技术工具
-tags: tensorflow web gRPC Restful
+tags: Tensorflow Web gRPC Restful
 excerpt: 如何将算法模型部署到线上？有哪些方法、工具及经验？
 author: 鹤啸九天
 mathjax: true
@@ -16,37 +16,6 @@ mathjax: true
 
 - 由于python的灵活性和完备的生态库，使得其成为实现、验证ML算法的不二之选。但是工业界要将模型部署到生产环境上，需要考略性能问题，就不建议再使用python端的服务
 - 可以采用 Saver (python) + Serving (tensorflow serving) + Client (Java) 作为解决方案，从零开始记录线上模型部署流程。
-
-# Python Web服务
-
-- 参考：[Python Web服务器并发性能测试](https://blog.csdn.net/bandaoyu/article/details/88546515)
-
-Python 常见部署方法有 ：
-- `fcgi` ：用 spawn-fcgi 或者框架自带的工具对各个 project 分别生成监听进程，然后和 http 服务互动
-- `wsgi` ：利用 http 服务的 mod_wsgi 模块来跑各个 project(Web 应用程序或框架简单而通用的 Web 服务器 之间的接口)。
-- `uWSGI` 是一款像 php-cgi 一样监听同一端口，进行统一管理和负载平衡的工具，uWSGI，既不用 wsgi 协议也不用 fcgi 协议，而是自创了一个 uwsgi 的协议，据说该协议大约是 fcgi 协议的 10 倍那么快。
-
-其实 WSGI 是分成 server 和 framework (即 application) 两部分 (当然还有 middleware)。
-
-严格说 WSGI 只是一个协议, 规范 server 和 framework 之间连接的接口。
-
-WSGI server 把服务器功能以 WSGI 接口暴露出来。比如 mod_wsgi 是一种 server, 把 apache 的功能以 WSGI 接口的形式提供出来。
-- WSGI framework 就是我们经常提到的 Django 这种框架。不过需要注意的是, 很少有单纯的 WSGI framework , 基于 WSGI 的框架往往都自带 WSGI server。比如 Django、CherryPy 都自带 WSGI server 主要是测试用途, 发布时则使用生产环境的 WSGI server。而有些 WSGI 下的框架比如 pylons、bfg 等, 自己不实现 WSGI server。使用 paste 作为 WSGI server。
-- Paste 是流行的 WSGI server, 带有很多中间件。还有 flup 也是一个提供中间件的库。
-搞清除 WSGI server 和 application, 中间件自然就清楚了。除了 session、cache 之类的应用, 前段时间看到一个 bfg 下的中间件专门用于给网站换肤的 (skin) 。中间件可以想到的用法还很多。
-- 这里再补充一下, 像 django 这样的框架如何以 fastcgi 的方式跑在 apache 上的。这要用到 flup.fcgi 或者 fastcgi.py (eurasia 中也设计了一个 fastcgi.py 的实现) 这些工具, 它们就是把 fastcgi 协议转换成 WSGI 接口 (把 fastcgi 变成一个 WSGI server) 供框架接入。
-    - 整个架构是这样的: django -> fcgi2wsgiserver -> mod_fcgi -> apache 。
-- 虽然我不是 WSGI 的粉丝, 但是不可否认 WSGI 对 python web 的意义重大。有意自己设计 web 框架, 又不想做 socket 层和 http 报文解析的同学, 可以从 WSGI 开始设计自己的框架。在 python 圈子里有个共识, 自己随手搞个 web 框架跟喝口水一样自然, 非常方便。或许每个 python 玩家都会经历一个倒腾框架的
-
-uWSGI 的主要特点如下：
-- 超快的性能。
-- 低内存占用（实测为 apache2 的 mod_wsgi 的一半左右）。
-- 多app管理。
-- 详尽的日志功能（可以用来分析 app 性能和瓶颈）。
-- 高度可定制（内存大小限制，服务一定次数后重启等）。
-
-Django就没有用异步，通过线程来实现并发，这也是WSGI普遍的做法，跟tornado不是一个概念
-
 
 # 机器学习模型生命周期
 
