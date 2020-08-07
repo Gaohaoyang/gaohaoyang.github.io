@@ -38,6 +38,14 @@ mathjax: true
 - `光学字符识别`(`OCR`,Optical Character Recognition)是指对文本资料进行扫描，然后对图像文件进行分析处理，获取文字及版面信息的过程。OCR技术非常专业，一般多是印刷、打印行业的从业人员使用，可以快速的将纸质资料转换为电子资料。
 - Tesseract的OCR引擎最先由HP实验室于1985年开始研发，至1995年时已经成为OCR业内最准确的三款识别引擎之一。
 - Tesseract目前已作为开源项目发布在Google Project，其最新版本3.0已经支持中文OCR，并提供了一个命令行工具。
+- 【2020-8-7】[一个超好用的开源OCR](https://www.toutiao.com/i6858234401206043140/?tt_from=mobile_qq&utm_campaign=client_share&timestamp=1596809559&app=news_article&utm_source=mobile_qq&utm_medium=toutiao_android&use_new_style=1&req_id=20200807221239010147083076216022E3&group_id=6858234401206043140)：[EasyOCR](https://github.com/JaidedAI/EasyOCR)，目前能够支持58种语言，其中有中文(简体和繁体)、日语、泰语、韩语等
+   - EasyOCR的模型主要分为两个，基于CRAFT的文字检测模型和基于ResNet+LSTM+CTC的识别模型
+   - ![](http://p6-tt.byteimg.com/large/pgc-image/2402e44dff954e4985f6762de5b07ce6?from=pc)
+   - 第三方基于easyOCR提供了几个demo地址，大家可以试试自己的数据看看效果：
+      - [Demo1](https://colab.fan/easyocr)
+      - [Demo2](https://hub.docker.com/r/challisa/easyocr)
+      - [Demo3](https://easyocrgpu-wook-2.endpoint.ainize.ai/)
+      - ![](http://p3-tt.byteimg.com/large/pgc-image/a56400ef928d419c8ef29c64abede5da?from=pc)
 
 ## 验证码识别
 
