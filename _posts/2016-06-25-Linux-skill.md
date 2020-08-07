@@ -33,6 +33,34 @@ mathjax: true
 
 ![](https://images2015.cnblogs.com/blog/31127/201705/31127-20170530141401383-1329040140.png)
 
+## linux工具
+
+史上最全，[linux内核调试工具](https://www.toutiao.com/a1674325657904128)都在这里了，我们来看看：
+1. 内存相关的：free, vmstate, slabtop
+2. cpu相关的：top, ps, pidstat, mpstat
+3. 块设备IO相关的：iostat, iotop, blktrace
+4. 网络相关的：ping, tcpdump, traceroute, ip, nicstat, netstat
+5. 系统调用相关的：strace, lstrace, sysdig, perf
+6. linux内核调试和优化相关的：perf, dtrace, stap, lttng, ktap, sysdig
+
+重点说一下perf，这个工具非常强大，可以说是做linux性能优化的首选工具，它可以：
+1. 统计出你的程序是花在cpu计算上、还是IO上；
+2. 统计出你的程序执行的时候经过了多少次进程切换。进程切换的多，说明系统的吞吐率较好，但是频繁的切换也会影响性能；
+3. 统计出你的程序运行过程中的cache-misses的计数，我们知道cache-misses过多，则表示访问内存的性能不佳；
+4. 统计出你的进程在运行过程中发生了多少次 CPU 迁移，即被调度器从一个 CPU 转移到另外一个 CPU 上运行；
+
+这个工具简直就是做linux内核性能优化的”瑞士军刀“，有木有？
+
+perf既然这么强大，那它的实现原理是什么呢？
+- perf其实依赖的是内核里的Tracepoint。
+- Tracepoint 是散落在内核源代码中的一些 hook，一旦使能，它们便可以在特定的代码被运行到时被触发，这一特性可以被各种 trace/debug 工具所使用。Perf 就是该特性的用户之一。假如您想知道在应用程序运行期间，内核内存管理模块的行为，便可以利用潜伏在 slab 分配器中的 tracepoint。当内核运行到这些 tracepoint 时，便会通知 perf。Perf 将 tracepoint 产生的事件记录下来，生成报告，通过分析这些报告，调优人员便可以了解程序运行时期内核的种种细节，对性能症状作出更准确的诊断。
+
+总结：
+
+![](https://p1-tt-ipv6.byteimg.com/img/tos-cn-i-0022/a75094f8b23645fdbc244851528c1c3b~tplv-obj:2664:1542.image?from=post)
+
+
+
 # Shell语言
 
 ## Shell知识点
