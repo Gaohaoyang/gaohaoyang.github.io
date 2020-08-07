@@ -5,7 +5,7 @@ date:   2020-08-07 19:17:00
 categories: 技术工具
 tags: Web Python Flask Django Fastapi Restful
 author : 鹤啸九天
-excerpt: 机器学习项目开始前的核心问题：如何设置指标，评价模型效果？
+excerpt: Web开发相关技术知识点
 mathjax: true
 ---
 
