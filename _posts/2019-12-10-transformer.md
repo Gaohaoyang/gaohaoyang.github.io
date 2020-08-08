@@ -3,7 +3,7 @@ layout: post
 title:  Transformer知识点汇总
 date:   2019-12-10 16:52:00
 categories: 深度学习 
-tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 
+tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention BeamSearch Seq2seq
 excerpt: Attention is all you need!
 mathjax: true
 ---
@@ -56,6 +56,143 @@ mathjax: true
 - ![](https://pic3.zhimg.com/80/v2-0137ab38a12f427925541ada8fd9f94f_720w.jpg)
 - 在每个timestep输入到decoder RNN结构中之前，会用当前的输入token的vector与encoder output中的每一个position的vector作一个"attention"操作，这个"attention"操作的目的就是计算当前token与每个position之间的"相关度"，从而决定每个position的vector在最终该timestep的context中占的比重有多少。最终的context即encoder output每个位置vector表达的加权平均。
 - ![](https://pic1.zhimg.com/80/v2-d0db8ab72a9319b5fad32acf32d86db7_720w.png)
+
+
+## 序列解码
+
+- 生成式任务比普通的分类、tagging等NLP任务复杂不少。生成时，模型的输出是一个时间步一个时间步依次获得，前面时间步的结果影响后面时间步的结果。即每一个时间步，模型给出的都是<font color='blue'>基于历史生成结果的条件概率</font>。
+- 生成完整的句子，需要一个称为`解码`的额外动作来融合模型多个时间步的输出，使得最终序列的每一步条件概率连乘起来最大。
+- 分析
+    - 每一个时间步可能的输出种类称为`字典大小`(vocabulary size，我们用v表示)
+    - 进行T步随机的生成可能获得的结果总共有vT种。
+    - 拿中文文本生成来说，v的值大约是5000-6000，即常用汉字的个数。
+- 在如此大的基数下，遍历整个生成空间是不现实的。
+
+
+### 贪心 Greedy Search
+
+- `贪心搜索`，即每一个时间步都取条件概率最大的输出，再将从开始到当前步的结果作为输入去获得下一个时间步的输出，直到模型给出生成结束的标志。
+- 示例，生成序列[A,B,C]
+    - ![](http://www.wuyuanhao.com/wp-content/uploads/2020/03/greedy.png)
+- 分析
+    - 优点
+        - 原来指数级别的求解空间直接压缩到了与长度线性相关的大小。（指数级→线性级）
+    - 缺点
+        - 由于丢弃了绝大多数的可能解，这种关注当下的策略<font color='red'>无法保证最终序列概率是最优的</font>。
+
+### 集束搜索 Beam Search
+
+- Beam search是对贪心策略一个改进。
+- 思路：稍微放宽一些考察的范围。
+    - 在每一个时间步，不再只保留当前分数最高的1个输出，而是保留num_beams个。
+    - 当num_beams=1时集束搜索就退化成了贪心搜索。
+- 示例
+    - 每个时间步有ABCDE共5种可能的输出，即v=5v=5，图中的num_beams=2，也就是说每个时间步都会保留到当前步为止条件概率最优的2个序列
+    - ![](http://www.wuyuanhao.com/wp-content/uploads/2020/03/beam-search.png)
+- 分析
+    - beam search在每一步需要考察的候选人数量是贪心搜索的num_beams倍
+    - BS是一种时间换性能的方法。
+    - 缺点
+        - 会遇到诸如词语重复问题
+
+#### 序列扩展
+
+- 序列扩展是beam search的核心过程
+- ![](http://www.wuyuanhao.com/wp-content/uploads/2020/03/seqextend-1024x695.png)
+
+#### 代码解析
+
+- NLP界著名Python包[Transformers](https://github.com/huggingface/transformers)
+- 解析过程见：[解读Beam Search (1/2)](http://www.wuyuanhao.com/2020/03/20/%e8%a7%a3%e8%af%bbbeam-search-1-2/)
+
+
+### Beam Search改进
+
+- Beam Search虽然比贪心有所改进，但还是会生成出空洞、重复、前后矛盾的文本。
+- 试图最大化序列条件概率的解码策略从根上就有问题
+- 人类选择的词（橙线）并不是像机器选择的（蓝线）那样总是那些条件概率最大的词。
+    - 总是选择概率大的词会发生正反馈从而陷入重复，从生成的结果也可以看出，机器生成的结果有大量重复。
+    - ![](http://www.wuyuanhao.com/wp-content/uploads/2020/03/probability.png)
+- 参考：[解读Beam Search (2/2)](http://www.wuyuanhao.com/2020/03/23/%e8%a7%a3%e8%af%bbbeam-search-2/)
+- 以下思路主要源自ICLR 2020论文：[《The Curious Case of Neural Text Degeneration》](https://arxiv.org/abs/1904.09751)
+
+#### 随机采样(sampling)
+
+- 随机采样：格局解码器输出的词典中每个词的概率分布随机抽样。
+    - 相比于按概率“掐尖”，这样会增大所选词的范围，引入更多的随机性。
+- 采样的时候有一个可以控制的超参数，称为**温度**(temperature, $T$)。
+    - 模型蒸馏里用到
+- 解码器的输出层后面通常会跟一个softmax函数来将输出概率归一化，通过改变$T$可以控制概率的形貌。
+- softmax的公式如下
+    - 当$T$大的时候，概率分布趋向平均，随机性增大；
+    - 当$T$小的时候，概率密度趋向于集中，即强者俞强，随机性降低，会更多地采样出“放之四海而皆准”的词汇。
+
+- 谷歌开放式聊天机器人Meena采用的方式，论文结论是：
+    - 这种随机采样的方法远好于Beam Search。
+    - 但这其实也是有条件的，随机采样容易产生前后不一致的问题。
+    - 而在开放闲聊领域，生成文本的 长度都比较短 ，这种问题就被自然的淡化了。
+
+#### top-k采样
+
+- 采样前将输出的概率分布截断，取出概率最大的k个词构成一个集合，然后将这个子集词的概率再归一化，最后重新的概率分布中采样词汇。
+- 据说可以获得比Beam Search好很多的效果，但有个问题，就是这个k不太好选。
+    - 概率分布变化比较大，有时候可能很均匀(flat)，有的时候比较集中(peaked)。
+    - ![](http://www.wuyuanhao.com/wp-content/uploads/2020/03/distribution.png)
+    - 对于集中的情况还好说，当分布均匀时，一个较小的k容易丢掉很多优质候选词。
+    - 但如果k定的太大，这个方法又会退化回普通采样。
+
+#### 核采样（Nucleus sampling) —— Top-p采样
+
+- 不再取一个固定的k，而是固定候选集合的概率密度和在整个概率分布中的比例
+- 选出来这个集合之后也和top-k采样一样，重新归一化集合内词的概率，并把集合外词的概率设为0。
+- 这种方式也称为top-p采样。
+
+#### 惩罚重复
+
+- 为了解决重复问题，还有可以通过惩罚因子将出现过词的概率变小或者强制不使用重复词来解决。
+
+#### 代码实现
+
+- 上述各种采样方式在HuggingFace的库里都已经实现了
+
+```python
+# 代码输入的是logits，而且考虑很周全（我感觉漏了考虑k和p都给了的情况，这应该是不合适的）
+# 巧妙地使用了torch.cumsum
+# 避免了一个词都选不出来的尴尬情况
+def top_k_top_p_filtering(logits, top_k=0, top_p=1.0, filter_value=-float("Inf"), min_tokens_to_keep=1):
+    """ Filter a distribution of logits using top-k and/or nucleus (top-p) filtering
+        Args:
+            logits: logits distribution shape (batch size, vocabulary size)
+            if top_k > 0: keep only top k tokens with highest probability (top-k filtering).
+            if top_p < 1.0: keep the top tokens with cumulative probability >= top_p (nucleus filtering).
+                Nucleus filtering is described in Holtzman et al. (http://arxiv.org/abs/1904.09751)
+            Make sure we keep at least min_tokens_to_keep per batch example in the output
+        From: https://gist.github.com/thomwolf/1a5a29f6962089e871b94cbd09daf317
+    """
+    if top_k > 0:
+        top_k = min(max(top_k, min_tokens_to_keep), logits.size(-1))  # Safety check
+        # Remove all tokens with a probability less than the last token of the top-k
+        indices_to_remove = logits < torch.topk(logits, top_k)[0][..., -1, None]
+        logits[indices_to_remove] = filter_value
+
+    if top_p < 1.0:
+        sorted_logits, sorted_indices = torch.sort(logits, descending=True)
+        cumulative_probs = torch.cumsum(F.softmax(sorted_logits, dim=-1), dim=-1)
+
+        # Remove tokens with cumulative probability above the threshold (token with 0 are kept)
+        sorted_indices_to_remove = cumulative_probs > top_p
+        if min_tokens_to_keep > 1:
+            # Keep at least min_tokens_to_keep (set to min_tokens_to_keep-1 because we add the first one below)
+            sorted_indices_to_remove[..., :min_tokens_to_keep] = 0
+        # Shift the indices to the right to keep also the first token above the threshold
+        sorted_indices_to_remove[..., 1:] = sorted_indices_to_remove[..., :-1].clone()
+        sorted_indices_to_remove[..., 0] = 0
+
+        # scatter sorted tensors to original indexing
+        indices_to_remove = sorted_indices_to_remove.scatter(1, sorted_indices, sorted_indices_to_remove)
+        logits[indices_to_remove] = filter_value
+    return logits
+```
 
 
 ## Attention的细节
@@ -621,7 +758,6 @@ class LayerNorm(nn.Module):
 下面是实现：
 
 ```python
-
 def padding_mask(seq_k, seq_q):
 	# seq_k和seq_q的形状都是[B,L]
     len_q = seq_q.size(1)
@@ -813,6 +949,7 @@ class PositionalWiseFeedForward(nn.Module):
 ```
 
 ## Transformer的实现
+
 至此，所有的细节都已经解释完了。现在来完成我们Transformer模型的代码。
 
 首先，我们需要实现6层的encoder和decoder。
