@@ -147,7 +147,7 @@ mathjax: true
     - ◆ 参考 word2vec 的方式，将每个类别特征的取值映射到一个连续的向量，对这个向量进行初始化，跟模型一起训练。训练结束后，可以同时得到每个ID的Embedding。具体的使用方式，可以参考 [Rossmann 销量预估竞赛第三名的获奖方案](，https://github.com/entron/entity-embedding-rossmann)。
  
 对于 Random Forest 和 GBDT 等模型，如果类别特征存在较多的取值，可以直接使用 LabelEncoder 后的结果作为特征。
- 
+
 ### 模型训练和验证
  
 #### 模型选择
