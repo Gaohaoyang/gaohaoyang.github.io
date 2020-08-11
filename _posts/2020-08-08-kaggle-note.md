@@ -176,7 +176,7 @@ mathjax: true
 另外，在以下一些情况下，往往 Public LB 反馈亦会提供有用信息，适当地使用这些反馈也许会给你带来优势。如图4所示，(a)和(b)表示数据与时间没有明显的关系（如图像分类），(c)和(d)表示数据随时间变化（如销量预估中的时序序列）。
 - (a)和(b)的区别在于，训练集样本数相对于 Public LB 的量级大小，其中(a)中训练集样本数远超于 Public LB 的样本数，这种情况下基于训练集的 Local Validation 更可靠；而(b)中，训练集数目与 Public LB 相当，这种情况下，可以结合 Public LB 的反馈来指导模型的选择。
  
-一种融合的方式是根据 Local Validation 和 Public LB 的样本数目，按比例进行加权。譬如评估标准为正确率，Local Validation 的样本数为 N_l，正确率为 A_l；Public LB 的样本数为 N_p，正确率为 A_p。则可以使用融合后的指标：（N_l * A_l + N_p * A_p）/(N_l + N_p)，来进行模型的筛选。对于(c)和(d)，由于数据分布跟时间相关，很有必要使用 Public LB 的反馈来进行模型的选择，尤其对于(c)图所示的情况。
+一种融合的方式是根据 Local Validation 和 Public LB 的样本数目，按比例进行加权。譬如评估标准为正确率，Local Validation 的样本数为 $N_l$，正确率为 $A_l$；Public LB 的样本数为 $N_p$，正确率为 $A_p$。则可以使用融合后的指标：$（N_l * A_l + N_p * A_p）/(N_l + N_p)$，来进行模型的筛选。对于(c)和(d)，由于数据分布跟时间相关，很有必要使用 Public LB 的反馈来进行模型的选择，尤其对于(c)图所示的情况。
  
 ![Kaggle 数据挖掘比赛经验分享](http://p3-tt.byteimg.com/large/pgc-image/d74063f119ce410fa48eb54892137363?from=pc)
  
