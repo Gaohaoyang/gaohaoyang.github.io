@@ -1,5 +1,0 @@
-I"I
-<p>掌握 React Hooks api 将更好的帮助你在工作中使用，对 React 的掌握更上一层楼。本系列将使用大量实例代码和效果展示，非常易于初学者和复习使用。</p>
-
-<p>截止目前我们已经学习了3个hook api，<code class="language-plaintext highlighter-rouge">useState</code>, <code class="language-plaintext highlighter-rouge">useEffect</code>, <code class="language-plaintext highlighter-rouge">useContext</code>。接下来我们学习下一个 hook api，<code class="language-plaintext highlighter-rouge">useReducer</code>。首先我们将讲讲什么是 reducer，以及为什么使用 reducer。研究一下 JavaScript 中的 reducer 是什么，这将有助于理解 react hook 中的 <code class="language-plaintext highlighter-rouge">useReducer</code>。好，现在开始吧。</p>
-:ET
