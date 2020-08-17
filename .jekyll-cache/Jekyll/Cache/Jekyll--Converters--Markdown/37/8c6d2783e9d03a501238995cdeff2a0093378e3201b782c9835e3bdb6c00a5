@@ -1,0 +1,17 @@
+I"#<ul id="markdown-toc">
+  <li><a href="#起因" id="markdown-toc-起因">起因</a></li>
+</ul>
+
+<h2 id="起因">起因</h2>
+
+<p>起因是这样的，在尝试前后端分离的这条道路上，我自己也在不断摸索，感觉要把大部分的坑都踩踩了。目前我用的技术是：</p>
+
+<ul>
+  <li>webpack 自动构建</li>
+  <li>AMD 模块化 js</li>
+  <li>Sass 预处理 CSS</li>
+  <li>使用前端模板引擎 handlebars 解决动态操作将 html 拼接在 js 中的问题</li>
+</ul>
+
+<p>但最近写了一个项目类似知乎这样的多页网站。前端 url 的处理让我觉得不够优雅。我使用的是 hash 的方式处理动态 url 的，为此我专门在知乎上提了一个问题：<a href="https://www.zhihu.com/question/38802932">前端如何处理动态url？</a></p>
+:ET

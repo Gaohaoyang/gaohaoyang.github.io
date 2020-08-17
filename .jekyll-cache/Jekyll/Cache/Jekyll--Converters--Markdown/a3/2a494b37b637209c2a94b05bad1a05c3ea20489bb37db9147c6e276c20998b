@@ -1,0 +1,2107 @@
+I"�y<ul id="markdown-toc">
+  <li><a href="#任务" id="markdown-toc-任务">任务</a></li>
+  <li><a href="#第一个页面交互" id="markdown-toc-第一个页面交互">第一个页面交互</a>    <ul>
+      <li><a href="#了解javascript是什么" id="markdown-toc-了解javascript是什么">了解JavaScript是什么</a></li>
+      <li><a href="#如何在-html-页面加载-javascript-代码" id="markdown-toc-如何在-html-页面加载-javascript-代码">如何在 HTML 页面加载 JavaScript 代码</a></li>
+      <li><a href="#为什么把-script-放在-body-前" id="markdown-toc-为什么把-script-放在-body-前">为什么把 <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> 放在 <code class="language-plaintext highlighter-rouge">&lt;/body&gt;</code> 前</a>        <ul>
+          <li><a href="#javascript-的性能优化加载和执行" id="markdown-toc-javascript-的性能优化加载和执行">JavaScript 的性能优化：加载和执行</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#javascript数据类型及语言基础" id="markdown-toc-javascript数据类型及语言基础">JavaScript数据类型及语言基础</a>    <ul>
+      <li><a href="#数据类型概要" id="markdown-toc-数据类型概要">数据类型概要</a></li>
+      <li><a href="#一些要点" id="markdown-toc-一些要点">一些要点</a></li>
+      <li><a href="#实践判断各种数据类型的方法" id="markdown-toc-实践判断各种数据类型的方法">实践判断各种数据类型的方法</a>        <ul>
+          <li><a href="#数组类型" id="markdown-toc-数组类型">数组类型</a></li>
+        </ul>
+      </li>
+      <li><a href="#值类型和引用类型的区别" id="markdown-toc-值类型和引用类型的区别">值类型和引用类型的区别</a></li>
+      <li><a href="#对象的读取遍历方式" id="markdown-toc-对象的读取遍历方式">对象的读取、遍历方式</a>        <ul>
+          <li><a href="#深度克隆" id="markdown-toc-深度克隆">深度克隆</a></li>
+        </ul>
+      </li>
+      <li><a href="#对数组进行去重" id="markdown-toc-对数组进行去重">对数组进行去重</a>        <ul>
+          <li><a href="#array-对象" id="markdown-toc-array-对象">Array 对象</a></li>
+        </ul>
+      </li>
+      <li><a href="#实现-trim" id="markdown-toc-实现-trim">实现 <code class="language-plaintext highlighter-rouge">trim()</code></a>        <ul>
+          <li><a href="#正则表达式" id="markdown-toc-正则表达式">正则表达式</a></li>
+          <li><a href="#string对象" id="markdown-toc-string对象">String对象</a></li>
+        </ul>
+      </li>
+      <li><a href="#遍历数组使每一个元素执行-fn-函数" id="markdown-toc-遍历数组使每一个元素执行-fn-函数">遍历数组，使每一个元素执行 <code class="language-plaintext highlighter-rouge">fn</code> 函数</a></li>
+      <li><a href="#获取对象中第一层元素个数" id="markdown-toc-获取对象中第一层元素个数">获取对象中第一层元素个数</a></li>
+      <li><a href="#正则表达式-1" id="markdown-toc-正则表达式-1">正则表达式</a></li>
+    </ul>
+  </li>
+  <li><a href="#dom" id="markdown-toc-dom">DOM</a>    <ul>
+      <li><a href="#基本任务" id="markdown-toc-基本任务">基本任务</a></li>
+      <li><a href="#mini-" id="markdown-toc-mini-">mini $</a></li>
+    </ul>
+  </li>
+  <li><a href="#事件" id="markdown-toc-事件">事件</a>    <ul>
+      <li><a href="#绑定注册事件与移除事件" id="markdown-toc-绑定注册事件与移除事件">绑定注册事件与移除事件</a></li>
+      <li><a href="#click-与-enter-键事件绑定" id="markdown-toc-click-与-enter-键事件绑定">click 与 enter 键事件绑定</a></li>
+      <li><a href="#事件代理" id="markdown-toc-事件代理">事件代理</a></li>
+    </ul>
+  </li>
+  <li><a href="#bom" id="markdown-toc-bom">BOM</a>    <ul>
+      <li><a href="#sessionstoragelocalstorage-和-cookie-之间的区别" id="markdown-toc-sessionstoragelocalstorage-和-cookie-之间的区别">sessionStorage、localStorage 和 cookie 之间的区别</a></li>
+    </ul>
+  </li>
+  <li><a href="#ajax" id="markdown-toc-ajax">Ajax</a></li>
+  <li><a href="#练习1处理兴趣列表" id="markdown-toc-练习1处理兴趣列表">练习1：处理兴趣列表</a>    <ul>
+      <li><a href="#任务要求" id="markdown-toc-任务要求">任务要求</a></li>
+      <li><a href="#思路" id="markdown-toc-思路">思路</a></li>
+      <li><a href="#实现" id="markdown-toc-实现">实现</a></li>
+    </ul>
+  </li>
+  <li><a href="#练习2倒计时" id="markdown-toc-练习2倒计时">练习2：倒计时</a>    <ul>
+      <li><a href="#任务要求-1" id="markdown-toc-任务要求-1">任务要求</a></li>
+      <li><a href="#思路-1" id="markdown-toc-思路-1">思路</a></li>
+      <li><a href="#实现-1" id="markdown-toc-实现-1">实现</a></li>
+    </ul>
+  </li>
+  <li><a href="#练习3图片轮播" id="markdown-toc-练习3图片轮播">练习3：图片轮播</a>    <ul>
+      <li><a href="#任务要求-2" id="markdown-toc-任务要求-2">任务要求</a></li>
+      <li><a href="#思路-2" id="markdown-toc-思路-2">思路</a></li>
+      <li><a href="#实现-2" id="markdown-toc-实现-2">实现</a></li>
+      <li><a href="#关于变速运动" id="markdown-toc-关于变速运动">关于变速运动</a></li>
+    </ul>
+  </li>
+  <li><a href="#练习4输入框即时提示" id="markdown-toc-练习4输入框即时提示">练习4：输入框即时提示</a>    <ul>
+      <li><a href="#任务要求-3" id="markdown-toc-任务要求-3">任务要求</a></li>
+      <li><a href="#思路-3" id="markdown-toc-思路-3">思路</a></li>
+      <li><a href="#实现-3" id="markdown-toc-实现-3">实现</a></li>
+    </ul>
+  </li>
+  <li><a href="#练习5拖拽交互" id="markdown-toc-练习5拖拽交互">练习5：拖拽交互</a>    <ul>
+      <li><a href="#任务要求-4" id="markdown-toc-任务要求-4">任务要求</a></li>
+      <li><a href="#思路-4" id="markdown-toc-思路-4">思路</a></li>
+      <li><a href="#实现-4" id="markdown-toc-实现-4">实现</a></li>
+    </ul>
+  </li>
+  <li><a href="#最终作品" id="markdown-toc-最终作品">最终作品</a></li>
+  <li><a href="#update" id="markdown-toc-update">Update</a></li>
+</ul>
+
+<p>百度前端学院的第二次任务笔记，JavaScript 基础。主要有JavaScript的定义，数据类型，对象，数组，字符串，正则表达式，DOM，事件，BOM，Ajax 等知识。</p>
+
+<h2 id="任务">任务</h2>
+
+<p>掌握JavaScript基础知识，能够使用JavaScript编写一些复杂度不大的交互功能。</p>
+
+<p><strong>任务：</strong> <a href="https://github.com/Gaohaoyang/ife/tree/master/task/task0002">JavaScript基础</a></p>
+
+<p>做完任务一的时候深深地感觉到自己的基础非常的薄弱，在这里再次感谢一下百度前端技术学院，做任务的时候深刻理解了自己平时掌握不牢固的内容，比如浮动、BFC、等高布局等。继续加油吧！</p>
+
+<p>像上一篇文章一样，写些东西记录一下。</p>
+
+<h2 id="第一个页面交互">第一个页面交互</h2>
+
+<p>按照任务中的代码，在IE8下提示：<code class="language-plaintext highlighter-rouge">对象不支持“addEventListener”属性或方法</code>  <br />
+我猜是IE8浏览器没有这个方法吧。</p>
+
+<p>参考资料：<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide">JavaScript 指南-MDN</a></p>
+
+<h3 id="了解javascript是什么">了解JavaScript是什么</h3>
+
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/JavaScript_Overview#What_is_JavaScript.3F">来自MDN的解释</a></p>
+
+<blockquote>
+  <p>JavaScript 是一种跨平台，面向对象的脚本语言。作为一种小巧且轻量级的语言，JavaScript 无意于独立运行，而是被设计为可以轻易嵌入到其它的产品和应用中，比如 Web 浏览器。在宿主环境中，JavaScript 可以被连接到环境中的对象之上，以提供对其的编程控制。</p>
+
+  <p>核心的 JavaScript 中包含有一组核心的对象，包括 Array，Date 和 Math，以及一组核心的语言要素，包括操作符，控制结构和语句。出于多种目的，可以通过为其增补附加的对象，对核心 JavaScript 加以扩展；例如：</p>
+
+  <ul>
+    <li>客户端 JavaScript 提供了用于控制浏览器（Navigator 或者其它浏览器）以及其中的文档对象模型（DOM）的对象，从而扩展了核心 JavaScript。例如，客户端扩展允许应用程序在 HTML 的表单中加入元素，以便响应用户事件，比如鼠标点击，表单输入和页面导航。</li>
+    <li>服务器端 JavaScript 提供了服务于在服务器上运行 JavaScript 的对象，从而扩展了核心 JavaScript。例如，服务器端扩展可以允许应用程序访问关系型数据库，在应用程序的不同调用间提供信息的连续性，甚至于处理服务器之上的文件。</li>
+  </ul>
+
+  <p>借由 JavaScript 的 LiveConnect 功能，您可以让 Java 和 JavaScript 间实现通讯。从 JavaScript 中，您可以创建 Java 对象并访问它们的公共方法和域。从 Java 中，也可以访问 JavaScript 的对象，属性和方法。</p>
+
+  <p>Netscape 发明了 JavaScript 并将 JavaScript 首先用于 Netscape 浏览器中。</p>
+</blockquote>
+
+<h3 id="如何在-html-页面加载-javascript-代码">如何在 HTML 页面加载 JavaScript 代码</h3>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> 标签在 HTML 文件中添加 JavaScript 代码。</p>
+
+<p>我们可以将 <code class="language-plaintext highlighter-rouge">JavaScript</code> 代码放在 <code class="language-plaintext highlighter-rouge">html</code> 文件中任何位置，但是我们一般放在网页的 <code class="language-plaintext highlighter-rouge">head</code> 或者 <code class="language-plaintext highlighter-rouge">body</code> 部分。</p>
+
+<p>放在 <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> 部分  <br />
+最常用的方式是在页面中head部分放置 <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> 元素，浏览器解析 <code class="language-plaintext highlighter-rouge">head</code> 部分就会执行这个代码，然后才解析页面的其余部分。</p>
+
+<p>放在 <code class="language-plaintext highlighter-rouge">&lt;body&gt;</code> 部分  <br />
+JavaScript 代码在网页读取到该语句的时候就会执行。</p>
+
+<p><strong>注意</strong>: javascript 作为一种脚本语言可以放在 html 页面中任何位置，但是浏览器解释 html 时是按先后顺序的，所以前面的 script 就先被执行。比如进行页面显示初始化的 js 必须放在 head 里面，因为初始化都要求提前进行（如给页面 body 设置 css 等）；而如果是通过事件调用执行的 function 那么对位置没什么要求的。</p>
+
+<h3 id="为什么把-script-放在-body-前">为什么把 <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> 放在 <code class="language-plaintext highlighter-rouge">&lt;/body&gt;</code> 前</h3>
+
+<p>虽然理论上放在哪里都是可以的，但是对于前端页面优化来讲，还是放在底部是最佳的，因为如果JS执行出现错误了，最起码页面中的元素还能加载出来，因为DOM文档是从上往下的顺序执行的。    如果你还不了解DOM的加载顺序，请阅读jQuery中ready与load事件的区别。</p>
+
+<p><strong>下面是重点</strong></p>
+
+<p>按照HTML5标准中的HTML语法规则，如果在 <code class="language-plaintext highlighter-rouge">&lt;/body&gt;</code> 后再出现 <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> 或任何元素的开始标签，都是parse error，浏览器会忽略之前的 <code class="language-plaintext highlighter-rouge">&lt;/body&gt;</code> ，即视作仍旧在body内。所以实际效果和写在 <code class="language-plaintext highlighter-rouge">&lt;/body&gt;</code> 之前是没有区别的。</p>
+
+<p>总之，这种写法虽然也能work，但是并没有带来任何额外好处，实际上出现这样的写法很可能是误解了“将script放在页面最末端”的教条。所以还是不要这样写为好。</p>
+
+<ul>
+  <li><a href="http://www.zhihu.com/question/20027966">script在body闭合标签之后还是之前-知乎</a></li>
+  <li><a href="http://www.zhihu.com/question/19617126">body 和 html 标签均没有关闭</a></li>
+</ul>
+
+<h4 id="javascript-的性能优化加载和执行">JavaScript 的性能优化：加载和执行</h4>
+
+<ul>
+  <li>扩展阅读：<a href="http://www.ibm.com/developerworks/cn/web/1308_caiys_jsload/index.html">JavaScript 的性能优化：加载和执行</a></li>
+</ul>
+
+<p><strong>脚本位置</strong></p>
+
+<p>由于脚本会阻塞页面其他资源的下载，因此推荐将所有 <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> 标签尽可能放到 <code class="language-plaintext highlighter-rouge">&lt;body&gt;</code> 标签的底部，以尽量减少对整个页面下载的影响。</p>
+
+<p><strong>组织脚本</strong></p>
+
+<p>由于每个 <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> 标签初始下载时都会阻塞页面渲染，所以减少页面包含的 <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> 标签数量有助于改善这一情况。这不仅针对外链脚本，内嵌脚本的数量同样也要限制。浏览器在解析 HTML 页面的过程中每遇到一个 <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> 标签，都会因执行脚本而导致一定的延时，因此最小化延迟时间将会明显改善页面的总体性能。</p>
+
+<p><strong>无阻塞的脚本</strong></p>
+
+<p>减少 JavaScript 文件大小并限制 HTTP 请求数在功能丰富的 Web 应用或大型网站上并不总是可行。Web 应用的功能越丰富，所需要的 JavaScript 代码就越多，尽管下载单个较大的 JavaScript 文件只产生一次 HTTP 请求，却会锁死浏览器的一大段时间。为避免这种情况，需要通过一些特定的技术向页面中逐步加载 JavaScript 文件，这样做在某种程度上来说不会阻塞浏览器。</p>
+
+<p>无阻塞脚本的秘诀在于，在页面加载完成后才加载 JavaScript 代码。这就意味着在 window 对象的 onload事件触发后再下载脚本。有多种方式可以实现这一效果。</p>
+
+<ul>
+  <li>延迟加载脚本</li>
+</ul>
+
+<p>HTML 4 为 <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> 标签定义了一个扩展属性：defer。Defer 属性指明本元素所含的脚本不会修改 DOM，因此代码能安全地延迟执行。</p>
+
+<p>带有 defer 属性的 <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> 标签可以放置在文档的任何位置。对应的 JavaScript 文件将在页面解析到 <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> 标签时开始下载，但不会执行，直到 DOM 加载完成，即onload事件触发前才会被执行。当一个带有 defer 属性的 JavaScript 文件下载时，它不会阻塞浏览器的其他进程，因此这类文件可以与其他资源文件一起并行下载。</p>
+
+<p>对于如下代码：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Script Defer Example<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">defer</span><span class="nt">&gt;</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">defer</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nt">&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">script</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nt">&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+        <span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+            <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">load</span><span class="dl">"</span><span class="p">);</span>
+        <span class="p">};</span>
+    <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>在支持 defer 属性的浏览器上，弹出的顺序则是：”script”、”defer”、”load”。请注意，带有 defer 属性的 <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> 元素不是跟在第二个后面执行，而是在 onload 事件被触发前被调用。</p>
+
+<p>引用的资料可能写的比较早，在 <a href="http://caniuse.com/#search=defer">CanIUse</a> 上查了一下 defer 发现大部分浏览器都是支持的。如下图： <br />
+<img src="http://7q5cdt.com1.z0.glb.clouddn.com/Baidu-Front-end-defer.jpg" alt="defer的支持情况" /></p>
+
+<p>HTML 5 为 <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> 标签定义了一个新的扩展属性：async。它的作用和 defer 一样，能够异步地加载和执行脚本，不因为加载脚本而阻塞页面的加载。但是有一点需要注意，在有 async 的情况下，JavaScript 脚本一旦下载好了就会执行，所以很有可能不是按照原本的顺序来执行的。如果 JavaScript 脚本前后有依赖性，使用 async 就很有可能出现错误。</p>
+
+<p>IE8,9不支持 <code class="language-plaintext highlighter-rouge">async</code></p>
+
+<ul>
+  <li>动态脚本元素</li>
+  <li>使用 XMLHttpRequest(XHR)对象</li>
+</ul>
+
+<p><strong>原文中的总结</strong></p>
+
+<p>减少 JavaScript 对性能的影响有以下几种方法：</p>
+
+<ul>
+  <li>将所有的 <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> 标签放到页面底部，也就是 <code class="language-plaintext highlighter-rouge">&lt;/body&gt;</code> 闭合标签之前，这能确保在脚本执行前页面已经完成了渲染。</li>
+  <li>尽可能地合并脚本。页面中的 <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> 标签越少，加载也就越快，响应也越迅速。无论是外链脚本还是内嵌脚本都是如此。</li>
+  <li>采用无阻塞下载 JavaScript 脚本的方法：
+    <ul>
+      <li>使用 <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> 标签的 defer 属性（仅适用于 IE 和 Firefox 3.5 以上版本）；</li>
+      <li>使用动态创建的 <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> 元素来下载并执行代码；</li>
+      <li>使用 XHR 对象下载 JavaScript 代码并注入页面中。</li>
+    </ul>
+  </li>
+</ul>
+
+<p>通过以上策略，可以在很大程度上提高那些需要使用大量 JavaScript 的 Web 网站和应用的实际性能。</p>
+
+<h2 id="javascript数据类型及语言基础">JavaScript数据类型及语言基础</h2>
+
+<h3 id="数据类型概要">数据类型概要</h3>
+
+<p>最新的 ECMAScript 标准定义了 7 种数据类型:</p>
+
+<ul>
+  <li>6 种 原始类型:
+    <ul>
+      <li>Boolean</li>
+      <li>Null</li>
+      <li>Undefined</li>
+      <li>Number</li>
+      <li>String</li>
+      <li>Symbol (new in ECMAScript 6)</li>
+    </ul>
+  </li>
+  <li>和 Object</li>
+</ul>
+
+<h3 id="一些要点">一些要点</h3>
+
+<ul>
+  <li>一个没有被赋值的变量会有个默认值 undefined</li>
+  <li>null 与 undefined 的不同点：</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typeof</span> <span class="kc">null</span>        <span class="c1">// object (bug in ECMAScript, should be null)</span>
+<span class="k">typeof</span> <span class="kc">undefined</span>   <span class="c1">// undefined</span>
+<span class="kc">null</span> <span class="o">===</span> <span class="kc">undefined</span> <span class="c1">// false</span>
+<span class="kc">null</span> <span class="o">==</span> <span class="kc">undefined</span> <span class="c1">// true</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>typeof null 返回 object
+</code></pre></div></div>
+
+<ul>
+  <li>Number 数字类型，它并没有为整数给出一种特定的类型。除了能够表示浮点数外，还有一些带符号的值：+Infinity，-Infinity 和 NaN (非数值，Not-a-Number)。</li>
+  <li>NaN与任何值都不相等，包括自身。应当使用 <code class="language-plaintext highlighter-rouge">x != x</code> 来判断，当且仅当 x 为 NaN 的时候，表达式的结果才为 <code class="language-plaintext highlighter-rouge">true</code>。相似的函数有 <code class="language-plaintext highlighter-rouge">isNaN()</code>, <code class="language-plaintext highlighter-rouge">isFinite()</code>。</li>
+  <li>数组直接量的语法允许有可选的结尾逗号，故 <code class="language-plaintext highlighter-rouge">[,,]</code> 只有两个元素而非三个。</li>
+</ul>
+
+<h3 id="实践判断各种数据类型的方法">实践判断各种数据类型的方法</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 判断arr是否为一个数组，返回一个bool值</span>
+<span class="kd">function</span> <span class="nx">isArray</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">typeof</span> <span class="nx">arr</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">object</span><span class="dl">"</span> <span class="o">&amp;&amp;</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">[object Array]</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 判断fn是否为一个函数，返回一个bool值</span>
+<span class="kd">function</span> <span class="nx">isFunction</span><span class="p">(</span><span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">typeof</span> <span class="nx">fn</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">function</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="数组类型">数组类型</h4>
+
+<p>在 ECMAScript5 中，可以直接使用 <code class="language-plaintext highlighter-rouge">Array.isArray()</code> 来判断数组。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">([]);</span>  <span class="c1">//true</span>
+<span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">({});</span>  <span class="c1">//false</span>
+</code></pre></div></div>
+
+<p>我看《JavaScript权威指南上》没有推荐使用 <code class="language-plaintext highlighter-rouge">instanceof</code>，因为可能会有多窗体(frame)存在。</p>
+
+<blockquote>
+  <p>这样每一个窗口都有一个自己的 JavaScript 环境，有自己的全局对象。并且每个全局对象都有自己的一组构造函数。因此一个窗体中的对象不可能是另外窗体中的构造函数的实例。</p>
+</blockquote>
+
+<p>所以采用了上述我写的那样的代码</p>
+
+<h3 id="值类型和引用类型的区别">值类型和引用类型的区别</h3>
+
+<ul>
+  <li>
+    <p>值类型</p>
+
+    <p>声明一个值类型变量，编译器会在栈上分配一个空间，这个空间对应着该值类型变量，空间里存储的就是该变量的值。存储在栈（stack）中的简单数据段，也就是说，它们的值直接存储在变量访问的位置。</p>
+  </li>
+  <li>
+    <p>引用类型</p>
+
+    <p>引用类型的实例分配在堆上，新建一个引用类型实例，得到的变量值对应的是该实例的内存分配地址，这就像您的银行账号一样。存储在堆（heap）中的对象，也就是说，存储在变量处的值是一个指针（point），指向存储对象的内存处。</p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>为变量赋值时，ECMAScript 的解释程序必须判断该值是原始类型，还是引用类型。要实现这一点，解释程序则需尝试判断该值是否为 ECMAScript 的原始类型之一，即 Undefined、Null、Boolean、Number 和 String 型。由于这些原始类型占据的空间是固定的，所以可将他们存储在较小的内存区域 - 栈中。这样存储便于迅速查寻变量的值。</p>
+
+  <ul>
+    <li><strong>在许多语言中，字符串都被看作引用类型，而非原始类型，因为字符串的长度是可变的。ECMAScript 打破了这一传统。</strong></li>
+  </ul>
+
+  <p>如果一个值是引用类型的，那么它的存储空间将从堆中分配。由于引用值的大小会改变，所以不能把它放在栈中，否则会降低变量查寻的速度。相反，放在变量的栈空间中的值是该对象存储在堆中的地址。地址的大小是固定的，所以把它存储在栈中对变量性能无任何负面影响。如下图所示：</p>
+
+  <p><img src="http://www.w3school.com.cn/i/ct_js_value.gif" alt="ct_js_value" /></p>
+</blockquote>
+
+<p>JavaScript中原始值包括：undefined，null，布尔值，数字和字符串。引用类型主要指对象（包括数组和函数）。</p>
+
+<blockquote>
+  <ul>
+    <li>原始值是不可更改的。对象的值是可修改的。</li>
+    <li>原始值的比较是值的比较。对象的比较并非值的比较。对象的值都是引用，对象的比较均是引用的比较，当且仅当他们都引用同一个基对象时，他们才相等。</li>
+  </ul>
+</blockquote>
+
+<p><strong>参考：</strong></p>
+
+<ul>
+  <li><a href="http://www.w3school.com.cn/js/pro_js_value.asp">ECMAScript 原始值和引用值</a></li>
+</ul>
+
+<h3 id="对象的读取遍历方式">对象的读取、遍历方式</h3>
+
+<p>参考：<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Working_with_Objects">JavaScript 指南-使用对象</a></p>
+
+<ul>
+  <li>对象</li>
+</ul>
+
+<p>在javascript中，一个对象可以是一个单独的拥有属性和类型的实体。我们拿它和一个杯子做下类比。一个杯子是一个对象(物体)，拥有属性。杯子有颜色，图案，重量，由什么材质构成等等。同样，javascript对象也有属性来定义它的特征。</p>
+
+<ul>
+  <li>属性</li>
+</ul>
+
+<p>一个 javascript 对象有很多属性。一个对象的属性可以被解释成一个附加到对象上的变量。对象的属性和普通的 javascript 变量基本没什么区别，仅仅是属性属于某个对象。属性定义了对象的特征(译注：动态语言面向对象的鸭子类型)。你可以通过点符号来访问一个对象的属性。JavaScript 对象的属性也可以通过方括号访问。</p>
+
+<ul>
+  <li>枚举</li>
+</ul>
+
+<p>你可以在 <code class="language-plaintext highlighter-rouge">for...in</code> 语句中使用方括号标记以枚举一个对象的所有属性。为了展示它如何工作，下面的函数当你将对象及其名称作为参数传入时，显示对象的属性：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">showProps</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">objName</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">i</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">result</span> <span class="o">+=</span> <span class="nx">objName</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">.</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">i</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> = </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">+</span> <span class="dl">"</span><span class="se">\n</span><span class="dl">"</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">srcObj</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">b</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">b1</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">hi</span><span class="dl">"</span><span class="p">],</span>
+        <span class="na">b2</span><span class="p">:</span> <span class="dl">"</span><span class="s2">JavaScript</span><span class="dl">"</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">showProps</span><span class="p">(</span><span class="nx">srcObj</span><span class="p">,</span><span class="dl">'</span><span class="s1">srcObj</span><span class="dl">'</span><span class="p">));</span>
+</code></pre></div></div>
+
+<p>console:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>srcObj.a = 2
+srcObj.b = [object Object]
+</code></pre></div></div>
+
+<p>这里使用 <code class="language-plaintext highlighter-rouge">hasOwnProperty()</code> 是为了确保是自己的属性而非继承的属性。</p>
+
+<p>可以如下写，跳过这个对象的方法：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">showPropsWithoutFun</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">objName</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">obj</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">i</span><span class="p">))</span> <span class="p">{</span>       <span class="c1">//跳过继承属性</span>
+            <span class="k">continue</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">function</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//跳过这个对象的方法</span>
+            <span class="k">continue</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nx">result</span> <span class="o">+=</span> <span class="nx">objName</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">.</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">i</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">=</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">+</span> <span class="dl">"</span><span class="se">\n</span><span class="dl">"</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>相关的方法还有：<code class="language-plaintext highlighter-rouge">Object.keys()</code>, <code class="language-plaintext highlighter-rouge">Object.getOwnPropertyNames()</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">Object.keys()</code> 方法会返回一个由给定对象的所有可枚举自身属性的属性名组成的数组，数组中属性名的排列顺序和使用for-in循环遍历该对象时返回的顺序一致（两者的主要区别是 for-in 还会遍历出一个对象从其原型链上继承到的可枚举属性）。</p>
+
+<p><code class="language-plaintext highlighter-rouge">Object.getOwnPropertyNames()</code> 方法返回一个由指定对象的所有自身属性的属性名（包括不可枚举属性）组成的数组。</p>
+
+<ul>
+  <li>创建对象</li>
+</ul>
+
+<p>创建对象的方式有三种：对象直接量，关键字 <code class="language-plaintext highlighter-rouge">new</code>，使用 <code class="language-plaintext highlighter-rouge">Object.create()</code> 方法。</p>
+
+<p><code class="language-plaintext highlighter-rouge">Object.create()</code> 方法创建一个拥有指定原型和若干个指定属性的对象。</p>
+
+<ul>
+  <li>继承</li>
+</ul>
+
+<p>所有的 JavaScript 对象继承于至少一个对象。被继承的对象被称作原型，并且继承的属性可能通过构造函数的 prototype 对象找到。</p>
+
+<ul>
+  <li>定义方法</li>
+</ul>
+
+<p>一个方法 是关联到某个对象的函数，或者简单地说，一个方法是一个值为某个函数的对象属性。定义方法就象定义普通的函数，除了它们必须被赋给对象的某个属性。例如：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">objectName</span><span class="p">.</span><span class="nx">methodname</span> <span class="o">=</span> <span class="nx">function_name</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">myObj</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">myMethod</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...do something</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h4 id="深度克隆">深度克隆</h4>
+
+<p>了解值类型和引用类型的区别，了解各种对象的读取、遍历方式，并在util.js中实现以下方法：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 使用递归来实现一个深度克隆，可以复制一个目标对象，返回一个完整拷贝</span>
+<span class="c1">// 被复制的对象类型会被限制为数字、字符串、布尔、日期、数组、Object对象。不会包含函数、正则对象等</span>
+<span class="kd">function</span> <span class="nx">cloneObject</span><span class="p">(</span><span class="nx">src</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// your implement</span>
+<span class="p">}</span>
+
+<span class="c1">// 测试用例：</span>
+<span class="kd">var</span> <span class="nx">srcObj</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">b</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">b1</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">hi</span><span class="dl">"</span><span class="p">],</span>
+        <span class="na">b2</span><span class="p">:</span> <span class="dl">"</span><span class="s2">JavaScript</span><span class="dl">"</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">abObj</span> <span class="o">=</span> <span class="nx">srcObj</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">tarObj</span> <span class="o">=</span> <span class="nx">cloneObject</span><span class="p">(</span><span class="nx">srcObj</span><span class="p">);</span>
+
+<span class="nx">srcObj</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="nx">srcObj</span><span class="p">.</span><span class="nx">b</span><span class="p">.</span><span class="nx">b1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Hello</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">abObj</span><span class="p">.</span><span class="nx">a</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">abObj</span><span class="p">.</span><span class="nx">b</span><span class="p">.</span><span class="nx">b1</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">tarObj</span><span class="p">.</span><span class="nx">a</span><span class="p">);</span>      <span class="c1">// 1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">tarObj</span><span class="p">.</span><span class="nx">b</span><span class="p">.</span><span class="nx">b1</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>    <span class="c1">// "hello"</span>
+</code></pre></div></div>
+
+<p><strong>参考：</strong></p>
+
+<ul>
+  <li><a href="http://blog.csdn.net/java2000_net/article/details/3014934">白话简单克隆和深度克隆</a> 介绍什么是深度克隆，用羊圈和羊的图，简单深刻。如下图：</li>
+</ul>
+
+<p><img src="http://p.blog.csdn.net/images/p_blog_csdn_net/java2000_net/EntryImages/20081004/%E7%AE%80%E5%8D%95%E5%85%8B%E9%9A%86.PNG" alt="简单克隆" />
+<img src="http://p.blog.csdn.net/images/p_blog_csdn_net/java2000_net/EntryImages/20081004/%E6%B7%B1%E5%BA%A6%E5%85%8B%E9%9A%86.PNG" alt="深度克隆" /></p>
+
+<ul>
+  <li><a href="http://www.jb51.net/article/32015.htm">javascript克隆对象深度介绍</a> 这个代码写的太妙了，可惜找不到源地址了，都是转载来转载去的，要是你知道源地址，请留言告诉我。</li>
+</ul>
+
+<p>浅度克隆：基本类型为值传递，对象仍为引用传递。</p>
+
+<p>深度克隆：所有元素或属性均完全克隆，并于原引用类型完全独立，即，在后面修改对象的属性的时候，原对象不会被修改。</p>
+
+<p><strong>思路：</strong>深度克隆复制目标对象，那么就需要枚举这个对象。</p>
+
+<ol>
+  <li>判断当前属性是否是引用类型，如果是数组或者对象，创建相应类型变量。</li>
+  <li>枚举对象内所有属性。</li>
+  <li>使用 <code class="language-plaintext highlighter-rouge">hasOwnProperty()</code> 方法，排除继承的属性。</li>
+  <li>给新的对象相应位置赋值，若当前属性为引用类型（数组或对象）递归本方法。直到内部的值类型。</li>
+  <li>返回新的对象。</li>
+</ol>
+
+<p><strong>我的代码实现：</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">cloneObject</span><span class="p">(</span><span class="nx">src</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// your implement</span>
+    <span class="kd">var</span> <span class="nx">o</span><span class="p">;</span> <span class="c1">//result</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">src</span><span class="p">)</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">[object Array]</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">o</span> <span class="o">=</span> <span class="p">[];</span> <span class="c1">//判断是否是数组，并赋初始值</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">o</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">src</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//遍历这个对象</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">src</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">i</span><span class="p">))</span> <span class="p">{</span> <span class="c1">//排出继承属性</span>
+            <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">src</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">object</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">o</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">cloneObject</span><span class="p">(</span><span class="nx">src</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span> <span class="c1">//递归赋值</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">o</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">src</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span> <span class="c1">//直接赋值</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">o</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="对数组进行去重">对数组进行去重</h3>
+
+<p><strong>参考：</strong></p>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array">MDN Array</a></li>
+  <li><a href="http://www.w3school.com.cn/jsref/jsref_obj_array.asp">JavaScript Array 对象 w3school</a></li>
+</ul>
+
+<p><strong>要求：</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 对数组进行去重操作，只考虑数组中元素为数字或字符串，返回一个去重后的数组</span>
+<span class="kd">function</span> <span class="nx">uniqArray</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// your implement</span>
+<span class="p">}</span>
+
+<span class="c1">// 使用示例</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">uniqArray</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span> <span class="c1">// [1, 3, 5, 7]</span>
+</code></pre></div></div>
+
+<p><strong>思路：</strong></p>
+
+<ol>
+  <li>新建一个空数组</li>
+  <li>遍历原数组</li>
+  <li>若新数组中不存在当前元素，将其 <code class="language-plaintext highlighter-rouge">push</code> 入新数组中</li>
+  <li>返回新数组</li>
+</ol>
+
+<p><strong>实现：</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 对数组进行去重操作，只考虑数组中元素为数字或字符串，返回一个去重后的数组</span>
+<span class="kd">function</span> <span class="nx">uniqArray</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">newArr</span> <span class="o">=</span> <span class="p">[];</span>    <span class="c1">//创建空数组</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>    <span class="c1">//遍历旧数组</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">newArr</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span><span class="c1">//如果新数组中不存在当前元素</span>
+            <span class="nx">newArr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span><span class="c1">//新数组中加入当前元素</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">newArr</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>相关方法与知识点：</strong></p>
+
+<h4 id="array-对象">Array 对象</h4>
+
+<ul>
+  <li>Array 对象属性</li>
+</ul>
+
+<table>
+  <tbody>
+    <tr>
+      <td>属性</td>
+      <td>描述</td>
+    </tr>
+    <tr>
+      <td>constructor</td>
+      <td>返回对创建此对象的数组函数的引用。</td>
+    </tr>
+    <tr>
+      <td>length</td>
+      <td>设置或返回数组中元素的数目。</td>
+    </tr>
+    <tr>
+      <td>prototype</td>
+      <td>使您有能力向对象添加属性和方法。</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>Mutator 方法，这些方法可以改变数组自身</li>
+</ul>
+
+<table>
+  <tbody>
+    <tr>
+      <td>方法</td>
+      <td>描述</td>
+    </tr>
+    <tr>
+      <td>pop</td>
+      <td>移除数组的最后一个元素，返回值是被删除的元素。</td>
+    </tr>
+    <tr>
+      <td>push</td>
+      <td>在数组的末尾添加一个或者多个元素，返回值是新的数组的长度。</td>
+    </tr>
+    <tr>
+      <td>reverse</td>
+      <td>颠倒数组中元素的顺序，原先第一个元素现在变成最后一个，同样原先的最后一个元素变成了现在的第一个，也就是数组的索引发生了变化。</td>
+    </tr>
+    <tr>
+      <td>shift</td>
+      <td>删除数组的第一个元素，返回值是删除的元素。</td>
+    </tr>
+    <tr>
+      <td>sort</td>
+      <td>对数组中的元素进行排序。</td>
+    </tr>
+    <tr>
+      <td>splice</td>
+      <td>添加或删除数组中的一个或多个元素。</td>
+    </tr>
+    <tr>
+      <td>unshift</td>
+      <td>添加一个或者多个元素在数组的开头，返回值是新的数组的长度。</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>Accessor 方法，这些过程不改变数组自身 These methods do not modify the array and return some representation of the array.</li>
+</ul>
+
+<table>
+  <tbody>
+    <tr>
+      <td>方法</td>
+      <td>描述</td>
+    </tr>
+    <tr>
+      <td>concat</td>
+      <td>返回一个包含此数组和其他数组和/或值的结合的新数组</td>
+    </tr>
+    <tr>
+      <td>indexOf</td>
+      <td>返回第一个与给定参数相等的数组元素的索引，没有找到则返回-1。</td>
+    </tr>
+    <tr>
+      <td>join</td>
+      <td>将所有的数组元素连接成一个字符串。</td>
+    </tr>
+    <tr>
+      <td>lastIndexOf</td>
+      <td>返回在数组中搜索到的与给定参数相等的元素的最后（最大）索引。</td>
+    </tr>
+    <tr>
+      <td>slice</td>
+      <td>返回数组中的一段。</td>
+    </tr>
+    <tr>
+      <td>toSource</td>
+      <td>Returns an array literal representing the specified array; you can use this value to create a new array. Overrides the Object.toSource method.</td>
+    </tr>
+    <tr>
+      <td>toString</td>
+      <td>返回代表该数组及其元素的字符,重写Object.toString 过程.</td>
+    </tr>
+    <tr>
+      <td>valueOf</td>
+      <td>Returns the primitive value of the array. Overrides the Object.valueOf method.</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>循环（迭代）过程</li>
+</ul>
+
+<table>
+  <tbody>
+    <tr>
+      <td>方法</td>
+      <td>描述</td>
+    </tr>
+    <tr>
+      <td>filter</td>
+      <td>对数组中的每一个元素调用参数中指定的过滤函数，并将对于过滤函数返回值为true的那些数组元素集合为新的数组返回。</td>
+    </tr>
+    <tr>
+      <td>forEach</td>
+      <td>对数组的每一个元素依次调用参数中指定的函数。</td>
+    </tr>
+    <tr>
+      <td>every</td>
+      <td>如果数组中每一个元素都满足参数中提供的测试函数，则返回真。</td>
+    </tr>
+    <tr>
+      <td>map</td>
+      <td>Creates a new array with the results of calling a provided function on every element in this array.</td>
+    </tr>
+    <tr>
+      <td>some</td>
+      <td>如果数组中至少有一个元素满足参数函数的测试，则返回true。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="实现-trim">实现 <code class="language-plaintext highlighter-rouge">trim()</code></h3>
+
+<p><strong>参考：</strong></p>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String">String MDN</a></li>
+  <li><a href="http://www.w3school.com.cn/jsref/jsref_obj_string.asp">JavaScript String 对象 W3school</a></li>
+</ul>
+
+<p><strong>要求：</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 中级班同学跳过此题</span>
+<span class="c1">// 实现一个简单的trim函数，用于去除一个字符串，头部和尾部的空白字符</span>
+<span class="c1">// 假定空白字符只有半角空格、Tab</span>
+<span class="c1">// 练习通过循环，以及字符串的一些基本方法，分别扫描字符串str头部和尾部是否有连续的空白字符，并且删掉他们，最后返回一个完成去除的字符串</span>
+<span class="kd">function</span> <span class="nx">simpleTrim</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// your implement</span>
+<span class="p">}</span>
+
+<span class="c1">// 很多同学肯定对于上面的代码看不下去，接下来，我们真正实现一个trim</span>
+<span class="c1">// 对字符串头尾进行空格字符的去除、包括全角半角空格、Tab等，返回一个字符串</span>
+<span class="c1">// 尝试使用一行简洁的正则表达式完成该题目</span>
+<span class="kd">function</span> <span class="nx">trim</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// your implement</span>
+<span class="p">}</span>
+
+<span class="c1">// 使用示例</span>
+<span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">   hi!  </span><span class="dl">'</span><span class="p">;</span>
+<span class="nx">str</span> <span class="o">=</span> <span class="nx">trim</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span> <span class="c1">// 'hi!'</span>
+</code></pre></div></div>
+
+<p><strong>思路：</strong></p>
+
+<p>对于 <code class="language-plaintext highlighter-rouge">simpleTrim()</code> 做两次循环，从前面开始和从后面开始。遇到空格和Tab跳出，最后用 <code class="language-plaintext highlighter-rouge">slice()</code> 取出子字符串。</p>
+
+<p>对于 <code class="language-plaintext highlighter-rouge">trim()</code> 使用正则表达式。</p>
+
+<p><strong>实现：</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">simpleTrim</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">i</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">j</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">str</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//从头遍历字符串</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="o">!=</span> <span class="dl">"</span><span class="s2"> </span><span class="dl">"</span> <span class="o">&amp;&amp;</span> <span class="nx">str</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="o">!=</span> <span class="dl">"</span><span class="se">\t</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//当不为空的时候</span>
+            <span class="k">break</span><span class="p">;</span> <span class="c1">//跳出循环</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">j</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="nx">j</span><span class="p">)</span> <span class="o">!=</span> <span class="dl">"</span><span class="s2"> </span><span class="dl">"</span> <span class="o">&amp;&amp;</span> <span class="nx">str</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="nx">j</span><span class="p">)</span> <span class="o">!=</span> <span class="dl">"</span><span class="se">\t</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//当不为空的时候</span>
+            <span class="k">break</span><span class="p">;</span> <span class="c1">//跳出循环</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">str</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">//返回子字符串</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">trim</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">str</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/^</span><span class="se">\s</span><span class="sr">+|</span><span class="se">\s</span><span class="sr">+$/g</span><span class="p">,</span> <span class="dl">''</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>关于正则表达式：</p>
+
+<h4 id="正则表达式">正则表达式</h4>
+
+<p>上面的思路是匹配开头和结尾的空白字符，并全局匹配。</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">^</code>：匹配字符串的开头，在多行检索中，匹配一行的开头。</li>
+  <li><code class="language-plaintext highlighter-rouge">$</code>：匹配字符串的结尾，在多行检索中，匹配一行的结尾。</li>
+  <li><code class="language-plaintext highlighter-rouge">|</code>：选择，匹配的是该符号左边的子表达式或右边的子表达式。</li>
+  <li><code class="language-plaintext highlighter-rouge">\s</code>：任何 Unicode 空白符。</li>
+  <li><code class="language-plaintext highlighter-rouge">g</code>：执行一个全局匹配，简言之，即找到所有匹配，而不是找到第一个之后就停止。</li>
+</ul>
+
+<p>以上来自 JavaScript权威指南（犀牛书），感觉这里面将的正则表达式还不错。</p>
+
+<p><strong>相关方法和知识点：</strong></p>
+
+<h4 id="string对象">String对象</h4>
+
+<ul>
+  <li>String 对象属性</li>
+</ul>
+
+<table>
+  <tbody>
+    <tr>
+      <td>属性</td>
+      <td>描述</td>
+    </tr>
+    <tr>
+      <td>constructor</td>
+      <td>对创建该对象的函数的引用</td>
+    </tr>
+    <tr>
+      <td>length</td>
+      <td>字符串的长度</td>
+    </tr>
+    <tr>
+      <td>prototype</td>
+      <td>允许您向对象添加属性和方法</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>String 对象方法</li>
+</ul>
+
+<table>
+  <tbody>
+    <tr>
+      <td>方法</td>
+      <td>描述</td>
+    </tr>
+    <tr>
+      <td>charAt()</td>
+      <td>返回在指定位置的字符。</td>
+    </tr>
+    <tr>
+      <td>charCodeAt()</td>
+      <td>返回在指定的位置的字符的 Unicode 编码。</td>
+    </tr>
+    <tr>
+      <td>concat()</td>
+      <td>连接字符串。</td>
+    </tr>
+    <tr>
+      <td>indexOf()</td>
+      <td>检索字符串。</td>
+    </tr>
+    <tr>
+      <td>lastIndexOf()</td>
+      <td>从后向前搜索字符串。</td>
+    </tr>
+    <tr>
+      <td>localeCompare()</td>
+      <td>用本地特定的顺序来比较两个字符串。</td>
+    </tr>
+    <tr>
+      <td>match()</td>
+      <td>找到一个或多个正则表达式的匹配。</td>
+    </tr>
+    <tr>
+      <td>replace()</td>
+      <td>替换与正则表达式匹配的子串。</td>
+    </tr>
+    <tr>
+      <td>search()</td>
+      <td>检索与正则表达式相匹配的值。</td>
+    </tr>
+    <tr>
+      <td>slice()</td>
+      <td>提取字符串的片断，并在新的字符串中返回被提取的部分。</td>
+    </tr>
+    <tr>
+      <td>split()</td>
+      <td>把字符串分割为字符串数组。</td>
+    </tr>
+    <tr>
+      <td>substr()</td>
+      <td>从起始索引号提取字符串中指定数目的字符。</td>
+    </tr>
+    <tr>
+      <td>substring()</td>
+      <td>提取字符串中两个指定的索引号之间的字符。</td>
+    </tr>
+    <tr>
+      <td>toLowerCase()</td>
+      <td>把字符串转换为小写。</td>
+    </tr>
+    <tr>
+      <td>toUpperCase()</td>
+      <td>把字符串转换为大写。</td>
+    </tr>
+    <tr>
+      <td>toString()</td>
+      <td>返回字符串。</td>
+    </tr>
+    <tr>
+      <td>valueOf()</td>
+      <td>返回某个字符串对象的原始值。</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>静态方法</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">String.fromCharCode()</code> 使用作为参数传入的字符编码创建一个新的字符串。</p>
+
+<ul>
+  <li>HTML方法</li>
+</ul>
+
+<p>由于不是标准方法，这里就不列举了。</p>
+
+<h3 id="遍历数组使每一个元素执行-fn-函数">遍历数组，使每一个元素执行 <code class="language-plaintext highlighter-rouge">fn</code> 函数</h3>
+
+<p><strong>要求：</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 实现一个遍历数组的方法，针对数组中每一个元素执行fn函数，并将数组索引和元素作为参数传递</span>
+<span class="kd">function</span> <span class="nx">each</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// your implement</span>
+<span class="p">}</span>
+
+<span class="c1">// 其中fn函数可以接受两个参数：item和index</span>
+
+<span class="c1">// 使用示例</span>
+<span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">java</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">c</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">php</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">html</span><span class="dl">'</span><span class="p">];</span>
+<span class="kd">function</span> <span class="nx">output</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">each</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">output</span><span class="p">);</span>  <span class="c1">// java, c, php, html</span>
+
+<span class="c1">// 使用示例</span>
+<span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">java</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">c</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">php</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">html</span><span class="dl">'</span><span class="p">];</span>
+<span class="kd">function</span> <span class="nx">output</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">index</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">item</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">each</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">output</span><span class="p">);</span>  <span class="c1">// 0:java, 1:c, 2:php, 3:html</span>
+</code></pre></div></div>
+
+<p><strong>分析：</strong></p>
+
+<p>这个任务有点像 <code class="language-plaintext highlighter-rouge">ECMAScript5</code> 中新增的数组方法：<code class="language-plaintext highlighter-rouge">forEach()</code>。还有一点这里的参数 index 是可选形参，保证第一个参数 item 能正常传入就行了，代码非常简单，如下：</p>
+
+<p><strong>实现：</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">each</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">arr</span><span class="p">){</span>
+        <span class="nx">fn</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span><span class="nx">i</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="获取对象中第一层元素个数">获取对象中第一层元素个数</h3>
+
+<p><strong>要求：</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 获取一个对象里面第一层元素的数量，返回一个整数</span>
+<span class="kd">function</span> <span class="nx">getObjectLength</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{}</span>
+
+<span class="c1">// 使用示例</span>
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">b</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="na">c</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">c1</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="na">c2</span><span class="p">:</span> <span class="mi">4</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getObjectLength</span><span class="p">(</span><span class="nx">obj</span><span class="p">));</span> <span class="c1">// 3</span>
+</code></pre></div></div>
+
+<p><strong>实现：</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getObjectLength</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>这个自己写的比较简单，不知道可以这样写不。其中 <code class="language-plaintext highlighter-rouge">Object.keys(o)</code> 为 Object 的一个静态方法，参数是一个对象，返回一个包含o的所有可枚举自有（非继承）属性名字的数组。</p>
+
+<h3 id="正则表达式-1">正则表达式</h3>
+
+<p><strong>要求：</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 判断是否为邮箱地址</span>
+<span class="kd">function</span> <span class="nx">isEmail</span><span class="p">(</span><span class="nx">emailStr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// your implement</span>
+<span class="p">}</span>
+
+<span class="c1">// 判断是否为手机号</span>
+<span class="kd">function</span> <span class="nx">isMobilePhone</span><span class="p">(</span><span class="nx">phone</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// your implement</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>分析：</strong></p>
+
+<p>邮箱由（数字字母，点），数字字母组合，@符号，数字字母，（点，数字字母）。其中两个小括号都是任意个数的。并且开头和结尾都是字母。</p>
+
+<p>手机号是11位组成的，有时候会在前面加国际区号的前缀，如中国：+86。查阅相关资料后发现区号最多4位。<a href="http://baike.baidu.com/link?url=2nwM_XyoKXLNPxk0-uDwGT4SxIFncXy7dqB3VbsH3tSaueYRri3CYOWWF9qb84zUqeKkq9uTF2YfetoiyJVm7_">国际电话区号_百度百科</a></p>
+
+<p>并且手机号最多就是11位，其他国家有用8位的，也有用7位，10位的都有。最短是7位，最长是11位。</p>
+
+<p><strong>实现：</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 判断是否为邮箱地址</span>
+<span class="kd">function</span> <span class="nx">isEmail</span><span class="p">(</span><span class="nx">emailStr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">pattern</span> <span class="o">=</span> <span class="sr">/^</span><span class="se">(\w</span><span class="sr">+</span><span class="se">\.)</span><span class="sr">*</span><span class="se">\w</span><span class="sr">+@</span><span class="se">\w</span><span class="sr">+</span><span class="se">(\.\w</span><span class="sr">+</span><span class="se">)</span><span class="sr">+$/</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">pattern</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">emailStr</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// 判断是否为手机号</span>
+<span class="kd">function</span> <span class="nx">isMobilePhone</span><span class="p">(</span><span class="nx">phone</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">pattern</span> <span class="o">=</span> <span class="sr">/^</span><span class="se">(\+\d{1,4})?\d{7,11}</span><span class="sr">$/</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">pattern</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">phone</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>相关方法和知识点：</strong></p>
+
+<ul>
+  <li>参考：<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp#Special_characters_in_regular_expressions">RegExp MDN</a></li>
+  <li>正则表达式修饰符：</li>
+</ul>
+
+<table>
+  <tbody>
+    <tr>
+      <td>字符</td>
+      <td>含义</td>
+    </tr>
+    <tr>
+      <td>g</td>
+      <td>全局匹配</td>
+    </tr>
+    <tr>
+      <td>i</td>
+      <td>忽略大小写</td>
+    </tr>
+    <tr>
+      <td>m</td>
+      <td>让开始和结束字符（^ 和 $）工作在多行模式（也就是，^ 和 $ 可以匹配字符串中每一行的开始和结束（行是由 \n 或 \r 分割的），而不只是整个输入字符串的最开始和最末尾处。</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>字符类别</li>
+</ul>
+
+<table>
+  <tbody>
+    <tr>
+      <td>字符</td>
+      <td>含义</td>
+    </tr>
+    <tr>
+      <td>[…]</td>
+      <td>方括号内的任意字符</td>
+    </tr>
+    <tr>
+      <td>[^…]</td>
+      <td>不在方括号内的任意字符</td>
+    </tr>
+    <tr>
+      <td>.</td>
+      <td>（点号，小数点）匹配任意单个字符，但是换行符除外，包括：\n \r \u2028 或 \u2029。<br /><br />需要注意的是，m 多行（multiline）标志不会改变点号的表现。因此为了匹配多行中的字符集，可使用[^] （当然你不是打算用在旧版本 IE 中），它将会匹配任意字符，包括换行符<br /><br />例如，/.y/ 匹配 “yes make my day” 中的 “my” 和 “ay”，但是不匹配 “yes”。</td>
+    </tr>
+    <tr>
+      <td>\d</td>
+      <td>匹配基本拉丁字母表（basic Latin alphabet）中的一个数字字符。等价于[0-9]。<br /><br />例如，/\d/ 或 /[0-9]/ 匹配 “B2 is the suite number.” 中的 ‘2’。</td>
+    </tr>
+    <tr>
+      <td>\D</td>
+      <td>匹配任意一个不是基本拉丁字母表中数字的字符。等价于[^0-9]。<br /><br />例如，/\D/ 或 /[^0-9]/ 匹配 “B2 is the suite number.” 中的 ‘B’。</td>
+    </tr>
+    <tr>
+      <td>\w</td>
+      <td>匹配任意来自基本拉丁字母表中的字母数字字符，还包括下划线。等价于 [A-Za-z0-9_]。<br /><br />例如，/\w/ 匹配 “apple” 中的 ‘a’，”$5.28” 中的 ‘5’ 和 “3D” 中的 ‘3’。</td>
+    </tr>
+    <tr>
+      <td>\W</td>
+      <td>匹配任意不是基本拉丁字母表中单词（字母数字下划线）字符的字符。等价于 [^A-Za-z0-9_]。<br /><br />例如，/\W/ 或 /[^A-Za-z0-9_]/ 匹配 “50%” 中的 ‘%’。</td>
+    </tr>
+    <tr>
+      <td>\s</td>
+      <td>匹配一个空白符，包括空格、制表符、换页符、换行符和其他 Unicode 空格。<br /><br />等价于 [ \f\n\r\t\v​\u00a0\u1680​\u180e\u2000​\u2001\u2002​\u2003\u2004​ \u2005\u2006​\u2007\u2008​\u2009\u200a​\u2028\u2029​​\u202f\u205f​ \u3000]。<br /><br />例如 /\s\w*/ 匹配 “foo bar” 中的 ‘ bar’。</td>
+    </tr>
+    <tr>
+      <td>\S</td>
+      <td>匹配一个非空白符。等价于 [^ \f\n\r\t\v​\u00a0\u1680​\u180e\u2000​\u2001\u2002​\u2003\u2004​ \u2005\u2006​\u2007\u2008​\u2009\u200a​\u2028\u2029​\u202f\u205f​\u3000]。<br /><br />例如，/\S\w*/ 匹配 “foo bar” 中的 ‘foo’。</td>
+    </tr>
+    <tr>
+      <td>[\b]</td>
+      <td>匹配一个退格符（backspace）（不要与 \b 混淆）</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>直接量字符</li>
+</ul>
+
+<table>
+  <tbody>
+    <tr>
+      <td>字符</td>
+      <td>匹配</td>
+    </tr>
+    <tr>
+      <td>数字和字母字符</td>
+      <td>自身</td>
+    </tr>
+    <tr>
+      <td>\t</td>
+      <td>匹配一个水平制表符（tab）</td>
+    </tr>
+    <tr>
+      <td>\r</td>
+      <td>匹配一个回车符（carriage return）</td>
+    </tr>
+    <tr>
+      <td>\n</td>
+      <td>匹配一个换行符（linefeed）</td>
+    </tr>
+    <tr>
+      <td>\v</td>
+      <td>匹配一个垂直制表符（vertical tab）</td>
+    </tr>
+    <tr>
+      <td>\f</td>
+      <td>匹配一个换页符（form-feed）</td>
+    </tr>
+    <tr>
+      <td>\0</td>
+      <td>匹配一个 NUL 字符。不要在此后面跟小数点。</td>
+    </tr>
+    <tr>
+      <td>\cX</td>
+      <td>X 是 A - Z 的一个字母。匹配字符串中的一个控制字符。<br /><br />例如，/\cM/ 匹配字符串中的 control-M。</td>
+    </tr>
+    <tr>
+      <td>\xhh</td>
+      <td>匹配编码为 hh （两个十六进制数字）的字符。</td>
+    </tr>
+    <tr>
+      <td>\uhhhh</td>
+      <td>匹配 Unicode 值为 hhhh （四个十六进制数字）的字符。</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>边界</li>
+</ul>
+
+<table>
+  <tbody>
+    <tr>
+      <td>字符</td>
+      <td>含义</td>
+    </tr>
+    <tr>
+      <td>^</td>
+      <td>匹配输入/字符串的开始。如果多行（multiline）标志被设为 true，该字符也会匹配一个断行（line break）符后的开始处。<br /><br />例如，/^A/ 不匹配 “an A” 中的 “A”，但匹配 “An A” 中的 “A”。</td>
+    </tr>
+    <tr>
+      <td>$</td>
+      <td>匹配输入/字符串的结尾。如果多行（multiline）标志被设为 true，该字符也会匹配一个断行（line break）符的前的结尾处。<br /><br />例如，/t$/ 不匹配 “eater” 中的 “t”，但匹配 “eat” 中的 “t”。</td>
+    </tr>
+    <tr>
+      <td>\b</td>
+      <td>匹配一个零宽单词边界（zero-width word boundary），如一个字母与一个空格之间。 （不要和 [\b] 混淆）<br /><br />例如，/\bno/ 匹配 “at noon” 中的 “no”，/ly\b/ 匹配 “possibly yesterday.” 中的 “ly”。</td>
+    </tr>
+    <tr>
+      <td>\B</td>
+      <td>匹配一个零宽非单词边界（zero-width non-word boundary），如两个字母之间或两个空格之间。<br /><br />例如，/\Bon/ 匹配 “at noon” 中的 “on”，/ye\B/ 匹配 “possibly yesterday.” 中的 “ye”。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="dom">DOM</h2>
+
+<p>参考：</p>
+
+<ul>
+  <li><a href="http://www.w3school.com.cn/htmldom/index.asp">HTML DOM 教程 W3C</a></li>
+  <li><a href="http://www.w3school.com.cn/js/js_htmldom.asp">JavaScript HTML DOM W3C</a></li>
+  <li><a href="http://www.w3school.com.cn/jsref/dom_obj_document.asp">参考手册-HTML DOM Document 对象</a></li>
+  <li><a href="http://www.w3school.com.cn/jsref/dom_obj_all.asp">参考手册-HTML DOM Element 对象</a></li>
+</ul>
+
+<h3 id="基本任务">基本任务</h3>
+
+<p><strong>任务：</strong></p>
+
+<p>先来一些简单的，在你的util.js中完成以下任务：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 为element增加一个样式名为newClassName的新样式</span>
+<span class="kd">function</span> <span class="nx">addClass</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">newClassName</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// your implement</span>
+<span class="p">}</span>
+
+<span class="c1">// 移除element中的样式oldClassName</span>
+<span class="kd">function</span> <span class="nx">removeClass</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">oldClassName</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// your implement</span>
+<span class="p">}</span>
+
+<span class="c1">// 判断siblingNode和element是否为同一个父元素下的同一级的元素，返回bool值</span>
+<span class="kd">function</span> <span class="nx">isSiblingNode</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">siblingNode</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// your implement</span>
+<span class="p">}</span>
+
+<span class="c1">// 获取element相对于浏览器窗口的位置，返回一个对象{x, y}</span>
+<span class="kd">function</span> <span class="nx">getPosition</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// your implement</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>思路：</strong></p>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">addClass()</code></p>
+
+    <p>对于element本身如果没有样式类，那么使用Element的className属性获取的是空字符串，则直接添加新的样式类字符串即可。对于已经有了样式类的元素，获取到原有的样式类后，在后面添加一个空格，再添加新的样式类即可。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">removeClass()</code></p>
+
+    <p>获取原始的样式，然后用正则表达式去匹配这个要删掉的样式，由于是动态的正则表达式，所以要用正则的构造函数 <code class="language-plaintext highlighter-rouge">RegExp()</code> 来创建，并且使用 <code class="language-plaintext highlighter-rouge">\b</code> 来确定单词边界。匹配好后用空字符串替换被匹配的样式类即可。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">isSiblingNode()</code></p>
+
+    <p>直接判断两个父节点是不是相同</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">getPosition()</code></p>
+
+    <p>下面这些内容是我之前的思路，现在觉得太复杂，可以用另一种解决方法。</p>
+
+    <blockquote>
+      <p><code class="language-plaintext highlighter-rouge">offsetTop</code>, <code class="language-plaintext highlighter-rouge">offsetLeft</code> 都是相对于最近一个有定位的父元素，如果都没有那么就是相对于 body 的偏移位置。</p>
+
+      <p><code class="language-plaintext highlighter-rouge">offsetParent</code> 是寻找最近一个有定位的父级元素，如果没有，那么找到 body 元素。</p>
+
+      <p>所以这道题需要先寻找有定位的父级元素，如果都没有，那么就是相对于 body 的偏移了，可以直接使用 <code class="language-plaintext highlighter-rouge">offsetTop</code>, <code class="language-plaintext highlighter-rouge">offsetLeft</code>。</p>
+
+      <p>如果有定位的父级元素不是 body，是 A 元素，那么再寻找 A 元素的最近的有定位的父级元素，如果没有，就是相对于 body 的定位，这时，所求偏移量就是 A 的偏移量加所求元素相对于 A 的偏移量。如果 A 还有已经定位的父级元素，就继续去推，直到找到 body 为止。</p>
+
+      <p>这里可能要用到一个递归算法。</p>
+    </blockquote>
+
+    <p><strong>另一种方法：</strong></p>
+
+    <p>使用 <code class="language-plaintext highlighter-rouge">getBoundingClientRect()</code> 方法获取当前元素相对于可视区域的位置，再加上滚动条的位置。</p>
+
+    <p>关于滚动条的位置 <code class="language-plaintext highlighter-rouge">scrollTop</code>, <code class="language-plaintext highlighter-rouge">scrollLeft</code> 这两个属性的使用，各个浏览器还都不一样。</p>
+
+    <ul>
+      <li>详情见 <a href="http://www.cnblogs.com/zhenyu-whu/archive/2012/11/13/2768004.html">document.body.scrollTop or document.documentElement.scrollTop</a>。</li>
+    </ul>
+
+    <p>简单的说就是：FF、Opera 和 IE 浏览器认为在客户端浏览器展示的页面的内容对应于整个 HTML，所以使用 <code class="language-plaintext highlighter-rouge">document.documentElement</code>来代表，相应的滚动距离则通过 <code class="language-plaintext highlighter-rouge">document.documentElement.scrollLeft</code> 和 <code class="language-plaintext highlighter-rouge">document.documentElement.scrollTop</code> 来获取，而 Safari 和 Chrome 浏览器则认为页面开始于 body 部分，从而相应的滚动距离用 <code class="language-plaintext highlighter-rouge">document.body.scrollLeft</code> 和 <code class="language-plaintext highlighter-rouge">document.body.scrollTop</code> 来获取。另外需要注意的是，FF 和 IE 的 quirks mode（兼容模式）下是用 <code class="language-plaintext highlighter-rouge">document.body</code> 来获取的。</p>
+
+    <p>documentElement 对应的是 html 标签，而 body 对应的是 body 标签</p>
+
+    <p>针对跨浏览器的解决方案则可简单的用如下代码获取：</p>
+  </li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">scrollLeft</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">scrollLeft</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">scrollLeft</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">scrollTop</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">scrollTop</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">scrollTop</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>实现：</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 为element增加一个样式名为newClassName的新样式</span>
+<span class="kd">function</span> <span class="nx">addClass</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">newClassName</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">oldClassName</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">className</span><span class="p">;</span> <span class="c1">//获取旧的样式类</span>
+    <span class="nx">element</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="nx">oldClassName</span> <span class="o">===</span> <span class="dl">""</span> <span class="p">?</span> <span class="nx">newClassName</span> <span class="p">:</span> <span class="nx">oldClassName</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">newClassName</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 移除element中的样式oldClassName</span>
+<span class="kd">function</span> <span class="nx">removeClass</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">oldClassName</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">originClassName</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">className</span><span class="p">;</span> <span class="c1">//获取原先的样式类</span>
+    <span class="kd">var</span> <span class="nx">pattern</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="dl">"</span><span class="se">\\</span><span class="s2">b</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">oldClassName</span> <span class="o">+</span> <span class="dl">"</span><span class="se">\\</span><span class="s2">b</span><span class="dl">"</span><span class="p">);</span> <span class="c1">//使用构造函数构造动态的正则表达式</span>
+    <span class="nx">element</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="nx">originClassName</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">pattern</span><span class="p">,</span> <span class="dl">''</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isSiblingNode</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">siblingNode</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">element</span><span class="p">.</span><span class="nx">parentNode</span> <span class="o">===</span> <span class="nx">siblingNode</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">getPosition</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">pos</span><span class="o">=</span><span class="p">{};</span>
+    <span class="nx">pos</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">getBoundingClientRect</span><span class="p">().</span><span class="nx">left</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">scrollLeft</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">scrollLeft</span><span class="p">);</span>
+    <span class="nx">pos</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">getBoundingClientRect</span><span class="p">().</span><span class="nx">top</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">scrollTop</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">scrollTop</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">pos</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="mini-">mini $</h3>
+
+<p><strong>任务：</strong></p>
+
+<p>接下来挑战一个mini $，它和之前的$是不兼容的，它应该是document.querySelector的功能子集，在不直接使用document.querySelector的情况下，在你的util.js中完成以下任务：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 实现一个简单的Query</span>
+<span class="kd">function</span> <span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="c1">// 可以通过id获取DOM对象，通过#标示，例如</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">#adom</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// 返回id为adom的DOM对象</span>
+
+<span class="c1">// 可以通过tagName获取DOM对象，例如</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">a</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// 返回第一个&lt;a&gt;对象</span>
+
+<span class="c1">// 可以通过样式名称获取DOM对象，例如</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">.classa</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// 返回第一个样式定义包含classa的对象</span>
+
+<span class="c1">// 可以通过attribute匹配获取DOM对象，例如</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">[data-log]</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// 返回第一个包含属性data-log的对象</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">[data-time=2015]</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// 返回第一个包含属性data-time且值为2015的对象</span>
+
+<span class="c1">// 可以通过简单的组合提高查询便利性，例如</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">#adom .classa</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// 返回id为adom的DOM所包含的所有子节点中，第一个样式定义包含classa的对象</span>
+</code></pre></div></div>
+
+<p><strong>参考：</strong></p>
+
+<ul>
+  <li><a href="http://www.imooc.com/code/4477">Sizzle选择器</a></li>
+  <li><a href="http://www.cnblogs.com/xesam/archive/2012/02/15/2352466.html">Sizzle引擎–原理与实践（一）</a></li>
+  <li><a href="http://www.cnblogs.com/rubylouvre/archive/2011/01/24/1942818.html">Sizzle是怎样工作的</a></li>
+</ul>
+
+<p><strong>思路：</strong></p>
+
+<ol>
+  <li>通过空格拆分参数 selector，因为可能是组合查询。拆分为数组 selectorArr</li>
+  <li>遍历 selectorArr，条件判断各种情况。</li>
+  <li>得到节点的 Element 对象后，以这个对象为父节点，继续下一层的判断。</li>
+</ol>
+
+<p><strong>实现：</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//多个选择器有点难到我了，看了一些资料觉得思路应该如下：</span>
+<span class="c1">//1.如果存在#，直接从#开始向后查</span>
+<span class="c1">//2.如果存在tag直接找到所有的tag然后向后查</span>
+<span class="c1">//3.样式类，属性，从后向前查，得到它所有的父节点名称，去筛选匹配</span>
+<span class="c1">//以上的做法有点太复杂，我还是做一个简单的正向匹配吧。</span>
+<span class="kd">function</span> <span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">selector</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">selector</span> <span class="o">==</span> <span class="nb">document</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">document</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nx">selector</span> <span class="o">=</span> <span class="nx">selector</span><span class="p">.</span><span class="nx">trim</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">selector</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="dl">"</span><span class="s2"> </span><span class="dl">"</span><span class="p">)</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//若存在空格</span>
+        <span class="kd">var</span> <span class="nx">selectorArr</span> <span class="o">=</span> <span class="nx">selector</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="sr">/</span><span class="se">\s</span><span class="sr">+/</span><span class="p">);</span> <span class="c1">//拆成数组</span>
+
+        <span class="kd">var</span> <span class="nx">rootScope</span> <span class="o">=</span> <span class="nx">myQuery</span><span class="p">(</span><span class="nx">selectorArr</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="c1">//第一次的查找范围</span>
+        <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">[];</span>
+        <span class="c1">//循环选择器中的每一个元素</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">selectorArr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">rootScope</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">result</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">myQuery</span><span class="p">(</span><span class="nx">selectorArr</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="nx">rootScope</span><span class="p">[</span><span class="nx">j</span><span class="p">]));</span>
+            <span class="p">}</span>
+            <span class="c1">// rootScope = result;</span>
+            <span class="c1">// 目前这个方法还有bug</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nx">result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">//只有一个，直接查询</span>
+        <span class="k">return</span> <span class="nx">myQuery</span><span class="p">(</span><span class="nx">selector</span><span class="p">,</span> <span class="nb">document</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/**
+ * 针对一个内容查找结果 success
+ * @param  {String} selector 选择器内容
+ * @param  {Element} root    根节点元素
+ * @return {NodeList数组}    节点列表，可能是多个节点也可能是一个
+ */</span>
+<span class="kd">function</span> <span class="nx">myQuery</span><span class="p">(</span><span class="nx">selector</span><span class="p">,</span> <span class="nx">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">signal</span> <span class="o">=</span> <span class="nx">selector</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="c1">//</span>
+    <span class="kd">var</span> <span class="nx">allChildren</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">content</span> <span class="o">=</span> <span class="nx">selector</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">currAttr</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="nx">root</span> <span class="o">=</span> <span class="nx">root</span> <span class="o">||</span> <span class="nb">document</span><span class="p">;</span> <span class="c1">//若没有给root，赋值document</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="nx">signal</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="dl">"</span><span class="s2">#</span><span class="dl">"</span><span class="p">:</span>
+            <span class="nx">result</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">content</span><span class="p">));</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="dl">"</span><span class="s2">.</span><span class="dl">"</span><span class="p">:</span>
+            <span class="nx">allChildren</span> <span class="o">=</span> <span class="nx">root</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="dl">"</span><span class="s2">*</span><span class="dl">"</span><span class="p">);</span>
+            <span class="c1">// var pattern0 = new RegExp("\\b" + content + "\\b");</span>
+            <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">allChildren</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">currAttr</span> <span class="o">=</span> <span class="nx">allChildren</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">getAttribute</span><span class="p">(</span><span class="dl">"</span><span class="s2">class</span><span class="dl">"</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">currAttr</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="kd">var</span> <span class="nx">currAttrsArr</span> <span class="o">=</span> <span class="nx">currAttr</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="sr">/</span><span class="se">\s</span><span class="sr">+/</span><span class="p">);</span>
+                    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">currAttr</span><span class="p">);</span>
+                    <span class="k">for</span> <span class="p">(</span><span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">currAttrsArr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="nx">content</span> <span class="o">===</span> <span class="nx">currAttrsArr</span><span class="p">[</span><span class="nx">j</span><span class="p">])</span> <span class="p">{</span>
+                            <span class="nx">result</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">allChildren</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+                            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="dl">"</span><span class="s2">[</span><span class="dl">"</span><span class="p">:</span> <span class="c1">//属性选择</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">content</span><span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="dl">"</span><span class="s2">=</span><span class="dl">"</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//只有属性，没有值</span>
+                <span class="nx">allChildren</span> <span class="o">=</span> <span class="nx">root</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="dl">"</span><span class="s2">*</span><span class="dl">"</span><span class="p">);</span>
+                <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">allChildren</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">allChildren</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">getAttribute</span><span class="p">(</span><span class="nx">selector</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">result</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">allChildren</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">//既有属性，又有值</span>
+                <span class="nx">allChildren</span> <span class="o">=</span> <span class="nx">root</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="dl">"</span><span class="s2">*</span><span class="dl">"</span><span class="p">);</span>
+                <span class="kd">var</span> <span class="nx">pattern</span> <span class="o">=</span> <span class="sr">/</span><span class="se">\[(\w</span><span class="sr">+</span><span class="se">)\s</span><span class="sr">*</span><span class="se">\=\s</span><span class="sr">*</span><span class="se">(\w</span><span class="sr">+</span><span class="se">)\]</span><span class="sr">/</span><span class="p">;</span> <span class="c1">//为了分离等号前后的内容</span>
+                <span class="kd">var</span> <span class="nx">cut</span> <span class="o">=</span> <span class="nx">selector</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">pattern</span><span class="p">);</span> <span class="c1">//分离后的结果，为数组</span>
+                <span class="kd">var</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">cut</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="c1">//键</span>
+                <span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">cut</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="c1">//值</span>
+                <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">allChildren</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">allChildren</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">getAttribute</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="o">==</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">result</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">allChildren</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="nl">default</span><span class="p">:</span> <span class="c1">//tag</span>
+            <span class="nx">result</span> <span class="o">=</span> <span class="nx">root</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="nx">selector</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="事件">事件</h2>
+
+<h3 id="绑定注册事件与移除事件">绑定注册事件与移除事件</h3>
+
+<p><strong>任务与实现：</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 给一个element绑定一个针对event事件的响应，响应函数为listener</span>
+<span class="kd">function</span> <span class="nx">addEvent</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">listener</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">element</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span><span class="nx">listener</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">){</span>
+        <span class="nx">element</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">(</span><span class="dl">"</span><span class="s2">on</span><span class="dl">"</span><span class="o">+</span><span class="nx">event</span><span class="p">,</span><span class="nx">listener</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 移除element对象对于event事件发生时执行listener的响应</span>
+<span class="kd">function</span> <span class="nx">removeEvent</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">listener</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">removeEventListenr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">element</span><span class="p">.</span><span class="nx">removeEventListenr</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span><span class="nx">listener</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">detachEvent</span><span class="p">){</span>
+        <span class="nx">element</span><span class="p">.</span><span class="nx">detachEvent</span><span class="p">(</span><span class="dl">"</span><span class="s2">on</span><span class="dl">"</span><span class="o">+</span><span class="nx">event</span><span class="p">,</span><span class="nx">listener</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>相关说明：</strong></p>
+
+<p>IE8+ 支持 <code class="language-plaintext highlighter-rouge">addEventListener()</code>。IE8 以下的版本使用 <code class="language-plaintext highlighter-rouge">attachEvent()</code>。</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">attachEvent()</code> 不支持事件捕获。</li>
+  <li><code class="language-plaintext highlighter-rouge">attachEvent()</code> 第一个参数事件处理程序属性名使用前缀 on。</li>
+  <li><code class="language-plaintext highlighter-rouge">attachEvent()</code> 允许相同的事件处理程序函数注册多次。</li>
+</ul>
+
+<h3 id="click-与-enter-键事件绑定">click 与 enter 键事件绑定</h3>
+
+<p><strong>任务与实现：</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 实现对click事件的绑定</span>
+<span class="kd">function</span> <span class="nx">addClickEvent</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">listener</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">addEvent</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="nx">listener</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// 实现对于按Enter键时的事件绑定</span>
+<span class="kd">function</span> <span class="nx">addEnterEvent</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">listener</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">addEvent</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="dl">"</span><span class="s2">keydown</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">13</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">listener</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>相关说明：</strong></p>
+
+<p>这里我直接使用了上一个任务写好的 <code class="language-plaintext highlighter-rouge">addEvent()</code> 函数。这样可以简化代码，并有良好的兼容性。</p>
+
+<p>enter 键的 keyCode 为 13。</p>
+
+<h3 id="事件代理">事件代理</h3>
+
+<p><strong>参考：</strong></p>
+
+<ul>
+  <li><a href="http://www.cnblogs.com/Aralic/p/4446030.html">javascript事件代理（委托）</a></li>
+  <li><a href="http://www.cnblogs.com/leo388/p/4461579.html">JS - 事件代理</a></li>
+</ul>
+
+<p><strong>任务与实现：</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">delegateEvent</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span><span class="nx">tag</span><span class="p">,</span><span class="nx">eventName</span><span class="p">,</span><span class="nx">listener</span><span class="p">){</span>
+    <span class="nx">addEvent</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">eventName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">){</span>
+        <span class="kd">var</span> <span class="nx">target</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span> <span class="o">||</span> <span class="nx">event</span><span class="p">.</span><span class="nx">srcElement</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">target</span><span class="p">.</span><span class="nx">tagName</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">==</span> <span class="nx">tag</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">())</span> <span class="p">{</span>
+            <span class="nx">listener</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="bom">BOM</h2>
+
+<p><strong>任务与实现：</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 判断是否为IE浏览器，返回-1或者版本号</span>
+<span class="kd">function</span> <span class="nx">isIE</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nb">navigator</span><span class="p">.</span><span class="nx">userAgent</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span>
+    <span class="c1">//ie10的信息：</span>
+    <span class="c1">//mozilla/5.0 (compatible; msie 10.0; windows nt 6.2; trident/6.0)</span>
+    <span class="c1">//ie11的信息：</span>
+    <span class="c1">//mozilla/5.0 (windows nt 6.1; trident/7.0; slcc2; .net clr 2.0.50727; .net clr 3.5.30729; .net clr 3.0.30729; media center pc 6.0; .net4.0c; .net4.0e; infopath.2; rv:11.0) like gecko</span>
+    <span class="kd">var</span> <span class="nx">ie</span> <span class="o">=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/rv:</span><span class="se">([\d</span><span class="sr">.</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">/</span><span class="p">)</span> <span class="o">||</span> <span class="nx">s</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/msie </span><span class="se">([\d</span><span class="sr">.</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">/</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">ie</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">ie</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 设置cookie</span>
+<span class="kd">function</span> <span class="nx">setCookie</span><span class="p">(</span><span class="nx">cookieName</span><span class="p">,</span> <span class="nx">cookieValue</span><span class="p">,</span> <span class="nx">expiredays</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">cookie</span> <span class="o">=</span> <span class="nx">cookieName</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">=</span><span class="dl">"</span> <span class="o">+</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">cookieValue</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">expiredays</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">number</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">cookie</span> <span class="o">+=</span> <span class="dl">"</span><span class="s2">;max-age=</span><span class="dl">"</span> <span class="o">+</span> <span class="p">(</span><span class="nx">expiredays</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span> <span class="o">=</span> <span class="nx">cookie</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 获取cookie值</span>
+<span class="kd">function</span> <span class="nx">getCookie</span><span class="p">(</span><span class="nx">cookieName</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">cookie</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="kd">var</span> <span class="nx">all</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">all</span><span class="o">===</span><span class="dl">""</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">cookie</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kd">var</span> <span class="nx">list</span> <span class="o">=</span> <span class="nx">all</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">; </span><span class="dl">"</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">list</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">list</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">indexOf</span><span class="p">(</span><span class="dl">"</span><span class="s2">=</span><span class="dl">"</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">list</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">p</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">list</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">substr</span><span class="p">(</span><span class="nx">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="nx">value</span> <span class="o">=</span> <span class="nb">decodeURIComponent</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+        <span class="nx">cookie</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">cookie</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>参考自：JavaScript权威指南</li>
+</ul>
+
+<h3 id="sessionstoragelocalstorage-和-cookie-之间的区别">sessionStorage、localStorage 和 cookie 之间的区别</h3>
+
+<ul>
+  <li>
+    <p><strong>共同点</strong></p>
+
+    <p>都是保存在浏览器端，且同源的。都是键值对存储。</p>
+  </li>
+  <li>
+    <p><strong>区别</strong></p>
+
+    <table>
+      <tbody>
+        <tr>
+          <td>特性</td>
+          <td>Cookie</td>
+          <td>localStorage</td>
+          <td>sessionStorage</td>
+        </tr>
+        <tr>
+          <td>数据的声明周期</td>
+          <td>一般由服务器生成，可设置失效时间。如果在浏览器端生成Cookie，默认是关闭浏览器后失效</td>
+          <td>除非被清除，否则永久保存</td>
+          <td>仅在当前会话下有效，关闭页面或浏览器后被清除</td>
+        </tr>
+        <tr>
+          <td>存放数据大小</td>
+          <td>4K左右</td>
+          <td>一般为5MB</td>
+          <td>同左</td>
+        </tr>
+        <tr>
+          <td>与服务器端通信</td>
+          <td>每次都会携带在HTTP头中，如果使用cookie保存过多数据会带来性能问题</td>
+          <td>仅在客户端（即浏览器）中保存，不参与和服务器的通信</td>
+          <td>同左</td>
+        </tr>
+        <tr>
+          <td>易用性</td>
+          <td>需要程序员自己封装，源生的Cookie接口不友好</td>
+          <td>源生接口可以接受，亦可再次封装来对Object和Array有更好的支持</td>
+          <td>同左</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p><strong>应用场景</strong></p>
+
+    <p>每个 HTTP 请求都会带着 Cookie 信息，所以 Cookie 应当简单，比如判断用户是否登陆。</p>
+
+    <p>localStorage 接替 Cookie 管理购物车，同时也可以存储 HTML5 游戏的一些本地数据。</p>
+
+    <p>sessionStorage 在表单内容较多的时候，为了优化用户体验，按步骤分页引导填写，这时使用sessionStorage 就发挥了作用。</p>
+  </li>
+  <li>
+    <p><strong>安全性</strong></p>
+
+    <p>cookie 中最好不要放置任何明文的东西。两个 storage的数据提交后在服务端一定要校验</p>
+  </li>
+</ul>
+
+<p><strong>参考：</strong></p>
+
+<ul>
+  <li><a href="http://jerryzou.com/posts/cookie-and-web-storage/">详说 Cookie, LocalStorage 与 SessionStorage</a></li>
+</ul>
+
+<h2 id="ajax">Ajax</h2>
+
+<p><strong>任务：</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 学习Ajax，并尝试自己封装一个Ajax方法。实现如下方法：</span>
+<span class="kd">function</span> <span class="nx">ajax</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// your implement</span>
+<span class="p">}</span>
+
+<span class="c1">// 使用示例：</span>
+<span class="nx">ajax</span><span class="p">(</span>
+    <span class="dl">'</span><span class="s1">http://localhost:8080/server/ajaxtest</span><span class="dl">'</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">simon</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">password</span><span class="p">:</span> <span class="dl">'</span><span class="s1">123456</span><span class="dl">'</span>
+        <span class="p">},</span>
+        <span class="na">onsuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">responseText</span><span class="p">,</span> <span class="nx">xhr</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">responseText</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">);</span><span class="err">　</span>
+</code></pre></div></div>
+
+<p><strong>实现：</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">ajax</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="kd">var</span> <span class="nx">dataResult</span><span class="p">;</span> <span class="c1">//结果data</span>
+
+    <span class="c1">// 处理data</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">c</span> <span class="k">in</span> <span class="nx">options</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">str</span> <span class="o">=</span> <span class="nx">str</span> <span class="o">+</span> <span class="nx">c</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">=</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">data</span><span class="p">[</span><span class="nx">c</span><span class="p">]</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">&amp;</span><span class="dl">'</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nx">dataResult</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">str</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 处理type</span>
+    <span class="nx">options</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">type</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">;</span>
+
+    <span class="c1">//获取XMLHttpRequest对象</span>
+    <span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">XMLHttpRequest</span> <span class="p">?</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">()</span> <span class="p">:</span> <span class="k">new</span> <span class="nx">ActiveXObject</span><span class="p">(</span><span class="dl">'</span><span class="s1">Microsoft.XMLHTTP</span><span class="dl">'</span><span class="p">);</span>
+
+    <span class="c1">// 发送请求</span>
+    <span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">type</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="dl">'</span><span class="s1">Content-type</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">);</span>
+        <span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">dataResult</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// readyState</span>
+    <span class="nx">xhr</span><span class="p">.</span><span class="nx">onreadystatechange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">readyState</span> <span class="o">===</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">onsuccess</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">options</span><span class="p">.</span><span class="nx">onsuccess</span><span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">responseText</span><span class="p">,</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">responseXML</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">onfail</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">options</span><span class="p">.</span><span class="nx">onfail</span><span class="p">();</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>说明：</strong></p>
+
+<ol>
+  <li>首先是处理 data，因为测试用例中的 data 是对象，所以把它遍历出来，把键和值中间用 = 连接，和下一组数据用 &amp; 连接。</li>
+  <li>处理 type，默认是 GET 请求。</li>
+  <li>使用 <code class="language-plaintext highlighter-rouge">open()</code> 指明请求方法和 url。方法一般为 GET 或 POST。</li>
+  <li>调用 <code class="language-plaintext highlighter-rouge">send()</code> 方法，GET 请求没有主体，所以应该传递 null 或省略这个参数。POST 请求有主体，同时使用 <code class="language-plaintext highlighter-rouge">setRequestHeaders()</code> 来指定 “Content-type” 头。这样便成功发送了请求。</li>
+  <li>取的响应。一个完整的 HTTP 响应是由状态码、响应头集合、响应主体组成。
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">readyState</code> 是一个整数，它指定了 HTTP 请求的状态。其值和含义如下表：</li>
+    </ul>
+
+    <table>
+      <tbody>
+        <tr>
+          <td>值</td>
+          <td>含义</td>
+        </tr>
+        <tr>
+          <td>0</td>
+          <td>open() 尚未调用</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>open() 已调用</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>接收到响应头信息</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>接收到响应主体</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>响应完成</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">status</code> 和 <code class="language-plaintext highlighter-rouge">statusText</code> 属性以数字和文本的形式返回 HTTP 状态码。这些属性保存标准的 HTTP 值。如，200和 “OK” 表示成功请求，404和 “Not Found” 表示 URL 不能匹配服务器上的任何资源。</li>
+      <li><code class="language-plaintext highlighter-rouge">getResponseHeader()</code> 和 <code class="language-plaintext highlighter-rouge">getAllResponseHeaders()</code> 能查询响应头。</li>
+      <li>响应主体可以从 <code class="language-plaintext highlighter-rouge">responseText</code> 属性中得到文本形式的，从 <code class="language-plaintext highlighter-rouge">responseXML</code> 属性中得到 Document 形式的。</li>
+    </ul>
+  </li>
+  <li>补充一点 <code class="language-plaintext highlighter-rouge">onreadystatechange</code> 事件会在 <code class="language-plaintext highlighter-rouge">readyState</code> 改变时被触发。</li>
+</ol>
+
+<p><strong>参考：</strong></p>
+
+<ul>
+  <li><a href="http://www.w3school.com.cn/ajax/index.asp">Ajax W3C</a></li>
+  <li><a href="http://www.ibm.com/developerworks/cn/web/wa-lo-comet/">Comet：基于 HTTP 长连接的“服务器推”技术</a></li>
+</ul>
+
+<h2 id="练习1处理兴趣列表">练习1：处理兴趣列表</h2>
+
+<h3 id="任务要求">任务要求</h3>
+
+<p>在<code class="language-plaintext highlighter-rouge">task0002</code>目录下创建一个<code class="language-plaintext highlighter-rouge">task0002_1.html</code>文件，以及一个<code class="language-plaintext highlighter-rouge">js</code>目录和<code class="language-plaintext highlighter-rouge">css</code>目录，在<code class="language-plaintext highlighter-rouge">js</code>目录中创建<code class="language-plaintext highlighter-rouge">task0002_1.js</code>，并将之前写的<code class="language-plaintext highlighter-rouge">util.js</code>也拷贝到<code class="language-plaintext highlighter-rouge">js</code>目录下。然后完成以下需求。</p>
+
+<p><strong>第一阶段</strong></p>
+
+<p>在页面中，有一个单行输入框，一个按钮，输入框中用来输入用户的兴趣爱好，允许用户用半角逗号来作为不同爱好的分隔。</p>
+
+<p>当点击按钮时，把用户输入的兴趣爱好，按照上面所说的分隔符分开后保存到一个数组，过滤掉空的、重复的爱好，在按钮下方创建一个段落显示处理后的爱好。</p>
+
+<p><strong>第二阶段</strong></p>
+
+<p>单行变成多行输入框，一个按钮，输入框中用来输入用户的兴趣爱好，允许用户用换行、空格（全角/半角）、逗号（全角/半角）、顿号、分号来作为不同爱好的分隔。</p>
+
+<p>当点击按钮时的行为同上</p>
+
+<p><strong>第三阶段</strong></p>
+
+<p>用户输入的爱好数量不能超过10个，也不能什么都不输入。当发生异常时，在按钮上方显示一段红色的错误提示文字，并且不继续执行后面的行为；当输入正确时，提示文字消失。</p>
+
+<p>同时，当点击按钮时，不再是输出到一个段落，而是每一个爱好输出成为一个checkbox，爱好内容作为checkbox的label。</p>
+
+<h3 id="思路">思路</h3>
+
+<p>主要就是对字符串的操作，<code class="language-plaintext highlighter-rouge">split()</code> 的使用，以及正则表达式的使用。</p>
+
+<h3 id="实现">实现</h3>
+
+<ul>
+  <li><a href="https://github.com/Gaohaoyang/ife/tree/master/task/task0002/work/Gaohaoyang">代码</a></li>
+  <li><a href="http://gaohaoyang.github.io/ife/task/task0002/work/Gaohaoyang/task0002_1.html">在线demo</a></li>
+</ul>
+
+<h2 id="练习2倒计时">练习2：倒计时</h2>
+
+<h3 id="任务要求-1">任务要求</h3>
+
+<p>在和上一任务同一目录下面创建一个<code class="language-plaintext highlighter-rouge">task0002_2.html</code>文件，在<code class="language-plaintext highlighter-rouge">js</code>目录中创建<code class="language-plaintext highlighter-rouge">task0002_2.js</code>，并在其中编码，实现一个倒计时功能。</p>
+
+<ul>
+  <li>界面首先有一个文本输入框，允许按照特定的格式<code class="language-plaintext highlighter-rouge">YYYY-MM-DD</code>输入年月日；</li>
+  <li>输入框旁有一个按钮，点击按钮后，计算当前距离输入的日期的00:00:00有多少时间差</li>
+  <li>在页面中显示，距离YYYY年MM月DD日还有XX天XX小时XX分XX秒</li>
+  <li>每一秒钟更新倒计时上显示的数</li>
+  <li>如果时差为0，则倒计时停止</li>
+</ul>
+
+<h3 id="思路-1">思路</h3>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">setInterval()</code> 方法可按照指定的周期（以毫秒计）来调用函数或计算表达式。</p>
+
+    <p><code class="language-plaintext highlighter-rouge">setInterval()</code> 方法会不停地调用函数，直到 <code class="language-plaintext highlighter-rouge">clearInterval()</code> 被调用或窗口被关闭。由 <code class="language-plaintext highlighter-rouge">setInterval()</code> 返回的 ID 值可用作 <code class="language-plaintext highlighter-rouge">clearInterval()</code> 方法的参数。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">clearInterval()</code> 方法可取消由 <code class="language-plaintext highlighter-rouge">setInterval()</code> 设置的 timeout。</p>
+
+    <p><code class="language-plaintext highlighter-rouge">clearInterval()</code> 方法的参数必须是由 <code class="language-plaintext highlighter-rouge">setInterval()</code> 返回的 ID 值。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">setTimeout()</code> 方法用于在指定的毫秒数后调用函数或计算表达式。</p>
+
+    <p>setTimeout() 只执行 code 一次。如果要多次调用，请使用 setInterval() 或者让 code 自身再次调用 setTimeout()。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">clearTimeout()</code> 方法可取消由 setTimeout() 方法设置的 timeout。</p>
+  </li>
+</ul>
+
+<h3 id="实现-1">实现</h3>
+
+<ul>
+  <li><a href="https://github.com/Gaohaoyang/ife/tree/master/task/task0002/work/Gaohaoyang">代码</a></li>
+  <li><a href="http://gaohaoyang.github.io/ife/task/task0002/work/Gaohaoyang/task0002_2.html">在线demo</a></li>
+</ul>
+
+<h2 id="练习3图片轮播">练习3：图片轮播</h2>
+
+<h3 id="任务要求-2">任务要求</h3>
+
+<p>在和上一任务同一目录下面创建一个<code class="language-plaintext highlighter-rouge">task0002_3.html</code>文件，在<code class="language-plaintext highlighter-rouge">js</code>目录中创建<code class="language-plaintext highlighter-rouge">task0002_3.js</code>，并在其中编码，实现一个轮播图的功能。</p>
+
+<ul>
+  <li>图片数量及URL均在HTML中写好</li>
+  <li>可以配置轮播的顺序（正序、逆序）、是否循环、间隔时长</li>
+  <li>图片切换的动画要流畅</li>
+  <li>在轮播图下方自动生成对应图片的小点，点击小点，轮播图自动动画切换到对应的图片</li>
+</ul>
+
+<p>效果示例：<a href="http://echarts.baidu.com/">http://echarts.baidu.com/</a> 上面的轮播图（不需要做左右两个箭头）</p>
+
+<h3 id="思路-2">思路</h3>
+
+<p>将图片排列成一排，一起向左运动，每次运动的距离刚好是一张图片的宽度。</p>
+
+<p>对于下面的小圆点，使用事件代理，将事件传递给每个 a 标签。</p>
+
+<p><strong>参考：</strong></p>
+
+<ul>
+  <li><a href="http://www.itxueyuan.org/view/6323.html">JS图片切换</a></li>
+</ul>
+
+<h3 id="实现-2">实现</h3>
+
+<ul>
+  <li><a href="https://github.com/Gaohaoyang/ife/tree/master/task/task0002/work/Gaohaoyang">代码</a></li>
+  <li><a href="http://gaohaoyang.github.io/ife/task/task0002/work/Gaohaoyang/task0002_3.html">在线demo</a></li>
+</ul>
+
+<h3 id="关于变速运动">关于变速运动</h3>
+
+<p>评论中有人问到运动部分为什么这样写，下面我讲一下吧。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">startMove</span><span class="p">(</span><span class="nx">target</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">timerInner</span><span class="p">);</span>
+    <span class="nx">timerInner</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">speed</span> <span class="o">=</span> <span class="p">(</span><span class="nx">target</span> <span class="o">-</span> <span class="nx">imgListDiv</span><span class="p">.</span><span class="nx">offsetLeft</span><span class="p">)</span> <span class="o">/</span> <span class="mi">6</span><span class="p">;</span>
+        <span class="nx">speed</span> <span class="o">=</span> <span class="nx">speed</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">?</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="nx">speed</span><span class="p">)</span> <span class="p">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">speed</span><span class="p">);</span>
+
+        <span class="nx">imgListDiv</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">imgListDiv</span><span class="p">.</span><span class="nx">offsetLeft</span> <span class="o">+</span> <span class="nx">speed</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">px</span><span class="dl">"</span><span class="p">;</span>
+    <span class="p">},</span> <span class="mi">30</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>上面是运动部分代码。</p>
+
+<ul>
+  <li>参数 <code class="language-plaintext highlighter-rouge">target</code> 是运动终点的位置。</li>
+  <li>首先停止计时器，为了避免上一次调用方法时，计时器没有关闭带来的干扰。</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">clearInterval</span><span class="p">(</span><span class="nx">timerInner</span><span class="p">);</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>下面开始开启计时器，每隔 30ms 执行一次内部的函数。</p>
+  </li>
+  <li>
+    <p>变速运动</p>
+  </li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">speed</span> <span class="o">=</span> <span class="p">(</span><span class="nx">target</span> <span class="o">-</span> <span class="nx">imgListDiv</span><span class="p">.</span><span class="nx">offsetLeft</span><span class="p">)</span> <span class="o">/</span> <span class="mi">6</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>逐渐变慢，最后停止，距离越远速度越大，速度由距离决定
+
+速度=(目标值-当前值)/缩放系数
+
+这样写的原因就是为了让它做缓冲运动，而不是匀速运动，这样给用户带来的交互感觉会更好。
+</code></pre></div></div>
+
+<ul>
+  <li>速度取整</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">speed</span> <span class="o">=</span> <span class="nx">speed</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">?</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="nx">speed</span><span class="p">)</span> <span class="p">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">speed</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>像素不能是小数，所以速度大于0的时候，向上取整。速度小于0时，向下取整
+</code></pre></div></div>
+
+<ul>
+  <li>最后关于运动终止条件。</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">imgListDiv</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">imgListDiv</span><span class="p">.</span><span class="nx">offsetLeft</span> <span class="o">+</span> <span class="nx">speed</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">px</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>由这一行可以看出，`imgListDiv.style.left` 在不断增大，即 `imgListDiv.offsetLeft` 在不断增大。这两个是相同的属性，只不过一个是在赋值时使用，第二个是在取值时使用。
+
+再看这行代码，由于这部分是每个30ms执行一次的，所以继续执行到这里。
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">speed</span> <span class="o">=</span> <span class="p">(</span><span class="nx">target</span> <span class="o">-</span> <span class="nx">imgListDiv</span><span class="p">.</span><span class="nx">offsetLeft</span><span class="p">)</span> <span class="o">/</span> <span class="mi">6</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>当不断增大的 `imgListDiv.offsetLeft` 等于 `target` 时，`speed` 为0。宏观表现为不再运动，这便是运动终止的状态，但是这里的方法还是不断在执行，每个30ms在执行。
+</code></pre></div></div>
+
+<h2 id="练习4输入框即时提示">练习4：输入框即时提示</h2>
+
+<h3 id="任务要求-3">任务要求</h3>
+
+<p>在和上一任务同一目录下面创建一个<code class="language-plaintext highlighter-rouge">task0002_4.html</code>文件，在<code class="language-plaintext highlighter-rouge">js</code>目录中创建<code class="language-plaintext highlighter-rouge">task0002_4.js</code>，并在其中编码，实现一个类似百度搜索框的输入提示的功能。</p>
+
+<p>要求如下：</p>
+
+<ul>
+  <li>允许使用鼠标点击选中提示栏中的某个选项</li>
+  <li>允许使用键盘上下键来选中提示栏中的某个选项，回车确认选中</li>
+  <li>选中后，提示内容变更到输入框中</li>
+</ul>
+
+<p><strong>初级班：</strong></p>
+
+<ul>
+  <li>不要求和后端交互，可以自己伪造一份提示数据例如：</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">suggestData</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Simon</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Erik</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Kener</span><span class="dl">'</span><span class="p">];</span>
+</code></pre></div></div>
+
+<p><strong>中级班：</strong></p>
+
+<ul>
+  <li>自己搭建一个后端Server，使用Ajax来获取提示数据</li>
+</ul>
+
+<h3 id="思路-3">思路</h3>
+
+<p>这里我使用了给 input 标签加 input 监听，即输入框内容发生改变时，触发事件。并兼容到 IE7。</p>
+
+<p>关于 input 监听的代码如下：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">addInputListener</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">inputArea</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// all browsers except IE before version 9</span>
+        <span class="nx">inputArea</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">input</span><span class="dl">"</span><span class="p">,</span> <span class="nx">OnInput</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">inputArea</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Internet Explorer and Opera</span>
+        <span class="nx">inputArea</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">(</span><span class="dl">"</span><span class="s2">onpropertychange</span><span class="dl">"</span><span class="p">,</span> <span class="nx">OnPropChanged</span><span class="p">);</span> <span class="c1">// Internet Explorer</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Firefox, Google Chrome, Opera, Safari from version 5, Internet Explorer from version 9</span>
+<span class="kd">function</span> <span class="nx">OnInput</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">inputValue</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+    <span class="nx">handleInput</span><span class="p">(</span><span class="nx">inputValue</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// Internet Explorer</span>
+<span class="kd">function</span> <span class="nx">OnPropChanged</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">inputValue</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">propertyName</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">value</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">inputValue</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">srcElement</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+        <span class="nx">handleInput</span><span class="p">(</span><span class="nx">inputValue</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>其中 handleInput() 为下一步要执行的方法。</p>
+
+<p>其实后来想了想也可以使用 keyup 事件了做这个任务。</p>
+
+<p>匹配的过程同样适用正则表达式，从开头开始匹配。遍历备选单词，如果匹配成功，则放入 li 标签中，准备展示。</p>
+
+<p>然后分别添加点击事件，键盘的 keydown 事件，用来选中提示出的单词。</p>
+
+<p><strong>参考：</strong></p>
+
+<ul>
+  <li><a href="http://help.dottoro.com/ljhxklln.php">oninput 事件</a></li>
+</ul>
+
+<h3 id="实现-3">实现</h3>
+
+<ul>
+  <li><a href="https://github.com/Gaohaoyang/ife/tree/master/task/task0002/work/Gaohaoyang">代码</a></li>
+  <li><a href="http://gaohaoyang.github.io/ife/task/task0002/work/Gaohaoyang/task0002_4.html">在线demo</a></li>
+</ul>
+
+<h2 id="练习5拖拽交互">练习5：拖拽交互</h2>
+
+<h3 id="任务要求-4">任务要求</h3>
+
+<ul>
+  <li>实现一个可拖拽交互的界面</li>
+  <li>如示例图，左右两侧各有一个容器，里面的选项可以通过拖拽来左右移动</li>
+  <li>被选择拖拽的容器在拖拽过程后，在原容器中消失，跟随鼠标移动</li>
+  <li>注意拖拽释放后，要添加到准确的位置</li>
+  <li>拖拽到什么位置认为是可以添加到新容器的规则自己定</li>
+  <li>注意交互中良好的用户体验和使用引导</li>
+</ul>
+
+<h3 id="思路-4">思路</h3>
+
+<ol>
+  <li>页面布局时，将要被拖拽的 div 设置为绝对定位，因为这样在后面拖拽的时候才方便更改坐标。</li>
+  <li>初始化界面的时候，首先让 div 块按照相应的高度重新排列一下。</li>
+  <li>拖拽方法的实现。由 mousedown mousemove mouseup 三部分组成。</li>
+  <li>在 mousemove 中判断，不能让鼠标拖出浏览器窗口。</li>
+  <li>在 mouseup 中判断，是否到达指定区域。完成拖拽。</li>
+</ol>
+
+<p>我在这里没有使用 html5 中的拖拽 API，所以兼容性还是很好的。</p>
+
+<h3 id="实现-4">实现</h3>
+
+<ul>
+  <li><a href="https://github.com/Gaohaoyang/ife/tree/master/task/task0002/work/Gaohaoyang">代码</a></li>
+  <li><a href="http://gaohaoyang.github.io/ife/task/task0002/work/Gaohaoyang/task0002_5.html">在线demo</a></li>
+</ul>
+
+<h2 id="最终作品">最终作品</h2>
+
+<ul>
+  <li><a href="https://github.com/Gaohaoyang/ife/tree/master/task/task0002/work/Gaohaoyang">代码</a></li>
+  <li><a href="http://gaohaoyang.github.io/ife/task/task0002/work/Gaohaoyang/index.html">在线 Demo</a></li>
+</ul>
+
+<h2 id="update">Update</h2>
+
+<p><strong>2015/06/01</strong></p>
+
+<ul>
+  <li><a href="https://github.com/hushicai/ife-task0002">导师的参考答案</a></li>
+  <li><a href="https://github.com/baidu-ife/ife/tree/master/task/task0002/review">review</a></li>
+</ul>
+
+<p>加油！向着下一个目标前进！</p>
+:ET

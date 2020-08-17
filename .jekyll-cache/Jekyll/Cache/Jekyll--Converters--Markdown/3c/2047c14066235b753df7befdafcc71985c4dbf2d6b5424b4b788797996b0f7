@@ -1,0 +1,12 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#简介" id="markdown-toc-简介">简介</a></li>
+</ul>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1yLBduDqWBKNjSZFAXXanSpXa-800-600.gif" alt="" /></p>
+
+<h2 id="简介">简介</h2>
+
+<p><a href="https://airbnb.design/lottie/">lottie</a> 是一个可以轻易的给各种 native app 添加高质量动画的类库。可以在 iOS、Android 和 React Native 实时渲染 After Effects 动画，就像使用静态图片一样容易。上图即为 lottie 的 logo。</p>
+
+<p>简单的说，lottie 动画制作的流程是，通过 Bodymovin 扩展将 AE 动画导出为 json 数据，然后再将这个 json 渲染在客户端或者 web 端。如下图：</p>
+:ET

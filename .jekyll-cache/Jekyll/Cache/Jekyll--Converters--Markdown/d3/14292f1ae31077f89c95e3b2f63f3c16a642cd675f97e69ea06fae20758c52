@@ -1,0 +1,333 @@
+I"�h<ul id="markdown-toc">
+  <li><a href="#组件多次被复用的场景" id="markdown-toc-组件多次被复用的场景">组件多次被复用的场景</a></li>
+  <li><a href="#使用-reactmemo-优化" id="markdown-toc-使用-reactmemo-优化">使用 React.memo 优化</a></li>
+  <li><a href="#usecallback" id="markdown-toc-usecallback">useCallback</a>    <ul>
+      <li><a href="#什么是-usecallback" id="markdown-toc-什么是-usecallback">什么是 useCallback</a></li>
+      <li><a href="#如何使用-usecallback" id="markdown-toc-如何使用-usecallback">如何使用 useCallback</a></li>
+    </ul>
+  </li>
+  <li><a href="#小结" id="markdown-toc-小结">小结</a></li>
+</ul>
+
+<p>本系列将讲述 React Hooks 的使用方法，从 useState 开始，将包含如下内容：</p>
+
+<ul>
+  <li><a href="https://juejin.im/post/6844904111024930824">useState</a></li>
+  <li><a href="https://juejin.im/post/6844904153580306446">useEffect</a></li>
+  <li><a href="https://juejin.im/post/6844904153584500749">useContext</a></li>
+  <li><a href="https://juejin.im/post/6844904157892050957">useReducer</a></li>
+  <li><a href="https://juejin.im/post/6844904162040233997">useCallback</a></li>
+  <li><a href="https://juejin.im/post/6844904162304458760">useMemo</a></li>
+  <li><a href="https://juejin.im/post/6844904168562360328">useRef</a></li>
+  <li><a href="https://juejin.im/post/6844904169539633166">custom hooks</a></li>
+</ul>
+
+<p>掌握 React Hooks api 将更好的帮助你在工作中使用，对 React 的掌握更上一层楼。本系列将使用大量实例代码和效果展示，非常易于初学者和复习使用。</p>
+
+<p>在我们开始深入学习 useCallback 前，先回顾一下性能优化相关的内容，这将有助于我们理解什么是 useCallback，为什么使用它，以及怎么使用它。</p>
+
+<p>依然先从一个组件多次被复用的代码场景看起。</p>
+
+<h2 id="组件多次被复用的场景">组件多次被复用的场景</h2>
+
+<p>有如下的，组件树结构。ParentWrap 包含 Title 组件、2次使用 Count 组件、2次使用 Button 组件。</p>
+
+<p>点击 Button，对应的 Count 分别会增加。</p>
+
+<p><img src="https://user-gold-cdn.xitu.io/2020/5/18/17226e2be3884074?w=1270&amp;h=595&amp;f=png&amp;s=7901" alt="" /></p>
+
+<p>App.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+<span class="k">import</span> <span class="dl">'</span><span class="s1">./App.css</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="nx">ParentComponent</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./components/26ParentComponenet</span><span class="dl">'</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">ParentComponent</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span>
+</code></pre></div></div>
+
+<p>ParentComponent.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">Title</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./26Title</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">Count</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./26Count</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">Button</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./26Button</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">ParentComponenet</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">age</span><span class="p">,</span> <span class="nx">setAge</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">29</span><span class="p">)</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">salary</span><span class="p">,</span> <span class="nx">setSalary</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">50000</span><span class="p">)</span>
+  <span class="kd">const</span> <span class="nx">incrementAge</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setAge</span><span class="p">(</span><span class="nx">age</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="kd">const</span> <span class="nx">incrementSalary</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setSalary</span><span class="p">(</span><span class="nx">salary</span> <span class="o">+</span> <span class="mi">1000</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Title</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Count</span>
+        <span class="na">text</span><span class="p">=</span><span class="s">"Age"</span>
+        <span class="na">count</span><span class="p">=</span><span class="si">{</span><span class="nx">age</span><span class="si">}</span>
+      <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Button</span>
+        <span class="na">handleClick</span><span class="p">=</span><span class="si">{</span><span class="nx">incrementAge</span><span class="si">}</span>
+      <span class="p">&gt;</span>Increment age<span class="p">&lt;/</span><span class="nc">Button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Count</span>
+        <span class="na">text</span><span class="p">=</span><span class="s">"Salary"</span>
+        <span class="na">count</span><span class="p">=</span><span class="si">{</span><span class="nx">salary</span><span class="si">}</span>
+      <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Button</span>
+        <span class="na">handleClick</span><span class="p">=</span><span class="si">{</span><span class="nx">incrementSalary</span><span class="si">}</span>
+      <span class="p">&gt;</span>Increment salary<span class="p">&lt;/</span><span class="nc">Button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">ParentComponenet</span>
+</code></pre></div></div>
+
+<p>Title.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">Title</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Rendering Title</span><span class="dl">'</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>useCallback<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Title</span>
+</code></pre></div></div>
+
+<p>Count.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">Count</span><span class="p">(</span><span class="nx">props</span><span class="p">:</span> <span class="p">{</span>
+  <span class="nl">text</span><span class="p">:</span> <span class="nx">string</span>
+  <span class="nx">count</span><span class="p">:</span> <span class="nx">number</span>
+<span class="p">})</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Rendering </span><span class="p">${</span><span class="nx">props</span><span class="p">.</span><span class="nx">text</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">text</span><span class="si">}</span> - <span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">count</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Count</span>
+</code></pre></div></div>
+
+<p>Button.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">Button</span><span class="p">(</span><span class="nx">props</span><span class="p">:</span> <span class="p">{</span>
+  <span class="nl">handleClick</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span>
+  <span class="nx">children</span><span class="p">:</span> <span class="nx">string</span>
+<span class="p">})</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Rendering button</span><span class="dl">'</span><span class="p">,</span> <span class="nx">props</span><span class="p">.</span><span class="nx">children</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">handleClick</span><span class="si">}</span><span class="p">&gt;</span>
+      <span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">children</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Button</span>
+</code></pre></div></div>
+
+<p>当然，我们可以将所有的 jsx 代码写在一起，我们这么组织代码的主要原因是让大家理解 react 中的性能优化，以及如何使用 useCallback api 进行性能优化。</p>
+
+<p>页面展示效果如下</p>
+
+<p><img src="https://user-gold-cdn.xitu.io/2020/5/18/17226e2be38b1a98?w=702&amp;h=606&amp;f=gif&amp;s=85359" alt="" /></p>
+
+<p>而我们要关注到的是性能问题，可以在 console 中看到，每次点击时，看到以下日志：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Rendering Title
+Rendering Age
+Rendering button Increment age
+Rendering Salary
+Rendering button Increment salary
+</code></pre></div></div>
+
+<p>每次状态改变都触发了所有组件的 rerender，这个示例比较简单，但是假如未来遇到20、30、甚至50个组件 rerender 的时候，就一定要考虑到性能问题了。下面讲讲在这个示例中怎么进行优化。</p>
+
+<h2 id="使用-reactmemo-优化">使用 React.memo 优化</h2>
+
+<p>在本例中，我们当然希望点击增加年龄的按钮时，只有关于年龄的 Count 和 Button 进行 rerender，而其他组件不发生 rerender，点击增加 salary 时也一样。如何才能做到呢？答案是 <code class="language-plaintext highlighter-rouge">React.memo</code>。</p>
+
+<p>我们给 Title.tsx, Count.tsx, Button.tsx 添加 <code class="language-plaintext highlighter-rouge">React.memo()</code>，代码如下：</p>
+
+<p>Title.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">Title</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Rendering Title</span><span class="dl">'</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>useCallback<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">React</span><span class="p">.</span><span class="nx">memo</span><span class="p">(</span><span class="nx">Title</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<p>Count.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">Count</span><span class="p">(</span><span class="nx">props</span><span class="p">:</span> <span class="p">{</span>
+  <span class="nl">text</span><span class="p">:</span> <span class="nx">string</span>
+  <span class="nx">count</span><span class="p">:</span> <span class="nx">number</span>
+<span class="p">})</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Rendering </span><span class="p">${</span><span class="nx">props</span><span class="p">.</span><span class="nx">text</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">text</span><span class="si">}</span> - <span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">count</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">React</span><span class="p">.</span><span class="nx">memo</span><span class="p">(</span><span class="nx">Count</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Button.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">Button</span><span class="p">(</span><span class="nx">props</span><span class="p">:</span> <span class="p">{</span>
+  <span class="nl">handleClick</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span>
+  <span class="nx">children</span><span class="p">:</span> <span class="nx">string</span>
+<span class="p">})</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Rendering button</span><span class="dl">'</span><span class="p">,</span> <span class="nx">props</span><span class="p">.</span><span class="nx">children</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">handleClick</span><span class="si">}</span><span class="p">&gt;</span>
+      <span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">children</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">React</span><span class="p">.</span><span class="nx">memo</span><span class="p">(</span><span class="nx">Button</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>效果如下：</p>
+
+<p><img src="https://user-gold-cdn.xitu.io/2020/5/18/17226e2be462d40e?w=702&amp;h=606&amp;f=gif&amp;s=110065" alt="" /></p>
+
+<blockquote>
+  <p>React.memo 为高阶组件。它与 React.PureComponent 非常相似，但只适用于函数组件，而不适用 class 组件。</p>
+</blockquote>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">MyComponent</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">memo</span><span class="p">(</span><span class="kd">function</span> <span class="nx">MyComponent</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+  <span class="cm">/* 使用 props 渲染 */</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>如果你的函数组件在给定相同 props 的情况下渲染相同的结果，那么你可以通过将其包装在 React.memo 中调用，以此通过记忆组件渲染结果的方式来提高组件的性能表现。这意味着在这种情况下，React 将跳过渲染组件的操作并直接复用最近一次渲染的结果。</p>
+
+  <p>React.memo 仅检查 props 变更。如果函数组件被 React.memo 包裹，且其实现中拥有 useState 或 useContext 的 Hook，当 context 发生变化时，它仍会重新渲染。</p>
+
+  <p>默认情况下其只会对复杂对象做浅层对比，如果你想要控制对比过程，那么请将自定义的比较函数通过第二个参数传入来实现。</p>
+</blockquote>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">MyComponent</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+  <span class="cm">/* 使用 props 渲染 */</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">areEqual</span><span class="p">(</span><span class="nx">prevProps</span><span class="p">,</span> <span class="nx">nextProps</span><span class="p">)</span> <span class="p">{</span>
+  <span class="cm">/*
+  如果把 nextProps 传入 render 方法的返回结果与
+  将 prevProps 传入 render 方法的返回结果一致则返回 true，
+  否则返回 false
+  */</span>
+<span class="p">}</span>
+<span class="k">export</span> <span class="k">default</span> <span class="nx">React</span><span class="p">.</span><span class="nx">memo</span><span class="p">(</span><span class="nx">MyComponent</span><span class="p">,</span> <span class="nx">areEqual</span><span class="p">);</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>此方法仅作为性能优化的方式而存在。但请不要依赖它来“阻止”渲染，因为这会产生 bug。</p>
+</blockquote>
+
+<p>但是，使用了 React.memo 后，我们看到点击增加年龄的按钮时，日志变为了</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Rendering Age
+Rendering button Increment age
+Rendering button Increment salary
+</code></pre></div></div>
+
+<p>依然有不相关的 rerender <code class="language-plaintext highlighter-rouge">Rendering button Increment salary</code>，我们来分析一下。</p>
+
+<p>在 ParentComponenet.tsx 中，我们看到点击 Increment age 按钮时，导致了 state 变化，ParentComponenet 进行了 rerender。<code class="language-plaintext highlighter-rouge">&lt;Title /&gt;</code> 没有传入属性，React.memo 判断出不需要 rerender，但是 Increment salary 按钮上的属性 incrementSalary 方法，实际上被重新创建了，导致了这个 Button 传入的 props 发生了变化，因此 React.memo 没有阻止 rerender。点击按钮 Increment salary 导致的相同的现象也是同理。那么如何解决呢？答案是使用 useCallback hook。</p>
+
+<h2 id="usecallback">useCallback</h2>
+
+<h3 id="什么是-usecallback">什么是 useCallback</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">memoizedCallback</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(</span>
+  <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">doSomething</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">);</span>
+  <span class="p">},</span>
+  <span class="p">[</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">],</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>返回一个 memoized 回调函数。</p>
+
+  <p>把内联回调函数及依赖项数组作为参数传入 <code class="language-plaintext highlighter-rouge">useCallback</code>，它将返回该回调函数的 memoized 版本，该回调函数仅在某个依赖项改变时才会更新。当你把回调函数传递给经过优化的并使用引用相等性去避免非必要渲染（例如 shouldComponentUpdate）的子组件时，它将非常有用。</p>
+</blockquote>
+
+<p>类比到我们的例子中，useCallback 会缓存我们的 <code class="language-plaintext highlighter-rouge">incrementSalary()</code> 如果 salary 没有变化，直接返回缓存的值，如果 salary 发生变化，也就是 useCallback 的依赖发生变化，那么一个新的方法将被返回。</p>
+
+<p>这就可以帮助我们解决只依赖某个变量的子组件避免不必要的 render 问题。</p>
+
+<h3 id="如何使用-usecallback">如何使用 useCallback</h3>
+
+<p>步骤如下：</p>
+
+<ol>
+  <li>import useCallback</li>
+  <li>调用 useCallback</li>
+</ol>
+
+<p>我们将 ParentComponenet.tsx 中的 incrementAge 和 incrementSalary 使用 useCallback 改写如下：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">incrementAge</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(</span>
+  <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setAge</span><span class="p">(</span><span class="nx">age</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">},</span>
+  <span class="p">[</span><span class="nx">age</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="kd">const</span> <span class="nx">incrementSalary</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(</span>
+  <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setSalary</span><span class="p">(</span><span class="nx">salary</span> <span class="o">+</span> <span class="mi">1000</span><span class="p">)</span>
+  <span class="p">},</span>
+  <span class="p">[</span><span class="nx">salary</span><span class="p">],</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="https://user-gold-cdn.xitu.io/2020/5/18/17226e2be53124b0?w=702&amp;h=411&amp;f=gif&amp;s=99118" alt="" /></p>
+
+<p>可以看到，已经达到了我们的目的，点击 Increment age 时，salary 的按钮组件也没有 rerender。至此，我们已经完成了所有的性能优化。</p>
+
+<h2 id="小结">小结</h2>
+
+<p>本章我们从一个组件多次被复用的的例子说起，一步一步对其进行性能优化，核心是阻止不必要的 rerender。</p>
+
+<p>学习使用了 React.memo 在 props 或 state 没有变化时，阻止组件的 rerender。</p>
+
+<p>学习了什么是 useCallback，如何使用 useCallback 缓存一个方法，只依赖某几个变量变化才更新，避免了每次传递给子组件的 props 都被更新，最终也是阻止了子组件不必要的 rerender。</p>
+:ET

@@ -1,0 +1,344 @@
+I"k<ul id="markdown-toc">
+  <li><a href="#什么是-context-api" id="markdown-toc-什么是-context-api">什么是 Context Api</a></li>
+  <li><a href="#使用-context" id="markdown-toc-使用-context">使用 Context</a>    <ul>
+      <li><a href="#创建-context" id="markdown-toc-创建-context">创建 context</a></li>
+      <li><a href="#提供-provider" id="markdown-toc-提供-provider">提供 Provider</a></li>
+      <li><a href="#在使用的节点处消费-context" id="markdown-toc-在使用的节点处消费-context">在使用的节点处消费 Context</a></li>
+      <li><a href="#多个-context-情况" id="markdown-toc-多个-context-情况">多个 Context 情况</a></li>
+    </ul>
+  </li>
+  <li><a href="#usecontext" id="markdown-toc-usecontext">useContext</a></li>
+</ul>
+
+<p>掌握 React Hooks api 将更好的帮助你在工作中使用，对 React 的掌握更上一层楼。本系列将使用大量实例代码和效果展示，非常易于初学者和复习使用。</p>
+
+<p>今天我们讲讲 Context 对象和 useContext 的使用方法。</p>
+
+<h2 id="什么是-context-api">什么是 Context Api</h2>
+
+<p>考虑这样一种场景，如果组件树结构如下，现在想从根节点传递一个 userName 的属性到叶子节点 A D F，通过 props 的方式传递，会不可避免的传递通过 B C E，即使这些组件也没有使用这个 userName 属性。</p>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1Nl38AAT2gK0jSZFkXXcIQFXa-1432-870.png" alt="" /></p>
+
+<p>如果这样的嵌套树形结构有5层或10层，那么将是灾难式的开发维护体验。如果能不经过中间的节点直接到达需要的地方就可以避免这种问题，这时 Context api 就是来解决这个问题的。</p>
+
+<p>Context api 是在组件树中传递数据但不用每层都经过的一种 api。下面我们一起看看 Context Hook 的使用方法。</p>
+
+<h2 id="使用-context">使用 Context</h2>
+
+<p>我们举个例子重点看下最右边的分支，C E F，从根节点传递一个变量 username 到 F 节点。</p>
+
+<p>我们先创建好 App, ComponentC, ComponentE, ComponentF, 如下</p>
+
+<p>App.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="dl">'</span><span class="s1">./App.css</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="nx">ComponentC</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./components/16ComponentC</span><span class="dl">'</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">ComponentC</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span>
+</code></pre></div></div>
+
+<p>ComponentC.tsx</p>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="nx">ComponentE</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./16ComponentE</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">ComponentC</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">ComponentE</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">ComponentC</span>
+
+</code></pre></div></div>
+
+<p>ComponentE.tsx</p>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="nx">ComponentF</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./16ComponentF</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">ComponentE</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">ComponentF</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">ComponentE</span>
+
+</code></pre></div></div>
+
+<p>ComponentF.tsx</p>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">ComponentF</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      ComponentF
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">ComponentF</span>
+</code></pre></div></div>
+
+<p>页面展示如下：</p>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1_nrMFkL0gK0jSZFAXXcA9pXa-438-193.png" alt="" /></p>
+
+<p>接下来我们来研究如何使用 Context 将 username 从 App 传递到 ComponentF，共分为以下3个步骤</p>
+
+<h3 id="创建-context">创建 context</h3>
+
+<p>在根节点 App.tsx 中使用 <code class="language-plaintext highlighter-rouge">createContext()</code> 来创建一个 context</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">UserContext</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createContext</span><span class="p">(</span><span class="dl">''</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>创建一个 Context 对象。当 React 渲染一个订阅了这个 Context 对象的组件，这个组件会从组件树中离自身最近的那个匹配的 Provider 中读取到当前的 context 值。</p>
+
+  <p>只有当组件所处的树中没有匹配到 Provider 时，其 defaultValue 参数才会生效。这有助于在不使用 Provider 包装组件的情况下对组件进行测试。注意：将 undefined 传递给 Provider 的 value 时，消费组件的 defaultValue 不会生效。</p>
+</blockquote>
+
+<h3 id="提供-provider">提供 Provider</h3>
+
+<p>在根节点中使用 Provider 包裹子节点，将 context 提供给子节点</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">UserContext</span><span class="p">.</span><span class="nx">Provider</span> <span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="dl">'</span><span class="s1">chuanshi</span><span class="dl">'</span><span class="p">}</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">ComponentC</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="sr">/UserContext.Provider</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>每个 Context 对象都会返回一个 Provider React 组件，它允许消费组件订阅 context 的变化。</p>
+
+  <p>Provider 接收一个 <code class="language-plaintext highlighter-rouge">value</code> 属性，传递给消费组件。一个 Provider 可以和多个消费组件有对应关系。多个 Provider 也可以嵌套使用，里层的会覆盖外层的数据。</p>
+
+  <p>当 Provider 的 <code class="language-plaintext highlighter-rouge">value</code> 值发生变化时，它内部的所有消费组件都会重新渲染。Provider 及其内部 consumer 组件都不受制于 <code class="language-plaintext highlighter-rouge">shouldComponentUpdate</code> 函数，因此当 consumer 组件在其祖先组件退出更新的情况下也能更新。</p>
+
+  <p>通过新旧值检测来确定变化，使用了与 Object.is 相同的算法。</p>
+</blockquote>
+
+<p>别忘了将之前定义好的 Context export 出去，以便在子孙节点中引入</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="kd">const</span> <span class="nx">UserContext</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createContext</span><span class="p">(</span><span class="dl">''</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>此时 App.tsx 的完整代码为</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="dl">'</span><span class="s1">./App.css</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="nx">ComponentC</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./components/16ComponentC</span><span class="dl">'</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">UserContext</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createContext</span><span class="p">(</span><span class="dl">''</span><span class="p">)</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">UserContext</span><span class="p">.</span><span class="nc">Provider</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="dl">'</span><span class="s1">chuanshi</span><span class="dl">'</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">ComponentC</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">UserContext</span><span class="p">.</span><span class="nc">Provider</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span>
+</code></pre></div></div>
+
+<h3 id="在使用的节点处消费-context">在使用的节点处消费 Context</h3>
+
+<p>import context 对象</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">UserContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../App</span><span class="dl">'</span>
+</code></pre></div></div>
+
+<p>使用 Consumer 进行消费</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">UserContext</span><span class="p">.</span><span class="nx">Consumer</span><span class="o">&gt;</span>
+  <span class="p">{</span>
+    <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+        <span class="nx">User</span> <span class="nx">context</span> <span class="nx">value</span> <span class="p">{</span><span class="nx">user</span><span class="p">}</span>
+      <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    <span class="p">)</span>
+  <span class="p">}</span>
+<span class="o">&lt;</span><span class="sr">/UserContext.Consumer</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>这里，React 组件也可以订阅到 context 变更。这能让你在函数式组件中完成订阅 context。</p>
+
+  <p>这需要函数作为子元素（function as a child）这种做法。这个函数接收当前的 context 值，返回一个 React 节点。传递给函数的 value 值等同于往上组件树离这个 context 最近的 Provider 提供的 value 值。如果没有对应的 Provider，value 参数等同于传递给 createContext() 的 defaultValue。</p>
+</blockquote>
+
+<p>完整的 ComponentF.tsx 代码如下</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="p">{</span> <span class="nx">UserContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../App</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">ComponentF</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">UserContext</span><span class="p">.</span><span class="nc">Consumer</span><span class="p">&gt;</span>
+        <span class="si">{</span>
+          <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+            <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+              User context value <span class="si">{</span><span class="nx">user</span><span class="si">}</span>
+            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+          <span class="p">)</span>
+        <span class="si">}</span>
+      <span class="p">&lt;/</span><span class="nc">UserContext</span><span class="p">.</span><span class="nc">Consumer</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">ComponentF</span>
+</code></pre></div></div>
+
+<p>效果如下</p>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1CSB6FpT7gK0jSZFpXXaTkpXa-448-210.png" alt="" /></p>
+
+<p>目前看只有1个 Context 的时候情况还好，下面我们来看看有多个 Context 的情况</p>
+
+<h3 id="多个-context-情况">多个 Context 情况</h3>
+
+<p>我们在 App.tsx 中再增加一个 Context</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="dl">'</span><span class="s1">./App.css</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="nx">ComponentC</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./components/16ComponentC</span><span class="dl">'</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">UserContext</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createContext</span><span class="p">(</span><span class="dl">''</span><span class="p">)</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">ChannelContext</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createContext</span><span class="p">(</span><span class="dl">''</span><span class="p">)</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">UserContext</span><span class="p">.</span><span class="nc">Provider</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="dl">'</span><span class="s1">chuanshi</span><span class="dl">'</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">ChannelContext</span><span class="p">.</span><span class="nc">Provider</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="dl">'</span><span class="s1">code volution</span><span class="dl">'</span><span class="si">}</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nc">ComponentC</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">ChannelContext</span><span class="p">.</span><span class="nc">Provider</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">UserContext</span><span class="p">.</span><span class="nc">Provider</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span>
+</code></pre></div></div>
+
+<p>接下来在 component F 中消费它们</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="p">{</span> <span class="nx">UserContext</span><span class="p">,</span> <span class="nx">ChannelContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../App</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">ComponentF</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">UserContext</span><span class="p">.</span><span class="nc">Consumer</span><span class="p">&gt;</span>
+        <span class="si">{</span>
+          <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+            <span class="p">&lt;</span><span class="nc">ChannelContext</span><span class="p">.</span><span class="nc">Consumer</span><span class="p">&gt;</span>
+              <span class="si">{</span>
+                <span class="p">(</span><span class="nx">channel</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+                  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+                    User context value <span class="si">{</span><span class="nx">user</span><span class="si">}</span>, channel value <span class="si">{</span><span class="nx">channel</span><span class="si">}</span>
+                  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+                <span class="p">)</span>
+              <span class="si">}</span>
+            <span class="p">&lt;/</span><span class="nc">ChannelContext</span><span class="p">.</span><span class="nc">Consumer</span><span class="p">&gt;</span>
+
+          <span class="p">)</span>
+        <span class="si">}</span>
+      <span class="p">&lt;/</span><span class="nc">UserContext</span><span class="p">.</span><span class="nc">Consumer</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">ComponentF</span>
+</code></pre></div></div>
+
+<p>页面展示如下</p>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1XC47Fvb2gK0jSZK9XXaEgFXa-453-183.png" alt="" /></p>
+
+<p>虽然代码运行没有问题，但是美观性和可读性都不太好，如果使用多个 Context，有个更好的方法，就是使用 Context hook 来解决消费多个 Context 的代码优雅问题。</p>
+
+<h2 id="usecontext">useContext</h2>
+
+<p>举个例子，我们在上述的 demo 中的 component E 中通过 <code class="language-plaintext highlighter-rouge">useContext</code> 使用根节点创建的 Context。分为以下步骤</p>
+
+<ol>
+  <li>从 react 对象中 import <code class="language-plaintext highlighter-rouge">useContext</code> 这个 hook api</li>
+  <li>import 根节点创建的 Context 对象（可以导入多个）</li>
+  <li>执行 <code class="language-plaintext highlighter-rouge">useContext()</code> 方法，将 Context 传入</li>
+</ol>
+
+<p>ComponentE 完整代码:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="nx">ComponentF</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./16ComponentF</span><span class="dl">'</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">UserContext</span><span class="p">,</span> <span class="nx">ChannelContext</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../App</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">ComponentE</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">useContext</span><span class="p">(</span><span class="nx">UserContext</span><span class="p">)</span>
+  <span class="kd">const</span> <span class="nx">channel</span> <span class="o">=</span> <span class="nx">useContext</span><span class="p">(</span><span class="nx">ChannelContext</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">ComponentF</span> <span class="p">/&gt;</span>
+      --- <span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+      <span class="si">{</span><span class="nx">user</span><span class="si">}</span> - <span class="si">{</span><span class="nx">channel</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">ComponentE</span>
+</code></pre></div></div>
+
+<p>页面展示如下</p>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1NnVuFUT1gK0jSZFhXXaAtVXa-453-224.png" alt="" /></p>
+
+<p>其关键的一行代码如下</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">useContext</span><span class="p">(</span><span class="nx">MyContext</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>useContext 方法接收一个 context 对象（<code class="language-plaintext highlighter-rouge">React.createContext</code> 的返回值）并返回该 context 的当前值。当前的 context 值由上层组件中距离当前组件最近的 <code class="language-plaintext highlighter-rouge">&lt;MyContext.Provider&gt;</code> 的 <code class="language-plaintext highlighter-rouge">value</code> prop 决定。</p>
+
+  <p>当组件上层最近的 <code class="language-plaintext highlighter-rouge">&lt;MyContext.Provider&gt;</code> 更新时，该 Hook 会触发重渲染，并使用最新传递给 <code class="language-plaintext highlighter-rouge">MyContext</code> provider 的 context <code class="language-plaintext highlighter-rouge">value</code> 值。即使祖先使用 <code class="language-plaintext highlighter-rouge">React.memo</code> 或 <code class="language-plaintext highlighter-rouge">shouldComponentUpdate</code>，也会在组件本身使用 <code class="language-plaintext highlighter-rouge">useContext</code> 时重新渲染。</p>
+
+  <p>可以理解为，<code class="language-plaintext highlighter-rouge">useContext(MyContext)</code> 相当于 class 组件中的 <code class="language-plaintext highlighter-rouge">static contextType = MyContext</code> 或者 <code class="language-plaintext highlighter-rouge">&lt;MyContext.Consumer&gt;</code>。</p>
+
+  <p><code class="language-plaintext highlighter-rouge">useContext(MyContext)</code> 只是让你能够读取 context 的值以及订阅 context 的变化。你仍然需要在上层组件树中使用 <code class="language-plaintext highlighter-rouge">&lt;MyContext.Provider&gt;</code> 来为下层组件提供 context。</p>
+</blockquote>
+
+<p>至此，关于 useContext hook api 我们已经掌握了使用方式，可以看到通过 useContext 可以极大的减小多个 Context 使用的代码复杂的问题。</p>
+:ET

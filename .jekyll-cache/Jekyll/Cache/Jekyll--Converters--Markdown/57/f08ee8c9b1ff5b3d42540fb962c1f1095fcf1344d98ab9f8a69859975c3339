@@ -1,0 +1,286 @@
+I"��<ul id="markdown-toc">
+  <li><a href="#题目" id="markdown-toc-题目">题目</a></li>
+  <li><a href="#解答" id="markdown-toc-解答">解答</a>    <ul>
+      <li><a href="#思路" id="markdown-toc-思路">思路</a></li>
+      <li><a href="#具体实现代码" id="markdown-toc-具体实现代码">具体实现代码</a></li>
+    </ul>
+  </li>
+  <li><a href="#总结" id="markdown-toc-总结">总结</a></li>
+</ul>
+
+<h2 id="题目">题目</h2>
+
+<p>题目来自 <a href="http://imooc.com/code/5760">慕课网 JavaScript 深入浅出 1-6 编程练习</a></p>
+
+<p>请在 index.html 文件中，编写 arraysSimilar 函数，实现判断传入的两个数组是否相似。具体需求：</p>
+
+<ol>
+  <li>数组中的成员类型相同，顺序可以不同。例如 [1, true] 与 [false, 2] 是相似的。</li>
+  <li>数组的长度一致。</li>
+  <li>类型的判断范围，需要区分: String, Boolean, Number, undefined, null, 函数, 日期, window.</li>
+</ol>
+
+<p>当以上全部满足，则返回<strong>“判定结果:通过”</strong>，否则返回<strong>“判定结果:不通过”</strong>。</p>
+
+<p>题目给出了 index.html 如下：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"Content-Type"</span> <span class="na">content=</span><span class="s">"text/html; charset=gb18030"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Untitled Document<span class="nt">&lt;/title&gt;</span>
+
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>   
+        <span class="cm">/*
+         * param1 Array
+         * param2 Array
+         * return true or false
+         */</span>
+        <span class="kd">function</span> <span class="nx">arraysSimilar</span><span class="p">(</span><span class="nx">arr1</span><span class="p">,</span> <span class="nx">arr2</span><span class="p">){</span>
+
+        <span class="p">}</span>
+    <span class="nt">&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"testData.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>其中 testData.js 是测试用例，代码如下</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//以下为多组测试数据</span>
+    <span class="kd">var</span> <span class="nx">cases</span> <span class="o">=</span> <span class="p">[{</span>
+        <span class="na">arr1</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">null</span><span class="p">],</span>
+        <span class="na">arr2</span><span class="p">:</span> <span class="p">[</span><span class="kc">null</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span>
+        <span class="na">expect</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">},</span> <span class="p">{</span>
+        <span class="na">arr1</span><span class="p">:</span> <span class="p">[</span>
+            <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
+            <span class="mi">100</span>
+        <span class="p">],</span>
+        <span class="na">arr2</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="p">{}],</span>
+        <span class="na">expect</span><span class="p">:</span> <span class="kc">false</span>
+    <span class="p">},</span> <span class="p">{</span>
+        <span class="na">arr1</span><span class="p">:</span> <span class="p">[</span><span class="kc">null</span><span class="p">,</span> <span class="mi">999</span><span class="p">],</span>
+        <span class="na">arr2</span><span class="p">:</span> <span class="p">[{},</span>
+            <span class="mi">444</span>
+        <span class="p">],</span>
+        <span class="na">expect</span><span class="p">:</span> <span class="kc">false</span>
+    <span class="p">},</span> <span class="p">{</span>
+        <span class="na">arr1</span><span class="p">:</span> <span class="p">[</span><span class="nb">window</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span> <span class="dl">"</span><span class="s2">hahaha</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{}),</span> <span class="kc">undefined</span><span class="p">],</span>
+        <span class="na">arr2</span><span class="p">:</span> <span class="p">[</span><span class="kc">undefined</span><span class="p">,</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{}),</span> <span class="dl">"</span><span class="s2">okokok</span><span class="dl">"</span><span class="p">,</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span> <span class="kc">false</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">window</span><span class="p">],</span>
+        <span class="na">expect</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">},</span> <span class="p">{</span>
+        <span class="na">arr1</span><span class="p">:</span> <span class="p">[</span><span class="k">new</span> <span class="nb">Date</span><span class="p">()],</span>
+        <span class="na">arr2</span><span class="p">:</span> <span class="p">[{}],</span>
+        <span class="na">expect</span><span class="p">:</span> <span class="kc">false</span>
+    <span class="p">},</span> <span class="p">{</span>
+        <span class="na">arr1</span><span class="p">:</span> <span class="p">[</span><span class="nb">window</span><span class="p">],</span>
+        <span class="na">arr2</span><span class="p">:</span> <span class="p">[{}],</span>
+        <span class="na">expect</span><span class="p">:</span> <span class="kc">false</span>
+    <span class="p">},</span> <span class="p">{</span>
+        <span class="na">arr1</span><span class="p">:</span> <span class="p">[</span><span class="kc">undefined</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="na">arr2</span><span class="p">:</span> <span class="p">[</span><span class="kc">null</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+        <span class="na">expect</span><span class="p">:</span> <span class="kc">false</span>
+    <span class="p">},</span> <span class="p">{</span>
+        <span class="na">arr1</span><span class="p">:</span> <span class="p">[</span><span class="k">new</span> <span class="nb">Object</span><span class="p">,</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">,</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">],</span>
+        <span class="na">arr2</span><span class="p">:</span> <span class="p">[{},</span> <span class="p">{},</span>
+            <span class="kc">null</span>
+        <span class="p">],</span>
+        <span class="na">expect</span><span class="p">:</span> <span class="kc">false</span>
+    <span class="p">},</span> <span class="p">{</span>
+        <span class="na">arr1</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="na">arr2</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="na">expect</span><span class="p">:</span> <span class="kc">false</span>
+    <span class="p">},</span> <span class="p">{</span>
+        <span class="na">arr1</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="na">arr2</span><span class="p">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="na">expect</span><span class="p">:</span> <span class="kc">false</span>
+    <span class="p">},</span> <span class="p">{</span>
+        <span class="na">arr1</span><span class="p">:</span> <span class="dl">"</span><span class="s2">abc</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">arr2</span><span class="p">:</span> <span class="dl">"</span><span class="s2">cba</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">expect</span><span class="p">:</span> <span class="kc">false</span>
+    <span class="p">}];</span>
+
+    <span class="c1">//使用for循环, 通过arraysSimilar函数验证以上数据是否相似，如相似显示“通过”,否则"不通过",所以大家要完成arraysSimilar函数,具体要求，详见任务要求。    </span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">cases</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">arraysSimilar</span><span class="p">(</span><span class="nx">cases</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">arr1</span><span class="p">,</span> <span class="nx">cases</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">arr2</span><span class="p">)</span> <span class="o">!==</span> <span class="nx">cases</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">expect</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="dl">"</span><span class="s2">不通过！case</span><span class="dl">"</span> <span class="o">+</span> <span class="p">(</span><span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">不正确！arr1=</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">cases</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">arr1</span><span class="p">)</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, arr2=</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">cases</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">arr2</span><span class="p">)</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> 的判断结果不是</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">cases</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">expect</span><span class="p">);</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+
+<span class="p">}();</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="dl">"</span><span class="s2">判定结果:</span><span class="dl">"</span> <span class="o">+</span> <span class="p">(</span><span class="nx">result</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">通过</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">不通过</span><span class="dl">"</span><span class="p">));</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="解答">解答</h2>
+
+<p>各位读者在看解答前也可以自己考虑一下，看看咱们的想法是否一致，期待您在本文的留言。</p>
+
+<hr />
+
+<h3 id="思路">思路</h3>
+
+<p>通过观察测试用例，可以发现，最后三个用例有不是数组的。所以我们可以先判断传入的参数是否是数组。 <br />
+又因为题目中要求数组长度必须一致，这也是第二个限制条件。 <br />
+最后再区分具体的类型。</p>
+
+<p>理清思路我们可以分为以下步骤：</p>
+
+<ol>
+  <li>判断传入的参数是否为数组 (使用 <code class="language-plaintext highlighter-rouge">instanceof</code> 方法)</li>
+  <li>检查两个数组长度是否一致</li>
+  <li>分别判断数组内元素的基本数据类型 (使用 <code class="language-plaintext highlighter-rouge">typeof</code> 方法)</li>
+  <li>因为 <code class="language-plaintext highlighter-rouge">typeof</code> 只能检查基本数据类型，对于 <code class="language-plaintext highlighter-rouge">null</code>, <code class="language-plaintext highlighter-rouge">Date</code>, <code class="language-plaintext highlighter-rouge">window</code> 返回的都是 <code class="language-plaintext highlighter-rouge">object</code>，所以使用 <code class="language-plaintext highlighter-rouge">Object.prototype.toString.apply()</code> 来检查这些对象类型，其返回值为：<code class="language-plaintext highlighter-rouge">'[object Null]'</code>, <code class="language-plaintext highlighter-rouge">'[object Date]'</code>, <code class="language-plaintext highlighter-rouge">'[object global]'</code></li>
+  <li>分别比较每个数组内元素的各种类型的个数，如果都相等，那么这两个数组是相似的。</li>
+</ol>
+
+<h3 id="具体实现代码">具体实现代码</h3>
+
+<p>JavaScript代码如下</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * =====================================================
+ * 请在index.html文件中，编写arraysSimilar函数，实现判断传入的两个数组是否相似。具体需求：
+ * 1. 数组中的成员类型相同，顺序可以不同。例如[1, true] 与 [false, 2]是相似的。
+ * 2. 数组的长度一致。
+ * 3. 类型的判断范围，需要区分:String, Boolean, Number, undefined, null, 函数，日期, window.
+ *
+ * 当以上全部满足，则返回"判定结果:通过"，否则返回"判定结果:不通过"。
+ * =====================================================
+ */</span>
+
+<span class="cm">/*
+* param1 Array
+* param2 Array
+* return true or false
+*/</span>
+<span class="kd">function</span> <span class="nx">arraysSimilar</span><span class="p">(</span><span class="nx">arr1</span><span class="p">,</span> <span class="nx">arr2</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">arr1</span> <span class="k">instanceof</span> <span class="nb">Array</span> <span class="o">&amp;&amp;</span> <span class="nx">arr2</span> <span class="k">instanceof</span> <span class="nb">Array</span> <span class="p">)</span> <span class="p">{</span>    <span class="c1">//先判断传入的是否是数组</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">arr1</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="nx">arr2</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>                    <span class="c1">//判断数组长度</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">same-length</span><span class="dl">"</span><span class="p">);</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr1</span><span class="p">);</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr2</span><span class="p">);</span>
+            <span class="c1">//开始判断数组内部是否相似</span>
+            <span class="k">return</span> <span class="nx">sameLengthArraysSimilar</span><span class="p">(</span><span class="nx">arr1</span><span class="p">,</span> <span class="nx">arr2</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span><span class="p">{</span>
+            <span class="c1">//两个数组长度不同返回false</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">//传入的参数不是数组返回false</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/**
+ * 判断两个等长的数组内部是否相似
+ * 遍历数组
+ * arr1中元素各种类型出现的个数是否和arr2中元素各种类型出现的个数相同
+ * @param  {Array} arr1 数组1
+ * @param  {Array} arr2 数组2
+ * @return {true,false}
+ */</span>
+<span class="kd">function</span> <span class="nx">sameLengthArraysSimilar</span><span class="p">(</span><span class="nx">arr1</span><span class="p">,</span><span class="nx">arr2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">numInArr1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">numInArr2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">booleanInArr1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">booleanInArr2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">funInArr1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">funInArr2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">undefinedInArr1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">undefinedInArr2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">stringInArr1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">stringInArr2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">nullInArr1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">nullInArr2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">dateInArr1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">dateInArr2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">windowInArr1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">windowInArr2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">arr1</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">arr1</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span> <span class="p">){</span>
+            <span class="nx">numInArr1</span> <span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">arr1</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">boolean</span><span class="dl">'</span><span class="p">){</span>
+            <span class="nx">booleanInArr1</span> <span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">arr1</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">function</span><span class="dl">'</span><span class="p">){</span>
+            <span class="nx">funInArr1</span> <span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">arr1</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">undefined</span><span class="dl">'</span><span class="p">){</span>
+            <span class="nx">undefinedInArr1</span> <span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">arr1</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">){</span>
+            <span class="nx">stringInArr1</span> <span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">arr1</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span><span class="dl">'</span><span class="s1">object</span><span class="dl">'</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">arr1</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">[object Null]</span><span class="dl">'</span><span class="p">){</span>
+                <span class="nx">nullInArr1</span> <span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">arr1</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">[object Date]</span><span class="dl">'</span><span class="p">){</span>
+                <span class="nx">dateInArr1</span> <span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">arr1</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">[object global]</span><span class="dl">'</span><span class="p">){</span>
+                <span class="nx">windowInArr1</span> <span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">arr2</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span><span class="p">){</span>
+            <span class="nx">numInArr2</span> <span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">arr2</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">boolean</span><span class="dl">'</span><span class="p">){</span>
+            <span class="nx">booleanInArr2</span> <span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">arr2</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">function</span><span class="dl">'</span><span class="p">){</span>
+            <span class="nx">funInArr2</span> <span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">arr2</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">undefined</span><span class="dl">'</span><span class="p">){</span>
+            <span class="nx">undefinedInArr2</span> <span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">arr2</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">){</span>
+            <span class="nx">stringInArr2</span> <span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">arr2</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span><span class="dl">'</span><span class="s1">object</span><span class="dl">'</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">arr2</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">[object Null]</span><span class="dl">'</span><span class="p">){</span>
+                <span class="nx">nullInArr2</span> <span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">arr2</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">[object Date]</span><span class="dl">'</span><span class="p">){</span>
+                <span class="nx">dateInArr2</span> <span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">arr2</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">[object global]</span><span class="dl">'</span><span class="p">){</span>
+                <span class="nx">windowInArr2</span> <span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">num---</span><span class="dl">"</span><span class="o">+</span><span class="nx">numInArr1</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">num---</span><span class="dl">"</span><span class="o">+</span><span class="nx">numInArr2</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">boo---</span><span class="dl">"</span><span class="o">+</span><span class="nx">booleanInArr1</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">boo---</span><span class="dl">"</span><span class="o">+</span><span class="nx">booleanInArr2</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">null---</span><span class="dl">"</span><span class="o">+</span><span class="nx">nullInArr1</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">null---</span><span class="dl">"</span><span class="o">+</span><span class="nx">nullInArr2</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">window---</span><span class="dl">"</span><span class="o">+</span><span class="nx">windowInArr1</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">window---</span><span class="dl">"</span><span class="o">+</span><span class="nx">windowInArr2</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">date---</span><span class="dl">"</span><span class="o">+</span><span class="nx">dateInArr1</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">date---</span><span class="dl">"</span><span class="o">+</span><span class="nx">dateInArr2</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">string---</span><span class="dl">"</span><span class="o">+</span><span class="nx">stringInArr1</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">string---</span><span class="dl">"</span><span class="o">+</span><span class="nx">stringInArr2</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">fun---</span><span class="dl">"</span><span class="o">+</span><span class="nx">funInArr1</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">fun---</span><span class="dl">"</span><span class="o">+</span><span class="nx">funInArr2</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">undefined---</span><span class="dl">"</span><span class="o">+</span><span class="nx">undefinedInArr1</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">undefined---</span><span class="dl">"</span><span class="o">+</span><span class="nx">undefinedInArr2</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="nx">numInArr1</span> <span class="o">==</span> <span class="nx">numInArr2</span> <span class="o">&amp;&amp;</span> <span class="nx">booleanInArr1</span><span class="o">==</span><span class="nx">booleanInArr2</span> <span class="o">&amp;&amp;</span> <span class="nx">funInArr1</span><span class="o">==</span><span class="nx">funInArr2</span> <span class="o">&amp;&amp;</span> <span class="nx">undefinedInArr1</span><span class="o">==</span><span class="nx">undefinedInArr2</span> <span class="o">&amp;&amp;</span> <span class="nx">stringInArr1</span><span class="o">==</span><span class="nx">stringInArr2</span> <span class="o">&amp;&amp;</span> <span class="nx">nullInArr1</span><span class="o">==</span><span class="nx">nullInArr2</span> <span class="o">&amp;&amp;</span> <span class="nx">dateInArr1</span><span class="o">==</span><span class="nx">dateInArr2</span> <span class="o">&amp;&amp;</span> <span class="nx">windowInArr1</span><span class="o">==</span><span class="nx">windowInArr2</span><span class="p">){</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">================================true</span><span class="dl">'</span><span class="p">);</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">================================false</span><span class="dl">'</span><span class="p">);</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="总结">总结</h2>
+
+<ul>
+  <li>上述代码完美的跑完所有的测试用例，读者 <a href="http://gaohaoyang.github.io/javascript-test/arraysSimilar/">点击这里查看结果</a>，并且可以按 <code class="language-plaintext highlighter-rouge">f12</code> 看 Console 信息， 里面有代码的执行过程。</li>
+  <li>当然你也可以复制本文的 JavaScript 代码，在 <a href="http://imooc.com/code/5760">慕课网的习题</a> 下跑一下，也可以看到 <code class="language-plaintext highlighter-rouge">判定结果:通过</code> 的结果</li>
+  <li>完整源代码在我的 GitHub <a href="https://github.com/Gaohaoyang/javascript-test/tree/master/arraysSimilar">javascript-test/arraysSimilar/</a> 仓库中</li>
+  <li>其实我的代码逻辑并不复杂，有点<strong>空间换时间</strong>的感觉，执行效率应该是较高的。没有用 JavaScript 封装的任何函数，完全是自己写的。其实代码除去 <code class="language-plaintext highlighter-rouge">console.log()</code> 也并没有多少行。</li>
+  <li>各位读者有什么好的想法欢迎留言交流！</li>
+</ul>
+:ET

@@ -1,0 +1,14 @@
+I"%<ul id="markdown-toc">
+  <li><a href="#什么是-weinre" id="markdown-toc-什么是-weinre">什么是 weinre？</a></li>
+</ul>
+
+<h2 id="什么是-weinre">什么是 weinre？</h2>
+
+<p><a href="http://people.apache.org/~pmuellr/weinre/docs/latest/Home.html">weinre官网</a> 上有两句有意思的介绍：</p>
+
+<blockquote>
+  <p><strong>weinre</strong> is <strong>WE</strong>b <strong>IN</strong>spector <strong>RE</strong>mote. Pronounced like the word “winery”. Or maybe like the word “weiner”. Who knows, really.</p>
+
+  <p><strong>weinre</strong> is a debugger for web pages, like FireBug (for FireFox) and Web Inspector (for WebKit-based browsers), except it’s designed to work remotely, and in particular, to allow you debug web pages on a mobile device such as a phone.</p>
+</blockquote>
+:ET

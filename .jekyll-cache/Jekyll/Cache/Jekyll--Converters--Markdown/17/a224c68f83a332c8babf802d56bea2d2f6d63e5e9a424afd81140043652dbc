@@ -1,0 +1,83 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#先上代码" id="markdown-toc-先上代码">先上代码</a></li>
+  <li><a href="#blob-对象" id="markdown-toc-blob-对象">Blob 对象</a></li>
+  <li><a href="#blob-urls" id="markdown-toc-blob-urls">Blob URLs</a></li>
+  <li><a href="#模拟-click" id="markdown-toc-模拟-click">模拟 click</a></li>
+  <li><a href="#小结" id="markdown-toc-小结">小结</a></li>
+  <li><a href="#参考" id="markdown-toc-参考">参考</a></li>
+</ul>
+
+<p>本文将介绍如何使用 JavaScript 创建文件，并自动/手动将文件下载。这在导出原始数据时会比较方便。</p>
+
+<h2 id="先上代码">先上代码</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * 创建并下载文件
+ * @param  {String} fileName 文件名
+ * @param  {String} content  文件内容
+ */</span>
+<span class="kd">function</span> <span class="nx">createAndDownloadFile</span><span class="p">(</span><span class="nx">fileName</span><span class="p">,</span> <span class="nx">content</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">aTag</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">blob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blob</span><span class="p">([</span><span class="nx">content</span><span class="p">]);</span>
+    <span class="nx">aTag</span><span class="p">.</span><span class="nx">download</span> <span class="o">=</span> <span class="nx">fileName</span><span class="p">;</span>
+    <span class="nx">aTag</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">);</span>
+    <span class="nx">aTag</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span>
+    <span class="nx">URL</span><span class="p">.</span><span class="nx">revokeObjectURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>很简单对吧，直接调用这个方法，传入文件名和文件内容，程序新建 a 标签，新建 Blob 对象，将文件名赋给 a 标签，同时将 Blob 对象作为 Url 也赋给 a 标签，模拟点击事件，自动下载成功，最后再回收内存。下面我们来看看具体是怎么操作的。</p>
+
+<p><img src="https://img.alicdn.com/tfs/TB16.GnOpXXXXXdapXXXXXXXXXX-307-134.png" alt="" /></p>
+
+<h2 id="blob-对象">Blob 对象</h2>
+
+<p>Blob 对象是一个字节序列。拥有 <code class="language-plaintext highlighter-rouge">size</code> 和 <code class="language-plaintext highlighter-rouge">type</code> 等属性。</p>
+
+<p>拥有 2 个只读状态 <code class="language-plaintext highlighter-rouge">OPEND</code> 和 <code class="language-plaintext highlighter-rouge">CLOSED。</code></p>
+
+<p>Blob 对象属于 JavaScript Web APIs 中的 File API 规定的部分，可以参考 W3C 文档中的 <a href="https://www.w3.org/TR/2015/WD-FileAPI-20150421/#blob"> The Blob Interface and Binary Data</a></p>
+
+<p>再回来看看我们的代码里是这么写的，使用了 Blob 的构造函数：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">blob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blob</span><span class="p">([</span><span class="nx">content</span><span class="p">]);</span>
+</code></pre></div></div>
+
+<p>使用方括号的原因是，其构造函数的参数为以下4中：</p>
+
+<ul>
+  <li>ArrayBuffer [TypedArrays] elements.</li>
+  <li>ArrayBufferView [TypedArrays] elements.</li>
+  <li>Blob elements.</li>
+  <li>DOMString [WebIDL] elements.</li>
+</ul>
+
+<p>所谓 <code class="language-plaintext highlighter-rouge">ArrayBuffer</code> 是一种用于呈现通用、固定长度的二进制数据的类型。详情可以参考 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer">ArrayBuffer -MDN</a> 以及 <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-arraybuffer-objects">ECMAScript2015 标准中的 ArrayBuffer</a>。</p>
+
+<h2 id="blob-urls">Blob URLs</h2>
+
+<p>Blob URLs 被创建或注销是使用 <code class="language-plaintext highlighter-rouge">URL</code> 对象上的方法。这个 <code class="language-plaintext highlighter-rouge">URL</code> 对象被挂在 <code class="language-plaintext highlighter-rouge">Window</code> (HTML) 对象下，或者 <code class="language-plaintext highlighter-rouge">WorkerGlobalScope</code> (Web Workers)对象下。</p>
+
+<p>拥有以下静态方法 <code class="language-plaintext highlighter-rouge">createObjectURL</code> 和 <code class="language-plaintext highlighter-rouge">revokeObjectURL</code>，用于创建一个 blob 对象的 url 和注销这个 blob url。</p>
+
+<p>详情可查看 <a href="https://www.w3.org/TR/2015/WD-FileAPI-20150421/#creating-revoking">关于创建和注销 Blob URL 的 W3C 标准文档</a></p>
+
+<h2 id="模拟-click">模拟 click</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">element</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>在 W3C 中很早就有这个<a href="https://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-2651361">规范</a>，不需要写繁琐的模拟事件触发的代码。</p>
+
+<h2 id="小结">小结</h2>
+
+<p>目前我将这个技术使用在 天猫双十一技术和UED庆功会 的摇火箭大屏游戏中。最后的游戏结果排名，在请求了接口后，在前端直接生成并下载到了本地，作为记录保存。主要也是因为服务端暂时没有提供这个一张表去记录游戏结果，于是采用了前端记录的解决方案。</p>
+
+<p>大家当时都玩的好开心啊，😁。你们的甘其食和全家卡的名单就是这样生成的！</p>
+
+<h2 id="参考">参考</h2>
+
+<ul>
+  <li><a href="http://www.alloyteam.com/2014/01/use-js-file-download/">在浏览器端用JS创建和下载文件 -alloyteam</a></li>
+</ul>
+:ET

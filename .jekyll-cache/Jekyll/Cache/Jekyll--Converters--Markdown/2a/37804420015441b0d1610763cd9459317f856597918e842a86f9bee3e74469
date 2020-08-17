@@ -1,0 +1,443 @@
+I"�?<ul id="markdown-toc">
+  <li><a href="#工具" id="markdown-toc-工具">工具</a></li>
+  <li><a href="#编程语言" id="markdown-toc-编程语言">编程语言</a>    <ul>
+      <li><a href="#javascript" id="markdown-toc-javascript">JavaScript</a></li>
+      <li><a href="#es2015" id="markdown-toc-es2015">ES2015</a></li>
+      <li><a href="#nodejs" id="markdown-toc-nodejs">NodeJS</a></li>
+    </ul>
+  </li>
+  <li><a href="#框架脚手架" id="markdown-toc-框架脚手架">框架&amp;脚手架</a>    <ul>
+      <li><a href="#webpack" id="markdown-toc-webpack">webpack</a></li>
+      <li><a href="#vue" id="markdown-toc-vue">Vue</a></li>
+      <li><a href="#react" id="markdown-toc-react">React</a></li>
+      <li><a href="#angularjs" id="markdown-toc-angularjs">AngularJS</a></li>
+      <li><a href="#测试" id="markdown-toc-测试">测试</a></li>
+    </ul>
+  </li>
+  <li><a href="#类库与插件" id="markdown-toc-类库与插件">类库与插件</a></li>
+  <li><a href="#模块化" id="markdown-toc-模块化">模块化</a></li>
+  <li><a href="#other-articles" id="markdown-toc-other-articles">other articles</a></li>
+  <li><a href="#编辑器" id="markdown-toc-编辑器">编辑器</a>    <ul>
+      <li><a href="#atom-中常用插件" id="markdown-toc-atom-中常用插件">Atom 中常用插件</a></li>
+    </ul>
+  </li>
+  <li><a href="#gitbook-及其插件" id="markdown-toc-gitbook-及其插件">GitBook 及其插件</a></li>
+  <li><a href="#chrome-插件" id="markdown-toc-chrome-插件">Chrome 插件</a></li>
+  <li><a href="#other-blogs" id="markdown-toc-other-blogs">Other blogs</a></li>
+  <li><a href="#交互设计相关" id="markdown-toc-交互设计相关">交互设计相关</a></li>
+  <li><a href="#comments" id="markdown-toc-comments">Comments</a></li>
+</ul>
+
+<h2 id="工具">工具</h2>
+
+<ul>
+  <li>
+    <p><a href="http://www.cssmatic.com/box-shadow">box-shadow generator</a></p>
+
+    <p>生成 box-shadow 的工具。</p>
+  </li>
+  <li>
+    <p><a href="http://www.cssmatic.com/gradient-generator">gradient-generator</a></p>
+
+    <p>渐变生成器。</p>
+  </li>
+  <li>
+    <p><a href="http://www.colorzilla.com/gradient-editor/">Ultimate CSS Gradient Generator</a></p>
+
+    <p>也是渐变生成器</p>
+  </li>
+  <li>
+    <p><a href="http://www.cssreflex.com/css-generators/">CSS Generators -CSSREFLEX</a></p>
+
+    <p>CSS3 生成器</p>
+  </li>
+  <li>
+    <p><a href="https://tinypng.com/">tiny png</a></p>
+
+    <p>用于压缩 png 或 jpg 的在线工具</p>
+  </li>
+  <li>
+    <p><a href="https://sm.ms/">图床 https://sm.ms/</a></p>
+
+    <p>有 API 可用。</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/Suxiaogang/WeiboPicBed">新浪微博图床 Chrome扩展</a></p>
+  </li>
+  <li>
+    <p><a href="http://tool.chinaz.com/Tools/unixtime.aspx">Unix 时间戳 Unix timestamp</a></p>
+  </li>
+  <li><a href="https://regex101.com/">在线正则表达式匹配</a>
+    <ul>
+      <li>这个功能更强大一点，能清楚的区分出贪婪和懒惰正则。</li>
+    </ul>
+  </li>
+  <li><a href="http://regexr.com/">http://regexr.com/</a></li>
+  <li><a href="https://fonts.google.com/">google fonts</a>
+    <ul>
+      <li><a href="https://fengmk2.com/blog/2016/google-fonts-mirror">Google Fonts 加速代理</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="编程语言">编程语言</h2>
+
+<h3 id="javascript">JavaScript</h3>
+
+<ul>
+  <li>
+    <p><a href="http://javascript.ruanyifeng.com/">JavaScript 标准参考教程（alpha） -阮一峰</a></p>
+  </li>
+  <li>
+    <p><a href="http://liubin.org/promises-book/">JavaScript Promise迷你书 -azu</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/getify/You-Dont-Know-JS">You Don’t Know JS (book series)</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/oneuijs/You-Dont-Need-jQuery/blob/master/README.zh-CN.md">You Don’t Need jQuery</a></p>
+
+    <p>前端发展很快，现代浏览器原生 API 已经足够好用。我们并不需要为了操作 DOM、Event 等再学习一下 jQuery 的 API。同时由于 React、Angular、Vue 等框架的流行，直接操作 DOM 不再是好的模式，jQuery 使用场景大大减少。本项目总结了大部分 jQuery API 替代的方法，暂时只支持 IE10+ 以上浏览器。</p>
+  </li>
+  <li>
+    <p><a href="http://youmightnotneedjqueryplugins.com/">YOU MIGHT NOT NEED JQUERY PLUGINS</a></p>
+  </li>
+  <li>
+    <p><a href="http://bonsaiden.github.io/JavaScript-Garden/zh/">JavaScript 秘密花园</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.alloyteam.com/2012/10/common-javascript-design-patterns/">JavaScript 设计模式 系列 AlloyTeam</a></p>
+  </li>
+</ul>
+
+<h3 id="es2015">ES2015</h3>
+
+<ul>
+  <li><a href="https://tc39.github.io/ecma262/">https://tc39.github.io/ecma262/</a></li>
+  <li>
+    <p><a href="http://www.ecma-international.org/ecma-262/6.0/">http://www.ecma-international.org/ecma-262/6.0/</a></p>
+
+    <p>ES2015规范</p>
+  </li>
+  <li>
+    <p><a href="http://es6katas.org/">http://es6katas.org/</a></p>
+
+    <p>Learn ES6 by doing it. Fix failing tests. Keep all learnings.</p>
+  </li>
+  <li>
+    <p><a href="http://segmentfault.com/a/1190000004365693">30分钟掌握ES6/ES2015核心内容（上）</a></p>
+  </li>
+  <li>
+    <p><a href="http://segmentfault.com/a/1190000004368132">30分钟掌握ES6/ES2015核心内容（下）</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/ruanyf/es6tutorial">《ECMAScript 6入门》 -阮一峰</a></p>
+  </li>
+  <li><a href="https://github.com/ouvens/es6-code-style-guide">EcmaScript6 全规范（含node） -ouvens</a></li>
+</ul>
+
+<h3 id="nodejs">NodeJS</h3>
+
+<ul>
+  <li><a href="https://nqdeng.github.io/7-days-nodejs">七天学会NodeJS -Nanqiao Deng</a></li>
+</ul>
+
+<h2 id="框架脚手架">框架&amp;脚手架</h2>
+
+<h3 id="webpack">webpack</h3>
+
+<ul>
+  <li>
+    <p><a href="https://www.gitbook.com/book/zhaoda/webpack/details">Webpack 中文指南 -赵达</a></p>
+  </li>
+  <li>
+    <p><a href="http://zhuanlan.zhihu.com/FrontendMagazine/20367175">Webpack傻瓜式指南（一） -前端外刊评论 知乎专栏</a></p>
+  </li>
+  <li>
+    <p><a href="http://zhuanlan.zhihu.com/FrontendMagazine/20397902">Webpack傻瓜指南（二）开发和部署技巧 -前端外刊评论 知乎专栏</a></p>
+  </li>
+  <li>
+    <p><a href="http://zhuanlan.zhihu.com/FrontendMagazine/20522487">Webpack傻瓜指南（三）和React配合开发 -前端外刊评论 知乎专栏</a></p>
+
+    <p>上述傻瓜指南的原始出处 <a href="https://github.com/vikingmute/webpack-for-fools">https://github.com/vikingmute/webpack-for-fools</a> Webpack傻瓜式指南</p>
+  </li>
+  <li>
+    <p><a href="http://www.html-js.com/article/3009">Webpack，101入门体验 -Yika</a></p>
+  </li>
+  <li>
+    <p><a href="https://segmentfault.com/a/1190000002551952">Webpack 入门指迷 -题叶</a></p>
+  </li>
+  <li>
+    <p><a href="https://webpack.github.io/">https://webpack.github.io/ Webpack 官网</a></p>
+  </li>
+</ul>
+
+<h3 id="vue">Vue</h3>
+
+<ul>
+  <li><a href="https://github.com/vuejs/awesome-vue">awesome-vue</a></li>
+  <li><a href="http://djyde.github.io/2015/08/29/vuejs-and-webpack-1/">Vue.js 和 Webpack（一） -Randy Lu</a></li>
+  <li><a href="http://djyde.github.io/2015/08/30/vuejs-and-webpack-2/">Vue.js 和 Webpack（二） -Randy Lu</a></li>
+  <li><a href="http://djyde.github.io/2015/08/31/vuejs-and-webpack-3/">Vue.js 和 Webpack（三） -Randy Lu</a></li>
+  <li><a href="https://laravist.com/series/vue-js-1-0-in-action-series">Vuejs 1.0 中文系列视频教程 -Laravist</a></li>
+  <li><a href="https://github.com/jsfront/src/blob/master/vuejs.md">Vuejs-QQ群 相关资料</a> 来自豪情</li>
+</ul>
+
+<h3 id="react">React</h3>
+
+<ul>
+  <li><a href="http://reactjs.cn/react/docs/thinking-in-react.html">深入理解 React -Thinking in React 中文版</a></li>
+  <li><a href="http://facebook.github.io/react/docs/thinking-in-react.html">Thinking in React</a></li>
+</ul>
+
+<h3 id="angularjs">AngularJS</h3>
+
+<ul>
+  <li>
+    <p><a href="https://hairui219.gitbooks.io/learning_angular/content/zh/index.html">学习AngularJS 1.x -Harry<a href="mailto:harry@andtoo.net">harry@andtoo.net</a></a></p>
+
+    <p>本书是作者 <a href="https://github.com/hairui219">Harry</a> 在学习和应用AngularJS 1.x 的过程中的资料梳理。希望能对大家学习AngularJS有一定帮助……</p>
+  </li>
+  <li>
+    <p><a href="https://docs.angularjs.org/api">AngularJS api 官网</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/zensh/AngularjsTutorial_cn">AngularJS入门教程——AngularJS中文社区提供</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.runoob.com/angularjs/angularjs-tutorial.html">AngularJS 教程 | 菜鸟教程</a></p>
+
+    <p>类似 w3school 的入门 AngularJS 教程。</p>
+  </li>
+</ul>
+
+<h3 id="测试">测试</h3>
+
+<ul>
+  <li><a href="http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html">测试框架 Mocha 实例教程 阮一峰</a></li>
+</ul>
+
+<h2 id="类库与插件">类库与插件</h2>
+
+<ul>
+  <li>
+    <p><a href="http://masonry.desandro.com/">Masonry</a></p>
+
+    <p>瀑布流布局库。</p>
+  </li>
+  <li>
+    <p><a href="http://www.jssor.com/">jssor</a></p>
+
+    <p>图片轮播图其 GitHub 地址 <a href="https://github.com/jssor/slider">jssor/slider</a></p>
+  </li>
+  <li>
+    <p><a href="http://cssslider.com/">cssslider</a></p>
+
+    <p>纯 CSS 的图片轮播图。</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/cferdinandi/gumshoe">gumshoe</a></p>
+
+    <p>A simple, framework-agnostic scrollspy script.</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/cferdinandi/smooth-scroll">smooth-scroll</a></p>
+
+    <p>A simple vanilla JS script to animate scrolling to anchor links.</p>
+  </li>
+</ul>
+
+<h2 id="模块化">模块化</h2>
+
+<ul>
+  <li><a href="http://lishaopeng.com/2016/02/05/js-module/">后端程序员的 JavaScript 之旅 - 模块化（一）</a></li>
+  <li><a href="http://lishaopeng.com/2016/02/11/js-module2/">后端程序员的 JavaScript 之旅 - 模块化（二）</a></li>
+  <li>
+    <p><a href="http://lishaopeng.com/2016/02/19/js-module3/">后端程序员的 JavaScript 之旅 - 模块化（三）</a></p>
+  </li>
+  <li><a href="http://javascript.ruanyifeng.com/nodejs/module.html">CommonJS 规范 -来自 阮一峰 JavaScript 标准参考教程(alpha)</a></li>
+</ul>
+
+<h2 id="other-articles">other articles</h2>
+
+<ul>
+  <li><a href="http://gethead.info/">&lt;head&gt; Cheat Sheet</a></li>
+  <li><a href="https://segmentfault.com/a/1190000004453249">将footer固定在页面底部的实现方法</a></li>
+  <li><a href="https://www.html5rocks.com/zh/tutorials/video/basics/">HTML5 视频 By Pete LePage</a></li>
+</ul>
+
+<h2 id="编辑器">编辑器</h2>
+
+<h3 id="atom-中常用插件">Atom 中常用插件</h3>
+
+<ul>
+  <li>auto-beautify</li>
+  <li>autoprefixer</li>
+  <li>block-comment</li>
+  <li>color-picker</li>
+  <li>docblockr</li>
+  <li>emmet</li>
+  <li>jquery-snippets</li>
+  <li>jshint</li>
+  <li>linter</li>
+  <li>linter-csslint</li>
+  <li>linter-htmlhint</li>
+  <li>minimap</li>
+  <li>minimap-git-diff</li>
+  <li>minimap-codeglance 滑过 minimap 显示代码</li>
+  <li>minimap-find-and-replace 在 minimap 中显示 <code class="language-plaintext highlighter-rouge">ctrl+D</code> 选中的内容</li>
+  <li>open-in-browser</li>
+  <li>uglify</li>
+  <li>active-power-mode</li>
+  <li>atom-terminal-panel</li>
+  <li>linter-scss-linter</li>
+  <li>atom-ternjs</li>
+  <li>file-icons 将图标变成彩色</li>
+  <li>autocomplete-paths 自动补充路径</li>
+  <li>symbols-tree-view A symbol treeview like taglist</li>
+</ul>
+
+<p>常用的主题：</p>
+
+<p>UI Theme: One Dark</p>
+
+<p>Syntax Theme: Atom Dark or One Dark</p>
+
+<h2 id="gitbook-及其插件">GitBook 及其插件</h2>
+
+<ul>
+  <li><a href="http://zhaoda.net/2015/11/09/gitbook-plugins/">Gitbook 的使用和常用插件 -赵达</a></li>
+  <li>
+    <p><a href="https://plugins.gitbook.com/plugin/expandable-chapters">gitbook-plugin-expandable-chapters</a></p>
+
+    <p>折叠左侧目录章节。</p>
+
+    <p><!-- ![](http://ww4.sinaimg.cn/large/7011d6cfjw1f08kmplbj1j20gn05l0tk.jpg) --></p>
+  </li>
+</ul>
+
+<h2 id="chrome-插件">Chrome 插件</h2>
+<ul>
+  <li>
+    <p><a href="https://chrome.google.com/webstore/detail/octotree/bkhaagjahfmjljalopjnoealnfndnagc">Octotree</a></p>
+
+    <ul>
+      <li>Code tree for GitHub and GitLab</li>
+    </ul>
+  </li>
+  <li>
+    <p><a href="http://www.ituring.com.cn/minibook/950">Chrome扩展及应用开发 -图灵电子书</a></p>
+  </li>
+  <li><a href="https://www.zhihu.com/question/23228162#answer-28057391">有哪些鲜为人知却非常有意思、好用的 Chrome 扩展？ -知乎</a></li>
+  <li>
+    <p><a href="https://chrome.google.com/webstore/detail/dribbble-new-tab/hmhjbefkpednjogghoibpejdmemkinbn">Dribbble New Tab</a></p>
+
+    <p>新建 tab 时，显示 dribbble 上的精选作品。</p>
+  </li>
+</ul>
+
+<h2 id="other-blogs">Other blogs</h2>
+
+<ul>
+  <li>
+    <p><a href="http://www.xiaoa.name/">COLORFUL xiaoa</a></p>
+  </li>
+  <li>
+    <p><a href="http://pinkyjie.com/">进击的马斯特 http://pinkyjie.com/</a></p>
+
+    <p>马斯特，87年生人，爱溜冰的码农。技术： Javascript、Python、Mac、iOS</p>
+  </li>
+  <li>
+    <p><a href="https://imququ.com/">Jerry Qu</a></p>
+
+    <p>JerryQu，奇虎 360，前端开发，前百度前端。</p>
+  </li>
+  <li>
+    <p><a href="https://mazhuang.org/">码志 https://mazhuang.org/</a></p>
+
+    <p>我是马壮，码而生，码而立。就职sogou。</p>
+  </li>
+  <li>
+    <p><a href="http://www.barretlee.com/">小胡子哥 http://www.barretlee.com/</a></p>
+
+    <p>李靖，阿里巴巴。</p>
+  </li>
+  <li>
+    <p><a href="http://blog.xcatliu.com/">Xcat Liu http://blog.xcatliu.com/</a></p>
+
+    <p>Microsoft Software Engineer II, Meituan Senior Front-End Engineer</p>
+  </li>
+  <li>
+    <p><a href="http://ouvens.github.io/">极限前端 http://ouvens.github.io/</a></p>
+
+    <p>Ouvenzhang, 前端工程师，对前端领域的技术知识具有较高的职业能力和探究精神。对响应式页面设计、工程构建组件化、mv*设计实现、前端优化、ES6开发体系等有深入的研究与项目实践。来自腾讯科技。</p>
+  </li>
+  <li>
+    <p><a href="http://www.dengzhr.com/">凳子_Joinery 邓智容  http://www.dengzhr.com/</a></p>
+  </li>
+  <li>
+    <p><a href="http://zhaoda.net/">赵达的个人网站 腾讯高级前端开发工程师</a></p>
+  </li>
+  <li>
+    <p><a href="http://djyde.github.io/">Randy</a></p>
+
+    <p>95年出生的全栈。卢涛南，英文名 Randy，用 djyde 这个ID混迹于网络。</p>
+  </li>
+  <li>
+    <p><a href="http://www.kancloud.cn/jsfront/month/82796">JS前端开发群月报 -豪情等人维护</a></p>
+  </li>
+</ul>
+
+<h2 id="交互设计相关">交互设计相关</h2>
+
+<ul>
+  <li>
+    <p><a href="https://framerjs.com/">Framer</a></p>
+
+    <p>Design the impossible with Framer</p>
+  </li>
+  <li>
+    <p><a href="https://www.flinto.com/">FLINTO</a></p>
+
+    <p>App Prototyping Tools for Designers</p>
+  </li>
+  <li>
+    <p><a href="http://principleformac.com/">Principle</a></p>
+
+    <p>Animate Your Ideas, Design Better Apps</p>
+  </li>
+  <li>
+    <p><a href="https://gyrosco.pe/">https://gyrosco.pe/</a></p>
+
+    <p>首页的卡片翻动效果非常赞。</p>
+  </li>
+</ul>
+
+<h2 id="comments">Comments</h2>
+
+<div id="disqus_thread"></div>
+<script>
+    /**
+     * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+
+    var disqus_config = function() {
+        this.page.url = 'http://localhost:4000/collection/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://localhost:4000/collection/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document,
+            s = d.createElement('script');
+
+        s.src = '//gaohaoyang.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+:ET

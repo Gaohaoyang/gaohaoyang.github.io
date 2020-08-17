@@ -1,0 +1,554 @@
+I"ɚ<ul id="markdown-toc">
+  <li><a href="#简单的usestate---counter-计数器示例" id="markdown-toc-简单的usestate---counter-计数器示例">简单的useState - Counter 计数器示例</a>    <ul>
+      <li><a href="#class-组件的写法" id="markdown-toc-class-组件的写法">Class 组件的写法</a></li>
+      <li><a href="#state-hook-实现" id="markdown-toc-state-hook-实现">State Hook 实现</a></li>
+      <li><a href="#小结-hooks-的使用规则" id="markdown-toc-小结-hooks-的使用规则">小结 Hooks 的使用规则</a></li>
+    </ul>
+  </li>
+  <li><a href="#usestate-with-previous-state" id="markdown-toc-usestate-with-previous-state">useState with Previous State</a>    <ul>
+      <li><a href="#counter-示例" id="markdown-toc-counter-示例">Counter 示例</a></li>
+      <li><a href="#小结" id="markdown-toc-小结">小结</a></li>
+    </ul>
+  </li>
+  <li><a href="#usestate-with-object" id="markdown-toc-usestate-with-object">useState with Object</a>    <ul>
+      <li><a href="#错误示例-firstname--lastname" id="markdown-toc-错误示例-firstname--lastname">错误示例 firstName &amp; lastName</a></li>
+      <li><a href="#正确示例-手动合并对象" id="markdown-toc-正确示例-手动合并对象">正确示例-手动合并对象</a></li>
+      <li><a href="#小结-1" id="markdown-toc-小结-1">小结</a></li>
+    </ul>
+  </li>
+  <li><a href="#usestate-with-array" id="markdown-toc-usestate-with-array">useState with Array</a>    <ul>
+      <li><a href="#列表示例" id="markdown-toc-列表示例">列表示例</a></li>
+    </ul>
+  </li>
+  <li><a href="#usestate-总结" id="markdown-toc-usestate-总结">useState 总结</a></li>
+</ul>
+
+<p>本系列将讲述 React Hooks 的使用方法，从 useState 开始，将包含如下内容：</p>
+
+<ul>
+  <li><a href="https://juejin.im/post/5e8324ade51d45470921f86a">useState</a></li>
+  <li><a href="https://juejin.im/post/5eb910b35188256d58312c7e">useEffect</a></li>
+  <li><a href="https://juejin.im/post/5eb912246fb9a0436e47f947">useContext</a></li>
+  <li><a href="https://juejin.im/post/5ebba47fe51d454dd5062f5b">useReducer</a></li>
+  <li><a href="https://juejin.im/post/5ec2465a5188256d841a552a">useCallback</a></li>
+  <li><a href="https://juejin.im/post/5ec293a55188256d754876fc">useMemo</a></li>
+  <li><a href="https://juejin.im/post/5ecbf486f265da7711699c3a">useRef</a></li>
+  <li><a href="https://juejin.im/post/5ecd4c86f265da76ff6d0f16">custom hooks</a></li>
+</ul>
+
+<p>掌握 React Hooks api 将更好的帮助你在工作中使用，对 React 的掌握更上一层楼。本系列将使用大量实例代码和效果展示，非常易于初学者和复习使用。</p>
+
+<p>前提，需要会使用 React Class 的写法，会使用 <code class="language-plaintext highlighter-rouge">setState()</code> 和 props。</p>
+
+<p>下面从第一个例子开始吧。</p>
+
+<h2 id="简单的usestate---counter-计数器示例">简单的useState - Counter 计数器示例</h2>
+
+<p>点击+1的计数器</p>
+
+<h3 id="class-组件的写法">Class 组件的写法</h3>
+
+<p>CounterClass.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">class</span> <span class="nx">CounterClass</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+
+  <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">count</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">}</span>
+
+  <span class="nx">incrementCount</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+      <span class="na">count</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="p">})</span>
+  <span class="p">}</span>
+
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">count</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">incrementCount</span><span class="si">}</span><span class="p">&gt;</span>Count <span class="si">{</span><span class="nx">count</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">CounterClass</span>
+
+</code></pre></div></div>
+
+<p>App.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="dl">'</span><span class="s1">./App.css</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="nx">CounterClass</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./components/CounterClass</span><span class="dl">'</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">CounterClass</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span>
+</code></pre></div></div>
+
+<p>效果如下</p>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1oZQLveL2gK0jSZPhXXahvXXa-306-179.gif" alt="" /></p>
+
+<p>创建这样的一个计数器分为简单的3步</p>
+
+<ol>
+  <li>创建一个 Class 组件</li>
+  <li>创建 state</li>
+  <li>创建 increment 方法</li>
+</ol>
+
+<p>接下来看看如何使用 Function Component 和 state hook 实现</p>
+
+<h3 id="state-hook-实现">State Hook 实现</h3>
+
+<p>HookCounter.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">HookCounter</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">setCount</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">setCount</span><span class="p">(</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>Count <span class="si">{</span><span class="nx">count</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">HookCounter</span>
+</code></pre></div></div>
+
+<p>App.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="dl">'</span><span class="s1">./App.css</span><span class="dl">'</span>
+
+<span class="c1">// import CounterClass from './components/1CounterClass'</span>
+<span class="k">import</span> <span class="nx">HookCounter</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./components/1HookCounter</span><span class="dl">'</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">HookCounter</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span>
+
+</code></pre></div></div>
+
+<p>效果与 Class 组件写法相同</p>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1oZQLveL2gK0jSZPhXXahvXXa-306-179.gif" alt="" /></p>
+
+<p>我们来看 useState 的使用方法</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">[</span><span class="nx">state</span><span class="p">,</span> <span class="nx">setState</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="nx">initialState</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>这行代码返回一个 state，以及更新 state 的函数。</p>
+
+<p>在初始渲染期间，返回的状态 (state) 与传入的第一个参数 (initialState) 值相同。</p>
+
+<p>setState 函数用于更新 state。它接收一个新的 state 值并将组件的一次重新渲染加入队列。</p>
+
+<h3 id="小结-hooks-的使用规则">小结 Hooks 的使用规则</h3>
+
+<ul>
+  <li>只能在顶层作用域调用 Hooks
+    <ul>
+      <li>不能在内部的循环、条件判断、嵌套的方法中使用</li>
+    </ul>
+  </li>
+  <li>只能在 React Function 里使用 Hooks
+    <ul>
+      <li>不能在其他普通的 function 中使用 Hooks</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="usestate-with-previous-state">useState with Previous State</h2>
+
+<p>本节讲述如何使用 previous state，当你的 state 值依赖上一个状态值时，就会用到 previous state。</p>
+
+<p>依然通过 Counter 的例子说明，增加了按钮点击 +1 或 -1</p>
+
+<h3 id="counter-示例">Counter 示例</h3>
+
+<p>HookCounter.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">HookCounter</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="kd">const</span> <span class="nx">initialCount</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">setCount</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="nx">initialCount</span><span class="p">)</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      Count: <span class="si">{</span><span class="nx">count</span><span class="si">}</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">setCount</span><span class="p">(</span><span class="nx">initialCount</span><span class="p">)</span>
+      <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>Reset<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">setCount</span><span class="p">(</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span> + 1 <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">setCount</span><span class="p">(</span><span class="nx">count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span> - 1 <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">HookCounter</span>
+</code></pre></div></div>
+
+<p>App.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="dl">'</span><span class="s1">./App.css</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="nx">HookCounter</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./components/3HookCounter</span><span class="dl">'</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">HookCounter</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span>
+</code></pre></div></div>
+
+<p>效果如下：</p>
+
+<p><img src="https://gw.alicdn.com/tfs/TB13LIYva61gK0jSZFlXXXDKFXa-306-179.gif" alt="" /></p>
+
+<p>看起来效果没有问题，<strong>但是这样写是不安全的！</strong> 这不是更改计数器的正确方法。下面告诉你为什么：</p>
+
+<p>同样也是举个例子，在上述的示例中再增加一个按钮，每次累加5</p>
+
+<p>代码如下</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">import React, { useState } from 'react'
+</span>
+function HookCounter() {
+
+  const initialCount = 0
+  const [count, setCount] = useState(initialCount)
+
++  const increment5 = () =&gt; {
+<span class="gi">+    for (let i = 0; i &lt; 5; i++) {
++      setCount(count + 1)
++    }
++  }
+</span>
+  return (
+    &lt;div&gt;
+      Count: {count}
+      &lt;button onClick={() =&gt; {
+        setCount(initialCount)
+      }}&gt;Reset&lt;/button&gt;
+      &lt;button onClick={() =&gt; {
+        setCount(count + 1)
+      }}&gt; + 1 &lt;/button&gt;
+      &lt;button onClick={() =&gt; {
+        setCount(count - 1)
+      }}&gt; - 1 &lt;/button&gt;
+<span class="gi">+      &lt;button onClick={increment5}&gt; + 5 &lt;/button&gt;
+</span>    &lt;/div&gt;
+  )
+<span class="err">}</span>
+
+<span class="p">export default HookCounter
+</span></code></pre></div></div>
+
+<p>点击 + 5 时，只加了 1</p>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1AdMTvoz1gK0jSZLeXXb9kVXa-306-179.gif" alt="" /></p>
+
+<p>这是因为 setCount 方法是异步的，不能立即反应并更新，瞬间调动多次入参中的 count 仍然是旧的值，没有被更新。</p>
+
+<p>将代码修改如下：</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">import React, { useState } from 'react'
+</span>
+function HookCounter() {
+
+  const initialCount = 0
+  const [count, setCount] = useState(initialCount)
+
+  const increment5 = () =&gt; {
+    for (let i = 0; i &lt; 5; i++) {
+<span class="gi">+      setCount(prevCount =&gt; prevCount + 1)
+</span>    }
+  }
+
+  return (
+    &lt;div&gt;
+      Count: {count}
+      &lt;button onClick={() =&gt; {
+        setCount(initialCount)
+      }}&gt;Reset&lt;/button&gt;
+      &lt;button onClick={() =&gt; {
+        setCount(count + 1)
+      }}&gt; + 1 &lt;/button&gt;
+      &lt;button onClick={() =&gt; {
+        setCount(count - 1)
+      }}&gt; - 1 &lt;/button&gt;
+      &lt;button onClick={increment5}&gt; + 5 &lt;/button&gt;
+    &lt;/div&gt;
+  )
+<span class="err">}</span>
+
+<span class="p">export default HookCounter
+</span></code></pre></div></div>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1ZG3WvkL0gK0jSZFAXXcA9pXa-306-179.gif" alt="" /></p>
+
+<p>注意到如果要使用 previous state，则需要通过 function 的方式传入 value 再返回变化后的新 value，将 <code class="language-plaintext highlighter-rouge">+ 1</code> <code class="language-plaintext highlighter-rouge">-1</code> 的功能也修改一下，完善后的代码如下：</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">HookCounter</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="kd">const</span> <span class="nx">initialCount</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">setCount</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="nx">initialCount</span><span class="p">)</span>
+
+  <span class="kd">const</span> <span class="nx">increment5</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">setCount</span><span class="p">(</span><span class="nx">prevCount</span> <span class="o">=&gt;</span> <span class="nx">prevCount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      Count: <span class="si">{</span><span class="nx">count</span><span class="si">}</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">setCount</span><span class="p">(</span><span class="nx">initialCount</span><span class="p">)</span>
+      <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>Reset<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">setCount</span><span class="p">(</span><span class="nx">prevCount</span> <span class="o">=&gt;</span> <span class="nx">prevCount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span> + 1 <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">setCount</span><span class="p">(</span><span class="nx">prevCount</span> <span class="o">=&gt;</span> <span class="nx">prevCount</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span> - 1 <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">increment5</span><span class="si">}</span><span class="p">&gt;</span> + 5 <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">HookCounter</span>
+</code></pre></div></div>
+
+<h3 id="小结">小结</h3>
+
+<p>使用 previousState 时，要使用 setter function 的方式，传参给 setState 方法。来确保拿到的是准确的 previous state。</p>
+
+<p>在重新渲染中，useState 返回的第一个值将始终是更新后最新的 state。</p>
+
+<h2 id="usestate-with-object">useState with Object</h2>
+
+<p>当 useState 中的 state 为对象时，调用相应的 setState 有一些要注意的地方，useState 不会自动合并更新对象，你可以用函数式的 setState 结合展开运算符来达到合并更新对象的效果。</p>
+
+<h3 id="错误示例-firstname--lastname">错误示例 firstName &amp; lastName</h3>
+
+<p>HookCounter.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">HookCounter</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">name</span><span class="p">,</span> <span class="nx">setName</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">({</span>
+    <span class="na">firstName</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+    <span class="na">lastName</span><span class="p">:</span> <span class="dl">''</span>
+  <span class="p">})</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">form</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span>
+        <span class="na">type</span><span class="p">=</span><span class="s">"text"</span>
+        <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">name</span><span class="p">.</span><span class="nx">firstName</span><span class="si">}</span>
+        <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">setName</span><span class="p">({</span>
+            <span class="na">firstName</span><span class="p">:</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span>
+          <span class="p">})</span>
+        <span class="p">}</span><span class="si">}</span>
+      <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span>
+        <span class="na">type</span><span class="p">=</span><span class="s">"text"</span>
+        <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">name</span><span class="p">.</span><span class="nx">lastName</span><span class="si">}</span>
+        <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">setName</span><span class="p">({</span>
+            <span class="na">lastName</span><span class="p">:</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span>
+          <span class="p">})</span>
+        <span class="p">}</span><span class="si">}</span>
+      <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Your first name is <span class="si">{</span><span class="nx">name</span><span class="p">.</span><span class="nx">firstName</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Your last name is <span class="si">{</span><span class="nx">name</span><span class="p">.</span><span class="nx">lastName</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">HookCounter</span>
+</code></pre></div></div>
+
+<p>注意到 input 标签上的 onChange 中，每次 setName 时，只对对象中的一个属性做了操作。只给 firstName 赋值时，lastName 属性会消失，这是一种错误的写法。</p>
+
+<p>由于我使用了 tsx 来写组件，我的编译器直接就报错了：</p>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1q8E0voY1gK0jSZFCXXcwqXXa-1098-822.jpg" alt="" /></p>
+
+<p>浏览器也直接报错了</p>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1FIMVvhD1gK0jSZFsXXbldVXa-910-832.jpg" alt="" /></p>
+
+<h3 id="正确示例-手动合并对象">正确示例-手动合并对象</h3>
+
+<p>这里要使用展开运算符，来解决这个对象的问题</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">HookCounter</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">name</span><span class="p">,</span> <span class="nx">setName</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">({</span>
+    <span class="na">firstName</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+    <span class="na">lastName</span><span class="p">:</span> <span class="dl">''</span>
+  <span class="p">})</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">form</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span>
+        <span class="na">type</span><span class="p">=</span><span class="s">"text"</span>
+        <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">name</span><span class="p">.</span><span class="nx">firstName</span><span class="si">}</span>
+        <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">setName</span><span class="p">({</span>
+            <span class="p">...</span><span class="nx">name</span><span class="p">,</span>
+            <span class="na">firstName</span><span class="p">:</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span>
+          <span class="p">})</span>
+        <span class="p">}</span><span class="si">}</span>
+      <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span>
+        <span class="na">type</span><span class="p">=</span><span class="s">"text"</span>
+        <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">name</span><span class="p">.</span><span class="nx">lastName</span><span class="si">}</span>
+        <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">setName</span><span class="p">({</span>
+            <span class="p">...</span><span class="nx">name</span><span class="p">,</span>
+            <span class="na">lastName</span><span class="p">:</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span>
+          <span class="p">})</span>
+        <span class="p">}</span><span class="si">}</span>
+      <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Your first name is <span class="si">{</span><span class="nx">name</span><span class="p">.</span><span class="nx">firstName</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Your last name is <span class="si">{</span><span class="nx">name</span><span class="p">.</span><span class="nx">lastName</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">HookCounter</span>
+</code></pre></div></div>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1mfIUvXY7gK0jSZKzXXaikpXa-373-215.gif" alt="" /></p>
+
+<h3 id="小结-1">小结</h3>
+
+<p>state hook 中操作对象时，不会自动合并对象中的属性，需要我们手动来合并，可以运用展开运算符。</p>
+
+<p>那么，数组也是类似的，见下一节。</p>
+
+<h2 id="usestate-with-array">useState with Array</h2>
+
+<h3 id="列表示例">列表示例</h3>
+
+<p>点击按钮，列表增加一个1-10的随机数</p>
+
+<p>UseStateWithArray.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kr">interface</span> <span class="nx">ItemType</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="nx">number</span>
+  <span class="nx">value</span><span class="p">:</span> <span class="nx">number</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">UseStateWithArray</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">items</span><span class="p">,</span> <span class="nx">setItems</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="o">&lt;</span><span class="nx">ItemType</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">([])</span>
+
+  <span class="kd">const</span> <span class="nx">addItem</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setItems</span><span class="p">([</span>
+      <span class="p">...</span><span class="nx">items</span><span class="p">,</span>
+      <span class="p">{</span>
+        <span class="na">id</span><span class="p">:</span> <span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+        <span class="na">value</span><span class="p">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+      <span class="p">}</span>
+    <span class="p">])</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">addItem</span><span class="si">}</span><span class="p">&gt;</span>add a number<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+        <span class="si">{</span>
+          <span class="nx">items</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">items</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">item</span><span class="p">:</span> <span class="nx">ItemType</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+            <span class="p">&lt;</span><span class="nt">li</span> <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">value</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+          <span class="p">))</span>
+        <span class="si">}</span>
+      <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">UseStateWithArray</span>
+</code></pre></div></div>
+
+<p>效果如下：</p>
+
+<p><img src="https://user-gold-cdn.xitu.io/2020/3/31/1713078db2b49cd1?w=418&amp;h=215&amp;f=gif&amp;s=19060" alt="" />
+<img src="https://gw.alicdn.com/tfs/TB1vcE7vXY7gK0jSZKzXXaikpXa-418-215.gif" alt="" /></p>
+
+<p>注意 typeScript 在 hooks 中的使用方法，可参考如下文章</p>
+
+<ul>
+  <li><a href="https://juejin.im/post/5ce0134b5188256a220235eb">TypeScript 中使用React Hook</a></li>
+</ul>
+
+<h2 id="usestate-总结">useState 总结</h2>
+
+<p>关于 useState 的使用就到这里，这里稍作总结。</p>
+
+<ul>
+  <li>可以在函数式组件中使用 state</li>
+  <li>在类组件中，state 是一个对象，但是 useState 中，state可以不是对象，可以是任何类型</li>
+  <li>useState 返回2个元素的数组
+    <ul>
+      <li>第一个是 state 的当前值</li>
+      <li>第二个是 state 的 setter 方法，调用时会触发 rerender
+        <ul>
+          <li>若当前的 state 依赖 previous state，可以传入一个函数到 state 的 setter 方法中，入参为 previous state，返回新的 state</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>对于对象和数组，注意 state 中不会自动补全旧的变量，需要使用展开运算符自己手动补充</li>
+</ul>
+
+<p>useState 的学习就到这里，下一篇将一起来学习 useEffect 的使用。</p>
+
+:ET

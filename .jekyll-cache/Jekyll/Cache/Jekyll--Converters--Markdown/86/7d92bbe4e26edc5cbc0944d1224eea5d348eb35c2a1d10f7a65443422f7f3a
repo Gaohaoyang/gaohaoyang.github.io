@@ -1,0 +1,351 @@
+I"<f<ul id="markdown-toc">
+  <li><a href="#概念" id="markdown-toc-概念">概念</a>    <ul>
+      <li><a href="#调用方式" id="markdown-toc-调用方式">调用方式</a></li>
+    </ul>
+  </li>
+  <li><a href="#函数声明与函数表达式" id="markdown-toc-函数声明与函数表达式">函数声明与函数表达式</a>    <ul>
+      <li><a href="#函数声明" id="markdown-toc-函数声明">函数声明</a></li>
+      <li><a href="#函数表达式" id="markdown-toc-函数表达式">函数表达式</a></li>
+      <li><a href="#变量--函数的声明前置" id="markdown-toc-变量--函数的声明前置">变量 &amp; 函数的声明前置</a></li>
+      <li><a href="#function-构造器" id="markdown-toc-function-构造器">Function 构造器</a></li>
+      <li><a href="#对比" id="markdown-toc-对比">对比</a></li>
+    </ul>
+  </li>
+  <li><a href="#函数属性--arguments" id="markdown-toc-函数属性--arguments">函数属性 &amp; arguments</a>    <ul>
+      <li><a href="#函数属性--arguments-1" id="markdown-toc-函数属性--arguments-1">函数属性 &amp; arguments</a></li>
+      <li><a href="#applycall-方法浏览器" id="markdown-toc-applycall-方法浏览器">apply/call 方法（浏览器）</a></li>
+      <li><a href="#bind-方法" id="markdown-toc-bind-方法">bind 方法</a>        <ul>
+          <li><a href="#bind-与-currying" id="markdown-toc-bind-与-currying">bind 与 currying</a></li>
+          <li><a href="#bind-与-new" id="markdown-toc-bind-与-new">bind 与 new</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>本文为慕课网 <a href="http://www.imooc.com/learn/277">JavaScript深入浅出</a> JavaScript 函数笔记。</p>
+
+<h2 id="概念">概念</h2>
+
+<p>函数是一块JavaScript代码，被定义一次，但可执行和调用多次。</p>
+
+<p>JS中的函数也是对象，所以JS函数可以像其它对象那样操作和传递。</p>
+
+<p>所以我们也常叫JS中的函数为函数对象。</p>
+
+<p>例如：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">x</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span> <span class="o">&amp;&amp;</span>
+        <span class="k">typeof</span> <span class="nx">y</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">// 3</span>
+</code></pre></div></div>
+
+<p>一般由3部分组成：</p>
+
+<ul>
+  <li>函数名</li>
+  <li>参数列表</li>
+  <li>函数体</li>
+</ul>
+
+<h3 id="调用方式">调用方式</h3>
+
+<ul>
+  <li>直接调用</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">foo</span><span class="p">();</span>
+</code></pre></div></div>
+
+<ul>
+  <li>对象方法</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">o</span><span class="p">.</span><span class="nx">method</span><span class="p">();</span>
+</code></pre></div></div>
+
+<ul>
+  <li>构造器</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">new</span> <span class="nx">Foo</span><span class="p">();</span>
+</code></pre></div></div>
+
+<ul>
+  <li>call/apply/bind</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">func</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">o</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="函数声明与函数表达式">函数声明与函数表达式</h2>
+
+<h3 id="函数声明">函数声明</h3>
+
+<p>就是对函数进行普通的声明</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="函数表达式">函数表达式</h3>
+
+<ul>
+  <li>将函数赋值给变量</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//function variable</span>
+<span class="kd">var</span> <span class="nx">add</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// body...</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>立即执行函数</p>
+
+    <p>把匿名函数用括号括起来，再直接调用。</p>
+  </li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// IEF(Immediately Executed Function)</span>
+<span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// body...</span>
+<span class="p">})();</span>
+</code></pre></div></div>
+
+<ul>
+  <li>函数对象作为返回值</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// body...</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<ul>
+  <li>命名式函数表达式</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//NFE(Named Function Expression)</span>
+<span class="kd">var</span> <span class="nx">add</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// body...</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>这里大家肯定会好奇，这个函数怎么调用？到底用哪个名字呢？</p>
+
+<p>做一个测试：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">func</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">nfe</span><span class="p">()</span> <span class="p">{};</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">func</span> <span class="o">===</span> <span class="nx">nfe</span><span class="p">);</span>
+<span class="c1">// 在 IE6~8，得到 false</span>
+<span class="c1">// 在 IE9+ 及现代浏览器中 Uncaught ReferenceError: nfe is not defined</span>
+</code></pre></div></div>
+
+<p>那么命名函数表达式有什么使用场景呢？</p>
+
+<ul>
+  <li>一般用于调试方便，如果使用匿名函数，执行的时候看不到函数名，命名函数表达式是可以看到函数名的。</li>
+  <li>或者在递归时，使用名字调用自己。</li>
+</ul>
+
+<p>但是这两种用法都不常见。</p>
+
+<h3 id="变量--函数的声明前置">变量 &amp; 函数的声明前置</h3>
+
+<p>举两个例子</p>
+
+<p>例1，函数声明：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">num</span> <span class="o">=</span> <span class="nx">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">num</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>例2，函数表达式：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">num</span> <span class="o">=</span> <span class="nx">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">num</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">add</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>例1中得到的结果是 3，而例2中是 <code class="language-plaintext highlighter-rouge">Uncaught TypeError: add is not a function</code>。</p>
+
+<p>因为函数和变量在声明的时候，会被前置到当前作用域的顶端。例1将函数声明 <code class="language-plaintext highlighter-rouge">function add(a, b)</code> 前置到作用域前端，例2将声明 <code class="language-plaintext highlighter-rouge">var add</code> 前置到其作用域的前端了，并没有赋值。<strong>赋值的过程是在函数执行到响应位置的时候才进行的</strong>。</p>
+
+<h3 id="function-构造器">Function 构造器</h3>
+
+<p>除了函数声明、函数表达式。还有一种创建函数对象的方式，是使用函数构造器。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">func</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span><span class="p">(</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">b</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">console.log(a+b);</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">func</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span><span class="c1">//3</span>
+
+<span class="kd">var</span> <span class="nx">func2</span> <span class="o">=</span> <span class="nb">Function</span><span class="p">(</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">b</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">console.log(a+b);</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">func2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span><span class="c1">//3</span>
+</code></pre></div></div>
+
+<p>Function 中前面的参数为后面函数体的形参，最后一个参数为函数体。可以看到传入的都是字符串，这样的创建函数对象的方法是不安全的。</p>
+
+<p>还有一点，Function 构造器的得到的函数对象，拿不到外层函数的变量，但是可以拿到全局变量。它的作用域与众不同，这也是很少使用的原因之一。</p>
+
+<h3 id="对比">对比</h3>
+
+<p><img src="http://7q5cdt.com1.z0.glb.clouddn.com/blog-function.png" alt="函数对比" /></p>
+
+<hr />
+
+<h2 id="函数属性--arguments">函数属性 &amp; arguments</h2>
+
+<h3 id="函数属性--arguments-1">函数属性 &amp; arguments</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">z</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="c1">// 2</span>
+    <span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="c1">// 1</span>
+    <span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="nx">x</span><span class="p">;</span> <span class="c1">// change to 10</span>
+
+    <span class="nx">arguments</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+    <span class="nx">z</span><span class="p">;</span> <span class="c1">// still undefined!!!</span>
+    <span class="nx">arguments</span><span class="p">.</span><span class="nx">callee</span> <span class="o">===</span> <span class="nx">foo</span><span class="p">;</span> <span class="c1">// true</span>
+<span class="p">}</span>
+
+<span class="nx">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+<span class="nx">foo</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="c1">// 3</span>
+<span class="nx">foo</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span> <span class="c1">//"foo"</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">foo.name</code> 函数名</li>
+  <li><code class="language-plaintext highlighter-rouge">foo.length</code> 形参个数</li>
+  <li><code class="language-plaintext highlighter-rouge">arguments.length</code> 实参个数</li>
+</ul>
+
+<p>未传参数时，arguments[i] 相应的位置仍然是 undefined。</p>
+
+<p>严格模式下，代码中的改变实参失效。即 x 仍为 1。同时 callee 属性失效。</p>
+
+<ul>
+  <li>
+    <p>关于 <code class="language-plaintext highlighter-rouge">callee</code></p>
+
+    <p>callee 属性的初始值就是正被执行的 Function 对象。</p>
+
+    <p>callee 属性是 arguments 对象的一个成员，它表示对函数对象本身的引用，这有利于匿名函数的递归或者保证函数的封装性，例如下边示例的递归计算1到n的自然数之和。而该属性仅当相关函数正在执行时才可用。还有需要注意的是callee拥有length属性，这个属性有时用于验证还是比较好的。</p>
+
+    <p>arguments.length是实参长度，arguments.callee.length是形参长度，由此可以判断调用时形参长度是否和实参长度一致。</p>
+  </li>
+</ul>
+
+<h3 id="applycall-方法浏览器">apply/call 方法（浏览器）</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">foo</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">//1 2 Number {[[PrimitiveValue]]: 100}</span>
+<span class="nx">foo</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]);</span> <span class="c1">//3 4 Boolean {[[PrimitiveValue]]: true}</span>
+<span class="nx">foo</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span> <span class="c1">//undefined undefined Window</span>
+<span class="nx">foo</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">undefined</span><span class="p">);</span> <span class="c1">//undefined undefined Window</span>
+</code></pre></div></div>
+
+<ul>
+  <li>call/apply 的作用：调用一个对象的一个方法，以另一个对象替换当前对象(其实就是更改对象的内部指针，即改变对象的this指向的内容)。</li>
+  <li>call/apply 的第一个参数为对象，即使不是对象，也会被包装为对象。</li>
+  <li>call 为扁平化传参，apply 后面的参数为数组</li>
+  <li>传入 null/undefined 时，实际为 Window 对象</li>
+  <li>在严格模式下：上述代码最后两行分别输出 <code class="language-plaintext highlighter-rouge">null</code>, <code class="language-plaintext highlighter-rouge">undefined</code></li>
+</ul>
+
+<h3 id="bind-方法">bind 方法</h3>
+
+<p><code class="language-plaintext highlighter-rouge">bind</code> 是 ES5 中提出的方法，所以浏览器支持为 IE9+ 及现代浏览器。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">module</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">x</span><span class="p">:</span> <span class="mi">81</span><span class="p">,</span>
+    <span class="na">getX</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">getX</span><span class="p">();</span> <span class="c1">//81</span>
+
+<span class="kd">var</span> <span class="nx">getX</span> <span class="o">=</span> <span class="nx">module</span><span class="p">.</span><span class="nx">getX</span><span class="p">;</span>
+<span class="nx">getX</span><span class="p">();</span> <span class="c1">//9</span>
+
+<span class="kd">var</span> <span class="nx">boundGetX</span> <span class="o">=</span> <span class="nx">getX</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">module</span><span class="p">);</span>
+<span class="nx">boundGetX</span><span class="p">();</span> <span class="c1">//81</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">bind</code> 主要用于改变函数中的 <code class="language-plaintext highlighter-rouge">this</code></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">module.getX(); </code> 直接通过对象调用自己的方法，结果是 81</li>
+  <li><code class="language-plaintext highlighter-rouge">var getX = module.getX;</code> 将这个方法赋值给一个全局变量，这时 this 指向了 Window，所以结果为 9</li>
+  <li><code class="language-plaintext highlighter-rouge">var boundGetX = getX.bind(module);</code> 使用 bind 绑定了自己的对象，这样 this 仍然指向 module 对象，所以结果为 81</li>
+</ul>
+
+<h4 id="bind-与-currying">bind 与 currying</h4>
+
+<p>bind 可以使函数柯里化，那么什么是柯里化？</p>
+
+<blockquote>
+  <p>在计算机科学中，柯里化（Currying）是把接受多个参数的函数变换成接受一个单一参数(最初函数的第一个参数)的函数，并且返回接受余下的参数且返回结果的新函数的技术。这个技术由 Christopher Strachey 以逻辑学家 Haskell Curry 命名的，尽管它是 Moses Schnfinkel 和 Gottlob Frege 发明的。</p>
+</blockquote>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span> <span class="o">+</span> <span class="nx">c</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">func</span> <span class="o">=</span> <span class="nx">add</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+<span class="nx">func</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">//103</span>
+
+<span class="kd">var</span> <span class="nx">func2</span> <span class="o">=</span> <span class="nx">func</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+<span class="nx">func2</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span> <span class="c1">//310</span>
+</code></pre></div></div>
+
+<p>add 函数拥有 3 个参数。我们想先传入一个参数，再去传其他参数。</p>
+
+<p><code class="language-plaintext highlighter-rouge">var func = add.bind(undefined, 100);</code> add 函数对象调用 bind 方法，由于不需要将 this 指向原来的 add 函数对象，所以第一个参数写为 undefined 或 null。第二个参数 100 传给了 add 函数中的形参 a，并赋值给一个新的函数对象 func。</p>
+
+<p>这时，<code class="language-plaintext highlighter-rouge">func(1, 2)</code> 即相当于传入后两个参数，所以结果为 103。</p>
+
+<p>同理，基于 func 可以创造一个函数 func2。它只用传最后一个参数。</p>
+
+<h4 id="bind-与-new">bind 与 new</h4>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">b</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">foo</span><span class="p">());</span> <span class="c1">//undefined</span>
+
+<span class="kd">var</span> <span class="nx">func</span> <span class="o">=</span> <span class="nx">foo</span><span class="p">.</span><span class="nx">bind</span><span class="p">({</span>
+    <span class="na">a</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">});</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">func</span><span class="p">());</span> <span class="c1">//1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">new</span> <span class="nx">func</span><span class="p">());</span> <span class="c1">//foo {b: 100}</span>
+</code></pre></div></div>
+
+<p>对于使用了 <code class="language-plaintext highlighter-rouge">new func()</code> 这种方式创建对象，其返回值为一个对象。</p>
+
+<p>而原函数 foo 的返回值不是对象，所以会直接忽视这个 return 方法。而是变为 <code class="language-plaintext highlighter-rouge">return this;</code>。并且 this 会被初始化为一个空对象，这个空对象的原型指向 foo.prototype。所以后面的 bind 是不起作用的。</p>
+
+<p>这里面这个 this 对象包含一个属性 <code class="language-plaintext highlighter-rouge">b = 100</code>。所以返回的是对象 <code class="language-plaintext highlighter-rouge">{b: 100}</code>。</p>
+:ET

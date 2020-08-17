@@ -1,0 +1,88 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#问题描述" id="markdown-toc-问题描述">问题描述</a></li>
+  <li><a href="#解决方法" id="markdown-toc-解决方法">解决方法</a></li>
+  <li><a href="#原来的解决方案" id="markdown-toc-原来的解决方案">原来的解决方案</a></li>
+</ul>
+
+<h2 id="问题描述">问题描述</h2>
+
+<p>我们每次使用命令</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git@gitlab.xxx.com:xxxxx.git
+</code></pre></div></div>
+
+<p>默认 clone 的是这个仓库的 master 分支。如果最新的代码不在 master 分支上，该如何拿到呢？如下图所示，最新的代码可能在<code class="language-plaintext highlighter-rouge">daily/1.4.1</code>分支上，我们希望拿到这个分支上的代码。</p>
+
+<p><img src="https://ooo.0o0.ooo/2016/07/07/577e349ab42ed.png" alt="7f07c8f6deef169ef6be5103bbd3e932f8676bb1.png" /></p>
+
+<h2 id="解决方法">解决方法</h2>
+
+<p><strong>刚刚开周会的时候，自己洋洋得意的分享我的解决方案，但是……经过与团队成员的的讨论，自己的方法弱爆了，现在把更优雅的方法写一下。原来写的方法并不太适合用在这个场景里。</strong> 我之前写的方法在文章后面。</p>
+
+<p>直接使用命令</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch -r #查看远程分支
+</code></pre></div></div>
+<p>或</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch -a #查看所有分支
+</code></pre></div></div>
+
+<p>会显示</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>origin/HEAD -&gt; origin/master
+origin/daily/1.2.2
+origin/daily/1.3.0
+origin/daily/1.4.1
+origin/develop
+origin/feature/daily-1.0.0
+origin/master
+</code></pre></div></div>
+
+<p>然后直接</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout origin/daily/1.4.1
+</code></pre></div></div>
+
+<p>就好了。。。</p>
+
+<h2 id="原来的解决方案">原来的解决方案</h2>
+
+<p><strong>其实我原来写的这个方法更多的是：设置已有的本地分支跟踪一个刚刚拉取下来的远程分支，或者想要修改正在跟踪的上游分支。</strong></p>
+
+<p>我们在本地先建立一个分支，建议名称和远程的想要同步的分支名称一样。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch daily/1.4.1
+</code></pre></div></div>
+
+<p>在切换到这个本地分支</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout daily/1.4.1
+# Switched to branch 'daily/1.4.1'
+</code></pre></div></div>
+
+<p>接下来就可以去建立上游分支的关联了，但是这个命令比较长，不好记，我们可以直接先<code class="language-plaintext highlighter-rouge">pull</code>一下，git 会提示我们相应的操作和命令。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull
+There is no tracking information for the current branch.
+Please specify which branch you want to merge with.
+See git-pull(1) for details.
+
+    git pull &lt;remote&gt; &lt;branch&gt;
+
+If you wish to set tracking information for this branch you can do so with:
+
+    git branch --set-upstream-to=origin/&lt;branch&gt; daily/1.4.1
+</code></pre></div></div>
+
+<p>我们看到最后一行，执行这个命令，即可完成与上游分支的关联。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch --set-upstream-to=origin/daily/1.4.1 daily/1.4.1
+# Branch daily/1.4.1 set up to track remote branch daily/1.4.1 from origin.
+</code></pre></div></div>
+
+<p>然后再<code class="language-plaintext highlighter-rouge">pull</code>一下就好了！</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull
+</code></pre></div></div>
+:ET

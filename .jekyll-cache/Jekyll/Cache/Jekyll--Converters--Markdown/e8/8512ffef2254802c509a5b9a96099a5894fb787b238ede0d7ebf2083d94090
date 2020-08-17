@@ -1,0 +1,1014 @@
+I"��<ul id="markdown-toc">
+  <li><a href="#任务" id="markdown-toc-任务">任务</a></li>
+  <li><a href="#css-如何工作" id="markdown-toc-css-如何工作">CSS 如何工作</a></li>
+  <li><a href="#层叠和继承" id="markdown-toc-层叠和继承">层叠和继承</a></li>
+  <li><a href="#选择器" id="markdown-toc-选择器">选择器</a>    <ul>
+      <li><a href="#标签选择器" id="markdown-toc-标签选择器">标签选择器</a></li>
+      <li><a href="#类选择器class-selectors" id="markdown-toc-类选择器class-selectors">类选择器（Class selectors）</a></li>
+      <li><a href="#id选择器id-selectors" id="markdown-toc-id选择器id-selectors">ID选择器（ID selectors）</a></li>
+      <li><a href="#优先级" id="markdown-toc-优先级">优先级</a></li>
+      <li><a href="#伪类选择器pseudo-classes-selectors" id="markdown-toc-伪类选择器pseudo-classes-selectors">伪类选择器（Pseudo-classes selectors）</a></li>
+      <li><a href="#基于关系的选择器" id="markdown-toc-基于关系的选择器">基于关系的选择器</a></li>
+    </ul>
+  </li>
+  <li><a href="#其他属性" id="markdown-toc-其他属性">其他属性</a>    <ul>
+      <li><a href="#text-indent" id="markdown-toc-text-indent"><code class="language-plaintext highlighter-rouge">text-indent</code></a></li>
+      <li><a href="#text-transform" id="markdown-toc-text-transform"><code class="language-plaintext highlighter-rouge">text-transform</code></a></li>
+      <li><a href="#text-decoration" id="markdown-toc-text-decoration"><code class="language-plaintext highlighter-rouge">text-decoration</code></a></li>
+      <li><a href="#text-align" id="markdown-toc-text-align"><code class="language-plaintext highlighter-rouge">text-align</code></a></li>
+      <li><a href="#word-spacing" id="markdown-toc-word-spacing"><code class="language-plaintext highlighter-rouge">word-spacing</code></a></li>
+      <li><a href="#white-space" id="markdown-toc-white-space"><code class="language-plaintext highlighter-rouge">white-space</code></a></li>
+      <li><a href="#font-face" id="markdown-toc-font-face"><code class="language-plaintext highlighter-rouge">@font-face</code></a></li>
+    </ul>
+  </li>
+  <li><a href="#深入了解行高属性" id="markdown-toc-深入了解行高属性">深入了解行高属性</a></li>
+  <li><a href="#盒模型及定位" id="markdown-toc-盒模型及定位">盒模型及定位</a>    <ul>
+      <li><a href="#已知宽度的div居中" id="markdown-toc-已知宽度的div居中">已知宽度的div居中</a>        <ul>
+          <li><a href="#对于居中的补充" id="markdown-toc-对于居中的补充">对于居中的补充</a></li>
+        </ul>
+      </li>
+      <li><a href="#早期css滑动门" id="markdown-toc-早期css滑动门">早期css滑动门</a></li>
+      <li><a href="#左侧固定右侧自适应宽度的两列布局" id="markdown-toc-左侧固定右侧自适应宽度的两列布局">左侧固定右侧自适应宽度的两列布局</a></li>
+      <li><a href="#双飞翼布局" id="markdown-toc-双飞翼布局">双飞翼布局</a></li>
+      <li><a href="#浮动布局" id="markdown-toc-浮动布局">浮动布局</a></li>
+      <li><a href="#清除浮动闭合浮动" id="markdown-toc-清除浮动闭合浮动">清除浮动/闭合浮动</a></li>
+      <li><a href="#box-sizing" id="markdown-toc-box-sizing"><code class="language-plaintext highlighter-rouge">box-sizing</code></a></li>
+      <li><a href="#响应式布局" id="markdown-toc-响应式布局">响应式布局</a></li>
+      <li><a href="#多列布局" id="markdown-toc-多列布局">多列布局</a></li>
+      <li><a href="#bfc-和-ie-的-haslayout" id="markdown-toc-bfc-和-ie-的-haslayout">BFC 和 IE 的 hasLayout</a></li>
+      <li><a href="#div-三列等高" id="markdown-toc-div-三列等高"><code class="language-plaintext highlighter-rouge">div</code> 三列等高</a></li>
+      <li><a href="#去除inline-block元素间间距" id="markdown-toc-去除inline-block元素间间距">去除inline-block元素间间距</a></li>
+    </ul>
+  </li>
+  <li><a href="#最终作品" id="markdown-toc-最终作品">最终作品</a></li>
+  <li><a href="#参考资料" id="markdown-toc-参考资料">参考资料</a></li>
+</ul>
+
+<p>百度前端学院的第一次任务笔记，HTML、CSS 基础。主要有 CSS 工作原理，选择器的使用，常用属性，行高属性，盒模型与定位，最后根据设计图实现4个页面。</p>
+
+<h2 id="任务">任务</h2>
+
+<p><strong>任务：</strong> <a href="https://github.com/Gaohaoyang/ife/tree/master/task/task0001">HTML、CSS基础</a></p>
+
+<p>有人问到提交作业 fork 同步的问题，真心觉得官方 GitHub 的帮助文档讲的很好，我上一篇博客 <a href="http://gaohaoyang.github.io/2015/04/12/Syncing-a-fork/">同步一个 fork</a> 就是翻译的这个官方文档，如果懒得看英文可以参考我的博客。</p>
+
+<p>写点东西记录一下我的做题过程吧。</p>
+
+<h2 id="css-如何工作">CSS 如何工作</h2>
+
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Getting_started/How_CSS_works">CSS 如何工作</a> Mozilla 的开发者文档讲的很好。</p>
+
+<blockquote>
+  <p>浏览器在展现一个文档的时候，必须要把文档内容和相应的样式信息结合起来展示。 这个处理过程一般分两个阶段：</p>
+
+  <ol>
+    <li>浏览器先将标记语言和 CSS 转换成 DOM (文档对象模型)结构。 这时 DOM 就代表了电脑内存中的相应文档，因为它已经融合了文档内容和相应的样式表。</li>
+    <li>最后浏览器把 DOM 的内容展示出来。</li>
+  </ol>
+</blockquote>
+
+<h2 id="层叠和继承">层叠和继承</h2>
+
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Getting_started/Cascading_and_inheritance">参考资料: 层叠和继承</a></p>
+
+<blockquote>
+  <p>对于层叠来说，共有三种主要的样式来源：</p>
+
+  <ul>
+    <li>浏览器对HTML定义的默认样式。</li>
+    <li>用户定义的样式。</li>
+    <li>
+      <p>开发者定义的样式，可以有三种形式：</p>
+
+      <ul>
+        <li>定义在外部文件（外链样式）：本教程中案例主要是通过这种形式定义样式。</li>
+        <li>在页面的头部定义（内联样式）：通过这种形式定义的样式只在本页面内生效。</li>
+        <li>定义在特定的元素身上（行内样式）：这种形式多用于测试，可维护性较差。</li>
+      </ul>
+    </li>
+  </ul>
+
+  <p>用户定义的样式表会覆盖浏览器定义的默认样式，然后网页开发者定义的样式又会覆盖用户样式。</p>
+
+  <p>再来看看优先级，从高到低依次为：网页开发者定义的样式、网页阅读者定义的样式、浏览器的默认样式。</p>
+
+  <p>对继承的元素来说，子元素自身的样式优先级高于从父级继承来的样式。</p>
+
+  <blockquote>
+    <p>更多细节 <br />
+CSS 另外提供了一个 !important 关键字，用户可以通过使用这个关键字使自己定义的样式覆盖掉开发者定义的样式。 <br />
+这就意味着，作为开发者，你很难准确的预知页面最终在用户电脑上的显示效果。</p>
+  </blockquote>
+</blockquote>
+
+<h2 id="选择器">选择器</h2>
+
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Getting_Started/Selectors">参考资料:选择器（Selectors）</a></p>
+
+<h3 id="标签选择器">标签选择器</h3>
+
+<h3 id="类选择器class-selectors">类选择器（Class selectors）</h3>
+
+<blockquote>
+  <p>通过设置元素的 class 属性，可以为元素指定类名。类名由开发者自己指定。 文档中的多个元素可以拥有同一个类名。</p>
+
+  <p>在写样式表时，类选择器是以英文句号（.）开头的。</p>
+</blockquote>
+
+<h3 id="id选择器id-selectors">ID选择器（ID selectors）</h3>
+
+<blockquote>
+  <p>通过设置元素的 id 属性为该元素制定ID。ID名由开发者指定。每个ID在文档中必须是唯一的。</p>
+
+  <p>在写样式表时，ID选择器是以#开头的。</p>
+</blockquote>
+
+<h3 id="优先级">优先级</h3>
+
+<blockquote>
+  <ul>
+    <li>如果多余一个规则指定了相同的属性值都应用到一个元素上，CSS规定拥有更高确定度的选择器优先级更高。ID选择器比类选择器更具确定度, 而类选择器比标签选择器（tag selector）更具确定度。</li>
+    <li>如果样式中包含冲突的规则，且它们具有相同的确定度。那么，后出现的规则优先级高。</li>
+    <li>如果你遇到规则冲突，你可以增加其中一条的确定度或将之移到后面以使它具有更高优先级。</li>
+  </ul>
+</blockquote>
+
+<h3 id="伪类选择器pseudo-classes-selectors">伪类选择器（Pseudo-classes selectors）</h3>
+
+<h3 id="基于关系的选择器">基于关系的选择器</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>选择器</td>
+      <td>选择的元素</td>
+    </tr>
+    <tr>
+      <td>A E</td>
+      <td>任何是元素A的后代元素E (后代节点指A的子节点，子节点的子节点，以此类推)</td>
+    </tr>
+    <tr>
+      <td>A &gt; E</td>
+      <td>任何元素A的子元素</td>
+    </tr>
+    <tr>
+      <td>E:first-child</td>
+      <td>任何元素的第一个子元素E</td>
+    </tr>
+    <tr>
+      <td>B + E</td>
+      <td>任何元素B的下一个兄弟元素E</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="其他属性">其他属性</h2>
+
+<h3 id="text-indent"><code class="language-plaintext highlighter-rouge">text-indent</code></h3>
+
+<p><strong>定义和用法</strong> <br />
+text-indent 属性规定文本块中首行文本的缩进。 <br />
+注释：允许使用负值。如果使用负值，那么首行会被缩进到左边。</p>
+
+<p><strong>可能的值</strong></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>值</td>
+      <td>描述</td>
+    </tr>
+    <tr>
+      <td>length</td>
+      <td>定义固定的缩进。默认值：0。</td>
+    </tr>
+    <tr>
+      <td>%</td>
+      <td>定义基于父元素宽度的百分比的缩进。</td>
+    </tr>
+    <tr>
+      <td>inherit</td>
+      <td>规定应该从父元素继承 text-indent 属性的值。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="text-transform"><code class="language-plaintext highlighter-rouge">text-transform</code></h3>
+
+<p><strong>定义和用法</strong>  <br />
+text-transform 属性控制文本的大小写。</p>
+
+<p><strong>说明</strong>  <br />
+这个属性会改变元素中的字母大小写，而不论源文档中文本的大小写。如果值为 capitalize，则要对某些字母大写，但是并没有明确定义如何确定哪些字母要大写，这取决于用户代理如何识别出各个“词”。</p>
+
+<p><strong>可能的值</strong></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>值</td>
+      <td>描述</td>
+    </tr>
+    <tr>
+      <td>none</td>
+      <td>默认。定义带有小写字母和大写字母的标准的文本。</td>
+    </tr>
+    <tr>
+      <td>capitalize</td>
+      <td>文本中的每个单词以大写字母开头。</td>
+    </tr>
+    <tr>
+      <td>uppercase</td>
+      <td>定义仅有大写字母。</td>
+    </tr>
+    <tr>
+      <td>lowercase</td>
+      <td>定义无大写字母，仅有小写字母。</td>
+    </tr>
+    <tr>
+      <td>inherit</td>
+      <td>规定应该从父元素继承 text-transform 属性的值。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="text-decoration"><code class="language-plaintext highlighter-rouge">text-decoration</code></h3>
+
+<p><strong>定义和用法</strong> <br />
+text-decoration 属性规定添加到文本的修饰。  <br />
+注释：修饰的颜色由 “color” 属性设置。  <br />
+注释：IE、Chrome 或 Safari 不支持 “blink” 属性值。</p>
+
+<p><strong>说明</strong>  <br />
+这个属性允许对文本设置某种效果，如加下划线。如果后代元素没有自己的装饰，祖先元素上设置的装饰会“延伸”到后代元素中。不要求用户代理支持 blink。</p>
+
+<h3 id="text-align"><code class="language-plaintext highlighter-rouge">text-align</code></h3>
+
+<p><strong>定义和用法</strong> <br />
+text-align 属性规定元素中的文本的水平对齐方式。 <br />
+该属性通过指定行框与哪个点对齐，从而设置块级元素内文本的水平对齐方式。通过允许用户代理调整行内容中字母和字之间的间隔，可以支持值 justify；不同用户代理可能会得到不同的结果。</p>
+
+<p><strong>可能的值</strong></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>值</td>
+      <td>描述</td>
+    </tr>
+    <tr>
+      <td>left</td>
+      <td>把文本排列到左边。默认值：由浏览器决定。</td>
+    </tr>
+    <tr>
+      <td>right</td>
+      <td>把文本排列到右边。</td>
+    </tr>
+    <tr>
+      <td>center</td>
+      <td>把文本排列到中间。</td>
+    </tr>
+    <tr>
+      <td>justify</td>
+      <td>实现两端对齐文本效果。</td>
+    </tr>
+    <tr>
+      <td>inherit</td>
+      <td>规定应该从父元素继承 text-align 属性的值。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="word-spacing"><code class="language-plaintext highlighter-rouge">word-spacing</code></h3>
+
+<p><strong>定义</strong> <br />
+word-spacing 属性增加或减少单词间的空白（即字间隔）。 <br />
+该属性定义元素中字之间插入多少空白符。针对这个属性，“字” 定义为由空白符包围的一个字符串。如果指定为长度值，会调整字之间的通常间隔；所以，normal 就等同于设置为 0。允许指定负长度值，这会让字之间挤得更紧。 <br />
+注释：允许使用负值。</p>
+
+<h3 id="white-space"><code class="language-plaintext highlighter-rouge">white-space</code></h3>
+
+<p><strong>定义和用法</strong> <br />
+white-space 属性设置如何处理元素内的空白。 <br />
+这个属性声明建立布局过程中如何处理元素中的空白符。值 pre-wrap 和 pre-line 是 CSS 2.1 中新增的。</p>
+
+<p><strong>可能的值</strong></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>值</td>
+      <td>描述</td>
+    </tr>
+    <tr>
+      <td>normal</td>
+      <td>默认。空白会被浏览器忽略。</td>
+    </tr>
+    <tr>
+      <td>pre</td>
+      <td>空白会被浏览器保留。其行为方式类似 HTML 中的 <code class="language-plaintext highlighter-rouge">&lt;pre&gt;</code> 标签。</td>
+    </tr>
+    <tr>
+      <td>nowrap</td>
+      <td>文本不会换行，文本会在在同一行上继续，直到遇到 <code class="language-plaintext highlighter-rouge">&lt;br&gt;</code> 标签为止。</td>
+    </tr>
+    <tr>
+      <td>pre-wrap</td>
+      <td>保留空白符序列，但是正常地进行换行。</td>
+    </tr>
+    <tr>
+      <td>pre-line</td>
+      <td>合并空白符序列，但是保留换行符。</td>
+    </tr>
+    <tr>
+      <td>inherit</td>
+      <td>规定应该从父元素继承 white-space 属性的值。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="font-face"><code class="language-plaintext highlighter-rouge">@font-face</code></h3>
+
+<p><strong>CSS3 @font-face 规则</strong> <br />
+在 CSS3 之前，web 设计师必须使用已在用户计算机上安装好的字体。 <br />
+通过 CSS3，web 设计师可以使用他们喜欢的任意字体。 <br />
+当您您找到或购买到希望使用的字体时，可将该字体文件存放到 web 服务器上，它会在需要时被自动下载到用户的计算机上。 <br />
+您“自己的”的字体是在 CSS3 @font-face 规则中定义的。</p>
+
+<p>注释：Internet Explorer 8 以及更早的版本不支持新的 @font-face 规则。Internet Explorer 9+ 支持新的 @font-face 规则，但是仅支持 .eot 类型的字体 (Embedded OpenType)。</p>
+
+<p><strong>使用您需要的字体</strong> <br />
+在新的 @font-face 规则中，您必须首先定义字体的名称（比如 myFirstFont），然后指向该字体文件。 <br />
+如需为 HTML 元素使用字体，请通过 font-family 属性来引用字体的名称 (myFirstFont)：</p>
+
+<p><strong>实例</strong></p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@font-face</span> <span class="p">{</span>
+    <span class="nl">font-family</span><span class="p">:</span> <span class="n">myFirstFont</span><span class="p">;</span>
+    <span class="nl">src</span><span class="p">:</span> <span class="sx">url('Sansation_Light.ttf')</span><span class="p">,</span>
+         <span class="sx">url('Sansation_Light.eot')</span><span class="p">;</span> <span class="c">/* IE9+ */</span>
+<span class="p">}</span>
+<span class="nt">div</span> <span class="p">{</span>
+    <span class="nl">font-family</span><span class="p">:</span> <span class="n">myFirstFont</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>CSS3 字体描述符</strong></p>
+
+<p>下面的表格列出了能够在 @font-face 规则中定义的所有字体描述符：</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>描述符</td>
+      <td>值</td>
+      <td>描述</td>
+    </tr>
+    <tr>
+      <td>font-family</td>
+      <td>name</td>
+      <td>必需。规定字体的名称。</td>
+    </tr>
+    <tr>
+      <td>src</td>
+      <td>URL</td>
+      <td>必需。定义字体文件的 URL。</td>
+    </tr>
+    <tr>
+      <td>font-stretch</td>
+      <td>normal<br />condensed<br />ultra-condensed<br />extra-condensed<br />semi-condensed<br />expanded<br />semi-expanded<br />extra-expanded<br />ultra-expanded</td>
+      <td>可选。定义如何拉伸字体。默认是 “normal”。</td>
+    </tr>
+    <tr>
+      <td>font-style</td>
+      <td>ormal<br />italic<br />oblique</td>
+      <td>可选。定义字体的样式。默认是 “normal”。</td>
+    </tr>
+    <tr>
+      <td>font-weight</td>
+      <td>normal<br />bold<br />100<br />200<br />300<br />400<br />500<br />600<br />700<br />800<br />900</td>
+      <td>选。定义字体的粗细。默认是 “normal”。</td>
+    </tr>
+    <tr>
+      <td>unicode-range</td>
+      <td>unicode-range</td>
+      <td>可选。定义字体支持的 UNICODE 字符范围。默认是 “U+0-10FFFF”。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="深入了解行高属性">深入了解行高属性</h2>
+
+<p><a href="http://www.cnblogs.com/fengzheng126/archive/2012/05/18/2507632.html">参考：深入了解css的行高Line Height属性</a></p>
+
+<p>一般来说，设置行高为<code class="language-plaintext highlighter-rouge">值：纯数字</code>是最理想的方式，因为其会随着对应的 <code class="language-plaintext highlighter-rouge">font-size</code> 而缩放。</p>
+
+<h2 id="盒模型及定位">盒模型及定位</h2>
+
+<h3 id="已知宽度的div居中">已知宽度的div居中</h3>
+
+<ul>
+  <li>用两种方法来实现一个背景色为红色、宽度为960px的&lt;DIV&gt;在浏览器中居中</li>
+</ul>
+
+<p>我的方法一：</p>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">margin：0 auto;</code></p>
+
+<p>html文件</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Document<span class="nt">&lt;/title&gt;</span>
+        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">href=</span><span class="s">"task0001-2.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"center"</span><span class="nt">&gt;</span>aaa<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>css文件</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.center</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">960px</span><span class="p">;</span>
+    <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span> <span class="nb">auto</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>方法二：</p>
+
+<p>绝对定位，左边距离 body 50%，<code class="language-plaintext highlighter-rouge">margin-left: -480px</code></p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.center</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">960px</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+    <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+    <span class="nl">left</span><span class="p">:</span> <span class="m">50%</span><span class="p">;</span>
+    <span class="nl">margin-left</span><span class="p">:</span> <span class="m">-480px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><a href="http://gaohaoyang.github.io/baidu-ife-practice/task0001/task0001-2.html">Demo</a></p>
+
+<h4 id="对于居中的补充">对于居中的补充</h4>
+
+<p>参考自 <a href="http://zh.learnlayout.com/">学习CSS布局</a>。</p>
+
+<p>像下面这样写css代码，使用 <code class="language-plaintext highlighter-rouge">max-width</code> 替代 <code class="language-plaintext highlighter-rouge">width</code>  可以使浏览器更好地处理小窗口的情况。这点在移动设备上显得尤为重要。</p>
+
+<p>有效的避免了如下问题： <br />
+当浏览器窗口比元素的宽度还要窄时，浏览器会显示一个水平滚动条来容纳页面。</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">#main</span> <span class="p">{</span>
+    <span class="nl">max-width</span><span class="p">:</span> <span class="m">600px</span><span class="p">;</span>
+    <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span> <span class="nb">auto</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li><a href="http://www.cnblogs.com/2050/p/3392803.html">CSS布局奇淫技巧之–各种居中</a></li>
+</ul>
+
+<h3 id="早期css滑动门">早期css滑动门</h3>
+
+<ul>
+  <li>有的圆角矩形是复杂图案，无法直接用border-radius，请在不使用 border-radius 的情况下实现一个可复用的高度和宽度都自适应的圆角矩形 <br />
+示例 <img src="http://7q5cdt.com1.z0.glb.clouddn.com/Baidu-Front-end-task0001_7.png" alt="圆角矩形" /></li>
+</ul>
+
+<p>这道题我一开始不会做，查阅了资料，发现这就是所谓的 css 滑动门的应用。<a href="http://www.bkjia.com/webzh/759711.html">妙味云课堂之css：滑动门、圆角、css精灵</a> <br />
+使用三层嵌套，或者四层嵌套的 <code class="language-plaintext highlighter-rouge">div</code>，通过背景图定位等方式可以实现。</p>
+
+<h3 id="左侧固定右侧自适应宽度的两列布局">左侧固定右侧自适应宽度的两列布局</h3>
+
+<ul>
+  <li>用两种不同的方法来实现一个两列布局，其中左侧部分宽度固定、右侧部分宽度随浏览器宽度的变化而自适应变化 <img src="http://7q5cdt.com1.z0.glb.clouddn.com/Baidu-Front-end-task0001_3.jpg" alt="pic" /></li>
+</ul>
+
+<p>我的方法一：</p>
+
+<p>不使用浮动，使用绝对定位，将左上角的块放好位置，右边的块设置<code class="language-plaintext highlighter-rouge">margin-left</code></p>
+
+<p>html 文件：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;title&gt;</span>layout<span class="nt">&lt;/title&gt;</span>
+        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">href=</span><span class="s">"task0001-6-3.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"left"</span><span class="nt">&gt;</span>DIV-A<span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"right"</span><span class="nt">&gt;</span>DIV-B<span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bottom"</span><span class="nt">&gt;</span>DIV-C<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>css 文件：</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.row</span> <span class="p">{</span>
+    <span class="nl">position</span><span class="p">:</span> <span class="nb">relative</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.left</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+    <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+    <span class="nl">top</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">left</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.right</span> <span class="p">{</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">blue</span><span class="p">;</span>
+    <span class="nl">margin-left</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.bottom</span> <span class="p">{</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">yellow</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>方法二：</p>
+
+<p>使用浮动，左边的块使用浮动，右边的块使用<code class="language-plaintext highlighter-rouge">margin-left</code></p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.left</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.right</span> <span class="p">{</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">blue</span><span class="p">;</span>
+    <span class="nl">margin-left</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.bottom</span> <span class="p">{</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">yellow</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><a href="http://gaohaoyang.github.io/baidu-ife-practice/task0001/task0001-6-3.html">Demo</a></p>
+
+<p><strong>补充：</strong></p>
+
+<p>看完了后面的 BFC 之后，本题和下一题都可以用另一种方法了
+总之我已经震惊了！太爽了！有没有！</p>
+
+<p>html</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;title&gt;</span>使用 BFC 进行两列布局<span class="nt">&lt;/title&gt;</span>
+        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"two-col-layout-with-BFC.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"left"</span><span class="nt">&gt;</span>DIV-A<span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"right"</span><span class="nt">&gt;</span>DIV-B<span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bottom"</span><span class="nt">&gt;</span>DIV-C<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>css</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.left</span><span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">blue</span><span class="p">;</span>
+    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.right</span><span class="p">{</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">yellow</span><span class="p">;</span>
+    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.bottom</span><span class="p">{</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><a href="http://gaohaoyang.github.io/baidu-ife-practice/task0001/two-col-layout-with-BFC.html">Demo</a></p>
+
+<h3 id="双飞翼布局">双飞翼布局</h3>
+
+<ul>
+  <li>用两种不同的方式来实现一个三列布局，其中左侧和右侧的部分宽度固定，中间部分宽度随浏览器宽度的变化而自适应变化</li>
+</ul>
+
+<p>原题中参考资料 <a href="http://www.imooc.com/wenda/detail/254035">双飞翼布局</a></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Flying Swing Layout<span class="nt">&lt;/title&gt;</span>
+        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">href=</span><span class="s">"task0001-6-4.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bd"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"main"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"main-wrap"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;p&gt;</span>Flying Swing Layout<span class="nt">&lt;/p&gt;</span>
+                <span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"sub"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;p&gt;</span>Flying Swing Layout<span class="nt">&lt;/p&gt;</span>
+                left
+            <span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"extra"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;p&gt;</span>Flying Swing Layout<span class="nt">&lt;/p&gt;</span>
+                right
+            <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>css</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.bd</span> <span class="p">{</span>
+
+    <span class="c">/*padding: 0 190px;*/</span>
+<span class="p">}</span>
+<span class="nc">.main</span> <span class="p">{</span>
+    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#aaa</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.main-wrap</span> <span class="p">{</span>
+    <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span> <span class="m">190px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.sub</span> <span class="p">{</span>
+    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">190px</span><span class="p">;</span>
+    <span class="nl">margin-left</span><span class="p">:</span> <span class="m">-100%</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">blue</span><span class="p">;</span>        
+    <span class="c">/*position: relative;
+    left: -190px;*/</span>
+<span class="p">}</span>
+<span class="nc">.extra</span> <span class="p">{</span>
+    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">190px</span><span class="p">;</span>
+    <span class="nl">margin-left</span><span class="p">:</span> <span class="m">-190px</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">yellow</span><span class="p">;</span>        
+    <span class="c">/*position: relative;
+    right: -190px;*/</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><a href="http://gaohaoyang.github.io/baidu-ife-practice/task0001/task0001-6-4.html">Demo</a></p>
+
+<p><strong>补充：</strong></p>
+
+<p>使用 BFC 的另一种方法，我再一次震惊！</p>
+
+<p>代码超级简单！</p>
+
+<p>html</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;title&gt;</span>flying-Swing-BFC<span class="nt">&lt;/title&gt;</span>
+        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"flying-Swing-BFC.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"left"</span><span class="nt">&gt;</span>left<span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"right"</span><span class="nt">&gt;</span>right<span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"main"</span><span class="nt">&gt;</span>
+            flying-Swing-BFC.htmlflying-Swing-BFC.htmlflying-Swing-BFC.htmlflying-Swing-BFC.htmlflying-Swing-BFC.htmlflying-Swing-BFC.htmlflying-Swing-BFC.htmlflying-Swing-BFC.htmlflying-Swing-BFC.htmlflying-Swing-BFC.htmlflying-Swing-BFC.html
+        <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"footer"</span><span class="nt">&gt;</span>
+            footerfooterfooterfooterfooterfooterfooterfooterfooter
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>css</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.left</span><span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.right</span><span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">200px</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">blue</span><span class="p">;</span>
+    <span class="nl">float</span><span class="p">:</span> <span class="nb">right</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.main</span><span class="p">{</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#eee</span><span class="p">;</span>
+    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p><a href="http://gaohaoyang.github.io/baidu-ife-practice/task0001/flying-Swing-BFC.html">Demo</a></p>
+
+<h3 id="浮动布局">浮动布局</h3>
+
+<ul>
+  <li>实现一个浮动布局，红色容器中每一行的蓝色容器数量随着浏览器宽度的变化而变化 <img src="http://7q5cdt.com1.z0.glb.clouddn.com/Baidu-Front-end-task0001_4.jpg" alt="pic" /><img src="http://7q5cdt.com1.z0.glb.clouddn.com/Baidu-Front-end-task0001_5.jpg" alt="pic" /></li>
+</ul>
+
+<p>这个题我觉的直接将每一个块浮动起来就好了，不知我理解的对不对。</p>
+
+<p>html文件</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Document<span class="nt">&lt;/title&gt;</span>
+        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">href=</span><span class="s">"task0001-6-5.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>css文件</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">body</span> <span class="p">{</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">div</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">150px</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+    <span class="nl">margin</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">blue</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><a href="file:///E:/GitWorkSpace/baidu-ife-practice/task0001/task0001-6-5.html">Demo</a></p>
+
+<h3 id="清除浮动闭合浮动">清除浮动/闭合浮动</h3>
+
+<p>参考自 <a href="http://www.iyunlu.com/view/css-xhtml/55.html">那些年我们一起清除过的浮动 by 一丝冰凉</a></p>
+
+<ol>
+  <li>清除浮动：清除对应的单词是 clear，对应CSS中的属性是 clear：left | right | both | none；</li>
+  <li>闭合浮动：更确切的含义是使浮动元素闭合，从而减少浮动带来的影响。</li>
+</ol>
+
+<p>我们想要达到的效果更确切地说是闭合浮动，而不是单纯的清除浮动，设置clear：both清除浮动并不能解决warp高度塌陷的问题。</p>
+
+<p>正是因为浮动的这种特性，导致本属于普通流中的元素浮动之后，包含框内部由于不存在其他普通流元素了，也就表现出高度为0（<strong>高度塌陷</strong>）。在实际布局中，往往这并不是我们所希望的，所以需要闭合浮动元素，使其包含框表现出正常的高度。</p>
+
+<p>最后一丝姐给了两个精益求精方案，我觉得方案一更易于理解，这里实践一下：</p>
+
+<p><a href="http://gaohaoyang.github.io/baidu-ife-practice/task0001/close-float.html">闭合浮动的Demo</a></p>
+
+<p>下面是源码</p>
+
+<p>html</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Document<span class="nt">&lt;/title&gt;</span>
+        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"close-float.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row clearfix"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"left"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;h1&gt;</span>left<span class="nt">&lt;/h1&gt;</span>
+                <span class="nt">&lt;div&gt;</span>Content or Something<span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"right"</span><span class="nt">&gt;</span>right<span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row2"</span><span class="nt">&gt;</span>Row2<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>css</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.row</span> <span class="p">{</span>
+    <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="no">red</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.clearfix</span><span class="nd">:after</span> <span class="p">{</span>
+    <span class="nl">content</span><span class="p">:</span> <span class="s1">"\200B"</span><span class="p">;</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="nb">block</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">clear</span><span class="p">:</span> <span class="nb">both</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.clearfix</span> <span class="p">{</span>
+    <span class="err">*</span><span class="py">zoom</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.left</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">200px</span><span class="p">;</span>
+    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#eee</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.right</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">200px</span><span class="p">;</span>
+    <span class="nl">float</span><span class="p">:</span> <span class="nb">right</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#eee</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.row2</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">600px</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">50px</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#aaa</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>其中<code class="language-plaintext highlighter-rouge">*zoom: 1</code>是为了触发<code class="language-plaintext highlighter-rouge">hasLayout</code></p>
+
+<p>还有另一种解决方案！</p>
+
+<p>参考自：<a href="http://zh.learnlayout.com/clearfix.html">清除浮动（clearfix hack）</a></p>
+
+<p>直接使用，如下代码即可</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.clearfix</span><span class="p">{</span>
+    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">auto</span><span class="p">;</span>
+    <span class="py">zoom</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><a href="http://gaohaoyang.github.io/baidu-ife-practice/task0001/close-float-2.html">Demo</a></p>
+
+<p>(实际上，我看完后面的资料，再翻到这里就明白了！正是使用了BFC原理！！！！！！！)</p>
+
+<p><strong>但是今天遇到一个坑！</strong></p>
+
+<p>如果使用了 <code class="language-plaintext highlighter-rouge">over-flow</code>，在后面如果有元素要绝对布局在父元素的外面的，意思就是出现 <code class="language-plaintext highlighter-rouge">top</code>, <code class="language-plaintext highlighter-rouge">bottom</code>, <code class="language-plaintext highlighter-rouge">left</code>, <code class="language-plaintext highlighter-rouge">right</code> 的值为负值时，就会出现看不到，或者滚动条的问题！</p>
+
+<p>若是有这种要求，我觉得还是用一丝姐姐的解决方案比较好。</p>
+
+<p><strong>参考</strong></p>
+
+<ul>
+  <li><a href="http://zfengqi.me/?p=87">清除浮动的几种方法</a></li>
+</ul>
+
+<h3 id="box-sizing"><code class="language-plaintext highlighter-rouge">box-sizing</code></h3>
+
+<p>当你设置一个元素为 <code class="language-plaintext highlighter-rouge">box-sizing: border-box;</code> 时，此元素的内边距和边框不再会增加它的宽度。</p>
+
+<p>他们的内边距和边框都是向内的挤压的。支持IE8+，需要加浏览器内核。</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.simple</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">500px</span><span class="p">;</span>
+    <span class="nl">margin</span><span class="p">:</span> <span class="m">20px</span> <span class="nb">auto</span><span class="p">;</span>
+    <span class="nl">-webkit-box-sizing</span><span class="p">:</span> <span class="n">border-box</span><span class="p">;</span>
+    <span class="nl">-moz-box-sizing</span><span class="p">:</span> <span class="n">border-box</span><span class="p">;</span>
+    <span class="nl">box-sizing</span><span class="p">:</span> <span class="n">border-box</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="响应式布局">响应式布局</h3>
+
+<p>媒体查询</p>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Media_queries">MDN CSS媒体查询</a></li>
+  <li>
+    <p><a href="http://zh.learnlayout.com/media-queries.html">媒体查询-学习CSS布局</a></p>
+
+    <p><code class="language-plaintext highlighter-rouge">@media screen and (min-width: 500px) and (max-width: 800px) { ... }</code></p>
+  </li>
+  <li><a href="https://dev.opera.com/articles/an-introduction-to-meta-viewport-and-viewport/">An Introduction to Meta Viewport and @viewport</a></li>
+</ul>
+
+<h3 id="多列布局">多列布局</h3>
+
+<ul>
+  <li><a href="http://zh.learnlayout.com/column.html">column</a></li>
+</ul>
+
+<h3 id="bfc-和-ie-的-haslayout">BFC 和 IE 的 hasLayout</h3>
+
+<ul>
+  <li><a href="http://www.cnblogs.com/pigtail/archive/2013/01/23/2871627.html">BFC和IE的hasLayout</a></li>
+  <li><a href="http://outofmemory.cn/wr/?u=http%3A%2F%2Fkkeys.me%2Fpost%2F68547473290">Block Formatting Context 的几大用处</a></li>
+</ul>
+
+<p>看完这个资料后我震惊了！竟然可以这么玩儿！ <br />
+我将本文之前提到的两列布局，双飞翼布局又重新写了一遍！太爽了！代码超级简洁！</p>
+
+<p><strong>Block Formatting Context 的几大用处：</strong></p>
+
+<ol>
+  <li>防止 margin 折叠</li>
+  <li>清除float</li>
+  <li>不会环绕float元素</li>
+</ol>
+
+<p>相关资料</p>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Visual_formatting_model">视觉格式化模型(visual formatting model)</a></li>
+  <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Block_formatting_context">块格式化上下文(block formatting context)</a></li>
+</ul>
+
+<h3 id="div-三列等高"><code class="language-plaintext highlighter-rouge">div</code> 三列等高</h3>
+
+<p><a href="http://show.sysu.edu.cn/?action-blogdetail-uid-2383-id-5040">纯CSS实现三列DIV等高布局</a></p>
+
+<p>最关键的地方有3句：</p>
+
+<p>最外层div设置一个溢出隐藏</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">#wrap</span> <span class="p">{</span>
+    <span class="nl">overflow</span><span class="p">:</span><span class="nb">hidden</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>每一个子块设置 padding 和 margin</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">#left</span><span class="o">,</span><span class="nf">#center</span><span class="o">,</span><span class="nf">#right</span><span class="p">{</span>
+    <span class="nl">margin-bottom</span><span class="p">:</span><span class="m">-10000px</span><span class="p">;</span>
+    <span class="nl">padding-bottom</span><span class="p">:</span><span class="m">10000px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>overflow:hidden;    ‘隐藏溢出。如果内容溢出wrap层，则不显示。</p>
+
+<p>margin-bottom:-10000px;    ‘底部边距-10000px。 <br />
+padding-bottom:10000px;    ‘底部填充10000px。 <br />
+上面这两句能够实现的效果就是，产生10000px的填充，然后用负的边距把它给抵销掉。</p>
+
+<h3 id="去除inline-block元素间间距">去除inline-block元素间间距</h3>
+
+<p>一开始我不知道是因为使用了 <code class="language-plaintext highlighter-rouge">display: inline-block</code> 会有间距。后来查找资料找到了相关的方案。</p>
+
+<ul>
+  <li><a href="http://www.zhangxinxu.com/wordpress/2012/04/inline-block-space-remove-%E5%8E%BB%E9%99%A4%E9%97%B4%E8%B7%9D/">去除inline-block元素间间距的N种方法</a></li>
+  <li><a href="https://css-tricks.com/fighting-the-space-between-inline-block-elements/">Fighting the Space Between Inline Block Elements</a></li>
+</ul>
+
+<p>真正意义上的inline-block水平呈现的元素间，换行显示或空格分隔的情况下会有间距。 <br />
+这种表现是符合规范的应该有的表现。</p>
+
+<p>解决方法有很多，上述博文中提到的有：</p>
+
+<ol>
+  <li>移除空格</li>
+  <li>使用 <code class="language-plaintext highlighter-rouge">margin</code> 负值</li>
+  <li>取消闭合标签</li>
+  <li>使用 <code class="language-plaintext highlighter-rouge">font-size: 0</code></li>
+  <li>使用 <code class="language-plaintext highlighter-rouge">letter-spacing</code></li>
+  <li>使用 <code class="language-plaintext highlighter-rouge">word-spacing</code></li>
+  <li>其他</li>
+</ol>
+
+<p>我觉得使用 4 <code class="language-plaintext highlighter-rouge">font-size: 0</code> 比较好，对别的元素影响最小。代码如下：在 <code class="language-plaintext highlighter-rouge">a</code> 的外层将字体尺寸设为 0，载对内层的 <code class="language-plaintext highlighter-rouge">a</code> 重新设置字体大小，即可。</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">nav</span> <span class="p">{</span>
+    <span class="nl">font-size</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">nav</span> <span class="nt">a</span> <span class="p">{</span>
+    <span class="nl">font-size</span><span class="p">:</span> <span class="m">16px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="最终作品">最终作品</h2>
+
+<ul>
+  <li><a href="http://gaohaoyang.github.io/ife/task/task0001/work/Gaohaoyang/index.html">在线Demo</a></li>
+  <li><a href="https://github.com/Gaohaoyang/ife/tree/master/task/task0001/work/Gaohaoyang">源代码</a></li>
+</ul>
+
+<h2 id="参考资料">参考资料</h2>
+
+<ul>
+  <li><a href="https://github.com/ecomfe/spec">HTML、CSS的代码规范</a> 自己要试着改变一些代码风格了，规范化！</li>
+  <li><a href="http://www.zhihu.com/question/20455165">顾轶灵:Web语义化</a> <br />
+我看他回答最后的举例的Sildes做的非常好，可以经常看看。<a href="http://justineo.github.io/slideshows/semantic-html/">Semantic HTML</a>。他的其他Slides也做的非常好，很喜欢这种风格！</li>
+  <li><a href="http://www.w3cfuns.com/blog-5445898-5398950.html">CSS命名规范@W3C Funs</a> 起名不再困难！</li>
+  <li>
+    <p><a href="点击阅读: CSS浏览器兼容性列表">点击阅读: CSS浏览器兼容性列表-维基百科</a> 类似的我想到了 <a href="http://caniuse.com/">Can I Use</a>，Can I Use 包含的更多，包括 HTML5, CSS SVG, JS API 等。</p>
+  </li>
+  <li><a href="http://zh.learnlayout.com/">学习CSS布局</a></li>
+  <li><a href="http://mediaqueri.es/">Media Queries</a></li>
+  <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Using_CSS_gradients">使用CSS渐变</a></li>
+  <li><a href="http://www.w3cplus.com/content/css3-gradient">CSS3 Gradient</a></li>
+  <li><a href="http://www.colorzilla.com/gradient-editor/">CSS渐变生成器</a></li>
+</ul>
+:ET

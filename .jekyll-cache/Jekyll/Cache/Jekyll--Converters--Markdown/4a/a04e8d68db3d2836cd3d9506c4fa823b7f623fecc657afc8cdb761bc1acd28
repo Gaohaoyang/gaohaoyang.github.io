@@ -1,0 +1,95 @@
+I"e#<ul id="markdown-toc">
+  <li><a href="#原理" id="markdown-toc-原理">原理</a></li>
+  <li><a href="#代码" id="markdown-toc-代码">代码</a></li>
+  <li><a href="#补充" id="markdown-toc-补充">补充</a></li>
+</ul>
+
+<p>关于写倒计时大家可能都都比较熟悉，使用 setTimeout 或 setInterval 就可以搞定。几秒钟或者几分钟的倒计时这样写没有问题，但是如果是长时间的倒计时，这样写就会不准确。如果用户修改了他的设备时间，这样的倒计时就没有意义了。今天就说说写一个精确的倒计时的方法。</p>
+
+<p><img src="https://img.alicdn.com/tfs/TB18QnlOpXXXXcVXpXXXXXXXXXX-388-256.png" alt="" /></p>
+
+<h2 id="原理">原理</h2>
+
+<p>众所周知 setTimeout 或者 setInterval 调用的时候会有微小的误差。有人做了一个 <a href="https://bl.ocks.org/kenpenn/raw/92ebaa71696b4c4c3acd672b1bb3f49a/">demo</a> 来观察这个现象并对其做了修正。短时间的误差倒也可以接受，但是作为一个长时间的倒计时，误差累计就会导致倒计时不准确。</p>
+
+<p>因此我们可以在获取剩余时间的时候，每次 new 一个设备时间，因为设备时间的流逝相对是准确的，并且如果设备打开了网络时间同步，也会解决这个问题。</p>
+
+<p>但是，如果用户修改了设备时间，那么整个倒计时就没有意义了，用户只要将设备时间修改为倒计时的 endTime 就可以轻易看到倒计时结束是页面的变化。因此一开始获取服务端时间就是很重要的。</p>
+
+<p>简单的说，一个简单的精确倒计时原理如下：</p>
+
+<ul>
+  <li>初始化时请求一次服务器时间 serverTime，再 new 一个设备时间 deviceTime</li>
+  <li>deviceTime 与 serverTime 的差作为时间偏移修正</li>
+  <li>每次递归时 new 一个系统时间，解决 setTimeout 不准确的问题</li>
+</ul>
+
+<h2 id="代码">代码</h2>
+
+<p>获取剩余时间的代码如下：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * 获取剩余时间
+ * @param  {Number} endTime    截止时间
+ * @param  {Number} deviceTime 设备时间
+ * @param  {Number} serverTime 服务端时间
+ * @return {Object}            剩余时间对象
+ */</span>
+<span class="kd">let</span> <span class="nx">getRemainTime</span> <span class="o">=</span> <span class="p">(</span><span class="nx">endTime</span><span class="p">,</span> <span class="nx">deviceTime</span><span class="p">,</span> <span class="nx">serverTime</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">endTime</span> <span class="o">-</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">())</span> <span class="o">-</span> <span class="nx">serverTime</span> <span class="o">+</span> <span class="nx">deviceTime</span>
+    <span class="kd">let</span> <span class="nx">seconds</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">((</span><span class="nx">t</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">%</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="kd">let</span> <span class="nx">minutes</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">((</span><span class="nx">t</span> <span class="o">/</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">60</span><span class="p">)</span> <span class="o">%</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="kd">let</span> <span class="nx">hours</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">((</span><span class="nx">t</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1000</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span><span class="p">))</span> <span class="o">%</span> <span class="mi">24</span><span class="p">)</span>
+    <span class="kd">let</span> <span class="nx">days</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">t</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1000</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="dl">'</span><span class="s1">total</span><span class="dl">'</span><span class="p">:</span> <span class="nx">t</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">days</span><span class="dl">'</span><span class="p">:</span> <span class="nx">days</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">hours</span><span class="dl">'</span><span class="p">:</span> <span class="nx">hours</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">minutes</span><span class="dl">'</span><span class="p">:</span> <span class="nx">minutes</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">seconds</span><span class="dl">'</span><span class="p">:</span> <span class="nx">seconds</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><del>获取服务器时间可以使用 mtop 接口 <code class="language-plaintext highlighter-rouge">mtop.common.getTimestamp</code> </del></p>
+
+<p>然后可以通过下面的方式来使用：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 获取服务端时间（获取服务端时间代码略）</span>
+<span class="nx">getServerTime</span><span class="p">((</span><span class="nx">serverTime</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+
+    <span class="c1">//设置定时器</span>
+    <span class="kd">let</span> <span class="nx">intervalTimer</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+
+        <span class="c1">// 得到剩余时间</span>
+        <span class="kd">let</span> <span class="nx">remainTime</span> <span class="o">=</span> <span class="nx">getRemainTime</span><span class="p">(</span><span class="nx">endTime</span><span class="p">,</span> <span class="nx">deviceTime</span><span class="p">,</span> <span class="nx">serverTime</span><span class="p">)</span>
+
+        <span class="c1">// 倒计时到两个小时内</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">remainTime</span><span class="p">.</span><span class="nx">total</span> <span class="o">&lt;=</span> <span class="mi">7200000</span> <span class="o">&amp;&amp;</span> <span class="nx">remainTime</span><span class="p">.</span><span class="nx">total</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// do something</span>
+
+        <span class="c1">//倒计时结束</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">remainTime</span><span class="p">.</span><span class="nx">total</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">intervalTimer</span><span class="p">);</span>
+            <span class="c1">// do something</span>
+        <span class="p">}</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>这样的的写法也可以做到准确倒计时，同时也比较简洁。不需要隔段时间再去同步一次服务端时间。</p>
+
+<h2 id="补充">补充</h2>
+
+<p>在写倒计时的时候遇到了一个坑这里记录一下。</p>
+
+<p><strong>千万别在倒计时结束的时候请求接口</strong>。会让服务端瞬间 QPS 峰值达到非常高。</p>
+
+<p><img src="https://img.alicdn.com/tfs/TB1LBzjOpXXXXcnXpXXXXXXXXXX-154-71.png" alt="" /></p>
+
+<p>如果在倒计时结束的时候要使用新的数据渲染页面，正确的做法是：</p>
+
+<p>在倒计时结束前的一段时间里，先请求好数据，倒计时结束后，再渲染页面。</p>
+
+<p>关于倒计时，如果你有什么更好的解决方案，欢迎评论交流。</p>
+:ET

@@ -1,0 +1,998 @@
+I"kc<p>本系列将讲述 React Hooks 的使用方法，从 useState 开始，将包含如下内容：</p>
+
+<ul>
+  <li><a href="https://juejin.im/post/6844904111024930824">useState</a></li>
+  <li><a href="https://juejin.im/post/6844904153580306446">useEffect</a></li>
+  <li><a href="https://juejin.im/post/6844904153584500749">useContext</a></li>
+  <li><a href="https://juejin.im/post/6844904157892050957">useReducer</a></li>
+  <li><a href="https://juejin.im/post/6844904162040233997">useCallback</a></li>
+  <li><a href="https://juejin.im/post/6844904162304458760">useMemo</a></li>
+  <li><a href="https://juejin.im/post/6844904168562360328">useRef</a></li>
+  <li><a href="https://juejin.im/post/6844904169539633166">custom hooks</a></li>
+</ul>
+
+<p>掌握 React Hooks api 将更好的帮助你在工作中使用，对 React 的掌握更上一层楼。本系列将使用大量实例代码和效果展示，非常易于初学者和复习使用。</p>
+
+<p>截止目前我们已经学习了3个hook api，<code class="language-plaintext highlighter-rouge">useState</code>, <code class="language-plaintext highlighter-rouge">useEffect</code>, <code class="language-plaintext highlighter-rouge">useContext</code>。接下来我们学习下一个 hook api，<code class="language-plaintext highlighter-rouge">useReducer</code>。首先我们将讲讲什么是 reducer，以及为什么使用 reducer。研究一下 JavaScript 中的 reducer 是什么，这将有助于理解 react hook 中的 <code class="language-plaintext highlighter-rouge">useReducer</code>。好，现在开始吧。</p>
+
+<h2 id="什么是-usereducer">什么是 useReducer</h2>
+
+<p><code class="language-plaintext highlighter-rouge">useReducer</code> 是一个用于状态管理的 hook api。是 <code class="language-plaintext highlighter-rouge">useState</code> 的替代方案。</p>
+
+<p>那么 <code class="language-plaintext highlighter-rouge">useReducer</code> 和 <code class="language-plaintext highlighter-rouge">useState</code> 的区别是什么呢？答案是<code class="language-plaintext highlighter-rouge">useState</code> 是使用 <code class="language-plaintext highlighter-rouge">useReducer</code> 构建的。</p>
+
+<p>那么什么时候使用 <code class="language-plaintext highlighter-rouge">useReducer</code> 还是 <code class="language-plaintext highlighter-rouge">useState</code> 呢？我们完成本章的学习就能找到答案。</p>
+
+<h3 id="reducer">reducer</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>useState - state
+useEffect - side effects
+useContext - context API
+useReducer - reducers
+</code></pre></div></div>
+
+<p>可以看到 useReducer 一定也与 reducer 有关，接下来看看什么是 reducer。之所以要了解什么是 reducer 是为了你不需要掌握 redux 而学会 useReducer，当然，如果你了解Redux，对本章理解会更容易。下面开始</p>
+
+<p>如果你研究过原生 JavaScript，你会发现有一些内置方法，如 <code class="language-plaintext highlighter-rouge">foreach</code>, <code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">reduce</code>。我们来深入看一下 <code class="language-plaintext highlighter-rouge">reduce</code> 方法。在 MDN 上可以看到 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce"><code class="language-plaintext highlighter-rouge">Array.prototype.reduce()</code> 的文档</a>，文档中说</p>
+
+<blockquote>
+  <p>reduce() 方法对数组中的每个元素执行一个由您提供的 reducer 函数(升序执行)，将其结果汇总为单个返回值。</p>
+</blockquote>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">array1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">];</span>
+<span class="kd">const</span> <span class="nx">reducer</span> <span class="o">=</span> <span class="p">(</span><span class="nx">accumulator</span><span class="p">,</span> <span class="nx">currentValue</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">accumulator</span> <span class="o">+</span> <span class="nx">currentValue</span><span class="p">;</span>
+
+<span class="c1">// 1 + 2 + 3 + 4</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">array1</span><span class="p">.</span><span class="nx">reduce</span><span class="p">(</span><span class="nx">reducer</span><span class="p">));</span>
+<span class="c1">// expected output: 10</span>
+
+<span class="c1">// 5 + 1 + 2 + 3 + 4</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">array1</span><span class="p">.</span><span class="nx">reduce</span><span class="p">(</span><span class="nx">reducer</span><span class="p">,</span> <span class="mi">5</span><span class="p">));</span>
+<span class="c1">// expected output: 15</span>
+</code></pre></div></div>
+
+<p>需要注意的是：reduce 方法接受2个参数，第一个为 reducer 函数，第二个为初始值（给 reducer 函数使用）。reduce 方法返回函数累计处理的结果。</p>
+
+<p>而 reducer 函数有2个必填入参：</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">accumulator</code> 累计器累计回调的返回值; 它是上一次调用回调时返回的累积值，或 initialValue。</li>
+  <li><code class="language-plaintext highlighter-rouge">currentValue</code> 数组中正在处理的元素。</li>
+</ul>
+
+<h3 id="reducer-与-usereducer">reducer 与 useReducer</h3>
+
+<p>reducer 与 useReducer 这两者之间有巨大的相似之处。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">reduce in JavaScript</th>
+      <th style="text-align: left">useReducer in React</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">array.reduce(reducer, initialValue)</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">useReducer(reducer, initialState)</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">singleValue = reducer(accumulator, itemValue)</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">newState = reducer(currentState, action)</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">reduce method returns a single value</td>
+      <td style="text-align: left">useReducer returns a pair of values. [newState, dispatch]</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>上述表格目前看不懂也没有关系，后续通过例子会详细说明。</p>
+
+<p>在这一小节我们学到了：</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">useReducer</code> 是一个用于状态管理的 hook api。</li>
+  <li><code class="language-plaintext highlighter-rouge">useReducer</code> 与 reducer 函数有关</li>
+  <li><code class="language-plaintext highlighter-rouge">useReducer(reducer, initialState)</code> 接受2个参数，分别为 reducer 函数 和 初始状态</li>
+  <li><code class="language-plaintext highlighter-rouge">reducer(currentState, action)</code> 也是接受2个参数，分别为当前状态和 action，返回一个 new state</li>
+</ul>
+
+<h2 id="simple-state--action">simple state &amp; action</h2>
+
+<p>在本节，我们来看一个计数器的例子，来学习 simple state &amp; action</p>
+
+<ol>
+  <li>import useReducer api</li>
+  <li>声明 reducer function 和 initialState</li>
+  <li>调用执行 reducer</li>
+</ol>
+
+<p>CounterOne.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useReducer</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">const</span> <span class="nx">initialState</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="kd">const</span> <span class="nx">reducer</span> <span class="o">=</span> <span class="p">(</span><span class="nx">state</span><span class="p">:</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">action</span><span class="p">:</span> <span class="nx">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">increment</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">decrement</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">reset</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">initialState</span>
+    <span class="na">default</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">CounterOne</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">dispatch</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useReducer</span><span class="p">(</span><span class="nx">reducer</span><span class="p">,</span> <span class="nx">initialState</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>Count - <span class="si">{</span><span class="nx">count</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dispatch</span><span class="p">(</span><span class="dl">'</span><span class="s1">increment</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span>
+      <span class="p">&gt;</span>Increment<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dispatch</span><span class="p">(</span><span class="dl">'</span><span class="s1">decrement</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span>
+      <span class="p">&gt;</span>Decrement<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dispatch</span><span class="p">(</span><span class="dl">'</span><span class="s1">reset</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span>
+      <span class="p">&gt;</span>Reset<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">CounterOne</span>
+
+</code></pre></div></div>
+
+<p>App.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="dl">'</span><span class="s1">./App.css</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="nx">CounterOne</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./components/19CounterOne</span><span class="dl">'</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">CounterOne</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span>
+</code></pre></div></div>
+
+<p>页面展示如下：</p>
+
+<p><img src="https://user-gold-cdn.xitu.io/2020/5/13/1720cfa8bf044b74?w=432&amp;h=209&amp;f=gif&amp;s=38049" alt="" /></p>
+
+<p>在回顾一下代码，首先 import useReducer</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useReducer</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+</code></pre></div></div>
+
+<p>然后调用 useReducer</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">dispatch</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useReducer</span><span class="p">(</span><span class="nx">reducer</span><span class="p">,</span> <span class="nx">initialState</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>声明 reducer, initialState</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">initialState</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="kd">const</span> <span class="nx">reducer</span> <span class="o">=</span> <span class="p">(</span><span class="nx">state</span><span class="p">:</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">action</span><span class="p">:</span> <span class="nx">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">increment</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">decrement</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">reset</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">initialState</span>
+    <span class="na">default</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>reducer function 的2个参数，分别为当前 state 和 action， 并根据不同的 action 返回不同的新的 state。</p>
+
+<p>useReducer 返回了一个数组，2个元素分别为 state 和 dispatch 方法。其中 state 在我们的例子中就是当前的 count 值，dispatch 方法接受一个参数，执行对应的 action。dispatch 执行后，对应的 state 会改变，组件会 rerender，来展示最新的状态。</p>
+
+<p>这就是使用 simple state 和 simple action 的例子，本例中 state 是一个 number 类型，action 也是简单的 string 类型，这和 Redux 的模式稍有不同。接下来我们看一个稍复杂的例子。</p>
+
+<h2 id="complex-state--action">complex state &amp; action</h2>
+
+<p>下面我们看第二个例子。将使用对象作为 state 和 action 的值，这就比较类似 Redux 的模式了。</p>
+
+<p>CounterTwo.tsx</p>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useReducer</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">const</span> <span class="nx">initialState</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">firstCounter</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+<span class="kd">const</span> <span class="nx">reducer</span> <span class="o">=</span> <span class="p">(</span>
+  <span class="nx">state</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">firstCounter</span><span class="p">:</span> <span class="nx">number</span>
+  <span class="p">},</span>
+  <span class="nx">action</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">type</span><span class="p">:</span> <span class="nx">string</span>
+  <span class="p">}</span>
+<span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">increment</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="na">firstCounter</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">firstCounter</span> <span class="o">+</span> <span class="mi">1</span>
+      <span class="p">}</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">decrement</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="na">firstCounter</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">firstCounter</span> <span class="o">-</span> <span class="mi">1</span>
+      <span class="p">}</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">reset</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">initialState</span>
+    <span class="na">default</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">CounterTwo</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">dispatch</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useReducer</span><span class="p">(</span><span class="nx">reducer</span><span class="p">,</span> <span class="nx">initialState</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>Count - <span class="si">{</span><span class="nx">count</span><span class="p">.</span><span class="nx">firstCounter</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dispatch</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">increment</span><span class="dl">'</span> <span class="p">})</span><span class="si">}</span>
+      <span class="p">&gt;</span>Increment<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dispatch</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">decrement</span><span class="dl">'</span> <span class="p">})</span><span class="si">}</span>
+      <span class="p">&gt;</span>Decrement<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dispatch</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">reset</span><span class="dl">'</span> <span class="p">})</span><span class="si">}</span>
+      <span class="p">&gt;</span>Reset<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">CounterTwo</span>
+</code></pre></div></div>
+
+<p>App.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="dl">'</span><span class="s1">./App.css</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="nx">CounterTwo</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./components/20CountTwo</span><span class="dl">'</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">CounterTwo</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span>
+</code></pre></div></div>
+
+<p>页面展示如下：</p>
+
+<p><img src="https://user-gold-cdn.xitu.io/2020/5/13/1720cfa8bf044b74?w=432&amp;h=209&amp;f=gif&amp;s=38049" alt="" /></p>
+
+<p>与上一节的示例效果相同。现在，我们已经将 state 和 action 都改写为对象了，那么这样写有什么好处呢？</p>
+
+<p>其一的好处是 action 现在是一个对象了，可以有多个属性决定 action 的效果。例如我们再添加一个 +5 的逻辑。</p>
+
+<p>CounterTwo.tsx</p>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useReducer</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">const</span> <span class="nx">initialState</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">firstCounter</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+<span class="kd">const</span> <span class="nx">reducer</span> <span class="o">=</span> <span class="p">(</span>
+  <span class="nx">state</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">firstCounter</span><span class="p">:</span> <span class="nx">number</span>
+  <span class="p">},</span>
+  <span class="nx">action</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">type</span><span class="p">:</span> <span class="nx">string</span>
+    <span class="nx">value</span><span class="p">:</span> <span class="nx">number</span>
+  <span class="p">}</span>
+<span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">increment</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="na">firstCounter</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">firstCounter</span> <span class="o">+</span> <span class="nx">action</span><span class="p">.</span><span class="nx">value</span>
+      <span class="p">}</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">decrement</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="na">firstCounter</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">firstCounter</span> <span class="o">-</span> <span class="nx">action</span><span class="p">.</span><span class="nx">value</span>
+      <span class="p">}</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">reset</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">initialState</span>
+    <span class="na">default</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">CounterTwo</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">dispatch</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useReducer</span><span class="p">(</span><span class="nx">reducer</span><span class="p">,</span> <span class="nx">initialState</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>Count - <span class="si">{</span><span class="nx">count</span><span class="p">.</span><span class="nx">firstCounter</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dispatch</span><span class="p">({</span>
+          <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">increment</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">value</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">})</span><span class="si">}</span>
+      <span class="p">&gt;</span>Increment<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dispatch</span><span class="p">({</span>
+          <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">decrement</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">value</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">})</span><span class="si">}</span>
+      <span class="p">&gt;</span>Decrement<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dispatch</span><span class="p">({</span>
+          <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">increment</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">value</span><span class="p">:</span> <span class="mi">5</span>
+        <span class="p">})</span><span class="si">}</span>
+      <span class="p">&gt;</span>Increment 5<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dispatch</span><span class="p">({</span>
+          <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">decrement</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">value</span><span class="p">:</span> <span class="mi">5</span>
+        <span class="p">})</span><span class="si">}</span>
+      <span class="p">&gt;</span>Decrement 5<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dispatch</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">reset</span><span class="dl">'</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span><span class="si">}</span>
+      <span class="p">&gt;</span>Reset<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">CounterTwo</span>
+</code></pre></div></div>
+
+<p>页面展示如下：
+<img src="https://user-gold-cdn.xitu.io/2020/5/13/1720cfa8ccd6c5ee?w=432&amp;h=209&amp;f=gif&amp;s=56875" alt="" /></p>
+
+<p>可以注意到给 action 增加了一个 value 属性，实现了加减 5 的逻辑。</p>
+
+<p>第二个好处是 state 作为一个对象，就可以添加更多的 state 属性，例如我们在增加一个计数器2，代码如下：</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useReducer</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">const</span> <span class="nx">initialState</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">firstCounter</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="na">secondCounter</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="kd">const</span> <span class="nx">reducer</span> <span class="o">=</span> <span class="p">(</span>
+  <span class="nx">state</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">firstCounter</span><span class="p">:</span> <span class="nx">number</span>
+    <span class="nx">secondCounter</span><span class="p">:</span> <span class="nx">number</span>
+  <span class="p">},</span>
+  <span class="nx">action</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">type</span><span class="p">:</span> <span class="nx">string</span>
+    <span class="nx">value</span><span class="p">:</span> <span class="nx">number</span>
+  <span class="p">}</span>
+<span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">increment</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="p">...</span><span class="nx">state</span><span class="p">,</span>
+        <span class="na">firstCounter</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">firstCounter</span> <span class="o">+</span> <span class="nx">action</span><span class="p">.</span><span class="nx">value</span>
+      <span class="p">}</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">decrement</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="p">...</span><span class="nx">state</span><span class="p">,</span>
+        <span class="na">firstCounter</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">firstCounter</span> <span class="o">-</span> <span class="nx">action</span><span class="p">.</span><span class="nx">value</span>
+      <span class="p">}</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">increment2</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="p">...</span><span class="nx">state</span><span class="p">,</span>
+        <span class="na">secondCounter</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">secondCounter</span> <span class="o">+</span> <span class="nx">action</span><span class="p">.</span><span class="nx">value</span>
+      <span class="p">}</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">decrement2</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="p">...</span><span class="nx">state</span><span class="p">,</span>
+        <span class="na">secondCounter</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">secondCounter</span> <span class="o">-</span> <span class="nx">action</span><span class="p">.</span><span class="nx">value</span>
+      <span class="p">}</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">reset</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">initialState</span>
+    <span class="na">default</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">CounterTwo</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">dispatch</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useReducer</span><span class="p">(</span><span class="nx">reducer</span><span class="p">,</span> <span class="nx">initialState</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>First Count - <span class="si">{</span><span class="nx">count</span><span class="p">.</span><span class="nx">firstCounter</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>Second Count - <span class="si">{</span><span class="nx">count</span><span class="p">.</span><span class="nx">secondCounter</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dispatch</span><span class="p">({</span>
+          <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">increment</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">value</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">})</span><span class="si">}</span>
+      <span class="p">&gt;</span>Increment<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dispatch</span><span class="p">({</span>
+          <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">decrement</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">value</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">})</span><span class="si">}</span>
+      <span class="p">&gt;</span>Decrement<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dispatch</span><span class="p">({</span>
+          <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">increment</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">value</span><span class="p">:</span> <span class="mi">5</span>
+        <span class="p">})</span><span class="si">}</span>
+      <span class="p">&gt;</span>Increment 5<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dispatch</span><span class="p">({</span>
+          <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">decrement</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">value</span><span class="p">:</span> <span class="mi">5</span>
+        <span class="p">})</span><span class="si">}</span>
+      <span class="p">&gt;</span>Decrement 5<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span>
+          <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dispatch</span><span class="p">({</span>
+            <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">increment2</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">value</span><span class="p">:</span> <span class="mi">1</span>
+          <span class="p">})</span><span class="si">}</span>
+        <span class="p">&gt;</span>Increment second<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span>
+          <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dispatch</span><span class="p">({</span>
+            <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">decrement2</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">value</span><span class="p">:</span> <span class="mi">1</span>
+          <span class="p">})</span><span class="si">}</span>
+        <span class="p">&gt;</span>Decrement second<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dispatch</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">reset</span><span class="dl">'</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="mi">0</span> <span class="p">})</span><span class="si">}</span>
+      <span class="p">&gt;</span>Reset<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">CounterTwo</span>
+</code></pre></div></div>
+
+<p>页面展示效果如下</p>
+
+<p><img src="https://user-gold-cdn.xitu.io/2020/5/13/1720cfa8c1cceb39?w=432&amp;h=209&amp;f=gif&amp;s=90575" alt="" /></p>
+
+<p>这样我们就能同时维护 2 个计时器。</p>
+
+<h2 id="multiple-usereducers">multiple useReducers</h2>
+
+<p>如果有多个 state，但 state 变化的方式又是相同的时候，可以多次使用 useReducer。</p>
+
+<p>CounterThree.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useReducer</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">const</span> <span class="nx">initialState</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="kd">const</span> <span class="nx">reducer</span> <span class="o">=</span> <span class="p">(</span><span class="nx">state</span><span class="p">:</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">action</span><span class="p">:</span> <span class="nx">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">increment</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">decrement</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">reset</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">initialState</span>
+    <span class="na">default</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">CounterThree</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">dispatch</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useReducer</span><span class="p">(</span><span class="nx">reducer</span><span class="p">,</span> <span class="nx">initialState</span><span class="p">)</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">countTwo</span><span class="p">,</span> <span class="nx">dispatchTwo</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useReducer</span><span class="p">(</span><span class="nx">reducer</span><span class="p">,</span> <span class="nx">initialState</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>Count - <span class="si">{</span><span class="nx">count</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dispatch</span><span class="p">(</span><span class="dl">'</span><span class="s1">increment</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span>
+      <span class="p">&gt;</span>Increment<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dispatch</span><span class="p">(</span><span class="dl">'</span><span class="s1">decrement</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span>
+      <span class="p">&gt;</span>Decrement<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dispatch</span><span class="p">(</span><span class="dl">'</span><span class="s1">reset</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span>
+      <span class="p">&gt;</span>Reset<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+
+      <span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>CountTwo - <span class="si">{</span><span class="nx">countTwo</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dispatchTwo</span><span class="p">(</span><span class="dl">'</span><span class="s1">increment</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span>
+      <span class="p">&gt;</span>Increment<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dispatchTwo</span><span class="p">(</span><span class="dl">'</span><span class="s1">decrement</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span>
+      <span class="p">&gt;</span>Decrement<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">dispatchTwo</span><span class="p">(</span><span class="dl">'</span><span class="s1">reset</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span>
+      <span class="p">&gt;</span>Reset<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">CounterThree</span>
+</code></pre></div></div>
+
+<p>页面展示如下</p>
+
+<p><img src="https://user-gold-cdn.xitu.io/2020/5/13/1720cfa8c2f16910?w=432&amp;h=209&amp;f=gif&amp;s=48640" alt="" /></p>
+
+<p>这个例子中使用了多个 useReducer，但共用了一个 reducer function。这有效的避免了合并对象的麻烦（可以对比上一节使用展开运算法合并 state）。也提高了代码的复用性。</p>
+
+<h2 id="usereducer-with-usecontext">useReducer with useContext</h2>
+
+<p>截止目前我们已经学习了在组件内使用 useReducer 进行状态管理。如果在某些场景想再组件之间分享 state，进行全局的 state 管理时，我们可以使用 useReducer 加 useContext。</p>
+
+<p>考虑这样一个场景，有3个子组件A, B, C，要在子组件内控制同一个计数器，常规的写法是将 counter 的方法写到父组件上，然后通过 props 的方式将 counter 方法和 state 传给子组件，子组件中调用通过 props 传入的 counter 方法，就会改变父组件中的 state，同时也能改变作为 props 传递给子组件的 app 中的 state。如下图：</p>
+
+<p><img src="https://user-gold-cdn.xitu.io/2020/5/13/1720cfa8c5efb591?w=717&amp;h=274&amp;f=png&amp;s=6293" alt="" /></p>
+
+<p>看起来没什么问题，但是如果组件嵌套比较深的时候，这将非常糟糕，要一层一层将 counter 方法作为 props 传递给子组件。这时就要使用 useContext 加 useReducer 了。</p>
+
+<p><img src="https://user-gold-cdn.xitu.io/2020/5/13/1720cfa8c674a7b3?w=717&amp;h=488&amp;f=png&amp;s=8360" alt="" /></p>
+
+<p>要完成这个需求分为 2 步</p>
+
+<ol>
+  <li>使用 useReducer 在根节点创建一个 counter 方法</li>
+  <li>通过 useContext 为子组件提供和消费 context</li>
+</ol>
+
+<p>App.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useReducer</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+<span class="k">import</span> <span class="dl">'</span><span class="s1">./App.css</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">A</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./components/22A</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">B</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./components/22B</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">C</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./components/22C</span><span class="dl">'</span>
+
+<span class="kr">interface</span> <span class="nx">CountContextType</span> <span class="p">{</span>
+  <span class="nl">countState</span><span class="p">:</span> <span class="nx">number</span>
+  <span class="nx">countDispatch</span><span class="p">:</span> <span class="p">(</span><span class="nx">action</span><span class="p">:</span> <span class="nx">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">CountContext</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createContext</span><span class="p">({}</span> <span class="k">as</span> <span class="nx">CountContextType</span><span class="p">)</span>
+
+<span class="kd">const</span> <span class="nx">initialState</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="kd">const</span> <span class="nx">reducer</span> <span class="o">=</span> <span class="p">(</span><span class="nx">state</span><span class="p">:</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">action</span><span class="p">:</span> <span class="nx">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">increment</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">decrement</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">reset</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">initialState</span>
+    <span class="na">default</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">dispatch</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useReducer</span><span class="p">(</span><span class="nx">reducer</span><span class="p">,</span> <span class="nx">initialState</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">CountContext</span><span class="p">.</span><span class="nc">Provider</span>
+      <span class="na">value</span><span class="p">=</span>
+    <span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+        Count - <span class="si">{</span><span class="nx">count</span><span class="si">}</span>
+        <span class="p">&lt;</span><span class="nc">A</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nc">B</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nc">C</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">CountContext</span><span class="p">.</span><span class="nc">Provider</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span>
+</code></pre></div></div>
+
+<p>A.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">CountContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../App</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">A</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">countContext</span> <span class="o">=</span> <span class="nx">useContext</span><span class="p">(</span><span class="nx">CountContext</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      A - <span class="si">{</span><span class="nx">countContext</span><span class="p">.</span><span class="nx">countState</span><span class="si">}</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">countContext</span><span class="p">.</span><span class="nx">countDispatch</span><span class="p">(</span><span class="dl">'</span><span class="s1">increment</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span>
+      <span class="p">&gt;</span>Increment<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">countContext</span><span class="p">.</span><span class="nx">countDispatch</span><span class="p">(</span><span class="dl">'</span><span class="s1">decrement</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span>
+      <span class="p">&gt;</span>Decrement<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">countContext</span><span class="p">.</span><span class="nx">countDispatch</span><span class="p">(</span><span class="dl">'</span><span class="s1">reset</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span>
+      <span class="p">&gt;</span>Reset<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">A</span>
+</code></pre></div></div>
+<p>B.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">D</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./22D</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">B</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">D</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">B</span>
+</code></pre></div></div>
+
+<p>C.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">E</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./22E</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">C</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">E</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">C</span>
+</code></pre></div></div>
+
+<p>D.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">CountContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../App</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">D</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">countContext</span> <span class="o">=</span> <span class="nx">useContext</span><span class="p">(</span><span class="nx">CountContext</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      D - <span class="si">{</span><span class="nx">countContext</span><span class="p">.</span><span class="nx">countState</span><span class="si">}</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">countContext</span><span class="p">.</span><span class="nx">countDispatch</span><span class="p">(</span><span class="dl">'</span><span class="s1">increment</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span>
+      <span class="p">&gt;</span>Increment<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">countContext</span><span class="p">.</span><span class="nx">countDispatch</span><span class="p">(</span><span class="dl">'</span><span class="s1">decrement</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span>
+      <span class="p">&gt;</span>Decrement<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">countContext</span><span class="p">.</span><span class="nx">countDispatch</span><span class="p">(</span><span class="dl">'</span><span class="s1">reset</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span>
+      <span class="p">&gt;</span>Reset<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">D</span>
+</code></pre></div></div>
+
+<p>E.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="nx">F</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./22F</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">E</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">F</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">E</span>
+</code></pre></div></div>
+
+<p>F.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">CountContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../App</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">F</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">countContext</span> <span class="o">=</span> <span class="nx">useContext</span><span class="p">(</span><span class="nx">CountContext</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      F - <span class="si">{</span><span class="nx">countContext</span><span class="p">.</span><span class="nx">countState</span><span class="si">}</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">countContext</span><span class="p">.</span><span class="nx">countDispatch</span><span class="p">(</span><span class="dl">'</span><span class="s1">increment</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span>
+      <span class="p">&gt;</span>Increment<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">countContext</span><span class="p">.</span><span class="nx">countDispatch</span><span class="p">(</span><span class="dl">'</span><span class="s1">decrement</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span>
+      <span class="p">&gt;</span>Decrement<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">countContext</span><span class="p">.</span><span class="nx">countDispatch</span><span class="p">(</span><span class="dl">'</span><span class="s1">reset</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span>
+      <span class="p">&gt;</span>Reset<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">F</span>
+</code></pre></div></div>
+
+<p>页面效果如下</p>
+
+<p><img src="https://user-gold-cdn.xitu.io/2020/5/13/1720cfa8eb039642?w=432&amp;h=209&amp;f=gif&amp;s=88607" alt="" /></p>
+
+<p>我们再一起回顾一下</p>
+
+<ol>
+  <li>在 App.tsx 中，我们使用 useReducer 创建了一个 counter，声明了初始值，创建了 reducer 函数，useReducer 返回了状态 count 和 dispatch 方法。</li>
+  <li>为了能让其他组件访问到 count 和 dispatch，我们通过 React.createContext 创建了 CountContext，并用 <code class="language-plaintext highlighter-rouge">&lt;CountContext.Provider&gt;</code> 包裹根节点。将 count 和 dispatch 作为 value 传给 Provider。</li>
+  <li>在子节点中，我们使用 useContext 获取到 count 和 dispatch 方法，通过调用 dispatch 实现对 count 的改变。</li>
+</ol>
+
+<h2 id="fetching-data-with-usereducer">Fetching Data with useReducer</h2>
+
+<p>之前我们已经在 useEffect 的章节中学习掌握了如何请求数据，当时是使用了 useEffect 和 useState，现在我们再来看看如何使用 useReducer 去请求远程数据。</p>
+
+<p>接下来我们做这样一个小需求：</p>
+
+<ol>
+  <li>页面载入时请求数据</li>
+  <li>请求数据中展示 loading 状态</li>
+  <li>请求返回后移除 loading 样式，展示请求的数据；若请求失败，也移除 loading 展示错误提示</li>
+</ol>
+
+<p>我们将分别使用 useState 和 useReducer 来实现，并对比其中的区别。</p>
+
+<h3 id="usestate-实现请求">useState 实现请求</h3>
+
+<p>App.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+<span class="k">import</span> <span class="dl">'</span><span class="s1">./App.css</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="nx">DataFetchingOne</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./components/23DataFetchingOne</span><span class="dl">'</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">DataFetchingOne</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span>
+</code></pre></div></div>
+
+<p>DataFetchingOne.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">axios</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span>
+
+<span class="kr">interface</span> <span class="nx">postType</span> <span class="p">{</span>
+  <span class="nl">userId</span><span class="p">:</span> <span class="nx">number</span>
+  <span class="nx">id</span><span class="p">:</span> <span class="nx">number</span>
+  <span class="nx">title</span><span class="p">:</span> <span class="nx">string</span>
+  <span class="nx">body</span><span class="p">:</span> <span class="nx">string</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">DataFetchingOne</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">loading</span><span class="p">,</span> <span class="nx">setLoading</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">error</span><span class="p">,</span> <span class="nx">setError</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">''</span><span class="p">)</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">post</span><span class="p">,</span> <span class="nx">setPost</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">({}</span> <span class="k">as</span> <span class="nx">postType</span><span class="p">)</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://jsonplaceholder.typicode.com/posts/1</span><span class="dl">'</span><span class="p">).</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+      <span class="nx">setPost</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span>
+      <span class="nx">setError</span><span class="p">(</span><span class="dl">''</span><span class="p">)</span>
+    <span class="p">}).</span><span class="k">catch</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+      <span class="nx">setPost</span><span class="p">({}</span> <span class="k">as</span> <span class="nx">postType</span><span class="p">)</span>
+      <span class="nx">setError</span><span class="p">(</span><span class="dl">'</span><span class="s1">something went wrong</span><span class="dl">'</span><span class="p">)</span>
+    <span class="p">})</span>
+  <span class="p">},</span> <span class="p">[])</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="si">{</span>
+        <span class="nx">loading</span>
+          <span class="p">?</span> <span class="dl">'</span><span class="s1">Loading...</span><span class="dl">'</span>
+          <span class="p">:</span> <span class="nx">post</span><span class="p">.</span><span class="nx">title</span>
+      <span class="si">}</span>
+      <span class="si">{</span>
+        <span class="nx">error</span>
+          <span class="p">?</span> <span class="nx">error</span>
+          <span class="p">:</span> <span class="kc">null</span>
+      <span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">DataFetchingOne</span>
+</code></pre></div></div>
+
+<p>页面效果如下</p>
+
+<p><img src="https://user-gold-cdn.xitu.io/2020/5/13/1720cfa8f0448577?w=557&amp;h=209&amp;f=gif&amp;s=19592" alt="" /></p>
+
+<p>我们故意改错一个 axios 请求的链接，可以看到如下进入错误的逻辑。</p>
+
+<p><img src="https://user-gold-cdn.xitu.io/2020/5/13/1720cfa8ee9c19d7?w=557&amp;h=209&amp;f=gif&amp;s=7886" alt="" /></p>
+
+<p>注意到在这个实现中，我们使用了3个useState去控制 loading, post 和 error，接下来看看如何使用 useReducer 实现。</p>
+
+<h3 id="usereducer-实现请求">useReducer 实现请求</h3>
+
+<p>App.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+<span class="k">import</span> <span class="dl">'</span><span class="s1">./App.css</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="nx">DataFetchingOne</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./components/23DataFetchingOne</span><span class="dl">'</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">DataFetchingOne</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span>
+</code></pre></div></div>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useEffect</span><span class="p">,</span> <span class="nx">useReducer</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">axios</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span>
+
+<span class="kr">interface</span> <span class="nx">postType</span> <span class="p">{</span>
+  <span class="nl">userId</span><span class="p">:</span> <span class="nx">number</span>
+  <span class="nx">id</span><span class="p">:</span> <span class="nx">number</span>
+  <span class="nx">title</span><span class="p">:</span> <span class="nx">string</span>
+  <span class="nx">body</span><span class="p">:</span> <span class="nx">string</span>
+<span class="p">}</span>
+
+<span class="nx">type</span> <span class="nx">stateType</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">loading</span><span class="p">:</span> <span class="nx">boolean</span>
+  <span class="na">error</span><span class="p">:</span> <span class="nx">string</span>
+  <span class="nx">post</span><span class="p">?:</span> <span class="nx">postType</span> <span class="o">|</span> <span class="p">{}</span>
+<span class="p">}</span>
+
+<span class="nx">type</span> <span class="nx">actionType</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">FETCH_SUCCESS</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">FETCH_ERROR</span><span class="dl">'</span>
+  <span class="nx">payload</span><span class="p">?:</span> <span class="nx">postType</span> <span class="o">|</span> <span class="p">{}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">initialState</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">loading</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="na">error</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+  <span class="na">post</span><span class="p">:</span> <span class="p">{},</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">reducer</span> <span class="o">=</span> <span class="p">(</span><span class="nx">state</span><span class="p">:</span> <span class="nx">stateType</span><span class="p">,</span> <span class="nx">action</span><span class="p">:</span> <span class="nx">actionType</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">FETCH_SUCCESS</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="na">loading</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">error</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+        <span class="na">post</span><span class="p">:</span> <span class="nx">action</span><span class="p">.</span><span class="nx">payload</span><span class="p">,</span>
+      <span class="p">}</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">FETCH_ERROR</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="na">loading</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">error</span><span class="p">:</span> <span class="dl">'</span><span class="s1">something went wrong</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">post</span><span class="p">:</span> <span class="p">{},</span>
+      <span class="p">}</span>
+    <span class="nl">default</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">DataFetchingTwo</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">state</span><span class="p">,</span> <span class="nx">dispatch</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useReducer</span><span class="p">(</span><span class="nx">reducer</span><span class="p">,</span> <span class="nx">initialState</span><span class="p">)</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://jsonplaceholder.typicode.com/posts/1</span><span class="dl">'</span><span class="p">).</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">dispatch</span><span class="p">({</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">FETCH_SUCCESS</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">payload</span><span class="p">:</span> <span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">,</span>
+      <span class="p">})</span>
+    <span class="p">}).</span><span class="k">catch</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">dispatch</span><span class="p">({</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">FETCH_ERROR</span><span class="dl">'</span>
+      <span class="p">})</span>
+    <span class="p">})</span>
+  <span class="p">},</span> <span class="p">[])</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="si">{</span>
+        <span class="nx">state</span><span class="p">.</span><span class="nx">loading</span>
+          <span class="p">?</span> <span class="dl">'</span><span class="s1">Loading...</span><span class="dl">'</span>
+          <span class="c1">// @ts-ignore</span>
+          <span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">post</span><span class="p">.</span><span class="nx">title</span>
+      <span class="si">}</span>
+      <span class="si">{</span>
+        <span class="nx">state</span><span class="p">.</span><span class="nx">error</span>
+          <span class="p">?</span> <span class="nx">state</span><span class="p">.</span><span class="nx">error</span>
+          <span class="p">:</span> <span class="kc">null</span>
+      <span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">DataFetchingTwo</span>
+</code></pre></div></div>
+
+<p>页面展示效果与上一个例子相同</p>
+
+<p><img src="https://user-gold-cdn.xitu.io/2020/5/13/1720cfa8f0448577?w=557&amp;h=209&amp;f=gif&amp;s=19592" alt="" /></p>
+
+<p>可以看到，我们将 state 集合在了一起，在同一个对象，修改 state 的逻辑也聚合在了一起，即 reducer 函数中的 switch 部分。</p>
+
+<p>至此你可能会好奇，什么时候该用 useState 什么时候该用 useReducer，我们继续往下看。</p>
+
+<h2 id="usestate-vs-usereducer">useState vs useReducer</h2>
+
+<ul>
+  <li>如果 state 的类型为 Number, String, Boolean 建议使用 useState，如果 state 的类型 为 Object 或 Array，建议使用 useReducer</li>
+  <li>如果 state 变化非常多，也是建议使用 useReducer，集中管理 state 变化，便于维护</li>
+  <li>如果 state 关联变化，建议使用 useReducer</li>
+  <li>业务逻辑如果很复杂，也建议使用 useReducer</li>
+  <li>如果 state 只想用在 组件内部，建议使用 useState，如果想维护全局 state 建议使用 useReducer</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Scenario</th>
+      <th>useState</th>
+      <th>useReducer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Type of state</td>
+      <td>Number, String, Boolean</td>
+      <td>Object or Array</td>
+    </tr>
+    <tr>
+      <td>Number of state transitions</td>
+      <td>1 or 2</td>
+      <td>Too many</td>
+    </tr>
+    <tr>
+      <td>Related state transitions</td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Business logic</td>
+      <td>No business logic</td>
+      <td>Complex business logic</td>
+    </tr>
+    <tr>
+      <td>local vs global</td>
+      <td>local</td>
+      <td>global</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="小结">小结</h2>
+
+<p>本章主要讲述了 useReducer 的使用方法。从 JavaScript 中的 reduce api 开始，对比说明了什么是 useReducer。</p>
+
+<p>学习了 useReducer 的简单状态的使用，复杂状态的使用，以及多个 useReducer 的使用。</p>
+
+<p>掌握了组件嵌套多层时使用 useContext 加 useReducer 完成子组件修改全局state的方法，代码更优雅，可维护性更高。</p>
+
+<p>通过对比 useState，学习了如何使用 useEffect 加 useReducer 请求数据，并控制 loading 状态的显示隐藏。</p>
+
+<p>最后对比了 useState 和 useReducer，并给出了使用建议。</p>
+:ET

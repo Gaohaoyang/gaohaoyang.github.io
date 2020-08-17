@@ -1,0 +1,221 @@
+I";I<ul id="markdown-toc">
+  <li><a href="#继承" id="markdown-toc-继承">继承</a>    <ul>
+      <li><a href="#伪类" id="markdown-toc-伪类">伪类</a></li>
+      <li><a href="#对象说明符" id="markdown-toc-对象说明符">对象说明符</a></li>
+      <li><a href="#原型" id="markdown-toc-原型">原型</a></li>
+      <li><a href="#函数化" id="markdown-toc-函数化">函数化</a></li>
+      <li><a href="#部件" id="markdown-toc-部件">部件</a></li>
+    </ul>
+  </li>
+  <li><a href="#数组" id="markdown-toc-数组">数组</a>    <ul>
+      <li><a href="#数组字面量" id="markdown-toc-数组字面量">数组字面量</a></li>
+      <li><a href="#长度" id="markdown-toc-长度">长度</a></li>
+      <li><a href="#删除" id="markdown-toc-删除">删除</a></li>
+      <li><a href="#枚举" id="markdown-toc-枚举">枚举</a></li>
+      <li><a href="#容易混淆的地方" id="markdown-toc-容易混淆的地方">容易混淆的地方</a></li>
+      <li><a href="#方法" id="markdown-toc-方法">方法</a></li>
+      <li><a href="#指定初始值" id="markdown-toc-指定初始值">指定初始值</a></li>
+    </ul>
+  </li>
+  <li><a href="#正则表达式" id="markdown-toc-正则表达式">正则表达式</a></li>
+</ul>
+
+<p>记录一下阅读蝴蝶书的笔记，本篇为书中以下章节的笔记：继承、数组和正则表达式。</p>
+
+<h2 id="继承">继承</h2>
+
+<p>继承的两大好处：代码重用，引入一套类型系统的规范。</p>
+
+<h3 id="伪类">伪类</h3>
+
+<p>JavaScript 通过构造器函数产生对象。</p>
+
+<p>构造器调用模式，即用<code class="language-plaintext highlighter-rouge">new</code>前缀去调用一个函数。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Mammal</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span>
+<span class="p">}</span>
+
+<span class="nx">Mammal</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span>
+<span class="p">}</span>
+
+<span class="nx">Mammal</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">says</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">saying</span> <span class="o">||</span> <span class="dl">''</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">myMammal</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Mammal</span><span class="p">(</span><span class="dl">'</span><span class="s1">Herb</span><span class="dl">'</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myMammal</span><span class="p">.</span><span class="nx">getName</span><span class="p">())</span> <span class="c1">//Herb</span>
+</code></pre></div></div>
+
+<p>书中不推荐这样的写法。有很多风险。若忘记添加<code class="language-plaintext highlighter-rouge">new</code>前缀，<code class="language-plaintext highlighter-rouge">this</code>无法绑定到新的对象上。而是绑定到了全局对象上，破坏了全局变量环境。</p>
+
+<h3 id="对象说明符">对象说明符</h3>
+
+<p>上一节中的构造器可能要接受一大串参数。我们可以这样写：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">myObject</span> <span class="o">=</span> <span class="nx">Maker</span><span class="p">({</span>
+    <span class="na">first</span><span class="p">:</span> <span class="nx">f</span><span class="p">,</span>
+    <span class="na">middle</span><span class="p">:</span> <span class="nx">m</span><span class="p">,</span>
+    <span class="na">last</span><span class="p">:</span> <span class="nx">l</span><span class="p">,</span>
+    <span class="na">state</span><span class="p">:</span> <span class="nx">s</span><span class="p">,</span>
+    <span class="na">city</span><span class="p">:</span> <span class="nx">c</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>将JSON对象传递给构造器，而它返回一个构造完全的对象。</p>
+
+<h3 id="原型">原型</h3>
+
+<p>在一个纯粹的原型模式中，我们将摒弃类，转而专注于对象。一个新对象可以继承一个就对象的属性。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">myMammal</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">MM</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">getName</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span>
+    <span class="p">},</span>
+    <span class="na">says</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">saying</span> <span class="o">||</span> <span class="dl">''</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">myCat</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myMammal</span><span class="p">)</span>
+<span class="nx">myCat</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Kitty</span><span class="dl">'</span>
+<span class="nx">myCat</span><span class="p">.</span><span class="nx">saying</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">meow</span><span class="dl">'</span>
+<span class="nx">myCat</span><span class="p">.</span><span class="nx">run</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="dl">'</span><span class="s1">Kitty is running</span><span class="dl">'</span>
+<span class="p">}</span>
+<span class="nx">myCat</span><span class="p">.</span><span class="nx">getName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">says</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">says</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>这是一种差异化继承。</p>
+
+<h3 id="函数化">函数化</h3>
+
+<p>前文看到的继承模式没法保护隐私。对象的所有属性都是可见的。无法得到私有变量和私有函数。为了解决这一问题，我们有模块模式。</p>
+
+<p>构造一个生成对象的函数需要4步骤：</p>
+
+<ol>
+  <li>创建一个新对象。</li>
+  <li>有选择的定义私有变量和方法。</li>
+  <li>给这个新对象扩充方法。</li>
+  <li>返回那个新对象。</li>
+</ol>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">mammal</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">spec</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="nx">that</span><span class="p">.</span><span class="nx">getName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">spec</span><span class="p">.</span><span class="nx">name</span>
+    <span class="p">}</span>
+    <span class="nx">that</span><span class="p">.</span><span class="nx">says</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">spec</span><span class="p">.</span><span class="nx">saying</span> <span class="o">||</span> <span class="dl">''</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nx">that</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">myMammal</span> <span class="o">=</span> <span class="nx">mammal</span><span class="p">({</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Herb</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">saying</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Cheers!</span><span class="dl">'</span>
+<span class="p">})</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myMammal</span><span class="p">.</span><span class="nx">getName</span><span class="p">())</span> <span class="c1">//Herb</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myMammal</span><span class="p">.</span><span class="nx">says</span><span class="p">())</span> <span class="c1">//Cheers!</span>
+</code></pre></div></div>
+
+<p>也可以参考上一篇文章，<a href="http://gaohaoyang.github.io/2016/06/07/JavaScript-good-parts-note1/#section-34">JavaScript 语言精粹笔记1-语法、对象、函数 之模块部分</a>。</p>
+
+<h3 id="部件">部件</h3>
+
+<p>这一部分看的不是特别懂，我想等我学完ES2015中的类和模块部分后再看看吧。</p>
+
+<h2 id="数组">数组</h2>
+
+<h3 id="数组字面量">数组字面量</h3>
+
+<p>一个数组字面量是在一对方括号中包围零个或多个用逗号分隔的值的表达式。</p>
+
+<p>再大多数语言中，一个数组的多有元素都要求是相同的类型。JavaScript 允许数组包含任意混合类型的值。</p>
+
+<h3 id="长度">长度</h3>
+
+<p>JavaScript 数组的<code class="language-plaintext highlighter-rouge">length</code>属性是没有上界的。如果用大于或等于当前<code class="language-plaintext highlighter-rouge">length</code>的数字作为下标来存储一个元素，那么<code class="language-plaintext highlighter-rouge">length</code>值会被增大以容纳新元素，不会发生数组越界错误。</p>
+
+<h3 id="删除">删除</h3>
+
+<p>数组也是对象，可以用<code class="language-plaintext highlighter-rouge">delete</code>来删除元素</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">one</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">two</span><span class="dl">'</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="dl">'</span><span class="s1">four</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">wu</span><span class="dl">'</span><span class="p">]</span>
+
+<span class="k">delete</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1">//undefined</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="c1">//5</span>
+</code></pre></div></div>
+
+<p>可以使用<code class="language-plaintext highlighter-rouge">splice</code>方法，进行删除和修改操作。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">numbers</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1">//two</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="c1">//4</span>
+</code></pre></div></div>
+
+<h3 id="枚举">枚举</h3>
+
+<p>使用常规<code class="language-plaintext highlighter-rouge">for</code>循环即可，可以保证数组的顺序。</p>
+
+<h3 id="容易混淆的地方">容易混淆的地方</h3>
+
+<p>当属性名是小而连续的整数时，应该使用数组，否则使用对象。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span> <span class="c1">//object</span>
+</code></pre></div></div>
+
+<p>返回数组的类型是<code class="language-plaintext highlighter-rouge">object</code>，没有任何意义。</p>
+
+<p>判断数组类型的方法</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">numbers</span><span class="p">))</span> <span class="c1">//true</span>
+</code></pre></div></div>
+<p>ECMAScript 5.1 (ECMA-262) 和 ECMAScript 2015 (6th Edition, ECMA-262) 标准中的方法。</p>
+
+<p>或者下面这个方法。</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">is_array</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">[object Array]</span><span class="dl">'</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">is_array</span><span class="p">(</span><span class="nx">numbers</span><span class="p">))</span> <span class="c1">//true</span>
+</code></pre></div></div>
+
+<h3 id="方法">方法</h3>
+
+<p>数组的方法被存储在<code class="language-plaintext highlighter-rouge">Array.prototype</code>中的函数。</p>
+
+<p>数组是对象，因此<code class="language-plaintext highlighter-rouge">Array.prototype</code>也是可扩充的。</p>
+
+<h3 id="指定初始值">指定初始值</h3>
+
+<p>JavaScript 的数组不会预制值。</p>
+
+<p>JavaScript 没有多维数组，单项大多数类 C 语言一样，支持元素为数组的数组。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">matrix</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">]</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span> <span class="c1">//6</span>
+</code></pre></div></div>
+
+<h2 id="正则表达式">正则表达式</h2>
+
+<p>关于正则表达式，以前的博文写的比较多了，详情见：</p>
+
+<p><a href="http://gaohaoyang.github.io/2015/04/22/baidu-ife-2-javascript/#section-10">百度Web前端技术学院(2)-JavaScript 基础 之正则表达式部分1</a></p>
+
+<p><a href="http://gaohaoyang.github.io/2015/04/22/baidu-ife-2-javascript/#section-12">百度Web前端技术学院(2)-JavaScript 基础 之正则表达式部分2</a></p>
+
+<p><a href="http://gaohaoyang.github.io/2016/05/06/regular-expression-group/">浅谈正则表达式中的分组和引用</a></p>
+:ET

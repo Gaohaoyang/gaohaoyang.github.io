@@ -1,0 +1,99 @@
+I"k<ul id="markdown-toc">
+  <li><a href="#如何使用搜索引擎" id="markdown-toc-如何使用搜索引擎">如何使用搜索引擎</a></li>
+  <li><a href="#具体方法" id="markdown-toc-具体方法">具体方法</a>    <ul>
+      <li><a href="#configuring-a-remote-for-a-fork" id="markdown-toc-configuring-a-remote-for-a-fork">Configuring a remote for a fork</a></li>
+      <li><a href="#syncing-a-fork" id="markdown-toc-syncing-a-fork">Syncing a fork</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>fork 了别人的仓库后，原作者又更新了仓库，如何将自己的代码和原仓库保持一致？本文将给你解答。</p>
+
+<h2 id="如何使用搜索引擎">如何使用搜索引擎</h2>
+
+<p>其实这个问题并不难，我又被坑了。百度搜的东西不靠谱啊，以后这种问题一定要用<strong>英文</strong>在 <a href="http://www.google.com">Google</a> 或者 <a href="http://cn.bing.com/">Bing</a> 上搜索，这样才能搜到原汁原味的答案。就当是一个教训吧。</p>
+
+<p>搜索 fork sync，就可以看到 GitHub 自己的帮助文档 <a href="https://help.github.com/articles/syncing-a-fork/">Syncing a fork</a> 点进去看这篇的时候，注意到有一个 Tip: Before you can sync your fork with an upstream repository, you must <a href="https://help.github.com/articles/configuring-a-remote-for-a-fork/">configure a remote that points to the upstream repository</a> in Git.</p>
+
+<p>根据这两篇文章，问题迎刃而解！</p>
+
+<h2 id="具体方法">具体方法</h2>
+
+<h3 id="configuring-a-remote-for-a-fork">Configuring a remote for a fork</h3>
+
+<ul>
+  <li>
+    <p>给 fork 配置一个 remote</p>
+  </li>
+  <li>
+    <p>主要使用 <code class="language-plaintext highlighter-rouge">git remote -v</code> 查看远程状态。</p>
+  </li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote -v
+# origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)
+# origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)
+</code></pre></div></div>
+
+<ul>
+  <li>添加一个将被同步给 fork 远程的上游仓库</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git
+</code></pre></div></div>
+
+<ul>
+  <li>再次查看状态确认是否配置成功。</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote -v
+# origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)
+# origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)
+# upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (fetch)
+# upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (push)
+</code></pre></div></div>
+
+<h3 id="syncing-a-fork">Syncing a fork</h3>
+
+<ul>
+  <li>从上游仓库 fetch 分支和提交点，传送到本地，并会被存储在一个本地分支 upstream/master <br />
+<code class="language-plaintext highlighter-rouge">git fetch upstream</code></li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git fetch upstream
+# remote: Counting objects: 75, done.
+# remote: Compressing objects: 100% (53/53), done.
+# remote: Total 62 (delta 27), reused 44 (delta 9)
+# Unpacking objects: 100% (62/62), done.
+# From https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY
+#  * [new branch]      master     -&gt; upstream/master
+</code></pre></div></div>
+
+<ul>
+  <li>切换到本地主分支(如果不在的话)  <br />
+<code class="language-plaintext highlighter-rouge">git checkout master</code></li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout master
+# Switched to branch 'master'
+</code></pre></div></div>
+
+<ul>
+  <li>把 upstream/master 分支合并到本地 master 上，这样就完成了同步，并且不会丢掉本地修改的内容。  <br />
+<code class="language-plaintext highlighter-rouge">git merge upstream/master</code></li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git merge upstream/master
+# Updating a422352..5fdff0f
+# Fast-forward
+#  README                    |    9 -------
+#  README.md                 |    7 ++++++
+#  2 files changed, 7 insertions(+), 9 deletions(-)
+#  delete mode 100644 README
+#  create mode 100644 README.md
+</code></pre></div></div>
+
+<ul>
+  <li>如果想更新到 GitHub 的 fork 上，直接 <code class="language-plaintext highlighter-rouge">git push origin master</code> 就好了。</li>
+</ul>
+:ET

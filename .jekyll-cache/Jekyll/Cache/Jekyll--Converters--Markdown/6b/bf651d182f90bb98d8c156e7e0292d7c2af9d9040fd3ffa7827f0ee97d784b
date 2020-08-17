@@ -1,0 +1,16 @@
+I"<ul id="markdown-toc">
+  <li><a href="#问题" id="markdown-toc-问题">问题</a></li>
+</ul>
+
+<p>由正则表达式如何匹配相同字符出发，讲讲正则表达式中的选择、分组和引用。</p>
+
+<h2 id="问题">问题</h2>
+
+<p>在外刊君读者群中看到有人提出这样的一个需求：</p>
+
+<blockquote>
+  <p>把字符串切成连续相同字符的正则怎么写？比如<code class="language-plaintext highlighter-rouge">abbcccdddd</code>切成<code class="language-plaintext highlighter-rouge">a,bb,ccc,dddd</code></p>
+</blockquote>
+
+<p>之前我对正则表达式也是略有研究，想尝试一下。其实我对正则表达式的学习基本完全来源于犀牛书的第10章，真正看懂这一章，我觉得操作正则表达式应该不在话下。</p>
+:ET

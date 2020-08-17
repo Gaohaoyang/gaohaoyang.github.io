@@ -1,0 +1,845 @@
+I"�"<ul id="markdown-toc">
+  <li><a href="#为什么使用-useeffect" id="markdown-toc-为什么使用-useeffect">为什么使用 useEffect</a>    <ul>
+      <li><a href="#生命周期中写逻辑的问题" id="markdown-toc-生命周期中写逻辑的问题">生命周期中写逻辑的问题</a></li>
+      <li><a href="#useeffect-解决的问题" id="markdown-toc-useeffect-解决的问题">useEffect 解决的问题</a></li>
+    </ul>
+  </li>
+  <li><a href="#useeffect-after-render-的使用" id="markdown-toc-useeffect-after-render-的使用">useEffect After Render 的使用</a>    <ul>
+      <li><a href="#class-组件的写法示例" id="markdown-toc-class-组件的写法示例">Class 组件的写法示例</a></li>
+      <li><a href="#使用-useeffect-改写上述示例" id="markdown-toc-使用-useeffect-改写上述示例">使用 useEffect 改写上述示例</a></li>
+    </ul>
+  </li>
+  <li><a href="#有条件地执行-useeffect" id="markdown-toc-有条件地执行-useeffect">有条件地执行 useEffect</a>    <ul>
+      <li><a href="#class-组件的写法示例-1" id="markdown-toc-class-组件的写法示例-1">Class 组件的写法示例</a></li>
+      <li><a href="#useeffect-的写法" id="markdown-toc-useeffect-的写法">useEffect 的写法</a></li>
+    </ul>
+  </li>
+  <li><a href="#只执行1次-useeffect" id="markdown-toc-只执行1次-useeffect">只执行1次 useEffect</a>    <ul>
+      <li><a href="#记录鼠标位置示例-class-写法" id="markdown-toc-记录鼠标位置示例-class-写法">记录鼠标位置示例 Class 写法</a></li>
+      <li><a href="#useeffect-中记录鼠标坐标" id="markdown-toc-useeffect-中记录鼠标坐标">useEffect 中记录鼠标坐标</a></li>
+    </ul>
+  </li>
+  <li><a href="#需要清除的-effect" id="markdown-toc-需要清除的-effect">需要清除的 Effect</a>    <ul>
+      <li><a href="#显示与移除组件" id="markdown-toc-显示与移除组件">显示与移除组件</a></li>
+      <li><a href="#componentwillunmount" id="markdown-toc-componentwillunmount">componentWillUnmount</a></li>
+    </ul>
+  </li>
+  <li><a href="#useeffect-中依赖错误导致的-bug" id="markdown-toc-useeffect-中依赖错误导致的-bug">useEffect 中依赖错误导致的 bug</a>    <ul>
+      <li><a href="#class-组件示例" id="markdown-toc-class-组件示例">Class 组件示例</a></li>
+      <li><a href="#hooks-示例" id="markdown-toc-hooks-示例">hooks 示例</a></li>
+      <li><a href="#多个-useeffect" id="markdown-toc-多个-useeffect">多个 useEffect</a></li>
+    </ul>
+  </li>
+  <li><a href="#fetch-data-with-effect-hook" id="markdown-toc-fetch-data-with-effect-hook">Fetch Data with Effect Hook</a>    <ul>
+      <li><a href="#简单获取数据" id="markdown-toc-简单获取数据">简单获取数据</a></li>
+      <li><a href="#输入id获取不同数据" id="markdown-toc-输入id获取不同数据">输入id获取不同数据</a></li>
+      <li><a href="#button-点击触发-effect" id="markdown-toc-button-点击触发-effect">button 点击触发 effect</a></li>
+    </ul>
+  </li>
+  <li><a href="#小结" id="markdown-toc-小结">小结</a></li>
+</ul>
+
+<p>掌握 React Hooks api 将更好的帮助你在工作中使用，对 React 的掌握更上一层楼。本系列将使用大量实例代码和效果展示，非常易于初学者和复习使用。</p>
+
+<p>今天我们讲讲 useEffect 的使用方法。</p>
+
+<h2 id="为什么使用-useeffect">为什么使用 useEffect</h2>
+
+<h3 id="生命周期中写逻辑的问题">生命周期中写逻辑的问题</h3>
+
+<p>react 中旧的生命周期可能会有副作用，比如页面的 title 要展示点击次数时，代码如下：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span><span class="p">}</span><span class="s2"> times`</span>
+<span class="p">}</span>
+<span class="nx">componentDidUpdate</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span><span class="p">}</span><span class="s2"> times`</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>在 componentDidMount 和 componentDidUpdate 中都写了同样的代码，我们不能在组件的生命周期中挂载一次，这就导致了代码重复的问题。</p>
+
+<p>另一个例子，页面中包含了倒计时，并且在页面销毁时要清除倒计时 timer</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">interval</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">tick</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">componentWillUnmount</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">clearInterval</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">interval</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>如果这个组件比较复杂，同时包含了上述的两种逻辑，那么代码如下：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span><span class="p">}</span><span class="s2"> times`</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">interval</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">tick</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">componentDidUpdate</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span><span class="p">}</span><span class="s2"> times`</span>
+<span class="p">}</span>
+<span class="nx">componentWillUnmount</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">clearInterval</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">interval</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>我们看到2个问题</p>
+
+<ol>
+  <li>代码重复。设置标题的代码重复了1遍</li>
+  <li>代码分散。逻辑看起来就分散在了组件生命周期的各个地方</li>
+</ol>
+
+<p>因此，我们需要更好的方法解决</p>
+
+<h3 id="useeffect-解决的问题">useEffect 解决的问题</h3>
+
+<ul>
+  <li>EffectHook 用于函数式组件中副作用，执行一些相关的操作，解决上述的问题</li>
+  <li>可以认为是 componentDidMount, componentDidUpdate, componentWillUnmount 的替代品</li>
+</ul>
+
+<p>接下来学习如何使用 useEffect。</p>
+
+<h2 id="useeffect-after-render-的使用">useEffect After Render 的使用</h2>
+
+<p>举个例子，通过一个点击按钮，修改页面 title 的例子来说明</p>
+
+<h3 id="class-组件的写法示例">Class 组件的写法示例</h3>
+
+<p>7ClassCounter.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">class</span> <span class="nx">ClassCounter</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+
+  <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">count</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">}</span>
+
+  <span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span><span class="p">}</span><span class="s2"> times`</span>
+  <span class="p">}</span>
+  <span class="nx">componentDidUpdate</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span><span class="p">}</span><span class="s2"> times`</span>
+  <span class="p">}</span>
+
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+            <span class="na">count</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span>
+          <span class="p">})</span>
+        <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
+          Clicked <span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span><span class="si">}</span> times
+        <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">ClassCounter</span>
+</code></pre></div></div>
+
+<p>App.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="dl">'</span><span class="s1">./App.css</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="nx">ClassCounter</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./components/7ClassCounter</span><span class="dl">'</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">ClassCounter</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span>
+
+</code></pre></div></div>
+
+<p>效果如下</p>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1yhhavy_1gK0jSZFqXXcpaXXa-418-215.gif" alt="" /></p>
+
+<h3 id="使用-useeffect-改写上述示例">使用 useEffect 改写上述示例</h3>
+
+<p>接下来使用函数时组件实现上述的例子</p>
+
+<p>7HookCounter.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">HookCounter</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">setCount</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">count</span><span class="p">}</span><span class="s2"> times`</span>
+  <span class="p">})</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">setCount</span><span class="p">(</span><span class="nx">prevCount</span> <span class="o">=&gt;</span> <span class="nx">prevCount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="p">}</span><span class="si">}</span> <span class="p">&gt;</span>Clicked <span class="si">{</span><span class="nx">count</span><span class="si">}</span> times<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">HookCounter</span>
+</code></pre></div></div>
+
+<p>效果和 Class 组件相同</p>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1yhhavy_1gK0jSZFqXXcpaXXa-418-215.gif" alt="" /></p>
+
+<p>可以看到 useEffect 的第一个入参是一个匿名函数，它会在每次 render 后调用。在第一次 render 和后续的更新 render 都会被调用。</p>
+
+<p>另外，useEffect 写在函数式组件内，这样就可以直接拿到 props 和 state 的值，不用写 this 之类的代码。</p>
+
+<h2 id="有条件地执行-useeffect">有条件地执行 useEffect</h2>
+
+<p>上一节了解到 useEffect 会在每次 render 后执行里面的函数，这可能会有一些性能问题，接下来就讲一讲如何有条件地执行 useEffect 中的匿名函数。</p>
+
+<p>在上一节的示例上进行扩展一个输入 name 的功能，通过判断只执行 count 变化带来的逻辑。</p>
+
+<h3 id="class-组件的写法示例-1">Class 组件的写法示例</h3>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kr">interface</span> <span class="nx">stateType</span> <span class="p">{</span>
+  <span class="nl">count</span><span class="p">:</span> <span class="nx">number</span>
+  <span class="nx">name</span><span class="p">:</span> <span class="nx">string</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">ClassCounter</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+
+  <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">count</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+  <span class="p">}</span>
+
+  <span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span><span class="p">}</span><span class="s2"> times`</span>
+  <span class="p">}</span>
+
+  <span class="nx">componentDidUpdate</span><span class="p">(</span><span class="nx">prevProps</span><span class="p">:</span> <span class="nx">any</span><span class="p">,</span> <span class="nx">prevState</span><span class="p">:</span> <span class="nx">stateType</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">prevState</span><span class="p">.</span><span class="nx">count</span> <span class="o">!==</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Update title</span><span class="dl">'</span><span class="p">)</span>
+      <span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span><span class="p">}</span><span class="s2"> times`</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span>
+          <span class="na">type</span><span class="p">=</span><span class="s">"text"</span>
+          <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span>
+          <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+              <span class="na">name</span><span class="p">:</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span>
+            <span class="p">})</span>
+          <span class="p">}</span><span class="si">}</span>
+        <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+            <span class="na">count</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span>
+          <span class="p">})</span>
+        <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
+          Clicked <span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span><span class="si">}</span> times
+        <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">ClassCounter</span>
+</code></pre></div></div>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1aX7.voz1gK0jSZLeXXb9kVXa-610-312.gif" alt="" /></p>
+
+<p>为了更好的性能，注意代码中判断了 prevState</p>
+
+<h3 id="useeffect-的写法">useEffect 的写法</h3>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">HookCounter</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">setCount</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">name</span><span class="p">,</span> <span class="nx">setName</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">''</span><span class="p">)</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">useEffect - update title</span><span class="dl">'</span><span class="p">)</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">`You clicked </span><span class="p">${</span><span class="nx">count</span><span class="p">}</span><span class="s2"> times`</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">count</span><span class="p">])</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span>
+        <span class="na">type</span><span class="p">=</span><span class="s">"text"</span>
+        <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">name</span><span class="si">}</span>
+        <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">setName</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span>
+        <span class="p">}</span><span class="si">}</span>
+      <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">setCount</span><span class="p">(</span><span class="nx">prevCount</span> <span class="o">=&gt;</span> <span class="nx">prevCount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="p">}</span><span class="si">}</span> <span class="p">&gt;</span>Clicked <span class="si">{</span><span class="nx">count</span><span class="si">}</span> times<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">HookCounter</span>
+</code></pre></div></div>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1efJbvAY2gK0jSZFgXXc5OFXa-610-312.gif" alt="" /></p>
+
+<p>注意到 useEffect 的第二个参数 <code class="language-plaintext highlighter-rouge">[count]</code>，这个参数是一个数组，元素是要被观察的 state 或 props，只有指定的这个变量发生变化时，才会触发 useEffect 中的第一个参数匿名函数的执行。这有利于性能的保证。</p>
+
+<h2 id="只执行1次-useeffect">只执行1次 useEffect</h2>
+
+<p>本节通过一个记录鼠标坐标的示例研究一下如何只执行一次 useEffect</p>
+
+<h3 id="记录鼠标位置示例-class-写法">记录鼠标位置示例 Class 写法</h3>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">class</span> <span class="nx">RunEffectsOnlyOnce</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">x</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">y</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">}</span>
+
+  <span class="nx">logMousePos</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">:</span> <span class="nx">MouseEvent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+      <span class="na">x</span><span class="p">:</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientX</span><span class="p">,</span>
+      <span class="na">y</span><span class="p">:</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span>
+    <span class="p">})</span>
+  <span class="p">}</span>
+
+  <span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">mousemove</span><span class="dl">'</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">logMousePos</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+        Y - <span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">y</span><span class="si">}</span>, X - <span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">x</span><span class="si">}</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">RunEffectsOnlyOnce</span>
+</code></pre></div></div>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1ydpavET1gK0jSZFrXXcNCXXa-295-225.gif" alt="" /></p>
+
+<p>这里只在 componentDidMount 中做了事件绑定，只执行了一次事件绑定</p>
+
+<h3 id="useeffect-中记录鼠标坐标">useEffect 中记录鼠标坐标</h3>
+
+<p>上述效果改造为函数式组件</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">RunEffectsOnlyOnce</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">x</span><span class="p">,</span> <span class="nx">setX</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">y</span><span class="p">,</span> <span class="nx">setY</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+  <span class="kd">const</span> <span class="nx">logMousePos</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">:</span> <span class="nx">MouseEvent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setX</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">clientX</span><span class="p">)</span>
+    <span class="nx">setY</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">addEventListener</span><span class="dl">'</span><span class="p">)</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">mousemove</span><span class="dl">'</span><span class="p">,</span> <span class="nx">logMousePos</span><span class="p">)</span>
+  <span class="p">},</span> <span class="p">[])</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      Y - <span class="si">{</span><span class="nx">y</span><span class="si">}</span>, X - <span class="si">{</span><span class="nx">x</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">RunEffectsOnlyOnce</span>
+</code></pre></div></div>
+
+<p>注意到 useEffect 方法的第二个参数传入一个空数组，有效的避免了多次调用的问题。</p>
+
+<blockquote>
+  <p>如果想执行只运行一次的 effect（仅在组件挂载和卸载时执行），可以传递一个空数组（[]）作为第二个参数。这就告诉 React 你的 effect 不依赖于 props 或 state 中的任何值，所以它永远都不需要重复执行。这并不属于特殊情况 —— 它依然遵循依赖数组的工作方式。</p>
+
+  <p>如果你传入了一个空数组（[]），effect 内部的 props 和 state 就会一直拥有其初始值。尽管传入 [] 作为第二个参数更接近大家更熟悉的 <code class="language-plaintext highlighter-rouge">componentDidMount</code> 和 <code class="language-plaintext highlighter-rouge">componentWillUnmount</code> 思维模式，但我们有更好的方式来避免过于频繁的重复调用 effect。除此之外，请记得 React 会等待浏览器完成画面渲染之后才会延迟调用 <code class="language-plaintext highlighter-rouge">useEffect</code>，因此会使得额外操作很方便。</p>
+</blockquote>
+
+<h2 id="需要清除的-effect">需要清除的 Effect</h2>
+
+<p>本节研究如何实现 willUnmount 这个生命周期，实现组件销毁时，清除 effect 逻辑。</p>
+
+<p>在上一个demo中增加一个逻辑，点击按钮展示或隐藏鼠标的坐标组件。</p>
+
+<h3 id="显示与移除组件">显示与移除组件</h3>
+
+<p>共三个文件，结构如下</p>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1R_pPFHY1gK0jSZTEXXXDQVXa-309-277.png" alt="" /></p>
+
+<!-- ``` plantuml
+
+skinparam style strictuml
+
+App -- MouseContainer
+MouseContainer -- MousePos
+
+``` -->
+
+<p>App.tsx</p>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="dl">'</span><span class="s1">./App.css</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="nx">MouseContainer</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./components/10MouseContainer</span><span class="dl">'</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">MouseContainer</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span>
+
+</code></pre></div></div>
+
+<p>MouseContainer.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="nx">RunEffectsOnlyOnce</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./9RunEffectsOnlyOnce</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">MouseContainer</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">display</span><span class="p">,</span> <span class="nx">setDisplay</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">setDisplay</span><span class="p">(</span><span class="o">!</span><span class="nx">display</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>Toggle display<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="si">{</span><span class="nx">display</span> <span class="o">&amp;&amp;</span> <span class="p">&lt;</span><span class="nc">RunEffectsOnlyOnce</span> <span class="p">/&gt;</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">MouseContainer</span>
+</code></pre></div></div>
+
+<p>MousePos</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">RunEffectsOnlyOnce</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">x</span><span class="p">,</span> <span class="nx">setX</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">y</span><span class="p">,</span> <span class="nx">setY</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+  <span class="kd">const</span> <span class="nx">logMousePos</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">:</span> <span class="nx">MouseEvent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setX</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">clientX</span><span class="p">)</span>
+    <span class="nx">setY</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">addEventListener</span><span class="dl">'</span><span class="p">)</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">mousemove</span><span class="dl">'</span><span class="p">,</span> <span class="nx">logMousePos</span><span class="p">)</span>
+  <span class="p">},</span> <span class="p">[])</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      Y - <span class="si">{</span><span class="nx">y</span><span class="si">}</span>, X - <span class="si">{</span><span class="nx">x</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">RunEffectsOnlyOnce</span>
+</code></pre></div></div>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1nYXavEH1gK0jSZSyXXXtlpXa-579-284.gif" alt="" /></p>
+
+<p>执行后发现隐藏了位置组件后，有一个错误警告。这是因为没有正确卸载子组件导致的。mousemove 事件依然被监听着和执行。并且可能会导致内存泄露。</p>
+
+<h3 id="componentwillunmount">componentWillUnmount</h3>
+
+<p>因此要在卸载组件时，确保所有的监听和订阅都已经被移除。若是在 Class 组件中，可以如下代码</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">componentWillUnmount</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">mousemove</span><span class="dl">'</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">logMousePos</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>但是在 useEffect 该如何写呢？请往下看</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">addEventListener</span><span class="dl">'</span><span class="p">)</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">mousemove</span><span class="dl">'</span><span class="p">,</span> <span class="nx">logMousePos</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nb">document</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">mousemove</span><span class="dl">'</span><span class="p">,</span> <span class="nx">logMousePos</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">},</span> <span class="p">[])</span>
+</code></pre></div></div>
+
+<p>在 useEffect 的第一个参数中添加一个 return 匿名函数，这个匿名函数将在组件卸载的时候执行，因此我们在这里移除监听就好了。</p>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1eAcBvX67gK0jSZPfXXahhFXa-579-284.gif" alt="" /></p>
+
+<p>如果需要一些在组件卸载时清除功能的代码，就写在 useEffect 第一个参数的返回匿名函数中吧。</p>
+
+<h2 id="useeffect-中依赖错误导致的-bug">useEffect 中依赖错误导致的 bug</h2>
+
+<p>useEffect 的依赖(第二个参数)错误导致的问题。</p>
+
+<p>以每秒 +1 的计数器为示例</p>
+
+<h3 id="class-组件示例">Class 组件示例</h3>
+
+<p>11Counter.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * 每秒 +1 的计数器
+ */</span>
+
+<span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">class</span> <span class="nx">Counter</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+
+  <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">count</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">}</span>
+
+  <span class="nl">timer</span><span class="p">:</span> <span class="nx">number</span> <span class="o">|</span> <span class="kc">undefined</span>
+
+  <span class="nx">tick</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+      <span class="na">count</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="p">})</span>
+  <span class="p">}</span>
+
+  <span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">timer</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">setInterval</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">tick</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="nx">componentWillUnmount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">clearInterval</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">timer</span><span class="p">)</span>
+  <span class="p">}</span>
+
+
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Counter</span>
+
+</code></pre></div></div>
+
+<p>App.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="dl">'</span><span class="s1">./App.css</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="nx">IntervalCounter</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./components/11Counter</span><span class="dl">'</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">IntervalCounter</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span>
+
+</code></pre></div></div>
+
+<p>执行没有问题，效果如下</p>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1CiNxx9f2gK0jSZFPXXXsopXa-487-270.gif" alt="" /></p>
+
+<h3 id="hooks-示例">hooks 示例</h3>
+
+<p>IntervalCounterHooks.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">IntervalCouterHooks</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">setCount</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+  <span class="kd">const</span> <span class="nx">tick</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setCount</span><span class="p">(</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">interval</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(</span><span class="nx">tick</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">interval</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">},</span> <span class="p">[])</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="si">{</span><span class="nx">count</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">IntervalCouterHooks</span>
+
+</code></pre></div></div>
+
+<p>App.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="dl">'</span><span class="s1">./App.css</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="nx">IntervalCounter</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./components/11Counter</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">IntervalCounterHooks</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./components/11IntervalCouterHooks</span><span class="dl">'</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">IntervalCounter</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nc">IntervalCounterHooks</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span>
+
+</code></pre></div></div>
+
+<p>但是计数器没有正常工作，效果如下</p>
+
+<p><img src="https://gw.alicdn.com/tfs/TB13TdBx7T2gK0jSZPcXXcKkpXa-425-270.gif" alt="" /></p>
+
+<p>传入空的依赖数组 <code class="language-plaintext highlighter-rouge">[]</code>，意味着该 hook 只在组件挂载时运行一次，并非重新渲染时。但如此会有问题，在 <code class="language-plaintext highlighter-rouge">setInterval</code> <code class="language-plaintext highlighter-rouge">的回调中，count</code> 的值不会发生变化。因为当 effect 执行时，我们会创建一个闭包，并将 <code class="language-plaintext highlighter-rouge">count</code> 的值被保存在该闭包当中，且初值为 0。每隔一秒，回调就会执行 <code class="language-plaintext highlighter-rouge">setCount(0 + 1)</code>，因此，<code class="language-plaintext highlighter-rouge">count</code> 永远不会超过 1。</p>
+
+<p>解法一：这里我们不能将 useEffect 的第二个参数设置为空数组，而是 <code class="language-plaintext highlighter-rouge">[count]</code>。</p>
+
+<p>指定 <code class="language-plaintext highlighter-rouge">[count]</code> 作为依赖列表就能修复这个 Bug，但会导致每次改变发生时定时器都被重置。事实上，每个 <code class="language-plaintext highlighter-rouge">setInterval</code> 在被清除前（类似于 setTimeout）都会调用一次。但这并不是我们想要的。要解决这个问题，我们可以使用 setState 的函数式更新形式。它允许我们指定 state 该如何改变而不用引用当前 state，即下面的解法二</p>
+
+<p>解法二：</p>
+
+<p>将</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">setCount</span><span class="p">(</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>改为</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">setCount</span><span class="p">((</span><span class="nx">preCount</span><span class="p">)</span> <span class="o">=&gt;</span>  <span class="nx">preCount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>useEffect 的依赖数组里依然使用空数组。这里设置了 count 的值是和上一个值有关，也解决了问题。此时，<code class="language-plaintext highlighter-rouge">setInterval</code> 的回调依旧每秒调用一次，但每次 setCount 内部的回调取到的 <code class="language-plaintext highlighter-rouge">count</code> 是最新值（在回调中变量命名为 c）。</p>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1eq1qAeT2gK0jSZFvXXXnFXXa-433-292.gif" alt="" /></p>
+
+<h3 id="多个-useeffect">多个 useEffect</h3>
+
+<p>如果代码中有多个业务逻辑，可以将他们写在不同的 useEffect 中，并且可以写多个 useState 和他们匹配分组使用，会让业务逻辑更加清晰。</p>
+
+<h2 id="fetch-data-with-effect-hook">Fetch Data with Effect Hook</h2>
+
+<h3 id="简单获取数据">简单获取数据</h3>
+
+<p>本节讲述使用 useEffect 来获取数据，本文使用 axios 库示例。</p>
+
+<p>https://jsonplaceholder.typicode.com/ 网站提供了示例的请求，返回了一些 json 数据。</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="nx">axios</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span>
+
+<span class="kr">interface</span> <span class="nx">postType</span> <span class="p">{</span>
+  <span class="nl">userId</span><span class="p">:</span> <span class="nx">number</span>
+  <span class="nx">id</span><span class="p">:</span> <span class="nx">number</span>
+  <span class="nx">title</span><span class="p">:</span> <span class="nx">string</span>
+  <span class="nx">body</span><span class="p">:</span> <span class="nx">string</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">FetchData</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">posts</span><span class="p">,</span> <span class="nx">setPosts</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="o">&lt;</span><span class="nx">postType</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">([])</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://jsonplaceholder.typicode.com/posts</span><span class="dl">'</span><span class="p">).</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="na">data</span><span class="p">:</span> <span class="nx">postType</span><span class="p">[]</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">data</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+      <span class="nx">setPosts</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+    <span class="p">}).</span><span class="k">catch</span><span class="p">((</span><span class="nx">rej</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">rej</span><span class="p">)</span>
+    <span class="p">})</span>
+  <span class="p">},</span> <span class="p">[])</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+        <span class="si">{</span>
+          <span class="nx">posts</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+            <span class="p">&lt;</span><span class="nt">li</span>
+              <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span>
+            <span class="p">&gt;</span>
+              <span class="si">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">title</span><span class="si">}</span>
+            <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+          <span class="p">))</span>
+        <span class="si">}</span>
+      <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">FetchData</span>
+</code></pre></div></div>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1UAWCAlr0gK0jSZFnXXbRRXXa-802-814.jpg" alt="" /></p>
+
+<p>这里注意 ts 在 useState 中的写法。</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">[</span><span class="nx">posts</span><span class="p">,</span> <span class="nx">setPosts</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="o">&lt;</span><span class="nx">postType</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">([])</span>
+</code></pre></div></div>
+
+<p>注意 useEffect 第二个依赖参数传入空数组，保证了 useEffect 只执行一次。</p>
+
+<h3 id="输入id获取不同数据">输入id获取不同数据</h3>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="nx">axios</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span>
+
+<span class="kr">interface</span> <span class="nx">postType</span> <span class="p">{</span>
+  <span class="nl">userId</span><span class="p">:</span> <span class="nx">number</span>
+  <span class="nx">id</span><span class="p">:</span> <span class="nx">number</span>
+  <span class="nx">title</span><span class="p">:</span> <span class="nx">string</span>
+  <span class="nx">body</span><span class="p">:</span> <span class="nx">string</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">FetchData</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">post</span><span class="p">,</span> <span class="nx">setPost</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="o">&lt;</span><span class="nx">postType</span><span class="o">&gt;</span><span class="p">()</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">id</span><span class="p">,</span> <span class="nx">setId</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">'</span><span class="s1">1</span><span class="dl">'</span><span class="p">)</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s2">`https://jsonplaceholder.typicode.com/posts/</span><span class="p">${</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">).</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="na">data</span><span class="p">:</span> <span class="nx">postType</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">data</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+        <span class="nx">setPost</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+      <span class="p">}).</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+      <span class="p">})</span>
+    <span class="p">}</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">id</span><span class="p">])</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span>
+        <span class="na">type</span><span class="p">=</span><span class="s">"text"</span>
+        <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">id</span><span class="si">}</span>
+        <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">setId</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span>
+        <span class="p">}</span><span class="si">}</span>
+      <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="si">{</span>
+          <span class="nx">post</span> <span class="o">&amp;&amp;</span> <span class="nx">post</span><span class="p">.</span><span class="nx">title</span>
+        <span class="si">}</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">FetchData</span>
+
+</code></pre></div></div>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1wvCvAXP7gK0jSZFjXXc5aXXa-432-292.gif" alt="" /></p>
+
+<h3 id="button-点击触发-effect">button 点击触发 effect</h3>
+
+<p>监听按钮点击触发变化，执行 effect 方法</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="nx">axios</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span>
+
+<span class="kr">interface</span> <span class="nx">postType</span> <span class="p">{</span>
+  <span class="nl">userId</span><span class="p">:</span> <span class="nx">number</span>
+  <span class="nx">id</span><span class="p">:</span> <span class="nx">number</span>
+  <span class="nx">title</span><span class="p">:</span> <span class="nx">string</span>
+  <span class="nx">body</span><span class="p">:</span> <span class="nx">string</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">FetchData</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">post</span><span class="p">,</span> <span class="nx">setPost</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="o">&lt;</span><span class="nx">postType</span><span class="o">&gt;</span><span class="p">()</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">id</span><span class="p">,</span> <span class="nx">setId</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">'</span><span class="s1">1</span><span class="dl">'</span><span class="p">)</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">idFromBtnClick</span><span class="p">,</span> <span class="nx">setIdFromBtnClick</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">'</span><span class="s1">1</span><span class="dl">'</span><span class="p">)</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">idFromBtnClick</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s2">`https://jsonplaceholder.typicode.com/posts/</span><span class="p">${</span><span class="nx">idFromBtnClick</span><span class="p">}</span><span class="s2">`</span><span class="p">).</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="na">data</span><span class="p">:</span> <span class="nx">postType</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">data</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+        <span class="nx">setPost</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+      <span class="p">}).</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+      <span class="p">})</span>
+    <span class="p">}</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">idFromBtnClick</span><span class="p">])</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span>
+        <span class="na">type</span><span class="p">=</span><span class="s">"text"</span>
+        <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">id</span><span class="si">}</span>
+        <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">setId</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span>
+        <span class="p">}</span><span class="si">}</span>
+      <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">setIdFromBtnClick</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span>
+        <span class="p">}</span><span class="si">}</span>
+      <span class="p">&gt;</span>Fetch Post<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="si">{</span>
+          <span class="nx">post</span> <span class="o">&amp;&amp;</span> <span class="nx">post</span><span class="p">.</span><span class="nx">title</span>
+        <span class="si">}</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">FetchData</span>
+</code></pre></div></div>
+
+<p><img src="https://gw.alicdn.com/tfs/TB1sH2tAi_1gK0jSZFqXXcpaXXa-432-292.gif" alt="" /></p>
+
+<h2 id="小结">小结</h2>
+
+<p>本章从为什么使用 useEffect 开始说起，用户解决代码重复代码分散的问题，useEffect 可以更好的组织代码。</p>
+
+<p>useEffect api 的用法，第一个参数为匿名函数，作为 effect 要执行的内容。第二个参数为数组，用于观察改变的 props 或 state 进行有条件的触发 effect，或者传入空数组，让 effect 只执行一次。useEffect 返回一个匿名函数，在组件销毁是执行，可以有效避免内存泄露的风险。</p>
+
+<p>最后举了几个例子来展示如何在 useEffect 中执行发起请求获取数据的逻辑。下一章将讲述 useContext 这个 api。</p>
+:ET

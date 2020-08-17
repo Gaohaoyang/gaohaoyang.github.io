@@ -1,0 +1,161 @@
+I"�"<ul id="markdown-toc">
+  <li><a href="#babel-cli" id="markdown-toc-babel-cli">babel-cli</a></li>
+  <li><a href="#在项目内运行-babel-cli" id="markdown-toc-在项目内运行-babel-cli">在项目内运行 babel-cli</a></li>
+  <li><a href="#配置babelrc" id="markdown-toc-配置babelrc">配置<code class="language-plaintext highlighter-rouge">.babelrc</code></a></li>
+  <li><a href="#配置jshintrc" id="markdown-toc-配置jshintrc">配置<code class="language-plaintext highlighter-rouge">.jshintrc</code></a></li>
+</ul>
+
+<p><a href="https://babeljs.io/">Babel</a> 用于将 ES6 的代码转化为 ES5，使得 ES6 可以在目前的浏览器环境下使用。学习使用 babel 是为了使用 ES2015 做准备。本文将介绍如何使用 babel，以及一些相关的配置。</p>
+
+<p><img src="https://babeljs.io/images/logo.svg" alt="" /></p>
+
+<p>学习 Babel 可以通过其手册 Babel handbook。</p>
+
+<ul>
+  <li><a href="https://github.com/thejameskyle/babel-handbook">babel-handbook</a></li>
+</ul>
+
+<p>其中包含多语言版本，分为<a href="https://github.com/thejameskyle/babel-handbook/blob/master/translations/zh-Hans/user-handbook.md">用户手册</a>和<a href="https://github.com/thejameskyle/babel-handbook/blob/master/translations/zh-Hans/plugin-handbook.md">插件手册</a>。这是一个很好的学习 Babel 的资料。</p>
+
+<h2 id="babel-cli">babel-cli</h2>
+
+<p>在 node 和 npm 环境安装好的前提下，安装 babel，如下：</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">--global</span> babel-cli
+</code></pre></div></div>
+
+<p>安装完成后就可以编译文件了。</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>babel main.js
+</code></pre></div></div>
+
+<p>编译后的文件显示在终端上，可以添加其他命令让它输出到指定文件下：</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>babel example.js <span class="nt">--out-file</span> compiled.js
+或
+babel example.js <span class="nt">-o</span> compiled.js
+</code></pre></div></div>
+
+<p>或将整个目录编译成一个新的目录：</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>babel src <span class="nt">--out-dir</span> lib
+或
+babel src <span class="nt">-d</span> lib
+</code></pre></div></div>
+
+<p>但这很麻烦，并且并不是一个很好的解决方案，请看下一节项目内运行 babel-cli。</p>
+
+<h2 id="在项目内运行-babel-cli">在项目内运行 babel-cli</h2>
+
+<p>初始化项目</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm init
+</code></pre></div></div>
+
+<p>再安装 babel-cli</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">--save-dev</span> babel-cli
+</code></pre></div></div>
+
+<p>项目中的<code class="language-plaintext highlighter-rouge">package.json</code>应该包含如下内容：</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"learn-es6"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"devDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"babel-cli"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.10.1"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>添加 npm scripts 命令。</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">{</span>
+  "name": "learn-es6",
+  "version": "1.0.0",
+<span class="gi">+   "scripts": {
++     "build": "babel src -d lib"
++   },
+</span>  "devDependencies": {
+    "babel-cli": "^6.10.1"
+  }
+<span class="err">}</span>
+</code></pre></div></div>
+
+<p>此时在终端里运行</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm run build
+</code></pre></div></div>
+
+<p>还不能成功编译，因为没有配置<code class="language-plaintext highlighter-rouge">.babelrc</code>文件。</p>
+
+<h2 id="配置babelrc">配置<code class="language-plaintext highlighter-rouge">.babelrc</code></h2>
+
+<p>通过配置<code class="language-plaintext highlighter-rouge">.babelrc</code>来告诉 babel 来做什么。</p>
+
+<p>在项目的根路径下创建<code class="language-plaintext highlighter-rouge">.babelrc</code>文件。然后输入以下内容作为开始：</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"presets"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nl">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>为了让 babel 将 ES2015 转化为 ES5，我们要安装如下：</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">--save-dev</span> babel-preset-es2015
+</code></pre></div></div>
+
+<p>安装完成后在<code class="language-plaintext highlighter-rouge">.babelrc</code>中添加参数：</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">{</span>
+    "presets": [
+<span class="gi">+       "es2015"
+</span>    ],
+    "plugins": []
+<span class="err">}</span>
+</code></pre></div></div>
+
+<p>现在在项目<code class="language-plaintext highlighter-rouge">src/main.js</code>中写一些 ES2015 的代码试试吧。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<p>在终端中输入命令</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm run build
+</code></pre></div></div>
+
+<p>执行后终端中显示：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; learn-es6@1.0.0 build c:\gitWorkSpace\learn-es6
+&gt; babel src -d lib
+</code></pre></div></div>
+
+<p>然后可以看到目录中出现了<code class="language-plaintext highlighter-rouge">lib/main.js</code></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="dl">"</span><span class="s2">use strict</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>即编译成功。</p>
+
+<h2 id="配置jshintrc">配置<code class="language-plaintext highlighter-rouge">.jshintrc</code></h2>
+
+<p>若编辑器中安装了 jshint 语法检查的插件。默认对于 ES2015 的代码可能会报错或者警告，看着可能会不爽。我们可以在配置文件中将它设置为允许 ES2015 的模式。</p>
+
+<p>在项目根目录下创建文件<code class="language-plaintext highlighter-rouge">.jshintrc</code>。内容如下：</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"asi"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"esversion"</span><span class="p">:</span><span class="w"> </span><span class="mi">2015</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>上述文件我分别设置了，使用无分号模式，es 版本使用 2015。</p>
+
+<p>关于<code class="language-plaintext highlighter-rouge">.jshintrc</code>的更详细配置可以参见官方示例：<a href="https://github.com/jshint/jshint/blob/master/examples/.jshintrc">https://github.com/jshint/jshint/blob/master/examples/.jshintrc</a></p>
+
+<p>好，babel 就说到这里，下面开始进入真正的 ES2015 的学习！</p>
+:ET

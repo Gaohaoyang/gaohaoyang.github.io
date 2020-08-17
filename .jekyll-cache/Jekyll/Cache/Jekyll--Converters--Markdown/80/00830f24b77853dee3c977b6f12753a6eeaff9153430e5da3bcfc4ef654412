@@ -1,0 +1,13 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#问题描述" id="markdown-toc-问题描述">问题描述</a></li>
+</ul>
+
+<h2 id="问题描述">问题描述</h2>
+
+<p>我们每次使用命令</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git@gitlab.xxx.com:xxxxx.git
+</code></pre></div></div>
+
+<p>默认 clone 的是这个仓库的 master 分支。如果最新的代码不在 master 分支上，该如何拿到呢？如下图所示，最新的代码可能在<code class="language-plaintext highlighter-rouge">daily/1.4.1</code>分支上，我们希望拿到这个分支上的代码。</p>
+:ET

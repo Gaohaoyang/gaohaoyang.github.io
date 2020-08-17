@@ -1,0 +1,193 @@
+I"�D<p>本系列将讲述 React Hooks 的使用方法，从 useState 开始，将包含如下内容：</p>
+
+<ul>
+  <li><a href="https://juejin.im/post/6844904111024930824">useState</a></li>
+  <li><a href="https://juejin.im/post/6844904153580306446">useEffect</a></li>
+  <li><a href="https://juejin.im/post/6844904153584500749">useContext</a></li>
+  <li><a href="https://juejin.im/post/6844904157892050957">useReducer</a></li>
+  <li><a href="https://juejin.im/post/6844904162040233997">useCallback</a></li>
+  <li><a href="https://juejin.im/post/6844904162304458760">useMemo</a></li>
+  <li><a href="https://juejin.im/post/6844904168562360328">useRef</a></li>
+  <li><a href="https://juejin.im/post/6844904169539633166">custom hooks</a></li>
+</ul>
+
+<p>掌握 React Hooks api 将更好的帮助你在工作中使用，对 React 的掌握更上一层楼。本系列将使用大量实例代码和效果展示，非常易于初学者和复习使用。</p>
+
+<p>上一章，我们学习了 useCallback 来进行性能优化，关于性能优化还有另一个 hook api，那就是 useMemo，下面我们一起通过一个例子来看看。</p>
+
+<h2 id="计数器示例">计数器示例</h2>
+
+<p>依然是计数器示例，创建2个计数器，并能区分当前是奇数或者偶数，为了模拟点击按钮时包含大量的计算逻辑影响性能，在判断偶数的方法中添加了没有用的计算逻辑，为了让性能差的明显。代码如下</p>
+
+<p>Counter.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">Counter</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">counterOne</span><span class="p">,</span> <span class="nx">setCounterOne</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">counterTwo</span><span class="p">,</span> <span class="nx">setCounterTwo</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+  <span class="kd">const</span> <span class="nx">incrementOne</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setCounterOne</span><span class="p">(</span><span class="nx">counterOne</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="kd">const</span> <span class="nx">incrementTwo</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setCounterTwo</span><span class="p">(</span><span class="nx">counterTwo</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="kd">const</span> <span class="nx">isEven</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">1000000000</span><span class="p">)</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="nx">counterOne</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">===</span> <span class="mi">0</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">incrementOne</span><span class="si">}</span>
+      <span class="p">&gt;</span>Count One = <span class="si">{</span><span class="nx">counterOne</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>
+        <span class="si">{</span>
+          <span class="nx">isEven</span><span class="p">()</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">even</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">odd</span><span class="dl">'</span>
+        <span class="si">}</span>
+      <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">incrementTwo</span><span class="si">}</span>
+      <span class="p">&gt;</span>Count Two = <span class="si">{</span><span class="nx">counterTwo</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Counter</span>
+</code></pre></div></div>
+
+<p>App.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+<span class="k">import</span> <span class="dl">'</span><span class="s1">./App.css</span><span class="dl">'</span>
+
+<span class="k">import</span> <span class="nx">Counter</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./components/27.Counter</span><span class="dl">'</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Counter</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span>
+</code></pre></div></div>
+
+<p>页面展示如下</p>
+
+<p><img src="https://user-gold-cdn.xitu.io/2020/5/18/1722810b8f2b8042?w=702&amp;h=286&amp;f=gif&amp;s=41101" alt="" /></p>
+
+<p>我们发现点击第一个按钮有较长的延迟，因为我们的判断偶数的逻辑中包含了大量的计算逻辑。但是，我们点击第二个按钮，也有较长的延迟！这很奇怪。</p>
+
+<p>这是因为，每次 state 更新时，组件会 rerender，isEven 会被执行，这就是我们点击第二个按钮时，也会卡的原因。我们需要优化，告诉 React 不要有不必要的计算，特别是这种计算量复杂的。</p>
+
+<p>在我们的示例中，我们要告诉 React，在点击第二个按钮时，不要执行 isEven 方法。这时就需要 useMemo hook 登场了。</p>
+
+<h2 id="usememo">useMemo</h2>
+
+<h3 id="优化示例">优化示例</h3>
+
+<p>与 useCallback 的用法类似。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">memoizedValue</span> <span class="o">=</span> <span class="nx">useMemo</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">computeExpensiveValue</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">),</span> <span class="p">[</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">]);</span>
+</code></pre></div></div>
+<blockquote>
+  <p>返回一个 memoized 值。
+把“创建”函数和依赖项数组作为参数传入 <code class="language-plaintext highlighter-rouge">useMemo</code>，它仅会在某个依赖项改变时才重新计算 memoized 值。这种优化有助于避免在每次渲染时都进行高开销的计算。</p>
+
+  <p>记住，传入 <code class="language-plaintext highlighter-rouge">useMemo</code> 的函数会在渲染期间执行。请不要在这个函数内部执行与渲染无关的操作，诸如副作用这类的操作属于 <code class="language-plaintext highlighter-rouge">useEffect</code> 的适用范畴，而不是 <code class="language-plaintext highlighter-rouge">useMemo</code>。</p>
+
+  <p>如果没有提供依赖项数组，<code class="language-plaintext highlighter-rouge">useMemo</code> 在每次渲染时都会计算新的值。</p>
+
+  <p><strong>你可以把 useMemo 作为性能优化的手段，但不要把它当成语义上的保证。</strong> 将来，React 可能会选择“遗忘”以前的一些 memoized 值，并在下次渲染时重新计算它们，比如为离屏组件释放内存。先编写在没有 useMemo 的情况下也可以执行的代码 —— 之后再在你的代码中添加 useMemo，以达到优化性能的目的。</p>
+</blockquote>
+
+<p>首先引入 useMemo</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useMemo</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+</code></pre></div></div>
+
+<p>然后将 isEven 方法使用 useMemo 改写，返回值赋给 isEven</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">isEven</span> <span class="o">=</span> <span class="nx">useMemo</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">while</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">1000000000</span><span class="p">)</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="k">return</span> <span class="nx">counterOne</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">===</span> <span class="mi">0</span>
+<span class="p">},</span> <span class="p">[</span><span class="nx">counterOne</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>最后记得修改 isEven 使用的地方，已经从一个方法变为了一个变量</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+  <span class="nx">isEven</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">even</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">odd</span><span class="dl">'</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>完整代码如下</p>
+
+<p>Counter.tsx</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useMemo</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
+
+<span class="kd">function</span> <span class="nx">Counter</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">counterOne</span><span class="p">,</span> <span class="nx">setCounterOne</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">counterTwo</span><span class="p">,</span> <span class="nx">setCounterTwo</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+  <span class="kd">const</span> <span class="nx">incrementOne</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setCounterOne</span><span class="p">(</span><span class="nx">counterOne</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="kd">const</span> <span class="nx">incrementTwo</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setCounterTwo</span><span class="p">(</span><span class="nx">counterTwo</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="kd">const</span> <span class="nx">isEven</span> <span class="o">=</span> <span class="nx">useMemo</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">1000000000</span><span class="p">)</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="nx">counterOne</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">===</span> <span class="mi">0</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">counterOne</span><span class="p">])</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">incrementOne</span><span class="si">}</span>
+      <span class="p">&gt;</span>Count One = <span class="si">{</span><span class="nx">counterOne</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>
+        <span class="si">{</span>
+          <span class="nx">isEven</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">even</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">odd</span><span class="dl">'</span>
+        <span class="si">}</span>
+      <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">incrementTwo</span><span class="si">}</span>
+      <span class="p">&gt;</span>Count Two = <span class="si">{</span><span class="nx">counterTwo</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Counter</span>
+</code></pre></div></div>
+
+<p>效果如下</p>
+
+<p><img src="https://user-gold-cdn.xitu.io/2020/5/18/1722810b9c48ecc9?w=702&amp;h=286&amp;f=gif&amp;s=40558" alt="" /></p>
+
+<p>我们看到点击第二个按钮时，不会有任何卡顿，这是因为使用了 useMemo 只依赖了 counterOne 变量，点击第二个按钮时，isEven 读取的是缓存值，不需要再重新计算是否为偶数。</p>
+
+<h3 id="usememo-与-usecallback-的区别">useMemo 与 useCallback 的区别</h3>
+
+<p>useCallback 是缓存了函数自身，而 useMemo 是缓存了函数的返回值。</p>
+
+<h2 id="小结">小结</h2>
+
+<p>本章通过示例展示了 useMemo 在性能优化中的作用。通过缓存函数的返回值，避免不必要的调用，从而避免了组件 rerender。</p>
+
+<p>最后有分析了 useMemo 与 useCallback 的区别，即 useMemo 是缓存了函数的返回值，useCallback 是缓存了函数自身。这两个 api 都是性能优化的方法。</p>
+:ET

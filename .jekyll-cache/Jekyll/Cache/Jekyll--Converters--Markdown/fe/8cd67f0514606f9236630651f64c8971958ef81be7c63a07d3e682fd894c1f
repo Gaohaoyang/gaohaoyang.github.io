@@ -1,0 +1,172 @@
+I"h<ul id="markdown-toc">
+  <li><a href="#色彩与图标" id="markdown-toc-色彩与图标">色彩与图标</a>    <ul>
+      <li><a href="#css滤镜" id="markdown-toc-css滤镜">CSS滤镜</a></li>
+      <li><a href="#渐变css代码生成器" id="markdown-toc-渐变css代码生成器">渐变CSS代码生成器</a></li>
+      <li><a href="#qq截图取色-16进制" id="markdown-toc-qq截图取色-16进制">QQ截图取色-16进制</a></li>
+      <li><a href="#配色" id="markdown-toc-配色">配色</a></li>
+      <li><a href="#图标" id="markdown-toc-图标">图标</a></li>
+    </ul>
+  </li>
+  <li><a href="#数据处理" id="markdown-toc-数据处理">数据处理</a>    <ul>
+      <li><a href="#json" id="markdown-toc-json">Json</a></li>
+    </ul>
+  </li>
+  <li><a href="#展示" id="markdown-toc-展示">展示</a>    <ul>
+      <li><a href="#revealjs" id="markdown-toc-revealjs">reveal.js</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>这里记录一些我用到的或者见到的比较好用方便的前端开发相关的工具吧。</p>
+
+<hr />
+
+<h2 id="色彩与图标">色彩与图标</h2>
+
+<h3 id="css滤镜">CSS滤镜</h3>
+
+<ul>
+  <li>
+    <p><a href="http://www.cssreflex.com/css-generators/filter">Filter Effects</a></p>
+
+    <p>界面：</p>
+
+    <p><img src="http://7q5cdt.com1.z0.glb.clouddn.com/blog-filter.png" alt="Filter Effects" /></p>
+
+    <p>有各种各样的滤镜效果，可以直接调节参数观察变化。</p>
+
+    <p>值得一提的是，这个网站还有很多其他 css 生成器。</p>
+
+    <p>比如：Border Image, Border Radius, Box Shadow, Filter Effects, Multi-Column, Outline Border, Overflow(x,y), RGBa, Text Rotate, Text Shadow, Textarea Resize, Transform</p>
+  </li>
+  <li>
+    <p>可以访问这里去使用这些 css 生成器：<a href="http://www.cssreflex.com/css-generators/">CSS Generators</a></p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="渐变css代码生成器">渐变CSS代码生成器</h3>
+
+<ul>
+  <li>
+    <p><a href="http://www.colorzilla.com/gradient-editor/">Ultimate CSS Gradient Generator</a></p>
+
+    <p>界面如下图：</p>
+
+    <p><img src="http://7q5cdt.com1.z0.glb.clouddn.com/blog-color-gradient.png" alt="Ultimate CSS Gradient Generator" /></p>
+
+    <p>目前 css 写渐变还很复杂，但是用了这个工具简直太方便了，直接生成 css 代码，还能兼容 ie。</p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="qq截图取色-16进制">QQ截图取色-16进制</h3>
+
+<p>在按下 <code class="language-plaintext highlighter-rouge">Ctrl+Shift+A</code> 后，再按一下 <code class="language-plaintext highlighter-rouge">Ctrl</code> 就可以看到截图框下面的颜色代码变成16进制的代码了。</p>
+
+<p>如下图：</p>
+
+<p>普通截图：</p>
+
+<p><img src="http://7q5cdt.com1.z0.glb.clouddn.com/blog-RBGScreenColor.png" alt="normal" /></p>
+
+<p>按住 <code class="language-plaintext highlighter-rouge">Ctrl</code>：</p>
+
+<p><img src="http://7q5cdt.com1.z0.glb.clouddn.com/blog-hexSreenColor.png" alt="press ctrl" /></p>
+
+<p>可以看到第一幅图中的 51, 51, 51 变成了 #333333。</p>
+
+<hr />
+
+<h3 id="配色">配色</h3>
+
+<ul>
+  <li>
+    <p><a href="http://nipponcolors.com/">nipponcolors</a></p>
+
+    <p>日本的一个配色网站。罗列了很多不饱和经典的颜色，当然，自己选配还是很重要的。</p>
+
+    <p><img src="http://7q5cdt.com1.z0.glb.clouddn.com/blog-chooseColor.png" alt="nipponcolors" /></p>
+  </li>
+  <li>
+    <p><a href="https://color.adobe.com/zh/explore/most-popular/?time=all">Adobe Color CC</a></p>
+
+    <p>Adobe 出的在线配色工具，里面有些现成的配色方案还是很不错的。</p>
+
+    <p><img src="http://7q5cdt.com1.z0.glb.clouddn.com/blog-adobeColorCC.png" alt="Adobe Color CC" /></p>
+  </li>
+  <li>
+    <p><a href="http://paletton.com/">paletton</a></p>
+
+    <p>提供了各种预览模式，可以在模板网站中预览，在色块中预览。</p>
+
+    <p><img src="http://7q5cdt.com1.z0.glb.clouddn.com/blog-paletton.png" alt="paletton" /></p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="图标">图标</h3>
+
+<ul>
+  <li>
+    <p><a href="http://www.easyicon.net/">easyicon</a></p>
+
+    <p>对中文的搜索支持很好。实际上它是先把中文翻译为英文再搜索的。</p>
+
+    <p><img src="http://7q5cdt.com1.z0.glb.clouddn.com/blog-icon.png" alt="easyicon" /></p>
+  </li>
+  <li>
+    <p><a href="http://fortawesome.github.io/Font-Awesome/icons/">Font-Awesome</a></p>
+
+    <p>比上面介绍的那个好用的多，字体图标，不需要考虑像素大小，全部是矢量图。并且图标精美。如果不使用 BootStrap，单独添加图标的话，这一套图标在合适不过了。</p>
+
+    <p><img src="http://7q5cdt.com1.z0.glb.clouddn.com/blog-font awesome.png" alt="Font-Awesome" /></p>
+  </li>
+  <li>
+    <p><a href="http://www.iconfont.cn/">iconfont.cn</a></p>
+
+    <p>阿里巴巴制作的图标库。</p>
+
+    <p><img src="http://7q5cdt.com1.z0.glb.clouddn.com/iconfont.png" alt="iconfont" /></p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="数据处理">数据处理</h2>
+
+<h3 id="json">Json</h3>
+
+<ul>
+  <li>
+    <p><a href="http://braincast.nl/samples/jsoneditor/">json editor</a></p>
+
+    <p>将json数据输入进去，会生成一个树形的结构，方便查看每个节点。</p>
+
+    <p><img src="http://7q5cdt.com1.z0.glb.clouddn.com/blog-json.png" alt="jsoneditor" /></p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="展示">展示</h2>
+
+<h3 id="revealjs">reveal.js</h3>
+
+<ul>
+  <li>
+    <p><a href="https://github.com/hakimel/reveal.js">reveal.js</a></p>
+
+    <p>在网页上展示 slides 幻灯片，太酷了。针对不会代码的人还有一个在线编辑器：<a href="http://slides.com">http://slides.com</a></p>
+
+    <p>还有一个新手入门教程：<a href="http://htmlcheats.com/reveal-js/reveal-js-tutorial-reveal-js-for-beginners/">Reveal.js Tutorial-Reveal.js for Beginners</a></p>
+
+    <p><img src="http://7q5cdt.com1.z0.glb.clouddn.com/blog-revealjs.png" alt="reveal" /></p>
+  </li>
+</ul>
+
+<p>本文不定期更新。</p>
+:ET

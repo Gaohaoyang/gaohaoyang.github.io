@@ -1,0 +1,25 @@
+I"4<ul id="markdown-toc">
+  <li><a href="#问题描述" id="markdown-toc-问题描述">问题描述</a></li>
+  <li><a href="#使用场景" id="markdown-toc-使用场景">使用场景</a></li>
+  <li><a href="#解决办法" id="markdown-toc-解决办法">解决办法</a></li>
+</ul>
+
+<h2 id="问题描述">问题描述</h2>
+
+<p>当我们点击一个空的、没有任何内容的 div 或者其他块级元素时。在 IE11 以下，是没有反应的。</p>
+
+<h2 id="使用场景">使用场景</h2>
+
+<p>这类问题使用场景还是很普遍的。比如 UI 给了一张大图，要点击图上的某一块位置的时候。可以用一个空的 div 定位到相应的位置，然后对它进行绑定事件。</p>
+
+<hr />
+
+<h2 id="解决办法">解决办法</h2>
+
+<p>解决方法很简单，即给这个块级元素填充任意颜色，然后将其透明度设置为0。代码如下：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>background-color: #fff;
+opacity: 0;
+filter:alpha(opacity=0);
+</code></pre></div></div>
+:ET

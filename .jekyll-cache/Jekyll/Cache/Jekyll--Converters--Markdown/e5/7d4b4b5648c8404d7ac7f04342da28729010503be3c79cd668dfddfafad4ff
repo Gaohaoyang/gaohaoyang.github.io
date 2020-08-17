@@ -1,0 +1,25 @@
+I"j	<ul id="markdown-toc">
+  <li><a href="#先上代码" id="markdown-toc-先上代码">先上代码</a></li>
+</ul>
+
+<p>本文将介绍如何使用 JavaScript 创建文件，并自动/手动将文件下载。这在导出原始数据时会比较方便。</p>
+
+<h2 id="先上代码">先上代码</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * 创建并下载文件
+ * @param  {String} fileName 文件名
+ * @param  {String} content  文件内容
+ */</span>
+<span class="kd">function</span> <span class="nx">createAndDownloadFile</span><span class="p">(</span><span class="nx">fileName</span><span class="p">,</span> <span class="nx">content</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">aTag</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">blob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blob</span><span class="p">([</span><span class="nx">content</span><span class="p">]);</span>
+    <span class="nx">aTag</span><span class="p">.</span><span class="nx">download</span> <span class="o">=</span> <span class="nx">fileName</span><span class="p">;</span>
+    <span class="nx">aTag</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">);</span>
+    <span class="nx">aTag</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span>
+    <span class="nx">URL</span><span class="p">.</span><span class="nx">revokeObjectURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>很简单对吧，直接调用这个方法，传入文件名和文件内容，程序新建 a 标签，新建 Blob 对象，将文件名赋给 a 标签，同时将 Blob 对象作为 Url 也赋给 a 标签，模拟点击事件，自动下载成功，最后再回收内存。下面我们来看看具体是怎么操作的。</p>
+:ET

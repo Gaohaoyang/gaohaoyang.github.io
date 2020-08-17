@@ -1,0 +1,164 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#闭包的例子" id="markdown-toc-闭包的例子">闭包的例子</a></li>
+  <li><a href="#应用" id="markdown-toc-应用">应用</a></li>
+  <li><a href="#常见错误之循环闭包" id="markdown-toc-常见错误之循环闭包">常见错误之循环闭包</a></li>
+  <li><a href="#封装" id="markdown-toc-封装">封装</a></li>
+  <li><a href="#总结" id="markdown-toc-总结">总结</a></li>
+</ul>
+
+<p>本文为慕课网 <a href="http://www.imooc.com/learn/277">JavaScript深入浅出</a> JavaScript 中的闭包笔记。</p>
+
+<h2 id="闭包的例子">闭包的例子</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function outer() {
+    var localVal = 30;
+    return localVal;
+}
+
+console.log(outer()); //30
+
+function outer2() {
+    var localVal = 30;
+    return function() {
+        return localVal;
+    };
+}
+
+var func = outer2();
+console.log(func()); //30
+</code></pre></div></div>
+
+<p>对于第一个普通的函数，在执行过之后，它的局部变量就可以被释放。</p>
+
+<p>对于第二个函数，<code class="language-plaintext highlighter-rouge">localVal</code> 是不能被释放的。因为调用 <code class="language-plaintext highlighter-rouge">outer2()</code> 后，返回的是匿名函数，匿名函数可以访问外部的 <code class="language-plaintext highlighter-rouge">outer2()</code> 中的局部变量，并返回了这个局部变量 localVal。当 <code class="language-plaintext highlighter-rouge">outer2()</code> 赋值给 <code class="language-plaintext highlighter-rouge">func</code> 后，再次调用 <code class="language-plaintext highlighter-rouge">func()</code>，仍能访问到局部变量 <code class="language-plaintext highlighter-rouge">localVal</code>。这种情况就是闭包。</p>
+
+<hr />
+
+<h2 id="应用">应用</h2>
+
+<ul>
+  <li>
+    <p><strong>所谓闭包就是：子函数可以使用父函数中的局部变量。</strong></p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ! function() {
+      var localData = "localData here";
+      document.addEventListener('click',
+          function() {
+              console.log(localData); //这里访问外部数据
+          });
+  }();
+
+  ! function() {
+      var localData = "localData here";
+      var url = "http://www.baidu.com/";
+      $.ajax({
+          url: url,
+          success: function() {
+              // do sth...
+              console.log(localData); //这里访问外部数据
+          }
+      });
+  }()
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="常见错误之循环闭包">常见错误之循环闭包</h2>
+
+<p>比如我们想循环绑定点击事件</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.body.innerHTML = "&lt;div id=div1&gt;aaa&lt;/div&gt;&lt;div id=div2&gt;bbb&lt;/div&gt;&lt;div id=div3&gt;ccc&lt;/div&gt;";
+for (var i = 1; i &lt; 4; i++) {
+    document.getElementById('div' + i).
+    addEventListener('click', function() {
+        alert(i); // all are 4!
+    });
+}
+</code></pre></div></div>
+
+<p>上面的代码，我们点击任何一个 div，弹出的都是 4</p>
+
+<p>这是因为，for 循环中的 i 是一个全局变量。这里内函数的点击事件，访问到的是循环后的 i 值，所以是 4</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document.body.innerHTML = "&lt;div id=div1&gt;aaa&lt;/div&gt;&lt;div id=div2&gt;bbb&lt;/div&gt;&lt;div id=div3&gt;ccc&lt;/div&gt;";
+for (var i = 1; i &lt; 4; i++) {
+    ! function(i) {
+        document.getElementById('div' + i).
+        addEventListener('click', function() {
+            alert(i); // 1, 2, 3
+        });
+    }(i);
+}
+</code></pre></div></div>
+
+<p>这里使用了立即执行函数，并给匿名函数赋值 i，这样点击事件每一次就会访问到相应的 i。</p>
+
+<hr />
+
+<h2 id="封装">封装</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(function() {
+    var _userId = 9527;
+    var _typeId = "item";
+    var exp = {};
+
+    function converter(userId) {
+        return +userId;
+    }
+
+    exp.getUserId = function() {
+        return converter(_userId);
+    };
+
+    exp.getTypeId = function() {
+        return _typeId;
+    };
+
+    window.a = exp;
+})();
+
+console.log(a.getUserId()); //9527
+console.log(a.getTypeId()); //item
+
+console.log(a._userId); //undefined
+console.log(a._typeId); //undefined
+console.log(converter); //Uncaught ReferenceError: converter is not defined
+</code></pre></div></div>
+
+<p>上面的代码通过闭包实现了一个封装。</p>
+
+<hr />
+
+<h2 id="总结">总结</h2>
+
+<blockquote>
+  <ul>
+    <li>
+      <p>在计算机科学中，闭包（也称词法闭包或函数闭包）是指一个函数或函数的引用，与一个引用环境绑定在一起。这个引用环境是一个存储该函数每个非局部变量（也叫自由变量）的表。</p>
+    </li>
+    <li>
+      <p>闭包，不同于一般的函数，它允许一个函数在立即词法作用域外调用时，仍可访问非本地变量。</p>
+    </li>
+  </ul>
+
+  <p>from 维基百科</p>
+</blockquote>
+
+<ul>
+  <li>闭包的优点
+    <ul>
+      <li>灵活和方便</li>
+      <li>封装</li>
+    </ul>
+  </li>
+  <li>缺点
+    <ul>
+      <li>空间浪费</li>
+      <li>内存泄露</li>
+      <li>性能消耗</li>
+    </ul>
+  </li>
+</ul>
+:ET
