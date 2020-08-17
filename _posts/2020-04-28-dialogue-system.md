@@ -369,6 +369,7 @@ public <cmd> = <cmd1>|<cmd2>|[option1|option2] say;
 14. <VOID>表示不识别的声音匹配 15. 注释： // ;/**/ ;@xx;
 
 - 案例
+
 ```js
 实际案例：
 <what> = ( 啥\|是什么\|怎么算\|怎么计算\|什么是\|是多少\|什么\|？\|?);
@@ -394,6 +395,7 @@ public <qid_3042657> = (<qid_3042657_1>\|<qid_3042657_2>) {qid-3042657};
 Python包：[pyjsgf](https://github.com/Danesprite/pyjsgf)
 - pip install pyjsgf
 示例：
+
 ```python
 from jsgf import PublicRule, Literal, Grammar
 
