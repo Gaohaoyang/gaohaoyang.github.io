@@ -335,6 +335,88 @@ Image('fsm.png')
 
 - 各类聊天机器人框架
 
+### JSGF
+
+- 强大的正则工具，支持快速定制NLU
+
+- CFG、JSGF系列规则体系
+  - [JSpeech Grammar Format Specification](https://www.w3.org/TR/jsgf/)
+- [语音识别百度jsgf语法笔记](https://wenku.baidu.com/view/c6a80e04580102020740be1e650e52ea5518cec0.html)
+
+- 示例
+
+```js
+#JSGF V1.0 UTF-8 en; grammar com.local; 
+public <cmd> = <cmd1>|<cmd2>|[option1|option2] say; 
+<cmd1> = please|/10.2/hello; 
+<cmd2> = open|close|start|stop;  
+```
+
+- 语法说明
+1. 头部格式固定，‘#’是开头。
+2. 第二行定义本语法的名字，用于被其他语法引用 
+3. 符号”<>”包含之内的叫做规则名 
+4. Public代表外面能够使用到这个规则。不加说明这个规则只能本文件使用。
+5. 符号’|’是或的意思，从中取一个结果。Open|close 只取其中一个值 
+6. 符号“[]”内部包含的是可选的意思，即可以取也可以不取这里的值 
+7. 符号“()”分组的意思，也能扩充优先级。
+8. 符号“//”表示权重 
+9. 符号“\”表示在字符串中出现特殊符号的时候使用。 
+10. 符号“*”表示出现0~N次 
+11. 符号“+”表示出现1~N次 
+12. 符号“{}”表示匹配时返回{}中给出的结果
+13. <NULL>表示无声音时候匹配 
+14. <VOID>表示不识别的声音匹配 15. 注释： // ;/**/ ;@xx;
+
+- 案例
+```js
+实际案例：
+<what> = ( 啥 | 是什么 | 怎么算 | 怎么计算 | 什么是 | 是多少 | 什么 | ？ | ?);
+<fact> = ( 定义 | 方法 | 规则 | 要求 | 咨询);
+<how> = ( 怎么办 | 咋办 | 咋 | 咋样 | 咋整 | 不了 | 怎样 | 怎么样 | 怎么弄 | 怎么用 | 什么办法 | 办法 | 如何 | 如何处理 | 怎么处理 );
+<why> = ( 为什么 | 为什 | 为何 | 原因 | 什么原因 | 什么意思 | 怎么回事 | 怎麽回事 | 怎么不 | 怎么还 | 怎么没 | 怎么是 | 怎么这么 | 啊 | 还是 | 干嘛 | 凭啥 | 凭什么 | 咋没有 | 还没 | 解释 | 啥意思 );
+<which> = ( 哪一个 | 哪个);
+<where> = ( 哪 | 地点 | 哪里 | 在哪儿 | 哪儿 | 在那里 | 那里);
+<much> = ( 哪些 | 几个 | 几次 | 多少 );
+<when> = ( 什么时候 | 多久 | 怎么还 | 啥时候 );
+<whether> = ( 能不能 | 是否 | 可不可以 | 可以 | 吗? | 吗？ | 吗 | 么 | 没有 | 有没有 | 是不是 | 行不行 | 好不好 );
+// 肯定、否定
+<yes> = (是 | 是的 | 对 | 嗯 );
+<no> = ( 不是 | 不是的 | 不对 | 错了 | 不 | 未 | 没有 | 没 );
+// wangqiwen, 格式：[qname[qid] : 相关case集合(/分隔)], 便于跟踪矫正
+// 指派模式拒单规则及影响[3042657] :  派单模式拒单会影响我服务分吗/派单模式不能取消吗/派单模式规则/我可以取消指派订单吗/指派订单必须得去吗
+public <qid_3042657> = (<qid_3042657_1> | <qid_3042657_2>) {qid-3042657};
+<qid_3042657_1> = ( (<assign_mode> <cancel>)|(<cancel> <assign_mode>) [<whether>|<what>|<fact>] );
+<qid_3042657_2> = ( <assign_mode> <whether> );
+```
+- Python的jsgf工具包
+
+Python包：[pyjsgf](https://github.com/Danesprite/pyjsgf)
+- pip install pyjsgf
+示例：
+```python
+from jsgf import PublicRule, Literal, Grammar
+
+# Create a public rule with the name 'hello' and a Literal expansion 'hello world'.
+rule = PublicRule("hello", Literal("hello world"))
+
+# Create a grammar and add the new rule to it.
+grammar = Grammar()
+grammar.add_rule(rule)
+
+# Compile the grammar using compile()
+# compile_to_file(file_path) may be used to write a compiled grammar to
+# a file instead.
+# Compilation is not required for finding matching rules.
+print(grammar.compile())
+
+# Find rules in the grammar that match 'hello world'.
+matching = grammar.find_matching_rules("hello world")
+print("Matching: %s" % matching[0])
+```
+
+
+
 ### [Chatterbot](https://github.com/gunthercox/ChatterBot)
 
 ![](https://camo.githubusercontent.com/b6aaad134a52f6a76001c91321fe81a2c889c45f/68747470733a2f2f692e696d6775722e636f6d2f623353436d47542e706e67)
