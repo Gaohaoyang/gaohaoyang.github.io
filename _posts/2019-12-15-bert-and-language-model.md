@@ -3,7 +3,7 @@ layout: post
 title:  BERT及预训练语言模型-BERT-and-Language-Model
 date:   2019-12-10 16:52:00
 categories: 深度学习 
-tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏
+tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook
 excerpt: 预训练语言模型及BERT知识点汇总
 mathjax: true
 ---
@@ -22,7 +22,21 @@ mathjax: true
 
 ## 总结
 
-- 占坑
+
+### Faiss简介
+
+- `Faiss`是Facebook AI团队开源的针对聚类和相似性搜索库，为稠密向量提供**高效相似度搜索和聚类**，支持**十亿**级别向量的搜索，是目前最为成熟的**近似近邻搜索库**。它包含多种搜索**任意**大小向量集（备注：向量集大小由RAM内存决定）的算法，以及用于算法评估和参数调整的支持代码。Faiss用C++编写，并提供与Numpy完美衔接的Python接口。除此以外，对一些核心算法提供了GPU实现。相关介绍参考《[Faiss：Facebook 开源的相似性搜索类库](https://infoq.cn/article/2017/11/Faiss-Facebook)》
+- Faiss对一些基础的算法提供了非常高效的失效
+    - 聚类Faiss提供了一个高效的k-means实现
+    - PCA降维算法
+    - PQ(ProductQuantizer)编码/解码
+- 组件
+    - Faiss中最常用的是索引Index，而后是PCA降维、PQ乘积量化，这里针对Index和PQ进行说明，PCA降维从流程上都可以理解。
+- 以图片搜索为例，所谓相似度搜索，便是在给定的一堆图片中，寻找出我指定的目标最像的K张图片，也简称为KNN（K近邻）问题。
+    - ![](https://img2018.cnblogs.com/blog/1408825/201903/1408825-20190320225405798-259149897.png)
+
+- [Faiss流程与原理分析](https://www.cnblogs.com/yhzhou/p/10568728.html)
+
 
 ## 预训练语言模型
 
