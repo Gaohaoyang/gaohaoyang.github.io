@@ -37,6 +37,13 @@ mathjax: true
 
 - [Faiss流程与原理分析](https://www.cnblogs.com/yhzhou/p/10568728.html)
 
+Faiss 使用场景：最常见的人脸比对，指纹比对，基因比对等。
+
+Faiss 开发资料：
+- [github](https://github.com/facebookresearch/faiss)
+- [tutorial](https://github.com/facebookresearch/faiss/wiki/Getting-started)
+
+
 
 ## 预训练语言模型
 
