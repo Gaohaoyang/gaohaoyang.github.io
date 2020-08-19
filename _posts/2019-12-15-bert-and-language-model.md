@@ -147,7 +147,8 @@ print(I[-5:])
 Faiss 开发资料：
 - [github](https://github.com/facebookresearch/faiss)
 - [tutorial](https://github.com/facebookresearch/faiss/wiki/Getting-started)
-- [Faiss学习笔记](https://blog.csdn.net/u013185349/article/details/103637977?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-4.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-4.nonecase)
+- [Faiss学习笔记](https://blog.csdn.net/u013185349/article/details/103637977)
+- 基于Faiss的特征向量相似度搜索引擎[Milvus](https://milvus.io/cn/)
 
 
 ## 预训练语言模型
