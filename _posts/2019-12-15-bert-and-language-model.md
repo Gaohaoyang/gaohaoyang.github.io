@@ -26,7 +26,7 @@ mathjax: true
 ### Faiss简介
 
 - `Faiss`是Facebook AI团队开源的针对聚类和相似性搜索库，为稠密向量提供**高效相似度搜索和聚类**，支持**十亿**级别向量的搜索，是目前最为成熟的**近似近邻搜索库**。它包含多种搜索**任意**大小向量集（备注：向量集大小由RAM内存决定）的算法，以及用于算法评估和参数调整的支持代码。Faiss用C++编写，并提供与Numpy完美衔接的Python接口。除此以外，对一些核心算法提供了GPU实现。相关介绍参考《[Faiss：Facebook 开源的相似性搜索类库](https://infoq.cn/article/2017/11/Faiss-Facebook)》
-- Faiss对一些基础的算法提供了非常高效的失效
+- Faiss对一些基础的算法提供了非常高效的实现
     - 聚类Faiss提供了一个高效的k-means实现
     - PCA降维算法
     - PQ(ProductQuantizer)编码/解码
@@ -39,10 +39,115 @@ mathjax: true
 
 Faiss 使用场景：最常见的人脸比对，指纹比对，基因比对等。
 
+**Index使用**
+
+Faiss处理固定维数d的向量集合，向量维度d通常为几十到几百。
+
+faiss 三个最基础的 index. 分别是 IndexFlatL2, IndexIVFFlat, IndexIVFPQ，更多参见[Guidelines to choose an index](https://github.com/facebookresearch/faiss/wiki/Guidelines-to-choose-an-index)
+- `IndexFlatL2`：最基础的Index
+- `IndexIVFFlat`：更快的搜索，将数据集分割成几部分，加快搜索
+    - d维空间中定义Voronoi单元格，并且每个数据库矢量都落入其中一个单元格中。在搜索时，只有查询x所在单元中包含的数据库向量y与少数几个相邻查询向量进行比较。(划分搜索空间)
+        - 与数据库向量具有相同分布的任何向量集合上执行训练
+        - 建索引，即`量化器`(quantizer)，它将矢量分配给Voronoi单元。每个单元由一个质心定义，找到一个矢量所在的Voronoi单元包括在质心集中找到该矢量的最近邻居。这是另一个索引的任务，通常是索引IndexFlatL2。
+- `IndexIVFPQ`：内存开销更小.
+    - IndexFlatL2和IndexIVFFlat都存储完整的向量，内存开销大
+    - 基于产品量化器的有损压缩来压缩存储的向量的变体。压缩的方法基于乘积量化([Product Quantizer](https://hal.archives-ouvertes.fr/file/index/docid/514462/filename/paper_hal.pdf))，矢量没有精确存储，搜索方法返回的距离也是近似值。
+
+
+IndexIVFFlat Demo 完整代码
+
+```python
+# encoding:utf-8
+ 
+# Copyright (c) 2015-present, Facebook, Inc.
+# All rights reserved.
+#
+# This source code is licensed under the BSD+Patents license found in the
+# LICENSE file in the root directory of this source tree.
+ 
+# author    : Facebook
+# translate : h-j-13
+ 
+import numpy as np
+d = 64                              # 向量维度
+nb = 100000                         # 向量集大小
+nq = 10000                          # 查询次数
+np.random.seed(1234)                # 随机种子,使结果可复现
+xb = np.random.random((nb, d)).astype('float32')
+xb[:, 0] += np.arange(nb) / 1000.
+xq = np.random.random((nq, d)).astype('float32')
+xq[:, 0] += np.arange(nq) / 1000.
+ 
+import faiss
+ 
+nlist = 100
+k = 4
+quantizer = faiss.IndexFlatL2(d)  # the other index
+index = faiss.IndexIVFFlat(quantizer, d, nlist, faiss.METRIC_L2)
+# here we specify METRIC_L2, by default it performs inner-product search
+ 
+assert not index.is_trained
+index.train(xb)
+assert index.is_trained
+ 
+index.add(xb)                  # 添加索引可能会有一点慢
+D, I = index.search(xq, k)     # 搜索
+print(I[-5:])                  # 最初五次查询的结果
+index.nprobe = 10              # 默认 nprobe 是1 ,可以设置的大一些试试
+D, I = index.search(xq, k)
+print(I[-5:])                  # 最后五次查询的结果
+```
+
+IndexIVFFlat 完整代码
+
+```python
+# encoding:utf-8
+ 
+# Copyright (c) 2015-present, Facebook, Inc.
+# All rights reserved.
+#
+# This source code is licensed under the BSD+Patents license found in the
+# LICENSE file in the root directory of this source tree.
+ 
+# author    : Facebook
+# translate : h-j-13
+ 
+import numpy as np
+ 
+d = 64                              # 向量维度
+nb = 100000                         # 向量集大小
+nq = 10000                          # 查询次数
+np.random.seed(1234)                # 随机种子,使结果可复现
+xb = np.random.random((nb, d)).astype('float32')
+xb[:, 0] += np.arange(nb) / 1000.
+xq = np.random.random((nq, d)).astype('float32')
+xq[:, 0] += np.arange(nq) / 1000.
+ 
+import faiss
+ 
+nlist = 100
+m = 8
+k = 4
+quantizer = faiss.IndexFlatL2(d)    # 内部的索引方式依然不变
+index = faiss.IndexIVFPQ(quantizer, d, nlist, m, 8)
+                                    # 每个向量都被编码为8个字节大小
+index.train(xb)
+index.add(xb)
+D, I = index.search(xb[:5], k)      # 测试
+print(I)
+print(D)
+index.nprobe = 10                   # 与以前的方法相比
+D, I = index.search(xq, k)          # 检索
+print(I[-5:])
+```
+
+
+
+
 Faiss 开发资料：
 - [github](https://github.com/facebookresearch/faiss)
 - [tutorial](https://github.com/facebookresearch/faiss/wiki/Getting-started)
-
+- [Faiss学习笔记](https://blog.csdn.net/u013185349/article/details/103637977?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-4.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-4.nonecase)
 
 
 ## 预训练语言模型
