@@ -3,7 +3,7 @@ layout: post
 title:  "优化算法笔记-optimization"
 date:   2020-08-02 00:23:00
 categories: 机器学习 数学基础
-tags: 最优化 梯度下降 牛顿法
+tags: 最优化 梯度下降 牛顿法 斯坦福 凸优化
 excerpt: 机器学习中常见的优化算法
 author: 鹤啸九天
 mathjax: true
@@ -24,6 +24,9 @@ mathjax: true
         - 不同算法在鞍点处的表现。这里，SGD、SGD-M、NAG 都受到了鞍点的严重影响，尽管后两者最终还是逃离了鞍点；而 Adagrad、RMSprop、Adadelta 都很快找到了正确的方向。
 
 - [最优化算法-避开鞍点](http://www.csuldw.com/2016/07/10/2016-07-10-saddlepoints/)
+
+- 【2020-8-20】【斯坦福凸优化短课程资料(Python)】’[cvx_short_course](https://github.com/cvxgrp/cvx_short_course) - Materials for a short course on convex optimization.' by Stanford University Convex Optimization Group
+
 
 # 简介
 
