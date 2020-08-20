@@ -27,7 +27,7 @@ mathjax: true
 
 # 机器学习流程
 
-- 书籍：[用tensorflow生态系统搭建机器学习pipeline](https://www.toutiao.com/a1673252334929924)
+- 书籍：[用tensorflow生态系统搭建机器学习pipeline](https://www.toutiao.com/a1673252334929924)，[配套代码](https://github.com/Building-ML-Pipelines/building-machine-learning-pipelines)
     - 了解构建机器学习管道的步骤
     - 使用TensorFlow Extended中的组件构建管道
     - 使用Apache Beam，Apache Airflow和Kubeflow Pipelines编排您的机器学习管道
