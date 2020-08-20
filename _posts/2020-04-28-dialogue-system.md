@@ -472,6 +472,8 @@ An example of typical input would be something like this:
 
 ### Rasa
 
+- [RASA中文聊天机器人项目](https://github.com/jiangdongguo/ChitChatAssistant)
+
 - Rasa是一个开源机器学习框架，用于构建上下文AI助手和聊天机器人。
   - 安装：
     - pip install rasa_nlu
