@@ -268,6 +268,15 @@ PTMs-Papers:
 - bert-as-service 是腾讯 AI Lab 开源的一个 BERT 服务（肖涵开发），它让用户可以以调用服务的方式使用 BERT 模型而不需要关注 BERT 的实现细节。bert-as-service 分为客户端和服务端，用户可以从 python 代码中调用服务，也可以通过 http 的方式访问。
 - - [快速使用 BERT 生成词向量：bert-as-service](https://blog.csdn.net/qq_34832393/article/details/90414293)
 
+- 【2020-8-20】以fastapi为基础的[NLP as a Service](https://github.com/abhimishra91/insight)
+- Project Insight is designed to create NLP as a service with code base for both front end GUI (streamlit) and backend server (FastApi) the usage of transformers models on various downstream NLP task.
+    - The downstream NLP tasks covered:
+    - News Classification
+    - Entity Recognition
+    - Sentiment Analysis
+    - Summarization
+    - Information Extraction To Do
+
 #### 安装
 - 
 - 用 pip 命令进行安装，客户端与服务端可以安装在不同的机器上：
