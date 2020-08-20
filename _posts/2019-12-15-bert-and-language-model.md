@@ -141,6 +141,17 @@ D, I = index.search(xq, k)          # 检索
 print(I[-5:])
 ```
 
+- Faiss 索引类型：
+    - Exact Search for L2 #基于L2距离的确定搜索匹配
+    - Exact Search for Inner Product #基于内积的确定搜索匹配
+    - Hierarchical Navigable Small World graph exploration #分层索引
+    - Inverted file with exact post-verification #倒排索引
+    - Locality-Sensitive Hashing (binary flat index) #本地敏感hash
+    - Scalar quantizer (SQ) in flat mode #标量量化索引
+    - Product quantizer (PQ) in flat mode #笛卡尔乘积索引
+    - IVF and scalar quantizer #倒排+标量量化索引
+    - IVFADC (coarse quantizer+PQ on residuals) #倒排+笛卡尔乘积索引
+    - IVFADC+R (same as IVFADC with re-ranking based on codes) # 倒排+笛卡尔乘积索引 + 基于编码器重排
 
 
 
