@@ -403,6 +403,7 @@ Image(img_file)
 ## python编译安装
 
 - 代码如下：
+
 ```shell
 # 下载python3
 src_file='https://www.python.org/ftp/python/3.8.3/Python-3.8.3.tgz'
@@ -444,6 +445,7 @@ pip3 list
 ## anaconda
 
 - 下载
+
 ```shell
 # 官方地址，慢
 wget https://repo.anaconda.com/archive/Anaconda3-2019.03-Linux-x86_64.sh
@@ -561,21 +563,25 @@ conda config --set show_channel_urls yes
 - 解决
    - 修改conda镜像路径
    - 执行如下命令，更换仓库径路为清华镜像路径
+
 ```
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
 ```
    - 在自己用户目录C:\Users<你的用户名>下生成一个文件，名字为：~/.condarc
+
 ```
 conda config --set show_channel_urls yes
 ```
    - 修改.condarc文件为如下:
+
 ```
 channels:
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
 show_channel_urls: true
 ssl_verify: true
 ```
+
    - 执行完上述三步，conda的镜像路径就更换完毕，如不放心可以 conda info 查看 channel URLs 信息已经更改。
 
 
@@ -620,6 +626,7 @@ ssl_verify: true
 
 - [2018-3-26]自动登录鲁班测试机
 - 方法一：
+
 ```shell
 #参考expect用法
 passwd="***"
@@ -628,9 +635,11 @@ expect -c "
     expect {
         \"*assword:\" {send \"$passwd\r\"; exp_continue }
     }
-"```
+"
+```
 - 方法二：
    - login.sh内容：
+   
 ```shell
 #!/usr/bin/expect -f
 set host luban@10.84.176.174
