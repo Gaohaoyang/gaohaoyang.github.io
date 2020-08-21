@@ -241,7 +241,27 @@ git log
 # 撤销本地修改
 #没有commit到暂存仓库的情况下：
 # 恢复之前上一次暂存区的所有文件到工作区
+git branch #查看分支
+git branch dev #创建分支
+git checkout dev #切换到分支dev
+git branch -r # 查看所有远程分支
+git branch -a # 查看存储库的所有当前分支，包括本地和远程分支。
+git branch -a --merged # 合并到当前分支的所有分支
+git checkout -b dev #创建并切换到分支dev
+git branch -d dev #删除分支
+git branch -D branch_2 # 删除本地分支，即使尚未合并，这也会删除该分支！
+git push origin dev #提交后，别人才能看到分支
+git checkout -- myfile #从本地仓库恢复文件（用于撤销本地修改）
+
 git checkout 
+git checkout 分支名称 # 切换分支
+
+git branch # 查看分支
+git branch -a # 所有分支
+git branch -r # 远程所有分支
+
+git merge 分支名称 # 合并分支
+
 #或者恢复暂存区的指定的某个文件到本地工作区
 git checkout [file]
 # 在commit之后撤销修改的情况下：
@@ -250,6 +270,19 @@ git reset --hard
 # 或者不管的情况下直接重新修改代码再commit一次
 # 或者通过使用git log查看版本号后回退到暂存区的某个版本
 git reset [版本号]
+
+# 【2020-8-21】
+git config --list 
+git config -l # 查看已有配置列表
+git config --global user.email "输入你的邮箱" # 设置变量
+git config --global user.name "输入你的用户名"
+git config --global --replace-all user.email "输入你的邮箱" # 覆盖已有变量
+git config --global --replace-all user.name "输入你的用户名"
+git config   --global --unset  user.name # 取消命名
+
+# 生成公钥
+ssh-keygen -t rsa
+
 ```
 
 ## 交互式学习
