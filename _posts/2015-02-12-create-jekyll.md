@@ -170,6 +170,8 @@ $$f \left( x _ { n + 1 } \right) - f \left( x _ { n } \right) = f ^ { \prime } \
 - 参考
    - [10款流程图工具](https://baijiahao.baidu.com/s?id=1668266730880239997)
 
+- 【2020-8-21】[如何绘制泳道图](https://www.jianshu.com/p/787d918c0120)，[processon泳道图示例](https://v3.processon.com/view/559632e3e4b018f0e50364a7)
+- [visual-paradigm](https://online.visual-paradigm.com/cn/)
 
 ### 任务管理
 
