@@ -103,6 +103,95 @@ if __name__ == '__main__':
 - ![](https://picb.zhimg.com/80/v2-ea6c68e52462fb5025992cbb6b9728ed_720w.jpg)
 
 
+### 自动生成APIs文档
+
+- 【2020-8-22】[自动为Flask写的API生成帮助文档](https://segmentfault.com/a/1190000013420209)
+    - ![](https://segmentfault.com/img/remote/1460000013420214?w=1760&h=1424)
+- [使用swagger 生成 Flask RESTful API](https://segmentfault.com/a/1190000010144742)
+- [Flask 系列之 构建 Swagger UI 风格的 WebAPI](https://www.cnblogs.com/hippieZhou/p/10848023.html), 基于 Flask 而创建 Swagger UI 风格的 WebAPI 包有很多，如
+    - [flasgger](https://github.com/rochacbruno/flasgger)
+    - [flask-swagger-ui](https://github.com/sveint/flask-swagger-ui)
+    - [swagger-ui-py](https://github.com/PWZER/swagger-ui-py)
+    - [flask_restplus](https://www.cnblogs.com/leejack/p/9162367.html)
+    - ![](https://img2018.cnblogs.com/blog/749711/201905/749711-20190511131630516-1117259038.png)
+
+- 实践
+    - 安装：
+        - flask_restplus实践失败，个别依赖不满足，放弃
+        - pip install flasgger
+    - 测试：如下 
+
+
+```python
+# coding:utf8
+
+#/**************************************************************************
+# * 
+# * Copyright (c) 2020, Inc. All Rights Reserved
+# * 
+# **************************************************************************
+# * @file main.py
+# * @author wangqiwen
+# * @date 2020/08/22 08:32
+# **************************************************************************
+
+from flask import Flask, request, render_template
+#from flask_restplus import Api
+from flasgger import Swagger, swag_from
+
+app = Flask(__name__)
+# swagger api封装，每个接口的注释文档中按照yaml格式排版
+Swagger(app)
+
+@app.route('/')
+#@app.route("/index",methods=["GET","POST"])
+#@app.route("/index/<int,>")
+def hello_world():
+
+    """
+    API说明
+    副标题（点击才能显示）
+    ---
+    tags:
+      - 自动生成示例
+    parameters:
+      - name: language
+        in: path
+        type: string
+        required: true
+        description: 变量含义
+    responses:
+      500:
+        description: 自定义服务端错误
+      200:
+        description: 自定义状态描述
+        schema:
+          id: awesome
+          properties:
+            language:
+              type: string
+              description: The language name
+              default: Lua
+    """ 
+    return render_template('index.html')
+
+@app.route("/tmp",methods=["GET","POST"])
+def tmp():
+    """
+        临时接口
+    """
+    return render_template('index.html')
+
+if __name__ == '__main__':
+    #app.run()
+    #app.run(debug=True)
+    app.run(debug=True, host='10.26.15.30', port='8044')
+
+# */* vim: set expandtab ts=4 sw=4 sts=4 tw=400: */
+```
+
+
+
 
 ## Django
 
