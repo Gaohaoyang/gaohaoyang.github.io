@@ -274,6 +274,7 @@ git reset [版本号]
 # 【2020-8-21】
 git config --list 
 git config -l # 查看已有配置列表
+git config -e # 直接编辑配置信息
 git config --global user.email "输入你的邮箱" # 设置变量
 git config --global user.name "输入你的用户名"
 git config --global --replace-all user.email "输入你的邮箱" # 覆盖已有变量
