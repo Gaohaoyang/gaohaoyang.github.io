@@ -584,6 +584,12 @@ ssl_verify: true
 
    - 执行完上述三步，conda的镜像路径就更换完毕，如不放心可以 conda info 查看 channel URLs 信息已经更改。
 
+- 【2020-8-22】执行conda install flask-restplus时，pip没问题
+   - Solving environment: failed with initial frozen solve. Retrying with flexible solve
+   - 解决：执行
+      - conda config --add channels conda-forge
+      - conda config --set channel_priority flexible
+
 
 # Linux工具
 
@@ -639,7 +645,7 @@ expect -c "
 ```
 - 方法二：
    - login.sh内容：
-   
+
 ```shell
 #!/usr/bin/expect -f
 set host luban@10.84.176.174
