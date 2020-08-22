@@ -3,7 +3,7 @@ layout: post
 title:  "Web服务知识-Web-Serving"
 date:   2020-08-07 19:17:00
 categories: 技术工具
-tags: Web Python Flask Django Fastapi Restful
+tags: Web Python Flask Django Fastapi Restful Swagger
 author : 鹤啸九天
 excerpt: Web开发相关技术知识点
 mathjax: true
@@ -118,7 +118,7 @@ if __name__ == '__main__':
 - 实践
     - 安装：
         - flask_restplus实践失败，个别依赖不满足，放弃
-        - pip install flasgger
+        - pip install [flasgger](https://github.com/flasgger/flasgger)
     - 测试：如下 
 
 
