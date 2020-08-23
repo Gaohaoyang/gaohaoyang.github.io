@@ -557,6 +557,13 @@ conda config --set show_channel_urls yes
 
 ```
 
+- 【2020-8-23】python项目依赖包管理
+- 安装：
+   - pip install -r requirements.txt
+- 自动生成requirements.txt
+   - pip install pipreqs 
+   - pipreqs /path/to/project
+
 
 ### 问题解决
 
