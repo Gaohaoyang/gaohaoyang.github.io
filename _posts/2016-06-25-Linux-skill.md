@@ -564,6 +564,13 @@ conda config --set show_channel_urls yes
    - pip install pipreqs 
    - pipreqs /path/to/project
 
+- 【2020-8-24】Python代码版本转换
+```shell
+2to3 -help # 帮助
+2to3 -w .　　#将当前整个文件夹代码从python2转到python3
+# python2文件会在.py后面再加上一个后缀.bak，而新生成的python3文件使用之前python2文件的命名
+
+```
 
 ### 问题解决
 
