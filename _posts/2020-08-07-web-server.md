@@ -3,7 +3,7 @@ layout: post
 title:  "Web服务知识-Web-Serving"
 date:   2020-08-07 19:17:00
 categories: 技术工具
-tags: Web Python Flask Django Fastapi Restful Swagger
+tags: Web Python Flask Django Fastapi Restful Swagger HTML
 author : 鹤啸九天
 excerpt: Web开发相关技术知识点
 mathjax: true
@@ -278,6 +278,24 @@ async def read_item(item_id: str, q: str = None, short: bool = False):
 
 - 【2020-8-22】[微信聊天窗口界面](https://github.com/kuangwk/wechat-chat-interface)
     - ![](https://github.com/kuangwk/wechat-chat-interface/raw/css/screenshot.png)
+
+
+## HTML
+
+- 【2020-8-24】Web页面分栏效果实现
+    - HTML中Frame实现左右分栏或上下分栏
+    - FrameSet中的Cols属性就控制了页面中的左右分篮，相应的rows则控制上下分栏
+    - 分栏的比例就有用逗号分开的10，*来确定
+
+```html
+<frameset border=10 framespacing=10 cols=”10,*” frameborder="1"   TOPMARGIN="0"  LEFTMARGIN="0" MARGINHEIGHT="0" MARGINWIDTH="0">
+  <frame>
+ <frame>
+</framset>
+```
+
+
+
 
 
 # 结束
