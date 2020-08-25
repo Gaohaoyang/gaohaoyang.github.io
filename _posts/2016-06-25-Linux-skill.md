@@ -3,7 +3,7 @@ layout: post
 title:  "Linux开发技能"
 date:   2016-06-25 23:35:00
 categories: 编程语言
-tags: Linux Shell Git
+tags: Linux Shell Git YAML
 excerpt: Linux环境开发技能总结
 mathjax: true
 ---
@@ -557,6 +557,8 @@ conda config --set show_channel_urls yes
 
 ```
 
+## Python
+
 - 【2020-8-23】python项目依赖包管理
 - 安装：
    - pip install -r requirements.txt
@@ -571,6 +573,92 @@ conda config --set show_channel_urls yes
 # python2文件会在.py后面再加上一个后缀.bak，而新生成的python3文件使用之前python2文件的命名
 
 ```
+
+### yaml
+
+- YAML是一种直观的能够被电脑识别的的数据序列化格式，容易被人类阅读，并且容易和脚本语言交互。YAML类似于XML，但是语法比XML简单得多，对于转化成数组或可以hash的数据时是很简单有效的。
+   1. 大小写敏感
+   2. 使用缩进表示层级关系
+   3. 缩进时不允许使用Tab，只允许使用空格
+   4. 缩进的空格数目不重要，只要相同层级的元素左对齐即可
+   5. \# 表示注释，从它开始到行尾都被忽略
+- 支持的数据类型
+   - 字符串
+   - 整型
+   - 浮点型
+   - 布尔型
+   - null
+   - 时间
+   - 日期
+- 主要特性，更多：[Python YAML用法详解](https://blog.csdn.net/lmj19851117/article/details/78843486)
+   - & 和 * 用于引用
+   - 强制转换，用!!实现
+   - 同一个yaml文件中，可以用 --- 来分段
+   - 构造器(constructors)、表示器(representers)、解析器(resolvers )
+
+
+
+- config.yaml内容：
+
+```yaml
+name: Tom Smith
+age: 37
+spouse:
+    name: Jane Smith
+    age: 25
+children:
+ - name: Jimmy Smith
+   age: 15
+ - name1: Jenny Smith
+   age1: 12
+---
+# 这个例子输出一个字典，其中value包括所有基本类型
+str: "Hello World!"
+int: 110
+float: 3.141
+boolean: true  # or false
+None: null  # 也可以用 ~ 号来表示 null
+time: 2016-09-22t11:43:30.20+08:00  # ISO8601，写法百度
+date: 2016-09-22  # 同样ISO8601
+name: &name 灰蓝 # 设置被引用字段名
+tester: *name # * 取引用内容
+a: !!str 3.14 # 转字符串
+b: !!int "123" # 转int
+```
+
+- 操作方法
+
+```python
+import yaml
+
+# 文件
+f = open(r'config.yml')
+# 字符串
+f = '''
+---
+name: James
+age: 20
+---
+name: Lily
+age: 19
+'''
+y = yaml.load(f) 
+y = yaml.load_all(f) # 多个yaml区域
+for data in y:
+    print(data)
+# 转成yaml文档
+obj1 = {'name': 'Silenthand Olleander',
+            'race': 'Human',
+            'traits': ['ONE_HAND', 'ONE_EYE']
+}
+obj2 = {"name": "James", "age": 20}
+print(yaml.dump(obj1，))
+f = open(r'out_config.yml','w')
+print(yaml.dump(obj2,f))
+yaml.dump_all([obj1, obj2], f) # 一次输出多个片区
+
+```
+
 
 ### 问题解决
 
