@@ -557,7 +557,7 @@ conda config --set show_channel_urls yes
 
 ```
 
-## Python
+## Python依赖包
 
 - 【2020-8-23】python项目依赖包管理
 - 安装：
@@ -566,7 +566,10 @@ conda config --set show_channel_urls yes
    - pip install pipreqs 
    - pipreqs /path/to/project
 
+## Python版本转换
+
 - 【2020-8-24】Python代码版本转换
+
 ```shell
 2to3 -help # 帮助
 2to3 -w .　　#将当前整个文件夹代码从python2转到python3
@@ -574,7 +577,7 @@ conda config --set show_channel_urls yes
 
 ```
 
-### yaml
+## yaml
 
 - YAML是一种直观的能够被电脑识别的的数据序列化格式，容易被人类阅读，并且容易和脚本语言交互。YAML类似于XML，但是语法比XML简单得多，对于转化成数组或可以hash的数据时是很简单有效的。
    1. 大小写敏感
