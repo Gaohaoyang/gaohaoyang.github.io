@@ -83,6 +83,7 @@ Django就没有用异步，通过线程来实现并发，这也是WSGI普遍的�
 
 - [用Python 的Flask实现 RESTful API(学习篇)](https://zhuanlan.zhihu.com/p/32202156)
 
+
 ### 部署
 
 - 示例代码
@@ -101,6 +102,57 @@ if __name__ == '__main__':
 
 - 浏览器上输入http://127.0.0.1:5000/，便会看到 Hello World！ 字样
 - ![](https://picb.zhimg.com/80/v2-ea6c68e52462fb5025992cbb6b9728ed_720w.jpg)
+
+
+### 传参
+
+- 传递请求参数的方式有两种
+    - 一是打包成 JSON 之后再传递
+        - 一般用 POST 请求来传递参数，然后用 FLASK 中 request 模块的 get_json() 方法获取参数。
+    - 二是直接放进 URL 进行传递 。
+        - 一般用 GET 请求传递参数，然后从 request.args 中用 get() 方法获取参数
+    - 不过需要说明的是用 POST 请求也可以通过 URL 的方式传递参数，而且获取参数的方式与 GET 请求相同。
+
+```python
+from flask import request, jsonify
+
+@app.route('/', methods = ["GET", "POST"])
+def post_data():
+	# 假设有如下 JSON 数据
+    #{"obj": [{"name":"John","age":"20"}] }
+    
+    #可以通过 request 的 args 属性来获取GET参数
+    name = request.args.get("name")
+    age = request.args.get("age")
+
+    # ----- POST -----
+    # 方法一
+    data = request.get_json()                # 获取 JSON 数据
+    data = pd.DataFrame(data["obj"])   # 获取参数并转变为 DataFrame 结构
+    
+    # 方法二
+    # data = request.json        # 获取 JOSN 数据
+    # data = data.get('obj')     #  以字典形式获取参数
+    
+    # ======= 统一 ======
+    if request.method == 'POST':
+        data = request.json
+        data = request.form.to_dict()
+        data = request.values
+    elif request.method == 'GET':
+        data = request.args
+
+    # 经过处理之后得到要传回的数据
+    res = some_function(data)
+    
+    # 将 DataFrame  数据再次打包为 JSON 并传回
+    # 方法一
+    res = '{{"obj": {} }}'.format(res.to_json(orient = "records", force_ascii = False))
+    # 方法二
+    # res = jsonify({"obj":res.to_json(orient = "records", force_ascii = False)})
+    
+    return res
+```
 
 
 ### 自动生成APIs文档
