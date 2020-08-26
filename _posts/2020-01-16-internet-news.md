@@ -663,6 +663,12 @@ mathjax: true
 
 ## 创业案例
 
+- 身边人的创业实践
+   - 昌平县城的书店：[爱书的孩子绘本馆——和孩子一起播下阅读的种子](https://mp.weixin.qq.com/s?__biz=MzUzMTUwMDM5Mw==&mid=2247483674&idx=1&sn=238a5e20334bc0f7393f93a0eab3c7d4&chksm=fa40dd1ccd37540ade867726acd441b87276dc5541c7f7808048d3ddeb9541e847d83ff76f13&mpshare=1&scene=1&srcid=0817UfnBXM3g80pLXDBYIzuh&sharer_sharetime=1597760319618&sharer_shareid=b8d409494a5439418f4a89712efcd92a&key=7e8de568c78f67e53c038a98a1277fab7c672a71b636aa83286de6e2e9e8fe212f581acee42f0f04776c0f12bc47c04b4bdb17e538f54f33bc047b678b002822aff13f4d2366082ce635db0940205a2fcf336c8e28a469b066f8d5ecbba0b11d928c2c8beb9f7c1e2117b0d9388f88ae97a518f588eaf716ccd310e725d38e05&ascene=1&uin=OTY1NzE1MTYw&devicetype=Windows+10+x64&version=62090529&lang=zh_CN&exportkey=Ac98ZB8sWuaUaG30VrS2VHg%3D&pass_ticket=Sl35MOSEZmbSDaWcAuk27eFTK9ZxQcLnbFI4%2BXa8avCLek%2FuHwjd5ZGTFPt4d2Db)
+   - [小鹿情感](http://wap.ixiaolu.com/), 四五个人，创业两年，一年几千万收入，普通一分钟2块，高级一分钟50块钱；起源于公众号
+   - 【2020-8-26】[恋摊](https://www.ifincloud.com/lian-tan/)，思随智能推出的一款，针对流动摊贩的位置信息分享平台，目标提供摊贩，消费者，监管三位一体的信息分享方案。
+
+
 ### [一个二本毕业生的创业逆袭，要做市值千亿的企业级巨头](https://www.toutiao.com/i6810764831235244558)
 
 ### [估值数亿的A轮公司倒闭了，90后CEO还患上肿瘤：创业（失败）到底是怎样的体验](https://mp.weixin.qq.com/s?__biz=MzAxOTM2NDU4Ng==&mid=2455715413&idx=1&sn=c87e61e932565711f777626b1c8931be&chksm=8c63b1d0bb1438c6fb8e4d2285d0fed4e1f5ad77c92c7181a25672cdfa9961bfea24f910f4a4&mpshare=1&scene=1&srcid=0901ka0LQmTL1C8GchuADTyp&sharer_sharetime=1567312086783&sharer_shareid=abefdff25047c434502420ca99eca734&key=034516426b2066d01f77e7ee141d250332eea51cda4b5215feb719029d7c2a0bfc83295cf2ad7157d5e89542d8ed4316aff4351f42eb7fa815a5b6dbd87075102e00d3c9c4997bc77705b9792fbfeee9&ascene=1&uin=OTY1NzE1MTYw&devicetype=Windows+10&version=62060833&lang=zh_CN&pass_ticket=eaz%2Fj4x3WcxBmQvGbcnrMgQ%2Fx%2FC%2FAgWiSp%2FQ1g2FvkNakTkY3F3liGH3lt4Q%2B6kW)
