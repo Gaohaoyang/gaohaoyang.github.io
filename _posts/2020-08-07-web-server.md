@@ -3,7 +3,7 @@ layout: post
 title:  "Web服务知识-Web-Serving"
 date:   2020-08-07 19:17:00
 categories: 技术工具
-tags: Web Python Flask Django Fastapi Restful Swagger HTML
+tags: Web Python Flask Django Fastapi Restful Swagger HTML JavaScript
 author : 鹤啸九天
 excerpt: Web开发相关技术知识点
 mathjax: true
@@ -278,6 +278,32 @@ async def read_item(item_id: str, q: str = None, short: bool = False):
 
 - 【2020-8-22】[微信聊天窗口界面](https://github.com/kuangwk/wechat-chat-interface)
     - ![](https://github.com/kuangwk/wechat-chat-interface/raw/css/screenshot.png)
+
+
+## js
+
+- 【2020-8-26】[JavaScript运行机制](https://www.toutiao.com/i6748661672522547719/)
+- JavaScript语言的一大特点就是单线程，也就是说，同一个时间只能做一件事。那么，为什么JavaScript不能有多个线程呢？这样能提高效率啊。
+- JavaScript的单线程，与它的用途有关。作为浏览器脚本语言，JavaScript的主要用途是与用户互动，以及操作DOM。这决定了它只能是单线程，否则会带来很复杂的同步问题。比如，假定JavaScript同时有两个线程，一个线程在某个DOM节点上添加内容，另一个线程删除了这个节点，这时浏览器应该以哪个线程为准？
+- 所以，为了避免复杂性，从一诞生，JavaScript就是单线程，这已经成了这门语言的核心特征，将来也不会改变。
+- 所有任务分成两种，一种是同步任务（synchronous）
+    - 另一种是异步任务（asynchronous）。同步任务指的是，在主线程上排队执行的任务，只有前一个任务执行完毕，才能执行后一个任务；
+    - 异步任务指的是，不进入主线程、而进入”任务队列”（task queue）的任务，只有”任务队列”通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行。
+        - 异步执行的运行机制如下：(这种运行机制又称为Event Loop（事件循环）)
+            - 所有同步任务都在主线程上执行，形成一个执行栈（execution context stack）。
+            - 主线程之外，还存在一个”任务队列”（task queue）。只要异步任务有了运行结果，就在”任务队列”之中放置一个事件。
+            - 一旦”执行栈”中的所有同步任务执行完毕，系统就会读取”任务队列”，看看里面有哪些事件。那些对应的异步任务，于是结束等待状态，进入执行栈，开始执行。
+            - 主线程不断重复上面的第三步。
+        - ![](https://p1-tt.byteimg.com/origin/pgc-image/e508259a15a04b3bbda091e0989390fb?from=pc)
+
+```javascript
+console.log(1);
+setTimeout(function(){
+console.log(3);
+},0);
+console.log(2);
+//请问数字打印顺序是什么？
+```
 
 
 ## HTML
