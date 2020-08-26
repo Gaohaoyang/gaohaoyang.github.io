@@ -656,9 +656,14 @@ obj1 = {'name': 'Silenthand Olleander',
 }
 obj2 = {"name": "James", "age": 20}
 print(yaml.dump(obj1，))
+# 中文输出
+import json
+print(json.dumps(obj1, ensure_ascii=False, indent=2))
+print(yaml.dump(d,default_flow_style=False, indent=2, allow_unicode=True))
 f = open(r'out_config.yml','w')
 print(yaml.dump(obj2,f))
 yaml.dump_all([obj1, obj2], f) # 一次输出多个片区
+
 
 ```
 
