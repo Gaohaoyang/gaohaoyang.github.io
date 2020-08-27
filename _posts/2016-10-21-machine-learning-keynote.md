@@ -322,6 +322,8 @@ _![](https://static.leiphone.com/uploads/new/article/740_740/201610/58098a477468
 ## 可解释性
 
 - 【2020-8-27】【KDD2020】[可解释深度神经网络](https://mp.weixin.qq.com/s?__biz=MzU2OTA0NzE2NA==&mid=2247535687&idx=1&sn=af3439ba70e23b1fd1bbf339320f6b2b&chksm=fc86ad54cbf12442f2b24f24034a4eeacde415708a539222f00794629be1e43bc300debfc7d8&mpshare=1&scene=23&srcid=0826XPNqyNV8CQloxKmgzaUF&sharer_sharetime=1598452800809&sharer_shareid=b8d409494a5439418f4a89712efcd92a#rd)
+    - KDD2020 Tutorial on [Interpreting and Explaining Deep Neural Networks: A Perspective on Time Series Data](http://xai.kaist.ac.kr/Tutorial/2020/)，含YouTube视频，ppt资料：XAI_KDD_Tutorial-[part1_final_v2](http://xai.kaist.ac.kr/static/img/event/XAI_KDD_Tutorial-part1_final_v2.pdf)，[part2](http://xai.kaist.ac.kr/static/img/event/XAI_KDD_Tutorial-part2_final_v2.pdf)，[part3](http://xai.kaist.ac.kr/static/img/event/XAI_KDD_Tutorial-part3_final.pdf)
+    - ![](http://xai.kaist.ac.kr/static/img/event/XAI_roadmap.png)
 
 
 
