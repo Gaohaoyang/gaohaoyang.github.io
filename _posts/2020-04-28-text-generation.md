@@ -183,6 +183,7 @@ mathjax: true
 # 资料
 
 - 更多[Demo地址](http://wqw547243068.github.io/demo)
+- 【2020-8-27】[E2Echallenge参赛模型汇总](https://blog.csdn.net/u012328476/article/details/108144226)
 
 # 结束
 
