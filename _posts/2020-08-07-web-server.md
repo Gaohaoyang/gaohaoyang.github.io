@@ -331,6 +331,8 @@ async def read_item(item_id: str, q: str = None, short: bool = False):
 
 - 【2020-8-22】[微信聊天窗口界面](https://github.com/kuangwk/wechat-chat-interface)
     - ![](https://github.com/kuangwk/wechat-chat-interface/raw/css/screenshot.png)
+- 【2020-8-28】[EasyMock](https://www.easy-mock.com/login)[文档](https://easy-mock.com/docs)，[Github地址](https://github.com/easy-mock/easy-mock)，Easy Mock 是一个可视化，并且能快速生成 模拟数据 的持久化服务
+    - ![](https://camo.githubusercontent.com/e3e9c378dd2f6d8349922f9e3cb0f7ee095533a9/687474703a2f2f696d672e736f756368652e636f6d2f6632652f33313362333661616137643061336166303837313863333861323836393533342e706e67)
 
 
 ## js
