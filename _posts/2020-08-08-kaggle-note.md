@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Kaggle比赛知识点汇总-Kaggle-Competition-Note"
+title:  "算法竞赛知识点汇总-Algo-Competition-Note"
 date:   2020-08-08 11:27:00
 categories: 机器学习 数据挖掘
 tags: Kaggle XGBoot 天池 KDD 特征工程
@@ -11,6 +11,10 @@ mathjax: true
 
 * content
 {:toc}
+
+# 总结
+
+- 汇总知名数据竞赛的经验信息
 
 
 # KDD CUP
