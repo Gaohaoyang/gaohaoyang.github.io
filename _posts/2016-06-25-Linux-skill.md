@@ -60,6 +60,45 @@ perf既然这么强大，那它的实现原理是什么呢？
 ![](https://p1-tt-ipv6.byteimg.com/img/tos-cn-i-0022/a75094f8b23645fdbc244851528c1c3b~tplv-obj:2664:1542.image?from=post)
 
 
+## 任务管理
+
+### contab使用
+
+- [Linux定时任务Crontab命令详解](https://www.cnblogs.com/intval/p/5763929.html)，[crontab在线测试](https://tool.lu/crontab/)
+
+```shell
+#安装crontab：
+yum install crontabs
+#服务操作说明：
+/sbin/service crond start # 启动服务
+/sbin/service crond stop # 关闭服务
+/sbin/service crond restart # 重启服务
+/sbin/service crond reload # 重新载入配置
+/sbin/service crond status # 启动服务
+# 查看
+crontab [-u user] file
+crontab [-u user] [ -e | -l | -r ] # l显示，e编辑
+# 看日志
+tail -n 2 /var/log/cron
+```
+
+- 每一行都代表一项任务，每行的每个字段代表一项设置，它的格式共分为六个字段，前五段是时间设定段，第六段是要执行的命令段，格式如下：
+   - minute hour day month week command
+      - minute： 表示分钟，可以是从0到59之间的任何整数。
+      - hour：表示小时，可以是从0到23之间的任何整数。
+      - day：表示日期，可以是从1到31之间的任何整数。
+      - month：表示月份，可以是从1到12之间的任何整数。
+      - week：表示星期几，可以是从0到7之间的任何整数，这里的0或7代表星期日。
+      - command：要执行的命令，可以是系统命令，也可以是自己编写的脚本文件。
+   - ![](https://images2015.cnblogs.com/blog/513841/201608/513841-20160812102124078-171184924.png)
+- 示例
+
+```shell
+* * * * * cd /home/work/code/training_platform/web && python t.py
+```
+
+
+
 
 # Shell语言
 
@@ -297,6 +336,7 @@ ssh-keygen -t rsa
 
 - [主流文本编辑器学习曲线](https://coolshell.cn/articles/3125.html)
 - 几个经典的文本编辑器的学习曲线，不排除其中有调侃和幽默的味道
+
 
 ## Vim技能
 
