@@ -742,6 +742,47 @@ ssl_verify: true
       - conda config --set channel_priority flexible
 
 
+## [logging](https://docs.python.org/3/library/logging.html)模块
+
+- [python日志基于时间切分和基于文件大小切分](https://www.jianshu.com/p/5a4e226444bd)
+- 代码：
+
+```python
+#！coding:utf-8
+import logging
+import logging.handlers
+import datetime, time
+
+#logging    初始化工作
+logger = logging.getLogger("zjlogger")
+logger.setLevel(logging.DEBUG)
+
+# 添加TimedRotatingFileHandler
+# (1) 定义一个1秒换一次log文件的handler, 保留3个旧log文件
+rf_handler = logging.handlers.TimedRotatingFileHandler(filename="all.log",when='S',interval=1, backupCount=3)
+# (2) 写入文件，如果文件超过100个Bytes，仅保留5个文件。
+handler = logging.handlers.RotatingFileHandler('logs/myapp.log', maxBytes=100, backupCount=5)
+
+rf_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(filename)s[:%(lineno)d] - %(message)s"))
+
+#在控制台打印日志
+handler = logging.StreamHandler()
+handler.setLevel(logging.DEBUG)
+handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
+
+logger.addHandler(rf_handler)
+logger.addHandler(handler)
+
+while True:
+    logger.debug('debug message')
+    logger.info('info message')
+    logger.warning('warning message')
+    logger.error('error message')
+    logger.critical('critical message')
+    time.sleep(1)
+
+```
+
 # Linux工具
 
 ## 文件传输
@@ -768,8 +809,8 @@ ssl_verify: true
             - 端口范围(1024,65535)
             - 发送、接收顺序不限
             - 传输目录
-               - 接收端：nc -l 9995 | tar xfvz -
-               - 发送端：tar cfz - * | nc 10.0.1.162 9995
+               - 接收端：nc -l 9995 \| tar xfvz -
+               - 发送端：tar cfz - * \| nc 10.0.1.162 9995
       - （3）聊天功能
          - 类似文件传输操作步骤，去掉文件定向（<>）即可
          - A：nc -l 9995
