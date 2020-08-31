@@ -27,6 +27,46 @@ mathjax: true
     - DELETE：删除给定位置的信息。
 
 
+- 参考：[HTTP请求时POST参数到底应该怎么传?](https://blog.csdn.net/j550341130/article/details/82012961)，[HTTP POST/GET 在线请求测试工具](https://www.sojson.com/httpRequest/)
+
+## HTTP请求头
+
+- 请求三要素
+    - ![](https://img-blog.csdn.net/2018082410162352)
+
+- 根据应用场景的不同,HTTP请求的请求体有三种不同的形式, 通过header中的content-type指定, 这里只分析两个:
+    1. **表单方式**：APPlication/x-www-form-urlencoded(默认类型)
+        - 如果不指定其他类型的话, 默认是x-www-form-urlencoded, 此类型要求参数传递样式为<font color='blue'>key1=value1&key2=value2</font>
+            - Flask代码：request.form得到字典
+        - ![](https://www.seotest.cn/d/file/news/20190605/20180824110103426.png)
+        - ![](https://img2018.cnblogs.com/blog/594801/201910/594801-20191029105138255-1197736174.png)
+    2. **json方式**：application/json
+        - 更适合传递大数据的形式, 参数样式就是json格式, 例如<font color='blue'>{"key1":"value1","key2":[1,2,3]}</font>等.
+            - Flask代码：request.json得到字典
+        - ![](https://www.seotest.cn/d/file/news/20190605/20180824110018525.png)
+        - ![](https://img2018.cnblogs.com/blog/594801/201910/594801-20191029105052405-1022058048.png)
+
+- GET方式获取地址栏参数
+    - Flask代码：request.args得到字典
+    - ![](https://img2018.cnblogs.com/blog/594801/201910/594801-20191029105256399-1220928345.png)
+
+
+## HTTP响应头
+
+- 响应三要素
+    - ![](https://img-blog.csdn.net/20180824101548255)
+
+
+## post/get参数获取
+
+- [flask的post,get请求及获取不同格式的参数](https://www.cnblogs.com/leijiangtao/p/11757554.html)
+- ![](https://img2018.cnblogs.com/blog/594801/201910/594801-20191029104937449-1769417565.png)
+
+- PostMan界面
+    - ![](https://img2018.cnblogs.com/blog/594801/201910/594801-20191029105052405-1022058048.png)
+
+
+
 # API
 
 - API(application programming interfaces)，即应用程序编程接口。API由服务器（Server）提供（服务器有各种各样的类型，一般我们浏览网页用到的是web server，即网络服务器），通过API，计算机可以读取、编辑网站数据，就像人类可以加载网页、提交信息等。通俗地，API可以理解为家用电器的插头，用户只提供插座，并执行将插头插入插座的行为，不需要考虑电器内部如何运作。从另外一个角度上讲API是一套协议，规定了与外界的沟通方式：如何发送请求和接受响应。
