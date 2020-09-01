@@ -478,7 +478,34 @@ console.log(2);
 </framset>
 ```
 
+## ajax
 
+- [ajax post 请求发送 json 字符串](https://www.cnblogs.com/virgosnail/p/10108997.html)
+
+代码：
+
+```javascript
+    $.ajax({
+        // 请求方式
+        type:"post",
+        // contentType 
+        contentType:"application/json",
+        // dataType
+        dataType:"json",
+        // url
+        url:url,
+        // 把JS的对象或数组序列化一个json 字符串
+        data:JSON.stringify(data),
+        // result 为请求的返回结果对象
+        success:function (result) {
+            if (200 == result.code){
+                alert("启动成功");
+            }else{
+                alert("启动失败");
+            }
+        }
+    });
+```
 
 
 
