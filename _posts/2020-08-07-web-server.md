@@ -286,6 +286,69 @@ if __name__ == '__main__':
     - 已提交issue：[Failed to get parameters by POST method in “try it out” feature](https://github.com/flasgger/flasgger/issues/428)
 
 
+### 全局变量
+
+- 参考: [Flask 上下文全局变量](https://www.jianshu.com/p/dfe1ee1dc1ec)
+- Flask 在分发请求之前激活(或推送)程序和请求上下文，请求处理完成后再将其删除。程 序上下文被推送后，就可以在线程中使用 current_app 和 g 变量。类似地，请求上下文被 推送后，就可以使用 request 和 session 变量。如果使用这些变量时我们没有激活程序上 下文或请求上下文，就会导致错误。
+
+|变量名|	上下文|	说明|
+|---|---|---|
+|current_app	| 程序上下文|	当前激活程序的程序实例|
+|g	|程序上下文	| 处理请求时用作临时存储的对象，每次请求都会重设这个变量|
+|request	| 请求上下文|	请求对象，封装了客户端发出的HTTP请求中的内容|
+|session	| 请求上下文|	用户会话，用于存储请求之间需要记住的值的词典|
+
+- 代码示例：[flask中4种全局变量](https://www.jianshu.com/p/f24e2c9b548e)
+
+**Session设置**
+
+- 代码
+
+```python
+from flask import Flask,session
+import os
+from datetime import timedelta
+app = Flask(__name__)
+app.config['SECRET_KEY'] = os.urandom(24)
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)
+# 添加数据到session中
+# 操作session的时候 跟操作字典是一样的。
+# SECRET_KEY
+
+@app.route('/')
+def hello_world():
+    session['username'] = 'zhangsan'
+    # 如果没有指定session的过期时间，那么默认是浏览器关闭就自动结束
+    # 如果设置了session的permanent属性为True，那么过期时间是31天。
+    session.permanent = True
+    return 'Hello World!'
+
+@app.route('/get/')
+def get():
+    # session['username']   如果username不存在则会抛出异常
+    # session.get('username')   如果username不存在会得到 none 不会报错 推荐使用
+    return session.get('username')
+
+@app.route('/delete/')
+def delete():
+    print(session.get('username'))
+    session.pop('username')
+    print(session.get('username'))
+    return 'success'
+
+@app.route('/clear/')
+def clear():
+    print(session.get('username'))
+    # 删除session中的所有数据
+    session.clear()
+    print(session.get('username'))
+    return 'success'
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+
 ## Django
 
 
