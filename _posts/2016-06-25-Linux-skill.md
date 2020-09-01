@@ -323,7 +323,21 @@ git config   --global --unset  user.name # 取消命名
 # 生成公钥
 ssh-keygen -t rsa
 
+# [2020-9-1]
+# git对比分支代码
+git log dev ^master # dev 有， master没有
+git log master ^dev # master有，而dev没有
+git log master..dev # dev比 master 中多提交了哪些内容
+git log dev..master # master 比 dev 多提交了什么
+git log dev...master # 仅仅查看有什么不一样
+git log --left-right dev...master # 每次提交都在哪个分支上
+# 注意 commit 后面的箭头，根据我们在 –left-right dev…master 的顺序，左箭头 < 表示是 dev 的，右箭头 > 表示是 master的。
+
 ```
+
+- [Git对比两个分支](https://www.cnblogs.com/mkl34367803/p/9196563.html)
+
+
 
 ## 交互式学习
 
