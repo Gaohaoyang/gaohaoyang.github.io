@@ -16,6 +16,7 @@ mathjax: true
 
 - 汇总NLP技能
 - 【2020-9-2】[文本挖掘实操课！手把手教你用文本挖掘剖析54万首诗歌](https://blog.csdn.net/BF02jgtRS00XKtCx/article/details/108191211)
+    - ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9uSUFtMTZ5VWdQajJtamFJdzdLM1hxYld3elF0TTlNY0Q3RVF6alJTRkhlSXBwT2JaempFN0MyNFVyMlloMXBlZzBFaWFCSTVHaHI2M2lickpQUEZaZkVnLzY0MA?x-oss-process=image/format,png)
     - ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9uSUFtMTZ5VWdQajJtamFJdzdLM1hxYld3elF0TTlNYzVGcmljYmhCREVoU2E2N0NadGZXYktDVlNPeU1ZdDBZdmhobFpXc01HSnpUY1U4T3RCUlFFMXcvNjQw)
     - ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9uSUFtMTZ5VWdQajJtamFJdzdLM1hxYld3elF0TTlNYzZIeGUzOHBMWUtnUXZiNXpJbXJ0TTBGc29aSjVBTXZGenZaaG1hejdDYzN6RnBmeGhWNVRSdy82NDA?x-oss-process=image/format,png)
     - ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9uSUFtMTZ5VWdQajJtamFJdzdLM1hxYld3elF0TTlNY3NMYWtrRmtuTHRmNFpMbFFTMmljSWV0c0R5UUhjdlFxdEdLZk1vM1hmZnVNdUo1U2JUOVhjV3cvNjQw?x-oss-process=image/format,png)
