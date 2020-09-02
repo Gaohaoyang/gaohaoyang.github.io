@@ -13,6 +13,22 @@ mathjax: true
 {:toc}
 
 
+# 总结
+
+- 【2020-9-2】[Bengio讲授因果表示学习，Mila博士因果推理导论开课了](https://www.toutiao.com/i6867722568795685387)，从机器学习的角度编写的《Introduction to Causal Inference》秋季[课程](https://www.bradyneal.com/causal-inference-course#course-textbook)，[教材地址](https://www.bradyneal.com/Introduction_to_Causal_Inference-Aug27_2020-Neal.pdf)，[YouTube地址](https://www.youtube.com/watch?v=CfzO4IEMVUk&list=PLoazKTcS0Rzb6bb9L508cyJ1z-U9iWkA0&index=1)，由 Yoshua Bengio 高徒 Brady Neal 主讲，主要讲述因果推理相关知识。此外，该课程整合了来自许多不同领域的见解，如流行病学、经济学、政治学和机器学习等，这些领域都利用到了因果推理。
+  - ![](https://p3-tt.byteimg.com/origin/pgc-image/50a7c51c7b664c4d97c6ffce404790e2?from=pc)
+  - 内容：
+    - 图模型、后门调整和因果模型结构；
+    - 随机化实验、前门调整、do-calculus 和通用识别；
+    - 估值和条件平均处理效应（Conditional Average Treatment Effects）；
+    - 未观察到的的混淆、边界以及敏感性分析；
+    - 工具变量、断点回归、双重差分和合成控制法；
+    - 有实验的因果关系发现；
+    - 无实验的因果关系发现；
+    - 可移植性和迁移学习；
+    - 反事实推理以及中介和特定路径效应（Mediation and Path-Specific Effects）。
+
+
 
 # The book of why
 
