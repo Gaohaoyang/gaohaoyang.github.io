@@ -3,7 +3,7 @@ layout: post
 title:  "机器学习本质-The-Essense-of-Machine Learning"
 date:   2016-10-21 18:32:00
 categories: 机器学习
-tags: 机器学习 周志华 通用逼近定理 归纳 演绎
+tags: 机器学习 周志华 通用逼近定理 归纳 演绎 凸函数
 excerpt: 机器学习的本质到底是什么？有哪些优缺点，存在哪些局限性
 mathjax: true
 ---
