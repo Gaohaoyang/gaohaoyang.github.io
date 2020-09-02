@@ -35,6 +35,119 @@ mathjax: true
     -  kkt 是个必要条件， 不敢完全判断带约束的也是有全局最优的解；
     - 带约束的优化， 可行域如果不是凹区域， 凸函数在这个可行域上也是有全局最优解；如果可行域是凸集，则凸函数在这个可行域上也是有全局最优解的，参考：[理解凸优化](https://zhuanlan.zhihu.com/p/37108430)，[熊军的笔记](https://note.youdao.com/ynoteshare1/index.html?id=a49d2e78bb131dcb591291a5f6126b78&type=note)
 
+- 代码
+
+```python
+# coding=utf8
+"""
+本代码主要实现两种带约束的lr的算法步骤：
+数据集： iris 数据集
+"""
+
+import torch
+from torch.nn.functional import cross_entropy
+from torch.optim import SGD
+from sklearn.datasets import load_iris
+from torch.utils.data import dataset
+from torch.utils.data import dataloader
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+
+class Ds(dataset.Dataset):
+    """
+    构建一个dataset类， 继承torch官方的Dataset
+    """
+    def __init__(self):
+        super(dataset.Dataset, self).__init__()
+        iris_data = load_iris()
+        self.data = iris_data['data']
+        self.labels = iris_data['target']
+
+    def __len__(self):
+        return len(self.labels)
+
+    def __getitem__(self, item):
+        x = self.data[item]
+        y = self.labels[item]
+        x = torch.Tensor(x)
+        y = torch.LongTensor([y])
+        return x, y
+
+
+class Trainer(object):
+    def __init__(self):
+        """
+        训练集合的特征个数是4， 类别是3
+        """
+        self.model = torch.nn.Linear(4, 3)
+        self.zeros = torch.zeros(3, 4)
+        self.modify_weight()
+        # 打印初始的模型参数， 确保所有的参数大于等于0
+        print(self.model.weight)
+
+    def train(self, epochs=1000, batch_size=16, lr=0.01):
+        dl = self.get_data_loader(batch_size)
+        loss_func = cross_entropy  # 定义损失函数为logistic的损失函数
+        optimizer = SGD(self.model.parameters(), lr=lr)
+        loss_arr = []
+        for epoch in range(epochs):
+            cur_loss = self.train_epoch(epoch, dl, loss_func, optimizer)
+            loss_arr.append(cur_loss)
+
+        print("*" * 100)
+        print("following is the parameters of the model")
+        for name, parameters in self.model.named_parameters():
+            print(name)
+            print(parameters.data)
+        print(loss_arr)
+        do_plot(list(range(epochs)), loss_arr)
+
+    def train_epoch(self, epoch, dl, loss_func, optimizer):
+        self.model.train()
+        loss_arr = []
+        for batch in dl:
+            self.model.zero_grad()  # 将所有的gradient 重置为0
+            x, y = batch
+            y = torch.squeeze(y, 1)  # 将里面的二维数组变成一维数组
+            pred = self.model(x)
+            loss = loss_func(pred, y)  # 计算logloss
+            loss.backward()
+            optimizer.step()
+            self.modify_weight()
+            print(f"epoch is: {epoch}, training loss is: {loss.item()}")
+            loss_arr.append(loss.item())
+        return sum(loss_arr) / len(loss_arr)
+
+    def get_data_loader(self, batch_size):
+        # 初始化iris 的dataset
+        ds = Ds()
+        dl = dataloader.DataLoader(ds, batch_size)
+        return dl
+
+    def modify_weight(self):
+        """
+        用来修改模型，让模型参数在可行区域
+        """
+        new_para = torch.max(self.zeros, self.model.weight.data)
+        self.model.weight.data.copy_(new_para)
+
+
+def do_plot(epoch_arr, loss_arr):
+    """
+    用来画不同epoch 对应的loss
+    """
+    sns.lineplot(x="epoch", y="loss", data={"epoch": epoch_arr, "loss": loss_arr})
+    plt.show()
+
+
+if __name__ == "__main__":
+    trainer = Trainer()
+    trainer.train()
+
+```
+
+
 ## 周志华：机器学习本质
 
 - 摘自：[CNCC 2016 \| 周志华 57 张 PPT 揭开机器学习本质](https://www.leiphone.com/news/201610/rZ9EHIpeSwBv2Tvq.html)
