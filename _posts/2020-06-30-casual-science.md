@@ -3,7 +3,7 @@ layout: post
 title:  "因果科学-Casual-Science"
 date:   2020-06-30 16:03:00
 categories: 自然语言处理 深度学习
-tags: 深度学习 NLP KG 知识图谱 表示学习 因果科学
+tags: 深度学习 NLP KG 知识图谱 表示学习 因果科学 集智俱乐部
 excerpt: 如何让AI系统具备真正的推理能力？图灵奖得主、贝叶斯网络之父 Judea Pearl 的解法——因果科学
 author: 鹤啸九天
 mathjax: true
@@ -28,6 +28,9 @@ mathjax: true
     - 可移植性和迁移学习；
     - 反事实推理以及中介和特定路径效应（Mediation and Path-Specific Effects）。
 
+- 乌鸦智能 ＞ 鹦鹉智能
+  - [因果观念新革命？万字长文，解读复杂系统背后的暗因果](https://swarma.org/?p=19906)，[集智俱乐部因果科学专题Github](https://github.com/CausalAI/clubjizhi)，[因果科学与 Causal AI 系列读书会](https://www.sohu.com/a/415039730_741733)
+  - ![](https://swarma.org/wp-content/uploads/2020/05/wxsync-2020-05-381c31fa5614d7d4df7ae1b27e0d393c.png)
 
 
 # The book of why
