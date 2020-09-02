@@ -88,9 +88,28 @@ Python 常见部署方法有 ：
 - `wsgi` ：利用 http 服务的 mod_wsgi 模块来跑各个 project(Web 应用程序或框架简单而通用的 Web 服务器 之间的接口)。
 - `uWSGI` 是一款像 php-cgi 一样监听同一端口，进行统一管理和负载平衡的工具，uWSGI，既不用 wsgi 协议也不用 fcgi 协议，而是自创了一个 uwsgi 的协议，据说该协议大约是 fcgi 协议的 10 倍那么快。
 
-其实 WSGI 是分成 server 和 framework (即 application) 两部分 (当然还有 middleware)。
+其实 WSGI 是分成 server 和 framework (即 application) 两部分 (当然还有 middleware)。严格说 WSGI 只是一个协议, 规范 server 和 framework 之间连接的接口。
 
-严格说 WSGI 只是一个协议, 规范 server 和 framework 之间连接的接口。
+- 所有的 Python Web框架都要遵循 WSGI 协议
+- WSGI 中有一个非常重要的概念：每个Python Web应用都是一个可调用（callable）的对象。
+    - 在 flask 中，这个对象就是 app = Flask(name) 创建出来的 app，图中的绿色Application部分。
+    - 要运行web应用，必须有 web server，如熟悉的apache、nginx，或者python中的gunicorn，werkzeug提供的WSGIServer，是图的黄色Server部分
+    - Server和Application之间怎么通信，就是WSGI的功能，规定了 app(environ, start_response) 的接口，server会调用 application，并传给它两个参数：environ 包含了请求的所有信息，start_response 是 application 处理完之后需要调用的函数，参数是状态码、响应头部还有错误信息。
+    - ![](https://img-blog.csdn.net/20170530093502586)
+    - WSGI application 非常重要的特点是可以嵌套。可以写个application，调用另外一个 application，然后再返回（类似一个 proxy）。一般来说，嵌套的最后一层是业务应用，中间就是 middleware。好处是可以解耦业务逻辑和其他功能，比如限流、认证、序列化等都实现成不同的中间层，不同的中间层和业务逻辑是不相关的，可以独立维护；而且用户也可以动态地组合不同的中间层来满足不同的需求。
+    - Flask基于Werkzeug WSGI工具箱和Jinja2 模板引擎。Flask也被称为“microframework”，因为它使用简单的核心，用extension增加其他功能。Flask没有默认使用的数据库、窗体验证工具。然而，Flask保留了扩增的弹性，可以用Flask-extension加入这些功能：ORM、窗体验证工具、文件上传、各种开放式身份验证技术。Flask是一个核心，而其他功能则是一些插件
+    - ![](https://img-blog.csdn.net/20170530093535180)
+    - Flask是怎么将代码转换为可见的Web网页?
+        - 从Web程序的一般流程来看，当客户端想要获取动态资源时，（比如ASP和PHP这类语言写的网站），会发起一个HTTP请求（比如用浏览器访问一个URL），Web应用程序就会在服务器后台进行相应的业务处理（比如对数据库进行操作或是进行一些计算操作等），取出用户需要的数据，生成相应的HTTP响应（当然，如果访问的是 静态资源 ，服务器则会直接返回用户所需的资源，不会进行业务处理）
+        - ![](https://img-blog.csdn.net/20170530093546915)
+        - 实际应用中，不同的请求可能会调用相同的处理逻辑，即Web开发中所谓的路由分发
+        - ![](https://img-blog.csdn.net/20170530093643676)
+        - Flask中，使用werkzeug来做路由分发，werkzeug是Flask使用的底层WSGI库（WSGI，全称 Web Server Gateway interface，或者 Python Web Server Gateway Interface，是为 Python 语言定义的Web服务器和Web应用程序之间的一种简单而通用的接口）。
+        - WSGI将Web服务分成两个部分：服务器和应用程序。
+            - WGSI服务器只负责与网络相关的两件事：接收浏览器的HTTP请求、向浏览器发送HTTP应答；
+            - 而对HTTP请求的具体处理逻辑，则通过调用WSGI应用程序进行。
+        - ![](https://img-blog.csdn.net/20170530093621801)
+        - 参考：[Flask运行原理解析](https://blog.csdn.net/sunhuaqiang1/article/details/72808619)，[Flask应用运行过程剖析](https://blog.csdn.net/weixin_34250434/article/details/89072137)
 
 WSGI server 把服务器功能以 WSGI 接口暴露出来。比如 mod_wsgi 是一种 server, 把 apache 的功能以 WSGI 接口的形式提供出来。
 - WSGI framework 就是我们经常提到的 Django 这种框架。不过需要注意的是, 很少有单纯的 WSGI framework , 基于 WSGI 的框架往往都自带 WSGI server。比如 Django、CherryPy 都自带 WSGI server 主要是测试用途, 发布时则使用生产环境的 WSGI server。而有些 WSGI 下的框架比如 pylons、bfg 等, 自己不实现 WSGI server。使用 paste 作为 WSGI server。
