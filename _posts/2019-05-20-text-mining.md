@@ -3,7 +3,7 @@ layout: post
 title:  "文本挖掘实战-Text Mining Implementation"
 date:   2019-05-20 13:00:00
 categories: 实战案例
-tags: 生活大爆炸 NLP 自然语言处理 台词 可视化 身份证 华为 微信
+tags: 生活大爆炸 NLP 自然语言处理 台词 可视化 身份证 华为 微信 诗歌
 excerpt: 深入挖掘分析生活大爆炸（Big Bang）的台词信息，看看各个角色的常用词汇有哪些
 author: 鹤啸九天
 mathjax: true
@@ -15,6 +15,11 @@ mathjax: true
 # NLP技能
 
 - 汇总NLP技能
+- 【2020-9-2】[文本挖掘实操课！手把手教你用文本挖掘剖析54万首诗歌](https://blog.csdn.net/BF02jgtRS00XKtCx/article/details/108191211)
+    - ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9uSUFtMTZ5VWdQajJtamFJdzdLM1hxYld3elF0TTlNYzVGcmljYmhCREVoU2E2N0NadGZXYktDVlNPeU1ZdDBZdmhobFpXc01HSnpUY1U4T3RCUlFFMXcvNjQw)
+    - ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9uSUFtMTZ5VWdQajJtamFJdzdLM1hxYld3elF0TTlNYzZIeGUzOHBMWUtnUXZiNXpJbXJ0TTBGc29aSjVBTXZGenZaaG1hejdDYzN6RnBmeGhWNVRSdy82NDA?x-oss-process=image/format,png)
+    - ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9uSUFtMTZ5VWdQajJtamFJdzdLM1hxYld3elF0TTlNY3NMYWtrRmtuTHRmNFpMbFFTMmljSWV0c0R5UUhjdlFxdEdLZk1vM1hmZnVNdUo1U2JUOVhjV3cvNjQw?x-oss-process=image/format,png)
+    - ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9uSUFtMTZ5VWdQajJtamFJdzdLM1hxYld3elF0TTlNYzhPVVRwUGx0bjByNk5IT1VuNGhtZ0k0WERhZGljZGlhM21VRlJhYmliUjFqaWJyMWE1UkNOVWlhTmJ3LzY0MA?x-oss-process=image/format,png)
 
 ## 编辑距离
 
