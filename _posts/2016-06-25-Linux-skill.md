@@ -360,6 +360,13 @@ git log --left-right dev...master # 每次提交都在哪个分支上
    - （3）它允许每个会话有多个连接窗口，因此可以多人实时共享会话。
    - （4）它还支持窗口任意的垂直和水平拆分。
 
+- 【2020-9-2】[Linux：在终端中查看图片和电影](https://blog.csdn.net/weixin_34072159/article/details/92473531)
+   - 安装工具(cacaview)：yum install caca-utils -y
+   - 查看图片：cacaview test.jpg
+   - 按d改变图片配色
+   - ![](https://static.xjh.me/wp-content/uploads/2017/11/www.xjh.me-2017-11-04_17-18-14_961742-2.png)
+
+
 ## Vim技能
 
 - 【2019-07-18】编辑器学习曲线:
