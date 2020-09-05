@@ -42,6 +42,7 @@ mathjax: true
   - ![](http://5b0988e595225.cdn.sohucs.com/images/20190716/935359c273384228b196eac31077b762.jpeg)
 - 《The book of Why》，豆瓣高达9.5分。其中文版《为什么：关于因果关系的新科学》由中信出版社推出
 - 因果推理和贝叶斯网络的创始人，图灵奖得主`Judea Peral`（朱迪亚·珀尔，贝叶斯网络之父）和科普作家 Mackenzie, Dana合作写的一本因果推理的入门书。
+  - 2011年，珀尔因“通过发展概率和因果推理对人工智能的奠基性贡献”获得了计算机科学的最高荣誉图灵奖
   - ![](http://5b0988e595225.cdn.sohucs.com/images/20190716/7cee9f86eaea4b12af02c573bac064ed.jpeg)
 
 ## 为什么要读
@@ -105,6 +106,12 @@ mathjax: true
 - 而第三层级“反事实”是基于基于人的想象力和假设，是人类独有的思考能力，也是令人工智能达到人类智能的关键命门。
 
 ![](http://p3-tt.byteimg.com/large/pgc-image/S2ZVU1rE6ABLQW)
+
+- 【2020-9-5】攀上因果关系的阶梯
+  - 珀尔描述了从仅仅观察相关性到检验因果性的转变，即从因果关系阶梯的第一级上升到第二级。
+  - 摘自：[因果之箭指向何方？| 图灵奖得主珀尔的《为什么》](https://www.toutiao.com/i6755077246928552452)
+![](https://p1-tt.byteimg.com/origin/pgc-image/e9f24e01f21f4b2b92c5fd877c9c20e2?from=pc)
+
 
 
 ## 因果定律
