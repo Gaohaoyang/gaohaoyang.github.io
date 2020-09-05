@@ -3,7 +3,7 @@ layout: post
 title:  "人工智能及未来畅想-AI and Future"
 date:   2019-06-04 23:41:00
 categories: 人工智能
-tags: 人工智能 AI 人类简史 人文 哲学 康德 汉字屋 清华大学 天机 自行车 AGI 类脑 类机 waitbutwhy 脑机接口 张首晟 姚期智 冯·诺依曼 天道 沈向洋
+tags: 人工智能 AI 人类简史 人文 哲学 康德 汉字屋 清华大学 天机 自行车 AGI 类脑 类机 waitbutwhy 脑机接口 张首晟 姚期智 冯·诺依曼 天道 沈向洋 戴海琼
 excerpt: 深度思考
 mathjax: true
 ---
@@ -42,6 +42,21 @@ mathjax: true
       - 其二是该方法实现了真正的会话学习。下面我主要讲讲GTG。
    - ![](http://p1-tt.byteimg.com/large/pgc-image/S69UvxiDrKbqBH?from=pc)
    - GTG模型与GPT模型对比也有比较大的优势：GPT是学习如何理解和生成自然语言，而GTG是学习预测对话状态，产生grounded responses（真实响应）来完成任务。
+
+- 【2020-9-5】[戴琼海：深度学习遭遇瓶颈，全脑观测启发下一代AI算法](https://www.toutiao.com/i6867958040830837256/)
+![](https://p6-tt.byteimg.com/origin/pgc-image/S9SNAiKA50i3tG?from=pc)
+![](https://p6-tt.byteimg.com/origin/pgc-image/S9SNAioHQBerMW?from=pc)
+![](https://p1-tt.byteimg.com/origin/pgc-image/S9SNAjF8XOMAe3?from=pc)
+- 利用脑观测成果启发人工智能理论应该还大有可为。
+![](https://p6-tt.byteimg.com/origin/pgc-image/S9SNAjdEmZVr3j?from=pc)
+![](https://p6-tt.byteimg.com/origin/pgc-image/S9SNAkC7SXcarK?from=pc)
+- 近年来，脑科学和人工智能是两条平行线，互不相交。在未来，我们需要在两者之间构建一个桥梁，即认知计算。认知计算是通过先进神经技术揭示脑结构、脑功能与智能产生的多层次关联与多模态映射机制，从而建立认知模型与类脑智能体系的科学。
+![](https://p6-tt.byteimg.com/origin/pgc-image/S9SNDpiDatW4iK?from=pc)
+- 对1906年来脑科学和人工智能的重要成果进行了调研，这些研究分别探索了人类的思考模式以及机器的思考模式
+![](https://p1-tt.byteimg.com/origin/pgc-image/S9SNDqG1c4SWtO?from=pc)
+![](https://p6-tt.byteimg.com/origin/pgc-image/S9SNDrB5fGyDbI?from=pc)
+![](https://p1-tt.byteimg.com/origin/pgc-image/S9SNGvP81HYn4c?from=pc)
+
 
 # 人工智能十大里程碑
 
