@@ -3,7 +3,7 @@ layout: post
 title:  "对话系统-Dialogue System"
 date:   2020-04-28 21:45:00
 categories: 深度学习
-tags: 深度学习 NLP 对话系统 QA 多轮 闲聊 沈向洋 FSM 有限状态机 GPT
+tags: 深度学习 NLP 对话系统 QA 多轮 闲聊 沈向洋 FSM 有限状态机 GPT 陈蕴侬
 excerpt: 对话系统技术图谱
 author: 鹤啸九天
 mathjax: true
@@ -32,6 +32,9 @@ mathjax: true
 ![](https://static.leiphone.com/uploads/new/images/20200810/5f311dc980e89.jpg?imageView2/2/w/740)
 ![](https://static.leiphone.com/uploads/new/images/20200810/5f311dd451d94.png?imageView2/2/w/740)
 ![](https://static.leiphone.com/uploads/new/images/20200810/5f311e76b3824.png?imageView2/2/w/740)
+
+- 【2020-7-6】台大陈蕴侬，[如何让任务型聊天机器人更加鲁棒](https://www.bilibili.com/video/BV1oa4y1h7Um/?spm_id_from=333.788.videocard.2)，[课程主页](https://www.csie.ntu.edu.tw/~miulab/s108-adl/)，[PPT链接](https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/)
+<iframe src="//player.bilibili.com/player.html?aid=668813899&bvid=BV1oa4y1h7Um&cid=209423753&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 # 现状
 
