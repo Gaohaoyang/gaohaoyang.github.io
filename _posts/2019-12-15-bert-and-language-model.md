@@ -569,6 +569,9 @@ Hinton在NIPS2014[\[1\]](https://zhuanlan.zhihu.com/p/71986772#ref_1)提出了`�
 - [OpenAI GPT-3 API](https://openai.com/blog/openai-api/)，[Github地址](https://github.com/elyase/awesome-gpt3#awesome-gpt-3)
 - ![](https://github.com/elyase/awesome-gpt3/raw/master/screenshot.png)
 
+- Jay Alammar杰作：[怎样向产品解释GPT-3](http://jalammar.github.io/how-gpt3-works-visualizations-animations/)
+![](http://jalammar.github.io/images/gpt3/05-gpt3-generate-output-context-window.gif)
+
 - 资料
     - [GPT-3的50种玩法告诉你，它很酷，但是没有通过图灵测试](https://www.toutiao.com/a6855330183403012621/)
     - [最新最全GPT-3模型网络结构详细解析](https://www.toutiao.com/i6858589917883138571/)
