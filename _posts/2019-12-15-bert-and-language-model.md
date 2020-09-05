@@ -562,7 +562,145 @@ Hinton在NIPS2014[\[1\]](https://zhuanlan.zhihu.com/p/71986772#ref_1)提出了`�
 
 # GPT模型
 
+- [OpenAI GPT-3 API](https://openai.com/blog/openai-api/)，[Github地址](https://github.com/elyase/awesome-gpt3#awesome-gpt-3)
+- ![](https://github.com/elyase/awesome-gpt3/raw/master/screenshot.png)
 
+- 资料
+    - [GPT-3的50种玩法告诉你，它很酷，但是没有通过图灵测试](https://www.toutiao.com/a6855330183403012621/)
+    - [最新最全GPT-3模型网络结构详细解析](https://www.toutiao.com/i6858589917883138571/)
+- 发展历史
+    - 2018年6月，OpenAI的研究人员使用了一种新颖的组合，将生成式深度学习架构Transformer和无监督预训练（也称为自监督学习）结合起来，得到了GPT模型。
+    - Transformer的自注意力机制提供了一种通用的方式来对输入的各个部分进行建模，使其依赖于输入的其他部分（需要大量计算）。
+    - Transformer和无监督预训练的组合不限于GPT系列模型。Google，Facebook和许多大学实验室相继提出了BERT、XLNet等语言模型。
+    - 到2019年初，OpenAI改进了其基础架构，将参数和数据数量增加10倍来扩展同一模型，即GPT-2。
+    - 随后，OpenAI推出了SparseTransformer，它是对早期Transformer模型的改进，可以可靠地处理更长的文档。
+    - 2020年，OpenAI通过其beta API发布了GPT-3，引起了人们的关注。GPT-3不仅扩大了GPT-2上使用的数据量和计算量，而且用SparseTransformer取代了原始Transformer，从而产生了迄今为止具有最佳zero-shot 和 few-shot学习性能的模型。
+    - GPT-3的few-shot学习能力使得它具备了一些非常有趣的演示功能，包括自动代码生成、“搜索引擎”、写作辅助和创意小说等。
+
+## 模型结构
+
+- 原始GPT网络结构
+    - ![](https://p6-tt.byteimg.com/origin/pgc-image/f3fcfe5dd66149a59d4adb1c82b5a812?from=pc)
+- 常见文本生成
+    - 并非所有英雄都穿 -> **斗篷**
+- GPT生成
+    - 并非所有英雄都披着斗篷 -> **但**
+    - 并非所有英雄都披着斗篷 ，但-> **全部**
+    - 并非所有英雄都披着斗篷，但全部 -> **恶棍**
+    - 并非所有英雄都披着斗篷，但全部恶棍 -> **做**
+- 说明
+    - 1. 输入序列固定在2048个字（对于GPT-3）以内。将短序列作为输入时，只需用“空”值填充。
+    - 2. GPT输出不仅是一次预测（概率），而是一系列预测（长度2048）（每个可能单词的概率）。序列中每个“next”位置都是一个预测。但是在生成文本时，通常只查看序列中最后一个单词的预测。
+    - 3. 为了提高效率，GPT-3实际上使用字节级（byte-level）字节对编码（[BPE](https://huggingface.co/transformers/tokenizer_summary.html)）进行Token化。
+    - 4. 对当前Token在序列中的位置进行编码，将Token的位置（标量i，在[0-2047]中）传递给12288个正弦函数，每个函数的频率都不同
+
+![](https://p6-tt.byteimg.com/origin/pgc-image/f900defa52ba43f89260c42eaaee237a?from=pc)
+
+## 被玩high的GPT-3
+
+
+- GitHub项目中的50种玩法，感兴趣的同学们可以继续探索。
+
+- 1、生成应用和布局
+    - 根据描述生成HTML布局和代码
+    - 根据描述创建UI设计
+    - 根据描述生成React代码创建待办事项清单应用
+    - 仅基于React变量名称生成component
+    - 根据颜色名称或表情符号生成色阶
+    - 根据描述创建网站
+- 2、搜索和数据分析
+    - 问题解答和搜索引擎
+    - 扩充表中的信息
+    - 根据描述创建图表
+    - 根据描述生成代码并转换为电子表格
+    - 根据描述生成图表和代码
+- 3、程序生成与分析
+    - 根据描述生成shell命令
+    - 阅读代码并回答相关问题
+    - 根据描述生成LaTeX表达式
+    - 根据问题描述生成SQL代码_1
+    - 根据问题描述生成SQL代码_2
+    - 编码面试
+    - 生成Python代码回答自然语言问题
+    - 生成特定数据库的SQL代码
+    - 根据描述生成机器学习代码
+- 4、文本生成
+    - 语言翻译
+    - 将日常语言转换为法律语言
+    - 自动生成请求
+    - 根据关键词写完整的回复邮件
+    - 简化法律语言
+    - 翻译中文非文学诗歌
+    - 将句子改写得更礼貌
+    - 总结名著思想
+    - 以大五人格（外向性、开放性、宜人性、尽责性、神经质）控制GPT-3的语言风格
+- 5、内容创作
+    - 营销内容创作
+    - 生成模因，模仿创作
+    - 撰写Google广告
+    - 生成图片说明
+    - 根据描述生成食谱
+    - 根据“如何有效召开董事会会议”写“如何招募董事会成员”
+    - 生成莎士比亚风格的诗歌
+    - 生成科学问题并回答
+    - 生成历史问题并回答
+    - 文本补全和风格化重写
+- 6、一般推理
+    - 物理问题
+    - 数学问题
+    - 医学问题
+    - 无意义的问题
+    - 推理问题
+    - 多步骤处理问题
+    - 通过图片确定食品成分和健康性
+    - 日常用语翻译成正式表达
+- 7、其他
+    - GPT-3下棋
+    - 使用自然语言设计交互式语音应答流
+    - 通过临床症状对患者进行诊断
+
+应用案例：
+- 1、根据描述生成HTML布局和代码：根据输入的自然语言描述生成HTML网页布局，以及相应代码。
+    - ![](https://p1-tt.byteimg.com/origin/pgc-image/S6FOh7mE73PNC1?from=pc)
+- 2、根据描述创建UI设计：输入文字描述，就可以生成相应的UI界面，跟上一个类似，不过界面更适应手机操作系统
+    - ![](https://p6-tt.byteimg.com/origin/pgc-image/S6FOhi7Ffa0ki6?from=pc)
+- 3、扩充表中的信息
+    - ![](https://p3-tt.byteimg.com/origin/pgc-image/S6FOhiu5j0rUax?from=pc)
+- 4、根据描述生成图表和Python代码
+    - ![](https://p3-tt.byteimg.com/origin/pgc-image/S6FOiGE9VukEYd?from=pc)
+- 5、根据描述生成LaTeX表达式
+    - ![](https://p3-tt.byteimg.com/origin/pgc-image/S6FOiGyIe28RJk?from=pc)
+- 6、根据问题描述生成SQL代码
+    - ![](https://p1-tt.byteimg.com/origin/pgc-image/S6FOiHNAhX0Ebi?from=pc)
+- 7、根据描述生成机器学习代码：GPT-3还能写自己同类的代码，比AutoML还AutoML
+    - ![](https://p6-tt.byteimg.com/origin/pgc-image/S6FOiHu6Sat7pt?from=pc)
+- 8、编码面试
+    - ![](https://p6-tt.byteimg.com/origin/pgc-image/S6FOiKUAtRoQdm?from=pc)
+- 9、将日常语言转换为法律语言
+    - ![](https://p6-tt.byteimg.com/origin/pgc-image/S6FOj84Ij3iIs1?from=pc)
+- 10、根据关键词写完整的回复邮件
+    - ![](https://p6-tt.byteimg.com/origin/pgc-image/S6FOj8RDFq98C0?from=pc)
+- 11、将句子改写得更礼貌
+    - ![](https://p6-tt.byteimg.com/origin/pgc-image/S6FOj8v4Ngc0XH?from=pc)
+- 12、总结名著思想
+    - ![](https://p6-tt.byteimg.com/origin/pgc-image/S6FOj97FXhmLjI?from=pc)
+- 13、生成科学问题并回答
+    - ![](https://p3-tt.byteimg.com/origin/pgc-image/S6FOjqo2eoEbhh?from=pc)
+- 14、推理问题
+
+
+## 思考
+
+- OpenAI的创始人Sam Altman也认为GPT-3被过度炒作，在推特上表示：“ GPT-3的炒作实在太多了。它仍然存在严重的缺陷，有时还会犯非常愚蠢的错误。”
+- 问题
+    - GPT-3还是一个依赖算力和大数据的怪兽。GPT-3的训练需要花费355GPU年和460万美元，数据集包含3000亿个文本token，存储量高达45TB，参数数量更是达到1750亿，而GPT-2的参数数量是15亿。
+    - 最近的流行也不能忽视心理学效应的影响
+    - 但是，GPT-3的few-shot 学习能力不是通用的，尽管该模型在复杂任务和模式的学习上给人留下了深刻的印象，但它仍然可能会失败。例如，即使看过10,000个示例，也解决不了反写字符串那样简单的任务。
+    - 即使是OpenAI，也曾指出GPT-3存在缺陷，GPT-3的原始论文就提供了一些证据，证明GPT-3无法执行复杂的逻辑推理。
+    - GPT3的宽度为2048个token，这是它理解上下文的极限，而人类可以记住多本书的知识，并将其关联起来，在这方面，GPT-3还差得远。
+    - GPT-3的生成结果表现出的灵活性是大数据训练的结果，它无法超越数据本身，也就无法拥有组合性推理能力，不如说，它学到的是“统计层面的复制粘贴能力”。
+
+![](https://p6-tt.byteimg.com/origin/pgc-image/S6FOjrg9iyHuW9?from=pc)
 
 
 # 资料
