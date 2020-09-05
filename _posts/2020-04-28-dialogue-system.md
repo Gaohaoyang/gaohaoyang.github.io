@@ -3,7 +3,7 @@ layout: post
 title:  "对话系统-Dialogue System"
 date:   2020-04-28 21:45:00
 categories: 深度学习
-tags: 深度学习 NLP 对话系统 QA 多轮 闲聊 沈向洋 FSM 有限状态机
+tags: 深度学习 NLP 对话系统 QA 多轮 闲聊 沈向洋 FSM 有限状态机 GPT
 excerpt: 对话系统技术图谱
 author: 鹤啸九天
 mathjax: true
@@ -27,6 +27,11 @@ mathjax: true
       - 其二是该方法实现了真正的会话学习。下面我主要讲讲GTG。
    - ![](http://p1-tt.byteimg.com/large/pgc-image/S69UvxiDrKbqBH?from=pc)
    - GTG模型与GPT模型对比也有比较大的优势：GPT是学习如何理解和生成自然语言，而GTG是学习预测对话状态，产生grounded responses（真实响应）来完成任务。
+   
+- 【2020-8-10】[京东副总裁何晓冬：GPT-3后，人机对话与交互何去何从？CCF-GAIR 2020](https://www.leiphone.com/news/202008/BC6XqIXF3ifH6uvV.html)
+![](https://static.leiphone.com/uploads/new/images/20200810/5f311dc980e89.jpg?imageView2/2/w/740)
+![](https://static.leiphone.com/uploads/new/images/20200810/5f311dd451d94.png?imageView2/2/w/740)
+![](https://static.leiphone.com/uploads/new/images/20200810/5f311e76b3824.png?imageView2/2/w/740)
 
 # 现状
 
