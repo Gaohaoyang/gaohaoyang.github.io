@@ -14,8 +14,6 @@ mathjax: true
 
 # BERT及预训练语言模型
 
-
-
 - [The Annotated Transformer](http://nlp.seas.harvard.edu/2018/04/03/attention.html),Harvard NLP出品，含pytorch版代码实现
 - [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/)
 - [Transformer模型的PyTorch实现](https://luozhouyang.github.io/transformer/),[A PyTorch implementation of the Transformer model in "Attention is All You Need"](https://github.com/jadore801120/attention-is-all-you-need-pytorch)
@@ -480,6 +478,7 @@ Hinton在NIPS2014[\[1\]](https://zhuanlan.zhihu.com/p/71986772#ref_1)提出了`�
 - 知识蒸馏使用的是Teacher—Student模型，其中teacher是“知识”的输出者，student是“知识”的接受者。知识蒸馏的过程分为2个阶段:
     - 原始模型训练: 训练"Teacher模型", 简称为Net-T，它的特点是模型相对复杂，也可以由多个分别训练的模型集成而成。我们对"Teacher模型"不作任何关于模型架构、参数量、是否集成方面的限制，唯一的要求就是，对于输入X, 其都能输出Y，其中Y经过softmax的映射，输出值对应相应类别的概率值。
     - 精简模型训练: 训练"Student模型", 简称为Net-S，它是参数量较小、模型结构相对简单的单模型。同样的，对于输入X，其都能输出Y，Y经过softmax映射后同样能输出对应相应类别的概率值。
+
 ### 知识蒸馏的关键点
 
 - 如果回归机器学习最最基础的理论，我们可以很清楚地意识到一点(而这一点往往在我们深入研究机器学习之后被忽略): 机器学习最根本的目的在于训练出在某个问题上泛化能力强的模型。
@@ -522,6 +521,7 @@ Hinton在NIPS2014[\[1\]](https://zhuanlan.zhihu.com/p/71986772#ref_1)提出了`�
 - 总的来说，T的选择和Net-S的大小有关，Net-S参数量比较小的时候，相对比较低的温度就可以了（因为参数量小的模型不能capture all knowledge，所以可以适当忽略掉一些负标签的信息）
 
 ## 2. 蒸馏经验
+
 --------
  
 ### 2.1 Transfer Set和Soft target
@@ -558,6 +558,9 @@ Hinton在NIPS2014[\[1\]](https://zhuanlan.zhihu.com/p/71986772#ref_1)提出了`�
 2.  [Distilling BERT Models with spaCy](https://link.zhihu.com/?target=http%3A//www.nlp.town/blog/distilling-bert/%3Futm_campaign%3DNLP%2520News%26utm_medium%3Demail%26utm_source%3DRevue%2520newsletter)
 3.  [DistilBERT](https://link.zhihu.com/?target=https%3A//medium.com/huggingface/distilbert-8cf3380435b5)
 4.  [Multilingual MiniBERT: Tsai et al. (EMNLP 2019)](https://link.zhihu.com/?target=https%3A//arxiv.org/pdf/1909.00100)
+
+
+# GPT模型
 
 
 
