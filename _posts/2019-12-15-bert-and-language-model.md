@@ -581,6 +581,9 @@ Hinton在NIPS2014[\[1\]](https://zhuanlan.zhihu.com/p/71986772#ref_1)提出了`�
     - 2020年，OpenAI通过其beta API发布了GPT-3，引起了人们的关注。GPT-3不仅扩大了GPT-2上使用的数据量和计算量，而且用SparseTransformer取代了原始Transformer，从而产生了迄今为止具有最佳zero-shot 和 few-shot学习性能的模型。
     - GPT-3的few-shot学习能力使得它具备了一些非常有趣的演示功能，包括自动代码生成、“搜索引擎”、写作辅助和创意小说等。
 
+- 【2020-8-10】[京东副总裁何晓冬：GPT-3后，人机对话与交互何去何从？CCF-GAIR 2020](https://www.leiphone.com/news/202008/BC6XqIXF3ifH6uvV.html)
+![](https://static.leiphone.com/uploads/new/images/20200810/5f311dc980e89.jpg?imageView2/2/w/740)
+
 ## 模型结构
 
 - 原始GPT网络结构
