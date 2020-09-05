@@ -3,7 +3,7 @@ layout: post
 title:  BERT及预训练语言模型-BERT-and-Language-Model
 date:   2019-12-10 16:52:00
 categories: 深度学习 
-tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook
+tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook TextCNN
 excerpt: 预训练语言模型及BERT知识点汇总
 mathjax: true
 ---
@@ -20,6 +20,10 @@ mathjax: true
 
 ## 总结
 
+- 【2020-8-13】[打破BERT天花板：11种花式炼丹术刷爆NLP分类SOTA！](https://blog.csdn.net/abcdefg90876/article/details/108016310)
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy81ZmtuYjQxaWI5cUgxd240a08wQ1FpYkJlZGNiZzduemZCUTNKMTlPcTNnRFZxY1ZFbU1lMjhPWjlwZkQ0SkswanV1YVVZNjYwTEtzcUJteE5BUTU4WlRnLzY0MA?x-oss-process=image/format,png)
+- NLP分类模型时间线
+    - ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy81ZmtuYjQxaWI5cUYzaWJLQ05yOG9FakZjRDF5bE9pY1o5VHVHTlpKcUN1N0ZtcWliMHZKbmU3c0V5Z2ljQkFzdTc3RDdTbjN2a0pTR1hDaWM5OUZRelRpY0dqU3cvNjQw?x-oss-process=image/format,png)
 
 ### Faiss简介
 
