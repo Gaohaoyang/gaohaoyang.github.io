@@ -3,13 +3,30 @@ layout: post
 title:  "丘成桐：数理与人文-Maths and Art"
 date:   2019-09-06 10:29:00
 categories: 数学基础
-tags: 丘成桐 数学 人文
+tags: 丘成桐 数学 人文 陶哲轩
 excerpt: 人文与数学的前后关系
 mathjax: true
 ---
 
 * content
 {:toc}
+
+
+
+# 数据简史
+
+- [数学的深渊](https://www.bilibili.com/video/BV1vJ411C7hn/?spm_id_from=333.788.videocard.1)
+
+<iframe src="//player.bilibili.com/player.html?aid=79072691&bvid=BV1vJ411C7hn&cid=135302530&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- [数学简史——帮你快速梳理数学知识的脉络](https://www.youtube.com/watch?v=OmJ-4B-mS-Y)，[B站地址](https://www.bilibili.com/video/BV1f741137pJ/?spm_id_from=333.788.videocard.12)
+<iframe src="//player.bilibili.com/player.html?aid=88736768&bvid=BV1f741137pJ&cid=151538219&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+- 【2020-9-5】2020年8月4日下午五点（北京时间）,[丘成桐讲数学简史](https://www.bilibili.com/video/av626712650/)，[ppt截图](http://www.360doc.com/content/20/0811/15/1564385_929664100.shtml)
+
+<iframe src="//player.bilibili.com/player.html?aid=626712650&bvid=BV1Xt4y1D7z7&cid=222894390&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+- [陶哲轩-地上最强数学家访谈](https://www.bilibili.com/video/BV1KW411q7r2/?spm_id_from=333.788.videocard.11)
+<iframe src="//player.bilibili.com/player.html?aid=18245630&bvid=BV1KW411q7r2&cid=29786993&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 # 数学大师
 
@@ -174,6 +191,8 @@ mathjax: true
 - 【2020-3-8】[Teaching kids real math with computers](https://www.ted.com/talks/conrad_wolfram_teaching_kids_real_math_with_computers#t-139494)
 
 <div style="max-width:854px"><div style="position:relative;height:0;padding-bottom:56.25%"><iframe src="https://embed.ted.com/talks/conrad_wolfram_teaching_kids_real_math_with_computers" width="854" height="480" style="position:absolute;left:0;top:0;width:100%;height:100%" frameborder="0" scrolling="no" allowfullscreen></iframe></div></div>
+
+
 
 # 丘成桐：数理与人文
 
