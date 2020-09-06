@@ -3,12 +3,15 @@ layout: post
 title:  "神经网络理解-Neural Network"
 date:   2018-12-09 22:44:00
 categories: 深度学习
-tags: 神经网络  人工智能  AI  机器学习  ML  表示学习 周志华 戴海琼
+tags: 神经网络  人工智能  AI  机器学习  ML  表示学习 周志华 戴海琼 Hinton
 excerpt: 整理神经网络的点点滴滴，思考背后的关联。
 mathjax: true
 ---
 
 # 资料
+
+- 【2020-7-28】[The Next Generation of Neural Networks](https://www.bilibili.com/video/BV18A411Y7N4), Geoffrey Hinton，对下一代神经网络，比学习的来龙去脉，以及现在的SOTA模型 SimCLR
+<iframe src="//player.bilibili.com/player.html?aid=329101147&bvid=BV18A411Y7N4&cid=217768758&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
 
