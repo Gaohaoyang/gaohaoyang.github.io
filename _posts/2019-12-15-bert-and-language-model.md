@@ -566,6 +566,7 @@ Hinton在NIPS2014[\[1\]](https://zhuanlan.zhihu.com/p/71986772#ref_1)提出了`�
 
 # GPT模型
 
+- 【2019-2】张俊林：[效果逆天的通用语言模型 GPT 2.0 来了，它告诉了我们什么？](https://www.infoq.cn/article/pW8YaUXjTuhC6d0p*OwX)
 - [OpenAI GPT-3 API](https://openai.com/blog/openai-api/)，[Github地址](https://github.com/elyase/awesome-gpt3#awesome-gpt-3)
 - ![](https://github.com/elyase/awesome-gpt3/raw/master/screenshot.png)
 
