@@ -310,6 +310,12 @@ git reset --hard
 # 或者通过使用git log查看版本号后回退到暂存区的某个版本
 git reset [版本号]
 
+# 【2020-9-8】
+git log # 查看历史提交信息, 
+git reset --soft 19462f6f46cf4cbc211d366359afac0c17a7c190
+# 注意 --hard 参数会抛弃当前工作区的修改
+# 使用 --soft 参数的话会回退到之前的版本，但是保留当前工作区的修改，可以重新提交
+
 # 更新master → release分支的操作步骤
 git branch release # 创建release分支，用于上线
 git checkout release # 切换到release分支
