@@ -310,6 +310,13 @@ git reset --hard
 # 或者通过使用git log查看版本号后回退到暂存区的某个版本
 git reset [版本号]
 
+# 更新master → release分支的操作步骤
+git branch release # 创建release分支，用于上线
+git checkout release # 切换到release分支
+git merge master -m '合并到release分支' # 合并master到本地
+git push origin release # 同步到远程分支
+
+
 # 【2020-8-21】
 git config --list 
 git config -l # 查看已有配置列表
