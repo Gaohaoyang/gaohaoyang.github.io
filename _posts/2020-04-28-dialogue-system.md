@@ -417,6 +417,9 @@ public <controlDevice> = <startPolite> <command> <endPolite>;
 13. <NULL>表示无声音时候匹配 
 14. <VOID>表示不识别的声音匹配 15. 注释： // ;/**/ ;@xx;
 
+- 注：暂不支持import功能，已提issue（[Suggestion: it's better to add `import` function](https://github.com/Danesprite/pyjsgf/issues/36)）
+
+
 - 案例
 
 ```java
