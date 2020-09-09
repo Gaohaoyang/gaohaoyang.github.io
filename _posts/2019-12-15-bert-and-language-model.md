@@ -18,12 +18,27 @@ mathjax: true
 - [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/)
 - [Transformer模型的PyTorch实现](https://luozhouyang.github.io/transformer/),[A PyTorch implementation of the Transformer model in "Attention is All You Need"](https://github.com/jadore801120/attention-is-all-you-need-pytorch)
 
+
 ## 总结
 
 - 【2020-8-13】[打破BERT天花板：11种花式炼丹术刷爆NLP分类SOTA！](https://blog.csdn.net/abcdefg90876/article/details/108016310)
 ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy81ZmtuYjQxaWI5cUgxd240a08wQ1FpYkJlZGNiZzduemZCUTNKMTlPcTNnRFZxY1ZFbU1lMjhPWjlwZkQ0SkswanV1YVVZNjYwTEtzcUJteE5BUTU4WlRnLzY0MA?x-oss-process=image/format,png)
 - NLP分类模型时间线
     - ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy81ZmtuYjQxaWI5cUYzaWJLQ05yOG9FakZjRDF5bE9pY1o5VHVHTlpKcUN1N0ZtcWliMHZKbmU3c0V5Z2ljQkFzdTc3RDdTbjN2a0pTR1hDaWM5OUZRelRpY0dqU3cvNjQw?x-oss-process=image/format,png)
+
+## 预训练语言模型（PLMs）
+
+- 【2020-9-9】[预训练语言模型(PLMs)走的飞快](https://zhuanlan.zhihu.com/p/93781241)
+- ![](https://pic1.zhimg.com/v2-447ae7707604e7ac520555249332c42c_1440w.jpg)
+- 预训练模型在经历中4个时代
+    - 第一个是轰动性的**词嵌入**（Word Embedding）时代， 杰出代表是Word2Vec和Glove；
+    - 第二个是**上下文嵌入**（Context Word Embedding），代表为CoVe和ELMO；
+    - 第三个时代是**预训练模型**，代表是GPT和BERT； 
+    - 第四个时代是**改进型**和**领域定制型**。 
+        - 改进型代表为ALBERT和XLNet
+        - 领域定制化(Domain Specific)代表为SciBert (Scientific Bert) 和BioBert(Biomedical Bert)。 
+
+
 
 ### Faiss简介
 
