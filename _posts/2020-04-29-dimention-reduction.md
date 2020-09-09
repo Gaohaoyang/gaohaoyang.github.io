@@ -14,6 +14,7 @@ mathjax: true
 
 # 总结
 
+- 【2020-9-9】[流形学习t-SNE，LLE，Isomap](https://www.toutiao.com/i6870113106081612292)
 
 # 降维
 
@@ -206,6 +207,12 @@ Diagram of k-fold cross-validation with k=4
 # 流形学习
 
 - 流形学习假设所有处于高维空间的数据点都分布在一个低维的流形上。流形学习的目的就在于寻找一种映射，从高维空间中恢复出低维流形来，从而利用流形的低维坐标表示高位空间的数据点，实现数据降维的目的。常用的算法有Isomap, LLE（Locally Linear Embedding）, LE（Laplacian Eigenmaps），LLP（Locality Preserving Projection）等
+
+- 虽然有一些维度缩减的变体是有监督的（例如线性/二次判别分析），流形学习通常指的是无监督的降维，其中类别没有提供给算法（虽然可能存在）
+
+![](https://p1-tt.byteimg.com/origin/pgc-image/18fd608d47914f9c90c2227d2dd56a9e)
+![](https://p3-tt.byteimg.com/origin/pgc-image/c0574ea8081f49af95604bb350657bd2)
+
 
 - 降维的目的在于寻找数据的“内在变量”,如图，丢弃掉数据之间你的公共信息（“A”的形状），发掘数据之间的变化信息（缩放尺度及旋转角度）。由于缩放尺度与旋转角度并非是线性分布的，因此更适合采用非线性降维方法。
 ![](https://img-blog.csdnimg.cn/20190401202159198.jpg)
