@@ -346,6 +346,9 @@ git log dev...master # 仅仅查看有什么不一样
 git log --left-right dev...master # 每次提交都在哪个分支上
 # 注意 commit 后面的箭头，根据我们在 –left-right dev…master 的顺序，左箭头 < 表示是 dev 的，右箭头 > 表示是 master的。
 
+# 【2020-9-10】git免密pull/push，以下命令自动保存密码
+git config --global credential.helper store
+
 ```
 
 - [Git对比两个分支](https://www.cnblogs.com/mkl34367803/p/9196563.html)
