@@ -330,6 +330,7 @@ from datetime import timedelta
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(24)
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)
+#SESSION_TYPE = "redis"
 # 添加数据到session中
 # 操作session的时候 跟操作字典是一样的。
 # SECRET_KEY
@@ -366,6 +367,72 @@ def clear():
 if __name__ == '__main__':
     app.run(debug=True)
 ```
+
+**分布式session**
+
+- 【2020-9-11】以上代码仅适用单机版，如果部署在分布式环境，流量负载均衡，会出现session找不到的现象
+- 分布式session一致性：
+    - 客户端发送一个请求，经过负载均衡后该请求会被分配到服务器中的其中一个，由于不同服务器含有不同的web服务器(例如Tomcat)，不同的web服务器中并不能发现之前web服务器保存的session信息，就会再次生成一个JSESSIONID，之前的状态就会丢失
+
+
+- 解决方法：
+    - 参考：
+        - [如何配置 flask将session 保存在redis中](https://www.cnblogs.com/wangkun122/articles/9118009.html)
+        - [4种分布式session解决方案](https://blog.csdn.net/qq_35620501/article/details/95047642)
+        - [分布式session的几种实现方式](https://www.cnblogs.com/daofaziran/p/10933221.html)
+
+- 方案一：客户端存储
+    - 直接将信息存储在cookie中
+    - cookie是存储在客户端上的一小段数据，客户端通过http协议和服务器进行cookie交互，通常用来存储一些不敏感信息
+    - 缺点：
+        - 数据存储在客户端，存在安全隐患
+        - cookie存储大小、类型存在限制
+        - 数据存储在cookie中，如果一次请求cookie过大，会给网络增加更大的开销
+- 方案二：session复制
+    - session复制是小型企业应用使用较多的一种服务器集群session管理机制，在真正的开发使用的并不是很多，通过对web服务器(例如Tomcat)进行搭建集群。
+    - 存在的问题：
+        - session同步的原理是在同一个局域网里面通过发送广播来异步同步session的，一旦服务器多了，并发上来了，session需要同步的数据量就大了，需要将其他服务器上的session全部同步到本服务器上，会带来一定的网路开销，在用户量特别大的时候，会出现内存不足的情况
+    - 优点：
+        - 服务器之间的session信息都是同步的，任何一台服务器宕机的时候不会影响另外服务器中session的状态，配置相对简单
+        - Tomcat内部已经支持分布式架构开发管理机制，可以对tomcat修改配置来支持session复制，在集群中的几台服务器之间同步session对象，使每台服务器上都保存了所有用户的session信息，这样任何一台本机宕机都不会导致session数据的丢失，而服务器使用session时，也只需要在本机获取即可
+- 方案三：session绑定：
+    - Nginx介绍：Nginx是一款自由的、开源的、高性能的http服务器和反向代理服务器
+    - Nginx能做什么：反向代理、负载均衡、http服务器（动静代理）、正向代理
+    - 如何使用nginx进行session绑定
+        - 利用nginx的反向代理和负载均衡，之前是客户端会被分配到其中一台服务器进行处理，具体分配到哪台服务器进行处理还得看服务器的负载均衡算法(轮询、随机、ip-hash、权重等)，但是我们可以基于nginx的ip-hash策略，可以对客户端和服务器进行绑定，同一个客户端就只能访问该服务器，无论客户端发送多少次请求都被同一个服务器处理
+    - 缺点：
+        - 容易造成单点故障，如果有一台服务器宕机，那么该台服务器上的session信息将会丢失
+        - 前端不能有负载均衡，如果有，session绑定将会出问题
+    - 优点：
+        - 配置简单
+- 方案四：session持久化到数据库
+    - 如：基于redis存储session方案
+    - 原理：就不用多说了吧，拿出一个数据库，专门用来存储session信息。保证session的持久化。
+    - 优点：服务器出现问题，session不会丢失
+    - 缺点：如果网站的访问量很大，把session存储到数据库中，会对数据库造成很大压力，还需要增加额外的开销维护数据库。
+    - 优点：
+        - 企业中使用的最多的一种方式
+        - spring为我们封装好了spring-session，直接引入依赖即可
+        - 数据保存在redis中，无缝接入，不存在任何安全隐患
+        - redis自身可做集群，搭建主从，同时方便管理
+    - 缺点：
+        - 多了一次网络调用，web容器需要向redis访问
+    - 基于redis存储session方案流程示意图
+![](https://img-blog.csdnimg.cn/2019070810495327.png)
+
+- 方案五：session复制
+    - terracotta实现session复制
+    - Terracotta的基本原理是对于集群间共享的数据，当在一个节点发生变化的时候，Terracotta只把变化的部分发送给Terracotta服务器，然后由服务器把它转发给真正需要这个数据的节点。对服务器session复制的优化。
+
+```python
+SESSION_TYPE = "redis"
+
+#在settings.py中写上这句话就能够让flask把session写在  redis中去
+SESSION_REDIS = Redis(host='192.168.0.94', port='6379')
+
+```
+
+
 
 
 ## Django
