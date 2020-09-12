@@ -206,7 +206,7 @@ def post_data():
     
     # 将 DataFrame  数据再次打包为 JSON 并传回
     # 方法一
-    res = '{{"obj": {} }}'.format(res.to_json(orient = "records", force_ascii = False))
+    res = '\{\{"obj": {} \}\}'.format(res.to_json(orient = "records", force_ascii = False))
     # 方法二
     # res = jsonify({"obj":res.to_json(orient = "records", force_ascii = False)})
     
