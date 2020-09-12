@@ -113,7 +113,6 @@ mathjax: true
 ![](https://p1-tt.byteimg.com/origin/pgc-image/e9f24e01f21f4b2b92c5fd877c9c20e2?from=pc)
 
 
-
 ## 因果定律
 
 ![](http://p1-tt.byteimg.com/large/pgc-image/S2ZVU3k8s8s47y)
