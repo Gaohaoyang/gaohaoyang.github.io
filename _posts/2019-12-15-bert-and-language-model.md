@@ -446,7 +446,7 @@ tokenizer_output = ["un", "##aff", "##able"]
     - 第一种是 **DistilBERT**，将 12 层的 BERT-base 模型蒸馏到 6 层的 BERT 模型；
     - 第二种是将 BERT 模型蒸馏到 BiLSTM 模型。
 - 更多内容：[BERT 模型蒸馏 Distillation BERT](https://baijiahao.baidu.com/s?id=1653807606350367881&wfr=spider&for=pc)
-
+- 【2020-9-14】albert用于中文Q/A，[github代码](https://github.com/wptoux/albert-chinese-large-webqa)
 
 - 模型压缩和加速四个技术是**设计高效小型网络**、**剪枝**、**量化**和**蒸馏**
 - 2015年，Hinton等人首次提出神经网络中的**知识蒸馏**(`Knowledge Distillation`, KD)技术/概念。较前者的一些工作，这是一个通用而简单的、不同的模型压缩技术。
