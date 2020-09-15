@@ -3,7 +3,7 @@ layout: post
 title:  BERT及预训练语言模型-BERT-and-Language-Model
 date:   2019-12-10 16:52:00
 categories: 深度学习 
-tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook TextCNN
+tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook TextCNN ES
 excerpt: 预训练语言模型及BERT知识点汇总
 mathjax: true
 ---
@@ -37,6 +37,13 @@ mathjax: true
     - 第四个时代是**改进型**和**领域定制型**。 
         - 改进型代表为ALBERT和XLNet
         - 领域定制化(Domain Specific)代表为SciBert (Scientific Bert) 和BioBert(Biomedical Bert)。 
+
+
+### ES句向量
+
+- 【2020-9-15】[ElasticTransformers](https://github.com/md-experiments/elastic_transformers)
+    - Elastic Transformers：Jupyter Notebook里的可扩展BERT语义搜索
+- ![](https://github.com/md-experiments/elastic_transformers/raw/master/assets/architecture.png)
 
 
 
