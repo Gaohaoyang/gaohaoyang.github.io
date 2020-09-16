@@ -48,6 +48,7 @@ mathjax: true
 - ![](http://5b0988e595225.cdn.sohucs.com/images/20180906/2cbe3385c1b74d2895626b0070c72b44.jpeg)
   - 摘自：
     - [知识图谱在贝壳找房的从0到1实践](https://www.sohu.com/a/252223730_499730)
+    - 【2020-9-16】[【知识图谱系列】开篇：基于KBQA的经纪人咨询助手](https://mp.weixin.qq.com/s?__biz=MzU3OTY2MjQ2NQ==&mid=2247485140&idx=1&sn=1d4739efa2e61f5bca6b2bf54d55ca87&chksm=fd63e13aca14682c8a4a97b30c093eb6cd5649f326e3d8875f3706a568175803d0fc642ad2aa&mpshare=1&scene=1&srcid=09164hw2hJXwSd3P2aCyZVSB&sharer_sharetime=1600234667205&sharer_shareid=2397ebcca559a9e3526dfd9d52c0256d&key=64c89714f25cba008511613fdb28eb9eec76e7ff16ef1ce851e84c38cb39e6ff776560f0a5a988ec2fd63004dc882a3f7759586fdb829f09d68df27f15a34b1dd856d2a1a2f9fb2cd3c9229a0e42e7f75aa93e8cfb790adb9ef6dd839f917abb6402cf62075855c87c616620f7d67a45c9d5ba7c3d613400428b90e868520b06&ascene=1&uin=OTY1NzE1MTYw&devicetype=Windows+10+x64&version=62090529&lang=zh_CN&exportkey=AUh00ODduFPVWprSECsaHVY%3D&pass_ticket=7mpEltFniVgVA8udzhXvGu5076WsT0d0jPX7mxvNBPPNk2qz5Sgw%2B8WUntOJuT9x&wx_header=0)
     - 【2020-7-18】[贝壳找房技术文章合集](https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&__biz=MzU3OTY2MjQ2NQ==&scene=24&album_id=1431012302404534273&uin=&key=&devicetype=iMac+MacBookPro13%2C2+OSX+OSX+10.15.5+build(19F101)&version=12040110&lang=zh_CN&nettype=WIFI&ascene=14&fontScale=100&winzoom=1.000000)
 
 ## 定义
