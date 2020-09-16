@@ -29,6 +29,39 @@ mathjax: true
     - Serving端：模型加载与在线预测
     - Client端：构建请求
 
+
+# Tensorflow Serving
+
+## 服务框架
+
+- Google在2017年的TensorFlow开发者Summit上便提出了TensorFlow Serving [官方文档](https://www.tensorflow.org/serving/)。可以将训练好的模型直接上线并提供服务。
+    - [TensorFlow Serving入门](https://www.jianshu.com/p/afe80b2ed7f0)
+- 客户端和服务端的通信只支持gRPC。在实际的生产环境中比较广泛使用的C/S通信手段是基于RESTfull API的，幸运的是从TF1.8以后，TF Serving也正式支持RESTfull API通信方式了。
+- ![](https://upload-images.jianshu.io/upload_images/4905018-913e07a93c4821ee.png)
+
+## TF Serving工作流程
+
+- 基于TF Serving的持续集成框架还是挺简明的，基本分三个步骤：
+    - 模型训练：主要包括数据的收集和清洗、模型的训练、评测和优化；
+    - 模型上线：前一个步骤训练好的模型在TF Server中上线；
+    - 服务使用：客户端通过gRPC和RESTfull API两种方式同TF Servering端进行通信，并获取服务；
+- TF Serving的工作流程主要分为以下几个步骤：
+    - Source会针对需要进行加载的模型创建一个Loader，Loader中会包含要加载模型的全部信息；
+    - Source通知Manager有新的模型需要进行加载；
+    - Manager通过版本管理策略（Version Policy）来确定哪些模型需要被下架，哪些模型需要被加载；
+    - Manger在确认需要加载的模型符合加载策略，便通知Loader来加载最新的模型；
+    - 客户端像服务端请求模型结果时，可以指定模型的版本，也可以使用最新模型的结果；
+- 示意图
+    - ![](https://upload-images.jianshu.io/upload_images/4905018-560bf34c3a9e5aca.png)
+
+## 调用方式
+
+- TF Serving客户端和服务端的通信方式有两种（gRPC和RESTfull API）
+    - （1）RESTfull API
+    - （2）gRPC形式
+
+
+
 ## Saver
 
 - 分别介绍，Tensorflow 1.0 和 2.0两个版本的导出方法
