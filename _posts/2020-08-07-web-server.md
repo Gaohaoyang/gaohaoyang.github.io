@@ -3,7 +3,7 @@ layout: post
 title:  "Web服务知识-Web-Serving"
 date:   2020-08-07 19:17:00
 categories: 技术工具
-tags: Web Python Flask Django Fastapi Restful Swagger HTML JavaScript
+tags: Web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session
 author : 鹤啸九天
 excerpt: Web开发相关技术知识点
 mathjax: true
@@ -373,6 +373,65 @@ if __name__ == '__main__':
 - 【2020-9-11】以上代码仅适用单机版，如果部署在分布式环境，流量负载均衡，会出现session找不到的现象
 - 分布式session一致性：
     - 客户端发送一个请求，经过负载均衡后该请求会被分配到服务器中的其中一个，由于不同服务器含有不同的web服务器(例如Tomcat)，不同的web服务器中并不能发现之前web服务器保存的session信息，就会再次生成一个JSESSIONID，之前的状态就会丢失
+
+- 【2020-9-18】Flask Session共享的一种实现方式：使用出问题（待核实原因）
+    - [flask-session 在redis中存储session](https://www.cnblogs.com/jackadam/p/9822680.html)
+
+```python
+import os
+from flask import Flask, session, request
+from flask_session import Session
+from redis import Redis
+
+app = Flask(__name__)
+app.config['SESSION_TYPE'] = 'redis'   #session存储格式为redis
+app.config['SESSION_REDIS'] = Redis(    #redis的服务器参数
+    host='192.168.1.3',                 #服务器地址
+    port=6379)                           #服务器端口
+
+app.config['SESSION_USE_SIGNER'] = True   #是否强制加盐，混淆session
+app.config['SECRET_KEY'] = os.urandom(24)  #如果加盐，那么必须设置的安全码，盐
+app.config['SESSION_PERMANENT'] = False  #sessons是否长期有效，false，则关闭浏览器，session失效
+app.config['PERMANENT_SESSION_LIFETIME'] = 3600   #session长期有效，则设定session生命周期，整数秒，默认大概不到3小时。
+Session(app)
+
+
+@app.route('/')
+def default():
+    return session.get('key', 'not set')
+
+@app.route('/test/')
+def test():
+    session['key'] = 'test'
+    return 'ok'
+
+@app.route('/set/')
+def set():
+    arg = request.args.get('key')
+    print(arg)
+    session['key'] = arg
+    return 'ok'
+
+
+@app.route('/get/')
+def get():
+    return session.get('key', 'not set')
+
+
+@app.route('/pop/')
+def pop():
+    session.pop('key')
+    return session.get('key', 'not set')
+
+
+@app.route('/clear/')
+def clear():
+    session.clear()
+    return session.get('key', 'not set')
+
+if __name__ == "__main__":
+    app.run(debug=True)
+```
 
 
 - 解决方法：
