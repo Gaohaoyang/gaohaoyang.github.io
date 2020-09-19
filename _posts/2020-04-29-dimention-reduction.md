@@ -15,6 +15,8 @@ mathjax: true
 # 总结
 
 - 【2020-9-9】[流形学习t-SNE，LLE，Isomap](https://www.toutiao.com/i6870113106081612292)
+- 【2020-9-19】流形学习前沿方向：隐图学习，[Latent graph neural networks: Manifold learning 2.0?](https://towardsdatascience.com/manifold-learning-2-99a25eeb677d)
+![](https://wx2.sinaimg.cn/mw690/5396ee05ly1ginkjd7x4ij20d40aetdm.jpg)
 
 # 降维
 
