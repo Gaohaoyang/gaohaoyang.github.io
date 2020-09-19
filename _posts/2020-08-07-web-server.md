@@ -374,7 +374,7 @@ if __name__ == '__main__':
 - 分布式session一致性：
     - 客户端发送一个请求，经过负载均衡后该请求会被分配到服务器中的其中一个，由于不同服务器含有不同的web服务器(例如Tomcat)，不同的web服务器中并不能发现之前web服务器保存的session信息，就会再次生成一个JSESSIONID，之前的状态就会丢失
 
-- 【2020-9-18】Flask Session共享的一种实现方式：使用出问题（待核实原因）
+- 【2020-9-18】Flask Session共享的一种实现方式：使用出问题（待核实原因），改用redis直接存储session变量
     - [flask-session 在redis中存储session](https://www.cnblogs.com/jackadam/p/9822680.html)
 
 ```python
