@@ -830,6 +830,14 @@ while True:
 
 # Linux工具
 
+## 日期
+
+- 【2020-9-21】时间矫正
+
+```shell
+ sudo ntpdate cn.pool.ntp.org # 矫正系统时间
+ ```
+
 ## 文件传输
 
 - 【2017-12-16】远程文件传输的几种方式：
