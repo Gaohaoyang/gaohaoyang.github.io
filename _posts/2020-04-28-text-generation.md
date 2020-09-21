@@ -15,6 +15,9 @@ mathjax: true
 # 总结
 
 - 【2020-7-6】清华孙茂松：九歌多样化古典诗歌机器写作模型[MixPoet](http://nlp.csai.tsinghua.edu.cn/news/)开源
+- 【2020-9-21】文本生成系列文章
+  - [文本生成12：4种融合知识的text generation](https://zhuanlan.zhihu.com/p/133266258)
+  - [文本生成13：万字长文梳理文本生成评价指标](https://zhuanlan.zhihu.com/p/144182853)
 
 # 文本生成方案
 
@@ -123,6 +126,7 @@ mathjax: true
       - Generating Informative Responses with Controlled Sentence Function
       - 条件变分编码器的网络结构去控制回复的句式，使模型生成一些更有信息量的回复
       - 约束中间隐变量z，使z更多地去编码句式属性的信息
+
 ### `多样性`
 - （4）改进Beam Search——提高回复多样性
   - 思路一：通过增加惩罚项
@@ -145,6 +149,22 @@ mathjax: true
 - 属性控制模型能有效提升回复质量
 
 ![](https://upload-images.jianshu.io/upload_images/18270108-e317e526462d7295.png)
+
+## 知识融合的文本生成
+
+- [文本生成12：4种融合知识的text generation](https://zhuanlan.zhihu.com/p/133266258)
+- 刘知远：“NLP搞事情少不了知识指导”
+  - ![](https://picb.zhimg.com/80/v2-3541affc2700d15d09952fc3c7d9513b_720w.jpg)
+- 对融合知识的idea做了一个简单的汇总，大致有4个较为典型的方式：
+  - 多任务学习（生成+文本蕴含）
+  - 基于knowledge graph 的文本生成：图神经网络参与文本生成
+    - 从长文本构建graph，然后辅助生成文本
+    - 语义图or三元组的文本生成，graph to text 就是原本的任务
+  - 基于memory network 的文本生成
+    - 以memory network 形式储存ConceptNet知识
+  - 结合分布-采样进行文本生成
+    - 从带有“知识”的分布采样生成文本
+
 
 # GAN方向
 
@@ -200,15 +220,18 @@ mathjax: true
   - TER: 编辑的距离
   - TERp: TER+同义替换
 
-- 参考：[文本生成评价方法](https://zhuanlan.zhihu.com/p/108630305)
+- 参考：
+  - [文本生成13：万字长文梳理文本生成评价指标](https://zhuanlan.zhihu.com/p/144182853)
+  - [文本生成评价方法](https://zhuanlan.zhihu.com/p/108630305)
 
 - 总结：
 
 |方法|全称|应用场景|核心思想|特点|缺点|改进|备注|
 |---|---|---|---|---|---|---|---|
 |BLEU|Machine Translation|比较候选译文和参考译文里的 n-gram 的重合程度|n-gram共现统计;基于精确率|只看重精确率，不看重召回率；存在常用词干扰（可以用截断的方法解决）；短句得分较高。即使引入了brevity penalty，也还是不够。|截断：改进常用词干扰；brevity penalty：改进短句得分较高的问题||
+|NIST|National Institute of standards and Technology|BLEU改进|引入了每个n-gram的信息量(information)，对于一些出现少的重点的词权重就给的大了 |||||
 |METEOR|Metric for Evaluation of Translation with Explicit ORdering，显式排序的翻译评估指标|Machine Translation、Image Caption|解决一些 BLEU 标准中固有的缺陷|unigram共现统计；基于F值；考虑同义词、词干|只有java实现；参数较多，4个自己设置；需要外部知识源，比如：WordNet|||
-|ROUGE|Recall-Oriented Understudy for Gisting Evaluation，面向召回率的摘要评估辅助工具|Text Summarization|大致分为四种：ROUGE-N，ROUGE-L，ROUGE-W，ROUGE-S|n-gram共现统计、最长公共子序列；基于召回率(ROUGE-N)和F值(ROUGE-L)|基于字的对应而非基于语义，可以通过增加参考摘要数量来缓解|ROUGE-S：统计skip n-gram而非n-gram；ROUGE-W：考虑加权的最长公共子序列||
+|ROUGE|Recall-Oriented Understudy for Gisting Evaluation，面向召回率的摘要评估辅助工具|Text Summarization|BLEU 的改进版，专注于召回率而非精度。多少个参考译句中的 n 元词组出现在了输出之中。大致分为四种：ROUGE-N，ROUGE-L，ROUGE-W，ROUGE-S|n-gram共现统计、最长公共子序列；基于召回率(ROUGE-N)和F值(ROUGE-L)|基于字的对应而非基于语义，可以通过增加参考摘要数量来缓解|ROUGE-S：统计skip n-gram而非n-gram；ROUGE-W：考虑加权的最长公共子序列||
 |Perplexity|困惑度|Machine Translation、Language Model|根据句子长度对语言模型得分进行Normalize|基于语言模型（我感觉其实也是n-gram）；困惑度越低，翻译质量越好|数据集越大，困惑度下降得越快；数据中的标点会对模型的PPL产生很大影响；常用词干扰|||
 |CIDEr|Consensus-based Image Description Evaluation，基于共识的图像描述评估|Image Caption|TF-IDF向量的夹角余弦度量相似度|TF-IDF；余弦相似度|与ROUGE一样，也只是基于字词的对应而非语义的对应|||
 |SPICE|Semantic Propositional Image Caption Evaluation，语义命题图像标题评估|Image Caption|||主要考察名词的相似度，不适合机器翻译|||
@@ -246,8 +269,18 @@ mathjax: true
 - Recall-Oriented Understudy for Gisting Evaluation，面向召回率的摘要评估辅助工具
 
 - 核心思想
-  - 大致分为四种：ROUGE-N，ROUGE-L，ROUGE-W，ROUGE-S。常用的是前两种（-N与-L） * ROUGE-N中的“N”指的是N-gram，其计算方式与BLEU类似，只是BLEU基于精确率，而ROUGE基于召回率。
+  - 大致分为四种：ROUGE-N，ROUGE-L，ROUGE-W，ROUGE-S。常用的是前两种（-N与-L）
+    - ROUGE-N （将BLEU的精确率优化为召回率） 
+    - ROUGE-L （将BLEU的n-gram优化为公共子序列） 
+    - ROUGE-W （将ROUGE-L的连续匹配给予更高的奖励） 
+    - ROUGE-S （允许n-gram出现跳词(skip)）
+  - ROUGE-N中的“N”指的是N-gram，其计算方式与BLEU类似，只是BLEU基于精确率，而ROUGE基于召回率。
   - ROUGE-L中的“L”指的是Longest Common Subsequence，计算的是候选摘要与参考摘要的最长公共子序列长度，长度越长，得分越高，基于F值。
+  - ROUGE 用作机器翻译评价指标的初衷：
+    - SMT（统计机器翻译）时代，机器翻译效果稀烂，需要同时评价翻译的准确度和流畅度；
+    - 等到 NMT （神经网络机器翻译）时代，神经网络脑补能力极强，翻译出的结果都是通顺的，但是有时候容易瞎翻译。
+  - ROUGE的出现很大程度上是为了解决**NMT的漏翻问题（低召回率）**。
+  - 所以 <font color='red'>ROUGE 只适合评价 NMT，而不适用于 SMT，因为它不管候选译文流不流畅</font>
 - 计算公式
   - 主要介绍ROUGE-N和ROUGE-L（见原文）
 - 主要特点
@@ -280,6 +313,17 @@ mathjax: true
   - 参数较多，有四个需要自己设置的参数。
   - 需要外部知识源，比如：WordNet，如果是WordNet中没有的语言，则无法用METEOR评测。
 
+## NIST
+
+- NIST(National Institute of standards and Technology)方法是在BLEU方法上的一种改进。
+  - [机器翻译评测——BLEU改进后的NIST算法](https://www.cnblogs.com/by-dream/p/7765345.html)
+- 最主要的是引入了每个n-gram的信息量(information) 的概念。BLEU算法只是单纯的将n-gram的数目加起来，而nist是在得到信息量累加起来再除以整个译文的n-gram片段数目。这样相当于对于一些出现少的重点的词权重就给的大了。
+- 信息量的计算公式是：
+  - ![](https://pic4.zhimg.com/80/v2-32ecf29b6114e3f0a98709f4847eacde_720w.png)
+- 解释一下：分母是n元词在参考译文中出现的次数，分子是对应的n-1元词在参考译文中的出现次数。对于一元词汇，分子的取值就是整个参考译文的长度。这里之所以这样算，应该是考虑到出现次数少的就是重点词这样的一个思路。
+- 计算信息量之后，就可以对每一个共现n元词乘以它的信息量权重，再进行加权求平均得出最后的评分结果：
+  - ![](https://pic2.zhimg.com/80/v2-1144e90bc10ce76487f680021e632e93_720w.png)
+
 ## 4. Perplexity
 
 困惑度
@@ -300,8 +344,9 @@ mathjax: true
   - 数据中的标点会对模型的PPL产生很大影响
   - 常用词干扰
 
-## Consensus-based Image Description Evaluation，基于共识的图像描述评估
+## CIDEr
 
+- Consensus-based Image Description Evaluation，基于共识的图像描述评估
 - 核心思想
   - 把每个句子看成文档，然后计算其 TF-IDF 向量（注意向量的每个维度表示的是n-gram 而不一定是单词）的余弦夹角，据此得到候选句子和参考句子的相似度。
 - 计算公式
