@@ -223,6 +223,7 @@ mathjax: true
 - 参考：
   - [文本生成13：万字长文梳理文本生成评价指标](https://zhuanlan.zhihu.com/p/144182853)
   - [文本生成评价方法](https://zhuanlan.zhihu.com/p/108630305)
+  - 【精】[文本生成评价指标的进化与推翻](https://blog.csdn.net/hwaust2020/article/details/106997321/)
 
 - 总结：
 
@@ -236,10 +237,71 @@ mathjax: true
 |CIDEr|Consensus-based Image Description Evaluation，基于共识的图像描述评估|Image Caption|TF-IDF向量的夹角余弦度量相似度|TF-IDF；余弦相似度|与ROUGE一样，也只是基于字词的对应而非语义的对应|||
 |SPICE|Semantic Propositional Image Caption Evaluation，语义命题图像标题评估|Image Caption|||主要考察名词的相似度，不适合机器翻译|||
 |||||||||
+|||||||||
+|||||||||
+
+
+- 一个好的评价指标（或者设置合理的损失函数）不仅能够高效的指导模型拟合数据分布，还能够客观的让人评估文本生成模型的质量，从而进一步推动 text generation 商业化能力。
+- 然而由于语言天生的复杂性和目前技术限制，我们目前还没有一个完美的评价指标。
+- 微软在其VTTChallenge2016中提出了三点主观评价标准：
+  - 1） **流畅度**：评价生成语句的逻辑和可读性。
+  - 2） **相关性**：评价生成语句是否包含与原视频段相关和重要的物体/动作/事件等。
+  - 3） **助盲性**：评价生成语句对一个实力有缺陷的人去理解其表示的视频片段到底有多大的帮助。
+- 本文就三方面对文本生成的评价指标介绍：
+  - （1）以 BLEU 为代表的基于统计的文本评价指标
+  - （2）data to text 和 image caption 进一步介绍了其特有的评价模式
+  - （3）基于 BERT 等预训练模型的文本评价指标
+- 评价方法
+  - （1）基于**词重叠率**的方法
+    - 机器翻译 & 摘要 常用指标
+    - 基于词重叠率的方法是指基于词汇的级别计算模型的生成文本和人工的参考文本之间的相似性，比较经典的代表有 BLEU、METEOR 和 ROUGE，其中 BLEU 和 METEOR 常用于机器翻译任务，ROUGE 常用于自动文本摘要。
+  - （2）**词向量**评价指标
+    - 上面的词重叠评价指标基本上都是 n-gram 方式，去计算生成响应和真是响应之间的重合程度，共现程度等指标。而词向量则是通过 Word2Vec、Sent2Vec 等方法将句子转换为向量表示，这样一个句子就被映射到一个低维空间，句向量在一定程度上表征了其含义，在通过余弦相似度等方法就可以计算两个句子之间的相似程度。
+    - 使用词向量的好处是，可以一定程度上增加答案的多样性，因为这里大多采用词语相似度进行表征，相比词重叠中要求出现完全相同的词语，限制降低了很多。
+- 总结
+  - BLEU，ROUGE 等评价指标依然是主流的评价方式
+  - 从短句惩罚、重复、重要信息缺失、多样化等方面，衍生出例如 METEOR、SPICE、Distinct 等评价指标
+  - 以 bertscore 为代表的评价指标近年来受到广泛的关注，与人工评价的相关性也越来越高
+
+
+- （1）基于词重合度的方法
+  - 机器翻译 & 摘要 常用指标
+      - BLEU：机器翻译
+      - ROUGE：自动文本摘要
+      - NIST
+      - METEOR：机器翻译
+      - TER
+  - data to text 常用指标
+    - 和翻译、摘要等生成式任务最大的不同是，input 是类似于 table 或者三元组等其他形式的数据。在评估生成结果时，需要考虑文本是否准确的涵盖了 data 的信息。《Challenges in Data-to-Document Generation》提供了许多 data to text 的评价指标，并且被后续的一些论文采用
+    - relation generation (RG)
+      - 从生成的句子中抽取出关系，然后对比有多少关系也出现在了 source 中（一般有 recall 和 count2 个指标）
+    - content selection (CS)
+      - data 当中的内容有多少出现在了生成的句子中，一般有 precision 和 recall 两个指标
+    - content ordering (CO)
+      - content ordering 使用归一化 Damerau-Levenshtein 距离计算生成句和参考句的 “sequence of records(个人认为可以理解为 item)”
+    - 如何实现上述的评价指标——github代码[data2text](https://github.com/harvardnlp/data2text)
+      - Coverage：不涉及复杂的关系抽取，可以简单的通过匹配方法来验证文本是否能够覆盖要描述的 data
+      - Distinct：某些生成场景中（对话，广告文案）等，还需要追求文本的多样性。李纪为的《A diversity-promoting objective function for neural conversation models》提出了 Distinct 指标，后续也被许多人采用。
+  - image caption 常用指标
+    - CIDEr
+    - SPICE
+- （2）词向量评价指标
+  - Greedy Matching
+  - Embedding Average
+  - Vector Extrema
+- （3）基于语言模型的方法
+  - PPL
+  - 基于 bert 的评分指标
+    - BERTSCORE
+    - 拓展阅读 ：BLEURT
+    - 拓展阅读 ：MoverScore
+
+
+## （1）词重叠率
 
 
 
-## BLEU
+### BLEU
 
 - BLEU：Bilingual Evaluation Understudy，双语评估辅助工具
 - 核心思想
@@ -264,7 +326,7 @@ mathjax: true
     - brevity penalty：改进短句得分较高的问题
 
 
-## ROUGE
+### ROUGE
 
 - Recall-Oriented Understudy for Gisting Evaluation，面向召回率的摘要评估辅助工具
 
@@ -295,25 +357,34 @@ mathjax: true
   - ROUGE-W：考虑加权的最长公共子序列
 
 
-## METEOR
+### METEOR
 
 - Metric for Evaluation of Translation with Explicit ORdering，显式排序的翻译评估指标
 - 核心思想
-  - METEOR 是基于BLEU进行了一些改进，其目的是解决一些 BLEU 标准中固有的缺陷 。使用 WordNet 计算特定的序列匹配，同义词，词根和词缀，释义之间的匹配关系，改善了BLEU的效果，使其跟人工判别共更强的相关性。并且，是基于F值的。
+  - METEOR 是基于BLEU进行了一些改进，其目的是解决一些 BLEU 标准中固有的缺陷 。
+  - METEOR 同时考虑了基于整个语料库上的准确率和召回率，而最终得出测度
+  - 使用 WordNet 计算特定的序列匹配，同义词，词根和词缀，释义之间的匹配关系，改善了BLEU的效果，使其跟人工判别共更强的相关性。并且，是基于F值的。
+  - METEOR 也包括其他指标没有发现一些其他功能，如同义词匹配等。METEOR 用 WordNet 等知识源扩充了一下同义词集，同时考虑了单词的词形
+  - 在评价句子流畅性的时候，用了 chunk 的概念
 - 计算公式
   - ![](https://www.zhihu.com/equation?tex=METEOR+%3D+%281-pen%29%5Ctimes+F_%7Bmeans%7D)
+  - ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X2pwZy81ZmtuYjQxaWI5cUZFV005T0laOUJBRGhzN2JQMGxyQWdydUNiZ1JIZDN0UUlURTJOMm1Rc2ZKVWZpY2JJUWF2N1RCR1pBN3d2VXBueWlhb01sd2ZZWXhyZy82NDA?x-oss-process=image/format,png#pic_center)
+  - 平面图，就是 1 元组之间的映射集。平面图有如下的一些限制：在待评价翻译中的每个 1 元组必须映射到参考翻译中的 1 个或 0 个一元组，然后根据这个定义创建平面图。如果有两个平面图的映射数量相同，那么选择映射交叉数目较少的那个。 也就是说，上面左侧平面图会被选择。状态会持续运行，在每个状态下只会向平面图加入那些在前一个状态中尚未匹配的 1 元组。一旦最终的平面图计算完毕，就开始计算 METEOR 得分
 - 主要特点
   - unigram共现统计
   - 基于F值
   - 考虑同义词、词干
 - 应用场景
   - Machine Translation、Image Caption
+- 优点
+  - 基于一元组的精度和召回的调和平均，召回的权重比精度要高一点 ， 与人类判断相关性高
+  - 引入了外部知识，评价更加友好
 - 缺点
-  - 只有Java实现。
+  - 实现复杂，只有Java实现。
   - 参数较多，有四个需要自己设置的参数。
   - 需要外部知识源，比如：WordNet，如果是WordNet中没有的语言，则无法用METEOR评测。
 
-## NIST
+### NIST
 
 - NIST(National Institute of standards and Technology)方法是在BLEU方法上的一种改进。
   - [机器翻译评测——BLEU改进后的NIST算法](https://www.cnblogs.com/by-dream/p/7765345.html)
@@ -324,9 +395,26 @@ mathjax: true
 - 计算信息量之后，就可以对每一个共现n元词乘以它的信息量权重，再进行加权求平均得出最后的评分结果：
   - ![](https://pic2.zhimg.com/80/v2-1144e90bc10ce76487f680021e632e93_720w.png)
 
-## 4. Perplexity
+### TER
 
-困惑度
+- TER 是 Translation Edit Rate 的缩写，是一种基于距离的评价方法，用来评定机器翻译结果的译后编辑的工作量。
+- 距离被定义为将一个序列转换成另一个序列所需要的最少编辑操作次数。操作次数越多，距离越大，序列之间的相似性越低；相反距离越小，表示一个句子越容易改写成另一个句子，序列之间的相似性越高。
+- TER 使用的编辑操作包括：增加、删除、替换和移位。其中增加、删除、替换操作计算得到的距离被称为编辑距离，并根据错误率的形式给出评分
+ $ score  = edit ⁡ ( c , r ) l \text { score }=\frac{\operatorname{edit}(c, r)}{l} $ 
+ 
+ $ score = edit(c,r) $
+​	
+- 其中 edit(c,r) 是指机器翻译生成的候选译文 c 和参考译文 r 之间的距离，l 是归一化因子，通常为参考译文的长度。在距离计算中所有的操作的代价都为 1。在计算距离时，优先考虑移位操作，再计算编辑距离，也就是增加、删除和替换操作的次数。直到移位操作（参考文献中还有个增加操作，感觉是笔误了）无法减少编辑距离时，将编辑距离和移位操作的次数累加得到 TER 计算的距离。
+>Example 1.2 Candidate：cat is standing in the ground Reference：The cat is standing on the ground
+
+- 将 Candidate 转换为 Reference，需要进行一次增加操作，在句首增加 “The”；一次替换操作，将 “in” 替换为 “on”。所以 edit(c, r) = 2，归一化因子 l 为 Reference 的长度 7，所以该参考译文的 TER 错误率为 2/7。
+- 与 BLEU 不同，基于距离的评价方法是一种典型的 “错误率” 的度量，类似的思想也广泛应用于语音识别等领域。在机器翻译中，除了 TER 外，还有 WER，PER 等十分相似的方法，只是在 “错误” 的定义上略有不同。需要注意的是，很多时候，研究者并不会单独使用 BLEU 或者 TER，而是将两种方法融合，比如，使用 BLEU 与 TER 相减后的值作为评价指标。
+
+
+### Perplexity
+
+- perplexity(困惑度)用来度量一个概率分布或概率模型预测样本的好坏程度。
+- 也可以用来比较两个概率分布或概率模型。（译者：应该是比较两者在预测样本上的优劣）低困惑度的概率分布模型或概率模型能更好地预测样本。
 
 - 核心思想
   - （1）根据参考句子，学习一个语言模型P； 
@@ -344,7 +432,7 @@ mathjax: true
   - 数据中的标点会对模型的PPL产生很大影响
   - 常用词干扰
 
-## CIDEr
+### CIDEr
 
 - Consensus-based Image Description Evaluation，基于共识的图像描述评估
 - 核心思想
@@ -360,18 +448,78 @@ mathjax: true
 - 缺点
   - 与ROUGE一样，也只是基于字词的对应而非语义的对应
 
-## SPICE
+### SPICE
 
 - Semantic Propositional Image Caption Evaluation，语义命题图像标题评估
 - 核心思想
   - SPICE 使用基于图的语义表示来编码 caption 中的 objects, attributes 和 relationships。它先将待评价 caption 和参考 captions 用 Probabilistic Context-Free Grammar (PCFG) dependency parser parse 成 syntactic dependencies trees，然后用基于规则的方法把 dependency tree 映射成 scene graphs。最后计算待评价的 caption 中 objects, attributes 和 relationships 的 F-score 值。
 - 计算公式
+  - ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X2pwZy81ZmtuYjQxaWI5cUZFV005T0laOUJBRGhzN2JQMGxyQWdsM0tDeE41c2NZQ3BvN1JuTENWT1dwVG1hRzhzY3NzQzFpYWliUHd6YU5DUU5BVHVPc1U3RHEzZy82NDA?x-oss-process=image/format,png#pic_center)
+  - ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X2pwZy81ZmtuYjQxaWI5cUZFV005T0laOUJBRGhzN2JQMGxyQWdSWWJlVzNOVnRJQVFEaWNrdEpBVE1sOW81S2t5SW1uZ2pzaWFJZG5YOFNkdndGRWlic3hBNTlVeVEvNjQw?x-oss-process=image/format,png#pic_center)
 - 主要特点
   - 使用基于图的语义表示
 - 应用场景
   - Image Caption
+- 优点
+  - 对目标，属性，关系有更多的考虑；
+  - 和基于 n-gram 的评价模式相比，有更高的和人类评价的相关性
 - 缺点
   - 由于在评估的时候主要考察名词的相似度，因此不适合用于机器翻译等任务。
+  - 不考虑语法问题
+  - 依赖于 semantic parsers ， 但是他不总是对的
+  - 每个目标，属性，关系的权重都是一样的（一幅画的物体显然有主次之分）
+
+## 词向量
+
+- 词重叠评价指标基本上都是 n-gram 方式，去计算生成响应和真是响应之间的重合程度，共现程度等指标。而词向量则是通过 Word2Vec、Sent2Vec 等方法将句子转换为向量表示，这样一个句子就被映射到一个低维空间，句向量在一定程度上表征了其含义，在通过余弦相似度等方法就可以计算两个句子之间的相似程度。
+- 使用词向量的好处是，可以一定程度上增加答案的多样性，因为这里大多采用词语相似度进行表征，相比词重叠中要求出现完全相同的词语，限制降低了很多。
+- 不过说句实话，至少在我读过的 paper 里很少有人用（或者说只用）这种评价指标来衡量模型好坏的。
+
+### Greedy Matching
+
+- ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X2pwZy81ZmtuYjQxaWI5cUZFV005T0laOUJBRGhzN2JQMGxyQWcxQU5QbkZuMThOYjFjcjVHaklOaWI3ZjRXbDdoQ3c3R01helVnYmljMlB2RjVlNXdhY0NYUkZtdy82NDA)
+- 如上图所示，对于真实响应的每个词，寻找其在生成响应中相似度最高的词，并将其余弦相似度相加并求平均。同样再对生成响应再做一遍，并取二者的平均值。上面的相似度计算都是基于词向量进行的，可以看出本方法主要关注两句话之间最相似的那些词语，即关键词。
+
+### Embedding Average
+
+- 这种方法直接使用句向量计算真实响应和生成响应之间的相似度，而句向量则是每个词向量加权平均而来，如下图所示。然后使用余弦相似度来计算两个句向量之间的相似度。
+- ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X2pwZy81ZmtuYjQxaWI5cUZFV005T0laOUJBRGhzN2JQMGxyQWdyTFRPbFVVQUdHWUxIT1RzSkY4eGNRU1RybHlKM0dUQk85Q0g1WDhOTEc4ZEJmQk9Oa1B5b2cvNjQw)
+
+
+### Vector Extrema
+
+- 跟上面的方法类似，也是先通过词向量计算出句向量，在使用句向量之间的余弦相似度表示二者的相似度。不过句向量的计算方法略有不同，这里采用向量极值法进行计算。
+
+## 基于语言模型的方法
+
+### PPL
+
+- 它也可以用来比较两个语言模型在预测样本上的优劣。低困惑度的概率分布模型或概率模型能更好地预测样本。（例如，给定一段人写的文本，分别查看 rnn 和 gpt-2 的 ppl 分数如何）
+
+- 注意，PPL 指标是越低，代表语言模型的建模能力就越好。
+- 给测试集的句子赋予较高概率值的语言模型较好, 当语言模型训练完之后，测试集中的句子都是正常的句子，那么训练好的模型就是在测试集上的概率越高越好，公式如下：
+ 
+
+所以当我们使用 tf.contrib.seq2seq.sequence_loss() 函数计算模型 loss 的时候，perplexity 的计算就显得很简单了，直接对计算出来的 loss 取个指数就行了，命令如下所示：
+
+```python
+train_perp = math.exp(float(mean_loss)) if mean_loss < 300else math.inf
+```
+
+### 基于 bert 的评分指标
+
+- 基于 N-gram 重叠的度量标准只对词汇变化敏感，不能识别句子语义或语法的变化。因此，它们被反复证明与人工评估差距较大。
+- 近年来 Bert 为代表的的 plm 红红火火，于是有人提出使用句子上下文表示 (bert 全家桶) 和人工设计的计算逻辑对句子相似度进行计算。这样的评价指标鲁棒性较好，在缺乏训练数据的情况下也具有较好表现。
+
+- BERTSCORE
+  - 思路是非常简单的：即对两个生成句和参考句（word piece 进行 tokenize）分别用 bert 提取特征，然后对 2 个句子的每一个词分别计算内积，可以得到一个相似性矩阵。基于这个矩阵，我们可以分别对参考句和生成句做一个最大相似性得分的累加然后归一化，得到 bertscore 的 precision，recall 和 F1
+- 拓展阅读 ：BLEURT
+  - 通过预训练结合人工评估数据的微调来同时满足度量方法的鲁棒性和表达度
+- 拓展阅读 ：MoverScore
+  - 采用了推土机距离计算和参考句的相似程度，而不是单纯的像 bertscore 只考虑最相似的词的距离。
+  - 如何得到一个 word/n-gram 的向量表示，基于预训练的模型来得到 contextualized 表示是一个开放性的问题，Elmo 和 BERT 都是多层结构，不同的 layer 包含了不同的含义。
+
+
 
 # 资料
 
