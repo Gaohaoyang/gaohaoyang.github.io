@@ -664,6 +664,8 @@ An example of typical input would be something like this:
   - 5分：在4分基础上，能让人感受到情感及人设。
 - 另外，为了消除主观偏差，采用多人标注、去掉极端值的方式，是当前普遍的做法。
 
+- 【2020-9-21】一篇解决对话无监督评估的论文：[How NOT To Evaluate Your Dialogue System: An Empirical Study of
+Unsupervised Evaluation Metrics for Dialogue Response Generation](https://arxiv.org/pdf/1603.08023.pdf)，[论文引用图谱](https://www.connectedpapers.com/main/129cbad01be98ee88a930e31898cb76be79c41c1/How-NOT-To-Evaluate-Your-Dialogue-System-An-Empirical-Study-of-Unsupervised-Evaluation-Metrics-for-Dialogue-Response-Generation/graph)
 
 
 ## 资料
