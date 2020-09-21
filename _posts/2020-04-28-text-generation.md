@@ -3,7 +3,7 @@ layout: post
 title:  "文本生成-Text Generation"
 date:   2020-04-28 21:39:00
 categories: 深度学习
-tags: 深度学习 NLP GAN Seq2seq 对话系统
+tags: 深度学习 NLP GAN Seq2seq 对话系统 文本评价
 excerpt: 深度学习在NLP子领域——文本生成的应用汇总，如seq2seq、GAN系列
 author: 鹤啸九天
 mathjax: true
@@ -187,6 +187,146 @@ mathjax: true
 - （4）MaskGAN
   - 从生成器端来为生成提供更多的信息，更多：[MaskGAN学习笔记](http://tobiaslee.top/2018/04/01/MaskGAN-Notes/)
   - 用了 Actor-Critic 来替换 Policy Gradient，相比 Monte Carlo，能够较好地对 reward function 做一个拟合
+
+
+# 评价方法
+
+- NLG常用metrics：
+  - BLEU: ngram precision；长度类似
+  - ROUGE: ngram recall
+  - NIST/CIDEr: 降低频繁词的权重
+  - METEOR: 考虑同义词的F score；鼓励连续词匹配
+  - STM: 匹配语法树子树
+  - TER: 编辑的距离
+  - TERp: TER+同义替换
+
+- 参考：[文本生成评价方法](https://zhuanlan.zhihu.com/p/108630305)
+
+- 总结：
+
+|方法|全称|应用场景|核心思想|特点|缺点|改进|备注|
+|---|---|---|---|---|---|---|---|
+|BLEU|Machine Translation|比较候选译文和参考译文里的 n-gram 的重合程度|n-gram共现统计;基于精确率|只看重精确率，不看重召回率；存在常用词干扰（可以用截断的方法解决）；短句得分较高。即使引入了brevity penalty，也还是不够。|截断：改进常用词干扰；brevity penalty：改进短句得分较高的问题||
+|METEOR|Metric for Evaluation of Translation with Explicit ORdering，显式排序的翻译评估指标|Machine Translation、Image Caption|解决一些 BLEU 标准中固有的缺陷|unigram共现统计；基于F值；考虑同义词、词干|只有java实现；参数较多，4个自己设置；需要外部知识源，比如：WordNet|||
+|ROUGE|Recall-Oriented Understudy for Gisting Evaluation，面向召回率的摘要评估辅助工具|Text Summarization|大致分为四种：ROUGE-N，ROUGE-L，ROUGE-W，ROUGE-S|n-gram共现统计、最长公共子序列；基于召回率(ROUGE-N)和F值(ROUGE-L)|基于字的对应而非基于语义，可以通过增加参考摘要数量来缓解|ROUGE-S：统计skip n-gram而非n-gram；ROUGE-W：考虑加权的最长公共子序列||
+|Perplexity|困惑度|Machine Translation、Language Model|根据句子长度对语言模型得分进行Normalize|基于语言模型（我感觉其实也是n-gram）；困惑度越低，翻译质量越好|数据集越大，困惑度下降得越快；数据中的标点会对模型的PPL产生很大影响；常用词干扰|||
+|CIDEr|Consensus-based Image Description Evaluation，基于共识的图像描述评估|Image Caption|TF-IDF向量的夹角余弦度量相似度|TF-IDF；余弦相似度|与ROUGE一样，也只是基于字词的对应而非语义的对应|||
+|SPICE|Semantic Propositional Image Caption Evaluation，语义命题图像标题评估|Image Caption|||主要考察名词的相似度，不适合机器翻译|||
+|||||||||
+
+
+
+## BLEU
+
+- BLEU：Bilingual Evaluation Understudy，双语评估辅助工具
+- 核心思想
+  - 比较候选译文和参考译文里的 n-gram 的重合程度，重合程度越高就认为译文质量越高。unigram用于衡量单词翻译的**准确性**，高阶n-gram用于衡量句子翻译的**流畅性**。 实践中，通常是取N=1~4，然后对进行加权平均。
+- 主要特点
+  - n-gram共现统计
+  - 基于精确率
+- 计算公式
+  - ![](https://www.zhihu.com/equation?tex=BLEU+%3D+BP+%5Ccdot+exp%28%5Csum_%5Climits%7Bn%3D1%7D%5EN+w_n+log%5C%2C+p_n+%29)
+  - 其中n表示n-gram，Wn表示n-gram的权重；
+  - BP表示短句子惩罚因子（brevity penaty），用 r 表示最短的参考翻译的长度， c 表示候选翻译的长度，则BP具体计算方法为：![](https://www.zhihu.com/equation?tex=%5Cbegin%7Bequation%7D+BP+%3D++++++%5Cbegin%7Bcases%7D++++++++++1+%26c%3Er%5C+++++++++e%5E%7B1-r%2Fc%7D+%26c%E2%89%A4r+++++%5Cend%7Bcases%7D+%5Cend%7Bequation%7D)
+  - pn表示n-gram的覆盖率，具体计算方式为：
+    - ![](https://www.zhihu.com/equation?tex=p_n+%3D+%5Cfrac+++++%7B+++++++++%5Csum_%5Climits%7BC%5Cin+%5C%7BCandidates%5C%7D%7D+++++%5Csum_%5Climits%7Bn-gram%5Cin+C%7D+++++Count_%7Bclip%7D%28n-gram%29+++++%7D+++++%7B+++++++++%5Csum_%5Climits%7BC%27%5Cin+%5C%7BCandidates%5C%7D%7D+++++%5Csum_%5Climits%7Bn-gram%5Cin+C%27%7D+++++Count%28n-gram%29+++++%7D)
+- 应用场景：Machine Translation
+- 总结
+  - 缺点：
+    - 只看重精确率，不看重召回率。（详细得说：待补充～） 
+    - 存在常用词干扰（可以用截断的方法解决）
+    - 短句得分较高。即使引入了brevity penalty，也还是不够。
+  - 改进
+    - 截断：改进常用词干扰
+    - brevity penalty：改进短句得分较高的问题
+
+
+## ROUGE
+
+- Recall-Oriented Understudy for Gisting Evaluation，面向召回率的摘要评估辅助工具
+
+- 核心思想
+  - 大致分为四种：ROUGE-N，ROUGE-L，ROUGE-W，ROUGE-S。常用的是前两种（-N与-L） * ROUGE-N中的“N”指的是N-gram，其计算方式与BLEU类似，只是BLEU基于精确率，而ROUGE基于召回率。
+  - ROUGE-L中的“L”指的是Longest Common Subsequence，计算的是候选摘要与参考摘要的最长公共子序列长度，长度越长，得分越高，基于F值。
+- 计算公式
+  - 主要介绍ROUGE-N和ROUGE-L（见原文）
+- 主要特点
+  - n-gram共现统计、最长公共子序列
+  - 基于召回率(ROUGE-N)和F值(ROUGE-L)
+- 应用场景
+  - Text Summarization
+- 缺点
+  - ROUGE是基于字的对应而非基于语义的对应，不过可以通过增加参考摘要的数量来缓解这一问题。
+- 改进
+  - ROUGE-S：统计skip n-gram而非n-gram
+  - ROUGE-W：考虑加权的最长公共子序列
+
+
+## METEOR
+
+- Metric for Evaluation of Translation with Explicit ORdering，显式排序的翻译评估指标
+- 核心思想
+  - METEOR 是基于BLEU进行了一些改进，其目的是解决一些 BLEU 标准中固有的缺陷 。使用 WordNet 计算特定的序列匹配，同义词，词根和词缀，释义之间的匹配关系，改善了BLEU的效果，使其跟人工判别共更强的相关性。并且，是基于F值的。
+- 计算公式
+  - ![](https://www.zhihu.com/equation?tex=METEOR+%3D+%281-pen%29%5Ctimes+F_%7Bmeans%7D)
+- 主要特点
+  - unigram共现统计
+  - 基于F值
+  - 考虑同义词、词干
+- 应用场景
+  - Machine Translation、Image Caption
+- 缺点
+  - 只有Java实现。
+  - 参数较多，有四个需要自己设置的参数。
+  - 需要外部知识源，比如：WordNet，如果是WordNet中没有的语言，则无法用METEOR评测。
+
+## 4. Perplexity
+
+困惑度
+
+- 核心思想
+  - （1）根据参考句子，学习一个语言模型P； 
+  - （2）根据语言模型P，计算候选句子的得分； 
+  - （3）根据句子长度对上述得分进行Normalize
+- 计算公式
+  - ![](https://www.zhihu.com/equation?tex=PPL%28W%29+%3D+P%28w_1w_2...w_N%29%5E%7B%5Cfrac%7B1%7D%7BN%7D%7D)
+- 主要特点
+  - 基于语言模型（我感觉其实也是n-gram）
+  - 困惑度越低，翻译质量越好
+- 应用场景
+  - Machine Translation、Language Model
+- 缺点
+  - 数据集越大，困惑度下降得越快
+  - 数据中的标点会对模型的PPL产生很大影响
+  - 常用词干扰
+
+## Consensus-based Image Description Evaluation，基于共识的图像描述评估
+
+- 核心思想
+  - 把每个句子看成文档，然后计算其 TF-IDF 向量（注意向量的每个维度表示的是n-gram 而不一定是单词）的余弦夹角，据此得到候选句子和参考句子的相似度。
+- 计算公式
+  - ![](https://www.zhihu.com/equation?tex=CIDEr_n%28c%2C+S%29+%3D+%5Cfrac+%7B1%7D+%7BM%7D+%5Csum%5Climits_%7Bi%3D1%7D%5E%7BM%7D+%5Cfrac+%7Bg%5En%28c%29+%5Ccdot+g%5En%28S_i%29%7D+%7B%7C%7Cg%5En%28c%29%7C%7C+%5Ctimes+%7C%7Cg%5En%28S_i%29%7C%7C%7D)
+  - 其中， c 表示候选标题， S 表示参考标题集合， n 表示评估的是n-gram， M 表示参考字幕的数量， Gn() 表示基于n-gram的TF-IDF向量。
+- 主要特点
+  - TF-IDF
+  - 余弦相似度
+- 应用场景
+  - Image Caption
+- 缺点
+  - 与ROUGE一样，也只是基于字词的对应而非语义的对应
+
+## SPICE
+
+- Semantic Propositional Image Caption Evaluation，语义命题图像标题评估
+- 核心思想
+  - SPICE 使用基于图的语义表示来编码 caption 中的 objects, attributes 和 relationships。它先将待评价 caption 和参考 captions 用 Probabilistic Context-Free Grammar (PCFG) dependency parser parse 成 syntactic dependencies trees，然后用基于规则的方法把 dependency tree 映射成 scene graphs。最后计算待评价的 caption 中 objects, attributes 和 relationships 的 F-score 值。
+- 计算公式
+- 主要特点
+  - 使用基于图的语义表示
+- 应用场景
+  - Image Caption
+- 缺点
+  - 由于在评估的时候主要考察名词的相似度，因此不适合用于机器翻译等任务。
 
 # 资料
 
