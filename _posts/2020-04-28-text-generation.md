@@ -503,7 +503,7 @@ mathjax: true
 所以当我们使用 tf.contrib.seq2seq.sequence_loss() 函数计算模型 loss 的时候，perplexity 的计算就显得很简单了，直接对计算出来的 loss 取个指数就行了，命令如下所示：
 
 ```python
-train_perp = math.exp(float(mean_loss)) if mean_loss < 300else math.inf
+train_perp = math.exp(float(mean_loss)) if mean_loss < 300 else math.inf
 ```
 
 ### 基于 bert 的评分指标
