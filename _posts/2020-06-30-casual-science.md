@@ -32,6 +32,10 @@ mathjax: true
   - [因果观念新革命？万字长文，解读复杂系统背后的暗因果](https://swarma.org/?p=19906)，[集智俱乐部因果科学专题Github](https://github.com/CausalAI/clubjizhi)，[因果科学与 Causal AI 系列读书会](https://www.sohu.com/a/415039730_741733)
   - ![](https://swarma.org/wp-content/uploads/2020/05/wxsync-2020-05-381c31fa5614d7d4df7ae1b27e0d393c.png)
 
+- 【2020-9-23】[Introduction to Causal Inference](https://www.bradyneal.com/causal-inference-course)
+  - [A Brief Introduction to Causal Inference](https://www.bradyneal.com/slides/1%20-%20A%20Brief%20Introduction%20to%20Causal%20Inference.pdf)
+  - [The Flow of Association and Causation in Graphs](https://www.bradyneal.com/slides/3%20-%20The%20Flow%20of%20Association%20and%20Causation%20in%20Graphs.pdf)
+
 
 # The book of why
 
