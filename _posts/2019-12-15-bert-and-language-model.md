@@ -3,7 +3,7 @@ layout: post
 title:  BERT及预训练语言模型-BERT-and-Language-Model
 date:   2019-12-10 16:52:00
 categories: 深度学习 
-tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook TextCNN ES
+tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook TextCNN ES 田渊栋 彩票假设
 excerpt: 预训练语言模型及BERT知识点汇总
 mathjax: true
 ---
@@ -434,6 +434,13 @@ tokenizer_output = ["un", "##aff", "##able"]
 
 # 模型蒸馏
 
+- 【2020-9-23】[田渊栋团队新作：神经网络“彩票假设”可泛化，强化学习和NLP也适用](https://zhuanlan.zhihu.com/p/93988943)
+    - 最初由MIT的研究人员Jonathan Frankle 和Michael Carbin 提出的彩票假设(lottery ticket hypothesis)表明，通过从“幸运”初始化(lucky initialization，通常被称为“中奖彩票”)开始训练深度神经网络，可以以最小的性能损失(甚至获得收益)将网络缩小10-100倍
+    - 这项工作的意义令人兴奋，不仅可能找到用更少的资源进行训练的方法，还可以在更小的设备(例如智能手机和VR头盔)上更快地运行模型推理。
+    - 但彩票假设尚未被AI社区完全理解。特别是尚不清楚中奖彩票是取决于特定的因素，还是代表了DNN的一种固有特性。
+    - Facebook AI的最新研究发现了第一个确定的证据，证明**彩票假设在相关但截然不同的数据集中普遍存在，并可以扩展到强化学习(RL)和自然语言处理(NLP)**。
+    ![](https://pic2.zhimg.com/v2-2ea52e4a9da0be3cba4d2427c6e3a33c_b.webp)
+    ![](https://pic4.zhimg.com/v2-99386a2930a2ce105a810b884134e39d_b.webp)
 
 ## 背景
 
