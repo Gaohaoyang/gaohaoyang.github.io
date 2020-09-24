@@ -440,21 +440,21 @@ if __name__ == "__main__":
         - [4种分布式session解决方案](https://blog.csdn.net/qq_35620501/article/details/95047642)
         - [分布式session的几种实现方式](https://www.cnblogs.com/daofaziran/p/10933221.html)
 
-- 方案一：客户端存储
+- 方案一：**客户端存储**
     - 直接将信息存储在cookie中
     - cookie是存储在客户端上的一小段数据，客户端通过http协议和服务器进行cookie交互，通常用来存储一些不敏感信息
     - 缺点：
         - 数据存储在客户端，存在安全隐患
         - cookie存储大小、类型存在限制
         - 数据存储在cookie中，如果一次请求cookie过大，会给网络增加更大的开销
-- 方案二：session复制
+- 方案二：**session复制**
     - session复制是小型企业应用使用较多的一种服务器集群session管理机制，在真正的开发使用的并不是很多，通过对web服务器(例如Tomcat)进行搭建集群。
     - 存在的问题：
         - session同步的原理是在同一个局域网里面通过发送广播来异步同步session的，一旦服务器多了，并发上来了，session需要同步的数据量就大了，需要将其他服务器上的session全部同步到本服务器上，会带来一定的网路开销，在用户量特别大的时候，会出现内存不足的情况
     - 优点：
         - 服务器之间的session信息都是同步的，任何一台服务器宕机的时候不会影响另外服务器中session的状态，配置相对简单
         - Tomcat内部已经支持分布式架构开发管理机制，可以对tomcat修改配置来支持session复制，在集群中的几台服务器之间同步session对象，使每台服务器上都保存了所有用户的session信息，这样任何一台本机宕机都不会导致session数据的丢失，而服务器使用session时，也只需要在本机获取即可
-- 方案三：session绑定：
+- 方案三：**session绑定**
     - Nginx介绍：Nginx是一款自由的、开源的、高性能的http服务器和反向代理服务器
     - Nginx能做什么：反向代理、负载均衡、http服务器（动静代理）、正向代理
     - 如何使用nginx进行session绑定
@@ -464,7 +464,7 @@ if __name__ == "__main__":
         - 前端不能有负载均衡，如果有，session绑定将会出问题
     - 优点：
         - 配置简单
-- 方案四：session持久化到数据库
+- 方案四：**session持久化到数据库**
     - 如：基于redis存储session方案
     - 原理：就不用多说了吧，拿出一个数据库，专门用来存储session信息。保证session的持久化。
     - 优点：服务器出现问题，session不会丢失
@@ -479,7 +479,7 @@ if __name__ == "__main__":
     - 基于redis存储session方案流程示意图
 ![](https://img-blog.csdnimg.cn/2019070810495327.png)
 
-- 方案五：session复制
+- 方案五：**session复制**
     - terracotta实现session复制
     - Terracotta的基本原理是对于集群间共享的数据，当在一个节点发生变化的时候，Terracotta只把变化的部分发送给Terracotta服务器，然后由服务器把它转发给真正需要这个数据的节点。对服务器session复制的优化。
 
@@ -491,7 +491,36 @@ SESSION_REDIS = Redis(host='192.168.0.94', port='6379')
 
 ```
 
-
+- 【2020-9-24】[深夜，我偷听到程序员要对Session下手……](https://www.toutiao.com/i6875568455475528203/)，演变历史：
+    - **单机服务器**(静态) → 单机服务器(动态) → **分布式服务器**（Nginx） → Redis**独立存储** → **Token时代**
+    - （1）单台静态Web服务器：一个web服务器，每天处理的不过是一些静态资源文件，像HTML、CSS、JS、图片等等，按照HTTP协议的规范处理请求即可。
+        - ![](https://p6-tt.byteimg.com/origin/pgc-image/da73c2849fb04ad3b5e47ec55dc47d0a)
+    - （2）单台动态Web服务器：
+        - 动态交互的网络应用开始如雨后春笋般涌现，像各种各样的论坛啊，购物网站啊之类
+        - Session诞生：记住每一个请求背后的用户是谁
+        - 浏览器登陆以后，服务器分配一个session id，表示一个会话，然后返回给浏览器保存着。后续再来请求的时候，带上，就能知道是谁
+        - ![](https://p6-tt.byteimg.com/origin/pgc-image/1c616a10971e41929a9408e990eb3a12)
+    - （3）多台动态Web服务器：
+        - 没几年，互联网的发展实在是太快，用户量蹭蹭上涨，session id数量也与日俱增，服务器不堪重负
+        - 增加nginx来进行负载均衡，单台服务器变成了3台web服务器组成的小集群
+        - ![](https://p6-tt.byteimg.com/origin/pgc-image/3fd170a8dec5461996e19b3d9c6ee107)
+        - 压力虽然减少，但session id的管理问题却变得复杂起来
+            - 请求如果发到某台机器，登记了session id，但下次请求说不定就发到第二胎，一会儿又发到第三台，这样各个服务器上的信息不一致，就会出现一些异常情况，用户估计要破口大骂：这什么辣鸡网站？
+            - （3.1）nginx：同一个用户来的请求都发给同一台机器
+        - 好景不长，各服务器相继出现宕机情况，这时候nginx还得把请求交给还在工作的机器，原来的问题就又出现了
+            - （3.2）session同步：有新增、失效的情况都给其他机器招呼一下，大家都管理一份，这样就不会出现不一致的问题
+            - ![](https://p3-tt.byteimg.com/origin/pgc-image/a94ead3997324b24ac73ad59cccdc576)
+        - 搞了半天，又回到从前，一个人管理所有session id的情况了，不仅如此，还要抽出时间和几位兄弟同步，把session id搬来搬去，工作量不减反增了。
+    - （4）独立缓存——Redis
+        - session id都统一存在redis里面
+        - ![](https://p6-tt.byteimg.com/origin/pgc-image/ea7f5139129c416ab80ca4efb60c2764)
+    - （5）Token时代
+        - Redis也不是万能的，也有崩溃的风险，一崩溃就全完了
+        - JWT（JSON Web Token） 技术，硬说让redis来管理保存session id负担太重了，以后不保存了
+        - 没有session id，但是换了一个token，用它来识别用户
+        - ![](https://p3-tt.byteimg.com/origin/pgc-image/863480eff55a489b879373ff4fb7dcf1)
+        - 第一部分是JWT的基本信息，然后把用户的身份信息放在第二部分，接着和第一部分合在一起做一个计算，计算的时候加入了一个只有我们才知道的密钥secretkey，计算结果作为第三部分。最后三部分拼在一起作为最终的token发送给客户端保存着···再收到这个token的时候，就可以通过同样的算法验证前面两部分的结果和第三部分是不是相同，就知道这个token是不是伪造的啦！因为密钥只有我们知道，别人没办法伪造出一个token的！最后确认有效之后，再取第二部分的用户身份信息，就知道这是谁了
+        - ![](https://p3-tt.byteimg.com/origin/pgc-image/32c0bd9dfa704f0d808a452106bfa930)
 
 
 ## Django
