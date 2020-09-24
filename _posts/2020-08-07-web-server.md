@@ -493,14 +493,14 @@ SESSION_REDIS = Redis(host='192.168.0.94', port='6379')
 
 - 【2020-9-24】[深夜，我偷听到程序员要对Session下手……](https://www.toutiao.com/i6875568455475528203/)，演变历史：
     - **单机服务器**(静态) → 单机服务器(动态) → **分布式服务器**（Nginx） → Redis**独立存储** → **Token时代**
-    - （1）单台静态Web服务器：一个web服务器，每天处理的不过是一些静态资源文件，像HTML、CSS、JS、图片等等，按照HTTP协议的规范处理请求即可。
+    - （1）**单台Web服务器-静态**：一个web服务器，每天处理的不过是一些静态资源文件，像HTML、CSS、JS、图片等等，按照HTTP协议的规范处理请求即可。
         - ![](https://p6-tt.byteimg.com/origin/pgc-image/da73c2849fb04ad3b5e47ec55dc47d0a)
-    - （2）单台动态Web服务器：
+    - （2）**单台Web服务器-动态**：
         - 动态交互的网络应用开始如雨后春笋般涌现，像各种各样的论坛啊，购物网站啊之类
         - Session诞生：记住每一个请求背后的用户是谁
         - 浏览器登陆以后，服务器分配一个session id，表示一个会话，然后返回给浏览器保存着。后续再来请求的时候，带上，就能知道是谁
         - ![](https://p6-tt.byteimg.com/origin/pgc-image/1c616a10971e41929a9408e990eb3a12)
-    - （3）多台动态Web服务器：
+    - （3）**分布式Web服务器**：
         - 没几年，互联网的发展实在是太快，用户量蹭蹭上涨，session id数量也与日俱增，服务器不堪重负
         - 增加nginx来进行负载均衡，单台服务器变成了3台web服务器组成的小集群
         - ![](https://p6-tt.byteimg.com/origin/pgc-image/3fd170a8dec5461996e19b3d9c6ee107)
@@ -511,16 +511,64 @@ SESSION_REDIS = Redis(host='192.168.0.94', port='6379')
             - （3.2）session同步：有新增、失效的情况都给其他机器招呼一下，大家都管理一份，这样就不会出现不一致的问题
             - ![](https://p3-tt.byteimg.com/origin/pgc-image/a94ead3997324b24ac73ad59cccdc576)
         - 搞了半天，又回到从前，一个人管理所有session id的情况了，不仅如此，还要抽出时间和几位兄弟同步，把session id搬来搬去，工作量不减反增了。
-    - （4）独立缓存——Redis
+    - （4）**独立缓存**——Redis
         - session id都统一存在redis里面
         - ![](https://p6-tt.byteimg.com/origin/pgc-image/ea7f5139129c416ab80ca4efb60c2764)
-    - （5）Token时代
+    - （5）**Token时代**
         - Redis也不是万能的，也有崩溃的风险，一崩溃就全完了
         - JWT（JSON Web Token） 技术，硬说让redis来管理保存session id负担太重了，以后不保存了
         - 没有session id，但是换了一个token，用它来识别用户
         - ![](https://p3-tt.byteimg.com/origin/pgc-image/863480eff55a489b879373ff4fb7dcf1)
         - 第一部分是JWT的基本信息，然后把用户的身份信息放在第二部分，接着和第一部分合在一起做一个计算，计算的时候加入了一个只有我们才知道的密钥secretkey，计算结果作为第三部分。最后三部分拼在一起作为最终的token发送给客户端保存着···再收到这个token的时候，就可以通过同样的算法验证前面两部分的结果和第三部分是不是相同，就知道这个token是不是伪造的啦！因为密钥只有我们知道，别人没办法伪造出一个token的！最后确认有效之后，再取第二部分的用户身份信息，就知道这是谁了
         - ![](https://p3-tt.byteimg.com/origin/pgc-image/32c0bd9dfa704f0d808a452106bfa930)
+    - JWT：目前有两种实现方式
+        - ![](https://img2018.cnblogs.com/blog/1552472/201911/1552472-20191115165339758-1975183863.png)
+        - JWS(JSON Web Signature)
+            - ![](https://img2018.cnblogs.com/blog/1552472/201911/1552472-20191115161445577-896569505.png)
+            - 分成三个部分：
+                - 头部（Header）：用于描述关于该JWT的最基本的信息，例如:其类型、以及签名所用的算法等。JSON内容要经Base64 编码生成字符串成为Header。
+                - 载荷（PayLoad）：payload的五个字段都是由JWT的标准所定义的。
+                    - iss: 该JWT的签发者
+                    - sub: 该JWT所面向的用户
+                    - aud: 接收该JWT的一方
+                    - exp(expires): 什么时候过期，这里是一个Unix时间戳
+                    - iat(issued at): 在什么时候签发的
+                    - 后面的信息可以按需补充。 JSON内容要经Base64 编码生成字符串成为PayLoad。
+                - 签名（signature）：这个部分header与payload通过header中声明的加密方式，使用密钥secret进行加密，生成签名。JWS的主要目的是保证了数据在传输过程中不被修改，验证数据的完整性。但由于仅采用Base64对消息内容编码，因此不保证数据的不可泄露性。所以不适合用于传输敏感数据。
+        - JWE(JSON Web Encryption)
+            - 相对于JWS，JWE则同时保证了安全性与数据完整性。 JWE由五部分组成：
+            - ![](https://img2018.cnblogs.com/blog/1552472/201911/1552472-20191115161640088-1851802272.png)
+            - JWE的计算过程相对繁琐，不够轻量级，因此适合与数据传输而非token认证，但该协议也足够安全可靠，用简短字符串描述了传输内容，兼顾数据的安全性与完整性
+            - 具体生成步骤为：
+                - JOSE含义与JWS头部相同。
+                - 生成一个随机的Content Encryption Key （CEK）。
+                - 使用RSAES-OAEP 加密算法，用公钥加密CEK，生成JWE Encrypted Key。
+                - 生成JWE初始化向量。
+                - 使用AES GCM加密算法对明文部分进行加密生成密文Ciphertext,算法会随之生成一个128位的认证标记Authentication Tag。 6.对五个部分分别进行base64编码。
+    -  Python实现：PyJWT
+    - 详情：[flask项目--认证方案Json Web Token(JWT)](https://www.cnblogs.com/oklizz/p/11414429.html)
+
+```python
+import jwt
+from jwt import PyJWTError
+from datetime import datetime, timedelta
+
+payload = {  # jwt设置过期时间的本质 就是在payload中 设置exp字段, 值要求为格林尼治时间
+    "user_id": 1,
+    'exp': datetime.utcnow() + timedelta(seconds=30)
+}
+
+screct_key = "test"
+# 生成token
+token = jwt.encode(payload, key=screct_key, algorithm='HS256')
+print(token)
+# 验签token  返回payload    pyjwt会自动校验过期时间
+try:
+    data = jwt.decode(token, key=screct_key, algorithms='HS256')
+    print(data)
+except PyJWTError as e:
+    print("jwt验证失败: %s" % e)
+```
 
 
 ## Django
