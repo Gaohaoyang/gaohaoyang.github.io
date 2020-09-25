@@ -96,10 +96,10 @@ mathjax: true
 # 深度学习文本分类
 
 
-## CNN文本分类
+## CNN文本分类（TextCNN）
 
 - 如：textCNN
-
+  - textcnn的论文Convolutional Neural Networks for Sentence Classification 和 A Sensitivity Analysis of Convolutional Neural Networks for Sentence Classification
 - 词向量
   - 随机初始化 （CNN-rand）
   - 预训练词向量进行初始化，在训练过程中固定 (CNN-static)
@@ -109,6 +109,7 @@ mathjax: true
   - 句长n=9，词向量维度k=6，filter有两种窗口大小（或者说kernel size），每种有2个，因此filter总个数m=4，其中:
   - 一种的窗口大小h=2（红色框），卷积后的向量维度为n−h+1=8
   - 另一种窗口大小h=3（黄色框），卷积后的向量维度为n−h+1=7
+- ![](https://pic4.zhimg.com/80/v2-be5c41070a93a6adf9ff73e76a5b305e_720w.jpg)
 - 一些结论
   - Multichannel vs. Single Channel Models: 虽然作者一开始认为多通道可以预防过拟合，从而应该表现更高，尤其是在小规模数据集上。但事  - 实是，单通道在一些语料上比多通道更好；
   - Static vs. Non-static Representations: 在大部分的语料上，CNN-non-static都优于CNN-static，一个解释：预训练词向量可能认为‘good’ - 和‘bad’类似（可能它们有许多类似的上下文），但是对于情感分析任务，good和bad应该要有明显的区分，如果使用CNN-static就无法做调整了；
@@ -117,17 +118,20 @@ mathjax: true
   - 可以尝试其他的词向量预训练语料，如Wikipedia[Collobert et al. (2011)]
   - Adadelta(Zeiler, 2012)和Adagrad(Duchi et al., 2011)可以得到相近的结果，但是所需epoch更少。
 
-## RNN文本分类
+## RNN文本分类（TextRNN）
 
+- 思想：以双向LSTM 或GRU来获取句子的信息表征， 以最后一时刻的 h 作为句子特征输入到 softmax 中进行预测
 - RNN用于文本分类
   - 策略1：直接使用RNN的最后一个单元输出向量作为文本特征
   - 策略2：使用双向RNN的两个方向的输出向量的连接（concatenate）或均值作为文本特征
   - 策略3：将所有RNN单元的输出向量的均值pooling或者max-pooling作为文本特征
   - 策略4：层次RNN+Attention, Hierarchical Attention Networks
 
-## RCNN（RNN+CNN）用于文本分类
+## Text-RCNN（RNN+CNN）用于文本分类
 
 - 论文Recurrent Convolutional Neural Networks for Text Classification设计了一种RNN和CNN结合的模型用于文本分类。
+  - 一个很简单的思想看起来比 Transformer 还复杂，真的是有点醉
+  - ![](https://pic4.zhimg.com/80/v2-55989a44d089b8acf269e6c4e219474e_720w.jpg)
 - RCNN相关总结
   - NN vs. traditional methods: 在该论文的所有实验数据集上，神经网络比传统方法的效果都要好
   - Convolution-based vs. RecursiveNN: 基于卷积的方法比基于递归神经网络的方法要好
@@ -172,6 +176,20 @@ mathjax: true
   - fastText模型直接对所有进行embedded的特征取均值，作为文本的特征表示
 - 特点
   - 当类别数量较大时，使用Hierachical Softmax将N-gram融入特征中，并且使用Hashing trick[Weinberger et al.2009]提高效率
+
+## HAN (长文本【篇章级别】分类）
+
+- 哈工大团队提出 Document Modeling with Gated Recurrent Neural Network for Sentiment Classification. Duyu Tang, Bing Qin , Ting Liu. In EMNLP, 2015，该文章提出了一种层次神经网络的结构做篇章级别的情感分析，取得了很好的效果
+  - ![](https://pic2.zhimg.com/80/v2-b65790c402734c1f7907f59e12058549_720w.jpg)
+- 2016年另外一个团队提出了HAN网络，也是使用层次神经网络的结构做篇章级别的文本分析。并且和上篇论文有很多相似之处。文章利用word att ention 和 sentence attention来更好的实现加权平均，取得了很好的效果
+  - [Hierarchical Attention Networks for Document Classification](https://www.aclweb.org/anthology/N16-1174/). Zichao Yang1, Diyi Yang1, Chris Dyer and et al. In NAACL-HLT, 2016
+  - ![](https://pic4.zhimg.com/80/v2-d4fe53cabdf030814b51fc22fb7d0c35_720w.jpg)
+  - 首先是词语到句子级别的，利用词向量，通过双向GRU，对一句话中的词抽取特征
+  - 考虑到在每个句子中，各个词对句子信息的贡献不同。随后作者利用word attention 来对BI-GRU抽取的词特征加权求和，生成句子表示（句向量）；
+  - 然后是句子到文章级别的，一篇文章有多个句子，把它们看成是一个时间序，使用双向GRU对所有句子进行整合，生成新的句向量；
+  - 对句向量使用sentence attention ，具体过程和word attention相似，获得文章表示
+  - 最后，用Softmax做分类。
+
 
 ## 最新研究
 
