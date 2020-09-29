@@ -14,6 +14,26 @@ mathjax: true
 
 > 数据挖掘方向知识点、经验总结
 
+
+# 数据分析
+
+- 【2020-9-29】数据分析知识点：[定性分析和定量分析的根本区别在于](https://www.zhihu.com/question/19603466)
+    - ① 画图前想想是定性分析还是定量分析
+        - 定性分析描述性质，侧重结论，如占比，一般用饼图、四分位图等；
+            - 分析1:郭小明胃口很大
+            - 分析2:郭晓明胃口很小
+        - 定量分析描述量级变化，侧重数字，一般用折线图、曲线图等。
+            - 分析1:郭小明一顿可以吃3个Schweinshaxe
+            - 分析2:郭小明在吃了3个Schweinshaxe之后还可以吃5个蛋挞
+        - ![](https://pic3.zhimg.com/80/v2-d30a8823aa5039fb7d83183fbeaf4ac2_720w.jpg)
+        - ![](https://pic3.zhimg.com/80/v2-1fe00ae8f51c1a31fa884a009f302ac6_720w.jpg)
+        - ![](https://picb.zhimg.com/80/v2-08a5f625113fc11cac12b7901e933a02_720w.jpg)
+    - ② 数据分析三大类：趋势、比较、细分。参考：[数据分析的三个常用方法：数据趋势、对比和细分分析](http://www.woshipm.com/data-analysis/676038.html)
+        - 趋势
+        - 比较
+        - 细分
+
+
 # [数据的游戏：冰与火](https://coolshell.cn/articles/10192.html)
 
 - 【2013-7-31】陈皓（左耳朵耗子）
