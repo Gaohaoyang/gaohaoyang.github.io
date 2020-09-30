@@ -222,6 +222,9 @@ mathjax: true
 - KBQA
 - MRCQA
 
+- 【2020-4-22】[KB-QA研究进展](https://www.jianshu.com/p/92ea00b7a4cc)
+- ![](https://upload-images.jianshu.io/upload_images/9298309-c4a3c66f7965460e.png)
+
 ## 资料
 
 - [针对复杂问题的知识图谱问答(KBQA)最新进展](https://blog.csdn.net/sdu_hao/article/details/105674327)

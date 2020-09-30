@@ -3,7 +3,7 @@ layout: post
 title:  "对话系统-Dialogue System"
 date:   2020-04-28 21:45:00
 categories: 深度学习
-tags: 深度学习 NLP 对话系统 QA 多轮 闲聊 沈向洋 FSM 有限状态机 GPT 陈蕴侬 JSGF
+tags: 深度学习 NLP 对话系统 QA KB-QA 多轮 闲聊 沈向洋 FSM 有限状态机 GPT 陈蕴侬 JSGF
 excerpt: 对话系统技术图谱
 author: 鹤啸九天
 mathjax: true
@@ -437,6 +437,10 @@ Image('fsm.png')
 
 ![](https://note.youdao.com/yws/public/resource/c388d7862c02facd6c2a03d6e17d9180/xmlnote/DED0DC29757E48DE9F55FB83A846A957/3963)
 
+## KB-QA
+
+- 【2020-4-22】[KB-QA研究进展](https://www.jianshu.com/p/92ea00b7a4cc)
+- ![](https://upload-images.jianshu.io/upload_images/9298309-c4a3c66f7965460e.png)
 
 
 ## 闲聊型对话
