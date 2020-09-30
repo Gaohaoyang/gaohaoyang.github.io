@@ -28,6 +28,7 @@ mathjax: true
 
 ## 预训练语言模型（PLMs）
 
+- 2020年3月18日，邱锡鹏老师发表了关于NLP预训练模型的综述《[Pre-trained Models for Natural Language Processing: A Survey](https://arxiv.org/abs/2003.08271v2)》
 - 【2020-9-9】[预训练语言模型(PLMs)走的飞快](https://zhuanlan.zhihu.com/p/93781241)
 - ![](https://pic1.zhimg.com/v2-447ae7707604e7ac520555249332c42c_1440w.jpg)
 - 预训练模型在经历中4个时代
@@ -37,156 +38,12 @@ mathjax: true
     - 第四个时代是**改进型**和**领域定制型**。 
         - 改进型代表为ALBERT和XLNet
         - 领域定制化(Domain Specific)代表为SciBert (Scientific Bert) 和BioBert(Biomedical Bert)。 
-
-
-### ES句向量
-
-- 【2020-9-15】[ElasticTransformers](https://github.com/md-experiments/elastic_transformers)
-    - Elastic Transformers：Jupyter Notebook里的可扩展BERT语义搜索
-- ![](https://github.com/md-experiments/elastic_transformers/raw/master/assets/architecture.png)
-
-
-
-### Faiss简介
-
-- `Faiss`是Facebook AI团队开源的针对聚类和相似性搜索库，为稠密向量提供**高效相似度搜索和聚类**，支持**十亿**级别向量的搜索，是目前最为成熟的**近似近邻搜索库**。它包含多种搜索**任意**大小向量集（备注：向量集大小由RAM内存决定）的算法，以及用于算法评估和参数调整的支持代码。Faiss用C++编写，并提供与Numpy完美衔接的Python接口。除此以外，对一些核心算法提供了GPU实现。相关介绍参考《[Faiss：Facebook 开源的相似性搜索类库](https://infoq.cn/article/2017/11/Faiss-Facebook)》
-- Faiss对一些基础的算法提供了非常高效的实现
-    - 聚类Faiss提供了一个高效的k-means实现
-    - PCA降维算法
-    - PQ(ProductQuantizer)编码/解码
-- 组件
-    - Faiss中最常用的是索引Index，而后是PCA降维、PQ乘积量化，这里针对Index和PQ进行说明，PCA降维从流程上都可以理解。
-- 以图片搜索为例，所谓相似度搜索，便是在给定的一堆图片中，寻找出我指定的目标最像的K张图片，也简称为KNN（K近邻）问题。
-    - ![](https://img2018.cnblogs.com/blog/1408825/201903/1408825-20190320225405798-259149897.png)
-
-- [Faiss流程与原理分析](https://www.cnblogs.com/yhzhou/p/10568728.html)
-
-Faiss 使用场景：最常见的人脸比对，指纹比对，基因比对等。
-
-**Index使用**
-
-Faiss处理固定维数d的向量集合，向量维度d通常为几十到几百。
-
-faiss 三个最基础的 index. 分别是 IndexFlatL2, IndexIVFFlat, IndexIVFPQ，更多参见[Guidelines to choose an index](https://github.com/facebookresearch/faiss/wiki/Guidelines-to-choose-an-index)
-- `IndexFlatL2`：最基础的Index
-- `IndexIVFFlat`：更快的搜索，将数据集分割成几部分，加快搜索
-    - d维空间中定义Voronoi单元格，并且每个数据库矢量都落入其中一个单元格中。在搜索时，只有查询x所在单元中包含的数据库向量y与少数几个相邻查询向量进行比较。(划分搜索空间)
-        - 与数据库向量具有相同分布的任何向量集合上执行训练
-        - 建索引，即`量化器`(quantizer)，它将矢量分配给Voronoi单元。每个单元由一个质心定义，找到一个矢量所在的Voronoi单元包括在质心集中找到该矢量的最近邻居。这是另一个索引的任务，通常是索引IndexFlatL2。
-- `IndexIVFPQ`：内存开销更小.
-    - IndexFlatL2和IndexIVFFlat都存储完整的向量，内存开销大
-    - 基于产品量化器的有损压缩来压缩存储的向量的变体。压缩的方法基于乘积量化([Product Quantizer](https://hal.archives-ouvertes.fr/file/index/docid/514462/filename/paper_hal.pdf))，矢量没有精确存储，搜索方法返回的距离也是近似值。
-
-
-IndexIVFFlat Demo 完整代码
-
-```python
-# encoding:utf-8
- 
-# Copyright (c) 2015-present, Facebook, Inc.
-# All rights reserved.
-#
-# This source code is licensed under the BSD+Patents license found in the
-# LICENSE file in the root directory of this source tree.
- 
-# author    : Facebook
-# translate : h-j-13
- 
-import numpy as np
-d = 64                              # 向量维度
-nb = 100000                         # 向量集大小
-nq = 10000                          # 查询次数
-np.random.seed(1234)                # 随机种子,使结果可复现
-xb = np.random.random((nb, d)).astype('float32')
-xb[:, 0] += np.arange(nb) / 1000.
-xq = np.random.random((nq, d)).astype('float32')
-xq[:, 0] += np.arange(nq) / 1000.
- 
-import faiss
- 
-nlist = 100
-k = 4
-quantizer = faiss.IndexFlatL2(d)  # the other index
-index = faiss.IndexIVFFlat(quantizer, d, nlist, faiss.METRIC_L2)
-# here we specify METRIC_L2, by default it performs inner-product search
- 
-assert not index.is_trained
-index.train(xb)
-assert index.is_trained
- 
-index.add(xb)                  # 添加索引可能会有一点慢
-D, I = index.search(xq, k)     # 搜索
-print(I[-5:])                  # 最初五次查询的结果
-index.nprobe = 10              # 默认 nprobe 是1 ,可以设置的大一些试试
-D, I = index.search(xq, k)
-print(I[-5:])                  # 最后五次查询的结果
-```
-
-IndexIVFFlat 完整代码
-
-```python
-# encoding:utf-8
- 
-# Copyright (c) 2015-present, Facebook, Inc.
-# All rights reserved.
-#
-# This source code is licensed under the BSD+Patents license found in the
-# LICENSE file in the root directory of this source tree.
- 
-# author    : Facebook
-# translate : h-j-13
- 
-import numpy as np
- 
-d = 64                              # 向量维度
-nb = 100000                         # 向量集大小
-nq = 10000                          # 查询次数
-np.random.seed(1234)                # 随机种子,使结果可复现
-xb = np.random.random((nb, d)).astype('float32')
-xb[:, 0] += np.arange(nb) / 1000.
-xq = np.random.random((nq, d)).astype('float32')
-xq[:, 0] += np.arange(nq) / 1000.
- 
-import faiss
- 
-nlist = 100
-m = 8
-k = 4
-quantizer = faiss.IndexFlatL2(d)    # 内部的索引方式依然不变
-index = faiss.IndexIVFPQ(quantizer, d, nlist, m, 8)
-                                    # 每个向量都被编码为8个字节大小
-index.train(xb)
-index.add(xb)
-D, I = index.search(xb[:5], k)      # 测试
-print(I)
-print(D)
-index.nprobe = 10                   # 与以前的方法相比
-D, I = index.search(xq, k)          # 检索
-print(I[-5:])
-```
-
-- Faiss 索引类型：
-    - Exact Search for L2 #基于L2距离的确定搜索匹配
-    - Exact Search for Inner Product #基于内积的确定搜索匹配
-    - Hierarchical Navigable Small World graph exploration #分层索引
-    - Inverted file with exact post-verification #倒排索引
-    - Locality-Sensitive Hashing (binary flat index) #本地敏感hash
-    - Scalar quantizer (SQ) in flat mode #标量量化索引
-    - Product quantizer (PQ) in flat mode #笛卡尔乘积索引
-    - IVF and scalar quantizer #倒排+标量量化索引
-    - IVFADC (coarse quantizer+PQ on residuals) #倒排+笛卡尔乘积索引
-    - IVFADC+R (same as IVFADC with re-ranking based on codes) # 倒排+笛卡尔乘积索引 + 基于编码器重排
-
-
-
-Faiss 开发资料：
-- [github](https://github.com/facebookresearch/faiss)
-- [tutorial](https://github.com/facebookresearch/faiss/wiki/Getting-started)
-- [Faiss学习笔记](https://blog.csdn.net/u013185349/article/details/103637977)
-- 基于Faiss的特征向量相似度搜索引擎[Milvus](https://milvus.io/cn/)
-
-
-## 预训练语言模型
+- 【2020-9-30】nlp中的预训练语言模型
+    - ![](https://pic4.zhimg.com/v2-0e78a280939451bef50bc0b1a521c45b_1440w.jpg)
+- 主要包括3大方面，涉及到的模型有：
+    - **单向**特征表示的**自回归**预训练语言模型，统称为**单向模型**：ELMO/ULMFiT/SiATL/GPT1.0/GPT2.0；
+    - **双向**特征表示的**自编码**预训练语言模型，统称为**BERT系列模型**：(BERT/MASS/UNILM/ERNIE1.0/ERNIE(THU)/MTDNN/ERNIE2.0/SpanBERT/RoBERTa)
+    - **双向**特征表示的**自回归**预训练语言模型：XLNet；
 
 - PTMs: Pre-trained-Models in NLP，[NLP预训练模型的全面总结(持续更新中)](https://github.com/loujie0822/Pre-trained-Models/blob/master/README.md)
 - 2020年3月18日，邱锡鹏老师发表了关于NLP预训练模型的综述《[Pre-trained Models for Natural Language Processing: A Survey](https://zhuanlan.zhihu.com/p/115014536?utm_source=qq&utm_medium=social&utm_oi=27211553832960#ref_1)》
@@ -287,7 +144,7 @@ PTMs-Papers:
 
 ## BERT变种
 
-
+- 一系列变种模型
 
 ## BERT服务
 
@@ -452,9 +309,21 @@ tokenizer_output = ["un", "##aff", "##able"]
     - 现在有不少机器学习任务需要运行在终端上，例如智能手机，这种情况也必须使用轻量级的模型。
 - 基于以上的原因，不少研究开始针对 BERT 模型压缩进行，常见的模型压缩方法有以下几种：
     - `模型蒸馏` Distillation，使用大模型的学到的知识训练小模型，从而让小模型具有大模型的泛化能力。
+        - 通过一些优化目标从大型、知识丰富、fixed的teacher模型学习一个小型的student模型。蒸馏机制主要分为3种类型：
+            - 从软标签蒸馏：DistilBERT、EnsembleBERT
+            - 从其他知识蒸馏：TinyBERT、BERT-PKD、MobileBERT、 MiniLM、DualTrain
+            - 蒸馏到其他结构：Distilled-BiLSTM
     - `量化` Quantization，降低大模型的精度，减小模型。
+        - 将高精度模型用低精度来表示；如Q-BERT和Q8BERT，量化通常需要兼容的硬件。
     - `剪枝` Pruning，去掉模型中作用比较小的连接。
+        - 将模型中影响较小的部分舍弃。如Compressing BERT，还有结构化剪枝 LayerDrop，其在训练时进行Dropout，预测时再剪掉Layer，不像知识蒸馏需要提前固定student模型的尺寸大小。
     - `参数共享`，共享网络中部分参数，降低模型参数数量。
+        - 相似模型单元间的参数共享；
+        - ALBERT主要是通过矩阵分解和跨层参数共享来做到对参数量的减少。
+    - `模块替换`：BERT-of-Theseus根据伯努利分布进行采样，决定使用原始的大模型模块还是小模型，只使用task loss。
+- 总结
+    - ![](https://pic1.zhimg.com/80/v2-b6bf3fcc2f2691c8b12dfd0a9ad2aa8a_720w.jpg)
+    - 源自：[NLP算法面试必备！史上最全！PTMs：NLP预训练模型的全面总结](https://zhuanlan.zhihu.com/p/115014536)
 - ALBERT 也是一种 BERT 压缩方法，主要是用了**参数共享**和**矩阵分解**的方法压缩 BERT，但是 ALBERT 只减少模型的参数，并不能减少其 inference 的时间。
 - 两种使用模型蒸馏压缩 BERT 的算法
     - 第一种是 **DistilBERT**，将 12 层的 BERT-base 模型蒸馏到 6 层的 BERT 模型；
@@ -762,6 +631,151 @@ Hinton在NIPS2014[\[1\]](https://zhuanlan.zhihu.com/p/71986772#ref_1)提出了`�
 4.GPT-3 确实可以通过文字输入生成代码，但是仅限于比较简单的情况；
 5. 离 AI 真正替代程序员工作， 还有较长的路要走 。
 
+### ES句向量
+
+- 【2020-9-15】[ElasticTransformers](https://github.com/md-experiments/elastic_transformers)
+    - Elastic Transformers：Jupyter Notebook里的可扩展BERT语义搜索
+- ![](https://github.com/md-experiments/elastic_transformers/raw/master/assets/architecture.png)
+
+
+
+### Faiss简介
+
+- `Faiss`是Facebook AI团队开源的针对聚类和相似性搜索库，为稠密向量提供**高效相似度搜索和聚类**，支持**十亿**级别向量的搜索，是目前最为成熟的**近似近邻搜索库**。它包含多种搜索**任意**大小向量集（备注：向量集大小由RAM内存决定）的算法，以及用于算法评估和参数调整的支持代码。Faiss用C++编写，并提供与Numpy完美衔接的Python接口。除此以外，对一些核心算法提供了GPU实现。相关介绍参考《[Faiss：Facebook 开源的相似性搜索类库](https://infoq.cn/article/2017/11/Faiss-Facebook)》
+- Faiss对一些基础的算法提供了非常高效的实现
+    - 聚类Faiss提供了一个高效的k-means实现
+    - PCA降维算法
+    - PQ(ProductQuantizer)编码/解码
+- 组件
+    - Faiss中最常用的是索引Index，而后是PCA降维、PQ乘积量化，这里针对Index和PQ进行说明，PCA降维从流程上都可以理解。
+- 以图片搜索为例，所谓相似度搜索，便是在给定的一堆图片中，寻找出我指定的目标最像的K张图片，也简称为KNN（K近邻）问题。
+    - ![](https://img2018.cnblogs.com/blog/1408825/201903/1408825-20190320225405798-259149897.png)
+
+- [Faiss流程与原理分析](https://www.cnblogs.com/yhzhou/p/10568728.html)
+
+Faiss 使用场景：最常见的人脸比对，指纹比对，基因比对等。
+
+**Index使用**
+
+Faiss处理固定维数d的向量集合，向量维度d通常为几十到几百。
+
+faiss 三个最基础的 index. 分别是 IndexFlatL2, IndexIVFFlat, IndexIVFPQ，更多参见[Guidelines to choose an index](https://github.com/facebookresearch/faiss/wiki/Guidelines-to-choose-an-index)
+- `IndexFlatL2`：最基础的Index
+- `IndexIVFFlat`：更快的搜索，将数据集分割成几部分，加快搜索
+    - d维空间中定义Voronoi单元格，并且每个数据库矢量都落入其中一个单元格中。在搜索时，只有查询x所在单元中包含的数据库向量y与少数几个相邻查询向量进行比较。(划分搜索空间)
+        - 与数据库向量具有相同分布的任何向量集合上执行训练
+        - 建索引，即`量化器`(quantizer)，它将矢量分配给Voronoi单元。每个单元由一个质心定义，找到一个矢量所在的Voronoi单元包括在质心集中找到该矢量的最近邻居。这是另一个索引的任务，通常是索引IndexFlatL2。
+- `IndexIVFPQ`：内存开销更小.
+    - IndexFlatL2和IndexIVFFlat都存储完整的向量，内存开销大
+    - 基于产品量化器的有损压缩来压缩存储的向量的变体。压缩的方法基于乘积量化([Product Quantizer](https://hal.archives-ouvertes.fr/file/index/docid/514462/filename/paper_hal.pdf))，矢量没有精确存储，搜索方法返回的距离也是近似值。
+
+
+IndexIVFFlat Demo 完整代码
+
+```python
+# encoding:utf-8
+ 
+# Copyright (c) 2015-present, Facebook, Inc.
+# All rights reserved.
+#
+# This source code is licensed under the BSD+Patents license found in the
+# LICENSE file in the root directory of this source tree.
+ 
+# author    : Facebook
+# translate : h-j-13
+ 
+import numpy as np
+d = 64                              # 向量维度
+nb = 100000                         # 向量集大小
+nq = 10000                          # 查询次数
+np.random.seed(1234)                # 随机种子,使结果可复现
+xb = np.random.random((nb, d)).astype('float32')
+xb[:, 0] += np.arange(nb) / 1000.
+xq = np.random.random((nq, d)).astype('float32')
+xq[:, 0] += np.arange(nq) / 1000.
+ 
+import faiss
+ 
+nlist = 100
+k = 4
+quantizer = faiss.IndexFlatL2(d)  # the other index
+index = faiss.IndexIVFFlat(quantizer, d, nlist, faiss.METRIC_L2)
+# here we specify METRIC_L2, by default it performs inner-product search
+ 
+assert not index.is_trained
+index.train(xb)
+assert index.is_trained
+ 
+index.add(xb)                  # 添加索引可能会有一点慢
+D, I = index.search(xq, k)     # 搜索
+print(I[-5:])                  # 最初五次查询的结果
+index.nprobe = 10              # 默认 nprobe 是1 ,可以设置的大一些试试
+D, I = index.search(xq, k)
+print(I[-5:])                  # 最后五次查询的结果
+```
+
+IndexIVFFlat 完整代码
+
+```python
+# encoding:utf-8
+ 
+# Copyright (c) 2015-present, Facebook, Inc.
+# All rights reserved.
+#
+# This source code is licensed under the BSD+Patents license found in the
+# LICENSE file in the root directory of this source tree.
+ 
+# author    : Facebook
+# translate : h-j-13
+ 
+import numpy as np
+ 
+d = 64                              # 向量维度
+nb = 100000                         # 向量集大小
+nq = 10000                          # 查询次数
+np.random.seed(1234)                # 随机种子,使结果可复现
+xb = np.random.random((nb, d)).astype('float32')
+xb[:, 0] += np.arange(nb) / 1000.
+xq = np.random.random((nq, d)).astype('float32')
+xq[:, 0] += np.arange(nq) / 1000.
+ 
+import faiss
+ 
+nlist = 100
+m = 8
+k = 4
+quantizer = faiss.IndexFlatL2(d)    # 内部的索引方式依然不变
+index = faiss.IndexIVFPQ(quantizer, d, nlist, m, 8)
+                                    # 每个向量都被编码为8个字节大小
+index.train(xb)
+index.add(xb)
+D, I = index.search(xb[:5], k)      # 测试
+print(I)
+print(D)
+index.nprobe = 10                   # 与以前的方法相比
+D, I = index.search(xq, k)          # 检索
+print(I[-5:])
+```
+
+- Faiss 索引类型：
+    - Exact Search for L2 #基于L2距离的确定搜索匹配
+    - Exact Search for Inner Product #基于内积的确定搜索匹配
+    - Hierarchical Navigable Small World graph exploration #分层索引
+    - Inverted file with exact post-verification #倒排索引
+    - Locality-Sensitive Hashing (binary flat index) #本地敏感hash
+    - Scalar quantizer (SQ) in flat mode #标量量化索引
+    - Product quantizer (PQ) in flat mode #笛卡尔乘积索引
+    - IVF and scalar quantizer #倒排+标量量化索引
+    - IVFADC (coarse quantizer+PQ on residuals) #倒排+笛卡尔乘积索引
+    - IVFADC+R (same as IVFADC with re-ranking based on codes) # 倒排+笛卡尔乘积索引 + 基于编码器重排
+
+
+
+Faiss 开发资料：
+- [github](https://github.com/facebookresearch/faiss)
+- [tutorial](https://github.com/facebookresearch/faiss/wiki/Getting-started)
+- [Faiss学习笔记](https://blog.csdn.net/u013185349/article/details/103637977)
+- 基于Faiss的特征向量相似度搜索引擎[Milvus](https://milvus.io/cn/)
 
 
 # 资料
