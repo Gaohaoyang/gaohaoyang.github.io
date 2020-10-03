@@ -18,6 +18,44 @@ mathjax: true
 - 【2020-9-19】流形学习前沿方向：隐图学习，[Latent graph neural networks: Manifold learning 2.0?](https://towardsdatascience.com/manifold-learning-2-99a25eeb677d)
 ![](https://wx2.sinaimg.cn/mw690/5396ee05ly1ginkjd7x4ij20d40aetdm.jpg)
 
+
+# Embedding
+
+- Embedding（嵌入）是拓扑学里面的词，在深度学习领域经常和`Manifold`（流形）搭配使用。
+  - 三维空间的球体是一个二维流形嵌入在三维空间（2D manifold embedded in 3D space）。球上的任意一个点只需要用一个二维的经纬度来表达就可以了。
+  - 一个二维空间的旋转矩阵是2x2的矩阵，其实只需要一个角度就能表达了，这是一维流形嵌入在2x2的矩阵空间。
+
+作者：刘斯坦
+链接：https://www.zhihu.com/question/38002635/answer/1382442522
+
+
+# 流形学习
+
+- [Neural Networks, Manifolds, and Topology](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/)
+  - ![](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/img/simple2_1.png)
+  - ![](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/img/spiral.1-2.2-2-2-2-2-2.gif)
+  - ![](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/img/topology_2D-2D_train.gif)
+- **Manifold Hypothesis**（`流形假设`）
+  - 流形假设：“自然的原始数据是低维的流形嵌入于(embedded in)原始数据所在的高维空间”
+  - 深度学习就是把高维原始数据（图像，句子）映射到低维流形，使得高维的原始数据被映射到低维流形之后变得可分，而这个映射就叫嵌入（Embedding）。如Word Embedding把单词组成的句子映射到一个表征向量。但后来把低维流形的表征向量叫做Embedding，其实是一种误用。
+  - Embedding就是从原始数据提取出来的Feature，也就是那个通过神经网络映射之后的低维向量。
+- 流形学习假设所有处于高维空间的数据点都分布在一个低维的流形上。流形学习的目的就在于寻找一种映射，从高维空间中恢复出低维流形来，从而利用流形的低维坐标表示高位空间的数据点，实现数据降维的目的。常用的算法有`Isomap`, `LLE`（Locally Linear Embedding）, `LE`（Laplacian Eigenmaps），`LLP`（Locality Preserving Projection）等
+
+- 虽然有一些维度缩减的变体是有监督的（例如线性/二次判别分析），**流形学习通常指的是无监督的降维**，其中类别没有提供给算法（虽然可能存在）
+
+![](https://p1-tt.byteimg.com/origin/pgc-image/18fd608d47914f9c90c2227d2dd56a9e)
+![](https://p3-tt.byteimg.com/origin/pgc-image/c0574ea8081f49af95604bb350657bd2)
+
+
+- 降维的目的在于寻找数据的“内在变量”,如图，丢弃掉数据之间你的公共信息（“A”的形状），发掘数据之间的变化信息（缩放尺度及旋转角度）。由于缩放尺度与旋转角度并非是线性分布的，因此更适合采用非线性降维方法。
+![](https://img-blog.csdnimg.cn/20190401202159198.jpg)
+
+- [什么是流形？manifold](https://www.bilibili.com/video/BV145411x7vJ)
+<iframe src="//player.bilibili.com/player.html?aid=455350252&bvid=BV145411x7vJ&cid=181172271&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- [用t-SNE进行数据可视化-GoogleTechTalks出品](https://www.bilibili.com/video/BV1Ax411v7z5)
+<iframe src="//player.bilibili.com/player.html?aid=10560557&bvid=BV1Ax411v7z5&cid=17434638&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+
 # 降维
 
 ## VC维
@@ -206,23 +244,6 @@ Diagram of k-fold cross-validation with k=4
 
 
 
-# 流形学习
-
-- 流形学习假设所有处于高维空间的数据点都分布在一个低维的流形上。流形学习的目的就在于寻找一种映射，从高维空间中恢复出低维流形来，从而利用流形的低维坐标表示高位空间的数据点，实现数据降维的目的。常用的算法有Isomap, LLE（Locally Linear Embedding）, LE（Laplacian Eigenmaps），LLP（Locality Preserving Projection）等
-
-- 虽然有一些维度缩减的变体是有监督的（例如线性/二次判别分析），流形学习通常指的是无监督的降维，其中类别没有提供给算法（虽然可能存在）
-
-![](https://p1-tt.byteimg.com/origin/pgc-image/18fd608d47914f9c90c2227d2dd56a9e)
-![](https://p3-tt.byteimg.com/origin/pgc-image/c0574ea8081f49af95604bb350657bd2)
-
-
-- 降维的目的在于寻找数据的“内在变量”,如图，丢弃掉数据之间你的公共信息（“A”的形状），发掘数据之间的变化信息（缩放尺度及旋转角度）。由于缩放尺度与旋转角度并非是线性分布的，因此更适合采用非线性降维方法。
-![](https://img-blog.csdnimg.cn/20190401202159198.jpg)
-
-- [什么是流形？manifold](https://www.bilibili.com/video/BV145411x7vJ)
-<iframe src="//player.bilibili.com/player.html?aid=455350252&bvid=BV145411x7vJ&cid=181172271&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
-- [用t-SNE进行数据可视化-GoogleTechTalks出品](https://www.bilibili.com/video/BV1Ax411v7z5)
-<iframe src="//player.bilibili.com/player.html?aid=10560557&bvid=BV1Ax411v7z5&cid=17434638&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
 ## 资料
