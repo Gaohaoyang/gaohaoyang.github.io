@@ -31,10 +31,27 @@ mathjax: true
 
 # 流形学习
 
-- [Neural Networks, Manifolds, and Topology](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/)
+- [Neural Networks, Manifolds, and Topology](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/)，中文翻译版：[神经网络、流形和拓扑](https://www.jianshu.com/p/12667309bf23)
+  - 一个双曲正切层tanh⁡(Wx+b)由以下组成：
+    - 1、由“权重”矩阵W的线性变换；
+    - 2、由矢量b的转换；
+    - 3、双曲正切函数的逐点应用。
+  - 连续变换如下图：
   - ![](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/img/simple2_1.png)
+  - 更复杂的网络，4个隐含层网络，“原始”表示转移到更高层次为了对数据进行分类。而螺旋最初是纠结的，最终他们是线性可分的。
   - ![](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/img/spiral.1-2.2-2-2-2-2-2.gif)
   - ![](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/img/topology_2D-2D_train.gif)
+  - 更多动图可视化见：Andrej Karpathy有很好的演示基于[ConvnetJS](http://cs.stanford.edu/people/karpathy/convnetjs//demo/classify2d.html)，让您可以交互式地浏览网络
+  - 双曲正切层的拓扑
+    - 每一层都会拉伸和挤压空间，但永远不会切割、断裂和褶皱它。直观地说，tanh保留了拓扑性质。例如，一组数据将在转化后依然保持连接状态。
+    - 定理：<font color='blue'>具有N个输入和N个输出的层是同胚，如果权重矩阵W是非奇异的</font>
+
+这样的转换，不影响拓扑结构，被称为同胚。在形式上，他们是连续函数的双向映射。
+
+作者：树石
+链接：https://www.jianshu.com/p/4d9efddf8d54
+来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 - **Manifold Hypothesis**（`流形假设`）
   - 流形假设：“自然的原始数据是低维的流形嵌入于(embedded in)原始数据所在的高维空间”
   - 深度学习就是把高维原始数据（图像，句子）映射到低维流形，使得高维的原始数据被映射到低维流形之后变得可分，而这个映射就叫嵌入（Embedding）。如Word Embedding把单词组成的句子映射到一个表征向量。但后来把低维流形的表征向量叫做Embedding，其实是一种误用。
