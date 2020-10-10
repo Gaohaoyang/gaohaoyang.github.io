@@ -16,6 +16,10 @@ mathjax: true
 
 - 汇总知名数据竞赛的经验信息
 
+## 数据科学竞赛大全
+
+- 【2020-10-10】Data Science Challenge / Competition 数据科学挑战赛/数据科学竞赛，源自：[机器学习理论与数据竞赛实战](https://www.zhihu.com/column/DataAI)
+![](https://pic3.zhimg.com/v2-af268652dc6a498641d8799862d61f2a_b.jpg)
 
 # KDD CUP
 
@@ -58,6 +62,9 @@ mathjax: true
 - 而参赛者可以接触到丰富的真实数据，解决实际问题，角逐名次，赢取奖金。
 - 诸如 Google，Facebook，Microsoft 等知名科技公司均在 Kaggle 上面举办过数据挖掘比赛。
 - 2017年3月，Kaggle 被 Google CloudNext 收购。
+
+- 【2020-10-10】历年赛题分布
+    - ![](https://pic4.zhimg.com/v2-b70f18c9a1a73e345200b747d15ebf6f_b.jpg)
  
 ### 参赛方式
  
@@ -90,12 +97,14 @@ mathjax: true
 - ◆ **Getting Started**：提供一些简单的任务用于熟悉平台和比赛；
 - ◆ **In Class**：用于课堂项目作业或者考试。
  
-![Kaggle 数据挖掘比赛经验分享](http://p1-tt.byteimg.com/large/pgc-image/e7fec7f15f94420a84e0c1f6554a1df1?from=pc)
+![Kaggle 数据挖掘比赛经验分享](http://p1-tt.byteimg.com/large/pgc-image/e7fec7f15f94420a84e0c1f6554a1df1)
  
 - 从领域归属划分：包含搜索相关性，广告点击率预估，销量预估，贷款违约判定，癌症检测等。
 - 从任务目标划分：包含回归，分类（二分类，多分类，多标签），排序，混合体（分类+回归）等。
 - 从数据载体划分：包含文本，语音，图像和时序序列等。
 - 从特征形式划分：包含原始数据，明文特征，脱敏特征（特征的含义不清楚）等。
+
+![](https://pic3.zhimg.com/v2-01a88fcaf5da9ac580f98606449c13d6_b.jpg)
  
 ### 比赛流程
  
@@ -190,6 +199,9 @@ mathjax: true
 - ◆ 对于**稠密型特征**，推荐使用 XGBoost 进行建模，简单易用效果好；
 - ◆ 数据中**既有稀疏特征，又有稠密特征**，可以考虑使用线性模型对稀疏特征进行建模，将其输出与稠密特征一起再输入 XGBoost/DNN 建模，具体可以参考2.5.2节 Stacking 部分。
  
+- 【2020-10-10】根据训练集、验证集和测试集误差大小适配不同解决办法
+- ![](https://pic1.zhimg.com/v2-3c971e6f2bfa69a2422af26a856aa9ac_b.jpg)
+
 #### 调参和模型验证
  
 对于选定的特征和模型，往往还需要对模型进行超参数的调优，才能获得比较理想的效果。调参一般可以概括为以下三个步骤：
