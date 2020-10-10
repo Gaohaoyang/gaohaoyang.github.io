@@ -3,7 +3,7 @@ layout: post
 title:  "tensorflow学习笔记"
 date:   2020-08-31 17:25:00
 categories: 编程语言
-tags: Tensorflow Python 深度学习
+tags: Tensorflow Python 深度学习 Pytorch
 excerpt: Tensorflow编程技能汇总
 author: 鹤啸九天
 mathjax: true
