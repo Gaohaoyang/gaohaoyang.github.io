@@ -106,7 +106,7 @@ mathjax: true
 - AI产品的架构比普通的互联网产品多了一个维度——“时间”。
   - 这种产品架构，可以生存到未来，并在未来逐步进化，一步步向智能逼近。
 - 其他业务实践分享
-  - [金融科技-智能投顾与AI金融风控 | 谢成]()
+  - [金融科技-智能投顾与AI金融风控-谢成]()
     - 金融科技的生态是三个相互牵制的部分：公司/银行——监管——资本
     - 金融科技发展：
       - 20世纪70年代 业务电子化
@@ -120,7 +120,7 @@ mathjax: true
       - （1）收集数据源（信用数据以及非标准数据）
       - （2）融和数据加工
       - （3）构建模型
-  - [车载语音助手的实战干货 | 宏卫]()
+  - [车载语音助手的实战干货-宏卫]()
     - 做产品，不做AI产品。因为小公司在算法等等技术上很难超过BAT等大公司，所以选择和构成产品每个部分最好的业务技术公司合作，再加上我们对产品的深挖，来做我们的产品
     - 车载场景下没有办法直接做to C的软件，因此选择了to B的商业模式。
     - 为了启动顺利，做了大量的数据埋点，收集到了颗粒化的数据，甚至是用户每一个问句都做了加密后的信息收集。
@@ -176,11 +176,11 @@ mathjax: true
     - 常用方法：DNN、RNN、NBT、迁移学习（迁移学习部分还没看，后续会更新到文章末尾）
   - `DPL`：对话策略管理是根据DST输出的当前系统状态来判断还有哪些槽需要被问及，去生成下一步的系统动作。
   - 论文（详见[对话系统中的DST](https://www.pkudodo.com/2019/06/09/1-12/)）
-    - 论文一：Deep Neural Network Approach for the Dialog State Tracking Challenge
+    - 论文一：**Deep Neural Network Approach for the Dialog State Tracking Challenge**
       - 使用n-gram滑动窗口，同时手工构造了12个特征函数来抽取特征，随后将所有特征送入DNN，最后对slot的所有可能value计算概率，概率最高的即为slot对应的value。每一个slot都会有一个对应的model，因此如果该intention内有n个slot需要填充，则系统内有n个该model。
-    - 论文二：Word-Based Dialog State Tracking with Recurrent Neural Networks
+    - 论文二：**Word-Based Dialog State Tracking with Recurrent Neural Networks**
       - ASR输出用户Utterance后需要再通过SLU，随后才进行DST。可是ASR可能会出错，SLU也可能会出错，这样会造成一个error传播。因此作者设计的model直接以ASR的输出作为DST的输入，绕过了SLU部分。这种策略目前在paper中也比较常见，一般来说效果也确实比添加SLU模块的要高一些。
-    - 论文三：Neural Belief Tracker: Data-Driven Dialogue State Tracking
+    - 论文三：**Neural Belief Tracker: Data-Driven Dialogue State Tracking**
       - 将SLU合并到了DST当中。model中可以看到一共有三个输入，System Output（上一时刻系统动作）、User Utterance（用户输入）、Candidate Pairs（候选槽值对）。model要做的就是根据系统之前动作及用户当前输入，判断候选槽值对中那个value才是真正的value。
       - ![](http://www.pkudodo.com/wp-content/uploads/2019/06/DBN-1024x625.png)
 - `NLG`：DPL生成下一步的系统动作后，生成相应的反馈，是以文本形式的。
