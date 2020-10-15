@@ -226,9 +226,17 @@ mathjax: true
 
 # KB-QA
 
-- IRQA
-- KBQA
-- MRCQA
+- 分类：
+  - IRQA
+  - KBQA
+  - MRCQA
+- 常用数据集
+  - **NLPCC**全称自然语言处理与中文计算会议（The Conference on Natural Language Processing and Chinese Computing）,它是由中国计算机学会（CCF）主办的 CCF 中文信息技术专业委员会年度学术会议，专注于自然语言处理及中文计算领域的学术和应用创新。
+  - 数据集来自NLPCC ICCPOL 2016 KBQA 任务集，其包含 14 609 个问答对的训练集和包含 9 870 个问答对的测试集。 并提供一个知识库，包含 6 502 738 个实体、 587 875 个属性以及 43 063 796 个 三元组。知识库文件中每行存储一个事实( fact) ，即三元组 ( 实体、属性、属性值) 。
+- [基于BERT的KBQA探索](https://zhuanlan.zhihu.com/p/62946533), 基于知识图谱的自动问答拆分为2 个主要步骤:命名实体识别步骤和属性映射步骤
+  - 命名实体识别步骤，采用BERT+BiLSTM+CRF方法（另外加上一些规则映射，可以提高覆盖度）
+  - 属性映射步骤，转换成文本相似度问题，采用BERT作二分类训练模型
+  - ![](https://pic4.zhimg.com/80/v2-782cfa7747c02d70ebb7fb542b574f8b_720w.jpg)
 
 - 【2020-4-22】[KB-QA研究进展](https://www.jianshu.com/p/92ea00b7a4cc)
 - ![](https://upload-images.jianshu.io/upload_images/9298309-c4a3c66f7965460e.png)
