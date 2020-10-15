@@ -170,15 +170,15 @@ mathjax: true
 ## 常识推理
 
 - [“原子”因果常识图谱](https://www.hankcs.com/nlp/corpus/atomic-commonsense-knowledge-graph.html)
-  - AAAI19的论文(Sap et al. (2019))开源了一个包含87万条推理常识的知识图谱ATOMIC。相较于常见的基于本体论分类条目的知识图谱，该知识库专注于“如果…那么…”关系的知识。作者提出了9种类型的因果联系来区分原因-效果、主体-主题、自愿-非自愿、行动-心理状态。通过生成式训练，作者发现神经网络模型可以从该图谱中获取简单的常识推理能力。
-  - 另外，该团队在ACL19上的论文COMET则利用了该图谱训练GPT模型，该GPT模型又反过来生成了许多全新的且合理的知识，达到了图谱补全的效果。
+  - AAAI 19的论文(Sap et al. (2019))开源了一个包含87万条推理常识的知识图谱ATOMIC。相较于常见的基于本体论分类条目的知识图谱，该知识库专注于“如果…那么…”关系的知识。作者提出了9种类型的因果联系来区分**原因-效果**、**主体-主题**、**自愿-非自愿**、**行动-心理状态**。通过生成式训练，作者发现神经网络模型可以从该图谱中获取简单的常识推理能力。
+  - 另外，该团队在ACL 19上的论文COMET则利用了该图谱训练GPT模型，该GPT模型又反过来生成了许多全新的且合理的知识，达到了图谱补全的效果。
   - ![](https://wx1.sinaimg.cn/large/006Fmjmcly1g91wq3pvxkj30u012lh1q.jpg)
 
 ## 问题思考
 
 - 目前已有的知识表示学习方法无法实现精确链接预测，有两个原因导致了这一现象的出现：
   - ill-posed algebraic problem：一个方程组中的方程式个数远大于变量个数
-    - 解法：流形函数, M(h,r,t)=D2r用来代替$h_r+r=t_r$，应用Reproducing Kernel Hilbert Space (RKHS)映射到Hilbert空间，以更高效地表征流形
+    - 解法：**流形函数**, M(h,r,t)=D2r用来代替$h_r+r=t_r$，应用Reproducing Kernel Hilbert Space (RKHS)映射到Hilbert空间，以更高效地表征流形
       - ![](https://images2015.cnblogs.com/blog/706575/201706/706575-20170619113807148-873845996.png)
   - adopting an overstrict geometric form。应用于h+r=t，所得到的尾实体几乎是一个点，这对于多对多关系而言显然是不正确的
 
