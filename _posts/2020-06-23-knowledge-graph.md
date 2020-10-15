@@ -185,6 +185,14 @@ mathjax: true
 - 摘自：知识图谱表示学习与关系推理（2016-2017）：[（一）](https://www.cnblogs.com/jtianwen2014/p/7000190.html)，[（二）](https://www.cnblogs.com/jtianwen2014/p/7008228.html)，[（三）](https://www.cnblogs.com/jtianwen2014/p/7018872.html)，[ACL2016信息抽取与知识图谱相关论文掠影](https://www.cnblogs.com/jtianwen2014/p/6985214.html)
 
 
+## 知识图谱嵌入(KGE)
+
+- [知识图谱嵌入(KGE)：方法和应用的综述](https://zhuanlan.zhihu.com/p/83026306)，参考《Knowledge Graph Embedding: A Survey of Approaches and Applications》和刘知远的《知识表示学习的研究与进展》做的总结
+
+![](https://pic4.zhimg.com/80/v2-8248f2e0ece454bd036b3ab97dc30b77_720w.jpg)
+
+
+
 # 事理图谱-Event Graph
 
 - [白硕：事理图谱六问六答 ](https://www.sohu.com/a/330151320_657157)
@@ -224,6 +232,14 @@ mathjax: true
 
 - 【2020-4-22】[KB-QA研究进展](https://www.jianshu.com/p/92ea00b7a4cc)
 - ![](https://upload-images.jianshu.io/upload_images/9298309-c4a3c66f7965460e.png)
+
+- [ACL2020 | 基于Knowledge Embedding的多跳知识图谱问答](https://zhuanlan.zhihu.com/p/149141891)
+- KGQA 方法称为 EmbedKGQA。其中包含三个关键模块。
+  - KG 嵌入模块：为 KG 中所有实体构建嵌入。
+  - 问题嵌入模块：为问题找到嵌入。
+  - 答案选择模块：减小候选答案实体的集合，并选择最终的答案。
+
+![](https://pic2.zhimg.com/80/v2-3dd2d09867f7a5dc072a36f113fc9121_720w.jpg)
 
 ## 资料
 
