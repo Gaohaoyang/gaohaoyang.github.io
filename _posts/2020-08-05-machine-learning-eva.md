@@ -3,7 +3,7 @@ layout: post
 title:  "机器学习模型评估方法-The-Evaluation-of-Machine Learning"
 date:   2020-08-05 14:56:00
 categories: 机器学习
-tags: 机器学习 AUC PR 混淆矩阵
+tags: 机器学习 AUC PR 混淆矩阵 NCE
 author : 鹤啸九天
 excerpt: 机器学习项目开始前的核心问题：如何设置指标，评价模型效果？
 mathjax: true
@@ -26,6 +26,17 @@ mathjax: true
 - Auc变化其实等价于左上角的面积（绿色部分）变化。 这个面积和两类数据的概率分布的重叠面积成正比 （容易分错类的部分）。 根各数据分布的重叠部分成正比。（这个数据不一定是原始数据，而是通过特征工程和模型高纬投影后的，各类数据分布）好的分类器，把两类分的很开，概率分布重叠小，左上面积小，auc大。最坏的情况是随机，概率分布完全重叠，auc是直线。
 - ![](https://pic3.zhimg.com/80/v2-ee0d1b124bae822d1e9bb5784d63e051_720w.jpg)
     - 转自：知乎[xixihaha912](https://www.zhihu.com/question/39840928/answer/342874215)
+
+
+# 损失函数
+
+## NCE Loss
+
+- 当分类的类别很多时，模型很难训练，而且训练速度很慢，nec_loss可以解决这种问题，在word2vec模型训练过程中，不同的词向量的个数可能有上百万个，这样直接采用softmax分类的方式是不太可行的，nce_loss可以采用随机负采样，相比hierarhical softmax可以大幅度提高性能。
+
+- 参考：知乎[qiao](https://www.zhihu.com/question/50043438/answer/586659546)
+- ![](https://pic2.zhimg.com/80/v2-e936075c894a5f9833419944acbfde4b_720w.jpg)
+
 
 ## ROC
 
