@@ -30,6 +30,7 @@ mathjax: true
 
 - 乌鸦智能 ＞ 鹦鹉智能
   - [因果观念新革命？万字长文，解读复杂系统背后的暗因果](https://swarma.org/?p=19906)，[集智俱乐部因果科学专题Github](https://github.com/CausalAI/clubjizhi)，[因果科学与 Causal AI 系列读书会](https://www.sohu.com/a/415039730_741733)
+  - 【2020-10-22】[如何在观测数据下进行因果效应评估](https://www.sohu.com/a/426630014_741733)
   - ![](https://swarma.org/wp-content/uploads/2020/05/wxsync-2020-05-381c31fa5614d7d4df7ae1b27e0d393c.png)
 
 - 【2020-9-23】[Introduction to Causal Inference](https://www.bradyneal.com/causal-inference-course)
