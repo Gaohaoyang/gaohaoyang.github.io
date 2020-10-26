@@ -1455,6 +1455,27 @@ LVQ算法的流程如下所示：
 
 > 在此聚类算法就介绍完毕，分类/聚类都是机器学习中最常见的任务，我实验室的大Boss也是靠着聚类起家，从此走上人生事业钱途...之巅峰，在书最后的阅读材料还看见Boss的名字，所以这章也是必读不可了...
 
+**如何选择聚类数目？**
+
+- 【2020-10-26】[比elbow方法更好的聚类评估指标](https://www.toutiao.com/i6848837710216430094/)
+- （1）对于k-means聚类方法，最常用的方法是elbow 方法（又称`肘部法则`）。它需要在一个循环中多次运行算法，聚类的数量不断增加，然后绘制聚类得分作为聚类数量的函数。
+	- ![](https://p6-tt.byteimg.com/origin/pgc-image/a3589246aa78466cb07d359c86add4f7)
+	- 得分是k-means目标函数上输入数据的度量，即某种形式的簇内距离相对于簇间距离
+	- elbow方法的默认k-means得分会产生相对不明确的结果。
+	- ![](https://p1-tt.byteimg.com/origin/pgc-image/c4b0b9f11442498c97c5fe52c93dcda6)
+- （2）Silhouette Coefficient
+	- Silhouette Coefficient是用每个样本的平均簇内距离a)和平均最近簇间距离(b)计算出来的。样本的轮廓系数为(b - a) / max(a, b)。
+	- ![](https://p1-tt.byteimg.com/origin/pgc-image/f0cf75dce16047ffbbe539253fcabd3a)
+	- 平均silhouette系数在k=5时增大，然后k值越大，平均silhouette系数急剧减小，即在k=5处有一个明显的峰值，这就是原始数据集生成的簇数。
+	- silhouette系数与elbow法的平缓弯曲相比，表现出峰值特性。这更容易可视化和归因。
+	- ![](https://p6-tt.byteimg.com/origin/pgc-image/c490ea1dae804839832abdc58026a5d1)
+- （3）BIC评分采用高斯混合模型
+	- Bayesian Information Criterion (BIC) ，适用于k-means以外的聚类方法—— Gaussian Mixture Model (GMM)。
+	- GMM将一个数据簇看作是具有独立均值和方差的多个高斯数据集的叠加。然后应用Expectation-Maximization (EM)算法来近似地确定这些平均值和方差。
+	- ![](https://p1-tt.byteimg.com/origin/pgc-image/6545be8160254d799f634ba28c3a6e0a)
+- [jupyter代码实战](https://github.com/tirthajyoti/computerlearing-with-python/blob/master/clustering-dimensions-reduction/clustering_metrics.ipynb)
+
+
 ## （12）降维与度量学习
 
 上篇主要介绍了几种常用的聚类算法，首先从距离度量与性能评估出发，列举了常见的距离计算公式与聚类评价指标，接着分别讨论了K-Means、LVQ、高斯混合聚类、密度聚类以及层次聚类算法。K-Means与LVQ都试图以类簇中心作为原型指导聚类，其中K-Means通过EM算法不断迭代直至收敛，LVQ使用真实类标辅助聚类；高斯混合聚类采用高斯分布来描述类簇原型；密度聚类则是将一个核心对象所有密度可达的样本形成类簇，直到所有核心对象都遍历完；最后层次聚类是一种自底向上的树形聚类方法，不断合并最相近的两个小类簇。本篇将讨论机器学习常用的方法--降维与度量学习。
