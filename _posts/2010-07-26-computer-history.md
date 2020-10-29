@@ -11,6 +11,11 @@ mathjax: true
 * content
 {:toc}
 
+# 临时
+
+- 【2020-10-29】源自linux之父的名言：**talk is cheap，show me the code**，汉化版：**北沙滩**（别瞎谈），**亮马桥**（亮码瞧）
+
+
 # [计算机编程简史](https://coolshell.cn/articles/2724.html)
 
 - 一张经典的图揭示计算机发展历史
