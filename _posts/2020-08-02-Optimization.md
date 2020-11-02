@@ -26,6 +26,13 @@ mathjax: true
 - [最优化算法-避开鞍点](http://www.csuldw.com/2016/07/10/2016-07-10-saddlepoints/)
 
 - 【2020-8-20】【斯坦福凸优化短课程资料(Python)】’[cvx_short_course](https://github.com/cvxgrp/cvx_short_course) - Materials for a short course on convex optimization.' by Stanford University Convex Optimization Group
+- 【2020-11-2】源自贪心学院的[机器学习高阶培训目录](https://mp.weixin.qq.com/s/Wp6xQUZ7vzaxhRhcFF5geQ)
+- 凸集的判断
+    - First-Order Convexity
+    - Second-order Convexity
+    - Operations Preserve Convexity
+- 二次规划问题（QP)
+
 
 
 # 简介
