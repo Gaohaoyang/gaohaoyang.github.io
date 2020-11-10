@@ -37,6 +37,19 @@ mathjax: true
 《统计学习方法》总结：
 - 【2019-1-23】[Python代码](https://github.com/ExtremeMart/lihang-code)，【2020-6-26】[北大研究生的代码实现](https://github.com/Dod-o/Statistical-Learning-Method_Code)，[第二版课件下载](https://download.csdn.net/download/weixin_39059031/11968968)，【2019-11-11】清华教授配套的[课件-百度云](https://www.toutiao.com/a6757901206011511304/?timestamp=1573478905&app=news_article_lite&group_id=6757901206011511304&req_id=201911112128250100260772123D507EAE)
 
+
+## 统计学习导论
+
+- [An-Introduction-to-Statistical-Learning](https://github.com/hardikkamboj/An-Introduction-to-Statistical-Learning)
+	- ![](https://camo.githubusercontent.com/38573cb27ef8df20ab2f41c8f5e851918705af19cfd5b8ecc557fe1685c97384/68747470733a2f2f696d616765732e737072696e6765722e636f6d2f7367772f626f6f6b732f6d656469756d2f393738313436313437313337302e6a706)
+- Introduction in Statistical Learning with application in R (ISLR)，是ESL的入门简单版，作者好像是一样的。
+- 官方[中文版](https://esl.hohoweiya.xyz/01-Introduction/1.1-Introduction/index.html)，[英文版](https://web.stanford.edu/~hastie/ElemStatLearn/printings/ESLII_print12.pdf#page=28)
+- 【2020-11-10】《统计学习导论》这本书配套视频，英文字幕加中文机翻字幕，配套的R语言教程附在每章的结尾处，github有人用[python实现](https://github.com/JWarmenhoven/ISLR-python)
+- [统计学习(机器学习)入门（统计学习导论配套视频）中英字幕](https://www.bilibili.com/video/BV11t411A7Ym)
+<iframe src="//player.bilibili.com/player.html?aid=60874013&bvid=BV11t411A7Ym&cid=105931949&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+
+
 ## 机器学习白板推导
 
 - [B站合集](https://space.bilibili.com/97068901)
