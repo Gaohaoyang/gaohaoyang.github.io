@@ -138,6 +138,22 @@ mathjax: true
    - 另一种是看人的智能是怎么产生的，然后进行类比或仿真。
    - 我觉得后者成功的概率会更大一些。
 
+
+## 恐怖谷定律
+
+- 【2020-11-12】恐怖谷（Uncanny Valley）最早是在机器人、3D电脑动画和计算机图形学（Computer Graphics,简称CG）领域存在着一个的假设。这个假设是由日本现代仿真机器人教父级人物**森政弘**（Masahiro Mori）于1970年提出：当仿真机器人的外表和动作像真实人类，但又不是完美拟合时，作为观察者的人类会产生厌恶反应。
+- 我们对于机器人的情感反应是随机器人和人类相似程度的增加而增加的，然而当相似度达到一定比例，我们的情感会突然逆转，产生厌恶感，而随着相似度的继续增加，我们的情感反应才会再次爬升起来。
+- 恐怖谷不是人类所独有的，很可能是进化的产物。2011年，加州大学圣地亚哥分校的认知科学家艾谢•瑟金（Ayse Saygin）和同事们从认知神经科学的角度研究了在观看机器人、仿真机器人和人类运动时，大脑皮层中到底发生了什么不同的活动。结果发现在运动感知系统（Action Perception System，APS，自身实施动作和观看他人动作时均会有所反应）中，的确会随刺激类型的不同而有不同的激活。相较于机器人和人类，在观看仿真机器人的活动影像时，大脑与运动感知系统相关的区域活动更加活跃（如上图）。这一结果恰恰可以运用认知失调的逻辑来解释，即当我们看机器人和人类活动时，他们就如我们预期的一样，而仿真机器人却不同，他们外观酷似人类，而动作却和机器人相同，这在我们头脑中造成了与预期不符的矛盾，从而要调动更多的大脑区域来调整这些矛盾。
+- ![](https://2-im.guokr.com/gkimage/xl/jn/zb/xljnzb.png)
+- 参考
+   - [恐怖谷：娃娃为什么很可怕？](https://www.guokr.com/article/146004). 
+   - [恐怖谷现象如何产生](https://www.zhihu.com/question/25865403) 
+   - ![](https://pic1.zhimg.com/80/v2-07c5d951387f2454d7ab9023e391227b_720w.jpg?source=1940ef5c)
+   - [可爱与可怕仅一步之遥](https://www.bilibili.com/video/BV1Vk4y127bM)
+   - <iframe src="//player.bilibili.com/player.html?aid=754321911&bvid=BV1Vk4y127bM&cid=224994851&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+   - [恐怖谷理论的六种解释](https://www.bilibili.com/video/BV1Bk4y167nq)
+   - <iframe src="//player.bilibili.com/player.html?aid=753265971&bvid=BV1Bk4y167nq&cid=195539386&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
 # 人工智能十大里程碑
 
 - 【2019-10-17】摘自：[人工智能十大里程碑](https://www.toutiao.com/a6748617986803761668/?timestamp=1571413762&app=news_article_lite&group_id=6748617986803761668&req_id=201910182349220100260772071E2002D3)
