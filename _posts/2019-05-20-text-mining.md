@@ -15,6 +15,9 @@ mathjax: true
 # NLP技能
 
 - 汇总NLP技能
+- 【2020-11-17】[奥森轨迹数据可视化分析](https://zhuanlan.zhihu.com/p/44857246)
+- Github跑步数据可视化[示例](https://github.com/yihong0618/running_page)，[代码](https://running.leeyom.top/)
+    - ![](https://p9-tt-ipv6.byteimg.com/img/pgc-image/8bc936dfa8c54211a71e21a22b5d1355~tplv-obj:1233:793.image?from=post)
 - 【2020-9-2】[文本挖掘实操课！手把手教你用文本挖掘剖析54万首诗歌](https://blog.csdn.net/BF02jgtRS00XKtCx/article/details/108191211)
     - ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9uSUFtMTZ5VWdQajJtamFJdzdLM1hxYld3elF0TTlNY0Q3RVF6alJTRkhlSXBwT2JaempFN0MyNFVyMlloMXBlZzBFaWFCSTVHaHI2M2lickpQUEZaZkVnLzY0MA?x-oss-process=image/format,png)
     - ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9uSUFtMTZ5VWdQajJtamFJdzdLM1hxYld3elF0TTlNYzVGcmljYmhCREVoU2E2N0NadGZXYktDVlNPeU1ZdDBZdmhobFpXc01HSnpUY1U4T3RCUlFFMXcvNjQw)
