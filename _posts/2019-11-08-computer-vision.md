@@ -77,6 +77,8 @@ mathjax: true
 - 【2020-7-23】2D照片转3D的效果，代码：[3d-photo-inpainting](https://github.com/vt-vl-lab/3d-photo-inpainting)
 - ![](https://p1-tt-ipv6.byteimg.com/img/pgc-image/54a7f500dc92415f91e0766e2f74c45a~tplv-obj:340:424.image?from=post)
 
+- 【2020-11-18】端到端面部表情合成 Speech-Driven Animation [Github代码](https://github.com/DinoMan/speech-driven-animation)
+   - ![](https://github.com/DinoMan/speech-driven-animation/raw/master/example.gif)
 
 # OCR
 
