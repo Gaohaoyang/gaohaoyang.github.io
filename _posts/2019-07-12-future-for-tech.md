@@ -746,6 +746,73 @@ CTO这个群体
 作者：[上官人](https://www.zhihu.com/question/399148081/answer/1292447563)
 
 
+# 算法工程发展之路
+
+- 【2020-11-15】[诸葛越：关于算法工程师职业发展的思考](https://blog.csdn.net/a934079371/article/details/109699181)
+
+## 公司组织架构
+ 
+很多人可能会有疑问，聊个人职业发展为什么要先介绍公司的组织架构？它和职业发展有什么关系呢？我想说不仅有关系，关系还挺大。首先，每个公司的组织架构都不同，不同的架构决定了不同的晋升通道，第二，职业路径规划是为了在职场上走的更高更远，所以脱离实际的晋升通道谈规划是不实际的。你在做职业路径规划时，首先就要了解所处公司的架构情况，明确可能的职业路径有哪些，然后才能确立目标并为之计划和执行。
+ 
+接下来我就简单介绍下三种常见的组织架构：
+ 
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy96SGJ6UVBLSUJQZ04xVmQzWEExWEVOREFyMUc0QTRCb0tjRGFGekJpYjF5Q29iNWJ5akMyQmljNVVtc01GTXpYZzFXaWNKMWhmY296WG81V1VSdHBkNVNNQS82NDA?x-oss-process=image/format,png)  
+ 
+第一种是AI LAB。这种模式在大公司很常见，老牌的有以MSRA为代表的外企研究机构，国内的如百度的深度学习研究院、阿里达摩院、头条的AI LAB等。AI Lab可以算是工业界中顶级的人工智能研究机构，汇聚了众多的业界大牛和顶尖人才，做出很多根植于工业界的研究贡献。在这样的结构下，你向上走需要具备的技能和产出、能达到的高度肯定与在研发线的同学是不一样的。
+ 
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy96SGJ6UVBLSUJQZ04xVmQzWEExWEVOREFyMUc0QTRCb3pjYzNNVjJxZnVhUzU1dWxVTG1xdXdjZmEwVHQzaGdnZVJweERld1JkaWN5QTcxeG1Da1lhcHcvNjQw?x-oss-process=image/format,png)
+ 
+第二种的AI团队是在研发线，位于CTO下面，支持不同产品线和公司级别的AI需求。对这个架构下的AI团队，公司希望它提供的是一种通用的类似于中台的能力。
+ 
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy96SGJ6UVBLSUJQZ04xVmQzWEExWEVOREFyMUc0QTRCbzBwWEtOR1BkSDZtV253dW80aWFtQURKaG0zNGhpYmljNUl3aWNLTW5iOTk3Q2MxWDU1U2lhTlVza29RLzY0MA?x-oss-process=image/format,png)
+ 
+第三种的AI团队位于不同的产品线上，这种结构在大公司常见。产品线比较丰富，且用户量较大，因此需要有专门的AI团队进行支持。比如在现场与我沟通的一个小朋友，他是腾讯看一看团队的算法实习生，听他介绍了解到腾讯里面团队分工很细致，算法团队和工程团队是分开的，算法团队又分为独立的召回团队和排序团队，每个团队在自己的方向上做的很精细。
+ 
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy96SGJ6UVBLSUJQZ04xVmQzWEExWEVOREFyMUc0QTRCbzNLcGVkVmliVDFzV2dlejZoZzZNa2owckRPa3NWbzgzRjBJREgwREtyN2dPamFDTGdzaWNCdWJnLzY0MA?x-oss-process=image/format,png)
+ 
+以上三种结构是比较普遍的，大家可以对照想一想你们团队在哪个架构下面，你又在团队的什么位置上。两三年后你肯定是想往上晋升的，那在现有的晋升通道下需要具备什么样的技能和产出呢？在向上呢，还需要怎么做？继续向上又如何呢？这些都是需要大家提前思考的。
+ 
+## 02 人才模型
+ 
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy96SGJ6UVBLSUJQZ04xVmQzWEExWEVOREFyMUc0QTRCb1RvdUc5enFwMmV0RXk5N1oxOXlOeWljUmJpY0dPS28xa2RkV1ptZHVFSFVnaWM1ejZPZEJvRVkzZy82NDA?x-oss-process=image/format,png)
+ 
+接下来给大家介绍一下人才模型，在给定了公司架构后，你要怎么做呢？大家可以看这个图，一个大写的字母“T”。这是我经常给Hulu的同事讲的，我们要想象我们的技能就像一个“T-shaped”。也可以比喻为大家熟识的“wide&deep”算法，就是你要走多宽，你要走多深。
+ 
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy96SGJ6UVBLSUJQZ04xVmQzWEExWEVOREFyMUc0QTRCb1A4V002clJLYWhraFliSTRraWF1ZEpVdnM3V1NGNzNEQ0pYN2FzOXlkOUJ2eUFzSEZ3a3lyV3cvNjQw?x-oss-process=image/format,png)
+ 
+有一类人，尤其是我们今天的受众，应该是倾向于偏深的，从而成为一个专家型人才。比如有一个人，他想成为一个专家，我们对话如下：
+ 
+> 我问：5年之后你想干什么？
+> 他答：我想做一个专家；
+> 我问：那10年之后呢？
+> 他答：更专的专家。
+ 
+想成为专家很好，但只说专家是不够的，假如说要成为Machine Learning的专家，好像有点太泛了。所以接下来还要问自己另外一个问题，那就是我要“专”什么？对于技术同学来讲，大概有三个维度上的专家：
+ - 第一，某一项技术的专家。比如说我是强化学习方向的专家，我对强化学习演进的历史特别清楚，过往的技术点有哪些，未来可能的研究趋势有哪些，更重要的是我还为这项技术的发展做出过某些重要的贡献。那我就算是强化学习的专家了，这是一个很确定的。
+- 第二，某一技术领域的专家。比如说CV是一个技术领域，这个领域里有很多特定的算法，虽然我不是某一特定算法的专家，但是我都了解，更关键的是我可以利用这些成熟的算法解决特定的业务问题，这也是一类专家；例如推荐系统也是一个领域，也可以成为这个领域的专家。
+- 第三，某一商业领域的技术专家。比如说拿商业广告来说，它包含了一整套的技术，例如说怎么优化网上广告的配型，比如说怎么做广告的个性化推荐等，你不仅都知道还可以带领团队搞定整个系统的问题，所以你也可以成为这一商业领域的算法专家。
+ 
+如果你想成为一个专家，那到底是你想成为上述三种的哪一种呢？有过思考吗？
+ 
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy96SGJ6UVBLSUJQZ04xVmQzWEExWEVOREFyMUc0QTRCbzVpY3lpYkhLNE9EOFRSazBpYWVkMHJiSk5oeUFNOTlxQmx2Zk9SZzNDWjJjYWdJZDRxOWJpYjF4S3cvNjQw?x-oss-process=image/format,png)
+ 
+我们接下来说第二类，与专家相对应的是偏宽度，简称为“杂家”吧，也有三个维度：
+- 第一，全能型算法工程师；这类工程师的学习能力特别强，给他任何一个问题，都能通过快速学习掌握相关知识点，然后把问题解决；再抛给他另一个完全不同的问题，依然可以快速解决。其实在某些类型的企业或者某些阶段的企业，给算法工程师营造的工作学习环境就是这样的，你没有办法决定精专一个方向，因为每天都要面对各种层出不穷的问题，且都需要你尽快解决。但是大家可以想象在这种环境长期发展下去的话，对算法工程师长期发展会造成什么影响；
+- 第二，可能不完全包含算法工程师，在特定的领域内，你对数据全流程都了解，对数据怎么从头到尾应用到机器学习领域都了解，有点数据科学家的意思。
+- 第三类，在大厂或者大平台有过丰富的经验，用同样的算法解决不同量级的问题；相较于其他没有相关经历的算法工程师，你知道怎么去处理更大的问题面对更大的挑战，这是很重要的优势。
+ 
+总结来说，即使说你什么都能干，也要想一想是在一个什么样的框架下处理什么样的问题。
+ 
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy96SGJ6UVBLSUJQZ04xVmQzWEExWEVOREFyMUc0QTRCb3pQU25pYnE2c01jQTVGRjFpY3lxcmlick1MbHVwbnl0NmppY24wcm1yWDVXTHRUZ1NuMHNxZGljMmljUS82NDA?x-oss-process=image/format,png)
+ 
+再说第三类，还有些人在特定阶段要走向管理，转向管理需要具备的技能与前两类又不一样。
+ 
+其实当你已经是一个领域的专家后，大家都会在继续走专家线还是走向管理线间有过思考和摇摆。但是不管你最终走向何方，一定要知道适合的才是最好的。怎么判断自己更适合哪个呢？那就需要把专家线和管理线对人才模型的要求搞清楚。专家线前面已经说过，我们在介绍下管理人才需要具备的技能。
+- 第一点，“学而优则仕”。怎么理解呢？只有那些已经成为技术专家的人，才有选择的机会。转管理是有门槛的，发展路径会一般是技术专家-技术leader-管理。；
+- 第二点，需要学习相应的软技能。这个涵盖的范围还挺大，简单列举些：如何招人、如何用人、如何保人，领导力，沟通能力，项目管理能等等。
+ 
+如果你未来想要走向管理岗，在技术上一定要有建树，还要提前学习和储备相应的软技能，而不是转过之后在补充。
+
 # 自由职业
 
 ## 转行
