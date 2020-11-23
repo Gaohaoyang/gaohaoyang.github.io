@@ -11,6 +11,12 @@ mathjax: true
 * content
 {:toc}
 
+
+# 总结
+
+- 【2020-11-23】始于颜值，敬于才华，合于性格，久于善良，终于人品。
+
+
 参考文章：
 > * [如何选择你的人生伴侣-上](https://waitbutwhy.com/cn/%e5%a6%82%e4%bd%95%e9%80%89%e6%8b%a9%e4%bd%a0%e7%9a%84%e4%ba%ba%e7%94%9f%e4%bc%b4%e4%be%a3)
 > * [如何选择你的人生伴侣-下](https://waitbutwhy.com/cn/%e5%a6%82%e4%bd%95%e9%80%89%e6%8b%a9%e4%bd%a0%e7%9a%84%e4%ba%ba%e7%94%9f%e4%bc%b4%e4%be%a3ii)
