@@ -361,6 +361,44 @@ mathjax: true
 
 
 
+# 情感分析
+
+- 【2020-11-23】大连理工工具包cncenti，[github地址](https://github.com/thunderhit/cnsenti)
+
+```python
+# [github地址](https://github.com/thunderhit/cnsenti)
+# !pip install cnsenti -i https://pypi.tuna.tsinghua.edu.cn/simple/
+from cnsenti import Sentiment
+
+senti = Sentiment()
+# 使用字典
+# senti = Sentiment(pos='正面词自定义.txt',  
+#                   neg='负面词自定义.txt', 
+#                   merge=True,  
+#                   encoding='utf-8')
+test_text= '我好开心啊，非常非常非常高兴！今天我得了一百分，我很兴奋开心，愉快，开心'
+print('句子：', test_text)
+# 情感词统计,默认使用Hownet词典
+result = senti.sentiment_count(test_text)
+print('情感词统计：', result)
+# 精准的计算文本的情感信息。相比于sentiment_count只统计文本正负情感词个数，sentiment_calculate还考虑了
+#   情感词前是否有强度副词的修饰作用
+#   情感词前是否有否定词的情感语义反转作用
+result2 = senti.sentiment_calculate(test_text)
+print('情感词统计-精准：', result2)
+from cnsenti import Emotion
+
+emotion = Emotion()
+test_text = '我好开心啊，非常非常非常高兴！今天我得了一百分，我很兴奋开心，愉快，开心'
+# 情绪统计
+result3 = emotion.emotion_count(test_text)
+print('情感计算：', result3)
+
+```
+
+
+
+
 # 结束
 
 
