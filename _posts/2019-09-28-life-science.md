@@ -78,6 +78,7 @@ mathjax: true
 - 这四种思维实验分别对应了`量子力学`、`微积分`、`经典力学`、`热力学第二定律`
 - 摘自：[数学天才8年前预测美2020将发生剧变！未来真的能被预测吗？](https://www.wukong.com/answer/6852500758681026827/)
 
+
 ### 拉普拉斯妖
 
 - 1814年法国著名的数学家皮埃尔-西蒙·拉普拉斯提出了一个假设，如果宇宙中存在一个“怪兽”，它掌握了宇宙中每个原子确切的位置和动量，那么根据经典物理学来推论，这个“怪兽”就可以知道宇宙中所有事件的整个过程，包括它的过去和未来。这个“怪兽”，我们称它为拉普拉斯妖，这实际上就是拉普拉斯坚持的决定论
@@ -93,6 +94,13 @@ mathjax: true
 
 ![](http://p1.pstatp.com/large/tos-cn-i-0022/0f76d3af106a406ca5627dbd6f74b57c)
 
+- 【2020-11-24】[科学界最令人恐怖的三个物理理论](https://m.toutiaocdn.com/i6898338146460008459/?app=&timestamp=1606170092&use_new_style=1&tt_from=mobile_qq&utm_source=mobile_qq&utm_medium=toutiao_android&utm_campaign=client_share)：
+   - ①`平行宇宙`，量子叠加态，另一个我同时存在，你却看不到
+   - ②`熵增定律`，宇宙终归死寂
+   - ③`光速限制`，永远看不到宇宙尽头
+
+
+<iframe src="//player.bilibili.com/player.html?aid=542697065&bvid=BV1Mi4y1L7o9&cid=252132939&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
 # [觉者：梁冬对话华大基因CEO尹烨](https://www.bilibili.com/video/av19676456)
