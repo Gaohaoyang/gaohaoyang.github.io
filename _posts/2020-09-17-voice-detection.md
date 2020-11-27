@@ -1774,6 +1774,22 @@ def tts_baidu(text):
 - 代码：
 
 ```python
+import win32com.client
+
+speaker = win32com.client.Dispatch("SAPI.SpVoice")
+str1 = """
+日照香炉生紫烟，
+遥看瀑布挂前川。
+飞流直下三千尺，
+疑是银河落九天。
+"""
+speaker.Speak(str1)
+for i in range(1, 6):
+    speaker.Speak("呵呵第" + str(i) + "次")
+```
+- 带GUI的版本
+
+```python
 #pip install python-canalyzer
 import win32com.client as wincl
 from tkinter import *
