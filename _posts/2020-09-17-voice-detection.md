@@ -1754,6 +1754,7 @@ def tts_ali(text):
 
 ### 百度tts
 
+- 【2020-11-28】[Python百度AI语音识别——文字转语音](https://blog.csdn.net/weixin_42365530/article/details/103915056)
 - 代码
 
 ```python
