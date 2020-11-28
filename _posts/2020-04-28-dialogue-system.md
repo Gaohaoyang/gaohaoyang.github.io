@@ -189,6 +189,85 @@ mathjax: true
 
 ### 端到端
 
+- 待补充
+
+
+### 案例
+
+- 【2020-11-28】[怎么让机器人帮我买咖啡](https://github.com/qhduan/ConversationalRobotDesign/blob/master/%E5%AF%B9%E8%AF%9D%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%8A%80%E6%9C%AF%E7%AE%80%E4%BB%8B%EF%BC%9A%E9%97%AE%E7%AD%94%E7%B3%BB%E7%BB%9F%E3%80%81%E5%AF%B9%E8%AF%9D%E7%B3%BB%E7%BB%9F%E4%B8%8E%E8%81%8A%E5%A4%A9%E6%9C%BA%E5%99%A8%E4%BA%BA/README.md)（Dialogue System）
+
+这里的对话系统特指 Task-Oriented Dialogue System，
+也就是让机器人帮助实现一种特定任务的系统，
+有一文献提到的 General Dialogue System 的系统，往往指类似 Chit Chat 的系统。
+
+一般此类对话系统的研究都基于如何让机器人在有限步骤内完成可以完成的任务的系统，并且结果往往定位到一个单一实体。此类系统的一个隐含假设往往是通过电话、文字、语音来进行人机交互，也就是没有什么“点击按钮”，“从多个选项选择”，之类的交互方式。当然在一些类似对话系统演变的工程实践中，是有类似的实现的。
+
+因为这个关于“必须文字交互”的假设，所以实际上有些问题并不适合基于这种假设的对话系统完成。例如你在一些手机软件中搜索餐厅，结果可能会返回多家餐厅（餐厅本身即实体），他们都有名称、地址、电话等等信息（这些也可以称为餐厅这个实体的属性，当然也可以是与餐厅这个实体有关的其他实体）。而你想要通过语音、朗读的文字来获得这个列表，就显得很愚蠢了，不会有人想听机器人读5分钟搜索结果的20家餐厅然后决策吧？所以此类系统往往最后是推荐单一实体，例如结果排名最高的餐厅，如果你需要更换，可以跟系统说换一下餐厅。
+
+一个典型的对话系统的交互过程是这样的：
+- 用户：你好（User Dialog Act：greeting）  
+- 机器：你好，我可以帮助你搜索并预订餐厅（Sys Dialog Act：greeting）  
+- 用户：我想要找一家在中央公园2.0附近的意大利餐厅（User Dialog Act：inform(地址=中央公园2.0，口味=意大利)）  
+- 机器：请问你想要在中央公园2.0附近什么价位的意大利餐厅？（Sys Dialog Act：request(价位)）  
+- 用户：普通的就好（User Dialog Act：inform(价位=普通)）  
+- 机器：我知道那里有一家柯南家的老意大利料理餐厅（Sys Dialog Act：inform(名称=柯南家的老意大利料理)）  
+- 用户：换一个（User Dialog Act：alter()）  
+- 机器：我知道那里有一家意大利油泼面餐厅（Sys Dialog Act：inform(名称=意大利油泼面)）  
+- 用户：它家的价格怎么样？（User Dialog Act：request(价位)）  
+- 机器：意大利油泼面的价位是普通（Sys Dialog Act：inform(价位=普通)）  
+- 用户：就这家吧，帮我预订（User Dialog Act：order()）  
+- 机器：请问有几个人？（Sys Dialog Act：request(人数)）  
+- 用户：单身狗（User Dialog Act：inform(人数=1)）  
+- 机器：真的就1个人吗？（Sys Dialog Act：confirm(人数=1)）  
+- 用户：是的（User Dialog Act：confirm()）  
+- 机器：已经预定成功（Sys Dialog Act：order_success()）  
+- 用户：好的，再见（User Dialog Act：bye()）  
+- 机器：再见，欢迎下次使用（Sys Dialog Act：bye()）
+
+Dialog Acts 如果是用户发起的（User Dialog Act），
+那么它是一种处理后的用户意图的抽象表达，是一种形式化的意图描述。
+
+>The dialog act expresses an important component of the intention of the speaker (or writer) in saying what they said
+
+系统发起的行为（Sys Dialog Act），是根据用户行为，上下文信息等等综合得出的，
+下一步所要进行的操作的抽象表达，这个抽象表达后续会送入NLG部件，生成自然语言。
+
+>Asking questions, giving orders, or making informational statements are things that people do in conversation, yet dealing with these kind of actions in dialogue what we will call dialog acts is something that the GUS-style frame-based dialog systems
+
+GUS对话系统，是 Genial Understander System 的缩写，可以追溯到1977年的论文(Daniel G. Bobrow, GUS, A Frame-Driven Dialog System, 1977)
+
+
+常见的不同意图有：
+- 用户的greeting：问好  
+- 用户的inform：用户提供一个信息，例如想要的餐厅的地址  
+- 用户的request：询问一个信息，例如当前结果餐厅的电话  
+- 用户的confirm：确认信息正确（例如上一条是机器问你对不对）  
+- 用户的bye：结束对话  
+
+机器的greeting：问好，也可以是自我介绍  
+- 机器的inform：提供机器知道的信息，例如当前结果餐厅的信息  
+- 机器的request：机器必须有足够的信息才能完成任务，如果欠缺一些必须信息，例如餐厅地址、口味，则会向用户询问  
+- 机器的confirm：根用户确认信息是否正确  
+- 机器的bye：结束对话  
+
+上文还出现了一些可能的特殊意图，例如：
+- 用户的order：确认订餐  
+- 用户的alter：更换检索结果  
+- 系统的order_success：反馈订餐成功  
+
+
+整个对话系统，就是为了完成某个特定任务，这个任务所需要的特定条件需需要由用户提供（例如帮助买咖啡需要咖啡品种，热或冷等信息），当信息足够的时候，机器就能完成相应任务。
+
+这个过程总结就是：
+- 用户说了什么 =》  
+- 分析用户意图 =》  
+- 生成系统的对应意图（操作）=》  
+- 用户听到了系统的反馈 =》  
+- 用户说了什么（第二轮）=》
+- …………
+
+当然根据任务复杂度、和其他系统结合等等问题，
+对话系统本身也有各种的不同准确度与实现方式。
 
 
 ## DM
@@ -205,9 +284,9 @@ mathjax: true
   - 提供语义表达的期望值（expectations for interpretation）interpretation: 用户输入的 internal representation，包括 speech recognition 和 parsing/semantic representation 的结果
 
 对话引擎根据对话按对话由谁主导可以分为三种类型：
-- 系统主导
+- **系统**主导
   - 系统询问用户信息，用户回答，最终达到目标
-- 用户主导
+- **用户**主导
   - 用户主动提出问题或者诉求，系统回答问题或者满足用户的诉求
 - 混合
   - 用户和系统在不同时刻交替主导对话过程，最终达到目标
@@ -441,6 +520,32 @@ Image('fsm.png')
 
 - 【2020-4-22】[KB-QA研究进展](https://www.jianshu.com/p/92ea00b7a4cc)
 - ![](https://upload-images.jianshu.io/upload_images/9298309-c4a3c66f7965460e.png)
+
+- 在知识图谱建模的领域，有一种称为`SPARQL`的语言，类似关系数据库查询的SQL语言，
+- 例如我们要查询 **(中国，有首都，北京)** 中的北京，则SPARQL可以写为：
+
+```sql
+Select ?x where {
+    中国, 有首都, ?x
+}
+```
+
+- 也就是问题转换为，如何把一句自然语言“中国的首都是哪？”，转换为上面的SPARQL语句？
+- 例如现在的一些方向是利用统计机器学习的翻译任务，完成从“自然语言”到“SPARQL”语言的机器翻译任务，就如同中英翻译等自然语言之间的翻译一样，同样也可以做到的。但是根据语料数据、SPARQL复杂度等等问题，也会有其他各种问题。
+- 当然也有不依赖SPARQL作为中间件的查询系统，例如有的文献设计了一套在知识图谱中逐渐搜索（探索）的系统；
+- 以这个问题为例，起始点可以是实体“中国”，中国这个实体可能有很多关系，例如有首都、有文化、有省份、有xxx，然后搜索下一步最合理的关系“有首都”；
+- 最后探索到答案“北京”，判读任务完成。
+
+## IR-QA
+
+- IR-based 问答系统 (IR: Information Retrieval) 不需要提前构建知识，而是根据问题去检索答案（例如从搜索引擎上）。
+- 从某种意义上类似人的搜索方式，例如想知道“中国的首都是哪”，可能会去搜索引擎中搜索这个问题，而答案很可能会出现在搜索结果中，这个答案的类型很可能是“某个城市”，所以我们会在搜索引擎给我们的结果中，寻找一个城市名。
+- 而机器也可以完成类似过程
+  - 先根据问题来尝试判断答案类型，同样也可以判断结果类型为城市。
+  - 然后可能需要对问题进行重构，也就是寻找一个搜索问句，能找到答案的几率最大，例如这个问题可能被重构为：“**中国 首都 城市**”。（最后添加了这个词城市，是因为我们假设可以准确判断出答案类型）
+  - 机器去自有的非结构化文档（没有知识图谱化的文档，例如各种纯文本文章），从中寻找最接近我们重构后问题的段落。或者去搜索引擎、百科网站等等，搜索答案、或者检索问题相关的段落。
+  - 定位到这个段落后，根据答案类型（这里是城市），尝试从这个段落中筛出答案。例如去搜索引擎搜索“中国的首都”，很可能第一个答案段落中的第一个出现的城市名就是我们所需要的答案。
+
 
 
 ## 闲聊型对话
