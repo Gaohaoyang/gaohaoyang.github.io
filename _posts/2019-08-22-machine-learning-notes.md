@@ -76,6 +76,7 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=58945047&cid=102752327&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
+- 【2020-12-04】对偶机器学习，[Duality in machine learning](http://mblondel.org/teaching/duality-2020.pdf)
 
 ## PRML
 
