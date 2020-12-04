@@ -329,6 +329,20 @@ mathjax: true
 - ② 图处理引擎
   - 原生图处理（也称为无索引邻接）是处理图数据的最有效方法，因为连接的节点在数据库中物理地指向彼此。非本机图处理使用其他方法来处理CRUD操作。
 
+## jupyter配套的图查询语言
+
+- 【2020-12-04】[Graph Notebook: easily query and visualize graphs](https://github.com/aws/graph-notebook)
+  - ![](https://github.com/aws/graph-notebook/raw/main/images/GremlinQueryGraph.png)
+
+Instructions for connecting to the following graph databases:
+
+|             Endpoint            |       Graph model       |   Query language    |
+| :-----------------------------: | :---------------------: | :-----------------: | 
+|[Gremlin Server](#gremlin-server)|     property graph      |       Gremlin       |
+|    [Blazegraph](#blazegraph)    |            RDF          |       SPARQL        |
+|[Amazon Neptune](#amazon-neptune)|  property graph or RDF  |  Gremlin or SPARQL  |
+
+
 ## Neo4j
 
 - Neo4J是由Java实现的开源图数据库。自2003年开始开发，直到2007年正式发布第一版，并托管于GitHub上。
@@ -368,6 +382,9 @@ RETURN
 - DGraph 的目标是提供 Google 生产水平的规模和吞吐量，在超过TB的结构数据里，为用户提供足够低延迟的实时查询。DGraph 支持 [GraphQL](https://www.oschina.net/p/graphql) 作为查询语言，响应 JSON。
 - 对比
   - ![](https://static.oschina.net/uploads/space/2017/1119/092808_e1XO_12.jpg)
+
+
+
 
 # 资料
 
