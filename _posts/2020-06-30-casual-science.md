@@ -50,6 +50,9 @@ mathjax: true
 
 # The book of why
 
+- 【2020-12-04】因果推理书籍索引，[Which causal inference book you should read](https://www.bradyneal.com/which-causal-inference-book)
+- ![](https://www.bradyneal.com/img/books_flowchart.svg)
+
 
 ## 简介
 
