@@ -141,6 +141,8 @@ mathjax: true
 
 ## Demo
 
+- 【2020-12-04】AI姿势传递模型，[论文地址](https://arxiv.org/pdf/2012.01158.pdf)，不愿意出节目的码农的年会神器？[将舞蹈化为己用-视频](https://weibo.com/tv/show/1034:4578074625245199?from=old_pc_videoshow)
+
 ### fast-style
 - 图像风格迁移，[深度学习之风格迁移简介](http://melonteam.com/posts/shen_du_xue_xi_zhi_feng_ge_qian_yi_jian_jie/)
    - ![](http://melonteam.com/image/shen_du_xue_xi_zhi_feng_ge_qian_yi_jian_jie/5489df3b2f1d117cbd275724697edda9ccadb0e92ba6d7c40dfb19c465378e01)
@@ -156,6 +158,7 @@ mathjax: true
 <iframe src="https://reiinakano.github.io/arbitrary-image-stylization-tfjs" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width='800' height='600'> </iframe>
 
 ### Real Time style transfer 实时风格迁移
+
 Real Time style transfer check [demo](https://wqw547243068.github.io/demo/RST/)
 
 ![alt text](https://raw.githubusercontent.com/zaidalyafeai/zaidalyafeai.github.io/master/images/rst.png)
