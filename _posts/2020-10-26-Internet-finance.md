@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "物联网研发-Internet Finance"
+title:  "互联网研发-Internet Finance"
 date:   2020-10-26 19:30:00
 categories: 技术工具
 tags: P2P 互联网 金融
