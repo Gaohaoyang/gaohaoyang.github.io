@@ -155,7 +155,7 @@ w2_hist = tf.summary.histogram("weights2", W2)
 cost_summ = tf.summary.scalar("cost", cost)
 # (2) Merge all summaries
 summary = tf.summary.merge_all()
-Create writer and add graph
+# Create writer and add graph
 # (3) Create summary writer
 writer = tf.summary.FileWriter(‘./logs’)
 writer.add_graph(sess.graph)
