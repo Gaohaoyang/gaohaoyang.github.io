@@ -143,6 +143,8 @@ mathjax: true
 
 - 【2020-12-04】AI姿势传递模型，[论文地址](https://arxiv.org/pdf/2012.01158.pdf)，不愿意出节目的码农的年会神器？[将舞蹈化为己用-视频](https://weibo.com/tv/show/1034:4578074625245199?from=old_pc_videoshow)
 - 【2020-12-02】【MaskDetection：滴滴开源的口罩检测模型】 by DiDi [GitHub](https://github.com/didi/maskdetection)
+- 【2020-12-04】[孪生网络用于图片搜索](https://www.pyimagesearch.com/2020/11/30/siamese-networks-with-keras-tensorflow-and-deep-learning/)《Siamese networks with Keras, TensorFlow, and Deep Learning - PyImageSearch》by Adrian Rosebrock
+   - ![](https://www.pyimagesearch.com/wp-content/uploads/2020/11/keras_siamese_networks_header.png)
 
 ### fast-style
 - 图像风格迁移，[深度学习之风格迁移简介](http://melonteam.com/posts/shen_du_xue_xi_zhi_feng_ge_qian_yi_jian_jie/)
