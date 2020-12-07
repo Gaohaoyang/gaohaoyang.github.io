@@ -44,7 +44,12 @@ Read more: http://bluewhale.cc/2016-06-30/analysis-of-correlation.html#ixzz6fwTn
     - 两个连续变量间呈线性相关时
         - 满足**积差**相关分析的适用条件时，使用Pearson积差相关系数
         - 不满足**积差**相关分析的适用条件时，使用Spearman**秩**相关系数来描述.
-    - （2.2）Spearman相关系数又称秩相关系数，是利用两变量的**秩次大小**作线性相关分析，对原始变量的分布不作要求，属于**非参数**统计方法，适用范围要广些。对于服从Pearson相关系数的数据亦可计算Spearman相关系数，但统计效能要低一些。Pearson相关系数的计算公式可以完全套用Spearman相关系数计算公式，但公式中的x和y用相应的秩次代替即可。
+    - （2.2）Spearman（斯皮尔曼）相关系数又称秩相关系数，是利用两变量的**秩次大小**作线性相关分析，对原始变量的分布不作要求，属于**非参数**统计方法，适用范围要广些。对于服从Pearson相关系数的数据亦可计算Spearman相关系数，但统计效能要低一些。Pearson相关系数的计算公式可以完全套用Spearman相关系数计算公式，但公式中的x和y用相应的秩次代替即可。
+        - 1.连续数据，正态分布，线性关系，用pearson相关系数是最恰当，当然用spearman相关系数也可以， 就是效率没有pearson相关系数高。
+        - 2.上述任一条件不满足，就用spearman相关系数，不能用pearson相关系数。
+        - 3.两个定序数据之间也用spearman相关系数，不能用pearson相关系数。
+            - 定序数据是指仅仅反映观测对象等级、顺序关系的数据，是由定序尺度计量形成的，表现为类别，可以进行排序，属于品质数据。
+            - 斯皮尔曼相关系数的适用条件比皮尔逊相关系数要广，只要数据满足单调关系（例如线性函数、指数函数、对数函数等）就能够使用。
     - （2.3）Kendall’s tau-b**等级**相关系数：用于反映分类变量相关性的指标，适用于两个分类变量均为有序分类的情况。对相关的有序变量进行非参数相关检验；取值范围在-1-1之间，此检验适合于正方形表格；
         - 计算积距pearson相关系数，连续性变量才可采用;
         - 计算Spearman秩相关系数，适合于定序变量或不满足正态分布假设的等间隔数据; 
@@ -62,9 +67,79 @@ Read more: http://bluewhale.cc/2016-06-30/analysis-of-correlation.html#ixzz6fwTn
     - ![](http://bluewhale.cc/wp-content/uploads/2016/06/b0%E5%85%AC%E5%BC%8F-1024x72.jpg)
 - （4）信息熵及互信息
     - 影响最终效果的因素可能有很多，并且不一定都是数值形式
-    - 互信息可以发现哪一类特征与最终的结果关系密切.互信息是用来衡量信息之间相关性的指标。当两个信息完全相关时，互信息为1，不相关时为0。
+    - 互信息可以发现哪一类特征与最终的结果关系密切.
+        - 互信息是用来衡量信息之间相关性的指标。当两个信息完全相关时，互信息为1，不相关时为0。
+        - 信息之间是有相关性的，互信息是度量相关性的尺子。互信息越高，相关性也越高。
+    - 相关系数 vs 互信息：
+        - 线性相关系数，从统计学出发度量信息A、B的关系，范围在-1到1，即有正相关和负相关。0表示相关
+        - 互信息，从联合概率的角度计算，可以理解为A出现的时候B出现的概率，概率范围是从0到1，即完全不确定到完全确定
     - 计算方法见：[决策树分类和预测算法的原理及实现](http://bluewhale.cc/2016-03-20/decision-tree.html#ixzz6fwV8sDfo)
         - ![](http://bluewhale.cc/wp-content/uploads/2016/03/%E4%BA%92%E4%BF%A1%E6%81%AF1.jpg)
+        - 离散
+            - ![](https://imgconvert.csdnimg.cn/aHR0cDovL3MyLnNpbmFpbWcuY24vYm1pZGRsZS82MjU1ZDIwZGc3NTUyOGMzMTJlMDEmNjkw)
+        - 连续
+            - ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy85MDcwNjM5LWY1ZjI4Y2Q4ZjdiOWFiZGQucG5nP2ltYWdlTW9ncjIvYXV0by1vcmllbnQvc3RyaXAlN0NpbWFnZVZpZXcyLzIvdy8zODUvZm9ybWF0L3dlYnA)
+- 代码
+
+```python
+# 方法1:
+#sklearn 计算
+from sklearn import metrics as mr
+if __name__ == '__main__':
+    A = [1, 1, 1, 2, 3, 3]
+    B = [1, 2, 3, 1, 2, 3]
+    result_NMI=metrics.normalized_mutual_info_score(A, B)
+    print("result_NMI:",result_NMI)
+ 
+#备注：计算A和B的互信息，A,B为list或array。
+ 
+#方法2:
+from scipy.stats import chi2_contingency
+ 
+def calc_MI(x, y, bins):
+    c_xy = np.histogram2d(x, y, bins)[0]
+    g, p, dof, expected = chi2_contingency(c_xy, lambda_="log-likelihood")
+    mi = 0.5 * g / c_xy.sum()
+
+# 备注：唯一区别就是这样实现使用自然对数而不是基2对数(因此它以“nats”而不是“bits”表示信息)。如果你喜欢bit，只需把mi除以log(2)
+
+#方法3：
+import numpy as np
+ 
+def calc_MI(X,Y,bins):
+ 
+   c_XY = np.histogram2d(X,Y,bins)[0]
+   c_X = np.histogram(X,bins)[0]
+   c_Y = np.histogram(Y,bins)[0]
+ 
+   H_X = shan_entropy(c_X)
+   H_Y = shan_entropy(c_Y)
+   H_XY = shan_entropy(c_XY)
+ 
+   MI = H_X + H_Y - H_XY
+   return MI
+ 
+def shan_entropy(c):
+    c_normalized = c / float(np.sum(c))
+    c_normalized = c_normalized[np.nonzero(c_normalized)]
+    H = -sum(c_normalized* np.log2(c_normalized))  
+    return H
+ 
+A = np.array([[ 2.0,  140.0,  128.23, -150.5, -5.4  ],
+              [ 2.4,  153.11, 130.34, -130.1, -9.5  ],
+              [ 1.2,  156.9,  120.11, -110.45,-1.12 ]])
+ 
+bins = 5 # ?
+n = A.shape[1]
+matMI = np.zeros((n, n))
+ 
+for ix in np.arange(n):
+    for jx in np.arange(ix+1,n):
+        matMI[ix,jx] = calc_MI(A[:,ix], A[:,jx], bins)
+
+```
+
+
 
 - 【2020-12-07】
 - `Sperman`或`kendall` **等级**相关分析
@@ -81,6 +156,8 @@ Read more: http://bluewhale.cc/2016-06-30/analysis-of-correlation.html#ixzz6fwTn
     - [五种常用的相关性分析方法](http://bluewhale.cc/2016-06-30/analysis-of-correlation.html)
     - [Pearson，Kendall和Spearman三种相关分析方法的异同](https://blog.csdn.net/sadfasdgaaaasdfa/article/details/46965827)
     - [皮尔森Pearson相关系数 VS 斯皮尔曼Spearman相关系数](https://blog.csdn.net/lambsnow/article/details/79972145)
+    - [数学建模--相关性分析及Python实现](https://blog.csdn.net/ddjhpxs/article/details/105767589)
+    - [大数据风控---互信息及Python实现](https://blog.csdn.net/qq_32123787/article/details/96371544)
 
 
 ## Pearson
