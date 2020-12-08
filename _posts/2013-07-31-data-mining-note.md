@@ -162,8 +162,39 @@ for ix in np.arange(n):
 
 ## Pearson
 
+- 皮尔逊相关系数( Pearson correlation coefficient），又称**皮尔逊**积矩相关系数（Pearson product-moment correlation coefficient，简称 **PPMCC**或**PCCs**）。用于衡量两个变量X和Y之间的线性相关相关关系，值域在-1与1之间。
 - 给定两个连续变量x和y，皮尔森相关系数被定义为
     - ![](https://img-blog.csdn.net/20180417114819536)
+    - ![](https://img-blog.csdnimg.cn/20190529103112626.png)
+
+- 代码
+
+```python
+# （1）numpy库
+pccs = np.corrcoef(x, y)
+# （2）scipy库
+from scipy.stats import pearsonr
+pccs = pearsonr(x, y)
+# （3）直接计算
+def cal_pccs(x, y, n):
+    """
+    warning: data format must be narray
+    :param x: Variable 1
+    :param y: The variable 2
+    :param n: The number of elements in x
+    :return: pccs
+    """
+    sum_xy = np.sum(np.sum(x*y))
+    sum_x = np.sum(np.sum(x))
+    sum_y = np.sum(np.sum(y))
+    sum_x2 = np.sum(np.sum(x*x))
+    sum_y2 = np.sum(np.sum(y*y))
+    pcc = (n*sum_xy-sum_x*sum_y)/np.sqrt((n*sum_x2-sum_x*sum_x)*(n*sum_y2-sum_y*sum_y))
+    return pcc
+
+```
+
+
 
 ## Spearman
 
