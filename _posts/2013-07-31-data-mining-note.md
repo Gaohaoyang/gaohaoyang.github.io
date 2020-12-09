@@ -352,6 +352,11 @@ def cal_pccs(x, y, n):
 
 # 回归分析
 
+- 【2020-12-09】[7种回归分析方法，数据分析师必须掌握](https://zhuanlan.zhihu.com/p/58352024)
+
+## 什么是回归分析
+
+- 回归分析是一种预测性的建模技术，它研究的是因变量（目标）和自变量（预测器）之间的关系。
 
 
 ## 广义线性模型
@@ -401,6 +406,8 @@ def cal_pccs(x, y, n):
         - ![](https://pic2.zhimg.com/80/v2-dd57a1a65e5f91b5aac1ecec6c28b031_720w.jpg)
         - ![](https://pic3.zhimg.com/80/v2-bfcc530aecc00a33a6f5981aa3aca062_720w.jpg)
         - ![](https://pic4.zhimg.com/80/v2-69592ce03a7d8e0a5bb3d1ab8a1b50e3_720w.jpg)
+
+
 
 
 # 结束
