@@ -353,11 +353,272 @@ def cal_pccs(x, y, n):
 
 # 回归分析
 
-- 【2020-12-09】[7种回归分析方法，数据分析师必须掌握](https://zhuanlan.zhihu.com/p/58352024)
+- 【2020-12-09】[7种回归分析方法，数据分析师必须掌握](https://zhuanlan.zhihu.com/p/58352024)，代码源自：[五种回归方法的比较](https://www.cnblogs.com/jin-liang/p/9551759.html)
+- 各种回归方式有主要有三个度量方式
+    - 自变量的个数
+    - 因变量的类型
+    - 回归线的形状
+    - ![](https://pic2.zhimg.com/80/v2-b9205bbba53244dba9692dafe411f27d_720w.jpg)
 
 ## 什么是回归分析
 
 - 回归分析是一种预测性的建模技术，它研究的是因变量（目标）和自变量（预测器）之间的关系。
+
+## 线性回归（Linear Regression）
+
+- 因变量是连续的，自变量可以是连续的也可以是离散的，回归线的性质是线性的。
+- 线性回归使用最佳的拟合直线（也就是回归线）在因变量（Y）和一个或多个自变量（X）之间建立一种关系。
+- 用一个方程式来表示它，即 Y=a+b*X + e，其中a表示截距，b表示直线的斜率，e是误差项。
+    - ![](https://pic1.zhimg.com/80/v2-6a7dc02e44d306bb5a90dbf6ff780624_720w.jpg)
+- 多元线性回归有（>1）个自变量，而一元线性回归通常只有1个自变量。
+- 最小二乘法是拟合回归线最常用的方法。对于观测数据，它通过最小化每个数据点到线的垂直偏差平方和来计算最佳拟合线。因为在相加时，偏差先平方，所以正值和负值没有抵消。
+    - ![](https://pic3.zhimg.com/80/v2-d1f57df439896295e079cb5daec7abb2_720w.jpg)
+    - ![](https://pic3.zhimg.com/80/v2-ea12ae4dd1a177974c2a38e6f77f82a6_720w.jpg)
+- R-square指标来评估模型性能。要点：
+    - ● 自变量与因变量之间必须有线性关系。
+    - ● 多元回归存在多重共线性，自相关性和异方差性。
+    - ● 线性回归对异常值非常敏感。它会严重影响回归线，最终影响预测值。
+- 多重共线性会增加系数估计值的方差，使得在模型轻微变化下，估计非常敏感。结果就是系数估计值不稳定，在多个自变量的情况下，可以使用向前选择法，向后剔除法和逐步筛选法来选择最重要的自变量。
+
+- 代码
+
+```python
+import numpy as np
+import pandas as pd
+from sklearn import datasets
+from sklearn import metrics
+ 
+data=datasets.load_boston()# load data
+ 
+#定义评估函数
+def evaluation(y_true,y_pred,index_name=['OLS']):
+    df=pd.DataFrame(index=[index_name],columns=['平均绝对误差','均方误差','r2'])
+    df['平均绝对误差']=metrics.mean_absolute_error(y_true, y_pred).round(4)
+    df['均方误差']=metrics.mean_squared_error(y_true,y_pred)
+    df['r2']=metrics.r2_score(y_true,y_pred)
+    return df
+
+df=pd.DataFrame(data.data,columns=data.feature_names)
+target=pd.DataFrame(data.target,columns=['MEDV'])
+
+# 可视化分析
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set(style="whitegrid", color_codes=True)
+ 
+ 
+g=sns.pairplot(data[list(data.columns)[:5]], hue='ZN',palette="husl",diag_kind="hist",size=2.5)
+for ax in g.axes.flat:
+    plt.setp(ax.get_xticklabels(), rotation=45)
+plt.tight_layout()
+
+# 相关系数图
+
+cm = np.corrcoef(data[list(data.columns)[:5]].values.T)   #corrcoef方法按行计算皮尔逊相关系数,cm是对称矩阵
+#使用np.corrcoef(a)可计算行与行之间的相关系数,np.corrcoef(a,rowvar=0)用于计算各列之间的相关系数,输出为相关系数矩阵。
+sns.set(font_scale=1.5)   #font_scale设置字体大小
+cols=list(data.columns)[:5]
+hm = sns.heatmap(cm,cbar=True,annot=True,square=True,fmt='.2f',annot_kws={'size': 15},yticklabels=cols,xticklabels=cols)
+# plt.tight_layout()
+# plt.savefig('./figures/corr_mat.png', dpi=300)
+
+```
+
+- 可视化分析
+    - ![](https://images2018.cnblogs.com/blog/1345004/201809/1345004-20180905212531559-649798200.png)
+- 相关系数图
+    - ![](https://images2018.cnblogs.com/blog/1345004/201809/1345004-20180905212639015-1313580620.png)
+
+
+
+
+## 逻辑回归（Logistic Regression）
+
+- 逻辑回归是用来计算“事件=Success”和“事件=Failure”的概率。当因变量的类型属于二元（1 / 0，真/假，是/否）变量时，就应该使用逻辑回归。
+- 为什么要在公式中使用对数log呢
+    - 因为用是的二项分布（因变量），需要选择一个对于这个分布最佳的连结函数，Logit函数。
+    - 通过观测样本的极大似然估计值来选择参数，而不是最小化平方和误差（如在普通回归使用的）
+    - ![](https://pic2.zhimg.com/80/v2-4387539def4aec08dd9b03fe45f0c4b1_720w.jpg)
+- 要点：
+    - ● 它广泛的用于分类问题。
+    - ● 逻辑回归不要求自变量和因变量是线性关系。它可以处理各种类型的关系，因为它对预测的相对风险指数OR使用了一个非线性的log转换。
+- 为了避免过拟合和欠拟合，我们应该包括所有重要的变量。有一个很好的方法来确保这种情况，就是使用逐步筛选方法来估计逻辑回归。它需要大的样本量，因为在样本数量较少的情况下，极大似然估计的效果比普通的最小二乘法差。
+- 自变量不应该相互关联的，即不具有多重共线性。然而，在分析和建模中，我们可以选择包含分类变量相互作用的影响。
+- 如果因变量的值是定序变量，则称它为序逻辑回归；
+- 如果因变量是多类的话，则称它为多元逻辑回归。
+
+## 多项式回归（Polynomial Regression）
+
+- 对于一个回归方程，如果自变量的指数大于1，那么它就是多项式回归方程。
+- 能够建模非线性可分离数据，完全控制特征变量的建模（指定要设置），需要一些背景知识，如果指数选择不当，容易过度拟合。
+- 如：y=a+b*x^2
+- 虽然可以拟合一个高次多项式并得到较低的错误，但会导致过拟合。
+    - ![](https://pic3.zhimg.com/80/v2-a345941ab716e78f178af7ff8bcffd7e_720w.jpg)
+
+- 代码
+
+```python
+from sklearn.preprocessing import PolynomialFeatures
+ 
+poly_reg = PolynomialFeatures(degree = 4)
+X_Poly = poly_reg.fit_transform(X)
+ 
+lin_reg_2 =linear_model.LinearRegression()
+lin_reg_2.fit(X_Poly, y)
+ 
+y_pred=lin_reg_2.predict(poly_reg.fit_transform(X))
+ 
+evaluation(y,y_pred,index_name=['poly_reg'])
+```
+
+
+- 最小二乘法
+
+```python
+# （1）statsmodels实现
+import statsmodels.api as sm
+ 
+X=df[df.columns].values
+y=target['MEDV'].values
+ 
+#add constant
+X=sm.add_constant(X)
+ 
+# build model
+model=sm.OLS(y,X).fit()
+prediction=model.predict(X)
+print(model.summary())
+
+# （2）sklearn 实现
+from sklearn import linear_model
+ 
+lm = linear_model.LinearRegression()
+model = lm.fit(X,y)
+ 
+y_pred = lm.predict(X)
+lm.score(X,y)
+ 
+#系数
+lm.coef_
+#截距
+lm.intercept_<br><br>evaluation(y,y_pred)
+
+```
+
+
+## 逐步回归（Stepwise Regression）
+
+- 适用于处理多个自变量
+- 自变量的选择是在一个自动的过程中完成的，其中包括非人为操作。
+- 通过观察统计的值，如R-square，t-stats和AIC指标，来识别重要的变量。逐步回归通过同时添加/删除基于指定标准的协变量来拟合模型。
+- 下面列出了一些最常用的逐步回归方法：
+    - ● 标准逐步回归法做两件事情。即增加和删除每个步骤所需的预测。
+    - ● 向前选择法从模型中最显著的预测开始，然后为每一步添加变量。
+    - ● 向后剔除法与模型的所有预测同时开始，然后在每一步消除最小显着性的变量。
+- 这种建模技术的目的是使用最少的预测变量数来最大化预测能力。这也是处理高维数据集的方法之一。
+
+## 岭回归（Ridge Regression）
+
+- 岭回归分析是一种用于存在**多重共线性**（自变量高度相关）数据的技术。此时，线性回归或多项式回归失效
+- 在多重共线性情况下，尽管最小二乘法（OLS）对每个变量很公平，但它们的差异很大，使得观测值偏移并远离真实值。
+- 共线性是独立变量之间存在近线性关系。
+- 高共线性的存在可以通过几种不同的方式确定：
+    - 即使理论上该变量应该与Y高度相关，回归系数也不显着。
+    - 添加或删除X特征变量时，回归系数会发生显着变化。
+    - X特征变量具有高成对相关性（检查相关矩阵）。
+
+
+- 岭回归通过给回归估计上增加一个偏差度，来降低标准误差。
+- 线性回归方程可以表示为：y=a+ b*x，但完整版：
+    - y = a + b*x + e (error term)
+    - [error term is the value needed to correct for a prediction error between the observed and predicted value]
+    - => y = a+y = a+ b1x1+ b2x2+....+e, for multiple independent variables.
+- 线性方程中，预测误差可以分解为2个子分量：偏差+方差。预测错误可能会由这两个分量或者这两个中的任何一个造成。
+- 岭回归通过收缩参数λ（lambda）解决多重共线性问题。
+    - ![](https://pic1.zhimg.com/80/v2-54eff081197c7d568f82648a961c35a0_720w.jpg)
+    - 第一个是最小二乘项，另一个是β2（β-平方）的λ倍，其中β是相关系数。为了收缩参数把它添加到最小二乘项中以得到一个非常低的方差。
+- 要点
+    - 除常数项以外，这种回归的假设与最小二乘回归类似；它收缩了相关系数的值，但没有达到零，这表明它没有特征选择功能，这是一个正则化方法，并且使用的是L2正则化。
+    - 回归的假设与最小二乘回归类似，但没有正态性假设。
+    - 它会缩小系数的值，但不会达到零，这表明没有特征选择功能
+
+- 代码
+
+```python
+from sklearn.linear_model import Ridge
+ 
+ridge_reg = Ridge(alpha=1, solver="cholesky")
+ridge_reg.fit(X, y)
+ 
+y_pred=ridge_reg.predict(X
+ 
+evaluation(y,y_pred,index_name='ridge_reg')
+```
+
+
+## 套索回归（Lasso Regression）
+
+- 类似于岭回归。Lasso （Least Absolute Shrinkage and Selection Operator）也会惩罚回归系数的绝对值大小。此外，它能够减少变化程度并提高线性回归模型的精度
+    - ![](https://pic1.zhimg.com/80/v2-eb2d9b0947e46650714aae8e2555d4f0_720w.jpg)
+- Lasso 回归与Ridge回归有一点不同，它使用的惩罚函数是绝对值，而不是平方。这导致惩罚（或等于约束估计的绝对值之和）值使一些参数估计结果等于零。使用惩罚值越大，进一步估计会使得缩小值趋近于零。这将导致我们要从给定的n个变量中选择变量。
+- 要点：
+    - ● 除常数项以外，这种回归的假设与最小二乘回归类似；
+    - ● 它收缩系数接近零（等于零），确实有助于特征选择；
+    - ● 这是一个正则化方法，使用的是L1正则化；
+- 如果预测的一组变量是高度相关的，Lasso 会选出其中一个变量并且将其它的收缩为零。
+
+- L2和L1正则化的属性差异：
+    - **内置特征选择**：经常被提及为L1范数的有用属性，而L2范数则不然。这实际上是L1范数的结果，它倾向于产生稀疏系数。例如，假设模型有100个系数，但 - 只有10个系数具有非零系数，这实际上是说“其他90个预测变量在预测目标值方面毫无用处”。 L2范数产生非稀疏系数，因此不具有此属性。因此，可以说  - Lasso回归做了一种“参数选择”，因为未选择的特征变量的总权重为0。
+    - **稀疏性**：指矩阵（或向量）中只有极少数条目为非零。 L1范数具有产生许多具有零值的系数或具有很少大系数的非常小的值的特性。这与Lasso执行一种特    - 征选择的前一点相关联。
+    - **计算效率**：L1范数没有解析解，但L2有。在计算上可以有效地计算L2范数解。然而，L1范数具有稀疏性属性，允许它与稀疏算法一起使用，这使得计算在计算上更有效。
+- 代码
+
+```python
+from sklearn.linear_model import Lasso
+ 
+lasso_reg = Lasso(alpha=0.1)
+lasso_reg.fit(X, y)
+y_pred=lasso_reg.predict(X)
+evaluation(y,y_pred,index_name='lasso_reg')
+```
+
+
+
+## 弹性网络回归（ElasticNet）
+
+- ElasticNet是Lasso和Ridge回归技术的混合体。它使用L1来训练并且L2优先作为正则化矩阵。当有多个相关的特征时，ElasticNet是很有用的。Lasso 会随机挑选他们其中的一个，而ElasticNet则会选择两个。
+    - ![](https://pic2.zhimg.com/80/v2-907891553373b212b1f280aeed728e15_720w.jpg)
+- Lasso和Ridge之间的实际的优点是，它允许ElasticNet继承循环状态下Ridge的一些稳定性。
+- 要点：
+    - ● 在高度相关变量的情况下，它会产生群体效应；
+    - ● 选择变量的数目没有限制；
+    - ● 它可以承受双重收缩。
+- 代码
+
+```python
+enet_reg = linear_model.ElasticNet(l1_ratio=0.7)
+enet_reg.fit(X,y)
+ 
+y_pred=enet_reg.predict(X)
+evaluation(y,y_pred,index_name='enet_reg ')
+```
+
+- 除了这7个最常用的回归技术，你也可以看看其他模型，如Bayesian、Ecological和Robust回归。
+
+
+## 如何正确选择回归模型？
+
+- 可选择的越多，选择正确的一个就越难。
+
+- 在多类回归模型中，基于自变量和因变量的类型，数据的维数以及数据的其它基本特征的情况下，选择最合适的技术非常重要。
+- 关键因素
+    1. 数据探索是构建预测模型的必然组成部分。在选择合适的模型时，比如识别变量的关系和影响时，它应该首选的一步。
+    2. 比较适合于不同模型的优点，我们可以分析不同的指标参数，如统计意义的参数，R-square，Adjusted R-square，AIC，BIC以及误差项，另一个是Mallows' Cp准则。这个主要是通过将模型与所有可能的子模型进行对比（或谨慎选择他们），检查在你的模型中可能出现的偏差。
+    3. 交叉验证是评估预测模型最好额方法。在这里，将你的数据集分成两份（一份做训练和一份做验证）。使用观测值和预测值之间的一个简单均方差来衡量你的预测精度。
+    4. 如果你的数据集是多个混合变量，那么你就不应该选择自动模型选择方法，因为你应该不想在同一时间把所有变量放在同一个模型中。
+    5. 它也将取决于你的目的。可能会出现这样的情况，一个不太强大的模型与具有高度统计学意义的模型相比，更易于实现。
+    6. 回归正则化方法（Lasso，Ridge和ElasticNet）在高维和数据集变量之间多重共线性情况下运行良好。
 
 
 ## 广义线性模型
