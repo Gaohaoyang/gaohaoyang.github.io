@@ -28,6 +28,9 @@ mathjax: true
 - [陶哲轩-地上最强数学家访谈](https://www.bilibili.com/video/BV1KW411q7r2/?spm_id_from=333.788.videocard.11)
 <iframe src="//player.bilibili.com/player.html?aid=18245630&bvid=BV1KW411q7r2&cid=29786993&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+- 【2020-12-11】[数学的酷炫你不懂](https://mp.weixin.qq.com/s/ncFbIu8KTmOkNSgI0EGgyA)
+
+
 # 数学大师
 
 - [一张图让你读懂：为何他会成为数学系所有学生的噩梦](https://www.toutiao.com/a6756016099625550343/?timestamp=1573015520&app=news_article_lite&group_id=6756016099625550343&req_id=201911061245190100260770880BC2E150)
