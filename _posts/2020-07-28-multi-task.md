@@ -12,6 +12,15 @@ mathjax: true
 * content
 {:toc}
 
+# 总结
+
+- 【2020-12-13】[多标签学习最新综述](https://mp.weixin.qq.com/s/SCsdWLrBDAKzc9NLAK1jxQ), 武大刘威威老师、南理工沈肖波老师和 UTS Ivor W. Tsang 老师合作的 2020 年多标签最新的 Survey：[The Emerging Trends of Multi-Label Learning](https://arxiv.org/abs/2011.11197)，之前的综述较少，还旧：
+- 现有的多标签 Survey 基本在 2014 年之前，主要有以下几篇：
+   1. Tsoumakas 的《Multi-label classification: An overview》(2007)
+   2. 周志华老师的《A review on multi-label learning algorithms》(2013)
+   3. 一篇比较小众的，Gibaja 《Multi‐label learning: a review of the state of the art and ongoing research》2014
+
+
 # 多任务学习介绍
 
 ## 1.Introduction
