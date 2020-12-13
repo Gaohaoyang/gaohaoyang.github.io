@@ -222,6 +222,7 @@ Gate 网络在两个任务的不同分布：
 ## TensorFlow实现多任务学习
 
 - [Tensorflow多任务学习总结](https://blog.csdn.net/chanbo8205/article/details/86539355)，faster rcnn是检测和分类的多任务学习
+- [英文原文](Multi-Task Learning in Tensorflow)
 
 ### 单任务网络框架
 
