@@ -17,9 +17,80 @@ mathjax: true
 ## 1.Introduction
  
 这一节主要介绍一些基础知识和背景，包括多什么是任务学习和多任务学习的挑战。
+
+### 概念区别（multi-class/multi-label等）
+
+- 【2020-12-16】几种概念区别（参考：[Multi-class, Multi-label 以及 Multi-task 问题](https://blog.csdn.net/golden1314521/article/details/51251252)）
+    - Multiclass classification 就是**多分类**问题，比如年龄预测中把人分为小孩，年轻人，青年人和老年人这四个类别。Multiclass classification 与 binary classification相对应，性别预测只有男、女两个值，就属于后者。
+    - Multilabel classification 是**多标签**分类，比如一个新闻稿A可以与{政治，体育，自然}有关，就可以打上这三个标签。而新闻稿B可能只与其中的{体育，自然}相关，就只能打上这两个标签。
+    - Multioutput-multiclass classification 和 **multi-task** classification 指的是同一个东西。仍然举前边的新闻稿的例子，定义一个三个元素的向量，该向量第1、2和3个元素分别对应是否（分别取值1或0）与政治、体育和自然相关。那么新闻稿A可以表示为[1,1,1]，而新闻稿B可以表示为[0,1,1]，这就可以看成是multi-task classification 问题了。 从这个例子也可以看出，**Multilabel classification 是一种特殊的multi-task classification 问题**。之所以说它特殊，是因为一般情况下，向量的元素可能会取多于两个值，比如同时要求预测年龄和性别，其中年龄有四个取值，而性别有两个取值。
+- ![](https://img-blog.csdn.net/20160728203028250)
+
+- 参考：[模型汇总-14 多任务学习-Multitask Learning概述](https://zhuanlan.zhihu.com/p/27421983)
+- 单任务学习 VS 多任务学习
+    - **单任务**学习：一次只学习一个任务（task），大部分的机器学习任务都属于单任务学习。
+        - 现在大多数机器学习任务都是单任务学习。对于复杂的问题，也可以分解为简单且相互独立的子问题来单独解决，然后再合并结果，得到最初复杂问题的结果。
+        - 看似合理，其实是不正确的，因为现实世界中很多问题不能分解为一个一个独立的子问题，即使可以分解，各个子问题之间也是相互关联的，通过一些**共享因素**或**共享表示**（share representation）联系在一起。把现实问题当做一个个独立的单任务处理，忽略了问题之间所富含的丰富的关联信息。
+    - **多任务**学习：把多个相关（related）的任务放在一起学习，同时学习多个任务。
+        - 多任务学习就是为了解决这个问题而诞生的。把多个相关（related）的任务（task）放在一起学习
+        - 多个任务之间共享一些因素，它们可以在学习过程中，共享它们所学到的信息，这是单任务学习所具备的。相关联的多任务学习比单任务学习能去的更好的泛化（generalization）效果。
+    - 对比
+        - 单任务学习时，各个任务之间的模型空间（Trained Model）是相互独立的。
+        - 多任务学习时，多个任务之间的模型空间（Trained Model）是共享的
+        - ![](https://pic3.zhimg.com/80/v2-9eed3a14f160f9562a37eafe82991b8e_720w.png)
+
+- 多任务学习（Multitask learning）是迁移学习算法的一种，迁移学习之前介绍过。定义一个一个**源领域**source domain和一个**目标领域**（target domain），在source domain学习，并把学习到的知识迁移到target domain，提升target domain的学习效果（performance）。
+- 多标签学习（Multilabel learning）是多任务学习中的一种，建模多个label之间的相关性，同时对多个label进行建模，多个类别之间共享相同的数据/特征。
+- 多类别学习（Multiclass learning）是多标签学习任务中的一种，对多个相互独立的类别（classes）进行建模。这几个学习之间的关系如图5所示：
+
+![](https://pic2.zhimg.com/80/v2-ac2579934ee805c8a7fbac8ff5cb3c31_720w.png)
  
 ### 1.1 MTL
 -------
+
+什么是多任务学习？
+- 多任务学习（Multitask learning）定义：
+    - 基于共享表示（shared representation），把多个相关的任务放在一起学习的一种机器学习方法。
+- 多任务学习（Multitask Learning）是一种推导迁移学习方法，主任务（main tasks）使用相关任务（related tasks）的训练信号（training signal）所拥有的领域相关信息（domain-specific information），做为一直推导偏差（inductive bias）来提升主任务（main tasks）泛化效果（generalization performance）的一种机器学习方法。
+- 多任务学习涉及多个**相关**的任务同时并行学习，梯度同时反向传播，多个任务通过底层的共享表示（shared representation）来互相帮助学习，提升泛化效果。
+- 简单来说：多任务学习把多个相关的任务放在一起学习（注意，一定要是相关的任务，后面会给出相关任务（related tasks）的定义，以及他们共享了那些信息），学习过程（training）中通过一个在浅层的共享（shared representation）表示来互相分享、互相补充学习到的领域相关的信息（domain information），互相促进学习，提升泛化的效果。
+    - **相关**（related）的具体定义很难，但我们可以知道的是，在多任务学习中，related tasks可以提升main task的学习效果，基于这点得到相关的定义：
+        - Related（Main Task，Related tasks，LearningAlg）= 1
+        - LearningAlg（Main Task||Related tasks）> LearningAlg（Main Task） （1）
+    - LearningAlg表示多任务学习采用的算法，公式（1）：第一个公式表示，把Related tasks与main tasks放在一起学习，效果更好；第二个公式表示，基于related tasks，采用LearningAlg算法的多任务学习Main task，要比单学习main task的条件概率概率更大。特别注意，相同的学习任务，基于不同学习算法，得到相关的结果不一样：
+        - Related（Main Task，Related tasks，LearningAlg1）不等于 Related（Main Task，Related tasks，LearningAlg2）
+    - 多任务学习并行学习时，有5个相关因素可以帮助提升多任务学习的效果。
+        - （1）、数据放大（data amplification）。相关任务在学习过程中产生的额外有用的信息可以有效方法数据/样本（data）的大小/效果。主要有三种数据     - 放大类型：统计数据放大（statistical data amplification）、采样数据放大（sampling data amplification），块数据放大（blocking data        - amplification）。
+        - （2）、Eavesdropping（窃听）。假设
+        - （3）、属性选择（attribute selection）
+        - （4）、表示偏移（representation bias）
+        - （5）、预防过拟合（overfitting prevention）
+
+所有这些关系（relationships）都可以帮助提升学习效果（improve learning performance）
+
+**共享表示**shared representation：
+- 共享表示的目的是为了提高**泛化**（improving generalization），图2中给出了多任务学习最简单的共享方式，多个任务在浅层共享参数。MTL中共享表示有两种方式：
+    - （1）、基于**参数**的共享（Parameter based）：比如基于神经网络的MTL，高斯处理过程。
+    - （2）、基于**约束**的共享（regularization based）：比如均值，联合特征（Joint feature）学习（创建一个常见的特征集合）。
+        - 基于特征的共享MTL（联合特征学习，Joint feature learning），通过创建一个常见的特征集合来实现多个任务之间基于特征（features）的shared representation
+        - ![](https://pic3.zhimg.com/80/v2-c19abd44c5a10c7bb0b17a3db84dd386_720w.png)
+        - 基于特征共享的MTL输入输出关系如图4所示，其中采用L1正则来保证稀疏性
+        - ![](https://pic4.zhimg.com/80/v2-59d7eaf42327905b757f4f98ddf48e77_720w.png)
+    - 其他MTL
+        - 均值约束 MTL：基于均值来约束所有的task
+        - 参数共享的高斯处理MTL
+        - 低秩约束MTL
+        - 交替结构优化MTL等等
+
+为什么把多个相关的任务放在一起学习，可以提高学习的效果？关于这个问题，有很多解释。这里列出其中一部分，以图2中由单隐含层神经网络表示的单任务和多任务学习对比为例。
+- （1）、多人相关任务放在一起学习，有相关的部分，但也有不相关的部分。当学习一个任务（Main task）时，与该任务不相关的部分，在学习过程中相当于是噪声，因此，引入噪声可以提高学习的泛化（generalization）效果。
+- （2）、单任务学习时，梯度的反向传播倾向于陷入局部极小值。多任务学习中不同任务的局部极小值处于不同的位置，通过相互作用，可以帮助隐含层逃离局部极小值。
+- （3）、添加的任务可以改变权值更新的动态特性，可能使网络更适合多任务学习。比如，多任务并行学习，提升了浅层共享层（shared representation）的学习速率，可能，较大的学习速率提升了学习效果。
+- （4）、多个任务在浅层共享表示，可能削弱了网络的能力，降低网络过拟合，提升了泛化效果。
+
+还有很多潜在的解释，为什么多任务并行学习可以提升学习效果（performance）。多任务学习有效，是因为它是建立在多个相关的，具有共享表示（shared representation）的任务基础之上的，因此，需要定义一下，什么样的任务之间是相关的。
+
+
  
 `MTL`（Multi-Task Learning）有很多形式：`联合学习`（joint learning）、`自主学习`（learning to learn）和`带有辅助任务`的学习（learning with auxiliary task）等都可以指 MTL。一般来说，优化多个损失函数就等同于进行多任务学习（与单任务学习相反）。
  
