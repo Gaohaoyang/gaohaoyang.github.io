@@ -290,6 +290,8 @@ Gate 网络在两个任务的不同分布：
 
 # 实践
 
+- 【2020-12-16】[多标签文本分类 ALBERT+TextCNN-附代码](https://zhuanlan.zhihu.com/p/158622992)
+    - ![](https://pic1.zhimg.com/80/v2-a693fbe72498802b9e7aaf601b694f58_720w.jpg)
 
 ## TensorFlow实现多任务学习
 
