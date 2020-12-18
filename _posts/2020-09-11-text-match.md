@@ -56,6 +56,9 @@ mathjax: true
   - IR-QA，是给定一个 query，直接从一堆 answer 中寻找最匹配的，省略了 FAQ 中 question-answer pair 的 question 中转
   - Ad-hoc retrieval，属于典型的相关匹配问题
 
+- 最长公共子序列、编辑距离、相同单词个数/序列长度、word2vec+余弦相似度、[Sentence2Vector](https://blog.csdn.net/qjzcy/article/details/51882959?spm=0.0.0.0.zFx7Qk) 、[DSSM(deep structured semantic models)(BOW/CNN/RNN) ](https://www.cnblogs.com/qniguoym/p/7772561.html)、[lstm+topic](https://blog.csdn.net/qjzcy/article/details/52269382)
+
+
 ## 有监督相似度计算
 
 - 基于有监督的相似度计算，主要介绍基于神经网络的，基本可以分为两大类，sentence encoding (sentence representation) 类、sentence interaction 类。
@@ -126,6 +129,14 @@ mathjax: true
   - 单语义匹配模型：DSSM（Deep Structured Semantic Models）以及基于此演进的系列模型CLSM/RNN-DSSM
 
 ![](https://pic3.zhimg.com/80/v2-39f58d7ce98f3f6f917da5a7c696d11b_720w.jpg)
+
+- 【2020-12-18】文本匹配模型归纳总结
+  - [DSSM详解](https://blog.csdn.net/u012526436/article/details/90212287)
+  - [ESIM详解](https://blog.csdn.net/u012526436/article/details/90380840)
+  - [ABCNN详解](https://blog.csdn.net/u012526436/article/details/90179481)
+  - [BiMPM详解](https://blog.csdn.net/u012526436/article/details/88663975)
+  - [DIIN详解](https://blog.csdn.net/u012526436/article/details/90710925)
+  - [DRCN详解](https://blog.csdn.net/u012526436/article/details/90757018)
 
 
 
