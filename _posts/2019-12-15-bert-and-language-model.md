@@ -299,6 +299,8 @@ tokenizer_output = ["un", "##aff", "##able"]
     ![](https://pic2.zhimg.com/v2-2ea52e4a9da0be3cba4d2427c6e3a33c_b.webp)
     ![](https://pic4.zhimg.com/v2-99386a2930a2ce105a810b884134e39d_b.webp)
 
+- 蒸馏模型采用的是迁移学习，蒸馏的目标是让student学习到teacher的泛化能力，蒸馏的本质是压缩模型
+
 ## 背景
 
 ![](https://pics3.baidu.com/feed/4b90f603738da977703daa3003be0a1c8718e394.jpeg)
