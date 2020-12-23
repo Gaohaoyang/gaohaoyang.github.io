@@ -296,6 +296,44 @@ GUS对话系统，是 Genial Understander System 的缩写，可以追溯到1977年的论文(Daniel
     -  open prompt（如 ‘How may I help you‘ 这种，用户可以回复任何内容 ）
     - directive prompt（如 ‘Say yes to accept call, or no’ 这种，系统限制了用户的回复选择）
 
+### DST
+
+- 【2020-12-23】对话状态追踪（DST）的作用：
+    - 根据**领域**(domain)/**意图**(intention) 、**槽值对**(slot-value pairs)、之前的状态以及之前系统的Action等来追踪当前状态。 
+    - 输入是Un（n时刻的意图和槽值对，也叫用户Action）、An-1（n-1时刻的系统Action）和Sn-1（n-1时刻的状态）
+    - 输出是Sn（n时刻的状态）。
+    - 用户Action和系统Action不同，且需要注意
+        - S = {Gn,Un,Hn}，Gn是用户目标、Un同上、Hn是聊天的历史，Hn= {U0, A0, U1, A1, ... , U ?1, A ?1}，S =f(S ?1,A ?1,U )。
+
+- DST涉及到两方面内容：**状态表示**、**状态追踪**。
+- DST形象化
+    - ![](https://upload-images.jianshu.io/upload_images/17303794-c1bbad40c15af803.jpg)
+- DST常见方法
+    - 注意：基于规则的方法虽然可以较好利用先验知识从而可以较好解决冷启动等问题，但是需要太多人工、非常不灵活、扩展性和移植性很差、不能同时追踪多种状态
+    - ![](https://upload-images.jianshu.io/upload_images/17303794-21b9f3b4f6e3c539.jpg)
+    - （1）CRF
+    - （2）NN-Based
+    - （3）基于迁移学习做DST
+    - （4）Multichannel Tracker
+    - （5）Neural Belief Tracker
+    - （6）其他：基于贝叶斯网络做DST、基于POMDP（部分可观测马尔可夫决策过程）等
+    - 总结对比
+        - ![](https://upload-images.jianshu.io/upload_images/17303794-865e51888fc863cc.jpg)
+- DST评估方法
+    - ![](https://upload-images.jianshu.io/upload_images/17303794-297db64c7cfbfc87.jpg)
+- 为了解决领域数据不足的问题，DST还有很多迁移学习(Transfer Learning)方面的工作。比如基于特征的迁移学习、基于模型的迁移学习等。
+
+#### DSTC
+
+- 讲到DST就不得不讲DSTC，DSTC是Dialog System Technology Challenge，主要包括6个Challenge。DSTC对DST的作用就相当于目标函数对机器学习任务的作用，真正起到了评估DST技术以及促进DST技术发展的作用。之所以在DST前先说DSTC是因为后面的很多DST的方法是在某个DSTC（大多是DSTC2、DSTC3、DSTC4、DSTC5）上做的。
+- ![](https://upload-images.jianshu.io/upload_images/17303794-b38b10790b64127f.jpg)
+
+
+- 详情参考：[任务型对话系统中状态追踪（DST）](https://www.jianshu.com/p/085eb0262284)
+
+
+
+### DP
 
 对话管理的一些方法，主要有三大类：
 - （1）**Structure-based Approaches**
