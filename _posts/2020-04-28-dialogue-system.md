@@ -306,6 +306,7 @@ GUS对话系统，是 Genial Understander System 的缩写，可以追溯到1977年的论文(Daniel
         - S = {Gn,Un,Hn}，Gn是用户目标、Un同上、Hn是聊天的历史，Hn= {U0, A0, U1, A1, ... , U ?1, A ?1}，S =f(S ?1,A ?1,U )。
 
 - DST涉及到两方面内容：**状态表示**、**状态追踪**。
+
 - DST形象化
     - ![](https://upload-images.jianshu.io/upload_images/17303794-c1bbad40c15af803.jpg)
 - DST常见方法
