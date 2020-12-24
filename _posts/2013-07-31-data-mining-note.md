@@ -3,7 +3,7 @@ layout: post
 title:  "数据挖掘经验总结-data-mining-note"
 date:   2013-07-31 23:02:00
 categories: 数据挖掘
-tags: 数据挖掘 机器学习 数据分析 陈皓 大数据 增长黑客 数据金字塔
+tags: 数据挖掘 机器学习 数据分析 陈皓 大数据 增长黑客 数据金字塔 zepplin
 excerpt: 数据挖掘知识点、经验总结
 author: 鹤啸九天
 mathjax: true
@@ -303,6 +303,45 @@ def cal_pccs(x, y, n):
     - ①数据很难启发重大创新。
     - ②某些问题压根没有数据可供分析。
 - 除了数据驱动之外，产品的优化一定还要依赖其他驱动力。
+
+
+## 分析工具
+
+### Zeppelin是什么?
+
+![](https://img-blog.csdn.net/20170518170538169)
+
+- 【2020-12-24】[一篇全面的zepplin教程](https://blog.csdn.net/jin6872115/article/details/83501359)
+- [zeppelin 安装使用，测试spark，spark sql](https://blog.csdn.net/feloxx/article/details/72476661)
+- [Apache Zeppelin](http://zeppelin.apache.org/)是一款基于Web的Notebook(类似于jupyter notebook)，支持交互式地数据分析。
+- Zeppelin可实现你所需要的：
+    - 数据采集
+    - 数据发现
+    - 数据分析
+    - 数据可视化和协作
+    - 支持多种语言，默认是Scala(背后是Spark shell)，SparkSQL, Markdown ，SQL，Shell，Markdown和Python等,Apache Zeppelin提供内置的Apache Spark集成。您不需要为其构建单独的模块，插件或库。
+- 安装
+    - [下载地址](https://mirror.bit.edu.cn/apache/zeppelin/zeppelin-0.9.0-preview2/zeppelin-0.9.0-preview2-bin-all.tgz)
+    - ![](https://img-blog.csdn.net/20170518170540748)
+    - ![](https://img-blog.csdn.net/20170518170543185)
+- 配置
+    - zeppelin-site.xml: 修改端口
+    - zeppelin-env.sh: 修改Hadoop、spark配置等
+- 启动
+    - ./zeppelin-daemon.sh start
+- 使用
+    - ![](https://img-blog.csdn.net/20170518170548373)
+    - ![](http://static.oschina.net/uploads/space/2016/0224/165936_Qu4p_1018641.jpg)
+
+
+- 语言
+
+```c
+%spark
+println("Hello "+z.input("name"))
+```
+
+
 
 # [数据的游戏：冰与火](https://coolshell.cn/articles/10192.html)
 
