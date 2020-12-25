@@ -59,6 +59,92 @@ mathjax: true
 - 最长公共子序列、编辑距离、相同单词个数/序列长度、word2vec+余弦相似度、[Sentence2Vector](https://blog.csdn.net/qjzcy/article/details/51882959?spm=0.0.0.0.zFx7Qk) 、[DSSM(deep structured semantic models)(BOW/CNN/RNN) ](https://www.cnblogs.com/qniguoym/p/7772561.html)、[lstm+topic](https://blog.csdn.net/qjzcy/article/details/52269382)
 
 
+### simhash
+
+- [【深度好文】simhash文本去重流程](https://zhuanlan.zhihu.com/p/71488127)
+- 传统Hash算法只负责将原始内容尽量均匀随机地映射为一个签名值，原理上仅相当于伪随机数产生算法。即便是两个原始内容只相差一个字节，所产生的签名也很可能差别很大，所以传统的Hash是无法在签名的维度上来衡量原内容的相似度。
+- 而SimHash本身属于一种**局部敏感hash**，其主要思想是降维，将高维的特征向量转化成一个f位的指纹（fingerprint），通过算出两个指纹的海明距离（hamming distince）来确定两篇文章的相似度，海明距离越小，相似度越低（根据 Detecting Near-Duplicates for Web Crawling 论文中所说），一般海明距离为3就代表两篇文章相同。     
+- simhash也有其局限性，在处理小于500字的短文本时，simhash的表现并不是很好，所以在使用simhash前一定要注意这个细节。
+
+#### 如何设计一个比较两篇文章相似度的算法？
+
+- 可能你会回答几个比较传统点的思路:
+  - 一种方案是先将两篇文章分别进行分词，得到一系列特征向量，然后计算特征向量之间的距离（可以计算它们之间的欧氏距离、海明距离或者夹角余弦等等），从而通过距离的大小来判断两篇文章的相似度。
+    - 只比较两篇文章的相似性还好，但如果是海量数据,有着数以百万甚至亿万的网页，计算量太大！
+  - 另外一种是传统hash，我们考虑为每一个web文档通过hash的方式生成一个指纹（finger print）。 
+    - 传统加密方式md5，其设计的目的是为了让整个分布尽可能地均匀，但如果输入内容一旦出现哪怕轻微的变化，hash值就会发生很大的变化。
+#### simhash原理
+- simhash是google用来处理海量文本去重的算法。 google出品，你懂的。 simhash最牛逼的一点就是将一个文档，最后转换成一个64位的字节，暂且称之为特征字，然后判断重复只需要判断他们的特征字的距离是不是<n（根据经验这个n一般取值为3），就可以判断两个文档是否相似。
+算法过程大致如下：
+  - 对文本分词，得到N维特征向量（默认为64维）
+  - 为分词设置权重（tf-idf）
+  - 为特征向量计算哈希
+  - 对所有特征向量加权，累加（目前仅进行非加权累加）
+  - 对累加结果，大于零置一，小于零置零
+  - 得到文本指纹（fingerprint）
+- 具体流程实现分为五个步骤
+  - 5个步骤：分词、hash、加权、合并、降维
+  - ![](https://pic3.zhimg.com/80/v2-ceb4d0e032c73e099e9292f88241f5f6_720w.jpg)
+
+
+#### 代码实现
+
+```python
+import jieba
+from simhash import Simhash
+
+words1 = jieba.lcut('我很想要打游戏，但是女朋友会生气！', cut_all=True)
+words2 = jieba.lcut('我很想要打游戏，但是女朋友非常生气！', cut_all=True)
+
+print(Simhash(words1).distance(Simhash(words2))) 
+
+#输出：6，因为短文本使用simhash的话，文字稍微有些改动，还是挺明显的，大家可以用长文本尝试
+
+# simhash核心代码
+# 说明：self.f 为simhash的长度；
+#            self.value 为当前实例的simhash值；
+#            self.hashfunc 为计算hash的函数，默认是md5；
+
+# 计算文本的hash值
+def build_by_features(self, features): 
+    """
+    `features` might be a list of unweighted tokens (a weight of 1
+                will be assumed), a list of (token, weight) tuples or
+                a token -> weight dict.
+    """
+    v = [0] * self.f
+    masks = [1 << i for i in range(self.f)]  #生成从1位到f位的mashs值，用于每个位的匹配操作
+    if isinstance(features, dict):
+        features = features.items()
+    # h是计算的hash值， w是权重(词频)
+    for f in features:
+        if isinstance(f, basestring):
+            h = self.hashfunc(f.encode('utf-8'))
+            w = 1
+        else:
+            assert isinstance(f, collections.Iterable)
+            h = self.hashfunc(f[0].encode('utf-8'))
+            w = f[1]
+        for i in range(self.f):
+            v[i] += w if h & masks[i] else -w  # 位操作，位值为1，则为w，位值为0，则为-w；
+    ans = 0
+    for i in range(self.f):
+        if v[i] > 0:
+            ans |= masks[i]  # 合并所有计算结果
+    self.value = ans
+
+# 计算两个hash值得距离
+def distance(self, another):
+    assert self.f == another.f
+    x = (self.value ^ another.value) & ((1 << self.f) - 1)
+    ans = 0
+    while x:
+        ans += 1
+        x &= x - 1
+    return ans
+
+```
+
 ## 有监督相似度计算
 
 - 基于有监督的相似度计算，主要介绍基于神经网络的，基本可以分为两大类，sentence encoding (sentence representation) 类、sentence interaction 类。
