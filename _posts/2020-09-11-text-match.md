@@ -97,7 +97,9 @@ words1 = jieba.lcut('我很想要打游戏，但是女朋友会生气！', cut_a
 words2 = jieba.lcut('我很想要打游戏，但是女朋友非常生气！', cut_all=True)
 
 print(Simhash(words1).distance(Simhash(words2))) 
+print(Simhash(words2).value)
 
+#输出：6，因为短文本使用simhash的话，文字稍微有些改动，还是挺明显的，大家可以用长文本尝试
 #输出：6，因为短文本使用simhash的话，文字稍微有些改动，还是挺明显的，大家可以用长文本尝试
 
 # simhash核心代码
