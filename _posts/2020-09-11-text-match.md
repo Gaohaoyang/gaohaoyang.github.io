@@ -58,23 +58,37 @@ mathjax: true
 
 - 最长公共子序列、编辑距离、相同单词个数/序列长度、word2vec+余弦相似度、[Sentence2Vector](https://blog.csdn.net/qjzcy/article/details/51882959?spm=0.0.0.0.zFx7Qk) 、[DSSM(deep structured semantic models)(BOW/CNN/RNN) ](https://www.cnblogs.com/qniguoym/p/7772561.html)、[lstm+topic](https://blog.csdn.net/qjzcy/article/details/52269382)
 
-
-### simhash
-
-- [【深度好文】simhash文本去重流程](https://zhuanlan.zhihu.com/p/71488127)
-- 传统Hash算法只负责将原始内容尽量均匀随机地映射为一个签名值，原理上仅相当于伪随机数产生算法。即便是两个原始内容只相差一个字节，所产生的签名也很可能差别很大，所以传统的Hash是无法在签名的维度上来衡量原内容的相似度。
-- 而SimHash本身属于一种**局部敏感hash**，其主要思想是降维，将高维的特征向量转化成一个f位的指纹（fingerprint），通过算出两个指纹的海明距离（hamming distince）来确定两篇文章的相似度，海明距离越小，相似度越低（根据 Detecting Near-Duplicates for Web Crawling 论文中所说），一般海明距离为3就代表两篇文章相同。     
-- simhash也有其局限性，在处理小于500字的短文本时，simhash的表现并不是很好，所以在使用simhash前一定要注意这个细节。
-
-#### 如何设计一个比较两篇文章相似度的算法？
+### 如何设计一个比较两篇文章相似度的算法？
 
 - 可能你会回答几个比较传统点的思路:
   - 一种方案是先将两篇文章分别进行分词，得到一系列特征向量，然后计算特征向量之间的距离（可以计算它们之间的欧氏距离、海明距离或者夹角余弦等等），从而通过距离的大小来判断两篇文章的相似度。
     - 只比较两篇文章的相似性还好，但如果是海量数据,有着数以百万甚至亿万的网页，计算量太大！
   - 另外一种是传统hash，我们考虑为每一个web文档通过hash的方式生成一个指纹（finger print）。 
     - 传统加密方式md5，其设计的目的是为了让整个分布尽可能地均匀，但如果输入内容一旦出现哪怕轻微的变化，hash值就会发生很大的变化。
+
+- 最简单的指纹构造方式就是计算文本的 md5 或者 sha 哈希值，除非输入相同的文本，否则会发生“**雪崩效应**”，**极小的文本差异通过 md5 或者 sha计算出来的指纹就会不同**（发生冲撞的概率极低），那么对于稍加改动的文本，计算出来的指纹也是不一样。因此，一个好的指纹应该具备如下特点：
+  - 1、指纹是**确定**的，相同的文本的指纹是相同的；
+  - 2、 指纹越相似，文本相似性就越高；
+  - 3、 指纹生成和匹配效率高。
+
+- 业界关于文本指纹去重的算法众多，如
+  - k-shingle 算法
+  - google 提出的simhash 算法
+  - Minhash 算法
+  - 百度top k 最长句子签名算法等等。
+
+
+### simhash
+
+- [【深度好文】simhash文本去重流程](https://zhuanlan.zhihu.com/p/71488127)
+- 传统Hash算法只负责将原始内容尽量均匀随机地映射为一个签名值，原理上仅相当于伪随机数产生算法。即便是两个原始内容只相差一个字节，所产生的签名也很可能差别很大，所以传统的Hash是无法在签名的维度上来衡量原内容的相似度。
+- 而SimHash本身属于一种**局部敏感hash**，其主要思想是**降维**，将高维的特征向量转化成一个f位的**指纹**（fingerprint），通过算出两个指纹的**海明距离**（hamming distince）来确定两篇文章的相似度，海明距离越小，相似度越低（根据 Detecting Near-Duplicates for Web Crawling 论文中所说），一般海明距离为3就代表两篇文章相同。     
+- simhash也有其局限性，在处理小于500字的短文本时，simhash的表现并不是很好，所以在使用simhash前一定要注意这个细节。
+
+
 #### simhash原理
-- simhash是google用来处理海量文本去重的算法。 google出品，你懂的。 simhash最牛逼的一点就是将一个文档，最后转换成一个64位的字节，暂且称之为特征字，然后判断重复只需要判断他们的特征字的距离是不是<n（根据经验这个n一般取值为3），就可以判断两个文档是否相似。
+- simhash是google用来处理海量文本去重的算法。 Moses Charikear于2007年发布的一篇论文《Detecting Near-duplicates for web crawling》中提出的， 专门用来解决亿万级别的网页去重任务。
+-  simhash最牛逼的一点就是将一个文档，最后转换成一个64位的字节，暂且称之为特征字，然后判断重复只需要判断他们的特征字的距离是不是<n（根据经验这个n一般取值为3），就可以判断两个文档是否相似。
 算法过程大致如下：
   - 对文本分词，得到N维特征向量（默认为64维）
   - 为分词设置权重（tf-idf）
@@ -88,6 +102,8 @@ mathjax: true
 
 
 #### 代码实现
+
+- python版本
 
 ```python
 import jieba
@@ -146,6 +162,49 @@ def distance(self, another):
     return ans
 
 ```
+- C++版本
+- [中文simhash算法库](https://github.com/yanyiwu/simhash)
+- [Simhash Server](https://github.com/yanyiwu/simhash_server)
+
+- 简介
+
+- 简单 [simhash](http://github.com/yanyiwu/simhash) 包装而成的 HTTP Server ，主要是总是有人反馈因为不懂C++所以不知道怎么使用 [simhash] ，
+希望提供个 HTTP 接口用法。所以才有了这个项目。独立成单独一个仓库的原因是不想让 [simhash](http://github.com/yanyiwu/simhash) 项目太过臃肿。
+
+- 用法
+  - 【依赖】
+    - `g++ (version >= 4.1 recommended) or clang++`;
+  - 【下载】
+
+```sh
+git clone git://github.com/yanyiwu/simhash_server.git
+cd keyword_server
+make
+#如果是MacOSX用户，请使用 make osx 。
+```
+
+【启动服务】
+
+```sh
+./simhash.server
+```
+
+【GET请求示例】
+
+```sh
+curl "http://127.0.0.1:11201/?s=你好世界"
+```
+
+【POST请求示例】
+
+```sh
+curl -d "我是蓝翔 技工拖拉机学院手扶拖拉机专业的。" "http://127.0.0.1:11201"
+```
+
+[simhash](http://github.com/yanyiwu/simhash)
+
+
+
 
 ## 有监督相似度计算
 
