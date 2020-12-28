@@ -49,6 +49,11 @@ mathjax: true
 - 如何定义“相似”也是个开放问题
 - 常见方法：PI、SSEI、STS、IR-QA、Ad-hoc retrieval
 
+
+- [2020-12-28][机器学习中“距离与相似度”计算汇总](https://zhuanlan.zhihu.com/p/336946131)
+  - 涵盖了常用到的距离与相似度计算方式，其中包括欧几里得距离、标准化欧几里得距离、曼哈顿距离、汉明距离、切比雪夫距离、马氏距离、兰氏距离、闵科夫斯基距离、编辑距离、余弦相似度、杰卡德相似度、Dice系数。
+  - ![](https://pic2.zhimg.com/80/v2-3c689f4658c634d803942370ec48c751_720w.jpg)
+
 - 谈起相似度计算，经常会出现几个关联的 NLP 任务，彼此存在微妙的区别：
   - paraphrase identification，即 PI，是判断一文本是否另一文本的复述
   - semantic text similarity，即 STS，是计算两文本在语义层面的相似性
