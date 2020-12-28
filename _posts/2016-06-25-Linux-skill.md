@@ -352,7 +352,13 @@ git config --global credential.helper store
 ```
 
 - [Git对比两个分支](https://www.cnblogs.com/mkl34367803/p/9196563.html)
-
+- [Git Clone克隆仓库速度太慢怎么办？](https://zhuanlan.zhihu.com/p/144016106)
+   - 修改Hosts：分别解析http://ithub.global.ssl.fastly.net和http://github.com网站的ip地址，加入host中；mac刷新host文件，sudo killall -HUP mDNSResponder
+   - 使用码云：
+      - (1) 使用git clone git@gitee.com:Evllis/novice.git克隆仓库到本地
+   - cgit（git换cgit）
+      - 安装：git clone https://github.com/killf/cgit.git && sudo ./cgit/install.sh
+      - 使用：cgit clone https://github.com/killf/cgit.git （亲测有效）
 
 
 ## 交互式学习
