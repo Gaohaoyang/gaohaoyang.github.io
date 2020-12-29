@@ -74,11 +74,20 @@ mathjax: true
 
 ## 图像3D化
 
+- [2017-9-21]自拍照三维重建[3D Face Reconstruction from a Single Image](http://www.cs.nott.ac.uk/~psxasj/3dme/index.php)
+- ![demo](https://cdn.vox-cdn.com/thumbor/fXbE0rbXW6WlcmtB1cKBiTsV1b0=/0x0:482x334/1820x1213/filters:focal(203x129:279x205):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/56734861/3d_mark_take_2.0.gif)
 - 【2020-7-23】2D照片转3D的效果，代码：[3d-photo-inpainting](https://github.com/vt-vl-lab/3d-photo-inpainting)
 - ![](https://p1-tt-ipv6.byteimg.com/img/pgc-image/54a7f500dc92415f91e0766e2f74c45a~tplv-obj:340:424.image?from=post)
 
 - 【2020-11-18】端到端面部表情合成 Speech-Driven Animation [Github代码](https://github.com/DinoMan/speech-driven-animation)
    - ![](https://github.com/DinoMan/speech-driven-animation/raw/master/example.gif)
+
+- 【2020-12-29】[单张图片三维重建](https://blog.csdn.net/zouxy09/article/details/8083553),Andrew Ng介绍他的两个学生用单幅图像去重构这个场景的三维模型。
+   - [斯坦福大学](http://ai.stanford.edu/~asaxena/reconstruction3d/)
+      - ![](http://ai.stanford.edu/~asaxena/reconstruction3d/Results/mountain_mesh_small.jpg)
+   - [康奈尔大学](http://www.cs.cornell.edu/~asaxena/learningdepth/)
+
+
 
 # OCR
 
