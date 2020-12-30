@@ -740,6 +740,30 @@ mathjax: true
    - 赖霖枫是雨林木风和115网盘的创始人
 
 
+
+- [硅谷大佬](https://www.bilibili.com/video/av10418675)6集
+- 电影：中国合伙人，[视频](https://www.vodxc.in/JQP/20294/20294-1-1.html)
+- 综艺节目：[合伙中国人](https://v.qq.com/x/search/?q=%E5%90%88%E4%BC%99%E4%B8%AD%E5%9B%BD%E4%BA%BA%E7%AC%AC3%E5%AD%A3&stag=9)
+   - [90后遭投资人痛批](https://v.youku.com/v_show/id_XMjg3NjI4MDM2NA==.html?spm=a2h0j.11185381.listitem_page1.5!11~A&&s=48efbfbd3b535eefbfbd)
+
+<iframe src="http://player.youku.com/embed/XMjg3NjI4MDM2NA==" frameborder="0" allowfullscreen=“true” height="600" width="100%" ></iframe>
+
+- 纪录片：燃点，[视频](https://www.vodxc.in/JLP/randiandianyingban/)
+   - 戴威的ofo要挂了，papi的内容创业偃旗息鼓，马薇薇名气下滑，傅盛还是意气风发，金星的新氧上市了，许单单的拉勾还在，老罗的锤子挂了。。。不胜唏嘘
+   - 安传东的经历最具参考价值，跟我一样出身农村，人大毕业后连续创业，愈挫愈勇
+   ![](https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=2256751130,3427799725&fm=173&app=49&f=JPEG?w=550&h=296&s=298A9C5D1A2A2E17508BC5AA03006049)
+- 【2019-12-31】创客兄弟：以创客的奋斗故事为主线，其中摒弃山寨手机等低端电子产品，到研发人工智能产品的场景，与华强北商业街的转型升级相呼应
+![](https://pics6.baidu.com/feed/024f78f0f736afc346ff177f703432c1b64512ef.jpeg?token=2a3eeccbe1a11a2d8eb656ddc79940fa&s=BA9305CD4B6011074051942D0300E043)
+- [2019我赚钱了](https://mp.weixin.qq.com/s/AbjlrLWdQQRXAD_fFWbIBA)
+- 【2020-1-13】只工作、不上班
+   - 豆瓣帖子：[采访100个不上班的人：“我只是想和别人不一样”](https://book.douban.com/review/10588140/)
+      - ![](https://img1.doubanio.com/view/thing_review/l/public/3525518.webp)
+   - B站视频：[【100个不上班的人】](https://space.bilibili.com/18937939), [旅行博主：那个睡陌生人家沙发，睡上电视的女孩](https://www.bilibili.com/video/av69166304)
+      - ![](https://img1.doubanio.com/view/thing_review/l/public/3525519.webp)
+      - <iframe src="//player.bilibili.com/player.html?aid=69166304&cid=119869704&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+
+
 # IT快讯
 
 - 【2019-07-22】[神策数据核心技术王集鹄过世](http://baijiahao.baidu.com/s?id=1639729785381397020&wfr=spider&for=pc)：去年查出恶性肿瘤 生前与病魔斗争
