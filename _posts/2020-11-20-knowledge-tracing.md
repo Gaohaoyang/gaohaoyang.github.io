@@ -17,6 +17,12 @@ mathjax: true
 - [knowledge-tracing最新进展](https://paperswithcode.com/task/knowledge-tracing)
   - [GIKT: A Graph-based Interaction Model for Knowledge Tracing](https://paperswithcode.com/paper/gikt-a-graph-based-interaction-model-for)
 - [深度知识追踪（Deep Knowledge Tracing）论文学习](https://blog.csdn.net/sereasuesue/article/details/108686717)
+- 知识追踪发展历程
+  - DKT：只建模问题
+  - SKT：只建模知识点
+  - DIKT：同时建模问题、知识点
+
+
 
 # 知识追踪
 
@@ -70,6 +76,11 @@ mathjax: true
 
 ## 在线教育
 
+- 【2020-12-30】[AI在扇贝的应用：基于TensorFlow的DKT(深度知识追踪)系统实现](https://zhuanlan.zhihu.com/p/51098581)
+  - 深度知识追踪系统可以实时地预测用户对词表上每个词回答正确的概率。介绍扇贝是如何实现深度追踪模型并运用到英语学习者词汇水平评估中去。
+  - 总序列数量已经累积到千万级别，这为使用深度学习模型提供了坚实的基础。模型方面，我们选用了斯坦福大学 Piech Chris 等人在 NIPS 2015 发表的 Deep Knowledge Tracing (DKT) 模型 [1]，该模型在 Khan Academy Data 上进行了验证，有着比传统 BKT 模型更好的效果。
+  - ![](https://pic1.zhimg.com/80/v2-bda4f0eecc8fe662fa5c3a055589120c_720w.jpg)
+  - ![](https://pic3.zhimg.com/80/v2-813552c1da97863a2662cf087938b2a6_720w.jpg)
 - 【2018-11-22】[67岁AI教父跳槽中国，放弃千亿美金巨头加盟初创公司](https://mp.weixin.qq.com/s/3KsTzVscWi5rnR1WbYpvXg?share_token=12a6d5ef-ec1d-4785-b505-d454551ba7fb), 11月16日，全球机器学习教父、人工智能领域顶尖科学家Tom Mitchell教授，正式宣布加入了中国一家教育创业公司——松鼠AI，出任首席人工智能科学家，引起圈里一阵惊叹。Mitchell长期从事机器学习、认知神经学科等研究，全世界最经典应用最广的机器学习教材，就出自他之手。在全球机器学习领域，Mitchell教授是公认的行业“教父”，Machine Learning第一人。
   - “我对教育领域一直很感兴趣，我编写过教材，始终认为教育是我职业生涯中的重要一环，我最近开始深度关注AI对教育的应用，因为现在时机比较成熟了。”在最近一场关于AI+教育的主题大会上，Mitchell如是说。
   - AI在教育领域应用时机的成熟，很可能意味着这个自古以来的传统行业，也要真正进入到数字化的快车道了。
