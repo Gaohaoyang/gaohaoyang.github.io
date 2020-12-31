@@ -130,6 +130,10 @@ useful_urls:
     name : Colah’s Blog
     url : http://colah.github.io/
     desc : 精品文章
+  -
+    name : 集智俱乐部
+    url : 如何在观测数据下进行因果效应评估 
+    desc : 没有围墙的大学
   - 
     name : prajwalsouza可视化项目
     url : https://prajwalsouza.github.io/
