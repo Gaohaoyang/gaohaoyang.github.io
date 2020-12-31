@@ -48,6 +48,15 @@ mathjax: true
   - [The Flow of Association and Causation in Graphs](https://www.bradyneal.com/slides/3%20-%20The%20Flow%20of%20Association%20and%20Causation%20in%20Graphs.pdf)
 
 
+- 【2021-1-1】[因果作用评价与因果网络学习及其结合](https://mp.weixin.qq.com/s/eQbKE3hMVx6B-sQ3oF0F_w?notreplace=true)
+  - 该报告介绍Pearl提出的因果推断的三个层级，综述因果推断的两个主要模型：潜在结果模型、因果网络。探讨因果作用和因果关系的可识别性，因果作用的可传递性，因果网络结构的学习算法，以及因果作用与因果网络结合的因果推断方法。
+  - 会议主题：智能大数据统计理想沙龙
+  - 会议时间：2020/12/30 15:00-17:00
+  - 重复周期：每周(周三)
+  - 点击链接入会，或添加至[会议列表](https://meeting.tencent.com/s/robNNEw2NswS)
+    - 会议 ID：598 3277 4222
+    - 会议密码：14103
+
 # The book of why
 
 - 【2020-12-04】因果推理书籍索引，[Which causal inference book you should read](https://www.bradyneal.com/which-causal-inference-book)
