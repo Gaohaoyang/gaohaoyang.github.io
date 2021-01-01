@@ -19,10 +19,17 @@ mathjax: true
 - [文本匹配（语义相似度/行为相关性）技术综述](http://www.manongjc.com/article/43533.html)
 - 文本匹配方法系列：[讲在前面](https://zhuanlan.zhihu.com/p/85088152)，[单语义匹配模型（1）](https://zhuanlan.zhihu.com/p/83574416)
 
+## 检索、分类与匹配
+
+- 总结
+  - 检索任务中的匹配通常是**相关性**匹配（Relevance Matching），关键词在其中起到至关重要的作用
+  - 传统的文本匹配大多考虑**语义**匹配（Semantic Matching）。
+
 
 # 介绍
 
 - 文本匹配技术，不像 MT、MRC、QA 等属于 end-to-end 型任务，通常以文本相似度计算、文本相关性计算的形式，在某应用系统中起核心支撑作用，比如搜索引擎、智能问答、知识检索、信息流推荐等。
+- 文本匹配任务的目标是：给定一个query和一些候选的documents，从这些documents中找出与query最匹配的一个或者按照匹配度排序；
 
 ## 面临的问题
 
@@ -40,6 +47,7 @@ mathjax: true
 - 智能问答和检索中，doc 与 query 形式基本一致，标注时
   - 如果根据文本语义相似度对 doc 与 query 打标签，那自然最终学习到的模型就是**语义相似度模型**
   - 如果根据检索后点击行为对 doc 与 query 打标签，那自然最终学习到的模型就是**行为相关性模型**。
+
 
 # 基础知识
 
@@ -385,13 +393,15 @@ curl -d "我是蓝翔 技工拖拉机学院手扶拖拉机专业的。" "http://
   - 百度在 ACL2018 提出的 DAM 模型：算是最新技术的集大成者，摒弃之前建模 utterance embedding sequence 的思路，先使用 Transformer encoder 得到文本多粒度的表征，然后借助 attention 设计了两种交互方式得到了 self-attention-match 和 cross-attention-match 两种对齐矩阵，再采用 3D-conv 进行聚合分类预测，实现了 SOTA，干净利落。
 
 
-# 文本匹配
-
 ## 应用
 
 - Answer Selection：给定一个问题，从候选答案集合中匹配最佳答案。
 - Paraphrase Identification释义识别：给定两个句子，判断它们是否包含相同的语义。
 - Textual entailment：给定一句话作为前提，另一句话作为推断，去判断能否根据前提得到推断。
+- 【2021-1-1】BERT用于文本分类+文本匹配的区别：
+  - 其他方面没有不同，只有在输入的时候，分类任务输入一个句子，而匹配任务输入两个句子
+    - 匹配任务的输入数据格式：texta \t text_b \t label 。两个句子之间通过[SEP]分割，[CLS]的向量作为分类的输入，标签是两个句子是否相似，1表示正例，0表示负例。
+
 
 ## 评估
 
@@ -405,6 +415,48 @@ curl -d "我是蓝翔 技工拖拉机学院手扶拖拉机专业的。" "http://
 
 # 匹配模型
 
+## 发展历史
+
+- （1）基于**特征**：传统的文本匹配任务还是采用基于特征的方式，无非就是
+  - 抽取两个文本tf-idf、BM25、词法等层面的特征，然后使用传统的机器学习模型（LR，SVM）等进行训练。
+  - 虽然基于**特征**的方法可解释性较好，但是这种依赖于人工寻找特征和不断试错的方法，泛化能力就显得比较一般，而且由于特征数量的限制，导致参数量受到限制，模型的性能比较一般。
+- （2）基于深度学习：2012年以来，深度学习技术的快速发展以及GPU的出现，使得人们有机会并且有能力训练大型的深度神经网络。深度学习技术开始对计算机视觉、自然语言处理等各个领域产生了冲击，作为自然语言处理的一个分支，文本匹配当然也不例外。
+  - 2013年，微软提出 DSSM (2013)，率先将深度学习技术引入到了文本检索任务中，开启了文本匹配方向的深度学习时代。
+  - 不同于传统基于特征的匹配方式，深度学习时代的文本匹配方法可以概括为两种类型：
+    - 基于**表征**（representation）的匹配：初始阶段对两个文本各自单独处理，通过深层的神经网络进行编码，得到文本的表征，然后基于得到的文本表征，采用相似度计算的函数得到两个文本的相似度。
+      - 基本范式（paradigm）：Embedding层->Encoding层->DNN层->Prediction层。
+      - 案例
+        - 2013年，微软提出 [DSSM](https://posenhuang.github.io/papers/cikm2013_DSSM_fullversion.pdf) (2013)
+        - 2014年，微软继续提出 [CDSSM](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/www2014_cdssm_p07.pdf)，基本流程和DSSM完全一样，无非就是将MLP替换成了CNN模型，可以提取N-gram特征
+        - 2014年，华为也提出了[ARC](https://arxiv.org/pdf/1503.03244.pdf)
+        - 2016年，孪生网络[Siamese Network](https://www.aclweb.org/anthology/W16-1617.pdf) (2016)以及其变种
+        - 2017年之后基本就没有基于表征的模型出现了。不过，就在最近，
+        - 2019年，Google在RecSys 2019上的提出了双塔结构流式模型，应用于Youtube进行大规模推荐. 基于BERT的双塔模型被很多文章提及，也可以看做是基于表征的模型，是一个非常强的baseline
+      - 分析：基于表征的方式可创新的地方并不多，Embedding层是固定的，Encoding层无非再加上各种char-embedding，或者entity-embedding来引入先验知识；可以稍微有点创新的就只有DNN层，但是由于表征模型从头到尾对两个待匹配文本都是独立处理的，能做的只能是怎么得到更好的表征向量，很容易想到的就是把DNN替换为RNN型网络或者后来的Attention网络；Prediction层则是寻找不同的相似度计算函数，或者直接使用一层线性层代替。
+      - 问题：在最后阶段才计算文本的相似度会过于依赖表征的质量，同时也会丢失基础的文本特征（比如词法、句法等） 
+        - 表征用来表示文本的高层语义特征，但是文本中单词的关系、句法等特征高层的表征比较难捕获，很难判定一个表征是否能很好的表征一段文本。
+        - 要想能够建模文本各个层级的匹配关系，最好能够尽早地让文本产生交互。通俗来讲就是，认识的越早，两个文本对彼此的了解就可能越多。
+    - 基于**交互**（interaction）的匹配方式。尽可能早的对文本特征进行交互，捕获更基础的特征，最后在高层基于这些基础匹配特征计算匹配分数。
+      - 案例
+        - 2014年，华为在ARC I的那篇文章中，提出了 ARC II (2014)，n-gram级别计算交互矩阵
+        - 从2014年开始，中科院郭嘉丰老师团队开始在文本匹配领域发力，发表了多篇经典的论文，包括MV-LSTM (2015)，MatchPyramid (2016)，DRMM (2016)，Match-SRNN (2016)等等。
+          - 前两者基本是对ARC II的补充
+            - MV-LSTM主要是使用Bi-LSTM对Embedding进行强化编码
+            - MatchPyramid则提出了计算交互矩阵时多种匹配模式（Indicator, Cosine, Dot）
+          - DRMM就是针对检索领域任务的特点进行了创新
+          - 郭嘉丰团队开源的文本匹配工具[MatchZoo](https://github.com/NTMC-Community/MatchZoo-py)，MatchZoo 是一个通用的文本匹配工具包，它旨在方便大家快速的实现、比较、以及分享最新的深度文本匹配模型。[使用流程介绍](https://zhuanlan.zhihu.com/p/94085483)
+          - MatchZoo可以快速搭建文本匹配的Pipeline，但是缺点是需要封装成内部定义的数据结构，限制了整个框架的扩展性；而且，MatchZoo只定义了英文的预处理器。因此，笔者对MatchZoo进行了一些[修改](https://github.com/Zessay/NLP-Pytorch-Template)，修改了底层数据封装的格式，除了能够进行文本匹配之外，还可以快速搭建文本分类、实体识别以及多轮QA检索等常见NLP任务的Pipeline。此外，还定义了中文的预处理器，并展示了一些使用的实例
+        - 2016年，如何采用花式Attention技巧来强化单词向量表征，以及文本的交互矩阵成为之后文本匹配工作的核心。比较早期的网络有aNMM (2016)，Match-LSTM (2016)，Decomposable Attention (2016)
+          - Attention的使用方向主要集中在两点
+            - 一个是Embedding之后的Encoding层，通过Attention来得到强化单词的表征；
+            - 一个是使用交互匹配矩阵得到两个文本align之后的Cross Attention。
+        - 2017年的论文BiMPM (2017) 可以说是对之前Attention的方式进行了一个汇总，也比较清晰地描述了基于交互的文本匹配模型的范式。该模型的结构分为Word Representation层，Context Representation层，Matching层，Aggregation层以及Prediction层。
+        - 2017年的论文ESIM (2017)也是文本匹配方向比较重要的一篇论文，笔者也是通过这篇论文第一次了解了Cross Attention
+        - 2017年，基于DRMM，CMU熊辰炎老师的团队又接连提出了KNRM (2017)和Conv-KNRM (2018)，采用核方法对直方图的匹配方式进行改进。
+        - HCAN (2019)提出在Matching层分别计算Relevance Matching和Semantic Matching，这样既可以很好地解决信息检索中exact match和soft match的问题，在其他匹配任务中也能取得很好的效果。
+        - 阿里的两篇工作RE2 (2019)和Enhanced-RCNN (2020)都在尝试使用轻量级并且效果不逊色于BERT的模型，便于线上部署，取得了不错的结果。
+- 【2021-1-1】以上内容摘自：[谈谈多轮匹配和文本检索](https://zhuanlan.zhihu.com/p/111769969)
+  
 ## MatchPyramid模型
 
 - 灵感来源于CV，把word-level的匹配情况看作是一张图片，用卷积来进行处理
