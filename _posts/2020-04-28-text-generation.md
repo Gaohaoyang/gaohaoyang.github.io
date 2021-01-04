@@ -279,7 +279,7 @@ mathjax: true
       - NIST
       - METEOR：机器翻译
       - TER
-  - data to text 常用指标
+  - data to text 常用指标 [data2text](https://zhuanlan.zhihu.com/p/82054729)
     - 和翻译、摘要等生成式任务最大的不同是，input 是类似于 table 或者三元组等其他形式的数据。在评估生成结果时，需要考虑文本是否准确的涵盖了 data 的信息。《Challenges in Data-to-Document Generation》提供了许多 data to text 的评价指标，并且被后续的一些论文采用
     - relation generation (RG)
       - 从生成的句子中抽取出关系，然后对比有多少关系也出现在了 source 中（一般有 recall 和 count2 个指标）
