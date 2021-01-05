@@ -48,7 +48,44 @@ mathjax: true
   - [The Flow of Association and Causation in Graphs](https://www.bradyneal.com/slides/3%20-%20The%20Flow%20of%20Association%20and%20Causation%20in%20Graphs.pdf)
 
 
-- 【2021-1-1】
+- 【2021-1-1】文库资料：
+- [因果推理](https://wenku.baidu.com/view/60e4478ccd1755270722192e453610661ed95af5.html)
+  - 因果推理的分类：
+    - 由因推果：没有复习，所以考不好
+    - 由果推因：心情不好，所以一定发生了不好的事情
+    - 因果分析：一果多因、一因多果、同因异果、异因同果、互为因果
+  - 因果分析的关键：
+    - （1）分清主因和次因
+    - （2）结果形成的因果链
+    - （3）同因异果、异因同果、互为因果
+      - 异因同果表面上互不干涉，但用联系的眼光看问题，深入分析下去，背后有共同之处，排除表象的迷惑，接近本质
+      - 同因异果也是常见的相互关联，同样的原因在不同条件下可能产生不同的结果
+  - 因果推理的误区
+    - 因果倒置谬误
+    - 强加因果谬误：仅仅把时间上有先后顺序或伴随发生的事看成有因果关系
+    - 单一因果谬误：用一个简单、单一的原因解释事件的发生，这个事件可能只是促进作用的原因之一，不是根本原因
+    - 滑坡谬误：使用连串的因果推论，却夸大了每个环节的因果强度，即不合理的使用连串的因果关系，将“可能性”转化为“必然性”，而得到不合理的结论，以实现某种意图
+    - 臆测原因谬误：针对某个现象（而不是调查分析）得出结论，根据主观臆断推断原因，造成归因偏差
+    - 诉诸公众谬误：以多数人相信的命题为事实依据来证明该命题一定是真的
+  - 因果推理的运用
+    - 补充中间环节：挖掘背后的因果链，找到关键因素
+    - 积极归因：
+    - 因果推理的目的：清楚某一现象背后的真正原因，包含主因、次因；如果是好现象，引导人们去做，如果是坏现象，告诫人们不该做
+- [因果关系的推断](http://www.doc88.com/p-1052907204605.html) 研究疾病里的因果
+  - 因果关联的几种方式：
+    - （1）单因单果 x → y
+    - （2）单因多果 x → y1,y2,y3
+    - （3）多因单果 x1,x2,x3 → y
+    - （4）多因多果 x1,x2,x3 → y1,y2,y3
+    - （5）直接/间接病因 x1 → x2  。。。 → xn → y
+  - 统计学关联的本质：原因、偏倚（系统误差）和机遇（随机误差）
+  - 统计学关联中，排除虚假关联、间接关联后，是直接关联，再剔除偏倚才是可能的因果关联
+  - 因果推断的标准
+    - 关联的时间顺序：从因到果，是必要和前提条件
+    - 关联的强度：与因果关联可能性成正比
+    - 关联的特异性：因果一一对应关系
+    - 关联的分布一致性
+    - 关联的一致性：多个研究结果的一致性/可重复性增强了因果关联的可能性
 - [观察性研究中的因果推断方法(三)30分钟.ppt](https://max.book118.com/html/2017/0930/135243899.shtm)， [百度文库](https://wenku.baidu.com/view/f945a4e8370cba1aa8114431b90d6c85ec3a8823.html)
 - [因果作用评价与因果网络学习及其结合](https://mp.weixin.qq.com/s/eQbKE3hMVx6B-sQ3oF0F_w?notreplace=true)
   - 该报告介绍Pearl提出的因果推断的三个层级，综述因果推断的两个主要模型：潜在结果模型、因果网络。探讨因果作用和因果关系的可识别性，因果作用的可传递性，因果网络结构的学习算法，以及因果作用与因果网络结合的因果推断方法。
@@ -61,6 +98,7 @@ mathjax: true
   - 【2021-1-6】May 10, 2017, MIT Machine learning expert Jonas Peters of the University of Copenhagen presents “Four Lectures on Causality”.
   - 从因果图模型开始，更广阔的定义了结构化的因果模型，以及如何从数据中识别因果关系。课程介绍了该领域当前（2017）比较前沿的研究，包括用传统机器学习方法进行因果推断的几篇论文。
   - MIT 因果推断 [Mini Lectures on Causality by Jonas Peters 2017](https://www.bilibili.com/video/av90067629/) (无字幕)
+    - [ppt地址](https://stat.mit.edu/news/four-lectures-causality/)
 
   <iframe src="//player.bilibili.com/player.html?aid=90067629&bvid=BV1o7411L7dp&cid=153821743&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="350px" height="266px" > </iframe>
 
