@@ -58,6 +58,17 @@ mathjax: true
   - 点击链接入会，或添加至[会议列表](https://meeting.tencent.com/s/robNNEw2NswS)
     - 会议 ID：598 3277 4222
     - 会议密码：14103
+  - 【2021-1-6】May 10, 2017, MIT Machine learning expert Jonas Peters of the University of Copenhagen presents “Four Lectures on Causality”.
+  - 从因果图模型开始，更广阔的定义了结构化的因果模型，以及如何从数据中识别因果关系。课程介绍了该领域当前（2017）比较前沿的研究，包括用传统机器学习方法进行因果推断的几篇论文。
+  - MIT 因果推断 [Mini Lectures on Causality by Jonas Peters 2017](https://www.bilibili.com/video/av90067629/) (无字幕)
+
+  <iframe src="//player.bilibili.com/player.html?aid=90067629&bvid=BV1o7411L7dp&cid=153821743&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="350px" height="266px" > </iframe>
+
+- 【因果推断】 [A Brief Introduction to Causal Inference by Brady Neal](https://www.bilibili.com/video/BV1CK4y1L7uA/?spm_id_from=333.788.videocard.5)
+- [Causal inference course written from a machine learning perspective](https://www.bradyneal.com/causal-inference-course)，包含课程ppt列表
+
+<iframe src="//player.bilibili.com/player.html?aid=885688534&bvid=BV1CK4y1L7uA&cid=267895326&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="350px" height="266px" > </iframe>
+
 
 # 因果推理书籍
 
