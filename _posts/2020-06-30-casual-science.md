@@ -48,7 +48,44 @@ mathjax: true
   - [The Flow of Association and Causation in Graphs](https://www.bradyneal.com/slides/3%20-%20The%20Flow%20of%20Association%20and%20Causation%20in%20Graphs.pdf)
 
 
-- 【2021-1-1】
+- 【2021-1-1】文库资料：
+- [因果推理](https://wenku.baidu.com/view/60e4478ccd1755270722192e453610661ed95af5.html)
+  - 因果推理的分类：
+    - 由因推果：没有复习，所以考不好
+    - 由果推因：心情不好，所以一定发生了不好的事情
+    - 因果分析：一果多因、一因多果、同因异果、异因同果、互为因果
+  - 因果分析的关键：
+    - （1）分清主因和次因
+    - （2）结果形成的因果链
+    - （3）同因异果、异因同果、互为因果
+      - 异因同果表面上互不干涉，但用联系的眼光看问题，深入分析下去，背后有共同之处，排除表象的迷惑，接近本质
+      - 同因异果也是常见的相互关联，同样的原因在不同条件下可能产生不同的结果
+  - 因果推理的误区
+    - 因果倒置谬误
+    - 强加因果谬误：仅仅把时间上有先后顺序或伴随发生的事看成有因果关系
+    - 单一因果谬误：用一个简单、单一的原因解释事件的发生，这个事件可能只是促进作用的原因之一，不是根本原因
+    - 滑坡谬误：使用连串的因果推论，却夸大了每个环节的因果强度，即不合理的使用连串的因果关系，将“可能性”转化为“必然性”，而得到不合理的结论，以实现某种意图
+    - 臆测原因谬误：针对某个现象（而不是调查分析）得出结论，根据主观臆断推断原因，造成归因偏差
+    - 诉诸公众谬误：以多数人相信的命题为事实依据来证明该命题一定是真的
+  - 因果推理的运用
+    - 补充中间环节：挖掘背后的因果链，找到关键因素
+    - 积极归因：
+    - 因果推理的目的：清楚某一现象背后的真正原因，包含主因、次因；如果是好现象，引导人们去做，如果是坏现象，告诫人们不该做
+- [因果关系的推断](http://www.doc88.com/p-1052907204605.html) 研究疾病里的因果
+  - 因果关联的几种方式：
+    - （1）单因单果 x → y
+    - （2）单因多果 x → y1,y2,y3
+    - （3）多因单果 x1,x2,x3 → y
+    - （4）多因多果 x1,x2,x3 → y1,y2,y3
+    - （5）直接/间接病因 x1 → x2  。。。 → xn → y
+  - 统计学关联的本质：原因、偏倚（系统误差）和机遇（随机误差）
+  - 统计学关联中，排除虚假关联、间接关联后，是直接关联，再剔除偏倚才是可能的因果关联
+  - 因果推断的标准
+    - 关联的时间顺序：从因到果，是必要和前提条件
+    - 关联的强度：与因果关联可能性成正比
+    - 关联的特异性：因果一一对应关系
+    - 关联的分布一致性
+    - 关联的一致性：多个研究结果的一致性/可重复性增强了因果关联的可能性
 - [观察性研究中的因果推断方法(三)30分钟.ppt](https://max.book118.com/html/2017/0930/135243899.shtm)， [百度文库](https://wenku.baidu.com/view/f945a4e8370cba1aa8114431b90d6c85ec3a8823.html)
 - [因果作用评价与因果网络学习及其结合](https://mp.weixin.qq.com/s/eQbKE3hMVx6B-sQ3oF0F_w?notreplace=true)
   - 该报告介绍Pearl提出的因果推断的三个层级，综述因果推断的两个主要模型：潜在结果模型、因果网络。探讨因果作用和因果关系的可识别性，因果作用的可传递性，因果网络结构的学习算法，以及因果作用与因果网络结合的因果推断方法。
@@ -58,27 +95,70 @@ mathjax: true
   - 点击链接入会，或添加至[会议列表](https://meeting.tencent.com/s/robNNEw2NswS)
     - 会议 ID：598 3277 4222
     - 会议密码：14103
+  - 【2021-1-6】May 10, 2017, MIT Machine learning expert Jonas Peters of the University of Copenhagen presents “Four Lectures on Causality”.
+  - 从因果图模型开始，更广阔的定义了结构化的因果模型，以及如何从数据中识别因果关系。课程介绍了该领域当前（2017）比较前沿的研究，包括用传统机器学习方法进行因果推断的几篇论文。
+  - MIT 因果推断 [Mini Lectures on Causality by Jonas Peters 2017](https://www.bilibili.com/video/av90067629/) (无字幕)
+    - [ppt地址](https://stat.mit.edu/news/four-lectures-causality/)
 
-# The book of why
+  <iframe src="//player.bilibili.com/player.html?aid=90067629&bvid=BV1o7411L7dp&cid=153821743&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="350px" height="266px" > </iframe>
 
+- 【因果推断】 [A Brief Introduction to Causal Inference by Brady Neal](https://www.bilibili.com/video/BV1CK4y1L7uA/?spm_id_from=333.788.videocard.5)
+- [Causal inference course written from a machine learning perspective](https://www.bradyneal.com/causal-inference-course)，包含课程ppt列表
+
+<iframe src="//player.bilibili.com/player.html?aid=885688534&bvid=BV1CK4y1L7uA&cid=267895326&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="350px" height="266px" > </iframe>
+
+
+# 因果推理书籍
+
+## 书籍汇总
+
+### （1）The book of why
 - 【2020-12-04】因果推理书籍索引，[Which causal inference book you should read](https://www.bradyneal.com/which-causal-inference-book)
 - ![](https://www.bradyneal.com/img/books_flowchart.svg)
-
-
-## 简介
 
 - 书籍：
   - ![](http://5b0988e595225.cdn.sohucs.com/images/20190716/935359c273384228b196eac31077b762.jpeg)
 - 《The book of Why》，豆瓣高达9.5分。其中文版《为什么：关于因果关系的新科学》由中信出版社推出
 - 因果推理和贝叶斯网络的创始人，图灵奖得主`Judea Peral`（朱迪亚·珀尔，贝叶斯网络之父）和科普作家 Mackenzie, Dana合作写的一本因果推理的入门书。
-  - 2011年，珀尔因“通过发展概率和因果推理对人工智能的奠基性贡献”获得了计算机科学的最高荣誉图灵奖
+  - 朱迪亚•珀尓（Judea Pearl），加州大学洛杉矶分校计算机科学教授，“贝叶斯网络”之父。2011年，珀尔因“通过发展概率和因果推理对人工智能的奠基性贡献”获得了计算机科学的最高荣誉图灵奖
   - ![](http://5b0988e595225.cdn.sohucs.com/images/20190716/7cee9f86eaea4b12af02c573bac064ed.jpeg)
+- 目录
+  - 导言：思维胜于数据
+  - 第一章：因果关系之梯
+  - 第二章：从海盗到豚鼠：因果推断的起源
+  - 第三章：从证据到因：当贝叶斯牧师遇见福尔摩斯先生
+  - 第四章：混杂和去混杂：或者，消灭潜伏变量
+  - 第五章：烟雾缭绕的争论：消除迷雾，澄清事实
+  - 第六章：大量的悖论！
+  - 第七章：超越调整：征服干预之峰
+  - 第八章：反事实：挖掘关于假如的世界
+  - 第九章：中介：寻找隐藏的作用机制
+  - 第十章：大数据，人工智能和大问题
+
+### （2）因果关系：模型、论证与推断
+
+- 《Causality : Models, Reasoning and Inference》（第二版）
+- 作者：Judea Pearl
+- 目录
+  - 1 概率、图表和因果模型简介
+  - 2 推论因果关系理论
+  - 3 因果图和因果效应的识别
+  - 4 行动、计划和直接影响
+  - 5 社会科学和经济学中的因果关系和结构模型
+  - 6 辛普森悖论、混乱与崩溃
+  - 7 基于结构的反事实逻辑
+  - 8 个不完善实验：边界效应与反事实
+  - 9 因果关系的可能性：解释与识别
+  - 10 实际原因
+  - 11 与读者的思考、阐述和讨论
+
 
 ## 为什么要读
 
 - 年度必读书，原因有二：
   - 提出了一套全新的科学方法论——因果关系模型，其应用范围涉及众多领域。借助因果关系的视角，作者重新阐述了人类认知和科学文明的发展史。
   - 因果推理将对人工智能产生革命性的跃迁，引领人工智能的未来发展，并赋予人工智能以真正的人类智慧甚至道德意识，让人工智能与人类能在彼此合作的基础上打造一个更好的未来世界。
+
 
 ## 当前的AI方法论错了！
 
@@ -94,6 +174,73 @@ mathjax: true
   - 也就是朱迪亚·珀尔强调的，真正的人工智能，光知道“相关”远远不够，而要懂得“因果”。
 
 
+# 机器学习理论的缺陷
+
+- [图灵奖得主Judea Pearl：机器学习的理论局限性与因果推理的七大特性](https://cloud.tencent.com/developer/article/1119926)
+
+- 【2018-5-10】近日，有越来越多的学者正在探讨机器学习（和深度学习）的局限性，并试图为人工智能的未来探路
+  - [纽约大学教授 Gary Marcus 就对深度学习展开了系统性的批判](http://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650735630&idx=1&sn=5840c3e9bed487da3a9080d482fcc58e&chksm=871ac070b06d496638d47dbdaac75fdec06c5e81a3afaee1e1ce2ea37e86d92ba61de8b2b7c9&scene=21#wechat_redirect)
+  - 图灵奖获得者，UCLA 教授 Judea Pearl 题为《[Theoretical Impediments to Machine Learning with Seven Sparks from the Causal Revolution](http://ftp.cs.ucla.edu/pub/stat_ser/r475.pdf)》的论文中，作者就已探讨了当前机器学习存在的理论局限性，并给出了面向解决这些问题，来自因果推理的七个启发。
+  - 当前的机器学习几乎完全是统计学或黑箱的形式，从而为其性能带来了严重的理论局限性。这样的系统不能推断干预和反思，因此不能作为强人工智能的基础。为了达到人类级别的智能，学习机器需要现实模型（类似于因果推理的模型）的引导。为了展示此类模型的关键性，我将总结展示 7 种当前机器学习系统无法完成的任务，并使用因果推理的工具完成它们。
+  - ![](https://ask.qcloudimg.com/http-save/yehe-1754229/e245kls6qs.jpeg?imageView2/2/w/1620)
+
+## 因果推理模型的 7 种特性
+
+- 考虑以下 5 个问题：
+  - 给定的疗法在治疗某种疾病上的有效性？
+  - 是新的税收优惠导致了销量上升吗？
+  - 每年的医疗费用上升是由于肥胖症人数的增多吗？
+  - 招聘记录可以证明雇主的性别歧视罪吗？
+  - 我应该放弃我的工作吗？
+- 这些问题的一般特征是它们关心的都是原因和效应的关系，可以通过诸如「治疗」、「导致」、「由于」、「证明」和「我应该」等词识别出这类关系。这些词在日常语言中很常见，并且我们的社会一直都需要这些问题的答案。然而，直到最近也没有足够好的科学方法对这些问题进行表达，更不用说回答这些问题了。和几何学、机械学、光学或概率论的规律不同，原因和效应的规律曾被认为不适合应用数学方法进行分析。
+- 这种误解有多严重呢？实际上仅几十年前科学家还不能为明显的事实「mud does not cause rain」写下一个数学方程。即使是今天，也只有顶尖的科学社区能写出这样的方程并形式地区分「mud causes rain」和「rain causes mud」。
+- 过去三十年事情已发生巨大变化。一种强大而透明的数学语言已被开发用于处理因果关系，伴随着一套把因果分析转化为数学博弈的工具。这些工具允许我们表达因果问题，用图和代数形式正式编纂我们现有的知识，然后利用我们的数据来估计答案。进而，这警告我们当现有知识或可获得的数据不足以回答我们的问题时，暗示额外的知识或数据源以使问题变的可回答。
+
+- 我把这种转化称为「因果革命」（Pearl and Mackenzie, 2018, forthcoming），而导致因果革命的数理框架我称之为「结构性因果模型」（SCM）。
+
+- SCM 由三部分构成：
+  - 图模型
+  - 结构化方程
+  - 反事实和介入式逻辑
+- 图模型作为表征知识的语言，反事实逻辑帮助表达问题，结构化方程以清晰的语义将前两者关联起来。
+
+接下来介绍 SCM 框架的 7 项最重要的特性，并讨论每项特性对自动化推理做出的独特贡献。
+1. 编码因果假设—透明性和可试性
+  - 图模型可以用紧凑的格式编码因果假设，同时保留透明性和可试性。其透明性使我们可以了解编码的假设是否可信（科学意义上），以及是否有必要添加其它假设。可试性使我们（作为人类或机器）决定编码的假设是否与可用的数据相容，如果不相容，分辨出需要修改的假设。利用 d-分离（d-separate）的图形标准有助于以上过程的执行，d-分离构成了原因和概率之间的关联。通过 d-分离可以知道，对模型中任意给定的路径模式，哪些依赖关系的模式才是数据中应该存在的（Pearl，1988）。
+2. do-calculus 和混杂控制
+  - 混杂是从数据中提取因果推理的主要障碍，通过利用一种称为「back-door」的图形标准可以完全地「解混杂」。特别地，为混杂控制选择一个合适的协变量集合的任务已被简化为一种简单的「roadblocks」问题，并可用简单的算法求解。（Pearl，1993）
+  - 为了应对「back-door」标准不适用的情况，人们开发了一种符号引擎，称为 do-calculus，只要条件适宜，它可以预测策略干预的效应。每当预测不能由具体的假设确定的时候，会以失败退出（Pearl, 1995; Tian and Pearl, 2002; Shpitser and Pearl, 2008）。
+3. 反事实算法
+  - 反事实分析处理的是特定个体的行为，以确定清晰的特征集合。例如，假定 Joe 的薪水为 Y=y，他上过 X=x 年的大学，那么 Joe 接受多一年教育的话，他的薪水将会是多少？
+  - 在图形表示中使用反事实推理是将因果推理应用于编码科学知识的非常有代表性的研究。每一个结构化方程都决定了每一个反事实语句的真值。因此，我们可以解析地确定关于语句真实性的概率是不是可以从实验或观察研究（或实验加观察）中进行估计（Balke and Pearl, 1994; Pearl, 2000, Chapter 7）。
+  - 人们在因果论述中特别感兴趣的是关注「效应的原因」的反事实问题（和「原因的效应」相对）。（Pearl，2015）
+4. 调解分析和直接、间接效应的评估
+  - 调解分析关心的是将变化从原因传递到效应的机制。对中间机制的检测是生成解释的基础，且必须应用反事实逻辑帮助进行检测。反事实的图形表征使我们能定义直接和间接效应，并确定这些效应可从数据或实验中评估的条件（Robins and Greenland, 1992; Pearl, 2001; VanderWeele, 2015）
+5. 外部效度和样本选择偏差
+  - 每项实验研究的有效性都需要考虑实验和现实设置的差异。不能期待在某个环境中训练的模型可以在环境改变的时候保持高性能，除非变化是局域的、可识别的。上面讨论的 do-calculus 提供了完整的方法论用于克服这种偏差来源。它可以用于重新调整学习策略、规避环境变化，以及控制由非代表性样本带来的偏差（Bareinboim and Pearl, 2016）。
+6. 数据丢失
+  - 数据丢失的问题困扰着实验科学的所有领域。回答者不会在调查问卷上填写所有的条目，传感器无法捕捉环境中的所有变化，以及病人经常不知为何从临床研究中突然退出。对于这个问题，大量的文献致力于统计分析的黑箱模型范式。使用缺失过程的因果模型，我们可以形式化从不完整数据中恢复因果和概率的关系的条件，并且只要条件被满足，就可以生成对所需关系的一致性估计（Mohan and Pearl, 2017）。
+7. 挖掘因果关系
+  - 上述的 d-分离标准使我们能检测和列举给定因果模型的可测试推断。这为利用不精确的假设、和数据相容的模型集合进行推理提供了可能，并可以对模型集合进行紧凑的表征。人们已在特定的情景中做过系统化的研究，可以显著地精简紧凑模型的集合，从而可以直接从该集合中评估因果问询。
+
+- NIPS 2017 研讨会 Q&A
+  - 我在一个关于机器学习与因果性的研讨会（长滩 NIPS 2017 会议之后）上发表了讲话。随后我就现场若干个问题作了回应。我希望从中你可以发现与博客主题相关的问题和回答。
+- 一些人也想拷贝我的 PPT，下面的链接即是，并附上[论文](http://ftp.cs.ucla.edu/pub/stat_ser/r475.pdf)：
+  - NIPS 17 – What If? Workshop Slides [PDF](http://causality.cs.ucla.edu/blog/wp-content/uploads/2017/12/nips-dec2017-bw.pdf)
+  - NIPS 17 – What If? Workshop Slides [PDF](http://causality.cs.ucla.edu/blog/wp-content/uploads/2017/12/nips-dec2017-bw.pdf)
+
+- 问题 1：「因果革命」是什么意思？
+  - 回答：「革命」是诗意用法，以总结 Gary King 的奇迹般的发现：「在过去几十年里，对于因果推断的了解比以前所有历史记载的总和还要多」（参见 Morgan 和 Winship 合著的书的封面，2015）。三十年之前，我们还无法为「Mud does not cause Rain」编写一个公式；现在，我们可以公式化和评估每一个因果或反事实陈述。
+- 问题 2：由图模型产生的评估与由潜在结果的方法产生的评估相同吗？
+  - 回答：是的，假设两种方法开始于相同的假设。图方法（graphical approach）中的假设在图中被展示，而潜在结果方法（potential outcome approach）中的假设则通过使用反事实词汇被审查者单独表达。
+- 问题 3：把潜在的结果归因于表格个体单元的方法似乎完全不同于图方法中所使用的方法。它们的区别是什么？
+  - 回答：只在有可条件忽略的特定假设成立的情况下，归因才有效。表格本身并未向我们展示假设是什么，其意义是什么？为了搞明白其意义，我们需要一个图，因为没有人可在头脑中处理这些假设。流程上的明显差异反映了对假设可见的坚持（在图框架中），而不是使其隐藏。
+- 问题 4：有人说经济学家并不使用图，因为其问题不同，并且也没能力建模整个经济。你同意这种解释吗？
+  - 回答：不同意！从数学上讲，经济问题与流行病学家（或其他科学家）面临的问题并无不同，对于后者来讲，图模型已经成为了第二语言。此外，流行病学家从未抱怨图迫使其建模整个人体解剖结构。（一些）经济学家中的图规避（graph-avoidance）是一种文化现象，让人联想到 17 世纪意大利教会天文学家避开望远镜。底线：流行病学家可以判断他们的假设的合理性——规避掉图的经济学家做不到（我提供给他们很多公开证明的机会，并且我不责怪他们保持沉默；没有外援，这个问题无法被处理）。
+- 问题 5：深度学习不仅仅是盛赞曲线拟合？毕竟，曲线拟合的目标是最大化拟合，同时深度学习中很多努力也在最小化过拟合。
+  - 回答：在你的学习策略中不管你使用何种技巧来最小化过拟合或其他问题，你依然在优化已观察数据的一些属性，同时不涉及数据之外的世界。这使你立即回到因果关系阶梯的第一阶段，其中包含了第一阶段要求的所有限制。
+
+
 # 引言
 
 - 2020年6月21日，图灵奖得主、贝叶斯网络之父 Judea Pearl 在第二届[北京智源大会](https://2020.baai.ac.cn/)上做了《新因果科学与数据科学、人工智能的思考》的报告。
@@ -101,7 +248,6 @@ mathjax: true
 - Pearl说：
   - 我们现在正处在第二次数学科学革命，这一革命是以科学为中心的因果革命，相对于第一次以数据为中心的革命，第二次显得有些沉默，但威力同样巨大。
 - Pearl解释了因果科学为什么需要新的逻辑和新的推理机制，以及因果科学中新引擎的结构是什么。也对称之为“double-helix”两个因果推理的基本定理进行了交代；最后也给大家讲了基于因果智能的七种工具，以及这七种工具是如何给科学带来革命性变化。
-
 
 # 什么是因果科学
 
@@ -130,6 +276,14 @@ mathjax: true
 
   ![](http://p1-tt.byteimg.com/large/pgc-image/S2ZVU0v7v01jZj)
 
+|层级|能力提现|数学表达|说明|
+|---|---|---|---|
+|反事实|想象|P(y_x\|x', y')|因果推断的最高层|
+|干预|行动|P(y\|do(x), z)|执行某动作会带来的结果|
+|关联|观察|P(y\|x)|发现规律→机器学习|
+
+
+
 `Judea Pearl` 曾在他的书里《`为什么`》中提到：
 - 第一层级“关联”和第二层级“干预”主要针对当前的弱人工智能，包括对现有贝叶斯网络在深度学习领域的拓展、前门标准实践、do-calculus 等核心算法；
 - 而第三层级“反事实”是基于基于人的想象力和假设，是人类独有的思考能力，也是令人工智能达到人类智能的关键命门。
@@ -141,11 +295,26 @@ mathjax: true
   - 摘自：[因果之箭指向何方？| 图灵奖得主珀尔的《为什么》](https://www.toutiao.com/i6755077246928552452)
 ![](https://p1-tt.byteimg.com/origin/pgc-image/e9f24e01f21f4b2b92c5fd877c9c20e2?from=pc)
 
+- 当前的机器学习无力回答反事实的问题，大多数机器学习模型甚至使用了不可能回答这一问题的表示。
+![](https://pic1.zhimg.com/80/v2-4722c095e0b8393476843c8be7704808_1440w.jpg)
 
 ## 因果定律
 
 ![](http://p1-tt.byteimg.com/large/pgc-image/S2ZVU3k8s8s47y)
 
+- Pearl的因果推断理论共有7大支柱：
+  - 有意义而紧凑的因果假设表示（graphical表示）
+  - 混杂因子控制（back-door、front-door、do-calculus）
+  - 反事实算法（本文重点介绍的内容）
+  - 媒介分析（反事实的graphical表示）
+  - 学习迁移、外部验证、取样偏差（do-calculus、selection diagrams）
+  - 数据缺失（graphical标准）
+  - 因果发现（寻找和数据兼容的模型，并紧凑地表示它们）
+
+- Pearl同时开发了结构化因果模型（Structural Causal Model, SCM），一个形式化地描述因果推断的框架
+![](https://pic2.zhimg.com/80/v2-cde33f828397d5ad19fd5a375c72e0c5_720w.jpg)
+
+- 摘自：[“无人问津”的贝叶斯网络之父Judea Pearl在NIPS 2017上到底报告了啥](https://zhuanlan.zhihu.com/p/31930409)
 
 ## 因果工具
 
@@ -218,11 +387,9 @@ mathjax: true
  
 相关性有三种来源：因果、混淆和样本选择。
  
-因果关联例子就是天下雨地面会湿，这种关系是能够被人类所理解的、是可解释的、稳定的（无论在任何国家或城市，天下雨地都会湿）。
- 
-混淆关联是由混淆偏差（Confounding Bias）造成的。比如图中X是T和Y的共同原因，但如果不对X进行观察，就会发现T和Y是具有相关性的，但T和Y之间是没有直接因果效应的，这就是产生了虚假相关。
- 
-样本选择偏差（Selection Bias）也会产生相关性，比如之前的例子中，如果数据集中的狗都出现在沙滩上，而没有狗的图片都是草地，那么训练处的模型就会发现草地与狗之间是负相关的，这也产生了虚假相关。
+- 因果关联例子就是天下雨地面会湿，这种关系是能够被人类所理解的、是可解释的、稳定的（无论在任何国家或城市，天下雨地都会湿）。
+- 混淆关联是由混淆偏差（Confounding Bias）造成的。比如图中X是T和Y的共同原因，但如果不对X进行观察，就会发现T和Y是具有相关性的，但T和Y之间是没有直接因果效应的，这就是产生了虚假相关。
+- 样本选择偏差（Selection Bias）也会产生相关性，比如之前的例子中，如果数据集中的狗都出现在沙滩上，而没有狗的图片都是草地，那么训练处的模型就会发现草地与狗之间是负相关的，这也产生了虚假相关。
  
 虚假相关与因果关联相比，缺乏可解释性，且容易随着环境变化。在工业界和学术界中，我们都希望能判断两个变量之间的相关究竟是因果关联还是虚假相关。如果是虚假相关的话，可能会给实际的系统带来风险。
  
@@ -343,8 +510,23 @@ Matching 的问题就是如何去评估两个个体的相似度，并需要设�
 ![](http://p1.itc.cn/q_70/images03/20201023/368e1e83dd6e4f75ada8add246a19404.jpeg)
 
 
+# 因果科学实践
 
+## 因果工具包
 
+- 【2021-1-5】[awesome-causality-algorithms](https://github.com/rguo12/awesome-causality-algorithms)
+- [DoWhy工具](https://github.com/microsoft/dowhy) An end-to-end library for causal inference
+  - [Jupyter notebook示例](https://github.com/microsoft/dowhy/blob/master/docs/source/example_notebooks/dowhy_simple_example.ipynb)
+  - ![](https://raw.githubusercontent.com/microsoft/dowhy/master/docs/images/dowhy-schematic.png)
+- [justcause](https://github.com/inovex/justcause)
+
+其它工具包
+1. [causalml]: causal inference with machine learning algorithms in Python
+2. [DoWhy]: causal inference using graphs for identification
+3. [EconML]: Heterogeneous Effect Estimation in Python
+4. [awesome-list]: A very extensive list of causal methods and respective code
+5. [IBM-Causal-Inference-Benchmarking-Framework]: Causal Inference Benchmarking Framework by IBM
+6. [CausalNex]: Bayesian Networks to combine machine learning and domain expertise for causal reasoning.
 
 # 资料
 

@@ -38,7 +38,7 @@ mathjax: true
 		- 神经网络和深度学习；
 		- 集成方法；
 		- ![](https://p6-tt.byteimg.com/origin/pgc-image/11fc9ade0b1246dd89be355e975661e4?from=pc)
-	
+- 【2021-1-2】[机器学习的12张思维导图](https://www.cnblogs.com/panchuangai/p/12568088.html)	
 
 
 # 机器学习课程

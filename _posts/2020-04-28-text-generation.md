@@ -18,7 +18,7 @@ mathjax: true
 - 【2020-9-21】文本生成系列文章
   - [文本生成12：4种融合知识的text generation](https://zhuanlan.zhihu.com/p/133266258)
   - [文本生成13：万字长文梳理文本生成评价指标](https://zhuanlan.zhihu.com/p/144182853)
-
+- 【2021-1-4】[data2text](https://zhuanlan.zhihu.com/p/82054729)
 # 文本生成方案
 
 生成一段对话回复的模型可以简单分为三类：
@@ -271,7 +271,6 @@ mathjax: true
   - 从短句惩罚、重复、重要信息缺失、多样化等方面，衍生出例如 METEOR、SPICE、Distinct 等评价指标
   - 以 bertscore 为代表的评价指标近年来受到广泛的关注，与人工评价的相关性也越来越高
 
-
 - （1）基于词重合度的方法
   - 机器翻译 & 摘要 常用指标
       - BLEU：机器翻译
@@ -279,7 +278,7 @@ mathjax: true
       - NIST
       - METEOR：机器翻译
       - TER
-  - data to text 常用指标
+  - data to text 常用指标 [data2text](https://zhuanlan.zhihu.com/p/82054729)
     - 和翻译、摘要等生成式任务最大的不同是，input 是类似于 table 或者三元组等其他形式的数据。在评估生成结果时，需要考虑文本是否准确的涵盖了 data 的信息。《Challenges in Data-to-Document Generation》提供了许多 data to text 的评价指标，并且被后续的一些论文采用
     - relation generation (RG)
       - 从生成的句子中抽取出关系，然后对比有多少关系也出现在了 source 中（一般有 recall 和 count2 个指标）
@@ -307,7 +306,7 @@ mathjax: true
 
 ## （1）词重叠率
 
-
+- 待定
 
 ### BLEU
 
