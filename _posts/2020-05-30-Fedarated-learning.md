@@ -15,6 +15,7 @@ mathjax: true
 # 总结
 
 - 【2020-8-6】联邦学习Python实践：[Federated Learning Demo in Python using Socket Programming](https://github.com/ahmedfgad/FederatedLearning)
+- 【2021-1-8】[字节跳动在联邦学习领域的探索及实践](https://www.toutiao.com/i6915250800906338819/)，联邦学习在广告投放和金融等场景中的应用模式、算法研究、软件系统及实践经验
 
 # 联邦学习介绍
 
@@ -125,6 +126,12 @@ mathjax: true
 - ![](https://static.leiphone.com/uploads/new/images/20200414/5e9595db77aad.png)
 - 总的来说，联邦学习的这种思想，事实上并不仅仅适用于设备用户数据的隐私保护和模型更新。
 - 我们将设备用户抽象来看，视作数据的拥有者，可以是手机持有者，也可以是公司、医院、银行等；而服务器或云端视作模型共享综合平台。
+
+
+- 联邦学习最重要的就是保护数据的可用而不可见，也就是数据的隐私保护，其研究有如下方面：
+- 一是基于差分隐私的数据保护；
+- 二是基于秘密共享的加密计算方法；
+- 三是基于同态加密的加密计算方法。
 
 # 应用
 
