@@ -16,14 +16,38 @@ mathjax: true
 
 - ![](https://raw.githubusercontent.com/woaielf/woaielf.github.io/master/_posts/Pic/1611/161115-1.png)
 
-- [可视化架构设计——C4介绍](https://insights.thoughtworks.cn/c4-model/)
-    - ![](https://insights.thoughtworks.cn/wp-content/uploads/2019/01/1-System.png)
+
 - 【2021-1-9】架构设计总结，[阿里技术：架构整洁之道](https://mp.weixin.qq.com/s/Kd1T40KZWvdThKC3IN6n-Q)，书籍《架构整洁之道》
   - ![](https://pic2.zhimg.com/80/v2-40885dfb8be237d2e0dcf1b0f75f4c45_720w.jpg)
 
 
 # 架构
 
+## 如何画架构图
+
+- 要让干系人理解、遵循架构决策，就需要把架构信息传递出去。架构图就是一个很好的载体。那么，画架构图是为了：
+  - 解决沟通障碍
+  - 达成共识
+  - 减少歧义
+- 比较流行的是4+1视图，分别为**场景**视图、**逻辑**视图、**物理**视图、**处理流程**视图和**开发**视图。
+- 什么样的架构图是好架构图？
+  - 首先应该要明确其受众，再想清楚要给他们传递什么信息 
+  - 所以，不要为了画一个物理视图去画物理视图，为了画一个逻辑视图去画逻辑视图，而应该根据受众的不同，传递的信息的不同，用图准确地表达出来，最后的图可能就是在这样一些分类里。
+  - 那么，画出的图好不好的一个直接标准就是：<font color='red'>受众有没有准确接收到想传递的信息。</font>
+  - 从受众角度来说，一个好的架构图是不需要解释的，应该是自描述的，并且要具备一致性和足够的准确性，能够与代码相呼应。
+  - 问题：
+    - 方框圆框、颜色、实线虚线什么意思？
+- C4 模型使用容器（应用程序、数据存储、微服务等）、组件和代码来描述一个软件系统的静态结构。
+  - 1、**语境图**(System Context Diagram)，有交互的周边系统
+  - 2、**容器图**(Container Diagram)，容器图是把语境图里待建设的系统做了一个展开。
+  - 3、**组件图**(Component Diagram)，把某个容器进行展开，描述其内部的模块。
+  - 4、**类图**(Code/Class Diagram)，给技术人员看的，比较常见
+
+
+
+- 【2021-1-9】[如何画出合格的技术架构图](https://mp.weixin.qq.com/s?__biz=MzIzOTU0NTQ0MA==&mid=2247490075&idx=1&sn=18b8f093352c34e1b7239eee3bfeb93c&chksm=e9292714de5eae02cd70e1ac03217fdf1e3ccfc3d0adce7f15b5366f6c498b2fdc21c1a0b2c8&scene=21#wechat_redirect)
+- [可视化架构设计——C4介绍](https://insights.thoughtworks.cn/c4-model/)
+    - ![](https://insights.thoughtworks.cn/wp-content/uploads/2019/01/1-System.png)
 
 ## 架构整洁之道
 
