@@ -70,11 +70,19 @@ mathjax: true
   - CUI核心是去覆盖频率只有5%，但数量却有9985种的长尾需求。每个人的长尾需求都不一样，CUI若能很好的满足一些长尾需求，能够使用户和产生依赖，让自己也成为一个“入口”。这是“低频打高频”的畅想。
 - 通用领域的长尾困境
   - “<font color='red'>低频打高频的畅想</font>”实现起来困难重重，即“<font color='blue'>通用领域的长尾困境</font>”。
+    - 低频打不过高频：
+      - 低频通常被定义为：使用频次较低，用户重复选择率较低。
+      - ×代驾和滴滴打车这两款软件同样是满足有出行需求的用户群，但代驾相对于出租车，属于使用频次较低的功能。当滴滴打车以“出租车”这个高频需求迅速切入市场，培养了大批用户群体后，迅速横向扩展到专车和代驾领域，并且以比单一领域更便捷的方式瓜分市场，自然将代驾产品逼上了绝境。毕竟，用户的手机不会装两款同等效用的产品。
+    - 创投圈/产品圈都流传着这样一个观点：“高频打低频”，高频的业务（如外卖O2O、日常出行）容易对相对低频的业务（如药品O2O、商务出行）形成竞争优势，高频的业务切入低频业务很容易，低频业务反击高频业务却很难。
+    - 为什么打不过低频？
+      - 大部分的解释来自**流量模型**，即高频业务天然拥有更多流量，即使在用户场景中分流一部分，也能对只做低频业务的独立应用形成流量优势，例如在外卖APP中上线一个送药上门的板块，让高频的外卖业务为低频的送药业务导流。
+      - 与直接做低频业务相比，从高频业务开始借助样本优势建立的**效率差**能够给用户带来更多**效用差**，这就是我认为的“高频打低频”观点的另一个真相
+    - 摘自：[样本优势：“高频打低频”的另一个真相](https://zhuanlan.zhihu.com/p/138101313)
   - 主要是由于不同场景下语义可以多种多样，有太多不明确的意图无法确认。
   - 为解决此问题，试图限定谈话的领域，从宽度发展变为广度发展。这也就是垂直领域的智能助理。
 - 垂直领域智能助理的困境
   - （1）**推理复杂度**
-    - 机器学习（ML）是计算的逆运算，很多时候时候从结论反推规则，用数据训练规律。对象的复杂程度直接决定模型的复杂程度。
+    - 机器学习（ML）是计算的逆运算，很多时候从结论反推规则，用数据训练规律。对象的复杂程度直接决定模型的复杂程度。
     - 意图理解难推理
     - ![](http://image.woshipm.com/wp-files/2017/09/68dG1enfVjHjfWnQ41sH.png)
   - （2）**知识复杂度**
@@ -300,10 +308,16 @@ GUS对话系统，是 Genial Understander System 的缩写，可以追溯到1977年的论文(Daniel
 
 - 【2020-12-23】对话状态追踪（DST）的作用：
     - 根据**领域**(domain)/**意图**(intention) 、**槽值对**(slot-value pairs)、之前的状态以及之前系统的Action等来追踪当前状态。 
-    - 输入是Un（n时刻的意图和槽值对，也叫用户Action）、An-1（n-1时刻的系统Action）和Sn-1（n-1时刻的状态）
-    - 输出是Sn（n时刻的状态）。
+    - 输入是
+      - **Un**：n时刻的意图和槽值对，也叫用户Action
+      - **An-1**：n-1时刻的系统Action
+      - **Sn-1**：n-1时刻的状态
+    - 输出是Sn：n时刻的状态
     - 用户Action和系统Action不同，且需要注意
-        - S = {Gn,Un,Hn}，Gn是用户目标、Un同上、Hn是聊天的历史，Hn= {U0, A0, U1, A1, ... , U ?1, A ?1}，S =f(S ?1,A ?1,U )。
+        - S = {Gn,Un,Hn}
+        - Gn是用户目标
+        - Un同上
+        - Hn是聊天的历史，Hn= {U0, A0, U1, A1, ... , U ?1, A ?1}，S =f(S ?1,A ?1,U )。
 
 - DST涉及到两方面内容：**状态表示**、**状态追踪**。
 
@@ -326,7 +340,7 @@ GUS对话系统，是 Genial Understander System 的缩写，可以追溯到1977年的论文(Daniel
 
 #### DSTC
 
-- 讲到DST就不得不讲DSTC，DSTC是Dialog System Technology Challenge，主要包括6个Challenge。DSTC对DST的作用就相当于目标函数对机器学习任务的作用，真正起到了评估DST技术以及促进DST技术发展的作用。之所以在DST前先说DSTC是因为后面的很多DST的方法是在某个DSTC（大多是DSTC2、DSTC3、DSTC4、DSTC5）上做的。
+- 讲到DST就不得不讲**DSTC**，DSTC是Dialog System Technology Challenge，主要包括6个Challenge。DSTC对DST的作用就相当于目标函数对机器学习任务的作用，真正起到了评估DST技术以及促进DST技术发展的作用。之所以先说DSTC是因为后面的很多DST的方法是在某个DSTC（大多是DSTC2、DSTC3、DSTC4、DSTC5）上做的。
 - ![](https://upload-images.jianshu.io/upload_images/17303794-b38b10790b64127f.jpg)
 
 
@@ -342,7 +356,7 @@ GUS对话系统，是 Genial Understander System 的缩写，可以追溯到1977年的论文(Daniel
     - 本质是关键词匹配，通常是通过捕捉用户最后一句话的关键词/关键短语来进行回应，比较知名的两个应用是 ELIZA 和 AIML。
       - AIML（人工智能标记语言），[代码示例](https://github.com/Shuang0420/aiml)，支持 python3、中文、* 扩展
   - **Tree and FSM**
-    - 把对话建模为通过树或者有限状态机（图结构）的路径。 相比于 simple reactive approach，这种方法融合了更多的上下文，能用一组有限的信息交换模板来完成对话的建模。
+    - 把对话建模为通过树或有限状态机（图结构）的路径。 相比于 simple reactive approach，这种方法融合了更多的上下文，能用一组有限的信息交换模板来完成对话的建模。
     - 这种方法适用于：
       - 系统主导
       - 需要从用户收集特定信息
@@ -428,13 +442,13 @@ GUS对话系统，是 Genial Understander System 的缩写，可以追溯到1977年的论文(Daniel
 
 ### 有限状态机FSM
 
-- `有限状态机`（Finite-state machine, `FSM`），又称有限状态自动机，简称状态机，是表示有限个状态以及在这些状态之间的转移和动作等行为的数学模型。FSM是一种算法思想，简单而言，有限状态机由一组状态、一个初始状态、输入和根据输入及现有状态转换为下一个状态的转换函数组成。
-
+- `有限状态机`（Finite-state machine, `FSM`），又称**有限状态自动机**，简称状态机，是表示有限个状态以及在这些状态之间的转移和动作等行为的数学模型。
+  - FSM是一种算法思想，简单而言，有限状态机由一组状态、一个初始状态、输入和根据输入及现有状态转换为下一个状态的转换函数组成。
 - 在描述有限状态机时，状态、事件、转换和动作是经常会碰到的几个基本概念。
-  - 状态（State）　指的是对象在其生命周期中的一种状况，处于某个特定状态中的对象必然会满足某些条件、执行某些动作或者是等待某些事件。
-  - 事件（Event）　指的是在时间和空间上占有一定位置，并且对状态机来讲是有意义的那些事情。事件通常会引起状态的变迁，促使状态机从一种状态切换到另一种状态。
-  - 转换（Transition）　指的是两个状态之间的一种关系，表明对象将在第一个状态中执行一定的动作，并将在某个事件发生同时某个特定条件满足时进入第二个状态。
-  - 动作（Action）　指的是状态机中可以执行的那些原子操作，所谓原子操作指的是它们在运行的过程中不能被其他消息所中断，必须一直执行下去。
+  - **状态**（State）　：对象在其生命周期中的一种状况，处于某个特定状态中的对象必然会满足某些条件、执行某些动作或者是等待某些事件。
+  - **事件**（Event）　：在时间和空间上占有一定位置，并且对状态机来讲是有意义的那些事情。事件通常会引起状态的变迁，促使状态机从一种状态切换到另一种状态。
+  - **转换**（Transition）：两个状态之间的一种关系，表明对象将在第一个状态中执行一定的动作，并将在某个事件发生同时某个特定条件满足时进入第二个状态。
+  - **动作**（Action）：状态机中可以执行的那些原子操作，所谓原子操作指的是它们在运行的过程中不能被其他消息所中断，必须一直执行下去。
 
 - FSME是一个基于Qt的有限状态机工具，它能够让用户通过图形化的方式来对程序中所需要的状态机进行建模，并且还能够自动生成用C++或者Python实现的状态机框架代码。
 - 类似的还有[QFSM](http://qfsm.sourceforge.net/download.html)：A graphical tool for designing finite state machines
@@ -546,7 +560,7 @@ Image('fsm.png')
 
 ![](https://note.youdao.com/yws/public/resource/c388d7862c02facd6c2a03d6e17d9180/xmlnote/DED0DC29757E48DE9F55FB83A846A957/3963)
 
-## KB-QA
+### KB-QA
 
 - 【2020-4-22】[KB-QA研究进展](https://www.jianshu.com/p/92ea00b7a4cc)
 - ![](https://upload-images.jianshu.io/upload_images/9298309-c4a3c66f7965460e.png)
@@ -566,7 +580,7 @@ Select ?x where {
 - 以这个问题为例，起始点可以是实体“中国”，中国这个实体可能有很多关系，例如有首都、有文化、有省份、有xxx，然后搜索下一步最合理的关系“有首都”；
 - 最后探索到答案“北京”，判读任务完成。
 
-## IR-QA
+### IR-QA
 
 - IR-based 问答系统 (IR: Information Retrieval) 不需要提前构建知识，而是根据问题去检索答案（例如从搜索引擎上）。
 - 从某种意义上类似人的搜索方式，例如想知道“中国的首都是哪”，可能会去搜索引擎中搜索这个问题，而答案很可能会出现在搜索结果中，这个答案的类型很可能是“某个城市”，所以我们会在搜索引擎给我们的结果中，寻找一个城市名。
@@ -575,7 +589,6 @@ Select ?x where {
   - 然后可能需要对问题进行重构，也就是寻找一个搜索问句，能找到答案的几率最大，例如这个问题可能被重构为：“**中国 首都 城市**”。（最后添加了这个词城市，是因为我们假设可以准确判断出答案类型）
   - 机器去自有的非结构化文档（没有知识图谱化的文档，例如各种纯文本文章），从中寻找最接近我们重构后问题的段落。或者去搜索引擎、百科网站等等，搜索答案、或者检索问题相关的段落。
   - 定位到这个段落后，根据答案类型（这里是城市），尝试从这个段落中筛出答案。例如去搜索引擎搜索“中国的首都”，很可能第一个答案段落中的第一个出现的城市名就是我们所需要的答案。
-
 
 
 ## 闲聊型对话
@@ -617,7 +630,6 @@ public <controlDevice> = <startPolite> <command> <endPolite>;
 ```
 
 
-
 - 语法说明
 1. 头部格式固定，‘#’是开头。
 2. 第二行定义本语法的名字，用于被其他语法引用 
@@ -639,7 +651,7 @@ public <controlDevice> = <startPolite> <command> <endPolite>;
 
 - 案例
 
-```java
+```js
 实际案例：
 <what> = ( 啥|是什么|怎么算|怎么计算|什么是|是多少|什么|？|?);
 <fact> = ( 定义|方法|规则|要求|咨询);
@@ -684,7 +696,6 @@ print("Matching: %s" % matching[0])
 ```
 
 
-
 ### [Chatterbot](https://github.com/gunthercox/ChatterBot)
 
 ![](https://camo.githubusercontent.com/b6aaad134a52f6a76001c91321fe81a2c889c45f/68747470733a2f2f692e696d6775722e636f6d2f623353436d47542e706e67)
@@ -721,10 +732,10 @@ An example of typical input would be something like this:
     - pip install rasa_nlu
     - pip install rasa_core[tensorflow]
 - Rasa有两个主要模块：
-  - Rasa NLU ：用于理解用户消息，包括意图识别和实体识别，它会把用户的输入转换为结构化的数据。
+  - **Rasa NLU** ：用于理解用户消息，包括意图识别和实体识别，它会把用户的输入转换为结构化的数据。
     - 支持不同的 Pipeline，其后端实现可支持spaCy、MITIE、MITIE + sklearn 以及 tensorflow，其中 spaCy 是官方推荐的，另外值得注意的是从 0.12 版本后，MITIE 就被列入 Deprecated 了。
     - Rasa提供了数据标注平台: [rasa-nlu-trainer](https://rasahq.github.io/rasa-nlu-trainer/)
-  - Rasa Core：对话管理平台，用于举行对话和决定下一步做什么。Rasa Core是用于构建AI助手的对话引擎，是开源Rasa框架的一部分。
+  - **Rasa Core**：对话管理平台，用于举行对话和决定下一步做什么。Rasa Core是用于构建AI助手的对话引擎，是开源Rasa框架的一部分。
     - 负责协调聊天机器人的各个模块，起到维护人机对话的结构和状态的作用。对话管理模块涉及到的关键技术包括对话行为识别、对话状态识别、对话策略学习以及行为预测、对话奖励等。
     - Rasa消息响应过程
       - ![](https://upload-images.jianshu.io/upload_images/3285850-ece175b3a873ff90)
@@ -732,7 +743,7 @@ An example of typical input would be something like this:
       - 其次，Rasa Core会将Interpreter提取到的意图和识别传给Tracker对象，该对象的主要作用是跟踪会话状态(conversation state)；
       - 第三，利用policy记录Tracker对象的当前状态，并选择执行相应的action，其中，这个action是被记录在Track对象中的；
       - 最后，将执行action返回的结果输出即完成一次人机交互。
-    - Rasa Core包含两个内容： stories和domain。
+    - Rasa Core包含两个内容： stories 和 domain。
       - domain.yml：包括对话系统所适用的领域，包含意图集合，实体集合和相应集合，相当于大脑框架，指定了意图`intents`， 实体`entities`， 插槽`slots`以及动作`actions`。
         - intents和entities与Rasa NLU模型训练样本中标记的一致。slot与标记的entities一致，actions为对话机器人对应用户的请求作出的动作。
         - 此外，domain.yml中的templates部分针对utter_类型action定义了模板消息，便于对话机器人对相关动作自动回复。
@@ -740,7 +751,6 @@ An example of typical input would be something like this:
         - Stories
           - stories可以理解为对话的场景流程，需要告诉机器多轮场景是怎样的。Story样本数据就是Rasa Core对话系统要训练的样本，它描述了人机对话过程中可能出现的故事情节，通过对Stories样本和domain的训练得到人机对话系统所需的对话模型。
           - Rasa Core中提供了rasa_core.visualize模块可视化故事，有利于掌握设计故事流程。
-
 - Rasa X是一个工具，可帮助您构建、改进和部署由Rasa框架提供支持的AI Assistants。 Rasa X包括用户界面和REST API。
   - ![](https://upload-images.jianshu.io/upload_images/3285850-26dd1db4512e05ac)
 
