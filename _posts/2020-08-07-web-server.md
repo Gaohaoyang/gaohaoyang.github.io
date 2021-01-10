@@ -360,10 +360,10 @@ mathjax: true
         - 5. 将student（params）反序列化后，在本地调用addAge()函数，得到结果
         - 6. 将student结果序列化后通过网络返回给Client
 - 图示
-    - ![](https://upload-images.jianshu.io/upload_images/7632302-ca0ba3118f4ef4fb.png?imageMogr2/auto-orient/strip|imageView2/2/w/560/format/webp)
+    - ![](https://upload-images.jianshu.io/upload_images/7632302-ca0ba3118f4ef4fb.png)
 - 微服务的设计中，一个服务A如果访问另一个Module下的服务B，可以采用HTTP REST传输数据，并在两个服务之间进行序列化和反序列化操作，服务B把执行结果返回过来。
 - 由于HTTP在应用层中完成，整个通信的代价较高，远程过程调用中直接基于TCP进行远程调用，数据传输在传输层TCP层完成，更适合对效率要求比较高的场景，RPC主要依赖于客户端和服务端之间建立Socket链接进行，底层实现比REST更复杂。
-- ![](https://upload-images.jianshu.io/upload_images/7632302-19ad38cdd9a4b3ec.png?imageMogr2/auto-orient/strip|imageView2/2/w/723/format/webp)
+- ![](https://upload-images.jianshu.io/upload_images/7632302-19ad38cdd9a4b3ec.png)
 
 ## RPC 架构：
 
@@ -374,7 +374,7 @@ mathjax: true
     - 服务端存根，接收客户端发送过来的消息，将消息解包，并调用本地的方法。
 - ![](https://p3-tt.byteimg.com/origin/pgc-image/28f3cdf8370647f9a2966b4bf352e52b?from=pc)
 
-## 什么时候需要PRC
+## 什么时候需要RPC
 
 - RPC通信方式，已经不仅仅是远程，这个远程就是指不在一个进程内，只能通过其他协议来完成，通常都是TCP或者是Http。
 - 希望是和在同一个进程里，一致的体验
@@ -395,7 +395,7 @@ mathjax: true
 - gRPC的优势是，设计复杂更新操作的API非常简单，具有高效紧凑的进程通信机制，在交换大量消息时效率高，远程过程调用和消息传递时可以采用双向的流式消息方式，同时客户端和服务端支持多种语言编写，互操作性强；
 - 不过gRPC的缺点是不方便与JavaScript集成，某些防火墙不支持该协议。
 - 注册中心：当项目中有很多服务时，可以把所有的服务在启动的时候注册到一个注册中心里面，用于维护服务和服务器之间的列表，当注册中心接收到客户端请求时，去找到该服务是否远程可以调用，如果可以调用需要提供服务地址返回给客户端，客户端根据返回的地址和端口，去调用远程服务端的方法，执行完成之后将结果返回给客户端。这样在服务端加新功能的时候，客户端不需要直接感知服务端的方法，服务端将更新之后的结果在注册中心注册即可，而且当修改了服务端某些方法的时候，或者服务降级服务多机部署想实现负载均衡的时候，我们只需要更新注册中心的服务群即可。
-- ![](https://upload-images.jianshu.io/upload_images/7632302-0b09dd85b8baa318.png?imageMogr2/auto-orient/strip|imageView2/2/w/790/format/webp)
+- ![](https://upload-images.jianshu.io/upload_images/7632302-0b09dd85b8baa318.png)
 
 ### thrift
 
