@@ -80,6 +80,10 @@ crontab [-u user] file
 crontab [-u user] [ -e | -l | -r ] # l显示，e编辑
 # 看日志
 tail -n 2 /var/log/cron
+
+# 更新系统时间
+ntpdate time.windows.com
+
 ```
 
 - 每一行都代表一项任务，每行的每个字段代表一项设置，它的格式共分为六个字段，前五段是时间设定段，第六段是要执行的命令段，格式如下：
