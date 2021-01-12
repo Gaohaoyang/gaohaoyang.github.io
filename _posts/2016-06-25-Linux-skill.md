@@ -405,6 +405,26 @@ git config --global credential.helper store
    - 命令：git clone https://github.com/jmoon018/PacVim.git
    - ![](https://img.linux.net.cn/data/attachment/album/201806/12/104234m10a8uuhxh08kxx5.png)
 
+### vim主题
+
+- 【2021-1-12】vim配色，[大全](http://vimcolors.com/)
+- 设置类似sublime的主题包：[vim-monokai](https://github.com/sickill/vim-monokai)
+   - ![](https://camo.githubusercontent.com/b7d019bb849ebced5559fbde94e152f72b86855e07ab302c7ee27890f503674c/68747470733a2f2f692e696d6775722e636f6d2f4e5058324d584d2e706e67)
+
+
+```shell
+# 下载sublime主题
+git clone https://github.com/sickill/vim-monokai.git
+# 创建主题目录
+mkdir -p ~/.vim/colors
+# 复制主题
+cp vim-monokai/colors/monokai.vim ~/.vim/colors
+# 设置vim主题, ~/.vimrc
+syntax enable
+colorscheme monokai
+```
+
+
 # jupyter notebook
 
 - Jupyther notebook ,也就是一般说的 Ipython notebook，是一个可以把代码、图像、注释、公式和作图集于一处，从而实现可读性分析的一种灵活的工具。 
