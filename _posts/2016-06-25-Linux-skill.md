@@ -448,6 +448,27 @@ set nocompatible
 set nobackup
 ```
 
+### vim技巧
+
+|命令|说明|备注|
+|---|---|---|
+|:s/searchStr/replaceStr/g	|替换当前行中的所有 searchStr 到 replaceStr||
+|:s/searchStr/replaceStr/	|替换当前行中的第一个 searchStr 到 replaceStr||
+|:%s/searchStr/replaceStr/	|替换每一行中的第一个 searchStr 到 replaceStr||
+|:%s/searchStr/replaceStr/g	|替换每一行中的每一个 searchStr 到 replaceStr||
+|h、j、k、l	|左下上右||
+|i	|插入||
+|A	|从末尾开始编辑||
+|w / e|	下一个单词开头 / 结尾||
+|b	|上一个单词||
+|u	|撤消操作||
+|x	|删除当前字符||
+|H M L	|屏幕的上 / 中 / 下||
+
+- 积累常见问题解决方法
+1. vim粘贴多行文本时，编辑器自动换行，格式乱
+   - 解决：粘贴前，使用命令：set paste即可, 如果想恢复自动换行，set nopaste
+1. 待定
 
 # jupyter notebook
 
