@@ -3,7 +3,7 @@ layout: post
 title:  "数据挖掘经验总结-data-mining-note"
 date:   2013-07-31 23:02:00
 categories: 数据挖掘
-tags: 数据挖掘 机器学习 数据分析 陈皓 大数据 增长黑客 数据金字塔 zepplin
+tags: 数据挖掘 机器学习 数据分析 陈皓 大数据 增长黑客 数据金字塔 zepplin hadoop hive tez spark
 excerpt: 数据挖掘知识点、经验总结
 author: 鹤啸九天
 mathjax: true
@@ -307,6 +307,13 @@ def cal_pccs(x, y, n):
 
 ## 分析工具
 
+### hadoop
+
+- Hadoop1到Hadoop2所做的改变，Hadoop1主要使用MapReduce引擎，到了Hadoop2，基于yarn，可以部署spark，tez等计算引擎，这里MapReduce作为一种引擎实现用的越来越少了，但是作为框架思路，tez本身也是MapReduce的改进。
+- ![](https://pic1.zhimg.com/80/v2-0a4c08d42a525a993571fb6c5bc9d590_1440w.jpg)
+
+
+
 ### hive
 
 - 待定
@@ -361,6 +368,28 @@ spark-sql
 
 EOF
 ```
+
+### Tez
+
+- MapReduce模型虽然很厉害，但不够灵活，一个简单的join都需要很多骚操作才能完成，又是加标签又是笛卡尔积。那有人就说我就是不想这么干那怎么办呢？Tez应运起，图飞入MR。
+    - [Tez简介](https://zhuanlan.zhihu.com/p/79384822)
+- Tez采用了DAG（有向无环图）来组织MR任务（DAG中一个节点就是一个RDD，边表示对RDD的操作）。它的核心思想是把将Map任务和Reduce任务进一步拆分，Map任务拆分为Input-Processor-Sort-Merge-Output，Reduce任务拆分为Input-Shuffer-Sort-Merge-Process-output，Tez将若干小任务灵活重组，形成一个大的DAG作业。
+    - 图中蓝色框表示Map任务，绿色框表示Reduce任务，云图表示写动作，可以看出，Tez去除了MR中不必要的写过程和Map，形成一张大的DAG图，在数据处理过程中没有网hdfs写数据，直接向后继节点输出，从而提升了效率。
+- ![](https://pic4.zhimg.com/80/v2-ee3a5c71c8fb8b452edc5b8c3394374f_1440w.jpg)
+
+- TEZ的构成
+- Tez对外提供了6种可编程组件，分别是：
+    - Input：对输入数据源的抽象，它解析输入数据格式，并吐出一个个Key/value
+    - Output：对输出数据源的抽象，它将用户程序产生的Key/value写入文件系统
+    - Paritioner：对数据进行分片，类似于MR中的Partitioner
+    - Processor：对计算的抽象，它从一个Input中获取数据，经处理后，通过Output输出
+    - Task：对任务的抽象，每个Task由一个Input、Ouput和Processor组成
+    - Maser：管理各个Task的依赖关系，并按顺依赖关系执行他们
+- 除了以上6种组件，Tez还提供了两种算子，分别是Sort（排序）和Shuffle（混洗），为了用户使用方便，它还提供了多种Input、Output、Task和Sort的实现，具体如下：
+    - Input实现：LocalMergedInput（文件本地合并后作为输入），ShuffledMergedInput（远程拷贝数据且合并后作为输入）
+    - Output实现：InMemorySortedOutput（内存排序后输出），LocalOnFileSorterOutput（本地磁盘排序后输出），OnFileSortedOutput（磁盘排序后输出）
+    - Task实现：RunTimeTask（非常简单的Task，基本没做什么事）
+    - Sort实现：DefaultSorter（本地数据排序），InMemoryShuffleSorter（远程拷贝数据并排序）
 
 ### Zeppelin是什么?
 
