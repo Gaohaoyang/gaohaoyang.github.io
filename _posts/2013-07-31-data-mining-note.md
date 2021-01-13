@@ -307,6 +307,61 @@ def cal_pccs(x, y, n):
 
 ## 分析工具
 
+### hive
+
+- 待定
+
+### spark sql
+
+- SparkSql常用命令操作
+1. 进入spark-shell模式
+    - spark-shell --master yarn --executor-memory 4g --num-executors 3 --executor-cores 4
+2. spark sql查询Hive数据库
+    - import spark.sql
+    - sql("use database_name”)
+    - sql("show tables").show
+3. 读取hdfs文件数据
+    - val data = spark.read.format("csv").option("sep", ",").option("header","true").load("file_path + file_name")
+4. 存储文件(默认hdfs路径)
+    - data.write.format("csv").save("/data/....")
+5. 读取hive表数据
+    - val res = spark.sql("select * from  table_1 where day='20181230'")
+6. 注册成表
+    - res.registerTempTable(“Res")
+7. 更换属性
+    - val ss = data.selectExpr("_c0 as like","_c1 as session_id","_c2 as uid1”)
+8. 删除某列属性
+    - val s1 = data.drop("_c0”)
+9. 一列转换成多列
+    - val df2 =df1.withColumn("_corrupt_record",split(col("_corrupt_record"),","))
+    - .select(col("_corrupt_record").getItem(0).as("uid"),col("_corrupt_record").getItem(1).as("number")) 
+10. 过滤数字(三个横线)
+    - val uid = df2.filter($"number"===1)
+11. 过滤空值
+    - val s_1 = res.filter("like is not null").filter("session_id is not null”)
+
+
+- Spark SQL CLI是一个很方便的工具，可以用来在本地模式下运行Hive的元数据服务，并且通过命令行执行针对Hive的SQL查询。但是要注意的是，Spark SQL CLI是不能与Thrift JDBC server进行通信的。如果要启动Spark SQL CLI，只要执行Spark的bin目录下的spark-sql命令即可
+- sh ./bin/spark-sql --jars /usr/local/hive/lib/mysql-connector-java-5.1.17.jar
+- 同样要注意的是，必须将我们的hive-site.xml文件放在Spark的conf目录下。也可以通过执行./bin/spark-sql --help命令，来获取该命令的所有帮助选项。
+- spark sql命令模板
+
+
+```sql
+spark-sql 
+--conf spark.scheduler.listenerbus.eventqueue.size=90000000
+--driver-cores 4 
+--driver-memory 10g 
+--executor-memory 80g 
+--num-executors 40 
+--executor-cores 20 
+--master yarn << EOF
+
+**HIVESQL**
+
+EOF
+```
+
 ### Zeppelin是什么?
 
 ![](https://img-blog.csdn.net/20170518170538169)
