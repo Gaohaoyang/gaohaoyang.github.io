@@ -3,7 +3,7 @@ layout: post
 title:  "数据挖掘经验总结-data-mining-note"
 date:   2013-07-31 23:02:00
 categories: 数据挖掘
-tags: 数据挖掘 机器学习 数据分析 陈皓 大数据 增长黑客 数据金字塔 zepplin hadoop hive tez spark
+tags: 数据挖掘 机器学习 数据分析 陈皓 大数据 增长黑客 数据金字塔 zepplin hadoop hive tez spark storm
 excerpt: 数据挖掘知识点、经验总结
 author: 鹤啸九天
 mathjax: true
@@ -307,11 +307,18 @@ def cal_pccs(x, y, n):
 
 ## 分析工具
 
+- Hadoop是基础，其中的HDFS提供文件存储，Yarn进行资源管理。在这上面可以运行MapReduce、Spark、Tez等计算框架。
+- MapReduce:是一种离线计算框架，将一个算法抽象成Map和Reduce两个阶段进行处理，非常适合数据密集型计算。
+- Spark:Spark是UC Berkeley AMP lab所开源的类Hadoop MapReduce的通用的并行计算框架，Spark基于map reduce算法实现的分布式计算，拥有Hadoop MapReduce所具有的优点；但不同于MapReduce的是Job中间输出和结果可以保存在内存中，从而不再需要读写HDFS，因此Spark能更好地适用于数据挖掘与机器学习等需要迭代的map reduce的算法。
+- Storm:MapReduce也不适合进行流式计算、实时分析，比如广告点击计算等。Storm是一个免费开源、分布式、高容错的实时计算系统。Storm令持续不断的流计算变得容易，弥补了Hadoop批处理所不能满足的实时要求。Storm经常用于在实时分析、在线机器学习、持续计算、分布式远程调用和ETL等领域
+- Tez: 是基于Hadoop Yarn之上的DAG（有向无环图，Directed Acyclic Graph）计算框架。它把Ｍap/Reduce过程拆分成若干个子过程，同时可以把多个Ｍap/Reduce任务组合成一个较大的DAG任务，减少了Ｍap/Reduce之间的文件存储。同时合理组合其子过程，也可以减少任务的运行时间
+
 ### hadoop
 
 - Hadoop1到Hadoop2所做的改变，Hadoop1主要使用MapReduce引擎，到了Hadoop2，基于yarn，可以部署spark，tez等计算引擎，这里MapReduce作为一种引擎实现用的越来越少了，但是作为框架思路，tez本身也是MapReduce的改进。
 - ![](https://pic1.zhimg.com/80/v2-0a4c08d42a525a993571fb6c5bc9d590_1440w.jpg)
-
+- MapReduce是一种编程模型，用于大规模数据集（大于1TB）的并行运算。概念"Map（映射）"和"Reduce（归约）"。
+- ![](https://images2015.cnblogs.com/blog/16956/201603/16956-20160327104341026-1321810730.jpg)
 
 
 ### hive
@@ -371,6 +378,11 @@ EOF
 
 ### Tez
 
+- Tez是Apache开源的支持DAG作业的计算框架，它直接源于MapReduce框架，核心思想是将Map和Reduce两个操作进一步拆分，即Map被拆分成Input、Processor、Sort、Merge和Output， Reduce被拆分成Input、Shuffle、Sort、Merge、Processor和Output等，这样，这些分解后的元操作可以任意灵活组合，产生新的操作，这些操作经过一些控制程序组装后，可形成一个大的DAG作业。总结起来，Tez有以下特点：
+    - （1）Apache二级开源项目（源代码今天发布的）
+    - （2）运行在YARN之上
+    - （3） 适用于DAG（有向图）应用（同Impala、Dremel和Drill一样，可用于替换Hive/Pig等）
+    - ![](https://images2015.cnblogs.com/blog/16956/201603/16956-20160327150439042-1656855042.jpg)
 - MapReduce模型虽然很厉害，但不够灵活，一个简单的join都需要很多骚操作才能完成，又是加标签又是笛卡尔积。那有人就说我就是不想这么干那怎么办呢？Tez应运起，图飞入MR。
     - [Tez简介](https://zhuanlan.zhihu.com/p/79384822)
 - Tez采用了DAG（有向无环图）来组织MR任务（DAG中一个节点就是一个RDD，边表示对RDD的操作）。它的核心思想是把将Map任务和Reduce任务进一步拆分，Map任务拆分为Input-Processor-Sort-Merge-Output，Reduce任务拆分为Input-Shuffer-Sort-Merge-Process-output，Tez将若干小任务灵活重组，形成一个大的DAG作业。
@@ -425,7 +437,9 @@ EOF
 println("Hello "+z.input("name"))
 ```
 
+### storm
 
+- 待定
 
 # [数据的游戏：冰与火](https://coolshell.cn/articles/10192.html)
 
