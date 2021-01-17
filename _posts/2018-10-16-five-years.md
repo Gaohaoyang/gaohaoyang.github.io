@@ -17,8 +17,16 @@ mathjax: true
 - [Facebook田渊栋：博士五年之后五年的总结](https://mp.weixin.qq.com/s?__biz=MzAxMzc2NDAxOQ==&mid=2650369213&idx=1&sn=9045f9948df77cb722ef2873d5466f40&chksm=83905861b4e7d177f0e320ca5497615a2ce777556e9c6d59503398d1dc2bc824a4adb5af60a2&mpshare=1&scene=1&srcid=1016J1NUjbZDjbPIH5PyFk49#rd)
 
 - 【2020-8-28】【Eric的博士生生存指南】《[Syllabus for Eric's PhD students - Google Docs](https://docs.google.com/document/d/11D3kHElzS2HQxTwPqcaTnU5HCJ8WGE5brTXI4KLf4dM/preview?pru=AAABdEw6n2A*Q0YVpfw_ms0fZOf3P5-_hw)》by Eric Gilbert
-
-
+- 【2021-1-8】[谷歌大脑高级研究科学家：在康奈尔读博6年，我收获了什么](https://new.qq.com/rain/a/20210108A085Y700)，谷歌大脑高级研究科学家 Maithra Raghu 发布了自己的博士生涯总结，包括期望值管理、读博的常见挑战，以及论文那些事儿，等等。原文地址：[Reflections on my (Machine Learning) PhD Journey](https://maithraraghu.com/blog/2020/Reflections_on_my_Machine_Learning_PhD_Journey/)
+  - 论文太多怎么办？准备一个相关论文的链接列表。对我来说，这需要结合 arXiv 的机器学习子目录、arXiv-sanity、推特、reddit 的 MachineLearning 板块（有时）、paperwithcode、Semantic Scholar 和 Google Scholar。
+    - 记录并更新论文阅读列表。如果看到了有趣的论文但没时间读，先记录下来之后再来看。
+    - 寻找一种阅读论文的节奏。如果论文和自己的研究方向强相关就仔细看，否则就快速看摘要和论文中的重要图片。
+    - 偶尔阅读不同领域的研究。有些时候（也许一年一次），我会尝试看一些不是自己研究领域里的论文，以便对前沿研究进展有大致了解。
+  - 孤独无助？可以：
+    - 1）与高年级学生或博士后建立合作；
+    - 2）从导师、实验室负责人、研究合作者那里获取有关自己工作进展的反馈；
+    - 3）积极参与更广泛的社区，无论是简单地参会，还是组织和指导 workshop。
+  - 读博最有用的三项能力说起：主动、专注和毅力。
 
 >编者按：[田渊栋](http://yuandong-tian.com/)，在硅谷年轻一代华人工程师和计算机科研工作者中具有不小的知名度。身为Facebook人工智能研究院研究员的他在专注科研的同时，一直笔耕不辍。他的文章具有深邃的思想，又兼具可读性。五年前，他在知乎上分享的文章《[博士五年总结](https://zhuanlan.zhihu.com/p/30656493)》曾引起关注；五年后，他再用《博士五年之后五年的总结》系列文章，回顾了博士毕业五年，在硅谷从谷歌无人驾驶转到Facebook人工智能研究院的所思与所得。本文汇总了该系列文章的前言、其一、其二和其三。
 
