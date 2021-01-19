@@ -172,6 +172,52 @@ tensorboard —logdir=./logs/xor_logs # server
 
 ```
 
+## TorchServe
+
+- 【2021-1-19】pytorch模型部署工具[TorchServe](https://github.com/pytorch/serve/blob/master/README.md#serve-a-model)
+- [如何评价 PyTorch 在 2020 年 4 月推出的 TorchServe？](https://www.zhihu.com/question/389731764)
+- TorchServe 旨在为大规模部署 PyTorch 模型推理，提供一个干净、兼容性好的工业级路径。其主要的特点包括有：
+    - 原生态 API：支持用于预测的推理 API，和用于管理模型服务器的管理 API。
+    - 安全部署：包括对安全部署的  HTTPS 支持。
+    - 强大的模型管理功能：允许通过命令行接口、配置文件或运行时 API 对模型、版本和单个工作线程进行完整配置。
+    - 模型归档：提供执行「模型归档」的工具，这是一个将模型、参数和支持文件打包到单个持久工件的过程。使用一个简单的命令行界面，可以打包和导出为单个「 .mar」文件，其中包含提供 PyTorch 模型所需的一切。该 .mar 文件可以共享和重用。
+    - 内置的模型处理程序：支持涵盖最常见用例，如图像分类、对象检测、文本分类、图像分割的模型处理程序。TorchServe 还支持自定义处理程序。
+    - 日志记录和指标：支持可靠的日志记录和实时指标，以监视推理服务和端点、性能、资源利用率和错误。还可以生成自定义日志并定义自定义指标。
+    - 模型管理：支持同时管理多个模型或同一模型的多个版本。你可以使用模型版本回到早期版本，或者将流量路由到不同的版本进行 A/B 测试。
+    - 预构建的图像：准备就绪后，可以在基于 CPU 和 NVIDIA GPU 的环境中，部署 TorchServe 的 Dockerfile 和 Docker 镜像。
+- 综上可知，这次的 TorchServe  在推理任务上，将会有很大的使用空间，对于广大开发者来说是一件好事。这一点可以留着以后去慢慢验证。对于这次 Facebook 和 AWS 合作，明显可以看出双方在各取所长，试图打造一个可以反抗谷歌 TensorFlow 垄断的方案。
+- TorchServe Architecture
+    - ![](https://user-images.githubusercontent.com/880376/83180095-c44cc600-a0d7-11ea-97c1-23abb4cdbe4d.jpg)
+
+- Model Server for PyTorch Documentation
+
+**Basic Features**
+
+* [Serving Quick Start](../README.md#serve-a-model) - Basic server usage tutorial
+* [Model Archive Quick Start](../model-archiver#creating-a-model-archive) - Tutorial that shows you how to package a model archive file.
+* [Installation](../README.md##install-torchserve) - Installation procedures
+* [Serving Models](server.md) - Explains how to use `torchserve`.
+  * [REST API](rest_api.md) - Specification on the API endpoint for TorchServe
+  * [gRPC API](grpc_api.md) - Specification on the gRPC API endpoint for TorchServe
+* [Packaging Model Archive](../model-archiver/README.md) - Explains how to package model archive file, use `model-archiver`.
+* [Logging](logging.md) - How to configure logging
+* [Metrics](metrics.md) - How to configure metrics
+* [Batch inference with TorchServe](batch_inference_with_ts.md) - How to create and serve a model with batch inference in TorchServe
+* [Model Snapshots](snapshot.md) - Describes how to use snapshot feature for resiliency due to a planned or unplanned service stop
+
+ **Advanced Features**
+
+* [Advanced settings](configuration.md) - Describes advanced TorchServe configurations.
+* [Custom Model Service](custom_service.md) - Describes how to develop custom inference services.
+* [Unit Tests](../ts/tests/README.md) - Housekeeping unit tests for TorchServe.
+* [Benchmark](../benchmarks/README.md) - Use JMeter to run TorchServe through the paces and collect benchmark data
+
+**Default Handlers**
+
+* [Image Classifier](../ts/torch_handler/image_classifier.py) - This handler takes an image and returns the name of object in that image
+* [Text Classifier](../ts/torch_handler/text_classifier.py) - This handler takes a text (string) as input and returns the classification text based on the model vocabulary
+* [Object Detector](../ts/torch_handler/object_detector.py) - This handler takes an image and returns list of detected classes and bounding boxes respectively
+* [Image Segmenter](../ts/torch_handler/image_segmenter.py) - This handler takes an image and returns output shape as [CL H W], CL - number of classes, H - height and W - width
 
 # Tensorflow 1.*
 
