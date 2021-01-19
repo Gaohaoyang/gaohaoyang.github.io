@@ -186,6 +186,8 @@ tensorboard —logdir=./logs/xor_logs # server
     - 模型管理：支持同时管理多个模型或同一模型的多个版本。你可以使用模型版本回到早期版本，或者将流量路由到不同的版本进行 A/B 测试。
     - 预构建的图像：准备就绪后，可以在基于 CPU 和 NVIDIA GPU 的环境中，部署 TorchServe 的 Dockerfile 和 Docker 镜像。
 - 综上可知，这次的 TorchServe  在推理任务上，将会有很大的使用空间，对于广大开发者来说是一件好事。这一点可以留着以后去慢慢验证。对于这次 Facebook 和 AWS 合作，明显可以看出双方在各取所长，试图打造一个可以反抗谷歌 TensorFlow 垄断的方案。
+- 问题：
+    - 为什么TorchServe采用Java开发，而没有像TensorFlow Serving一样采用更好性能的C++，抑或是采用Golang?
 - TorchServe Architecture
     - ![](https://user-images.githubusercontent.com/880376/83180095-c44cc600-a0d7-11ea-97c1-23abb4cdbe4d.jpg)
 
