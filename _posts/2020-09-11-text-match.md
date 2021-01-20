@@ -653,7 +653,119 @@ PS：
 
 ## 评估
 
+- 准确率，召回率和F值都是利用无序的文当集合进行计算，而搜索引擎返回的结果通常是有序的，因此有必要对这些指标进行扩展以考虑位置信息。
 - MAP，MRR评估方法
+
+### MAP(Mean Average Precision) 考虑位置因素
+
+- MAP(Mean Average Precision)是近年来比较流行的评价指标, MAP在准确率的基础上考虑了位置的因素。
+- 单个主题的平均准确率是每篇相关文档检索出后的准确率的平均值。主集合的平均准确率(MAP)是每个主题的平均准确率的平均值。
+  - ![](https://img-blog.csdn.net/20150213010830760)
+- MAP 是反映系统在全部相关文档上性能的单值指标。系统检索出来的相关文档越靠前(rank 越高)，MAP就可能越高。如果系统没有返回相关文档，则准确率默认为0。
+- 例如：假设有两个主题，主题1有4个相关网页，主题2有5个相关网页。
+  - 某系统
+    - 对于主题1检索出4个相关网页，其rank分别为1,2,4,7；
+    - 对于主题2检索出3个相关网页，其rank分别为1,3,5。
+  - 对于主题1，平均准确率为(1/1+2/2+3/4+4/7)/4=0.83。
+  - 对于主题2，平均准确率为(1/1+2/3+3/5+0+0)/5=0.45。
+  - 则MAP=(0.83+0.45)/2=0.64。
+- 总结：MAP是顺序敏感的召回
+
+- 代码
+
+```python
+def AP(ranked_list, ground_truth):
+    """Compute the average precision (AP) of a list of ranked items
+    """
+    hits = 0
+    sum_precs = 0
+    for n in range(len(ranked_list)):
+        if ranked_list[n] in ground_truth:
+            hits += 1
+            sum_precs += hits / (n + 1.0)
+    if hits > 0:
+        return sum_precs / len(ground_truth)
+    else:
+        return 0
+```
+
+
+### NDCG(Normalized Discounted Cumulative Gain)归一化折扣累计增益
+
+- DCG的两个思想：
+  - 1、高关联度的结果比一般关联度的结果更影响最终的指标得分；
+  - 2、有高关联度的结果出现在更靠前的位置的时候，指标会越高；
+- **累计增益**（CG）
+  - CG，cumulative gain，是DCG的前身，只考虑到了相关性的关联程度，没有考虑到位置的因素。它是一个搜素结果相关性分数的总和。
+- **折损累计增益**（DCG）
+  - DCG， Discounted 的CG，就是在每一个CG的结果上处以一个折损值，为什么要这么做呢？目的就是为了让排名越靠前的结果越能影响最后的结果。假设排序越往后，价值越低。到第i个位置的时候，它的价值是 1/log2(i+1)
+- Ideal DCG(IDCG)：
+  - IDCG是理想情况下的DCG，即对于一个查询语句和p来说，DCG的最大值。
+- **归一化折损累计增益**（NDCG）
+  - NDCG， Normalized 的DCG，由于搜索结果随着检索词的不同，返回的数量是不一致的，而DCG是一个累加的值，没法针对两个不同的搜索结果进行比较，因此需要归一化处理，这里是处以IDCG。
+  - IDCG为理想情况下最大的DCG值
+- 摘自：[搜索评价指标NDCG](https://blog.csdn.net/jingshuiliushen_zj/article/details/83014009)
+
+- 在MAP中，四个文档和query要么相关，要么不相关，也就是相关度非0即1。 value = 0/1
+- NDCG中改进了下，相关度分成从0到r的r+1的等级(r可设定)。value = 2^(r-1)
+  - 当取r=5时，等级设定如下图所示：
+  - ![](https://images0.cnblogs.com/blog/397158/201308/16151643-60613296a66248bd86688b336840b523.png)
+- 对于排在结位置n处的NDCG的计算公式
+  - ![](https://images0.cnblogs.com/blog/397158/201308/16151624-5a269a399e064326b7f50c5e9b5a0cfe.png)
+- query={abc}，返回下图左列的Ranked List(URL)，当假设用户的选择与排序结果无关(即每一级都等概率被选中)，则生成的累计增益值如下图最右列所示
+  - ![](https://images0.cnblogs.com/blog/397158/201308/16151742-69d786c85a7d4bf99eebfd383106ec31.png)
+- 考虑到一般情况下用户会优先点选排在前面的搜索结果，所以应该引入一个折算因子(discounting factor): log(2)/log(1+rank)。这时将获得DCG值(Discounted Cumulative Gain)如下如所示
+  - ![](https://images0.cnblogs.com/blog/397158/201308/16151742-69d786c85a7d4bf99eebfd383106ec31.png)
+- 为了使不同等级上的搜索结果的得分值容易比较，需要将DCG值归一化的到NDCG值。操作如下图所示，首先计算理想返回结果List的DCG值：
+  - ![](https://images0.cnblogs.com/blog/397158/201308/16151802-897f63e8cbe54b359a6536301accf255.png)
+- 用DCG/MaxDCG就得到NDCG值
+  - ![](https://images0.cnblogs.com/blog/397158/201308/16151827-dbe371552d3e4897a8d0870b4d3ab11a.png)
+- 代码
+
+```python
+# ndcg
+def get_dcg(y_pred, y_true, k):
+    #注意y_pred与y_true必须是一一对应的，并且y_pred越大越接近label=1(用相关性的说法就是，与label=1越相关)
+    df = pd.DataFrame({"y_pred":y_pred, "y_true":y_true})
+    df = df.sort_values(by="y_pred", ascending=False)  # 对y_pred进行降序排列，越排在前面的，越接近label=1
+    df = df.iloc[0:k, :]  # 取前K个
+    dcg = (2 ** df["y_true"] - 1) / np.log2(np.arange(1, df["y_true"].count()+1) + 1) # 位置从1开始计数
+    dcg = np.sum(dcg)
+    
+def get_ndcg(df, k):
+    # df包含y_pred和y_true
+    dcg = get_dcg(df["y_pred"], df["y_true"], k)
+    idcg = get_dcg(df["y_true"], df["y_true"], k)
+    ndcg = dcg / idcg
+    return ndcg
+```
+
+
+
+### MRR(Mean Reciprocal Rank) 取倒数体现位置
+
+- 把标准答案在被评价系统给出结果中的排序取倒数作为它的准确度，再对所有的问题取平均。
+  - value = 1/pos
+- 举个例子：有3个query如下图所示
+  - ![](https://images0.cnblogs.com/blog/397158/201308/16152008-50ddb12c58a74b71a2b880f71cb3b024.png)
+  - MRR值为：(1/3 + 1/2 + 1)/3 = 11/18=0.61
+- 代码
+
+```python
+def average_precision(gt, pred):
+  if not gt:
+    return 0.0
+
+  score = 0.0
+  num_hits = 0.0
+  for i,p in enumerate(pred):
+    if p in gt and p not in pred[:i]:
+      num_hits += 1.0
+      score += num_hits / (i + 1.0)
+
+  return score / max(1.0, len(gt))
+  ```
+
 
 ## 思路
 
