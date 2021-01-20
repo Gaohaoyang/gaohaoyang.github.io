@@ -556,6 +556,17 @@ from IPython.display import Image
 Image(img_file)
 ```
 
+# java
+
+- 【2021-1-20】
+- 安装：先装[java](https://www.oracle.com/java/technologies/javase-jdk15-downloads.html), open JDK[清华源下载](https://mirror.tuna.tsinghua.edu.cn/AdoptOpenJDK/15/jdk/x64/linux/)
+- 配置环境变量：vim /etc/profile
+   - export JAVA_HOME=/usr/local/src/jdk1.8.0_171 （根据自己的完整路径修改）
+   - export PATH=$PATH:$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH
+   - export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
+- 查看版本：java -version
+
+
 # python开发环境
 
 - [Cython中def,cdef,cpdef的区别](https://www.cnblogs.com/lidyan/p/7474244.html)
