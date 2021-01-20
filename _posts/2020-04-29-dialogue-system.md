@@ -560,6 +560,32 @@ Image('fsm.png')
 
 ![](https://note.youdao.com/yws/public/resource/c388d7862c02facd6c2a03d6e17d9180/xmlnote/DED0DC29757E48DE9F55FB83A846A957/3963)
 
+
+### 【2021-1-20】[How to Build an Open-Domain Question Answering System?](https://lilianweng.github.io/lil-log/2020/10/29/open-domain-question-answering.html)
+
+- Open-domain Question Answering (ODQA) is a type of language tasks, asking a model to produce answers to factoid questions in natural language. The true answer is objective, so it is simple to evaluate model performance.
+- For example,
+  - Question: What did Albert Einstein win the Nobel Prize for?
+  - Answer: The law of the photoelectric effect.
+- 开放域问答分类难度：
+- When considering different types of open-domain questions, I like the classification by [Lewis, et al., 2020](https://arxiv.org/abs/2008.02637), in increasing order of difficulty:
+  - （1）准确记忆训练时期的回答：A model is able to correctly memorize and respond with the answer to a question that has been seen at training time.
+  - （2）测试时可以用已有语料回答新问题：A model is able to answer novel questions at test time and choose an answer from the set of answers it has seen during training.
+  - （3）回答训练语料意外的问题：A model is able to answer novel questions which have answers not contained in the training dataset.
+- 三种类型的图解 Overview of three frameworks discussed in this post
+  - ![](https://lilianweng.github.io/lil-log/assets/images/QA-summary.png)
+- （1）Open-book QA: Retriever-Reader
+  - The retriever-reader QA framework combines information retrieval with machine reading comprehension
+  - ![](https://lilianweng.github.io/lil-log/assets/images/QA-retriever-reader.png)
+- （2）Open-book QA: Retriever-Generator
+  - The retriever + generator QA framework combines a document retrieval system with a general language model.
+  - ![](https://lilianweng.github.io/lil-log/assets/images/QA-retiever-generator.png)
+- （3）Closed-book QA: Generative Language Model
+  - The pre-trained language models produce free text to respond to questions, no explicit reading comprehension.
+  - ![](https://lilianweng.github.io/lil-log/assets/images/T5_SSM.png)
+- summary
+  - ![](https://lilianweng.github.io/lil-log/assets/images/QA-results.png)
+
 ### KB-QA
 
 - 【2020-4-22】[KB-QA研究进展](https://www.jianshu.com/p/92ea00b7a4cc)
