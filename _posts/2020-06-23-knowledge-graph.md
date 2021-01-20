@@ -346,6 +346,7 @@ Instructions for connecting to the following graph databases:
 ## Neo4j
 
 - [Neo4J](https://neo4j.com/download/)是由Java实现的开源图数据库。自2003年开始开发，直到2007年正式发布第一版，并托管于GitHub上。在线[demo](http://console.neo4j.org/)
+  - 安装：先装[java](https://www.oracle.com/java/technologies/javase-jdk15-downloads.html), open JDK[清华源下载](https://mirror.tuna.tsinghua.edu.cn/AdoptOpenJDK/15/jdk/x64/linux/)
 - Neo4J支持ACID，集群、备份和故障转移。目前Neo4J最新版本为3.5，分为社区版和企业版，社区版只支持单机部署，功能受限。企业版支持主从复制和读写分离，包含可视化管理工具。
 
 - 标记属性图模型
