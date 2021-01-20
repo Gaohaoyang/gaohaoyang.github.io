@@ -5,8 +5,8 @@ title: "神经网络架构搜索-Neural Architecture Search"
 date: 2021-01-21 00:14:00
 tags:  AutoML NAS 强化学习
 categories: 深度学习
-excerpt: 情感计算研究就是试图创建一种能感知、识别和理解人的情感，并能针对人的情感做出智能、灵敏、友好反应的计算系统
-author: 鹤啸九天
+excerpt: NAS详解
+author: lil-log
 mathjax: true
 ---
 
