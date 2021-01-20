@@ -345,7 +345,7 @@ Instructions for connecting to the following graph databases:
 
 ## Neo4j
 
-- Neo4J是由Java实现的开源图数据库。自2003年开始开发，直到2007年正式发布第一版，并托管于GitHub上。
+- [Neo4J](https://neo4j.com/download/)是由Java实现的开源图数据库。自2003年开始开发，直到2007年正式发布第一版，并托管于GitHub上。在线[demo](http://console.neo4j.org/)
 - Neo4J支持ACID，集群、备份和故障转移。目前Neo4J最新版本为3.5，分为社区版和企业版，社区版只支持单机部署，功能受限。企业版支持主从复制和读写分离，包含可视化管理工具。
 
 - 标记属性图模型
@@ -354,6 +354,129 @@ Instructions for connecting to the following graph databases:
   - 属性
   - 标签
 - ![](https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/uploads/20170731095054/Property-Graph-Concepts-Simple.svg)
+- 代码
+
+```python
+# coding: utf-8
+"""
+    Neo4j的python接口测试
+    参考:https://blog.csdn.net/macb007/article/details/79044460
+    时间：2018-4-23, wangqiwen
+"""
+#import random
+import json
+from py2neo import Graph#pylint:disable=import-error
+#from py2neo import Graph, Node, Relationship
+import numpy as np
+import pandas as pd
+ 
+def main():#pylint:disable=too-many-statements,too-many-branches,too-many-locals
+    """
+        测试示例,http://10.84.129.206:8090/browser/
+    """
+    data_file = '../../../bot/graph.xlsx'
+    data = {}
+    #实体、关系、相似词
+    sheet_list = ['entities', 'relations', 'sim', 'freq']
+    for sheet in sheet_list:
+        data[sheet] = pd.read_excel(open(data_file, 'rb'), sheetname=sheet)
+    #print data['sim']
+    #初始化
+    host = '10.84.129.206'
+    host = 'localhost'
+    host = '172.23.201.167'
+    graph = Graph("http://%s:8090"%(host), username="neo4j", password="wqw")
+    #graph = Graph("http://localhost:7474", username="neo4j", password="neo4j")
+    #(1)创建实体
+    cur_data_list = data['entities'].values.tolist()
+    #唯一约束(name唯一)
+    cql_delete = 'MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n,r'#删除所有节点和关系
+    graph.run(cql_delete)
+    #print(cur_data_list)
+    for entity in cur_data_list:
+        print json.dumps(entity, ensure_ascii=False)
+        cql_create = 'MERGE (n:%s {name:"%s",type:"%s"})'%(entity[1], entity[0], entity[1])
+        graph.run(cql_create)
+        #print u'执行命令:%s'%(cql)
+    for label in ['noun', 'verb', 'status', 'event']:
+        cql = 'CREATE CONSTRAINT ON (n:%s) ASSERT n.name IS UNIQUE'%(label)
+        graph.run(cql)
+    #(2)相似词(synonym)
+    cur_data_list = data['sim'].values.tolist()
+    #match (a:Person),(b:Person) where a.name="zhangs" and b.name="lisi"  create (a)-[r:RELTYPE]->(b)#pylint:disable=line-too-long
+    #match (charlie:Person {name:"Charlie"}),(wall:Movie {title:"Wall"}) merge (charlie)-[r:ACTED_AT]->(wall)  return r;#pylint:disable=line-too-long
+    for sim in cur_data_list:
+        #[住校 注销]
+        if len(sim) < 2 or sim[0] == sim[1]:
+            print u'格式异常(长度不足2或者两个实体相同):%s'%(json.dumps(sim, ensure_ascii=False))
+            continue
+        #同义词对中关键词不存在就创建
+        for node in sim[:2]:
+            cql = 'MATCH (n {name:"%s"}) RETURN n'%(node)
+            result = graph.data(cql)
+            if not result:
+                #cql_create = 'MERGE (n {name:"%s"}) ON CREATE SET n.type=%s,n.name=%s'%(node, 'null', node)
+                cql_create = 'MERGE (m:%s {name:"%s",type:"%s"})'%('null', node, 'null')
+            graph.run(cql_create)
+        #创建同义词关系
+        cql = 'MATCH (a {name:"%s"}), (b {name:"%s"}) MERGE (a)-[r:synonym]->(b)'%(sim[0], sim[1])
+        #cql = 'MERGE (a {name:"%s"}), (b {name:"%s"}) ON CREATE SET () ON MATCH SET (a)-[r:synonym]->(b)'%(sim[0], sim[1])
+        graph.run(cql)
+        print cql
+    #exit(1)
+    #(3)创建关系(关键词连接到标准词再插入关系)
+    cur_data_list = data['relations'].values.tolist()
+    #MATCH (a:noun {name:"服务分"}),(b:status {name:"下降"}) MERGE (a)-[r:can {is_problem:True,weight:0.23}]->(b)
+    for rel in cur_data_list:
+        print json.dumps(rel, ensure_ascii=False)
+        if len(rel) < 3 or rel[0] == rel[1] or rel[2] == 'synonym':
+            print u'格式异常(长度不足3或者两个实体相同/相近):%s'%(json.dumps(rel, ensure_ascii=False))
+            continue
+        is_pro = False
+        if rel[3] is not np.nan:
+            is_pro = True
+        weight = 0
+        if rel[5] is not np.nan:
+            weight = rel[5]
+        #is_problem属性不一定有效
+        #逐个判断是否存在同义词
+        for i, k in enumerate(rel[0:2]):
+            cql_replace = 'MATCH (a {name:"%s"})-[:synonym]->(a1) RETURN a1.name as new'%(k)
+            result = graph.data(cql_replace)
+            #print 'CQL: %s , %s'%(cql_replace, json.dumps(result))
+            if result:
+                rel[i] = result[0]['new']
+        #match (a {name:'账户'})-[r:synonym]->(b)  with b
+        cql = 'MATCH (a {name:"%s"}),(b {name:"%s"}) \
+               MERGE (a)-[r:%s {%s:%s, weight:%s}]->(b)'%(rel[0], rel[1], rel[2], rel[3], is_pro, weight)
+        #if np.isnan(rel[3]):
+        if rel[3] is np.nan:
+            #print u'===> 替换:%s(%s),%s(%s),%s'%(rel[3],type(rel[3]),np.nan,type(np.nan),is_pro)
+            cql = cql.replace('%s:%s, '%(rel[3], is_pro), '')
+        print cql
+        graph.run(cql)
+    #(4)词频信息
+    cur_data_list = data['freq'].values.tolist()
+    #merge (keanu:Person {name:"Keanu"}) on create set keanu.created=timestamp() on match set keanu.lastSeen=timestamp() return keanu;
+    for item in cur_data_list:
+        #[注销 4654]
+        cql_replace = 'MATCH (a {name:"%s"})-[:synonym]->(a1) RETURN a1.name as new'%(item[0])
+        result = graph.data(cql_replace)
+        #print 'CQL: %s , %s'%(cql_replace, json.dumps(result))
+        if result:
+            item[0] = result[0]['new']
+        cql = 'MERGE (a {name:"%s"}) ON MATCH SET a.freq = %s '%(item[0], item[1])
+        #cql = 'MERGE (a {name:"%s"}) ON CREATE SET a.freq = %s ON MATCH SET a.freq = %s '%(item[0], item[1], item[1])
+        graph.run(cql)
+        print cql
+    #查询
+    result = graph.data('match (n) return n')
+    print json.dumps(result, ensure_ascii=False)
+ 
+if __name__ == '__main__':
+    main()
+```
+
 
 ### Cypher
 
