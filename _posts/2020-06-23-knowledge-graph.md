@@ -371,7 +371,7 @@ Instructions for connecting to the following graph databases:
 """
 #import random
 import json
-from py2neo import Graph#pylint:disable=import-error
+from py2neo import Graph #pylint:disable=import-error
 #from py2neo import Graph, Node, Relationship
 import numpy as np
 import pandas as pd
@@ -447,14 +447,14 @@ def main():#pylint:disable=too-many-statements,too-many-branches,too-many-local
         #is_problem属性不一定有效
         #逐个判断是否存在同义词
         for i, k in enumerate(rel[0:2]):
-            cql_replace = 'MATCH (a {name:"%s"})-[:synonym]->(a1) RETURN a1.name as new'%(k)
+            cql_replace = 'MATCH (a {name:"%s" } )-[:synonym]->(a1) RETURN a1.name as new'%(k)
             result = graph.data(cql_replace)
             #print 'CQL: %s , %s'%(cql_replace, json.dumps(result))
             if result:
                 rel[i] = result[0]['new']
         #match (a {name:'账户'})-[r:synonym]->(b)  with b
-        cql = 'MATCH (a {name:"%s"}),(b {name:"%s"}) \
-               MERGE (a)-[r:%s {%s:%s, weight:%s}]->(b)'%(rel[0], rel[1], rel[2], rel[3], is_pro, weight)
+        cql = 'MATCH (a { name:"%s" }),(b { name:"%s" }) \
+               MERGE (a)-[r:%s { %s:%s, weight:%s }]->(b)'%(rel[0], rel[1], rel[2], rel[3], is_pro, weight)
         #if np.isnan(rel[3]):
         if rel[3] is np.nan:
             #print u'===> 替换:%s(%s),%s(%s),%s'%(rel[3],type(rel[3]),np.nan,type(np.nan),is_pro)
@@ -466,12 +466,12 @@ def main():#pylint:disable=too-many-statements,too-many-branches,too-many-local
     #merge (keanu:Person {name:"Keanu"}) on create set keanu.created=timestamp() on match set keanu.lastSeen=timestamp() return keanu;
     for item in cur_data_list:
         #[注销 4654]
-        cql_replace = 'MATCH (a {name:"%s"})-[:synonym]->(a1) RETURN a1.name as new'%(item[0])
+        cql_replace = 'MATCH (a { name:"%s" })-[:synonym]->(a1) RETURN a1.name as new'%(item[0])
         result = graph.data(cql_replace)
         #print 'CQL: %s , %s'%(cql_replace, json.dumps(result))
         if result:
             item[0] = result[0]['new']
-        cql = 'MERGE (a {name:"%s"}) ON MATCH SET a.freq = %s '%(item[0], item[1])
+        cql = 'MERGE (a { name:"%s" }) ON MATCH SET a.freq = %s '%(item[0], item[1])
         #cql = 'MERGE (a {name:"%s"}) ON CREATE SET a.freq = %s ON MATCH SET a.freq = %s '%(item[0], item[1], item[1])
         graph.run(cql)
         print cql
