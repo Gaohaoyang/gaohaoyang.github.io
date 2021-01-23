@@ -79,6 +79,7 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=48285039&cid=84577011&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
+- 【2021-1-24】李宏毅机器学习知识点[脑图](https://github.com/KaifuZ/ML_mindmap)
 
 ## Google机器学习速成课
 
