@@ -3,7 +3,7 @@ layout: post
 title:  "数据挖掘经验总结-data-mining-note"
 date:   2013-07-31 23:02:00
 categories: 数据挖掘
-tags: 数据挖掘 机器学习 数据分析 陈皓 大数据 增长黑客 数据金字塔 zepplin
+tags: 数据挖掘 机器学习 数据分析 陈皓 大数据 增长黑客 数据金字塔 zepplin hadoop hive tez spark storm
 excerpt: 数据挖掘知识点、经验总结
 author: 鹤啸九天
 mathjax: true
@@ -307,6 +307,102 @@ def cal_pccs(x, y, n):
 
 ## 分析工具
 
+- Hadoop是基础，其中的HDFS提供文件存储，Yarn进行资源管理。在这上面可以运行MapReduce、Spark、Tez等计算框架。
+- MapReduce:是一种离线计算框架，将一个算法抽象成Map和Reduce两个阶段进行处理，非常适合数据密集型计算。
+- Spark:Spark是UC Berkeley AMP lab所开源的类Hadoop MapReduce的通用的并行计算框架，Spark基于map reduce算法实现的分布式计算，拥有Hadoop MapReduce所具有的优点；但不同于MapReduce的是Job中间输出和结果可以保存在内存中，从而不再需要读写HDFS，因此Spark能更好地适用于数据挖掘与机器学习等需要迭代的map reduce的算法。
+- Storm:MapReduce也不适合进行流式计算、实时分析，比如广告点击计算等。Storm是一个免费开源、分布式、高容错的实时计算系统。Storm令持续不断的流计算变得容易，弥补了Hadoop批处理所不能满足的实时要求。Storm经常用于在实时分析、在线机器学习、持续计算、分布式远程调用和ETL等领域
+- Tez: 是基于Hadoop Yarn之上的DAG（有向无环图，Directed Acyclic Graph）计算框架。它把Ｍap/Reduce过程拆分成若干个子过程，同时可以把多个Ｍap/Reduce任务组合成一个较大的DAG任务，减少了Ｍap/Reduce之间的文件存储。同时合理组合其子过程，也可以减少任务的运行时间
+
+### hadoop
+
+- Hadoop1到Hadoop2所做的改变，Hadoop1主要使用MapReduce引擎，到了Hadoop2，基于yarn，可以部署spark，tez等计算引擎，这里MapReduce作为一种引擎实现用的越来越少了，但是作为框架思路，tez本身也是MapReduce的改进。
+- ![](https://pic1.zhimg.com/80/v2-0a4c08d42a525a993571fb6c5bc9d590_1440w.jpg)
+- MapReduce是一种编程模型，用于大规模数据集（大于1TB）的并行运算。概念"Map（映射）"和"Reduce（归约）"。
+- ![](https://images2015.cnblogs.com/blog/16956/201603/16956-20160327104341026-1321810730.jpg)
+
+
+### hive
+
+- 待定
+
+### spark sql
+
+- SparkSql常用命令操作
+1. 进入spark-shell模式
+    - spark-shell --master yarn --executor-memory 4g --num-executors 3 --executor-cores 4
+2. spark sql查询Hive数据库
+    - import spark.sql
+    - sql("use database_name”)
+    - sql("show tables").show
+3. 读取hdfs文件数据
+    - val data = spark.read.format("csv").option("sep", ",").option("header","true").load("file_path + file_name")
+4. 存储文件(默认hdfs路径)
+    - data.write.format("csv").save("/data/....")
+5. 读取hive表数据
+    - val res = spark.sql("select * from  table_1 where day='20181230'")
+6. 注册成表
+    - res.registerTempTable(“Res")
+7. 更换属性
+    - val ss = data.selectExpr("_c0 as like","_c1 as session_id","_c2 as uid1”)
+8. 删除某列属性
+    - val s1 = data.drop("_c0”)
+9. 一列转换成多列
+    - val df2 =df1.withColumn("_corrupt_record",split(col("_corrupt_record"),","))
+    - .select(col("_corrupt_record").getItem(0).as("uid"),col("_corrupt_record").getItem(1).as("number")) 
+10. 过滤数字(三个横线)
+    - val uid = df2.filter($"number"===1)
+11. 过滤空值
+    - val s_1 = res.filter("like is not null").filter("session_id is not null”)
+
+
+- Spark SQL CLI是一个很方便的工具，可以用来在本地模式下运行Hive的元数据服务，并且通过命令行执行针对Hive的SQL查询。但是要注意的是，Spark SQL CLI是不能与Thrift JDBC server进行通信的。如果要启动Spark SQL CLI，只要执行Spark的bin目录下的spark-sql命令即可
+- sh ./bin/spark-sql --jars /usr/local/hive/lib/mysql-connector-java-5.1.17.jar
+- 同样要注意的是，必须将我们的hive-site.xml文件放在Spark的conf目录下。也可以通过执行./bin/spark-sql --help命令，来获取该命令的所有帮助选项。
+- spark sql命令模板
+
+
+```sql
+spark-sql 
+--conf spark.scheduler.listenerbus.eventqueue.size=90000000
+--driver-cores 4 
+--driver-memory 10g 
+--executor-memory 80g 
+--num-executors 40 
+--executor-cores 20 
+--master yarn << EOF
+
+**HIVESQL**
+
+EOF
+```
+
+### Tez
+
+- Tez是Apache开源的支持DAG作业的计算框架，它直接源于MapReduce框架，核心思想是将Map和Reduce两个操作进一步拆分，即Map被拆分成Input、Processor、Sort、Merge和Output， Reduce被拆分成Input、Shuffle、Sort、Merge、Processor和Output等，这样，这些分解后的元操作可以任意灵活组合，产生新的操作，这些操作经过一些控制程序组装后，可形成一个大的DAG作业。总结起来，Tez有以下特点：
+    - （1）Apache二级开源项目（源代码今天发布的）
+    - （2）运行在YARN之上
+    - （3） 适用于DAG（有向图）应用（同Impala、Dremel和Drill一样，可用于替换Hive/Pig等）
+    - ![](https://images2015.cnblogs.com/blog/16956/201603/16956-20160327150439042-1656855042.jpg)
+- MapReduce模型虽然很厉害，但不够灵活，一个简单的join都需要很多骚操作才能完成，又是加标签又是笛卡尔积。那有人就说我就是不想这么干那怎么办呢？Tez应运起，图飞入MR。
+    - [Tez简介](https://zhuanlan.zhihu.com/p/79384822)
+- Tez采用了DAG（有向无环图）来组织MR任务（DAG中一个节点就是一个RDD，边表示对RDD的操作）。它的核心思想是把将Map任务和Reduce任务进一步拆分，Map任务拆分为Input-Processor-Sort-Merge-Output，Reduce任务拆分为Input-Shuffer-Sort-Merge-Process-output，Tez将若干小任务灵活重组，形成一个大的DAG作业。
+    - 图中蓝色框表示Map任务，绿色框表示Reduce任务，云图表示写动作，可以看出，Tez去除了MR中不必要的写过程和Map，形成一张大的DAG图，在数据处理过程中没有网hdfs写数据，直接向后继节点输出，从而提升了效率。
+- ![](https://pic4.zhimg.com/80/v2-ee3a5c71c8fb8b452edc5b8c3394374f_1440w.jpg)
+
+- TEZ的构成
+- Tez对外提供了6种可编程组件，分别是：
+    - Input：对输入数据源的抽象，它解析输入数据格式，并吐出一个个Key/value
+    - Output：对输出数据源的抽象，它将用户程序产生的Key/value写入文件系统
+    - Paritioner：对数据进行分片，类似于MR中的Partitioner
+    - Processor：对计算的抽象，它从一个Input中获取数据，经处理后，通过Output输出
+    - Task：对任务的抽象，每个Task由一个Input、Ouput和Processor组成
+    - Maser：管理各个Task的依赖关系，并按顺依赖关系执行他们
+- 除了以上6种组件，Tez还提供了两种算子，分别是Sort（排序）和Shuffle（混洗），为了用户使用方便，它还提供了多种Input、Output、Task和Sort的实现，具体如下：
+    - Input实现：LocalMergedInput（文件本地合并后作为输入），ShuffledMergedInput（远程拷贝数据且合并后作为输入）
+    - Output实现：InMemorySortedOutput（内存排序后输出），LocalOnFileSorterOutput（本地磁盘排序后输出），OnFileSortedOutput（磁盘排序后输出）
+    - Task实现：RunTimeTask（非常简单的Task，基本没做什么事）
+    - Sort实现：DefaultSorter（本地数据排序），InMemoryShuffleSorter（远程拷贝数据并排序）
+
 ### Zeppelin是什么?
 
 ![](https://img-blog.csdn.net/20170518170538169)
@@ -341,7 +437,9 @@ def cal_pccs(x, y, n):
 println("Hello "+z.input("name"))
 ```
 
+### storm
 
+- 待定
 
 # [数据的游戏：冰与火](https://coolshell.cn/articles/10192.html)
 

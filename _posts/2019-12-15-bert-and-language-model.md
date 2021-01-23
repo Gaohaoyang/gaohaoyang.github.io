@@ -211,7 +211,7 @@ doc_vecs = bc.encode(['First do it', 'then do it right', 'then do it better'])
 ```
 - doc_vecs 是一个 numpy.ndarray ，它的每一行是一个固定长度的句子向量，长度由输入句子的最大长度决定。如果要指定长度，可以在启动服务使用 max_seq_len 参数，过长的句子会被从右端截断。
 
-- BERT 的另一个特性是可以获取一对句子的向量，句子之间使用 ||| 作为分隔，例如：
+- BERT 的另一个特性是可以获取一对句子的向量，句子之间使用 \|\|\| 作为分隔，例如：
 
 ```python
 bc.encode(['First do it ||| then do it right'])
@@ -222,11 +222,14 @@ bc.encode(['First do it ||| then do it right'])
 - 启动服务时将参数 pooling_strategy 设置为 None ：
 
 ```shell
+# bert服务端
 bert-serving-start -pooling_strategy NONE -model_dir /tmp/english_L-12_H-768_A-12/
+
 ```
 - 这时的返回是语料中每个 token 对应 embedding 的矩阵
 
 ```python
+# 客户端
 bc = BertClient()
 vec = bc.encode(['hey you', 'whats up?'])
 

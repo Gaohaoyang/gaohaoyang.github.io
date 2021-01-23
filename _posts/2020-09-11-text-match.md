@@ -18,6 +18,7 @@ mathjax: true
 
 - [文本匹配（语义相似度/行为相关性）技术综述](http://www.manongjc.com/article/43533.html)
 - 文本匹配方法系列：[讲在前面](https://zhuanlan.zhihu.com/p/85088152)，[单语义匹配模型（1）](https://zhuanlan.zhihu.com/p/83574416)
+- [NLP之文本匹配及语义匹配应用介绍](https://blog.csdn.net/ling620/article/details/95468908)
 
 ## 检索、分类与匹配
 
@@ -34,6 +35,33 @@ mathjax: true
 
 - 文本匹配技术，不像 MT、MRC、QA 等属于 end-to-end 型任务，通常以文本相似度计算、文本相关性计算的形式，在某应用系统中起核心支撑作用，比如搜索引擎、智能问答、知识检索、信息流推荐等。
 - 文本匹配任务的目标是：给定一个query和一些候选的documents，从这些documents中找出与query最匹配的一个或者按照匹配度排序；
+
+## 文本匹配应用场景
+
+- 文本匹配任务汇总
+
+![](https://img-blog.csdn.net/20180705111011893?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RpbmdfeGlhb2ZlaQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+
+### 1.复述识别（paraphrase identification）
+
+又称释义识别，也就是判断两段文本是不是表达了同样的语义，即是否构成复述（paraphrase）关系。有的数据集是给出相似度等级，等级越高越相似，有的是直接给出0/1匹配标签。这一类场景一般建模成分类问题。
+
+### 2.文本蕴含识别（Textual Entailment）
+
+文本蕴含属于NLI（自然语言推理）的一个任务，它的任务形式是：给定一个前提文本（text），根据这个前提去推断假说文本（hypothesis）与文本的关系，一般分为蕴含关系（entailment）和矛盾关系（contradiction），蕴含关系（entailment）表示从text中可以推断出hypothesis；矛盾关系（contradiction）即hypothesis与text矛盾。文本蕴含的结果就是这几个概率值。
+
+### 3.问答（QA）
+
+问答属于文本匹配中较为常见的任务了，这个任务也比较容易理解，根据Question在段落或文档中查找Answer，但是在现在这个问题常被称为阅读理解，还有一类是根据Question查找包含Answer的文档，QA任务常常会被建模成分类问题，但是实际场景往往是从若干候选中找出正确答案，而且相关的数据集也往往通过一个匹配正例+若干负例的方式构建，因此往往建模成ranking问题。
+
+### 4.对话（Conversation）
+
+对话实际上跟QA有一些类似，但是比QA更复杂一些，它在QA的基础上引入了历史轮对话，在历史轮的限制下，一些本来可以作为回复的候选会因此变得不合理。比如，历史轮提到过你18岁了，那么对于query”你今天在家做什么呢“，你就不能回复“我在家带孙子”了。该问题一般使用Recall_n@k（在n个候选中，合理回复出现在前k个位置就算召回成功）作为评价指标，有时也会像问答匹配一样使用MAP、MRR等指标。
+
+### 5.信息检索（IR）
+
+信息检索也是一个更为复杂的任务，往往会有Query——Tittle，Query——Document的形式，而且更为复杂的Query可能是一个Document，变成Document——Document的形式，相对于其他匹配任务而言，相似度计算、检索这些只是一个必须的过程，更重要的是需要排序，一般先通过检索方法召回相关项，再对相关项进行rerank。ranking问题就不能仅仅依赖文本这一个维度的feature了，而且相对来说判断两个文本的语义匹配的有多深以及关系有多微妙就没那么重要了。
 
 ## 面临的问题
 
@@ -239,6 +267,72 @@ curl -d "我是蓝翔 技工拖拉机学院手扶拖拉机专业的。" "http://
   - SSEI：sentence semantic equivalent identification，是判断两文本在语义层面是否一致；
   - IR-QA：是给定一个 query，直接从一堆 answer 中寻找最匹配的，省略了 FAQ 中 question-answer pair 的 question 中转。
 
+- 判断两段文本是不是表达了同样的语义，即是否构成复述（paraphrase）关系。有的数据集是给出相似度等级，等级越高越相似（这种更合理一些），有的是直接给出0/1匹配标签。这一类场景一般建模成分类问题。
+
+### 一 相似度计算&复述识别（textual similarity&paraphrase identification）
+代表性数据集：
+- [SemEval STS Task](https://ixa2.si.ehu.es/stswiki/index.php/STSbenchmark)：从2012年开始每年都举办的经典NLP比赛。这个评测将两段文本的相似度程度表示为0.0~5.0，越靠近0.0表示这两段文本越不相关，越靠近5.0表示越相似。使用皮尔逊相关系数（Pearson Correlation）来作为评测指标。
+- [Quora Question Pairs (QQP)](https://www.quora.com/q/quoradata/First-Quora-Dataset-Release-Question-Pairs)：这个数据集是Quora发布的。相比STS，这个数据集规模明显大，包含400K个question-question pairs，标签为0/1，代表两个问句的意思是否相同。既然建模成了分类任务，自然可以使用准确率acc和f1这种常用的分类评价指标啦。（知乎什么时候release一个HuQP数据集(￣∇￣)）
+- [MSRP/MRPC](https://www.microsoft.com/en-us/download/details.aspx%3Fid%3D52398)：这是一个更标准的复述识别数据集。在QQP数据集中文本都是来自用户提问的问题，而MRPC里的句子则是来源于新闻语料。不过MRPC规模则要小得多，只有5800个样本（毕竟是2005年release的数据集，而且人工标注，所以可以理解╮(￣▽￣"")╭）。跟QQP一样，MRPC一般也用acc或f1这种分类指标评估。
+- [PPDB](https://paraphrase.org/%23/download)：这个paraphrase数据集是通过一种ranking方法来远程监督[]做出来的，所以规模比较大。文本粒度包含lexical level（单词对）、phrase level（短语对）和syntactic level（带句法分析标签）。而且不仅包含英文语料，还有法语、德语、西班牙语等15种语言（为什么没有中文！）。语料库规模从S号、M号一直到XXXL号让用户选择性下载也是很搞笑了，其中短语级就有7000多万，句子级则有2亿多。由于语料规模太大，标注质量还可以，因此甚至可以拿来训练词向量[1]。
+
+### 二 问答匹配（answer selection）
+
+- 问答匹配问题虽然可以跟复述识别一样强行建模成分类问题，但是实际场景往往是从若干候选中找出正确答案，而且相关的数据集也往往通过一个匹配正例+若干负例的方式构建，因此往往建模成ranking问题。
+- 在学习方法上，不仅可以使用分类的方法来做（在ranking问题中叫pointwise learning），还可以使用其他learning-to-rank的学习方法，如pairwise learning（”同question的一对正负样本”作为一个训练样本）和listwise learning（”同question的全部样本排好序“作为一个训练样本） 。因此，相应的评价指标也多使用MAP、MRR这种ranking相关的指标。
+- 注意：这并不代表pointwise matching这种分类做法就一定表现更弱，详情见相关papers
+代表性数据集如：
+  - [TrecQA](https://trec.nist.gov/data/qa.html)：包含56k的问答对（但是只有1K多的问题，负样本超级多），不过原始的数据集略dirty，包含一些无答案样本和只有正样本以及只有负样本的样本（什么鬼句子），所以做research的话注意一下，有些paper是用的clean版本（滤掉上述三类样本），有的是原始版本，一个数据集强行变成了两个track。
+  - [WikiQA](https://link.zhihu.com/?target=https%3A//www.microsoft.com/en-us/download/details.aspx%3Fid%3D52419)：这也是个小数据集，是微软从bing搜索query和wiki中构建的。包含10K的问答对（1K多的问题），样本正负比总算正常了些。paper[2]
+  - [QNLI](https://firebasestorage.googleapis.com/v0/b/mtl-sentence-representations.appspot.com/o/data%252FQNLIv2.zip%3Falt%3Dmedia%26token%3D6fdcf570-0fc5-4631-8456-9505272d1601)：总算有大规模数据集了，这个是从SQuAD数据集改造出来的，把context中包含answer span的句子作为匹配正例，其他作为匹配负例，于是就有了接近600K的问答对（包含接近100K的问题）。
+
+### 三 对话匹配（response selection）
+
+对话匹配可以看作进阶版的问答匹配，主要有两方面升级。
+
+一方面，对话匹配在问答匹配的基础上引入了历史轮对话，在历史轮的限制下，一些本来可以作为回复的候选会因此变得不合理。比如，历史轮提到过你18岁了，那么对于query”你今天在家做什么呢“，你就不能回复“我在家带孙子”了。
+
+ps：一个价值五毛钱的例子(¬_¬)
+另一方面，对于一个query，对话回复空间要远比问题答案空间大得多，对于问答类query，正确答案往往非常有限，甚至只有一个，但是对话类query却往往有一大串合理的回复，甚至有一大堆的万能回复比如“哦”，“好吧”，“哈哈哈”。很多时候的回复跟query在lexical level上基本没有交集，因此对话匹配模型更难训一些，数据质量稍差就难以收敛。因此做够了问答匹配，来做做对话匹配还是比较意思滴。
+
+该问题一般使用Recall_n@k（在n个候选中，合理回复出现在前k个位置就算召回成功）作为评价指标，有时也会像问答匹配一样使用MAP、MRR等指标。
+
+代表性数据集：
+
+UDC：Ubuntu Dialogue Corpus是对话匹配任务最最经典的数据集，包含1000K的多轮对话（对话session），每个session平均有8轮对话，不仅规模大而且质量很高，所以近些年的对话匹配工作基本都在这上面玩。paper[3]
+Douban Conversation Corpus：硬要给UDC挑毛病的话，就是UDC是在ubuntu技术论坛这种限定域上做出来的数据集，所以对话topic是非常专的。所以 @吴俣 大佬release了这个开放域对话匹配的数据集，而且由于是中文的，所以case study的过程非常享受。paper[4]
+
+### 四、自然语言推理/文本蕴含识别（Natural Language Inference/Textual Entailment）
+
+NLI，或者说RTE任务的目的就是判断文本A与文本B是否构成语义上的推理/蕴含关系：即，给定一个描述「前提」的句子A和一个描述「假设」的句子B，若句子A描述的前提下，若句子B为真，那么就说文本A蕴含了B，或者说A可以推理出B；若B为假，就说文本A与B互相矛盾；若无法根据A得出B是真还是假，则说A与B互相独立。
+
+显然该任务可以看作是一个3-way classification的任务，自然可以使用分类任务的训练方法和相关评价指标。当然也有一些早期的数据集只判断文本蕴含与否，这里就不贴这些数据集了。
+
+代表性数据集：
+- [SNLI](https://nlp.stanford.edu/projects/snli/)：Stanford Natural Language Inference数据集是NLP深度学习时代的标志性数据集之一，2015年的时候发布的，57万样本纯手写和手工标注，可以说业界良心了，成为了当时NLP领域非常稀有的深度学习方法试验场。paper[5]
+- [MNLI](https://www.nyu.edu/projects/bowman/multinli)：Multi-Genre Natural Language Inference数据集跟SNLI类似，可以看做SNLI的升级版，包含了不同风格的文本（口语和书面语），包含433k的句子对
+- [XNLI](https://www.nyu.edu/projects/bowman/xnli)：全称是Cross-lingual Natural Language Inference。看名字也能猜到这个是个多语言的数据集，XNLI是在MNLI的基础上将一些样本翻译成了另外14种语言（包括中文）。
+
+### 五、信息检索中的匹配
+
+除上述4个场景之外，还有query-title匹配、query-document匹配等信息检索场景下的文本匹配问题。不过，信息检索场景下，一般先通过检索方法召回相关项，再对相关项进行rerank。对这类问题来说，更重要的是ranking，而不是非黑即白或单纯的selection。ranking问题就不能仅仅依赖文本这一个维度的feature了，而且相对来说判断两个文本的语义匹配的有多深以及关系有多微妙就没那么重要了。
+
+从纯文本维度上来说，q-a、q-r匹配和NLI相关的方法在理论上当然可以套用在query-title问题上；而query-doc问题则更多的是一个检索问题了，传统的检索模型如TFIDF、BM25等虽然是词项（term）level的文本匹配，但是配合下查询扩展，大部分case下已经可以取得看起来不错的效果了。如果非要考虑语义层次的匹配，也可以使用LSA、LDA等主题模型的传统方法。当然啦，强行上深度学习方法也是没问题的，例如做一下query理解，甚至直接进行query-doc的匹配（只要你舍得砸资源部署），相关工作如
+
+DSSM：CIKM2013 | Learning Deep Structured Semantic Models for Web Search using Clickthrough Data
+CDSSM：WWW2014 | Learning Semantic Representations Using Convolutional Neural Networks for Web Search
+HCAN：EMNLP2019 | Bridging the Gap between Relevance Matching and Semantic Matching for Short Text Similarity Modeling
+
+### 六、机器阅读理解问题
+
+同时，还有一些不那么直观的文本匹配任务，例如机器阅读理解（MRC）。这是一个在文本段中找答案片段的问题，换个角度来说就可以建模成带上下文的问答匹配问题（虽然候选有点多╮(￣▽￣"")╭）。代表性数据集如SQuAD系列、MS MARCO、CoQA、NewsQA，分别cover了很多典型的NLP问题：MRC任务建模问题、多文档问题、多轮交互问题、推理问题。因此做匹配的话，相关的代表性工作如BiDAF、DrQA等最好打卡一下的。
+- BiDAF：ICLR2017 | Bidirectional Attention Flow for Machine Comprehension
+- DrQA：ACL2017 | Reading Wikipedia to Answer Open-Domain Questions
+
+PS：
+- 上述各个场景的模型其实差不太多，甚至一些方法直接在多个匹配场景上进行实验，近两年的paper也大多claim自己是一个非常general的匹配框架/模型。因此下面介绍打卡paper的时候就不区分场景啦，而是分成基于表示和基于交互来介绍打卡点。
+- 注意：虽然基于表示的文本匹配方法（一般为Siamese网络结构）与基于交互的匹配方法（一般使用花式的attention完成交互）纷争数年，不过最终文本匹配问题还是被BERT及其后辈们终结了。因此下面两节请带着缅怀历史的心情来打卡，不必纠结paper的细节，大体知道剧情就好。
+
 
 # 解法
 
@@ -283,9 +377,28 @@ curl -d "我是蓝翔 技工拖拉机学院手扶拖拉机专业的。" "http://
 
 # 模型
 
+## （1）传统文本匹配
+
+- 传统的文本匹配技术有BoW、VSM、TF-IDF、 BM25、Jaccord、SimHash等算法，如BM25算法通过网络字段对查询字段的覆盖程度来计算两者间的匹配得分，得分越高的网页与查询的匹配度更好。主要解决词汇层面的匹配问题，或者说词汇层面的相似度问题。而实际上，基于词汇重合度的匹配算法有很大的局限性，原因包括：
+  - 词义局限：“的士”和“出租车”虽然字面上不相似，但实际为同一种交通工具；“苹果”在不同的语境下表示不同的东西，或为水果或为公司
+  - 结构局限：“机器学习”和“学习机器”虽然词汇完全重合，但表达的意思不同。
+  - 知识局限：“秦始皇打Dota”，这句话虽从词法和句法上看均没问题，但结合知识看这句话是不对的。
+- 这表明，对于文本匹配任务，不能只停留在字面匹配层面，更需要语义层面的匹配。而语义层面的匹配，首先面临语义如何表示，如何计算的问题。
+
+## （2）主题模型
+
+- 无监督技术
+- 上世纪90年代逐渐流行起来语义分析技术（Latent Sementic Analysis, LSA），开辟了一个新思路。将语句映射到等长的低维连续空间，可在此隐式的潜在语义空间上进行相似度计算。
+- 此后，又有PLSA（Probabilistic Latent Semantic Analysis）、LDA（Latent Dirichlet Allocation）等更高级的概率模型被设计出来，逐渐形成非常火热的 主题模型 技术方向。
+- 这些技术对文本的语义表示形式简洁、运算方便，较好地弥补了传统词汇匹配方法的不足。不过从效果上来看，这些技术都无法替代字面匹配技术，只能作为字面匹配的有效补充。
+
+## （3）深度语义匹配模型
+
+- 基于神经网络训练出的Word Embedding来进行文本匹配计算，训练方式简洁，所得的词语向量表示的语义可计算性进一步加强。但是只利用无标注数据训练得到的Word Embedding在匹配度计算的实用效果上和主题模型技术相差不大。他们本质都是基于共现信息的训练。另外，Word Embedding本身没有解决短语、句子的语义表示问题，也没有解决匹配的非对称性问题。
+
 有监督深度学习方法，基本可以分为两大类，sentence representation、sentence interaction 级表示方法和交互方法。
-- SE模型：基于 Siamese 网络，表示层后交互计算；
-- SI模型：表示层后进行交互计算。
+- （1）SE模型：基于 Siamese 网络，表示层后交互计算；
+- （2）SI模型：表示层后进行交互计算。
 
 ![](https://picb.zhimg.com/80/v2-fed1956bd44c4a18d1d3622fede50022_720w.jpg)
 
@@ -293,6 +406,19 @@ curl -d "我是蓝翔 技工拖拉机学院手扶拖拉机专业的。" "http://
   - 单语义匹配模型：DSSM（Deep Structured Semantic Models）以及基于此演进的系列模型CLSM/RNN-DSSM
 
 ![](https://pic3.zhimg.com/80/v2-39f58d7ce98f3f6f917da5a7c696d11b_720w.jpg)
+
+- 匹配方法可以分为三类：
+  - （a）基于单语义文档表达的深度学习模型（基于表示）
+    - 基于单语义文档表达的深度学习模型主要思路是，首先将单个文本先表达成一个稠密向量（分布式表达），然后直接计算两个向量间的相似度作为文本间的匹配度。
+  - （b）基于多语义文档表达的深度学习模型（基于交互）
+    - 基于多语义的文档表达的深度学习模型认为单一粒度的向量来表示一段文本不够精细，需要多语义的建立表达，更早地让两段文本进行交互， 然后挖掘文本交互后的模式特征， 综合得到文本间的匹配度。
+  - （c）BERT及其后辈
+
+## 匹配模型汇总
+
+自从深度学习出现以来，文本匹配模型层出不穷，几乎每年都会有一个极具代表性的模型出现。下面列出了十一个较为知名的模型。
+![](https://picb.zhimg.com/v2-a22a3a5c809591e6c3226e4ef1ea2732_r.jpg)
+
 
 - 【2020-12-18】文本匹配模型归纳总结
   - [DSSM详解](https://blog.csdn.net/u012526436/article/details/90212287)
@@ -304,7 +430,16 @@ curl -d "我是蓝翔 技工拖拉机学院手扶拖拉机专业的。" "http://
 
 
 
-## SE 网络 （sentence encoding）
+## SE 网络 （sentence encoding）基于表示
+
+- 基于表示的匹配模型的基本结构包括：
+  - （1）嵌入层，即文本细粒度的嵌入表示；
+  - （2）编码层，在嵌入表示的基础上进一步编码；
+  - （3）表示层：获取各文本的向量表征；
+  - （4）预测层：对文本pair的向量组进行聚合，从而进行文本关系的预测
+
+- 结构
+![](https://img-blog.csdnimg.cn/20200720232715103.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2d1b2ZlaV9mbHk=,size_16,color_FFFFFF,t_70)
 
 - SE 网络结构如下：
   - representation-based 类模型，思路是基于 Siamese 网络，提取文本整体语义再进行匹配
@@ -315,7 +450,35 @@ curl -d "我是蓝翔 技工拖拉机学院手扶拖拉机专业的。" "http://
   - 优点是可以对文本预处理，构建索引，大幅降低在线计算耗时
   - 缺点是失去语义焦点，易语义漂移，难以衡量词的上下文重要性
 
-## SI 网络 （sentence interaction）
+代表：
+- 1. DSMM
+  - DSSM、CDSSM、DSSM+LSTM、DSSM+CNN、DSSM+GRU、DSSM+RNN、MV（Multi-View）-DSSM
+  - 关于DSSM双塔模型有人做了一些归纳，[DSSM双塔模型](https://www.jianshu.com/p/9cb35ef01353)
+- 2. Siam（孪生）网络
+  - SiamCNN、SiamLSTM、、
+- 3. ARC-1
+- 4. Multi-view
+- 5. InferSent
+- 6. SSE
+
+- siameseCNN
+  - ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9waWMyLnpoaW1nLmNvbS92Mi0zYWU4ODUwMDBmNTcwNTczMDIwYWZhMGM0Y2U2NWExOV9iLmpwZw?x-oss-process=image/format,png)
+
+## SI 网络 （sentence interaction）基于交互
+
+- 表示型的文本匹配模型存在两大问题：
+  - （1）对各文本抽取的仅仅是最后的语义向量，其中的信息损失难以衡量；
+  - （2）缺乏对文本pair间词法、句法信息的比较
+- 而交互型的文本匹配模型通过尽早在文本pair间进行信息交互，能够改善上述问题。
+- 基于交互的匹配模型的基本结构包括：
+  - （1）嵌入层，即文本细粒度的嵌入表示；
+  - （2）编码层，在嵌入表示的基础上进一步编码；
+  - （3）匹配层：将文本对的编码层输出进行交互、对比，得到各文本强化后的向量表征，或者直接得到统一的向量表征；
+  - （4）融合层：对匹配层输出向量进一步压缩、融合；
+  - （5）预测层：基于文本对融合后的向量进行文本关系的预测。
+
+- 结构
+  - ![](https://img-blog.csdnimg.cn/20200721231045412.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2d1b2ZlaV9mbHk=,size_16,color_FFFFFF,t_70)
 
 - SI 网络结构如下：
   - interaction-based 类模型，思路是捕捉直接的匹配信号（模式），将词间的匹配信号作为灰度图，再进行后续建模抽象
@@ -325,6 +488,36 @@ curl -d "我是蓝翔 技工拖拉机学院手扶拖拉机专业的。" "http://
   - 优点是更好地把握了语义焦点，能对上下文重要性进行更好的建模
   - 缺点是忽视了句法、句间对照等全局性信息，无法由局部匹配信息刻画全局匹配信息
 
+- 代表：
+1. ARC-Ⅱ
+2. PairCNN
+3. MatchPyranmid
+4. DecAtt
+5. CompAgg
+6. ABCNN: BCNN、ABCNN、ABCNN-2、ABCNN-3、
+7. DIIN
+8. DRCN
+9. ESIM
+10. Bimpm
+11. HCAN
+
+## 基于预训练模型BERT
+
+- SOTA模型，基于bert的改进还在学习中，base-bert、孪生bert等，此外BERT还有一个问题，无法解决长文本的匹配，但是对于此问题也有文章在解决了。
+
+【Reference】
+1. Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks
+2. Simple Applications of BERT for Ad Hoc Document Retrieval
+
+其他
+- 文本匹配的baseline有很多，借助一些好用的开源工具可以大大提升开发效率：MatchZoo、AnyQ、DGU
+  - [MatchZoo](https://github.com/NTMC-Community/MatchZoo)：一个通用文本匹配工具包，囊括了非常多代表性的数据集、匹配模型和场景，接口友好，非常适合拿来跑baseline。
+  - [AnyQ](https://github.com/baidu/AnyQ)：一个面向FAQ集和的问答系统框架，插件和配置机制做的很赞，集成了一堆代表性的匹配模型和一些检索模型，完整涵盖了Question Analysis、Retrieval、Matching和Re-Rank这4个做问答系统的全部必备环节。
+  - [DGU](https://github.com/PaddlePaddle/models/tree/develop/PaddleNLP/PaddleDialogue/dialogue_general_understanding)：一个bert-based通用对话理解工具，提供了一套simple but effective的对话任务解决方案，一键刷爆各个对话任务（包括多轮对话匹配）的SOTA也是一个神奇的体验了。
+
+摘自：
+- [深度匹配简述](https://www.cnblogs.com/ZhangHT97/p/13391689.html)
+- [文本匹配相关方向总结（数据，场景，论文，开源工具）](https://blog.csdn.net/xixiaoyaoww/article/details/104553503)
 
 ## 深度语义
 
@@ -399,6 +592,57 @@ curl -d "我是蓝翔 技工拖拉机学院手扶拖拉机专业的。" "http://
 
 ## 应用
 
+- 工业界的很多应用都有在语义上衡量文本相似度的需求，我们将这类需求统称为“语义匹配”。
+根据文本长度的不同，语义匹配可以细分为三类：
+  - 短文本-短文本语义匹配
+  - 短文本-长文本语义匹配
+  - 长文本-长文本语义匹配
+- 基于主题模型的语义匹配通常作为经典文本匹配技术的补充，而不是取代传统的文本匹配技术
+
+### 1 短文本-短文本语义匹配
+
+- 该类型在工业界的应用场景很广泛。如
+  - 在网页搜索中，需要度量用户查询（Query）和网页标题（web page title）的语义相关性；
+  - 在Query查询中，需要度量 Query和其他 Query之间的相似度。
+- 由于主题模型在短文本上的效果不太理想，在短文本-短文本匹配任务中 词向量的应用 比主题模型更为普遍。简单的任务可以使用Word2Vec这种浅层的神经网络模型训练出来的词向量。
+- 如，计算两个Query的相似度， q1 = "推荐好看的电影"与 q2 = “2016年好看的电影”。
+  - 通过词向量按位累加的方式，计算这两个Query的向量表示
+  - 利用余弦相似度（Cosine Similarity）计算两个向量的相似度。
+- 对于较难的短文本-短文本匹配任务，考虑引入有监督信号并利用“DSSM”或“CLSM”这些更复杂的神经网络进行语义相关性的计算。
+
+总结：
+- 使用词向量按位累加方式获取句向量，使用距离度量获取相似度
+- 利用DSSM等方法进行匹配度计算
+
+### 2 短文本-长文本语义匹配
+
+- 短文本-长文本语义匹配的应用场景在工业界非常普遍。例如，
+- 在搜索引擎中，需要计算用户 Query 和一个网页正文（content）的语义相关度。由于 Query 通常较短，因此 Query 与 content 的匹配与上文提到的短文本-短文本不同，通常需要使用短文本-长文本语义匹配，以得到更好的匹配效果。
+- 在计算相似度的时候，我们规避对短文本直接进行主题映射，而是根据长文本的 主题分布，计算该分布生成短文本的概率，作为他们之间的相似度。
+  - ![](https://img-blog.csdnimg.cn/20190711163840560.png)
+  - 其中，q表示Query，c表示content， w表示q中的词，z k z_kz ，k表示第k个主题。
+- 案例
+  - 案例1-用户查询-广告页面相似度
+  - 案例2：文档关键词抽取
+
+总结：
+- 利用主题模型或者其他方法如TF-IDF方法获取长本文的主题分布/提取关键词
+- 计算Querry与文档主题/提取关键词之间的相似度
+
+
+### 长文本-长文本语义匹配
+
+- 通过使用主题模型，我们可以得到两个长文本的主题分布，再通过计算两个多项式分布的距离来衡量它们之间的相似度。衡量多项式的距离 可以利用Hellinger Distance和Jensen-Shannon Divergence（JSD）。
+- 案例
+  - 案例3：新闻个性化推荐：行为信息对应的文本内容可以组合成一篇抽象的“文档”，对该“文档”进行主题映射 后获得的 主题分布 作为用户画像。
+  - ![](https://img-blog.csdnimg.cn/20190711175310170.png)
+- 总结：
+  - 分别计算长文本的主题分布
+  - 计算两个多项式分布之间的距离作为相似度度量
+- 知识点
+  - Hellinger Distance（海林格距离）：又称Bhattacharyya distance，因为作者的姓氏叫Anil Kumar Bhattacharya。在概率和统计学中，海林格距离被用来衡量两个概率分布之间的相似性，属于f-divergence的一种。而f-divergence又是什么呢？，一个f-divergence是一个函数D f ( P \∣\∣ Q ) D_f(P\|\|Q)D (P\∣\∣Q)用来衡量两个概率分布P PP和Q QQ之间的不同。
+
+
 - Answer Selection：给定一个问题，从候选答案集合中匹配最佳答案。
 - Paraphrase Identification释义识别：给定两个句子，判断它们是否包含相同的语义。
 - Textual entailment：给定一句话作为前提，另一句话作为推断，去判断能否根据前提得到推断。
@@ -409,7 +653,119 @@ curl -d "我是蓝翔 技工拖拉机学院手扶拖拉机专业的。" "http://
 
 ## 评估
 
+- 准确率，召回率和F值都是利用无序的文当集合进行计算，而搜索引擎返回的结果通常是有序的，因此有必要对这些指标进行扩展以考虑位置信息。
 - MAP，MRR评估方法
+
+### MAP(Mean Average Precision) 考虑位置因素
+
+- MAP(Mean Average Precision)是近年来比较流行的评价指标, MAP在准确率的基础上考虑了位置的因素。
+- 单个主题的平均准确率是每篇相关文档检索出后的准确率的平均值。主集合的平均准确率(MAP)是每个主题的平均准确率的平均值。
+  - ![](https://img-blog.csdn.net/20150213010830760)
+- MAP 是反映系统在全部相关文档上性能的单值指标。系统检索出来的相关文档越靠前(rank 越高)，MAP就可能越高。如果系统没有返回相关文档，则准确率默认为0。
+- 例如：假设有两个主题，主题1有4个相关网页，主题2有5个相关网页。
+  - 某系统
+    - 对于主题1检索出4个相关网页，其rank分别为1,2,4,7；
+    - 对于主题2检索出3个相关网页，其rank分别为1,3,5。
+  - 对于主题1，平均准确率为(1/1+2/2+3/4+4/7)/4=0.83。
+  - 对于主题2，平均准确率为(1/1+2/3+3/5+0+0)/5=0.45。
+  - 则MAP=(0.83+0.45)/2=0.64。
+- 总结：MAP是顺序敏感的召回
+
+- 代码
+
+```python
+def AP(ranked_list, ground_truth):
+    """Compute the average precision (AP) of a list of ranked items
+    """
+    hits = 0
+    sum_precs = 0
+    for n in range(len(ranked_list)):
+        if ranked_list[n] in ground_truth:
+            hits += 1
+            sum_precs += hits / (n + 1.0)
+    if hits > 0:
+        return sum_precs / len(ground_truth)
+    else:
+        return 0
+```
+
+
+### NDCG(Normalized Discounted Cumulative Gain)归一化折扣累计增益
+
+- DCG的两个思想：
+  - 1、高关联度的结果比一般关联度的结果更影响最终的指标得分；
+  - 2、有高关联度的结果出现在更靠前的位置的时候，指标会越高；
+- **累计增益**（CG）
+  - CG，cumulative gain，是DCG的前身，只考虑到了相关性的关联程度，没有考虑到位置的因素。它是一个搜素结果相关性分数的总和。
+- **折损累计增益**（DCG）
+  - DCG， Discounted 的CG，就是在每一个CG的结果上处以一个折损值，为什么要这么做呢？目的就是为了让排名越靠前的结果越能影响最后的结果。假设排序越往后，价值越低。到第i个位置的时候，它的价值是 1/log2(i+1)
+- Ideal DCG(IDCG)：
+  - IDCG是理想情况下的DCG，即对于一个查询语句和p来说，DCG的最大值。
+- **归一化折损累计增益**（NDCG）
+  - NDCG， Normalized 的DCG，由于搜索结果随着检索词的不同，返回的数量是不一致的，而DCG是一个累加的值，没法针对两个不同的搜索结果进行比较，因此需要归一化处理，这里是处以IDCG。
+  - IDCG为理想情况下最大的DCG值
+- 摘自：[搜索评价指标NDCG](https://blog.csdn.net/jingshuiliushen_zj/article/details/83014009)
+
+- 在MAP中，四个文档和query要么相关，要么不相关，也就是相关度非0即1。 value = 0/1
+- NDCG中改进了下，相关度分成从0到r的r+1的等级(r可设定)。value = 2^(r-1)
+  - 当取r=5时，等级设定如下图所示：
+  - ![](https://images0.cnblogs.com/blog/397158/201308/16151643-60613296a66248bd86688b336840b523.png)
+- 对于排在结位置n处的NDCG的计算公式
+  - ![](https://images0.cnblogs.com/blog/397158/201308/16151624-5a269a399e064326b7f50c5e9b5a0cfe.png)
+- query={abc}，返回下图左列的Ranked List(URL)，当假设用户的选择与排序结果无关(即每一级都等概率被选中)，则生成的累计增益值如下图最右列所示
+  - ![](https://images0.cnblogs.com/blog/397158/201308/16151742-69d786c85a7d4bf99eebfd383106ec31.png)
+- 考虑到一般情况下用户会优先点选排在前面的搜索结果，所以应该引入一个折算因子(discounting factor): log(2)/log(1+rank)。这时将获得DCG值(Discounted Cumulative Gain)如下如所示
+  - ![](https://images0.cnblogs.com/blog/397158/201308/16151742-69d786c85a7d4bf99eebfd383106ec31.png)
+- 为了使不同等级上的搜索结果的得分值容易比较，需要将DCG值归一化的到NDCG值。操作如下图所示，首先计算理想返回结果List的DCG值：
+  - ![](https://images0.cnblogs.com/blog/397158/201308/16151802-897f63e8cbe54b359a6536301accf255.png)
+- 用DCG/MaxDCG就得到NDCG值
+  - ![](https://images0.cnblogs.com/blog/397158/201308/16151827-dbe371552d3e4897a8d0870b4d3ab11a.png)
+- 代码
+
+```python
+# ndcg
+def get_dcg(y_pred, y_true, k):
+    #注意y_pred与y_true必须是一一对应的，并且y_pred越大越接近label=1(用相关性的说法就是，与label=1越相关)
+    df = pd.DataFrame({"y_pred":y_pred, "y_true":y_true})
+    df = df.sort_values(by="y_pred", ascending=False)  # 对y_pred进行降序排列，越排在前面的，越接近label=1
+    df = df.iloc[0:k, :]  # 取前K个
+    dcg = (2 ** df["y_true"] - 1) / np.log2(np.arange(1, df["y_true"].count()+1) + 1) # 位置从1开始计数
+    dcg = np.sum(dcg)
+    
+def get_ndcg(df, k):
+    # df包含y_pred和y_true
+    dcg = get_dcg(df["y_pred"], df["y_true"], k)
+    idcg = get_dcg(df["y_true"], df["y_true"], k)
+    ndcg = dcg / idcg
+    return ndcg
+```
+
+
+
+### MRR(Mean Reciprocal Rank) 取倒数体现位置
+
+- 把标准答案在被评价系统给出结果中的排序取倒数作为它的准确度，再对所有的问题取平均。
+  - value = 1/pos
+- 举个例子：有3个query如下图所示
+  - ![](https://images0.cnblogs.com/blog/397158/201308/16152008-50ddb12c58a74b71a2b880f71cb3b024.png)
+  - MRR值为：(1/3 + 1/2 + 1)/3 = 11/18=0.61
+- 代码
+
+```python
+def average_precision(gt, pred):
+  if not gt:
+    return 0.0
+
+  score = 0.0
+  num_hits = 0.0
+  for i,p in enumerate(pred):
+    if p in gt and p not in pred[:i]:
+      num_hits += 1.0
+      score += num_hits / (i + 1.0)
+
+  return score / max(1.0, len(gt))
+  ```
+
 
 ## 思路
 

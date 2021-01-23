@@ -405,6 +405,71 @@ git config --global credential.helper store
    - 命令：git clone https://github.com/jmoon018/PacVim.git
    - ![](https://img.linux.net.cn/data/attachment/album/201806/12/104234m10a8uuhxh08kxx5.png)
 
+### vim主题
+
+- 【2021-1-12】vim配色，[大全](http://vimcolors.com/)
+- 设置类似sublime的主题包：[vim-monokai](https://github.com/sickill/vim-monokai)
+   - ![](https://camo.githubusercontent.com/b7d019bb849ebced5559fbde94e152f72b86855e07ab302c7ee27890f503674c/68747470733a2f2f692e696d6775722e636f6d2f4e5058324d584d2e706e67)
+
+
+```shell
+# 下载sublime主题
+git clone https://github.com/sickill/vim-monokai.git
+# 创建主题目录
+mkdir -p ~/.vim/colors
+# 复制主题
+cp vim-monokai/colors/monokai.vim ~/.vim/colors
+# 设置vim主题, ~/.vimrc
+syntax enable
+colorscheme monokai
+```
+
+- 完整版主题设置
+
+```python
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=ucs-bom,utf-8,chinese,cp936
+set guifont=Consolas:h15
+language messages zh_CN.utf-8
+set lines=45 columns=100
+set number
+set autoindent
+set smartindent
+set tabstop=4
+set autochdir
+
+set shiftwidth=4
+set foldmethod=manual
+
+syntax enable
+colorscheme monokai
+set nocompatible
+set nobackup
+```
+
+### vim技巧
+
+|命令|说明|备注|
+|---|---|---|
+|:s/searchStr/replaceStr/g	|替换当前行中的所有 searchStr 到 replaceStr||
+|:s/searchStr/replaceStr/	|替换当前行中的第一个 searchStr 到 replaceStr||
+|:%s/searchStr/replaceStr/	|替换每一行中的第一个 searchStr 到 replaceStr||
+|:%s/searchStr/replaceStr/g	|替换每一行中的每一个 searchStr 到 replaceStr||
+|h、j、k、l	|左下上右||
+|i	|插入||
+|A	|从末尾开始编辑||
+|w / e|	下一个单词开头 / 结尾||
+|b	|上一个单词||
+|u	|撤消操作||
+|x	|删除当前字符||
+|H M L	|屏幕的上 / 中 / 下||
+
+- 积累常见问题解决方法
+1. vim粘贴多行文本时，编辑器自动换行，格式乱
+   - 解决：粘贴前，使用命令：set paste即可, 如果想恢复自动换行，set nopaste
+1. 待定
+
 # jupyter notebook
 
 - Jupyther notebook ,也就是一般说的 Ipython notebook，是一个可以把代码、图像、注释、公式和作图集于一处，从而实现可读性分析的一种灵活的工具。 
@@ -491,6 +556,17 @@ from IPython.display import Image
 Image(img_file)
 ```
 
+# java
+
+- 【2021-1-20】
+- 安装：先装[java](https://www.oracle.com/java/technologies/javase-jdk15-downloads.html), open JDK[清华源下载](https://mirror.tuna.tsinghua.edu.cn/AdoptOpenJDK/15/jdk/x64/linux/)
+- 配置环境变量：vim /etc/profile
+   - export JAVA_HOME=/usr/local/src/jdk1.8.0_171 （根据自己的完整路径修改）
+   - export PATH=$PATH:$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH
+   - export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
+- 查看版本：java -version
+
+
 # python开发环境
 
 - [Cython中def,cdef,cpdef的区别](https://www.cnblogs.com/lidyan/p/7474244.html)
@@ -538,305 +614,6 @@ pip3 list
 ```
 
 
-## anaconda
-
-- 下载
-
-```shell
-# 官方地址，慢
-wget https://repo.anaconda.com/archive/Anaconda3-2019.03-Linux-x86_64.sh
-# 清华地址: https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/
-wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-5.3.1-Linux-x86_64.sh
-bash Anaconda3-2019.03-Linux-x86_64.sh
-```
-
-- 安装完成之后会多几个应用
-   - Anaconda Navigtor ：用于管理工具包和环境的图形用户界面，后续涉及的众多管理命令也可以在 Navigator 中手工实现。
-   - Jupyter notebook ：基于web的交互式计算环境，可以编辑易于人们阅读的文档，用于展示数据分析的过程。
-   - qtconsole ：一个可执行 IPython 的仿终端图形界面程序，相比 Python Shell 界面，qtconsole 可以直接显示代码生成的图形，实现多行代码输入执行，以及内置许多有用的功能和函数。
-   - spyder ：一个使用Python语言、跨平台的、科学运算集成开发环境。
-- 加入环境变量
-   - 安装器若提示“`Do you wish the installer to prepend the Anaconda install location to PATH in your /home/<user>/.bash_profile ?`，建议输入“yes”。
-   - 如果输入“no”，则需要手动添加路径。添加 export PATH="/<anaconda_path>/bin:$PATH" 在 .bashrc 或者 .bash_profile 中。
-
-- 注意：
-   - 不要擅自在bash_profile中添加alias别名！会导致虚拟环境切换后python、pip转换失效
-
-```shell
-# anaconda 环境
-export PATH="~/anaconda3/bin:$PATH"
-# 以下语句不要添加！
-alias python='/home/wangqiwen004/anaconda3/bin/python'
-alias pip='/home/wangqiwen004/anaconda3/bin/pip'
-# 如果仍然失效，强制使用变量切换
-sra(){
-    CONDA_ROOT="~/anaconda3"
-    env=$1
-    conda activate $env
-    export LD_LIBRARY_PATH="$CONDA_ROOT/envs/$env/lib:$LD_LIBRARY_PATH" 
-    export PATH=$CONDA_ROOT/envs/$env/bin:$PATH
-}
-# 【2020-7-10】以上方法不支持默认环境base的切换，优化如下：
-sra(){
-    CONDA_ROOT="~/anaconda3"
-    # 获取当前虚拟环境名称列表(不含base)
-    env_list=(`conda info -e | awk '{if($1!~/#|base/)printf $1" "}'`)
-    env=$1
-    conda activate $env
-    echo "env=$env, str=${env_list[@]}"
-    # 判断是否匹配已有环境名称
-    # echo "${env_list[@]}" | grep $env && echo "yes" || echo "no"
-    #[[ "$1" =~ "${env_str}" ]] && echo "yes" || echo "no"
-    #[[ ${env_list[@]/${env}/} != ${env_list[@]} ]] && {
-    res="no"
-    for i in ${env_list[@]}
-    do
-         [ "$i" == "$env" ] && res="yes"
-    done
-    [ $res == "yes" ] && {
-        echo "找到目标环境$env"
-        export LD_LIBRARY_PATH="$CONDA_ROOT/envs/$env/lib:$LD_LIBRARY_PATH"
-        export PATH=$CONDA_ROOT/envs/$env/bin:$PATH
-    }||{
-        echo "启用默认环境base"
-        env="base"
-        export LD_LIBRARY_PATH="$CONDA_ROOT/lib:$LD_LIBRARY_PATH"
-        export PATH=$CONDA_ROOT/bin:$PATH
-    }
-    echo "环境切换完毕: --> $env"
-}
-alias srd='conda deactivate'
-# 激活的使用方法
-sra learn
-```
-
-- 注意：不要这样加！
-
-### 常用命令
-
-- 汇总如下：
-   -  [anaconda完全手册](https://www.jianshu.com/p/eaee1fadc1e9)
-   - [Anaconda介绍、安装及使用教程](https://zhuanlan.zhihu.com/p/32925500)
-
-```shell
-conda --version # 查看版本
-activate # 切换到base环境
-activate learn # 切换到learn环境
-conda create -n learn python=3 # 创建一个名为learn的环境并指定python版本为3(的最新版本，也可以是2.7、3.6等))
-conda create -n learn numpy matplotlib python=2.7 # 创建环境同时安装必要的包
-conda create -n py36_tf1 python=3.6 tensorflow==1.11 # [2020-7-21]
-conda create --prefix="D:\\my_python\\envs\\my_py_env"  python=3.6.3 # 自定义虚拟环境
-conda create --name env_name --clone learn # 克隆环境 learn -> env_name
-conda env list # 列出conda管理的所有环境, conda info -e 
-source activate learn # linux下激活虚拟环境conda activate，windows下为：activate learn
-source deactivate # linux下关闭虚拟环境conda deactivate，windows下为：deactivate
-conda list # 列出当前环境的所有包
-conda list -n learn # 列出某环境下的所有包
-conda install requests #安装requests包, 同pip install
-conda install -n your_env_name [package] # 即可安装package到your_env_name中
-conda remove requests #卸载requets包
-conda remove -n learn --all # 删除learn环境及下属所有包
-conda remove --name learn  package_name  # 删除learn环境下某个包
-conda update requests # 更新requests包
-conda search pyqtgraph # 搜索包(模糊查找)
-conda search --full-name pyqtgraph # 精确查找
-conda env export > environment.yaml # 导出当前环境的包信息
-conda env create -f environment.yaml # 用配置文件创建新的虚拟环境
-
-# 添加Anaconda的TUNA镜像
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-# TUNA的help中镜像地址加有引号，需要去掉
- 
-# 设置搜索时显示通道地址
-conda config --set show_channel_urls yes
-
-```
-
-## Python依赖包
-
-- 【2020-8-23】python项目依赖包管理
-- 安装：
-   - pip install -r requirements.txt
-- 自动生成requirements.txt
-   - pip install pipreqs 
-   - pipreqs /path/to/project
-
-## Python版本转换
-
-- 【2020-8-24】Python代码版本转换
-
-```shell
-2to3 -help # 帮助
-2to3 -w .　　#将当前整个文件夹代码从python2转到python3
-# python2文件会在.py后面再加上一个后缀.bak，而新生成的python3文件使用之前python2文件的命名
-
-```
-
-## yaml
-
-- YAML是一种直观的能够被电脑识别的的数据序列化格式，容易被人类阅读，并且容易和脚本语言交互。YAML类似于XML，但是语法比XML简单得多，对于转化成数组或可以hash的数据时是很简单有效的。
-   1. 大小写敏感
-   2. 使用缩进表示层级关系
-   3. 缩进时不允许使用Tab，只允许使用空格
-   4. 缩进的空格数目不重要，只要相同层级的元素左对齐即可
-   5. \# 表示注释，从它开始到行尾都被忽略
-- 支持的数据类型
-   - 字符串
-   - 整型
-   - 浮点型
-   - 布尔型
-   - null
-   - 时间
-   - 日期
-- 主要特性，更多：[Python YAML用法详解](https://blog.csdn.net/lmj19851117/article/details/78843486)
-   - & 和 * 用于引用
-   - 强制转换，用!!实现
-   - 同一个yaml文件中，可以用 --- 来分段
-   - 构造器(constructors)、表示器(representers)、解析器(resolvers )
-
-
-
-- config.yaml内容：
-
-```yaml
-name: Tom Smith
-age: 37
-spouse:
-    name: Jane Smith
-    age: 25
-children:
- - name: Jimmy Smith
-   age: 15
- - name1: Jenny Smith
-   age1: 12
----
-# 这个例子输出一个字典，其中value包括所有基本类型
-str: "Hello World!"
-int: 110
-float: 3.141
-boolean: true  # or false
-None: null  # 也可以用 ~ 号来表示 null
-time: 2016-09-22t11:43:30.20+08:00  # ISO8601，写法百度
-date: 2016-09-22  # 同样ISO8601
-name: &name 灰蓝 # 设置被引用字段名
-tester: *name # * 取引用内容
-a: !!str 3.14 # 转字符串
-b: !!int "123" # 转int
-```
-
-- 操作方法
-
-```python
-import yaml
-
-# 文件
-f = open(r'config.yml')
-# 字符串
-f = '''
----
-name: James
-age: 20
----
-name: Lily
-age: 19
-'''
-y = yaml.load(f) 
-y = yaml.load_all(f) # 多个yaml区域
-for data in y:
-    print(data)
-# 转成yaml文档
-obj1 = {'name': 'Silenthand Olleander',
-            'race': 'Human',
-            'traits': ['ONE_HAND', 'ONE_EYE']
-}
-obj2 = {"name": "James", "age": 20}
-print(yaml.dump(obj1，))
-# 中文输出
-import json
-print(json.dumps(obj1, ensure_ascii=False, indent=2))
-print(yaml.dump(d,default_flow_style=False, indent=2, allow_unicode=True))
-f = open(r'out_config.yml','w')
-print(yaml.dump(obj2,f))
-yaml.dump_all([obj1, obj2], f) # 一次输出多个片区
-
-
-```
-
-
-### 问题解决
-
-- 使用conda install 安装各种包的时候速度很慢，参考：[conda install速度慢](https://blog.csdn.net/mojiewangday/article/details/105583026)
-- 解决
-   - 修改conda镜像路径
-   - 执行如下命令，更换仓库径路为清华镜像路径
-
-```
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
-```
-   - 在自己用户目录C:\Users<你的用户名>下生成一个文件，名字为：~/.condarc
-
-```
-conda config --set show_channel_urls yes
-```
-   - 修改.condarc文件为如下:
-
-```
-channels:
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-show_channel_urls: true
-ssl_verify: true
-```
-
-   - 执行完上述三步，conda的镜像路径就更换完毕，如不放心可以 conda info 查看 channel URLs 信息已经更改。
-
-- 【2020-8-22】执行conda install flask-restplus时，pip没问题
-   - Solving environment: failed with initial frozen solve. Retrying with flexible solve
-   - 解决：执行
-      - conda config --add channels conda-forge
-      - conda config --set channel_priority flexible
-
-
-## [logging](https://docs.python.org/3/library/logging.html)模块
-
-- [python日志基于时间切分和基于文件大小切分](https://www.jianshu.com/p/5a4e226444bd)
-- 代码：
-
-```python
-#！coding:utf-8
-import logging
-import logging.handlers
-import datetime, time
-
-#logging    初始化工作
-logger = logging.getLogger("zjlogger")
-logger.setLevel(logging.DEBUG)
-
-# 添加TimedRotatingFileHandler
-# (1) 定义一个1秒换一次log文件的handler, 保留3个旧log文件
-rf_handler = logging.handlers.TimedRotatingFileHandler(filename="all.log",when='S',interval=1, backupCount=3)
-# (2) 写入文件，如果文件超过100个Bytes，仅保留5个文件。
-handler = logging.handlers.RotatingFileHandler('logs/myapp.log', maxBytes=100, backupCount=5)
-
-rf_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(filename)s[:%(lineno)d] - %(message)s"))
-
-#在控制台打印日志
-handler = logging.StreamHandler()
-handler.setLevel(logging.DEBUG)
-handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
-
-logger.addHandler(rf_handler)
-logger.addHandler(handler)
-
-while True:
-    logger.debug('debug message')
-    logger.info('info message')
-    logger.warning('warning message')
-    logger.error('error message')
-    logger.critical('critical message')
-    time.sleep(1)
-
-```
 
 # Linux工具
 

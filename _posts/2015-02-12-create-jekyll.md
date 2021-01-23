@@ -80,6 +80,16 @@ print "hello"
 - **加粗**, *斜体*
 - <font color='green'>彩色字体</font>
 
+### 博客内部链接
+
+- 【2021-1-23】
+- [站内文章链接]({{ site.baseurl}}{% post_url 2010-01-01-navigation %}#导航)
+
+代码
+
+```html
+[站内文章链接]({{ site.baseurl}}{% post_url 2010-01-01-navigation %}#home)
+```
 
 ### 图片嵌入
 
@@ -99,8 +109,19 @@ print "hello"
 ```
 
 或者：
+```shell
+# 简洁模式
+![](/wqw/fig/3brown1blue.png)
+# 正规模式
+![三综一蓝]({{ '/wqw/fig/3brown1blue.png' | relative_url }})
+# 高级模式，图片属性
+![三综一蓝]({{ '/wqw/fig/3brown1blue.png' | relative_url }})
+{: style="width: 100%;" class="center"}
+*Fig. 25. 图片注释*
+{:.image-caption}
+```
+![](/wqw/fig/3brown1blue.png)
 
-![](pics/xxxx)
 
 
 ### 公式嵌入
@@ -191,6 +212,7 @@ $$f \left( x _ { n + 1 } \right) - f \left( x _ { n } \right) = f ^ { \prime } \
 ```
 
 - [不蒜子](http://busuanzi.ibruce.info/) 静态站点统计, 两行代码搞定
+- 
 ![](http://busuanzi.ibruce.info/images/garlic.png)
 
 ```html
