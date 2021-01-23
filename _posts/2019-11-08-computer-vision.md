@@ -175,6 +175,13 @@ Real Time style transfer check [demo](https://wqw547243068.github.io/demo/RST/)
 
 ![alt text](https://raw.githubusercontent.com/zaidalyafeai/zaidalyafeai.github.io/master/images/rst.png)
 
+
+## 应用案例
+
+- 杂货店货架识别
+- 【2021-1-23】[Grocery-Product-Detection](https://github.com/sayakpaul/Grocery-Product-Detection)
+  - This repository builds a product detection model to recognize products from grocery shelf images. The dataset comes from [here](https://github.com/gulvarol/grocerydataset). Everything from data preparation to model training is done using [Colab Notebooks](https://colab.research.google.com/) so that no setup is required locally. All the relevant commentaries have been included inside the Colab Notebooks.
+
 ## 资料
 
 - 更多[Demo地址](http://wqw547243068.github.io/demo)
