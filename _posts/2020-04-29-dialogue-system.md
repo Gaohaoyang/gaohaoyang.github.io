@@ -44,6 +44,33 @@ mathjax: true
     - ![](https://pic3.zhimg.com/80/v2-fdfd12ad3423d0ea2ea90779b0d01b52_720w.jpg)
   - 任务型对话系统
     - ![](https://pic1.zhimg.com/80/v2-6f4677765f75aa196e232ec6c1a1c548_720w.jpg)
+- 【2021-1-20】【基于Unilm模型的夸夸式闲聊机器人项目】'Unilm for Chinese Chitchat Robot - Unilm for Chinese Chitchat Robot.' by logCong GitHub  
+  - [UniLM论文](https://arxiv.org/abs/1905.03197)全名为Unified Language Model Pre-training for Natural Language Understanding and Generation，译为自然语言理解与生成的统一预训练语言模型，来自于微软研究院。
+  - 开源的模型仅使用豆瓣夸夸群数据训练，所以称之为夸夸式闲聊机器人。感兴趣的同学，也可以使用本项目代码对其他对话语料进行训练。
+详细介绍见知乎：[夸夸式闲聊机器人之Unilm对话生成](https://zhuanlan.zhihu.com/p/170358507)。
+  - UniLM模型之所以强大，是因为它既可以应用于自然语言理解（NLU）任务，又可以应用于自然语言生成（NLG）任务。结构与BERT一致，是由一个多层Transformer网络构成，通过修改训练时的Mask矩阵，使模型拥有更多的能力。
+  - [云问机器人](http://www.iyunwen.com/)开源出来的[模型](https://github.com/YunwenTechnology/Unilm)
+  - 不足之处
+    - 本模型最大的问题是，在训练模型时，没有考虑上下文信息，也就是训练是针对单轮对话进行的，因此无法很好地回答上下文相关的问题，并且可能会出现文不对题的情况。
+  - 示例
+
+```shell
+#user:工作不开心
+chatbot: 你可以的！工作不开心也可以去吃火锅，看个影响自己心情的电视剧
+#user:工作不开心
+chatbot: 我也是，不过现在开始努力找工作啦！一起加油鸭～
+#user:工作不开心
+chatbot:那就祝福你，能找到喜欢的工作吧。
+#user:工作不开心
+chatbot:你也要加油鸭！
+#user:工作不开心
+chatbot:我也是，不过总有一天就会好起来的
+```
+
+- 【2021-1-23】[空妙对话机器人Demo](https://communechatbot.com/)
+
+
+
 # 现状
 
 - 参考资料
