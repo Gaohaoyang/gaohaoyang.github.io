@@ -289,9 +289,7 @@ mathjax: true
 - KBQA(Knowledge Base Question Answering)，是基于知识库的问答系统，本质上KBQA系统反映一个简化的“问答-答案”的映射过程，需要对自然语言语义解析与理解后，进行结构化查询与推理，得出相应的答案。
 - ![](https://pic2.zhimg.com/80/v2-2699f1e6d3dd51c7c86cbb9cf0e58af9_720w.jpg)
 - ![](https://pic2.zhimg.com/80/v2-49c7910b5ffa6a492249f49d5af26269_720w.jpg)
-- 参考：
-  - [刘康-基于深度学习的知识库问答研究进展](https://wenku.baidu.com/view/d0d2ff717ed5360cba1aa8114431b90d6c858925.html)
-  - [知识图谱-基于ES(ElasticSearch)和gAnswer构建智能问答系统](https://zhuanlan.zhihu.com/p/91294301)
+
 - KB-QA与对话系统
   - 问答系统是信息检索系统的高级形式，是以问题为驱动的信息获取过程，按QA类别可以分为WebQA（Web问答）、KBQA（知识库问答）、CQA（社区问答）和DBQA（阅读理解的QA系统，斯坦福的SQuAD），而对话系统主要关注对话过程，多采用多轮方式进行，主要分为开放闲聊的对话系统、任务驱动的对话系统、以知识获取的对话系统和信息推荐的对话系统，传统的对话系统主要由四个部分：NLU（自然语言生成）、DST（对话状态追溯）、PL（策略学习）和NLG（自然语言生成），目前，采用是端对端检索式与生成式的，但是精度较低。
   - KBQA主要通过对自然语言进行语义解析与理解后，查询知识库，进行某一类事实问题进行回答（简单的BFQ或者复杂多跳转问题），答案是某一种实体或者实体的属性或者关系，而对话系统，句子级的对话，注重对话过程，回答的问题是一般是句子而不是简单的答案，类似人对话聊天。对话系统也可以结合知识库进行更加全面句子级答案生成（知识获取的对话系统）。
@@ -330,6 +328,10 @@ mathjax: true
 
 ## 资料
 
+- 参考：
+  - [刘康-基于深度学习的知识库问答研究进展](https://wenku.baidu.com/view/d0d2ff717ed5360cba1aa8114431b90d6c858925.html)
+  - [知识图谱-基于ES(ElasticSearch)和gAnswer构建智能问答系统](https://zhuanlan.zhihu.com/p/91294301)
+  - KBQA论文集[Awesome-knowledge-graph-question-answering](https://github.com/BshoterJ/awesome-kgqa)
 - [针对复杂问题的知识图谱问答(KBQA)最新进展](https://blog.csdn.net/sdu_hao/article/details/105674327)
 
 - 知识图谱问答（KBQA）利用图谱丰富的语义关联信息，能够深入理解用户问题并给出答案，近年来吸引了学术界和工业界的广泛关注。KBQA 主要任务是将自然语言问题（NLQ）通过不同方法映射到结构化的查询，并在知识图谱中获取答案。
