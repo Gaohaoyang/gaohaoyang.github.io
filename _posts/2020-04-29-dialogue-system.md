@@ -566,6 +566,15 @@ Image('fsm.png')
 
 ## 知识型对话
 
+- 【2021-1-25】（美团）智能问答技术框架
+  - ![](https://pics3.baidu.com/feed/37d12f2eb9389b50842a106dabc123dae6116e30.png)
+  - 问题推荐：问题生成、问题排序、问题引导
+  - 问题理解：领域/意图识别、实体识别/链接、意图澄清、时效识别、句式识别、实体澄清、槽位填充
+  - 问题解决：KB-QA、DocumentQA、CommunityQA、多答案融合排序、TaskBot、NLG
+- 详解
+  - Document QA：商户简介、攻略和UGC评论等非结构化文档中包含大量优质信息，从非结构化文档中提取答案，即文档问答 ( Document QA )。近年来基于深度神经网络的机器阅读理解 ( Machine Reading Comprehension，MRC ) 技术得到了快速的发展，逐渐成为问答和对话系统中的关键技术。Document QA借助机器阅读理解 ( MRC ) 技术，从非结构化文档中抽取片段回答用户问题。在问答场景中，当用户输入问题后，问答系统首先采用信息检索方式从商户详情或诸多UGC评论中查找到相关文档，再利用MRC模型从文档中摘取能够确切回答问题的一段文本。
+  - 
+
 - 【2020-8-18】参考：
   - [基于索引的QA问答对匹配流程梳理](https://www.cnblogs.com/yhzhou/p/13436374.html)
   - [智能问答中的NLU意图识别流程梳理](https://www.cnblogs.com/yhzhou/p/13456361.html)
@@ -586,6 +595,8 @@ Image('fsm.png')
   - 从流程梳理看，NLU的意图识别从根本上看是有监督的机器学习，即基于给定的人工筛选数据进行特征处理，构建模型用于预测。
 
 ![](https://note.youdao.com/yws/public/resource/c388d7862c02facd6c2a03d6e17d9180/xmlnote/DED0DC29757E48DE9F55FB83A846A957/3963)
+
+
 
 
 ### 【2021-1-20】[How to Build an Open-Domain Question Answering System?](https://lilianweng.github.io/lil-log/2020/10/29/open-domain-question-answering.html)
