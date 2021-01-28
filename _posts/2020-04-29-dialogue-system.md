@@ -723,8 +723,11 @@ Select ?x where {
 
 ## 闲聊型对话
 
-- 待补充
-
+- 微软小冰通用闲聊框架,通用闲聊的整体流程也是 检索 + 排序
+- ![](https://pic2.zhimg.com/80/v2-aac4cf4dab6f96b8354f54bba3f2a2a9_720w.jpg)
+- 任务框架 [微软小冰对话机器人框架](https://zhuanlan.zhihu.com/p/57532328)
+  - 任务机器人应该用的还是 Frame-based 的经典框架。这块就不再多说，值得提的是，小冰会依据用户画像给出个性化的答复。例如一个美国人问中国面积多大时，答复里的面积单位是平方英里，而中国人问答复里的面积单位是平方公里。
+  - ![](https://pic1.zhimg.com/80/v2-ba47b03339fe6c07beb60f8f719b1660_720w.jpg)
 
 ## 对话机器人工程实现
 
@@ -969,4 +972,5 @@ Unsupervised Evaluation Metrics for Dialogue Response Generation](https://arxiv.
         - 话题管理器模拟人类在对话期间更改话题的行为。它由一个分类器和一个话题检索引擎组成，分类器用于在每个对话回合决定是否切换话题。如果小冰对话题没有足够的了解，无法进行有意义的对话，或者用户感到厌烦，就会引发话题切换。
     - 数据层：由一组数据库组成，这些数据库存储收集到的人类会话数据(文本对或文本图像对)、用于核心会话和技能的非会话数据和知识图，以及小冰和所有注册用户的个人档案。
   - ![](https://img.huxiucdn.com/article/content/201812/28/162450034922.jpg?imageView2/2/w/1000/format/jpg/interlace/1/q/85)
+  
 
