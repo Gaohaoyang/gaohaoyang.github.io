@@ -68,6 +68,20 @@ chatbot:我也是，不过总有一天就会好起来的
 ```
 
 - 【2021-1-23】[空妙对话机器人Demo](https://communechatbot.com/)
+- 【2021-1-28】AI+HI实现 [对话系统 NLU/DM 任务详解](https://www.jianshu.com/p/d713678fddfb)
+  - 在很多场景下，对话用户界面（CUI - Conversational User Interface）比图形用户界面（GUI - Graphical User Interface）更加自然和高效。过去一年中，CUI得到了大量的关注，也取得了迅速的发展。微软提出了对话即平台的战略，Facebook Messenger上出现了各种对话机器人（chatbot），很多和CUI相关的创业公司也应运而生。
+  - AI+HI表示机器助理和真人助理结合起来，为用户提供优质的体验。为什么要这么做呢？因为当真人能够和机器配合时，能产生一个正反馈：
+    - 真人纠正机器的错误 -> 更好的用户体验 -> 更多的活跃用户 -> 获取更高质量的数据 -> 训练更好地模型 -> 机器更好地辅助真人。
+  - HI和AI如何无缝的配合呢？我们通过群聊将用户、AI和HI放在一个群里。由AI根据置信度来判断，什么情况下需要将HI加入群内，将什么样的HI加入群内，以及什么时候HI来干预。AI和HI的配合分为三种：
+    - 1）AI置信度较高时，无需HI干预，对话系统完全由AI来执行动作；
+    - 2）AI置信度不高时，AI生成候选动作辅助HI来动作；
+    - 3）AI不确定性很高时，完全由HI接管来执行动作。
+  - ![](https://upload-images.jianshu.io/upload_images/5756726-6bdc4001931547fd.png)
+  - 基于AI+HI的对话系统中，HI扮演三种角色：
+    - 1）为AI提供反馈，如NLU出现错误时，HI可以纠正，然后AI在纠正后的对话状态下继续工作；
+    - 2）在AI的辅助下执行动作，比如AI生成候选动作但不执行，由HI进行判断最终来执行；
+    - 3）产生标注数据使AI不断进化，例如HI每一次纠错、执行动作都是一个标注的样本，可以用于训练AI。
+
 
 
 
@@ -179,9 +193,21 @@ chatbot:我也是，不过总有一天就会好起来的
 
 ## 任务型对话
 
+
+- 非任务型对话系统，如开放域的闲聊，常见方法：
+  - ① 基于**生成**方法，例如序列到序列模型（seq2seq），在对话过程中产生合适的回复，生成型聊天机器人目前是研究界的一个热点，和检索型聊天机器人不同的是，它可以生成一种全新的回复，因此相对更为灵活，但它也有自身的缺点，比如有时候会出现语法错误，或者生成一些没有意义的回复。
+  - ② 基于**检索**的方法，从事先定义好的索引中进行搜索，学习从当前对话中选择回复。检索型方法的缺点在于它过于依赖数据质量，如果选用的数据质量欠佳，那就很有可能前功尽弃。
+
+- [NLP之智能对话系统](https://www.jianshu.com/p/85ac1e329264)
+
+
+- 任务导向型对话系统旨在通过分析对话内容提取用户任务，并且帮助用户完成实际具体的任务
 - 任务型对话的处理方式有`pipeline`和`端到端`两种结构
-  - pipeline定义了数个模块，以一条line的形式串联起来共同完成一个任务，如下图所示。
-  - 端到端的代表为memory network
+  - pipeline(管道式)：定义了数个模块，以一条line的形式串联起来共同完成一个任务，如下图所示。
+  - 端到端：代表为memory network
+
+- 【2021-1-28】[智能对话系统和算法](http://html.rhhz.net/buptjournal/html/20190602.htm)
+
 
 ### pipeline
 
@@ -227,7 +253,12 @@ chatbot:我也是，不过总有一天就会好起来的
 
 ### 端到端
 
-- 待补充
+- 基于管道方法的对话系统中有许多特定领域的手工制作，所以它们很难适用于新的领域。近年来，随着端到端神经生成模型的发展，为面向任务的对话系统构建了端到端的可训练框架。与传统的管道模型不同，端到端模型使用一个模块，并与结构化的外部数据库交互。
+- ![](https://upload-images.jianshu.io/upload_images/1535345-3e1a2d7d80ba70d8.jpeg)
+- 上图的模型是一种基于网络的端到端可训练任务导向型对话系统，将对话系统的学习作为学习从对话历史到系统回复的映射问题，并应用encoder-decoder模型来训练。然而，该系统是在监督的方式下进行训练——不仅需要大量的训练数据，而且由于缺乏对训练数据对话控制的进一步探索，它也可能无法找到一个好的策略。
+- 端到端强化学习方法
+  - ![](https://upload-images.jianshu.io/upload_images/1535345-afd604658341abf5.png?imageMogr2/auto-orient/strip|imageView2/2/w/636/format/webp)
+  - 上图的模型首先提出了一种端到端强化学习的方法，在对话管理中联合训练对话状态跟踪和对话策略学习，从而更有力地对系统的动作进行优化。
 
 
 ### 案例
@@ -620,7 +651,10 @@ Image('fsm.png')
 
 ![](https://note.youdao.com/yws/public/resource/c388d7862c02facd6c2a03d6e17d9180/xmlnote/DED0DC29757E48DE9F55FB83A846A957/3963)
 
-
+- 【2021-1-28】意图识别和槽填充
+  - 意图识别：分类问题，SVM，adaboost和NN等
+  - 槽填充：序列标注，CRF，HMM等
+  - ![](https://upload-images.jianshu.io/upload_images/5756726-38005b3b2de61d54.jpg)
 
 
 ### 【2021-1-20】[How to Build an Open-Domain Question Answering System?](https://lilianweng.github.io/lil-log/2020/10/29/open-domain-question-answering.html)
