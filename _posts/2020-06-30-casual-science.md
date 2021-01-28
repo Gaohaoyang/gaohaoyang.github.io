@@ -102,6 +102,10 @@ mathjax: true
 
   <iframe src="//player.bilibili.com/player.html?aid=90067629&bvid=BV1o7411L7dp&cid=153821743&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="350px" height="266px" > </iframe>
 
+- 【2021-1-28】[将因果关系引入计算机视觉的"小学生"](https://mp.weixin.qq.com/s?__biz=MzA5ODEzMjIyMA==&mid=2247575503&idx=1&sn=1a3a0c3f99f2bee229e983ca5e4564be&chksm=9095ae5ca7e2274a817ca681ea37267e33c139c54c406f73a5f964b3c11691edb48595a7077f&mpshare=1&scene=23&srcid=0128c6xVJSEVLXRvMK6obR48&sharer_sharetime=1611811625919&sharer_shareid=b8d409494a5439418f4a89712efcd92a%23rd)
+  - AI 仍是一个比人类更低维的生物，与人类之间存在很大差距，对事物的因果推理能力便是其中之一
+  - 张含望创立并带领的机器推理与学习实验室（Machine Reasoning and Learning Lab，简称“MReal”）是全球第一个将因果关系推理引入计算机视觉研究中的团队。
+
 - 【因果推断】 [A Brief Introduction to Causal Inference by Brady Neal](https://www.bilibili.com/video/BV1CK4y1L7uA/?spm_id_from=333.788.videocard.5)
 - [Causal inference course written from a machine learning perspective](https://www.bradyneal.com/causal-inference-course)，包含课程ppt列表
 
