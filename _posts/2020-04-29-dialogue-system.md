@@ -603,6 +603,8 @@ GUS对话系统，是 Genial Understander System 的缩写，可以追溯到1977
 - ![](https://www.ibm.com/developerworks/cn/linux/l-fsmachine/image/2.jpg)
 
 
+
+
 **Python版本**
 
 - [Transitions](https://github.com/pytransitions/transitions)
@@ -684,6 +686,15 @@ Image('fsm.png')
 - [squirrel](https://github.com/hekailiang/squirrel)
 
 ![](https://camo.githubusercontent.com/c7aa76914060369995ee7ac173c16512634ab0cb/687474703a2f2f68656b61696c69616e672e6769746875622e696f2f737175697272656c2f696d616765732f41544d53746174654d616368696e652e706e67)
+
+
+### 状态机适用条件
+
+- 状态机问题
+  - ① 状态机模型的最大缺陷：<font color='blue'>所有状态都提前预知了才能够规划代码</font>，所以也叫有限状态机。以有限的状态应对可能比预期更多的状态，一旦遇到新增一个状态，全部状态机代码都得重审一遍，以免遗漏状态切换。
+  - ② 还有大量的数据一般都是共享的，状态机模型对数据的封闭不利，对一些本来适合在函数参数中传递的变量，适合在private中封闭掉的数据，常常被迫敞开。
+  - ③ 状态机的架构不太适合多线程模型，有限状态机流行的年代，高效多线程架构还不流行，这方面都是欠缺的。
+- 最重要的是状态清晰，粒度适中，状态迁移图明确可靠。一般的状态机状态数量4到8个，太少太简单，太多要注意适当切分。
 
 ## 知识型对话
 
