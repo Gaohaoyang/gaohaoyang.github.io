@@ -16,11 +16,14 @@ mathjax: true
 
 - 文本分类是自然语言处理的一个基本任务，试图推断出给定的文本（句子、文档等）的标签或标签集合。
 - 文本分类算是NLP比较简单的任务之一，并且目前由于预训练语言模型的出现，现在文本分类直接上bert效果就挺好。
+- 【2021-2-2】[深度学习文本分类-模型&代码&技巧](https://mp.weixin.qq.com/s/8rF2VXeKMKMpBAOlgPep8A)，[NLP入门指南各类代码汇总](https://github.com/leerumor/nlp_tutorial)
+  - 实际上，落地时主要还是和数据的博弈。数据决定模型的上限，大多数人工标注的准确率达到95%以上就很好了，而文本分类通常会对准确率的要求更高一些，与其苦苦调参想fancy的结构，不如好好看看badcase，做一些数据增强提升模型鲁棒性更实用。
 
 ## 资料
 
 - [文本分类-基础算法](https://zhuanlan.zhihu.com/p/93322804)
 - [深度学习在文本分类中的应用](https://zhuanlan.zhihu.com/p/34383508)
+- 【2021-2-2】文本分类方法[表格汇总](https://github.com/leerumor/nlp_tutorial/blob/main/README.md#para2cls)
 
 
 # 评估方法
@@ -74,16 +77,22 @@ mathjax: true
   - 模型对正例的预测概率是越大越好，模型对负例的预测概率是越小越好。由于正例的数量少，很容易保证每个正例的预测概率尽可能大，而负例的数量特别多，所以负采样的思路就是根据某种负采样的策略随机挑选一些负例，然后保证挑选的这部分负例的预测概率尽可能小。
   - 所以，负采样策略是对模型的效果影响很大，word2vec常用的负采样策略有**均匀负采样**、**按词频率采样**等等。
 
-## FastText
+## FastText —— 适合长文本
 
+- 【2021-2-2】[论文](https://arxiv.org/abs/1607.01759)，[代码](https://github.com/facebookresearch/fastText)
+- Fasttext是Facebook推出的一个便捷的工具，包含文本分类和词向量训练两个功能。
+- Fasttext的分类思想：把输入转化为词向量，取平均，再经过线性分类器得到类别。
+- 输入的词向量可以是预先训练好的，也可以随机初始化，跟着分类任务一起训练。
 - fastText模型架构和word2vec的CBOW模型架构非常相似
 ![](https://pic1.zhimg.com/80/v2-5d56f85aab55494afa27ce33acef3773_720w.jpg)
-- fastText模型和CBOW一样也只有三层：输入层、隐含层、输出层（Hierarchical Softmax）。输出层没啥好说的。fasttext的隐藏层是把输入层的向量求平均。
+- fastText模型和CBOW一样也只有三层：输入层、隐含层、输出层（Hierarchical Softmax）。fasttext的隐藏层是把输入层的向量求平均。
 - cbow是将每个词先用one-hot编码，然后再经过随机初始化的look-up table。
 - fasttext也是相似，区别就是fastText在输入时，将单词的字符级别的n-gram向量作为额外的特征，所以fastText的输入是多个单词及其n-gram特征，这些特征用来表示单个文档。
 
 - fastText作者的实现是句子中的单词再加上n-gram作为输入的。并且为了节省内存，n-gram需要经过哈希处理，哈希到同一个位置的不同n-gram是会共享一个embedding的。
-- fastText单词的embedding跟常见的embedding方法没什么不同，都是先随机初始化，然后再通过反向传播学习参数，维度就是人工指定的一个超参数，是词向量的维度。不过有两点要注意的地方，第一是如果你说的fastText的embedding是通过supervised的方式来训练一个文本分类器并同时学习embedding的话，那么这个embedding的学习过程就是有监督的，与word2vec等无监督的模型是有一定区别的；第二是fastText还会学习n-gram（这里的n-gram其实有两种，分别是char-n-gram和word-n-gram，就不展开说了，真正有兴趣的话可以读读源码）的embedding，这使得它可以在一定程度上捕捉词序信息。为了节省空间，fastText在原作者的实现中并不是每一个n-gram都学习一个单独的embedding，而是首先将n-gram进行hash，hash到同一个位置的多个n-gram是会共享一个embedding的。
+- fastText单词的embedding跟常见的embedding方法没什么不同，都是先随机初始化，然后再通过反向传播学习参数，维度就是人工指定的一个超参数，是词向量的维度。不过有两点要注意的地方
+  - 第一是如果fastText的embedding是通过supervised的方式来训练一个文本分类器并同时学习embedding的话，那么这个embedding的学习过程就是有监督的，与word2vec等无监督的模型是有一定区别的；
+  - 第二是fastText还会学习n-gram（这里的n-gram其实有两种，分别是char-n-gram和word-n-gram）的embedding，这使得它可以在一定程度上捕捉词序信息。为了节省空间，fastText在原作者的实现中并不是每一个n-gram都学习一个单独的embedding，而是首先将n-gram进行hash，hash到同一个位置的多个n-gram是会共享一个embedding的。
 
 
 - 字符级n-gram的引入，有以下几点好处：
@@ -91,15 +100,29 @@ mathjax: true
   - 为罕见的单词生成更好的单词向量。根据上面的字符级别的n-gram来说，即使这个单词出现的次数很少，但是组成单词的字符和其他单词有共享的部分，因此这一点可以优化生成的单词向量
   - 一定程度上解决了OOV问题。即使单词没有出现在训练语料库中，仍然可以从字符级n-gram中构造单词的词向量。
   - word-n-gram可以让模型学习到局部词序信息，可以在一定程度上捕捉词序信息。
-  - cbow先将词进行one-hot编码，其实在我看来就是构造了word2id词典，这样就可以通过lookup-table 查询到对应的词向量。我不清楚fasttext是不是也是这么做的，但我觉得通过构建vocab2id这个map，就能实现one-hot编码的作用，所以下面keras实现中也是这么做的。
+  - cbow先将词进行one-hot编码，其实在我看来就是构造了word2id词典，这样就可以通过lookup-table 查询到对应的词向量。
+
+- 优点：
+  - 模型本身复杂度低，但效果不错，能快速产生任务的baseline
+  - Facebook使用C++进行实现，进一步提升了计算效率
+  - 采用了char-level的n-gram作为附加特征，比如paper的trigram是 [pap, ape, per]，在将输入paper转为向量的同时也会把trigram转为向量一起参与计算。这样一方面解决了长尾词的OOV (out-of-vocabulary)问题，一方面利用n-gram特征提升了表现
+  - 当类别过多时，支持采用hierarchical softmax进行分类，提升效率
+  - 对于**文本长且对速度要求高**的场景，Fasttext是baseline首选。同时用它在无监督语料上训练词向量，进行文本表示也不错。不过想继续提升效果还需要更复杂的模型。
 
 # 深度学习文本分类
 
+- 汇总文本分类众多方法
 
-## CNN文本分类（TextCNN）
+## CNN文本分类
 
-- 如：textCNN
-  - textcnn的论文Convolutional Neural Networks for Sentence Classification 和 A Sensitivity Analysis of Convolutional Neural Networks for Sentence Classification
+### TextCNN —— 适合中短文本
+
+- TextCNN是Yoon Kim小哥在2014年提出的模型，开创了用CNN编码n-gram特征的先河
+  - textcnn的[论文](https://arxiv.org/abs/1408.5882)
+    - Convolutional Neural Networks for Sentence Classification
+    - A Sensitivity Analysis of Convolutional Neural Networks for Sentence Classification
+  - 论文：
+代码：https://github.com/yoonkim/CNN_sentence
 - 词向量
   - 随机初始化 （CNN-rand）
   - 预训练词向量进行初始化，在训练过程中固定 (CNN-static)
@@ -118,6 +141,31 @@ mathjax: true
   - 可以尝试其他的词向量预训练语料，如Wikipedia[Collobert et al. (2011)]
   - Adadelta(Zeiler, 2012)和Adagrad(Duchi et al., 2011)可以得到相近的结果，但是所需epoch更少。
 
+- 模型结构如图，图像中的卷积都是二维的，而TextCNN则使用「一维卷积」，即filter_size * embedding_dim，有一个维度和embedding相等。这样就能抽取filter_size个gram的信息。以1个样本为例，整体的前向逻辑是：
+  - 对词进行embedding，得到[seq_length, embedding_dim]
+  - 用N个卷积核，得到N个seq_length-filter_size+1长度的一维feature map
+  - 对feature map进行max-pooling（因为是时间维度的，也称max-over-time pooling），得到N个1x1的数值，拼接成一个N维向量，作为文本的句子表示
+  - 将N维向量压缩到类目个数的维度，过Softmax
+- 优化：
+  - Filter尺寸：这个参数决定了抽取n-gram特征的长度，这个参数主要跟数据有关，平均长度在50以内的话，用10以下就可以了，否则可以长一些。在调参时可以先用一个尺寸grid search，找到一个最优尺寸，然后尝试最优尺寸和附近尺寸的组合
+  - Filter个数：这个参数会影响最终特征的维度，维度太大的话训练速度就会变慢。这里在100-600之间调参即可
+  - CNN的激活函数：可以尝试Identity、ReLU、tanh
+  - 正则化：指对CNN参数的正则化，可以使用dropout或L2，但能起的作用很小，可以试下小的dropout率(<0.5)，L2限制大一点
+  - Pooling方法：根据情况选择mean、max、k-max pooling，大部分时候max表现就很好，因为分类任务对细粒度语义的要求不高，只抓住最大特征就好了
+  - Embedding表：中文可以选择char或word级别的输入，也可以两种都用，会提升些效果。如果训练数据充足（10w+），也可以从头训练蒸馏BERT的logits，利用领域内无监督数据
+  - 加深全连接：原论文只使用了一层全连接，而加到3、4层左右效果会更好[2]
+- TextCNN是很适合**中短文本**场景的强baseline，但不太适合长文本，因为卷积核尺寸通常不会设很大，无法捕获长距离特征。同时max-pooling也存在局限，会丢掉一些有用特征。另外再仔细想的话，**TextCNN和传统的n-gram词袋模型本质是一样的**，它的好效果很大部分来自于词向量的引入，因为解决了词袋模型的稀疏性问题。
+
+### DPCNN
+
+- [论文](https://ai.tencent.com/ailab/media/publications/ACL3-Brady.pdf)，[代码](https://github.com/649453932/Chinese-Text-Classification-Pytorch)
+- TextCNN有太浅和长距离依赖的问题，那直接多堆几层CNN是否可以呢？事情没想象的那么简单。
+- 直到2017年，腾讯才提出了把TextCNN做到更深的DPCNN模型
+  - 在Region embedding时不采用CNN那样加权卷积的做法，而是对n个词进行pooling后再加个1x1的卷积，因为实验下来效果差不多，且作者认为前者的表示能力更强，容易过拟合
+  - 使用1/2池化层，用size=3 stride=2的卷积核，直接让模型可编码的sequence长度翻倍（自己在纸上画一下就get啦）
+  - 残差链接，参考ResNet，减缓梯度弥散问题
+- 凭借以上一些精妙的改进，DPCNN相比TextCNN有1-2个百分点的提升。
+
 ## RNN文本分类（TextRNN）
 
 - 思想：以双向LSTM 或GRU来获取句子的信息表征， 以最后一时刻的 h 作为句子特征输入到 softmax 中进行预测
@@ -127,9 +175,10 @@ mathjax: true
   - 策略3：将所有RNN单元的输出向量的均值pooling或者max-pooling作为文本特征
   - 策略4：层次RNN+Attention, Hierarchical Attention Networks
 
-## Text-RCNN（RNN+CNN）用于文本分类
+### Text-RCNN（RNN+CNN）用于文本分类
 
-- 论文Recurrent Convolutional Neural Networks for Text Classification设计了一种RNN和CNN结合的模型用于文本分类。
+- 除了DPCNN那样增加感受野的方式，RNN也可以缓解长距离依赖的问题。
+- 论文[Recurrent Convolutional Neural Networks for Text Classification](https://dl.acm.org/doi/10.5555/2886521.2886636)设计了一种RNN和CNN结合的模型用于文本分类。[代码](https://github.com/649453932/Chinese-Text-Classification-Pytorch)
   - 一个很简单的思想看起来比 Transformer 还复杂，真的是有点醉
   - ![](https://pic4.zhimg.com/80/v2-55989a44d089b8acf269e6c4e219474e_720w.jpg)
 - RCNN相关总结
@@ -139,6 +188,15 @@ mathjax: true
   - RCNN vs. CNN: 在该论文的所有实验数据集上，RCNN比CNN更好
   - CNNs使用固定的词窗口(window of words), 实验结果受窗口大小影响
   - RCNNs使用循环结构捕获广泛的上下文信息
+- 通过加入RNN，比纯CNN提升了1-2个百分点。
+
+### TextBiLSTM+Attention
+
+- [论文](https://www.aclweb.org/anthology/P16-2034.pdf)，[代码](https://github.com/649453932/Chinese-Text-Classification-Pytorch)
+- 文本分类的框架，就是
+  - 先基于上下文对token编码，然后pooling出句子表示再分类。
+  - 在最终池化时，max-pooling通常表现更好，因为文本分类经常是主题上的分类，从句子中一两个主要的词就可以得到结论，其他大多是噪声，对分类没有意义。而到更细粒度的分析时，max-pooling可能又把有用的特征去掉了，这时便可以用attention进行句子表示的融合
+- 加attention的套路用到CNN编码器之后代替pooling也是可以的，从实验结果来看attention的加入可以提高2个点。如果是情感分析这种由句子整体决定分类结果的任务首选RNN。
 
 ## 一定要CNN/RNN吗
 
@@ -179,6 +237,8 @@ mathjax: true
 
 ## HAN (长文本【篇章级别】分类）
 
+- [论文](https://www.aclweb.org/anthology/N16-1174.pdf)，[代码](https://github.com/richliao/textClassifier)
+- 以上方法都是句子级别的分类，虽然用到长文本、篇章级也是可以的，但速度精度都会下降，于是有研究者提出了**层次注意力**分类框架，即Hierarchical Attention。先对每个句子用 BiGRU+Att 编码得到句向量，再对句向量用 BiGRU+Att 得到doc级别的表示进行分类
 - 哈工大团队提出 Document Modeling with Gated Recurrent Neural Network for Sentiment Classification. Duyu Tang, Bing Qin , Ting Liu. In EMNLP, 2015，该文章提出了一种层次神经网络的结构做篇章级别的情感分析，取得了很好的效果
   - ![](https://pic2.zhimg.com/80/v2-b65790c402734c1f7907f59e12058549_720w.jpg)
 - 2016年另外一个团队提出了HAN网络，也是使用层次神经网络的结构做篇章级别的文本分析。并且和上篇论文有很多相似之处。文章利用word att ention 和 sentence attention来更好的实现加权平均，取得了很好的效果
@@ -189,7 +249,7 @@ mathjax: true
   - 然后是句子到文章级别的，一篇文章有多个句子，把它们看成是一个时间序，使用双向GRU对所有句子进行整合，生成新的句向量；
   - 对句向量使用sentence attention ，具体过程和word attention相似，获得文章表示
   - 最后，用Softmax做分类。
-
+- 方法很符合直觉，不过实验结果来看比起avg、max池化只高了不到1个点（狗头，真要是很大的doc分类，好好清洗下，fasttext其实也能顶的
 
 ## 最新研究
 
@@ -197,6 +257,10 @@ mathjax: true
   - Learning Structured Text Representations
   - Attentive Convolution
   - 论文Multi-Task Label Embedding for Text Classification 认为标签与标签之间有可能有联系，所以不是像之前的深度学习模型把标签看成one-hot vector，而是对每个标签进行embedding学习，以提高文本分类的精度。
+- 其他模型
+  - BERT
+  - Capsule Network被证明在多标签迁移的任务上性能远超CNN和LSTM，但这方面的研究在18年以后就很少了。
+  - TextGCN则可以学到更多的global信息，用在半监督场景中，但碰到较长的需要序列信息的文本表现就会差些
 
 
 # [工业界文本分类避坑指南](https://zhuanlan.zhihu.com/p/201239352)
