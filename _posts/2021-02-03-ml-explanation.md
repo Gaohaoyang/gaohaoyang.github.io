@@ -14,7 +14,7 @@ mathjax: true
 
 # 总结
 
-- 【2021-2-3】[机器学习的可解释性](https://mp.weixin.qq.com/s/CYN5ZJhkdpI0DSg_9EapEQ)，[知乎地址](https://zhuanlan.zhihu.com/p/334636096)，【知源月旦】团队完成的首篇综述，参考了Gilpin Leilani H.,et al. 发表在DSAA2018 上的文章
+- 【2021-2-3】[机器学习的可解释性](https://mp.weixin.qq.com/s/CYN5ZJhkdpI0DSg_9EapEQ)，[知乎地址](https://zhuanlan.zhihu.com/p/334636096)，[Github地址](https://github.com/floatingCatty/BAAI-Monthly-)，【知源月旦】团队完成的首篇综述，参考了Gilpin Leilani H.,et al. 发表在DSAA2018 上的文章
 
 # 一、机器学习的可解释性研究概述
  
