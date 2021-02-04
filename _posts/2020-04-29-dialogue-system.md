@@ -15,7 +15,8 @@ mathjax: true
 # 总结
 
 - 【2021-2-4】调停机器人（斡旋）
-  - [Intervening Ethical Governor for Robot Mediator in Patient-Caregiver Relationship](https://www.youtube.com/watch?v=3-ZST_bGW3Q&feature=youtu.be)，国外的调停机器人，佐治亚理工，应用于医患关系调解
+  - [Intervening Ethical Governor for Robot Mediator in Patient-Caregiver Relationship](https://www.youtube.com/watch?v=3-ZST_bGW3Q&feature=youtu.be)，国外的调停机器人，佐治亚理工，应用于医患关系调解，论文：[an intervening ethical governor for a robot mediator in patient-caregiver relationship.](https://www.cc.gatech.edu/ai/robot-lab/online-publications/ICRE15_shim_arkin.pdf)
+    - ![](https://spectrum.ieee.org/image/MjkzMjc1OA.jpeg)
   - 冲突调解机器人：[Robot Mediator for Young Children’s Interpersonal Conflict Resolution](https://www.youtube.com/watch?v=2TYjzIUnRjA)
   - 谈判机器人, [Robot mediators](https://www.youtube.com/watch?v=BZ9fMySqnTM)
 - 图灵测试
