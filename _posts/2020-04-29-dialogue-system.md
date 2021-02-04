@@ -14,6 +14,7 @@ mathjax: true
 
 # 总结
 
+- 【2021-2-4】[Intervening Ethical Governor for Robot Mediator in Patient-Caregiver Relationship](https://www.youtube.com/watch?v=3-ZST_bGW3Q&feature=youtu.be)，国外的调停机器人，佐治亚理工，应用于医患关系调解
 - 图灵测试
   - 现代计算机之父阿兰·图灵1950年在哲学刊物《思维》上发表了“计算机器与智能”一文，提出了经典的图灵测试(the Turing test)，在测试者与被测试者(一个人和一台机器)隔开情况下，通过一些装置, 如键盘, 向被测试者随意提问.进行多次测试后，如果有超过30%的测试者不能确定被测试者是人还是机器，那么这台机器就通过了测试，并被认为具有人类智能.
 
