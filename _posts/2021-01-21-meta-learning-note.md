@@ -13,6 +13,157 @@ mathjax: true
 * content
 {:toc}
 
+# 总结
+
+- 【2021-2-5】阿里小蜜-北京 [小样本学习（Few-shot Learning）综述](https://zhuanlan.zhihu.com/p/61215293)
+  - 将 Few-shot Learning 和 Capsule Network 融合，提出了 Induction Network，在文本分类上做到了新的 state-of-the-art。
+  - 基于目前 Metric Based 方法，提出了 Encoder-Induction-Relation 的三级框架，如图 10 所示，Encoder 模块用于获取每个样本的语义表示，可以使用典型的 CNN、LSTM、Transformer 等结构，Induction 模块用于从支撑集的样本语义中归纳出类别特征，Relation 模块用于度量 query 和类别之间的语义关系，进而完成分类。
+  - ![](https://pic1.zhimg.com/80/v2-3bffc6cb2a790f0d694a304720e80b08_720w.jpg)
+- [最新《小样本学习(Few-shot learning)》2020综述，34页pdf166篇参考文献](https://zhuanlan.zhihu.com/p/129786553)
+  - 小样本学习综述《[Generalizing from a Few Examples: A Survey on Few-Shot Learning](https://arxiv.org/abs/1904.05046)》，包含166篇参考文献，来自第四范式和香港科技大学习的研究学者。
+- [Few-shot learning（少样本学习）入门](https://zhuanlan.zhihu.com/p/156830039)
+
+# Few shot learning 小样本学习
+
+- 人类非常擅长通过**极少量**的样本识别一个新物体，比如小孩子只需要书中的一些图片就可以认识什么是“斑马”，什么是“犀牛”。在人类的快速学习能力的启发下，研究人员希望机器学习模型在学习了一定类别的大量数据后，对于新的类别，只需要少量的样本就能快速学习，这就是 Few-shot Learning 要解决的问题。
+- 方法体系：数据、模型和算法
+  - ![](https://pic4.zhimg.com/80/v2-34c21e6e6a6b07fa5d327b05d33fbc47_720w.jpg)
+
+## 背景
+
+- 分类非常常见，但如果每个类只有几个标注样本，怎么办？
+- 大量平台用户在创建一个新对话任务时，并没有大量标注数据，每个意图往往只有几个或十几个样本。
+- 面对这类问题，有一个专门的机器学习分支——**Few-shot Learning** 来进行研究和解决
+
+## FSL定义
+
+- Few-shot Learning 是 Meta Learning 在**监督学习**领域的应用。
+- FSL的核心问题：<font color='red'>经验风险最小化是不可靠的</font>
+- 监督学习与小样本学习差异（左边是数据量充足，右边小样本）
+  - ![](https://pic4.zhimg.com/80/v2-2826adf85240538e9fbf82890a63bac3_720w.jpg)
+- Meta Learning，又称为 learning to learn
+  - meta training 阶段，将数据集分解为不同的 **meta task**，去学习类别变化的情况下模型的泛化能力
+  - meta testing 阶段，面对全新的类别，不需要变动已有的模型，就可以完成分类。
+- Few-shot 的训练集中包含了很多的类别，每个类别中有多个样本。
+  - 在训练阶段，会在训练集中随机抽取 C 个类别，每个类别 K 个样本（总共 CK 个数据），构建一个 **meta-task**，作为模型的**支撑集**（support set）输入；
+  - 再从这 C 个类中剩余的数据中抽取一批（batch）样本作为模型的预测对象（batch set）。即要求模型从 C*K 个数据中学会如何区分这 C 个类别，这样的任务被称为 **C-way K-shot** 问题。
+  - 5 way 1 shot 示例
+    - ![](https://pic3.zhimg.com/80/v2-7bae6075712b14614b52f515c593573e_720w.jpg)
+  - 2-way 5-shot 示例
+     -  ![](https://pic2.zhimg.com/80/v2-425a4cceb747a125d92b07add5917b09_720w.jpg)
+     -  meta training 阶段构建了一系列 meta-task 来让模型学习如何根据 support set 预测 batch set 中的样本的标签；
+     -  meta testing 阶段的输入数据的形式与训练阶段一致（2-way 5-shot），但是会在全新的类别上构建 support set 和 batch。
+- 训练过程中，每次训练（episode）都会采样得到不同 meta-task，所以总体来看，训练包含了不同的类别组合，这种机制使得模型学会不同 meta-task 中的共性部分，比如如何提取重要特征及比较样本相似等，忘掉 meta-task 中 task 相关部分。通过这种学习机制学到的模型，在面对新的未见过的 meta-task 时，也能较好地进行分类。
+
+## 数据集
+
+- 图像
+  -  MiniImage
+  -  Omnigraffle
+- 文本
+  1. FewRel 数据集由Han等人在EMNLP 2018提出，是一个小样本关系分类数据集，包含64种关系用于训练，16种关系用于验证和20种关系用于测试，每种关系下包含700个样本。
+  2. ARSC 数据集 由 Yu 等人在 NAACL 2018 提出，取自亚马逊多领域情感分类数据，该数据集包含 23 种亚马逊商品的评论数据，对于每一种商品，构建三个二分类任务，将其评论按分数分为 5、4、 2 三档，每一档视为一个二分类任务，则产生 23*3=69 个 task，然后取其中 12 个 task（4*3）作为测试集，其余 57 个 task 作为训练集。
+  3. ODIC 数据集来自阿里巴巴对话工厂平台的线上日志，用户会向平台提交多种不同的对话任务，和多种不同的意图，但是每种意图只有极少数的标注数据，这形成了一个典型的 Few-shot Learning 任务，该数据集包含 216 个意图，其中 159 个用于训练，57 个用于测试。
+
+
+## 方法
+
+- 早期的 Few-shot Learning 算法研究多集中在图像领域，以 MiniImage 和 Omnigraffle 两个数据集为代表。
+- 近年来，在自然语言处理领域也开始出现 Few-shot Learning 的数据集和模型，相比于图像，文本的语义中包含更多的变化和噪声
+- ![](https://pic2.zhimg.com/80/v2-91fcdbfabcb3aa5386e436c27fb52615_720w.jpg)
+- Few-shot Learning 模型大致可分为三类：
+  - **Mode Based**：通过模型结构的设计快速在少量样本上更新参数，直接建立输入 x 和预测值 P 的映射函数
+  - **Metric Based**：通过度量 batch 中的样本和 support 中样本的距离，借助最近邻的思想完成分类
+  - **Optimization Based**：普通的梯度下降方法难以在 few-shot 场景下拟合，因此通过调整优化方法来完成小样本分类的任务
+
+### Model Based方法
+
+- Santoro 等人提出使用记忆增强的方法来解决 Few-shot Learning 任务。基于记忆的神经网络方法早在 2001 年被证明可以用于 meta-learning。他们通过权重更新来调节 bias，并且通过学习将表达快速缓存到记忆中来调节输出。
+- 然而，利用循环神经网络的内部记忆单元无法扩展到需要对大量新信息进行编码的新任务上。因此，需要让存储在记忆中的表达既要稳定又要是元素粒度访问的，前者是说当需要时就能可靠地访问，后者是说可选择性地访问相关的信息；另外，参数数量不能被内存的大小束缚。神经图灵机（NTMs）和记忆网络就符合这种必要条件。
+- 文章基于神经网络图灵机（NTMs）的思想，因为 NTMs 能通过外部存储（external memory）进行短时记忆，并能通过缓慢权值更新来进行长时记忆，NTMs 可以学习将表达存入记忆的策略，并如何用这些表达来进行预测。由此，文章方法可以快速准确地预测那些只出现过一次的数据。
+- 文章基于 LSTM 等 RNN 的模型，将数据看成序列来训练，在测试时输入新的类的样本进行分类。
+- 具体地，在 t 时刻，模型输入 (xt,yt-1)，也就是在当前时刻预测输入样本的类别，并在下一时刻给出真实的 label，并且添加了 external memory 存储上一次的 x 输入，这使得下一次输入后进行反向传播时，可以让 y (label) 和 x 建立联系，使得之后的 x 能够通过外部记忆获取相关图像进行比对来实现更好的预测。
+  - ![](https://pic2.zhimg.com/80/v2-abf2cab4e2fd2f20589c219048bffe09_720w.jpg)
+  - ▲ Memory Augmented Model
+- Meta Network的快速泛化能力源自其“快速权重”的机制，在训练过程中产生的梯度被用来作为快速权重的生成。
+- 模型包含一个 meta learner 和一个 base learner
+  - meta learner 用于学习 meta task 之间的泛化信息，并使用 memory 机制保存这种信息
+  - base learner 用于快速适应新的 task，并和 meta learner 交互产生预测输出。
+
+### Metric Based方法
+
+- 如果在 Few-shot Learning 的任务中去训练普通的基于 cross-entropy 的神经网络分类器，那么几乎肯定是会过拟合，因为神经网络分类器中有数以万计的参数需要优化。
+- 相反，很多非参数化的方法（最近邻、K-近邻、Kmeans）不需要优化参数，因此可以在 meta-learning 的框架下构造一种可以端到端训练的 few-shot 分类器。该方法是对样本间距离分布进行建模，使得同类样本靠近，异类样本远离。下面介绍相关的方法。
+- 如图所示，**孪生网络**（Siamese Network）通过有监督的方式训练孪生网络来学习，然后重用网络所提取的特征进行 one/few-shot 学习。
+  - Siamese Network
+  - ![](https://pic4.zhimg.com/80/v2-2620b9d172e3e28df69b6a999dd8ba03_720w.jpg)
+  - 知乎视频讲解：[Few-Shot Learning - Siamese Network](https://www.zhihu.com/zvideo/1335317579628548096)，使用triplet loss，**同类相近，异类相远**
+- 双路神经网络
+  - 训练时，通过组合的方式构造不同的成对样本，输入网络进行训练，在最上层通过样本对的距离判断他们是否属于同一个类，并产生对应的概率分布。
+  - 预测时，孪生网络处理测试样本和支撑集之间每一个样本对，最终预测结果为支撑集上概率最高的类别。
+- （1）相比**孪生网络**（连体网络），**匹配网络**（Match Network）为**支撑集**和 **Batch 集**构建不同的编码器，最终分类器的输出是支撑集样本和 query 之间预测值的加权求和。
+- ![](https://pic4.zhimg.com/80/v2-d62b26df5f93b0c4489b467978d43057_720w.jpg)
+- 在不改变网络模型的前提下能对未知类别生成标签，其主要创新体现在建模过程和训练过程上。对于建模过程的创新，文章提出了基于 memory 和 attention 的 matching nets，使得可以快速学习。基于传统机器学习的一个原则，即训练和测试是要在同样条件下进行的，提出在训练的时候不断地让网络只看每一类的少量样本，这将和测试的过程是一致的。
+- 支撑集样本 embedding 模型 g 能继续优化，并且支撑集样本应该可以用来修改测试样本的 embedding 模型 f。
+- 这个可以通过如下两个方面来解决，即：
+  - 1）基于双向 LSTM 学习训练集的 embedding，使得每个支撑样本的 embedding 是其它训练样本的函数；
+  - 2）基于 attention-LSTM 来对测试样本 embedding，使得每个 Query 样本的 embedding 是支撑集 embedding 的函数。文章称其为 FCE (fully-conditional embedding)。
+- （2）**原型网络**（Prototype Network）基于这样的想法：
+  - 每个类别都存在一个原型表达，该类的原型是 support set 在 embedding 空间中的均值。然后，分类问题变成在 embedding 空间中的最近邻。
+  - c1、c2、c3 分别是三个类别的均值中心（称 Prototype），将测试样本 x 进行 embedding 后，与这 3 个中心进行距离计算，从而获得 x 的类别。
+  - ![](https://pic2.zhimg.com/80/v2-b80a95841c319730ddb4fe3e86b9b445_720w.jpg)
+  - 文章采用在 Bregman 散度下的指数族分布的混合密度估计，文章在训练时采用相对测试时更多的类别数，即训练时每个 episodes 采用 20 个类（20 way），而测试对在 5 个类（5 way）中进行，其效果相对训练时也采用 5 way 的提升了 2.5 个百分点。
+- 前面介绍的几个网络结构在最终的距离度量上都使用了固定的度量方式，如 cosine，欧式距离等，这种模型结构下所有的学习过程都发生在样本的 embedding 阶段。
+- （3）Relation Network
+  - Relation Network认为度量方式也是网络中非常重要的一环，需要对其进行建模，所以该网络不满足单一且固定的距离度量方式，而是训练一个网络来学习（例如 CNN）距离的度量方式，在 loss 方面也有所改变，考虑到 relation network 更多的关注 relation score，更像一种回归，而非 0/1 分类，所以使用了 MSE 取代了 cross-entropy。
+  - ![](https://pic2.zhimg.com/80/v2-2f8ed3cf76e138a7be12c6645fd33441_720w.jpg)
+
+
+
+### Optimization Based方法
+
+- Ravi 等人 [7] 研究了在少量数据下，基于梯度的优化算法失败的原因，即无法直接用于 meta learning。
+  - 首先，这些梯度优化算法包括 momentum, adagrad, adadelta, ADAM 等，**无法在几步内完成优化**，特别是在**非凸**的问题上，多种超参的选取无法保证收敛的速度。
+  - 其次，不同任务**分别随机初始化**会影响任务收敛到好的解上。虽然 fine tune 这种迁移学习能缓解这个问题，但当新数据相对原始数据偏差比较大时，迁移学习的性能会大大下降。我们需要一个系统的学习通用初始化，使得训练从一个好的点开始，它和迁移学习不同的是，它能保证该初始化能让 finetune 从一个好的点开始。
+- 文章学习的是一个模型参数的**更新函数**或**更新规则**。它不是在多轮的 episodes 学习一个单模型，而是在**每个 episode 学习特定的模型**。
+- 学习基于梯度下降的参数更新算法，采用 LSTM 表达 meta learner，用其状态表达目标分类器的参数的更新，最终学会如何在新的分类任务上，对分类器网络（learner）进行初始化和参数更新。这个优化算法同时考虑一个任务的短时知识和跨多个任务的长时知识。
+- 文章设定目标为通过少量的迭代步骤捕获优化算法的泛化能力，由此 meta learner 可以训练让 learner 在每个任务上收敛到一个好的解。另外，通过捕获所有任务之前共享的基础知识，进而更好地初始化 learner。
+- ![](https://pic4.zhimg.com/80/v2-5b123b7cc752acb08a37ca95d51f5e9b_720w.jpg)
+  - 以训练 miniImage 数据集为例，训练过程中，从训练集（64 个类，每类 600 个样本）中随机采样 5 个类，每个类 5 个样本，构成支撑集，去学习 learner；然后从训练集的样本（采出的 5 个类，每类剩下的样本）中采样构成 Batch 集，集合中每类有 15 个样本，用来获得 learner 的 loss，去学习 meta leaner。
+  - 测试时的流程一样，从测试集（16 个类，每类 600 个样本）中随机采样 5 个类，每个类 5 个样本，构成支撑集 Support Set，去学习 learner；然后从测试集剩余的样本（采出的 5 个类，每类剩下的样本）中采样构成 Batch 集，集合中每类有 15 个样本，用来获得 learner 的参数，进而得到预测的类别概率。这两个过程分别如图 8 中虚线左侧和右侧。
+- meta learner 的目标是在各种不同的学习任务上学出一个模型，使得可以仅用少量的样本就能解决一些新的学习任务。这种任务的挑战是模型需要结合之前的经验和当前新任务的少量样本信息，并避免在新数据上过拟合。
+- Finn [8] 提出的方法使得可以在小量样本上，用少量的迭代步骤就可以获得较好的泛化性能，而且模型是容易 fine-tine 的。而且这个方法无需关心模型的形式，也不需要为 meta learning 增加新的参数，直接用梯度下降来训练 learner。
+  - 文章的核心思想是学习模型的初始化参数使得在一步或几步迭代后在新任务上的精度最大化。它学的不是模型参数的更新函数或是规则，它不局限于参数的规模和模型架构（比如用 RNN 或 siamese）。它本质上也是学习一个好的特征使得可以适合很多任务（包括分类、回归、增强学习），并通过 fine-tune 来获得好的效果。
+  - 文章提出的方法，可以学习任意标准模型的参数，并让该模型能快速适配。他们认为，一些中间表达更加适合迁移，比如神经网络的内部特征。因此面向泛化性的表达是有益的。因为我们会基于梯度下降策略在新的任务上进行 finetune，所以目标是学习这样一个模型，它能对新的任务从之前任务上快速地进行梯度下降，而不会过拟合。事实上，是要找到一些对任务变化敏感的参数，使得当改变梯度方向，小的参数改动也会产生较大的 loss。
+
+
+# Meta-Learning 元学习
+
+- Meta learning
+- 元学习的核心想法是先学习一个**先验知识**（prior），这个先验知识对解决 few-shot learning 问题特别有帮助。
+- Meta-learning 中有 task 的概念，比如5-way 1-shot 问题就是一个 task，先学习很多很多这样的 task，然后再来解决这个新的 task 。重要的一点，这是一个新的 task。分类问题中，这个新的 task 中的类别是之前我们学习过的 task 中没有见过的！ 在 Meta-learning 中之前学习的 task 我们称为 meta-training task，遇到的新的 task 称为 meta-testing task。因为每一个 task 都有自己的训练集和测试集，因此为了不引起混淆，我们把 task 内部的训练集和测试集一般称为 support set 和 query set
+- Meta-learning 方法的分类标准有很多，为解决过拟合问题，有下面常见的3种方法
+  - **学习微调** (Learning to Fine-Tune)
+  - 基于 RNN 的**记忆** (RNN Memory Based)
+  - **度量学习** (Metric Learning)
+- 参考文章《Learning to Compare: Relation Network for Few-Shot Learning》
+
+
+1. 学习微调 (Learning to Fine-Tune)
+   - MAML（《Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks》） 是这类方法的范例之一。MAML 的思想是学习一个 初始化参数 (initialization parameter)，这个初始化参数在遇到新的问题时，只需要使用少量的样本 (few-shot learning) 进行几步梯度下降就可以取得很好地效果（ 参见后续博客 ）。另一个典型是《Optimization as a Model for Few-Shot Learning》，他不仅关注于初始化，还训练了一个基于 LSTM 的优化器 (optimizer) 来帮助微调（ 参见后续博客 ）。
+2. 基于 RNN 的记忆 (RNN Memory Based)
+   - 最直观的方法，使用基于 RNN 的技术记忆先前 task 中的表示等，这种表示将有助于学习新的 task。可参考《Meta networks》和 《Meta-learning with memory-augmented neural networks.》
+3. 度量学习 (Metric Learning)
+   - 主要可以参考《Learning a Similarity Metric Discriminatively, with Application to Face Verification.》，《Siamese neural networks for one-shot image recognition》，《Siamese neural networks for one-shot image recognition》，《Matching networks for one shot learning》，《Prototypical Networks for Few-shot Learning》，《Learning to Compare: Relation Network for Few-Shot Learning》。
+- 核心思想：学习一个 embedding 函数，将输入空间（例如图片）映射到一个新的嵌入空间，在嵌入空间中有一个相似性度量来区分不同类。我们的先验知识就是这个 embedding 函数，在遇到新的 task 的时候，只将需要分类的样本点用这个 embedding 函数映射到嵌入空间里面，使用相似性度量比较进行分类。
+
+- 方法简单比较
+  - 基于 RNN 的记忆 (RNN Memory Based) 有两个关键问题，一个是这种方法经常会加一个外部存储来记忆，另一个是对模型进行了限制 (RNN)，这可能会在一定程度上阻碍其发展和应用。
+  - 学习微调 (Learning to Fine-Tune) 的方法需要在新的 task 上面进行微调，也正是由于需要新的 task 中 support set 中有样本来进行微调，目前我个人还没看到这种方法用于 zero-shot learning（参考 few-shot learning 问题的定义，可以得到 zero-shot learning的定义）的问题上，但是在《Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks》的作者 Chelsea Finn 的博士论文《Learning to Learn with Gradients》中给出了 MAML 的理论证明，并且获得了 2018 ACM 最佳博士论文奖，还有一点就是 MAML 可以用于强化学习，另外两种方法多用于分类问题。[链接](https://mp.weixin.qq.com/s/AdlwI-nbVlDWCj0o5LR7Sw)
+  - 度量学习 (Metric Learning)，和学习微调 (Learning to Fine-Tune) 的方法一样不对模型进行任何限制，并且可以用于 zero-shot learning 问题。虽然效果比较理想但是现在好像多用于分类任务并且可能缺乏一些理论上的证明，比如相似性度量是基于余弦距离还是欧式距离亦或是其他？为什么是这个距离？（因为 embedding 函数是一个神经网络，可解释性差，导致无法很好解释新的 embedding 空间），虽然《Learning to Compare: Relation Network for Few-Shot Learning》中的 Relation Network 将两个需要比较的 embedding 又送到一个神经网络（而不是人为手动选择相似性度量）来计算相似性得分，但是同样缺乏很好地理论证明。
+- 参考：[Few-shot learning（少样本学习）和 Meta-learning（元学习）概述](https://blog.csdn.net/weixin_37589575/article/details/92801610)
+
+
 > Meta-learning, also known as "learning to learn", intends to design models that can learn new skills or adapt to new environments rapidly with a few training examples. There are three common approaches: 1) learn an efficient distance metric (metric-based); 2) use (recurrent) network with external or internal memory (model-based); 3) optimize the model parameters explicitly for fast learning (optimization-based).
 
 <!--more-->
