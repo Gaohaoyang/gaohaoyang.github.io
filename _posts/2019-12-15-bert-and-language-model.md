@@ -501,6 +501,13 @@ Hinton在NIPS2014[\[1\]](https://zhuanlan.zhihu.com/p/71986772#ref_1)提出了`�
 
 - 【2020-8-10】[京东副总裁何晓冬：GPT-3后，人机对话与交互何去何从？CCF-GAIR 2020](https://www.leiphone.com/news/202008/BC6XqIXF3ifH6uvV.html)
 ![](https://static.leiphone.com/uploads/new/images/20200810/5f311dc980e89.jpg?imageView2/2/w/740)
+- 【2021-2-6】[GPT发家史](https://mp.weixin.qq.com/s/Y8yHaf7dm5jEQAvP9IvRRA)
+  - OpenAI 成立之初并非因为文本生成模型而知名，这点和 DeepMind 些许不同，后者专注强化学习一百年。 OpenAI 一开始两条线是**强化学习**和**生成模型**（集中 GAN），而 GPT 开始也没受到太大关注，而是在探索中 OpenAI 发现了其可能性，便开始大力投入，到现在基本上一大半项目都与其相关。所以，现今大家提起 OpenAI 相信都是马上想起 GPT，再或者和马一龙（Elon Musk）早期有一腿，又多少人还能想起强化学习和GAN呢。
+  - OpenAI 早期成员，除 Pieter Abbeel 等做强化学习的，就是一众做偏图像生成的，比如
+    - GAN 提出者 Ian Goodfellow 最早也是入职 OpenAI
+    - 同期入职的还有一个叫 Alec Radford 发明 DCGAN 的精神小伙。大家记住这个名字，因为他对 GPT 的发展应该说至关重要。
+    - 所以可以看出最早 OpenAI 就是群做强化学习和图像生成的人，没啥做 NLP 的，自然也难料想自己居然是通过 NLP 来一战成名。
+
 
 ## 模型结构
 
