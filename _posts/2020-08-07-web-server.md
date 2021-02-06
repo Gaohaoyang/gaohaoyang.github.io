@@ -3,7 +3,7 @@ layout: post
 title:  "Web服务知识-Web-Serving"
 date:   2020-08-07 19:17:00
 categories: 技术工具
-tags: Web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session RPC 架构设计
+tags: Web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session RPC 架构设计 GraphQL
 author : 鹤啸九天
 excerpt: Web开发相关技术知识点
 mathjax: true
@@ -485,8 +485,97 @@ mathjax: true
 
 - 目前网上很多说是下一代微服务架构就是Service Mesh，Service Mesh主流框架有Linkerd和Istio，其中Istio有大厂加持所以呼声更高。
 
+# GraphQL
+
+## GraphQL简介
+  - GraphQL是一种新的API标准，它提供了一种比REST更有效、更强大和更灵活的替代方案。
+- Facebook开发并开源的，现在由来自世界各地的公司和个人组成的大型社区维护。
+- GraphQL本质上是一种**基于api的查询语言**，现在大多数应用程序都需要从服务器中获取数据，这些数据存储可能存储在数据库中，API的职责是提供与应用程序需求相匹配的存储数据的接口。
+- 数据库无关的，而且可以在使用API的任何环境中有效使用，GraphQL是基于API之上的一层封装，目的是为了更好，更灵活的适用于业务的需求变化。
+- 总结
+  - 强大的API查询语言
+  - 客户端服务器间通信中介
+  - 比Restful API更高效、灵活
+
+## GraphQL 对比 REST API 
+
+- 【2021-2-6】总结
+
+|维度|Restful API|GraphQL|
+|---|---|---|
+|接口|接口灵活性差、操作流程繁琐|声明式数据获取，接口数据精确返回，查询流程简洁，照顾了客户端的灵活性|
+|扩展性|不断编写新接口（依赖于服务端）|一个服务仅暴露一个 GraphQL 层，消除了服务器对数据格式的硬性规定，客户端按需请求数据，可进行单独维护和改进。|
+|传输协议|HTTP协议，不能灵活选择网络协议|传输层无关、数据库技术无关，技术栈选择更灵活|
+
+## 介绍
+- 举例说明：前端向后端请求一个book对象的数据及其作者信息。
+- REST API动图演示：
+  - ![](https://pic4.zhimg.com/v2-c9260410f4c294c8e0e4ce94d4ac6767_b.webp)
+- GraphQL动图演示：
+  - ![](https://pic1.zhimg.com/v2-6a2d8af7087b156cf3dde52ccf5d7d08_b.webp)
+- 与REST多个endpoint不同，每一个的 GraphQL 服务其实对外只提供了一个用于调用内部接口的端点，所有的请求都访问这个暴露出来的唯一端点。
+  - ![](https://pic2.zhimg.com/80/v2-6c849555869fbd25ceb69e2530273949_720w.jpg)
+- GraphQL 实际上将多个 HTTP 请求聚合成了一个请求，将多个 restful 请求的资源变成了一个从根资源 POST 访问其他资源的 Comment 和 Author 的图，多个请求变成了一个请求的不同字段，从原有的**分散式**请求变成了**集中式**的请求，因此GraphQL又可以被看成是**图数据库**的形式。
+  - ![](https://pic4.zhimg.com/80/v2-4efc7e2a78697e086b5bceec3f82b3c7_720w.jpg)
+
+- GraphQL的核心概念：**图表模式**（Schema）
+- GraphQL设计了一套Schema模式（可以理解为语法），其中最重要的就是数据类型的定义和支持。类型（Type）就是模式（Schema）最核心的东西
+- 什么是类型？
+  - 对于数据模型的抽象是通过类型（Type）来描述的，每一个类型有若干字段（Field）组成，每个字段又分别指向某个类型（Type）。这很像Java、C#中的类（Class）。
+  - GraphQL的Type简单可以分为两种，一种叫做Scalar Type(标量类型)，另一种叫做Object Type(对象类型)。
+
+## GraphQL特点总结
+
+- **声明式数据获取**（可以对API进行查询）: 声明式的数据查询带来了接口的精确返回，服务器会按数据查询的格式返回同样结构的 JSON 数据、真正照顾了客户端的灵活性。
+- 一个微服务仅暴露**一个 GraphQL 层**：一个微服务只需暴露一个GraphQL endpoint，客户端请求相应数据只通过该端点按需获取，不需要再额外定义其他接口。
+- **传输层无关、数据库技术无关**：带来了更灵活的技术栈选择，比如我们可以选择对移动设备友好的协议，将网络传输数据量最小化，实现在网络协议层面优化应用。
 
 
+## GraphQL接口设计
+
+- GraphQL获取数据三步骤
+  - 首先要设计数据模型，用来描述数据对象，它的作用可以看做是VO，用于告知GraphQL如何来描述定义的数据，为下一步查询返回做准备；
+  - 前端使用模式查询语言（Schema）来描述需要请求的数据对象类型和具体需要的字段（称之为声明式数据获取）；
+  - 后端GraphQL通过前端传过来的请求，根据需要，自动组装数据字段，返回给前端。
+- ![](https://pic4.zhimg.com/v2-4bafe3f3e71c4b06d58b9d5b556df6df_b.webp)
+- 设计思想：GraphQL 以图的形式将整个 Web 服务中的资源展示出来，客户端可以按照其需求自行调用，类似添加字段的需求其实就不再需要后端多次修改了。
+- 创建GraphQL服务器的最终目标是：允许查询通过图和节点的形式去获取数据。
+  - ![](https://pic2.zhimg.com/80/v2-942b7a4fbc8c8e5dcd016bc072895a9d_720w.jpg)
+
+## GraphQL支持的数据操作
+- GraphQL对数据支持的操作有：
+  - 查询（Query）：获取数据的基本查询。
+  - 变更（Mutation）：支持对数据的增删改等操作。
+  - 订阅（Subscription）：用于监听数据变动、并靠websocket等协议推送变动的消息给对方。
+
+## GraphQL执行逻辑
+
+- 有人会问：
+  - 使用了GraphQL就要完全抛弃REST了吗？
+  - GraphQL需要直接对接数据库吗？
+  - 使用GraphQL需要对现有的后端服务进行大刀阔斧的修改吗？
+- 答案是：NO！不需要！
+- 它完全可以以一种不侵入的方式来部署，将它作为前后端的中间服务，也就是，现在开始逐渐流行的 前端 —— 中端 —— 后端 的三层结构模式来部署！
+- 那就来看一下这样的部署模式图：
+  - ![](https://pic3.zhimg.com/80/v2-bd8655c1d1d472088ae593674491df12_720w.jpg)
+- 完全可以搭建一个GraphQL服务器，专门来处理前端请求，并处理后端服务获取的数据，重新进行组装、筛选、过滤，将完美符合前端需要的数据返回。
+- 新的开发需求可以直接就使用GraphQL服务来获取数据了，以前已经上线的功能无需改动，还是使用原有请求调用REST接口的方式，最低程度的降低更换GraphQL带来的技术成本问题！
+- 如果没有那么多成本来支撑改造，那么就不需要改造！
+- 只有当原有需求发生变化，需要对原功能进行修改时，就可以换成GraphQL了。
+
+## GraphQL服务框架：
+
+- 框架
+  - Apollo Engine:一个用于监视 GraphQL 后端的性能和使用的服务。
+  - Graphcool(github): 一个 BaaS（后端即服务），它为你的应用程序提供了一个 GraphQL 后端，且具有用于管理数据库和存储数据的强大的 web ui。
+  - Tipe (github): 一个 SaaS（软件即服务）内容管理系统，允许你使用强大的编辑工具创建你 的内容，并通过 GraphQL 或 REST API 从任何地方访问它。
+  - AWS AppSync：完全托管的 GraphQL 服务，包含实时订阅、离线编程和同步、企业级安全特性以及细粒度的授权控制。
+  - Hasura：一个 BaaS（后端即服务），允许你在 Postgres 上创建数据表、定义权限并使用 GraphQL 接口查询和操作。
+- 工具
+  - graphiql (npm): 一个交互式的运行于浏览器中的 GraphQL IDE。
+  - Graphql Language Service: 一个用于构建 IDE 的 GraphQL 语言服务（诊断、自动完成等） 的接口。
+  - quicktype (github): 在 TypeScript、Swift、golang、C#、C++ 等语言中为 GraphQL 查 询生成类型。
+- 想要获取更多关于Graphql的一些框架、工具，可以去awesome-graphql：一个神奇的社区，维护一系列库、资源等。更多Graphql的知识，可以去http://GraphQL.cn
 
 # Python Web框架
 
