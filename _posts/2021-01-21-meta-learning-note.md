@@ -22,6 +22,9 @@ mathjax: true
 - [最新《小样本学习(Few-shot learning)》2020综述，34页pdf166篇参考文献](https://zhuanlan.zhihu.com/p/129786553)
   - 小样本学习综述《[Generalizing from a Few Examples: A Survey on Few-Shot Learning](https://arxiv.org/abs/1904.05046)》，包含166篇参考文献，来自第四范式和香港科技大学习的研究学者。
 - [Few-shot learning（少样本学习）入门](https://zhuanlan.zhihu.com/p/156830039)
+- 书籍： [Hands-On Meta Learning With Python](https://github.com/sudharsan13296/Hands-On-Meta-Learning-With-Python), 包含配套代码，Learning to Learn using One-Shot Learning, MAML, Reptile, Meta-SGD and more. You will delve into various one-shot learning algorithms, like siamese, prototypical, relation and memory-augmented networks by implementing them in TensorFlow and Keras.
+- [From zero to research — An introduction to Meta-learning](https://medium.com/huggingface/from-zero-to-research-an-introduction-to-meta-learning-8e16e677f78a)
+- Google谷歌和伯克利出品ppt：[What’s Wrong with Meta-Learning and how we might fix it](http://metalearning.ml/2018/slides/meta_learning_2018_Levine.pdf)
 
 # Few shot learning 小样本学习
 
@@ -38,6 +41,7 @@ mathjax: true
 ## FSL定义
 
 - Few-shot Learning 是 Meta Learning 在**监督学习**领域的应用。
+  - 问题：无监督领域里的元学习是什么？元强化学习（Meta-RL）
 - FSL的核心问题：<font color='red'>经验风险最小化是不可靠的</font>
 - 监督学习与小样本学习差异（左边是数据量充足，右边小样本）
   - ![](https://pic4.zhimg.com/80/v2-2826adf85240538e9fbf82890a63bac3_720w.jpg)
@@ -65,6 +69,13 @@ mathjax: true
   2. ARSC 数据集 由 Yu 等人在 NAACL 2018 提出，取自亚马逊多领域情感分类数据，该数据集包含 23 种亚马逊商品的评论数据，对于每一种商品，构建三个二分类任务，将其评论按分数分为 5、4、 2 三档，每一档视为一个二分类任务，则产生 23*3=69 个 task，然后取其中 12 个 task（4*3）作为测试集，其余 57 个 task 作为训练集。
   3. ODIC 数据集来自阿里巴巴对话工厂平台的线上日志，用户会向平台提交多种不同的对话任务，和多种不同的意图，但是每种意图只有极少数的标注数据，这形成了一个典型的 Few-shot Learning 任务，该数据集包含 216 个意图，其中 159 个用于训练，57 个用于测试。
 
+Most popularly used datasets:
+* [Omniglot](https://github.com/brendenlake/omniglot) 
+* [mini-ImageNet](https://github.com/y2l/mini-imagenet-tools) 
+* [ILSVRC](http://image-net.org/challenges/LSVRC/)
+* [FGVC aircraft](http://www.robots.ox.ac.uk/~vgg/data/fgvc-aircraft/)
+* [Caltech-UCSD Birds-200-2011](http://www.vision.caltech.edu/visipedia/CUB-200-2011.html)
+Check several other datasets by Google [here.](https://github.com/google-research/meta-dataset)
 
 ## 方法
 
@@ -922,6 +933,8 @@ See you in the next post!
 
 ## Reference
 
+- 【2021-2-7】摘自：[awesome-meta-learning](https://github.com/dragen1860/awesome-meta-learning/blob/master/README.md)
+
 [1] Brenden M. Lake, Ruslan Salakhutdinov, and Joshua B. Tenenbaum. ["Human-level concept learning through probabilistic program induction."](https://www.cs.cmu.edu/~rsalakhu/papers/LakeEtAl2015Science.pdf) Science 350.6266 (2015): 1332-1338.
 
 [2] Oriol Vinyals' talk on ["Model vs Optimization Meta Learning"](http://metalearning-symposium.ml/files/vinyals.pdf)
@@ -951,3 +964,194 @@ See you in the next post!
 [14] [Slides on Reptile](https://www.slideshare.net/YoonhoLee4/on-firstorder-metalearning-algorithms) by Yoonho Lee.
 
 
+
+# Papers and Code
+
+- Pytorch版本的MAML实现：[How to train your MAML in Pytorch](https://github.com/AntreasAntoniou/HowToTrainYourMAMLPytorch)，文章介绍：[How to train your MAML: A step by step approach](https://www.bayeswatch.com/2018/11/30/HTYM/)
+
+- Zero-Shot / One-Shot / Few-Shot / Low-Shot Learning
+* __Siamese Neural Networks for One-shot Image Recognition__, (2015), _Gregory Koch, Richard Zemel, Ruslan Salakhutdinov_. [[pdf]](https://www.cs.cmu.edu/~rsalakhu/papers/oneshot1.pdf) [[code]](https://github.com/sudharsan13296/Hands-On-Meta-Learning-With-Python/blob/master/02.%20Face%20and%20Audio%20Recognition%20using%20Siamese%20Networks/2.4%20Face%20Recognition%20Using%20Siamese%20Network.ipynb) 
+* __Prototypical Networks for Few-shot Learning__, (2017), _Jake Snell, Kevin Swersky, Richard S. Zemel_. [[pdf]](https://arxiv.org/pdf/1703.05175.pdf) [[code]](https://github.com/sudharsan13296/Hands-On-Meta-Learning-With-Python/blob/master/03.%20Prototypical%20Networks%20and%20its%20Variants/3.3%20Omniglot%20Character%20set%20classification%20using%20Prototypical%20Network.ipynb)
+* __Gaussian Prototypical Networks for Few-Shot Learning on Omniglot__ (2017), _Stanislav Fort_. [[pdf]](https://arxiv.org/pdf/1708.02735.pdf) [[code]](https://github.com/stanislavfort/gaussian-prototypical-networks) 
+* __Matching Networks for One Shot Learning__, (2017), _Oriol Vinyals, Charles Blundell, Timothy Lillicrap, Koray Kavukcuoglu, Daan Wierstra_. [[pdf]](https://arxiv.org/pdf/1606.04080.pdf) [[code]](https://github.com/sudharsan13296/Hands-On-Meta-Learning-With-Python/blob/master/04.%20Relation%20and%20Matching%20Networks%20Using%20Tensorflow/4.9%20Matching%20Networks%20Using%20Tensorflow.ipynb) 
+* __Learning to Compare: Relation Network for Few-Shot Learning__, (2017), _Flood Sung, Yongxin Yang, Li Zhang, Tao Xiang, Philip H.S. Torr, Timothy M. Hospedales_. [[pdf]](https://arxiv.org/pdf/1711.06025.pdf) [[code]](https://github.com/sudharsan13296/Hands-On-Meta-Learning-With-Python/blob/master/04.%20Relation%20and%20Matching%20Networks%20Using%20Tensorflow/4.5%20Building%20Relation%20Network%20Using%20Tensorflow.ipynb)
+* __One-shot Learning with Memory-Augmented Neural Networks__, (2016), _Adam Santoro, Sergey Bartunov, Matthew Botvinick, Daan Wierstra, Timothy Lillicrap_. [[pdf]](https://arxiv.org/pdf/1605.06065.pdf) [[code]](https://github.com/vineetjain96/one-shot-mann)
+* __Optimization as a Model for Few-Shot Learning__, (2016), _Sachin Ravi and Hugo Larochelle_. [[pdf]](https://openreview.net/pdf?id=rJY0-Kcll) [[code]](https://github.com/gitabcworld/FewShotLearning)
+* __An embarrassingly simple approach to zero-shot learning__, (2015), _B Romera-Paredes, Philip H. S. Torr_. [[pdf]](http://proceedings.mlr.press/v37/romera-paredes15.pdf) [[code]](https://github.com/bernard24/Embarrassingly-simple-ZSL)
+* __Low-shot Learning by Shrinking and Hallucinating Features__, (2017), _Bharath Hariharan, Ross Girshick_.  [[pdf]](https://arxiv.org/pdf/1606.02819.pdf) [[code]](https://github.com/facebookresearch/low-shot-shrink-hallucinate)
+* __Low-shot learning with large-scale diffusion__, (2018), _Matthijs Douze, Arthur Szlam, Bharath Hariharan, Hervé Jégou_. 
+[[pdf]](https://arxiv.org/pdf/1706.02332v2.pdf) [[code]](https://github.com/facebookresearch/low-shot-with-diffusion)
+* __Low-Shot Learning with Imprinted Weights__, (2018), _Hang Qi, Matthew Brown, David G. Lowe_. [[pdf]](http://openaccess.thecvf.com/content_cvpr_2018/papers/Qi_Low-Shot_Learning_With_CVPR_2018_paper.pdf) [[code]](https://github.com/YU1ut/imprinted-weights) 
+* __One-Shot Video Object Segmentation__, (2017), _S. Caelles and K.K. Maninis and J. Pont-Tuset and L. Leal-Taixe' and D. Cremers and L. Van Gool_. [[pdf]](http://vision.ee.ethz.ch/~cvlsegmentation/osvos/) [[code]](https://github.com/scaelles/OSVOS-TensorFlow)
+* __One-Shot Learning for Semantic Segmentation__, (2017), _Amirreza Shaban, Shray Bansal, Zhen Liu, Irfan Essa, Byron Boots_. [[pdf]](https://arxiv.org/abs/1709.03410) [[code]](https://github.com/lzzcd001/OSLSM)
+* __Few-Shot Segmentation Propagation with Guided Networks__, (2018), _Kate Rakelly, Evan Shelhamer, Trevor Darrell, Alexei A. Efros, Sergey Levine_. [[pdf]](https://arxiv.org/abs/1806.07373) [[code]](https://github.com/shelhamer/revolver)
+* __Few-Shot Semantic Segmentation with Prototype Learning__, (2018), _Nanqing Dong and Eric P. Xing_. [[pdf]](http://bmvc2018.org/contents/papers/0255.pdf)
+* __Dynamic Few-Shot Visual Learning without Forgetting__, (2018), _Spyros Gidaris, Nikos Komodakis_. [[pdf]](https://arxiv.org/pdf/1804.09458.pdf) [[code]](https://github.com/gidariss/FewShotWithoutForgetting)
+* __Feature Generating Networks for Zero-Shot Learning__, (2017), _Yongqin Xian, Tobias Lorenz, Bernt Schiele, Zeynep Akata_. [[pdf]](https://arxiv.org/pdf/1712.00981.pdf)
+* __Meta-Learning Deep Visual Words for Fast Video Object Segmentation__, (2019), _Harkirat Singh Behl, Mohammad Najafi, Anurag Arnab, Philip H.S. Torr_. [[pdf]](https://arxiv.org/pdf/1812.01397.pdf)
+- Model Agnostic Meta Learning
+* __Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks__, (2017), _Chelsea Finn, Pieter Abbeel, Sergey Levine_. [[pdf]](https://arxiv.org/pdf/1703.03400.pdf) [[code]](https://github.com/sudharsan13296/Hands-On-Meta-Learning-With-Python/blob/master/06.%20MAML%20and%20it's%20Variants/6.5%20Building%20MAML%20From%20Scratch.ipynb)
+* __Adversarial Meta-Learning__, (2018), _Chengxiang Yin, Jian Tang, Zhiyuan Xu, Yanzhi Wang_. [[pdf]](https://arxiv.org/pdf/1806.03316.pdf) [[code]](https://github.com/sudharsan13296/Hands-On-Meta-Learning-With-Python/blob/master/06.%20MAML%20and%20it's%20Variants/6.7%20Building%20ADML%20From%20Scratch.ipynb)
+* __On First-Order Meta-Learning Algorithms__, (2018), _Alex Nichol, Joshua Achiam, John Schulman_. [[pdf]](https://arxiv.org/pdf/1803.02999.pdf) [[code]](https://github.com/sudharsan13296/Hands-On-Meta-Learning-With-Python/blob/master/07.%20Meta-SGD%20and%20Reptile%20Algorithms/7.7%20Sine%20wave%20Regression%20Using%20Reptile.ipynb)
+* __Meta-SGD: Learning to Learn Quickly for Few-Shot Learning__, (2017), _Zhenguo Li, Fengwei Zhou, Fei Chen, Hang Li_. [[pdf]](https://arxiv.org/pdf/1707.09835.pdf) [[code]](https://github.com/sudharsan13296/Hands-On-Meta-Learning-With-Python/blob/master/07.%20Meta-SGD%20and%20Reptile%20Algorithms/7.4%20Building%20Meta-SGD%20from%20Scratch.ipynb) 
+* __Gradient Agreement as an Optimization Objective for Meta-Learning__, (2018), _Amir Erfan Eshratifar, David Eigen, Massoud Pedram_. [[pdf]](https://arxiv.org/pdf/1810.08178.pdf) [[code]](https://github.com/sudharsan13296/Hands-On-Meta-Learning-With-Python/blob/master/08.%20Gradient%20Agreement%20As%20An%20Optimization%20Objective/8.4%20Building%20Gradient%20Agreement%20Algorithm%20with%20MAML.ipynb)
+* __Gradient-Based Meta-Learning with Learned Layerwise Metric and Subspace__, (2018), _Yoonho Lee, Seungjin Choi_. [[pdf]](https://arxiv.org/pdf/1801.05558.pdf) [[code]](https://github.com/yoonholee/MT-net)
+* __A Simple Neural Attentive Meta-Learner__, (2018), _Nikhil Mishra, Mostafa Rohaninejad, Xi Chen, Pieter Abbeel_. [[pdf]](https://arxiv.org/pdf/1707.03141.pdf) [[code]](https://github.com/eambutu/snail-pytorch)
+* __Personalizing Dialogue Agents via Meta-Learning__, (2019), _Zhaojiang Lin, Andrea Madotto, Chien-Sheng Wu, Pascale Fung_. [[pdf]](https://arxiv.org/pdf/1905.10033.pdf) [[code]](https://github.com/HLTCHKUST/PAML) 
+* __How to train your MAML__, (2019), _Antreas Antoniou, Harrison Edwards, Amos Storkey_. [[pdf]](https://arxiv.org/pdf/1810.09502.pdf) [[code]](https://github.com/AntreasAntoniou/HowToTrainYourMAMLPytorch)
+* __Learning to learn by gradient descent by gradient descent__, (206), _Marcin Andrychowicz, Misha Denil, Sergio Gomez, Matthew W. Hoffman, David Pfau, Tom Schaul, Brendan Shillingford, Nando de Freitas_. [[pdf]](https://arxiv.org/pdf/1606.04474.pdf) [[code]](https://github.com/deepmind/learning-to-learn)
+* __Unsupervised Learning via Meta-Learning__, (2019), _Kyle Hsu, Sergey Levine, Chelsea Finn_. [[pdf]](https://arxiv.org/pdf/1810.02334.pdf) [[code]](https://github.com/hsukyle/cactus-maml)
+* __Few-Shot Image Recognition by Predicting Parameters from Activations__, (2018), _Siyuan Qiao, Chenxi Liu, Wei Shen, Alan Yuille_. [[pdf]](https://arxiv.org/pdf/1706.03466.pdf) [[code]](https://github.com/joe-siyuan-qiao/FewShot-CVPR)
+* __One-Shot Imitation from Observing Humans via Domain-Adaptive Meta-Learning__, (2018), _Tianhe Yu, Chelsea Finn, Annie Xie, Sudeep Dasari, Pieter Abbeel, Sergey Levine_, [[pdf]](https://arxiv.org/pdf/1802.01557.pdf) [[code]](https://github.com/aravind0706/upn)
+* __MetaGAN: An Adversarial Approach to Few-Shot Learning__, (2018), _ZHANG, Ruixiang and Che, Tong and Ghahramani, Zoubin and Bengio, Yoshua and Song, Yangqiu_. [[pdf]](http://papers.nips.cc/paper/7504-metagan-an-adversarial-approach-to-few-shot-learning.pdf) 
+* __Fast Parameter Adaptation for Few-shot Image Captioning and Visual Question Answering__,(2018), _Xuanyi Dong, Linchao Zhu, De Zhang, Yi Yang, Fei Wu_. [[pdf]](https://xuanyidong.com/pdf/FPAIT-MM-18.pdf) 
+* __CAML: Fast Context Adaptation via Meta-Learning__, (2019), _Luisa M Zintgraf, Kyriacos Shiarlis, Vitaly Kurin, Katja Hofmann, Shimon Whiteson_. [[pdf]](https://arxiv.org/pdf/1810.03642.pdf) 
+* __Meta-Learning for Low-resource Natural Language Generation in Task-oriented Dialogue Systems__, (2019), _Fei Mi, Minlie Huang, Jiyong Zhang, Boi Faltings_. [[pdf]](https://arxiv.org/pdf/1905.05644.pdf)
+* __MIND: Model Independent Neural Decoder__, (2019), _Yihan Jiang, Hyeji Kim, Himanshu Asnani, Sreeram Kannan_. [[pdf]](https://arxiv.org/pdf/1903.02268.pdf)
+* __Toward Multimodal Model-Agnostic Meta-Learning__, (2018), _Risto Vuorio, Shao-Hua Sun, Hexiang Hu, Joseph J. Lim_. [[pdf]](https://arxiv.org/pdf/1812.07172.pdf) 
+* __Alpha MAML: Adaptive Model-Agnostic Meta-Learning__, (2019), _Harkirat Singh Behl, Atılım Güneş Baydin, Philip H. S. Torr._  [[pdf]](https://arxiv.org/pdf/1905.07435.pdf)
+* __Online Meta-Learning__, (2019), Chelsea Finn, _Aravind Rajeswaran, Sham Kakade, Sergey Levine_. [[pdf]](https://arxiv.org/pdf/1902.08438.pdf)
+- Meta Reinforcement Learning
+* __Generalizing Skills with Semi-Supervised Reinforcement Learning__, (2017), _Chelsea Finn, Tianhe Yu, Justin Fu, Pieter Abbeel, Sergey Levine_. [[pdf]](https://arxiv.org/pdf/1612.00429.pdf) [[code]](https://github.com/cbfinn/gps/tree/ssrl)
+* __Guided Meta-Policy Search__, (2019), _Russell Mendonca, Abhishek Gupta, Rosen Kralev, Pieter Abbeel, Sergey Levine, Chelsea Finn_. [[pdf]](https://arxiv.org/pdf/1904.00956.pdf) [[code]](https://github.com/RussellM2020/GMPS)
+* __End-to-End Robotic Reinforcement Learning without Reward Engineering__, (2019), _Avi Singh, Larry Yang, Kristian Hartikainen, Chelsea Finn, Sergey Levine_. [[pdf]](https://arxiv.org/abs/1904.07854) [[code]](https://github.com/avisingh599/reward-learning-rl)
+* __Efficient Off-Policy Meta-Reinforcement Learning via Probabilistic Context Variables__, (2019), _Kate Rakelly, Aurick Zhou, Deirdre Quillen, Chelsea Finn, Sergey Levine_. [[pdf]](https://arxiv.org/pdf/1903.08254) [[code]](https://github.com/katerakelly/oyster)
+* __Meta-Gradient Reinforcement Learning__, (2018), _Zhongwen Xu, Hado van Hasselt,David Silver_. [[pdf]](http://papers.nips.cc/paper/7507-meta-gradient-reinforcement-learning.pdf)
+* __Task-Agnostic Dynamics Priors for Deep Reinforcement Learning__, (2019), _Yilun Du, Karthik Narasimhan_. [[pdf]](https://arxiv.org/pdf/1905.04819.pdf)
+* __Meta Reinforcement Learning with Task Embedding and Shared Policy__,(2019), _Lin Lan, Zhenguo Li, Xiaohong Guan, Pinghui Wang_. [[pdf]](https://arxiv.org/pdf/1905.06527.pdf) 
+* __NoRML: No-Reward Meta Learning__, (2019), _Yuxiang Yang, Ken Caluwaerts, Atil Iscen, Jie Tan, Chelsea Finn_. [[pdf]](https://arxiv.org/pdf/1903.01063.pdf)
+* __Actor-Critic Algorithms for Constrained Multi-agent Reinforcement Learning__, (2019), _Raghuram Bharadwaj Diddigi, Sai Koti Reddy Danda, Prabuchandran K. J., Shalabh Bhatnagar_. [[pdf]](https://arxiv.org/pdf/1905.02907.pdf)
+* __Adaptive Guidance and Integrated Navigation with Reinforcement Meta-Learning__, (2019), _Brian Gaudet, Richard Linares, Roberto Furfaro_. [[pdf]](https://arxiv.org/pdf/1904.09865.pdf)
+* __Watch, Try, Learn: Meta-Learning from Demonstrations and Reward__, (2019), _Allan Zhou, Eric Jang, Daniel Kappler, Alex Herzog, Mohi Khansari, Paul Wohlhart, Yunfei Bai, Mrinal Kalakrishnan, Sergey Levine, Chelsea Finn_. [[pdf]](https://arxiv.org/pdf/1906.03352.pdf)
+* __Options as responses: Grounding behavioural hierarchies in multi-agent RL__, (2019), _Alexander Sasha Vezhnevets, Yuhuai Wu, Remi Leblond, Joel Z. Leibo_. [[pdf]](https://arxiv.org/pdf/1906.01470.pdf)
+* __Learning latent state representation for speeding up exploration__, (2019), _Giulia Vezzani, Abhishek Gupta, Lorenzo Natale, Pieter Abbeel_. [[pdf]](https://arxiv.org/pdf/1905.12621.pdf)
+* __Beyond Exponentially Discounted Sum: Automatic Learning of Return Function__, (2019), _Yufei Wang, Qiwei Ye, Tie-Yan Liu_. [[pdf]](https://arxiv.org/pdf/1905.11591.pdf)
+* __Learning Efficient and Effective Exploration Policies with Counterfactual Meta Policy__, (2019),  _Ruihan Yang, Qiwei Ye, Tie-Yan Liu_. [[pdf]](https://arxiv.org/pdf/1905.11583.pdf)
+* __Dealing with Non-Stationarity in Multi-Agent Deep Reinforcement Learning__, (2019), _Georgios Papoudakis, Filippos Christianos, Arrasy Rahman, Stefano V. Albrecht_. [[pdf]](https://arxiv.org/pdf/1906.04737.pdf)
+* __Learning to Discretize: Solving 1D Scalar Conservation Laws via Deep Reinforcement Learning__, (2019), _Yufei Wang, Ziju Shen, Zichao Long, Bin Dong_. [[pdf]](https://arxiv.org/pdf/1905.11079.pdf)
+
+
+
+* [Meta-Dataset: A Dataset of Datasets for Learning to Learn from Few Examples](https://arxiv.org/pdf/1903.03096v1.pdf). Eleni Triantafillou, Tyler Zhu, Vincent Dumoulin, Pascal Lamblin, Kelvin Xu, Ross Goroshin, Carles Gelada, Kevin Swersky, Pierre-Antoine Manzagol, Hugo Larochelle.
+* [Gradient-Based Meta-Learning with Learned Layerwise Metric and Subspace](https://arxiv.org/abs/1801.05558). Yoonho Lee, Seungjin Choi.
+[![Code](github.jpg)](https://github.com/yoonholee/MT-net)
+* [FIGR: Few-shot Image Generation with Reptile](https://arxiv.org/abs/1901.02199). Louis Clouâtre, Marc Demers.
+* [Online gradient-based mixtures for transfer modulation in meta-learning](https://arxiv.org/abs/1812.06080). Ghassen Jerfel, Erin Grant, Thomas L. Griffiths, Katherine Heller.
+* [Auto-Meta: Automated Gradient Based Meta Learner Search](https://arxiv.org/pdf/1806.06927.pdf). Jaehong Kim, Youngduck Choi, Moonsu Cha, Jung Kwon Lee, Sangyeul Lee, Sungwan Kim, Yongseok Choi, Jiwon Kim.
+* [MetaGAN: An Adversarial Approach to Few-Shot Learning](http://papers.nips.cc/paper/7504-metagan-an-adversarial-approach-to-few-shot-learning). ZHANG, Ruixiang and Che, Tong and Ghahramani, Zoubin and Bengio, Yoshua and Song, Yangqiu.
+* [Learned Optimizers that Scale and Generalize](https://arxiv.org/abs/1703.04813). Olga Wichrowska, Niru Maheswaranathan, Matthew W. Hoffman, Sergio Gomez Colmenarejo, Misha Denil, Nando de Freitas, Jascha Sohl-Dickstein.
+* [Guiding Policies with Language via Meta-Learning](https://arxiv.org/abs/1811.07882). John D. Co-Reyes, Abhishek Gupta, Suvansh Sanjeev, Nick Altieri, John DeNero, Pieter Abbeel, Sergey Levine.
+* [Deep Comparison: Relation Columns for Few-Shot Learning](https://128.84.21.199/abs/1811.07100?context=cs). Xueting Zhang, Flood Sung, Yuting Qiang, Yongxin Yang, Timothy M. Hospedales.
+* [Towards learning-to-learn](https://arxiv.org/abs/1811.00231). Benjamin James Lansdell, Konrad Paul Kording.
+* [Learning to Learn with Gradients](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2018/EECS-2018-105.html). Finn, Chelsea. 
+* [How to train your MAML](https://arxiv.org/abs/1810.09502). Antreas Antoniou, Harrison Edwards, Amos Storkey.
+[![Code](github.jpg)](https://github.com/AntreasAntoniou/HowToTrainYourMAMLPytorch)
+* [Learned optimizers that outperform SGD on wall-clock and validation loss](https://arxiv.org/abs/1810.10180). Luke Metz, Niru Maheswaranathan, Jeremy Nixon, C. Daniel Freeman, Jascha Sohl-Dickstein
+* [Gradient Agreement as an Optimization Objective for Meta-Learning](https://arxiv.org/pdf/1810.08178.pdf). Amir Erfan Eshratifar, David Eigen, Massoud Pedram. 
+* [Few-Shot Image Recognition by Predicting Parameters from Activations](https://arxiv.org/abs/1706.03466). Siyuan Qiao, Chenxi Liu, Wei Shen, Alan Yuille. CVPR 2018.
+[![Code](github.jpg)](https://github.com/joe-siyuan-qiao/FewShot-CVPR)
+* [META-LEARNING WITH LATENT EMBEDDING OPTIMIZATION](https://arxiv.org/pdf/1807.05960.pdf). Andrei A. Rusu, Dushyant Rao, Jakub Sygnowski, Oriol Vinyals, Razvan Pascanu, Simon Osindero & Raia Hadsell
+* [Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks](https://arxiv.org/abs/1703.03400), Chelsea Finn, Pieter Abbeel, Sergey Levine. ICML 2017.
+[![Code](github.jpg)](https://github.com/cbfinn/maml) [![Code](github.jpg)](https://github.com/cbfinn/maml_rl) [![Code](github.jpg)](https://github.com/dragen1860/MAML-Pytorch) [![Code](github.jpg)](https://github.com/tristandeleu/pytorch-maml-rl)
+* [On First-Order Meta-Learning Algorithms](https://arxiv.org/abs/1803.02999). Alex Nichol, Joshua Achiam, John Schulman.
+[![Code](github.jpg)](https://github.com/openai/supervised-reptile) 
+* [Prototypical Networks for Few-shot Learning](https://arxiv.org/abs/1703.05175), Jake Snell, Kevin Swersky, Richard S. Zemel. NIPS 2017. 
+[![Code](github.jpg)](https://github.com/jakesnell/prototypical-networks)
+* [Learning to learn by gradient descent by gradient descent](https://arxiv.org/abs/1606.04474), Marcin Andrychowicz, Misha Denil, Sergio Gomez, Matthew W. Hoffman, David Pfau, Tom Schaul, Brendan Shillingford, Nando de Freitas
+[![Code](github.jpg)](https://github.com/deepmind/learning-to-learn) 
+[![Code](github.jpg)](https://becominghuman.ai/paper-repro-learning-to-learn-by-gradient-descent-by-gradient-descent-6e504cc1c0de)
+* [Learning to Learn without Gradient Descent by Gradient Descent](http://proceedings.mlr.press/v70/chen17e/chen17e.pdf), Yutian Chen, Matthew W. Hoffman, Sergio Gomez Colmenarejo, Misha Denil, Timothy P. Lillicrap,
+Matt Botvinick, Nando de Freitas, ICML 2017
+* [OPTIMIZATION AS A MODEL FOR FEW-SHOT LEARNING](https://openreview.net/pdf?id=rJY0-Kcll), Sachin Ravi, Hugo Larochelle. ICLR 2017
+[![Code](github.jpg)](https://github.com/twitter/meta-learning-lstm) 
+[![Code](github.jpg)](https://github.com/gitabcworld/FewShotLearning) 
+* [Meta-SGD: Learning to Learn Quickly for Few-Shot Learning](https://arxiv.org/abs/1707.09835), Zhenguo Li, Fengwei Zhou, Fei Chen, Hang Li
+[![Code](github.jpg)](https://github.com/foolyc/Meta-SGD)
+* [Unsupervised Meta-Learning for Reinforcement Learning](https://arxiv.org/abs/1806.04640). Abhishek Gupta, Benjamin Eysenbach, Chelsea Finn, Sergey Levine.
+* [Learning to Compare: Relation Network for Few-Shot Learning](https://arxiv.org/abs/1711.06025), Flood Sung, Yongxin Yang, Li Zhang, Tao Xiang, Philip H.S. Torr, Timothy M. Hospedales, CVPR 2018
+[Few-shot Pytorch![Code](github.jpg)](https://github.com/floodsung/LearningToCompare_FSL)
+[Zero-shot Pytorch![Code](github.jpg)](https://github.com/lzrobots/LearningToCompare_ZSL)
+[miniImageNet Pytorch![Code](github.jpg)](https://github.com/dragen1860/LearningToCompare-Pytorch)
+* [Object-Level Representation Learning for Few-Shot Image Classification](https://arxiv.org/abs/1805.10777), Liangqu Long, Wei Wang, Jun Wen, Meihui Zhang, Qian Lin, Beng Chin Ooi
+* [A Simple Neural Attentive Meta-Learner](https://arxiv.org/abs/1707.03141), Nikhil Mishra, Mostafa Rohaninejad, Xi Chen, Pieter Abbeel. ICLR 2018
+[![Code](github.jpg)](https://github.com/eambutu/snail-pytorch)
+* [Meta-Learning for Semi-Supervised Few-Shot Classification](https://openreview.net/forum?id=HJcSzz-CZ), Mengye Ren, Eleni Triantafillou, Sachin Ravi, Jake Snell, Kevin Swersky, Joshua B. Tenenbaum, Hugo Larochelle, Richard S. Zemel. ICLR 2018，提出一种新的extensions of Prototypical Networks
+* [Learning to Optimize](https://arxiv.org/abs/1606.01885), Ke Li, Jitendra Malik
+* [Matching Networks for One Shot Learning](https://arxiv.org/abs/1606.04080), Oriol Vinyals, Charles Blundell, Timothy Lillicrap, Koray Kavukcuoglu, Daan Wierstra
+* [Meta-Learning with Memory-Augmented Neural Networks](http://proceedings.mlr.press/v48/santoro16.pdf), Adam Santoro, Sergey Bartunov, Matthew Botvinick, Daan Wierstra, Timothy Lillicrap
+[![Code](github.jpg)](https://github.com/tristandeleu/ntm-one-shot)
+* [CAML: Fast Context Adaptation via Meta-Learning](https://arxiv.org/abs/1810.03642), Luisa M Zintgraf, Kyriacos Shiarlis, Vitaly Kurin, Katja Hofmann, Shimon Whiteson
+* [Unsupervised Learning via Meta-Learning](https://arxiv.org/pdf/1810.02334.pdf), Kyle Hsu, Sergey Levine, Chelsea Finn
+[![Code](github.jpg)](https://github.com/hsukyle/cactus-maml)
+[![Code](github.jpg)](https://github.com/hsukyle/cactus-protonets)
+* [Fast Parameter Adaptation for Few-shot Image Captioning and Visual Question Answering](http://xuanyidong.com/pdf/FPAIT-MM-18.pdf). Xuanyi Dong, Linchao Zhu, De Zhang, Yi Yang, Fei Wu. [![Code](github.jpg)](https://github.com/D-X-Y/FPAIT)
+
+
+# Tutorials and Slides
+
+* NeuraIPS meta-learning workshop: [2018](http://metalearning.ml/2018/), [2017](http://metalearning.ml/2017/)
+* [What’s Wrong with Meta-Learning](http://metalearning.ml/2018/slides/meta_learning_2018_Levine.pdf)
+* [Meta-Learning: Learning to Learn Fast](https://lilianweng.github.io/lil-log/2018/11/30/meta-learning.html)
+* [How to train your MAML: A step by step approach](https://www.bayeswatch.com/2018/11/30/HTYM/)
+* [From zero to research — An introduction to Meta-learning](https://medium.com/huggingface/from-zero-to-research-an-introduction-to-meta-learning-8e16e677f78a)
+* [Deep learning to learn](https://www.dropbox.com/s/j7coq7rz6ig5f6n/2018_08_02_Amazon-SF-ML-Meetup-Abbeel-final.pdf?dl=0). Pieter Abbeel
+* [Meta-Learning Frontiers: Universal, Uncertain, and Unsupervised](http://people.eecs.berkeley.edu/~cbfinn/_files/metalearning_frontiers_2018_small.pdf), Sergey Levine, Chelsea Finn
+
+## Blogs
+
+* [Berkeley Artificial Intelligence Research blog](https://bair.berkeley.edu/blog/2017/07/18/learning-to-learn/)
+* [Meta-Learning: Learning to Learn Fast](https://lilianweng.github.io/lil-log/2018/11/30/meta-learning.html)
+* [Meta-Reinforcement Learning](https://blog.floydhub.com/meta-rl/)
+* [How to train your MAML: A step by step approach](https://www.bayeswatch.com/2018/11/30/HTYM/)
+* [An Introduction to Meta-Learning](https://medium.com/walmartlabs/an-introduction-to-meta-learning-ced7072b80e7)
+* [From zero to research — An introduction to Meta-learning](https://medium.com/huggingface/from-zero-to-research-an-introduction-to-meta-learning-8e16e677f78a)
+* [What’s New in Deep Learning Research: Understanding Meta-Learning](https://towardsdatascience.com/whats-new-in-deep-learning-research-understanding-meta-learning-91fef1295660) 
+* [Meta Reinforcement Learning Blog by Lilian Weng](https://lilianweng.github.io/lil-log/2019/06/23/meta-reinforcement-learning.html)
+
+## Lecture Videos 
+
+* [Stanford CS330: Multi-Task and Meta-Learning, 2019 by Chelsea Finn](https://youtu.be/0rZtSwNOTQo)
+* [Meta Learning lecture by Soheil Feizi](https://www.youtube.com/watch?v=CRHKgOYXVe8)
+* [Chelsea Finn: Building Unsupervised Versatile Agents with Meta-Learning](https://www.youtube.com/watch?v=i05Fk4ebMY0)
+* [Sam Ritter: Meta-Learning to Make Smart Inferences from Small Data](https://www.youtube.com/watch?v=NpSpHlHpz6k)
+* [Model Agnostic Meta Learning by Siavash Khodadadeh](https://www.youtube.com/watch?v=wT45v8sIMDM)
+* [Meta Learning by Siraj Raval](https://www.youtube.com/watch?v=2z0ofe2lpz4)
+* [Meta Learning by Hugo Larochelle](https://www.youtube.com/watch?v=lz0ekIVfoFs) 
+* [Meta Learning and One-Shot Learning](https://www.youtube.com/watch?v=KUWywwvQv8E)
+
+## Workshops
+
+* [MetaLearn 2017](http://metalearning.ml/2017/)
+* [MetaLearn 2018](http://metalearning.ml/2018/)
+* [MetaLearn 2019](http://metalearning.ml/2019/)
+* [MetaLearn 2020](https://meta-learn.github.io/2020/)
+
+# Reseachers and Labs
+
+## Libraries
+
+* [Higher by Facebook research](https://github.com/facebookresearch/higher)
+* [TorchMeta](https://github.com/tristandeleu/pytorch-meta)
+* [Learn2learn]( https://github.com/learnables/learn2learn)
+
+## Labs
+
+* [Chelsa Finn](http://people.eecs.berkeley.edu/~cbfinn/), UC Berkeley
+* [Misha Denil](http://mdenil.com/), DeepMind
+* [Sachin Ravi](http://www.cs.princeton.edu/~sachinr/), Princeton University
+* [Hugo Larochelle](https://ai.google/research/people/105144), Google Brain
+* [Jake Snell](http://www.cs.toronto.edu/~jsnell/), University of Toronto, Vector Institute
+* [Adam Santoro](https://scholar.google.com/citations?hl=en&user=evIkDWoAAAAJ&view_op=list_works&sortby=pubdate), DeepMind
+* [JANE X. WANG](http://www.janexwang.com/), DeepMind
+
+## Researchers
+
+* [Chelsea Finn](http://people.eecs.berkeley.edu/~cbfinn/), _UC Berkeley_
+* [Pieter Abbeel](https://people.eecs.berkeley.edu/~pabbeel/), _UC Berkeley_
+* [Erin Grant](https://people.eecs.berkeley.edu/~eringrant/),  _UC Berkeley_
+* [Raia Hadsell](http://raiahadsell.com/index.html), _DeepMind_
+* [Misha Denil](http://mdenil.com/), _DeepMind_
+* [Adam Santoro](https://scholar.google.com/citations?hl=en&user=evIkDWoAAAAJ&view_op=list_works&sortby=pubdate), _DeepMind_
+* [Sachin Ravi](http://www.cs.princeton.edu/~sachinr/), _Princeton University_
+* [David Abel](https://david-abel.github.io/), _Brown University_
+* [Brenden Lake](https://cims.nyu.edu/~brenden/), _Facebook AI Research_
