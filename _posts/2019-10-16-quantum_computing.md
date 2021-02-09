@@ -15,6 +15,11 @@ mathjax: true
 >- 解释不通，穿越时空；
 >- 脑洞不够，平行宇宙
 
+# 总结
+
+- 【2021-2-9】[我国首个量子计算机操作系统“本源司南”正式发布，由合肥本源量子自主开发](http://www.techweb.com.cn/it/2021-02-09/2825582.shtml)，实现了量子资源系统化管理、量子计算任务并行化执行、量子芯片自动化校准等全新功能，助力量子计算机高效稳定运行，标志着国产量子软件研发能力已达国际先进水平。[本源司南](http://www.originqc.com.cn/)提供的[官方教程](https://learn-quantum.com/EDU/video.html?link=1_2)
+  - ![](http://www.originqc.com.cn/assets/images/orgin_pilot_icon_logo.png)
+
 
 # [十分钟看懂现代量子计算机到底是什么](https://zhuanlan.zhihu.com/p/53896253)
 
