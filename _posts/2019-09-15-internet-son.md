@@ -26,6 +26,11 @@ mathjax: true
 
 Aaron_Swartz
 
+- 【2021-2-10】语录
+
+>  - 请保持好奇，广泛阅读、尝试新事物。我想人们所说的智慧，大多源自好奇
+>  - “Be curious. Read widely. Try new things. I think a lot of what people call intelligence boils down to curiosity.” ​​​​
+
 ## 成长
 
 1986年11月8日，有个叫Aaron Swartz的人在美国芝加哥伊利诺伊州出生。因为他父母创办了一个软件公司，所以，Aaron在3岁的时候就接触到了电脑，然后就着迷了。
