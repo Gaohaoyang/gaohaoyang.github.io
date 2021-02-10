@@ -17,6 +17,9 @@ mathjax: true
 - 【2017-12-24】[一个故事告诉你比特币的原理及运作机制](http://blog.codinglabs.org/articles/bitcoin-mechanism-make-easy.html)- 【2018-1-23】[如何简单易懂的介绍区块链](https://www.zhihu.com/question/37290469)
 - 【2018-2-19】[区块链讲解及Demo](https://anders.com/blockchain/)
 - 【2018-3-18】比特币在线Demo：[coinDemo](https://coindemo.io/),[blockchainDemo](https://blockchaindemo.io/)
+- 【2021-2-9】金融纪录片，[比特币：钱的终结](https://www.bilibili.com/video/BV1D54y1C7vd)
+  - <iframe src="//player.bilibili.com/player.html?aid=842054725&bvid=BV1D54y1C7vd&cid=234432929&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+
 
 ## 什么是区块链
 
