@@ -14,6 +14,7 @@ mathjax: true
 
 # 总结
 
+- 【2021-2-10】艾瑞咨询：[2020中国知识图谱行业研究报告](http://report.iresearch.cn/wx/report.aspx?id=3553)
 
 总结如下：
 
@@ -155,16 +156,16 @@ mathjax: true
   - 另一种是网络上公开、抓取的数据，这些数据通常是以网页的形式存在所以是非结构化的数据。
 - 信息抽取的难点在于处理非结构化数据。
 - 非结构化（纯文本）知识抽取分三个任务： 
-- 1. `实体提取`(Entity Discovery) 
+- 1. **实体提取**(Entity Discovery) 
   - 细分任务分为：
     - `实体识别`(Entity Recognition)
     - `实体消歧`(Entity Disambiguation)
     - `实体分类`(Entity Typing)
     - `实体对齐`(Entity Alignment)
-- 2. `关系提取`(Relation Extraction) 
+- 2. **关系提取**(Relation Extraction) 
   - 2.1 定义：关系抽取是从非结构化数据中抽取未知关系事实并将其加入到知识图谱中，是自动构建大规模知识图谱的关键 
   - 2.2 方法：传统的方法高度依赖于特征工程。由于缺乏标记的关系数据，使用启发式匹配来创建训练数据，利用文本特征(包括词汇和句法特征、命名实体标记和连接特征)对关系分类进行远程监控。目前最新研究以深度学习工具实现关系提取。
-- 3. `知识补全`(KGC) 
+- 3. **知识补全**(KGC) 
   - 3.1 基于知识图谱不完备性的特点，提出了一种新的知识图谱三元组生成方法。即，给定一个不完整的知识图谱 G=(E, R, F)，知识图谱补全旨在推理出缺失的三元组 T={(head, relation, tail) \| (head, relation, tail) ∉ F} 。
   - 3.2 典型的子任务包括：
     - `链路预测`(Link Prediction)
@@ -195,10 +196,10 @@ mathjax: true
 ## 关系推理
 
 - 简单问答只需要识别出问题中的实体和关系，链接到知识图谱中，即可查出答案。
-- 推理问答则要求计算机具备多种推理能力，具体包括：
-  - （1）处理多跳关系的能力，如“姚明的妻子的学校”；
-  - （2）数值比较的能力，如“哪个城市的人口更多”；
-  - （3）集合操作的能力，如“即是篮球运动员，又是球队老板的人有哪些”。
+- 推理问答则要求计算机具备多种**推理**能力，具体包括：
+  - （1）处理**多跳**关系的能力，如“姚明的妻子的学校”；
+  - （2）**数值比较**的能力，如“哪个城市的人口更多”；
+  - （3）**集合操作**的能力，如“即是篮球运动员，又是球队老板的人有哪些”。
 - 知识图谱推理问答主流方法大致分为4大类别
   - 键值记忆网络（KVMemNet）
   - 基于强化学习的多跳路径搜索
@@ -208,23 +209,23 @@ mathjax: true
   - [知识图谱推理问答：如何让机器像人类一样学会推理](https://www.toutiao.com/i6842470279516520972/)
 
 - 基于知识图谱的关系推理的相关工作，大体分为三种方法：
-  - 首先是统计关系学习方法（SRL），如马尔科夫逻辑网络、贝叶斯网络，但这类方发需要设计相应的规则，因此没有很好的扩展性和泛化性；
-  - 嵌入式表示的方法，旨在将实体和关系映射为空间中的向量，通过空间中向量的运算来进行推理（如TransE），该方法取得了较好的准确率，但分布式表示的解释性不强，另外，较难实现并行计算；
-  - 基于关系路径特征的随机游走模型，该方法可以进行并行计算，具有较好的执行效率，但准确率与召回率相比嵌入式表示学习的方法存在劣势。
+  - （1）**统计关系**学习方法（SRL），如马尔科夫逻辑网络、贝叶斯网络，但这类方发需要设计相应的规则，因此没有很好的扩展性和泛化性；
+  - （2）**嵌入式**表示的方法，旨在将实体和关系映射为空间中的向量，通过空间中向量的运算来进行推理（如TransE），该方法取得了较好的准确率，但分布式表示的解释性不强，另外，较难实现并行计算；
+  - （3）基于关系路径特征的**随机游走**模型，该方法可以进行并行计算，具有较好的执行效率，但准确率与召回率相比嵌入式表示学习的方法存在劣势。
 
 ### 推理数据集
 
 - 4个常用推理问答数据集，并从所用知识库、知识类型、问题数量、自然语言、SPARQL共5个角度加以对比。
   - 三种知识类型：
-    - ①关系型，如（“姚明”，“出生于”，“上海”）；
-    - ②属性型，如（“姚明”，“身高”，“ 229 厘米”）；
-    - ③事实型，用于表示一个关系型事实或属性型事实的知识，如[（“上海”，“人口”，“23,390,000”），“统计时间”，“2016”]。
+    - ①**关系**型，如（“姚明”，“出生于”，“上海”）；
+    - ②**属性**型，如（“姚明”，“身高”，“ 229 厘米”）；
+    - ③**事实**型，用于表示一个关系型事实或属性型事实的知识，如[（“上海”，“人口”，“23,390,000”），“统计时间”，“2016”]。
     - ![](http://p1-tt.byteimg.com/large/pgc-image/bfbadfacd0cf40dba276f6a3e0c70f33?from=pc)
     - 在提到的4个数据集中，MetaQA 和 CSQA 仅考虑关系型知识。
-  - 现有数据集存在一个共同的问题，都缺乏推理过程，只给出复杂的问题以及对应的答案，没有问题解答过程。
+  - 现有数据集存在一个共同的问题，都**缺乏推理过程**，只给出复杂的问题以及对应的答案，没有问题解答过程。
   - 清华大学知识工程实验室构造了一个新的数据集——KQA Pro，可提供之前数据集都不具备的推理过程。
     - ![](http://p3-tt.byteimg.com/large/pgc-image/cb3ae03cd46d4a8db6ebbb1375275293?from=pc)
-  - 为表示推理过程，KQA Pro引入函数（function）和程序（program）两个概念。函数对应简单问题，程序对应复杂问题，将简单的函数组合成复杂的程序，从而解决复杂问题。
+  - 为表示推理过程，KQA Pro引入**函数**（function）和**程序**（program）两个概念。函数对应简单问题，程序对应复杂问题，将简单的函数组合成复杂的程序，从而解决复杂问题。
     - ![](http://p6-tt.byteimg.com/large/pgc-image/08a168a57ec644268e16264598f910aa?from=pc)
 
 ## 常识推理
@@ -241,7 +242,6 @@ mathjax: true
     - 解法：**流形函数**, M(h,r,t)=D2r用来代替$h_r+r=t_r$，应用Reproducing Kernel Hilbert Space (RKHS)映射到Hilbert空间，以更高效地表征流形
       - ![](https://images2015.cnblogs.com/blog/706575/201706/706575-20170619113807148-873845996.png)
   - adopting an overstrict geometric form。应用于h+r=t，所得到的尾实体几乎是一个点，这对于多对多关系而言显然是不正确的
-
 - 摘自：知识图谱表示学习与关系推理（2016-2017）：[（一）](https://www.cnblogs.com/jtianwen2014/p/7000190.html)，[（二）](https://www.cnblogs.com/jtianwen2014/p/7008228.html)，[（三）](https://www.cnblogs.com/jtianwen2014/p/7018872.html)，[ACL2016信息抽取与知识图谱相关论文掠影](https://www.cnblogs.com/jtianwen2014/p/6985214.html)
 
 
@@ -286,33 +286,32 @@ mathjax: true
 
 # KB-QA
 
-- KBQA(Knowledge Base Question Answering)，是基于知识库的问答系统，本质上KBQA系统反映一个简化的“问答-答案”的映射过程，需要对自然语言语义解析与理解后，进行结构化查询与推理，得出相应的答案。
+- **KBQA**(Knowledge Base Question Answering)，是基于知识库的问答系统，本质上KBQA系统反映一个简化的“问答-答案”的映射过程，需要对自然语言语义解析与理解后，进行结构化查询与推理，得出相应的答案。
 - ![](https://pic2.zhimg.com/80/v2-2699f1e6d3dd51c7c86cbb9cf0e58af9_720w.jpg)
 - ![](https://pic2.zhimg.com/80/v2-49c7910b5ffa6a492249f49d5af26269_720w.jpg)
 
 - KB-QA与对话系统
-  - 问答系统是信息检索系统的高级形式，是以问题为驱动的信息获取过程，按QA类别可以分为WebQA（Web问答）、KBQA（知识库问答）、CQA（社区问答）和DBQA（阅读理解的QA系统，斯坦福的SQuAD），而对话系统主要关注对话过程，多采用多轮方式进行，主要分为开放闲聊的对话系统、任务驱动的对话系统、以知识获取的对话系统和信息推荐的对话系统，传统的对话系统主要由四个部分：NLU（自然语言生成）、DST（对话状态追溯）、PL（策略学习）和NLG（自然语言生成），目前，采用是端对端检索式与生成式的，但是精度较低。
+  - **问答系统是信息检索系统的高级形式**，是以问题为驱动的信息获取过程，按QA类别可以分为**WebQA**（Web问答）、**KBQA**（知识库问答）、**CQA**（社区问答）和**DBQA**（阅读理解的QA系统，斯坦福的SQuAD），而对话系统主要关注对话过程，多采用多轮方式进行，主要分为开放闲聊的对话系统、任务驱动的对话系统、以知识获取的对话系统和信息推荐的对话系统，传统的对话系统主要由四个部分：**NLU**（自然语言生成）、**DST**（对话状态追溯）、**PL**（策略学习）和**NLG**（自然语言生成），目前，采用是端对端检索式与生成式的，但是精度较低。
   - KBQA主要通过对自然语言进行语义解析与理解后，查询知识库，进行某一类事实问题进行回答（简单的BFQ或者复杂多跳转问题），答案是某一种实体或者实体的属性或者关系，而对话系统，句子级的对话，注重对话过程，回答的问题是一般是句子而不是简单的答案，类似人对话聊天。对话系统也可以结合知识库进行更加全面句子级答案生成（知识获取的对话系统）。
 - KBQA系统实现有哪些方法？
-  - （1）基于语义解析的方法
+  - （1）基于**语义解析**的方法
     - 将自然语言转换为一系列形式化的逻辑表达式，利用知识库中语义信息将逻辑表达式转为知识库查询，最终得到相应的答案。
     - ![](https://pic3.zhimg.com/80/v2-b9f896cccd14c52c95b7278e9f081ade_720w.jpg)
-  - （2）基于模板匹配的方法
+  - （2）基于**模板匹配**的方法
     - 基于模板匹配的方法是通过预制模板匹配问题，代替本体映射，绕过语义解析脆弱性，一般使用该方法与结合语义解析+模板匹配查询的方法来解决工业界的问题，如基于模板匹配的查询语言章节讲的，但是此方法需要人工构建大量模板，只能解决简答的事实类型的问答
     - ![](https://pic1.zhimg.com/80/v2-951e8b05200c6f940ab6aa981214f100_720w.jpg)
-  - （3）基于深度学习优化模板匹配的方法
+  - （3）基于**深度学习**优化模板匹配的方法
     - 深度学习主要用来改进问答系统的流程，包括语义解析、实体识别、意图识别与分类和实体链接与消歧等，这类的算法很多，比如对于实体识别的LSTM+CRF、基于深度学习及概率图的实体消歧等，另一方，采用深度学习对问答对进行训练得到大量的模板,便于问题与知识库匹配
-
 - 分类：
-  - IRQA
-  - KBQA
-  - MRCQA
+  - IRQA 基于检索的QA
+  - KBQA 基于知识库的QA
+  - MRCQA 基于阅读理解的QA
 - 常用数据集
   - **NLPCC**全称自然语言处理与中文计算会议（The Conference on Natural Language Processing and Chinese Computing）,它是由中国计算机学会（CCF）主办的 CCF 中文信息技术专业委员会年度学术会议，专注于自然语言处理及中文计算领域的学术和应用创新。
   - 数据集来自NLPCC ICCPOL 2016 KBQA 任务集，其包含 14 609 个问答对的训练集和包含 9 870 个问答对的测试集。 并提供一个知识库，包含 6 502 738 个实体、 587 875 个属性以及 43 063 796 个 三元组。知识库文件中每行存储一个事实( fact) ，即三元组 ( 实体、属性、属性值) 。
 - [基于BERT的KBQA探索](https://zhuanlan.zhihu.com/p/62946533), 基于知识图谱的自动问答拆分为2 个主要步骤:命名实体识别步骤和属性映射步骤
-  - 命名实体识别步骤，采用BERT+BiLSTM+CRF方法（另外加上一些规则映射，可以提高覆盖度）
-  - 属性映射步骤，转换成文本相似度问题，采用BERT作二分类训练模型
+  - **命名实体识别**步骤，采用BERT+BiLSTM+CRF方法（另外加上一些规则映射，可以提高覆盖度）
+  - **属性映射**步骤，转换成文本相似度问题，采用BERT作二分类训练模型
   - ![](https://pic4.zhimg.com/80/v2-782cfa7747c02d70ebb7fb542b574f8b_720w.jpg)
 
 - 【2020-4-22】[KB-QA研究进展](https://www.jianshu.com/p/92ea00b7a4cc)
@@ -334,22 +333,22 @@ mathjax: true
   - KBQA论文集[Awesome-knowledge-graph-question-answering](https://github.com/BshoterJ/awesome-kgqa)
 - [针对复杂问题的知识图谱问答(KBQA)最新进展](https://blog.csdn.net/sdu_hao/article/details/105674327)
 
-- 知识图谱问答（KBQA）利用图谱丰富的语义关联信息，能够深入理解用户问题并给出答案，近年来吸引了学术界和工业界的广泛关注。KBQA 主要任务是将自然语言问题（NLQ）通过不同方法映射到结构化的查询，并在知识图谱中获取答案。
-
+- 知识图谱问答（KBQA）利用图谱丰富的语义关联信息，能够深入理解用户问题并给出答案，近年来吸引了学术界和工业界的广泛关注。
+- KBQA 主要任务是将自然语言问题（NLQ）通过不同方法映射到结构化的查询，并在知识图谱中获取答案。
 - 小蜜团队研发的知识图谱问答系统（KBQA）目前已广泛应用于电信运营商、保险、税务等领域，但是在真实的客服场景中，KBQA 在处理复杂问句上仍然面临着挑战。
 
 - 用户在咨询问题时，倾向于表达非常具体的信息，以便快速的获得答案，比较常见问句类型的有：
-  - 1）复杂条件句：“小规模纳税人季度销售额未超过 30 万，但是要开具 5 万元的专票，需要缴纳附加税费吗？”；
-  - 2）并列句：“介绍下移动大流量和畅享套餐”；
-  - 3）推理型问句：“你们这最便宜的 5G 套餐是哪个？”等，
+  - 1）**复杂条件**句：“小规模纳税人季度销售额未超过 30 万，但是要开具 5 万元的专票，需要缴纳附加税费吗？”；
+  - 2）**并列**句：“介绍下移动大流量和畅享套餐”；
+  - 3）**推理型**问句：“你们这最便宜的 5G 套餐是哪个？”等，
 
 # 知识图谱存储
 
 ## 知识图谱存储方式
 
 - 知识图谱的两种存储方式
-  - 一种是基于RDF的存储；
-  - 另一种是基于图数据库的存储。
+  - 一种是基于**RDF**的存储；
+  - 另一种是基于**图数据库**的存储。
 - 图数据库仍然是增长最快的存储系统。相反，关系型数据库的增长基本保持在一个稳定的水平。
 - RDF一个重要的设计原则是数据的易发布以及共享，图数据库则把重点放在了高效的图查询和搜索上。其次，RDF以三元组的方式来存储数据而且不包含属性信息，但图数据库一般以属性图为基本的表示形式，所以实体和关系可以包含属性，这就意味着更容易表达现实的业务场景。
   - ![](https://pic1.zhimg.com/80/v2-c5c1aa508f3583cf659479a60fc37d30_720w.jpg)
@@ -358,8 +357,8 @@ mathjax: true
 
 - 现有图数据库对比
   - ![](https://pic4.zhimg.com/80/v2-2d99d2a221bbe2b8be179140e88efb33_720w.jpg)
-- 其中Neo4j系统目前仍是使用率最高的图数据库，它拥有活跃的社区，而且系统本身的查询效率高，但唯一的不足就是不支持准分布式。
-- 相反，OrientDB和JanusGraph（原Titan）支持分布式，但这些系统相对较新，社区不如Neo4j活跃，这也就意味着使用过程当中不可避免地会遇到一些刺手的问题。如果选择使用RDF的存储系统，Jena或许一个比较不错的选择。
+- 其中`Neo4j`系统目前仍是使用率最高的图数据库，它拥有活跃的社区，而且系统本身的查询效率高，但唯一的不足就是不支持准分布式。
+- 相反，`OrientDB`和`JanusGraph`（原`Titan`）支持分布式，但这些系统相对较新，社区不如Neo4j活跃，这也就意味着使用过程当中不可避免地会遇到一些刺手的问题。如果选择使用RDF的存储系统，Jena或许一个比较不错的选择。
   - 摘自：[知识图谱的技术与应用（18版）](https://zhuanlan.zhihu.com/p/38056557)
 
 
@@ -377,26 +376,26 @@ mathjax: true
 
 ## 关系型数据库
 
-- 关系型数据库实际上是不擅长处理关系的
+- <font color='red'>关系型数据库实际上是不擅长处理关系的</font>
   - 关系型数据库
     - ![](https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/uploads/20180716185458/relational-database-rdbms-model-example.jpg)
   - 图数据库
     - ![](https://s2.ax1x.com/2019/02/21/kR4tKg.md.png)
 - 在数据关系中心，图形数据库在查询速度方面非常高效，即使对于深度和复杂的查询也是如此。在《Neo4j in Action》这本书中，作者在关系型数据库
 和图数据库(Neo4j)之间进行了实验。
-  - 在深度为2时（即朋友的朋友），两种数据库性能相差不是很明显；
-  - 深度为3时(即朋友的朋友的朋友)，很明显，关系型数据库的响应时间30s，已经变得不可接受了；
-  - 深度到4时，关系数据库需要近半个小时才能返回结果，使其无法应用于在线系统；
-  - 深度到5时，关系型数据库已经无法完成查询。而对于图数据库Neo4J，深度从3到5，其响应时间均在3秒以内。
+  - 深度为2时（即朋友的朋友），两种数据库性能相差不是很明显；
+  - 深度为3时(即朋友的朋友的朋友)，很明显，关系型数据库的响应时间**30s**，已经变得不可接受了；
+  - 深度到4时，关系数据库需要近**半个小时**才能返回结果，使其无法应用于在线系统；
+  - 深度到5时，关系型数据库已经**无法完成**查询。而对于图数据库Neo4J，深度从3到5，其响应时间均在**3秒以内**。
 - 可以看出，对于图数据库来说，数据量越大，越复杂的关联查询，约有利于体现其优势。从深度为4/5的查询结果我们可以看出，图数据库返回了整个社交网络一半以上的人数。
 
 ## NoSQL数据库
 
 大致可以分为四类：
-- 键值(key/value)数据库
-- 列存储数据库
-- 文档型数据库
-- 图数据库
+- **键值**(key/value)数据库
+- **列存储**数据库
+- **文档型**数据库
+- **图**数据库
 
 ![](https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/uploads/20181025032156/nosql-databases-overview.png)
 
@@ -404,10 +403,10 @@ mathjax: true
 
 | 分类 |	数据模型 |	优势 |	劣势	| 举例 |
 |---|---|---|---|---|
-|键值数据库	|哈希表	|查找速度快	|数据无结构化，通常只被当作字符串或者二进制数据|	Redis|
-|列存储数据库|	列式数据存储|	查找速度快；支持分布横向扩展；数据压缩率高|	功能相对受限|	HBase|
-|文档型数据库	|键值对扩展	|数据结构要求不严格；表结构可变；不需要预先定义表结构	|查询性能不高，缺乏统一的查询语法|	MongoDB|
-|图数据库|	节点和关系组成的图|	利用图结构相关算法(最短路径、节点度关系查找等)|	可能需要对整个图做计算，不利于图数据分布存储|	Neo4j、JanusGraph|
+|**键值**数据库	|哈希表	|查找速度快	|数据无结构化，通常只被当作字符串或者二进制数据|	Redis|
+|**列存储**数据库|	列式数据存储|	查找速度快；支持分布横向扩展；数据压缩率高|	功能相对受限|	HBase|
+|**文档型**数据库	|键值对扩展	|数据结构要求不严格；表结构可变；不需要预先定义表结构	|查询性能不高，缺乏统一的查询语法|	MongoDB|
+|**图**数据库|	节点和关系组成的图|	利用图结构相关算法(最短路径、节点度关系查找等)|	可能需要对整个图做计算，不利于图数据分布存储|	Neo4j、JanusGraph|
 
 ## 什么是图数据库？
 
@@ -422,7 +421,6 @@ mathjax: true
 - 比如：
   - Neo4J就是属于原生图数据库，它使用的后端存储是专门为Neo4J这种图数据库定制和优化的，理论上说能更有利于发挥图数据库的性能。
   - 而JanusGraph不是原生图数据库，而将数据存储在其他系统上，比如Hbase。
-
 - ① 图存储
   - 一些图数据库使用原生图存储，这类存储是经过优化的，并且是专门为了存储和管理图而设计的。并不是所有图数据库都是使用原生图存储，也有一些图数据库将图数据序列化，然后保存到关系型数据库或者面向对象数据库，或其他通用数据存储中。
 - ② 图处理引擎
@@ -451,8 +449,9 @@ Instructions for connecting to the following graph databases:
     - export PATH=$PATH:$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH
     - export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
   - 查看版本：java -version
-- Neo4J支持ACID，集群、备份和故障转移。目前Neo4J最新版本为3.5，分为社区版和企业版，社区版只支持单机部署，功能受限。企业版支持主从复制和读写分离，包含可视化管理工具。
-
+- Neo4J支持ACID，集群、备份和故障转移。目前Neo4J最新版本为3.5，分为**社区版**和**企业版**
+  - 社区版只支持单机部署，功能受限。
+  - 企业版支持**主从复制**和**读写分离**，包含可视化管理工具。
 - 标记属性图模型
   - 节点
   - 关系
@@ -587,10 +586,10 @@ if __name__ == '__main__':
 
 - Cypher是Neo4j的图形查询语言，允许用户存储和检索图形数据库中的数据。
 - 查询语言如下：
+
 ```sql
 MATCH 
-  (person:Person)-[:KNOWS]-(friend:Person)-[:KNOWS]-
-  (foaf:Person)
+  (person:Person)-[:KNOWS]-(friend:Person)-[:KNOWS]-(foaf:Person)
 WHERE 
   person.name = "Joe"
   AND NOT (person)-[:KNOWS]-(foaf)
@@ -601,7 +600,8 @@ RETURN
 
 ## JanusGraph
 
-- 一个Linux基金会下的开源分布式图数据库 。JanusGraph提供Apache2.0软件许可证。该项目由IBM、Google、Hortonworks支持。JanusGraph是由TitanDB 图数据库修改而来，TitanDB从2012年开始开发。目前最新版本为0.3.1。
+- 一个Linux基金会下的开源分布式图数据库 。JanusGraph提供Apache2.0软件许可证。该项目由IBM、Google、Hortonworks支持。
+- JanusGraph是由TitanDB 图数据库修改而来，TitanDB从2012年开始开发。目前最新版本为0.3.1。
 
 
 ## DGraph
@@ -614,9 +614,295 @@ RETURN
 
 
 
-# 资料
+# 应用案例
 
-- 更多[Demo地址](http://wqw547243068.github.io/demo)
+## 金融领域知识图谱
+
+- [用Neo4j搭建简单金融知识图谱](https://blog.csdn.net/m0_37565948/article/details/81133041)
+- 整体架构
+  - 用户问题先进行实体抽取来得到抽取后的问题和实体类型：实体字典
+  - 抽取后的问题通过属性映射得到问题模板(编号)
+  - 然后用实体类型：实体字典和问题模板(编号)来得到图形数据库相应的查询语言
+  - 最后将查询到结果进行语言的上的润色得到相应的答案。
+  - ![](https://img2020.cnblogs.com/blog/1598939/202012/1598939-20201222075651213-2120487609.png)
+  - ![](https://img2020.cnblogs.com/blog/1598939/202012/1598939-20201220094557833-604139559.png)
+  - match (p:企业) where p.name='华为' return p.code 
+- neo4j构建一个简单的金融领域的知识图谱，挖掘“高管—上市企业—行业/概念”之间的关系
+  - 数据源：[链接](https://pan.baidu.com/s/1I8No_6pAoLYce34eW1tRXg)，密码:h8of
+  - csv文件统一放入neo4j的安装目录下的import目录
+  - 命令行进入neo4j安装目录下的bin目录，输入命令
+    - neo4j-admin import --mode=csv --database=mygraph2.db --nodes ../import/concept.csv --nodes ../import/executive.csv --nodes ../import/industry.csv --nodes ../import/stock.csv --relationships ../import/executive_stock.csv --relationships ../import/stock_concept.csv --relationships ../import/stock_industry.csv
+- 示例
+  - ![](https://img2020.cnblogs.com/blog/1598939/202012/1598939-20201220092016042-319934592.png)
+
+## [基于BERT的问答系统](https://www.cnblogs.com/Serenaxy/p/14063869.html#%E5%9F%BA%E4%BA%8Ebert%E7%9A%84%E9%97%AE%E7%AD%94%E7%B3%BB%E7%BB%9F)
+
+- 基于知识图谱的问答系统，BERT做命名实体识别和句子相似度，分为online和outline模式
+- [知乎帖子地址](https://zhuanlan.zhihu.com/p/62946533)，[代码地址](https://github.com/WenRichard/KBQA-BERT)
+
+## 电影问答系统
+
+- 【2021-2-10】[300行python代码从零开始构建基于知识图谱的电影问答系统](https://blog.csdn.net/xyz1584172808/article/details/89319129)
+- 代码
+  - 前端：[chatbot_with_IR](https://github.com/IrvingBei/chatbot_with_IR)
+  - 后端：[simple_movie_qa_with_KG](https://github.com/IrvingBei/simple_movie_qa_with_KG)
+- 效果图
+  - ![](https://img-blog.csdnimg.cn/20190415192606960.gif)
+
+### [系统的整体逻辑是怎么样的？（系统业务逻辑介绍）](https://blog.csdn.net/xyz1584172808/article/details/89336478)
+
+- 准备工作：
+  - 环境：Python 3.6，基于webpy库，图数据库neo4j
+    - pip install -r requirements.txt
+  - 数据：数据来源于IMDB数据库，这是一个关于电影演员、电影、电视节目、电视明星和电影制作的在线数据库。
+    - 格式：
+      - ![](https://img-blog.csdnimg.cn/20190506204109978.png)
+    - [链接](https://pan.baidu.com/s/1HgjZFQ7q4V_8EzzjNmMwwQ)，提取码：7qv1
+    - 把数据csv文件放入neo4j安装目录下的import目录下即可
+      - E:\neo4j-community-3.5.3-windows\neo4j-community-3.5.3\import
+- 系统整体框架
+  - ![](https://img-blog.csdnimg.cn/20190416143958243.png)
+- 问题预处理（NLU）
+  - NER：提取关键信息，主语是人还是电影，这就涉及到自然语言处理中的命名实体识别；
+    - 对query进行词性标注后，找到对应的nr对应的单词，即人名，电影名称
+  - 意图识别：用户想问什么，文本表示问题，最最基本的文本表示方法是one-hot形式，在试验中使用的是sklearn中的tfidf工具
+    - 分类：用监督学习方法识别用户意图，需要提前准备语料，用户的问题归纳成了很多类，对各个类别进行抽象，比如对于用户询问某某演过哪些电影等一系列问题，抽象成：*nr 电影作品*
+- 问题模板
+  - 用户各种问题的模板（nm代表电影名称，ng代表电影类型）
+- 查询答案
+  - 如何对图数据库进行操作
+  - 示例：*刘德华演过哪些电影呀？*
+  - 获取关键信息：*刘德华*
+  - 问题分类得到问题模板：*7:nnt 电影作品*
+  - 进行替换得到新的问题：*刘德华 电影作品*
+
+### [需要做那些准备工作？（实验环境和实验数据准备）](https://blog.csdn.net/xyz1584172808/article/details/89891248)
+
+```shell
+# 用户各种问题的模板（nm代表电影名称，ng代表电影类型）
+0:nm 评分
+1:nm 上映时间
+2:nm 类型
+3:nm 简介
+4:nm 演员列表
+5:nnt 介绍
+6:nnt ng 电影作品
+7:nnt 电影作品
+8:nnt 参演评分 大于 x
+9:nnt 参演评分 小于 x
+10:nnt 电影类型
+11:nnt nnr 合作 电影列表
+12:nnt 电影数量
+13:nnt 出生日期
+```
+
+- 图数据库代码
+
+```sql
+//导入节点 电影类型  == 注意类型转换
+LOAD CSV WITH HEADERS  FROM "file:///genre.csv" AS line
+MERGE (p:Genre{gid:toInteger(line.gid),name:line.gname})
+
+//导入节点 演员信息	
+LOAD CSV WITH HEADERS FROM 'file:///person.csv' AS line
+MERGE (p:Person { pid:toInteger(line.pid),birth:line.birth,
+death:line.death,name:line.name,
+biography:line.biography,
+birthplace:line.birthplace})
+// 导入节点 电影信息
+LOAD CSV WITH HEADERS  FROM "file:///movie.csv" AS line  
+MERGE (p:Movie{mid:toInteger(line.mid),title:line.title,introduction:line.introduction,
+rating:toFloat(line.rating),releasedate:line.releasedate})
+// 导入关系 actedin  电影是谁参演的 1对多
+LOAD CSV WITH HEADERS FROM "file:///person_to_movie.csv" AS line 
+match (from:Person{pid:toInteger(line.pid)}),(to:Movie{mid:toInteger(line.mid)})  
+merge (from)-[r:actedin{pid:toInteger(line.pid),mid:toInteger(line.mid)}]->(to)
+//导入关系  电影是什么类型 == 1对多
+LOAD CSV WITH HEADERS FROM "file:///movie_to_genre.csv" AS line
+match (from:Movie{mid:toInteger(line.mid)}),(to:Genre{gid:toInteger(line.gid)})  
+merge (from)-[r:is{mid:toInteger(line.mid),gid:toInteger(line.gid)}]->(to)
+```
+
+
+### [接收到用户的问题后需要怎么处理用户问题？（用户问题预处理）](https://blog.csdn.net/xyz1584172808/article/details/89914745)
+
+- 词性标注
+  - jieba的词性标注和分词是同步进行的，所以如果分词不准确的话，那么词性标注往往也会出错
+  - 比如说电影《卧虎藏龙》，被jieba分词分为：卧虎，藏龙
+  - 解决：自定义字典
+    - 卧虎藏龙 15 nm
+    - 陈雅伦 15 nr
+
+```python
+def question_posseg(self):
+    jieba.load_userdict("./data/userdict3.txt")
+    clean_question = re.sub("[\s+\.\!\/_,$%^*(+\"\')]+|[+——()?【】“”！，。？、~@#￥%……&*（）]+","",self.raw_question)
+    self.clean_question=clean_question
+    question_seged=jieba.posseg.cut(str(clean_question))
+    result=[]
+    question_word, question_flag = [], []
+    for w in question_seged:
+        temp_word=f"{w.word}/{w.flag}"
+        result.append(temp_word)
+        # 预处理问题
+        word, flag = w.word,w.flag
+        question_word.append(str(word).strip())
+        question_flag.append(str(flag).strip())
+    assert len(question_flag) == len(question_word)
+    self.question_word = question_word
+    self.question_flag = question_flag
+    print(result)
+    return result
+```
+
+- 问题分类和模板填充
+
+```python
+# 获取训练数据
+def read_train_data(self):
+    train_x=[]
+    train_y=[]
+    file_list=getfilelist("./data/question/")
+    # 遍历所有文件
+    for one_file in file_list:
+        # 获取文件名中的数字
+        num = re.sub(r'\D', "", one_file)
+        # 如果该文件名有数字，则读取该文件
+        if str(num).strip()!="":
+            # 设置当前文件下的数据标签
+            label_num=int(num)
+            # 读取文件内容
+            with(open(one_file,"r",encoding="utf-8")) as fr:
+                data_list=fr.readlines()
+                for one_line in data_list:
+                    word_list=list(jieba.cut(str(one_line).strip()))
+                    # 将这一行加入结果集
+                    train_x.append(" ".join(word_list))
+                    train_y.append(label_num)
+    return train_x,train_y
+
+# 贝叶斯分类模型
+# 训练并测试模型-NB
+def train_model_NB(self):
+    X_train, y_train = self.train_x, self.train_y
+    self.tv = TfidfVectorizer()
+
+    train_data = self.tv.fit_transform(X_train).toarray()
+    clf = MultinomialNB(alpha=0.01)
+    clf.fit(train_data, y_train)
+    return clf
+# 预测
+def predict(self,question):
+    question=[" ".join(list(jieba.cut(question)))]
+    test_data=self.tv.transform(question).toarray()
+    y_predict = self.model.predict(test_data)[0]
+    # print("question type:",y_predict)
+    return y_predict
+```
+
+- 返回用户问题所属的类别编号，这个编号也就对应一个问题模板：
+
+```shell
+0:nm 评分
+1:nm 上映时间
+2:nm 类型
+3:nm 简介
+4:nm 演员列表
+5:nnt 介绍
+6:nnt ng 电影作品
+7:nnt 电影作品
+8:nnt 参演评分 大于 x
+9:nnt 参演评分 小于 x
+10:nnt 电影类型
+11:nnt nnr 合作 电影列表
+12:nnt 电影数量
+13:nnt 出生日期
+```
+
+### [如果根据用户问题来查找答案？（答案获取）](https://blog.csdn.net/xyz1584172808/article/details/89947813)
+
+- 得到了这些信息后，如何在知识图谱中查询答案。
+- 简单来说，每个问题模板就对应了一个用户意图，那么就按照每个意图来写查询语句
+- 定义了一个问题模板的方法字典，每一个key对应模板的编号，value就是根据该模板来查询答案的方法
+
+```python
+self.q_template_dict={
+            0:self.get_movie_rating,
+            1:self.get_movie_releasedate,
+            2:self.get_movie_type,
+            3:self.get_movie_introduction,
+            4:self.get_movie_actor_list,
+            5:self.get_actor_info,
+            6:self.get_actor_act_type_movie,
+            7:self.get_actor_act_movie_list,
+            8:self.get_movie_rating_bigger,
+            9:self.get_movie_rating_smaller,
+            10:self.get_actor_movie_type,
+            11:self.get_cooperation_movie_list,
+            12:self.get_actor_movie_num,
+            13:self.get_actor_birthday
+        }
+
+def get_question_answer(self,question,template):
+    # 如果问题模板的格式不正确则结束
+    assert len(str(template).strip().split("\t"))==2
+    template_id,template_str=int(str(template).strip().split("\t")[0]),str(template).strip().split("\t")[1]
+    self.template_id=template_id
+    self.template_str2list=str(template_str).split()
+
+    # 预处理问题
+    question_word,question_flag=[],[]
+    for one in question:
+        word, flag = one.split("/")
+        question_word.append(str(word).strip())
+        question_flag.append(str(flag).strip())
+    assert len(question_flag)==len(question_word)
+    self.question_word=question_word
+    self.question_flag=question_flag
+    self.raw_question=question
+    # 根据问题模板来做对应的处理，获取答案
+    answer=self.q_template_dict[template_id]()
+    return answer
+
+
+```
+
+- 进入到对应的方法中，利用Cypher语言来构建查询语句
+  - 基本形式：match(n)-[r] -(b)
+  - 直接使用python的库py2neo来操作图数据库neo4j
+
+```python
+from py2neo import Graph,Node,Relationship,NodeMatcher
+
+class Query():
+    def __init__(self):
+        self.graph=Graph("http://localhost:7474", username="neo4j",password="123456")
+
+    # 问题类型0，查询电影得分
+    def run(self,cql):
+        # find_rela  = test_graph.run("match (n:Person{name:'张学友'})-[actedin]-(m:Movie) return m.title")
+        result=[]
+        find_rela = self.graph.run(cql)
+        for i in find_rela:
+            result.append(i.items()[0][1])
+        return result
+# 查询演员
+# 4:nm 演员列表
+def get_movie_actor_list(self):
+    movie_name=self.get_movie_name()
+    cql = f"match(n:Person)-[r:actedin]->(m:Movie) where m.title='{movie_name}' return n.name"
+    print(cql)
+    answer = self.graph.run(cql)
+    answer_set = set(answer)
+    answer_list = list(answer_set)
+    answer = "、".join(answer_list)
+    final_answer = movie_name + "由" + str(answer) + "等演员主演！"
+    return final_answer
+
+```
+
+
+
 
 # 结束
 
