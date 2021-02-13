@@ -340,6 +340,33 @@ mathjax: true
 
 ![](https://pic2.zhimg.com/80/v2-3dd2d09867f7a5dc072a36f113fc9121_720w.jpg)
 
+- 【2021-2-13】问答任务的类型（搜索领域用户日志），源自《智能问答》P8
+  - 事实类：factoid
+  - 是非类：yes/no
+  - 定义类：definition
+  - 列表类：list
+  - 比较类：comparison
+  - 意见类：opinion
+  - 指导类：how-to
+  - 总结：
+    - 列表类通过表格形式解答
+    - 后三者答案主观，一般通过qa对形式来解答
+- 进一步分类：
+  - （1）知识图谱问答：knowledge-based QA
+    - 事实在知识图谱中表示方式有两类：三元组事实（triple fact）、CVT事实（CVT fact）
+    - CVT：compound value type，复合值类型节点，如：奥巴马→（婚姻）→婚姻事实（包含人物、时间、地点等信息）
+  - （2）表格问答：table-based QA
+    - 分成表格检索+答案生成两个步骤
+  - （3）文本问答：text-based QA
+    - 按照答案颗粒度不同，分成：
+      - 答案句子选择（answer sentence selection）：对所有句子打分、排序，选择最高的句子作为回复
+      - 机器阅读理解（machine reading comprehension）：短语级别，解决思路：
+        - 排序任务：对所有候选短语抽取、排序
+        - 序列标注：判断每个单词是否属于答案（0/1）
+  - （4）社区问答：community QA
+    - 数据集：<问题，答案>对
+
+
 ## 资料
 
 - 参考：
