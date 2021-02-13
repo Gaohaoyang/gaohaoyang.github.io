@@ -14,6 +14,7 @@ mathjax: true
 
 # 总结
 
+- 【2021-2-14】[思知机器人](https://www.ownthink.com/)，开源中文知识图谱，[图谱可视化](https://www.ownthink.com/knowledge.html?word=%E9%92%9F%E5%8D%97%E5%B1%B1)，[Demo体验](https://www.ownthink.com/robot.html)，包含实时tts；OwnThink开源了史上最大规模（1.4亿）中文知识图谱，[地址](https://github.com/ownthink/KnowledgeGraphData)
 - 【2021-2-4】调停机器人（斡旋）
   - [Intervening Ethical Governor for Robot Mediator in Patient-Caregiver Relationship](https://www.youtube.com/watch?v=3-ZST_bGW3Q&feature=youtu.be)，国外的调停机器人，佐治亚理工，应用于医患关系调解，论文：[an intervening ethical governor for a robot mediator in patient-caregiver relationship.](https://www.cc.gatech.edu/ai/robot-lab/online-publications/ICRE15_shim_arkin.pdf)
     - ![](https://spectrum.ieee.org/image/MjkzMjc1OA.jpeg)

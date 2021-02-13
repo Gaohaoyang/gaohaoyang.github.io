@@ -14,6 +14,7 @@ mathjax: true
 
 # 总结
 
+- 【2021-2-14】[思知机器人](https://www.ownthink.com/)，开源中文知识图谱，[图谱可视化](https://www.ownthink.com/knowledge.html?word=%E9%92%9F%E5%8D%97%E5%B1%B1)，[Demo体验](https://www.ownthink.com/robot.html)，包含实时tts；OwnThink开源了史上最大规模（1.4亿）中文知识图谱，[地址](https://github.com/ownthink/KnowledgeGraphData)
 - 【2021-2-10】艾瑞咨询：[2020中国知识图谱行业研究报告](http://report.iresearch.cn/wx/report.aspx?id=3553)
 - 艾瑞咨询《知识图谱白皮书》（2020）发布
 - 艾瑞咨询是解决商业决策问题的专业第三方机构，互联网企业IPO报告里80%的材料引用自艾瑞研究的成果。
