@@ -264,6 +264,17 @@ mathjax: true
 
 ![](https://pic4.zhimg.com/80/v2-8248f2e0ece454bd036b3ab97dc30b77_720w.jpg)
 
+- 【2021-2-7】[DGL-KE：亚马逊开源知识图谱嵌入库，亲测快到飞起](https://zhuanlan.zhihu.com/p/347803335)，[github地址](https://github.com/awslabs/dgl-ke)
+  - DGL-KE 是一个高性能、易于使用且可扩展的知识图谱嵌入工具包，它是依赖 Deep Graph Library (DGL) 库实现的，支持 CPU、GPU、分布式训练，包括 TransE、TransR、RESCAL、DistMult、ComplEx 和 RotatE 等一系列经典模型。
+  - DGL-KE 正在继续开发中，预计一个月之后会加入 SimplE 模型、图神经网络 GNN 等。
+  - ![](https://pic4.zhimg.com/80/v2-15dc7467e7818373fe4e495ad847d2ff_720w.jpg)
+  - 对比分析：清华开源库 OpenKE，TransE 的对比结果，训练数据的规模是10w+的数据。
+  - 结论：快了400倍
+
+|开源库	|时间	|迭代次数|
+|---|---|---|
+|OpenKE|	1小时|	1000|
+|DGL-KE|	|15分钟|	100000|
 
 
 # 事理图谱-Event Graph
