@@ -3,7 +3,7 @@ layout: post
 title:  "知识图谱-Knowledge-Graph"
 date:   2020-06-23 21:14:00
 categories: 自然语言处理
-tags: 深度学习 NLP KG KB-QA 知识图谱 表示学习
+tags: 深度学习 NLP KG KB-QA 知识图谱 表示学习 jena
 excerpt: 知识图谱（Knowledge Graph）发展历史，主要类型，前沿研究及应用场景等
 author: 鹤啸九天
 mathjax: true
@@ -14,7 +14,9 @@ mathjax: true
 
 # 总结
 
-- 【2021-2-14】[思知机器人](https://www.ownthink.com/)，开源中文知识图谱，[图谱可视化](https://www.ownthink.com/knowledge.html?word=%E9%92%9F%E5%8D%97%E5%B1%B1)，[Demo体验](https://www.ownthink.com/robot.html)，包含实时tts；OwnThink开源了史上最大规模（1.4亿）中文知识图谱，[地址](https://github.com/ownthink/KnowledgeGraphData)
+- 【2021-2-14】[思知机器人](https://www.ownthink.com/)，开源中文知识图谱，[图谱可视化](https://www.ownthink.com/knowledge.html?word=%E9%92%9F%E5%8D%97%E5%B1%B1)，[Demo体验](https://www.ownthink.com/robot.html)，包含实时tts；OwnThink开源了史上最大规模（1.4亿）中文知识图谱，[地址](https://github.com/ownthink/KnowledgeGraphData)。[阿里云地址](https://nebula-graph.oss-accelerate.aliyuncs.com/ownthink/kg_v2.tar.gz)，百度云[地址](https://pan.baidu.com/s/1LZjs9Dsta0yD9NH-1y0sAw)，提取码: 3hpp 解压密码是：https://www.ownthink.com/，1.95G
+  - ![](https://pic4.zhimg.com/80/v2-7bf5c629b7dcc923a6a92ce69dc0d0b7_720w.jpg)
+  - [Neo4j导入思知OwnThink开源的知识图谱](https://zhuanlan.zhihu.com/p/113569382)
 - 【2021-2-10】艾瑞咨询：[2020中国知识图谱行业研究报告](http://report.iresearch.cn/wx/report.aspx?id=3553)
 - 艾瑞咨询《知识图谱白皮书》（2020）发布
 - 艾瑞咨询是解决商业决策问题的专业第三方机构，互联网企业IPO报告里80%的材料引用自艾瑞研究的成果。
@@ -268,7 +270,7 @@ mathjax: true
 - 【2021-2-7】[DGL-KE：亚马逊开源知识图谱嵌入库，亲测快到飞起](https://zhuanlan.zhihu.com/p/347803335)，[github地址](https://github.com/awslabs/dgl-ke)
   - DGL-KE 是一个高性能、易于使用且可扩展的知识图谱嵌入工具包，它是依赖 Deep Graph Library (DGL) 库实现的，支持 CPU、GPU、分布式训练，包括 TransE、TransR、RESCAL、DistMult、ComplEx 和 RotatE 等一系列经典模型。
   - DGL-KE 正在继续开发中，预计一个月之后会加入 SimplE 模型、图神经网络 GNN 等。
-  - ![](https://pic4.zhimg.com/80/v2-15dc7467e7818373fe4e495ad847d2ff_720w.jpg)
+  - ![](https://data.dgl.ai/asset/image/ke/dgl_ke_arch.png)
   - 对比分析：清华开源库 OpenKE，TransE 的对比结果，训练数据的规模是10w+的数据。
   - 结论：快了400倍
 
@@ -416,6 +418,7 @@ mathjax: true
   - ![](https://pic4.zhimg.com/80/v2-2d99d2a221bbe2b8be179140e88efb33_720w.jpg)
 - 其中`Neo4j`系统目前仍是使用率最高的图数据库，它拥有活跃的社区，而且系统本身的查询效率高，但唯一的不足就是不支持准分布式。
 - 相反，`OrientDB`和`JanusGraph`（原`Titan`）支持分布式，但这些系统相对较新，社区不如Neo4j活跃，这也就意味着使用过程当中不可避免地会遇到一些刺手的问题。如果选择使用RDF的存储系统，Jena或许一个比较不错的选择。
+  - Apache [Jena](https://jena.apache.org/)官方[下载](https://jena.apache.org/download/index.cgi)
   - 摘自：[知识图谱的技术与应用（18版）](https://zhuanlan.zhihu.com/p/38056557)
 
 
@@ -709,6 +712,23 @@ RETURN
 ## 电影问答系统
 
 - 【2021-2-10】[300行python代码从零开始构建基于知识图谱的电影问答系统](https://blog.csdn.net/xyz1584172808/article/details/89319129)
+- 【2021-2-14】[简单构建基于RDF和SPARQL的KBQA（知识图谱问答系统）](https://www.cnblogs.com/whiterock/p/9522821.html)
+  - 流程
+    1. 预定义 3 ​类共 5 ​个示例问题，​包括：
+      - ● "谁是苑茵?",
+      - ● "丁洪奎是谁?",
+      - ● "苏进木来自哪里?",
+      - ● "苑茵哪个族的?",
+      - ● "苑茵是什么民族的人?".
+    1. 利用结巴分词对中文句子进行分词, ​同时进行词性标注；
+    2. 将词的文本和词性打包, ​视为"词对象"，对应 :class:Word(token,​ ​pos)​；
+    3. 利用 REfO ​模块对词进行对象级别 (object-level) ​的正则匹配，判断问题属于的​种类​并产生对应的 SPARQL，对应 :class:Rule(condition,​ ​action)​；
+    4. 如果成功匹配并成功产生 SPARQL ​查询语句, ​立刻请求 Fuseki ​服务并返回结果，打印相关内容；
+  - 安装
+    - 1、配置第三方库：pip install refo jieba sparqlwrapper
+    - 2、安装JAVA JDK1.8，配置好环境变量。
+    - 3、项目根目录主要包括backend​​文件夹和test.py文件（同一级），backend是Jena​的Fuseki 模块，​运行第4步后在本地监听(http://localhost:3030/)，如图：
+      - ![](https://images2018.cnblogs.com/blog/1177970/201808/1177970-20180823111745754-547513861.jpg)
 
 ### User Simulator
 
