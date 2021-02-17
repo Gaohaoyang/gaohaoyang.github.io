@@ -3,7 +3,7 @@ layout: post
 title:  "深度学习-Deep Learning"
 date:   2020-01-14 12:44:00
 categories: 深度学习 机器学习 数学基础
-tags: 神经网络  人工智能  AI  机器学习  ML  表示学习 AI圣经 读书笔记
+tags: 神经网络  人工智能  AI  机器学习  ML  表示学习 AI圣经 读书笔记 遗忘曲线
 excerpt: 深度学习学习读书笔记汇总。
 author: 鹤啸九天
 mathjax: true
@@ -247,6 +247,13 @@ Ian Goodfellow的「`Deep learning`」这本书，久负盛名，号称是`AI圣
 - 一周后，只剩可怜的<font color='red' size='5'>25%</font>
 
 ![](https://static.leiphone.com/uploads/new/article/740_740/201708/599049430a227.jpg?imageMogr2/format/jpg/quality/90)
+
+- 【2021-2-17】[艾宾豪斯遗忘曲线记忆法](https://zhuanlan.zhihu.com/p/39857208)
+  - 艾宾浩斯是德国著名心理学家，他根据人的短时记忆和长时记忆特征，发现了记忆遗忘规律，形成的坐标图曲线便是记忆遗忘曲线，也称为艾宾浩斯记忆遗忘曲线。我们可以按艾宾浩斯记忆遗忘曲线制定学习计划，这样记忆效果更好，学习效率更高。
+  - 艾宾浩斯记忆遗忘曲线是把各种记忆机制综合起来考虑，反映平均记忆力衰退的情况。人们把记忆类型粗分成短时记忆 (Short term memory) 和长时记忆 (Long term memory)。
+  - 在从短时记忆到长时记忆的转化中，一个重要的因素是训练间隔。实验表明，如果持续高强度的不停训练(massed training)，是不能直接形成长时记忆的。只有加上一定的间隔(spaced training)，才能有效将短时记忆转化成长时记忆。
+  - ![](https://pic3.zhimg.com/80/v2-3601eef66a841b7d9d9c3ececb7aadda_720w.jpg)
+  - ![](https://pic1.zhimg.com/80/v2-268499275754a82982d9fb53448c2314_720w.jpg)
 
 这张图，总体描述了每个章节内容，章节之间的关系，有利于形成全局观。
 
