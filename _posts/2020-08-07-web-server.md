@@ -51,7 +51,9 @@ mathjax: true
 
 ## UML图
 
-- 【2021-2-19】[UML中六种箭头含义](https://blog.csdn.net/wglla/article/details/52225571)
+- 【2021-2-19】[UML中六种箭头含义](https://blog.csdn.net/wglla/article/details/52225571)：
+  - 总结：
+    - <font color='blue'>泛化、实现、 依赖 → 关联 → 聚合 → 组合</font>
   - 泛化：一般与特殊、一般与具体之间的关系，表示继承关系
     - 实线空心三角箭头表示
     - ![](https://img-blog.csdn.net/20160816223903989)
