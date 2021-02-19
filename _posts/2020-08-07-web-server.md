@@ -3,7 +3,7 @@ layout: post
 title:  "Web服务知识-Web-Serving"
 date:   2020-08-07 19:17:00
 categories: 技术工具
-tags: Web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session RPC 架构设计 GraphQL
+tags: Web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session RPC 架构设计 GraphQL UML
 author : 鹤啸九天
 excerpt: Web开发相关技术知识点
 mathjax: true
