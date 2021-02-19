@@ -32,6 +32,12 @@ mathjax: true
 - 方法体系：数据、模型和算法
   - ![](https://pic4.zhimg.com/80/v2-34c21e6e6a6b07fa5d327b05d33fbc47_720w.jpg)
 
+- 【2021-2-19】分类：The GPT-3 model is evaluated in three different settings
+  - 少样本学习 Few-shot learning, when the model is given a few demonstrations of the task (typically, 10 to 100) at inference time but with no weight updates allowed.
+  - 单样本学习 One-shot learning, when only one demonstration is allowed, together with a natural language description of the task.
+  - 零样本学习 Zero-shot learning, when no demonstrations are allowed and the model has access only to a natural language description of the task.
+- [2020’s Top AI & Machine Learning Research Papers](https://www.topbots.com/ai-machine-learning-research-papers-2020/#ai-paper-2020-5)
+
 ## 背景
 
 - 分类非常常见，但如果每个类只有几个标注样本，怎么办？
