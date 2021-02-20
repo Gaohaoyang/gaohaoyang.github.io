@@ -25,6 +25,17 @@ mathjax: true
 - 书籍： [Hands-On Meta Learning With Python](https://github.com/sudharsan13296/Hands-On-Meta-Learning-With-Python), 包含配套代码，Learning to Learn using One-Shot Learning, MAML, Reptile, Meta-SGD and more. You will delve into various one-shot learning algorithms, like siamese, prototypical, relation and memory-augmented networks by implementing them in TensorFlow and Keras.
 - [From zero to research — An introduction to Meta-learning](https://medium.com/huggingface/from-zero-to-research-an-introduction-to-meta-learning-8e16e677f78a)
 - Google谷歌和伯克利出品ppt：[What’s Wrong with Meta-Learning and how we might fix it](http://metalearning.ml/2018/slides/meta_learning_2018_Levine.pdf)
+- 【2021-2-20】[清华大学朱文武团队夺冠AAAI 2021国际深度元学习挑战赛](https://www.163.com/dy/article/G39E7NKT0536A3D8.html)
+  - 三个方面的挑战：
+    - 一、如何使模型具有**快速适应小样本新任务**的能力。在这次比赛中，参赛者提交的模型拥有两次训练过程：元训练过程以及测试训练过程。在元训练过程中，模型必须提炼出该数据集的元知识以及最佳的学习方法，来确保模型在测试训练过程中能快速学习并防止过拟合。
+    - 二、**时间以及空间约束**。本次比赛拥有对时间以及空间的约束条件。总时长不超过 2h，总 GPU 资源占用不得超过 4 张 8G M60 GPU。这要求参赛者提供的模型必须高效、轻量地提取元知识和学习方法。
+    - 三、**适配未知数据集**。相别于传统小样本学习，本次比赛还考察了模型对于不同类型数据集的适应效果。由于事先并不知道测试阶段的隐藏元训练数据，挑战者提交的模型必须拥有足够的泛化能力，来应对在未知类型的数据集中提炼元知识的能力。这一点又被称为元-元学习，是对元学习的补充与提升。
+  - 为了应对以上三个问题，Meta-Learners 参赛团队提出了自适应深度元学习系统 Meta-Delta 来实现轻量级、高效、高泛化性的元学习模型
+    - [Meta-Delta 论文](http://mn.cs.tsinghua.edu.cn/xinwang/PDF/AAAI21_MetaDelta.pdf)
+    - [Meta-Delta系统源码](https://github.com/Frozenmad/MetaDelta)
+    - Meta-Delta 系统采用基于测量的方法（metric-based method）来作为元学习模型的内核（如图 Meta-Learner）。这种方法将数据集映射到一个元知识空间，并以空间中测试样本点（query）和训练样本点（support）的距离远近，来快速进行小样本分类。这样的做法将元知识的提取转化为空间变换问题，是最近研究中效果最好的元学习算法之一，很好地解决了快速适应小样本新任务的挑战。
+    - ![](https://pics4.baidu.com/feed/18d8bc3eb13533fad5827ab3c326ec1740345b70.jpeg?token=869b18ede095a403329ccc72528cb348&s=9DE0E9138B2045030874E8CB020080B2)
+    - ![](https://pics3.baidu.com/feed/10dfa9ec8a13632767365c35fb7ab1e40afac7de.jpeg?token=d2b39d9e6183432f7f238e014ae010f2&s=D900EE1B8BE0450346FCE8CE0300C033)
 
 # Few shot learning 小样本学习
 
