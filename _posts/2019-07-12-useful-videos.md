@@ -64,7 +64,7 @@ mathjax: true
 
 ## 社会
 
-- 反映社会的短片：[Dinner for few](http://www.365yg.com/a6604023738310590980/#mid=1605851765491715),[B站](https://www.bilibili.com/video/av36040687/?p=2)
+- 反映社会的短片：[Dinner for few](https://www.bilibili.com/video/BV1SW411C7JZ/?spm_id_from=autoNext)
    - 《少数人的晚餐》在250多个国际电影节上放映，并赢得了78个奖项，它是2015年获得奥斯卡金像奖的60种动画短片之一.
    - 猫有两种，代表平民，分别是：
       - 代表遵纪守法的平民白猫
@@ -103,7 +103,7 @@ mathjax: true
 
    该片讲了一个黑色寓言。每到晚餐时间，“系统”就开始如一台上了油的机器般运作。这台机器只负责一小撮人不饿肚子。这些人瓜分了所有资源，而剩下的大多数则饥弱不堪，嗷嗷待哺。最终，资源会耗尽，饥饿的人眼睛发绿，一场风暴在所难免。但让人遗憾的是，变革带来的并不是希望，而是永恒的轮回。
 
-<iframe src="//player.bilibili.com/player.html?aid=36040687&cid=63346561&page=2" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=31614877&bvid=BV1SW411C7JZ&cid=55282695&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
 - V字仇杀队，[在线观看](http://www.caomintv.com/dianying/play/45147-1-1.html)
