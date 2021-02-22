@@ -296,7 +296,7 @@ pie
 
 ## 提升技术影响力
 
-{% include wqw_graph_tech_influence.html %}
+- drawio自动跳转，影响阅读，关闭
 
 ## 如何转型做管理
 

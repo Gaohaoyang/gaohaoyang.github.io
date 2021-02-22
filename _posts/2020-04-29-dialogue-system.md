@@ -1043,10 +1043,10 @@ An example of typical input would be something like this:
     - pip install rasa_nlu
     - pip install rasa_core[tensorflow]
 - Rasa有两个主要模块：
-  - **Rasa NLU** ：用于理解用户消息，包括意图识别和实体识别，它会把用户的输入转换为结构化的数据。
+  - **Rasa NLU** （NLU）：用于理解用户消息，包括意图识别和实体识别，它会把用户的输入转换为结构化的数据。
     - 支持不同的 Pipeline，其后端实现可支持spaCy、MITIE、MITIE + sklearn 以及 tensorflow，其中 spaCy 是官方推荐的，另外值得注意的是从 0.12 版本后，MITIE 就被列入 Deprecated 了。
     - Rasa提供了数据标注平台: [rasa-nlu-trainer](https://rasahq.github.io/rasa-nlu-trainer/)
-  - **Rasa Core**：对话管理平台，用于举行对话和决定下一步做什么。Rasa Core是用于构建AI助手的对话引擎，是开源Rasa框架的一部分。
+  - **Rasa Core** (DM)：对话管理平台，用于举行对话和决定下一步做什么。Rasa Core是用于构建AI助手的对话引擎，是开源Rasa框架的一部分。
     - 负责协调聊天机器人的各个模块，起到维护人机对话的结构和状态的作用。对话管理模块涉及到的关键技术包括对话行为识别、对话状态识别、对话策略学习以及行为预测、对话奖励等。
     - Rasa消息响应过程
       - ![](https://upload-images.jianshu.io/upload_images/3285850-ece175b3a873ff90)
@@ -1062,10 +1062,24 @@ An example of typical input would be something like this:
         - Stories
           - stories可以理解为对话的场景流程，需要告诉机器多轮场景是怎样的。Story样本数据就是Rasa Core对话系统要训练的样本，它描述了人机对话过程中可能出现的故事情节，通过对Stories样本和domain的训练得到人机对话系统所需的对话模型。
           - Rasa Core中提供了rasa_core.visualize模块可视化故事，有利于掌握设计故事流程。
-- Rasa X是一个工具，可帮助您构建、改进和部署由Rasa框架提供支持的AI Assistants。 Rasa X包括用户界面和REST API。
+- Rasa X（web工具）是一个工具，可帮助您构建、改进和部署由Rasa框架提供支持的AI Assistants。 Rasa X包括用户界面和REST API。
   - ![](https://upload-images.jianshu.io/upload_images/3285850-26dd1db4512e05ac)
+- 基本概念
+  - intents：意图
+  - pipeline：
+  - **stories**：对话管理（dialogue management）是对话系统或者聊天机器人的核心，在 Rasa 中由 Rasa Core 负责，而这部分的训练数据在Rasa 中由 Stories 提供。Stories可以理解为对话的场景流程，一个 story 是一个用户和AI小助手之间真实的对话，这里面包含了可以反映用户输入（信息）的意图和实体以及小助手在回复中应该采取的 action（行动）
+  - **domain** ：即知识库，其中定义了意图（intents)，动作（actions)，以及对应动作所反馈的内容模板（templates)，例如它能预测的用户意图，它可以处理的 actions，以及对应 actions 的响应内容。
+  - rasa train : 模型训练,添加 NLU 或者 Core 数据，或者修改了domain和配置文件，需要重新训练模型
+    - python -m rasa train --config configs/config.yml --domain configs/domain.yml --data data/
+
 
 - 测试效果
+  - 启动rasa服务：python -m rasa run --port 5005 --endpoints configs/endpoints.yml --credentials configs/credentials.yml --debug
+  - 启动action服务：Python -m rasa run actions --port 5055 --actions actions --debug 
+- Rasa Server、Action Server和Server.py运行后，在浏览器输入测试：
+  - http://127.0.0.1:8088/ai?content=询广州明天的天气
+  - [Rasa中文聊天机器人开发指南](https://blog.csdn.net/andrexpert/article/details/104328946), [github代码示例](RASA中文聊天机器人Github地址：ChitChatAssistant)
+  - ![](https://img-blog.csdnimg.cn/20200227153932228.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FuZHJFeHBlcnQ=,size_16,color_FFFFFF,t_70)
 
 - 测试命令
 >python -m rasa_core.run -d models/chat1 -u models/nlu/model_20190820-105546
@@ -1104,17 +1118,24 @@ An example of typical input would be something like this:
     - B）`完成度`（即，前文提过的“用户任务达成率”）。由于任务型最后总要去调一个接口或者触发什么东西来完成任务，所以可以计算多少人进入了这个对话单元，其中有多少人最后调了接口；
     - C）`相关的`，还有（每个任务）平均slot填入轮数或填充完整度。即，完成一个任务，平均需要多少轮，平均填写了百分之多少的槽位slot。对于槽位的基础知识介绍，可详见《填槽与多轮对话-AI产品经理需要了解的AI技术概念》。
   - 3）**问答型**
-    - A）最终求助人工的比例（即，前文提过的“用户任务达成率”相关）；
-    - B）重复问同样问题的比例；
-    - C）“没答案”之类的比例。
+    - A）转人工比例：最终求助人工的比例（即，前文提过的“用户任务达成率”相关）；
+    - B）重复率：重复问同样问题的比例；
+    - C）无结果率：“没答案”之类的比例。
     - 整体来说，行业一般PR宣传时，会更多的提CPS。其他指标看起来可能相对太琐碎或不够高大上，但是，实际工作中，可能CPS更多是面向闲聊型对话系统，而其他的场景，可能更应该从“效果”出发。比如，如果小孩子哭了，机器人能够“哭声安慰”，没必要对话那么多轮次，反而应该越少越好。
 - 4、语料自然度和人性化的程度
-- 目前对于这类问题，一般是使用人工评估的方式进行。这里的语料，通常不是单个句子，而是分为单轮的问答对或多轮的一个session。一般来讲，评分范围是1~5分：
+- 目前对于这类问题，一般是使用**人工评估**的方式进行。语料通常不是单个句子，而是分为单轮的问答对或多轮的一个session。一般来讲，评分范围是1~5分（或GSB打分）：
   - 1分或2分：完全答非所问，以及含有不友好内容或不适合语音播报的特殊内容；
   - 3分：基本可用，问答逻辑正确；
   - 4分：能解决用户问题且足够精炼；
   - 5分：在4分基础上，能让人感受到情感及人设。
 - 另外，为了消除主观偏差，采用多人标注、去掉极端值的方式，是当前普遍的做法。
+- 5、常规互联网产品，都会有整体的用户指标；AI产品，一般也会有这个角度的考量。
+  - 1、DAU（Daily Active User，日活跃用户数，简称“日活”）
+    - 在特殊场景会有变化，比如在车载场景，会统计“DAU占比（占车机DAU的比例）”。
+  - 2、被使用的**意图丰富度**（使用率>X%的意图个数）。
+  - 3、可尝试通过用户语音的情绪信息和语义的情绪分类评估**满意度**。
+    - 尤其对于生气的情绪检测，这些对话样本是可以挑选出来分析的。比如，有公司会统计语音中有多少是骂人的，以此大概了解用户情绪。还比如，在同花顺手机客户端中，拉到最底下，有个一站式问答功能，用户对它说“怎么登录不上去”和说“怎么老是登录不上去”，返回结果是不一样的——后者，系统检测到负面情绪，会提示转接人工。
+
 
 - 【2020-9-21】一篇解决对话无监督评估的论文：[How NOT To Evaluate Your Dialogue System: An Empirical Study of
 Unsupervised Evaluation Metrics for Dialogue Response Generation](https://arxiv.org/pdf/1603.08023.pdf)，[论文引用图谱](https://www.connectedpapers.com/main/129cbad01be98ee88a930e31898cb76be79c41c1/How-NOT-To-Evaluate-Your-Dialogue-System-An-Empirical-Study-of-Unsupervised-Evaluation-Metrics-for-Dialogue-Response-Generation/graph)

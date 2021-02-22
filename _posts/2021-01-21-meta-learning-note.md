@@ -2,7 +2,7 @@
 layout: post
 title:  "元学习-Meta-Learning: Learning to Learn Fast"
 date: 2021-01-21 00:00:00
-tags: meta-learning 元学习
+tags: meta-learning 元学习 小样本学习 半监督
 categories: 深度学习
 excerpt: 元学习介绍
 author: Lily
@@ -25,6 +25,19 @@ mathjax: true
 - 书籍： [Hands-On Meta Learning With Python](https://github.com/sudharsan13296/Hands-On-Meta-Learning-With-Python), 包含配套代码，Learning to Learn using One-Shot Learning, MAML, Reptile, Meta-SGD and more. You will delve into various one-shot learning algorithms, like siamese, prototypical, relation and memory-augmented networks by implementing them in TensorFlow and Keras.
 - [From zero to research — An introduction to Meta-learning](https://medium.com/huggingface/from-zero-to-research-an-introduction-to-meta-learning-8e16e677f78a)
 - Google谷歌和伯克利出品ppt：[What’s Wrong with Meta-Learning and how we might fix it](http://metalearning.ml/2018/slides/meta_learning_2018_Levine.pdf)
+- 【2021-2-20】[清华大学朱文武团队夺冠AAAI 2021国际深度元学习挑战赛](https://www.163.com/dy/article/G39E7NKT0536A3D8.html)
+  - 三个方面的挑战：
+    - 一、如何使模型具有**快速适应小样本新任务**的能力。在这次比赛中，参赛者提交的模型拥有两次训练过程：元训练过程以及测试训练过程。在元训练过程中，模型必须提炼出该数据集的元知识以及最佳的学习方法，来确保模型在测试训练过程中能快速学习并防止过拟合。
+    - 二、**时间以及空间约束**。本次比赛拥有对时间以及空间的约束条件。总时长不超过 2h，总 GPU 资源占用不得超过 4 张 8G M60 GPU。这要求参赛者提供的模型必须高效、轻量地提取元知识和学习方法。
+    - 三、**适配未知数据集**。相别于传统小样本学习，本次比赛还考察了模型对于不同类型数据集的适应效果。由于事先并不知道测试阶段的隐藏元训练数据，挑战者提交的模型必须拥有足够的泛化能力，来应对在未知类型的数据集中提炼元知识的能力。这一点又被称为元-元学习，是对元学习的补充与提升。
+  - 为了应对以上三个问题，Meta-Learners 参赛团队提出了自适应深度元学习系统 Meta-Delta 来实现轻量级、高效、高泛化性的元学习模型
+    - [Meta-Delta 论文](http://mn.cs.tsinghua.edu.cn/xinwang/PDF/AAAI21_MetaDelta.pdf)
+    - [Meta-Delta系统源码](https://github.com/Frozenmad/MetaDelta)
+    - Meta-Delta 系统采用基于测量的方法（metric-based method）来作为元学习模型的内核（如图 Meta-Learner）。这种方法将数据集映射到一个元知识空间，并以空间中测试样本点（query）和训练样本点（support）的距离远近，来快速进行小样本分类。这样的做法将元知识的提取转化为空间变换问题，是最近研究中效果最好的元学习算法之一，很好地解决了快速适应小样本新任务的挑战。
+    - ![](https://pics4.baidu.com/feed/18d8bc3eb13533fad5827ab3c326ec1740345b70.jpeg?token=869b18ede095a403329ccc72528cb348&s=9DE0E9138B2045030874E8CB020080B2)
+    - ![](https://pics3.baidu.com/feed/10dfa9ec8a13632767365c35fb7ab1e40afac7de.jpeg?token=d2b39d9e6183432f7f238e014ae010f2&s=D900EE1B8BE0450346FCE8CE0300C033)
+- 【2021-2-20】[韩家炜课题组重磅发文：文本分类只需标签名称，不需要任何标注数据！](https://zhuanlan.zhihu.com/p/345738174)
+
 
 # Few shot learning 小样本学习
 
@@ -38,11 +51,38 @@ mathjax: true
   - 零样本学习 Zero-shot learning, when no demonstrations are allowed and the model has access only to a natural language description of the task.
 - [2020’s Top AI & Machine Learning Research Papers](https://www.topbots.com/ai-machine-learning-research-papers-2020/#ai-paper-2020-5)
 
+
+## 半监督
+
+- 【2021-2-20】[不要浪费没有标注的数据！超强文本半监督方法MixText来袭！](https://mp.weixin.qq.com/s/j_1wgIUhhfJ4FcPRh5HhUw),ACL20的paper《[MixText: Linguistically-Informed Interpolation of Hidden Space for Semi-Supervised Text Classification](https://arxiv.org/pdf/2004.12239)》, [代码地址](https://github.com/GT-SALT/MixText)
+  - MixText主要针对的是半监督文本分类场景，其主要的亮点有：
+    - 提出一种全新文本增强方式——TMix，在隐式空间插值，生成全新样本。
+    - 对未标注样本进行低熵预测，并与标注样本混合进行TMix。MixText可以挖掘句子之间的隐式关系，并在学习标注样本的同时利用无标注样本的信息。
+    - 超越预训练模型和其他半监督方法， 在少样本场景下表现卓越！
+- 数据为王，数据是深度学习时代的“煤油电”。虽然标注数据获取昂贵，但半监督学习可以同时标注数据和未标注数据，而未标注数据通常很容易得到。
+- 半监督文本分类可分为以下4种：
+  - **变分自编码VAE**：通过重构句子，并使用从重构中学到的潜在变量来预测句子标签；
+  - **自训练**：通过self-training的方式，让模型在未标注数据上生成高置信度的标签；
+  - **一致性训练**：通过 对抗噪声 或者 数据增强 的方式对未标注数据进行一致性训练；
+  - **微调预训练模型**：在大规模无标注数据上进行预训练，在下游标注数据上微调；
+
 ## 背景
 
-- 分类非常常见，但如果每个类只有几个标注样本，怎么办？
-- 大量平台用户在创建一个新对话任务时，并没有大量标注数据，每个意图往往只有几个或十几个样本。
-- 面对这类问题，有一个专门的机器学习分支——**Few-shot Learning** 来进行研究和解决
+- 当前的文本分类任务需要利用众多标注数据，标注成本是昂贵的。而半监督文本分类虽然减少了对标注数据的依赖，但还是需要领域专家手动进行标注，特别是在类别数目很大的情况下。
+- （1）如果每个类只有几个标注样本，怎么办？大量平台用户在创建一个新对话任务时，并没有大量标注数据，每个意图往往只有几个或十几个样本。
+  - 面对这类问题，有一个专门的机器学习分支——**Few-shot Learning** 来进行研究和解决
+- （2）而人类是如何对新闻文本进行分类的？其实，我们不要任何标注样本，只需要利用和分类类别相关的少数单词就可以，有没有一种方式，可以让文本分类不再需要任何标注数据呢？
+  - 「伊利诺伊大学香槟分校韩家炜老师课题组」的EMNLP20论文《[Text Classification Using Label Names Only: A Language Model Self-Training Approach](https://arxiv.org/pdf/2010.07245.pdf)》。
+  - 这篇论文的最大亮点就是：不需要任何标注数据，只需利用标签名称就在四个分类数据上获得了近90%的准确率！
+  - 论文提出一种[LOTClass模型](https://github.com/yumeng5/LOTClass)，即Label-name-Only Text Classification，LOTClass模型的主要亮点有：
+    - 不需要任何标注数据，只需要标签名称！ 只依赖预训练语言模型(LM)，不需要其他依赖！
+    - 提出了类别指示词汇获取方法和基于上下文的单词类别预测任务，经过如此训练的LM进一步对未标注语料进行自训练后，可以很好泛化！
+    - 在四个分类数据集上，LOTClass明显优于各弱监督模型，并具有与强半监督和监督模型相当的性能。
+  - LOTClass将BERT作为其backbone模型，其总体实施流程分为以下三个步骤：
+    - ①标签名称替换：利用并理解标签名称，通过MLM生成类别词汇；
+    - ②类别预测：通过MLM获取类别指示词汇集合，并构建基于上下文的单词类别预测任务，训练LM模型；
+    - ③自训练：基于上述LM模型，进一步对未标注语料进行自训练后，以更好泛化！
+
 
 ## FSL定义
 
