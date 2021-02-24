@@ -14,6 +14,14 @@ mathjax: true
 
 # 总结
 
+- 【2021-2-22】[达摩院Conversational AI研究进展及应用](https://mp.weixin.qq.com/s?__biz=MzU1NTMyOTI4Mw==&mid=2247531629&idx=1&sn=0c028fe3e3aa3b7deb872268ecd9c97c&chksm=fbd7ce01cca04717fd115d671cbfc9e9d015c87096574db04892ffcc670f5ef8197f6cd5a429&mpshare=1&scene=1&srcid=0222uIsdzMLXqIlAS8HdPo8r&sharer_sharetime=1614146750577&sharer_shareid=b8d409494a5439418f4a89712efcd92a&version=3.1.0.6189&platform=mac#rd)
+  - 任务型对话引擎Dialog Studio和表格型问答引擎TableQA的核心技术研究进行介绍：
+    - 语言理解：如何系统解决低资源问题
+    - 对话管理：如何从状态机到深度模型
+    - TableQA：Conversational Semantic Parsing的难点和进展
+- [台大对话系统](https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/200602_ConversationalAI.pdf)，对话AI的两个分支
+  - Chit-Chat： seq2seq → 集成上下文 → 集成知识库
+  - Task-Oriented：single-domain → multi-domain, contextual → end2end learning
 - 【2021-2-14】[思知机器人](https://www.ownthink.com/)，开源中文知识图谱，[图谱可视化](https://www.ownthink.com/knowledge.html?word=%E9%92%9F%E5%8D%97%E5%B1%B1)，[Demo体验](https://www.ownthink.com/robot.html)，包含实时tts；OwnThink开源了史上最大规模（1.4亿）中文知识图谱，[地址](https://github.com/ownthink/KnowledgeGraphData)
 - 【2021-2-4】调停机器人（斡旋）
   - [Intervening Ethical Governor for Robot Mediator in Patient-Caregiver Relationship](https://www.youtube.com/watch?v=3-ZST_bGW3Q&feature=youtu.be)，国外的调停机器人，佐治亚理工，应用于医患关系调解，论文：[an intervening ethical governor for a robot mediator in patient-caregiver relationship.](https://www.cc.gatech.edu/ai/robot-lab/online-publications/ICRE15_shim_arkin.pdf)
@@ -310,6 +318,19 @@ chatbot:我也是，不过总有一天就会好起来的
   - 基于检索的方法从候选回复中选择回复.检索方法的关键是消息-回复匹配，匹配算法必须克服消息和回复之间的语义鸿沟.基于学习的搜索和排序算法在基于检索的对话系统中起着至关重要的作用，基础算法在近几年取得了非常大的进步，基于检索的对话系统展现出非常客观的性能和准确率.在众多非任务型对话中，基于检索的方法输出的结构也常常作为生成对话模型的输入，或者进行平行组合使用.
   - 检索式对话的基本思路就是将输入和候选输出投射到同一个语义空间中，判断两者是否相似.对于是否相似的计算而言，经典方式是基于独热编码或词袋模型，这是比较传统的表达方式.而当深度学习崛起之后，开始使用表示学习，也就是学习出向量嵌入表示，最后是基于抽象表示的匹配相似度计算.
   - 近年来，有很多模型被提出，如微软的DSSM、CDSSM及相关系列模型；华为诺亚方舟实验室提出的ARC-Ⅰ和ARC-Ⅱ；斯坦福的Tree-LSTM，IBM的ABCNN，Pang等提出的MatchPyramid，Qian等提出的ESIM等.通常，深度匹配模型可以从大类上分为表示型和交互型2种表示型模型，如DSSM等，侧重对表示层的学习和构建，它会在表示层将输入转换成整体表示向量，利用深度网络进行语义表示的加强.这种模型的问题是容易发生语义偏移，上下文信息的重要性难以显式衡量.交互型模型，如ARC-Ⅱ等，这类模型在输入层就进行词语间的先匹配，并将匹配的结果作为灰度图进行后续的计算和建模，能够更精细地处理句子中的联系.它的优势是可以较好地把握语义焦点，对上下文重要性合理建模.近年来，基于检索的架构在工业界的实践和应用得到了快速的发展.
+
+## NLU
+
+- [台大对话系统](https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/200602_ConversationalAI.pdf)
+- 语言理解的pipeline，前两者主要通过Classification实现，第三个是Sequence Labeling
+  1. Domain Identification（分类）： Requires Predefined Domain Ontology
+    - 如：find a good eating place for taiwanese food
+    - 识别为餐饮领域
+  2. Intent Detection（分类）：Requires Predefined Schema
+    - 餐饮领域里的找餐馆意图：FIND_RESTAURANT
+  3. Slot Filling（序列标注）：Requires Predefined Schema
+    - 槽位：rating=“good”，type=“taiwanese”
+    - Slot Tagging
 
 ## 任务型对话
 
