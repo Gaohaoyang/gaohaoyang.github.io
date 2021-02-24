@@ -168,6 +168,11 @@ Collaboration-based User Simulation for Goal-oriented Dialog Systems——在有
 
 # 工程实现
 
+- 【2021-2-23】[user-simulator](https://github.com/wyshi/user-simulator)，Codebase for [How to Build User Simulators to Train RL-based Dialog Systems](https://arxiv.org/pdf/1909.01388.pdf), published as a long paper in EMNLP 2019. The sequicity part is developed based on [Sequicity: Simplifying Task-oriented Dialogue Systems with Single Sequence-to-Sequence Architectures](https://github.com/WING-NUS/sequicity).
+  - RL training with agenda-based simulator: python run_mydata_new.py
+  - RL training with supervised-learning-based simulator: python run_mydata_seq_new.py
+  - Interacting with trained policies: policies are under simulator/policy/
+
 ## TC-Bot
 
 - 台大的TC-Bot框架提供了一种开发和比较不同算法和模型的方法。 
@@ -289,19 +294,11 @@ dqn.py主要函数介绍：DQN主要是训练一个强化学习的对话过程�
 
 - 表2是用户模拟器与SimpleRL-SoftKB和End2End-RL代理之间的对话。Critic_rating槽位值是用户模拟器中常见的错误源，因此，所有学习到的策略都倾向于多次请求该值。
 
-
-
 图1：没有NLU和NLG的策略训练学习曲线：绿线是规则代理，我们使用它来初始化体验重播缓冲池； 蓝线是RL代理； 橙色线是最佳上限，它是通过代理数据库中可达到的用户目标数与用户目标总数的比。
-
-
 
 图2：使用NLU和NLG进行的端到端策略训练的学习曲线：绿线是规则我们用来初始化经历重放缓冲池的代理； 蓝线是学习RL代理的曲线； 橙色线是最佳上限，由代理程序数据库中可达到的用户目标数与用户目标总数之比。
 
-
-
 表1：基于规则的代理和RL代理与用户模拟器生成的两个示例对话：左列显示规则和RL代理均成功； 右列显示基于规则的代理失败，而RL代理成功。
-
-
 
 表2：用户模拟器与SimpleRL-SoftKB和End2End-RL代理之间的对话示例。 在每次对话结束时，代理会告知KB后验的前5个结果。 已经通知的用户目标以粗体显示。
 
