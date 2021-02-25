@@ -175,8 +175,6 @@ Check several other datasets by Google [here.](https://github.com/google-researc
   - Relation Network认为度量方式也是网络中非常重要的一环，需要对其进行建模，所以该网络不满足单一且固定的距离度量方式，而是训练一个网络来学习（例如 CNN）距离的度量方式，在 loss 方面也有所改变，考虑到 relation network 更多的关注 relation score，更像一种回归，而非 0/1 分类，所以使用了 MSE 取代了 cross-entropy。
   - ![](https://pic2.zhimg.com/80/v2-2f8ed3cf76e138a7be12c6645fd33441_720w.jpg)
 
-
-
 ### Optimization Based方法
 
 - Ravi 等人 [7] 研究了在少量数据下，基于梯度的优化算法失败的原因，即无法直接用于 meta learning。
@@ -194,6 +192,22 @@ Check several other datasets by Google [here.](https://github.com/google-researc
   - 文章提出的方法，可以学习任意标准模型的参数，并让该模型能快速适配。他们认为，一些中间表达更加适合迁移，比如神经网络的内部特征。因此面向泛化性的表达是有益的。因为我们会基于梯度下降策略在新的任务上进行 finetune，所以目标是学习这样一个模型，它能对新的任务从之前任务上快速地进行梯度下降，而不会过拟合。事实上，是要找到一些对任务变化敏感的参数，使得当改变梯度方向，小的参数改动也会产生较大的 loss。
 
 
+## 案例
+
+- 【2021-2-22】[达摩院Conversational AI研究进展及应用](https://mp.weixin.qq.com/s?__biz=MzU1NTMyOTI4Mw==&mid=2247531629&idx=1&sn=0c028fe3e3aa3b7deb872268ecd9c97c&chksm=fbd7ce01cca04717fd115d671cbfc9e9d015c87096574db04892ffcc670f5ef8197f6cd5a429&mpshare=1&scene=1&srcid=0222uIsdzMLXqIlAS8HdPo8r&sharer_sharetime=1614146750577&sharer_shareid=b8d409494a5439418f4a89712efcd92a&version=3.1.0.6189&platform=mac#rd)
+  - 任务型对话引擎Dialog Studio和表格型问答引擎TableQA的核心技术研究进行介绍：
+    - 语言理解：如何系统解决低资源问题
+      - 低资源小样本问题
+        - 冷启动的场景下，统计45个POC机器人的数据，平均每个意图下的训练样本不到6条，是一个典型的小样本学习问题。
+        - 在脱离了冷启动阶段进入规模化阶段之后，小样本问题依然存在，比如对浙江省11个地市的12345热线机器人数据进行分析，在将近900个意图中，有42%的中长尾意图的训练样本少于10条，这仍然是一个典型的小样本学习问题。
+        - ![](https://n.sinaimg.cn/sinakd2021222s/62/w1052h610/20210222/3945-kkmphps2653871.png)
+      - 解决方案：引入Few-shot Learning系统解决小样本问题；本质是一个迁移学习：迁移学习的方式能够最大化平台方积累数据的优势。即插即用的算法：在应用的时候不需要训练，可以灵活地增添新的数据，这对toB场景非常友好；
+        - ![](https://n.sinaimg.cn/sinakd2021222s/40/w1080h560/20210222/aa14-kkmphps2653870.png)
+        - 达摩院Conversational AI团队提出了一个Encoder-Induction-Relation的三层Few-shot learning Framework
+          - ![](https://n.sinaimg.cn/sinakd2021222s/735/w1080h455/20210222/ec72-kkmphps2653957.png)
+        - 无论是小孩子还是大人，从小样本中进行学习的时候，主要依靠的是两种强大的能力，归纳能力和记忆能力
+        - 达摩院提出了Dynamic Memory Induction Networks的动态记忆机制（发表于ACL2020）
+
 # Meta-Learning 元学习
 
 - Meta learning
@@ -204,7 +218,6 @@ Check several other datasets by Google [here.](https://github.com/google-researc
   - 基于 RNN 的**记忆** (RNN Memory Based)
   - **度量学习** (Metric Learning)
 - 参考文章《Learning to Compare: Relation Network for Few-Shot Learning》
-
 
 1. 学习微调 (Learning to Fine-Tune)
    - MAML（《Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks》） 是这类方法的范例之一。MAML 的思想是学习一个 初始化参数 (initialization parameter)，这个初始化参数在遇到新的问题时，只需要使用少量的样本 (few-shot learning) 进行几步梯度下降就可以取得很好地效果（ 参见后续博客 ）。另一个典型是《Optimization as a Model for Few-Shot Learning》，他不仅关注于初始化，还训练了一个基于 LSTM 的优化器 (optimizer) 来帮助微调（ 参见后续博客 ）。
