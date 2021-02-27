@@ -18,6 +18,8 @@ mathjax: true
 
 - 原文：[Neural Architecture Search](https://lilianweng.github.io/lil-log/2020/08/06/neural-architecture-search.html)
 
+- 【2021-2-27】Lilian Weng：看过不少论文，里面提出的微小改变完全可以用一句话说清楚。该有种更好的方式来分享渐进式的改进和实验结果。有些论文很有趣，也很有价值，但写成十页似乎也太长了。
+
 <!--more-->
 
 
