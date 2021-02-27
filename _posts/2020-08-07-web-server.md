@@ -608,7 +608,9 @@ mathjax: true
 
 # Python Web框架
 
-- 参考：[Python Web服务器并发性能测试](https://blog.csdn.net/bandaoyu/article/details/88546515)
+- 参考：
+  - [Python Web服务器并发性能测试](https://blog.csdn.net/bandaoyu/article/details/88546515)
+  - [从0到1，Python Web开发的进击之路](https://zhuanlan.zhihu.com/p/25038203)
 
 Python 常见部署方法有 ：
 - `fcgi` ：用 spawn-fcgi 或者框架自带的工具对各个 project 分别生成监听进程，然后和 http 服务互动
