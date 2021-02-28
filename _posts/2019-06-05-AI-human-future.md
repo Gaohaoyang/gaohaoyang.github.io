@@ -13,12 +13,23 @@ mathjax: true
 
 # AI之路
 
+- 【2021-2-28】[Bengio、Hinton的不懈追求——深度学习算法揭示大脑如何学习](https://mp.weixin.qq.com/s/2-mTVY_pyHcYyaoJtR1Hsg)，[原文链接](https://www.quantamagazine.org/artificial-neural-nets-finally-yield-clues-to-how-brains-learn-20210218/)
+  - 时至今日，深度学习网络统治了人工智能领域，是当之无愧的新时代的弄潮儿，其背后最大的功臣之一，便是大名鼎鼎的反向传播算法Backpropagation。
+  - 深度学习算法虽然启发自人脑的结构单元和学习机制，但这种简单的“模拟”其实并不是人脑真正运行的方式。
+  - 生物大脑不太可能使用反向传播机制来进行学习。来自Montreal大学的计算机科学家、魁北克人工智能研究所科学主任、也是2007年那场“非法”的研讨会的组织者之一Yoshua Bengio说，“相对于深度学习算法，人脑更加强大，它拥有更好的泛化和学习的能力”。而且各种证据都显示，在大脑的解剖和生理构造上，特别是在皮质层，人脑是几乎不可能利用反向传播机制进行学习的。相对于简单的深度学习算法来说，人脑是一个更趋于完美的有机主体，如果我们能对它的学习机制有所了解，肯定能够促进深度学习的发展。
+  - 研究人员一直在苦苦求索这个人脑中的与“反向传播”学习算法相匹配的生物机制。近年来，人们已经取得了一些相关的进展，其中最有前景的三个发现包括——**反馈对齐**（FeedBack Alignment）、**均衡传播**（Equilibrium Propagation）和**预测编码**（Predictive Coding）。还有一些研究人员甚至将生物学中某些类型的皮质层神经元的特性和注意力机制等过程具体化到他们的算法之中，力求揭示人脑神经元学习背后的奥秘。
+  - ![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F0228%2F03d557fep00qp8evu0029d200fk00klg00fk00kl.png&thumbnail=650x2147483647&quality=80&type=jpg)
+  - ![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F0228%2F98f17815p00qp8evu001kd200fk00cng00fk00cn.png&thumbnail=650x2147483647&quality=80&type=jpg)
+  - ![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F0228%2F83ce12e7p00qp8evu002nd200fk00pgg00fk00pg.png&thumbnail=650x2147483647&quality=80&type=jpg)
 - 【2020-7-28】实现AI一般有三条路径：
-   - 1）神经科学：自底向上，模仿生物；
-   - 2）认知科学：自顶向下，构建认知框架；
-   - 3）计算科学：模拟神经活动（例如DNN）。
+   - 1）**神经**科学：自底向上，模仿生物；
+   - 2）**认知**科学：自顶向下，构建认知框架；
+   - 3）**计算**科学：模拟神经活动（例如DNN）。
 ![](https://p26-tt.byteimg.com/img/pgc-image/8c84b15be9c54b76acb45b5396b0242a~tplv-obj:523:291.image)
-- 最为理想的研究状态是：首先由神经科学发现大脑的一些信息加工的机制；然后用认知科学的方法对这种机制进行建模；在此模型之上，计算科学抽象出算法，从而获得一套解决问题的方案。
+- 最为理想的研究状态是：
+  - 首先由神经科学发现大脑的一些信息加工的机制；
+  - 然后用认知科学的方法对这种机制进行建模；
+  - 在此模型之上，计算科学抽象出算法，从而获得一套解决问题的方案。
 - 简单来说，即将认知神经科学与人工智能结合，分别从生物视觉的硬件层、模型层、算法层进行研究。
 
 - 【2019-11-13】[综述：全面介绍脑连接研究的方法学](https://mp.weixin.qq.com/s?__biz=MzI2ODEyOTE3OQ==&mid=2649569369&idx=1&sn=210bb5d90c308ff5072fabb6645c85b9&chksm=f2eddeadc59a57bb7192738d35d5d4f8a078f7c20038c9bcce3183ce308fa3be74d10476ad5a&mpshare=1&scene=23&srcid&sharer_sharetime=1573616516238&sharer_shareid=b8d409494a5439418f4a89712efcd92a%23rd)
