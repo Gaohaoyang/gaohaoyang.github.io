@@ -13,7 +13,7 @@ mathjax: true
 
 # 总结
 
-
+- 【2021-2-28】[研究生自救指南](https://mp.weixin.qq.com/s/_bHwYU_B2S_XkEC4R7VT8w)，一张图形象描述论文作者间的关系
 - [Facebook田渊栋：博士五年之后五年的总结](https://mp.weixin.qq.com/s?__biz=MzAxMzc2NDAxOQ==&mid=2650369213&idx=1&sn=9045f9948df77cb722ef2873d5466f40&chksm=83905861b4e7d177f0e320ca5497615a2ce777556e9c6d59503398d1dc2bc824a4adb5af60a2&mpshare=1&scene=1&srcid=1016J1NUjbZDjbPIH5PyFk49#rd)
 
 - 【2020-8-28】【Eric的博士生生存指南】《[Syllabus for Eric's PhD students - Google Docs](https://docs.google.com/document/d/11D3kHElzS2HQxTwPqcaTnU5HCJ8WGE5brTXI4KLf4dM/preview?pru=AAABdEw6n2A*Q0YVpfw_ms0fZOf3P5-_hw)》by Eric Gilbert
