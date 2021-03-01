@@ -9,6 +9,10 @@ mathjax: true
 
 前端动画的开发一直是我所热衷探索与研究的内容，本文将描述什么是拟真的动画效果，目前所流行的 React 动画库，以及一些基于 framer-motion 动画库的 demos。
 
+
+
+
+
 ## 动画效果的真实体验
 
 ### `timing-function` 的不足
@@ -321,7 +325,7 @@ demo 页面链接 [https://gaohaoyang.github.io/framer-motion-practice/#/Spring]
 
 代码中修改位移、阻尼的地方如下，代码中只设置了 div 需要运动的位移 x，和阻尼值（质量和劲度系数使用默认值），就完成了动画的触发。这是与传统的 transition 设置 duration 等值的动画理念完全不同。
 
-```jsx
+```
 animate={{
   x: 150,
   transition: {
@@ -341,7 +345,7 @@ animate={{
 
 接下来再看一个元素展示和隐藏时的动画 demo。正常情况下，在元素消失时，我们要监听 `transitionend` 事件，然后再移除 dom 节点，但 framer-motion 也帮我们封装好了，只需要 `AnimatePresence` 这个标签即可，代码如下：
 
-```jsx
+``` jsx
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
