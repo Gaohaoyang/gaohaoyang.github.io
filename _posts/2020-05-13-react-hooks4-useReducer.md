@@ -537,6 +537,8 @@ export default CounterThree
 
 App.tsx
 
+{% raw %}
+
 ``` jsx
 import React, { useReducer } from 'react'
 import './App.css'
@@ -586,6 +588,8 @@ const App = () => {
 
 export default App
 ```
+
+{% endraw %}
 
 A.tsx
 

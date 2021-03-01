@@ -7,12 +7,15 @@ author: HyG
 mathjax: true
 ---
 
+* content
+{:toc}
+
 前端动画的开发一直是我所热衷探索与研究的内容，本文将描述什么是拟真的动画效果，目前所流行的 React 动画库，以及一些基于 framer-motion 动画库的 demos。
 
 
 
 
-
+{% raw %}
 ## 动画效果的真实体验
 
 ### `timing-function` 的不足
@@ -188,7 +191,7 @@ $$
     <img src="https://gw.alicdn.com/imgextra/i2/O1CN011yInSb1UIIRunzpdL_!!6000000002494-2-tps-200-200.png"/>
   </td>
 </tr>
-<table/>
+</table>
 
 可以看出，前文解出来的方程即一种欠阻尼的简谐运动。这些都是真实世界中的弹性运动，显然 timing-function 中的三次贝塞尔曲线无法模拟，需要一个能够模拟弹簧阻尼系统的动画库。
 
@@ -325,7 +328,7 @@ demo 页面链接 [https://gaohaoyang.github.io/framer-motion-practice/#/Spring]
 
 代码中修改位移、阻尼的地方如下，代码中只设置了 div 需要运动的位移 x，和阻尼值（质量和劲度系数使用默认值），就完成了动画的触发。这是与传统的 transition 设置 duration 等值的动画理念完全不同。
 
-```
+```jsx
 animate={{
   x: 150,
   transition: {
@@ -345,7 +348,7 @@ animate={{
 
 接下来再看一个元素展示和隐藏时的动画 demo。正常情况下，在元素消失时，我们要监听 `transitionend` 事件，然后再移除 dom 节点，但 framer-motion 也帮我们封装好了，只需要 `AnimatePresence` 这个标签即可，代码如下：
 
-``` jsx
+```jsx
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -400,7 +403,7 @@ export default index
     <img src="https://gw.alicdn.com/imgextra/i1/O1CN01zm3ZKY1x4D7uLkixa_!!6000000006389-2-tps-200-200.png"/>
   </td>
 </tr>
-<table/>
+</table>
 
 代码中，我们可以看到使用 useState 设置了 div 展示或隐藏的状态。在需要有移除操作的动效中，使用 `AnimatePresence` 标签包裹，设置 exit 属性就好了
 
@@ -463,7 +466,7 @@ export default index
     <img src="https://gw.alicdn.com/imgextra/i3/O1CN01WRs9RF1MjIsVUyAcm_!!6000000001470-2-tps-200-200.png"/>
   </td>
 </tr>
-<table/>
+</table>
 
 可以看到代码非常简单，给 div 设置 drag 属性、dragElastic 弹性、drag 边界条件，即可得到这样的效果，并且在 drag 过程中松手时，div 会随着惯性继续移动。
 
@@ -495,3 +498,4 @@ framer-motion 不止拥有 spring 动画，同样也具有 tween 补间动画，
 
 ![](https://gw.alicdn.com/imgextra/i3/O1CN01iN0CRO1I7y83KjN6g_!!6000000000847-2-tps-1758-634.png)
 
+{% endraw %}
