@@ -446,7 +446,7 @@ chatbot:我也是，不过总有一天就会好起来的
 - 【2021-1-28】[智能对话系统和算法](http://html.rhhz.net/buptjournal/html/20190602.htm)
 
 
-### pipeline
+### （1）Pipeline
 
 ![](https://www.pkudodo.com/wp-content/uploads/2019/06/pipeline.png)
 
@@ -488,7 +488,7 @@ chatbot:我也是，不过总有一天就会好起来的
 - `TTS`：若用户是语音交互，则将NLG输出的文本转换为对应语音即可。这部分与ASR差不多，功能相反而已。
 
 
-### 端到端
+### （2）端到端
 
 - 基于管道方法的对话系统中有许多特定领域的手工制作，所以它们很难适用于新的领域。近年来，随着端到端神经生成模型的发展，为面向任务的对话系统构建了端到端的可训练框架。与传统的管道模型不同，端到端模型使用一个模块，并与结构化的外部数据库交互。
 - ![](https://upload-images.jianshu.io/upload_images/1535345-3e1a2d7d80ba70d8.jpeg)
@@ -496,7 +496,13 @@ chatbot:我也是，不过总有一天就会好起来的
 - 端到端强化学习方法
   - ![](https://upload-images.jianshu.io/upload_images/1535345-afd604658341abf5.png?imageMogr2/auto-orient/strip|imageView2/2/w/636/format/webp)
   - 上图的模型首先提出了一种端到端强化学习的方法，在对话管理中联合训练对话状态跟踪和对话策略学习，从而更有力地对系统的动作进行优化。
-
+- 【2021-3-2】微软的[Jianfeng Gao](https://www.microsoft.com/en-us/research/people/jfgao/)，[ConvLab](https://github.com/ConvLab/ConvLab) is an open-source multi-domain end-to-end dialog system platform，aiming to enable researchers to quickly set up experiments with reusable components and compare a large set of different approaches, ranging from conventional pipeline systems to end-to-end neural models, in common environments.
+  - 开源的[ConvLab: Multi-Domain End-to-End Dialog System Platform](https://arxiv.org/abs/1904.08637).
+  - [ConvLab-2](https://convlab.github.io/), DSTC9 Track 2: Multi-domain Task-oriented Dialog Challenge II
+    - End-to-end Multi-domain Task Completion Dialog Task
+    - Cross-lingual Multi-domain Dialog State Tracking Task
+  - [Deep Reinforcement Learning for Goal-Oriented Dialogues](https://www.microsoft.com/en-us/research/project/deep-reinforcement-learning-goal-oriented-dialogue/#)
+    - ![](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/04/composite-dialogue-1024x459.png)
 
 ### 案例
 
