@@ -29,7 +29,7 @@ mathjax: true
 <iframe src="//player.bilibili.com/player.html?aid=18245630&bvid=BV1KW411q7r2&cid=29786993&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 - 【2020-12-11】[数学的酷炫你不懂](https://mp.weixin.qq.com/s/ncFbIu8KTmOkNSgI0EGgyA)
-
+- 【2021-2-28】[拉马努金和哈代：两位数学巨匠的惺惺相惜](https://mp.weixin.qq.com/s/wJ7Y6wLxfaG_QWAHaZ8iow)
 
 # 数学大师
 
