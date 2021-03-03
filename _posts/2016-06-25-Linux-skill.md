@@ -369,6 +369,8 @@ git config --global credential.helper store
 
 ## git问题
 
+###  OpenSSL SSL_read
+
 - 现象：windows下git pull，出错：
 
 > fatal: unable to access 'https://github.com/wqw547243068/wqw547243068.github.io.git/': OpenSSL SSL_read: Connection was reset, errno 10054
@@ -376,6 +378,19 @@ git config --global credential.helper store
 - 解决方法
   - 参考[解法](http://www.9lyp.com/article/info/details/id/76)，有多种原因，如文件名或路径太长
   - git config --global core.longpaths true
+
+### 443
+
+- 执行git push，错误提示：
+
+> fatal: unable to access 'https://github.com/wqw547243068/wqw547243068.github.io.git/': Failed to connect to github.com port 443: Timed out
+
+- 解法
+  - Internet与网络的设置，有代理导致，需要勾选：自动检测设置，[详见](https://blog.csdn.net/yy339452689/article/details/104040279)
+
+### 速度慢
+
+- [解决github 打开、拉取、推送速度慢的问题](https://blog.csdn.net/natahew/article/details/81387885)
 
 ## 交互式学习
 
