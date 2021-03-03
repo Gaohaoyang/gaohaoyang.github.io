@@ -139,7 +139,7 @@ $$f \left( x _ { n + 1 } \right) - f \left( x _ { n } \right) = f ^ { \prime } \
 
 
 
-### 视屏嵌入
+### 视频嵌入
 ---
 【2019-04-29】嵌入视频
 
@@ -159,6 +159,23 @@ $$f \left( x _ { n + 1 } \right) - f \left( x _ { n } \right) = f ^ { \prime } \
 
 ```html
 <object width="640" height="360"><param name="movie" value="//open.163.com/openplayer/-M6HV755O6-M6HV8DF19-http://open-image.nosdn.127.net/a5954850efaf429189dd8247a999be22.jpg-openPlayer.swf?isUserAutoPlay=1"></param><param name="allowScriptAccess" value="always"></param><param name="wmode" value="transparent"></param><embed src="//open.163.com/openplayer/-M6HV755O6-M6HV8DF19-http://open-image.nosdn.127.net/a5954850efaf429189dd8247a999be22.jpg-openPlayer.swf?isUserAutoPlay=1" type="application/x-shockwave-flash" width="640" height="360" allowFullScreen="true" wmode="transparent" allowScriptAccess="always"></embed></object>
+```
+
+- 【2021-3-3】按照html方式嵌入视频，有4-5种方式，参考[w3c地址](https://www.w3school.com.cn/html/html_video.asp)，示例：
+
+```html
+<embed width="500" height="300" src="https://d2r55xnwy6nx47.cloudfront.net/uploads/2021/02/Neuron_2880_Lede.mp4" />
+<object data="movie.swf" height="200" width="200"/>
+<!-- H5 -->
+<video width="320" height="240" controls="controls">
+  <source src="movie.mp4" type="video/mp4" />
+  <source src="movie.ogg" type="video/ogg" />
+  <source src="movie.webm" type="video/webm" />
+  <object data="movie.mp4" width="320" height="240">
+    <embed src="movie.swf" width="320" height="240" />
+  </object>
+</video>
+
 ```
 
 

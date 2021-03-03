@@ -75,7 +75,8 @@ mathjax: true
 <iframe src="//player.bilibili.com/player.html?aid=668813899&bvid=BV1oa4y1h7Um&cid=209423753&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 - 【2020-9-12】百度王凡：[开放域对话系统：现状和未来](https://mp.weixin.qq.com/s?__biz=MzU1NTMyOTI4Mw==&mid=2247507362&idx=1&sn=f266e83bf26956838a830a6a8a9194d9&chksm=fbd76fcecca0e6d8e1e6869a5f701476b2955c51d9ef2976e44feb912d0c7ce78b88bf9bbdd9&mpshare=1&scene=1&srcid=0911roXzZkIrRt7BtSTeBubc&sharer_sharetime=1599789486897&sharer_shareid=b8d409494a5439418f4a89712efcd92a&key=0a19845a51c58415c57b70e5f9fcc7ac1e55f7a063b5625f0ad6ccdb97f84fc761d724100f3eaed413d29d6ec7d00b57d24ba7704bca6760e6a12c76d8fe7d71b6ff948a0f1bde8d149ca08a3d5c255b6d3383569f32352ea1d5acc4e3bc8c484c49e8e22249bc5e1217f078d0699a752d15bc2c23d03e00bc50d2c5f3568f74&ascene=1&uin=OTY1NzE1MTYw&devicetype=Windows+10+x64&version=62090529&lang=zh_CN&exportkey=ASpq7RdZ3unrf%2FjEtdDMFCc%3D&pass_ticket=PuzvgcInSGb6VR3uby%2FNFgjqxSEToDvVRO%2BX7yC0tMwo7rfZ0%2FgqILDt9IhoQjhw&wx_header=0)
-
+- 7/2018: [Jianfeng Gao](https://www.microsoft.com/en-us/research/people/jfgao/) (MSR AI), [Lihong Li](https://lihongli.github.io/) (Google AI) and I presented a tutorial on Neural Approaches to Conversational AI at [SIGIR-18](http://sigir.org/sigir2018/) and [ACL-18](https://acl2018.org/). Slides: [PowerPoint](https://www.microsoft.com/en-us/research/uploads/prod/2019/05/neural-approaches-to-conversational-AI.pptx) (with animations) and [PDF](https://www.microsoft.com/en-us/research/uploads/prod/2019/05/neural-approaches-to-conversational-AI.pdf).
+- a tutorial on Neural Approaches to Conversational AI [paper](https://arxiv.org/pdf/1809.08267.pdf) at ICML-19. Slides: [pdf](https://www.microsoft.com/en-us/research/uploads/prod/2019/06/neural-approaches-to-conversational-AI.pdf), [Powerpoint](https://www.microsoft.com/en-us/research/uploads/prod/2019/06/neural-approaches-to-conversational-AI-public.pptx).
 - 【2020-11-28】优质资料，哈工大张伟男：[人机对话关键技术及挑战](https://zhuanlan.zhihu.com/p/90425938)，【2020-11-6】附：[前沿动态综述-闲聊型对话-视频版](https://hub.baai.ac.cn/view/3736)
   - ![](https://pic4.zhimg.com/80/v2-ce5e5d418062c9f707066be1ff1b339f_720w.jpg)
   - 开放域对话系统
@@ -445,7 +446,7 @@ chatbot:我也是，不过总有一天就会好起来的
 - 【2021-1-28】[智能对话系统和算法](http://html.rhhz.net/buptjournal/html/20190602.htm)
 
 
-### pipeline
+### （1）Pipeline
 
 ![](https://www.pkudodo.com/wp-content/uploads/2019/06/pipeline.png)
 
@@ -487,7 +488,7 @@ chatbot:我也是，不过总有一天就会好起来的
 - `TTS`：若用户是语音交互，则将NLG输出的文本转换为对应语音即可。这部分与ASR差不多，功能相反而已。
 
 
-### 端到端
+### （2）端到端
 
 - 基于管道方法的对话系统中有许多特定领域的手工制作，所以它们很难适用于新的领域。近年来，随着端到端神经生成模型的发展，为面向任务的对话系统构建了端到端的可训练框架。与传统的管道模型不同，端到端模型使用一个模块，并与结构化的外部数据库交互。
 - ![](https://upload-images.jianshu.io/upload_images/1535345-3e1a2d7d80ba70d8.jpeg)
@@ -495,7 +496,13 @@ chatbot:我也是，不过总有一天就会好起来的
 - 端到端强化学习方法
   - ![](https://upload-images.jianshu.io/upload_images/1535345-afd604658341abf5.png?imageMogr2/auto-orient/strip|imageView2/2/w/636/format/webp)
   - 上图的模型首先提出了一种端到端强化学习的方法，在对话管理中联合训练对话状态跟踪和对话策略学习，从而更有力地对系统的动作进行优化。
-
+- 【2021-3-2】微软的[Jianfeng Gao](https://www.microsoft.com/en-us/research/people/jfgao/)，[ConvLab](https://github.com/ConvLab/ConvLab) is an open-source multi-domain end-to-end dialog system platform，aiming to enable researchers to quickly set up experiments with reusable components and compare a large set of different approaches, ranging from conventional pipeline systems to end-to-end neural models, in common environments.
+  - 开源的[ConvLab: Multi-Domain End-to-End Dialog System Platform](https://arxiv.org/abs/1904.08637).
+  - [ConvLab-2](https://convlab.github.io/), DSTC9 Track 2: Multi-domain Task-oriented Dialog Challenge II
+    - End-to-end Multi-domain Task Completion Dialog Task
+    - Cross-lingual Multi-domain Dialog State Tracking Task
+  - [Deep Reinforcement Learning for Goal-Oriented Dialogues](https://www.microsoft.com/en-us/research/project/deep-reinforcement-learning-goal-oriented-dialogue/#)
+    - ![](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/04/composite-dialogue-1024x459.png)
 
 ### 案例
 
