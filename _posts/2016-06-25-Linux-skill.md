@@ -367,6 +367,15 @@ git config --global credential.helper store
       - 安装：git clone https://github.com/killf/cgit.git && sudo ./cgit/install.sh
       - 使用：cgit clone https://github.com/killf/cgit.git （亲测有效）
 
+## git问题
+
+- 现象：windows下git pull，出错：
+
+> fatal: unable to access 'https://github.com/wqw547243068/wqw547243068.github.io.git/': OpenSSL SSL_read: Connection was reset, errno 10054
+
+- 解决方法
+  - 参考[解法](http://www.9lyp.com/article/info/details/id/76)，有多种原因，如文件名或路径太长
+  - git config --global core.longpaths true
 
 ## 交互式学习
 
