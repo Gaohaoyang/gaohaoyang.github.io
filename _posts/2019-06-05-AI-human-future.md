@@ -15,7 +15,8 @@ mathjax: true
 
 - 【2021-2-28】[Bengio、Hinton的不懈追求——深度学习算法揭示大脑如何学习](https://mp.weixin.qq.com/s/2-mTVY_pyHcYyaoJtR1Hsg)，[原文链接](https://www.quantamagazine.org/artificial-neural-nets-finally-yield-clues-to-how-brains-learn-20210218/)
   - [Hinton：我终于想明白大脑怎么工作了！神经学家花三十年，寻找反向传播的生物机制](https://mp.weixin.qq.com/s/nKPde5Hv4YoZCMOFvBXM1w)，更详细的解释，英文原文：[Artificial Neural Nets Finally Yield Clues to How Brains Learn](https://www.quantamagazine.org/artificial-neural-nets-finally-yield-clues-to-how-brains-learn-20210218/)
-    - ![](https://d2r55xnwy6nx47.cloudfront.net/uploads/2021/02/Neuron_2880_Lede.mp4)
+    - [神经元信号传递视频](https://d2r55xnwy6nx47.cloudfront.net/uploads/2021/02/Neuron_2880_Lede.mp4)
+    - <embed width="800" height="640" src="https://d2r55xnwy6nx47.cloudfront.net/uploads/2021/02/Neuron_2880_Lede.mp4" />
   - 时至今日，深度学习网络统治了人工智能领域，是当之无愧的新时代的弄潮儿，其背后最大的功臣之一，便是大名鼎鼎的反向传播算法Backpropagation。
   - 深度学习算法虽然启发自人脑的结构单元和学习机制，但这种简单的“模拟”其实并不是人脑真正运行的方式。
   - 生物大脑不太可能使用反向传播机制来进行学习。来自Montreal大学的计算机科学家、魁北克人工智能研究所科学主任、也是2007年那场“非法”的研讨会的组织者之一Yoshua Bengio说，“相对于深度学习算法，人脑更加强大，它拥有更好的泛化和学习的能力”。而且各种证据都显示，在大脑的解剖和生理构造上，特别是在皮质层，人脑是几乎不可能利用反向传播机制进行学习的。相对于简单的深度学习算法来说，人脑是一个更趋于完美的有机主体，如果我们能对它的学习机制有所了解，肯定能够促进深度学习的发展。
