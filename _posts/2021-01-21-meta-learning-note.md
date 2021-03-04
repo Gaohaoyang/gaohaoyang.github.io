@@ -22,6 +22,7 @@ mathjax: true
 - [最新《小样本学习(Few-shot learning)》2020综述，34页pdf166篇参考文献](https://zhuanlan.zhihu.com/p/129786553)
   - 小样本学习综述《[Generalizing from a Few Examples: A Survey on Few-Shot Learning](https://arxiv.org/abs/1904.05046)》，包含166篇参考文献，来自第四范式和香港科技大学习的研究学者。
 - [Few-shot learning（少样本学习）入门](https://zhuanlan.zhihu.com/p/156830039)
+- 【2021-3-4】[用于表格推理的小样本学习](https://mp.weixin.qq.com/s?__biz=MzU1OTMyNDcxMQ==&mid=2247493084&idx=1&sn=8f16af202fb080da01ef622f353a6728&chksm=fc1bae94cb6c27828781fd988a294a95e096c4facd69a46fe4dfd3b06ca59512b7858f01d019&mpshare=1&scene=1&srcid=0304V9tx0lAJRmBTRbCLuw2F&sharer_sharetime=1614857183449&sharer_shareid=b8d409494a5439418f4a89712efcd92a&version=3.1.0.6189&platform=mac#rd)
 - 书籍： [Hands-On Meta Learning With Python](https://github.com/sudharsan13296/Hands-On-Meta-Learning-With-Python), 包含配套代码，Learning to Learn using One-Shot Learning, MAML, Reptile, Meta-SGD and more. You will delve into various one-shot learning algorithms, like siamese, prototypical, relation and memory-augmented networks by implementing them in TensorFlow and Keras.
 - [From zero to research — An introduction to Meta-learning](https://medium.com/huggingface/from-zero-to-research-an-introduction-to-meta-learning-8e16e677f78a)
 - Google谷歌和伯克利出品ppt：[What’s Wrong with Meta-Learning and how we might fix it](http://metalearning.ml/2018/slides/meta_learning_2018_Levine.pdf)
