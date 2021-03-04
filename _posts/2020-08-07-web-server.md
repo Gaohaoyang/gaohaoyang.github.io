@@ -16,7 +16,6 @@ mathjax: true
 
 - ![](https://raw.githubusercontent.com/woaielf/woaielf.github.io/master/_posts/Pic/1611/161115-1.png)
 
-
 - 【2021-1-9】架构设计总结，[阿里技术：架构整洁之道](https://mp.weixin.qq.com/s/Kd1T40KZWvdThKC3IN6n-Q)，书籍《架构整洁之道》
   - ![](https://pic2.zhimg.com/80/v2-40885dfb8be237d2e0dcf1b0f75f4c45_720w.jpg)
 
