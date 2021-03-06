@@ -3,7 +3,7 @@ layout: post
 title:  "互联网资讯-Internet News"
 date:   2020-01-16 22:30:00
 categories: 互联网
-tags: 互联网 BAT TMD 陆奇
+tags: 互联网 BAT TMD 陆奇 朱松纯
 excerpt: 互联网行业资讯及各大厂信息汇总
 author: 鹤啸九天
 mathjax: true
@@ -800,8 +800,26 @@ mathjax: true
 
 ## 行业分析
 
+- 【2021-3-6】[To B产品商业化的真相](https://mp.weixin.qq.com/s/K77Y5akJJnVvZz8mFY_oMg)
+  - 产品商业化的误区：
+    - 1）重研发轻销售：产品的生命周期不是从研发结束的那一刻开始的，而是从客户使用的那一刻开始的
+    - 2）重销售轻交付：商机来了，运营拉上产研团队和合作伙伴蜂拥而上，见客户、吹牛逼、写方案、斗友商
+    - 3）重交付轻运营：项目经理协调服务商全力保障项目的交付质量，等项目交付告一段落，甚至在项目初验结束后，就打道回府。
+  - 如何开启产品商业化？见[图](https://mmbiz.qpic.cn/mmbiz_png/jIwqrGkiaUBDnksJAKuxKEfcic7hFc2BvKR6ZOjpWnxXUdHrGGWs2icYGDJywKxgB5flXRdBE5fncgHmVmWGrRfDw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+    - 想法→原型→产品→产品集成方案→客户解决方案→客户项目案例
+      - ![](https://mmbiz.qpic.cn/mmbiz_png/jIwqrGkiaUBDnksJAKuxKEfcic7hFc2BvK7jQafwKyt3sRQ13NxFSz0iahWiamuiatBerPF1wePegQHO6FH93picH7icA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+    - 卖什么→卖给谁→凭什么→怎么卖→怎么交付→怎么运营 
+      - ![](https://mmbiz.qpic.cn/mmbiz_png/jIwqrGkiaUBDnksJAKuxKEfcic7hFc2BvKG6FBVoMicrqcXuQjcXzToLjcEws5mjtpkibKDfICtWdib2vLeQGS1KeYA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+    - ![](https://mmbiz.qpic.cn/mmbiz_png/jIwqrGkiaUBDnksJAKuxKEfcic7hFc2BvKR6ZOjpWnxXUdHrGGWs2icYGDJywKxgB5flXRdBE5fncgHmVmWGrRfDw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+
 ### 在线教育
 
+- 【2021-3-6】[智能教育硬件战火烧到「造灯」，腾讯、字节跳动入局](https://zhuanlan.zhihu.com/p/354859592)，智能作业灯装了两个摄像头，学生在使用台灯前，正面摄像头用来矫正坐姿，在进入学习状态时，顶部摄像头用来拍照查词，学习完成后，还可以批改作业。
+  - 这是腾讯教育发布的首款智能作业灯「AILA」，售价1499元。这款智能作业灯由腾讯教育与人工智能机构暗物智能（朱松纯）联合「制造」，配备了腾讯教育的OCR技术、以及暗物智能的强认知AI技术能力，主打家庭辅导场景，具有指尖点读、智能批改等功能。大家对智能教育硬件的印象是，点读笔、学习机、故事机、电子辞典。可没想到，护眼灯也能成为学习硬件的载体。
+  - ![](https://pic1.zhimg.com/80/v2-9cf9446dc8e4132fd5b6bab7977742dc_720w.jpg)
+  - 不仅具备护眼照明功能，这款智能作业灯还具备语音唤醒、指尖点读及查字典词典等功能，内置「腾讯作业君」应用，支持小学阶段语数英三门学科的作业提交、自动批改作业、AI讲题、错题本自动生成等多项AI功能。在智能作业灯当中，「AI讲题」便是来自暗物智能k12教育产品「谙心助教」的核心功能。该功能通过拟人推算技术，可以实现符合人脑自然表达的智能讲解，基于可解释AI模型，可以将问题抽象为模型，不需要依赖题库也可以讲解相关知识点题型。
+  - ![](https://pic4.zhimg.com/80/v2-353d418679d69b030c01142bca3f4fe3_720w.jpg)
+  - 2020年中，字节跳动在推出大力智能作业灯时便瞄准了家庭作业场景，聚焦群体是幼升小和一至六年级的孩子。
 - 【2020-7-25】[风光无限和暗潮汹涌，猿辅导的撕裂两极](https://mp.weixin.qq.com/s?__biz=MjM5OTA3MDg4Mg==&mid=2650778103&idx=1&sn=c73b86ed22b5b18956d209e91dc7471a&chksm=beca143a89bd9d2cdd359a95635fe8ec73adce7acc391c0bc518c0f578a44efd4a8d4653e582&mpshare=1&scene=1&srcid=07251QkQNq8djovaJKDr1Ufb&sharer_sharetime=1595690030121&sharer_shareid=b8d409494a5439418f4a89712efcd92a&key=0a19845a51c584155b6345d202cd04b468e6d3675c7e8c993850f213cf51345e413e7acc27be226f961ad42e4bd6e5ba800252723e94d885c7f44fdaa51f98dd6cef53afaea24452284b8e0c29f32f0b&ascene=1&uin=OTY1NzE1MTYw&devicetype=Windows+10+x64&version=62090529&lang=zh_CN&exportkey=Aa5%2FF8IzX%2BoGwenXeRSJ4lk%3D&pass_ticket=N515jI8hJLYuSweockQxdzhhoduUWPoTrVv0oEt0EVwl0E%2FX27ocEguoKFqhAvt%2B)
    - 疫情的爆发，使得原本存在感不强的在线教育行业备受瞩目，再度成为资本宠儿。在众多在线教育产品之中，猿辅导的各方面表现可谓一骑绝尘。
    - 在资本方面，猿辅导于3月末宣布完成了G轮融资，10亿，是迄今为止在线教育领域单笔最大的一笔融资。猿辅导的估值达到78亿美元，是未上市的在线教育公司中估值最高的品牌。
