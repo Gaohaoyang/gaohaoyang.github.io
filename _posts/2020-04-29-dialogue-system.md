@@ -1396,8 +1396,9 @@ Unsupervised Evaluation Metrics for Dialogue Response Generation](https://arxiv.
 - [基于 CNN 和序列标注的对联机器人 | 附数据集 & 开源代码](https://mp.weixin.qq.com/s/wH8nFwaDryrjBn1y-e-QdQ)
 - [深度长文：NLP 的巨人肩膀（上）](https://mp.weixin.qq.com/s/Rd3-ypRYiJObi-e2JDeOjQ)
 - [问答系统冠军之路：用 CNN 做问答任务的 QANet](https://mp.weixin.qq.com/s/Xc4kh3y-wHfyVt0-BL1RBQ)
-- [竹间智能 CTO 翁嘉颀：如何打造主动式对话机器人 | 吃瓜笔记](https://mp.weixin.qq.com/s/HWWkzgv5b5TvG-ySkTy3eQ)
-
+- [竹间智能 CTO 翁嘉颀：如何打造主动式对话机器人 | 吃瓜笔记](https://mp.weixin.qq.com/s/HWWkzgv5b5TvG-ySkTy3eQ)，含视频讲解
+  - chatbot演变历程，siri的智商低，相当于两岁的小朋友，只有小孩能聊下去
+  - ![](https://mmbiz.qpic.cn/mmbiz_png/YicUhk5aAGtBLelmPzmdJ4AuDTFfOyqBLUWHI4lPCjJuzYuHOjTzTkrrRWtY1WayYhtppC50wLZ1oVmiaCeamzow/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
 - [聊天机器人“进化论”:从陪你聊到懂你心](https://mp.weixin.qq.com/s/p2hhJ2u7y6JRzhoh7BRC2A)
 - [研学·产品设计 | Chatbot 的人格很重要吗？](https://mp.weixin.qq.com/s/ZotAU1q7-54zJ1-3V6G-NQ)
 - [用 TensorFlow 实现智能机器人](https://mp.weixin.qq.com/s/bnDlLdtTfUxv9b4QUNuhNw)
