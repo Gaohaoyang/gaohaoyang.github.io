@@ -243,7 +243,7 @@ chatbot:我也是，不过总有一天就会好起来的
 - AI产品的架构比普通的互联网产品多了一个维度——“时间”。
   - 这种产品架构，可以生存到未来，并在未来逐步进化，一步步向智能逼近。
 - 其他业务实践分享
-  - [金融科技-智能投顾与AI金融风控-谢成]()
+  - 金融科技-智能投顾与AI金融风控-谢成，类似文章：灵智优诺CTO 许可的[如何为智能投顾打造对话系统？](https://mp.weixin.qq.com/s?__biz=MzIzNjc1NzUzMw==&mid=2247487709&idx=3&sn=e46b7598e4be040b4bd13832b6c53dae&chksm=e8d3a7afdfa42eb9b67a4e9d369e1815b1b589f433299acd42258507f8a5f3c638a71ec7c873&scene=21#wechat_redirect)
     - 金融科技的生态是三个相互牵制的部分：公司/银行——监管——资本
     - 金融科技发展：
       - 20世纪70年代 业务电子化
@@ -1356,10 +1356,11 @@ Unsupervised Evaluation Metrics for Dialogue Response Generation](https://arxiv.
     - 数据层：由一组数据库组成，这些数据库存储收集到的人类会话数据(文本对或文本图像对)、用于核心会话和技能的非会话数据和知识图，以及小冰和所有注册用户的个人档案。
   - ![](https://img.huxiucdn.com/article/content/201812/28/162450034922.jpg?imageView2/2/w/1000/format/jpg/interlace/1/q/85)
   
-- [Chatbot Catalog: Customer Service](https://github.com/chatopera/chatbot.catalog.customer-service)
-- 智能客服、聊天机器人的应用和架构、算法分享和介绍
 
 ### 聊天机器人
+
+- [Chatbot Catalog: Customer Service](https://github.com/chatopera/chatbot.catalog.customer-service)
+- 智能客服、聊天机器人的应用和架构、算法分享和介绍
 
 - [对话智能：国际视角，国内形势及案例学习](https://www.infoq.cn/article/AsSJ4cx5mLsa7SYl3-EY)
 - [实录分享 | 计算未来轻沙龙：对话系统研究进展（视频 + PPT）](https://mp.weixin.qq.com/s/YxpU4Q7QsUS3RGtlcK4Gwg)
