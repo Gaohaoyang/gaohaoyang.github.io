@@ -15,7 +15,9 @@ mathjax: true
 # 总结
 
 - 【2020-11-20】[清华权威报告告诉你：人工智能的情感计算是什么？](https://www.ednchina.com/news/201911251401.html)
-
+- [竹间智能CTO翁嘉颀：如何打造主动式对话机器人](https://mp.weixin.qq.com/s/HWWkzgv5b5TvG-ySkTy3eQ)
+  - 情感计算设计与应用，[图](https://mmbiz.qpic.cn/mmbiz_png/YicUhk5aAGtBLelmPzmdJ4AuDTFfOyqBLgNslCkEhbcfA0jvJkj61YD9ay3b6FLVmewuAJPiccwG99qESD6y59kQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+  - ![](https://mmbiz.qpic.cn/mmbiz_png/YicUhk5aAGtBLelmPzmdJ4AuDTFfOyqBLgNslCkEhbcfA0jvJkj61YD9ay3b6FLVmewuAJPiccwG99qESD6y59kQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
 
 # 背景
 
