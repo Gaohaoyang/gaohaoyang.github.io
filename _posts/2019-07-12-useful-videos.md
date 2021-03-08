@@ -327,7 +327,7 @@ mathjax: true
 <iframe src="http://player.youku.com/embed/XMzM3Nzk0MjQ4" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
-- 【2021-3-8】国产人工智能电视剧：《[你好！安怡](http://www.kuyv.cn/tv/nihaoanyi/)》，2021年2月19日
+- 【2021-3-8】国产人工智能电视剧：《[你好！安怡](http://www.kuyv.cn/tv/nihaoanyi/)》，2021年2月19日；原名完美芯机人，2020-05-07
 - [【拳头说书】9分钟解读刘慈欣《流浪地球》原著](https://www.bilibili.com/video/av41214971)
 
 <iframe src="//player.bilibili.com/player.html?aid=41214971&cid=72388155&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
