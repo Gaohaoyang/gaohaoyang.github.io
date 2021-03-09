@@ -75,6 +75,25 @@ mathjax: true
 <iframe src="//player.bilibili.com/player.html?aid=668813899&bvid=BV1oa4y1h7Um&cid=209423753&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 - 【2020-9-12】百度王凡：[开放域对话系统：现状和未来](https://mp.weixin.qq.com/s?__biz=MzU1NTMyOTI4Mw==&mid=2247507362&idx=1&sn=f266e83bf26956838a830a6a8a9194d9&chksm=fbd76fcecca0e6d8e1e6869a5f701476b2955c51d9ef2976e44feb912d0c7ce78b88bf9bbdd9&mpshare=1&scene=1&srcid=0911roXzZkIrRt7BtSTeBubc&sharer_sharetime=1599789486897&sharer_shareid=b8d409494a5439418f4a89712efcd92a&key=0a19845a51c58415c57b70e5f9fcc7ac1e55f7a063b5625f0ad6ccdb97f84fc761d724100f3eaed413d29d6ec7d00b57d24ba7704bca6760e6a12c76d8fe7d71b6ff948a0f1bde8d149ca08a3d5c255b6d3383569f32352ea1d5acc4e3bc8c484c49e8e22249bc5e1217f078d0699a752d15bc2c23d03e00bc50d2c5f3568f74&ascene=1&uin=OTY1NzE1MTYw&devicetype=Windows+10+x64&version=62090529&lang=zh_CN&exportkey=ASpq7RdZ3unrf%2FjEtdDMFCc%3D&pass_ticket=PuzvgcInSGb6VR3uby%2FNFgjqxSEToDvVRO%2BX7yC0tMwo7rfZ0%2FgqILDt9IhoQjhw&wx_header=0)
+  - 对话语料，往往充斥着已知和未知的背景信息，使得对话成为一个"一对多"的问题，而神经网络模型解决的是一一映射，最大似然只能学到所有语料的共通点，所有背景，独特语境都可能被模型认为是噪音，最终形成大量安全回复；对话语料中潜藏着很多个人属性、生活常识、知识背景、价值观/态度、对话场景、情绪装填、意图等信息，这些潜藏的信息没有出现在语料，建模它们是十分困难的。
+  - 百度NLP：做有知识、可控的对话生成方案：围绕多样性对话生成、知识对话生成、自动化评价和对话流控制、大规模和超大规模隐空间对话生成模型4个模块展开。
+    - 1. 多样性对话生成： 
+      - ① 多映射机制的端到端生成模型：假设每一句回复可能来自于一个独特的映射机制 ( Mapping mechanism )，用M1到M4表示。如果给定某种映射机制，就可确定最终的回复，消除了回复过程中的不确定性。
+      - ②类似工作也有很多，不过都存在一些弊端。比如CVAE用了连续的高斯空间，对于对话多样性捕捉能力非常差；而MHAM和MARM没有对先验和后验的分布差异进行有效的建模。如一句上文可能对应4种不同的回复，且都是合理的，而训练时只出现一种，推断时就无法捕捉另外几种映射逻辑。推断和训练时对映射机制的选择是存在差异的，这会导致优化的过程乱掉。
+      - 创新：一时采用离散的映射机制，二是分离了先验和后验的推断。除了用NLLLoss ( negative log likelihood loss ) 外，还用了一个matching loss，这个loss的目标是为了辅助整个后验选择网络的训练，特别是Response encoder这一块。在推断时模型结构有部分差异，因为在推断时是没有Response的，这时我们就任意选择一个Map来生成回复。
+      - ![](https://mmbiz.qpic.cn/mmbiz_png/zHbzQPKIBPiaoM63srX1YFe7VT44Wa34IF8BSuEcoJxoZZMVS3mIT8u0dWCAbh4EAQEDvV0GmlrBhQEeNpr2zjg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+    - 2. 知识对话生成
+      - 通过知识引入有助于对话"去模糊"、"可控制". 选择知识库的部分来用，所以常规做法是引入attention来进行知识的选择
+    - 3. 自动化评价和对话流控制
+      - ① 自进化对话系统 ( SEEDS )：监督学习只能考虑当前一轮的回复，当不同Agent在进行交流时会发现很多问题，原因是因为在数据中没有见过这些信息。那能否考虑利用长远的反馈信息来提升对话的控制？多样化生成理论，包含两部分。一部分是Diversified Generation，根据特定知识或隐空间生成回复的过程；另一部分是Dialogue "Controller"，怎么去选择知识或者隐空间而不是仅仅依赖于Prior？我们通过强化学习来提升选择知识或者隐变量的能力。
+      - ② 自动化的对话评价体系：从连贯性、信息量、逻辑等角度用一系列模型去评价这些对话，使用无监督语料训练出来
+    - 4. 大规模和超大规模隐空间对话生成模型
+      - NLP模型发展趋势：![](https://mmbiz.qpic.cn/mmbiz_png/zHbzQPKIBPiaoM63srX1YFe7VT44Wa34IpevnPJOjsjeibaCSy7PSJh9nyicdI4VA0r8sQ1NSibXzxWZdfJkeibyNWQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+      - 使用隐空间的对话模型PLATO,基于前面提到的隐空间的机制，来使得Transformer模型生成的对话丰富度要更丰富。PLATO模型总共由三个模块组成，Generation ( 利用隐变量控制生成 )、Recognition ( 隐变量识别 ) 和Prior ( 隐变量推导 )。而我们6月份提出的PLATO2的一个相对PLATO的改进则是没有使用Prior模块，因为实验发现用一个Retrieval模块来代替Prior模块效果会更好。PLATO2有两个训练阶段：一个叫Coarse-Grained Generation，即先训练一个基础版网络，没有用隐变量。之后基于这个网络我们再进一步训练，叫做Fine-Grained Generation，引入隐变量等信息。训练时用到了三个Loss
+  - 未来解决对话问题的要素可以从以下方面入手：
+    - 语料 & 知识， 这是训练任何模型的基础
+    - 记忆 & Few-shot Learning， 人类是能够在对话中不断学习的，一个好的对话系统需要具有这种能力
+    - 虚拟环境 & Self-Play， 当前很多语料不能提供足够背景知识的前提下，虚拟环境能很好地提供这一点
 - 7/2018: [Jianfeng Gao](https://www.microsoft.com/en-us/research/people/jfgao/) (MSR AI), [Lihong Li](https://lihongli.github.io/) (Google AI) and I presented a tutorial on Neural Approaches to Conversational AI at [SIGIR-18](http://sigir.org/sigir2018/) and [ACL-18](https://acl2018.org/). Slides: [PowerPoint](https://www.microsoft.com/en-us/research/uploads/prod/2019/05/neural-approaches-to-conversational-AI.pptx) (with animations) and [PDF](https://www.microsoft.com/en-us/research/uploads/prod/2019/05/neural-approaches-to-conversational-AI.pdf).
 - a tutorial on Neural Approaches to Conversational AI [paper](https://arxiv.org/pdf/1809.08267.pdf) at ICML-19. Slides: [pdf](https://www.microsoft.com/en-us/research/uploads/prod/2019/06/neural-approaches-to-conversational-AI.pdf), [Powerpoint](https://www.microsoft.com/en-us/research/uploads/prod/2019/06/neural-approaches-to-conversational-AI-public.pptx).
 - 【2020-11-28】优质资料，哈工大张伟男：[人机对话关键技术及挑战](https://zhuanlan.zhihu.com/p/90425938)，【2020-11-6】附：[前沿动态综述-闲聊型对话-视频版](https://hub.baai.ac.cn/view/3736)
