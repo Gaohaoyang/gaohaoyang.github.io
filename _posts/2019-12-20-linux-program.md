@@ -2519,7 +2519,6 @@ int execve(const char *path,char *const argv[],char *const envp[]);
 
 ```c
 #include <sys/type.h>
-
 #include <unistd.h>
 
 pid_t fork(void);
@@ -2529,13 +2528,9 @@ pid_t fork(void);
 一个简单的fork示例：
 
 ```c
-
 #include <sys/types.h>
-
 #include <unistd.h>
-
 #include <stdio.h>
-
 #include <stdlib.h>
 
 int main()
@@ -2586,7 +2581,6 @@ This is the child
 
 ```c
 #include <sys/types.h>
-
 #include <sys/wait.h>
 
 pid_t wait(int *stat_loc);
@@ -2642,7 +2636,6 @@ void (*signal(int sig, void((*func)(int))))(int);
 
 ```c
 #include <sys/types.h>
-
 #include <signal.h>
 
 int kill(pid_t pid,int sig);
@@ -3241,11 +3234,8 @@ void *thread_function(void *arg) {
 
 ```c++
 #include <stdio.h>
-
 #include <unistd.h>
-
 #include <stdlib.h>
-
 #include <pthread.h>
 
 void *thread_function(void *arg);
@@ -3333,11 +3323,8 @@ int pthread_setcanceltype(int type,int *oldtype);
 下面是一个简答的使用示例;
 ```c++
 #include <stdio.h>
-
 #include <unistd.h>
-
 #include <stdlib.h>
-
 #include <pthread.h>
 
 void *thread_function(void *arg);
@@ -3392,11 +3379,8 @@ void *thread_function(void *arg) {
 
 ```c++
 #include <stdio.h>
-
 #include <unistd.h>
-
 #include <stdlib.h>
-
 #include <pthread.h>
 
 #define NUM_THREADS 6
@@ -3528,11 +3512,8 @@ Linux wangpengcheng-Inspiron-3650 4.15.0-50-generic
 
 ```c++
 #include <unistd.h>
-
 #include <stdlib.h>
-
 #include <stdio.h>
-
 #include <string.h>
 
 int main()
@@ -3687,11 +3668,8 @@ int pipe(int file_descriptor[2]);
 
 ```c++
 #include <unistd.h>
-
 #include <stdlib.h>
-
 #include <stdio.h>
-
 #include <string.h>
 
 int main()
@@ -3754,11 +3732,8 @@ Read 3 bytes: 123
 
 ```c++
 #include <unistd.h>
-
 #include <stdlib.h>
-
 #include <stdio.h>
-
 #include <string.h>
 
 int main()
@@ -3801,11 +3776,8 @@ pip4代码如下所示：
 // The 'consumer' program, pipe4.c, that reads the data is much simpler.
 
 #include <unistd.h>
-
 #include <stdlib.h>
-
 #include <stdio.h>
-
 #include <string.h>
 
 int main(int argc, char *argv[])
@@ -3853,11 +3825,8 @@ int dup2(int file_descriptor_one,int file_descriptor_two);
 
 ```c
 #include <unistd.h>
-
 #include <stdlib.h>
-
 #include <stdio.h>
-
 #include <string.h>
 
 int main()
@@ -3933,7 +3902,6 @@ od成都读取写到管道中的3个字节数据之后，后续的读操作将�
 
 ```c
 #include <sys/types.h>
-
 #include <sys/stat.h>
 
 int mkinfo(const char *filename,mode_t mode);
@@ -3967,17 +3935,11 @@ mknod主要用来创建多种类型的特殊文件。
 // of command-line arguments have been supplied.
 
 #include <unistd.h>
-
 #include <stdlib.h>
-
 #include <stdio.h>
-
 #include <string.h>
-
 #include <fcntl.h>
-
 #include <sys/types.h>
-
 #include <sys/stat.h>
 
 #define FIFO_NAME "/tmp/my_fifo"
@@ -4035,25 +3997,16 @@ int main(int argc, char *argv[])
 //消费者程序
 
 #include <unistd.h>
-
 #include <stdlib.h>
-
 #include <stdio.h>
-
 #include <string.h>
-
 #include <fcntl.h>
-
 #include <limits.h>
-
 #include <sys/types.h>
-
 #include <sys/stat.h>
 
 #define FIFO_NAME "/tmp/my_fifo"
-
 #define BUFFER_SIZE PIPE_BUF
-
 #define TEN_MEG (1024 * 1024 * 10)
 
 int main()
@@ -4103,35 +4056,24 @@ int main()
 
 ```c++
 #include <unistd.h>
-
 #include <stdlib.h>
-
 #include <stdio.h>
-
 #include <string.h>
-
 #include <fcntl.h>
-
 #include <limits.h>
-
 #include <sys/types.h>
-
 #include <sys/stat.h>
 
 #define SERVER_FIFO_NAME "/tmp/serv_fifo"
-
 #define CLIENT_FIFO_NAME "/tmp/cli_%d_fifo"
-
 #define BUFFER_SIZE 20
 
 //定义传输的数据结构
 
 struct data_to_pass_st {
     //客户端id
-
     pid_t  client_pid;
     //传输的信息
-
     char   some_data[BUFFER_SIZE - 1];
 };
 ```
@@ -4140,7 +4082,6 @@ client.cpp
 
 ```c++
 #include "client.h"
-
 #include <ctype.h>
 
 int main()
@@ -4199,9 +4140,7 @@ int main()
 
 ```c++
 //server.
-
 #include "client.h"
-
 #include <ctype.h>
 
 int main()
@@ -4389,11 +4328,8 @@ command参数值如下：
 
 ```c++
 #include <unistd.h>
-
 #include <stdlib.h>
-
 #include <stdio.h>
-
 #include <sys/sem.h>
 
 #if defined(__GNU_LIBRARY__) && !defined(_SEM_SEMUN_UNDEFINED)
@@ -6193,6 +6129,34 @@ GCC编译分为4步；
 
 
 ## [Makefile快速入门](https://zhuanlan.zhihu.com/p/149346441)
+
+### 总结
+
+- 【2020-12-28】[九张图记住makefile](https://zhuanlan.zhihu.com/p/163287897)
+- 解释编译和链接
+  - 以C/C++代码为例，我们编写完代码后变成可执行文件需要经过编译和链接阶段。这个过程如果在Windows下是由IDE内置的编译器和链接器完成的。但是在Unix系统我们需要自己处理这个过程。以图解表示如下
+  - ![](https://pic2.zhimg.com/80/v2-076075c94bcdee6d126b38ffe6d146d5_1440w.jpg)
+- Make的工作流程
+  - ![](https://pic1.zhimg.com/80/v2-486474d83ac0af401bbb9a4226be6fbc_1440w.jpg)
+  - 在 Makefile 中，规则的顺序是很重要的，因为，Makefile 中只应该有一个最终目标，其它的目标都是被这个目标所连带出来的，所以一定要让 make 知道你的最终目标是什么。一般来说，定义在 Makefile 中的目标可能会有很多，但是第一条规则中的目标将被确立为最终的目标。如果第一条规则中的目标有很多个，那么，第一个目标会成为最终的目标。 make所完成的也就是这个目标
+- 书写依赖规则
+  - make实际上只是检查Makefile里面的依赖关系（规则），然后决定哪一条规则下面的命令会被执行。命令执行成功与否make并不管
+  - ![](https://pic3.zhimg.com/80/v2-e4820de2df1b607224dc89a00c749a3a_1440w.jpg)
+- 书写命令
+  - 当make检查到某一条规则里，依赖文件比目标文件更新的情况时，就会执行该规则下的命令
+  - ![](https://pic2.zhimg.com/80/v2-b62b51eb64cfddc8ffddaa8c799cb709_1440w.jpg)
+- 使用变量
+  - ![](https://pic4.zhimg.com/80/v2-40e57cd058ea02ee582db91cc6332f43_1440w.jpg)
+  - 使用得最多最频繁的，可能是自动化变量了
+  - ![](https://pic4.zhimg.com/80/v2-96492cd67aa0db7909e9fa54796f6643_1440w.jpg)
+  - Makefile中的自动化变量
+- 使用函数
+  - ![](https://pic4.zhimg.com/80/v2-ff3eee3bf7d6b254481fe2c6ace2f383_1440w.jpg)
+- 字符串处理函数
+  - ![](https://pic2.zhimg.com/80/v2-f6e0e636e25b09678221053c15375085_1440w.jpg)
+- 文件名操作函数
+  - ![](https://pic3.zhimg.com/80/v2-b07e0a8a9f93c0b10b680045d9bce89a_1440w.jpg)
+
 
 ### 需求介绍
 
