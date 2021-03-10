@@ -1512,15 +1512,15 @@ Unsupervised Evaluation Metrics for Dialogue Response Generation](https://arxiv.
 - [从 api.ai 工作原理来看构建简单场景 chatbot 的一般方法](https://mp.weixin.qq.com/s/1NZK_of6G7YLmVRN0IJaEw)
 - [利用逻辑回归模型判断用户提问意图](https://mp.weixin.qq.com/s/FVNPaB9k3WunPab6nJeJAA)
 - [一天开发一款聊天机器人](https://mp.weixin.qq.com/s/yTQKO52i6zHiG8dYvLwe9w)
-- [分享丨浅谈垂直领域的 chatbot](https://mp.weixin.qq.com/s/h8uontPdM5JyD-T71eAHqg)
+- [浅谈垂直领域的 chatbot](https://mp.weixin.qq.com/s/h8uontPdM5JyD-T71eAHqg)
 - [学术】联合意图推测和槽位填充的基于注意力的循环神经网络模型](https://mp.weixin.qq.com/s/lw3zLhxoJEbEQz0KGsS7KQ)
 - [赛尔原创 ：聊天机器人中用户出行消费意图识别方法研究](https://mp.weixin.qq.com/s/ZexnTKHEFKPso5fhZNQfQQ)
 - [“搜你所想”之用户搜索意图识别](https://mp.weixin.qq.com/s/iZktDVvurlCQxdz-O6xGBw)
 
-- [图灵机器人：带着千亿条语料库，它成为了 QQ 的群聊机器人，创业](https://mp.weixin.qq.com/s/rqOgiuOCh1uZ71Qe3rWhYg) -[PaperWeekly 第 40 期 | 对话系统任务综述与基于 POMDP 的对话系统](https://mp.weixin.qq.com/s/Y1AmrK4kIBNtXwdW718cag)
+- [图灵机器人：带着千亿条语料库，它成为了 QQ 的群聊机器人，创业](https://mp.weixin.qq.com/s/rqOgiuOCh1uZ71Qe3rWhYg) -[PaperWeekly 第 40 期 对话系统任务综述与基于 POMDP 的对话系统](https://mp.weixin.qq.com/s/Y1AmrK4kIBNtXwdW718cag)
 - [让聊天机器人同你聊得更带劲 - 对话策略学习，论文访谈间 #21](https://mp.weixin.qq.com/s/vt25TVX-tcurtAC63dYYNA)
 - [“小会话，大学问” - 如何让聊天机器人读懂对话历史？论文访谈间 #03](https://mp.weixin.qq.com/s/9PRVaafBCHy1kjO9LQyHoA)
-- [最全盘点| 入侵保险业的聊天机器人](https://mp.weixin.qq.com/s/m9HuxxQN43wCI42Lhi-m5g)
+- [最全盘点-入侵保险业的聊天机器人](https://mp.weixin.qq.com/s/m9HuxxQN43wCI42Lhi-m5g)
 
 - [机器学习利用 Elasticsearch 进行更智能搜索](https://mp.weixin.qq.com/s/6-KAMm-HKUURR0OU_-ZhiA)
 - [用 Rasa NLU 构建自己的中文 NLU 系统](https://mp.weixin.qq.com/s/pdHAMBhNOiANe2JUUMadYw)
@@ -1540,14 +1540,14 @@ Unsupervised Evaluation Metrics for Dialogue Response Generation](https://arxiv.
 
 ### 对话管理
 
-- [干货｜深度强化学习在面向任务的对话管理中的应用](https://mp.weixin.qq.com/s/uDFsWebfLmka-zZX3Y_8kg)
+- [深度强化学习在面向任务的对话管理中的应用](https://mp.weixin.qq.com/s/uDFsWebfLmka-zZX3Y_8kg)
 - [机器人，我们来聊天吧](https://mp.weixin.qq.com/s/IsN60tmtERjWb2howxs4ug)
 - [多轮对话之对话管理(Dialog Management)](https://mp.weixin.qq.com/s/9i8v2kiPQKLYicoASJvfQg)
 - [【小夕精选】多轮对话之对话管理(Dialog Management)](https://mp.weixin.qq.com/s/QIXqgzK-XBRgbtfY3uP0sg)
 
 ### 知识图谱
 
-- [基于知识图谱的人机对话系统 | 公开课笔记](https://mp.weixin.qq.com/s/vRsqMgBUI6Nv1ieFDx5jDQ)
+- [基于知识图谱的人机对话系统-公开课笔记](https://mp.weixin.qq.com/s/vRsqMgBUI6Nv1ieFDx5jDQ)
 - [基于知识图谱的问答系统关键技术研究（一）](https://mp.weixin.qq.com/s/rpUtdoOWMX4meQjw6-D6gw)
 - [基于知识图谱的问答系统关键技术研究（三）](https://mp.weixin.qq.com/s/6D0d6Fp6wBvDyOyvFlJ1Qg)
 - [肖仰华，基于知识图谱的问答系统](https://mp.weixin.qq.com/s/pl1m8ZgFQS-O-t7scUvUYQ)
@@ -1585,7 +1585,7 @@ Unsupervised Evaluation Metrics for Dialogue Response Generation](https://arxiv.
 - [阿里小蜜：智能服务技术实践及场景探索](https://mp.weixin.qq.com/s/uzmcISuDbf7EkralufAKhA)
 - [云小蜜：在中国移动的落地实践](https://mp.weixin.qq.com/s/3ylhIZf7OyTu24WeynHzxA)
 - [阿里小蜜这一年，经历了哪些技术变迁？](https://zhuanlan.zhihu.com/p/33596423?utm_source=wechat_timeline&utm_medium=social&utm_oi=32105543237632&from=timeline)
-- [论文导读 | 阿里小蜜背后的技术秘密](https://mp.weixin.qq.com/s/2Y66uCi1qS0VTaizyCg3cA)
+- [论文导读-阿里小蜜背后的技术秘密](https://mp.weixin.qq.com/s/2Y66uCi1qS0VTaizyCg3cA)
 - [小蜜家族知多少：人工智能客服如何做到“不智障”？](https://mp.weixin.qq.com/s/d86lvXwU7Z1QloPVqQfkCQ)
 - [售后智能客服：店小蜜用户体验地图](https://mp.weixin.qq.com/s/YcWJNEtU4cElBj5mapEp8Q)
 - [为减少用户电话排队，阿里研发了智能客服调度系统](https://mp.weixin.qq.com/s/nqOvcKtxpqehWFO4XkXr5g)
