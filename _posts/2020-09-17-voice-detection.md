@@ -17,6 +17,9 @@ mathjax: true
 - 语音识别系统框架 —— 参考：[中科院横评了 8 款主流智能音箱，百度智能音箱各项评测数据排名第一](https://zhuanlan.zhihu.com/p/96729745)
   - 自动语音识别技术（ASR）将语音信号转换为文字或者二进制代码、字符序列等能让电脑识别的模式。语音识别系统由：语音信号处理和特征提取、声学模型、语言模型和解码搜索组成。其中语音信号处理和特征提取可以看成语音识别系统的前端，声学模型、语言模型和解码作为系统的后端
   - ![](https://img.yidonghuayuan.com/group1/M00/00/07/wKgBJF3tuH2ACHKzAAMlJKSNoK0503.png)
+- 【2021-3-10】[有感情的机器声优，Sonantic AI拟人配音技术为游戏注入情感](https://mp.weixin.qq.com/s?__biz=MzAxMzc2NDAxOQ==&mid=2650399087&idx=2&sn=cd3d86be4847c0af94bb06a92dd2bdb9&chksm=8390d5b3b4e75ca5917bec764a7ea4ca432271ec113d8fb50742943f1a46d9059b0836c31748&mpshare=1&scene=1&srcid=0310XbmTi2wTUlIYHvmbUoay&sharer_sharetime=1615364819532&sharer_shareid=b8d409494a5439418f4a89712efcd92a&version=3.1.0.6189&platform=mac#rd)
+  - 面部表情迁移：吴京+甄子丹 [微博示例](https://video.weibo.com/show?fid=1034:4609199536013325)
+  - 百度地图等APP里说二十句话，生成自己音色的导航语音包的功能，就是个典型的音色克隆。
 
 ## 业界音箱产品评测
 
