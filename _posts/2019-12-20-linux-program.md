@@ -6205,7 +6205,10 @@ GNU的make工作时的执行步骤入下：（想来其它的make也是类似）
     - src=$(wildcard ./*.c)
   - patsubst 替换所有.c文件为.o文件
     - obj=$(patsubst ./%.c, ./%.o, $(src))
-
+- 条件控制
+  - Ifneq和ifeq作用相反，此关键字是用来判断参数是否不相等。
+  - ifdef关键字用来判断一个变量是否已经定义。
+  - 具体用法：[makefile--参数传递、条件判断、include （五）](https://www.cnblogs.com/zxouxuewei/p/5107621.html)
 
 ### 示例
 
@@ -6220,6 +6223,23 @@ GNU的make工作时的执行步骤入下：（想来其它的make也是类似）
 SRC = tmp.cpp # 源码
 SRC = $(HOST_CFLAGS) # 从外部参数指定源文件
 DIR = ./out # 二进制文件目录
+
+ifeq ($(DEBUG_SYMBOLS), TRUE)
+	CFLAGS += -g -Wall -Werror -O0
+else
+	CFLAGS += -Wall -Werror -O2
+endif 
+
+ifdef $(FILE)
+	SRC = $(FILE)
+else
+	SRC = tmp.cpp
+endif
+
+#SRC = test.cpp
+# 调用shell获取当前目录地址
+CUR_DIR = $(shell pwd -L .) # 调用shell命令
+
 FILE_NAME = $(basename $(SRC)) # 提取路径文件
 # include $(SRC_BASE)/Makefile.rule # 包含别的makefile文件
 # 自动寻找本目录源码文件 wildcard表示文件匹配
