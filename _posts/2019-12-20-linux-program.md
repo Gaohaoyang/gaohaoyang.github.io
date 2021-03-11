@@ -6239,6 +6239,13 @@ hello: $(OBJS)
 # 目标clean，清理冗余文件
 clean :
 	rm -rf *.o hello
+# 帮助文件
+help:
+	@echo "编译$(SRC)..."
+	@echo "make HOST_CFLAGS=test.cpp # 编译指定文件"
+	@echo "make -f makefile # 编译指定makefile"
+	@echo "make clean # 清理现场"
+
 ```
 
 - 更多示例
