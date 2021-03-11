@@ -6130,32 +6130,6 @@ GCC编译分为4步；
 
 ## [Makefile快速入门](https://zhuanlan.zhihu.com/p/149346441)
 
-- [Makefile教程（绝对经典，所有问题看这一篇足够了）](https://blog.csdn.net/weixin_38391755/article/details/80380786/)
-- make命令会在当前目录下按顺序找寻文件名为“GNUmakefile”、“makefile”、“Makefile”的文件，找到了解释这个文件
-- 指定某个makefile文件：make -f Make.Linux或make --file Make.AIX。
-- 引用makefile：用include关键字可以把别的Makefile包含进来，这很像C语言的#include，被包含的文件会原模原样的放在当前文件的包含位置。
-  -  include foo.make *.mk $(bar)
-  - 在include前面可以有一些空字符，但是绝不能是[Tab]键开始。include和可以用一个或多个空格隔开。
-
-Makefile里主要包含了五个东西：显式规则、隐晦规则、变量定义、文件指示和注释。
-- 显式规则。显式规则说明了，如何生成一个或多的的目标文件。这是由Makefile的书写者明显指出，要生成的文件，文件的依赖文件，生成的命令。
-- 隐晦规则。由于我们的make有自动推导的功能，所以隐晦的规则可以让我们比较粗糙地简略地书写Makefile，这是由make所支持的。
-- 变量的定义。在Makefile中我们要定义一系列的变量，变量一般都是字符串，这个有点你C语言中的宏，当Makefile被执行时，其中的变量都会被扩展到相应的引用位置上。
-- 文件指示。其包括了三个部分，一个是在一个Makefile中引用另一个Makefile，就像C语言中的include一样；另一个是指根据某些情况指定Makefile中的有效部分，就像C语言中的预编译#if一样；还有就是定义一个多行的命令。有关这一部分的内容，我会在后续的部分中讲述。
-- 注释。Makefile中只有行注释，和UNIX的Shell脚本一样，其注释是用“#”字符，这个就像C/C++中的“//”一样。如果你要在你的Makefile中使用“#”字符，可以用反斜框进行转义，如：“\#”。
-- 最后，还值得一提的是，在Makefile中的命令，必须要以[Tab]键开始。
-
-### makefile执行顺序
-
-GNU的make工作时的执行步骤入下：（想来其它的make也是类似）
-1. 读入所有的Makefile。
-2. 读入被include的其它Makefile。
-3. 初始化文件中的变量。
-4. 推导隐晦规则，并分析所有规则。
-5. 为所有的目标文件创建依赖关系链。
-6. 根据依赖关系，决定哪些目标要重新生成。
-7. 执行生成命令。
-
 ### 总结
 
 - 【2020-12-28】[九张图记住makefile](https://zhuanlan.zhihu.com/p/163287897)
@@ -6182,6 +6156,56 @@ GNU的make工作时的执行步骤入下：（想来其它的make也是类似）
   - ![](https://pic2.zhimg.com/80/v2-f6e0e636e25b09678221053c15375085_1440w.jpg)
 - 文件名操作函数
   - ![](https://pic3.zhimg.com/80/v2-b07e0a8a9f93c0b10b680045d9bce89a_1440w.jpg)
+
+### 介绍
+
+- [Makefile教程（绝对经典，所有问题看这一篇足够了）](https://blog.csdn.net/weixin_38391755/article/details/80380786/)
+- make命令会在当前目录下按顺序找寻文件名为“GNUmakefile”、“makefile”、“Makefile”的文件，找到了解释这个文件
+- 指定某个makefile文件：make -f Make.Linux或make --file Make.AIX。
+- 引用makefile：用include关键字可以把别的Makefile包含进来，这很像C语言的#include，被包含的文件会原模原样的放在当前文件的包含位置。
+  -  include foo.make *.mk $(bar)
+  - 在include前面可以有一些空字符，但是绝不能是[Tab]键开始。include和可以用一个或多个空格隔开。
+
+Makefile里主要包含了五个东西：显式规则、隐晦规则、变量定义、文件指示和注释。
+- 显式规则。显式规则说明了，如何生成一个或多的的目标文件。这是由Makefile的书写者明显指出，要生成的文件，文件的依赖文件，生成的命令。
+- 隐晦规则。由于我们的make有自动推导的功能，所以隐晦的规则可以让我们比较粗糙地简略地书写Makefile，这是由make所支持的。
+- 变量的定义。在Makefile中我们要定义一系列的变量，变量一般都是字符串，这个有点你C语言中的宏，当Makefile被执行时，其中的变量都会被扩展到相应的引用位置上。
+- 文件指示。其包括了三个部分，一个是在一个Makefile中引用另一个Makefile，就像C语言中的include一样；另一个是指根据某些情况指定Makefile中的有效部分，就像C语言中的预编译#if一样；还有就是定义一个多行的命令。有关这一部分的内容，我会在后续的部分中讲述。
+- 注释。Makefile中只有行注释，和UNIX的Shell脚本一样，其注释是用“#”字符，这个就像C/C++中的“//”一样。如果你要在你的Makefile中使用“#”字符，可以用反斜框进行转义，如：“\#”。
+- 最后，还值得一提的是，在Makefile中的命令，必须要以[Tab]键开始。
+
+### makefile执行顺序
+
+GNU的make工作时的执行步骤入下：（想来其它的make也是类似）
+1. 读入所有的Makefile。
+2. 读入被include的其它Makefile。
+3. 初始化文件中的变量。
+4. 推导隐晦规则，并分析所有规则。
+5. 为所有的目标文件创建依赖关系链。
+6. 根据依赖关系，决定哪些目标要重新生成。
+7. 执行生成命令。
+
+- 工作原理
+
+![](https://img-blog.csdn.net/20181002091509553)
+
+
+- 变量
+  - 自动变量
+    - $< : 规则中的第一个依赖
+    - $@：规则中的目标
+    - $^： 规则中所有的依赖
+  - 默认变量
+    - CC：cc（即gcc）
+    - APPFLAGS：预处理使用的选项
+    - CFLAGS：编译的时候使用的选项
+    - LDFLAGS：链接库使用的选项
+- 函数
+  - wildcard 查找当前目录下所有.c文件，返回值给src
+    - src=$(wildcard ./*.c)
+  - patsubst 替换所有.c文件为.o文件
+    - obj=$(patsubst ./%.c, ./%.o, $(src))
+
 
 ### 示例
 
@@ -6216,6 +6240,10 @@ hello: $(OBJS)
 clean :
 	rm -rf *.o hello
 ```
+
+- 更多示例
+  - [linux基础-makefile](https://www.e-learn.cn/content/linux/1221180)
+  - ![](https://img-blog.csdn.net/20181002103826663)
 
 ### 需求介绍
 
