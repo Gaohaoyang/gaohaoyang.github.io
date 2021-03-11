@@ -6216,6 +6216,7 @@ GNU的make工作时的执行步骤入下：（想来其它的make也是类似）
   - make 或 make hello
   - make -f Makefile.rule # 执行指定的makefile文件
   - make HOST_CFLAGS=tmp.cpp # 传参指定编译哪个文件,HOST_CFLAGS变量将会替换相应Makefile中的HOST_CFLAGS
+  - make FILE=test.cpp # 传参
   - 清理现场：make clean
 
 ```makefile
@@ -6230,7 +6231,7 @@ else
 	CFLAGS += -Wall -Werror -O2
 endif 
 
-ifdef $(FILE)
+ifdef FILE
 	SRC = $(FILE)
 else
 	SRC = tmp.cpp
