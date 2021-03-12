@@ -372,6 +372,10 @@ Neuralink and the Brain’s Magical Future](https://waitbutwhy.com/2017/04/neura
 
 <iframe src="//player.bilibili.com/player.html?aid=83746758&cid=143264316&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+- 【2021-3-11】[复旦Nature论文实现《三体》科幻场景：把显示屏穿身上，还能导航、聊天那种](https://www.jiqizhixin.com/articles/2021-03-11-4)，新一期《Nature》杂志刊载了复旦大学高分子科学系教授彭慧胜团队的一项研究成果——《[大面积显示织物及其功能集成系统](https://www.nature.com/articles/s41586-021-03295-8)》。
+  - 在处理器的帮助下，人类脑电波可被转换为可读信息，并显示在织物上. 发光经纱 + 导电纬纱 = 显示织物. 该织物系统包括显示屏、键盘和电源，因而可作为通信工具来使用。它可以用电池充电，甚至使用太阳能。最重要的是，它还具备输入、沟通和导航等功能，是真正意义上的「可穿戴设备」。可以说，穿上它，你就是街上最「亮」的仔。
+  - ![](https://image.jiqizhixin.com/uploads/editor/23ff36bb-6872-46da-9c40-1a74ba544857/640.gif)
+
 
 # [语言的对决：乔姆斯基攻防战](https://www.guokr.com/article/156457/)
 
