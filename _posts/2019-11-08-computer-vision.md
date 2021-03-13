@@ -89,6 +89,7 @@ mathjax: true
 - 【2021-3-1】[这个AI，能让你的老照片“动起来”](http://finance.sina.com.cn/jjxw/2021-03-01/doc-ikftssap9415759.shtml),老照片影像复原，动态头像制作，西班牙公司MyHeritage开发的[Deep Nostalgia](https://www.myheritage.cn/deep-nostalgia)，需要注册、翻墙，使用指南参考[视频](https://www.ixigua.com/6938795588075029028?logTag=W2lrE6h70ntQRqUMGWkEk)
   - MyHeritage是一家基因检测公司，通过人们提供的唾沫样本，来整理他们的家族谱系。深度学习技术，只需上传一张照片，等几秒钟，照片上的人能逼真地动起来。
   - ![](http://n.sinaimg.cn/spider202131/313/w544h569/20210301/b07b-kksmnwv1175036.gif)
+  - 类似应用：抖音吗咿呀嘿教程，下载【Avatarify】
 
 
 # OCR
