@@ -326,6 +326,8 @@ tokenizer_output = ["un", "##aff", "##able"]
         - 相似模型单元间的参数共享；
         - ALBERT主要是通过矩阵分解和跨层参数共享来做到对参数量的减少。
     - `模块替换`：BERT-of-Theseus根据伯努利分布进行采样，决定使用原始的大模型模块还是小模型，只使用task loss。
+    - 【2021-3-14】精简总结
+      - ![](https://p1.pstatp.com/large/tos-cn-i-0022/6f5550f39b63450d8652a27ce4f61dfa)
 - 总结
     - ![](https://pic1.zhimg.com/80/v2-b6bf3fcc2f2691c8b12dfd0a9ad2aa8a_720w.jpg)
     - 源自：[NLP算法面试必备！史上最全！PTMs：NLP预训练模型的全面总结](https://zhuanlan.zhihu.com/p/115014536)
