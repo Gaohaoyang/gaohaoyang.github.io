@@ -81,7 +81,7 @@ mathjax: true
 
 - 【2020-11-18】端到端面部表情合成 Speech-Driven Animation [Github代码](https://github.com/DinoMan/speech-driven-animation)
    - ![](https://github.com/DinoMan/speech-driven-animation/raw/master/example.gif)
-
+- 【2021-3-10】面部表情迁移：吴京+甄子丹 [微博示例](https://video.weibo.com/show?fid=1034:4609199536013325)
 - 【2020-12-29】[单张图片三维重建](https://blog.csdn.net/zouxy09/article/details/8083553),Andrew Ng介绍他的两个学生用单幅图像去重构这个场景的三维模型。
    - [斯坦福大学](http://ai.stanford.edu/~asaxena/reconstruction3d/)
       - ![](http://ai.stanford.edu/~asaxena/reconstruction3d/Results/mountain_mesh_small.jpg)
