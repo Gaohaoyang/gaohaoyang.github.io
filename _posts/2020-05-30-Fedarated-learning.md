@@ -16,6 +16,7 @@ mathjax: true
 
 - 【2020-8-6】联邦学习Python实践：[Federated Learning Demo in Python using Socket Programming](https://github.com/ahmedfgad/FederatedLearning)
 - 【2021-1-8】[字节跳动在联邦学习领域的探索及实践](https://www.toutiao.com/i6915250800906338819/)，联邦学习在广告投放和金融等场景中的应用模式、算法研究、软件系统及实践经验
+- 【2021-3-14】[联邦学习:Tensorflow中的逐步实现](https://www.toutiao.com/i6814051104825803278/)
 
 # 联邦学习介绍
 
@@ -158,6 +159,10 @@ mathjax: true
 
 - 开源FL工具包FATE
 - Tensorflow工具包：FFT
+- 【2021-3-14】[联邦学习:Tensorflow中的逐步实现](https://www.toutiao.com/i6814051104825803278/)
+  - FL架构的基本形式包括一个位于中心的管理员或服务器，负责协调训练活动。客户端主要是边缘设备，可以达到数百万的数量。这些设备在每次训练迭代中至少与服务器通信两次。首先，它们各自从服务器接收当前全局模型的权重，在各自的本地数据上对其进行训练，以生成更新后的参数，然后将这些参数上传到服务器进行汇总。这种通信循环一直持续到达到预先设定的epochs数或准确度条件为止。在联邦平均算法中，汇总仅仅意味着平均操作。
+  - ![](https://p6-tt.byteimg.com/origin/pgc-image/66d33ac16b7e4951870bb12b2a6ae363?from=pc)
+  - 在Tensorflow中从头开始构建一个FL，并在Kaggle的[MNIST数据集](https://www.kaggle.com/scolianni/mnistasjpg)上对其进行训练
 
 # 资料
 
