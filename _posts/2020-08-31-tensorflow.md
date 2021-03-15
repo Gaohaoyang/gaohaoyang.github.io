@@ -229,7 +229,17 @@ tensorboard —logdir=./logs/xor_logs # server
 # Tensorflow 2.*
 
 - [30天吃掉那只TensorFlow2](https://github.com/lyhue1991/eat_tensorflow2_in_30_days)，[在线阅读地址](https://lyhue1991.github.io/eat_tensorflow2_in_30_days/)
-
+- 【2021-3-15】[机器学习：TensorFlow 2.0中的10个技巧](https://www.toutiao.com/i6828167519837094414/)
+  1. 数据流构建：输入管道的tf.data API和ImageDataGenerator实时生成数据集切片
+  2. tf.image进行数据增强
+  3. TensorFlow数据集工具包：pip install tensorflow-datasets
+  4. 预训练的模型进行迁移学习
+  5. Estimators是TensorFlow完整模型的高级表示，内置的estimators提供了非常高级的模型抽象，其设计目的是易于缩放和异步训练
+  6. 自定义层：神经网络是已知的多层网络，其中的层可以是不同的类型。TensorFlow包含许多预定义层(例如Dense，LSTM等)。但是对于更复杂的架构，层的逻辑可能会复杂得多。TensorFlow允许构建自定义层，这可以通过对tf.keras.layers.Layer类进行子类化来完成
+  7. 定制训练：tf.keras序列和模型API使训练模型更容易。但是，大多数时候在训练复杂模型时会使用自定义损失函数。此外，模型训练也可以不同于缺省值
+  8. 检查点：保存TensorFlow模型可以有两种类型：①SavedModel：保存模型的完整状态以及所有参数。model.save_weights('checkpoint')②检查点（Checkpoints）
+  9. Keras Tuner：TensorFlow中的一个相当新的功能。超参数调优是挑选参数的过程，这些参数定义了机器学习模型的配置，除了HyperBand, BayesianOptimization和RandomSearch也可用于调优。利用最优超参数对模型进行训练
+  10. 分布式训练：如果有多个GPU，并希望通过将训练分散在多个GPU上来优化训练，TensorFlow的各种分布式训练策略能够优化GPU的使用
 
 
 
