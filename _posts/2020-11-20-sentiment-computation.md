@@ -18,6 +18,10 @@ mathjax: true
 - [竹间智能CTO翁嘉颀：如何打造主动式对话机器人](https://mp.weixin.qq.com/s/HWWkzgv5b5TvG-ySkTy3eQ)
   - 情感计算设计与应用，[图](https://mmbiz.qpic.cn/mmbiz_png/YicUhk5aAGtBLelmPzmdJ4AuDTFfOyqBLgNslCkEhbcfA0jvJkj61YD9ay3b6FLVmewuAJPiccwG99qESD6y59kQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
   - ![](https://mmbiz.qpic.cn/mmbiz_png/YicUhk5aAGtBLelmPzmdJ4AuDTFfOyqBLgNslCkEhbcfA0jvJkj61YD9ay3b6FLVmewuAJPiccwG99qESD6y59kQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+- 【2021-3-14】华为细粒度文本情感分析及其应用
+- 情感分析五要素：（entity，aspect，opinion，holder，time）, entity + aspect -> target
+  - 示例：我觉得华为手机拍照非常牛逼。 → （华为手机，拍照，正面，我，\）
+  - ![](https://p1.pstatp.com/large/tos-cn-i-0022/8bd0117028624224811facc091b2ded2)
 
 # 背景
 

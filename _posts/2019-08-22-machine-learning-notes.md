@@ -132,6 +132,26 @@ PRML 的主要内容：
 	- [ch11. Sampling Methods](https://nbviewer.jupyter.org/github/ctgk/PRML/blob/master/notebooks/ch11_Sampling_Methods.ipynb)
 	- [ch12. Continuous Latent Variables](https://nbviewer.jupyter.org/github/ctgk/PRML/blob/master/notebooks/ch12_Continuous_Latent_Variables.ipynb)
 
+# 机器学习基础
+
+
+## 基础概念
+
+### 偏差方差
+
+- 【2021-3-14】偏差、方差关系，[偏差Bias和方差Variance——机器学习中的模型选择](https://zhuanlan.zhihu.com/p/44872686)
+  - 误差的期望值可以分解为三个部分：
+  - **误差的期望值** = **噪音的方差** + **模型预测值的方差** + **预测值相对真实值的偏差**的平方
+  - ![](https://www.zhihu.com/equation?tex=E%28%28y-%5Chat%7Bf%7D%28x%29%29%5E2%29+%3D+%5Csigma%5E2+%2B+Var%5B%5Chat%7Bf%7D%28x%29%5D+%2B+%28Bias%5B%5Chat%7Bf%7D%28x%29%5D%29%5E2)
+  - ![](https://pic1.zhimg.com/v2-7cd04b4be18328e7b5d25cc8f00c9e4f_1440w.jpg?source=172ae18b)
+- 偏差、方差的选择
+  - 不同复杂度模型的对比
+    - ![](https://pic2.zhimg.com/80/v2-8064476118d70efcc0b649a3c6c66585_720w.jpg)
+  - 选择相对较好的模型的顺序：
+    - 方差小，偏差小 > 方差小，偏差大 > 方差大，偏差小 > 方差大，偏差大。 
+    - 稳定性＞精准度：方差小，偏差大 之所以排位靠前，是因为比较**稳定**。
+  - ![](https://pic2.zhimg.com/80/v2-f4ba863a664e5b74882fc3123a550675_720w.jpg)
+
 # 深度学习
 
 ## 斯坦佛-吴恩达

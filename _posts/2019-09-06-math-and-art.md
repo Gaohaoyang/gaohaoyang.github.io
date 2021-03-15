@@ -11,9 +11,12 @@ mathjax: true
 * content
 {:toc}
 
+# 总结
+
+- 【2021-3-9】[130张炫酷动图, 让你秒懂高中理科所有原理——物理篇](https://mp.weixin.qq.com/s/CD2GtHreMsq6G6lQoX8qLw)
 
 
-# 数据简史
+# 数学简史
 
 - [数学的深渊](https://www.bilibili.com/video/BV1vJ411C7hn/?spm_id_from=333.788.videocard.1)
 

@@ -3,7 +3,7 @@ layout: post
 title:  "机器学习本质-The-Essense-of-Machine Learning"
 date:   2016-10-21 18:32:00
 categories: 机器学习
-tags: 机器学习 周志华 通用逼近定理 归纳 演绎 凸函数
+tags: 机器学习 周志华 通用逼近定理 归纳 演绎 凸函数 漂移 可解释
 excerpt: 机器学习的本质到底是什么？有哪些优缺点，存在哪些局限性
 mathjax: true
 ---
@@ -163,7 +163,7 @@ if __name__ == "__main__":
  
 ![](https://static.leiphone.com/uploads/new/article/740_740/201610/5809edd85d30e.jpg?imageMogr2/format/jpg/quality/90)
  
->- 周志华, CCF 会士、常务理事、人工智能专委主任。南京大学教授，校学术委员会委员，计算机软件新技术国家重点实验室常务副主任。AAAI Fellow, IEEE Fellow, IAPR Fellow，ACM 杰出科学家。长江学者特聘教授、国家杰出青年科学基金获得者。
+>- `周志华`, CCF 会士、常务理事、人工智能专委主任。南京大学教授，校学术委员会委员，计算机软件新技术国家重点实验室常务副主任。AAAI Fellow, IEEE Fellow, IAPR Fellow，ACM 杰出科学家。长江学者特聘教授、国家杰出青年科学基金获得者。
 >- 主要从事人工智能、机器学习、数据挖掘等领域的研究。著有《Ensemble Methods: Foundations and Algorithms》、《机器学习》。在本领域顶级期刊会议发表论文百余篇，被引用2万余次。获发明专利14项，多种技术在企业应用中取得成效。
 >- 任《Frontiers in Computer Science》执行主编及多种国内外学术期刊副主编、编委；亚洲机器学习大会创始人，国际人工智能联合大会（IJCAI）顾问委员会成员，IEEE 数据挖掘大会（ICDM）等数十次国内外学术会议主席；IEEE 计算智能学会数据挖掘技术委员会主席等。曾获国家自然科学二等奖、两次教育部自然科学一等奖、亚太数据挖掘卓越贡献奖、12 次国际期刊 / 会议论文 / 竞赛奖等。
  
@@ -277,10 +277,8 @@ _![](https://static.leiphone.com/uploads/new/article/740_740/201610/58098a477468
 最著名的深度学习模型叫做卷积神经网络（CNN），其实早在 1995 年就提出了，但为什么现在才火呢？要先提两个问题：
  
 *   有多深？
-    
 *   为何深？
-    
- 
+
 ![](https://static.leiphone.com/uploads/new/article/740_740/201610/58098bbfc933f.jpg?imageMogr2/format/jpg/quality/90)
  
 提升模型的复杂度可以提升学习能力，增加模型深度比宽度更有效，但提升模型的复杂度并不一定有利，因为存在过拟合和计算开销大的问题。
@@ -326,7 +324,6 @@ _![](https://static.leiphone.com/uploads/new/article/740_740/201610/58098a477468
 这里点出了一个关键问题：鲁棒性。
  
 > 人类犯错：水平从九段降到八段。
-> 
 > 机器犯错：水平从九段降到业余。
  
 ![](https://static.leiphone.com/uploads/new/article/740_740/201610/58098bee32971.jpg?imageMogr2/format/jpg/quality/90)
@@ -449,8 +446,26 @@ _![](https://static.leiphone.com/uploads/new/article/740_740/201610/58098a477468
 - 【2020-8-27】【KDD2020】[可解释深度神经网络](https://mp.weixin.qq.com/s?__biz=MzU2OTA0NzE2NA==&mid=2247535687&idx=1&sn=af3439ba70e23b1fd1bbf339320f6b2b&chksm=fc86ad54cbf12442f2b24f24034a4eeacde415708a539222f00794629be1e43bc300debfc7d8&mpshare=1&scene=23&srcid=0826XPNqyNV8CQloxKmgzaUF&sharer_sharetime=1598452800809&sharer_shareid=b8d409494a5439418f4a89712efcd92a#rd)
     - KDD2020 Tutorial on [Interpreting and Explaining Deep Neural Networks: A Perspective on Time Series Data](http://xai.kaist.ac.kr/Tutorial/2020/)，含YouTube视频，ppt资料：XAI_KDD_Tutorial-[part1_final_v2](http://xai.kaist.ac.kr/static/img/event/XAI_KDD_Tutorial-part1_final_v2.pdf)，[part2](http://xai.kaist.ac.kr/static/img/event/XAI_KDD_Tutorial-part2_final_v2.pdf)，[part3](http://xai.kaist.ac.kr/static/img/event/XAI_KDD_Tutorial-part3_final.pdf)
     - ![](http://xai.kaist.ac.kr/static/img/event/XAI_roadmap.png)
-
-
+- 【2021-3-14】中国人寿研发中心：模型可解释性在保险理赔反欺诈中的应用实践
+- （1）全局解释方法
+  - **特征权重**：线性模型，系数
+  - **信息增益**：信息论，树型模型
+  - **importance**：特征重要性排序
+- （2）局部解释方法：专注于该数据点并查看该点周围的特征空间中的局部子区域，并尝试基于该局部区域理解该点的模型决策，解释单个预测
+  - **Shap**：博弈论，计算单个特征贡献值
+    - 将某一特征与其他所有的特征子集进行博弈比较，计算其对于其他特征子集对预测结果影响。预测值= 1/(1+exp(-sum(贡献值)))
+  - **DeepLIFT**：相对特征基准值，计算特征贡献
+  - **Lime**：线性模型局部模拟，计算贡献
+    - 某个样本附近生成采样数据，训练线性模型，辅助解释
+- ![](https://p1.pstatp.com/large/tos-cn-i-0022/5e6b5959ffec46d696f7021339d489b3)
+- 总结
+  - ① 适用范围：模型有关？Lime算法无关，DeepLIFT适用深度模型
+  - ② 运行效率：Lime较慢，Shap较快，全局解释依据模型计算
+  - Shap方法在适用范围和运行效率上具有双重优势。
+- 应用
+  - 问题一：单纯欺诈风险评分，不可解释，作业人员使用意愿不强。
+  - 问题二：调查建议指导性不强，调查工作仍然强依赖经验丰富的调查人员。
+  - 解法：多轮交互验证，历史欺诈案件多特征shap贡献多维分析，形成反欺诈知识经验，并由审核员整理解释性的具体书面表达话术
 
 # 结束
 
