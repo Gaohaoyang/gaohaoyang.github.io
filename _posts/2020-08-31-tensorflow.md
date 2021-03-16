@@ -172,6 +172,41 @@ tensorboard —logdir=./logs/xor_logs # server
 
 ```
 
+## 单测
+
+- Tensorflow中有一个类tf.test用来做单元测试，它继承于类unittest.TestCase，里面包含了Tensorflow做单元测试相关的方法。
+- Tensorflow Unit Test 框架
+  - tf.test.main
+  - tf.test.TestCase
+
+```python
+import tensorflow as tf
+class AlexnetV2Test(tf.test.TestCase):
+	def testBuild(self):
+		self.assertEquals(name, 'alexnet_v2/fc8/squeezed')
+
+if __name__ == '__main__':
+  tf.test.main()
+```
+- 模块是对象，并且所有的模块都有一个内置属性 name。一个模块的 name 的值取决于您如何应用模块。如果 import 一个模块，那么模块__name__ 的值通常为模块文件名，不带路径或者文件扩展名。但是您也可以像一个标准的程序样直接运行模块，在这 种情况下, name 的值将是一个特别缺省"main"。
+- 在cmd 中直接运行.py文件,则__name__的值是'main';
+
+```python
+import tensorflow as tf
+
+class SquareTest(tf.test.TestCase):
+    def testSquare(self):
+        with self.test_session():
+            # 平方操作
+            x = tf.square([2, 3])
+            # 测试x的值是否等于[4,9]
+            self.assertAllEqual(x.eval(), [4, 9])
+
+if __name__ == "__main__":
+    tf.test.main()
+```
+
+
 ## TorchServe
 
 - 【2021-1-19】pytorch模型部署工具[TorchServe](https://github.com/pytorch/serve/blob/master/README.md#serve-a-model)
