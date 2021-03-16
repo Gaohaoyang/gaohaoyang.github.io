@@ -75,11 +75,11 @@ The user can collect their favorite article links with `markdown` syntax.
 
 ### Demo
 
-I use *[Masonry](http://masonry.desandro.com/)* to rewrite the waterfall responsive layout. Better interactive experience.
+I use *[Masonry](http://masonry.desandro.com/)* to rewrite the waterfall responsive layout for Better interactive experience.
 
 ### About
 
-The user can write some introduction about theirselves and their site with `markdown` syntax.
+The user can write some interesting facts about theirselves and their site with `markdown` syntax.
 
 ### Comments
 
