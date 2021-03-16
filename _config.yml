@@ -17,11 +17,12 @@ permalink: /:year/:month/:day/:title/
 twitter_username:
 facebook_username: gaohaoyang.water
 github_username:  Gaohaoyang
+patreon_username: your_patreon_username
 email: gaohaoyang126@126.com
 weibo_username: 3115521wh
 zhihu_username: gaohaoyang
 linkedIn_username: gaohaoyang
-dribbble_username:
+dribbble_username: your_dribbble_username
 
 description_footer: 本站记录我前端之旅的沿途风景！
 
