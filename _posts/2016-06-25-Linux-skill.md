@@ -3,7 +3,7 @@ layout: post
 title:  "Linux开发技能"
 date:   2016-06-25 23:35:00
 categories: 编程语言
-tags: Linux Shell Git YAML
+tags: Linux Shell Git yaml
 excerpt: Linux环境开发技能总结
 mathjax: true
 ---
