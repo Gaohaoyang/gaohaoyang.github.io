@@ -3,7 +3,7 @@ layout: post
 title:  "推荐系统-Recommendation-System"
 date:   2020-07-21 21:05:00
 categories: 推荐系统
-tags: 深度学习 推荐系统 CTR FM Wide&Deep
+tags: 推荐系统 CTR FM Wide&Deep
 excerpt: 推荐系统常用技术方案
 author: 鹤啸九天
 mathjax: true
@@ -33,6 +33,9 @@ mathjax: true
 
 
 # 常用算法
+
+- 推荐系统冷启动通常分为三类，即**用户**冷启动、**物品**冷启动还有**系统**冷启动。无论那种冷启动都因为只有较少的数据和特征来训练模型，所有需要不同的技术方案来提升推荐效果。另外冷启动结合产品方案可以加速冷启动的过程。
+- 用户冷启动的问题对于移动互联网基于内容推荐产品中非常重要
 
 ## FM
 
