@@ -1232,6 +1232,33 @@ console.log(2);
 //请问数字打印顺序是什么？
 ```
 
+### 基础知识
+
+- 数据类型
+  - 数据类型有7种： number、boolean、symbol、string、object、undefined、function。null 有属于自己的数据类型 Null
+- 类型判断（[js数据类型判断](https://www.cnblogs.com/yadiblogs/p/10750775.html)）
+  - typeof(a)
+  - toString最完美
+  - instanceof
+    - instanceof 是用来判断 A 是否为 B 的实例，表达式为：A instanceof B，如果 A 是 B 的实例，则返回 true,否则返回 false。 在这里需要特别注意的是：instanceof 检测的是原型
+  - constructor
+    - constructor是原型prototype的一个属性，当函数被定义时候，js引擎会为函数添加原型prototype
+    - ![](https://img2018.cnblogs.com/blog/1334093/201904/1334093-20190422154822998-1507326377.png)
+    - 注意：①null 和 undefined 无constructor，这种方法判断不了。②如果自定义对象，开发者重写prototype之后，原有的constructor会丢失
+- 元素遍历, [js数组遍历](https://www.cnblogs.com/woshidouzia/p/9304603.html)
+  - 1.for循环
+  - 2.foreach循环
+  - 3.map循环
+  - 4.forof遍历
+  - 5.filter遍历
+  - 6.every遍历
+  - 7.some遍历
+  - 8.reduce
+  - 9.reduceRight
+  - 10.find
+  - 11.findIndex
+  - 12.keys，values，entries
+
 
 ## HTML
 
