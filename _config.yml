@@ -202,6 +202,10 @@ useful_urls:
     name : 数学研发论坛
     url : http://yoyowinwin.com:8000/about/
     desc : 数学爱好者
+  -
+    name : 码云同步
+    url : https://gitee.com/wqw547243068
+    desc : 代码同步，解决github不稳定的问题
   - 
     name : hht
     url : https://xhhszc.github.io
