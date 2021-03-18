@@ -3,7 +3,7 @@ layout: post
 title:  "Linux开发技能"
 date:   2016-06-25 23:35:00
 categories: 编程语言
-tags: Linux Shell Git YAML
+tags: Linux Shell Git yaml github
 excerpt: Linux环境开发技能总结
 mathjax: true
 ---
@@ -251,6 +251,30 @@ x+y = z\\a=4
 
 - 【2021-2-10】用vscode在线查看github代码库，方法：加1s即可，详见：[github1s](https://github.com/conwnet/github1s)
 - github新功能，在线编辑IDE，[codespace](https://github.com/features/codespaces)
+
+## github问题
+
+- 【2021-3-18】github访问受限，速度慢, 知乎专题：[github打开慢？无法访问？](https://zhuanlan.zhihu.com/p/356790236)
+  - （1）修改 HOSTS 文件进行加速，手动把cdn和ip地址绑定
+    - 第一步：获取 github 的 global.ssl.fastly 地址访问：http://github.global.ssl.fastly.net.ipaddress.com/#ipinfo 获取cdn和ip域名，得到：199.232.69.194 https://github.global.ssl.fastly.net
+    - 第二步：获取github.com地址， 访问：https://github.com.ipaddress.com/#ipinfo 获取cdn和ip，得到：140.82.114.4 http://github.com
+    - 第三步：修改 host 文件映射上面查找到的 IP
+      - windows系统：1、修改C:\Windows\System32\drivers\etc\hosts文件的权限，指定可写入：右击->hosts->属性->安全->编辑->点击Users->在Users的权限“写入”后面打勾。然后点击确定。
+      - 2、右击->hosts->打开方式->选定记事本（或者你喜欢的编辑器）->在末尾处添加以下内容：199.232.69.194 github.global.ssl.fastly.net 和 140.82.114.4 github.com
+    - 附：DNS[查询工具](https://myssl.com/dns_check.html)，[switchhost](https://oldj.github.io/SwitchHosts/#cn)管理hosts文件
+  - （2）Gitee中转fork仓库，如[码云](https://gitee.com/)，导入github项目即可，web编辑，还能**同步到github**，[示例项目](https://gitee.com/wqw547243068)
+  - （3）[GitHub镜像源](https://www.zhihu.com/question/38192507?sort=created)，克隆版的 GitHub，你可以访问上面的镜像网站，网站的内容跟 GitHub 是完整同步的镜像, 如网站: [fastgit](https://hub.fastgit.org/),[cnpmjs](https://github.com.cnpmjs.org),
+  - （4）仅查看代码：github.com → github1s.com，就能按照vs code模式查看代码
+- Github 加速下载
+  - 只需要复制当前 GitHub 地址粘贴到输入框中就可以代理加速下载！[地址](http://toolwa.com/github/)
+  - GitHub raw 加速：GitHub raw 域名并非 github.com 而是 raw.githubusercontent.com，上方的 GitHub 加速如果不能加速这个域名，那么可以使用 Static CDN 提供的反代服务。将 raw.githubusercontent.com 替换为 raw.staticdn.net 即可加速。
+  - 进入指定网站([zhlh6](https://github.zhlh6.cn)或[toolwa](http://toolwa.com/github/))，输入 Github 仓库地址，使用生成的地址进行 git ssh 等操作
+  - 谷歌浏览器GitHub加速[插件](https://chrome.google.com/webstore/detail/mfnkflidjnladnkldfonnaicljppahpg): 
+    - 链接: https://pan.baidu.com/s/1u_lBrU4S8jG5KCu2gscsTQ 
+    - 提取码: i21n
+  - gitclone缓存加速[网站](https://gitclone.com/)
+- 参考：[github镜像加速](https://blog.csdn.net/guoxinian/article/details/108874469)
+
 
 ## 基本概念
 
