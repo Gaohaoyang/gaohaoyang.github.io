@@ -251,7 +251,7 @@ x+y = z\\a=4
 
 - 【2021-2-10】用vscode在线查看github代码库，方法：加1s即可，详见：[github1s](https://github.com/conwnet/github1s)
 - github新功能，在线编辑IDE，[codespace](https://github.com/features/codespaces)
-- 【2021-3-18】[github打开慢？无法访问？](https://zhuanlan.zhihu.com/p/356790236)，[switchhost](https://oldj.github.io/SwitchHosts/#cn)管理hosts文件
+- 【2021-3-18】[github打开慢？无法访问？](https://zhuanlan.zhihu.com/p/356790236)，DNS[查询工具](https://myssl.com/dns_check.html)，[switchhost](https://oldj.github.io/SwitchHosts/#cn)管理hosts文件
 
 ## 基本概念
 
