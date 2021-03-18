@@ -624,6 +624,14 @@ $$
 
 # 泰勒级数
 
+- 【2021-3-18】[【官方双语】微积分的本质 - 10 - 泰勒级数](https://www.bilibili.com/video/av11251323/?from=search&seid=10355824295490802414)
+  - ![](https://www.zhihu.com/equation?tex=%5Cbegin%7Balign%7D+f%28x%29_%7BTaylor%7D+%26%3D+%5Csum_%7Bn%3D0%7D%5E%7B%5Cinfty%7D+%5Cfrac%7Bf%5E%7B%28n%29%7D%28a%29%7D%7Bn%21%7D+%5Ctimes+%28x+-+a%29%5En+%5C%5C+%26%3D+f%28a%29+%2B+%5Cfrac%7Bf%27%28a%29%7D%7B1%21%7D%28x-a%29+%2B+%5Cfrac%7Bf%5E%7B%282%29%7D%28a%29%7D%7B2%21%7D%28x-a%29%5E2%2B+%5Ccdots+%2B+%5Cfrac%7Bf%5E%7B%28n%29%7D%28a%29%7D%7Bn%21%7D%28x-a%29%5En+%2B+R_n%28x%29+%5Cend%7Balign%7D)
+  - ![](https://pic1.zhimg.com/50/v2-b4d93e93381963b2862b1ec7bea0754a_hd.webp?source=1940ef5c)
+  - [怎样更好地理解并记忆泰勒展开式？ - 刘遥行的回答](https://www.zhihu.com/question/25627482/answer/321719657)
+  - [动图讲解泰勒级数](https://pic1.zhimg.com/50/v2-8391cbeb7da1d4a14550265ac9f74b4b_hd.webp?source=1940ef5c)
+  - ![](https://pic1.zhimg.com/50/v2-8391cbeb7da1d4a14550265ac9f74b4b_hd.webp?source=1940ef5c)
+- <iframe src="//player.bilibili.com/player.html?aid=11251323&bvid=BV1Gx411Y7cz&cid=18609209&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 ## 高阶导数
 
 这里介绍高阶导数的目的是帮助得到函数的近似——`泰勒级数`
