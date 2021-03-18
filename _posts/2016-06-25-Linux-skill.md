@@ -274,6 +274,15 @@ x+y = z\\a=4
     - 提取码: i21n
   - gitclone缓存加速[网站](https://gitclone.com/)
 - 参考：[github镜像加速](https://blog.csdn.net/guoxinian/article/details/108874469)
+- github与gitee同步
+  - 终端下同时连接github和gitee，设置方法：vim ~/.git/config
+
+```yaml
+[remote "origin"]
+	url = https://gitee.com/wqw547243068/wqw547243068.github.io.git
+   url = https://github.com/wqw547243068/wqw547243068.github.io.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+```     
 
 
 ## 基本概念
