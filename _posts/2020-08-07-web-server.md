@@ -683,6 +683,8 @@ Django就没有用异步，通过线程来实现并发，这也是WSGI普遍的�
 
 ## Flask
 
+- 【2021-3-18】flask 1.0和1.1版本的差异，api返回值类型不同，前者不能直接返回python的dict类型，需要用json.dumps转换为string，后者可以直接返回dict结构，自动转换
+
 ![](https://pic3.zhimg.com/v2-ddbbe5dcf4fa4b35f11bca5f0546ecc3_1440w.jpg?source=172ae18b)
 
 - [用Python 的Flask实现 RESTful API(学习篇)](https://zhuanlan.zhihu.com/p/32202156)
