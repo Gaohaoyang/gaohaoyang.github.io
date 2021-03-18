@@ -15,6 +15,8 @@ mathjax: true
 
 # 总结
 
+- 【2021-3-18】[如何理解傅里叶变换](https://www.zhihu.com/question/19714540/answer/514107420)
+  - 简易[动图视频](https://vdn1.vzuu.com/SD/d223de46-23a7-11eb-95ec-fe27a5b7ef44.mp4), [傅里叶画小猫](https://vdn1.vzuu.com/SD/558491cc-23ad-11eb-8d25-96e8993416ca.mp4?disable_local_cache=1&auth_key=1616043161-0-0-8cbf2f8d73d82c3bfd25e646628a7035&f=mp4&bu=pico&expiration=1616043161&v=hw)
 - 知乎上对[傅立叶变换、拉普拉斯变换、Z变换的联系？为什么要进行这些变换。研究的都是什么？](https://www.zhihu.com/question/22085329/answer/26047106)问题的回答
 
 ## 什么是傅里叶变换
