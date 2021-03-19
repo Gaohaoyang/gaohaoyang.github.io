@@ -144,6 +144,15 @@ PRML 的主要内容：
   - **误差的期望值** = **噪音的方差** + **模型预测值的方差** + **预测值相对真实值的偏差**的平方
   - ![](https://www.zhihu.com/equation?tex=E%28%28y-%5Chat%7Bf%7D%28x%29%29%5E2%29+%3D+%5Csigma%5E2+%2B+Var%5B%5Chat%7Bf%7D%28x%29%5D+%2B+%28Bias%5B%5Chat%7Bf%7D%28x%29%5D%29%5E2)
   - ![](https://pic1.zhimg.com/v2-7cd04b4be18328e7b5d25cc8f00c9e4f_1440w.jpg?source=172ae18b)
+  - 解释
+    - Bias是 f* 的期望到目标模型之间的偏差，Variance是 f* 到 f* 的期望之间的偏差
+    - ![](https://pic2.zhimg.com/80/v2-c5aceedb4136774c229933917831c95d_720w.jpg)
+    - 左边是高偏差低方差的情况，右边是低偏差高方差的情况
+    - ![](https://pic2.zhimg.com/80/v2-c61e3a4526912bf7796fb88dacb495f1_720w.jpg)
+    - 越是越是简单的模型，Variance越小；越是复杂的模型，Variance越大，而且简单的模型更不容易被某些噪声数据所干扰。同样，我们发现越是简单的模型Bias越大，越是复杂的模型Bias越小。
+    - ![](https://pic3.zhimg.com/80/v2-e38cf2dd35448cf548fa88ed725bbd9e_720w.jpg)
+    - 越是越是简单的模型，Bias越大Variance越小；越是复杂的模型，Bias越小Variance越大，都会导致泛化误差高。所以，机器学习模型的泛化误差是由Bias和Variance相互影响的
+    - ![](https://pic3.zhimg.com/80/v2-4aff5169ffeb156e9f8df324f05a17c6_720w.jpg)
 - 偏差、方差的选择
   - 不同复杂度模型的对比
     - ![](https://pic2.zhimg.com/80/v2-8064476118d70efcc0b649a3c6c66585_720w.jpg)
