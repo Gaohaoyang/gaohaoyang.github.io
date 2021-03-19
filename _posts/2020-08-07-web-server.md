@@ -1246,10 +1246,16 @@ console.log(2);
     - ![](https://img2018.cnblogs.com/blog/1334093/201904/1334093-20190422154822998-1507326377.png)
     - 注意：①null 和 undefined 无constructor，这种方法判断不了。②如果自定义对象，开发者重写prototype之后，原有的constructor会丢失
 - 元素遍历, [js数组遍历](https://www.cnblogs.com/woshidouzia/p/9304603.html)
-  - 1.for循环
+  - 1.for循环： 4个元素的arr， 普通for循环最优雅
+    - for(j = 0; j < arr.length; j++) # 循环4次
+    - for(j = 0,len=arr.length; j < len; j++) # 循环4次，优化，算一次长度
+    - for(j = 0; arr[j]!=null; j++) # 性能弱于上面
+  - forin
+    - for(a in arr) # 循环5次，末尾是undefine
   - 2.foreach循环
   - 3.map循环
   - 4.forof遍历
+    - for(let value of arr) # 需要ES6支持，forin＜性能＜for
   - 5.filter遍历
   - 6.every遍历
   - 7.some遍历
@@ -1258,6 +1264,8 @@ console.log(2);
   - 10.find
   - 11.findIndex
   - 12.keys，values，entries
+- 总结: [JS几种数组遍历方式总结](https://blog.csdn.net/function__/article/details/79555301)
+  - ![](https://dailc.github.io/jsfoundation-perfanalysis/staticresource/performanceAnalysis/demo_js_performanceAnalysis_jsarrayGoThrough_1.png)
 
 
 ## HTML
