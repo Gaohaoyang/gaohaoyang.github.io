@@ -19,6 +19,8 @@ mathjax: true
 
 - 【2020-6-17】人的一生，**靠本事保底，靠运气探顶**。年轻人不要把运气误当本事自叹不如。珍惜时间和机会，发奋图强，不断提升自己就好。创造条件等机会而已。机会没来之前，也要懂得知足长乐。 ​​​​
 - 人的自由之路，无非是两条：一条是给能力做加法，一条是给欲望做减法。
+- 【2021-3-20】[毕业两年，才看清有身边人的差距](https://www.ixigua.com/6939826056224309285)
+  - <iframe width="720" height="405" frameborder="0" allowfullscreen src="https://www.ixigua.com/iframe/6939826056224309285?autoplay=0&startTime=0"> </iframe>
 - 【2021-3-10】[脉脉](https://maimai.cn/web/gossip_detail?src=app&webid=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlZ2lkIjoiNzJjZTM5ZGE4MTYyMTFlYmJiZjYyNDZlOTZiNDgwODgiLCJ1IjozNTM5LCJpZCI6Mjg2OTQ0OTJ9.6YzMKLwDvtcsv-tm2TzeRsdnr3xeEXEXY1rRrbbf6hs&share_channel=2)，目前看到的几个扎心的现象：
   - 1，互联网格局进入**收官阶段**了(相对于2018年的互联网下半场)，已经没有太多的创新余地了
   - 2，随着第一点，不少人的工作快变成没有意义的事了，岗位人数还会进一步缩减，**35岁的槛慢慢向30岁靠近**，创业也更难
