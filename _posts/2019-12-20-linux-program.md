@@ -6209,9 +6209,6 @@ GNU的make工作时的执行步骤入下：（想来其它的make也是类似）
     - CXXFLAGS: C++语言编译器的参数
     - ARFLAGS: AR命令的参数
     - RM: rm -f
-    
-
-
 - 函数
   - wildcard 查找当前目录下所有.c文件，返回值给src
     - src=$(wildcard ./*.c)
