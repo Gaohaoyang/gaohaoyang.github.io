@@ -4,8 +4,8 @@ layout: default
 
 <div class="page clearfix" index>
     <div class="left">
-        <h1>Welcome to HyG's Blog!</h1>
-        <small>这里记录着我的前端学习之路</small>
+        <h2><img src="./images/home.jpg" alt="Дом, милый дом" align="left" width="150" hspace="8" />Страница дома Москва, ул. Новомарьинская д. 32</h2>
+        <small>Cайт предназначен для оперативного распространения информации среди жильцов дома и собственников квартир.</small>
         <hr>
         <ul>
             {% for post in paginator.posts %}
@@ -37,7 +37,7 @@ layout: default
                     {{post.excerpt}}
                 </div>
                 <div class="read-all">
-                    <a  href="{{ post.url | prepend: site.baseurl }}"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="{{ post.url | prepend: site.baseurl }}"><i class="fa fa-newspaper-o"></i>Читать далее</a>
                 </div>
                 <hr>
               </li>
@@ -71,7 +71,7 @@ layout: default
             <div class="side">
                 <div>
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    Recent Posts
+                    Недавнее
                 </div>
                 <ul class="content-ul" recent>
                     {% for post in site.posts offset: 0 limit: 10  %}
@@ -81,10 +81,22 @@ layout: default
             </div>
 
             <!-- Content -->
-            <div class="side ">
+            <div class="side">
+                <div>
+                    <i class="fa fa-external-link"></i>
+                    Полезные ссылки
+                </div>
+                <ul class="content-ul">
+                    <li><a href="https://mos.ru/">Портал мэра Москвы</a></li>
+                    <li><a href="https://www.gosuslugi.ru/">Портал госуслуг РФ</a></li>
+                    <li><a href="https://my.mosenergosbyt.ru">ЛК Мосэнерго</a></li>
+                </ul>
+            </div>
+
+            <div class="side">
                 <div>
                     <i class="fa fa-th-list"></i>
-                    Categories
+                    Категории
                 </div>
                 <ul class="content-ul" cate>
                     {% for category in site.categories %}
@@ -99,11 +111,11 @@ layout: default
                     {% endfor %}
                 </ul>
             </div>
-            <!-- 其他div框放到这里 -->
+            <!-- Put other div tags here -->
             <div class="side">
                 <div>
                     <i class="fa fa-tags"></i>
-                    Tags
+                    Тэги
                 </div>
                 <div class="tags-cloud">
                     {% assign first = site.tags.first %}
@@ -143,16 +155,6 @@ layout: default
                     {% endfor %}
                 </div>
             </div>
-
-            <!-- <div class="side">
-                <div>
-                    <i class="fa fa-external-link"></i>
-                    Links
-                </div>
-                <ul  class="content-ul">
-
-                </ul>
-            </div> -->
         </div>
     </div>
 </div>
