@@ -1454,8 +1454,23 @@ print("Matching: %s" % matching[0])
 ### Google [Dialogflow](https://dialogflow.com/)
 ![](https://ss.csdn.net/p?http://mmbiz.qpic.cn/mmbiz_png/rFWVXwibLGtw9fIXO7xspXUwFLRz3hDqY3RomibnP9iaEcSYibnqE8ypnJ8BvTZemsWD1zGQDhAJquFNmQic28JYyGQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1)
 - DialogFlow是基于谷歌的Duplex技术开发，该技术使得客户获得更好的人机交互体验，使得对话聊天更加自然。推出 Dialogflow (https://dialogflow.com)，用于替代 API.AI，将 Dialogflow 打造成您构建出色的对话体验的端到端平台
-  - API.AI 是一家B2D(business to developer)公司，是一个为开发者提供服务的机器人搭建平台，帮助开发者迅速开发一款bot并把发布到各种message平台上。
+  - API.AI 是一家B2D(business to developer)公司，是一个为开发者提供服务的机器人搭建平台，帮助开发者迅速开发一款bot并把发布到各种message平台上。2016年9月被Google收购，是Google基于云的自然语言理解（NLU）解决方案
   - Dialogflow 提供了一个网页界面，称为 Dialogflow 控制台（[访问文档](https://cloud.google.com/dialogflow/docs/console?hl=zh_CN)，[打开控制台](https://dialogflow.cloud.google.com/?hl=zh_CN)）
+  - ![](http://www.ctiforum.com/uploadfile/2019/0524/20190524111428379.jpg)
+  - Dialogflow的工作原理。[智能客服技术专栏](http://cc.ctiforum.com/hujiaozhongxinjishu/ics/)，[解码Dialogflow：构建智能机器人入门](http://cc.ctiforum.com/jishu/hujiao/hujiaozhongxinjishu/ics/jishuwenzhai/556023.html)
+    - 1.Dialogflow的输入可以是基于文本或人声的20种不同语言，包括一些本地方言，如英语（美国和英国）或中文（简体和繁体）。文本输入来自消息传递通道，包括SMS，Webchat和电子邮件。谷歌与Slack，Facebook Messenger，Google智能助理，Twitter，微软Skype和Skype for Business，思科Webex Teams，Twilio，Viber，Line，Telegram和Kik建立了Dialogflow集成。来自Amazon和Microsoft的SMS，电子邮件和语音助理需要额外的编码或消息处理才能输入Dialogflow。
+    - 2.基于文本的消息可以通过可选的拼写检查程序。当人们输入或使用短信时，拼写错误很常见。纠正拼写错误将提高自然语言理解引擎的准确性。
+    - 3.Dialogflow的语音呼叫通过Google的语音到文本处理器，将用户的语音输入转换为文本流。
+    - 4.将语音转换为文本或输入文本已更正后，生成的文本流将传递到Dialogflow中的自然语言理解引擎。这实际上是支持智能机器人创建的核心元素。
+      - Dialogflow首先检查文本流并尝试找出用户的意图。意图是用户想要的--为什么他或她首先与机器人交互。获得正确的意图至关重要。（我们将在后续文章中讨论如何创建Dialogflow意图。）
+      - 意图的例子可以是“我想知道天气预报”，“我的银行余额是什么”，以及“我想要预订”。
+      - 意图通常具有与之关联的实体，例如名称，日期和位置。如果你想知道天气，你需要告诉机器人的位置。如果您想知道您的银行余额，那么机器人将需要获取该帐户的名称。一些比如日期，时间，地点和货币都是开箱即用的，并且是作为Google技术堆栈的一部分启用的。
+      - Dialogflow支持上下文的概念来管理会话状态，流和分支。上下文用于跟踪对话的状态，并且它们会在根据用户之前的回复指导对话时影响匹配的意图。上下文有助于使交互感觉自然而真实。
+      - Slots是与实体关联的参数。在银行余额意图示例中，实体是该人的姓名。Slot可能是正在寻找余额的人名下的特定帐号。如果您要预订机票，您的座位偏好（窗口或过道）是slot值。
+      - 使用Dialogflow创建智能机器人需要开发人员考虑机器人应该处理的所有意图以及用户阐明此意图的所有不同方式。然后，对于每个意图，开发人员必须识别与该意图相关联的实体，以及与每个实体相关的任何slots。如果查询中缺少实体（entity）和/或slot，则机器人需要弄清楚如何向用户询问它。
+    - 5.一旦Dialogflow识别出intent，entities和slot值，它就会将此信息移交给满足意图的软件代码。实现意图可能包括进行数据库检索以查找用户正在查找的信息，或者为后端或基于云的系统调用某种API。例如，如果用户要求提供银行信息，则此代码将与银行应用程序连接。如果意图是用于HR策略信息，则代码触发数据库搜索以检索所请求的信息。
+    - 6.一旦检索到必要的信息将通过Dialogflow传回并返回给用户。如果交互是基于文本的，则在调用以发送消息的同一渠道中将文本响应发送回用户。如果是语音请求，则将文本转换为语音响应用户。
+　　当Dialogflow通过其中一个联络中心合作伙伴作为CCAI的一部分进行集成时，流程变得有点复杂，但功能更强大。
 - 自然语言处理（NLP）算法可以计算两种不同类型的对话内容。
   - ①基于**意图**(Intent-based)的对话：这是当NLP算法使用intents和entities进行对话时，通过识别用户声明中的名词和动词，然后与它的dictionary交叉引用，让bot可以执行有效的操作，这种类型的对话是Dialogflow使用的。
   - ②基于**流程**(Flow-based)的对话：基于流程的对话是智能通信的下一个级别。在这里，我们会给予两个人之间对话的许多不同样本的RNN（循环神经网络），创建的机器人将根据你训练的ML模型进行响应。Wit.ai是在这个领域取得巨大进展的少数网站之一，不用担心，我们不需要做到这个程度。
