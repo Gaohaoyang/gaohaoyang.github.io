@@ -14,6 +14,28 @@ mathjax: true
 
 # 总结
 
+- 【2020-05-16】[如何实现聊天机器人？ChatBot技术栈](https://zhuanlan.zhihu.com/p/141454891)
+  - 设计一个机器人时，记住三个创新的核心维度：你的产品必须 desirable（满足客户需求）、viable（满足客户需求）、feasible（技术可行性）
+  - ![](https://pic1.zhimg.com/80/v2-ec25b4833e902648077ea803e3c1afac_720w.jpg)
+  - 怎样解释半智能聊天机器人？
+    - 用户通过设备在消息平台上进行交互，她的的消息会通过 NLP 进行处理。
+    - 然后机器人可以启动一个过程，用来自数据库 / API 的实时信息来回应，或者转交人工。
+    - 接收的消息越多，机器人提升的也就越多：这也就是所谓的机器学习。某些情况下也需要人工来帮助机器人，也就是所谓的监督学习。
+    - ![](https://pic1.zhimg.com/80/v2-2e2fdd2078f35e44dea619d95bd19158_720w.jpg)
+  - 聊天机器人十大重要问题
+    - ![](https://pic1.zhimg.com/80/v2-507440dbcab7af6d6974f9d1e92031dc_720w.jpg)
+  - 合适的技术解决方案。举个例子：
+    - Facebook messenger 可以让你看见在页面管理器中看见所有会话。他们最近宣布了为开发者的转化协议
+    - Operator，来自 Intercom 的 Operator 似乎被设计成可以让人工插入会话
+    - Chatfuel 提供按钮来看使「在线聊天会议」
+    - Dashbot 有人工转接功能
+  - 技术栈：
+    - 用 API.ai 做 NLP 与监督学习：很不错的讨论小功能，支持法语的最佳平台，漂亮的界面……
+    - 用 Dashbot 做分析以及人工转接：十分详细的统计，易于集成，报表功能……
+    - 用 Botpress 做 NodeJS 框架：可以迅速搭建并且十分灵活
+    - 用 Wechat 做消息接口：10 亿的用户，绝佳的聊天 UX
+    - 用 MongoDB 做数据库：可以由非技术人群更新
+    - 还有其他一些取决于项目类型的 API（QQ、Spotify、Youtube、 Google Maps……)
 - 【2021-2-22】[达摩院Conversational AI研究进展及应用](https://mp.weixin.qq.com/s?__biz=MzU1NTMyOTI4Mw==&mid=2247531629&idx=1&sn=0c028fe3e3aa3b7deb872268ecd9c97c&chksm=fbd7ce01cca04717fd115d671cbfc9e9d015c87096574db04892ffcc670f5ef8197f6cd5a429&mpshare=1&scene=1&srcid=0222uIsdzMLXqIlAS8HdPo8r&sharer_sharetime=1614146750577&sharer_shareid=b8d409494a5439418f4a89712efcd92a&version=3.1.0.6189&platform=mac#rd)
   - 任务型对话引擎Dialog Studio和表格型问答引擎TableQA的核心技术研究进行介绍：
     - 语言理解：如何系统解决低资源问题
