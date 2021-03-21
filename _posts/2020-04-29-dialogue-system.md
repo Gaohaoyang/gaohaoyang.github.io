@@ -1429,6 +1429,63 @@ print(grammar.compile())
 matching = grammar.find_matching_rules("hello world")
 print("Matching: %s" % matching[0])
 ```
+### Google [Dialogflow](https://dialogflow.com/)
+![](https://ss.csdn.net/p?http://mmbiz.qpic.cn/mmbiz_png/rFWVXwibLGtw9fIXO7xspXUwFLRz3hDqY3RomibnP9iaEcSYibnqE8ypnJ8BvTZemsWD1zGQDhAJquFNmQic28JYyGQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1)
+- DialogFlow是基于谷歌的Duplex技术开发，该技术使得客户获得更好的人机交互体验，使得对话聊天更加自然。推出 Dialogflow (https://dialogflow.com)，用于替代 API.AI，将 Dialogflow 打造成您构建出色的对话体验的端到端平台
+  - API.AI 是一家B2D(business to developer)公司，是一个为开发者提供服务的机器人搭建平台，帮助开发者迅速开发一款bot并把发布到各种message平台上。
+  - Dialogflow 提供了一个网页界面，称为 Dialogflow 控制台（[访问文档](https://cloud.google.com/dialogflow/docs/console?hl=zh_CN)，[打开控制台](https://dialogflow.cloud.google.com/?hl=zh_CN)）
+- 自然语言处理（NLP）算法可以计算两种不同类型的对话内容。
+  - ①基于**意图**(Intent-based)的对话：这是当NLP算法使用intents和entities进行对话时，通过识别用户声明中的名词和动词，然后与它的dictionary交叉引用，让bot可以执行有效的操作，这种类型的对话是Dialogflow使用的。
+  - ②基于**流程**(Flow-based)的对话：基于流程的对话是智能通信的下一个级别。在这里，我们会给予两个人之间对话的许多不同样本的RNN（循环神经网络），创建的机器人将根据你训练的ML模型进行响应。Wit.ai是在这个领域取得巨大进展的少数网站之一，不用担心，我们不需要做到这个程度。
+  - Dialogflow 可以与 Google 助理、Slack 和 Facebook Messenger 等许多热门对话平台集成。
+  - （1）在集成服务中使用 Fulfillment
+    - ![](https://img-blog.csdnimg.cn/20201203084116392.png)
+  - （2）通过 API 实现用户互动
+    - 如果没有使用某个集成选项，则必须编写与最终用户直接交互的代码。必须为每轮对话直接与 Dialogflow 的 API 交互，以发送最终用户表述并接收意图匹配信息。下图展示了使用该 API 进行互动的处理流程。
+    - ![](https://img-blog.csdnimg.cn/20201203084131857.png)
+- 参考：
+  - [Dialogueflow基础知识](https://cloud.google.com/dialogflow/docs/basics?hl=zh-cn)
+  - [Dialogflow ES 基础知识](https://blog.csdn.net/Daniel462038751/article/details/110517486)
+  - [利用Dialogflow构建聊天机器人](https://blog.csdn.net/WebEye_Marketing/article/details/111637129)，当用户在 Google Chat 中提出问题时，启动的聊天机器人会与 Dialogflow 集成，来进行自然的对话，Dialogflow 通过 Cloud Functions 实现与后端数据库或 Sheets集成。含youtube视频介绍，[解构聊天机器人系列视频](https://www.youtube.com/playlist?list=PLIivdWyY5sqK5SM34zbkitWLOV-b3V40B)
+  - [聊天机器人教学：使用Dialogflow (API.AI)开发 iOS Chatbot App](https://www.jianshu.com/p/48cc2e0343f4?utm_campaign=maleskine)，酒店预订示例代码：[ChatbotHotel](https://github.com/appcoda/ChatbotHotel)
+- 登录自己的Google帐户，可以按照以下步骤登录Dialogflow：https://console.dialogflow.com/api-client/#/login
+- ![](https://img-blog.csdnimg.cn/20210303193604774.png)
+- 代理agent
+  - Dialogflow 代理是负责与终端用户对话的虚拟客服人员。它是一种NLU模块，能够理解人类语言的细微差别。Dialogflow 可以在对话过程中将用户输入的文字和音频转换为应用和服务可以理解的结构化数据。您可以设计并构建 Dialogflow 代理来负责您的系统所需的各种对话。
+  - Dialogflow 代理类似于人类呼叫中心的客服人员。您可以对代理/客服人员进行训练来处理预期的对话场景，您的训练不需要过于明确
+- **意图** Intents
+  - 用户每轮对话的[意图](https://cloud.google.com/dialogflow/docs/intents-overview?hl=zh_CN)进行分类。可以为每个agent定义多个意图，组合意图可以处理一段完整的对话。当终端用户输入文字或说出话语（称为“终端用户表述”时，Dialogflow 会将用户表述与agent中最佳意图进行匹配。**匹配**意图也又称为“**意图分类**”。
+  - 例如，创建一个天气agent，用于识别并响应用户关于天气的问题。您可以为与天气预报有关的问题定义一个意图。如果最终用户说出“What's the forecast?”，Dialogflow 会将该用户表述与预测意图相匹配。您还可以定义意图，以便从最终用户表述中提取实用信息，例如所需哪个时间或地方的天气预报。提取的数据对于系统为最终用户执行天气查询非常重要。
+  - ![](https://img-blog.csdnimg.cn/20201203084019644.png)
+- 基本意图包含以下内容：
+  - [训练语句](https://cloud.google.com/dialogflow/docs/intents-training-phrases?hl=zh-cn)：这些是最终用户可能说出的语句示例。 当最终用户的表述与其中某一语句相近时，Dialogflow 会将其视为匹配意图。Dialogflow 的内置机器学习功能会根据您的列表扩展出其他相似的语句，因此您无需定义所有可能出现的示例。
+  - [操作](https://cloud.google.com/dialogflow/docs/intents-actions-parameters?hl=zh-cn#actions)：您可以为每个意图定义一项操作。 当某个意图匹配时，Dialogflow 会向系统提供该操作，您可以使用该操作触发系统中定义的特定操作。
+  - [参数](https://cloud.google.com/dialogflow/docs/intents-actions-parameters?hl=zh-cn#params)：当某个意图在运行时匹配时，Dialogflow 会以“参数”形式提供从最终用户表述中提取的值。 每个参数都有一个类型，称为实体类型，用于明确说明数据的提取方式。 与原始的最终用户输入不同，参数是结构化数据，可以轻松用于执行某些逻辑或生成响应。
+  - [响应](https://cloud.google.com/dialogflow/docs/intents-responses?hl=zh-cn)：您可以定义要返回给最终用户的文本、语音或视觉响应。 这些响应可能是为最终用户提供解答、向最终用户询问更多信息或终止对话。
+  - 下图展示了匹配意图和响应最终用户的基本流程：
+    - ![](https://img-blog.csdnimg.cn/20201203084037155.png)
+  - 更复杂的意图还可能包含以下内容：
+  - [上下文](https://cloud.google.com/dialogflow/docs/contexts-overview?hl=zh-cn)：Dialogflow 上下文类似于自然语言上下文。 如果有人对您说“它们是橙色的”，您需要了解上下文才能理解此人所指的是什么。 同样，为了让 - Dialogflow 处理类似的最终用户表述，您需要为其提供上下文，以便系统正确地匹配意图。
+  - 事件：借助事件，您可以根据已发生的情况而非最终用户表达的内容来调用意图。
+- **实体** Entities
+  - 每个意图参数都有一个类型，称为实体类型，用于明确说明从用户表述中提取数据的方式。
+  - Dialogflow 提供预定义的[系统实体](https://cloud.google.com/dialogflow/docs/entities-system?hl=zh_CN)，这些实体可以匹配许多常见的数据类型。 例如，您可以使用系统实体来匹配日期、时间、颜色、电子邮件地址等类型。 您还可以自行创建[自定义实体](https://cloud.google.com/dialogflow/docs/entities-custom?hl=zh_CN)来匹配自定义数据。 例如，您可以定义一个 vegetable 实体，以匹配杂货店代理出售的蔬菜类型。
+- **上下文**
+  - Dialogflow 上下文类似于自然语言上下文。 如果有人对您说“它们是橙色的”，您需要了解上下文才能理解“它们”指的是什么。 同样，为了让 Dialogflow 顺利处理类似的最终用户表述，您需要为其提供上下文，以便系统正确地匹配意图。
+  - 您可以使用上下文来控制对话流程。 您可以为意图配置上下文，方法是设置由字符串名称标识的[输入和输出上下文](https://cloud.google.com/dialogflow/docs/contexts-input-output?hl=zh_CN)。 当某个意图匹配时，为该意图配置的所有输出上下文都将变为活跃状态。 当所有上下文处于活跃状态时，Dialogflow 更可能匹配配置了输入上下文，且该上下文与当前活跃上下文匹配的意图。
+- 下图是一个将上下文用于银行代理的示例。
+  - ![](https://img-blog.csdnimg.cn/20201203084054337.png)
+  1. 用户询问其支票账户的相关信息。
+  2. Dialogflow 将此最终用户表述与 CheckingInfo 意图匹配。此意图具有 checking 输出上下文，因此上下文变为活跃状态。
+  3. 代理询问最终用户他们希望了解支票账户的哪类信息。
+  4. 最终用户回复“my balance”。
+  5. Dialogflow 将此最终用户表述与 CheckingBalance 意图匹配。此意图具有 checking 输入上下文，该上下文需要处于活跃状态才能匹配此意图。当 savings 上下文处于活跃状态时，也可能存在类似的 SavingsBalance 意图来匹配该最终用户表述。
+  6. 系统执行必要的数据库查询后，代理会回复该支票账户的余额。
+- 后续意图
+  - 您可以使用后续意图自动设置意图对的上下文。后续意图是相关父意图下的子意图。创建后续意图时，系统会将输出上下文添加到父意图中，并将同名的输入上下文添加到子意图中。只有父意图在上一轮对话中匹配时，系统才会匹配后续意图。您还可以创建多个级别的嵌套后续意图。
+  - Dialogflow 提供多个预定义后续意图，旨在处理“是”、“否”或“取消”等常见的最终用户回复。您还可以创建自己的后续意图来处理自定义回复。
+
+
 
 
 ### [Chatterbot](https://github.com/gunthercox/ChatterBot)
