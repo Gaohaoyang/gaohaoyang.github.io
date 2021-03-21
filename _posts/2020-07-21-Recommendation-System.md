@@ -14,6 +14,11 @@ mathjax: true
 
 # 总结
 
+
+- 【2021-3-21】脉脉：[推荐算法选哪个方向更好？](https://maimai.cn/web/gossip_detail?src=app&webid=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlZ2lkIjoiZmMwYTU3YTc4ODdkMTFlYjg3Njc4MDE4NDRlNTAxOTAiLCJ1IjozNTM5LCJpZCI6Mjg3MjkxMzN9.b09CGopcevFpUQsURFIXAigPVo-BE75_mRjhlhM7XEc&share_channel=5)
+  - 如果是新业务，做**精排和重排**最容易有效果，而且看起来容易吹。
+  - 如果是特别成熟的业务，精排完全不动的，这个时候**召回**容易出成果。
+  - 精排锻炼搞模型的能力，召回锻炼业务思维、大局观，越往前效果越大，重排靠策略机制，精排靠特征数据模型
 - [从零搭建推荐系统——算法篇](https://zhuanlan.zhihu.com/p/153451292)
 - 推荐系统中算法的位置
     - ![](https://picb.zhimg.com/v2-c1d3b70030d90f53e983643668583a99_b.jpg)
