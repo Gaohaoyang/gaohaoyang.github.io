@@ -27,7 +27,7 @@ mathjax: true
   - 合适的技术解决方案。举个例子：
     - Facebook messenger 可以让你看见在页面管理器中看见所有会话。他们最近宣布了为开发者的转化协议
     - Operator，来自 Intercom 的 Operator 似乎被设计成可以让人工插入会话
-    - Chatfuel 提供按钮来看使「在线聊天会议」
+    - [Chatfuel](https://chatfuel.com/) 提供按钮来看使「在线聊天会议」, The leading no-code chatbot platform for Facebook, Instagram, and Messenger
     - Dashbot 有人工转接功能
   - 技术栈：
     - 用 API.ai 做 NLP 与监督学习：很不错的讨论小功能，支持法语的最佳平台，漂亮的界面……
@@ -1451,7 +1451,9 @@ print(grammar.compile())
 matching = grammar.find_matching_rules("hello world")
 print("Matching: %s" % matching[0])
 ```
+
 ### Google [Dialogflow](https://dialogflow.com/)
+
 ![](https://ss.csdn.net/p?http://mmbiz.qpic.cn/mmbiz_png/rFWVXwibLGtw9fIXO7xspXUwFLRz3hDqY3RomibnP9iaEcSYibnqE8ypnJ8BvTZemsWD1zGQDhAJquFNmQic28JYyGQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1)
 - DialogFlow是基于谷歌的Duplex技术开发，该技术使得客户获得更好的人机交互体验，使得对话聊天更加自然。推出 Dialogflow (https://dialogflow.com)，用于替代 API.AI，将 Dialogflow 打造成您构建出色的对话体验的端到端平台
   - API.AI 是一家B2D(business to developer)公司，是一个为开发者提供服务的机器人搭建平台，帮助开发者迅速开发一款bot并把发布到各种message平台上。2016年9月被Google收购，是Google基于云的自然语言理解（NLU）解决方案
@@ -1554,6 +1556,14 @@ An example of typical input would be something like this:
 
 ### Rasa
 
+- 为什么使用Rasa而不是使用wit、luis、dialogflow这些服务？
+  - （1）不必把数据交给FackBook/MSFT/Google；
+    - 已有的NLU工具，大多是以服务的方式，通过调用远程http的restful API来对目标语句进行解析完成上述两个任务。如Google的[API.ai](http://api.ai/)（收购后更名为Dialogueflow）, Microsoft的[Luis.ai](http://luis.at/), Facebook的[Wit.ai](http://wit.ai/)等。刚刚被百度收购的[Kitt.ai](http://kitt.ai/)除了百度拿出来秀的语音唤醒之外，其实也有一大部分工作是在NLU上面，他们很有启发性的的Chatflow就包含了一个自己的NLU引擎。
+    - 对于数据敏感的用户来说，开源的NLU工具如Rasa.ai提供了另一条路。更加重要的是，可以本地部署，针对实际需求训练和调整模型，据说对一些特定领域的需求效果要比那些通用的在线NLU服务还要好很多。
+    - Rasa NLU本身是只支持英文和德文的。中文因为其特殊性需要加入特定的tokenizer（如jieba）作为整个流水线的一部分。代码在[github](https://github.com/crownpku/rasa_nlu_chi)上。
+  - （2）不必每次都做http请求；
+  - （3）你可以在特殊的场景中调整模型，保证更有效。
+
 - [RASA中文聊天机器人项目](https://github.com/jiangdongguo/ChitChatAssistant)
 
 - Rasa是一个开源机器学习框架，用于构建上下文AI助手和聊天机器人。
@@ -1561,10 +1571,30 @@ An example of typical input would be something like this:
     - pip install rasa_nlu
     - pip install rasa_core[tensorflow]
 - Rasa有两个主要模块：
-  - **Rasa NLU** （NLU）：用于理解用户消息，包括意图识别和实体识别，它会把用户的输入转换为结构化的数据。
+  - **Rasa NLU** （`NLU`）：用于理解用户消息，包括意图识别和实体识别，它会把用户的输入转换为结构化的数据。
     - 支持不同的 Pipeline，其后端实现可支持spaCy、MITIE、MITIE + sklearn 以及 tensorflow，其中 spaCy 是官方推荐的，另外值得注意的是从 0.12 版本后，MITIE 就被列入 Deprecated 了。
-    - Rasa提供了数据标注平台: [rasa-nlu-trainer](https://rasahq.github.io/rasa-nlu-trainer/)
-  - **Rasa Core** (DM)：对话管理平台，用于举行对话和决定下一步做什么。Rasa Core是用于构建AI助手的对话引擎，是开源Rasa框架的一部分。
+    - rasa nlu 支持不同的 Pipeline，其后端实现可支持 spaCy、MITIE、MITIE + sklearn 以及 tensorflow，其中 spaCy 是官方推荐的，另外值得注意的是从 0.12 版本后，MITIE 就被列入 Deprecated 了
+    - 最重要的两个 pipeline 是：`supervised_embeddings` 和 `pretrained_embeddings_spacy`。
+      - 最大的区别是：pretrained_embeddings_spacy pipeline 是来自 GloVe 或 fastText 的预训练词向量；supervised_embeddings pipeline 不使用任何预先训练的词向量，是为了你的训练集而用的。
+      - ① `pretrained_embeddings_spacy`：优势在于，当你有一个训练示例，比如：“我想买苹果”，并且要求 Rasa 预测“买梨”的意图，那么你的模型已经知道“苹果”和“梨子”这两个词非常相似，如果你没有太多的训练数据，这将很有用。
+      - ② `supervised_embeddings`：优势在于，针对你的 domain 自定义词向量。例如：在英语中单词 "balance" 与 "symmetry" 密切相关，但是与单词 "cash" 有很大不同。在银行领域，"balance" 与 "cash" 密切相关，你希望你的模型能够做到这一点。该 pipeline 不使用特定语言模型，因此它可以与任何你分好词（空格分词或自定义分词）的语言一起使用。该模式支持任何语言。默认情况下，它以空格进行分词
+      - ③ `MITIE`：可以在 pipeline 中使用 MITIE 作为词向量的来源，从语料库中训练词向量，使用 MITIE 的特征器和多类分类器。该版本的训练可能很慢，所以不建议用于大型数据集上。
+        - MITIE 后端对于**小数据集**表现良好，但如果有数百个以上的示例，训练时间可能会花费很长时间。不建议使用，因为在将来的版本中可能不再支持 MITIE。
+        - 中文语料源：[awesome-chinese-nlp](https://github.com/crownpku/awesome-chinese-nlp)中列出的中文wikipedia dump和百度百科语料，[MITIE训练](https://github.com/mit-nlp/MITIE)耗时，也可以直接使用训练好的文件：中文 wikipedia 和百度百科语料生成的模型文件 total_word_feature_extractor_chi.dat，[百度云链接](https://pan.baidu.com/s/1kNENvlHLYWZIddmtWJ7Pdg),密码：p4vx
+        - 仅仅获取语料还不够，因为MITIE模型训练的输入是以词为单位的。所以要先进行分词，如jieba
+        - MITIE模型训练, 详见：[用Rasa NLU构建自己的中文NLU系统](https://blog.csdn.net/QFire/article/details/78964212)
+      - ④ 自定义 Pipelines：可以选择不使用模板，通过列出要使用的组件名称来自定义自己的 pipeline
+      - 参考
+        - [rasa算法_Rasa 入门教程 NLU 系列（三）](https://blog.csdn.net/weixin_26729841/article/details/112484055)
+    - **如何选择pipeline**？
+      - 训练数据集<1000: 用语言模型 spaCy，使用 `pretraine_embeddings_spacy` 作为 pipeline， 它用GloVe 或 fastText 的预训练词向量
+      - 训练数据集≥1000或带有标签的数据：supervised_embeddings 作为 pipeline，它不使用任何预先训练的词向量，只用训练集
+    - **类别不平衡**
+      - 如果存在很大的类别不平衡，例如：有很多针对某些意图的训练数据，但是其他意图的训练数据很少，通常情况下分类算法表现不佳。为了缓解这个问题，rasa 的 `supervised_embeddings` pipeline 使用了 **balanced** 批处理策略
+    - **多意图**
+      - 将意图拆分为多个标签，比如预测多个意图或者建模分层意图结构，那么只能使用**有监督**的嵌入 pipeline 来执行此操作。因此，需要使用这些标识：WhitespaceTokenizer：intent_split_symbol：设置分隔符字符串以拆分意图标签，默认 _ 。
+    - Rasa提供了数据**标注平台**: [rasa-nlu-trainer](https://rasahq.github.io/rasa-nlu-trainer/)
+  - **Rasa Core** (`DM`)：对话管理平台，用于举行对话和决定下一步做什么。Rasa Core是用于构建AI助手的对话引擎，是开源Rasa框架的一部分。
     - 负责协调聊天机器人的各个模块，起到维护人机对话的结构和状态的作用。对话管理模块涉及到的关键技术包括对话行为识别、对话状态识别、对话策略学习以及行为预测、对话奖励等。
     - Rasa消息响应过程
       - ![](https://upload-images.jianshu.io/upload_images/3285850-ece175b3a873ff90)
@@ -1572,7 +1602,7 @@ An example of typical input would be something like this:
       - 其次，Rasa Core会将Interpreter提取到的意图和识别传给Tracker对象，该对象的主要作用是跟踪会话状态(conversation state)；
       - 第三，利用policy记录Tracker对象的当前状态，并选择执行相应的action，其中，这个action是被记录在Track对象中的；
       - 最后，将执行action返回的结果输出即完成一次人机交互。
-    - Rasa Core包含两个内容： stories 和 domain。
+    - Rasa Core包含两个内容： **stories** 和 **domain**。
       - domain.yml：包括对话系统所适用的领域，包含意图集合，实体集合和相应集合，相当于大脑框架，指定了意图`intents`， 实体`entities`， 插槽`slots`以及动作`actions`。
         - intents和entities与Rasa NLU模型训练样本中标记的一致。slot与标记的entities一致，actions为对话机器人对应用户的请求作出的动作。
         - 此外，domain.yml中的templates部分针对utter_类型action定义了模板消息，便于对话机器人对相关动作自动回复。
@@ -1580,7 +1610,10 @@ An example of typical input would be something like this:
         - Stories
           - stories可以理解为对话的场景流程，需要告诉机器多轮场景是怎样的。Story样本数据就是Rasa Core对话系统要训练的样本，它描述了人机对话过程中可能出现的故事情节，通过对Stories样本和domain的训练得到人机对话系统所需的对话模型。
           - Rasa Core中提供了rasa_core.visualize模块可视化故事，有利于掌握设计故事流程。
-- Rasa X（web工具）是一个工具，可帮助您构建、改进和部署由Rasa框架提供支持的AI Assistants。 Rasa X包括用户界面和REST API。
+  - Rasa Stack —— 汉化版 [Rasa_NLU_Chi](https://blog.csdn.net/QFire/article/details/96835309)
+    - Rasa Stack 包括 Rasa NLU 和 Rasa Core，前者负责进行语义理解（意图识别和槽值提取），而后者负责会话管理，控制跟踪会话并决定下一步要做什么，两者都使用了机器学习的方法可以从真实的会话数据进行学习；另外他们之间还相互独立，可以单独使用
+    - ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9qdmVyc29uLm9zcy1jbi1iZWlqaW5nLmFsaXl1bmNzLmNvbS8zMjI5YmE3NWMwYmZkYjhlYzNkYTIyM2E4NGE2NDkxMy5qcGc)
+- **Rasa X**（web工具）是一个工具，可帮助您构建、改进和部署由Rasa框架提供支持的AI Assistants。 Rasa X包括用户界面和REST API。
   - ![](https://upload-images.jianshu.io/upload_images/3285850-26dd1db4512e05ac)
 - 基本概念
   - intents：意图
