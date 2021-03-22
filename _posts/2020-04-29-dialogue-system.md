@@ -102,15 +102,14 @@ mathjax: true
     - 1. 多样性对话生成： 
       - ① 多映射机制的端到端生成模型：假设每一句回复可能来自于一个独特的映射机制 ( Mapping mechanism )，用M1到M4表示。如果给定某种映射机制，就可确定最终的回复，消除了回复过程中的不确定性。
       - ②类似工作也有很多，不过都存在一些弊端。比如CVAE用了连续的高斯空间，对于对话多样性捕捉能力非常差；而MHAM和MARM没有对先验和后验的分布差异进行有效的建模。如一句上文可能对应4种不同的回复，且都是合理的，而训练时只出现一种，推断时就无法捕捉另外几种映射逻辑。推断和训练时对映射机制的选择是存在差异的，这会导致优化的过程乱掉。
-      - 创新：一时采用离散的映射机制，二是分离了先验和后验的推断。除了用NLLLoss ( negative log likelihood loss ) 外，还用了一个matching loss，这个loss的目标是为了辅助整个后验选择网络的训练，特别是Response encoder这一块。在推断时模型结构有部分差异，因为在推断时是没有Response的，这时我们就任意选择一个Map来生成回复。
-      - ![](https://mmbiz.qpic.cn/mmbiz_png/zHbzQPKIBPiaoM63srX1YFe7VT44Wa34IF8BSuEcoJxoZZMVS3mIT8u0dWCAbh4EAQEDvV0GmlrBhQEeNpr2zjg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+      - 创新：一时采用离散的映射机制，二是分离了先验和后验的推断。除了用NLLLoss ( negative log likelihood loss ) 外，还用了一个matching loss，这个loss的目标是为了辅助整个后验选择网络的训练，特别是Response encoder这一块。在推断时模型结构有部分差异，因为在推断时是没有Response的，这时我们就任意选择一个Map来生成回复。[图](https://mmbiz.qpic.cn/mmbiz_png/zHbzQPKIBPiaoM63srX1YFe7VT44Wa34IF8BSuEcoJxoZZMVS3mIT8u0dWCAbh4EAQEDvV0GmlrBhQEeNpr2zjg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
     - 2. 知识对话生成
       - 通过知识引入有助于对话"去模糊"、"可控制". 选择知识库的部分来用，所以常规做法是引入attention来进行知识的选择
     - 3. 自动化评价和对话流控制
       - ① 自进化对话系统 ( SEEDS )：监督学习只能考虑当前一轮的回复，当不同Agent在进行交流时会发现很多问题，原因是因为在数据中没有见过这些信息。那能否考虑利用长远的反馈信息来提升对话的控制？多样化生成理论，包含两部分。一部分是Diversified Generation，根据特定知识或隐空间生成回复的过程；另一部分是Dialogue "Controller"，怎么去选择知识或者隐空间而不是仅仅依赖于Prior？我们通过强化学习来提升选择知识或者隐变量的能力。
       - ② 自动化的对话评价体系：从连贯性、信息量、逻辑等角度用一系列模型去评价这些对话，使用无监督语料训练出来
     - 4. 大规模和超大规模隐空间对话生成模型
-      - NLP模型发展趋势：![](https://mmbiz.qpic.cn/mmbiz_png/zHbzQPKIBPiaoM63srX1YFe7VT44Wa34IpevnPJOjsjeibaCSy7PSJh9nyicdI4VA0r8sQ1NSibXzxWZdfJkeibyNWQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+      - [NLP模型发展趋势](https://mmbiz.qpic.cn/mmbiz_png/zHbzQPKIBPiaoM63srX1YFe7VT44Wa34IpevnPJOjsjeibaCSy7PSJh9nyicdI4VA0r8sQ1NSibXzxWZdfJkeibyNWQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
       - 使用隐空间的对话模型PLATO,基于前面提到的隐空间的机制，来使得Transformer模型生成的对话丰富度要更丰富。PLATO模型总共由三个模块组成，Generation ( 利用隐变量控制生成 )、Recognition ( 隐变量识别 ) 和Prior ( 隐变量推导 )。而我们6月份提出的PLATO2的一个相对PLATO的改进则是没有使用Prior模块，因为实验发现用一个Retrieval模块来代替Prior模块效果会更好。PLATO2有两个训练阶段：一个叫Coarse-Grained Generation，即先训练一个基础版网络，没有用隐变量。之后基于这个网络我们再进一步训练，叫做Fine-Grained Generation，引入隐变量等信息。训练时用到了三个Loss
   - 未来解决对话问题的要素可以从以下方面入手：
     - 语料 & 知识， 这是训练任何模型的基础
@@ -397,13 +396,13 @@ chatbot:我也是，不过总有一天就会好起来的
 - 第三类`闲聊型`对话，用户可能只想找人聊聊天，对话不涉及到知识或业务，比如说“今天天气真好”。
   - 涉及的技术包括：文本生成模型、文本检索、排序技术等；
 - 第四类`推荐式`对话，新兴领域
-  - 大多数推荐系统都是以静态的方式工作，于是有了对话推荐系统（Conversational Recommender Systems，CRSs）的出现，打破了传统静态的工作方式，动态地和用户进行交互，获得用户的实时反馈，进而向用户做出心仪的推荐。
+  - 大多数推荐系统都是以静态的方式工作，于是有了对话推荐系统（Conversational Recommender Systems，CRSs）的出现，打破了传统静态的工作方式，动态地和用户进行交互，获得用户的实时反馈，进而向用户做出心仪的推荐。[图](https://upload-images.jianshu.io/upload_images/18270108-74922f3390e8b699.png)
 
 ![](https://upload-images.jianshu.io/upload_images/18270108-74922f3390e8b699.png)
 
 （2）按照模式可以分为检索和生成
 - 基于检索的模型，用预定义的数据库和某种启发式推理来根据输入和上下文选择适当的答复。换句话说就是构建FAQ，存储问题-答案对，之后用检索的方式从该FAQ中返回句子的答案。  这些系统不会产生任何新的文本，他们只是从固定的集合中选择一个响应。这种方法有明显的优点和缺点。 由于使用手工打造的存储库，基于检索的方法不会产生语法错误。 但是，它们可能无法处理没有预定义响应的场景。 出于同样的原因，这些模型不能引用上下文实体信息，如前面提到的名称。
-- 生成式模型，这种方法要更难一些，它不依赖于预定义的响应，完全从零开始生成新的响应。 生成式模型通常基于机器翻译技术，但不是从一种语言翻译到另一种语言，而是从输入到输出（响应）的“翻译”。
+- 生成式模型，这种方法要更难一些，它不依赖于预定义的响应，完全从零开始生成新的响应。 生成式模型通常基于机器翻译技术，但不是从一种语言翻译到另一种语言，而是从输入到输出（响应）的“翻译”。[图](https://img-blog.csdn.net/20171205212417003)
   - ![](https://img-blog.csdn.net/20171205212417003)
   - 这方法有明显的优点和缺点。它可以引用输入中的实体，给人一种印象，即你正在与人交谈。 然而，这些模型很难训练，而且很可能会有语法错误（特别是在较长的句子上），并且通常需要大量的训练数据。  
 
@@ -435,19 +434,19 @@ chatbot:我也是，不过总有一天就会好起来的
 
 
 - （1）管道式架构——pipeline
-  - 含语音识别
+  - 含语音识别，[图](http://html.rhhz.net/buptjournal/html/PIC/bjyddxxb-42-6-10-1.jpg)
     - ![](http://html.rhhz.net/buptjournal/html/PIC/bjyddxxb-42-6-10-1.jpg)
   - 纯文本
-    - 对话系统、模拟器和多个外部服务、资源组成多智能体的交互整体
+    - 对话系统、模拟器和多个外部服务、资源组成多智能体的交互整体，[图](http://html.rhhz.net/buptjournal/html/PIC/bjyddxxb-42-6-10-2.jpg)
     - ![](http://html.rhhz.net/buptjournal/html/PIC/bjyddxxb-42-6-10-2.jpg)
 - （2）端到端结构——end2end
   - 各个模块彼此依赖，统一优化.目前端到端的人机对话系统随着深度学习等一系列算法技术的进步而迅速发展，逐渐成为当前的研究热点.
   - 由于内部独立模块的训练过程，管道式架构往往存在模块之间错误累加的问题.与管道式架构不同，端到端模型根据误差的反向传播共同调整和优化模型内部的网络结构和参数，直到模型收敛或达到预期的效果，中间所有的操作都包含在神经网络内部，不再分成多个独立模块分别处理. 有的方法虽然是端到端的方法，但还是单独设计模型的部件，不同部件解决管道方法中某个或多个模块所承担的任务.
-  - 端到端对话模型可分为检索式和生成式，检索式模型就是给定对话历史从预定义回复候选集合中选出最佳回复作为当前系统输出，生成式模型则是给定对话历史直接生成回复。两种方式都可以通过和用户多轮交互完成最终的对话任务。
+  - 端到端对话模型可分为检索式和生成式，检索式模型就是给定对话历史从预定义回复候选集合中选出最佳回复作为当前系统输出，生成式模型则是给定对话历史直接生成回复。两种方式都可以通过和用户多轮交互完成最终的对话任务。[图](http://html.rhhz.net/buptjournal/html/PIC/bjyddxxb-42-6-10-3.jpg)
   - ![](http://html.rhhz.net/buptjournal/html/PIC/bjyddxxb-42-6-10-3.jpg)
   - 将人机对话的过程看作为从对话历史到系统回复的一种映射问题，通常应用编解码模型来进行端到端训练.
   - 端到端对话系统是在有监督的方式下进行训练，需要大量人人对话的训练数据，理论上有很多优点，但目前从结果上看仍需要在技术上做大的提升，以确保对话的逻辑性和鲁棒性.
-- 总结：任务型对话系统的架构分类
+- 总结：任务型对话系统的架构分类，[图](http://html.rhhz.net/buptjournal/html/PIC/bjyddxxb-42-6-10-4.jpg)
   - ![](http://html.rhhz.net/buptjournal/html/PIC/bjyddxxb-42-6-10-4.jpg)
 
 ### 非任务型架构
@@ -470,8 +469,8 @@ chatbot:我也是，不过总有一天就会好起来的
   - 检索知识库的过程中，最重要的是如何找到与输入语义等价的问句,常用的相似度算法包括: 余弦相似度、编辑距离、关键词重合度、BM25等等，实际使用中是有用，但仍然不够，因为可能遇到如下问题：①字面相似的句子语义不等价②字面不相似的句子语义等价，如“什么是新冠肺炎”和“解释下新冠肺炎的定义”是语义等价，但和“什么是支气管肺炎”却不是语义等价的，采用编辑距离之类的算法是无法识别的。
     - ![](https://image.jiqizhixin.com/uploads/editor/39ffcdcd-1766-496e-9e98-94ad4eab7c85/5.png)
   - 因而，只有基于语义理解的模型才能识别出来，这里包括两类，一是传统机器学习方法，二是深度迁移学习方法。
-    - 基于BERT和BIMPM的语义等价模型方案,BIMPM本身是十分经典的模型，底层是通过word2vec向量来进行语义匹配计算，这里我们将word2vec词向量全部替换为BERT的最上面若干层的输出，并将原有模型中的BI-LSTM结构，替换为Transformer，以提高其在序列性上的表现，实际测试中，该模型在Quora和SLNI数据集中达到了state-of-the-art的效果
-    - ![](https://image.jiqizhixin.com/uploads/editor/c985af05-2486-4455-bc73-7f12daee9c0d/6.png)
+    - 基于BERT和BIMPM的语义等价模型方案,BIMPM本身是十分经典的模型，底层是通过word2vec向量来进行语义匹配计算，这里我们将word2vec词向量全部替换为BERT的最上面若干层的输出，并将原有模型中的BI-LSTM结构，替换为Transformer，以提高其在序列性上的表现，实际测试中，该模型在Quora和SLNI数据集中达到了state-of-the-art的效果，[图](https://image.jiqizhixin.com/uploads/editor/c985af05-2486-4455-bc73-7f12daee9c0d/6.png)
+    - ![图](https://image.jiqizhixin.com/uploads/editor/c985af05-2486-4455-bc73-7f12daee9c0d/6.png)
 
 ## NLU
 
@@ -510,8 +509,8 @@ chatbot:我也是，不过总有一天就会好起来的
   - ![](https://upload-images.jianshu.io/upload_images/1060404-6f96e93a05bcc9ca.png)
 - 基本概念
   - 槽：实体已明确定义的属性，打车中的，出发地点槽，目的地槽，出发时间槽中的属性分别是“出发地点”、“目的地”和“出发时间”
-  - 槽位：槽是由槽位构成
-    - ![](https://upload-images.jianshu.io/upload_images/1060404-41dbe622cfb85ced.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/549)
+  - 槽位：槽是由槽位构成 [图](https://upload-images.jianshu.io/upload_images/1060404-41dbe622cfb85ced.png)
+    - ![](https://upload-images.jianshu.io/upload_images/1060404-41dbe622cfb85ced.png)
     - 槽位的属性
       - 接口槽与词槽
         - 词槽，通过用户对话的关键词获取信息的填槽方式
@@ -634,7 +633,7 @@ chatbot:我也是，不过总有一天就会好起来的
 - ![](https://upload-images.jianshu.io/upload_images/1535345-3e1a2d7d80ba70d8.jpeg)
 - 上图的模型是一种基于网络的端到端可训练任务导向型对话系统，将对话系统的学习作为学习从对话历史到系统回复的映射问题，并应用encoder-decoder模型来训练。然而，该系统是在监督的方式下进行训练——不仅需要大量的训练数据，而且由于缺乏对训练数据对话控制的进一步探索，它也可能无法找到一个好的策略。
 - 端到端强化学习方法
-  - ![](https://upload-images.jianshu.io/upload_images/1535345-afd604658341abf5.png?imageMogr2/auto-orient/strip|imageView2/2/w/636/format/webp)
+  - ![](https://upload-images.jianshu.io/upload_images/1535345-afd604658341abf5.png)
   - 上图的模型首先提出了一种端到端强化学习的方法，在对话管理中联合训练对话状态跟踪和对话策略学习，从而更有力地对系统的动作进行优化。
 - 【2021-3-2】微软的[Jianfeng Gao](https://www.microsoft.com/en-us/research/people/jfgao/)，[ConvLab](https://github.com/ConvLab/ConvLab) is an open-source multi-domain end-to-end dialog system platform，aiming to enable researchers to quickly set up experiments with reusable components and compare a large set of different approaches, ranging from conventional pipeline systems to end-to-end neural models, in common environments.
   - 开源的[ConvLab: Multi-Domain End-to-End Dialog System Platform](https://arxiv.org/abs/1904.08637).
