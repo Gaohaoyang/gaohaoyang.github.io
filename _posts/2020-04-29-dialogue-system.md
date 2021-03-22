@@ -166,19 +166,19 @@ chatbot:我也是，不过总有一天就会好起来的
 
 |任务 |	算法|	优势|	劣势|
 |---|---|---|---|
-|自然语言理解	|Classical Classifier	|实现简单，经典分类算法常用于意图分类、领域分类、对话动作分类等|	需要特征工程|
-|自然语言理解	|CRF	|考虑结合标签的转移概率，适合槽位识别任务	|只使用了固定窗口尺寸，难以扩展|
-|自然语言理解	|RNN	|能够对语言内容长距离建模，适合于上下文相关的多轮意图分类	|梯度消失或者梯度爆炸问题|
-|自然语言理解	|LSTM	|结合“门”机制，能够选择记忆和忘记相关信息	|需要更多的训练数据|
-|对话状态追踪|	Hidden Information State Model|	理论上能够对任意槽值的依赖进行建模	|只能够保持top N个状态|
-|对话状态追踪|Bayesian Update of Dialogue States|	能够对状态的概率进行建模	|只能对简单的依赖进行表征|
-|对话状态追踪|Static Classifier	|不需要依赖之前的状态，可对任意的分类器工作	|没有考虑到状态的转移，使用了人工定义的特征|
-|对话状态追踪|Sequential Classifier	|考虑到状态的转移概率	|发生在最后一个状态的错误可能会影响当前状态的估计|
-|对话状态追踪|Transfer Learning	|能够基于现有槽值信息对新任务或领域进行迁移	|需要大量的特征设计|
-|对话策略优化|	Q-Learning	|经典算法，易于实现	|不能处理连续的动作空间问题|
-|对话策略优化|Policy Iteration|	能够处理连续动作空间问题	|优化过程不稳定|
-|对话策略优化|Actor Critic|	能够处理连续动作空间问题，稳定地优化	|需要严格选择函数的逼近方法|
-|对话策略优化|Transfer Learning	|对于原领域和目标领域的槽值适应性	|计算复杂度高|
+|NLU	|Classical Classifier	|实现简单，经典分类算法常用于意图分类、领域分类、对话动作分类等|	需要特征工程|
+|NLU	|CRF	|考虑结合标签的转移概率，适合槽位识别任务	|只使用了固定窗口尺寸，难以扩展|
+|NLU	|RNN	|能够对语言内容长距离建模，适合于上下文相关的多轮意图分类	|梯度消失或者梯度爆炸问题|
+|NLU	|LSTM	|结合“门”机制，能够选择记忆和忘记相关信息	|需要更多的训练数据|
+|DST|	Hidden Information State Model|	理论上能够对任意槽值的依赖进行建模	|只能够保持top N个状态|
+|DST|Bayesian Update of Dialogue States|	能够对状态的概率进行建模	|只能对简单的依赖进行表征|
+|DST|Static Classifier	|不需要依赖之前的状态，可对任意的分类器工作	|没有考虑到状态的转移，使用了人工定义的特征|
+|DST|Sequential Classifier	|考虑到状态的转移概率	|发生在最后一个状态的错误可能会影响当前状态的估计|
+|DST|Transfer Learning	|能够基于现有槽值信息对新任务或领域进行迁移	|需要大量的特征设计|
+|DPO|	Q-Learning	|经典算法，易于实现	|不能处理连续的动作空间问题|
+|DPO|Policy Iteration|	能够处理连续动作空间问题	|优化过程不稳定|
+|DPO|Actor Critic|	能够处理连续动作空间问题，稳定地优化	|需要严格选择函数的逼近方法|
+|DPO|Transfer Learning	|对于原领域和目标领域的槽值适应性	|计算复杂度高|
 |端到端	|End-to-End LSTM Policy Network with Answer Selection	|能够进行对话状态的自动学习	|仍然有组件需要手工定制|
 |端到端	|End-to-End Training of Modular Dialogue System	|只需要少量的人工参与	|槽的数量和槽值信息需要提前定义，DST是分开训练的，需要更多的数据 |
 |端到端	|Memory Network based End-to-End Dialogue System	|对确定槽和槽值信息的依赖性低	|难以与人类知识集成|
