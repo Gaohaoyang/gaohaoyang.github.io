@@ -3,7 +3,7 @@ layout: post
 title:  "数据挖掘经验总结-data-mining-note"
 date:   2013-07-31 23:02:00
 categories: 数据挖掘
-tags: 数据挖掘 机器学习 数据分析 陈皓 大数据 增长黑客 数据金字塔 zepplin hadoop hive tez spark storm
+tags: 数据挖掘 机器学习 数据分析 陈皓 大数据 增长黑客 数据金字塔 zepplin hadoop hive tez spark storm 服务质量 评分卡
 excerpt: 数据挖掘知识点、经验总结
 author: 鹤啸九天
 mathjax: true
