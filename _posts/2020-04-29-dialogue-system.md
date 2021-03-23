@@ -1562,8 +1562,10 @@ An example of typical input would be something like this:
     - Rasa NLU本身是只支持英文和德文的。中文因为其特殊性需要加入特定的tokenizer（如jieba）作为整个流水线的一部分。代码在[github](https://github.com/crownpku/rasa_nlu_chi)上。
   - （2）不必每次都做http请求；
   - （3）你可以在特殊的场景中调整模型，保证更有效。
-
-- [RASA中文聊天机器人项目](https://github.com/jiangdongguo/ChitChatAssistant)
+- 示例
+  - [RASA中文聊天机器人项目](https://github.com/jiangdongguo/ChitChatAssistant)
+  - [使用Rasa_core和Rasa_nls框架搭建问答机器人](https://blog.csdn.net/Solitarily/article/details/84251628)，训练，在线学习
+  - ![](https://img-blog.csdnimg.cn/2018111915173690.jpg)
 
 - Rasa是一个开源机器学习框架，用于构建上下文AI助手和聊天机器人。
   - 安装：
