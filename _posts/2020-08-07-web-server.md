@@ -1212,6 +1212,7 @@ async def read_item(item_id: str, q: str = None, short: bool = False):
 - 总结
   - [JavaScript基础知识总结笔记](https://blog.csdn.net/weixin_41651627/article/details/79106164)
   - [JavaScript笔记总结](https://blog.csdn.net/weixin_43862596/article/details/109783431)
+  - [JS知识点思维导图](https://github.com/daniellidg/javascript-knowhow)
 
 - JavaScript一种直译式脚本语言，一种基于对象和事件驱动并具有安全性的客户端脚本语言；也是一种广泛应用客户端web开发的脚本语言。简单地说，JavaScript是一种运行在浏览器中的解释型的编程语言。
 
@@ -1245,11 +1246,16 @@ console.log(2);
 - JS中的变量的**数据类型**
   - 数据类型有7种： number、boolean、symbol、string、object、undefined、function。null 有属于自己的数据类型 Null
   - String：字符串类型。用""和''包裹的内容，称为字符串。
-  - Number：数值类型。可以是小数，也可以是正数。
+  - Number：数值类型。可以是小数，也可以是正数。Number可以表示十进制，八进制，十六进制整数，浮点数，科学记数法，最大整数是2^53，BigInt可以表述任意大的整数
   - boolean：真假，可选值true/false。
   - Object：（复杂数据类型）
-  - Null：表示为空的引用。var a = null;
-  - Undefined：未定义，用var声明的变量，没有进行初始化赋值。var a;
+  - Null：表示为空的引用。var a = null; null表示一个对象不存在，其数据类型为Object
+  - Undefined：未定义，用var声明的变量，没有进行初始化赋值。var a; 
+    - 声明了但未赋值的变量，其值是 undefined ，typeof 也返回 undefined
+    - 任何变量均可通过设置值为 undefined 进行清空。其类型也将是 undefined
+    - 空值与 undefined 不是一回事，空的字符串变量既有值也有类型。
+- 语句
+  - 语句分号（ ；）结尾，大括号包裹语句块（基本与Java语法类似）；严格区分大小写；没有添加分号时浏览器自动添加，但是消耗资源并且可能添加出错
 - 类型判断（[js数据类型判断](https://www.cnblogs.com/yadiblogs/p/10750775.html)）
   - typeof(a)
   - toString最完美
@@ -1318,8 +1324,118 @@ console.log(2);
 - Window
   - 所有浏览器都支持 window 对象。它表示浏览器窗口。所有 JavaScript 全局对象、函数以及变量均自动成为 window 对象的成员。
   - 全局变量是 window 对象的属性。全局函数是 window 对象的方法。
+  - 如：Document对象包含当前文档的信息，例如：标题、背景、颜色、表格等，screen，location，history等
 - JSON
   - JSON 是一种轻量级的数据交换格式；JSON是独立的语言 ；JSON 易于理解。
+- 输出方式
+  - document.write()	//向body中写入字符串，输出到页面，会以HTML的语法解析里面的内容
+  - cosole.log()	//向控制台输出
+  - alert()		//弹出框，会以文本的原格式输出
+  - prompt('提示文字'，'默认值') // 输入框---不常用
+
+```JS
+myObj =  { "name":"Nya", "age":21, "car":null };
+// 访问对象JSON值,嵌套的JSON对象，使用点号和括号访问嵌套的JSON对象
+x = myObj.name;
+x = myObj["name"];
+
+console.log(typeof null);	//返回object
+
+function demo(){  
+	console.log('demo');  
+}  
+console.log(typeof demo);	// 返回function 
+// 分支
+var a = 1;
+switch(a){
+    case 1:
+        console.log("1");
+        break;
+    case 2:
+        console.log("2");
+        break;
+    default:
+        console.log("其他");
+        break;
+}
+// for
+function p(i){
+    document.write(i);
+    document.write("<br>");
+ }
+for(var i = 0; i < 10; i++){
+ 	 p(i);
+ }
+// for in
+for (x in myObj){
+	document.write(myObj[x] + "<br />")
+}
+
+//new创建对象
+var person = new Person();
+person.name = "Nya";
+person.age = 21;
+person.sex = "男";
+//创建了对象的一个新实例，并向其添加了四个属性
+//函数创建对象
+function person(name, age, sex){
+    this.name = name;
+    this.age = age;
+    this.sex = sex	//在JS中，this通常指向的是我们正在执行的函数本身，或者是指向该函数所属的对象（运行时）
+}
+//创建对象实例
+var myFather = new person("Ton", 51, "男");
+var myMother = new person("Sally", 49, "女");
+// 返回一个包含所有的cookie的字符串，每条cookie以分号和空格(; )分隔(即key*=*value键值对)：
+allCookies = document.cookie;
+// 设置高度、宽度
+document.write("可用宽度: " + screen.availWidth + '高度：' +screen.availHeight); 
+//改变当前网页地址（加载新的网页）：
+location.href = 'http://www.baidu.com';
+//返回（当前页面的)整个URL：
+document.write(location.href);
+// 自调用函数，匿名函数
+(function () {
+    var x = "Hello!!";      // 我将调用自己
+})();
+//以上函数实际上是一个匿名自我调用的函数(没有函数名)
+```
+
+- html示例：
+  - 上一页/下一页
+
+```html
+<script type="text/javascript"> 
+    自己编写的js代码
+</script>
+<!-- ① 将上面的代码放在<head></head>或者<body></body>之间 -->
+<!-- ② 直接保存为js文件，然后外部调用<script type="text/javascript" src="js文件"></script> -->
+
+<input type="button" value="Back" onclick="goBack()">
+<script>
+	function goBack(){
+    	window.history.back()
+	}
+</script>
+
+<input type="button" value="Forward" onclick="goForward()">
+<script>
+    function goBack(){
+    	window.history.forwardk()
+	}
+</script>
+
+<!-- 交互事件 -->
+<h1 onclick="this.innerHTML='Ooops!'">点击文本!</h1>
+
+<!-- 操作DOM元素，例：向button元素分配onclick事件 -->
+document.getElementById("myBtn").onclick=function(){displayDate()};
+<!-- 操作style样式 -->
+document.getElementsByClassName('box')[0].style.background = 'red';
+
+```
+
+
 
 ### JavaScript 框架（库）
 
@@ -1415,7 +1531,12 @@ console.log(document.cookie)
 
 ```
 
+### 异步请求Ajax
 
+- 请求：
+  - 同步请求:只有当一次请求完全结束以后才能够发起另一次请求
+  - 异步请求:不需要其他请求结束就可以向服务器发起请求
+- 向服务器发起请求的时候，服务器不会像浏览器响应整个页面，而是只有局部刷新。它是一个异步请求，浏览器页面只需要进行局部刷新，效率非常的高
 
 ## HTML
 
