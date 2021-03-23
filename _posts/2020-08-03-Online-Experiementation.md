@@ -3,8 +3,8 @@ layout: post
 title:  "服务部署及在线实验笔记-online-experimentation"
 date:   2020-08-03 18:22:00
 categories: 技术工具 数学基础
-tags: A/B实验 假设检验 因果推理
-excerpt: 互联网公司常用的在线实验方法讲解
+tags: A/B实验 假设检验 因果推理 灰度
+excerpt: 互联网公司常用的服务部署、在线实验方法讲解
 author: 鹤啸九天
 mathjax: true
 ---
