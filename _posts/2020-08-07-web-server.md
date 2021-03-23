@@ -1209,6 +1209,14 @@ async def read_item(item_id: str, q: str = None, short: bool = False):
 
 ## js
 
+- 总结
+  - [JavaScript基础知识总结笔记](https://blog.csdn.net/weixin_41651627/article/details/79106164)
+  - [JavaScript笔记总结](https://blog.csdn.net/weixin_43862596/article/details/109783431)
+
+- JavaScript一种直译式脚本语言，一种基于对象和事件驱动并具有安全性的客户端脚本语言；也是一种广泛应用客户端web开发的脚本语言。简单地说，JavaScript是一种运行在浏览器中的解释型的编程语言。
+
+### 运行机制
+
 - 【2020-8-26】[JavaScript运行机制](https://www.toutiao.com/i6748661672522547719/)
 - JavaScript语言的一大特点就是单线程，也就是说，同一个时间只能做一件事。那么，为什么JavaScript不能有多个线程呢？这样能提高效率啊。
 - JavaScript的单线程，与它的用途有关。作为浏览器脚本语言，JavaScript的主要用途是与用户互动，以及操作DOM。这决定了它只能是单线程，否则会带来很复杂的同步问题。比如，假定JavaScript同时有两个线程，一个线程在某个DOM节点上添加内容，另一个线程删除了这个节点，这时浏览器应该以哪个线程为准？
@@ -1234,8 +1242,14 @@ console.log(2);
 
 ### 基础知识
 
-- 数据类型
+- JS中的变量的**数据类型**
   - 数据类型有7种： number、boolean、symbol、string、object、undefined、function。null 有属于自己的数据类型 Null
+  - String：字符串类型。用""和''包裹的内容，称为字符串。
+  - Number：数值类型。可以是小数，也可以是正数。
+  - boolean：真假，可选值true/false。
+  - Object：（复杂数据类型）
+  - Null：表示为空的引用。var a = null;
+  - Undefined：未定义，用var声明的变量，没有进行初始化赋值。var a;
 - 类型判断（[js数据类型判断](https://www.cnblogs.com/yadiblogs/p/10750775.html)）
   - typeof(a)
   - toString最完美
@@ -1266,6 +1280,63 @@ console.log(2);
   - 12.keys，values，entries
 - 总结: [JS几种数组遍历方式总结](https://blog.csdn.net/function__/article/details/79555301)
   - ![](https://dailc.github.io/jsfoundation-perfanalysis/staticresource/performanceAnalysis/demo_js_performanceAnalysis_jsarrayGoThrough_1.png)
+- [JavaScript基础知识整理](https://zhuanlan.zhihu.com/p/68963487)
+- 变量
+  - 变量是用于存储信息的"容器"，是命名的内存空间，可以使用变量名称找到该内存空间；
+  - JavaScript 的变量是松散类型（弱类型）的，就是用来保存任何类型的数据。在定义变量的时候不需要指定变量的数据类型。
+  - JavaScript 定义变量有四种方法：const、let、var，还有一种是直接赋值，比如a = " a"（不规范，不推荐使用）
+    - var 定义的变量可以修改，如果不初始化会输出undefined，不会报错。
+    - let let是块级作用域，定义的变量只在let 命令所在的代码块内有效，变量需要先声明再使用。
+    - const 定义的变量不可以修改，而且必须初始化，const定义的是一个恒定的常量，声明一个只读的常量或多个，一旦声明，常量值就不能改变。
+  - 作用域
+    - 在函数外声明的变量作用域是**全局**的，全局变量在 JavaScript 程序的任何地方都可以访问；
+    - 在函数内声明的变量作用域是**局部**的（函数内），函数内使用 var 声明的变量只能在函数内容访问。
+- 对象
+  - JavaScript 对象是拥有属性和方法的数据，是变量的容器。对象：是封装一个事物的属性和功能的程序结构，是内存中保存多个属性和方法的一块存储空间。JavaScript中所有事物都是对象：数字、字符串、日期、数组等。JavaScript对象可以是字面量创建、分配给变量，数组和其他对象的属性、
+作为参数传递给函数、有属性和作为返回值。
+- JS**对象**分为三类：
+  - **内置**对象（静态对象）：js本身已经写好的对象，可以直接使用不需要定义它。
+    - 常见的内置对象有 Global、Math（它们也是本地对象，根据定义每个内置对象都是本地对象）。
+  - **本地**对象（非静态对象）：必须实例化才能使用其方法和属性的就是本地对象。
+    - 常见的本地对象有 Object、Function、Data、Array、String、Boolean、Number、RegExp、Error等
+  - **宿主**对象：js运行和存活的地方，它的生活环境就是DOM（文档对象模式）和BOM（浏览器对象模式）。
+- JavaScript函数
+  - 使用函数前要先定义才能调用，函数的定义分为三部分：函数名，参数列表
+  - 四种**调用**模式：
+    - 函数调用模式（通过函数调用）
+    - 方法调用模式（通过对象属性调用）
+    - 构造函数模式（如果是作为构造函数来调用，那么this指向new创建的新对象）
+    - 函数上下文（借用方法模式：它的this指向可以改变，而前三种模式是固定的）；
+    - 函数上下文就是函数作用域；基本语法：apply 和 call 后面都是跟两个参数。）
+  - 在javascript函数中，函数的**参数**一共有两种形式：（实际参数与形式参数）
+    - **形参**：在函数定义时所指定的参数就称之为“函数的形参”。
+    - **实参**：在函数调用时所指定的参数就称之为“函数的实参”。
+- this
+  - 方法中的this指向调用它所在方法的对象。单独使用this，指向全局对象。函数中，函数所属者默认绑定到this上。
+- 闭包
+  - 闭包是指有权访问另一个函数作用域中的变量的函数。创建闭包就是创建了一个不销毁的作用域。闭包需要了解的几个概念： 作用域链、执行上下文、变量对象。
+- Window
+  - 所有浏览器都支持 window 对象。它表示浏览器窗口。所有 JavaScript 全局对象、函数以及变量均自动成为 window 对象的成员。
+  - 全局变量是 window 对象的属性。全局函数是 window 对象的方法。
+- JSON
+  - JSON 是一种轻量级的数据交换格式；JSON是独立的语言 ；JSON 易于理解。
+
+### JavaScript 框架（库）
+
+- （1）jQuery 库
+  - jQuery 函数是 $() 函数（jQuery 函数）。jQuery 库包含以下功能：
+  - HTML 元素选取、元素操作、CSS 操作、HTML 事件函数、JavaScript 特效和动画、
+  - HTML DOM 遍历和修改、AJAX、Utilities
+  - 面向对象编程包括 创建对象、原型继承、class继承。
+  - 类是对象的类型模板；实例是根据类创建的对象。
+- （2）AngularJs企业级框架
+  - 其最为核心的特性为：MVC、模块化、自动化双向数据绑定、语义化标签及依赖注入等。
+- （3）React框架
+  - React被称为构建用户接口而提供的Javascript库；主要用来构建UI，其专注于MVC的V部分。
+- （4）vue未来的主流
+  - vue.js 是用来构建web应用接口的一个库，技术上，Vue.js 重点集中在MVVM模式的ViewModel层，它连接视图和数据绑定模型通过两种方式。
+- （5）D3.js
+  - 数据可视化和图表是Web应用中不可或缺的一部分。d3.js就是最流行的可视化库之一，它允许绑定任意数据到DOM，然后将数据驱动转换应用到Document中。
 
 
 ### JavaScript本地储存
