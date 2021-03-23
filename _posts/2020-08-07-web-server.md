@@ -1268,6 +1268,84 @@ console.log(2);
   - ![](https://dailc.github.io/jsfoundation-perfanalysis/staticresource/performanceAnalysis/demo_js_performanceAnalysis_jsarrayGoThrough_1.png)
 
 
+### JavaScript本地储存
+
+- 【2021-3-23】[JavaScript本地储存有localStorage、sessionStorage、cookie多种方法](https://www.jb51.net/article/197357.htm)
+1. **sessionStorage**：仅在当前会话下有效，关闭页面或浏览器后被清除；
+  - setItem(key,value) 设置数据
+  - getItem(key) 获取数据
+  - removeItem(key) 移除数据
+  - clear() 清除所有值
+2. **localStorage** ：HTML5 标准中新加入的技术，用于长久保存整个网站的数据，保存的数据没有过期时间，直到手动去删除；
+  - localStorage和sessionStorage最大一般为5MB，仅在客户端（即浏览器）中保存，不参与和服务器的通信；
+  - 主要方法同sessionStorage
+3. **Cookie**
+  - Cookie 是一些数据, 存储于你电脑上的文本文件中，用于存储 web 页面的用户信息. Cookie 数据是以键值对的形式存在的，每个键值对都有过期时间。如果不设置时间，浏览器关闭，cookie就会消失，当然用户也可以手动清除cookie. Cookie每次都会携带在HTTP头中，如果使用cookie保存过多数据会带来性能问题, Cookie内存大小受限，一般每个域名下是4K左右，每个域名大概能存储50个键值对
+  - 通过访问document.cookie可以对cookie进行创建，修改与获取。默认情况下，cookie 在浏览器关闭时删除，你还可以为 cookie的某个键值对 添加一个过期时间. 如果设置新的cookie时，某个key已经存在，则会更新这个key对应的值，否则他们会同时存在cookie中
+- **总结**
+  - 相同点：都保存在浏览器端
+  - 不同点
+    - ① **传递方式**不同
+      - cookie数据始终在**同源http请求**中携带（即使不需要），即cookie在浏览器和服务器间来回传递。
+      - sessionStorage和localStorage不会自动把数据发给服务器，仅在本地保存。
+    - ② **数据大小**不同
+      - cookie数据还有路径（path）的概念，可以限制cookie只属于某个路径下。
+      - 存储大小限制也不同，cookie数据不能超过4k，同时因为每次http请求都会携带cookie，所以cookie只适合保存很小的数据，如会话标识。
+      - sessionStorage和localStorage 虽然也有存储大小的限制，但比cookie大得多，可以达到5M或更大。
+    - ③ 数据**有效期**不同
+      - sessionStorage：仅在**当前浏览器窗口**关闭前有效，自然也就不可能持久保持；
+      - localStorage：**始终有效**，窗口或浏览器关闭也一直保存，因此用作持久数据；
+      - cookie只在设置的cookie**过期时间之前**一直有效，即使窗口或浏览器关闭。
+    - ④ **作用域**不同
+      - sessionStorage不在**不同浏览器窗口**中共享，即使是同一个页面；
+      - localStorage 在所有同源窗口中都是共享的；
+      - cookie也是在**所有同源窗口**中都是共享的。
+      - Web Storage 支持事件通知机制，可以将数据更新的通知发送给监听者。Web Storage 的 api 接口使用更方便。
+
+- 代码
+
+```js
+// ============sessionStorage============
+// 添加数据
+window.sessionStorage.setItem("name","李四")
+window.sessionStorage.setItem("age",18)
+// 获取数据
+console.log(window.sessionStorage.getItem("name")) // 李四
+// 清除某个数据
+window.sessionStorage.removeItem("gender")
+// 清空所有数据
+window.sessionStorage.clear()
+// ============localStorage============
+// 添加数据
+window.localStorage.setItem("name","张三")
+window.localStorage.setItem("age",20)
+window.localStorage.setItem("gender","男")
+// 获取数据
+console.log(window.localStorage.getItem("name")) // 张三
+// 清除某个数据
+window.localStorage.removeItem("gender")
+// 清空所有数据
+window.localStorage.clear()
+// ===========cookie==========
+// 设置cookie
+document.cookie = "username=orochiz"
+document.cookie = "age=20"
+// 读取cookie
+var msg = document.cookie
+console.log(msg) // username=orochiz; age=20
+// 添加过期时间（单位：天）
+var d = new Date() // 当前时间 2019-9-25
+var days = 3    // 3天
+d.setDate(d.getDate() + days)
+document.cookie = "username=orochiz;"+"expires="+d
+// 删除cookie （给某个键值对设置过期的时间）
+d.setDate(d.getDate() - 1)
+console.log(document.cookie)
+
+```
+
+
+
 ## HTML
 
 - 【2020-8-24】Web页面分栏效果实现
