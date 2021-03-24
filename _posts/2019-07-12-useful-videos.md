@@ -223,6 +223,11 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=2894797&cid=4523684&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="600"> </iframe>
 
+- 【2021-3-23】黄建新和杨亚洲导演的 《都市三部曲》，背靠背脸对脸，红灯停绿灯行，站直喽别趴下。建议成年人都看看，当年文化真的开放，以后很难还可以拍出这种电影了
+  - 背靠背，脸靠脸-[解说](https://www.ixigua.com/6942535581553394207)，副馆长的官场生存主题
+  - [红灯停绿灯行](https://v.pptv.com/show/2uVx7la8LGrNS7M.html?rcc_id=wap_2093)，[解说](https://www.ixigua.com/6847878217974579720?logTag=Zdxrs-fS0UxGlDBoJ7tyv)， 90年代普通人的生存法则与处事则学
+  - [站直喽别趴下](https://vip.1905.com/play/1463064.shtml?__hz=da8ce53cf0240070&api_source=jrtt_filmadd)，[解说](https://www.ixigua.com/6807188646051971591?logTag=wsJbWg7w9ej-ACyb1XBio)，一个作家搬到了新分配的房子里，这里有两个邻居，一个是小领导，一个是个地痞流氓一样的胖子，生活鸡飞狗跳，几家人的生活也随着社会的剧烈变化变动着; 隐喻改革开放背景下文化人+政府官员被暴发户挤走
+
 ## 地理文化
 
 - [隐秘中国](https://www.bilibili.com/bangumi/play/ep244420)，三集
