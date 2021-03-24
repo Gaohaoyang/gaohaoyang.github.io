@@ -18,6 +18,7 @@ tags: jekyll markdown 插件 github
 ## markdown编辑环境
 
 - 【2021-3-24】[Typora+PicGo+Gitee笔记方案](https://blog.csdn.net/lin455989875/article/details/104621967)
+- [Typora+PicGo+Github/Gitee搭建免费稳定的图床](https://www.jianshu.com/p/a1e2cf01e05f)，github图床设置，gitee
 - Markdown是一门易于上手能帮助作者专心写作的文档编辑语言，它的好处太多了，建议想自己动手做笔记写博客的朋友都可以学一学，10分钟上手，从此不用在为排版烦恼。
    - [Typora](https://www.typora.io/)是一款优雅的markdown编辑器，所见即所得的编辑方式让我爱不释手，也推荐给大家。
    - [Gitee](https://gitee.com/)是国内版的Github，功能跟Github基本一样，主要是在国内访问非常快，作为图床和笔记文件存放仓库非常合适。
