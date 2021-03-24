@@ -15,6 +15,16 @@ tags: jekyll markdown 插件 github
 - 使用jekyll搭建github静态页面
 - 汇总各类小技巧
 
+## markdown编辑环境
+
+- 【2021-3-24】[Typora+PicGo+Gitee笔记方案](https://blog.csdn.net/lin455989875/article/details/104621967)
+- Markdown是一门易于上手能帮助作者专心写作的文档编辑语言，它的好处太多了，建议想自己动手做笔记写博客的朋友都可以学一学，10分钟上手，从此不用在为排版烦恼。
+   - [Typora](https://www.typora.io/)是一款优雅的markdown编辑器，所见即所得的编辑方式让我爱不释手，也推荐给大家。
+   - [Gitee](https://gitee.com/)是国内版的Github，功能跟Github基本一样，主要是在国内访问非常快，作为图床和笔记文件存放仓库非常合适。
+   - [PicGo](https://github.com/Molunerfinn/PicGo/releases)实现自动上传图片并返回markdown格式的图片url，这是自动上传的，也就是在Typora中插入图片就自动帮你上传替换图片的url，对于我们用户是透明的，十分舒服。
+- [原文链接](https://blog.csdn.net/lin455989875/article/details/104621967)
+
+
 ## 技巧汇总
 
 ### jupyter notebook
@@ -180,6 +190,7 @@ $$f \left( x _ { n + 1 } \right) - f \left( x _ { n } \right) = f ^ { \prime } \
 
 
 ---
+
 
 ### 脑图嵌入
 - processon
