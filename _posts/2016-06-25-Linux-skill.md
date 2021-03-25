@@ -313,7 +313,7 @@ git merge 分支名称 # 合并分支
 git checkout [file]
 # 在commit之后撤销修改的情况下：
 # 重置到上一次暂存区版本
-git reset --hard
+git reset --hard [版本号]
 # 或者不管的情况下直接重新修改代码再commit一次
 # 或者通过使用git log查看版本号后回退到暂存区的某个版本
 git reset [版本号]
@@ -323,13 +323,15 @@ git log # 查看历史提交信息,
 git reset --soft 19462f6f46cf4cbc211d366359afac0c17a7c190
 # 注意 --hard 参数会抛弃当前工作区的修改
 # 使用 --soft 参数的话会回退到之前的版本，但是保留当前工作区的修改，可以重新提交
-
+git push  --forced # 远程推送的话
 # 更新master → release分支的操作步骤
 git branch release # 创建release分支，用于上线
 git checkout release # 切换到release分支
 git merge master -m '合并到release分支' # 合并master到本地
 git push origin release # 同步到远程分支
-
+# 撤销merge操作
+git revert 【方法二撤销merge时提交的commit的版本号，这里是88edd6d】
+git revert -m 【要撤销的那条merge线的编号，从1开始计算（怎么看哪条线是几啊？）】 【merge前的版本号】
 
 # 【2020-8-21】
 git config --list 
