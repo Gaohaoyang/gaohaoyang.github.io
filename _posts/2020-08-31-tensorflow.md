@@ -14,7 +14,18 @@ mathjax: true
 
 # 总结
 
-【2020-8-31】[30天吃掉那只TensorFlow2](https://github.com/lyhue1991/eat_tensorflow2_in_30_days)
+- 【2020-8-31】[30天吃掉那只TensorFlow2](https://github.com/lyhue1991/eat_tensorflow2_in_30_days)，[20天吃掉那只Pytorch](https://jackiexiao.github.io/eat_pytorch_in_20_days/)
+- [入门级解读：小白也能看懂的TensorFlow介绍](https://www.toutiao.com/a6389412632331419906/),日本东京 TensorFlow 聚会联合组织者 Hin Khor 所写的 TensorFlow 系列介绍
+
+## 深度学习框架
+
+- 2018：TensorFlow 碾压 PyTorch. Jeff Hale 的第一份调研结果发布于 2018 年 9 月。他在那次调研中发现，TensorFlow 是当时的绝对冠军。在 GitHub 活跃度、谷歌搜索量、Medium 文章数、亚马逊书籍和 arXiv 论文等维度上所占的比重都是最大的。此外，TensorFlow 还拥有最多的开发者用户，相关的网上职位描述也是最多的。
+- ![](https://p1-tt.byteimg.com/origin/pgc-image/01cda030aefa419baf834cd77c19f169.png?from=pc)
+- 2019：PyTorch 火力全开，TensorFlow 增长乏力
+2019 年 4 月，Jeff Hale 发布了第二份调查结果。这次，他调研了几个框架在过去 6 个月（此次调研与上次调研之间的时间间隔）里的增长情况。结果发现，TensorFlow 仍然是当时需求量最大、增长最快的框架，但 PyTorch 也不容小觑，在过去的六个月增速超过了原来的第二名 Keras。
+- ![](https://p6-tt.byteimg.com/origin/pgc-image/8320537b60dc4ccca8f3c4b85a38328b?from=pc)
+- 2020：PyTorch 顶会独领风骚，职场优势追赶 TensorFlow
+
 
 ## Tensorflow v.s. Pytorch
 
@@ -28,9 +39,20 @@ mathjax: true
     - 3，TensorFlow2和Pytorch实际上整体风格已经非常相似了，学会了其中一个，学习另外一个将比较容易。两种框架都掌握的话，能够参考的开源模型案例更多，并且可以方便地在两种框架之间切换。
 - Keras库在2.3.0版本后将不再更新，用户应该使用tf.keras
 
-
-
 # Tensorflow介绍
+
+## TensorFlow历史
+
+- 2015年11月9日，Google Research 发布了文章：TensorFlow - Google’s latest machine learning system, open sourced for everyone，正式宣布其新一代机器学习系统开源。
+- 2016年4月13日，TensorFlow v0.8发布，提供分布式计算支持。
+- 2016年4月29日，开发AlphaGo的DeepMind宣布从Torch7平台转向TensorFlow。
+- 2016年4月12日，基于TensorFlow的世界最准确的语法解析器SyntaxNet宣布开源。
+- 2016年6月27日，TensorFlow v0.9发布，提高对移动设备的支持。
+- 2016年8月30日，TF-Slim——TensorFlow的高层库发布，用户可以更简单快速地定义模型。
+- 2017年2月15日，TensorFlow v1.0发布，提高了速度和灵活性，并且承诺提供稳定的Python API。
+- 2019年10月1日，TensorFlow在经历七个多月(2019年3月1日-2019年10月1日)的2.0 Alpha 版本的更新迭代后发布 2.0 正式版
+
+## TensorFlow基础知识
 
 - [TensorFlow](https://www.tensorflow.org/get_started/) 是一种采用数据流图（data flow graphs），用于数值计算的开源软件库。
 - 其中 Tensor 代表传递的数据为张量（多维数组），Flow 代表使用计算图进行运算。
@@ -57,6 +79,7 @@ mathjax: true
     - **稀疏张量**：tf.SparseTensor
 - **张量**是计算图执行运算的基本载体
     - ![](https://pic3.zhimg.com/80/v2-d8a71cabf42889643b6c5204e57f526a_720w.jpg)
+    - ![](https://p6-tt.byteimg.com/origin/pgc-image/8cdc0abf5d8e4f96ae4f694bc63e7149?from=pc)
     - 零阶张量就是我们熟悉的标量数字，它仅仅只表达了量的大小或性质而没有其它的描述。
     - 一阶张量即我们熟悉的向量，它不仅表达了线段量的大小，同时还表达了方向。
     - 一般来说二维向量可以表示平面中线段的量和方向，三维向量和表示空间中线段的量和方向。
@@ -147,6 +170,9 @@ train = tf.train.GradientDescentOptimizer(learning_rate=0.01).minimize(cost)
 
 ## Tensorboard使用
 
+- 理解训练过程、调试和优化TensorFlow程序，TensorFlow团队开发了一套名为TensorBoard的可视化工具，它是一套可以通过浏览器运行的Web应用程序。TensorBoard可用于可视化TensorFlow计算图，绘制有关计算图运行结果的量化指标，并显示其他数据（如通过它的图像）
+- ![](https://p3-tt.byteimg.com/origin/pgc-image/45b05322178c442f99b39199e17c1d55?from=pc)
+
 - 5个步骤
 
 ```python
@@ -171,6 +197,12 @@ tensorboard —logdir=./logs/xor_logs # server
 # 访问：http://127.0.0.1:7007
 
 ```
+
+- TensorBoard 常用API
+  - ![](https://p3-tt.byteimg.com/origin/pgc-image/12d38976fa274af69a66f711541398b8?from=pc)
+- tensorboard可视化: 通过 TensorFlow 程序运行过程中输出的日志文件可视化 TenorFlow 程序的运行状态d
+  - ![](https://p1-tt.byteimg.com/origin/pgc-image/28ff3eb0d23347b89c3b51ce7062a231?from=pc)
+
 
 ## 单测
 
