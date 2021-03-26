@@ -15,7 +15,7 @@ mathjax: true
 # 说明
 
 - 汇总计算机视觉的应用案例
-- 【2021-3-26】[视频大脑：视频内容理解的技术详解和应用](https://www.infoq.cn/article/vhIXoD0CAqmojPHeKP5f/)
+- 【2021-3-26】[视频大脑：视频内容理解的技术详解和应用](https://www.infoq.cn/article/vhIXoD0CAqmojPHeKP5f/)，[极客时间视频](https://time.geekbang.org/dailylesson/detail/100022917),黄君实 奇虎360 人工智能研究院资深研发科学家
   - ![](https://static001.infoq.cn/resource/image/46/6a/46ccd482ad8a09752bca0a184aaca56a.png)
 - 【2020-11-5】[扫地机器人“离家出走”的真实原因找到了：差个自动驾驶算法](https://www.toutiao.com/i6890749840834167303/)
    - ![](https://p3-tt.byteimg.com/origin/pgc-image/a0dcbab57eeb4e31a1eb74c9de31f6c1?from=pc)
