@@ -27,11 +27,78 @@ mathjax: true
 
 ![](https://static.oschina.net/uploads/space/2017/0206/122129_TqPO_12.jpeg)
 
+
+## 文件
+
+[图解 Linux 最常用命令](https://www.toutiao.com/a6756106065248518664/)
+
+### linux的目录结构
+
+[linux的目录结构](https://p3-tt.byteimg.com/origin/pgc-image/ab3bdd7224a14682a35e60fe1ee802cf?from=pc)
+
+![](https://p3-tt.byteimg.com/origin/pgc-image/ab3bdd7224a14682a35e60fe1ee802cf?from=pc)
+
+下级目录结构
+- bin (binaries)存放二进制可执行文件
+- sbin (super user binaries)存放二进制可执行文件，只有root才能访问
+- etc (etcetera)存放系统配置文件
+- usr (unix shared resources)用于存放共享的系统资源
+- home 存放用户文件的根目录
+- root 超级用户目录
+- dev (devices)用于存放设备文件
+- lib (library)存放跟文件系统中的程序运行所需要的共享库及内核模块
+- mnt (mount)系统管理员安装临时文件系统的安装点
+- boot 存放用于系统引导时使用的各种文件
+- tmp (temporary)用于存放各种临时文件
+- var (variable)用于存放运行时需要改变数据的文件
+
+### 文件权限
+
+![图解 Linux 最常用命令](https://p3-tt.byteimg.com/origin/pgc-image/61a15ef57bd4472e949236049ce0bdda?from=pc)
+
+linux文件权限的描述格式解读
+- r 可读权限，w可写权限，x可执行权限（也可以用二进制表示 111 110 100 --> 764）
+- 第1位：文件类型（d 目录，- 普通文件，l 链接文件）
+- 第2-4位：所属用户权限，用u（user）表示
+- 第5-7位：所属组权限，用g（group）表示
+- 第8-10位：其他用户权限，用o（other）表示
+- 第2-10位：表示所有的权限，用a（all）表示
+
+![](https://p6-tt.byteimg.com/origin/pgc-image/3000314a51c249cab168bc400dd7c5f3?from=pc)
+
+### 文件操作命令
+
+- [文件操作命令](https://p3-tt.byteimg.com/origin/pgc-image/6fe9b14521964698aad985d270cf6d9b?from=pc)
+![](https://p3-tt.byteimg.com/origin/pgc-image/6fe9b14521964698aad985d270cf6d9b?from=pc)
+![](https://p1-tt.byteimg.com/origin/pgc-image/dba5dffe4dcd446987f9b252f0b21c50?from=pc)
+![](https://p1-tt.byteimg.com/origin/pgc-image/80d9bc3abcf34b3eb7efc9655698e6f6?from=pc)
+- 文件压缩
+  - .tar 使用tar命令压缩或解压
+    - tar cvfz archive.tar.gz dir/
+    - tar xvfz. archive.tar.gz
+  - .bz2 使用bzip2命令操作
+  - .gz 使用gzip命令操作
+  - .zip 使用unzip命令解压
+  - .rar 使用unrar命令解压
+  - ![](https://p3-tt.byteimg.com/origin/pgc-image/0ffce7c93b324bed86a2e5dabdf92049?from=pc)
+
 ## 常用命令
 
 - [linux常用命令脑图](https://www.cnblogs.com/hzg110/p/6914963.html)
 
 ![](https://images2015.cnblogs.com/blog/31127/201705/31127-20170530141401383-1329040140.png)
+
+- [linux命令汇总](https://www.toutiao.com/w/i1694976027465741/)
+![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/057f03b362234ad5a702ad00c5f9f797~tplv-obj:975:1280.image?from=post)
+
+### 系统命令
+
+- [系统常用命令](https://p6-tt.byteimg.com/origin/pgc-image/15e52c0fb24a444d99784798bbf6aba3?from=pc)
+  - ![](https://p6-tt.byteimg.com/origin/pgc-image/15e52c0fb24a444d99784798bbf6aba3?from=pc)
+  - ![](https://p1-tt.byteimg.com/origin/pgc-image/2107086df3244564a9ca41908b482da5?from=pc)
+  - ![](https://p1-tt.byteimg.com/origin/pgc-image/300ef1e7824342afb93a24f988bd7151?from=pc)
+- 快捷键
+  - ![](https://p6-tt.byteimg.com/origin/pgc-image/4621e6095a834b078b0a6ced28ebf5cc?from=pc)
 
 ## linux工具
 
@@ -491,6 +558,8 @@ git config --global credential.helper store
 
 ## Vim技能
 
+- vi / vim是Linux上最常用的文本编辑器而且功能非常强大。只有命令，没有菜单，下图表示vi命令的各种模式的切换图。
+  - ![](https://p3-tt.byteimg.com/origin/pgc-image/89e2d5d5a06e40d498f169c6bfde54fb?from=pc)
 - 【2019-07-18】编辑器学习曲线:
    - ![](https://github.com/wqw547243068/wangqiwen/blob/master/other/figure/mmexport1563449034348.jpg?raw=true)
 - [如何使用VIM搭建IDE？](http://harttle.com/2015/11/04/vim-ide.html),[vim键盘图大全](http://www.cnblogs.com/yu-lang/p/5413279.html),[所见即所得，像IDE一样使用vim](https://github.com/yangyangwithgnu/use_vim_as_ide)，![VIM键盘图](http://harttle.com/assets/img/blog/vim-key.png)
