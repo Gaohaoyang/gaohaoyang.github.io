@@ -532,11 +532,8 @@ git reset --soft 19462f6f46cf4cbc211d366359afac0c17a7c190
 git reset –hard [commit] # 将丢弃所有历史记录，并返回到指定的提交
 # 注意 --hard 参数会抛弃当前工作区的修改
 # 使用 --soft 参数的话会回退到之前的版本，但是保留当前工作区的修改，可以重新提交
-<<<<<<< HEAD
 git push  --forced # 远程推送的话
-=======
 git remote add [variable name] [Remote Server Link] # 将本地存储库连接到远程服务器。
->>>>>>> ac7186dcea3fa39d6f1a296e3e0be70aee142a94
 # 更新master → release分支的操作步骤
 git branch release # 创建release分支，用于上线
 git checkout release # 切换到release分支
