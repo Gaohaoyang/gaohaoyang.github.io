@@ -18,6 +18,7 @@ mathjax: true
 
 - 【2021-1-9】架构设计总结，[阿里技术：架构整洁之道](https://mp.weixin.qq.com/s/Kd1T40KZWvdThKC3IN6n-Q)，书籍《架构整洁之道》
   - ![](https://pic2.zhimg.com/80/v2-40885dfb8be237d2e0dcf1b0f75f4c45_720w.jpg)
+- 【2021-3-27】一个通过Web浏览器获取各种权限的[页面](https://permission.site/)，可用于前端测试 
 
 
 # 架构
