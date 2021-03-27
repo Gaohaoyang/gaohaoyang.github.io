@@ -55,7 +55,10 @@ mathjax: true
   - Chit-Chat： seq2seq → 集成上下文 → 集成知识库
   - Task-Oriented：single-domain → multi-domain, contextual → end2end learning
 - 【2021-2-14】[思知机器人](https://www.ownthink.com/)，开源中文知识图谱，[图谱可视化](https://www.ownthink.com/knowledge.html?word=%E9%92%9F%E5%8D%97%E5%B1%B1)，[Demo体验](https://www.ownthink.com/robot.html)，包含实时tts；OwnThink开源了史上最大规模（1.4亿）中文知识图谱，[地址](https://github.com/ownthink/KnowledgeGraphData)
-- 【2021-2-28】[Chatopera](https://www.chatopera.com/)开发的[机器人平台](https://bot.chatopera.com/)使用指南，王海良，Chatopera联合创始人 & CEO，《智能问答与深度学习》作者,[腾讯课堂讲解](https://ke.qq.com/course/2994143?taid=10214570399215583)
+- 【2021-2-28】[Chatopera](https://www.chatopera.com/)开发的[机器人平台](https://bot.chatopera.com/)使用指南，王海良，Chatopera联合创始人 & CEO，《智能问答与深度学习》作者,[腾讯课堂讲解](https://ke.qq.com/course/2994143?taid=10214570399215583)，Chatopera 为企业提供智能对话机器人和智能客服系统解决方案，这些解决方案面向多个行业，支持通用的业务场景，比如客户服务中的多渠道管理、坐席管理、企业知识库和机器人对话管理。同时，Chatopera 面向开发者提供开源软件、云服务、开发者社区和学习资料，帮助开发者掌握智能对话机器人和客服系统的定制化开发技能，进而为企业客户进一步优化软件服务。[保险行业语料库](https://github.com/chatopera/insuranceqa-corpus-zh)，[大盛CRM](https://crm.chatopera.com)
+  - [春松客服](https://docs.chatopera.com/products/cskefu/index.html)，[Demo](https://cc.chatopera.com/)，春松客服是拥有机器人客服、呼叫中心、数据分析、CRM 等功能于一身的新一代客服系统。将智能机器人与人工客服完美融合，同时整合了多种渠道，结合 CRM 系统，为客户打标签，建立客户的人群画像等，帮助企业向客户提供更加专业客服服务。
+  - ![](https://docs.chatopera.com/images/products/trademark-chatopera.png)
+  - ![](https://docs.chatopera.com/images/products/user-service-prod.png)
 - 【2021-2-4】调停机器人（斡旋）
   - [Intervening Ethical Governor for Robot Mediator in Patient-Caregiver Relationship](https://www.youtube.com/watch?v=3-ZST_bGW3Q&feature=youtu.be)，国外的调停机器人，佐治亚理工，应用于医患关系调解，论文：[an intervening ethical governor for a robot mediator in patient-caregiver relationship.](https://www.cc.gatech.edu/ai/robot-lab/online-publications/ICRE15_shim_arkin.pdf)
     - ![](https://spectrum.ieee.org/image/MjkzMjc1OA.jpeg)
