@@ -550,11 +550,11 @@ Matching 的问题就是如何去评估两个个体的相似度，并需要设�
 - 【2021-1-5】[awesome-causality-algorithms](https://github.com/rguo12/awesome-causality-algorithms)
 - [DoWhy工具](https://github.com/microsoft/dowhy) An end-to-end library for causal inference
   - 微软的DoWhy是一个基于python的因果推理和分析库，它试图简化在机器学习应用程序中采用因果推理的过程。受到朱迪亚·珀尔的因果推理演算的启发，DoWhy在一个简单的编程模型下结合了几种因果推理方法，消除了传统方法的许多复杂性。
-  - DoWhy将工作流中的任何因果推理问题建模为四个基本步骤:建模、识别、估计和反驳。
-    - **模型**:DoWhy使用因果关系图对每个问题建模。DoWhy的当前版本支持两种图形输入格式:gml(首选)和dot。图中可能包含了变量之间因果关系的先验知识，但DoWhy不做任何直接的假设。
-    - **标识**:使用输入图，DoWhy根据图形模型找到所有可能的方法来标识期望的因果关系。它使用基于图的标准和do-calculus来寻找潜在的方法，找到能够识别因果关系的表达式
-    - **估计**:DoWhy使用匹配或工具变量等统计方法估计因果效应。DoWhy的当前版本支持基于倾向性分层或倾向性评分匹配的估计方法，这些方法侧重于估计处理任务，以及侧重于估计响应面的回归技术。
-    - **验证**:最后，DoWhy使用不同的robustness methods（鲁棒性方法）验证因果效应的有效性。
+  - DoWhy将工作流中的任何因果推理问题建模为四个基本步骤: **建模**、**识别**、**估计**和**反驳**。
+    - **模型**: DoWhy使用因果关系图对每个问题建模。DoWhy的当前版本支持两种图形输入格式:`gml`(首选)和`dot`。图中可能包含了变量之间因果关系的先验知识，但DoWhy不做任何直接的假设。
+    - **标识**: 使用**输入图**，DoWhy根据图形模型找到所有可能的方法来标识期望的因果关系。它使用基于图的标准和do-calculus来寻找潜在的方法，找到能够识别因果关系的表达式
+    - **估计**: DoWhy使用匹配或工具变量等统计方法估计因果效应。DoWhy的当前版本支持基于倾向性分层或倾向性评分匹配的估计方法，这些方法侧重于估计处理任务，以及侧重于估计响应面的回归技术。
+    - **验证**: 最后，DoWhy使用不同的robustness methods（鲁棒性方法）验证因果效应的有效性。
   - [Jupyter notebook示例](https://github.com/microsoft/dowhy/blob/master/docs/source/example_notebooks/dowhy_simple_example.ipynb)
   - ![](https://raw.githubusercontent.com/microsoft/dowhy/master/docs/images/dowhy-schematic.png)
 
@@ -602,7 +602,6 @@ res_random=model.refute_estimate(identified_estimand, estimate, method_name="ran
 - 结果
   - ![](http://imgcdn.atyun.com/2019/06/4-6.png)
   - ![](http://imgcdn.atyun.com/2019/06/5-5.png)
-
 
 
 - [justcause](https://github.com/inovex/justcause)
