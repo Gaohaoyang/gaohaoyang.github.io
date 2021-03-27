@@ -27,11 +27,78 @@ mathjax: true
 
 ![](https://static.oschina.net/uploads/space/2017/0206/122129_TqPO_12.jpeg)
 
+
+## 文件
+
+[图解 Linux 最常用命令](https://www.toutiao.com/a6756106065248518664/)
+
+### linux的目录结构
+
+[linux的目录结构](https://p3-tt.byteimg.com/origin/pgc-image/ab3bdd7224a14682a35e60fe1ee802cf?from=pc)
+
+![](https://p3-tt.byteimg.com/origin/pgc-image/ab3bdd7224a14682a35e60fe1ee802cf?from=pc)
+
+下级目录结构
+- bin (binaries)存放二进制可执行文件
+- sbin (super user binaries)存放二进制可执行文件，只有root才能访问
+- etc (etcetera)存放系统配置文件
+- usr (unix shared resources)用于存放共享的系统资源
+- home 存放用户文件的根目录
+- root 超级用户目录
+- dev (devices)用于存放设备文件
+- lib (library)存放跟文件系统中的程序运行所需要的共享库及内核模块
+- mnt (mount)系统管理员安装临时文件系统的安装点
+- boot 存放用于系统引导时使用的各种文件
+- tmp (temporary)用于存放各种临时文件
+- var (variable)用于存放运行时需要改变数据的文件
+
+### 文件权限
+
+![图解 Linux 最常用命令](https://p3-tt.byteimg.com/origin/pgc-image/61a15ef57bd4472e949236049ce0bdda?from=pc)
+
+linux文件权限的描述格式解读
+- r 可读权限，w可写权限，x可执行权限（也可以用二进制表示 111 110 100 --> 764）
+- 第1位：文件类型（d 目录，- 普通文件，l 链接文件）
+- 第2-4位：所属用户权限，用u（user）表示
+- 第5-7位：所属组权限，用g（group）表示
+- 第8-10位：其他用户权限，用o（other）表示
+- 第2-10位：表示所有的权限，用a（all）表示
+
+![](https://p6-tt.byteimg.com/origin/pgc-image/3000314a51c249cab168bc400dd7c5f3?from=pc)
+
+### 文件操作命令
+
+- [文件操作命令](https://p3-tt.byteimg.com/origin/pgc-image/6fe9b14521964698aad985d270cf6d9b?from=pc)
+![](https://p3-tt.byteimg.com/origin/pgc-image/6fe9b14521964698aad985d270cf6d9b?from=pc)
+![](https://p1-tt.byteimg.com/origin/pgc-image/dba5dffe4dcd446987f9b252f0b21c50?from=pc)
+![](https://p1-tt.byteimg.com/origin/pgc-image/80d9bc3abcf34b3eb7efc9655698e6f6?from=pc)
+- 文件压缩
+  - .tar 使用tar命令压缩或解压
+    - tar cvfz archive.tar.gz dir/
+    - tar xvfz. archive.tar.gz
+  - .bz2 使用bzip2命令操作
+  - .gz 使用gzip命令操作
+  - .zip 使用unzip命令解压
+  - .rar 使用unrar命令解压
+  - ![](https://p3-tt.byteimg.com/origin/pgc-image/0ffce7c93b324bed86a2e5dabdf92049?from=pc)
+
 ## 常用命令
 
 - [linux常用命令脑图](https://www.cnblogs.com/hzg110/p/6914963.html)
 
 ![](https://images2015.cnblogs.com/blog/31127/201705/31127-20170530141401383-1329040140.png)
+
+- [linux命令汇总](https://www.toutiao.com/w/i1694976027465741/)
+![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/057f03b362234ad5a702ad00c5f9f797~tplv-obj:975:1280.image?from=post)
+
+### 系统命令
+
+- [系统常用命令](https://p6-tt.byteimg.com/origin/pgc-image/15e52c0fb24a444d99784798bbf6aba3?from=pc)
+  - ![](https://p6-tt.byteimg.com/origin/pgc-image/15e52c0fb24a444d99784798bbf6aba3?from=pc)
+  - ![](https://p1-tt.byteimg.com/origin/pgc-image/2107086df3244564a9ca41908b482da5?from=pc)
+  - ![](https://p1-tt.byteimg.com/origin/pgc-image/300ef1e7824342afb93a24f988bd7151?from=pc)
+- 快捷键
+  - ![](https://p6-tt.byteimg.com/origin/pgc-image/4621e6095a834b078b0a6ced28ebf5cc?from=pc)
 
 ## linux工具
 
@@ -60,11 +127,45 @@ perf既然这么强大，那它的实现原理是什么呢？
 ![](https://p1-tt-ipv6.byteimg.com/img/tos-cn-i-0022/a75094f8b23645fdbc244851528c1c3b~tplv-obj:2664:1542.image?from=post)
 
 
+- nl的功能和cat -n一样，同样是从第一行输出全部内容，并且把行号显示出来
+- more的功能是将文件从第一行开始，根据输出窗口的大小，适当的输出文件内容。当一页无法全部输出时，可以用“回车键”向下翻行，用“空格键”向下翻页。退出查看页面，请按“q”键。另外，more还可以配合管道符“|”（pipe）使用，例如:ls -al | more
+- less的功能和more相似，但是使用more无法向前翻页，只能向后翻。less可以使用【pageup】和【pagedown】键进行前翻页和后翻页，这样看起来更方便。
+- cat的功能是将文件从第一行开始连续的将内容输出在屏幕上。当文件大，行数比较多时，屏幕无法全部容下时，只能看到一部分内容。所以通常使用重定向的方式，输出满足指定格式的内容
+  - cat语法：cat [-n]  文件名 （-n ： 显示时，连行号一起输出）
+- tac的功能是将文件从最后一行开始倒过来将内容数据输出到屏幕上。我们可以发现，tac实际上是cat反过来写。这个命令不常用。
+  - tac语法：tac 文件名。
+
+### tcpdump常用命令
+
+- 用简单的话来定义tcpdump，就是：dump the traffic on a network，根据使用者的定义对网络上的数据包进行截获的包分析工具。 tcpdump可以将网络中传送的数据包的“头”完全截获下来提供分析。它支持针对网络层、协议、主机、网络或端口的过滤，并提供and、or、not等逻辑语句来帮助你去掉无用的信息。
+
+实用命令实例，
+```shell
+#将某端口收发的数据包保存到文件
+sudo tcpdump -i any port 端口 -w 文件名.cap
+# 打印请求到屏幕<br>
+sudo tcpdump -i any port 端口 -Xnlps0
+# 默认启动
+tcpdump
+# 普通情况下，直接启动tcpdump将监视第一个网络接口上所有流过的数据包。
+#监视指定网络接口的数据包
+tcpdump -i eth1
+#如果不指定网卡，默认tcpdump只会监视第一个网络接口，一般是eth0，下面的例子都没有指定网络接口。
+```
+
 ## 任务管理
 
 ### contab使用
 
 - [Linux定时任务Crontab命令详解](https://www.cnblogs.com/intval/p/5763929.html)，[crontab在线测试](https://tool.lu/crontab/)
+- 通过crontab 命令，我们可以在固定的间隔时间执行指定的系统指令或 shell script脚本。时间间隔的单位可以是分钟、小时、日、月、周及以上的任意组合。这个命令非常设合周期性的日志分析或数据备份等工作。
+- 命令参数：
+  - -u user：用来设定某个用户的crontab服务，例如，“-u ixdba”表示设定ixdba用户的crontab服务，此参数一般有root用户来运行。
+  - file：file是命令文件的名字,表示将file做为crontab的任务列表文件并载入crontab。如果在命令行中没有指定这个文件，crontab命令将接受标准输入（键盘）上键入的命令，并将它们载入crontab。
+  - -e：编辑某个用户的crontab文件内容。如果不指定用户，则表示编辑当前用户的crontab文件。
+  - -l：显示某个用户的crontab文件内容，如果不指定用户，则表示显示当前用户的crontab文件内容。
+  - -r：从/var/spool/cron目录中删除某个用户的crontab文件，如果不指定用户，则默认删除当前用户的crontab文件。
+  - -i：在删除用户的crontab文件时给确认提示。
 
 ```shell
 #安装crontab：
@@ -255,11 +356,114 @@ x+y = z\\a=4
 
 ## 基本概念
 
+- Git有四个工作区域：
+  - **工作目录**（Working Directory）
+  - **暂存区**(Stage/Index)
+  - **资源库**(Repository或Git Directory)
+  - **git仓库**(Remote Directory)。
 - ![](https://bbsmax.ikafan.com/static/L3Byb3h5L2h0dHAvd3d3LnJ1YW55aWZlbmcuY29tL2Jsb2dpbWcvYXNzZXQvMjAxNS9iZzIwMTUxMjA5MDEucG5n.jpg)
 - [Git快速入门](https://www.cnblogs.com/polk6/p/git-introduce.html)
    - ![](https://images2017.cnblogs.com/blog/153475/201710/153475-20171013183602293-822234036.png)
+- 文件的四种状态
+  - **Untracked**:未跟踪, 此文件在文件夹中, 但并没有加入到git库, 不参与版本控制. 通过git add 状态变为Staged.
+  - **Staged**:暂存状态. 执行git commit则将修改同步到库中, 这时库中的文件和本地文件又变为一致, 文件为Unmodify状态. 执行git reset HEAD filename取消暂存,文件状态为Modified;
+  - **Mosified**:文件已修改, 仅仅是修改, 并没有进行其他的操作.
+  - **Committed**: 文件已提交修改；
 - [Git文件状态流程图](https://blog.csdn.net/leyangjun/article/details/52540590)
    - ![](https://img-blog.csdn.net/20160918100329572?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+- .git的目录结构：进入隐藏的 .git 目录之后可以看到如上图所示结构
+  - 核心文件： config，objects，HEAD，index，refs 这 5 个文件夹
+
+## 项目中如何选择分支模式
+
+- 【2021-3-26】[Git原理及如何选择分支模式](https://www.toutiao.com/a6858060508738945547/)
+- 在项目开发的过程中，选择一个合适的分支模式来管理代码至为重要，那么如何根据这身的业务特点和团队规模来选择合适的分支模式呢？这部分将对几种主流的Git分支模式进行介绍，下边将介绍TBD（主干开发模式）、Git-Flow模式、Github-Flow和Gitlab-Flow模式。
+- 分支总结: 根据每个项目的实际情况的不同选择不同的分支模式：
+1. git-flow模式对于开发周期长的项目是比较好的选择，可以很好解决新功能开发，版本发布，线上问题修复等问题；
+2. 如项目发布周期短，需持续发布维护，功能较为简单，TBD和GitHub-flow是个不错的选择；
+3. 如果对一些复杂功能的上线前增加一些验证，可选gitlab-flow模式。
+
+还有一些其他的分支策略，比如定义一个主干分支，然后每个成员已自己名字命名的开发分支等等，结合我们的业务需求选择分支策略最为重要。
+
+### TBD(主干开发模式)
+
+- TBD，即**主干开发模式**，所有的开发都在一个开发分支上进行协作开发，只保留一条长期稳定的开发分支，不允许新建任何长期存在的开发分支，任何代码的变更都更新到主干分支上，当需要发布时，建议根据版本号拉一个release分支进行发布，可以通过merge或者cherry pick将代码弄到发布分支上。
+- ![](https://p3-tt.byteimg.com/origin/pgc-image/9469e92a4b7b40ff969a7ca093db91aa?from=pc)
+
+TBD模式注意点：
+1. 因为所有的改动及变更都在主干分支上，所以确保改动足够小，每次的改动都是可控的，能段时间完成验证；
+2. 每次主干分支上的改动能得到快速验证，有完善的团队协作及自动化测试，随时做好上线的准备，避免引主干上的功能缺陷而影响发布。
+
+因为主干开发要求每次变更提交都要小，并且要快速验证完，保证主干是处在可发布状态。对于一些处在开发过程中的特性，如每次变更提交，并非意味着完整特性的完成，为了隔离“特性半成品”对主干的影响，一般会采用特性开关（Feature Toggle）的方式进行隔离。即频繁的代码变更提交，可以先做集成及验证，但是在发布的角度，通过（Feature Toggle）先隐藏相关特性，只有当特性都完成之后，才打开开关，特性完全透出。
+
+TBD模式优点：
+1. 分支少，合并冲突小，实践简单；
+2. 适合持续交付及部署，简单密集需求交付
+
+TBD模式缺点：
+1. 对团队协作及成熟度合集成测试有很高的要求；
+2. 不适合开发一些持续时间长的需求及功能复杂的业务；
+
+### Git-Flow模式
+
+- 随着敏捷开发的广泛使用，越来越多的团队协作完成某一特性或者分别完成不用的用户故事，根据不同的特性或者用户故事来创建开发分支就应运而生。最有代表性的就是Git-Flow模式。
+- Git-Flow 模式很好解决了不同特性之间并行开发需要的工作方式。每一个特性都能同时开工，结合敏捷开发的例子，每个迭代开始时从主干分支拉出一个特性分支，命名结构参考feature/xxx-232，所有关于此特性的开发都在此分支上进行，当开发完成后把特性分支合并回主干分支上，测试通过后进行发布。
+
+Git原理及如何选择分支模式
+![](https://p3-tt.byteimg.com/origin/pgc-image/02fd057c7eed4e6ba7abaded26e5401e?from=pc)
+
+Git-Flow模式一般有以下分支结构：
+- feature分支：开发者进行特性功能开发的分支；
+- develop分支：开发主干分支，包含所有的特性功能；
+- release分支：版本发布分支；
+- master分支：稳定分支，保存最新的已发布代码；
+- hotfix分支：线上问题缺陷修复分支；
+
+工作流程：
+- 在开发者接到一个开发需求时，从develop分支拉一个feature分支进行开发，最好已ID进行命名，避免重复，为了减少后边合入develop的冲突，最好在开始coding前把develop分支合到feature分支上再进行开发；
+- 当在feature分支完成开发并验证通过后，将feature分支合入develop分支；
+- develop分支用于集成功能验证，当集成测试成功后将基于develop分支拉一个release版本分支进行发布，如果在release上测试发现bug则在release上修复，之后将代码合入develop，当上线完成后将release合入master分支进行最新上线代码保存；
+- 如果线上发现bug,则基于master拉一条hotfix分支进行修复，修复完成后将hotfix分支合入master进行发布，最后将hotfix代码也同步到develop上。
+
+注意：对一些已完成的feature分支及hotfix分支进行及时删除。
+
+Git-Flow模式的优点
+1. 特性并行开发，效率高，代码独立；
+2. 支持复杂业务、大团队协同开发；
+3. 支持多版本发布；
+
+Git-Flow模式的缺点
+1. 分支多，合并冲突较为频繁
+2. 需要进行维护分支，对分支代码进行更新
+
+### Github-Flow 模式
+
+- Github-Flow就是简化版的Git-Flow，更轻量，减少分支。对于 GitHub-Flow 来说，发布应该是持续地，当一个版本准备好，它就可以被部署，feature跟hotfix本质上都是一样的，都属于特性分支，并移除了release分支。
+![](https://p6-tt.byteimg.com/origin/pgc-image/62bfda1a1e4049ae8e583ccae319ba97?from=pc)
+
+分支情况如下：
+- 在master分支上的代码都是最新的，可部署的；
+- 在特性分支合到master分支时需要发起Pull Request代码评审，评审后方可合入master；
+- 在master上进行持续版本发布。
+
+优点：
+1. 支持并行开发；
+2. 分支结构简单，有明确的规则定义，持续集成持续部署
+
+缺点：
+1. 对测试要求高，一些功能复杂的需求需要持续长的时间验证或者中断则影响整个计划；
+2. 不能很好的处理一些很紧急的上线需求；
+
+### Gitlab-Flow模式
+
+GitLab-Flow 相比于 GitHub-Flow 来说，在开发侧的区别不大，只是将 pull request 改成了 merge request，而 merge request 的用法与 pull request 类似，都可以做为代码评审、获取反馈意见的一种沟通方式。
+
+最大的区别体现在发布侧，即引入了对应生产环境的 production 分支和对应预发环境的 pre-production 分支（如果有预发环境的话）。这样，master 分支反映的是部署在集成环境上的代码，pre-production 分支反映的是部署在预发环境的代码，production 分支反映的最新部署在生产环境的代码。
+
+当一个特性开发完成，提交 merge request，将特性开发的代码合并到 master，并部署到集成环境进行验证；当验证通过之后，提交 merge reqeust，合并 master 到 pre-production 分支，并部署到预发环境，进行预发环境上验证；当预发环境验证成功之后，再提交 merge request，将 pre-production 分支上的代码合并到 production 分支上。
+
+![](https://p6-tt.byteimg.com/origin/pgc-image/c4cc0d7b45c24ce38aaa19513d893113?from=pc)
+
 
 ## 常用命令
 
@@ -281,6 +485,8 @@ git  pull orgin master # 将本地master拉取到远程仓库origin的master分�
 # 上传本地指定分支到远程仓库
 git push [remote] [branch]
 git push origin master # pull大致同理
+git push –all [variable name] # 将所有分支推送到你的远程存储库。
+git push [variable name] : [branch name] # 删除远程存储库上的分支
 # 查看变更信息或者冲突
 git status
 # 查看提交的历史
@@ -288,14 +494,14 @@ git log
 # 撤销本地修改
 #没有commit到暂存仓库的情况下：
 # 恢复之前上一次暂存区的所有文件到工作区
-git branch #查看分支
-git branch dev #创建分支
+git branch # 查看本地分支
+git branch dev #创建分支dev
 git checkout dev #切换到分支dev
 git branch -r # 查看所有远程分支
 git branch -a # 查看存储库的所有当前分支，包括本地和远程分支。
 git branch -a --merged # 合并到当前分支的所有分支
-git checkout -b dev #创建并切换到分支dev
-git branch -d dev #删除分支
+git checkout -b dev # 创建并切换到分支dev
+git branch -d dev # 删除分支
 git branch -D branch_2 # 删除本地分支，即使尚未合并，这也会删除该分支！
 git push origin dev #提交后，别人才能看到分支
 git checkout -- myfile #从本地仓库恢复文件（用于撤销本地修改）
@@ -303,12 +509,13 @@ git checkout -- myfile #从本地仓库恢复文件（用于撤销本地修改�
 git checkout 
 git checkout 分支名称 # 切换分支
 
-git branch # 查看分支
-git branch -a # 所有分支
-git branch -r # 远程所有分支
+git stash save # 临时存储所有已修改的跟踪文件
+git stash pop # 恢复最近存放的文件。
+git stash list # 列出所有隐藏的变更集。
+git stash drop # 将丢弃最近存放的变更集。
 
 git merge 分支名称 # 合并分支
-
+git tag [commitID] # 用于将标签赋予指定的提交。
 #或者恢复暂存区的指定的某个文件到本地工作区
 git checkout [file]
 # 在commit之后撤销修改的情况下：
@@ -318,12 +525,18 @@ git reset --hard [版本号]
 # 或者通过使用git log查看版本号后回退到暂存区的某个版本
 git reset [版本号]
 
-# 【2020-9-8】
-git log # 查看历史提交信息, 
+# 【2020-9-8】 
+git reset [file] # 取消暂存文件，但保留文件内容
+git reset [commit] # 在指定的提交后撤消所有提交，并在本地保留更改。
 git reset --soft 19462f6f46cf4cbc211d366359afac0c17a7c190
+git reset –hard [commit] # 将丢弃所有历史记录，并返回到指定的提交
 # 注意 --hard 参数会抛弃当前工作区的修改
 # 使用 --soft 参数的话会回退到之前的版本，但是保留当前工作区的修改，可以重新提交
+<<<<<<< HEAD
 git push  --forced # 远程推送的话
+=======
+git remote add [variable name] [Remote Server Link] # 将本地存储库连接到远程服务器。
+>>>>>>> ac7186dcea3fa39d6f1a296e3e0be70aee142a94
 # 更新master → release分支的操作步骤
 git branch release # 创建release分支，用于上线
 git checkout release # 切换到release分支
@@ -347,6 +560,8 @@ git config   --global --unset  user.name # 取消命名
 ssh-keygen -t rsa
 
 # [2020-9-1]
+git log # 查看历史提交信息
+git log –follow [file] # 列出了文件的版本历史记录，包括文件的重命名。
 # git对比分支代码
 git log dev ^master # dev 有， master没有
 git log master ^dev # master有，而dev没有
@@ -356,8 +571,16 @@ git log dev...master # 仅仅查看有什么不一样
 git log --left-right dev...master # 每次提交都在哪个分支上
 # 注意 commit 后面的箭头，根据我们在 –left-right dev…master 的顺序，左箭头 < 表示是 dev 的，右箭头 > 表示是 master的。
 
+git show [commit] # 显示指定提交的元数据和内容更改。
+
 # 【2020-9-10】git免密pull/push，以下命令自动保存密码
 git config --global credential.helper store
+
+git diff # 此命令显示尚未暂存的文件差异
+git diff –staged # 此命令显示暂存区域中的文件与当前最新版本之间的差异
+git diff [first branch] [second branch] # 两个分支之间的差异
+
+git rm [file] # 从你的工作目录中删除文件，然后进行删除。
 
 ```
 
@@ -459,6 +682,8 @@ git config --global credential.helper store
 
 ## Vim技能
 
+- vi / vim是Linux上最常用的文本编辑器而且功能非常强大。只有命令，没有菜单，下图表示vi命令的各种模式的切换图。
+  - ![](https://p3-tt.byteimg.com/origin/pgc-image/89e2d5d5a06e40d498f169c6bfde54fb?from=pc)
 - 【2019-07-18】编辑器学习曲线:
    - ![](https://github.com/wqw547243068/wangqiwen/blob/master/other/figure/mmexport1563449034348.jpg?raw=true)
 - [如何使用VIM搭建IDE？](http://harttle.com/2015/11/04/vim-ide.html),[vim键盘图大全](http://www.cnblogs.com/yu-lang/p/5413279.html),[所见即所得，像IDE一样使用vim](https://github.com/yangyangwithgnu/use_vim_as_ide)，![VIM键盘图](http://harttle.com/assets/img/blog/vim-key.png)

@@ -3,7 +3,7 @@ layout: post
 title:  "文本挖掘实战-Text Mining Implementation"
 date:   2019-05-20 13:00:00
 categories: 实战案例
-tags: 生活大爆炸 NLP 自然语言处理 台词 可视化 身份证 华为 微信 诗歌
+tags: 生活大爆炸 NLP 自然语言处理 台词 可视化 身份证 华为 微信 诗歌 simhash
 excerpt: 深入挖掘分析生活大爆炸（Big Bang）的台词信息，看看各个角色的常用词汇有哪些
 author: 鹤啸九天
 mathjax: true
@@ -95,6 +95,48 @@ b = ['helloworld',"你好吗？",'可以吗','请这里','计算偏差大不大'
 acquaintance(a,b)
 ```
 
+## simhash
+
+- 文本聚类，计算长文本相似度并聚类
+
+```python
+import jieba
+from simhash import Simhash
+import json
+#new = json.loads(df.loc[1]['room_info'])
+#new
+print(df.columns)
+output = open('/home/work/data/mian_out.txt', 'w')
+sim_list = []
+for line in df.loc[:,:].itertuples():
+    #print(line[4])
+    new = json.loads(line[4])
+    #print(new)
+    res = new['overall_review'].get('score', '-')
+    if res != '-':
+        out = [str(res['pass']), str(res['total_score']), 
+           '%s_%s'%(res['language']['score'], res['language']['name']),
+          '%s_%s'%(res['logic']['score'], res['logic']['name']),
+          '%s_%s'%(res['explain_ability']['score'], res['explain_ability']['name']),
+          '%s_%s'%(res['knowledge']['score'], res['knowledge']['name'])]
+    else:
+        out = ['-', '-', '-', '-', '-', '-']
+    # asr的key：['question_order', 'quest_weight', 'quest_score', 'second_category', 'asr_result', 'question_id', 'S3_url', 'tips', 'duration', 'difficulty', 'third_category', 'question_review', 'answer', 'judge_rule', 'std_duration', 'question_content', 'sub_score', 'readtime']
+    #print(new['questions'][0].keys())
+    ans_list = []
+    for item in new['questions']:
+        ans_list.append('&'.join(item['asr_result']['sentences']))
+        #print('\t'.join([str(item['question_id']),str(item['question_order']), str(item['quest_score']), item['question_content'][0], '&'.join(item['asr_result']['sentences'])])) # ['sentences']
+    ans_str = '|'.join(ans_list)
+    words = jieba.lcut(ans_str, cut_all=True)
+    sim = Simhash(words).value
+    sim_list.append([str(line[3]), line[5], new['room_id'],sim])
+    # [agent_id, time, room_id, sim, pass, total_score, s1,s2,s3,s4, ans_str]
+    #print('\t'.join([str(line[3]), line[5], new['room_id'], str(sim)]+out+[ans_str]))
+    output.writelines('\t'.join([str(line[3]), line[5], new['room_id'], str(sim)]+out+[ans_str])+'\n')
+output.close()
+print(len(sim_list))
+```
 
 # Big Bang台词分析
 
@@ -131,6 +173,7 @@ acquaintance(a,b)
 - [生活大爆炸(TBBT)：台词爬取、词云生成与NLP分析](https://blog.csdn.net/Tele_Anti_Nomy/article/details/88092709)
 
 ## 数据准备
+
 - 下载数据，将json格式加载进来
 - 发现一共202篇台词
 

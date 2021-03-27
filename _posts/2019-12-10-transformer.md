@@ -27,10 +27,116 @@ mathjax: true
    - 提升长程依赖的学习能力
    - 层次化建模
 
+## Seq2seq结构
 
-## 背景
+### Seq2Seq 模型
 
-- 机器翻译是从RNN开始跨入神经网络机器翻译时代的，几个比较重要的阶段分别是: Simple RNN, Contextualize RNN, Contextualized RNN with attention, Transformer(2017)
+参考：[Seq2Seq 模型详解](https://www.jianshu.com/p/80436483b13b)
+
+- Seq2Seq 是一种RNN模型，使用的是 **Encoder-Decoder**结构，可以理解为一种 N * M 的模型
+  - 即 **Encoder** 长度可以为N，**Decoder** 长度可以为M。多对多的序列结构
+  - **Encoder** 用于编码序列的信息，将任意长度的序列信息编码到一个向量 **c** 里。
+  - 而 **Decoder** 是解码器，解码器得到上下文信息向量 **c** 之后可以将信息解码，并输出为序列。
+
+### 常见的 Seq2Seq 结构
+
+Seq2Seq的模型结构也有很多种，常见的有下面几种，**Encoder**都相同，区别主要在于**Decoder**
+
+#### 第一种Seq2Seq
+
+Encoder & Decoder：
+
+![img](https://gitee.com/summerrat/images/raw/master/img/20030902-f3b85bfbaae7d8b1.png)
+
+单看 Decoder：
+
+![img](https://gitee.com/summerrat/images/raw/master/img/20030902-6f461e520d31cb27.png)
+
+这种**Decoder**比较简单：
+
+- 将上下文向量 **c** 当成是 RNN 的初始隐藏状态输入到 RNN 中
+- 后续只接受上一个神经元的隐藏层状态 **h'** 而不接收其他的输入 **x**
+
+
+#### 第二种Seq2Seq
+
+Encoder & Decoder：
+
+![img](https://gitee.com/summerrat/images/raw/master/img/20030902-479f2b802293c8c5.png)
+
+单看 Decoder：
+
+![img](https://gitee.com/summerrat/images/raw/master/img/20030902-177f158afe2216bf.png)
+
+-  Decoder 结构有了自己的初始隐藏层状态 **h'0**
+-  不再把上下文向量 **c** 当成是 RNN 的初始隐藏状态，而是当成 RNN 每一个神经元的输入
+
+#### 第三种Seq2Seq
+
+Encoder & Decoder：
+
+![img](https://gitee.com/summerrat/images/raw/master/img/20030902-98c17bbce81a14ba.png)
+
+单看Decoder：
+
+![img](https://gitee.com/summerrat/images/raw/master/img/20030902-840078e115f43250.png)
+
+- Decoder 结构和第二种类似，但是在输入的部分多了上一个神经元的输出 **y'**。
+- 即每一个神经元的输入包括：上一个神经元的隐藏层向量 **h'**，上一个神经元的输出 **y'**，当前的输入 **c** (Encoder 编码的上下文向量)。
+- 对于第一个神经元的输入 **y'**0，通常是句子起始标志位的 embedding 向量。
+
+### Seq2Seq的优化技巧
+
+#### 1、Teacher Forcing
+
+Teacher Forcing 用于训练阶段，预测过程是都是一样的。
+
+训练时：如果不使用 Teacher Forcing，输入包括了上一个神经元的输出 **y'**。如果上一个神经元的输出是错误的，则下一个神经元的输出也很容易错误，导致错误会一直传递下去。
+
+![img](https://gitee.com/summerrat/images/raw/master/img/20030902-a7cf394b2d40a052.png)
+
+使用 Teacher Forcing，神经元直接使用正确的输出作为当前神经元的输入。
+
+![img](https://gitee.com/summerrat/images/raw/master/img/20030902-1ed6e410da784c5e.png)
+
+#### 2、Attention
+
+- 上面的Seq2Seq 模型中，**Encoder** 总是将源句子的所有信息编码到一个固定长度的上下文向量 **c** 中，然后在 **Decoder** 解码的过程中向量 **c** 都是不变的。这存在着不少缺陷：
+  - 对于比较长的句子，很难用一个定长的向量 **c** 完全表示其意义。
+  - RNN 存在长序列梯度消失的问题，只使用最后一个神经元得到的向量 **c** 效果不理想。
+  - 人在阅读文章的时候，会把注意力放在当前的句子上，这种结构没有利用这点。
+- 引入attention 机制，就是一种将模型的注意力放在当前翻译单词上的一种机制。
+  - 例如翻译 "I have a cat"，翻译到 "我" 时，要将注意力放在源句子的 "I" 上，翻译到 "猫" 时要将注意力放在源句子的 "cat" 上。
+
+使用了 Attention 后：
+
+- **Decoder** 的输入就不是固定的上下文向量 **c** 了
+- 而是会根据当前翻译的信息，计算当前的 **c**
+
+![img](https://gitee.com/summerrat/images/raw/master/img/20030902-3caa6122e9b613c5.png)
+
+- Attention 需要保留 Encoder 每一个神经元的隐藏层向量 **h**
+- 然后 Decoder 的第 t 个神经元要根据上一个神经元的隐藏层向量 **h'**t-1 计算出当前状态与 Encoder 每一个神经元的相关性 **e**t
+- **e**t 是一个 N 维的向量 (Encoder 神经元个数为 N)，若 **e**t 的第 i 维越大，则说明当前节点与 Encoder 第 i 个神经元的相关性越大。**e**t 的计算方法有很多种，即相关性系数的计算函数 a 有很多种：
+  - ![img](https://gitee.com/summerrat/images/raw/master/img/20030902-d6ef2d1879205693.png)
+- 上面得到相关性向量 **e**t 后，需要进行归一化，使用 softmax 归一化。然后用归一化后的系数融合 Encoder 的多个隐藏层向量得到 Decoder 当前神经元的上下文向量 **c**t：
+  - ![img](https://gitee.com/summerrat/images/raw/master/img/20030902-0b435754763ef850.png)
+
+#### 3、beam search
+
+- beam search 方法不用于训练的过程，而是用在测试的。训练的时候因为知道正确答案，不需要再进行搜索。
+  - 在每一个神经元中，我们都选取当前输出概率值最大的 **top k** 个输出传递到下一个神经元。
+  - 下一个神经元分别用这 k 个输出，计算出 L 个单词的概率 (L 为词汇表大小)，然后在 kL 个结果中得到 **top k** 个最大的输出，重复这一步骤。后面会不断重复这个过程，直到遇到结束符或者达到最大长度为止。最终输出得分最高的2个序列。
+- 例如
+  - 预测的时候，假设词表大小为3，内容为a，b，c。beam size是2，decoder解码的时候：
+    - 1： 生成第1个词的时候，选择概率最大的2个词，假设为a,c,那么当前的2个序列就是a和c。
+    - 2：生成第2个词的时候，我们将当前序列a和c，分别与词表中的所有词进行组合，得到新的6个序列aa ab ac ca cb cc，计算每个序列的得分并选择得分最高2个序列，作为新的当前序列，假如为aa cb。
+    - 3：后面会不断重复这个过程，直到遇到结束符或者达到最大长度为止。最终输出得分最高的2个序列。
+
+
+## RNN系列
+
+- **机器翻译**是从RNN开始跨入神经网络机器翻译时代的，几个比较重要的阶段分别是: **Simple RNN**, **Contextualize RNN**, **Contextualized RNN with attention**, **Transformer**(2017)
 
 ### Simple RNN
 
@@ -555,17 +661,11 @@ class ScaledDotProductAttention(nn.Module):
 
 Multi-head attention允许模型加入不同位置的表示子空间的信息。
 
-Multi-head attention的公式如下：
+Multi-head attention的公式如下：$$\text{MultiHead}(Q,K,V) = \text{Concat}(\text{head}_ 1,\dots,\text{head}_ h)W^O$$
 
-$$\text{MultiHead}(Q,K,V) = \text{Concat}(\text{head}_ 1,\dots,\text{head}_ h)W^O$$
+其中，$\text{head}_ i = \text{Attention}(QW_i^Q,KW_i^K,VW_i^V)$
 
-其中，
-
-$\text{head}_ i = \text{Attention}(QW_i^Q,KW_i^K,VW_i^V)$
-
-论文里面，$d_{model}=512$，$h=8$。所以在scaled dot-product attention里面的
-
-$d_q = d_k = d_v = d_{model}/h = 512/8 = 64$
+论文里面，$d_{model}=512$，$h=8$。所以在scaled dot-product attention里面的 $d_q = d_k = d_v = d_{model}/h = 512/8 = 64$
 
 ### Multi-head attention的实现
 
@@ -642,13 +742,9 @@ class MultiHeadAttention(nn.Module):
 ![residual_conn](http://blog.stupidme.me/wp-content/uploads/2018/09/residual_connection.png)  
 *Figure 5. Residual connection.*  
 
-假设网络中某个层对输入`x`作用后的输出是$F(x)$，那么增加**residual connection**之后，就变成了：
+假设网络中某个层对输入`x`作用后的输出是$F(x)$，那么增加**residual connection**之后，就变成了：$F(x)+x$
 
-$F(x)+x$
-
-这个`+x`操作就是一个**shortcut**。
-
-那么**残差结构**有什么好处呢？显而易见：因为增加了一项$x$，那么该层网络对x求偏导的时候，多了一个常数项$1$！所以在反向传播过程中，梯度连乘，也不会造成**梯度消失**！
+这个`+x`操作就是一个**shortcut**。那么**残差结构**有什么好处呢？显而易见：因为增加了一项$x$，那么该层网络对x求偏导的时候，多了一个常数项$1$！所以在反向传播过程中，梯度连乘，也不会造成**梯度消失**！
 
 所以，代码实现residual connection很非常简单：
 
@@ -801,6 +897,7 @@ def sequence_mask(seq):
 至此，mask相关的问题解决了。
 
 ## Positional encoding是什么？
+
 好了，终于要解释**位置编码**了，那就是文字开始的结构图提到的**Positional encoding**。
 
 就目前而言，我们的Transformer架构似乎少了点什么东西。没错，就是**它对序列的顺序没有约束**！我们知道序列的顺序是一个很重要的信息，如果缺失了这个信息，可能我们的结果就是：所有词语都对了，但是无法组成有意义的语句！

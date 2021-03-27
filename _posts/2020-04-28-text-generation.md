@@ -2,8 +2,8 @@
 layout: post
 title:  "文本生成-Text Generation"
 date:   2020-04-28 21:39:00
-categories: 深度学习
-tags: 深度学习 NLP GAN Seq2seq 对话系统 文本评价
+categories: 自然语言处理
+tags: 深度学习 NLP GAN Seq2seq 对话系统 文本评价 BLEU
 excerpt: 深度学习在NLP子领域——文本生成的应用汇总，如seq2seq、GAN系列
 author: 鹤啸九天
 mathjax: true
@@ -218,6 +218,11 @@ mathjax: true
 
 
 # 评价方法
+
+- 【2021-3-25】文本生成评估方法综述：[Evaluation of Text Generation: A Survey](https://www.aminer.cn/pub/5ef9c12e91e011b84e1f8bfd/evaluation-of-text-generation-a-survey)
+  -  (1) human-centric evaluation metrics
+  -  (2) automaticmetrics that require no training
+  - (3) machine-learned metrics. 
 
 - NLG常用metrics：
   - BLEU: ngram precision；长度类似

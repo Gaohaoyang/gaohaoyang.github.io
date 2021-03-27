@@ -14,7 +14,7 @@ mathjax: true
 
 # 总结
 
-- 【2021-2-3】[机器学习的可解释性](https://mp.weixin.qq.com/s/CYN5ZJhkdpI0DSg_9EapEQ)，[知乎地址](https://zhuanlan.zhihu.com/p/334636096)，[Github地址](https://github.com/floatingCatty/BAAI-Monthly-)，【知源月旦】团队完成的首篇综述，参考了Gilpin Leilani H.,et al. 发表在DSAA2018 上的文章
+- 【2021-2-3】[机器学习的可解释性](https://mp.weixin.qq.com/s/CYN5ZJhkdpI0DSg_9EapEQ)，[知乎地址](https://zhuanlan.zhihu.com/p/334636096)，[Github地址](https://github.com/floatingCatty/BAAI-Monthly-)，【知源月旦】团队完成的首篇综述，参考了Gilpin Leilani H.,et al. 发表在DSAA2018 上的文章，[ppt](https://event-cdn.baai.ac.cn/20210202/interpretability-slides-yzhang.pdf), 作者[视频讲解](https://hub.baai.ac.cn/activity/details/129)，南方科技大学张宇博士（唐珂教授2017级在读博士）发表一篇神经网络可解释性综述《A Survey on Neural Network Interpretability》
 
 # 一、机器学习的可解释性研究概述
  
