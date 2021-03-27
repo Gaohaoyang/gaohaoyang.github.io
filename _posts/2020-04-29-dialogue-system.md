@@ -14,6 +14,7 @@ mathjax: true
 
 # 总结
 
+- 【2021-3-27】【开放域长式问答的进展与挑战】《[Progress and Challenges in Long-Form Open-Domain Question Answering-Google AI Blog](https://ai.googleblog.com/2021/03/progress-and-challenges-in-long-form.html)》，论文 paper:《[Hurdles to Progress in Long-form Question Answering](https://arxiv.org/abs/2103.06332)》
 - 【2021-3-25】[对话的囧境？](https://mp.weixin.qq.com/s/UHfw3uaDM_vQFUCmqX0gTA) 
   - 人工智能对话系统一直是让我又**爱**又**恨**的存在，爱是因为一想到它的终极NB形态就令人兴奋，觉得自己在从事一门可以改变世界的技术，恨是因为现有的技术与期待相差太远，一旦框架搭起来了就陷入解case的死循环，让我怀疑我是谁我在干什么，我有生之年能看到强人工智能吗？？？
 - 【2020-05-16】[如何实现聊天机器人？ChatBot技术栈](https://zhuanlan.zhihu.com/p/141454891)
