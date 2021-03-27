@@ -274,7 +274,7 @@ mathjax: true
 - p(y\|x)和p(y\|do(x))不一样，p(y\|do(x))实际上和x无关
 - p(y\|do(x))实际上就是一个普通的条件分布，但它不是基于 p(x,z,y,…)的，而是pdo(X=x)(x,z,y,…)。这里的pdo(X=x)是如果实际进行干预的话会观察到的数据的联合分布。所以p(y\|do(x))是从随机对照试验或A/B测试收集到的数据中学习的条件分布，其中x由实验者控制。
 - 即便不能从随机实验中直接估计p(y\|do(x))，这个分布也是实际存在的。所以因果推断和do-calculus的主要观点是：
-  - 如果我不能在随机对照实验中直接测量p(y|do(x))，那我是否可以根据我在受控实验之外观察到的数据来估计它？
+  - 如果我不能在随机对照实验中直接测量p(y\|do(x))，那我是否可以根据我在受控实验之外观察到的数据来估计它？
   - ![](https://www.inference.vc/content/images/2018/05/Causality_-building-a-bridge--1-.png)
   - ![](https://www.inference.vc/content/images/2018/05/Causality_-do-calculus-estimand--1-.png)
 - 参考作者：[骑驴看热闹](https://www.zhihu.com/question/283897078/answer/756671333)，英文原文：[ML beyond Curve Fitting: An Intro to Causal Inference and do-Calculus](https://www.inference.vc/untitled/)
