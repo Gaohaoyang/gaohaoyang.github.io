@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "机器阅读理解-machine-reading-comprehension"
+title:  "机器阅读理解-Machine-Reading-Comprehension"
 date:   2021-03-28 00:00:00
 categories: 自然语言处理 
 tags:  阅读理解 神经网络
@@ -14,8 +14,7 @@ mathjax: true
 
 # 总结
 
-## 阅读理解
-
+- 【2021-3-29】机器阅读理解综述（一）
 - 【2021-3-14】机器阅读理解（Machine Reading Comprehension，MRC）是一种利用算法使计算机理解文章语义并回答相关问题的技术。学者 C. Snow 在 2002 年的一篇论文中定义阅读理解是“通过交互从书面文字中提取与构造文章语义的过程”。而机器阅读理解的目标是利用人工智能技术，使计算机具有和人类一样理解文章的能力。
   - 机器阅读理解任务样例
   - ![](https://oscimg.oschina.net/oscnet/up-df08aa492c833ac4e2dadc30e01976e24d3.png)
