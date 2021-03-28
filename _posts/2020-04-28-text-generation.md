@@ -14,6 +14,8 @@ mathjax: true
 
 # 总结
 
+- 【2021-3-27】【可控的神经网络文本生成】《[Controllable Neural Text Generation](https://lilianweng.github.io/lil-log/2021/01/02/controllable-neural-text-generation.html)》by Lilian Weng 
+- 【2021-3-26】【用于生成阅读理解问题的NLP系统】'question_generator - An NLP system for generating reading comprehension questions' by Adam Montgomerie [GitHub](https://github.com/AMontgomerie/question_generator)
 - 【2020-7-6】清华孙茂松：九歌多样化古典诗歌机器写作模型[MixPoet](http://nlp.csai.tsinghua.edu.cn/news/)开源
 - 【2020-9-21】文本生成系列文章
   - [文本生成12：4种融合知识的text generation](https://zhuanlan.zhihu.com/p/133266258)
