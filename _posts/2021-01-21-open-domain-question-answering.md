@@ -3,7 +3,7 @@ layout: post
 comments: true
 title: "如何构建开放域问答系统-How to Build an Open-Domain Question Answering System?"
 date: 2021-01-21 00:18:00
-tags: nlp language-model attention transformer
+tags: nlp language-model attention transformer 对话系统 问答
 categories: 深度学习
 excerpt: 开放域对话系统的最新进展
 author: lil-log
