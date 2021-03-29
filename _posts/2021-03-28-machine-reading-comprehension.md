@@ -46,6 +46,12 @@ mathjax: true
 
 # 简介
 
+**机器阅读理解**（MachineReading Comprehension, MRC）任务主要是指让机器根据给定的文本回答与文本相关的问题，以此来衡量机器对自然语言的理解能力。这一任务的缘起可以追溯到 20 世纪 70 年代，但是受限于小规模数据集和基于规则的传统方法，机器阅读理解系统在当时并不能满足实际应用的需求。
+
+这种局面在 2015 年发生了转变，主要归功于以下两点：
+- 1）基于深度学习的机器阅读理解模型（神经机器阅读理解）的提出，这类模型更擅长于挖掘文本的上下文语义信息，与传统模型相比效果提升显著；
+- 2）一系列大规模机器阅读理解数据集的公布，如 CNN & Daily Mail、SQuAD、MS MARCO等，这些数据集使得训练深度神经模型成为可能，也可以很好的测试模型效果。神经机器阅读理解在近几年逐渐受到越来越多的关注，成为了学术界和工业界的研究热点。
+
 - 机器阅读理解包括 4 种比较常见的任务：完形填空，多项选择，片段抽取，自由作答。
    - `完形填空`：在文章中隐藏一些单词，然后预测被隐藏的单词。
    - `多项选择`：给定一个问题、一段背景文字和一些候选答案，让模型判断哪些是正确答案。
@@ -66,7 +72,7 @@ mathjax: true
    - ![](https://blog.floydhub.com/content/images/2019/04/coverage.gif)
 
 - [阅读理解进阶三部曲——关键知识、模型性能提升、产品化落地](https://www.toutiao.com/i6630964969640821262/?tt_from=mobile_qq&utm_campaign=client_share&timestamp=1544680034&app=news_article&utm_source=mobile_qq&iid=53104048203&utm_medium=toutiao_android&group_id=6630964969640821262)
-- 【2021-3-19】国防科技大学团队2019年在arXiv上发布了预印版综述文章 Neural Machine Reading Comprehension: Methods and Trends。[神经机器阅读理解最新综述：方法和趋势](https://www.sohu.com/a/329167296_500659)
+- 【2021-3-19】国防科技大学团队2019年在arXiv上发布了预印版综述文章 [Neural Machine Reading Comprehension: Methods and Trends](https://www.aminer.cn/pub/5e5e19db93d709897ce8cf11/neural-machine-reading-comprehension-methods-and-trends)。[神经机器阅读理解最新综述：方法和趋势](https://www.sohu.com/a/329167296_500659)
 
 SQuAD 2.0[67]是一个具有代表性的MRC数据集，问题是无法回答。基于2016年发布的前一个版本，《SQuAD 2.0》有超过5万个由群众工人创造的无法回答的问题。
 - 按照构建难易程度（Construction）、对自然语言理解的测试水平（Understanding）、答案灵活程度（Flexibility）、评价难易程度（Evaluation）和实际应用贴合程度（Application）等五个维度出发，对四类常见的机器阅读理解任务进行比较，依据每个任务在不同维度上的表现，得分最低 1 分、最高 4 分
@@ -159,13 +165,13 @@ SQuAD 2.0[67]是一个具有代表性的MRC数据集，问题是无法回答。�
 *   **Context-Question Interaction**：context和question之间的相关性在预测答案中起着重要作用。有了这些信息，机器就能够找出context中哪些部分对回答question更为重要。为了实现该目标，在该模块中广泛使用attention机制，单向或双向，以强调与query相关的context的部分。为了充分提取它们的相关性，context和question之间的相互作用有时会执行多跳，这模拟了人类理解的重读过程。
 *   **Answer Prediction**：基于上述模块获得的信息输出最终答案。因为MRC任务根据答案形式分为了很多种，所以该模块与不同任务相关。对于完形填空，该模块输出context中的一个单词或一个实体；对于多项选择，该模块从候选答案中选择正确答案。
  
-![](https://pic3.zhimg.com/80/v2-239d4adc691bad54ef41c68a4d4aef62_1440w.jpg)
+![](http://5b0988e595225.cdn.sohucs.com/images/20190725/8c416628f8844012ab169e8d0eee7dfd.jpeg)
 
 ## 方法 Methods
  
 有各种各样的方法应用到MRC系统中，如下图所示，接下来会一一介绍。
  
-![](https://pic3.zhimg.com/80/v2-f3427b1b1a004102422218690b6fc35a_1440w.jpg)
+![](http://5b0988e595225.cdn.sohucs.com/images/20190725/b2c82a823e204d0ca592e30a71db5db5.jpeg)
  
 ### Embeddings
 
