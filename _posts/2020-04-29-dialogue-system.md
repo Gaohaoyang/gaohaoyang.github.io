@@ -3,7 +3,7 @@ layout: post
 title:  "对话系统-Dialogue System"
 date:   2020-04-29 21:45:00
 categories: 深度学习
-tags: 深度学习 NLP 对话系统 QA KB-QA 多轮 闲聊 沈向洋 FSM 有限状态机 GPT 陈蕴侬 JSGF 图灵测试 推荐系统
+tags: 深度学习 NLP 对话系统 QA KB-QA 多轮 闲聊 沈向洋 FSM 有限状态机 GPT 陈蕴侬 JSGF 图灵测试 推荐系统 阅读理解
 excerpt: 对话系统技术图谱
 author: 鹤啸九天
 mathjax: true
@@ -14,6 +14,8 @@ mathjax: true
 
 # 总结
 
+- 【2021-3-29】[开放领域问答梳理系列](https://zhuanlan.zhihu.com/p/360572095), 两阶段系统：基于信息检索（information Retrieval， IR）+机器阅读理解（Machine Reading Comprehension， MRC）（retriever-reader）的开放领域问答系统
+  - ![](https://pic3.zhimg.com/80/v2-4c8be13f06c586b374df8783620b677a_1440w.jpg)
 - 【2021-3-27】【开放域长式问答的进展与挑战】《[Progress and Challenges in Long-Form Open-Domain Question Answering-Google AI Blog](https://ai.googleblog.com/2021/03/progress-and-challenges-in-long-form.html)》，论文 paper:《[Hurdles to Progress in Long-form Question Answering](https://arxiv.org/abs/2103.06332)》
 - 【2021-3-25】[对话的囧境？](https://mp.weixin.qq.com/s/UHfw3uaDM_vQFUCmqX0gTA) 
   - 人工智能对话系统一直是让我又**爱**又**恨**的存在，爱是因为一想到它的终极NB形态就令人兴奋，觉得自己在从事一门可以改变世界的技术，恨是因为现有的技术与期待相差太远，一旦框架搭起来了就陷入解case的死循环，让我怀疑我是谁我在干什么，我有生之年能看到强人工智能吗？？？
@@ -1064,6 +1066,19 @@ Sebastian将QA的研究分为了5个阶段。
 
 ### 问答技术框架
 
+- 【2021-3-29】[开放领域问答梳理系列](https://zhuanlan.zhihu.com/p/360572095)
+- **单阶段**的系统（比如Phrase Retrieval期望直接通过检索IR找出答案，T5、GPT3这种大规模预训练模型甚至可以期望直接通过MRC生成答案）
+- 还有**多阶段**的系统（比如把二阶段系统中的IR细分到文档检索+文档ranking，MRC细分为answer extraction和answer ranking，或者是迭代式（iterative）问答/多轮问答/multi-hop QA）
+- **两阶段**系统：基于**信息检索**（information Retrieval， IR）+ **机器阅读理解**（Machine Reading Comprehension， MRC）（retriever-reader）的开放领域问答系统，典型实现如下：
+  - ![](https://pic3.zhimg.com/80/v2-4c8be13f06c586b374df8783620b677a_1440w.jpg)
+- ① DrQA：Reading Wikipedia to Answer Open-Domain Questions，简称DrQA，是danqi chen（陈丹琦）在2017发表于ACL上的一篇经典文章，业内也经常称该论文是深度学习时代关于开放领域问答的第一篇文章。该文相关[代码地址](https://github.com/facebookresearch/DrQA),该文开源代码十分值得入门的同学学习！包括但不限于：自然语言处理任务的文本预处理、TFIDF的高效实现、训练LSTM神经网络用于阅读理解抽取答案、python多线程加速信息检索、文本中的词性标注等作为特征帮助文本理解任务。
+  - ![](https://pic4.zhimg.com/80/v2-5dd7796042ae2c398215df23a24900d3_1440w.jpg)
+  - DrQA基本系统改进1: BERTserini
+  - DrQA基本系统改进2: 训练一个passage ranker
+  - DrQA基本系统改进3: multi-passage一起处理
+  - DrQA基本系统改进4: Reader-Ranker互相帮助
+  - DrQA基本系统改进5：answer re-ranker
+  - DrQA基本系统改进6: 监督信号的选择
 - 【2021-1-25】（美团）智能问答技术框架
   - ![](https://pics3.baidu.com/feed/37d12f2eb9389b50842a106dabc123dae6116e30.png)
   - 问题推荐：问题生成、问题排序、问题引导
@@ -1102,8 +1117,6 @@ Sebastian将QA的研究分为了5个阶段。
   - 经典的NL2SQL方案中，基于Seq2Seq的X-SQL模型是十分常见的，该模型的思路是先通过 MT-DNN 对原始问题及字段名称进行编码，再在问题前面人为地添加一个 [CXT] 用于提取全局信息。
   - ![](https://image.jiqizhixin.com/uploads/editor/2d042821-c741-4635-a6bb-cdeb595b85e8/13.png)
   - 【2021-3-15】详见：[百分点认知智能实验室：智能对话技术应用和实践](https://www.jiqizhixin.com/articles/2020-12-29-2)
-
-
 - 【2020-8-18】参考：
   - [基于索引的QA问答对匹配流程梳理](https://www.cnblogs.com/yhzhou/p/13436374.html)
   - [智能问答中的NLU意图识别流程梳理](https://www.cnblogs.com/yhzhou/p/13456361.html)
