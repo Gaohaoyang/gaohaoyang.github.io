@@ -21,6 +21,10 @@ mathjax: true
   - [文本生成12：4种融合知识的text generation](https://zhuanlan.zhihu.com/p/133266258)
   - [文本生成13：万字长文梳理文本生成评价指标](https://zhuanlan.zhihu.com/p/144182853)
 - 【2021-1-4】[data2text](https://zhuanlan.zhihu.com/p/82054729)，【2021-3-29】解读[文本生成2：Data-to-text Generation with Entity Modeling](https://zhuanlan.zhihu.com/p/82054729), [论文](https://arxiv.org/abs/1906.03221)，[代码](https://github.com/ratishsp/data2text-entity-py)
+- 【2021-1-4】题目自动生成[data2text](https://zhuanlan.zhihu.com/p/82054729)
+  - 应用点是业务方设计题目时，不用再费劲编写题目，只需设置知识点，系统根据知识点+问题类型生成候选题目，业务方验证通过即可
+- 【2021-3-29】文本风格迁移综述，[一文超详细讲解文本风格迁移](https://zhuanlan.zhihu.com/p/159039652)
+  - ![](https://pic2.zhimg.com/80/v2-da58494400a380027e47ff97af6b97fd_1440w.jpg)
 
 # 文本生成方案
 
