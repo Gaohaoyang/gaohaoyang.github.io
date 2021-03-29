@@ -27,8 +27,7 @@ mathjax: true
     - 无实验的因果关系发现；
     - 可移植性和迁移学习；
     - 反事实推理以及中介和特定路径效应（Mediation and Path-Specific Effects）。
-
-- 乌鸦智能 ＞ 鹦鹉智能
+- **乌鸦智能** ＞ **鹦鹉智能**
   - [因果观念新革命？万字长文，解读复杂系统背后的暗因果](https://swarma.org/?p=19906)，[集智俱乐部因果科学专题Github](https://github.com/CausalAI/clubjizhi)，[因果科学与 Causal AI 系列读书会](https://www.sohu.com/a/415039730_741733)
   - 【2020-10-22】[如何在观测数据下进行因果效应评估](https://www.sohu.com/a/426630014_741733)：
     - 相关性相比因果，更缺乏 **可解释性**（Explainability）、**稳定性**（Stability）（漂移）
@@ -45,8 +44,6 @@ mathjax: true
 - 【2020-9-23】[Introduction to Causal Inference](https://www.bradyneal.com/causal-inference-course)
   - [A Brief Introduction to Causal Inference](https://www.bradyneal.com/slides/1%20-%20A%20Brief%20Introduction%20to%20Causal%20Inference.pdf)
   - [The Flow of Association and Causation in Graphs](https://www.bradyneal.com/slides/3%20-%20The%20Flow%20of%20Association%20and%20Causation%20in%20Graphs.pdf)
-
-
 - 【2021-1-1】文库资料：
 - [因果推理](https://wenku.baidu.com/view/60e4478ccd1755270722192e453610661ed95af5.html)
   - 因果推理的分类：
@@ -100,6 +97,7 @@ mathjax: true
   - 张含望创立并带领的机器推理与学习实验室（Machine Reasoning and Learning Lab，简称“MReal”）是全球第一个将因果关系推理引入计算机视觉研究中的团队。
 
 - 【因果推断】 [A Brief Introduction to Causal Inference by Brady Neal](https://www.bilibili.com/video/BV1CK4y1L7uA/?spm_id_from=333.788.videocard.5)
+- 【2021-3-29】[统计之都-因果推断专题](https://cosx.org/tags/%E5%9B%A0%E6%9E%9C%E6%8E%A8%E6%96%AD/)
 - [Causal inference course written from a machine learning perspective](https://www.bradyneal.com/causal-inference-course)，包含课程ppt列表
 
 <iframe src="//player.bilibili.com/player.html?aid=885688534&bvid=BV1CK4y1L7uA&cid=267895326&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="350px" height="266px" > </iframe>
@@ -107,43 +105,60 @@ mathjax: true
 
 # 因果推理书籍
 
-## 书籍汇总
 
-### （1）The book of why
+## （1）The book of why
 - 【2020-12-04】因果推理书籍索引，[Which causal inference book you should read](https://www.bradyneal.com/which-causal-inference-book)
 - ![](https://www.bradyneal.com/img/books_flowchart.svg)
-
 - 书籍：
   - ![](http://5b0988e595225.cdn.sohucs.com/images/20190716/935359c273384228b196eac31077b762.jpeg)
 - 《The book of Why》，豆瓣高达9.5分。其中文版《为什么：关于因果关系的新科学》由中信出版社推出
 - 因果推理和贝叶斯网络的创始人，图灵奖得主`Judea Peral`（朱迪亚·珀尔，贝叶斯网络之父）和科普作家 Mackenzie, Dana合作写的一本因果推理的入门书。
-  - 朱迪亚•珀尓（Judea Pearl），加州大学洛杉矶分校计算机科学教授，“贝叶斯网络”之父。2011年，珀尔因“通过发展概率和因果推理对人工智能的奠基性贡献”获得了计算机科学的最高荣誉图灵奖
+  - 朱迪亚•珀尓（Judea Pearl），加州大学洛杉矶分校计算机科学教授，“贝叶斯网络”之父。2011年，珀尔因“通过发展概率和因果推理对人工智能的奠基性贡献”获得了计算机科学的最高荣誉图灵奖；他的孩子，一名记者在巴以冲突的死亡，他为了纪念他的孩子还设立了一个基金。[初读Judea Pearl的书，有什么感觉？](https://www.zhihu.com/question/67715905)
   - ![](http://5b0988e595225.cdn.sohucs.com/images/20190716/7cee9f86eaea4b12af02c573bac064ed.jpeg)
 - 目录
   - 导言：思维胜于数据
-  - 第一章：因果关系之梯
+  - 第一章：**因果关系**之梯
   - 第二章：从海盗到豚鼠：因果推断的起源
   - 第三章：从证据到因：当贝叶斯牧师遇见福尔摩斯先生
-  - 第四章：混杂和去混杂：或者，消灭潜伏变量
+  - 第四章：**混杂**和去混杂：或者，消灭潜伏变量
   - 第五章：烟雾缭绕的争论：消除迷雾，澄清事实
-  - 第六章：大量的悖论！
-  - 第七章：超越调整：征服干预之峰
-  - 第八章：反事实：挖掘关于假如的世界
-  - 第九章：中介：寻找隐藏的作用机制
+  - 第六章：大量的**悖论**！
+  - 第七章：超越调整：征服**干预**之峰
+  - 第八章：**反事实**：挖掘关于假如的世界
+  - 第九章：**中介**：寻找隐藏的作用机制
   - 第十章：大数据，人工智能和大问题
 
-### （2）因果关系：模型、论证与推断
+## （2）因果 Causality
+
+- Judea Pearl的《Causality》
+  - ![](https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2426721436,1889448037&fm=15&gp=0.jpg)
+- 主要内容：
+  - 第一章——前言：用通俗的语言介绍「什么是因果关系？」这一问题的讨论背景，并概括若干个传统的哲学观点，以及和下文的统计因果模型相比，这些传统定义存在的缺陷。
+  - 第二章——事件性因果
+    - 2.1. 随机对照试验
+    - 2.2. **介入主义**的因果观
+    - 2.3. **虚拟事实模型**（RCM）
+    - 2.4. 贝叶斯网络
+    - 2.5. **结构方程**（SEM）+ **结构因果模型**（SCM）
+    - 2.6. SCM的**反事实**推理
+  - 第三章——过程性因果：**因果环路图**（CLD）与微分方程
+  - 第四章——后记
+- 除前言外，本文其他部分默认读者已经理解基础概率论（概率、条件概率、贝叶斯定理、随机变量、期望值、相互独立事件）、基础图论（节点、边、有向无环图）、概率图模型初步（贝叶斯网络、d分隔）、统计学基础（随机对照试验）等知识。
+- 【2021-3-29】源自书籍总结：[【综述长文】因果关系是什么？结构因果模型入门](https://zhuanlan.zhihu.com/p/33860572)，高二学生的杰作！
+
+
+## （2）因果关系：模型、论证与推断
 
 - 《Causality : Models, Reasoning and Inference》（第二版）
 - 作者：Judea Pearl
 - 目录
   - 1 概率、图表和因果模型简介
   - 2 推论因果关系理论
-  - 3 因果图和因果效应的识别
+  - 3 **因果图**和**因果效应**的识别
   - 4 行动、计划和直接影响
   - 5 社会科学和经济学中的因果关系和结构模型
   - 6 辛普森悖论、混乱与崩溃
-  - 7 基于结构的反事实逻辑
+  - 7 基于结构的**反事实**逻辑
   - 8 个不完善实验：边界效应与反事实
   - 9 因果关系的可能性：解释与识别
   - 10 实际原因
