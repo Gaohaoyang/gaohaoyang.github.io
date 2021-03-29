@@ -66,6 +66,28 @@ mathjax: true
    - ![](https://blog.floydhub.com/content/images/2019/04/coverage.gif)
 
 - [阅读理解进阶三部曲——关键知识、模型性能提升、产品化落地](https://www.toutiao.com/i6630964969640821262/?tt_from=mobile_qq&utm_campaign=client_share&timestamp=1544680034&app=news_article&utm_source=mobile_qq&iid=53104048203&utm_medium=toutiao_android&group_id=6630964969640821262)
+- 【2021-3-19】国防科技大学团队2019年在arXiv上发布了预印版综述文章 Neural Machine Reading Comprehension: Methods and Trends。[神经机器阅读理解最新综述：方法和趋势](https://www.sohu.com/a/329167296_500659)
+
+SQuAD 2.0[67]是一个具有代表性的MRC数据集，问题是无法回答。基于2016年发布的前一个版本，《SQuAD 2.0》有超过5万个由群众工人创造的无法回答的问题。
+- 按照构建难易程度（Construction）、对自然语言理解的测试水平（Understanding）、答案灵活程度（Flexibility）、评价难易程度（Evaluation）和实际应用贴合程度（Application）等五个维度出发，对四类常见的机器阅读理解任务进行比较，依据每个任务在不同维度上的表现，得分最低 1 分、最高 4 分
+
+![](https://img-blog.csdnimg.cn/20200530225952179.png)
+
+任务构造数据集是否容易不是越简单，分数越高。
+- construction 构造:这个维度度量为任务构造数据集是否容易。越简单，分数越高。
+- Understanding: 这个维度评估任务在多大程度上可以测试机器的理解能力。如果一项任务需要更多的理解和推理，分数就会更高。
+- Flexibility: 答案表单的灵活性可以度量任务的质量。当答案更灵活时，flflexibility分数更高。
+- Evaluation: 评估是MRC任务的必要组成部分。一项任务是否容易评估也决定了它的质量。在这种情况下，易于评价的任务得分较高。
+- Application:应用:一个好的任务应该是接近实际应用的。因此，如果一个任务可以很容易地应用到现实世界中，那么这个维度的分数就很高.
+
+总结：
+- **完形填空**任务的数据集易于构建，可以用准确率指标进行评价。但是由于这一任务的答案限定为原文中的一个词或实体，所以并不能很好的测试机器对自然语言的理解能力且与实际应用相距较远。
+- **多项选择**任务由于提供了候选答案，答案的形式相较于完形填空而言更为灵活，构建数据集可以直接利用现有的语言测试中的多项选择题目，所以较为容易。由于该任务要求从备选答案中选出正确答案，模型的搜索空间相对较小，对自然语言理解的测试较为局限，提供备选答案与实际应用场景不太相符。
+- **片段抽取**任务是一个适中的选择，数据集相对容易构建，模型效果也可以使用精确匹配和 F1 分数进行衡量，答案限定为原文中的子片段，相较于多项选择有了更大的搜索空间，也在一定程度上能测试机器对自然语言的理解能力，但是和实际应用仍有一定差距。
+- **自由作答**任务答案形式非常灵活，能很好的测试对自然语言的理解，与现实应用最为贴近，但是这类任务的数据集构造相对困难，如何有效的评价模型效果有待进行更为深入的研究。
+
+[机器阅读理解综述：2019—Neural Machine Reading Comprehension_Methods and Trends](https://blog.csdn.net/yangyanglulu/article/details/106448685)
+
 
 ## 评估方法 Evaluation Metrics
 
