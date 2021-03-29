@@ -133,6 +133,31 @@ mathjax: true
   - 第八章：**反事实**：挖掘关于假如的世界
   - 第九章：**中介**：寻找隐藏的作用机制
   - 第十章：大数据，人工智能和大问题
+- 【2021-3-29】[《为什么：关于因果关系的新科学》思维导图](https://zhuanlan.zhihu.com/p/144562779)
+- 1、 文章结构
+  - 人类创造出了我们今天所享有的科技文明。所有这一切都源于我们的祖先提出了这样一个简单的问题：为什么？因果推断正是关于这个问题的严肃思考。因果革命背后有数学工具上的发展作为支撑，这种数学工具最恰当的名称应该是“因果关系演算法”。其一为因果图（causal diagrams），用以表达我们已知的事物，其二为类似代数的符号语言，用以表达我们想知道的事物。
+![](https://pic4.zhimg.com/80/v2-8bb7cbdd487fbd5c93d7a3f184f2def7_1440w.jpg)
+- 2、 **因果关系之梯**
+  - 如果第一层级对应的是观察到的世界，第二层级对应的是一个可被观察的美好新世界，那么第三层级对应的就是一个无法被观察的世界（因为它与我们观察到的世界截然相反）。为了弥合第三层级与前两个层级之间的差距，我们需要掌握一种理解力，建立一种理论，据此我们就可以预测在尚未经历甚至未曾设想过的情况下会发生什么——这显然是所有科学分支的圣杯。
+![](https://pic3.zhimg.com/80/v2-d198dbac52e3e19e756ba4b5944a64c6_1440w.jpg)
+- 3、 **因果推断的起源**
+  - 因果推断是用数学语言表达看似合理的因果知识，将其与经验数据相结合，回答具有实际价值的因果问题。将相关关系的知识与因果关系的知识相结合以获得某些结果的做法。而路径图在因果论和概率论之间建立的第一座桥梁，其跨越了因果关系之梯第二层级和第一层级之间的障碍。在建造了这座桥梁之后，就可以进行反向的实践，从根据数据测算出的相关性（第一层级）中发现隐藏在背后的因果量。
+ 
+![](https://pic3.zhimg.com/80/v2-07a7bfe5722105fa283c20018babce6a_1440w.jpg)
+- 4、 **混杂和对撞因子**
+  - 我们在实际生活中似乎就是遵循着共因原则行事的，无论何时，只要观察到某种模式，我们就会去寻找一个因果解释。事实上，我们本能地渴望根据数据之外的某个稳定机制对观察结果做出解释。其中最令人满意的解释是直接因果关系：X导致Y。
+ 
+![](https://pic4.zhimg.com/80/v2-f6d7aab9b26261f5c3b5f3f61e264337_1440w.jpg)
+- 5、 **征服干预之峰**
+  - 混杂因子是导致我们混淆“观察”与“干预”的主要障碍。在用“路径阻断”工具和后门标准消除这一障碍后，我们就能精确而系统地绘制出登上干预之峰的路线图。最安全的路线是后门调整和由此衍生的诸多同源路线，它们有些可以归于“前门调整”名下，有些则可以归于“工具变量”名下。一种通用的绘图工具，我们称之为“do演算”（do–calculus），它允许研究者探索并绘制出通往干预之峰的所有可能的路线，无论这些路线有多曲折。
+ 
+![](https://pic4.zhimg.com/80/v2-76999a49fea61767d4e794e957a60dbf_1440w.jpg)
+- 6、 **反事实**
+  - “A导致B”解释为“假如没有A，则B就不会发生”。我们根本不需要争论这样的世界是否以物理或者形而上学的实体形式存在。如果我们的目的是解释人们所说的“A导致B”的含义，那么我们只需要假设人们有能力在头脑中想象出可能的世界，并能判断出哪个世界“更接近”我们的真实世界即可；最重要的是我们的想象和判断要前后一致，这有助于我们在群体中达成共识。
+ 
+![](https://pic4.zhimg.com/80/v2-0edbbc63e8f6f20a1cb40e7059fa2ec7_1440w.jpg)
+
+
 
 ## （2）因果 Causality
 
@@ -153,7 +178,7 @@ mathjax: true
 - 【2021-3-29】源自书籍总结：[【综述长文】因果关系是什么？结构因果模型入门](https://zhuanlan.zhihu.com/p/33860572)，高二学生的杰作！
 
 
-## （2）因果关系：模型、论证与推断
+## （3）因果关系：模型、论证与推断
 
 - 《Causality : Models, Reasoning and Inference》（第二版）
 - 作者：Judea Pearl
@@ -351,6 +376,409 @@ mathjax: true
 - 摘自：[“无人问津”的贝叶斯网络之父Judea Pearl在NIPS 2017上到底报告了啥](https://zhuanlan.zhihu.com/p/31930409)
 
 
+## 因果前言
+
+因果关系在生活中无处不在。经济、法律、医学、物理、统计、哲学、宗教等众多学科，都与因果的分析密不可分。然而，和其他概念，例如统计的相关性相比，因果（causality）非常难以定义。利用直觉，我们可以轻易判断日常生活中的因果关系；但是，用清晰、没有歧义的语言准确回答「因果关系是什么？」这个问题，往往超出了常人的能力范围。
+ 
+（感兴趣的读者，不妨暂停阅读，然后试着给出一个「因果关系」的定义。）
+ 
+不得不承认，回答这个问题是如此困难，以至于部分哲学家认为，因果关系是不可还原的、最基础的认知公理，无法被用其他方式描述。不过，本文即将描述的众多统计因果模型，将会是针对这一观点的有力反驳。
+ 
+在知乎上，也有一些对于因果关系的探讨，例如哲学话题下的「[因果关系是真实存在，还是我们认识世界的一种方法？](https://www.zhihu.com/question/20318246)」令人遗憾的是，这个问题下的大多数答案，都把重心放在了认知论上，即「如何回应休谟的归纳问题？」以及「我们怎么知道，我们认知的因果关系是可靠的？」大家似乎都默认，「什么是因果关系」是一个琐碎得不需要讨论的前提（但显然并非如此），陷入怀疑论和先验论，从而无法给出一个实用的因果模型。事实上，因果关系是一个本体论的话题：我们需要找到一个符合直觉、足够广泛，但也足够具体的定义来描述因果关系；在此基础之上，我们还需要一套可靠的判定因果的方法。
+ 
+常用的统计因果模型都采用了介入主义（interventionism）的诠释：因果关系的定义依赖于「介入」的概念；外在的介入是因，产生现象的变化是果。
+ 
+在此之前，我们先了解一下其他传统的对于「因果关系」的定义，以及为什么它们不符合直觉。
+ 
+![](https://pic3.zhimg.com/80/v2-7c8f73a1d0f267a00f2b4b1c40c45156_1440w.jpg)
+ 
+大卫·休谟（David Hume）
+ 
+- 休谟：因果就是「经常性联结」（constant conjunction）。如果我们观察到，A总是在B之前发生，事件A与事件B始终联结在一起，那么A就导致了B，或者说A是B的原因。
+- 反驳：令A表示公鸡打鸣，令B表示日出。自然条件下，日出之前总有公鸡打鸣，但不会有人认为公鸡打鸣导致了日出。假如我们进行介入，监禁了所有的公鸡，使它们无法打鸣，太阳仍然会照常升起。
+ 
+在这里，有必要注意一个细节：
+- 大卫·休谟（David Hume，1711年－1776年）。
+- 卡尔·皮尔逊（Karl Pearson，1857年－1936年）。
+提出「统计相关性」概念的皮尔逊，比休谟晚出生了一百多年。
+ 
+我们现在的思维方式，并非是自古以来就存在的：我们眼里理所应当的常识，在古人脑中可能从未出现。
+ 
+在统计学成为一门严谨的学科、皮尔逊清晰地分离相关性和因果性之前，大多数人都把相关性和因果性混为一谈。即便到了现在，认为相关就代表因果的人也不在少数。
+ 
+我们没有必要因为休谟的历史地位，就把他下的定义奉为金科玉律。所以，休谟用的经常性联结只能定义相关性，不能定义因果性。
+ 
+![](https://pic4.zhimg.com/80/v2-527cbeca6d5ab2127118ace7d469b087_1440w.jpg)
+ 
+相关性未必意味着因果性
+1.  相关性不代表因果性。
+2.  相关性是对称的，而因果性是不对称的。如果A是B的原因，那么B是A的结果，但我们绝不会同时说「事件A是事件B的原因，事件A也是事件B的结果」。至于相关性，随机变量X与Y之间的相关性定义为 ![[公式]](https://www.zhihu.com/equation?tex=%5Cmathrm+%7Bcorr%7D+%28X%2CY%29%3D%7B%5Cmathrm+%7Bcov%7D+%28X%2CY%29+%5Cover+%5Csigma+_%7BX%7D%5Csigma+_%7BY%7D%7D%3D%7BE%5B%28X-%5Cmu+_%7BX%7D%29%28Y-%5Cmu+_%7BY%7D%29%5D+%5Cover+%5Csigma+_%7BX%7D%5Csigma+_%7BY%7D%7D) ，所以必然有 ![[公式]](https://www.zhihu.com/equation?tex=%5Cmathrm+%7Bcorr%7D+%28X%2CY%29+%3D+%5Cmathrm+%7Bcorr%7D+%28Y%2CX%29) 。
+ 
+因果关系的不对称性，曾被用于反驳亨佩尔用DN模型定义「科学解释」的做法，但这是属于科学哲学的题外话了。
+以上两条直觉，可以反驳以下一系列不使用「介入」概念的因果定义。
+*   充分因： ![[公式]](https://www.zhihu.com/equation?tex=A+%5Crightarrow+B)
+*   必然因： ![[公式]](https://www.zhihu.com/equation?tex=A+%5Cleftarrow+B)
+*   朴素的反事实因果： ![[公式]](https://www.zhihu.com/equation?tex=%28A%E2%86%92B%29%E2%88%A7%28%C2%ACA%E2%86%92%C2%ACB%29)
+*   加入概率论，用相关性定义因果性。
+
+一个典型的反例：用事件A表示「冰激凌销量增加」，用B表示「溺水死亡者数量增加」。A与B之间成正相关，但我们都知道，A与B之间不存在因果关系，它们都是由一个共同的因素「夏天」导致的。由此可见，仅仅使用概率统计的工具，并不足以让我们在现实中做出理性的因果推断。
+ 
+*   INUS条件：原因是Insufficient but Necessary parts of a condition which is itself Unnecessary but Sufficient。
+    
+ 
+是INUS条件，但不是原因的例子，并不难构造：闪电、干草堆、消防员玩忽职守、空气干燥都是一场火灾的INUS条件。但是，我们知道闪电和雷声永远符合「如果有闪电，那么必然有雷声」；因此，雷声也是火灾的INUS条件，却不是火灾的原因。
+ 
+上述一系列模型/定义，都有一个共同的缺陷：给定一个因果关系，这些模型可以完美套用；然而，给定一个此类模型，我们却无法直接确定不同变量之间的因果关系，因为这样的单个模型可以同时描述多种不同的因果、甚至非因果的关系。
+ 
+哲学家们看似没有对因果关系提出令人满意的诠释。但是，这至多只是一种流行于哲学爱好者之间的误解。普通哲学爱好者们在因果关系方面的了解，通常不会超过休谟与康德，能知道刘易斯、必然论、多元主义之类都极为难得。实际上，在统计、经济等领域，已经有大量成熟且投入使用的因果模型，它们准确反映了我们对因果的直觉认识，而且能被精确的数学语言描述。
+
+ 
+## 事件性因果
+ 
+当我们说「A是因，B是对应的果」的时候，A和B可以是什么「东西」？
+ 
+一般而言，我们认为A和B是某种事件，而且A必须发生在B之前。因为「因」必须发生在「果」之前，所以如果A导致了B，那么不可能同时有B导致了A——两个事件无法互为因果。由此可见，因果关系存在一种不对称性。
+ 
+针对「在时间上，因必须先于果」这一条件，哲学家们有过大量的讨论（[Backward Causation](https://link.zhihu.com/?target=https%3A//plato.stanford.edu/entries/causation-backwards/)），其中不少还涉及尖端的量子力学。不过，我们仍然没有理由放弃这一条件。因为，不同的模型有不同的适用范围，而因果模型的适用范围主要是宏观现象、经济、医疗、复杂动力/电路系统，不论微观物理的结论如何，它在已知领域的有效性都不受影响。
+ 
+有人或许会质疑，为什么两个东西不能互为因果呢？例如，让A1表示草原上羊的数量，让B1表示草原上狼的数量；其他条件不变，狼的增加会导致羊的减少，羊的减少会导致狼的减少，狼的减少会反而导致羊的增加，羊的增加进而导致狼的增加；A1和B1互为因果。
+ 
+值得注意，A1与B1表示了某种过程，而不是某些固定时间点上的事件，所以A1与B1之间完整的因果关系无法用事件性因果表示。所以，对于这种质疑，我有以下几条回应：
+1.  我们可以按照时间顺序，把每个时间点上的A和B拆分为单独的事件，即B1（狼增加）→A1（羊减少）→B2（狼减少）→A2（羊增加）。如此一来，事件性因果也能表达A与B之间的关系。
+2.  针对过程性的因果，我们有另一种模型——因果环路图（CLD），将在本文第三章介绍。
+3.  过程性因果比事件性因果复杂。在理解过程性因果模型之前，我们需要先理解更简单的事件性因果模型。
+    
+
+对于事件性因果，当前最成熟、最广泛的模型是结构因果模型（Structural Causal Model，以下简称SCM）。SCM结合了结构方程（SEM）、虚拟事实模型（RCM）、概率图模型（主要是贝叶斯网络），并将其应用于因果分析。各类常用因果模型，都可以看作SCM的子类。接下来，我将以RCM、贝叶斯网络、SEM的顺序，按照SCM的发展思路，对其进行详细的介绍。
+ 
+2.1. 随机对照试验
+ 
+任何一本初级统计学课本都会提到，基于观测的统计模型无法可靠地识别因果关系。要确定因果关系，必须通过随机对照试验（Randomized Controlled Trial）。
+ 
+在一个简单随机对照试验中，试验对象（通常是参加研究的志愿者，下文每一个对象用u表示）会被随机分入两组：实验组（treatment group，下文用t表示）和对照组（control group，下文用c表示）。
+ 
+我们有多种不同的随机分组方式，例如简单随机分组、随机区组设计、配对设计。使用随机区组设计时，研究者会先根据个体的特征（年龄、性别等）将其分入不同的区组，再在每个区组内实施简单随机分组。使用配对设计时，研究者会把在各方面都非常相似的个体（例如双胞胎、不同时间节点的同一个人）配成对，在每一对个体中随机选一个作为实验组，另一个作为对照组。
+ 
+实验组的对象会接受干预，但对照组的对象不会受到任何干预/介入。在医学实验中，实验组的对象会接受真正的治疗，而对照组的对象只会收到安慰剂。实验结束后，研究者会比较实验组和对照组的结果。
+ 
+如果我们用Y表示我们感兴趣的结果变量，那么我们可以用以下符号表示随机对照试验的结果：
+*   ![[公式]](https://www.zhihu.com/equation?tex=Y_c%28u%29) 是在对照组条件下，对象u展现出的结果变量Y。
+*   ![[公式]](https://www.zhihu.com/equation?tex=Y_t%28u%29) 是在实验组条件下，对象u展现出的结果变量Y。
+ 
+在研究中，我们通常会探究 ![[公式]](https://www.zhihu.com/equation?tex=Y_t%28u%29) 是否统计显著地不同于 ![[公式]](https://www.zhihu.com/equation?tex=Y_c%28u%29) 。这一过程涉及较为具体的统计假设检验，与本文的主要内容无关。但是，我们至少可以意识到，t与c的区别是因果关系中的「因」， ![[公式]](https://www.zhihu.com/equation?tex=Y_t%28u%29) 与 ![[公式]](https://www.zhihu.com/equation?tex=Y_c%28u%29) 的区别是因果关系中的「果」。
+ 
+2.2. 介入主义的因果观
+ 
+在随机对照实验的基础框架上，我们可以建立起一个介入主义（interventionism）因果观。
+ 
+一个介入主义的因果模型包括三部分：
+1.  所有的系统 ![[公式]](https://www.zhihu.com/equation?tex=U) ：一个包含所有系统 ![[公式]](https://www.zhihu.com/equation?tex=u) 的集合。一个系统 ![[公式]](https://www.zhihu.com/equation?tex=u) 我们讨论的对象，可以是人体、机械、星球、化学反应系统、经济实体等。
+2.  所有的介入方式 ![[公式]](https://www.zhihu.com/equation?tex=T) ：一个包含所有可能的介入方式 ![[公式]](https://www.zhihu.com/equation?tex=t) 的集合。例如，假设我们讨论的系统 ![[公式]](https://www.zhihu.com/equation?tex=U) 是一个有两个按钮的黑箱，一个按钮是红色的，另一个按钮是绿色的，那么所有可能的介入方式为 {按红按钮，按绿按钮，两个按钮都按，两个按钮都不按} 。（在这个具体的例子里，根据黑箱的结构不同，可能的介入方式或许不止四种，所以这只是一个经过简化，以便直观理解的模型。）
+3.  状态函数 ![[公式]](https://www.zhihu.com/equation?tex=Y) ：输入一个系统 ![[公式]](https://www.zhihu.com/equation?tex=u) 和一种介入方式 ![[公式]](https://www.zhihu.com/equation?tex=t) ，输出系统的某个状态 ![[公式]](https://www.zhihu.com/equation?tex=y) ，写作 ![[公式]](https://www.zhihu.com/equation?tex=y%3DY_t%28u%29) 。例如，在一个医疗实验中， ![[公式]](https://www.zhihu.com/equation?tex=Y) 可以反映「u（病人甲）在受到干预t（服用降压药）之后的y（血压）」。注意，y不一定要完整描述u的状态的所有部分，只反映几个变量也是可以的。我们当然可以让y表示某个病人全身所有分子的运动状态，但这类过于复杂的状态函数，往往没有太大的实用价值。可是，在简单电路这样的系统中，完整表达电路每个节点的状态不仅可行，而且有利。因此，在建立因果模型时，我们需要具体问题具体分析，选择一个合适的状态函数。
+
+值得注意的是，因为「果」的定义涉及到 ![[公式]](https://www.zhihu.com/equation?tex=Y_t%28u%29) 与 ![[公式]](https://www.zhihu.com/equation?tex=Y_c%28u%29) 的区别，而单次介入只说明了t却没有说明c，所以 ![[公式]](https://www.zhihu.com/equation?tex=T) 必须包含一种表示「不介入」的介入方式 ![[公式]](https://www.zhihu.com/equation?tex=c) 。也就是说，在一个因果模型中，任何一个系统都必须有一种不受干预的「自然状态」。如果现实情况过于复杂，很难找到不受干预的自然状态，我们可以把某种介入方式 ![[公式]](https://www.zhihu.com/equation?tex=c) 默认为「不介入」。
+ 
+因此：
+*   任意一个介入主义的因果模型，都必须明确指出一种代表「不介入」的介入方式。
+*   当我们在问「为什么发生了现象 ![[公式]](https://www.zhihu.com/equation?tex=y_1)」的时候，我们其实在问：「在我对世界建立的因果模型中，自然状态的现象是 ![[公式]](https://www.zhihu.com/equation?tex=y_0%3DY_c%28u%29) ，但是我观察到了现象 ![[公式]](https://www.zhihu.com/equation?tex=y1+%5Cne+y0) 。于是，我认为实际发生的情况是 ![[公式]](https://www.zhihu.com/equation?tex=y_1%3DY_t%28u%29) ，其中 ![[公式]](https://www.zhihu.com/equation?tex=t+%5Cne+c) 。 ![[公式]](https://www.zhihu.com/equation?tex=t) 与 ![[公式]](https://www.zhihu.com/equation?tex=c) 之间的区别是什么？」
+*   或者，更简单地说，当我们问「为什么A」的时候，我们往往省略了后半句：「为什么A，而不是B？
+ 
+以知乎搜索「为什么」前几个结果为例，我们可以发现，「默认状态」的思维方式的确无处不在。
+ 
+> 例1：[现在的男生为什么不追女生？](https://www.zhihu.com/question/58896903)
+ 
+默认状态：男生应当追女生。
+ 
+> 例2：[为什么有人会点两百多块一杯的猫屎咖啡？](https://www.zhihu.com/question/21128697)
+ 
+默认状态：一般人不会花两百多块买一杯咖啡。
+ 
+另一些情形中，两个对话者可能选择了不同的默认状态，便带来了以下的对话：
+- 甲：「你为什么做了A这件事？」（默认「不做A」是自然状态，要求乙为「做A」提供理由）
+- 乙：「为什么不呢？」（默认「做A」是自然状态，把论证的责任转移到甲身上）
+在下一部分（2.3），我们将把这一系列直觉发展为正式的虚拟事实模型。
+ 
+不过，我希望先对格兰杰因果（Granger causality）做出一些澄清。格兰杰因果的定义：如果得知事件A的发生有助于预测之后的事件B，那么我们说A是B的格兰杰因。然而，格兰杰因果只包含了观测，却没有包含介入，直接操纵A并不一定能影响B，这与我们日常对因果的直觉不符。所以，格兰杰因果虽然名叫「因果」，却只是一个统计相关性的概念，而非真正的因果概念。在下文中，我不会对格兰杰因果做更多讨论。
+ 
+2.3. 虚拟事实模型
+ 
+虚拟事实模型（Rubin Causal Model，简称RCM）由Donald Rubin提出。在RCM中，因果关系「果」的定义是 ![[公式]](https://www.zhihu.com/equation?tex=%5Cdelta%28u%29%3DY_t%28u%29-Y_c%28u%29) 。
+ 
+在实际生活中，我们考虑的系统往往不止一个——对于某个正在研发的药品，我们最感兴趣的无疑是它在所有目标人群上的效果，而不仅仅是某个病人甲。继续采用RCM对于因果的定义，那么一个介入「因」对群体内所有个体的「果」是 ![[公式]](https://www.zhihu.com/equation?tex=E%5B%5Cdelta%28u%29%5D%3DE%5BY_t%28u%29-Y_c%28u%29%5D%3DE%5BY_t%28u%29%5D-E%5BY_c%28u%29%5D) 。（由期望值的线性可得）
+ 
+在上帝视角下，上述定义并不复杂。即使变量 ![[公式]](https://www.zhihu.com/equation?tex=y%3DY_t%28u%29) 不是一个数值变量，我们也可以通过其他方式定义 ![[公式]](https://www.zhihu.com/equation?tex=%5Cdelta%28u%29) 。从更广泛的角度考虑，RCM定义中的减法未必是实数域的减法；针对更复杂的变量y（例如张量、概率分布），我们可以采用其他的减法，只要符合数学规范和具体研究需要即可。
+ 
+可是在实际生活中，我们无法获得完美的信息：
+1.  无法同时知晓 ![[公式]](https://www.zhihu.com/equation?tex=Y_c%28u%29) 与 ![[公式]](https://www.zhihu.com/equation?tex=Y_t%28u%29) 。由于每个人都是独一无二的，每个时间节点也是独一无二的，所以在受到了一种介入，并表现出新状态之后，这个系统不可能完美恢复到原来的状态，重新接受另一种介入。这种情况被称为「因果推断的根本问题」（the Fundamental Problem of Causal Inference，以下简称FPCI）。
+2.  无法同时知晓每个个体的情况。正如在检测手机在极端条件下的质量时，我们不可能去砸坏每一个手机一样，我们只能随机从群体中抽取样本，再利用样本的统计数据推断群体参数。
+    
+ 
+「无法同时知晓每个个体」的问题，已经有常规的统计学手段解决。但为了避免FPCI，我们必须对群体参数的分布做出额外的假设，包括但不限于以下的一种或多种：
+1.  个体处理效应稳定假设（Stable unit treatment value assumption，简称SUTVA）：对于任意个体 ![[公式]](https://www.zhihu.com/equation?tex=u_1) 的干预不会影响到另一个任意个体 ![[公式]](https://www.zhihu.com/equation?tex=u_2) 的状态。SUTVA使我们可以把样本中每个个体的反应看作独立事件，从而降低了我们需要的样本体积、模型体积和建模时间。
+2.  同效果假设（assumption of constant effect）：对于所有的个体，某种介入方式造成的效果是相同的。例如，某个降压药对所有人的效果都是降低血压，不会产生增高血压的情况——即使有，也只不过是统计的噪声，可以用大样本、大数定理和中心极限定理消解。于是，我们可以得到 ![[公式]](https://www.zhihu.com/equation?tex=%5Chat%7B%5Cdelta%7D%28u%29%3D%5Cbar%7BY_t%7D%28u%29-%5Cbar%7BY_c%7D%28u%29) ，用样本内的平均效果估算这一介入方法对所有个体的因果效果。
+3.  同质性假设（assumption of homogeneity）：对于任意个体 ![[公式]](https://www.zhihu.com/equation?tex=u_1) 和 ![[公式]](https://www.zhihu.com/equation?tex=u_2) ，以及任意介入方式 ![[公式]](https://www.zhihu.com/equation?tex=t%5E%2A) ，始终有 ![[公式]](https://www.zhihu.com/equation?tex=Y_%7Bt%5E%2A%7D%28u_1%29%3DY_%7Bt%5E%2A%7D%28u_2%29) 。同质性假设强于同效果假设。例如，一个简单的FizzBuzz电脑程序在不同时间点上的性质理应完全相同。虽然在同一时间点上，我们无法同时测试它在不同输入下的输出，但是它在不同时间点上的表现必然相同。如果我们把「不同时间点上的FizzBuzz程序」看作一个群体，那么其中个体「每个时间点上的FizzBuzz程序」均符合同质性假设。
+ 
+2.3.1. 虚拟事实模型的不足
+ 
+虽然RCM提供了一个可以用数学、统计定义的因果模型，但是它的缺点也很明显：在介入时，我们通常一次只能改变一个变量，观测的状态也只有一个变量。如果我们增加变量，模型的体积、需要的训练数据、训练时间都将以指数级增长。在下一部分，我们可以看到，贝叶斯网络先验的条件独立信息可以缓解这一困难。
+ 
+此外，RCM从自变量的「因」到应变量的「果」的结构几乎完全是个黑箱，缺乏更清晰的可解释性。因此，单个RCM所能解决的问题也较为有限。相比之下，结构因果模型能为因果律、多变量之间的因果关系提供更详细的解释。
+ 
+2.4. 贝叶斯网络
+ 
+贝叶斯网络是一种基于有向无环图（directed acyclic graph，简称DAG）的概率图模型。虽然贝叶斯网络并不能直接表示因果，只能表示相关，但是它的图结构是SCM的基础。
+ 
+![](https://pic3.zhimg.com/80/v2-d9b0f455833ccf4bbf4c94feaca40196_1440w.jpg)
+ 
+贝叶斯网络示例
+ 
+在一个贝叶斯网络中，每个节点是一个随机变量，代表一个事件。通常，这个随机变量服从某个离散或连续的分布。一个节点 ![[公式]](https://www.zhihu.com/equation?tex=X) 中，储存了给定它的所有父节点 ![[公式]](https://www.zhihu.com/equation?tex=%5Cmathrm%7Bpa%7D%28X%29) 时 ![[公式]](https://www.zhihu.com/equation?tex=X) 的分布，即 ![[公式]](https://www.zhihu.com/equation?tex=P%28X%3Dx%7C%5Cmathrm%7Bpa%7D%28x%29%29) 。![[公式]](https://www.zhihu.com/equation?tex=%5Cmathrm%7Bpa%7D%28X%29)表示节点X的所有父节点，即所有「拥有直接指向X的有向边」的节点。以上图为例， ![[公式]](https://www.zhihu.com/equation?tex=%5Cmathrm%7Bpa%7D%28Grade%29%3D+%5C%7B%5Ctextit%7BDifficulty%7D%2C+%5Ctextit%7BIntelligence%7D%5C%7D) 。
+ 
+贝叶斯网络（以及其他所有的概率图模型）相比于原始的联合分布模型，最大的优势在于增加了变量之间条件独立的先验信息，从而减小了模型的体积，与模型进行推断、学习的时间。例如，上图共有5个变量，如果用朴素的联合分布模型建模，条件概率表格的体积将会是 ![[公式]](https://www.zhihu.com/equation?tex=2+%5Ctimes3%5Ctimes2%5Ctimes2%5Ctimes2%3D48) ，而采用贝叶斯网络后，条件概率表格的总体积为 ![[公式]](https://www.zhihu.com/equation?tex=2+%2B+2+%2B+4+%5Ctimes+2+%2B+2%5Ctimes+1+%2B+3+%5Ctimes+1+%3D+17) 。在小型的网络中，这种简化的效果尚不明显，但在大型网络中，假设每个变量有a种取值，那么联合分布模型的体积将为 ![[公式]](https://www.zhihu.com/equation?tex=O%28a%5En%29) ，而一个合适的贝叶斯网络或许能把体积复杂度降低到多项式级别。最极端的情况是朴素贝叶斯，即所有的随机变量均独立，此时模型的体积复杂度为 ![[公式]](https://www.zhihu.com/equation?tex=O%28an%29) 。
+ 
+条件独立的信息是先验的，它们往往由任务相关的专家提供，而非从数据中学习得到。这种做法能保证网络结构的可靠。（此处讨论的是parameter learning而非structure learning，网络结构已知而参数未知；对于后者，我们有Chow-Liu算法，但此处不讨论。）之后，我们也会发现，类似的先验因果假设在SCM中有重要地位。
+ 
+2.4.1. d分隔
+ 
+![](https://pic2.zhimg.com/80/v2-92fbac23e221826585c55d4bddb09255_1440w.jpg)
+ 
+如图所示，对于一个贝叶斯网络中的三个节点/变量而言，一共有三种基本的结构。两种不同的条件独立假设。用 ![[公式]](https://www.zhihu.com/equation?tex=X+%5Cperp+Y)表示X与Y之间独立：
+ 
+1.  cascade: ![[公式]](https://www.zhihu.com/equation?tex=A+%5Crightarrow+B+%5Crightarrow+C) ，则必有 ![[公式]](https://www.zhihu.com/equation?tex=%28A%5Cperp+C%29%7CB) 以及 ![[公式]](https://www.zhihu.com/equation?tex=A+%5Cnot%5Cperp+C) 。
+2.  common parent: ![[公式]](https://www.zhihu.com/equation?tex=A+%5Cleftarrow+B+%5Crightarrow+C)，同样有 ![[公式]](https://www.zhihu.com/equation?tex=%28A%5Cperp+C%29%7CB) 以及 ![[公式]](https://www.zhihu.com/equation?tex=A+%5Cnot%5Cperp+C) 。
+3.  V-structure: ![[公式]](https://www.zhihu.com/equation?tex=A+%5Crightarrow+B+%5Cleftarrow+C) ，必有 ![[公式]](https://www.zhihu.com/equation?tex=A+%5Cperp+C) 与 ![[公式]](https://www.zhihu.com/equation?tex=%28A+%5Cnot%5Cperp+C%29+%7C+B) ，与前两种基本结构的条件独立情况不同。
+ 
+为了回答「给定一个随机变量的集合Z，随机变量A与B之间是否条件独立」这个问题，我们需要引入d分隔的概念。d分隔（d-separation）的全名是「有向分隔」（directed separation）。
+ 
+某个节点集合O能d分隔节点A与节点B，当且仅当：给定O时，A与B之间不存在有效路径（active path）。
+ 
+对于A与B之间的无向无环路径P，如果P上的每三个连续节点，都符合以下四种情况中的一种，那么P就是一条有效路径：
+1.  X←Y←Z且Y∉O
+2.  X→Y→Z且Y∉O
+3.  X←Y→Z且Y∉O
+4.  X→Y←Z且Y∈O。这种情况被称为伯克森悖论（Berkson's Paradox）：当两个独立事件的共同结果被观察到时，这两个独立事件就不再相互独立了。例如，扔两个硬币，硬币A朝上的面和硬币B朝上的面之间，应该是相互独立的；然而，如果我们已知「有一个硬币正面朝上」，那么A与B朝上的面之间就不再相互独立了。
+    
+ 
+相应地，如果给定O之后，一条路径P不是一条有效路径，那么我们称O节点集合 d分隔 了路径P。d分隔的概念适用于两个节点，也适用于两个节点之间的路径，后者在「后门准则」的定义中非常有用。
+ 
+如果两个变量没有被d分隔，那么它们之间的状态被称为d联结（d-connection）。
+ 
+  
+ 
+d分隔能极大简化贝叶斯网络中 ![[公式]](https://www.zhihu.com/equation?tex=%28X%5Cperp+Y+%29%7C+Z) 等条件独立情况的判定。Pearl将其进一步泛化，提出了拟图（graphoid）的概念。一个graphoid是一组形如「已知变量Z，则变量X与变量Y相互独立」的陈述，服从以下五条拟图公理：
+ 
+![](https://pic3.zhimg.com/80/v2-220c102184781b71c753f20ea7e824da_1440w.jpg)
+ 
+关于graphoid中文翻译的备注：graphoid尚无权威的中文翻译，而且在互联网上几乎没有任何相关的中文材料。我在选择译名时，参考了matroid的翻译。既然matrix是矩阵，而matroid是拟阵，那么graph是图，所以graphoid应该被称为拟图。
+ 
+拟图的概念只出现在Pearl的著作中。不过，如果我们采用概率论对于「独立事件」的定义，那么我们可以把它们当做定理推导得出，可见概率论的「独立」符合拟图公理体系。当然，intersection的成立需要一个额外条件：针对所有的事件A，如果 ![[公式]](https://www.zhihu.com/equation?tex=A+%5Cne+%5Cemptyset) ，那么 ![[公式]](https://www.zhihu.com/equation?tex=P%28A%29%3E0) 。
+ 
+  
+ 
+2.4.2. 为什么贝叶斯网络不适合做因果模型？
+ 
+有了一个学习完毕的贝叶斯网络后，我们可以用它进行各类推断，主要是概率推断![[公式]](https://www.zhihu.com/equation?tex=P%28X_i%7CX_%7Bj_1%7D%2C+X_%7Bj_2%7D%2C+X_%7Bj_3%7D%2C+...%2C+X_%7Bj_k%7D%29) ：已知 ![[公式]](https://www.zhihu.com/equation?tex=X_%7Bj_1%7D%2C+X_%7Bj_2%7D%2C+X_%7Bj_3%7D%2C+...%2C+X_%7Bj_k%7D) 等随机变量的值，求另一随机变量 ![[公式]](https://www.zhihu.com/equation?tex=X_i) 的条件概率。贝叶斯网络的优越性体现于，即使有大量的缺失、未知变量值，它也能利用边缘化操作，毫无障碍地进行概率推断。在SCM中，这一功能仍然有相当重要的地位。
+ 
+如果我们把箭头看作从因指向果，把A→B看作A导致了B，那么贝叶斯网络看起来似乎能表达因果关系。然而，贝叶斯网络本身无法区分出因果的方向。例如，A←B←C与A→B→C的因果方向完全相反，但在贝叶斯网络的模型描述下，它们表达的概率分布和条件独立假设完全相同。
+ 
+此外，概率论「给定/已知随机变量Z」里的「给定/已知」只能用于表达观察，而非介入。例如，P(下雨|地面是湿的)与P(地面是湿的|下雨)的概率值都很高，其中「给定“地面是湿的”」与「给定“下雨”」都是观察而非介入的结果。用do(X)表示「介入，使得事件X发生」，现在考虑另一种情况：P(下雨|do(地面是湿的))。根据直觉，显然P(下雨|do(地面是湿的)) < P(下雨|地面是湿的)，因为把地面弄湿并不能导致下雨。
+ 
+综上所述，贝叶斯网络虽然十分强大，但无法准确描述因果关系。下文的SEM将主要解决这个问题。在学习贝叶斯网络的过程中，我们也应该尽量避免使用「因果」相关的词语——贝叶斯网络中，A→B未必等同于A导致B。
+ 
+  
+ 
+2.5. 结构方程+结构因果模型
+ 
+为了表示因果关系，我们需要对贝叶斯网络进行改进。结构方程模型（Structural Equation Model，简称SEM）在经济与工程领域十分常用。在贝叶斯网络的基础上加入SEM的成分之后，我们就离完善的SCM（结构因果模型）更近了一步。
+ 
+  
+ 
+2.5.1. 打破对称性
+ 
+在贝叶斯网络中，节点 ![[公式]](https://www.zhihu.com/equation?tex=X) 的概率分布 ![[公式]](https://www.zhihu.com/equation?tex=P%28X%3Dx%7C%5Cmathrm%7Bpa%7D%28X%29%29) 由它的父节点 ![[公式]](https://www.zhihu.com/equation?tex=%5Cmathrm%7Bpa%7D%28x%29) 决定，记录在一个条件概率表格中。然而，条件概率表格和一些简单的连续概率分布都是可逆的。例如，对于随机变量 ![[公式]](https://www.zhihu.com/equation?tex=X) 和 ![[公式]](https://www.zhihu.com/equation?tex=Y) ，如果 ![[公式]](https://www.zhihu.com/equation?tex=Y%3D%5Calpha+X+%2B+%5Cbeta) ，那么我们可以操纵代数表达式，得到 ![[公式]](https://www.zhihu.com/equation?tex=X%3D%5Cfrac%7BY-%5Cbeta%7D%7B%5Calpha%7D) 。然而，这种对称性在因果关系里是不符合直觉的。对称的代数表达式表明，如果我们改变Y，X就会发生相应的改变；可是，修改温度计的读数并不会改变环境温度，调整闹钟的时针并不会改变真正时间的流动。
+ 
+因此，在SEM中，我们用函数式的方程表示某个变量 ![[公式]](https://www.zhihu.com/equation?tex=X) ： ![[公式]](https://www.zhihu.com/equation?tex=X%3Df_X%28%5Cmathrm%7Bpa%7D%28X%29%2C%5Cmathrm%7Bu%7D%28X%29%29) 。其中， ![[公式]](https://www.zhihu.com/equation?tex=%5Cmathrm%7Bpa%7D%28X%29) 表示X的父节点中的内生变量（endogenous variable）； ![[公式]](https://www.zhihu.com/equation?tex=%5Cmathrm%7Bu%7D%28X%29) 表示X的父节点中的外生变量（exogenous variable），只有一个。内生变量依赖于其他变量，在SCM中表示为「存在父节点的节点」，即至少有一条边指向该节点；外生变量独立于其他变量，在SCM中表示为「不存在父节点的节点」，即没有边指向该节点。
+ 
+传统的路径分析研究中， ![[公式]](https://www.zhihu.com/equation?tex=f_X) 通常是一个线性函数，因果律的定义也局限与 ![[公式]](https://www.zhihu.com/equation?tex=Y%3D%5Calpha+X+%2B+%5Cbeta) 中的 ![[公式]](https://www.zhihu.com/equation?tex=%5Calpha) 。但是，在数据越发复杂的现在，我们完全可以采用非线性函数、非参数模型。相对地，「因果」的定义也从路径参数 ![[公式]](https://www.zhihu.com/equation?tex=%5Calpha) 变成了更广义的「变化传递」，参见前文RCM的部分。作为一个广泛的模型框架，SCM可以产生各式各样的复杂模型。
+ 
+在最广泛的条件下，函数 ![[公式]](https://www.zhihu.com/equation?tex=f_X) 是不可逆的。我们需要把 ![[公式]](https://www.zhihu.com/equation?tex=X%3Df_X%28%5Cmathrm%7Bpa%7D%28X%29%2C%5Cmathrm%7Bu%7D%28X%29%29) 理解为「（大自然/模型本身）对X的赋值」，而不仅仅是一个普通的代数等式。SCM要求所有的箭头 ![[公式]](https://www.zhihu.com/equation?tex=A%5Cto+B) 必须表示「A直接导致B」。所以，在因果推断的过程中，我们必须按照因果箭头的方向进行推理，不能颠倒顺序。
+ 
+![](https://pic1.zhimg.com/80/v2-2f59fbad01d5b57d7c151822c14712ac_1440w.jpg)
+ 
+图1：结构因果模型示意图
+ 
+如上图所示， ![[公式]](https://www.zhihu.com/equation?tex=U_X) 与 ![[公式]](https://www.zhihu.com/equation?tex=U_Y) 是外生变量， X与Y是内生变量，X可以导致Y。在图(a)中， ![[公式]](https://www.zhihu.com/equation?tex=U_X) 与 ![[公式]](https://www.zhihu.com/equation?tex=U_Y) 之间没有边相连，而在图(b)中， ![[公式]](https://www.zhihu.com/equation?tex=U_X) 与 ![[公式]](https://www.zhihu.com/equation?tex=U_Y) 之间有一条用虚线表示的双向箭头。在SCM里，我们用单向箭头表达直接的因果关系，用双向箭头表明两个外生变量之间可能存在未知的混杂因素（confounding variable）。
+ 
+![[公式]](https://www.zhihu.com/equation?tex=U_X) 与 ![[公式]](https://www.zhihu.com/equation?tex=U_Y) 等外生变量可以表示「模型没有考虑到的环境噪音」，从而为看似非随机的结构方程模型加入随机的成分。因此，SEM并非完全确定，它也可以拥有概率、不确定性等特征；SCM比普通的贝叶斯网络更广泛。此外，一个SCM描述了数据的生成原理，而不仅是表面观测到的概率分布，所以SCM比贝叶斯网络更稳定。
+ 
+  
+ 
+2.5.2. 介入
+ 
+如上文所言，SCM是对于贝叶斯网络的一种泛化。一般的贝叶斯网络可以解答两类问题：
+*   条件概率： ![[公式]](https://www.zhihu.com/equation?tex=P%28Y%7CE%3De%29) ，其中Y是我们感兴趣的一组未知变量，E是一组我们观察到的已知变量，e是我们观察到的E的值。E可以是空集，代表「我们没有观察到任何变量」。
+*   最大后验概率（MAP）： ![[公式]](https://www.zhihu.com/equation?tex=%5Carg%5Cmax_%7By%7D%7BP%28Y%3Dy%7CE%3De%29%7D) ，我们想要找到的是一组最有可能的Y值。
+    
+ 
+如果不考虑算法复杂度，一个能估计条件概率的模型必然能估计MAP，所以下文将只讨论条件概率的情况。
+ 
+在「观察」的基础上，SCM还能做到「介入」： ![[公式]](https://www.zhihu.com/equation?tex=P%28Y%7CE%3De%2C+do%28X%3Dx%29%29) 。其中，我们对系统进行介入，迫使一组变量X拥有值x。在X是一个空集的情况下，SCM与普通的贝叶斯网络差别不大。
+ 
+以下图为例，我将展示SCM实现介入的方法。
+ 
+![](https://pic1.zhimg.com/80/v2-bfddee417c2bc99edd58383eae72548c_1440w.jpg)
+
+图2：一个SCM
+ 
+在这个SCM中，变量X、Y、Z之间的关系可以用以下的结构方程表示：
+ 
+1.  ![[公式]](https://www.zhihu.com/equation?tex=Z%3Df_Z%28U_Z%29)
+2.  ![[公式]](https://www.zhihu.com/equation?tex=X%3Df_X%28Z%2C+U_X%29)
+3.  ![[公式]](https://www.zhihu.com/equation?tex=Y%3Df_Y%28X%2C+U_Y%29)
+    
+ 
+在此模型中，我们假设 ![[公式]](https://www.zhihu.com/equation?tex=U_X) 与 ![[公式]](https://www.zhihu.com/equation?tex=U_Y) 与 ![[公式]](https://www.zhihu.com/equation?tex=U_Z) 这三个外生变量独立。所以，图(a)与图(b)中的 ![[公式]](https://www.zhihu.com/equation?tex=U_X) 与 ![[公式]](https://www.zhihu.com/equation?tex=U_Y) 与 ![[公式]](https://www.zhihu.com/equation?tex=U_Z) 之间均没有边相连。
+ 
+如图(b)所示，当我们进行介入 ![[公式]](https://www.zhihu.com/equation?tex=do%28X%3Dx_0%29) 时，我们切断了所有指向X的边，并将X赋值为 ![[公式]](https://www.zhihu.com/equation?tex=x_0) 。于是，新的SCM包括了一套新的结构方程：
+1.  ![[公式]](https://www.zhihu.com/equation?tex=Z%3Df_Z%28U_Z%29)
+2.  ![[公式]](https://www.zhihu.com/equation?tex=X%3Dx_0)
+3.  ![[公式]](https://www.zhihu.com/equation?tex=Y%3Df_Y%28X%2C+U_Y%29)
+    
+ 
+综上所述，一个SCM（写作 ![[公式]](https://www.zhihu.com/equation?tex=M_1) ）估计 ![[公式]](https://www.zhihu.com/equation?tex=P_%7BM_1%7D%28Y%7CE%3De%2Cdo%28X%3Dx%29%29) 的方式为：完成对原有模型 ![[公式]](https://www.zhihu.com/equation?tex=M_1) 的介入 ![[公式]](https://www.zhihu.com/equation?tex=do%28X%3Dx%29) 之后，得到一个新的模型 ![[公式]](https://www.zhihu.com/equation?tex=M_2) 。随后，在 ![[公式]](https://www.zhihu.com/equation?tex=M_2) 上估计 ![[公式]](https://www.zhihu.com/equation?tex=P_%7BM_2%7D%28Y%7CE%3De%29) 。
+ 
+有人可能会产生疑问：「观察和介入，有什么本质区别吗？」
+ 
+一个日常例子式的回答如下：
+ 
+用A代表「环境温度」，用B代表「温度计读数」，A与B之间的因果关系为 ![[公式]](https://www.zhihu.com/equation?tex=A+%5Cto+B) 。在默认状态下，温度计不会受到外在干预。因此，观察到温度计读数升高，我们可以推断出环境温度升高。但是，当我们直接干预温度计时（例如用手握住温度计），我们进行了介入 ![[公式]](https://www.zhihu.com/equation?tex=do%28B%3Db_1%29) ，使温度计的读数变成了 ![[公式]](https://www.zhihu.com/equation?tex=b_1) ；同时，因为是介入而非观察，从A到B的因果箭头被切断了，我们有 ![[公式]](https://www.zhihu.com/equation?tex=A%5Cnot%5Cto+B) 或 ![[公式]](https://www.zhihu.com/equation?tex=A+%5C+%5C+%5C+%5C+%5C+B) 。
+ 
+假设 ![[公式]](https://www.zhihu.com/equation?tex=b_1) 是一个较高的温度，那么 ![[公式]](https://www.zhihu.com/equation?tex=P%28A%3Db_1%7CB%3Db_1%29) 代表「在自然状态下，观察到温度计的读数是 ![[公式]](https://www.zhihu.com/equation?tex=b_1) 时，实际的环境温度为 ![[公式]](https://www.zhihu.com/equation?tex=b_1) 的概率」； ![[公式]](https://www.zhihu.com/equation?tex=P%28A%3Db_1%7Cdo%28B%3Db_1%29%29) 代表「在外在干预使温度计读数成为 ![[公式]](https://www.zhihu.com/equation?tex=b_1) 时，实际的环境温度为 ![[公式]](https://www.zhihu.com/equation?tex=b_1) 的概率」。显然， ![[公式]](https://www.zhihu.com/equation?tex=P%28A%3Db_1%7CB%3Db_1%29+%3E+P%28A%3Db_1%7Cdo%28B%3Db_1%29%29) ，可见观察与介入是两种完全不同的行为。观察不会影响模型的自然状态，但介入会。
+ 
+2.5.3. 因果推断的数学原理
+ 
+在这一部分，我将介绍SCM进行因果推断的数学基础。
+ 
+我们说一个SCM具有马尔可夫性质，当且仅当这个SCM不包含任何的有向环，且所有外生变量均相互独立。因为外生变量通常被理解为某种「误差项」或「噪音项」，所以如果某些外生变量之间存在相关性，那么它们之间可能存在混淆变量。在一个马尔可夫式SCM中，我们可以得到以下的基本定理：
+ 
+因果马尔可夫条件： ![[公式]](https://www.zhihu.com/equation?tex=P%28v_1%2C+v_2%2C+...%2C+v_n%29%3D%5Cprod_%7Bi%3D1%7D%5E%7Bn%7DP%28v_i%7C%5Cmathrm%7Bpa%7D%28v_i%29%29)
+ 
+其中， ![[公式]](https://www.zhihu.com/equation?tex=v_i) 代表我们感兴趣的变量， ![[公式]](https://www.zhihu.com/equation?tex=%5Cmathrm%7Bpa%7D%28v_i%29) 代表它的父节点中的所有内生变量。利用因果马尔可夫条件，我们可以把一个联合概率分布分解为多个条件概率分布的积。
+ 
+一个符合因果马尔可夫条件的SCM经过介入之后，仍然符合因果马尔可夫条件，条件概率计算如下：
+ 
+![[公式]](https://www.zhihu.com/equation?tex=P%28v_1%2C+v_2%2C+...%2C+v_n%7Cdo%28X%3Dx%29%29%3D%5Cprod_%7Bi%3D1%2C+v_i%5Cnotin+X%7D%5E%7Bn%7DP%28v_i%7C%5Cmathrm%7Bpa%7D%28v_i%29%29%7C_%7BX%3Dx%7D)
+ 
+其中，X是一系列受到干预的变量，x是X中变量受干预之后的数值。 ![[公式]](https://www.zhihu.com/equation?tex=P%28v_i%7C%5Cmathrm%7Bpa%7D%28v_i%29%29%7C_%7BX%3Dx%7D) 表示， ![[公式]](https://www.zhihu.com/equation?tex=%5Cmathrm%7Bpa%7D%28v_i%29) 里同时也在X里（即在 ![[公式]](https://www.zhihu.com/equation?tex=%5Cmathrm%7Bpa%7D%28v_i%29+%5Ccup+X) 中）的变量将被赋值为 ![[公式]](https://www.zhihu.com/equation?tex=x) 的对应值。
+ 
+![](https://pic1.zhimg.com/80/v2-bfddee417c2bc99edd58383eae72548c_1440w.jpg)
+
+图2
+ 
+以图2为例，在干预之前， ![[公式]](https://www.zhihu.com/equation?tex=P%28Z%2C+Y%2C+X%29+%3D+P%28Z%29P%28X%7CZ%29P%28Y%7CX%29) ，而在干预 ![[公式]](https://www.zhihu.com/equation?tex=do%28X%3Dx_1%29) 之后， ![[公式]](https://www.zhihu.com/equation?tex=P%28Z%2C+Y%7Cdo%28X%3Dx_1%29%29+%3D+P%28Z%29P%28Y%7CX%3Dx_1%29) 。注意，由于从Z到X的因果箭头已经被切断， ![[公式]](https://www.zhihu.com/equation?tex=P%28Z%29%3DP%28Z%7Cdo%28X%3Dx_1%29%29) ，因为直接改变X无法影响Z。
+ 
+在《Causality》中，Pearl证明了一个更广泛的结论：
+ 
+![[公式]](https://www.zhihu.com/equation?tex=P%28Y%3Dy%7Cdo%28X%3Dx%29%29%3D%5Csum_t%7BP%28Y%3Dy%7CT%3Dt%2CX%3Dx%29P%28T%3Dt%29%7D)
+ 
+其中，每一个t都代表X所有父节点的一种可能取值。由于所有直接指向X的箭头已经被切断，所以自然有 ![[公式]](https://www.zhihu.com/equation?tex=P%28T%3Dt%7CX%3Dx%29%3DP%28T%3Dt%29) 。
+ 
+  
+ 
+2.5.4. 后门准则（back-door criterion）
+ 
+考虑如下图3所示的SCM：
+ 
+![](https://pic1.zhimg.com/80/v2-6e12dd916d27ef0130aded624a625500_1440w.jpg)
+ 
+图3
+ 
+在SCM中，如果一条无向连接X与Y的路径有一条指向X的箭头，那么我们把这条路径称为从X到Y的后门路径。按照正常的因果链，「X导致Y」的结构应该是 ![[公式]](https://www.zhihu.com/equation?tex=X%5Cto+V_1+%5Cto+V_2+%5Cto+...+%5Cto+V_%7Bk-1%7D+%5Cto+V_%7Bk%7D+%5Cto+Y) ；然而，如果X与Y之间后门路径存在，那么实际结果中很可能出现虚假的统计相关性。
+ 
+因此，当一个变量集合S符合以下两个条件时，我们称S符合后门准则：
+1.  S中不包括X的后代。
+2.  S能d分隔所有从X到Y的后门路径。
+    
+ 
+例如，在图3里， ![[公式]](https://www.zhihu.com/equation?tex=%5C%7BZ_1%2C+Z_2%2C+Z_3%5C%7D%2C+%5C%7BZ_1%2C+Z_3%5C%7D%2C+%5C%7BW_1%2C+Z_3%5C%7D%2C+%5C%7BW_2%2C+Z_3%5C%7D) 等集合都满足后门准则，但 ![[公式]](https://www.zhihu.com/equation?tex=%5C%7BZ_3%5C%7D) 不满足后门准则。
+ 
+后门准则的重要性在于，它进一步泛化了2.5.3.结尾的公式。如果S满足从X到Y的后门准则，那么，我们可以推导得到：
+ 
+![[公式]](https://www.zhihu.com/equation?tex=P%28Y+%3D+y%7Cdo%28X+%3D+x%29%2C+S+%3D+s%29+%3D+P%28Y+%3D+y%7CX+%3D+x%2C+S+%3D+s%29)
+ 
+![[公式]](https://www.zhihu.com/equation?tex=P%28Y+%3D+y%7Cdo%28X+%3D+x%29%29+%3D+%5Csum_s+P%28Y+%3D+y%7CX+%3D+x%2C+S+%3D+s%29P%28S%3Ds%29%3D%5Csum_s+%5Cfrac%7BP%28Y+%3D+y%2C+X+%3D+x%2C+S+%3D+s%29%7D%7BP%28X%3Dx%2C+S%3Ds%29%7D)
+ 
+这极大简化了SCM推导时的运算。
+ 
+  
+ 
+2.6. SCM的反事实推理
+ 
+反事实推理（counterfactual inference）的核心在于：虽然现实情况下 ![[公式]](https://www.zhihu.com/equation?tex=X%3Dx_1) ，但是假如![[公式]](https://www.zhihu.com/equation?tex=X%3Dx_2) 的话，Y会怎么样呢？
+ 
+有些人后悔，「如果我当年……，那么我现在就能……。」这一思维方式就是反事实推理。
+ 
+反事实推理与FPCI（因果推断的根本问题）息息相关。对于一个已经接受了实验组介入的样本u，我们只能观察到u的 ![[公式]](https://www.zhihu.com/equation?tex=Y_t%28u%29) ，却永远无法观察到 ![[公式]](https://www.zhihu.com/equation?tex=Y_c%28u%29) ，反之亦然。RCM（虚拟事实模型）对反事实推理有一定的描述，但RCM整体不如SCM清晰、明确、易解释。
+ 
+下面，我将用SCM重新表达2.2部分中提到的介入主义因果观。
+ 
+*   RCM考虑的对象是一个种群 ![[公式]](https://www.zhihu.com/equation?tex=U) 内的所有个体 ![[公式]](https://www.zhihu.com/equation?tex=u) 。在很多情形下，同质性假设不成立，每个个体都不尽相同。在SCM中，个体的差异会被误差项 ![[公式]](https://www.zhihu.com/equation?tex=U_V) 表示（外生变量 ![[公式]](https://www.zhihu.com/equation?tex=U_V) 会相对应地影响内生变量 ![[公式]](https://www.zhihu.com/equation?tex=V) ）。除了 ![[公式]](https://www.zhihu.com/equation?tex=U_V) 之外，模型 ![[公式]](https://www.zhihu.com/equation?tex=M) 本身所代表的「自然法则」保持不变。
+*   RCM的表达式 ![[公式]](https://www.zhihu.com/equation?tex=Y_t%28u%29) 可以表示为 ![[公式]](https://www.zhihu.com/equation?tex=M.%5Cmathtt%7Bquery%7D%28P%28Y%7Cdo%28T%3Dt%29%2C+U%3Du%29%29) 。即：我们对模型M进行干预，使得变量T赋值为t；同时，我们观察到所有外生变量U的值为u；在此情况下，我们向模型M查询我们感兴趣变量Y的条件概率。
+*   RCM要求模型拥有一个「不受介入」的默认状态。显然，SCM符合要求：![[公式]](https://www.zhihu.com/equation?tex=Y_c%28u%29%3DM.%5Cmathtt%7Bquery%7D%28P%28Y%7CU%3Du%29%29)
+    
+ 
+因此，SCM可以回答类似「假如 ![[公式]](https://www.zhihu.com/equation?tex=X%3Dx_1) 而非现实中的 ![[公式]](https://www.zhihu.com/equation?tex=X%3Dx_0) ，Y的值是什么？」的反事实问题。但是，在现实生活中，由于个体信息 ![[公式]](https://www.zhihu.com/equation?tex=U%3Du) 通常未知，而复杂的非线性结构方程可能会随着U的分布变化而变化，所以反事实推理普遍比较困难。
+ 
+总而言之，所有RCM均可以用SCM表达，而且SCM的白箱比RCM的黑箱更清晰、更稳定。
+ 
+  
+ 
+## 过程性因果
+ 
+在第二章，我们使用的SCM（结构因果模型）建立在三条基本直觉上：
+1.  因和果都是单独时间点上的单独事件
+2.  因在前，果在后
+3.  （由1和2可得）两个事件无法互为因果
+ 
+不过，在其他一些情境中，例如掠食者的数量与猎物的数量，两个变量似乎「互为因果」。SCM与贝叶斯网络不允许环路的存在，故无法表示此类直觉上的因果关系。所以，我们需要一个更复杂的因果模型——因果环路图（Causal Loop Diagram，简称CLD）。
+ 
+CLD中的变量基于以下的直觉：
+1.  因和果是某种过程，有一段持续的时间
+2.  因和果的持续时间段可以相互重叠
+3.  两个过程可以互为因果，甚至一个过程自身也可以形成因果环路
+    
+ 
+![](https://pic4.zhimg.com/v2-2d54fa8887f3ca929ff3d1aca035c6ff_b.webp)
+ 
+因果环路图：银行存款与利息
+ 
+和SCM相比，CLD尚未有那么严谨、广泛的理论框架。我们可以把CLD理解为一个「从时间标量（实数）到一个SCM集」的函数映射。为了方便建模，所有的变量都是数值变量，而且多个过程变量之间的相互影响往往都是线性的，形如 ![[公式]](https://www.zhihu.com/equation?tex=Y%3D%5Calpha+X+%2B+%5Cbeta) 。如果 ![[公式]](https://www.zhihu.com/equation?tex=%5Calpha+%3D+%5Cfrac%7BdY%7D%7BdX%7D+%3E+0) ，那么我们说从X到Y的链接是正链接；如果 ![[公式]](https://www.zhihu.com/equation?tex=%5Calpha+%3D+%5Cfrac%7BdY%7D%7BdX%7D+%3C+0) ，那么我们说从X到Y的链接是负链接。
+ 
+![](https://pic3.zhimg.com/v2-793e119dfa33cf7b26893a16572c2de6_b.jpg)
+ 
+正链接（左）与负链接（右）
+ 
+对于因果环路 ![[公式]](https://www.zhihu.com/equation?tex=A+%5Cto+B+%5Cto+A) ：
+ 
+*   如果A起初的一点增加（或减少）会通过因果环路，导致A进一步增加（或减少），那么我们称之为强化反馈回路。
+*   如果A起初的一点增加（或减少）会通过因果环路，反而导致A减少（或增加），从而中和最初的增加（减少），那么我们称之为平衡反馈回路。
+    
+ 
+假设A>0且B>0，那么：
+*   如果 ![[公式]](https://www.zhihu.com/equation?tex=A%5Cto+B) 与 ![[公式]](https://www.zhihu.com/equation?tex=B+%5Cto+A) 的链接正负相同，那么我们通常可以得到一个强化反馈回路。
+    
+*   如果 ![[公式]](https://www.zhihu.com/equation?tex=A%5Cto+B) 与 ![[公式]](https://www.zhihu.com/equation?tex=B+%5Cto+A) 的链接正负相反，那么我们通常可以得到一个平衡反馈回路。
+    
+ 
+更一般地，在一个因果环路图中：
+*   如果有偶数个负链接，那么它是一个强化反馈回路。
+*   如果有奇数个负链接，那么它是一个平衡反馈回路。
+ 
+反馈回路的实际意义通常如下：
+*   强化反馈回路通常意味着指数增加、指数衰减，例如「利滚利」的银行存款与利息、不受限制的人口增长。
+*   平衡反馈回路通常意味着达到某个平衡状态，例如洛特卡-沃尔泰拉方程的解。
+
+在未来，一个可能的研究方向是把SCM中较为成熟、广泛的因果推断框架推广到CLD上。研究的重点在于引入非线性、非参数的复杂因果链接。此类研究必然十分困难，但随着电脑计算能力的增强，我们将逐渐有能力构建更复杂的CLD。
 
 
 
