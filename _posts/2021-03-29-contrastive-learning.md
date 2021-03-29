@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "对比学习综述-Contrastive Learning"
+title:  "对比学习(无监督)综述-Contrastive Learning"
 date:   2021-03-29 17:24:00
 categories: 机器学习
 tags:  对比学习
