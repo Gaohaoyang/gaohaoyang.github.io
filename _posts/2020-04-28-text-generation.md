@@ -20,7 +20,7 @@ mathjax: true
 - 【2020-9-21】文本生成系列文章
   - [文本生成12：4种融合知识的text generation](https://zhuanlan.zhihu.com/p/133266258)
   - [文本生成13：万字长文梳理文本生成评价指标](https://zhuanlan.zhihu.com/p/144182853)
-- 【2021-1-4】[data2text](https://zhuanlan.zhihu.com/p/82054729)，【2021-3-29】[文本生成2：Data-to-text Generation with Entity Modeling](https://zhuanlan.zhihu.com/p/82054729), [论文](https://arxiv.org/abs/1906.03221)，[代码](https://github.com/ratishsp/data2text-entity-py)
+- 【2021-1-4】[data2text](https://zhuanlan.zhihu.com/p/82054729)，【2021-3-29】解读[文本生成2：Data-to-text Generation with Entity Modeling](https://zhuanlan.zhihu.com/p/82054729), [论文](https://arxiv.org/abs/1906.03221)，[代码](https://github.com/ratishsp/data2text-entity-py)
 
 # 文本生成方案
 
