@@ -274,43 +274,56 @@ One-Hop Interaction可能无法全面理解相互question-context信息，与此
 
 考虑到目前方法的局限性，MRC出现了新的任务，比如，**knowledge**-based MRC, MRC with **unanswerable** questions, **multi-passage** MRC，**conversational** question answering。
  
-### Knowledge-Based Machine Reading Comprehension
+### 知识融合 Knowledge-Based Machine Reading Comprehension
  
-有时候，我们只根据context是无法回答问题的，需要借助外部知识。因此，基于外部知识的MRC应运而生。KBMRC和MRC的不同主要在输入部分，MRC的输入是context和question，而KBMRC的输入是context、question、knowledge。
+- 当有些问题不能根据给定文本进行回答时，人们会利用常识或积累的背景知识进行作答，而在机器阅读理解任务中却没有很好的利用外部知识，这是机器阅读理解和人类阅读理解存在的差距之一。
+- 为了引入额外的外部知识，一些学者提出了基于知识的机器阅读理解任务，与之前所介绍的任务不同，这一任务的输入除了文章和问题，还有从外部知识库中抽取的知识，以此来提高机器进行答案预测的准确率。
+- 代表性的基于知识的机器阅读理解数据集有 MC [25]，其中的文本关于人类的一些日常活动，有些问题仅根据给定文本不能作答，需要一定的常识。例如回答“用什么来挖洞”（What was used to dig the hole?）这一问题，依据常识我们知道一般是用“铲子”（a shovel）而不是用“手”（bare hands）。
+
+有时只根据context是无法回答问题的，需要借助外部知识。因此，基于外部知识的MRC应运而生。KBMRC和MRC的不同主要在输入部分，MRC的输入是context和question，而KBMRC的输入是context、question、knowledge。
  
 ![](https://pic1.zhimg.com/80/v2-7639ff4b878691078a327a083329f728_1440w.jpg)
- 
+
 目前KBMRC的主要挑战在于：
-*   Relevant External Knowledge Retrieval
-*   External Knowledge Integration
+*   Relevant External Knowledge Retrieval: 相关外部知识的检索（如何从知识库中找到“用铲子挖洞”这一常识）
+*   External Knowledge Integration: 外部知识的融合（知识库中结构化的知识如何与非结构化的文本进行融合）
  
-### Unanswerable Questions
+### 含无答案问题 Unanswerable Questions
  
-有一个潜在的假设就是MRC任务中正确答案总是存在于给定的上下文中。显然这是不现实的，上下文覆盖的知识是有限的，存在一些问题是无法只根据上下文就可以回答的。因此，MRC系统应该区分这些无法回答的问题。
+
+机器阅读理解任务有一个潜在的假设，即在给定文章中一定存在正确答案，但这与实际应用不符，由于给定文章中所含的知识有限，一些问题仅根据原文可能并不能做出回答，这就出现了带有不能回答问题的机器阅读理解任务。在这一任务中，首先机器要判断问题仅根据给定文章能否进行作答，如若不能，将其标记为不能回答，并停止作答；反之，则给出答案。
+
+SQuAD2.0 是带有不能回答问题的机器阅读理解任务的代表数据集。在下面的例子中，问题是“1937 年条约的名字”（What was the name of the 1937 treaty?），但是原文中虽然提到了 1937 年的条约，但是没有给出它的名字，仅根据原文内容不能对问题进行作答，1940 年条约的名字还会对回答问题造成误导。
  
 ![](https://pic3.zhimg.com/80/v2-1809b9f8f2d72626c2b98d0a5f0e68d6_1440w.jpg)
  
 关于不可回答的问题，相比传统的MRC，在该新任务上又有新的挑战：
-*   Unanswerable Question Detection
-*   Plausible Answer Discrimination
-    
+*   Unanswerable Question Detection：不能回答问题的判别（判断“1937 年条约的名字是什么”这个问题能否根据文章内容进行作答）
+*   Plausible Answer Discrimination：干扰答案的识别（避免被 1940 年条约名字这一干扰答案误导）
+
+### 多文档 Multi-Passage Machine Reading Comprehension
  
-### Multi-Passage Machine Reading Comprehension
- 
+机器阅读理解任务中，文章是预先定义的，再根据文章提出问题，这与实际应用不符。人们在进行问答时，通常先提出一个问题，再利用相关的可用资源获取回答问题所需的线索。
+
+为了让机器阅读理解任务与实际应用更为贴合，一些研究者提出了多文档机器阅读理解任务，不再仅仅给定一篇文章，而是要求机器根据多篇文章对问题进行作答。这一任务可以应用到基于大规模非结构化文本的开放域问答场景中。多文档机器阅读理解的代表数据集有 MS MARCO [3]、TriviaQA [13]、SearchQA [16]、DuReader [18] 和 QUASAR [27]。
+
 在MRC任务中，相关的段落是预定义好的，这与人类的问答流程矛盾。因为人们通常先提出一个问题，然后再去找所有相关的段落，最后在这些段落中找答案。因此研究学者提出了multi-passage machine reading comprehension，相关数据集有MS MARCO、TriviaQA、SearchQA、Dureader、QUASAR。
  
 ![](https://pic4.zhimg.com/80/v2-440cd6d5068a467954c83340a209880b_1440w.jpg)
- 
-相比传统的MRC，MP MRC的挑战在于：
-*   Massive Document Corpus
-*   Noisy Document Retrieval
-*   No Answer
-*   Multiple Answers
-*   Evidence Aggregation
 
+多文档机器阅读理解的挑战有：
+1. Massive Document Corpus：相关文档的检索（如何从多篇文档中检索到与回答问题相关的文档）
+2. Noisy Document Retrieval：噪声文档的干扰（一些文档中可能存在标记答案，但是这些答案与问题可能存在答非所问的情况）
+3. No Answer：检索得到的文档中没有答案
+4. Multiple Answers：可能存在多个答案（例如问“美国总统是谁”，特朗普和奥巴马都是可能的答案，但是哪一个是正确答案还需要结合语境进行推断）
+5. Evidence Aggregation：需要对多条线索进行聚合（回答问题的线索可能出现在多篇文档中，需要对其进行总结归纳才能得出正确答案）。
  
-### Conversational Question Answering
+### 对话式 Conversational Question Answering
  
+机器阅读理解任务中所提出的问题一般是相互独立的，而人们往往通过一系列相关的问题来获取知识。当给定一篇文章时，提问者先提出一个问题，回答者给出答案，之后提问者再在回答的基础上提出另一个相关的问题，多轮问答对话可以看作是上述过程迭代进行多次。为了模拟上述过程，出现了对话式阅读理解，将对话引入了机器阅读理解中。
+
+对话式阅读理解的代表性数据集有 CoQA、QuAC等。下图展示了 CQA 中的一个对话问答的例子。对于给定的文章，进行了五段相互关联的对话，不仅问题之间存在联系，后续的问题可能与之前的答案也有联系，如问题 4 和问题 5 都是针对问题 3 的答案 visitors 进行的提问。
+
 MRC系统理解了给定段落的语义后回答问题，问题之间是相互独立的。然而，人们获取知识的最自然方式是通过一系列相互关联的问答过程。比如，给定一个问答，A提问题，B回复答案，然后A根据答案继续提问题。这个方式有点类似多轮对话。
  
 ![](https://pic2.zhimg.com/80/v2-0f7d74919ef2a9dce1013ddbbc3e8965_1440w.jpg)
@@ -318,17 +331,23 @@ MRC系统理解了给定段落的语义后回答问题，问题之间是相互�
 相关数据集：CoQA、QuAC
  
 ![](https://pic1.zhimg.com/80/v2-82993d4dd455512282e6576f41939b94_1440w.jpg)
- 
-与MRC相比，CQA带来了新的挑战：
-*   Conversational History
-*   Coreference Resolution
+
+对话式阅读理解（CQA）存在的挑战有：
+1. Conversational History：对话历史信息的利用（后续的问答过程与之前的问题、答案紧密相关，如何有效利用之前的对话信息）；
+2. Coreference Resolution：指代消解（理解问题 2，必须知道其中的 she 指的是 Jessica）。
  
 ### Open Issues
  
-*   Incorporation of External Knowledge
-*   Robustness of MRC Systems
-*   Limitation of Given Context
-*   Lack of Inference Ability
+* Incorporation of External Knowledge **外部知识**的引入
+  - 常识和背景知识作为人类智慧的一部分常常用于人类阅读理解过程中，虽然基于知识的机器阅读理解任务在引入外部知识方面有一定的尝试，但是仍存在不足。
+  - 一方面，存储在知识库中的结构化知识的形式和非结构化的文章、问题存在差异，如何将两者有效的进行融合仍值得研究；
+  - 另一方面，基于知识的机器阅读理解任务表现高度依赖于知识库的构建，但是知识库的构建往往是费时费力的，而且存储在其中的知识是稀疏的，如果不能在知识库中直接找到相关的外部知识，可能还需要对其进行进一步的推理。
+* Robustness of MRC Systems：机器阅读理解系统的**鲁棒性**
+  - 正如 Jia & Liang指出的，现有的基于抽取的机器阅读理解模型对于存在误导的对抗性样本表现非常脆弱。如果原文中存在干扰句，机器阅读理解模型的效果将大打折扣，这也在一定程度上表明现有的模型并不是真正的理解自然语言，机器阅读理解模型的鲁棒性仍待进一步的提升。
+* Limitation of Given Context：**限定文章**带来的局限性
+  - 机器阅读理解任务要求机器根据给定的原文回答相关问题，但是在实际应用中，人们往往是先提出问题，之后再利用可用的资源对问题进行回答。多文档机器阅读理解任务的提出在一定程度上打破了预先定义文章的局限，但是相关文档的检索精度制约了多文档机器阅读理解模型在答案预测时的表现。信息检索和机器阅读理解需要在未来进行更为深度的融合。
+* Lack of Inference Ability：**推理能力**的缺乏
+  - 现有的机器阅读理解模型大多基于问题和文章的语义匹配来给出答案，这就导致模型缺乏推理能力。例如，给定原文“机上五人地面两人丧命”，要求回答问题“几人丧命”时，机器很难给出正确答案“7 人”。如何赋予机器推理能力将是推动机器阅读理解领域发展的关键问题。
 
 ## 经典模型
 
