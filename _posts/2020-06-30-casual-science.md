@@ -3,7 +3,7 @@ layout: post
 title:  "因果科学-Casual-Science"
 date:   2020-06-30 16:03:00
 categories: 自然语言处理 深度学习
-tags: 深度学习 NLP KG 知识图谱 表示学习 因果科学 集智俱乐部
+tags: 深度学习 NLP KG 知识图谱 表示学习 因果科学 集智俱乐部 广告预估
 excerpt: 如何让AI系统具备真正的推理能力？图灵奖得主、贝叶斯网络之父 Judea Pearl 的解法——因果科学
 author: 鹤啸九天
 mathjax: true
@@ -98,6 +98,11 @@ mathjax: true
 
 - 【因果推断】 [A Brief Introduction to Causal Inference by Brady Neal](https://www.bilibili.com/video/BV1CK4y1L7uA/?spm_id_from=333.788.videocard.5)
 - 【2021-3-29】[统计之都-因果推断专题](https://cosx.org/tags/%E5%9B%A0%E6%9E%9C%E6%8E%A8%E6%96%AD/)
+  - [因果推断简介之一：从 Yule-Simpson’s Paradox 讲起](https://cosx.org/2012/03/causality1-simpson-paradox/)
+  - [因果推断简介之二：Rubin Causal Model (RCM) 和随机化试验](https://cosx.org/2012/03/causality2-rcm/)
+  - [因果推断简介之三：R. A. Fisher 和 J. Neyman 的分歧](https://cosx.org/2012/03/causality3-fisher-and-neyman/)
+  - [因果推断简介之五：因果图 (Causal Diagram)](https://cosx.org/2012/10/causality5-causal-diagram/)
+  
 - [Causal inference course written from a machine learning perspective](https://www.bradyneal.com/causal-inference-course)，包含课程ppt列表
 
 <iframe src="//player.bilibili.com/player.html?aid=885688534&bvid=BV1CK4y1L7uA&cid=267895326&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="350px" height="266px" > </iframe>
@@ -158,8 +163,22 @@ mathjax: true
 ![](https://pic4.zhimg.com/80/v2-0edbbc63e8f6f20a1cb40e7059fa2ec7_1440w.jpg)
 
 
+## （2）因果关系：模型、论证与推断
 
-## （2）因果 Causality
+- 2011 年图灵奖得主 Judea Pearl 的 《[Causality : Models, Reasoning and Inference](http://bayes.cs.ucla.edu/BOOK-2K/)》（第二版）
+- 作者：Judea Pearl
+- 目录
+  - 1 概率、图表和因果模型简介
+  - 2 推论因果关系理论
+  - 3 **因果图**和**因果效应**的识别
+  - 4 行动、计划和直接影响
+  - 5 社会科学和经济学中的因果关系和结构模型
+  - 6 辛普森悖论、混乱与崩溃
+  - 7 基于结构的**反事实**逻辑
+  - 8 个不完善实验：边界效应与反事实
+  - 9 因果关系的可能性：解释与识别
+  - 10 实际原因
+  - 11 与读者的思考、阐述和讨论
 
 - Judea Pearl的《Causality》
   - ![](https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2426721436,1889448037&fm=15&gp=0.jpg)
@@ -177,23 +196,6 @@ mathjax: true
 - 除前言外，本文其他部分默认读者已经理解基础概率论（概率、条件概率、贝叶斯定理、随机变量、期望值、相互独立事件）、基础图论（节点、边、有向无环图）、概率图模型初步（贝叶斯网络、d分隔）、统计学基础（随机对照试验）等知识。
 - 【2021-3-29】源自书籍总结：[【综述长文】因果关系是什么？结构因果模型入门](https://zhuanlan.zhihu.com/p/33860572)，高二学生的杰作！
 
-
-## （3）因果关系：模型、论证与推断
-
-- 《Causality : Models, Reasoning and Inference》（第二版）
-- 作者：Judea Pearl
-- 目录
-  - 1 概率、图表和因果模型简介
-  - 2 推论因果关系理论
-  - 3 **因果图**和**因果效应**的识别
-  - 4 行动、计划和直接影响
-  - 5 社会科学和经济学中的因果关系和结构模型
-  - 6 辛普森悖论、混乱与崩溃
-  - 7 基于结构的**反事实**逻辑
-  - 8 个不完善实验：边界效应与反事实
-  - 9 因果关系的可能性：解释与识别
-  - 10 实际原因
-  - 11 与读者的思考、阐述和讨论
 
 
 ## 为什么要读
@@ -314,6 +316,7 @@ mathjax: true
 
 - **因果推断**
   - 因果推断区分了人们可能想要估计的两种条件分布。机器学习中，通常只会估计一种分布，但在某些情况下，可能也需要估计第二种。
+  - 因果推断用的最多的模型是 Rubin Causal Model (RCM; Rubin 1978) 和 Causal Diagram (Pearl 1995)。Pearl (2000) 中介绍了这两个模型的等价性，但是就应用来看，RCM 更加精确，而 Causal Diagram 更加直观，后者深受计算机专家们的推崇。
 - 观察给定一个x后，变量y会发生什么变化。这就引申出两种表述： 
   - （1）**观察**p(y\|x)：如果观察变量X取值于x，Y的相应分布是什么？这是我们常在监督学习中遇到问题，它是一个条件分布，可以从p(x,y,z,…)中计算出它的两个边缘概率：p(y\|x) = p(x,y)/p(x)。相信所有人都不会对这个公式感到陌生，也都会计算。 
   - （2）**介入**p(y\|do(x))：如果设X的值为x，那Y的相应分布是什么？这其实就是通过人为把X的值设为x来干预数据生成过程，但其余变量还是用原先的生成方式，以此观察Y的变化（请注意，数据生成过程与联合分布p(x,y,z,…)不同）。
@@ -984,6 +987,7 @@ Matching 的问题就是如何去评估两个个体的相似度，并需要设�
 
 
 # 因果科学实践
+
 
 ## 阿里飞猪广告预算分配里的因果推断技术
 
