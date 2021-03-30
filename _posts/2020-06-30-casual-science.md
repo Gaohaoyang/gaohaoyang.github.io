@@ -226,7 +226,39 @@ mathjax: true
 - 【2018-5-10】近日，有越来越多的学者正在探讨机器学习（和深度学习）的局限性，并试图为人工智能的未来探路
   - [纽约大学教授 Gary Marcus 就对深度学习展开了系统性的批判](http://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650735630&idx=1&sn=5840c3e9bed487da3a9080d482fcc58e&chksm=871ac070b06d496638d47dbdaac75fdec06c5e81a3afaee1e1ce2ea37e86d92ba61de8b2b7c9&scene=21#wechat_redirect)
   - 图灵奖获得者，UCLA 教授 Judea Pearl 题为《[Theoretical Impediments to Machine Learning with Seven Sparks from the Causal Revolution](http://ftp.cs.ucla.edu/pub/stat_ser/r475.pdf)》的论文中，作者就已探讨了当前机器学习存在的理论局限性，并给出了面向解决这些问题，来自因果推理的七个启发。
-  - 当前的机器学习几乎完全是统计学或黑箱的形式，从而为其性能带来了严重的理论局限性。这样的系统不能推断干预和反思，因此不能作为强人工智能的基础。为了达到人类级别的智能，学习机器需要现实模型（类似于因果推理的模型）的引导。为了展示此类模型的关键性，我将总结展示 7 种当前机器学习系统无法完成的任务，并使用因果推理的工具完成它们。
+  - 当前的机器学习几乎完全是统计学或**黑箱**的形式，从而为其性能带来了严重的理论局限性。这样的系统不能推断干预和反思，因此不能作为强人工智能的基础。为了达到人类级别的智能，学习机器需要现实模型（类似于因果推理的模型）的引导。为了展示此类模型的关键性，我将总结展示 7 种当前机器学习系统无法完成的任务，并使用因果推理的工具完成它们。
+
+## 解决缺陷
+
+- 【2021-3-30】[ICLR 2020 反事实因果理论如何帮助深度学习？](https://zhuanlan.zhihu.com/p/136937643)
+- 一个巨大的问题是深度神经网络的**黑箱**问题和**不稳定性**问题。其中的一个根本原因，基于**相关性**的统计模型容易学习到数据中的“**伪关系**(spurious relation)”，而非因果关系，从而降低了泛化能力和对抗攻击的能力。
+  - 一个潜在的方向，就是采用从90年代以来以Judea Pearl为代表的研究者们提出的**因果推断理论**来改进现有的表示学习技术。
+  - 然而<font color='blue'>因果分析框架和表示学习并非天生相容</font>。
+    - **因果分析**通常是基于抽象的、高层次的统计特征来构建结构**因果图**；
+    - 而**表示学习**则基于海量数据提取具体的、低层次的表示特征来辅助下游任务。
+  - 为了结合这两者，MILA的Yoshua Bengio提出了System 2框架，Max Planck Institute的Bernhard Schölkopf提出的因果表示学习框架。这两者实际上的思考是一致的。ICLR 2020上因果表示学习的2项有代表性的工作：如何利用因果理论中的**反事实**（counterfactual）框架来提高算法的**稳定性**和**可解释性**。
+  - [Learning the Difference That Makes A Difference with Counterfactually-Augmented Data](https://www.aminer.cn/pub/5e5e18a393d709897ce222b4/learning-the-difference-that-makes-a-difference-with-counterfactually-augmented-data)
+    - 深度学习容易学到语言数据集上**伪关系**（spurious relation）的问题一直没有得到解决。因果推断理论告诉我们，这是由于**混杂因子**（confounding）造成的。
+    - 然而，将因果推断方法应用到自然语言处理面临着巨大的困难：什么是自然语言当中的随机变量？如何从表示中找出混杂因子？如何让学习结果更加稳定，避免受训练集中的伪关系影响？其中最大的困难，在于如何定义自然语言中的因果关系。
+    - 作者设计了一种巧妙的方法，绕开了随机变量的定义问题，转而采用因果理论中的另一个重要概念——**反事实**——来进行**human in the loop**的数据增强以避免伪关系的干扰。
+    - ![](https://pic2.zhimg.com/80/v2-4e65ed79cfe3785eb17a8a23c40bb711_1440w.jpg)
+    - 在情感分析的一个3分类数据集上，利用Amazon’s Mechanical Turk众包平台，要求人类对句子做轻微的修改。这些修改包括：
+      * 将**事实变为希望**：比如加入supposed to be表示虚拟语气
+      * **反讽**语气：如加入引号修饰、改为反问句表示反讽
+      * 插入/替换**修饰词**：将interesting替换为boring
+      * 插入**短语**，修改**评分**等
+    - 使评论的情感分类发生变化（如从正面变为负面）来进行数据增强。实验证明，对于支持向量机，朴素贝叶斯，随机森林，Bi-LSTM和BERT：
+      - a) 在原有数据集上训练后，相比原测试集，**反事实**数据集上的测试结果要差许多。反之亦然。
+      - b) 在结合了反事实增强过的训练集上训练，模型性能相比原来有着巨大的提升。
+      - c) BERT不但在通常情况下表现最好，而且在反事实干扰的数据集上表现也降低得最少
+        - [台湾国立成功大学一篇论文把 BERT 拉下神坛！NLP 神话缺了数据集还不如随机](https://zhuanlan.zhihu.com/p/74652696)，曾经狂扫 11 项记录的谷歌 NLP 模型BERT在一些基准测试中的成功仅仅是因为利用了数据集中的虚假统计线索，如若不然，还没有随机的结果好。
+        - 鉴于 R∧A→¬C，通过否定 claim 并反转每个数据点的标签来产生对抗性示例，将对抗性示例与原始数据进行组合，构建对抗测试集
+          - ![](https://pic2.zhimg.com/80/v2-75a3014d062de4707616e048a820568d_1440w.jpg)
+        - 实验表明：BERT 并不能做出正确 “理解”，只能利用统计线索
+  - [Counterfactuals Uncover the Modular Structure of Deep Generative Models](https://www.aminer.cn/pub/5c2c7a9217c44a4e7cf314de/counterfactuals-uncover-the-modular-structure-of-deep-generative-models)
+    - 有监督的视觉模型很容易会被伪关系干扰从而学出带有偏见的结果。比如，一个典型的例子是有监督CNN模型在识别狼和狗的图片时，实际上使用的统计特征是狼一般在雪中而狗在草地上。也就是说，模型认为“背景（草或雪）”与“目标（狗和狼）”之间存在某种关系。而实际上，这两种特征是解耦合的。我们希望能找到某些能学会解耦合的特征表示的模型。
+    - 检验模型能否推理反事实情况（比如狗在雪中，狼崽草上）。这样的反事实推理能力也是人类智能的一个重要标志，即推理未发生事件的结果的能力，属于因果学习的一个重要分支。反事实理论在计量经济学和公共卫生领域得到了广泛的应用，然而对于机器学习，这套理论的应用方法仍然是一片空白。将因果学习应用在表示学习上的一个重要改进的方向，就是来自Max Planck Institute的Scho ̈lkopf和MILA的Bengio目前倡议的causal representation learning. 本文即是Scho ̈lkopf在ICLR2020上的一篇尝试性的工作：通过验证模型推断反事实的能力，来验证生成式模型（BigGAN）可以学习到解耦合的模块化结构。提出了**因果生成模型**（Causal Generative Model）的分析框架来解耦合生成式模型的模块化结构
+
 
 
 ## 因果推理模型的 7 种特性
