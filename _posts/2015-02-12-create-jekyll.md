@@ -144,6 +144,10 @@ print "hello"
 
 $$f \left( x _ { n + 1 } \right) - f \left( x _ { n } \right) = f ^ { \prime } \left( x _ { n } \right) \left( x _ { n + 1 } - x _ { n } \right)$$
 
+[吴文中公式在线LaTeX编辑器](https://latex.91maths.com/)
+
+$$ P = \frac{1}{1 + \exp^{-(实力-难度)}} $$
+
 - 知乎提供公式生成图片服务：https://www.zhihu.com/equation?tex=y+%3D+%5Cphi%28%5Csum+W_%7Bij%7DX_j+%2B+b%29+
 - 效果：
 
