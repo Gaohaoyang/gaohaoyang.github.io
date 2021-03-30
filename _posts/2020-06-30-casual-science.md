@@ -251,10 +251,10 @@ mathjax: true
       - a) 在原有数据集上训练后，相比原测试集，**反事实**数据集上的测试结果要差许多。反之亦然。
       - b) 在结合了反事实增强过的训练集上训练，模型性能相比原来有着巨大的提升。
       - c) BERT不但在通常情况下表现最好，而且在反事实干扰的数据集上表现也降低得最少
-        - [台湾国立成功大学一篇论文把 BERT 拉下神坛！NLP 神话缺了数据集还不如随机](https://zhuanlan.zhihu.com/p/74652696)，曾经狂扫 11 项记录的谷歌 NLP 模型BERT在一些基准测试中的成功仅仅是因为利用了数据集中的虚假统计线索，如若不然，还没有随机的结果好。
+        - [台湾国立成功大学一篇论文把 BERT 拉下神坛！NLP 神话缺了数据集还不如随机](https://zhuanlan.zhihu.com/p/74652696)，曾经狂扫 11 项记录的谷歌 NLP 模型BERT在一些基准测试中的成功仅仅是因为利用了数据集中的**虚假统计线索**(Spurious Statistical Cues)，如若不然，还没有随机的结果好。
         - 鉴于 R∧A→¬C，通过否定 claim 并反转每个数据点的标签来产生对抗性示例，将对抗性示例与原始数据进行组合，构建对抗测试集
           - ![](https://pic2.zhimg.com/80/v2-75a3014d062de4707616e048a820568d_1440w.jpg)
-        - 实验表明：BERT 并不能做出正确 “理解”，只能利用统计线索
+        - 实验表明：BERT准确率就从77%降到53%，几乎等同于随机猜。BERT 并不能做出正确 “理解”，只能利用**虚假统计线索**(Spurious Statistical Cues)
   - [Counterfactuals Uncover the Modular Structure of Deep Generative Models](https://www.aminer.cn/pub/5c2c7a9217c44a4e7cf314de/counterfactuals-uncover-the-modular-structure-of-deep-generative-models)
     - 有监督的视觉模型很容易会被伪关系干扰从而学出带有偏见的结果。比如，一个典型的例子是有监督CNN模型在识别狼和狗的图片时，实际上使用的统计特征是狼一般在雪中而狗在草地上。也就是说，模型认为“背景（草或雪）”与“目标（狗和狼）”之间存在某种关系。而实际上，这两种特征是解耦合的。我们希望能找到某些能学会解耦合的特征表示的模型。
     - 检验模型能否推理反事实情况（比如狗在雪中，狼崽草上）。这样的反事实推理能力也是人类智能的一个重要标志，即推理未发生事件的结果的能力，属于因果学习的一个重要分支。反事实理论在计量经济学和公共卫生领域得到了广泛的应用，然而对于机器学习，这套理论的应用方法仍然是一片空白。将因果学习应用在表示学习上的一个重要改进的方向，就是来自Max Planck Institute的Scho ̈lkopf和MILA的Bengio目前倡议的causal representation learning. 本文即是Scho ̈lkopf在ICLR2020上的一篇尝试性的工作：通过验证模型推断反事实的能力，来验证生成式模型（BigGAN）可以学习到解耦合的模块化结构。提出了**因果生成模型**（Causal Generative Model）的分析框架来解耦合生成式模型的模块化结构
