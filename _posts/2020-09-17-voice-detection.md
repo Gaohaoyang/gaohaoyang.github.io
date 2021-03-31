@@ -20,6 +20,8 @@ mathjax: true
 - 【2021-3-10】[有感情的机器声优，Sonantic AI拟人配音技术为游戏注入情感](https://mp.weixin.qq.com/s?__biz=MzAxMzc2NDAxOQ==&mid=2650399087&idx=2&sn=cd3d86be4847c0af94bb06a92dd2bdb9&chksm=8390d5b3b4e75ca5917bec764a7ea4ca432271ec113d8fb50742943f1a46d9059b0836c31748&mpshare=1&scene=1&srcid=0310XbmTi2wTUlIYHvmbUoay&sharer_sharetime=1615364819532&sharer_shareid=b8d409494a5439418f4a89712efcd92a&version=3.1.0.6189&platform=mac#rd)，[Sonantic官网](https://www.sonantic.io/)
   - 面部表情迁移：吴京+甄子丹 [微博示例](https://video.weibo.com/show?fid=1034:4609199536013325)
   - 百度地图等APP里说二十句话，生成自己音色的导航语音包的功能，就是个典型的音色克隆。
+- 【2021-3-31】2012年，专家们开始了正式的大规模改造。成果就是英特尔刚刚公布的针对残障人士开发的交互系统工具包ACAT(Assistive Context Aware Toolkit，辅助情境感知工具包)。2015年，[英特尔开源霍金的语音系统 ACAT](https://www.oschina.net/news/65333/intel-opensource-acat),（Stephen Hawking）的语音系统 Assistive Context-Aware Toolkit (ACAT) ，[代码地址](https://github.com/01org/acat)
+
 
 ## 业界音箱产品评测
 
