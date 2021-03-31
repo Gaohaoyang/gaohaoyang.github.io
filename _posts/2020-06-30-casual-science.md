@@ -1269,11 +1269,13 @@ res_random=model.refute_estimate(identified_estimand, estimate, method_name="ran
   - ![](http://imgcdn.atyun.com/2019/06/4-6.png)
   - ![](http://imgcdn.atyun.com/2019/06/5-5.png)
 
-
 - [justcause](https://github.com/inovex/justcause)
 
 其它工具包
 1. [causalml]: causal inference with machine learning algorithms in Python
+  - Uber开源Causal ML，支持树形的一些算法，[地址](https://github.com/uber/causalml)
+  - [causalml - Meta-Learner Example Notebook](https://github.com/uber/causalml/blob/master/examples/meta_learners_with_synthetic_data.ipynb)
+  - ![](https://raw.githubusercontent.com/uber/causalml/master/docs/_static/img/uplift_tree_vis.png)
 2. [DoWhy]: causal inference using graphs for identification
 3. [EconML]: Heterogeneous Effect Estimation in Python
 4. [awesome-list]: A very extensive list of causal methods and respective code
