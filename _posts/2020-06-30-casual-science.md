@@ -226,24 +226,24 @@ mathjax: true
 - 【2018-5-10】近日，有越来越多的学者正在探讨机器学习（和深度学习）的局限性，并试图为人工智能的未来探路
   - [纽约大学教授 Gary Marcus 就对深度学习展开了系统性的批判](http://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650735630&idx=1&sn=5840c3e9bed487da3a9080d482fcc58e&chksm=871ac070b06d496638d47dbdaac75fdec06c5e81a3afaee1e1ce2ea37e86d92ba61de8b2b7c9&scene=21#wechat_redirect)
   - 图灵奖获得者，UCLA 教授 Judea Pearl 题为《[Theoretical Impediments to Machine Learning with Seven Sparks from the Causal Revolution](http://ftp.cs.ucla.edu/pub/stat_ser/r475.pdf)》的论文中，作者就已探讨了当前机器学习存在的理论局限性，并给出了面向解决这些问题，来自因果推理的七个启发。
-  - 当前的机器学习几乎完全是统计学或**黑箱**的形式，从而为其性能带来了严重的理论局限性。这样的系统不能推断干预和反思，因此不能作为强人工智能的基础。为了达到人类级别的智能，学习机器需要现实模型（类似于因果推理的模型）的引导。为了展示此类模型的关键性，我将总结展示 7 种当前机器学习系统无法完成的任务，并使用因果推理的工具完成它们。
+  - 当前的机器学习几乎完全是统计学或**黑箱**的形式，从而为其性能带来了严重的理论局限性。这样的系统不能推断干预和反思，因此不能作为**强人工智能**的基础。为了达到人类级别的智能，学习机器需要现实模型（类似于因果推理的模型）的引导。为了展示此类模型的关键性，我将总结展示 7 种当前机器学习系统无法完成的任务，并使用因果推理的工具完成它们。
 
 ## 解决缺陷
 
 - 【2021-3-30】[ICLR 2020 反事实因果理论如何帮助深度学习？](https://zhuanlan.zhihu.com/p/136937643)
 - 一个巨大的问题是深度神经网络的**黑箱**问题和**不稳定性**问题。其中的一个根本原因，基于**相关性**的统计模型容易学习到数据中的“**伪关系**(spurious relation)”，而非因果关系，从而降低了泛化能力和对抗攻击的能力。
   - 一个潜在的方向，就是采用从90年代以来以Judea Pearl为代表的研究者们提出的**因果推断理论**来改进现有的表示学习技术。
-  - 然而<font color='blue'>因果分析框架和表示学习并非天生相容</font>。
+  - 然而<font color='blue'>**因果分析**框架和**表示学习**并非天生相容</font>。
     - **因果分析**通常是基于抽象的、高层次的统计特征来构建结构**因果图**；
     - 而**表示学习**则基于海量数据提取具体的、低层次的表示特征来辅助下游任务。
-  - 为了结合这两者，MILA的Yoshua Bengio提出了System 2框架，Max Planck Institute的Bernhard Schölkopf提出的因果表示学习框架。这两者实际上的思考是一致的。ICLR 2020上因果表示学习的2项有代表性的工作：如何利用因果理论中的**反事实**（counterfactual）框架来提高算法的**稳定性**和**可解释性**。
+  - 为了结合这两者，MILA的Yoshua Bengio提出了**System 2**框架，Max Planck Institute的Bernhard Schölkopf提出的因果表示学习框架。这两者实际上的思考是一致的。ICLR 2020上因果表示学习的2项有代表性的工作：如何利用因果理论中的**反事实**（counterfactual）框架来提高算法的**稳定性**和**可解释性**。
   - [Learning the Difference That Makes A Difference with Counterfactually-Augmented Data](https://www.aminer.cn/pub/5e5e18a393d709897ce222b4/learning-the-difference-that-makes-a-difference-with-counterfactually-augmented-data)
     - 深度学习容易学到语言数据集上**伪关系**（spurious relation）的问题一直没有得到解决。因果推断理论告诉我们，这是由于**混杂因子**（confounding）造成的。
     - 然而，将因果推断方法应用到自然语言处理面临着巨大的困难：什么是自然语言当中的随机变量？如何从表示中找出混杂因子？如何让学习结果更加稳定，避免受训练集中的伪关系影响？其中最大的困难，在于如何定义自然语言中的因果关系。
     - 作者设计了一种巧妙的方法，绕开了随机变量的定义问题，转而采用因果理论中的另一个重要概念——**反事实**——来进行**human in the loop**的数据增强以避免伪关系的干扰。
     - ![](https://pic2.zhimg.com/80/v2-4e65ed79cfe3785eb17a8a23c40bb711_1440w.jpg)
     - 在情感分析的一个3分类数据集上，利用Amazon’s Mechanical Turk众包平台，要求人类对句子做轻微的修改。这些修改包括：
-      * 将**事实变为希望**：比如加入supposed to be表示虚拟语气
+      * 将**事实变为希望**：比如加入supposed to be表示**虚拟**语气
       * **反讽**语气：如加入引号修饰、改为反问句表示反讽
       * 插入/替换**修饰词**：将interesting替换为boring
       * 插入**短语**，修改**评分**等
@@ -259,9 +259,171 @@ mathjax: true
     - 有监督的视觉模型很容易会被伪关系干扰从而学出带有偏见的结果。比如，一个典型的例子是有监督CNN模型在识别狼和狗的图片时，实际上使用的统计特征是狼一般在雪中而狗在草地上。也就是说，模型认为“背景（草或雪）”与“目标（狗和狼）”之间存在某种关系。而实际上，这两种特征是解耦合的。我们希望能找到某些能学会解耦合的特征表示的模型。
     - 检验模型能否推理反事实情况（比如狗在雪中，狼崽草上）。这样的反事实推理能力也是人类智能的一个重要标志，即推理未发生事件的结果的能力，属于因果学习的一个重要分支。反事实理论在计量经济学和公共卫生领域得到了广泛的应用，然而对于机器学习，这套理论的应用方法仍然是一片空白。将因果学习应用在表示学习上的一个重要改进的方向，就是来自Max Planck Institute的Scho ̈lkopf和MILA的Bengio目前倡议的causal representation learning. 本文即是Scho ̈lkopf在ICLR2020上的一篇尝试性的工作：通过验证模型推断反事实的能力，来验证生成式模型（BigGAN）可以学习到解耦合的模块化结构。提出了**因果生成模型**（Causal Generative Model）的分析框架来解耦合生成式模型的模块化结构
 
+# 因果推理
+
+- 【2021-3-31】[通俗解释因果推理 causal inference](https://zhuanlan.zhihu.com/p/109996301)
+- 推理（inference）是“使用离理智从某些前提产生结论”的行动。因果推理，也叫做反事实推理。**反事实推理**，就是解决 what if 之类的问题。举个例子，和家人的旅行之前，肯定会有一些疑问，这些疑问就叫做反事实疑问，获取反事实疑问的结果叫做因果推理。
+  - ![](https://pic3.zhimg.com/80/v2-6505b93cc1a8df5a9370f01dc8c15d0a_1440w.jpg)
+
+## 基本概念
+ 
+- **unit**: 因果推理中的原子研究对象，可以是实物，也可以是概念，可以是一个或者多个。在一些框架下，不同时刻的同一对象被认为是不同的units。
+- **treatment**：施加给unit的操作。也叫做**干预**、**介入**等。
+- **variables**: unit自带的一些属性，比如患者的年龄，性别，病史，血压等。在treatment过程中不受影响的variable叫做pre-treatment variables，比如患者的性别在多数情况下是不变的；对应的，收到影响的variable叫做post-treatment variables。多数情况下，variables指的是Pre-treatment variables。一些文献中也叫做context。
+- **Confounders**: 会影响treatment选择和结果的一些变量。比如同一剂量的药剂在不同年龄的人群的结果可能不一样，或者说不同年龄的药剂选择会不同。有一些文献中也叫做**协变量**，covariate。  
+- **causal effects**: 对于个体（或者群体）施加了一个干预A，其结果不等于没有施加该操作的对象的结果，则称A构成了一个**因果效应**。施加对象是个体的话是个体因果效应，群体是群体因果效应。
+- **potential outcome**: 施加给对象的操作所能产生的所有可能产生的结果。包含observed outcome和反事实结果。
+- **factual outcome**: 施加给对象的操作最终观测到的结果，记做Y.
+- 反事实结果**counterfactual outcomes**：某次操作没有产生的结果。从唯物主义的观点来看，事物是在时刻变化的，因此实验是不可逆的。而没有观测到的结果，是不可能看到的，即为反事实。
+- **individualized treatment effect**: Y(1)-Y(0).前者是事实结果，后者是反事实结果。或者说前者是treated，后者是control。如果是多个个体，则是期望。  
+- 反事实推理**counterfactual inference**：解决类似于“如果这个病人采用其他疗法，血压会降下来吗？”这样的问题的推理。
+- 倾向分数**propensity score**：p(x) = P(Wi = 1|Xi = x)，反映出样本x选择treatment的可能性。
+- 选择偏倚**selection bias**：由于Confounders的存在，treatment组合对照组的分布有可能不一致，因此导致出现偏差，这也使得推理更加困难。
+ 
+以下图为例，年龄对心脏病介入来说就是一个协变量，不同年龄会采取不同的措施：年轻的手术，年老的服药，手术和服药是两种不同的treatment；同时年龄又影响着结果，年轻人的生存时间是大于老年人的。
+ 
+![](https://pic1.zhimg.com/80/v2-d11fda1af0ce323818d839d49f59266c_1440w.jpg)
+ 
+年龄作为协变量对手术的影响
+ 
+## 主要算法和进展
+
+在推理中的算法有很多，主要是克服选择偏倚，先介绍一些比较常见的做法，包括
+- (1) Re-weighting methods; 
+- (2) Stratification methods; 
+- (3) Matching methods; 
+- (4) Tree-based methods; 
+- (5) Representation based methods;
+- (6) Multi-task methods; 
+- (7) Meta-learning methods。
+ 
+### Re-weighting methods
+
+调整每个unit的权重，使得treatment组合和对照组的分布一致，解决选择偏差的问题。
+ 
+### Stratification Methods 分层算法  
+
+也叫subclassification或者blocking。直觉是把treatment组和对照组的样本分组，使得组内的treatment和对照组是同构的。最终的得分是所有小组的加权平均。
+ 
+### Matching Methods匹配算法
+ 
+匹配算法使用下面的公式来估计后果：
+ 
+![](https://pic2.zhimg.com/80/v2-d1ad27e975669c7e87d0b0d7d0df5c79_1440w.png)
+ 
+Y(0)代表对照组，Y(1)表示实验组。J (i)代表在相反的组中和样本距离最近的样本。
+ 
+其中距离度量的方式很多，主要的有欧式距离和马氏距离。
+ 
+样本空间有原始空间，也包括转换后的空间。
+ 
+![](https://pic3.zhimg.com/80/v2-0776b0476c08afc7cb53cc9b99a68fc2_1440w.jpg)
+ 
+匹配算法归类
+ 
+### Tree-based Methods
+
+Tree-based Methods主要指的是决策树，包括CART树、BART树和RF。
+ 
+以上算法都是统计学习方法，一笔带过，现在主要介绍一些deep的方法。
+ 
+Johansson, Learning Representations for Counterfactual Inference, ICML`16
+ 
+介绍：基于表示学习。
+ 
+做法：重新定义反事实问题为协变量转变的问题，进而定义成一个领域适应问题。因为事实分布和反事实结果分布式不一样的，因此可以使用领域适应来克服。主要有3点考虑：
+ 
+a. 最小化事实结果的错误率。
+ 
+b. 使用相关的事实结果来指导反事实结果，这是通过约束来完成的，使得类似的干预结果一样。
+ 
+c.干预的分布是相似的。这个通过最小化所谓的discrepancy distance来克服。
+ 
+这个discrepancy distance指的是在表示空间内，事实分布和反事实分布的差异，即
+ 
+![](https://pic4.zhimg.com/80/v2-ff093b9fb7a523da2b1cf0b6767fcd73_1440w.png)
+ 
+其中IPM指的是an Integral Probability Metrics，衡量的是两个分布之间的距离。
+ 
+损失函数由以上三项加起来即可，同时加上一个模型复杂度的正则项。
+ 
+后续，该作者继续提出一些改进，比如引入re-weight等。
+ 
+Shalit, Estimating individual treatment effect: generalization bounds and algorithms,ICML`17
+ 
+主要内容：
+ 
+模型整体和前作很相似，改进了discrepancy distance，即IPM改进为联合分布的差异。
+ 
+整体的loss如下，L是观测数据和预测数据的差异，wi是一个权重，这里模型的wi不是学习来的，后两项是模型的复杂度和discrepancy distance，确实和上一个论文很类似。
+ 
+![](https://pic1.zhimg.com/80/v2-34941b8c49ea75c243a990e386097d60_1440w.jpg)
+ 
+网络架构如图，其中的全连接分别对应表示层和回归层，即fi和h。
+ 
+![](https://pic2.zhimg.com/80/v2-031ae6c80aa84e8226febc2d300a6e11_1440w.jpg)
+ 
+Sharma, MetaCI: Meta-Learning for Causal Inference in a Heterogeneous Population, NIPS`19
+-----------------------------------------------------------------------------------------
+ 
+任务：借助于元学习开开展推理
+ 
+做法：将meta learning中的reptile框架引入了推理中，元学习就是所谓的‘learn to learn’，旨在学习最适合任务的初始化参数等，通过少量的样本来调整参数，然后通过不同的任务来学习初始化的能力。文章引入了reptile这一个元学习策略并加以改进，提出了并行化的reptile。
+ 
+元学习中的一个重要特点是多任务，少样本，因此和few-shot learning类似，而在因果推理框架中的多个任务则是由同样分布的子组（subgroup）组成。
+ 
+![](https://pic4.zhimg.com/80/v2-f6fa6be99d213362c6d78c9707d6ec2f_1440w.jpg)
+ 
+每次迭代的示意图如上，每个任务的support data并不同（元学习的每一个子任务的训练数据成为support data），获取表示之后进入全连接，然后获取loss，每个任务只进行几次迭代。
+ 
+### Hassanpour, CounterFactual Regression with Importance Sampling Weights, IJCAI`19
+ 
+主要工作：
+ 
+把表示学习和re-weight结合起来，首先用表示学习使得选择偏倚尽可能缩小，同时保证事实结果尽可能正确。而re-weight可以调整样本的权重，使得观测数据和反事实数据的分布尽可能一致。
+ 
+如下图所示，经过transform之后的特征空间和原始的x相比，不同treatment的样本分布逐渐接近，同时保证了Y是不变的。
+ 
+![](https://pic4.zhimg.com/80/v2-7d0260d6751bbb5a993c6c9c33e401d3_1440w.jpg)
+
+这篇文章是对之前其他工作的改进，主要是对第二篇文章的改进，上面知道第二个文章的loss中的wi是有概率直接得出，而该算法则是学习得到。如下图：
+ 
+![](https://pic2.zhimg.com/80/v2-7563a4181b51fb8b42db0a112fd4d2c1_1440w.jpg)
+
+看出系数是通过表示向量学习出来的，即为重要性抽样：
+ 
+![](https://pic1.zhimg.com/80/v2-f19c3f48e647358006f8a5f1180ae2ac_1440w.jpg)
+
+后半部分的分布计算起来比较麻烦，通过贝叶斯来变换：
+ 
+![](https://pic3.zhimg.com/80/v2-f47f0ea3b2c52b660da323d111e4d502_1440w.jpg)
+ 
+其中的π就是图中的π网络，是一个简单的逻辑回归。其中的w和b依赖于t和表示向量。
+ 
+Alaa, Deep Counterfactual Networks with Propensity-Dropout, ICML`17
+ 
+主要做法：比起之前的领域适应的做法，该文章把反事实推理认为是一种多任务的框架，通过倾向分dropout来缓解选择偏倚：每一次迭代的时候有一定的dropout几率，而这个几率就依赖于倾向分。
+ 
+propensity score倾向分数：p(x) = P(Wi = 1|Xi = x)，反映出样本x选择treatment的可能性。
+ 
+![](https://pic2.zhimg.com/80/v2-aeb3e34bb106af89dab0508da55ff52d_1440w.jpg)
+ 
+看图：
+ 
+对于每一个输入，不同的treatment是首先共享前几层，然后再分化为不同的输出层，同时有一个倾向分网络来计算dropout概率。
+ 
+这个倾向分的P，是对于简单的样本，取得极端值，比如0和1，对于复杂的样本，取得中间值，比如0.5.
+ 
+![](https://pic4.zhimg.com/80/v2-7b105c8cc6a404763021eb91d2e6df13_1440w.png)
+ 
+其中 0 ≤ γ ≤ 1，是一个超参数，文章设为1.
+ 
+H(p) = −p log(p)−(1−p) log(1−p)，香农熵。
+您最近使用了： 
 
 
-## 因果推理模型的 7 种特性
+
+## 因果推理模型的7种特性
 
 - 【2021-1-9】和家人一起去一个未知的目的地度假。假期前后，你都在纠结一些与事实相悖的问题:
   - 假期里我们应该做什么？
@@ -270,7 +432,6 @@ mathjax: true
   - 之后我们会有什么感觉？
 
 ![](http://imgcdn.atyun.com/2019/06/2-8.png)
-
 
 - 考虑以下 5 个问题：
   - 给定的疗法在治疗某种疾病上的有效性？
@@ -281,8 +442,8 @@ mathjax: true
 - 这些问题的一般特征是它们关心的都是原因和效应的关系，可以通过诸如「治疗」、「导致」、「由于」、「证明」和「我应该」等词识别出这类关系。这些词在日常语言中很常见，并且我们的社会一直都需要这些问题的答案。然而，直到最近也没有足够好的科学方法对这些问题进行表达，更不用说回答这些问题了。和几何学、机械学、光学或概率论的规律不同，原因和效应的规律曾被认为不适合应用数学方法进行分析。
 - 这种误解有多严重呢？实际上仅几十年前科学家还不能为明显的事实「mud does not cause rain」写下一个数学方程。即使是今天，也只有顶尖的科学社区能写出这样的方程并形式地区分「mud causes rain」和「rain causes mud」。
 - 过去三十年事情已发生巨大变化。一种强大而透明的数学语言已被开发用于处理因果关系，伴随着一套把因果分析转化为数学博弈的工具。这些工具允许我们表达因果问题，用图和代数形式正式编纂我们现有的知识，然后利用我们的数据来估计答案。进而，这警告我们当现有知识或可获得的数据不足以回答我们的问题时，暗示额外的知识或数据源以使问题变的可回答。
-- 我把这种转化称为「**因果革命**」（Pearl and Mackenzie, 2018, forthcoming），而导致因果革命的数理框架我称之为「结构性因果模型」（SCM）。
-- SCM 由三部分构成：
+- 这种转化称为「**因果革命**」（Pearl and Mackenzie, 2018, forthcoming），而导致因果革命的数理框架我称之为「**结构性因果模型**」（SCM）。
+- **SCM** 由三部分构成：
   - 图模型
   - 结构化方程
   - 反事实和介入式逻辑
