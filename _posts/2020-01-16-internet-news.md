@@ -1034,6 +1034,7 @@ mathjax: true
 
 # IT快讯
 
+- 【2021-3-30】[快兰斯财经](http://www.financebe.com/)，24h实时推送
 - 【2019-07-22】[神策数据核心技术王集鹄过世](http://baijiahao.baidu.com/s?id=1639729785381397020&wfr=spider&for=pc)：去年查出恶性肿瘤 生前与病魔斗争
 - 【2020-3-31】[技术大神“司徒正美”不幸离世，刚入职OPPO](https://tech.ifeng.com/c/7vI5xPxLnt9)
 - 【2020-7-10】[经纬张颖：33岁之前的我，你们根本想象不到](https://www.toutiao.com/i6847119647137858062/?tt_from=mobile_qq&utm_campaign=client_share&timestamp=1594305190&app=news_article&utm_source=mobile_qq&utm_medium=toutiao_android&use_new_style=1&req_id=2020070922330901002302815412763382&group_id=6847119647137858062)
