@@ -13,6 +13,7 @@ mathjax: true
 
 # 总结
 
+- 【2021-3-31】[图灵奖今日出炉](https://mp.weixin.qq.com/s/Q6kbBomC85xbmKS2SLllfA)，“龙书” 作者、编程语言大佬 Alfred Aho 和 Jeffrey Ullman 获奖
 - 【2020-10-29】源自linux之父的名言：**talk is cheap，show me the code**，汉化版：**北沙滩**（别瞎谈），**亮马桥**（亮码瞧）
 
 
