@@ -324,20 +324,19 @@ Y(0)代表对照组，Y(1)表示实验组。J (i)代表在相反的组中和样�
 ### Tree-based Methods
 
 Tree-based Methods主要指的是决策树，包括CART树、BART树和RF。
+
+### 深度学习方法
  
 以上算法都是统计学习方法，一笔带过，现在主要介绍一些deep的方法。
  
-Johansson, Learning Representations for Counterfactual Inference, ICML`16
+**Johansson, Learning Representations for Counterfactual Inference**, ICML`16
  
 介绍：基于表示学习。
  
 做法：重新定义反事实问题为协变量转变的问题，进而定义成一个领域适应问题。因为事实分布和反事实结果分布式不一样的，因此可以使用领域适应来克服。主要有3点考虑：
- 
-a. 最小化事实结果的错误率。
- 
-b. 使用相关的事实结果来指导反事实结果，这是通过约束来完成的，使得类似的干预结果一样。
- 
-c.干预的分布是相似的。这个通过最小化所谓的discrepancy distance来克服。
+- a. 最小化事实结果的错误率。
+- b. 使用相关的事实结果来指导反事实结果，这是通过约束来完成的，使得类似的干预结果一样。
+- c. 干预的分布是相似的。这个通过最小化所谓的discrepancy distance来克服。
  
 这个discrepancy distance指的是在表示空间内，事实分布和反事实分布的差异，即
  
@@ -349,11 +348,9 @@ c.干预的分布是相似的。这个通过最小化所谓的discrepancy distan
  
 后续，该作者继续提出一些改进，比如引入re-weight等。
  
-Shalit, Estimating individual treatment effect: generalization bounds and algorithms,ICML`17
+Shalit, **Estimating individual treatment effect: generalization bounds and algorithms**, ICML`17
  
-主要内容：
- 
-模型整体和前作很相似，改进了discrepancy distance，即IPM改进为联合分布的差异。
+主要内容：模型整体和前作很相似，改进了discrepancy distance，即IPM改进为联合分布的差异。
  
 整体的loss如下，L是观测数据和预测数据的差异，wi是一个权重，这里模型的wi不是学习来的，后两项是模型的复杂度和discrepancy distance，确实和上一个论文很类似。
  
@@ -363,12 +360,10 @@ Shalit, Estimating individual treatment effect: generalization bounds and algori
  
 ![](https://pic2.zhimg.com/80/v2-031ae6c80aa84e8226febc2d300a6e11_1440w.jpg)
  
-Sharma, MetaCI: Meta-Learning for Causal Inference in a Heterogeneous Population, NIPS`19
------------------------------------------------------------------------------------------
+Sharma, **MetaCI: Meta-Learning for Causal Inference in a Heterogeneous Population**, NIPS`19
  
-任务：借助于元学习开开展推理
- 
-做法：将meta learning中的reptile框架引入了推理中，元学习就是所谓的‘learn to learn’，旨在学习最适合任务的初始化参数等，通过少量的样本来调整参数，然后通过不同的任务来学习初始化的能力。文章引入了reptile这一个元学习策略并加以改进，提出了并行化的reptile。
+- 任务：借助于元学习开开展推理
+- 做法：将meta learning中的reptile框架引入了推理中，元学习就是所谓的‘learn to learn’，旨在学习最适合任务的初始化参数等，通过少量的样本来调整参数，然后通过不同的任务来学习初始化的能力。文章引入了reptile这一个元学习策略并加以改进，提出了并行化的reptile。
  
 元学习中的一个重要特点是多任务，少样本，因此和few-shot learning类似，而在因果推理框架中的多个任务则是由同样分布的子组（subgroup）组成。
  
@@ -376,11 +371,9 @@ Sharma, MetaCI: Meta-Learning for Causal Inference in a Heterogeneous Population
  
 每次迭代的示意图如上，每个任务的support data并不同（元学习的每一个子任务的训练数据成为support data），获取表示之后进入全连接，然后获取loss，每个任务只进行几次迭代。
  
-### Hassanpour, CounterFactual Regression with Importance Sampling Weights, IJCAI`19
+Hassanpour, **CounterFactual Regression with Importance Sampling Weights**, IJCAI`19
  
-主要工作：
- 
-把表示学习和re-weight结合起来，首先用表示学习使得选择偏倚尽可能缩小，同时保证事实结果尽可能正确。而re-weight可以调整样本的权重，使得观测数据和反事实数据的分布尽可能一致。
+主要工作：把表示学习和re-weight结合起来，首先用表示学习使得选择偏倚尽可能缩小，同时保证事实结果尽可能正确。而re-weight可以调整样本的权重，使得观测数据和反事实数据的分布尽可能一致。
  
 如下图所示，经过transform之后的特征空间和原始的x相比，不同treatment的样本分布逐渐接近，同时保证了Y是不变的。
  
@@ -400,7 +393,7 @@ Sharma, MetaCI: Meta-Learning for Causal Inference in a Heterogeneous Population
  
 其中的π就是图中的π网络，是一个简单的逻辑回归。其中的w和b依赖于t和表示向量。
  
-Alaa, Deep Counterfactual Networks with Propensity-Dropout, ICML`17
+Alaa, **Deep Counterfactual Networks with Propensity-Dropout**, ICML`17
  
 主要做法：比起之前的领域适应的做法，该文章把反事实推理认为是一种多任务的框架，通过倾向分dropout来缓解选择偏倚：每一次迭代的时候有一定的dropout几率，而这个几率就依赖于倾向分。
  
