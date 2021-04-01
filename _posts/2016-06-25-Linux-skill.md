@@ -590,6 +590,11 @@ git rm [file] # 从你的工作目录中删除文件，然后进行删除。
     - 安装：git clone https://github.com/killf/cgit.git && sudo ./cgit/install.sh
     - 使用：cgit clone https://github.com/killf/cgit.git （亲测有效）
 
+【2021-4-1】[git思维导图](https://p6.toutiaoimg.com/img/tos-cn-i-0022/c661edf2db1e41ef97ff21347c8ca89a~tplv-obj:1674:4096.image?from=post)
+
+![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/c661edf2db1e41ef97ff21347c8ca89a~tplv-obj:1674:4096.image?from=post)
+
+
 ## git问题
 
 ###  OpenSSL SSL_read
