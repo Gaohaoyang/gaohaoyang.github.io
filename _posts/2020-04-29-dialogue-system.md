@@ -444,8 +444,8 @@ chatbot:我也是，不过总有一天就会好起来的
   - 对话管理器(DM, dialogue manager)
   - 语言生成(NLG, natural language generation)
   - 语音合成(TTS, text to speech)等组件[5].
-  - 纯文本的对话不含语音识别和语音合成模块.
-  - 近几年随着深度学习的发展，一部分对话系统将对话管理器分成对话状态跟踪(DST，dialogue state tracking)及对话策略优化2个部分，使得对话管理更加依赖统计模型的方法，更加鲁棒.管道式架构中各个模块独立优化，也是目前商用系统的典型架构.
+- 纯文本的对话不含语音识别NLU和语音合成TTS模块.
+- 近几年随着深度学习的发展，一部分对话系统将对话管理器分成对话状态跟踪(DST，dialogue state tracking)及对话策略优化DPO 2个部分，使得对话管理更加依赖统计模型的方法，更加鲁棒.管道式架构中各个模块独立优化，也是目前商用系统的典型架构.
 
 ![](https://static001.infoq.cn/resource/image/95/b0/95872ddc2e39ceb0d47yy39a79d0cfb0.png)
 - 尽管模块化的对话系统由于每个部分独立优化，具有更强的可控性，但是端到端的对话系统可以直接利用对话日志进行训练，不需要人工设计特定的语义标签，因此更具备可扩展性，在一些复杂度中低的对话场景中能够快速训练部署使用。
@@ -492,57 +492,61 @@ chatbot:我也是，不过总有一天就会好起来的
 
 ## NLU
 
-- [台大对话系统](https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/200602_ConversationalAI.pdf)
-- 语言理解的pipeline，前两者主要通过Classification实现，第三个是Sequence Labeling
-  1. Domain Identification（分类）： Requires Predefined Domain Ontology
-    - 如：find a good eating place for taiwanese food
-    - 识别为餐饮领域
-  2. Intent Detection（分类）：Requires Predefined Schema
-    - 餐饮领域里的找餐馆意图：FIND_RESTAURANT
-  3. Slot Filling（序列标注）：Requires Predefined Schema
-    - 槽位：rating=“good”，type=“taiwanese”
-    - Slot Tagging
+- [台大对话系统](https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/200602_ConversationalAI.pdf)，语言理解的pipeline，前两者主要通过Classification实现，第三个是Sequence Labeling
+1. **Domain Identification**（分类）： Requires Predefined Domain Ontology
+  - 如：find a good eating place for taiwanese food
+  - 识别为餐饮领域
+2. **Intent Detection**（分类）：Requires Predefined Schema
+  - 餐饮领域里的找餐馆意图：FIND_RESTAURANT
+3. **Slot Filling**（序列标注）：Requires Predefined Schema
+  - 槽位：rating=“good”，type=“taiwanese”
+  - Slot Tagging
 
 ### 意图识别
 
 - 意图识别通过文本分类实现，但是和文本分类有区别，这个区别造就了它更“难一些”，主要难点如下：
-  - 输入不规范：错别字、堆砌关键词、非标准自然语言；
-  - 多意图：输入的语句信息量太少造成意图不明确，且有歧义。比如输入仙剑奇侠传，那么是想获得游戏下载、电视剧、电影、音乐还是小说下载呢；
-  - 意图强度：输入的语句好像即属于A意图，又属于B意图，每个意图的的得分都不高；
-  - 时效性：用户的意图是有较强时效性的，用户在不同时间节点的相同的query可能是属于不同意图的，比如query为“战狼”，在当前时间节点可能是想在线观看战狼1或者战狼2，而如果是在战狼3开拍的时间节点搜的话，可能很大概率是想了解战狼3的一些相关新闻了。
+  - **输入不规范**：错别字、堆砌关键词、非标准自然语言；
+  - **多意图**：输入的语句信息量太少造成意图不明确，且有歧义。比如输入仙剑奇侠传，那么是想获得游戏下载、电视剧、电影、音乐还是小说下载呢；
+  - **意图强度**：输入的语句好像即属于A意图，又属于B意图，每个意图的的得分都不高；
+  - **时效性**：用户的意图是有较强时效性的，用户在不同时间节点的相同的query可能是属于不同意图的，比如query为“战狼”，在当前时间节点可能是想在线观看战狼1或者战狼2，而如果是在战狼3开拍的时间节点搜的话，可能很大概率是想了解战狼3的一些相关新闻了。
 
 
 ### 填槽
 
-- 填槽（Slot filling）定义：
-  - 一般定义：填槽指的是为了让用户意图转化为用户明确的指令而补全信息的过程。
-  - 专业定义：从大规模的语料库中抽取给定实体（query）的被明确定义的属性（slot types）的值（slot fillers）——网络文章定义
-    - 设定闹钟这个行为，需要两个关键信息，一个是行为，一个是时间。这两个信息可以理解为“设闹钟”行为的前置条件，就好像事有个槽空缺在那，需要先补充完整了这个槽，完成这个条件后，触发新的副本，才能继续后续的行为。
-  - 用途
-    - ①多用于**任务型**对话
-      - 任务型对话系统的语言理解部分，通常使用语义槽来表示用户的需求，如出发地、到达地、出发时间等信息。 
-    - ②作为意图识别的**关键字**
-    - ③作为下一步对话的**提示信息**
-      - 填槽的意义有两个：作条件分支多轮对话、作信息补全用户意图。填槽不仅是补全用户意图的方式，而且前序槽位的填写还会起到指导后续信息补全走向的作用。
-  - ![](https://upload-images.jianshu.io/upload_images/1060404-6f96e93a05bcc9ca.png)
-- 基本概念
-  - 槽：实体已明确定义的属性，打车中的，出发地点槽，目的地槽，出发时间槽中的属性分别是“出发地点”、“目的地”和“出发时间”
-  - 槽位：槽是由槽位构成 [图](https://upload-images.jianshu.io/upload_images/1060404-41dbe622cfb85ced.png)
-    - ![](https://upload-images.jianshu.io/upload_images/1060404-41dbe622cfb85ced.png)
-    - 槽位的属性
-      - 接口槽与词槽
-        - 词槽，通过用户对话的关键词获取信息的填槽方式
-        - 接口槽，通过其他方式获取信息的填槽方式
-      - 可默认填写/不可默认填写：有些槽是不可默认填写的，不填没办法继续下去，有些即使不填，有默认值也可。
-      - 槽位优先级：当有多个槽位的时候，槽该采用那个信息，这时候有个优先级。
-      - 澄清话术：当槽不可默认填写同时又没有填写的时候，就要进行澄清
-      - 澄清顺序：当有多个槽需要澄清的时候，就存在先后顺序的问题，所以需要一个澄清顺序，先问什么，再问什么。
-      - 平级槽或依赖槽，根据槽和槽之间是否独立，后续的槽是否依赖前面槽的结果。可以将槽之间的关系分为
-        - 平级槽，槽与槽之间没有依赖，例如打车中的三槽
-        - 依赖槽，后续的槽是否依赖前面槽的结果，例如手机号码槽，不同国家手机号码格式不同（槽的属性不同），所以国家槽会影响选择哪个手机号码槽。
-  - 准入条件：从一个开放域转入到封闭域，或者从一个封闭域转入到另一个封闭域，中间的跳转是需要逻辑判断的，而这个逻辑判断就是准入条件。
-  - 封闭域对话：封闭域对话是指识别用户意图后，为了明确用户目的（或者称为明确任务细节）而进行的对话
-  - 澄清话术：当用户的需求中缺乏一些必要条件时，需要对话系统主动发问，把必要条件全部集齐之后再去做最终的满足执行。
+【定义】
+**填槽**（Slot filling）定义：
+- 一般定义：填槽指的是为了让用户意图转化为用户明确的指令而补全信息的过程。
+- 专业定义：从大规模的语料库中抽取给定**实体**（query）的被明确定义的**属性**（slot types）的**值**（slot fillers）——网络文章定义
+  - 设定闹钟这个行为，需要两个关键信息，一个是行为，一个是时间。这两个信息可以理解为“设闹钟”行为的前置条件，就好像事有个槽空缺在那，需要先补充完整了这个槽，完成这个条件后，触发新的副本，才能继续后续的行为。
+  
+【用途】
+
+- ①多用于**任务型**对话
+  - 任务型对话系统的语言理解部分，通常使用语义槽来表示用户的需求，如出发地、到达地、出发时间等信息。 
+- ②作为意图识别的**关键字**
+- ③作为下一步对话的**提示信息**
+  - 填槽的意义有两个：作条件分支多轮对话、作信息补全用户意图。填槽不仅是补全用户意图的方式，而且前序槽位的填写还会起到指导后续信息补全走向的作用。
+- ![](https://upload-images.jianshu.io/upload_images/1060404-6f96e93a05bcc9ca.png)
+
+【基本概念】
+
+- **槽**：实体已明确定义的属性，打车中的，出发地点槽，目的地槽，出发时间槽中的属性分别是“出发地点”、“目的地”和“出发时间”
+- **槽位**：槽是由槽位构成 [图](https://upload-images.jianshu.io/upload_images/1060404-41dbe622cfb85ced.png)
+  - ![](https://upload-images.jianshu.io/upload_images/1060404-41dbe622cfb85ced.png)
+- **槽位的属性**
+  - 接口槽与词槽
+    - 词槽，通过用户对话的关键词获取信息的填槽方式
+    - 接口槽，通过其他方式获取信息的填槽方式
+  - 可默认填写/不可默认填写：有些槽是不可默认填写的，不填没办法继续下去，有些即使不填，有默认值也可。
+  - 槽位优先级：当有多个槽位的时候，槽该采用那个信息，这时候有个优先级。
+  - 澄清话术：当槽不可默认填写同时又没有填写的时候，就要进行澄清
+  - 澄清顺序：当有多个槽需要澄清的时候，就存在先后顺序的问题，所以需要一个澄清顺序，先问什么，再问什么。
+  - 平级槽或依赖槽，根据槽和槽之间是否独立，后续的槽是否依赖前面槽的结果。可以将槽之间的关系分为
+    - 平级槽，槽与槽之间没有依赖，例如打车中的三槽
+    - 依赖槽，后续的槽是否依赖前面槽的结果，例如手机号码槽，不同国家手机号码格式不同（槽的属性不同），所以国家槽会影响选择哪个手机号码槽。
+- 准入条件：从一个开放域转入到封闭域，或者从一个封闭域转入到另一个封闭域，中间的跳转是需要逻辑判断的，而这个逻辑判断就是准入条件。
+- 封闭域对话：封闭域对话是指识别用户意图后，为了明确用户目的（或者称为明确任务细节）而进行的对话
+- 澄清话术：当用户的需求中缺乏一些必要条件时，需要对话系统主动发问，把必要条件全部集齐之后再去做最终的满足执行。
 - ![](https://upload-images.jianshu.io/upload_images/1060404-8b1f274ac179571c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700)
 - BIO的解释
   - “B-X”表示此元素所在的片段属于X类型并且此元素在此片段的开头。
@@ -609,11 +613,11 @@ chatbot:我也是，不过总有一天就会好起来的
 
 **pipline模块**
 
-- 其核心模块组成是`NLU`->`DM`->`NLG`
-- NLU负责对用户输入进行理解，随后进入DM模块，负责系统状态的追踪以及对话策略的学习，控制系统的下一步动作，而NLG则配合系统将要采取的动作生成合适的对话反馈给用户。
+其核心模块组成是`NLU`->`DM`->`NLG`
+- （1）NLU负责对用户输入进行理解，随后进入DM模块，负责系统状态的追踪以及对话策略的学习，控制系统的下一步动作，而NLG则配合系统将要采取的动作生成合适的对话反馈给用户。
 - 其中若用户的输入是语音形式，则在NLU的输入前需再添加一个ASR语音识别模块，负责将语音信号转换为文本信号。
-- `DM`对话管理器内部又可分为`DST`（对话状态追踪）和`DPL`（对话策略学习），`DST`（对话状态追踪）根据用户每一轮的输入更新当前的系统状态，而DPL则根据当前的系统状态决定下一步采取何种动作。
-- `NLG`将语言生成后，若用户采用语音交互方式，则还需要`TTS`（语音合成）模块将文本转换为语音。
+- （2）`DM`对话管理器内部又可分为`DST`（对话状态追踪）和`DPL`（对话策略学习），`DST`（对话状态追踪）根据用户每一轮的输入更新当前的系统状态，而DPL则根据当前的系统状态决定下一步采取何种动作。
+- （3）`NLG`将语言生成后，若用户采用语音交互方式，则还需要`TTS`（语音合成）模块将文本转换为语音。
 
 **pipline工作原理直观理解**
 
@@ -663,7 +667,7 @@ chatbot:我也是，不过总有一天就会好起来的
 
 - 【2021-3-15】百分点智能问答主要流程
   - ![](https://image.jiqizhixin.com/uploads/editor/d3dda01e-1926-45fa-9f34-b8d18b617c18/2.png)
-  - 首先进行语音识别，将用户会话识别出来后，经过ASR结果纠错和补全、指代消解、省略恢复等预处理之后，经过敏感词检测，送入中控系统。中控系统是在特定语境下进行意图识别的系统，分为情绪识别、业务意图识别、对话管理、异常处理等四个模块，其中业务意图包括QA问答机器人（QA Bot）、基于知识图谱的问答机器人（KG Bot），NL2SQL机器人（DB Bot），任务型机器人（TASK Bot）。对话管理包括多轮对话的对话历史管理、BOT当前询问、会话状态选取等模块。异常处理包括安全话术（对意图结果的结果进行后处理）、会话日志记录、告警等功能。然后，进入话术/指令生成子系统，这是识别问句意图后的对话结果生成，包括话术生成和指令生成两个模块，在话术生成中，对话系统根据对话历史数据和对话模板生成和拼接产生话术，如果是任务型对话，将生成对应指令。另外，辅助系统通过画像分析、用户分析、问题分析等功能，进一步优化问答系统的效果。
+  - 首先进行语音识别，将用户会话识别出来后，经过ASR结果纠错和补全、指代消解、省略恢复等预处理之后，经过敏感词检测，送入中控系统。中控系统是在特定语境下进行意图识别的系统，分为情绪识别、业务意图识别、对话管理、异常处理等四个模块，其中业务意图包括QA问答机器人（**QA** Bot）、基于知识图谱的问答机器人（**KG** Bot），NL2SQL机器人（**DB** Bot），任务型机器人（**TASK** Bot）。对话管理包括多轮对话的对话历史管理、BOT当前询问、会话状态选取等模块。异常处理包括安全话术（对意图结果的结果进行后处理）、会话日志记录、告警等功能。然后，进入话术/指令生成子系统，这是识别问句意图后的对话结果生成，包括话术生成和指令生成两个模块，在话术生成中，对话系统根据对话历史数据和对话模板生成和拼接产生话术，如果是任务型对话，将生成对应指令。另外，辅助系统通过画像分析、用户分析、问题分析等功能，进一步优化问答系统的效果。
 - 智能问答产品典型架构
   - ![](https://image.jiqizhixin.com/uploads/editor/06578b0e-afba-49dd-b46c-0b9dc80855fa/3.png)
   - 智能问答产品主要包括知识库、对话模型、配置中心、多渠道接入以及后台管理。针对不同的任务划分，准备不同的知识库，例如QA BOT需要引入问答知识对，KG BOT需要知识图谱的支持等等。将针对不同任务的对话模型服务，部署接入各个平台接口，譬如小程序、微信、网页等，提供在线问答服务。配置中心主要提供QA对、闲聊语料、同义词库、特征词库等的可视化配置服务，实现知识配置的快速拓展。后台管理针对智能问答系统实施整体监控、日志管理、告警、权限管理等等，另外，它还提供各种维度的统计分析服务。
@@ -747,58 +751,60 @@ GUS对话系统，是 Genial Understander System 的缩写，可以追溯到1977
 - [多轮对话之对话管理(Dialog Management)](https://zhuanlan.zhihu.com/p/32716205)
 - 对话管理（Dialog Management, DM）控制着人机对话的过程，DM 根据对话历史信息，决定此刻对用户的反应。最常见的应用还是任务驱动的多轮对话，用户带着明确的目的如订餐、订票等，用户需求比较复杂，有很多限制条件，可能需要分多轮进行陈述，一方面，用户在对话过程中可以不断修改或完善自己的需求，另一方面，当用户的陈述的需求不够具体或明确的时候，机器也可以通过询问、澄清或确认来帮助用户找到满意的结果。
 - ![](https://picb.zhimg.com/80/v2-763da7952c607ed3065af3cacdd9c7d8_720w.jpg)
-- 对话管理的任务大致有下面一些：
-  - `对话状态维护`（dialog state tracking, `DST`）
-    - 维护 & 更新对话状态
-  - `生成系统决策`（dialog policy）`DP`
-    - 根据 DST 中的对话状态（DS），产生系统行为（dialog act），决定下一步做什么dialog act 可以表示观测到的用户输入（用户输入 -> DA，就是 NLU 的过程），以及系统的反馈行为（DA -> 系统反馈，就是 NLG 的过程）
-  - 作为接口与后端/任务模型进行交互
-  - 提供语义表达的期望值（expectations for interpretation）interpretation: 用户输入的 internal representation，包括 speech recognition 和 parsing/semantic representation 的结果
+
+对话管理的任务大致有下面一些：
+- `对话状态维护`（dialog state tracking, `DST`）
+  - 维护 & 更新对话状态
+- `生成系统决策`（dialog policy）`DP`
+  - 根据 DST 中的对话状态（DS），产生系统行为（dialog act），决定下一步做什么dialog act 可以表示观测到的用户输入（用户输入 -> DA，就是 NLU 的过程），以及系统的反馈行为（DA -> 系统反馈，就是 NLG 的过程）
+- 作为接口与后端/任务模型进行交互
+- 提供语义表达的期望值（expectations for interpretation）interpretation: 用户输入的 internal representation，包括 speech recognition 和 parsing/semantic representation 的结果
 
 对话引擎根据对话按对话由谁主导可以分为三种类型：
 - **系统**主导
   - 系统询问用户信息，用户回答，最终达到目标
 - **用户**主导
   - 用户主动提出问题或者诉求，系统回答问题或者满足用户的诉求
-- 混合
-  - 用户和系统在不同时刻交替主导对话过程，最终达到目标
-  - 有两种类型，一是用户/系统转移任何时候都可以主导权，这种比较困难，二是根据 prompt type 来实现主导权的移交
+- **混合**
+  - 用户和系统在不同时刻交替主导对话过程，最终达到目标。有两种类型
+    - 一是用户/系统转移任何时候都可以主导权，这种比较困难
+    - 二是根据 prompt type 来实现主导权的移交
   - Prompts 又分为：
-    -  open prompt（如 ‘How may I help you‘ 这种，用户可以回复任何内容 ）
-    - directive prompt（如 ‘Say yes to accept call, or no’ 这种，系统限制了用户的回复选择）
+    -  **open prompt**（如 ‘How may I help you‘ 这种，用户可以回复任何内容 ）
+    - **directive prompt**（如 ‘Say yes to accept call, or no’ 这种，系统限制了用户的回复选择）
 
 ### DST
 
-- 【2020-12-23】对话状态追踪（DST）的作用：
-    - 根据**领域**(domain)/**意图**(intention) 、**槽值对**(slot-value pairs)、之前的状态以及之前系统的Action等来追踪当前状态。 
-    - 输入是
-      - **Un**：n时刻的意图和槽值对，也叫用户Action
-      - **An-1**：n-1时刻的系统Action
-      - **Sn-1**：n-1时刻的状态
-    - 输出是Sn：n时刻的状态
-    - 用户Action和系统Action不同，且需要注意
-        - S = {Gn,Un,Hn}
-        - Gn是用户目标
-        - Un同上
-        - Hn是聊天的历史，Hn= {U0, A0, U1, A1, ... , U ?1, A ?1}，S =f(S ?1,A ?1,U )。
+【2020-12-23】对话状态追踪（DST）的作用：
+- 根据**领域**(domain)/**意图**(intention) 、**槽值对**(slot-value pairs)、之前的状态以及之前系统的Action等来追踪当前状态。 
+- 输入是
+  - **Un**：n时刻的意图和槽值对，也叫用户Action
+  - **An-1**：n-1时刻的系统Action
+  - **Sn-1**：n-1时刻的状态
+- 输出是Sn：n时刻的状态
+- 用户Action和系统Action不同，且需要注意
+  - S = {Gn,Un,Hn}
+  - Gn是用户目标
+  - Un同上
+  - Hn是聊天的历史，Hn= {U0, A0, U1, A1, ... , U ?1, A ?1}，S =f(S ?1,A ?1,U )。
 
-- DST涉及到两方面内容：**状态表示**、**状态追踪**。
+DST涉及到两方面内容：**状态表示**、**状态追踪**。
 
-- DST形象化
-    - ![](https://upload-images.jianshu.io/upload_images/17303794-c1bbad40c15af803.jpg)
+- DST形象化，[图](https://upload-images.jianshu.io/upload_images/17303794-c1bbad40c15af803.jpg)
+  - ![](https://upload-images.jianshu.io/upload_images/17303794-c1bbad40c15af803.jpg)
 - DST常见方法
-    - 注意：基于规则的方法虽然可以较好利用先验知识从而可以较好解决冷启动等问题，但是需要太多人工、非常不灵活、扩展性和移植性很差、不能同时追踪多种状态
-    - ![](https://upload-images.jianshu.io/upload_images/17303794-21b9f3b4f6e3c539.jpg)
-    - （1）CRF
-    - （2）NN-Based
-    - （3）基于迁移学习做DST
-    - （4）Multichannel Tracker
-    - （5）Neural Belief Tracker
-    - （6）其他：基于贝叶斯网络做DST、基于POMDP（部分可观测马尔可夫决策过程）等
-    - 总结对比
-        - ![](https://upload-images.jianshu.io/upload_images/17303794-865e51888fc863cc.jpg)
+  - 注意：基于规则的方法虽然可以较好利用先验知识从而可以较好解决冷启动等问题，但是需要太多人工、非常不灵活、扩展性和移植性很差、不能同时追踪多种状态，[图](https://upload-images.jianshu.io/upload_images/17303794-21b9f3b4f6e3c539.jpg)
+![](https://upload-images.jianshu.io/upload_images/17303794-21b9f3b4f6e3c539.jpg)
+  - （1）CRF
+  - （2）NN-Based
+  - （3）基于迁移学习做DST
+  - （4）Multichannel Tracker
+  - （5）Neural Belief Tracker
+  - （6）其他：基于贝叶斯网络做DST、基于POMDP（部分可观测马尔可夫决策过程）等
+  - 总结对比,[图](https://upload-images.jianshu.io/upload_images/17303794-865e51888fc863cc.jpg)
+  - ![](https://upload-images.jianshu.io/upload_images/17303794-865e51888fc863cc.jpg)
 - DST评估方法
-    - ![](https://upload-images.jianshu.io/upload_images/17303794-297db64c7cfbfc87.jpg)
+  - ![](https://upload-images.jianshu.io/upload_images/17303794-297db64c7cfbfc87.jpg)
 - 为了解决领域数据不足的问题，DST还有很多迁移学习(Transfer Learning)方面的工作。比如基于特征的迁移学习、基于模型的迁移学习等。
 
 #### DSTC
@@ -809,98 +815,101 @@ GUS对话系统，是 Genial Understander System 的缩写，可以追溯到1977
 
 - 详情参考：[任务型对话系统中状态追踪（DST）](https://www.jianshu.com/p/085eb0262284)
 
-
-
 ### DP
 
 对话管理的一些方法，主要有三大类：
-- （1）**Structure-based Approaches**
-  - **Key phrase reactive**
-    - 本质是关键词匹配，通常是通过捕捉用户最后一句话的关键词/关键短语来进行回应，比较知名的两个应用是 ELIZA 和 AIML。
-      - AIML（人工智能标记语言），[代码示例](https://github.com/Shuang0420/aiml)，支持 python3、中文、* 扩展
-  - **Tree and FSM**
-    - 把对话建模为通过树或有限状态机（图结构）的路径。 相比于 simple reactive approach，这种方法融合了更多的上下文，能用一组有限的信息交换模板来完成对话的建模。
-    - 这种方法适用于：
-      - 系统主导
-      - 需要从用户收集特定信息
-      - 用户对每个问题的回答在有限集合中
-    -  FSM，把对话看做是在有限状态内跳转的过程，每个状态都有对应的动作和回复，如果能从开始节点顺利的流转到终止节点，任务就完成了。
-    - ![](https://pic2.zhimg.com/80/v2-1d52ccbfd607dd95c94a6f132181bf81_720w.jpg)
-    - ![](https://pic4.zhimg.com/80/v2-06657b8968f5e2f352b44bf87599ff70_hd.jpg)
-    - FSM 的状态对应系统问用户的问题，弧线对应将采取的行为，依赖于用户回答。
-    - FSM-based DM 的特点是：
-      - 人为定义对话流程
-      - 完全由系统主导，系统问，用户答
-      - 答非所问的情况直接忽略
-      - 建模简单，能清晰明了的把交互匹配到模型
-      - 难以扩展，很容易变得复杂
-      - 适用于简单任务，对简单信息获取很友好，难以处理复杂的问题
-      - 缺少灵活性，表达能力有限，输入受限，对话结构/流转路径受限
-      - 对特定领域要设计 task-specific FSM，简单的任务 FSM 可以比较轻松的搞定，但稍复杂的问题就困难了，毕竟要考虑对话中的各种可能组合，编写和维护都要细节导向，非常耗时。一旦要扩展 FSM，哪怕只是去 handle 一个新的 observation，都要考虑很多问题。实际中，通常会加入其它机制（如变量等）来扩展 FSM 的表达能力。
-  - …
-- （2）**Principle-based Approaches**
-  - Frame-based
-    - Frame-based approach 通过允许多条路径更灵活的获得信息的方法扩展了基于 FSM 的方法，它将对话建模成一个填槽的过程，槽就是多轮对话过程中将初步用户意图转化为明确用户指令所需要补全的信息。一个槽与任务处理中所需要获取的一种信息相对应。槽直接没有顺序，缺什么槽就向用户询问对应的信息。
-    - ![](https://pic4.zhimg.com/80/v2-5c0585ce7c8a8790e36bcdc721a7f1ce_hd.jpg)
-    - Frame-based DM 包含下面一些要素：
-      - Frame： 是槽位的集合，定义了需要由用户提供什么信息
-      - 对话状态：记录了哪些槽位已经被填充
-      - 行为选择：下一步该做什么，填充什么槽位，还是进行何种操作
-      - 行为选择可以按槽位填充/槽位加权填充，或者是利用本体选择
-    - 基于框架/模板的系统本质上是一个生成系统，不同类型的输入激发不同的生成规则，每个生成能够灵活的填入相应的模板。常常用于用户可能采取的行为相对有限、只希望用户在这些行为中进行少许转换的场合。
-    - Frame-based DM 特点：
-      - 用户回答可以包含任何一个片段/全部的槽信息
-      - 系统来决定下一个行为
-      - 支持混合主导型系统
-      - 相对灵活的输入，支持多种输入/多种顺序
-      - 适用于相对复杂的信息获取
-      - 难以应对更复杂的情境
-      - 缺少层次
-    - 槽的更多信息可以参考[填槽与多轮对话-AI产品经理需要了解的AI技术概念](https://link.zhihu.com/?target=http%3A//www.pmcaff.com/article/index/971158746030208%3Ffrom%3Drelated%26pmc_param%255Bentry_id%255D%3D950709304427648)
-  - Agenda + Frame
-    - Agenda + Frame(CMU Communicator) 对 frame model 进行了改进，有了层次结构，能应对更复杂的信息获取，支持话题切换、回退、退出。主要要素如下：
-      - product
-        - 树的结构，能够反映为完成这个任务需要的所有信息的顺序
-        - 相比于普通的 Tree and FSM approach，这里产品树（product tree）的创新在于它是动态的，可以在 session 中对树进行一系列操作比如加一个子树或者挪动子树
-      - process
-        - agenda
-          - 相当于任务的计划（plan）
-          - 类似栈的结构（generalization of stack）
-          - 是话题的有序列表（ordered list of topics）
-          - 是 handler 的有序列表（list of handlers），handler 有优先级
-        - handler
-          - 产品树上的每个节点对应一个 handler，一个 handler 封装了一个 information item
-    - 从 product tree 从左到右、深度优先遍历生成 agenda 的顺序。当用户输入时，系统按照 agenda 中的顺序调用每个 handler，每个 handler 尝试解释并回应用户输入。handler 捕获到信息就把信息标记为 consumed，这保证了一个 information item 只能被一个 handler 消费。
-  - Information-State
-    - Information State Theories 提出的背景是：
-      - 很难去评估各种 DM 系统
-      - 理论和实践模型存在很大的 gap
-        - 理论型模型有：logic-based, BDI, plan-based, attention/intention
-        - 实践中模型大多数是 finite-state 或者 frame-based
-      - 即使从理论模型出发，也有很多种实现方法
-    - Information State Models 作为对话建模的形式化理论，为工程化实现提供了理论指导，也为改进当前对话系统提供了大的方向。Information-state theory 的关键是识别对话中流转信息的 relevant aspects，以及这些成分是怎么被更新的，更新过程又是怎么被控制的。idea 其实比较简单，不过执行很复杂罢了
-    - ![](https://pic4.zhimg.com/80/v2-bd700b2e509e7d2d84a8ffad91a9ce55_hd.jpg)
-  - Plan
-    - 一般指大名鼎鼎的 BDI (Belief, Desire, Intention) 模型。起源于三篇经典论文：
-      - Cohen and Perrault 1979
-      - Perrault and Allen 1980
-      - Allen and Perrault 1980
-    - 基本假设是，一个试图发现信息的行为人，能够利用标准的 plan 找到让听话人告诉说话人该信息的 plan。这就是 Cohen and Perrault 1979 提到的 AI Plan model，Perrault and Allen 1980 和 Allen and Perrault 1980 将 BDI 应用于理解，特别是间接言语语效的理解，本质上是对 Searle 1975 的 speech acts 给出了可计算的形式体系。
-    - 重要的概念：goals, actions, plan construction, plan inference。
-    - 理解上有点绕，简单来说就是 agent 会捕捉对 internal state (beliefs) 有益的信息，然后这个 state 与 agent 当前目标（goals/desires）相结合，再然后计划（plan/intention）就会被选择并执行。对于 communicative agents 而言，plan 的行为就是单个的 speech acts。speech acts 可以是复合（composite）或原子（atomic）的，从而允许 agent 按照计划步骤传达复杂或简单的 conceptual utterance。
-    - 这里简单提一下重要的概念。
-      - 信念（Belief）：基于谓词 KNOW，如果 A 相信 P 为真，那么用 B(A, P) 来表示
-      - 期望（Desire）：基于谓词 WANT，如果 S 希望 P 为真（S 想要实现 P），那么用 WANT(S, P) 来表示，P 可以是一些行为的状态或者实现，W(S, ACT(H)) 表示 S 想让 H 来做 ACT
-    - Belief 和 WANT 的逻辑都是基于公理。最简单的是基于 action schema。每个 action 都有下面的参数集：
-      - 前提（precondition）：为成功实施该行为必须为真的条件
-      - 效果（effect）：成功实施该行为后变为真的条件
-      - 体（body）：为实施该行为必须达到的部分有序的目标集（partially ordered goal states）
-  - 更多见 [Plan-based models of dialogue](https://citeseerx.ist.psu.edu/viewdoc/download%3Fdoi%3D10.1.1.65.8451%26rep%3Drep1%26type%3Dpdf)
-- （3）**Statistical Approaches**
-  - RL-Based Approaches
-    - 前面提到的很多方法还是需要人工来定规则的（hand-crafted approaches），然而人很难预测所有可能的场景，这种方法也并不能重用，换个任务就需要从头再来。而一般的基于统计的方法又需要大量的数据。再者，对话系统的评估也需要花费很大的代价。
-    - 这种情况下，强化学习的优势就凸显出来了。RL-Based DM 能够对系统理解用户输入的不确定性进行建模，让算法来自己学习最好的行为序列。首先利用 simulated user 模拟真实用户产生各种各样的行为（捕捉了真实用户行为的丰富性），然后由系统和 simulated user 进行交互，根据 reward function 奖励好的行为，惩罚坏的行为，优化行为序列。由于 simulated user 只用在少量的人机互动语料中训练，并没有大量数据的需求，不过 user simulation 也是个很难的任务就是了。
-    - ![](https://pic3.zhimg.com/80/v2-a499aef3d6e5bf09ea9e4239415c1ee6_hd.jpg)
+
+#### （1）**Structure-based Approaches**
+
+- **Key phrase reactive**
+  - 本质是关键词匹配，通常是通过捕捉用户最后一句话的关键词/关键短语来进行回应，比较知名的两个应用是 ELIZA 和 AIML。
+    - AIML（人工智能标记语言），[代码示例](https://github.com/Shuang0420/aiml)，支持 python3、中文、* 扩展
+- **Tree and FSM**
+  - 把对话建模为通过树或有限状态机（图结构）的路径。 相比于 simple reactive approach，这种方法融合了更多的上下文，能用一组有限的信息交换模板来完成对话的建模。
+  - 这种方法适用于：
+    - 系统主导
+    - 需要从用户收集特定信息
+    - 用户对每个问题的回答在有限集合中
+  -  FSM，把对话看做是在有限状态内跳转的过程，每个状态都有对应的动作和回复，如果能从开始节点顺利的流转到终止节点，任务就完成了。
+  - ![](https://pic2.zhimg.com/80/v2-1d52ccbfd607dd95c94a6f132181bf81_720w.jpg)
+  - ![](https://pic4.zhimg.com/80/v2-06657b8968f5e2f352b44bf87599ff70_hd.jpg)
+  - FSM 的状态对应系统问用户的问题，弧线对应将采取的行为，依赖于用户回答。
+  - FSM-based DM 的特点是：
+    - 人为定义对话流程
+    - 完全由系统主导，系统问，用户答
+    - 答非所问的情况直接忽略
+    - 建模简单，能清晰明了的把交互匹配到模型
+    - 难以扩展，很容易变得复杂
+    - 适用于简单任务，对简单信息获取很友好，难以处理复杂的问题
+    - 缺少灵活性，表达能力有限，输入受限，对话结构/流转路径受限
+    - 对特定领域要设计 task-specific FSM，简单的任务 FSM 可以比较轻松的搞定，但稍复杂的问题就困难了，毕竟要考虑对话中的各种可能组合，编写和维护都要细节导向，非常耗时。一旦要扩展 FSM，哪怕只是去 handle 一个新的 observation，都要考虑很多问题。实际中，通常会加入其它机制（如变量等）来扩展 FSM 的表达能力。
+
+#### （2）**Principle-based Approaches**
+
+- Frame-based
+  - Frame-based approach 通过允许多条路径更灵活的获得信息的方法扩展了基于 FSM 的方法，它将对话建模成一个填槽的过程，槽就是多轮对话过程中将初步用户意图转化为明确用户指令所需要补全的信息。一个槽与任务处理中所需要获取的一种信息相对应。槽直接没有顺序，缺什么槽就向用户询问对应的信息。
+  - ![](https://pic4.zhimg.com/80/v2-5c0585ce7c8a8790e36bcdc721a7f1ce_hd.jpg)
+  - Frame-based DM 包含下面一些要素：
+    - Frame： 是槽位的集合，定义了需要由用户提供什么信息
+    - 对话状态：记录了哪些槽位已经被填充
+    - 行为选择：下一步该做什么，填充什么槽位，还是进行何种操作
+    - 行为选择可以按槽位填充/槽位加权填充，或者是利用本体选择
+  - 基于框架/模板的系统本质上是一个生成系统，不同类型的输入激发不同的生成规则，每个生成能够灵活的填入相应的模板。常常用于用户可能采取的行为相对有限、只希望用户在这些行为中进行少许转换的场合。
+  - Frame-based DM 特点：
+    - 用户回答可以包含任何一个片段/全部的槽信息
+    - 系统来决定下一个行为
+    - 支持混合主导型系统
+    - 相对灵活的输入，支持多种输入/多种顺序
+    - 适用于相对复杂的信息获取
+    - 难以应对更复杂的情境
+    - 缺少层次
+  - 槽的更多信息可以参考[填槽与多轮对话-AI产品经理需要了解的AI技术概念](https://link.zhihu.com/?target=http%3A//www.pmcaff.com/article/index/971158746030208%3Ffrom%3Drelated%26pmc_param%255Bentry_id%255D%3D950709304427648)
+- Agenda + Frame
+  - Agenda + Frame(CMU Communicator) 对 frame model 进行了改进，有了层次结构，能应对更复杂的信息获取，支持话题切换、回退、退出。主要要素如下：
+    - product
+      - 树的结构，能够反映为完成这个任务需要的所有信息的顺序
+      - 相比于普通的 Tree and FSM approach，这里产品树（product tree）的创新在于它是动态的，可以在 session 中对树进行一系列操作比如加一个子树或者挪动子树
+    - process
+      - agenda
+        - 相当于任务的计划（plan）
+        - 类似栈的结构（generalization of stack）
+        - 是话题的有序列表（ordered list of topics）
+        - 是 handler 的有序列表（list of handlers），handler 有优先级
+      - handler
+        - 产品树上的每个节点对应一个 handler，一个 handler 封装了一个 information item
+  - 从 product tree 从左到右、深度优先遍历生成 agenda 的顺序。当用户输入时，系统按照 agenda 中的顺序调用每个 handler，每个 handler 尝试解释并回应用户输入。handler 捕获到信息就把信息标记为 consumed，这保证了一个 information item 只能被一个 handler 消费。
+- Information-State
+  - Information State Theories 提出的背景是：
+    - 很难去评估各种 DM 系统
+    - 理论和实践模型存在很大的 gap
+      - 理论型模型有：logic-based, BDI, plan-based, attention/intention
+      - 实践中模型大多数是 finite-state 或者 frame-based
+    - 即使从理论模型出发，也有很多种实现方法
+  - Information State Models 作为对话建模的形式化理论，为工程化实现提供了理论指导，也为改进当前对话系统提供了大的方向。Information-state theory 的关键是识别对话中流转信息的 relevant aspects，以及这些成分是怎么被更新的，更新过程又是怎么被控制的。idea 其实比较简单，不过执行很复杂罢了
+  - ![](https://pic4.zhimg.com/80/v2-bd700b2e509e7d2d84a8ffad91a9ce55_hd.jpg)
+- Plan
+  - 一般指大名鼎鼎的 BDI (Belief, Desire, Intention) 模型。起源于三篇经典论文：
+    - Cohen and Perrault 1979
+    - Perrault and Allen 1980
+    - Allen and Perrault 1980
+  - 基本假设是，一个试图发现信息的行为人，能够利用标准的 plan 找到让听话人告诉说话人该信息的 plan。这就是 Cohen and Perrault 1979 提到的 AI Plan model，Perrault and Allen 1980 和 Allen and Perrault 1980 将 BDI 应用于理解，特别是间接言语语效的理解，本质上是对 Searle 1975 的 speech acts 给出了可计算的形式体系。
+  - 重要的概念：goals, actions, plan construction, plan inference。
+  - 理解上有点绕，简单来说就是 agent 会捕捉对 internal state (beliefs) 有益的信息，然后这个 state 与 agent 当前目标（goals/desires）相结合，再然后计划（plan/intention）就会被选择并执行。对于 communicative agents 而言，plan 的行为就是单个的 speech acts。speech acts 可以是复合（composite）或原子（atomic）的，从而允许 agent 按照计划步骤传达复杂或简单的 conceptual utterance。
+  - 这里简单提一下重要的概念。
+    - 信念（Belief）：基于谓词 KNOW，如果 A 相信 P 为真，那么用 B(A, P) 来表示
+    - 期望（Desire）：基于谓词 WANT，如果 S 希望 P 为真（S 想要实现 P），那么用 WANT(S, P) 来表示，P 可以是一些行为的状态或者实现，W(S, ACT(H)) 表示 S 想让 H 来做 ACT
+  - Belief 和 WANT 的逻辑都是基于公理。最简单的是基于 action schema。每个 action 都有下面的参数集：
+    - 前提（precondition）：为成功实施该行为必须为真的条件
+    - 效果（effect）：成功实施该行为后变为真的条件
+    - 体（body）：为实施该行为必须达到的部分有序的目标集（partially ordered goal states）
+- 更多见 [Plan-based models of dialogue](https://citeseerx.ist.psu.edu/viewdoc/download%3Fdoi%3D10.1.1.65.8451%26rep%3Drep1%26type%3Dpdf)
+
+#### （3）**Statistical Approaches**
+
+- RL-Based Approaches
+  - 前面提到的很多方法还是需要人工来定规则的（hand-crafted approaches），然而人很难预测所有可能的场景，这种方法也并不能重用，换个任务就需要从头再来。而一般的基于统计的方法又需要大量的数据。再者，对话系统的评估也需要花费很大的代价。
+  - 这种情况下，强化学习的优势就凸显出来了。RL-Based DM 能够对系统理解用户输入的不确定性进行建模，让算法来自己学习最好的行为序列。首先利用 simulated user 模拟真实用户产生各种各样的行为（捕捉了真实用户行为的丰富性），然后由系统和 simulated user 进行交互，根据 reward function 奖励好的行为，惩罚坏的行为，优化行为序列。由于 simulated user 只用在少量的人机互动语料中训练，并没有大量数据的需求，不过 user simulation 也是个很难的任务就是了。
+  - ![](https://pic3.zhimg.com/80/v2-a499aef3d6e5bf09ea9e4239415c1ee6_hd.jpg)
 
 
 ### 有限状态机FSM
