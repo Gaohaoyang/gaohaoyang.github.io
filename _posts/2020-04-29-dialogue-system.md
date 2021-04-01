@@ -464,7 +464,7 @@ chatbot:我也是，不过总有一天就会好起来的
   - ![](http://html.rhhz.net/buptjournal/html/PIC/bjyddxxb-42-6-10-3.jpg)
   - 将人机对话的过程看作为从对话历史到系统回复的一种映射问题，通常应用编解码模型来进行端到端训练.
   - 端到端对话系统是在有监督的方式下进行训练，需要大量人人对话的训练数据，理论上有很多优点，但目前从结果上看仍需要在技术上做大的提升，以确保对话的逻辑性和鲁棒性.
-- 总结：任务型对话系统的架构分类，[图](http://html.rhhz.net/buptjournal/html/PIC/bjyddxxb-42-6-10-4.jpg)
+- 总结：任务型对话系统的架构分类，[图](http://html.rhhz.net/buptjournal/html/PIC/bjyddxxb-42-6-10-4.jpg)，源自清华convlab2的[论文](https://www.aminer.cn/pub/5e451e433a55acfaed738772/convlab-an-open-source-toolkit-for-building-evaluating-and-diagnosing-dialogue-systems)
   - ![](http://html.rhhz.net/buptjournal/html/PIC/bjyddxxb-42-6-10-4.jpg)
 
 ### 非任务型架构
@@ -658,10 +658,14 @@ chatbot:我也是，不过总有一天就会好起来的
   - ![](https://upload-images.jianshu.io/upload_images/1535345-afd604658341abf5.png)
   - 上图的模型首先提出了一种端到端强化学习的方法，在对话管理中联合训练对话状态跟踪和对话策略学习，从而更有力地对系统的动作进行优化。
 - 【2021-3-2】微软的[Jianfeng Gao](https://www.microsoft.com/en-us/research/people/jfgao/)，[ConvLab](https://github.com/ConvLab/ConvLab) is an open-source multi-domain end-to-end dialog system platform，aiming to enable researchers to quickly set up experiments with reusable components and compare a large set of different approaches, ranging from conventional pipeline systems to end-to-end neural models, in common environments.
-  - 开源的[ConvLab: Multi-Domain End-to-End Dialog System Platform](https://arxiv.org/abs/1904.08637).
-  - [ConvLab-2](https://convlab.github.io/), DSTC9 Track 2: Multi-domain Task-oriented Dialog Challenge II
+  - 开源的[ConvLab: Multi-Domain End-to-End Dialog System Platform](https://arxiv.org/abs/1904.08637). 
+  - ACL 2020 demo track, 清华开源的[ConvLab-2: An Open-Source Toolkit for Building, Evaluating, and Diagnosing Dialogue Systems](https://arxiv.org/abs/2002.04793)，[AMiner地址](https://www.aminer.cn/pub/5e451e433a55acfaed738772/convlab-an-open-source-toolkit-for-building-evaluating-and-diagnosing-dialogue-systems)
+  - [ConvLab-2](https://convlab.github.io/), 端到端模型、评价、诊断，build task-oriented dialogue systems with state-of-the-art models, perform an end-to-end evaluation, and diagnose the weakness of systems. [这篇顶会，助你徒手搭建任务导向对话系统](https://zhuanlan.zhihu.com/p/199261627),朱祺的团队用最先进的模型构建面向任务的对话系统，执行端到端评估，并诊断系统缺陷。ConvLab-2继承了ConvLab的框架，但集成了更强大的对话模型并支持更多的数据集。还开发了一个分析工具和一个交互工具来帮助研究人员诊断对话系统。分析工具提供了丰富的统计数据和图表展示，并对模拟数据中的常见错误进行汇总，便于错误分析和系统改进。交互工具提供了一个用户模拟器界面，允许开发人员通过与系统交互并修改系统组件的输出来诊断组装好的对话系统。
+    - DSTC9 Track 2: Multi-domain Task-oriented Dialog Challenge II
     - End-to-end Multi-domain Task Completion Dialog Task
     - Cross-lingual Multi-domain Dialog State Tracking Task
+    - ![](https://pic2.zhimg.com/80/v2-110d9d814477e68b3184d017619bbfdd_1440w.jpg)
+    - ![](https://pic3.zhimg.com/80/v2-53b34da932b17b2db31085fd23f2e12e_1440w.jpg)
   - [Deep Reinforcement Learning for Goal-Oriented Dialogues](https://www.microsoft.com/en-us/research/project/deep-reinforcement-learning-goal-oriented-dialogue/#)
     - ![](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/04/composite-dialogue-1024x459.png)
 
@@ -686,26 +690,25 @@ chatbot:我也是，不过总有一天就会好起来的
 
 一个典型的对话系统的交互过程是这样的：
 - 用户：你好（User Dialog Act：greeting）  
-- 机器：你好，我可以帮助你搜索并预订餐厅（Sys Dialog Act：greeting）  
+  - 机器：你好，我可以帮助你搜索并预订餐厅（Sys Dialog Act：greeting）  
 - 用户：我想要找一家在中央公园2.0附近的意大利餐厅（User Dialog Act：inform(地址=中央公园2.0，口味=意大利)）  
-- 机器：请问你想要在中央公园2.0附近什么价位的意大利餐厅？（Sys Dialog Act：request(价位)）  
+  - 机器：请问你想要在中央公园2.0附近什么价位的意大利餐厅？（Sys Dialog Act：request(价位)）  
 - 用户：普通的就好（User Dialog Act：inform(价位=普通)）  
-- 机器：我知道那里有一家柯南家的老意大利料理餐厅（Sys Dialog Act：inform(名称=柯南家的老意大利料理)）  
+  - 机器：我知道那里有一家柯南家的老意大利料理餐厅（Sys Dialog Act：inform(名称=柯南家的老意大利料理)）  
 - 用户：换一个（User Dialog Act：alter()）  
-- 机器：我知道那里有一家意大利油泼面餐厅（Sys Dialog Act：inform(名称=意大利油泼面)）  
+  - 机器：我知道那里有一家意大利油泼面餐厅（Sys Dialog Act：inform(名称=意大利油泼面)）  
 - 用户：它家的价格怎么样？（User Dialog Act：request(价位)）  
-- 机器：意大利油泼面的价位是普通（Sys Dialog Act：inform(价位=普通)）  
+  - 机器：意大利油泼面的价位是普通（Sys Dialog Act：inform(价位=普通)）  
 - 用户：就这家吧，帮我预订（User Dialog Act：order()）  
-- 机器：请问有几个人？（Sys Dialog Act：request(人数)）  
+  - 机器：请问有几个人？（Sys Dialog Act：request(人数)）  
 - 用户：单身狗（User Dialog Act：inform(人数=1)）  
-- 机器：真的就1个人吗？（Sys Dialog Act：confirm(人数=1)）  
+  - 机器：真的就1个人吗？（Sys Dialog Act：confirm(人数=1)）  
 - 用户：是的（User Dialog Act：confirm()）  
-- 机器：已经预定成功（Sys Dialog Act：order_success()）  
+  - 机器：已经预定成功（Sys Dialog Act：order_success()）  
 - 用户：好的，再见（User Dialog Act：bye()）  
-- 机器：再见，欢迎下次使用（Sys Dialog Act：bye()）
+  - 机器：再见，欢迎下次使用（Sys Dialog Act：bye()）
 
-Dialog Acts 如果是用户发起的（User Dialog Act），
-那么它是一种处理后的用户意图的抽象表达，是一种形式化的意图描述。
+Dialog Acts 如果是用户发起的（User Dialog Act），那么它是一种处理后的用户意图的抽象表达，是一种形式化的意图描述。
 
 >The dialog act expresses an important component of the intention of the speaker (or writer) in saying what they said
 系统发起的行为（Sys Dialog Act），是根据用户行为，上下文信息等等综合得出的，
@@ -715,41 +718,37 @@ Dialog Acts 如果是用户发起的（User Dialog Act），
 GUS对话系统，是 Genial Understander System 的缩写，可以追溯到1977年的论文(Daniel G. Bobrow, GUS, A Frame-Driven Dialog System, 1977)
 
 常见的不同意图有：
-- 用户的greeting：问好  
-- 用户的inform：用户提供一个信息，例如想要的餐厅的地址  
-- 用户的request：询问一个信息，例如当前结果餐厅的电话  
-- 用户的confirm：确认信息正确（例如上一条是机器问你对不对）  
-- 用户的bye：结束对话  
+- 用户的**greeting**：问好  
+- 用户的**inform**：用户提供一个信息，例如想要的餐厅的地址  
+- 用户的**request**：询问一个信息，例如当前结果餐厅的电话  
+- 用户的**confirm**：确认信息正确（例如上一条是机器问你对不对）  
+- 用户的**bye**：结束对话  
 
 机器的greeting：问好，也可以是自我介绍  
-- 机器的inform：提供机器知道的信息，例如当前结果餐厅的信息  
-- 机器的request：机器必须有足够的信息才能完成任务，如果欠缺一些必须信息，例如餐厅地址、口味，则会向用户询问  
-- 机器的confirm：根用户确认信息是否正确  
-- 机器的bye：结束对话  
+- 机器的**inform**：提供机器知道的信息，例如当前结果餐厅的信息  
+- 机器的**request**：机器必须有足够的信息才能完成任务，如果欠缺一些必须信息，例如餐厅地址、口味，则会向用户询问  
+- 机器的**confirm**：根用户确认信息是否正确  
+- 机器的**bye**：结束对话  
 
 上文还出现了一些可能的特殊意图，例如：
-- 用户的order：确认订餐  
-- 用户的alter：更换检索结果  
-- 系统的order_success：反馈订餐成功  
+- 用户的**order**：确认订餐  
+- 用户的**alter**：更换检索结果  
+- 系统的**order_success**：反馈订餐成功  
 
 整个对话系统，就是为了完成某个特定任务，这个任务所需要的特定条件需需要由用户提供（例如帮助买咖啡需要咖啡品种，热或冷等信息），当信息足够的时候，机器就能完成相应任务。
 
 这个过程总结就是：
-- 用户说了什么 =》  
-- 分析用户意图 =》  
-- 生成系统的对应意图（操作）=》  
-- 用户听到了系统的反馈 =》  
-- 用户说了什么（第二轮）=》
-- …………
+- 用户说了什么 =》  分析用户意图 =》  生成系统的对应意图（操作）=》  用户听到了系统的反馈 =》  用户说了什么（第二轮）=》…………
 
 当然根据任务复杂度、和其他系统结合等等问题，
 对话系统本身也有各种的不同准确度与实现方式。
 
-
 ## DM
 
+对话管理（Dialog Manager，下文简称 DM）一般的定义是，根据用户当前的输入，以及对话上下文，决定系统下一步的最佳响应。对于任务型 DM，其职责是通过一致性的对话交互，完成用户的对话目标。
+
 - [多轮对话之对话管理(Dialog Management)](https://zhuanlan.zhihu.com/p/32716205)
-- 对话管理（Dialog Management, DM）控制着人机对话的过程，DM 根据对话历史信息，决定此刻对用户的反应。最常见的应用还是任务驱动的多轮对话，用户带着明确的目的如订餐、订票等，用户需求比较复杂，有很多限制条件，可能需要分多轮进行陈述，一方面，用户在对话过程中可以不断修改或完善自己的需求，另一方面，当用户的陈述的需求不够具体或明确的时候，机器也可以通过询问、澄清或确认来帮助用户找到满意的结果。
+- **对话管理**（Dialog Management, DM）控制着人机对话的过程，DM 根据对话历史信息，决定此刻对用户的反应。最常见的应用还是任务驱动的多轮对话，用户带着明确的目的如订餐、订票等，用户需求比较复杂，有很多限制条件，可能需要分多轮进行陈述，一方面，用户在对话过程中可以不断修改或完善自己的需求，另一方面，当用户的陈述的需求不够具体或明确的时候，机器也可以通过询问、澄清或确认来帮助用户找到满意的结果。
 - ![](https://picb.zhimg.com/80/v2-763da7952c607ed3065af3cacdd9c7d8_720w.jpg)
 
 对话管理的任务大致有下面一些：
@@ -770,282 +769,20 @@ GUS对话系统，是 Genial Understander System 的缩写，可以追溯到1977
     - 一是用户/系统转移任何时候都可以主导权，这种比较困难
     - 二是根据 prompt type 来实现主导权的移交
   - Prompts 又分为：
-    -  **open prompt**（如 ‘How may I help you‘ 这种，用户可以回复任何内容 ）
+    - **open prompt**（如 ‘How may I help you‘ 这种，用户可以回复任何内容 ）
     - **directive prompt**（如 ‘Say yes to accept call, or no’ 这种，系统限制了用户的回复选择）
 
-### DST
+### 实现方法
 
-【2020-12-23】对话状态追踪（DST）的作用：
-- 根据**领域**(domain)/**意图**(intention) 、**槽值对**(slot-value pairs)、之前的状态以及之前系统的Action等来追踪当前状态。 
-- 输入是
-  - **Un**：n时刻的意图和槽值对，也叫用户Action
-  - **An-1**：n-1时刻的系统Action
-  - **Sn-1**：n-1时刻的状态
-- 输出是Sn：n时刻的状态
-- 用户Action和系统Action不同，且需要注意
-  - S = {Gn,Un,Hn}
-  - Gn是用户目标
-  - Un同上
-  - Hn是聊天的历史，Hn= {U0, A0, U1, A1, ... , U ?1, A ?1}，S =f(S ?1,A ?1,U )。
+- 【2021-4-1】[得助智能](https://www.51ima.com/)丁南的系列文章
+  - [任务型对话管理的产品实践（第一篇）- 实现方法的回顾](https://zhuanlan.zhihu.com/p/71785382)
+  - [第二篇 - Data-driven 方法应用的困难](https://zhuanlan.zhihu.com/p/71787538)
+  - [任务型对话管理的产品实践（第二篇）- 机器学习方法应用的困难](https://zhuanlan.zhihu.com/p/80957096)
+  - [第三篇 - 业界解决方案一览](https://zhuanlan.zhihu.com/p/71788365)
 
-DST涉及到两方面内容：**状态表示**、**状态追踪**。
+![](https://pic3.zhimg.com/v2-838c2141adab54758263ea0de49b07d2_r.jpg)
 
-- DST形象化，[图](https://upload-images.jianshu.io/upload_images/17303794-c1bbad40c15af803.jpg)
-  - ![](https://upload-images.jianshu.io/upload_images/17303794-c1bbad40c15af803.jpg)
-- DST常见方法
-  - 注意：基于规则的方法虽然可以较好利用先验知识从而可以较好解决冷启动等问题，但是需要太多人工、非常不灵活、扩展性和移植性很差、不能同时追踪多种状态，[图](https://upload-images.jianshu.io/upload_images/17303794-21b9f3b4f6e3c539.jpg)
-![](https://upload-images.jianshu.io/upload_images/17303794-21b9f3b4f6e3c539.jpg)
-  - （1）CRF
-  - （2）NN-Based
-  - （3）基于迁移学习做DST
-  - （4）Multichannel Tracker
-  - （5）Neural Belief Tracker
-  - （6）其他：基于贝叶斯网络做DST、基于POMDP（部分可观测马尔可夫决策过程）等
-  - 总结对比,[图](https://upload-images.jianshu.io/upload_images/17303794-865e51888fc863cc.jpg)
-  - ![](https://upload-images.jianshu.io/upload_images/17303794-865e51888fc863cc.jpg)
-- DST评估方法
-  - ![](https://upload-images.jianshu.io/upload_images/17303794-297db64c7cfbfc87.jpg)
-- 为了解决领域数据不足的问题，DST还有很多迁移学习(Transfer Learning)方面的工作。比如基于特征的迁移学习、基于模型的迁移学习等。
-
-#### DSTC
-
-- 讲到DST就不得不讲**DSTC**，DSTC是Dialog System Technology Challenge，主要包括6个Challenge。DSTC对DST的作用就相当于目标函数对机器学习任务的作用，真正起到了评估DST技术以及促进DST技术发展的作用。之所以先说DSTC是因为后面的很多DST的方法是在某个DSTC（大多是DSTC2、DSTC3、DSTC4、DSTC5）上做的。
-- ![](https://upload-images.jianshu.io/upload_images/17303794-b38b10790b64127f.jpg)
-
-
-- 详情参考：[任务型对话系统中状态追踪（DST）](https://www.jianshu.com/p/085eb0262284)
-
-### DP
-
-对话管理的一些方法，主要有三大类：
-
-#### （1）**Structure-based Approaches**
-
-- **Key phrase reactive**
-  - 本质是关键词匹配，通常是通过捕捉用户最后一句话的关键词/关键短语来进行回应，比较知名的两个应用是 ELIZA 和 AIML。
-    - AIML（人工智能标记语言），[代码示例](https://github.com/Shuang0420/aiml)，支持 python3、中文、* 扩展
-- **Tree and FSM**
-  - 把对话建模为通过树或有限状态机（图结构）的路径。 相比于 simple reactive approach，这种方法融合了更多的上下文，能用一组有限的信息交换模板来完成对话的建模。
-  - 这种方法适用于：
-    - 系统主导
-    - 需要从用户收集特定信息
-    - 用户对每个问题的回答在有限集合中
-  -  FSM，把对话看做是在有限状态内跳转的过程，每个状态都有对应的动作和回复，如果能从开始节点顺利的流转到终止节点，任务就完成了。
-  - ![](https://pic2.zhimg.com/80/v2-1d52ccbfd607dd95c94a6f132181bf81_720w.jpg)
-  - ![](https://pic4.zhimg.com/80/v2-06657b8968f5e2f352b44bf87599ff70_hd.jpg)
-  - FSM 的状态对应系统问用户的问题，弧线对应将采取的行为，依赖于用户回答。
-  - FSM-based DM 的特点是：
-    - 人为定义对话流程
-    - 完全由系统主导，系统问，用户答
-    - 答非所问的情况直接忽略
-    - 建模简单，能清晰明了的把交互匹配到模型
-    - 难以扩展，很容易变得复杂
-    - 适用于简单任务，对简单信息获取很友好，难以处理复杂的问题
-    - 缺少灵活性，表达能力有限，输入受限，对话结构/流转路径受限
-    - 对特定领域要设计 task-specific FSM，简单的任务 FSM 可以比较轻松的搞定，但稍复杂的问题就困难了，毕竟要考虑对话中的各种可能组合，编写和维护都要细节导向，非常耗时。一旦要扩展 FSM，哪怕只是去 handle 一个新的 observation，都要考虑很多问题。实际中，通常会加入其它机制（如变量等）来扩展 FSM 的表达能力。
-
-#### （2）**Principle-based Approaches**
-
-- Frame-based
-  - Frame-based approach 通过允许多条路径更灵活的获得信息的方法扩展了基于 FSM 的方法，它将对话建模成一个填槽的过程，槽就是多轮对话过程中将初步用户意图转化为明确用户指令所需要补全的信息。一个槽与任务处理中所需要获取的一种信息相对应。槽直接没有顺序，缺什么槽就向用户询问对应的信息。
-  - ![](https://pic4.zhimg.com/80/v2-5c0585ce7c8a8790e36bcdc721a7f1ce_hd.jpg)
-  - Frame-based DM 包含下面一些要素：
-    - Frame： 是槽位的集合，定义了需要由用户提供什么信息
-    - 对话状态：记录了哪些槽位已经被填充
-    - 行为选择：下一步该做什么，填充什么槽位，还是进行何种操作
-    - 行为选择可以按槽位填充/槽位加权填充，或者是利用本体选择
-  - 基于框架/模板的系统本质上是一个生成系统，不同类型的输入激发不同的生成规则，每个生成能够灵活的填入相应的模板。常常用于用户可能采取的行为相对有限、只希望用户在这些行为中进行少许转换的场合。
-  - Frame-based DM 特点：
-    - 用户回答可以包含任何一个片段/全部的槽信息
-    - 系统来决定下一个行为
-    - 支持混合主导型系统
-    - 相对灵活的输入，支持多种输入/多种顺序
-    - 适用于相对复杂的信息获取
-    - 难以应对更复杂的情境
-    - 缺少层次
-  - 槽的更多信息可以参考[填槽与多轮对话-AI产品经理需要了解的AI技术概念](https://link.zhihu.com/?target=http%3A//www.pmcaff.com/article/index/971158746030208%3Ffrom%3Drelated%26pmc_param%255Bentry_id%255D%3D950709304427648)
-- Agenda + Frame
-  - Agenda + Frame(CMU Communicator) 对 frame model 进行了改进，有了层次结构，能应对更复杂的信息获取，支持话题切换、回退、退出。主要要素如下：
-    - product
-      - 树的结构，能够反映为完成这个任务需要的所有信息的顺序
-      - 相比于普通的 Tree and FSM approach，这里产品树（product tree）的创新在于它是动态的，可以在 session 中对树进行一系列操作比如加一个子树或者挪动子树
-    - process
-      - agenda
-        - 相当于任务的计划（plan）
-        - 类似栈的结构（generalization of stack）
-        - 是话题的有序列表（ordered list of topics）
-        - 是 handler 的有序列表（list of handlers），handler 有优先级
-      - handler
-        - 产品树上的每个节点对应一个 handler，一个 handler 封装了一个 information item
-  - 从 product tree 从左到右、深度优先遍历生成 agenda 的顺序。当用户输入时，系统按照 agenda 中的顺序调用每个 handler，每个 handler 尝试解释并回应用户输入。handler 捕获到信息就把信息标记为 consumed，这保证了一个 information item 只能被一个 handler 消费。
-- Information-State
-  - Information State Theories 提出的背景是：
-    - 很难去评估各种 DM 系统
-    - 理论和实践模型存在很大的 gap
-      - 理论型模型有：logic-based, BDI, plan-based, attention/intention
-      - 实践中模型大多数是 finite-state 或者 frame-based
-    - 即使从理论模型出发，也有很多种实现方法
-  - Information State Models 作为对话建模的形式化理论，为工程化实现提供了理论指导，也为改进当前对话系统提供了大的方向。Information-state theory 的关键是识别对话中流转信息的 relevant aspects，以及这些成分是怎么被更新的，更新过程又是怎么被控制的。idea 其实比较简单，不过执行很复杂罢了
-  - ![](https://pic4.zhimg.com/80/v2-bd700b2e509e7d2d84a8ffad91a9ce55_hd.jpg)
-- Plan
-  - 一般指大名鼎鼎的 BDI (Belief, Desire, Intention) 模型。起源于三篇经典论文：
-    - Cohen and Perrault 1979
-    - Perrault and Allen 1980
-    - Allen and Perrault 1980
-  - 基本假设是，一个试图发现信息的行为人，能够利用标准的 plan 找到让听话人告诉说话人该信息的 plan。这就是 Cohen and Perrault 1979 提到的 AI Plan model，Perrault and Allen 1980 和 Allen and Perrault 1980 将 BDI 应用于理解，特别是间接言语语效的理解，本质上是对 Searle 1975 的 speech acts 给出了可计算的形式体系。
-  - 重要的概念：goals, actions, plan construction, plan inference。
-  - 理解上有点绕，简单来说就是 agent 会捕捉对 internal state (beliefs) 有益的信息，然后这个 state 与 agent 当前目标（goals/desires）相结合，再然后计划（plan/intention）就会被选择并执行。对于 communicative agents 而言，plan 的行为就是单个的 speech acts。speech acts 可以是复合（composite）或原子（atomic）的，从而允许 agent 按照计划步骤传达复杂或简单的 conceptual utterance。
-  - 这里简单提一下重要的概念。
-    - 信念（Belief）：基于谓词 KNOW，如果 A 相信 P 为真，那么用 B(A, P) 来表示
-    - 期望（Desire）：基于谓词 WANT，如果 S 希望 P 为真（S 想要实现 P），那么用 WANT(S, P) 来表示，P 可以是一些行为的状态或者实现，W(S, ACT(H)) 表示 S 想让 H 来做 ACT
-  - Belief 和 WANT 的逻辑都是基于公理。最简单的是基于 action schema。每个 action 都有下面的参数集：
-    - 前提（precondition）：为成功实施该行为必须为真的条件
-    - 效果（effect）：成功实施该行为后变为真的条件
-    - 体（body）：为实施该行为必须达到的部分有序的目标集（partially ordered goal states）
-- 更多见 [Plan-based models of dialogue](https://citeseerx.ist.psu.edu/viewdoc/download%3Fdoi%3D10.1.1.65.8451%26rep%3Drep1%26type%3Dpdf)
-
-#### （3）**Statistical Approaches**
-
-- RL-Based Approaches
-  - 前面提到的很多方法还是需要人工来定规则的（hand-crafted approaches），然而人很难预测所有可能的场景，这种方法也并不能重用，换个任务就需要从头再来。而一般的基于统计的方法又需要大量的数据。再者，对话系统的评估也需要花费很大的代价。
-  - 这种情况下，强化学习的优势就凸显出来了。RL-Based DM 能够对系统理解用户输入的不确定性进行建模，让算法来自己学习最好的行为序列。首先利用 simulated user 模拟真实用户产生各种各样的行为（捕捉了真实用户行为的丰富性），然后由系统和 simulated user 进行交互，根据 reward function 奖励好的行为，惩罚坏的行为，优化行为序列。由于 simulated user 只用在少量的人机互动语料中训练，并没有大量数据的需求，不过 user simulation 也是个很难的任务就是了。
-  - ![](https://pic3.zhimg.com/80/v2-a499aef3d6e5bf09ea9e4239415c1ee6_hd.jpg)
-
-
-### 有限状态机FSM
-
-- `有限状态机`（Finite-state machine, `FSM`），又称**有限状态自动机**，简称状态机，是表示有限个状态以及在这些状态之间的转移和动作等行为的数学模型。
-  - FSM是一种算法思想，简单而言，有限状态机由一组状态、一个初始状态、输入和根据输入及现有状态转换为下一个状态的转换函数组成。
-- 在描述有限状态机时，状态、事件、转换和动作是经常会碰到的几个基本概念。
-  - **状态**（State）　：对象在其生命周期中的一种状况，处于某个特定状态中的对象必然会满足某些条件、执行某些动作或者是等待某些事件。
-  - **事件**（Event）　：在时间和空间上占有一定位置，并且对状态机来讲是有意义的那些事情。事件通常会引起状态的变迁，促使状态机从一种状态切换到另一种状态。
-  - **转换**（Transition）：两个状态之间的一种关系，表明对象将在第一个状态中执行一定的动作，并将在某个事件发生同时某个特定条件满足时进入第二个状态。
-  - **动作**（Action）：状态机中可以执行的那些原子操作，所谓原子操作指的是它们在运行的过程中不能被其他消息所中断，必须一直执行下去。
-
-- FSME是一个基于Qt的有限状态机工具，它能够让用户通过图形化的方式来对程序中所需要的状态机进行建模，并且还能够自动生成用C++或者Python实现的状态机框架代码。
-- 类似的还有[QFSM](http://qfsm.sourceforge.net/download.html)：A graphical tool for designing finite state machines
-- ![](https://www.ibm.com/developerworks/cn/linux/l-fsmachine/image/2.jpg)
-
-
-
-
-**Python版本**
-
-- [Transitions](https://github.com/pytransitions/transitions)
-- [Python的Transitions库实现有限状态机(FSM)](https://www.jianshu.com/p/decf86e0e420)
-
-![](https://upload-images.jianshu.io/upload_images/618241-70acdf59c5f312c8.png)
-
-- 安装方法
-
-```shell
-conda install transitions graphviz
-```
-
-
-- Machine示例
-
-```python
-from transitions import Machine
-# 定义模型
-class AModel(object):
-    def __init__(self):
-        self.sv = 0  # state variable of the model
-        self.conditions = {  # each state
-            'sA': 0,
-            'sB': 3,
-            'sC': 6,
-            'sD': 0,
-        }
-    def poll(self):
-        if self.sv >= self.conditions[self.state]:
-            self.next_state()  # go to next state
-        else:
-            getattr(self, 'to_%s' % self.state)()  # enter current state again
-    def on_enter(self):
-        print('entered state %s' % self.state)
-    def on_exit(self):
-        print('exited state %s' % self.state)
-# setup model and state machine
-model = AModel()
-# 状态集合 init transitions model 
-list_of_states = ['sA', 'sB', 'sC', 'sD']
-machine = Machine(model=model, states=list_of_states, initial='sA',
-                  ordered_transitions=True, before_state_change='on_exit',
-                  after_state_change='on_enter')
-# begin main
-for i in range(0, 10):
-    print('iter is: ' + str(i) + " -model state is:" +  model.state)
-    model.sv = i
-    model.poll()
-```
-- GraphMachine示例，可以画图
-
-```python
-from transitions.extensions import GraphMachine
-# 定义状态集合
-states = ['first', 'second']
-# 定义转移集合
-transitions = [
-    ['any_trigger', 'first', 'first'],
-    ['anything', '*', 'second'],
-]
-machine = GraphMachine(states=states, transitions=transitions, initial='first',
-                       auto_transitions=False, show_conditions=True)
-# 绘制状态机
-machine.get_graph().draw('fsm.png', prog='dot')
-from IPython.display import Image
-Image('fsm.png')
-```
-- 结果
-![](https://upload-images.jianshu.io/upload_images/618241-70acdf59c5f312c8.png)
-
-**java版本**
-
-- [FSM-Java](https://gitlab.com/tengbai/fsm-java)，项目中共有4中状态机的实现方式。参考：[Java有限状态机4种实现对比](https://zhuanlan.zhihu.com/p/97442825)
-  - 基于Switch语句实现的有限状态机，代码在master分支
-  - 基于State模式实现的有限状态机。代码在state-pattern分支
-  - 基于状态集合实现的有限状态机。代码在collection-state分支
-  - 基于枚举实现的状态机。代码在enum-state分支
-- [squirrel](https://github.com/hekailiang/squirrel)
-
-![](https://camo.githubusercontent.com/c7aa76914060369995ee7ac173c16512634ab0cb/687474703a2f2f68656b61696c69616e672e6769746875622e696f2f737175697272656c2f696d616765732f41544d53746174654d616368696e652e706e67)
-
-
-### 状态机适用条件
-
-- 状态机问题
-  - ① 状态机模型的最大缺陷：<font color='blue'>所有状态都提前预知了才能够规划代码</font>，所以也叫有限状态机。以有限的状态应对可能比预期更多的状态，一旦遇到新增一个状态，全部状态机代码都得重审一遍，以免遗漏状态切换。
-  - ② 还有大量的数据一般都是共享的，状态机模型对数据的封闭不利，对一些本来适合在函数参数中传递的变量，适合在private中封闭掉的数据，常常被迫敞开。
-  - ③ 状态机的架构不太适合多线程模型，有限状态机流行的年代，高效多线程架构还不流行，这方面都是欠缺的。
-- 最重要的是状态清晰，粒度适中，状态迁移图明确可靠。一般的状态机状态数量4到8个，太少太简单，太多要注意适当切分。
-
-- 【2021-2-24】[达摩院Conversational AI研究进展及应用](https://t.cj.sina.com.cn/articles/view/2674405451/9f68304b01900tdaj)
-- 基于状态机的对话管理主要面临两个问题：
-  - 第一：通过配置的方法，永远无法把整个对话流配置完备，总会有漏掉的配置；
-  - 第二：基于状态机的对话管理，本质上仍是一个规则化的对话引擎，即使积累再多的日志和数据，也没有办法具备学习能力。
-- 基于以上两点，把对话管理从状态机推到深度模型，就是一条必然的路径，但是目前学术界尤其是工业界还没有解决这个问题，这个问题的核心难点是多轮对话数据获取难、标注难。
-- （1）标注数据采集
-  - 达摩院引入了用户模拟器，把用户模拟器和对话系统结合在一起，通过两者之间的Self-Play产生海量的标注数据来解决数据难题。
-  - ![](https://n.sinaimg.cn/sinakd2021222s/71/w1080h591/20210222/ee22-kkmphps2654246.png)
-  - 在用户模拟器和对话系统的对偶模型中有两个模块：
-    - 对话机器人：每一轮中说机器应该说的那句话
-    - 用户模拟器：模拟用户这个角色应该说的话
-  - 这样就形成了机器和用户之间的对话过程，产生大量的对话数据，而这些数据最大的优势就是：这些数据是带有标签的。
-- （2）深度模型
-  - 基于以上的基础建模，达摩院实现了对话管理的深度学习模型化，并且在业务场景中进行了大规模的落地应用：
-  - ![](https://n.sinaimg.cn/sinakd2021222s/771/w1080h491/20210222/a94c-kkmphps2654353.png)
-  - 整个过程分为以下三部分：
-    - Step1：利用用户模拟器冷启动对话管理模型，产生大量的模拟训练数据，通过模拟训练数据即可对模型进行训练，得到可直接上线的模型；
-    - Step2：模型上线之后会产生日志数据，可以利用这些日志数据来进行数据增强，通过模拟器的迭代来提升模型的效果；
-    - Step3：对于产生的日志数据，也可以通过人力适量标注一部分来进一步提升模型的效果；
-  - 通过引入用户模拟机器，解决了对话管理的深度学习模型化问题。
-- （3）对话管理模型的迁移学习
-  - ![](https://n.sinaimg.cn/sinakd2021222s/30/w1080h550/20210222/9746-kkmphps2654354.png)
-  - 在实际应用的时候还遇到了新的问题：当我们有了一些场景的标注数据以及训练好的模型之后，在面对新的应用场景时，如何将已有的数据和模型复用起来。
-  - ![](https://n.sinaimg.cn/sinakd2021222s/85/w1080h605/20210222/a2ec-kkmphps2654476.png)
-  - 针对这一新的问题，达摩院考虑使用迁移学习的方法来进行解决。为此对迁移学习在这方面的应用做了一定的研究，最终提出了一个Meta-Dialog Model，对应的工作发表在ACL2020上。主要思想是将MAML（Model-Agnostic Meta-Learning）这种迁移学习的思路引入进来：在已有数据的前提下，利用MAML迁移学习的方法训练出一个比较好的元模型（Meta Model）, 当有新的场景时，可以用元模型的参数来进行初始化，这可以使得新场景下的模型有更好的初始化参数和训练起点。基于这种方法，在政务12345热线上进行了实验，得到了4个点的提升。
-
+详见另一篇笔记：[对话系统之对话管理器-Dialogue Manager](https://wqw547243068.github.io/2020/04/29/dialogue-manager)
 
 ## 知识型对话—— Q/A
 
