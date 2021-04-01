@@ -3,7 +3,7 @@ layout: post
 title:  "多任务学习-Multi-Task-Learning"
 date:   2020-07-28 15:26:00
 categories: 机器学习 深度学习
-tags: 多任务学习 深度学习 神经网络
+tags: 多任务学习 深度学习 神经网络 广告预估
 excerpt: 多任务学习相关知识点
 author: 鹤啸九天
 mathjax: true
@@ -84,7 +84,6 @@ mathjax: true
 ![](https://pic2.zhimg.com/80/v2-ac2579934ee805c8a7fbac8ff5cb3c31_720w.png)
  
 ### 1.1 MTL
--------
 
 什么是多任务学习？
 - 多任务学习（Multitask learning）定义：
@@ -199,6 +198,22 @@ MLT 主要有两种形式，一种是基于参数的共享，另一种是基于�
 ![Google 多任务学习框架 MMoE](http://p1-tt.byteimg.com/large/pgc-image/5ed2a60bae25442496ce1179acca00bd?from=pc)
 
 # 工程实现
+
+## ESMM模型
+
+- 【2021-4-1】[多任务学习(MTL)在转化率预估上的应用](https://mp.weixin.qq.com/s/uSP3oKe3eiPplWvbgaZJtQ)
+
+- ESMM：**完整空间多任务模型**(Entire Space Multi-Task Model)，是阿里2018年提出的模型思想，是一个**hard**参数共享的MTL模型。主要为了解决传统CVR建模过程中样本选择偏差(sample selection bias, SSB)和数据稀疏(data sparsity,DS)问题。
+- **样本选择偏差**：用户在广告上的行为属于顺序行为模式impression -> click -> conversion，传统CVR建模训练时是在click的用户集合中选择正负样本，模型最终是对整个impression的用户空间进行CVR预估，由于click用户集合和impression用户集合存在差异（如下图），引起样本选择偏差。
+- ESMM算法引入两个辅助任务学习任务，分别拟合pCTR和pCTCVR，都是从整个样本空间选择样本，来同时消除上面提到的两个问题。
+- ESMM模型的优化
+
+在ESMM模型的基础上，我们做了以下两点优化：
+- a. 优化网络embedding层，使其可以处理用户不定长行为特征
+  - 用户历史行为属于不定长行为，比如曾经点击过的ID列表，一般我们对这种行为引入网络中的时候，会将不定长进行截断成统一长度（比如：平均长度）的定长行为，方便网络使用。很多用户行为没有达到平均长度，则会在后面统一补0，这会导致用户embedding结果里面包含很多并未去过的节点0的信息。这里我们提出一种聚合-分发的特征处理方式，使得网络的特征embedding层可以处理不定长的特征。
+  - 由于单个特征节点的embedding结果是和用户无关的，比如：用户A点击k，用户B也点击了k，最终embedding得到的k结果是唯一的，对A和B两个用户访问的k都是一样的。基于该前提，我们采用聚合-分发的处理思想。将min-batch的所有用户的不定长行为聚合拼接成一维的长矩阵，并记录下各个用户行为的索引，在embedding完成之后，根据索引将各个用户的实际行为进行还原，并降维成固定长度，输入到dense层使用。
+- b. 由于训练正负样本差异比较大，模型引入Focal Loss，使训练过程更加关注数量较少的正样本
+
 
 ## [Google 多任务学习框架 MMoE](https://www.toutiao.com/i6838966189872382475/?tt_from=mobile_qq&utm_campaign=client_share&timestamp=1595857174&app=news_article&utm_source=mobile_qq&utm_medium=toutiao_android&use_new_style=1&req_id=20200727213933010147084145261AF78B&group_id=6838966189872382475)
  
