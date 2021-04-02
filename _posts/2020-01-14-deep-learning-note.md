@@ -45,6 +45,26 @@ mathjax: true
 
 - 最近进行的一项工作是BabyAI平台。在这个平台中，我们为BabyAI提供一个场景或者一个游戏，像指导一个婴儿认知世界一样，人类通过与BabyAI的互动帮助它理解周围的环境，学习它应该学到的内容。我们设置了从容易到困难的不同关卡让BabyAI进行不同程度的学习，这一平台在提升训练中数据效率上取得了很大的进展。
 
+- 【2021-4-2】国立台湾大学总结的深度学习发展史 [History of Deep Learning](https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/200303_Introduction.pdf)
+   - ◉ 1960s: Perceptron (single layer neural network)
+   - ◉ 1969: Perceptron has limitation
+   - ◉ 1980s: Multi-layer perceptron
+   - ◉ 1986: Backpropagation
+   - ◉ 1989: 1 hidden layer is “good enough”, why deep?
+   - ◉ 2006: RBM initialization (breakthrough)
+   - ◉ 2009: GPU
+   - ◉ 2010: breakthrough in Speech Recognition (Dahl et al., 2010)
+   - ◉ 2012: breakthrough in ImageNet (Krizhevsky et al. 2012)
+   - ◉ 2015: “superhuman” results in Image and Speech Recognition
+- Why does deep learning show breakthrough in applications after 2010?
+  - 1. Data: big data
+  - 2. Hardware: GPU computing
+  - 3. Talent: design algorithms to allow networks to work for the specific problems
+- Why Deeper is Better?
+  - Universality Theorem 通用逼近定理
+  - Fat + Shallow（O(2d)） v.s. Thin + Deep（O(d^2)）：The deeper model uses less parameters to achieve the same performance，
+
+
 ## [Deep Learning模型若干年的重要进展](https://www.leiphone.com/news/201804/YYH8dZZNUHlNn6B2.html)
 
 - 2018年，清华大学唐杰副教授及其学生丁铭结合其Aminer数据库整理出 Deep Learning 模型最近若干年的重要进展，共有4条脉络。
