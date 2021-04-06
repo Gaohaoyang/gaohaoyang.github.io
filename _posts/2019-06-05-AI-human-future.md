@@ -13,6 +13,7 @@ mathjax: true
 
 # AI之路
 
+- 【2017-1-2】《对话》 20170101 [人工智能：挑战2017] (http://tv.cctv.com/2017/01/02/VIDEVhAzxZgC8tsHgPfF9Ukz170102.shtml), [B站地址](https://www.bilibili.com/video/BV1ps411Y7fm?t=1584)
 - 【2021-2-28】[Bengio、Hinton的不懈追求——深度学习算法揭示大脑如何学习](https://mp.weixin.qq.com/s/2-mTVY_pyHcYyaoJtR1Hsg)，[原文链接](https://www.quantamagazine.org/artificial-neural-nets-finally-yield-clues-to-how-brains-learn-20210218/)
   - [Hinton：我终于想明白大脑怎么工作了！神经学家花三十年，寻找反向传播的生物机制](https://mp.weixin.qq.com/s/nKPde5Hv4YoZCMOFvBXM1w)，更详细的解释，英文原文：[Artificial Neural Nets Finally Yield Clues to How Brains Learn](https://www.quantamagazine.org/artificial-neural-nets-finally-yield-clues-to-how-brains-learn-20210218/)
     - [神经元信号传递视频](https://d2r55xnwy6nx47.cloudfront.net/uploads/2021/02/Neuron_2880_Lede.mp4)
