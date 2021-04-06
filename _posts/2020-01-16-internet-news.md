@@ -19,6 +19,9 @@ mathjax: true
 
 # 互联网格局
 
+【2021-4-6】[2021互联网公司最新格局](https://www.toutiao.com/w/i1696261450443788/),[图](https://p26.toutiaoimg.com/img/tos-cn-i-0022/cd50ae1739a1489c91d403fed79e7161~tplv-obj:1080:1195.image?from=post)
+![](https://p26.toutiaoimg.com/img/tos-cn-i-0022/cd50ae1739a1489c91d403fed79e7161~tplv-obj:1080:1195.image?from=post)
+
 
 ## 互联网产品
 
