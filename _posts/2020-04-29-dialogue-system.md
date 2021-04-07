@@ -651,6 +651,13 @@ chatbot:我也是，不过总有一天就会好起来的
 
 ### （2）端到端
 
+- 【2020-7-6】[端到端聊天技术](https://zhuanlan.zhihu.com/p/150608851), 小冰使用这种复杂架构的原因是现在的技术水平只能利用这种方法来平衡系统的**智能性**和**可控性**。1月Google的**Meena**和4月Facebook的**Blender**验证了端到端这条路真的走得通,足够大的端到端模型可以打败复杂架构的对话系统
+  - 1月Google的**Meena**：[Towards a Human-like Open-Domain Chatbot](https://arxiv.org/abs/2001.09977)，seq2seq模型每层使用的是Evolved Transformer (ET) 块。Encoder端使用了1个ET层（相当于2层 Transformer），Decoder端使用了13个ET层（相当于26层 Transformer）。相比于GPT-2训练使用了40GB的文档数据，Meena训练使用了341GB的对话数据。Meena的模型参数规模达到了2.6B，在GPT-2的基础上又大了不少。Meena的训练样本格式为 (context, response)，其中 context 由前几轮（最多7轮）对话拼接而成。训练使用的是标准的MLE。Decoding阶段有两种方法：Beam Search和Sampling方法。定义了一种新的人为评估方法，叫 Sensibleness and Specficity Average (SSA)，它是以下两个值的平均值：Sensibleness：回复合理；符合逻辑、保持一致性；Specficity：回复具体，有内容。
+    - ![](https://pic3.zhimg.com/80/v2-e630c11412d1b169362fbd2bb0c8e366_1440w.jpg)
+    - ![](https://pic2.zhimg.com/v2-915da9326a6d4ce4a38e3b7246d3cacd_b.webp)
+  - 4月Facebook的**Blender**：[Recipes for building an open-domain chatbot](https://arxiv.org/abs/2004.13637),尝试的三个模型，然后介绍训练使用的数据集，以及各方面的效果评估等，混合版聊天机器人在不断逼近人类的水平（纵坐标是机器聊的比人好的百分比，所以人的聊天水平对应纵坐标50）
+    - 检索模型、生成模型、检索+生成
+
 - 基于管道方法的对话系统中有许多特定领域的手工制作，所以它们很难适用于新的领域。近年来，随着端到端神经生成模型的发展，为面向任务的对话系统构建了端到端的可训练框架。与传统的管道模型不同，端到端模型使用一个模块，并与结构化的外部数据库交互。
 - ![](https://upload-images.jianshu.io/upload_images/1535345-3e1a2d7d80ba70d8.jpeg)
 - 上图的模型是一种基于网络的端到端可训练任务导向型对话系统，将对话系统的学习作为学习从对话历史到系统回复的映射问题，并应用encoder-decoder模型来训练。然而，该系统是在监督的方式下进行训练——不仅需要大量的训练数据，而且由于缺乏对训练数据对话控制的进一步探索，它也可能无法找到一个好的策略。
@@ -675,6 +682,7 @@ chatbot:我也是，不过总有一天就会好起来的
 - 智能问答产品典型架构
   - ![](https://image.jiqizhixin.com/uploads/editor/06578b0e-afba-49dd-b46c-0b9dc80855fa/3.png)
   - 智能问答产品主要包括知识库、对话模型、配置中心、多渠道接入以及后台管理。针对不同的任务划分，准备不同的知识库，例如QA BOT需要引入问答知识对，KG BOT需要知识图谱的支持等等。将针对不同任务的对话模型服务，部署接入各个平台接口，譬如小程序、微信、网页等，提供在线问答服务。配置中心主要提供QA对、闲聊语料、同义词库、特征词库等的可视化配置服务，实现知识配置的快速拓展。后台管理针对智能问答系统实施整体监控、日志管理、告警、权限管理等等，另外，它还提供各种维度的统计分析服务。
+
 
 ### 案例
 
