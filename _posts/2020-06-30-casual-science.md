@@ -303,7 +303,7 @@ mathjax: true
 - 反事实结果**counterfactual outcomes**：某次操作没有产生的结果。从唯物主义的观点来看，事物是在时刻变化的，因此实验是不可逆的。而没有观测到的结果，是不可能看到的，即为反事实。
 - **individualized treatment effect**: Y(1)-Y(0).前者是事实结果，后者是反事实结果。或者说前者是treated，后者是control。如果是多个个体，则是期望。  
 - 反事实推理**counterfactual inference**：解决类似于“如果这个病人采用其他疗法，血压会降下来吗？”这样的问题的推理。
-- 倾向分数**propensity score**：p(x) = P(Wi = 1|Xi = x)，反映出样本x选择treatment的可能性。
+- 倾向分数**propensity score**：p(x) = P(Wi = 1\|Xi = x)，反映出样本x选择treatment的可能性。
 - 选择偏倚**selection bias**：由于Confounders的存在，treatment组合对照组的分布有可能不一致，因此导致出现偏差，这也使得推理更加困难。
  
 以下图为例，年龄对心脏病介入来说就是一个协变量，不同年龄会采取不同的措施：年轻的手术，年老的服药，手术和服药是两种不同的treatment；同时年龄又影响着结果，年轻人的生存时间是大于老年人的。
