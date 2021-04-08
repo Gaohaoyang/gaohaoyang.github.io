@@ -1299,7 +1299,7 @@ print("Matching: %s" % matching[0])
   - 下图展示了匹配意图和响应最终用户的基本流程：
     - ![](https://img-blog.csdnimg.cn/20201203084037155.png)
   - 更复杂的意图还可能包含以下内容：
-  - [上下文](https://cloud.google.com/dialogflow/docs/contexts-overview?hl=zh-cn)：Dialogflow 上下文类似于自然语言上下文。 如果有人对您说“它们是橙色的”，您需要了解上下文才能理解此人所指的是什么。 同样，为了让 - Dialogflow 处理类似的最终用户表述，您需要为其提供上下文，以便系统正确地匹配意图。
+  - [上下文](https://cloud.google.com/dialogflow/docs/contexts-overview?hl=zh-cn)：Dialogflow 上下文类似于自然语言上下文。 如果有人对您说“它们是橙色的”，您需要了解上下文才能理解此人所指的是什么。 同样，为了让Dialogflow 处理类似的最终用户表述，您需要为其提供上下文，以便系统正确地匹配意图。
   - 事件：借助事件，您可以根据已发生的情况而非最终用户表达的内容来调用意图。
 - **实体** Entities
   - 每个意图参数都有一个类型，称为实体类型，用于明确说明从用户表述中提取数据的方式。
