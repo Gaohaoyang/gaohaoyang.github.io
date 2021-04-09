@@ -92,6 +92,15 @@ print "hello"
 - **加粗**, *斜体*
 - <font color='green'>彩色字体</font>
 
+### Jekyll admin插件
+
+- 【2021-4-9】界面形式操作站点内容的CMS系统，[参考](http://www.mianshigee.com/project/jekyll-admin)
+- 打开网站的 Gemfile 文件里：
+  - gem 'jekyll-admin', group: :jekyll_plugins
+- 运行 bundle install
+- 用法：像往常一样启动 jekyll (bundle exec jekyll serve)
+  - 打开浏览器，通过 http://localhost:4000/admin 访问管理界面
+
 ### 博客内部链接
 
 - 【2021-1-23】
@@ -107,6 +116,11 @@ print "hello"
 
 - 默认方法
    - ![](https://img3.doubanio.com/lpic/s28012945.jpg)
+   - 解析成：
+```html
+<image title="name" alt="name" src="url">
+```
+
 - 限制大小
    - <img src="https://img3.doubanio.com/lpic/s28012945.jpg" height="100%" width="100" />
 
@@ -134,6 +148,9 @@ print "hello"
 ```
 ![](/wqw/fig/3brown1blue.png)
 
+【2021-4-9】图片放大，Jekyll添加[FancyBox](https://www.cnblogs.com/Grand-Jon/p/7397652.html)插件，
+
+![](https://images2017.cnblogs.com/blog/1221855/201708/1221855-20170819190958896-1029926791.png)
 
 
 ### 公式嵌入
