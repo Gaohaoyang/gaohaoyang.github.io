@@ -450,7 +450,6 @@ chatbot:我也是，不过总有一天就会好起来的
 ![](https://static001.infoq.cn/resource/image/95/b0/95872ddc2e39ceb0d47yy39a79d0cfb0.png)
 - 尽管模块化的对话系统由于每个部分独立优化，具有更强的可控性，但是端到端的对话系统可以直接利用对话日志进行训练，不需要人工设计特定的语义标签，因此更具备可扩展性，在一些复杂度中低的对话场景中能够快速训练部署使用。
 
-
 - （1）**管道式**架构——**pipeline**
   - 含语音识别，[图](http://html.rhhz.net/buptjournal/html/PIC/bjyddxxb-42-6-10-1.jpg)
     - ![](http://html.rhhz.net/buptjournal/html/PIC/bjyddxxb-42-6-10-1.jpg)
