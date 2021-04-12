@@ -23,9 +23,15 @@ mathjax: true
 
 无监督表示学习的第一种做法：生成式自监督学习。比如还原句子中被mask的字，或者还原图像中被mask的像素。但这种方式的前提需要假设被mask的元素是相互独立的，不符合真实情况。
 
+如凭空画一张美元：
+- ![](https://ask.qcloudimg.com/http-save/yehe-7043804/8jc0g3bmln.jpeg?imageView2/2/w/1620)
+真实的美元：
+- ![](https://ask.qcloudimg.com/http-save/yehe-7043804/ki03pcx5af.jpeg?imageView2/2/w/1620)
+
 另一方面，研究者们也质疑如此细粒度的还原是否真正必要。记住的事物特征，不一定是像素级别的，而是更高维度的. 如用编码去做分类任务，我们不需要知道每个数据的细节，只要抓住每个类别的主要特征，自然就能把他们分开了
 
 不重构数据，那如何衡量表示z的好坏呢？这时也可以用互信息I(X,Z)，代表我们知道了Z之后，X的信息量减少了多少。 
+![](https://ask.qcloudimg.com/http-save/yehe-7043804/nm4eqehaze.jpeg?imageView2/2/w/1620)
 
 ## A.引入
  
