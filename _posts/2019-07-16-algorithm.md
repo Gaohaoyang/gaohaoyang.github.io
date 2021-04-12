@@ -56,7 +56,7 @@ mathjax: true
 
 ### 插入排序
 
-```C++
+```C
 void insertSort(vector<int>& nums){
   int len=nums.size();
   for(int i=1;i<len;i++){
@@ -82,7 +82,7 @@ void insertSort(vector<int>& nums){
 - 优化3：优化递归操作
 - 优化4：使用并行或多线程处理子序列
 
-```C++
+```C
 void swap(vector<int>& vec,int a,int b){
     vec[a]=vec[a]^vec[b];
     vec[b]=vec[a]^vec[b];
@@ -114,7 +114,8 @@ void quickSort(vector<int>& vec,int start,int end){
 * 将前n-1个元素重新构建大顶堆或小顶堆，重复这个过程，直到所有元素都已经排序
 
 整体时间复杂度为nlogn
-```C++
+
+```C
 #include<iostream>
 #include<vector>
 using namespace std;
@@ -319,7 +320,7 @@ KMP算法是经典的串匹配算法，由Knuth和Pratt师徒发明，同一时�
 
 其对应的暴力算法代码为（Java）：
 
-``` java
+```java
 public int match(String P, String T) {
 	int n = T.length(); // 文本串长度
 	int m = P.length(); // 模式串长度
@@ -332,7 +333,7 @@ public int match(String P, String T) {
 
 为了披露更多的算法细节，这里我们不使用Java内置函数实现，以为接下来的KMP算法的理解做准备：
 
-``` java
+```java
 public int match(String P, String T) {
 	int n = T.length(), i = 0; // 文本串长度及当前比对字符
 	int m = P.length(), j = 0; // 模式串长度及当前比对字符
@@ -404,7 +405,7 @@ public int match(String P, String T) {
 
 根据next数组的定义，我们可以很快写出KMP算法进行匹配计算的代码：
 
-``` java
+```java
 public int KMP(String P, String T) {
 	int n = T.length(), i = 0; // 文本串指针
 	int m = P.length(), j = 0; // 模式串指针
@@ -455,13 +456,13 @@ public int KMP(String P, String T) {
 
 归纳为数学语言如下：
 
-```
+```java
 next[j] = max({ t | P[0, t) = P[j - t, j) 且 P[t] ≠P[j] })
 ```
 
 因此实质上，next表的构建是一个自我匹配的过程，仿照匹配代码，我们可以写出next表的构建代码：
 
-``` java
+```java
 public int[] buildNext(String P) {
 	int m = P.length();
 	int[] next = new int[m];
@@ -543,7 +544,7 @@ public int[] buildNext(String P) {
 
 为统一起见，本文定义树节点的格式为：
 
-``` java
+```java
 class TreeNode {
 	public Value val;       // 节点的值
 	public TreeNode left;   // 左孩子
@@ -562,7 +563,7 @@ class TreeNode {
 
 利用递归处理二叉树的遍历问题非常方便，以先序遍历为例，其遍历方法如下：
 
-``` java
+```java
 public void preOrderTraversal(TreeNode root) {
 	if (root == null) return;
 	visit(root);                    // 访问节点
@@ -585,7 +586,7 @@ public void preOrderTraversal(TreeNode root) {
 
 先序遍历的概念非常清晰，利用栈的辅助，在访问完该节点之后将子树入栈即可：
 
-``` java
+```java
 public void preOrderTraversal(TreeNode root) {
 	if (root == null) return;
 	Stack<TreeNode> stack = new Stack<TreeNode>(); // 利用栈进行临时存储
@@ -602,7 +603,7 @@ public void preOrderTraversal(TreeNode root) {
 
 或者使用如下方法，在节点到达null层时进行判断：
 
-``` java
+```java
 public void preOrderTraversal2(TreeNode root) {
 	if (root == null) return;
 	Stack<TreeNode> stack = new Stack<TreeNode>(); // 利用栈进行临时存储
@@ -633,7 +634,7 @@ public void preOrderTraversal2(TreeNode root) {
 
 按照这种思路，我们可以写出一种直接的方法：
 
-``` java
+```java
 public void inOrderTraversal(TreeNode root) {
 	if (root == null) return;
 	Stack<TreeNode> stack = new Stack<TreeNode>(); // 利用栈进行临时存储
@@ -658,7 +659,7 @@ public void inOrderTraversal(TreeNode root) {
 
 或者根据先序遍历方法2进行修改，在节点出栈时访问节点：
 
-``` java
+```java
 public void inOrderTraversal2(TreeNode root) {
 	if (root == null) return;
 	Stack<TreeNode> stack = new Stack<TreeNode>(); // 利用栈进行临时存储
@@ -690,7 +691,7 @@ public void inOrderTraversal2(TreeNode root) {
 
 因此可以考虑采用栈的方式，依次将根节点、右孩子、左孩子入栈，以保证访问次序。由于后续遍历的回溯过程只可能上升一层，因此可以添加临时变量lastNode记录刚刚访问的节点，如果当前节点是上次访问节点的父节点，则说明子树访问完成，可以访问当前节点了。
 
-``` java
+```java
 public void postOrderTraversal(TreeNode root) {
 	if (root == null) return;
 	Stack<TreeNode> stack = new Stack<TreeNode>(); // 利用栈进行临时存储
@@ -714,7 +715,7 @@ public void postOrderTraversal(TreeNode root) {
 
 当然，对上述方法的一个修改是添加“哨兵”节点，用于判断回溯位置。不过显然这种方式还需要对一些方法进行添加，并不是特别“优雅”：
 
-``` java
+```java
 public void postOrderTraversal2(TreeNode root) {
 	if (root == null) return;
 	Stack<TreeNode> stack = new Stack<TreeNode>(); // 利用栈进行临时存储
@@ -745,7 +746,7 @@ public void postOrderTraversal2(TreeNode root) {
 
 相较于前面几种遍历方式，层次遍历是最直观的遍历方式，可以利用队列来辅助实现：
 
-``` java
+```java
 public void levelTraversal(TreeNode root) {
 	if (root == null) return;
 	Queue<TreeNode> queue = new LinkedList<TreeNode>(); // 利用队列进行临时存储
@@ -773,7 +774,6 @@ public void levelTraversal(TreeNode root) {
 Morris遍历方法打破了一般遍历思想上的“禁锢”，通过临时对子节点引用的修改来实现“后继”节点的保存，之后再次遍历到时可以恢复树的结构，以此仅仅通过`O(1)`的空间实现树的遍历。没错，这又是KMP算法里面的Morris发明的（为什么别人可以这么聪明……）
 
 我们先以中序遍历为例，介绍Morris算法的核心思想。回顾一下中序遍历的内容：
-
 1. 若节点还有左子树，就要先把左子树访问完
 2. 没有左子树可访问时，访问该节点，并尝试访问右子树
 
@@ -782,11 +782,8 @@ Morris遍历方法打破了一般遍历思想上的“禁锢”，通过临时�
 ![](https://raw.githubusercontent.com/ghh3809/ghh3809.github.io/master/_posts/_pic/20180806_succ.png)
 
 显然，中序遍历可以转化为对后继节点的计算过程。后继节点的计算方法为：
-
-```
 1. 对于存在右子树的节点A，其后继节点是其右子树中最左侧的节点；
 2. 对于没有右子树的节点B，其后继节点是其自下而上的父节点中第一个将其作为左子树的节点。
-```
 
 节点A的后继计算非常简单。然而由于二叉树的信息中不包括父节点的信息，因此第2条操作起来非常困难，这也是为何之前采用了栈/队列的方式存储父节点的信息。
 
@@ -815,7 +812,7 @@ Morris遍历方法打破了一般遍历思想上的“禁锢”，通过临时�
 
 因此，我们写出Morris中序遍历算法的程序如下：
 
-``` java
+```java
 public void morrisInOrderTraversal(TreeNode root) {
 	TreeNode node = root, prev = null; // 仅存放两个临时变量，O(1)空间复杂度
 	while (node != null) { // 当前节点为空时，说明访问完成
@@ -858,7 +855,7 @@ $$C = \sum_{i=1}^{\log_2(n/2)} \frac{n}{2^{i+1}} \times i = \frac{n}{4} \times 1
 
 介绍完了Morris中序遍历，其先序遍历和后序遍历都是在中序遍历的基础之上加以改动得到的。例如先序遍历时，需要先访问节点，再决定深入左子树或右子树：
 
-``` java
+```java
 public void morrisPreOrderTraversal(TreeNode root) {
 	TreeNode node = root, prev = null; // 仅存放两个临时变量，O(1)空间复杂度
 	while (node != null) { // 当前节点为空时，说明访问完成
@@ -886,14 +883,11 @@ public void morrisPreOrderTraversal(TreeNode root) {
 ![](https://raw.githubusercontent.com/ghh3809/ghh3809.github.io/master/_posts/_pic/20180806_morris_post.png)
 
 推广到Morris遍历里，可以得到：
-
-```
-当访问到任何节点C的前驱节点B时，由B到C的路径（不包括节点C）即为之后的访问顺序。
-```
+- 当访问到任何节点C的前驱节点B时，由B到C的路径（不包括节点C）即为之后的访问顺序。
 
 因此所有的访问过程可以化为由B到C的访问。得到的Morris后序遍历程序如下，注意为了保证程序能够顺利访问右子树，为根节点添加了一个哨兵节点：
 
-``` java
+```java
 public void morrisPostOrderTraversal(TreeNode root) {
 	TreeNode temp = new TreeNode(new Value(Value.INVALID_VALUE)), node = temp, prev = null; // 仅存放一个“哨兵”节点和两个临时变量，O(1)空间复杂度
 	temp.left = root;
@@ -918,7 +912,7 @@ public void morrisPostOrderTraversal(TreeNode root) {
 
 对于逆序访问函数`visitReverse()`，我们可以采用链表翻转的方式实现，一个参考实现如下：
 
-``` java
+```java
 public void visitReverse(TreeNode node1, TreeNode node2) {
 	reverse(node1, node2); // 首先进行翻转
 	TreeNode node = node2; // 之后进行顺序访问
@@ -1073,12 +1067,11 @@ k 为哈希函数个数，m 为布隆过滤器长度，n 为插入的元素个�
 #### （10）生成随机数问题：给定生成1到5的随机数Rand5()，如何得到生成1到7的随机数函数Rand7()？
 思路：由大的生成小的容易，比如由Rand7()生成Rand5()，所以我们先构造一个大于7的随机数生成函数。
 记住下面这个式子：
-```
-RandNN= N( RandN()-1 ) + RandN() ;// 生成1到N^2之间的随机数
+- RandNN= N( RandN()-1 ) + RandN() ;// 生成1到N^2之间的随机数
 可以看作是在数轴上撒豆子。N是跨度/步长，是RandN()生成的数的范围长度，RandN()-1的目的是生成0到N-1的数，是跳数。后面+RandN()的目的是填满中间的空隙
-```
+
 比如` Rand25= 5( Rand5()-1 ) + Rand5()`可以生成1到25之间的随机数。我们可以只要1到21（3*7）之间的数字，所以可以这么写
-```
+```c
 int rand7(){
   int x=INT_MAX;
   while(x>21){
