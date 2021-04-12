@@ -115,24 +115,29 @@ mathjax: true
 因为这个关于“必须文字交互”的假设，所以实际上有些问题并不适合基于这种假设的对话系统完成。例如你在一些手机软件中搜索餐厅，结果可能会返回多家餐厅（餐厅本身即实体），他们都有名称、地址、电话等等信息（这些也可以称为餐厅这个实体的属性，当然也可以是与餐厅这个实体有关的其他实体）。而你想要通过语音、朗读的文字来获得这个列表，就显得很愚蠢了，不会有人想听机器人读5分钟搜索结果的20家餐厅然后决策吧？所以此类系统往往最后是推荐单一实体，例如结果排名最高的餐厅，如果你需要更换，可以跟系统说换一下餐厅。
 
 一个典型的对话系统的交互过程是这样的：
-- 用户：你好（User Dialog Act：greeting）  
-  - 机器：你好，我可以帮助你搜索并预订餐厅（Sys Dialog Act：greeting）  
-- 用户：我想要找一家在中央公园2.0附近的意大利餐厅（User Dialog Act：inform(地址=中央公园2.0，口味=意大利)）  
-  - 机器：请问你想要在中央公园2.0附近什么价位的意大利餐厅？（Sys Dialog Act：request(价位)）  
-- 用户：普通的就好（User Dialog Act：inform(价位=普通)）  
-  - 机器：我知道那里有一家柯南家的老意大利料理餐厅（Sys Dialog Act：inform(名称=柯南家的老意大利料理)）  
-- 用户：换一个（User Dialog Act：alter()）  
-  - 机器：我知道那里有一家意大利油泼面餐厅（Sys Dialog Act：inform(名称=意大利油泼面)）  
-- 用户：它家的价格怎么样？（User Dialog Act：request(价位)）  
-  - 机器：意大利油泼面的价位是普通（Sys Dialog Act：inform(价位=普通)）  
-- 用户：就这家吧，帮我预订（User Dialog Act：order()）  
-  - 机器：请问有几个人？（Sys Dialog Act：request(人数)）  
-- 用户：单身狗（User Dialog Act：inform(人数=1)）  
-  - 机器：真的就1个人吗？（Sys Dialog Act：confirm(人数=1)）  
-- 用户：是的（User Dialog Act：confirm()）  
-  - 机器：已经预定成功（Sys Dialog Act：order_success()）  
-- 用户：好的，再见（User Dialog Act：bye()）  
-  - 机器：再见，欢迎下次使用（Sys Dialog Act：bye()）
+
+|角色|类型|内容|
+|---|---|---|
+|用户|User Dialog Act：greeting|你好|
+|机器|Sys Dialog Act：greeting|你好，我可以帮助你搜索并预订餐厅|
+|用户|User Dialog Act：inform(地址=中央公园2.0，口味=意大利)|我想要找一家在中央公园2.0附近的意大利餐厅|
+|机器|Sys Dialog Act：request(价位)|请问你想要在中央公园2.0附近什么价位的意大利餐厅？|
+|用户|User Dialog Act：inform(价位=普通)|普通的就好|
+|机器|Sys Dialog Act：inform(名称=柯南家的老意大利料理)|我知道那里有一家柯南家的老意大利料理餐厅|
+|用户|User Dialog Act：alter()|换一个|
+|机器|Sys Dialog Act：inform(名称=意大利油泼面)|我知道那里有一家意大利油泼面餐厅|
+|用户|User Dialog Act：request(价位)|它家的价格怎么样？|
+|机器|Sys Dialog Act：inform(价位=普通)|意大利油泼面的价位是普通|
+|用户|User Dialog Act：order()|就这家吧，帮我预订|
+|机器|Sys Dialog Act：request(人数)|请问有几个人？|
+|用户|User Dialog Act：inform(人数=1)|单身狗|
+|机器|Sys Dialog Act：confirm(人数=1)|真的就1个人吗？|
+|用户|User Dialog Act：confirm()|是的|
+|机器|Sys Dialog Act：order_success()|已经预定成功|
+|用户|User Dialog Act：bye()|好的，再见|
+|机器|Sys Dialog Act：bye()|再见，欢迎下次使用|
+|用户|||
+|机器|||
 
 Dialog Acts 如果是用户发起的（User Dialog Act），那么它是一种处理后的用户意图的抽象表达，是一种形式化的意图描述。
 
