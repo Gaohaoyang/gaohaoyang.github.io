@@ -41,7 +41,7 @@ PtrNet主要应用于NLP的文本摘要任务、对话任务、（特定条件�
  
 本文选取了4篇PtrNet论文，我按照论文的发表顺序，分别在本文的2~5节进行呈现，以此来介绍PtrNet提出、改进和发展的过程。
  
-# 2 Pointer Networks
+# 2 2015-凸包-Pointer Networks
  
 ![](https://pic3.zhimg.com/80/v2-a61f2c9c5767777fd1560c24f8ea7fc2_1440w.jpg)
  
@@ -49,21 +49,20 @@ PtrNet主要应用于NLP的文本摘要任务、对话任务、（特定条件�
  
 《Pointer Networks》论文是PtrNet模型的开山之作，发表于2015年。
  
-论文提出了当前文本序列生成模型的三个问题，这三个问题都可以通过使用PtrNet解决：
-- （1）目标序列的词表，和源序列的词语内容是强相关的。面对不同语言、不同应用场景的任务，往往需要重新构造词表。
-- （2）词表的长度需要在模型构建之前作为超参数进行配置。如果需要变更词表的长度，就需要重新训练模型。
-- （3）在部分任务场景里，不允许有OOV的存在。
+论文提出了当前文本序列生成模型（seq2seq）的三个问题，这三个问题都可以通过使用PtrNet解决：
+- （1）目标序列的词表，和源序列的词语内容是**强相关**的。面对不同语言、不同应用场景的任务，往往需要重新构造词表。
+- （2）词表的长度需要在模型构建之前作为**超参数**进行配置。如果需要变更词表的长度，就需要重新训练模型。
+- （3）在部分任务场景里，不允许有**OOV**的存在。
  
-本论文的思路，就是让decoder输出一个由目标序列指向源序列的指针序列，而如何去选择这个指针，就是论文的主要内容。
+本论文的思路是**让decoder输出一个由目标序列指向源序列的指针序列**，而如何去选择这个指针，就是论文的主要内容。
  
-PtrNet利用了Attention模型的一个中间变量：对齐系数a。因为对齐系数a表示目标序列当前step和源序列所有step之间的相关性大小，所以我们可以通过选取对齐系数向量a（向量a长度为源序列的step长度）中数值最大的那个维度（每个维度指向源序列的一个step），实现一个从目标序列step到源序列step的指针。最后，根据这个指针指向的源序列的词，直接提取这个词进行输出。
+PtrNet利用了Attention模型的一个中间变量：**对齐系数a**。因为对齐系数a表示目标序列当前step和源序列所有step之间的相关性大小，所以可以通过选取对齐系数向量a（向量a长度为源序列的step长度）中数值最大的那个维度（每个维度指向源序列的一个step），实现一个从目标序列step到源序列step的指针。最后，根据这个指针指向的源序列的词，直接提取这个词进行输出。
  
 通过以上方法，就能够在decoder的每一个step，从源序列的所有step中抽取出一个，进行输出。这样，由于decoder输出的是一个指针序号的序列，而不是具体的词，也就没有了OOV问题；同时，因为不需要构建词表，就从根本上解决了词表内容和词表长度的问题。
  
-很遗憾的，虽然论文中有提及：PtrNet可以在翻译任务中提取命名实体，在摘要任务中提取关键词，但是论文中并没有更进一步，将PtrNet应用于NLP任务，而是利用凸包求解问题、旅行商问题进行了实验和论证。
+很遗憾的，虽然论文中有提及：**PtrNet可以在翻译任务中提取命名实体，在摘要任务中提取关键词**，但是论文中并没有更进一步，将PtrNet应用于NLP任务，而是利用凸包求解问题、旅行商问题进行了实验和论证。
  
-# 3 Pointing the Unknown Words
-----------------------------
+# 3 2016-落地NLP-Pointing the Unknown Words
  
 ![](https://pic1.zhimg.com/80/v2-c80e67bcad1257905a437704990b5dcc_1440w.jpg)
  
@@ -72,11 +71,11 @@ PtrNet利用了Attention模型的一个中间变量：对齐系数a。因为对�
 论文《Pointing the Unknown Words》发表于2016年，将PtrNet模型在NLP领域的文本摘要任务和翻译任务上进行了落地实践。
  
 这篇论文提出的Pointer Softmax Network模型包含三个主要模块。用通俗的语言解释，如果传统模型效果好，就选择传统模型的输出值进行输出，如果PtrNet模型效果好，就选择PtrNet模型的输出值进行输出，然后需要有一个开关网络来判断，传统模型效果好还是PtrNet模型效果好。这三个模块的描述如下：
-- （1）Shortlist Softmax：这个模块由传统的Attention Mechanism实现，输出一个在词表里的词的条件概率。这个模块需要维护一个固定大小的词表。在下面的公式中，_p(w)_就是Shortlist Softmax的输出：
+- （1）**Shortlist** Softmax：这个模块由传统的Attention Mechanism实现，输出一个在词表里的词的条件概率。这个模块需要维护一个固定大小的词表。在下面的公式中，_p(w)_就是Shortlist Softmax的输出：
   - ![](https://pic2.zhimg.com/80/v2-eff729f9cbddfc6a3a53fe3188f1d811_1440w.png)
-- （2）Location Softmax：这个模块利用了Attention Mechanism的对齐系数a。对齐系数a的向量长度是源序列的step长度，并且对齐系数a每个维度的值，表示decoder当前step输出源序列每个step的概率大小。我们就可以在对齐系数a的各个维度中，取出数值最大的那个维度，作为decoder当前step的指针，这个维度上的值就是其概率大小。该模块输出词表的大小为输入序列的step序列长度。在下面的公式中，_p(l)_就是Location Softmax的输出：
+- （2）**Location** Softmax：这个模块利用了Attention Mechanism的对齐系数a。对齐系数a的向量长度是源序列的step长度，并且对齐系数a每个维度的值，表示decoder当前step输出源序列每个step的概率大小。我们就可以在对齐系数a的各个维度中，取出数值最大的那个维度，作为decoder当前step的指针，这个维度上的值就是其概率大小。该模块输出词表的大小为输入序列的step序列长度。在下面的公式中，_p(l)_就是Location Softmax的输出：
   - ![](https://pic4.zhimg.com/80/v2-e0a919889eabc8bfaf802cd20b8851e3_1440w.png)
-- （3）Switching Network：前面两个模块的公式里的_p(z)_项，就是由Switching Network模块生成输出的。Switching Network模型通过_p(z)_选择是采纳Shortlist Softmax输出的预测词，还是采纳Location Softmax输出的预测词。Switching Network由一个多层感知机MLP实现，并在最后接一个sigmoid激活函数。Switching Network的输出值如下：
+- （3）**Switching** Network：前面两个模块的公式里的_p(z)_项，就是由Switching Network模块生成输出的。Switching Network模型通过_p(z)_选择是采纳Shortlist Softmax输出的预测词，还是采纳Location Softmax输出的预测词。Switching Network由一个多层感知机MLP实现，并在最后接一个sigmoid激活函数。Switching Network的输出值如下：
   - ![](https://pic2.zhimg.com/80/v2-9b15650ce011666cd94c6a7c39fecbb9_1440w.jpg)
   - 将整个模型拼接起来，公式如下：![](https://pic3.zhimg.com/80/v2-88067e68fa250e33eee73a156081b34a_1440w.jpg)
  
@@ -85,7 +84,7 @@ PtrNet利用了Attention模型的一个中间变量：对齐系数a。因为对�
 - （2）这篇论文和论文\[4\]，都有提及：虽然引入PtrNet机制会扩大网络规模，增加网络的参数，但是在模型训练环节，反而会让模型收敛得更快。
 - （3）要将PtrNet用于翻译任务，需要做一些额外的工作：遇到OOV词时，在使用Location Softmax模块前，会进行两个判定，一个是对OOV词进行查表（法语-英语字典）判断相应的词是否在target和source中同时出现，另一个是查找OOV词是否直接在target和source中同时出现，如果其中一个判定成功，则模型可以使用Location Softmax（逻辑上很麻烦对不对，特别是还要额外引入一个词典）。
  
-# 4 Incorporating Copying Mechanism in Seq2Seq Learning
+# 4 2016-copy机制-Incorporating Copying Mechanism in Seq2Seq Learning
  
 ![](https://pic2.zhimg.com/80/v2-afdefb4134436762830babcd3bea8a79_1440w.jpg)
  
@@ -154,7 +153,6 @@ CopyNet把\[2\]中的两个预测输出模块融合到一起去了。Generate-Mo
 （5）State Update中的e使用的是上个step输出词的word embedding，这样在解码时候，岂不是只能用greedy search，而不能用beam search了？
  
 # 5 Summarization with Pointer-Generator Networks
------------------------------------------------
  
 ![](https://pic1.zhimg.com/80/v2-9e8ba770f99802f9bb038b5839ab03e0_1440w.jpg)
  
