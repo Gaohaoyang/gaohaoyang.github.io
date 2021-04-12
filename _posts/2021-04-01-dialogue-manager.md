@@ -119,23 +119,23 @@ mathjax: true
 |角色|类型|内容|
 |---|---|---|
 |用户|User Dialog Act：greeting|**你好**|
-|机器|Sys Dialog Act：greeting|你好，我可以帮助你搜索并预订餐厅|
+|机器|Sys Dialog Act：greeting|<font color='blue'>你好，我可以帮助你搜索并预订餐厅</font>|
 |用户|User Dialog Act：inform(地址=中央公园2.0，口味=意大利)|**我想要找一家在中央公园2.0附近的意大利餐厅**|
-|机器|Sys Dialog Act：request(价位)|请问你想要在中央公园2.0附近什么价位的意大利餐厅？|
+|机器|Sys Dialog Act：request(价位)|<font color='blue'>请问你想要在中央公园2.0附近什么价位的意大利餐厅？</font>|
 |用户|User Dialog Act：inform(价位=普通)|**普通的就好**|
-|机器|Sys Dialog Act：inform(名称=柯南家的老意大利料理)|我知道那里有一家柯南家的老意大利料理餐厅|
+|机器|Sys Dialog Act：inform(名称=柯南家的老意大利料理)|<font color='blue'>我知道那里有一家柯南家的老意大利料理餐厅</font>|
 |用户|User Dialog Act：alter()|**换一个**|
-|机器|Sys Dialog Act：inform(名称=意大利油泼面)|我知道那里有一家意大利油泼面餐厅|
+|机器|Sys Dialog Act：inform(名称=意大利油泼面)|<font color='blue'>我知道那里有一家意大利油泼面餐厅</font>|
 |用户|User Dialog Act：request(价位)|**它家的价格怎么样？**|
-|机器|Sys Dialog Act：inform(价位=普通)|意大利油泼面的价位是普通|
+|机器|Sys Dialog Act：inform(价位=普通)|<font color='blue'>意大利油泼面的价位是普通</font>|
 |用户|User Dialog Act：order()|**就这家吧，帮我预订**|
-|机器|Sys Dialog Act：request(人数)|请问有几个人？|
+|机器|Sys Dialog Act：request(人数)|<font color='blue'>请问有几个人？</font>|
 |用户|User Dialog Act：inform(人数=1)|**单身狗**|
-|机器|Sys Dialog Act：confirm(人数=1)|真的就1个人吗？|
+|机器|Sys Dialog Act：confirm(人数=1)|<font color='blue'>真的就1个人吗？</font>|
 |用户|User Dialog Act：confirm()|**是的**|
-|机器|Sys Dialog Act：order_success()|已经预定成功|
+|机器|Sys Dialog Act：order_success()|<font color='blue'>已经预定成功</font>|
 |用户|User Dialog Act：bye()|**好的，再见**|
-|机器|Sys Dialog Act：bye()|再见，欢迎下次使用|
+|机器|Sys Dialog Act：bye()|<font color='blue'>再见，欢迎下次使用</font>|
 
 Dialog Acts 如果是用户发起的（User Dialog Act），那么它是一种处理后的用户意图的抽象表达，是一种形式化的意图描述。
 
