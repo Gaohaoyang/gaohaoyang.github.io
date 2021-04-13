@@ -3,7 +3,7 @@ layout: post
 title:  "对话系统-Dialogue System"
 date:   2020-04-29 21:45:00
 categories: 深度学习
-tags: 深度学习 NLP 对话系统 QA KB-QA 多轮 闲聊 沈向洋 FSM 有限状态机 GPT 陈蕴侬 JSGF 图灵测试 推荐系统 阅读理解 智能音箱 个人助理 智能客服
+tags: 深度学习 NLP 对话系统 QA KB-QA 多轮 闲聊 沈向洋 FSM 有限状态机 GPT 台大 陈蕴侬 JSGF 图灵测试 推荐系统 阅读理解 智能音箱 个人助理 智能客服
 excerpt: 对话系统技术图谱
 author: 鹤啸九天
 mathjax: true
@@ -98,7 +98,7 @@ mathjax: true
 ![](https://static.leiphone.com/uploads/new/images/20200810/5f311dc980e89.jpg?imageView2/2/w/740)
 ![](https://static.leiphone.com/uploads/new/images/20200810/5f311dd451d94.png?imageView2/2/w/740)
 ![](https://static.leiphone.com/uploads/new/images/20200810/5f311e76b3824.png?imageView2/2/w/740)
-- 【2020-7-6】台大陈蕴侬，[如何让任务型聊天机器人更加鲁棒](https://www.bilibili.com/video/BV1oa4y1h7Um/?spm_id_from=333.788.videocard.2)，[课程主页](https://www.csie.ntu.edu.tw/~miulab/s108-adl/)，[PPT链接](https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/)，[pdf](https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/200602_ConversationalAI.pdf)
+- 【2020-7-6】台大[陈蕴侬](http://vivianchen.idv.tw/)，[如何让任务型聊天机器人更加鲁棒](https://www.bilibili.com/video/BV1oa4y1h7Um/?spm_id_from=333.788.videocard.2)，[课程主页](https://www.csie.ntu.edu.tw/~miulab/s108-adl/)，[PPT链接](https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/)，[pdf](https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/200602_ConversationalAI.pdf)
 <iframe src="//player.bilibili.com/player.html?aid=668813899&bvid=BV1oa4y1h7Um&cid=209423753&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 - 【2020-9-12】百度王凡：[开放域对话系统：现状和未来](https://mp.weixin.qq.com/s?__biz=MzU1NTMyOTI4Mw==&mid=2247507362&idx=1&sn=f266e83bf26956838a830a6a8a9194d9&chksm=fbd76fcecca0e6d8e1e6869a5f701476b2955c51d9ef2976e44feb912d0c7ce78b88bf9bbdd9&mpshare=1&scene=1&srcid=0911roXzZkIrRt7BtSTeBubc&sharer_sharetime=1599789486897&sharer_shareid=b8d409494a5439418f4a89712efcd92a&key=0a19845a51c58415c57b70e5f9fcc7ac1e55f7a063b5625f0ad6ccdb97f84fc761d724100f3eaed413d29d6ec7d00b57d24ba7704bca6760e6a12c76d8fe7d71b6ff948a0f1bde8d149ca08a3d5c255b6d3383569f32352ea1d5acc4e3bc8c484c49e8e22249bc5e1217f078d0699a752d15bc2c23d03e00bc50d2c5f3568f74&ascene=1&uin=OTY1NzE1MTYw&devicetype=Windows+10+x64&version=62090529&lang=zh_CN&exportkey=ASpq7RdZ3unrf%2FjEtdDMFCc%3D&pass_ticket=PuzvgcInSGb6VR3uby%2FNFgjqxSEToDvVRO%2BX7yC0tMwo7rfZ0%2FgqILDt9IhoQjhw&wx_header=0)
@@ -491,7 +491,7 @@ chatbot:我也是，不过总有一天就会好起来的
 
 ## NLU
 
-- [台大对话系统](https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/200602_ConversationalAI.pdf)，语言理解的pipeline，前两者主要通过Classification实现，第三个是Sequence Labeling
+- 台大[陈蕴侬](http://vivianchen.idv.tw/)讲解的[对话系统](https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/200602_ConversationalAI.pdf)，语言理解的pipeline，前两者主要通过Classification实现，第三个是Sequence Labeling
 1. **Domain Identification**（分类）： Requires Predefined Domain Ontology
   - 如：find a good eating place for taiwanese food
   - 识别为餐饮领域
@@ -675,11 +675,11 @@ chatbot:我也是，不过总有一天就会好起来的
   - [Deep Reinforcement Learning for Goal-Oriented Dialogues](https://www.microsoft.com/en-us/research/project/deep-reinforcement-learning-goal-oriented-dialogue/#)
     - ![](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/04/composite-dialogue-1024x459.png)
 
-- 【2021-3-15】百分点智能问答主要流程
-  - ![](https://image.jiqizhixin.com/uploads/editor/d3dda01e-1926-45fa-9f34-b8d18b617c18/2.png)
+- 【2021-3-15】百分点智能问答主要流程——源自：[百分点认知智能实验室：智能对话技术应用和实践](https://www.jiqizhixin.com/articles/2020-12-29-2)
+  - [图](https://image.jiqizhixin.com/uploads/editor/d3dda01e-1926-45fa-9f34-b8d18b617c18/2.png)![](https://image.jiqizhixin.com/uploads/editor/d3dda01e-1926-45fa-9f34-b8d18b617c18/2.png)
   - 首先进行语音识别，将用户会话识别出来后，经过ASR结果纠错和补全、指代消解、省略恢复等预处理之后，经过敏感词检测，送入中控系统。中控系统是在特定语境下进行意图识别的系统，分为情绪识别、业务意图识别、对话管理、异常处理等四个模块，其中业务意图包括QA问答机器人（**QA** Bot）、基于知识图谱的问答机器人（**KG** Bot），NL2SQL机器人（**DB** Bot），任务型机器人（**TASK** Bot）。对话管理包括多轮对话的对话历史管理、BOT当前询问、会话状态选取等模块。异常处理包括安全话术（对意图结果的结果进行后处理）、会话日志记录、告警等功能。然后，进入话术/指令生成子系统，这是识别问句意图后的对话结果生成，包括话术生成和指令生成两个模块，在话术生成中，对话系统根据对话历史数据和对话模板生成和拼接产生话术，如果是任务型对话，将生成对应指令。另外，辅助系统通过画像分析、用户分析、问题分析等功能，进一步优化问答系统的效果。
 - 智能问答产品典型架构
-  - ![](https://image.jiqizhixin.com/uploads/editor/06578b0e-afba-49dd-b46c-0b9dc80855fa/3.png)
+  - [图](https://image.jiqizhixin.com/uploads/editor/06578b0e-afba-49dd-b46c-0b9dc80855fa/3.png)![](https://image.jiqizhixin.com/uploads/editor/06578b0e-afba-49dd-b46c-0b9dc80855fa/3.png)
   - 智能问答产品主要包括知识库、对话模型、配置中心、多渠道接入以及后台管理。针对不同的任务划分，准备不同的知识库，例如QA BOT需要引入问答知识对，KG BOT需要知识图谱的支持等等。将针对不同任务的对话模型服务，部署接入各个平台接口，譬如小程序、微信、网页等，提供在线问答服务。配置中心主要提供QA对、闲聊语料、同义词库、特征词库等的可视化配置服务，实现知识配置的快速拓展。后台管理针对智能问答系统实施整体监控、日志管理、告警、权限管理等等，另外，它还提供各种维度的统计分析服务。
 
 
