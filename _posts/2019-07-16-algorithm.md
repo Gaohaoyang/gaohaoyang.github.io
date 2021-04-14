@@ -22,7 +22,7 @@ mathjax: true
 - 【2020-6-18】快速刷题：[算法模板](https://github.com/greyireland/algorithm-pattern)，最科学的刷题方式，最快速的刷题路径，你值得拥有~ [Gitbook](https://greyireland.gitbook.io/algorithm-pattern/ru-men-pian/quickstart)
 ![](https://camo.githubusercontent.com/dec4d9e996c2357647a28b995307e826531f994f/68747470733a2f2f696d672e667569626f6f6d2e636f6d2f696d672f6c656574636f64655f6578706c6f72652e706e67)
 - 【2021-1-23】可视化解释A*、Dijkstra、BFS寻路算法，[在线体验地址](https://interactive-pathfinding.netlify.app/)，完整代码[Interactive pathfinding](https://github.com/npretto/pathfinding) - Visual explanation of pathfinding algorithms and how a*, Dijkstra and BFS can be seen as the same algorithm with different parameter/data structures used under the hood' by Nicolò Pretto
-
+- 【2021-4-14】算法经验总结，[labuladong](https://labuladong.gitee.io/algo/), [gitee地址]([labuladong](https://labuladong.gitee.io/algo/))
 
 
 ## 观点
