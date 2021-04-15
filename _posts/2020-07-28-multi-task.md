@@ -15,6 +15,7 @@ mathjax: true
 # 总结
 
 - 【2021-4-15】近几年工业界/学术界有关多任务学习的研究和成功实践层出不穷：比如推荐系统里的谷歌的MMOE，SNR，MOSE，Youtube排序模型，阿里的ESSM，腾讯最新的PLE；NLP里微软的MT-DNN，以及最近hotpotQA榜单上的IRRR模型。
+- 【2021-4-3】[一文"看透"多任务学习](https://mp.weixin.qq.com/s/mL9GjnTK1p4MtdI9Bx1huw)
 - 现有的多标签 Survey 基本在 2014 年之前，主要有以下几篇：
    1. Tsoumakas 的《Multi-label classification: An overview》(2007)
    2. 周志华老师的《A review on multi-label learning algorithms》(2013)
