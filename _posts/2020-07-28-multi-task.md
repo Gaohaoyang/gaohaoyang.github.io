@@ -14,6 +14,7 @@ mathjax: true
 
 # 总结
 
+- 【2021-4-15】近几年工业界/学术界有关多任务学习的研究和成功实践层出不穷：比如推荐系统里的谷歌的MMOE，SNR，MOSE，Youtube排序模型，阿里的ESSM，腾讯最新的PLE；NLP里微软的MT-DNN，以及最近hotpotQA榜单上的IRRR模型。
 - 现有的多标签 Survey 基本在 2014 年之前，主要有以下几篇：
    1. Tsoumakas 的《Multi-label classification: An overview》(2007)
    2. 周志华老师的《A review on multi-label learning algorithms》(2013)
@@ -141,7 +142,7 @@ mathjax: true
 # 多任务学习介绍
 
 ## 1.Introduction
- 
+
 这一节主要介绍一些基础知识和背景，包括多什么是任务学习和多任务学习的挑战。
 
 ### 概念区别（multi-class/multi-label等）
@@ -167,9 +168,9 @@ mathjax: true
         - 多任务学习时，多个任务之间的模型空间（Trained Model）是共享的
         - ![](https://pic3.zhimg.com/80/v2-9eed3a14f160f9562a37eafe82991b8e_720w.png)
 
-- 多任务学习（Multitask learning）是迁移学习算法的一种，迁移学习之前介绍过。定义一个一个**源领域**source domain和一个**目标领域**（target domain），在source domain学习，并把学习到的知识迁移到target domain，提升target domain的学习效果（performance）。
-- 多标签学习（Multilabel learning）是多任务学习中的一种，建模多个label之间的相关性，同时对多个label进行建模，多个类别之间共享相同的数据/特征。
-- 多类别学习（Multiclass learning）是多标签学习任务中的一种，对多个相互独立的类别（classes）进行建模。这几个学习之间的关系如图5所示：
+- 多**任务**学习（Multitask learning）是迁移学习算法的一种，迁移学习之前介绍过。定义一个一个**源领域**source domain和一个**目标领域**（target domain），在source domain学习，并把学习到的知识迁移到target domain，提升target domain的学习效果（performance）。
+- 多**标签**学习（Multilabel learning）是多任务学习中的一种，建模多个label之间的相关性，同时对多个label进行建模，多个类别之间共享相同的数据/特征。
+- 多**类别**学习（Multiclass learning）是多标签学习任务中的一种，对多个相互独立的类别（classes）进行建模。这几个学习之间的关系如图5所示：
 
 ![](https://pic2.zhimg.com/80/v2-ac2579934ee805c8a7fbac8ff5cb3c31_720w.png)
  
@@ -181,17 +182,17 @@ mathjax: true
 - 多任务学习（Multitask Learning）是一种推导迁移学习方法，主任务（main tasks）使用相关任务（related tasks）的训练信号（training signal）所拥有的领域相关信息（domain-specific information），做为一直推导偏差（inductive bias）来提升主任务（main tasks）泛化效果（generalization performance）的一种机器学习方法。
 - 多任务学习涉及多个**相关**的任务同时并行学习，梯度同时反向传播，多个任务通过底层的共享表示（shared representation）来互相帮助学习，提升泛化效果。
 - 简单来说：多任务学习把多个相关的任务放在一起学习（注意，一定要是相关的任务，后面会给出相关任务（related tasks）的定义，以及他们共享了那些信息），学习过程（training）中通过一个在浅层的共享（shared representation）表示来互相分享、互相补充学习到的领域相关的信息（domain information），互相促进学习，提升泛化的效果。
-    - **相关**（related）的具体定义很难，但我们可以知道的是，在多任务学习中，related tasks可以提升main task的学习效果，基于这点得到相关的定义：
-        - Related（Main Task，Related tasks，LearningAlg）= 1
-        - LearningAlg（Main Task||Related tasks）> LearningAlg（Main Task） （1）
-    - LearningAlg表示多任务学习采用的算法，公式（1）：第一个公式表示，把Related tasks与main tasks放在一起学习，效果更好；第二个公式表示，基于related tasks，采用LearningAlg算法的多任务学习Main task，要比单学习main task的条件概率概率更大。特别注意，相同的学习任务，基于不同学习算法，得到相关的结果不一样：
-        - Related（Main Task，Related tasks，LearningAlg1）不等于 Related（Main Task，Related tasks，LearningAlg2）
-    - 多任务学习并行学习时，有5个相关因素可以帮助提升多任务学习的效果。
-        - （1）、数据放大（data amplification）。相关任务在学习过程中产生的额外有用的信息可以有效方法数据/样本（data）的大小/效果。主要有三种数据     - 放大类型：统计数据放大（statistical data amplification）、采样数据放大（sampling data amplification），块数据放大（blocking data        - amplification）。
-        - （2）、Eavesdropping（窃听）。假设
-        - （3）、属性选择（attribute selection）
-        - （4）、表示偏移（representation bias）
-        - （5）、预防过拟合（overfitting prevention）
+- **相关**（related）的具体定义很难，但我们可以知道的是，在多任务学习中，related tasks可以提升main task的学习效果，基于这点得到相关的定义：
+  - Related（Main Task，Related tasks，LearningAlg）= 1
+  - LearningAlg（Main Task||Related tasks）> LearningAlg（Main Task） （1）
+- LearningAlg表示多任务学习采用的算法，公式（1）：第一个公式表示，把Related tasks与main tasks放在一起学习，效果更好；第二个公式表示，基于related tasks，采用LearningAlg算法的多任务学习Main task，要比单学习main task的条件概率概率更大。特别注意，相同的学习任务，基于不同学习算法，得到相关的结果不一样：
+- Related（Main Task，Related tasks，LearningAlg1）不等于 Related（Main Task，Related tasks，LearningAlg2）
+- 多任务学习并行学习时，有5个相关因素可以帮助提升多任务学习的效果。
+  - （1）、数据放大（data amplification）。相关任务在学习过程中产生的额外有用的信息可以有效方法数据/样本（data）的大小/效果。主要有三种数据放大类型：统计数据放大（statistical data amplification）、采样数据放大（sampling data amplification），块数据放大（blocking data - amplification）。
+  - （2）、Eavesdropping（窃听）。假设
+  - （3）、属性选择（attribute selection）
+  - （4）、表示偏移（representation bias）
+  - （5）、预防过拟合（overfitting prevention）
 
 所有这些关系（relationships）都可以帮助提升学习效果（improve learning performance）
 
@@ -217,6 +218,8 @@ mathjax: true
 
 还有很多潜在的解释，为什么多任务并行学习可以提升学习效果（performance）。多任务学习有效，是因为它是建立在多个相关的，具有共享表示（shared representation）的任务基础之上的，因此，需要定义一下，什么样的任务之间是相关的。
 
+机器学习解释：
+> 多任务学习通过提供某种**先验假设**（inductive knowledge）来提升模型效果，这种先验假设通过增加辅助任务（具体表现为增加一个loss）来提供，相比于L1正则更方便（L1正则的先验假设是：模型参数更少更好）。
 
  
 `MTL`（Multi-Task Learning）有很多形式：`联合学习`（joint learning）、`自主学习`（learning to learn）和`带有辅助任务`的学习（learning with auxiliary task）等都可以指 MTL。一般来说，优化多个损失函数就等同于进行多任务学习（与单任务学习相反）。
@@ -224,7 +227,7 @@ mathjax: true
 本篇文章，包括之前的 ESMM 都是属于带有辅助任务的多任务学习。
  
 MTL 的目标在于通过利用包含在相关任务训练信号中特定领域的信息来提高泛化能力。
- 
+
 那么，什么是相关任务呢？我们有以下几个不严谨的解释：
 1.  使用相同特征做判断的任务；
 2.  任务的分类边界接近；
@@ -236,10 +239,14 @@ MTL 的目标在于通过利用包含在相关任务训练信号中特定领域�
 ### 1.1.1 Common form
  
 MLT 主要有两种形式，一种是基于参数的共享，另一种是基于约束的共享。
+
+![](https://pic2.zhimg.com/80/v2-cedb49f4bbf82f3f6c88a5f3840a6a91_1440w.jpg)
  
 **Hard 参数共享**
  
 参数共享的形式在基于神经网络的 MLT 中非常常见，其在所有任务中共享隐藏层并同时保留几个特定任务的输出层。这种方式有助于降低过拟合风险，因为同时学习的任务越多，模型找到一个含有所有任务的表征就越困难，从而过拟合某个特定任务的可能性就越小。ESMM 就属于这种类型的 MLT。
+
+即便是2021年，hard parameter sharing依旧是很好用的baseline系统。
  
 ![Google 多任务学习框架 MMoE](http://p3-tt.byteimg.com/large/pgc-image/ba192c31c339490fa48110480e2f9796?from=pc)
  
@@ -249,7 +256,11 @@ MLT 主要有两种形式，一种是基于参数的共享，另一种是基于�
  
 ![Google 多任务学习框架 MMoE](http://p6-tt.byteimg.com/large/pgc-image/50ccadccf2e044d3a510c2b3d1dd4a08?from=pc)
 
- 
+现代研究重点倾向的方法：soft parameter sharing
+- 底层共享一部分参数，自己还有独特的一部分参数不共享；顶层有自己的参数。底层共享的、不共享的参数如何融合到一起送到顶层，也就是研究人员们关注的重点啦。这里可以放上咱们经典的MMOE模型结构（图3），大家也就一目了然了。和最左边（a）的hard sharing相比，（b）和（c）都是先对Expert0-2（每个expert理解为一个隐层神经网络就可以了）进行加权求和之后再送入Tower A和B（还是一个隐层神经网络），通过Gate（还是一个隐藏层）来决定到底加权是多少。
+
+![](https://pic2.zhimg.com/80/v2-45537d8de9ad8e105d0ad6c8d2b3a555_1440w.jpg)
+
 ### 1.1.2 Why MTL work
  
 那么，为什么 MLT 有效呢？主要有以下几点原因：
@@ -261,7 +272,6 @@ MLT 主要有两种形式，一种是基于参数的共享，另一种是基于�
     
  
 ### 1.2 Challenge in MTL
---------------------
  
 在多任务学习中，假设有这样两个相似的任务：猫分类和狗分类。他们通常会有比较接近的底层特征，比如皮毛、颜色等等。如下图所示：
  
@@ -360,8 +370,7 @@ MoE 能够实现不同数据多样化使用共享层，但针对不同任务而�
 首先是不同 MLT 模型对在不同相关性任务下的参数分布，其可以反应模型的鲁棒性。可以看到 MMeE 模型性能还是比较稳定的。
  
 ![Google 多任务学习框架 MMoE](http://p1-tt.byteimg.com/large/pgc-image/b5dc49c0bd9347f0be0619b3d9302ce7?from=pc)
-  
- 
+
 第一组数据集的表现：
  
 ![Google 多任务学习框架 MMoE](http://p6-tt.byteimg.com/large/pgc-image/9e446451f6e546aab8b1bfb4f962f3d9?from=pc)
@@ -385,6 +394,13 @@ Gate 网络在两个任务的不同分布：
 总结：作者提出了一种新颖的多任务学习方法——MMoE，其通过多个 Gate 网络来自适应学习不同数据在不同任务下的与专家子网的权重关系系数，从而在相关性较低的多任务学习中取得不错的成绩。
  
 共享网络节省了大量计算资源，且 Gate 网络参数较少，所以 MMoE 模型很大程度上也保持了计算优势
+
+## 谷歌SNR模型
+
+- [浅谈多任务学习（Multi-task Learning）](https://zhuanlan.zhihu.com/p/348873723)
+- [图](https://pic1.zhimg.com/80/v2-a316f17c3752dcf405ae40a929362e88_1440w.jpg)
+
+![](https://pic1.zhimg.com/80/v2-a316f17c3752dcf405ae40a929362e88_1440w.jpg)
 
 
 # 实践
