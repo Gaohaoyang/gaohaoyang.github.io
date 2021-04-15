@@ -32,8 +32,8 @@ layout: default
 
         </div>
         
-	<!-- 导读区 -->
-	{% include tool_note.html %}
+        <!-- 导读区 -->
+        {% include tool_note.html %}
       
         <!-- 文章内容 -->
         <hr>
@@ -45,10 +45,11 @@ layout: default
         <!-- 打赏 -->
         {% include tool_award.html %}
 	
-	<!-- 分享工具 -->
-	<h2 id="share">Share</h2>
+        <!-- 分享工具 -->
+        <h2 id="share">Share</h2>
         {% include tool_share.html %}
 
+        <!-- 相似文章 -->
         {% assign hasSimilar = '' %}
         {% for post in site.related_posts %}
             {% assign postHasSimilar = false %}
@@ -75,8 +76,10 @@ layout: default
         {% if hasSimilar.size > 0 %}
             </ul>
         {% endif %}
-	<!-- 相关文章推荐 -->
-	<h2 id="comments">Related Posts</h2>
+
+        <!-- 相关文章推荐 -->
+        <h2 id="comments">Related Posts</h2>
+
         <!-- 翻页 -->
         {% include previousAndNext.html %}
 	
@@ -86,6 +89,7 @@ layout: default
 	
     </div>
     <button class="anchor"><i class="fa fa-anchor"></i></button>
+    
     <!-- 右侧工具栏 -->
     <div class="right">
         <!-- 搜索框 -->
