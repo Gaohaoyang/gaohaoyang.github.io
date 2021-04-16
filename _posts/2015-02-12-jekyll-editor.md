@@ -538,7 +538,20 @@ landslide readme.md -i -o > slide.html # 转换
 
 - [Jekyll](https://jekyllrb.com/)中的配置和模板语法
 
+## Jekyll目录结构
 
+- _config.yml 配置文件，最为重要，包含了所有配置信息
+  - title: Blog名称
+  - subtitle: 副标题
+  - description: Blog的描述
+  - author: Blog拥有者
+- _includes 文件夹包含了将被反复利用的文件，比如footer，header
+- _layouts 文件夹包含了主页面的排版布局
+- _posts 文件夹将包含所有的日志文件，Markdown格式
+
+将编辑好的markdown文件放到_post目录下,运行命令：
+- jekyll build  -- 将文本转换成静态Blog，生成在_site目录下
+- jekyll serve -- 本地运行服务，可以在localhost:4000 中看到自己Blog的效果，方便调试。
 
 ## 搭建过程
 
@@ -587,7 +600,7 @@ cd到jekyllWorkspace
 
 ![](http://ww3.sinaimg.cn/large/7011d6cfjw1f2ue3lt31nj20cj02nt8u.jpg)
 
-文件结构如下：   
+文件结构如下：
 
 ![](http://ww1.sinaimg.cn/large/7011d6cfjw1f2ue3ujsybj20ek06wabh.jpg)
 
