@@ -79,10 +79,10 @@ mathjax: true
 
 - 基于管道方法的对话系统中有许多特定领域的手工制作，所以它们很难适用于新的领域。近年来，随着端到端神经生成模型的发展，为面向任务的对话系统构建了端到端的可训练框架。与传统的管道模型不同，端到端模型使用一个模块，并与结构化的外部数据库交互。
 - ![](https://upload-images.jianshu.io/upload_images/1535345-3e1a2d7d80ba70d8.jpeg)
-- 上图的模型是一种基于网络的端到端可训练任务导向型对话系统，将对话系统的学习作为学习从对话历史到系统回复的映射问题，并应用encoder-decoder模型来训练。然而，该系统是在监督的方式下进行训练——不仅需要大量的训练数据，而且由于缺乏对训练数据对话控制的进一步探索，它也可能无法找到一个好的策略。
-- 端到端强化学习方法,[图](https://upload-images.jianshu.io/upload_images/1535345-3e1a2d7d80ba70d8.jpeg)
+- [上图](https://upload-images.jianshu.io/upload_images/1535345-3e1a2d7d80ba70d8.jpeg)的模型是一种基于网络的端到端可训练任务导向型对话系统，将对话系统的学习作为学习从对话历史到系统回复的映射问题，并应用encoder-decoder模型来训练。然而，该系统是在监督的方式下进行训练——不仅需要大量的训练数据，而且由于缺乏对训练数据对话控制的进一步探索，它也可能无法找到一个好的策略。
+- 端到端强化学习方法
   - ![](https://upload-images.jianshu.io/upload_images/1535345-afd604658341abf5.png)
-  - 上图的模型首先提出了一种端到端强化学习的方法，在对话管理中联合训练对话状态跟踪和对话策略学习，从而更有力地对系统的动作进行优化。
+  - 上[图](https://upload-images.jianshu.io/upload_images/1535345-3e1a2d7d80ba70d8.jpeg)的模型首先提出了一种端到端强化学习的方法，在对话管理中联合训练对话状态跟踪和对话策略学习，从而更有力地对系统的动作进行优化。
 - 【2021-3-2】微软的[Jianfeng Gao](https://www.microsoft.com/en-us/research/people/jfgao/)，[ConvLab](https://github.com/ConvLab/ConvLab) is an open-source multi-domain end-to-end dialog system platform，aiming to enable researchers to quickly set up experiments with reusable components and compare a large set of different approaches, ranging from conventional pipeline systems to end-to-end neural models, in common environments.
   - 开源的[ConvLab: Multi-Domain End-to-End Dialog System Platform](https://arxiv.org/abs/1904.08637). 
   - ACL 2020 demo track, 清华开源的[ConvLab-2: An Open-Source Toolkit for Building, Evaluating, and Diagnosing Dialogue Systems](https://arxiv.org/abs/2002.04793)，[AMiner地址](https://www.aminer.cn/pub/5e451e433a55acfaed738772/convlab-an-open-source-toolkit-for-building-evaluating-and-diagnosing-dialogue-systems)
@@ -95,10 +95,10 @@ mathjax: true
   - [Deep Reinforcement Learning for Goal-Oriented Dialogues](https://www.microsoft.com/en-us/research/project/deep-reinforcement-learning-goal-oriented-dialogue/#)
     - ![](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/04/composite-dialogue-1024x459.png)
 
-- 【2021-3-15】百分点智能问答主要流程
+- 【2021-3-15】百分点智能问答主要流程,[图](https://image.jiqizhixin.com/uploads/editor/d3dda01e-1926-45fa-9f34-b8d18b617c18/2.png)
   - ![](https://image.jiqizhixin.com/uploads/editor/d3dda01e-1926-45fa-9f34-b8d18b617c18/2.png)
   - 首先进行语音识别，将用户会话识别出来后，经过ASR结果纠错和补全、指代消解、省略恢复等预处理之后，经过敏感词检测，送入中控系统。中控系统是在特定语境下进行意图识别的系统，分为情绪识别、业务意图识别、对话管理、异常处理等四个模块，其中业务意图包括QA问答机器人（**QA** Bot）、基于知识图谱的问答机器人（**KG** Bot），NL2SQL机器人（**DB** Bot），任务型机器人（**TASK** Bot）。对话管理包括多轮对话的对话历史管理、BOT当前询问、会话状态选取等模块。异常处理包括安全话术（对意图结果的结果进行后处理）、会话日志记录、告警等功能。然后，进入话术/指令生成子系统，这是识别问句意图后的对话结果生成，包括话术生成和指令生成两个模块，在话术生成中，对话系统根据对话历史数据和对话模板生成和拼接产生话术，如果是任务型对话，将生成对应指令。另外，辅助系统通过画像分析、用户分析、问题分析等功能，进一步优化问答系统的效果。
-- 智能问答产品典型架构
+- 智能问答产品典型架构,[图](https://image.jiqizhixin.com/uploads/editor/06578b0e-afba-49dd-b46c-0b9dc80855fa/3.png)
   - ![](https://image.jiqizhixin.com/uploads/editor/06578b0e-afba-49dd-b46c-0b9dc80855fa/3.png)
   - 智能问答产品主要包括知识库、对话模型、配置中心、多渠道接入以及后台管理。针对不同的任务划分，准备不同的知识库，例如QA BOT需要引入问答知识对，KG BOT需要知识图谱的支持等等。将针对不同任务的对话模型服务，部署接入各个平台接口，譬如小程序、微信、网页等，提供在线问答服务。配置中心主要提供QA对、闲聊语料、同义词库、特征词库等的可视化配置服务，实现知识配置的快速拓展。后台管理针对智能问答系统实施整体监控、日志管理、告警、权限管理等等，另外，它还提供各种维度的统计分析服务。
 
