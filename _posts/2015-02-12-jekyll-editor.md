@@ -4,7 +4,7 @@ title:  "Jekyll编辑功能汇总"
 date:   2015-02-15 22:14:54
 categories: 技术工具
 excerpt: "jekyll用法汇总" 
-tags: jekyll markdown 插件 github
+tags: jekyll markdown 插件 github gitee 码云
 ---
 
 * content
@@ -522,6 +522,7 @@ landslide readme.md -i -o > slide.html # 转换
 
 - [Jekyll 语法简单笔记](http://github.tiankonguse.com/blog/2014/11/10/jekyll-study.html)
 - 【2018-6-10】[github page jeklly主题](https://github.com/Gaohaoyang/gaohaoyang.github.io/blob/master/README-zh-cn.md)
+- 【2021-4-16】[GitHub Pages 与 Gitee Pages 上的 Jekyll](https://www.cnblogs.com/xjtu-blacksmith/p/jekyll-of-pages.html)
 - 【2019-04-29】[Jeklly主题大全](http://jekyllthemes.org/)
 
 - [Jekyll](https://jekyllrb.com/)中的配置和模板语法
