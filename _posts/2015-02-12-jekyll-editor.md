@@ -101,6 +101,17 @@ print "hello"
 - 用法：像往常一样启动 jekyll (bundle exec jekyll serve)
   - 打开浏览器，通过 http://localhost:4000/admin 访问管理界面
 
+### 页面边距设置
+
+- 【2021-4-16】问题：原版页面的左右边距太大，导致正文区空间受限，不少表格展示不佳，需要改变版面边距设置
+- jekyll页面关系：_includes和 _layouts里的html文件与 _sass里的css样式对应（名字）
+- 方法：修改 _sass/_page.scss文件里，注意注释不能用中文，否则github page会报编码错误
+
+```css
+.page {
+    width: 1400px; // [2021-4-15] original value is 1140
+```
+
 ### 博客内部链接
 
 - 【2021-1-23】

@@ -8,12 +8,12 @@
     *zoom: 1;
 }
 .page {
-    width: 1400px; // [2021-4-15] 调整页面宽度
+    width: 1400px; // [2021-4-15] original value is 1140
     box-sizing: border-box;
     margin: 0 auto;
     // word-break: break-all;
     .left {
-        width: 80%; // 原来是75%
+        width: 80%; //original value is 75%
         float: left;
         padding: 20px 30px;
         line-height: 1.6;
@@ -91,7 +91,7 @@
     }
     .right {
         float: left;
-        width: 20%; // 原来是25%
+        width: 20%; // original value is 25%
         padding-left: 20px;
         top: 0;
         .fixed {
