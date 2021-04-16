@@ -540,13 +540,30 @@ landslide readme.md -i -o > slide.html # 转换
 
 ## Jekyll目录结构
 
+jekyll结构
+
+```s
+|-- _config.yml
+|-- _includes
+|-- _layouts
+|   |-- default.html
+|   `-- post.html
+|-- _posts
+|   |-- 2007-10-29-why-every-programmer-should-play-nethack.textile
+|   `-- 2009-04-26-barcamp-boston-4-roundup.textile
+|-- _site
+`-- index.html
+```
+
+
 - _config.yml 配置文件，最为重要，包含了所有配置信息
   - title: Blog名称
   - subtitle: 副标题
   - description: Blog的描述
   - author: Blog拥有者
 - _includes 文件夹包含了将被反复利用的文件，比如footer，header
-- _layouts 文件夹包含了主页面的排版布局
+  - 可复用的模块，方便通过{ % include file.ext %}（去掉前两个{中或者{与%中的空格，下同）灵活的调用。
+- _layouts 文件夹包含了主页面的排版布局, \{\{ content \}\}标记用来将数据插入到这些模板中来
 - _posts 文件夹将包含所有的日志文件，Markdown格式
 
 将编辑好的markdown文件放到_post目录下,运行命令：
