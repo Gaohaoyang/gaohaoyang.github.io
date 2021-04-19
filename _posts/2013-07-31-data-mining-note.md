@@ -3,7 +3,7 @@ layout: post
 title:  "数据挖掘经验总结-data-mining-note"
 date:   2013-07-31 23:02:00
 categories: 数据挖掘
-tags: 数据挖掘 机器学习 数据分析 陈皓 大数据 增长黑客 数据金字塔 zepplin hadoop hive tez spark storm 服务质量 评分卡
+tags: 数据挖掘 机器学习 数据分析 陈皓 大数据 增长黑客 数据金字塔 zepplin hadoop hive tez spark storm 服务质量 评分卡 clickhouse
 excerpt: 数据挖掘知识点、经验总结
 author: 鹤啸九天
 mathjax: true
@@ -450,6 +450,42 @@ println("Hello "+z.input("name"))
 ### storm
 
 - 待定
+
+
+### clickhouse
+
+- 【2021-4-19】[ClickHouse](https://clickhouse.tech/docs/zh/)是一个用于联机分析(OLAP)的列式数据库管理系统(DBMS)
+- 行式存储: 传统的行式数据库系统中,处于同一行中的数据总是被物理的存储在一起。
+  - 常见的行式数据库系统有：MySQL、Postgres和MS SQL Server。
+  - ![](https://clickhouse.tech/docs/zh/images/row-oriented.gif)
+- 列式存储: 来自不同列的值被单独存储，来自同一列的数据被存储在一起
+  - 常见的列式数据库有： Vertica、 Paraccel (Actian Matrix，Amazon Redshift)、 Sybase IQ、 Exasol、 Infobright、 InfiniDB、 MonetDB (VectorWise， Actian Vector)、 LucidDB、 SAP HANA、 Google Dremel、 Google PowerDrill、 Druid、 kdb+
+  - ![](https://clickhouse.tech/docs/zh/images/column-oriented.gif)
+- 列式数据库更适合于OLAP场景(对于大多数查询而言，处理速度至少提高了100倍)，下面详细解释了原因(通过图片更有利于直观理解)
+- 语法
+  - ck里的SQL语法不太一样，[json用法](https://clickhouse.tech/docs/zh/sql-reference/functions/json-functions/)，hive里的get_json_object → visitParamExtractRaw
+
+```sql
+SELECT
+	room_id, agent_id, pt, action, 
+    visitParamExtractRaw(message, 'phase') as phase,
+    visitParamExtractRaw(visitParamExtractRaw(message, 'session'), 'utterance') as utterance,
+    message
+	--,room_id,get_json_object(message, '$.housedel_id') as housedel_id
+--from spider_ods.spider_ods_swh_log_all_wa
+
+from spider.spider_pm_agent_log_di_all
+WHERE pt = '2021-04-01'
+    AND business_name = 'vr_practice'
+    AND action='3021' -- gds_asr响应, 3010 gds init请求
+    -- AND get_json_object(message, '$.level') = "normal"
+    -- AND city_id='110000'
+  	-- AND room_id = '1800210355'
+    -- AND agent_id = '20091125'
+limit 100
+```
+
+
 
 # [数据的游戏：冰与火](https://coolshell.cn/articles/10192.html)
 
