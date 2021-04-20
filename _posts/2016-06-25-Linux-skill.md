@@ -427,6 +427,10 @@ Git-Flow模式一般有以下分支结构：
 
 注意：对一些已完成的feature分支及hotfix分支进行及时删除。
 
+【2021-4-20】[Git Flow工作流](https://p1.pstatp.com/large/pgc-image/676bee8ded6140ddba8f5d8cb13a90bf)
+
+![](https://p1.pstatp.com/large/pgc-image/676bee8ded6140ddba8f5d8cb13a90bf)
+
 Git-Flow模式的优点
 1. 特性并行开发，效率高，代码独立；
 2. 支持复杂业务、大团队协同开发；
