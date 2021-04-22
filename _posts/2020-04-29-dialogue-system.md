@@ -483,7 +483,7 @@ chatbot:我也是，不过总有一天就会好起来的
   - 基于检索的方法从候选回复中选择回复.检索方法的关键是**消息-回复**匹配，匹配算法必须克服消息和回复之间的语义鸿沟.基于学习的搜索和排序算法在基于检索的对话系统中起着至关重要的作用，基础算法在近几年取得了非常大的进步，基于检索的对话系统展现出非常客观的性能和准确率.在众多非任务型对话中，基于检索的方法输出的结构也常常作为生成对话模型的输入，或者进行平行组合使用.
   - **检索式**对话的基本思路就是将输入和候选输出投射到同一个语义空间中，判断两者是否相似.对于是否相似的计算而言，经典方式是基于独热编码或词袋模型，这是比较传统的表达方式.而当深度学习崛起之后，开始使用表示学习，也就是学习出向量嵌入表示，最后是基于抽象表示的匹配相似度计算.
   - 近年来，有很多模型被提出，如微软的DSSM、CDSSM及相关系列模型；华为诺亚方舟实验室提出的ARC-Ⅰ和ARC-Ⅱ；斯坦福的Tree-LSTM，IBM的ABCNN，Pang等提出的MatchPyramid，Qian等提出的ESIM等.通常，深度匹配模型可以从大类上分为表示型和交互型2种表示型模型，如DSSM等，侧重对表示层的学习和构建，它会在表示层将输入转换成整体表示向量，利用深度网络进行语义表示的加强.这种模型的问题是容易发生语义偏移，上下文信息的重要性难以显式衡量.交互型模型，如ARC-Ⅱ等，这类模型在输入层就进行词语间的先匹配，并将匹配的结果作为灰度图进行后续的计算和建模，能够更精细地处理句子中的联系.它的优势是可以较好地把握语义焦点，对上下文重要性合理建模.近年来，基于检索的架构在工业界的实践和应用得到了快速的发展.
-  - 检索知识库的过程中，最重要的是如何找到与输入语义等价的问句,常用的相似度算法包括: 余弦相似度、编辑距离、关键词重合度、BM25等等，实际使用中是有用，但仍然不够，因为可能遇到如下问题：①字面相似的句子语义不等价②字面不相似的句子语义等价，如“什么是新冠肺炎”和“解释下新冠肺炎的定义”是语义等价，但和“什么是支气管肺炎”却不是语义等价的，采用编辑距离之类的算法是无法识别的。
+  - 检索知识库的过程中，最重要的是如何找到与输入语义等价的问句,常用的相似度算法包括: 余弦相似度、编辑距离、关键词重合度、BM25等等，实际使用中是有用，但仍然不够，因为可能遇到如下问题：①字面相似的句子语义不等价②字面不相似的句子语义等价，如“什么是新冠肺炎”和“解释下新冠肺炎的定义”是语义等价，但和“什么是支气管肺炎”却不是语义等价的，采用编辑距离之类的算法是无法识别的。[图](https://image.jiqizhixin.com/uploads/editor/39ffcdcd-1766-496e-9e98-94ad4eab7c85/5.png)
     - ![](https://image.jiqizhixin.com/uploads/editor/39ffcdcd-1766-496e-9e98-94ad4eab7c85/5.png)
   - 因而，只有基于语义理解的模型才能识别出来，这里包括两类，一是传统机器学习方法，二是深度迁移学习方法。
     - 基于BERT和BIMPM的语义等价模型方案,BIMPM本身是十分经典的模型，底层是通过word2vec向量来进行语义匹配计算，这里我们将word2vec词向量全部替换为BERT的最上面若干层的输出，并将原有模型中的BI-LSTM结构，替换为Transformer，以提高其在序列性上的表现，实际测试中，该模型在Quora和SLNI数据集中达到了state-of-the-art的效果，[图](https://image.jiqizhixin.com/uploads/editor/c985af05-2486-4455-bc73-7f12daee9c0d/6.png)
@@ -524,7 +524,7 @@ chatbot:我也是，不过总有一天就会好起来的
   - 任务型对话系统的语言理解部分，通常使用语义槽来表示用户的需求，如出发地、到达地、出发时间等信息。 
 - ②作为意图识别的**关键字**
 - ③作为下一步对话的**提示信息**
-  - 填槽的意义有两个：作条件分支多轮对话、作信息补全用户意图。填槽不仅是补全用户意图的方式，而且前序槽位的填写还会起到指导后续信息补全走向的作用。
+  - 填槽的意义有两个：作条件分支多轮对话、作信息补全用户意图。填槽不仅是补全用户意图的方式，而且前序槽位的填写还会起到指导后续信息补全走向的作用。[图](https://upload-images.jianshu.io/upload_images/1060404-6f96e93a05bcc9ca.png)
 - ![](https://upload-images.jianshu.io/upload_images/1060404-6f96e93a05bcc9ca.png)
 
 【基本概念】
@@ -545,8 +545,8 @@ chatbot:我也是，不过总有一天就会好起来的
     - 依赖槽，后续的槽是否依赖前面槽的结果，例如手机号码槽，不同国家手机号码格式不同（槽的属性不同），所以国家槽会影响选择哪个手机号码槽。
 - 准入条件：从一个开放域转入到封闭域，或者从一个封闭域转入到另一个封闭域，中间的跳转是需要逻辑判断的，而这个逻辑判断就是准入条件。
 - 封闭域对话：封闭域对话是指识别用户意图后，为了明确用户目的（或者称为明确任务细节）而进行的对话
-- 澄清话术：当用户的需求中缺乏一些必要条件时，需要对话系统主动发问，把必要条件全部集齐之后再去做最终的满足执行。
-- ![](https://upload-images.jianshu.io/upload_images/1060404-8b1f274ac179571c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700)
+- 澄清话术：当用户的需求中缺乏一些必要条件时，需要对话系统主动发问，把必要条件全部集齐之后再去做最终的满足执行。[图](https://upload-images.jianshu.io/upload_images/1060404-8b1f274ac179571c.png)
+- ![](https://upload-images.jianshu.io/upload_images/1060404-8b1f274ac179571c.png)
 - BIO的解释
   - “B-X”表示此元素所在的片段属于X类型并且此元素在此片段的开头。
   - “I-X”表示此元素所在的片段属于X类型并且此元素在此片段的中间位置。
@@ -992,16 +992,16 @@ Sebastian将QA的研究分为了5个阶段。
 
 ### KB-QA
 
-- 【2020-4-22】[KB-QA研究进展](https://www.jianshu.com/p/92ea00b7a4cc)
+- 【2020-4-22】[KB-QA研究进展](https://www.jianshu.com/p/92ea00b7a4cc)，[图](https://upload-images.jianshu.io/upload_images/9298309-c4a3c66f7965460e.png)
 - ![](https://upload-images.jianshu.io/upload_images/9298309-c4a3c66f7965460e.png)
 
 - [美团智能问答技术探索与实践](https://mp.weixin.qq.com/s?__biz=MzU1NTMyOTI4Mw==&mid=2247517833&idx=1&sn=0cb67429fa434d3dcd5afd6167754313&chksm=fbd734e5cca0bdf3f0cf43b588153d8117dec25d130240dcb9c42d5219cd94b972e463b55063&mpshare=1&scene=1&srcid=1221TKOk0XWVMxG3wT9wowUP&sharer_sharetime=1610600327445&sharer_shareid=b8d409494a5439418f4a89712efcd92a&version=3.1.0.6189&platform=mac#rd)
 - KBQA是一种基于知识图谱的问答技术，其主要任务是将自然语言问题 ( NLQ ) 通过不同方法映射到结构化的查询，并在知识图谱中获取答案。相比非结构化文本问答方法利用图谱丰富的语义关联信息，能够深入理解用户问题、解决更多复杂推理类问题。
 - 主流的KBQA解决方案包括基于**查询图**方法 ( Semantic Parser )、基于**搜索排序**方法 ( Information Retrieval )。
   - 查询图方案核心思路就是将自然语言问题经过一些语义分析方式转化成中间的语义表示 ( Logical Forms )，然后再将其转化为可以在 KG 中执行的描述性语言 ( 如 SPARQL 语言 ) 在图谱中查询，这种方式优势就是可解释强，符合知识图谱的显示推理过程。
-  - 搜索排序方案首先会确定用户Query中的实体提及词 ( Entity Mention )，然后链接到 KG 中的主题实体 ( Topic Entity )，并将与Topic Entity相关的子图 ( Subgraph ) 提取出来作为候选答案集合，通过对Query以及Subgraph进行向量表示并映射到同一向量空间，通过两者相似度排序得到答案。这类方法更偏向于端到端的解决问题，但在扩展性和可解释性上不如查询图方案。
+  - 搜索排序方案首先会确定用户Query中的实体提及词 ( Entity Mention )，然后链接到 KG 中的主题实体 ( Topic Entity )，并将与Topic Entity相关的子图 ( Subgraph ) 提取出来作为候选答案集合，通过对Query以及Subgraph进行向量表示并映射到同一向量空间，通过两者相似度排序得到答案。这类方法更偏向于端到端的解决问题，但在扩展性和可解释性上不如查询图方案。[图](https://pics6.baidu.com/feed/0b46f21fbe096b6339fce93323c74143e9f8acec.png)
 - ![](https://pics6.baidu.com/feed/0b46f21fbe096b6339fce93323c74143e9f8acec.png)
-- kbqa核心技术
+- kbqa核心技术，[图](https://pics2.baidu.com/feed/faf2b2119313b07e6a33a9513823572495dd8cdd.png)
   - ![](https://pics2.baidu.com/feed/faf2b2119313b07e6a33a9513823572495dd8cdd.png)
 - 在知识图谱建模的领域，有一种称为`SPARQL`的语言，类似关系数据库查询的SQL语言，
 - 例如我们要查询 **(中国，有首都，北京)** 中的北京，则SPARQL可以写为：
@@ -1105,14 +1105,14 @@ Select ?x where {
   - CRSs 的一项重要功能，是实时地向用户进行提问，以获得用户的动态偏好。这其中，各式方法可以分为两个类。一是询问商品，即收集用户对推荐商品本身的喜好；二是询问用户对商品属性的偏好，例如“你喜欢摇滚类的音乐吗？”一个基于路径推理的 CRS 示意图如下。原文表 1 总结了各种 CRSs 的工作原理。更多细节请看原文。
   - ![](https://mmbiz.qpic.cn/mmbiz_png/VBcD02jFhgm9w1VoxeIibn2DpNOWcknnzMwqCj4v4Wd2mXEOALoWSAeSwyR4srhQMgF5GHuteLic9tPw4YnoGs7Q/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
 - （2）多轮对话**推荐策略**
-  - CRSs 的一个核心任务是关注**如何问问题**，即什么时候问问题，什么时候做推荐。本文总结了几种模式，包括“**问一轮推一轮**”、“**问 X 轮推一轮**”，“**问 X 轮推 Y 轮**”几种方式。其中 X 和 Y 可固定或由模型决定。图 3 给出了一个“问 X 轮推 Y 轮”的 CRS 模型示意图。
+  - CRSs 的一个核心任务是关注**如何问问题**，即什么时候问问题，什么时候做推荐。本文总结了几种模式，包括“**问一轮推一轮**”、“**问 X 轮推一轮**”，“**问 X 轮推 Y 轮**”几种方式。其中 X 和 Y 可固定或由模型决定。图 3 给出了一个“问 X 轮推 Y 轮”的 CRS 模型示意图。[图](https://mmbiz.qpic.cn/mmbiz_png/VBcD02jFhgm9w1VoxeIibn2DpNOWcknnzw51KJAwDxAp7MEUnWQD9ibKIQu9GWlMicjYiaSicibia0GcNLK2TKqmetSew/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
     - ![](https://mmbiz.qpic.cn/mmbiz_png/VBcD02jFhgm9w1VoxeIibn2DpNOWcknnzw51KJAwDxAp7MEUnWQD9ibKIQu9GWlMicjYiaSicibia0GcNLK2TKqmetSew/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
   - 除了提问以外，CRSs 也可考虑其他多轮对话策略，如加入闲聊以增加趣味，或者加入说服，协商等多样化的功能以进一步引导对话。原文表 2 总结了 CRSs 的多轮对话策略。
 - （3）自然语言**理解及生成**
   - 处理用户多样化的输入以及灵活的输出，也是 CRSs 中的一大挑战。目前的 CRSs 多数还是以基于提前标注的输入以及基于模版的输出为主，少数 CRSs 以对话系统的模式出发来考虑直接处理自然语言和生成自然语言。这是因为 CRSs 的主要目标还是保证推荐的质量，而非语言处理能力。原文表三总结了两个分类下的部分工作。
 - （4）**探索与深究**之间的权衡
   - 探索与深究是推荐系统中一个重要的研究方向，也是处理冷启动用户的一个有效手段。探索意味着去让用户尝试以往没有选择过的商品，而深究则是利用用户之前的喜好继续推荐。前者冒着用户可能不喜欢的风险，但能探索到用户一些额外的喜好；后者则安全保险，但一直陷入在已知的局部偏好中，不去改变。
-  - 这就如同经典的**多臂老虎机**问题（Multi-armed Bandit, MAB），如图 4，一个赌徒可以选择多个老虎机的摇杆进行下拉。每个摇杆  下拉后的收益期望 μ 是可以根据多次实验估计出来的，但由于实验次数有限，对收益的估计存在不确定性  。若要追求全局最优点，便需要从尝试新摇杆（Exploration）与选择目前已知的高收益摇杆（Exploitation）这两者中不断交替权衡，从而达到长期的高收益。 
+  - 这就如同经典的**多臂老虎机**问题（Multi-armed Bandit, MAB），如图 4，一个赌徒可以选择多个老虎机的摇杆进行下拉。每个摇杆  下拉后的收益期望 μ 是可以根据多次实验估计出来的，但由于实验次数有限，对收益的估计存在不确定性  。若要追求全局最优点，便需要从尝试新摇杆（Exploration）与选择目前已知的高收益摇杆（Exploitation）这两者中不断交替权衡，从而达到长期的高收益。 [图](https://mmbiz.qpic.cn/mmbiz_png/VBcD02jFhgm9w1VoxeIibn2DpNOWcknnzyLicuicfEMbQRA7RLPSCWdjoeIU7HXzMz5JsyqQ4tGiaojYLcdF5VicWYQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
   - ![](https://mmbiz.qpic.cn/mmbiz_png/VBcD02jFhgm9w1VoxeIibn2DpNOWcknnzyLicuicfEMbQRA7RLPSCWdjoeIU7HXzMz5JsyqQ4tGiaojYLcdF5VicWYQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
   - 由于 CRSs 和交互式推荐系统一样，都可以实时地获得用户的反馈，于是 MAB 问题以及一系列解决方法都可以应用在 CRSs 与交互式推荐中。此外，除了经典的 MAB 算法，Meta learning 的方法也可以应用在 CRSs 中来解决冷启动或者 EE 问题。原文表 4 中列举了一些工作。
 - （5）模型**评测**和**用户模拟**
@@ -1501,24 +1501,24 @@ Unsupervised Evaluation Metrics for Dialogue Response Generation](https://arxiv.
 - 【2020-7-4】开域聊天机器人技术介绍——未来篇（[上](https://mp.weixin.qq.com/s?__biz=MzI1NTMxOTUwOA==&mid=2247485263&idx=1&sn=3be60ccf90324d8f267222a1efb17792&chksm=ea368bf4dd4102e24ae94133abea1d10a70daef753105e6bac7e026bc1adad0506d8ad867dc7&scene=21#wechat_redirect),[下](https://mp.weixin.qq.com/s/czPDx8YNoZseC0EisKZVpQ)）
 - 更多[Demo地址](http://wqw547243068.github.io/demo)
 
-- 【2021-1-28】[微软团队：首次公开小冰系统设计，迄今最详细](https://www.huxiu.com/article/278885.html)
-  - IQ和EQ的结合是小冰系统设计的核心。小冰的个性也是独一无二的。
-  - IQ 能力包括知识和记忆建模、图像和自然语言理解、推理、生成和预测
-  - EQ有两个关键组成部分：同理心和社交技巧。xs
-- 微软小冰框架
-  - 小冰的总体架构如图4所示。它由3个层组成：用户体验、对话引擎和数据。
-    - 用户体验层：该层将小冰连接到流行的聊天平台(如微信、QQ)，并以两种模式与用户交流：全双工模式和轮流对话模式。该层还包括一组用于处理用户输入和小冰响应的组件，如语音识别和合成、图像理解和文本规范化。
-    - 对话引擎层：由对话管理器、移情计算模块、核心聊天和对话技能组成。
-      - 对话引擎层主要包括四大组件：对话管理器、移情计算(empathetic computing)、Core Chat和技巧。
-        - 对话管理器是对话系统的中央控制器。它由全局状态跟踪器(Global State Tracker)和对话策略(Dialogue Policy)组成。 该操作可以是顶级策略激活的技巧或Core Chat。
-        - 全局状态跟踪器通过一个工作内存(working memory)来跟踪对话状态。工作内存在每个会话开始时是空的，然后在每个对话中将用户和小冰的对话以及根据移情计算模块从文本中检测到的实体和移情标签，用文本字符串的形式来进行存储。
-        - 移情计算，小冰使用分层策略：
-          - ⑴顶级策略通过在每个对话轮次中选择Core Chat或基于对话状态激活的技能来管理整个会话; 
-          - ⑵一组低级策略，每个策略对应一种技能，用于管理其会话段。
-          - 对话策略旨在通过基于XiaoIce用户反馈的迭代、反复试验和错误过程来优化长期用户参与。
-        - 话题管理器模拟人类在对话期间更改话题的行为。它由一个分类器和一个话题检索引擎组成，分类器用于在每个对话回合决定是否切换话题。如果小冰对话题没有足够的了解，无法进行有意义的对话，或者用户感到厌烦，就会引发话题切换。
-    - 数据层：由一组数据库组成，这些数据库存储收集到的人类会话数据(文本对或文本图像对)、用于核心会话和技能的非会话数据和知识图，以及小冰和所有注册用户的个人档案。
-  - ![](https://img.huxiucdn.com/article/content/201812/28/162450034922.jpg?imageView2/2/w/1000/format/jpg/interlace/1/q/85)
+【2021-1-28】[微软团队：首次公开小冰系统设计，迄今最详细](https://www.huxiu.com/article/278885.html)
+- IQ和EQ的结合是小冰系统设计的核心。小冰的个性也是独一无二的。
+- IQ 能力包括知识和记忆建模、图像和自然语言理解、推理、生成和预测
+- EQ有两个关键组成部分：同理心和社交技巧。xs
+
+微软小冰框架，小冰的总体架构如图4所示。它由3个层组成：用户体验、对话引擎和数据。
+- ①**用户体验层**：该层将小冰连接到流行的聊天平台(如微信、QQ)，并以两种模式与用户交流：全双工模式和轮流对话模式。该层还包括一组用于处理用户输入和小冰响应的组件，如语音识别和合成、图像理解和文本规范化。
+- ②**对话引擎层**：由对话管理器、移情计算模块、核心聊天和对话技能组成。
+  - 对话引擎层主要包括四大组件：对话管理器、移情计算(empathetic computing)、Core Chat和技巧。
+    - 对话管理器是对话系统的中央控制器。它由全局状态跟踪器(Global State Tracker)和对话策略(Dialogue Policy)组成。 该操作可以是顶级策略激活的技巧或Core Chat。
+    - 全局状态跟踪器通过一个工作内存(working memory)来跟踪对话状态。工作内存在每个会话开始时是空的，然后在每个对话中将用户和小冰的对话以及根据移情计算模块从文本中检测到的实体和移情标签，用文本字符串的形式来进行存储。
+    - 移情计算，小冰使用分层策略：
+      - ⑴顶级策略通过在每个对话轮次中选择Core Chat或基于对话状态激活的技能来管理整个会话; 
+      - ⑵一组低级策略，每个策略对应一种技能，用于管理其会话段。
+      - 对话策略旨在通过基于XiaoIce用户反馈的迭代、反复试验和错误过程来优化长期用户参与。
+    - 话题管理器模拟人类在对话期间更改话题的行为。它由一个分类器和一个话题检索引擎组成，分类器用于在每个对话回合决定是否切换话题。如果小冰对话题没有足够的了解，无法进行有意义的对话，或者用户感到厌烦，就会引发话题切换。
+- ③**数据层**：由一组数据库组成，这些数据库存储收集到的人类会话数据(文本对或文本图像对)、用于核心会话和技能的非会话数据和知识图，以及小冰和所有注册用户的个人档案。
+- ![](https://img.huxiucdn.com/article/content/201812/28/162450034922.jpg?imageView2/2/w/1000/format/jpg/interlace/1/q/85)
   
 
 ### 聊天机器人
@@ -1556,13 +1556,13 @@ Unsupervised Evaluation Metrics for Dialogue Response Generation](https://arxiv.
 - [Chatopera 多轮对话设计器:实现天气查询机器人的过程](http://www.ctiforum.com/news/guandian/540278.html)
 - [基于金融-司法领域(兼有闲聊性质)的聊天机器人](https://mp.weixin.qq.com/s/ziM0U-KEePjZLNMhK5PVXA)
 
-- [AI 中台——智能聊天机器人平台的架构与应用|分享实录（附视频）](https://mp.weixin.qq.com/s/c5uXsPIwFzoMwqmG2-JUPg)
+- [AI 中台——智能聊天机器人平台的架构与应用-分享实录（附视频）](https://mp.weixin.qq.com/s/c5uXsPIwFzoMwqmG2-JUPg)
 
 - [基于 CNN 和序列标注的对联机器人：附数据集 & 开源代码](https://mp.weixin.qq.com/s/wH8nFwaDryrjBn1y-e-QdQ)
 - [深度长文：NLP 的巨人肩膀（上）](https://mp.weixin.qq.com/s/Rd3-ypRYiJObi-e2JDeOjQ)
 - [问答系统冠军之路：用 CNN 做问答任务的 QANet](https://mp.weixin.qq.com/s/Xc4kh3y-wHfyVt0-BL1RBQ)
 - [竹间智能 CTO 翁嘉颀：如何打造主动式对话机器人：吃瓜笔记](https://mp.weixin.qq.com/s/HWWkzgv5b5TvG-ySkTy3eQ)，含视频讲解
-  - chatbot演变历程，siri的智商低，相当于两岁的小朋友，只有小孩能聊下去
+  - chatbot演变历程，siri的智商低，相当于两岁的小朋友，只有小孩能聊下去，[图](https://mmbiz.qpic.cn/mmbiz_png/YicUhk5aAGtBLelmPzmdJ4AuDTFfOyqBLUWHI4lPCjJuzYuHOjTzTkrrRWtY1WayYhtppC50wLZ1oVmiaCeamzow/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
   - ![](https://mmbiz.qpic.cn/mmbiz_png/YicUhk5aAGtBLelmPzmdJ4AuDTFfOyqBLUWHI4lPCjJuzYuHOjTzTkrrRWtY1WayYhtppC50wLZ1oVmiaCeamzow/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
 - [聊天机器人“进化论”:从陪你聊到懂你心](https://mp.weixin.qq.com/s/p2hhJ2u7y6JRzhoh7BRC2A)
 - [研学·产品设计：Chatbot 的人格很重要吗？](https://mp.weixin.qq.com/s/ZotAU1q7-54zJ1-3V6G-NQ)
