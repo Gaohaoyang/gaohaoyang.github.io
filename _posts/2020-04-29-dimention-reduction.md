@@ -2,7 +2,7 @@
 layout: post
 title:  "流形学习&降维-Manifold Learning&Dimention Reduction"
 date:   2020-04-29 14:21:00
-categories: 深度学习
+categories: 机器学习
 tags: 深度学习 流形学习 降维 无监督学习 维数灾难 embedding
 excerpt: 机器学习无监督学习中的降维技术，线性（pca/lda），非线性（t-sne/isomap/mds），及背后的流形学习原理
 author: 鹤啸九天
