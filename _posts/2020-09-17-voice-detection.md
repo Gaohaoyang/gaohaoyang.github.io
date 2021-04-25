@@ -21,7 +21,7 @@ mathjax: true
   - 面部表情迁移：吴京+甄子丹 [微博示例](https://video.weibo.com/show?fid=1034:4609199536013325)
   - 百度地图等APP里说二十句话，生成自己音色的导航语音包的功能，就是个典型的音色克隆。
 - 【2021-3-31】[霍金简史：英特尔如何让他发声](https://www.leiphone.com/news/201501/Axq8grdarUb6iZ84.html)，2012年，专家们开始了正式的大规模改造。成果就是英特尔刚刚公布的针对残障人士开发的交互系统工具包ACAT(Assistive Context Aware Toolkit，辅助情境感知工具包)。2015年，[英特尔开源霍金的语音系统 ACAT](https://www.oschina.net/news/65333/intel-opensource-acat),（Stephen Hawking）的语音系统 Assistive Context-Aware Toolkit (ACAT) ，[代码地址](https://github.com/01org/acat)
-
+- 【2021-4-25】[标贝科技](https://www.data-baker.com/)，包含风格化tts，体验地址：[标贝悦读](https://yuedu.data-baker.com/#/)
 
 ## 业界音箱产品评测
 
