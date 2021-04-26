@@ -214,6 +214,7 @@ mathjax: true
 
 
 ## 互联网分层架构
+
 - 【2020-12-02】沈剑
     - [互联网分层架构的本质](https://blog.csdn.net/wuhenyouyuyouyu/article/details/80687483)是数据移动，[出处](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651960455&idx=1&sn=02cb2345ae9862edad11113726c49512&chksm=bd2d015b8a5a884d9619cdf7ae0dc1a480979a95abb24bac2645cecd54caec4c6bdb3aa617d7&scene=21#wechat_redirect)
     - 为什么说，MapReduce，颠覆了互联网分层架构的本质？
@@ -351,6 +352,17 @@ mathjax: true
     - ![](https://img2018.cnblogs.com/blog/594801/201910/594801-20191029105052405-1022058048.png)
 
 
+## 状态码
+
+【2021-4-26】HTTP[状态码说明](http://restful.p2hp.com/resources/http-status-codes)，HTTP定义了四十个标准状态代码，可用于传达客户端请求的结果。状态代码分为以下五个类别
+
+| 类别 |	要点 | 描述|
+|---|---|---|
+|1xx|信息|	通信传输协议级信息|
+|2xx|成功	|表示客户端的请求已成功接受|
+|3xx|重定向|	表示客户端必须执行一些其他操作才能完成其请求|
+|4xx|客户端错误|	此类错误状态代码指向客户端|
+|5xx|服务器错误|	服务器负责这些错误状态代码|
 
 # API
 
