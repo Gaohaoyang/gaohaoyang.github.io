@@ -3,7 +3,7 @@ layout: post
 title:  "互联网资讯-Internet News"
 date:   2020-01-16 22:30:00
 categories: 互联网
-tags: 互联网 BAT TMD 陆奇 朱松纯 张一鸣 平安科技 在线教育
+tags: 互联网 BAT TMD 陆奇 朱松纯 张一鸣 平安科技 在线教育 谷歌
 excerpt: 互联网行业资讯及各大厂信息汇总
 author: 鹤啸九天
 mathjax: true
@@ -916,6 +916,38 @@ mathjax: true
 
 因为未上市或已退市，及本人漏记的互联网公司包括：
 >蚂蚁金服、字节跳动、滴滴、斗鱼、快手、蘑菇街、盛大、昆仑万维、多益、易车网、4399、游族网络、慧聪网、当当、世纪佳缘等。
+
+# 国外互联网公司
+
+
+## 谷歌Google
+
+[ForTest](https://www.zhihu.com/question/24290336/answer/1852091010)
+
+吹 Google 的这么多，这里泼点冷水（自己 14-17 年在 Google，个人观感）
+
+### Good parts
+
+- 强悍的内部工具：Critique 代码 review，Code Search 代码搜索，Cider 云端代码编辑器，Blaze 云端编译构建，Rapid 持续集成等等，业界内部工具最强，没有之一
+- 单一代码库（大公司似乎只有 FB 和 Google 做到 Single Repro），学习代码（复制粘贴）无比方便
+- 很多 senior eng（这里的 senior 不是 level 而是水准），可以从 senior eng 的 doc/互怼/design 中学到很多东西
+- 有国内 office（北京/上海），不用担心签证被 check 滞留国内
+- 对 low performer 相对友好，你可以在 E3 待一辈子也不会被开掉
+
+### Bad parts
+
+- 职位晋升慢，promo committee 极度低效，即便是 junior eng 升职也需要写大量的吹逼文案（据说 18 年后有改进）我在 Google 见过大量做 10 多年还是 E3/E4 的老油条，人都快废了
+- 内部级别人人可见，相当的 senior eng（这里是 level 不是水准）对 junior eng 不友好，code review 过于吹毛求疵（我曾经因为 colour 写成 color 被怼你能想象么）
+- 产品迭代速度慢，p 大的 feature 需要层层 review（这里和 org 相关，特指 ads），新人如果进错组可能一年都写不出来什么东西
+- refresher 股票少，你能想象 Google 的 E5 和 FB 的 E4 到手工资差不多么
+- 食堂极差（US 总部），除非你喜欢天天吃白水鸡
+- Manager 大多不靠谱，不少 Manager 是从 tech track 上转过来，根本不知道怎么帮新人做 career growth，1:1 基本都是扯淡。加上 Google 没有 FB 对升职的年限要求，雪上加霜
+
+总之：G
+- oogle Infra 很强悍，但和你没啥关系
+- 不推荐新人去 Google，除非你佛系受得了 5 年 10 年不升职
+- 不推荐去 Google 做产品，除非你已经是大佬
+- 对于 Google 吹不要太当真，新人入职都会有种错觉公司牛逼仿佛自己也牛逼了起来
 
 # 创业
 
