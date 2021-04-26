@@ -3,7 +3,7 @@ layout: post
 title:  "语音识别-Voice Detection"
 date:   2020-09-17 19:43:00
 categories: 深度学习
-tags: 语音识别 NLP ASR TTS 情感计算 声纹识别 说话人识别
+tags: 语音识别 NLP ASR TTS 情感计算 声纹识别 说话人识别  直播 webrtc
 excerpt: 语音识别技术笔记
 author: 鹤啸九天
 mathjax: true
@@ -22,6 +22,10 @@ mathjax: true
   - 百度地图等APP里说二十句话，生成自己音色的导航语音包的功能，就是个典型的音色克隆。
 - 【2021-3-31】[霍金简史：英特尔如何让他发声](https://www.leiphone.com/news/201501/Axq8grdarUb6iZ84.html)，2012年，专家们开始了正式的大规模改造。成果就是英特尔刚刚公布的针对残障人士开发的交互系统工具包ACAT(Assistive Context Aware Toolkit，辅助情境感知工具包)。2015年，[英特尔开源霍金的语音系统 ACAT](https://www.oschina.net/news/65333/intel-opensource-acat),（Stephen Hawking）的语音系统 Assistive Context-Aware Toolkit (ACAT) ，[代码地址](https://github.com/01org/acat)
 - 【2021-4-25】[标贝科技](https://www.data-baker.com/)，包含风格化tts，体验地址：[标贝悦读](https://yuedu.data-baker.com/#/)
+- 【2021-4-26】[淘系音视频技术的演进之路](http://www.toutiao.com/i6954603729932878350/),2016年被称为直播元年，淘宝直播也是在2016年开始了自己的业务
+  - 淘系内容业务发展史
+  - 音视频技术趋势以及淘系技术相关布局
+  - 淘系音视频领域若干技术进展
 
 ## 业界音箱产品评测
 
