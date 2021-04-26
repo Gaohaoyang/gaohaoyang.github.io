@@ -548,6 +548,8 @@ mathjax: true
       - 另外，更高级别的人（>P8）人数少，收入会相当依赖股票（超过一半），他们的收入范围很大，会比较难以量化，故没有列入。
 ![](https://pic4.zhimg.com/80/v2-735d740a1bed2899bc10bc68424c4a2b_720w.jpg)
 
+- 【2020-7-15】大厂职级对应关系, [阿里、腾讯、字节，员工职级是如何对应的](https://zhuanlan.zhihu.com/p/159940779?ivk_sa=1024320u)
+![](https://pic4.zhimg.com/80/v2-2829edce6aed0ad09500a1a4ce74baeb_1440w.jpg)
 
 ## 阿里
 
