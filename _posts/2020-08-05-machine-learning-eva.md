@@ -3,7 +3,7 @@ layout: post
 title:  "机器学习模型评估方法-The-Evaluation-of-Machine Learning"
 date:   2020-08-05 14:56:00
 categories: 机器学习
-tags: 机器学习 AUC PR 混淆矩阵 NCE 评分卡 评价 KL散度 风控 互联网金融
+tags: 机器学习 AUC PR 混淆矩阵 NCE 评分卡 评价 KL散度 风控 互联网金融 交叉熵
 author : 鹤啸九天
 excerpt: 机器学习项目开始前的核心问题：如何设置指标，评价模型效果？
 mathjax: true
@@ -11,6 +11,24 @@ mathjax: true
 
 * content
 {:toc}
+
+# 总结
+
+
+## 回归MSE/分类CE？
+
+回归、分类的损失函数：
+- 回归问题常用mse作为损失函数，隐含的预设是数据误差符合高斯分布。
+- 交叉熵则是以数据分布服从多项式分布为前提。
+
+回归问题能用交叉熵吗
+- 可以，虽然交叉熵用在回归问题看起来有些越俎代庖，「狗拿耗子多管闲事」，但「黑猫白猫能捉老鼠就是好猫」，搞清楚数据特点、使用场景，loss选择就能更贴合实际，最终的效果才是硬道理。
+
+本质上回归应该**用什么样的损失函数取决于数据分布**。损失函数的选择本身也是一种先验偏好，选择mse意味着你认为数据误差符合高斯分布，选择交叉熵则表示你倾向于认为数据接近多项式分布。如果你的先验直觉比较准确，符合实际情况，那模型效果应该会更好一些。 多项式分布一般和离散数据相关，但如果连续数据分桶后接近多项式分布，那选用mse可能就不合时宜了。
+
+本质上，损失函数的选择是取决于对数据分布的假设，不同的loss形式隐式地有对数据分布的要求，需要仔细分析数据特点进行判断。至于为什么A分布对应甲损失函数，B分布却对应乙损失函数，这也是一个值得展开的话题，简单来说这是最大熵原理约束下的选择。如对于高斯噪音分布，选择mse是满足最大熵要求的，它没有在高斯分布的假设之外增加额外的先验偏好。
+
+[知乎](https://zhuanlan.zhihu.com/p/362496849)
 
 
 # 分类
@@ -304,18 +322,18 @@ AUC越大表示模型区分正例和负例的能力越强，那么AUC要达到�
 
 - 【2021-3-21】[深入浅出评分卡的逻辑回归原理](https://zhuanlan.zhihu.com/p/104599677)
 - 信贷评分卡的建模过程中，使用最多的算法就是逻辑回归（logistics regression）函数。下面，我们将围绕下面几点详细地讲述逻辑回归的数学来源和业务用途：
-    - 什么是逻辑回归函数?
-      - ![](https://pic1.zhimg.com/80/v2-036cc92debe28b75c8d4f5d093a9a8e0_1440w.jpg)
-    - 为什么评分卡要使用逻辑回归函数？
-    - 经济意义下逻辑回归函数的由来？（从金融角度揭示）
-    - 怎么产生标准评分卡？（评分卡分数的线性转换）
-      - 模型最终的产出还得是分数，上述的 s(x) 为对数比率分数，想要转化为千分制的分数还必须进行分数线性转化：![](https://www.zhihu.com/equation?tex=S_%7Bscale%7D%3Da%2Bb%2AS_%7BlogOdds%7D)
-      - 以下2个假设用于定义分数刻度：
-        - log 比率为 1:1的时候，分数为500分；![](https://www.zhihu.com/equation?tex=500%3Da%2Bb%2Aln%281%29)
-        - 好坏比（odds)每增加一倍，分数增加20分。![](https://www.zhihu.com/equation?tex=520%3Da%2Bb%2Aln%282%29)
-      - 解出![](https://www.zhihu.com/equation?tex=a%3D500%2Cb%3D20%2Fln2)，所以![](https://www.zhihu.com/equation?tex=S_%7Bscale%7D%3D500%2B%2820%2Fln2%29%2AS_%7BlogOdds%7D)![](https://www.zhihu.com/equation?tex=%5CRightarrow+S_%7Bscale%7D%3D500%2B%2820%2Fln2%29%2A%28a%2B%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%7Bw%28x_%7Bi%7D%29%7D%29%3D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%7B%5Cfrac%7B500%7D%7Bn%7D%2B%5Cfrac%7B20%7D%7Bln2%7Dw%28x_%7Bi%7D%29%7D)
-      - 分数输出: 经过特征筛选、证据权重的计算、系数的回归，对每个特征分组都计算出一个分数，得出如下标准评分卡格式
-    - 逻辑回归-标准评分卡的实操。
+  - 什么是逻辑回归函数?
+    - ![](https://pic1.zhimg.com/80/v2-036cc92debe28b75c8d4f5d093a9a8e0_1440w.jpg)
+  - 为什么评分卡要使用逻辑回归函数？
+  - 经济意义下逻辑回归函数的由来？（从金融角度揭示）
+  - 怎么产生标准评分卡？（评分卡分数的线性转换）
+    - 模型最终的产出还得是分数，上述的 s(x) 为对数比率分数，想要转化为千分制的分数还必须进行分数线性转化：![](https://www.zhihu.com/equation?tex=S_%7Bscale%7D%3Da%2Bb%2AS_%7BlogOdds%7D)
+    - 以下2个假设用于定义分数刻度：
+      - log 比率为 1:1的时候，分数为500分；![](https://www.zhihu.com/equation?tex=500%3Da%2Bb%2Aln%281%29)
+      - 好坏比（odds)每增加一倍，分数增加20分。![](https://www.zhihu.com/equation?tex=520%3Da%2Bb%2Aln%282%29)
+    - 解出![](https://www.zhihu.com/equation?tex=a%3D500%2Cb%3D20%2Fln2)，所以![](https://www.zhihu.com/equation?tex=S_%7Bscale%7D%3D500%2B%2820%2Fln2%29%2AS_%7BlogOdds%7D)![](https://www.zhihu.com/equation?tex=%5CRightarrow+S_%7Bscale%7D%3D500%2B%2820%2Fln2%29%2A%28a%2B%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%7Bw%28x_%7Bi%7D%29%7D%29%3D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%7B%5Cfrac%7B500%7D%7Bn%7D%2B%5Cfrac%7B20%7D%7Bln2%7Dw%28x_%7Bi%7D%29%7D)
+    - 分数输出: 经过特征筛选、证据权重的计算、系数的回归，对每个特征分组都计算出一个分数，得出如下标准评分卡格式
+  - 逻辑回归-标准评分卡的实操。
 - 银行决定是否给个人或企业贷款的关键因素是对未来违约概率的预测，逻辑回归函数能提供此技术支持。假设某银行挑选了 n 个特征进入评分卡给客户进行准入评分，且这 n 个特征包含了能判断客户是好还是坏的充分信息![](https://www.zhihu.com/equation?tex=X%3D%28x_%7B1%7D%2Cx_%7B2%7D%2C...%2Cx_%7Bn%7D%29)，若是想预测某个客户在将来违约的概率，那么只需要收集该客户的n个特征信息，代入公式![](https://www.zhihu.com/equation?tex=p%28z%29%3D%5Cfrac%7B1%7D%7B1%2Be%5E%7B-z%7D%7D)，就得到一个介于(0,1)之间的值，称为好客户的概率。
 - 在逻辑回归函数的作用下，可以将客户的特征信息（如婚姻、年龄、历史以往信贷表现等）综合起来并转化为一个概率值，该值给银行预测客户好坏提供了一个直观依据。即 p(z) 值越大，证明该客户在将来违约的概率越小。
 
