@@ -32,7 +32,7 @@ type: page
    - ![](https://static.leiphone.com/uploads/new/article/740_740/201708/598fd35654561.jpg)
 - 大数据文摘+清华+SoAI共同承办的AI培训班：[The School of AI Beijing](https://wqw547243068.github.io/school-of-ai-beijing)
 ![](https://wqw547243068.github.io/school-of-ai-beijing/other/bdd_siraj.png)
-- 雷锋网上开的Python入门AI课程：[有趣的Python](https://wqw547243068.github.io/Python-learning)
+- 雷锋网上开的Python入门AI课程：[有趣的Python](https://wqw547243068.github.io/Python-learning), [AI研习社课程](https://mooc.yanxishe.com/course/489)
 [![](http://static.mooc.ai/files/course/2018/05-08/17590372d80d143595.jpg)](http://www.mooc.ai/course/489)
 
 ## 联系我
