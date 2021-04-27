@@ -145,10 +145,14 @@ TensorFlow版本的Embedding实现：（参考：[TensorFlow embedding小记](ht
 - 分类模型中用这种id类特征，主要是希望模型把这个商品记住。但id类特征维度太高，同一个商品的数据量也不大，因此也常常用i2i算法产出的item embedding来替代id特征。
 
 ```python
+import tensorflow as tf
+
 # embedding矩阵
 embeddings = tf.Variable( tf.random_uniform([vocabulary_size, embedding_size], -1.0, 1.0))
 # 将train_inputs(目标索引/编号)映射为向量
 embed = tf.nn.embedding_lookup(embeddings, train_inputs)
+# 执行
+print(sess.run(input_embedding, feed_dict={input_ids:[[1, 2], [2, 1], [3, 3]]}))
 ```
 
 
