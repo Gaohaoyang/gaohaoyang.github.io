@@ -227,15 +227,11 @@ $$ P = \frac{1}{1 + \exp^{-(实力-难度)}} $$
 ```html
 <video width="620" height="440" controls="controls" autoplay="autoplay">
   <source src="https://vdn1.vzuu.com/SD/48e8724a-9521-11eb-a73c-be9fcf3af908.mp4?disable_local_cache=1&auth_key=1619412400-0-0-298e79ec9b1fd68667f15832b49df810&f=mp4&bu=pico&expiration=1619412400&v=hw" type="video/mp4" />
-  <object data="https://vdn1.vzuu.com/SD/48e8724a-9521-11eb-a73c-be9fcf3af908.mp4?disable_local_cache=1&auth_key=1619412400-0-0-298e79ec9b1fd68667f15832b49df810&f=mp4&bu=pico&expiration=1619412400&v=hw" width="420" height="340">
-  </object>
 </video>
 ```
 
 <video width="620" height="440" controls="controls" autoplay="autoplay">
   <source src="https://vdn1.vzuu.com/SD/48e8724a-9521-11eb-a73c-be9fcf3af908.mp4?disable_local_cache=1&auth_key=1619412400-0-0-298e79ec9b1fd68667f15832b49df810&f=mp4&bu=pico&expiration=1619412400&v=hw" type="video/mp4" />
-  <object data="https://vdn1.vzuu.com/SD/48e8724a-9521-11eb-a73c-be9fcf3af908.mp4?disable_local_cache=1&auth_key=1619412400-0-0-298e79ec9b1fd68667f15832b49df810&f=mp4&bu=pico&expiration=1619412400&v=hw" width="420" height="340">
-  </object>
 </video>
 
 
