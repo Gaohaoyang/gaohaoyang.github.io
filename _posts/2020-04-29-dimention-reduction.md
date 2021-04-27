@@ -92,22 +92,48 @@ mathjax: true
 
 # Embedding（嵌入）
 
+## 基本概念
+
 - Embedding（嵌入）是**拓扑学**里面的词，在深度学习领域经常和`Manifold`（流形）搭配使用。
   - 三维空间的球体是一个二维流形嵌入在三维空间（2D manifold embedded in 3D space）。球上的任意一个点只需要用一个二维的经纬度来表达就可以了。
   - 一个二维空间的旋转矩阵是2x2的矩阵，其实只需要一个角度就能表达了，这是一维流形嵌入在2x2的矩阵空间。
 
 作者：[刘斯坦](https://www.zhihu.com/question/38002635/answer/1382442522)
 
-观点：Embedding 就是把一个东西映射到一个向量 x。如果两个东西很像，那么得到的向量x1和x2的欧式距离很小。
+Embedding 就是把一个东西映射到一个向量 x。如果两个东西很像，那么得到的向量x1和x2的欧式距离很小。
 - 例一：Word Embedding，把单词 w 映射到向量 x。如果两个词的原意接近，比如coronavirus和covid，那么它们映射后得到的两个词向量 x1 和 x2 的欧式距离很小。
 - 例二：User Embedding，把用户 ID 映射到向量 x。推荐系统中需要用一个向量表示一个用户。如果两个用户的行为习惯接近，那么他们对应的向量  x1 和 x2 的欧式距离很小。
 - 例三：Graph Embedding，把图中的每个节点映射成一个向量 x。如果图中两个节点接近，比如它们的最短路很小，那么它们embed得到的向量 x1 和 x2 的欧式距离很小。
 
 [知乎sen2020](https://www.zhihu.com/question/38002635/answer/1782324218)
 
+## 作用
+
+Embedding 是一个将离散变量转为连续向量表示的一个方式。在神经网络中，embedding是非常有用的，因为它不光可以减少离散变量的空间维数，同时还可以有意义的表示该变量。
+
+Embedding 有以下 3 个主要目的：
+- 在 embedding 空间中查找最近邻，这可以很好的用于根据用户的兴趣来进行推荐。
+- 作为监督性学习任务的输入。
+- 用于可视化不同离散变量之间的关系。
+
 Embedding这个概念在深度学习领域最原初的切入点是所谓的**Manifold Hypothesis**（**流形假设**）。流形假设是指“**自然的原始数据是低维的流形嵌入于(embedded in)原始数据所在的高维空间**”。深度学习的任务就是把**高维**原始数据（图像，句子）映射到**低维**流形，使得高维的原始数据被映射到低维流形之后变得可分，而这个映射就叫嵌入（Embedding）。比如Word Embedding，就是把单词组成的句子映射到一个表征向量。但后来不知咋回事，开始把低维流形的表征向量叫做Embedding，其实是一种误用。。。如果按照现在深度学习界通用的理解（其实是偏离了原意的），Embedding就是从原始数据提取出来的Feature，也就是那个通过神经网络映射之后的低维向量。
 
 2014年的经典文章：[Neural Networks, Manifolds, and Topology](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/)
+
+## Embedding 可视化
+
+Embedding 最酷的一个地方在于可以用来可视化出表示的数据的相关性，为了便于观察，需要通过降维技术来达到 2 维或 3 维。最流行的降维技术是：t-Distributed Stochastic Neighbor Embedding (`TSNE`)。
+
+![](https://pic4.zhimg.com/80/v2-e1c5fcd4234d9a6ef64daa9108309ed7_1440w.jpg)
+
+TensorFlow开发了在线应用程序[projector](https://projector.tensorflow.org/)，可视化并与 embedding 交互。
+
+<video width="620" height="440" controls="controls" autoplay="autoplay">
+  <source src="https://vdn1.vzuu.com/SD/7191e9f4-ec77-11ea-acfd-5ab503a75443.mp4?disable_local_cache=1&auth_key=1619512352-0-0-9d84f1b7e6c1920c1c9a0a2806ca2132&f=mp4&bu=pico&expiration=1619512352&v=hw" type="video/mp4" />
+  </object>
+</video>
+
+摘自：[Embedding的理解](https://zhuanlan.zhihu.com/p/46016518)，[英文原文](https://towardsdatascience.com/neural-network-embeddings-explained-4d028e6f0526)
 
 # 流形学习
 
