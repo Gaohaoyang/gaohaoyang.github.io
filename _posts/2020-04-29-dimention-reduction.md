@@ -135,6 +135,23 @@ TensorFlow开发了在线应用程序[projector](https://projector.tensorflow.or
 
 摘自：[Embedding的理解](https://zhuanlan.zhihu.com/p/46016518)，[英文原文](https://towardsdatascience.com/neural-network-embeddings-explained-4d028e6f0526)
 
+## 实现
+
+TensorFlow版本的Embedding实现：（参考：[TensorFlow embedding小记](https://blog.csdn.net/xiaoguaishou21509/article/details/79796773)）
+- embedding_lookup虽然是随机化地映射成向量，看起来信息量相同，但其实却更加超平面可分
+- embedding_lookup不是简单的查表，id对应的向量是可以训练的，训练参数个数应该是 category num*embedding size，也就是说lookup是一种全连接层。
+- word embedding其实是有了一个距离的定义，即出现在同一上下文的词的词向量距离应该小，这样生成向量比较容易理解。autoencode、pca等做一组基变换，也是假设原始特征值越接近越相似。但id值的embedding应该是没有距离可以定义，没有物理意义，只是一种特殊的全连接层。
+- 用embedding_lookup做id类特征embedding由google的deep&wide提出，但隐藏了具体实现细节
+- 分类模型中用这种id类特征，主要是希望模型把这个商品记住。但id类特征维度太高，同一个商品的数据量也不大，因此也常常用i2i算法产出的item embedding来替代id特征。
+
+```python
+# embedding矩阵
+embeddings = tf.Variable( tf.random_uniform([vocabulary_size, embedding_size], -1.0, 1.0))
+# 将train_inputs(目标索引/编号)映射为向量
+embed = tf.nn.embedding_lookup(embeddings, train_inputs)
+```
+
+
 # 流形学习
 
 - [Neural Networks, Manifolds, and Topology](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/)，中文翻译版：[神经网络、流形和拓扑](https://www.jianshu.com/p/12667309bf23)
