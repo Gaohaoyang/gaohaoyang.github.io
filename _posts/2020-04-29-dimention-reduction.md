@@ -3,7 +3,7 @@ layout: post
 title:  "流形学习&降维-Manifold Learning&Dimention Reduction"
 date:   2020-04-29 14:21:00
 categories: 机器学习
-tags: 深度学习 流形学习 降维 无监督学习 维数灾难 embedding
+tags: 深度学习 流形学习 降维 无监督学习 维数灾难 embedding word2vec
 excerpt: 机器学习无监督学习中的降维技术，线性（pca/lda），非线性（t-sne/isomap/mds），及背后的流形学习原理
 author: 鹤啸九天
 mathjax: true
@@ -120,6 +120,7 @@ Embedding这个概念在深度学习领域最原初的切入点是所谓的**Man
 
 2014年的经典文章：[Neural Networks, Manifolds, and Topology](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/)
 
+
 ## Embedding 可视化
 
 Embedding 最酷的一个地方在于可以用来可视化出表示的数据的相关性，为了便于观察，需要通过降维技术来达到 2 维或 3 维。最流行的降维技术是：t-Distributed Stochastic Neighbor Embedding (`TSNE`)。
@@ -134,6 +135,12 @@ TensorFlow开发了在线应用程序[projector](https://projector.tensorflow.or
 </video>
 
 摘自：[Embedding的理解](https://zhuanlan.zhihu.com/p/46016518)，[英文原文](https://towardsdatascience.com/neural-network-embeddings-explained-4d028e6f0526)
+
+## word2vec
+
+优质文章：[The Illustrated Word2vec](https://jalammar.github.io/illustrated-word2vec/)，[中文版](https://mp.weixin.qq.com/s?__biz=MjM5MTQzNzU2NA==&mid=2651669277&idx=2&sn=bc8f0590f9e340c1f1359982726c5a30&chksm=bd4c648e8a3bed9817f30c5a512e79fe0cc6fbc58544f97c857c30b120e76508fef37cae49bc&scene=0&xtrack=1#rd)
+
+![](https://jalammar.github.io/images/word2vec/personality-two-persons.png)
 
 ## 实现
 
