@@ -73,7 +73,7 @@ excerpt_separator: "\n\n\n\n"
 
 # paginate 
 plugins: [jekyll-paginate]
-paginate: 20
+paginate: 30
 
 
 # useful websites
