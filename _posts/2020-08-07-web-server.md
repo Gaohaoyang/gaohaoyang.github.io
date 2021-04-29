@@ -3,7 +3,7 @@ layout: post
 title:  "Web服务知识-Web-Serving"
 date:   2020-08-07 19:17:00
 categories: 技术工具
-tags: Web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session RPC 架构设计 GraphQL UML
+tags: Web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session RPC 架构设计 GraphQL UML Gunicorn
 author : 鹤啸九天
 excerpt: Web开发相关技术知识点
 mathjax: true
@@ -681,6 +681,76 @@ uWSGI 的主要特点如下：
 - 高度可定制（内存大小限制，服务一定次数后重启等）。
 
 Django就没有用异步，通过线程来实现并发，这也是WSGI普遍的做法，跟tornado不是一个概念
+
+## Gunicorn
+
+Gunicorn“绿色独角兽”是一个被广泛使用的**高性能**的python WSGI UNIX HTTP服务器，移植自Ruby的独角兽（Unicorn）项目，使用pre-fork worker模式具有使用非常简单，轻量级的资源消耗，以及高性能等特点。
+- pre-fork worker模式: 一个中央master进程来管理一系列的工作进程，master并不知道各个独立客户端。所有的请求和响应完全由工作进程去完成。master通过一个循环不断监听各个进程的信号并作出相应反应，这些信号包括TTIN、TTOU和CHLD。TTIN和TTOU告诉master增加或者减少正在运行的进程数，CHLD表明一个子进程被终止了，在这种情况下master进程会自动重启这个失败的进程。
+
+Gunicorn是主流的WSGI容器之一，它易于配置，兼容性好，CPU消耗很少，它支持多种worker模式：
+- 同步worker：默认模式，也就是一次只处理一个请求。最简单的同步工作模式
+- 异步worker：通过Eventlet、Gevent实现的异步模式,gevent和eventlet都是基于greenlet库，利用python协程实现的
+- 异步IOWorker：目前支持gthread和gaiohttp; gaiohttp利用aiohttp库实现异步IO，支持web socket; gthread采用的事线程工作模式，利用线程池管理连接
+- Tronado worker：tornado框架,利用python Tornado框架实现
+
+工作模式是通过work_class参数配置的值：缺省值：sync
+- sync
+- Gevent
+- Eventlet
+- tornado
+- gaiohttp
+- gthread
+
+[Gunicorn使用详解](https://www.cnblogs.com/shijingjing07/p/9110619.html), [Gunicorn的使用](https://www.jianshu.com/p/8ea438251e44/)
+![](https://img.jbzj.com/file_images/article/201907/2019722104302288.jpg?2019622104331)
+Gunicorn(Green Unicorn)是一个WSGI HTTP服务器,python自带的有个web服务器，叫做wsgiref，Gunicorn的优势在于，它使用了pre-fork worker模式，gunicorn在启动时，会在主进程中预先fork出指定数量的worker进程来处理请求，gunicorn依靠操作系统来提供负载均衡，推进的worker数量是(2*$num_cores)+1
+python是单线程的语言，当进程阻塞时，后续请求将排队处理。所用pre-fork worker模式，极大提升了服务器请求负载。
+
+安装
+
+```shell
+pip install gunicorn
+```
+
+使用,编写wsgi接口,test.py代码
+
+```python
+def application(environ,start_response):
+    start_response('200 OK',[('Content-Type','text/html')])
+    return b'<h1>Hello,web!</h1>'
+```
+
+使用gunicorn监听请求，运行以下命令
+- -w:指定fork的worker进程数
+- -b:指定绑定的端口
+- test:模块名,python文件名
+- application:变量名,python文件中可调用的wsgi接口名称
+
+```shell
+gunicorn -w 2 -b 0.0.0.0:8000 test.application
+```
+
+gunicorn相关参数
+- 1) -c CONFIG,--config=CONFIG, 指定一个配置文件（py文件）
+- 2) -b BIND,--bind=BIND 与指定socket进行板顶
+- 3) -D,--daemon 后台进程方式运行gunicorn进程
+- 4) -w WORKERS,--workers=WORKERS, 工作进程的数量
+  - 获取CPU个数: python -c 'import multiprocessing;print(multiprocessing.cpu_count())'
+- 5) -k WORKERCLASS,--worker-class=WORKERCLASS, 工作进程类型，包括sync（默认）,eventlet,gevent,tornado,gthread,gaiohttp
+- 6) --backlog INT 最大挂起的连接数
+- 7)--log-level LEVEL 日志输出等级
+- 8) --access-logfile FILE 访问日志输出文件
+- 9)--error-logfile FILE 错误日志输出文件
+
+gunicorn可以写在配置文件中，下面举列说明配置文件的写法,gunicorn.conf.py
+
+```python
+bind = "0.0.0.0:8000"
+workers = 2
+```
+
+运行以下命令:
+- gunicorn -c gunicorn.conf.py test:application
 
 
 ## web框架对比
