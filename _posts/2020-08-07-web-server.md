@@ -679,6 +679,44 @@ uWSGI 的主要特点如下：
 
 Django就没有用异步，通过线程来实现并发，这也是WSGI普遍的做法，跟tornado不是一个概念
 
+作者：[HylaruCoder](https://www.zhihu.com/question/297267614/answer/505683007)
+
+简单说下几种部署方式 
+- Flask 内置 WebServer + Flask App = 弱鸡版本的 Server, 单进程（单 worker) / 失败挂掉 / 不易 Scale
+- Gunicorn + Flask App = 多进程（多 worker) / 多线程 / 失败自动帮你重启 Worker / 可简单Scale
+- 多 Nginx + 多 Gunicorn + Flask App = 小型多实例 Web 应用，一般也会给 gunicorn 挂 supervisor
+
+在生产环境中, 一般都是请求的走向都是 Nginx->gunicorn->flask/django app 
+
+第一个问题，Flask 作为一个 Web 框架，内置了一个 webserver, 但这自带的 Server 到底能不能用？ 
+- 官网的介绍： While lightweight and easy to use, Flask’s built-in server is not suitable for production as it doesn’t scale well. Some of the options available for properly running Flask in production are documented here. 
+- 很显然，内置的 webserver 是能用的。但不适合放在生产环境。这个 server 本来就是给开发者用的。框架本身并不提供生产环境的 web 服务器，SpringBoot 这种内置 Tomcat 生产级服务器 是例外。 
+- 查看 flask 代码的时候也可以看到这个 WebServer 的名称也叫做 run_simple , too simple 的东西往往不太适合生产。 
+
+```python
+from werkzeug.serving import run_simple
+run_simple('localhost', 5000, application, use_reloader=True)
+```
+
+来看看为什么？ 假设我们使用的是 Nginx+Flask Run 来当作生产环境，全部部署在一台机器上。 
+
+劣势如下： 
+- 『单 Worker』只有一个进程在跑所有的请求，而由于实现的简陋性，内置 webserver 很容易卡死。并且只有一个 Worker 在跑请求。在多核 CPU 下，仅仅占用一核。当然，其实也可以多起几个进程。
+- 『缺乏 Worker 的管理』接上，加入负载量上来了，Gunicorn 可以调节 Worker 的数量。而这个东西，内置的 Webserver 是不适合做这种事情的。
+
+一言以蔽之，太弱，几个请求就打满了。 
+
+第二个问题，Gunicorn 作为 Server 相对而言可以有什么提升。 
+
+gunicorn 的优点如下
+- 帮我 scale worker, 进程挂了帮我重启
+- 用 python 的框架 flask/django/webpy 配置起来都差不多。
+- 还有信号机制。可以支持多种配置。
+
+在管理 worker 上，使用了 pre-fork 模型，即一个 master 进程管理多个 worker 进程，所有请求和响应均由 Worker 处理。Master 进程是一个简单的 loop, 监听 worker 不同进程信号并且作出响应。比如接受到 TTIN 提升 worker 数量，TTOU 降低运行 Worker 数量。如果 worker 挂了，发出 CHLD, 则重启失败的 worker, 同步的 Worker 一次处理一个请求。 
+
+PS: 如果没有静态资源并且无需反向代理的话，抛弃 Nginx 直接使用 Gunicorn 和 Flask app 也能搞定。
+
 ## Gunicorn
 
 Gunicorn“绿色独角兽”是一个被广泛使用的**高性能**的python WSGI UNIX HTTP服务器，移植自Ruby的独角兽（Unicorn）项目，使用pre-fork worker模式具有使用非常简单，轻量级的资源消耗，以及高性能等特点。
