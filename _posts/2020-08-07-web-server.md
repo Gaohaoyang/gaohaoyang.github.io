@@ -3,7 +3,7 @@ layout: post
 title:  "Web服务知识-Web-Serving"
 date:   2020-08-07 19:17:00
 categories: 技术工具
-tags: Web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session RPC 架构设计 GraphQL UML Gunicorn
+tags: Web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session RPC 架构设计 GraphQL UML Gunicorn supervisor
 author : 鹤啸九天
 excerpt: Web开发相关技术知识点
 mathjax: true
@@ -42,8 +42,6 @@ mathjax: true
   - 2、**容器图**(Container Diagram)，容器图是把语境图里待建设的系统做了一个展开。
   - 3、**组件图**(Component Diagram)，把某个容器进行展开，描述其内部的模块。
   - 4、**类图**(Code/Class Diagram)，给技术人员看的，比较常见
-
-
 
 - 【2021-1-9】[如何画出合格的技术架构图](https://mp.weixin.qq.com/s?__biz=MzIzOTU0NTQ0MA==&mid=2247490075&idx=1&sn=18b8f093352c34e1b7239eee3bfeb93c&chksm=e9292714de5eae02cd70e1ac03217fdf1e3ccfc3d0adce7f15b5366f6c498b2fdc21c1a0b2c8&scene=21#wechat_redirect)
 - [可视化架构设计——C4介绍](https://insights.thoughtworks.cn/c4-model/)
@@ -584,7 +582,6 @@ SDK是什么
 - 一个微服务仅暴露**一个 GraphQL 层**：一个微服务只需暴露一个GraphQL endpoint，客户端请求相应数据只通过该端点按需获取，不需要再额外定义其他接口。
 - **传输层无关、数据库技术无关**：带来了更灵活的技术栈选择，比如我们可以选择对移动设备友好的协议，将网络传输数据量最小化，实现在网络协议层面优化应用。
 
-
 ## GraphQL接口设计
 
 - GraphQL获取数据三步骤
@@ -751,6 +748,52 @@ workers = 2
 
 运行以下命令:
 - gunicorn -c gunicorn.conf.py test:application
+
+## supervisor
+
+[使用Gunicorn与Supervisor部署Flask](https://blog.csdn.net/henghenghalala/article/details/103685602)
+
+supervisor实现程序的后台守护运行, 也可以实现开机自动重启
+
+```shell
+# 下载安装supervisor， 请注意此时所在目录还是项目目录 /root/xubobo/project
+pip install supervisor
+# 初始化配置文件
+echo_supervisord_conf > supervisor.conf
+# 此时目录下多了一个配置文件， 修改此配置文件
+vim supervisor.conf
+# 在配置文件最底部加入如下配置
+[program: githook]
+command=/root/xubobo/githook/venv/bin/gunicorn -w 3 -b 0.0.0.0:5000 app:app   ; 启动命令
+directory=/root/xubobo/githook                                   ; 项目的文件夹路径
+startsecs=0                                                      ; 启动时间
+stopwaitsecs=0                                                   ; 终止等待时间
+autostart=true                                                   ; 是否自动启动
+autorestart=true                                                 ; 是否自动重启
+stdout_logfile=/data/python/SMT/log/gunicorn.log                 ; log 日志
+stderr_logfile=/data/python/SMT/log/gunicorn.err                 ; 错误日志
+
+# 指定配置文件来启动supervisord
+supervisord -c supervisor.conf
+# 检查状态
+supervisorctl -c supervisor.conf status
+# 可以看到 githook 应用已经是RUNNING状态了
+```
+
+supervisor的常用命令
+
+```shell
+# 通过配置文件启动supervisor
+supervisord -c supervisor.conf       
+# 察看supervisor的状态
+supervisorctl -c supervisor.conf status
+# 重新载入 配置文件
+supervisorctl -c supervisor.conf reload
+# 启动指定/所有 supervisor管理的程序进程
+supervisorctl -c supervisor.conf start [all]|[appname]
+# 关闭指定/所有 supervisor管理的程序进程
+supervisorctl -c supervisor.conf stop [all]|[appname]
+```
 
 
 ## web框架对比
