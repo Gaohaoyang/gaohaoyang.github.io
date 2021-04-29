@@ -3,7 +3,7 @@ layout: post
 title:  "Web服务知识-Web-Serving"
 date:   2020-08-07 19:17:00
 categories: 技术工具
-tags: Web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session RPC 架构设计 GraphQL UML Gunicorn supervisor
+tags: Web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session RPC 架构设计 GraphQL UML Gunicorn supervisor genvent grequests
 author : 鹤啸九天
 excerpt: Web开发相关技术知识点
 mathjax: true
@@ -831,6 +831,119 @@ supervisorctl -c supervisor.conf reload
 supervisorctl -c supervisor.conf start [all]|[appname]
 # 关闭指定/所有 supervisor管理的程序进程
 supervisorctl -c supervisor.conf stop [all]|[appname]
+```
+
+## gevent/grequests
+
+[python中grequests模块简单应用](https://blog.csdn.net/cong_da_da/article/details/84325849)
+
+用requests向某个url批量发起POST请求，交互的内容很简单，若开启多线程去访问占用太多资源不合理。
+想到了使用协程gevent，grequests 模块相当于是封装了gevent的requests模块
+
+安装
+- 若是联网安装，直接 pip install grequests 完事
+- 若是离线安装，需要先安装 greenlet模块 和 gevent模块 ，再安装 grequests模块 
+
+```python
+# coding:utf-8
+adata = json.dumps({"key": "value"})
+header = {"Content-type": "appliaction/json", "Accept":"application/json"}
+url = "http://www.baidu.com"
+
+task = []
+req = grequests.request("POST", url=url, data=adata, headers=header)
+task.append(req)
+# 此处map的requests参数是装有实例化请求对象的列表,其返回值也是列表， size参数可以控制并发的数量
+resp = grequests.map(task)
+print resp
+# 查看返回值的属性值，我们关注的一般就是text json links  url headers 等了
+print dir(resp[0])
+#==============
+urls = ["http://www.baidu.com", "http://www.baidu.com", "http://www.baidu.com"]
+req = (grequests.get(u) for u in urls)
+resp = grequests.map(req)
+```
+
+grequests和requests的对比
+- grequests比单个的requests请求要快一点，当网络延迟较高时，grequests优势比较明显，修改 map的size参数进行尝试,合理的设置size值，不要太大，超过阀值再大也没有用
+
+```python
+# coding:utf-8
+import grequests
+import time
+import json
+import requests
+ 
+ 
+adata = json.dumps({"key": "value"})
+header = {"Content-type": "appliaction/json", "Accept":"application/json"}
+
+def use_grequests(num):
+    task = []
+    urls = ["http://hao.jobbole.com/python-docx/" for i in range(num)]
+    while urls:
+        url = urls.pop(0)
+        rs = grequests.request("POST", url, data=adata, headers=header)
+        task.append(rs)
+    resp = grequests.map(task, size=5)
+    return resp
+ 
+def use_requests(num):
+    urls = ["http://hao.jobbole.com/python-docx/" for i in range(num)]
+    index = 0
+    while urls:
+        url = urls.pop(0)
+        resp = requests.post(url=url, headers=header, data=adata)
+        index += 1
+        if index % 10 == 0:
+            print u'目前是第{}个请求'.format(index)
+
+def main(num):
+    time1 = time.time()
+    finall_res = use_requests(num)
+    print finall_res
+    time2 = time.time()
+    T = time2 - time1
+    print u'use_requests发起{}个请求花费了{}秒'.format(num, T)
+ 
+    print u'正在使用grequests模块发起请求...'
+    time3 = time.time()
+    finall_res2 = use_grequests(num)
+    print finall_res2
+    time4 = time.time()
+    T2 = time4 - time3
+    print u'use_grequests发起{}个请求花费了{}秒'.format(num, T2)
+ 
+if __name__ == '__main__':
+    main(100)
+```
+
+手动使用gevent配合requests模块
+
+```python
+# coding:utf-8
+import gevent
+import time
+from gevent import monkey
+import requests
+monkey.patch_all()
+ 
+datali = [x for x in range(100)]
+task = []
+def func(i):
+	print u'第{}个请求'.format(i)
+    url = "http://hao.jobbole.com/python-docx/"
+    resp = requests.get(url=url)
+    return resp
+ 
+time1 = time.time()
+for i in datali:
+    task.append(gevent.spawn(func, i))
+res = gevent.joinall(task)
+print len(res)
+time2 = time.time()
+T = time2 - time1
+print u'消耗了{}秒'.format(T)
 ```
 
 
