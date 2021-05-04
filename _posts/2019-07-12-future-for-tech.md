@@ -200,7 +200,7 @@ coding path
 ## 35岁以上程序员都去哪儿了？
 
 - 百度T9胡嵩：[那些牛X的程序员，35岁以后都去了哪？](https://mp.weixin.qq.com/s?__biz=MzIyNjMwMzMxOQ==&mid=2247483949&idx=1&sn=27af916cceb9785b24c964bee00b8033&chksm=e873ce15df0447034ae7b7feea24fdf37d123a3f5d3da059a4a0009684336ea1aeef960b5f8c&mpshare=1&scene=23&srcid=&sharer_sharetime=1582424902392&sharer_shareid=b8d409494a5439418f4a89712efcd92a#rd)
-   - 干程序员这行前期发展快， 越到后面越吃力。所以顺风顺水时，就应该考虑自己的Plan B了。像Jack Ma所说的：在晴天补屋顶。
+   - 干程序员这行前期发展快， 越到后面越吃力。所以顺风顺水时，就应该考虑自己的Plan B了。像Jack Ma所说的：<font color='red'>在晴天补屋顶。</font>
 - 作者调研身边的大龄技术人，出路如下：
    - 15%，`大厂高P`，技术 or 管理路线
       - 技术路线：至少P8往上了，早已成为一个领域（架构、算法）的专家，指导着几十号、上百号兄弟，不可替代。
