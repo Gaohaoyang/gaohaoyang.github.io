@@ -3,7 +3,7 @@ layout: post
 title:  "互联网资讯-Internet News"
 date:   2020-01-16 22:30:00
 categories: 互联网
-tags: 互联网 BAT TMD 陆奇 朱松纯 张一鸣 平安科技 在线教育 谷歌 达摩院
+tags: 互联网 BAT TMD 陆奇 朱松纯 张一鸣 平安科技 在线教育 谷歌 达摩院 FLAGS 硅谷
 excerpt: 互联网行业资讯及各大厂信息汇总
 author: 鹤啸九天
 mathjax: true
@@ -924,6 +924,9 @@ mathjax: true
 >蚂蚁金服、字节跳动、滴滴、斗鱼、快手、蘑菇街、盛大、昆仑万维、多益、易车网、4399、游族网络、慧聪网、当当、世纪佳缘等。
 
 # 国外互联网公司
+
+- 硅谷名企简称：FLAGS, [「AI大咖谈」FLAG资深工程师谈ML Infra和分布式模型服务](https://zhuanlan.zhihu.com/p/360007940)
+![](https://pic1.zhimg.com/80/v2-5f93c7c78580a0bdcef0daf9aeb54408_720w.jpg)
 
 
 ## 谷歌Google
