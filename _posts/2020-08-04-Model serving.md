@@ -3,7 +3,7 @@ layout: post
 title:  "算法模型部署-Model Serving"
 date:   2020-08-04 16:52:00
 categories: 机器学习 技术工具
-tags: Tensorflow Web gRPC Restful
+tags: Tensorflow Web gRPC Restful 服务部署 HTTP
 excerpt: 如何将算法模型部署到线上？有哪些方法、工具及经验？
 author: 鹤啸九天
 mathjax: true
@@ -17,18 +17,88 @@ mathjax: true
 - 由于python的灵活性和完备的生态库，使得其成为实现、验证ML算法的不二之选。但是工业界要将模型部署到生产环境上，需要考略性能问题，就不建议再使用python端的服务
 - 可以采用 Saver (python) + Serving (tensorflow serving) + Client (Java) 作为解决方案，从零开始记录线上模型部署流程。
 
+
 # 机器学习模型生命周期
 
 - 从训练到部署的整个流程
     - ![](https://img2020.cnblogs.com/blog/963156/202004/963156-20200424165332708-1843237557.png)
 - 基本可以把工作分为三块：
-    - Saver端：将训练好的整个模型导出为一系列标准格式的文件，在不同的平台上部署模型文件。
+    - **Saver端**：将训练好的整个模型导出为一系列标准格式的文件，在不同的平台上部署模型文件。
         - TensorFlow 使用 SavedModel（pb文件） 这一格式用于模型部署。
         - 与Checkpoint 不同，SavedModel 包含了一个 TensorFlow 程序的完整信息： **不仅包含参数的权值，还包含计算图**。
         - SavedModel最终保存结果包含两部分saved_model.pb和variables文件夹。
-    - Serving端：模型加载与在线预测
-    - Client端：构建请求
+    - **Serving端**：模型加载与在线预测
+    - **Client端**：构建请求
 
+## 深度学习模型部署问题
+
+- 【2021-5-6】[「AI大咖谈」FLAG资深工程师谈ML Infra和分布式模型服务](https://zhuanlan.zhihu.com/p/360007940)
+- 深度学习在业界的应用进入一个全新的阶段，**复杂模型的结构红利正在被吃尽，深度学习模型和工程架构的协同演进正在成为新的效果增长极**。国内外的巨头互联网公司在分布式深度学习框架，线上大规模模型服务领域可以说优势颇大，有时候也略显神秘。
+- 新同学往往不喜欢也不屑于做所谓的dirty work，但本质上来说，**工业界的机器学习问题几乎全都是dirty work**，不存在什么训练一个模型，创新一个模型结构就交给其他人的事情，你说的根本不是新人，而是老板。
+
+问题：
+- ①模型漂移：运行一段时间后，效果逐步下滑，如何做到自动更新模型？
+- ②自动降级：资源有限，根据不同的qps压力，适配不同版本的模型
+
+### 算法与工程合作
+
+- Infra/ML engineer与data scientist/researcher们的合作中最显著的一个特点是**大家在不同的抽象层面思考问题**，有些看起来有一定创新性的模型结构调整其实在产品化、工程化的道路上困难重重。
+  - 比如最近关注的一个项目，offline training的时候发现效果很好，模型CTR的提升非常显著，但是在推进到生产环境阶段时，会发现90%的剩余工作都是infra方面。
+  - 比如如何处理模型变大之后offline training阶段的各种限制，典型的像模型**推断时间过长**，**内存占用过多**，online training如何**避免数据丢失**，并且能以合理的速度更新，inference阶段如何在不显著增加系统开销的前提下顺利满足所有的在线推理要求（比如实时特征的准备）等等。
+- 一个模型在离线效果上验证有收益只是第一步，甚至是比较小的第一步，尤其是在模型规模、复杂度显著增加的基础上，模型效果上的收益扣除Infra上的开销之后，实际还剩多少收益是要打一个问号的。在第一步之后，剩下的路肯定会有很多infra上的限制要去处理。所以，从我的角度来说，无论是Infra engineer，还是researcher们，都要加深对对方领域的理解，只有一个人对这些可能的问题越熟悉越了解，也就越能增加自己的模型落地的可能。
+
+总结
+- 无论是Infra engineer，还是researcher们，都要加深对对方领域的理解，只有一个人对这些可能的问题越熟悉越了解，也就越能增加自己的模型落地的可能
+- 有些看起来有一定创新性的模型结构调整其实在产品化、工程化的道路上困难重重，所以在构建模型的时候，也要提前充分考虑工程化的关键问题
+- 实现庞大模型线上服务最可行的手段就是选择在Embedding层进行拆解。因为模型大小完全由Embedding size主导。
+- 在分布式inference的过程中，我们首先要关心的就是节点间的通信开销问题
+- 在分布式inference的过程中，尽量从模型中拆解出可以并行的部分
+- 巨大Embedding table的sharding和replication策略是需要精确设计的
+- 当模型足够复杂之后，一个最有效的办法其实是返璞归真到模型本身：你能直接或者间接支持起更多的 feature，用更大的 embedding，用更多的参数，一样的模- 型效果就会显著 out-perform 现有的，于是 ML 的问题其实就又变成了一个 infra 问题。
+- embedding 模型 incremental checkpointing 效率上会比全量更新高效很多，是一个极有价值的方向
+
+### 模型结构 vs ML infra哪个更重要？
+
+分阶段：
+- 早期，数据量不够时，各种传统ML算法可以取得不错的效果，而使用神经网络只在数据量和 infra 到了一定程度之后才会有明显效果
+  - **传统机器学习**模型 → **简单深度学习**模型 → **大规模深度学习**模型
+- 当模型足够复杂之后，一个最有效的办法其实是回到模型本身：你能直接/间接支持起更多的feature，用更大的embedding，用更多的参数，一样的模型效果就会显著 out-perform 现有的模型，于是 ML 的问题其实就又变成了一个 infra 问题。
+
+### 模型更新
+
+Embedding 模型 incremental checkpointing 效率上会比全量更新高效很多。
+
+全量更新？增量训练？如何做版本控制？
+
+### 如何部署大模型
+
+深度学习中典型的有sparse feature的ads/recommendation model。这类模型的特点就是参数量巨大，单机内存放不下，自然也就无法做推断。这个时候如你所问，我们就必须进行模型的拆解，而且最可行的手段就是选择在Embedding层进行拆解。因为模型大小完全由Embedding size主导（后续的MLP等结构的参数量级远小于Embedding层）。
+
+针对Embedding，可以通过sharding和partitioning（分表、分片）等手段把一个完整的推断过程从单节点的执行过程拆解成单节点推断主过程+多RPC call分布式Embedding查找过程。
+
+具体来说，这里会有一个单节点做End2End的推理执行，包括最开始的特征准备、预处理以及最后几层FC layers的矩阵运算，但是中间的Embedding查找以及相关运算因为内存原因就没法在单节点上完成，但是可以通过blocking RPC call来和几个专门存放embedding 的service或者数据库做交互，这样一个完整的推断过程就可以在多个节点上分开运行。
+
+### 分布式inference
+
+当模型体积大到一定程度的时候，就无法通过单机进行预测，这时候就得靠分布式inference了
+
+首先要关心**节点间的通信开销问题**（Communication overhead）。 
+- 单机的推断其实是有非常好的性质的，比如具备着极致的执行效率，良好的服务接口的特性，像便于 replication（复制）, load balancing（负载平衡）; 而拆解到多个分布式的模块之后，每个模块内部的串并联解耦、不同模块之间的通信开销，根据我们的观察会占到很大比重，这是非常值得优化的方向。
+- 但总的原则是固定的，就是尽量从模型中拆解出可以并行的部分（比如最后的MLP部分就很难并行化，那么就完全在单节点内完成，但是Embedding的部分，模型中可以并行化的部分，独立的特征生成的部分，都可以拆解成不同的服务模块）。在这个拆解的过程中，还要尽量去减少模块间的通信总次数，所以这个过程是一个非常细致，非常考验基本功的地方。
+![](https://pic4.zhimg.com/80/v2-5b724719d77ccd69f43868be2708193b_720w.jpg)
+
+### Embedding
+
+聚焦到Embedding部分来说，如何把一个巨大的embedding table分配到不同的服务模块是很讲究策略的，会对最终的整个推断效率产生非常大的影响。讲一个简单的例子，比如说有一个embedding table，有10台参数服务器，如果把这个embedding table拆成十份，分配给10台参数服务器，好处当然是每台服务器上的embedding规模只是1/10。但坏处是如果有一个average pooling的操作，要查找10次embedding，那么很有可能我们要向不同参数服务器节点发出多次请求，才能最终在主推断节点完成average pooling的操作。
+
+但是如果我们采用replication的策略，把这个embedding table全量的分配到10个参数服务器，那么在参数服务器内部就可以完成average pooling的操作，通信一次就可以了。这对于节省整个网络的通信开销贡献是巨大的。当然了，这个策略浪费了宝贵的服务器内存资源。
+
+类似sharding和replication的权衡在Embedding规模变得更大之后会变得更加复杂，我们往往需要更加复杂的策略才能找到一个平衡通信开销和系统内存开销的平衡点。
+![](https://pic2.zhimg.com/80/v2-9a0a98ac42aa5f7599ef1aacc6c21af9_720w.jpg)
+
+Embedding store
+- 生产环境中最主要的方式还是去做**全量更新**。比如一个模型通过fully training/incremental training/online training得到一个新的模型，那么由于相应的embedding层结构会发生变化，那么还是会走完全部的模型压缩、发布流程生成一个全新的snapshot，然后让已经比较成熟的线上环境自主去发现、载入、进而使用新的snapshot进行推断。
+- 当然国内有几家公司其实在这方面走的更靠前一些，比如做Embedding的增量更新。实际上同一个模型两个 snapshot 之间 embedding 的更新比例并不会特别高（大家可以思考一下哪些情况下某个id对应的embedding才会更新），因此实验和部署 incremental checkpointing 就会是一个很有意义的方向，尤其是模型大小越来越大的情况。
 
 # Tensorflow Serving
 
