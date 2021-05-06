@@ -3,7 +3,7 @@ layout: post
 title:  "职业化要点-Points to Be More Professional"
 date:   2020-07-13 12:00:00
 categories: 软素质 团队管理
-tags: 工作效率 会议效率 舒适区 时间管理 二八定律 KPI OKR
+tags: 工作效率 会议效率 舒适区 时间管理 二八定律 KPI OKR 孙子兵法 三十六计
 excerpt: 为什么有的人虽然工作十年，但实际上只有一年经验？
 author: 鹤啸九天
 mathjax: true
@@ -504,6 +504,12 @@ mathjax: true
    - 《薄白学》
    - 鲁班经
    - 鬼谷子
+
+## 孙子兵法
+
+- 【2021-5-7】[孙子兵法三十六计简要总结](https://www.toutiao.com/w/i1698705888241683/)
+
+![](https://p5.toutiaoimg.com/img/tos-cn-i-0022/c0f8b27d002d4e61b55361f4743644f9~tplv-obj:1041:2109.image?from=post)
 
 ## 罗织经
 
