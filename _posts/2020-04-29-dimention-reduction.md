@@ -92,6 +92,8 @@ mathjax: true
 
 # Embedding（嵌入）
 
+- 【2021-5-6】国立台湾大学陈蕴侬的[word embedding](https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/200331_WordEmbeddings.pdf)，更多[课件](https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/)
+
 ## 基本概念
 
 - Embedding（嵌入）是**拓扑学**里面的词，在深度学习领域经常和`Manifold`（流形）搭配使用。
