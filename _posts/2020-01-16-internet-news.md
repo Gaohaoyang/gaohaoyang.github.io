@@ -3,7 +3,7 @@ layout: post
 title:  "互联网资讯-Internet News"
 date:   2020-01-16 22:30:00
 categories: 互联网
-tags: 互联网 BAT TMD 陆奇 朱松纯 张一鸣 平安科技 在线教育 谷歌 达摩院 FLAGS 硅谷
+tags: 互联网 BAT TMD 陆奇 朱松纯 张一鸣 平安科技 在线教育 谷歌 达摩院 FLAGS 硅谷 富豪
 excerpt: 互联网行业资讯及各大厂信息汇总
 author: 鹤啸九天
 mathjax: true
@@ -22,6 +22,7 @@ mathjax: true
   - 美国打压的企业，基本上都是行业领先者，尤其是标准制定者。大多数被制裁的公司，都是国内未上市或者只在A股上市或香港上市的科技公司。与美国财团无关
   - 达摩院的自负盈亏会是一种障碍吗？变相让达摩院成为高级外包，自己想办法接业务，从而盈利。不是所有实验室都要赚钱，有些是暂时也是没有KPI指标的，有些工作还在保密阶段，也没这么快出成果。举个例子就算达摩院真在秘密研发光刻机，过程也要几十年，我们就别指望两三年的达摩院能给你搞出尖端成果了。
   - 达摩院[架构图](https://pics5.baidu.com/feed/08f790529822720e242c9f7c24247a4ef01fab49.jpeg?token=b3a47bb543bc0b2e2a157d6ad446ce0d)
+- 【2021-5-7】[超级富豪们的家庭出身](https://mp.weixin.qq.com/s/T-LvbJfaaMJLtsf66Hlaww)
 
 # 互联网格局
 
