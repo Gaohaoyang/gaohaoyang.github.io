@@ -3,7 +3,7 @@ layout: post
 title:  "算法模型部署-Model Serving"
 date:   2020-08-04 16:52:00
 categories: 机器学习 技术工具
-tags: Tensorflow Web gRPC Restful 服务部署 HTTP
+tags: Tensorflow Web gRPC Restful 服务部署 HTTP PS 参数服务器 分布式
 excerpt: 如何将算法模型部署到线上？有哪些方法、工具及经验？
 author: 鹤啸九天
 mathjax: true
@@ -30,7 +30,7 @@ mathjax: true
     - **Serving端**：模型加载与在线预测
     - **Client端**：构建请求
 
-## 深度学习模型部署问题
+## 深度学习模型部署
 
 - 【2021-5-6】[「AI大咖谈」FLAG资深工程师谈ML Infra和分布式模型服务](https://zhuanlan.zhihu.com/p/360007940)
 - 深度学习在业界的应用进入一个全新的阶段，**复杂模型的结构红利正在被吃尽，深度学习模型和工程架构的协同演进正在成为新的效果增长极**。国内外的巨头互联网公司在分布式深度学习框架，线上大规模模型服务领域可以说优势颇大，有时候也略显神秘。
@@ -39,6 +39,55 @@ mathjax: true
 问题：
 - ①模型漂移：运行一段时间后，效果逐步下滑，如何做到自动更新模型？
 - ②自动降级：资源有限，根据不同的qps压力，适配不同版本的模型
+
+### 什么是Model Serving？
+
+一句话解释就是：
+> Model Serving解决的是模型离线训练好之后，如何进行线上实时推断的问题。
+
+在每个服务器节点动辄几千上万QPS的压力下，必然不可能在tensorflow，spark mllib等训练环境中进行实时推断。必须有一个模型服务器来承载模型相关的参数或者数据，进行几十毫秒级别的实时推断，这就是model serving面临的主要挑战。
+
+### 常见serving方法
+
+Model Serving的主要方法: 文章[如何解决推荐系统工程难题——深度学习推荐模型线上serving](https://zhuanlan.zhihu.com/p/77664408) 中提到了几种主流的方法，分别是：
+- （1）**自研平台**
+  - 为什么要自研？TensorFlow等通用平台为了灵活性和通用性支持大量冗余的功能，导致平台过重，难以修改和定制。而自研平台的好处是可以根据公司业务和需求进行定制化的实现，并兼顾模型serving的效率。
+  - 弊端：实现模型的时间成本较高，自研一到两种模型是可行的，但往往无法做到数十种模型的实现、比较、和调优。而在模型结构层出不穷的今天，自研模型的迭代周期过长。
+  - 因此自研平台和模型往往只在大公司采用，或者在已经确定模型结构的前提下，手动实现inference过程的时候采用。
+- （2）**预训练embedding+轻量级模型** —— 业界主流
+  - 初衷：结合通用平台的灵活性、功能的多样性，和自研模型线上inference高效性
+  - 工业界很多公司采用了“**复杂网络离线训练，生成embedding存入内存数据库，线上实现LR或浅层NN等轻量级模型拟合优化目标**”的上线方式。百度曾经成功应用的“双塔”模型是非常典型的例子; 阿里妈妈提出的Model Serving方法 User Interest Center, UIC架构
+  - 百度的双塔模型分别用复杂网络对“用户特征”和“广告特征”进行了embedding化，在最后的交叉层之前，用户特征和广告特征之间没有任何交互，这就形成了两个独立的“塔”，因此称为双塔模型。在完成双塔模型的训练后，可以把最终的用户embedding和广告embedding存入内存数据库。而在线上inference时，也不用复现复杂网络，只需要实现最后一层的逻辑，在从内存数据库中取出用户embedding和广告embedding之后，通过简单计算即可得到最终的预估结果。[图](https://pic1.zhimg.com/80/v2-ec935e0b0d1b2f48182fe0d13bbdb36c_720w.jpg)
+    - ![](https://pic1.zhimg.com/80/v2-ec935e0b0d1b2f48182fe0d13bbdb36c_720w.jpg)
+  - 同样，在graph embedding技术已经非常强大的今天，利用embedding离线训练的方法已经可以融入大量user和item信息。那么利用预训练的embedding就可以大大降低线上预估模型的复杂度，从而使得手动实现深度学习网络的inference逻辑成为可能。
+- （3）PMML等**模型序列化和解析**工具
+  - Embedding+线上简单模型的方法实用且高效，但还是把模型割裂了，不完全是End2End训练+End2End部署这种最“完美”的形式。有没有能够在离线训练完模型之后，直接部署模型的方式呢？一种脱离于平台的通用的模型部署方式PMML
+  - PMML的全称是“预测模型标记语言”(Predictive Model Markup Language, PMML)是一种通用的以XML的形式表示不同模型结构参数的标记语言。在模型上线的过程中，PMML经常作为中间媒介连接离线训练平台和线上预测平台。
+  - 以Spark mllib模型的训练和上线过程为例解释PMML在整个机器学习模型训练及上线流程中扮演的角色
+  - ![](https://pic1.zhimg.com/80/v2-93ca8baff2cc85bac680f35b2bfcee54_720w.jpg)
+  - 使用了JPMML作为序列化和解析PMML文件的library。JPMML项目分为Spark和Java Server两部分。Spark部分的library完成Spark MLlib模型的序列化，生成PMML文件并保存到线上服务器能够触达的数据库或文件系统中；Java Server部分则完成PMML模型的解析，并生成预估模型，完成和业务逻辑的整合。由于JPMML在Java Server部分只进行inference，不用考虑模型训练、分布式部署等一系列问题，因此library比较轻，能够高效的完成预估过程。与JPMML相似的开源项目还有Mleap，同样采用了PMML作为模型转换和上线的媒介。
+  - JPMML和MLeap也具备sk-learn，TensorFlow简单模型的转换和上线能力。但针对TensorFlow的复杂模型，PMML语言的表达能力是不够的，因此上线TensorFlow模型就需要TensorFlow的原生支持——TensorFlow Serving。
+- （4）TensorFlow serving等**平台原生model serving**工具
+  - TensorFlow Serving 是TensorFlow推出的原生的模型serving服务器。本质上, TensorFlow Serving的工作流程和PMML类的工具的流程是一致的。不同之处在于TensorFlow定义了自己的模型序列化标准。利用TensorFlow自带的模型序列化函数可将训练好的模型参数和结构保存至某文件路径。
+  - TensorFlow Serving最普遍也是最便捷的serving方式是使用Docker建立模型Serving API。
+  - 要搭建一套完整的TensorFlow Serving服务并不是一件容易的事情，因为其中涉及到模型更新，整个docker container集群的维护和按需扩展等一系例工程问题；此外，TensorFlow Serving的性能问题也仍被业界诟病。但Tensorflow Serving的易用性和对复杂模型的支持仍使其是上线TensorFlow模型的第一选择。
+  - 除了TensorFlow Serving之外，Amazon的Sagemaker，H2O.ai的H2O平台都是类似的专业用于模型serving的服务。平台的易用性和效率都有保证，但都需要与离线训练平台进行绑定，无法做到跨平台的模型迁移部署。
+
+
+
+阿里妈妈的服务架构（[从阿里的User Interest Center看模型线上实时serving方法](https://zhuanlan.zhihu.com/p/111929212)）
+- (A)和(B)分别代表了两种不同的模型服务架构，横向虚线代表了在线环境和离线环境的分隔
+- (A)是经典的解决方案
+  - 离线部分做模型训练，在线部分根据用户各类特征（User Demography Features 和 User Behavior Features）以及广告特征（Ad Features），在模型服务器（Real-Time Prediction Server）中进行预估。
+  - 问题：模型越来越复杂之后，特别是像DIEN或者MIMN这类模型加入序列结构之后，这些序列结构的推断时间实在是太长了。结构已经复杂到模型服务器在几十毫秒的时间内根本没有可能推断完的地步。
+- (B) 阿里改进版：大幅降低模型在线推断复杂度，达到准实时
+  - B架构将A架构的“用户行为特征(User Behavior Features)在线数据库”替换成了“用户兴趣表达(User Interest Representation)在线数据库”。
+  - 如果在线获取的是**用户行为特征序列**，对实时预估服务器(Real-time Prediction Server)来说，需要运行复杂的序列模型推断过程生成用户兴趣向量
+  - 如果在线获取的是**用户兴趣向量**，实时预估服务器就可以跳过序列模型阶段，直接开始 MLP 阶段的运算。MLP 的层数相较序列模型大大减少，而且便于并行计算，因此整个实时预估的延迟可以大幅减少。
+  - “用户兴趣表达模块”本质上是以类似redis的内存数据库为主实现的。
+  - 结果：每个服务节点在 500 QPS(Queries Per Second， 每秒查询次数)的压力下，DIEN 模型的预估时间从 200 毫秒降至 19 毫秒。
+![](https://pic2.zhimg.com/80/v2-8409fd79a63ce2b0231b670f8c2bfb2d_720w.jpg)
+
 
 ### 算法与工程合作
 
@@ -86,6 +135,46 @@ Embedding 模型 incremental checkpointing 效率上会比全量更新高效很�
 - 单机的推断其实是有非常好的性质的，比如具备着极致的执行效率，良好的服务接口的特性，像便于 replication（复制）, load balancing（负载平衡）; 而拆解到多个分布式的模块之后，每个模块内部的串并联解耦、不同模块之间的通信开销，根据我们的观察会占到很大比重，这是非常值得优化的方向。
 - 但总的原则是固定的，就是尽量从模型中拆解出可以并行的部分（比如最后的MLP部分就很难并行化，那么就完全在单节点内完成，但是Embedding的部分，模型中可以并行化的部分，独立的特征生成的部分，都可以拆解成不同的服务模块）。在这个拆解的过程中，还要尽量去减少模块间的通信总次数，所以这个过程是一个非常细致，非常考验基本功的地方。
 ![](https://pic4.zhimg.com/80/v2-5b724719d77ccd69f43868be2708193b_720w.jpg)
+
+- 【2021-5-7】[一文读懂「Parameter Server」的分布式机器学习训练原理](https://zhuanlan.zhihu.com/p/82116922)
+
+Parameter Server采取了和Spark MLlib一样的数据并行训练产生局部梯度，再汇总梯度更新参数权重的并行化训练方案。物理上，PS其实是和spark的master-worker的架构基本一致的
+![](https://pic3.zhimg.com/80/v2-622874fc4d30a12de71b7678068a97fe_720w.jpg)
+
+Parameter Server由server节点和worker节点组成，其主要功能分别如下：
+- server节点的主要功能是保存模型参数、接受worker节点计算出的局部梯度、汇总计算全局梯度，并更新模型参数
+- worker节点的主要功能是各保存部分训练数据，从server节点拉取最新的模型参数，根据训练数据计算局部梯度，上传给server节点。
+
+PS分为两大部分：server group和多个worker group，另外resource manager负责总体的资源分配调度。
+- server group内部包含多个server node，每个server node负责维护一部分参数，server manager负责维护和分配server资源；
+- 每个worker group对应一个application（即一个模型训练任务），worker group之间，以及worker group内部的worker node互相之间并不通信，worker node只与server通信。
+
+多server节点的协同和效率问题
+- 导致Spark MLlib并行训练效率低下的另一原因是每次迭代都需要master节点将模型权重参数的广播发送到各worker节点。这导致两个问题：
+  - master节点作为一个瓶颈节点，受带宽条件的制约，发送全部模型参数的效率不高；
+  - 同步地广播发送所有权重参数，使系统整体的网络负载非常大。
+
+那么PS是如何解决单点master效率低下的问题呢？从图2的架构图中可知，PS采用了server group内多server的架构，每个server主要负责一部分的模型参数。模型参数使用key value的形式，每个server负责一个key的range就可以了。
+
+那么另一个问题来了，每个server是如何决定自己负责哪部分key range呢？如果有新的server节点加入，又是如何在保证已有key range不发生大的变化的情况下加入新的节点呢？这两个问题的答案涉及到一致性哈希（consistent hashing）的原理。
+
+![](https://pic2.zhimg.com/80/v2-e69c3e87adde28f87bd492543a60d9d5_720w.jpg)
+
+PS的server group中应用一致性哈希的原理大致有如下几步：
+- 将模型参数的key映射到一个环形的hash空间，比如有一个hash函数可以将任意key映射到0~(2^32)-1的hash空间内，我们只要让(2^32)-1这个桶的下一个桶是0这个桶，那么这个空间就变成了一个环形hash空间；
+- 根据server节点的数量n，将环形hash空间等分成n*m个range，让每个server间隔地分配m个hash range。这样做的目的是保证一定的负载均衡性，避免hash值过于集中带来的server负载不均；
+- 在新加入一个server节点时，让新加入的server节点找到hash环上的插入点，让新的server负责插入点到下一个插入点之间的hash range，这样做相当于把原来的某段hash range分成两份，新的节点负责后半段，原来的节点负责前半段。这样不会影响其他hash range的hash分配，自然不存在大量的rehash带来的数据大混洗的问题。
+- 删除一个server节点时，移除该节点相关的插入点，让临近节点负责该节点的hash range。
+- PS server group中应用一致性哈希原理，其实非常有效的降低了原来单master节点带来的瓶颈问题。比如现在某worker节点希望pull新的模型参数到本地，worker节点将发送不同的range pull到不同的server节点，server节点可以并行的发送自己负责的weight到worker节点。
+
+此外，由于在处理梯度的过程中server节点之间也可以高效协同，某worker节点在计算好自己的梯度后，也只需要利用range push把梯度发送给一部分相关的server节点即可。当然，这一过程也与模型结构相关，需要跟模型本身的实现结合起来实现。总的来说，PS基于一致性哈希提供了range pull和range push的能力，让模型并行训练的实现更加灵活。
+
+总结一下Parameter Server实现分布式机器学习模型训练的要点：
+- 用异步非阻断式的分布式梯度下降策略替代同步阻断式的梯度下降策略；
+- 实现多server节点的架构，避免了单master节点带来的带宽瓶颈和内存瓶颈；
+- 使用一致性哈希，range pull和range push等工程手段实现信息的最小传递，避免广播操作带来的全局性网络阻塞和带宽浪费。
+
+- Parameter Server仅仅是一个管理并行训练梯度的权重的平台，并不涉及到具体的模型实现，因此PS往往是作为MXNet，TensorFlow的一个组件，要想具体实现一个机器学习模型，还需要依赖于通用的，综合性的机器学习平台。
 
 ### Embedding
 
