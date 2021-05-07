@@ -3,7 +3,7 @@ layout: post
 title:  "人工智能及未来畅想-AI and Future"
 date:   2019-06-04 23:41:00
 categories: 人工智能
-tags: 人工智能 AI 人类简史 人文 哲学 康德 汉字屋 清华大学 天机 自行车 AGI 类脑 类机 waitbutwhy 脑机接口 张首晟 姚期智 冯·诺依曼 天道 沈向洋 戴海琼
+tags: 人工智能 AI 人类简史 人文 哲学 康德 汉字屋 清华大学 天机 自行车 AGI 类脑 类机 waitbutwhy 脑机接口 张首晟 姚期智 冯·诺依曼 天道 沈向洋 戴海琼 达摩院
 excerpt: 深度思考
 mathjax: true
 ---
@@ -15,6 +15,8 @@ mathjax: true
 
 - 【2021-4-19】[工程院院士李德毅：认知的三次革命，类脑的五条启发](https://mp.weixin.qq.com/s/Y8esD4fpjN9Y-zqxRmh1FA), [视频](https://wx.vzan.com/live/tvchat-1248131354)
 - 【2017-1-2】《对话》 20170101 [人工智能：挑战2017] (http://tv.cctv.com/2017/01/02/VIDEVhAzxZgC8tsHgPfF9Ukz170102.shtml), [B站地址](https://www.bilibili.com/video/BV1ps411Y7fm?t=1584)
+- 【2021-5-7】[阿里巴巴达摩院司罗：NLP如何达到真正智能？视频](https://www.ixigua.com/i6929800183979052292/)，NLP达到人的程度，还有很远的路要走
+  - 智能分四个层面：计算智能→感知智能→认知智能→创造智能
 - 【2021-2-28】[Bengio、Hinton的不懈追求——深度学习算法揭示大脑如何学习](https://mp.weixin.qq.com/s/2-mTVY_pyHcYyaoJtR1Hsg)，[原文链接](https://www.quantamagazine.org/artificial-neural-nets-finally-yield-clues-to-how-brains-learn-20210218/)
   - [Hinton：我终于想明白大脑怎么工作了！神经学家花三十年，寻找反向传播的生物机制](https://mp.weixin.qq.com/s/nKPde5Hv4YoZCMOFvBXM1w)，更详细的解释，英文原文：[Artificial Neural Nets Finally Yield Clues to How Brains Learn](https://www.quantamagazine.org/artificial-neural-nets-finally-yield-clues-to-how-brains-learn-20210218/)
     - [神经元信号传递视频](https://d2r55xnwy6nx47.cloudfront.net/uploads/2021/02/Neuron_2880_Lede.mp4)
