@@ -477,6 +477,9 @@ GitLab-Flow 相比于 GitHub-Flow 来说，在开发侧的区别不大，只是�
 ```shell
 #下载一个项目
 git clone [url]
+git clone --recursive [url] # 【2021-5-7】用于循环克隆git子项目(包含别的仓库代码), 一次性解决模块依赖
+# git clone 中途报错（early EOF），进入主目录，补充执行以下命令
+git submodule update --init --recursive
 #添加所有你修改的文件到暂存区
 git add -A
 #把本地的备注提交到暂存区
