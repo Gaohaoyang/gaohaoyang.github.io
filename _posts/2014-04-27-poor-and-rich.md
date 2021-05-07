@@ -3,7 +3,7 @@ layout: post
 title:  "【读书笔记】-贫富思考-poor-and-rich"
 date:   2014-04-27 12:02:00
 categories: 读书笔记
-tags: 人生规划 贫富差距 家庭教育
+tags: 人生规划 贫富差距 家庭教育 富豪 社会阶级
 excerpt: 穷人一直穷，富人一直富吗？
 author: 鹤啸九天
 mathjax: true
@@ -17,6 +17,8 @@ mathjax: true
 - 决定一个人富有的三个条件，一是出身，二是运气，三是努力，而这三者之中，努力是最微不足道的。
 - 但是不管是否有人鼓励以及最终结果如何，每个人都需要努力的。
 
+- 【2021-5-7】[超级富豪们的家庭出身](https://mp.weixin.qq.com/s/T-LvbJfaaMJLtsf66Hlaww)，个人在社会层级中的升降，并不是个人努力的结果
+  - ![](https://p9.toutiaoimg.com/img/tos-cn-i-0022/4e33b2aa8b1b498186880dfc3acd8226~tplv-obj:1020:1006.image)
 
 # 贫穷的本质
 
