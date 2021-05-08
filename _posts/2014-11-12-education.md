@@ -3,7 +3,7 @@ layout: post
 title:  "清华学生留学香港后对人生的思考-think-about-education&life"
 date:   2014-11-12 14:02:00
 categories: 读书笔记
-tags: 贫富差距 家庭教育 留学生 
+tags: 贫富差距 家庭教育 留学生 益才
 excerpt: 穷人一直穷，富人一直富吗？
 author: 鹤啸九天
 mathjax: true
@@ -37,6 +37,8 @@ mathjax: true
 - 【KBS纪录片】[学习的人.Homo.Academics](https://www.bilibili.com/video/av23959550/)，一共五集
   - <iframe src="//player.bilibili.com/player.html?aid=23959550&bvid=BV1rp411R7Uo&cid=40098655&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  width="100%" height="600"> </iframe>
 
+- 【2021-5-8】[30年俯身躬耕，这位大蕲校长感动荆楚，梦想再启程](https://www.sohu.com/a/290343429_120053425) 
+  - ![](http://5b0988e595225.cdn.sohucs.com/images/20190120/9da17eb0236f4b4286c6aef74d2f7b35.jpeg)
 
 # [一个清华学生留学香港后对人生的思考](https://mp.weixin.qq.com/s?__biz=MjM5ODY2OTQyNg==&mid=200945260&idx=1&sn=37f11020da912382deb04b8011465b65&chksm=28c9b3711fbe3a67824aa0761f85a57240bb8bdad3de6da6c48fc9063df5b97c1fdad0c5759f&token=1917001922&lang=zh_CN#rd)
 
