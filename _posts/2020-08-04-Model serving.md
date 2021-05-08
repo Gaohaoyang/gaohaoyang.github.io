@@ -3,7 +3,7 @@ layout: post
 title:  "算法模型部署-Model Serving"
 date:   2020-08-04 16:52:00
 categories: 机器学习 技术工具
-tags: Tensorflow Web gRPC Restful 服务部署 HTTP PS 参数服务器 分布式
+tags: Tensorflow Web gRPC Restful 服务部署 HTTP PS 参数服务器 分布式 GPU
 excerpt: 如何将算法模型部署到线上？有哪些方法、工具及经验？
 author: 鹤啸九天
 mathjax: true
@@ -14,6 +14,9 @@ mathjax: true
 
 # 总结
 
+- 【2021-5-8】深度学习模型部署资源全集，[Deep-Learning-in-Production](https://github.com/ahkarami/Deep-Learning-in-Production)
+  - 部署PyTorch/TensorFlow/keras/MXNet Models，转C++/go
+  - Python加速，GPU加速
 - 由于python的灵活性和完备的生态库，使得其成为实现、验证ML算法的不二之选。但是工业界要将模型部署到生产环境上，需要考略性能问题，就不建议再使用python端的服务
 - 可以采用 Saver (python) + Serving (tensorflow serving) + Client (Java) 作为解决方案，从零开始记录线上模型部署流程。
 
