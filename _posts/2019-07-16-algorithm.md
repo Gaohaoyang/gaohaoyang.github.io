@@ -13,6 +13,29 @@ mathjax: true
 
 - 本栏目汇总各类经典的基础算法
 
+# 总结
+
+## 观点
+
+【2012-8-22】陈皓：[为什么我反对纯算法面试题](https://coolshell.cn/articles/8138.html)
+- 问难的算法题并没有错，错的很多面试官只是在肤浅甚至错误地理解着面试算法题的目的。
+- 能解算法题并不意味着这个人就有能力就能在工作中解决问题，你可以想想，小学奥数题可能比这些题更难，但并不意味着那些奥数能手就能解决实际问题。
+- **纯算法题根本不能反映一个程序员的综合能力**
+- 要考量程序员的那些综合素质呢？
+	- 会不会做需求分析？怎么理解问题的？
+	- 解决问题的思路是什么？想法如何？
+	- 会不会对基础的算法和数据结构灵活运用？
+- 工程上，难是的是这些挑战：
+	- 软件的维护成本远远大于软件的开发成本。
+	- 软件的质量变得越来越重要，所以，测试工作也变得越来越重要。
+	- 软件的需求总是在变的，软件的需求总是一点一点往上加的。
+	- 程序中大量的代码都是在处理一些错误的或是不正常的流程。
+- 对于编程能力上，应该主要考量程序员如下能力：
+	- 设计是否满足对需求的理解，并可以应对可能出现的需求变化。
+	- 程序是否易读，易维护？
+	- 重构代码的能力如何？
+	- 会不会测试自己写好的程序？
+
 # 数据结构与算法
 
 - 【2020-1-2】[清华大学邓俊辉](https://dsa.cs.tsinghua.edu.cn/~deng/ds/dsacpp/)数据结构,[视频](https://www.bilibili.com/video/av81804191)
@@ -24,27 +47,35 @@ mathjax: true
 - 【2021-1-23】可视化解释A*、Dijkstra、BFS寻路算法，[在线体验地址](https://interactive-pathfinding.netlify.app/)，完整代码[Interactive pathfinding](https://github.com/npretto/pathfinding) - Visual explanation of pathfinding algorithms and how a*, Dijkstra and BFS can be seen as the same algorithm with different parameter/data structures used under the hood' by Nicolò Pretto
 - 【2021-4-14】算法经验总结，[labuladong](https://labuladong.gitee.io/algo/), [gitee地址]([labuladong](https://labuladong.gitee.io/algo/))，各种类型题目解题思路，如[动态规划](https://github.com/labuladong/fucking-algorithm/blob/master/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%B3%BB%E5%88%97/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%AF%A6%E8%A7%A3%E8%BF%9B%E9%98%B6.md)，[pdf文件](https://share.weiyun.com/vdGvmPMe)
 
+- 【2021-5-8】基础[算法笔记](https://dairongpeng.github.io/algorithm-note/)，[Github地址](https://github.com/Dairongpeng/algorithm-note)，Morris算法可以实现二叉树遍历O(N)时间+O(1)空间
 
-## 观点
+目录概览
 
-- 【2012-8-22】陈皓：[为什么我反对纯算法面试题](https://coolshell.cn/articles/8138.html)
-	- 问难的算法题并没有错，错的很多面试官只是在肤浅甚至错误地理解着面试算法题的目的。
-	- 能解算法题并不意味着这个人就有能力就能在工作中解决问题，你可以想想，小学奥数题可能比这些题更难，但并不意味着那些奥数能手就能解决实际问题。
-- **纯算法题根本不能反映一个程序员的综合能力**
-	- 要考量程序员的那些综合素质呢？
-		- 会不会做需求分析？怎么理解问题的？
-		- 解决问题的思路是什么？想法如何？
-		- 会不会对基础的算法和数据结构灵活运用？
-	- 工程上，难是的是这些挑战：
-		- 软件的维护成本远远大于软件的开发成本。
-		- 软件的质量变得越来越重要，所以，测试工作也变得越来越重要。
-		- 软件的需求总是在变的，软件的需求总是一点一点往上加的。
-		- 程序中大量的代码都是在处理一些错误的或是不正常的流程。
-	- 对于编程能力上，应该主要考量程序员如下能力：
-		- 设计是否满足对需求的理解，并可以应对可能出现的需求变化。
-		- 程序是否易读，易维护？
-		- 重构代码的能力如何？
-		- 会不会测试自己写好的程序？
+- [x] [第一节 复杂度、排序、二分、异或](https://dairongpeng.github.io/algorithm-note/01)
+- [x] [第二节 链表、栈、队列、递归、哈希表、顺序表](https://dairongpeng.github.io/algorithm-note/02)
+- [x] [第三节 归并排序、随机快排介绍](https://dairongpeng.github.io/algorithm-note/03)
+- [x] [第四节 比较器与堆](https://dairongpeng.github.io/algorithm-note/04)
+- [x] [第五节 前缀树、桶排序以及排序总结](https://dairongpeng.github.io/algorithm-note/05)
+- [x] [第六节 链表相关面试题总结](https://dairongpeng.github.io/algorithm-note/06)
+- [x] [第七节 二叉树基本算法](https://dairongpeng.github.io/algorithm-note/07)
+- [x] [第八节 二叉树的递归思维建立](https://dairongpeng.github.io/algorithm-note/08)
+- [x] [第九节 认识贪心算法](https://dairongpeng.github.io/algorithm-note/09)
+- [x] [第十节 并查集、图相关算法介绍](https://dairongpeng.github.io/algorithm-note/10)
+- [x] [第十一节 暴力递归思维、动态规划思维建立](https://dairongpeng.github.io/algorithm-note/11)
+- [x] [第十二节 用简单暴力递归思维推导动态规划思维](https://dairongpeng.github.io/algorithm-note/12)
+- [x] [第十三节 单调栈和窗口及其更新结构](https://dairongpeng.github.io/algorithm-note/13)
+- [x] [第十四节 类似斐波那契数列的递归](https://dairongpeng.github.io/algorithm-note/14)
+- [x] [第十五节 认识KMP算法与bfprt算法](https://dairongpeng.github.io/algorithm-note/15)
+- [x] [第十六节 认识Manacher(马拉车)算法](https://dairongpeng.github.io/algorithm-note/16)
+- [x] [第十七节 认识Morris遍历](https://dairongpeng.github.io/algorithm-note/17)
+- [x] [第十八节 线段树](https://dairongpeng.github.io/algorithm-note/18)
+- [x] [第十九节 打表技巧和矩阵处理技巧](https://dairongpeng.github.io/algorithm-note/19)
+- [x] [第二十节 组累加和问题整理](https://dairongpeng.github.io/algorithm-note/20)
+- [x] [第二十一节 哈希函数有关的结构和岛问题](https://dairongpeng.github.io/algorithm-note/21)
+- [x] [第二十二节 解决资源限制类题目](https://dairongpeng.github.io/algorithm-note/22)
+- [x] [第二十三节 有序表原理及扩展](https://dairongpeng.github.io/algorithm-note/23)
+- [x] [第二十四节 AC自动机和卡特兰数](https://dairongpeng.github.io/algorithm-note/23)
+
 
 
 ## 排序算法

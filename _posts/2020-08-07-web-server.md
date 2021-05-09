@@ -1433,6 +1433,8 @@ except PyJWTError as e:
     - 基于标准：基于（并完全兼容）API 的开放标准：OpenAPI（以前称为Swagger）和 JSON Schema。
 - [文档](https://fastapi.tiangolo.com)
 
+- 【2021-5-8】问题：严格的参数验证、没有类似flask的全局变量
+
 ### 部署
 
 ```shell
