@@ -1221,4 +1221,6 @@ mathjax: true
  
 **上篇关联文章：**
  
-[相对论前夜：牛顿和麦克斯韦的战争www.zhihu.com![图标](https://pic1.zhimg.com/v2-aa09980649011aeed8cf127d1baa80c0_180x120.jpg)](https://www.zhihu.com/question/52992989/answer/1207274251)
+[相对论前夜：牛顿和麦克斯韦的战争](https://www.zhihu.com/question/52992989/answer/1207274251)
+
+![图标](https://pic1.zhimg.com/v2-aa09980649011aeed8cf127d1baa80c0_180x120.jpg)
