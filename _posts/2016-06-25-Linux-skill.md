@@ -675,6 +675,9 @@ git rm [file] # 从你的工作目录中删除文件，然后进行删除。
 
 ## 终端
 
+- 【2021-5-10】[terminus](https://eugeny.github.io/terminus/)，[下载地址](https://github.com/Eugeny/terminus/releases/tag/v1.0.138)
+![](https://gitee.com/mirrors/terminus/raw/master/docs/readme.png)
+
 - 【2020-9-1】[tmux](https://www.ruanyifeng.com/blog/2019/10/tmux.html)
 - Tmux 就是会话与窗口的"解绑"工具，将它们彻底分离。
   - （1）它允许在单个窗口中，同时访问多个会话。这对于同时运行多个命令行程序很有用。
