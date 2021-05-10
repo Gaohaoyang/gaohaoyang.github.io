@@ -151,6 +151,8 @@ CPU的指令及构架，X86架构，Arm架构，微架构，还有手机处理�
 # (1) aarch64就是ARM架构
 uname -a
 # Linux tegra-ubuntu 4.4.38-tegra #1 SMP PREEMPT Fri Jul 28 09:55:22 PDT 2017 aarch64 aarch64 aarch64 GNU/Linux
+uname -m
+# 。。。。
 file /bin/bash
 # 含ARM
 # /bin/bash: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), dynamically linked, interpreter /lib/ld-, for GNU/Linux 3.7.0, BuildID[sha1]=64c27467ad7a6c507c8f79464fea872fed5dd044, stripped
@@ -161,6 +163,8 @@ cat /proc/cpuinfo # 查看cpu信息
 # (2) x86架构
 uname -a
 # Linux ubuntu 4.4.0-21-generic #37-Ubuntu SMP Mon Apr 18 18:33:37 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux
+uname -m # 返回 x86_64
+
 file /bin/bash
 # /bin/bash: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 2.6.32, BuildID[sha1]=04eca96c5bf3e9a300952a29ef3218f00487d37b, stripped
 arch
