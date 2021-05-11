@@ -460,7 +460,7 @@ BucketID=Hash(实验对象ID，策略ID，流量层ID)%100+1
 
 ![](https://p0.meituan.net/travelcube/4c3f775d572de5f3b1371644916e644260396.jpg)
 
-[美团点评效果广告实验配置平台的设计与实现](https://blog.csdn.net/liuhuiteng/article/details/106741896)
+[美团点评效果广告实验配置平台的设计与实现](https://tech.meituan.com/2019/11/28/advertising-performance-experiment-configuration-platform.html)
 
 
 #### 贝壳
