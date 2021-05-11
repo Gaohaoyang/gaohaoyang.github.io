@@ -151,6 +151,8 @@ mathjax: true
 
 ## Demo
 
+- 【2021-5-11】[案例解析：用Tensorflow和Pytorch计算骰子值](https://www.toutiao.com/i6622845628902801933/)
+  - ![](https://p6-tt.byteimg.com/origin/pgc-image/557db089145144b5a7ae5195cf6d4aef?from=pc)，[github](https://github.com/sugi-chan/2-stage-dice-pipeline)
 - 【2020-12-04】AI姿势传递模型，[论文地址](https://arxiv.org/pdf/2012.01158.pdf)，不愿意出节目的码农的年会神器？[将舞蹈化为己用-视频](https://weibo.com/tv/show/1034:4578074625245199?from=old_pc_videoshow)
 - 【2020-12-02】【MaskDetection：滴滴开源的口罩检测模型】 by DiDi [GitHub](https://github.com/didi/maskdetection)
 - 【2020-12-04】[孪生网络用于图片搜索](https://www.pyimagesearch.com/2020/11/30/siamese-networks-with-keras-tensorflow-and-deep-learning/)《Siamese networks with Keras, TensorFlow, and Deep Learning - PyImageSearch》by Adrian Rosebrock
