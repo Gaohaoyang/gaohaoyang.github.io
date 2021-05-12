@@ -1214,6 +1214,10 @@ Matching 的问题就是如何去评估两个个体的相似度，并需要设�
 
 ## 因果工具包
 
+【2021-5-12】滴滴[连续因果森林模型的构造与实践](https://mp.weixin.qq.com/s/u7sCeNTSfHtmaW51Me2CQg)：
+- 大多数流行的**增益**模型框架(如CausalML, pylift, grf)，都很好地支持了**二元**处理变量(如发券或不发券，吃药或不吃药)的效应估计。但在**多元**/**连续**处理变量方面，尚未有很好的支持。
+- **因果森林**(Causal Forest)是由Susan Athey、Stefan Wager等人开发，专门估计异质处理效应的机器学习模型，是当前增益模型领域最为流行的算法之一。目前，官方有基于C++/R语言的[算法实现](https://grf-labs.github.io/grf)。与其他**增益树模型**(Tree-based Uplift Model)类似，因果森林以随机森林为基础，通过对特征空间进行**重复划分**(Recursive Partitioning)，以达到局部特征空间的数据同质/无混淆。在一定的假设下，我们就可以得到各个维度上**异质处理效应**(Heterogeneous Treatment Effect)的无偏估计
+
 - 【2021-1-5】[awesome-causality-algorithms](https://github.com/rguo12/awesome-causality-algorithms)
 - [DoWhy工具](https://github.com/microsoft/dowhy) An end-to-end library for causal inference
   - 微软的DoWhy是一个基于python的因果推理和分析库，它试图简化在机器学习应用程序中采用因果推理的过程。受到朱迪亚·珀尔的因果推理演算的启发，DoWhy在一个简单的编程模型下结合了几种因果推理方法，消除了传统方法的许多复杂性。
