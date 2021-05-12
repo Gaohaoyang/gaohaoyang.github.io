@@ -26,6 +26,9 @@ mathjax: true
   - 各地方、企业衍生出来的**小银行**，如上海浦发，福建兴业，做五大行看不上的生意，降不了的费用
   - ③ **农村信用合作社**，买种子，卖猪等三农事情可以借钱，要求低于农业银行
 
+![](http://image.yjcf360.com/u/cms/www/201808/13181920g8iv.JPG)
+
+
 # [马云外滩金融峰会演讲实录：不要因P2P否定互联网金融创新](http://news.startup-partner.com/news/14532.html)
 
 - ![](http://img2.ctoutiao.com/uploads/2020/10/24/1603537785572391.png)
