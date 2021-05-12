@@ -5,7 +5,7 @@ subtitle:   Linux程序开发
 date:   2019-12-20 15:43:00
 author:  鹤啸九天
 categories: 编程语言
-tags: Linux 编程技能 操作系统 C/C++ MakeFile GCC
+tags: Linux 编程技能 操作系统 C/C++ MakeFile GCC cmake
 excerpt: Linux程序开发
 mathjax: true
 header-img: img/post-bg-ios10.jpg
@@ -5380,15 +5380,10 @@ int gethostname(char *name,int namelength);
 /*  As usual, make the appropriate includes and declare the variables.  */
 
 #include <netinet/in.h>
-
 #include <arpa/inet.h>
-
 #include <unistd.h>
-
 #include <netdb.h>
-
 #include <stdio.h>
-
 #include <stdlib.h>
 
 int main(int argc, char *argv[])
@@ -5434,7 +5429,6 @@ int main(int argc, char *argv[])
     }
 
 /* 否则，显示它的所有IP地址 */
-
     addrs = hostinfo -> h_addr_list;
     while(*addrs) {
         printf(" %s", inet_ntoa(*(struct in_addr *)*addrs));
@@ -5443,27 +5437,17 @@ int main(int argc, char *argv[])
     printf("\n");
     exit(0);
 }
-
-
-
 ```
 
 下面是连接到标准服务，查看服务器的当前日期和时间
 
 ```c++
-
 /* 准备必要的头文件 */
-
 #include <sys/socket.h>
-
 #include <netinet/in.h>
-
 #include <netdb.h>
-
 #include <stdio.h>
-
 #include <unistd.h>
-
 #include <stdlib.h>
 
 int main(int argc, char *argv[])
@@ -5553,11 +5537,8 @@ level是相关的协议等级，想要正常使用，必须设置对应的编号
 select系统调用允许程序同时在多个底层文件描述符上等待输入的到达。主要是对数据结构`fd_set`进行操作，它是由打开的文件描述符构成的集合。有一组定义好的宏可以来控制这个集合。
 
 ```c
-
 #include <sys/types.h>
-
 #include <sys/time.h>
-
 /* 将fd_set初始化为空 */
 void FD_ZERO(fd_set *fdset);
 /* 清除传递的文件符 */
@@ -5581,7 +5562,6 @@ select系统调用的原型如下：
 
 ```c
 #include <sys/types.h>
-
 #include <sys/time.h>
 
 int select(int nfds,fd_set *readfds,fd_set *writefds, fd_set *errorfds,struct timeval *timeout);
@@ -5600,19 +5580,12 @@ select函数会在以下情况时返回:
 
 ```c++
 /* 开始和必要的头文件 */
-
 #include <sys/types.h>
-
 #include <sys/time.h>
-
 #include <stdio.h>
-
 #include <fcntl.h>
-
 #include <sys/ioctl.h>
-
 #include <unistd.h>
-
 #include <stdlib.h>
 
 int main()
@@ -5646,7 +5619,6 @@ int main()
             exit(1);
 
 /* 如果在等待期间，对文件描述符采取了一些动嘴，程序将读取标准输入stdin上的输入，并在接收到行尾字符之后将他们都回显到屏幕上。ctrl+D，就退出程序 */
-
         default:
             if(FD_ISSET(0,&testfds)) {
                 ioctl(0,FIONREAD,&nread);
@@ -5676,19 +5648,12 @@ int main()
     in our last program and declare some extra variables to deal with select.  */
 
 #include <sys/types.h>
-
 #include <sys/socket.h>
-
 #include <stdio.h>
-
 #include <netinet/in.h>
-
 #include <sys/time.h>
-
 #include <sys/ioctl.h>
-
 #include <unistd.h>
-
 #include <stdlib.h>
 
 int main()
@@ -5787,15 +5752,10 @@ UDP使用的是不稳定链接，因此不需要进行过多的更改和连接�
 
 ```c++
 #include <sys/socket.h>
-
 #include <netinet/in.h>
-
 #include <netdb.h>
-
 #include <stdio.h>
-
 #include <unistd.h>
-
 #include <stdlib.h>
 
 int main(int argc,char *argv[])
@@ -6123,7 +6083,6 @@ GCC编译分为4步；
 ## 2 关于程序的编译与链接
 
 具体的过程可以参照:[C/C++ 的一个符号操作问题](https://wangpengcheng.github.io/2019/05/12/c_peator_problem/)
-
 - 编译时(.c->.o)：编译器需要的是语法正确，函数与变量的声明的正确。
 - 链接时(.o->exe):主要是链接函数和全局变量。
 
@@ -6157,6 +6116,112 @@ GCC编译分为4步；
 - 文件名操作函数
   - ![](https://pic3.zhimg.com/80/v2-b07e0a8a9f93c0b10b680045d9bce89a_1440w.jpg)
 
+### CMake
+
+- 【2021-5-12】[CMakeList语法知识](https://www.jianshu.com/p/33efb7b67acc)
+- 实际项目中的C/C++文件不计其数、文件放置的位置也不同，Makefile定义了一系列的规则来指定，哪些文件需要先编译，哪些文件需要后编译，哪些文件需要重新编译，甚至于进行更复杂的功能操作。实现自动化的编译。
+- CMake是一种**跨平台**编译工具，CMake主要是编写CMakeLists.txt文件，然后通过cmake命令将CMakeLists.txt文件转化为make所需要的Makefile文件，最后用make命令编译源码生成可执行程序或者库文件。
+
+**CMake方式编译生成库文件**
+
+CMake的语法,创建一个 test项目，项目结构如下:
+```shell
+├── test目录 # 测试？
+│ ├── CMakeLists.txt 
+│ ├── include目录 # 头文件
+│ │ ├── myprint.h
+│ ├── src 目录 # 源码文件
+│ │ ├── myprint.cpp
+│ ├── lib目录 # lib库
+│ ├── biuld目录 # 构建项目
+```
+myprint.h
+
+```cpp
+#include<stdio.h>
+#include<stdlib.h>
+
+void myprint(char* str);
+```
+
+myprint.cpp
+
+```cpp
+#include "/usr/demo/test5/include/myprint.h"
+
+void myprint(char* str) {
+    printf("%s",str);
+}
+```
+
+CMakeLists.txt文件
+
+```shell
+#指定CMake编译最低要求版本
+CMAKE_MINIMUM_REQUIRED(VERSION 3.14)
+#给项目命名
+PROJECT(MYPRINT)
+#收集c/c++文件并赋值给变量SRC_LIST_CPP  ${PROJECT_SOURCE_DIR}代表区当前项目录
+FILE(GLOB SRC_LIST_CPP ${PROJECT_SOURCE_DIR}/src/*.cpp)
+FILE(GLOB SRC_LIST_C ${PROJECT_SOURCE_DIR}/src/*.c)
+#指定头文件目录
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/include)
+#指定生成库文件的目录
+SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+#去变量SRC_LIST_CPP 与SRC_LIST_C 指定生成libmyprint 动态库   默认生成静态库  SHARED指定生成库类型为动态库
+ADD_LIBRARY(myprint SHARED ${SRC_LIST_CPP} ${SRC_LIST_C})
+```
+
+cd到项目biuld目录执行cmake命令, 将会在biuld目录下生成Makefile文件，执行make命令项目就会开始编译，在项目lib目录下生成libmyprint.so文件
+
+```shell
+mkdir build
+cd build
+cmake .. # cmakelists文件目录
+cmake -H. -Bbuild # 或指定输出目录
+# 生成makefile文件
+make # 开始编译
+# 生成libmyprint.dylib文件
+```
+
+使用库文件
+
+```cpp
+#include <stdio.h>
+#include "/usr/demo/test5/include/myprint.h"
+
+int main() {
+        myprint("hello World\n");
+        return 0;
+}
+```
+
+重新编写CMakeLists.txt
+
+```shell
+CMAKE_MINIMUM_REQUIRED(VERSION 3.14)
+#指定项目名称
+PROJECT(HELLO)
+
+#将hello.cpp 赋值给SOURCE 变量
+SET(SOURCE ${PROJECT_SOURCE_DIR}/src/hello.cpp)
+
+#指定头文件目录
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/include)
+#指定链接库文件目录
+LINK_DIRECTORIES(${PROJECT_SOURCE_DIR}/lib)
+
+#将hello.cpp生成可执行文件hello 
+ADD_EXECUTABLE(hello ${SOURCE})
+
+#指定hello 链接库myprint
+TARGET_LINK_LIBRARIES(hello myprint)
+```
+
+build目录下，重新执行一遍cmake及make，生成二进制文件 ./hello
+
+
+
 ### 介绍
 
 - [Makefile教程（绝对经典，所有问题看这一篇足够了）](https://blog.csdn.net/weixin_38391755/article/details/80380786/)
@@ -6188,7 +6253,6 @@ GNU的make工作时的执行步骤入下：（想来其它的make也是类似）
 - 工作原理
 
 ![](https://img-blog.csdn.net/20181002091509553)
-
 
 - 变量
   - 自动变量
@@ -6332,8 +6396,6 @@ int main(){
 ```
  
 ### 不用 makefile 如何编译？
-
------------------
  
 如果不用 makefile，则需要按照下面的方式编译上述代码：
  
@@ -6345,13 +6407,13 @@ g++ -o hello main.o function1.o function2.o
 ```
  
 其中，`g++ -c function1.cpp` 会将源码编译成名为 `function1.o` 对象文件。如果不想采用默认的命名，也可以自定义文件名，例如：`g++ -c function1.cpp -o fun1.o`。
- 
+
 也可以用一行命令整合编译、链接的步骤：
  
 ```shell
 g++ -o hello main.cpp function1.cpp function2.cpp
 ```
- 
+
 这种方式有很多弊端，例如：
 - 1.  每次编译、链接都需要手动敲的很多命令。
 - 2.  当工程量很大时，编译整个工程需要花很久。而我们往往并不是每次都修改了所有源文件，因此希望程序自动编译那些被修改的源码，而没被修改的部分不要浪费时间重新编译。
@@ -6359,8 +6421,7 @@ g++ -o hello main.cpp function1.cpp function2.cpp
 为了解决上述第一个问题，我们可以把所有编译需要的命令保存到文件中，编译时一键执行。针对第二个问题，我们希望有一个软件，自动检测哪些源文件被修改过，然后自动把它们挑出来选择性地编译。而 make 命令通过检测代码文件的时间戳，决定是否编译它。
  
 ### 第一版 Makefile
-------------
- 
+
 首先需要确定 Makefile 的名字，需要设置成 `Makefile` 或者 `makefile`，而不能是其它版本（`MakeFile, Make_file, makeFile,... `)。其次，需要注意的是 Makefile 是缩进敏感的，在行首一定不能随便打空格。下面我们看一下第一版 Makefile。
  
 ```makefile
@@ -6377,8 +6438,7 @@ clean:
 - 这个 Makefile 虽然可以省去敲命令的痛苦，却无法选择性编译源码。因为我们把所有源文件都一股脑塞进了一条命令，每次都要编译整个工程，很浪费时间。第二版 Makefile 将解决这个问题。
  
 ### 第二版 Makefile
-------------
- 
+
 既然我们希望能够选择性地编译源文件，就不能像上一节那样把所有源文件放在一条命令里编译了，而是要分开写：
  
 ```makefile
@@ -6420,7 +6480,6 @@ g++ main.o function1.o function2.o -o hello
 这样，我们就发挥出 Makefile 选择性编译的功能了。下面，将介绍如何在 Makefile 中声明变量（declare variable）。
  
 ### 第三版 Makefile
-------------
  
 我们希望将需要反复输入的命令整合成变量，用到它们时直接用对应的变量替代，这样如果将来需要修改这些命令，则在定义它的位置改一行代码即可。
  
@@ -6441,24 +6500,23 @@ function2.o: function2.cpp
 clean:
         rm -rf *.o hello
 ```
- 
+
 上面的 Makefile 中，开头定义了三个变量：CC，CFLAGS，和 LFLAGS。其中 CC 表示选择的编译器（也可以改成 gcc）；CFLAGS 表示编译选项，-c 即 g++ 中的 -c，-Wall 表示显示编译过程中遇到的所有 warning；LFLAGS 表示链接选项，它就不加 -c 了。这些名字都是自定义的，真正起作用的是它们保存的内容，因此只要后面的代码正确引用，将它们定义成阿猫阿狗都没问题。容易看出，引用变量名时需要用 $() 将其括起来，表示这是一个变量名。
  
 ### 第四版 Makefile
-------------
  
 第三版的 Makefile 还是不够简洁，例如我们的 dependencies 中的内容，往往和 g++ 命令中的内容重复：
 ```makefile
 hello: main.o function1.o function2.o
         $(CC) $(LFLAGS) main.o function1.o function2.o -o hello
 ```
- 
+
 我们不想敲那么多字，能不能善用 <target>:<dependencies> 中的内容呢？这就需要引入下面几个特殊符号了（也正是这些特殊符号，把 Makefile 搞得像是天书，吓退了很多初学者）：$@ ，$<，$^。
  
 例如我们有 target: dependencies 对：`all: library.cpp main.cpp`
-- *   `$@` 指代 all ，即 target
-- *   `$<` 指代 library.cpp， 即第一个 dependency
-- *   `$^` 指代 library.cpp 和 main.cpp，即所有的 dependencies
+- *  `$@` 指代 all ，即 target
+- *  `$<` 指代 library.cpp， 即第一个 dependency
+- *  `$^` 指代 library.cpp 和 main.cpp，即所有的 dependencies
 
 因此，本节开头的 Makefile 片段可以改为：
  
@@ -6490,7 +6548,6 @@ clean:
 但是手动敲文件名还是有点麻烦，能不能自动检测目录下所有的 cpp 文件呢？此外 main.cpp 和 main.o 只差一个后缀，能不能自动生成对象文件的名字，将其设置为源文件名字后缀换成 .o 的形式？
  
 ### 第五版 Makefile
-------------
  
 想要实现自动检测 cpp 文件，并且自动替换文件名后缀，需要引入两个新的命令：`patsubst` 和 `wildcard`。
  
@@ -6557,7 +6614,6 @@ clean:
 然而这一版的 Makefile 还有提升空间，它的 main.o，function1.o，function2.o 使用的都是同一套模板，不过换了个名字而已。第六版的 Makefile 将处理这个问题。
  
 ### 第六版 Makefile
-------------
  
 - 这里要用到 Static Pattern Rule，其语法为：
     - targets: target-pattern: prereq-patterns
@@ -6807,7 +6863,7 @@ print:*.c
 - `$(@F)`:表示`$@`的文件部分。
 剩下的$(操作符D)和$(操作符F)功能一次类推。
 
-### 5.4文件查询
+### 5.4 文件查询
 
 makefile中可以使用VPATH来指定文件查找目录。使用方法如下：
 - 1.vpath <pattern> <directories>:为符合模式<pattern>的文件指定搜索目录<directories>。
