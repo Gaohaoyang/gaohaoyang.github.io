@@ -6116,6 +6116,18 @@ GCC编译分为4步；
 - 文件名操作函数
   - ![](https://pic3.zhimg.com/80/v2-b07e0a8a9f93c0b10b680045d9bce89a_1440w.jpg)
 
+【2021-5-12】[5分钟理解make/makefile/cmake/nmake](https://zhuanlan.zhihu.com/p/111110992)
+gcc是GNU Compiler Collection（就是GNU编译器套件），可以简单认为是编译器，编译很多种编程语言（括C、C++、Objective-C、Fortran、Java等等）。当程序只有一个源文件时，直接就可以用gcc命令编译它。可是，程序包含很多个源文件时，怎么办，总不能挨个编译吧？
+- make工具可以看成是一个智能的批处理工具，它本身并没有编译和链接的功能，而是用类似于批处理的方式—通过调用makefile文件中用户指定的命令来进行编译和链接的。
+- makefile就像一首歌的乐谱，make工具就像指挥家，指挥家根据乐谱指挥整个乐团怎么样演奏，make工具就根据makefile中的命令进行编译和链接的。makefile命令中就包含了调用gcc（也可以是别的编译器）去编译某个源文件的命令。
+  - 当工程非常大时，手写makefile非常麻烦的，换了个平台makefile又要重新修改，这时候就出现了Cmake工具。
+- cmake可以更加简单的生成makefile文件。还可以跨平台生成对应平台能用的makefile，不用再自己去修改了。
+- CMakeList.txt：cmake根据一个叫CMakeLists.txt文件（学名：组态档）去生成makefile。
+- nmake是Microsoft Visual Studio中的附带命令，需要安装VS，实际上可以说相当于linux的make
+
+![](https://pic3.zhimg.com/80/v2-497f031761c929e5c036138f938508c6_720w.jpg)
+
+
 ### CMake
 
 - 【2021-5-12】[CMakeList语法知识](https://www.jianshu.com/p/33efb7b67acc)
