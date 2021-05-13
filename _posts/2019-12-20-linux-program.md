@@ -6120,7 +6120,8 @@ GCC编译分为4步；
 
 - 【2021-5-12】[CMakeList语法知识](https://www.jianshu.com/p/33efb7b67acc)
 - 实际项目中的C/C++文件不计其数、文件放置的位置也不同，Makefile定义了一系列的规则来指定，哪些文件需要先编译，哪些文件需要后编译，哪些文件需要重新编译，甚至于进行更复杂的功能操作。实现自动化的编译。
-- CMake是一种**跨平台**编译工具，CMake主要是编写CMakeLists.txt文件，然后通过cmake命令将CMakeLists.txt文件转化为make所需要的Makefile文件，最后用make命令编译源码生成可执行程序或者库文件。
+- CMake是一种**跨平台**编译工具，比make更高级，使用更方便。**CMake**主要是编写**CMakeLists.txt**文件，通过cmake命令将CMakeLists.txt文件转化为make所需要的**Makefile文件**，最后用make命令编译源码生成**可执行程序或者库文件**。
+- cmake 指向CMakeLists.txt所在的目录，例如 cmake .. 表示CMakeLists.txt在当前目录的上一级目录。cmake后会生成很多编译的中间文件以及makefile文件，所以一般建议新建一个新的目录，专门用来编译
 
 **CMake方式编译生成库文件**
 
@@ -6157,19 +6158,42 @@ void myprint(char* str) {
 CMakeLists.txt文件
 
 ```shell
-#指定CMake编译最低要求版本
+# 指定CMake编译最低要求版本
 CMAKE_MINIMUM_REQUIRED(VERSION 3.14)
-#给项目命名
-PROJECT(MYPRINT)
-#收集c/c++文件并赋值给变量SRC_LIST_CPP  ${PROJECT_SOURCE_DIR}代表区当前项目录
+# 指定项目的名称，一般和项目的文件夹名称对应
+PROJECT(MYPRINT) # 或 project，这个命令非必须，但最好都加上。它会引入两个变量 demo_BINARY_DIR 和 demo_SOURCE_DIR，同时，cmake自动定义了两个等价的变量 PROJECT_BINARY_DIR 和 PROJECT_SOURCE_DIR。
+# 源文件目录
+AUX_SOURCE_DIRECTORY(src DIR_SRCS)
+# 收集c/c++文件并赋值给变量SRC_LIST_CPP  ${PROJECT_SOURCE_DIR}代表区当前项目录
 FILE(GLOB SRC_LIST_CPP ${PROJECT_SOURCE_DIR}/src/*.cpp)
 FILE(GLOB SRC_LIST_C ${PROJECT_SOURCE_DIR}/src/*.c)
-#指定头文件目录
+# 指定头文件目录
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/include)
-#指定生成库文件的目录
+# 指定生成库文件的目录
 SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
-#去变量SRC_LIST_CPP 与SRC_LIST_C 指定生成libmyprint 动态库   默认生成静态库  SHARED指定生成库类型为动态库
+# ==== 设置编译类型 =====
+# 去变量SRC_LIST_CPP 与SRC_LIST_C 指定生成libmyprint 动态库   默认生成静态库  SHARED指定生成库类型为动态库
 ADD_LIBRARY(myprint SHARED ${SRC_LIST_CPP} ${SRC_LIST_C})
+add_library(common STATIC util.cpp) # 生成静态库（默认）  libcommon.a(linux)/common.lib(windows)
+add_library(common SHARED util.cpp) # 生成动态库或共享库  libcommon.so(linux)/common.dll(windows)
+add_library(demo demo.cpp test.cpp util.cpp) # 指定demo包含的源文件
+# ===== 自定义搜索规则 =====
+file(GLOB SRC_LIST "*.cpp" "protocol/*.cpp")
+add_library(demo ${SRC_LIST})
+# 或者
+file(GLOB SRC_LIST "*.cpp")
+file(GLOB SRC_PROTOCOL_LIST "protocol/*.cpp")
+add_library(demo ${SRC_LIST} ${SRC_PROTOCOL_LIST})
+# 或者
+aux_source_directory(. SRC_LIST)
+aux_source_directory(protocol SRC_PROTOCOL_LIST)
+add_library(demo ${SRC_LIST} ${SRC_PROTOCOL_LIST})
+find_library(VAR name path) # 查找到指定的预编译库，并将它的路径存储在变量中
+# 类似的命令还有 find_file()、find_path()、find_program()、find_package()。
+
+aux_source_directory(. SRC_LIST) # 搜索当前目录下的所有.cpp文件, 并保存在变量SRC_LIST中
+add_library(demo ${SRC_LIST})
+add_executable(demo demo.cpp) # 生成可执行文件 demo/demo.exe
 ```
 
 cd到项目biuld目录执行cmake命令, 将会在biuld目录下生成Makefile文件，执行make命令项目就会开始编译，在项目lib目录下生成libmyprint.so文件
@@ -6220,7 +6244,136 @@ TARGET_LINK_LIBRARIES(hello myprint)
 
 build目录下，重新执行一遍cmake及make，生成二进制文件 ./hello
 
+CMakeLists.txt文件规则
 
+（1）条件控制
+
+逻辑判断和比较：
+- if (expression)：expression 不为空（0,N,NO,OFF,FALSE,NOTFOUND）时为真
+- if (not exp)：与上面相反
+- if (var1 AND var2)
+- if (var1 OR var2)
+- if (COMMAND cmd)：如果 cmd 确实是命令并可调用为真
+- if (EXISTS dir) if (EXISTS file)：如果目录或文件存在为真
+- if (file1 IS_NEWER_THAN file2)：当 file1 比 file2 新，或 file1/file2 中有一个不存在时为真，文件名需使用全路径
+- if (IS_DIRECTORY dir)：当 dir 是目录时为真
+- if (DEFINED var)：如果变量被定义为真
+- if (var MATCHES regex)：给定的变量或者字符串能够匹配正则表达式 regex 时为真，此处 var 可以用 var 名，也可以用 ${var}
+- if (string MATCHES regex)
+
+数字比较：
+- if (variable LESS number)：LESS 小于
+- if (string LESS number)
+- if (variable GREATER number)：GREATER 大于
+- if (string GREATER number)
+- if (variable EQUAL number)：EQUAL 等于
+- if (string EQUAL number)
+
+字母表顺序比较：
+- if (variable STRLESS string)
+- if (string STRLESS string)
+- if (variable STRGREATER string)
+- if (string STRGREATER string)
+- if (variable STREQUAL string)
+- if (string STREQUAL string)
+
+示例
+```shell
+
+if(MSVC)
+    set(LINK_LIBS common)
+else()
+    set(boost_thread boost_log.a boost_system.a)
+endif()
+target_link_libraries(demo ${LINK_LIBS})
+# 或者
+if(UNIX)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fpermissive -g")
+else()
+    add_definitions(-D_SCL_SECURE_NO_WARNINGS
+    D_CRT_SECURE_NO_WARNINGS
+    -D_WIN32_WINNT=0x601
+    -D_WINSOCK_DEPRECATED_NO_WARNINGS)
+endif()
+ 
+if(${CMAKE_BUILD_TYPE} MATCHES "debug")
+    ...
+else()
+    ...
+```
+
+（2）循环
+
+```shell
+# ----- while ------
+while(condition)
+    ...
+endwhile()
+# ----- for ------
+foreach(loop_var RANGE start stop [step])
+    ...
+endforeach(loop_var)
+
+foreach(i RANGE 1 9 2)
+    message(${i})
+endforeach(i)
+# 输出：13579
+```
+
+(3) 打印信息
+
+message(${PROJECT_SOURCE_DIR})
+message("build with debug mode")
+message(WARNING "this is warnning message")
+message(FATAL_ERROR "this build has many error") # FATAL_ERROR 会导致编译失败
+
+（4）文件包含
+
+```shell
+include(./common.cmake) # 指定包含文件的全路径
+include(def) # 在搜索路径中搜索def.cmake文件
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake) # 设置include的搜索路径
+```
+
+(5) 预定义变量
+
+- PROJECT_SOURCE_DIR：工程的根目录
+- PROJECT_BINARY_DIR：运行 cmake 命令的目录，通常是 ${PROJECT_SOURCE_DIR}/build
+- PROJECT_NAME：返回通过 project 命令定义的项目名称
+- CMAKE_CURRENT_SOURCE_DIR：当前处理的 CMakeLists.txt 所在的路径
+- CMAKE_CURRENT_BINARY_DIR：target 编译目录
+- CMAKE_CURRENT_LIST_DIR：CMakeLists.txt 的完整路径
+- CMAKE_CURRENT_LIST_LINE：当前所在的行
+- CMAKE_MODULE_PATH：定义自己的 cmake 模块所在的路径，SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)，然后可以用INCLUDE命令来调用自己的模块
+- EXECUTABLE_OUTPUT_PATH：重新定义目标二进制可执行文件的存放位置
+- LIBRARY_OUTPUT_PATH：重新定义目标链接库文件的存放位置
+
+（6）变量
+
+系统信息
+­- CMAKE_MAJOR_VERSION：cmake 主版本号，比如 3.4.1 中的 3
+- ­CMAKE_MINOR_VERSION：cmake 次版本号，比如 3.4.1 中的 4
+­- CMAKE_PATCH_VERSION：cmake 补丁等级，比如 3.4.1 中的 1
+­- CMAKE_SYSTEM：系统名称，比如 Linux-­2.6.22
+­- CMAKE_SYSTEM_NAME：不包含版本的系统名，比如 Linux
+­- CMAKE_SYSTEM_VERSION：系统版本，比如 2.6.22
+­- CMAKE_SYSTEM_PROCESSOR：处理器名称，比如 i686
+­- UNIX：在所有的类 UNIX 平台下该值为 TRUE，包括 OS X 和 cygwin
+­- WIN32：在所有的 win32 平台下该值为 TRUE，包括 cygwin
+
+```shell
+set(ENV{Name} value) # 设置环境变量，这里没有“$”符号
+$ENV{Name} # 使用环境变量
+```
+
+开关选项
+- BUILD_SHARED_LIBS：这个开关用来控制默认的库编译方式，如果不进行设置，使用 add_library 又没有指定库类型的情况下，默认编译生成的库都是静态库。如果 set(BUILD_SHARED_LIBS ON) 后，默认生成的为动态库
+- CMAKE_C_FLAGS：设置 C 编译选项，也可以通过指令 add_definitions() 添加
+- CMAKE_CXX_FLAGS：设置 C++ 编译选项，也可以通过指令 add_definitions() 添加
+
+add_definitions(-DENABLE_DEBUG -DABC) # 参数之间用空格分隔
+
+参考：[CMakeLists.txt 语法介绍与实例演练](https://blog.csdn.net/afei__/article/details/81201039)
 
 ### 介绍
 
