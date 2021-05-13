@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "深度学习精简笔记-Deep Learning Summary"
+title:  "机器学习/深度学习 精简笔记-Deep Learning Summary"
 date:   2018-07-24 11:45:00
 categories: 深度学习 机器学习
-tags: 神经网络  人工智能  AI  机器学习 吴恩达
+tags: 神经网络  人工智能  AI  机器学习 吴恩达 机器学习流程
 excerpt: 深度学习的精简笔记，便于快速回顾
 author: 鹤啸九天
 mathjax: true
@@ -14,7 +14,57 @@ mathjax: true
 
 >知识点精简笔记
 
+# 图解机器学习
+
+- 【2021-5-13】[【绝对干货】机器学习模型训练全流程](https://zhuanlan.zhihu.com/p/184673895), [数据科学信息图](https://github.com/dataprofessor/infographic)
+  - ![](https://github.com/dataprofessor/infographic/blob/master/01-Building-the-Machine-Learning-Model.JPG?raw=true)
+- [MLOps：构建生产机器学习系统最佳实践](https://zhuanlan.zhihu.com/p/363697750)
+  - 生命周期
+    - 一个典型的ML生命周期可以概括为以下图表，主要由三个阶段组成
+    - ![](https://pic1.zhimg.com/80/v2-f33475c071cc24b479b98c6148d82f90_1440w.jpg)
+  - 机器学习基本组成部分
+    - ![](https://pic1.zhimg.com/80/v2-286009a5c03b210b829f6d1ef8275914_1440w.jpg)
+  - 基本流程
+    - ![](https://pic1.zhimg.com/80/v2-d6de7de2ce6d135a7bf6ff5d289a4f64_1440w.jpg)
+    - 第一阶段，**数据**，深入研究数据之前做好准备是很重要的。因此与业务专家一起，仔细定义我们的问题和业务目标!需要回答一些重要的问题，这些问题使我们能够对模型和生产线的设计进行培训和服务决策。例如:
+      - 理想的结果是什么?
+      - 我们的评估指标是什么?我们如何定义ROI?
+      - 成功和失败的标准是什么?
+      - 推理速度要求是什么?我们能否让每个功能都满足要求?…
+    - 第二阶段，**建模**，建立第一个ML模型，进行ML可行性研究。
+      - 使用第一阶段中定义的度量来证明ML业务价值。ML工程规则第1条的最佳实践是«保持第一个模型简单，并获得正确的基础模型»。最初的模型为我们的产品提供了最大的提升，所以它不需要一开始就成为最花哨的模型。
+    - 第三阶段，**部署**，进入生产阶段。一旦生产管道准备好并设计好了，我们便能够更快更有效地收集见解并迭代新想法。
+
+
+
 # 吴恩达深度学习课程精简笔记
+
+【2021-5-13】[图解机器学习流程：技师版本vs数理版本](https://zhuanlan.zhihu.com/p/53079923): 吴恩达CS229第一至四课的感受：关于机器学习，可以有两个版本，工程师/技师版本，和数理专家版本。
+
+（1）工程师/技师眼中机器学习的流程结构：
+- data + learning algo (+ non-linear functions) + objective function + search algorithm + iteration = hypothesis with params optimized
+- 数据 + 学习算法 + 目标函数 + 优化算法 + 循环 = 最优模型
+
+![](https://pic3.zhimg.com/80/v2-93f4e6416aa5280c6381d22b5f7a6332_1440w.jpg)
+
+（2）数理版本的流程：
+- data + probabilistic or distribution function (GLM, e.g., the exponential family) + maximum likelihood + search algorithm + iteration = hypothesis with params optimized
+
+由此可见，数理版本与技师版本的不同之处，有三，分别用一下三张图对比说明
+
+![](https://pic3.zhimg.com/80/v2-30b800bbb5523278ba80cee04eb3a752_1440w.jpg)
+
+数理专家，偷懒，用GLM将大量learning algos融合在了一起；或者说可以通过调制GLM生成不同的learning algos 
+
+![](https://pic3.zhimg.com/80/v2-05d6c6fa6872bb362cc85fe38dfdc392_1440w.jpg)
+
+最后，是将工程师所用的三个不同的目标函数，做减法做融合，只用maximum likelihood就能搞定。下图只展示了如何用maximum likelihood 代替MSE
+
+![](https://pic3.zhimg.com/80/v2-7ee53a82e0c779206cbbd9f28f8e2f2e_1440w.jpg)
+
+
+
+
 
 ![22张深度学习精炼图笔记总结](https://pic4.zhimg.com/50/v2-a913394041ebf4717d8a64eb93d28736_hd.jpg)
  
