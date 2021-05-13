@@ -76,8 +76,6 @@ Model Serving的主要方法: 文章[如何解决推荐系统工程难题——�
   - 要搭建一套完整的TensorFlow Serving服务并不是一件容易的事情，因为其中涉及到模型更新，整个docker container集群的维护和按需扩展等一系例工程问题；此外，TensorFlow Serving的性能问题也仍被业界诟病。但Tensorflow Serving的易用性和对复杂模型的支持仍使其是上线TensorFlow模型的第一选择。
   - 除了TensorFlow Serving之外，Amazon的Sagemaker，H2O.ai的H2O平台都是类似的专业用于模型serving的服务。平台的易用性和效率都有保证，但都需要与离线训练平台进行绑定，无法做到跨平台的模型迁移部署。
 
-
-
 阿里妈妈的服务架构（[从阿里的User Interest Center看模型线上实时serving方法](https://zhuanlan.zhihu.com/p/111929212)）
 - (A)和(B)分别代表了两种不同的模型服务架构，横向虚线代表了在线环境和离线环境的分隔
 - (A)是经典的解决方案
