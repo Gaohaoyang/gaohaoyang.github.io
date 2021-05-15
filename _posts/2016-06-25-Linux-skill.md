@@ -734,6 +734,20 @@ git rm [file] # 从你的工作目录中删除文件，然后进行删除。
 
 ## 终端
 
+- 【2021-5-15】Next Terminal 是一款开源的远程登录工具，需要自己部署，可以在任何一个浏览器远程访问Windows/Linux/macOS系统，方便快捷。Next Terminal 基于 Apache Guacamole 开发，使用到了guacd 服务。在线[DEMO](https://next-terminal.typesafe.cn/)，即开即用,（用户名/密码 test/test），打开后就能看到后台了
+- 具体功能如下：
+  - 授权凭证管理（密码、密钥）
+  - 资产管理（支持RDP、SSH、VNC、TELNET 协议）
+  - 指令管理（预设命令行）
+  - 批量执行命令
+  - 在线会话管理（监控、强制断开）
+  - 离线会话管理（查看录屏）
+  - 双因素认证
+  - 多用户登录
+  - 资产授权
+  - 用户分组
+  - ![](https://img3.appinn.net/images/202101/vnc.jpg)
+  - [Next Terminal – 用浏览器访问远程桌面，支持 RDP、SSH、VNC 和 Telnet](https://www.appinn.com/next-terminal/)
 - 【2021-5-10】[terminus](https://eugeny.github.io/terminus/)，[下载地址](https://github.com/Eugeny/terminus/releases/tag/v1.0.138)
 ![](https://gitee.com/mirrors/terminus/raw/master/docs/readme.png)
 
