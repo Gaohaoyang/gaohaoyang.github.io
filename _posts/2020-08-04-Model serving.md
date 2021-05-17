@@ -23,6 +23,16 @@ mathjax: true
 
 # 机器学习生命周期
 
+机器学习周期的三个阶段 [图](https://img-blog.csdnimg.cn/20210410095830948.png)
+- 数据准备
+- 模型建立
+- 线上部署
+
+![](https://img-blog.csdnimg.cn/20210410095830948.png)
+![](https://img-blog.csdnimg.cn/20210410095837503.png)
+
+源自：[MLOps：构建生产机器学习系统的最佳实践](https://deephub.blog.csdn.net/article/details/115564701)
+
 典型 ML 生命周期 —— 微软[MLOps 和 ML 生命周期简介](https://docs.microsoft.com/zh-cn/learn/modules/start-ml-lifecycle-mlops/2-mlops-introduction)
 - **训练和测试**： 首先，数据科学家需要准备训练数据。 这通常是生命周期中最大的时间投入。 准备工作包括将数据标准化，使其采用可重用格式并标识各自的“特征”或变量。 例如，要预测信用风险，特征可能包括客户年龄、帐户大小和帐户期限。 接下来，将算法应用于数据，对机器学习模型进行训练。 然后，通过新数据对其进行测试，了解其预测的准确性。
 - **打包**： ML 工程师使用其环境将模型容器化，这意味着通过其所有依赖项为模型创建一个在其中运行的 docker 容器。 模型环境包含模型需要无缝执行的元数据，如代码库。
