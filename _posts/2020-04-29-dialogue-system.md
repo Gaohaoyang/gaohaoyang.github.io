@@ -14,8 +14,6 @@ mathjax: true
 
 # 总结
 
-- 【2021-5-17】智能外呼机器人，[知乎](https://www.zhihu.com/question/268748598), [行业现状](https://pic2.zhimg.com/80/v2-843538439c23e20a0473028b5c1bcdef_1440w.jpg?source=1940ef5c)，[智能获客机器人](https://pic4.zhimg.com/80/v2-12cac2954590abe9960823a9c6918930_1440w.jpg?source=1940ef5c)
-  - ![](https://pic2.zhimg.com/80/v2-843538439c23e20a0473028b5c1bcdef_1440w.jpg?source=1940ef5c)
 - 【2021-3-29】[开放领域问答梳理系列](https://zhuanlan.zhihu.com/p/360572095), 两阶段系统：基于信息检索（information Retrieval， IR）+机器阅读理解（Machine Reading Comprehension， MRC）（retriever-reader）的开放领域问答系统
   - ![](https://pic3.zhimg.com/80/v2-4c8be13f06c586b374df8783620b677a_1440w.jpg)
 - 【2021-3-27】【开放域长式问答的进展与挑战】《[Progress and Challenges in Long-Form Open-Domain Question Answering-Google AI Blog](https://ai.googleblog.com/2021/03/progress-and-challenges-in-long-form.html)》，论文 paper:《[Hurdles to Progress in Long-form Question Answering](https://arxiv.org/abs/2103.06332)》
@@ -477,6 +475,47 @@ Mingke： 每一个行业都会诞生属于这个领域的智能服务，金融�
 
 与这个过程伴随出现的，还有配套的工具、平台、基础设施，以及其他“卖水给掘金者”的业务，都会纷纷出现。下一个时代可能是属于智能服务的，看上去像是由 to B 开始的，巅峰的时候可能是全面 to C。智能服务是我认为 AI to C 的方向最有可能出现的做法。 所以我对未来是非常期待的，如果有对这个行业感兴趣的小伙伴欢迎跟我讨论或者加入这个行业。 
 
+## 智能外呼
+
+- 【2021-5-17】智能外呼机器人，[知乎](https://www.zhihu.com/question/268748598), [行业现状](https://pic2.zhimg.com/80/v2-843538439c23e20a0473028b5c1bcdef_1440w.jpg?source=1940ef5c)，[智能获客机器人](https://pic4.zhimg.com/80/v2-12cac2954590abe9960823a9c6918930_1440w.jpg?source=1940ef5c)
+  - ![](https://pic2.zhimg.com/80/v2-843538439c23e20a0473028b5c1bcdef_1440w.jpg?source=1940ef5c)
+
+
+做**智能外呼机器人**的企业现在已经挺多了，比如各个答案中提到的各家的产品。它的市场认可度也比较高，大家都知道它能用于**通知、回访、问卷调查、营销**等业务场景。外呼机器人的价值很好衡量，用了外呼机器人后，能给企业赚多少钱，或者能给企业省多少钱，简单地算算收益和成本差异就知道值不值得用了。
+
+总的来说，构建**智能外呼机器人**的所有产品都是在**成本**和**效果**两个坐标上找平衡点。在现有技术水平下，机器人如果功能简单是可以通过机器人平台自主构建的，但如果要求机器人更加智能（比如精准理解用户说的话并提供对应答复），就需要做深度定制。
+
+![](https://pic2.zhimg.com/80/v2-843538439c23e20a0473028b5c1bcdef_1440w.jpg?source=1940ef5c)
+
+有些产品走的是**低价和平台策略**，比如[百应](https://link.zhihu.com/?target=https%3A//www.byai.com/)、[硅基](https://link.zhihu.com/?target=https%3A//www.guiji.ai/)、[环信](https://link.zhihu.com/?target=https%3A//www.easemob.com/product/ai/call)、[智齿](https://link.zhihu.com/?target=https%3A//www.sobot.com/icall.html)、[百度智能云](https://link.zhihu.com/?target=https%3A//cloud.baidu.com/product/ai-outbound.html)、[京东数科](https://link.zhihu.com/?target=https%3A//www.jddglobal.com/products/outbound)，你只要交点钱就可以用他们的平台自己去配置外呼机器人，平台是不怎么负责帮你优化外呼机器人效果的。这样配置出来的机器人，基本只能做简单的通知，不允许用户与机器人有复杂的自主交互。这种产品适用于构建通知类外呼机器人，比如现在很多快递公司都使用机器人打电话通知取快递。
+ 
+还有另一类外呼产品主打的是**机器人的效果**，也即平台提供深度定制服务以构建更加智能的外呼机器人。这类产品有：[爱因互动](https://link.zhihu.com/?target=http%3A//www.einplus.cn/)、[捷通华声](https://link.zhihu.com/?target=http%3A//www.sinovoice.com/)、[思必驰](https://www.talkinggenie.com/4)。这类产品适合业务场景比较复杂，或者（潜在）客户价值较高时的情况。定制开发的机器人能更精准地理解用户说的话，比如对营销产品的意向度、情感倾向，用户画像如性别、年龄、教育程度等。
+ 
+说说**爱因互动**做外呼机器人的原因和优势。从算法技术框架上看，智能外呼机器人和文本对话机器人（聊天机器人）差异不大，只是在文本处理逻辑的基础上增加了语音转换的流程：**语音转文字（ASR）**和**文字转语音（TTS）**，即下图中的红色部分。
+ 
+![](https://pic2.zhimg.com/80/v2-8aeb1464930fbeccce437c749c197a1e_1440w.jpg?source=1940ef5c)
+ 
+相比于大家对**文本机器人**不切实际的期待（“_我们没历史数据，机器人不是会自主学习吗干嘛还要数据训练_”，“_这两句话虽然没有一个词相同，但它们明明是一个意思机器人怎么识别不了_”，“_为什么机器人不能跟我闲聊_”），外呼机器人的使用场景通常简单单一，且价值容易衡量。这使得外呼机器人中要求的文本处理技术更加简单，在较低成本的定制化后机器人就能达到很高的准确率。作为从文本机器人起家的爱因互动，我们实施过数百个业务定制的复杂文本对话机器人，从中积累了大量快速精准定制的工具和方法论。这些积累都可以直接移植到外呼机器人的研发上。
+ 
+![](https://pic2.zhimg.com/80/v2-d0caa71d7275c4a530ef3cb1b15ce8a7_1440w.jpg?source=1940ef5c)
+ 
+**爱因互动**也把文本处理中最新的BERT技术推广到语音处理领域，我们利用自己的数据训练了外呼场景的大规模语音处理模型 **audio-BERT**。基于audio-BERT技术我们开发了基于语音信号的**情绪识别**、**性别检测**、**年龄检测**等模型。基于我们的语音处理模型和我们在文本处理的积累，我们不仅能精准识别用户意图，在对话中提供灵活打断和答疑等能力，还能为对话打上用户画像的多种标签。
+
+![](https://pic4.zhimg.com/80/v2-f73cad287d964541fbb385fad518e873_1440w.jpg?source=1940ef5c)
+
+![](https://pic4.zhimg.com/80/v2-6fe8c32babf6a45c479ab0adc1008034_1440w.jpg?source=1940ef5c)
+ 
+**爱因互动的外呼机器人主要包括三大类：**
+  
+![](https://pic4.zhimg.com/80/v2-12cac2954590abe9960823a9c6918930_1440w.jpg?source=1940ef5c)
+
+![](https://pic4.zhimg.com/80/v2-86ae70915e9c1a828a72567809178909_1440w.jpg?source=1940ef5c)
+
+![](https://pic1.zhimg.com/80/v2-87b6504a7753e368a08607d6a2e0d17e_1440w.jpg?source=1940ef5c)
+
+**爱因互动**也为诸多行业提供了详细的解决方案。比如**对于教育行业，我们提供了智能获客的全场景覆盖。**
+
+![](https://pic2.zhimg.com/80/v2-e3b93cfd98c11d1fa91a77473000ff5b_1440w.jpg?source=1940ef5c)
 
 
 # 现状
