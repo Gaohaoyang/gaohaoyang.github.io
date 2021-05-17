@@ -224,7 +224,9 @@ Embedding store
 
 # MLOps
 
-- 【2021-5-17】[MLOps简介](https://segmentfault.com/a/1190000039957405?utm_source=sf-similar-article)
+- 【2021-5-17】[MLOps简介](https://segmentfault.com/a/1190000039957405?utm_source=sf-similar-article)，作者字节，知乎原文：[从小作坊到智能中枢: MLOps简介](https://zhuanlan.zhihu.com/p/357897337)，其它系列文章
+  - [Full Stack Deep Learning](Full Stack Deep Learning)
+  - [人类早期驯服野生机器学习模型的珍贵资料](https://zhuanlan.zhihu.com/p/330577488)
 
 ## 一、什么是 MLOps？
 
