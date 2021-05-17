@@ -170,6 +170,7 @@ PRML 的主要内容：
 <iframe src="//player.bilibili.com/player.html?aid=47055599&cid=82415548&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 - 【2020-1-2】吴恩达[机器学习课程资料](https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes)，含ppt、word、markdown版笔记，黄海广总结
+- 【2021-5-17】[machine-learning-yearning](https://deeplearning-ai.github.io/machine-learning-yearning-cn/), 机器学习秘笈中文版
 
 
 # 强化学习
