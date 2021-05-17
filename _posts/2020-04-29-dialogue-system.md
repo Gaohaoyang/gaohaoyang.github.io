@@ -14,6 +14,8 @@ mathjax: true
 
 # 总结
 
+- 【2021-5-17】智能外呼机器人，[知乎](https://www.zhihu.com/question/268748598), [行业现状](https://pic2.zhimg.com/80/v2-843538439c23e20a0473028b5c1bcdef_1440w.jpg?source=1940ef5c)，[智能获客机器人](https://pic4.zhimg.com/80/v2-12cac2954590abe9960823a9c6918930_1440w.jpg?source=1940ef5c)
+  - ![](https://pic2.zhimg.com/80/v2-843538439c23e20a0473028b5c1bcdef_1440w.jpg?source=1940ef5c)
 - 【2021-3-29】[开放领域问答梳理系列](https://zhuanlan.zhihu.com/p/360572095), 两阶段系统：基于信息检索（information Retrieval， IR）+机器阅读理解（Machine Reading Comprehension， MRC）（retriever-reader）的开放领域问答系统
   - ![](https://pic3.zhimg.com/80/v2-4c8be13f06c586b374df8783620b677a_1440w.jpg)
 - 【2021-3-27】【开放域长式问答的进展与挑战】《[Progress and Challenges in Long-Form Open-Domain Question Answering-Google AI Blog](https://ai.googleblog.com/2021/03/progress-and-challenges-in-long-form.html)》，论文 paper:《[Hurdles to Progress in Long-form Question Answering](https://arxiv.org/abs/2103.06332)》
