@@ -31,6 +31,9 @@ mathjax: true
 ![](https://img-blog.csdnimg.cn/20210410095830948.png)
 ![](https://img-blog.csdnimg.cn/20210410095837503.png)
 
+完整的端到端自动化[管道](https://img-blog.csdnimg.cn/20210410095953318.png)
+![](https://img-blog.csdnimg.cn/20210410095953318.png)
+
 源自：[MLOps：构建生产机器学习系统的最佳实践](https://deephub.blog.csdn.net/article/details/115564701)
 
 典型 ML 生命周期 —— 微软[MLOps 和 ML 生命周期简介](https://docs.microsoft.com/zh-cn/learn/modules/start-ml-lifecycle-mlops/2-mlops-introduction)
@@ -52,7 +55,6 @@ mathjax: true
   - 模型计算的“**实时数据**”问题。 例如：卖方在公司 CRM 系统中不一致地记录客户数据。
   - 随着时间推移模型本身发生“**偏移**”或者衰退。 这包括“概念偏移”，就是说要预测的内容的概念发生改变。 “数据偏移”（即数据的属性发生变化）也很常见。 “上游数据更改”（即数据收集的方式或内容发生操作性更改）也会影响模型。
   - 外界变化。 例如：基于 2001 年数据的财务交易模型在 2020 可能无效。
-
 
 - 从训练到部署的整个流程
     - ![](https://img2020.cnblogs.com/blog/963156/202004/963156-20200424165332708-1843237557.png)
@@ -488,6 +490,8 @@ MLOps如果能做的好，可以获得很多回报。个人感觉其中价值最
 
 
 # Tensorflow Serving
+
+Tensorflow自带Tensorflow Extended (TFX)。TFX使我们能够专注于优化ML管道，同时减少对每次重复的样板代码的关注。像数据验证和模型分析这样的组件可以很容易地完成，而不需要开发自定义代码来读取数据并在两次管道执行之间检测异常。使用TFX，只需要很少几行代码就可以完成，从而节省了大量开发管道组件的时间。数据验证和模型分析组件中的截图来自TFX。
 
 ## 服务框架
 
