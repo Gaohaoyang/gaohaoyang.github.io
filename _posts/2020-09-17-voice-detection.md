@@ -26,8 +26,8 @@ mathjax: true
   - 淘系内容业务发展史
   - 音视频技术趋势以及淘系技术相关布局
   - 淘系音视频领域若干技术进展
-- 【2021-5-18】搜狗发布全球首个手语合成主播，小聪
-<iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/6963883755006231052?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
+- 【2021-5-18】[搜狗发布全球首个手语合成主播](https://www.ixigua.com/6963167753645589029)，小聪
+<iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/6963167753645589029?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
 
 
 ## 业界音箱产品评测
