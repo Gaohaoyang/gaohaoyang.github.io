@@ -416,6 +416,7 @@ _图源：https://arxiv.org/pdf/1612.08242.pdf_
 ![](https://image.jiqizhixin.com/uploads/editor/c8b94c58-c362-4593-a982-a42165f2bddc/1524810338786.jpg)
  
 _图源：https://arxiv.org/pdf/1612.08242.pdf_
+
  
 ## YOLOv3
  
@@ -511,6 +512,13 @@ _RetinaNet_
 # 目标检测实践
 
 ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X2dpZi8xTXRuQXhtV1N3TnBlWHVvOFAyd1ZpY2lhVkswdEEzcXBQMmliRHp2anRpY0N0NU1WSllzUFVCb2liZXU0TjZxbUxSZTJrTG13SWljRHNXY2hNRFE4aWJZam9jb1EvNjQw?x-oss-process=image/format,png)
+
+- 【2021-5-18】[4种YOLO目标检测的C++和Python两种版本实现](https://www.toutiao.com/i6963503613297689102/)
+- 2020年，新出了几个新版本的YOLO目标检测，最多的有YOLOv4，Yolo-Fastest，YOLObile以及百度提出的PP-YOLO。C++编写一套基于OpenCV的YOLO目标检测，这个程序里包含了经典的YOLOv3，YOLOv4，Yolo-Fastest和YOLObile这4种YOLO目标检测的实现
+- Yolo-Fastest运行速度最快，YOLObile号称是实时的，但是从结果看并不如此。并且查看它们的模型文件，可以看到Yolo-Fastest的是最小的。
+- opencv实现yolov5目标检测，程序依然是包含了C++和Python两种版本的实现，地址: [python](https://github.com/hpc203/yolov5-dnn-cpp-python),  [C++](https://github.com/hpc203/yolov5-dnn-cpp-python-v2)
+
+![](https://p6-tt.byteimg.com/origin/pgc-image/3ae75db8898d47eaac8b9649a0ff5a97?from=pc)
 
 ## Real-Time-Person-Removal
 
