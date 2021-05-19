@@ -236,6 +236,14 @@ mathjax: true
  
 从AI换脸到AI试穿，再到AI助“数字永生”……如今，人工智能正全方位渗透到我们的生活中，重要且不可忽视。
  
+- 【2021-5-19】BBC人工智能纪录片：[起源](https://www.ixigua.com/6934918741855584781)，[学习](https://www.ixigua.com/6940612280199414283)，[认知世界](https://www.ixigua.com/6940612280199414283)
+
+<iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/6934918741855584781?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
+
+<iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/6934922793687613983?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
+
+<iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/6935038290122932744?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
+
 ## 艾萨克·阿西莫夫提出“机器人三大定律”（1942）
 
 1942年，艾萨克·阿西莫夫（IsaacAsimov）发表了短篇小说《转圈圈》(Runaround，又译作《环舞》)。这位著名的科幻作家首次完整地阐述了他的“`机器人三大定律`”：
