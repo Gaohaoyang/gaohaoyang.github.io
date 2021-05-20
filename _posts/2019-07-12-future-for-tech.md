@@ -1095,6 +1095,22 @@ ps：和自由职业有关的书也有不少，比如说最近几年比较火的
 
 ![](https://img1.doubanio.com/view/note/large/public/p9004668.jpg)
 
+【2021-5-20】互联网内卷越来越严重，清北遍地，处处高P堰塞湖，工作多年的人，性价比又不如刚工作几年的年轻人，学习速度快，团队产出惊人
+- 写书的多是跨行新人，积累影响力的好办法，持续输出，倒逼自己主动学习、思考
+- 身边的写书案例
+  - [华校专](https://www.zhihu.com/people/you-xia-er-67)，清华年级第一，转国防科大硕士计算机，自学算法，入职阿里，P6，从做笔记到写书，加盟创业公司首席研究院，跳腾讯；经常做笔记，整理知识点
+    - 书籍：[Python大战机器学习](https://item.jd.com/12049023.html)，[个人网站](http://www.huaxiaozhuan.com/)
+    - 《算法导论》的[C++实现代码](https://github.com/huaxz1986/cplusplus-_Implementation_Of_Introduction_to_Algorithms),[《Unix 环境高级编程第三版》笔记](https://github.com/huaxz1986/APUE_notes)
+  - [董峰池](https://www.linkedin.com/in/%E5%B3%B0%E6%B1%A0-%E8%91%A3-09475b14b/)，2018年人大硕士（学习并非最好）毕业，头条两年的“小朋友”写的书：https://dongfengchi.github.io/algo_engineer_zero_to_one/
+  - 朱鹏臻：哈工大硕士期间写书，入职滴滴
+    - 2018年，[人工智能产品经理：人机对话系统设计逻辑探究](https://e.jd.com/30457741.html)
+  - 冯超，滴滴→阿里，凭借书籍拿到P8
+    - 2018年，[强化学习精要：核心算法与TensorFlow实现](https://e.jd.com/30450070.html)，[豆瓣](https://book.douban.com/subject/30214611/)
+  - 梁爱丽，北大硕士毕业，喜欢旅行，经常去日本参加马拉松。一个学数学出身的码农。旅游达人。在多次走进台湾之后，也来尝试捉笔铺墨，介绍他眼中的台湾，开始在文字圈的 hello world。
+    - 2016年7月，[环游台湾，老时光慢地方](https://book.douban.com/subject/26841131/)
+  - 陈开江，推荐系统三十六式
+
+
 # 结束
 
 
