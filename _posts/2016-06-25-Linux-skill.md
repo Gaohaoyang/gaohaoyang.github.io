@@ -557,7 +557,7 @@ git push [variable name] : [branch name] # 删除远程存储库上的分支
 # 查看变更信息或者冲突
 git status
 # 查看提交的历史
-git log
+git log 
 # 撤销本地修改
 #没有commit到暂存仓库的情况下：
 # 恢复之前上一次暂存区的所有文件到工作区
@@ -580,6 +580,8 @@ git stash save # 临时存储所有已修改的跟踪文件
 git stash pop # 恢复最近存放的文件。
 git stash list # 列出所有隐藏的变更集。
 git stash drop # 将丢弃最近存放的变更集。
+git stash apply # 恢复工作现场
+git stash apply stash@{0} # 恢复指定的工作现场，当你保存了不只一份工作现场时
 
 git merge 分支名称 # 合并分支
 git tag [commitID] # 用于将标签赋予指定的提交。
@@ -634,7 +636,11 @@ git log dev..master # master 比 dev 多提交了什么
 git log dev...master # 仅仅查看有什么不一样
 git log --left-right dev...master # 每次提交都在哪个分支上
 # 注意 commit 后面的箭头，根据我们在 –left-right dev…master 的顺序，左箭头 < 表示是 dev 的，右箭头 > 表示是 master的。
-
+git log --pretty=oneline # 精简模式：单行
+# 设置别名
+alias gitp='git log --pretty=oneline' # 单行模式
+alias gitg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit" # 图模式
+git config --global alias.s status # git别名 git s
 git show [commit] # 显示指定提交的元数据和内容更改。
 
 # 【2020-9-10】git免密pull/push，以下命令自动保存密码
@@ -666,6 +672,8 @@ git submodule deinit <submodule-name> # 删除第三方库
 # 作者：guanguans，https://www.jianshu.com/p/e27a978ddb88
 # ----------------------------------
 
+# 查看某个文件谁改过代码
+git blame filename
 ```
 
 - [Git对比两个分支](https://www.cnblogs.com/mkl34367803/p/9196563.html)
