@@ -494,6 +494,51 @@ mathjax: true
 
 - 美到窒息！【纪录片】2012《[时间的风景](https://www.bilibili.com/video/av13614491)》TimeScapes(原版为4K蓝光6声道),影片采用慢镜头与定时拍摄的摄影技术，向我们展示了美国西南部陆地、人文以及野外令人惊叹的瑰丽景色。为拍摄本影片，劳开着他的丰田敞篷小卡车奔走于美国西南部，历时两年。
 - [生命](https://www.bilibili.com/bangumi/play/ss20387),2009年是达尔文诞辰二百周年，也是《物种起源》发表150周年。为了进行纪念，本片力图展现自然界缤纷物种的多样性，和它们为适应环境而进化出的各种神奇生存本领。
+- 【2021-5-19】[35部各学科最顶级的纪录片](https://www.toutiao.com/w/i1700012851516420)
+  - 数学：
+    - 数学的故事（the story of maths）：BBC科学纪录片，数学的整个历史进程
+    - 终极密码（the code）：万物充满了带数字的抽象世界
+    - 伟大的疯狂（a brilliant madness）：约翰-纳什的生平，及均衡论的发现过程
+    - 数学大迷思（the greate math mystery）：美国2015年纪录片，数学从哪里来，为什么这么重要
+    - 寻找隐藏的维度（hunting the hidden dimension）：本华-曼德博的分形理论，毫不相干的东西能联系在一起，彻底改变人的思维
+  - 历史
+    - 古希腊瑰宝（treasures of ancient greece）：古希腊文明的瑰宝
+    - 二战全史（the world at war）：二战全过程
+    - 金雀花王朝（the plantagenets）：英国历史上统治时间最长的王朝
+    - 中国通史：从祖先先将到封建帝制结束
+    - 河西走廊：丝绸之路，从汉代降到现代
+  - 艺术
+    - 达芬奇（leonardo）：达芬奇的传奇一生
+    - 现代艺术大师（modern masters）：四位艺术家的生前住所、博物馆
+    - 艺术的力量（simon schema power of art）：8位艺术家扣人心弦的故事
+    - 旷世杰作的秘密（private life of masterpiece）：经典作品背后的真相及秘密
+    - 摄影艺术百年史（the genius of photography）：诞生不到200年的摄影艺术
+  - 地理
+    - 蓝色星球2（blue planet 2）：BBC史上最美纪录片
+    - 冰冻星球（frozen planet）：BBC耗时两年制作，几篇正在融化的南北极
+    - 人类星球（human planet）：不同视角下的壮观景色
+    - 新西兰（new zealand）：新西兰奇观，让人大吃一惊的动物
+    - 航拍中国第一季：故事化舒事方式讲解中国
+  - 人文纪录片
+    - 文明（civilization）：一起探索人类创造的渴望
+    - 中国门（china gate）：3段乡村孩子艰苦学习的故事
+    - 丹麦九年二班 vs 中国初三(13)班：最幸福国度和最勤劳国度的初三学生比拼
+    - 我在故宫修文物
+    - 世界遗产在中国：33处非物质遗产
+  - 理科
+    - into the universe with Stephen hawking：霍金
+    - 神奇的费曼先生（the fantastic of mr feynman）：亲子纪录片
+    - 脑力大挑战（test your brain）：如何做到专注、感受和记忆？
+    - 宇宙的奇迹（wonders of the universe）：地球上罕见的景观及背后的隐藏的秘密
+    - 吉米的食品工厂（jimmy's food factory）：食品超市制作过程
+  - 自然
+    - 生命（life）：无比精彩、悲壮的生物行为，地球因此而精彩
+    - 猎捕（the hunt）：雨林、冻土、海洋等生态环境一网打尽
+    - 企鹅群里有特务（penguins：spy in the hundle）：企鹅生活
+    - 种出个地球（how to grow a planet）：植物进化到生态的影响
+    - 飞跃地球（earth flight）：动物、风景
+
+
 
 ## 动物电影
    - 忠犬八公
