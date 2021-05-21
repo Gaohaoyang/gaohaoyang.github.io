@@ -349,6 +349,15 @@ export LD_LIBRARY_PATH=/path/to/TensorRT-7.2.3.4/lib:$LD_LIBRARY_PATH
 export LIBRARY_PATH=/path/to/TensorRT-7.2.3.4/lib::$LIBRARY_PATH
 ```
 
+## TensorRT 工作流
+
+工作流主要分为两个阶段：建造阶段(build  phase)和执行阶段(compile phase)。
+- 在建造阶段，TensorRT 接收外部提供的网络定义(也可包含权值 weights)和超参数，根据当前编译的设备进行网络运行的优化(optimization), 并生成推理引擎 inference  engine(可以以 PLAN 形式存在在硬盘上)；
+- 在执行阶段，通过运行推理引擎调用 GPU 计算资源——整个流程如图
+[原文链接](https://blog.csdn.net/weixin_39875161/article/details/99084743)
+
+![](https://img-blog.csdnimg.cn/20190810162851400.png)
+
 ## TensorRT 接口
 
 必备接口流程图
