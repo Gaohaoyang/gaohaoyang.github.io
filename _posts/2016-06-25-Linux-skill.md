@@ -538,7 +538,8 @@ GitLab-Flow 相比于 GitHub-Flow 来说，在开发侧的区别不大，只是�
 git clone [url]
 git clone --recursive [url] # 【2021-5-7】用于循环克隆git子项目(包含别的仓库代码), 一次性解决模块依赖
 # git clone 中途报错（early EOF），进入主目录，补充执行以下命令
-git submodule update --init --recursive
+git submodule update --init --recursive 
+
 #添加所有你修改的文件到暂存区
 git add -A
 #把本地的备注提交到暂存区
@@ -644,6 +645,26 @@ git diff –staged # 此命令显示暂存区域中的文件与当前最新版�
 git diff [first branch] [second branch] # 两个分支之间的差异
 
 git rm [file] # 从你的工作目录中删除文件，然后进行删除。
+
+# 【2021-5-21】----------- 第三方库 --------------
+# 直接把第三方的版本库合并到自己的库中. 示例如下：
+git clone https://git.oschina.net/gaofeifps/body.git # 主库
+cd body
+git submodule add https://git.oschina.net/gaofeifps/leg.git # 添加第三方库
+git status # 多了一个 leg的库, 和一个.gitmodules的文件, 现在提交一下
+git commit -am "add leg"
+git push
+# 版本库中不会存第三方引入库的实体文件, 而是通过 .gitmodules的方式存储三方的联系方式, 当下载到本地运行的时候才会再拉取文件
+# 而且这个时候在其他的地方安装body这个库的时候直接运行 git clone 是生成不了完整的文件的, 缺少了 leg库的文件
+# 因为这个时候的 body/leg目录是空的需要多走一步, 这时为什么呢? 
+git clone https://git.oschina.net/gaofeifps/body.git
+git submodule init && git submodule update
+#下面这一句的效果和上面三条命令的效果是一样的,多加了个参数  `--recursive`
+git clone https://git.oschina.net/gaofeifps/body.git --recursive # 获取完整库
+git submodule foreach git checkout master # 批量更新所有第三方库，按照 .gitmodules会根据path寻找所有的三方模块, 并在每一个模块中都执行 foreach 后的命令
+git submodule deinit <submodule-name> # 删除第三方库
+# 作者：guanguans，https://www.jianshu.com/p/e27a978ddb88
+# ----------------------------------
 
 ```
 
