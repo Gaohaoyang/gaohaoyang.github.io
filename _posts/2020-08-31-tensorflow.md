@@ -354,6 +354,17 @@ export LIBRARY_PATH=/path/to/TensorRT-7.2.3.4/lib::$LIBRARY_PATH
 必备接口流程图
 ![](https://img-blog.csdnimg.cn/20210425232029160.png
 
+TensorRT核心库中，最关键的几种接口类型有：
+- IExecutionContext    推理引擎运行上下文
+- ICudaEngine            推理引擎
+- IRuntime                  CudaEngine反序列化
+- INetWorkDefinition   网络定义
+- IParser                     网络模型解析
+- IOptimizationProfile 优化配置
+- IBuilderConfig          CudaEngine的构造参数
+- IBuilder                     构造器，主要用于构造CudaEngine
+- ILogger                    日志接口，需要开发者实现
+
 接口详情参考：[TensorRT入门](https://blog.csdn.net/Ango_/article/details/116140436)
 
 
