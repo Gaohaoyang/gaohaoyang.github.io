@@ -3,7 +3,7 @@ layout: post
 title:  "数据挖掘经验总结-data-mining-note"
 date:   2013-07-31 23:02:00
 categories: 数据挖掘
-tags: 数据挖掘 机器学习 数据分析 陈皓 大数据 增长黑客 数据金字塔 zepplin hadoop hive tez spark storm 服务质量 评分卡 clickhouse
+tags: 数据挖掘 机器学习 数据分析 陈皓 大数据 增长黑客 数据金字塔 zepplin hadoop hive tez spark storm 服务质量 评分卡 clickhouse kafka zookeeper
 excerpt: 数据挖掘知识点、经验总结
 author: 鹤啸九天
 mathjax: true
@@ -485,7 +485,27 @@ WHERE pt = '2021-04-01'
 limit 100
 ```
 
+### Kafka
 
+【2021-5-23】[Kafka原理篇：图解kafka架构原理](https://www.toutiao.com/i6965046292519076384/)
+- Kafka 架构设计哲学和原理
+- Kafka 中 zookeeper 的作用
+- Kafka Controller 实现原理
+- Kafka Network 原理
+
+![](https://p6-tt.byteimg.com/origin/pgc-image/c1a01e62d7e24f3c97007a84c4b8e0fe?from=pc)
+
+### Zookeeper
+
+Zookeeper 是一个成熟的分布式协调服务，它可以为分布式服务提供分布式配置服、同步服务和命名注册等能力.。对于任何分布式系统，都需要一种协调任务的方法。Kafka 是使用 ZooKeeper 而构建的分布式系统。但是也有一些其他技术（例如 Elasticsearch 和 MongoDB）具有其自己的内置任务协调机制。
+
+Kafka 将 Broker、Topic 和 Partition 的元数据信息存储在 Zookeeper 上。通过在 Zookeeper 上建立相应的数据节点，并监听节点的变化，Kafka 使用 Zookeeper 完成以下功能：
+- Kafka Controller 的 Leader 选举
+- Kafka 集群成员管理
+- Topic 配置管理
+- 分区副本管理
+
+![](https://p3-tt.byteimg.com/origin/pgc-image/d1116d42b06f4c438f10c947f31daf8c?from=pc)
 
 # [数据的游戏：冰与火](https://coolshell.cn/articles/10192.html)
 
