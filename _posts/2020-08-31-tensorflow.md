@@ -3,7 +3,7 @@ layout: post
 title:  "tensorflow学习笔记"
 date:   2020-08-31 17:25:00
 categories: 编程语言
-tags: Tensorflow Python 深度学习 Pytorch
+tags: Tensorflow Python 深度学习 Pytorch TensorRT
 excerpt: Tensorflow编程技能汇总
 author: 鹤啸九天
 mathjax: true
@@ -308,6 +308,128 @@ if __name__ == "__main__":
   9. Keras Tuner：TensorFlow中的一个相当新的功能。超参数调优是挑选参数的过程，这些参数定义了机器学习模型的配置，除了HyperBand, BayesianOptimization和RandomSearch也可用于调优。利用最优超参数对模型进行训练
   10. 分布式训练：如果有多个GPU，并希望通过将训练分散在多个GPU上来优化训练，TensorFlow的各种分布式训练策略能够优化GPU的使用
 
+
+# TensorRT
+
+- 【2021-5-21】[TensorRT入门指北](https://zhuanlan.zhihu.com/p/371239130)
+[显卡算力查看](https://developer.nvidia.com/zh-cn/cuda-gpus)
+
+
+## 什么是TensorRT
+
+- TensorRT是由Nvidia推出的C++语言开发的高性能神经网络推理库，是一个用于生产部署的优化器和运行时引擎。其高性能计算能力依赖于Nvidia的图形处理单元。它专注于推理任务，与常用的神经网络学习框架形成互补，包括TensorFlow、Caffe、PyTorch、MXNet等。可以直接载入这些框架的已训练模型文件，也提供了API接口通过编程自行构建模型。
+  - ![](https://img-blog.csdnimg.cn/20210425231146908.png)
+- TensorRT是可以在NVIDIA各种GPU硬件平台下运行的一个C++推理框架。我们利用Pytorch、TF或者其他框架训练好的模型，可以转化为TensorRT的格式，然后利用TensorRT推理引擎去运行我们这个模型，从而提升这个模型在英伟达GPU上运行的速度。速度提升的比例是比较可观的。
+- TensorRT是由C++、CUDA、python三种语言编写成的一个库，其中核心代码为C++和CUDA，Python端作为前端与用户交互。当然，TensorRT也是支持C++前端的，如果我们追求高性能，C++前端调用TensorRT是必不可少的。
+- TensorRT是半开源的，除了核心部分其余的基本都开源了。
+![](https://pic4.zhimg.com/80/v2-bc9b29cc831bb9793a0aeaaa3061e223_720w.jpg)
+
+## TensorRT的使用场景
+
+TensorRT的使用场景很多。服务端、嵌入式端、家用电脑端都是我们的使用场景。
+- 服务端对应的显卡型号为A100、T4、V100等
+- 嵌入式端对应的显卡为AGX Xavier、TX2、Nano等
+- 家用电脑端对应的显卡为3080、2080TI、1080TI等
+
+当然这不是固定的，只要我们显卡满足TensorRT的先决条件，用就对了。
+
+## TensorRT安装
+
+安装TensorRT的方式有很多，[官方](https://developer.nvidia.com/zh-cn/tensorrt)提供了多种方式：Debian or RPM packages, a pip wheel file, a tar file, or a zip file.
+- 如下载TensorRT-7.2.3.4.Ubuntu-18.04.x86_64-gnu.cuda-11.1.cudnn8.1.tar.gz
+  - TensorRT的版本与CUDA还有CUDNN版本是密切相关的,不匹配版本的cuda以及cudnn是无法和TensorRT一起使用的
+  - 查看本机驱动：nvidia-smi
+- 下载好后，tar -zxvf解压即可。
+- 解压之后我们需要添加环境变量，以便让我们的程序能够找到TensorRT的libs
+
+```shell
+vim ~/.bashrc
+# 添加以下内容
+export LD_LIBRARY_PATH=/path/to/TensorRT-7.2.3.4/lib:$LD_LIBRARY_PATH
+export LIBRARY_PATH=/path/to/TensorRT-7.2.3.4/lib::$LIBRARY_PATH
+```
+
+## TensorRT 工作流
+
+工作流主要分为两个阶段：建造阶段(build  phase)和执行阶段(compile phase)。
+- 在建造阶段，TensorRT 接收外部提供的网络定义(也可包含权值 weights)和超参数，根据当前编译的设备进行网络运行的优化(optimization), 并生成推理引擎 inference  engine(可以以 PLAN 形式存在在硬盘上)；
+- 在执行阶段，通过运行推理引擎调用 GPU 计算资源——整个流程如图
+[原文链接](https://blog.csdn.net/weixin_39875161/article/details/99084743)
+
+![](https://img-blog.csdnimg.cn/20190810162851400.png)
+
+## TensorRT 接口
+
+必备接口流程图
+![](https://img-blog.csdnimg.cn/20210425232029160.png
+
+TensorRT核心库中，最关键的几种接口类型有：
+- IExecutionContext    推理引擎运行上下文
+- ICudaEngine            推理引擎
+- IRuntime                  CudaEngine反序列化
+- INetWorkDefinition   网络定义
+- IParser                     网络模型解析
+- IOptimizationProfile 优化配置
+- IBuilderConfig          CudaEngine的构造参数
+- IBuilder                     构造器，主要用于构造CudaEngine
+- ILogger                    日志接口，需要开发者实现
+
+接口详情参考：[TensorRT入门](https://blog.csdn.net/Ango_/article/details/116140436)
+
+
+## TensorRT的加速效果怎么样
+
+加速效果取决于模型的类型和大小，也取决于所使用的显卡类型。
+
+对于GPU来说，因为底层的硬件设计，更适合并行计算也更喜欢密集型计算。TensorRT所做的优化也是基于GPU进行优化，当然也是更喜欢那种一大块一大块的矩阵运算，尽量直通到底。因此对于通道数比较多的卷积层和反卷积层，优化力度是比较大的；如果是比较繁多复杂的各种细小op操作(例如reshape、gather、split等)，那么TensorRT的优化力度就没有那么夸张了。
+
+为了更充分利用GPU的优势，我们在设计模型的时候，可以更加偏向于模型的并行性，因为同样的计算量，“大而整”的GPU运算效率远超“小而碎”的运算。
+
+工业界更喜欢简单直接的模型和backbone。2020年的RepVGG，就是为GPU和专用硬件设计的高效模型，追求高速度、省内存，较少关注参数量和理论计算量。相比resnet系列，更加适合充当一些检测模型或者识别模型的backbone。
+
+在实际应用中，老潘也简单总结了下TensorRT的加速效果：
+- SSD检测模型，加速3倍(Caffe)
+- CenterNet检测模型，加速3-5倍(Pytorch)
+- LSTM、Transformer(细op)，加速0.5倍-1倍(TensorFlow)
+- resnet系列的分类模型，加速3倍左右(Keras)
+- GAN、分割模型系列比较大的模型，加速7-20倍左右(Pytorch)
+
+## TensorRT有哪些黑科技
+
+为什么TensorRT能够提升我们模型在英伟达GPU上运行的速度，当然是做了很多对提速有增益的优化：
+- 算子融合(层与张量融合)：简单来说就是通过融合一些计算op或者去掉一些多余op来减少数据流通次数以及显存的频繁使用来提速
+量化：量化即IN8量化或者FP16以及TF32等不同于常规FP32精度的使用，这些精度可以显著提升模型执行速度并且不会保持原先模型的精度
+- 内核自动调整：根据不同的显卡构架、SM数量、内核频率等(例如1080TI和2080TI)，选择不同的优化策略以及计算方式，寻找最合适当前构架的计算方式
+- 动态张量显存：我们都知道，显存的开辟和释放是比较耗时的，通过调整一些策略可以减少模型中这些操作的次数，从而可以减少模型运行的时间
+- 多流执行：使用CUDA中的stream技术，最大化实现并行操作
+TensorRT的这些优化策略代码虽然是闭源的，但是大部分的优化策略我们或许也可以猜到一些，也包括TensorRT官方公布出来的一些优化策略：
+
+![](https://pic3.zhimg.com/80/v2-41d4cde8f1a25ffb0ed0ac22a4dcc782_720w.jpg)
+
+
+## 什么模型可以转换为TensorRT
+
+TensorRT官方支持Caffe、Tensorflow、Pytorch、ONNX等模型的转换(不过Caffe和Tensorflow的转换器Caffe-Parser和UFF-Parser已经有些落后了)，也提供了三种转换模型的方式：
+- 使用TF-TRT，将TensorRT集成在TensorFlow中
+- 使用ONNX2TensorRT，即ONNX转换trt的工具
+- 手动构造模型结构，然后手动将权重信息挪过去，非常灵活但是时间成本略高，有大佬已经尝试过了：tensorrtx
+
+不过目前TensorRT对ONNX的支持最好，TensorRT-8最新版ONNX转换器又支持了更多的op操作。而深度学习框架中，TensorRT对Pytorch的支持更为友好，除了Pytorch->ONNX->TensorRT这条路，还有：
+- torch2trt
+- torch2trt_dynamic
+- TRTorch
+
+总而言之，理论上95%的模型都可以转换为TensorRT，条条大路通罗马嘛。只不过有些模型可能转换的难度比较大。如果遇到一个无法转换的模型，先不要绝望，再想想，再想想，看看能不能通过其他方式绕过去。
+
+## TensorRT支持哪几种权重精度
+
+支持FP32、FP16、INT8、TF32等，这几种类型都比较常用。
+- FP32：单精度浮点型，没什么好说的，深度学习中最常见的数据格式，训练推理都会用到；
+- FP16：半精度浮点型，相比FP32占用内存减少一半，有相应的指令值，速度比FP32要快很多；
+- TF32：第三代Tensor Core支持的一种数据类型，是一种截短的 Float32 数据格式，将FP32中23个尾数位截短为10bits，而指数位仍为8bits，总长度为19(=1+8 +10)。保持了与FP16同样的精度(尾数位都是 10 位），同时还保持了FP32的动态范围指数位都是8位)；
+- INT8：整型，相比FP16占用内存减小一半，有相应的指令集，模型量化后可以利用INT8进行加速。
+简单展示下各种精度的区别：
+![](https://pic2.zhimg.com/80/v2-e86c8661901842ffaf960bb2abbe37e9_720w.jpg)
 
 
 # 结束

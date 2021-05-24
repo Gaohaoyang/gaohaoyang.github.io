@@ -538,7 +538,8 @@ GitLab-Flow 相比于 GitHub-Flow 来说，在开发侧的区别不大，只是�
 git clone [url]
 git clone --recursive [url] # 【2021-5-7】用于循环克隆git子项目(包含别的仓库代码), 一次性解决模块依赖
 # git clone 中途报错（early EOF），进入主目录，补充执行以下命令
-git submodule update --init --recursive
+git submodule update --init --recursive 
+
 #添加所有你修改的文件到暂存区
 git add -A
 #把本地的备注提交到暂存区
@@ -556,7 +557,7 @@ git push [variable name] : [branch name] # 删除远程存储库上的分支
 # 查看变更信息或者冲突
 git status
 # 查看提交的历史
-git log
+git log 
 # 撤销本地修改
 #没有commit到暂存仓库的情况下：
 # 恢复之前上一次暂存区的所有文件到工作区
@@ -579,6 +580,8 @@ git stash save # 临时存储所有已修改的跟踪文件
 git stash pop # 恢复最近存放的文件。
 git stash list # 列出所有隐藏的变更集。
 git stash drop # 将丢弃最近存放的变更集。
+git stash apply # 恢复工作现场
+git stash apply stash@{0} # 恢复指定的工作现场，当你保存了不只一份工作现场时
 
 git merge 分支名称 # 合并分支
 git tag [commitID] # 用于将标签赋予指定的提交。
@@ -633,7 +636,11 @@ git log dev..master # master 比 dev 多提交了什么
 git log dev...master # 仅仅查看有什么不一样
 git log --left-right dev...master # 每次提交都在哪个分支上
 # 注意 commit 后面的箭头，根据我们在 –left-right dev…master 的顺序，左箭头 < 表示是 dev 的，右箭头 > 表示是 master的。
-
+git log --pretty=oneline # 精简模式：单行
+# 设置别名
+alias gitp='git log --pretty=oneline' # 单行模式
+alias gitg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit" # 图模式
+git config --global alias.s status # git别名 git s
 git show [commit] # 显示指定提交的元数据和内容更改。
 
 # 【2020-9-10】git免密pull/push，以下命令自动保存密码
@@ -645,6 +652,28 @@ git diff [first branch] [second branch] # 两个分支之间的差异
 
 git rm [file] # 从你的工作目录中删除文件，然后进行删除。
 
+# 【2021-5-21】----------- 第三方库 --------------
+# 直接把第三方的版本库合并到自己的库中. 示例如下：
+git clone https://git.oschina.net/gaofeifps/body.git # 主库
+cd body
+git submodule add https://git.oschina.net/gaofeifps/leg.git # 添加第三方库
+git status # 多了一个 leg的库, 和一个.gitmodules的文件, 现在提交一下
+git commit -am "add leg"
+git push
+# 版本库中不会存第三方引入库的实体文件, 而是通过 .gitmodules的方式存储三方的联系方式, 当下载到本地运行的时候才会再拉取文件
+# 而且这个时候在其他的地方安装body这个库的时候直接运行 git clone 是生成不了完整的文件的, 缺少了 leg库的文件
+# 因为这个时候的 body/leg目录是空的需要多走一步, 这时为什么呢? 
+git clone https://git.oschina.net/gaofeifps/body.git
+git submodule init && git submodule update
+#下面这一句的效果和上面三条命令的效果是一样的,多加了个参数  `--recursive`
+git clone https://git.oschina.net/gaofeifps/body.git --recursive # 获取完整库
+git submodule foreach git checkout master # 批量更新所有第三方库，按照 .gitmodules会根据path寻找所有的三方模块, 并在每一个模块中都执行 foreach 后的命令
+git submodule deinit <submodule-name> # 删除第三方库
+# 作者：guanguans，https://www.jianshu.com/p/e27a978ddb88
+# ----------------------------------
+
+# 查看某个文件谁改过代码
+git blame filename
 ```
 
 - [Git对比两个分支](https://www.cnblogs.com/mkl34367803/p/9196563.html)
