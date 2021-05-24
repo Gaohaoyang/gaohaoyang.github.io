@@ -406,6 +406,7 @@ Waymo与滴滴路测里程的对比：
   - 2019/10，上海-安亭
   - 2020/2，70w+
 
+[详情笔记](http://note.youdao.com/s/NkoLbaaR)
 
 # 结束
 
