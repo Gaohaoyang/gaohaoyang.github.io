@@ -16,7 +16,8 @@ mathjax: true
 
 - [对比学习（Contrastive Learning）综述](https://zhuanlan.zhihu.com/p/346686467)
 - 【2021-4-11】[一文梳理2020年大热的对比学习模型](https://blog.csdn.net/moxibingdao/article/details/111027188)：对比学习的概念很早就有了，但真正成为热门方向是在2020年的2月份，Hinton组的Ting Chen提出了SimCLR，用该框架训练出的表示以7%的提升刷爆了之前的SOTA，甚至接近有监督模型的效果。
-- 【2021-5-27】[SimCLR: 用对比学习生成图像表征](https://www.toutiao.com/i6966574071790256679/)
+- 【2021-5-27】[SimCLR: 用对比学习生成图像表征](https://www.toutiao.com/i6966574071790256679/)，利用对比学习生成图像表征的算法 SimCLR，SimCLR 出自 Google 的论文《A Simple Framework for Contrastive Learning of Visual Representations》
+  - 《[SimCSE: 通过对比学习获得句子向量](https://www.toutiao.com/a6963651410546197005/?channel=&source=search_tab)》：SimCSE 采用对比学习训练得到句子向量
 
 # 介绍
 
@@ -590,7 +591,7 @@ G. NLP近年论文
 ![](https://pic3.zhimg.com/80/v2-52ec7bfd30e719909e5e7249a4d02caa_1440w.jpg)
  
 ![](https://pic1.zhimg.com/80/v2-fa4b23a3923b4513b18a24745ebbc778_1440w.jpg)
- 
+
 # 附录
 
  
@@ -630,9 +631,7 @@ VAE的思想是用 ![[公式]](https://www.zhihu.com/equation?tex=r%28c%29) 【�
 由于没有进行先验估计，所以是更加紧的上界。
  
 ![[公式]](https://www.zhihu.com/equation?tex=I_%7BC+L+U+B%7D%28X%2C+C%29%3DE_%7Bp%28x%2C+c%29%7D%5B%5Clog+%28p%28c+%5Cmid+x%29%29%5D-E_%7Bp%28x%29%7D+E_%7Bp%28c%29%7D%5B%5Clog+%28p%28c+%5Cmid+x%29%29%5D%5C%5C)
- 
-  
- 
+
 ![[公式]](https://www.zhihu.com/equation?tex=%5Cbegin%7Baligned%7D+I_%7BC+L+U+B%7D%28X%2C+C%29-I%28X%2C+C%29%26%3DE_%7Bp%28x%2C+c%29%7D%5B%5Clog+%28p%28c+%5Cmid+x%29%29%5D-E_%7Bp%28x%29%7D+E_%7Bp%28c%29%7D%5B%5Clog+%28p%28c+%5Cmid+x%29%29%5D%5C%5C+%26-E_%7Bp%28x%2C+c%29%7D%5B%5Clog+%28p%28c+%5Cmid+x%29%29%5D%2BE_%7Bp%28x%29%7D+E_%7Bp%28c%29%7D%5B%5Clog+%28p%28c%29%29%5D%5C%5C+%26%3DE_%7Bp%28c%29%7D%5Cleft%5B%5Clog+%28p%28c%29%29-E_%7Bp%28x%29%7D%5B%5Clog+%28p%28c+%5Cmid+x%29%29%5D%5Cright%5D%5C%5C+%5Cend%7Baligned%7D)
  
 由于log函数是凹函数，根据 Jensen 不等式：
@@ -827,7 +826,7 @@ NCE 的目标函数还需要在(9)式的基础上除以正样本的数量 ![[公
 InfoNCE 是在\[6\]CPC中提出的。CPC(对比预测编码) 就是一种通过无监督任务来学习高维数据的特征表示，而通常采取的无监督策略就是根据上下文预测未来或者缺失的信息。
  
 原文引入了互信息的思想，认为我们可以通过最大化当前上下文 ![[公式]](https://www.zhihu.com/equation?tex=c_t) 和下 ![[公式]](https://www.zhihu.com/equation?tex=k) 个时刻的数据 ![[公式]](https://www.zhihu.com/equation?tex=x_%7Bt%2Bk%7D) 之间的互信息来构建预测任务，互信息的定义表示如下：
- 
+
 ![[公式]](https://www.zhihu.com/equation?tex=I%28x_%7Bt%2Bk%7D%3Bc_t%29%3D%5Csum_%7Bx%2Cc%7Dp%28x_%7Bt%2Bk%7D%2Cc_t%29%5Clog%5Cfrac%7Bp%28x_%7Bt%2Bk%7D%7Cc_t%29%7D%7Bp%28x_%7Bt%2Bk%7D%29%7D%5Ctag%7B19%7D%5C%5C)
  
 我们无法知道 ![[公式]](https://www.zhihu.com/equation?tex=x_%7Bt%2Bk%7D) 和 ![[公式]](https://www.zhihu.com/equation?tex=c_t) 之间的联合分布 ![[公式]](https://www.zhihu.com/equation?tex=p%28x_%7Bt%2Bk%7D%2Cc_t%29) ，因此要最大化 ![[公式]](https://www.zhihu.com/equation?tex=I%28x_%7Bt%2Bk%7D%3Bc_t%29) ，就需要最大化 ![[公式]](https://www.zhihu.com/equation?tex=%5Cfrac%7B%5Ctilde+p%28x_%7Bt%2Bk%7D%7Cc_t%29%7D%7Bp%28x_%7Bt%2Bk%7D%29%7D) 。
@@ -835,14 +834,10 @@ InfoNCE 是在\[6\]CPC中提出的。CPC(对比预测编码) 就是一种通过�
 把这个比例定义为密度比，那么，分子 ![[公式]](https://www.zhihu.com/equation?tex=p%28x_%7Bt%2Bk%7D%7Cc_t%29) 就相当于 ![[公式]](https://www.zhihu.com/equation?tex=p_d) ，是想得到的目标函数；分母就相 ![[公式]](https://www.zhihu.com/equation?tex=p%28x_%7Bt%2Bk%7D%29) 当于 ![[公式]](https://www.zhihu.com/equation?tex=p_n) ，是用来进行对比的噪声。
  
 因此，我们就可以根据NCE中提供的思路，将问题转换为一个二分类的问题，更具体来解释：
- 
 1.  从条件![[公式]](https://www.zhihu.com/equation?tex=p%28x_%7Bt%2Bk%7D%7Cc_t%29)中取出数据称为“正样本”，它是根据上下文 ![[公式]](https://www.zhihu.com/equation?tex=c_t) 所做出的预测数据，将它和这个上下文一起组成“正样本对”，类别标签设为 1。  
-    
 2.  将从![[公式]](https://www.zhihu.com/equation?tex=p%28x_%7Bt%2Bk%7D%29)中取出的样本称为“负样本”，它是与当前上下文![[公式]](https://www.zhihu.com/equation?tex=c_t)没有必然关系的随机数据，将它和这个上下文 ![[公式]](https://www.zhihu.com/equation?tex=c_t)一起组成“负样本对”，类别标签设为 0。  
-    
 3.  正样本也就是与 ![[公式]](https://www.zhihu.com/equation?tex=c_t) 间隔固定步长 ![[公式]](https://www.zhihu.com/equation?tex=k) 的数据，根据 NCE 中说明的设定，正样本选取 1 个；  
     因为在 NCE 中证明了噪声分布与数据分布越接近越好，所以负样本就直接在当前序列中随机选取（只要不是那一个正样本就行），负样本数量越多越好。  
-    
  
 所以要做的就是训练一个 logistics 分类模型，来区分这两个正负样本对。问题转换后，训练的模型能够“成功分辨出每个正负样本的能力”就等价于“根据 ![[公式]](https://www.zhihu.com/equation?tex=c_t) 预测 ![[公式]](https://www.zhihu.com/equation?tex=x_%7Bt%2Bk%7D) 的能力”。
  
@@ -903,6 +898,111 @@ InfoNCE 是在\[6\]CPC中提出的。CPC(对比预测编码) 就是一种通过�
 在使用 InfoNCE 时把它当作一个对比损失，那么分子上的![[公式]](https://www.zhihu.com/equation?tex=%28x_%7Bt%2Bk%7D%2Cc_t%29) 表示正样本对， 分母上的 ![[公式]](https://www.zhihu.com/equation?tex=%28x_j%2Cc_t%29) 表示负样本对，我们只要构建好正负样本对，然后利用 InfoNCE 的优化过程，就可以使正样本对之间的互信息最大，使负样本对之间的互信息最小了：
  
 ![[公式]](https://www.zhihu.com/equation?tex=%5Cmathcal+%7BL%7D%5E%7BInfoNCE%7D_N%3D-%5Cmathbb%7BE%7D_X%5B%5Clog+%5Cfrac+%7Bf_k%28x_%7Bt%2Bk%7D%2Cc_t%29%7D%7B%5Csum_%7Bx_j%5Cin+X%7Df_k%28x_j%2Cc_t%29%7D%5D%5C%5C)
+
+
+# SimCSR
+
+- 【2021-5-27】[SimCLR: 用对比学习生成图像表征](https://www.toutiao.com/i6966574071790256679/)，利用对比学习生成图像表征的算法 SimCLR，SimCLR 出自 Google 的论文《A Simple Framework for Contrastive Learning of Visual Representations》
+- 《[SimCSE: 通过对比学习获得句子向量](https://www.toutiao.com/a6963651410546197005/?channel=&source=search_tab)》：SimCSE 采用对比学习训练得到句子向量
+
+## 1. 概述
+ 
+在前一篇文章[《SimCSE: 通过对比学习获得句子向量》](https://www.toutiao.com/a6963651410546197005/?channel=&source=search_tab)中我们介绍了 SimCSE 算法，SimCSE 采用对比学习训练得到句子向量。本文介绍一种利用对比学习生成图像表征的算法 SimCLR，SimCLR 出自 Google 的论文《A Simple Framework for Contrastive Learning of Visual Representations》。
+ 
+对比学习 (Contrastive Learning) 的目标就是让模型学会区分样本是否相似，因此训练需要同时提供相似样本 (正样本) 和不相似样本 (负样本)，如下图所示：
+ 
+![SimCLR: 用对比学习生成图像表征](https://p3-tt.byteimg.com/origin/pgc-image/b99110e73ea5481087ad774abd3bd954?from=pc)
+ 
+对比学习示意图
+ 
+SimCLR 训练的数据无需人工标注，对于一幅图像 x，其采用数据增强的方式生成图片 x 的正样本对 (xi, xj)，将 batch 里的其他图像当成负样本。然后 SimCLR 使用对比学习训练 Encoder (通常是 CNN 模型，例如 ResNet)，从而生成高质量的图像表征。在实验中 SimCLR 取得了 SOTA 的效果，超越了之前的自监督学习算法，并且 top-1 准确率可以逼近有监督的 ResNet-50。
+ 
+## 2. SimCLR
+ 
+![SimCLR: 用对比学习生成图像表征](https://p3-tt.byteimg.com/origin/pgc-image/c7c86683e3d04417957f9151913384f9?from=pc)
+ 
+SimCLR 结构图
+ 
+SimCLR 的结构如上图所示，图片出自博客 The Illustrated SimCLR Framework，SimCLR 包含三个部分：
+*   数据增强 Data Augmentation，对图片进行随机的变换 (如裁剪、翻转、颜色抖动等)，变换后的数据作为正样本。
+*   Encoder，图像编码模型 (如 ResNet、AlexNet 等)，SimCLR 使用 Encoder 获得图像表征向量，Encoder 也可用于其他下游任务的微调。
+*   非线性投影层，Projection Head，对 Encoder 输出的表征进行变换，投影层只用于训练 SimCLR，训练结束后使用 Encoder 得到图像表征。
+ 
+### 2.1 数据增强
+ 
+数据增强广泛用在视觉领域，能够增加样本的数量及多样性，使模型更加健壮。图像数据增强的方法多种多样，如下图所示：
+ 
+![SimCLR: 用对比学习生成图像表征](https://p3-tt.byteimg.com/origin/pgc-image/63d49f8405934d5fb9f9ecc3044fbe99?from=pc)
+ 
+数据增强
+ 
+SimCLR 对图片进行数据增强时不是采用单一的增强方式，而是会随机使用多种不同的增强方法进行结合，这样能够产生更好的表征向量。
+ 
+作者也通过一个小实验，证明结合不同的增强方法能够产生更好的表征向量。实验采用 ImageNet 数据集，指标为 top-1 准确率，实验结果如下图所示。其中对角线的位置表示采用单一的数据增强方法，其他位置表示两种数据增强方法结合，最后一列表示每一行的平均值。可以看到结合后的效果会大大提升。
+ 
+![SimCLR: 用对比学习生成图像表征](https://p3-tt.byteimg.com/origin/pgc-image/d6f8145525d14283bf658875d7313098?from=pc)
+ 
+不同数据增强方法组合的准确率
+ 
+SimCLR 会为一个 batch 里的每一幅图像 x 进行两次数据增强，分别得到图像 xi 和 xj，则 (xi, xj) 作为一对正样本，如下图所示：
+ 
+![SimCLR: 用对比学习生成图像表征](https://p6-tt.byteimg.com/origin/pgc-image/416b3b33e2364dffbc537b5a6e7c9166?from=pc)
+ 
+SimCLR 数据增强
+ 
+经过数据增强后，我们就可以得到一个 batch 数据的正样本和负样本，如下图所示，SimCLR 需要让正样本的相似度尽可能高，让负样本之间的相似度尽可能低：
+ 
+![SimCLR: 用对比学习生成图像表征](https://p3-tt.byteimg.com/origin/pgc-image/4a6919d7e54b46469d3e7543c7cc523e?from=pc)
+ 
+正负样本
+ 
+### 2.2 非线性投影层
+ 
+SimCLR 使用 ResNet-50 作为 Encoder，用于获取图像的表征向量 (Representation)，同时 Encoder 也可用于后续的下游任务。但是 SimCLR 在训练时为了得到更好的效果，还需要在 Encoder 后增加非线性投影层 (Dense-Relu-Dense)，如下图所示，注意非线性投影层只在训练时使用。
+ 
+![SimCLR: 用对比学习生成图像表征](https://p6-tt.byteimg.com/origin/pgc-image/4935a9ace0f247ca83a02777913332c6?from=pc)
+ 
+SimCLR 结构图
+ 
+作者在原文里对非线性投影层的作用进行了一些解释，认为 Encoder 后的表征 h 包含更多的信息 (例如数据增强变换信息、颜色、方向)，而非线性投影层的输出 z 可以去掉这些多余的信息，还原数据本质。Encoder 的输出信息丰富对于下游任务更有帮助，但并不适合对比学习任务，因此用非线性投影层对数据进行还原从而更好地训练。
+ 
+### 2.3 损失函数
+ 
+假设图像 xi 和 xj 经过 SimCLR 的输出为 zi 和 zj，则首先要计算 zi 和 zj 的余弦相似度，如下。
+ 
+![SimCLR: 用对比学习生成图像表征](https://p1-tt.byteimg.com/origin/pgc-image/f27356eda0e24bebadd482c51046f499?from=pc)
+ 
+余弦相似度
+ 
+如果一个 batch 里有 N 个图像，则数据增强后会有 2N 个图像，每一个图像 xi 会有 1 个正样本和 2N-2 个负样本，则对于一对正样本 (zi 和 zj)，损失函数如下所示。
+ 
+![SimCLR: 用对比学习生成图像表征](https://p3-tt.byteimg.com/origin/pgc-image/6beac1b51a3e4bee8b05b57e4001f732?from=pc)
+ 
+损失函数
+ 
+## 3. 实验效果
+ 
+下面的两幅图展示了 SimCLR 和其他自监督学习算法的对比，数据集为 ImageNet。可以看到 SimCLR 远超之前的算法，并且可以达到和有监督相近的准确率。
+ 
+![SimCLR: 用对比学习生成图像表征](https://p1-tt.byteimg.com/origin/pgc-image/e8b234ffb0f142d7b29bb77a4045bddb?from=pc)
+ 
+ImageNet 对比图
+ 
+![SimCLR: 用对比学习生成图像表征](https://p6-tt.byteimg.com/origin/pgc-image/746cc4151372494fbf4519df4a0c78b8?from=pc)
+ 
+ImageNet 对比表
+ 
+下图展示了 SimCLR 在图像分类上进行迁移学习的效果，用到了 12 个图像分类数据集。
+ 
+![SimCLR: 用对比学习生成图像表征](https://p3-tt.byteimg.com/origin/pgc-image/769fda7009124eada2c3bc35964da85a?from=pc)
+ 
+SimCLR 迁移学习和有监督学习
+ 
+## 4. 参考文献
+ 
+*   SimCLR: A Simple Framework for Contrastive Learning of Visual Representations [「链接」](https://arxiv.org/pdf/2002.05709.pdf)
+*   代码 [「链接」](https://github.com/google-research/simclr)
+*   博客: The Illustrated SimCLR Framework [「链接」](https://amitness.com/2020/03/illustrated-simclr/)
 
 
 
