@@ -16,6 +16,7 @@ mathjax: true
 
 - [对比学习（Contrastive Learning）综述](https://zhuanlan.zhihu.com/p/346686467)
 - 【2021-4-11】[一文梳理2020年大热的对比学习模型](https://blog.csdn.net/moxibingdao/article/details/111027188)：对比学习的概念很早就有了，但真正成为热门方向是在2020年的2月份，Hinton组的Ting Chen提出了SimCLR，用该框架训练出的表示以7%的提升刷爆了之前的SOTA，甚至接近有监督模型的效果。
+- 【2021-5-27】[SimCLR: 用对比学习生成图像表征](https://www.toutiao.com/i6966574071790256679/)
 
 # 介绍
 
