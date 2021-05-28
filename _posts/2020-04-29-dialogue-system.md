@@ -837,6 +837,17 @@ Mingke： 每一个行业都会诞生属于这个领域的智能服务，金融�
     - ④[Attention-Based Recurrent Neural Network Models for Joint Intent Detection and Slot Filling](https://arxiv.org/abs/1609.01454) (比较经典，论文是意图识别和槽填充共同训练）
     - ⑤BERT Slot标注：[代码](https://github.com/yym6472/bert_slot_tagging)
 
+【2021-5-28】[意图识别和槽填充是挂钩的吗？](https://www.zhihu.com/question/450693192/answer/1795128895)
+- 二者区别
+  - 意图识别目的是识别用户对话内容的意图，本质上是一个分类任务．
+  - 槽位填充是将我们关心的实体识别出来，本质上是一个序列标注任务．
+- 当前处理这种具有一定关系任务的两种思想：
+  - 一种是**pipeline**思想，先对意图识别，识别完意图之后再提取槽值 —— 简单，直观，普通人的思路
+  - 另一种是**joint**思想．两个任务同时做，还能做的更好 —— 大神的思路
+    - 尤其是在深度学习出现以后，基于joint模型的方法着实火了一把：文本的输入层和中间层保持一致，只需要在输出层加多个输出即可，这样就能共享输入和中间层的特征表示，再输出层进行魔性创新
+
+![](https://pic1.zhimg.com/80/v2-fc31934cfba32866e876d038426ec2cb_1440w.jpg?source=1940ef5c)
+
 
 ## 任务型对话
 
