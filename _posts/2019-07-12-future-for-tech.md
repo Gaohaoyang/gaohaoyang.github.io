@@ -51,6 +51,9 @@ mathjax: true
 - [在北京月入多少可以实现财富自由？你离菜场自由还远吗](https://www.bilibili.com/video/av68936365)
 <iframe src="//player.bilibili.com/player.html?aid=68936365&cid=119472761&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+- 【2021-5-29】[程序员的前半生](https://www.toutiao.com/w/i1700881704856583/)
+- ![](https://p5.toutiaoimg.com/img/pgc-image/dd5b7537ff8e4d36b88d84438ba6da06~tplv-obj:1023:520.image?from=post)
+
 
 #  [三年升高工，七年做架构，十年送外卖](https://mp.weixin.qq.com/s/19HOV6jCjzvwIL307MWaDw) 
 
