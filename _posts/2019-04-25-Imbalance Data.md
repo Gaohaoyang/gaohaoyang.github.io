@@ -34,7 +34,9 @@ mathjax: true
 > * 校对者：[lsvih](https://github.com/lsvih), [lileizhenshuai](https://github.com/lileizhenshuai)
 
 - [有道云笔记总结](http://note.youdao.com/s/7SHGEUqr)
-- 【2021-5-30】[样本不均衡的一顿操作](https://blog.csdn.net/m0_52122378/article/details/116007787)：不平衡问题解法很多，最简单的就是重采样，包括过采样和欠采样，使各个类别数量大致相同；更复杂的采样方式，如先对样本聚类，在需要降采样的样本上，按类别进行降采样，这样能丢失较少的信息。过采样不再是简单copy，可以加一点点"噪声"，生成更多的样本。
+- 【2021-5-30】[样本不均衡的一顿操作](https://blog.csdn.net/m0_52122378/article/details/116007787)：不平衡问题解法很多，最简单的就是重采样，包括过采样和欠采样，使各个类别数量大致相同；
+  - ![](https://ss.csdn.net/p?https://pic1.zhimg.com/v2-8c2953af30a7eb02bb0527e888cce9a8_b.jpg)
+  - 更复杂的采样方式，如先对样本聚类，在需要降采样的样本上，按类别进行降采样，这样能丢失较少的信息。过采样不再是简单copy，可以加一点点"噪声"，生成更多的样本。
   - Tomek links：Tomek连接指的是在空间上"最近"的样本，但是是不同类别的样本。删除这些pair中，占大多数类别的样本。通过这种降采样方式，有利于分类模型的学习
     - ![](https://ss.csdn.net/p?https://pic4.zhimg.com/v2-f2210f618d41d37dc58fcd92a678011f_b.jpg)
   - SMOTE方法可以给少数样本做扩充，SMOTE在样本空间中少数样本随机挑选一个样本，计算k个邻近的样本，在这些样本之间插入一些样本做扩充，反复这个过程，知道样本均衡
