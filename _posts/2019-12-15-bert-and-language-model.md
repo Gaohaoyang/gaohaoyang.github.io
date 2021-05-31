@@ -270,7 +270,7 @@ PTMs-Papers:
 
 ### BERT-as-service
 
-- Google 已经公开了 TensorFlow 版本的预训练模型和代码，可以用于生成词向量，但是还有更简单的方法：直接调用封装好的库 bert-as-service 。
+- Google 已经公开了 TensorFlow 版本 [BERT](https://github.com/google-research/bert) 的预训练模型和代码，可以用于生成词向量，但是还有更简单的方法：直接调用封装好的库 [bert-as-service](https://github.com/hanxiao/bert-as-service) 。
 ![](https://img-blog.csdnimg.cn/20190521201148390.gif)
 
 - bert-as-service 是腾讯 AI Lab 开源的一个 BERT 服务（肖涵开发），它让用户可以以调用服务的方式使用 BERT 模型而不需要关注 BERT 的实现细节。bert-as-service 分为客户端和服务端，用户可以从 python 代码中调用服务，也可以通过 http 的方式访问。
@@ -311,8 +311,10 @@ pip install bert-serving-client # 客户端，与服务端互相独立
 #### 启动 BERT 服务
 
 - 使用 bert-serving-start 命令启动服务：
-    - bert-serving-start -model_dir /tmp/english_L-12_H-768_A-12/ -num_worker=2
-    - 其中，-model_dir 是预训练模型的路径，-num_worker 是线程数，表示同时可以处理多少个并发请求
+  - 其中，-model_dir 是预训练模型的路径，-num_worker 是线程数，表示同时可以处理多少个并发请求
+
+> bert-serving-start -model_dir /tmp/english_L-12_H-768_A-12/ -num_worker=2
+
 - 如果启动成功，服务器端会显示：
 ![](https://img-blog.csdnimg.cn/20190521201200157.gif)
 
@@ -325,8 +327,8 @@ from bert_serving.client import BertClient
 bc = BertClient()
 doc_vecs = bc.encode(['First do it', 'then do it right', 'then do it better'])
 ```
-- doc_vecs 是一个 numpy.ndarray ，它的每一行是一个固定长度的句子向量，长度由输入句子的最大长度决定。如果要指定长度，可以在启动服务使用 max_seq_len 参数，过长的句子会被从右端截断。
 
+- doc_vecs 是一个 numpy.ndarray ，它的每一行是一个固定长度的句子向量，长度由输入句子的最大长度决定。如果要指定长度，可以在启动服务使用 max_seq_len 参数，过长的句子会被从右端截断。
 - BERT 的另一个特性是可以获取一对句子的向量，句子之间使用 \|\|\| 作为分隔，例如：
 
 ```python
@@ -340,7 +342,6 @@ bc.encode(['First do it ||| then do it right'])
 ```shell
 # bert服务端
 bert-serving-start -pooling_strategy NONE -model_dir /tmp/english_L-12_H-768_A-12/
-
 ```
 - 这时的返回是语料中每个 token 对应 embedding 的矩阵
 
@@ -366,9 +367,83 @@ vec[0][25]  # error, out of index!
 # on another CPU machine
 from bert_serving.client import BertClient
 bc = BertClient(ip='xx.xx.xx.xx')  # ip address of the GPU machine
+# 一次多输入几个，不要for循环一个个获取！
 bc.encode(['First do it', 'then do it right', 'then do it better'])
 ```
 - 这个例子中，只需要在客户端 pip install -U bert-serving-client
+
+```python
+from bert_serving.client import BertClient
+import numpy as np
+
+class SimilarModel:
+    def __init__(self):
+        # ip默认为本地模式，如果bert服务部署在其他服务器上，修改为对应ip
+        self.bert_client = BertClient(ip='192.168.x.x')
+
+    def close_bert(self):
+        self.bert_client.close()
+
+    def get_sentence_vec(self,sentence):
+        '''
+        根据bert获取句子向量
+        :param sentence:
+        :return:
+        '''
+        return self.bert_client .encode([sentence])[0]
+
+    def cos_similar(self,sen_a_vec, sen_b_vec):
+        '''
+        计算两个句子的余弦相似度
+        :param sen_a_vec:
+        :param sen_b_vec:
+        :return:
+        '''
+        vector_a = np.mat(sen_a_vec)
+        vector_b = np.mat(sen_b_vec)
+        num = float(vector_a * vector_b.T)
+        denom = np.linalg.norm(vector_a) * np.linalg.norm(vector_b)
+        cos = num / denom
+        return cos
+
+if __name__=='__main__':
+    # 从候选集condinates 中选出与sentence_a 最相近的句子
+    condinates = ['为什么天空是蔚蓝色的','太空为什么是黑的？','天空怎么是蓝色的','明天去爬山如何']
+    sentence_a = '天空为什么是蓝色的'
+    bert_client = SimilarModel()
+    max_cos_similar = 0
+    most_similar_sentence = ''
+    for sentence_b in condinates:
+        sentence_a_vec = bert_client.get_sentence_vec(sentence_a)
+        sentence_b_vec = bert_client.get_sentence_vec(sentence_b)
+        cos_similar = bert_client.cos_similar(sentence_a_vec,sentence_b_vec)
+        if cos_similar > max_cos_similar:
+            max_cos_similar = cos_similar
+            most_similar_sentence = sentence_b
+
+    print('最相似的句子：',most_similar_sentence)
+    bert_client .close_bert()
+    # 为什么天空是蔚蓝色的
+```
+
+或者HTTP调用：
+```shell
+curl -X POST http://xx.xx.xx.xx:8125/encode \
+  -H 'content-type: application/json' \
+  -d '{"id": 123,"texts": ["hello world"], "is_tokenized": false}'
+```
+
+Bert的输出最终有两个结果可用
+- sequence_output：维度【batch_size, seq_length, hidden_size】，这是训练后每个token的词向量。
+- pooled_output：维度是【batch_size, hidden_size】，每个sequence第一个位置CLS的向量输出，用于分类任务。
+
+```shell
+{
+    "id": 123,
+    "results": [[768 float-list], [768 float-list]],
+    "status": 200
+}
+```
 
 #### 其他
 
