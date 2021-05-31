@@ -162,6 +162,33 @@ Hinge损失函数标准形式如下：
 最后奉献上交叉熵损失函数的实现代码：[cross_entropy](https://link.zhihu.com/?target=https%3A//github.com/yyHaker/MachineLearning/blob/master/src/common_functions/loss_functions.py).
 
 
+## 凸函数
+
+- 【2021-5-31】[理解凸性:为什么梯度下降适用于线性回归](https://www.toutiao.com/i6817344123704443404)
+
+首先，通过凸集和凸函数定义凸度。凸集的定义如下:
+- ![理解凸性:为什么梯度下降适用于线性回归](https://p3-tt.byteimg.com/origin/pgc-image/9eda7c3599bd4983babdbc0edd64044c?from=pc)
+ 
+在二维中，我们可以将凸集视为一个形状，无论您用什么线连接集中的两个点，都不会在集外。
+- ![理解凸性:为什么梯度下降适用于线性回归](https://p6-tt.byteimg.com/origin/pgc-image/be14dc2b815140dbbf351628459fc98f?from=pc)
+ （左）凸集，（中）非凸集，（右）凸集
+ 
+凸集的定义正好体现在凸函数的定义中，如下所示：
+- ![理解凸性:为什么梯度下降适用于线性回归](https://p3-tt.byteimg.com/origin/pgc-image/a53f22a6df8e47729ee4f32710636a13?from=pc)
+
+你可以直观地把凸函数想象成这样的函数:如果你画一条从(x,f(x))到(y,f(y))的直线，那么凸函数的图像就会在这条直线的下方。下面是三个例子，我们应用这个直觉来确定函数是否是凸的。
+- ![理解凸性:为什么梯度下降适用于线性回归](https://p3-tt.byteimg.com/origin/pgc-image/edbe443661144544ae4ef6fda5fd9a42?from=pc)
+- （左）具有唯一优化器的凸函数，（中）非凸函数，（右）具有多个优化器的凸函数
+ 
+我们可以看到中间的图不是凸的，因为当我们绘制连接图上两个点的线段时，有一些点（x，f（x））大于f（x）上对应的点。
+ 
+左边和右边的图形都是凸的。不管你在这些图上画什么线段，这个线段总是在函数图的上面或者等于函数图。
+
+梯度下降以最简单的形式没有找到全局最小化器。
+
+![](https://p1-tt.byteimg.com/origin/pgc-image/1a67811e997e4f41a6bc035aeddf93d0?from=pc)
+
+
 ## 最优化问题的两大类：连续优化与离散优化
 
 - 关于约束条件，理想很美好，现实很骨感，在现实生活中，我们会遇到比如预算有限、时间有限、外部强制性条件等各种各样的问题，与目标函数一样，这些限制条件不是单一存在的，也可能同时存在同一个问题里，对于某一个优化问题来讲，限制条件越复杂，求解就越困难。
