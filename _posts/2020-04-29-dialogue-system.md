@@ -304,6 +304,16 @@ chatbot:我也是，不过总有一天就会好起来的
 
 ## 智能客服
 
+### 发展阶段
+
+【2021-5-31】阿里小蜜：智能客服的几种模式
+* **传统**服务模式
+  - ![图片](https://img-blog.csdnimg.cn/img_convert/fec5e563d93ce8c4f819198787303c1e.png)
+* **经典**服务模式
+  - ![图片](https://img-blog.csdnimg.cn/img_convert/e80cab3898203186cd1fe291a8a473f4.png)
+* **智能问答**服务模式
+  - ![图片](https://img-blog.csdnimg.cn/img_convert/aece14a932bb13c5184a66452d86ba48.png)
+
 - 【2021-5-8】[智能客服终将被颠覆，进化为下一代智能服务](https://mp.weixin.qq.com/s/mT-L1E9wqsxgIT38pBPnUw), Mingke，智能对话领域创业者. 作者的相关文章：[人工智障 2 : 你看到的 AI 与智能无关](https://mp.weixin.qq.com/s/tFcVohNjdhvBE_INQk9muQ)，2016-11，[为什么现在的人工智能助理都像人工智障？](https://www.sohu.com/a/119727799_413981)
 - 现阶段智能客服在理念方向和技术上都存在一定瓶颈。在未来，智能客服终将被颠覆，将进化为下一代智能服务 。Mingke 认为，一家智能客服公司要想快速建立起自己的核心壁垒，重点是更快地转型为智能服务公司。
 
