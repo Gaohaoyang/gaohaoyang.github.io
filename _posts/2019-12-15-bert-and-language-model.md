@@ -3,7 +3,7 @@ layout: post
 title:  BERT及预训练语言模型-BERT-and-Language-Model
 date:   2019-12-10 16:52:00
 categories: 深度学习 
-tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook TextCNN ES 田渊栋 彩票假设 自监督
+tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook TextCNN ES 田渊栋 彩票假设 自监督 Milvus
 excerpt: 预训练语言模型及BERT知识点汇总
 mathjax: true
 ---
@@ -643,8 +643,6 @@ Hinton在NIPS2014[\[1\]](https://zhuanlan.zhihu.com/p/71986772#ref_1)提出了`�
 - 总的来说，T的选择和Net-S的大小有关，Net-S参数量比较小的时候，相对比较低的温度就可以了（因为参数量小的模型不能capture all knowledge，所以可以适当忽略掉一些负标签的信息）
 
 ## 2. 蒸馏经验
-
---------
  
 ### 2.1 Transfer Set和Soft target
  
@@ -667,7 +665,6 @@ Hinton在NIPS2014[\[1\]](https://zhuanlan.zhihu.com/p/71986772#ref_1)提出了`�
  
  
 ## 3. 总结
-------
  
 再重点强调一下，student学习的是teacher的泛化能力，而不是“过拟合训练数据”。
  
@@ -992,6 +989,24 @@ Faiss 开发资料：
 - [tutorial](https://github.com/facebookresearch/faiss/wiki/Getting-started)
 - [Faiss学习笔记](https://blog.csdn.net/u013185349/article/details/103637977)
 - 基于Faiss的特征向量相似度搜索引擎[Milvus](https://milvus.io/cn/)
+
+### Milvus
+
+【2021-5-31】[Milvus 是什么](https://milvus.io/cn/docs/overview.md) Milvus 是一款开源的向量数据库，支持针对 TB 级向量的增删改操作和近实时查询，具有高度灵活、稳定可靠以及高速查询等特点。Milvus 集成了 Faiss、NMSLIB、Annoy 等广泛应用的向量索引库，提供了一整套简单直观的 API，让你可以针对不同场景选择不同的索引类型。此外，Milvus 还可以对标量数据进行过滤，进一步提高了召回率，增强了搜索的灵活性。
+
+Milvus 服务器采用主从式架构 (Client-server model)。在服务端，Milvus 由 Milvus Core 和 Meta Store 两部分组成：
+- Milvus Core 存储与管理向量和标量数据。
+- Meta Store 存储与管理 SQLite 和 MySQL 中的元数据，分别用于测试和生产。
+在客户端，Milvus 还提供了基于 Python、Java、Go、C++ 的 SDK 和 RESTful API。
+
+整体架构
+
+![](https://milvus.io/static/822d9e7c7b1dd7cd0c9e27040be06bbe/1e088/milvus_arch.png)
+
+Milvus 在全球范围内已被数百家组织和机构所采用，广泛应用于以下场景：
+- 图像、视频、音频等音视频搜索领域
+- 文本搜索、推荐和交互式问答系统等文本搜索领域
+- 新药搜索、基因筛选等生物医药领域
 
 
 # 资料
