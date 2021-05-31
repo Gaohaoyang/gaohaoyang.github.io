@@ -268,6 +268,17 @@ PTMs-Papers:
 
 - 【2020-7-11】ES开始支持embedding的BERT索引，[Elasticsearch遇上BERT：使用Elasticsearch和BERT构建搜索引擎](https://mp.weixin.qq.com/s/PzhdvwsR3ru2u_oVqSxxPQ)
 
+### BERT结合Faiss的语义表示
+
+【2021-5-31】语义匹配搜索项目使用的 Faiss和BERT的整体架构 [image](https://img-blog.csdnimg.cn/img_convert/a6df8af67afe4b2b7ebebd3d3531d380.png), 参考：[基于文本语义的智能问答系统](https://blog.csdn.net/shenfuli/article/details/107823959)
+- 注：深蓝色线为数据导入过程，橘黄色线为用户查询过程。）
+- 首先，本文项目使用开源的 bert-serving ， BERT做句子编码器，标题数据转化为固定长度为 768 维的特征向量，并导入 Milvus 或者Faiss库。
+- 然后，对存入 Milvus/Faiss 库中的特征向量进行存储并建立索引，同时原始数据提供唯一ID编码，将 ID 和对应内容存储在 PostgreSQL 中。
+- 最后，用户输入一个标题，BERT 将其转成特征向量。Milvus/Faiss 对特征向量进行相似度检索，得到相似的标题的 ID ，在 知识库（PostgreSQL/MySQL/SQLite。。。） 中找出 ID 对应的详细信息返回
+
+![](https://img-blog.csdnimg.cn/img_convert/a6df8af67afe4b2b7ebebd3d3531d380.png)
+
+
 ### BERT-as-service
 
 - Google 已经公开了 TensorFlow 版本 [BERT](https://github.com/google-research/bert) 的预训练模型和代码，可以用于生成词向量，但是还有更简单的方法：直接调用封装好的库 [bert-as-service](https://github.com/hanxiao/bert-as-service) 。
