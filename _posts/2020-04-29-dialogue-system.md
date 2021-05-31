@@ -3,7 +3,7 @@ layout: post
 title:  "对话系统-Dialogue System"
 date:   2020-04-29 21:45:00
 categories: 深度学习
-tags: 深度学习 NLP 对话系统 QA KB-QA 多轮 闲聊 沈向洋 FSM 有限状态机 GPT 台大 陈蕴侬 JSGF 图灵测试 推荐系统 阅读理解 智能音箱 个人助理 智能客服
+tags: 深度学习 NLP 对话系统 QA KB-QA 多轮 闲聊 沈向洋 FSM 有限状态机 GPT 台大 陈蕴侬 JSGF 图灵测试 推荐系统 阅读理解 智能音箱 个人助理 智能客服 BERT faiss
 excerpt: 对话系统技术图谱
 author: 鹤啸九天
 mathjax: true
@@ -1287,6 +1287,17 @@ Sebastian将QA的研究分为了5个阶段。
     - 第二个是多表单轮的Spider数据集；
     - 第三个是多表多轮的SparC数据集；
     - 第四个是CoSQL数据集，这是一个融合了多轮对话特点的多表多轮数据集。
+
+### BERT结合Faiss的语义表示
+
+【2021-5-31】语义匹配搜索项目使用的 Faiss和BERT的整体架构 [image](https://img-blog.csdnimg.cn/img_convert/a6df8af67afe4b2b7ebebd3d3531d380.png), 参考：[基于文本语义的智能问答系统](https://blog.csdn.net/shenfuli/article/details/107823959)
+- 注：深蓝色线为数据导入过程，橘黄色线为用户查询过程。）
+- 首先，本文项目使用开源的 bert-serving ， BERT做句子编码器，标题数据转化为固定长度为 768 维的特征向量，并导入 Milvus 或者Faiss库。
+- 然后，对存入 Milvus/Faiss 库中的特征向量进行存储并建立索引，同时原始数据提供唯一ID编码，将 ID 和对应内容存储在 PostgreSQL 中。
+- 最后，用户输入一个标题，BERT 将其转成特征向量。Milvus/Faiss 对特征向量进行相似度检索，得到相似的标题的 ID ，在 知识库（PostgreSQL/MySQL/SQLite。。。） 中找出 ID 对应的详细信息返回
+
+![](https://img-blog.csdnimg.cn/img_convert/a6df8af67afe4b2b7ebebd3d3531d380.png)
+
 
 ### 【2021-1-20】[How to Build an Open-Domain Question Answering System?](https://lilianweng.github.io/lil-log/2020/10/29/open-domain-question-answering.html)
 
