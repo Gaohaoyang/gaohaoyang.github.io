@@ -658,11 +658,14 @@ Mingke： 每一个行业都会诞生属于这个领域的智能服务，金融�
 语义理解单工模式准确率 95%+，召回率 96%+;双工模式 误识率< 4%，拒识率< 7%。核心技能 F1-score:电台/小说 98%+，车控/导航 95%+。对话能力已输出到家居、出行、教育、文旅、客服等场景。
 
 
-# 分类
+# 对话任务分类
 
 ## 简介
 
 ![](https://pic4.zhimg.com/80/v2-418bd5874dd55dc1be8bbb16a721dd0b_1440w.jpg)
+
+整体框架 [image](https://img-blog.csdn.net/20171129171908532)
+![](https://img-blog.csdn.net/20171129171908532)
 
 （1）对话机器人按照功能可以分为3-4类：
 - 第一类`任务型`对话，主要解决如订机票、订酒店等问题。
@@ -801,6 +804,9 @@ Mingke： 每一个行业都会诞生属于这个领域的智能服务，金融�
 3. **Slot Filling**（序列标注）：Requires Predefined Schema
   - 槽位：rating=“good”，type=“taiwanese”
   - Slot Tagging
+
+【2021-5-31】自然语言理解的语义表示主要有**分布**语义表示 (Distributional semantics)、**框架**语义表示 (Frame semantics) 和**模型论**语义表示 (Model-theoretic semantics) 三种方式。在智能对话交互中，自然语言理解一般采用的是 frame semantics 表示的一种变形，即采用**领域**（domain）、**意图**（intent）和**属性槽**（slots）来表示语义结果，如[图](https://img-blog.csdn.net/20171129172354204), 摘自：[阿里智能对话交互技术实践与创新](https://blog.csdn.net/qq_40027052/article/details/78672907)
+![](https://img-blog.csdn.net/20171129172354204)
 
 ### 意图识别
 
@@ -1104,6 +1110,11 @@ GUS对话系统，是 Genial Understander System 的缩写，可以追溯到1977
 详见另一篇笔记：[对话系统之对话管理器-Dialogue Manager](https://wqw547243068.github.io/2020/04/29/dialogue-manager)
 
 ## 知识型对话—— Q/A
+
+- 【2021-5-31】业务场景中有三种典型的问答任务
+  - 一是用户提供 QA-Pairs，一问一答；
+  - 二是建立结构化的知识图谱，进行基于**知识图谱**的问答；
+  - 三是针对非结构化的文本，进行基于**阅读理解**的问答。
 
 - 资料
   - [chatbot_with_IR](https://github.com/IrvingBei/chatbot_with_IR)：一个利用搜索引擎构建的简单问答系统，webpy服务
