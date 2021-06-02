@@ -3,7 +3,7 @@ layout: post
 title:  "计算机发展史-Computer History"
 date:   2010-07-26 23:42:00
 categories: 计算机基础
-tags: 高德纳 乔姆斯基 图灵 冯·诺依曼 陈皓 少儿编程 网络 体系结构 CPU arm x86
+tags: 高德纳 乔姆斯基 图灵 冯·诺依曼 陈皓 少儿编程 网络 体系结构 CPU arm x86 OSI
 excerpt: 计算机发展历史，编程语言诞生过程，及几位关键人物
 mathjax: true
 ---
@@ -17,6 +17,10 @@ mathjax: true
 - 【2020-10-29】源自linux之父的名言：**talk is cheap，show me the code**，汉化版：**北沙滩**（别瞎谈），**亮马桥**（亮码瞧）
 - 计算机网络里的 **OSI七层模型** 或 **TCP/IP五层模型**，即应用层（应用层、表示层、会话层）、传输层、网络层、数据链路层、物理层
 ![](https://pic4.zhimg.com/50/v2-6531ff0d8cbf967211297ef7c7813ab1_hd.jpg)
+
+- [OSI七层模型](https://www.toutiao.com/w/a1701287080764423/)
+
+![](https://p5.toutiaoimg.com/img/tos-cn-i-0022/d2916c97afc94b9daa01bdaca34759a0~tplv-obj:1575:2227.image?from=post)
 
 # [计算机编程简史](https://coolshell.cn/articles/2724.html)
 
