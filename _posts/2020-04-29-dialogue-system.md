@@ -62,6 +62,7 @@ mathjax: true
   - [春松客服](https://docs.chatopera.com/products/cskefu/index.html)，[Demo](https://cc.chatopera.com/)，春松客服是拥有机器人客服、呼叫中心、数据分析、CRM 等功能于一身的新一代客服系统。将智能机器人与人工客服完美融合，同时整合了多种渠道，结合 CRM 系统，为客户打标签，建立客户的人群画像等，帮助企业向客户提供更加专业客服服务。
   - ![](https://docs.chatopera.com/images/products/trademark-chatopera.png)
   - ![](https://docs.chatopera.com/images/products/user-service-prod.png)
+- 【2021-6-2】百度机器人平台，[UNIT](https://ai.baidu.com/unit/v2/static/socialbot)
 - 【2021-2-4】调停机器人（斡旋）
   - [Intervening Ethical Governor for Robot Mediator in Patient-Caregiver Relationship](https://www.youtube.com/watch?v=3-ZST_bGW3Q&feature=youtu.be)，国外的调停机器人，佐治亚理工，应用于医患关系调解，论文：[an intervening ethical governor for a robot mediator in patient-caregiver relationship.](https://www.cc.gatech.edu/ai/robot-lab/online-publications/ICRE15_shim_arkin.pdf)
     - ![](https://spectrum.ieee.org/image/MjkzMjc1OA.jpeg)
