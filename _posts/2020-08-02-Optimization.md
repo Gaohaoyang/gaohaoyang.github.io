@@ -169,6 +169,48 @@ Hinge损失函数标准形式如下：
 ![](https://img-blog.csdn.net/20170730100057611?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTGVmdF9UaGluaw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
 
+10. Focal loss
+
+Focal loss出自计算机视觉目标检测领域，作者是斩获多届顶会best paper的**何凯明**。虽然出自目标检测，但是focal loss的思想在各个领域上都起到了很大的作用。总体上讲，Focal Loss是一个缓解分类问题中**类别不平衡**、难易样本不均衡的损失函数。传统交叉熵损失函数的形式为：
+ 
+![[公式]](https://www.zhihu.com/equation?tex=CE+%3D+-%28y+%5Ccdot+log%28p%29+%2B+%281-y%29%5Ccdot+log%281-p%29%29)
+ 
+其中，y为真值，p为预测概率，我们进一步可以将预测概率表示为：
+ 
+![](https://pic1.zhimg.com/v2-75e13d60ce1c2fed1de9cfd542f99c59_720w.png?source=3af55fa1)
+ 
+![](https://pic1.zhimg.com/80/v2-75e13d60ce1c2fed1de9cfd542f99c59_720w.png?source=3af55fa1)
+ 
+于是上述交叉熵的表达式可以简化为：
+ 
+![[公式]](https://www.zhihu.com/equation?tex=CE+%3D+-log%28p_t%29)
+ 
+我们再来看一下Focal loss的具体形式：
+ 
+![[公式]](https://www.zhihu.com/equation?tex=focal+%3D-+%5Calpha%281-p_t%29%5E%5Cgamma+log%28p_t%29)
+ 
+对比可以看到，focal loss相较于交叉熵多了两项 ![[公式]](https://www.zhihu.com/equation?tex=%5Calpha) 与 ![[公式]](https://www.zhihu.com/equation?tex=%281-p_t%29%5E%5Cgamma) . 这两项分别对应着前面提到的分类问题中类别不平衡、难易样本不均衡。 ![[公式]](https://www.zhihu.com/equation?tex=%5Calpha) 的作用与前面加权交叉熵中的权重一样，用于处理类别不平衡，而![[公式]](https://www.zhihu.com/equation?tex=%281-p_t%29%5E%5Cgamma) 则用于处理难易样本不均衡。其实很容易理解，当 ![[公式]](https://www.zhihu.com/equation?tex=p_t) 较大的时候，说明样本比较容易被模型分类，此时 ![[公式]](https://www.zhihu.com/equation?tex=%281-p_t%29%5E%5Cgamma) 的值就会较小。反之 ![[公式]](https://www.zhihu.com/equation?tex=p_t) 较小，样本难分， ![[公式]](https://www.zhihu.com/equation?tex=%281-p_t%29%5E%5Cgamma) 就会加大。所以这也是一种加权。
+ 
+TensorFlow对于focal loss同样没有封装，所以依然得我们自己自定义：
+ 
+```python
+def test_softmax_focal_ce_3(gamma, alpha, logits, label):
+    epsilon = 1.e-8
+    logits = tf.nn.sigmoid(logits)
+    logits = tf.clip_by_value(logits, epsilon, 1. - epsilon)
+ 
+    weight = tf.multiply(label, tf.pow(tf.subtract(1., logits), gamma))
+    if alpha is not None:  
+        alpha_t = alpha
+    else:
+        alpha_t = tf.ones_like(label)
+    xent = tf.multiply(label, -tf.log(logits))
+    focal_xent = tf.multiply(alpha_t, tf.multiply(weight, xent))
+    reduced_fl = tf.reduce_sum(focal_xent, axis=1)
+    return tf.reduce_mean(reduced_fl)
+```
+
+
 ## 凸函数
 
 - 【2021-5-31】[理解凸性:为什么梯度下降适用于线性回归](https://www.toutiao.com/i6817344123704443404)

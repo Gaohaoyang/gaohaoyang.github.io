@@ -3,7 +3,7 @@ layout: post
 title:  "如何处理机器学习中的不平衡类别-How to handle imbalance data"
 date:   2019-04-25 20:12:00
 categories: 机器学习
-tags: 机器学习 不平衡
+tags: 机器学习 不平衡 损失函数
 excerpt: 技术文章
 mathjax: true
 ---
@@ -52,6 +52,171 @@ mathjax: true
    - （3）从扩大边界到Logits调整
    - 长尾分布：少数类别的样本数目非常多，多数类别的样本数目非常少。
    - ![](http://p8.itc.cn/q_70/images03/20200913/ce0ea36c06ec4f2ea121f78ad7920a93.png)
+
+# 不平衡问题解法
+
+以Albert+TextCNN为基础框架，将已有的长尾问题损失函数解决方案集成进该基础框架进行多标签文本分类,数据的长尾问题是经常会遇见的一个棘手的问题，更为极端的情况甚至极个别的类的trainning sample等于0。这对一个模型的性能影响是非常大的。
+![](https://pic2.zhimg.com/v2-8a3ccd7ed59de691a27406065477b3b9_720w.jpg?source=3af55fa1)
+
+## 加权交叉熵损失函数
+
+类别不均衡的情况下，需要通过损失函数中设置权重参数来调节各类之间的比重。一般不同类别的权重占比需要通过**多次**实验调整。如首先采用**中值频率平衡**的方法来结算每一个类的权重。然后在同时实验的效果对权重进行微调找到最合适的类别权重。
+
+中值频率平衡的原理如下：
+ 
+![[公式]](https://www.zhihu.com/equation?tex=freq_c+%3D+sum_c%2Fsum)
+ 
+![[公式]](https://www.zhihu.com/equation?tex=weight_c+%3D+freq_c%2Fmedium)
+ 
+其中 ![[公式]](https://www.zhihu.com/equation?tex=sum_c) 表示 ![[公式]](https://www.zhihu.com/equation?tex=c) 类别在训练集中的实例个数， ![[公式]](https://www.zhihu.com/equation?tex=sum) 表示训练集的大小， ![[公式]](https://www.zhihu.com/equation?tex=medium) 对所有类别的实例数目进行排序之后取到的中位数。
+ 
+有了上述对于权重的计算，但是tensorflow中没有对应的多标签分类的加权二进制交叉熵损失函数的api封装，所以这个函数得我们自己自定义，核心代码如下：
+ 
+```
+epsilon = 1.e-8
+logits = tf.nn.sigmoid(prediction)
+# 做一个截断操作，防止后续log的计算中出现nan值
+logits = tf.clip\_by\_value(logits, epsilon, 1. - epsilon)
+#这里的weight_c就是用前面公式求出来得到的一个列表
+weight = tf.constant(weight_c)  
+# 这里的label为真值
+loss = -tf.reduce_mean(weight\*label\*tf.log(logits)+(1-label)*tf.log((1-logits)))
+```
+
+## Focal loss
+
+Focal loss出自计算机视觉目标检测领域，作者是斩获多届顶会best paper的**何凯明**。虽然出自目标检测，但是focal loss的思想在各个领域上都起到了很大的作用。总体上讲，Focal Loss是一个缓解分类问题中**类别不平衡**、难易样本不均衡的损失函数。传统交叉熵损失函数的形式为：
+ 
+![[公式]](https://www.zhihu.com/equation?tex=CE+%3D+-%28y+%5Ccdot+log%28p%29+%2B+%281-y%29%5Ccdot+log%281-p%29%29)
+ 
+其中，y为真值，p为预测概率，我们进一步可以将预测概率表示为：
+ 
+![](https://pic1.zhimg.com/v2-75e13d60ce1c2fed1de9cfd542f99c59_720w.png?source=3af55fa1)
+ 
+![](https://pic1.zhimg.com/80/v2-75e13d60ce1c2fed1de9cfd542f99c59_720w.png?source=3af55fa1)
+ 
+于是上述交叉熵的表达式可以简化为：
+ 
+![[公式]](https://www.zhihu.com/equation?tex=CE+%3D+-log%28p_t%29)
+ 
+我们再来看一下Focal loss的具体形式：
+ 
+![[公式]](https://www.zhihu.com/equation?tex=focal+%3D-+%5Calpha%281-p_t%29%5E%5Cgamma+log%28p_t%29)
+ 
+对比可以看到，focal loss相较于交叉熵多了两项 ![[公式]](https://www.zhihu.com/equation?tex=%5Calpha) 与 ![[公式]](https://www.zhihu.com/equation?tex=%281-p_t%29%5E%5Cgamma) . 这两项分别对应着前面提到的分类问题中类别不平衡、难易样本不均衡。 ![[公式]](https://www.zhihu.com/equation?tex=%5Calpha) 的作用与前面加权交叉熵中的权重一样，用于处理类别不平衡，而![[公式]](https://www.zhihu.com/equation?tex=%281-p_t%29%5E%5Cgamma) 则用于处理难易样本不均衡。其实很容易理解，当 ![[公式]](https://www.zhihu.com/equation?tex=p_t) 较大的时候，说明样本比较容易被模型分类，此时 ![[公式]](https://www.zhihu.com/equation?tex=%281-p_t%29%5E%5Cgamma) 的值就会较小。反之 ![[公式]](https://www.zhihu.com/equation?tex=p_t) 较小，样本难分， ![[公式]](https://www.zhihu.com/equation?tex=%281-p_t%29%5E%5Cgamma) 就会加大。所以这也是一种加权。
+ 
+TensorFlow对于focal loss同样没有封装，所以依然得我们自己自定义：
+ 
+```python
+def test_softmax_focal_ce_3(gamma, alpha, logits, label):
+    epsilon = 1.e-8
+    logits = tf.nn.sigmoid(logits)
+    logits = tf.clip_by_value(logits, epsilon, 1. - epsilon)
+ 
+    weight = tf.multiply(label, tf.pow(tf.subtract(1., logits), gamma))
+    if alpha is not None:  
+        alpha_t = alpha
+    else:
+        alpha_t = tf.ones_like(label)
+    xent = tf.multiply(label, -tf.log(logits))
+    focal_xent = tf.multiply(alpha_t, tf.multiply(weight, xent))
+    reduced_fl = tf.reduce_sum(focal_xent, axis=1)
+    return tf.reduce_mean(reduced_fl)
+```
+
+## **[Dice Loss](http://link.zhihu.com/?target=https%3A//arxiv.org/abs/1606.04797) 与** **[DSC Loss](http://link.zhihu.com/?target=https%3A//arxiv.org/pdf/1911.02855.pdf)**
+
+ 
+Dice Loss最先是在[VNet](http://link.zhihu.com/?target=https%3A//arxiv.org/abs/1606.04797) 这篇文章中被提出，后来被广泛的应用在了医学影像语义分割之中。Dice loss提出来是用来解决图像中前景与背景像素数目不平衡的问题。而正也正好对应到了分类问题中的正例与负例。在包括多标签文本分类的分类问题中，正例与负例的不平衡一直是一个很棘手的问题。
+ 
+> 1、训练与测试失配。占据绝大多数的负例会支配模型的训练过程，导致模型倾向于负例，而测试时使用的F1指标需要每个类都能准确预测；  
+> 2、简单负例过多。负例占绝大多数也意味着其中包含了很多简单样本，这些简单样本对于模型学习困难样本几乎没有帮助，反而会在交叉熵的作用下推动模型遗忘对困难样本的知识。
+ 
+我们知道，分类问题一般都基于交叉熵作为损失函数，交叉熵有一个很明显的特点：“平等”地看待每一个样本，无论正负，都尽力把它们推向1（正例）或0（负例）。但实际上，对分类而言，将一个样本分类为负只需要它的概率＜0.5即可，完全没有必要将它推向0。
+ 
+基于这个观察，作者提出一个基于Dice Loss的自适应损失——DSC，在训练时推动模型更加关注困难的样本，降低简单负例的学习度，从而在整体上提高基于F1值的效果。
+ 
+先来看一下Dice Loss是怎么操作的，给定两个集合A和B，衡量两者之间的相似度：
+ 
+![[公式]](https://www.zhihu.com/equation?tex=Dice_%7Bcoefficient%7D%3D+%5Cfrac%7B2%7CA%5Ccap+B%7C%7D%7B%7CA%7C%5Ccup%7CB%7C%7D)
+ 
+如果我们把![[公式]](https://www.zhihu.com/equation?tex=A)看作是模型预测的正例，![[公式]](https://www.zhihu.com/equation?tex=B)看作真实的正例。那么上式可以写成：
+ 
+![[公式]](https://www.zhihu.com/equation?tex=Dice_%7Bcoefficient%7D%3D+%5Cfrac%7B2TP%7D%7B2TP%2BFN%2BFP%7D+%3D+F_1)
+ 
+对于单个样本而言：
+ 
+![[公式]](https://www.zhihu.com/equation?tex=Dice_%7Bcoefficient%7D%3D+%5Cfrac%7B2p_iy_i%7D%7Bp_i%2By_i%7D) , 其中 ![[公式]](https://www.zhihu.com/equation?tex=p_i) 为预测结果， ![[公式]](https://www.zhihu.com/equation?tex=y_i) 为真值。
+ 
+![[公式]](https://www.zhihu.com/equation?tex=Dice_%7Bcoefficient%7D) 表达了模型预测的正例与真正的正例之间的相似度，我们希望他们越相似越好，所以Dice Loss最基础的版本可以表达为：
+ 
+![[公式]](https://www.zhihu.com/equation?tex=Dice_%7Bloss%7D+%3D+1-Dice_%7Bcoefficient%7D)
+ 
+可以看到，对于二分类而言，如果为负例， ![[公式]](https://www.zhihu.com/equation?tex=Dice_%7Bcoefficient%7D) 为0，这显然不太合理。所以作者加入了平滑系数 ![[公式]](https://www.zhihu.com/equation?tex=%5Cvarepsilon) ，即：
+ 
+![[公式]](https://www.zhihu.com/equation?tex=Dice_%7Bcoefficient%7D%3D+%5Cfrac%7B2p_iy_i+%2B+%5Cvarepsilon%7D%7Bp_i%2By_i+%2B+%5Cvarepsilon%7D)
+ 
+后来，Milletari et al. (2016)将分母改为平方和的形式以实现更好的收敛：
+ 
+![[公式]](https://www.zhihu.com/equation?tex=Dice_%7Bcoefficient%7D%3D+%5Cfrac%7B2p_iy_i+%2B+%5Cvarepsilon%7D%7Bp_i%5E2%2By_i%5E2+%2B+%5Cvarepsilon%7D)
+ 
+而在ACL2020提出的DSC中， ![[公式]](https://www.zhihu.com/equation?tex=Dice_%7Bcoefficient%7D) 变为：
+ 
+![[公式]](https://www.zhihu.com/equation?tex=Dice_%7Bcoefficient%7D%3D+%5Cfrac%7B2%281-p_i%29p_iy_i+%2B+%5Cvarepsilon%7D%7B%281-p_i%29p_i%2By_i+%2B+%5Cvarepsilon%7D)
+ 
+可以发现，这里的思想与focal loss一致，或者是说借鉴了focal loss的思想。不过，Focal Loss即使能对简单样本降低学习权重，但是它本质上仍然是在鼓励简单样本趋向0或1（本质上仍然是交叉熵），这就和DSC有了根本上的区别。因此，我们说DSC通过“平衡”简单样本和困难样本的学习过程，从而提高了最终的F1值。
+ 
+同样，TensorFlow并没有dice loss和DSC的封装，还得自己写：
+ 
+DiceLoss
+ 
+```python
+def dice_loss(y_true, y_pred, varepsilon):
+  epsilon = 1.e-8
+  y_true = tf.cast(y_true, tf.float32)
+  y_pred = tf.nn.sigmoid(y_pred)
+  y_pred = tf.clip_by_value(y_pred, epsilon, 1. - epsilon)
+ 
+  numerator = 2 * tf.reduce_sum(y_true * y_pred) + varepsilon
+  denominator = tf.reduce_sum(y_true + y_pred) + varepsilon
+ 
+  return 1 - numerator / denominator
+```
+ 
+DSC
+ 
+```python
+def dsc_loss(y_true, y_pred, varepsilon):
+  epsilon = 1.e-8
+  y_true = tf.cast(y_true, tf.float32)
+  y_pred = tf.nn.sigmoid(y_pred)
+  y_pred = tf.clip_by_value(y_pred, epsilon, 1. - epsilon)
+ 
+  numerator = 2 * tf.reduce_sum(y_true * y_pred * (1-y_pred)) + varepsilon
+  denominator = tf.reduce_sum(y_true + y_pred * (1-y_pred)) + varepsilon
+ 
+  return 1 - numerator / denominator
+```
+
+## **实验结果**
+    
+ 
+| 方法 | recall | precision | F1 |
+|---|---|---|---|
+|albert+textcnn | 83.7 | 96.0 | 89.4 |
+| albert+textcnn（weight BCE）| 80.3| 95.1| 87.1 |
+| albert+textcnn（Focal loss）| 85.6 | 94.8| 90.2|
+| albert+textcnn（Dice loss）| 84.5| 95.5| 90.1|
+| albert+textcnn（DSC loss）| 84.9| 96.2| 90.5|
+ 
+Focal loss模型还未train至收敛，收敛后的结果之后进行更新
+
+此外，本表格会持续收录并验证一些最新的论文的从loss的角度来解决长尾问题的方案
+ 
+*   **结论**
+- 1）**加权交叉熵**：理论上完全能够取得精度的提升。但是实际操作起来却很难。需要很丰富的实际经验，尤其是对于我们这种类别很多的任务时。过于加大尾部类别的权重反而会起到反作用。所以，如何确定每个类别的权重成为该方法的瓶颈。
+- 2) **Focal loss**:  在超参数设置得当的情况下能够提升召回率而精确度不会出现很大的下降。但是不同的数据集，超参数的设置需要进行多次实验才能得到最合适的设置。另外需要注意的是，focal loss最好与交叉熵loss一起使用，并且对两个loss需要设置合适的权重，不然单独使用focal loss容易将所有类的预测概率都推向1。此外加入了focal loss之后，模型需要更长的训练epoch才能收敛。
+- 3）Dice loss/DSC loss: 与focal loss一样，与交叉熵loss一起使用效果更好。当然，两个loss的权重就需要实验寻找。
 
 
 # 如何处理机器学习中的不平衡类别
@@ -124,9 +289,7 @@ import pandas as pd
 import numpy as np
 
 # 读取数据集
-df = pd.read_csv('balance-scale.data',
-                 names=['balance', 'var1', 'var2', 'var3', 'var4'])
-
+df = pd.read_csv('balance-scale.data', names=['balance', 'var1', 'var2', 'var3', 'var4'])
 # 显示示例观测样本
 df.head()
 ```
@@ -580,8 +743,6 @@ print( roc_auc_score(y, prob_y_4) )
 
 这些策略受[没有免费的午餐定理](http://elitedatascience.com/machine-learning-algorithms)支配，你应该尝试使用其中几种方法，并根据测试集的结果来决定你的问题的最佳解决方案。
 
-----
 【2019-04-25】Google colab上的[代码实现](https://colab.research.google.com/drive/1Wv9NaOKrQCQbahFDM_I-ML2Lp6BqURxx#scrollTo=AqjCU2X74RUF)
 
-😁
 
