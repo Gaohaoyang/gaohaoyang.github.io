@@ -26,6 +26,42 @@ mathjax: true
    - 提升长程依赖的学习能力
    - 层次化建模
 
+## 卷积
+
+各类卷积讲解:[A Comprehensive Introduction to Different Types of Convolutions in Deep Learning](https://towardsdatascience.com/a-comprehensive-introduction-to-different-types-of-convolutions-in-deep-learning-669281e58215)
+- 卷积与互相关（信号处理）
+- 深度学习中的卷积（单通道/多通道）
+- 3D卷积1 x 1卷积卷积运算（Convolution Arithmetic）
+- 转置卷积（反卷积，checkerboard artifacts）
+- 扩张卷积（空洞卷积）
+- 可分离卷积（空间可分离卷积，深度卷积）
+- 扁平卷积（Flattened Convolution）
+- 分组卷积（Grouped Convolution）
+- 随机分组卷积（Shuffled Grouped Convolution）
+- 逐点分组卷积（Pointwise Grouped Convolution）
+
+作者：[初识CV](https://www.zhihu.com/question/54149221/answer/1850592489)
+
+![](https://pic1.zhimg.com/50/v2-0411ccbcb5529b2855478d619ac78d9d_hd.webp?source=1940ef5c)
+
+
+空洞卷积 diolation
+
+![](https://pic1.zhimg.com/50/v2-9c531569460c694db396a7530d8e5ffc_hd.webp?source=1940ef5c)
+
+
+内部卷积 involution
+
+[CVPR 2021 | Involution：超越 Convolution 和 Self-attention 的神经网络新算子](https://blog.csdn.net/BAAIBeijing/article/details/115222970), [论文地址](http://arxiv.org/abs/2103.06255)
+![](https://img-blog.csdnimg.cn/img_convert/0f8c8ff1aa63b079025990418c20ea68.png)
+
+
+![](https://img-blog.csdn.net/20170730100057611?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTGVmdF9UaGluaw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+![](https://img-blog.csdnimg.cn/img_convert/b670881b8e5cd7b52b4ebe69ace1654b.png)
+
+
+
 ## Seq2seq结构
 
 编码-解码结构
@@ -661,7 +697,6 @@ def top_k_top_p_filtering(logits, top_k=0, top_p=1.0, filter_value=-float("Inf")
 
 
 ## Attention的细节
-----------------
  
 ### 2.1. 点积attention
  
@@ -754,7 +789,6 @@ Multi-head Attention的本质是，在参数总量保持不变的情况下，将
 从上图可以看出， ![[公式]](https://www.zhihu.com/equation?tex=q_i) 和 ![[公式]](https://www.zhihu.com/equation?tex=k_j) 之间的attention score从1个变成了h个，这就对应了h个子空间中它们的关联度。
  
 3. Transformer模型架构中的其他部分
--------------------------
  
 ### 3.1. Feed Forward Network
  
