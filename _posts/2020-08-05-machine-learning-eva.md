@@ -3,7 +3,7 @@ layout: post
 title:  "机器学习模型评估方法-The-Evaluation-of-Machine Learning"
 date:   2020-08-05 14:56:00
 categories: 机器学习
-tags: 机器学习 AUC PR 混淆矩阵 NCE 评分卡 评价 KL散度 风控 互联网金融 交叉熵
+tags: 机器学习 AUC PR 混淆矩阵 NCE 评分卡 评价 KL散度 风控 互联网金融 交叉熵 损失函数
 author : 鹤啸九天
 excerpt: 机器学习项目开始前的核心问题：如何设置指标，评价模型效果？
 mathjax: true
@@ -44,6 +44,22 @@ mathjax: true
 - Auc变化其实等价于左上角的面积（绿色部分）变化。 这个面积和两类数据的概率分布的重叠面积成正比 （容易分错类的部分）。 根各数据分布的重叠部分成正比。（这个数据不一定是原始数据，而是通过特征工程和模型高纬投影后的，各类数据分布）好的分类器，把两类分的很开，概率分布重叠小，左上面积小，auc大。最坏的情况是随机，概率分布完全重叠，auc是直线。
 - ![](https://pic3.zhimg.com/80/v2-ee0d1b124bae822d1e9bb5784d63e051_720w.jpg)
     - 转自：知乎[xixihaha912](https://www.zhihu.com/question/39840928/answer/342874215)
+
+
+## PR曲线
+
+P-R曲线中，P为[图](https://img-blog.csdn.net/20180715110420551?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxOTk0MDA2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)中precision，即精准度，R为图中recall，即召回率。
+
+![](https://img-blog.csdn.net/20180715110420551?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxOTk0MDA2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+AP的计算，此处参考的是PASCAL  VOC  CHALLENGE的2010年之前计算方法。首先设定一组阈值，[0, 0.1, 0.2, …, 1]。然后对于recall大于每一个阈值（比如recall>0.3），我们都会得到一个对应的最大precision。这样，我们就计算出了11个precision。AP即为这11个precision的平均值。这种方法英文叫做11-point interpolated average precision。​
+
+## AP/mAP
+
+[原文链接](https://blog.csdn.net/qq_41994006/article/details/81051150)
+
+## AUC
+
 
 
 # 损失函数
