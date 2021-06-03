@@ -162,6 +162,13 @@ Hinge损失函数标准形式如下：
 最后奉献上交叉熵损失函数的实现代码：[cross_entropy](https://link.zhihu.com/?target=https%3A//github.com/yyHaker/MachineLearning/blob/master/src/common_functions/loss_functions.py).
 
 
+9. CTC loss
+
+[CTC Loss讲解](https://blog.csdn.net/yifen4234/article/details/80334516)
+
+![](https://img-blog.csdn.net/20170730100057611?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTGVmdF9UaGluaw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+
 ## 凸函数
 
 - 【2021-5-31】[理解凸性:为什么梯度下降适用于线性回归](https://www.toutiao.com/i6817344123704443404)
