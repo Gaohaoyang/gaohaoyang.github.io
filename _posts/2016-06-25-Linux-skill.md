@@ -155,7 +155,7 @@ tcpdump -i eth1
 
 ## 任务管理
 
-### contab使用
+### crontab使用
 
 - [Linux定时任务Crontab命令详解](https://www.cnblogs.com/intval/p/5763929.html)，[crontab在线测试](https://tool.lu/crontab/)
 - 通过crontab 命令，我们可以在固定的间隔时间执行指定的系统指令或 shell script脚本。时间间隔的单位可以是分钟、小时、日、月、周及以上的任意组合。这个命令非常设合周期性的日志分析或数据备份等工作。
@@ -292,6 +292,17 @@ function log(){
    - grep 更适合单纯的查找或匹配文本
    - sed 更适合编辑匹配到的文本
    - awk 更适合格式化文本，对文本进行较复杂格式处理
+
+## 编码转换
+
+- 【2021-6-4】linux下转换文件编码格式，命令：
+
+```shell
+# 从gbk转utf8
+iconv -f gbk -t utf8 pattern_0603.txt -o pattern.txt
+# 上面命令失败的用下面
+iconv -f gbk -t utf8 pattern_0603.txt > pattern.txt
+```
 
 ## awk
 
