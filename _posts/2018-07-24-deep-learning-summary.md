@@ -16,6 +16,12 @@ mathjax: true
 
 # 图解机器学习
 
+- 【2021-6-7】深度学习与机器学习，人工智能关系，[图解](https://p1-tt.byteimg.com/origin/pgc-image/f1c72788cf7d464fad60c3a48382ef59?from=pc), [详解AI、Machine learning和Deep learning 三者之间的关系](https://www.toutiao.com/i6970246557027287584)
+  - ![](https://p1-tt.byteimg.com/origin/pgc-image/f1c72788cf7d464fad60c3a48382ef59?from=pc)
+- 强人工智能和弱人工智能
+  - 强人工智能 指让机器获得自适应能力，解决一些之前没有遇到过的问题，电影里的人工智能多半都是在描绘强人工智能，这种要求比较高，在目前的现实世界里完全真正实现强人工智能难度很大。
+  - 弱人工智能 指让机器具备观察和感知的能力，可以做到一定程度的理解和推理，目前我们科研工作都集中在弱人工智能这部分。
+  - 弱人工智能有希望取得突破，这主要归功于一种实现人工智能的方法——机器学习。
 - 【2021-5-13】[【绝对干货】机器学习模型训练全流程](https://zhuanlan.zhihu.com/p/184673895), [数据科学信息图](https://github.com/dataprofessor/infographic)
   - ![](https://github.com/dataprofessor/infographic/blob/master/01-Building-the-Machine-Learning-Model.JPG?raw=true)
 - [MLOps：构建生产机器学习系统最佳实践](https://zhuanlan.zhihu.com/p/363697750)
