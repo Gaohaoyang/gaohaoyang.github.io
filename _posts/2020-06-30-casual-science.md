@@ -31,12 +31,12 @@ mathjax: true
   - [因果观念新革命？万字长文，解读复杂系统背后的暗因果](https://swarma.org/?p=19906)，[集智俱乐部因果科学专题Github](https://github.com/CausalAI/clubjizhi)，[因果科学与 Causal AI 系列读书会](https://www.sohu.com/a/415039730_741733)
   - 【2020-10-22】[如何在观测数据下进行因果效应评估](https://www.sohu.com/a/426630014_741733)：
     - 相关性相比因果，更缺乏 **可解释性**（Explainability）、**稳定性**（Stability）（漂移）
-    - 可行动性（Actionability）：这些虚假相关是由混淆变量产生的混杂偏倚（Confounding Bias），这种决策问题实际上是反事实问题，而不是预测问题。
-    - 公平性（Fairness）：通过因果评估的框架，可以用Do-演算（Do-Calculus）等工具，干预收入的多少，来计算肤色与犯罪率之间真正的因果效应大小。
+    - **可行动性**（Actionability）：这些虚假相关是由混淆变量产生的**混杂偏倚**（Confounding Bias），这种决策问题实际上是反事实问题，而不是预测问题。
+    - **公平性**（Fairness）：通过因果评估的框架，可以用**Do-演算**（Do-Calculus）等工具，干预收入的多少，来计算肤色与犯罪率之间真正的因果效应大小。
     - 相关性有三种来源：**因果**、**混淆**和**样本选择**。
       - ① 因果关联例子就是天下雨地面会湿，这种关系是能够被人类所理解的、是可解释的、稳定的（无论在任何国家或城市，天下雨地都会湿）。
-      - ② 混淆关联是由混淆偏差（Confounding Bias）造成的。比如图中X是T和Y的共同原因，但如果不对X进行观察，就会发现T和Y是具有相关性的，但T和Y之间是没有直接因果效应的，这就是产生了虚假相关。
-      - ③ 样本选择偏差（Selection Bias）也会产生相关性，比如之前的例子中，如果数据集中的狗都出现在沙滩上，而没有狗的图片都是草地，那么训练处的模型就会发现草地与狗之间是负相关的，这也产生了虚假相关。
+      - ② 混淆关联是由**混淆偏差**（Confounding Bias）造成的。比如图中X是T和Y的共同原因，但如果不对X进行观察，就会发现T和Y是具有相关性的，但T和Y之间是没有直接因果效应的，这就是产生了虚假相关。
+      - ③ 样本选择偏差（Selection Bias）也会产生相关性，比如之前的例子中，如果数据集中的狗都出现在沙滩上，而没有狗的图片都是草地，那么训练出的模型就会发现草地与狗之间是负相关的，这也产生了虚假相关。
     - 虚假相关与因果关联相比，缺乏可解释性，且容易随着环境变化。在工业界和学术界中，我们都希望能判断两个变量之间的相关究竟是因果关联还是虚假相关。如果是虚假相关的话，可能会给实际的系统带来风险。
     - 所以恢复因果可以提高可解释性，帮助决策，并在未来的数据集中做出稳定而鲁棒的预测，防止算法产生的偏差。无论数据集中有什么样的偏差，我们都希望能挖掘出没有偏差的因果关系，来指导算法。
   - ![](https://swarma.org/wp-content/uploads/2020/05/wxsync-2020-05-381c31fa5614d7d4df7ae1b27e0d393c.png)
@@ -98,7 +98,7 @@ mathjax: true
 
 - 【因果推断】 [A Brief Introduction to Causal Inference by Brady Neal](https://www.bilibili.com/video/BV1CK4y1L7uA/?spm_id_from=333.788.videocard.5)
 - 【2021-3-29】[统计之都-因果推断专题](https://cosx.org/tags/%E5%9B%A0%E6%9E%9C%E6%8E%A8%E6%96%AD/)
-  - [因果推断简介之一：从 Yule-Simpson’s Paradox 讲起](https://cosx.org/2012/03/causality1-simpson-paradox/)
+  - [因果推断简介之一：从 Yule-Simpson’s Paradox 讲起](https://cosx.org/2012/03/causality1-simpson-paradox/) 辛普森悖论
   - [因果推断简介之二：Rubin Causal Model (RCM) 和随机化试验](https://cosx.org/2012/03/causality2-rcm/)
   - [因果推断简介之三：R. A. Fisher 和 J. Neyman 的分歧](https://cosx.org/2012/03/causality3-fisher-and-neyman/)
   - [因果推断简介之五：因果图 (Causal Diagram)](https://cosx.org/2012/10/causality5-causal-diagram/)
@@ -225,6 +225,14 @@ mathjax: true
   - 图灵奖获得者，UCLA 教授 Judea Pearl 题为《[Theoretical Impediments to Machine Learning with Seven Sparks from the Causal Revolution](http://ftp.cs.ucla.edu/pub/stat_ser/r475.pdf)》的论文中，作者就已探讨了当前机器学习存在的理论局限性，并给出了面向解决这些问题，来自因果推理的七个启发。
   - 当前的机器学习几乎完全是统计学或**黑箱**的形式，从而为其性能带来了严重的理论局限性。这样的系统不能推断干预和反思，因此不能作为**强人工智能**的基础。为了达到人类级别的智能，学习机器需要现实模型（类似于因果推理的模型）的引导。为了展示此类模型的关键性，我将总结展示 7 种当前机器学习系统无法完成的任务，并使用因果推理的工具完成它们。
 
+![](https://ask.qcloudimg.com/http-save/yehe-1754229/e245kls6qs.jpeg?imageView2/2/w/1620)
+
+| Level (Symbol) | Typical  Activity | Typical Questions | Examples |
+|---|---|---|---|
+| 1. **Association** P(y|x) | Seeing | ①What is? ②How would seeing X change my belief inY ? | ①What does a symptom tell me about a disease?②What does a survey tell us about the election results? |
+| 2. **Intervention** P(y|do(x), z) | Doing Intervening | ①What if? ②What if I do X? | ① What if I take aspirin, will my headache be cured?②What if we ban cigarettes? |
+| 3. **Counterfactuals** P(yx|x', y') |  Imagining, Retrospection | ① Why? ②Was it X that caused Y ? ③What if I had acted differently? | ①Was it the aspirin that stopped my headache?②Would Kennedy be alive had Oswald not shot him? ③What if I had not been smoking the past 2 years? |
+
 - 【2021-3-31】[厘清因果逻辑后的机器学习可以脱胎换骨吗？](https://www.toutiao.com/i6945642299799896607/xs)
 - 人类与机器学习的一大不同即人类理解因果逻辑容易，机器学习理解因果却难如登天。机器学习算法，尤其是深度神经网络，擅长从大量数据中找出微妙的模式，但它们很难做出简单的因果推论，主要涉及的难题是独立和恒等分布数据（i.i.d）。
 - （1）为什么机器学习模型不能超越其狭窄的领域和训练数据?
@@ -335,11 +343,7 @@ mathjax: true
  
 ![](https://pic2.zhimg.com/80/v2-d1ad27e975669c7e87d0b0d7d0df5c79_1440w.png)
  
-Y(0)代表对照组，Y(1)表示实验组。J (i)代表在相反的组中和样本距离最近的样本。
- 
-其中距离度量的方式很多，主要的有欧式距离和马氏距离。
- 
-样本空间有原始空间，也包括转换后的空间。
+Y(0)代表对照组，Y(1)表示实验组。J (i)代表在相反的组中和样本距离最近的样本。其中距离度量的方式很多，主要的有欧式距离和马氏距离。样本空间有原始空间，也包括转换后的空间。
  
 ![](https://pic3.zhimg.com/80/v2-0776b0476c08afc7cb53cc9b99a68fc2_1440w.jpg)
  
@@ -366,11 +370,7 @@ Tree-based Methods主要指的是决策树，包括CART树、BART树和RF。
  
 ![](https://pic4.zhimg.com/80/v2-ff093b9fb7a523da2b1cf0b6767fcd73_1440w.png)
  
-其中IPM指的是an Integral Probability Metrics，衡量的是两个分布之间的距离。
- 
-损失函数由以上三项加起来即可，同时加上一个模型复杂度的正则项。
- 
-后续，该作者继续提出一些改进，比如引入re-weight等。
+其中IPM指的是an Integral Probability Metrics，衡量的是两个分布之间的距离。损失函数由以上三项加起来即可，同时加上一个模型复杂度的正则项。后续，该作者继续提出一些改进，比如引入re-weight等。
  
 Shalit, **Estimating individual treatment effect: generalization bounds and algorithms**, ICML`17
  
