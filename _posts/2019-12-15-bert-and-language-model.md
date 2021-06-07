@@ -18,6 +18,7 @@ mathjax: true
 - [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/)
 - [Transformer模型的PyTorch实现](https://luozhouyang.github.io/transformer/),[A PyTorch implementation of the Transformer model in "Attention is All You Need"](https://github.com/jadore801120/attention-is-all-you-need-pytorch)
 
+- 【2021-6-7】[一文了解预训练语言模型](https://mp.weixin.qq.com/s/meDVXt91pypl4Gn_1A6iVg), 配套书籍，预训练语言模型，2021-5出版
 
 ## 总结
 
