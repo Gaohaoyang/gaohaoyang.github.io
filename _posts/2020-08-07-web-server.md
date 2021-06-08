@@ -3,7 +3,7 @@ layout: post
 title:  "Web服务知识-Web-Serving"
 date:   2020-08-07 19:17:00
 categories: 技术工具
-tags: Web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session RPC 微服务 GraphQL UML Gunicorn supervisor genvent grequests
+tags: Web web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session RPC 微服务 GraphQL UML Gunicorn supervisor genvent grequests
 author : 鹤啸九天
 excerpt: Web开发相关技术知识点
 mathjax: true
@@ -1484,6 +1484,47 @@ console.log(document.cookie)
  <frame>
 </framset>
 ```
+
+### 下拉框
+
+- 【2021-6-8】下拉框提供选项，示例：
+
+```html
+<html>
+<head>
+    <script language="javascript" type="text/javascript">
+    function modify(osel){ // 下拉框动作变更通知
+        value = osel.options[osel.selectedIndex].text; //text
+        alert('你已选择：'+value);
+        //sessionStorage.setItem("product", value); // 本地session
+        //var product = window.sessionStorage.getItem('product');
+    	//content.innerHTML += product;
+    }
+    function SetIndex(v){
+      var s=document.getElementById('selectSS');
+      s.selectedIndex=v;
+      if(s.onchange)s.onchange();
+      //sessionStorage.setItem("product", v);
+    }
+    </script>
+</head>
+
+<body>
+  <select id="selectSS" onChange="modify(this)">
+        <option value="1">第一项</option>
+        <option selected value="2">第二项(默认选中)</option>
+        <option value="3">第三项</option>
+        <option value="4">第四项</option>
+  </select>
+  <a href="#" onclick="SetIndex(0)">重置</a>
+   
+   <div class=content>
+   获取的选项内容：
+   </div>
+</body>
+</html>
+```
+
 
 ## ajax
 
