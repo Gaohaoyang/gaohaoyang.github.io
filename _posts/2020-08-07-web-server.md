@@ -1487,7 +1487,7 @@ console.log(document.cookie)
 
 ### 下拉框
 
-- 【2021-6-8】下拉框提供选项，示例：
+- 【2021-6-8】下拉框提供选项，触发onchange时间，[示例](https://bbs.csdn.net/topics/270085808)：
 
 ```html
 <html>
