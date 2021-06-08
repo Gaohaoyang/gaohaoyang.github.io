@@ -1461,7 +1461,6 @@ document.cookie = "username=orochiz;"+"expires="+d
 // 删除cookie （给某个键值对设置过期的时间）
 d.setDate(d.getDate() - 1)
 console.log(document.cookie)
-
 ```
 
 ### 异步请求Ajax
