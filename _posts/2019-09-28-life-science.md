@@ -3,7 +3,7 @@ layout: post
 title:  "生命科学的终极讨论-Life Science"
 date:   2019-09-28 09:30:00
 categories: 自然科学
-tags: 梁冬 华大基因 生命 自然 宇宙 神学 中医 西医 病毒 细菌 真菌 SARS SARI 武汉肺炎 埃博拉 蝙蝠 血型 薛定谔的猫 芝诺的乌龟 拉普拉斯兽 麦克斯韦妖 量子力学 微积分 经典力学 热力学第二定律 甲醛
+tags: 梁冬 华大基因 生命 自然 宇宙 神学 中医 西医 病毒 细菌 真菌 SARS SARI 武汉肺炎 埃博拉 蝙蝠 血型 薛定谔的猫 芝诺的乌龟 拉普拉斯兽 麦克斯韦妖 量子力学 微积分 经典力学 热力学第二定律 甲醛 癌症
 excerpt: 生命是什么，人类是地球统治者吗，科学的尽头是神学吗？
 mathjax: true
 ---
@@ -2286,6 +2286,14 @@ mathjax: true
 - 【2021-6-8】[图](https://p6.toutiaoimg.com/img/tos-cn-i-0022/a6f9f129a58644868319f1771ddfe8e1~tplv-obj:349:16000.image?from=post)说酗酒的危害过程
   - ![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/a6f9f129a58644868319f1771ddfe8e1~tplv-obj:349:16000.image?from=post)
 
+
+## 癌症
+
+
+### 如何预防癌症
+
+- 【2021-6-8】国家癌症中心[出品](https://www.toutiao.com/w/i1700551379584003), [图](https://p9.toutiaoimg.com/img/tos-cn-i-0022/10f533e4836c4e0381d1aca75abb8de6~tplv-obj:1022:2498.image?from=post)
+  - ![](https://p9.toutiaoimg.com/img/tos-cn-i-0022/10f533e4836c4e0381d1aca75abb8de6~tplv-obj:1022:2498.image?from=post)
 
 
 # 资料
