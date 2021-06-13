@@ -363,7 +363,7 @@ mathjax: true
 
 <iframe src="http://player.youku.com/embed/XMjg3NjI4MDM2NA==" frameborder="0" allowfullscreen=“true” height="600" width="100%" ></iframe>
 
-- 纪录片：燃点，[视频](https://www.vodxc.in/JLP/randiandianyingban/)
+- 纪录片：燃点，[视频](https://v.youku.com/v_show/id_XNDA4NzYwNzEyOA==.html)
    - 戴威的ofo要挂了，papi的内容创业偃旗息鼓，马薇薇名气下滑，傅盛还是意气风发，金星的新氧上市了，许单单的拉勾还在，老罗的锤子挂了。。。不胜唏嘘
    - 安传东的经历最具参考价值，跟我一样出身农村，人大毕业后连续创业，愈挫愈勇
    ![](https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=2256751130,3427799725&fm=173&app=49&f=JPEG?w=550&h=296&s=298A9C5D1A2A2E17508BC5AA03006049)
