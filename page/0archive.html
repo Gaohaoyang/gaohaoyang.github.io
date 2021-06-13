@@ -42,11 +42,13 @@ type: page
     <button class="anchor"><i class="fa fa-anchor"></i></button>
     <div class="right">
         <div class="wrap">
-
             <!-- Content -->
+
+            {% include externalLinks.html %}
+
             <div class="side content">
                 <div>
-                    Content
+                    Содержание
                 </div>
                 <ul id="content-side" class="content-ul">
                     {% assign counter = 0 %}
@@ -61,6 +63,9 @@ type: page
                         {% endfor %}
                 </ul>
             </div>
+
+            {% include recent.html %}
+
             <!-- Put other div tags here -->
             <!-- <div class="side">bbbb</div> -->
         </div>

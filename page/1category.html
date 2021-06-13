@@ -35,14 +35,16 @@ type: page
     <button class="anchor"><i class="fa fa-anchor"></i></button>
     <div class="right">
         <div class="wrap">
-
             <!-- Content -->
+
+            {% include externalLinks.html %}
+
             <div class="side content">
                 <div>
-                    Content
+                    Содержание
                 </div>
                 <ul id="content-side" class="content-ul">
-                    {% for category in site.categories%}
+                    {% for category in site.categories %}
                         <li>
                             <a data-scroll href="#{{ category | first }}">
                                 {{ category | first }} ({{ category | last | size }})

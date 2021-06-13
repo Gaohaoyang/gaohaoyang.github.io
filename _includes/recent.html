@@ -1,0 +1,11 @@
+<div class="side">
+    <div>
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        Недавнее
+    </div>
+    <ul class="content-ul" recent>
+        {% for post in site.posts offset: 0 limit: 10  %}
+            <li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
