@@ -140,6 +140,32 @@
                 padding-left: 20px;
             }
         }
+        .wrap {
+            .side {
+                margin-bottom: 20px;
+                padding-bottom: 0;
+                i {
+                    margin-right: 3px;
+                }
+                .content-ul{
+                    padding-bottom: 16px;
+                    li{
+                        color:#aaa;
+                        font-size: 14px;
+                    }
+                }
+                .tags-cloud {
+                    font-weight: normal;
+                    a {
+                        padding: 0 3px;
+                        border-radius: 5px;
+                        &:hover {
+                            background-color: #f0e7ce;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 @media screen and (max-width:1200px) and (min-width: 770px) {

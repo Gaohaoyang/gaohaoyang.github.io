@@ -68,31 +68,9 @@ layout: default
     <!-- <button class="anchor"><i class="fa fa-anchor"></i></button> -->
     <div class="right">
         <div class="wrap">
-            <div class="side">
-                <div>
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    Недавнее
-                </div>
-                <ul class="content-ul" recent>
-                    {% for post in site.posts offset: 0 limit: 10  %}
-                        <li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
+            {% include externalLinks.html %}
 
-            <!-- Content -->
-            <div class="side">
-                <div>
-                    <i class="fa fa-external-link"></i>
-                    Полезные ссылки
-                </div>
-                <ul class="content-ul">
-                    <li><b><a href="https://github.com/super-dom/super-dom.github.io/projects/1">Обращения жильцов</a></b></li>
-                    <li><a href="https://mos.ru/">Портал мэра Москвы</a></li>
-                    <li><a href="https://www.gosuslugi.ru/">Портал госуслуг РФ</a></li>
-                    <li><a href="https://my.mosenergosbyt.ru">ЛК Мосэнерго</a></li>
-                </ul>
-            </div>
+            {% include recent.html %}
 
             <div class="side">
                 <div>

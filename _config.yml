@@ -10,6 +10,7 @@ title: Cайт нашего дома
 brief-intro: г. Москва, ул. Новомарьинская д. 32
 baseurl: ""
 url: "https://super-dom.github.io"
+repository: super-dom/super-dom.github.io
 
 permalink: /:year/:month/:day/:title/
 
@@ -46,7 +47,7 @@ category_dir: category/
 tag_dir: tag/
 
 # excerpt
-excerpt_separator: "\n\n\n\n"
+excerpt_separator: "<!--more-->"
 
 # paginate
 gems: [jekyll-paginate]
