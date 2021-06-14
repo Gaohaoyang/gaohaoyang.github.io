@@ -376,6 +376,104 @@ Barabási与Albert针对复杂网络中普遍存在的幂律分布现象，提�
 - 从心理学解释，模仿（内部）和从众（外部）引发的“同嗜性”和“自分类”理论”是产生幂律分布现象的群体动力学机制;从管理学解释，广泛存在的科层制组织使得信息流动天然形成了幂律分布态势；
 - 从社会物理学解释，梅特卡夫定律所描述的网络中节点数量以线性方式增加，网络价值则以指数方式增长，大型网络媒体成为的连接力加速提升的“吸引子”，强力扭曲了周围常规连接行为，从而使相关人群优先连接它们。
 
+### 代码实验
+
+【2021-6-14】按照时间线轮播，[kaggle代码地址](https://www.kaggle.com/wqw547243068/finace)
+
+```python
+# -*- coding: UTF-8 -*-
+import copy
+import random
+
+NUM = 10
+wealth_list = [100]*NUM
+person_id = [ '编号{}'.format(i) for i in range(NUM)]
+print("迭代前的财富分配：{}".format(wealth_list))
+wealth_process = {}
+MAX = 1000000
+stop = [1, 1000, 10000, 100000, MAX]
+for iter in range(MAX):
+	for i,v in enumerate(wealth_list):
+		send_person = random.randint(0,NUM-1)
+		#print('第{}轮: {} -> {}'.format(iter, i, send_person))
+		#if wealth_list[i] > 0:
+		#	wealth_list[i] -= 1
+		wealth_list[i] -= 1
+		wealth_list[send_person] += 1
+	if iter+1 in stop:
+		wealth_process[iter+1] = {'data': [], 'range':[]}
+		wealth_process[iter+1]['range'] = [min(wealth_list), max(wealth_list), max(wealth_list)/min(wealth_list),sum(wealth_list)/NUM]
+		wealth_process[iter+1]['data'] = copy.deepcopy(wealth_list)
+        
+		print("迭代{}轮后的财富分配：[{},{}], 极差：{}, 均值:{}, 详情：{}".format(iter+1, 
+                       *wealth_process[iter+1]['range'], wealth_process[iter+1]['data']))
+print("迭代{}轮后的财富分配：{}".format(iter+1, wealth_list))
+
+
+from pyecharts import options as opts
+from pyecharts.charts import Bar, Timeline
+from pyecharts.commons.utils import JsCode
+#from pyecharts.faker import Faker
+
+#x = Faker.choose()
+x = person_id
+tl = Timeline()
+for i in wealth_process:
+    bar = (
+        Bar()
+        .add_xaxis(x)
+        .add_yaxis("财富值", wealth_process[i]['data'])
+        #.add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            #title_opts=opts.TitleOpts("幂律分布：财富随机分配实验,第{}轮".format(i)),
+            title_opts=opts.TitleOpts(title="幂律分布：财富随机分配实验",
+                    subtitle="{}人，每人底钱100元，每轮随机给别人1元，迭代{}轮后，[{},{}], 均值{:.2f}, 极差{}".format(NUM, MAX,
+                                                                             *wealth_process[i]['range'])),
+            graphic_opts=[
+                opts.GraphicGroup(
+                    graphic_item=opts.GraphicItem(
+                        rotation=JsCode("Math.PI / 4"),
+                        bounding="raw",
+                        right=100,
+                        bottom=110,
+                        z=100,
+                    ),
+                    children=[
+                        opts.GraphicRect(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_shape_opts=opts.GraphicShapeOpts(
+                                width=400, height=50
+                            ),
+                            graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                fill="rgba(0,0,0,0.3)"
+                            ),
+                        ),
+                        opts.GraphicText(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_textstyle_opts=opts.GraphicTextStyleOpts(
+                                text="第{}轮→马太效应".format(i),
+                                font="bold 26px Microsoft YaHei",
+                                graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                    fill="#fff"
+                                ),
+                            ),
+                        ),
+                    ],
+                )
+            ],
+        )
+    )
+    tl.add(bar, "第{}轮".format(i))
+tl.render("timeline_bar_with_graphic.html")
+tl.render_notebook()
+```
+
+
+
 
 # 资料
 
