@@ -375,12 +375,12 @@ mathjax: true
 #### 倾向分数
 
 它是给定观测协变量向量的特定干预分配的条件概率，反映出样本x选择treatment的可能性。
-- 𝑒(𝑥)=𝑃𝑟(𝑊=1∣𝑋=𝑥)e(x)=Pr(W=1∣X=x)
+- e(x)=Pr(W=1∣X=x)
  
 #### 反向倾向加权(IPW)
  
 给每个unit指定的权重为：
-- 𝑟=𝑊/𝑒(𝑥)+(1−𝑊)/(1−𝑒(𝑥))
+- 𝑟 = 𝑊/𝑒(𝑥) + (1−𝑊)/(1−𝑒(𝑥))
 
 其中 𝑊 是treatment， e(x) 是倾向得分。重加权后在整体层面对平均干预效果进行估计：
  
@@ -407,7 +407,7 @@ mathjax: true
 #### 数据驱动变量分解(𝐷2𝑉𝐷D2VDD^{2}VD)
  
 **假设**：观测变量可以分解为混杂变量、调整变量和无关变量
- 
+
 **目的**：区分混杂变量和调整变量，同时剔除无关变量。
  
 [![image-20200718094109524](https://images.cnblogs.com/cnblogs_com/caoyusang/1830367/o_200818050024image-20200718094109524.png)](https://images.cnblogs.com/cnblogs_com/caoyusang/1830367/o_200818050024image-20200718094109524.png)
@@ -453,7 +453,7 @@ Tree-based Methods主要指的是决策树，包括CART树、BART树和RF。
 ### 深度学习方法
  
 以上算法都是统计学习方法，一笔带过，现在主要介绍一些deep的方法。
- 
+
 **Johansson, Learning Representations for Counterfactual Inference**, ICML`16
  
 介绍：基于表示学习。
@@ -1151,13 +1151,9 @@ CLD中的变量基于以下的直觉：
 ## 应用
 
 因果推理的应用可以分为三个方向
- 
 *   决策评估 —— 这与Treatment效果评估的目标是一致的。
-    
 *   反事实估计 —— 反事实学习极大地帮助了与决策相关的领域，因为它可以提供不同决策选择（或策略）的潜在结果。
-    
 *   处理选择偏差 —— 在许多实际应用程序中，出现在收集的数据集中的记录并不代表感兴趣的整个群体。如果不恰当地处理选择偏差，将影响训练模型的泛化。
-    
  
 下面是这三个方向适用的应用场景：
  
@@ -1170,7 +1166,7 @@ CLD中的变量基于以下的直觉：
 正确衡量广告活动的效果是品牌方成功营销的关键，如新广告是否增加点击量，或新广告是否增加销售额等。
  
 **衡量方法**
- 
+
 *   随机试验 —— 成本高且耗时，不应采纳
 *   从观察数据中估计广告效果
 *   随机最近邻匹配法 —— 估计数字营销活动的治疗效果
@@ -1230,12 +1226,12 @@ CLD中的变量基于以下的直觉：
 - 因果模型
   - 当只有蓝色分布中的采样数据时，怎么凭空造出绿色分布中的数据。这时就要用到do-calculus。它允许慢慢探索绿色条件分布，直到可以根据蓝色分布下的各种边际分布、条件分布和期望来表
   - ![](https://pic4.zhimg.com/80/v2-8c82015e505280e3b4c87e0a676d735e_720w.jpg?source=1940ef5c)
-- Do-calculus（do算子）
+- **Do-calculus**（do算子）
   - 最终如果能获得一个p̃(y\|do(x))的等价公式，（不再有任何do操作符），则因果查询p̃(y\|do(x))是可识别，否则不能识别
   - ![](https://pic1.zhimg.com/80/v2-c995f1ba9331c306f59caa2cf150cc8f_720w.jpg?source=1940ef5c)
 
 数据集、开源代码及研究框架。
- 
+
 ### 数据集
  
 由于反事实的结果永远无法被观察到，因此很难找到一个完全满足实验要求的数据集，即具有基本真实数据集 (ITE) 的观测数据集。
@@ -1260,7 +1256,6 @@ CLD中的变量基于以下的直觉：
 *   Saccharomyces cerevisiae (yeast) cell cycle gene expression dataset
 *   THE
 *   FERTIL2
-    
  
 ### 代码
  
@@ -1270,8 +1265,7 @@ CLD中的变量基于以下的直觉：
 *   [Causal ML](https://github.com/uber/causalml) —— Uber研发，基于Python
 *   [EconML](https://github.com/microsoft/EconML#blogs-and-publications) —— 微软研发，基于Python
 *   [causalToolbox](https://github.com/soerenkuenzel/causalToolbox) —— 基于R语言
-    
- 
+
 [![](https://images.cnblogs.com/cnblogs_com/caoyusang/1830367/o_200818050857causal-infer-frameworks.png)](https://images.cnblogs.com/cnblogs_com/caoyusang/1830367/o_200818050857causal-infer-frameworks.png)
  
 #### 开源因果推理方法
@@ -1514,10 +1508,15 @@ Matching 的问题就是如何去评估两个个体的相似度，并需要设�
 
 ## 因果工具包
 
-【2021-5-12】滴滴[连续因果森林模型的构造与实践](https://mp.weixin.qq.com/s/u7sCeNTSfHtmaW51Me2CQg)：
-- 大多数流行的**增益**模型框架(如CausalML, pylift, grf)，都很好地支持了**二元**处理变量(如发券或不发券，吃药或不吃药)的效应估计。但在**多元**/**连续**处理变量方面，尚未有很好的支持。
+【2021-5-12】滴滴[连续因果森林模型的构造与实践](https://mp.weixin.qq.com/s/u7sCeNTSfHtmaW51Me2CQg)：**增益模型**（Uplift Model）作为工业界因果推断与机器学习结合最成熟的算法之一，在智能营销中有着广泛的应用。目前大多数增益模型仅讨论了**二元**处理变量情况下的处理效应估计，然而在网约车市场中存在大量多维、连续的处理变量。针对这一困境，我们构造了**连续因果森林模型**，并成功地应用在了网约车交易市场策略上，量化价格对网约车供需关系的影响，这对于精细化定价补贴策略的制定和优化有着重要的意义。
+- 在业界，我们称针对某个**处理变量**(Treatment)，衡量其**处理效应**(Treatment Effect)的一类模型为**增益模型**(Uplift Modeling)。与传统的监督学习模型关注于准确估计响应变量(Y)不同， 增益模型专注于估计处理变量(W)对响应变量(Y)的影响。因此这类问题通常被放在因果推断(Causal Inference)的框架下进行讨论。大多数流行的**增益**模型框架(如CausalML, pylift, grf)，都很好地支持了**二元**处理变量(如发券或不发券，吃药或不吃药)的效应估计。但在**多元**/**连续**处理变量方面，尚未有很好的支持。而在广大应用场景中，<font color='red'>多元或连续的处理变量更为普遍。</font> 例如，价格就是一个连续变量，存在理论上无限多的可能值。那是否可以在因果推断的框架下实现对多元或连续处理变量的效应估计？经过一段时间的开发和测试，在二元因果森林的基础上，我们扩展研发了连续因果森林，初步解决了部分场景下连续变量处理效应的估计问题。
 - **因果森林**(Causal Forest)是由Susan Athey、Stefan Wager等人开发，专门估计异质处理效应的机器学习模型，是当前增益模型领域最为流行的算法之一。目前，官方有基于C++/R语言的[算法实现](https://grf-labs.github.io/grf)。与其他**增益树模型**(Tree-based Uplift Model)类似，因果森林以随机森林为基础，通过对特征空间进行**重复划分**(Recursive Partitioning)，以达到局部特征空间的数据同质/无混淆。在一定的假设下，我们就可以得到各个维度上**异质处理效应**(Heterogeneous Treatment Effect)的无偏估计
-
+- ![](https://img-blog.csdnimg.cn/img_convert/638b37ccca73bb68eab19e4bbea15c02.png)
+- ![](https://img-blog.csdnimg.cn/img_convert/0aeb5d19db1a44f2652a4af62a7c06be.png)
+- 目前连续因果森林仍处于早期的开发阶段，存在大量的优化空间。例如:
+  - 可否使用非线性假设
+  - 如何处理无单调关系的处理变量(如不同套餐)
+  - 如何估计多维处理效应(如多个产品线价格间的相互影响)
 - 【2021-1-5】[awesome-causality-algorithms](https://github.com/rguo12/awesome-causality-algorithms)
 - [DoWhy工具](https://github.com/microsoft/dowhy) An end-to-end library for causal inference
   - 微软的DoWhy是一个基于python的因果推理和分析库，它试图简化在机器学习应用程序中采用因果推理的过程。受到朱迪亚·珀尔的因果推理演算的启发，DoWhy在一个简单的编程模型下结合了几种因果推理方法，消除了传统方法的许多复杂性。
