@@ -3,7 +3,7 @@ layout: post
 title:  BERT及预训练语言模型-BERT-and-Language-Model
 date:   2019-12-10 16:52:00
 categories: 深度学习 
-tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook TextCNN ES 田渊栋 彩票假设 自监督 Milvus
+tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook TextCNN ES 田渊栋 彩票假设 自监督 Milvus ALBERT
 excerpt: 预训练语言模型及BERT知识点汇总
 mathjax: true
 ---
@@ -258,11 +258,6 @@ PTMs-Papers:
 - ![](https://pic3.zhimg.com/80/v2-09c5df603126e72b4ba2b0a9a45ee1b6_720w.jpg)
 
 
-
-## BERT变种
-
-- 一系列变种模型
-
 ## BERT服务
 
 ### ES里的BERT索引
@@ -495,6 +490,204 @@ input = "unaffable"
 tokenizer_output = ["un", "##aff", "##able"]
 ```
 
+
+# BERT变种
+
+- 一系列变种模型
+
+
+## ALBERT
+
+【2019-9-28】谷歌Lab发布了一个新的预训练模型"ALBERT"全面在SQuAD 2.0、GLUE、RACE等任务上超越了BERT、XLNet、RoBERTa再次刷新了排行榜
+- [ALBERT: A LITE BERT FOR SELF-SUPERVISED LEARNING OF LANGUAGE REPRESENTATIONS](https://arxiv.org/pdf/1909.11942.pdf)
+- ![](https://pic4.zhimg.com/80/v2-237353aaeb0f6a2a8fe24bcd585cc65b_720w.jpg)
+
+【2020-5-20】[BERT的youxiu变体：ALBERT论文图解介绍](https://zhuanlan.zhihu.com/p/142416395)
+
+ALBERT作为BERT的一个变体，在保持性能的基础上，大大减少了模型的参数，使得实用变得更加方便，是经典的BERT变体之一。
+ 
+考虑下面给出的句子。作为人类，当我们遇到“**apple**”这个词时，我们可以：
+*   把“apple”这个词和我们对“apple”这个水果的表征联系起来
+*   根据上下文将“apple”与水果联系在一起，而不是与公司联系在一起
+*   理解“_he ate an apple_”
+*   在字符级，单词级和句子级理解它
+ 
+![](https://pic2.zhimg.com/v2-e7dda49cb43c1d2f5e4bbe757b0a5a19_b.jpg)
+ 
+NLP最新发展的基本前提是赋予机器学习这些表示的能力。  
+2018年，谷歌发布了BERT，试图基于一些新的想法来学习这个表示：
+ 
+### **回顾: BERT**
+
+**1\. 掩码语言建模**
+ 
+语言建模包括预测单词的上下文，作为一种学习表示的方法。传统上，这包括到当给出前面的单词时预测句子中的下一个单词。
+ 
+![](https://pic2.zhimg.com/v2-e394582d3b192c7b9e6ce6a23a5ea67d_b.jpg)
+ 
+相反，BERT使用了一个**掩码语言模型**目标，在这个模型中，我们在文档中随机地对单词进行掩码，并试图根据周围的上下文来预测它们。
+ 
+![](https://pic3.zhimg.com/v2-cceaeae52d02d52a4a2a27dac0662d9a_b.jpg)
+ 
+ **2\. 下一个句子预测**  
+ 
+“下一个句子预测”的目的是检测两个句子是否连贯。
+ 
+![](https://pic2.zhimg.com/v2-a66f48660c3d0d00c8c06011f0897fc1_b.jpg)
+ 
+为此，训练数据中的连续句被用作一个正样本。对于负样本，取一个句子，然后在另一个文档中随机抽取一个句子放在它的旁边。在这个任务中，BERT模型被训练来识别两个句子是否可以同时出现。
+ 
+**3\. Transformer结构**
+ 
+为了解决上述两项任务，BERT使用了多层Transformer模块作为编码器。单词向量被传递到各个层，以捕获其含义，并为基本模型生成大小为768的向量。
+ 
+![](https://pic2.zhimg.com/v2-2797503b2f0e9275bd2d0466e47e66a5_b.jpg)
+ 
+Jay Alammar有一篇非常好的文章：[http://jalammar.github.io/bert/](https://link.zhihu.com/?target=http%3A//jalammar.github.io/bert/)，更深入地阐述了Transformer的内部机制。
+ 
+### **BERT的问题**
+ 
+BERT发布后，在排行榜上产生了许多NLP任务的最新成果。但是，模型非常大，导致了一些问题。“ALBERT”论文将这些问题分为两类：
+ 
+1、**内存限制和通信开销**：
+ 
+考虑一个包含一个输入节点、两个隐藏节点和一个输出节点的简单神经网络。即使是这样一个简单的神经网络，由于每个节点的权重和偏差，也会有7个参数需要学习。
+ 
+![](https://pic1.zhimg.com/v2-955ed3bb42debfc88c5d35ae147d4b70_b.jpg)
+
+BERT-large模型是一个复杂的模型，它有24个隐含层，在前馈网络和注意头中有很多节点，所以有3.4亿个参数。如果你想在BERT的基础上进行改进，你需要大量的计算资源的需求来从零开始进行训练并在其上进行迭代
+ 
+![](https://pic3.zhimg.com/v2-c30e166f19a018432a2354ac329b2eaa_b.jpg)
+ 
+这些计算需求主要涉及gpu和TPUs，但是这些设备有内存限制。所以，模型的大小是有限制的。  
+ 
+分布式训练是解决这个问题的一种流行方法。我们以BERT-large上的数据并行性为例，其中训练数据被分到两台机器上。模型在两台机器上对数据块进行训练。如图所示，你可以注意到在梯度同步过程中要传输的大量参数，这会减慢训练过程。同样的瓶颈也适用于模型的并行性，即我们在不同的机器上存储模型的不同部分。
+ 
+![](https://pic2.zhimg.com/v2-2ecac204965c9acbdaec48a3c4f413e9_b.jpg)
+ 
+2、**模型退化**  
+ 
+最近在NLP研究社区的趋势是使用越来越大的模型，以获得在排行榜上的最先进的性能。ALBERT 的研究表明，这可能会导致收益退化。
+ 
+在论文中，作者做了一个有趣的实验。
+ 
+> 如果更大的模型可以带来更好的性能，为什么不将最大的BERT模型(BERT-large)的隐含层单元增加一倍，从1024个单元增加到2048个单元呢?
+ 
+他们称之为“BERT-xlarge”。令人惊讶的是，无论是在语言建模任务还是在阅读理解测试(RACE)中，这个更大的模型的表现都不如BERT-large模型。
+ 
+![](https://pic1.zhimg.com/v2-32e5c234b4128584c752d11cb3751a48_b.jpg)
+ 
+从原文给出的图中，我们可以看到性能是如何下降的。BERT-xlarge的性能比BERT-large差，尽管它更大并且有更多的参数。  
+ 
+![](https://pic3.zhimg.com/v2-1a9c618bd33e5fd93ce6d98ef1f50f66_b.jpg)
+ 
+### **从BERT到ALBERT**  
+
+一个有趣的现象：
+- 当我们让一个模型的参数变多的时候，一开始模型效果是提高的趋势，但一旦复杂到了一定的程度，接着再去增加参数反而会让效果降低，这个现象叫作“model degratation"。
+
+albert要解决的问题：
+1. 让模型的参数更少 
+2. 使用更少的内存 
+3. 提升模型的效果
+
+ALBERT提出了三种优化策略，做到了比BERT模型小很多的模型，但效果反而超越了BERT， XLNet。
+- **低秩分解** `Factorized Embedding Parameterization`. 针对于Vocabulary Embedding。在BERT、XLNet中，词表的embedding size(E)和transformer层的hidden size(H)是等同的，所以E=H。但实际上词库的大小一般都很大，这就导致模型参数个数就会变得很大。通过对Embedding 部分降维来达到降低参数的作用。在最初的BERT中，以Base为例，Embedding层的维度与隐层的维度一样都是768，而词的分布式表示，往往并不需要这么高的维度，如Word2Vec时代就多采用50或300这样的维度。为了解决这些问题他们提出了一个基于factorization的方法。他们没有直接把one-hot映射到hidden layer, 而是先把one-hot映射到低维空间之后，再映射到hidden layer。这其实类似于做了矩阵的分解。
+  - ![](https://www.zhihu.com/equation?tex=+O%28V+%5Ctimes+H%29+%5Cto+O%28V+%5Ctimes+E+%2B+E+%5Ctimes+H%29+)
+  - V：词表大小；H：隐层维度；E：词向量维度
+  - 以 BERT-Base 为例，Base中的Hidden size 为768， 词表大小为3w，此时的参数量为：768 * 3w = 23040000。 如果将 Embedding 的维度改为 128，那么此时Embedding层的参数量为： 128 * 3w + 128 * 768 = 3938304。二者的差为19101696，大约为19M。我们看到，其实Embedding参数量从原来的23M变为了现在的4M，似乎变化特别大，然而当我们放到全局来看的话，BERT-Base的参数量在110M，降低19M也不能产生什么革命性的变化。因此，可以说Embedding层的因式分解其实并不是降低参数量的主要手段。
+- **层间参数共享** `Cross-layer parameter sharing`. Zhenzhong博士提出每一层的layer可以共享参数，这样一来参数的个数不会以层数的增加而增加。所以最后得出来的模型相比BERT-large小18倍以上。
+  - 本质上就是对参数共享机制在Transformer内的探讨。Transformer两大主要的组件：FFN与多头注意力机制。
+- **SOP替代NSP** `Inter-sentence coherence loss`. 在BERT的训练中提出了next sentence prediction loss, 也就是给定两个sentence segments, 然后让BERT去预测它俩之间的先后顺序，但在ALBERT文章里提出这种是有问题的，其实也说明这种训练方式用处不是很大。 所以他们做出了改进，他们使用的是setence-order prediction loss (SOP)，其实是基于主题的关联去预测是否两个句子调换了顺序。
+
+模型压缩有很多手段，包括剪枝，参数共享，低秩分解，网络结构设计，知识蒸馏等。ALBERT 也没能逃出这一框架，它其实是一个相当工程化的思想
+ 
+ALBERT在BERT 的基础上提出了一些新颖的想法来解决这些问题：
+ 
+1、**跨层参数共享**
+ 
+BERT-large模型有24层，而它的基础版本有12层。随着层数的增加，参数的数量呈指数增长。
+ 
+![](https://pic4.zhimg.com/v2-da47ac3ebd17d165d957b4959294118f_b.jpg)
+ 
+为了解决这个问题，ALBERT使用了跨层参数共享的概念。为了说明这一点，让我们看一下12层的BERT-base模型的例子。我们只学习第一个块的参数，并在剩下的11个层中重用该块，而不是为12个层中每个层都学习不同的参数。  
+ 
+![](https://pic1.zhimg.com/v2-e5457046cbaeb14334cc8d9de72f128c_b.jpg)
+ 
+我们可以只共享feed-forward层的参数，只共享注意力参数，也可以共享整个块的参数。论文对整个块的参数进行了共享。  
+ 
+与BERT-base的1.1亿个参数相比，ALBERT模型只有3100万个参数，而使用相同的层数和768个隐藏单元。当嵌入尺寸为128时，对精度的影响很小。精度的主要下降是由于feed-forward层的参数共享。共享注意力参数的影响是最小的。
+ 
+![](https://pic3.zhimg.com/v2-5e3a3fe7c409ca694d28ab4f68e16356_b.jpg)
+ 
+跨层参数策略对性能的影响
+ 
+2、**句子顺序预测 (SOP)**
+ 
+BERT引入了一个叫做“**下一个句子预测**”的二分类损失。这是专门为提高使用句子对，如“自然语言推断”的下游任务的性能而创建的。基本流程为：
+*   从训练语料库中取出两个连续的段落作为正样本
+*   从不同的文档中随机创建一对段落作为负样本
+
+![](https://pic2.zhimg.com/v2-90f2e0b33156326e46387959ce388c29_b.jpg)
+ 
+像ROBERTA和XLNET这样的论文已经阐明了NSP的无效性，并且发现它对下游任务的影响是不可靠的。在取消NSP任务之后，多个任务的性能都得到了提高。  
+ 
+因此，ALBERT提出了另一个任务**“句子顺序预测”**。关键思想是:
+*   从同一个文档中取两个连续的段落作为一个正样本
+*   交换这两个段落的顺序，并使用它作为一个负样本
+ 
+![](https://pic3.zhimg.com/v2-c7b91c17a1b42283817b17a2d566a6d6_b.jpg)
+ 
+这使得模型能学习到更细粒度的关于段落级的一致性的区别。
+ 
+ALBERT推测NSP是无效的，因为与掩码语言建模相比，它并不是一项困难的任务。在单个任务中，它混合了主题预测和连贯性预测。主题预测部分很容易学习，因为它与掩码语言建模的损失有重叠。因此，即使NSP没有学习连贯性预测，它也会给出更高的分数。
+ 
+SOP提高了下游多句编码任务(SQUAD 1.1, 2.0, MNLI, SST-2, RACE)的性能。
+ 
+![](https://pic3.zhimg.com/v2-c9ce732b00678780cb2ae1fc9e219612_b.jpg)
+
+在这里我们可以看到，在SOP任务上，一个经过NSP训练的模型给出的分数只比随机基线略好一点，但是经过SOP训练的模型可以非常有效地解决NSP任务。这就证明SOP能带来更好的学习表现。
+ 
+3、**嵌入参数分解**
+ 
+在BERT中，使用的embeddings(word piece embeddings)大小被链接到transformer块的隐藏层大小。Word piece embeddings使用了大小为30,000的词汇表的独热编码表示。这些被直接投射到隐藏层的隐藏空间。
+ 
+假设我们有一个大小为30K的词汇表，大小为E=768的word-piece embedding和大小为H=768的隐含层。如果我们增加了块中的隐藏单元尺寸，那么我们还需要为每个嵌入添加一个新的维度。这个问题在XLNET和ROBERTA中也很普遍。
+
+![](https://pic4.zhimg.com/v2-262f2f051d69dda14c1e437524f84e43_b.jpg)
+ 
+ALBERT通过将大的词汇表嵌入矩阵分解成两个小的矩阵来解决这个问题。这将隐藏层的大小与词汇表嵌入的大小分开。这允许我们在不显著增加词汇表嵌入的参数大小的情况下增加隐藏的大小。
+ 
+![](https://pic1.zhimg.com/v2-e9fb494e0067ae3770d09c7299e6aa94_b.jpg)
+ 
+我们将独热编码向量投影到E=100的低维嵌入空间，然后将这个嵌入空间投影到隐含层空间H=768。
+ 
+### **结果**
+ 
+*   比BERT-large模型缩小了18x的参数
+*   训练加速1.7x
+*   在GLUE, RACE和SQUAD得到SOTA结果：
+  *   RACE：89.4%\[提升45.3%\]
+  *   GLUE Benchmark：89.4
+  *   SQUAD2.0 f1 score：92.2
+
+ALBERT与BERT模型之间参数情况
+
+![](https://pic3.zhimg.com/80/v2-7f6261989fc1b9b8d2ce05d4249911ce_720w.jpg)
+
+在benchmark上的效果
+![](https://pic1.zhimg.com/80/v2-5e320cd88fbc16d4038eebfaf586a9f4_720w.jpg)
+![](https://pic4.zhimg.com/80/v2-969d2eefa07339b637d6333817d13a0f_720w.jpg)
+
+
+**总结**
+ 
+ALBERT标志着构建语言模型的重要一步，该模型不仅达到了SOTA，而且对现实世界的应用也是可行的。
+ 
+- 英文原文：[https://amitness.com/2020/02/al](https://amitness.com/2020/02/albert-visual-summary/)
+- albert的[中文预训练模型](https://github.com/brightmart/albert_zh)
+
+
 # 模型蒸馏
 
 - 【2020-9-23】[田渊栋团队新作：神经网络“彩票假设”可泛化，强化学习和NLP也适用](https://zhuanlan.zhihu.com/p/93988943)
@@ -562,7 +755,6 @@ tokenizer_output = ["un", "##aff", "##able"]
 Hinton在NIPS2014[\[1\]](https://zhuanlan.zhihu.com/p/71986772#ref_1)提出了`知识蒸馏`（Knowledge Distillation）的概念，旨在把一个大模型或者多个模型ensemble学到的知识迁移到另一个轻量级单模型上，方便部署。简单的说就是用新的小模型去学习大模型的预测结果，改变一下目标函数。听起来是不难，但在实践中小模型真的能拟合那么好吗？所以还是要多看看别人家的实验，掌握一些trick。
  
 ## 0. 名词解释
---------
  
 *   teacher - 原始模型或模型ensemble
 *   student - 新模型
@@ -574,7 +766,6 @@ Hinton在NIPS2014[\[1\]](https://zhuanlan.zhihu.com/p/71986772#ref_1)提出了`�
 *   teacher annealing - 防止student的表现被teacher限制，在蒸馏时逐渐减少soft targets的权重
  
 ## 1. 基本思想
---------
 
 - 知识蒸馏是让一个小模型去学习一个大模型，所以首先会有一个预训练好的大模型，称之为**Teacher模型**，小模型被称为**Student模型**。知识蒸馏的方法就是会让Student模型去尽量拟合。
 - 这个的动机就在于跟ground truth的one-hot编码相比，Teacher模型的输出概率分布包含着更多的信息，从Teacher模型的概率分布中学习，能让Student模型充分去模拟Teacher模型的行为。
