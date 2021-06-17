@@ -11,16 +11,16 @@ mathjax: true
 * content
 {:toc}
 
-
-# BERT及预训练语言模型
+# 总结
 
 - [The Annotated Transformer](http://nlp.seas.harvard.edu/2018/04/03/attention.html),Harvard NLP出品，含pytorch版代码实现
 - [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/)
 - [Transformer模型的PyTorch实现](https://luozhouyang.github.io/transformer/),[A PyTorch implementation of the Transformer model in "Attention is All You Need"](https://github.com/jadore801120/attention-is-all-you-need-pytorch)
 
 - 【2021-6-7】[一文了解预训练语言模型](https://mp.weixin.qq.com/s/meDVXt91pypl4Gn_1A6iVg), 配套书籍，预训练语言模型，2021-5出版
-
-## 总结
+- 【2021-6-17】[预训练模型最新综述：过去、现在和未来](https://zhuanlan.zhihu.com/p/381121057) [Pre-Trained Models: Past, Present and Future](https://arxiv.org/abs/2106.07139)，全面回顾了 PTM 的最新突破。这些突破是由计算能力的激增和数据可用性增加推动的，朝着四个重要方向发展：设计有效的架构、利用丰富的上下文、提高计算效率以及进行解释和理论分析。PTM发展过程：
+  - ![](https://pic2.zhimg.com/80/v2-67138799a41ee6e489727b15c0b1e731_720w.jpg)
+  - ![](https://pic2.zhimg.com/80/v2-d82cd793c1b59c20ee7f97d95f53c675_720w.jpg)
 
 - 【2020-8-13】[打破BERT天花板：11种花式炼丹术刷爆NLP分类SOTA！](https://blog.csdn.net/abcdefg90876/article/details/108016310)
 ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy81ZmtuYjQxaWI5cUgxd240a08wQ1FpYkJlZGNiZzduemZCUTNKMTlPcTNnRFZxY1ZFbU1lMjhPWjlwZkQ0SkswanV1YVVZNjYwTEtzcUJteE5BUTU4WlRnLzY0MA?x-oss-process=image/format,png)
@@ -237,7 +237,7 @@ PTMs-Papers:
 中国大陆境内建议使用讯飞云下载点，境外用户建议使用谷歌下载点，base模型文件大小约**400M**。 
 
 
-## BERT
+# BERT
 
 - 2018年11月底，谷歌发布了基于双向 `Transformer` 的大规模预训练语言模型 `BERT`，该预训练模型能高效抽取文本信息并应用于各种 NLP 任务，该研究凭借预训练模型刷新了 11 项 NLP 任务的当前最优性能记录。
 - 技术博主 Jay Alammar 近日发文[illustrated-bert](https://jalammar.github.io/illustrated-bert/)，通过图解方式生动地讲解了 BERT 的架构和方法基础。
@@ -495,6 +495,23 @@ tokenizer_output = ["un", "##aff", "##able"]
 
 - 一系列变种模型
 
+## MLM改进
+
+- 基于MLM，做各种改进尝试
+
+### 结合人工模板
+
+[必须要GPT-3吗？不，BERT的MLM模型也能小样本学习](https://mp.weixin.qq.com/s?__biz=MzIwMTc4ODE0Mw==&mid=2247512167&idx=1&sn=cc7695d92362e3b18a6e8969fb14dc27&chksm=96ea6fe7a19de6f1be86b965e268df1b9c6320810cf32b6d64ddd3d238bf9088be41fb36adfe#rd)中，我们介绍了一种名为**Pattern-Exploiting Training**（`PET`） 的方法，它通过人工构建的模版与BERT的MLM模型结合，能够起到非常好的零样本、小样本乃至半监督学习效果，而且该思路比较优雅漂亮，因为它将预训练任务和下游任务统一起来了。
+
+### 模板自动生成
+
+【2021-6-17】[P-tuning：自动构建模版，释放语言模型潜能](https://zhuanlan.zhihu.com/p/364141928)
+
+然而，人工构建这样的模版有时候也是比较困难的，而且不同的模版效果差别也很大，如果能够通过少量样本来自动构建模版，也是非常有价值的。
+
+最近Arxiv上的论文《[GPT Understands, Too](https://arxiv.org/abs/2103.10385)》提出了名为**P-tuning**的方法，成功地实现了模版的**自动构建**。不仅如此，借助P-tuning，GPT在SuperGLUE上的成绩首次超过了同等级别的BERT模型，这颠覆了一直以来“GPT不擅长NLU”的结论，也是该论文命名的缘由。
+
+
 
 ## ALBERT
 
@@ -686,6 +703,40 @@ ALBERT标志着构建语言模型的重要一步，该模型不仅达到了SOTA�
  
 - 英文原文：[https://amitness.com/2020/02/al](https://amitness.com/2020/02/albert-visual-summary/)
 - albert的[中文预训练模型](https://github.com/brightmart/albert_zh)
+
+
+## RoBERTa
+
+RoBERTa 是BERT的成功变种之一，主要有四个简单有效的变化：
+- 1）去除NSP任务；
+- 2）训练步骤更多，batch size更大，数据更多；
+- 3）更长的训练句子；
+- 4）动态改变 [ MASK ] 模式。
+
+RoBERTa 在 BERT 的基础上取得了令人印象深刻的结果。而且，RoBERTa 已经指出，**NSP 任务对于 BERT 的训练来说相对没用**。
+
+## XLNet
+
+- 全排列语言模型
+- transformer-XL
+- 跟多的数据
+
+
+## ERNIE（融合知识）
+
+思路：
+- 百度版：全词mask
+- 清华版：知识图谱融入
+
+
+## 其它
+
+UniLM、MASS 、SpanBERT 和 ELECTRA
+
+# GPT
+
+迭代路线：
+- GPT → GPT-2 → GPT-3
 
 
 # 模型蒸馏
