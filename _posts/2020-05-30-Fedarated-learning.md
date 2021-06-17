@@ -3,7 +3,7 @@ layout: post
 title:  "联邦学习-Federated Learning"
 date:   2020-05-30 08:27:00
 categories: 机器学习
-tags: 机器学习 联邦学习 同态加密
+tags: 机器学习 联邦学习 同态加密 群体学习
 excerpt: 如何保护用户隐私的同时也能充分利用各类数据？
 author: 鹤啸九天
 mathjax: true
@@ -17,6 +17,15 @@ mathjax: true
 - 【2020-8-6】联邦学习Python实践：[Federated Learning Demo in Python using Socket Programming](https://github.com/ahmedfgad/FederatedLearning)
 - 【2021-1-8】[字节跳动在联邦学习领域的探索及实践](https://www.toutiao.com/i6915250800906338819/)，联邦学习在广告投放和金融等场景中的应用模式、算法研究、软件系统及实践经验
 - 【2021-3-14】[联邦学习:Tensorflow中的逐步实现](https://www.toutiao.com/i6814051104825803278/)
+- 【2021-6-17】[AI新算法**群体学习**（Swarm Learning，以下简称SL）登Nature封面！解决医疗数据隐私问题，超越联邦学习？](https://mp.weixin.qq.com/s/75VjJkJvCmLpor2GZURZpQ)比联邦学习更安全，SL可保障医疗数据共享. 联邦学习方法（Federated Learning）解决了其中的一些问题。数据保存在数据所有者本地，保密性问题得到解决，但参数设置仍要中央协调员协调。此外，这种星型架构降低了容错能力。更好的选择是采取完全去中心化的人工智能解决方案，即SL来克服已有方案的不足，适应医学领域固有的分散式数据结构以及数据隐私和安全法规的要求。
+  - SL具有以下优势：
+    - （1）将大量医疗数据保存至数据所有者本地；
+    - （2）不需要交换原始数据，从而减少数据流量；
+    - （3）提供高级别的数据安全保障；
+    - （4）能够保证网络中成员的安全、透明和公平加入，不再需要中央托管员；
+    - （5）允许参数合并，实现所有成员权力均等；
+    - （6）可以保护机器学习模型免受攻击。
+  - 论文题目为《用于去中心化且保密临床数据分析的Swarm Learning机器学习技术 [Swarm Learning for decentralized and confidential clinical machine learning](https://www.nature.com/articles/s41586-021-03583-3) 》，于5月26日发表在Nature上
 
 # 联邦学习介绍
 
