@@ -503,16 +503,16 @@ Instructions for connecting to the following graph databases:
 ## Neo4j
 
 - [Neo4J](https://neo4j.com/download/)是由Java实现的开源图数据库。自2003年开始开发，直到2007年正式发布第一版，并托管于GitHub上。在线[demo](http://console.neo4j.org/)
-  - 安装：先装[java](https://www.oracle.com/java/technologies/javase-jdk15-downloads.html), open JDK[清华源下载](https://mirror.tuna.tsinghua.edu.cn/AdoptOpenJDK/15/jdk/x64/linux/)
-  - 配置环境变量：vim /etc/profile
-    - export JAVA_HOME=/usr/local/src/jdk1.8.0_171 （根据自己的完整路径修改）
-    - export PATH=$PATH:$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH
-    - export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
-  - 查看版本：java -version
+  - 安装：先装[java](https://www.oracle.com/java/technologies/javase-jdk15-downloads.html),必须是open jdk 11以上版本, open JDK[清华源下载](https://mirror.tuna.tsinghua.edu.cn/AdoptOpenJDK/15/jdk/x64/linux/)
+  - 配置环境变量：见下面代码
+  - 查看版本：java --version
   - 社区版neo4j下载：（免登记，直接下载，版本号可定制）
     - windows：https://neo4j.com/artifact.php?name=neo4j-community_windows-x64_3_1_0.exe
     - linux：https://neo4j.com/artifact.php?name=neo4j-community-3.1.0-unix.tar.gz
     - mac：https://neo4j.com/artifact.php?name=neo4j-community_macos_3_1_0.dmg
+  - 更改配置, conf/neo4j.conf
+    - To accept non-local connections, uncomment this line:
+    - dbms.default_listen_address=0.0.0.0 # 注释掉此行
   - 安装完成后，启动服务
   - Web Demo：http://localhost:7474/browser/
     - 默认账户，用户名：neo4j 密码 ：neo4j
@@ -526,9 +526,21 @@ Instructions for connecting to the following graph databases:
   - 属性
   - 标签
 - ![](https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/uploads/20170731095054/Property-Graph-Concepts-Simple.svg)
+
+```shell
+# 环境变量如下
+vim /etc/profile 或 ~/.bash_profile
+export JAVA_HOME=/usr/local/src/jdk1.8.0_171 （根据自己的完整路径修改）
+export PATH=$PATH:$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH
+export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
+alias java=$JAVA_HOME/bin/java # 如果系统已有java，加此行覆盖
+```
+
+
 - 代码
 
 ```python
+# !pip install py2neo
 # coding: utf-8
 """
     Neo4j的python接口测试
@@ -536,117 +548,56 @@ Instructions for connecting to the following graph databases:
     时间：2018-4-23, wangqiwen
 """
 #import random
-import json
-from py2neo import Graph #pylint:disable=import-error
+import json
+from py2neo import Graph #pylint:disable=import-error
 #from py2neo import Graph, Node, Relationship
-import numpy as np
-import pandas as pd
- 
-def main():#pylint:disable=too-many-statements,too-many-branches,too-many-locals
-    """
-        测试示例,http://10.84.129.206:8090/browser/
-    """
-    data_file = '../../../bot/graph.xlsx'
-    data = {}
-    #实体、关系、相似词
-    sheet_list = ['entities', 'relations', 'sim', 'freq']
-    for sheet in sheet_list:
-        data[sheet] = pd.read_excel(open(data_file, 'rb'), sheetname=sheet)
-    #print data['sim']
-    #初始化
-    host = '10.84.129.206'
-    host = 'localhost'
-    host = '172.23.201.167'
-    graph = Graph("http://%s:8090"%(host), username="neo4j", password="wqw")
-    #graph = Graph("http://localhost:7474", username="neo4j", password="neo4j")
-    #(1)创建实体
-    cur_data_list = data['entities'].values.tolist()
-    #唯一约束(name唯一)
-    cql_delete = 'MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n,r'#删除所有节点和关系
-    graph.run(cql_delete)
-    #print(cur_data_list)
-    for entity in cur_data_list:
-        print json.dumps(entity, ensure_ascii=False)
-        cql_create = 'MERGE (n:%s {name:"%s",type:"%s"})'%(entity[1], entity[0], entity[1])
-        graph.run(cql_create)
-        #print u'执行命令:%s'%(cql)
-    for label in ['noun', 'verb', 'status', 'event']:
-        cql = 'CREATE CONSTRAINT ON (n:%s) ASSERT n.name IS UNIQUE'%(label)
-        graph.run(cql)
-    #(2)相似词(synonym)
-    cur_data_list = data['sim'].values.tolist()
-    #match (a:Person),(b:Person) where a.name="zhangs" and b.name="lisi"  create (a)-[r:RELTYPE]->(b)#pylint:disable=line-too-long
-    #match (charlie:Person {name:"Charlie"}),(wall:Movie {title:"Wall"}) merge (charlie)-[r:ACTED_AT]->(wall)  return r;#pylint:disable=line-too-long
-    for sim in cur_data_list:
-        #[住校 注销]
-        if len(sim) < 2 or sim[0] == sim[1]:
-            print u'格式异常(长度不足2或者两个实体相同):%s'%(json.dumps(sim, ensure_ascii=False))
-            continue
-        #同义词对中关键词不存在就创建
-        for node in sim[:2]:
-            cql = 'MATCH (n {name:"%s"}) RETURN n'%(node)
-            result = graph.data(cql)
-            if not result:
-                #cql_create = 'MERGE (n {name:"%s"}) ON CREATE SET n.type=%s,n.name=%s'%(node, 'null', node)
-                cql_create = 'MERGE (m:%s {name:"%s",type:"%s"})'%('null', node, 'null')
-            graph.run(cql_create)
-        #创建同义词关系
-        cql = 'MATCH (a {name:"%s"}), (b {name:"%s"}) MERGE (a)-[r:synonym]->(b)'%(sim[0], sim[1])
-        #cql = 'MERGE (a {name:"%s"}), (b {name:"%s"}) ON CREATE SET () ON MATCH SET (a)-[r:synonym]->(b)'%(sim[0], sim[1])
-        graph.run(cql)
-        print cql
-    #exit(1)
-    #(3)创建关系(关键词连接到标准词再插入关系)
-    cur_data_list = data['relations'].values.tolist()
-    #MATCH (a:noun {name:"服务分"}),(b:status {name:"下降"}) MERGE (a)-[r:can {is_problem:True,weight:0.23}]->(b)
-    for rel in cur_data_list:
-        print json.dumps(rel, ensure_ascii=False)
-        if len(rel) < 3 or rel[0] == rel[1] or rel[2] == 'synonym':
-            print u'格式异常(长度不足3或者两个实体相同/相近):%s'%(json.dumps(rel, ensure_ascii=False))
-            continue
-        is_pro = False
-        if rel[3] is not np.nan:
-            is_pro = True
-        weight = 0
-        if rel[5] is not np.nan:
-            weight = rel[5]
-        #is_problem属性不一定有效
-        #逐个判断是否存在同义词
-        for i, k in enumerate(rel[0:2]):
-            cql_replace = 'MATCH (a {name:"%s" } )-[:synonym]->(a1) RETURN a1.name as new'%(k)
-            result = graph.data(cql_replace)
-            #print 'CQL: %s , %s'%(cql_replace, json.dumps(result))
-            if result:
-                rel[i] = result[0]['new']
-        #match (a {name:'账户'})-[r:synonym]->(b)  with b
-        cql = 'MATCH (a { name:"%s" }),(b { name:"%s" }) \
-               MERGE (a)-[r:%s { %s:%s, weight:%s }]->(b)'%(rel[0], rel[1], rel[2], rel[3], is_pro, weight)
-        #if np.isnan(rel[3]):
-        if rel[3] is np.nan:
-            #print u'===> 替换:%s(%s),%s(%s),%s'%(rel[3],type(rel[3]),np.nan,type(np.nan),is_pro)
-            cql = cql.replace('%s:%s, '%(rel[3], is_pro), '')
-        print cql
-        graph.run(cql)
-    #(4)词频信息
-    cur_data_list = data['freq'].values.tolist()
-    #merge (keanu:Person {name:"Keanu"}) on create set keanu.created=timestamp() on match set keanu.lastSeen=timestamp() return keanu;
-    for item in cur_data_list:
-        #[注销 4654]
-        cql_replace = 'MATCH (a { name:"%s" })-[:synonym]->(a1) RETURN a1.name as new'%(item[0])
-        result = graph.data(cql_replace)
-        #print 'CQL: %s , %s'%(cql_replace, json.dumps(result))
-        if result:
-            item[0] = result[0]['new']
-        cql = 'MERGE (a { name:"%s" }) ON MATCH SET a.freq = %s '%(item[0], item[1])
-        #cql = 'MERGE (a {name:"%s"}) ON CREATE SET a.freq = %s ON MATCH SET a.freq = %s '%(item[0], item[1], item[1])
-        graph.run(cql)
-        print cql
-    #查询
-    result = graph.data('match (n) return n')
-    print json.dumps(result, ensure_ascii=False)
- 
-if __name__ == '__main__':
-    main()
+import numpy as np
+import pandas as pd
+
+def main():#pylint:disable=too-many-statements,too-many-branches,too-many-locals
+    """
+        测试示例, http://10.200.24.101:7474/browser/
+    """
+    data_file = '新房电子驻场客服-意图体系.csv'
+    df = pd.read_csv(data_file)
+    data = df.values.tolist()
+    # neo4j 初始化
+    host = '10.200.24.101'
+    graph = Graph("http://%s:7474"%(host), user="neo4j", password="wqw")
+    # graph = Graph("http://%s:7474"%(host), username="neo4j", password="wqw") # username参数不再支持
+    #(1)创建实体
+    #cur_data_list = data['entities'].values.tolist()
+    cur_data_list = data
+
+    # 创建节点, 数据示例：[20, 'SALE_INFO', '项目销售信息', 'ONSALE_ROOM', '在售户型']
+    cur_type = 'root'; business_info = {"id":"newhouse", "name":"新房电子驻场客服"}
+    # 唯一约束(name唯一)
+    cql_delete = 'MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n,r' #删除所有节点和关系
+    graph.run(cql_delete)
+    cql_create = 'MERGE(n:%s {id:"%s", name:"%s", type:"%s"})'%(cur_type, business_info['id'], business_info['name'],cur_type)
+    graph.run(cql_create)
+    for entity in cur_data_list:
+        print(json.dumps(entity, ensure_ascii=False))
+        # domain节点
+        cur_type = 'domain'
+        cql_create = 'MERGE(n:%s {id:"%s", name:"%s", type:"%s", business:"%s"})'%(cur_type, entity[1], entity[2],cur_type,business_info['id'])
+        graph.run(cql_create)
+        # intent节点
+        cur_type = 'intent'
+        cql_create = 'MERGE(n:%s {id:"%s", name:"%s", type:"%s", business:"%s"})'%(cur_type, entity[3], entity[4],cur_type,business_info['id'])
+        graph.run(cql_create)
+        # 边 root->domain->intent
+        cql_rel = 'MATCH(a {id:"%s"}),(b{id:"%s"})\
+            MERGE(a)-[r:%s {name:"%s",id:"%s"}]->(b)'%('newhouse', entity[1], '有', 'has', '有')
+        graph.run(cql_rel)
+        cql_rel = 'MATCH(a {id:"%s"}),(b{id:"%s"})\
+            MERGE(a)-[r:%s {name:"%s",id:"%s"}]->(b)'%(entity[1], entity[3], '包含', 'include', '包含')
+        graph.run(cql_rel)
+    #result = graph.run('match (n) return n')
+    #print(json.dumps(result, ensure_ascii=False))
+
+if __name__ == '__main__':
+    main()
 ```
 
 
