@@ -299,18 +299,226 @@ if __name__ == "__main__":
 
 # Tensorflow 2.*
 
+- [TF 2.0官方教程](https://www.tensorflow.org/tutorials/quickstart/beginner?hl=zh-cn)
+- [高效的TensorFlow 2.0 (tensorflow2官方教程翻译)](https://www.jianshu.com/p/599c79c3a537)
+- 官方教程导读: [ML Study Jam 2020](https://tf.wiki/zh_hans/mlstudyjam.html)
+
+## 设备检测
+
+代码
+
+```python
+import tensorflow as tf
+
+tf.debugging.set_log_device_placement(True)     # 设置输出运算所在的设备
+cpus = tf.config.list_physical_devices('CPU')   # 获取当前设备的 CPU 列表
+tf.config.set_visible_devices(cpus)           # 设置 TensorFlow 的可见设备范围为 cpu
+```
+
+## 新特性
+
 - [30天吃掉那只TensorFlow2](https://github.com/lyhue1991/eat_tensorflow2_in_30_days)，[在线阅读地址](https://lyhue1991.github.io/eat_tensorflow2_in_30_days/)
-- 【2021-3-15】[机器学习：TensorFlow 2.0中的10个技巧](https://www.toutiao.com/i6828167519837094414/)
-  1. 数据流构建：输入管道的tf.data API和ImageDataGenerator实时生成数据集切片
-  2. tf.image进行数据增强
-  3. TensorFlow数据集工具包：pip install tensorflow-datasets
-  4. 预训练的模型进行迁移学习
-  5. Estimators是TensorFlow完整模型的高级表示，内置的estimators提供了非常高级的模型抽象，其设计目的是易于缩放和异步训练
-  6. 自定义层：神经网络是已知的多层网络，其中的层可以是不同的类型。TensorFlow包含许多预定义层(例如Dense，LSTM等)。但是对于更复杂的架构，层的逻辑可能会复杂得多。TensorFlow允许构建自定义层，这可以通过对tf.keras.layers.Layer类进行子类化来完成
-  7. 定制训练：tf.keras序列和模型API使训练模型更容易。但是，大多数时候在训练复杂模型时会使用自定义损失函数。此外，模型训练也可以不同于缺省值
-  8. 检查点：保存TensorFlow模型可以有两种类型：①SavedModel：保存模型的完整状态以及所有参数。model.save_weights('checkpoint')②检查点（Checkpoints）
-  9. Keras Tuner：TensorFlow中的一个相当新的功能。超参数调优是挑选参数的过程，这些参数定义了机器学习模型的配置，除了HyperBand, BayesianOptimization和RandomSearch也可用于调优。利用最优超参数对模型进行训练
-  10. 分布式训练：如果有多个GPU，并希望通过将训练分散在多个GPU上来优化训练，TensorFlow的各种分布式训练策略能够优化GPU的使用
+
+【2021-3-15】[机器学习：TensorFlow 2.0中的10个技巧](https://www.toutiao.com/i6828167519837094414/)
+1. 数据流构建：输入管道的tf.data API和ImageDataGenerator实时生成数据集切片
+2. tf.image进行数据增强
+3. TensorFlow数据集工具包：pip install tensorflow-datasets
+4. 预训练的模型进行迁移学习
+5. Estimators是TensorFlow完整模型的高级表示，内置的estimators提供了非常高级的模型抽象，其设计目的是易于缩放和异步训练
+6. 自定义层：神经网络是已知的多层网络，其中的层可以是不同的类型。TensorFlow包含许多预定义层(例如Dense，LSTM等)。但是对于更复杂的架构，层的逻辑可能会复杂得多。TensorFlow允许构建自定义层，这可以通过对tf.keras.layers.Layer类进行子类化来完成
+7. 定制训练：tf.keras序列和模型API使训练模型更容易。但是，大多数时候在训练复杂模型时会使用自定义损失函数。此外，模型训练也可以不同于缺省值
+8. 检查点：保存TensorFlow模型可以有两种类型：①SavedModel：保存模型的完整状态以及所有参数。model.save_weights('checkpoint')②检查点（Checkpoints）
+9. Keras Tuner：TensorFlow中的一个相当新的功能。超参数调优是挑选参数的过程，这些参数定义了机器学习模型的配置，除了HyperBand, BayesianOptimization和RandomSearch也可用于调优。利用最优超参数对模型进行训练
+10. 分布式训练：如果有多个GPU，并希望通过将训练分散在多个GPU上来优化训练，TensorFlow的各种分布式训练策略能够优化GPU的使用
+
+## 新旧版兼容
+
+Tensorflow新旧版本兼容
+
+TensorFlow 2 提供了 `tf.compat.v1` 模块以支持 TensorFlow 1.X 版本的 API。原来静态图代码升级，引入：
+- 旧版：import tensorflow as tf
+- ① 新版（用工具）：TensorFlow 2.0中提供了命令行迁移工具，来自动的把1.x的代码转换为2.0的代码
+    - **tf_upgrade_v2** --infile first-tf.py --outfile first-tf-v2.py
+- ② 新版（加代码）：适合稳定使用中、并且没有重构意愿的代码
+
+```python     
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
+```
+
+- 参考：[tensorflow兼容处理 tensorflow.compat.v1](https://blog.csdn.net/kyle1314608/article/details/100594884)
+- 注意
+    - Keras 的模型是同时兼容`即时执行模式`和`图执行模式`的。
+    - 在图执行模式下， model(input_tensor) 只需运行一次以完成图的建立操作。
+    - 张量以数组的方式依次存放起来, 可以使用list，但不适用于计算图特性（模型加速/SavedModel模型导出），TensorFlow 提供了 tf.TensorArray ，一种支持计算图特性的 TensorFlow 动态数组
+- 问题
+    - 'Tensor' object has no attribute 'numpy'处理方法
+    - 开启即时模式
+
+```python
+    tf.enable_eager_execution(
+    config=None,
+    device_policy=None,
+    execution_mode=None
+) 
+```
+
+## 自动求导
+
+- 即时执行模式下，TensorFlow 引入了 tf.GradientTape() 这个 “求导记录器” 来实现自动求导
+
+```python
+import tensorflow as tf
+
+x = tf.Variable(initial_value=3.)
+with tf.GradientTape() as tape:     # 在tf.GradientTape()的上下文内，所有计算步骤都会被记录以用于求导
+    y = tf.square(x)
+y_grad = tape.gradient(y, x)        # 计算y关于x的导数
+print(y, y_grad)
+```
+
+
+## 线性回归
+
+示例
+
+```python
+import tensorflow as tf
+#tf.enable_eager_execution()
+import numpy as np
+
+X_raw = np.array([2013, 2014, 2015, 2016, 2017, 2018], dtype=np.float32)
+y_raw = np.array([12000, 14000, 15000, 16500, 17500, 19000], dtype=np.float32)
+
+X = (X_raw - X_raw.min()) / (X_raw.max() - X_raw.min())
+y = (y_raw - y_raw.min()) / (y_raw.max() - y_raw.min())
+
+X = tf.constant(X)
+y = tf.constant(y)
+
+a = tf.Variable(initial_value=0.)
+b = tf.Variable(initial_value=0.)
+variables = [a, b]
+
+num_epoch = 10000
+optimizer = tf.keras.optimizers.SGD(learning_rate=5e-4)
+for e in range(num_epoch):
+    if e % 500 == 0:
+        print('step {}\ta={}\tb={}'.format(e, a.numpy(), b.numpy()))
+    # 使用tf.GradientTape()记录损失函数的梯度信息
+    with tf.GradientTape() as tape:
+        y_pred = a * X + b
+        loss = tf.reduce_sum(tf.square(y_pred - y))
+    # TensorFlow自动计算损失函数关于自变量（模型参数）的梯度
+    grads = tape.gradient(loss, variables)
+    # TensorFlow自动根据梯度更新参数
+    optimizer.apply_gradients(grads_and_vars=zip(grads, variables))
+
+print(a, b)
+print(a.value().numpy())
+print(a.numpy())
+print(a.read_value())
+```
+
+## 模型搭建与训练
+
+- 使用 TensorFlow 快速搭建动态模型。
+    - 模型的构建： tf.keras.Model 和 tf.keras.layers
+    - 模型的损失函数： tf.keras.losses
+    - 模型的优化器： tf.keras.optimizer
+    - 模型的评估： tf.keras.metrics
+
+    ![](https://tf.wiki/_images/model.png)
+
+- 解释
+    - 继承 tf.keras.Model 后，同时可以使用父类的若干方法和属性，例如在实例化类 model = Model() 后，可以通过 model.
+    - variables 这一属性直接获得模型中的所有变量，免去我们一个个显式指定变量的麻烦。
+- TensorFlow 的模型编写方式。在这一部分，我们依次进行以下步骤：
+    - 使用 `tf.keras.datasets` 获得数据集并预处理
+    - 使用 `tf.keras.Model` 和 `tf.keras.layers` 构建模型
+    - 构建模型训练流程，使用 `tf.keras.losses` 计算损失函数，并使用 `tf.keras.optimizer` 优化模型
+    - 构建模型评估流程，使用 `tf.keras.metrics` 计算评估指标
+
+```python
+import tensorflow as tf
+
+X = tf.constant([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]])
+y = tf.constant([[10.0], [20.0]])
+
+class Linear(tf.keras.Model):
+    def __init__(self):
+        super().__init__()
+        self.dense = tf.keras.layers.Dense(
+            units=1,
+            activation=None,
+            # 问题：为什么权重矩阵的名字是kernel？让人联想到cnn的卷积核
+            kernel_initializer=tf.zeros_initializer(),
+            bias_initializer=tf.zeros_initializer()
+        )
+    def call(self, input):
+        output = self.dense(input)
+        return output
+
+# 以下代码结构与前节类似
+model = Linear()
+optimizer = tf.keras.optimizers.SGD(learning_rate=0.01)
+for i in range(100):
+    # ①定义自动求导
+    with tf.GradientTape() as tape:
+        # 调用模型 y_pred = model(X) 而不是显式写出 y_pred = a * X + b
+        y_pred = model(X)
+        loss = tf.reduce_mean(tf.square(y_pred - y))
+    # ②计算梯度
+    grads = tape.gradient(loss, model.variables)
+    # 使用 model.variables 直接获取模型中所有变量
+    # ③更新梯度
+    optimizer.apply_gradients(grads_and_vars=zip(grads, model.variables))
+print(model.variables)
+```
+
+## CNN分类
+
+### CNN网络
+
+- 卷积神经网络 （Convolutional Neural Network, CNN）是一种结构类似于人类或动物的 视觉系统 的人工神经网络，包含一个或多个卷积层（Convolutional Layer）、池化层（Pooling Layer）和全连接层（Fully-connected Layer）
+
+![](https://tf.wiki/_images/cnn.png)
+
+### 代码
+
+```python
+class CNN(tf.keras.Model):
+    def __init__(self):
+        super().__init__()
+        self.conv1 = tf.keras.layers.Conv2D(
+            filters=32,             # 卷积层神经元（卷积核）数目
+            kernel_size=[5, 5],     # 感受野大小
+            padding='same',         # padding策略（vaild 或 same）
+            activation=tf.nn.relu   # 激活函数
+        )
+        self.pool1 = tf.keras.layers.MaxPool2D(pool_size=[2, 2], strides=2)
+        self.conv2 = tf.keras.layers.Conv2D(
+            filters=64,
+            kernel_size=[5, 5],
+            padding='same',
+            activation=tf.nn.relu
+        )
+        self.pool2 = tf.keras.layers.MaxPool2D(pool_size=[2, 2], strides=2)
+        self.flatten = tf.keras.layers.Reshape(target_shape=(7 * 7 * 64,))
+        self.dense1 = tf.keras.layers.Dense(units=1024, activation=tf.nn.relu)
+        self.dense2 = tf.keras.layers.Dense(units=10)
+
+    def call(self, inputs):
+        x = self.conv1(inputs)                  # [batch_size, 28, 28, 32]
+        x = self.pool1(x)                       # [batch_size, 14, 14, 32]
+        x = self.conv2(x)                       # [batch_size, 14, 14, 64]
+        x = self.pool2(x)                       # [batch_size, 7, 7, 64]
+        x = self.flatten(x)                     # [batch_size, 7 * 7 * 64]
+        x = self.dense1(x)                      # [batch_size, 1024]
+        x = self.dense2(x)                      # [batch_size, 10]
+        output = tf.nn.softmax(x)
+        return output
+```
 
 
 # TensorRT
