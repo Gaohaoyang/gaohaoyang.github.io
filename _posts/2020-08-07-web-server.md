@@ -1046,6 +1046,35 @@ except PyJWTError as e:
     print("jwt验证失败: %s" % e)
 ```
 
+### flask高并发问题
+
+- 【2021-6-18】[Flask+Gunicorn(协程)高并发的解决方法探究](https://www.toutiao.com/i6735284444271215117), 直接使用flask的python code.py的方式运行，简单但不能解决高并发问题，不稳定，有一定概率遇到连接超时无返回的情况，不能用于生产环境。
+  - （1）通过设置app.run()的参数，来达到多进程的效果。但threaded与processes不能同时打开，如果同时设置的话，将会出错
+    - app.run(threaded=1, processes=2)
+  - （2）使用gevent做协程解决高并发问题
+  - （3）通过Gunicorn(with gevent)的形式对app进行包装，从而来启动服务【推荐】
+    - 指定进程和端口号： -w: 表示进程（worker） --bind：表示绑定ip地址和端口号（bind） —threads 多线程 -k 异步方案
+
+[image](https://p1-tt.byteimg.com/origin/pgc-image/a8fe60b01ff7415a9ec130d8fcfcae2e?from=pc)
+
+![](https://p1-tt.byteimg.com/origin/pgc-image/9102d29dad204e608f407ef1f84b3922?from=pc)
+
+### 进程、协程和线程
+
+定义
+- 进程：操作系统中资源分配/拥有的最小单位
+- 线程：操作系统中独立调度的最小单位
+  - 线程是操作系统的内核对象，多线程编程时，如果线程数过多，就会导致频繁的上下文切换，这些 cpu时间是一个额外的耗费。
+- 协程：非操作系统调度，而是程序猿代码控制
+  - 协程在应用层模拟的线程，避免了上下文切换的额外耗费，兼顾了多线程的优点。简化了高并发程序的复杂度。
+  - goroutine 就是协程。 不同的是，Golang 在 runtime、系统调用等多方面对 goroutine 调度进行了封装和处理，当遇到长时间执行或者进行系统调用时，会主动把当前 goroutine 的CPU (P) 转让出去，让其他 goroutine 能被调度并执行，也就是 Golang 从语言层面支持了协程。
+
+区别
+- 线程之间可以共享内存
+- 
+
+![](https://p1-tt.byteimg.com/origin/pgc-image/a8fe60b01ff7415a9ec130d8fcfcae2e?from=pc)
+
 
 ## Django
 
