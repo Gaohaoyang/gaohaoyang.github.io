@@ -3,7 +3,7 @@ layout: post
 title:  "图像识别-Image-Recognizer"
 date:   2019-11-08 16:52:00
 categories: 计算机视觉
-tags: 深度学习 计算机视觉 GAN 扫地机器人 自动驾驶
+tags: 深度学习 计算机视觉 GAN 扫地机器人 自动驾驶 何恺明 CVPR 论文 sota
 excerpt: 图像风格迁移是什么原理？具体如何实施？可以迁移到文本吗？
 mathjax: true
 ---
@@ -76,6 +76,8 @@ mathjax: true
 - 「我们的数据集更大！」
 - 「研究范围超广，无他，我们有钱」
 - 「花钱多，结果好」......
+
+何恺明和Xinlei Chen的论文Exploring Simple Siamese Representation Learning（探索简单的连体表征学习）获得了最佳论文提名。
 
 「连体网络」（Siamese networks）已经成为最近各种无监督视觉表征学习模型中的一种常见结构。这些模型最大限度地提高了一个图像的两个增量之间的相似性，但必须符合某些条件以避免collapse的解决方案。在本文中，我们报告了令人惊讶的经验结果，即简单的连体网络即使不使用以下任何一种情况也能学习有意义的表征。(i) 负样本对，(ii) 大batch，(iii) 动量编码器。我们的实验表明，对于损失和结构来说，collapse的解决方案确实存在，但stop-gradient操作在防止collapse方面发挥了重要作用。我们提供了一个关于stop-gradient含义的假设，并进一步展示了验证该假设的概念验证实验。我们的 「SimSiam 」方法在ImageNet和下游任务中取得了有竞争力的结果。我们希望这个简单的基线能促使人们重新思考连体结构在无监督表征学习中的作用。
 
