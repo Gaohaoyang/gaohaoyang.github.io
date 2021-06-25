@@ -1112,6 +1112,18 @@ interact
    - alias luban='expect ~/login.sh'
 
 
+# ADB
+
+【2021-6-23】[Android 调试桥 (adb)](https://developer.android.google.cn/studio/command-line/adb)
+
+Android 调试桥 (adb) 是一种功能多样的命令行工具，可让您与设备进行通信。adb 命令可用于执行各种设备操作（例如安装和调试应用），并提供对 Unix shell（可用来在设备上运行各种命令）的访问权限。它是一种客户端-服务器程序，包括以下三个组件：
+- 客户端：用于发送命令。客户端在开发计算机上运行。您可以通过发出 adb 命令从命令行终端调用客户端。
+- 守护程序 (adbd)：用于在设备上运行命令。守护程序在每个设备上作为后台进程运行。
+- 服务器：用于管理客户端与守护程序之间的通信。服务器在开发机器上作为后台进程运行。
+
+adb 包含在 Android SDK 平台工具软件包中。您可以使用 SDK 管理器下载此软件包，该管理器会将其安装在 android_sdk/platform-tools/ 下。或者，如果您需要独立的 Android SDK 平台工具软件包，也可以点击此处进行下载。
+
+
 # 小项目
 
 ## python健康打卡
