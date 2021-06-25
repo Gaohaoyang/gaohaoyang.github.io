@@ -3,7 +3,7 @@ layout: post
 title:  "互联网资讯-Internet News"
 date:   2020-01-16 22:30:00
 categories: 互联网
-tags: 互联网 BAT TMD 陆奇 朱松纯 张一鸣 平安科技 在线教育 谷歌 达摩院 FLAGS 硅谷 富豪
+tags: 互联网 BAT TMD 陆奇 朱松纯 张一鸣 平安科技 在线教育 谷歌 达摩院 FLAGS 硅谷 富豪 拼多多
 excerpt: 互联网行业资讯及各大厂信息汇总
 author: 鹤啸九天
 mathjax: true
@@ -14,6 +14,7 @@ mathjax: true
 
 # 汇总
 
+- 【2021-6-25】[拼多多这三年](https://mp.weixin.qq.com/s/1f-XpG9IDoNLXQmVSXO1Lw)
 - 【2021-6-21】[2021年上海互联网公司排名](https://mp.weixin.qq.com/s/kJGtY3IaBh4QgjJ7pHbkyA)
 - 2019年，[996.ICU](https://996.icu/#/zh_CN)异军突起，短时间内冲上了github第一名，可见国内上班族对工作强度的怨念有多深
 - 【2021-5-3】[美国为什么会无视阿里的达摩院？](https://baijiahao.baidu.com/s?id=1698703483200200725&wfr=spider&for=pc)：达摩院走的是AI人工智能的高科技路线，包括量子计算、大数据云和生物科学等不容小觑，可是美国为何却选择无视呢？是因为阿里达摩院实力不济吗？①美股上市有资本财团利益捆绑②技术点人畜无害，只解决自己的问题，尚未大规模对外输出，不具备威胁力
