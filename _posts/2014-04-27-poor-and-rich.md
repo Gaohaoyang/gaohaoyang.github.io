@@ -3,7 +3,7 @@ layout: post
 title:  "【读书笔记】-贫富思考-poor-and-rich"
 date:   2014-04-27 12:02:00
 categories: 读书笔记
-tags: 人生规划 贫富差距 家庭教育 富豪 社会阶级
+tags: 人生规划 贫富差距 家庭教育 富豪 社会阶级 留学生 教育
 excerpt: 穷人一直穷，富人一直富吗？
 author: 鹤啸九天
 mathjax: true
@@ -22,6 +22,16 @@ mathjax: true
 
 # 超级富豪
 
+
+## 中国富二代留学生
+
+- 【2021-7-6】[【纪录片】中国富二代留学生在海外的真实生活](https://www.bilibili.com/video/BV1zt411U7Ug/)
+- <iframe src="//player.bilibili.com/player.html?aid=35850699&bvid=BV1zt411U7Ug&cid=62913180&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%> </iframe>
+
+
+
+## 22位富豪家庭出身
+
 - 【2021-5-7】[超级富豪们的家庭出身](https://mp.weixin.qq.com/s/T-LvbJfaaMJLtsf66Hlaww)，今天成为超级富豪的，他们的祖辈或者父辈往往都已经是当地出类拔萃的存在。真正出生于普通家庭的，少之又少。
   - 黄光裕的祖父是大地主，外祖家族是泰国巨富，小时候他和哥哥就听惯了父母讲祖辈如何经商和致富的故事。
   - 曹德旺的曾祖父是地方首富，父亲是在海外赚了大钱的归侨，三四十年代就在上海滩开夜总会和百货公司。
@@ -29,8 +39,6 @@ mathjax: true
 - 除了黄光裕和曹德旺以外，想必你还听说过：
   - 马云的父亲是浙江省曲艺家协会主席，马化腾的父亲是盐田港集团董事，王兴的父亲是龙岩市的水泥大王和亿万富翁……
   - 哪怕我们印象中出身极度贫寒的刘强东，虽然父亲只是个跑船的小老板，但祖父也是资本家。
-
-## 22位富豪家庭出身
 
 ### 第一类：家里拥有一定级别的政界背景的，共有3位：王石、柳传志、曹德旺。
 
