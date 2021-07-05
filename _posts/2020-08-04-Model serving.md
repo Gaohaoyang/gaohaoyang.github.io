@@ -224,6 +224,16 @@ Embedding store
 
 # MLOps
 
+- 【2021-6-30】[机器学习工程（MLOps）实践：机器学习持续交付](https://www.toutiao.com/i6978834483323601439/), 机器学习应用主要在三个维度变化：**代码**本身、**模型算法**、**数据集**。这些变化一般比较复杂并且难以预测，同时，它们也很难进行测试、解释和迭代更新。机器学习持续交付（CD4ML）是给机器学习应用带来持续性交付和实际实践的重要法则。
+  - ![](https://p1-tt.byteimg.com/origin/pgc-image/ec22cfb8fc454487b0479a8e83dad281?from=pc)
+  - 用一个监督学习算法和著名的scikit-learn Python库，我们使用标注过的输入数据来训练一个预测模型，并将这个模型集成到一个简单的Web应用中，然后部署在云服务器的生产环境中
+    - ![](https://p6-tt.byteimg.com/origin/pgc-image/b152ab177ca348be802ceabb0a68feb0?from=pc)
+  - 端到端的过程仍然有着两个挑战。
+    - 第一个挑战是组织结构：不同的团队可能在整个流程中位于不同的部分，因此如何跨越这些障碍是一个关键。数据工程师可以通过构建流程来获得数据，但是数据科学家可能担心ML模型的构建和优化。机器学习工程师或者开发者将会担心如何集成模型和发布对应的产品。这会导致项目延迟和矛盾分化，一个普遍的现象是，工业场景下使用一个仅在实验室环境下可行的模型，未进行实用场景证明。或以手动临时方式将其投入生产，这样的产品就很难进行更新迭代。
+    - ![](https://p1-tt.byteimg.com/origin/pgc-image/9bf94a20af234ff7a8fe9502e41b4894?from=pc)
+    - 第二个挑战是技术问题：如何实现过程的可重用和可审查。因为这些团队实用不同的工具，并且遵从不同的工作流程，这样对实现自动端到端开发造成困难。然而，除了代码意外还有很多需要管理的内容，以及对不同的组建进行版本化。其中一些内容工作量巨大，需要非常复杂的工具来实现高效的存储和货物。
+  - 机器学习流水线：“机器学习管道”，也称为“模型训练管道”，是以数据和代码为输入，生成经过训练的ML模型作为输出的过程。 这个过程通常涉及数据清洗和预处理、特征工程、模型和算法选择、模型优化和评估。 
+    - ![](https://p1-tt.byteimg.com/origin/pgc-image/ca85e0e773ea4131baa935e3b7fa02c6?from=pc)
 - 【2021-5-17】[MLOps简介](https://segmentfault.com/a/1190000039957405?utm_source=sf-similar-article)，作者字节，知乎原文：[从小作坊到智能中枢: MLOps简介](https://zhuanlan.zhihu.com/p/357897337)，其它系列文章
   - [Full Stack Deep Learning](Full Stack Deep Learning)
   - [人类早期驯服野生机器学习模型的珍贵资料](https://zhuanlan.zhihu.com/p/330577488)
@@ -234,7 +244,6 @@ Embedding store
 *   更快地试验和开发模型
 *   更快地将模型部署到生产环境
 *   质量保证
-    
  
 顾名思义，MLOps就是机器学习时代的DevOps。它的主要作用就是连接模型构建团队和业务，运维团队，建立起一个标准化的模型开发，部署与运维流程，使得企业组织能更好的利用机器学习的能力来促进业务增长。
  
@@ -252,7 +261,6 @@ Embedding store
 1.  项目设计，包括需求收集，场景设计，数据可用性检查等。
 1.  模型开发，包括数据工程，模型工程，以及评估验证等。
 1.  模型运维，包括模型部署，CI/CD/CT工作流，监控与调度触发等。
-    
  
 DevOps通过缩短开发部署的时间来更快地迭代软件产品，使得公司业务不断进化。MLOps的逻辑也是通过相似的自动化和迭代形式，加快企业从数据到insights的价值获取速度。
  
@@ -495,6 +503,14 @@ MLOps如果能做的好，可以获得很多回报。个人感觉其中价值最
 
 Tensorflow自带Tensorflow Extended (TFX)。TFX使我们能够专注于优化ML管道，同时减少对每次重复的样板代码的关注。像数据验证和模型分析这样的组件可以很容易地完成，而不需要开发自定义代码来读取数据并在两次管道执行之间检测异常。使用TFX，只需要很少几行代码就可以完成，从而节省了大量开发管道组件的时间。数据验证和模型分析组件中的截图来自TFX。
 
+- 【2021-7-1】[如何用TF Serving部署TensorFlow模型](https://zhuanlan.zhihu.com/p/60685482)，[TF Serving文档](https://www.tensorflow.org/serving/)，TensorFlow Serving可抽象为一些组件构成，每个组件实现了不同的API任务，其中最重要的是Servable, Loader, Source, 和 Manager
+  - ![](https://pic4.zhimg.com/80/v2-86bc01f10e86c374a9ae17bd1946bf8f_1440w.jpg)
+  - 当TF Serving发现磁盘上的模型文件，该模型服务的生命周期就开始了。
+  - Source组件负责发现模型文件，找出需要加载的新模型。实际上，该组件监控文件系统，当发现一个新的模型版本，就为该模型创建一个Loader。总之，Loader需要知道模型的相关信息，包括如何加载模型如何估算模型需要的资源，包括需要请求的RAM、GPU内存。Loader带一个指针，连接到磁盘上存储的模型，其中包含加载模型需要的相关元数据。不过记住，Loader现在还不允许加载模型。Loader创建完成后，Source组件将其发送至Manager，作为一个待加载的版本。
+  - Manager收到待加载模型版本，开始模型服务流程。此处有两种可能性，第一种情况是模型首次推送部署，Manager先确保模型需要的资源可用，一旦获取相应的资源，Manager赋予Loader权限去加载模型。第二种情况是为已上线模型部署一个新版本。Manager会先查询Version Policy插件，决定加载新模型的流程如何进行。具体来说，当加载新模型时，可选择保持 (1) 可用性 或 (2) 资源。如果选(1)可用性，意味着我们倾向于确保系统对客户请求总能相应。Manager让Loader实例化新的计算图和新的权重。此时模型的两个版本被都被加载，也就是说Manager先加载新版本模型确保其可以安全服务后，然后再卸载原版本模型。如果选(2)资源，如果我们希望节省资源不为新版本模型申请额外的资源，可选择保持资源。对于重量级模型也许挺有用，模型切换间会有极短的可用性缺口，不过可以换取内存不足。
+  - 最后，当用户请求模型的句柄，Manager返回句柄给Servable。
+
+
 ## 服务框架
 
 - Google在2017年的TensorFlow开发者Summit上便提出了TensorFlow Serving [官方文档](https://www.tensorflow.org/serving/)。可以将训练好的模型直接上线并提供服务。
@@ -522,8 +538,6 @@ Tensorflow自带Tensorflow Extended (TFX)。TFX使我们能够专注于优化ML�
 - TF Serving客户端和服务端的通信方式有两种（gRPC和RESTfull API）
     - （1）RESTfull API
     - （2）gRPC形式
-
-
 
 ## Saver
 
@@ -599,6 +613,12 @@ saved_model_cli show --dir model_dir_path --all
 
 ![](https://img2020.cnblogs.com/blog/963156/202004/963156-20200424170122025-1632884222.png)
 
+SavedModel是TensorFlow模型的一种通用序列化格式。如果你熟悉TF，你会使用 TensorFlow Saver to persist保存模型变量。TensorFlow Saver提供模型checkpoint磁盘文件的保存/恢复。事实上SavedModel封装了TensorFlow Saver，对于模型服务是一种标准的导出方法。
+
+SavedModel对象有一些不错的特性。
+- 首先，一个SavedModel对象中可存储一个或更多的meta-graph，换句话说，这个特性允许我们为不同的任务订制不同的计算图。例如模型训练完成后，大多数情况下使用推理模式时，计算图中不需要一些用于训练的特殊操作，包括优化器、学习率调度变量、额外的预处理操作等等。
+- 另外，有时候可能需要将计算图简化作移动端部署。SavedModel允许用户以不同的配置保存计算图。SavedModel提供了SignatureDefs，简化了这一过程。SignatureDefs定义了一组TensorFlow支持的计算签名，便于在计算图中找到适合的输入输出张量。简单的说，使用这些计算签名，可以准确指定特定的输入输出节点。TF Serving要求模型中包含一个或多个SignatureDefs，以使用内建服务API。
+![](https://pic3.zhimg.com/80/v2-a2e62e52002a2b91f2077b52d3248a32_1440w.jpg)
 
 ## Serving
 
