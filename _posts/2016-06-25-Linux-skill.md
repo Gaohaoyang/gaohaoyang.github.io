@@ -82,6 +82,22 @@ linux文件权限的描述格式解读
   - .rar 使用unrar命令解压
   - ![](https://p3-tt.byteimg.com/origin/pgc-image/0ffce7c93b324bed86a2e5dabdf92049?from=pc)
 
+### 解压命令
+
+如下：
+- (1) *.tar 用 tar –xvf 解压
+- (2) *.gz 用 gzip -d或者gunzip 解压
+- (3) *.tar.gz和*.tgz 用 tar –xzf 解压
+- (4) *.bz2 用 bzip2 -d或者用bunzip2 解压
+- (5) *.tar.bz2用tar –xjf 解压
+- (6) *.Z 用 uncompress 解压
+- (7) *.tar.Z 用tar –xZf 解压
+- (8) *.rar 用 unrar e解压
+- (9) *.zip 用 unzip 解压
+- (10) *.xz 用 xz -d 解压
+- (11) *.tar.xz 用 tar -zJf 解压
+
+
 ## 常用命令
 
 - [linux常用命令脑图](https://www.cnblogs.com/hzg110/p/6914963.html)

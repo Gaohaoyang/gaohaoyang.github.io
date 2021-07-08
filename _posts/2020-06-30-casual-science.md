@@ -15,6 +15,7 @@ mathjax: true
 
 # 总结
 
+- 【2021-7-8】对比《思考：快与慢》书籍中的人脑的快系统和慢系统，他最近提出了一个类似人脑慢系统的 [System 2 Deep Learning](https://drive.google.com/file/d/1UT118pX3DzePaEEwj1tlaznqwHICSzhG/view)，做为一个目标为人类水平智能的范式，将因果推理能力的内容作为其核心组件。Bengio指出人的认知系统包含两个子系统：System1是直觉系统，主要负责快速、无意识、非语言的认知，这是目前深度学习主要做的事情；System2是逻辑分析系统，是有意识的、带逻辑、规划、推理以及可以语言表达的系统，这是未来深度学习需要着重考虑的。
 - 【2020-9-2】[Bengio讲授因果表示学习，Mila博士因果推理导论开课了](https://www.toutiao.com/i6867722568795685387)，从机器学习的角度编写的《Introduction to Causal Inference》秋季[课程](https://www.bradyneal.com/causal-inference-course#course-textbook)，[教材地址](https://www.bradyneal.com/Introduction_to_Causal_Inference-Aug27_2020-Neal.pdf)，[YouTube地址](https://www.youtube.com/watch?v=CfzO4IEMVUk&list=PLoazKTcS0Rzb6bb9L508cyJ1z-U9iWkA0&index=1)，由 Yoshua Bengio 高徒 Brady Neal 主讲，主要讲述因果推理相关知识。此外，该课程整合了来自许多不同领域的见解，如流行病学、经济学、政治学和机器学习等，这些领域都利用到了因果推理。
   - ![](https://p3-tt.byteimg.com/origin/pgc-image/50a7c51c7b664c4d97c6ffce404790e2?from=pc)
   - 内容：
@@ -28,7 +29,13 @@ mathjax: true
     - 可移植性和迁移学习；
     - 反事实推理以及中介和特定路径效应（Mediation and Path-Specific Effects）。
 - **乌鸦智能** ＞ **鹦鹉智能**
-  - [因果观念新革命？万字长文，解读复杂系统背后的暗因果](https://swarma.org/?p=19906)，[集智俱乐部因果科学专题Github](https://github.com/CausalAI/clubjizhi)，[因果科学与 Causal AI 系列读书会](https://www.sohu.com/a/415039730_741733)
+  - [因果观念新革命？万字长文，解读复杂系统背后的暗因果](https://swarma.org/?p=19906)，[集智俱乐部因果科学专题Github](https://github.com/CausalAI/clubjizhi)，集智[因果科学与Causal AI系列读书会](https://www.sohu.com/a/415039730_741733)
+    - 【2020-12-9】中科院计算所在读博士李奉治 [因果阶梯与Do-演算：怎样完美地证明吸烟致癌？](https://mp.weixin.qq.com/s/SLBXgf8rkJaQwVzZhD_yAQ)，[视频地址](https://campus.swarma.org/course/1986)有向图中的路径，只会有这三种基础结构，对应了“因果流”的三种模式：
+      1. A→B→C ：`链` (Chain) 接合，其中B被称作“中介变量” (Mediator). 如果控制了中介变量B，A与C之间的因果关系传递就会被阻断。
+      2. A←B→C ：`叉` (Fork) 接合，其中B被称作“混杂因子” (Confounder). 如果控制了混杂因子B，A与C之间就失去了相关性。
+      3. A→B←C ：`对撞` (Collider) 接合，其中B被称作“对撞因子” (Collider). 原本A和C之间就是独立的，但如果控制了对撞因子B，根据辩解效应 (Pearl, 1988) 的存在，反而会打开A与C之间的因果关系传递通道。
+    - 上方的三种接合模式都有对应的控制因果流的传递方法。对于更大的因果图，如何阻断某两个结点之间的因果信息流呢？这里就提供了一个判据，被称为**d-分离**。强制干预一个变量，就是do-演算框架中的 **do算子**。为了算出直接干预一个变量后其他变量变化的结果，2011年图灵奖得主 Judea Pearl 提出了一个do-演算的公理体系，包含三条公理，对观察项和干预项进行转换。
+    - 中科大统计学在读博士生龚鹤扬 [因果科学：连接统计学、机器学习与自动推理的新兴交叉领域](https://mp.weixin.qq.com/s/l-05jRYabGI-JoXedU-PLA)， 哲学中关于因果关系讨论中，其因果的分类方法非常有启发性，把因果分成了两类，一类是 Type causality ，另一类是 Actual causality。Type  causality 关注的是某个原因会导致什么样的结果，例如吸烟是否导致肺癌，可理解成由因推果（Forward-looking），是一种干预思维，能帮助科学家进行预测；而 Actual causality 关注某个事件发生的具体原因是什么，例如恐龙灭亡的原因是六千万年的小行星撞地球导致的吗，它是由果推因（Backward-looking），与反事实思维思维密切相关。
   - 【2020-10-22】[如何在观测数据下进行因果效应评估](https://www.sohu.com/a/426630014_741733)：
     - 相关性相比因果，更缺乏 **可解释性**（Explainability）、**稳定性**（Stability）（漂移）
     - **可行动性**（Actionability）：这些虚假相关是由混淆变量产生的**混杂偏倚**（Confounding Bias），这种决策问题实际上是反事实问题，而不是预测问题。
