@@ -137,6 +137,8 @@ Check several other datasets by Google [here.](https://github.com/google-researc
   - **Mode Based**：通过模型结构的设计快速在少量样本上更新参数，直接建立输入 x 和预测值 P 的映射函数
   - **Metric Based**：通过度量 batch 中的样本和 support 中样本的距离，借助最近邻的思想完成分类
   - **Optimization Based**：普通的梯度下降方法难以在 few-shot 场景下拟合，因此通过调整优化方法来完成小样本分类的任务
+- Few shot learning中较为热门的方法大多是metric-based，即通过类别中少量样本计算得到该类别的表示，然后再用某种metric方法计算得到最终的分类结果。
+  - 【2021-7-8】阿里达摩院黎槟华，李永彬的[基于小样本学习的对话意图识别](https://www.toutiao.com/i6898528278961816077/)
 
 ### Model Based方法
 
@@ -157,7 +159,7 @@ Check several other datasets by Google [here.](https://github.com/google-researc
 - 如果在 Few-shot Learning 的任务中去训练普通的基于 cross-entropy 的神经网络分类器，那么几乎肯定是会过拟合，因为神经网络分类器中有数以万计的参数需要优化。
 - 相反，很多非参数化的方法（最近邻、K-近邻、Kmeans）不需要优化参数，因此可以在 meta-learning 的框架下构造一种可以端到端训练的 few-shot 分类器。该方法是对样本间距离分布进行建模，使得同类样本靠近，异类样本远离。下面介绍相关的方法。
 - 如图所示，**孪生网络**（Siamese Network）通过有监督的方式训练孪生网络来学习，然后重用网络所提取的特征进行 one/few-shot 学习。
-  - Siamese Network
+  - **Siamese Network**
   - ![](https://pic4.zhimg.com/80/v2-2620b9d172e3e28df69b6a999dd8ba03_720w.jpg)
   - 知乎视频讲解：[Few-Shot Learning - Siamese Network](https://www.zhihu.com/zvideo/1335317579628548096)，使用triplet loss，**同类相近，异类相远**
 - 双路神经网络
