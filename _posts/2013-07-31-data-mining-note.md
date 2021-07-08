@@ -452,12 +452,11 @@ SWOT即基于内外部竞争环境和竞争条件下的态势分析，可以对�
 
 # 数据库
 
-## 传统数据库
+## MySQL
 
 - [PostgreSQL学习笔记](http://www.cnblogs.com/stephen-liu74/archive/2012/06/08/2315679.html)
 
 python使用mysql方法
-
 
 ### mysql安装方法
 
@@ -498,6 +497,10 @@ delete from tempdb.tb_tmp where id=3;
 select * from tempdb.tb_tmp where id=2;  
 EOF
 ```
+
+## PostGreSQL
+
+- [PostgreSQL学习笔记](http://www.cnblogs.com/stephen-liu74/archive/2012/06/08/2315679.html)
 
 # 分析工具
 
@@ -559,7 +562,9 @@ print("Database version : %s " % data)
 db.close()
 ```
 
-【2021-7-8】pymysql示例
+[mysqldb使用方法](https://www.runoob.com/python/python-mysql.html)
+
+【2021-7-8】[pymysql使用教程](https://www.cnblogs.com/sui776265233/p/9353148.html)
 
 ```python
 import pymysql
@@ -582,6 +587,7 @@ name CHAR(10) NOT NULL UNIQUE,
 age TINYINT NOT NULL
 )ENGINE=innodb DEFAULT CHARSET=utf8;  #注意：charset='utf8' 不能写成utf-8
 """
+#============= 查询数据 ========
 sql = "select * from nlp_data_collection.t_intention limit 10"
 res = cursor.execute(sql) # 执行SQL语句,只返回条数
 print(res) 
@@ -594,6 +600,36 @@ res1=cursor.fetchone()      #以元组的形式，返回查询记录的结果，
 # res4=cursor.fetchmany(2)   #查询两条记录会以元组套小元组的形式进行展示
 res5=cursor.fetchall()
 print(res5)
+#============= 插入数据 ========
+# 获取一个光标
+cursor = conn.cursor()
+# 定义要执行的sql语句
+sql = 'insert into userinfo(user,pwd) values(%s,%s);'
+data = [
+    ('july', '147'),
+    ('june', '258'),
+    ('marin', '369')
+]
+# 拼接并执行sql语句
+rows = cursor.execute(sql,data[0]) # 单条语句
+cursor.executemany(sql, data) # 多条语句
+print(cursor.lastrowid) # 当前插入的第一条记录
+conn.commit() # 涉及写操作要注意提交
+#============= 删除数据 ========
+cursor = conn.cursor() # 获取一个光标
+# 定义将要执行的SQL语句
+sql = "delete from userinfo where user=%s;"
+name = "june"
+cursor.execute(sql, [name]) # 拼接并执行SQL语句
+conn.commit() # 涉及写操作注意要提交
+#============= 更改数据 ========
+cursor = conn.cursor()
+# 定义将要执行的SQL语句
+sql = "update userinfo set pwd=%s where user=%s;"
+# 拼接并执行SQL语句
+cursor.execute(sql, ["july", "july"])
+conn.commit() # 涉及写操作注意要提交
+
 cursor.close() # 关闭光标对象
 conn.close() # 关闭数据库连接
 ```
