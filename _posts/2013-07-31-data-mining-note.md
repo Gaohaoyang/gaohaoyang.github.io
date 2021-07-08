@@ -3,7 +3,7 @@ layout: post
 title:  "数据挖掘经验总结-data-mining-note"
 date:   2013-07-31 23:02:00
 categories: 数据挖掘
-tags: 数据挖掘 机器学习 数据分析 陈皓 大数据 增长黑客 数据金字塔 zepplin hadoop hive tez spark storm 服务质量 评分卡 clickhouse kafka zookeeper
+tags: 数据挖掘 机器学习 数据分析 陈皓 大数据 增长黑客 数据金字塔 zepplin hadoop hive tez spark storm 服务质量 评分卡 clickhouse kafka zookeeper 数据库 mysql
 excerpt: 数据挖掘知识点、经验总结
 author: 鹤啸九天
 mathjax: true
@@ -450,8 +450,157 @@ SWOT即基于内外部竞争环境和竞争条件下的态势分析，可以对�
     - ②某些问题压根没有数据可供分析。
 - 除了数据驱动之外，产品的优化一定还要依赖其他驱动力。
 
+# 数据库
 
-## 分析工具
+## 传统数据库
+
+- [PostgreSQL学习笔记](http://www.cnblogs.com/stephen-liu74/archive/2012/06/08/2315679.html)
+
+python使用mysql方法
+
+
+### mysql安装方法
+
+- 【2021-6-17】[mysql官方下载](https://dev.mysql.com/downloads/mysql/)，适配各种操作系统，含UI界面工具workbench
+  - [mac下安装MySQL指南](https://www.jianshu.com/p/83c0afe1bd16)，[linux下安装指南](https://www.cnblogs.com/shenjianping/p/10984540.html), [linux下mysql的安装与使用](https://www.cnblogs.com/shenjianping/p/10984540.html)
+
+```shell
+# 下载mysql包
+# 解压，如果是tar.xz文件，使用xz -d命令解压
+tar -xzvf  mysql-5.7.26-linux-glibc2.12-x86_64.tar.gz -C /usr/local/
+# 创建用户和组
+groupadd mysql
+useradd -r -g mysql mysql
+# 将安装目录所有者及所属组改为mysql
+chown -R mysql.mysql /usr/local/mysql
+# 创建data目录
+ mkdir data #进入mysql文件夹
+# 
+yum install libaio
+/usr/local/mysql/bin/mysqld --user=mysql --basedir=/usr/local/mysql/ --datadir=/usr/local/mysql/data --initialize
+```
+
+### 连接mysql
+
+shell 代码，shell脚本中调用sql脚本
+```shell
+#mysql初始化-shell
+mysql=/usr/local/mysql/bin/mysql
+$mysql -uroot -pwqw  < init.sql
+```
+或者shell脚本中直接执行sql
+```shell
+mysql=/usr/local/mysql/bin/mysql
+$mysql -uroot -p123456 <<EOF  
+source /root/temp.sql;  
+select current_date();  
+delete from tempdb.tb_tmp where id=3;  
+select * from tempdb.tb_tmp where id=2;  
+EOF
+```
+
+# 分析工具
+
+## 爬虫
+
+### python抓取链接二手房数据
+- [链家二手房数据分析](https://zhuanlan.zhihu.com/p/25132058)
+- [scrapy爬链家成都房价并可视化](https://github.com/happyte/buyhouse)
+- [抓知乎爬虫](http://www.csuldw.com/2016/11/05/2016-11-05-simulate-zhihu-login/)
+- 【2019-11-24】[链家房源爬虫及可视化](https://www.toutiao.com/a6762317941271691788/?timestamp=1574491642&app=news_article_lite&group_id=6762317941271691788&req_id=2019112314472101002607901601D1CD43),[github](https://github.com/XuefengHuang/lianjia-scrawler)
+
+## json使用
+
+### shell中使用json
+- #[2016-12-31] shell中使用json
+- 安装：
+> pip install git+https://github.com/dominictarr/JSON.sh#egg=JSON.sh
+
+- 使用：
+```shell
+echo '{"a":2,"b":[3,6,8]}' |JSON.sh
+```
+详情参考：https://github.com/dominictarr/JSON.sh
+
+
+## Python工具包
+
+命令：
+- mysql -h10.26.21.38 -utest -p123
+
+两个工具包：
+- MySQLdb：MySQLdb（MySQL-python）仅支持python2
+- pymysql：MySQL-python不支持py3，可以pip install pymysql代替
+
+要想使python可以操作mysql，就需要MySQL-python驱动，它是python 操作mysql必不可少的模块。
+- [下载地址](https://pypi.python.org/pypi/MySQL-python/)
+- 下载MySQL-python-1.2.5.zip 文件之后直接解压。
+- 进入MySQL-python-1.2.5目录:
+
+```shell
+python setup.py install
+```
+
+```python
+#!pip install mysqldb
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+import MySQLdb
+# 打开数据库连接
+db = MySQLdb.connect("localhost", "testuser", "test123", "TESTDB", charset='utf8' )
+# 使用cursor()方法获取操作游标 
+cursor = db.cursor()
+# 使用execute方法执行SQL语句
+cursor.execute("SELECT VERSION()")
+# 使用 fetchone() 方法获取一条数据
+data = cursor.fetchone()
+print("Database version : %s " % data)
+# 关闭数据库连接
+db.close()
+```
+
+【2021-7-8】pymysql示例
+
+```python
+import pymysql
+ 
+# 连接database
+conn = pymysql.connect(
+    host='10.26.21.38',
+    user='test',password='123456',
+    #database='test',
+    charset='utf8')
+# 得到一个可以执行SQL语句的光标对象
+cursor = conn.cursor()  # 执行完毕返回的结果集默认以元组显示
+# 得到一个可以执行SQL语句并且将结果作为字典返回的游标
+#cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
+# 定义要执行的SQL语句
+sql = """
+CREATE TABLE USER1 (
+id INT auto_increment PRIMARY KEY ,
+name CHAR(10) NOT NULL UNIQUE,
+age TINYINT NOT NULL
+)ENGINE=innodb DEFAULT CHARSET=utf8;  #注意：charset='utf8' 不能写成utf-8
+"""
+sql = "select * from nlp_data_collection.t_intention limit 10"
+res = cursor.execute(sql) # 执行SQL语句,只返回条数
+print(res) 
+#cursor.scroll(1,mode='absolute') # 相对绝对位置移动，第一个参数是相对绝对位置移动的记录条个数
+# cursor.scroll(1,mode='relative') # 相对当前位置移动，第一个参数是相对当前位置移动的记录条个数
+#通过fetchone、fetchmany、fetchall拿到查询结果
+res1=cursor.fetchone()      #以元组的形式，返回查询记录的结果，默认是从第一条记录开始查询
+# res2=cursor.fetchone()    #会接着上一次的查询记录结果继续往下查询
+# res3=cursor.fetchone()
+# res4=cursor.fetchmany(2)   #查询两条记录会以元组套小元组的形式进行展示
+res5=cursor.fetchall()
+print(res5)
+cursor.close() # 关闭光标对象
+conn.close() # 关闭数据库连接
+```
+
+
+
+## 大数据分析
 
 - Hadoop是基础，其中的HDFS提供文件存储，Yarn进行资源管理。在这上面可以运行MapReduce、Spark、Tez等计算框架。
 - MapReduce:是一种离线计算框架，将一个算法抽象成Map和Reduce两个阶段进行处理，非常适合数据密集型计算。
