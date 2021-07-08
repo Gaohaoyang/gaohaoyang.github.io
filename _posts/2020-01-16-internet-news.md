@@ -794,6 +794,8 @@ mathjax: true
 
 ### 滴滴
 
+- 【2021-7-7】滴滴上市招股书，[英文版](https://www.sec.gov/Archives/edgar/data/0001764757/000104746921001218/a2243291zf-1a.htm), [ppt微云地址](https://share.weiyun.com/ky7oN3jy)
+
 ![](http://image.woshipm.com/wp-files/2018/12/c6T1nqYypeuN2dyUlB8Y.jpg)
 - 【2017-11】滴滴高管及组织架构图（[The Information](https://www.theinformation.com/)的网站）,[滴滴高管团队揭秘：多名投行人士把控关键职位](https://www.sohu.com/a/202890410_505837)
 ![](http://5b0988e595225.cdn.sohucs.com/images/20171107/4d3fe305bc4c48b69f31c0fa6206ba0f.jpeg)
