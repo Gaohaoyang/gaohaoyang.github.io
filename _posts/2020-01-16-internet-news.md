@@ -1009,6 +1009,8 @@ mathjax: true
 
 # 创业
 
+- 【2021-7-8】[知乎：不到20人的IT公司值得去吗](https://mp.weixin.qq.com/s/fZq_PCb16ZKzsx_VbcREuQ)，[知乎帖子](https://www.zhihu.com/question/421150601)
+
 - 为什么累死的是我首富却是你？
 - 郭台铭的回答
   - 第一：30年前我创建公司，是赌上全部家当，不成功便成仁。而你寄出履历表后就来我们公司上班，而且随时可以走人。
