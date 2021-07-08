@@ -701,9 +701,7 @@ spark-sql
 --num-executors 40 
 --executor-cores 20 
 --master yarn << EOF
-
 **HIVESQL**
-
 EOF
 ```
 
