@@ -21,6 +21,12 @@ mathjax: true
 - 【2020-5-8】无人驾驶科研笔记 [My Bibliography for Research on Autonomous Driving](https://github.com/chauvinSimon/My_Bibliography_for_Research_on_Autonomous_Driving)
 
 
+## 汽车品牌
+
+【2021-7-12】汽车品牌鄙视链, [IMG](https://p9.toutiaoimg.com/img/tos-cn-i-0022/15600f0b605e427695527f298414be0a~tplv-obj:1057:1422.image?from=post)
+![](https://p9.toutiaoimg.com/img/tos-cn-i-0022/15600f0b605e427695527f298414be0a~tplv-obj:1057:1422.image?from=post)
+
+
 # 车联网
 
 ## 资料
