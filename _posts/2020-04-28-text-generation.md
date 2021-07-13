@@ -3,7 +3,7 @@ layout: post
 title:  "文本生成-Text Generation"
 date:   2020-04-28 21:39:00
 categories: 自然语言处理
-tags: 深度学习 NLP GAN Seq2seq 对话系统 文本评价 BLEU
+tags: 深度学习 NLP GAN Seq2seq 对话系统 文本评价 BLEU 多模态 好未来
 excerpt: 深度学习在NLP子领域——文本生成的应用汇总，如seq2seq、GAN系列
 author: 鹤啸九天
 mathjax: true
@@ -14,6 +14,12 @@ mathjax: true
 
 # 总结
 
+- 【2021-7-14】[WAIC 2021-好未来副总裁吴中勤：多模态机器学习与自动生成技术](https://www.toutiao.com/i6984303337013363212/)，好未来集团技术副总裁吴中勤发表主题演讲《多模态机器学习及大规模自动生成技术：算法框架、行业实践》，他主要介绍了多模态深度学习以及大规模自动生成技术在教育领域的实践与应用，并介绍了好未来 AI 研究院的最新研究成果及成功案例。
+  - 多模态整个技术研究方向包括以下：表征，多个模态联合去做事物或者语义的联合表征；转换，在模态之间实现转换，例如输入文字出现画面，输入声音出现文字；融合，在做单模态识别之后做后端融合，把整个模态在分类阶段、工作阶段加以融合；对齐，比如一段文字、一个视频，怎么把其中物体和关系做对应；此外还包括模态之间的协同。[img](https://p1-tt.byteimg.com/origin/pgc-image/e0b83a3aaacf4296931db87706437308?from=pc)
+  - ![](https://p1-tt.byteimg.com/origin/pgc-image/e0b83a3aaacf4296931db87706437308?from=pc)
+  - GodEye 这套教学辅助系统，基于多模态深度学习理念打造的，可以针对课堂当中老师和学生各类行为进行智能识别，通过辅助授课老师在授课中视频片段、关键行为去定位老师和学生在课堂中的交互，最后提升学习效果。
+  - 一个小时之内可生成几十万道题，针对个性化去生成针对性的题目，生成题目速度超越人类千倍、万倍，生成题目也具有多样性和广泛性，而且我们发现随着学生的使用量越来越大，年限越来越强，学生都在一点点的进步。除了生成题目，该模型还能生成作文
+  - ![](https://p3-tt.byteimg.com/origin/pgc-image/35d0314282ac4edc9359836325677a04?from=pc)
 - 【2021-3-27】【可控的神经网络文本生成】《[Controllable Neural Text Generation](https://lilianweng.github.io/lil-log/2021/01/02/controllable-neural-text-generation.html)》by Lilian Weng 
 - 【2021-3-26】【用于生成阅读理解问题的NLP系统】'question_generator - An NLP system for generating reading comprehension questions' by Adam Montgomerie [GitHub](https://github.com/AMontgomerie/question_generator)
 - 【2020-7-6】清华孙茂松：九歌多样化古典诗歌机器写作模型[MixPoet](http://nlp.csai.tsinghua.edu.cn/news/)开源
