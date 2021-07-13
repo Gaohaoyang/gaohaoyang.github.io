@@ -13,6 +13,9 @@ mathjax: true
 
 # 汇总
 
+- 【2021-7-14】[ICML 2021 (Long Oral) 深入研究不平衡回归问题](https://zhuanlan.zhihu.com/p/369627086)，在经典的数据不平衡问题下，探索了非常实际但极少被研究的问题：数据不平衡回归问题。现有的处理不平衡数据/长尾分布的方法绝大多数仅针对分类问题，即目标值是不同类别的离散值（索引）；但是，许多实际的任务涉及连续的，甚至有时是无限多的目标值。本文推广了传统不平衡分类问题的范式，将数据不平衡问题从离散值域推广到连续域。
+  - ![](https://pic4.zhimg.com/80/v2-e70edea5b4096e4299e999547325799f_720w.jpg)
+  - ![](https://pic2.zhimg.com/v2-9c0da9f202c09997c73732d7634ae3c5_b.webp)
 - 【2020-7-17】focal loss[论文](https://arxiv.org/abs/1708.02002)，[配套代码](https://github.com/Tony607/Focal_Loss_Keras)
 - [非平衡数据集 focal loss 多类分类](https://www.yanxishe.com/TextTranslation/1646)
 - [Focal Loss理解](https://www.cnblogs.com/king-lps/p/9497836.html)：降低了大量简单负样本在训练中所占的权重，也可理解为一种困难样本挖掘
