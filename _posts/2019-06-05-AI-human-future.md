@@ -393,6 +393,10 @@ Neuralink and the Brain’s Magical Future](https://waitbutwhy.com/2017/04/neura
  
 # 实际案例
 
+- 【2021-7-8】[意念打字登Nature封面！每分钟写90个字符，准确率超99%](https://www.toutiao.com/i6961632792107123231)，一位截瘫患者，正在用“意念”打出一段话，0.5秒左右就能输出一个字母,他所需要做的，只是在脑中将字母“手写”出来，然后系统就会自动识别生成字母，一分钟可写90个字符。。[图](https://p6-tt.byteimg.com/origin/pgc-image/160795ad77884c3cbd594f4177e92d79?from=pc)
+  - ![](https://p6-tt.byteimg.com/origin/pgc-image/160795ad77884c3cbd594f4177e92d79?from=pc)
+  - ![](https://p1-tt.byteimg.com/origin/pgc-image/a684da519f2342da8b9c6fea835ad898.png?from=pc)
+
 ![](https://mmbiz.qpic.cn/mmbiz_jpg/V1OJoKudbibamvvRKM6jYFt5Gf2wz9BHR92gRojGfZMFMR6ocnDNSicGKCfncAjtWClicU2rHDicmSt0OjibUFTLpjA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
 
 - 【2020-1-16】浙江大学：[国内首例植入式脑机接口让“意念”控制机器臂](https://mp.weixin.qq.com/s/X58bAYMPGDtw-IC7aOcAZg)
