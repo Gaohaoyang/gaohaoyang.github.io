@@ -510,6 +510,15 @@ Tensorflow自带Tensorflow Extended (TFX)。TFX使我们能够专注于优化ML�
   - Manager收到待加载模型版本，开始模型服务流程。此处有两种可能性，第一种情况是模型首次推送部署，Manager先确保模型需要的资源可用，一旦获取相应的资源，Manager赋予Loader权限去加载模型。第二种情况是为已上线模型部署一个新版本。Manager会先查询Version Policy插件，决定加载新模型的流程如何进行。具体来说，当加载新模型时，可选择保持 (1) 可用性 或 (2) 资源。如果选(1)可用性，意味着我们倾向于确保系统对客户请求总能相应。Manager让Loader实例化新的计算图和新的权重。此时模型的两个版本被都被加载，也就是说Manager先加载新版本模型确保其可以安全服务后，然后再卸载原版本模型。如果选(2)资源，如果我们希望节省资源不为新版本模型申请额外的资源，可选择保持资源。对于重量级模型也许挺有用，模型切换间会有极短的可用性缺口，不过可以换取内存不足。
   - 最后，当用户请求模型的句柄，Manager返回句柄给Servable。
 
+## TF特性
+
+以下特性：
+- 支持多种模型服务策略,比如用最新版本/所有版本/指定版本, 以及动态策略更新、模型的增删等
+- 自动加载/卸载模型
+- Batching
+- 多种平台支持(非TF平台)
+- 为gRPC expose port 8500，为REST API expose port 8501
+
 
 ## 服务框架
 
@@ -521,16 +530,16 @@ Tensorflow自带Tensorflow Extended (TFX)。TFX使我们能够专注于优化ML�
 ## TF Serving工作流程
 
 - 基于TF Serving的持续集成框架还是挺简明的，基本分三个步骤：
-    - 模型训练：主要包括数据的收集和清洗、模型的训练、评测和优化；
-    - 模型上线：前一个步骤训练好的模型在TF Server中上线；
-    - 服务使用：客户端通过gRPC和RESTfull API两种方式同TF Servering端进行通信，并获取服务；
+    - 模型**训练**：主要包括数据的收集和清洗、模型的训练、评测和优化；
+    - 模型**上线**：前一个步骤训练好的模型在TF Server中上线；
+    - **服务使用**：客户端通过gRPC和RESTfull API两种方式同TF Servering端进行通信，并获取服务；
 - TF Serving的工作流程主要分为以下几个步骤：
     - Source会针对需要进行加载的模型创建一个Loader，Loader中会包含要加载模型的全部信息；
     - Source通知Manager有新的模型需要进行加载；
     - Manager通过版本管理策略（Version Policy）来确定哪些模型需要被下架，哪些模型需要被加载；
     - Manger在确认需要加载的模型符合加载策略，便通知Loader来加载最新的模型；
     - 客户端像服务端请求模型结果时，可以指定模型的版本，也可以使用最新模型的结果；
-- 示意图
+- 示意图 [img](https://upload-images.jianshu.io/upload_images/4905018-560bf34c3a9e5aca.png)
     - ![](https://upload-images.jianshu.io/upload_images/4905018-560bf34c3a9e5aca.png)
 
 ## 调用方式
@@ -540,6 +549,99 @@ Tensorflow自带Tensorflow Extended (TFX)。TFX使我们能够专注于优化ML�
     - （2）gRPC形式
 
 ## Saver
+
+存储格式：
+- （1）ckpt：首先这种模型文件是依赖 TensorFlow 的，只能在其框架下使用；
+- （2）pb：它具有**语言独立性**，可独立运行，封闭的序列化格式，任何语言都可以解析它，它允许其他语言和深度学习框架读取、继续训练和迁移 TensorFlow 的模型；保存为 PB 文件时候，模型的变量都会变成固定的，导致模型的大小会大大减小
+
+代码示例
+
+```python
+import tensorflow as tf
+ 
+x = tf.placeholder(tf.float32, [1, 2], name='input_x')
+y = tf.placeholder(tf.float32, [1, 2], name='input_y')
+z = tf.Variable([[1.0, 1.0]], name='var_z')
+a = x + y
+tf.identity(a, name="output_a")
+b = x - y
+tf.identity(b, name="output_b")
+ 
+sess = tf.Session()
+init_op = tf.global_variables_initializer()
+sess.run(init_op)
+ 
+result_add = sess.run(a, feed_dict={x: [[1, 2]], y: [[3, 4]]})
+result_del = sess.run(b, feed_dict={x: [[1, 2]], y: [[3, 4]]})
+ 
+print(result_add)
+print(result_del)
+
+# ---- 保存（ckpt） -----
+tf.train.Saver().save(sess, './ckpt_model/model.ckpt')
+
+#checkpoint 文本文件，记录了模型文件的路径信息列表
+#model.ckpt.data-00000-of-00001 网络参数值
+#model.ckpt.index 文件保存了当前参数名和索引
+#model.ckpt.meta 保存模型的网络结构
+# ---- 保存（pb） -----
+tf.saved_model.simple_save(sess, "./pb_model/", inputs={ "input_x": x, "input_y": y}, outputs={ "result_add": a, "result_sub": b})
+# saved_model.pb 保存图形结构
+# variables 保存训练所习得的权重。
+
+# ---- 加载（ckpt） -----
+ckpt = tf.train.get_checkpoint_state('./ckpt_model/')
+saver = tf.train.import_meta_graph(ckpt.model_checkpoint_path + '.meta')
+with tf.Session() as sess:
+    saver.restore(sess, ckpt.model_checkpoint_path)
+    x = sess.graph.get_tensor_by_name("input_x:0")
+    y = sess.graph.get_tensor_by_name("input_y:0")
+    a = sess.graph.get_tensor_by_name("output_a:0")
+    b = sess.graph.get_tensor_by_name("output_b:0")
+    result_add = sess.run(a, feed_dict={x: [[1, 2]], y: [[3, 4]]})
+    result_sub = sess.run(b, feed_dict={x: [[1, 2]], y: [[3, 4]]})
+
+print(result_add)
+print(result_sub)
+
+# ---- 加载（pb） -----
+with tf.Session() as sess:
+    tf.saved_model.loader.load(sess, ["serve"], "./pb_model")
+    graph = tf.get_default_graph()
+ 
+    x = sess.graph.get_tensor_by_name("input_x:0")
+    y = sess.graph.get_tensor_by_name("input_y:0")
+ 
+    a = sess.graph.get_tensor_by_name("output_a:0")
+    b = sess.graph.get_tensor_by_name("output_b:0")
+ 
+    result_add = sess.run(a, feed_dict={x: [[1, 2]], y: [[3, 4]]})
+    result_sub = sess.run(b, feed_dict={x: [[1, 2]], y: [[3, 4]]})
+ 
+print(result_add)
+print(result_sub)
+# ---- 格式转换（ckpt→pb） -----
+ckpt = tf.train.get_checkpoint_state('./ckpt_model/')
+saver = tf.train.import_meta_graph(ckpt.model_checkpoint_path + '.meta')
+with tf.Session() as sess:
+    saver.restore(sess, ckpt.model_checkpoint_path)
+ 
+    x = sess.graph.get_tensor_by_name("input_x:0")
+    y = sess.graph.get_tensor_by_name("input_y:0")
+ 
+    a = sess.graph.get_tensor_by_name("output_a:0")
+    b = sess.graph.get_tensor_by_name("output_b:0")
+ 
+    result_add = sess.run(a, feed_dict={x: [[1, 2]], y: [[3, 4]]})
+    result_sub = sess.run(b, feed_dict={x: [[1, 2]], y: [[3, 4]]})
+ 
+    tf.saved_model.simple_save(sess, "./ckpt2pb/", inputs={"input_x": x, "input_y": y}, outputs={"result_add": a, "result_sub": b})
+ 
+print(result_add)
+print(result_sub)
+
+```
+
 
 - 分别介绍，Tensorflow 1.0 和 2.0两个版本的导出方法
 
