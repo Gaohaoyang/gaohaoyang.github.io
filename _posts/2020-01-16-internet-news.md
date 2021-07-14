@@ -39,6 +39,7 @@ mathjax: true
 
 ## 2021新格局
 
+- 【2021-7-13】青山资本2021年中消费报告，[Z世代消费报告](http://www.360doc.com/content/21/0713/14/21321265_986371187.shtml)
 【2021-4-6】互联网怪盗团出品，[诸神之黄昏：2021年以后的互联网及新兴行业](https://www.huxiu.com/article/419673.html)
 - 【2021-5-18】[游戏的未来](https://mp.weixin.qq.com/s/T5vqeDfAz7qjvhub4Go8EQ)
 - 四次互联网红利及其后果
