@@ -3,7 +3,7 @@ layout: post
 title:  "优化算法笔记-optimization"
 date:   2020-08-02 00:23:00
 categories: 机器学习 数学基础
-tags: 最优化 梯度下降 牛顿法 斯坦福 凸优化 KKT 损失函数
+tags: 最优化 梯度下降 牛顿法 斯坦福 凸优化 KKT 损失函数 距离计算 相似度
 excerpt: 机器学习中常见的优化算法
 author: 鹤啸九天
 mathjax: true
@@ -42,6 +42,177 @@ mathjax: true
 - 人生不如意之事十之八九，想达到我们想要达到的目标时，通常都有各种各样的限制。那么所谓最优化问题，就是指**用最优的方式去平衡理想与现实之间的关系**。
 
 - 最古老的优化问题：邮差送信
+
+## 距离度量
+
+【2021-7-15】[NLP 语义相似度计算 整理总结](https://www.cnblogs.com/shona/p/11971310.html)
+
+在很多NLP任务中，都涉及到语义相似度的计算，例如：
+- 在搜索场景下（对话系统、问答系统、推理等），query和Doc的语义相似度；
+- feeds场景下Doc和Doc的语义相似度；
+- 在各种分类任务，翻译场景下，都会涉及到语义相似度语义相似度的计算
+
+基本概念
+- TF：Term frequency即关键词词频，是指一篇文章中关键词出现的频率 ![](https://images.cnblogs.com/cnblogs_com/liangxiaxu/201205/201205051901168917.gif)
+- IDF：Inverse document frequency指逆向文本频率，是用于衡量关键词权重的指数 ![](https://images.cnblogs.com/cnblogs_com/liangxiaxu/201205/201205051901168393.gif)
+- 向量空间模型
+  - 向量空间模型简称 VSM，是 VectorSpace Model 的缩写。在此模型中，文本被看作是由一系列相互独立的词语组成的，若文档 D 中包含词语 t1,t2,…,tN，则文档表示为D（t1,t2,…,tN）。由于文档中词语对文档的重要程度不同，并且词语的重要程度对文本相似度的计算有很大的影响，因而可对文档中的每个词语赋以一个权值 w，以表示该词的权重，其表示如下：D（t1,w1；t2,w2；…,tN，wN），可简记为 D（w1,w2,…,wN），此时的 wk 即为词语 tk的权重，1≤k≤N。关于权重的设置，我们可以考虑的方面：词语在文本中的出现频率（tf），词语的文档频率（df，即含有该词的文档数量，log N/n。很多相似性计算方法都是基于向量空间模型的。
+
+### 1\. 余弦相似度（Cosine）
+
+余弦相似性通过测量两个向量的夹角的余弦值来度量它们之间的相似性。
+- [img](https://img-blog.csdn.net/20170411164251296) ![](https://img-blog.csdn.net/20170411164251296)
+- 问题：
+  - 表示方向上的差异，但**对距离不敏感**。
+  - 关心距离上的差异时，会对计算出的每个（相似度）值都减去一个它们的均值，称为调整余弦相似度。
+
+### 2\. 欧式距离
+
+考虑的是点的空间距离，各对应元素做差取平方求和后开方。能体现数值的绝对差异。
+- [img](https://img-blog.csdn.net/20170411163336409) ![](https://img-blog.csdn.net/20170411163336409)
+
+### 3\. 曼哈顿距离（Manhattan Distance）
+
+向量各坐标的绝对值做查后求和。
+- d(i,j)=|X1-X2|+|Y1-Y2|
+- [img](https://img-blog.csdn.net/20170411163529421) ![](https://img-blog.csdn.net/20170411163529421)
+
+### 4\. 明可夫斯基距离（Minkowski distance）
+
+明氏距离是欧氏距离的推广，是对多个距离度量公式的概括性的表述。
+- [img](https://img-blog.csdn.net/20170411192555236) ![](https://img-blog.csdn.net/20170411192555236)
+- [img](https://img-blog.csdn.net/20170411163856462) ![](https://img-blog.csdn.net/20170411163856462)
+- 分析
+  - 当p==1,“明可夫斯基距离”变成“曼哈顿距离”
+  - 当p==2,“明可夫斯基距离”变成“欧几里得距离”
+  - 当p==∞,“明可夫斯基距离”变成“切比雪夫距离”
+
+### 5\. Jaccard 相似系数（Jaccard Coefficient）
+ 
+Jaccard系数主要用于计算**符号**度量或**布尔值**度量的向量的相似性。即，**无需比较差异大小，只关注是否相同**。Jaccard系数只关心特征是否一致（共有特征的比例）。
+- [img](https://img-blog.csdn.net/20170411164412676) ![](https://img-blog.csdn.net/20170411164412676)
+- [img](https://img-blog.csdn.net/20180516170747250) ![](https://img-blog.csdn.net/20180516170747250)
+
+- [img](https://img-blog.csdn.net/20170411164453926) ![](https://img-blog.csdn.net/20170411164453926)
+ 
+然后利用公式进行计算:
+- [img](https://img-blog.csdn.net/20170411164535504) ![](https://img-blog.csdn.net/20170411164535504)
+
+### 6\. 皮尔森相关系数(Pearson Correlation Coefficient)
+ 
+皮尔森相关系数又称为相关相似性。
+- [img](https://img-blog.csdn.net/20170411200323838) ![这里写图片描述](https://img-blog.csdn.net/20170411200323838)
+
+或表示为：
+- ![](https://img-blog.csdn.net/20180516170033853)
+ 
+这就是1中所提到的调整余弦相似度，向量内各对应元素减去均值求积后求和，记为结果1；各对应元素减去均值平方求和再求积，记为结果2；结果1比结果2。
+
+针对线性相关情况，可用于比较因变量和自变量间相关性如何。
+ 
+### 7\. SimHash + 汉明距离（Hamming Distance）
+ 
+- Simhash：谷歌发明，根据文本转为64位的字节，计算汉明距离判断相似性。
+- 汉明距离：在信息论中，两个等长字符串的汉明距离是两者间对应位置的不同字符的个数。换句话说，它就是将一个字符串变换成另外一个字符串所需要替换的字符个数。例如：
+  - “10110110”和“10011111”的汉明距离为3；
+  - “abcde”和“adcaf”的汉明距离为3.
+ 
+### 8\.   斯皮尔曼（等级）相关系数（SRC :Spearman Rank Correlation）
+ 
+和6上述类似，不同的是将对于样本中的原始数据Xi,Yi转换成等级数据xi,yi，即xi等级和yi等级。并非考虑原始数据值，而是按照一定方式（通常按照大小）对数据进行排名，取数据的不同排名结果代入公式。
+- [img](https://img-blog.csdn.net/20180516165942943) ![](https://img-blog.csdn.net/20180516165942943)
+ 
+实际上，可通过简单的方式进行计算，n表示样本容量，di表示两向量X和Y内对应元素的等级的差值，等级di = xi - yi，则：
+- [img](https://img-blog.csdn.net/20180516170606465) ![](https://img-blog.csdn.net/20180516170606465)
+
+### 9\. BM25算法 
+
+原理
+- BM25算法，通常用来作搜索相关性平分：对Query进行语素解析，生成语素qi；然后，对于每个搜索结果D，计算每个语素qi与D的相关性得分，最后，将qi相对于D的相关性得分进行加权求和，从而得到Query与D的相关性得分。
+- BM25算法的一般性公式如下：
+  - [img](https://upload-images.jianshu.io/upload_images/1713353-070925230006436c.jpg) ![](https://upload-images.jianshu.io/upload_images/1713353-070925230006436c.jpg)
+  - 其中，Q表示Query，qi表示Q解析之后的一个语素（对中文而言，我们可以把对Query的分词作为语素分析，每个词看成语素qi。）；d表示一个搜索结果文档；Wi表示语素qi的权重；R(qi，d)表示语素qi与文档d的相关性得分。
+- BM25算法的相关性得分公式可总结为：
+  - [img](https://upload-images.jianshu.io/upload_images/1713353-fc89dbc4421949c6.jpg) ![](https://upload-images.jianshu.io/upload_images/1713353-fc89dbc4421949c6.jpg)
+- 代码实现，[完整版](https://github.com/jllan/jannlp/blob/master/similarity/bm25.py)
+
+```python
+import math
+import jieba
+from utils import utils
+
+# 测试文本
+text = '''
+自然语言处理是计算机科学领域与人工智能领域中的一个重要方向。
+它研究能实现人与计算机之间用自然语言进行有效通信的各种理论和方法。
+自然语言处理是一门融语言学、计算机科学、数学于一体的科学。
+因此，这一领域的研究将涉及自然语言，即人们日常使用的语言，
+所以它与语言学的研究有着密切的联系，但又有重要的区别。
+自然语言处理并不是一般地研究自然语言，
+而在于研制能有效地实现自然语言通信的计算机系统，
+特别是其中的软件系统。因而它是计算机科学的一部分。
+'''
+
+class BM25(object):
+
+    def __init__(self, docs):
+        self.D = len(docs)
+        self.avgdl = sum([len(doc)+0.0 for doc in docs]) / self.D
+        self.docs = docs
+        self.f = []  # 列表的每一个元素是一个dict，dict存储着一个文档中每个词的出现次数
+        self.df = {} # 存储每个词及出现了该词的文档数量
+        self.idf = {} # 存储每个词的idf值
+        self.k1 = 1.5
+        self.b = 0.75
+        self.init()
+
+    def init(self):
+        for doc in self.docs:
+            tmp = {}
+            for word in doc:
+                tmp[word] = tmp.get(word, 0) + 1  # 存储每个文档中每个词的出现次数
+            self.f.append(tmp)
+            for k in tmp.keys():
+                self.df[k] = self.df.get(k, 0) + 1
+        for k, v in self.df.items():
+            self.idf[k] = math.log(self.D-v+0.5)-math.log(v+0.5)
+
+    def sim(self, doc, index):
+        score = 0
+        for word in doc:
+            if word not in self.f[index]:
+                continue
+            d = len(self.docs[index])
+            score += (self.idf[word]*self.f[index][word]*(self.k1+1)
+                      / (self.f[index][word]+self.k1*(1-self.b+self.b*d
+                                                      / self.avgdl)))
+        return score
+
+    def simall(self, doc):
+        scores = []
+        for index in range(self.D):
+            score = self.sim(doc, index)
+            scores.append(score)
+        return scores
+
+if __name__ == '__main__':
+    sents = utils.get_sentences(text)
+    doc = []
+    for sent in sents:
+        words = list(jieba.cut(sent))
+        words = utils.filter_stop(words)
+        doc.append(words)
+    print(doc)
+    s = BM25(doc)
+    print(s.f)
+    print(s.idf)
+    print(s.simall(['自然语言', '计算机科学', '领域', '人工智能', '领域']))
+```
+
+### Dice 系数法（DiceCoefficient）
+
+- todo
+
 
 ## 分类
 
