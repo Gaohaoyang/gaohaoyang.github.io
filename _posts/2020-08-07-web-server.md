@@ -1176,6 +1176,9 @@ web页面代码
 
 ## Django
 
+【2021-7-16】python为后端，vue为前端的web开发框架整合demo，拿来即用，[django-vue-demo](https://github.com/realjf/django-vue-demo.git)，安装详情：[Django后端 + Vue前端 构建Web开发框架](https://realjf.io/python/django-vue-web/)，覆盖node、mysql、vue等工具包
+
+
 
 
 ## [Fastapi](https://github.com/tiangolo/fastapi)
