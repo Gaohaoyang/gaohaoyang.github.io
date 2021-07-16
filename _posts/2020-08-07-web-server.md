@@ -3,7 +3,7 @@ layout: post
 title:  "Web服务知识-Web-Serving"
 date:   2020-08-07 19:17:00
 categories: 技术工具
-tags: Web web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session RPC 微服务 GraphQL UML Gunicorn supervisor genvent grequests
+tags: Web web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session RPC 微服务 GraphQL UML Gunicorn supervisor genvent grequests node.js vue
 author : 鹤啸九天
 excerpt: Web开发相关技术知识点
 mathjax: true
@@ -1683,6 +1683,18 @@ console.log(document.cookie)
         }
     });
 ```
+
+
+## node.js
+
+node.js、npm、vue、webpack之间的关系
+- **node.js**是javascript运行的环境，以前只能浏览器解析js，现在直接用chrome的v8引擎封装成nodejs，实现js独立于浏览器也可以解析运行
+- **npm**，前端依赖包管理器（包含在nodejs中），类似maven，帮助下载和管理前端的包，这个下载源是外国服务器，如果想提高下载速度的话，建议更换成淘宝镜像，类似maven之于阿里云镜像。
+- **vue.js** 前端框架，其他大火的前端框架：anjularjs
+- **WebPack** webpack能够把.vue后缀名的文件打包成浏览器能够识别的js，而这个.vue文件装换需要打包器vue-loader→npm下载→node包管理工具
+  - 可以看做是模块打包机，它做的事情：分析你的项目结构，找到JavaScript模块以及其它的一些浏览器不能直接运行的拓展语言（Scss，TypeScript等），并将其转换和打包为合适的格式供浏览器使用。
+
+## vue
 
 
 
