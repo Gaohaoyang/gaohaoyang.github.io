@@ -865,7 +865,7 @@ set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,chinese,cp936
 set guifont=Consolas:h15
 language messages zh_CN.utf-8
-set lines=45 columns=100
+" set lines=45 columns=100 # 这行不能加，否则按O进入编辑状态时，视觉错位
 set number
 set autoindent
 set smartindent
