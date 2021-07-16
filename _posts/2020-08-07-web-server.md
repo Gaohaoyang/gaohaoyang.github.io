@@ -1076,6 +1076,104 @@ except PyJWTError as e:
 ![](https://p1-tt.byteimg.com/origin/pgc-image/a8fe60b01ff7415a9ec130d8fcfcae2e?from=pc)
 
 
+### 模板使用
+
+
+if/for控制语句
+
+前端的Jinja2语法中，if可以进行判断：存在的参数是否满足条件。
+- 跟python很像，只是需要添加\{% %\}和\{% endxx %\}
+- ![](https://pic2.zhimg.com/80/v2-7c8b008840b966bee55a1ae71caf5e11_720w.jpg)
+
+```python
+from flask import Flask  #导入模块
+from flask import render_template
+
+app  = Flask(__name__)
+
+@app.route('/table')  #定义第一页视图
+def choice():
+    goods = [{'name':'包包', 'price':'500元'}, \
+             {'name':'口红', 'price':'300元'}, \
+             {'name':'冰淇淋', 'price':'20元'}]
+    # locals指定所有变量
+    return render_template('goods.html', **locals())
+
+@app.route('/user')
+def user():
+    user = 'dongGe'
+    #user = ['dongGe'] # 列表
+    #user = {'name':'dongGe'} # 字典
+    return render_template('user.html',user=user)
+
+@app.route('/loop')
+ def loop():
+    fruit = ['apple','orange','pear','grape']
+    return render_template('loop.html',fruit=fruit)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+web页面代码
+
+```html
+ <html>
+ <head>
+     {% if user %}
+        <title> hello {{user}} </title>
+        <!-- <title> hello {{user[0]}} </title> -->
+        <!-- <title> hello {{user.name}} </title> -->
+    {% else %}
+         <title> welcome to flask </title>        
+    {% endif %}
+ </head>
+
+ <body>
+     <h1>hello world</h1>
+    <ul>
+        {% for index in fruit %}
+            <li>{{ index }}</li>
+        {% endfor %}
+    </ul>
+  <!-- good.html -->
+    <table>
+      <thead>
+          <th>商品名称</th>
+          <th>商品价格</th>
+      </thead>
+      <tbody>
+      {% for good in goods %}
+          <tr>
+              <td>{{good.name}}    </td>
+              <td>{{good.price}}    </td>
+          </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  <!-- 临时变量 -->
+  {% set links = [
+      ('home',url_for('.home')),
+      ('service',url_for('.service')),
+      ('about',url_for('.about')),
+    ] %}
+  <nav>
+      {% for label,link in links %}
+          <!-- loop获取循环信息，loop.index表示下标, 从1开始 -->
+          {% if not loop.first %}|{% endif %}
+          <a href="{% if link is current_link %}#
+          {% else %}
+          {{ link }}
+          {% endif %}
+          ">{{ label }}</a>
+      {% endfor %}
+  </nav>
+ </body>
+ </html>
+ ```
+
+
+
 ## Django
 
 
