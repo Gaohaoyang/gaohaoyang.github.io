@@ -777,8 +777,8 @@ if __name__ == '__main__':
 # */* vim: set expandtab ts=4 sw=4 sts=4 tw=400: */
 ```
 
-- 【2020-8-26】页面测试功能对POST无效，传参失败
-    - 已提交issue：[Failed to get parameters by POST method in “try it out” feature](https://github.com/flasgger/flasgger/issues/428)
+- 【2020-8-26】页面测试功能（try it out）对GET/POST无效，传参失败
+    - 已提交issue：[Failed to get parameters by POST method in “try it out” feature](https://github.com/flasgger/flasgger/issues/428)，到【2021-7-19】仍然未解决
 
 
 ### 全局变量
