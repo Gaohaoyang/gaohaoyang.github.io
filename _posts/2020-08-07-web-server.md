@@ -702,11 +702,22 @@ def post_data():
     - [flask_restplus](https://www.cnblogs.com/leejack/p/9162367.html)
     - ![](https://img2018.cnblogs.com/blog/749711/201905/749711-20190511131630516-1117259038.png)
 
-- 实践
-    - 安装：
-        - flask_restplus实践失败，个别依赖不满足，放弃
-        - pip install [flasgger](https://github.com/flasgger/flasgger)
-    - 测试：如下 
+flasgger配置文件解析：
+- 在flasgger的配置文件中，以**yaml格式**描述了flasgger页面的内容；
+- **tags标签**中可以放置对这个api的描述和说明；
+- **parameters标签**中可以放置这个api所需的参数
+  - 如果是GET方法，可以放置url中附带的请求参数
+  - 如果是POST方法，可以将参数放置在body参数 **schema子标签**下面；
+- responses标签中可以放置返回的信息，以状态码的形式分别列出，每个状态码下可以用schema标签放置返回实体的格式；
+
+- 【2020-8-26】页面测试功能（try it out）对GET/POST无效，传参失败
+  - 已提交issue：[Failed to get parameters by POST method in “try it out” feature](https://github.com/flasgger/flasgger/issues/428)
+- 【2021-7-19】参考帖子[Parameter in body does not work in pydoc #461](https://github.com/flasgger/flasgger/issues/461)，正确的使用方法：parameter针对url path里的参数，如果启用post需要新增body参数，里面注明post参数信息
+
+- 安装：
+    - flask_restplus实践失败，个别依赖不满足，放弃
+    - pip install [flasgger](https://github.com/flasgger/flasgger)
+- 测试：如下 
 
 
 ```python
@@ -722,7 +733,7 @@ def post_data():
 # * @date 2020/08/22 08:32
 # **************************************************************************
 
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify, request
 #from flask_restplus import Api
 from flasgger import Swagger, swag_from
 
@@ -730,23 +741,42 @@ app = Flask(__name__)
 # swagger api封装，每个接口的注释文档中按照yaml格式排版
 Swagger(app)
 
-@app.route('/')
+@app.route('/api/<arg>')
 #@app.route("/index",methods=["GET","POST"])
 #@app.route("/index/<int,>")
 def hello_world():
 
     """
     API说明
-    副标题（点击才能显示）
+    副标题（点击才能显示），url请求示例：[点击](http://10.200.24.101:8082/nlu?query_info=%E4%BD%A0%E5%A5%BD%E5%B0%8F%E8%B4%9D,%E5%8C%97%E4%BA%AC%E6%98%AF%E4%B8%AA%E5%A4%A7%E5%9F%8E%E5%B8%82&action_info=ner||seg||pos||keyword||summary)
     ---
     tags:
       - 自动生成示例
     parameters:
-      - name: language
+      - name: arg # path参数区
         in: path
         type: string
-        required: true
+        enum: ['all', 'rgb', 'cmyk'] # 枚举类型
+        required: false
         description: 变量含义
+      - name: body  # post 参数区（与get冲突）
+        in: body
+        required: true
+        schema:
+          id: 用户注册
+          required:
+            - username
+            - password
+          properties:
+            username:
+              type: string
+              description: 用户名.
+            password:
+              type: string
+              description: 密码.
+            inn_name:
+              type: string
+              description: 客栈名称.
     responses:
       500:
         description: 自定义服务端错误
@@ -760,6 +790,16 @@ def hello_world():
               description: The language name
               default: Lua
     """ 
+    res = {"code":0, "msg":'-', "data":{}}
+    if request.method == 'GET':
+        req_data = request.values # 表单形式
+    elif request.method == 'POST':
+        req_data = request.json # json形式
+    else:
+        res['msg'] = '异常请求(非GET/POST)'
+        res['status'] = -1
+    # return jsonify(result) # 方法①
+    # return json.dumps(res, ensure_ascii=False) # 方法②
     return render_template('index.html')
 
 @app.route("/tmp",methods=["GET","POST"])
@@ -777,8 +817,6 @@ if __name__ == '__main__':
 # */* vim: set expandtab ts=4 sw=4 sts=4 tw=400: */
 ```
 
-- 【2020-8-26】页面测试功能（try it out）对GET/POST无效，传参失败
-    - 已提交issue：[Failed to get parameters by POST method in “try it out” feature](https://github.com/flasgger/flasgger/issues/428)，到【2021-7-19】仍然未解决
 
 
 ### 全局变量
