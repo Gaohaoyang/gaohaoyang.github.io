@@ -317,6 +317,8 @@ mathjax: true
 - ![](https://pic2.zhimg.com/80/v2-2699f1e6d3dd51c7c86cbb9cf0e58af9_720w.jpg)
 - ![](https://pic2.zhimg.com/80/v2-49c7910b5ffa6a492249f49d5af26269_720w.jpg)
 
+- 【2021-7-20】基于neo4j的医疗领域知识图谱问答[demo代码](https://github.com/zhihao-chen/QASystemOnMedicalGraph)
+
 - KB-QA与对话系统
   - **问答系统是信息检索系统的高级形式**，是以问题为驱动的信息获取过程，按QA类别可以分为**WebQA**（Web问答）、**KBQA**（知识库问答）、**CQA**（社区问答）和**DBQA**（阅读理解的QA系统，斯坦福的SQuAD）
   - 对话系统主要关注对话过程，多采用多轮方式进行，主要分为开放**闲聊**的对话系统、**任务驱动**的对话系统、以**知识获取**的对话系统和**信息推荐**的对话系统

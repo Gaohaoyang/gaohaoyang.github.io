@@ -1496,6 +1496,7 @@ Sebastian将QA的研究分为了5个阶段。
 
 ### KB-QA
 
+- 【2021-7-20】基于neo4j的医疗领域知识图谱问答[demo代码](https://github.com/zhihao-chen/QASystemOnMedicalGraph)
 - 【2020-4-22】[KB-QA研究进展](https://www.jianshu.com/p/92ea00b7a4cc)，[图](https://upload-images.jianshu.io/upload_images/9298309-c4a3c66f7965460e.png)
 - ![](https://upload-images.jianshu.io/upload_images/9298309-c4a3c66f7965460e.png)
 
