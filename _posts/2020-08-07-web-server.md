@@ -1307,6 +1307,19 @@ async def read_item(item_id: str, q: str = None, short: bool = False):
 - 【2021-5-13】[机器学习建模与部署--以垃圾消息识别为例](https://kuhungio.me/2019/flask_vue_ml/?utm_source=zhihu&utm_campaign=ml_sys_design#%E5%89%8D%E7%AB%AF-vue), 项目地址 [kuhung/flask_vue_ML](https://github.com/kuhung/flask_vue_ML)
   - ![](https://kuhungio.me/images/flask_vue_ML/flask_vue_ml.jpg)
 
+## 简介
+
+
+前端三要素
+- HTML(结构层) : 超文本标记语言(Hyper Text Markup Language) ，决定网页的结构和内容
+- CSS(表现层) : 层叠样式表(Cascading Style sheets) ，设定网页的表现样式。CSS预处理器：
+  - ①SASS：基于Ruby，通过服务端处理，功能强大。解析效率稿。需要学习 Ruby 语言，上手难度高于LESS。
+  - ②LESS：基于 NodeJS，通过客户端处理，使用简单。功能比 SASS 简单，解析效率也低于 SASS，但在实际开发中足够了，所以后台人员如果需要的话，建议使用 LESS。
+- JavaScript(行为层) : 是一种弱类型脚本语言，其源代码不需经过编译，而是由浏览器解释运行,用于控制网页的行为
+  - ①原生JS开发，也就是让我们按照【ECMAScript】标准的开发方式，简称是ES,特点是所有浏览器都支持。
+  - ②TypeScript是一种由微软开发的自由和开源的编程语言。它是JavaScript的一个超集，而且本质上向这个语言添加了可选的静态类型和基于类的面向对象编程。由安德斯海尔斯伯格（C#、Delphi、TypeScript 之父； .NET 创立者）主导。该语言的特点就是除了具备 ES 的特性之外还纳入了许多不在标准范围内的新特性，所以会导致很多浏览器不能直接支持 TypeScript 语法，需要编译后（编译成 JS ）才能被浏览器正确执行。
+
+【2021-7-21】[Vue快速入门学习笔记(更新ing)](https://www.cnblogs.com/melodyjerry/p/13768594.html)
 
 ## js
 
@@ -1536,25 +1549,34 @@ document.getElementsByClassName('box')[0].style.background = 'red';
 
 ```
 
-
-
 ### JavaScript 框架（库）
 
-- （1）jQuery 库
+前端三大框架：Angular、React、Vue
+- jQuery: 大家熟知的JavaScript框架，优点是简化了DOM操作，缺点是DOM操作太频繁,影响前端性能;在前端眼里使用它仅仅是为了兼容IE6、7、8。
   - jQuery 函数是 $() 函数（jQuery 函数）。jQuery 库包含以下功能：
   - HTML 元素选取、元素操作、CSS 操作、HTML 事件函数、JavaScript 特效和动画、
   - HTML DOM 遍历和修改、AJAX、Utilities
   - 面向对象编程包括 创建对象、原型继承、class继承。
   - 类是对象的类型模板；实例是根据类创建的对象。
-- （2）AngularJs企业级框架
+- Angular: Google收购的前端框架，由一群Java程序员开发，其特点是将后台的MVC模式搬到了前端并增加了模块化开发的理念，与微软合作，采用TypeScript语法开发;对后台程序员友好，对前端程序员不太友好;最大的缺点是版本迭代不合理(如: 1代-> 2代，除了名字，基本就是两个东西;截止发表博客时已推出了Angular6)。
   - 其最为核心的特性为：MVC、模块化、自动化双向数据绑定、语义化标签及依赖注入等。
-- （3）React框架
+- React: Facebook出品，一款高性能的JS前端框架;特点是提出了新概念[虚拟DOM]用于减少真实DOM操作，在内存中模拟DOM操作，有效的提升了前端渲染效率;缺点是使用复杂，因为需要额外学习一门[JSX] 语言。
   - React被称为构建用户接口而提供的Javascript库；主要用来构建UI，其专注于MVC的V部分。
-- （4）vue未来的主流
+- Vue:一款渐进式JavaScript框架，所谓渐进式就是逐步实现新特性的意思，如实现模块化开发、路由、状态管理等新特性。其特点是综合了Angular (模块化)和React (虚拟DOM)的优点;。
   - vue.js 是用来构建web应用接口的一个库，技术上，Vue.js 重点集中在MVVM模式的ViewModel层，它连接视图和数据绑定模型通过两种方式。
-- （5）D3.js
+- Axios :前端通信框架；因为Vue 的边界很明确，就是为了处理DOM，所以并不具备通信能力，此时就需要额外使用一个通信框架与服务器交互；当然也可以直接选择使用jQuery提供的AJAX通信功能。
+- D3.js
   - 数据可视化和图表是Web应用中不可或缺的一部分。d3.js就是最流行的可视化库之一，它允许绑定任意数据到DOM，然后将数据驱动转换应用到Document中。
 
+UI框架
+- Ant-Design：阿里巴巴出品，基于React的UI框架
+- ElementUI、 iview、 ice: 基于Vue的UI框架
+- Bootstrap：Twitter推出的一个用于前端开发
+- AmazeUI：又叫"妹子UI"，一款HTML5跨屏前端框架
+
+JavaScript构建工具
+- Babel: JS编译工具，主要用于浏览器不支持的ES新特性，比如用于编译TypeScript
+- WebPack: 模块打包器，主要作用是打包、压缩、合并及按序加载
 
 ### JavaScript本地储存
 
