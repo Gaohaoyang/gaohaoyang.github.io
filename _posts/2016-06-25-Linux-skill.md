@@ -3,7 +3,7 @@ layout: post
 title:  "Linux开发技能"
 date:   2016-06-25 23:35:00
 categories: 编程语言
-tags: Linux Shell Git yaml github
+tags: Linux Shell Git yaml github 文件服务
 excerpt: Linux环境开发技能总结
 mathjax: true
 ---
@@ -150,6 +150,62 @@ perf既然这么强大，那它的实现原理是什么呢？
   - cat语法：cat [-n]  文件名 （-n ： 显示时，连行号一起输出）
 - tac的功能是将文件从最后一行开始倒过来将内容数据输出到屏幕上。我们可以发现，tac实际上是cat反过来写。这个命令不常用。
   - tac语法：tac 文件名。
+
+### 文件服务
+
+一行命令搭建文件服务
+
+```shell
+# python2
+python -m SimpleHTTPServer 8001
+# python3下直接执行以下命令即可
+cd $your_dir # 要共享的目录
+# 启动文件服务，ip填下本机ip，默认端口8000
+python -m http.server
+python -m http.server 8001 # 指定端口
+nohup python -m http.server -b 10.200.24.101 &>log.txt & 
+# 打开网页: http://10.200.24.101:8000/
+```
+
+注意：
+- 当前目录下不要放index.html，会被服务识别为主页，自动加载
+- http.server建的文件服务器是单线程的，意味着如果多个用户访问会被阻塞，同时只能一个用户访问
+
+多线程改进方案
+
+```python
+import socket
+import SocketServer
+import BaseHTTPServer
+from SimpleHTTPServer import SimpleHTTPRequestHandler
+
+class ForkingHTTPServer(SocketServer.ForkingTCPServer):
+
+   allow_reuse_address = 1
+
+   def server_bind(self):
+       """Override server_bind to store the server name."""
+       SocketServer.TCPServer.server_bind(self)
+       host, port = self.socket.getsockname()[:2]
+       self.server_name = socket.getfqdn(host)
+       self.server_port = port
+
+def test(HandlerClass=SimpleHTTPRequestHandler,
+        ServerClass=ForkingHTTPServer):
+   BaseHTTPServer.test(HandlerClass, ServerClass)
+
+
+if __name__ == '__main__':
+   test()
+```
+
+代码命名为MultiHTTPServer.py 放置到 python的lib库里面, 如Python/2.7/lib/python/site-packages
+
+```shell
+# 多线程文件服务器版本
+python -m MultiHTTPServer.py
+```
+
 
 ### tcpdump常用命令
 
