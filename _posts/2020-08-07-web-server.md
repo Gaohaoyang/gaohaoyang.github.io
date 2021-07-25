@@ -1151,18 +1151,18 @@ if __name__ == '__main__':
     app.run(debug=True)
 ```
 
-web页面代码
+web页面代码 (为了避开jeklly语法冲突，%号和{中间间隔开)
 
 ```html
  <html>
  <head>
-     {% if user %}
+     { % if user % }
         <title> hello {{user}} </title>
         <!-- <title> hello {{user[0]}} </title> -->
         <!-- <title> hello {{user.name}} </title> -->
-    {% else %}
+    { % else % }
          <title> welcome to flask </title>        
-    {% endif %}
+    { % endif % }
  </head>
 
  <body>
