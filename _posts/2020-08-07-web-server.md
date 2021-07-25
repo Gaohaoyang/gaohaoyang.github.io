@@ -1109,9 +1109,7 @@ except PyJWTError as e:
 
 区别
 - 线程之间可以共享内存
-- 
-
-![](https://p1-tt.byteimg.com/origin/pgc-image/a8fe60b01ff7415a9ec130d8fcfcae2e?from=pc)
+- ![](https://p1-tt.byteimg.com/origin/pgc-image/a8fe60b01ff7415a9ec130d8fcfcae2e?from=pc)
 
 
 ### 模板使用
@@ -1120,7 +1118,7 @@ except PyJWTError as e:
 if/for控制语句
 
 前端的Jinja2语法中，if可以进行判断：存在的参数是否满足条件。
-- 跟python很像，只是需要添加\{% %\}和\{% endxx %\}
+- 跟python很像，只是需要添加{ %  % } 和 { % endxx % }
 - ![](https://pic2.zhimg.com/80/v2-7c8b008840b966bee55a1ae71caf5e11_720w.jpg)
 
 ```python
