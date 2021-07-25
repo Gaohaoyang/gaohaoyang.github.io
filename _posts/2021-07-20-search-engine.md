@@ -2,7 +2,7 @@
 layout: post
 title:  "搜索引擎-Search-Engine"
 date:   2021-07-20 21:05:00
-categories: 搜索引擎
+categories: 技术工具
 tags: 搜索 索引 正排 倒排 pagerank 谷歌 Google 百度
 excerpt: 搜索引擎技术汇总
 author: 鹤啸九天
