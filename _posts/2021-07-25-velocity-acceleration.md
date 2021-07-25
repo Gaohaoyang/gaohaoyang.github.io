@@ -737,7 +737,7 @@ if (canvas) {
 
 ![](https://gw.alicdn.com/imgextra/i3/O1CN01ykyUOq1ESniMhv3OO_!!6000000000351-1-tps-655-482.gif)
 
-demo 链接 [https://gaohaoyang.github.io/canvas-practice/26-space-ship/](https://gaohaoyang.github.io/canvas-practice/26-space-ship/)
+demo 链接 [https://gaohaoyang.github.io/canvas-practice/26-space-ship/index.html](https://gaohaoyang.github.io/canvas-practice/26-space-ship/index.html)
 
 源码链接 [https://github.com/Gaohaoyang/canvas-practice/blob/main/src/26-space-ship/index.ts](https://github.com/Gaohaoyang/canvas-practice/blob/main/src/26-space-ship/index.ts)
 
