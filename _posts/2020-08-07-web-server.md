@@ -1197,10 +1197,10 @@ web页面代码 (为了避开jeklly语法冲突，%号和{中间间用-隔开)
       {-% for label,link in links %-}
           <!-- loop获取循环信息，loop.index表示下标, 从1开始 -->
           { % if not loop.first % }|{ % endif % }
-          <a href="{% if link is current_link %}#
-          {% else %}
+          <a href="{ % if link is current_link % }#
+          { % else % }
           {{ link }}
-          {% endif %}
+          { % endif % }
           ">{{ label }}</a>
       {-% endfor %-}
   </nav>
