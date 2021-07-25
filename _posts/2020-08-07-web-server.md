@@ -1168,9 +1168,9 @@ web页面代码
  <body>
      <h1>hello world</h1>
     <ul>
-        {% for index in fruit %}
+        { % for index in fruit % }
             <li>{{ index }}</li>
-        {% endfor %}
+        { % endfor % }
     </ul>
   <!-- good.html -->
     <table>
@@ -1179,30 +1179,30 @@ web页面代码
           <th>商品价格</th>
       </thead>
       <tbody>
-      {% for good in goods %}
+      {  % for good in goods %  }
           <tr>
               <td>{{good.name}}    </td>
               <td>{{good.price}}    </td>
           </tr>
-      {% endfor %}
+      { % endfor % }
       </tbody>
     </table>
   <!-- 临时变量 -->
-  {% set links = [
+  { % set links = [
       ('home',url_for('.home')),
       ('service',url_for('.service')),
       ('about',url_for('.about')),
-    ] %}
+    ] % }
   <nav>
-      {% for label,link in links %}
+      { % for label,link in links % }
           <!-- loop获取循环信息，loop.index表示下标, 从1开始 -->
-          {% if not loop.first %}|{% endif %}
+          { % if not loop.first % }|{ % endif % }
           <a href="{% if link is current_link %}#
           {% else %}
           {{ link }}
           {% endif %}
           ">{{ label }}</a>
-      {% endfor %}
+      { % endfor % }
   </nav>
  </body>
  </html>
