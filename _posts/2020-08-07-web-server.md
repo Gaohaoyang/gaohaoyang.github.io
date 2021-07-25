@@ -1118,7 +1118,7 @@ except PyJWTError as e:
 if/for控制语句
 
 前端的Jinja2语法中，if可以进行判断：存在的参数是否满足条件。
-- 跟python很像，只是需要添加{ %  % } 和 { % endxx % }
+- 跟python很像，只是需要添加：大括号+百分号
 - ![](https://pic2.zhimg.com/80/v2-7c8b008840b966bee55a1ae71caf5e11_720w.jpg)
 
 ```python
