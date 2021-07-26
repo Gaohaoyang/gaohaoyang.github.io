@@ -3,7 +3,7 @@ layout: post
 title:  "图像识别-Image-Recognizer"
 date:   2019-11-08 16:52:00
 categories: 计算机视觉
-tags: 深度学习 计算机视觉 GAN 扫地机器人 自动驾驶 何恺明 CVPR 论文 sota
+tags: 深度学习 计算机视觉 GAN 扫地机器人 自动驾驶 何恺明 CVPR 论文 sota OCR
 excerpt: 图像风格迁移是什么原理？具体如何实施？可以迁移到文本吗？
 mathjax: true
 ---
@@ -13,6 +13,8 @@ mathjax: true
 
 
 # 说明
+
+- 【2021-7-26】免费在线OCR工具 [ocrmaker](http://ocrmaker.com/)
 
 - 汇总计算机视觉的应用案例
 - 【2021-3-26】[视频大脑：视频内容理解的技术详解和应用](https://www.infoq.cn/article/vhIXoD0CAqmojPHeKP5f/)，[极客时间视频](https://time.geekbang.org/dailylesson/detail/100022917),黄君实 奇虎360 人工智能研究院资深研发科学家
