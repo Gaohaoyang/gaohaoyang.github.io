@@ -961,6 +961,8 @@ Mingke： 每一个行业都会诞生属于这个领域的智能服务，金融�
 
 ## NLU
 
+NLU即Natural Language Understanding，负责理解用户的语句输入，一般是做**意图识别**（intent detection）和**槽位抽取**（slots filling）。
+
 - 台大[陈蕴侬](http://vivianchen.idv.tw/)讲解的[对话系统](https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/200602_ConversationalAI.pdf)，语言理解的pipeline，前两者主要通过Classification实现，第三个是Sequence Labeling
 1. **Domain Identification**（分类）： Requires Predefined Domain Ontology
   - 如：find a good eating place for taiwanese food
@@ -973,6 +975,9 @@ Mingke： 每一个行业都会诞生属于这个领域的智能服务，金融�
 
 【2021-5-31】自然语言理解的语义表示主要有**分布**语义表示 (Distributional semantics)、**框架**语义表示 (Frame semantics) 和**模型论**语义表示 (Model-theoretic semantics) 三种方式。在智能对话交互中，自然语言理解一般采用的是 frame semantics 表示的一种变形，即采用**领域**（domain）、**意图**（intent）和**属性槽**（slots）来表示语义结果，如[图](https://img-blog.csdn.net/20171129172354204), 摘自：[阿里智能对话交互技术实践与创新](https://blog.csdn.net/qq_40027052/article/details/78672907)
 ![](https://img-blog.csdn.net/20171129172354204)
+
+开源代码
+- [Rasa_NLU](https://github.com/RasaHQ/rasa_nlu) 英文版、[Rasa_NLU_Chi](https://github.com/crownpku/Rasa_NLU_Chi) 中文版
 
 ### 意图识别
 
@@ -1247,12 +1252,27 @@ GUS对话系统，是 Genial Understander System 的缩写，可以追溯到1977
 - ![](https://picb.zhimg.com/80/v2-763da7952c607ed3065af3cacdd9c7d8_720w.jpg)
 
 对话管理的任务大致有下面一些：
-- `对话状态维护`（dialog state tracking, `DST`）
+- `对话状态维护`（`DST`，dialog state tracking）
   - 维护 & 更新对话状态
-- `生成系统决策`（dialog policy）`DP`
+- `生成系统决策`（`DP`或`DPL`，dialog policy learning）
   - 根据 DST 中的对话状态（DS），产生系统行为（dialog act），决定下一步做什么dialog act 可以表示观测到的用户输入（用户输入 -> DA，就是 NLU 的过程），以及系统的反馈行为（DA -> 系统反馈，就是 NLG 的过程）
 - 作为接口与后端/任务模型进行交互
 - 提供语义表达的期望值（expectations for interpretation）interpretation: 用户输入的 internal representation，包括 speech recognition 和 parsing/semantic representation 的结果
+
+dialogue management的种类（从简单到复杂）：
+- （1）规则版 **Rule Based**：基于规则的方法虽然可以较好利用先验知识从而可以较好解决冷启动等问题，但是需要太多人工、非常不灵活、扩展性和移植性很差、不能同时追踪多种状态。
+  - 优点：准确、可以实现基于配置的可扩展。
+  - 缺点：难以真正扩展，复杂场景的代码可能非常复杂。
+- （2）映射版 **Switch statement**： 即简单定义一些query模板对应的response。缺点：总是用户拥有主动权，机器不会主动问。也没有使用对话上下文信息。
+- （3）有限状态机 **Finite state machine**：相对强大很多，可以覆盖大部分的对话。缺点：灵活性比较差，必须按照状态机规定的按部就班；相对复杂的对话，有限状态机的构图可能会变得很难维护。
+  - 简单地考虑点和边表示的内容，可以分成两种：
+    - 1.点表示数据；边表示操作；
+    - 2.点表示操作；边表示数据。
+  - 开源工具：[transitions](https://github.com/pytransitions/transitions)
+  - 基于状态机的对话管理：[Dialogue management using Finite State Models (2002)](http://www.coli.uni-saarland.de/~korbay/Courses/DM-SS02/DM-slides/hagen-fsm-slides.pdf), 详细介绍FSM的演进过程，优缺点。
+- （4）基于目标 **Goal based**：考虑用户每次对话的最终目标（goal），比如订餐馆、设定导航等。比如当机器人收到用户关于餐馆的问题时，可以设定intent是looking_for_restaurant，goal是finding_restaurant。然后机器人可以知道要完成这个goal，需要用户再提供哪些信息，后续就可以去询问关于这些信息的问题。缺点：构建难度相对较大，开源工具少。
+- （5）基于置信度 **Belief based**：前提是：现实中NLU模块不可能完全正确。因此dm需要考虑把信念（概率分布）加进来。
+参考：[任务型对话系统综述](https://applenob.github.io/dialog_sys/dialog_sys/)
 
 对话引擎根据对话按对话由谁主导可以分为三种类型：
 - **系统**主导
@@ -1266,6 +1286,75 @@ GUS对话系统，是 Genial Understander System 的缩写，可以追溯到1977
   - Prompts 又分为：
     - **open prompt**（如 ‘How may I help you‘ 这种，用户可以回复任何内容 ）
     - **directive prompt**（如 ‘Say yes to accept call, or no’ 这种，系统限制了用户的回复选择）
+
+### DST
+
+对话状态追踪(Dialogue State Tracker)，用于记录和表示当前对话状态。
+- 输入：各种可以获取的信息，包括所有的用户utterance、NLU结果、系统动作、以及外部知识库。
+- 输出：当前对话的状态评估s。
+
+由于ASR、SLU等组件的识别结果往往会出错，所以常常会输出N-best列表（带置信度概率），这就要求DST拥有比较强的鲁棒性。所以DST往往输出各个状态的概率分布，b(s)。
+
+根据DST对NLU输出信息的保留程度，状态维护又分两种形式：
+- **1-Best**：只保留NLU结果中置信度**最高**的槽位，维护对话状态时，只需等同于槽位数量的空间（k）。
+- **N-Best**： 保留每个槽位NLU结果中**N-best**的结果，还要维护一个槽位组合在一起的整体（overall）置信度。
+
+参考：[任务型对话系统综述](https://applenob.github.io/dialog_sys/dialog_sys/)
+
+#### 状态表示
+
+理论上完整的状态表示，需要维护的状态数是：所有slot的所有可能值的的累乘。因为所有slot搭配都有可能出现。
+- 示例：咖啡种类是N1种，即3种，包括Frappuccino（默认是冰的）、Latte、Mocha。温度N2种，即梁两种：Iced、Hot。因此这里需要维护的状态总数是2*3=6。
+![](https://applenob.github.io/dialog_sys/dialog_sys/all_states.png)
+
+以上方法容易形成组合爆炸，简化方法：
+
+##### （1）**隐藏信息状态模型** Hidden Information State Model (HIS)
+
+- 决策树是对特征空间的切割；HIS是对状态空间的切割。每轮对话，当前空间切分成两个partition。最后需要维护的个数是2的n次方个（切割后空间partition的个数）。处在同一个partition里的状态默认概率相同。
+- ![](https://applenob.github.io/dialog_sys/dialog_sys/his.png)
+- 示例：第一轮判断类型是Latte的概率很高，所以可以忽略Frappuccino和Mocha的各自分别（这二者合并成一个partition）。最终需要维护的partition数量为2^2=4。
+- 评价
+  - 优点：可以对任何两种状态之间的转换进行建模。
+  - 缺点：只有前n个状态被追踪。
+- 资料：[The hidden information state approach to dialog management.](http://farm2.user.srcf.net/research/papers/ygkm09.pdf)
+
+##### (2) **对话状态的贝叶斯更新** Bayesian Update of Dialogue States (BUDS)
+
+- 假设不同的槽位之间的取值是相互独立的, 
+- ![](https://applenob.github.io/dialog_sys/dialog_sys/buds.png)
+- 举例：需要维护的是N1+N2个状态数，这里即3+2=5种。
+- 评价
+  - 优点：可以追踪所有可能的状态。
+  - 缺点：不能处理复杂的转换。
+- 资料：[Bayesian update of dialogue state for robust dialogue systems.](https://www.researchgate.net/profile/Steve_Young3/publication/224762279_Bayesian_update_of_dialogue_state_for_robust_dialogue_systems/links/0deec51d918e358316000000/Bayesian-update-of-dialogue-state-for-robust-dialogue-systems.pdf)
+
+#### 状态跟踪
+
+##### Hand Crafted
+ 
+输入上一个状态和当前的最佳（1-best）NLU结果，输出目前状态。
+*   优点：不需要训练数据，适合冷启动。
+*   缺点：需要人力手动设计规则，不能从实际对话中学习。不能充分挖掘NLU的n-best的结果。
+    
+ 
+##### [Neural Belief Tracker](https://applenob.github.io/dialog_sys/dialog_sys/#Neural-Belief-Tracker)
+
+*   三个输入：上一次的系统动作+用户输入+候选的slot名-值对
+*   输出：是否选用当前的候选slot对。
+    
+ 
+##### [资料](https://applenob.github.io/dialog_sys/dialog_sys/#%E8%B5%84%E6%96%99-2 "资料")
+ 
+*   [Global-Locally Self-Attentive Dialogue State Tracker (2018)](https://arxiv.org/pdf/1805.09655.pdf)
+*   [Neural Belief Tracker: Data-Driven Dialogue State Tracking ,Mrkšić et al., ACL 2017](https://arxiv.org/pdf/1606.03777.pdf)
+
+### DPL
+
+对话策略学习（Dialogue Policy Learning），通过当前的状态表示，做出响应动作的选择。常用监督学习+强化学习。
+
+[DSTC：Dialog System Technology Challenge](https://www.microsoft.com/en-us/research/event/dialog-state-tracking-challenge/
+)
 
 ### 实现方法
 
