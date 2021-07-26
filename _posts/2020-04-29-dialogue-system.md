@@ -1307,10 +1307,13 @@ dialogue management的种类（从简单到复杂）：
 - 示例：咖啡种类是N1种，即3种，包括Frappuccino（默认是冰的）、Latte、Mocha。温度N2种，即梁两种：Iced、Hot。因此这里需要维护的状态总数是2*3=6。
 ![](https://applenob.github.io/dialog_sys/dialog_sys/all_states.png)
 
+对话状态数跟意图和槽值对的数成指数关系，维护所有状态的一个分布非常浪费资源,好的状态表示法来减少状态维护的资源开销
+
 以上方法容易形成组合爆炸，简化方法：
 
 ##### （1）**隐藏信息状态模型** Hidden Information State Model (HIS)
 
+- 使用状态**分组**和状态**分割**减少跟踪复杂度。其实就是类似于二分查找、剪枝。
 - 决策树是对特征空间的切割；HIS是对状态空间的切割。每轮对话，当前空间切分成两个partition。最后需要维护的个数是2的n次方个（切割后空间partition的个数）。处在同一个partition里的状态默认概率相同。
 - ![](https://applenob.github.io/dialog_sys/dialog_sys/his.png)
 - 示例：第一轮判断类型是Latte的概率很高，所以可以忽略Frappuccino和Mocha的各自分别（这二者合并成一个partition）。最终需要维护的partition数量为2^2=4。
@@ -1321,7 +1324,7 @@ dialogue management的种类（从简单到复杂）：
 
 ##### (2) **对话状态的贝叶斯更新** Bayesian Update of Dialogue States (BUDS)
 
-- 假设不同的槽位之间的取值是相互独立的, 
+- 假设不同的槽位之间的取值是相互独立的, 或者具有非常简单的依赖关系。这样就将状态数从意图和槽值数的指数减少到了线性。
 - ![](https://applenob.github.io/dialog_sys/dialog_sys/buds.png)
 - 举例：需要维护的是N1+N2个状态数，这里即3+2=5种。
 - 评价
@@ -1330,6 +1333,8 @@ dialogue management的种类（从简单到复杂）：
 - 资料：[Bayesian update of dialogue state for robust dialogue systems.](https://www.researchgate.net/profile/Steve_Young3/publication/224762279_Bayesian_update_of_dialogue_state_for_robust_dialogue_systems/links/0deec51d918e358316000000/Bayesian-update-of-dialogue-state-for-robust-dialogue-systems.pdf)
 
 #### 状态跟踪
+
+[一文看懂任务型对话系统中的状态追踪（DST）](https://mp.weixin.qq.com/s?__biz=MzIzMDM1Mjk1OA==&mid=2247483944&idx=1&sn=4902a121df912fd567e915e552cee353&scene=19#wechat_redirect)
 
 ##### Hand Crafted
  
