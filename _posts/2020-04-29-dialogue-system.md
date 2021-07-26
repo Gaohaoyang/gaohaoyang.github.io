@@ -1992,6 +1992,66 @@ An example of typical input would be something like this:
 - 【2020-9-21】一篇解决对话无监督评估的论文：[How NOT To Evaluate Your Dialogue System: An Empirical Study of
 Unsupervised Evaluation Metrics for Dialogue Response Generation](https://arxiv.org/pdf/1603.08023.pdf)，[论文引用图谱](https://www.connectedpapers.com/main/129cbad01be98ee88a930e31898cb76be79c41c1/How-NOT-To-Evaluate-Your-Dialogue-System-An-Empirical-Study-of-Unsupervised-Evaluation-Metrics-for-Dialogue-Response-Generation/graph)
 
+## 对话平台
+
+### convlab 简介
+
+【2021-7-26】[convlab探索记](https://applenob.github.io/dialog_sys/convlab/)
+
+**ConvLab**是微软和清华开源的一个**多领域**的**端到端**对话系统平台。旨在为对话系统的研究人员提供一个可以快速启动的实验平台。为此该平台提供了**两个标注好的数据集、一些算法的实现（包括pipeline和end2end）、相关的预训练模型和其他可复用的组件**。另外，ConvLab也是DSTC8 track1的官方平台。
+*   ConvLab Code Repository: [https://github.com/ConvLab/ConvLab](https://github.com/ConvLab/ConvLab)
+*   ConvLab Paper: [https://arxiv.org/pdf/1904.08637.pdf](https://arxiv.org/pdf/1904.08637.pdf)
+
+[](https://applenob.github.io/dialog_sys/convlab/#%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84 "整体结构")整体结构
+ 
+[![image.png](https://applenob.github.io/dialog_sys/convlab/1.png)](https://applenob.github.io/dialog_sys/convlab/1.png)
+ 
+ConvLab的实现基于[SLM-Lab](https://github.com/kengz/SLM-Lab)，因此继承了其有关强化学习的术语：**AEB**（Agent、Environment、Body），具体参考[文档](https://kengz.gitbooks.io/slm-lab/content/)。
+ 
+ConvLab支持：**Multi-agent learning**、**Multi-task learning**和**Role play**。
+ 
+### [](https://applenob.github.io/dialog_sys/convlab/#%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE "参数配置")参数配置
+ 
+[![image.png](https://applenob.github.io/dialog_sys/convlab/2.png)](https://applenob.github.io/dialog_sys/convlab/2.png)
+ 
+整体的参数配置可以参考上图（**横着看**）：可以是按照pipeline所有的模块一个个配置，也可以配置一个完整的end2end，还有其他支持的组合。
+ 
+[![image.png](https://applenob.github.io/dialog_sys/convlab/3.png)](https://applenob.github.io/dialog_sys/convlab/3.png)
+ 
+类似的，环境的构建也是需要构造支持的模块参数组合。
+ 
+[](https://applenob.github.io/dialog_sys/convlab/#%E4%BD%BF%E7%94%A8%E7%9A%84%E6%A8%A1%E5%9E%8B "使用的模型")使用的模型
+ 
+*   NLU
+  *   Semantic Tuple Classifier (STC) `*` [pdf](http://mi.eng.cam.ac.uk/~sjy/papers/mgjk09.pdf) ： 支持多领域、多意图。
+  *   OneNet `*` [pdf](https://arxiv.org/pdf/1801.05149.pdf)：可以解决OOV问题。
+  *   MILU（综合了上面二者）：可同时处理多意图和OOV。
+*   DST
+  *   rule based （类似于DSTC的baseline）
+  *   Word-level Dialog State Tracking（从用户语句直接更新对话状态，免去NLU）
+  *   MDBT `*` [pdf](https://arxiv.org/pdf/1807.06517.pdf)
+*   DPL（系统策略）
+  *   DQN `*` [pdf](https://arxiv.org/pdf/1312.5602.pdf)
+  *   REINFORCE `*` [pdf](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.31.2545&rep=rep1&type=pdf)
+  *   PPO `*` [pdf](https://arxiv.org/pdf/1707.06347.pdf)
+*   NLG
+  *   a template-based model
+  *   SC-LSTM `*` [pdf](https://arxiv.org/pdf/1508.01745.pdf)
+  *   Word-level Policy (从对话状态直接到response)
+  *   seq2seq (dialogue state encoder + database query result encoder) `*` [pdf](https://arxiv.org/pdf/1810.00278.pdf)
+*   用户策略（用户模拟）
+  *   agenda-based `*` [pdf](http://mi.eng.cam.ac.uk/~sjy/papers/stwy07.pdf)
+  *   data-driven : HUS `*` [pdf](https://arxiv.org/pdf/1811.04369.pdf)
+  *   End2End
+  *   Mem2Seq `*` [pdf](https://www.aclweb.org/anthology/P18-1136.pdf)
+  *   Sequicity `*` [pdf](https://www.aclweb.org/anthology/P18-1133.pdf) ：为了支持多领域，在切换领域时需要重置belief span。
+
+数据集
+- MultiWOZ
+  - Multiwoz-a large-scale multi-domain wizard-of-oz dataset for task-oriented dialogue modelling. * [pdf](https://arxiv.org/pdf/1810.00278.pdf)
+  - MultiWoz的主任务是帮助游客解决各类问题。问题又分为7个子领域：Attraction, Hospital, Police, Hotel, Restaurant, Taxi, Train。一共有10438个对话，单领域的平均轮数是8.93；跨领域的平均轮数是15.39。
+- Movie
+  - 来自微软对话挑战赛，一共2890个对话，平均轮数7.5。
 
 ## 资料
 
