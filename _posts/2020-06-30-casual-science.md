@@ -304,6 +304,10 @@ mathjax: true
 - 推理（inference）是“使用离理智从某些前提产生结论”的行动。因果推理，也叫做反事实推理。**反事实推理**，就是解决 what if 之类的问题。举个例子，和家人的旅行之前，肯定会有一些疑问，这些疑问就叫做反事实疑问，获取反事实疑问的结果叫做因果推理。
   - ![](https://pic3.zhimg.com/80/v2-6505b93cc1a8df5a9370f01dc8c15d0a_1440w.jpg)
 
+## 简介
+
+因果科学的工作大致分为**基础因果假设及框架**（fundamental causal assumption and framework）、**因果学习**（causal learning）、**因果推断**（causal reasoning/inference）和**应用系统**，其中因果学习又可以分为**因果结构学习**（causal discovery/causal structure learning）和**因果表示学习**（causal representation learning）。
+
 ## 结构因果模型（SCM）
 
 研究 𝑋 和 𝑌 的因果关系
@@ -1239,12 +1243,68 @@ CLD中的变量基于以下的直觉：
 
 数据集、开源代码及研究框架。
 
+【2021-7-26】[因果科学算法、框架、数据集汇总](https://swarma.org/?p=27736), 因果科学的工作大致分为
+- **基础因果假设及框架**（fundamental causal assumption and framework）
+- **因果学习**（causal learning）
+  - 因果**结构**学习（causal discovery/causal structure learning）
+  - 因果**表示**学习（causal representation learning）
+- **因果推断**（causal reasoning/inference）
+- **应用系统**
+
+### 概率编程框架
+
+|类型|框架名称|所属团队|特性|
+|---|---|---|---|
+|概率编程框架|[pyro](http://pyro.ai/)|Uber|基于pytorch|
+|概率编程框架|[pymc3](http://docs.pymc.io/)|ThePyMC DeveIopment Team|基于theano|
+|概率编程框架|[pgmPY](https://github.com/pgmpy/pgmpy)|AnkurAnkan|概率图|
+|概率编程框架|[pomegranate](https://github.com/jmschrei/pomegranate)|JacobSchreiber|面向图模型和概率模型，基于cpython|
+
+
+### 工具包
+
+|类型|工具包名称|维护团队|特性|
+|---|---|---|---|
+|因果结构学习|[TETRAD](https://github.com/cmu-phil/tetrad)|卡内基梅隆因果发现中心(CCD)|生物医学|
+|因果结构学习|[CausalDiscoveryToolbox](https://github.com/FenTechSolutions/CausalDiscoveryToolbox)|FenTechSolutions|DAG/Pair生成器、数据集接囗、独立性分析、因果结构学习、评价指标|
+|因果结构学习|[gCastle](https://github.com/huawei-noah/trustworthyAI/tree/master/gcastle)|华为诺亚|数据生成和处理、因果结构学习、评价指标|
+|因果结构学习|[tigramite](https://github.com/jakobrunge/tigramite)|JakobRunge|从时间序列学习|
+|因果推断|[Ananke](https://ananke.readthedocs.io/en/latest/)|TheAnankeTeam|集成了ID算法进行do演算|
+|因果推断|[EconML](https://github.com/microsoft/EconML)|微软|计量经济学|
+|因果推断|[dOWhy](https://github.com/microsoft/dowhy)|微软|支持中介分析|
+|因果推断|[causalml](https://github.com/uber/causalml)|Uber|营销增益|
+|因果推断|[WhyNot](https://whynot.readthedocs.io/en/latest/)|JohnMiller|提供了模拟器和环境|
+|因果推断|[Causallmpact](https://github.com/google/CausalImpact)|谷歌|时间序列因果效应估计，如广告宣传，对点击量的提升，R语言|
+|因果推断|[Causal-Curve](https://github.com/ronikobrosly/causal-curve)|Kobrosly,R、W.|估计连续型干预变量，如价格、时间、收入|
+|因果推断|[grf](https://github.com/grf-labs/grf)|斯坦福grf-lab|R语言|
+|因果推断|[dosearch](https://cran.r-project.org/web/packages/dosearch/index.html)|SanttuTikka|R语言|
+|端到端|[causalnex](https://github.com/quantumblacklabs/causalnex)|QuantumBlack|集成因果结构学习、领域专家调整、因果推断，但版本是0．10．0|
+
+
 ### 数据集
  
 由于反事实的结果永远无法被观察到，因此很难找到一个完全满足实验要求的数据集，即具有基本真实数据集 (ITE) 的观测数据集。
  
 现在很多研究中使用到的数据集基本上都是半人工合成的数据集，合成的规则不尽相同，如IHDP数据集，是从随机数据集中按照一定的生成过程生成其观测结果，并去除一个有偏子集来模拟观测数据集中的选择偏差。一些数据集，如Jobs数据集，将随机数据集和观察控制数据集结合起来，产生选择偏差。
  
+
+数据集
+
+|类型|工具包名称|维护团队|特性|
+|---|---|---|---|
+|因果推断数据集|[MIMIC II/III Data](https://archive.physionet.org/mimic2/),[1.4](https://physionet.org/content/mimiciii/1.4/)|PhysioNet|ICU数据|
+|因果推断数据集|[Advertisement Data](https://research.google/pubs/pub41854/)|谷歌|广告|
+|因果推断数据集|[Geo experiment data](https://research.google/pubs/pub45950/)|谷歌|地理数据|
+|因果推断数据集|[Economic data for Spanish regions](https://www.aeaweb.org/articles?id=10.1257/000282803321455188)|-|没有Groundtruth|
+|因果推断数据集|[Californa’s Tobacco Control Program](https://economics.mit.edu/files/11859)|-|-|
+|因果推断数据集|[Air Quality Data](https://www.aeaweb.org/articles?id=10.1257/aer.101.6.2687)|-|-|
+|因果推断数据集|[Monetary POlicy Data](https://www.tandfonline.com/doi/abs/10.1080/01621459.2018.1491403?journalCode=uasa20)|-|-|
+|因果发现数据集|见表下方[介绍](https://arxiv.org/abs/2102.05829), 真实数据集，合成数据集等|-|-|
+|因果推断基准|[JustCause](https://justcause.readthedocs.io/en/latest/)|Maximilian Franz, Florian Wilhelm|支持IHDP,IBM ACIC等数据集和STOA算法|
+|因果发现基准|[Causeme](https://causeme.uv.es/)|巴伦西亚大学图像和信号处理组，德国宇航中心JAKOBRUNGE|多为时间序列|
+
+[郭若城因果算法总结](https://github.com/rguo12/awesome-causality-algorithms)
+
 **目前可用基准数据集**
  
 *   [IHDP](http://www.mit.edu/~fredrikj/files/ihdp_100.tar.gz)
