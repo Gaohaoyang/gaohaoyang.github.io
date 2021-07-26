@@ -3,7 +3,7 @@ layout: post
 title:  "用户模拟器-User Simulator"
 date:   2020-08-12 20:46:00
 categories: 深度学习
-tags: 对话系统 用户模拟器
+tags: 对话系统 用户模拟器 性格模拟
 excerpt: 对话系统之用户模拟器专题
 author: 鹤啸九天
 mathjax: true
@@ -14,6 +14,7 @@ mathjax: true
 
 # 总结
 
+- 【2021-7-26】[机器人性格综述](https://max.book118.com/html/2017/0525/109104518.shtm)
 - 【2019-8-5】阿里小蜜：[最新综述：对话系统之用户模拟器](https://blog.csdn.net/c9yv2cf9i06k2a9e/article/details/98549007)
 - 资料
   - 论文1《A User Simulator for Task-Completion Dialogues》
