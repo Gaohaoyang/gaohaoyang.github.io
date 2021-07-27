@@ -963,11 +963,15 @@ DST 主要分为三类方法：基于人工规则、基于生成式模型和基�
 - 类似的还有[QFSM](http://qfsm.sourceforge.net/download.html)：A graphical tool for designing finite state machines
 - ![](https://www.ibm.com/developerworks/cn/linux/l-fsmachine/image/2.jpg)
 
+#### transitions库
 
 **Python版本**
 
-- [Transitions](https://github.com/pytransitions/transitions)
+- [Transitions](https://github.com/pytransitions/transitions), 扩展插件：异步状态机 [transitions-anyio](https://github.com/pytransitions/transitions-anyio), 支持web形式展示、编辑
 - [Python的Transitions库实现有限状态机(FSM)](https://www.jianshu.com/p/decf86e0e420)
+- [python裸写状态机](https://www.cnblogs.com/21207-iHome/p/6085334.html)
+- [transitions-gui](https://pypi.org/project/transitions-gui/)，基于tornado开发的状态机编辑web页面
+  - ![](https://warehouse-camo.ingress.cmh1.psfhosted.org/af8b413dd77427b0d0f37745234a371c7d704c40/68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f616c656e65756d2f7472616e736974696f6e732d6775692f302e312e302f646f632f696d672f696e697469616c2d766965772e706e67)
 
 ![](https://upload-images.jianshu.io/upload_images/618241-70acdf59c5f312c8.png)
 
@@ -977,12 +981,103 @@ DST 主要分为三类方法：基于人工规则、基于生成式模型和基�
 conda install transitions graphviz
 ```
 
+transitions库把一个完整的状态机分为执行器和控制器2部分。
+- **执行器**：就是在指定状态下分别干什么，各种算法都将装在此处
+- **控制器**：就是通过外界的动作出发来切换不同的状态。达到想让程序干啥就干啥的目的。状态切换并非状态1->状态2这么简单，还涉及到触发切换后准备阶段、退出旧状态阶段、进入新状态阶段、处于新状态阶段等等
+
+一个状态机控制器最起码应包括几个内容：
+1.控制器要控制哪个执行器 model=tracer
+2.整个状态机都有哪些状态states=states_lst
+3.状态间切换的触发条件transitions=transitions_lst
+
+[python状态机transitions库的示例分析](https://www.yisu.com/zixun/456499.html)
+
+状态机
+- state：状态节点
+- transition：用于从一个状态节点移动到另一个状态节点
+
+state可以指定：
+- name：状态节点的名字，必须指定。
+- on_enter：进入该状态节点会产生的事件（注意，初始节点不会调用，因为已经进入了。见【验证代码】）
+- on_exit：退出该状态节点会产生的事件
+
+transition需要指定三个东西：
+- trigger：表示transition的名字（注意，不能和Number类中方法重名了）
+- source：原状态节点
+- dest：目标转态节点
+
+
+```python
+from transitions import State
+zero = '0'
+one = State('1')
+one = State('1', on_enter=['hello'], on_exit=['hello'])
+two = {'name':'2'}
+two = {'name':'2', 'on_enter':['hello'], 'on_exit':['hello']}
+# ----- 状态 ------
+machine.add_states(zero) # 添加一个
+machine.add_states([one, two]) # 添加多个
+# 一次性定义
+states = [
+    {'name':'0'},
+    {'name':'1'},
+    {'name':'2', 'on_enter':['hello'], 'on_exit':['hello']},
+]
+# ---- 转移条件 -----
+machine.add_transition('zero_to_one', source='0', dest='1')    # 有效
+machine.add_transition('zero_to_one', source='1', dest='2')    # 无效
+# 一次性定义
+# way1
+transitions = [
+    { 'trigger': 'zero_to_one', 'source': '0', 'dest': '1' },
+    { 'trigger': 'zero_to_two', 'source': '0', 'dest': '2' },
+    { 'trigger': 'one_to_two', 'source': '1', 'dest': '2' },
+    { 'trigger': 'any_to_zero', 'source': '*', 'dest': '0' },   # 任意前状态 '*'
+]
+# way2
+transitions = [
+    ['zero_to_one', '0', '1' ],
+    ['one_to_two', '1', '2' ],
+    ['any_to_zero', '*', '0' ],    # 任意前状态 '*'
+]
+
+# ----- 定义状态机 -----
+from transitions import Machine
+
+class Number(object):
+    def hello(self):
+        print('hello')
+    pass
+    
+number = Number()
+machine = Machine(model=number, states=states, initial=states[0]['name'], transitions=transitions)
+
+# 得到了两个东西，一个是状态机machine，一个是具体的实体对象number，之后设定状态机是用machine，运行状态机是用具体的实体对象number。
+
+now_state = number.state
+print('当前状态：', now_state)
+print('判断当前状态：', number.is_0()) # 格式：is_{状态名}
+number.to_2() # 强行移动状态 格式：to_{状态名}
+
+machine.get_triggers('0') # 获取到某个状态的transition
+# ['to_0', 'to_1', 'to_2', 'zero_to_one', 'any_to_zero']
+
+# 调用transition
+number.zero_to_one() # 方法①
+number.trigger('zero_to_one') # 方法②
+
+```
+
+
 
 - Machine示例
 
 ```python
-from transitions import Machine
-# 定义模型
+from transitions import Machine   #不嵌套
+#from transitions.extensions import HierarchicalMachine as Machine # 嵌套
+#from transitions.extensions.nesting import NestedState
+
+# 定义模型 （执行器）
 class AModel(object):
     def __init__(self):
         self.sv = 0  # state variable of the model
@@ -1005,6 +1100,7 @@ class AModel(object):
 model = AModel()
 # 状态集合 init transitions model 
 list_of_states = ['sA', 'sB', 'sC', 'sD']
+# 控制器
 machine = Machine(model=model, states=list_of_states, initial='sA',
                   ordered_transitions=True, before_state_change='on_exit',
                   after_state_change='on_enter')
@@ -1012,7 +1108,7 @@ machine = Machine(model=model, states=list_of_states, initial='sA',
 for i in range(0, 10):
     print('iter is: ' + str(i) + " -model state is:" +  model.state)
     model.sv = i
-    model.poll()
+    model.poll() # 用执行器进行切换
 ```
 - GraphMachine示例，可以画图
 
@@ -1020,10 +1116,11 @@ for i in range(0, 10):
 from transitions.extensions import GraphMachine
 # 定义状态集合
 states = ['first', 'second']
+
 # 定义转移集合
 transitions = [
     ['any_trigger', 'first', 'first'],
-    ['anything', '*', 'second'],
+    ['anything', '*', 'second'], # * 表示任何位置
 ]
 machine = GraphMachine(states=states, transitions=transitions, initial='first',
                        auto_transitions=False, show_conditions=True)
