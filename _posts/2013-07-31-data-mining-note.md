@@ -57,20 +57,20 @@ mathjax: true
     - 中级方法：对数据间关系的强弱进行度量，如完全相关，不完全相关等。
     - 高级方法：将数据间的关系转化为模型，并通过模型对未来的业务发展进行预测。
 
-Read more: http://bluewhale.cc/2016-06-30/analysis-of-correlation.html#ixzz6fwTnlB2v
+[Read more](http://bluewhale.cc/2016-06-30/analysis-of-correlation.html#ixzz6fwTnlB2v)
 
 
 - （1）协方差及协方差矩阵
     - 协方差用来衡量两个变量的总体误差，如果两个变量的变化趋势一致，协方差就是正值，说明两个变量正相关。如果两个变量的变化趋势相反，协方差就是负值，说明两个变量负相关。如果两个变量相互独立，那么协方差就是0，说明两个变量不相关。
-        - ![](http://bluewhale.cc/wp-content/uploads/2016/06/%E5%8D%8F%E6%96%B9%E5%B7%AE%E5%85%AC%E5%BC%8F.jpg)
+        - [img](http://bluewhale.cc/wp-content/uploads/2016/06/%E5%8D%8F%E6%96%B9%E5%B7%AE%E5%85%AC%E5%BC%8F.jpg) ![](http://bluewhale.cc/wp-content/uploads/2016/06/%E5%8D%8F%E6%96%B9%E5%B7%AE%E5%85%AC%E5%BC%8F.jpg)
     - 协方差只能对两组数据进行相关性分析，当有两组以上数据时就需要使用协方差矩阵。
-        - ![](http://bluewhale.cc/wp-content/uploads/2016/06/%E5%8D%8F%E6%96%B9%E5%B7%AE%E7%9F%A9%E9%98%B5%E5%85%AC%E5%BC%8F.jpg)
+        - [img](http://bluewhale.cc/wp-content/uploads/2016/06/%E5%8D%8F%E6%96%B9%E5%B7%AE%E7%9F%A9%E9%98%B5%E5%85%AC%E5%BC%8F.jpg) ![](http://bluewhale.cc/wp-content/uploads/2016/06/%E5%8D%8F%E6%96%B9%E5%B7%AE%E7%9F%A9%E9%98%B5%E5%85%AC%E5%BC%8F.jpg)
     - 协方差通过数字衡量变量间的相关性，正值表示正相关，负值表示负相关。但无法对相关的密切程度进行度量。当我们面对多个变量时，无法通过协方差来说明那两组数据的相关性最高。要衡量和对比相关性的密切程度，就需要使用下一个方法：**相关系数**。
 - （2）相关系数
-    - 相关系数(Correlation coefficient)是反应变量之间关系密切程度的统计指标，相关系数的取值区间在1到-1之间。1表示两个变量完全线性相关，-1表示两个变量完全负相关，0表示两个变量不相关。数据越趋近于0表示相关关系越弱。
-        - ![](http://bluewhale.cc/wp-content/uploads/2016/06/%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0%E5%85%AC%E5%BC%8F.jpg)
-        - ![](http://bluewhale.cc/wp-content/uploads/2016/06/Sxy%E5%85%AC%E5%BC%8F.jpg)
-        - ![](http://bluewhale.cc/wp-content/uploads/2016/06/Sx%E5%85%AC%E5%BC%8F.jpg)
+    - **相关系数**(Correlation coefficient)是反应变量之间关系密切程度的统计指标，相关系数的取值区间在1到-1之间。1表示两个变量完全线性相关，-1表示两个变量完全负相关，0表示两个变量不相关。数据越趋近于0表示相关关系越弱。
+        - [img](http://bluewhale.cc/wp-content/uploads/2016/06/%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0%E5%85%AC%E5%BC%8F.jpg) ![](http://bluewhale.cc/wp-content/uploads/2016/06/%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0%E5%85%AC%E5%BC%8F.jpg)
+        - [img](http://bluewhale.cc/wp-content/uploads/2016/06/Sxy%E5%85%AC%E5%BC%8F.jpg) ![](http://bluewhale.cc/wp-content/uploads/2016/06/Sxy%E5%85%AC%E5%BC%8F.jpg)
+        - [img](http://bluewhale.cc/wp-content/uploads/2016/06/Sx%E5%85%AC%E5%BC%8F.jpg) ![](http://bluewhale.cc/wp-content/uploads/2016/06/Sx%E5%85%AC%E5%BC%8F.jpg)
     - 缺点是无法利用这种关系对数据进行预测，简单的说就是没有对变量间的关系进行提炼和固化，形成模型。要利用变量间的关系进行预测，需要使用到下一种相关分析方法，回归分析。
     - **pearson**(皮尔逊), **kendall**（肯德尔）和**spearman**（斯伯曼/斯皮尔曼）三种相关分析方法有什么异同
     - （2.1）**pearson**(皮尔逊) **线性**相关系数
@@ -199,8 +199,8 @@ for ix in np.arange(n):
 
 - 皮尔逊相关系数( Pearson correlation coefficient），又称**皮尔逊**积矩相关系数（Pearson product-moment correlation coefficient，简称 **PPMCC**或**PCCs**）。用于衡量两个变量X和Y之间的线性相关相关关系，值域在-1与1之间。
 - 给定两个连续变量x和y，皮尔森相关系数被定义为
-    - ![](https://img-blog.csdn.net/20180417114819536)
-    - ![](https://img-blog.csdnimg.cn/20190529103112626.png)
+    - [img](https://img-blog.csdn.net/20180417114819536) ![](https://img-blog.csdn.net/20180417114819536)
+    - [img](https://img-blog.csdnimg.cn/20190529103112626.png) ![](https://img-blog.csdnimg.cn/20190529103112626.png)
 
 - 代码
 
@@ -226,7 +226,6 @@ def cal_pccs(x, y, n):
     sum_y2 = np.sum(np.sum(y*y))
     pcc = (n*sum_xy-sum_x*sum_y)/np.sqrt((n*sum_x2-sum_x*sum_x)*(n*sum_y2-sum_y*sum_y))
     return pcc
-
 ```
 
 
@@ -238,7 +237,7 @@ def cal_pccs(x, y, n):
 - ![](https://img-blog.csdn.net/20180417113553969)
 - 相对于皮尔森相关系数，斯皮尔曼相关系数对于数据错误和极端值的反应不敏感。
 - 斯皮尔曼相关系数的另一种公式表示如下：
-    - ![](https://img-blog.csdn.net/20180417114927879)
+    - [img](https://img-blog.csdn.net/20180417114927879) ![](https://img-blog.csdn.net/20180417114927879)
 
 ## Kendall
 
