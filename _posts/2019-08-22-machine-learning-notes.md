@@ -40,6 +40,23 @@ mathjax: true
 		- ![](https://p6-tt.byteimg.com/origin/pgc-image/11fc9ade0b1246dd89be355e975661e4?from=pc)
 - 【2021-1-2】[机器学习的12张思维导图](https://www.cnblogs.com/panchuangai/p/12568088.html)	
 
+## 分类
+
+【2021-5-24】[为什么机器学习算法难以优化？一文详解算法优化内部机制](https://cloud.tencent.com/developer/article/1827805)
+
+机器学习分成：
+- 监督学习：
+  - 分类
+  - 回归
+- 无监督学习
+  - 聚类
+  - 降维
+- 半监督学习
+- 强化学习
+
+![](https://ask.qcloudimg.com/http-save/yehe-1622140/xhslx354lm.png?imageView2/2/w/1620)
+
+
 
 # 机器学习课程
 
