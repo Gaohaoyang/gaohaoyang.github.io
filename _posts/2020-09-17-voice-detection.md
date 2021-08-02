@@ -201,6 +201,8 @@ mathjax: true
 采用该技术的智能硬件设备，也不需要用户在每轮交互时都说出唤醒词， 仅需一次唤醒，就可以轻松实现连续对话 ，使人与机器的对话更像人与人的自然交流。
 ![全双工语音](https://ask.qcloudimg.com/http-save/yehe-1000017/rg5na6y1zk.jpeg?imageView2/2/w/1620)
 
+[百应Voicebot：开放的全双工智能语音对话机器人](https://it.gmw.cn/2018-11/29/content_32070680.htm)
+
 ## 二、语音识别的基本原理：
 
 ### 1、本质
