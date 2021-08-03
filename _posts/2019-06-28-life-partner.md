@@ -44,6 +44,8 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=39370474&cid=69181558&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
+- 【2021-8-3】独居者《[独自生活的人们](https://youtu.be/G9wjqS2yaIM)》 一部平平无奇的韩国电影，却有很多人打5星！因为太真实了！
+
 ## 谈几段恋爱合适？
 
 - [单身狗速进！如何科学有效地脱单？](https://www.bilibili.com/video/av75629882)
