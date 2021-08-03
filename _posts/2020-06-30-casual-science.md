@@ -15,6 +15,9 @@ mathjax: true
 
 # 总结
 
+- 【5】 Causal Inference in Educational Systems: A Graphical Modeling Approach
+  - 标题：教育系统中的因果推理：一种图形化建模方法
+  - [链接](https://arxiv.org/abs/2108.00654)
 - 【2021-7-8】对比《思考：快与慢》书籍中的人脑的快系统和慢系统，他最近提出了一个类似人脑慢系统的 [System 2 Deep Learning](https://drive.google.com/file/d/1UT118pX3DzePaEEwj1tlaznqwHICSzhG/view)，做为一个目标为人类水平智能的范式，将因果推理能力的内容作为其核心组件。Bengio指出人的认知系统包含两个子系统：System1是直觉系统，主要负责快速、无意识、非语言的认知，这是目前深度学习主要做的事情；System2是逻辑分析系统，是有意识的、带逻辑、规划、推理以及可以语言表达的系统，这是未来深度学习需要着重考虑的。
 - 【2020-9-2】[Bengio讲授因果表示学习，Mila博士因果推理导论开课了](https://www.toutiao.com/i6867722568795685387)，从机器学习的角度编写的《Introduction to Causal Inference》秋季[课程](https://www.bradyneal.com/causal-inference-course#course-textbook)，[教材地址](https://www.bradyneal.com/Introduction_to_Causal_Inference-Aug27_2020-Neal.pdf)，[YouTube地址](https://www.youtube.com/watch?v=CfzO4IEMVUk&list=PLoazKTcS0Rzb6bb9L508cyJ1z-U9iWkA0&index=1)，由 Yoshua Bengio 高徒 Brady Neal 主讲，主要讲述因果推理相关知识。此外，该课程整合了来自许多不同领域的见解，如流行病学、经济学、政治学和机器学习等，这些领域都利用到了因果推理。
   - ![](https://p3-tt.byteimg.com/origin/pgc-image/50a7c51c7b664c4d97c6ffce404790e2?from=pc)
