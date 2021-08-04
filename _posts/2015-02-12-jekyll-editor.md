@@ -182,6 +182,20 @@ $$ P = \frac{1}{1 + \exp^{-(实力-难度)}} $$
 ![](https://www.zhihu.com/equation?tex=y+%3D+%5Cphi%28%5Csum+W_%7Bij%7DX_j+%2B+b%29+)
 
 
+### 文档嵌入
+
+pdf文件直接显示
+
+```html
+<object type="application/pdf" data="https://arxiv.org/pdf/2004.05388"
+           id="review" style="width:100%;  height:800; margin-top:0px;  margin-left:0px" >
+</object>
+```
+
+<object type="application/pdf" data="https://arxiv.org/pdf/2004.05388"
+           id="review" style="width:100%;  height:800; margin-top:0px;  margin-left:0px" >
+</object>
+
 
 ### 视频嵌入
 ---
