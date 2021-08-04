@@ -1567,8 +1567,8 @@ Sebastian将QA的研究分为了5个阶段。
 ![](https://img-blog.csdnimg.cn/img_convert/a6df8af67afe4b2b7ebebd3d3531d380.png)
 
 
-### 【2021-1-20】[How to Build an Open-Domain Question Answering System?](https://lilianweng.github.io/lil-log/2020/10/29/open-domain-question-answering.html)
-
+### [How to Build an Open-Domain Question Answering System?](https://lilianweng.github.io/lil-log/2020/10/29/open-domain-question-answering.html)
+【2021-1-20】
 - Open-domain Question Answering (ODQA) is a type of language tasks, asking a model to produce answers to factoid questions in natural language. The true answer is objective, so it is simple to evaluate model performance.
 - For example,
   - Question: What did Albert Einstein win the Nobel Prize for?
@@ -2089,6 +2089,32 @@ An example of typical input would be something like this:
 
 - 【2020-9-21】一篇解决对话无监督评估的论文：[How NOT To Evaluate Your Dialogue System: An Empirical Study of
 Unsupervised Evaluation Metrics for Dialogue Response Generation](https://arxiv.org/pdf/1603.08023.pdf)，[论文引用图谱](https://www.connectedpapers.com/main/129cbad01be98ee88a930e31898cb76be79c41c1/How-NOT-To-Evaluate-Your-Dialogue-System-An-Empirical-Study-of-Unsupervised-Evaluation-Metrics-for-Dialogue-Response-Generation/graph)
+
+
+## 对话比赛
+
+[2020年多模态对话挑战赛](http://jddc.jd.com/)
+
+### DSTC
+
+- 待补充
+
+### ConvAI
+
+#### ConvAI2
+
+2018年，[对话智能挑战赛：ConvAI 2](https://www.jiqizhixin.com/articles/2018-10-22-14)
+
+2018年的比赛是ConvAI挑战的第二届，同样是NIPS大会8个正式的竞赛任务之一
+
+#### ConvAI3
+
+Clarifying Questions for Open-Domain Dialogue Systems ([ClariQ](http://convai.io/))
+
+we provide to the participants the datasets that include:
+- 信息咨询 User Request: an initial user request in the conversational form, e.g., “What is Fickle Creek Farm?”, with a label reflects if clarification is needed to be ranged from 1 to 4;
+- 问题澄清 Clarification questions: a set of possible clarifying questions, e.g., “Do you want to know the location of fickle creek farm?”;
+- 用户答案 User Answers: each question is supplied with a user answer, e.g., “No, I want to find out where can i purchase fickle creek farm products.”
 
 ## 对话平台
 
