@@ -107,7 +107,7 @@ mathjax: true
 
 - 【2020-12-04】对偶机器学习，[Duality in machine learning](http://mblondel.org/teaching/duality-2020.pdf)
 
-## PRML
+## 模式识别和机器学习--PRML
 
 - 经典书籍：模式识别与机器学习
 - 目录
@@ -148,6 +148,48 @@ PRML 的主要内容：
 	- [ch10. Approximate Inference](https://nbviewer.jupyter.org/github/ctgk/PRML/blob/master/notebooks/ch10_Approximate_Inference.ipynb)
 	- [ch11. Sampling Methods](https://nbviewer.jupyter.org/github/ctgk/PRML/blob/master/notebooks/ch11_Sampling_Methods.ipynb)
 	- [ch12. Continuous Latent Variables](https://nbviewer.jupyter.org/github/ctgk/PRML/blob/master/notebooks/ch12_Continuous_Latent_Variables.ipynb)
+
+
+## 《机器学习：概率视角》——《Machine Learning: a Probabilistic Perspective》
+
+- 作者是谷歌研究员Kevin Patrick Murphy，自2012年出版以来就一直被列为机器学习经典著作之一。本书可以作为PRML的姊妹篇，基于概率论和概率模型的角度来理解机器学习模型
+
+### 目录
+
+全书包括28个章节，可以算是鸿篇巨制。
+- Chapter 1: 引言 Introduction
+- Chapter 2: 概率 Probability
+- Chapter 3: 面向离散数据的生成式模型 Generative models for discrete data
+- Chapter 4: 高斯模型 Gaussian models
+- Chapter 5: 贝叶斯统计 Bayesian statistics
+- Chapter 6: 频率统计 Frequentist statistics
+- Chapter 7: 线性回归 Linear regression
+- Chapter 8: 逻辑回归 Logistic regression
+- Chapter 9: 广义线性模型和指数族 Generalized linear models and the exponential family
+- Chapter 10: 有向图模型(贝叶斯网络) Directed graphical models (Bayes nets)
+- Chapter 11: 混合模型与EM算法 Mixture models and the EM algorithm
+- Chapter 12: 隐式线性模型 Latent linear models
+- Chapter 13: 稀疏线性模型 Sparse linear models
+- Chapter 14: 核方法 Kernels
+- Chapter 15: 高斯过程 Gaussian processes
+- Chapter 16: 自适应基函数模型 Adaptive basis function model
+- Chapter 17: 马尔可夫模型和隐马尔可夫模型 Markov and hidden Markov Models
+- Chapter 18: 状态空间模型 State space models
+- Chapter 19: 无向图模型(马尔可夫随机域) Undirected graphical models (Markov random fields)
+- Chapter 20: 图模型精准推断 Exact inference algorithms for graphical models
+- Chapter 21: 变分推断 Variational inference
+- Chapter 22: 更进变分推断 More variational inference
+- Chapter 23: 蒙特卡洛推断 Monte Carlo inference algorithms
+- Chapter 24: 马尔科夫链蒙特卡洛推断 MCMC inference algorithms
+- Chapter 25: 聚类 Clustering
+- Chapter 26: 图模型结构学习 Graphical model structure learning
+- Chapter 27: 因变量 Latent variable models for discrete data
+- Chapter 28: 深度学习 Deep learning
+
+### 代码
+
+
+GitHub上同步开源随书[代码](https://github.com/probml/pyprobml)，供大家参考学习
 
 # 机器学习基础
 
