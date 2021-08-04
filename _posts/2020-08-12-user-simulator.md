@@ -3,7 +3,7 @@ layout: post
 title:  "用户模拟器-User Simulator"
 date:   2020-08-12 20:46:00
 categories: 深度学习
-tags: 对话系统 用户模拟器 性格模拟
+tags: 对话系统 用户模拟器 性格模拟 角色模拟 论文
 excerpt: 对话系统之用户模拟器专题
 author: 鹤啸九天
 mathjax: true
@@ -84,7 +84,6 @@ mathjax: true
 
 
 # 用户模拟器的实现方法
-
 
 - 用户模拟器的实现方法大致分成两类：
   - 基于规则的方法
@@ -302,6 +301,38 @@ dqn.py主要函数介绍：DQN主要是训练一个强化学习的对话过程�
 表1：基于规则的代理和RL代理与用户模拟器生成的两个示例对话：左列显示规则和RL代理均成功； 右列显示基于规则的代理失败，而RL代理成功。
 
 表2：用户模拟器与SimpleRL-SoftKB和End2End-RL代理之间的对话示例。 在每次对话结束时，代理会告知KB后验的前5个结果。 已经通知的用户目标以粗体显示。
+
+
+# 论文解读
+
+## You Impress Me: Dialogue Generation via Mutual Persona Perception
+ 
+** Published:** April 11, 2020，[作者主页](https://siviltaram.github.io/publication/2020-04-11-you)
+
+**个性化对话生成**（Personalized Dialogue Generation）是对话生成领域近几年的一个研究热点（Zhang et al. 2018）。个性的引入可以帮助对话生成模型产生更一致的、更有趣的回复。然而大部分工作仍像对待普通开放域对话生成那样，关注模型生成回复的流畅性，较少关注对话中对话者之间的互动和了解。相比于已有工作，我们显式地建模了对话者之间的了解，从而使得对话生成的结果更加有趣，且更加符合对话者的个性。
+
+这篇论文提出了一个 Transmitter-Receiver 的框架来显式建模对话者之间的了解，其中 Transmitter 负责对话生成，而 Receiver 负责个性了解。在这个框架下，我们引入一个新颖的概念“相互个性感知”，来刻画对话者之间的信息交流，即对话者对彼此个性的了解程度。众所周知，高效的沟通能够让对话的双方充分了解并达成共识，所以相互个性感知的提升在一定程度上也代表了对话质量的提高。为了达成这个目标，我们首先按照传统的监督学习来训练Transmitter，然后让两个训练好的 Transmitter 通过互相对话进行自我学习（self-play）。在它们对话若干轮后，借助 Receiver 提供的个性感知奖励微调 Transmitter。
+
+![](https://www.msra.cn/wp-content/uploads/2020/07/acl-2020-25.png)
+ 
+- [PAPER](https://arxiv.org/pdf/2004.05388.pdf)，[CODE](https://github.com/SivilTaram/Persona-Dialogue-Generation)，[SLIDES](https://siviltaram.github.io/files/you-slides.pdf)，[MEDIA](https://mp.weixin.qq.com/s/Do_swfjTNi9Kf23E8LJb6A)
+
+![](https://siviltaram.github.io/images/you-demo.JPG)
+
+
+原文：
+
+<object type="application/pdf" data="https://arxiv.org/pdf/2004.05388"
+           id="review" style="width:100%;  height:100%; margin-top:0px;  margin-left:0px" >
+</object>
+
+解读ppt
+
+<object type="application/pdf" data="https://siviltaram.github.io/files/you-slides.pdf"
+           id="review" style="width:100%;  height:100%; margin-top:0px;  margin-left:0px" >
+</object>
+
+
 
 
 # 结束
