@@ -184,16 +184,16 @@ $$ P = \frac{1}{1 + \exp^{-(实力-难度)}} $$
 
 ### 文档嵌入
 
-pdf文件直接显示
+pdf文件直接显示，800px不能省略px，否则高度低
 
 ```html
 <object type="application/pdf" data="https://arxiv.org/pdf/2004.05388"
-           id="review" style="width:100%;  height:800; margin-top:0px;  margin-left:0px" >
+           id="review" style="width:100%;  height:800px; margin-top:0px;  margin-left:0px" >
 </object>
 ```
 
 <object type="application/pdf" data="https://arxiv.org/pdf/2004.05388"
-           id="review" style="width:100%;  height:800; margin-top:0px;  margin-left:0px" >
+           id="review" style="width:100%;  height:800px; margin-top:0px;  margin-left:0px" >
 </object>
 
 
