@@ -738,6 +738,9 @@ mathjax: true
   - ④对热门事件评论
   - ⑤生活习惯
 
+【2021-8-4】[脉脉](https://maimai.cn/web/gossip_detail?src=app&webid=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlZ2lkIjoiYmUxOWQ1ODVmNTAzMTFlYjgzMmZlNDQzNGIyZmE4ODgiLCJ1IjozNTM5LCJpZCI6MjkyNDk5MzF9.WklHZBM0TLH0ckgTMC7ab1pP4tUazTy6w72vwrosjMo&share_channel=2)：结过婚的想来真心劝一句，挑选结婚对象，收入工作学历相貌这些东西真的不要看得太重，决定两个人能不能开心生活下去的就是**性格**和**对生活的态度**，无论男女都一定要找**性格好，能包容彼此，对小事不计较，生活态度一致的**。即使是贫贱的夫妻面对清苦的生活都能豁达安逸、相互激励日子也是甜的；学历和收入和你有差距问题不是特别大，但是对生活热爱，积极向上，性格稳定，能让你看到生活中的光才是最重要的。
+
+重复一遍，**性格**、**人品**和**生活态度**，才是寻觅人生伴侣最要看重的事情，切勿本末倒置，不然只会像我一样落得一地鸡毛。
 
 ## 约会时如何快速了解对方
 
