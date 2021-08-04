@@ -857,6 +857,12 @@ Mingke： 每一个行业都会诞生属于这个领域的智能服务，金融�
 总结：
 ![](https://img-blog.csdnimg.cn/img_convert/9ffebad770a03654d01bb8501abb4249.png)
 
+【2021-8-4】**多轮对话**体系定义问题的回答——
+- 基本定义：什么是多轮对话？ （封闭域）多轮对话是一种人机对话中获取必要信息以明确用户指令的方式。多轮对话与一件事情的处理相对应。
+- 补充说明1：所谓『必要信息』一定要通过与用户的对话获取吗？ 不一定，即便是人与人之间的交流，对话本身所包含的信息也只占总传递信息量的小部分，更多信息来源于说话人的身份、当前的时间/地点等一系列场景信息。所以多轮对话的信息获取方式，也不应当只局限于用户所说的话。
+- 补充说明2：多轮对话一定在形式上表现为与用户的多次对话交互吗？ 不一定，如果用户的话语中已经提供了充足的信息，或者其它来源的补充信息已足够将用户的初步意图转化为一条明确的用户指令，那就不会存在与用户的多次对话交互。
+参考：[AI产品经理需要了解的AI技术概念](https://mp.weixin.qq.com/s?__biz=MjM5NzA5OTAwMA==&mid=2650005853&idx=1&sn=2c6bb9e9c3751fdc3fd95e89b8b6377d&chksm=bed865ca89afecdcdf0ecde9ed2385fb613cb2a40ad0c491582c7faf91841d17efdfe59718e1&mpshare=1&scene=1&srcid=0304keVTiRXgpPHVGxGFL6mI#rd)
+
 - 【2021-5-31】问答、任务和闲聊几种类型对话的区别和关系 [图](https://img-blog.csdnimg.cn/img_convert/e3c054b8f185aeb202974323b6e8794a.png)
   - ![](https://img-blog.csdnimg.cn/img_convert/e3c054b8f185aeb202974323b6e8794a.png)
 
