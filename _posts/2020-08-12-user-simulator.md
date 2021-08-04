@@ -321,13 +321,13 @@ dqn.py主要函数介绍：DQN主要是训练一个强化学习的对话过程�
 原文：
 
 <object type="application/pdf" data="https://arxiv.org/pdf/2004.05388"
-           id="review" style="width:100%;  height:800; margin-top:0px;  margin-left:0px" >
+           id="review" style="width:100%;  height:800px; margin-top:0px;  margin-left:0px" >
 </object>
 
 解读ppt
 
 <object type="application/pdf" data="https://siviltaram.github.io/files/you-slides.pdf"
-           id="review" style="width:100%;  height:800; margin-top:0px;  margin-left:0px" >
+           id="review" style="width:100%;  height:800px; margin-top:0px;  margin-left:0px" >
 </object>
 
 
