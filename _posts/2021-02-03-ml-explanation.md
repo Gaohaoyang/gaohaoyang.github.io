@@ -15,16 +15,25 @@ mathjax: true
 # 总结
 
 - 【2021-2-3】[机器学习的可解释性](https://mp.weixin.qq.com/s/CYN5ZJhkdpI0DSg_9EapEQ)，[知乎地址](https://zhuanlan.zhihu.com/p/334636096)，[Github地址](https://github.com/floatingCatty/BAAI-Monthly-)，【知源月旦】团队完成的首篇综述，参考了Gilpin Leilani H.,et al. 发表在DSAA2018 上的文章，[ppt](https://event-cdn.baai.ac.cn/20210202/interpretability-slides-yzhang.pdf), 作者[视频讲解](https://hub.baai.ac.cn/activity/details/129)，南方科技大学张宇博士（唐珂教授2017级在读博士）发表一篇神经网络可解释性综述《A Survey on Neural Network Interpretability》
+<object type="application/pdf" data="https://event-cdn.baai.ac.cn/20210202/interpretability-slides-yzhang.pdf"
+           id="review" style="width:100%;  height:800px; margin-top:0px;  margin-left:0px" >
+</object>
 - 【2021-5-11】[「综述专栏」神经网络的可解释性综述](https://www.toutiao.com/i6960861660567486983),从方法论上来讲，都应“先见森林，再见树木”, 源自[知乎](https://zhuanlan.zhihu.com/p/368755357)对[A Survey on Neural Network Interpretability](https://arxiv.org/abs/2012.14261)的解读
 
 # 一、机器学习的可解释性研究概述
  
-![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9aa2dmVXppYVBJTzBaYVBpYU5ZZmFMTXFTbEhCdDE3MlZjV2d2TEFxQ2szeGFIcWlhcDFHRmRwNHYwS2lhM0pLbkM2T2ZzaWJSSlI0T09EZnRpY1dZaWFoaG5iYncvNjQw?x-oss-process=image/format,png)
- 
 随着机器学习模型在人们日常生活中的许多场景下扮演着越来越重要的角色，模型的「可解释性」成为了决定用户是否能够「信任」这些模型的关键因素（尤其是当我们需要机器为关系到人类生命健康、财产安全等重要任务给出预测和决策结果时）。在本章，我们将从机器学习可解释性的定义、研究意义、分类方法 3 个方面对这一话题展开讨论。
  
 ## 1.1 什么是可解释性
- 
+
+- Interpretability (of a DNN) is the ability to provide explanations in understandable terms to a human. F Doshi-Velez & B Kim, 2017
+- **解释**（Explanations），是指需要用某种语言来描述和注解
+  - 理想情况下，严谨的数学符号-逻辑规则是最好的解释（D Pedreschi et al., 2019）。实际上人们往往不强求“完整的解释”，只需要关键信息和一些先验知识
+- **可解释的边界**（Explainable Boundary），是指可解释性能够提供解释的程度
+  - 来自XAI的：对于不同的听众，解释的深度也有所不同，应该是需求而定。例如：为什么你这么聪明？因为我喜欢吃鱼。为什么吃鱼会聪明？因为鱼类富含DHA。为什么DHA聪明？...... 因为根据不同的人群，我们的可解释的工作也不一样。例如给大众解释吃鱼能够聪明就行了，因为吃鱼能够聪明我们很多人已经从小到大耳熟能详了。如果我们给专业人士解释DHA为什么会是大脑聪明，我们身边很多人也答不出来，这已经远超出我们计算机这个领域了。当然，可解释的这种边界越深，这个模型的能力也越强。
+- **可理解的术语**（Understandable Terms），是指构成解释的基本单元
+  - 不同领域的模型解释需要建立在不同的领域术语之上，不可能或者目前难以用数学逻辑符号来解释。例如计算机视觉中的image patches，NLP中的单词等。而可理解的术语可以理解为计算机跟我们人类能够沟通的语言。以前我们很多研究关于人类跟计算机表达的语言例如计算机指令，现在是反过来计算机根据现有的模型给我们解释
+
 - 对于机器学习的用户而言，模型的可解释性是一种较为主观的性质，我们无法通过严谨的数学表达方法形式化定义可解释性。通常可以认为机器学习的可解释性刻画了「**人类对模型决策或预测结果的理解程度**」，即用户可以更容易地理解解释性较高的模型做出的决策和预测。
 
 从哲学的角度来说，为了理解何为机器学习的可解释性，需要回答以下几个问题：
@@ -41,6 +50,15 @@ mathjax: true
  
 在当下的深度学习浪潮中，许多新发表的工作都声称自己可以在目标任务上取得良好的性能。尽管如此，用户在诸如医疗、法律、金融等应用场景下仍然需要从更为详细和具象的角度理解得出结论的原因。为模型赋予较强的可解释性也有利于确保其公平性、隐私保护性能、鲁棒性，说明输入到输出之间个状态的因果关系，提升用户对产品的信任程度。下面从「**完善**深度学习模型」、「深度学习模型与**人**的关系」、「深度学习模型与**社会**的关系」3 个方面简介研究机器学习可解释性的意义。
  
+- （1）**高可靠性**的要求
+  - a）神经网络在实践中经常有难以预测的错误（进一步的研究是对抗样本攻击与防御），这对于要求可靠性较高的系统很危险
+  - b）可解释性有助于发现潜在的错误；也可以通过debug而改进模型
+- （2）**伦理/法规**的要求
+  - AI医疗：目前一般只作为辅助性的工具，是因为一个合格的医疗系统必须是透明的、可理解的、可解释的，可以获得医生和病人的信任。
+  - 司法决策：面对纷繁复杂的事实类型，除了法律条文，还需要融入社会常识、人文因素等。因此，AI在司法决策的事后，必须要给出法律依据和推理过程。
+- （3）作为其他科学研究的**工具**
+  - 科学研究可以发现新知识，可解释性正是用以揭示背后原理。
+
 ### （1）完善深度学习模型
  
 * 大多数深度学习模型是由数据驱动的黑盒模型，而这些模型本身成为了知识的来源，模型能提取到怎样的知识在很大程度上依赖于模型的组织架构、对数据的表征方式，对模型的可解释性可以显式地捕获这些知识。 
