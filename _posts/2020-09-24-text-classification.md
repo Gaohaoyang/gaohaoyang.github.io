@@ -18,6 +18,11 @@ mathjax: true
 - 文本分类算是NLP比较简单的任务之一，并且目前由于预训练语言模型的出现，现在文本分类直接上bert效果就挺好。
 - 【2021-2-2】[深度学习文本分类-模型&代码&技巧](https://mp.weixin.qq.com/s/8rF2VXeKMKMpBAOlgPep8A)，[NLP入门指南各类代码汇总](https://github.com/leerumor/nlp_tutorial)
   - 实际上，落地时主要还是和数据的博弈。数据决定模型的上限，大多数人工标注的准确率达到95%以上就很好了，而文本分类通常会对准确率的要求更高一些，与其苦苦调参想fancy的结构，不如好好看看badcase，做一些数据增强提升模型鲁棒性更实用。
+- 【2021-8-5】[深度学习文本分类模型综述+代码+技巧](https://zhuanlan.zhihu.com/p/349086747)，文本分类方法快速选型[导图](https://pic1.zhimg.com/80/v2-23b33b3f7116181bcb26161f5a0fab14_720w.jpg)
+  - ![](https://pic1.zhimg.com/80/v2-23b33b3f7116181bcb26161f5a0fab14_720w.jpg)
+  - 上线吗(不：BERT) → 文本长吗(短：CNN/FastText) → 任务难吗（还行：RNN/ALBERT） → 别做了
+  - 落地时主要还是和数据的博弈。数据决定模型的上限，大多数人工标注的准确率达到95%以上就很好了，而文本分类通常会对准确率的要求更高一些，与其苦苦调参想fancy的结构，不如好好看看badcase，做一些数据增强提升模型鲁棒性更实用。
+
 
 ## 资料
 
@@ -80,9 +85,8 @@ mathjax: true
 ## FastText —— 适合长文本
 
 - 【2021-2-2】[论文](https://arxiv.org/abs/1607.01759)，[代码](https://github.com/facebookresearch/fastText)
-- Fasttext是Facebook推出的一个便捷的工具，包含文本分类和词向量训练两个功能。
-- Fasttext的分类思想：把输入转化为词向量，取平均，再经过线性分类器得到类别。
-- 输入的词向量可以是预先训练好的，也可以随机初始化，跟着分类任务一起训练。
+- Fasttext是Facebook推出的一个便捷的工具，包含**文本分类**和**词向量训练**两个功能。
+- Fasttext的分类思想：把输入转化为词向量，取平均，再经过线性分类器得到类别。输入的词向量可以是预先训练好的，也可以随机初始化，跟着分类任务一起训练。
 - fastText模型架构和word2vec的CBOW模型架构非常相似
 ![](https://pic1.zhimg.com/80/v2-5d56f85aab55494afa27ce33acef3773_720w.jpg)
 - fastText模型和CBOW一样也只有三层：输入层、隐含层、输出层（Hierarchical Softmax）。fasttext的隐藏层是把输入层的向量求平均。
@@ -156,10 +160,10 @@ mathjax: true
   - 加深全连接：原论文只使用了一层全连接，而加到3、4层左右效果会更好[2]
 - TextCNN是很适合**中短文本**场景的强baseline，但不太适合长文本，因为卷积核尺寸通常不会设很大，无法捕获长距离特征。同时max-pooling也存在局限，会丢掉一些有用特征。另外再仔细想的话，**TextCNN和传统的n-gram词袋模型本质是一样的**，它的好效果很大部分来自于词向量的引入，因为解决了词袋模型的稀疏性问题。
 
-### DPCNN
+### DPCNN——TextCNN改进
 
 - [论文](https://ai.tencent.com/ailab/media/publications/ACL3-Brady.pdf)，[代码](https://github.com/649453932/Chinese-Text-Classification-Pytorch)
-- TextCNN有太浅和长距离依赖的问题，那直接多堆几层CNN是否可以呢？事情没想象的那么简单。
+- TextCNN有**太浅和长距离依赖**的问题，那直接多堆几层CNN是否可以呢？事情没想象的那么简单。
 - 直到2017年，腾讯才提出了把TextCNN做到更深的DPCNN模型
   - 在Region embedding时不采用CNN那样加权卷积的做法，而是对n个词进行pooling后再加个1x1的卷积，因为实验下来效果差不多，且作者认为前者的表示能力更强，容易过拟合
   - 使用1/2池化层，用size=3 stride=2的卷积核，直接让模型可编码的sequence长度翻倍（自己在纸上画一下就get啦）
