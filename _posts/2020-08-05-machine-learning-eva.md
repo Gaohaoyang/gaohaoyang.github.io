@@ -37,6 +37,39 @@ mathjax: true
 - 在机器学习的评估指标中，AUC是一个最常见也是最常用的指标之一。
 - AUC本身的定义是基于几何的，但是其意义十分重要，应用十分广泛。
 
+## 介绍
+
+混淆矩阵：
+
+| pred_label/true_label | Positive | Negative |
+|:---:|:---:|:---:|
+|Positive|TP|FP|
+|Negtive|FN|TN|
+
+如上表所示，行表示预测的label值，列表示真实label值。TP，FP，FN，TN分别表示如下意思：
+- TP（true positive）：表示样本的真实类别为正，最后预测得到的结果也为正；
+- FP（false positive）：表示样本的真实类别为负，最后预测得到的结果却为正；
+- FN（false negative）：表示样本的真实类别为正，最后预测得到的结果却为负；
+- TN（true negative）：表示样本的真实类别为负，最后预测得到的结果也为负.
+根据以上几个指标，可以分别计算出Accuracy、Precision、Recall（Sensitivity，SN），Specificity（SP）, [img](https://ask.qcloudimg.com/http-save/yehe-5020298/lf7xwsxhsx.png?imageView2/2/w/1620)
+- Accuracy：表示预测结果的精确度，预测正确的样本数除以总样本数。
+- precision，准确率，表示预测结果中，预测为正样本的样本中，正确预测为正样本的概率；
+- recall，召回率，表示在原始样本的正样本中，最后被正确预测为正样本的概率；
+- specificity，常常称作特异性，它研究的样本集是原始样本中的负样本，表示的是在这些负样本中最后被正确预测为负样本的概率。
+
+![](https://ask.qcloudimg.com/http-save/yehe-5020298/lf7xwsxhsx.png?imageView2/2/w/1620)
+
+实际中，往往希望得到的precision和recall都比较高，比如当FN和FP等于0的时候，他们的值都等于1。但是，它们往往在某种情况下是互斥的，比如这种情况，50个正样本，50个负样本，结果全部预测为正，那么它的precision为1而recall却为0.5.所以需要一种折衷的方式，因此就有了F1-score。
+- F1-score表示的是precision和recall的调和平均评估指标
+  - ![](https://ask.qcloudimg.com/http-save/yehe-5020298/58joe37gx9.png?imageView2/2/w/1620)
+- 类似的还有MCC
+  - ![](https://ask.qcloudimg.com/http-save/yehe-5020298/qg4ywi3bnj.png?imageView2/2/w/1620)
+
+一张图总结：[img](https://img-blog.csdnimg.cn/20200721143338327.png)
+- ![](https://img-blog.csdnimg.cn/20200721143338327.png)
+
+[img](https://pic1.zhimg.com/80/v2-763b2bc2e358ead002eca8d94e104db4_720w.jpg)![](https://pic1.zhimg.com/80/v2-763b2bc2e358ead002eca8d94e104db4_720w.jpg)
+
 ## 总结
 
 - auc只能用于binary classifier 评价
@@ -61,6 +94,76 @@ AP的计算，此处参考的是PASCAL  VOC  CHALLENGE的2010年之前计算�
 ## AUC
 
 
+## 多分类
+
+- 【2021-8-6】[多分类模型Accuracy, Precision, Recall和F1-score的超级无敌深入探讨](https://zhuanlan.zhihu.com/p/147663370)
+- 具体场景（如不均衡多分类）中到底应该以哪种指标为主要参考呢？
+- 多分类模型和二分类模型的评价指标有啥区别？
+- 多分类问题中
+  - 为什么Accuracy = micro precision = micro recall = micro F1-score? 
+  - 什么时候用macro, weighted, micro precision/ recall/ F1-score?
+
+Accuracy是分类问题中最常用的指标，它计算了分类正确的预测数与总预测数的比值。但是，对于**不平衡**数据集而言，Accuracy并不是一个好指标。如100张图片中91张图片是「狗」，5张是「猫」，4张是「猪」，训练一个三分类器，能正确识别图片里动物的类别。其中，狗这个类别就是**大多数**类 (majority class)。当大多数类中样本（狗）的数量远超过其他类别（猫、猪）时，如果采用Accuracy来评估分类器的好坏，即便模型性能很差 (如无论输入什么图片，都预测为「狗」)，也可以得到较高的Accuracy Score（如91%）。此时，虽然Accuracy Score很高，但是**意义不大**。当数据异常不平衡时，Accuracy评估方法的缺陷尤为显著。因此需要引入`Precision` （精准度），`Recall` （召回率）和`F1-score`评估指标。考虑到二分类和多分类模型中，评估指标的计算方法略有不同
+
+在多分类（大于两个类）问题中，假设我们要开发一个动物识别系统，来区分输入图片是猫，狗还是猪。给定分类器一堆动物图片，产生了如下结果混淆矩阵。
+- ![](https://pic4.zhimg.com/80/v2-e1cf922d05b7e1bf266620577e6fd253_720w.jpg)
+- 混淆矩阵中，正确的分类样本（Actual label = Predicted label）分布在左上到右下的对角线上。其中，Accuracy的定义为分类正确（对角线上）的样本数与总样本数的比值。Accuracy度量的是全局样本预测情况。而对于Precision和Recall而言，每个类都需要**单独**计算其Precision和Recall。
+
+如果想评估该识别系统的总体功能，必须考虑猫、狗、猪三个类别的综合预测性能。那么，到底要怎么综合这三个类别的Precision呢？是简单加起来做平均吗？通常来说， 我们有如下几种解决方案（也可参考[scikit-learn官网](https://link.zhihu.com/?target=https%3A//scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_score.html)）
+
+### Macro-average方法
+    
+ 
+该方法最简单，直接将不同类别的评估指标（Precision/ Recall/ F1-score）加起来求**平均**，给所有类别**相同权重**。该方法能够平等看待每个类别，但是它的值会受稀有类别影响。
+- ![[公式]](https://www.zhihu.com/equation?tex=%5Ctext%7BMacro-Precision%7D+%3D+%5Cfrac%7B%7BP%7D_%7Bcat%7D+%2BP_%7Bdog%7D++%2BP_%7Bpig%7D+%7D%7B3%7D+%3D+0.5194)
+- ![[公式]](https://www.zhihu.com/equation?tex=%5Ctext%7BMacro-Recall%7D+%3D+%5Cfrac%7BR_%7Bcat%7D+%2B+R_%7Bdog%7D++%2BR_%7Bpig%7D+%7D%7B3%7D+%3D+0.5898)
+ 
+### Weighted-average方法
+ 
+该方法给不同类别**不同权重**（权重根据该类别的**真实分布**比例确定），每个类别乘权重后再进行相加。该方法考虑了类别不平衡情况，它的值更容易受到常见类（majority class）的影响。
+- ![[公式]](https://www.zhihu.com/equation?tex=%5Ctext%7BW%7D_%7Bcat%7D+%3A+%5Ctext%7BW%7D_%7Bdog%7D+%3A+%5Ctext%7BW%7D_%7Bpig%7D+%3D+%5Ctext%7BN%7D_%7Bcat%7D+%3A+%5Ctext%7BN%7D_%7Bdog%7D+%3A%5Ctext%7BN%7D_%7Bpig%7D++%3D+%5Cfrac%7B7%7D%7B26%7D+%3A+%5Cfrac%7B16%7D%7B26%7D%3A+%5Cfrac%7B3%7D%7B26%7D) (W代表权重，N代表样本在该类别下的真实数目)
+- ![[公式]](https://www.zhihu.com/equation?tex=%5Ctext%7BWeighted-Precision%7D+%3D+%7BP%7D_%7Bcat%7D%5Ctimes+W_%7Bcat%7D+%2B++%7BP%7D_%7Bdog%7D%5Ctimes+W_%7Bdog%7D+%2B++%7BP%7D_%7Bpig%7D%5Ctimes+W_%7Bpig%7D+%3D+0.6314)
+- ![[公式]](https://www.zhihu.com/equation?tex=%5Ctext%7BWeighted-Recall%7D+%3D+%7BR%7D_%7Bcat%7D%5Ctimes+W_%7Bcat%7D+%2B++%7BR%7D_%7Bdog%7D%5Ctimes+W_%7Bdog%7D+%2B++%7BR%7D_%7Bpig%7D%5Ctimes+W_%7Bpig%7D+%3D+0.5577)
+ 
+### Micro-average方法
+ 
+该方法把每个类别的TP, FP, FN先相加之后，在根据二分类的公式进行计算。
+- ![[公式]](https://www.zhihu.com/equation?tex=%5Ctext%7BMicro-Precision%7D+%3D+%5Cfrac%7B%7BTP%7D_%7Bcat%7D+%2B+%7BTP%7D_%7Bdog%7D+%2B+%7BTP%7D_%7Bpig%7D%7D%7B+%7BTP%7D_%7Bcat%7D+%2B+%7BTP%7D_%7Bdog%7D+%2B+%7BTP%7D_%7Bpig%7D%2B++%7BFP%7D_%7Bcat%7D+%2B+%7BFP%7D_%7Bdog%7D+%2B+%7BFP%7D_%7Bpig%7D%7D+%3D+0.5577+)
+- ![[公式]](https://www.zhihu.com/equation?tex=%5Ctext%7BMicro-Recall%7D+%3D+%5Cfrac%7B%7BTP%7D_%7Bcat%7D+%2B+%7BTP%7D_%7Bdog%7D+%2B+%7BTP%7D_%7Bpig%7D%7D%7B+%7BTP%7D_%7Bcat%7D+%2B+%7BTP%7D_%7Bdog%7D+%2B+%7BTP%7D_%7Bpig%7D%2B++%7BFN%7D_%7Bcat%7D+%2B+%7BFN%7D_%7Bdog%7D+%2B+%7BFN%7D_%7Bpig%7D%7D%3D0.5577)
+
+其中，特别有意思的是，**Micro-precision和Micro-recall竟然始终相同**！这是为啥呢？
+ 
+这是因为在某一类中的False Positive样本，一定是其他某类别的False Negative样本。听起来有点抽象？举个例子，比如说系统错把「狗」预测成「猫」，那么对于狗而言，其错误类型就是False Negative，对于猫而言，其错误类型就是False Positive。于此同时，Micro-**precision**和Micro-**recall**的数值都等于**Accuracy**，因为它们计算了对角线样本数和总样本数的比值，总结就是：
+- ![[公式]](https://www.zhihu.com/equation?tex=%5Ctext%7BMicro-Precision%7D+%3D+%5Ctext%7BMicro-Recall%7D+%3D+%5Ctext%7BMicro-F1+score%7D+%3D+%5Ctext%7BAccuracy%7D+)
+
+代码
+
+```python
+import numpy as np
+import seaborn as sns
+from sklearn.metrics import confusion_matrix
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.metrics import accuracy_score, average_precision_score,precision_score,f1_score,recall_score
+
+# create confusion matrix
+y_true = np.array([-1]*70 + [0]*160 + [1]*30)
+y_pred = np.array([-1]*40 + [0]*20 + [1]*20 + 
+                  [-1]*30 + [0]*80 + [1]*30 + 
+                  [-1]*5 + [0]*15 + [1]*20)
+cm = confusion_matrix(y_true, y_pred)
+conf_matrix = pd.DataFrame(cm, index=['Cat','Dog','Pig'], columns=['Cat','Dog','Pig'])
+
+# plot size setting
+fig, ax = plt.subplots(figsize = (4.5,3.5))
+sns.heatmap(conf_matrix, annot=True, annot_kws={"size": 19}, cmap="Blues")
+plt.ylabel('True label', fontsize=18)
+plt.xlabel('Predicted label', fontsize=18)
+plt.xticks(fontsize=18)
+plt.yticks(fontsize=18)
+plt.savefig('confusion.pdf', bbox_inches='tight')
+plt.show()
+```
 
 # 损失函数
 
