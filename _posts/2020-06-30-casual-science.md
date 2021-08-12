@@ -229,6 +229,8 @@ mathjax: true
 
 # 机器学习理论的缺陷
 
+2019年图灵奖得主Yoshua Bengio认为：“深度学习已经走到了瓶颈期，将因果关系整合到AI当中已经成为目前的头等大事“。而2011年的图灵奖得主的Judea Pearl则提到：“目前有太多深度学习项目都单纯关注缺少因果关系的粗糙关联性，这常常导致深度学习系统在真实条件下（明显不同于训练场景的条件下）进行测试时，往往拿不出良好的实际表现。”
+
 - [图灵奖得主Judea Pearl：机器学习的理论局限性与因果推理的七大特性](https://cloud.tencent.com/developer/article/1119926)
 - 【2018-5-10】近日，有越来越多的学者正在探讨机器学习（和深度学习）的局限性，并试图为人工智能的未来探路
   - [纽约大学教授 Gary Marcus 就对深度学习展开了系统性的批判](http://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650735630&idx=1&sn=5840c3e9bed487da3a9080d482fcc58e&chksm=871ac070b06d496638d47dbdaac75fdec06c5e81a3afaee1e1ce2ea37e86d92ba61de8b2b7c9&scene=21#wechat_redirect)
@@ -307,6 +309,24 @@ mathjax: true
 - 推理（inference）是“使用离理智从某些前提产生结论”的行动。因果推理，也叫做反事实推理。**反事实推理**，就是解决 what if 之类的问题。举个例子，和家人的旅行之前，肯定会有一些疑问，这些疑问就叫做反事实疑问，获取反事实疑问的结果叫做因果推理。
   - ![](https://pic3.zhimg.com/80/v2-6505b93cc1a8df5a9370f01dc8c15d0a_1440w.jpg)
 
+
+什么是causality（因果）
+- Formal Definition: Causality is a generic relationship between an effect and the cause that gives rise to it.
+
+causality和statistical association的区别（因果性和相关性区别）
+
+Two main questions
+- Causal discovery(**因果关系挖掘**): 比如研究温度升高是否是电费增加的原因？或者在商品价格，商品转化率，商品上市时间，商品成本等几个变量之间探究一个因果图，即变量两两之间是否有因果关系？如果有，谁是因谁是果？
+- Causal effect Estimation(**因果效应估计**): 比如我们已经知道温度升高是电费增加的原因，我们想知道温度从20度升至30度，会对电费带来多少增加？
+
+Two main frameworks
+- （1）Structural Causal Models(**SCM**) **结构因果模型**
+  - Judea Pearl: A causal model by SCMs consists of two components: the causal graph (causal diagram) and the structural equations. 即需要先得到一张**因果图**，然后对于因果图，使用Structural Equations来描述它。
+  - ![](https://pic2.zhimg.com/80/v2-154ef98f3dbc4d0a6ca8ac03690a3489_1440w.jpg)
+  - 比如对于这一张因果图，箭头由因指向果，X和E都是变量。然后右边的一系列方程就是Structural Equations来描述这个图，每一个方程f都表示着由因到果的一个映射或者说一个表达式，这个方程可以是linear也可以是nonlinear的，取决于他们的因果关系是否线性。
+- （2）Potential Outcome Framework **潜在结果框架**
+  - Donald Rubin: It is mainly applied to learning causal effect as it corresponds to a given treatment-outcome pair (D,Y). 简单来说，计算因果效应最直接的手段就是**控制住所有的变量不变，只变化cause**，比如把温度从20变到30度，然后直接看outcome变化，也就是直接用30度时的电费减去20度时的电费，既可以得到causal effect。HOWEVER，**easier said than done**！！！如果这个世界有两个平行时空，那么可以做这个实验，但是如果没有呢？温度不可能在同一个地方，同一个时间，即20度又30度，那么必然20度的时候，30度时的电费就叫potential outcome。而这个framework，就是相方设法从能观察到的数据中得到这个potential的结果，然后二者相减，就是我们想要的答案啦！
+
 ## 简介
 
 因果科学的工作大致分为**基础因果假设及框架**（fundamental causal assumption and framework）、**因果学习**（causal learning）、**因果推断**（causal reasoning/inference）和**应用系统**，其中因果学习又可以分为**因果结构学习**（causal discovery/causal structure learning）和**因果表示学习**（causal representation learning）。
@@ -363,6 +383,151 @@ mathjax: true
 ![](https://pic1.zhimg.com/80/v2-d11fda1af0ce323818d839d49f59266c_1440w.jpg)
  
 年龄作为协变量对手术的影响
+
+## （1）因果发现 causal discovery
+
+【2021-8-13】[大白话谈因果系列文章（一）：因果推断简介及论文介绍](https://zhuanlan.zhihu.com/p/397796913)
+
+贝叶斯网络是一个DAG(directed acyclic graph)，即有向无环网络。然后可以把它当作一个概率图，也就是可以概率表达它。
+
+![](https://pic4.zhimg.com/80/v2-c910501231378cd35ba8811a52d99727_1440w.jpg)
+
+上图表达为P(A,B,C) = P(C|A,B)*P(B|A)*P(A)。因为C有AB两个变量指向他，而B同样只有A指向它。
+
+### 因果发现总结
+
+|类型|图解|说明|其它|
+|---|---|---|---|
+|head-to-head|![](https://pic4.zhimg.com/80/v2-25204fe0332cc9deffcdb51110a88613_1440w.jpg)|a与b独立|![](https://www.zhihu.com/equation?tex=p%28a%2Cb%2Cc%29%3Dp%28a%29%2Ap%28b%29%2Ap%28c%7Ca%2Cb%29%5C%5C+%5Csum_cp%28a%2Cb%2Cc%29%3D%5Csum_cp%28a%29%2Ap%28b%29%2Ap%28c%7Ca%2Cb%29%5C%5C+p%28a%2Cb%29%3Dp%28a%29%2Ap%28b%29%5C%5C+a+%5Cbot+b)|
+|tail-to-tail|![](https://pic1.zhimg.com/80/v2-0b4637b1a145c09f60400c5229104198_1440w.jpg)|a与b条件独立|![](https://www.zhihu.com/equation?tex=p%28a%2Cb%2Cc%29%3Dp%28c%29%2Ap%28a%7Cc%29%2Ap%28b%7Cc%29%5C%5C+%5Cfrac%7Bp%28a%2Cb%2Cc%29%7D%7Bp%28c%29%7D%3Dp%28a%7Cc%29%2Ap%28b%7Cc%29%5C%5C+p%28a%2Cb%7Cc%29%3Dp%28a%7Cc%29%2Ap%28b%7Cc%29%5C%5C+a+%5Cbot+b%7Cc)|
+|head-to-tail|![](https://pic1.zhimg.com/80/v2-26df5af1ca821e2af3a8032565f610c8_1440w.jpg)|a与b条件独立|![](https://www.zhihu.com/equation?tex=p%28a%2Cb%2Cc%29%3Dp%28a%29%2Ap%28c%7Ca%29%2Ap%28b%7Cc%29%5C%5C+%5Cfrac%7Bp%28a%2Cb%2Cc%29%7D%7Bp%28c%29%7D%3D%5Cfrac%7Bp%28a%29%2Ap%28c%7Ca%29%2Ap%28b%7Cc%29%7D%7Bp%28c%29%7D%5C%5C+p%28a%2Cb%7Cc%29%3D%5Cfrac%7Bp%28a%2Cc%29%2Ap%28b%7Cc%29%7D%7Bp%28c%29%7D%5C%5C+p%28a%2Cb%7Cc%29%3D%5Cfrac%7Bp%28a%2Cc%29%7D%7Bp%28c%29%7D%2Ap%28b%7Cc%29%5C%5C+p%28a%2Cb%7Cc%29%3Dp%28a%7Cc%29%2Ap%28b%7Cc%29%5C%5C+a%5Cbot+b%7Cc)|
+
+对于head-to-head，我们有a与b独立，对于tail-to-tail，我们有given c，a与b条件独立，对于head-to-tail，我们有given c，a与b条件独立。换一个直观的例子：
+![](https://pic1.zhimg.com/80/v2-a73f90fc390503b4443cd6bd7f83c650_1440w.jpg)
+
+我们可以看到，因为c这个“搅屎棍”的存在，我们很可能在数据误以为a与b有因果关系，实际上他们只是有相关性，也可以说c d-separate/blocked a and b。但是对于a与b的关系，NONE of them are causality。而我们要做的就是找到这些关系，才能判断出真正的因果。我们定义一下，head-to-head叫做v-structure或者collider，tail-to-tail叫做confounder或者fork，head-to-tail叫做chain。以便于理解后面以及其他paper。
+
+### 因果发现算法
+
+#### Constraint-based Algorithms
+
+这一类算法learn a set of causal graphs which satisfy the conditional independence embedded in the data。也就是通过找到上面三种结构来构建**因果图**，寻找方式就是通过条件独立的检验，一般的方式都是从一个无向的全链接图出发开始寻找，通过一系列规则最终生成一个图。
+
+有两类重要假设：
+1. Faithfulness Assumption and Markov Assumption，即Conditional independence imply d-separate, vice versa。
+2. Sufficiency Assumption ，即 No unobserved confounder (common cause)。
+
+缺点：
+1. 不能有unobserved confounder，这个条件即便在如今大数据的时代下，也很难满足。当然有类似IC*和FCI这种算法可以loose这个unobserved confounder的假设。所以这个缺点还好。
+2. 对于上面的chain和fork，由于他们都imply a和b基于c条件独立，故称为马尔可夫等价类，而这类算法无法从马尔可夫等价类中区分出不同的DAG，即对于这类算法，他认为chain和fork是一个东西，这也意味着对于上图，a有可能是c的因，也可能是果，这显然不make sense。
+3. 假设极其严格，需要非常多且高质量的数据，因为faithfulness假设使得我们只能通过conditional independence来测试，如果数据很少，有可能这些测试互相都会相斥，做起图非常困难
+
+论文分享
+- IC algorithm: 一个经典的constraint-based algorithm, 它是利用conditional independence 来确定v-structure, chain, confounder，然后由此来identify DAG。
+  - 方法见书：《Causality: models, reasoning, and inference》[ Judea_Pearl], p60
+- IC* algorithm: IC算法的改良版，可以用在latent(unobserved) confounder存在的情况下。前两步与IC算法相同，第三步的判断规则基于存在latent confounder的假设下做了调整
+  - 方法见书：《Causality: models, reasoning, and inference》[ Judea_Pearl], p62
+- PC algorithm: 也是一个经典的constraint-based algorithm, 和IC算法的思路很相近
+  - 方法见[书](https://www.cs.cmu.edu/afs/cs.cmu.edu/project/learn-43/lib/photoz/.g/web/.g/scottd/fullbook.pdf) p136
+
+#### Score-based Algorithms
+
+这类算法是通过最优化一个给每个图打分的score function来找到最优的图。要想成为打分函数，其要有两个基本部分。
+1. structural equation from candidate G’
+2. other constraints of G’。
+
+比如学过统计的朋友们都知道BIC就是一个打分函数： ![[公式]](https://www.zhihu.com/equation?tex=S%28X%2CG%27%29%3DlogP%28X%7C%5Chat%7B%5Ctheta%7D%2CG%27%29-%5Cfrac%7BJ%7D%7B2%7Dlog%28n%29)
+ 
+他由两部分最成，Maximize likelihood（第一项）的同时regularize graph size（第二项），正好对应了上面的两个基本部分。
+ 
+- 优点
+  - 由于使用goodness of fit替代了conditional independent，于是relax了上面的第一类假设
+- 但缺点
+  - 仍然无法区分马尔可夫等价类
+  - 这类算法因为要找到最优的分数，就要搜索全部的图，这是一个NP-hard和NP-complete的问题，复杂度极高且容易陷入局部最优。
+ 
+论文分享
+- GES algorithm: 一个经典的scored-based algorithm, 使用下面BDeu这个打分函数来给每个图打分。但是这个方法只要求找到一个局部最优解即可。方法使用2阶段的贪婪搜索，第一阶段只insert edges，每轮insert operator只操作可以让这个打分函数最高分的三元组，直到达到local optimum。然后第二阶段只delete edges，同理delete operator只操作可以让这个打分函数最高分的三元组，直到达到local optimum。
+  - ![[公式]](https://www.zhihu.com/equation?tex=S_%7BBDeu%7D%7BG%27%2CX%7D%3Dlog%5Cprod_%7Bj%3D1%7D%5E%7BJ%7D0.001%5E%7B%28r_h-1%29q_j%7D%5Cprod_%7Bk%3D1%7D%5E%7Bq_j%7D%5Cfrac%7B%5CGamma%2810%2Fq_j%29%7D%7B%5CGamma%2810%2Fq_j%2BN_%7Bjk%7D%29%7D%5Cprod_%7Bl%3D1%7D%5E%7Br_j%7D%5Cfrac%7B%5CGamma%2810%2F%28r_iq_i%29%2BN_%7Bjkl%7D%29%7D%7B%5CGamma%2810%2F%28r_jq_j%29%29%7D)
+  - 方法见论文：[http://www.jmlr.org/papers/volume3/chickering02b/chickering02b.pdf](https://link.zhihu.com/?target=http%3A//www.jmlr.org/papers/volume3/chickering02b/chickering02b.pdf)
+- fGES algorithm: fast GES, 是快速版，复杂度低版的GES，有两处改变：parallelize and reorganize caching in the GES
+  - 方法见论文：[https://errorstatistics.files.wordpress.com/2016/11/a-million-variables-and-more-2016-proofs.pdf](https://link.zhihu.com/?target=https%3A//errorstatistics.files.wordpress.com/2016/11/a-million-variables-and-more-2016-proofs.pdf)
+ 
+#### FCMs-based Algorithms
+ 
+这类算法的名字是我自己起的。什么是FCM (functional causal model)呢？不严谨的来说就是上面我提到的Structural Causal Models的图里右边那一堆function，假设我们能先得到这些function，我们就可以还原左边的图。大概就是这个思路。举个例子，对于s，d，y三个变量，如果我们通过某个算法得到了如下的等式关系，也就是一个下三角阵：
+ 
+![](https://pic4.zhimg.com/80/v2-7bfd1fab83acf70400bd3eaa2f7c6a0b_1440w.jpg)
+ 
+那可以通过它得到一个causal order，也就是一个序，比如对于s，d，y来说就是1，2，3。通过这个序，我们知道s一定在d和y前面，d一定在y前面，于是我们有下图的因果DAG
+ 
+![](https://pic1.zhimg.com/80/v2-94b654a6a58cf4602ead7a658772f5f4_1440w.png)
+ 
+这类方法最大的优点就在于能够从马尔可夫等价类中区分出不同的DAG，从而保证有序的因果关系。
+ 
+论文分享
+- LiNGAM: 一个最经典的FCM-based algorithm, 用于continuous data。方法最常用的是用ICA（independent component analysis）作为求解的武器，核心逻辑就是估计一个类似上图的那种strictly lower triangle matrix (下三角阵)，然后这个下三角阵就得到了一个unique的causal order。但是有严格的假设，分别是如下三个假设(a) the data generating process is linear, (b) there are no unobserved confounders, and (c) disturbance variables have non-Gaussian distributions of non-zero variances. 这个方法还有几个优化的变体，DirectLiNGAM，LvLiNGAM，SLIM，LiNGAM-GC-UK等
+  - 方法见文章：[https://www.cs.helsinki.fi/u/ahyvarin/papers/JMLR06.pdf](https://link.zhihu.com/?target=https%3A//www.cs.helsinki.fi/u/ahyvarin/papers/JMLR06.pdf)
+- BMLiNGAM: 和LiNGAM很像, 但是使用于两变量之间的，换句话说就是一个在确定两者有因果关系的变量之间找出谁是因谁是果。 他还有一个极其重要的优势就是可以用于unobserved confounders存在的情况下。类似的还有pairwise LiNGAM
+  - 方法见文章：[http://www.jmlr.org/papers/volume15/shimizu14a/shimizu14a.pdf](https://link.zhihu.com/?target=http%3A//www.jmlr.org/papers/volume15/shimizu14a/shimizu14a.pdf)
+- ANM: additive noise model: 也是一个处理两变量的方法。模型对LiNGAM第一个linear的假设做了放松（即variables和noise不需要再有linear relationship的假设了），然后对于noise，只要是additive的即可。还有一个ANM的优势是缩小了图的搜索空间。类似的可以处理多变量的模型还有一个叫CAM (causal additive model)的模型
+  - 方法见文章：[https://papers.nips.cc/paper/3548-nonlinear-causal-discovery-with-additive-noise-models.pdf](https://link.zhihu.com/?target=https%3A//papers.nips.cc/paper/3548-nonlinear-causal-discovery-with-additive-noise-models.pdf)
+ 
+#### DL/RL algorithm
+
+这类方法有别于上述方法，更多使用深度学习或者强化学习等思路来挖掘因果图，里面的方法其实基本是也是上面的三类，只不过他们的实现路径不太好直接去归类到其中某一类，故我们就单列一类
+ 
+论文分享
+- CGNN: AWESOME! 一个极其强大的算法。可以在如下情况下使用，can be used for multi-variable, can be used in asymmetric distribution, can be used in unobserved confounder, non-linear cases.
+  - 回忆我们刚刚提到的FCM方程，里面有一个个f，这些f我们刚刚说可以是linear也可以是nonlinear的，这里是使用神经网络作为FCM 里的f，然后用他来生成拟合的一个FCM作为拟合出来的joint distribution来approximate the real joint distribution of data，用拟合的distribution和真正的distribution之间的差距作为损失函数，网络的目标即为最小化这个损失函数。损失函数表达如下： ![[公式]](https://www.zhihu.com/equation?tex=S%28%5Chat%7BG%7D%2CD%29%3D-%5Chat%7BMMD%7D_k%28D%2C%5Chat%7BD%7D%29-%5Clambda%7C%5Chat%7BG%7D%7C) ，其中 ![[公式]](https://www.zhihu.com/equation?tex=%7C%5Chat%7BG%7D%7C) 是 ![[公式]](https://www.zhihu.com/equation?tex=%5Chat%7BG%7D) 的edge的个数。另外：![[公式]](https://www.zhihu.com/equation?tex=%5Chat%7BMMD%7D_k%3D%5Cfrac%7B1%7D%7Bn%5E2%7D%5Csum%5En_%7Bi%2Cj%3D1%7Dk%28x_i%2Cx_j%29%2B%5Cfrac%7B1%7D%7Bn%5E2%7D%5Csum%5En_%7Bi%2Cj%3D1%7Dk%28%5Chat%7Bx%7D_i%2C%5Chat%7Bx%7D_j%29-%5Cfrac%7B2%7D%7Bn%5E2%7D%5Csum%5En_%7Bi%2Cj%3D1%7Dk%28x_i%2C%5Chat%7Bx%7D_j%29)
+  - 这里k就是某种核函数，衡量距离用的，MMD就是用来衡量两个分布的接近程度的，当两个分布完全一样时，MMD=0。所以大家其实可以看出来，这是一个score-based method，因为他的score function由两部分组成，一部分评估SCM的效果，一部分是对图的构造做了限制。不过这个方法理论上我理解是可以区分马尔可夫等价类的，所以也不算一般的score-based method
+  - 具体怎么实现呢？首先我们需要输入一个skeleton，就是一个先验的无向的因果图，这个图一般由专家知识得到。如果是score-based method，就会有一个搜索的策略，CGNN也是如此，他一共有3步搜索策略。
+ 
+1. 对于两两相邻的变量，通过这两个变量做一个pairwise CGNN，然后两个方向分别去训练一波，得到最优的损失，选比较小的损失作为选定的方向。于是我们就得到了两两的方向，即 ![](https://pic2.zhimg.com/80/v2-2a46763be48c57c0457f79bd05fbb9e1_1440w.png)
+2. 顺着目前得到图的任意一个节点，找找有没有环，有环则把他reverse，这步就是保证不存在任意一个环，即 ![](https://pic2.zhimg.com/80/v2-89123402c49a7216f1f4eebf802317fd_1440w.jpg)
+3. 对于目前的图，不断的尝试reverse其中某个边，然后再去训练，看最后损失能不能减少，如果可以就reverse。这步一般使用hill-climbing算法。即 ![](https://pic2.zhimg.com/80/v2-0934155db10969af82289400480ccfe9_1440w.png)
+ 
+这样就得到了最后的图，所以NN其实是在每次需要计算score的时候都训练一遍，且参数并不保留，都是重新训练。还有就是，这个方法可以处理hidden confounder，方法就是把noise作为variables也放进图里。详细可以看原论文：[https://arxiv.org/pdf/1711.08936.pdf](https://link.zhihu.com/?target=https%3A//arxiv.org/pdf/1711.08936.pdf)
+ 
+- SAM: recovering full causal models from continuous observational data along a multivariate non-parametric setting。也是可以处理有hidden confounder的情况。这篇文章比较骚的地方在于他提到自己不是上述任意一类的方法，他说他是一个集大成者，即用到了conditional independence如constraint-based，又做了regularization如score-based，同时又可以和CGNN，CAM等方法一样解决distributional asymmetries的问题。可见现在学术圈有多卷！
+  - 详细可以看原论文：[https://arxiv.org/pdf/1803.04929.pdf](https://link.zhihu.com/?target=https%3A//arxiv.org/pdf/1803.04929.pdf)
+- CAUSAL DISCOVERY WITH REINFORCEMENT LEARNING: 这篇文章来自华为的诺亚实验室，他利用Reinforcement Learning (RL)来寻找得分最高的DAG. Its encoder-decoder model takes observable data as input and generates graph adjacency matrices that are used to compute rewards. It uses RL as a search strategy and its final output would be the graph, among all graphs generated during training, that achieves the best reward, is the best DAG. 使用RL作为因果挖掘的思想非常straightforward，因为在RL里的每个action可以看作是一个treatment的改变，而reward就可以是图的分数，这个思想非常好
+  - 详细可以看原论文：[https://arxiv.org/pdf/1906.0447](https://link.zhihu.com/?target=https%3A//arxiv.org/pdf/1906.04477.pdf)
+
+## （2）Causal Effect Estimation 因果效应的估计
+
+[大白话谈因果系列文章（二）因果效应估计及论文介绍](https://zhuanlan.zhihu.com/p/397974913)
+
+例子：发优惠券是因，购买转化率是果，想知道，发券时购买转化率会增加多少？这个问题就是一个典型的**因果效应估计**问题。
+
+因果效应估计非常广，细分了很多领域，比如对`ITE`的估计，对`ATE`的估计，其中根据因果类型和数据特性，又有更多分类，比如对于连续性treatment的估计，对multi-cause的估计，对time-varying treatment的估计等等。这里我们主要focus在ATE和ITE的两种估计。
+
+treatment是我们感兴趣的那个因，比如研究给用户发优惠券对购买转化率的影响，那么不发券（t=0），发券（t=1）。
+
+假设treatment有两种 ![[公式]](https://www.zhihu.com/equation?tex=t%5Cin%5C%7B0%2C1%5C%7D) ，对于一个instance i，比如一个用户，他的转化率y是果，是否发券的t是因， ![[公式]](https://www.zhihu.com/equation?tex=y%5Et) 表示在treatment为t的情况下转化率y的值。我们就有ITE (Individual treatment effect)公式如下：![[公式]](https://www.zhihu.com/equation?tex=ITE_i%3D%5Ctau_i%3Dy_i%5E1-y_i%5E0), 表示一个individual的treatment effect。那么如果我们想看一个大群体（一个普遍现象），就是ATE(average treatment effect)啦，ATE is the expectation of ITE over the whole population i=1,...,n：![[公式]](https://www.zhihu.com/equation?tex=ATE%3DE_i%5B%5Ctau_i%5D%3DE_i%5By_i%5E1-y_i%5E0%5D%3D%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5En%28y_i%5E1-y_i%5E0%29)
+ 
+那么介于两者中间呢，就有一个CATE(conditional average treatment effect)，也就是一个subpopulation的average treatment effect。![[公式]](https://www.zhihu.com/equation?tex=CATE%3D%5Ctau%28X%29%3DE_%7Bi%3Ax_i%5Cin+X%7D%5B%5Ctau_i%5D), 其实ITE就是CATE的变种，只不过这个subpopulation缩小到了一个人。
+ 
+### 估计ATE
+ 
+估计ATE的作用是做一些宏观的决策，或者对于整体population是否施加treatment做一些决策。举个例子，想要评估打疫苗对病变的效果，我们要评估一个overall的疫苗效应，这个时候我们去预估ATE就够了。
+
+评估效果的时候，我们需要一个ground truth的ATE ![[公式]](https://www.zhihu.com/equation?tex=%5Ctau) 以及我们infer出来的ATE ![[公式]](https://www.zhihu.com/equation?tex=%5Chat%7B%5Ctau%7D) ，我们评估的指标就是MAE：![[公式]](https://www.zhihu.com/equation?tex=%5Cepsilon_%7BMAE%5C_ATE%7D%3D%7C%5Ctau-%5Chat%7B%5Ctau%7D%7C)
+ 
+### 估计ITE (CATE)
+ 
+那么什么时候我们需要估计ITE呢？当整个population是heterogeneous的时候，即人群有异质性的时候，ATE可能会误导结论。举个例子，我们衡量大众点评评分对餐馆的销量影响的时候，ATE可能会误导，因为大城市的餐馆可能会更多被大众点评影响，小城市或农村可能影响更小。这时候其实我们要评估的每一个subpopulation的ATE，也即CATE（或者细粒度到每个individual的ITE）。那么我们怎么去定义各个subpopulation呢？就是靠除了treatment t之外的其他特征X，每一组X的取值就代表了一个subpopulation。
+ 
+评估效果的时候，我们可能需要AB的环境，对于某个样本做treatment=0和1的两次实验得到结果 ![[公式]](https://www.zhihu.com/equation?tex=y%5E0) 和 ![[公式]](https://www.zhihu.com/equation?tex=y%5E1) ，然后我们算一个MSE：![[公式]](https://www.zhihu.com/equation?tex=%5Cepsilon_%7BPEHE%7D%3D%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5En%28y_i%5E1-y_i%5E0-%5Chat%7B%5Ctau%7D%28x_i%29%29%5E2)
+ 
+### 一个重要假设
+ 
+第一篇文章提到了，SCM这个结构中有一个重要假设叫sufficiency assumption，即我们没有unobserved confounder，confounder就是同时对t和y都有因果影响的变量，这里要求所有的confounder都在我们的数据特征X中。所以前期的很多方法都需要满足这个假设，不过大家也知道这个条件其实在现实生活中的假设是很难被满足的，这时候我们就会有一些方法可以relax这个假设。所以我们也可以把方法依据是否能在有unobserved confounder的情况下使用分成两类。
+ 
+所以接下来的文章介绍其实就会根据用来估计ATE/ITE，是否要求no unobserved confounder这两方面去做分类。详见[原文](https://zhuanlan.zhihu.com/p/397974913)
+- 要求no unobserved confounder的方法
+- 不要求no unobserved confounder的方法
+
 
 ## 因果推理方法
 
