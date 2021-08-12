@@ -3,7 +3,7 @@ layout: post
 title:  "搜索引擎-Search-Engine"
 date:   2021-07-20 21:05:00
 categories: 技术工具
-tags: 搜索 索引 正排 倒排 pagerank 谷歌 Google 百度
+tags: 搜索 索引 正排 倒排 pagerank 谷歌 Google 百度 ES es
 excerpt: 搜索引擎技术汇总
 author: 鹤啸九天
 mathjax: true
@@ -475,6 +475,365 @@ Query扩展pair的挖掘方式和纠错差不多，可以建模为pair对判别�
 虽然NLP只有几个基础任务，但在最终落地时却是很复杂的，一个几十毫秒的Query理解模块包含着这么多逻辑，需要几人甚至十几人的团队来维护，不仅要上高效率的模型，还需要增加各种策略来解决业务问题。
 
 # 开源搜索引擎
+
+## ES：ElasticSearch
+
+Elasticsearch 是一个分布式、RESTful 风格的搜索和数据分析引擎，能够解决不断涌现出的各种用例。
+
+Kibana是官方推出的把 Elasticsearch 数据可视化的工具, 官方[下载地址](https://artifacts.elastic.co/downloads/kibana/kibana-7.14.0-linux-x86_64.tar.gz)
+
+### 基本概念
+
+节点 Node、集群 Cluster 和分片 Shards
+ElasticSearch 是分布式数据库，允许多台服务器协同工作，每台服务器可以运行多个实例。
+- 单个实例称为一个**节点**（node），一组节点构成一个**集群**（cluster）。
+- **分片**是底层的工作单元，文档保存在分片内，分片又被分配到集群内的各个节点里，每个分片仅保存全部数据的一部分。
+
+索引 Index、类型 Type 和文档 Document
+对比MySQL 数据库：
+- index → db
+- type → table
+- document → row
+如果要访问一个文档元数据应该包括囊括 index/type/id 这三种类型，很好理解。
+
+1. Node & Cluster	
+  - 单个 Elasticsearch 实例称为一个节点（Node）；一组节点构成一个集群（Cluster）。
+2. Index	
+  - Elasticsearch 数据管理的顶层单位就叫做 Index（索引）；相当于 MySQL、MongoDB 等里面的数据库的概念；
+  - 注意：每个 Index （即数据库）的名字必须是小写。
+3. Document	
+  - Index 里面单条的记录称为 Document（文档）；Document 使用 JSON 格式表示；
+  - 同一个 Index 的Document，不要求有相同的结构（scheme），但最好保持相同，有利于提高搜索效率。
+4. Type	
+  - Document 可以分组，这种分组就叫做 Type；它是虚拟的逻辑分组，用来过滤 Document，类似 MySQL 中的数据表，MongoDB 中的 Collection；
+  - 不同的 Type 应有相似的结构。（根据规划 Elastic 6.x 版只允许每个 Index 包含一个 Type，7.x 版将会移除 Type。）
+5. Fields	
+  - 即字段，每个 Document 都类似一个 JSON 结构，它包含了许多字段，每个字段都有其对应的值；可以类比 MySQL 数据表中的字段。
+
+
+
+### 安装
+
+- 下载：官网[下载地址](https://www.elastic.co/cn/downloads/elasticsearch)
+  - wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.1.1-linux-x86_64.tar.gz
+- 解压到/usr/local/目录：
+  - tar -avxf elasticsearch-7.1.1-linux-x86_64.tar.gz -C /usr/local/
+- 进入elasticsearch目录：
+  - 新建data目录：mkdir data
+- 修改配置
+  - vim config/elasticsearch.yml，开启以下配置项：
+    - network.host: 10.200.24.101
+    - http.port: 9200
+    - discovery.seed_hosts: [ "10.200.24.101" ]
+- 启动es
+  - 进入/bin目录执行命令：./elasticsearch
+  - 后台启动：./elasticsearch -d
+  - 查看es进程：ps -ef|grep elasticsearch
+- 注：
+  - ①若提示内存不够，elasticsearch使用java的jvm默认是使用1G的内存，需要修改配置vim ./config/jvm.options， -Xms200m
+    - 【2021-8-12】错误提示：max virtual memory areas vm.max_map_count [ 65530 ] is too low, increase to at least [ 262144 ]
+      - [解法](https://blog.csdn.net/qq_43655835/article/details/104633359)：sysctl -w vm.max_map_count=262144
+  - ②can not run elasticsearch as root：不能使用root用户操作，添加一个其他的用户：
+    - 添加用户：adduser es
+    - 输入密码：passwd es
+    - 更改目录所属用户：chown es /usr/local/elasticsearch-7.1.1/ -R
+    - 编辑配置：/etc/security/limits.conf
+    - 后续详细配置见：[Linux安装Elasticsearch7.x](https://blog.csdn.net/luo1544943710/article/details/93196147)
+
+
+参考：
+
+```yaml
+cluster.name: my-application #集群名称
+node.name: node-1 #节点名称
+#数据和日志的存储目录
+path.data: /usr/local/elasticsearch-7.1.1/data
+path.logs: /usr/local/elasticsearch-7.1.1/logs
+#设置绑定的ip，设置为0.0.0.0以后就可以让任何计算机节点访问到了
+network.host: 0.0.0.0
+http.port: 9200 #端口
+#设置在集群中的所有节点名称，这个节点名称就是之前所修改的，当然你也可以采用默认的也行，目前是单机，放入一个节点即可
+cluster.initial_master_nodes: ["node-1"]
+```
+
+web页面示例：所有其他语言可以使用 RESTful API 通过端口 9200 和 Elasticsearch 进行通信
+
+![](https://img-blog.csdnimg.cn/20190621174647630.png)
+
+```shell
+curl -XGET 'http://localhost:9200/_count?pretty' -d '
+{
+    "query": {
+        "match_all": {}
+    }
+}
+'
+```
+
+
+
+### Python操作ES
+
+[python 操作 ElasticSearch 入门](https://zhuanlan.zhihu.com/p/95163799)
+
+中文分词插件：
+
+elasticsearch默认是英文分词器，所以我们需要安装一个中文分词插件 elasticsearch-analysis-ik （注意和elasticsearch的版本对应），安装之后重新启动 Elasticsearch 自动加载安装好的插件
+- 命令：elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v6.5.4/elasticsearch-analysis-ik-6.5.4.zip  
+
+1. 创建 Index  --  es.indices.create(index=' ')
+
+- 即字段，每个 Document 都类似一个 JSON 结构，它包含了许多字段，每个字段都有其对应的值；可以类比 MySQL 数据表中的字段。
+
+2. 删除 Index  --  es.indices.delete(index='news')
+
+```python
+result = es.indices.delete(index='news', ignore=[400, 404])
+print(result)
+```
+
+3. 插入数据  --  es.create()  &  es.index()
+
+```python
+es.indices.create(index='news', ignore=400)
+data = {'title': '美国留给伊拉克的是个烂摊子吗', 'url': 'http://view.news.qq.com/zt2011/usa_iraq/index.htm'}
+ 
+# 方法一：es.create()  手动指定 id 唯一标识
+result = es.create(index='news', doc_type='politics', id=1, body=data)
+print(result)
+ 
+# 方法二：es.index()  自动生成id
+es.index(index='news', doc_type='politics', body=data)
+```
+
+4. 更新数据
+
+```python
+data = {
+    'title': '美国留给伊拉克的是个烂摊子吗',
+    'url': 'http://view.news.qq.com/zt2011/usa_iraq/index.htm',
+    'date': '2011-12-16'
+}
+result = es.update(index='news', doc_type='politics', body=data, id=1)
+print(result)
+ 
+# 第二种方法：index  -- 数据不存在，增加; 如果已经存在，更新
+es.index(index='news', doc_type='politics', body=data, id=1)
+```
+
+5. 删除数据
+
+```python
+# delete -- 指定对应的id 
+result = es.delete(index='news', doc_type='politics', id=1)
+print(result)
+```
+
+6.查询数据 -- 优势：其异常强大的检索功能
+
+新建一个索引并指定需要分词的字段, 更新 mapping 信息
+
+```python
+from elasticsearch import Elasticsearch
+ 
+es = Elasticsearch()
+mapping = {
+    'properties': {
+        'title': {
+            'type': 'text',
+            'analyzer': 'ik_max_word',
+            'search_analyzer': 'ik_max_word'
+        }
+    }
+}
+es.indices.delete(index='news', ignore=[400, 404])
+es.indices.create(index='news', ignore=400)
+ 
+# 设置mapping 信息：指定字段的类型 type 为 text，分词器 analyzer 和 搜索分词器 search_analyzer 为 ik_max_word，即中文分词插件，默认的英文分词器。
+result = es.indices.put_mapping(index='news', doc_type='politics', body=mapping)
+print(result)
+```
+
+插入几条新的数据
+
+```python
+datas = [
+    {
+        'title': '美国留给伊拉克的是个烂摊子吗',
+        'url': 'http://view.news.qq.com/zt2011/usa_iraq/index.htm',
+        'date': '2011-12-16'
+    },
+    {
+        'title': '公安部：各地校车将享最高路权',
+        'url': 'http://www.chinanews.com/gn/2011/12-16/3536077.shtml',
+        'date': '2011-12-16'
+    },
+    {
+        'title': '中韩渔警冲突调查：韩警平均每天扣1艘中国渔船',
+        'url': 'https://news.qq.com/a/20111216/001044.htm',
+        'date': '2011-12-17'
+    },
+    {
+        'title': '中国驻洛杉矶领事馆遭亚裔男子枪击 嫌犯已自首',
+        'url': 'http://news.ifeng.com/world/detail_2011_12/16/11372558_0.shtml',
+        'date': '2011-12-18'
+    }
+]
+ 
+for data in datas:
+    es.index(index='news', doc_type='politics', body=data)
+
+# 查询  --  根据关键词查询一下相关内容
+result = es.search(index='news', doc_type='politics')
+print(result)    # 返回所有结果
+
+# 检索 -- 全文检索
+# 使用 DSL 语句来进行查询： match 指定全文检索，检索字段 title，检索内容 “中国领事馆”
+dsl = {
+    'query': {
+        'match': {
+            'title': '中国 领事馆'
+        }
+    }
+}
+ 
+es = Elasticsearch()
+result = es.search(index='news', doc_type='politics', body=dsl)
+print(json.dumps(result, indent=2, ensure_ascii=False))
+```
+
+返回的检索结果有两条，第一条的分数为 2.54，第二条的分数为 0.28。这是因为第一条匹配的数据中含有“中国”和“领事馆”两个词，第二条匹配的数据中不包含“领事馆”，但是包含了“中国”这个词，所以也被检索出来了，但是分数比较低。检索结果会按照检索关键词的相关性进行排序，这就是一个基本的搜索引擎雏形
+
+[Python 使用 elasticsearch 的基本操作](https://blog.csdn.net/refrain__wg/article/details/86028943)
+
+汇总：
+
+```python
+# 使用python操作ElasticSearch
+from elasticsearch import Elasticsearch
+# 连接ES,http://10.200.24.101:9200/
+
+es = Elasticsearch([{'host':'10.200.24.101','port':9200}], timeout=3600)
+
+# 创建数据
+# 不指定id 自动生成
+es.index(index="megacorp",body={"first_name":"xiao","last_name":"xiao", 'age': 25, 'about': 'I love to go rock climbing', 'interests': ['game', 'play']})
+{'_index': 'megacorp',
+ '_type': '_doc',
+ '_id': '3oXEzm4BAZBCZGyZ2R40',
+ '_version': 1,
+ 'result': 'created',
+ '_shards': {'total': 2, 'successful': 1, 'failed': 0},
+ '_seq_no': 1,
+ '_primary_term': 2}
+# 指定IDwu
+es.index(index="megacorp",id=4,body={"first_name":"xiao","last_name":"wu", 'age': 66, 'about': 'I love to go rock climbing', 'interests': ['sleep', 'eat']})
+{'_index': 'megacorp',
+ '_type': '_doc',
+ '_id': '4',
+ '_version': 1,
+ 'result': 'created',
+ '_shards': {'total': 2, 'successful': 1, 'failed': 0},
+ '_seq_no': 5,
+ '_primary_term': 2}
+
+# 查询: query内的条件选其中一个
+query = {
+  "query": {
+    "match_all": {} # 默认方式，查询所有文档，是没有查询条件下的默认语句
+    "match": {"about": "rock"} # 标准查询，只能就指定某个确切字段某个确切的值进行搜索
+    "multi_match": { # multi_match 查询--match查询的基础上同时搜索多个字段，在多个字段中同时查一个
+        "query": 'music',"fields": ["about","interests"]}
+    "bool": { # bool 查询--与 bool 过滤相似，用于合并多个查询子句。不同的是，bool 过滤可以直接给出是否匹配成功， 而bool 查询要计算每一个查询子句的 _score （相关性分值）。
+             "must": {"match": { "last_name": 'Smith' }},
+             "must_not":{"exists":  {"field":  "name"}}
+        }
+    "wildcard": {"about": "ro*"} # wildcards 查询--使用标准的shell通配符查询
+    "regexp": {"about": ".a.*"} # 正则查询
+    "prefix": {"about": "I love"} # prefix 查询 -- 以什么字符开头的
+    "match_phrase": {"about": "I love"} # 短语匹配(Phrase Matching) -- 寻找邻近的几个单词
+    "match_phrase": {"about": "I love"} # 统计查询， 配合语句：result = es.count(index="megacorp", body=query)
+    "term": {'age': 32} # term主要用于精确匹配哪些值，比如数字，日期，布尔值或 not_analyzed 的字符串(未经切词的文本数据类型)
+    "terms": {'age': [32, 25]} # terms 跟 term 有点类似，但 terms 允许指定多个匹配条件。
+    "range": {'age': {"gt":34}} # range, 按照指定范围查找一批数据, gt/大于, gte/大于等于,lt/小于,lte/小于等于
+    "exists": {"field": "first_name"} # exists 和 missing 过滤--查找文档中是否包含指定字段或没有某个字段，类似于SQL语句中的IS_NULL条件
+    "bool": {"must": {"term": { "_score": 1 },"term": { "age": 32 }}, # bool 过滤--合并多个过滤条件查询结果的布尔逻辑
+             "must_not":{"exists":  {"field": "name"}}}
+            # must/多个查询条件的完全匹配,相当于 and。
+            # must_not/多个查询条件的相反匹配，相当于 not。
+            # should/至少有一个查询条件匹配, 相当于 or。
+  }
+}
+result = es.search(index="megacorp", body=query)
+print(result)
+# DSL语句查询: term 过滤--term主要用于精确匹配哪些值，比如数字，日期，布尔值或 not_analyzed 的字符串(未经切词的文本数据类型)
+
+# 根据ID删除
+es.delete(index='megacorp', id='3oXEzm4BAZBCZGyZ2R40')
+{'_index': 'megacorp',
+ '_type': '_doc',
+ '_id': '3oXEzm4BAZBCZGyZ2R40',
+ '_version': 2,
+ 'result': 'deleted',
+ '_shards': {'total': 2, 'successful': 1, 'failed': 0},
+ '_seq_no': 3,
+ '_primary_term': 2}
+# delete_by_query：删除满足条件的所有数据，查询条件必须符合DLS格式
+query = {
+    "query": {
+        "match": {
+            "first_name": "xiao"
+        }
+    }
+}
+result = es.delete_by_query(index="megacorp", body=query)
+print(result)
+#{'took': 57, 'timed_out': False, 'total': 1, 'deleted': 1, 'batches': 1, 'version_conflicts': 0, 'noops': 0, 'retries': {'bulk': 0, 'search': 0}, 'throttled_millis': 0, 'requests_per_second': -1.0, 'throttled_until_millis': 0, 'failures': []}
+
+# 根据ID更新
+doc_body = {
+    'script': "ctx._source.remove('age')"
+}  
+# 增加字段   
+doc_body = {
+    'script': "ctx._source.address = '合肥'"
+} 
+# 修改部分字段
+doc_body = {
+    "doc": {"last_name": "xiao"}
+}
+es.update(index="megacorp", id=4, body=doc_body)
+{'_index': 'megacorp',
+ '_type': '_doc',
+ '_id': '4',
+ '_version': 2,
+ 'result': 'updated',
+ '_shards': {'total': 2, 'successful': 1, 'failed': 0},
+ '_seq_no': 6,
+ '_primary_term': 2}
+# update_by_query：更新满足条件的所有数据，写法同上删除和查询
+query = {
+    "query": {
+        "match": {
+            "last_name": "xiao"
+        }
+    },
+    "script":{
+        "source": "ctx._source.last_name = params.name;ctx._source.age = params.age",
+        "lang": "painless",
+        "params" : {
+            "name" : "wang",
+            "age": 100,
+        },  
+    }
+
+}
+result = es.update_by_query(index="megacorp", body=query)
+print(result)
+#{'took': 72, 'timed_out': False, 'total': 1, 'updated': 1, 'deleted': 0, 'batches': 1, 'version_conflicts': 0, 'noops': 0, 'retries': {'bulk': 0, 'search': 0}, 'throttled_millis': 0, 'requests_per_second': -1.0, 'throttled_until_millis': 0, 'failures': []}
+```
+
+参考：[python 操作 ElasticSearch 入门](https://zhuanlan.zhihu.com/p/95163799)
  
 ## 全文检索引擎 Sphinx
  
