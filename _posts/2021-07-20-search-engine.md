@@ -482,18 +482,83 @@ Elasticsearch 是一个分布式、RESTful 风格的搜索和数据分析引擎�
 
 Kibana是官方推出的把 Elasticsearch 数据可视化的工具, 官方[下载地址](https://artifacts.elastic.co/downloads/kibana/kibana-7.14.0-linux-x86_64.tar.gz)
 
+
+[一文搞懂什么是ElasticSearch](https://cloud.tencent.com/developer/article/1583402)
+
+什么是Elasticsearch？
+>- Elasticsearch is a real-time, distributed storage, search, and analytics engine
+>- Elasticsearch 是一个**实时**的**分布式**存储、搜索、分析的引擎。
+
+介绍那儿有几个关键字：
+- 实时
+- 分布式
+- 搜索
+- 分析
+
+为什么要使用Elasticsearch？传统数据库也能做到（实时、存储、搜索、分析）。相对于数据库，Elasticsearch的强大之处就是可以**模糊查询**。
+- SQL里的模糊查询效率低（数据量很大（1亿条）时，查询是秒级别），返回大量结果；无法兼容拼写错误
+  - select * from user where name like '% 公众号Java3y %'
+
+Elasticsearch是专门做搜索的，就是为了解决上面所讲的问题而生的：
+- Elasticsearch对**模糊搜索**非常擅长（搜索速度很快）
+- 从Elasticsearch搜索到的数据可以根据评分过滤掉大部分的，只要返回评分高的给用户就好了（原生就支持排序）
+- 没有那么准确的关键字也能搜出相关的结果（能匹配有相关性的记录）
+
+Elasticsearch为什么可以实现快速的“模糊匹配”/“相关性查询”？写入数据到Elasticsearch的时候会进行分词，建倒排索引
+
+![倒排索引图](https://ask.qcloudimg.com/http-save/yehe-2520554/uof7z5nfd4.jpeg)
+
+Elasticsearch内置了一些分词器
+- Standard  Analyzer 。按词切分，将词小写
+- Simple Analyzer。按非字母过滤（符号被过滤掉），将词小写
+- WhitespaceAnalyzer。按照空格切分，不转小写
+- ….等等等
+
+Elasticsearch分词器主要由三部分组成：
+- *Character Filters（文本过滤器，去除HTML）
+- Tokenizer（按照规则切分，比如空格）
+- TokenFilter（将切分后的词进行处理，比如转成小写）
+
+Elasticsearch是老外写的，内置的分词器都是英文类的，而我们用户搜索的时候往往搜的是中文，现在中文分词器用得最多的就是**IK**。
+
+Elasticsearch的数据结构是怎么样的？
+- ![ES数据结构](https://ask.qcloudimg.com/http-save/yehe-2520554/xubkeuwjxi.jpeg)
+- 输入一段文字，Elasticsearch会根据分词器对我们的那段文字进行分词（也就是图上所看到的Ada/Allen/Sara..)，这些分词汇总起来我们叫做Term Dictionary，而我们需要通过分词找到对应的记录，这些文档ID保存在PostingList
+- 在Term Dictionary中的词由于是非常非常多的，所以我们会为其进行排序，等要查找的时候就可以通过二分来查，不需要遍历整个Term Dictionary
+- 由于Term Dictionary的词实在太多了，不可能把Term Dictionary所有的词都放在内存中，于是Elasticsearch还抽了一层叫做Term Index，这层只存储  部分   词的前缀，Term Index会存在内存中（检索会特别快）
+- Term Index在内存中是以FST（Finite State Transducers）的形式保存的，其特点是非常节省内存。FST有两个优点：
+  - 1）空间占用小。通过对词典中单词前缀和后缀的重复利用，压缩了存储空间；
+  - 2）查询速度快。O(len(str))的查询时间复杂度。
+
+前面讲到了Term Index是存储在内存中的，且Elasticsearch用FST（Finite State Transducers）的形式保存（节省内存空间）。Term Dictionary在Elasticsearch也是为他进行排序（查找的时候方便），其实PostingList也有对应的优化。PostingList会使用Frame Of Reference（FOR）编码技术对里边的数据进行压缩，节约磁盘空间。
+
+![](https://ask.qcloudimg.com/http-save/yehe-2520554/csu2tzhwgj.jpeg?imageView2/2/w/1620)
+ 
+`PostingList`里边存的是文档ID，我们查的时候往往需要对这些文档ID做**交集和并集**的操作（比如在多条件查询时)，`PostingList`使用**Roaring Bitmaps**来对文档ID进行交并集操作。
+ 
+使用**Roaring Bitmaps**的好处就是可以节省空间和快速得出交并集的结果。
+- ![](https://ask.qcloudimg.com/http-save/yehe-2520554/cq0fqq7dil.jpeg?imageView2/2/w/1620)
+ 
+所以到这里我们总结一下Elasticsearch的数据结构有什么特点：
+- ![](https://ask.qcloudimg.com/http-save/yehe-2520554/hcio746lq5.jpeg?imageView2/2/w/1620)
+
 ### 基本概念
 
-节点 Node、集群 Cluster 和分片 Shards
-ElasticSearch 是分布式数据库，允许多台服务器协同工作，每台服务器可以运行多个实例。
-- 单个实例称为一个**节点**（node），一组节点构成一个**集群**（cluster）。
-- **分片**是底层的工作单元，文档保存在分片内，分片又被分配到集群内的各个节点里，每个分片仅保存全部数据的一部分。
+Elasticsearch的一些常见术语。
+- `Index`：Elasticsearch的Index相当于数据库的Table
+- `Type`：这个在新的Elasticsearch版本已经废除（在以前的Elasticsearch版本，一个Index下支持多个Type--有点类似于消息队列一个topic下多个group的概念）
+- `Document`：Document相当于数据库的一行记录
+- `Field`：相当于数据库的Column的概念
+- `Mapping`：相当于数据库的Schema的概念
+- `DSL`：相当于数据库的SQL（给我们读取Elasticsearch数据的API）
 
 索引 Index、类型 Type 和文档 Document
 对比MySQL 数据库：
 - index → db
 - type → table
 - document → row
+![图解](https://ask.qcloudimg.com/http-save/yehe-2520554/56osb1nzie.jpeg?imageView2/2/w/1620)
+
 如果要访问一个文档元数据应该包括囊括 index/type/id 这三种类型，很好理解。
 
 1. Node & Cluster	
@@ -510,6 +575,20 @@ ElasticSearch 是分布式数据库，允许多台服务器协同工作，每台
 5. Fields	
   - 即字段，每个 Document 都类似一个 JSON 结构，它包含了许多字段，每个字段都有其对应的值；可以类比 MySQL 数据表中的字段。
 
+Elasticsearch的架构是怎么样的呢？
+- 一个Elasticsearch集群会有多个Elasticsearch节点，所谓节点实际上就是运行着Elasticsearch进程的机器。
+- 在众多的节点中，其中会有一个Master Node，它主要负责维护索引元数据、负责切换主分片和副本分片身份等工作（后面会讲到分片的概念），如果主节点挂了，会选举出一个新的主节点。
+  - ![](https://ask.qcloudimg.com/http-save/yehe-2520554/548ms6dfmy.jpeg?imageView2/2/w/1620)
+- Elasticsearch最外层的是Index（相当于数据库 表的概念）；一个Index的数据我们可以分发到不同的Node上进行存储，这个操作就叫做**分片**
+  - 为什么要分片?
+    - 如果一个Index的数据量太大，只有一个分片，那只会在一个节点上存储，随着数据量的增长，一个节点未必能把一个Index存储下来。
+    - 多个分片，在写入或查询的时候就可以并行操作（从各个节点中读写数据，提高吞吐量）
+  - 分片会有**主分片**和**副本分片**之分（为了实现高可用）,数据写入的时候是写到主分片，副本分片会复制主分片的数据，读取的时候主分片和副本分片都可以读。
+
+节点 Node、集群 Cluster 和分片 Shards
+ElasticSearch 是分布式数据库，允许多台服务器协同工作，每台服务器可以运行多个实例。
+- 单个实例称为一个**节点**（node），一组节点构成一个**集群**（cluster）。
+- **分片**是底层的工作单元，文档保存在分片内，分片又被分配到集群内的各个节点里，每个分片仅保存全部数据的一部分。
 
 
 ### 安装
