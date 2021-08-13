@@ -433,7 +433,7 @@ x+y = z\\a=4
 - [牛逼哄哄的 Git 命令动画演示，一看就懂！](https://www.cnblogs.com/lzkwin/p/12658029.html)，[CS Visualized: Useful Git Commands](https://links.jianshu.com/go?to=https%3A%2F%2Fdev.to%2Flydiahallie%2Fcs-visualized-useful-git-commands-37p1)
 ![](https://tukuimg.bdstatic.com/scrop/80a43c9d8428273cc9cabe71256eb9ef.gif)
 
-- 【2021-2-10】用vscode在线查看github代码库，方法：加1s即可，详见：[github1s](https://github.com/conwnet/github1s)
+- 【2021-2-10】用vscode在线查看github代码库，方法：加1s或com→dev即可，详见：[github1s](https://github.com/conwnet/github1s)
 - github新功能，在线编辑IDE，[codespace](https://github.com/features/codespaces)
 
 
