@@ -129,12 +129,190 @@ Embedding 最酷的一个地方在于可以用来可视化出表示的数据的�
 
 ![](https://pic4.zhimg.com/80/v2-e1c5fcd4234d9a6ef64daa9108309ed7_1440w.jpg)
 
-TensorFlow开发了在线应用程序[projector](https://projector.tensorflow.org/)，可视化并与 embedding 交互。
+2016年12月，[谷歌开源Embedding Projector，可将高维数据可视化](https://zhuanlan.zhihu.com/p/24252690)
+- 一款用于交互式可视化和高维数据分析的网页工具 [Embedding Projector](https://projector.tensorflow.org/)，通过PCA，T-SNE等方法将高维向量投影到三维坐标系。
+  - **PCA** 通常可以有效地探索嵌入的内在结构，揭示出数据中最具影响力的维度。
+  - **t-SNE** 可用于探索局部近邻值（local neighborhoods）和寻找聚类（cluster），可以让开发者确保一个嵌入保留了数据中的所有含义（比如在 MNIST 数据集中，可以看到同样的数字聚类在一起）。
+  - **自定义线性投影**可以帮助发现数据集中有意义的「方向（direction）」，比如一个语言生成模型中一种正式的语调和随意的语调之间的区别——这让我们可以设计出更具适应性的机器学习系统。
+- 其作为 TensorFlow 的一部分，能带来类似 [A.I. Experiment](http://aiexperiments.withgoogle.com/) 的效果。同时，谷歌也在 projector.tensorflow.org 放出了一个可以单独使用的版本，让用户无需安装和运行 TensorFlow 即可进行高维数据的可视化
+- [论文](https://arxiv.org/pdf/1611.05469v1.pdf), [A.I. Experiment](http://aiexperiments.withgoogle.com/), [Embedding Projector体验地址](https://projector.tensorflow.org/)，[使用介绍](https://www.tensorflow.org/versions/master/how_tos/embedding_viz/index.html)
+- ![nlp降维图示](https://pic1.zhimg.com/80/v2-7abbe32b5feb0ab869db33a55e2b8b7c_720w.png)
+  - Label by：可以选择Label和Index，将鼠标放到相应的点上，可以显示该点的Label或者Index
+  - Color by：可选Label和No color map，前者会根据不同的label给点赋予不同的颜色，后者不涂色，一律为黑白，如图所示。
+  - ![](https://img-blog.csdn.net/20180710170658512)
+  - 可以根据Label查找某个类，如图，我们可以找到Label为4的点。
+  - ![](https://img-blog.csdn.net/20180710170727330)
 
 <video width="620" height="440" controls="controls" autoplay="autoplay">
   <source src="https://vdn1.vzuu.com/SD/7191e9f4-ec77-11ea-acfd-5ab503a75443.mp4?disable_local_cache=1&auth_key=1619512352-0-0-9d84f1b7e6c1920c1c9a0a2806ca2132&f=mp4&bu=pico&expiration=1619512352&v=hw" type="video/mp4" />
   </object>
 </video>
+
+- 将projector用于代码：[TensorBoard-PROJECTOR-高维向量可视化](https://blog.csdn.net/a13602955218/article/details/80988904)
+
+```python
+import tensorflow as tf
+import mnist_inference
+import os
+
+from tensorflow.contrib.tensorboard.plugins import projector
+from tensorflow.examples.tutorials.mnist import input_data
+
+batch_size = 128
+learning_rate_base = 0.8
+learning_rate_decay = 0.99
+training_steps = 10000
+moving_average_decay = 0.99
+
+log_dir = 'log'
+sprite_file = 'mnist_sprite.jpg'
+meta_file = 'mnist_meta.tsv'
+tensor_name = 'final_logits'
+
+#获取瓶颈层数据，即最后一层全连接层的输出
+def train(mnist):
+    with tf.variable_scope('input'):
+        x = tf.placeholder(tf.float32,[None,784],name='x-input')
+        y_ = tf.placeholder(tf.float32,[None,10],name='y-input')
+
+    y = mnist_inference.build_net(x)
+    global_step = tf.Variable(0,trainable=False)
+
+    with tf.variable_scope('moving_average'):
+        ema = tf.train.ExponentialMovingAverage(moving_average_decay,global_step)
+        ema_op = ema.apply(tf.trainable_variables())
+
+    with tf.variable_scope('loss_function'):
+        loss = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(logits=y,labels=tf.argmax(y_,1)))
+
+    with tf.variable_scope('train_step'):
+        learning_rate = tf.train.exponential_decay(
+            learning_rate_base,
+            global_step,
+            mnist.train.num_examples/batch_size,
+            learning_rate_decay,
+            staircase=True
+        )
+
+        train_step = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss,global_step=global_step)
+
+        train_op = tf.group(train_step,ema_op)
+
+    with tf.Session() as sess:
+        sess.run(tf.global_variables_initializer())
+        for i in range(training_steps):
+            xs,ys = mnist.train.next_batch(batch_size)
+            _,loss_value,step = sess.run([train_op,loss,global_step],feed_dict={x:xs,y_:ys})
+
+            if step % 100 == 0 :
+                print('step:{},loss:{}'.format(step,loss_value))
+
+        final_result = sess.run(y,feed_dict={x:mnist.test.images})
+
+    return final_result
+
+def visualisation(final_result):
+    #定义一个新向量保存输出层向量的取值
+    y = tf.Variable(final_result,name=tensor_name)
+    #定义日志文件writer
+    summary_writer = tf.summary.FileWriter(log_dir)
+
+    #ProjectorConfig帮助生成日志文件
+    config = projector.ProjectorConfig()
+    #添加需要可视化的embedding
+    embedding = config.embeddings.add()
+    #将需要可视化的变量与embedding绑定
+    embedding.tensor_name = y.name
+
+    #指定embedding每个点对应的标签信息，
+    #这个是可选的，没有指定就没有标签信息
+    embedding.metadata_path = meta_file
+    #指定embedding每个点对应的图像，
+    #这个文件也是可选的，没有指定就显示一个圆点
+    embedding.sprite.image_path = sprite_file
+    #指定sprite图中单张图片的大小
+    embedding.sprite.single_image_dim.extend([28,28])
+
+    #将projector的内容写入日志文件
+    projector.visualize_embeddings(summary_writer,config)
+
+    #初始化向量y，并将其保存到checkpoints文件中，以便于TensorBoard读取
+    sess = tf.InteractiveSession()
+    sess.run(tf.global_variables_initializer())
+    saver = tf.train.Saver()
+    saver.save(sess,os.path.join(log_dir,'model'),training_steps)
+    summary_writer.close()
+
+def main(_):
+    mnist = input_data.read_data_sets('MNIST_data',one_hot=True)
+
+    final_result = train(mnist)
+    visualisation(final_result)
+
+if __name__ == '__main__':
+    tf.app.run()
+```
+
+生成sprite图和meta文件, 便于直接在动态图上看到数据标签
+
+```python
+import matplotlib.pyplot as plt
+import tensorflow as tf
+import numpy as np
+import os
+from tensorflow.examples.tutorials.mnist import input_data
+
+log_dir = './log'
+sprite_file = 'mnist_sprite.jpg'
+meta_file = 'mnist_meta.tsv'
+
+def create_sprite_image(images):
+    if isinstance(images,list):
+        images = np.array(images)
+    #获取图像的高和宽
+    img_h = images.shape[1]
+    img_w = images.shape[2]
+    #对图像数目开方，并向上取整，得到sprite图每边的图像数目
+    num = int(np.ceil(np.sqrt(images.shape[0])))
+    #初始化sprite图
+    sprite_image = np.zeros([img_h*num,img_w*num])
+    #为每个小图像赋值
+    for i in range(num):
+        for j in range(num):
+            cur = i * num + j
+            if cur < images.shape[0]:
+                sprite_image[i*img_h:(i+1)*img_h,j*img_w:(j+1)*img_w] = images[cur]
+
+    return sprite_image
+
+if __name__ == '__main__':
+    mnist = input_data.read_data_sets('MNIST_data',one_hot=False)
+    #黑底白字变成白底黑字
+    to_visualise = 1 - np.reshape(mnist.test.images,[-1,28,28])
+    sprite_image = create_sprite_image(to_visualise)
+
+    #存储展示图像
+    path_mnist_sprite = os.path.join(log_dir,sprite_file)
+    plt.imsave(path_mnist_sprite,sprite_image,cmap='gray')
+    plt.imshow(sprite_image,cmap='gray')
+
+    #存储每个下标对应的标签
+    path_mnist_metadata = os.path.join(log_dir,meta_file)
+    with open(path_mnist_metadata,'w') as f:
+        f.write('Index\tLabel\n')
+        for index,label in enumerate(mnist.test.labels):
+            f.write('{}\t{}\n'.format(index,label))
+
+```
+
+执行tensorboard –logdir=log后，浏览器打开localhost:6006，即可观察到相应结果。每个高维向量都被投影到一个三维坐标系中，同一个类别的向量彼此靠近，形成一个一个的簇，且界限明显，可见分类效果较好
+
+![](https://img-blog.csdn.net/2018071017062698)
+
+t-sne效果较好
+
+![](https://img-blog.csdn.net/20180710170707473)
+
 
 摘自：[Embedding的理解](https://zhuanlan.zhihu.com/p/46016518)，[英文原文](https://towardsdatascience.com/neural-network-embeddings-explained-4d028e6f0526)
 
