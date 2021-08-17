@@ -3,7 +3,7 @@ layout: post
 title:  "机器学习模型评估方法-The-Evaluation-of-Machine Learning"
 date:   2020-08-05 14:56:00
 categories: 机器学习
-tags: 机器学习 AUC PR 混淆矩阵 NCE 评分卡 评价 KL散度 风控 互联网金融 交叉熵 损失函数
+tags: 机器学习 AUC PR 混淆矩阵 NCE 评分卡 评价 KL散度 风控 互联网金融 交叉熵 损失函数 kappa 马修斯
 author : 鹤啸九天
 excerpt: 机器学习项目开始前的核心问题：如何设置指标，评价模型效果？
 mathjax: true
@@ -110,6 +110,13 @@ Accuracy是分类问题中最常用的指标，它计算了分类正确的预测
 - 混淆矩阵中，正确的分类样本（Actual label = Predicted label）分布在左上到右下的对角线上。其中，Accuracy的定义为分类正确（对角线上）的样本数与总样本数的比值。Accuracy度量的是全局样本预测情况。而对于Precision和Recall而言，每个类都需要**单独**计算其Precision和Recall。
 
 如果想评估该识别系统的总体功能，必须考虑猫、狗、猪三个类别的综合预测性能。那么，到底要怎么综合这三个类别的Precision呢？是简单加起来做平均吗？通常来说， 我们有如下几种解决方案（也可参考[scikit-learn官网](https://link.zhihu.com/?target=https%3A//scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_score.html)）
+
+
+### 总结
+
+[How to avoid machine learning pitfalls: a guide for academic researchers](https://arxiv.org/abs/2108.02497)
+- 不要对不平衡的数据集使用准确度（accuracy）指标。这个指标常用于分类模型，不平衡数据集应采用**kappa系数**或**马修斯相关系数**（MCC）指标。
+
 
 ### Macro-average方法
     
