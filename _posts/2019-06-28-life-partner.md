@@ -892,4 +892,79 @@ A小姐又很贴心地想了一个问题5的备份。万一人家没看过这部
 以上这些问题大致涵盖了一个人三观，问完这些问题，就可以大致知道这个人的三观与你是否一致了，也就能决定是否有必要继续下去了。
 
 
+## 怎么判断是否适合结婚
+
+[怎样确定你的女朋友（男朋友）是适合的结婚对象？](https://www.zhihu.com/question/21778422/answer/946252689)
+
+### 婚前15问
+
+纽约时报曾经刊载过一个著名的“婚前15问”，目的就是为了帮助每一对情侣来判断自己和现在的另一半有没有具备成为夫妻的条件
+1. 我们要不要孩子？如果要，主要由谁来负责？
+2. 我们的家庭赚钱能力及目标是什么？消费观及储蓄观会不会发生冲突？
+3. 我们的家庭如何维持？由谁来掌握可能出现的风险?
+4. 我们有没有详尽地交换过双方的疾病史？包括精神上的.
+5. 我们父母的态度有没有达到我们的预期？会不会给足够的祝福？
+6. 我们有没有自然、坦诚地说出自己的性需求、性的偏好及恐惧？
+7. 卧室能放电视机吗？
+8. 我们真的能倾听对方诉说，并公平对待对方的想法和抱怨吗？
+9. 我们清晰地了解对方的精神需求及信仰吗？我们讨论过孩子将来的信仰问题吗？
+10. 我们喜欢并尊重对方的朋友吗？
+11. 我们能不能看重并尊敬对方的父母？我们有没考虑到父母可能会干涉我们的关系？
+12. 我的家庭最让你心烦的事情是什么？
+13. 我们永远不会因为婚姻放弃的东西是什么？
+14. 如果我们中的一人需要离开其家族所在地陪同另一个人到外地工作，做得到吗？
+15. 我们是不是充满信心面对任何挑战使婚姻一直往前走？
+
+Relationship experts report that too many couples fail to ask each other  critical questions before marrying. Here are a few key ones that  couples should consider asking:
+- 1) Have we discussed whether or not to have children, and if the answer is yes, who is going to be the primary care giver?
+- 2) Do we have a clear idea of each other’s financial obligations and goals, and do our ideas about spending and saving mesh?
+- 3) Have we discussed our expectations for how the household will be maintained, and are we in agreement on who will manage the chores?
+- 4) Have we fully disclosed our health histories, both physical and mental?
+- 5) Is my parent affectionate to the degree that I expect?
+- 6) Can we comfortably and openly discuss our sexual needs, preferences and fears?
+- 7) Will there be a television in the bedroom?
+- 8) Do we truly listen to each other and fairly consider one another’s ideas and complaints?
+- 9) Have we reached a clear understanding of each other’s spiritual beliefs and needs, and have we discussed when and how our children will be exposed to religious/moral education?
+- 10) Do we like and respect each other’s friends?
+- 11) Do we value and respect each other’s parents, and is either of us concerned about whether the parents will interfere with the relationship?
+- 12) What does my family do that annoys you?
+- 13) Are there some things that you and I are NOT prepared to give up in the marriage?
+- 14) If one of us were to be offered a career opportunity in a location far from the other’s family, are we prepared to move?
+- 15) Does each of us feel fully confident in the other’s commitment to the marriage and believe that the bond can survive whatever challenges we may face?
+
+### 改良版：婚前十问
+
+改良版的“婚前十问”，[李所爱的回答](https://www.zhihu.com/question/21778422/answer/946252689)
+1. 我们是否有着足够的经济支持，能够保证我们小家庭的建立，以及以后婚姻生活的维持？
+2. 我们在彩礼和陪嫁的问题上能否达成一致意见？我们双方的家庭能否满意？
+3. 我们对彼此的原生家庭是否足够了解？原生家庭对我们的婚姻是否会产生干涉？
+4. 我们的父母和朋友是否都赞成我们的婚姻？我们的婚姻得到长辈的祝福了吗？
+5. 我们真的了解对方的生活习惯吗？我们能够接受对方日常生活中的状态吗？
+6. 我们要不要孩子，要几个，一定要男孩吗？
+7. 我们能够接受对方的工作性质吗？在工作和家庭当中我们应该怎么平衡？
+8. 我们真的对对方满意吗？我们有什么对于对方的不满是一直都没有和对方说的？
+9. 一旦面临工作调动产生的异地和长期分居，我们应该怎么办？
+10. 我们能陪伴对方到什么程度？到了什么情况下，我们可以开始各自的生活了？
+
+### 恶性伴侣
+
+恶性情人的特点：
+- 无限放大对方的缺点，显得对方不正常
+- 不会换位思考，自我任性
+- 彻头彻尾伪君子，人前一套，人后一套
+- 习惯撒谎、找借口
+- 双标：关注对方的错误，忽略自己的问题
+- 缺乏基本的尊重
+- 极度自私，过于关注他人
+- 激起对方极端情绪，反过来指责
+- 不信任，处处防备，谈恋爱像破案
+- 掩饰自己，极少人知道他的真面目
+- 争吵时，不断放大问题，并威胁分手
+- 不断侵蚀对方的底线和边界
+- 打击对方的自信心
+- 其它见[盐选推荐的回答](https://www.zhihu.com/question/21778422/answer/1907488710) 
+
+
+
+
 # 结束
