@@ -886,6 +886,8 @@ CTO这个群体
 ### 读博
 
 - 在职读博：如[中科大在职博士](https://miralab.ai/people/)
+- 【2021-8-17】优异者：[尤洋](https://www.comp.nus.edu.sg/~youy/)，2011年保送清华读研，https://zhuanlan.zhihu.com/p/67238945，LARS算法：当今训练ImageNet最快的算法，清华学子尤洋 荣升新加坡国立大学“校长青年教授” https://zhuanlan.zhihu.com/p/347473465
+
 
 ### 出书
 - [猫小蓟的画花笔记](https://www.douban.com/note/285378114/), 画画→上传到网上→出版社关注→出书
