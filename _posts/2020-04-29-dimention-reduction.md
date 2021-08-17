@@ -165,6 +165,92 @@ print(sess.run(input_embedding, feed_dict={input_ids:[[1, 2], [2, 1], [3, 3]]}))
 ```
 
 
+## pyecharts可视化
+
+将高维向量通过t-sne降维，再用pyecharts（1.*以上版本）可视化出来
+- t-sne降维
+
+```python
+# 原始数据文件格式：[query, 0.23, 0.43, ..., 1.23], 将query嵌入到768的高维空间里
+data_file = 'newhouse/all_data_embedding.txt'
+import logging
+data_file = 'newhouse/all_data_embedding.txt'
+#query_vec = pd.read_csv(data_file)
+#query_vec
+num = 0
+n = 769
+query_dict = {}
+for line in open(data_file):
+    num += 1
+    #if num > 50:
+    #    break
+    arr = line.strip().split(',')
+    query= arr[0]
+    vec = arr[1:]
+    if len(arr) != 769 or not query:
+        logging.error('格式异常: query={}, len={}, line={}'.format(query,len(arr),arr[:3]))
+        continue
+    query_dict[query] = vec
+query_list = list(query_dict.values())
+query_label = list(query_dict.keys())
+print(len(query_dict.keys()))
+
+
+import numpy as np 
+from sklearn.manifold import TSNE
+
+X = np.array(query_list)
+#X = np.array([[0,0,0],[0,1,1],[1,0,1],[1,1,1]])
+tsne = TSNE(n_components = 3)
+tsne.fit_transform(X)
+X_new = tsne.embedding_ # 降维后的3维矩阵
+print(query_label[10],X_new[10]) # 输出label、降维后的向量
+```
+- 数据加载、可视化
+
+```python
+
+import random
+from pyecharts import options as  opts
+from pyecharts.charts import Scatter3D
+from pyecharts.faker import Faker
+
+# --------- 加载数据 ---------
+vec_tsne = np.load('/home/wangqiwen004/work/nlu_data/newhouse/vec_tsne.npy')
+vec_label = np.load('/home/wangqiwen004/work/nlu_data/newhouse/vec_label.npy')
+vec_label = vec_label.reshape((-1,1)) # label是1维时，需要转换成矩阵，才能拼接
+print(vec_label.shape,vec_tsne.shape)
+vec_tsne[:3].tolist()
+np.hstack((vec_tsne[:3], vec_label[:3]))
+# --------- 数据格式化 ---------
+#Scatter_data = [(random.randint(0,50),random.randint(0,50),random.randint(0,50)) for i in range(50)]
+#Scatter_data = vec_tsne[:10].tolist()
+N = 50000
+Scatter_data = np.hstack((vec_tsne, vec_label))[:N].tolist()
+
+# --------- 绘图 ---------
+c = (
+    Scatter3D(init_opts = opts.InitOpts(width='1500px',height='900px'))  #初始化
+    .add("句子向量（t-sne）",Scatter_data,
+         grid3d_opts=opts.Grid3DOpts(
+            width=100, depth=100, rotate_speed=20, is_rotate=False
+        ))
+    
+    #设置全局配置项
+    .set_global_opts(
+        title_opts=opts.TitleOpts(title="新房驻场客服query分布（部分N={}）".format(min(N,vec_label.shape[0]))),  #添加标题
+        visualmap_opts=opts.VisualMapOpts(
+            max_=50, #最大值
+            pos_top=50, # visualMap 组件离容器上侧的距离
+            range_color=Faker.visual_color  #颜色映射                                         
+        )
+    )
+)
+c.render("新房驻场客服-query空间关系.html")
+#c.render_notebook() # 渲染到jupyter notebook页面
+```
+
+
 # 流形学习
 
 - [Neural Networks, Manifolds, and Topology](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/)，中文翻译版：[神经网络、流形和拓扑](https://www.jianshu.com/p/12667309bf23)
