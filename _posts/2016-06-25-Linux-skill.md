@@ -399,9 +399,11 @@ less error.txt | awk 'BEGIN {srand();OFS="\t"} {print $0,rand()*1000}' |sort -k2
 
 ## sed
 
+- 待补充
 
 ## grep
 
+- 待补充
 
 # 数学公式编辑
 
@@ -429,6 +431,7 @@ x+y = z\\a=4
 
 # Git使用
 
+- 待补充
 
 ## 总结
 
