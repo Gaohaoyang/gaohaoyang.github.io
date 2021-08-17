@@ -433,9 +433,17 @@ x+y = z\\a=4
 - [牛逼哄哄的 Git 命令动画演示，一看就懂！](https://www.cnblogs.com/lzkwin/p/12658029.html)，[CS Visualized: Useful Git Commands](https://links.jianshu.com/go?to=https%3A%2F%2Fdev.to%2Flydiahallie%2Fcs-visualized-useful-git-commands-37p1)
 ![](https://tukuimg.bdstatic.com/scrop/80a43c9d8428273cc9cabe71256eb9ef.gif)
 
-- 【2021-2-10】用vscode在线查看github代码库，方法：加1s或com→dev即可，详见：[github1s](https://github.com/conwnet/github1s)
-- github新功能，在线编辑IDE，[codespace](https://github.com/features/codespaces)
 
+## VSCode 在线体验（解决访问受限问题）
+
+【2021-2-10】用vscode在线查看github代码库，方法：
+- （1）加`1s` ，详见：[github1s](https://github.com/conwnet/github1s)
+- （2）com→`dev`: [VSCode福利来了，在github上面像本地一样开发](https://zhuanlan.zhihu.com/p/398867445)
+  - dev == 点击键盘上的 . 符号进入 web editor
+  - 问题：【2021-8-17】没有push功能，修改的东西如何提交？是要付费才行吗？
+- github新功能，在线编辑IDE，[codespace](https://github.com/features/codespaces)，Github 自从被微软收购后，和 vscode 的联动，真的是强强联手，从 GitHub Codespaces 和 GitHub Copilot 来看，好功能一个接一个
+
+<iframe src="https://vdn1.vzuu.com/SD/0758de44-fad6-11eb-a8c4-6ee192182cb1.mp4" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 ## 基本概念
 
