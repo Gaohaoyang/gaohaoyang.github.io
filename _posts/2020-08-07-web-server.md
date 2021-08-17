@@ -1712,6 +1712,21 @@ console.log(document.cookie)
 </html>
 ```
 
+### 输入框提示
+
+HTML5的datalist可以实现[历史消息提示](https://www.cnblogs.com/jacko/p/6034196.html)
+
+```html
+<input id="country_name" name="country_name" type="text" list="city" />  
+<datalist id="city">  
+    <option value="中国 北京">  
+    <option value="中国 上海">  
+    <option value="中国 广州">  
+    <option value="中国 深圳">  
+    <option value="中国 东莞">  
+</datalist> 
+
+```
 
 ## ajax
 

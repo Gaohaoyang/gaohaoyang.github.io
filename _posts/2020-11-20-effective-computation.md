@@ -25,6 +25,8 @@ mathjax: true
 - 情感分析五要素：（entity，aspect，opinion，holder，time）, entity + aspect -> target
   - 示例：我觉得华为手机拍照非常牛逼。 → （华为手机，拍照，正面，我，\）
   - ![](https://p1.pstatp.com/large/tos-cn-i-0022/8bd0117028624224811facc091b2ded2)
+- 【2021-8-13】[哈工大：多模态情感分析语料库调研](https://mp.weixin.qq.com/s/YQxGvevrYixWcXXgKg0NXw)
+
 
 # 背景
 
@@ -304,6 +306,113 @@ mathjax: true
 - 虽然人脸、姿态和语音等均能独立地表示一定的情感，但人的相互交流却总是通过信息的综合表现来进行。所以， 只有实现多通道的人机界面，才是人与计算机最为自然的交互方式，它集自然语言、语音、手语、人脸、唇读、头势、体势等多种交流通道为一体，并对这些通道信息进行编码、压缩、集成和融合，集中处理图像、音频、视频、文本等多媒体信息。多模态计算是目前情感计算发展的主流方向。每个模块所传达的人类情感的信息量大小和维度不同。在人机交互中，不同的维度还存在缺失和不完善的问题。因此，人机交互中情感分析应尽可能从多个维度入手，将单一不完善的情感通道补上，最后通过多结果拟合来判断情感倾向。
 - 在多模态情感计算研究中，一个很重要的分支就是**情感机器人**和**情感虚拟人**的研究。美国麻省理工学院、日本东京科技大学、美国卡内基·梅隆大学均在此领域做出了较好的演示系统。目前中科院自动化所模式识别国家重点实验室已将情感处理融入到了他们已有的语音和人脸的多模态交互平台中，使其结合情感语音合成、人脸建模、视位模型等一系列前沿技术，构筑了栩栩如生的情感虚拟头像，并积极转向嵌入式平台和游戏平台等实际应用。
 - 目前， 情感识别和理解的方法上运用了模式识别、人工智能、语音和图像技术的大量研究成果。例如：在情感语音声学分析的基础上，运用线性统计方法和神经网络模型，实现了基于语音的情感识别原型；通过对面部运动区域进行编码，采用 HMM 等不同模型，建立了面部情感特征的识别方法；通过对人姿态和运动的分析，探索肢体运动的情感类别等等。不过，受到情感信息捕获技术的影响， 以及缺乏大规模的情感数据资源，有关多特征融合的情感理解模型研究还有待深入。随着未来的技术进展，还将提出更有效的机器学习机制。
+
+### 多模态情感分析语料库
+
+【2021-8-13】[哈工大：多模态情感分析语料库调研](https://mp.weixin.qq.com/s/YQxGvevrYixWcXXgKg0NXw)
+
+介绍相关子任务和对应数据集以及在数据集上的最新研究工作。主要分为：
+- 面向**视频评论**的情感分析
+- 面向视频评论的**细粒度**情感分析
+- 面向**视频对话**的情绪分析
+- 面向视频的**反讽**识别
+- 面向**图文**的反讽识别
+- 面向图文的情感分析
+- 面向图文的细粒度情感分析、幽默检测、抑郁检测。
+
+本文分别总结了相关数据集和方法，具体内容见第三部分。
+
+[多模态情感分析简述](https://zhuanlan.zhihu.com/p/97170240), 任务概览，总结如下：
+
+![多模态情感分析任务概览](https://pic1.zhimg.com/80/v2-18dfa11b0b0a41fba2f1a92a54cbad18_1440w.jpg)
+
+多模态情感分析相关数据集和方法概览
+
+|模态|任务|数据集及下载地址|方法|
+|---|---|---|---|
+|声图文|面向视频评论的情感分析|[Youtube数据集](https://projects.ict.usc.eduyoutube)，[MOSI数据集](https://github.com/A2Zadeh/CMU-MultimodalSDK)，[MOSEI数据集](https://github.com/A2Zadeh/CMU-MultimodalSDK)|Self-MM，Mult|
+|声图文|面向视频评论的细粒度情感分析|[CH-SIMS数据集](https://github.com/thuiar/MMSA)|MTFN|
+|声图文|面向视频对话的情绪分析|[IEMOCAP数据集](https://sail.usc.edu/iemocap/), [MELD数据集](https://affective-meld.github.io)|DialogueRNN, MESM|
+|声图文|面向视频的反讽识别|[MUStARD数据集](https://github.com/soujanyaporia/MUStARD)|Early Fusion +SVM|
+|图文|面向图文的反讽识别|[Twitter反讽数据集](https://github.com/headacheboy/data-of-multimodal-sarcasm-detection)|D&R net|
+|图文|面向图文的情感分析|[Yelp数据集](https://www.yelp.com/dataset),[MVSA数据集](http://mcrlab.net/research/mvsa-sentiment-analysis-on-multi-view-social-data/)||
+|图文|面向图文的细粒度情感分析|[Multi-ZOL数据集](https://github.com/xunan0812/MIMN),[Twitter-15&17数据集](https://github.com/jefferyYu/TomBERT)|TomBert|
+|声图文|幽默检测|[UR-FUNNY数据集](https://github.com/ROC-HCI/UR-FUNNY)|C-MFN|
+|声图文|抑郁检测|[DAIC-WOZ数据集](https://dcapswoz.ict.usc.edu)||
+|图文|抑郁检测|[Twitter抑郁检测数据集](https://depressiondetection.droppages.com)|MDL|
+
+详情见原文
+
+
+### 对话情绪识别
+
+- 对话情绪识别任务介绍,[数据集链接](https://sail.usc.edu/iemocap/)
+  - ![img](http://p3.itc.cn/q_70/images03/20200608/518912dd277e416ca6961376e701fb6b.png)
+
+【2020-6-8】[对话中的情感分析与生成简述](https://www.sohu.com/a/400451249_657157) 
+
+#### 数据集介绍
+
+|数据集|形式|量级|总结|介绍|
+|---|---|---|---|---|
+|[SEMAINE](https://semaine-db.eu/)|多模态|95段对话，共5798句|常用数据集之一，但数据规模较小|SEMAINE数据库收集的多模态对话数据，由四个固定形象的机器人与人进行对话，曾用于AVEC2012挑战赛，**4个情感维度**：Valence (**愉悦度**), Arousal (**激活度**), Expectancy (**预期**), Power (**力量**)。|
+|[DailyDialog](http://yanran.li/dailydialog)|纯文本|12218段对话，共103607句|应用较少，优点是数据规模较大，缺点是中性情绪占比过高|高质量多轮对话数据集，纯文本，噪声小，对话反映不同主题的日常生活，无固定说话人。7类**情绪**标注，还有10类**主题**标注以及4类**对话行为**标注|
+|[EmotionLines](http://doraemon.iis.sinica.edu.tw/emotionlines/index.html)|纯文本|两部分独立，各1000段对话，共29245句|应用较少，通常使用多模态的MELD数据集|老友记（多人对话）和私人Facebook聊天记录（双人对话），纯文本，有固定说话人。曾用于SocialNLP 2018 EmotionX Challenge。标注了7类情绪|
+|[EmoContext](https://www.humanizing-ai.com/emocontext.html)|纯文本双人对话|38421段对话，共115263句|应用较少，优点是数据规模较大，缺点是对话长度过短和仅标注最后一句|标注了**4类情绪**：Happiness, Sadness, Anger, Other，非中性情绪占比42.8%。|
+|[MELD](https://affective-meld.github.io/)|多模态|1433段对话，共13708句|常用的数据集之一，优点是数据集质量较高并且有多模态信息，缺点是数据集中的对话涉及到的剧情背景太多，情绪识别难度很大|老友记，多人对话形式，是EmotionLines老友记部分的多模态扩充（文本+视频），标注了7类情绪和3类情感：Positive, Negative, Neutral，非中性情绪占比53%|
+
+详情：
+- [SEMAINE](https://semaine-db.eu/)。SEMAINE数据库收集的多模态对话数据，由四个固定形象的机器人与人进行对话，曾用于AVEC2012挑战赛。AVEC2012使用的数据有95段对话，共5798句。标注了**4个情感维度**：Valence (**愉悦度**), Arousal (**激活度**), Expectancy (**预期**), Power (**力量**)。
+  - Valence表示情感积极的程度
+  - Arousal表示兴奋的程度
+  - Expectancy表示与预期相符的程度
+  - Power表示情感影响力。
+  - 其中Valence、Arousa和Expectancy为[-1, 1]范围内的连续值，Power为大于等于0的连续值。
+  - SEMAINE是对话情绪识别中常用的数据集之一，缺点是数据规模较小。
+- [DailyDialog](http://yanran.li/dailydialog)。高质量多轮对话数据集，纯文本，噪声小，对话反映不同主题的日常生活，无固定说话人。数据集除了**7类情绪**标注，还有**10类主题标注**以及4类**对话行为**标注。12218段对话，共103607句。标注了7类情绪：Neutral, Happiness, Surprise, Sadness, Anger, Disgust, Fear，非中性情绪占比16.8%。
+  - DailyDialog在对话情绪识别中应用较少，优点是数据规模较大，缺点是中性情绪占比过高。
+- [EmotionLines](http://doraemon.iis.sinica.edu.tw/emotionlines/index.html)。来源于老友记（多人对话）和私人Facebook聊天记录（双人对话），纯文本，有固定说话人。曾用于SocialNLP 2018 EmotionX Challenge。内容上两部分独立，各1000段对话，共29245句。标注了**7类情绪**：Neutral, Happiness, Surprise, Sadness, Anger, Disgust, Fear，非中性情绪占比44.5%。
+  - EmotionLines在对话情绪识别中应用较少，通常使用多模态的MELD数据集。
+- [EmoContext](https://www.humanizing-ai.com/emocontext.html)。纯文本双人对话，每段对话三句，仅最后一句有情感标签。用于SemEval-2019 Task 3。38421段对话，共115263句。标注了**4类情绪**：Happiness, Sadness, Anger, Other，非中性情绪占比42.8%。 
+  - EmoContext在对话情绪识别中应用较少，优点是数据规模较大，缺点是对话长度过短和仅标注最后一句。
+- [MELD](https://affective-meld.github.io/)。来源于老友记，多人对话形式，是EmotionLines老友记部分的多模态扩充（文本+视频）。1433段对话，共13708句。标注了7类情绪：Neutral, Happiness, Surprise, Sadness, Anger, Disgust, Fear和3类情感：Positive, Negative, Neutral，非中性情绪占比53%。 MELD是对话情绪识别中常用的数据集之一，优点是数据集质量较高并且有多模态信息，缺点是数据集中的对话涉及到的剧情背景太多，情绪识别难度很大。
+
+#### 相关工作
+
+- 第一类：上下文建模
+- 第二类：说话人建模
+  - 对话中除了话语的上下文信息外，还需要考虑说话人的状态与相互影响。
+- 第三类：区分说话人的建模
+  - 上面虽然对不同的说话人信息进行了建模，但是对于最终要识别的话语，并未区分该话语属于哪个说话人。
+
+### 对话情感生成
+
+对话情感生成是一个生成任务，旨在对话中生成蕴含情感、有针对性的回复。对于待生成回复的情感，一般有两种观点：
+- 一种认为待生成回复的情感需要明确指出，这类做法的输入是对话上文和目标情感，输出是蕴含该情感的回复，其优点是生成情感灵活可控，缺点是需要大规模情感标注的对话语料；
+- 另一种则认为待生成回复的情感已经隐含在对话上文之中，不需要明确指出，因此这类做法只需要提供对话上文，其优点是可利用已有的大规模对话语料，缺点是生成的情感不易控制。
+
+对话情感生成主要应用在聊天机器人之中，可以让机器人在显式或隐式理解用户情感的基础上，生成情感合理的回复，解决聊天机器人的情感表达问题。
+
+![img](http://p7.itc.cn/q_70/images03/20200608/93551e9690f24faf91ca8de10ad55e83.png)
+
+#### 数据集介绍
+
+- [STC](http://ntcir12.noahlab.com.hk/stc.htm)。新浪微博数据，无情感标注，中文，由问题和回复组成，可视为单轮对话，共440万对，问题与回复的句子平均长度分别为20、15。 ECM[13] 中使用Bi-LSTM情感分类器自动标注了六类情感：Angry, Disgust, Happy, Like, Sad, Other。 STC是对话情感生成中常用的数据集之一，优点是数据规模大，缺点是无人工情感标注，需要借助情感分类器自动标注，因此数据质量一般。
+- [Cornell Movie Dialogs](http://www.cs.cornell.edu/~cristian/Cornell_Movie-Dialogs_Corpus.html) 。康奈尔大学收集的电影对话语料，无情感标注，22万段对话，30万个句子，涉及617部电影中的9035个角色，无标注，噪声相对较小。 ANRG[15] 和 EMOTICONS[16] 中用于seq2seq模型训练。 Cornell Movie Dialogs是对话情感生成中常用的数据集之一，优点是数据质量较高，缺点是无人工情感标注。
+- [OpenSubtitles](http://opus.nlpl.eu/OpenSubtitles-v2018.php) 。多语言的电影字幕数据库，数据量大，无情感标注，噪声相对较大。 ADGEE[18] 使用OpenSubtitles2016，过滤后有1130万句子，训练了Bi-LSTM情感分类器进行自动情感标注。 EMOTICONS[16] 使用OpenSubtitles2018，过滤后的数据有至少四轮对话，250万句子。 OpenSubtitles是对话情感生成中常用的数据集之一，优点是数据规模巨大，缺点是噪声大且无人工情感标注。
+- [Twitter](https://github.com/claude-zhou/MojiTalk
+)。Twitter上获取的带emoji表情的对话，由问题和回复组成，可视为单轮对话，共66万对。使用句子带的emoji表情作为句子标注，共64种标签。 Mojitalk[19] 使用该语料训练模型，进行情感回复生成。 Mojitalk[19] 构造了该数据集，并使用该数据集训练模型进行情感回复生成。
+- [DailyDialog](http://yanran.li/dailydialog)。高质量多轮对话数据集，10万句，详见对话情绪识别数据集介绍。 AR-S2S[20] 使用该数据集作为测试集，评估模型在不同领域对话的泛化性能。
+- [SEMAINE](https://semaine-db.eu/)。情绪识别用的数据集，有情感属性，无情感类别标注。AAAI 2018的 Emo-HERD[21] 使用工具为其标注情感。约0.5万句，详见对话情绪识别数据集介绍。
+
+#### 相关工作介绍
+
+- 第一类：情感语言模型
+  - 给定起始片段和情感信息，可生成指定情感的句子。Affect-LM是基于LSTM的语言模型，在单词的概率预测阶段融入了情感标签以及情感强度，从而期望模型可以生成一定强度的某种情感类别的回复。语言模型采用困惑度进行评价。
+- 第二类：指定回复情感的对话生成模型
+  - 给定上文和情感信息，可生成带有指定情感的回复。
+- 第三类：不指定回复情感的对话生成模型
+  - 不需要指定情感信息，认为上文已经内在地决定了下文的情感。 
 
 # 情感计算应用
 

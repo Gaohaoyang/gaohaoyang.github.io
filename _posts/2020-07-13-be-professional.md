@@ -177,6 +177,29 @@ mathjax: true
   - ![](https://static.mysmth.net/nForum/att/ITExpress/1992125/219)
   - 认知过程本身就是片面的，横看成岭侧成峰，远近高低各不同，人们习惯以己推人，掉入井底摸象。最了解你的人永远是你自己，别人只能在你的生命长河中停留片刻，这段时间里呈现的点会撑起认知中的线，面，有的实，有的虚，有的面朝上，有的面朝下，有的面本身就不是面，不过一条线，甚至几个点，对你有立体认知的人少之又少。所以，遇到认知偏差，无须烦恼，一笑而过，如果想纠正，那就多花些心思展现更多的点给别人看。如鱼饮水，冷暖自知
 
+### 完美沟通
+
+【2021-8-6】[宋晓阳《完美沟通》笔记](https://www.toutiao.com/w/i1707264794626068/)
+
+- ![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/c0af5612ad0e4118ad93d76b592213fa~tplv-obj:1080:1512.image?from=post)
+- ![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/1b729769ac4e48b1bd41c4c763cc8004~tplv-obj:1080:1512.image?from=post)
+- ![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/5f7402ae4fe744d2a6c9623f4ad0fb19~tplv-obj:1080:1512.image?from=post)
+- ![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/d4b59d3065f14891af153da4d09608bf~tplv-obj:1080:1512.image?from=post)
+- ![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/b4763352da354543a072e959eb9e3b94~tplv-obj:1080:1512.image?from=post)
+- ![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/d92f4a5fcb984dc38b64e6b72295ab75~tplv-obj:1080:1512.image?from=post)
+- ![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/9edc9a87dde24324a6f4c806a30b33e0~tplv-obj:1080:1512.image?from=post)
+- ![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/e0e04c649c674807acd20dc277453204~tplv-obj:1080:1512.image?from=post)
+- ![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/16f27cb880594c26b02314b719ec726b~tplv-obj:1080:1512.image?from=post)
+- ![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/bc87bdab84e44e01885fcfac1a73da16~tplv-obj:1080:1512.image?from=post)
+- ![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/eef6850a37c54cf6bf000e6504340576~tplv-obj:1080:1512.image?from=post)
+- ![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/6117a572cc04485dbbc25828df33d872~tplv-obj:1080:1512.image?from=post)
+- ![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/b4b8d0a8e70c4217938366d788c80100~tplv-obj:1080:1512.image?from=post)
+- ![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/4da1f5dee8d045d08a8bc59dcf221529~tplv-obj:1080:1512.image?from=post)
+- ![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/f806d7ca4abc4a0bb0ae91b0b39074fb~tplv-obj:1080:1512.image?from=post)
+- ![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/be70418939004670bcd1dddedb723b64~tplv-obj:1080:1512.image?from=post)
+- ![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/8bfb35f0c8774bc1a9a8e503ca6417e4~tplv-obj:1080:1512.image?from=post)
+- ![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/48bd0702ce144621a30e17abffa93ede~tplv-obj:1080:1512.image?from=post)
+
 
 ## 如何开会？
 
