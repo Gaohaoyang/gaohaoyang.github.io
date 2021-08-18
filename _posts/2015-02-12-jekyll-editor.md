@@ -4,7 +4,7 @@ title:  "Jekyll编辑功能汇总"
 date:   2015-02-15 22:14:54
 categories: 技术工具
 excerpt: "jekyll用法汇总" 
-tags: jekyll markdown 插件 github gitee 码云
+tags: jekyll markdown 插件 github gitee 码云 latex 公式
 ---
 
 * content
@@ -166,20 +166,15 @@ print "hello"
 
 ### 公式嵌入
 
-* [Latex在线调试](https://latexbase.com/)，[吴文中数学公式编辑器](http://latex.91maths.com/)，公式在线编辑，所见所得，支持图片输出
-
+公式编辑工具：
+- [latexlive](https://www.latexlive.com/home)：支持在线编辑、模板、图片识别、URL分享，十分强大，已用邮箱注册账号，latex @ 3721
+- [Latex在线调试](https://latexbase.com/)
+- [吴文中数学公式编辑器](http://latex.91maths.com/)，公式在线编辑，所见所得，支持图片输出
+  - $$ P = \frac{1}{1 + \exp^{-(实力-难度)}} $$
 - Github自带公式显示LaTeX，[LATEX数学公式基本语法](https://www.cnblogs.com/houkai/p/3399646.html)
-
-$$f \left( x _ { n + 1 } \right) - f \left( x _ { n } \right) = f ^ { \prime } \left( x _ { n } \right) \left( x _ { n + 1 } - x _ { n } \right)$$
-
-[吴文中公式在线LaTeX编辑器](https://latex.91maths.com/)
-
-$$ P = \frac{1}{1 + \exp^{-(实力-难度)}} $$
-
+  - $$f \left( x _ { n + 1 } \right) - f \left( x _ { n } \right) = f ^ { \prime } \left( x _ { n } \right) \left( x _ { n + 1 } - x _ { n } \right)$$
 - 知乎提供公式生成图片服务：https://www.zhihu.com/equation?tex=y+%3D+%5Cphi%28%5Csum+W_%7Bij%7DX_j+%2B+b%29+
-- 效果：
-
-![](https://www.zhihu.com/equation?tex=y+%3D+%5Cphi%28%5Csum+W_%7Bij%7DX_j+%2B+b%29+)
+  - 效果：![](https://www.zhihu.com/equation?tex=y+%3D+%5Cphi%28%5Csum+W_%7Bij%7DX_j+%2B+b%29+)
 
 
 ### 文档嵌入
