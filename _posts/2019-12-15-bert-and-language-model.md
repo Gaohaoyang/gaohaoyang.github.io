@@ -3,7 +3,7 @@ layout: post
 title:  BERT及预训练语言模型-BERT-and-Language-Model
 date:   2019-12-10 16:52:00
 categories: 深度学习 
-tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook TextCNN ES 田渊栋 彩票假设 自监督 Milvus ALBERT elasticsearch es
+tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook TextCNN ES 田渊栋 彩票假设 自监督 Milvus ALBERT elasticsearch es 可视化
 excerpt: 预训练语言模型及BERT知识点汇总
 mathjax: true
 ---
@@ -267,16 +267,75 @@ ACL 2019最新收录的论文：[What does BERT learn about the structure of lan
 
 ### BERT降维
 
+
+#### 可视化
+
+- [Visualizing BERT](https://home.ttic.edu/~kgimpel/viz-bert/viz-bert.html)
+- kaggle上外国人分享的[Visualizing BERT embeddings with t-SNE](https://www.kaggle.com/wqw547243068/visualizing-bert-embeddings-with-t-sne/edit)
+
+
 #### BERT-flow
 
-flow模型是可逆的、不降维的，这在某些场景下是好处，但在不少场景下也是缺点，因为它无法剔除冗余维度，限制了性能，比如GAN的研究表明，通过一个256维的高斯向量就可以随机生成1024×1024的人脸图，这表明这些人脸图其实只是构成了一个相当低维的流形，但是如果用flow模型来做，因为要保证可逆性，就得强行用1024×1024×3那么多维的高斯向量来随机生成，计算成本大大增加，而且效果还上不去。
+BERT-flow来自论文《[On the Sentence Embeddings from Pre-trained Language Models](https://arxiv.org/abs/2011.05864)》，EMNLP 2020，主要是用flow模型校正了BERT出来的句向量的分布，从而使得计算出来的cos相似度更为合理一些。
+
+用句向量做相似度计算、索引时，常常用到余弦相似度，根据数值排序，然而，不是所有向量都适合用余弦相似度。
+- 余弦相似度：两个向量x,y的内积的几何意义就是“各自的模长乘以它们的夹角余弦”，即两个向量的内积并除以各自的模长
+- 假设：向量的“夹角余弦”本身是具有鲜明的几何意义的，但上式右端只是坐标的运算，坐标依赖于所选取的坐标基，基底不同，内积对应的坐标公式就不一样，从而余弦值的坐标公式也不一样。即余弦公式只在“**标准正交基**”下成立，如果这组基是标准正交基，每个分量都是独立的、均匀的，基向量集表现出“**各项同性**”。
+
+BERT向量用余弦值来比较相似度，表现不好，原因可能就是句向量所属的坐标系并非**标准正交基**。不满足各项同性时，需要通过一些方法转换，比如：BERT-flow用了flow模型。
+
+flow模型是一个向量变换模型，它可以将输入数据的分布转化为**标准正态分布**，而显然标准正态分布是各向同性的
+
+flow模型本身很弱，BERT-flow里边使用的flow模型更弱，所以flow模型不大可能在BERT-flow中发挥至关重要的作用。反过来想，那就是也许我们可以找到更简单直接的方法达到BERT-flow的效果。
+
 
 #### BERT-whitening
 
 [你可能不需要BERT-flow：一个线性变换媲美BERT-flow](https://kexue.fm/archives/8069)
 - [BERT-whitening](https://github.com/bojone/BERT-whitening)：通过简单的向量**白化**来改善句向量质量，可以媲美甚至超过BERT-flow的效果, 一个线性变换，可以轻松套到任意的句向量模型中
   - 《[Whitening Sentence Representations for Better Semantics and Faster Retrieval](https://arxiv.org/abs/2103.15316)》
-将句向量的均值变换为0、协方差矩阵变换为单位阵, 相当于传统数据挖掘中的**白化**操作（Whitening），所以该方法笔者称之为**BERT-whitening**
+将句向量的**均值**变换为0、**协方差矩阵**变换为单位阵, 相当于传统数据挖掘中的**白化**操作（Whitening），所以该方法笔者称之为**BERT-whitening**
+
+协方差矩阵Σ是一个半正定对称矩阵，半正定对称矩阵都具有如下形式的SVD分解Σ=UΛU⊤，其中U是一个正交矩阵，而Λ是一个对角阵，并且对角线元素都是正的，因此直接让$\boldsymbol{W}^{-1}=\sqrt{\boldsymbol{\Lambda}} \boldsymbol{U}^{\top}$就可以完成求解：$\boldsymbol{W}=\boldsymbol{U} \sqrt{\mathbf{\Lambda}^{-1}}$
+
+```python
+def compute_kernel_bias(vecs):
+    """计算kernel和bias
+    vecs.shape = [num_samples, embedding_size]，
+    最后的变换：y = (x + bias).dot(kernel)
+    """
+    mu = vecs.mean(axis=0, keepdims=True)
+    cov = np.cov(vecs.T)
+    u, s, vh = np.linalg.svd(cov)
+    W = np.dot(u, np.diag(1 / np.sqrt(s)))
+    return W, -mu
+```
+
+[Github链接](https://github.com/bojone/BERT-whitening)
+
+使用一个简单线性变换的BERT-whitening取得了跟BERT-flow媲美的结果。除了STS-B之外，笔者的同事在中文业务数据内做了类似的比较，结果都表明BERT-flow带来的提升跟BERT-whitening是相近的,
+
+仿照PCA降维，效果更好
+
+```python
+def compute_kernel_bias(vecs, n_components=256):
+    """计算kernel和bias
+    vecs.shape = [num_samples, embedding_size]，
+    最后的变换：y = (x + bias).dot(kernel)
+    """
+    mu = vecs.mean(axis=0, keepdims=True)
+    cov = np.cov(vecs.T)
+    u, s, vh = np.linalg.svd(cov)
+    W = np.dot(u, np.diag(1 / np.sqrt(s)))
+    return W[:, :n_components], -mu
+```
+
+将base版本的768维只保留前256维，效果有所提升，并且由于降维，向量检索速度肯定也能大大加快；类似地，将large版的1024维只保留前384维，那么降维的同时也提升了效果。
+
+这个结果表明：无监督训练出来的句向量其实是“**通用型**”的，对于特定领域内的应用，里边有很多特征是冗余的，剔除这些冗余特征，往往能达到提速又提效的效果。
+
+而flow模型是可逆的、不降维的，这在某些场景下是好处，但在不少场景下也是缺点，因为它无法剔除冗余维度，限制了性能，比如GAN的研究表明，通过一个256维的高斯向量就可以随机生成1024×1024的人脸图，这表明这些人脸图其实只是构成了一个相当低维的流形，但是如果用flow模型来做，因为要保证可逆性，就得强行用1024×1024×3那么多维的高斯向量来随机生成，计算成本大大增加，而且效果还上不去。
+
 
 #### 降维后刀片状分布
 
