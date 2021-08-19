@@ -3,7 +3,7 @@ layout: post
 title:  BERT及预训练语言模型-BERT-and-Language-Model
 date:   2019-12-10 16:52:00
 categories: 深度学习 
-tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook TextCNN ES 田渊栋 彩票假设 自监督 Milvus ALBERT
+tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook TextCNN ES 田渊栋 彩票假设 自监督 Milvus ALBERT elasticsearch es
 excerpt: 预训练语言模型及BERT知识点汇总
 mathjax: true
 ---
@@ -252,6 +252,37 @@ PTMs-Papers:
 
 ![](https://image.jiqizhixin.com/uploads/editor/41afd366-28b8-4aa1-8464-5f10d253cb48/1544732037865.png)
 
+## 思考
+
+### BERT学到了什么
+
+ACL 2019最新收录的论文：[What does BERT learn about the structure of language?](https://hal.inria.fr/hal-02131630/document) [理解BERT每一层都学到了什么](https://zhuanlan.zhihu.com/p/74515580)， [代码](https://github.com/ganeshjawahar/interpret_bert)
+- Frege早在1965年的组合原则里谈到，复杂表达式的意义由其子表达式的意义以及意义如何组合的规则共同决定。
+- 本文思路与分析卷积神经网络每层学习到的表征类似，主要是探索了BERT的每一层到底捕捉到了什么样的信息表征。作者通过一系列的实验证明BERT学习到了一些**结构化**的语言信息，比如
+  - BERT的**低层**网络就学习到了**短语**级别的**信息表征**
+  - BERT的**中层**网络就学习到了丰富的**语言学**特征
+  - BERT的**高层**网络则学习到了丰富的**语义**信息特征。
+- [图示](https://pic2.zhimg.com/80/v2-602f7d353a057e56327a631e396934b1_720w.jpg)
+  - ![](https://pic2.zhimg.com/80/v2-602f7d353a057e56327a631e396934b1_720w.jpg)
+
+### BERT降维
+
+#### BERT-flow
+
+flow模型是可逆的、不降维的，这在某些场景下是好处，但在不少场景下也是缺点，因为它无法剔除冗余维度，限制了性能，比如GAN的研究表明，通过一个256维的高斯向量就可以随机生成1024×1024的人脸图，这表明这些人脸图其实只是构成了一个相当低维的流形，但是如果用flow模型来做，因为要保证可逆性，就得强行用1024×1024×3那么多维的高斯向量来随机生成，计算成本大大增加，而且效果还上不去。
+
+#### BERT-whitening
+
+[你可能不需要BERT-flow：一个线性变换媲美BERT-flow](https://kexue.fm/archives/8069)
+- [BERT-whitening](https://github.com/bojone/BERT-whitening)：通过简单的向量**白化**来改善句向量质量，可以媲美甚至超过BERT-flow的效果, 一个线性变换，可以轻松套到任意的句向量模型中
+  - 《[Whitening Sentence Representations for Better Semantics and Faster Retrieval](https://arxiv.org/abs/2103.15316)》
+将句向量的均值变换为0、协方差矩阵变换为单位阵, 相当于传统数据挖掘中的**白化**操作（Whitening），所以该方法笔者称之为**BERT-whitening**
+
+#### 降维后刀片状分布
+
+【2021-8-19】s-bert、bert、simCSE句向量，经过pca/t-SNE多种方式降维后，都呈现刀片分布，原因不明
+
+
 
 ## BERT应用
 
@@ -263,6 +294,8 @@ PTMs-Papers:
 ### ES里的BERT索引
 
 - 【2020-7-11】ES开始支持embedding的BERT索引，[Elasticsearch遇上BERT：使用Elasticsearch和BERT构建搜索引擎](https://mp.weixin.qq.com/s/PzhdvwsR3ru2u_oVqSxxPQ)
+- 【2019-7-5】[BERT和TensorFlow构建搜索引擎](https://cloud.tencent.com/developer/article/1458233)
+  - ![](https://ask.qcloudimg.com/http-save/yehe-5669851/5xixkmgeim.jpeg?imageView2/2/w/1620)
 
 ### BERT结合Faiss的语义表示
 
