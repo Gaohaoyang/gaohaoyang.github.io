@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "文本生成-Text Generation"
+title:  "文本生成&评价-Text Generation and Evaluation"
 date:   2020-04-28 21:39:00
 categories: 自然语言处理
-tags: 深度学习 NLP GAN Seq2seq 对话系统 文本评价 BLEU 多模态 好未来
+tags: 深度学习 NLP GAN Seq2seq 对话系统 文本评价 BLEU 多模态 好未来 paraphrase 复述
 excerpt: 深度学习在NLP子领域——文本生成的应用汇总，如seq2seq、GAN系列
 author: 鹤啸九天
 mathjax: true
@@ -242,6 +242,80 @@ mathjax: true
 
 - 从生成器端来为生成提供更多的信息，更多：[MaskGAN学习笔记](http://tobiaslee.top/2018/04/01/MaskGAN-Notes/)
 - 用了 Actor-Critic 来替换 Policy Gradient，相比 Monte Carlo，能够较好地对 reward function 做一个拟合
+
+# paraphrase 复述/同义语/改写
+
+## 什么是paraphrase
+
+**复述**（paraphrase）是指：
+> “运用与原句不同的词汇、句式，重新写一个相同含义的句子。”
+para的意思是“另外的”，phrase是“陈述”。所以国内有人翻译为“**复述**”。但中文含义不同，叫“同义语”更合适
+
+文本复述研究的主要对象是‘**词语以上，句子以下**’的语言单元，不涉及到段落级的改写问题。
+
+与文本相似相比，还需要考虑语义的相似性。比如：
+- S1: 我吃了晚饭
+- S2: 我吃了早饭
+这两句话很像（文本相似），但意义却不一样，不能互为文本复述。
+
+### 文本复述方法
+
+常见的文本复述类型（英语）
+- ![英文复述类型](https://img-blog.csdnimg.cn/20191016195842986.png)
+
+## 英文复述
+
+[如何改写（paraphrase）英文句子？](https://zhuanlan.zhihu.com/p/36789022)
+
+示例：
+- ① You should learn paraphrasing, for it is very important.
+- ② Paraphrasing is extremely important, so it should be learned.
+改动点：
+- **单词**：very important → extremely
+- **词序**：前后互换，（A，因为B）→ （B，所以A）
+- **语法结构**：You should learn paraphrasing → it(paraphrasing) should be learned.
+有哪些改写方法？
+- 改单词：
+  - a. 近义词替换：简单但有一定风险，单词在不同场合含义不同
+  - b. 改词性：将原句中的某些单词改变词性，一般来说，改词性时也会改动词序
+- 改词序
+  - a. 主从句顺序：如果一个长句子有两个或以上的句子组成，可以通过调整句子的顺序来完成改写。
+  - b. 形容词变从句：句子中如果有“形容词+名词”结构，可以将形容词改成一个从句，放在名词后面。
+- 改语法结构
+  - a. 改语态，如改句子的语态：主动改成被动，反之亦然。
+
+## 中文复述
+
+### 工程实现
+
+- [中文复述代码](https://github.com/mlpod/chinese_pararphrase_generation), 使用训练好的**英文**文本复述模型进行复述，通过百度翻译API实现中文的输入和输出。英文文本复述模型可选择的有：tuner007/pegasus_paraphrase、ceshine/t5-paraphrase-quora-paws
+
+### 中文复述语料库
+
+2019年9月30号，北大release了一批中文文本复述语料，[PKU Paraphrase Bank文章解读：句级中文文本复述语料库](https://blog.csdn.net/Tardigrade_/article/details/102585514)
+- 常见的文本复述方法多依赖于有**孪生结构**的深度神经网络，对label的要求较高，这篇文章使用了无监督方法生成了大量的匹配label数据，对中文环境下的文本复述识别、生成很有帮助。
+- [PKU Paraphrase Bank: A Sentence-Level Paraphrase Corpus for Chinese](https://link.springer.com/chapter/10.1007/978-3-030-32233-5_63)
+- [语料库地址](https://github.com/pkucoli/PKU-Paraphrase-Bank)
+
+数据来源
+- 40部经典小说的95个译本，小说包括《基督山伯爵》《飘》《大卫科波菲尔》等。即每部小说选取2-3个译本。译本来源于网络。
+- 这是很经典的枢轴（pivot）方法：采用同一文本（枢轴）的不同翻译作为文本复述模板的资源获取方法。
+> “由于每次翻译过程均要求源语言和目标语言中文本的语义保持一致，因此可以预期最后得到的文本在语义上能跟输入文本保持一致。”
+
+举个文章中的例子（上面两句互为文本复述，下面两句互为文本复述）：
+- ![示例](https://img-blog.csdnimg.cn/20191016195713328.png)
+
+数据规模
+- 509,832 (50w+) 组句对，大约是常见语料库（例如：Twitter News URL Corpus) 的10倍以上。平均每句23.05个词。
+ 
+无监督语料库生成方法
+- ![流程](https://img-blog.csdnimg.cn/20191016172627666.png)
+流程概览
+- 首先，通过OCR工具将下载的pdf文件转换为plain text.
+- 在格式清理的步骤中，需要将匹配用不到的头注，脚注，页码和注释等手动规则移除。
+- 然后，通过。？！进行句子分割。少于6个单词的句子并入前句。
+- 最后一步，利用Sun等人2011年提出的无监督方法[Enhancing Chinese word segmentation using unlabeled data](https://dl.acm.org/citation.cfm?id=2145538)进行中文分词。
+评估方法：[多样性得分（PINC）](https://www.aclweb.org/anthology/P11-1020/),Chen等人2011年定义的，它的含义和BLEU相反：句对间n-gram的co-occurence/同时出现的次数越少，得分越高。这意味着，虽然这两个句子意思相同，但它们“看起来”更不一样。
 
 
 # 评价方法
