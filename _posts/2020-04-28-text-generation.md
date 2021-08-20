@@ -189,6 +189,8 @@ mathjax: true
 
 # GAN方向
 
+![GAN](https://p1.pstatp.com/large/pgc-image/99ece025696c4b9a9ed96a2f364a4d21)
+
 ## GAN家族
 
 - [GAN工作原理Web演示](https://poloclub.github.io/ganlab/)
@@ -206,28 +208,40 @@ mathjax: true
 - GAN为什么在文本上效果不佳？
   - 图像和文本的核心区别在于图像的 Pixel 表示是连续的，而文本是由离散的 token 组成
   - 参数的微小改变不能对结果产生影响，或者说影响的方向也不对，这就导致 Discriminator 的梯度回传变得没有意义
+- GAN在NLP表现一般：
+  - 语言不同于图像、语音，前者由人类制造，分布在**离散**空间中，后者天然存在于**连续**空间，结构化较好，所以，NLP中的embedding，**微小的改变不足以产生影响，甚至让反向传播失效** [img](https://p1.pstatp.com/large/pgc-image/87711cd4b8714dcdb7772907d69f8606)
+  - ![](https://p1.pstatp.com/large/pgc-image/87711cd4b8714dcdb7772907d69f8606)
+  - 思想：语言本身的离散特性，主谓宾结构，人类学习语言时也是这种模式，概念拼接组装置换
+
 - [GAN-in-NLP-Notes](https://tobiaslee.top/2018/04/22/GAN-in-NLP-Notes/)
 
-- （1） SeqGAN
-  - SeqGAN 用了 RL + GAN 用于文本生成，一大创举，详见[笔记](http://tobiaslee.top/2018/03/11/SeqGAN/)
-    - SeqGAN_Sequence Generative Adversarial Nets with Policy Gradient
-    - 引入强化学习中的 Policy Gradient 来解决因为离散 token 生成前采样动作造成的不可微
-    - SeqGAN 在 Oracle 和古诗生成任务上做了测试，回过头来看，效果只能说一般。但其开创性的将文本生成看做序列决策问题， 并且将 RL 和 GAN 进行了有机的结合
-    ![](https://tobiaslee.top/img/seqgan.png)
-- （2）LeakGAN
-  - 交大继 SeqGAN 后的又一力作
-  - SeqGAN的问题：
-    - Discriminator 提供给 Generator 的 reward 需要等句子完成之后才能被计算（即使用 Monte Carlo 来计算，也只是一种近似的模拟），对于每一步的 token 生成不能得到及时的反馈；
-    -  Reward 本身只是一个 Scalar，并不能携带太多的信息。何况对于文本这种结构复杂，同样的意思不同的说法都是可以的，那么数值所包含的指导信号比较弱。
-  - 改进
-    - 让 Discriminator 向 Generator “泄露”一些消息，也就是把作为 Discriminator 的 CNN 最后一层的 Feature Vector 交给 Generator，让这个 Feature Vector 携带大量的信息来指导 Generator 更好的生成
-    - 层次生成器：在生成器端使用了 Manager 和 Worker 两个模块，分别用于解析 CNN 提供的 Feature Vector 和具体的 token 生成。
-- （3）RankGAN
-  - Discriminator 的 Binary Classification 不足以生成多样、符合现实逻辑的文本
-  - 用一个 Ranker 来替代 Discriminator，以提供更好地生成句子的评估，进而生帮助 Generator 生成更为真实的句子
-- （4）MaskGAN
-  - 从生成器端来为生成提供更多的信息，更多：[MaskGAN学习笔记](http://tobiaslee.top/2018/04/01/MaskGAN-Notes/)
-  - 用了 Actor-Critic 来替换 Policy Gradient，相比 Monte Carlo，能够较好地对 reward function 做一个拟合
+### （1） SeqGAN
+
+- SeqGAN 用了 RL + GAN 用于文本生成，一大创举，详见[笔记](http://tobiaslee.top/2018/03/11/SeqGAN/)
+- SeqGAN_Sequence Generative Adversarial Nets with Policy Gradient
+- 引入强化学习中的 Policy Gradient 来解决因为离散 token 生成前采样动作造成的不可微
+- SeqGAN 在 Oracle 和古诗生成任务上做了测试，回过头来看，效果只能说一般。但其开创性的将文本生成看做序列决策问题， 并且将 RL 和 GAN 进行了有机的结合
+- ![](https://tobiaslee.top/img/seqgan.png)
+
+### （2）LeakGAN
+
+- 交大继 SeqGAN 后的又一力作
+- SeqGAN的问题：
+  - Discriminator 提供给 Generator 的 reward 需要等句子完成之后才能被计算（即使用 Monte Carlo 来计算，也只是一种近似的模拟），对于每一步的 token 生成不能得到及时的反馈；
+  -  Reward 本身只是一个 Scalar，并不能携带太多的信息。何况对于文本这种结构复杂，同样的意思不同的说法都是可以的，那么数值所包含的指导信号比较弱。
+- 改进
+  - 让 Discriminator 向 Generator “泄露”一些消息，也就是把作为 Discriminator 的 CNN 最后一层的 Feature Vector 交给 Generator，让这个 Feature Vector 携带大量的信息来指导 Generator 更好的生成
+  - 层次生成器：在生成器端使用了 Manager 和 Worker 两个模块，分别用于解析 CNN 提供的 Feature Vector 和具体的 token 生成。
+
+### （3）RankGAN
+
+- Discriminator 的 Binary Classification 不足以生成多样、符合现实逻辑的文本
+- 用一个 Ranker 来替代 Discriminator，以提供更好地生成句子的评估，进而生帮助 Generator 生成更为真实的句子
+
+### （4）MaskGAN
+
+- 从生成器端来为生成提供更多的信息，更多：[MaskGAN学习笔记](http://tobiaslee.top/2018/04/01/MaskGAN-Notes/)
+- 用了 Actor-Critic 来替换 Policy Gradient，相比 Monte Carlo，能够较好地对 reward function 做一个拟合
 
 
 # 评价方法
