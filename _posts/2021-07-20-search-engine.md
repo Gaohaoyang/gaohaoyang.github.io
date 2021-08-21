@@ -661,9 +661,7 @@ elasticsearch默认是英文分词器，所以我们需要安装一个中文分�
 - 命令：elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v6.5.4/elasticsearch-analysis-ik-6.5.4.zip  
 
 1. 创建 Index  --  es.indices.create(index=' ')
-
 - 即字段，每个 Document 都类似一个 JSON 结构，它包含了许多字段，每个字段都有其对应的值；可以类比 MySQL 数据表中的字段。
-
 2. 删除 Index  --  es.indices.delete(index='news')
 
 ```python
@@ -708,7 +706,7 @@ result = es.delete(index='news', doc_type='politics', id=1)
 print(result)
 ```
 
-6.查询数据 -- 优势：其异常强大的检索功能
+6. 查询数据 -- 优势：其异常强大的检索功能
 
 新建一个索引并指定需要分词的字段, 更新 mapping 信息
 
@@ -913,6 +911,32 @@ print(result)
 ```
 
 参考：[python 操作 ElasticSearch 入门](https://zhuanlan.zhihu.com/p/95163799)
+
+【2021-8-20】实践
+
+```python
+from elasticsearch import Elasticsearch
+# 连接ES,http://10.200.24.101:9200/
+
+es = Elasticsearch([{'host':'10.200.24.101','port':9200}]) #, timeout=3600)
+
+text = '100平的板楼有没有'
+data = {
+  "query": {
+    #"match_all": {} # 默认方式，查询所有文档，是没有查询条件下的默认语句
+    "match": {"words": text} # 标准查询，只能就指定某个确切字段某个确切的值进行搜索
+  }
+}
+result = es.search(index="query_info", body=data)
+print('[{}]一共查询到{}条,  top 10如下：'.format(text, result['took']))
+for i in result['hits']['hits']:
+    res = [i['_index'],i['_type'],str(i['_score']),i['_source']['words'],i['_source']['intent'],i['_source']['ctime']]
+    print('\t'.join(res))
+print('-'*30)
+print(json.dumps(result, ensure_ascii=False))
+#es.close()
+```
+
  
 ## 全文检索引擎 Sphinx
  

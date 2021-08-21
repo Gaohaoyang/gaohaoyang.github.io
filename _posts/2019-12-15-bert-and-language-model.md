@@ -3,7 +3,7 @@ layout: post
 title:  BERT及预训练语言模型-BERT-and-Language-Model
 date:   2019-12-10 16:52:00
 categories: 深度学习 
-tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook TextCNN ES 田渊栋 彩票假设 自监督 Milvus ALBERT
+tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook TextCNN ES 田渊栋 彩票假设 自监督 Milvus ALBERT elasticsearch es 可视化 unilm simcse
 excerpt: 预训练语言模型及BERT知识点汇总
 mathjax: true
 ---
@@ -252,6 +252,134 @@ PTMs-Papers:
 
 ![](https://image.jiqizhixin.com/uploads/editor/41afd366-28b8-4aa1-8464-5f10d253cb48/1544732037865.png)
 
+## 思考
+
+### BERT学到了什么
+
+ACL 2019最新收录的论文：[What does BERT learn about the structure of language?](https://hal.inria.fr/hal-02131630/document) [理解BERT每一层都学到了什么](https://zhuanlan.zhihu.com/p/74515580)， [代码](https://github.com/ganeshjawahar/interpret_bert)
+- Frege早在1965年的组合原则里谈到，复杂表达式的意义由其子表达式的意义以及意义如何组合的规则共同决定。
+- 本文思路与分析卷积神经网络每层学习到的表征类似，主要是探索了BERT的每一层到底捕捉到了什么样的信息表征。作者通过一系列的实验证明BERT学习到了一些**结构化**的语言信息，比如
+  - BERT的**低层**网络就学习到了**短语**级别的**信息表征**
+  - BERT的**中层**网络就学习到了丰富的**语言学**特征
+  - BERT的**高层**网络则学习到了丰富的**语义**信息特征。
+- [图示](https://pic2.zhimg.com/80/v2-602f7d353a057e56327a631e396934b1_720w.jpg)
+  - ![](https://pic2.zhimg.com/80/v2-602f7d353a057e56327a631e396934b1_720w.jpg)
+
+### BERT降维
+
+
+#### 可视化
+
+- [Visualizing BERT](https://home.ttic.edu/~kgimpel/viz-bert/viz-bert.html)
+- kaggle上外国人分享的[Visualizing BERT embeddings with t-SNE](https://www.kaggle.com/wqw547243068/visualizing-bert-embeddings-with-t-sne/edit)
+
+
+#### BERT-flow
+
+BERT-flow来自论文《[On the Sentence Embeddings from Pre-trained Language Models](https://arxiv.org/abs/2011.05864)》，EMNLP 2020，主要是用flow模型校正了BERT出来的句向量的分布，从而使得计算出来的cos相似度更为合理一些。
+
+用句向量做相似度计算、索引时，常常用到余弦相似度，根据数值排序，然而，不是所有向量都适合用余弦相似度。
+- 余弦相似度：两个向量x,y的内积的几何意义就是“各自的模长乘以它们的夹角余弦”，即两个向量的内积并除以各自的模长
+- 假设：向量的“夹角余弦”本身是具有鲜明的几何意义的，但上式右端只是坐标的运算，坐标依赖于所选取的坐标基，基底不同，内积对应的坐标公式就不一样，从而余弦值的坐标公式也不一样。即余弦公式只在“**标准正交基**”下成立，如果这组基是标准正交基，每个分量都是独立的、均匀的，基向量集表现出“**各项同性**”。
+
+BERT向量用余弦值来比较相似度，表现不好，原因可能就是句向量所属的坐标系并非**标准正交基**。不满足各项同性时，需要通过一些方法转换，比如：BERT-flow用了flow模型。
+
+flow模型是一个向量变换模型，它可以将输入数据的分布转化为**标准正态分布**，而显然标准正态分布是各向同性的
+
+flow模型本身很弱，BERT-flow里边使用的flow模型更弱，所以flow模型不大可能在BERT-flow中发挥至关重要的作用。反过来想，那就是也许我们可以找到更简单直接的方法达到BERT-flow的效果。
+
+
+#### BERT-whitening
+
+[你可能不需要BERT-flow：一个线性变换媲美BERT-flow](https://kexue.fm/archives/8069)
+- [BERT-whitening](https://github.com/bojone/BERT-whitening)：通过简单的向量**白化**来改善句向量质量，可以媲美甚至超过BERT-flow的效果, 一个线性变换，可以轻松套到任意的句向量模型中
+  - 《[Whitening Sentence Representations for Better Semantics and Faster Retrieval](https://arxiv.org/abs/2103.15316)》
+将句向量的**均值**变换为0、**协方差矩阵**变换为单位阵, 相当于传统数据挖掘中的**白化**操作（Whitening），所以该方法笔者称之为**BERT-whitening**
+
+协方差矩阵Σ是一个半正定对称矩阵，半正定对称矩阵都具有如下形式的SVD分解Σ=UΛU⊤，其中U是一个正交矩阵，而Λ是一个对角阵，并且对角线元素都是正的，因此直接让$\boldsymbol{W}^{-1}=\sqrt{\boldsymbol{\Lambda}} \boldsymbol{U}^{\top}$就可以完成求解：$\boldsymbol{W}=\boldsymbol{U} \sqrt{\mathbf{\Lambda}^{-1}}$
+
+```python
+def compute_kernel_bias(vecs):
+    """计算kernel和bias
+    vecs.shape = [num_samples, embedding_size]，
+    最后的变换：y = (x + bias).dot(kernel)
+    """
+    mu = vecs.mean(axis=0, keepdims=True)
+    cov = np.cov(vecs.T)
+    u, s, vh = np.linalg.svd(cov)
+    W = np.dot(u, np.diag(1 / np.sqrt(s)))
+    return W, -mu
+```
+
+[Github链接](https://github.com/bojone/BERT-whitening)
+
+使用一个简单线性变换的BERT-whitening取得了跟BERT-flow媲美的结果。除了STS-B之外，笔者的同事在中文业务数据内做了类似的比较，结果都表明BERT-flow带来的提升跟BERT-whitening是相近的,
+
+仿照PCA降维，效果更好
+
+```python
+def compute_kernel_bias(vecs, n_components=256):
+    """计算kernel和bias
+    vecs.shape = [num_samples, embedding_size]，
+    最后的变换：y = (x + bias).dot(kernel)
+    """
+    mu = vecs.mean(axis=0, keepdims=True)
+    cov = np.cov(vecs.T)
+    u, s, vh = np.linalg.svd(cov)
+    W = np.dot(u, np.diag(1 / np.sqrt(s)))
+    return W[:, :n_components], -mu
+```
+
+将base版本的768维只保留前256维，效果有所提升，并且由于降维，向量检索速度肯定也能大大加快；类似地，将large版的1024维只保留前384维，那么降维的同时也提升了效果。
+
+这个结果表明：无监督训练出来的句向量其实是“**通用型**”的，对于特定领域内的应用，里边有很多特征是冗余的，剔除这些冗余特征，往往能达到提速又提效的效果。
+
+而flow模型是可逆的、不降维的，这在某些场景下是好处，但在不少场景下也是缺点，因为它无法剔除冗余维度，限制了性能，比如GAN的研究表明，通过一个256维的高斯向量就可以随机生成1024×1024的人脸图，这表明这些人脸图其实只是构成了一个相当低维的流形，但是如果用flow模型来做，因为要保证可逆性，就得强行用1024×1024×3那么多维的高斯向量来随机生成，计算成本大大增加，而且效果还上不去。
+
+
+#### SimBERT
+
+[鱼与熊掌兼得：融合检索和生成的SimBERT模型](https://kexue.fm/archives/7427)
+
+追一科技开放了一个名为[SimBERT](https://github.com/ZhuiyiTechnology/pretrained-models#simbert-base)的模型权重，它是以Google开源的BERT模型为基础，基于微软的[UniLM](https://arxiv.org/abs/1905.03197)思想设计了融检索与生成于一体的任务，来进一步微调后得到的模型，所以它同时具备相似问**生成**和相似句**检索**能力。不过当时除了放出一个权重文件和示例脚本之外，未对模型原理和训练过程做进一步说明
+
+`UniLM`是一个融合NLU和NLG能力的Transformer模型，由微软在去年5月份提出来的，今年2月份则升级到了v2版本。我们之前的文章《从语言模型到Seq2Seq：Transformer如戏，全靠Mask》就简单介绍过UniLM，并且已经集成到了bert4keras中。
+
+UniLM的核心是通过特殊的Attention Mask来赋予模型具有Seq2Seq的能力。假如输入是“你想吃啥”，目标句子是“白切鸡”，那UNILM将这两个句子拼成一个：[ CLS] 你 想 吃 啥 [ SEP] 白 切 鸡 [ SEP]，然后接如图的Attention Mask
+- ![](https://kexue.fm/usr/uploads/2019/09/1625339461.png)
+- [ CLS] 你 想 吃 啥 [ SEP]这几个token之间是双向的Attention，而白 切 鸡 [ SEP]这几个token则是单向Attention，从而允许递归地预测白 切 鸡 [ SEP]这几个token，所以它具备文本生成能力。
+- ![](https://kexue.fm/usr/uploads/2019/09/1879768703.png)
+
+
+[SimBERT](https://github.com/ZhuiyiTechnology/simbert)属于有监督训练，训练语料是自行收集到的相似句对，通过一句来预测另一句的相似句生成任务来构建Seq2Seq部分，然后前面也提到过[ CLS]的向量事实上就代表着输入的句向量，所以可以同时用它来训练一个检索任务
+- ![](https://kexue.fm/usr/uploads/2020/05/2840550561.png)
+- 假设SENT_a和SENT_b是一组相似句，那么在同一个batch中，把[ CLS] SENT_a [ SEP] SENT_b [ SEP] 和 [ CLS] SENT_b [ SEP] SENT_a [ SEP]都加入训练，做一个相似句的生成任务，这是Seq2Seq部分。
+关键就是“[ CLS]的向量事实上就代表着输入的句向量”，所以可以用它来做一些NLU相关的事情。最后的loss是Seq2Seq和相似句分类两部分loss之和。
+
+实施：
+- 数据来源是爬取百度知道推荐的相似问，然后经过简单算法过滤。如果本身有很多问句，也可以通过常见的检索算法检索出一些相似句，作为训练数据用。总而言之，训练数据没有特别严格要求，理论上有一定的相似性都可以。
+- 至于训练硬件，开源的模型是在一张TITAN RTX（22G显存，batch_size=128）上训练了4天左右，显存和时间其实也没有硬性要求，视实际情况而定，如果显存没那么大，那么适当降低batch_size即可，如果语料本身不是很多，那么训练时间也不用那么长（大概是能完整遍历几遍数据集即可）。
+
+#### SimCSE对比学习
+
+中文任务还是SOTA吗？我们给SimCSE补充了一些实验
+
+苏剑林构思的“BERT-whitening”的方法一度成为了语义相似度的新SOTA，然而不久之后，Arxiv上出现了至少有两篇结果明显优于BERT-whitening的新论文。
+- 第一篇是《[Generating Datasets with Pretrained Language Models](https://arxiv.org/pdf/2104.07540.pdf)》，这篇借助模板从GPT2_XL中无监督地构造了数据对来训练**相似度**模型，虽然有一定启发而且效果还可以，但是复现的成本和变数都太大。
+- 另一篇则是《[SimCSE: Simple Contrastive Learning of Sentence Embeddings](https://arxiv.org/abs/2104.08821)》，它提出的`SimCSE`在英文数据上显著超过了BERT-flow和BERT-whitening，并且方法特别简单～
+
+https://github.com/bojone/SimCSE
+
+`SimCSE`可以看成是`SimBERT`的**简化版**：
+- 1、SimCSE去掉了SimBERT的生成部分，仅保留检索模型；
+- 2、由于SimCSE没有标签数据，所以把每个句子自身视为相似句传入。
+即：(自己,自己) 作为**正例**、(自己,别人) 作为**负例**来训练对比学习模型，这里的“自己”并非完全一样，而是采用一些数据扩增手段，让正例的两个样本有所差异，但是在NLP中如何做数据扩增本身又是一个难搞的问题，SimCSE则提出了一个极为简单的方案：**直接把Dropout当作数据扩增**！
+
+实验结果
+- 英文语料：SimCSE**明显优于**BERT-flow和BERT-whitening
+- 中文语料：除了PAWSX这个“异类”外，SimCSE相比BERT-whitening确实有压倒性优势，有些任务还能好10个点以上，在BQ上SimCSE还比有监督训练过的SimBERT要好，而且像SimBERT这种已经经过监督训练的模型还能获得进一步的提升，这些都说明确实强大
+
+
 
 ## BERT应用
 
@@ -263,6 +391,8 @@ PTMs-Papers:
 ### ES里的BERT索引
 
 - 【2020-7-11】ES开始支持embedding的BERT索引，[Elasticsearch遇上BERT：使用Elasticsearch和BERT构建搜索引擎](https://mp.weixin.qq.com/s/PzhdvwsR3ru2u_oVqSxxPQ)
+- 【2019-7-5】[BERT和TensorFlow构建搜索引擎](https://cloud.tencent.com/developer/article/1458233)
+  - ![](https://ask.qcloudimg.com/http-save/yehe-5669851/5xixkmgeim.jpeg?imageView2/2/w/1620)
 
 ### BERT结合Faiss的语义表示
 
@@ -583,7 +713,7 @@ ALBERT作为BERT的一个变体，在保持性能的基础上，大大减少了�
 NLP最新发展的基本前提是赋予机器学习这些表示的能力。  
 2018年，谷歌发布了BERT，试图基于一些新的想法来学习这个表示：
  
-### **回顾: BERT**
+### 回顾BERT
 
 **1\. 掩码语言建模**
  
@@ -611,7 +741,7 @@ NLP最新发展的基本前提是赋予机器学习这些表示的能力。
  
 Jay Alammar有一篇非常好的文章：[http://jalammar.github.io/bert/](https://link.zhihu.com/?target=http%3A//jalammar.github.io/bert/)，更深入地阐述了Transformer的内部机制。
  
-### **BERT的问题**
+### BERT的问题
  
 BERT发布后，在排行榜上产生了许多NLP任务的最新成果。但是，模型非常大，导致了一些问题。“ALBERT”论文将这些问题分为两类：
  
@@ -647,7 +777,7 @@ BERT-large模型是一个复杂的模型，它有24个隐含层，在前馈网�
  
 ![](https://pic3.zhimg.com/v2-1a9c618bd33e5fd93ce6d98ef1f50f66_b.jpg)
  
-### **从BERT到ALBERT**  
+### 从BERT到ALBERT
 
 一个有趣的现象：
 - 当我们让一个模型的参数变多的时候，一开始模型效果是提高的趋势，但一旦复杂到了一定的程度，接着再去增加参数反而会让效果降低，这个现象叫作“model degratation"。
@@ -728,7 +858,7 @@ ALBERT通过将大的词汇表嵌入矩阵分解成两个小的矩阵来解决�
  
 我们将独热编码向量投影到E=100的低维嵌入空间，然后将这个嵌入空间投影到隐含层空间H=768。
  
-### **结果**
+### 结果
  
 *   比BERT-large模型缩小了18x的参数
 *   训练加速1.7x
