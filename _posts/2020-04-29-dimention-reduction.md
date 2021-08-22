@@ -3,7 +3,7 @@ layout: post
 title:  "流形学习&降维-Manifold Learning&Dimention Reduction"
 date:   2020-04-29 14:21:00
 categories: 机器学习
-tags: 深度学习 流形学习 降维 无监督学习 维数灾难 embedding word2vec t-sne
+tags: 深度学习 流形学习 降维 无监督学习 维数灾难 embedding word2vec t-sne pca
 excerpt: 机器学习无监督学习中的降维技术，线性（pca/lda），非线性（t-sne/isomap/mds），及背后的流形学习原理
 author: 鹤啸九天
 mathjax: true
@@ -470,8 +470,91 @@ c.render("新房驻场客服-query空间关系.html")
 - [用t-SNE进行数据可视化-GoogleTechTalks出品](https://www.bilibili.com/video/BV1Ax411v7z5)
 <iframe src="//player.bilibili.com/player.html?aid=10560557&bvid=BV1Ax411v7z5&cid=17434638&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+## LLE
+
+LLE：局部线性嵌入（Locally Linear Embedding）是一种非常有效的非线性降维（NLDR）方法。测量每个训练实例与其最近邻（c.n.）之间的线性关系，然后寻找能最好地保留这些局部关系的训练集的低维表示，擅长展开扭曲的流形。
+
+代码：
+
+```python
+from sklearn.manifold import LocallyLinearEmbedding
+lle=LocallyLinearEmbedding(n_components=2,n_neighbors=10)
+X_reduced=lle.fit_transform(X)
+```
 
 # 降维
+
+## 为什么要降维
+
+目的：
+- 加快后续训练算法（在某些情况下甚至可能去除噪声和冗余功能，使训练算法执行更好）。
+- 可视化数据。
+- 节省空间（压缩）
+
+带来的问题
+- 丢失了一些信息，可能会降低后续性能训练算法。
+- 可能是计算密集型的
+- 为机器学习流程增加了一些复杂性。
+- 转换的过程通常难以解释。
+
+降维可逆吗？
+- 一些算法（如PCA）具有简单的逆向变换过程可以重建与原始数据相对类似的数据集
+- 某些降维算法则没有逆变换的方法（如T-SNE）。
+
+## 主要方法
+
+降低维度的两种主要方法：**投影**和**流形学习**。
+
+### 投影
+
+- 适合所有训练实例实际上位于（或接近）高维空间的**低维子空间**内，这样就可以采用投影的降维方法。
+  -  如分布接近于2D子空间的3D数据集一个分布接近于2D子空间的3D数据集
+  - ![](https://img-blog.csdnimg.cn/20190319231722249.jpg)
+- 但是，投影并不总是降维的最佳方法。在很多情况下，子空间可能会扭曲和转动，如瑞士卷型数据集，S形分布
+
+#### PCA
+
+- 代表示例：PCA系列（SVD分解），如：增量 PCA，随机 PCA，核PCA（非线性投影，如RBF核的kPCA）
+
+选哪种pca？
+- **常规PCA**是首选，仅当数据集适合内存时才有效。
+- **增量PCA**对于不适合内存的大型数据集很有用，但速度较慢比普通PCA，所以如果数据集适合内存，应该选择常规PCA。当需要时，增量PCA对在线任务也很有用。每当新实例到达时，PCA即时运行。
+- **随机PCA**：当想要大大降低维度并且数据集适合内存时，它比普通PCA快得多。
+- 最后，**核PCA**是对非线性数据集很有用。
+
+
+- PCA可以显著降低大多数数据集的维数，甚至是高度非线性的数据集，因为它可以消除无用特征（维度）的干扰。但是，如果没有无用的特征（维度），例如瑞士数据集卷，那么使用PCA降低维度会丢失太多信息。你想要展开瑞士卷，而不是挤压它
+
+代码
+
+```python
+from sklearn.decomposition import PCA
+
+pca=PCA(n_components=2) # 指定主成分数目
+#pca=PCA(n_components=0.95) # 指定累计贡献率
+X2D=pca.fit_transform(X)
+# 访问主成分
+pca.components_.T[:,0]
+# 方差解释率
+print(pca.explained_variance_ratio_) # array([0.84248607, 0.14631839])
+# 应用到新数据
+X_reduced=pca.fit_transform(X)
+
+
+#------ 核pca ------
+from sklearn.decomposition import KernelPCA
+rbf_pca=KernelPCA(n_components=2,kernel='rbf',gamma=0.04)
+X_reduced=rbf_pca.fit_transform(X)
+```
+
+无监督学习的核pca如何调参？
+- 使用 kPCA 将维度降至低维维，然后应用 Logistic 回归进行分类。然后使用 Grid SearchCV 为 kPCA 找到最佳的核和 gamma 值，以便在最后获得最佳的分类准确性.（引入模型，以最优化模型表现调参）
+
+参考：[机器学习算法（降维）总结及sklearn实践——主成分分析（PCA）、核PCA、LLE、流形学习](https://blog.csdn.net/github_38486975/article/details/88384884)
+
+### 流形学习
+
+- 瑞士卷一个是二维流形的例子.简而言之，二维流形是一种二维形状，它可以在更高维空间中弯曲或扭曲。
 
 ## VC维
 
