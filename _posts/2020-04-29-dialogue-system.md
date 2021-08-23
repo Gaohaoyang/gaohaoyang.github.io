@@ -1086,6 +1086,34 @@ NLU即Natural Language Understanding，负责理解用户的语句输入，一�
 
 ![](https://pic1.zhimg.com/80/v2-fc31934cfba32866e876d038426ec2cb_1440w.jpg?source=1940ef5c)
 
+### 算法实现
+
+**意图识别**/意图分类(Intent Classification)和**槽位填充** (Slot Filling) 是**自然语言理解** (Natural Language Understanding, NLU)领域中的两个比较重要的任务。在聊天机器人、智能语音助手等方面有着广泛的应用。
+
+意图识别可以看作一个**分类任务**，就是对当前输入的句子进行分类，得到其具体意图，然后完成后续的处理。而槽位填充则是一个**序列标注**问题，是在得到意图之后，再对句子的每一个词进行标注，标注的格式为BIO格式，将每个元素标注为“B-X”、“I-X”或者“O”。
+- “B-X”表示此元素所在的片段属于X类型并且此元素在此片段的开头
+- “I-X”表示此元素所在的片段属于X类型并且此元素在此片段的中间位置
+- “O”表示不属于任何类型。
+
+比如tell me the weather report for half moon bay这句话中，它的意图类别为weather/find(查询天气)，slot filling的结果为：
+- ![](https://img-blog.csdnimg.cn/20190714160330638.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNzk0NzE1Ng==,size_16,color_FFFFFF,t_70)
+
+意图分类和槽位填充任务主要有两个数据集Snips和ATIS。
+
+- 【2021-8-23】[Joint Model (Intent+Slot)](https://blog.csdn.net/weixin_37947156/article/details/85313616)
+ 2018年提出的《[BERT for Joint Intent Classification and Slot Filling](https://arxiv.org/pdf/1902.10909.pdf)》提出了使用BERT进行文本意图分类和槽位填充的任务，其结果达到了最好的成绩。
+
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9UM3V2dHlSaWNOcXFoTDNRaWNnaDYzT0JlaWFWbWJhUlZBTng3Wmplb0MyS0pja1ppYktrd3o5SDRDQjZ0RFNLQ0tZam5yQWx4OEhpYmV6ZWxabUxiaWJza1luUS82NDA?x-oss-process=image/format,png)
+
+
+|模型|改进点|效果|其它|
+|---|---|---|---|
+|2018，JointBERT|联合训练|snips:98.6(intent),97(slot),92.8(sent); atis:97.5(intent),96.1(slot),88.w(sent);|Joint BERT+CRF不如Joint BERT；[github](https://github.com/sliderSun/pynlp/tree/master/nlu/BERT-for-Sequence-Labeling-and-Text-Classification)|
+|2018, Slot-Gated|加gate|不如Joint BERT|[github](https://github.com/sliderSun/pynlp/tree/master/nlu/Intent-SlotGated)|
+|双向GRU+CRF|改进点|atis:98.32(intent),96.89(slot);|其它|
+|2014，RecNN+Viterbi|语义树构建路径特征|atis:95.4(intent),93.69(slot);|其它|
+|2013，CNN+Tri-CRF|改进点|atis:94.14(intent),95.62(slot);|其它|
+
 
 ## 任务型对话
 
