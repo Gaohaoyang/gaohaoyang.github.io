@@ -121,6 +121,7 @@ linux文件权限的描述格式解读
 史上最全，[linux内核调试工具](https://www.toutiao.com/a1674325657904128)都在这里了，我们来看看：
 1. 内存相关的：free, vmstate, slabtop
 2. cpu相关的：top, ps, pidstat, mpstat
+  - 【2021-8-23】根据关键词快速杀死进程：ps axu | grep start_all | awk '{print $2}' | xargs kill
 3. 块设备IO相关的：iostat, iotop, blktrace
 4. 网络相关的：ping, tcpdump, traceroute, ip, nicstat, netstat
 5. 系统调用相关的：strace, lstrace, sysdig, perf
