@@ -65,6 +65,13 @@ mathjax: true
 
 - 【2020-10-10】历年赛题分布
     - ![](https://pic4.zhimg.com/v2-b70f18c9a1a73e345200b747d15ebf6f_b.jpg)
+
+**竞赛**( Leaderboard) 是论文最好的练兵场，撕开论文第三页上方华丽花哨的大图，是骡子是马拉出来溜溜。为什么说竞赛(Leaderboard)是论文最好的练兵场。原因有以下几个：
+- 统一测试集的划分，不放出标签，避免了自己通过不规范不统一的验证集划分来自说自话，运动员想当裁判。众所周知，不同的测试集其实方差波动范围不小.
+- **允许trick**，在trick的加成下比试去比model baseline，避免了自己偷偷用了trick提升了百分之80的效果，然后把功劳送给第三页上面的花里胡哨的大图。然后说我真棒。
+- 会有很多团队（上千支）同时来检验paper，是否难于实现，开源是否丰富，是否难以泛化都决定了你工作的质量。
+- Leaderboard数据一般比较新，数量可靠（百万级别很常见），没有过度优化甚至泄露标签的风险。
+- 同时的多数据集评测能一定程度考验模型的方差。
  
 ### 参赛方式
  
@@ -79,7 +86,7 @@ mathjax: true
     - 此外，队伍之间也不能私自分享代码或者数据，除非在论坛上面公开发布。
 - 比赛一般只提交测试集的预测结果，无需提交代码。
 - 每人（或每个队伍）每天有提交次数的限制，一般为2次或者5次，在 Submission 页面会有提示。
- 
+
 ### 比赛获奖
  
 - Kaggle 比赛奖金丰厚，一般前三名均可以获得奖金。
@@ -88,7 +95,7 @@ mathjax: true
 - 对于某些比赛，Kaggle 或者主办方会邀请获奖队伍进行电话/视频会议，获奖队伍进行 Presentation，并与主办方团队进行交流。
  
 ### 比赛类型
- 
+
 从 Kaggle 提供的官方分类来看，可以划分为以下类型：
 - ◆ **Featured**：商业或科研难题，奖金一般较为丰厚；
 - ◆ **Recruitment**：比赛的奖励为面试机会；
@@ -129,7 +136,12 @@ mathjax: true
 ## 数据挖掘比赛基本流程
  
 - 从上面图可以看到，做一个数据挖掘比赛，主要包含了`数据分析`，`数据清洗`，`特征工程`，`模型训练`和`验证`等四个大的模块，下面分别介绍。
- 
+
+### 数据集上传
+
+- kaggle上有各种数据集，[Kaggle dataset](https://www.kaggle.com/datasets)，也可以自己上传，不过国内需要翻墙，才能上传自己的数据集，否则上传进度一直是0
+- 方法：在[Kaggle dataset](https://www.kaggle.com/datasets)上点New Dataset创建一个新的数据集, 左下角设置里有Private、Public选项，是否公开数据集.
+
 ### 数据分析
  
 数据分析可能涉及以下方面：
@@ -275,6 +287,102 @@ Bagging Ensemble Selection [5] 是我在 CrowdFlower 搜索相关性比赛中使
 到目前为止，Kaggle 平台上面已经举办了大大小小不同的赛事，覆盖图像分类，销量预估，搜索相关性，点击率预估等应用场景。在不少的比赛中，获胜者都会把自己的方案开源出来，并且非常乐于分享比赛经验和技巧心得。这些开源方案和经验分享对于广大的新手和老手来说，是入门和进阶非常好的参考资料。以下作者结合自身的背景和兴趣，对不同场景的竞赛开源方案作一个简单的盘点，总结其常用的方法和工具，以期启发思路。
 
 ## NLP
+
+### 文本分类技术演进
+
+[从Kaggle看文本分类技术演进](https://mp.weixin.qq.com/s/Tyx5pN9lMhrx_GPXjhwPnw)
+
+- (1) `青铜时代`：特征工程+分类器的天下。[LSHTC数据集](https://www.kaggle.com/c/lshtc)
+  - 2014年著名大规模文本分类数据集LSHTC的首次登场，后来演变成了text classification的benchmark。
+  - 2015年DL刚起步，风还没有刮到NLP，于是喜闻乐见，方案是特征工程+分类器，特征如TFIDF，BM25等。线性分类器融合。
+  - 中规中矩的监督学习框架，没有什么亮点，不过TFIDF，BM25就是IR领域里最经得住历史考验的东西，沿用至今。
+  - [论文和代码见](https://storage.googleapis.com/kaggle-competitions/kaggle/3634/media/LSHTC4_winner_solution.zip)
+- (2) `白银时代`：电影评论分类，初见word2vec的身影，[Rotten Tomatoes 电影评论](https://www.kaggle.com/c/sentiment-analysis-on-movie-reviews/data)和[IMDB数据集](https://www.kaggle.com/c/word2vec-nlp-tutorial/data)
+  - 2015上半年，word2vec已经被大家讨论起来，不过端到端的方案似乎还还不多。方案是特征工程+分类器，特征多了bag of words的word2vec。
+  - 2015下半年，电影评论分类(IMDB数据集), DL开始见威力，和FE+分类器的方法不相上下，具体这里有一些讨论，这时候应该有一些端到端的方案了，不过大家似乎还是愿意把word2vec当feature用。DL框架也不是很多被讨论。
+  - 2017年，基于[quora匹配数据集](https://www.kaggle.com/c/quora-question-pairs)的文本匹配任务，DL开始大放异彩，不用magic的情况下，**孪生网络**+**embedding**为代表的DL baseline 可以碾压FE+分类器了。这时候各种框架也开始百花，keras占领了kaggle半壁江山，pytorch因该刚刚还在襁褓里。
+  - 这中间缺了一些文本分类的比赛，也进入文本分类的**黑暗时期**，毫无亮点，大家沉浸在排列组合的无聊游戏中疯狂水论文，于是乎embedding + CNN/RNN/LSTM/Highway/Attention/Memory/hierarchy/Graph/Tree 开始排列组合，类似与CTR中的排列组合水论文大法。不过涌现了一些比较高质量的embeding，如fasttext和glove等等。这里面的方法当属**textCNN**(创新型较大) **fasttext**（工程意义大），其他的可以扔进垃圾箱（个人观点）。
+  - 2018年，基于toxic数据集的分类比赛，DL的**端到端方法**基本碾压了FE，强力baseline：bilstm几乎可以吊打所有的文本分类结构，ELMO还没诞生，这个比赛也是各种排列组合，没什么意思。
+- (3) `黄金时代`
+  - 2019年，基于[quora分类数据集](https://www.kaggle.com/c/quora-insincere-questions-classification)的比赛，pretrianed model的光照亮了nlp，给历史翻篇，枚举和排列组合结构终于被一棒子打死。于是乎大家看到一个**bert直接霸榜**，不过这次比赛禁止了外部数据，所以bert不能用作最后提交方案，所以导致大家穷尽可能的使用embedding+排列组合的方法也没打过public的bert，前排用bert挥一挥衣袖，没有留下一片云彩。
+  - 同年，[Toxic2 数据集](https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification)，pretrained model大放异彩。**bert**和**gpt2**开始霸榜，xlnet进入讨论区。几乎清一色的**finetune model**。手痒痒也参加了这个比赛，不得不说，bert真强。
+  - 2020年，[Google QA Labeling数据集](https://www.kaggle.com/c/google-quest-challenge) pretrained mode丰富起来，albert，roberta, t5, CTRL, Camembert, BART等新面孔争奇斗艳...(不过说实话，还是bert的泛化最好）
+
+pretrianed model标志着NLP正式进入 CV的玩法，以resnet和bert为代表性的backbone被大家牢牢记住。当然新的方法的出现不意味着老方法的完全失效，在一些特定场景下，还是有用武之地。不过从规律来看，就是一个好点子，引发了一大堆花里胡哨的东西，而好点子基本是最靠谱的，花里胡哨的中有一些是靠谱的。大浪淘沙，金子最终会闪闪发光，一切还没有盖棺定论。
+
+### 文本分类比赛技巧
+
+[5招教你搞定Kaggle文本分类比赛](https://mp.weixin.qq.com/s/liirWVcFlrdiPk05BHWFOA)
+
+#### 技巧1：快速读取数据
+
+现在很多Kaggle比赛，数据集都比较大，大于3GB是非常常见的事情。在读取数据集时，可能会遇到一些困难。可以尝试以下的方法加速数据读取：
+- 在pandas读取时手动设置变量类型
+- 使用cudf代替pandas完成读取
+- 转为parquet或feather再进行读取
+
+#### 技巧2：扩充数据集
+
+当比赛数据集非常小时，外部数据集就非常关键了。此时可以寻找相似的外部数据集来完成预训练。例如对于QA任务，可以选择以下的数据完成预训练。
+- https://rajpurkar.github.io/SQuAD-explorer/
+- http://nlpprogress.com/english/question_answering.html
+当然也可以从**伪标签**和**数据扩增**和**回译**来增加数据样本。
+
+#### 技巧3：深入文本数据
+
+文本分析
+- EDA有助于更好地理解数据。在开始开发机器学习模型之前，应该阅读/做大量的数据文本，这有助于特征工程和数据清洗。
+  - 文本长度规律
+  - 语种规律
+  - 标点符号规律
+  - 特殊字符规律
+文本清洗
+- 文本清理是NLP赛题中的重要组成部分。文本数据总是需要一些预处理和清理，然后我们才能用合适的形式表示它。
+  - Remove HTML tags
+  - Remove extra whitespaces
+  - Convert accented characters to ASCII characters
+  - Expand contractions
+  - Remove special characters
+  - Lowercase all texts
+  - Convert number words to numeric form
+  - Remove numbers
+  - Remove stopwords
+  - Lemmatization
+
+#### 技巧4：文本表示
+
+文本表示方法影响文本的表示形式，也决定了模型的精度。基础的词向量包括：
+- Pretrained **Glove** vectors
+- Pretrained **fasttext** vectors
+- Pretrained **word2vec** vectors
+- Pretrained **Paragram** vectors
+- Universal Sentence Encoder
+也可以考虑组合上述词向量以减少OOV的情况，当然同一个单词也可以拼接或平均多种词向量。
+
+也可以直接考虑直接使用高阶嵌入方法：
+- Bert
+- Roberta Bert
+- XLNET
+
+#### 技巧5：模型构建
+
+损失函数
+- 二分类Binary cross-entropy
+- 多分类Categorical cross-entropy
+- 二分类Focal loss
+- 多分类Weighted focal loss
+- 多分类Weighted kappa
+优化器
+- SGD
+- RMSprop
+- Adagrad
+- Adam
+- Adam with warmup
+Callback
+- Model checkpoint
+- Learning rate scheduler
+- Early Stopping
+
 
 ### [Contradictory, My Dear Watson](https://www.kaggle.com/c/contradictory-my-dear-watson)
 
