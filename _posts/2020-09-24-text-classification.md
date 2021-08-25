@@ -45,6 +45,59 @@ mathjax: true
 
 - tf-idf在nlp的比赛中仍然是一个强特征，合理使用就可以提分
 
+### 代码
+
+```python
+import warnings
+warnings.filterwarnings("ignore")
+import pandas as pd
+import numpy as np
+import sys
+from sklearn import feature_extraction
+from sklearn.feature_extraction.text import TfidfTransformer
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import classification_report
+
+
+train_data = pd.read_csv(sys.argv[1],sep='|',names=["a","b","c","label"])
+test_data = pd.read_csv(sys.argv[2],sep='|',names=["a","b","c","label"])
+
+def pre_process(df):
+    df['real_path'] = df['c'].apply(lambda x:x.split("\\"))
+    df['real_path'] = df['real_path'].apply(lambda x:" ".join(x))
+    return df
+
+train_data = pre_process(train_data)
+test_data = pre_process(test_data)
+data = train_data.append(test_data)
+#vectorizer = CountVectorizer()
+#transformer = TfidfTransformer()
+#tfidf = transformer.fit_transform(vectorizer.fit_transform(data['real_path']))
+# add ngram feature
+tfidf = TfidfVectorizer(ngram_range=(1,3), max_features=5000)
+tfidf = tfidf.fit_transform(data['real_path'])
+
+X_train = tfidf[:len(train_data)]
+y_train = train_data['label'].values
+
+X_test = tfidf[len(train_data):] 
+y_test = test_data['label'].values
+
+print("\nthis is the RF Classifier:")
+model = RandomForestClassifier()
+model.fit(X_train,y_train)
+y_predict = model.predict(X_test)
+print("this is the precision:")
+print(precision_score(y_predict, y_test))
+print("this is the recall:")
+print(recall_score(y_predict, y_test))
+print(classification_report(y_predict, y_test))
+```
+
 ## N-Gram
 
 - 单纯的char embedding所提供的特征比较单一，所以一般会加别的特征，n-gram就是其中的一个，可以通过字符级别的n-gram来。
@@ -84,6 +137,12 @@ mathjax: true
 
 ## FastText —— 适合长文本
 
+- 论文Bag of Tricks for Efficient Text Classification提出一个快速进行文本分类的模型和一些trick。
+- fastText模型架构
+  - fastText模型直接对所有进行embedded的特征取均值，作为文本的特征表示
+- 特点
+  - 当类别数量较大时，使用Hierachical Softmax将N-gram融入特征中，并且使用Hashing trick[Weinberger et al.2009]提高效率
+
 - 【2021-2-2】[论文](https://arxiv.org/abs/1607.01759)，[代码](https://github.com/facebookresearch/fastText)
 - Fasttext是Facebook推出的一个便捷的工具，包含**文本分类**和**词向量训练**两个功能。
 - Fasttext的分类思想：把输入转化为词向量，取平均，再经过线性分类器得到类别。输入的词向量可以是预先训练好的，也可以随机初始化，跟着分类任务一起训练。
@@ -113,6 +172,46 @@ mathjax: true
   - 当类别过多时，支持采用hierarchical softmax进行分类，提升效率
   - 对于**文本长且对速度要求高**的场景，Fasttext是baseline首选。同时用它在无监督语料上训练词向量，进行文本表示也不错。不过想继续提升效果还需要更复杂的模型。
 
+代码
+
+```python
+import pandas as pd
+import numpy as np
+import fasttext
+import sys
+from sklearn.utils import shuffle
+from sklearn.metrics import f1_score
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import classification_report
+
+# 转换为FastText需要的格式
+train_df = pd.read_csv(sys.argv[1], sep='\t', names=["label","text"])
+train_df = shuffle(train_df)
+test_df = pd.read_csv(sys.argv[2], sep='\t', names=["label","text"])
+
+train_df['label_ft'] = '__label__' + train_df['label'].astype(str)
+train_df[['text','label_ft']].to_csv('train.csv', index=None, header=None, sep='\t')
+test_df['label_ft'] = '__label__' + train_df['label'].astype(str)
+test_df[['text','label_ft']].to_csv('test.csv', index=None, header=None, sep='\t')
+
+#print(dir(fasttext))
+model = fasttext.train_supervised('train.csv', lr=1.0, wordNgrams=2, 
+                                  verbose=2, epoch=25, loss="hs")
+
+val_pred = [model.predict(x)[0][0].split('__')[-1] for x in test_df['text']]
+
+val_pred = [int(x) for x in val_pred]
+
+print("this is the precision:")
+print(precision_score(test_df['label'].values,val_pred))
+print("this is the recall:")
+print(recall_score(test_df['label'].values,val_pred))
+print(classification_report(test_df['label'].values,val_pred))
+```
+
+
 # 深度学习文本分类
 
 - 汇总文本分类众多方法
@@ -121,18 +220,21 @@ mathjax: true
 
 ### TextCNN —— 适合中短文本
 
+[textcnn结构图](https://pic1.zhimg.com/80/v2-a4c1ce1360613599af01d4266734618c_720w.jpg)
+
+![textcnn结构图](https://pic1.zhimg.com/80/v2-a4c1ce1360613599af01d4266734618c_720w.jpg)
+
 - TextCNN是Yoon Kim小哥在2014年提出的模型，开创了用CNN编码n-gram特征的先河
   - textcnn的[论文](https://arxiv.org/abs/1408.5882)
     - Convolutional Neural Networks for Sentence Classification
     - A Sensitivity Analysis of Convolutional Neural Networks for Sentence Classification
-  - 论文：
-代码：https://github.com/yoonkim/CNN_sentence
+  - 论文：[代码](https://github.com/yoonkim/CNN_sentence)
 - 词向量
   - 随机初始化 （CNN-rand）
   - 预训练词向量进行初始化，在训练过程中固定 (CNN-static)
   - 预训练词向量进行初始化，在训练过程中进行微调 (CNN-non-static)
   - 多通道(CNN-multichannel):将固定的预训练词向量和微调的词向量分别当作一个通道(channel)，卷积操作同时在这两个通道上进行，可以类比于图像RGB三通道。
-- ![](https://picb.zhimg.com/80/v2-5e45d24243a2113327db19b84aa1774a_720w.jpg)
+- ![img](https://picb.zhimg.com/80/v2-5e45d24243a2113327db19b84aa1774a_720w.jpg)
   - 句长n=9，词向量维度k=6，filter有两种窗口大小（或者说kernel size），每种有2个，因此filter总个数m=4，其中:
   - 一种的窗口大小h=2（红色框），卷积后的向量维度为n−h+1=8
   - 另一种窗口大小h=3（黄色框），卷积后的向量维度为n−h+1=7
@@ -160,6 +262,170 @@ mathjax: true
   - 加深全连接：原论文只使用了一层全连接，而加到3、4层左右效果会更好[2]
 - TextCNN是很适合**中短文本**场景的强baseline，但不太适合长文本，因为卷积核尺寸通常不会设很大，无法捕获长距离特征。同时max-pooling也存在局限，会丢掉一些有用特征。另外再仔细想的话，**TextCNN和传统的n-gram词袋模型本质是一样的**，它的好效果很大部分来自于词向量的引入，因为解决了词袋模型的稀疏性问题。
 
+代码：pytorch
+
+```python
+import sys
+import torch
+import pandas as pd
+import numpy as np
+import torch.nn as nn
+import torch.optim as optim
+import torch.utils.data as Data
+import torch.nn.functional as F
+from collections import Counter
+from sklearn.utils import shuffle
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import classification_report
+
+train = pd.read_csv(sys.argv[1],sep='|',names=["a","b","c","label"])
+test = pd.read_csv(sys.argv[2],sep='|',names=["a","b","c","label"])
+
+dtype = torch.FloatTensor
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# 3 words sentences (=sequence_length is 3)
+train = shuffle(train)
+word2idx = {}
+sentences = list(train['c'].apply(lambda x:" ".join(x.split("\\"))))
+labels = list(train['label'])
+test_sentences = list(test['c'].apply(lambda x:" ".join(x.split("\\"))))
+test_labels = list(test['label'])
+
+# TextCNN Parameter
+embedding_size = 300
+sequence_length = max([len(each.split()) for each in sentences]) # every sentences contains sequence_length(=3) words
+num_classes = 2  # 0 or 1
+batch_size = 128
+
+word_list = " ".join(sentences).split()
+c = Counter(word_list)
+word_list_common = list(Counter(el for el in c.elements() if c[el]>1))
+word_list_common.append("UNK")
+vocab = list(set(word_list_common))
+word2idx = {w: i for i, w in enumerate(vocab)}
+vocab_size = len(vocab)
+
+def make_data(sentences, labels):
+    inputs = []
+    for sen in sentences:
+        tmp_list = []
+        for each_word in sen.split():
+            try:
+                tmp_list.append(word2idx[each_word])
+            except:
+                tmp_list.append(word2idx['UNK'])      
+        inputs.append(tmp_list)    
+        #inputs.append([word2idx[n] for n in sen.split()])
+    targets = []
+    for out in labels:
+        targets.append(out) # To using Torch Softmax Loss function
+    pad_token = 0
+    padded_X = np.ones((len(inputs), sequence_length)) * pad_token
+    for i, x_len in enumerate([len(each) for each in inputs]):
+        sequence = inputs[i]
+        padded_X[i, 0:x_len] = sequence[:x_len]
+    inputs, targets = torch.LongTensor(padded_X), torch.LongTensor(labels)
+    return inputs, targets
+
+input_batch, target_batch = make_data(sentences,labels)
+input_batch_test, target_batch_test = make_data(test_sentences,test_labels)
+dataset = Data.TensorDataset(input_batch, target_batch)
+loader = Data.DataLoader(dataset, batch_size, True)
+
+
+class TextCNN(nn.Module):
+    def __init__(self):
+        super(TextCNN, self).__init__()
+        self.W = nn.Embedding(vocab_size, embedding_size)
+        output_channel = 1
+        self.conv2 = nn.Conv2d(1, 1, (2, embedding_size))
+        self.conv3 = nn.Conv2d(1, 1, (3, embedding_size))
+        self.conv4 = nn.Conv2d(1, 1, (4, embedding_size))
+        # fc
+        #self.fc = nn.Linear(3 * output_channel, num_classes)
+        self.Max2_pool = nn.MaxPool2d((sequence_length-2+1, 1))
+        self.Max3_pool = nn.MaxPool2d((sequence_length-3+1, 1))
+        self.Max4_pool = nn.MaxPool2d((sequence_length-4+1, 1))
+        #self.fc = nn.Linear(7 * output_channel, num_classes)
+        self.linear1 = nn.Linear(6, 2)
+    
+    def forward(self, x):
+      #'''
+      #X: [batch_size, sequence_length]
+      #'''
+      #batch_size = X.shape[0]
+      #embedding_X1 = self.W(X) # [batch_size, sequence_length, embedding_size]
+      #embedding_X = embedding_X.unsqueeze(1) # add channel(=1) [batch, channel(=1), sequence_length, embedding_size]
+      #conved = self.conv(embedding_X) # [batch_size, output_channel, 1, 1]
+      #flatten = conved.view(batch_size, -1) # [batch_size, output_channel*1*1]
+      #output = self.fc(flatten)
+      #return output
+        batch = x.shape[0]
+        # Convolution
+        x = self.W(x)
+        x = x.unsqueeze(1)
+        x11 = F.relu(self.conv2(x))
+        x12 = F.relu(self.conv2(x))
+        x21 = F.relu(self.conv3(x))
+        x22 = F.relu(self.conv3(x))
+        x31 = F.relu(self.conv4(x))
+        x32 = F.relu(self.conv4(x))
+        
+        # Pooling
+        x11 = self.Max2_pool(x11)
+        x12 = self.Max2_pool(x12)
+        x21 = self.Max3_pool(x21)
+        x22 = self.Max3_pool(x22)
+        x31 = self.Max4_pool(x31)
+        x32 = self.Max4_pool(x32)
+        # capture and concatenate the features
+        x = torch.cat((x11, x12, x21, x22, x31, x32), -1)
+        x = x.view(batch, 1, -1)
+
+        # project the features to the labels
+        x = self.linear1(x)
+        x = x.view(-1, 2)
+
+        return x
+      
+
+
+model = TextCNN().to(device)
+criterion = nn.CrossEntropyLoss().to(device)
+optimizer = optim.SGD(model.parameters(), lr=0.01)
+
+# Training
+for epoch in range(2):
+  for i,(batch_x, batch_y) in enumerate(loader):
+    batch_x, batch_y = batch_x.to(device), batch_y.to(device)
+    pred = model(batch_x)
+    loss = criterion(pred, batch_y)
+    if (i + 1) % 100 == 0:
+    #    print('Epoch:', '%04d' % (epoch + 1), 'loss =', '{:.6f}'.format(loss))
+        print('Epoch:', '%03d' % (epoch + 1), "data_batch:",i, 'loss =', '{:.6f}'.format(loss))
+    optimizer.zero_grad()
+    loss.backward()
+    optimizer.step()
+    
+# test eval
+
+
+## Test
+## Predict
+model = model.eval()
+predict = model(input_batch_test).data.max(1, keepdim=True)[1]
+print("this is the precision:")
+print(precision_score(test_labels,predict))
+
+print("this is the recall:")
+print(recall_score(test_labels,predict))
+
+print(classification_report(test_labels,predict))
+```
+
+
 ### DPCNN——TextCNN改进
 
 - [论文](https://ai.tencent.com/ailab/media/publications/ACL3-Brady.pdf)，[代码](https://github.com/649453932/Chinese-Text-Classification-Pytorch)
@@ -170,7 +436,7 @@ mathjax: true
   - 残差链接，参考ResNet，减缓梯度弥散问题
 - 凭借以上一些精妙的改进，DPCNN相比TextCNN有1-2个百分点的提升。
 
-## RNN文本分类（TextRNN）
+## RNN文本分类
 
 - 思想：以双向LSTM 或GRU来获取句子的信息表征， 以最后一时刻的 h 作为句子特征输入到 softmax 中进行预测
 - RNN用于文本分类
@@ -179,8 +445,131 @@ mathjax: true
   - 策略3：将所有RNN单元的输出向量的均值pooling或者max-pooling作为文本特征
   - 策略4：层次RNN+Attention, Hierarchical Attention Networks
 
+### TextRNN
+
+```python
+import sys
+import torch
+import pandas as pd
+import numpy as np
+import torch.nn as nn
+import torch.optim as optim
+import torch.utils.data as Data
+import torch.nn.functional as F
+from collections import Counter
+from sklearn.utils import shuffle
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import classification_report
+
+train = pd.read_csv(sys.argv[1],sep='|',names=["a","b","c","label"])
+test = pd.read_csv(sys.argv[2],sep='|',names=["a","b","c","label"])
+
+dtype = torch.FloatTensor
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# 3 words sentences (=sequence_length is 3)
+train = shuffle(train)
+word2idx = {}
+sentences = list(train['c'].apply(lambda x:" ".join(x.split("\\"))))
+labels = list(train['label'])
+test_sentences = list(test['c'].apply(lambda x:" ".join(x.split("\\"))))
+test_labels = list(test['label'])
+
+# TextRNN Parameter
+embedding_size = 300
+sequence_length = max([len(each.split()) for each in sentences]) # every sentences contains sequence_length(=3) words
+num_classes = 2  # 0 or 1
+batch_size = 128
+
+word_list = " ".join(sentences).split()
+c = Counter(word_list)
+word_list_common = list(Counter(el for el in c.elements() if c[el]>1))
+word_list_common.append("UNK")
+vocab = list(set(word_list_common))
+word2idx = {w: i for i, w in enumerate(vocab)}
+vocab_size = len(vocab)
+
+def make_data(sentences, labels):
+    inputs = []
+    for sen in sentences:
+        tmp_list = []
+        for each_word in sen.split():
+            try:
+                tmp_list.append(word2idx[each_word])
+            except:
+                tmp_list.append(word2idx['UNK'])      
+        inputs.append(tmp_list)    
+        #inputs.append([word2idx[n] for n in sen.split()])
+    targets = []
+    for out in labels:
+        targets.append(out) # To using Torch Softmax Loss function
+    pad_token = 0
+    padded_X = np.ones((len(inputs), sequence_length)) * pad_token
+    for i, x_len in enumerate([len(each) for each in inputs]):
+        sequence = inputs[i]
+        padded_X[i, 0:x_len] = sequence[:x_len]
+    inputs, targets = torch.LongTensor(padded_X), torch.LongTensor(labels)
+    return inputs, targets
+
+input_batch, target_batch = make_data(sentences,labels)
+input_batch_test, target_batch_test = make_data(test_sentences,test_labels)
+dataset = Data.TensorDataset(input_batch, target_batch)
+loader = Data.DataLoader(dataset, batch_size, True)
+
+
+class TextRNN(nn.Module):
+    def __init__(self):
+        super(TextRNN, self).__init__()
+        self.W = nn.Embedding(vocab_size, embedding_size)
+        self.lstm = nn.LSTM(300, 128, 2,bidirectional=True, batch_first=True)
+        # fc
+        self.fc = nn.Linear(128 * 2, 2)
+      
+    def forward(self, X):
+      '''
+      X: [batch_size, sequence_length]
+      '''
+      batch_size = X.shape[0]
+      out = self.W(X) # [batch_size, sequence_length, embedding_size]
+      out, _ = self.lstm(out)
+      out = self.fc(out[:, -1, :]) 
+      return out
+
+model = TextRNN().to(device)
+criterion = nn.CrossEntropyLoss().to(device)
+optimizer = optim.Adam(model.parameters(), lr=0.001)
+
+# Training
+for epoch in range(2):
+  for i,(batch_x, batch_y) in enumerate(loader):
+    batch_x, batch_y = batch_x.to(device), batch_y.to(device)
+    pred = model(batch_x)
+    loss = criterion(pred, batch_y)
+    if (i + 1) % 100 == 0:
+        #print('Epoch:', '%04d' % (epoch + 1), 'loss =', '{:.6f}'.format(loss))
+        print('Epoch:', '%03d' % (epoch + 1), "data_batch:",i, 'loss =', '{:.6f}'.format(loss))
+    optimizer.zero_grad()
+    loss.backward()
+    optimizer.step()
+    
+# test eval
+## Test
+## Predict
+model = model.eval()
+predict = model(input_batch_test).data.max(1, keepdim=True)[1]
+print("this is the precision:")
+print(precision_score(test_labels,predict))
+print("this is the recall:")
+print(recall_score(test_labels,predict))
+print(classification_report(test_labels,predict))
+```
+
 ### Text-RCNN（RNN+CNN）用于文本分类
 
+TextRCNN：一种结合RNN和CNN的模型，通过RNN捕获长依赖特性，通过CNN来对捕获文本中的重要部分，防止RNN有偏特点。
+
+![textrnn](https://pic1.zhimg.com/80/v2-870f4f26b6368dacdfdbe8ace144e694_720w.jpg)
 - 除了DPCNN那样增加感受野的方式，RNN也可以缓解长距离依赖的问题。
 - 论文[Recurrent Convolutional Neural Networks for Text Classification](https://dl.acm.org/doi/10.5555/2886521.2886636)设计了一种RNN和CNN结合的模型用于文本分类。[代码](https://github.com/649453932/Chinese-Text-Classification-Pytorch)
   - 一个很简单的思想看起来比 Transformer 还复杂，真的是有点醉
@@ -231,15 +620,9 @@ mathjax: true
 
 - 针对DAN模型，论文提出一种word dropout策略：在求平均词向量前，随机使得文本中的某些单词(token)失效。
 
-### fastText
+## HAN 注意力机制 (长文本【篇章级别】分类）
 
-- 论文Bag of Tricks for Efficient Text Classification提出一个快速进行文本分类的模型和一些trick。
-- fastText模型架构
-  - fastText模型直接对所有进行embedded的特征取均值，作为文本的特征表示
-- 特点
-  - 当类别数量较大时，使用Hierachical Softmax将N-gram融入特征中，并且使用Hashing trick[Weinberger et al.2009]提高效率
-
-## HAN (长文本【篇章级别】分类）
+HAN：一种采用了attention机制的用于文本分类的分层注意力模型，attention机制让模型基于不同的单词和句子给予不同的注意力权重。模型主要有一个词序列编码器，一个词级注意力层，一个句子编码器和一个句子层注意力层，词和句上的结构基本类似。字编码阶段GRU将词向量通过隐层形式表征，再拼接前向和后向的隐藏表征，作为注意力层的输入，在注意力层选取一个query向量分别计算不同单词的权重，作为词的attention权重。结果作为句子表征阶段的输入，句子表征重复单词阶段的两个步骤，最后的句子的表征能用来做下游的分类任务。该模型在长文本有相对不错的效果，且因为attention的存在，能对词和句子有着相对不错的解释。
 
 - [论文](https://www.aclweb.org/anthology/N16-1174.pdf)，[代码](https://github.com/richliao/textClassifier)
 - 以上方法都是句子级别的分类，虽然用到长文本、篇章级也是可以的，但速度精度都会下降，于是有研究者提出了**层次注意力**分类框架，即Hierarchical Attention。先对每个句子用 BiGRU+Att 编码得到句向量，再对句向量用 BiGRU+Att 得到doc级别的表示进行分类
@@ -254,6 +637,25 @@ mathjax: true
   - 对句向量使用sentence attention ，具体过程和word attention相似，获得文章表示
   - 最后，用Softmax做分类。
 - 方法很符合直觉，不过实验结果来看比起avg、max池化只高了不到1个点（狗头，真要是很大的doc分类，好好清洗下，fasttext其实也能顶的
+
+## transformer
+
+### BERT
+
+BERT：Pre-training of Deep Bidirectional Transformers for Language Understanding，双向的Transformers的Encoder，是谷歌于2018年10月提出的。主要是一种预训练的模型，通过双向transformer实现的，通过mask的机制，随机遮挡部分的单词进行词向量的预训练，同时在每个位置token表征的时候引入了token向量，segment向量和position向量相结合的方式，能更全面的语义进行表征，同时通过mask的机制使得单次的训练中，词向量的学习过程能同时引入前后文的信息，而不是通过双向RNN那种生硬拼接的方式，从结果上来说，该模型的效果在很多任务上表现显著。
+
+### XLNet
+
+XLNet：是一种通用化自动回归 BERT 式预训练语言模型，可通过最大限度地提高针对因式分解顺序的所有排列的预期可能性，实现学习双向上下文，乱排序可以不用显现mask来学习到双向上下文的信息，防止类似mask操作导致的finetune数据和预训练数据分布不一致，和mask的token之间存在相互依赖关系。为了防止训练过程中标签泄露的问题，引入了Two-Stream Self-Attention机制，XLNet在Pre-train時分為兩個stream，Content stream負責學習上下文，而Query stream這個角色就是用來代替< Mask>token，其負責把Content stream產生的representation拿來做預測，且引入了Transformer-XL，该方法能克服Transformer中长依赖的学习问题。
+
+## GNN 图神经网络
+
+### TextGCN
+
+TextGCN：一种文本分类的图神经网络方法。第一次将整个语料库建模为异构图，并研究用图形神经网络联合学习词和文档嵌入。
+
+
+通过图表征的方式进行建模，将文档和单词通过异构图的形式进行构建，边的权重是单词在文档中的TFIDF值，最后将文档表征作为下游的分类应用。
 
 ## 最新研究
 
