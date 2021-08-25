@@ -625,6 +625,168 @@ tokenizer_output = ["un", "##aff", "##able"]
 
 - 一系列变种模型
 
+## BERT fine-tune
+
+- 【2021-8-25】[中文语料的 Bert 微调 Bert Chinese Finetune](https://kuhungio.me/2019/bert-chinese-finetune/)
+
+[Bert](https://github.com/google-research/bert) 的文档本身对 finetune 进行了较为详细的描述，但对于不熟悉官方标准数据集的工程师来说，有一定的上手难度。随着 [Bert as service](https://github.com/hanxiao/bert-as-service) 代码的开源，使用 Bert 分类或阅读理解的副产物–词空间，成为一个更具实用价值的方向。
+
+### 预训练模型
+
+- 下载 [BERT-Base, Chinese](https://storage.googleapis.com/bert_models/2018_11_03/chinese_L-12_H-768_A-12.zip): Chinese Simplified and Traditional, 12-layer, 768-hidden, 12-heads, 110M parameters
+
+### 数据准备
+- train.tsv 训练集
+- dev.tsv 验证集
+
+数据格式
+- 第一列为 label，第二列为具体内容，tab 分隔。因模型本身在字符级别做处理，因而无需分词。
+
+```
+fashion	衬衫和它一起穿,让你减龄十岁!越活越年轻!太美了!...
+houseliving	95㎡简约美式小三居,过精美别致、悠然自得的小日子! 屋主的客...
+game	赛季末用他们两天上一段，7.20最强LOL上分英雄推荐！ 各位小伙...
+```
+
+bert 的 finetune 主要存在两类应用场景：分类和阅读理解。
+
+### 分类任务
+
+因分类较为容易获得样本，以下以分类为例，做模型微调：
+
+修改 run_classifier.py
+- 集成抽象类DataProcessor，实现里面的几种方法：
+  - get_train_examples：获取训练集数据
+  - get_dev_examples：获取验证集数据
+  - get_test_examples：获取测试集数据
+  - get_labels：获取分类标签集合
+
+BERT数据处理过程：<font color='blue'>原始文本 → 分词 → 加特殊标记 → 映射为id → 合并</font>
+- 原始文本
+- **分词**：中英文不同
+  - 英文：词性/词干还原
+  - 中文：分词，bert默认以单字切割
+- 加**特殊标记**
+  - 根据任务不同，加\[CLS],\[SEP],\[PAD]等
+- **映射为id**
+  - 将以上所有字符映射为id编号序列
+  - 注意：encoder和decoder对应不同的字典
+- 句子**向量化**
+  - 根据语料长度，设置高于分词后最大长度的阈值max_len，作为句子长度维度
+
+格式：
+- (a) For sequence pairs: **句子对**
+  - sentence: is this jackson ville ? || no it is not .
+  - tokens:   \[CLS] is this jack ##son ##ville ? \[SEP] no it is not . \[SEP]
+  - type_ids: 0     0  0    0    0   0  0 0     1  1  1  1   1 1
+-  (b) For single sequences: **单句形式**
+  - sentence: the dog is hairy .
+  - tokens:   \[CLS] the dog is hairy . \[SEP]
+  - type_ids:   0     0   0   0  0     0  0
+- 输出格式：[guid, text_a, text_b, label]
+  - 后两个字段可选
+- 输入模型
+  - input_ids：句子id向量，max_len维
+  - input_mask：句子掩码模板，0，1标记，0表示空白填充
+  - segment_ids：两个句子分隔位置
+  - label_id：分类目标对应的id
+
+```python
+class DemoProcessor(DataProcessor):
+    """任务相关的数据集，处理类"""
+    def __init__(self):
+        self.labels = set() # label集合
+    
+    def get_train_examples(self, data_dir):
+        """读取训练集"""
+        # _read_csv只是简单按照tab分隔成list
+        # _create_examples将以上list转成标准样本格式
+        return self._create_examples(
+            self._read_tsv(os.path.join(data_dir, "train.tsv")), "train")
+    def get_dev_examples(self, data_dir):
+        """读取验证集"""
+        return self._create_examples(
+            self._read_tsv(os.path.join(data_dir, "dev.tsv")), "dev")
+    def get_test_examples(self, data_dir):
+        """读取测试集"""
+        return self._create_examples(
+          self._read_tsv(os.path.join(data_dir, "test.tsv")), "test")
+    def get_labels(self):
+        """获取目标值集合"""
+        #return list(self.labels)
+        return ["fashion", "houseliving","game"] # 根据 label 自定义
+    
+    def _create_examples(self, lines, set_type):
+        """从训练集/验证集中读取样本"""
+        examples = []
+        for (i, line) in enumerate(lines):
+            # 格式：[label text]
+            # Only the test set has a header 测试集有header表头信息
+            if set_type == "test" and i == 0:
+                continue
+            guid = "%s-%s" % (set_type, i) # 样本唯一id
+            if set_type == "test":
+                text_a = tokenization.convert_to_unicode(line[0])
+                label = "0" # 测试集给默认label
+            else: # 将所有字符转成unicode
+                text_a = tokenization.convert_to_unicode(line[1])
+                label = tokenization.convert_to_unicode(line[0])
+                examples.append(
+                  InputExample(guid=guid, text_a=text_a, text_b=None, label=label))
+        # 输出格式：[guid, text_a, text_b, label]
+        return examples
+```
+
+添加 DemoProcessor
+
+```python
+  processors = {
+      "cola": ColaProcessor,
+      "mnli": MnliProcessor,
+      "mrpc": MrpcProcessor,
+      "xnli": XnliProcessor,
+      "demo": DemoProcessor,
+  }
+```
+
+启动训练
+
+```python
+export BERT_Chinese_DIR=/path/to/bert/chinese_L-12_H-768_A-12
+export Demo_DIR=/path/to/DemoDate
+python run_classifier.py \
+  --task_name=demo \
+  --do_train=true \
+  --do_eval=true \
+  --data_dir=$Demo_DIR \
+  --vocab_file=$BERT_Chinese_DIR/vocab.txt \
+  --bert_config_file=$BERT_Chinese_DIR/bert_config.json \
+  --init_checkpoint=$BERT_Chinese_DIR/bert_model.ckpt \
+  --max_seq_length=128 \
+  --train_batch_size=32 \
+  --learning_rate=2e-5 \
+  --num_train_epochs=3.0 \
+  --output_dir=/tmp/Demo_output/
+```
+
+若一切顺利，将会有以下输出:
+
+```shell
+***** Eval results *****
+  eval_accuracy = xx
+  eval_loss = xx
+  global_step = xx
+  loss = xx
+```
+
+最终，微调后的模型保存在output_dir指向的文件夹中。
+
+### 总结
+
+Bert 预训练后的 finetune，是一种很高效的方式，节省时间，同时提高模型在垂直语料的表现。finetune 过程，实际上不难。较大的难点在于数据准备和 pipeline 的设计。从商业角度讲，应着重考虑 finetune 之后，模型有效性的证明，以及在业务场景中的应用。如果评估指标和业务场景都已缕清，那么不妨一试。
+
+[Github 地址](https://github.com/kuhung/bert_finetune)
+
 ## MLM改进
 
 - 基于MLM，做各种改进尝试
