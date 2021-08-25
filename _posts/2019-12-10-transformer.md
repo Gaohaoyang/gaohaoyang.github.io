@@ -1323,6 +1323,11 @@ Self-attention可以一次性的将所有的字都当做输入。但是NLP的输
   - ![图示](https://img-blog.csdnimg.cn/img_convert/ef2c7618ee3451e8c16c2e7fa21fbd71.png)
   - 问题：这种方式虽说可以表示出相对的距离关系，但是也是有局限的。其中一个比较大的问题是：只能的到相对关系，无法得到**方向关系**。所谓的方向关系就是，对于两个token谁在谁的前面，或者谁在谁的后面是无法判断的。
 
+transformer位置编码采用函数型，GPT-3论文给出的公式：
+- ![公式](https://img-blog.csdnimg.cn/img_convert/0eed794d556ddb9a75bb2e39cf2791b7.png)
+- 注意：每一个Token的位置信息编码不是数字，而是一个不同频率分割出来，和文本一样维度的向量。不同频率是通过Wn来表示。
+- 得到位置向量P之后，将和模型的embedding向量相加，得到进入Transformer模型的最终表示 ![公式](https://img-blog.csdnimg.cn/img_convert/c096e564bb2b7b833c96769511a704a5.png), 其中，$w_i=1/10000^{2i/d_{model}}$,  t是每个token的位置，比如说是位置1，位置2，以及位置n
+
 transformer怎么做呢？论文的实现很有意思，使用正余弦函数。公式如下：
 - $$PE(pos,2i) = sin(pos/10000^{2i/d_{model}}) $$
 - $$PE(pos,2i+1) = cos(pos/10000^{2i/d_{model}})$$
