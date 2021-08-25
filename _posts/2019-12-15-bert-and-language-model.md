@@ -179,7 +179,7 @@ DeepMoji的作者们使用这个概念对一个模型进行了12亿条推文的�
 - 综述从四个方面（Representation Types、Architectures、Pre-training Task Types、Extensions）对现有 PTMs (Pre-trained Models) 进行了系统分类，一幅图来概括全文精华：
    - ![](http://images.shuang0420.com/images/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%20-%20Pre-trained%20Models%20for%20Natural%20Language%20Processing/taxonomy.png)
 
-### 1、论文汇总：
+## 1、论文汇总：
 
 PTMs-Papers:
 
@@ -189,7 +189,7 @@ PTMs-Papers:
 4. https://bertlang.unibocconi.it/
 5. https://github.com/jessevig/bertviz
 
-### 2. PTMs单模型解读
+## 2. PTMs单模型解读
 
 1. 自监督学习：[Self-Supervised Learning 入门介绍](https://zhuanlan.zhihu.com/p/108625273)
 2. 自监督学习：[Self-supervised Learning 再次入门](https://zhuanlan.zhihu.com/p/108906502)
@@ -208,6 +208,221 @@ PTMs-Papers:
 15. 模型压缩 TinyBERT:[比 Bert 体积更小速度更快的 TinyBERT](https://zhuanlan.zhihu.com/p/94359189)
 16. 模型压缩总结：[BERT 瘦身之路：Distillation，Quantization，Pruning](https://zhuanlan.zhihu.com/p/86900556)
 
+
+## Huggingface
+
+![logo](https://img-blog.csdnimg.cn/20200904202104322.png)
+
+[demo](https://transformer.huggingface.co/)
+
+### Hugging face 简介
+
+[Hugging Face](https://huggingface.co/)是一家总部位于纽约的聊天机器人初创服务商，开发的应用在青少年中颇受欢迎，相比于其他公司，Hugging Face更加注重产品带来的情感以及环境因素。
+
+但更令它广为人知的是Hugging Face专注于NLP技术，拥有大型的开源社区。尤其是在github上开源的自然语言处理，预训练模型库 `Transformers`，已被下载超过一百万次，github上超过24000个star。[Transformers](https://github.com/huggingface/transformers) 提供了NLP领域大量state-of-art的 预训练语言模型结构的模型和调用框架。
+
+### transformers库
+
+- 这个库最初的名称是pytorch-pretrained-bert，它随着BERT一起应运而生。Google2018年10月底在开源了[BERT](https://github.com/google-research/bert)的tensorflow实现。当时，BERT以其强劲的性能，引起NLPer的广泛关注。几乎与此同时，pytorch-pretrained-bert也开始了它的第一次提交。pytorch-pretrained-bert 用当时已有大量支持者的pytorch框架复现了BERT的性能，并提供预训练模型的下载，使没有足够算力的开发者们也能够在几分钟内就实现 state-of-art-fine-tuning。
+- 直到2019年7月16日，在repo上已经有了包括BERT，GPT，GPT-2，Transformer-XL，XLNET，XLM在内六个预训练语言模型，这时候名字再叫pytorch-pretrained-bert就不合适了，于是改成了pytorch-transformers，势力范围扩大了不少。这还没完！
+- 2019年6月Tensorflow2的beta版发布，Huggingface也闻风而动。为了立于不败之地，又实现了TensorFlow 2.0和PyTorch模型之间的深层互操作性，可以在TF2.0/PyTorch框架之间随意迁移模型。在2019年9月也发布了2.0.0版本，同时正式更名为 transformers 。到目前为止，transformers 提供了超过100种语言的，32种预训练语言模型，简单，强大，高性能，是新手入门的不二选择。
+
+安装：pip install transformers==2.2.0
+
+```python
+import torch
+from transformers import BertModel, BertTokenizer
+
+# 调用bert-base模型，同时模型的词典经过小写处理
+model_name = 'bert-base-uncased'
+# 读取模型对应的tokenizer
+tokenizer = BertTokenizer.from_pretrained(model_name)
+# 载入模型
+model = BertModel.from_pretrained(model_name)
+# 输入文本
+input_text = "Here is some text to encode"
+# 通过tokenizer把文本变成 token_id
+input_ids = tokenizer.encode(input_text, add_special_tokens=True)
+# input_ids: [101, 2182, 2003, 2070, 3793, 2000, 4372, 16044, 102]
+input_ids = torch.tensor([input_ids])
+
+# 获得BERT模型最后一个隐层结果
+with torch.no_grad():
+    last_hidden_states = model(input_ids)[0]  # Models outputs are now tuples
+
+""" tensor([[[-0.0549,  0.1053, -0.1065,  ..., -0.3550,  0.0686,  0.6506],
+         [-0.5759, -0.3650, -0.1383,  ..., -0.6782,  0.2092, -0.1639],
+         [-0.1641, -0.5597,  0.0150,  ..., -0.1603, -0.1346,  0.6216],
+         ...,
+         [ 0.2448,  0.1254,  0.1587,  ..., -0.2749, -0.1163,  0.8809],
+         [ 0.0481,  0.4950, -0.2827,  ..., -0.6097, -0.1212,  0.2527],
+         [ 0.9046,  0.2137, -0.5897,  ...,  0.3040, -0.6172, -0.1950]]]) 
+	shape: (1, 9, 768)     
+"""
+
+
+```
+
+包括import在内的不到十行代码，我们就实现了读取一个预训练过的BERT模型，来encode我们指定的一个文本，对文本的每一个token生成768维的向量。如果是二分类任务，我们接下来就可以把第一个token也就是\[CLS]的768维向量，接一个linear层，预测出分类的logits，或者根据标签进行训练。
+
+**BERT configuration**
+
+Transformers的源码：路径 src/transformers 下有很多的python代码文件。以 configuration 开头的都是各个模型的配置代码，比如 configuration_bert.py，主要是一个继承自 PretrainedConfig 的类 BertConfig的定义，以及不同BERT模型的config文件的下载路径，下方显示前三个。
+- bert-base-uncased的模型的配置，其中包括dropout, hidden_size, num_hidden_layers, vocab_size 等等。
+- 比如bert-base-uncased的配置它是12层的，词典大小30522等等，甚至可以在config里利用output_hidden_states配置是否输出所有hidden_state。
+
+```python
+BERT_PRETRAINED_CONFIG_ARCHIVE_MAP = {
+    "bert-base-uncased": "https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased-config.json",
+    "bert-large-uncased": "https://s3.amazonaws.com/models.huggingface.co/bert/bert-large-uncased-config.json",
+    "bert-base-cased": "https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased-config.json",
+}
+```
+
+**BERT tokenization**
+
+以tokenization开头的都是跟vocab有关的代码，比如在 tokenization_bert.py 中有函数如whitespace_tokenize，还有不同的tokenizer的类。同时也有各个模型对应的vocab.txt。从第一个链接进去就是bert-base-uncased的词典，这里面有30522个词，对应着config里面的vocab_size。
+- 其中，第0个token是\[pad]，第101个token是\[CLS]，第102个token是\[SEP]，所以之前encode得到的 [101, 2182, 2003, 2070, 3793, 2000, 4372, 16044, 102] ，其实tokenize后convert前的token就是 [ '[ CLS]', 'here', 'is', 'some', 'text', 'to', 'en', '##code', '[ SEP]' ]，经过之前BERT论文的介绍，大家应该都比较熟悉了。
+- BERT的vocab预留了不少unused token，如果我们会在文本中使用特殊字符，在vocab中没有，这时候就可以通过替换vacab中的unused token，实现对新的token的embedding进行训练。
+
+```python
+PRETRAINED_VOCAB_FILES_MAP = {
+    "vocab_file": {
+        "bert-base-uncased": "https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased-vocab.txt",
+        "bert-large-uncased": "https://s3.amazonaws.com/models.huggingface.co/bert/bert-large-uncased-vocab.txt",
+        "bert-base-cased": "https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased-vocab.txt",
+    }
+}
+```
+
+**BERT modeling**
+
+以modeling开头的就是最关心的模型代码，比如 modeling_bert.py。文件中有许多不同的预训练模型以供下载，可以按需获取。
+
+代码中可以重点看**BertModel**类，它就是BERT模型的基本代码, 类定义中，由embedding，encoder，pooler组成，forward时顺序经过三个模块，输出output。
+
+```python
+class BertModel(BertPreTrainedModel):
+    def __init__(self, config):
+        super().__init__(config)
+        self.config = config
+
+        self.embeddings = BertEmbeddings(config)
+        self.encoder = BertEncoder(config)
+        self.pooler = BertPooler(config)
+
+        self.init_weights()
+        
+ def forward(
+        self, input_ids=None, attention_mask=None, token_type_ids=None,
+        position_ids=None, head_mask=None, inputs_embeds=None,
+        encoder_hidden_states=None, encoder_attention_mask=None,
+    ):
+    """ 省略部分代码 """
+    
+        embedding_output = self.embeddings(
+            input_ids=input_ids, position_ids=position_ids, token_type_ids=token_type_ids, inputs_embeds=inputs_embeds
+        )
+        encoder_outputs = self.encoder(
+            embedding_output,
+            attention_mask=extended_attention_mask,
+            head_mask=head_mask,
+            encoder_hidden_states=encoder_hidden_states,
+            encoder_attention_mask=encoder_extended_attention_mask,
+        )
+        sequence_output = encoder_outputs[0]
+        pooled_output = self.pooler(sequence_output)
+
+        outputs = (sequence_output, pooled_output,) + encoder_outputs[
+            1:
+        ]  # add hidden_states and attentions if they are here
+        return outputs  # sequence_output, pooled_output, (hidden_states), (attentions)
+```
+BertEmbeddings这个类中可以清楚的看到，embedding由三种embedding相加得到，经过layernorm 和 dropout后输出。
+
+```python
+def __init__(self, config):
+        super().__init__()
+        self.word_embeddings = nn.Embedding(config.vocab_size, config.hidden_size, padding_idx=0)
+        self.position_embeddings = nn.Embedding(config.max_position_embeddings, config.hidden_size)
+        self.token_type_embeddings = nn.Embedding(config.type_vocab_size, config.hidden_size)
+        # self.LayerNorm is not snake-cased to stick with TensorFlow model variable name and be able to load
+        # any TensorFlow checkpoint file
+        self.LayerNorm = BertLayerNorm(config.hidden_size, eps=config.layer_norm_eps)
+        self.dropout = nn.Dropout(config.hidden_dropout_prob)
+        
+def forward(self, input_ids=None, token_type_ids=None, position_ids=None, inputs_embeds=None):
+        """ 省略 embedding生成过程 """
+        embeddings = inputs_embeds + position_embeddings + token_type_embeddings
+        embeddings = self.LayerNorm(embeddings)
+        embeddings = self.dropout(embeddings)
+        return embeddings
+```
+
+BertEncoder主要将embedding的输出，逐个经过每一层Bertlayer的处理，得到各层hidden_state，再根据config的参数，来决定最后是否所有的hidden_state都要输出，BertLayer的内容展开的话，篇幅过长，读者感兴趣可以自己一探究竟。
+
+```python
+class BertEncoder(nn.Module):
+    def __init__(self, config):
+        super().__init__()
+        self.output_attentions = config.output_attentions
+        self.output_hidden_states = config.output_hidden_states
+        self.layer = nn.ModuleList([BertLayer(config) for _ in range(config.num_hidden_layers)])
+
+    def forward(
+        self,
+        hidden_states,
+        attention_mask=None,
+        head_mask=None,
+        encoder_hidden_states=None,
+        encoder_attention_mask=None,
+    ):
+        all_hidden_states = ()
+        all_attentions = ()
+        for i, layer_module in enumerate(self.layer):
+            if self.output_hidden_states:
+                all_hidden_states = all_hidden_states + (hidden_states,)
+
+            layer_outputs = layer_module(
+                hidden_states, attention_mask, head_mask[i], encoder_hidden_states, encoder_attention_mask
+            )
+            hidden_states = layer_outputs[0]
+
+            if self.output_attentions:
+                all_attentions = all_attentions + (layer_outputs[1],)
+        # Add last layer
+        if self.output_hidden_states:
+            all_hidden_states = all_hidden_states + (hidden_states,)
+
+        outputs = (hidden_states,)
+        if self.output_hidden_states:
+            outputs = outputs + (all_hidden_states,)
+        if self.output_attentions:
+            outputs = outputs + (all_attentions,)
+        return outputs  # last-layer hidden state, (all hidden states), (all attentions)
+```
+
+Bertpooler 其实就是将BERT的\[CLS]的hidden_state 取出，经过一层DNN和Tanh计算后输出。
+
+```python
+class BertPooler(nn.Module):
+    def __init__(self, config):
+        super().__init__()
+        self.dense = nn.Linear(config.hidden_size, config.hidden_size)
+        self.activation = nn.Tanh()
+
+    def forward(self, hidden_states):
+        # We "pool" the model by simply taking the hidden state corresponding
+        # to the first token.
+        first_token_tensor = hidden_states[:, 0]
+        pooled_output = self.dense(first_token_tensor)
+        pooled_output = self.activation(pooled_output)
+        return pooled_output
+```
+
+在这个文件中还有上述基础的BertModel的进一步的变化，比如BertForMaskedLM，BertForNextSentencePrediction这些是Bert加了预训练头的模型，还有BertForSequenceClassification， BertForQuestionAnswering 这些加上了特定任务头的模型。
+
+[Huggingface简介及BERT代码浅析](https://zhuanlan.zhihu.com/p/120315111)
 
 ## 中文模型下载
 
@@ -231,10 +446,126 @@ PTMs-Papers:
 
 > [1] 通用数据包括：百科、新闻、问答等数据，总词数达5.4B，处理后的文本大小约10G
 
-以上预训练模型以TensorFlow版本的权重为准。
-对于PyTorch版本，我们使用的是由Huggingface出品的[PyTorch-Transformers 1.0](https://github.com/huggingface/pytorch-transformers)提供的转换脚本。
-如果使用的是其他版本，请自行进行权重转换。
-中国大陆境内建议使用讯飞云下载点，境外用户建议使用谷歌下载点，base模型文件大小约**400M**。 
+以上预训练模型以TensorFlow版本的权重为准。中国大陆境内建议使用讯飞云下载点，境外用户建议使用谷歌下载点，base模型文件大小约**400M**。
+
+
+[pytorch中文语言模型bert预训练代码](https://zhuanlan.zhihu.com/p/161301389)
+
+对于PyTorch版本，使用的是由`Huggingface`出品的[PyTorch-Transformers 1.0](https://github.com/huggingface/pytorch-transformers)提供的转换脚本。如果使用的是其他版本，请自行进行权重转换。
+
+huggingface项目中语言模型预训练用**mask方式**如下。仍是按照`15%`的数据随机mask然后预测自身。如果要做一些高级操作比如whole word masking或者实体预测，可以自行修改transformers.DataCollatorForLanguageModeling。[代码](https://github.com/zhusleep/pytorch_chinese_lm_pretrain)
+
+```python
+def mask_tokens(self, inputs: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+        """
+        Prepare masked tokens inputs/labels for masked language modeling: 80% MASK, 10% random, 10% original.
+        """
+        if self.tokenizer.mask_token is None:
+            raise ValueError(
+                "This tokenizer does not have a mask token which is necessary for masked language modeling. Remove the --mlm flag if you want to use this tokenizer."
+            )
+
+        labels = inputs.clone()
+        # We sample a few tokens in each sequence for masked-LM training (with probability args.mlm_probability defaults to 0.15 in Bert/RoBERTa)
+        probability_matrix = torch.full(labels.shape, self.mlm_probability)
+        special_tokens_mask = [
+            self.tokenizer.get_special_tokens_mask(val, already_has_special_tokens=True) for val in labels.tolist()
+        ]
+        probability_matrix.masked_fill_(torch.tensor(special_tokens_mask, dtype=torch.bool), value=0.0)
+        if self.tokenizer._pad_token is not None:
+            padding_mask = labels.eq(self.tokenizer.pad_token_id)
+            probability_matrix.masked_fill_(padding_mask, value=0.0)
+        masked_indices = torch.bernoulli(probability_matrix).bool()
+        labels[~masked_indices] = -100  # We only compute loss on masked tokens
+
+        # 80% of the time, we replace masked input tokens with tokenizer.mask_token ([MASK])
+        indices_replaced = torch.bernoulli(torch.full(labels.shape, 0.8)).bool() & masked_indices
+        inputs[indices_replaced] = self.tokenizer.convert_tokens_to_ids(self.tokenizer.mask_token)
+
+        # 10% of the time, we replace masked input tokens with random word
+        indices_random = torch.bernoulli(torch.full(labels.shape, 0.5)).bool() & masked_indices & ~indices_replaced
+        random_words = torch.randint(len(self.tokenizer), labels.shape, dtype=torch.long)
+        inputs[indices_random] = random_words[indices_random]
+
+        # The rest of the time (10% of the time) we keep the masked input tokens unchanged
+        return inputs, labels
+```
+
+三个常见的中文bert语言模型：<font color='blue'>ERNIE ＞ roberta-wwm-ext ＞ bert-base-chinese </font>
+- [bert-base-chinese](https://huggingface.co/bert-base-chinese)：最常见的中文bert语言模型，Google基于中文维基百科相关语料进行预训练。把它作为**baseline**，在领域内无监督数据进行语言模型预训练很简单。
+- [roberta-wwm-ext](https://github.com/ymcui/Chinese-BERT-wwm)：**哈工大**讯飞联合实验室发布的预训练语言模型。预训练的方式是采用roberta类似的方法，比如动态mask，更多的训练数据等等。在很多任务中，该模型效果要优于bert-base-chinese。
+- [ernie](https://github.com/nghuyong/ERNIE-Pytorch%25EF%25BC%2589)
+
+### bert-base-chinese
+
+预训练代码：
+
+```shell
+python run_language_modeling.py \
+    --output_dir=output \
+    --model_type=bert \
+    --model_name_or_path=bert-base-chinese \
+    --do_train \
+    --train_data_file=$TRAIN_FILE \
+    --do_eval \
+    --eval_data_file=$TEST_FILE \
+    --mlm
+```
+其中$TRAIN_FILE 代表领域相关中文语料地址。
+
+- 【2021-8-26】中文模型：bert-base-chinese，跑不通！
+
+### roberta-wwm-ext
+
+代码：
+
+```python
+import torch
+from transformers import BertTokenizer, BertModel
+
+tokenizer = BertTokenizer.from_pretrained("hfl/chinese-roberta-wwm-ext")
+roberta = BertModel.from_pretrained("hfl/chinese-roberta-wwm-ext")
+
+# 切记不可使用官方推荐的以下语句!
+tokenizer = AutoTokenizer.from_pretrained("hfl/chinese-roberta-wwm-ext")
+model = AutoModel.from_pretrained("hfl/chinese-roberta-wwm-ext")
+```
+
+注意：<font color='red'>切记不可使用官方推荐的Auto语句!</font>
+- 中文roberta类的配置文件比如vocab.txt，都是采用bert的方法设计的。英文roberta模型读取配置文件的格式默认是vocab.json。对于一些英文roberta模型，倒是可以通过AutoModel自动读取。这就解释了huggingface的模型库的**中文roberta示例代码为什么跑不通**。
+
+如果要基于上面的代码run_language_modeling.py继续预训练roberta。还需要做两个改动。
+- 下载roberta-wwm-ext到本地目录hflroberta，在config.json中修改“model_type”:"roberta"为"model_type":"bert"。
+- 对上面的run_language_modeling.py中的AutoModel和AutoTokenizer都进行替换为BertModel和BertTokenizer。
+
+```shell
+python run_language_modeling_roberta.py \
+    --output_dir=output \
+    --model_type=bert \
+    --model_name_or_path=hflroberta \
+    --do_train \
+    --train_data_file=$TRAIN_FILE \
+    --do_eval \
+    --eval_data_file=$TEST_FILE \
+    --mlm
+```
+
+### ernie
+
+ernie是百度发布的基于百度知道贴吧等中文语料结合实体预测等任务生成的预训练模型。这个模型的准确率在某些任务上要优于bert-base-chinese和roberta。如果基于ernie1.0模型做领域数据预训练的话只需要一步修改。
+- 下载ernie1.0到本地目录ernie，在config.json中增加字段"model_type":"bert"。
+
+```shell
+python run_language_modeling.py \
+    --output_dir=output \
+    --model_type=bert \
+    --model_name_or_path=ernie \
+    --do_train \
+    --train_data_file=$TRAIN_FILE \
+    --do_eval \
+    --eval_data_file=$TEST_FILE \
+    --mlm
+```
 
 
 # BERT
