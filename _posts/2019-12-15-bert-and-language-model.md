@@ -234,11 +234,42 @@ PyTorch实现了从语言中识别情绪情感反讽的DeepMoji模型：https://
 
 ```shell
 pip install transformers==2.2.0
+pip install tensorflow
+pip install numpy
 # tf环境
 pip install tensorflow-gpu==2.4.0
 # pytorch环境
 pip install torch
 ```
+
+模型下载
+- 在[hugging face模型库](https://huggingface.co/models)里选择需要的预训练模型并下载。例如，点击bert-base-uncased以后点Files and versions进行手动下载。
+- 通常这样下载的模型会是有损的，后续无法使用，因此最好是通过git下载
+
+```shell
+# mac下
+brew install git-lfs
+git lfs install
+git clone https://huggingface.co/bert-base-chinese
+```
+
+模型文件导入
+
+```python
+import transformers
+
+MODEL_PATH = "./transformr_files/bert-base-uncased/"
+# a.通过词典导入分词器
+tokenizer = transformers.BertTokenizer.from_pretrained(f"{MODEL_PATH}/bert-base-uncased-vocab.txt") 
+# b. 导入配置文件
+model_config = transformers.BertConfig.from_pretrained(MODEL_PATH)
+# 修改配置
+model_config.output_hidden_states = True
+model_config.output_attentions = True
+# 通过配置和路径导入模型
+model = transformers.BertModel.from_pretrained(MODEL_PATH,config = model_config)
+```
+
 
 代码讲解：
 
@@ -555,6 +586,121 @@ class BertPooler(nn.Module):
 在这个文件中还有上述基础的BertModel的进一步的变化，比如BertForMaskedLM，BertForNextSentencePrediction这些是Bert加了预训练头的模型，还有BertForSequenceClassification， BertForQuestionAnswering 这些加上了特定任务头的模型。
 
 [Huggingface简介及BERT代码浅析](https://zhuanlan.zhihu.com/p/120315111)
+
+### 模型信息
+
+[Transformers是TensorFlow 2.0和PyTorch的最新自然语言处理库](https://pytorchchina.com/2020/02/20/transformers_1/)
+
+每个模型架构的详细示例(Bert、GPT、GPT-2、Transformer-XL、XLNet和XLM)可以在完整[文档](https://huggingface.co/transformers/)中找到
+
+```python
+import torch
+from transformers import *
+
+# transformer有一个统一的API
+# 有10个Transformer结构和30个预训练权重模型。
+#模型|分词|预训练权重
+MODELS = [(BertModel,       BertTokenizer,       'bert-base-uncased'),
+          (OpenAIGPTModel,  OpenAIGPTTokenizer,  'openai-gpt'),
+          (GPT2Model,       GPT2Tokenizer,       'gpt2'),
+          (CTRLModel,       CTRLTokenizer,       'ctrl'),
+          (TransfoXLModel,  TransfoXLTokenizer,  'transfo-xl-wt103'),
+          (XLNetModel,      XLNetTokenizer,      'xlnet-base-cased'),
+          (XLMModel,        XLMTokenizer,        'xlm-mlm-enfr-1024'),
+          (DistilBertModel, DistilBertTokenizer, 'distilbert-base-cased'),
+          (RobertaModel,    RobertaTokenizer,    'roberta-base'),
+          (XLMRobertaModel, XLMRobertaTokenizer, 'xlm-roberta-base'),
+         ]
+
+# 要使用TensorFlow 2.0版本的模型，只需在类名前面加上“TF”，例如。“TFRobertaModel”是TF2.0版本的PyTorch模型“RobertaModel”
+
+# 让我们用每个模型将一些文本编码成隐藏状态序列:
+for model_class, tokenizer_class, pretrained_weights in MODELS:
+    # 加载pretrained模型/分词器
+    tokenizer = tokenizer_class.from_pretrained(pretrained_weights)
+    model = model_class.from_pretrained(pretrained_weights)
+
+    # 编码文本
+    input_ids = torch.tensor([tokenizer.encode("Here is some text to encode", add_special_tokens=True)])  # 添加特殊标记
+    with torch.no_grad():
+        last_hidden_states = model(input_ids)[0]  # 模型输出是元组
+
+# 每个架构都提供了几个类，用于对下游任务进行调优，例如。
+BERT_MODEL_CLASSES = [BertModel, BertForPreTraining, BertForMaskedLM, BertForNextSentencePrediction,
+                      BertForSequenceClassification, BertForTokenClassification, BertForQuestionAnswering]
+
+# 体系结构的所有类都可以从该体系结构的预训练权重开始
+#注意，为微调添加的额外权重只在需要接受下游任务的训练时初始化
+
+pretrained_weights = 'bert-base-uncased'
+tokenizer = BertTokenizer.from_pretrained(pretrained_weights)
+for model_class in BERT_MODEL_CLASSES:
+    # 载入模型/分词器
+    model = model_class.from_pretrained(pretrained_weights)
+
+    # 模型可以在每一层返回隐藏状态和带有注意力机制的权值
+    model = model_class.from_pretrained(pretrained_weights,
+                                        output_hidden_states=True,
+                                        output_attentions=True)
+    input_ids = torch.tensor([tokenizer.encode("Let's see all hidden-states and attentions on this text")])
+    all_hidden_states, all_attentions = model(input_ids)[-2:]
+
+    #模型与Torchscript兼容
+    model = model_class.from_pretrained(pretrained_weights, torchscript=True)
+    traced_model = torch.jit.trace(model, (input_ids,))
+
+    # 模型和分词的简单序列化
+    model.save_pretrained('./directory/to/save/')  # 保存
+    model = model_class.from_pretrained('./directory/to/save/')  # 重载
+    tokenizer.save_pretrained('./directory/to/save/')  # 保存
+    tokenizer = BertTokenizer.from_pretrained('./directory/to/save/')  # 重载
+```
+
+如何用12行代码训练TensorFlow 2.0模型,然后加载在PyTorch快速检验/测试。
+
+```python
+import tensorflow as tf
+import tensorflow_datasets
+from transformers import *
+
+# 从预训练模型/词汇表中加载数据集、分词器、模型
+tokenizer = BertTokenizer.from_pretrained('bert-base-cased')
+model = TFBertForSequenceClassification.from_pretrained('bert-base-cased')
+data = tensorflow_datasets.load('glue/mrpc')
+
+# 准备数据集作为tf.data.Dataset的实例
+train_dataset = glue_convert_examples_to_features(data['train'], tokenizer, max_length=128, task='mrpc')
+valid_dataset = glue_convert_examples_to_features(data['validation'], tokenizer, max_length=128, task='mrpc')
+train_dataset = train_dataset.shuffle(100).batch(32).repeat(2)
+valid_dataset = valid_dataset.batch(64)
+
+# 准备训练:编写tf.keras模型与优化，损失和学习率调度
+optimizer = tf.keras.optimizers.Adam(learning_rate=3e-5, epsilon=1e-08, clipnorm=1.0)
+loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
+metric = tf.keras.metrics.SparseCategoricalAccuracy('accuracy')
+model.compile(optimizer=optimizer, loss=loss, metrics=[metric])
+
+# 用tf.keras.Model.fit进行测试和评估
+history = model.fit(train_dataset, epochs=2, steps_per_epoch=115,
+                    validation_data=valid_dataset, validation_steps=7)
+
+# 在PyTorch中加载TensorFlow模型进行检查
+model.save_pretrained('./save/')
+pytorch_model = BertForSequenceClassification.from_pretrained('./save/', from_tf=True)
+
+#让我们看看我们的模型是否学会了这个任务
+sentence_0 = "This research was consistent with his findings."
+sentence_1 = "His findings were compatible with this research."
+sentence_2 = "His findings were not compatible with this research."
+inputs_1 = tokenizer.encode_plus(sentence_0, sentence_1, add_special_tokens=True, return_tensors='pt')
+inputs_2 = tokenizer.encode_plus(sentence_0, sentence_2, add_special_tokens=True, return_tensors='pt')
+
+pred_1 = pytorch_model(inputs_1['input_ids'], token_type_ids=inputs_1['token_type_ids'])[0].argmax().item()
+pred_2 = pytorch_model(inputs_2['input_ids'], token_type_ids=inputs_2['token_type_ids'])[0].argmax().item()
+
+print("sentence_1 is", "a paraphrase" if pred_1 else "not a paraphrase", "of sentence_0")
+print("sentence_2 is", "a paraphrase" if pred_2 else "not a paraphrase", "of sentence_0")
+```
 
 ## 中文模型下载
 
