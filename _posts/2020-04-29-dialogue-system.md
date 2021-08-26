@@ -1086,7 +1086,10 @@ NLU即Natural Language Understanding，负责理解用户的语句输入，一�
 
 ![](https://pic1.zhimg.com/80/v2-fc31934cfba32866e876d038426ec2cb_1440w.jpg?source=1940ef5c)
 
-### 算法实现
+
+中文数据集：CQUD
+
+### 简介
 
 **意图识别**/意图分类(Intent Classification)和**槽位填充** (Slot Filling) 是**自然语言理解** (Natural Language Understanding, NLU)领域中的两个比较重要的任务。在聊天机器人、智能语音助手等方面有着广泛的应用。
 
@@ -1098,13 +1101,26 @@ NLU即Natural Language Understanding，负责理解用户的语句输入，一�
 比如tell me the weather report for half moon bay这句话中，它的意图类别为weather/find(查询天气)，slot filling的结果为：
 - ![](https://img-blog.csdnimg.cn/20190714160330638.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNzk0NzE1Ng==,size_16,color_FFFFFF,t_70)
 
-意图分类和槽位填充任务主要有两个数据集Snips和ATIS。
+### 数据集
+
+意图分类和槽位填充任务主要有两个数据集`Snips`和`ATIS`。
+
+#### ATIS
+
+- 数据集信息：航空旅行领域的语料，上个世纪发布的数据，是对话领域常用的数据集。
+- 该数据集规模很小，训练集4400+，测试集800+，槽位意图识别难度不大，目前处于被刷爆的程度，intent detection和slot filling任务的F值都已经在95+以上了，唯一可以挑战的是NLU的Acc，也称为Sentence Acc，即输入句子的意图、槽位同时正确才算该样本预测正确。目前的SOTA为Bert，具体可上paper-with-code网站搜索
+- 当前的SOTA：
+
+#### SNIPS
+
+#### CQUD
+
+### 模型
 
 - 【2021-8-23】[Joint Model (Intent+Slot)](https://blog.csdn.net/weixin_37947156/article/details/85313616)
  2018年提出的《[BERT for Joint Intent Classification and Slot Filling](https://arxiv.org/pdf/1902.10909.pdf)》提出了使用BERT进行文本意图分类和槽位填充的任务，其结果达到了最好的成绩。
 
 ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9UM3V2dHlSaWNOcXFoTDNRaWNnaDYzT0JlaWFWbWJhUlZBTng3Wmplb0MyS0pja1ppYktrd3o5SDRDQjZ0RFNLQ0tZam5yQWx4OEhpYmV6ZWxabUxiaWJza1luUS82NDA?x-oss-process=image/format,png)
-
 
 |模型|改进点|效果|其它|
 |---|---|---|---|
@@ -1114,9 +1130,19 @@ NLU即Natural Language Understanding，负责理解用户的语句输入，一�
 |2014，RecNN+Viterbi|语义树构建路径特征|atis:95.4(intent),93.69(slot);|其它|
 |2013，CNN+Tri-CRF|改进点|atis:94.14(intent),95.62(slot);|其它|
 
+从目前的趋势来看，大体上有两大类方法：
+- **多任务**学习：按Multi-Task Learning的套路，在学习时最终的loss等于两个任务的loss的weight sum，两者在模型架构上仍然完全独立，或者仅共享特征编码器。
+- **交互式**模型：将模型中Slot和Intent的隐层表示进行交互，引入更强的归纳偏置，最近的研究显示，这种方法的联合NLU准确率更高。
+
+### JointBert
+
+- JointBERT的pytorch实现：[JointBERT](https://github.com/monologg/JointBERT)
+- JointBERT的TensorFlow实现：[dialog-nlu](https://github.com/MahmoudWahdan/dialog-nlu.git)
+- JointBERT的transformers+TensorFlow实现
+
+参考：[Intent Detection and Slot Filling（更新中。。。)](https://zhuanlan.zhihu.com/p/75228411)
 
 ## 任务型对话
-
 
 - 非任务型对话系统，如开放域的闲聊，常见方法：
   - ① 基于**生成**方法，例如序列到序列模型（seq2seq），在对话过程中产生合适的回复，生成型聊天机器人目前是研究界的一个热点，和检索型聊天机器人不同的是，它可以生成一种全新的回复，因此相对更为灵活，但它也有自身的缺点，比如有时候会出现语法错误，或者生成一些没有意义的回复。
@@ -1349,7 +1375,7 @@ dialogue management的种类（从简单到复杂）：
 
 以上方法容易形成组合爆炸，简化方法：
 
-##### （1）**隐藏信息状态模型** Hidden Information State Model (HIS)
+##### (1) **隐藏信息状态模型** Hidden Information State Model (HIS)
 
 - 使用状态**分组**和状态**分割**减少跟踪复杂度。其实就是类似于二分查找、剪枝。
 - 决策树是对特征空间的切割；HIS是对状态空间的切割。每轮对话，当前空间切分成两个partition。最后需要维护的个数是2的n次方个（切割后空间partition的个数）。处在同一个partition里的状态默认概率相同。
