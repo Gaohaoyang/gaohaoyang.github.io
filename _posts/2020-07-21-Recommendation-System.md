@@ -476,9 +476,127 @@ for key in sorted(results):
   print("%s: %s" % (key, results[key]))
 ```
 
+# 工程落地
 
 
+## TensorFlow Recommenders
 
+[TensorFlow Recommenders 现已开源，让推荐系统更上一层楼](https://mp.weixin.qq.com/s/qjMBs3_vCT9luNZo24kBOw)
+
+【202-10-19】谷歌推出 TensorFlow Recommenders (TFRS)，这款开源 TensorFlow 软件包可简化构建、评估和应用复杂的推荐模型。[TensorFlow Recommenders (TFRS)](https://tensorflow.google.cn/recommenders)
+
+TFRS 使用 TensorFlow 2.x 构建，有助于：
+- 构建和评估灵活的 Candidate Nomination Model；
+- 将条目、用户和上下文信息自由整合到推荐模型；
+- 训练可联合优化多个推荐目标的多任务模型；
+- 用 TensorFlow Serving 高效利用生成的模型。
+
+TFRS 基于 TensorFlow 2.x 和 Keras，十分易于上手，在采用模块化设计的同时（您可以自定义每个层和评价指标），仍然组成了一个强有力的整体（各个组件可以良好协作）。在 TFRS 的设计过程中，我们一直强调灵活性和易用性：合理的默认设置、直观易行的常见任务以及更复杂或自定义的推荐任务。
+
+### 安装
+
+```python
+pip install tensorflow_recommenders
+```
+
+### 电影推荐示例
+
+用MovieLens数据集训练一个简单的电影推荐模型。数据集所含信息包括用户观看了哪些电影以及用户对该电影的评分。
+
+将使用这一数据集构建模型，预测用户已观看和未观看的电影。此类任务通常选择**双塔模型**：一个具有两个子模型的神经网络，分别学习 query 和 candidate 的表征。给定的 query-candidate 对的得分 (score) 只是这两个塔的输出的点积。
+
+query塔的输入可以是：用户 ID、搜索关键词或时间戳；对于 candidate塔则有：电影片名、描述、梗概、主演名单。在此示例中，**query塔**仅使用用户 ID，在 **candidate塔**仅使用电影片名。
+
+数据集的所有可用特征中，最实用的是用户 ID 和电影片名。虽然 TFRS 有多种可选特征，但为简单起见，我们只使用这两项。
+
+只使用用户 ID 和电影片名时，我们简单的双塔模型与典型的矩阵分解模型非常相似。我们需要使用以下内容进行构建：
+- 一个用户塔，将用户 ID 转换为用户 embedding 向量（高维向量表示）。
+  - 用户模型：一组描述如何将原始用户特征转换为数字化用户表征的层。我们在这里使用 Keras 预处理层将用户 ID 转换为整数索引，然后将其映射到学习的 embedding 向量
+- 一个电影塔，将电影片名转换为电影 embedding 向量。
+- 一个损失函数，对于观看行为，最大化预测用户与电影的匹配度，而未观看的行为进行最小化。
+
+[完整教程](https://tensorflow.google.cn/recommenders/examples/basic_retrieval#building_a_candidate_ann_index)
+
+```python
+import tensorflow as tf
+import tensorflow_datasets as tfds
+import tensorflow_recommenders as tfrs
+
+# Ratings data.
+ratings = tfds.load("movie_lens/100k-ratings", split="train")
+# Features of all the available movies.
+movies = tfds.load("movie_lens/100k-movies", split="train")
+
+ratings = ratings.map(lambda x: {
+    "movie_title": x["movie_title"],
+    "user_id": x["user_id"],
+})
+movies = movies.map(lambda x: x["movie_title"])
+
+class TwoTowerMovielensModel(tfrs.Model):
+  """MovieLens prediction model."""
+
+  def __init__(self):
+    # The `__init__` method sets up the model architecture.
+    super().__init__()
+
+    # How large the representation vectors are for inputs: larger vectors make
+    # for a more expressive model but may cause over-fitting.
+    embedding_dim = 32
+    num_unique_users = 1000
+    num_unique_movies = 1700
+    eval_batch_size = 128
+    # 用户模型
+    # Set up user and movie representations.
+    self.user_model = tf.keras.Sequential([
+      # We first turn the raw user ids into contiguous integers by looking them
+      # up in a vocabulary.
+      tf.keras.layers.experimental.preprocessing.StringLookup(
+          max_tokens=num_unique_users),
+      # We then map the result into embedding vectors.
+      tf.keras.layers.Embedding(num_unique_users, embedding_dim)
+    ])
+    # 电影模型
+    self.movie_model = tf.keras.Sequential([
+      tf.keras.layers.experimental.preprocessing.StringLookup(
+          max_tokens=num_unique_movies),
+      tf.keras.layers.Embedding(num_unique_movies, embedding_dim)
+    ])
+    # 目标+评估指标 Retrieval
+    # The `Task` objects has two purposes: (1) it computes the loss and (2)
+    # keeps track of metrics.
+    self.task = tfrs.tasks.Retrieval(
+        # In this case, our metrics are top-k metrics: given a user and a known
+        # watched movie, how highly would the model rank the true movie out of
+        # all possible movies?
+        metrics=tfrs.metrics.FactorizedTopK(
+            candidates=movies.batch(eval_batch_size).map(self.movie_model)
+        )
+    )
+    # 训练过程查看
+    def compute_loss(self, features, training=False):
+        # The `compute_loss` method determines how loss is computed.
+        # Compute user and item embeddings.
+        user_embeddings = self.user_model(features["user_id"])
+        movie_embeddings = self.movie_model(features["movie_title"])
+        # Pass them into the task to get the resulting loss. The lower the loss is, the
+        # better the model is at telling apart true watches from watches that did
+        # not happen in the training data.
+        return self.task(user_embeddings, movie_embeddings)
+
+model = MovielensModel()
+model.compile(optimizer=tf.keras.optimizers.Adagrad(0.1))
+
+model.fit(ratings.batch(4096), verbose=False)
+
+# 对模型的推荐进行 Sanity-Check（合理性检验），我们可以使用 TFRS BruteForce 层。BruteForce 层以预先计算好的 candidate 的表征进行排序，允许我们对所有可能的 candidate 计算其所在 query-candidate 对的得分，并返回排名最靠前的电影 (query)
+index = tfrs.layers.ann.BruteForce(model.user_model)
+index.index(movies.batch(100).map(model.movie_model), movies)
+
+# Get recommendations.
+_, titles = index(tf.constant(["42"]))
+print(f"Recommendations for user 42: {titles[0, :3]}")
+```
 
 # 结束
 
