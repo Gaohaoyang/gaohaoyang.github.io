@@ -293,6 +293,8 @@ print("vocab: ", len(vocab))
 model = BertModel.from_pretrained(model_name)
 # 本地保存
 model = BertModel.from_pretrained(model_name, cache_dir='./transformers/')
+# 输出隐含层
+model = BertModel.from_pretrained('./model', output_hidden_states = True,)
 
 # 获取词向量矩阵
 word_embedding = model.get_input_embeddings()
