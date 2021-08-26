@@ -476,6 +476,12 @@ Query扩展pair的挖掘方式和纠错差不多，可以建模为pair对判别�
 
 # 开源搜索引擎
 
+## MeiliSearch
+
+一款开源免费、功能强大、快速、易于使用和部署的搜索引擎 MeiliSearch。从搜索到展示结果速度达到小于 50 毫秒，可高度自由定制搜索与索引，能理解错字和拼写错误，支持中文字符、同义词等功能。
+
+[GitHub](http://www.github.com/meilisearch/MeiliSearch)
+
 ## ES：ElasticSearch
 
 Elasticsearch 是一个分布式、RESTful 风格的搜索和数据分析引擎，能够解决不断涌现出的各种用例。
