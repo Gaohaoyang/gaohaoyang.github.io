@@ -221,13 +221,26 @@ PTMs-Papers:
 
 但更令它广为人知的是Hugging Face专注于NLP技术，拥有大型的开源社区。尤其是在github上开源的自然语言处理，预训练模型库 `Transformers`，已被下载超过一百万次，github上超过24000个star。[Transformers](https://github.com/huggingface/transformers) 提供了NLP领域大量state-of-art的 预训练语言模型结构的模型和调用框架。
 
+PyTorch实现了从语言中识别情绪情感反讽的DeepMoji模型：https://github.com/huggingface/torchMoji
+
 ### transformers库
 
 - 这个库最初的名称是pytorch-pretrained-bert，它随着BERT一起应运而生。Google2018年10月底在开源了[BERT](https://github.com/google-research/bert)的tensorflow实现。当时，BERT以其强劲的性能，引起NLPer的广泛关注。几乎与此同时，pytorch-pretrained-bert也开始了它的第一次提交。pytorch-pretrained-bert 用当时已有大量支持者的pytorch框架复现了BERT的性能，并提供预训练模型的下载，使没有足够算力的开发者们也能够在几分钟内就实现 state-of-art-fine-tuning。
 - 直到2019年7月16日，在repo上已经有了包括BERT，GPT，GPT-2，Transformer-XL，XLNET，XLM在内六个预训练语言模型，这时候名字再叫pytorch-pretrained-bert就不合适了，于是改成了pytorch-transformers，势力范围扩大了不少。这还没完！
 - 2019年6月Tensorflow2的beta版发布，Huggingface也闻风而动。为了立于不败之地，又实现了TensorFlow 2.0和PyTorch模型之间的深层互操作性，可以在TF2.0/PyTorch框架之间随意迁移模型。在2019年9月也发布了2.0.0版本，同时正式更名为 transformers 。到目前为止，transformers 提供了超过100种语言的，32种预训练语言模型，简单，强大，高性能，是新手入门的不二选择。
 
-安装：pip install transformers==2.2.0
+安装：
+- transforers包所需的tensorflow版本至少为2.2.0，而该版本对应的CUDA版本可能不同，如笔者使用的2.4.0版本tensorflow对应的CUDA是11版本
+
+```shell
+pip install transformers==2.2.0
+# tf环境
+pip install tensorflow-gpu==2.4.0
+# pytorch环境
+pip install torch
+```
+
+代码讲解：
 
 ```python
 import torch
@@ -235,16 +248,59 @@ from transformers import BertModel, BertTokenizer
 
 # 调用bert-base模型，同时模型的词典经过小写处理
 model_name = 'bert-base-uncased'
+model_name = 'bert-base-chinese' # 中文模型
+# ----------- 分词器 ------------
 # 读取模型对应的tokenizer
 tokenizer = BertTokenizer.from_pretrained(model_name)
+tokenizer = BertTokenizer.from_pretrained(model_name, cache_dir='./transformers/')	# cache_dir表示将预训练文件下载到本地指定文件夹下
+# 获取词表
+vocab = tokenizer.get_vocab()
+print("vocab: ", len(vocab))
+
+# ----------- 模型 ------------
 # 载入模型
 model = BertModel.from_pretrained(model_name)
-# 输入文本
+# 本地保存
+model = BertModel.from_pretrained(model_name, cache_dir='./transformers/')
+
+# 获取词向量矩阵
+word_embedding = model.get_input_embeddings()
+embed_weights = word_embedding.weight
+print("embed_weights: ", embed_weights.shape, type(embed_weights))
+# embed_weights: torch.Size([30522, 768]
+# ----------- 测试 ------------
+# （1）单行文本
 input_text = "Here is some text to encode"
 # 通过tokenizer把文本变成 token_id
 input_ids = tokenizer.encode(input_text, add_special_tokens=True)
 # input_ids: [101, 2182, 2003, 2070, 3793, 2000, 4372, 16044, 102]
 input_ids = torch.tensor([input_ids])
+# 中文测试
+input_ids = torch.tensor(tokenizer.encode("遇见被老师提问问题", add_special_tokens=True)).unsqueeze(0)	# 增加一个维度因为输入到Bert模型中要求二维(Batch_size, seq_len)
+print("input_ids: ", input_ids)
+output = model(input_ids=input_ids)
+last_hidden_states_0 = output[0]
+print("last_hidden_states_0.shape: ", last_hidden_states_0.shape)
+last_hidden_states_1 = output[1]
+print("last_hidden_states_1.shape: ", ast_hidden_states_1.shape)
+# input_ids:  tensor([[ 101, 6878, 6224, 6158, 5439, 2360, 2990, 7309, 7309, 7579,  102]])
+# last_hidden_states_0.shape: torch.Size([1, 11, 768]
+# last_hidden_states_1.shape: torch.Size([1, 768]
+
+# （2）pair文本对
+text_a = "EU rejects German call to boycott British lamb ."
+text_b = "This tokenizer inherits from :class: transformers.PreTrainedTokenizer"
+
+tokens_encode = tokenizer.encode_plus(text=text, text_pair=text_b, max_length=20, truncation_strategy="longest_first", truncation=True)
+print("tokens_encode: ", tokens_encode)
+# tokens_encode:  {'input_ids': [2, 2898, 12170, 18, 548, 645, 20, 16617, 388, 8624, 3, 48, 20, 2853, 11907, 17569, 18, 37, 13, 3], 'token_type_ids': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], 'attention_mask': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]}
+# 输出以列表的形式保存
+# - input_ids的内容与encode()方法返回的结果相同，为token转化为id之后的表示。
+# - token_type_ids的内容表示用来区别两个文本，为0表示第一个文本，为1表示第二个文本。
+# - attention_mask表示文本padding的部分(这里没有，所有全为1)。
+# 每个部分分别对应于BertModel的输入参数，使用时取出对应键值的内容输入到相应参数即可
+# forward(input_ids=None, attention_mask=None, token_type_ids=None, position_ids=None, head_mask=None, inputs_embeds=None, output_attentions=None, output_hidden_states=None, return_dict=None)[SOURCE]
+
 
 # 获得BERT模型最后一个隐层结果
 with torch.no_grad():
@@ -259,6 +315,84 @@ with torch.no_grad():
          [ 0.9046,  0.2137, -0.5897,  ...,  0.3040, -0.6172, -0.1950]]]) 
 	shape: (1, 9, 768)     
 """
+# ----------- 配置文件 ------------
+from transformers import BertConfig
+# 获取bert模型结构参数
+bert_config = BertConfig.from_pretrained('bert-base-uncased')
+print(bert_config.get_config_dict('bert-base-uncased'))
+# ({'architectures': ['BertForMaskedLM'], 'attention_probs_dropout_prob': 0.1, 'hidden_act': 'gelu', 'hidden_dropout_prob': 0.1, 'hidden_size': 768, 'initializer_range': 0.02, 'intermediate_size': 3072, 'layer_norm_eps': 1e-12, 'max_position_embeddings': 512, 'model_type': 'bert', 'num_attention_heads': 12, 'num_hidden_layers': 12, 'pad_token_id': 0, 'type_vocab_size': 2, 'vocab_size': 30522}, {})
+# ----------- albert模型 ------------
+from transformers import AlbertTokenizer, AlbertModel
+# albert模型
+tokenizer = AlbertTokenizer.from_pretrained("albert-base-v2", cache_dir="./transformers/")
+model = AlbertModel.from_pretrained("albert-base-v2", cache_dir="transformers/")
+# 多种模型，如XLNet、DistilBBET、RoBERTa等模型都可以以同样的方式进行导
+
+# ----------- 学习率设置 ------------
+from transformers import AdaW, get_linear_schedule_with_warmup
+
+warmup_steps = int(args.warmup_proportion * num_train_optimization_steps)	# 定义warmup方式的步长
+    optimizer = AdamW(optimizer_grouped_parameters, lr=args.learning_rate, eps=args.adam_epsilon)	# 定义优化器
+    scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps, num_training_steps=num_train_optimization_steps)		# 更新学习率的方式
+
+# ----------- tf模型训练 ------------
+def data_incoming(path):
+    x = []
+    y = []
+    with open(path, 'r') as f:
+        for line in f.readlines():
+            line = line.strip('\n')
+            line = line.split('\t')
+            x.append(line[0])
+            y.append(line[1])
+    df_row = pd.DataFrame([x, y], index=['text', 'label'])
+    df_row = df_row.T
+    df_label = pd.DataFrame({"label": ['YOUR_LABEL'], 'y': list(range(10))})
+    output = pd.merge(df_row, df_label, on='label', how='left')
+    return output
+
+def convert_example_to_feature(review):
+    return tokenizer.encode_plus(review,
+                                 max_length=256,
+                                 pad_tp_max_length=True,
+                                 return_attention_mask=True,
+                                 truncation=True
+                                 )
+
+def map_example_to_dict(input_ids, attention_mask, token_type_ids, label):
+    return {
+               "input_ids": input_ids,
+               "token_type_ids": token_type_ids,
+               "attention_mask": attention_mask,
+           }, label
+
+def encode_example(ds, limit=-1):
+    input_ids_list = []
+    token_type_ids_list = []
+    attention_maks_list = []
+    label_list = []
+    if limit > 0:
+        ds.take(limit)
+    for index, row in ds.iterrows():
+        review = row["text"]
+        label = row['y']
+        bert_input = convert_example_to_feature(review)
+        input_ids_list.append(bert_input["input_ids"])
+        token_type_ids_list.append(bert_input['token_type_ids'])
+        attention_maks_list.append(bert_input['attention_maks'])
+        label_list.append([label])
+    return tf.data.Dataset.from_tensor_slices(
+        (input_ids_list, token_type_ids_list, attention_maks_list, label_list)).map(map_example_to_dict)
+
+train = data_incoming(data_path + 'train.tsv')
+test = data_incoming(data_path + 'test.tsv')
+train = encode_example(train).shuffle(100000).batch(100)
+test = encode_example(test).batch(100)
+model = TFBertForSequenceClassification(model_path, num_labels=num_labels)
+optimizer = tf.keras.optimizers.Adam(1e-5)
+model.compile(optimizer=optimizer, loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True))
+model.fit(train, epochs=epoch, verbose=1, validation_data=test)
+
 ```
 
 包括import在内的不到十行代码，我们就实现了读取一个预训练过的BERT模型，来encode我们指定的一个文本，对文本的每一个token生成768维的向量。如果是二分类任务，我们接下来就可以把第一个token也就是\[CLS]的768维向量，接一个linear层，预测出分类的logits，或者根据标签进行训练。
