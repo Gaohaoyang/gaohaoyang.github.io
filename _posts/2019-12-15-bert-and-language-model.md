@@ -223,11 +223,13 @@ PTMs-Papers:
 
 PyTorch实现了从语言中识别情绪情感反讽的DeepMoji模型：https://github.com/huggingface/torchMoji
 
-### transformers库
+## transformers库
 
 - 这个库最初的名称是pytorch-pretrained-bert，它随着BERT一起应运而生。Google2018年10月底在开源了[BERT](https://github.com/google-research/bert)的tensorflow实现。当时，BERT以其强劲的性能，引起NLPer的广泛关注。几乎与此同时，pytorch-pretrained-bert也开始了它的第一次提交。pytorch-pretrained-bert 用当时已有大量支持者的pytorch框架复现了BERT的性能，并提供预训练模型的下载，使没有足够算力的开发者们也能够在几分钟内就实现 state-of-art-fine-tuning。
 - 直到2019年7月16日，在repo上已经有了包括BERT，GPT，GPT-2，Transformer-XL，XLNET，XLM在内六个预训练语言模型，这时候名字再叫pytorch-pretrained-bert就不合适了，于是改成了pytorch-transformers，势力范围扩大了不少。这还没完！
 - 2019年6月Tensorflow2的beta版发布，Huggingface也闻风而动。为了立于不败之地，又实现了TensorFlow 2.0和PyTorch模型之间的深层互操作性，可以在TF2.0/PyTorch框架之间随意迁移模型。在2019年9月也发布了2.0.0版本，同时正式更名为 transformers 。到目前为止，transformers 提供了超过100种语言的，32种预训练语言模型，简单，强大，高性能，是新手入门的不二选择。
+
+### 安装
 
 安装：
 - transforers包所需的tensorflow版本至少为2.2.0，而该版本对应的CUDA版本可能不同，如笔者使用的2.4.0版本tensorflow对应的CUDA是11版本
@@ -242,7 +244,8 @@ pip install tensorflow-gpu==2.4.0
 pip install torch
 ```
 
-模型下载
+### 模型下载
+
 - 在[hugging face模型库](https://huggingface.co/models)里选择需要的预训练模型并下载。例如，点击bert-base-uncased以后点Files and versions进行手动下载。
 - 通常这样下载的模型会是有损的，后续无法使用，因此最好是通过git下载
 
@@ -270,8 +273,440 @@ model_config.output_attentions = True
 model = transformers.BertModel.from_pretrained(MODEL_PATH,config = model_config)
 ```
 
+## transformers源码
 
-代码讲解：
+参考：
+- [BERT源码详解（一）——HuggingFace Transformers最新版本源码解读](https://zhuanlan.zhihu.com/p/360988428)
+- [BERT源码详解（二）——HuggingFace Transformers最新版本源码解读](https://zhuanlan.zhihu.com/p/363014957)
+
+1. BERT Tokenization分词模型（BertTokenizer）（请看上篇）
+2. BERT Model本体模型（BertModel）（请看上篇）
+  - 2.1 BertEmbeddings
+  - 2.2 BertEncoder
+    - 2.2.1 BertLayer
+      - 2.2.1.1 BertAttention
+        - 2.2.1.1 BertSelfAttention
+        - 2.2.1.2 BertSelfOutput
+      - 2.2.1.2 BertIntermediate
+      - 2.2.1.3 BertOutput
+    - 2.2.2 BertPooler
+3. BERT-based Models应用模型
+  - 3.1 BertForPreTraining
+  - 3.2 BertForSequenceClassification
+  - 3.3 BertForMultiChoice
+  - 3.4 BertForTokenClassification
+  - 3.5 BertForQuestionAnswering
+4. BERT训练与优化
+  - 4.1 Pre-Training
+  - 4.2 Fine-Tuning
+    - 4.2.1 AdamW
+    - 4.2.2 Warmup
+
+
+### Tokenization（BertTokenizer）
+
+和BERT有关的Tokenizer主要写在/models/bert/tokenization_bert.py和/models/bert/tokenization_bert_fast.py 中。这两份代码分别对应基本的BertTokenizer，以及不进行token到index映射的BertTokenizerFast，这里主要讲解第一个。
+
+BertTokenizer 是基于`BasicTokenizer`和`WordPieceTokenizer` 的分词器：
+- `BasicTokenizer`负责处理的第一步——按标点、空格等分割句子，并处理是否统一小写，以及清理非法字符。继承自 class BertTokenizer(PreTrainedTokenizer):
+  - 对于中文字符，通过预处理（加空格）来按字分割；
+  - 同时可以通过never_split指定对某些词不进行分割；
+  - 这一步是可选的（默认执行）。
+- `WordPieceTokenizer`在词的基础上，进一步将词分解为子词（subword） 。
+  - subword介于char和word之间，既在一定程度保留了词的含义，又能够照顾到英文中单复数、时态导致的词表爆炸和未登录词的OOV（Out-Of-Vocabulary）问题，将词根与时态词缀等分割出来，从而减小词表，也降低了训练难度；
+  - 例如，tokenizer这个词就可以拆解为“token”和“##izer”两部分，注意后面一个词的“##”表示接在前一个词后面。
+
+BertTokenizer 有以下常用方法：
+- from_pretrained：从包含词表文件（vocab.txt）的目录中初始化一个分词器；
+- tokenize：将文本（词或者句子）分解为子词列表；
+- convert_tokens_to_ids：将子词列表转化为子词对应**下标**的列表；
+- convert_ids_to_tokens ：与上一个相反；
+- convert_tokens_to_string：将subword列表按“##”拼接回词或者句子；
+- encode：对于单个句子输入，分解词并加入特殊词形成“[CLS], x, [SEP]”的结构并转换为词表对应下标的列表；对于两个句子输入（多个句子只取前两个），分解词并加入特殊词形成“[CLS], x1, [SEP], x2, [SEP]”的结构并转换为下标列表；
+- decode：可以将encode方法的输出变为完整句子。
+
+### Model（BertModel）
+
+和BERT模型有关的代码主要写在/models/bert/modeling_bert.py中，这一份代码有一千多行，包含BERT模型的基本结构和基于它的微调模型等。继承自class BertModel(BertPreTrainedModel)
+
+BertModel主要为transformer encoder结构，包含三个部分：
+- `embeddings`，即BertEmbeddings类的实体，对应词嵌入；
+- `encoder`，即BertEncoder类的实体；
+- `pooler`， 即BertPooler类的实体，这一部分是可选的。
+补充：注意BertModel也可以配置为Decoder，不过下文中不包含对这一部分的讨论。
+
+BertModel的前向传播过程中各个参数的含义以及返回值：
+
+```python
+def forward(
+    self,
+    input_ids=None,
+    attention_mask=None,
+    token_type_ids=None,
+    position_ids=None,
+    head_mask=None,
+    inputs_embeds=None,
+    encoder_hidden_states=None,
+    encoder_attention_mask=None,
+    past_key_values=None,
+    use_cache=None,
+    output_attentions=None,
+    output_hidden_states=None,
+    return_dict=None,
+): ...
+```
+说明：
+- input_ids：经过tokenizer分词后的subword对应的下标列表；
+- attention_mask：在self-attention过程中，这一块mask用于标记subword所处句子和padding的区别，将padding部分填充为0；
+- token_type_ids： 标记subword当前所处句子（第一句/第二句/padding）；
+- position_ids： 标记当前词所在句子的位置下标；
+- head_mask： 用于将某些层的某些注意力计算无效化；
+- inputs_embeds： 如果提供了，那就不需要input_ids，跨过embedding lookup过程直接作为Embedding进入Encoder计算；
+- encoder_hidden_states： 这一部分在BertModel配置为decoder时起作用，将执行cross-attention而不是self-attention；
+- encoder_attention_mask： 同上，在cross-attention中用于标记encoder端输入的padding；
+- past_key_values：这个参数貌似是把预先计算好的K-V乘积传入，以降低cross-attention的开销（因为原本这部分是重复计算）；
+- use_cache： 将保存上一个参数并传回，加速decoding；
+- output_attentions：是否返回中间每层的attention输出；
+- output_hidden_states：是否返回中间每层的输出；
+- return_dict：是否按键值对的形式（ModelOutput类，也可以当作tuple用）返回输出，默认为真。
+补充：注意，这里的head_mask对注意力计算的无效化，和下文提到的注意力头剪枝不同，而仅仅把某些注意力的计算结果给乘以这一系数。
+
+返回值不但包含了encoder和pooler的输出，也包含了其他指定输出的部分（hidden_states和attention等，这一部分在encoder_outputs[1:]）方便取用
+
+BertModel还有以下的方法，方便BERT玩家进行各种骚操作：
+- get_input_embeddings：提取embedding中的word_embeddings即词向量部分；
+- set_input_embeddings：为embedding中的word_embeddings赋值；
+- _prune_heads：提供了将注意力头剪枝的函数，输入为{layer_num: list of heads to prune in this layer}的字典，可以将指定层的某些注意力头剪枝。
+补充：剪枝是一个复杂的操作，需要将保留的注意力头部分的Wq、Kq、Vq和拼接后全连接部分的权重拷贝到一个新的较小的权重矩阵（注意先禁止grad再拷贝），并实时记录被剪掉的头以防下标出错。具体参考BertAttention部分的prune_heads方法。
+
+#### BertEmbeddings
+
+包含三个部分求和得到：
+- ![结构图](https://pic3.zhimg.com/80/v2-58b65365587f269bc76358016414dc26_720w.jpg)
+- word_embeddings，上文中subword对应的嵌入。
+- token_type_embeddings，用于表示当前词所在的句子，辅助区别句子与padding、句子对间的差异。
+- position_embeddings，句子中每个词的位置嵌入，用于区别词的顺序。和transformer论文中的设计不同，这一块是训练出来的，而不是通过Sinusoidal函数计算得到的固定嵌入。一般认为这种实现不利于拓展性（难以直接迁移到更长的句子中）。
+三个embedding不带权重相加，并通过一层LayerNorm+dropout后输出，其大小为(batch_size, sequence_length, hidden_size)。
+
+补充：这里为什么要用LayerNorm+Dropout呢？为什么要用LayerNorm而不是BatchNorm？可以参考一个不错的[回答](https://www.zhihu.com/question/395811291/answer/1260290120)
+
+#### BertEncoder
+
+包含多层BertLayer，这一块本身没有特别需要说明的地方，不过有一个细节值得参考：
+- 利用gradient checkpointing技术以降低训练时的显存占用。
+补充：gradient checkpointing即梯度检查点，通过减少保存的计算图节点压缩模型占用空间，但是在计算梯度的时候需要重新计算没有存储的值，参考论文《Training Deep Nets with Sublinear Memory Cost》，过程如下[示意图](https://pic2.zhimg.com/v2-24dfc50af29690e09dd5e8cc3319847d_b.webp)
+- ![](https://pic2.zhimg.com/v2-24dfc50af29690e09dd5e8cc3319847d_b.webp)
+
+在BertEncoder中，gradient checkpoint是通过torch.utils.checkpoint.checkpoint实现的，使用起来比较方便，可以参考[文档](https://link.zhihu.com/?target=https%3A//pytorch.org/docs/stable/checkpoint.html)
+
+#### BertLayer
+
+这一层包装了BertAttention和BertIntermediate+BertOutput（即Attention后的FFN部分），以及这里直接忽略的cross-attention部分（将BERT作为Decoder时涉及的部分）。
+
+理论上，这里顺序调用三个子模块就可以，没有什么值得说明的地方。
+
+细节：apply_chunking_to_forward和feed_forward_chunk了吗（为什么要整这么复杂，直接调用它不香吗？
+- 节约显存的技术——包装了一个切分小batch或者低维数操作的功能：这里参数chunk_size其实就是切分的batch大小，而chunk_dim就是一次计算维数的大小，最后拼接起来返回。
+- 不过，在默认操作中不会特意设置这两个值（在源代码中默认为0和1），所以会直接等效于正常的forward过程。
+
+#### BertAttention
+
+本以为attention的实现就在这里，没想到还要再下一层……其中，self成员就是多头注意力的实现，而output成员实现attention后的全连接+dropout+residual+LayerNorm一系列操作。出现了上文提到的剪枝操作，即prune_heads方法
+
+class BertAttention(nn.Module)概括如下：
+- find_pruneable_heads_and_indices是定位需要剪掉的head，以及需要保留的维度下标index；
+- prune_linear_layer则负责将Wk/Wq/Wv权重矩阵（连同bias）中按照index保留没有被剪枝的维度后转移到新的矩阵。
+
+##### BertSelfAttention
+
+预警：这一块可以说是模型的核心区域，也是唯一涉及到公式的地方，所以将贴出大量代码。
+
+class BertSelfAttention(nn.Module)
+
+```python
+class BertSelfAttention(nn.Module):
+    def __init__(self, config):
+        super().__init__()
+        if config.hidden_size % config.num_attention_heads != 0 and not hasattr(config, "embedding_size"):
+            raise ValueError(
+                "The hidden size (%d) is not a multiple of the number of attention "
+                "heads (%d)" % (config.hidden_size, config.num_attention_heads)
+            )
+
+        self.num_attention_heads = config.num_attention_heads
+        self.attention_head_size = int(config.hidden_size / config.num_attention_heads)
+        self.all_head_size = self.num_attention_heads * self.attention_head_size
+
+        self.query = nn.Linear(config.hidden_size, self.all_head_size)
+        self.key = nn.Linear(config.hidden_size, self.all_head_size)
+        self.value = nn.Linear(config.hidden_size, self.all_head_size)
+
+        self.dropout = nn.Dropout(config.attention_probs_dropout_prob)
+        self.position_embedding_type = getattr(config, "position_embedding_type", "absolute")
+        if self.position_embedding_type == "relative_key" or self.position_embedding_type == "relative_key_query":
+            self.max_position_embeddings = config.max_position_embeddings
+            self.distance_embedding = nn.Embedding(2 * config.max_position_embeddings - 1, self.attention_head_size)
+
+        self.is_decoder = config.is_decoder
+```
+
+- 除掉熟悉的query、key、value三个权重和一个dropout，这里还有一个谜一样的position_embedding_type，以及decoder标记（当然，我不打算介绍cross-attenton部分）；
+- 注意，hidden_size和all_head_size在一开始是一样的。至于为什么要看起来多此一举地设置这一个变量——显然是因为上面那个剪枝函数，剪掉几个attention head以后all_head_size自然就小了；
+- hidden_size必须是num_attention_heads的整数倍，以bert-base为例，每个attention包含12个head，hidden_size是768，所以每个head大小即attention_head_size=768/12=64；
+- position_embedding_type是什么？
+
+multi-head self-attention的基本公式
+- ![](https://pic4.zhimg.com/80/v2-0c1ffd5ec70918a7c6c42fc7aafd7b0b_720w.png)
+
+注意力头，众所周知是并行计算的，所以上面的query、key、value三个权重是唯一的——这并不是所有heads共享了权重，而是“拼接”起来了。
+
+补充：原论文中多头的理由为Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions. With a single attention head, averaging inhibits this.而另一个比较靠谱的[分析](https://www.zhihu.com/question/341222779/answer/814111138)
+
+forward方法
+
+```python
+def transpose_for_scores(self, x):
+        new_x_shape = x.size()[:-1] + (self.num_attention_heads, self.attention_head_size)
+        x = x.view(*new_x_shape)
+        return x.permute(0, 2, 1, 3)
+
+    def forward(
+        self,
+        hidden_states,
+        attention_mask=None,
+        head_mask=None,
+        encoder_hidden_states=None,
+        encoder_attention_mask=None,
+        past_key_value=None,
+        output_attentions=False,
+    ):
+        mixed_query_layer = self.query(hidden_states)
+
+        # 省略一部分cross-attention的计算
+        key_layer = self.transpose_for_scores(self.key(hidden_states))
+        value_layer = self.transpose_for_scores(self.value(hidden_states))
+        query_layer = self.transpose_for_scores(mixed_query_layer)
+
+        # Take the dot product between "query" and "key" to get the raw attention scores.
+        attention_scores = torch.matmul(query_layer, key_layer.transpose(-1, -2))
+        # ...
+```
+
+- transpose_for_scores用来把hidden_size拆成多个头输出的形状，并且将中间两维转置以进行矩阵相乘；
+- 这里key_layer/value_layer/query_layer的形状为：(batch_size, num_attention_heads, sequence_length, attention_head_size)；
+- 这里attention_scores的形状为：(batch_size, num_attention_heads, sequence_length, sequence_length)，符合多个头单独计算获得的attention map形状。
+- 到这里实现了K与Q相乘，获得raw attention scores的部分，按公式接下来应该是按dk进行scaling并做softmax的操作。奇怪的positional_embedding，以及一堆爱因斯坦求和
+
+。。。
+
+get_extended_attention_mask这个函数是在什么时候被调用的呢？和BertModel有什么关系呢？
+- BertModel的继承细节了：BertModel继承自BertPreTrainedModel ，后者继承自PreTrainedModel，而PreTrainedModel继承自[nn.Module, ModuleUtilsMixin, GenerationMixin] 三个基类。——好复杂的封装！
+- 这也就是说， BertModel必然在中间的某个步骤对原始的attention_mask调用了get_extended_attention_mask ，导致attention_mask从原始的[1, 0]变为[0, -1e4]的取值。BertModel的前向传播过程中找到了这一调用（第944行）
+- 问题解决了：这一方法不但实现了改变mask的值，还将其广播（broadcast）为可以直接与attention map相加的形状。
+
+细节有：
+- 按照每个头的维度进行缩放，对于bert-base就是64的平方根即8；
+- attention_probs不但做了softmax，还用了一次dropout，这是担心attention矩阵太稠密吗……这里也提到很不寻常，但是原始Transformer论文就是这么做的；
+- head_mask就是之前提到的对多头计算的mask，如果不设置默认是全1，在这里就不会起作用；
+- context_layer即attention矩阵与value矩阵的乘积，原始的大小为：(batch_size, num_attention_heads, sequence_length, attention_head_size) ；
+- context_layer进行转置和view操作以后，形状就恢复了(batch_size, sequence_length, hidden_size)。
+
+#### BertSelfOutput
+
+这一块操作略多但不复杂
+
+```python
+class BertSelfOutput(nn.Module):
+    def __init__(self, config):
+        super().__init__()
+        self.dense = nn.Linear(config.hidden_size, config.hidden_size)
+        self.LayerNorm = nn.LayerNorm(config.hidden_size, eps=config.layer_norm_eps)
+        self.dropout = nn.Dropout(config.hidden_dropout_prob)
+
+    def forward(self, hidden_states, input_tensor):
+        hidden_states = self.dense(hidden_states)
+        hidden_states = self.dropout(hidden_states)
+        hidden_states = self.LayerNorm(hidden_states + input_tensor)
+        return hidden_states
+```
+
+补充：这里又出现了LayerNorm和Dropout的组合，只不过这里是先Dropout，进行残差连接后再进行LayerNorm。至于为什么要做残差连接，最直接的目的就是降低网络层数过深带来的训练难度，对原始输入更加敏感
+
+#### BertIntermediate
+
+看完了BertAttention，在Attention后面还有一个全连接+激活的操作
+
+```python
+class BertIntermediate(nn.Module):
+    def __init__(self, config):
+        super().__init__()
+        self.dense = nn.Linear(config.hidden_size, config.intermediate_size)
+        if isinstance(config.hidden_act, str):
+            self.intermediate_act_fn = ACT2FN[config.hidden_act]
+        else:
+            self.intermediate_act_fn = config.hidden_act
+
+    def forward(self, hidden_states):
+        hidden_states = self.dense(hidden_states)
+        hidden_states = self.intermediate_act_fn(hidden_states)
+        return hidden_states
+```
+
+- 全连接做了一个扩展，以bert-base为例，扩展维度为3072，是原始维度768的4倍之多；
+  - 补充：为什么要过一个FFN？不知道……谷歌最近的[论文](https://arxiv.org/abs/2103.03404)貌似说明只有attention的模型什么用都没有
+- 激活函数默认实现为gelu（Gaussian Error Linerar Units(GELUS）： ![公式](https://www.zhihu.com/equation?tex=GELU%28x%29%3DxP%28X%3C%3Dx%29%3Dx%CE%A6%28x%29+) ；当然，它是无法直接计算的，可以用一个包含tanh的表达式进行近似（略）。
+
+为什么在transformer中要用这个激活函数
+- 补充：看了一些研究，应该是说GeLU比ReLU这些表现都好，以至于后续的语言模型都沿用了这一激活函数。
+
+#### BertOutput
+
+在这里又是一个全连接+dropout+LayerNorm，还有一个残差连接residual connect
+
+```python
+class BertOutput(nn.Module):
+    def __init__(self, config):
+        super().__init__()
+        self.dense = nn.Linear(config.intermediate_size, config.hidden_size)
+        self.LayerNorm = nn.LayerNorm(config.hidden_size, eps=config.layer_norm_eps)
+        self.dropout = nn.Dropout(config.hidden_dropout_prob)
+
+    def forward(self, hidden_states, input_tensor):
+        hidden_states = self.dense(hidden_states)
+        hidden_states = self.dropout(hidden_states)
+        hidden_states = self.LayerNorm(hidden_states + input_tensor)
+        return hidden_states
+```
+
+这里的操作和BertSelfOutput不能说没有关系，只能说一模一样……非常容易混淆的两个组件。
+
+### BertPooler
+
+这一层只是简单地取出了句子的第一个token，即[CLS]对应的向量，然后过一个全连接层和一个激活函数后输出
+
+```python
+class BertPooler(nn.Module):
+    def __init__(self, config):
+        super().__init__()
+        self.dense = nn.Linear(config.hidden_size, config.hidden_size)
+        self.activation = nn.Tanh()
+
+    def forward(self, hidden_states):
+        # We "pool" the model by simply taking the hidden state corresponding
+        # to the first token.
+        first_token_tensor = hidden_states[:, 0]
+        pooled_output = self.dense(first_token_tensor)
+        pooled_output = self.activation(pooled_output)
+        return pooled_output
+```
+
+### 小结
+
+- 在HuggingFace实现的Bert模型中，使用了多种节约显存的技术：
+  - gradient checkpoint，不保留前向传播节点，只在用时计算；
+  - apply_chunking_to_forward，按多个小批量和低维度计算FFN部分；
+- BertModel包含复杂的封装和较多的组件。以bert-base为例，主要组件如下：
+  - 总计Dropout出现了1+(1+1+1)x12=37次；
+  - 总计LayerNorm出现了1+(1+1)x12=25次；
+  - 总计dense全连接层出现了(1+1+1)x12+1=37次，并不是每个dense都配了激活函数
+- BertModel有极大的参数量。以bert-base为例，其参数量为109M，具体计算过程可以[参考](https://zhuanlan.zhihu.com/p/144582114)
+
+### BERT-based Models
+
+基于BERT的模型都写在/models/bert/modeling_bert.py里面，包括BERT预训练模型和BERT分类模型，UML图如下：
+- ![](https://pic1.zhimg.com/80/v2-0e126f74d40d2db8bc133bc67f8055b4_720w.png)
+BERT模型一图流（建议保存后放大查看）
+
+首先，以下所有的模型都是基于BertPreTrainedModel这一抽象基类的，而后者则基于一个更大的基类PreTrainedModel。这里我们关注BertPreTrainedModel的功能：
+- 用于初始化模型权重，同时维护继承自PreTrainedModel的一些标记身份或者加载模型时的类变量。
+
+#### BertForPreTraining
+
+众所周知，BERT预训练任务包括两个：
+- Masked Language Model（MLM）：在句子中随机用[MASK]替换一部分单词，然后将句子传入 BERT 中编码每一个单词的信息，最终用[MASK]的编码信息预测该位置的正确单词，这一任务旨在训练模型根据上下文理解单词的意思；
+- Next Sentence Prediction（NSP）：将句子对A和B输入BERT，使用[CLS]的编码信息进行预测B是否A的下一句，这一任务旨在训练模型理解预测句子间的关系。
+![](https://pic4.zhimg.com/80/v2-778b166945e69e7689cccfe7532e74e3_720w.jpg)
+
+对应到代码中，这一融合两个任务的模型就是BertForPreTraining。略
+
+这份代码里面也包含了对于只想对单个目标进行预训练的BERT模型（具体细节不作展开）：
+- BertForMaskedLM：只进行MLM任务的预训练；
+  - 基于BertOnlyMLMHead，而后者也是对BertLMPredictionHead的另一层封装；
+- BertLMHeadModel：这个和上一个的区别在于，这一模型是作为decoder运行的版本；
+  - 同样基于BertOnlyMLMHead；
+- BertForNextSentencePrediction：只进行NSP任务的预训练。
+  - 基于BertOnlyNSPHead，内容就是一个线性层……
+
+各种Fine-tune模型，基本都是分类任务：
+- ![](https://pic1.zhimg.com/80/v2-d870cb6a4cc1b6f5f7f54cd9f563e468_720w.jpg)
+
+#### BertForSequenceClassification
+
+这一模型用于句子分类（也可以是回归）任务，比如GLUE benchmark的各个任务。
+- 句子分类的输入为句子（对），输出为单个分类标签。
+结构上很简单，就是BertModel（有pooling）过一个dropout后接一个线性层输出分类
+
+在前向传播时，和上面预训练模型一样需要传入labels输入。
+- 如果初始化的num_labels=1，那么就默认为回归任务，使用MSELoss；
+- 否则认为是分类任务。
+
+#### BertForMultipleChoice
+
+这一模型用于多项选择，如RocStories/SWAG任务。
+- 多项选择任务的输入为一组分次输入的句子，输出为选择某一句子的单个标签。
+结构上与句子分类相似，只不过线性层输出维度为1，即每次需要将每个样本的多个句子的输出拼接起来作为每个样本的预测分数。
+- 实际上，具体操作时是把每个batch的多个句子一同放入的，所以一次处理的输入为[batch_size, num_choices]数量的句子，因此相同batch大小时，比句子分类等任务需要更多的显存，在训练时需要小心。
+
+#### BertForTokenClassification
+
+这一模型用于序列标注（词分类），如NER任务。
+- 序列标注任务的输入为单个句子文本，输出为每个token对应的类别标签。
+由于需要用到每个token对应的输出而不只是某几个，所以这里的BertModel不用加入pooling层；
+- 同时，这里将_keys_to_ignore_on_load_unexpected这一个类参数设置为[r"pooler"]，也就是在加载模型时对于出现不需要的权重不发生报错。
+
+#### BertForQuestionAnswering
+
+这一模型用于解决问答任务，例如SQuAD任务。
+- 问答任务的输入为问题+（对于BERT只能是一个）回答组成的句子对，输出为起始位置和结束位置用于标出回答中的具体文本。
+这里需要两个输出，即对起始位置的预测和对结束位置的预测，两个输出的长度都和句子长度一样，从其中挑出最大的预测值对应的下标作为预测的位置。
+- 对超出句子长度的非法label，会将其压缩（torch.clamp_）到合理范围。
+
+作为一个迟到的补充，这里稍微介绍一下ModelOutput这个类。它作为上述各个模型输出包装的基类，同时支持字典式的存取和下标顺序的访问，继承自python原生的OrderedDict 类。
+
+### BERT训练和优化
+
+#### Pre-Training
+
+预训练阶段，除了众所周知的15%、80%mask比例，有一个值得注意的地方就是参数共享。
+
+不止BERT，所有huggingface实现的PLM的word embedding和masked language model的预测权重在初始化过程中都是共享的：
+
+
+#### Fine-Tuning
+
+微调也就是下游任务阶段，也有两个值得注意的地方。
+
+##### AdamW
+
+首先介绍一下BERT的优化器：AdamW（AdamWeightDecayOptimizer）。
+
+这一优化器来自ICLR 2017的Best Paper：《Fixing Weight Decay Regularization in Adam》中提出的一种用于修复Adam的权重衰减错误的新方法。论文指出，L2正则化和权重衰减在大部分情况下并不等价，只在SGD优化的情况下是等价的；而大多数框架中对于Adam+L2正则使用的是权重衰减的方式，两者不能混为一谈。
+
+##### Warmup
+
+BERT的训练中另一个特点在于Warmup，其含义为：
+- 在训练初期使用较小的学习率（从0开始），在一定步数（比如1000步）内逐渐提高到正常大小（比如上面的2e-5），避免模型过早进入局部最优而过拟合；
+- 在训练后期再慢慢将学习率降低到0，避免后期训练还出现较大的参数变化。
+在Huggingface的实现中，可以使用多种warmup策略
+- CONSTANT：保持固定学习率不变；
+- CONSTANT_WITH_WARMUP：在每一个step中线性调整学习率；
+- LINEAR：上文提到的两段式调整；
+- COSINE：和两段式调整类似，只不过采用的是三角函数式的曲线调整；
+- COSINE_WITH_RESTARTS：训练中将上面COSINE的调整重复n次；
+- POLYNOMIAL：按指数曲线进行两段式调整。
+
+
+### 入门代码
 
 ```python
 import torch
@@ -588,6 +1023,97 @@ class BertPooler(nn.Module):
 在这个文件中还有上述基础的BertModel的进一步的变化，比如BertForMaskedLM，BertForNextSentencePrediction这些是Bert加了预训练头的模型，还有BertForSequenceClassification， BertForQuestionAnswering 这些加上了特定任务头的模型。
 
 [Huggingface简介及BERT代码浅析](https://zhuanlan.zhihu.com/p/120315111)
+
+### pipeline NLP快速应用
+
+[参考文章](https://blog.csdn.net/YangStudent/article/details/118879560)：pipeline涉及多个NLP任务，transformers库，pipline函数
+- 分类，实体识别，生成，预测，问答，摘要，翻译，相似度，迁移学习，预训练模型，transformer概念
+- 类似sklearn的pipeline流水线机制
+
+```python
+from transformers import pipeline
+ 
+# 1. 情感分类
+classfier1 = pipeline("sentiment-analysis")
+print(classfier1("My wife is a beautiful girl"))
+# [{'label': 'POSITIVE', 'score': 0.9998767971992493}]
+ 
+# print(classfier1('I am pool', 'My PBL is beautiful, but I love it'))
+# [{'label': 'NEGATIVE', 'score': 0.7211759090423584}, {'label': 'POSITIVE', 'score': 0.9998372197151184}]
+ 
+classfier2  = pipeline("zero-shot-classification")
+print(classfier2(
+    "This a project about the Style transfer",
+    candidate_labels = ['education', 'politics', 'business']
+))
+# {'sequence': 'This a project about the Style transfer', 'labels': ['business', 'education', 'politics'], 'scores': [0.673454225063324, 0.17288313806056976, 0.15366260707378387]}
+ 
+# 2.文本生成
+generator1 = pipeline("text-generation") # 默认的文本生成模型是gpt2
+print(generator1(
+    "I owe 2300 yuan",
+    max_length = 50, # 指定生成句的大小
+    num_return_sequence = 2, # 指定生成的句子个数
+))
+# [{'generated_text': "I owe 2300 yuan from the bank since it made me a few dollars but it's just so damn hard to pay. I'm on a two-yearly policy and the current rate I'm using has to be 100 yuan. So, I"}]
+#
+ 
+generator2 = pipeline("text-generation", model="distilgpt2") # 指定模型为distilgpt2,轻量的gpt2
+print(generator2(
+    "I owe 2300 yuan"
+))
+# [{'generated_text': 'I owe 2300 yuan to the country.”'}]
+ 
+# 3.预测文本遮罩
+unmasker = pipeline('fill-mask') # 基于bert
+print(unmasker('My favorite girl is <mask>'))
+# top_k的含义是返回最有可能的两种结果
+# [{'sequence': '<s>My favorite girl is…</s>', 'score': 0.035072073340415955, 'token': 1174, 'token_str': 'âĢ¦'}, {'sequence': '<s>My favorite girl is...</s>', 'score': 0.034020423889160156, 'token': 734, 'token_str': '...'}, {'sequence': '<s>My favorite girl is Barbie</s>', 'score': 0.01795039512217045, 'token': 31304, 'token_str': 'ĠBarbie'}, {'sequence': '<s>My favorite girl is Cinderella</s>', 'score': 0.011553746648132801, 'token': 34800, 'token_str': 'ĠCinderella'}, {'sequence': '<s>My favorite girl is ______</s>', 'score': 0.010862686671316624, 'token': 47259, 'token_str': 'Ġ______'}]
+ 
+# 4.命名实体识别，识别一句话中的，实体，如人，组织，或地点
+ner = pipeline('ner', grouped_entities=True) # grouped_entities=True, 允许相似的实体分组到同一个组内
+print(ner("I'm working in CCNU , is a beautiful school , and I like Wollongong"))
+# [{'entity_group': 'I-ORG', 'score': 0.9960816502571106, 'word': 'CCNU'}, {'entity_group': 'I-LOC', 'score': 0.9867993593215942, 'word': 'Wollongong'}]
+ 
+ 
+# 5.提取问题答案 在context中提取出question的答案
+question_answer = pipeline('question-answering')
+print(question_answer(
+    question = 'Who are you?',
+    context = 'I am XsY and good luck to see you',
+))
+# {'score': 0.6727198958396912, 'start': 5, 'end': 8, 'answer': 'XsY'}
+ 
+# 6.文本摘要
+summarizer = pipeline('summarization')
+print(summarizer("""    America has changed dramatically during recent years. Not only has the number of 
+    graduates in traditional engineering disciplines such as mechanical, civil, 
+    electrical, chemical, and aeronautical engineering declined, but in most of 
+    the premier American universities engineering curricula now concentrate on 
+    and encourage largely the study of engineering science. As a result, there 
+    are declining offerings in engineering subjects dealing with infrastructure, 
+    the environment, and related issues, and greater concentration on high 
+    technology subjects, largely supporting increasingly complex scientific 
+    developments. While the latter is important, it should not be at the expense 
+    of more traditional engineering.
+    Rapidly developing economies such as China and India, as well as other 
+    industrial countries in Europe and Asia, continue to encourage and advance 
+    the teaching of engineering. Both China and India, respectively, graduate 
+    six and eight times as many traditional engineers as does the United States. 
+    Other industrial countries at minimum maintain their output, while America 
+    suffers an increasingly serious decline in the number of engineering graduates 
+    and a lack of well-educated engineers.
+    """))
+# [{'summary_text': ' America has changed dramatically during recent years . The number of engineering graduates in the U.S. has declined in traditional engineering disciplines such as mechanical, civil, electrical, chemical, and aeronautical engineering . Rapidly developing economies such as China and India, as well as other industrial countries, continue to encourage and advance the teaching of engineering .'}]
+ 
+ 
+# 7.翻译
+translator = pipeline('translation', model='Helsinki-NLP/opus-mt-zh-en')
+print(translator('我是真的很穷不要再坑我了'))
+# [{'translation_text': "I'm really poor. Don't lie to me again."}]
+```
+
+
 
 ### 模型信息
 
