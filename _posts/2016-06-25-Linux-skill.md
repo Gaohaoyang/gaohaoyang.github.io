@@ -744,8 +744,13 @@ git show [commit] # 显示指定提交的元数据和内容更改。
 # 【2020-9-10】git免密pull/push，以下命令自动保存密码
 git config --global credential.helper store
 
-git diff # 此命令显示尚未暂存的文件差异
+git diff # 此命令显示尚未暂存的文件差异，查看当前没有add 的内容修改
+git diff HEAD # 查看当前没有add和commit的改动
+git status # 同上
+git diff --cached # 查看已经add 没有commit 的改动
 git diff –staged # 此命令显示暂存区域中的文件与当前最新版本之间的差异
+git diff 版本号码1 版本号码2 # 查看任意两个版本之间的改动
+git diff 版本号码1 版本号码2  src # 比较两个版本号码的src 文件夹的差异
 git diff [first branch] [second branch] # 两个分支之间的差异
 
 git rm [file] # 从你的工作目录中删除文件，然后进行删除。
