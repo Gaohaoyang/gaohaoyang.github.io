@@ -2738,10 +2738,50 @@ Milvus 在全球范围内已被数百家组织和机构所采用，广泛应用�
 - [知识蒸馏(Knowledge Distillation) 经典之作](https://zhuanlan.zhihu.com/p/102038521)
 
 
+# NLP新范式：Prompt
 
+【2021-8-3】[Fine-tune之后的NLP新范式：Prompt越来越火，CMU华人博士后出了篇综述文章](https://blog.csdn.net/xixiaoyaoww/article/details/119363189)，CMU 博士后研究员刘鹏飞：近代自然语言处理技术发展的第四范式可能是预训练语言模型加持下的 Prompt Learning。
+- 从 BERT 开始，**预训练+finetune** 已经成为了整个领域的常规范式。但是从 GPT-3 开始，一种新的范式开始引起大家的关注并越来越流行：**prompting**。
+- [论文地址](https://arxiv.org/pdf/2107.13586.pdf)，更多研究见：清华大学开源的论文列表 [thunlp/PromptPapers](https://github.com/thunlp/PromptPapers)
+- ![img](https://img-blog.csdnimg.cn/img_convert/e538ffef7d05deaf84a5a66225c7f4bc.png)
 
+## 介绍
 
+全监督学习在 NLP 领域也非常重要。但是全监督的数据集对于学习高质量的模型来说是不充足的，早期的 NLP 模型严重依赖特征工程。随着用于 NLP 任务的神经网络出现，使得特征学习与模型训练相结合，研究者将研究重点转向了架构工程，即通过设计一个网络架构能够学习数据特征。各种模式的对比如下：
 
+|模式paradigm|工程重心engineering|示例|任务关系task relation|
+|---|---|---|---|
+|①全监督（非神经网络）|特征|如单词，词性，句子长度等|分类、序列标注、语言模型（无监督）、生成|
+|②全监督（神经网络）|结构|如卷积、循环、自注意力|同上|
+|③pre-train与fine-tune|目标|掩码语言模型、NSP下一句预测|以语言模型为中心，含无监督训练|
+|④pre-train、prompt与predict|提示|完形填空、前缀|语言模型为中心，含文本提示|
 
+- ![img](https://img-blog.csdnimg.cn/img_convert/e7be4976c76f47cf54a95a7dcd2150b9.png)
 
+## Prompt 概要
 
+该综述研究试图通过提供 prompting 方法的概述和形式化定义，以及使用这些 prompt 的预训练语言模型的概述，来梳理这一迅速发展领域的当前知识状态。然后该论文对 prompt 方法进行了深入的讨论，包括 **prompt工程**、**answer工程**等基础和**多prompt学习**方法、**prompt相关的训练方法**等更高级的概念。
+
+然后，该研究列出了已有的基于 prompt 学习方法的多种应用，并探讨了不同应用场景中如何选择合适的训练方法。最后，该研究尝试在研究生态系统中定位 prompt 方法的当前状态，并与其他研究领域建立联系。此外，该研究提出一些可能适合进一步研究的挑战性问题，并针对当前研究趋势进行了分析。
+
+基于 Prompt 的学习方法试图通过**学习LM**来规避这一问题，该 LM 对文本 x 本身的概率 P(x; θ) 进行建模并使用该概率来预测 y，从而减少或消除了训练模型对大型监督数据集的需求。
+
+最基本的 Prompt 形式的数学描述，包含许多有关 Prompt 的工作，并且可以扩展到其他内容。
+
+基础 Prompt 分三步预测得分最高的 ^y，即：**prompt 添加**、**answer 搜索**和 **answer 映射**。prompting 方法的术语和符号。
+- ![img](https://img-blog.csdnimg.cn/img_convert/c441c670a31e4b2669da835842b9f171.png)
+不同任务的输入、模板和 answer 示例：
+- ![img](https://img-blog.csdnimg.cn/img_convert/90e84a4ad6cf465e3e306fc376581bcf.png)
+
+## Prompt设计思路
+
+Prompting 设计考虑：
+- 预训练模型选择：有许多预训练 LM 可以用来计算 P(x; θ)。在第 3 章中，研究者对预训练 LM 进行了初步的介绍；
+- **Prompt 工程**：如果 prompt 指定了任务，那么选择正确的 prompt 不仅对准确率影响很大，而且对模型首先执行的任务也有很大影响。在第 4 章中，研究者讨论了应该选择哪个 prompt 作为 f_prompt(x) 方法；
+- **Answer 工程**：根据任务的不同，会有不同的方式设计 Z (Answer)，可能会和映射函数一起使用。在第 5 章中，详细介绍了不同的设计方式；
+- **扩展范式**：如上所述， 上面的公式仅仅代表了各种底层框架中最简单的一种，这些框架已经被提议用于执行各种 prompting。在 第 6 章中，研究者讨论了扩展这种基本范式以进一步提高结果或适用性的方法；
+- 基于 Prompt 的**训练策略**：在第 7 章中，研究者总结了不同的训练策略并详细说明它们的相对优势
+
+![img](https://img-blog.csdnimg.cn/img_convert/eae05d97522535d2a976353daae592c2.png)
+
+详情见原文
