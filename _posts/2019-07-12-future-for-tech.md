@@ -17,6 +17,11 @@ mathjax: true
 
 # 总结
 
+- 【2021-9-5】[普通人的奋斗路径](https://maimai.cn/web/gossip_detail?src=app&webid=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlZ2lkIjoiZmYwODY5MzMwYzkzMTFlY2FjNDY4MDE4NDRlMmQ4NmMiLCJ1IjozNTM5LCJpZCI6MjkzNjUzMTJ9.KDLYwqGW2g4MNa-WQOceCbFT62xkxryxSkUNjKrJ8fM&share_channel=2)
+  - 第一种：**房奴**模式。这是最常见的一种，每天辛苦工作，拿着正常工资，在合适的城市定居，平淡过完一生。
+  - 第二种：**奋斗**模式。职场中的卷王，一路升职，拿着高薪资，勉强在一线城市体面生活，属于普通人的极限。
+  - 第三种：**混吃等死**模式。工作不太努力，每天划水摸鱼，30岁后容易被裁，浑浑噩噩的度过一生。
+  - 第四种：**地狱**模式。不甘于平庸的人，什么事情都尝试，辞职创业，风口投机。人生极度不稳定，可能成功，但大概率失败凄惨无比。
 - 【2020-6-17】人的一生，**靠本事保底，靠运气探顶**。年轻人不要把运气误当本事自叹不如。珍惜时间和机会，发奋图强，不断提升自己就好。创造条件等机会而已。机会没来之前，也要懂得知足长乐。 ​​​​
 - 人的自由之路，无非是两条：一条是给能力做加法，一条是给欲望做减法。
 - 【2021-3-20】[毕业两年，才看清有身边人的差距](https://www.ixigua.com/6939826056224309285)
