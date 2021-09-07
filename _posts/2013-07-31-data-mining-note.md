@@ -3,7 +3,7 @@ layout: post
 title:  "数据挖掘经验总结-data-mining-note"
 date:   2013-07-31 23:02:00
 categories: 数据挖掘
-tags: 数据挖掘 机器学习 数据分析 陈皓 大数据 增长黑客 数据金字塔 zepplin hadoop hive tez spark storm 服务质量 评分卡 clickhouse kafka zookeeper 数据库 mysql
+tags: 数据挖掘 机器学习 数据分析 陈皓 大数据 增长黑客 数据金字塔 zepplin hadoop hive tez spark storm 服务质量 评分卡 clickhouse kafka zookeeper 数据库 mysql NPS
 excerpt: 数据挖掘知识点、经验总结
 author: 鹤啸九天
 mathjax: true
@@ -1376,7 +1376,22 @@ evaluation(y,y_pred,index_name='enet_reg ')
 - [Servqual Model: Five Key Service Dimensions, Servqual Gaps & Reasons](https://newsmoor.com/servqual-model-five-key-service-dimensions-servqual-gaps-reasons/)
 
 
+## NPS 净推荐值
 
+【2021-9-7】[用户体验指数NPS（净推荐值）的定义和应用](https://zhuanlan.zhihu.com/p/33993262?from=singlemessage)
+
+`净推荐`(Net Promoter)是Fred Reichheld（2003）针对企业良性收益与真实增长所提出的用户忠诚度概念。
+- 请用户回答“您在多大程度上愿意向您的朋友（亲人、同事……）推荐XX公司/产品？”（0-10分，10分表示非常愿意，0分表示非常不愿意）
+- ![](https://pics4.baidu.com/feed/f703738da97739128d9746319460ee1c377ae2af.jpeg)
+- 根据用户的推荐意愿，将用户分为三类：`推荐者`、`被动者`、`贬损者`，推荐者与贬损者是对企业实际的产品口碑有影响的用户，这两部分用户在用户总数中所占百分比之差，就是净推荐值（Net Promoter Score，NPS）。
+- `推荐者`（Promoter）：具有狂热忠诚度，铁杆粉丝，反复光顾，向朋友推荐。
+- `被动者`（Passives）：总体满意但不忠诚，容易转向竞争对手。
+- `贬损者`（Detractors）：使用不满意不忠诚，不断抱怨或投诉。
+计算公式：
+> 净推荐值(NPS) = (推荐者数/总样本数)×100%－(贬损者数/总样本数)×100%
+![图解NPS](https://pic2.zhimg.com/80/v2-a8c661866270910f067c32de216bf559_720w.jpg)
+
+NPS的存在是一个衡量标尺，但没有绝对的高低之分，不同的行业有着不同的标准，比如下图统计出来各个行业的NPS平均值水平中所示，银行业的NPS值跨度从-18%到77%，行业平均值23%，如果高于23%就算比较优秀，而汽车经销行业的NPS值就很稳定，平均分数也很低，那么用衡量银行业的 23%来衡量汽车销售业，就非常不客观了。
 
 
 # 结束
