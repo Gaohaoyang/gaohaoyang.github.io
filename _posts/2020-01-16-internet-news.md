@@ -1254,6 +1254,7 @@ mathjax: true
 
 ## 电商
 
+- 【2021-9-13】[跨境电商20年](https://mp.weixin.qq.com/s/1I1_QDm4y2SxYA_unHmMGw)
 - 【2020-7-18】[直播带货风口下，小红书的尴尬处境](https://mp.weixin.qq.com/s?__biz=MjM5OTA3MDg4Mg==&mid=2650778042&idx=1&sn=581f63783878d91b6bc8ec244af83768&chksm=beca147789bd9d6134ba0a398ad639bbe735c3f5d7882eb98a6c31e90edc09e91fadd6c538e1&scene=21#wechat_redirect)
    - 中国互联网平台上最大的种草社区的小红书，出现了一个不可思议的状况，即直播业务发展迟缓。
    - 不仅是用户心智被先入场者占据，连主播们的心智，都更倾向于其他平台
