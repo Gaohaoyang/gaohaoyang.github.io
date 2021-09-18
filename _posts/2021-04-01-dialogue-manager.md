@@ -365,16 +365,55 @@ N阶对话建模需要解决的问题:
 对话管理的一些方法，主要有三大类：
 - （1）**Structure**-based Approaches
   - Key phrase reactive：本质上就是**关键词**匹配，通过捕捉用户最后一句话的关键词/关键短语来进行回应，比较知名的两个应用是 `ELIZA` 和 `AIML`。AIML （人工智能标记语言），XML 格式，支持 ELIZA 的规则，并且更加灵活，能支持一定的上下文实现简单的多轮对话（利用 that），支持变量，支持按 topic 组织规则等。
-  - Tree and FSM
+  - Tree and FSM：把对话建模为通过**树**或者**有限状态机**（图结构）的路径。 相比于 simple reactive approach，这种方法融合了更多的上下文，能用一组有限的信息交换模板来完成对话的建模。这种方法适用于：
+    - ①系统主导
+    - ②需要从用户收集特定信息
+    - ③用户对每个问题的回答在有限集合中
+    - FSM-based DM 的特点是：
+      - 人为定义对话流程
+      - 完全由系统主导，系统问，用户答
+      - 答非所问的情况直接忽略
+      - 建模简单，能清晰明了的把交互匹配到模型
+      - 难以扩展，很容易变得复杂
+      - 适用于简单任务，对简单信息获取很友好，难以处理复杂的问题
+      - 缺少灵活性，表达能力有限，输入受限，对话结构/流转路径受限
+    - 对特定领域要设计 task-specific FSM，简单的任务 FSM 可以比较轻松的搞定，但稍复杂的问题就困难了，毕竟要考虑对话中的各种可能组合，编写和维护都要细节导向，非常耗时。一旦要扩展 FSM，哪怕只是去 handle 一个新的 observation，都要考虑很多问题。实际中，通常会加入其它机制（如变量等）来扩展 FSM 的表达能力。
   - …
 - （2）**Principle**-based Approaches
-  - Frame
+  - Frame：Frame-based approach 通过允许多条路径更灵活的获得信息的方法**扩展**了基于 FSM 的方法，它将对话建模成一个**填槽**的过程，槽就是多轮对话过程中将初步用户意图转化为明确用户指令所需要补全的信息。一个槽与任务处理中所需要获取的一种信息相对应。槽直接没有顺序，缺什么槽就向用户询问对应的信息。
+    - Frame-based DM 包含的一些要素：
+      - Frame： 是槽位的集合，定义了需要由用户提供什么信息
+      - 对话状态：记录了哪些槽位已经被填充
+      - 行为选择：下一步该做什么，填充什么槽位，还是进行何种操作；行为选择可以按槽位填充/槽位加权填充，或者是利用本体选择
+    - 基于框架/模板的系统本质上是一个生成系统，不同类型的输入激发不同的生成规则，每个生成能够灵活的填入相应的模板。常常用于用户可能采取的行为相对有限、只希望用户在这些行为中进行少许转换的场合。
+    - 特点
+      - 用户回答可以包含任何一个片段/全部的槽信息
+      - 系统来决定下一个行为
+      - 支持混合主导型系统
+      - 相对灵活的输入，支持多种输入/多种顺序
+      - 适用于相对复杂的信息获取
+      - 难以应对更复杂的情境
+      - 缺少层次
+  - Agenda + Frame(CMU Communicator)
+    - Agenda + Frame(CMU Communicator) 对 frame model 进行了改进，有了**层次**结构，能应对更复杂的信息获取，支持话题**切换**、**回退**、**退出**。主要要素：
+      - product：树的结构，能够反映为完成这个任务需要的所有信息的顺序，跟FSM相比，产品树（product tree）的创新在于它是**动态**的，可以在 session 中对树进行一系列操作比如加一个子树或者挪动子树
+      - process（含agenda和handler）
+        - agenda：相当于任务的计划（plan），类似栈的结构（generalization of stack），话题的有序列表（ordered list of topics），handler 的有序列表（list of handlers），handler 有优先级
+        - handler：产品树上的每个节点对应一个 handler，一个 handler 封装了一个 information item
+    - 从 product tree 从左到右、深度优先遍历生成 agenda 的顺序。当用户输入时，系统按照 agenda 中的顺序调用每个 handler，每个 handler 尝试解释并回应用户输入。handler 捕获到信息就把信息标记为 consumed，这保证了一个 information item 只能被一个 handler 消费。
+    - input pass 完成后，如果用户输入不会直接导致特定的 handler 生成问题，那么系统将会进入 output pass，每个 handler 都有机会产生自己的 prompt（例如，departure date handler 可以要求用户出发日期）。
+    - 可以从 handler 返回代码中确定下一步，选择继续 current pass，还是退出 input pass 切换到 output pass，还是退出 current pass 并等待来自用户输入等。handler 也可以通过返回码声明自己为当前焦点（focus），这样这个 handler 就被提升到 agenda 的顶端。为了保留特定主题的上下文，这里使用 sub-tree promotion 的方法，handler 首先被提升到兄弟节点中最左边的节点，父节点同样以此方式提升
+    - 论文：[AN AGENDA-BASED DIALOG MANAGEMENT ARCHITECTURE FOR SPOKEN LANGUAGE SYSTEMS](https://link.zhihu.com/?target=http%3A//www.cs.cmu.edu/~xw/asru99-agenda.pdf)
   - Information-State
+    - 背景：①很难去评估各种 DM 系统②理论和实践模型存在很大的 gap，理论型模型有：logic-based, BDI, plan-based, attention/intention，实践中模型大多数是 finite-state 或者 frame-based，即使从理论模型出发，也有很多种实现方法
+    - Information State Models 作为对话建模的形式化理论，为工程化实现提供了理论指导，也为改进当前对话系统提供了大的方向。Information-state theory 的关键是识别对话中流转信息的 relevant aspects，以及这些成分是怎么被更新的，更新过程又是怎么被控制的。idea 其实比较简单，不过执行很复杂罢了。
   - Plan
+    - 指大名鼎鼎的 BDI (Belief, Desire, Intention) 模型。起源于三篇经典论文
+    - 基本假设是，一个试图发现信息的行为人，能够利用标准的 plan 找到让听话人告诉说话人该信息的 plan。这就是 Cohen and Perrault 1979 提到的 AI Plan model，Perrault and Allen 1980 和 Allen and Perrault 1980 将 BDI 应用于理解，特别是间接言语语效的理解，本质上是对 Searle 1975 的 speech acts 给出了可计算的形式体系。
   - …
 - （3）**Statistical** Approaches
   - 这一类其实和上面两类有交叉…不过重点想提的是：Reinforcement Learning
-
+详情见原文：[多轮对话之对话管理(Dialog Management)](https://blog.csdn.net/stay_foolish12/article/details/90265394)
 
 
 ## 1. 问答匹配方法（点）
