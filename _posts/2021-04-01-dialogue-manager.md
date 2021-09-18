@@ -3,7 +3,7 @@ layout: post
 title:  "对话系统之对话管理器-Dialogue Manager"
 date:   2021-04-01 18:45:00
 categories: NLP
-tags: 深度学习 对话系统 多轮 FSM 有限状态机 陈蕴侬
+tags: 深度学习 对话系统 多轮 FSM 有限状态机 陈蕴侬 AIML
 excerpt: 对话管理器技术总结
 author: 鹤啸九天
 mathjax: true
@@ -15,10 +15,16 @@ mathjax: true
 # 总结
 
 - 【2021-4-2】任务型对话方法总结,[任务型对话系统简述与细节把捉](https://zhuanlan.zhihu.com/p/276323615)
-![](https://pic1.zhimg.com/80/v2-4006962bc24493ba4680390f2a83b804_1440w.jpg)
-![](https://pic4.zhimg.com/80/v2-c545115ac8b06b546e0ad310c729d757_1440w.jpg)
+![图](https://pic1.zhimg.com/80/v2-4006962bc24493ba4680390f2a83b804_1440w.jpg)
+![图](https://pic4.zhimg.com/80/v2-c545115ac8b06b546e0ad310c729d757_1440w.jpg)
+
 
 # 任务型对话简介
+
+DM在对话系统中的位置
+- ![](https://pic1.zhimg.com/80/v2-763da7952c607ed3065af3cacdd9c7d8_hd.jpg)
+
+
 
 非任务型对话系统，如开放域的闲聊，常见方法：
 - ① 基于**生成**方法，例如序列到序列模型（seq2seq），在对话过程中产生合适的回复，生成型聊天机器人目前是研究界的一个热点，和检索型聊天机器人不同的是，它可以生成一种全新的回复，因此相对更为灵活，但它也有自身的缺点，比如有时候会出现语法错误，或者生成一些没有意义的回复。
@@ -354,6 +360,22 @@ N阶对话建模需要解决的问题:
 
 ![](https://pic3.zhimg.com/v2-838c2141adab54758263ea0de49b07d2_r.jpg)
 
+## 方法
+
+对话管理的一些方法，主要有三大类：
+- （1）**Structure**-based Approaches
+  - Key phrase reactive：本质上就是**关键词**匹配，通过捕捉用户最后一句话的关键词/关键短语来进行回应，比较知名的两个应用是 `ELIZA` 和 `AIML`。AIML （人工智能标记语言），XML 格式，支持 ELIZA 的规则，并且更加灵活，能支持一定的上下文实现简单的多轮对话（利用 that），支持变量，支持按 topic 组织规则等。
+  - Tree and FSM
+  - …
+- （2）**Principle**-based Approaches
+  - Frame
+  - Information-State
+  - Plan
+  - …
+- （3）**Statistical** Approaches
+  - 这一类其实和上面两类有交叉…不过重点想提的是：Reinforcement Learning
+
+
 
 ## 1. 问答匹配方法（点）
 
@@ -382,6 +404,7 @@ N阶对话建模需要解决的问题:
 - ![图](https://pic1.zhimg.com/80/v2-c27a81d4afc5f18d9367549a3882623c_1440w.jpg)
 但 finite-state 方法非常**不灵活**，如果对话任务中有多个待提供的信息时尤为如此。用户可能一并把其他信息也说了，或者用户对已询问的信息做了修改，或者用户并没有按要求回答，也就是说用户可能并没有完全按系统预设的路径走，即用户主导了对话的进行（user initiative）。如果 finite-state 方法需要支持 user initiative，那就需要考虑用户反馈所有可能性，状态跳转的可能路径会非常多，对话流会变得非常复杂，最后变得无法维护 。
 - ![图](https://pic1.zhimg.com/80/v2-84d67e7f78150849e102a18afc81d5f8_1440w.jpg)
+
 上图是finite-state实现的订机票场景，虽然考虑了部分 user initiative 交互，但仍然存在诸多问题，让用户觉得很不智能
 - 第一它并未考虑对话中很多实际情况，系统**超时**怎么办；
 - 第二实现信息的**更新**很麻烦，需要在图上把信息更新的交互也画出来；
@@ -1182,6 +1205,116 @@ Image('fsm.png')
 
 # DM案例
 
+## AIML
+
+基于关键词的对话管理，比如：ELIZA 和 AIML。
+
+`AIML`是Artificial Intelligence Markup Language的缩写， 用于描述一类称为AIML对象，同时部分描述了计算机程序处理这些对象时的表现。AIML是XML语言（可扩展标记语言）的衍生。
+
+`AIML` （人工智能标记语言），XML格式，支持 ELIZA 规则，并且更加灵活，能支持一定的**上下文**实现简单的**多轮**对话（利用 that），支持变量，支持按 topic 组织规则等。
+
+### AIML语法
+
+AIML对象是由**topic**和**category**单元组成的，格式化或未格式化的数据均可。格式化的数据是由字符组成的，其中有的组成符号数据，有的构成AIML元素。AIML元素将应答数据封装在文档中。包含这些元素的字符数据有可能被AIML解释器格式化，也有可能在之后的响应中处理。
+
+aiml中的元素不区分大小写
+
+```xml
+<?xml version="1.0" encoding="GB2312"?>
+
+<category>
+<pattern>MOTHER</pattern>
+<template> Tell me more about your family. </template>
+</category>
+
+<category>
+<pattern>YES</pattern>
+<that>DO YOU LIKE MOVIES</that>
+<template>What is your favorite movie?</template>
+</category>
+```
+
+解释：
+1. 第一行是所有xml文档都必须申明的，如果是中文这里要申明编码为：GB2312，如果是英文则一般申明为：UTF-8 
+2. category表示一个**意图类目**，表示一个**一问一答**匹配和**一问多种应答**匹配，但不允许多中提问匹配。 
+3. pattern表示匹配模式，表示用户的输入匹配，以上例子，用户一旦输入你好，那机器人就找到这个匹配，然后取出应答“好”； 
+4. template表示**应答**，这里应答一个“好”字。 
+
+有了这几个简单的元素理论上就可以写出任意匹配模式，达到一定智能，但实际应用当中只有这些元素是不够的
+
+语法说明：详见原文[AIML元素详细说明](https://blog.csdn.net/qq_16633405/article/details/80228697)
+- think元素：将某个信息存储在变量里，简单说，记录信息，不回复
+- < get name=””名字/> 即得到name的值。
+- < star/>表示*：通配符
+- < srai>元素：query改写
+- < condition>元素：类似于if-else语句
+- < if>元素：判断元素
+- < gender>元素：英文性别代名词
+- < input>表示用户输入
+- < random>随机元素：从候选库中任选一个
+- < system> < /system>元素：调用系统函数
+- < that>元素：前置问题匹配（上文）
+- < Topic name=”film”>元素：设置主题
+- < topicstar index=”n”>元素：用来得到先前倒数第n次谈论的主题
+
+### 安装
+
+目前大部分AIML, [PyAIML](https://github.com/andelf/PyAIML), 只支持Py2.7版本并且不支持中文, 但有人汉化，[AIML汉化版](https://github.com/Shuang0420/aiml)，安装如下：
+
+```shell
+git clone https://github.com/Shuang0420/aiml.git
+cd aiml
+python setup.py build
+python setup.py install
+```
+
+代码示例：更多示例见example目录
+
+```python
+import aiml
+import os
+
+# the path where your AIML startup.xml file located
+chdir = os.getcwd()
+# aiml解释器初始化
+k = aiml.Kernel()
+# 先下载 "alice" AIML数据集
+# for alice
+#k.bootstrap(learnFiles="std-startup.xml", commands="load aiml b", chdir=chdir)
+# for chinese 中文数据集
+k.bootstrap(learnFiles="cn-startup.xml", commands="load aiml cn", chdir=chdir)
+# 或者
+#k.learn("cn-startup.xml")
+# 做出回答
+k.respond("load aiml cn")
+
+# Loop forever, reading user input from the command
+# line and printing responses.
+while True: 
+    if PY3:
+        print(k.respond(input("> ")))
+    else:
+        print(k.respond(raw_input("> ")))
+# if python 2
+# while True: print(k.respond(raw_input("> ")))
+# if python 3
+# while True: print(k.respond(input("> ")))
+```
+
+对话效果: example2目录
+
+```shell
+> 几点了
+Sat Sep 18 15:54:47 CST 2021
+> 我在案例
+你现在在什么地方?
+> 上海
+真希望我也在上海,陪你.
+> 天气咋样
+我暂时不会说别的了.
+```
+
+
 ## Google [Dialogflow](https://dialogflow.com/)
 
 ![](https://ss.csdn.net/p?http://mmbiz.qpic.cn/mmbiz_png/rFWVXwibLGtw9fIXO7xspXUwFLRz3hDqY3RomibnP9iaEcSYibnqE8ypnJ8BvTZemsWD1zGQDhAJquFNmQic28JYyGQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1)
@@ -1285,7 +1418,7 @@ An example of typical input would be something like this:
 ## Rasa
 
 - 为什么使用Rasa而不是使用wit、luis、dialogflow这些服务？
-  - （1）不必把数据交给FackBook/MSFT/Google；
+  - （1）不必把数据交给FaceBook/MSFT/Google；
     - 已有的NLU工具，大多是以服务的方式，通过调用远程http的restful API来对目标语句进行解析完成上述两个任务。如Google的[API.ai](http://api.ai/)（收购后更名为Dialogueflow）, Microsoft的[Luis.ai](http://luis.at/), Facebook的[Wit.ai](http://wit.ai/)等。刚刚被百度收购的[Kitt.ai](http://kitt.ai/)除了百度拿出来秀的语音唤醒之外，其实也有一大部分工作是在NLU上面，他们很有启发性的的Chatflow就包含了一个自己的NLU引擎。
     - 对于数据敏感的用户来说，开源的NLU工具如Rasa.ai提供了另一条路。更加重要的是，可以本地部署，针对实际需求训练和调整模型，据说对一些特定领域的需求效果要比那些通用的在线NLU服务还要好很多。
     - Rasa NLU本身是只支持英文和德文的。中文因为其特殊性需要加入特定的tokenizer（如jieba）作为整个流水线的一部分。代码在[github](https://github.com/crownpku/rasa_nlu_chi)上。
