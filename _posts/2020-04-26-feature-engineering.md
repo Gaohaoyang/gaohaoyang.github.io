@@ -37,6 +37,61 @@ Feature engineering and selection is the art/science of converting data to the b
 - 所有 Feature Column 都源自 FeatureColumn 类，并继承了三个子类 CategoricalColumn、DenseColumn 和 SequenceDenseColumn，分别对应稀疏特征、稠密特征、序列稠密特征。算法人员可以按照样本特征的类型找到对应的接口直接适配。
 - ![](https://img-blog.csdnimg.cn/img_convert/779703f3920ecde96972cd2f1614417d.png)
 
+# 特诊工程
+
+
+## 为什么要做特征归一化/标准化？
+
+【2021-9-6】[为什么要做特征归一化/标准化？](https://blog.csdn.net/blogshinelee/article/details/102875044)
+
+Feature scaling，常见的提法有“特征归一化”、“标准化”，是数据预处理中的重要技术，有时甚至决定了算法能不能work以及work得好不好。谈到feature scaling的必要性，最常用的2个例子可能是：
+- 特征间的单位（尺度）可能不同，比如身高和体重，比如摄氏度和华氏度，比如房屋面积和房间数，一个特征的变化范围可能是[ 1000 , 10000 ] [1000, 10000][1000,10000]，另一个特征的变化范围可能是[ − 0.1 , 0.2 ] [-0.1, 0.2][−0.1,0.2]，在进行距离有关的计算时，单位的不同会导致计算结果的不同，尺度大的特征会起决定性作用，而尺度小的特征其作用可能会被忽略，为了消除特征间单位和尺度差异的影响，以对每维特征同等看待，需要对特征进行归一化。
+- 原始特征下，因尺度差异，其损失函数的等高线图可能是椭圆形，梯度方向垂直于等高线，下降会走zigzag路线，而不是指向local minimum。通过对特征进行zero-mean and unit-variance变换后，其损失函数的等高线图更接近圆形，梯度下降的方向震荡更小，收敛更快
+- ![andrew ng](https://s2.ax1x.com/2019/10/30/K4ZoHf.png)
+
+问题：
+- 常用的feature scaling方法都有哪些？
+  - feature scaling的方法可以分成2类，**逐行**进行和**逐列**进行。逐行是对每一维特征操作，逐列是对每个样本操作
+- 什么情况下该使用什么feature scaling方法？有没有一些指导思想？
+  - 涉及或隐含距离计算的算法，比如K-means、KNN、PCA、SVM等，一般需要feature scaling
+  - 损失函数中含有正则项时，一般需要feature scaling:
+  - 梯度下降算法，需要feature scaling。收敛速度取决于：参数的初始位置到local minima的距离，以及学习率η \etaη的大小。
+- 所有的机器学习算法都需要feature scaling吗？有没有例外？
+  - 与距离计算无关的概率模型，不需要feature scaling，比如Naive Bayes；
+  - 与距离计算无关的基于树的模型，不需要feature scaling，比如决策树、随机森林等，树中节点的选择只关注当前特征在哪里切分对分类更好，即只在意特征内部的相对大小，而与特征间的相对大小无关。
+- 损失函数的等高线图都是椭圆或同心圆吗？能用椭圆和圆来简单解释feature scaling的作用吗？
+- 如果损失函数的等高线图很复杂，feature scaling还有其他直观解释吗？
+
+## 特征归一化
+
+feature scaling的方法可以分成2类，**逐行**进行和**逐列**进行。
+
+常见方法如下：
+- 逐行：Rescaling (min-max normalization、range scaling)：缩放到区间[ a , b ]
+  - 将每一维特征线性映射到目标范围[ a,b ]，即将最小值映射为a，最大值映射为b，常用目标范围为[ 0 , 1 ]和[−1 , 1]
+- 逐行：Mean normalization
+  - 将均值映射为0，同时用最大值最小值的差对特征进行归一化
+- 逐行：Standardization (Z-score Normalization)
+  - 每维特征0均值1方差（zero-mean and unit-variance）
+- 逐利：Scaling to unit length
+  - 每个样本的特征向量除以其长度，即对样本特征向量的长度进行归一化，长度的度量常使用的是L2 norm（欧氏距离），有时也会采用L1 norm
+
+前3种feature scaling的计算方式为减一个统计量再除以一个统计量，最后1种为除以向量自身的长度。
+- **减**一个统计量可以看成选哪个值作为原点，是最小值还是均值，并将整个数据集平移到这个新的原点位置。如果特征间偏置不同对后续过程有负面影响，则该操作是有益的，可以看成是某种偏置无关操作；如果原始特征值有特殊意义，比如稀疏性，该操作可能会破坏其稀疏性。
+- **除**以一个统计量可以看成在坐标轴方向上对特征进行缩放，用于降低特征尺度的影响，可以看成是某种尺度无关操作。缩放可以使用最大值最小值间的跨度，也可以使用标准差（到中心点的平均距离），前者对outliers敏感，outliers对后者影响与outliers数量和数据集大小有关，outliers越少数据集越大影响越小。
+- **除**以**长度**相当于把长度归一化，把所有样本映射到单位球上，可以看成是某种长度无关操作，比如，词频特征要移除文章长度的影响，图像处理中某些特征要移除光照强度的影响，以及方便计算余弦距离或内积相似度等。
+
+从几何上观察上述方法的作用，图片来自[CS231n-Neural Networks Part 2: Setting up the Data and the Loss](http://cs231n.github.io/neural-networks-2/)
+- zero-mean将数据集平移到原点
+- unit-variance使每维特征上的跨度相当，图中可以明显看出两维特征间存在线性相关性
+- Standardization操作并没有消除这种相关性。
+
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zMi5heDF4LmNvbS8yMDE5LzEwLzMxL0tJd1hIeC5wbmc?x-oss-process=image/format,png)
+
+可通过PCA方法移除线性相关性（decorrelation），即引入旋转，找到新的坐标轴方向，在新坐标轴方向上用“标准差”进行缩放
+
+总的来说，归一化/标准化的目的是为了**获得某种“无关性”**——**偏置**无关、**尺度**无关、**长度**无关……当归一化/标准化方法背后的物理意义和几何含义与当前问题的需要相契合时，其对解决该问题就有**正向**作用，反之，就会起**反作用**。所以，“何时选择何种方法”取决于待解决的问题，即problem-dependent。
+
 
 # 实践
 
