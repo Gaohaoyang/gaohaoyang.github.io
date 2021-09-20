@@ -133,7 +133,7 @@ mathjax: true
 ## 书籍
 
 - 李善友：《第一性原理》，[读书笔记](https://www.jianshu.com/p/f24c6db51768)
-  - ![书](https://upload-images.jianshu.io/upload_images/19978364-962afb11e185a10a?imageMogr2/auto-orient/strip|imageView2/2/w/594/format/webp)
+  - ![书](https://upload-images.jianshu.io/upload_images/19978364-962afb11e185a10a)
 
 ## 视频
 
