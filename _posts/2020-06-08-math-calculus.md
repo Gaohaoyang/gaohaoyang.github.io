@@ -3,7 +3,7 @@ layout: post
 title:  "数学基础：微积分系列"
 date:   2020-06-08 13:10:00
 categories: 数学基础
-tags: 数学 微积分
+tags: 数学 微积分 几何学
 excerpt: 微积分知识点概括，参考普林斯顿微积分读本，以通俗易懂方式讲解微积分概念
 author: 鹤啸九天
 mathjax: true
