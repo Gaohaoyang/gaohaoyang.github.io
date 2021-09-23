@@ -3,7 +3,7 @@ layout: post
 title:  "Linux开发技能"
 date:   2016-06-25 23:35:00
 categories: 编程语言
-tags: Linux Shell Git yaml github 文件服务
+tags: Linux Shell Git yaml github 文件服务 vscode
 excerpt: Linux环境开发技能总结
 mathjax: true
 ---
@@ -451,6 +451,28 @@ x+y = z\\a=4
 - github新功能，在线编辑IDE，[codespace](https://github.com/features/codespaces)，Github 自从被微软收购后，和 vscode 的联动，真的是强强联手，从 GitHub Codespaces 和 GitHub Copilot 来看，好功能一个接一个
 
 <iframe src="https://vdn1.vzuu.com/SD/0758de44-fad6-11eb-a8c4-6ee192182cb1.mp4" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+## VSCode远程连接
+
+[使用VScode连接远程服务器进行开发](https://zhuanlan.zhihu.com/p/141205262)
+- 直接在插件中搜索ssh，即可找到Remote-SSH，点击install安装
+- 左侧会出现一个远程资源管理的图标，选择SSH Targets，进入config配置文件
+- 可选：通过跳板机连接服务器
+- 点击SSH TARGETS下的服务器旁边的按钮纽行连接
+
+配置文件
+
+```shell
+Host c00
+    HostName xxx.xxx.xxx.xxx（跳板机IP）
+    User lyfeng
+
+Host c01
+    HostName 192.168.0.10（内网地址）
+    User lyfeng
+    ProxyCommand "openssh的安装路径"\ssh.exe -W %h:%p -q c00
+    # 连接c00, 再通过c00的局域网ssh到c01
+```
 
 ## 基本概念
 
