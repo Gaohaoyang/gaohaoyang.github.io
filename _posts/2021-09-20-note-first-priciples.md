@@ -3,7 +3,7 @@ layout: post
 title:  "【读书笔记】-第一性原理"
 date:   2021-09-20 22:19:00
 categories: 读书笔记
-tags: 第一性原理 归纳 演绎 亚里士多德 马斯克 笛卡尔 黎曼 几何 宇宙
+tags: 第一性原理 归纳 演绎 亚里士多德 马斯克 笛卡尔 黎曼 几何 宇宙 数学 相对论
 excerpt: 马斯克隆重推荐的思维方法：第一性原理
 author: 鹤啸九天
 mathjax: true
