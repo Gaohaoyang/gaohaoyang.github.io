@@ -463,10 +463,127 @@ Frame概念在人工智能中的应用可以追溯到马文·明斯基（Marvin 
 
 **槽填充**的实现方法有很多，常见的方法是用**树结构**表示一个frame，根节点为frame的名字，叶子节点表示槽位，槽填充通过不断遍历叶节点，执行未填充叶节点的响应（例如一段机器回复），直到一棵树被填充完整为止。
 
-Frame-based方法提出后被应用到很多商用对话系统中，如工业界对话系统的 **语音标记语言** VoiceXML。frame之间通过特定跳转逻辑连接，或用一个流程图来连接，一个多任务的对话项目就能快速开发出来。VoiceXML 的对话逻辑用 XML 来定义，frame（在 VoiceXML 中被称为 orm）是 XML 文档的核心组成部分，其 FIA（Form Interpretation Algorithm）算法通过不断遍历 frame 中所有槽位，找到未填充槽位后，将其对应的回复（prompt）输出给 TTS，TTS 生成一段语音给用户，一种 FIA 实现如图。
+Frame-based方法提出后被应用到很多商用对话系统中，如工业界对话系统的 **语音标记语言** `VoiceXML`。frame之间通过特定跳转逻辑连接，或用一个流程图来连接，一个多任务的对话项目就能快速开发出来。VoiceXML 的对话逻辑用 XML 来定义，frame（在 VoiceXML 中被称为 orm）是 XML 文档的核心组成部分，其 FIA（Form Interpretation Algorithm）算法通过不断遍历 frame 中所有槽位，找到未填充槽位后，将其对应的回复（prompt）输出给 TTS，TTS 生成一段语音给用户，一种 FIA 实现如图。
 - ![图](https://pic2.zhimg.com/80/v2-8c433ca8127ce47f28626d9f6009dff1_1440w.jpg)
 对话交互中的任务被一个个frame表单表示，frame 之间通过特定跳转逻辑连接，或用一个流程图来连接，一个多任务的对话项目就能快速开发出来。现在大多通用 chatbot / 智能对话平台仍然会采用**槽填充**方法，例如图，IBM Watson 的对话配置界面。现在大多通用chatbot/智能对话平台仍然会采用槽填充方法，如IBM Watson 的对话配置界面
 - ![图](https://pic4.zhimg.com/80/v2-b9b4a120efb876b2f9e43866b6686dfb_1440w.jpg)
+
+### VoiceXML
+
+资料
+- [VoiceXML简介](https://www.cnblogs.com/keystone/p/10750188.html)
+- [VoiceXML中文教程](https://blog.csdn.net/kyle_blog/article/details/3137149)
+
+VoiceXML就是**语音**网络世界的HTML，一种用于语音应用的开放标准的标记语言。VoiceXML的问世使得为HTML发展起来的web体系也能够轻松地创建和使用语音应用。
+
+**什么是VoiceXML**
+
+VoiceXML是建立于XML语言规范基础之上，应用于语音浏览的标记语言。如果说HTML是一种用于描述视觉元素，让用户通过键盘鼠标和网络应用交互的标记语言；那么VoiceXML就是一种用于描述听觉元素，让用户通过电话和网络应用交互的标记语言。
+
+它的出现是为了简化AT&T一个名为`PML`（Phone Markup Language）项目中语音识别程序的开发过程。经过AT&T的重新组织，AT&T，Lucent and Motorola的开发团队继续致力于开发他们的类PML语言。
+
+就像HTML默认需要一个图形化的web浏览器，输入输出装置（通常是键盘，鼠标），VoiceXML也默认需要一个带音频输入输出，以及键盘输入的语音浏览器。语音浏览器中的语音识别部分负责处理语音输入。语音输出可以是录音，也可以是语音浏览器的TTS（Text-To-Speech）合成语音输出。
+
+语音浏览器通常是运行在同时和互联网（Internet）以及公共交换电话网（PSTN）相连的专用语音通道节点上。这种语音通道可以支持数千通话同时进行，可以被当今世界超过15亿电话访问。
+
+![](https://img2018.cnblogs.com/blog/1589819/201904/1589819-20190422150300383-981997149.jpg)
+
+ VoiceXML是用来创建音频对话的，主要包括**语音合成**、**数字化音频**、**语音识别**、**DTMF按键输入识别**、**录音**、**通话**、**混合主动式会话**。它的主要作用是把基于网络的开发和信息这两者的优势引入语音应答系统。
+
+**发展历史**
+
+- 1995年AT&T研究院的Dave Ladd, Chris Ramming, Ken Rehor以及Curt Tuckey在头脑风暴关于互联网会如何改变电话应用的时候，产生了一些新的想法：为什么不设计这样一个系统来运行一种可以解析某种语音标记语言的语音浏览器，用来把互联网的内容和服务提供到千家万户的电话上。于是，AT&T就开始“电话网络项目”（Phone Web Project）。之后，Chris继续留在AT&T，Ken去了朗讯，Dave和Curt去了摩托罗拉。1999年初的时候，他们分别在各自的公司迈出了语音标记语言规范实质性的第一步。因为他们的密友关系，这几家公司合作成立了一个VoiceXML论坛组织，IBM也作为一个创始公司加入了进来。
+- 1999年3月至8月，这个论坛的一个小组发布了VoiceXML 0.9版本。
+- 2000年3月，VoiceXML 1.0问世。
+- 一个月后，VoiceXML论坛把1.0规范提交给了权威的World Wide Web组织（W3C）。
+- 2000年5月，W3C接手了这个VoiceXML 1.0规范。
+- 2001年10月，VoiceXML 2.0试验版问世。
+- 2002年4月，最后一个版本的2.0试验版发布。
+- 2003年1月，VoiceXML 2.0正式版发布。
+
+
+**什么是VoiceXML Browser**
+
+就像HTML由网页浏览器来将文本标记解释成各种视觉元素一样，VoiceXML也由VoiceXML Browser来处理其中的各种标记，一个VoiceXML Browser至少需要支持以下功能：音频文件的播放、录音、TTS(Text To Speech)、ASR(Automated Speech Recognition)、DTMF检测。通常，支持VoiceXML的媒体服务器(Media Server)、IVR Platform，其核心都是一个VoiceXML Browser，或者说它们就是一个VoiceXML Browser。
+
+
+**VoiceXML能干什么**
+
+VoiceXML不是万能的，它不能代替HTML，WebService等其它Web应用，而是它们在语音方面的补充。让我们看一个非常简单的例子，用户拨打一个电话，接通后根据语音提示输入股票代码，听取相应的股票价格。在这个例子中，VoiceXML都做了什么？
+- 1、播放语音提示；
+- 2、检测用户电话键盘输入；
+- 3、通过发送携带着输入的股票代码的HTTP请求来调用查询股票的Web应用；
+- 4、利用TTS技术将返回的股票价格转换为语音，播报给用户。
+
+![流程图](https://p-blog.csdn.net/images/p_blog_csdn_net/kyle_blog/EntryImages/20081024/Picture%2013.png)
+
+**VoiceXML语言**
+
+VoiceXML 2.0 是一个用于创建**自动语音识别** (ASR) 和**互动式语音应答** (IVR) 应用的**可扩展标记语言** (XML)。VoiceXML继承了XML的标签风格。一个VoiceXML应用通常由多个文件（document）构成，这些文件均为.vxml后缀，由标记xml以及vxml版本开始。
+
+在vxml标签下，document由多个离散的对话元素组成，称为**表单**（form）。每个form有各自的名称，且负责执行对话的一个部分。form标签底下含有一系列的用来执行应用的各种任务的元素，大体上可分为两类：**field** item和**control** item。
+- Field item负责一些识别任务,包括从通话者吸收信息，给变量赋值，也可能包含有一些指令用来告诉通话者应该说些什么，一些语法规则来定义如何解析通话者说的话等等。
+  - 包含<field>, <record>, <transfer>, <object>, <subdialog>
+- Control item则负责一些非识别的任务。包含<block>, <initial>
+
+看一个VoiceXML文件的小例子：
+
+```xml
+<?xml version="1.0"?>
+<!-- 或 <vxml version="2.0"> -->
+<vxml application="tutorial.vxml" version="2.0">
+<form id="someName">
+<block>
+<prompt> Created by tutee
+</block>
+</form>
+</vxml>
+```
+
+[VoiceXML2.0规范](https://blog.csdn.net/haha_wodexuexi/article/details/5973752)
+- 第一章介绍它的背景、基本概念和用途；
+- 第二章介绍form的对话框结构（dialog constructs）、menu、link和它们的解释机制FIA（Form Interpretation Algorithm）；
+- 第三章介绍用户的DTMF（Dual Tone Multi-Frequency）和语音输入用到的语法；
+- 第四章介绍系统输出用到的语音合成和预先录制的音频；
+- 第五章介绍对话框（Dialog）流程的控制，包括变量、事件和可执行元素；
+- 第六章介绍各种环境特性，例如参数（Parameter）、属性（Property）和资源处理；
+
+附录提供了包括VoiceXML计划、FIA（Form Interpretation Algorithm）、音频文件格式等附加信息。
+
+示例：要求用户选择一种饮料，然后把它提交给服务器端的一个脚本
+-  field是一个输入域，用户必须给field提供一个值，否则就不可能进行到form中的下一个元素。
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml xmlns="http://www.w3.org/2001/vxml"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.w3.org/2001/vxml
+          http://www.w3.org/TR/voicexml20/vxml.xsd"
+          version="2.0">
+  <form>
+    <field name="drink">
+      <prompt>Would you like coffee, tea, milk, or nothing?</prompt>
+      <grammar src="drink.grxml" type="application/srgs+xml"/>
+    <block>
+      <submit next="http://www.drink.example.com/drink2.asp"/>
+    </block>
+    </field>
+  </form>
+</vxml>
+```
+
+实现效果
+
+```
+C (computer): Would you like coffee, tea, milk, or nothing?
+H (human): Orange juice.
+C: I did not understand what you said. (a platform-specific default message.) 
+C: Would you like coffee, tea, milk, or nothing?
+H: Tea
+C: (continues in document drink2.asp) 
+```
+
+
 
 ## 5. 基于目标的方法（树+栈+字典）
 
@@ -493,7 +610,7 @@ Grosz假设任务型的对话结构可以按**意图**/**目标**（purpose）�
 - intentional structure 即表示对话的**意图**结构
 - attentional state 指的就是每一个时刻的对话**焦点**。
 
-根据基于目标的对话理论框架，研究者们开始考虑如何将其应用到人机对话系统，典型的代表有Collagen和RavenClaw。要实现基于目标的对话理论，首先需要考虑用什么样的方式来表示这样的对话结构。一般的做法是，用**树**（tree）表示整个对话的组织结构，用**栈**（stack）维护对话进行中每一时刻的对话焦点，用**字典**（dict）存储对话栈中每个对话目标所依赖的信息。
+根据基于目标的对话理论框架，研究者们开始考虑如何将其应用到人机对话系统，典型的代表有 Collagen 和 [RavenClaw](https://www.cs.cmu.edu/~dbohus/ravenclaw-olympus/prerequisites.html) 。要实现基于目标的对话理论，首先需要考虑用什么样的方式来表示这样的对话结构。一般的做法是，用**树**（tree）表示整个对话的组织结构，用**栈**（stack）维护对话进行中每一时刻的对话焦点，用**字典**（dict）存储对话栈中每个对话目标所依赖的信息。
 
 由于一个对话任务的总目标总是可以拆分成多个小目标，所以对话目标可以看成一个层次结构，这就很适合用**树形**结构表示。
 - 示例：简化版的信用卡还款业务如图，目标是信用卡还款，对话被分成了多个小目标（暂且称二级目标），分别是：用户初始化、获取账号信息、询问还款信息、还款操作，以及结束语。为了完成对话的二级目标，继续将目标拆分成三级目标，这样整个对话的多层次树结构就出来了。在 RavenClaw 中，树结构中的节点分成两类
