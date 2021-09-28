@@ -818,7 +818,28 @@ git blame filename
 - Git LFS（Large File Storage, 大文件存储）是可以把音乐、图片、视频等指定的任意文件存在 Git 仓库之外，而在 Git 仓库中用一个占用空间 1KB 不到的文本指针来代替的小工具。通过把大文件存储在 Git 仓库之外，可以减小 Git 仓库本身的体积，使克隆 Git 仓库的速度加快，也使得 Git 不会因为仓库中充满大文件而损失性能。
 - 使用 Git LFS，在默认情况下，只有当前签出的 commit 下的 LFS 对象的当前版本会被下载。此外，我们也可以做配置，只取由 Git LFS 管理的某些特定文件的实际内容，而对于其他由 Git LFS 管理的文件则只保留文件指针，从而节省带宽，加快克隆仓库的速度；也可以配置一次获取大文件的最近版本，从而能方便地检查大文件的近期变动。详见后文进阶使用
 
-## git问题
+## git命令问题
+
+### dev分支push被拒
+
+【2021-9-28】参考[地址](https://blog.csdn.net/whiteBearClimb/article/details/118733543)，错误信息：
+
+```
+To https://git.lianjia.com/aisearch/speech/nlu-service.git
+ ! [remote rejected] dev-wqw -> dev-wqw (pre-receive hook declined)
+error: failed to push some refs to 'https://git.lianjia.com/aisearch/speech/nlu-service.git'
+```
+
+分析：
+- 原因1：本地git没有配置好用户信息
+  - 解决：添加配置信息
+    - 配置gitlab的邮箱：git config user.email jojo.jiang@XXXXadmin.com
+    - 配置gitlab用户名：git config --global user.name “jojo.jiang”
+    - 查看：git config --list
+    - 随便修改某个文件，直接提交：git push origin dev-wqw （这个步骤不能省）
+- 原因2：自身权限不够（mainteiner以下），dev分支被protected
+  - 解决：找管理员提升权限
+
 
 ###  OpenSSL SSL_read
 
