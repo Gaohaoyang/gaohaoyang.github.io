@@ -1285,11 +1285,14 @@ mathjax: true
 
 ### 小程序开发
 
+微信小程序是一个运行在微信app上的一个webview，一个小程序页面由4个文件组成，分别是：js(**页面逻辑**)、wxml(**页面结构**)、json(**页面配置**)、wxss(**页面样式**)。和网页的组成一模一样，wxml->html，wxss->css。
+
+
 微信电商小程序
 - [代码](https://gitee.com/sansanC/wechatApp)：外卖小程序，电商小程序，门店类小程序，展示类小程序，批发商城小程序。
 - 来客推，[代码](https://gitee.com/laiketui/open)，[效果演示](https://www.laiketui.com/action)，包含商城管理后台（含SAAS中控平台/多租户平台）、PC端、商家管理后台等
 
-
+【2021-9-29】头条用户[创业程序猿港锅锅](https://www.toutiao.com/c/user/token/MS4wLjABAAAApCzhz0U0iNyQ07N0WsyRejhDz4sURxnD-DGe9RNb6R8/?source=weitoutiao_detail)的小程序开发生意，[交友小程序](https://www.toutiao.com/w/i1711477462767629)报价3280，结果老板说太便宜了，主动加价2000成交，其他[报价清单](http://www.tk3.cn/Article/912.html)
 
 ## 短视频
 
