@@ -226,6 +226,10 @@ mathjax: true
 
 # 团队管理
 
+普通管理者和有些管理者区别
+
+![](https://p26.toutiaoimg.com/img/tos-cn-i-qvj2lq49k0/1712ba18903046c1a964157ad9271944~tplv-obj:1000:4572.image)
+
 ## 如何分配工作
 
 背景介绍：任务背景信息
