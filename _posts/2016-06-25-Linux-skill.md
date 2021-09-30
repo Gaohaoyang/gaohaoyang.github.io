@@ -814,9 +814,55 @@ git blame filename
 
 ![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/c661edf2db1e41ef97ff21347c8ca89a~tplv-obj:1674:4096.image?from=post)
 
+### git lfs
+
 【2021-6-7】git大文件管理，[Git LFS操作指南](https://zzz.buzz/zh/2016/04/19/the-guide-to-git-lfs/)
 - Git LFS（Large File Storage, 大文件存储）是可以把音乐、图片、视频等指定的任意文件存在 Git 仓库之外，而在 Git 仓库中用一个占用空间 1KB 不到的文本指针来代替的小工具。通过把大文件存储在 Git 仓库之外，可以减小 Git 仓库本身的体积，使克隆 Git 仓库的速度加快，也使得 Git 不会因为仓库中充满大文件而损失性能。
 - 使用 Git LFS，在默认情况下，只有当前签出的 commit 下的 LFS 对象的当前版本会被下载。此外，我们也可以做配置，只取由 Git LFS 管理的某些特定文件的实际内容，而对于其他由 Git LFS 管理的文件则只保留文件指针，从而节省带宽，加快克隆仓库的速度；也可以配置一次获取大文件的最近版本，从而能方便地检查大文件的近期变动。详见后文进阶使用
+
+普通场景不论是针对小型的代码文本文件、还是比较大型的图片文件，在相关变更从本地提交到远端仓库时，所有的相关文件资源都会完整的存储在git server。就图片中的例子而言，如果图片文件越来越多，改动频次越来越大，仓库的体积将极速膨胀起来。
+
+Git 是业界流行的分布式版本控制工具，本地仓库与远端仓库同样保存了全量的文件和变更历史，这样让代码协作变得简单和高效。但也正因为如此，Git针对大型文件（例如图片、视频或其他二进制文件）的版本控制，也会存在一些问题，主要有两点：
+- 效率变慢：不管实际上用户是否使用到这些大文件的历史，都需要把每一个文件的每一个版本下载到本地仓库。毫无疑问，下载耗时的增加给用户带来了更多的等待时间。
+- 空间变大：一个Git仓库存放的大型的文件越多，加之伴随着其关联提交不断增多，Git仓库会以非常快的速率膨胀，占用更多的磁盘空间。
+
+Git LFS 为了解决大文件托管的效率问题，提供了五大特性，抽象看来为：
+- 更大：支持GB级别的大文件版本控制。
+- 更小：让Git仓库空间占用减小。
+- 更快：仓库的克隆和拉取更快。
+- 透明：Git使用上对用户完全透明。
+- 兼容：权限控制上完全兼容（兼容Codeup权限控制）。
+
+
+LFS处理流程
+
+- ![](https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/4613725161/p240002.png)
+
+参考：[如何使用Git LFS](https://help.aliyun.com/document_detail/206889.html)
+
+安装
+
+```shell
+curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+yum install git-lfs
+git lfs install
+```
+
+
+使用方法
+- 执行 git lfs install 开启lfs功能
+- 使用 git lfs track 命令进行大文件追踪 例如git lfs track "*.png" 追踪所有后缀为png的文件
+- 使用 git lfs track 查看现有的文件追踪模式
+- 提交代码需要将gitattributes文件提交至仓库. 它保存了文件的追踪记录
+- 提交后运行git lfs ls-files 可以显示当前跟踪的文件列表
+- 将代码 push 到远程仓库后，LFS 跟踪的文件会以『Git LFS』的形式显示:
+- clone 时 使用'git clone' 或 git lfs clone均可
+
+限制
+- Window平台，单个文件不支持超过4G，issues 2434
+- Window用户必须保证已经安装Git Credential Manager，否则可能导致操作被无限挂起，issues 1763
+- 不同于Gitlab硬编码的LFS下载token超时时间(30分钟)，Codeup会根据将要下载的文件列表动态计算token超时时间，但是如果位于网络环境不好的环境，仍旧可能导致token超时的情况。如果需要根据需求调整，可以联系Codeup系统管理员处理。
+
 
 ## git命令问题
 
@@ -1179,38 +1225,39 @@ pip3 list
 
 ## 文件传输
 
-- 【2017-12-16】远程文件传输的几种方式：
-   - secureCRT、ftpxp客户端
-   - scp命令
-   - rsync命令
-   - ftp、http服务
-      - 【2018-1-4】python搭建简易web服务，可以下载文件
-         - 服务端：python -m SimpleHTTPServer 8088
-         - 客户端浏览器：http://uemc-train-srv00.gz01:8088/
-         - 参考：[三种Shell脚本编程中避免SFTP输入密码的方法](http://blog.csdn.net/hereiskxm/article/details/7861759)
-   - sftp服务
-   - szrz命令
-   - nc命令
-      - Linux网络工具中的“瑞士军刀”盛誉的netcat,能通过TCP和UDP在网络中读写数据
-      - (1) 检测端口是否可用：
-         - nc -v www.thanks.live 80
-      - （2）文件传输
-         - 接收端：nc -l 9995 > tmp
-         - 发送端：nc 10.200.0.79 9995 < send_file
-         - 注：
-            - 端口范围(1024,65535)
-            - 发送、接收顺序不限
-            - 传输目录
-               - 接收端：nc -l 9995 \| tar xfvz -
-               - 发送端：tar cfz - * \| nc 10.0.1.162 9995
-      - （3）聊天功能
-         - 类似文件传输操作步骤，去掉文件定向（<>）即可
-         - A：nc -l 9995
-         - B：nc 10.200.0.79 9995
-      - （4）telnet服务器（远程登录）
-         - 服务端：nc -l -p 9995 -e bash
-         - 客户端：nc 10.200.0.79 9995
-   - samba
+【2017-12-16】远程文件传输的几种方式：
+- secureCRT、ftpxp客户端
+- scp命令
+- rsync命令
+- ftp、http服务
+  - 【2018-1-4】python搭建简易web服务，可以下载文件
+      - 服务端：python -m SimpleHTTPServer 8088
+      - 客户端浏览器：http://uemc-train-srv00.gz01:8088/
+      - 参考：[三种Shell脚本编程中避免SFTP输入密码的方法](http://blog.csdn.net/hereiskxm/article/details/7861759)
+- sftp服务
+- szrz命令
+- nc命令
+  - Linux网络工具中的“瑞士军刀”盛誉的netcat,能通过TCP和UDP在网络中读写数据
+  - (1) 检测端口是否可用：
+      - nc -v www.thanks.live 80
+  - （2）文件传输
+      - 接收端：nc -l 9995 > tmp
+      - 发送端：nc 10.200.0.79 9995 < send_file
+      - 注：
+        - 端口范围(1024,65535)
+        - 发送、接收顺序不限
+        - 传输目录
+            - 接收端：nc -l 9995 \| tar xfvz -
+            - 发送端：tar cfz - * \| nc 10.0.1.162 9995
+  - （3）聊天功能
+      - 类似文件传输操作步骤，去掉文件定向（<>）即可
+      - A：nc -l 9995
+      - B：nc 10.200.0.79 9995
+  - （4）telnet服务器（远程登录）
+      - 服务端：nc -l -p 9995 -e bash
+      - 客户端：nc 10.200.0.79 9995
+- samba
+- Git LFS
 
 ## 自动登录
 
