@@ -3,7 +3,7 @@ layout: post
 title:  "密码学-Cryptography"
 date:   2020-05-30 00:13:00
 categories: 密码学
-tags: 密码学 同态加密 彩虹表 加盐 量子计算机
+tags: 密码学 同态加密 彩虹表 加盐 量子计算机 王小云
 excerpt: 密码学知识，常见的加密、解码算法，对称密钥、非对称密钥和Hash散列
 author: 鹤啸九天
 mathjax: true
@@ -14,6 +14,9 @@ mathjax: true
 
 # 总结
 
+- 【2021-10-7】[未来科学大奖得主访谈：王小云院士的数学和密码人生](https://www.163.com/dy/article/EP2RHHBP0538057A.html)，微信公众号[好玩的数学](https://mp.weixin.qq.com/s/9ii3N4OkXEtSHCLjR600tw)
+  - 2019年9月7日，2019年“未来科学大奖”数学与计算机科学奖宣布授予密码学家王小云，奖励她在密码学领域的开创性贡献。王小云创造了一种毁灭性的密码分析方法，破解了一个又一个国际通用的算法
+  - 在密码分析领域，她系统给出了包括 MD5, SHA-1 在内的系列 Hash 函数算法的碰撞攻击理论，提出了对多个重要 MAC 算法 ALPHA-MAC、MD5-MAC 和 PELICAN 等的子密钥恢复攻击，以及 HMAC-MD5 的区分攻击思想。在密码设计领域，主持设计了国家密码算法标准 Hash 函数 SM3，该算法在我国金融、交通、电力、社保、教育等重要领域得到广泛使用，并于2018年被成功纳入 ISO/IEC 国际密码算法标准。
 - [对话Peter Shor： 量子计算机威胁到网络加密只是一个时间问题](https://zhuanlan.zhihu.com/p/314061733)
 
 
