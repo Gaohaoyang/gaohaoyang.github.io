@@ -3,7 +3,7 @@ layout: post
 title:  "生命科学的终极讨论-Life Science"
 date:   2019-09-28 09:30:00
 categories: 自然科学
-tags: 梁冬 华大基因 生命 自然 宇宙 神学 中医 西医 病毒 细菌 真菌 SARS SARI 武汉肺炎 埃博拉 蝙蝠 血型 薛定谔的猫 芝诺的乌龟 拉普拉斯兽 麦克斯韦妖 量子力学 微积分 经典力学 热力学第二定律 甲醛 癌症 果壳 饮酒
+tags: 梁冬 华大基因 生命 自然 宇宙 神学 中医 西医 病毒 细菌 真菌 SARS SARI 武汉肺炎 埃博拉 蝙蝠 血型 薛定谔的猫 芝诺的乌龟 拉普拉斯兽 麦克斯韦妖 量子力学 微积分 经典力学 热力学第二定律 甲醛 癌症 果壳 饮酒 地理
 excerpt: 生命是什么，人类是地球统治者吗，科学的尽头是神学吗？
 mathjax: true
 ---
@@ -101,6 +101,14 @@ mathjax: true
 
 
 <iframe src="//player.bilibili.com/player.html?aid=542697065&bvid=BV1Mi4y1L7o9&cid=252132939&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+## 地球历史
+
+### 中国从何而来
+
+【2021-10-7】[中国从哪里来？——以地理的视角](https://www.bilibili.com/video/BV1SU4y1A7wX)，青藏高原，改变行星气候，亚洲水塔
+- <iframe src="//player.bilibili.com/player.html?aid=675759092&bvid=BV1SU4y1A7wX&cid=417052243&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 
 
 # [觉者：梁冬对话华大基因CEO尹烨](https://www.bilibili.com/video/av19676456)
