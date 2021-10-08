@@ -1399,7 +1399,104 @@ Airflow的核心构建块, 概念化：
 
 Operator不需要立即分配给DAG（以前dag是必需的参数）。但是一旦operator分配给DAG, 它就不能transferred或者unassigned. 当一个Operator创建时，通过延迟分配或甚至从其他Operator推断，可以让DAG得到明确的分配
 
+[工作流管理平台 Airflow 入门](https://leeguoren.blog.csdn.net/article/details/88741701) 安装
+
+```shell
+# 默认目录在~/airflow，也可以使用以下命令来指定目录
+export AIRFLOW_HOME=~/airflow
+ 
+pip install apache-airflow
+# 初始化数据库
+airflow initdb
+# 启动web服务，默认端口为8080，也可以通过`-p`来指定
+airflow webserver -p 8080
+# 启动 scheduler
+airflow scheduler
+```
+
+
 Python版DAG示例：
+
+```python
+# coding: utf-8
+ 
+from airflow import DAG
+from airflow.operators.python_operator import PythonOperator
+from datetime import datetime, timedelta
+ 
+# 定义默认参数
+default_args = {
+    'owner': 'airflow',  # 拥有者名称
+    'start_date': datetime(2018, 6, 6, 20, 00),  # 第一次开始执行的时间，为格林威治时间，为了方便测试，一般设置为当前时间减去执行周期
+    'email': ['shelmingsong@gmail.com'],  # 接收通知的email列表
+    'email_on_failure': True,  # 是否在任务执行失败时接收邮件
+    'email_on_retry': True,  # 是否在任务重试时接收邮件
+    'retries': 3,  # 失败重试次数
+    'retry_delay': timedelta(seconds=5)  # 失败重试间隔
+}
+ 
+# 定义DAG
+dag = DAG(
+    dag_id='hello_world',  # dag_id
+    default_args=default_args,  # 指定默认参数
+    # schedule_interval="00, *, *, *, *"  # 执行周期，依次是分，时，天，月，年，此处表示每个整点执行
+    schedule_interval=timedelta(minutes=1)  # 执行周期，表示每分钟执行一次
+)
+ 
+# 定义要执行的Python函数1
+def hello_world_1():
+    current_time = str(datetime.today())
+    with open('/root/tmp/hello_world_1.txt', 'a') as f:
+        f.write('%s\n' % current_time)
+    assert 1 == 1  # 可以在函数中使用assert断言来判断执行是否正常，也可以直接抛出异常
+ 
+# 定义要执行的Python函数2
+def hello_world_2():
+    current_time = str(datetime.today())
+    with open('/root/tmp/hello_world_2.txt', 'a') as f:
+        f.write('%s\n' % current_time)
+ 
+# 定义要执行的Python函数3
+def hello_world_3():
+    current_time = str(datetime.today())
+    with open('/root/tmp/hello_world_3.txt', 'a') as f:
+        f.write('%s\n' % current_time)
+ 
+# 定义要执行的task 1
+t1 = PythonOperator(
+    task_id='hello_world_1',  # task_id
+    python_callable=hello_world_1,  # 指定要执行的函数
+    dag=dag,  # 指定归属的dag
+    retries=2,  # 重写失败重试次数，如果不写，则默认使用dag类中指定的default_args中的设置
+)
+ 
+# 定义要执行的task 2
+t2 = PythonOperator(
+    task_id='hello_world_2',  # task_id
+    python_callable=hello_world_2,  # 指定要执行的函数
+    dag=dag,  # 指定归属的dag
+)
+ 
+# 定义要执行的task 3
+t3 = PythonOperator(
+    task_id='hello_world_3',  # task_id
+    python_callable=hello_world_3,  # 指定要执行的函数
+    dag=dag,  # 指定归属的dag
+)
+ 
+t2.set_upstream(t1)
+# 表示t2这个任务只有在t1这个任务执行成功时才执行，
+# 等价于 t1.set_downstream(t2)
+# 同时等价于 dag.set_dependency('hello_world_1', 'hello_world_2')
+ 
+t3.set_upstream(t1)  # 同理
+```
+
+写完后执行它检查是否有错误，如果命令行没有报错，就表示没问题。
+- python $AIRFLOW_HOME/dags/hello_world.py
+- 查看生效的dags： airflow list_dags
+- 查看hello_world这个dag下面的tasks： airflow list_tasks hello_world
+- 查看hello_world这个dag下面tasks的层级关系：airflow list_tasks hello_world --tree
 
 ```python
 # -*- coding: utf-8 -*-
@@ -1409,6 +1506,9 @@ from airflow.operators.bash_operator import BashOperator
 from airflow.operators.dummy_operator import DummyOperator
 from airflow.models import DAG
 
+from airflow.models import Variable
+foo = Variable.get("foo"， default_var='a')  # 设置当获取不到时使用的默认值
+bar = Variable.get("bar", deserialize_json=True)  # 对json数据进行反序列化
 
 args = {
     'owner': 'airflow',
@@ -1443,7 +1543,7 @@ task.set_downstream(run_this_last)
 with DAG('my_dag', start_date=datetime(2016, 1, 1)) as dag:
     (
         dag
-        >> DummyOperator(task_id='dummy_1')
+        >> DummyOperator(task_id='dummy_1')  # 使用位移指定执行顺序，等效于op1.set_downstream(op2)
         >> BashOperator(
             task_id='bash_1',
             bash_command='echo "HELLO!"')
@@ -1465,7 +1565,20 @@ Apache Airflow 作为重要的工作流调度组件，社区活跃度非常高�
 
 #### cpp-taskflow
 
-- [github地址](https://github.com/cpp-taskflow/cpp-taskflow)
+taskflow一个写的比较好的基于task有向无环图（DAG）的并行调度的框架，之所以说写的比较好，有几点原因：
+1. 是一个兼具学术研究和工业使用的项目，并非一个玩具
+2. 现代C++开发，风格简洁
+（源码要求编译器支持C++17，也比较容易改成C++11）
+3. 文档全面
+4. 注释丰富
+
+一个通用的DAG调度框架：
+1. 拓扑结构的存储和表达: taskflow存储和表达拓扑结构的方式还是比较简单的，用Node类表示DAG中的每个结点，Graph类存储所有的Node对象，Topology类表示一个拓扑结构，后面再详细说。
+2. 拓扑结构的调度执行: taskflow的调度逻辑中为提高性能做了较多优化：通过WorkStealingQueue提高线程使用率，通过Notifier类（from Eigen库）减少生产者-消费者模式中加锁的频率等。
+3. 辅助工具或功能: taskflow提供方法可以比较简单的监视每个线程的活动、分析用户程序的性能。
+
+- [github地址](https://github.com/cpp-taskflow/cpp-taskflow), [源码分析](https://blog.csdn.net/yockie/article/details/104190147)
+
 
 在一个拥有四个任务的调度系统中，cpp-taskflow需要通过下面方式来配置DAG。
 
