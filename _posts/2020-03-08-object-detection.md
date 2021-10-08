@@ -3,7 +3,7 @@ layout: post
 title:  "目标检测--Obeject Detection"
 date:   2020-03-08 18:30:00
 categories: 计算机视觉
-tags: 深度学习 计算机视觉 GAN  yolo
+tags: 深度学习 计算机视觉 GAN  yolo cv
 excerpt: 计算机视觉之目标检测知识汇总
 author: 鹤啸九天
 mathjax: true
@@ -507,6 +507,13 @@ _编辑自原论文_
 ![](https://image.jiqizhixin.com/uploads/editor/5526e1b4-fe6c-46ec-bdf6-9347e903383a/1524810340700.jpg)
  
 _RetinaNet_
+
+
+## YOLOX
+
+【2021-10-8】2021年旷视科技推出[yolox](https://github.com/Megvii-BaseDetection/YOLOX)，[YOLOX: Exceeding YOLO Series in 2021](https://arxiv.org/abs/2107.08430)， [手把手教你使用YOLOX进行物体检测](https://jishuin.proginn.com/p/763bfbd6774b)
+
+YOLOX 是旷视开源的高性能检测器。旷视的研究者将解耦头、数据增强、无锚点以及标签分类等目标检测领域的优秀进展与 YOLO 进行了巧妙的集成组合，提出了 YOLOX，不仅实现了超越 YOLOv3、YOLOv4 和 YOLOv5 的 AP，而且取得了极具竞争力的推理速度。YOLOX-L版本以 68.9 FPS 的速度在 COCO 上实现了 50.0% AP，比 YOLOv5-L 高出 1.8% AP！还提供了支持 ONNX、TensorRT、NCNN 和 Openvino 的部署版本
 
 
 # 目标检测实践
