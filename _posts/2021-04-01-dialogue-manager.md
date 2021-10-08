@@ -1359,6 +1359,158 @@ Image('fsm.png')
   - ![](https://n.sinaimg.cn/sinakd2021222s/85/w1080h605/20210222/a2ec-kkmphps2654476.png)
   - 针对这一新的问题，达摩院考虑使用迁移学习的方法来进行解决。为此对迁移学习在这方面的应用做了一定的研究，最终提出了一个Meta-Dialog Model，对应的工作发表在ACL2020上。主要思想是将MAML（Model-Agnostic Meta-Learning）这种迁移学习的思路引入进来：在已有数据的前提下，利用MAML迁移学习的方法训练出一个比较好的元模型（Meta Model）, 当有新的场景时，可以用元模型的参数来进行初始化，这可以使得新场景下的模型有更好的初始化参数和训练起点。基于这种方法，在政务12345热线上进行了实验，得到了4个点的提升。
 
+### DAG图
+
+开源社区中DAG-based调度框架也有很多，例如`cpp-taskflow`。
+
+#### Airflow
+
+Airflow 是 Airbnb 开源的一个用 Python 编写的调度工具。于 2014 年启动，2015 年春季开源，2016 年加入 Apache 软件基金会的孵化计划。主要包括 Airflow 的服务构成、Airflow 的 Web 界面、DAG 配置、常用配置以及 Airflow DAG Creation Manager Plugin 这一款 Airflow 插件。
+
+一个工作流可以用一个 DAG 来表示，在 DAG 中将完整得记录整个工作流中每个作业之间的依赖关系、条件分支等内容，并可以记录运行状态。通过 DAG，我们可以精准的得到各个作业之间的依赖关系。
+- ![](https://upload-images.jianshu.io/upload_images/9094111-f6824a65e9234b48.png)
+
+
+[链接](https://www.jianshu.com/p/e878bbc9ead2)
+
+- Task: 一旦Operator被实例化，它被称为"任务"。实例化为在调用抽象Operator时定义一些特定值，参数化任务使之成为DAG中的一个节点。
+- 任务实例化: 一个任务实例表示任务的一次特定运行，并且被表征为dag，任务和时间点的组合。任务实例也有指示性状态，可能是“运行”，“成功”，“失败”，“跳过”，“重试”等。
+
+
+Airflow的核心构建块, 概念化：
+- （1）DAG：描述工作发生的顺序, 即工作流
+- （2）Operator：执行某些工作的模板类，即单个任务
+  - Operator通常（但不总是）原子性的，这意味着它们可以独立存在，不需要与其他Operator共享资源。DAG将确保Operator按正确的顺序运行; 除了这些依赖之外，Operator通常独立运行。实际上，他们可能会运行在两台完全不同的机器上。
+  - 注意：如果两个Operator需要共享信息，如文件名或少量数据，则应考虑将它们组合成一个Operator。如果绝对不可避免，Airflow确实有一个名为XCom的Operator可以交叉通信。
+  - Airflow为Operator提供许多常见任务，包括：
+    - BashOperator：执行bash命令
+    - PythonOperator：调用任意的Python函数
+    - EmailOperator：发送邮件
+    - HTTPOperator：发送 HTTP 请求
+    - SqlOperator：执行 SQL 命令
+    - Sensor：等待一定时间，文件，数据库行，S3键等...
+  - 还有更多的特定Operator:DockerOperator，HiveOperator，S3FileTransferOperator，PrestoToMysqlOperator，SlackOperator ...
+  - airflow/contrib/目录包含更多由社区建立的Operator。这些Operator并不总是与主包(in the main distribution)中的Operator一样完整或经过很好的测试，但允许用户更轻松地向平台添加新功能。Operators只有在分配给DAG时，才会被Airflow加载。
+- （3）Task：Operator的参数化实例
+- （4）TaskInstances(任务实例)：
+  - 1）已分配给DAG的任务
+  - 2）具有DAG特定运行相关的状态
+通过组合DAG和Operators来创建TaskInstances，可以构建复杂的工作流。
+
+Operator不需要立即分配给DAG（以前dag是必需的参数）。但是一旦operator分配给DAG, 它就不能transferred或者unassigned. 当一个Operator创建时，通过延迟分配或甚至从其他Operator推断，可以让DAG得到明确的分配
+
+Python版DAG示例：
+
+```python
+# -*- coding: utf-8 -*-
+
+import airflow
+from airflow.operators.bash_operator import BashOperator
+from airflow.operators.dummy_operator import DummyOperator
+from airflow.models import DAG
+
+
+args = {
+    'owner': 'airflow',
+    'start_date': airflow.utils.dates.days_ago(2)
+}
+
+dag = DAG(
+    dag_id='example_bash_operator', default_args=args,
+    schedule_interval='0 0 * * *')
+
+cmd = 'ls -l'
+run_this_last = DummyOperator(task_id='run_this_last', dag=dag)
+
+run_this = BashOperator(
+    task_id='run_after_loop', bash_command='echo 1', dag=dag)
+run_this.set_downstream(run_this_last)
+
+for i in range(3):
+    i = str(i)
+    task = BashOperator(
+        task_id='runme_'+i,
+        bash_command='echo "{{ task_instance_key_str }}" && sleep 1',
+        dag=dag)
+    task.set_downstream(run_this)
+
+task = BashOperator(
+    task_id='also_run_this',
+    bash_command='echo "run_id={{ run_id }} | dag_run={{ dag_run }}"',
+    dag=dag)
+task.set_downstream(run_this_last)
+#------------airflow 2.0------------
+with DAG('my_dag', start_date=datetime(2016, 1, 1)) as dag:
+    (
+        dag
+        >> DummyOperator(task_id='dummy_1')
+        >> BashOperator(
+            task_id='bash_1',
+            bash_command='echo "HELLO!"')
+        >> PythonOperator(
+            task_id='python_1',
+            python_callable=lambda: print("GOODBYE!"))
+    )
+```
+
+[AirFlow使用指南四 DAG Operator Task](https://smartsi.blog.csdn.net/article/details/76648035)
+
+
+[Apache Airflow 2.0能否满足当前数据工程需求](https://blog.csdn.net/weixin_42731853/article/details/116226461)
+
+Apache Airflow 作为重要的工作流调度组件，社区活跃度非常高，在2020年12月，Airflow正式发布了2.0版本。新UI的主要优点是自动刷新功能，您不再需要不断刷新浏览器来获取工作流程的更新状态，UI会自动刷新，您可以单击以禁用它
+- ![](https://img-blog.csdnimg.cn/20210428095216229.png)
+
+2.0版本中，可以利用完整的REST API来创建，读取，更新或删除DagRun，变量，连接或池。本地运行的Airflow，则可以通过以下URL访问Swagger UI： http://localhost:8080/api/v1/ui/
+
+#### cpp-taskflow
+
+- [github地址](https://github.com/cpp-taskflow/cpp-taskflow)
+
+在一个拥有四个任务的调度系统中，cpp-taskflow需要通过下面方式来配置DAG。
+
+```c++
+auto [A, B, C, D] = taskflow.emplace(
+      [] () { std::cout << "TaskA\n"; },
+      [] () { std::cout << "TaskB\n"; },
+      [] () { std::cout << "TaskC\n"; },
+      [] () { std::cout << "TaskD\n"; }
+    );
+    A.precede(B);  // A runs before B 
+    A.precede(C);  // A runs before C 
+    B.precede(D);  // B runs before D 
+    C.precede(D);  // C runs before D 
+}
+```
+
+生成预期的DAG图需要人工显式定义每两个节点之间的依赖关系，这种方式虽然理解比较直观
+
+#### gparallel (C++)
+
+几乎所有框架都采用了**手工配置**的方式生成调度DAG。虽然理解比较直观，但是缺点也非常明显：
+- 在有**大量**任务的时候，人工定义DAG图比较困难并且容易出错。现实中的业务系统一般是多人同时开发，这就需要模块owner对所有的任务节点之间的依赖关系进行人工梳理，**可维护性较差**。
+- 工业环境中很多业务，往往以**数据流驱动**的方式表达会更加清晰，这就需要花费大量时间来将系统逻辑从数据驱动表示强行转化为任务驱动表示来适配调度系统，耗时耗力。
+
+【2021-10-7】[gparallel：一个基于DAG的任务调度框架](https://zhuanlan.zhihu.com/p/142743586)，gparallel是一个针对具有复杂流程或逻辑的单体式信息检索系统而设计的并行任务调度框架。使用Meta Programming技术根据任务的输入和输出自动推导依赖关系，生成DAG(Directed acyclic graph)并进行并行任务调度。
+- ![](https://pic1.zhimg.com/v2-35b563efb5e987a7194cfc96793d0bb6_1440w.jpg?source=172ae18b)
+
+gparallel是一款基于`DAG`(Directed acyclic graph)的并且支持**自动依赖推导**的任务调度框架。
+
+gparallel主要思想有3个：
+- **数据划分**：将所有数据成员，按照业务逻辑和数据状态划分为不同的集合。
+- **依赖推导**：将所有的代码逻辑，按照功能划分为不同的task节点，并且自动推导task节点之间的依赖关系，建立DAG。
+- **任务调用**：通过拓扑排序，将DAG转化为偏序表示，并使用thread或者coroutine对task进行调度。
+
+[项目地址](https://github.com/galois-advertising/gparallel)
+
+编译依赖: g++8, boost_log-mt v1.70, gtest v1.10.0
+
+[Web 示例](http://graphviz.it/#/gallery/longflat.gv)：
+- ![](https://pic3.zhimg.com/80/v2-38b164fe0fcbffdf5794bd45db8f72d2_720w.jpg)
+- ![](https://pic3.zhimg.com/80/v2-01d3dc3f702666c3338678fe6c8aa41a_720w.jpg)
+
+
+
 # DM案例
 
 ## AIML
