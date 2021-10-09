@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "【读书笔记】-自私的基因"
+title:  "【读书笔记】-自私的基因 The Gene of Selfie"
 date:   2017-05-15 20:22:00
 categories: 读书笔记
 tags: 进化论 生命 心理学

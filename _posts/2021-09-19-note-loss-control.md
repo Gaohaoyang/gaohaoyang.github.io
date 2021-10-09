@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "【读书笔记】-失控"
+title:  "【读书笔记】-失控 Loss of Control"
 date:   2021-09-19 22:19:00
 categories: 读书笔记
 tags: 人工智能 凯文凯利
