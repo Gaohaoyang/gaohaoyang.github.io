@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "【读书笔记】-第一性原理 First Priciples"
+title:  "【读书笔记】-第一性原理 First Principles"
 date:   2021-09-20 22:19:00
 categories: 读书笔记
 tags: 第一性原理 归纳 演绎 亚里士多德 马斯克 笛卡尔 黎曼 几何 宇宙 数学 相对论
@@ -190,7 +190,8 @@ mathjax: true
 - ![平面几何](https://p3-tt.byteimg.com/origin/pgc-image/1e0d1f4390394df29310f3c5da896b22?from=pc)
 
 19世纪，`勒让德`证明了第5公设等价于“**三角形内角之和等于两个直角**。” 这一公设下的几何也被称为“欧几里得几何”或“平面几何”。
-- ![三角形](https://p3-tt.byteimg.com/origin/pgc-image/5dfa90b3d3ec45f7817900437e3b046a?from=pc)
+- <img src="https://p3-tt.byteimg.com/origin/pgc-image/5dfa90b3d3ec45f7817900437e3b046a" height="100%" width="500" />
+
 
 在这种几何中
 - 两条平行的直线永远不会相交
@@ -273,7 +274,7 @@ mathjax: true
 - ![双曲](https://p1-tt.byteimg.com/origin/pgc-image/56351cbfe9b14ad0b42d572ee1792a96?from=pc)
 
 与球面几何相比，双曲线几何更难以被可视化。不同于球面几何的向内闭合，双曲几何是向外张开的。一种可被用来展示双曲几何的方法叫做**庞加莱半平面模型**（Poincaré half-plane model）。这个模型与“真实”的双曲空间之间的关系，有点类似于平面地图与球面世界之间的关系。举个例子，驾驶一架飞机从北京直飞伦敦，那么在平面地图上画出的路线不会是直的，而是弯曲的。
-- ![三角形](https://p6-tt.byteimg.com/origin/pgc-image/03a7ab3514ca48ddae201e1ebfcc8f7e?from=pc)
+- <img src="https://p6-tt.byteimg.com/origin/pgc-image/03a7ab3514ca48ddae201e1ebfcc8f7e?" height="100%" width="500" />
 - 在欧几里得几何中，圆的周长与半径成正比；但在双曲几何中，圆周长与半径成指数关系。如果放大双曲圆盘的边界，就会看到在那里堆积着大量的三角形。在双曲几何中，三角形的内角是小于180度的。以庞加莱圆盘中的三角形为例，其内角和为165度。
 
 双曲几何有多种形式，其中的一种闵可夫斯基几何引入了时间维度的光锥，成为了狭义相对论的基础。
