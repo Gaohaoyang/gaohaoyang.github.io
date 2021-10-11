@@ -15,6 +15,7 @@ mathjax: true
 
 # 总结
 
+- 【2021-10-11】[因果推断研究获2021诺贝尔经济学奖](https://github.com/ZhangNanBei/Interview-all-in-one)，北京时间10月11日下午，2021年诺贝尔经济学奖揭晓，颁发给三位学者。其中Joshua D. Angrist和Guido W. Imbens因“对因果关系分析的方法学贡献”而获奖。
 - 【5】 Causal Inference in Educational Systems: A Graphical Modeling Approach
   - 标题：教育系统中的因果推理：一种图形化建模方法
   - [链接](https://arxiv.org/abs/2108.00654)
