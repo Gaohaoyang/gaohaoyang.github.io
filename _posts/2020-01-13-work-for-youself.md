@@ -14,6 +14,7 @@ mathjax: true
 
 # 资料
 
+- 【2021-10-11】猎头组织的各公司工作强度汇总，[协同文档](https://docs.qq.com/sheet/DVmhnRG15TG1Tb2Js)，[github备份](https://github.com/ZhangNanBei/WokerLifeMatters)，覆盖互联网、金融、地产等行业
 - 2019年，[996.ICU](https://996.icu/#/zh_CN)异军突起，短时间内冲上了github第一名，可见国内上班族对工作强度的怨念有多深
 - 难道只能忍受吗，能不能做些改变？
 - [2019年38种自由职业大盘点](https://zhuanlan.zhihu.com/p/32040835)
@@ -80,7 +81,7 @@ mathjax: true
    - 有关资料表明，STEM相关人员的自由职业比率比较低，可能的原因是因为，在就业市场上技术人员的工资较高（比如程序员），因此更多的人选择在大公司就职[2]。
 - ③从年龄上说，年龄越大的人从事自由职业的比率越高[3]，原因当然是多方面的，比如说职场上的年龄歧视啊。还有就是人有了一定的阅历和技能的积累之后难免会有一些想法，想要做一些自己的事情。
    - 来自巴西就业市场的数据：
-![](https://mmbiz.qpic.cn/mmbiz_png/0DtsZr7a9NhzyWyWnfmDNjIjg0R5BicicUjp1Sm0uD1iaGbfPk7b76Q33dIpq85Gd2icOibiaxuPSVzjdvibVjX3vrzSQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+     - ![](https://mmbiz.qpic.cn/mmbiz_png/0DtsZr7a9NhzyWyWnfmDNjIjg0R5BicicUjp1Sm0uD1iaGbfPk7b76Q33dIpq85Gd2icOibiaxuPSVzjdvibVjX3vrzSQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
 - ④从学历上说，倾向于自主创业的人群学历呈现出一个倒U型的分布，也就是说学历最低和学历最高的人都更倾向于自主创业[4]。当然这其中的原因是不相同的，学历最低的人，在职场被边缘化，不如出来做点小生意。 而学历最高的一群人，创业的原因可能更加积极：为了创新，为了做前人没有做过的事情。
 
 ### 二：自由职业者的收入和投入如何？
