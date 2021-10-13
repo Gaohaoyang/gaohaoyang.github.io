@@ -2399,8 +2399,47 @@ Hinton在NIPS2014[\[1\]](https://zhuanlan.zhihu.com/p/71986772#ref_1)提出了`�
 
 - 迭代路线：GPT → GPT-2 → GPT-3
 
+项目[github页面](https://github.com/openai/gpt-3)和论文[Language Models are Few-Shot Learners](https://arxiv.org/abs/2005.14165), 目前没有代码只有生成样本和数据.52页的T5，72页的GPT-3
+
+## 体验
+
+申请账号，调用官方[api](https://beta.openai.com/?app=creative-gen&demo=5)
+
+openai提供的[应用示例集合](https://beta.openai.com/examples)
+
+代码：
+
+```python
+import os
+import openai
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+# ------- 文本生成 ---------
+prompt = """We’re releasing an API for accessing new AI models developed by OpenAI. Unlike most AI systems which are designed for one use-case, the API today provides a general-purpose “text in, text out” interface, allowing users to try it on virtually any English language task. You can now request access in order to integrate the API into your product, develop an entirely new application, or help us explore the strengths and limits of this technology."""
+
+response = openai.Completion.create(model="davinci", prompt=prompt, stop="\n", temperature=0.9, max_tokens=100)
+
+# ------- 其它应用 ---------
+response = openai.Completion.create(
+  engine="davinci",
+  prompt="The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.\n\nHuman: Hello, who are you?\nAI: I am an AI created by OpenAI. How can I help you today?\nHuman: I'd like to cancel my subscription.\nAI:",
+  temperature=0.9,
+  max_tokens=150,
+  top_p=1,
+  frequency_penalty=0.0,
+  presence_penalty=0.6,
+  stop=["\n", " Human:", " AI:"]
+)
+
+print(response)
+
+```
+
+
 ## 资料
 
+- 【2021-10-13】[GPT-3 Creative Fiction](https://www.gwern.net/GPT-3) 小说作品创作
 - 【2019-2】张俊林：[效果逆天的通用语言模型 GPT 2.0 来了，它告诉了我们什么？](https://www.infoq.cn/article/pW8YaUXjTuhC6d0p*OwX)
 - [OpenAI GPT-3 API](https://openai.com/blog/openai-api/)，[Github地址](https://github.com/elyase/awesome-gpt3#awesome-gpt-3)
 - ![](https://github.com/elyase/awesome-gpt3/raw/master/screenshot.png)
@@ -2475,8 +2514,6 @@ GPT-3依旧延续自己的**单向**语言模型训练方式，只不过这次�
 - 实验证明Few-shot下GPT-3有很好的表现: 量变引起的质变
   - ![](https://pic1.zhimg.com/80/v2-77f44d864f988f74bdc9c3f29fc043c0_720w.jpg)
 
-项目[github页面](https://github.com/openai/gpt-3)和论文[Language Models are Few-Shot Learners](https://arxiv.org/abs/2005.14165), 目前没有代码只有生成样本和数据.52页的T5，72页的GPT-3
-
 传入文本作为输入，GPT输出，模型在训练期间扫描大量文本“学到”的东西产生的，3000亿个文本token的数据集用于生成模型的训练样本，训练是将模型暴露于大量文本的过程。现在看到的所有实验都来自该受过训练的模型。据估计，这需要花费355年的GPU时间，花费460万美元
 - ![](https://pic1.zhimg.com/80/v2-675873e6eb879d499511e4d3113180a4_720w.jpg)
 
@@ -2526,9 +2563,9 @@ GPT与BERT关系
 ![](https://p6-tt.byteimg.com/origin/pgc-image/f900defa52ba43f89260c42eaaee237a?from=pc)
 
 
-### GPT3工作原理
+## GPT3工作原理
 
-[How GPT3 Works - Visualizations and Animations](https://jalammar.github.io/how-gpt3-works-visualizations-animations/)
+- [How GPT3 Works - Visualizations and Animations](https://jalammar.github.io/how-gpt3-works-visualizations-animations/)，汉化版：[图解GPT3的工作原理](https://zhuanlan.zhihu.com/p/344695943)
 
 
 GPT3进行微调后，会更加惊人。微调实际上会更新模型的权重，以使模型在某些任务上表现更好
@@ -2633,13 +2670,14 @@ GPT3进行微调后，会更加惊人。微调实际上会更新模型的权重�
 ## 思考
 
 - OpenAI的创始人Sam Altman也认为GPT-3被过度炒作，在推特上表示：“ GPT-3的炒作实在太多了。它仍然存在严重的缺陷，有时还会犯非常愚蠢的错误。”
-- 问题
-    - GPT-3还是一个依赖算力和大数据的怪兽。GPT-3的训练需要花费355GPU年和460万美元，数据集包含3000亿个文本token，存储量高达45TB，参数数量更是达到1750亿，而GPT-2的参数数量是15亿。
-    - 最近的流行也不能忽视心理学效应的影响
-    - 但是，GPT-3的few-shot 学习能力不是通用的，尽管该模型在复杂任务和模式的学习上给人留下了深刻的印象，但它仍然可能会失败。例如，即使看过10,000个示例，也解决不了反写字符串那样简单的任务。
-    - 即使是OpenAI，也曾指出GPT-3存在缺陷，GPT-3的原始论文就提供了一些证据，证明GPT-3无法执行复杂的逻辑推理。
-    - GPT3的宽度为2048个token，这是它理解上下文的极限，而人类可以记住多本书的知识，并将其关联起来，在这方面，GPT-3还差得远。
-    - GPT-3的生成结果表现出的灵活性是大数据训练的结果，它无法超越数据本身，也就无法拥有组合性推理能力，不如说，它学到的是“统计层面的复制粘贴能力”。
+
+问题
+- GPT-3还是一个依赖算力和大数据的怪兽。GPT-3的训练需要花费355GPU年和460万美元，数据集包含3000亿个文本token，存储量高达45TB，参数数量更是达到1750亿，而GPT-2的参数数量是15亿。
+- 最近的流行也不能忽视心理学效应的影响
+- 但是，GPT-3的few-shot 学习能力不是通用的，尽管该模型在复杂任务和模式的学习上给人留下了深刻的印象，但它仍然可能会失败。例如，即使看过10,000个示例，也解决不了反写字符串那样简单的任务。
+- 即使是OpenAI，也曾指出GPT-3存在缺陷，GPT-3的原始论文就提供了一些证据，证明GPT-3无法执行复杂的逻辑推理。
+- GPT3的宽度为2048个token，这是它理解上下文的极限，而人类可以记住多本书的知识，并将其关联起来，在这方面，GPT-3还差得远。
+- GPT-3的生成结果表现出的灵活性是大数据训练的结果，它无法超越数据本身，也就无法拥有组合性推理能力，不如说，它学到的是“统计层面的复制粘贴能力”。
 
 ![](https://p6-tt.byteimg.com/origin/pgc-image/S6FOjrg9iyHuW9?from=pc)
 
@@ -2652,7 +2690,9 @@ GPT3进行微调后，会更加惊人。微调实际上会更新模型的权重�
 4.GPT-3 确实可以通过文字输入生成代码，但是仅限于比较简单的情况；
 5. 离 AI 真正替代程序员工作， 还有较长的路要走 。
 
-### ES句向量
+# 向量化
+
+## ES句向量
 
 - 【2020-9-15】[ElasticTransformers](https://github.com/md-experiments/elastic_transformers)
     - Elastic Transformers：Jupyter Notebook里的可扩展BERT语义搜索
@@ -2660,7 +2700,7 @@ GPT3进行微调后，会更加惊人。微调实际上会更新模型的权重�
 
 
 
-### Faiss简介
+## Faiss简介
 
 - `Faiss`是Facebook AI团队开源的针对聚类和相似性搜索库，为稠密向量提供**高效相似度搜索和聚类**，支持**十亿**级别向量的搜索，是目前最为成熟的**近似近邻搜索库**。它包含多种搜索**任意**大小向量集（备注：向量集大小由RAM内存决定）的算法，以及用于算法评估和参数调整的支持代码。Faiss用C++编写，并提供与Numpy完美衔接的Python接口。除此以外，对一些核心算法提供了GPU实现。相关介绍参考《[Faiss：Facebook 开源的相似性搜索类库](https://infoq.cn/article/2017/11/Faiss-Facebook)》
 - Faiss对一些基础的算法提供了非常高效的实现
@@ -2791,14 +2831,13 @@ print(I[-5:])
     - IVFADC+R (same as IVFADC with re-ranking based on codes) # 倒排+笛卡尔乘积索引 + 基于编码器重排
 
 
-
 Faiss 开发资料：
 - [github](https://github.com/facebookresearch/faiss)
 - [tutorial](https://github.com/facebookresearch/faiss/wiki/Getting-started)
 - [Faiss学习笔记](https://blog.csdn.net/u013185349/article/details/103637977)
 - 基于Faiss的特征向量相似度搜索引擎[Milvus](https://milvus.io/cn/)
 
-### Milvus
+## Milvus
 
 【2021-5-31】[Milvus 是什么](https://milvus.io/cn/docs/overview.md) Milvus 是一款开源的向量数据库，支持针对 TB 级向量的增删改操作和近实时查询，具有高度灵活、稳定可靠以及高速查询等特点。Milvus 集成了 Faiss、NMSLIB、Annoy 等广泛应用的向量索引库，提供了一整套简单直观的 API，让你可以针对不同场景选择不同的索引类型。此外，Milvus 还可以对标量数据进行过滤，进一步提高了召回率，增强了搜索的灵活性。
 
