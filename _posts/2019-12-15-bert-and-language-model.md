@@ -2211,11 +2211,6 @@ RoBERTa 在 BERT 的基础上取得了令人印象深刻的结果。而且，RoB
 
 UniLM、MASS 、SpanBERT 和 ELECTRA
 
-# GPT
-
-迭代路线：
-- GPT → GPT-2 → GPT-3
-
 
 # 模型蒸馏
 
@@ -2402,6 +2397,10 @@ Hinton在NIPS2014[\[1\]](https://zhuanlan.zhihu.com/p/71986772#ref_1)提出了`�
 
 # GPT模型
 
+- 迭代路线：GPT → GPT-2 → GPT-3
+
+## 资料
+
 - 【2019-2】张俊林：[效果逆天的通用语言模型 GPT 2.0 来了，它告诉了我们什么？](https://www.infoq.cn/article/pW8YaUXjTuhC6d0p*OwX)
 - [OpenAI GPT-3 API](https://openai.com/blog/openai-api/)，[Github地址](https://github.com/elyase/awesome-gpt3#awesome-gpt-3)
 - ![](https://github.com/elyase/awesome-gpt3/raw/master/screenshot.png)
@@ -2410,45 +2409,133 @@ Hinton在NIPS2014[\[1\]](https://zhuanlan.zhihu.com/p/71986772#ref_1)提出了`�
 ![](http://jalammar.github.io/images/gpt3/05-gpt3-generate-output-context-window.gif)
 
 - 资料
-    - [GPT-3的50种玩法告诉你，它很酷，但是没有通过图灵测试](https://www.toutiao.com/a6855330183403012621/)
-    - [最新最全GPT-3模型网络结构详细解析](https://www.toutiao.com/i6858589917883138571/)
-- 发展历史
-    - 2018年6月，OpenAI的研究人员使用了一种新颖的组合，将生成式深度学习架构Transformer和无监督预训练（也称为自监督学习）结合起来，得到了GPT模型。
-    - Transformer的自注意力机制提供了一种通用的方式来对输入的各个部分进行建模，使其依赖于输入的其他部分（需要大量计算）。
-    - Transformer和无监督预训练的组合不限于GPT系列模型。Google，Facebook和许多大学实验室相继提出了BERT、XLNet等语言模型。
-    - 到2019年初，OpenAI改进了其基础架构，将参数和数据数量增加10倍来扩展同一模型，即GPT-2。
-    - 随后，OpenAI推出了SparseTransformer，它是对早期Transformer模型的改进，可以可靠地处理更长的文档。
-    - 2020年，OpenAI通过其beta API发布了GPT-3，引起了人们的关注。GPT-3不仅扩大了GPT-2上使用的数据量和计算量，而且用SparseTransformer取代了原始Transformer，从而产生了迄今为止具有最佳zero-shot 和 few-shot学习性能的模型。
-    - GPT-3的few-shot学习能力使得它具备了一些非常有趣的演示功能，包括自动代码生成、“搜索引擎”、写作辅助和创意小说等。
+  - [GPT-3的50种玩法告诉你，它很酷，但是没有通过图灵测试](https://www.toutiao.com/a6855330183403012621/)
+  - [最新最全GPT-3模型网络结构详细解析](https://www.toutiao.com/i6858589917883138571/)
+  - 知乎：[如何评价1700亿参数的GPT-3？](https://www.zhihu.com/question/398114261)
+
+## 发展历史
+
+- 2018年6月，OpenAI的研究人员使用了一种新颖的组合，将生成式深度学习架构Transformer和无监督预训练（也称为自监督学习）结合起来，得到了GPT模型。
+- Transformer的自注意力机制提供了一种通用的方式来对输入的各个部分进行建模，使其依赖于输入的其他部分（需要大量计算）。
+- Transformer和无监督预训练的组合不限于GPT系列模型。Google，Facebook和许多大学实验室相继提出了BERT、XLNet等语言模型。
+- 到2019年初，OpenAI改进了其基础架构，将参数和数据数量增加10倍来扩展同一模型，即GPT-2。
+- 随后，OpenAI推出了SparseTransformer，它是对早期Transformer模型的改进，可以可靠地处理更长的文档。
+- 2020年，OpenAI通过其beta API发布了GPT-3，引起了人们的关注。GPT-3不仅扩大了GPT-2上使用的数据量和计算量，而且用SparseTransformer取代了原始Transformer，从而产生了迄今为止具有最佳zero-shot 和 few-shot学习性能的模型。
+- GPT-3的few-shot学习能力使得它具备了一些非常有趣的演示功能，包括自动代码生成、“搜索引擎”、写作辅助和创意小说等。
 
 - 【2020-8-10】[京东副总裁何晓冬：GPT-3后，人机对话与交互何去何从？CCF-GAIR 2020](https://www.leiphone.com/news/202008/BC6XqIXF3ifH6uvV.html)
 ![](https://static.leiphone.com/uploads/new/images/20200810/5f311dc980e89.jpg?imageView2/2/w/740)
-- 【2021-2-6】[GPT发家史](https://mp.weixin.qq.com/s/Y8yHaf7dm5jEQAvP9IvRRA)
-  - OpenAI 成立之初并非因为文本生成模型而知名，这点和 DeepMind 些许不同，后者专注强化学习一百年。 OpenAI 一开始两条线是**强化学习**和**生成模型**（集中 GAN），而 GPT 开始也没受到太大关注，而是在探索中 OpenAI 发现了其可能性，便开始大力投入，到现在基本上一大半项目都与其相关。所以，现今大家提起 OpenAI 相信都是马上想起 GPT，再或者和马一龙（Elon Musk）早期有一腿，又多少人还能想起强化学习和GAN呢。
-  - OpenAI 早期成员，除 Pieter Abbeel 等做强化学习的，就是一众做偏图像生成的，比如
-    - GAN 提出者 Ian Goodfellow 最早也是入职 OpenAI
-    - 同期入职的还有一个叫 Alec Radford 发明 DCGAN 的精神小伙。大家记住这个名字，因为他对 GPT 的发展应该说至关重要。
-    - 所以可以看出最早 OpenAI 就是群做强化学习和图像生成的人，没啥做 NLP 的，自然也难料想自己居然是通过 NLP 来一战成名。
+
+【2021-2-6】[GPT发家史](https://mp.weixin.qq.com/s/Y8yHaf7dm5jEQAvP9IvRRA)
+- OpenAI 成立之初并非因为文本生成模型而知名，这点和 DeepMind 些许不同，后者专注强化学习一百年。 OpenAI 一开始两条线是**强化学习**和**生成模型**（集中 GAN），而 GPT 开始也没受到太大关注，而是在探索中 OpenAI 发现了其可能性，便开始大力投入，到现在基本上一大半项目都与其相关。所以，现今大家提起 OpenAI 相信都是马上想起 GPT，再或者和马一龙（Elon Musk）早期有一腿，又多少人还能想起强化学习和GAN呢。
+- OpenAI 早期成员，除 Pieter Abbeel 等做强化学习的，就是一众做偏图像生成的，比如
+- GAN 提出者 Ian Goodfellow 最早也是入职 OpenAI
+- 同期入职的还有一个叫 Alec Radford 发明 DCGAN 的精神小伙。大家记住这个名字，因为他对 GPT 的发展应该说至关重要。
+- 所以可以看出最早 OpenAI 就是群做强化学习和图像生成的人，没啥做 NLP 的，自然也难料想自己居然是通过 NLP 来一战成名。
+
+GPT系列：
+- 2018年6月 `GPT-1`：大量数据（约5GB文本）上无监督训练，然后针对具体任务在小的有监督数据集上做微调；关键词：“scalable, task-agnostic system”；8个GPU上训练一个月；预训练模型（1.1亿参数）可[下载](https://github.com/openai/finetune-transformer-lm)；
+- 2019年2月 `GPT-2`：大量数据（约40GB文本）上无监督训练，然后针对具体任务在小的有监督数据集上做微调，尝试在一些任务上不微调（即使结果离SOTA还远）；关键词“without task-specific training”；据说在256个Google Cloud TPU v3上训练，256刀每小时，训练时长未知[2]；预训练模型（15亿参数）最终公开可[下载](https://github.com/openai/gpt-2-output-dataset)；[openai model](https://openai.com/blog/better-language-models/​openai.com/blog/better-language-models/)
+- 2020年5月 `GPT-3`：大量数据（499B tokens）上无监督训练，不微调就超越SOTA；关键词“zero-shot, one-shot, few-shot”；训练据说话费1200万刀；1750亿参数，将会开放付费API
+
+【202-7-14】[人工智能GPT3](https://zhuanlan.zhihu.com/p/159414219)
+
+2019 年初，OpenAI 发布了通用语言模型 GPT-2，能够生成连贯的文本段落，在许多语言建模基准上取得了 SOTA 性能。这一基于 Transformer 的大型语言模型共包含 15 亿参数、在一个 800 万网页数据集上训练而成。GPT-2 是对 GPT 模型的直接扩展，在超出 10 倍的数据量上进行训练，参数量也多出了 10 倍。
+
+OpenAI在最近， 新提出的 GPT-3 在网络媒体上引起啦的热议。因为它的参数量要比 2 月份刚刚推出的、全球最大深度学习模型 Turing NLP 大上十倍，而且不仅可以更好地答题、翻译、写文章，还带有一些数学计算的能力。
+- [NLP各种语言模型参数对比](https://pic2.zhimg.com/80/v2-ddabb5228a36ec649adfad9a1589d838_720w.jpg?source=1940ef5c)
+  - ![](https://pic2.zhimg.com/80/v2-ddabb5228a36ec649adfad9a1589d838_720w.jpg?source=1940ef5c)
+  - 最早的ELMO模型有94M，然后2018年7月GPT出世，模型参数有110M，接着BERT-Large有340M；后来GPT-2出世已经把参数弄到1.5b了；再后来随着Turing  NLG的出现直接将参数提升到17b，成为当时最大的模型；最后GPT-3出现了，直接将参数增加到175b，参数量基本上是第二名Turing  NLG的十倍。参考：[数据拾光者](https://www.zhihu.com/question/398114261/answer/1647770083)
+- `GPT-2` （参数15 亿）、`Megatron-BERT`（80 亿参数）、`Turing NLG`（170 亿参数），而`GPT-3`直接1700亿个参数。GPT-3不需要fine-tune，就能具有非常好的效果
+
+
+GPT-3 在许多 NLP 数据集上均具有出色的性能，包括翻译、问答和文本填空任务，这还包括一些需要即时推理或领域适应的任务，例如给一句话中的单词替换成同义词，或执行 3 位数的数学运算。新闻生成，GPT-3生成的新闻我们很难将机器写的和人类写的区分。
+
+GPT-3 是一种具有1,750亿个参数的自然语言深度学习模型，足足是 GPT-2 的 **116倍** 。该模型经过了将近0.5万亿个单词的预训练，并且在不进行微调的情况下，可以在多个NLP基准上达到最先进的性能。
+
+GPT-3 最令人惊讶的还是**模型体量**，它用的最大数据集在处理前容量达到了 **45TB**。根据 OpenAI 的算力统计单位 petaflops/s-days，训练 AlphaGoZero 需要 1800-2000pfs-day，而 OpenAI 刚刚提出的 GPT-3 用了 3640pfs-day。
+- Google的T5论文的一页实验烧了几百万美元，当时看起来已经是壕无人性了，但背靠MS的OpenAI的GPT-3需要的GPU算力是BERT的近2000倍，训练成本保守估计一千万美元，以至于训练出了一个bug也无能无力，论文只能拿出一部分篇幅研究了这个bug会有多大影响
+- 当下入坑DL建议：<font color='red'>穷搞理论，富搞预训练。</font>
+- 31个作者，72页论文，320万token（一个batch），1700亿参数，暴力出奇迹，few-shot干翻SOTA，finetune都省了（当然也tune不动），有钱真好。- 计算量（flops）是BERT的两千多倍，训练一个BERT 1.2万美元, GPT-3训练下来大约花了**1200万刀**。难怪出了bug也不敢retrain，**地主家也没余粮**了。
+- ![](https://pica.zhimg.com/80/v2-601de22700b3f16299cad6596b7c46e9_720w.jpg?source=1940ef5c)
+- 参考：[Jsgfery](https://www.zhihu.com/question/398114261/answer/1253374136)
+
+
+研究者们希望 GPT-3 能够成为更通用化的 NLP 模型，解决当前 BERT 等模型的两个不足之处：对领域内**有标记**数据的过分依赖，以及对于领域数据分布的过拟合。GPT-3 致力于能够使用**更少**的特定领域，不做 fine-tuning 解决问题。
+
+GPT-3依旧延续自己的**单向**语言模型训练方式，只不过这次把模型尺寸增大到了1750亿，并且使用45TB数据进行训练。同时，GPT-3主要聚焦于更通用的NLP模型，解决当前BERT类模型的两个缺点：
+- 对领域内有标签数据的过分依赖：虽然有了预训练+精调的两段式框架，但还是少不了一定量的领域标注数据，否则很难取得不错的效果，而标注数据的成本又是很高的。
+- 对于领域数据分布的过拟合：在精调阶段，因为领域数据有限，模型只能拟合训练数据分布，如果数据较少的话就可能造成过拟合，致使模型的泛华能力下降，更加无法应用到其他领域。
+
+因此GPT-3的主要目标是用更少的领域数据、且不经过精调步骤去解决问题。GPT-3一定程度上证明了**大力真的可以出奇迹**，无需fine-tuning就能在下游任务中“大显神威”。
+
+预训练好的GPT-3探索了不同输入形式下的推理效果：
+- ![](https://pic1.zhimg.com/80/v2-da41862b5628280989f1add7ad7aa2d4_720w.jpg)
+- Zero-shot、One-shot、Few-shot都是完全不需要精调的，因为GPT-3是单向transformer，在预测新的token时会对之前的examples进行编码。
+- 实验证明Few-shot下GPT-3有很好的表现: 量变引起的质变
+  - ![](https://pic1.zhimg.com/80/v2-77f44d864f988f74bdc9c3f29fc043c0_720w.jpg)
+
+项目[github页面](https://github.com/openai/gpt-3)和论文[Language Models are Few-Shot Learners](https://arxiv.org/abs/2005.14165), 目前没有代码只有生成样本和数据.52页的T5，72页的GPT-3
+
+传入文本作为输入，GPT输出，模型在训练期间扫描大量文本“学到”的东西产生的，3000亿个文本token的数据集用于生成模型的训练样本，训练是将模型暴露于大量文本的过程。现在看到的所有实验都来自该受过训练的模型。据估计，这需要花费355年的GPU时间，花费460万美元
+- ![](https://pic1.zhimg.com/80/v2-675873e6eb879d499511e4d3113180a4_720w.jpg)
+
+GPT3为2048个token。这就是它的“上下文窗口”。这意味着它有2048条轨道，沿着这些轨道处理token。
+
+NLP可以说是实现AGI的最大难题，NLP的突破需要一个效果很好且通用的模型，GPT-3依凭借巨大的参数与算力已经极力接近这样的性质，在许多任务上（如翻译、QA和文本填空任务）拥有出色的性能甚至取得了SOTA。然而，GPT-3还是存在一些局限，论文作者给出了未来有前景的方向：建立GPT-3尺度的双向模型。使双向模型能在少样本、零样本学习上工作。
+
+其它评论：
+- GPT-3参数量再大，还是没有逃过任何一个普通两层全连接神经网络的缺点：
+  - 灾难性遗忘
+  - 独立同分布假设
+- 1700亿参数的堆叠就会是智能的本质吗？**大一点的猴子，但还是猴子，不是人**。只是在量变并没有质变。
+- 人工智能该到了谈信仰的时候了，上一次这样争论的内容是联结主义和符号主义。Judea Pearl的结构因果模型才是真正可以称得上智能的东西。GPT-3呢？仍然处于 Association 阶段，只是在寻找数据之间的相关性，并没有从因果的角度显式地给出文本之间可解释的内在逻辑。它做不到训练集分布外的延拓，做不到因果推断，更何谈智能。总而言之，GPT-3更像是深度学习在现有算力下的一次巅峰验证，只是一个顺应时代的产物，但绝不是我们对智能最终的解决方案。
+- GPT-3不具备人类的感知思维，它的生成表现只是大数据训练的结果，无法超越数据本身，也无法拥有人类自成长型的广泛组合性推理的能力，所以，我们不如说它学会的是“统计层面的复制粘贴能力”。[知乎](https://www.zhihu.com/question/398114261/answer/1376204327)
 
 
 ## 模型结构
 
+GPT(“Generative Pre-Training”)也叫**生成式**预训练模型，之所以说它超强但不秀的原因是作为NLP中极有价值的工作，比BERT出现的早，但是名声却远远不如BERT那么响亮。
+
+GPT是典型的预训练+微调的两阶段模型。
+- **预训练**阶段就是用海量的文本数据通过无监督学习的方式来获取语言学知识
+- **微调**就是用下游任务的训练数据来获得特定任务的模型。
+
+GPT预训练模型结构主要有两个重要的点：
+- 一个是使用**Transformer**作为特征抽取器
+- 另一个是使用**单向**的语言模型。
+
+GPT与BERT关系
+- ![](https://pic2.zhimg.com/80/v2-c5295b8541bce75b8468e42f639235a6_720w.jpg?source=1940ef5c)
+
 - 原始GPT网络结构
-    - ![](https://p6-tt.byteimg.com/origin/pgc-image/f3fcfe5dd66149a59d4adb1c82b5a812?from=pc)
+  - ![](https://p6-tt.byteimg.com/origin/pgc-image/f3fcfe5dd66149a59d4adb1c82b5a812?from=pc)
 - 常见文本生成
-    - 并非所有英雄都穿 -> **斗篷**
+  - 并非所有英雄都穿 -> **斗篷**
 - GPT生成
-    - 并非所有英雄都披着斗篷 -> **但**
-    - 并非所有英雄都披着斗篷 ，但-> **全部**
-    - 并非所有英雄都披着斗篷，但全部 -> **恶棍**
-    - 并非所有英雄都披着斗篷，但全部恶棍 -> **做**
+  - 并非所有英雄都披着斗篷 -> **但**
+  - 并非所有英雄都披着斗篷 ，但-> **全部**
+  - 并非所有英雄都披着斗篷，但全部 -> **恶棍**
+  - 并非所有英雄都披着斗篷，但全部恶棍 -> **做**
 - 说明
-    - 1. 输入序列固定在2048个字（对于GPT-3）以内。将短序列作为输入时，只需用“空”值填充。
-    - 2. GPT输出不仅是一次预测（概率），而是一系列预测（长度2048）（每个可能单词的概率）。序列中每个“next”位置都是一个预测。但是在生成文本时，通常只查看序列中最后一个单词的预测。
-    - 3. 为了提高效率，GPT-3实际上使用字节级（byte-level）字节对编码（[BPE](https://huggingface.co/transformers/tokenizer_summary.html)）进行Token化。
-    - 4. 对当前Token在序列中的位置进行编码，将Token的位置（标量i，在[0-2047]中）传递给12288个正弦函数，每个函数的频率都不同
+  - 1. 输入序列固定在2048个字（对于GPT-3）以内。将短序列作为输入时，只需用“空”值填充。
+  - 2. GPT输出不仅是一次预测（概率），而是一系列预测（长度2048）（每个可能单词的概率）。序列中每个“next”位置都是一个预测。但是在生成文  时，通常只查看序列中最后一个单词的预测。
+  - 3. 为了提高效率，GPT-3实际上使用字节级（byte-level）字节对编码（[BPE](https://huggingface.co/transformers  tokenizer_summary.html)）进行Token化。
+  - 4. 对当前Token在序列中的位置进行编码，将Token的位置（标量i，在[0-2047]中）传递给12288个正弦函数，每个函数的频率都不同
 
 ![](https://p6-tt.byteimg.com/origin/pgc-image/f900defa52ba43f89260c42eaaee237a?from=pc)
+
+
+### GPT3工作原理
+
+[How GPT3 Works - Visualizations and Animations](https://jalammar.github.io/how-gpt3-works-visualizations-animations/)
+
+
+GPT3进行微调后，会更加惊人。微调实际上会更新模型的权重，以使模型在某些任务上表现更好
+
+<iframe src="https://vdn1.vzuu.com/SD/8741ab12-57a8-11eb-ad57-02310f44807a.mp4" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+
+
 
 ## 被玩high的GPT-3
 
