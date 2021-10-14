@@ -110,6 +110,12 @@ mathjax: true
      -  meta testing 阶段的输入数据的形式与训练阶段一致（2-way 5-shot），但是会在全新的类别上构建 support set 和 batch。
 - 训练过程中，每次训练（episode）都会采样得到不同 meta-task，所以总体来看，训练包含了不同的类别组合，这种机制使得模型学会不同 meta-task 中的共性部分，比如如何提取重要特征及比较样本相似等，忘掉 meta-task 中 task 相关部分。通过这种学习机制学到的模型，在面对新的未见过的 meta-task 时，也能较好地进行分类。
 
+【2021-10-13】结合最新的Prompt Tuning的思想，PaddleNLP中集成了三大前沿FSL算法：
+- **EFL**(Entailment as Few-Shot Learner)，将 NLP Fine-tune任务统一转换为二分类的文本蕴含任务；
+- **PET**(Pattern-Exploiting Training)，通过人工构建模板，将分类任务转成完形填空任务；
+- **P-Tuning**：自动构建模板，将模版的构建转化为连续参数优化问题。
+使用小样本学习策略，仅仅32条样本即可在电商评论分类任务上取得87%的分类精度
+
 ## 数据集
 
 - 图像
