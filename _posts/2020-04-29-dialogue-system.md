@@ -3,7 +3,7 @@ layout: post
 title:  "对话系统-Dialogue System"
 date:   2020-04-29 21:45:00
 categories: 深度学习
-tags: 深度学习 NLP 对话系统 QA KB-QA 多轮 闲聊 沈向洋 FSM 有限状态机 GPT 台大 陈蕴侬 JSGF 图灵测试 推荐系统 阅读理解 智能音箱 个人助理 智能客服 BERT faiss
+tags: 深度学习 NLP 对话系统 QA KB-QA 多轮 闲聊 沈向洋 FSM 有限状态机 GPT 台大 陈蕴侬 JSGF 图灵测试 推荐系统 阅读理解 智能音箱 个人助理 智能客服 BERT faiss nl2sql
 excerpt: 对话系统技术图谱
 author: 鹤啸九天
 mathjax: true
@@ -1691,6 +1691,84 @@ Select ?x where {
   - 机器去自有的非结构化文档（没有知识图谱化的文档，例如各种纯文本文章），从中寻找最接近我们重构后问题的段落。或者去搜索引擎、百科网站等等，搜索答案、或者检索问题相关的段落。
   - 定位到这个段落后，根据答案类型（这里是城市），尝试从这个段落中筛出答案。例如去搜索引擎搜索“中国的首都”，很可能第一个答案段落中的第一个出现的城市名就是我们所需要的答案。
 
+### NL2SQL
+
+NL2SQL（Natural Language to SQL）是一项将用户的自然语句转为可执行 SQL 语句的技术，有很大的实际应用价值，对改善用户与数据库之间的交互方式有很大意义。
+
+#### 介绍
+
+NL2SQL，也就是把自然语言“翻译”成机器能理解的SQL语句，在人机交互中有巨大的价值,解决了从中文人类语言到SQL这种计算机语言的转化问题，那些和你对话的AI系统们，就会变得更“聪明”，更容易理解你的问题并找到答案，App里的智能客服、家里的智能音箱们一问三不知的情况也会少很多。
+
+在 CUI（Conversation User Interface）的大背景下，如何通过自然语言自由地查询数据库中的目标数据成为了新兴的研究热点。
+
+肖仰华教授说，现在阻碍大数据价值变现的最大难题就是访问数据门槛太高，依赖数据库管理员写复杂的SQL，而且考虑到中文的表述更加多样，中文NL2SQL要比英文难很多。
+
+NL2SQL 任务的本质是将用户的**自然语言**语句转化为计算机可以理解并执行的**规范语义表示** (formal meaning representation)，是语义分析 (Semantic Parsing) 领域的一个子任务。NL2SQL 是由自然语言生成 SQL，那么自然也有 `NL2Bash`、`NL2Python`、`NL2Java` 等类似的研究。
+
+NL2Bash Dataset 的一条数据：
+
+```shell
+# NL: 
+Search for the string ‘git’ in all the files under current directory tree without traversing into ‘.git’ folder and excluding files that have ‘git’ in their names.
+# Bash: 
+find . -not -name ".git" -not -path "*.git*" -not –name "*git*" | xargs -I {} grep git {}
+```
+
+#### 示例
+
+示例：
+- 用户可能会想知道「宝马的车总共卖了多少辆？」
+  - ![](https://p6.toutiaoimg.com/origin/pgc-image/9bb34f92f03e4477a2a6d06f284157dd.png?from=pc)
+  - 表格数据是信息在经过人为整理、归纳后的一种高效的结构化表达形式，信息的价值、密度和质量高于普通的文字文本。
+- 其相应的 SQL 表达式是
+  - SELECT SUM(销量) FROM TABLE WHERE 品牌==’宝马‘
+- NL2SQL结合用户想要查询的表格，将用户的问句转化为相应的 SQL 语句，从而得到答案「8」。
+
+示例：
+- 用户问：「哪些城市的全月销量同比超过了 50% 或者当日环比大于 25%？相应的房产类型和销售面积情况如何？」
+- 表格
+  - ![](https://p6.toutiaoimg.com/origin/pgc-image/4510230326ef42819aba3bcecd1c6850.png?from=pc)
+- SQL 语句
+  - select 城市, 类型, 全月数值 (万平) from table where 全月同比 (%) > 50 or 当日环比 (%) > 25
+
+示例
+- 用户如果想问「**在哪些年里平均溢价率高于 20%**」这样的问题，依靠现有的**机器阅读理解**技术，在文本中是找不到答案的。而 NL2SQL 可以很好地弥补现有技术的不足，完善非结构化文本问答在真实落地场景中的应用，更充分地发掘此类结构化数据的价值。
+- ![](https://p6.toutiaoimg.com/origin/pgc-image/bd2a07354a7c44ccbe8e3a2858b3bcee.png?from=pc)
+
+广义来说，`KBQA` 也与 `NL2SQL` 技术有着千丝万缕的联系，其背后的做法也是将用户的自然语言转化为逻辑形式，只不过不同点在于前者转化的逻辑形式是 `SPARQL`，而不是 SQL。将生成的查询语句在知识图谱执行，直接得到用户的答案，进而提升算法引擎的用户体验。
+- ![](https://p6.toutiaoimg.com/origin/pgc-image/a392c4c51cb54f5f9f445df1137887cd.png?from=pc)
+
+#### 方法
+
+具体做法
+- 在深度学习端到端解决方案流行之前，这一领域的解决方案主要是通过高质量的语法树和词典来构建语义解析器，再将自然语言语句转化为相应的 SQL。
+- ![](https://p6.toutiaoimg.com/origin/pgc-image/7197494c674c4f3ba91132b6790d2201.png?from=pc)
+
+#### kaggle比赛
+
+[中文自动转SQL刷新纪录](https://www.toutiao.com/a6747512003088105998), 追一科技主办的首届中文NL2SQL挑战赛上，又一项超越国外水平的NLP研究成果诞生了。在NL2SQL这项任务上，比赛中的最佳成绩达到了**92.19%**的准确率，超过英文NL2SQL数据集WikiSQL目前完全匹配精度86.0%，执行匹配精度91.8%的最高成绩。
+- WikiSQL排行榜上的第一名、来自微软Dynamics 365团队的X-SQL有一些问题，模型框架不完全适配，在value抽取上colume特征不显著，容易抽取混乱。针对这些问题，冠军团队提出了M-SQL，将原本X-SQL的6个子任务改为8个子任务，并且增加三个子模型，S-num、Value抽取、Value匹配，一次性将query中含有的所有Value抽取出来，并对value和数据库表字段的隶属关系进行判断。之后进行了一些细节提升，比如在数据预处理方面，将数据、年份、单位、日期、同义词进行修正，统一query的范式；在query信息表达方面，用XLS标记替换CLS标记，这样在线下验证集上准确率提高了0.3个百分点。用到的预训练模型，则是哈工大发布的BERT-wwm-ext模型。
+- [冠军团队方案](https://github.com/nudtnlp/tianchi-nl2sql-top1)
+- 参考资料：[天池比赛](https://tianchi.aliyun.com/competition/entrance/231716/introduction), [WikiSQL](https://github.com/salesforce/WikiSQL)
+
+
+#### 数据集
+
+NL2SQL 方向已经有 WikiSQL、Spider、WikiTableQuestions、ATIS 等诸多公开数据集。不同数据集都有各自的特点，这里简单介绍一下这四个数据集。
+- (1) **WikiSQL** 是 Salesforce 在 2017 年提出的大型标注 NL2SQL 数据集，也是目前规模最大的 NL2SQL 数据集。它包含了 24,241 张表、80,645 条自然语言问句及相应的 SQL 语句。下图是其中的一条数据样例，包括一个 table、一条 SQL 语句及该条 SQL 语句所对应的自然语言语句。已经有 18 次公开提交。由于 SQL 的形式较为简单，该数据集不涉及高级用法，Question 所对应的正确表格已经给定，不需要联合多张表格，这些简化使得强监督模型已经可以在 WikiSQL 上达到执行 91.8% 的执行准确率。
+  - ![](https://p6.toutiaoimg.com/origin/pgc-image/d2512d8bbe6e4069a9eac00f07fa590e.png?from=pc)
+- (2) **Spider** 是耶鲁大学 2018 年新提出的一个较大规模的 NL2SQL 数据集。该数据集包含了 10,181 条自然语言问句、分布在 200 个独立数据库中的 5,693 条 SQL，内容覆盖了 138 个不同的领域。虽然在数据数量上不如 WikiSQL，但 Spider 引入了更多的 SQL 用法，例如 Group By、Order By、Having，甚至需要 Join 不同表，这更贴近真实场景，也带来了更高的难度。因此目前在该榜单上只有 8 次提交，在不考虑条件判断中 value 的情况下，准确率最高只有 54.7，可见这个数据集的难度非常大。
+  - ![](https://p6.toutiaoimg.com/origin/pgc-image/683dcc7e00dc4e96a2be82ce1aa46897.png?from=pc)
+- (3) **WikiTableQuestions** 是斯坦福大学于 2015 年提出的一个针对维基百科中那些半结构化表格问答的数据集，包含了 22,033 条真实问句以及 2,108 张表格。由于数据的来源是维基百科，因此表格中的数据是真实且没有经过归一化的，一个 cell 内可能包含多个实体或含义，比如「Beijing, China」或「200 km」；同时，为了很好地泛化到其它领域的数据，该数据集测试集中的表格主题和实体之间的关系都是在训练集中没有见到过的。下图是该数据集中的一条示例，数据阐述的方式展现出作者想要体现的问答元素。
+  - ![](https://p6.toutiaoimg.com/origin/pgc-image/b2cc22ede3bb4624b6e2718089c13152.png?from=pc)
+- (4) **The Air Travel Information System** (ATIS) 是一个年代较为久远的经典数据集，由德克萨斯仪器公司在 1990 年提出。该数据集获取自关系型数据库 Official Airline Guide (OAG, 1990)，包含 27 张表以及不到 2,000 次的问询，每次问询平均 7 轮，93% 的情况下需要联合 3 张以上的表才能得到答案，问询的内容涵盖了航班、费用、城市、地面服务等信息。下图是取自该数据集的一条样例，可以看出比之前介绍的数据集更有难度。
+  - ![](https://p6.toutiaoimg.com/origin/pgc-image/7f77db7fe5eb4c5b8d311c4bd64701f1.png?from=pc)
+
+#### 资料
+
+- [人工智能时代如何高效发掘数据库的价值？NL2SQL值得你关注](https://www.toutiao.com/a6698189653658305037)
+- 【2019-10-14】[中文自动转SQL刷新纪录，Kaggle大师带队拿下NL2SQL挑战赛冠军](https://www.toutiao.com/a6747512003088105998/?): 在追一科技主办的首届中文NL2SQL挑战赛上，又一项超越国外水平的NLP研究成果诞生了。在NL2SQL这项任务上，比赛中的最佳成绩达到了92.19%的准确率，超过英文NL2SQL数据集WikiSQL目前完全匹配精度86.0%，执行匹配精度91.8%的最高成绩。
+
 
 ## 闲聊型对话
 
@@ -2197,7 +2275,9 @@ ConvLab的实现基于[SLM-Lab](https://github.com/kengz/SLM-Lab)，因此继承
  
 ConvLab支持：**Multi-agent learning**、**Multi-task learning**和**Role play**。
  
-### [](https://applenob.github.io/dialog_sys/convlab/#%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE "参数配置")参数配置
+### 参数
+
+[参数配置](https://applenob.github.io/dialog_sys/convlab/#%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE "参数配置")
  
 [![image.png](https://applenob.github.io/dialog_sys/convlab/2.png)](https://applenob.github.io/dialog_sys/convlab/2.png)
  
