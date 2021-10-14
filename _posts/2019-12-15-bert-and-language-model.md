@@ -2491,6 +2491,21 @@ GPT系列：
 - 2019年2月 `GPT-2`：大量数据（约40GB文本）上无监督训练，然后针对具体任务在小的有监督数据集上做微调，尝试在一些任务上不微调（即使结果离SOTA还远）；关键词“without task-specific training”；据说在256个Google Cloud TPU v3上训练，256刀每小时，训练时长未知[2]；预训练模型（15亿参数）最终公开可[下载](https://github.com/openai/gpt-2-output-dataset)；[openai model](https://openai.com/blog/better-language-models/​openai.com/blog/better-language-models/)
 - 2020年5月 `GPT-3`：大量数据（499B tokens）上无监督训练，不微调就超越SOTA；关键词“zero-shot, one-shot, few-shot”；训练据说话费1200万刀；1750亿参数，将会开放付费API
 
+
+![](http://files.cn-healthcare.com/upload/20201117/wximg/41331605568278419)
+
+[白描网页版](https://web.baimiaoapp.com/)
+
+| 时间| 机构| 模型名称| 模型规模| 数据规模 | 计算时间|
+|---|---|---|---|---|---|
+|2018.6 | OpenAI | GPT | 110M | 4GB| 3天 |
+|2018.10 | Google | BERT | 330M | 16GB | 50天 |
+| 2019.2 | OpenAI | GPT-2 | 1.5B | 40GB | 200天 |
+| 2019.7 | Facebook | RoBERTa | 330M | 160GB | 3年 |
+| 2019.10 | Google| T5| 11B| 800GB| 66年|
+| 2020.6| OpenAl| GPT-3| 175B| 2TB| 355年|
+| 2021| 预计 | 预计|~1000B| ~10TB| ～1000年|
+
 【202-7-14】[人工智能GPT3](https://zhuanlan.zhihu.com/p/159414219)
 
 2019 年初，OpenAI 发布了通用语言模型 GPT-2，能够生成连贯的文本段落，在许多语言建模基准上取得了 SOTA 性能。这一基于 Transformer 的大型语言模型共包含 15 亿参数、在一个 800 万网页数据集上训练而成。GPT-2 是对 GPT 模型的直接扩展，在超出 10 倍的数据量上进行训练，参数量也多出了 10 倍。
@@ -2697,12 +2712,86 @@ GPT3进行微调后，会更加惊人。微调实际上会更新模型的权重�
 
 - 【2020-8-15】[强大如 GPT-3，1750 亿参数也搞不定中国话](https://www.infoq.cn/article/l7bhKDEolj06Y9dEwJ6O)
     - 魏晨：GPT-3 模型从看上去更加接近“通用人工智能”(AGI) ，可以动态学习，处理多种不同的任务，只需少量的标注数据。
+
 重点：
 1. GPT-3 参数庞大（约 1750 亿参数），能力较之前确实有所提升，但是宣传效果有夸张成分；
 2. 受参数大小影响，GPT-3 并不是一款性价比很高的模型，训练成本较高；
 3. 中文 GPT-3 的实践尚未出现；
 4.GPT-3 确实可以通过文字输入生成代码，但是仅限于比较简单的情况；
 5. 离 AI 真正替代程序员工作， 还有较长的路要走 。
+
+## 中文GPT
+
+### 好玩儿的案例
+
+【2021-10-14】[爆肝100天，我开发了一个会写作文的人工智能【17亿参数、2亿数据、1万行代码】](https://www.bilibili.com/video/BV1pr4y1w7uM) EssayKiller
+- 一个基于OCR、NLP领域模型所构建的生成式文本创作AI框架，目前第一版finetune模型针对高考作文（主要是议论文），可以有效生成符合人类认知的文章，多数文章经过测试可以达到正常高中生及格作文水平。视频中有部分细节为了方便非AI专业的观众理解，以及为了更好的节目效果，做的略有不严谨。由于要控制时长我没有展开讲，业内大佬们见谅。技术上的问题欢迎[Github](https://github.com/EssayKillerBrain/EssayKiller_V2/tree/2.0)
+
+<iframe src="//player.bilibili.com/player.html?aid=755124609&bvid=BV1pr4y1w7uM&cid=249390460&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width='800' height='600'> </iframe>
+
+### CPM 清华智源
+
+【2020-11-17】[中文版GPT-3来了？智源研究院发布清源 CPM —— 以中文为核心的大规模预训练模型](https://www.cn-healthcare.com/articlewm/20201117/content-1163510.html)
+- ![](http://files.cn-healthcare.com/upload/20201117/wximg/38391605568279885)
+- ![](http://files.cn-healthcare.com/upload/20201117/wximg/4751605568279966)
+- ![](http://files.cn-healthcare.com/upload/20201117/wximg/94871605568280187)
+- [CPM清华大学演示使用过程小说语句生成](https://www.bilibili.com/video/BV1VA411s77D/)
+- <iframe src="//player.bilibili.com/player.html?aid=330632724&bvid=BV1VA411s77D&cid=268856252&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width='800' height='600'> </iframe>
+
+北京智源人工智能研究院和清华大学研究团队合作开展大规模预训练模型，并发布[清源CPM](https://cpm.baai.ac.cn/) (Chinese Pretrained Models) 研究计划，旨在推动中文自然语言处理的研究与应用。2020 年 11 月中旬，CPM 开放第一阶段的26 亿参数规模的中文语言模型 (CPM-LM) 和217亿参数规模的结构化知识表示模型 (CPM-KM) 下载，以及相应的系统演示。
+
+清源 CPM 大规模预训练模型具有以下特点： 
+1. 学习能力强：能够在多种自然语言处理任务上，进行**零次**学习或**少次**学习达到较好的效果。
+2. 语料丰富**多样**：收集大量丰富多样的中文语料，包括百科、小说、对话、问答、新闻等类型。
+3. 行文自然流畅：基于给定上文，模型可以续写出一致性高、可读性强的文本，达到现有中文生成模型的领先效果。
+4. 模型规模大：本次发布的 CPM-LM 的参数规模为 26 亿，预训练中文数据规模100 GB，使用了 64 块 V100 GPU 训练时间约为 3 周。CPM-KG 的参数规模分别为217亿，预训练结构化知识图谱为 WikiData 全量数据，包含近 1300 个关系、8500万实体、4.8 亿个事实三元组，使用了 8 块 V100 GPU 训练时间约为 2 周。
+
+资料
+- [清源CPM主页](https://cpm.baai.ac.cn/)
+- 清源CPM [Github](https://github.com/TsinghuaAI/)
+- 预训练模型必读[论文列表](https://github.com/thunlp/PLMpapers)
+- [清源 CPM-中文GPT3-我魔改出了一个TF版本](https://zhuanlan.zhihu.com/p/297152907)
+
+
+### PLUG——阿里巴巴达摩院
+
+[PLUG测试地址](https://nlp.aliyun.com/portal#/BigText_chinese)
+- ![](https://pic1.zhimg.com/80/v2-9abea76b517e3ab3f4e24dbeddf4ced8_720w.jpg)
+
+【2021-4-19】[达摩院用128张GPU烧出“中文版GPT-3”，我试了下，这文风不是开往幼儿园的车…](https://zhuanlan.zhihu.com/p/365999690)
+
+PLUG，Pre-training for Language Understanding and Generation，顾名思义，就是集语言理解（NLU）和生成（NLG）能力于一身。要实现这一点，据团队介绍，这一模型是达摩院此前提出的两种自研模型——NLU语言模型StructBERT、NLG语言模型PALM的融合。
+
+此外，跟GPT-3的单向建模方式不同的是，它采用了编码器-解码器（encoder-decoder）的双向建模方式。整个训练过程分为两个阶段。
+- 第一阶段，以达摩院自研的语言理解模型——StructBERT作为编码器。简单来说，它是在句子级别和词级别两个层次的训练目标中，加强对语言结构信息的建模，从而提高模型的语法学习能力。这也使得PLUG具有输入文本双向理解能力，能够生成和输入更相关的内容。这个过程共训练了300B tokens训练数据。
+- 第二阶段，将这个编码器用于生成模型的初始化，并外挂一个6层、8192个隐藏层节点数的解码器，共计训练了100B tokens的训练数据。
+- ![](https://pic2.zhimg.com/80/v2-ce80eff0eaf1d9e3d1aec364a1a3904d_720w.jpg)
+
+PLUG还能为目标任务做针对性优化。GPT-3并没有利用**微调**和**梯度更新**，而是通过指定任务、展示少量演示，来与模型文本进行交互，完成各种任务。因此在面对新任务时候，不需要重新收集大量的带标签数据。但不可避免的，生成的效果不足。比如，**犯低级错误**就是GPT-3被人诟病比较多的一点。而PLUG的能力更加全面，既可以实现与GPT-3类似的**零样本**生成功能，也可以利用下游训练数据微调（finetune）模型，提升特定任务的生成质量。
+
+当然，效果实现的关键，还少不了算力和数据。PLUG负责人表示，原本计划用128张A100训练120天炼成，不过由于阿里云、算法优化等达摩院多方力量的参与，以及加速手段的有效利用，成功将日程缩短到三分之一。最后，只烧了35天就达到了这样的效果。前面也提到，PLUG的参数量达到了270亿，中文训练数据量也达到了1T以上。在语言理解任务上，PLUG以80.614分刷新了CLUE分类任务榜单记录。而在语言生成任务上，据团队介绍，其多项应用数据较业内最优水平提升了8%以上。
+- ![](https://pic4.zhimg.com/80/v2-804a587190c5cc17c24cb453b96ec3e3_720w.jpg)
+
+耗时3个月、270亿参数规模、一发布就给体验端口
+
+去年，阿里达摩院发布了自研深度语言模型体系，包括6大自研模型。
+- **通用**语言模型StructBERT
+- **多模态**语言模型StructVBERT
+- **多语言**模型VECO
+- **生成式**语言模型PALM……
+他们一直在致力于陆陆续续将模型开源出来。
+
+
+### 彩云小梦
+
+[彩云小梦](https://if.caiyunai.com/dream/#/)
+- ![](https://pic2.zhimg.com/80/v2-acb86090e26d23f3462b7ff43afef379_720w.jpg?source=1940ef5c)
+
+总结：
+- 小梦熟悉小说写作的各种套路，它有着不错的脑洞，能够一定程度上理解前文的脉络，并且不失时机地运用它知道的写作手法。
+- 不过，它的缺点也是明显的，依然是缺少常识。这导致它在遣词造句上，会写出不符合人类习惯的奇怪句子。
+- 不过小梦显然是值得期待的。甚至现在的网文作者，已经可以把小梦当作工具，在一些特定的场景里，帮助作者寻找情节的突破口。小梦写得还不够好，但它肯定看过的文章比任何人都多，未来可期。
+
 
 # 向量化
 
