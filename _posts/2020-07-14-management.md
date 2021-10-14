@@ -3,7 +3,7 @@ layout: post
 title:  "技术管理之路-Path to Management"
 date:   2020-07-14 12:00:00
 categories: 软素质
-tags: KPI OKR 孙子兵法 三十六计 创新扩散曲线
+tags: KPI OKR 孙子兵法 三十六计 创新扩散曲线 情商
 excerpt: 为什么有的人虽然工作十年，但实际上只有一年经验？
 author: 鹤啸九天
 mathjax: true
@@ -11,6 +11,22 @@ mathjax: true
 
 * content
 {:toc}
+
+
+# 职场情商
+
+工作越久越能看明白，职场内工作高情商的10个表现，[脉脉](https://maimai.cn/web/gossip_detail?src=app&webid=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlZ2lkIjoiOTNhMWZhZWMyYzk0MTFlY2EwZDU4MDE4NDRlNTAxOTAiLCJ1IjozNTM5LCJpZCI6Mjk0ODY0MjR9.37Se5u3uJ7dN5KnZ238MOhXybNcCazzaE82l6LDIKzY&share_channel=4)
+- 1、有能力不要四处**炫耀**，真希望你好的人不多。
+- 2、批评别人一定是先批评**后表扬**, 顺序不要反。
+- 3、夸人时选**人多**的地方，批评人时人越**少**越好。
+- 4、办公室里分零食，一定是在者有份儿。别人不一定喜欢吃，但是你每次都得让一下。
+- 5、不好的事情发生了，就不要再说“我早说了……、我就知道……”，马后炮只会显得你**落井下石**。
+- 6、**做人留一线**，日后好相见，实在是不对付，也不要闹太僵。
+- 7、办公室同事说话没有人接，你会主动化解尴尬。
+- 8、千万不要冒犯或得罪**小气**的人。
+- 9、对方和你谈话时心不在焉，可能是不想交谈或者还有急事，这时你要有眼色，停止说话。
+- 10、向人借钱要做到不哀求，不绑架，借钱给人，要做到不借穷，只救急。
+
 
 # 管理
 
