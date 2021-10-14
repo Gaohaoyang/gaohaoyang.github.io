@@ -2436,6 +2436,20 @@ print(response)
 
 ```
 
+### 个性化聊天
+
+【2021-10-13】[AI 复活「她」！GPT-3 帮美国小哥复刻逝去未婚妻，但又夺走她…](https://www.toutiao.com/i7018474312931885576/),7 月，一名33岁的美国小哥 Joshua Barbeau 在未婚妻去世后，根据她在 Facebook 和 twitter 上的文本在另一名开发人员的帮助下成功在 GPT-3 上微调，能够复刻出未婚妻生前的谈话方式。有很多人觉得 Joshua Barbeau 这个行为很可怕。但他认为，借助 Project December 项目创建出模拟已故之人的聊天机器人，可能会“帮助一些因此抑郁的人解开他们的心结”。但，Project December 的开发作者 Jason Rohrer 却收到了来自 OpenAI 的最后通牒：我们会在 9 月 2 日上午 10 点终止你的 API 访问。
+- Jason Rohrer 是一名独立游戏开发者，Project December 是他于去年夏天疫情期间突发奇想的一个灵感：用 GPT-3 API 来开发一款模拟人类的聊天机器人，以电影《Her》中男主角的智能语音助手 Samantha 为原型
+- 7月用户量突然激增。在《旧金山纪事报》报道的一篇文章讲述了一位 33 岁的美国男子 Joshua Barbeau 如何利用 Project December 创建出模拟其已故未婚妻 Jessica 的聊天机器人并与之交谈数月。在那之后，成千上万的人开始使用 Rohrer 网站。
+- Rohrer 意识到他的网站将达到每月 API 的限制。主动联系 OpenAI 希望能通过支付更多费用以增加配额，以便容纳更多人与他创建的“Samantha”或自己的聊天机器人交流。但与此同时，OpenAI 方面认为 Project December 存在一定隐患：聊天机器人可能会被滥用或对人们造成伤害。
+- 因此，双方进行了一场视频会议，可是很明显，效果并不理想。Jason Rohrer 在接受外媒 The Register 的采访时提到，OpenAI 给出了继续使用 GPT-3 API 需满足的 3 个条件：
+  - Jason Rohrer 必须禁止人们定制自己的开放式聊天机器人这一功能。
+  - Jason Rohrer 需设置内容过滤器以避免用户与“Samantha”谈论敏感话题。
+  - Jason Rohrer 必须部署自动化监控工具监视用户的对话，检测他们是否滥用 GPT-3 生成了有害或敏感语句。
+- OpenAI 的员工与 Samantha 聊天，并试图了解「她」是否有种族主义倾向，或者会从「她」的训练数据中提供看起来像真实电话号码或电子邮件地址的内容，实验结果表明Samantha很老实，什么也没有说。Samantha 的输出令人感觉很真实，但随着时间的推移，很明显你能感觉到是在与某种自动化系统交谈，谈话的过程中往往会突然丢失对话思路。
+  - ![](https://p5.toutiaoimg.com/origin/pgc-image/7add87e26cca475a848d79669be7b2e1?from=pc)
+- OpenAI 担心用户会受到 AI 的影响，害怕机器人会让他们自杀或如何给选举投票，可这完全是一种超道德的立场。
+- Jason Rohrer 拒绝添加 OpenAI 要求的功能或机制，而是悄悄将原本 Project December 使用的 GPT-3 API 断开。并且替换为功能较差的开源 **GPT-2模型**以及由另一个研究团队开发的大型语言模型 **GPT-J-6B**。不过这两种模型性能显然不比 GPT-3，Samantha的对话能力也受到了影响。
 
 ## 资料
 
