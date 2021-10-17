@@ -225,7 +225,7 @@ ps：和自由职业有关的书也有不少，比如说最近几年比较火的
 
 ## 只工作不上班
 
-<img src="https://img9.doubanio.com/view/subject/l/public/s33488846.jpg" height="100%" width="300" />
+<img src="https://p3.toutiaoimg.com/origin/pgc-image/f3ca07bd12c64cbdae960faf2193c498" height="100%" width="300" />
 
 目录
 - （1）`开店`：听说每三个不想上班的人中，就有一人想开店?
