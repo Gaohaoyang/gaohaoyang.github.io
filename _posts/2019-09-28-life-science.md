@@ -102,6 +102,11 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=542697065&bvid=BV1Mi4y1L7o9&cid=252132939&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+【2021-10-17】[宇宙尽头：一片死寂](https://www.bilibili.com/video/BV1z4411Y7tX/)，作者主页[SYMPHONY OF SCIENCE](https://www.symphonyofscience.com/vids)
+
+<iframe src="//player.bilibili.com/player.html?aid=52012946&bvid=BV1z4411Y7tX&cid=365220412&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+
 ## 地球历史
 
 ### 中国从何而来
@@ -120,6 +125,16 @@ mathjax: true
 - ![](http://5b0988e595225.cdn.sohucs.com/images/20181109/76c51df191df4f22a740177d10d71a27.jpeg)
 
 ![](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1583649836802&di=c888fcfb53bb4439095803128fbab220&imgtype=0&src=http%3A%2F%2Fimg3m0.ddimg.cn%2F26%2F10%2F1422015830-1_u_1.jpg)
+
+### 鸟类
+
+【2021-10-16】
+- 童年时只闻其声不见其影的鸟类
+  - <iframe src="//player.bilibili.com/player.html?aid=848164729&bvid=BV14L4y187i9&cid=413312898&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- 10种令人称奇的鸟叫
+  - <iframe src="//player.bilibili.com/player.html?aid=589902915&bvid=BV12q4y1S7id&cid=393690231&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- 100种最好听的鸟叫声大全
+  - <iframe src="//player.bilibili.com/player.html?aid=504027025&bvid=BV1zg411u7Pw&cid=366009810&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 ### 人类起源
 

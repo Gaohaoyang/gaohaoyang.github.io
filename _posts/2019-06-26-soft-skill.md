@@ -14,6 +14,8 @@ mathjax: true
 
 # 如何走向成功
 
+
+- 【2021-10-15】<font color='red'>归因于己，归功于外；因上努力，果上随缘。</font>
 - 【2020-5-16】《成功的原则》[中文完整版](https://www.bilibili.com/video/BV1Ab411J73x),[英文版本](https://www.bilibili.com/video/BV1Yb411371J)
    - 1. 你必须自己思考真相是什么？
       - * 犯错误，反思错误，总结出原因，改正错误
