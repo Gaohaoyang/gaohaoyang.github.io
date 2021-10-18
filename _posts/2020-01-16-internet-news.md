@@ -36,6 +36,7 @@ mathjax: true
   - ![](https://p3-tt.byteimg.com/origin/pgc-image/1eff0045eaa14927b6250be2b454c05d)
   - ![](https://p1-tt.byteimg.com/origin/pgc-image/aeab61a5f4e9489e838bf672d037d90b)
   - ![](https://p1-tt.byteimg.com/origin/pgc-image/e81ead35a5e94cf297b0ed8994e66508)
+- 【2021-10-17】[杭州有哪些互联网公司](https://mp.weixin.qq.com/s/gvr-HFbHtIyoWJ_6dVqoog), 头条、阿里、京东、网易、华为、中移动、腾讯、51信用卡、蘑菇街、有赞、zoom分部、思科
 
 ## 2021新格局
 
