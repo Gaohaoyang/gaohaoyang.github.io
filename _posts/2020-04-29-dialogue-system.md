@@ -1156,9 +1156,10 @@ NLU-Benchmark数据集标注了场景，动作和实体。例如：
 
 参考：[Intent Detection and Slot Filling（更新中。。。)](https://zhuanlan.zhihu.com/p/75228411)
 
-#### DIET——2020年5月
+#### DIET（RASA）——2020年5月 
 
-【2021-10-19】[DIET模型 rasa 聊天机器人核心模型论文](https://zhuanlan.zhihu.com/p/162995854)
+【2021-10-19】[DIET模型 rasa 聊天机器人核心模型论文](https://zhuanlan.zhihu.com/p/162995854)，原文：[Introducing DIET: state-of-the-art architecture that outperforms fine-tuning BERT and is 6X faster to train](https://rasa.com/blog/introducing-dual-intent-and-entity-transformer-diet-state-of-the-art-performance-on-a-lightweight-architecture/)
+- With Rasa 1.8, our research team is releasing a new state-of-the-art lightweight, multitask transformer architecture for NLU: **Dual Intent and Entity Transformer** (DIET).
 
 `DIET`模型是Dual Intent and Entity Transformer的简称, 解决了对话理解问题中的2个问题(意图分类和实体识别)。DIET使用的是纯监督的方式，没有任何预训练的情况下，**无须大规模预训练**是关键，性能好于fine-tuning Bert, 但是训练速度是bert的**6倍**。
 
