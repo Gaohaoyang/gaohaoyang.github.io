@@ -288,6 +288,80 @@ model_config.output_attentions = True
 model = transformers.BertModel.from_pretrained(MODEL_PATH,config = model_config)
 ```
 
+#### 模型不同点
+
+[关于transformers库中不同模型的Tokenizer](https://zhuanlan.zhihu.com/p/121787628)
+
+不同PLM原始论文和transformers库中数据的组织格式。其实，像Roberta，XLM等模型的中< s>, < /s>是可以等价于Bert中的[CLS], [SEP]的，只不过不同作者的习惯不同。
+
+```shell
+# Bert
+单句：[CLS] A [SEP]
+句对：[CLS] A [SEP] A [SEP]
+# Roberta
+单句：<s> A </s>
+句对：<s> A </s> </s> B </s>
+# Albert
+单句：[CLS] A [SEP]
+句对：[CLS] A [SEP] B [SEP]
+# XLNet
+单句：[A] <sep> <cls>
+句对：A <sep> B <sep> <cls>
+# XLM
+单句：<s> A </s>
+句对：<s> A </s> B </s>
+# XLM-Roberta
+单句：<s> A </s>
+句对：<s> A </s> </s> B </s>
+# Bart
+单句：<s> A </s>
+句对：<s> A </s> </s> B </s>
+```
+
+transformers库中RobertaTokenizer和BertTokenizer的不同
+- transformers库中RobertaTokenizer需要同时读取vocab_file和merges_file两个文件，不同于BertTokenizer只需要读取vocab_file一个词文件。主要原因是两种模型采用的编码不同：
+- Bert采用的是字符级别的BPE编码，直接生成词表文件，官方词表中包含3w左右的单词，每个单词在词表中的位置即对应Embedding中的索引，Bert预留了100个[unused]位置，便于使用者将自己数据中重要的token手动添加到词表中。
+- Roberta采用的是byte级别的BPE编码，官方词表包含5w多的byte级别的token。merges.txt中存储了所有的token，而vocab.json则是一个byte到索引的映射，通常频率越高的byte索引越小。所以转换的过程是，先将输入的所有tokens转化为merges.txt中对应的byte，再通过vocab.json中的字典进行byte到索引的转化。
+
+由于中文的特殊性不太适合采用byte级别的编码，所以大部分开源的中文Roberta预训练模型仍然采用的是单字词表，所以直接使用BertTokenizer读取即可， 不需要使用RobertaTokenizer。
+
+### pipeline
+
+pipeline API可以快速体验 Transformers。它将模型的预处理, 后处理等步骤包装起来，使得我们可以直接定义好任务名称后，输出文本，直接得到我们需要的结果。这是一个高级的API，可以让我们领略到transformers 这个库的强大且友好。
+
+```python
+from transformers import pipeline
+
+classifier = pipeline("sentiment-analysis")
+# 单句
+classifier("I've been waiting for a HuggingFace course my whole life.")
+# 多句
+classifier([
+    "I've been waiting for a HuggingFace course my whole life.", 
+    "I hate this so much!"
+])
+```
+
+用 pipeline API，输入任务名称，默认会选择特定已经存好的模型文件，然后会进行下载并且缓存。
+
+主要有以下三个步骤被包装起来了：
+- 输入文本被预处理成机器可以理解的格式
+- 被处理后的输入被传入模型中
+- 模型的预测结果经过后处理，得到人类可以理解的结果
+
+
+目前支持的pipeline 如下：
+- feature-extraction (get the vector representation of a text) 特征抽取
+- fill-mask 掩码回复
+- ner (named entity recognition) 命名实体识别
+- question-answering 阅读理解
+- sentiment-analysis 情感分析
+- summarization 摘要
+- text-generation 文本生成
+- translation 翻译
+- zero-shot-classification 零样本分类
+
+
 ## transformers源码
 
 参考：
