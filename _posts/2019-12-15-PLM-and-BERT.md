@@ -3054,6 +3054,21 @@ GPT与BERT关系
 
 ![](https://p6-tt.byteimg.com/origin/pgc-image/f900defa52ba43f89260c42eaaee237a?from=pc)
 
+## GPT-2
+
+【2021-10-21】[图解GPT-2完整版](https://mp.weixin.qq.com/s?__biz=MzIyNjM2MzQyNg==&mid=2247539832&idx=1&sn=907c887c260a110cf5f0375cde6e6f9b&chksm=e8738d35df04042355802506243989770ebaa25ab4df3ff28e62d4ff2d862fda3b10c4a16968&mpshare=1&scene=23&srcid=1020ygRzRzn95VkxxlIb0njd&sharer_sharetime=1634742907130&sharer_shareid=b8d409494a5439418f4a89712efcd92a#rd)，[英文原文](http://jalammar.github.io/illustrated-gpt2/)
+- GPT-2 不是一个特别新颖的架构，而是一种与 Transformer 解码器非常类似的架构。不过 GPT-2 是一个巨大的、基于 Transformer 的语言模型，它是在一个巨大的数据集上训练的。
+- GPT-2 基本上就是键盘应用程序中预测下一个词的功能，但 GPT-2 比你手机上的键盘 app 更大更复杂。GPT-2 是在一个 40 GB 的名为 WebText 的数据集上训练的，OpenAI 的研究人员从互联网上爬取了这个数据集，作为研究工作的一部分。从存储空间大小方面来比较，我使用的键盘应用程序 SwiftKey，占用了 78 MB 的空间。而最小的 GPT-2 变种，需要 500 MB 的空间来存储它的所有参数。最大的 GPT-2 模型变种是其大小的 13 倍，因此占用的空间可能超过 6.5 GB。
+- ![](http://p9.itc.cn/q_70/images03/20201111/dfb14796eddd4a4eac1f436e8d0041ec.png)
+- ![](http://p8.itc.cn/q_70/images03/20201111/6bfcefd3a0d14eb1be6fac226a89c756.png)
+- GPT-2体验：AllenAI [GPT-2 Explorer](https://gpt2.apps.allenai.org/)。它使用 GPT-2 来显示下一个单词的 10 种预测（包括每种预测的分数）。你可以选择一个单词，然后就能看到下一个单词的预测列表，从而生成一篇文章。
+
+模型结构
+- BERT 是使用 Transformer 的 Encoder 模块构建，而GPT-2 用 Transformer 的 Decoder 模块构建。
+- 一个重要差异是，GPT-2 和传统的语言模型一样，一次输出一个 token
+- GPT-2和后来的一些模型如 TransformerXL 和 XLNet，本质上都是自回归的模型。但 BERT 不是自回归模型。这是一种权衡。去掉了自回归后，BERT 能够整合左右两边的上下文，从而获得更好的结果。XLNet 重新使用了 自回归，同时也找到一种方法能够结合两边的上下文。
+- ![](http://p2.itc.cn/q_70/images03/20201111/b01d3ba72549484ea085877e173e8da5.gif)
+- 更多资料见原文
 
 ## GPT3工作原理
 
