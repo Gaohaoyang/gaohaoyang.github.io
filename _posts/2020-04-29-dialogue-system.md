@@ -1103,7 +1103,7 @@ NLU即Natural Language Understanding，负责理解用户的语句输入，一�
 
 ### 数据集
 
-意图分类和槽位填充任务主要有两个数据集`Snips`和`ATIS`。
+意图分类和槽位填充任务主要数据集`Snips`、`ATIS`和NLU-Benchmark
 
 #### ATIS
 
@@ -1111,9 +1111,23 @@ NLU即Natural Language Understanding，负责理解用户的语句输入，一�
 - 该数据集规模很小，训练集4400+，测试集800+，槽位意图识别难度不大，目前处于被刷爆的程度，intent detection和slot filling任务的F值都已经在95+以上了，唯一可以挑战的是NLU的Acc，也称为Sentence Acc，即输入句子的意图、槽位同时正确才算该样本预测正确。目前的SOTA为Bert，具体可上paper-with-code网站搜索
 - 当前的SOTA：
 
+ATIS数据集是一个比较常规的NLU数据集，它是一个标注过的预定机票的样本。分为训练集，开发集和测试集，训练集和开发集包括4,478,500样本，测试集包括893 utterances样本。训练集包含21种意图，79种实体。
+
 #### SNIPS
 
+SNIPS数据集，该数据集是从Snips个人语音助手收集的。它包含13,784个训练样本和700个测试样本。包含7种意图，39种实体。
+
+#### NLU-Benchmark
+
+NLU-Benchmark数据集标注了场景，动作和实体。例如：
+
+”schedule a call with Lisa on Monday morning“ ，标注的场景是日历calendar, 动作action是设立一个事件event，实体有2个，是事件名字和日期 [event name: a call with Lisa]和 [date: Monday morning]， 意图标签是通过拼接场景和动作得到的，例如：calendar set event。
+
+该数据集有25716个utterrances语句，涵盖了多个家庭助理任务，例如播放音乐或日历查询，聊天，以及向机器人发出的命令等。数据集拆分成10 folds, 每个fold有9960个训练样本和1076个测试样本，覆盖了64种意图和54种实体类别。
+
 #### CQUD
+
+- 无
 
 ### 模型
 
@@ -1134,13 +1148,65 @@ NLU即Natural Language Understanding，负责理解用户的语句输入，一�
 - **多任务**学习：按Multi-Task Learning的套路，在学习时最终的loss等于两个任务的loss的weight sum，两者在模型架构上仍然完全独立，或者仅共享特征编码器。
 - **交互式**模型：将模型中Slot和Intent的隐层表示进行交互，引入更强的归纳偏置，最近的研究显示，这种方法的联合NLU准确率更高。
 
-### JointBert
+#### JointBert——2018年
 
 - JointBERT的pytorch实现：[JointBERT](https://github.com/monologg/JointBERT)
 - JointBERT的TensorFlow实现：[dialog-nlu](https://github.com/MahmoudWahdan/dialog-nlu.git)
 - JointBERT的transformers+TensorFlow实现
 
 参考：[Intent Detection and Slot Filling（更新中。。。)](https://zhuanlan.zhihu.com/p/75228411)
+
+#### DIET（RASA）——2020年5月 
+
+【2021-10-19】[DIET模型 rasa 聊天机器人核心模型论文](https://zhuanlan.zhihu.com/p/162995854)，原文：[Introducing DIET: state-of-the-art architecture that outperforms fine-tuning BERT and is 6X faster to train](https://rasa.com/blog/introducing-dual-intent-and-entity-transformer-diet-state-of-the-art-performance-on-a-lightweight-architecture/)
+- With Rasa 1.8, our research team is releasing a new state-of-the-art lightweight, multitask transformer architecture for NLU: **Dual Intent and Entity Transformer** (DIET).
+
+`DIET`模型是Dual Intent and Entity Transformer的简称, 解决了对话理解问题中的2个问题(意图分类和实体识别)。DIET使用的是纯监督的方式，没有任何预训练的情况下，**无须大规模预训练**是关键，性能好于fine-tuning Bert, 但是训练速度是bert的**6倍**。
+
+对话建模的2种常用方法：**端到端** 和 **模块化**系统
+- 模块化系统：如POMDP的对话策略（Williams and Young，2007）和 混合代码网络 (Williams et al., 2017) 会使用独立的自然语言理解（NLU）和生成（NLG）系统。对话策略会从NLU接收输出并选择下一个action，然后NLG生成相应的响应。
+- 端到端方法中，用户输入直接喂给对话策略以预测下一个utterance(语句)，最新的方法是合并这2种常用方法， **Fusion Networks** (Mehri et al., 2019)。
+
+对话系统中的自然语言理解的2个任务是**意图分类**和**实体识别**， Goo et al认为单独的训练这2个task会导致**错误传播**，其效果不如2个任务同时使用一个模型，2个任务的效果会相互加强。
+
+最近研究表明大型的预训练模型在自然语言理解上性能很好，但是在训练和微调阶段都需要**大量的计算性能**。
+
+DIET模型的关键功能是能够将预训练模型的得到的词向量，和可自由组合的稀疏的单词特征和n-gram特征结合起来， 在DIET代码中，这2个是dense-feature 和sparse-feature特征。
+
+（1）通过迁移学习获取dense representations 稠密向量
+- 一般使用ELMO，BERT，GPT等模型作为迁移学习的模型，然后使用或不使用fine-tuning获取向量，用于下一个模型，但是这些模型速度慢，训练成本高，不太适合现实的AI对话系统。
+- Hen-derson et al. (2019b) 提出了一个更简洁的模型，使用单词和句子级别的encoding进行预训练，比BERT和ELMO效果要好，DIET模型是对此进一步研究。
+
+联合的意图分类和命名实体识别
+- Zhang and Wang (2016) 提出了一种由双向门控递归单元（BiGRU）组成的联合架构。每个时间步的隐藏状态用于实体标记，最后时间步的隐藏状态用于意图分类。
+- Liuand Lane (2016); Varghese et al. (2020) and Gooet al. (2018) ）提出了一种基于注意力的双向长期短期记忆（BiLSTM），用于联合意图分类和NER。 
+- Haihong et al.(2019) 引入了一个共同关注网络，用于每个任务之间共享信息。 
+- Chenet al. (2019)提出了联合BERT，该BERT建立在BERT之上，并以端到端的方式进行训练。他们用第一个（CLS）的隐藏状态进行意图分类。使用其他token的最终隐藏状态来预测实体标签。
+- Vanzo（2019）提出了一种由BiLSTM单元组成的分层自下而上的体系结构，以捕获语义框架的表示形式。他们从以自下而上的方式堆叠的各个层学习的表示形式，预测对话行为，意图和实体标签。
+DIET采用transformer-based 框架，使用的多任务像形式，此外我们还进行了消融测试。
+
+架构图，意图是play_game, 实体是ping pong，FFW是共享权重的。
+- ![](https://pic4.zhimg.com/80/v2-317c4a058927979676c3a67f81e0b833_720w.jpg)
+
+**Featurization 特征**
+
+输入特征分为2部分，**稠密**特征 dense features和**稀疏**特征sparse features。
+- 稀疏特征是n-grams(n<=5)的one-hot 或者multi-hot编码，但是稀疏特征包含很多冗余特征，为了避免过拟合，我们对此加入了dropout。
+- 稠密特征来自预训练模型， 例如Bert或GloVe。
+
+使用ConveRT作为句子的编码器，ConveRT的_CLS向量作为DIET的初始输入。这就是作为单词信息之外的句子信息特征了。如果使用BERT，我们使用 BERT [ CLS] token， 对于GloVe，我们使用句子所有token的均值作为_CLS_，
+
+稀疏特征通过一个全连接计算，其中全连接的权重是和其它序列的时间步全连接共享的，目的是为了让稀疏特征的维度和稠密特征的维度一致， 然后将稀疏特征的FFW的输出和稠密特征的向量进行concat拼接，因为transformer要求输入的向量维度需要一致，因此我们在拼接后面再接一个FFW，FFW的权重也是共享的。在实验中，这一层的维度是256.
+
+transformer模块，使用2层layer，使用token的相对位置编码。
+
+**Intent classification 意图分类**
+
+意图分类就是CLS经过transformers的输出，然后后意图标签y向量化后计算相似度， 这里计算损失是用的dot-product loss，点积损失，使得这个相似度和真实意图的相似性最高，使用负采样计算与其它意图的相似性降低。
+
+**Named entity recognition 命名实体识别部分**
+
+实体识别分类标签y是根据条件随机场Conditional Random Field (CRF) 计算的，是用的transformer的输出的向量，注意根据输出向量可以找到对应的输入token位置。
 
 ## 任务型对话
 
@@ -1350,6 +1416,43 @@ dialogue management的种类（从简单到复杂）：
   - Prompts 又分为：
     - **open prompt**（如 ‘How may I help you‘ 这种，用户可以回复任何内容 ）
     - **directive prompt**（如 ‘Say yes to accept call, or no’ 这种，系统限制了用户的回复选择）
+
+### 数据集
+
+数据集汇总
+- ![](https://pic2.zhimg.com/v2-934cd6c7e7cd77f3904387d72cd72c29_r.jpg)
+
+#### 检索式对话数据集
+
+检索式对话数据集，诸如 Ubuntu、Douban，对于给定的多轮对话，需要模型在若干候选回复中，选出最合适的句子作为对话的回复。
+
+然而这些数据集主要关注模型能否选出**相关性**较好的回复，并不直接考察模型的**推理能力**。随着 BERT 等预训练模型的涌现，模型在此类数据集上已经达到了很好的效果。
+
+#### 推理式数据集
+
+已有的针对推理的数据集（DROP、CommonsenseQA、ARC、Cosmos等）大多被设计为**阅读理解**格式。它们需要模型在阅读文章后回答额外问题。由于任务不同，这些现有的推理数据集并不能直接帮助指导训练聊天机器人。
+
+#### MuTual
+
+[多轮对话推理数据集MuTual发布，聊天机器人常识推理能力大挑战](https://zhuanlan.zhihu.com/p/151366314)
+- [论文](https://arxiv.org/abs/2004.04494), [MuTual github](https://github.com/Nealcly/MuTual)，[leaderboard](https://nealcly.github.io/MuTual-leaderboard)
+- 在构建聊天机器人时，现有对话模型的回复往往**相关性**较好，但经常出现**常识和逻辑**错误。由于现有的大部分检索式对话数据集都没有关注到对话的逻辑问题，导致评价指标也无法直接反映模型对对话逻辑的掌握程度。
+- 对此，微软亚洲研究院发布了**多轮对话推理**数据集 [MuTual](https://github.com/Nealcly/MuTual)，针对性地评测模型在多轮对话中的推理能力。
+  - 相比现有的其他检索式聊天数据集，MuTual 要求对话模型具备常识推理能力；
+  - 相比阅读理解式的推理数据集，MuTual 的输入输出则完全符合标准检索式聊天机器人的流程。
+因此，MuTual 也是目前最具挑战性的对话式数据集。测试过多个基线模型后，RoBERTa-base 表现仅为70分左右。目前已有多个知名院校和企业研究部门进行了提交，最优模型可以达到87分左右，仍与人类表现有一定差距。
+
+MuTual 基于中国高考英语听力题改编。听力考试要求学生根据一段双人多轮对话，回答额外提出的问题（图1左），并通过学生能否正确答对问题衡量学生是否理解了对话内容。为了更自然的模拟开放领域对话，我们进一步将听力题中额外的问题转化为对话中的回复
+- 所有的回复都与上下文相关，但其中只有一个是逻辑正确的。一些错误的回复在极端情况下可能是合理的，但正确的回复是最合适的。
+- ![](https://pic1.zhimg.com/80/v2-252da22a9a24d7abd914cb743c5d6c9c_720w.jpg)
+
+MuTual 数据集主要包含聊天机器人需要的六种推理能力：
+- 态度推理(13%)
+- 数值推理(7%)
+- 意图预测(31%)
+- 多事实推理(24%)
+- 常识等其他推理类型（9%）。
+
 
 ### DST
 

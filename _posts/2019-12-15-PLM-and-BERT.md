@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  BERT及预训练语言模型-BERT-and-Language-Model
+title:  BERT及预训练语言模型-BERT-and-Pretrain-Language-Model
 date:   2019-12-10 16:52:00
 categories: 深度学习 
 tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook TextCNN ES 田渊栋 彩票假设 自监督 Milvus ALBERT elasticsearch es 可视化 unilm simcse
@@ -225,9 +225,10 @@ PyTorch实现了从语言中识别情绪情感反讽的DeepMoji模型：https://
 
 ## transformers库
 
-- 这个库最初的名称是pytorch-pretrained-bert，它随着BERT一起应运而生。Google2018年10月底在开源了[BERT](https://github.com/google-research/bert)的tensorflow实现。当时，BERT以其强劲的性能，引起NLPer的广泛关注。几乎与此同时，pytorch-pretrained-bert也开始了它的第一次提交。pytorch-pretrained-bert 用当时已有大量支持者的pytorch框架复现了BERT的性能，并提供预训练模型的下载，使没有足够算力的开发者们也能够在几分钟内就实现 state-of-art-fine-tuning。
-- 直到2019年7月16日，在repo上已经有了包括BERT，GPT，GPT-2，Transformer-XL，XLNET，XLM在内六个预训练语言模型，这时候名字再叫pytorch-pretrained-bert就不合适了，于是改成了pytorch-transformers，势力范围扩大了不少。这还没完！
-- 2019年6月Tensorflow2的beta版发布，Huggingface也闻风而动。为了立于不败之地，又实现了TensorFlow 2.0和PyTorch模型之间的深层互操作性，可以在TF2.0/PyTorch框架之间随意迁移模型。在2019年9月也发布了2.0.0版本，同时正式更名为 transformers 。到目前为止，transformers 提供了超过100种语言的，32种预训练语言模型，简单，强大，高性能，是新手入门的不二选择。
+- 这个库最初的名称是 pytorch-pretrained-bert，它随着BERT一起应运而生。Google2018年10月底在开源了[BERT](https://github.com/google-research/bert) 的tensorflow实现。当时，BERT以其强劲的性能，引起NLPer的广泛关注。几乎与此同时，pytorch-pretrained-bert也开始了它的第一次提交。pytorch-pretrained-bert 用当时已有大量支持者的pytorch框架复现了BERT的性能，并提供预训练模型的下载，使没有足够算力的开发者们也能够在几分钟内就实现 state-of-art-fine-tuning。
+- 直到2019年7月16日，在repo上已经有了包括BERT，GPT，GPT-2，Transformer-XL，XLNET，XLM在内六个预训练语言模型，这时候名字再叫pytorch-pretrained-bert 就不合适了，于是改成了pytorch-transformers，势力范围扩大了不少。这还没完！
+- 2019年6月Tensorflow2的beta版发布，Huggingface也闻风而动。为了立于不败之地，又实现了TensorFlow 2.0和PyTorch模型之间的深层互操作性，可以在TF2.0/PyTorch框架之间随意迁移模型。
+- 在2019年9月也发布了2.0.0版本，同时正式更名为 transformers 。到目前为止，transformers 提供了超过100种语言的，32种预训练语言模型，简单，强大，高性能，是新手入门的不二选择。
 
 ### 安装
 
@@ -242,7 +243,21 @@ pip install numpy
 pip install tensorflow-gpu==2.4.0
 # pytorch环境
 pip install torch
+# 或 pytorch+transformers一起安装
+pip install transformers[torch]
+# 或 TensorFlow+transformers一起安装
+pip install transformers[tf-cpu]
+# 或源码安装
+pip install git+https://github.com/huggingface/transformers
+
 ```
+
+测试：
+
+```python
+python -c "from transformers import pipeline; print(pipeline('sentiment-analysis')('I hate you'))"
+```
+
 
 ### 模型下载
 
@@ -271,6 +286,355 @@ model_config.output_hidden_states = True
 model_config.output_attentions = True
 # 通过配置和路径导入模型
 model = transformers.BertModel.from_pretrained(MODEL_PATH,config = model_config)
+```
+
+#### 模型不同点
+
+[关于transformers库中不同模型的Tokenizer](https://zhuanlan.zhihu.com/p/121787628)
+
+不同PLM原始论文和transformers库中数据的组织格式。其实，像Roberta，XLM等模型的中< s>, < /s>是可以等价于Bert中的[CLS], [SEP]的，只不过不同作者的习惯不同。
+
+```shell
+# Bert
+单句：[CLS] A [SEP]
+句对：[CLS] A [SEP] A [SEP]
+# Roberta
+单句：<s> A </s>
+句对：<s> A </s> </s> B </s>
+# Albert
+单句：[CLS] A [SEP]
+句对：[CLS] A [SEP] B [SEP]
+# XLNet
+单句：[A] <sep> <cls>
+句对：A <sep> B <sep> <cls>
+# XLM
+单句：<s> A </s>
+句对：<s> A </s> B </s>
+# XLM-Roberta
+单句：<s> A </s>
+句对：<s> A </s> </s> B </s>
+# Bart
+单句：<s> A </s>
+句对：<s> A </s> </s> B </s>
+```
+
+transformers库中RobertaTokenizer和BertTokenizer的不同
+- transformers库中RobertaTokenizer需要同时读取vocab_file和merges_file两个文件，不同于BertTokenizer只需要读取vocab_file一个词文件。主要原因是两种模型采用的编码不同：
+- Bert采用的是字符级别的BPE编码，直接生成词表文件，官方词表中包含3w左右的单词，每个单词在词表中的位置即对应Embedding中的索引，Bert预留了100个[unused]位置，便于使用者将自己数据中重要的token手动添加到词表中。
+- Roberta采用的是byte级别的BPE编码，官方词表包含5w多的byte级别的token。merges.txt中存储了所有的token，而vocab.json则是一个byte到索引的映射，通常频率越高的byte索引越小。所以转换的过程是，先将输入的所有tokens转化为merges.txt中对应的byte，再通过vocab.json中的字典进行byte到索引的转化。
+
+由于中文的特殊性不太适合采用byte级别的编码，所以大部分开源的中文Roberta预训练模型仍然采用的是单字词表，所以直接使用BertTokenizer读取即可， 不需要使用RobertaTokenizer。
+
+### 模型保存
+
+
+```python
+
+tokenizer.save_pretrained(save_directory)
+model.save_pretrained(save_directory)
+```
+
+
+### pipeline
+
+pipeline API可以快速体验 Transformers。它将模型的预处理, 后处理等步骤包装起来，使得我们可以直接定义好任务名称后，输出文本，直接得到我们需要的结果。这是一个高级的API，可以让我们领略到transformers 这个库的强大且友好。
+
+用 pipeline API，输入任务名称，默认会选择特定已经存好的模型文件，然后会进行下载并且缓存。
+
+主要有以下三个步骤被包装起来了： preprocess -> fit model -> postprocessing
+- 输入文本被预处理成机器可以理解的格式
+  - 将输入的文本进行分词，例如变成：words，subwords，或者symbols，这些统称为token
+  - 将每个token映射为一个integer
+  - 为输入添加模型需要的特殊字符。
+- 被处理后的输入被传入模型中
+- 模型的预测结果经过后处理，得到人类可以理解的结果
+
+![](https://pic2.zhimg.com/v2-d9b23d02a7e5e1988ba8f902d7da9c0d_r.jpg)
+
+注意：
+- 所有的预处理阶段（Preprocessing），都要**与模型预训练阶段保持一致**，所以要从Model Hub 中下载预处理的信息。
+- 我们可以使用 AutoTokenizer 的 from_pretrained 方法进行tokenizer 的加载，通过把tokenizer 的checkpoint 导入，它可以自动获取tokenizer需要的数据并进行缓存（下次无需下载）。
+
+
+目前支持的pipeline 如下：
+- feature-extraction (get the vector representation of a text) 特征抽取
+- fill-mask 掩码回复
+- ner (named entity recognition) 命名实体识别
+- question-answering 问答
+- sentiment-analysis 情感分析
+- summarization 文本摘要
+- text-generation 文本生成
+- translation 机器翻译
+- zero-shot-classification 零样本分类
+
+最新pipeline类型：详见[官网介绍](https://huggingface.co/transformers/main_classes/pipelines.html)
+- AudioClassificationPipeline
+- AutomaticSpeechRecognitionPipeline
+- ConversationalPipeline
+- FeatureExtractionPipeline
+- FillMaskPipeline
+- ImageClassificationPipeline
+- ObjectDetectionPipeline
+- QuestionAnsweringPipeline
+- SummarizationPipeline
+- TableQuestionAnsweringPipeline
+- TextClassificationPipeline
+- TextGenerationPipeline
+- Text2TextGenerationPipeline
+- TokenClassificationPipeline
+- TranslationPipeline
+- ZeroShotClassificationPipeline
+
+所有的API都可以通过 搜索，并且在线测试
+
+#### Text classification
+
+默认checkpoint 是 distilbert-base-uncased-finetuned-sst-2-english
+
+```python
+from transformers import pipeline
+
+#checkpoint = "distilbert-base-uncased-finetuned-sst-2-english"
+#tokenizer = AutoTokenizer.from_pretrained(checkpoint)
+classifier = pipeline("sentiment-analysis")
+# 指定模型，硬件环境
+pipe = pipeline("sentiment-analysis", model=model_name, device=0)
+# 单句
+classifier("I've been waiting for a HuggingFace course my whole life.")
+# 多句
+classifier([
+    "I've been waiting for a HuggingFace course my whole life.", 
+    "I hate this so much!"
+])
+```
+
+
+```python
+## ------------ PYTORCH CODE ------------ 
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+import torch
+
+model_name = "bert-base-cased-finetuned-mrpc"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForSequenceClassification.from_pretrained(model_name)
+
+classes = ["not paraphrase", "is paraphrase"]
+
+sequence_0 = "The company HuggingFace is based in New York City"
+sequence_1 = "Apples are especially bad for your health"
+sequence_2 = "HuggingFace's headquarters are situated in Manhattan"
+
+# The tokenizer will automatically add any model specific separators (i.e. <CLS> and <SEP>) and tokens to
+# the sequence, as well as compute the attention masks.
+paraphrase = tokenizer(sequence_0, sequence_2, return_tensors="pt")
+not_paraphrase = tokenizer(sequence_0, sequence_1, return_tensors="pt")
+
+paraphrase_classification_logits = model(**paraphrase).logits
+not_paraphrase_classification_logits = model(**not_paraphrase).logits
+
+paraphrase_results = torch.softmax(paraphrase_classification_logits, dim=1).tolist()[0]
+not_paraphrase_results = torch.softmax(not_paraphrase_classification_logits, dim=1).tolist()[0]
+
+# Should be paraphrase
+for i in range(len(classes)):
+    print(f"{classes[i]}: {int(round(paraphrase_results[i] * 100))}%")
+
+# Should not be paraphrase
+for i in range(len(classes)):
+    print(f"{classes[i]}: {int(round(not_paraphrase_results[i] * 100))}%")
+
+## ------------ TENSORFLOW CODE ------------ 
+from transformers import AutoTokenizer, TFAutoModelForSequenceClassification
+import tensorflow as tf
+
+model_name = "bert-base-cased-finetuned-mrpc"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = TFAutoModelForSequenceClassification.from_pretrained(model_name)
+
+classes = ["not paraphrase", "is paraphrase"]
+
+sequence_0 = "The company HuggingFace is based in New York City"
+sequence_1 = "Apples are especially bad for your health"
+sequence_2 = "HuggingFace's headquarters are situated in Manhattan"
+
+# The tokenizer will automatically add any model specific separators (i.e. <CLS> and <SEP>) and tokens to
+# the sequence, as well as compute the attention masks.
+paraphrase = tokenizer(sequence_0, sequence_2, return_tensors="tf")
+not_paraphrase = tokenizer(sequence_0, sequence_1, return_tensors="tf")
+
+paraphrase_classification_logits = model(paraphrase).logits
+not_paraphrase_classification_logits = model(not_paraphrase).logits
+
+paraphrase_results = tf.nn.softmax(paraphrase_classification_logits, axis=1).numpy()[0]
+not_paraphrase_results = tf.nn.softmax(not_paraphrase_classification_logits, axis=1).numpy()[0]
+
+# Should be paraphrase
+for i in range(len(classes)):
+    print(f"{classes[i]}: {int(round(paraphrase_results[i] * 100))}%")
+
+# Should not be paraphrase
+for i in range(len(classes)):
+    print(f"{classes[i]}: {int(round(not_paraphrase_results[i] * 100))}%")
+```
+
+
+#### Zero-shot classification
+
+文本分类标注往往非常耗时，huggingface 提供了0样本分类的pipeline， 用户只需要传入文本内容，以及可能的分类标签，就可以得到每个标签的概率，这样子可以提供标注人员参考结果，大大提高标注效率。
+
+```python
+from transformers import pipeline
+
+classifier = pipeline("zero-shot-classification")
+classifier(
+    "This is a course about the Transformers library",
+    candidate_labels=["education", "politics", "business"],
+)
+{'sequence': 'This is a course about the Transformers library',
+ 'labels': ['education', 'business', 'politics'],
+ 'scores': [0.8445963859558105, 0.111976258456707, 0.043427448719739914]}
+```
+
+#### Text generation
+
+文本生成任务，是指你输入开头的话术（prompt），然后让机器自动帮你生成完剩下的句子。Text generation 中包含了一些随机因子，因此每次生成的结果都可能不同。
+
+```python
+from transformers import pipeline
+
+generator = pipeline("text-generation")
+generator("In this course, we will teach you how to")
+[{'generated_text': 'In this course, we will teach you how to understand and use '
+                    'data flow and data interchange when handling user data. We '
+                    'will be working with one or more of the most commonly used '
+                    'data flows — data flows of various types, as seen by the '
+                    'HTTP'}]
+```
+
+你可以设置参数 num_return_sequences 选择返回的结果个数，也可以通过 max_length 限制每次返回的结果句子的长度.
+
+并且模型选择可以通过 model 设置，这边选择 distilgpt2
+
+```python
+from transformers import pipeline
+
+generator = pipeline("text-generation", model="distilgpt2")
+generator(
+    "In this course, we will teach you how to",
+    max_length=30,
+    num_return_sequences=2,
+)
+[{'generated_text': 'In this course, we will teach you how to manipulate the world and '
+                    'move your mental and physical capabilities to your advantage.'},
+ {'generated_text': 'In this course, we will teach you how to become an expert and '
+                    'practice realtime, and with a hands on experience on both real '
+                    'time and real'}]
+```
+
+#### Mask filling
+
+掩码恢复是将一个句子中随机遮掩<mask>的词给恢复回来，top_k 控制了概率最大的 top k 个词被返回。
+
+例如：
+
+```python
+from transformers import pipeline
+
+unmasker = pipeline("fill-mask")
+unmasker("This course will teach you all about <mask> models.", top_k=2)
+[{'sequence': 'This course will teach you all about mathematical models.',
+  'score': 0.19619831442832947,
+  'token': 30412,
+  'token_str': ' mathematical'},
+ {'sequence': 'This course will teach you all about computational models.',
+  'score': 0.04052725434303284,
+  'token': 38163,
+  'token_str': ' computational'}]
+```
+
+#### Named entity recognition
+
+命名实体是被是指如何将文本中的实体，例如：persons, locations, or organizations，识别出来的任务：
+
+```python
+from transformers import pipeline
+
+ner = pipeline("ner", grouped_entities=True)
+ner("My name is Sylvain and I work at Hugging Face in Brooklyn.")
+[{'entity_group': 'PER', 'score': 0.99816, 'word': 'Sylvain', 'start': 11, 'end': 18}, 
+ {'entity_group': 'ORG', 'score': 0.97960, 'word': 'Hugging Face', 'start': 33, 'end': 45}, 
+ {'entity_group': 'LOC', 'score': 0.99321, 'word': 'Brooklyn', 'start': 49, 'end': 57}
+]
+```
+
+注意这边设置了 grouped_entities=True，这就告诉模型，将同一个entity的部分，聚合起来，例如这边的 “Hugging” and “Face” 是一个实体organization，所以就把它给聚合起来。
+
+在数据预处理的部分， Sylvain 被拆解为4 pieces: S, ##yl, ##va, and ##in. 这边后处理也会将这些给聚合起来。
+
+#### Question answering
+
+阅读理解的问题，是通过文本内容，以及提出的问题，得到答案：
+
+```python
+from transformers import pipeline
+
+question_answerer = pipeline("question-answering")
+question_answerer(
+    question="Where do I work?",
+    context="My name is Sylvain and I work at Hugging Face in Brooklyn"
+)
+{'score': 0.6385916471481323, 'start': 33, 'end': 45, 'answer': 'Hugging Face'}
+```
+
+#### Summarization
+
+摘要问题，是将长文本的进行句子的压缩，得到简练的句子表达。
+
+```python
+from transformers import pipeline
+
+summarizer = pipeline("summarization")
+summarizer("""
+    America has changed dramatically during recent years. Not only has the number of 
+    graduates in traditional engineering disciplines such as mechanical, civil, 
+    electrical, chemical, and aeronautical engineering declined, but in most of 
+    the premier American universities engineering curricula now concentrate on 
+    and encourage largely the study of engineering science. As a result, there 
+    are declining offerings in engineering subjects dealing with infrastructure, 
+    the environment, and related issues, and greater concentration on high 
+    technology subjects, largely supporting increasingly complex scientific 
+    developments. While the latter is important, it should not be at the expense 
+    of more traditional engineering.
+
+    Rapidly developing economies such as China and India, as well as other 
+    industrial countries in Europe and Asia, continue to encourage and advance 
+    the teaching of engineering. Both China and India, respectively, graduate 
+    six and eight times as many traditional engineers as does the United States. 
+    Other industrial countries at minimum maintain their output, while America 
+    suffers an increasingly serious decline in the number of engineering graduates 
+    and a lack of well-educated engineers.
+""")
+[{'summary_text': ' America has changed dramatically during recent years . The '
+                  'number of engineering graduates in the U.S. has declined in '
+                  'traditional engineering disciplines such as mechanical, civil '
+                  ', electrical, chemical, and aeronautical engineering . Rapidly '
+                  'developing economies such as China and India, as well as other '
+                  'industrial countries in Europe and Asia, continue to encourage '
+                  'and advance engineering .'}]
+```
+
+跟text generation 任务一样，我们也可以设置参数： max_length or a min_length ，限制文本的长度。
+
+#### Translation
+
+文本翻译，你可以在 Model Hub 中，找到特定的翻译模型，例如法翻英的模型， Helsinki-NLP/opus-mt-fr-en：
+
+```python
+from transformers import pipeline
+
+translator = pipeline("translation", model="Helsinki-NLP/opus-mt-fr-en")
+translator("Ce cours est produit par Hugging Face.")
+[{'translation_text': 'This course is produced by Hugging Face.'}]
 ```
 
 ## transformers源码
@@ -1402,13 +1766,112 @@ ACL 2019最新收录的论文：[What does BERT learn about the structure of lan
 - [图示](https://pic2.zhimg.com/80/v2-602f7d353a057e56327a631e396934b1_720w.jpg)
   - ![](https://pic2.zhimg.com/80/v2-602f7d353a057e56327a631e396934b1_720w.jpg)
 
-### BERT降维
-
-
-#### 可视化
+### BERT可视化
 
 - [Visualizing BERT](https://home.ttic.edu/~kgimpel/viz-bert/viz-bert.html)
 - kaggle上外国人分享的[Visualizing BERT embeddings with t-SNE](https://www.kaggle.com/wqw547243068/visualizing-bert-embeddings-with-t-sne/edit)
+
+
+[BertViz](https://github1s.com/jessevig/bertviz)是BERT可视化工具包，支持[transformers](https://github.com/huggingface/transformers) 库的大部分模型 (BERT, GPT-2, XLNet, RoBERTa, XLM, CTRL, BART, etc.)，继承于[Tensor2Tensor visualization tool](https://github.com/tensorflow/tensor2tensor/tree/master/tensor2tensor/visualization)
+
+```shell
+# pip安装
+pip install bertviz
+# 源码安装
+git clone https://github.com/jessevig/bertviz.git
+cd bertviz
+python setup.py develop
+```
+
+功能：
+- headview：指定层的注意力层可视化
+  - [interactive Colab Notebook](https://colab.research.google.com/drive/1PEHWRHrvxQvYr9NFRC-E_fr3xDq1htCj)
+  - ![](https://upload-images.jianshu.io/upload_images/22279029-4a9d09dd11e565a3.png)
+- modelview：整个模型的注意力可视化
+  - [interactive Colab Notebook](https://colab.research.google.com/drive/1c73DtKNdl66B0_HF7QXuPenraDp0jHRS)
+  - ![](https://upload-images.jianshu.io/upload_images/22279029-59e2434e45d87166.png)
+- neuralview：QKV神经元可视化, 及如何计算注意力
+  - [interactive Colab Notebook](https://colab.research.google.com/drive/1m37iotFeubMrp9qIf9yscXEL1zhxTN2b)
+  - ![](https://upload-images.jianshu.io/upload_images/22279029-7088fd1e5fef41e5.png)
+
+
+```python
+from transformers import AutoTokenizer, AutoModel
+from bertviz import model_view
+
+model_version = "distilbert-base-uncased"
+tokenizer = AutoTokenizer.from_pretrained(model_version)
+model = AutoModel.from_pretrained(model_version, output_attentions=True)
+
+inputs = tokenizer.encode("The cat sat on the mat", return_tensors='pt')
+outputs = model(inputs)
+attention = outputs[-1]  # Output includes attention weights when output_attentions=True
+tokens = tokenizer.convert_ids_to_tokens(inputs[0]) 
+
+# head可视化
+from bertviz import head_view
+head_view(attention, tokens)
+head_view(attention, tokens, layer=2, heads=[3,5])
+
+# model可视化
+model_view(attention, tokens)
+model_view(attention, tokens, display_mode="light") # 背景设置
+model_view(attention, tokens, include_layers=[5, 6]) # 只显示5-6层
+
+# neural可视化
+# Import specialized versions of models (that return query/key vectors)
+from bertviz.transformers_neuron_view import BertModel, BertTokenizer
+
+from bertviz.neuron_view import show
+
+model = BertModel.from_pretrained(model_version, output_attentions=True)
+tokenizer = BertTokenizer.from_pretrained(model_version, do_lower_case=do_lower_case)
+model_type = 'bert'
+show(model, model_type, tokenizer, sentence_a, sentence_b, layer=2, head=0)
+
+```
+
+jupyter notebook版本：
+
+```python
+# bert可视化  pip install bertviz
+from transformers import BertTokenizer, BertModel
+#from bertv_master.bertviz import head_view
+from bertviz import head_view
+
+
+# 在 jupyter notebook 显示visualzation 
+def call_html():
+  import IPython
+  display(IPython.core.display.HTML('''<script src="/static/components/requirejs/require.js"></script><script>// <![CDATA[
+requirejs.config({ paths: { base: '/static/base', "d3": "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.8/d3.min", jquery: '//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min', }, });
+// ]]></script>'''))
+
+# 記得我们是使用中文 BERT
+model_version = 'bert-base-chinese'
+model = BertModel.from_pretrained(model_version, cache_dir="./transformers/", output_attentions=True)
+tokenizer = BertTokenizer.from_pretrained(model_version)
+ 
+# 情境 1 的句子
+sentence_a = "老爸叫小宏去买酱油，"
+sentence_b = "回来慢了就骂他。"
+ 
+# 得到tokens后输入BERT模型获取注意力权重(attention)
+inputs = tokenizer.encode_plus(sentence_a,sentence_b,return_tensors='pt', add_special_tokens=True)
+token_type_ids = inputs['token_type_ids']
+input_ids = inputs['input_ids']
+attention = model(input_ids, token_type_ids=token_type_ids)[-1]
+input_id_list = input_ids[0].tolist() # Batch index 0
+tokens = tokenizer.convert_ids_to_tokens(input_id_list)
+call_html()
+
+# 用BertViz可视化
+head_view(attention, tokens)
+```
+
+
+
+### BERT降维
 
 
 #### BERT-flow
@@ -2794,6 +3257,7 @@ PLUG还能为目标任务做针对性优化。GPT-3并没有利用**微调**和*
 
 
 # 向量化
+
 
 ## ES句向量
 

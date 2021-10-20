@@ -21,7 +21,9 @@ mathjax: true
 - 【2020-10-10】Data Science Challenge / Competition 数据科学挑战赛/数据科学竞赛，源自：[机器学习理论与数据竞赛实战](https://www.zhihu.com/column/DataAI)
 ![](https://pic3.zhimg.com/v2-af268652dc6a498641d8799862d61f2a_b.jpg)
 
-# KDD CUP
+# 算法竞赛
+
+## KDD CUP
 
 - 【2020-8-28】[KDD CUP 2020 大奖出炉，中国团队包揽全部冠亚军](https://www.toutiao.com/i6865771958059926024/)
     - KDD CUP 2020 大赛结果终于在其官网上公布，其中，来自中国的团队如国立台湾大学、美团点评、北航、第四范式、东南大学、上海交大、国科大、清华大学包揽全部奖项的冠亚军
@@ -46,6 +48,16 @@ mathjax: true
             - 冠军思路：参赛者需要解决网约车平台的订单匹配与车辆调度问题，其中订单匹配任务需要每两秒钟进行一次匹配，车辆调度任务则需要在成都8000余个六边形网格内进行运力调度。相关算法可将乘客潜在出行需求与合适的司机相匹配，从而更高效地利用空置车辆，提高车辆周转率，提升用户体验与司机收入水平，优化系统运营效率。
 
 
+## CCF
+
+- []()
+
+## SemEval
+
+国际计算语言学协会（Association for Computational Linguistics, ACL）下属的 SIGLEX 主办。ACL 作为世界上影响力最大、最具活力的国际学术组织，其举办的计算语言学年会（Annual Meeting of the Association for Computational Linguistics）是国际自然语言处理的顶级会议。自 2001 年起，SemEval 至今已成功举办了十三届，吸引了世界范围内的多所大学和研究机构的参加，在业界和学术界具有极高的影响力。根据 Google Scholar 的数据，发表在 SemEval 的文章在 Computational Linguistics 领域的影响力仅次于 ACL/EMNLP/NAACL 三大顶会，位于 NLP 会议、期刊中的第四位。
+
+- [SemEval 2022](https://semeval.github.io/SemEval2022/tasks)，跟ACL合作
+- [NLP 顶级赛事 SemEval 那个人居然夺得榜首](https://www.dreamwings.cn/semeval2020-task4-results/5582.html): 第十四届国际语义评测大赛（International Workshop on Semantic Evaluation 2020, SemEval 2020）落下帷幕。在 Task 4: Commonsense Validation and Explanation 常识验证与解释评测任务中，由我院 ICA 研究所的（我导师 + 联合培养的另一位老师）担任指导老师，千千、小雨等同学组成的参赛队成功获得子任务 B 第一名，子任务 A 第二名，撒花~ (●ˇ∀ˇ●)。本届比赛也吸引了包括哈尔滨工业大学、香港中文大学、雷丁大学等著名全球高校。
 
 # Kaggle
 
