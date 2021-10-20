@@ -203,6 +203,47 @@ def dsc_loss(y_true, y_pred, varepsilon):
   return 1 - numerator / denominator
 ```
 
+## Class-Balanced Loss
+
+【2021-10-17】谷歌对CVPR 2019上发表的一篇文章的综述。它为最常用的损耗(softmax-cross-entropy、focal loss等)提出了一个针对每个类别的重新加权方案，能够快速提高精度，特别是在处理高度类不平衡的数据时。
+- 论文: [Class-Balanced Loss Based on Effective Number of Samples]()
+- [PyTorch实现源码]https://github.com/vandit15/Class-balanced-loss-pytorch)
+
+### 样本的有效数量
+
+在处理长尾数据集(其中大部分样本属于很少的类，而许多其他类的样本非常少)的时候，如何对不同类的损失进行加权可能比较棘手, 通常将权重设置为类样本的**倒数**或类样本的**平方根**的倒数。
+- ![](https://p9.toutiaoimg.com/origin/pgc-image/5fdb00997dc840bd9e48c965c7108f59?from=pc)
+
+问题：
+- 随着样本数量的增加，新数据点的带来的好处会减少。新样本极有可能是现有样本的**近似副本**，特别是在训练神经网络时使用大量数据增强(如重新缩放、随机裁剪、翻转等)的时候，很多都是这样的样本。用**有效样本数**重新加权可以得到较好的结果。
+
+有效样本数：近似n个样本所覆盖的实际体积，其中总体积N由总样本表示
+- ![](https://p9.toutiaoimg.com/origin/pgc-image/38b1c63850b949dd87e20b5925647832?from=pc)
+
+每个样本的贡献：
+- 第j个样本对有效样本数的贡献为β^(j-1), 如果β=0，则En=1。同样，当β→1的时候En→n。后者可以很容易地用**洛必达法则**证明。
+- 这意味着当N很大时，有效样本数与样本数N相同。在这种情况下，唯一原型数N很大，每个样本都是唯一的。然而，如果N=1，这意味着所有数据都可以用一个原型表示。
+- ![](https://p9.toutiaoimg.com/origin/pgc-image/bdd0d77498994872b7e6552b66a8da32?from=pc)
+
+### 类别均衡损失
+
+如果没有额外的信息，我们不能为每个类设置单独的Beta值，因此，使用整个数据的时候，我们将把它设置为一个特定的值(通常设置为0.9、0.99、0.999、0.9999中的一个)。
+
+类别均衡损失可表示为：
+- ![](https://p9.toutiaoimg.com/origin/pgc-image/67c77475560e4f6ca81f61b70f1d324e?from=pc)
+这里， L(p,y) 可以是任意的损失。
+
+类别均衡Focal Loss
+
+使用一个特别设计的损失来处理类别不均衡的数据集
+原始版本的focal loss有一个α平衡变量。这里，我们将使用每个类的有效样本数对其重新加权。
+
+类似地，这样一个重新加权的项也可以应用于其他著名的损失(sigmod -cross-entropy, softmax-cross-entropy等)。
+
+实现
+
+在开始实现之前，需要注意的一点是，在使用基于sigmoid的损失进行训练时，使用b=-log(C-1)初始化最后一层的偏差，其中C是类的数量，而不是0。这是因为设置b=0会在训练开始时造成巨大的损失，因为每个类的输出概率接近0.5。因此，我们可以假设先验类是1/C，并相应地设置b的值。
+
 ## **实验结果**
     
  
