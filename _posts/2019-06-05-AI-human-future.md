@@ -3,7 +3,7 @@ layout: post
 title:  "人工智能及未来畅想-AI and Future"
 date:   2019-06-04 23:41:00
 categories: 人工智能
-tags: 人工智能 AI 人类简史 人文 哲学 康德 汉字屋 清华大学 天机 自行车 AGI 类脑 类机 waitbutwhy 脑机接口 张首晟 姚期智 冯·诺依曼 天道 沈向洋 戴海琼 达摩院 Bengio
+tags: 人工智能 AI 人类简史 人文 哲学 康德 汉字屋 清华大学 天机 自行车 AGI 类脑 类机 waitbutwhy 脑机接口 张首晟 姚期智 冯·诺依曼 天道 沈向洋 戴海琼 达摩院 Bengio SNN 神经网络 BP
 excerpt: 深度思考
 mathjax: true
 ---
@@ -13,8 +13,18 @@ mathjax: true
 
 # AI之路
 
+## 资料
+
+- 【2021-10-21】[中科院自动化所登Science子刊：自组织反向传播提升网络学习效率](https://www.toutiao.com/i7021409819336753678/), 在图像识别任务中，引入 SBP 能让识别准确度稍稍提高，计算成本还能降低 57%。BP反向传播，这种端到端的学习方法性能卓越，但学习过程能量消耗大，且缺乏灵活性。中科院脑智卓越中心徐波、蒲慕明联合研究团队近期借助生物网络中发现的介观尺度自组织反向传播机制（Self-backpropagation，SBP），在更具效率和灵活性的类脑局部学习方法方面取得了重要进展。
+  - 论文《[Self-backpropagation of synaptic modifications elevates the efficiency of spiking and artificial neural networks](https://www.science.org/doi/10.1126/sciadv.abh0146)》已于 2021 年 10 月 20 日（美东时间）在线发表于《科学》子刊《Science Advances》
+  - 1997年，蒲慕明团队在 Nature 杂志上撰文发现海马体内的神经元可以将长时程抑制（Long-term depression，LTD）可塑性自组织地传播到三个方向，分别是突触前侧向传播（Presynaptic lateral spread）、突触后侧向传播（Postsynaptic lateral spread）、反向传播（Backpropagation，这个发现就是自组织反向传播神经可塑性机制（SBP）。SBP现象具有普遍性，不仅覆盖更多的神经区域如视网膜 - 顶盖系统，还覆盖更多的可塑性类型，如长时程增强（Long-term potentiation，LTP）。该机制的发生归结于生物神经元内分子调制信号的天然逆向传递，被认为是可能导致生物神经网络高效反馈学习的关键
+  - 研究人员认为，SBP 是一类介观尺度的特殊生物可塑性机制，该机制同时在 SNN 和 ANN 中获得了广泛的组合优化优势，对进一步深入探索类脑局部计算具有很大的启示性。生物智能计算的本质，很可能就是灵活融合多类微观、介观等可塑性机制的自组织局部学习，结合遗传演化赋予的远程投射网络结构，实现高效的全局优化学习效果。该工作可以进一步引导生物和人工网络的深度融合，最终实现能效比高、可解释性强、灵活度高的新一代人工智能模型。
 - 【2021-4-19】[工程院院士李德毅：认知的三次革命，类脑的五条启发](https://mp.weixin.qq.com/s/Y8esD4fpjN9Y-zqxRmh1FA), [视频](https://wx.vzan.com/live/tvchat-1248131354)
 - 【2017-1-2】《对话》 20170101 [人工智能：挑战2017] (http://tv.cctv.com/2017/01/02/VIDEVhAzxZgC8tsHgPfF9Ukz170102.shtml), [B站地址](https://www.bilibili.com/video/BV1ps411Y7fm?t=1584)
+
+
+## 大脑工作原理
+
 - 【2021-5-7】[阿里巴巴达摩院司罗：NLP如何达到真正智能？视频](https://www.ixigua.com/i6929800183979052292/)，NLP达到人的程度，还有很远的路要走
   - 智能分四个层面：计算智能→感知智能→认知智能→创造智能
 - 【2021-6-3】[Yoshua Bengio：新步伐，迈向鲁棒泛化的深度学习2.0](https://mp.weixin.qq.com/s/tnXKTCYK5uB-bTGZ_dPM7w),2021 年 6 月 1 日，Yoshua Bengio 在 2021 北京智源大会上发表了题为「Towards Robust Generalization in Machine Learning with System 2 Deep Learning」的主题演讲。
