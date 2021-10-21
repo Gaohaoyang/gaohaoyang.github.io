@@ -244,6 +244,28 @@ chatbot:我也是，不过总有一天就会好起来的
   - 所有能理解的需求，都要有能力履行（full-fulfillment）
   - 基于上下文的对话能力（contextual conversation）
 
+## 人机对话发展
+
+【2021-10-21】[人机对话的几个层级及发展方向](https://www.toutiao.com/w/i1714197681803267/)
+- 层级
+  - ![](https://p5.toutiaoimg.com/img/tos-cn-i-qvj2lq49k0/cb00c3723d964cfeb7319ab8cce2abe1~tplv-obj:1440:1080.image?from=post)
+
+|层级|场景|模态|对话能力|
+|---|---|---|---|
+|L1|受限场景|单模态|预定义对话|
+|L2|半开放场景|单模态|预定义对话|
+|L3|半开放场景|多模态|预定义对话|
+|L4|半开放场景|多模态|终身学习对话|
+|L5|完全开放场景|多模态|终身学习对话|
+
+- Conversational AI发展方向
+  - （1）知识驱动+主动交互+终身学习：能力自主进化、知识自主进化、文档→结构化知识
+  - （2）多模态、有情感：多模态内容理解、对话建模、回复生成
+  - （3）多语言：
+  - ![](https://p5.toutiaoimg.com/img/tos-cn-i-qvj2lq49k0/6c27f649bb874110bcff7ffd683f5bca~tplv-obj:1440:1080.image)
+
+
+
 ## 智能音箱
 
 ### 发展历史
