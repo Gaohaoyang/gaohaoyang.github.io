@@ -14,6 +14,7 @@ mathjax: true
 
 # 总结
 
+- 【2021-10-26】[变分自编码器(VAEs)在推荐系统中的应用](https://www.toutiao.com/i7023200170640998919/),《[Variational Autoencoders for Collaborative Filtering](https://dl.acm.org/doi/pdf/10.1145/3178876.3186150)》,[论文源码】(https://github.com/dawenl/vae_cf)
 - 【2021-3-21】脉脉：[推荐算法选哪个方向更好？](https://maimai.cn/web/gossip_detail?src=app&webid=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlZ2lkIjoiZmMwYTU3YTc4ODdkMTFlYjg3Njc4MDE4NDRlNTAxOTAiLCJ1IjozNTM5LCJpZCI6Mjg3MjkxMzN9.b09CGopcevFpUQsURFIXAigPVo-BE75_mRjhlhM7XEc&share_channel=5)
   - 如果是新业务，做**精排和重排**最容易有效果，而且看起来容易吹。
   - 如果是特别成熟的业务，精排完全不动的，这个时候**召回**容易出成果。
