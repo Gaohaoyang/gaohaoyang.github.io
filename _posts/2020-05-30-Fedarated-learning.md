@@ -149,6 +149,14 @@ Google首先将联邦学习运用在Gboard（Google键盘）上，联合用户�
 - 各server节点对worker节点控制弱；
 - 通讯频率和成本较高。
 
+【2021-10-27】`联邦学习`属于`分布式`学习，但正如背景中所介绍的，它有具体适用的场景，与典型的分布式学习有明显的区别。表2全面地总结了典型分布式以及联邦学习间的不同之处。概括而言，与典型的分布式优化问题相比，联邦优化问题有以下几个关键特性：
+- 设备通常由大量的移动设备组成，每一个设备上的数据量相对较小，而设备数相对较多。
+- 设备间的数据通常是非独立同分布、且不平衡的。
+- 设备有通信限制：移动设备可能存在频繁掉线、速度缓慢、费用昂贵等问题。
+- 更注重隐私，不允许原始数据在设备间互相传输。
+其中，隐私问题和通信效率被视为是需要优先考虑的问题。联邦学习这些独有的特性，对其理论研究和算法改进都带来巨大的挑战。
+
+
 ## 架构
 
 [联邦学习在腾讯微视广告投放中的实践](https://mp.weixin.qq.com/s?__biz=MzU1NTMyOTI4Mw==&mid=2247548974&idx=1&sn=8ddfce42c8c1fd1a766039082c760c46&chksm=fbd7b242cca03b54ce5795761ed64306fb6b420dec35a08537d7edc3c2628f16f00e73cf0e4f&mpshare=1&scene=23&srcid=0826F45fSSMZKwrj42ji1Q6n&sharer_sharetime=1629989033937&sharer_shareid=b8d409494a5439418f4a89712efcd92a#rd)
@@ -199,6 +207,13 @@ Google首先将联邦学习运用在Gboard（Google键盘）上，联合用户�
 - 二是基于秘密共享的加密计算方法；
 - 三是基于同态加密的加密计算方法。
 
+## 联邦学习算法
+
+目前最流行的联邦学习方法，是由McMahan et al, 2017提出的**Federated Averaging**（也称parallel SGD/local SGD）方法（及其变体）。具体而言，机器学习中经典的SGD算法为：每次使用一个样本来计算梯度并进行参数更新。扩展到多台机器的版本，即为：
+- 每个Client在每次通信中使用一个样本来计算梯度并局部更新参数，将参数传给Server。Server汇总平均后更新模型参数再返回给Clients。这样的效率对于通信受限的联邦学习框架是难以承受的。
+- 因此，为了提高通信效率，Federated Averaging考虑每个Client首先在本地多次通过SGD更新模型，再将更新后的模型参数传给Server进行汇总平均。
+
+
 # 应用
 
 ## 风控
@@ -222,12 +237,24 @@ Google首先将联邦学习运用在Gboard（Google键盘）上，联合用户�
 
 # 工程实现
 
-- 开源FL工具包FATE
-- Tensorflow工具包：FFT
-- 【2021-3-14】[联邦学习:Tensorflow中的逐步实现](https://www.toutiao.com/i6814051104825803278/)
+## 数据集
+
+（1）数据集
+1. EMNIST数据集： 原始数据由671,585个数字图像和大小写英文字符（62个类）组成。联邦学习的版本将数据集拆分到3,400个不平衡Clients，每个Clients上的数字/字符为同一人所写，由于每个人都有独特的写作风格，因此数据是非同分布的。
+2. Stackoverflow数据集： 该数据集由Stack Overflow的问答组成，并带有时间戳、分数等元数据。训练数据集包含342,477多个用户和135,818,730个例子。其中的时间戳信息有助于模拟传入数据的模式。[下载地址](https://www.kaggle.com/stackoverflow/stackoverflow)
+3. Shakespeare数据集： 该数据是从The Complete Works of William Shakespeare获得的语言建模数据集。由715个字符组成，其连续行是Client数据集中的示例。训练集样本量为16,068，测试集为2,356。
+
+## 工具包
+
+（2）开源软件包
+1. **TensorFlow Federated**： TensorFlow框架，专门针对研究用例，提供大规模模拟功能来控制抽样。支持在模拟环境中加载分散数据集，每个Client的ID对应于TensorFlow数据集对象。
+  - 【2021-3-14】[联邦学习:Tensorflow中的逐步实现](https://www.toutiao.com/i6814051104825803278/)
   - FL架构的基本形式包括一个位于中心的管理员或服务器，负责协调训练活动。客户端主要是边缘设备，可以达到数百万的数量。这些设备在每次训练迭代中至少与服务器通信两次。首先，它们各自从服务器接收当前全局模型的权重，在各自的本地数据上对其进行训练，以生成更新后的参数，然后将这些参数上传到服务器进行汇总。这种通信循环一直持续到达到预先设定的epochs数或准确度条件为止。在联邦平均算法中，汇总仅仅意味着平均操作。
   - ![](https://p6-tt.byteimg.com/origin/pgc-image/66d33ac16b7e4951870bb12b2a6ae363?from=pc)
   - 在Tensorflow中从头开始构建一个FL，并在Kaggle的[MNIST数据集](https://www.kaggle.com/scolianni/mnistasjpg)上对其进行训练
+来源：The TFF Authors. TensorFlow Federated, 2019. URL：https://www.tensorflow.org/federated.
+2. **PySyft**： PyTorch框架，使用PyTorch中的联邦学习。适用于考虑隐私保护的机器学习，采用差分隐私和多方计算（MPC）将私人数据与模型训练分离。
+3. 开源FL工具包FATE
 
 ## 腾讯联邦学习
 
