@@ -1655,6 +1655,10 @@ print(result)
 
 所以两相结合，**以数据为基础，主导产品布局，拆解用户行为，赋能业务增长**，一定是运营职业上升不可缺少的重要能力之一。如果你经常逛招聘市场就会发现，可以通过数据赋能增长的能力在职场中越来越重要。尤其对运营人来说，增长就是运营人职场能力的分水岭。
 
+- 【2021-10-28】[一张图告诉你运营重点](https://maimai.cn/web/feed_detail?fid=1616875160&efid=3OUZnOuogEPqZHWZecHp2Q&share_channel=4)，社群、活动、新媒体、转化、内容、增长等知识点，源自江湖运营的文章：[2019年互联网运营地图大全：新媒体到短视频、私域到社群无所不包](https://mp.weixin.qq.com/s/CTXZHU6RoN5wlA8alUBFWw)，涵盖运营、新媒体、电商、抖音短视频、社群、私域流量、百度SEO、餐饮实战、产品思维、连锁模式、APP运营、营销技术、爆款写作、职场成长、恋爱婚姻、经济学，甚至还包括用户、增长、渠道、行业、裂变、文案、流量、数据、活动、职场、推广等技巧。巨细无遗，核心内容都被行业高手们整理成一张张“内功口诀”——知识地图
+  - ![](https://i9.taou.com/maimai/p/27854/9255_4_8oRGKRIXAXHfoO7X)
+- [电商运营知识点](https://bbs.paidai.com/topic/399122)
+  - ![](https://paidai.oss-cn-beijing.aliyuncs.com/uploadpath/2015-6/2015630134713_693584.jpeg?x-oss-process=logo)
 
 # 科技前沿
 
