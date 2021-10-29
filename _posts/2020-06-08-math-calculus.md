@@ -40,6 +40,13 @@ mathjax: true
     - [Mathematics for Machine Learning: Multivariate Calculus](https://www.coursera.org/learn/multivariate-calculus-machine-learning)
     - [Mathematics for Machine Learning: Linear Algebra](https://www.youtube.com/playlist?list=PLiiljHvN6z1_o1ztXTKWPrShrMrBLo5P3)
 
+## 椭圆
+
+神奇的椭圆，三种不同定义（拉伸，斜切圆锥体，画线）最终都能得到椭圆
+- [【官方双语】数学天赋是什么样的？它从何而来？](https://www.bilibili.com/video/BV1Ks411G7kN)
+
+<iframe src="//player.bilibili.com/player.html?aid=28518492&bvid=BV1Ks411G7kN&cid=49355487&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 
 # 导读
 ---
