@@ -3,7 +3,7 @@ layout: post
 title:  "家庭教育与人生-Education & Life"
 date:   2014-11-12 14:02:00
 categories: 读书笔记
-tags: 贫富差距 家庭教育 留学生 凉子访谈录
+tags: 贫富差距 家庭教育 留学生 凉子访谈录 衡水中学
 excerpt: 穷人一直穷，富人一直富吗？
 author: 鹤啸九天
 mathjax: true
@@ -45,7 +45,14 @@ mathjax: true
 
 ## 家庭教育与心理学
 
-【2021-10-30】北京青年-凉子访谈录：[15岁进北大，退学复读考上清华，我不想再当「做题工具人」](https://www.bilibili.com/video/BV1vN411f7FF/)
+【2021-10-30】
+
+[“复读时去了传说中的衡水中学，看到了很多匪夷所思的事，三观被颠覆了…完整版](https://www.bilibili.com/video/BV1Uz4y1C7dY/?spm_id_from=autoNext)
+
+<iframe src="//player.bilibili.com/player.html?aid=585193619&bvid=BV1Uz4y1C7dY&cid=252332015&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  width="100%" height="600"> </iframe>
+
+
+北京青年-凉子访谈录：[15岁进北大，退学复读考上清华，我不想再当「做题工具人」](https://www.bilibili.com/video/BV1vN411f7FF/)
 - 小镇做题家：杜青云，湖南张家界农家子弟，15岁以湖南省第二名考入北大，按父母意愿进入光华管理学院，然而室友家庭背景很好，功利心较重，边缘化农村学生，转寝室申请被辅导员驳回后，杜青云开始抑郁，失去方向，完成自我重构后，大三重新高考，再次以湖南省第一考入清华
   - 父亲夸“乖”，实际上是一种驯化，工具人，培养奴性
   - 考第一又怎么样呢？只是某种规则上胜利者，被驯化，并没有多厉害
