@@ -2004,6 +2004,8 @@ https://github.com/bojone/SimCSE
 
 ![](https://img-blog.csdnimg.cn/img_convert/a6df8af67afe4b2b7ebebd3d3531d380.png)
 
+【2021-10-28】[FAISS + SBERT实现的十亿级语义相似性搜索](https://www.yanxishe.com/TextTranslation/2987?from=wcm)，[Billion-scale semantic similarity search with FAISS+SBERT](https://towardsdatascience.com/billion-scale-semantic-similarity-search-with-faiss-sbert-c845614962e2)
+
 
 ### BERT-as-service
 
