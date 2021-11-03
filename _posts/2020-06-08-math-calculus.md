@@ -40,6 +40,17 @@ mathjax: true
     - [Mathematics for Machine Learning: Multivariate Calculus](https://www.coursera.org/learn/multivariate-calculus-machine-learning)
     - [Mathematics for Machine Learning: Linear Algebra](https://www.youtube.com/playlist?list=PLiiljHvN6z1_o1ztXTKWPrShrMrBLo5P3)
 
+## 圆
+
+【2021-11-3】平稳转动的几何形状不止圆形，比如：勒洛三角形，[介绍](https://www.ixigua.com/i7022216012045094181/)，不能做轮子因为内有固定轴。
+- 勒洛三角形应用案例：
+  - 转子发动机，也叫汪克尔引擎，汪克尔在1957年做了第一个转子发动机原型机。马自达(以前好像叫东洋工业)好像是1961年有的授权，不过马自达研究比任何车企都用心而已，奔驰以前也研究过，没结论
+  - 什么形状的钻头，能钻出方孔? 答案就是勒洛三角形，这个近似三角形的几何图形，绘制起来也十分简单，以一个正三角形的三个顶点为圆心，边长为半径画圆，三条边围绕的三段弧形，即可组成勒洛三角形
+- [勒洛三角形是什么？将水杯放在三角形上推动，有趣的现象发生了](https://www.bilibili.com/video/BV1dL411W7oq)
+
+<iframe src="//player.bilibili.com/player.html?aid=463258721&bvid=BV1dL411W7oq&cid=416971623&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+
 ## 椭圆
 
 神奇的椭圆，三种不同定义（拉伸，斜切圆锥体，画线）最终都能得到椭圆
