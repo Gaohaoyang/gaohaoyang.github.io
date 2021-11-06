@@ -689,6 +689,46 @@ def post_data():
     return res
 ```
 
+### app模块化 blueprint
+
+一个py文件中写入了很多路由, 维护代码非常麻烦，时长出现重名，错乱，然而并不能想普通py代码一样直接导入别的路由 → 路由**模块化**
+
+Flask提供一个特有的模块化处理方式blueprint，Blueprint 是一个存储操作方法的容器，这些操作在这个Blueprint 被注册到一个应用之后就可以被调用，Flask 可以通过Blueprint来组织URL以及处理请求。
+
+Flask使用Blueprint让应用实现模块化，在Flask中，Blueprint具有如下属性：
+- 一个应用app可以具有多个Blueprint
+- 可以将一个Blueprint**注册**到任何一个未使用的URL下比如 “/”、“/sample”或者子域名
+- 在一个应用中，一个模块可以注册**多次**
+- Blueprint可以单独具有自己的模板、静态文件或者其它的通用操作方法，它并不是必须要实现应用的视图和函数的
+- 在一个应用初始化时，就应该要注册需要使用的Blueprint
+但是一个Blueprint并不是一个完整的应用，它不能独立于应用运行，而必须要注册到某一个应用中。
+
+蓝图/Blueprint对象用起来和一个应用/Flask对象差不多，最大的区别在于**蓝图对象没有办法独立运行**，必须将它注册到一个应用对象上才能生效
+
+使用蓝图可以分为三个步骤, 应用启动后,通过/admin/可以访问到蓝图中定义的视图函数
+
+```python
+# 1,创建一个蓝图对象
+admin=Blueprint('admin',__name__)　
+# 2,在这个蓝图对象上进行操作,注册路由,指定静态文件夹,注册模版过滤器
+@admin.route('/')
+def admin_home():
+    return 'admin_home'
+# 3,在应用对象上注册这个蓝图对象
+app.register_blueprint(admin,url_prefix='/admin')
+
+```
+
+运行机制
+- 蓝图是保存了一组将来可以在应用对象上执行的操作，注册路由就是一种操作. 当在应用对象上调用 route 装饰器注册路由时,这个操作将修改对象的url_map路由表. 然而，蓝图对象根本没有路由表，当我们在蓝图对象上调用route装饰器注册路由时,它只是在内部的一个延迟操作记录列表defered_functions中添加了一个项
+- 当执行应用对象的 register_blueprint() 方法时，应用对象将从蓝图对象的 defered_functions 列表中取出每一项，并以自身作为参数执行该匿名函数，即调用应用对象的 add_url_rule() 方法，这将真正的修改应用对象的路由表
+
+蓝图的url前缀
+- 当我们在应用对象上注册一个蓝图时，可以指定一个url_prefix关键字参数（这个参数默认是/）
+- 在应用最终的路由表 url_map中，在蓝图上注册的路由URL自动被加上了这个前缀，这个可以保证在多个蓝图中使用相同的URL规则而不会最终引起冲突，只要在注册蓝图时将不同的蓝图挂接到不同的自路径即可
+
+url_for
+url_for('admin.index') # /admin/
 
 ### 自动生成APIs文档
 
@@ -1208,6 +1248,127 @@ web页面代码 (为了避开jeklly语法冲突，%号和{中间间用空格隔�
  </html>
  ```
 
+
+### 文件上传下载
+
+参考：
+- [Python Flask:一个极简的web服务+文件上传](https://xu3352.github.io/python/2018/04/29/python-flask-web-server)
+- [Python实现文件上传下载](https://blog.csdn.net/songling515010475/article/details/106409521)，使用socket
+
+步骤
+- 限制指定的后缀文件才可以上传
+- 上传成功后, 跳转到成功页面
+- 成功页面可以再返回上传页面
+- 文件上传到指定的目录, 目录需要提前创建好
+
+
+
+```python
+import os
+from flask import Flask, request, redirect, url_for
+from werkzeug import secure_filename
+
+UPLOAD_FOLDER = '/tmp/uploads'
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+
+app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/upload/', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        file = request.files['file']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('upload_success', filename=filename))
+    return '''
+    <!doctype html>
+    <title>Upload new File</title>
+    <h1>Upload new File</h1>
+    <form action="" method=post enctype=multipart/form-data>
+      <p><input type=file name=file>
+         <input type=submit value=Upload>
+    </form>
+    '''
+
+@app.route('/upload_success')
+def upload_success():
+    return '''
+    <!doctype html>
+    <title>上传成功</title>
+    <h1>上传成功</h1>
+    <a href="/upload/">继续上传</a>
+    '''
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8080, debug=True)
+```
+
+另一个上传/下载完整示例
+
+```python
+#!/usr/bin/env python3
+# -*- coding:utf-8 -*-
+
+import os, sys
+from flask import Flask, render_template, request, send_file, send_from_directory
+
+app = Flask(__name__)
+BASE_PATH = os.path.dirname(os.path.abspath(__file__))
+
+@app.route("/")
+def index():
+    # 文件上传页面
+    html="""<html>
+        <head>
+          <title>文件上传测试</title>
+        </head>
+        <body>
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" multiple="multiple" />
+                <input type="submit" value="提交" />
+            </form>
+        </body>
+        </html>"""
+    return html
+
+@app.route("/upload", methods=["POST"])
+def upload_file():
+    try:
+        # f = request.files["file"]
+        for f in request.files.getlist('file'):
+            filename = os.path.join(BASE_PATH, "upload", f.filename)
+            print(filename)
+            f.save(filename)
+        return "file upload successfully!"
+    except Exception as e:
+        return "failed!"
+
+
+@app.route("/download/<filename>", methods=["GET"])
+def download_file(filename):
+    # 下载方法：http://10.200.24.101:8093/download/log.txt
+    dir = os.path.join(BASE_PATH, 'download')
+    return send_from_directory(dir, filename, as_attachment=True)
+
+
+def mkdir(dirname):
+    dir = os.path.join(BASE_PATH, dirname)
+    if not os.path.exists(dir):
+        os.makedirs(dir)
+
+
+if __name__ == "__main__":
+    mkdir('download')
+    mkdir('upload')
+    app.run(host="10.200.24.101", port=8093, debug=False)
+```
 
 
 ## Django
