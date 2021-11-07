@@ -15,6 +15,15 @@ mathjax: true
 
 # 总结
 
+- 【2021-11-7】[The Algorithms](https://the-algorithms.com/#aboutUs)，[项目地址](https://github.com/TheAlgorithms), 分别提供了用 Python、Java、C、C++ 等数十种编程语言实现的算法，每种语言都有自己的 GitHub 算法代码库。如下领域的算法：
+  - 排序（Sorts）算法
+  - 搜索（Searches）算法
+  - 动态规划（Dynamic Programming）算法: 编辑距离（Edit Distance）、子集和问题（Sum of Sunset）、最小分区（Minimum Partition）等子算法。
+  - 加密（Ciphers）算法
+  - 数据结构（Data Structures）算法
+  - 数学（Math）算法
+  - 数字图像处理（Digital Image Processing）算法
+
 ## 观点
 
 【2012-8-22】陈皓：[为什么我反对纯算法面试题](https://coolshell.cn/articles/8138.html)
@@ -87,7 +96,7 @@ mathjax: true
 
 ### 插入排序
 
-```C
+```c
 void insertSort(vector<int>& nums){
   int len=nums.size();
   for(int i=1;i<len;i++){
