@@ -2,7 +2,7 @@
 layout: post
 comments: true
 title: "神经网络架构搜索-Neural Architecture Search"
-date: 2021-01-21 00:14:00
+date: 2021-01-22 00:14:00
 tags:  AutoML NAS 强化学习
 categories: 深度学习
 excerpt: NAS详解
