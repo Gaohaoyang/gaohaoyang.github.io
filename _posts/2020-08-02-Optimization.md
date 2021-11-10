@@ -3,7 +3,7 @@ layout: post
 title:  "优化算法笔记-optimization"
 date:   2020-08-02 00:23:00
 categories: 机器学习 数学基础
-tags: 最优化 梯度下降 牛顿法 斯坦福 凸优化 KKT 损失函数 距离计算 相似度 Pareto 帕累托
+tags: 最优化 梯度下降 牛顿法 斯坦福 凸优化 KKT 损失函数 距离计算 相似度 Pareto 帕累托 编辑距离
 excerpt: 机器学习中常见的优化算法
 author: 鹤啸九天
 mathjax: true
@@ -63,7 +63,6 @@ mathjax: true
     - ![](https://ask.qcloudimg.com/http-save/yehe-1622140/6jigyrmzvj.gif)
 
 
-
 # 简介
 
 - 摘自：[最优化算法的前世今生](https://xw.qq.com/cmsid/20200718A06NR300)
@@ -81,10 +80,10 @@ mathjax: true
 - 在各种分类任务，翻译场景下，都会涉及到语义相似度语义相似度的计算
 
 基本概念
-- TF：Term frequency即关键词词频，是指一篇文章中关键词出现的频率 ![](https://images.cnblogs.com/cnblogs_com/liangxiaxu/201205/201205051901168917.gif)
-- IDF：Inverse document frequency指逆向文本频率，是用于衡量关键词权重的指数 ![](https://images.cnblogs.com/cnblogs_com/liangxiaxu/201205/201205051901168393.gif)
+- `TF`：Term frequency即关键词词频，是指一篇文章中关键词出现的频率 ![](https://images.cnblogs.com/cnblogs_com/liangxiaxu/201205/201205051901168917.gif)
+- `IDF`：Inverse document frequency指逆向文本频率，是用于衡量关键词权重的指数 ![](https://images.cnblogs.com/cnblogs_com/liangxiaxu/201205/201205051901168393.gif)
 - 向量空间模型
-  - 向量空间模型简称 VSM，是 VectorSpace Model 的缩写。在此模型中，文本被看作是由一系列相互独立的词语组成的，若文档 D 中包含词语 t1,t2,…,tN，则文档表示为D（t1,t2,…,tN）。由于文档中词语对文档的重要程度不同，并且词语的重要程度对文本相似度的计算有很大的影响，因而可对文档中的每个词语赋以一个权值 w，以表示该词的权重，其表示如下：D（t1,w1；t2,w2；…,tN，wN），可简记为 D（w1,w2,…,wN），此时的 wk 即为词语 tk的权重，1≤k≤N。关于权重的设置，我们可以考虑的方面：词语在文本中的出现频率（tf），词语的文档频率（df，即含有该词的文档数量，log N/n。很多相似性计算方法都是基于向量空间模型的。
+  - `向量空间模型`简称 VSM，是 VectorSpace Model 的缩写。在此模型中，文本被看作是由一系列相互独立的词语组成的，若文档 D 中包含词语 t1,t2,…,tN，则文档表示为D（t1,t2,…,tN）。由于文档中词语对文档的重要程度不同，并且词语的重要程度对文本相似度的计算有很大的影响，因而可对文档中的每个词语赋以一个权值 w，以表示该词的权重，其表示如下：D（t1,w1；t2,w2；…,tN，wN），可简记为 D（w1,w2,…,wN），此时的 wk 即为词语 tk的权重，1≤k≤N。关于权重的设置，我们可以考虑的方面：词语在文本中的出现频率（tf），词语的文档频率（df，即含有该词的文档数量，log N/n。很多相似性计算方法都是基于向量空间模型的。
 
 ### 余弦相似度（Cosine）
 
@@ -120,7 +119,6 @@ mathjax: true
 Jaccard系数主要用于计算**符号**度量或**布尔值**度量的向量的相似性。即，**无需比较差异大小，只关注是否相同**。Jaccard系数只关心特征是否一致（共有特征的比例）。
 - [img](https://img-blog.csdn.net/20170411164412676) ![](https://img-blog.csdn.net/20170411164412676)
 - [img](https://img-blog.csdn.net/20180516170747250) ![](https://img-blog.csdn.net/20180516170747250)
-
 - [img](https://img-blog.csdn.net/20170411164453926) ![](https://img-blog.csdn.net/20170411164453926)
  
 然后利用公式进行计算:
@@ -241,6 +239,67 @@ if __name__ == '__main__':
 
 - todo
 
+### 编辑距离
+
+字符串的相似性比较应用场合很多，像拼写**纠错**、文本**去重**、上下文**相似性**等。
+
+评价字符串相似度最常见的办法就是：把一个字符串通过插入、删除或替换这样的编辑操作，变成另外一个字符串，所需要的最少编辑次数，这种就是**编辑距离**（edit distance）度量方法，也称为**Levenshtein距离**。海明距离是编辑距离的一种特殊情况，只计算**等长**情况下替换操作的编辑次数，只能应用于两个等长字符串间的距离度量。
+
+其他常用的度量方法还有：`Jaccard` distance、`J-W`距离（Jaro–Winkler distance）、`余弦`相似性（cosine similarity）、`欧氏`距离（Euclidean distance）等。
+
+【2021-11-8】[Python Levenshtein 计算文本之间的距离](https://blog.csdn.net/u014657795/article/details/90476489)
+- pip install difflib
+- pip install python-Levenshtein
+
+```python
+import difflib
+
+query_str = '市公安局'
+s1 = '广州市邮政局'
+s2 = '广州市公安局'
+s3 = '广州市检查院'
+
+seq = difflib.SequenceMatcher(None, s1, s2)
+ratio = seq.ratio()
+print 'difflib similarity1: ', ratio
+
+# difflib 去掉列表中不需要比较的字符
+seq = difflib.SequenceMatcher(lambda x: x in ' 我的雪', str1,str2)
+ratio = seq.ratio()
+print 'difflib similarity2: ', ratio
+
+print(difflib.SequenceMatcher(None, query_str, s1).quick_ratio())  
+print(difflib.SequenceMatcher(None, query_str, s2).quick_ratio())  
+print(difflib.SequenceMatcher(None, query_str, s3).quick_ratio())  
+# 0.4
+# 0.8 --> 某一种相似度评判标准下的最相似的文本……
+# 0.08695652173913043
+
+import Levenshtein
+# (1) 汉明距离，str1和str2必须长度一致。是描述两个等长字串之间对应位置上不同字符的个数
+Levenshtein.hamming('hello', 'world') # 4
+Levenshtein.hamming('abc', 'abd') # 1
+# (2) 编辑距离（也成Levenshtein距离）。是描述由一个字串转化成另一个字串最少的操作次数，在其中的操作包括插入、删除、替换
+Levenshtein.distance('hello', 'world') # 4
+Levenshtein.distance('abc', 'abd') # 1
+Levenshtein.distance('abc', 'aecfaf') # 4
+# (3) 莱文斯坦比。计算公式 r = (sum - ldist) / sum, 其中sum是指str1 和 str2 字串的长度总和，ldist是类编辑距离
+# 注意：这里的类编辑距离不是2中所说的编辑距离，2中三种操作中每个操作+1，而在此处，删除、插入依然+1，但是替换+2
+# 这样设计的目的：ratio('a', 'c')，sum=2,按2中计算为（2-1）/2 = 0.5,’a’,'c’没有重合，显然不合算，但是替换操作+2，就可以解决这个问题。
+Levenshtein.ratio('hello', 'world') # 0.2
+Levenshtein.ratio('abc', 'abd') # 0.6666666666666666
+Levenshtein.ratio('abc', 'aecfaf') # 0.4444444444444444
+# (4) jaro距离
+Levenshtein.jaro('hello', 'world') # 0.43333333333333335
+Levenshtein.jaro('abc', 'abd') # 0.7777777777777777
+Levenshtein.jaro('abc', 'aecfaf') # 0.6666666666666666
+# (5) Jaro–Winkler距离
+Levenshtein.jaro_winkler('hello', 'world') # 0.43333333333333335
+Levenshtein.jaro_winkler('abc', 'abd') # 0.8222222222222222
+Levenshtein.jaro_winkler('abc', 'aecfaf') # 0.7
+
+```
+
 
 ## 分类
 
@@ -357,24 +416,49 @@ beale函数
 
 # 算法类型
 
+## 梯度下降 GD
+
+【2021-11-9】[梯度下降方法的视觉解释](https://www.toutiao.com/i6836422484028293640/)（动量，AdaGrad，RMSProp，Adam），原文：[A Visual Explanation of Gradient Descent Methods (Momentum, AdaGrad, RMSProp, Adam](https://towardsdatascience.com/a-visual-explanation-of-gradient-descent-methods-momentum-adagrad-rmsprop-adam-f898b102325c)
+
+机器学习中，梯度下降的目标是损失函数最小化。好的算法可以快速/可靠地找到最小值，即不会陷入局部最小值，鞍点或平稳区域，而会求出全局最小值。
+
+基本的梯度下降算法遵循这样的思想，即梯度的相反方向指向下部区域的位置。 因此，它会沿梯度的**相反**方向迭代地采取步骤。 
+
+对于每个参数theta，它执行以下操作：
+> - 增量delta =- 学习率 * 梯度
+> - θ += 增量
+
+Delta是算法每次迭代后theta的变化量； 希望随着每个这样的变化，θ逐渐接近最佳值。
+- ![](https://p3.toutiaoimg.com/origin/pgc-image/e5527a9c5c2b436ab50a11fb9b0fb4b9)
 
 ## Vanilla SGD
 
+Vannilla梯度下降法是普通的，因为仅对**梯度**起作用
 - 朴素 SGD (Stochastic Gradient Descent) 最为简单，没有动量的概念
     - ![](https://www.zhihu.com/equation?tex=%5Ctheta_%7Bi%2B1%7D%3D+%5Ctheta_t+-+%5Ceta+g_t)
     - ![](https://pic3.zhimg.com/80/v2-2476080e4cdfd489ae64ae3ceeafe48b_720w.jpg)
-- 缺点
-    - 收敛速度慢，可能在鞍点处震荡。
-    - 如何合理的选择学习率是 SGD 的一大难点。
-
+缺点
+- 收敛速度慢，可能在鞍点处震荡。
+- 如何合理的选择学习率是 SGD 的一大难点。
 
 ## 动量 Momentum
 
-- SGD 在遇到沟壑时容易陷入震荡。为此，可以为其引入动量 Momentum[3]，加速 SGD 在正确方向的下降并抑制震荡。
-    - ![](https://www.zhihu.com/equation?tex=m_t+%3D+%5Cgamma+m_%7Bt-1%7D+%2B+%5Ceta+g_t)
+- SGD 在遇到沟壑时容易陷入震荡。为此，可以为其引入**动量** Momentum，加速 SGD 在正确方向的下降并抑制震荡。
+- 动量算法（或简称为动量）的梯度下降借鉴了物理学的思想。 想象一下，将球滚动到无摩擦碗内。 累积的动量并没有停止在底部，而是将其向前推动，并且球不断来回滚动。
+- 公式
+  - ![](https://www.zhihu.com/equation?tex=m_t+%3D+%5Cgamma+m_%7Bt-1%7D+%2B+%5Ceta+g_t)
+
+> - 增量 =- 学习率 * 梯度 + 上一个增量衰变率
+> - θ += 增量
+
+- Momentum descent with decay_rate = 1.0 (no decay).
+  - ![](https://p3.toutiaoimg.com/origin/pgc-image/9e65f1b70c76486798e1899dfbfeba18?from=pc)
 - 引入动量有效的加速了梯度下降收敛过程。
 - ![](https://pic2.zhimg.com/80/v2-b9388fd6e465d82687680f9d16edcd2b_720w.jpg)
 
+优点：
+- 动量只是移动得**更快**（因为它累积了所有动量）
+- 动量有逃避**局部最小值**的作用（因为动量可能将其推离局部最小值），或更好地通过**高原**地区。
 
 ## Nesterov Accelerated Gradient
 
@@ -386,22 +470,38 @@ beale函数
 
 ## Adagrad
 
+机器学习中，稀疏特征的平均梯度通常很小，因此这些特征的训练速度慢。
+- 解决方法之一是为每个特征设置不同的学习率，但这会很快变得混乱。
+- AdaGrad解决思路：当前更新的特征越多，将来更新的特征就越少，从而为其他特征（例如稀疏功能）提供了赶超的机会。
+
+![](https://p3.toutiaoimg.com/origin/pgc-image/b6ab8e70a4864dc4ac4caa64dcd45444?from=pc)
+- AdaGrad（以及其他类似的基于梯度平方的方法，如RMSProp和Adam）可以更好地逃避鞍点。
+- AdaGrad将走一条直线，而梯度下降（或相关的动量）则采取 "让我先滑下陡坡，然后再担心慢速方向" 的方法。 有时，原生梯度下降可能会在两个方向的梯度均为0且在此处完全满足的鞍点处停止。
+
+自适应梯度算法（或简称AdaGrad）是跟踪**梯度平方**的总和，并使用它来适应不同方向的梯度。 
 - SGD、SGD-M 和 NAG 均是以相同的学习率去更新各个分量。而深度学习模型中往往涉及大量的参数，不同参数的更新频率往往有所区别。对于更新不频繁的参数（典型例子：更新 word embedding 中的低频词），我们希望单次步长更大，多学习一些知识；对于更新频繁的参数，我们则希望步长较小，使得学习到的参数更稳定，不至于被单个样本影响太多。
 - Adagrad算法即可达到此效果。其引入了二阶动量
 
-## RMSprop
+## RMSprop——给劲AdaGrad
 
-- 在 Adagrad 中，Vt单调递增，使得学习率逐渐递减至 0，可能导致训练过程提前结束。为了改进这一缺点，可以考虑在计算二阶动量时不累积全部历史梯度，而只关注最近某一时间窗口内的下降梯度。根据此思想有了 RMSprop
-    - ![](https://www.zhihu.com/equation?tex=v_t+%3D+%5Cgamma+v_%7Bt-1%7D+%2B+%281-%5Cgamma%29+%5Ccdot+%5Ctext%7Bdiag%7D%28g_t%5E2%29)
+AdaGrad的问题在于它的运行速度非常慢
+- 在 Adagrad 中，Vt 单调递增，使得学习率逐渐递减至0，可能导致训练过程提前结束。
+- Adagrad **梯度平方的总和**只会增加而不会缩小（单调递增）。 
+- RMSProp（用于均方根传播）通过添加**衰减因子**来解决此问题。即：梯度平方的和实际上是梯度平方的**衰减**的和
+![](https://p3.toutiaoimg.com/origin/pgc-image/112619e0307f47db9f332270a07ffd67?from=pc)
+- AdaGrad white（白色）最初与RMSProp（绿色）保持一致，这与调整后的学习速率和衰减速率一样。 但是AdaGrad的平方平方和累积起来如此之快，以至于很快就变得庞大起来（由动画中的平方大小证明）。 他们付出了沉重的代价，最终AdaGrad实际上停止了前进。 另一方面，由于衰减率的原因，RMSProp始终将正方形保持在可管理的大小范围内。 这使得RMSProp比AdaGrad更快。
+
+在计算二阶动量时不累积全部历史梯度，而只关注最近某一时间窗口内的下降梯度。根据此思想有了 RMSprop
+  - ![](https://www.zhihu.com/equation?tex=v_t+%3D+%5Cgamma+v_%7Bt-1%7D+%2B+%281-%5Cgamma%29+%5Ccdot+%5Ctext%7Bdiag%7D%28g_t%5E2%29)
 
 ## Adadelta
 
 - 待补充
 
-## Adam
+## Adam——深度学习默认首选，融合动量+RMSProp
 
 - Adam是 RMSprop 和 Momentum 的结合。和 RMSprop 对二阶动量使用指数移动平均类似，Adam 中对一阶动量也是用指数移动平均计算。
-
+Adam（自适应矩估计的缩写）兼具**动量**和**RMSProp**的优点，Adam从动量获得速度，并从RMSProp获得了在不同方向适应梯度的能力。 两者的结合使其功能强大。。 Adam在经验上表现良好，因此近年来是深度学习问题的首选。
 
 ## NAdam
 
