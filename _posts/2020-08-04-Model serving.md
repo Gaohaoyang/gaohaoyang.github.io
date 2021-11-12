@@ -28,6 +28,12 @@ mathjax: true
 - 模型建立
 - 线上部署
 
+## 教程
+
+【2021-11-12】[《生产系统中的机器学习工程 (MLOps) 专业课程》介绍](https://mp.weixin.qq.com/s/_xjGUt-p7OZqGXu_kPYdfg), 2021 年 11 月 16 日正式上线, 讲师：Andrew Ng
+
+## MLOps
+
 ![](https://img-blog.csdnimg.cn/20210410095830948.png)
 ![](https://img-blog.csdnimg.cn/20210410095837503.png)
 
