@@ -3,7 +3,7 @@ layout: post
 title:  "家庭教育与人生-Education & Life"
 date:   2014-11-12 14:02:00
 categories: 读书笔记
-tags: 贫富差距 家庭教育 留学生 凉子访谈录 衡水中学
+tags: 贫富差距 家庭教育 留学生 凉子访谈录 衡水中学 海淀学区
 excerpt: 穷人一直穷，富人一直富吗？
 author: 鹤啸九天
 mathjax: true
@@ -74,7 +74,23 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=415359839&bvid=BV18V411a7HK&cid=257608501&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="600"> </iframe>
 
+## 北京学区
 
+### 海淀学区划分
+
+海淀17个学区划分 [图](http://www.360doc.com/content/21/0324/12/10674521_968608066.shtml)
+[北京海淀学区划分，街道地图+学区划分](https://zhuanlan.zhihu.com/p/345566627)
+- ![](https://pic3.zhimg.com/v2-0620e99c8f2afeb00a3d96ef097a67d7_1440w.jpg?source=172ae18b)
+
+海淀学区划分五大区域：
+- 区域一：羊坊店、万寿路、永定路（海淀南片）
+- 区域二：北太平庄、花园路、学院路
+- 区域三：中关村、海淀
+- 区域四：八里庄、紫竹院、四季青
+- 区域五：西三旗、清河、上地、青龙桥、上庄西北旺、温泉苏家坨
+
+学校实力
+- ![](https://p3.toutiaoimg.com/large/tos-cn-i-qvj2lq49k0/6da2407fabf44119b024e242d20f026a)
 
 # [一个清华学生留学香港后对人生的思考](https://mp.weixin.qq.com/s?__biz=MjM5ODY2OTQyNg==&mid=200945260&idx=1&sn=37f11020da912382deb04b8011465b65&chksm=28c9b3711fbe3a67824aa0761f85a57240bb8bdad3de6da6c48fc9063df5b97c1fdad0c5759f&token=1917001922&lang=zh_CN#rd)
 
