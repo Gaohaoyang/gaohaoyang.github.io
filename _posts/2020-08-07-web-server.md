@@ -3,7 +3,7 @@ layout: post
 title:  "Web前端服务知识-Web-Serving"
 date:   2020-08-07 19:17:00
 categories: 技术工具
-tags: Web web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session RPC 微服务 GraphQL UML Gunicorn supervisor genvent grequests node.js vue 前端
+tags: Web web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session RPC 微服务 GraphQL UML Gunicorn supervisor genvent grequests node.js vue 前端 低代码 拖拽
 author : 鹤啸九天
 excerpt: Web开发相关技术知识点
 mathjax: true
@@ -1933,6 +1933,20 @@ node.js、npm、vue、webpack之间的关系
 ## vue
 
 【2021-7-21】[vue学习笔记（超详细）](https://blog.csdn.net/fmk1023/article/details/111381876)
+
+
+## 低代码平台
+
+- 【2021-11-15】[基于 magic-api 搭建自己的低代码平台](https://www.toutiao.com/i7000242091813126670/)，2021 开年“低代码”成了热门话题，各大云厂商都在加码。
+
+- 阿里推出了易搭，通过简单的拖拽、配置，即可完成业务应用的搭建
+- 腾讯则是推出了微搭，通过行业化模板、拖放式组件和可视化配置快速构建多端应用（小程序、H5 应用、Web 应用等），打通了小程序、云函数。
+- 低代码开源项目：百度 amis、h5-Dooring 和 magic-api。
+  - 百度 amis（前端）：百度 amis 是一套前端低代码框架，通过 JSON 配置就能生成各种后台页面，极大减少开发成本，甚至可以不需要了解前端。
+    - ![](https://p9.toutiaoimg.com/origin/pgc-image/f75e701db958418d8a5ecb0a5af497ed?from=pc)
+  - [h5-Dooring](http://h5.dooring.cn)（前端）：h5-Dooring，让 H5 制作像搭积木一样简单, 轻松搭建 H5 页面, H5 网站, PC 端网站, 可视化设计。
+    - ![](https://p9.toutiaoimg.com/origin/pgc-image/61b16a01a9bc46ae88391a5165c8b3e2?from=pc)
+  - magic-api（后端）：magic-api 是一个基于 Java 的接口快速开发框架，编写接口将通过 magic-api 提供的 UI 界面完成，自动映射为 HTTP 接口，无需定义 Controller、Service、Dao、Mapper、XML、VO 等 Java 对象即可完成常见的 HTTP API 接口开发。
 
 # 结束
 
