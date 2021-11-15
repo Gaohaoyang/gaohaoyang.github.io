@@ -3,7 +3,7 @@ layout: post
 title:  "技术管理之路-Path to Management"
 date:   2020-07-14 12:00:00
 categories: 软素质
-tags: KPI OKR 孙子兵法 三十六计 创新扩散曲线 情商
+tags: KPI OKR 孙子兵法 三十六计 创新扩散曲线 情商 人脉
 excerpt: 为什么有的人虽然工作十年，但实际上只有一年经验？
 author: 鹤啸九天
 mathjax: true
@@ -11,6 +11,10 @@ mathjax: true
 
 * content
 {:toc}
+
+【2021-11-14】六度人脉：
+- **六度人脉**关系理论（Six Degrees of Separation），是指地球上所有的人都可以通过六层以内的关系链和任何其他人联系起来。也就是所谓的六次握手规律。通俗地讲：“你和任何一个陌生人之间所间隔的人不会超过五个，也就是说，最多通过六个人你就能够认识任何一个陌生人。”
+- ![](https://bkimg.cdn.bcebos.com/pic/9825bc315c6034a86acbece4cc134954092376ad?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2U4MA==,g_7,xp_5,yp_5/format,f_auto)
 
 
 # 职场情商

@@ -817,6 +817,13 @@ mathjax: true
   - 剩女更多的是主动选择，高度发展的今天，相夫教子不再是唯一需求，跨入不如意的婚姻生活是更大的问题→剩女
 - 【2021-5-4】[红娘最终版 - 985相亲平台：清北学霸谈恋爱方式，服了！](https://www.ixigua.com/6929548045738574340)
 
+【2021-11-14】国外PBS拍摄的中国纪录片leftover women《剩女》，[上](https://www.bilibili.com/video/BV1Si4y1x7Qi/)，[下](https://www.bilibili.com/video/BV1Si4y1x7Qi?p=2)
+- <iframe src="//player.bilibili.com/player.html?aid=540553332&bvid=BV1Si4y1x7Qi&cid=187030594&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- 传媒大学女生被妈妈“控制”，去心理咨询
+- <iframe src="//player.bilibili.com/player.html?aid=540553332&bvid=BV1Si4y1x7Qi&cid=187030594&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- 来自山东的律师，家里人只有她接受过高等教育，思想层面的矛盾很难协调，家里长辈都是以自己认为的幸福定义孩子是否幸福，却忘了放手，忽略了人是独立的个体，长辈多用亲情绑架，很棘手。34岁时选择出国（法国）留学
+- 35岁以上算高龄高危，5倍风险，国内暂无冻卵子机构，国外有，泰国乌克兰
+
 ## 交友活动
 
 这种快速交友活动适合条件很好的头部人群，其他人机会不大，除了一见钟情或者有共同点（老乡，校友，职业），其他人机会只能看运气了，毕竟大家都是往上看。可以试试20人以内小型活动，一块出去旅游，桌游啥的，增加相处时间。朋好友介绍会好些，人一多就会比来比去，变得挑剔
