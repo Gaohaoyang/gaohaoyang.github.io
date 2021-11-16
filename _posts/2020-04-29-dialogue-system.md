@@ -931,9 +931,44 @@ embed()
 #### 企业微信
 
 - 企业微信[接入机器人步骤](https://blog.csdn.net/weixin_41635750/article/details/117002704)
-  - [企微官方文档](https://work.weixin.qq.com/api/doc/90000/90136/91770)上列的是机器人主动发消息，目前不支持类似钉钉的 @方式调起机器人
+- [企微官方文档](https://work.weixin.qq.com/api/doc/90000/90136/91770)上列的是机器人主动发消息，目前不支持类似钉钉的 @方式调起机器人
+
+注意：
+- 外部群没有机器人接口
 
 企业微信机器人支持发送多种数据格式，包括：纯文本、Markdown（部分语法）、图片、新闻卡片、文件
+
+【2021-11-15】企业微信群测试，[文档](https://work.weixin.qq.com/api/doc/90000/90136/91770?version=3.1.0.6189&platform=mac)
+- 点加号，群管理里点添加机器人按钮，就可以创建一个群机器人了。可以给机器人起个名字，上传个头像，加个简单介绍。系统会自动生成一个Webhook调用地址，关于调用方法在配置说明里有详细说明。
+  - ![](https://pic2.zhimg.com/80/v2-3e77f324eb6708d0e58b7836f2d6bb65_720w.jpg)![](https://pic3.zhimg.com/80/v2-819f8f42325caf50cd343b10e32e7866_720w.jpg)
+- 企微手机端添加企微机器人，（pc端没有添加入口），记住webhook地址url
+  - ![](https://upload-images.jianshu.io/upload_images/1763614-13d31fb4a730dec2.jpg)
+- 调用接口发送数据（请求url），传入指定参数
+  - Windows系统：用VBS创建了一个脚本，然后在windows服务器中加入一个计划任务，在固定时间执行这个脚本，就可以实现一个简单的群里自动提醒功能了。
+  - 其它系统：shell命令执行
+
+代码：
+
+```shell
+# --- 企微群机器人 ----
+# 文档：https://work.weixin.qq.com/api/doc/90000/90136/91770?version=3.1.0.6189&platform=mac
+# 当前自定义机器人支持文本（text）、markdown（markdown）、图片（image）、图文（news）四种消息类型。
+# 机器人的text/markdown类型消息支持在content中使用<@userid>扩展语法来@群成员
+#curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=693axxx6-7aoc-4bc4-97a0-0ec2sifa5aaa' \
+curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=8b0a379f-b148-4e94-9dbb-3b72ee7515fa' \
+   -H 'Content-Type: application/json' \
+   -d '{
+        "msgtype": "text",
+        "mentioned_list":["wangqiwen004@ke.com","fanbingbing019@ke.com"],
+        "text": {
+            "content": "贝壳小冰，你好呀~ @某人 测试" 
+        }
+   }'
+# 更多参数
+# "mentioned_mobile_list":["13800001111","@all"]
+```
+
+当前自定义机器人支持：`文本`（text）、`markdown`（markdown）、`图片`（image）、`图文`（news）四种消息类型。
 
 
 # 现状
