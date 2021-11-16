@@ -954,8 +954,7 @@ embed()
 # 文档：https://work.weixin.qq.com/api/doc/90000/90136/91770?version=3.1.0.6189&platform=mac
 # 当前自定义机器人支持文本（text）、markdown（markdown）、图片（image）、图文（news）四种消息类型。
 # 机器人的text/markdown类型消息支持在content中使用<@userid>扩展语法来@群成员
-#curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=693axxx6-7aoc-4bc4-97a0-0ec2sifa5aaa' \
-curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=8b0a379f-b148-4e94-9dbb-3b72ee7515fa' \
+curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=*****' \
    -H 'Content-Type: application/json' \
    -d '{
         "msgtype": "text",
