@@ -3,7 +3,7 @@ layout: post
 title:  "Web前端服务知识-Web-Serving"
 date:   2020-08-07 19:17:00
 categories: 技术工具
-tags: Web web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session RPC 微服务 GraphQL UML Gunicorn supervisor genvent grequests node.js vue 前端 低代码 拖拽
+tags: Web web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session RPC 微服务 GraphQL UML Gunicorn supervisor genvent grequests node.js vue 前端 低代码 拖拽 api
 author : 鹤啸九天
 excerpt: Web开发相关技术知识点
 mathjax: true
@@ -89,6 +89,539 @@ HTTP常见的方法：
 - 每一个URI代表一种资源；
 - 客户端和服务器之间，传递这种资源的某种表现层；把"资源"具体呈现出来的形式，叫做它的"表现层"（Representation）。比如，文本可以用txt格式表现，也可以用HTML格式、XML格式、JSON格式表现，甚至可以采用二进制格式；图片可以用JPG格式表现，也可以用PNG格式表现。
 - 客户端通过四个HTTP动词，四个表示操作方式的动词：GET、POST、PUT、DELETE。它们分别对应四种基本操作：GET用来获取资源，POST用来新建资源（也可以用于更新资源），PUT用来更新资源，DELETE用来删除资源。
+
+## API设计规范
+
+在移动互联网，分布式、微服务盛行的今天，现在项目绝大部分都采用的微服务框架，**前后端分离**方式,一般系统的大致整体架构图
+- ![](https://filescdn.proginn.com/195712466d8fa71a7e933534a00b8251/1e22e56dc3ece99738d7eae1aa78dd1e.webp)
+
+接口交互
+- 前端和后端进行交互，前端按照约定请求URL路径，并传入相关参数，后端服务器接收请求，进行业务处理，返回数据给前端。
+
+API与客户端用户的通信协议，总是使用HTTPS协议，以确保交互数据的传输安全。
+
+其它要求：
+- **限流**设计、**熔断**设计、**降级**设计，大部分都用不到，当用上了基本上也都在网关中加这些功能。
+
+资料：
+- [API接口设计规范](https://cloud.tencent.com/developer/article/1590150)
+- [API接口规范](https://www.jianshu.com/p/3f8953f73a79)
+- [RESTful API定义及使用规范](https://zhuanlan.zhihu.com/p/31298060)
+
+### path路径规范
+
+域名设计：
+- 应该尽量将API部署在专用域名之下：https://api.example.com
+- 如果确定API很简单,不会有进一步扩展,可以考虑放在主域名下：https://www.example.com/api
+
+路径又称"终点"（end point），表示API的具体网址。
+- 1、在RESTful架构中，每个网址代表一种**资源**(resource),所以网址中不能有动词，只能有**名词**。【所用的名词往往与数据库的**表格名**对应】
+- 2、数据库中的表一般都是同种记录的"**集合**"(collection),所以API中的名词也应该使用复数。
+
+例子: 
+- https://api.example.com/v1/products
+- https://api.example.com/v1/users
+- https://api.example.com/v1/employees
+
+| 动作 | 前缀 | 备注|
+|---|---|---|
+|获取|get|get{XXX}|
+|获取|get|get{XXX}List|
+|新增|add|add{XXX}|
+|修改|update|update{XXX}|
+|保存|save| save{XXX}|
+|删除|delete| delete{XXX}|
+|上传| upload| upload{XXX}|
+|发送|send|send{XXX}|
+
+### 版本控制
+
+https://api.example.com/v{n}
+
+- 1、应该将API的版本号放入URL。
+- 2、采用多版本并存，增量发布的方式。
+- 3、n代表版本号，分为整型和浮点型
+  - 整型： 大功能版本，  如v1、v2、v3 ...
+  - 浮点型： 补充功能版本， 如v1.1、v1.2、v2.1、v2.2 ...
+- 4、对于一个 API 或服务，应在生产中最多保留 3 个最详细的版本
+
+### 请求方式
+
+
+- GET（SELECT）：    从服务器取出资源（一项或多项）。
+- POST（CREATE）：   在服务器新建一个资源。
+- PUT（UPDATE）：    在服务器更新资源（客户端提供改变后的完整资源）。
+- DELETE（DELETE）： 从服务器删除资源。
+
+例子： 
+- GET    /v1/products      获取所有商品
+- GET    /v1/products/ID   获取某个指定商品的信息
+- POST   /v1/products      新建一个商品
+- PUT    /v1/products/ID   更新某个指定商品的信息
+- DELETE /v1/products/ID   删除某个商品,更合理的设计详见【9、非RESTful API的需求】
+- GET    /v1/products/ID/purchases      列出某个指定商品的所有投资者
+- GET    /v1/products/ID/purchases/ID   获取某个指定商品的指定投资者信息
+
+### 请求参数
+
+传入参数分为4种类型：
+- 1、cookie：         一般用于OAuth认证
+- 2、request header： 一般用于OAuth认证
+- 3、请求body数据：
+- 4、地址栏参数： 
+  - 1）restful 地址栏参数 /v1/products/ID ID为产品编号，获取产品编号为ID的信息
+  - 2）get方式的查询字段
+详情：
+- Query
+  - url?后面的参数，存放请求接口的参数数据。
+- Header
+  - 请求头，存放公共参数、requestId、token、加密字段等。
+- Body
+  - Body 体，存放请求接口的参数数据。
+- 公共参数
+  - APP端请求：network（网络：wifi/4G）、operator（运营商：中国联通/移动）、platform（平台：iOS/Android）、system（系统：ios 13.3/android 9）、device（设备型号：iPhone XY/小米9）、udid（设备唯一标识）、apiVersion（API版本号：v1.1）
+  - Web端请求：appKey（授权key），调用方需向服务方申请 appKey（请求时使用） 和 secretKey（加密时使用）。
+- 安全规范
+  - 敏感参数加密处理：登录密码、支付密码，需加密后传输，建议使用 非对称加密。
+- 参数命名规范：建议使用**驼峰**命名，首字母小写。
+- requestId 建议携带唯一标示追踪问题。
+
+若记录数量很多，服务器不可能返回全部记录给用户。API应该提供分页参数及其它筛选参数，过滤返回结果。
+- /v1/products?page=1&pageSize=20     指定第几页，以及每页的记录数。
+- /v1/products?sortBy=name&order=asc  指定返回结果按照哪个属性排序，以及排序顺序。
+
+
+### 返回格式
+
+【2021-11-16】
+- [RestFul API 统一响应格式与自动包装](https://zhuanlan.zhihu.com/p/126603159)
+- [如何设计 API 接口，实现统一格式返回？](https://jishuin.proginn.com/p/763bfbd6c335)
+
+#### 整体格式
+
+响应结构有两种：
+- 方式一：**包装**响应格式，会在真正的响应数据外面包装一层，比如code、message等数据，如果接口报错，响应Status依然为200，更改响应数据里的code。
+- 方式二：**不包装**响应数据，需要什么返回什么，如果接口报错，更改响应Status，同时换另一种响应格式，告知前端错误信息。
+
+两种方式各有千秋，这里不谈孰优孰劣
+
+第一种：
+- code只是示例，实际项目中应为项目提前定义好的业务异常code，如10025，如果希望得到建议，可以参考另一篇文章异常及错误码定义。
+- 这种方式接口响应的Status均为200，使用响应体中的code来区分状态。
+无论如何，接口返回响应的数据结构都是一致的。实现提来也比较简单，每个接口都返回统一的一个类型即可，也可以各自返回各自的，再统一进行包装。
+
+```json
+// 接口正常
+{
+	code: 200, 
+	msg: null,
+	data: {
+        "name": "张三",
+        "age": 108
+	}
+}
+// 接口异常
+{
+	code: 500,
+	msg: "系统开小差了，稍后再试吧。"
+}
+```
+
+第二种：不包装响应数据
+- 这种方式，成功的时候只返回请求的数据，而失败时才会返回失败信息，两种情况数据结构是不同的，需要通过响应的status来区分。
+- 这里的code指的是业务上的**错误码**，并不是简单的http status
+
+```json
+// 正常
+{
+    "name": "张三",
+    "age": 108
+}
+// 异常
+{
+	code: 500,
+	msg: ""
+}
+
+```
+
+#### 典型数据字段
+
+后端返回给前端数据, 一般用JSON体方式，定义如下：
+
+```shell
+{
+	#返回状态码
+	code:integer,		
+	#返回信息描述
+	message:string,
+	#返回值
+	data:object
+}
+```
+
+##### （1）code
+- code表示返回状态码，一般开发时需要什么，就添加什么。如接口要返回用户权限异常，加一个状态码为101吧，下一次又要加一个数据参数异常，就加一个102的状态码。这样虽然能够照常满足业务，但状态码太凌乱了，可以参考HTTP请求返回的状态码
+- ![](https://pic1.zhimg.com/80/v2-675d06d91948b580be09a845eaef869c_720w.jpg)
+常见的HTTP状态码：
+- 200 - 请求成功
+- 301 - 资源（网页等）被永久转移到其它URL
+- 404 - 请求的资源（网页等）不存在
+- 500 - 内部服务器错误
+这样做的好处是就把错误类型归类到某个**区间**内，如果区间不够，可以设计成4位数。
+- 1000～1999 区间表示参数错误
+- 2000～2999 区间表示用户错误
+- 3000～3999 区间表示接口异常
+前端开发人员在得到返回值后，根据状态码就可以知道，大概什么错误，再根据message相关的信息描述，可以快速定位。
+
+总结：
+- 接口正常访问情况下，服务器返回2××的HTTP状态码；如200一切正常、201资源被创建、204资源被删除
+- 当用户访问接口出错时，服务器会返回给一个合适的4××或者5××的HTTP状态码；以及一个application/json格式的消息体，消息体中包含错误码code和错误说明message。
+  - 5××错误(500 =< status code)为服务器或程序出错，客户端只需要提示“服务异常，请稍后重试”即可，该类错误不在每个接口中列出。
+  - 4××错误(400 =< status code<500)为客户端的请求错误，需要根据具体的code做相应的提示和逻辑处理，message仅供开发时参考，不建议作为用户提示。
+
+##### （2）Message
+- 这个字段相对理解比较简单，就是发生错误时，如何友好的进行提示。一般的设计是和code状态码一起设计
+
+##### （3）data
+- 需要返回给前端的数据。这个data内的数据一定要是JSON格式，方便前端的解析。
+
+数据常见的有2个大类：
+- 业务操作结果
+  - 业务操作的过程，能否封装、优化要看实际情况，但是业务操作的最终结果，即最终得到的要返回给前端的数据，可以使用AOP统一封装的前面提到的统一格式中，而不用每次手动封装。
+- 参数校验结果
+  - 参数的校验如果不使用第三方库，会在代码中多出很多的冗余代码，所以，最好使用oval、hibernate validate或者Spring等参数校验方式，可以大幅度美观代码。
+
+#### 字段
+- 数据脱敏
+  - 用户手机号、用户邮箱、身份证号、支付账号、邮寄地址等要进行脱敏，部分数据加 * 号处理。
+- 属性名命名时，建议使用**驼峰**命名，首字母小写。
+- 属性值为空时，严格按类型返回**默认值**。
+- 金额类型/时间日期类型的属性值，如果仅用来显示，建议后端返回可以显示的字符串。
+- 业务逻辑的状态码和对应的文案，建议后端两者都返回。
+- 调用方不需要的属性，不要返回。
+
+| 参数 | 类型| 说明|备注|
+|---|---|---|---|
+|code|Number|结果码|成功=1失败=-1未登录=401无权限=403|
+|showMsg|String|显示信息|系统繁忙，稍后重试|
+|errorMsg|String|错误信息|便于研发定位问题|
+|data|Object|数据|JSON 格式|
+
+```json
+{
+    "code": 1,
+    "showMsg": "success",
+    "errorMsg": "",
+    "data": {
+        "list": [],
+        "pagination": {
+            "total": 100,
+            "currentPage": 1,
+            "prePageCount": 10
+        }
+    }
+}
+```
+
+API接口：
+
+```shell
+# response：
+#----------------------------------------
+{
+   status: 200,               // 详见【status】
+
+   data: {
+      code: 1,                // 详见【code】
+      data: {} || [],         // 数据
+      message: '成功',        // 存放响应信息提示,显示给客户端用户【须语义化中文提示】
+      sysMsg: 'success'       // 存放响应信息提示,调试使用,中英文都行
+      ...                     // 其它参数，如 total【总记录数】等
+   },
+
+   message: '成功',            // 存放响应信息提示,显示给客户端用户【须语义化中文提示】
+   sysMsg: 'success'          // 存放响应信息提示,调试使用,中英文都行
+}
+#----------------------------------------
+【status】:
+           200: OK       400: Bad Request        500：Internal Server Error       
+                         401：Unauthorized
+                         403：Forbidden
+                         404：Not Found
+
+【code】:
+         1: 获取数据成功 | 操作成功             0：获取数据失败 | 操作失败
+```
+
+### 签名设计（权限）
+
+权限分为
+- none：无需任何授权；
+- token：需要用户登录授权，可通过header Authorization和Cookie CoSID传递；
+- admintoken：需要管理员登录授权，可通过header Authorization和Cookie CoCPSID传递；
+- token或admintoken：用户登录授权或管理员登录授权都可以；
+- sign：需要签名，一般用于服务端内部相互调用，详见 孩宝API HMAC-SHA1签名。
+
+签名验证没有确定的规范，自己制定就行，可以选择使用 对称加密、 非对称加密、 单向散列加密 等，分享下原来写的签名验证，供参考。
+- [Go 签名验证](https://mp.weixin.qq.com/s?__biz=MjM5NDM4MDIwNw==&mid=2448835322&idx=1&sn=80d2d77c9c81d63b482b2651fab9a19e&scene=21#wechat_redirect)
+- [PHP 签名验证](https://mp.weixin.qq.com/s?__biz=MjM5NDM4MDIwNw==&mid=2448834957&idx=1&sn=fe3c63ad05a2412856892ad790c26fae&scene=21#wechat_redirect)
+
+
+### 日志平台设计
+
+日志平台有利于故障定位和日志统计分析。
+
+日志平台的搭建可以使用的是 ELK 组件，使用 Logstash 进行收集日志文件，使用 Elasticsearch 引擎进行搜索分析，最终在 Kibana 平台展示出来。
+
+### 幂等性设计
+
+我们无法保证接口的每一次调用都是有返回结果的，要考虑到出现网络异常的情况。
+- 举个例子，订单创建时，我们需要去减库存，这时接口发生了超时，调用方进行了重试，这时是否会多扣一次库存？
+
+解决这类问题有 2 种方案：
+- 一、服务方提供相应的查询接口，调用方在请求超时后进行查询，如果查到了，表示请求处理成功了，没查到就走失败流程。
+- 二、调用方只管重试，服务方保证一次和多次的请求结果是一样的。
+
+对于第二种方案，就需要服务方的接口支持**幂等性**。
+
+大致设计思路是这样的：
+- 调用接口前，先获取一个全局唯一的令牌（Token）
+- 调用接口时，将 Token 放到 Header 头中
+- 解析 Header 头，验证是否为有效 Token，无效直接返回失败
+- 完成业务逻辑后，将业务结果与 Token 进行关联存储，设置失效时间
+- 重试时不要重新获取 Token，用要上次的 Token
+
+### 非Restful API
+
+- 1、实际业务开展过程中，可能会出现各种的api不是简单的restful 规范能实现的。
+- 2、需要有一些api突破restful规范原则。
+- 3、特别是移动互联网的api设计，更需要有一些特定的api来优化数据请求的交互。
+
+1)、删除单个 | 批量删除  ： DELETE  /v1/product      body参数{ids：[]}
+
+2)、页面级API :  把当前页面中需要用到的所有数据通过一个接口一次性返回全部数据
+
+### 接口文档
+
+- 1、尽量采用**自动化**接口文档，可以做到在线测试，同步更新。
+  - 生成的工具为apidoc，详细阅读官方文档：http://apidocjs.com
+- 2、应包含：接口BASE地址、接口版本、接口模块分类等。
+- 3、每个接口应包含：
+  - 接口地址：不包含接口BASE地址。
+  - 请求方式: get、post、put、delete等。
+  - 请求参数：数据格式【默认JSON、可选form data】、数据类型、是否必填、中文描述。
+  - 响应参数：类型、中文描述。
+
+### 测试工具
+
+推荐Chrome浏览器插件`Postman`作为接口测试工具， [Postman下载地址](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop)
+- ![](https://pic2.zhimg.com/80/v2-2c3dcfc9251b9d1c2be62d24ba2d5f51_720w.jpg)
+
+### 示例
+
+```python
+# !/usr/bin/env python
+# -*- coding:utf8 -*- 
+
+# **************************************************************************
+# * Copyright (c) 2021 *.com, Inc. All Rights Reserved
+# **************************************************************************
+# * @file main.py FAQ推荐服务
+# * @author ****
+# * @date 2021/11/06 10:44
+# **************************************************************************
+
+from flask import Flask, request, render_template, make_response, g
+from flasgger import Swagger
+from functools import wraps # 装饰器工具，用于时间统计
+import logging # 日志模块
+import os
+import json
+import time
+
+# flask服务
+app = Flask(__name__)
+main_dir = '..'
+log_path =  '{}/logs/recommend/'.format(main_dir)
+# -------- log -------------
+if not os.path.exists(log_path):
+    # 目录不存在，进行创建操作
+    os.makedirs(log_path)
+# logging.basicConfig函数对日志的输出格式及方式做相关配置
+# 第一步，创建一个logger
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)  # Log等级总开关
+# 第二步，创建一个handler，用于写入日志文件
+rq = time.strftime('%Y%m%d%H%M', time.localtime(time.time()))
+log_name = log_path + rq + '.log'
+logfile = log_name
+fh = logging.FileHandler(logfile, mode='w')
+fh.setLevel(logging.DEBUG)  # 输出到file的log等级的开关
+# 第三步，定义handler的输出格式
+formatter = logging.Formatter("%(asctime)s - %(filename)s[line:%(lineno)d] - %(levelname)s: %(message)s")
+fh.setFormatter(formatter)
+# 第四步，将logger添加到handler里面
+logger.addHandler(fh)
+# --------- 启动服务 ----------
+project_name = 'aionsite_newhouse' # aionsite_newhouse,contract_center,isc_ssc,homespeech_smarthome
+
+# 配置文件主目录
+conf_dir = 'infrastructure/engines/legacy'
+
+# swagger api
+Swagger(app)
+
+@app.route('/', methods=['GET', 'POST'])
+def home():
+    # 服务主页
+    res = {"msg":"-", "status":0, "req":{} , "resp":{}}
+    req_data = {}
+    if request.method == 'GET':
+        req_data = request.values # 表单形式
+    elif request.method == 'POST':
+        req_data = request.json # json形式
+    else:
+        res['msg'] = '异常请求(非GET/POST)'
+        res['status'] = -1
+    res['req'] = req_data
+    res['msg'] = "服务主页"
+    return render_template("index.html")
+
+@app.route('/recommend', methods=['GET', 'POST'])
+def recommend():
+    """
+    新房驻场客服问题推荐请求接口
+    2021-11-5
+    ---
+    tags:
+      - NLU服务接口
+    parameters:
+      - name: product
+        in: path
+        type: string
+        required: true
+        description: newhouse (新房电子驻场客服）
+      - name: project_id
+        in: path
+        type: string
+        required: true
+        description: 楼盘id
+      - name: city_name
+        in: path
+        type: string
+        required: True
+        description: 城市名
+      - name: position
+        in: path
+        type: string
+        required: false
+        description: 展示位置, detail（盘源详情页）、pop（弹窗页）
+      - name: raw_text
+        in: path
+        type: string
+        required: false
+        description: 检索词(暂时不用)
+    responses:
+      500:
+        description: 自定义服务端错误
+      200:
+        description: 自定义状态描述
+    """
+    # 各业务线接口, product字段区分，status >= 0合法，1截取topn，2补足topn
+    res = {"message":"-", "errno":0, "data":{}}
+    req_data = {}
+    if request.method == 'GET':
+        req_data = request.values # 表单形式
+    elif request.method == 'POST':
+        req_data = request.json # json形式
+    else:
+        res['message'] = '异常请求(非GET/POST)'
+        res['errno'] = -1
+    req_dict = {}
+    # 参数处理
+    for k in ['product', 'project_id', 'city_name', 'position']:
+        req_dict[k] = req_data.get(k, "-")
+    # 保存请求信息
+    #res['req'].update(req_data)
+    if req_dict['product'] != 'newhouse':
+        res.update({"errno": -2, "message":"product取值无效"})
+        return res
+    if req_dict['position'] not in ('detail', 'pop'):
+        res.update({"errno": -3, "message":"position缺失/取值无效"})
+        return res
+    # 处理请求信息
+    res['data'] = {
+            "project_id": 671289,
+            "project_name": "天朗·富春原颂", 
+			"pv": 230, # 楼盘累计请求数（包含点击、文字、语音所有触发请求的行为）
+			"percent": 0.02, # 累计累计请求数占比
+            "question_num": 9, # 累计点击问题数
+            "click_num": 24, # 累计点击次数，含：更多问题
+            "question_list":
+            [ # 字段说明：问题id，点击次数，点击占比（分母限该楼盘），楼盘名
+                {"pos": 1, "question_id": 8, "click_num": 5, "click_percent": 26.316, "question_name": "项目基本信息"}, 
+				{"pos": 2, "question_id": 1, "click_num": 5, "click_percent": 26.316, "question_name": "售楼处地址及接待信息"}, 
+				{"pos": 3, "question_id": 2, "click_num": 3, "click_percent": 15.789, "question_name": "在售户型信息？"}, 
+				{"pos": 4, "question_id": 6, "click_num": 2, "click_percent": 10.526, "question_name": "此项目激励政策是什么？"}, 
+				{"pos": 5, "question_id": 13, "click_num": 1, "click_percent": 5.263, "question_name": "带看规则及注意事项是什么？"}, 
+				{"pos": 6, "question_id": 10, "click_num": 1, "click_percent": 5.263, "question_name": "物业信息"}, 
+				{"pos": 7, "question_id": 4, "click_num": 1, "click_percent": 5.263, "question_name": "当前有哪些开发商优惠？"}, 
+				{"pos": 8, "question_id": 3, "click_num": 1, "click_percent": 5.263, "question_name": "在售楼栋信息？"}
+            ],
+    }
+    res['errno'] = 0
+    res['message'] = '请求正常'
+    # 后处理：①空值 ②不足5-6个 ③超纲
+    # 默认配置信息: detail页(详情页: 8,2,1,28,3,6)，pop页(弹窗页: 8,2,1,3,6)
+    default_info = {}
+    # 弹窗页默认答案
+    default_info['pop'] = [
+        {"pos": 1, "question_id": 8, "click_num": 0, "click_percent": 0.0, "question_name": "项目基本信息"}, 
+        {"pos": 2, "question_id": 2, "click_num": 0, "click_percent": 0.0, "question_name": "在售户型信息？"},
+        {"pos": 3, "question_id": 1, "click_num": 0, "click_percent": 0.0, "question_name": "售楼处地址及接待信息"},
+        {"pos": 4, "question_id": 3, "click_num": 0, "click_percent": 0.0, "question_name": "在售楼栋信息？"},
+        {"pos": 5, "question_id": 6, "click_num": 0, "click_percent": 0.0, "question_name": "此项目激励政策是什么？"}
+    ]
+    # 详情页默认答案
+    default_info['detail'] = [
+        {"pos": 1, "question_id": 8, "click_num": 0, "click_percent": 0.0, "question_name": "项目基本信息"}, 
+        {"pos": 2, "question_id": 2, "click_num": 0, "click_percent": 0.0, "question_name": "在售户型信息？"},
+        {"pos": 3, "question_id": 1, "click_num": 0, "click_percent": 0.0, "question_name": "售楼处地址及接待信息"},
+        {"pos": 4, "question_id": 28, "click_num": 0, "click_percent": 0.0, "question_name": "项目笔记"},
+        {"pos": 5, "question_id": 3, "click_num": 0, "click_percent": 0.0, "question_name": "在售楼栋信息？"},
+        {"pos": 6, "question_id": 6, "click_num": 0, "click_percent": 0.0, "question_name": "此项目激励政策是什么？"}
+    ]
+    top_num = len(default_info[req_dict['position']])
+    diff_num = res['data']['question_num'] - top_num
+    diff_num = -2
+    if diff_num > 0:
+        res['data']['question_list'] = res['data']['question_list'][:top_num]
+        res['errno'] = 1
+        res['message'] = '截取TopN'
+    elif diff_num == 0:
+        pass
+    else: # 补默认值
+        id_list = [i["question_id"] for i in res['data']['question_list']]
+        cnt = 0
+        for i in default_info[req_dict['position']]:
+            if cnt + diff_num >= 0:
+                break
+            if i["question_id"] in id_list:
+                continue
+            i["pos"] = res['data']['question_list'][-1]['pos'] + 1
+            res['data']['question_list'].append(i)
+            cnt += 1
+        res['errno'] = 2
+        res['message'] = '补足topN'
+    logger.info(json.dumps(res, ensure_ascii=False))
+    return res
+
+if __name__ == '__main__':
+    #app.run(host='0.0.0.0', port=8089)
+    app.run(host='10.200.24.101', port=8092)
+    #app.run(host='10.200.24.101', port=8092)
+```
 
 # SDK
 
