@@ -1182,15 +1182,43 @@ new_model.summary()
 
 ## 设备检测
 
+检测是否安装GPU版本：
+
+```python
+from tensorflow.python.client import device_lib
+print(device_lib.list_local_devices())
+
+#[name: "/device:CPU:0"
+# device_type: "CPU"
+# memory_limit: 268435456
+# locality {
+#}
+# incarnation: 1937408177159318398
+#]
+```
+如果是GPU版本的话，应该会有这样的一段
+- ![](https://img-blog.csdnimg.cn/06a1b158cfbd476e8fe76382ff84ce9c.png)
+- 卸载：pip uninstall tensorflow
+- 安装：pip install tensorflow-gpu==版本号
+
 代码
 
 ```python
 import tensorflow as tf
 
+# cpu版tf提示错误：
+# 2021-11-18 11:22:03.396212: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: ~/anaconda3/envs/py3/lib:~/anaconda3/lib:~/anaconda3/lib:~/anaconda3/lib:
+# 2021-11-18 11:22:03.396264: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+
 tf.debugging.set_log_device_placement(True)     # 设置输出运算所在的设备
 cpus = tf.config.list_physical_devices('CPU')   # 获取当前设备的 CPU 列表
 tf.config.set_visible_devices(cpus)           # 设置 TensorFlow 的可见设备范围为 cpu
 ```
+
+[2021最新：TensorFlow各个GPU版本CUDA和cuDNN对应版本整理(最简洁)](https://blog.csdn.net/K1052176873/article/details/114526086)
+
+
+
 
 ## 新特性
 
