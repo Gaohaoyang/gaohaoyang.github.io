@@ -930,6 +930,9 @@ embed()
 
 #### 企业微信
 
+- [企业微信应用接入](https://work.weixin.qq.com/api/doc/90001/90146/90568)
+- [企业微信接入第三方应用（以服务商身份）](https://blog.csdn.net/anyuetiantang/article/details/97516853)
+  - ![](https://img-blog.csdnimg.cn/20190727151609707.png)
 - 企业微信[接入机器人步骤](https://blog.csdn.net/weixin_41635750/article/details/117002704)
 - [企微官方文档](https://work.weixin.qq.com/api/doc/90000/90136/91770)上列的是机器人主动发消息，目前不支持类似钉钉的 @方式调起机器人
 
