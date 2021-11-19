@@ -207,6 +207,58 @@ if __name__ == '__main__':
 python -m MultiHTTPServer.py
 ```
 
+### 邮件
+
+【2021-11-19】[Linux 命令行发送邮件的 5 种方法](https://linux.cn/article-11663-1.html)
+
+ Linux中邮件命令怎么把邮件传递给收件人的？
+ - 邮件命令撰写邮件并发送给一个本地**邮件传输代理**（MTA，如 sendmail、Postfix）。邮件服务器和远程邮件服务器之间通信以实际发送和接收邮件。下面的流程可以看得更详细。
+ - ![](https://img.linux.net.cn/data/attachment/album/201912/11/081830xntnd4iny5nl9ran.png)
+
+最流行的 5 个命令行邮件客户端，你可以选择其中一个。这 5 个命令分别是：
+- mail / mailx
+  - 安装： yum install mailx
+- mutt
+  - 安装：yum install mutt
+- mpack
+  - 安装：yum install mpack
+- sendmail
+  - 安装：yum install sendmail
+- ssmtp
+  - ssmtp 是类似 sendmail 的一个**只发送不接收**的工具，可以把邮件从本地计算机传递到配置好的 邮件主机（mailhub）。用户可以在 Linux 命令行用 ssmtp 把邮件发送到 SMTP 服务器。可以运行下面的命令从官方发行版仓库安装 ssmtp 命令。
+  - 安装：yum install ssmtp
+
+```shell
+# ------ mail ------
+echo "This is the mail body" | mail -s "Subject" 2daygeek@gmail.com
+# 带附件
+# -a：用于在基于 Red Hat 的系统上添加附件。
+# -A：用于在基于 Debian 的系统上添加附件。
+# -s：指定消息标题。
+echo "This is the mail body" | mail -a test1.txt -s "Subject" 2daygeek@gmail.com
+
+# -------- mutt -------
+echo "This is the mail body" | mutt -s "Subject" 2daygeek@gmail.com
+# 带附件
+echo "This is the mail body" | mutt -s "Subject" 2daygeek@gmail.com -a test1.txt
+
+# -------- mpack ---------
+echo "This is the mail body" | mpack -s "Subject" 2daygeek@gmail.com
+# 附件
+echo "This is the mail body" | mpack -s "Subject" 2daygeek@gmail.com -a test1.txt
+
+# --------- sendmail ---------
+# 准备邮件内容：
+echo -e "Subject: Test Mail\nThis is the mail body" > /tmp/send-mail.txt
+# 发送
+sendmail 2daygeek@gmail.com < send-mail.txt
+
+# ---------- ssmtp ------------
+echo -e "Subject: Test Mail\nThis is the mail body" > /tmp/ssmtp-mail.txt
+ssmtp 2daygeek@gmail.com < /tmp/ssmtp-mail.txt
+
+```
+
 
 ### tcpdump常用命令
 
