@@ -759,6 +759,7 @@ mathjax: true
 
 ## 互联网大厂职级待遇对照
 
+【2021-11-20】[直接对标](https://duibiao.info/)，仿照国外的levels.fyi, 大厂各职级待遇查找,时薪，工作强度，面经等数据可视化
 - [互联网大厂各职级薪资对应关系图（2020年初）](https://zhuanlan.zhihu.com/p/110443296)
    - 表格中包含了绝大多数互联网大厂，包括 阿里巴巴、腾讯、字节跳动、美团点评、百度、京东、滴滴出行、网易和快手。不排除有很极端的收入情况，但至少能囊括 95% 以上同职级的收入吧。从规模上看，拼多多应该也应该在里面，但拼多多没有职级；而像华为、小米等公司不算传统的互联网，所以也没有归入其中。
    - 作为参考，以「硕士毕业校招」为职业起点，平均来讲：
@@ -1533,6 +1534,7 @@ mathjax: true
   - ④ 心存高远，脚踏实地。踏实做事儿，同时好好思考商业模式，宏观架构，别只玩概念。
   
 ### 一席其他视频
+
 - 方励：《[感谢你给我机会上场](https://www.bilibili.com/video/BV1HW411b7HG?from=search&seid=4252969446460899437)》
   - 当你意识到生命有多宝贵的时候，你就会特别特别惜命，但惜命的最好方法不是养生，而是折腾自己，把自己的生命淋漓尽致地燃烧透了。所以我每天做很多很多事儿，其实都是玩儿，结果占了大便宜，让自己至少活了两条命。
   - <iframe src="//player.bilibili.com/player.html?aid=17782345&bvid=BV1HW411b7HG&cid=29032365&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%" > </iframe>
@@ -1574,8 +1576,6 @@ mathjax: true
    - B站视频：[【100个不上班的人】](https://space.bilibili.com/18937939), [旅行博主：那个睡陌生人家沙发，睡上电视的女孩](https://www.bilibili.com/video/av69166304)
       - ![](https://img1.doubanio.com/view/thing_review/l/public/3525519.webp)
       - <iframe src="//player.bilibili.com/player.html?aid=69166304&cid=119869704&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
-
-
 
 # IT快讯
 
