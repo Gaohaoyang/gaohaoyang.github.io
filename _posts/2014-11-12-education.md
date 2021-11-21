@@ -3,7 +3,7 @@ layout: post
 title:  "家庭教育与人生-Education & Life"
 date:   2014-11-12 14:02:00
 categories: 读书笔记
-tags: 贫富差距 家庭教育 留学生 凉子访谈录 衡水中学 海淀学区
+tags: 贫富差距 家庭教育 留学生 凉子访谈录 衡水中学 海淀学区 脱口秀
 excerpt: 穷人一直穷，富人一直富吗？
 author: 鹤啸九天
 mathjax: true
@@ -14,6 +14,8 @@ mathjax: true
 
 # 总结
 
+- 【2021-11-21】呼兰脱口秀：讨厌的学霸-[音频](https://www.ixigua.com/7032442292862586125)，[视频](https://v.qq.com/x/page/m328008vnc1.html)，学渣更容易融入美国社会
+<iframe frameborder="0" src="https://v.qq.com/txp/iframe/player.html?vid=m328008vnc1" allowFullScreen="true" width="100%" height="600"></iframe>
 
 # 世界各国教育
 
