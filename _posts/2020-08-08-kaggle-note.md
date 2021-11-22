@@ -50,7 +50,115 @@ mathjax: true
 
 ## CCF
 
-- []()
+- 比赛：[智能人机交互自然语言理解]()，
+
+### 赛题介绍
+
+对NLU领域的“意图识别”及“槽位填充”任务进行考察，发布的数据集包含用户与音箱等智能设备进行单轮对话的文本数据，共计11种意图类别（包含2个小样本意图）、47个槽位类型。
+
+| 意图名称 |	样本数量 | 	槽位 |
+| --- |	--- | 	------- |
+| Video-Play |	1000 | 	datetime_time, region, datetime_date,name |
+| Calendar-Query |	1000 | 	datetime_date |
+| Alarm-Update |	1000 | 	datetime_time, notes, datetime_date |
+| Radio-Listen |	1000 | 	name, frequency,  channel, artist |
+| FilmTele-Play |	1000 | 	play_setting, name, tag, age, region, artist |
+| Travel-Query |	1000 | 	departure, destination, datetime_date, datetime_time, query_type |
+| Weather-Query |	1000 | 	type, datetime_date, datetime_time, city, index |
+| HomeAppliance-Control |	1000 | 	appliance, command, details |
+| Music-Play |	1000 | 	album, play_mode, song, instrument, language, artist, age |
+| Audio-Play |	50 | 	artist, name, tag, language, play_setting |
+| TVProgram-Play |	50 | 	datetime_time, datetime_date, channel, name |
+
+大赛需要参赛选手围绕所选赛题和特定任务，设置多种不同的技术场景，基于给定的数据训练算法模型，持续优化相关精度、效率等指标。因此该赛题除基本的学习任务外，还面临“域外检测”与“小样本学习”两个子任务：
+- 期望通过“**小样本**学习”任务减少产品对大量新类别标注数据的依赖。
+- 通过“**域外检测**”任务识别未知意图，摆脱对已知意图的干扰，同时达到尽可能好的学习效果。
+
+### 技术路线
+
+NLU任务分成意图识别+槽位抽取两个子任务，实现上有两个方向：
+- **串行**：先分类，在子类上做槽位抽取
+- **并行**：一步到位，直接给出意图及槽位
+
+示例：
+- query：给我放白居易的咏怀
+- intent：Audio-play，置信度0.73
+- slot-filling：artist（白居易）、art（咏怀）
+
+
+### 模型选择
+
+| 模型 |	预训练任务差异 |决策|
+|---|---|---|
+| BERT |	MLM获取双向特征表示；NSP学习句间关系 | 放弃 |
+| ALBERT |	因式分解、参数共享减少参数量；SOP增加句间任务难度 | 放弃 |
+| RoBERTa |	动态masking；更多的数据；更大的mini-batch | 采用 |
+| NeZha |	相对位置编码；全词掩码；混合精度训练；LAMB Optimizer | 采用 |
+| MacBERT |	MLM作为校正 | 采用 |
+
+### 自监督
+
+自监督预训练：分别用RoBERTa、NeZha和MacBERT执行MLM的预训练任务
+
+示例：
+- query：  播 放 中 央 电 视 台 的 都 市 之 声
+- n-gram挖掘词语级别的特征表示 
+  - bi-gram MLM： \[CLS] 播 放 中 央 \[MUSK] \[MUSK] 台 的 \[MUSK] \[MUSK] 之 声
+  - tri-gram MLM：\[CLS] 播 放 中 央 \[MUSK] \[MUSK] \[MUSK] 的 \[MUSK] \[MUSK] \[MUSK] 声
+
+
+### 分类
+
+分类问题
+- （1）**常规**意图：直接加MLP，输出softmax结果
+- （2）**二级**意图：合并层次信息
+  - radio 与 play 合并为：radio-play
+  - traval 与 query 合并为：travel-query
+- （3）**小样本**意图：数据增强 + 权重设置
+  - query：查询北京飞桂林的飞机是否已经起飞了
+  - ① 数据**增强**：数据增强：Cutoff, AEDA
+    - 北京飞桂林的飞机，是否！起飞了。
+  - ② **权重**设置：基础类别 1，小样本类别 12
+  - ③ 基于**提示**的预训练范式，通过设计**提示模板**更好的利用语言模型
+- （4）域外意图
+  - 级联另一个专门预测other类别的模型，
+
+### 序列标注
+
+槽位抽取
+- 常规槽位：
+  - MacBERT + BiLSTM  → CRF
+- 小样本槽位
+  - 迁移学习
+
+其它
+- 对抗训练
+- 五折交叉验证
+- 相似词替换
+- 随机sentence permutation
+- 随机word drop
+
+尝试过的模型
+- Joint-Model
+- MRC-Model
+- Proposed Model
+
+
+
+#### 并行
+
+
+[2021 CCIR Cup竞赛成果揭晓，极链发力“人机交互NLU”战绩可贺](https://baijiahao.baidu.com/s?id=1716837610063284796&wfr=spider&for=pc), 经历了近三个月A榜与B榜的接连挑战，决赛答辩阶段，组委会根据算法创新性、商业价值与现场表现力等多个维度对参赛团队进行综合评估，最终极链科技两支团队在中国移动研究院发布的「智能人机交互自然语言理解」赛题中取得第二名和第三名的优秀战绩。
+- ![](https://pics3.baidu.com/feed/d833c895d143ad4b910759ad92a128a6a50f06d9.png)
+
+两大团队面对所需解决的任务，均设计了由“域外检测”、“意图识别与槽位抽取”两大算法模块构成的算法系统。通过“域外检测”算法来排除测试集中的域外数据，再对过滤后得到的域内数据进行“意图识别与槽位抽取”。
+- ![](https://pics5.baidu.com/feed/1b4c510fd9f9d72a9560fcf6db895a3d359bbb06.png)
+- “域外检测”算法部分，综合利用了BERT、RoBERTa、MACBERT等基于不同语料预训练和不同开源模型之间的互补能力，融合增强了整体算法模型体系的域外检测能力，提升域外数据召回率的同时，也利用了多样化开源数据进行训练以最大化构建域内数据的补集空间。
+- 为了更进一步提升任务准确率，团队对意图识别与槽位抽取进行了**联合**建模，通过联合训练学习到了两种任务间的相互约束关系，并实现了一次推理过程即可同时完成两种任务，准确而高效。
+- 由于缺乏先验知识，而使意图识别的准确率提升陷入瓶颈。为了在缺乏实体属性的情形下，对模型不可靠的预测过程进行知识赋能，团队为此构建了**文人名录**库、**文学作品**库等多种知识库，从而提高了意图识别的准确率。（例如，改进后可以正确地在Music-Play、Audio-Play这两种易混淆意图当中作出选择）
+- 针对竞赛训练数据中“异常槽位”（表现为槽位所对应的槽值并非来自于原文中，准确地说应该为一种分类标签）的抽取，团队根据异常槽位槽值非空占比值的大小设计了高效的特征词判断规则、深度学习分类模型两种策略，从而可靠地实现了槽位抽取任务。
+
+
 
 ## SemEval
 
