@@ -637,65 +637,100 @@ SDK是什么
 
 # RPC
 
+资料
 - 【2020-12-25】[为啥需要RPC，而不是简单的HTTP？](https://www.toutiao.com/i6898582988620202500/)
-- 企业开发的模式一直定性为HTTP接口开发，即常说的RESTful风格的服务接口。对于接口不多、系统与系统交互较少的情况下，解决信息孤岛初期常使用的一种通信手段；
-- 优点就是简单、直接、开发方便。利用现成的http协议进行传输。要写一大份接口文档，严格地标明输入输出是什么，说清楚每一个接口的请求方法，以及请求参数需要注意的事项等。
-- 但是对于大型企业来说，内部子系统较多、接口非常多的情况下，RPC框架的好处就显示出来了
-    - 首先就是长链接，不必每次通信都要像http一样去3次握手什么的，减少了网络开销；
-    - 其次就是RPC框架一般都有注册中心，有丰富的监控管理；
-    - 发布、下线接口、动态扩展等，对调用方来说是无感知、统一化的操作。
+- 【2021-11-24】[1万行代码，单机50万QPS，今年最值得学习的开源RPC框架！](http://it.taocms.org/11/94072.htm)
 
-## 基本概念
+企业开发的模式一直定性为**HTTP接口**开发，即常说的 RESTful 风格的服务接口。对于接口不多、系统与系统交互较少的情况下，解决信息孤岛初期常使用的一种通信手段；
+- 优点：简单、直接、开发方便。利用现成的http协议进行传输。要写一大份接口文档，严格地标明输入输出是什么，说清楚每一个接口的请求方法，以及请求参数需要注意的事项等。
+- 但是对于大型企业来说，**内部子系统较多、接口非常多**的情况下，RPC框架的好处就显示出来了
+  - 首先，**长链接**，不必每次通信都要像http一样去3次握手什么的，减少了网络开销；
+  - 其次，RPC框架一般都有**注册中心**，有丰富的监控管理；
+  - 发布、下线接口、动态扩展等，对调用方来说是**无感知**、统一化的操作。
+
+## 什么是RPC
 
 - [什么是RPC](https://www.jianshu.com/p/7d6853140e13)
-- RPC（Remote Procedure Call）远程过程调用，简单的理解是一个节点请求另一个节点提供的服务
+
+|调用类型|过程| 代码 |示意图| 备注 |
+|---|---|---|--——| --- |
+| 本地函数调用 | 传参→本地函数代码→执行→返回结果| int result = Add(1, 2); | ![](http://cdn1.taocms.org/imgpxy.php?url=gnp%3Dtmf_xw%3F046%2FA4JAWAtPcfAaM6mUOrOJtvOA29yCSf7ciISf1Fccln8svRpUwftH6VbDxxRbifkHGL95EQ6UrM431yOYhkcxzerY%2Fgnp_zibmm_zs%2Fnc.cipq.zibmm%2F%2F%3Asptth) | 所有动作发生同一个进程空间 |
+| 远程过程调用 | 传参→远程调用→远程执行→返回结果 | int result = Add(1, 2);（socket通信） |![](http://cdn1.taocms.org/imgpxy.php?url=gnp%3Dtmf_xw%3F046%2FQMTbiMcucicJlpTXIbigNciUc0rVf7I0psdaYGsMbi2mjCdr7M6nsVAG4h1DxxRbifkHGL95EQ6UrM431yOYhkcxzerY%2Fgnp_zibmm_zs%2Fnc.cipq.zibmm%2F%2F%3Asptth) | 跨进程、跨服务器 | 
+
+
+RPC（Remote Procedure Call）**远程过程调用**，简单的理解是一个节点请求另一个节点提供的服务
 - **本地过程调用**：如果需要将本地student对象的age+1，可以实现一个addAge()方法，将student对象传入，对年龄进行更新之后返回即可，本地方法调用的函数体通过函数指针来指定。
 - **远程过程调用**：上述操作的过程中，如果addAge()这个方法在服务端，执行函数的函数体在远程机器上，如何告诉机器需要调用这个方法呢？
-    - 1.首先客户端需要告诉服务器，需要调用的函数，这里函数和进程ID存在一个映射，客户端远程调用时，需要查一下函数，找到对应的ID，然后执行函数的  - 代码。
-    - 2.客户端需要把本地参数传给远程函数，本地调用的过程中，直接压栈即可，但是在远程调用过程中不再同一个内存里，无法直接传递函数的参数，因此需  - 要客户端把参数转换成字节流，传给服务端，然后服务端将字节流转换成自身能读取的格式，是一个序列化和反序列化的过程。
-    - 3.数据准备好了之后，如何进行传输？网络传输层需要把调用的ID和序列化后的参数传给服务端，然后把计算好的结果序列化传给客户端，因此TCP层即可完成上述过程，gRPC中采用的是HTTP2协议。
-- 总结
-    - Client端 ：Student student = Call(ServerAddr, addAge, student)
-        - 1. 将这个调用映射为Call ID。
-        - 2. 将Call ID，student（params）序列化，以二进制形式打包
-        - 3. 把2中得到的数据包发送给ServerAddr，这需要使用网络传输层
-        - 4. 等待服务器返回结果
-        - 5. 如果服务器调用成功，那么就将结果反序列化，并赋给student，年龄更新
-    - Server端
-        - 1. 在本地维护一个Call ID到函数指针的映射call_id_map，可以用Map<String, Method> callIdMap
-        - 2. 等待服务端请求
-        - 3. 得到一个请求后，将其数据包反序列化，得到Call ID
-        - 4. 通过在callIdMap中查找，得到相应的函数指针
-        - 5. 将student（params）反序列化后，在本地调用addAge()函数，得到结果
-        - 6. 将student结果序列化后通过网络返回给Client
+  - 1.首先客户端需要告诉服务器，需要调用的函数，这里函数和进程ID存在一个映射，客户端远程调用时，需要查一下函数，找到对应的ID，然后执行函数的代码。
+  - 2.客户端需要把本地参数传给远程函数，本地调用的过程中，直接压栈即可，但是在远程调用过程中不再同一个内存里，无法直接传递函数的参数，因此需要客户端把参数转换成字节流，传给服务端，然后服务端将字节流转换成自身能读取的格式，是一个序列化和反序列化的过程。
+  - 3.数据准备好了之后，如何进行传输？网络传输层需要把调用的ID和序列化后的参数传给服务端，然后把计算好的结果序列化传给客户端，因此TCP层即可完成上述过程，gRPC中采用的是HTTP2协议。
+
+总结
+- Client端 ：Student student = Call(ServerAddr, addAge, student)
+  - 1. 将这个调用映射为Call ID。
+  - 2. 将Call ID，student（params）序列化，以二进制形式打包
+  - 3. 把2中得到的数据包发送给ServerAddr，这需要使用网络传输层
+  - 4. 等待服务器返回结果
+  - 5. 如果服务器调用成功，那么就将结果反序列化，并赋给student，年龄更新
+- Server端
+  - 1. 在本地维护一个Call ID到函数指针的映射call_id_map，可以用Map<String, Method> callIdMap
+  - 2. 等待服务端请求
+  - 3. 得到一个请求后，将其数据包反序列化，得到Call ID
+  - 4. 通过在callIdMap中查找，得到相应的函数指针
+  - 5. 将student（params）反序列化后，在本地调用addAge()函数，得到结果
+  - 6. 将student结果序列化后通过网络返回给Client
+
 - 图示
     - ![](https://upload-images.jianshu.io/upload_images/7632302-ca0ba3118f4ef4fb.png)
 - 微服务的设计中，一个服务A如果访问另一个Module下的服务B，可以采用HTTP REST传输数据，并在两个服务之间进行序列化和反序列化操作，服务B把执行结果返回过来。
 - 由于HTTP在应用层中完成，整个通信的代价较高，远程过程调用中直接基于TCP进行远程调用，数据传输在传输层TCP层完成，更适合对效率要求比较高的场景，RPC主要依赖于客户端和服务端之间建立Socket链接进行，底层实现比REST更复杂。
 - ![](https://upload-images.jianshu.io/upload_images/7632302-19ad38cdd9a4b3ec.png)
 
-## RPC 架构：
+## RPC框架
 
-- 一个完整的RPC架构里面包含了四个核心的组件，分别是Client ,Server,Client Stub以及Server Stub，这个Stub大家可以理解为存根。分别说说这几个组件：
-    - 客户端（Client），服务的调用方。
-    - 服务端（Server），真正的服务提供者。
-    - 客户端存根，存放服务端的地址消息，再将客户端的请求参数打包成网络消息，然后通过网络远程发送给服务方。
-    - 服务端存根，接收客户端发送过来的消息，将消息解包，并调用本地的方法。
-- ![](https://p3-tt.byteimg.com/origin/pgc-image/28f3cdf8370647f9a2966b4bf352e52b?from=pc)
+### 为什么需要RPC框架呢？
 
-## 什么时候需要RPC
+如果没有统一的RPC框架，各个团队的服务提供方就需要各自实现一套序列化、反序列化、网络框架、连接池、收发线程、超时处理、状态机等“业务之外”的重复技术劳动，造成整体的低效。
+
+RPC框架的职责，就是要屏蔽各种复杂性：
+- （1）调用方client感觉就像调用本地函数一样，来调用服务；
+- （2）提供方server感觉就像实现一个本地函数一样，来实现服务；
+
+### 什么时候需要RPC
 
 - RPC通信方式，已经不仅仅是远程，这个远程就是指不在一个进程内，只能通过其他协议来完成，通常都是TCP或者是Http。
 - 希望是和在同一个进程里，一致的体验
 - http做不到，Http（TCP）本身的三次握手协议，就会带来大概1MS的延迟。每发送一次请求，都会有一次建立连接的过程，加上Http报文本身的庞大，以及Json的庞大，都需要作一些优化。
 - 一般的场景下，没什么问题，但是对于Google这种级别的公司，他们接受不了。几MS的延迟可能就导致多出来几万台服务器，所以他们想尽办法去优化，优化从哪方面入手？
-    - 1.减少传输量。
-    - 2.简化协议。
-    - 3.用长连接，不再每一个请求都重新走三次握手流程
+  - 1.减少传输量。
+  - 2.简化协议。
+  - 3.用长连接，不再每一个请求都重新走三次握手流程
 - Http的协议就注定了，在高性能要求的下，不适合用做线上分布式服务之间互相使用的通信协议。
 - RPC服务主要是针对大型企业的，而HTTP服务主要是针对小企业的，因为RPC效率更高，而HTTP服务开发迭代会更快。
 
-## gRPC与REST
+### RPC基本组件
+
+一个完整的RPC架构里面包含了四个核心的组件，分别是Client ,Server,Client Stub以及Server Stub，这个Stub大家可以理解为存根。分别说说这几个组件：
+- 客户端（Client），服务的调用方。
+- 服务端（Server），真正的服务提供者。
+- 客户端存根，存放服务端的地址消息，再将客户端的请求参数打包成网络消息，然后通过网络远程发送给服务方。
+- 服务端存根，接收客户端发送过来的消息，将消息解包，并调用本地的方法。
+- ![](https://p3-tt.byteimg.com/origin/pgc-image/28f3cdf8370647f9a2966b4bf352e52b?from=pc)
+
+### 常见RPC框架
+
+有哪些常见的，出圈的RPC框架呢？
+- （1）gRPC，Google出品，支持多语言；
+- （2）Thrift，Facebook出品，支持多语言；
+- （3）Dubbo，阿里开源的，支持Java；
+- （4）bRPC，百度开源的，支持C++，Java；
+- （5）tRPC，腾讯RPC框架，支持多语言；
+- （6）srpc，作者是搜狗的媛架构师liyingxin，基于WF，代码量1W左右：
+  - ① 非常适合用来学习RPC的架构设计；
+  - ② 又是一个工业级的产品，QPS可以到50W，应该是行业能目前性能最好的RPC框架了吧，有不少超高并发的线上应用都使用它。
+- （7）。。。
+
+### gRPC与REST
 
 - REST通常以业务为导向，将业务对象上执行的操作映射到HTTP动词，格式非常简单，可以使用浏览器进行扩展和传输，通过JSON数据完成客户端和服务端之间的消息通信，直接支持请求/响应方式的通信。不需要中间的代理，简化了系统的架构，不同系统之间只需要对JSON进行解析和序列化即可完成数据的传递。
 - 但是REST也存在一些弊端，比如只支持请求/响应这种单一的通信方式，对象和字符串之间的序列化操作也会影响消息传递速度，客户端需要通过服务发现的方式，知道服务实例的位置，在单个请求获取多个资源时存在着挑战，而且有时候很难将所有的动作都映射到HTTP动词。
@@ -718,6 +753,128 @@ SDK是什么
     - 由于thrift支持序列化和反序列化，并且支持rpc调用，其代码风格较好并且使用方便，对效率要求不算太高的业务，以及需要rpc的场景，可以选择thrift作为基础库
 ![](https://img2018.cnblogs.com/blog/524932/201809/524932-20180915020117562-1191051189.png)
 
+
+### sRPC
+
+【2021-11-24】[1万行代码，单机50万QPS，今年最值得学习的开源RPC框架！](http://it.taocms.org/11/94072.htm)
+- [github地址](https://github.com/sogou/srpc)，作者[知乎](https://www.zhihu.com/people/liyingxin1412/posts)
+
+#### 什么是srpc？
+
+- 基于WF的轻量级，超高性能，工业级RPC框架，兼容多协议，例如百度bRPC，腾讯tRPC，Google的gRPC，以及FB的thrift协议。
+
+#### srpc特点
+
+srpc有些什么特点？
+- （1）支持多种IDL格式，包括Protobuf，Thrift等，对于这类项目，可以一键迁移；
+- （2）支持多种序列化方式，包括Protobuf，Thrift，json等；
+- （3）支持多压缩方法，对应用透明，包括gzip，zlib，lz4，snappy等；
+- （4）支持多协议，对应用透明，包括http，https，ssl，tcp等；
+- （5）高性能；不同客户端线程压力下的性能表现非常稳定，QPS在50W左右，优于同等压测配置的bRPC与thrift。
+  - ![](http://cdn1.taocms.org/imgpxy.php?url=gnp%3Dtmf_xw%3F046%2FgXKBtRFZZne43bDPrPX1MRzprUHQqfyBH2rOtM10b9hL3t4JdGxTVlDxxRbifkHGL95EQ6UrM431yOYhkcxzerY%2Fgnp_zibmm_zs%2Fnc.cipq.zibmm%2F%2F%3Asptth)
+- （6）轻量级，低门槛，1W行左右代码，只需引入一个静态库；
+
+#### 设计思路
+
+srpc的架构设计思路是怎样的？
+
+作为一个RPC框架，srpc的架构是异常清晰的，用户需要关注这3个层次：
+- （1）IDL接口描述文件层；
+- （2）RPC序列化协议层；
+- （3）网络通讯层；
+
+同时，每一层次又提供了多种选择，用户可以任意的组合
+- ![](http://cdn1.taocms.org/imgpxy.php?url=gnp%3Dtmf_xw%3F046%2FweBRbi95Ko72pjseO1IXggym7TYHnQPtz04CuPci3QTgHeykEpciyIKsNDxxRbifkHGL95EQ6UrM431yOYhkcxzerY%2Fgnp_zibmm_zs%2Fnc.cipq.zibmm%2F%2F%3Asptth)
+- （1）IDL层，用户可以选择Protobuf或者Thrift；
+- （2）协议层，可以选择Thrift，bRPC，tRPC等；
+画外音：因此，才能和其他RPC框架无缝互通。
+- （3）通信层，可以选择tcp或者http；
+
+RPC的客户端要做什么工作，RPC的服务端要做什么工作，srpc框架又做了什么工作呢？
+
+首先必须在IDL中要定义好：
+- （1）逻辑请求包request；
+- （2）逻辑响应包response；
+- （3）服务接口函数method；
+- ![](http://cdn1.taocms.org/imgpxy.php?url=gnp%3Dtmf_xw%3F046%2FwarKvQllah52wJ8UciZaiPGcgVUR0vyssGCJutjtLVPeJ8jWqy1Qlq5YDxxRbifkHGL95EQ6UrM431yOYhkcxzerY%2Fgnp_zibmm_zs%2Fnc.cipq.zibmm%2F%2F%3Asptth)
+
+RPC-client的工作就异常简单了：
+- （1）调用method；
+- （2）绑定回调函数，处理回调；
+对应上图中顶部方框的**绿色**部分。
+
+RPC-server的工作也非常简单，像实现一个本地函数一样，提供远程的服务：
+- （1）实现method；
+- （2）接受request，逻辑处理，返回response；
+对应上图中底部方框的**黄色**部分。
+
+srpc框架完成了绝大部分的工作：
+- （1）对request序列化，压缩，处理生成二进制报文；
+- （2）连接池，超时，任务队列，异步等处理；
+- （3）对request二进制报文处理，解压缩，反序列化；
+对应上图中中间的方框的**红色**部分，以及大部分流程。
+
+在这个过程中，srpc采用插件化设计，各种复杂性细节，对接口调用方与服务提供方，都是透明的，并且具备良好的扩展性。
+- ![](http://cdn1.taocms.org/imgpxy.php?url=gnp%3Dtmf_xw%3F046%2FAHBbiQaiZSATQVPSEHrghOWhdBNLaima3b67OzKRqIkGGkVzBpDujwl51DxxRbifkHGL95EQ6UrM431yOYhkcxzerY%2Fgnp_zibmm_zs%2Fnc.cipq.zibmm%2F%2F%3Asptth)
+
+另外，定义好IDL之后，服务端的代码可以利用框架提供的工具自动生成代码，业务服务提供方，只需要专注于业务接口的实现即可，你说帅气不帅气？
+画外音：具体的生成工具，与生成方法，请参看git上的文档。
+
+最后，我觉得这个srpc最帅气的地方之一，就是：开源版本即线上工程版本，更新快，issue响应快，并且文档真的很全！
+画外音：不少大公司，公司内部的版本和开源的版本是两套代码，开源版本没有文档，KPI完成之后，开源就没人维护了，结果坑了一大票人。
+
+#### 如何快速上手
+
+三个步骤
+- 第一步：定义IDL描述文件。
+- 第二步：生成代码，并实现ServiceIMPL，server端就搞定了。
+- 第三步：自己定义一个请求客户端，向服务端发送echo请求。
+
+代码：
+
+```c++
+// (1) 第一步：定义IDL描述文件
+syntax = "proto3";// proto2 or proto3
+message EchoRequest {
+   string message = 1;
+   string name = 2;
+
+};
+
+message EchoResponse {
+   string message = 1;
+
+};
+
+service Example {
+   rpc Echo(EchoRequest) returns (EchoResponse);
+
+};
+
+// (2) 第二步：生成代码，并实现ServiceIMPL，server端就搞定了
+class ExampleServiceImpl : public Example::Service
+{
+public
+   void Echo(EchoRequest *request,
+        EchoResponse *response,
+        RPCContext *ctx) override
+    {
+       response->set_message("Hi, " + request->name());
+    }
+};
+
+// (3) 第三步：自己定义一个请求客户端，向服务端发送echo请求。
+int main()
+{
+   Example::SRPCClient client("127.0.0.1", 1412);
+   EchoRequest req;
+   req.set_message("Hello, srpc!");
+   req.set_name("zhangsan");
+   client.Echo(&req, 
+        [](EchoResponse *response, RPCContext *ctx){});
+   return 0;
+}
+```
 
 # GraphQL
 
