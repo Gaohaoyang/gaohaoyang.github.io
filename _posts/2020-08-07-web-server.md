@@ -2629,6 +2629,125 @@ node.js、npm、vue、webpack之间的关系
 
 【2021-7-21】[vue学习笔记（超详细）](https://blog.csdn.net/fmk1023/article/details/111381876)
 
+### Flask + Vue
+
+【2021-11-25】[浅谈如何用使用flask和vue，快速开发常用应用](https://baiyue.one/archives/1694.html), flask是python的一种通用的web框架，诞生至今已有10年了，虽然官网界面比较复古极简，但使用者还是不在少数。纯后端的api开发，还可以看向fastapi，都是当今最主流的两个选择。
+- ![](https://cdn.jsdelivr.net/gh/Baiyuetribe/yyycode@dev/img/20/yyycode_com20200924111604.png)
+
+flask和vue结合的优势
+- vue有着简洁、易懂的前端界面开发逻辑
+- flask有着python独特的语义化代码，非常适合处理各种数据
+- 两种语言都对小白非常友好，python更是当下最广泛的编程语言，用户量庞大
+- 当前vue在vite的帮助下，可以快速定制开发环境，不论是html模板的pug语法，还是style的stylus语法，都是简化输入，突出逻辑框架，开发者的精力可以更集中在逻辑设计上。
+- 容易上手，带来的自然高效率、易维护、易复制
+
+数据库代码：
+
+```sql
+-- SQLite
+CREATE TABLE books (
+    id int,
+    title varcha(255),
+    author varcha(255),
+    price int
+)；
+-- 插入数据
+INSERT INTO books VALUES ('1','商业周刊','期刊','15');
+INSERT INTO books VALUES ('2','新闻周刊','新闻','25');
+INSERT INTO books VALUES ('3','有机化学','书籍','46');
+INSERT INTO books VALUES ('4','读者文摘','读者','48');
+```
+
+flask入口文件app.py
+
+```python
+import sqlite3
+from flask import Flask
+from flask import jsonify,render_template
+from flask_cors import CORS
+
+app = Flask(__name__)
+# CORS(app, supports_credentials=True)    #解决跨域问题
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})   #两种模式都行
+@app.route('/')
+def home():
+    return render_template('index.html',title='flask & vue')
+@app.route('/api/books')
+def books():
+    conn = sqlite3.connect('books.db')
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+    sql = 'select * from books'
+    rows = cur.execute(sql).fetchall()
+    rows = [dict(row) for row in rows]
+    return jsonify(rows)
+if __name__ == "__main__":
+    app.run(debug=True,port=3000)
+```
+
+前端文件：index.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- 引入axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="app">
+    <h1>书籍信息展示</h1>
+    <table border="1" >
+        <tr>
+            <td>#</td>
+            <td>标题</td>
+            <td>作者</td>
+            <td>价格</td>
+        </tr>
+        <!-- 定义行 -->
+        <tr v-for="book in books">
+            <td>[[book.id]]</td>
+            <td>[[book.title]]</td>
+            <td>[[book.author]]</td>
+            <td>[[book.price]]</td>
+        </tr>
+    </table>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                books:[],
+                msg: '说你好'
+            },
+            delimiters: ["[[","]]"],    //用于避免与flask冲突
+            mounted: function(){
+                this.fetchData()
+            },
+            methods: {
+                fetchData(){    // axios异步请求数据
+                    axios.get('/api/books').then(res =>{
+                        this.books = res.data
+                        console.log(this.books)
+                    }).catch(err=>{
+                        console.log(err)
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+</html>
+```
+
+最终效果
+- 由于flask采用的是jinja模板，也就是采用{{}}模式与web页面交互，因此会与vue的默认分隔符号相冲突，因此在script里需要修改delimiters: ["[[","]]"]。当然还有其他修改方式，这里推荐的也是相对简单的方法。
+- ![](https://cdn.jsdelivr.net/gh/Baiyuetribe/yyycode@dev/img/20/yyycode_com20200924113511.png)
 
 ## 低代码平台
 
