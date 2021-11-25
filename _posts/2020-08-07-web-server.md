@@ -974,44 +974,51 @@ int main()
 
 # Python Web框架
 
-- 参考：
-  - [Python Web服务器并发性能测试](https://blog.csdn.net/bandaoyu/article/details/88546515)
-  - [从0到1，Python Web开发的进击之路](https://zhuanlan.zhihu.com/p/25038203)
+参考：
+- [Python Web服务器并发性能测试](https://blog.csdn.net/bandaoyu/article/details/88546515)
+- [从0到1，Python Web开发的进击之路](https://zhuanlan.zhihu.com/p/25038203)
 
 Python 常见部署方法有 ：
 - `fcgi` ：用 spawn-fcgi 或者框架自带的工具对各个 project 分别生成监听进程，然后和 http 服务互动
 - `wsgi` ：利用 http 服务的 mod_wsgi 模块来跑各个 project(Web 应用程序或框架简单而通用的 Web 服务器 之间的接口)。
 - `uWSGI` 是一款像 php-cgi 一样监听同一端口，进行统一管理和负载平衡的工具，uWSGI，既不用 wsgi 协议也不用 fcgi 协议，而是自创了一个 uwsgi 的协议，据说该协议大约是 fcgi 协议的 10 倍那么快。
 
-其实 WSGI 是分成 server 和 framework (即 application) 两部分 (当然还有 middleware)。严格说 WSGI 只是一个协议, 规范 server 和 framework 之间连接的接口。
+其实 WSGI 是分成 **server** 和 **framework** (即 application) 两部分 (当然还有 **middleware** 中间件)。
+
+严格说 WSGI 只是一个**协议**, 规范 server 和 framework 之间连接的接口。
 
 - 所有的 Python Web框架都要遵循 WSGI 协议
-- WSGI 中有一个非常重要的概念：每个Python Web应用都是一个可调用（callable）的对象。
-    - 在 flask 中，这个对象就是 app = Flask(name) 创建出来的 app，图中的绿色Application部分。
-    - 要运行web应用，必须有 web server，如熟悉的apache、nginx，或者python中的gunicorn，werkzeug提供的WSGIServer，是图的黄色Server部分
-    - Server和Application之间怎么通信，就是WSGI的功能，规定了 app(environ, start_response) 的接口，server会调用 application，并传给它两个参数：environ 包含了请求的所有信息，start_response 是 application 处理完之后需要调用的函数，参数是状态码、响应头部还有错误信息。
-    - ![](https://img-blog.csdn.net/20170530093502586)
-    - WSGI application 非常重要的特点是可以嵌套。可以写个application，调用另外一个 application，然后再返回（类似一个 proxy）。一般来说，嵌套的最后一层是业务应用，中间就是 middleware。好处是可以解耦业务逻辑和其他功能，比如限流、认证、序列化等都实现成不同的中间层，不同的中间层和业务逻辑是不相关的，可以独立维护；而且用户也可以动态地组合不同的中间层来满足不同的需求。
-    - Flask基于Werkzeug WSGI工具箱和Jinja2 模板引擎。Flask也被称为“microframework”，因为它使用简单的核心，用extension增加其他功能。Flask没有默认使用的数据库、窗体验证工具。然而，Flask保留了扩增的弹性，可以用Flask-extension加入这些功能：ORM、窗体验证工具、文件上传、各种开放式身份验证技术。Flask是一个核心，而其他功能则是一些插件
-    - ![](https://img-blog.csdn.net/20170530093535180)
-    - Flask是怎么将代码转换为可见的Web网页?
-        - 从Web程序的一般流程来看，当客户端想要获取动态资源时，（比如ASP和PHP这类语言写的网站），会发起一个HTTP请求（比如用浏览器访问一个URL），Web应用程序就会在服务器后台进行相应的业务处理（比如对数据库进行操作或是进行一些计算操作等），取出用户需要的数据，生成相应的HTTP响应（当然，如果访问的是 静态资源 ，服务器则会直接返回用户所需的资源，不会进行业务处理）
-        - ![](https://img-blog.csdn.net/20170530093546915)
-        - 实际应用中，不同的请求可能会调用相同的处理逻辑，即Web开发中所谓的路由分发
-        - ![](https://img-blog.csdn.net/20170530093643676)
-        - Flask中，使用werkzeug来做路由分发，werkzeug是Flask使用的底层WSGI库（WSGI，全称 Web Server Gateway interface，或者 Python Web Server Gateway Interface，是为 Python 语言定义的Web服务器和Web应用程序之间的一种简单而通用的接口）。
-        - WSGI将Web服务分成两个部分：服务器和应用程序。
-            - WGSI服务器只负责与网络相关的两件事：接收浏览器的HTTP请求、向浏览器发送HTTP应答；
-            - 而对HTTP请求的具体处理逻辑，则通过调用WSGI应用程序进行。
-        - ![](https://img-blog.csdn.net/20170530093621801)
-        - 参考：[Flask运行原理解析](https://blog.csdn.net/sunhuaqiang1/article/details/72808619)，[Flask应用运行过程剖析](https://blog.csdn.net/weixin_34250434/article/details/89072137)
+
+WSGI 中有一个非常重要的概念：每个Python Web应用都是一个**可调用**（callable）的对象。
+- 在 flask 中，这个对象就是 app = Flask(name) 创建出来的 app，图中的绿色Application部分。
+- 要运行web应用，必须有 web server，如熟悉的apache、nginx，或者python中的gunicorn，werkzeug提供的WSGIServer，是图的黄色Server部分
+- Server和Application之间怎么通信，就是WSGI的功能，规定了 app(environ, start_response) 的接口，server会调用 application，并传给它两个参数：environ 包含了请求的所有信息，start_response 是 application 处理完之后需要调用的函数，参数是状态码、响应头部还有错误信息。
+- ![](https://img-blog.csdn.net/20170530093502586)
+- WSGI application 非常重要的特点是可以嵌套。可以写个application，调用另外一个 application，然后再返回（类似一个 proxy）。一般来说，嵌套的最后一层是业务应用，中间就是 middleware。好处是可以解耦业务逻辑和其他功能，比如限流、认证、序列化等都实现成不同的中间层，不同的中间层和业务逻辑是不相关的，可以独立维护；而且用户也可以动态地组合不同的中间层来满足不同的需求。
+- Flask基于Werkzeug WSGI工具箱和Jinja2 模板引擎。Flask也被称为“microframework”，因为它使用简单的核心，用extension增加其他功能。Flask没有默认使用的数据库、窗体验证工具。然而，Flask保留了扩增的弹性，可以用Flask-extension加入这些功能：ORM、窗体验证工具、文件上传、各种开放式身份验证技术。Flask是一个核心，而其他功能则是一些插件
+- ![](https://img-blog.csdn.net/20170530093535180)
+
+Flask是怎么将代码转换为可见的Web网页?
+- 从Web程序的一般流程来看，当客户端想要获取动态资源时，（比如ASP和PHP这类语言写的网站），会发起一个HTTP请求（比如用浏览器访问一个URL），Web应用程序就会在服务器后台进行相应的业务处理（比如对数据库进行操作或是进行一些计算操作等），取出用户需要的数据，生成相应的HTTP响应（当然，如果访问的是 静态资源 ，服务器则会直接返回用户所需的资源，不会进行业务处理）
+- ![](https://img-blog.csdn.net/20170530093546915)
+- 实际应用中，不同的请求可能会调用相同的处理逻辑，即Web开发中所谓的路由分发
+- ![](https://img-blog.csdn.net/20170530093643676)
+- Flask中，使用werkzeug来做路由分发，werkzeug是Flask使用的底层WSGI库（WSGI，全称 Web Server Gateway interface，或者 Python Web Server Gateway Interface，是为 Python 语言定义的Web服务器和Web应用程序之间的一种简单而通用的接口）。
+- WSGI将Web服务分成两个部分：服务器和应用程序。
+  - WGSI服务器只负责与网络相关的两件事：接收浏览器的HTTP请求、向浏览器发送HTTP应答；
+  - 而对HTTP请求的具体处理逻辑，则通过调用WSGI应用程序进行。
+- ![](https://img-blog.csdn.net/20170530093621801)
+
+参考：
+- [Flask运行原理解析](https://blog.csdn.net/sunhuaqiang1/article/details/72808619)
+- [Flask应用运行过程剖析](https://blog.csdn.net/weixin_34250434/article/details/89072137)
 
 WSGI server 把服务器功能以 WSGI 接口暴露出来。比如 mod_wsgi 是一种 server, 把 apache 的功能以 WSGI 接口的形式提供出来。
 - WSGI framework 就是我们经常提到的 Django 这种框架。不过需要注意的是, 很少有单纯的 WSGI framework , 基于 WSGI 的框架往往都自带 WSGI server。比如 Django、CherryPy 都自带 WSGI server 主要是测试用途, 发布时则使用生产环境的 WSGI server。而有些 WSGI 下的框架比如 pylons、bfg 等, 自己不实现 WSGI server。使用 paste 作为 WSGI server。
 - Paste 是流行的 WSGI server, 带有很多中间件。还有 flup 也是一个提供中间件的库。
-搞清除 WSGI server 和 application, 中间件自然就清楚了。除了 session、cache 之类的应用, 前段时间看到一个 bfg 下的中间件专门用于给网站换肤的 (skin) 。中间件可以想到的用法还很多。
+搞清楚 WSGI server 和 application, 中间件自然就清楚了。除了 session、cache 之类的应用, 前段时间看到一个 bfg 下的中间件专门用于给网站换肤的 (skin) 。中间件可以想到的用法还很多。
 - 这里再补充一下, 像 django 这样的框架如何以 fastcgi 的方式跑在 apache 上的。这要用到 flup.fcgi 或者 fastcgi.py (eurasia 中也设计了一个 fastcgi.py 的实现) 这些工具, 它们就是把 fastcgi 协议转换成 WSGI 接口 (把 fastcgi 变成一个 WSGI server) 供框架接入。
-    - 整个架构是这样的: django -> fcgi2wsgiserver -> mod_fcgi -> apache 。
+  - 整个架构是这样的: django -> fcgi2wsgiserver -> mod_fcgi -> apache 。
 - 虽然我不是 WSGI 的粉丝, 但是不可否认 WSGI 对 python web 的意义重大。有意自己设计 web 框架, 又不想做 socket 层和 http 报文解析的同学, 可以从 WSGI 开始设计自己的框架。在 python 圈子里有个共识, 自己随手搞个 web 框架跟喝口水一样自然, 非常方便。或许每个 python 玩家都会经历一个倒腾框架的
 
 uWSGI 的主要特点如下：
@@ -1026,11 +1033,11 @@ Django就没有用异步，通过线程来实现并发，这也是WSGI普遍的�
 作者：[HylaruCoder](https://www.zhihu.com/question/297267614/answer/505683007)
 
 简单说下几种部署方式 
-- Flask 内置 WebServer + Flask App = 弱鸡版本的 Server, 单进程（单 worker) / 失败挂掉 / 不易 Scale
-- Gunicorn + Flask App = 多进程（多 worker) / 多线程 / 失败自动帮你重启 Worker / 可简单Scale
-- 多 Nginx + 多 Gunicorn + Flask App = 小型多实例 Web 应用，一般也会给 gunicorn 挂 supervisor
+- Flask 内置 WebServer + Flask App = **弱鸡版**本的 Server, **单进程**（单 worker) / 失败挂掉 / 不易 Scale
+- Gunicorn + Flask App = **多进程**（多 worker) / 多线程 / 失败自动帮你重启 Worker / 可简单Scale
+- 多 Nginx + 多 Gunicorn + Flask App = **小型**多实例 Web 应用，一般也会给 gunicorn 挂 supervisor
 
-在生产环境中, 一般都是请求的走向都是 Nginx->gunicorn->flask/django app 
+在生产环境中, 一般都是请求的走向都是 Nginx -> gunicorn -> flask/django app 
 
 第一个问题，Flask 作为一个 Web 框架，内置了一个 webserver, 但这自带的 Server 到底能不能用？ 
 - 官网的介绍： While lightweight and easy to use, Flask’s built-in server is not suitable for production as it doesn’t scale well. Some of the options available for properly running Flask in production are documented here. 
@@ -1042,7 +1049,7 @@ from werkzeug.serving import run_simple
 run_simple('localhost', 5000, application, use_reloader=True)
 ```
 
-来看看为什么？ 假设我们使用的是 Nginx+Flask Run 来当作生产环境，全部部署在一台机器上。 
+来看看为什么？ 假设我们使用的是 Nginx + Flask Run 来当作生产环境，全部部署在一台机器上。 
 
 劣势如下： 
 - 『单 Worker』只有一个进程在跑所有的请求，而由于实现的简陋性，内置 webserver 很容易卡死。并且只有一个 Worker 在跑请求。在多核 CPU 下，仅仅占用一核。当然，其实也可以多起几个进程。
@@ -1053,9 +1060,9 @@ run_simple('localhost', 5000, application, use_reloader=True)
 第二个问题，Gunicorn 作为 Server 相对而言可以有什么提升。 
 
 gunicorn 的优点如下
-- 帮我 scale worker, 进程挂了帮我重启
+- 帮忙 scale worker, 进程挂了自动重启
 - 用 python 的框架 flask/django/webpy 配置起来都差不多。
-- 还有信号机制。可以支持多种配置。
+- 还有**信号**机制。可以支持多种配置。
 
 在管理 worker 上，使用了 pre-fork 模型，即一个 master 进程管理多个 worker 进程，所有请求和响应均由 Worker 处理。Master 进程是一个简单的 loop, 监听 worker 不同进程信号并且作出响应。比如接受到 TTIN 提升 worker 数量，TTOU 降低运行 Worker 数量。如果 worker 挂了，发出 CHLD, 则重启失败的 worker, 同步的 Worker 一次处理一个请求。 
 
@@ -1063,12 +1070,12 @@ PS: 如果没有静态资源并且无需反向代理的话，抛弃 Nginx 直接
 
 ## Gunicorn
 
-Gunicorn“绿色独角兽”是一个被广泛使用的**高性能**的python WSGI UNIX HTTP服务器，移植自Ruby的独角兽（Unicorn）项目，使用pre-fork worker模式具有使用非常简单，轻量级的资源消耗，以及高性能等特点。
+Gunicorn（“绿色独角兽”）是一个被广泛使用的**高性能**的python WSGI UNIX HTTP服务器，移植自Ruby的独角兽（Unicorn）项目，使用pre-fork worker模式具有使用非常简单，轻量级的资源消耗，以及高性能等特点。
 - pre-fork worker模式: 一个中央master进程来管理一系列的工作进程，master并不知道各个独立客户端。所有的请求和响应完全由工作进程去完成。master通过一个循环不断监听各个进程的信号并作出相应反应，这些信号包括TTIN、TTOU和CHLD。TTIN和TTOU告诉master增加或者减少正在运行的进程数，CHLD表明一个子进程被终止了，在这种情况下master进程会自动重启这个失败的进程。
 
 Gunicorn是主流的WSGI容器之一，它易于配置，兼容性好，CPU消耗很少，它支持多种worker模式：
-- 同步worker：默认模式，也就是一次只处理一个请求。最简单的同步工作模式
-- 异步worker：通过Eventlet、Gevent实现的异步模式,gevent和eventlet都是基于greenlet库，利用python协程实现的
+- **同步**worker：默认模式，也就是一次只处理一个请求。最简单的同步工作模式
+- **异步**worker：通过Eventlet、Gevent实现的异步模式,gevent和eventlet都是基于greenlet库，利用python协程实现的
 - 异步IOWorker：目前支持gthread和gaiohttp; gaiohttp利用aiohttp库实现异步IO，支持web socket; gthread采用的事线程工作模式，利用线程池管理连接
 - Tronado worker：tornado框架,利用python Tornado框架实现
 
@@ -1080,9 +1087,13 @@ Gunicorn是主流的WSGI容器之一，它易于配置，兼容性好，CPU消�
 - gaiohttp
 - gthread
 
-[Gunicorn使用详解](https://www.cnblogs.com/shijingjing07/p/9110619.html), [Gunicorn的使用](https://www.jianshu.com/p/8ea438251e44/)
-![](https://img.jbzj.com/file_images/article/201907/2019722104302288.jpg?2019622104331)
-Gunicorn(Green Unicorn)是一个WSGI HTTP服务器,python自带的有个web服务器，叫做wsgiref，Gunicorn的优势在于，它使用了pre-fork worker模式，gunicorn在启动时，会在主进程中预先fork出指定数量的worker进程来处理请求，gunicorn依靠操作系统来提供负载均衡，推进的worker数量是(2*$num_cores)+1
+参考：
+- [Gunicorn使用详解](https://www.cnblogs.com/shijingjing07/p/9110619.html)
+- [Gunicorn的使用](https://www.jianshu.com/p/8ea438251e44/)
+
+- ![](https://img.jbzj.com/file_images/article/201907/2019722104302288.jpg?2019622104331)
+
+Gunicorn(Green Unicorn)是一个WSGI HTTP服务器,python自带的有个web服务器，叫做 wsgiref，Gunicorn的优势在于，它使用了pre-fork worker模式，gunicorn在启动时，会在主进程中预先fork出指定数量的worker进程来处理请求，gunicorn依靠操作系统来提供负载均衡，推进的worker数量是(2*$num_cores)+1
 python是单线程的语言，当进程阻塞时，后续请求将排队处理。所用pre-fork worker模式，极大提升了服务器请求负载。
 
 安装
@@ -1091,9 +1102,12 @@ python是单线程的语言，当进程阻塞时，后续请求将排队处理�
 pip install gunicorn
 ```
 
-使用,编写wsgi接口,test.py代码
+使用, 编写wsgi接口, test.py代码
 
 ```python
+from flask import Flask
+app = Flask(__name__)
+
 def application(environ,start_response):
     start_response('200 OK',[('Content-Type','text/html')])
     return b'<h1>Hello,web!</h1>'
@@ -1106,7 +1120,10 @@ def application(environ,start_response):
 - application:变量名,python文件中可调用的wsgi接口名称
 
 ```shell
-gunicorn -w 2 -b 0.0.0.0:8000 test.application
+# 启动并发进程, 注意：不是. 而是 :
+gunicorn -w 2 -b 0.0.0.0:8000 test:application
+# 查询配置信息
+gunicorn -h
 ```
 
 gunicorn相关参数
@@ -1128,12 +1145,129 @@ bind = "0.0.0.0:8000"
 workers = 2
 ```
 
+常用项目配置
+
+```python
+# config.py
+import os
+import gevent.monkey
+gevent.monkey.patch_all()
+
+import multiprocessing
+
+# debug = True # 用于开发环境，非线上环境
+# 开启debug项后，在启动gunicorn的时候可以看到所有可配置项的配置
+
+loglevel = 'debug' # debug、info、warning、error、critical
+bind = "0.0.0.0:7001"
+# 日志文件。 注意：如果log不存在，启动会报错
+pidfile = "log/gunicorn.pid"
+accesslog = "log/access.log"
+errorlog = "log/debug.log"
+daemon = True # 开启后台运行
+
+# 启动的进程数
+workers = multiprocessing.cpu_count()
+worker_class = 'gevent'
+x_forwarded_for_header = 'X-FORWARDED-FOR'
+```
+
 运行以下命令:
-- gunicorn -c gunicorn.conf.py test:application
+
+```shell
+# 使用配置文件启动服务
+gunicorn -c gunicorn.conf.py test:application
+```
+
+## uvicorn
+
+类似gunicorn
+
+FastAPI 推荐使用 uvicorn 来运行服务，Uvicorn 是基于 uvloop 和 httptools 构建的闪电般快速的 ASGI 服务器
+-  uvloop 用于替换标准库 asyncio 中的事件循环，使用 Cython 实现，它非常快，可以使 asyncio 的速度提高 2-4 倍。asyncio 不用我介绍吧，写异步代码离不开它。
+- httptools 是 nodejs HTTP 解析器的 Python 实现。
+- ASGI 服务器是**异步网关协议接口**，一个介于网络协议服务和 Python 应用之间的标准接口，能够处理多种通用的协议类型，包括 HTTP，HTTP2 和 WebSocket。ASGI 帮助 Python 在 Web 框架上和 Node.JS 及 Golang 相竟争，目标是获得高性能的 IO 密集型任务，ASGI 支持 HTTP2 和 WebSockets，WSGI 是不支持的。
+  - Python 仍缺乏异步的网关协议接口，ASGI 的出现填补了这一空白.
+
+
+安装：
+- pip install uvicorn
+
+服务启动
+- 命令行方式
+
+```shell
+# main.py里的app应用
+uvicorn main:app
+# --reload: 热启动，方便代码的开发
+uvicorn main:app --reload
+# 指定host和port
+uvicorn main:app --reload --host 192.XXX.XXX --port 8001
+uvicorn main:app --host 10.200.24.101  --port 8094
+```
+
+- Python代码方式, demo.py
+
+```python
+from fastapi import FastAPI
+ 
+app = FastAPI()
+
+@app.get("/")
+def root():
+	return {"name":"wangqien", "value":23}
+
+# 异步接口
+@app.get("/index")
+async def index():
+	return {"name":"wangqien", "value":23}
+
+@app.get("/items/{item_id}")
+async def read_item(item_id: str, q: str = None, short: bool = False):
+    item = {"item_id": item_id}
+    if q:
+        item.update({"q": q})
+    if not short:
+        item.update(
+            {"description": "This is an amazing item that has a long description"}
+        )
+    return item
+ 
+if __name__ == '__main__':
+    import uvicorn
+
+    uvicorn.run(app=app)
+    # 自定义host、port
+    uvicorn.run(app, host="192.XXX.XXX", port=8001)
+    # 设置日志级别
+    uvicorn.run("demo:app", host="127.0.0.1", port=5000, log_level="info")
+    # 设置热更新
+    uvicorn.run(app="demo:app", host="127.0.0.1", port=8000, reload=True, debug=True)
+```
+
 
 ## supervisor
 
 [使用Gunicorn与Supervisor部署Flask](https://blog.csdn.net/henghenghalala/article/details/103685602)
+
+supervisor用作流程管理器，应该：
+- 用其文件描述符将套接字移交给uvicorn，supervisor始终将其用作0，并且必须在本fcgi-program节中进行设置。或为每个uvicorn进程使用UNIX域套接字。
+
+一个简单的主管配置可能看起来像这样： administratord.conf：
+
+```
+[supervisord]
+
+[fcgi-program:uvicorn]
+socket=tcp://localhost:8000
+command=venv/bin/uvicorn --fd 0 example:App
+numprocs=4
+process_name=uvicorn-%(process_num)d
+stdout_logfile=/dev/stdout
+stdout_logfile_maxbytes=0
+```
+
+运行: supervisord -n
 
 supervisor实现程序的后台守护运行, 也可以实现开机自动重启
 
@@ -2119,10 +2253,10 @@ uvicorn sql_app.main:app --reload
 uvicorn main:app --host=0.0.0.0 --port=8800
 ```
 
-- 访问
-    - http://127.0.0.1:8000
-    - 打开自动生成的[文档](http://127.0.0.1:8000/docs)：http://127.0.0.1:8000/docs，可以动态传入数据
-        - ![](https://picb.zhimg.com/80/v2-27e0a1f1fa58c3fbde1839b010e482ff_720w.jpg)
+访问
+- http://127.0.0.1:8000
+- 打开自动生成的[文档](http://127.0.0.1:8000/docs)：http://127.0.0.1:8000/docs，可以动态传入数据
+    - ![](https://picb.zhimg.com/80/v2-27e0a1f1fa58c3fbde1839b010e482ff_720w.jpg)
 
 
 ### 使用
@@ -2134,10 +2268,14 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
+
 @app.get("/")
+def index():
+    return "Hello world"
+# 异步请求
+@app.get("/index")
 async def index():
     return "Hello world"
-
 
 @app.get("/items/{item_id}")
 async def read_item(item_id: str, q: str = None, short: bool = False):
@@ -2149,6 +2287,24 @@ async def read_item(item_id: str, q: str = None, short: bool = False):
             {"description": "This is an amazing item that has a long description"}
         )
     return item
+
+from typing import Optional
+from fastapi import FastAPI, Path, Query
+
+# 指定参数格式、合法范围
+@app.get("/bar/{foo}")
+# @app.post("/bar") # post请求
+async def read_item(
+        foo: int = Path(1, title='描述'),
+        age: int = Query(..., le=120, title="年龄"),
+        name: Optional[str] = Query(None, min_length=3, max_length=50, regex="^xiao\d+$")
+):
+    return {"foo": foo, "age": age, "name": name}
+
+# Path方法获取请求路径里面的参数如 http://127.0.0.1:8000/bar/123
+# Query方法获取请求路径后面的查询参数如 http://127.0.0.1:8000/bar?name=xiaoming&age=18
+# Body方法获取请求体里面的参数，前提是请求头得用accept: application/json
+
 ```
 
 
@@ -2301,7 +2457,7 @@ console.log(2);
   - alert()		//弹出框，会以文本的原格式输出
   - prompt('提示文字'，'默认值') // 输入框---不常用
 
-```JS
+```javascript
 myObj =  { "name":"Nya", "age":21, "car":null };
 // 访问对象JSON值,嵌套的JSON对象，使用点号和括号访问嵌套的JSON对象
 x = myObj.name;
