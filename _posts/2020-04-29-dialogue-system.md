@@ -2873,6 +2873,35 @@ ConvLab支持：**Multi-agent learning**、**Multi-task learning**和**Role play
   - 语料清洗 → 按照知识类目聚类/分类 → 训练效果评测
 
 
+#### 问题生成
+
+[相似问、标准问生成](https://www.cnblogs.com/zhangxianrong/p/14830483.html)
+
+问答系统中，运营、产品常常人为地配置一些常用且描述清晰的问题及其对应的回答，我们将这些配置好的问题称之为“**标准问**”，当用户提问时，系统将问题与配置的标准问进行相似度计算，找出与用户问题最相似的标准问，并返回其答案给用户，这样就完成了一次问答操作。
+
+然而，人工配置“标准问”库是一个耗时耗力的工作，并且生成高质量而具有总结概括性质的问题会给运营人员带来极大的负担。如果自动生成一些Query，供运营人员去选择的话，无疑于会给运营人员减轻很大的负担。简单地来说，就是**创造**与**选择**的区别，选择比创造要简单地多。
+
+Query生成方法主要有两大类，一种是**规则**方法，另一种就是**模型**方法。而每种方法其实又包含两个方面。如果我们已经人为地配置过一些query了，但是量比较少时，可以根据已有的query去生成query。
+- （1）**规则**方法比较简单，但是生成的问题会比较单一。
+  - 一般通过词典或NER技术，识别出已有query的关键词或重要词汇，然后将其中的关键词做替换或者通过模板将关键词套入，最终生成新的问题。
+  - 规则方法的核心是规则的归纳与总结，这通常是比较麻烦地事情；往往需要人看过大量数据后（需要很多人力），才能构造出比较优秀的规则，但规则之间有时也会有冲突。
+  - ![](https://pic2.zhimg.com/80/v2-29c6cd9ba91f05c6c22e2a0e1838b43d_1440w.jpg)
+- （2）**模型**方法一般是用过Seq2Seq模型，根据所给问题去生成新的问题。
+  - 模型方法相较于规则方法来说，生成的问题会更**多样化**，陈述不会一成不变；并且会生成一些具有概述性质或者更加具体的问题，供运营人员的选择更多。
+  - Seq2Seq模型有很多，包括LSTM、Transform、GPT、UniLM、GPT2、MASS等等。
+  - GPT2模型在生成问题上表现优秀，因此使用GPT2模型训练了一个Query2Query的模型去扩充我们现有的“标准问”库。GPT2_ML的项目开源了一个具有15亿参数的中文版的GPT2开源模型，我们在此模型基础上进行微调。
+  - ![](https://pic1.zhimg.com/80/v2-a0348a9704cdc079e7ce7c222efdea1c_1440w.jpg)
+  - [GPT-2代码](https://github.com/JasonZhangXianRong/QueryGeneration)，权重，原文：[智能扩充机器人的“标准问”库之Query生成](https://zhuanlan.zhihu.com/p/149429784)
+
+```shell
+# 下载代码
+git clone https://github.com/YunwenTechnology/QueryGeneration
+# 下载模型
+#    见以上地址里的百度云盘
+cd scripts/
+# 文本生成
+python3 interactive_conditional_samples.py -model_config_fn ../configs/mega.json -model_ckpt /iyunwen/lcong/model/model.ckpt-850000 -top_p 5.0 -eos_token 102 -min_len 7 -samples 5 -do_topk True
+```
 
 ### 阿里巴巴
 
