@@ -1432,27 +1432,6 @@ CLD中的变量基于以下的直觉：
 |概率编程框架|[pgmPY](https://github.com/pgmpy/pgmpy)|AnkurAnkan|概率图|
 |概率编程框架|[pomegranate](https://github.com/jmschrei/pomegranate)|JacobSchreiber|面向图模型和概率模型，基于cpython|
 
-
-### 工具包
-
-|类型|工具包名称|维护团队|特性|
-|---|---|---|---|
-|因果结构学习|[TETRAD](https://github.com/cmu-phil/tetrad)|卡内基梅隆因果发现中心(CCD)|生物医学|
-|因果结构学习|[CausalDiscoveryToolbox](https://github.com/FenTechSolutions/CausalDiscoveryToolbox)|FenTechSolutions|DAG/Pair生成器、数据集接囗、独立性分析、因果结构学习、评价指标|
-|因果结构学习|[gCastle](https://github.com/huawei-noah/trustworthyAI/tree/master/gcastle)|华为诺亚|数据生成和处理、因果结构学习、评价指标|
-|因果结构学习|[tigramite](https://github.com/jakobrunge/tigramite)|JakobRunge|从时间序列学习|
-|因果推断|[Ananke](https://ananke.readthedocs.io/en/latest/)|TheAnankeTeam|集成了ID算法进行do演算|
-|因果推断|[EconML](https://github.com/microsoft/EconML)|微软|计量经济学|
-|因果推断|[dOWhy](https://github.com/microsoft/dowhy)|微软|支持中介分析|
-|因果推断|[causalml](https://github.com/uber/causalml)|Uber|营销增益|
-|因果推断|[WhyNot](https://whynot.readthedocs.io/en/latest/)|JohnMiller|提供了模拟器和环境|
-|因果推断|[Causallmpact](https://github.com/google/CausalImpact)|谷歌|时间序列因果效应估计，如广告宣传，对点击量的提升，R语言|
-|因果推断|[Causal-Curve](https://github.com/ronikobrosly/causal-curve)|Kobrosly,R、W.|估计连续型干预变量，如价格、时间、收入|
-|因果推断|[grf](https://github.com/grf-labs/grf)|斯坦福grf-lab|R语言|
-|因果推断|[dosearch](https://cran.r-project.org/web/packages/dosearch/index.html)|SanttuTikka|R语言|
-|端到端|[causalnex](https://github.com/quantumblacklabs/causalnex)|QuantumBlack|集成因果结构学习、领域专家调整、因果推断，但版本是0．10．0|
-
-
 ### 数据集
  
 由于反事实的结果永远无法被观察到，因此很难找到一个完全满足实验要求的数据集，即具有基本真实数据集 (ITE) 的观测数据集。
@@ -1495,7 +1474,167 @@ CLD中的变量基于以下的直觉：
 *   Saccharomyces cerevisiae (yeast) cell cycle gene expression dataset
 *   THE
 *   FERTIL2
- 
+
+### 工具包
+
+1. [causalml]: causal inference with machine learning algorithms in Python
+  - Uber开源Causal ML，支持树形的一些算法，[地址](https://github.com/uber/causalml)
+  - [causalml - Meta-Learner Example Notebook](https://github.com/uber/causalml/blob/master/examples/meta_learners_with_synthetic_data.ipynb)
+  - ![](https://raw.githubusercontent.com/uber/causalml/master/docs/_static/img/uplift_tree_vis.png)
+2. [DoWhy]: causal inference using graphs for identification
+3. [EconML]: Heterogeneous Effect Estimation in Python
+4. [awesome-list]: A very extensive list of causal methods and respective code
+5. [IBM-Causal-Inference-Benchmarking-Framework]: Causal Inference Benchmarking Framework by IBM
+6. [CausalNex]: Bayesian Networks to combine machine learning and domain expertise for causal reasoning.
+
+- 【2021-1-5】[awesome-causality-algorithms](https://github.com/rguo12/awesome-causality-algorithms)
+
+
+|类型|工具包名称|维护团队|特性|
+|---|---|---|---|
+|因果结构学习|[TETRAD](https://github.com/cmu-phil/tetrad)|卡内基梅隆因果发现中心(CCD)|生物医学|
+|因果结构学习|[CausalDiscoveryToolbox](https://github.com/FenTechSolutions/CausalDiscoveryToolbox)|FenTechSolutions|DAG/Pair生成器、数据集接囗、独立性分析、因果结构学习、评价指标|
+|因果结构学习|[gCastle](https://github.com/huawei-noah/trustworthyAI/tree/master/gcastle)|华为诺亚|数据生成和处理、因果结构学习、评价指标|
+|因果结构学习|[tigramite](https://github.com/jakobrunge/tigramite)|JakobRunge|从时间序列学习|
+|因果推断|[Ananke](https://ananke.readthedocs.io/en/latest/)|TheAnankeTeam|集成了ID算法进行do演算|
+|因果推断|[EconML](https://github.com/microsoft/EconML)|微软|计量经济学|
+|因果推断|[dOWhy](https://github.com/microsoft/dowhy)|微软|支持中介分析|
+|因果推断|[causalml](https://github.com/uber/causalml)|Uber|营销增益|
+|因果推断|[WhyNot](https://whynot.readthedocs.io/en/latest/)|JohnMiller|提供了模拟器和环境|
+|因果推断|[Causallmpact](https://github.com/google/CausalImpact)|谷歌|时间序列因果效应估计，如广告宣传，对点击量的提升，R语言|
+|因果推断|[Causal-Curve](https://github.com/ronikobrosly/causal-curve)|Kobrosly,R、W.|估计连续型干预变量，如价格、时间、收入|
+|因果推断|[grf](https://github.com/grf-labs/grf)|斯坦福grf-lab|R语言|
+|因果推断|[dosearch](https://cran.r-project.org/web/packages/dosearch/index.html)|SanttuTikka|R语言|
+|端到端|[causalnex](https://github.com/quantumblacklabs/causalnex)|QuantumBlack|集成因果结构学习、领域专家调整、因果推断，但版本是0．10．0|
+
+
+### DoWhy（微软）
+
+- [DoWhy工具](https://github.com/microsoft/dowhy) An end-to-end library for causal inference
+  - [开始使用dowhy](https://zhuanlan.zhihu.com/p/274281410)
+
+- 微软的DoWhy是一个基于python的因果推理和分析库，它试图简化在机器学习应用程序中采用因果推理的过程。受到朱迪亚·珀尔的因果推理演算的启发，DoWhy在一个简单的编程模型下结合了几种因果推理方法，消除了传统方法的许多复杂性。
+- DoWhy将工作流中的任何因果推理问题建模为四个基本步骤: **建模**、**识别**、**估计**和**反驳**。
+  - (1) **模型**: 从数据和给定的图创建一个因果模型。
+    - DoWhy使用因果关系图对每个问题建模。有助于使每个因果假设明确。该图不必是完整的，您可以提供一个**局部图**，以表示有关某些变量的先验知识。 DoWhy会自动将其余变量视为潜在的混杂因素。
+    - DoWhy的当前版本支持两种图形输入格式:`gml`(首选)和`dot`。图中可能包含了变量之间因果关系的先验知识，但DoWhy不做任何直接的假设。
+    - 因果假设：
+      - 「**图**」（Graph）：提供 gml 或 dot 形式的因果图，具体可以是文件或字符串格式
+      - 「**命名变量集合**」（Named variable sets）：直接提供变量的类型，包括「混杂因子」（common causes / cofounders）、「工具变量」（instrumental variables）、「结果修改变量」（effect modifiers）、「前门变量」（front-door variables）等
+    - model = `CausalModel`(data=data["df"], treatment=data["treatment_name"], outcome=data["outcome_name"], graph=data["gml_graph"])
+  - (2) **标识**: 识别因果效应并返回目标的估计量（estimands）
+    - 基于因果图，DoWhy根据图形模型找到所有可能的方法来标识期望的因果关系。它使用基于**图的准则**（graph-based criteria）和**do-演算**（do-calculus）来找到可能的方式来找到可以识别因果关系的表达式。
+    - 支持的识别准则有：
+      - 「后门准则」（Back-door criterion）
+      - 「前门准则」（Front-door criterion）
+      - 「工具变量」（Instrumental Variables）
+      - 「中介-直接或间接结果识别」（Mediation-Direct and indirect effect identification）
+    - identified_estimand = model.`identify_effect`()
+  - (3) **估计**: 基于可识别的目标量，使用统计方法估计目标量（这里是计算因果效应）
+    - DoWhy使用**匹配**或**工具变量**等统计方法估计因果效应。DoWhy的当前版本支持基于倾向性**分层**或倾向性**评分匹配**的估计方法，这些方法侧重于估计处理任务，以及侧重于估计响应面的回归技术。
+    - DoWhy支持基于**后门准则**（back-door criterion）和**工具变量**（ instrumental variables）的方法。它还提供了一个非参数置换检验（non-parametric permutation test）来检验估计到的估计量的统计显著性。
+    - 目前，其支持的后门准则的方法有
+      - （1）基于估计处理任务（the treatment assignment）的方法：
+        - Propensity-based Stratification
+        - Propensity Score Matching
+        - Inverse Propensity Weighting
+      - （2）基于响应层面（response surface）的方法：Regression, 其支持的基于工具变量的方法有
+        - Binary Instrument/Wald Estimator
+        - Regression discontinuity
+      - DoWhy 支持一系列基于上述识别准则的估计方法，此外还提供了非参数置信空间与排列测试来检验得到的估计的统计显著性。具体支持的估计方法列表如下：
+      - 「基于估计干预分配的方法」
+        - 基于倾向的分层（Propensity-based Stratification）
+        - 倾向得分匹配（Propensity Score Matching）
+        - 逆向倾向加权（Inverse Propensity Weighting）
+      - 「基于估计结果模型的方法」
+        - 线性回归（Linear Regression）
+        - 广义线性模型（Generalized Linear Models）
+      - 「基于工具变量等式的方法」
+        - 二元工具/Wald 估计器（Binary Instrument/Wald Estimator）
+        - 两阶段最小二乘法（Two-stage least squares）
+        - 非连续回归（Regression discontinuity）
+      - 「基于前门准则和一般中介的方法」
+        - 两层线性回归（Two-stage linear regression）
+      - 此外，DoWhy 还支持调用外部的估计方法，例如 EconML 与 CausalML。
+    - estimate = model.`estimate_effect`(identified_estimand, method_name="backdoor.propensity_score_matching")
+  - (4) **验证**: 使用多个鲁棒性的检查方法来反驳得到的估计，验证估计到的因果效应的有效性。
+    - DoWhy提供的方法有：
+      - Placebo Treatment
+      - Irrelevant Additional Confounder
+      - Subset validation
+    - refute_results = model.`refute_estimate`(identified_estimand, estimate, method_name="random_common_cause")
+    - DoWhy强调其输出的**可解释性**。分析时，我们都可以检查未经检验的假设，已确定的估计值（如果有）和估计值（如果有）。
+    - DoWhy 支持多种**反驳**方法来验证估计的正确性，具体列表如下：
+      - 「添加随机混杂因子」：添加一个随机变量作为混杂因子后估计因果效应是否会改变（期望结果：不会）
+      - 「安慰剂干预」：将真实干预变量替换为独立随机变量后因果效应是否会改变（期望结果：因果效应归零）
+      - 「虚拟结果」：将真实结果变量替换为独立随机变量后因果效应是否会改变（期望结果：因果效应归零）
+      - 「模拟结果」：将数据集替换为基于接近给定数据集数据生成过程的方式模拟生成的数据集后因果效应是否会改变（期望结果：与数据生成过程的效应参数相匹配）
+      - 「添加未观测混杂因子」：添加一个额外的与干预和结果相关的混杂因子后因果效应的敏感性（期望结果：不过度敏感）
+      - 「数据子集验证」：将给定数据集替换为一个随机子集后因果效应是否会改变（期望结果：不会）
+      - 「自助验证」：将给定数据集替换为同一数据集的自助样本后因果效应是否会改变（期望结果：不会）
+DoWhy是根据两个指导原则创建的：明确要求因果假设，并测试对违反这些假设的估计的稳健性。换句话说，DoWhy将因果效应的识别与其相关性的估计分开，这使得能够推断出非常复杂的因果关系。
+- ![](https://img-blog.csdnimg.cn/img_convert/36044eb2132dc0c1a951bc4d50018a18.png)
+
+DoWhy支持Python 3+，它需要以下包：
+- numpy
+- SciPy
+- scikit-learn
+- pandas
+- networkx（用于分析因果图）
+- matplotlib（用于一般情节绘图）
+- sympy（用于呈现符号表达式）
+
+- [Jupyter notebook示例](https://github.com/microsoft/dowhy/blob/master/docs/source/example_notebooks/dowhy_simple_example.ipynb)
+- ![](https://raw.githubusercontent.com/microsoft/dowhy/master/docs/images/dowhy-schematic.png)
+
+- [微软因果推理框架DoWhy入门](http://www.atyun.com/41349.html)
+- 代码示例
+
+```python
+import numpy as np
+from dowhy import CausalModel
+import dowhy.datasets
+
+# 加载数据，DoWhy依赖于panda dataframes来捕获输入数据
+rvar = 1 if np.random.uniform() >0.5 else 0
+data_dict = dowhy.datasets.xy_dataset(10000, effect=rvar, sd_error=0.2)
+
+df = data_dict['df']
+print(df[["Treatment", "Outcome", "w0"]].head())
+
+# 因果推理
+model= CausalModel(
+  data=df,
+  treatment=data_dict["treatment_name"],
+  outcome=data_dict["outcome_name"],
+  common_causes=data_dict["common_causes_names"],
+  instruments=data_dict["instrument_names"])
+
+model.view_model(layout="dot")
+
+from IPython.display import Image, display
+display(Image(filename="causal_model.png"))
+
+# 确定图标中的因果关系
+identified_estimand = model.identify_effect()
+
+# 估计因果关系
+estimate = model.estimate_effect(identified_estimand,
+method_name="backdoor.linear_regression")
+# Plot Slope of line between treamtent and outcome =causal effect
+dowhy.plotter.plot_causal_effect(estimate, df[data_dict["treatment_name"]], df[data_dict["outcome_name"]])
+
+# 反驳因果估计
+res_random=model.refute_estimate(identified_estimand, estimate, method_name="random_common_cause")
+
+```
+
+- 结果
+  - ![](http://imgcdn.atyun.com/2019/06/4-6.png)
+  - ![](http://imgcdn.atyun.com/2019/06/5-5.png)
+
+- [justcause](https://github.com/inovex/justcause)
+
 ### 代码
  
 #### 开源的研究框架(工具箱)
@@ -1542,15 +1681,6 @@ CLD中的变量基于以下的直觉：
 *   [Residual Balancing](https://github.com/swager/balanceHD)
 *   [CBPS](https://github.com/kosukeimai/CBPS)
 *   [Entropy Balancing](https://cran.r-project.org/web/packages/ebal/)
-
-
-# 工程实现
-
-- Whitney:
-  - 在某个条件下的 群体的平均ite，w=1表示这个病人采用了这个治疗手段（treatment 组），w=0表示这个病人没采用治疗手段（control 组），Y表示在w干预情况下的outcome。也就是说，假设这个病人在治疗组的outcome 减去 假设这个病人在对照组的outcome。一般只能知道 这个病人在治疗组的outcome 或者 这个病人在对照组的outcome。已知的那个叫事实，另外一个不知道的就叫反事实，要知道这个治疗方案到底有没有效果，就要算ite。所以需要推理反事实
-
-<iframe frameborder="0" style="width:100%;height:811px;" src="https://app.diagrams.net/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Untitled%20Diagram.drawio#R1ZdNb9swDIZ%2Fja%2BDLclfxyRrux16WQfsrNmKLVQWA0X52q8fHcuJE7lAgaaB60vMlyJFPXSYOKCLZv9k%2BKp%2BhlKogITlPqDfA0KikGb40SqHTmF53gmVkaVbdBZe5D%2FRRzp1I0uxvlhoAZSVq0uxAK1FYS80bgzsLpctQV3uuuKV8ISXgitf%2FSNLWzs1SvKz44eQVe22zkjaOf7y4rUysNFuv4DQ5fHq3A3vc7mDrmtewm4g0YeALgyA7e6a%2FUKolm2PrYt7fMN7qtsIbd8TQKKYuqAtVxvRV32szR56HhiE6NGYL6VSC1Bgjg76GGZpGKMOK15I27Y7CdFcWwOvol%2BoQbextW0UWlGbBrQdpjleqPv199UJY8V%2BILnzPAlohDUHXOK8lObf4i7IPX00zHpld%2B5mHLoe1INGnkTunqDqlP9MEW8cyLehkg9AjchsNp8W1Ci9hhrdnyn9AFORxQkjk2LKsgkwZR7Tn3qLZ5KgPbh4LuuQuJFNGNpcyUqjUWCYQE7zFoHEYTpzjkaWpbofV5Jfc8UBPQI2ykfApjfiGntcf4ktqM1XBptMAWzigf1teCm%2FMlfmcY3ju3NNPa7PUknLXaYRrB7Gd9AatCJKbkMvTrwxmo%2FRYyPw2I3gZR68BeilkvjXdNrwGLuGx0Z%2FhD4TXu7DqzmsJ07OH4Z3J9enGZBDOlwXYuLs%2FK8sZZ%2FIDs3zG9XRN3htpQ%2F%2FAQ%3D%3D"></iframe>
-
 
 # [如何在观测数据下进行因果效应评估](https://www.sohu.com/a/426630014_741733)
 
@@ -1748,7 +1878,12 @@ Matching 的问题就是如何去评估两个个体的相似度，并需要设�
 ## [快手因果推断与实验设计](https://zhuanlan.zhihu.com/p/399274589)
 
 
-## 因果工具包
+## 滴滴因果推理森林
+
+- Whitney:
+  - 在某个条件下的 群体的平均ite，w=1表示这个病人采用了这个治疗手段（treatment 组），w=0表示这个病人没采用治疗手段（control 组），Y表示在w干预情况下的outcome。也就是说，假设这个病人在治疗组的outcome 减去 假设这个病人在对照组的outcome。一般只能知道 这个病人在治疗组的outcome 或者 这个病人在对照组的outcome。已知的那个叫事实，另外一个不知道的就叫反事实，要知道这个治疗方案到底有没有效果，就要算ite。所以需要推理反事实
+
+<iframe frameborder="0" style="width:100%;height:811px;" src="https://app.diagrams.net/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Untitled%20Diagram.drawio#R1ZdNb9swDIZ%2Fja%2BDLclfxyRrux16WQfsrNmKLVQWA0X52q8fHcuJE7lAgaaB60vMlyJFPXSYOKCLZv9k%2BKp%2BhlKogITlPqDfA0KikGb40SqHTmF53gmVkaVbdBZe5D%2FRRzp1I0uxvlhoAZSVq0uxAK1FYS80bgzsLpctQV3uuuKV8ISXgitf%2FSNLWzs1SvKz44eQVe22zkjaOf7y4rUysNFuv4DQ5fHq3A3vc7mDrmtewm4g0YeALgyA7e6a%2FUKolm2PrYt7fMN7qtsIbd8TQKKYuqAtVxvRV32szR56HhiE6NGYL6VSC1Bgjg76GGZpGKMOK15I27Y7CdFcWwOvol%2BoQbextW0UWlGbBrQdpjleqPv199UJY8V%2BILnzPAlohDUHXOK8lObf4i7IPX00zHpld%2B5mHLoe1INGnkTunqDqlP9MEW8cyLehkg9AjchsNp8W1Ci9hhrdnyn9AFORxQkjk2LKsgkwZR7Tn3qLZ5KgPbh4LuuQuJFNGNpcyUqjUWCYQE7zFoHEYTpzjkaWpbofV5Jfc8UBPQI2ykfApjfiGntcf4ktqM1XBptMAWzigf1teCm%2FMlfmcY3ju3NNPa7PUknLXaYRrB7Gd9AatCJKbkMvTrwxmo%2FRYyPw2I3gZR68BeilkvjXdNrwGLuGx0Z%2FhD4TXu7DqzmsJ07OH4Z3J9enGZBDOlwXYuLs%2FK8sZZ%2FIDs3zG9XRN3htpQ%2F%2FAQ%3D%3D"></iframe>
 
 【2021-5-12】滴滴[连续因果森林模型的构造与实践](https://mp.weixin.qq.com/s/u7sCeNTSfHtmaW51Me2CQg)：**增益模型**（Uplift Model）作为工业界因果推断与机器学习结合最成熟的算法之一，在智能营销中有着广泛的应用。目前大多数增益模型仅讨论了**二元**处理变量情况下的处理效应估计，然而在网约车市场中存在大量多维、连续的处理变量。针对这一困境，我们构造了**连续因果森林模型**，并成功地应用在了网约车交易市场策略上，量化价格对网约车供需关系的影响，这对于精细化定价补贴策略的制定和优化有着重要的意义。
 - 在业界，我们称针对某个**处理变量**(Treatment)，衡量其**处理效应**(Treatment Effect)的一类模型为**增益模型**(Uplift Modeling)。与传统的监督学习模型关注于准确估计响应变量(Y)不同， 增益模型专注于估计处理变量(W)对响应变量(Y)的影响。因此这类问题通常被放在因果推断(Causal Inference)的框架下进行讨论。大多数流行的**增益**模型框架(如CausalML, pylift, grf)，都很好地支持了**二元**处理变量(如发券或不发券，吃药或不吃药)的效应估计。但在**多元**/**连续**处理变量方面，尚未有很好的支持。而在广大应用场景中，<font color='red'>多元或连续的处理变量更为普遍。</font> 例如，价格就是一个连续变量，存在理论上无限多的可能值。那是否可以在因果推断的框架下实现对多元或连续处理变量的效应估计？经过一段时间的开发和测试，在二元因果森林的基础上，我们扩展研发了连续因果森林，初步解决了部分场景下连续变量处理效应的估计问题。
@@ -1759,74 +1894,6 @@ Matching 的问题就是如何去评估两个个体的相似度，并需要设�
   - 可否使用非线性假设
   - 如何处理无单调关系的处理变量(如不同套餐)
   - 如何估计多维处理效应(如多个产品线价格间的相互影响)
-- 【2021-1-5】[awesome-causality-algorithms](https://github.com/rguo12/awesome-causality-algorithms)
-- [DoWhy工具](https://github.com/microsoft/dowhy) An end-to-end library for causal inference
-  - 微软的DoWhy是一个基于python的因果推理和分析库，它试图简化在机器学习应用程序中采用因果推理的过程。受到朱迪亚·珀尔的因果推理演算的启发，DoWhy在一个简单的编程模型下结合了几种因果推理方法，消除了传统方法的许多复杂性。
-  - DoWhy将工作流中的任何因果推理问题建模为四个基本步骤: **建模**、**识别**、**估计**和**反驳**。
-    - **模型**: DoWhy使用因果关系图对每个问题建模。DoWhy的当前版本支持两种图形输入格式:`gml`(首选)和`dot`。图中可能包含了变量之间因果关系的先验知识，但DoWhy不做任何直接的假设。
-    - **标识**: 使用**输入图**，DoWhy根据图形模型找到所有可能的方法来标识期望的因果关系。它使用基于图的标准和do-calculus来寻找潜在的方法，找到能够识别因果关系的表达式
-    - **估计**: DoWhy使用匹配或工具变量等统计方法估计因果效应。DoWhy的当前版本支持基于倾向性分层或倾向性评分匹配的估计方法，这些方法侧重于估计处理任务，以及侧重于估计响应面的回归技术。
-    - **验证**: 最后，DoWhy使用不同的robustness methods（鲁棒性方法）验证因果效应的有效性。
-  - [Jupyter notebook示例](https://github.com/microsoft/dowhy/blob/master/docs/source/example_notebooks/dowhy_simple_example.ipynb)
-  - ![](https://raw.githubusercontent.com/microsoft/dowhy/master/docs/images/dowhy-schematic.png)
-
-- [微软因果推理框架DoWhy入门](http://www.atyun.com/41349.html)
-- 代码示例
-
-```python
-import numpy as np
-from dowhy import CausalModel
-import dowhy.datasets
-
-# 加载数据，DoWhy依赖于panda dataframes来捕获输入数据
-rvar = 1 if np.random.uniform() >0.5 else 0
-data_dict = dowhy.datasets.xy_dataset(10000, effect=rvar, sd_error=0.2)
-df = data_dict['df']
-print(df[["Treatment", "Outcome", "w0"]].head())
-
-# 因果推理
-model= CausalModel(
-  data=df,
-  treatment=data_dict["treatment_name"],
-  outcome=data_dict["outcome_name"],
-  common_causes=data_dict["common_causes_names"],
-  instruments=data_dict["instrument_names"])
-
-model.view_model(layout="dot")
-
-from IPython.display import Image, display
-display(Image(filename="causal_model.png"))
-
-# 确定图标中的因果关系
-identified_estimand = model.identify_effect()
-
-# 估计因果关系
-estimate = model.estimate_effect(identified_estimand,
-method_name="backdoor.linear_regression")
-# Plot Slope of line between treamtent and outcome =causal effect
-dowhy.plotter.plot_causal_effect(estimate, df[data_dict["treatment_name"]], df[data_dict["outcome_name"]])
-
-# 反驳因果估计
-res_random=model.refute_estimate(identified_estimand, estimate, method_name="random_common_cause")
-
-```
-
-- 结果
-  - ![](http://imgcdn.atyun.com/2019/06/4-6.png)
-  - ![](http://imgcdn.atyun.com/2019/06/5-5.png)
-
-- [justcause](https://github.com/inovex/justcause)
-
-其它工具包
-1. [causalml]: causal inference with machine learning algorithms in Python
-  - Uber开源Causal ML，支持树形的一些算法，[地址](https://github.com/uber/causalml)
-  - [causalml - Meta-Learner Example Notebook](https://github.com/uber/causalml/blob/master/examples/meta_learners_with_synthetic_data.ipynb)
-  - ![](https://raw.githubusercontent.com/uber/causalml/master/docs/_static/img/uplift_tree_vis.png)
-2. [DoWhy]: causal inference using graphs for identification
-3. [EconML]: Heterogeneous Effect Estimation in Python
-4. [awesome-list]: A very extensive list of causal methods and respective code
-5. [IBM-Causal-Inference-Benchmarking-Framework]: Causal Inference Benchmarking Framework by IBM
-6. [CausalNex]: Bayesian Networks to combine machine learning and domain expertise for causal reasoning.
 
 # 因果表示学习
 
