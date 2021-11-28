@@ -327,6 +327,8 @@ chatbot:我也是，不过总有一天就会好起来的
 
 ## 智能音箱
 
+- 【2021-11-28】[模仿AI音箱声音](https://www.ixigua.com/7025454462718181895)，网红模仿siri、天猫精灵、小米小爱
+
 ### 发展历史
 
 - 【2021-3-9】[2021年了，对话系统凉透了吗？](https://mp.weixin.qq.com/s/d7Bt1gHIP_LXmMJuIKUL-A)
