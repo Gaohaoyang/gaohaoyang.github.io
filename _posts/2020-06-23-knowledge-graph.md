@@ -423,6 +423,19 @@ mathjax: true
   - Apache [Jena](https://jena.apache.org/)官方[下载](https://jena.apache.org/download/index.cgi)
   - 摘自：[知识图谱的技术与应用（18版）](https://zhuanlan.zhihu.com/p/38056557)
 
+图数据库产品可以分为**原生**和**多模**两类。
+- 原生指专门针对图数据存储和计算研发的产品，包括neo4j\janusGraph等
+- 多模指多个大厂推出的数据库产品中能够兼容处理图数据。多模形态产品的主要问题是针对图谱数据做兼容处理，用于适配其底层的存储机制。原生图数据库对在技术的专注度上会更加集中，包括图计算引擎实现和图存储算法。
+对比分析：
+- DBEngine的图数据库排名。
+- ![](https://pic4.zhimg.com/80/v2-cc9806f0c082c3f7f7ae80e56b6f8d2b_720w.jpg)
+- 得分最高的是neo4j，长期保持第一。neo4j有原创的图存储算法，在计算性能上比较突出。产品分为社区版和商业版，社区版只能部署单点，支持亿级节点，足够普通小型应用使用，商业版可以支持动态扩展。
+- 排名第二是CosmosDB，使用者往往也是Azure其他产品的使用者。可以说Neo4j和CosmosDB是第一阵营。
+- 排名第三开始得分出现断崖式下降，之后的得分都相差不多。ArangoDB和OrientDB的得分和特性都比较相近，前者是c++实现，后者是java实现。
+- JanusGraph本身的得分并不高，但是也排在原生图数据库的第二名。
+
+[同花顺知识图谱团队的图数据库选型](https://nebula-graph.com.cn/posts/reason-to-choose-a-graph-database/), 对比Neo4j、Orient DB、Dgraph、JanusGraph、HugeGraph、Nebula 等 6 款图数据库产品，最终选定HugeGraph
+- ![](https://www-cdn.nebula-graph.com.cn/nebula-blog/ths-15.png)
 
 - [越来越火的图数据库究竟是什么？](https://www.cnblogs.com/mantoudev/p/10414495.html)
 
@@ -623,6 +636,19 @@ RETURN
 
 - 一个Linux基金会下的开源分布式图数据库 。JanusGraph提供Apache2.0软件许可证。该项目由IBM、Google、Hortonworks支持。
 - JanusGraph是由TitanDB 图数据库修改而来，TitanDB从2012年开始开发。目前最新版本为0.3.1。
+
+TinkerPop图生态
+- Apache TinkerPop是一款开源的图计算框架，JanusGraph通过原生支持TinkerPop来提供图数据库(OLTP)和图分析系统 (OLAP)的能力。
+- 下图包括了TinkerPop的几个组成部分。
+  - 最上层是Gremlin Server，为用户提供了访问图数据库的通道，通过脚本可以连上Gremlin Server，使用Gremlin查询/遍历语言来操作JanusGraph等支持Gremlin的图数据库，Gremlin语言支持Cypher语法；
+  - 再下层是TinkerPop提供的用于表示属性图的核心API，包括图、定点和边的各种操作接口；Graph Computer是TinkPop的图计算框架，与Spark、Giraph或Hadoop等大数据平台配合并通过调用JanusGraph提供的OLAP I/O接口实现图分析和处理能力。JanusGraph等图数据库和图分析系统通过实现Provider API来对接TinkPop框架，定制所需的功能。
+- ![](https://pic3.zhimg.com/80/v2-918387e3d814609c615524bcde1980b6_720w.jpg)
+
+
+JanusGraph主要定位是做图数据的是实时检索。特性支持动态扩展、良好的性能指标、支持TinkerPop框架、支持Gremlin语言及技术栈、支持多种底层存储。
+- [JanusGraph技术总结](https://zhuanlan.zhihu.com/p/110325350)
+- [JanusGraph实用查询](https://zhuanlan.zhihu.com/p/57101944): Gremlin
+![](https://pic4.zhimg.com/80/v2-5796de6b7e3049f10a6e72c6ffd0fc4b_720w.jpg)
 
 
 ## DGraph
