@@ -1179,6 +1179,102 @@ x_forwarded_for_header = 'X-FORWARDED-FOR'
 gunicorn -c gunicorn.conf.py test:application
 ```
 
+【2021-11-30】项目中使用的gunicorn配置文件：gunicorn_config.py
+
+```python
+# !/usr/bin/env python
+# -*- coding:utf8 -*- 
+
+# **************************************************************************
+# * Copyright (c) 2021 ke.com, Inc. All Rights Reserved
+# **************************************************************************
+# * @file gunicorn并发配置
+# * @author wangqiwen004@ke.com
+# * @date 2021/11/30 12:17
+# **************************************************************************
+
+
+__author__ = "wangqiwen004@ke.com"
+__copyright__ = "Copyright of beike (2021)."
+
+import os
+from numbers import Number
+import psutil
+
+core_number = psutil.cpu_count(logical=True)
+if isinstance(core_number, Number):
+    workers_num = core_number
+else:
+    workers_num = 5
+
+port = os.getenv('PORT', '7399')
+bind = '0.0.0.0:{}'.format(port)  # 绑定地址
+backlog = 128
+workers = workers_num
+print('Child process number: {} with port: {}'.format(workers, port))
+
+graceful_timeout = 3
+
+proc_name = 'bwbd_server'
+preload_app = True
+
+# */* vim: set expandtab ts=4 sw=4 sts=4 tw=400: */
+```
+
+启动脚本：服务入口脚本 start_all.py, 里面的app是flask初始化后的对象
+- gunicorn --pid=run.pid --config gunicorn_config.py --daemon start_all:app
+
+```shell
+#! /bin/bash
+export LANG='UTC-8'
+export LC_ALL='en_US.UTF-8'
+
+echo "MATRIX_CODE_DIR:" "$MATRIX_CODE_DIR"
+
+if [ 0"$MATRIX_CODE_DIR" = "0" ];then
+    export MATRIX_CODE_DIR="`pwd`"
+    export MATRIX_APPLOGS_DIR="."
+    export MATRIX_PRIVDATA_DIR="."
+fi
+
+LOG_FILE=$MATRIX_APPLOGS_DIR/log
+if [ ! -e $LOG_FILE ];then
+    mkdir $LOG_FILE
+fi
+export ENVTYPE=`cat "$MATRIX_CODE_DIR"/env_flag.in`
+echo "condition is: "$ENVTYPE
+
+case $1 in
+    start)
+        echo "run start ... "$MATRIX_PRIVDATA_DIR
+        source $MATRIX_PRIVDATA_DIR/venv/bin/activate
+        cd $MATRIX_CODE_DIR
+        #source install.sh
+		# gunicorn --pid=run.pid --config gunicorn_config.py --daemon start_all:app
+        $MATRIX_PRIVDATA_DIR/venv/bin/gunicorn \
+                --pid=$LOG_FILE/run.pid \
+                --config bin/gunicorn_config.py \
+                --daemon start_all:app \
+        deactivate
+        echo "start with nohup"
+    ;;
+    run)
+        source $MATRIX_PRIVDATA_DIR/venv/bin/activate
+        cd $MATRIX_CODE_DIR
+        #source install.sh
+        $MATRIX_PRIVDATA_DIR/venv/bin/gunicorn \
+                --pid=$LOG_FILE/run.pid \
+                --config bin/gunicorn_config.py \
+                start_all:app
+ 	;;
+    *)
+        echo "Using option{start|run|stop}"
+    ;;
+esac
+
+```
+
+
 ## uvicorn
 
 类似gunicorn
