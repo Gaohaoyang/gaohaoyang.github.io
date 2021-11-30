@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "人工智能及未来畅想-AI and Future"
-date:   2019-06-04 23:41:00
+date:   2019-06-05 23:41:00
 categories: 人工智能
 tags: 人工智能 AI 人类简史 人文 哲学 康德 汉字屋 清华大学 天机 自行车 AGI 类脑 类机 waitbutwhy 脑机接口 张首晟 姚期智 冯·诺依曼 天道 沈向洋 戴海琼 达摩院 Bengio SNN 神经网络 BP
 excerpt: 深度思考
@@ -15,6 +15,13 @@ mathjax: true
 
 ## 资料
 
+- 【2021-11-30】人工智能训练师」国家职业技能标准：五大级别，你是第几级？
+  - 「人工智能训练师」职业技能标准也分为五个等级：从数据采集和处理、数据标注、智能系统运维、业务分析、智能训练、智能系统设计等维度，划分出 L5-L1 五个等级，并对各个等级的职业能力给出了具体的描述和要求。
+  - 该职业包含数据标注员、人工智能算法测试员两个工种。2020 年 2 月，[「人工智能训练师」2021年版](http://www.mohrss.gov.cn/xxgk2020/fdzdgknr/rcrs_4225/jnrc/zyyjnpj/202111/W020211125403381394423.pdfs) 正式成为新职业并纳入国家职业分类目录。
+  - 理论权重
+    - ![](https://p5.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/834a8f8da1044aaa87b5671f0673b89a.png?from=pc)
+  - 技能权重
+    - ![](https://p5.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/c6c7e8583b584c9cb482b52eaa3e5587.png?from=pc)
 - 【2021-10-21】[中科院自动化所登Science子刊：自组织反向传播提升网络学习效率](https://www.toutiao.com/i7021409819336753678/), 在图像识别任务中，引入 SBP 能让识别准确度稍稍提高，计算成本还能降低 57%。BP反向传播，这种端到端的学习方法性能卓越，但学习过程能量消耗大，且缺乏灵活性。中科院脑智卓越中心徐波、蒲慕明联合研究团队近期借助生物网络中发现的介观尺度自组织反向传播机制（Self-backpropagation，SBP），在更具效率和灵活性的类脑局部学习方法方面取得了重要进展。
   - 论文《[Self-backpropagation of synaptic modifications elevates the efficiency of spiking and artificial neural networks](https://www.science.org/doi/10.1126/sciadv.abh0146)》已于 2021 年 10 月 20 日（美东时间）在线发表于《科学》子刊《Science Advances》
   - 1997年，蒲慕明团队在 Nature 杂志上撰文发现海马体内的神经元可以将长时程抑制（Long-term depression，LTD）可塑性自组织地传播到三个方向，分别是突触前侧向传播（Presynaptic lateral spread）、突触后侧向传播（Postsynaptic lateral spread）、反向传播（Backpropagation，这个发现就是自组织反向传播神经可塑性机制（SBP）。SBP现象具有普遍性，不仅覆盖更多的神经区域如视网膜 - 顶盖系统，还覆盖更多的可塑性类型，如长时程增强（Long-term potentiation，LTP）。该机制的发生归结于生物神经元内分子调制信号的天然逆向传递，被认为是可能导致生物神经网络高效反馈学习的关键
