@@ -974,6 +974,17 @@ error: failed to push some refs to 'https://git.lianjia.com/aisearch/speech/nlu-
 
 - [解决github 打开、拉取、推送速度慢的问题](https://blog.csdn.net/natahew/article/details/81387885)
 
+### 不能撤销本地修改(error:path…is unmerged)
+
+【2021-12-1】[不能撤销本地修改(error:path…is unmerged)](https://kb.kaifa99.com/git/post_228038)
+
+- 做了错误操作，应该先进行重置，先取消暂存文件，然后签出，再恢复本地更改。
+
+```shell
+git reset foo/bar.txt # 重置
+git checkout foo/bar.txt # 恢复本地
+```
+
 ## github问题
 
 - 【2021-3-18】github访问受限，速度慢, 知乎专题：[github打开慢？无法访问？](https://zhuanlan.zhihu.com/p/356790236)
