@@ -3,7 +3,7 @@ layout: post
 title:  "Web前端服务知识-Web-Serving"
 date:   2020-08-07 19:17:00
 categories: 技术工具
-tags: Web web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session RPC 微服务 GraphQL UML Gunicorn supervisor genvent grequests node.js vue 前端 低代码 拖拽 api
+tags: Web web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session RPC 微服务 GraphQL UML Gunicorn supervisor genvent grequests node.js vue 前端 低代码 拖拽 api 异步 celery
 author : 鹤啸九天
 excerpt: Web开发相关技术知识点
 mathjax: true
@@ -2049,6 +2049,21 @@ except PyJWTError as e:
     print("jwt验证失败: %s" % e)
 ```
 
+### 进程、协程和线程
+
+定义
+- `进程`：操作系统中资源分配/拥有的最小单位
+- `线程`：操作系统中独立调度的最小单位
+  - 线程是操作系统的内核对象，多线程编程时，如果线程数过多，就会导致频繁的上下文切换，这些 cpu时间是一个额外的耗费。
+- `协程`：非操作系统调度，而是程序猿**代码**控制
+  - 协程在应用层模拟的线程，避免了上下文切换的额外耗费，兼顾了多线程的优点。简化了高并发程序的复杂度。
+  - **goroutine** 就是**协程**。 不同的是，Golang 在 runtime、系统调用等多方面对 goroutine 调度进行了封装和处理，当遇到长时间执行或者进行系统调用时，会主动把当前 goroutine 的CPU (P) 转让出去，让其他 goroutine 能被调度并执行，也就是 Golang 从语言层面支持了协程。
+
+区别
+- 线程之间可以共享内存
+- ![](https://p1-tt.byteimg.com/origin/pgc-image/a8fe60b01ff7415a9ec130d8fcfcae2e?from=pc)
+
+
 ### flask高并发问题
 
 - 【2021-6-18】[Flask+Gunicorn(协程)高并发的解决方法探究](https://www.toutiao.com/i6735284444271215117), 直接使用flask的python code.py的方式运行，简单但不能解决高并发问题，不稳定，有一定概率遇到连接超时无返回的情况，不能用于生产环境。
@@ -2062,19 +2077,95 @@ except PyJWTError as e:
 
 ![](https://p1-tt.byteimg.com/origin/pgc-image/9102d29dad204e608f407ef1f84b3922?from=pc)
 
-### 进程、协程和线程
 
-定义
-- 进程：操作系统中资源分配/拥有的最小单位
-- 线程：操作系统中独立调度的最小单位
-  - 线程是操作系统的内核对象，多线程编程时，如果线程数过多，就会导致频繁的上下文切换，这些 cpu时间是一个额外的耗费。
-- 协程：非操作系统调度，而是程序猿代码控制
-  - 协程在应用层模拟的线程，避免了上下文切换的额外耗费，兼顾了多线程的优点。简化了高并发程序的复杂度。
-  - goroutine 就是协程。 不同的是，Golang 在 runtime、系统调用等多方面对 goroutine 调度进行了封装和处理，当遇到长时间执行或者进行系统调用时，会主动把当前 goroutine 的CPU (P) 转让出去，让其他 goroutine 能被调度并执行，也就是 Golang 从语言层面支持了协程。
+### flask异步调度
 
-区别
-- 线程之间可以共享内存
-- ![](https://p1-tt.byteimg.com/origin/pgc-image/a8fe60b01ff7415a9ec130d8fcfcae2e?from=pc)
+异步本质上并不比同步快。 在执行**并发IO** 绑定任务时， 异步是有益的。但是 对于 **CPU密集型** 任务，则未必有用，因此传统的 Flask 视图仍然适用于大多数用例。 Flask 异步支持的引入，带来本地化编写和使用异步代码的可能性。
+
+由于 Flask本身的实现方式， Flask的异步支持性能不如**异步优先框架**。如果代码主要是基于异步的，那么可以考虑 Quart 。 Quart 是一个 Flask 的重新实现，但是基于 ASGI 标准而不是WSGI。这允许它处理大量并发请求、长时间运行 的请求和 websocket ，而不需要多个工作进程或线程。
+
+同时，也可以用 **Gevent** 或 Eventlet 运行 Flask ，以获得**异步**请求处理的诸多好处。 这些库修补低级 Python 函数来实现这一点，而 async/ await 和 ASGI 则使用标准的现代 Python 功能。决定应该使用 Flask 还是 Quart 或其他东西 最终还是取决于项目的具体需求。
+
+几种方案：
+- flask async/await
+- celery
+- gevent
+
+#### async/await
+
+安装 Flask 时使用了额外的 async （ 即用 pip install flask\[async] 命令安装），那么路由、出错处理器、请求前、请 求后和拆卸函数都可以是协程函数。这样，视图可以使用 async def 定义，并 使用 await 。 pip install flask\[async] 命令会用到 contextvars.ContextVar ， 因此需要 Python 3.7 以上版本。
+
+```python
+@app.route("/get-data")
+async def get_data():
+    data = await async_db_query(...)
+    return jsonify(data)
+```
+
+
+####  celery
+
+【2021-12-1】[celery + flask 异步调用任务](https://blog.csdn.net/yukai08008/article/details/109725238)
+
+有一些非常耗时的任务，无法实现实时的RPC调用。因此计划使用celery + flask提供异步任务调度服务
+
+一个请求的服务过程是这样：
+- 1 服务器接到一个请求（一个几k到几百k的文本）
+- 2 服务器计算摘要作为键值，将其加入异步任务。
+- 3 服务器将摘要返回，状态为calculating。
+- 4 异步任务执行耗时计算，结果有两个副本。一个存在本地(pkl),一个发往目标服务器。这样如果目标服务器没收到，服务就把本地的副本读取再发送，避免重新计算。
+
+```python
+from flask import Flask
+from celery import Celery # 消息队列中间件
+from celery.result import AsyncResult
+import time
+
+app = Flask(__name__)
+# 用以储存消息队列
+app.config['CELERY_BROKER_URL'] = 'redis://127.0.0.1:6379/0'
+# 用以储存处理结果
+app.config['CELERY_RESULT_BACKEND'] = 'redis://127.0.0.1:6379/0'
+
+celery_ = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
+celery_.conf.update(app.config)
+
+
+@celery_.task
+def my_background_task(arg1, arg2):
+     # 两数相加
+     time.sleep(10)
+     return arg1+arg2
+
+
+@app.route("/sum/<arg1>/<arg2>")
+def sum_(arg1, arg2):
+    # 发送任务到celery,并返回任务ID,后续可以根据此任务ID获取任务结果
+    result = my_background_task.delay(int(arg1), int(arg2))
+    return result.id
+
+
+@app.route("/get_result/<result_id>")
+def get_result(result_id):
+    # 根据任务ID获取任务结果
+    result = AsyncResult(id=result_id)
+    return str(result.get())
+```
+
+启动方法
+- 作用分别是: 启动flask服务(基本web服务)，启动celery服务(异步任务)，启动flower服务（监控任务）
+
+```shell
+# 运行flask服务
+gunicorn entry_ner_cpu:app -b 0.0.0.0:5001
+# 使用celery执行异步任务
+celery -A entry_ner_cpu.celery_ worker
+# 使用flower监督异步任务
+flower --basic_auth=admin:admin --broker=redis://127.0.0.1:6379/0 --address=0.0.0.0 --port=5556
+```
+
+flower监控面板
+- ![](https://img-blog.csdnimg.cn/2020111619075451.png)
 
 
 ### 模板使用
