@@ -17,6 +17,7 @@ mathjax: true
 
 # 总结
 
+- 【2021-12-1】[互联网大厂程序员梦醒时分：攒够400万，到40岁退休](https://new.qq.com/omn/20211130/20211130A0DD9X00.html)
 - 【2021-9-5】[普通人的奋斗路径](https://maimai.cn/web/gossip_detail?src=app&webid=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlZ2lkIjoiZmYwODY5MzMwYzkzMTFlY2FjNDY4MDE4NDRlMmQ4NmMiLCJ1IjozNTM5LCJpZCI6MjkzNjUzMTJ9.KDLYwqGW2g4MNa-WQOceCbFT62xkxryxSkUNjKrJ8fM&share_channel=2)
   - 第一种：**房奴**模式。这是最常见的一种，每天辛苦工作，拿着正常工资，在合适的城市定居，平淡过完一生。
   - 第二种：**奋斗**模式。职场中的卷王，一路升职，拿着高薪资，勉强在一线城市体面生活，属于普通人的极限。
