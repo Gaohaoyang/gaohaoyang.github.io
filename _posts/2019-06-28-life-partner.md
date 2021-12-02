@@ -26,6 +26,7 @@ mathjax: true
 
 [为什么说找一个聊得来的人很重要？](https://www.zhihu.com/question/43445138/answer/111219554)
 
+- 【2021-12-2】男人的世界其实非常单纯，[脱口秀](https://www.ixigua.com/7035606107716390182)，独居、群居时不做计划，不做防备，一声吆喝就出门
 
 参考文章：
 > * [如何选择你的人生伴侣-上](https://waitbutwhy.com/cn/%e5%a6%82%e4%bd%95%e9%80%89%e6%8b%a9%e4%bd%a0%e7%9a%84%e4%ba%ba%e7%94%9f%e4%bc%b4%e4%be%a3)
