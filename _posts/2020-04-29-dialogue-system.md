@@ -2146,6 +2146,8 @@ NL2SQL 方向已经有 WikiSQL、Spider、WikiTableQuestions、ATIS 等诸多公
 
 ## 推荐式对话
 
+- 【2021-12-2】[万字长文详述对话推荐系统的逻辑与演化](https://mp.weixin.qq.com/s?__biz=MjM5ODkzMzMwMQ==&mid=2650427527&idx=2&sn=d43550c27d96a6153b0fe9bbdc4ed8f7&chksm=becdd6dd89ba5fcbd3282062b1e5e6fb639c7377be59c2105279ff55ebb39a3c42d642f87fe5&mpshare=1&scene=23&srcid=1202RJBNXN9Eo5p6EN03kmEM&sharer_sharetime=1638460968648&sharer_shareid=b8d409494a5439418f4a89712efcd92a#rd)，人民大学，RUC AI Box 开发和维护了一个用于构建对话推荐系统的开源工具 [CRSLab代码](https://github.com/RUCAIBox/CRSLab)（发表在 ACL Demo 2021）
+
 - 推荐系统为工业界带来了巨大的收益。大多数推荐系统都是以静态的方式工作，即从用户历史的交互中来推测用户的兴趣爱好从而做出推荐。然而，这样的方式有缺陷，具体来说，两个较重要的问题无法被解答：
   - 1）用户目前具体喜欢什么？
   - 2）用户为什么喜欢一个商品？
