@@ -1028,6 +1028,71 @@ Kubernetes 的 kubectl 也就是 command tool，Kubernetes UI，或者有时候�
 所以可以看到 label 是一个非常核心的 kubernetes API 的概念，我们在接下来的课程中也会着重地去讲解和介绍 label 这个概念，以及如何更好地去使用它。
 
 
+# Docker
+
+
+构建Docker镜像有以下两种方法：
+- 1：使用docker commit命令。
+- 2：使用docker build命令和 Dockerfile 文件。
+一般情况下并不推荐使用“docker commit”来构建镜像，而应该使用更灵活、更强大的Dockerfile来构建Docker镜像，这里就来说一下使用Dockerfile创建镜像，创建容器并运行的方法。
+
+- 注意：源码文件和Dockerfile文件放到同一个目录下
+  - Dockerfile
+  - jdk-8u162-linux-x64.tar.gz
+
+## Docker命令
+
+```shell
+# 构建镜像（当前目录dockerfile）
+#   -t 镜像名称及标签（name:tag），tag一般表示版本号，一次构建中可以设置多个tag
+#   . 待构建的上下文环境目录
+docker build -t myubuntu:v1 .
+# 构建镜像：指定源dockerfile
+docker build . -f ./build/fpm/Dockerfile  -t php:latest
+
+
+# 查看生成的镜像
+docker images
+# 创建容器(命名为myubuntu_test)并运行命令（/bin/bash）, 映射到本地主机 127.0.0.1 的 8111 端口上
+docker run -it -p 127.0.0.1:8111:80 --name myubuntu_test myubuntu:v8 /bin/bash
+# 后台模式启动容器
+docker run -p 127.0.0.1:8111:80 -d --name myubuntu_test myubuntu:v8
+# 登录到容器中
+docker run -it myubuntu_test /bin/bash
+# 查看运行中的容器：
+docker ps
+# 查看所有容器：
+docker ps -a
+
+```
+
+## Dockerfile
+
+Dockerfile文件
+
+```Dockerfile
+FROM ubuntu:18.10
+
+# 注视单独成行
+#Ingrediten:
+#       jdk-8u162-linux-x64.tar.gz
+
+RUN buildDeps='gcc libc6 make ssh net-tools iputils-ping git curl telnet vim yum' \
+        && apt-get update       \
+        && apt-get install -y $buildDeps        \
+        && mkdir -p /opt/java/
+
+COPY ./jdk-8u162-linux-x64.tar.gz  /opt/java/
+
+RUN cd /opt/java/       \
+        && tar -zxvf jdk-8u162-linux-x64.tar.gz
+
+ENV JAVA_HOME=/opt/java/jdk1.8.0_162
+ENV PATH=$JAVA_HOME/bin:$PATH
+ENV CLASSPATH=.:$JAVA_HOME/bin/dt.jar:$JAVA_HOME/lib/tools.jar
+```
+
+
 # 结束
 
 
