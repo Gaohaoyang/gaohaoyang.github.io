@@ -1960,6 +1960,7 @@ Sebastian将QA的研究分为了5个阶段。
 
 ### TableQA
 
+- 【2021-12-3】[首个中文表格预训练模型！达摩院AliceMind上新，序列到结构详解](https://www.toutiao.com/i7036970750120755725/)
 - 【2021-2-24】[达摩院Conversational AI研究进展及应用](https://t.cj.sina.com.cn/articles/view/2674405451/9f68304b01900tdaj)
 - 一个例子来介绍TableQA。
   - 有一个理财产品的Table，围绕这个Table， 用户可能会问：“收益率大于3.5%且保本型的理财产品最低起投金额是多少？”
