@@ -729,9 +729,9 @@ git add -A
 #把本地的备注提交到暂存区
 git commit -m"[message]对你修改过代码一个备注"
 #常用：
-git  pull orgin master # 将本地master拉取到远程仓库origin的master分支
+
 # 拉取远程仓库，并与本地仓库的代码合并
-git pull [remote]  [branch]
+# git pull [remote]  [branch]
 git  pull orgin master # 将本地master拉取到远程仓库origin的master分支
 # 上传本地指定分支到远程仓库
 git push [remote] [branch]
@@ -767,7 +767,8 @@ git stash drop # 将丢弃最近存放的变更集。
 git stash apply # 恢复工作现场
 git stash apply stash@{0} # 恢复指定的工作现场，当你保存了不只一份工作现场时
 
-git merge 分支名称 # 合并分支
+git merge dev # 合并分支dev到master
+
 git tag [commitID] # 用于将标签赋予指定的提交。
 #或者恢复暂存区的指定的某个文件到本地工作区
 git checkout [file]
@@ -877,6 +878,102 @@ git blame filename
 【2021-4-1】[git思维导图](https://p6.toutiaoimg.com/img/tos-cn-i-0022/c661edf2db1e41ef97ff21347c8ca89a~tplv-obj:1674:4096.image?from=post)
 
 ![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/c661edf2db1e41ef97ff21347c8ca89a~tplv-obj:1674:4096.image?from=post)
+
+### fetch
+
+git fetch 有四种基本用法
+1. git fetch
+  - 这将更新git remote 中所有的远程repo 所包含分支的最新commit-id, 将其记录到.git/FETCH_HEAD文件中
+2. git fetch remote_repo
+  - 这将更新名称为remote_repo 的远程repo上的所有branch的最新commit-id，将其记录。 
+3. git fetch remote_repo remote_branch_name
+  - 这将这将更新名称为remote_repo 的远程repo上的分支： remote_branch_name
+4. git fetch remote_repo remote_branch_name:local_branch_name
+  - 这将这将更新名称为remote_repo 的远程repo上的分支： remote_branch_name ，并在本地创建local_branch_name 本地分支保存远端分支的所有数据。
+
+FETCH_HEAD： 是一个版本链接，记录在本地的一个文件中，指向着目前已经从远程仓库取下来的分支的末端版本。
+
+
+### pull
+
+git pull 操作其实是git fetch 与 git merge 两个命令的集合。
+- git pull 等效于先执行 git **fetch** origin 当前分支名, 再执行 git **merge** FETCH_HEAD.
+
+如果要合并代码就并不一定要用git merge命令了，也可以用git pull命名的，比如要把远程origin仓库的 xx 分支合并到本地的 yy 分支，可以有如下两种做法。
+
+```shell
+#（1）第一种，传统标准的做法：
+# 举例说明：将远程origin仓库的xx分支合并到本地的yy分支。
+git fetch origin xx # fetch到远程仓库目标分支的最新commit记录到  ./git/FETCH_HEAD文件中
+git checkout yy # 切换到要合并的分支
+git merge FETCH_HEAD # 将目标分支最新的commit记录合并到当前分支
+
+# （2）第二种，直接使用pull命令，将远程仓库的目标分支合并到本地的分支：
+# git pull <remoterepo_name> <branch_name> 
+# 举例说明：将远程origin仓库的xx分支合并到本地的yy分支
+git checkout yy
+git pull origin xx
+# （3）第三种
+git checkout xx
+git pull   # 如果本地没有xx分支的，这一步都可以不执行。
+git checkout yy  # 切换到yy分支
+git merge xx # 将xx分支合并到yy分支  这一步可以加上 --no-ff 参数，即 git merge --no-ff
+
+```
+
+### cherry-pick
+
+[git 教程 --git cherry-pick 命令](https://zhuanlan.zhihu.com/p/355413226)
+
+一般代码的合并分为两种：一种是**整个分支**的合并，一个是挑选**部分**的commit来合并, 使用指令git cherry-pick。
+
+git cherry-pick基础用法
+
+```shell
+# ------ （1）基础用法 --------
+# 挑选一个commit-id合并
+# 注意：合并过来的commit-id将会变掉，产生一个新的commit-id，跟原来的不在相同
+git cherry-pick commit-id
+
+# 挑选多个commit-id合并
+git cherry-pick commit-idA commit-idB
+
+# 挑选连续的多个commit-id合并
+# 该指令是将从commit-idA开始到commit-idB之间的所有commit-id提交记录都合并过来，需要注意的是，commit-idA必须比commit-idB提前提交，也就是说在被挑选的分支上，先有的commit-idA，然后才有的commit-idB
+git cherry-pick commit-idA..commit-idB
+
+# 第一步：需要合并人解决对应的冲突文件，然后提交到暂存区
+git add . 
+# 第二步：使用下面的命令继续执行
+git cherry-pick --continue
+```
+
+（2）高级用法 
+
+使用上面的指令基本上可以玩转很大部分的场景，但是总有一些我们预想不到或者相对不是很丝滑的场景
+
+① 合并冲突：
+- 在实际合并的过程中，总有一些冲突的情况，遇到这些情况下，该如何使用cherry-pick的组合命令来解决问题?
+- 首先在使用cherry-pick时，如果遇到了代码冲突，其实合并过程会停止，需要使用其他的方式来继续对应的操作
+
+② 继续合并--continue
+- 第一步：需要合并人解决对应的冲突文件，然后提交到暂存区
+  - git add . 
+- 第二步：使用下面的命令继续执行
+  - git cherry-pick --continue
+
+![](https://pic4.zhimg.com/80/v2-3e2afc3e1495e3427e31546488b89703_1440w.jpg)
+
+③ 放弃合并，回归原始状态--abort
+- 使用当前的指令，合并的动作暂停，并且回归到操作前的样子
+  - git cherry-pick --abort
+
+![](https://pic1.zhimg.com/80/v2-bdaa65e8c73bbcf49648a7419874ba00_1440w.jpg)
+
+④ 放弃合并，保留状态 --quit
+- 使用当前的指令，会保留车祸现场，退出cherry-pick
+  - git cherry-pick --quit
+
 
 ### git lfs
 
