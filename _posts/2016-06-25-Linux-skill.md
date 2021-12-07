@@ -107,6 +107,71 @@ linux文件权限的描述格式解读
 - [linux命令汇总](https://www.toutiao.com/w/i1694976027465741/)
 ![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/057f03b362234ad5a702ad00c5f9f797~tplv-obj:975:1280.image?from=post)
 
+### 账户管理
+
+Linux 系统中，具有最高权限的用户——root。
+- root 用户是系统中**唯一**的一个**超级**管理员，拥有了系统中的所有权限，可以执行任何想要执行的操作，也正因为如此，处于安全考虑，一般情况下不推荐使用 root 用户进行日常使用。
+- root 用户所在的用户组称为 “root组”，处于 root 组的普通用户，能够通过 sudo 命令获取 root 权限。
+
+Linux 将用户账号、密码等相关的信息分别存储在四个文件夹下：
+- /etc/passwd —— 管理用户UID/GID重要参数
+  - 账号名称 : 密码 : UID : GID : 用户信息说明列 : 主文件夹 : shell
+  - root : x : 0 : 0 : root : /root : /bin/bash
+  - 密码项显示 “x” 是出于安全考虑，Linux 将密码信息移到 /etc/shadow 进行存储；
+- /etc/shadow —— 管理用户密码
+  - 账号名称 : 密码 : 最近改动密码的日期 : 密码不可被改变的天数 : 密码需要重新更改的天数 : 更改提醒天数 : 密码过期后账号的宽限时间 : 账号失效日期 : 保留
+  - root : (字符串，此处打码) : 200 : 0 : 99999 : 7 : : :
+- /etc/group —— 管理用户组相关信息
+  - 用户组名称 : 用户组密码 : GID : 此用户组包含的账号名称
+  - root : x : 0 : root
+- /etc/gshadow —— 管理用户组管理员相关信息
+  - 用户组名 : 密码 : 用户组管理员账号 : 该用户组包含的账号名称
+  - root : : : root
+
+adduser 与 useradd 在一些方面存在不同。
+- useradd 创建用户，但是不创建密码等其他用户信息，需要使用 passwd 设置密码才能使用；而 adduser 能通过交互界面，由用户直接输入密码等，设置用户信息。
+- useradd 默认不在 /home 下创建用户同名的主文件夹，而 adduser 默认创建。
+- useradd 是一个命令，而 adduser 被理解为一个 “简单的应用程序”。
+
+```shell
+# 查询用户信息
+id <user> # 展示指定user的UID、GID、用户组信息等，默认为当前有效用户
+who am i  # 等同于 who -m，仅显示当前登录用户相关信息
+whoami    #   仅显示当前有效用户的用户名
+w         # 展示当前正在登录主机的用户信息及正在执行的操作
+who       # 展示当前正在登录主机的用户信息
+last <user>  # 展示指定用户的历史登录信息，默认为当前有效用户
+lastlog -u <user> # 展示指定用户最近的一次登录信息，默认显示所有用户
+
+useradd # 新增用户，只是创建了一个用户名，如 （useradd  +用户名 ），它并没有在/home目录下创建同名文件夹，也没有创建密码，因此利用这个用户登录系统，是登录不了的
+useradd -m wqw  # 添加用户：
+passwd wqw # 设置密码
+
+su wqw # 切换用户
+userdel  -r  wqw # 删除用户
+# 类似useradd，但adduser更实用，交互式创建用户
+adduser tommy # 添加一个名为tommy的用户，
+#passwd tommy  # 修改密码
+# 赋予root权限： 修改 /etc/sudoers 文件，找到下面一行，把前面的注释(#)去掉
+#    %wheel ALL=(ALL)    ALL
+# 修改用户，使其属于root组(wheel)
+usermod -g root tommy
+# 用户组的添加和删除：
+groupadd testgroup # 组的添加
+groupdel testgroup # 组的删除
+```
+
+sudo
+- 普通用户可以通过 sudo 命令，使用 root 用户权限来执行命令。
+- 当然，不是所有的用户都能执行 sudo 命令的，而是在 /etc/sudoers 文件内的用户才能执行这个命令。
+
+sudo 的执行流程大致为：
+- 系统到 /etc/sudoers 下检查用户是否有执行 sudo 的权限
+- 若有 sudo 权限，则需要输入本用户的密码（root 用户执行 sudo 不需要密码）
+- 验证成功后执行命令
+- 因此，关键在于执行 sudo 的用户是否存在于 /etc/sudoers 文件内
+
+
 ### 系统命令
 
 - [系统常用命令](https://p6-tt.byteimg.com/origin/pgc-image/15e52c0fb24a444d99784798bbf6aba3?from=pc)
