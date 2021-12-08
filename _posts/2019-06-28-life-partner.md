@@ -853,8 +853,9 @@ mathjax: true
 50个候选人，很喜欢的少，3个左右，喜欢的不多，7个，不喜欢的也不多，10个，剩下的是不反感的30个。头部的3-10个往往条件好，选择空间大，竞争激烈，他们优中选优，一般人没机会，真正适合的人在30个人中，但由于倾心程度不够，还惦记着那10个，于是谨慎的等待，不理不睬，以致于错过…最后，一场活动白参加了，多几个陌生人而已。放下自尊心，被人伤不气馁，当没发生，感觉合适就大胆要微信
 
 
-## 2019年8月6日 幸福心态
+## 他人经验
 
+【2019年8月6日】 幸福心态
 - ①幸福取决于自己，不要寄托于别人
 - ②没有完美的人，只有完美的心态，求同存异，抓住主要因素
    - 什么是主要因素？列出各种条条框框，按照重要性倒排
@@ -881,6 +882,15 @@ mathjax: true
 【2021-8-4】[脉脉](https://maimai.cn/web/gossip_detail?src=app&webid=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlZ2lkIjoiYmUxOWQ1ODVmNTAzMTFlYjgzMmZlNDQzNGIyZmE4ODgiLCJ1IjozNTM5LCJpZCI6MjkyNDk5MzF9.WklHZBM0TLH0ckgTMC7ab1pP4tUazTy6w72vwrosjMo&share_channel=2)：结过婚的想来真心劝一句，挑选结婚对象，收入工作学历相貌这些东西真的不要看得太重，决定两个人能不能开心生活下去的就是**性格**和**对生活的态度**，无论男女都一定要找**性格好，能包容彼此，对小事不计较，生活态度一致的**。即使是贫贱的夫妻面对清苦的生活都能豁达安逸、相互激励日子也是甜的；学历和收入和你有差距问题不是特别大，但是对生活热爱，积极向上，性格稳定，能让你看到生活中的光才是最重要的。
 
 重复一遍，**性格**、**人品**和**生活态度**，才是寻觅人生伴侣最要看重的事情，切勿本末倒置，不然只会像我一样落得一地鸡毛。
+
+【2021-12-8】[脉脉](https://maimai.cn/web/gossip_detail?src=app&webid=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlZ2lkIjoiZTgxMDYyYmQ1NTE4MTFlYzg4ZWQ4MDE4NDRlNTAxOTAiLCJpZCI6Mjk2NzkzNjksInUiOjM1Mzl9.rtmIW5VeMUiarPPgi4pA6dLtqsY5xJ2v45rpLZVAxhU&share_channel=5)
+
+成年人找对象，最重要的就是**性格乐观，情绪稳定**，否则你将获得如下生活：
+1. 回到家战战兢兢，比面对领导还紧张，一个不谨慎对方就火山爆发，比上班还痛苦
+2. 生活中无限对你输出负能量，任何鸡毛小事都能成为输出点
+3. 本以为伴侣应该是互相扶持，结果感情带来的却是比工作还大的消耗
+4. 不敢提分手，怕对方做出失去理智的过激行为
+如果有上述感觉，那么恭喜你，多在公司加会儿班吧。祝大家收获身心健康，情绪稳定，乐观开朗的另一半。
 
 ## 约会时如何快速了解对方
 
