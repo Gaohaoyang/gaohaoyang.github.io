@@ -2390,7 +2390,7 @@ if __name__ == "__main__":
 ## Django
 
 【2021-7-16】python为后端，vue为前端的web开发框架整合demo，拿来即用，[django-vue-demo](https://github.com/realjf/django-vue-demo.git)，安装详情：[Django后端 + Vue前端 构建Web开发框架](https://realjf.io/python/django-vue-web/)，覆盖node、mysql、vue等工具包
-
+- Django在线教程：[Django Book](http://djangobook.py3k.cn/)，[中文](http://djangobook.py3k.cn/2.0/)
 
 
 
@@ -3104,6 +3104,157 @@ if __name__ == "__main__":
   - [h5-Dooring](http://h5.dooring.cn)（前端）：h5-Dooring，让 H5 制作像搭积木一样简单, 轻松搭建 H5 页面, H5 网站, PC 端网站, 可视化设计。
     - ![](https://p9.toutiaoimg.com/origin/pgc-image/61b16a01a9bc46ae88391a5165c8b3e2?from=pc)
   - magic-api（后端）：magic-api 是一个基于 Java 的接口快速开发框架，编写接口将通过 magic-api 提供的 UI 界面完成，自动映射为 HTTP 接口，无需定义 Controller、Service、Dao、Mapper、XML、VO 等 Java 对象即可完成常见的 HTTP API 接口开发。
+
+### python生成前端代码
+
+【2021-12-8】[详解一个Python库，用于构建精美数据可视化web app](https://www.toutiao.com/i7039182714125353479/). Python 库 Streamlit，它可以为机器学习和数据分析构建 web app。它的优势是入门容易、纯 Python 编码、开发效率高、UI精美。
+- ![](https://p6.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/c26adac17c1d461cb4301318440c8045?from=pc)
+- 对于交互式的数据可视化需求，完全可以考虑用 Streamlit 实现。特别是在学习、工作汇报的时候，用它的效果远好于 PPT。因为 Streamlit 提供了很多前端交互的组件，所以也可以用它来做一些简单的web 应用。
+
+安装：
+
+```shell
+pip install streamlit # 安装
+streamlit hello # 检查是否安装成功
+```
+
+主要功能：
+- 文本组件：文本组件是用来在网页上展示各种类型的文本内容
+- 数据组件：
+  - dataframe 和 table 组件可以展示表格。前者可动态展示。数据类型包括 pandas.DataFrame、pandas.Styler、pyarrow.Table、numpy.ndarray、Iterable、dict。
+  - json组件：显示json格式，展示地更美观，并且提供交互，可以展开、收起 json 的子节点。
+  - metric 组件用来展示指标的变化，数据分析中经常会用到。
+    - st.metric(label="Temperature", value="70 °F", delta="1.2 °F")
+- 图标组件：包含两部分，一部分是原生组件，另一部分是渲染第三方库。
+  - 原生组件只包含 4 个图表，line_chart、area_chart 、bar_chart 和 map，分别展示折线图、面积图、柱状图和地图。
+  - 第三方库：matplotlib.pyplot、Altair、vega-lite、Plotly、Bokeh、PyDeck、Graphviz。
+- 输入组件
+  - Streamlit 提供的输入组件都是基本的，都是我们在网站、移动APP上经常看到的。包括：
+    - button：按钮
+    - download_button：文件下载
+    - file_uploader：文件上传
+    - checkbox：复选框
+    - radio：单选框
+    - selectbox：下拉单选框
+    - multiselect：下拉多选框
+    - slider：滑动条
+    - select_slider：选择条
+    - text_input：文本输入框
+    - text_area：文本展示框
+    - number_input：数字输入框，支持加减按钮
+    - date_input：日期选择框
+    - time_input：时间选择框
+    - color_picker：颜色选择器
+  - 它们包含一些公共的参数：
+    - label：组件上展示的内容（如：按钮名称）
+    - key：当前页面唯一标识一个组件
+    - help：鼠标放在组件上展示说明信息
+    - on_click / on_change：组件发生交互（如：输入、点击）后的回调函数
+    - args：回调函数的参数
+    - kwargs：回调函数的参数
+  - ![](https://p6.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/50d4f1b2b7e745cf9cf44d3d02e1938f.png?from=pc)
+- 多媒体组件
+  - Streamlit 定义了 image、audio 和 video 用于展示图片、音频和视频。可以展示本地多媒体，也通过 url 展示网络多媒体。
+  - ![](https://p6.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/d16ae8c021a54c3b952a7fe8b16b8a74.png?from=pc)
+- 状态组件
+  - 状态组件用来向用户展示当前程序的运行状态，包括：
+    - progress：进度条，如游戏加载进度
+    - spinner：等待提示
+    - balloons：页面底部飘气球，表示祝贺
+    - error：显示错误信息
+    - warning：显示报警信息
+    - info：显示常规信息
+    - success：显示成功信息
+    - exception：显示异常信息（代码错误栈）
+  - ![](https://p6.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/9fcc5e3ec3b7418ca48f339bc1001822.png?from=pc)
+
+Streamlit 可以展示纯文本、Markdown、标题、代码和LaTeX公式。
+
+my_code.py
+
+```python
+import streamlit as st
+
+# markdown
+st.markdown('Streamlit is **_really_ cool**.')
+# 设置网页标题
+st.title('This is a title')
+# 展示一级标题
+st.header('This is a header')
+# 展示二级标题
+st.subheader('This is a subheader')
+# metric
+st.metric(label="Temperature", value="70 °F", delta="1.2 °F")
+# json组件
+st.json({
+'foo': 'bar',
+'stuff': [
+'stuff 1',
+'stuff 2',
+],
+})
+
+# 展示代码，有高亮效果
+code = '''def hello():
+print("Hello, Streamlit!")'''
+st.code(code, language='python')
+# 纯文本
+st.text('This is some text.')
+# LaTeX 公式
+st.latex(r'''
+a + ar + a r^2 + a r^3 + \cdots + a r^{n-1} =
+\sum_{k=0}^{n-1} ar^k =
+a \left(\frac{1-r^{n}}{1-r}\right)
+''')
+
+# 图表
+chart_data = pd.DataFrame(np.random.randn(20, 3), columns=['a', 'b', 'c'])
+st.line_chart(chart_data)
+# 第三方图表
+import matplotlib.pyplot as plt
+arr = np.random.normal(1, 1, size=100)
+fig, ax = plt.subplots()
+ax.hist(arr, bins=20)
+st.pyplot(fig)
+
+# 交互输入框：下拉框
+option = st.selectbox('下拉框', ('选项一', '选项二', '选项三'))
+# 输出组件，可以输出字符串、DataFrame、普通对象等各种类型数据。
+st.write('选择了：', option)
+```
+
+执行：streamlit run my_code.py ，streamlit 会启动 web 服务，加载指定的源文件。浏览器访问 http://localhost:8501/ 即可。
+
+当源代码被修改，无需重启服务，在页面上点击刷新按钮就可加载最新的代码，运行和调试都非常方便。
+
+
+- **页面布局**。之前我们写的 Streamlit 都是按照代码执行顺序从上至下展示组件，Streamlit 提供了 5 种布局：
+  - sidebar：侧边栏，如：文章开头那张图，页面左侧模型参数选择
+  - columns：列容器，处在同一个 columns 内组件，按照从左至右顺序展示
+  - expander：隐藏信息，点击后可展开展示详细内容，如：展示更多
+  - container：包含多组件的容器
+  - empty：包含单组件的容器
+- **控制流**。控制 Streamlit 应用的执行，包括
+  - stop：可以让 Streamlit 应用停止而不向下执行，如：验证码通过后，再向下运行展示后续内容。
+  - form：表单，Streamlit 在某个组件有交互后就会重新执行页面程序，而有时候需要等一组组件都完成交互后再刷新（如：登录填用户名和密码），这时候就需要将这些组件添加到 form 中
+  - form_submit_button：在 form 中使用，提交表单。
+- **缓存**。这个比较关键，尤其是做机器学习的同学。刚刚说了， Streamlit 组件交互后页面代码会重新执行，如果程序中包含一些复杂的数据处理逻辑（如：读取外部数据、训练模型），就会导致每次交互都要重复执行相同数据处理逻辑，进而导致页面加载时间过长，影响体验。
+  - 加入缓存便可以将第一次处理的结果存到内存，当程序重新执行会从内存读，而不需要重新处理。
+  - 使用方法也简单，在需要缓存的函数加上 @st.cache 装饰器即可。前两天我们讲过 Python 装饰器。
+
+```python
+DATE_COLUMN = 'date/time'
+DATA_URL = ('https://s3-us-west-2.amazonaws.com/'
+'streamlit-demo-data/uber-raw-data-sep14.csv.gz')
+@st.cache
+def load_data(nrows):
+data = pd.read_csv(DATA_URL, nrows=nrows)
+lowercase = lambda x: str(x).lower()
+data.rename(lowercase, axis='columns', inplace=True)
+data[DATE_COLUMN] = pd.to_datetime(data[DATE_COLUMN])
+return data
+```
+
 
 # 结束
 
