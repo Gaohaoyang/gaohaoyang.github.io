@@ -123,6 +123,76 @@ print "hello"
 [站内文章链接]({{ site.baseurl}}{% post_url 2010-01-01-navigation %}#home)
 ```
 
+### 表格
+
+|左对齐|右对齐（设置宽度）|居中|
+|:---|----------:|:-----:|
+|你好|你好|你好|
+|hello<br>world| hello world||
+
+合并单元格直接使用HTML来达到效果。
+
+这会用到HTML的标签：
+- colspan：规定单元格可纵深的列数
+- rowspan：规定单元格可横跨的行数
+
+<table>
+    <tr>
+        <td>张</td>
+        <td>王</td>
+    <tr>
+    <tr>
+        <td colspan="2">姓氏</td>
+    <tr>
+</table>
+
+合并列：
+
+<table>
+    <tr>
+        <td>类别</td>
+        <td>名称</td>
+    </tr>
+    <tr>
+        <td rowspan="2">颜色</td>
+        <td>红色</td>
+    </tr>
+    <tr>
+        <td>黄色</td>
+    </tr>
+    <tr>
+        <td rowspan="2">姓氏</td>
+        <td>张</td>
+    </tr>
+    <tr>
+        <td>王</td>
+    </tr>
+</table>
+
+有行有列；
+
+<table>
+    <tr>
+        <td>类别</td>
+        <td>名称</td>
+    </tr>
+    <tr>
+        <td rowspan="2">颜色</td>
+        <td>红色</td>
+    </tr>
+    <tr>
+        <td>黄色</td>
+    </tr>
+    <tr>
+        <td colspan="2">姓氏</td>
+    </tr>
+    <tr>
+        <td>王</td>
+        <td>张</td>
+    </tr>
+</table>
+
+
 ### 图片嵌入
 
 - 默认方法
