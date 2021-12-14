@@ -54,7 +54,12 @@ mathjax: true
 
 # Tensorflow 1.*
 
-- 静态图
+主要的是：
+- tf.Variable
+- tf.Constant
+- tf.Placeholder
+- tf.SparseTensor
+除了tf.Variable，张量的值是不变的
 
 ## TensorFlow基础知识
 
@@ -106,6 +111,30 @@ b = tf.Variable(tf.zeros([4]), name="b")
 # 2.使用get_variable的方式来创建
 my_int_variable = tf.get_variable("my_int_variable", [1, 2, 3], dtype=tf.int32,
   initializer=tf.zeros_initializer)
+```
+
+
+### 显示张量值
+
+```python
+import tensorflow as tf
+
+#定义变量a
+a=tf.Variable([[[1,2,3],[4,5,6]],[[7,8,9],[10,11,12]]])
+#定义索引
+indics=[[0,0,0],[0,1,1],[0,1,2]]
+#把a中索引为indics的值取出
+b=tf.gather_nd(a,indics)
+
+#初始化
+init=tf.global_variables_initializer()
+with tf.Session() as sess:
+    #执行初始化
+    sess.run(init)
+    #打印结果
+    print(a.eval())
+    print(b.eval())
+    tf.Print(a)
 ```
 
 
@@ -304,6 +333,23 @@ if __name__ == "__main__":
 - 官方教程导读: [ML Study Jam 2020](https://tf.wiki/zh_hans/mlstudyjam.html)
 
 在 TensorFlow 1.X 版本中， 必须 在导入 TensorFlow 库后调用 tf.enable_eager_execution() 函数以启用即时执行模式。在 TensorFlow 2 中，**即时执行**模式将成为**默认**模式，无需额外调用 tf.enable_eager_execution() 函数（不过若要关闭即时执行模式，则需调用 tf.compat.v1.disable_eager_execution() 函数）。
+
+
+## tf 2 与 tf 1差异
+
+TensorFlow版本差异：
+- ① 在TensorFlow1.x中，最常规的是使用"session.run()"方法执行计算图，“session.run()"方法的调用类似于函数调用，指定输入数据和调用的方法，最后返回结果。
+- ② TensorFlow2.0将Eager Execcution(**动态图**机制）作为默认模式。在该模式下用户能够轻松地编写和调试代码，可以使用原生的Python控制语句，大大降低了学习和使用TensorFlow的门槛
+- ③ 在TensorFlow2.0中，**图**（graph)和**会话**(Session)都会变成底层实现，而不需要用户关心。
+- ④ TensorFlow2.0推出了一个新的运行理念，即 `AutoGraph`。当运行代码时，TensorFlow2.0自动调用Eager模式执行函数，这是内部所完成的。
+
+总结：
+- TensorFlow1.x版本之所以要分为**两步**进行，是因为它无法使用Python支持的常用代码，所以需要将Python代码进行编译为TensorFlow所内置的API和函数才能执行。
+- 而2.0版本可以使用"tf.**function**"来修饰Python函数，以将其标记为即时编译，从而TensorFlow可以将其作为单个图来执行。
+
+参考：[Tensorflow如何使用GPU训练](https://blog.csdn.net/qq_31554953/article/details/107302404)
+
+
 
 ## 基础
 
