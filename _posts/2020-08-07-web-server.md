@@ -977,6 +977,8 @@ int main()
 参考：
 - [Python Web服务器并发性能测试](https://blog.csdn.net/bandaoyu/article/details/88546515)
 - [从0到1，Python Web开发的进击之路](https://zhuanlan.zhihu.com/p/25038203)
+  - ![](https://pic1.zhimg.com/80/v2-a165341ad880a5bcb1e2bd8d6623d800_720w.png)
+  - ![](https://pic4.zhimg.com/80/v2-8a8fd9da3b83b31a331105ce3b81f75b_720w.png)
 
 Python 常见部署方法有 ：
 - `fcgi` ：用 spawn-fcgi 或者框架自带的工具对各个 project 分别生成监听进程，然后和 http 服务互动
