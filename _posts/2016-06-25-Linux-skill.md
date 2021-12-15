@@ -570,7 +570,9 @@ x+y = z\\a=4
 ![](https://tukuimg.bdstatic.com/scrop/80a43c9d8428273cc9cabe71256eb9ef.gif)
 
 
-## VSCode 在线体验（解决访问受限问题）
+## VSCode 
+
+### 在线体验（解决访问受限问题）
 
 【2021-2-10】用vscode在线查看github代码库，方法：
 - （1）加`1s` ，详见：[github1s](https://github.com/conwnet/github1s)
@@ -579,9 +581,7 @@ x+y = z\\a=4
   - 问题：【2021-8-17】没有push功能，修改的东西如何提交？是要付费才行吗？
 - github新功能，在线编辑IDE，[codespace](https://github.com/features/codespaces)，Github 自从被微软收购后，和 vscode 的联动，真的是强强联手，从 GitHub Codespaces 和 GitHub Copilot 来看，好功能一个接一个
 
-<iframe src="https://vdn1.vzuu.com/SD/0758de44-fad6-11eb-a8c4-6ee192182cb1.mp4" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
-
-## VSCode远程连接
+### 远程连接
 
 [使用VScode连接远程服务器进行开发](https://zhuanlan.zhihu.com/p/141205262)
 - 直接在插件中搜索ssh，即可找到Remote-SSH，点击install安装
@@ -610,18 +610,23 @@ Host c01
   - **暂存区**(Stage/Index)
   - **资源库**(Repository或Git Directory)
   - **git仓库**(Remote Directory)。
-- ![](https://bbsmax.ikafan.com/static/L3Byb3h5L2h0dHAvd3d3LnJ1YW55aWZlbmcuY29tL2Jsb2dpbWcvYXNzZXQvMjAxNS9iZzIwMTUxMjA5MDEucG5n.jpg)
+- [图](https://bbsmax.ikafan.com/static/L3Byb3h5L2h0dHAvd3d3LnJ1YW55aWZlbmcuY29tL2Jsb2dpbWcvYXNzZXQvMjAxNS9iZzIwMTUxMjA5MDEucG5n.jpg)
 - [Git快速入门](https://www.cnblogs.com/polk6/p/git-introduce.html)
-   - ![](https://images2017.cnblogs.com/blog/153475/201710/153475-20171013183602293-822234036.png)
+   - [图](https://images2017.cnblogs.com/blog/153475/201710/153475-20171013183602293-822234036.png)
 - 文件的四种状态
   - **Untracked**:未跟踪, 此文件在文件夹中, 但并没有加入到git库, 不参与版本控制. 通过git add 状态变为Staged.
   - **Staged**:暂存状态. 执行git commit则将修改同步到库中, 这时库中的文件和本地文件又变为一致, 文件为Unmodify状态. 执行git reset HEAD filename取消暂存,文件状态为Modified;
   - **Mosified**:文件已修改, 仅仅是修改, 并没有进行其他的操作.
   - **Committed**: 文件已提交修改；
 - [Git文件状态流程图](https://blog.csdn.net/leyangjun/article/details/52540590)
-   - ![](https://img-blog.csdn.net/20160918100329572?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+   - [图](https://img-blog.csdn.net/20160918100329572?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
 - .git的目录结构：进入隐藏的 .git 目录之后可以看到如上图所示结构
   - 核心文件： config，objects，HEAD，index，refs 这 5 个文件夹
+
+提交的准则
+1. 除了源码相关的东西之外，其他build产生的东西（如：maven的target文件夹，.idea文件夹等），均不能提交进入源码仓库，添加到 .gitignore 文件中忽略掉。
+2. 撰写规范的提交说明。一份好的提交说明可以帮助协作者更轻松更有效地配合工作。
+3. 要严格按照我们定的流程切换到指定分支，开发相应的功能。
 
 ## 项目中如何选择分支模式
 
@@ -715,10 +720,10 @@ TBD模式缺点：
 ### Git-Flow模式
 
 - 随着敏捷开发的广泛使用，越来越多的团队协作完成某一特性或者分别完成不用的用户故事，根据不同的特性或者用户故事来创建开发分支就应运而生。最有代表性的就是Git-Flow模式。
-- Git-Flow 模式很好解决了不同特性之间并行开发需要的工作方式。每一个特性都能同时开工，结合敏捷开发的例子，每个迭代开始时从主干分支拉出一个特性分支，命名结构参考feature/xxx-232，所有关于此特性的开发都在此分支上进行，当开发完成后把特性分支合并回主干分支上，测试通过后进行发布。
+- Git-Flow 模式很好解决了不同特性之间**并行开发**需要的工作方式。每一个特性都能同时开工，结合敏捷开发的例子，每个迭代开始时从主干分支拉出一个特性分支，命名结构参考feature/xxx-232，所有关于此特性的开发都在此分支上进行，当开发完成后把特性分支合并回主干分支上，测试通过后进行发布。
 
 Git原理及如何选择分支模式
-![](https://p3-tt.byteimg.com/origin/pgc-image/02fd057c7eed4e6ba7abaded26e5401e?from=pc)
+- ![](https://p3-tt.byteimg.com/origin/pgc-image/02fd057c7eed4e6ba7abaded26e5401e?from=pc)
 
 Git-Flow模式一般有以下分支结构：
 - feature分支：开发者进行特性功能开发的分支；
@@ -747,6 +752,46 @@ Git-Flow模式的优点
 Git-Flow模式的缺点
 1. 分支多，合并冲突较为频繁
 2. 需要进行维护分支，对分支代码进行更新
+
+【2021-12-15】[Git Flow 工作流程使用寿命](https://www.toutiao.com/i7041475885186187783)
+
+分支简述
+- ![](https://p3.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/8754e82b34e54524bba712bbd1dbb1fd?from=pc)
+
+主要分支简述
+- 天蓝色圆点 所在的线源码的**主线**（master）。
+  - master分支用来记录官方发布轨迹
+  - 天蓝色方形 指向的节点就是每一个发布版本的**标签**（tag）。
+- 紫色圆点 所在的线为**主要分支**线（develop）。
+  - 集成分支，用来记录开发新功能的轨迹。
+  - ![](https://p3.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/6e0a33e7571d4543b33c00ae21f4ec0b?from=pc)
+- 注意：
+  - 除了 master 主线和 develop 主分支线，其他的分支都是**临时**分支，有一定的生命周期的，其余的工作流程分支都是围绕这两个分支之间的区别进行的。
+- 其它分支
+  - 橙色圆点 所在的线为**新功能**开发分支线（feature）。
+    - 每一个新的功能都应该创建一个独立的分支，从develop分支中派生出来。当功能完成后，要合并（merged）回develop分支，合并后它的生命周期就结束。新功能分支**不会**与master分支有直接的交汇。
+    - 所有新功能分支会合并到develop分支。但这个Gitflow工作流不会在此结束。
+    - ![](https://p3.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/6e0a33e7571d4543b33c00ae21f4ec0b?from=pc)
+  - 绿色圆点 所在的线为新版本**发布**线（release）。
+    - 一旦开发的功能已经满足发布条件（或预定发布日期接近），应该合并所有满足发布条件的新功能分支到develop分支中
+    - 然后开一个**发布**分支（Release）发布版本。这个分支不能再添加新的功能，只有bug修复和该版本为导向的任务。
+    - 一旦到了发布日期，Release就要合并回master发布，并打出版本标签。
+    - 另外，还需要合并回develop分支。
+    - ![](https://p3.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/be9a0373c9b34ec98b56e8deb11d6dda?from=pc)
+  - 红色圆点 所在的线为发布版本**bug修复**线（hotfix）。
+    - 维护分支也就是线上bug修复分支，使用来快速修复生产环境的紧急问题。
+    - 唯一一个开放过程中直接从master分支派生来的分支。快速的修复问题后，它应该被合并回master和develop（或者当前发布分支），然后，master分支需要打一个版本标签。
+    - 一个专门的错误修复开发线，可以让团队在不等待下一个发布周期，导致中断工作流程情况下解决问题。可以将维护分支当做主要的问题修复分支，与master并行。
+    - ![](https://p3.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/4aed012a912044be806ef6b6f9e6e7e2?from=pc)
+
+命名约定
+- 主分支名称：master
+- 主开发分支名称：develop
+- 标签（tag）名称：v*.RELEASE，其中”*“ 为版本号，“RELEASE”大写，如：v1.0.0.RELEASE
+- 新功能开发分支名称：feature-* or feature/*，其中 “*” 为新功能简述，如：feature-item-activity-list
+- 发布分支名称：release-* or release/*，其中 * 为版本号，“release”小写，如：release-1.0.0
+- master的bug修复分支名称：hotfix-* or hotfix/*，其中 * 为bug简述，如：hotfix/item-update-bug
+
 
 ### Github-Flow 模式
 
@@ -817,9 +862,14 @@ git branch -r # 查看所有远程分支
 git branch -a # 查看存储库的所有当前分支，包括本地和远程分支。
 git branch -a --merged # 合并到当前分支的所有分支
 git checkout -b dev # 创建并切换到分支dev
+git checkout -b dev origin/dev # 创建远程dev分支轨迹版本
+
 git branch -d dev # 删除分支
 git branch -D branch_2 # 删除本地分支，即使尚未合并，这也会删除该分支！
-git push origin dev #提交后，别人才能看到分支
+
+git push origin dev # 注意：本地分支提交后，别人才能看到分支
+git push -u origin develop # 推送到服务器
+
 git checkout -- myfile #从本地仓库恢复文件（用于撤销本地修改）
 
 git checkout 
