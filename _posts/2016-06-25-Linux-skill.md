@@ -476,6 +476,69 @@ function log(){
     echo ${cur_color} "[`date "+%Y-%m-%d %H:%M:%S"`] [$level] $log_info" ${Color_Off}
 }
 ```
+
+### 随机抽奖
+
+Shell随机创建手机号码与随机抽奖：
+- 随机生成1000个以136开头的手机号码
+
+```shell
+#! usr/bin/bash
+
+# 生成的手机号码存放到指定的目录的文件
+filePath="/home/phoneNum.txt"
+
+#(())语法类似C语法的括号
+for((i=1;i<=1000;i++))
+do
+	# 取模
+	num1=$[$RANDOM%10] # $RANDOM代表随机函数，是操作系统的全局变量
+	num2=$[$RANDOM%10]
+	num3=$[$RANDOM%10]
+	num4=$[$RANDOM%10]
+	num5=$[$RANDOM%10]
+	num6=$[$RANDOM%10]
+	num7=$[$RANDOM%10]
+	num8=$[$RANDOM%10]
+	num9=$[$RANDOM%10]
+	# 将结果输到指定的文件里面
+	echo "136$num1$num2$num3num4$num5$num6$num7$num8$num9" >> $filePath
+done
+
+# 寻找第100个的手机号码
+head -100 phoneNum.txt | tail -1
+# 查看是否有重复的手机号码
+cat phoneNum.txt | sort -u|wc -l
+
+# ================
+# 抽取幸运的5位手机号码并去除已经抽取过的用户
+
+#! usr/bin/bash
+filePath="/home/phoneNum.txt"
+
+# 循环读取5位用户手机号码
+for((i=1;i<=5;i++))
+do
+	# 定位幸运观众所在行数
+	#line=`wc -l $filePath | cut -d ' ' -f1`
+  line=`wc -l $filePath | awk '{print $1}'
+	#计算幸运行
+	luck_line=$[RANDOM%line+1]
+	#取出幸运观众所在行的电话号码,-1代表是一个
+	luck_num=`head -$luck_line $filePath | tail -1` 
+	#显示到屏幕,截取后位的号码数字
+	echo "136****${luck_num:7:4}"
+	# 将抽中的手机号码放到一个文本
+	echo $luck_num >> luck.txt
+	# 将抽中的手机号码在文本删除，防止下一次又抽中
+	sed -i "/$luck_num/d" $filePath
+done
+# 查看还有多少行手机号码
+wc -l /home/phoneNum.txt 
+
+```
+
+
 ## 文本处理
 
 - grep 、sed、awk被称为linux中的"三剑客"。
