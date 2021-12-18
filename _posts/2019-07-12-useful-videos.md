@@ -38,6 +38,145 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=81499701&cid=139469096&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+- 【2021-12-18】[No excuse](https://www.bilibili.com/video/BV1Cg4y187uN)
+- 超燃励志-[精神氮泵——健身减肥必听](https://www.bilibili.com/audio/am31119050?type=6)
+  1. 01-没有借口-NO EXCUSE  南星大叔 02:52
+  2. 02-相信自己-KEEP YOUR FAITH  南星大叔 03:27
+  3. 03-坚持不懈-RISE AND GRIND  南星大叔 03:00
+  4. 04-不要放弃-DON'T QUIT NOW  南星大叔 03:14
+  5. 05-绝望之时-WHEN HOPE LOST  南星大叔 03:59
+  6. 06-志在必得-I CAN DO IT  南星大叔 04:09
+  7. 07-即刻改变-TIME TO CHANGE  南星大叔 04:02
+  8. 08-严于律己-Disciplined  南星大叔 03:23
+  9. 09-执迷不悔-OBSESSION  南星大叔 03:15
+- <iframe src="//player.bilibili.com/player.html?aid=837773988&bvid=BV1Cg4y187uN&cid=181357145&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+```shell
+# 《拒绝借口》
+No excuse
+
+# 是什么阻碍了？
+What’s stopping you?
+# 是你太累了？
+Are you too tired?
+# 没有充足的睡眠？
+Didn’t get enough sleep?
+# 没有充沛的精力？
+Don’t have enough energy?
+# 没有足够的时间？
+Don’t have enough time?
+# 是这些原因阻拦着你吗？
+Is that what’s stopping you right now?
+# 没有丰厚的财富？
+Don’t have enough money?
+# 真的如此吗？
+Is that the thing?
+# 又或者说，真正阻碍你的——就是你自己。
+Or is the thing that’s stopping you? You?
+# 借口对于编造者来说是那样的完美
+Excuse sound best to a person who’s making them up.
+# 不自怨自艾
+Stop feeling sorry for yourself.
+# 不遗憾过去
+Get off the pity potty # /ˈpɑːti/ 发狂的
+# 以悲伤和委屈博得惋惜和怜悯； /sɑːb/ 哭诉，/pəˈreɪdz/ 游行，检阅，散步
+telling everybody you’re sad and sob stories, trying to get people to show up to your pity parties and your pity parades.
+# 当你看见我坐在劳斯莱斯或是住在六星或七星酒店，过着富足的生活
+If you ever see me in a Rolls Royce, a six or 7 star hotel living my life to the fullest,
+# 不要羡慕我 
+Don’t get jealous of me.   # ass /æs/ 傻瓜，笨蛋 
+# 这都是我拼尽全力换来的
+Because I worked my ass off to get it.
+# 没有任何人能帮我
+Nobody handed me nothing.
+# 醒醒吧
+Wake your ass up.
+# 唤醒内心的野心
+Awaken the beast inside. # /biːst/ 野兽
+# 游戏开始了
+It’s game on.
+# 赛季已经到来
+It’s go season.
+# 是时候利用好自己的国家和圈子的渠道和资源了。
+It’s time for you to take advantage of the access and the resources that you have in your country and your community.
+# 你还质疑你的生活吗
+You got a problem with your life?
+# 你还不满你所处的环境吗？
+You got a problem with your environment?
+# 那就对此作出改变
+Do something about it.
+# 如果有真心想要得到的东西,就必须认真全力以赴
+If you want it, go get it.
+# 你要明白借口没有意义
+Recognize the excuses are not valid
+# 它们是虚构的存在
+They’re conjured up # /ˈkɑːndʒər/ 变魔术
+# 它们是编造出来的
+They’re fabricated # /ˈfæbrɪkeɪtɪd/ 虚构的
+# 它们是谎言
+they’re lies
+# 你要怎样停止谎言呢？
+And how do you stop the lies?
+# 你只能用真相去打败它
+You stop the lies with the truth
+# 真相就是 你还有时间去改变
+And the truth is you have time
+# 你身怀技能 你满腹学识
+you have the skill you have the knowledge 
+# 还有支持以及信念、自律,帮助你改变一切
+and the support and the willpower and the discipline to get it done #  /ˈwɪlpaʊər/ 意志力
+# 生活中所有美好的事情都源于挑战
+The fruit of everything good in life begins with a challenge.
+# 事情价值体现在了它的漫长而艰难
+Everything is uphill that’s worthwhile. #  /ˌʌpˈhɪl/ 向上的，上坡
+# 天下没有免费的午餐，好运不会无端的降临在自己身上，获得成功虽然困难重重但也不会难于登天，就是这么简单
+And it’s not going to come to you and it’s not to fall in your lap, and it’s not going to be something that, oh my gosh, it just was so simple it’s always going to be difficult. #  /ɡɑːʃ/ 上帝
+# 如果有真心想要得到的东西,就必须认真全力以赴
+If you want it, you gotten go get it.
+# 这是你的机会
+This is your chance.
+# 这是你的舞台
+This is your shot.
+# 这是你的时刻
+This is your moment.
+# 这是你的时代
+This is your time.
+# 这是你的地盘
+This is your place.
+# 这是你的机遇
+This is your opportunity.
+# 这是我的时代
+This is my time.
+# 这是我的时刻
+This is my moment.
+# 明天，后天，以及未来的每一天
+Tomorrow, tomorrow, tomorrow 
+# 根本没有明天这样的东西
+Ain’t no such thing as tomorrow 
+# 我们只有今天
+We only got today.
+# 这是你的梦想
+It’s your dream.
+# 如果你想实现它，行动起来，让梦想照进现实
+If you’re going to have it,  get your butt up and make it happen.
+# 如果你想拥有他，坚持不懈，让努力有所回报
+If you’re going to have it, rise and grind.
+# 你还有未完成的事
+You still got work to do
+# 坚守在篮球场上
+Stay on that basketball court
+# 执着于足球场上
+Stay on that football field
+# 这是磨练你的时刻
+It’s grind season homie. # /ɡraɪnd/ 摩擦
+```
+
+- [重度抑郁肥宅的自我救赎之路](https://www.bilibili.com/video/BV1xr4y1A7u5/?spm_id_from=333.788.video.desc.click)
+- 《[绝望之时](https://www.bilibili.com/video/BV16V411C7G3/?spm_id_from=333.788.video.desc.click)》
+- <iframe src="//player.bilibili.com/player.html?aid=413318212&bvid=BV16V411C7G3&cid=195045325&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- 《[志在必得](https://www.bilibili.com/video/BV1nA411Y7Ha/?spm_id_from=333.788.video.desc.click)》
+- <iframe src="//player.bilibili.com/player.html?aid=329071674&bvid=BV1nA411Y7Ha&cid=217385110&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 ## 思维哲学
 
 ### 知行合一-王阳明
