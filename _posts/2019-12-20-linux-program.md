@@ -2324,9 +2324,7 @@ int dbm_nextkey(DBM *database_descriptor);
 
 ```c
 #include <stdlib.h>
-
 #include <stdio.h>
-
 #include "mysql.h"
 
 MYSQL my_connection;
@@ -2337,12 +2335,9 @@ int main(int argc, char *argv[]) {
    int res;
 
    mysql_init(&my_connection);  
-   if (mysql_real_connect(&my_connection, "localhost", "rick", 
-                                              "secret", "foo", 0, NULL, 0)) {
+   if (mysql_real_connect(&my_connection, "localhost", "rick", "secret", "foo", 0, NULL, 0)) {
    printf("Connection success\n");
-   
    res = mysql_query(&my_connection, "SELECT childno, fname, age FROM children WHERE age > 5");
-
    if (res) {
       printf("SELECT error: %s\n", mysql_error(&my_connection));
    } else {
@@ -2357,10 +2352,8 @@ int main(int argc, char *argv[]) {
        }
        mysql_free_result(res_ptr);
       }
-
    }
    mysql_close(&my_connection);
-
    } else {
       fprintf(stderr, "Connection failed\n");
       if (mysql_errno(&my_connection)) {
@@ -2368,7 +2361,6 @@ int main(int argc, char *argv[]) {
                   mysql_errno(&my_connection), mysql_error(&my_connection));
       }
    }
-
    return EXIT_SUCCESS;
 }
 ```
@@ -2378,7 +2370,6 @@ int main(int argc, char *argv[]) {
 ### 9.2 make命令和makefile
 
 make 选项参数：
-
 - -k:make发生错误时仍然继续执行。
 - -n:即刻输出将要执行的操作而不进行执行。
 - -f:使用那个文件作为makefile文件。
@@ -2452,7 +2443,6 @@ void assert(int expression);
 ### 10.6 内存调试
 
 在一个已经分配的内存块的尾部的后面(或者在它头部的前面)写数据，就可能会破坏malloc库用于记录内存分配情况的数据结构。
-
 使用ElectricFence函数库可以使用Linux的虚拟内存保护机制来保护malloc和free所使用的内存。
 
 ### 10.6.2 valgrind
@@ -2488,13 +2478,13 @@ void assert(int expression);
 
 int system(const char *string);
 ```
+
 system运行以字符串参数的形式传递给它的命令，并等待命令的完成。命令的执行情况就如同下面的情况`sh -c string`。
 
 注意：这里system函数并不是启动气他进程的理想手段，应为它必须用一个shell来启动需要的程序。
 
 可以优先使用`exec`系列函数。
-
-exec函数可以把当前进程替换为一个新进程，新进程由path或者file参数指定。可以使用exec函数将程序的执行从一个程序切换到另外一个程序。exec函数比system函数更有效，因为在新的程序启动后，原来的程序就不再运行了。
+- exec函数可以把当前进程替换为一个新进程，新进程由path或者file参数指定。可以使用exec函数将程序的执行从一个程序切换到另外一个程序。exec函数比system函数更有效，因为在新的程序启动后，原来的程序就不再运行了。
 
 ```c++
 #include <unistd.h>
@@ -2592,8 +2582,7 @@ wait系统调用将暂停父进程直到它的子进程结束为止，这个调�
 
 ![wait信号处理](https://wangpengcheng.github.io/img/2019-09-18-20-19-14.png)
 
-```
-
+```c++
 if(pid!=0){
     int stat_val;
     pid_t child_pid;
@@ -2630,6 +2619,7 @@ linux中由(raise)表示一个信号的产生，使用术语(catch)表示接收�
 
 void (*signal(int sig, void((*func)(int))))(int);
 ```
+
 注意:这里并不推荐使用`signal()`接口，建议使用`sigaction()`函数。
 
 #### 11.4.1 发送信号
@@ -2642,10 +2632,9 @@ int kill(pid_t pid,int sig);
 
 //使用闹钟设置指定时间后运行
 unsigned int alarm(unsigned int seconds);
-
 ```
-kill函数将参数sig给定的信号发送给由参数pid给出的进程号所指定的进程，成功时返回0。错误时返回-1并设置errno变量。其类型如下：
 
+kill函数将参数sig给定的信号发送给由参数pid给出的进程号所指定的进程，成功时返回0。错误时返回-1并设置errno变量。其类型如下：
 - EINVAL:给定的信号无效。
 - EPERM:发送进程权限不够。
 - ESRCH:目标进程不存在。
@@ -2665,6 +2654,7 @@ int pause(void);
 
 int sigaction(int sig,const struct sigaction *act,struct sigaction *oact);
 ```
+
 sigaction结构定义在接收到参数sig指定的信号后应该采取的行动。该结构至少应该包括以下几个成员：
 
 ```c
@@ -2679,35 +2669,26 @@ int sa_flags //对信号处理重置的效果，必须在sa_flags成员中包含
 #include <signal.h>
 
 //将信号集中添加信号
-
 int sigaddset(sigset_t *set,int signo);
 //将信号集初始化为空
-
 int sigemptyset(sigset_t *set);
 //sigfillset将信号集初始化为包含所有已定义的信号。
-
 int sigfillset(sigset_t *set);
 //从信号集中删除信号
-
 int sigdelset(sigset_t *set,int signo);
 //判断一个给定的信号是否是一个信号集的成员。如果是就返回1，不是返回0，信号无效就返回-1并设置errno
 int sigismember(sigset_t *set,int signo);
 //信号屏蔽字的设置和检查
-
 int sigprocmask(int how,const sigset_t *set,sigset_t *oset);
 //将被阻塞的信号中停留在待处理状态的一组信号写到参数set指向的信号集合中。进程挂起自己的执行，直到信号集中的一个信号到达为止。
-
 int sigpending(sigset_t *set);
 //将进程的屏蔽字替换为由参数sigmask给出的信号集，然后挂起程序的执行。
-
 int sigsuspend(const sigset_t *sigmask);
-
 ```
 
 
 sigprocmask中how的取值如下
-
-![sigprocmask中how的取值](https://wangpengcheng.github.io/img/2019-09-18-21-14-51.png)
+- ![sigprocmask中how的取值](https://wangpengcheng.github.io/img/2019-09-18-21-14-51.png)
 
 **sigaction标志**
 
@@ -2718,16 +2699,13 @@ sigprocmask中how的取值如下
 ![linux常用信号参考](https://wangpengcheng.github.io/img/2019-09-18-21-24-33.png)
 
 引起信号异常终止信号：
-
-![引起信号异常终止信号](https://wangpengcheng.github.io/img/2019-09-18-21-25-37.png)
+- ![引起信号异常终止信号](https://wangpengcheng.github.io/img/2019-09-18-21-25-37.png)
 
 接收之后挂起的信号
-
-![接收之后挂起的信号](https://wangpengcheng.github.io/img/2019-09-18-21-26-43.png)
+- ![接收之后挂起的信号](https://wangpengcheng.github.io/img/2019-09-18-21-26-43.png)
 
 下面信号是重启被暂停的进程
-
-![重启被暂停的进程](https://wangpengcheng.github.io/img/2019-09-18-21-27-46.png)
+- ![重启被暂停的进程](https://wangpengcheng.github.io/img/2019-09-18-21-27-46.png)
 
 
 # Linux 程序设计 阅读笔记(四)
@@ -2740,8 +2718,6 @@ sigprocmask中how的取值如下
 - [Linux Kernel API](https://www.kernel.org/doc/htmldocs/kernel-api/index.html)
 - [书中代码地址](http://www.wrox.com/WileyCDA/WroxTitle/Beginning-Linux-Programming-4th-Edition.productCd-0470147628,descCd-DOWNLOAD.html)
 - [POSIX thread (pthread) libraries](https://www.cs.cmu.edu/afs/cs/academic/class/15492-f07/www/pthreads.html)
-
-
 
 ## 第 12 章 POSIX线程
 
@@ -2756,10 +2732,8 @@ sigprocmask中how的取值如下
 ```c
 #include <pthread.h>
 //创建利用函数和相关参数创建线程
-
 int pthread_create(pthread_t *thread,pthread_attr_t *attr,void *(*start_rountine)(void *),void *arg);
 //终止相关线程
-
 void pthread_exit(void *retval);
 //收集子进程信息的wait函数
 int pthread_join(pthread_t th,void **thread_return);
@@ -2769,13 +2743,9 @@ int pthread_join(pthread_t th,void **thread_return);
 
 ```c++
 #include <stdio.h>
-
 #include <unistd.h>
-
 #include <stdlib.h>
-
 #include <string.h>
-
 #include <pthread.h>
 
 void *thread_function(void *arg);
@@ -2787,7 +2757,6 @@ int main() {
     pthread_t a_thread;
     void *thread_result;
     //创建对应的函数
-
     res = pthread_create(&a_thread, NULL, thread_function, (void *)message);
     if (res != 0) {
         perror("Thread creation failed");
@@ -2818,11 +2787,8 @@ void *thread_function(void *arg) {
 
 ```c++
 #include <stdio.h>
-
 #include <unistd.h>
-
 #include <stdlib.h>
-
 #include <pthread.h>
 
 void *thread_function(void *arg);
@@ -2851,7 +2817,6 @@ int main() {
             sleep(1);//没有则不断检查，这种方式称之为忙等待
         }
     }
-
     printf("\nWaiting for thread to finish...\n");
     //等待线程完成和结束
     res = pthread_join(a_thread, &thread_result);
@@ -2875,7 +2840,6 @@ void *thread_function(void *arg) {
             sleep(1);
         }
     }
-
     sleep(3);
 }
 
@@ -2891,32 +2855,23 @@ void *thread_function(void *arg) {
 ```c++
 #include <semaphore.h>
 
-//初始化sem指向的信号量对象，设置共享量和初始值
-
+//初始化sem指向的信号量对象，设置共享量和初始
 int sem_init(sem_t *sem,int pshared,unsigned int value);
-//等待传入信号量，以原子操作的方式将信号量-1
-
+//等待传入信号量，以原子操作的方式将信号量-
 int sem_wait(sem_t *sem);
-//发射信号量,以原子操作的方式将信号量+1
-
+//发射信号量,以原子操作的方式将信号量+
 int sem_post(sem_t *sem);
 //在使用玩信号量之后，对其进行销毁
-
 int sem_destroy(sem_t *sem);
 ```
 
 信号量的简单使用
 ```c++
 #include <stdio.h>
-
-#include <unistd.h>
-
+#include <unistd.h
 #include <stdlib.h>
-
 #include <string.h>
-
 #include <pthread.h>
-
 #include <semaphore.h>
 
 void *thread_function(void *arg);
@@ -2982,34 +2937,25 @@ void *thread_function(void *arg) {
 ```c
 #include <pthread.h>
 //初始化互斥量
-
 int pthread_mutex_init(pthread_mutex_t *mutex,const pthread_mutexattr_t);
 //互斥量加锁
-
 int pthread_mutex_lock(pthread_mutex_t *mutex);
 //互斥量解锁
-
 int pthread_mutex_unlock(pthread_mutex_t *mutex);
 //互斥量销毁
-
 int pthread_mutex_destroy(pthread_mutex_t *mutex);
-
 ```
+
 注意：互斥量的属性相关值默认为fast，如果一个程序试图对一个已经加了锁的互斥量调用thread_mutex_lock程序就会被阻塞，当互斥量拥有线程被阻塞时，就会形成死锁。
 
 下面是使用的简单示例：
 
 ```c++
 #include <stdio.h>
-
 #include <unistd.h>
-
 #include <stdlib.h>
-
 #include <string.h>
-
 #include <pthread.h>
-
 #include <semaphore.h>
 
 void *thread_function(void *arg);
@@ -3039,18 +2985,14 @@ int main() {
         exit(EXIT_FAILURE);
     }
     //线程加锁
-
     pthread_mutex_lock(&work_mutex);
     //执行操作
-
     printf("Input some text. Enter 'end' to finish\n");
     //接受输入参数
-
     while(!time_to_exit) {
         fgets(work_area, WORK_SIZE, stdin);
         pthread_mutex_unlock(&work_mutex);
-        //循环等待并加锁
-
+        //循环等待并加
         while(1) {
             pthread_mutex_lock(&work_mutex);
             if (work_area[0]!='\0') {/*读到末尾直接解锁*/
@@ -3063,11 +3005,9 @@ int main() {
         }
     }
     //解锁线程
-
     pthread_mutex_unlock(&work_mutex);
     printf("\nWaiting for thread to finish...\n");
     //等待子线程结束
-
     res = pthread_join(a_thread, &thread_result);
     if (res != 0) {
         perror("Thread join failed");
@@ -3075,7 +3015,6 @@ int main() {
     }
     printf("Thread joined\n");
     //销毁信号量
-
     pthread_mutex_destroy(&work_mutex);
     exit(EXIT_SUCCESS);
 }
@@ -3083,10 +3022,8 @@ int main() {
 void *thread_function(void *arg) {
     sleep(1);
     //互斥量加锁
-
     pthread_mutex_lock(&work_mutex);
     //当检测到了end函数
-
     while(strncmp("end", work_area, 3) != 0) {
         printf("You input %d characters\n", strlen(work_area) -1);
         work_area[0] = '\0';
@@ -3119,7 +3056,6 @@ _参考链接：_ [POSIX thread (pthread) libraries](https://www.cs.cmu.edu/afs/
 #include <pthread.h>
 
 //初始化属性
-
 int pthread_attr_init(pthread_attr_t *attr);
 //设置detachedstate属性，是否可以获取另外一个线程的状态。
 int pthread_attr_setdetachstate(pthread_attr_t *attr,int detachstate);
@@ -3145,15 +3081,10 @@ int pthread_attr_getstacksize(const pthread_attr_t *attr,int *scope);
 
 ```c++
 #include <stdio.h>
-
 #include <unistd.h>
-
 #include <stdlib.h>
-
 #include <string.h>
-
 #include <pthread.h>
-
 #include <semaphore.h>
 
 void *thread_function(void *arg);
@@ -3309,14 +3240,11 @@ void *thread_function(void *arg) {
 
 ```c
 #include <pthread.h>
-//向线程发送取消信号
-
+//向线程发送取消信
 int pthread_cancel(pthread_t thread);
-//设置线程自己的取消状态,state是接受/忽略取消请求，oldstate指针用于获取先前的取消状态
-
+//设置线程自己的取消状态,state是接受/忽略取消请求，oldstate指针用于获取先前的取消状
 int pthread_setcancelstate(int state,int *oldstate);
-//进入第二个层次设置取消类型
-
+//进入第二个层次设置取消类
 int pthread_setcanceltype(int type,int *oldtype);
 ```
 
@@ -3467,11 +3395,8 @@ popen函数是将一个程序命令来作为一个新进程来启动。可以传
 
 ```c++
 #include <unistd.h>
-
 #include <stdlib.h>
-
 #include <stdio.h>
-
 #include <string.h>
 
 int main()
@@ -3543,7 +3468,6 @@ int main()
 当数据过大时可以使用buffer来设置块的大小，按照块来进行读取。关键代码如下
 
 ```c++
-
 if(read_fp!=NULL){
     char_read=fread(buffer,sizeof(char),BUFSIZ,read_fp);
     while(chars_read>0){
@@ -3662,6 +3586,7 @@ popen的本质还是使用shell进行命令的发送和接收。一次每次执�
 
 int pipe(int file_descriptor[2]);
 ```
+
 ![pipe函数](https://wangpengcheng.github.io/img/2019-09-20-14-15-04.png)
 
 使用示例：
@@ -3691,7 +3616,6 @@ int main()
             fprintf(stderr, "Fork failure");
             exit(EXIT_FAILURE);
         }
-
 // We've made sure the fork worked, so if fork_result equals zero, we're in the child process.
 
         if (fork_result == 0) {
@@ -3699,7 +3623,6 @@ int main()
             printf("Read %d bytes: %s\n", data_processed, buffer);
             exit(EXIT_SUCCESS);
         }
-
 // Otherwise, we must be the parent process.
 
         else {
@@ -3774,7 +3697,6 @@ pip4代码如下所示：
 
 ```c++
 // The 'consumer' program, pipe4.c, that reads the data is much simpler.
-
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -5115,7 +5037,6 @@ socket的主要属性如下：
 
 ```c
 #include <sys/types.h>
-
 #include <sys/socket.h>
 
 int socket(int domain,int type,int protocol);
@@ -5130,12 +5051,11 @@ domain参数可以指定的协议族如下：
 
 `AF_UNIX`地址结构由`sockaddr_un`来描述，该结构定义子啊头文件`sys/un.h`中
 
-```c
+```c++
 struct sockaddr_un
   {
     sa_family_t sun_family;
     /* Path name.  */
-
     char sun_path[];
   };
 //下面是Ubuntu16.04 中的相关定义
@@ -5144,7 +5064,6 @@ struct sockaddr_un
   {
     __SOCKADDR_COMMON (sun_);
     /* Path name.  */
-
     char sun_path[108];
   };
 ```
@@ -5153,16 +5072,17 @@ struct sockaddr_un
 
 在`AF_INET`中，地址结构由`sockaddr_in`来指定，该结构定义在头文件`netinet/in.h`中，它至少包括以下几项：
 
-```c
+```c++
 struct sockaddr_in{
     short int           sin_family;     /*AF_INET*/
     unsigned short int  sin_port;       /*Port number*/
     struct in_addr      sin_addr;       /*Internet address*/
 }
 ```
+
 ip地址结构定义如下:
 
-```c
+```c++
 typedef uint32_t in_addr_t;
 struct in_addr
   {
@@ -5179,6 +5099,7 @@ struct in_addr
 
 int bind(int socket,const struct sockaddr *address,size_t address_len);
 ```
+
 bind将address中的地址分配给与文件描述符socket关联的未命名套接字。地址长度由address_len传递。
 
 **地址的长度和格式取决于地址族**，然后bind调用一个特定的地址结构指针转换为指向通用的地址类型(struct sockaddr*);调用成功返回0，失败返回-1，并设置errno为表15-2中的一个值
@@ -5188,7 +5109,8 @@ bind将address中的地址分配给与文件描述符socket关联的未命名套
 #### 15.2.5 创建套接字队列
 
 服务器程序必须创建一个队列来保存未处理的请求。使用`listen`系统调用来完成这项工作。
-```c
+
+```c++
 int listen(int socket,int backlog)
 ```
 
@@ -5198,7 +5120,7 @@ backlog设置接收队列长度的值。Linux系统中也对可以容纳的未�
 
 服务器通过accept接受来自客户的等待队列的事件处理和连接:
 
-```c
+```c++
 int accept(int socket,struct sockaddr *address,size_t *address_len);
 ```
 
@@ -5210,7 +5132,7 @@ accept只有当排队的第一个未处理程序，试图连接到由socket参�
 
 如果等待队列为空，贼accept将会阻塞(程序将暂停)直到有客户建立连接为止。我们可以通过对套接字文件描述符设置`O_NONBLOCK`标志来改变这个行为。
 
-```c
+```c++
 int flags=fcntl(socket,F_GETFL,0);
 fcntl(socket,F_SETFL,O_NONBLOCK|flags);
 ```
@@ -5221,11 +5143,12 @@ fcntl(socket,F_SETFL,O_NONBLOCK|flags);
 
 客户端使用未命名套接字和服务器监听套接字之间建立连接的方法来连接到服务器。它们通过connect调用来完成这个工作。
 
-```c
+```c++
 #include <sys/socket.h>
 
 int connect(int socket,const struct sockaddr *address,size_t address_len);
 ```
+
 socket指定的套接字是通过socket调用获得的一个有效的文件描述符。connect调用成功返回0，失败返回-1.可能的错误代码如下：
 
 ![可能存在的错误码](https://wangpengcheng.github.io/img/2019-09-24-10-14-07.png)
@@ -5246,17 +5169,11 @@ socket指定的套接字是通过socket调用获得的一个有效的文件描�
 
 ```c++
 #include <sys/types.h>
-
 #include <sys/socket.h>
-
 #include <stdio.h>
-
 #include <netinet/in.h>
-
 #include <arpa/inet.h>
-
 #include <unistd.h>
-
 #include <stdlib.h>
 
 int main()
@@ -5267,10 +5184,8 @@ int main()
   int result;
   char ch='A';
   //为客户创建一个socket
-
   sockfd=socket(AF_INET,SOCK_STREAM,0);
   //命名套接字，与服务器保持一致
-
   address.sin_family=AF_INET;
   address.sin_addr.s_addr=inet_addr("127.0.0.1");
   address.sin_port=9734;
@@ -5284,17 +5199,11 @@ int main()
 
 ```c++
 #include <sys/types.h>
-
 #include <sys/socket.h>
-
 #include <stdio.h>
-
 #include <netinet/in.h>
-
 #include <arpa/inet.h>
-
 #include <unistd.h>
-
 #include <stdlib.h>
 
 int main()
@@ -5304,10 +5213,8 @@ int main()
   struct sockaddr_in server_address;
   struct sockaddr_in client_address;
   //创建一个未命名的套接字
-
   server_sockfd=socket(AF_INET,SOCK_STREAM,0);
   //设置套接字名字
-
   server_address.sin_family=AF_INET;
   server_address.sin_addr.s_addr=inet_addr("127.0.0.1");
   server_address.sin_port=9734;
@@ -5333,18 +5240,16 @@ int main()
 ```c
 #include <netdb.h>
 /* 查询host地址 */
-
 struct hostent *gethostbyaddr(const void *addr,size_t len,int type);
 struct hostent *gethostbyname(const char *name);
 /* 查询端口号相关信息 */
-
 struct servent *getservbyname(const char *name,const char *proto);
 struct servent *getservbyport(int port,const char *proto);
 ```
 
 返回的hostnet和event结构中至少包含一下几个成员:
 
-```c
+```c++
 struct hostent{
   char *h_name;
   char **h_aliases;
@@ -5362,15 +5267,13 @@ struct servent{
 
 要把返回的地址列表转换为正确的地址类型，并用函数`inet_ntoa`将它们从网络字节序转换为可打印的字符。函数`inet_ntoa`的定义如下。
 
-```c
+```c++
 #include <arpa/inet.h>
 //将一个intel主机地址转换为一个点四元组格式的字符串，它在失败时返回-1,
-
 char *inet_ntoa(struct in_addr in);
 
 #include <unistd.h>
 //将当前主机的名字写入name指向的字符串中。主机名以null结尾。参数namelength指定了字符串name的长度。如果主机名太长会被截断
-
 int gethostname(char *name,int namelength);
 ```
 
@@ -5378,7 +5281,6 @@ int gethostname(char *name,int namelength);
 
 ```c++
 /*  As usual, make the appropriate includes and declare the variables.  */
-
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
@@ -5392,7 +5294,6 @@ int main(int argc, char *argv[])
     struct hostent *hostinfo;
 
 /* 将host变量设置为getname程序所提供的命令行参数，或默认设置为用户主机的主机名 */
-
     if(argc == 1) {
         char myname[256];
         gethostname(myname, 255);
@@ -5402,7 +5303,6 @@ int main(int argc, char *argv[])
         host = argv[1];
 
 /* 调用gethostname,如果未找到相应的信息就报告一条错误 */
-
     hostinfo = gethostbyname(host);
     if(!hostinfo) {
         fprintf(stderr, "cannot get info for host: %s\n", host);
@@ -5410,7 +5310,6 @@ int main(int argc, char *argv[])
     }
 
 /* 显示主机名和它可能有的所有别名 */
-
     printf("results for host %s:\n", host);
     printf("Name: %s\n", hostinfo -> h_name);
     printf("Aliases:");
@@ -5520,7 +5419,7 @@ int main(int argc, char *argv[])
 
 可以使用`setsocket`函数用于控制这些选项。它的定义如下：
 
-```c
+```c++
 #include <sys/socket.h>
 
 int setsocket(int socket,int level,int option_name,const void *option_value,size_t option_len);
@@ -5536,7 +5435,7 @@ level是相关的协议等级，想要正常使用，必须设置对应的编号
 
 select系统调用允许程序同时在多个底层文件描述符上等待输入的到达。主要是对数据结构`fd_set`进行操作，它是由打开的文件描述符构成的集合。有一组定义好的宏可以来控制这个集合。
 
-```c
+```c++
 #include <sys/types.h>
 #include <sys/time.h>
 /* 将fd_set初始化为空 */
@@ -5551,7 +5450,7 @@ void FD_ISSET(int fd,fd_set *fdset);
 
 select函数可以设置一个超时来防止无限期的阻塞。这个超时值由一个timeval结构给出。这个结构定义在头文件`sys/time.h`中，它由以下几个成员组成:
 
-```c
+```c++
 struct timeval{
     time_t tv_sec; /* seconds */
     long   tv_usec; /* microseconds */
@@ -5560,7 +5459,7 @@ struct timeval{
 
 select系统调用的原型如下：
 
-```c
+```c++
 #include <sys/types.h>
 #include <sys/time.h>
 
@@ -5811,11 +5710,9 @@ int main(int argc,char *argv[])
 
 UDP关键函数如下：
 
-```c
+```c++
 /* 这里的flags参数一般被设置为0 */
-
 int sendto(int sockfd,void *buffer,size_t len,int flags,struct sockaddr *to,socklen_t tolen);
-
 int recvfrom(int sockfd,void *buffer,size_t len,int flags,struct sockaddr *from,socklent_t *fromlen);
 ```
 
@@ -5945,8 +5842,6 @@ GtkDialog是GtkWindow的一个子类，继承了其所有函数和属性：
 
 这个不需要多说了,看参考连接。。。。
 
-_参考连接：_
-
 - [Qt Documentation](https://doc.qt.io/qt-5/reference-overview.html)
 
 ## 第 18 章 Linux标准
@@ -5998,9 +5893,11 @@ make工具：
 文章主要针对GNU的make 
 
 ## GCC指令
+
 _参考链接：_ [GCC](http://gcc.gnu.org/);[GCC online documentation](https://gcc.gnu.org/onlinedocs/);[GCC C++ Command Options](https://gcc.gnu.org/onlinedocs/gcc-5.5.0/gcc/#toc-GCC-Command-Options);[GCC参数详解](https://www.runoob.com/w3cnote/gcc-parameter-detail.html)
 
 ### GCC 编译步骤
+
 _参考链接：_ [gcc程序的编译过程和链接原理](https://blog.csdn.net/czg13548930186/article/details/78331692);
 
 GCC编译分为4步；
@@ -6118,12 +6015,22 @@ GCC编译分为4步；
 
 【2021-5-12】[5分钟理解make/makefile/cmake/nmake](https://zhuanlan.zhihu.com/p/111110992)
 gcc是GNU Compiler Collection（就是GNU编译器套件），可以简单认为是编译器，编译很多种编程语言（括C、C++、Objective-C、Fortran、Java等等）。当程序只有一个源文件时，直接就可以用gcc命令编译它。可是，程序包含很多个源文件时，怎么办，总不能挨个编译吧？
-- make工具可以看成是一个智能的批处理工具，它本身并没有编译和链接的功能，而是用类似于批处理的方式—通过调用makefile文件中用户指定的命令来进行编译和链接的。
-- makefile就像一首歌的乐谱，make工具就像指挥家，指挥家根据乐谱指挥整个乐团怎么样演奏，make工具就根据makefile中的命令进行编译和链接的。makefile命令中就包含了调用gcc（也可以是别的编译器）去编译某个源文件的命令。
+- make 工具可以看成是一个智能的批处理工具，它本身并没有编译和链接的功能，而是用类似于批处理的方式—通过调用makefile文件中用户指定的命令来进行编译和链接的。
+- makefile 就像一首歌的乐谱，make工具就像指挥家，指挥家根据乐谱指挥整个乐团怎么样演奏，make工具就根据makefile中的命令进行编译和链接的。makefile命令中就包含了调用gcc（也可以是别的编译器）去编译某个源文件的命令。
   - 当工程非常大时，手写makefile非常麻烦的，换了个平台makefile又要重新修改，这时候就出现了Cmake工具。
-- cmake可以更加简单的生成makefile文件。还可以跨平台生成对应平台能用的makefile，不用再自己去修改了。
-- CMakeList.txt：cmake根据一个叫CMakeLists.txt文件（学名：组态档）去生成makefile。
 - nmake是Microsoft Visual Studio中的附带命令，需要安装VS，实际上可以说相当于linux的make
+- **cmake** 可以更加简单的生成makefile文件。还可以跨平台生成对应平台能用的makefile，不用再自己去修改了。
+  - ![](http://www.hahack.com/images/cmake/cmake100.png)
+  - 几种 Make 工具，例如 GNU **Make** ，QT 的 **qmake** ，微软的 MS **nmake**，BSD Make（**pmake**），Makepp，等等。这些 Make 工具遵循着不同的规范和标准，所执行的 Makefile 格式也千差万别。这样就带来了一个严峻的问题：如果软件想**跨平台**，必须要保证能够在不同平台编译。而如果使用上面的 Make 工具，就得为每一种标准写一次 Makefile ，这将是一件让人抓狂的工作。
+  - CMake可以跨平台生成makefile的工具：它首先允许开发者编写一种平台无关的 **CMakeList.txt** 文件来定制整个编译流程，然后再根据目标用户的平台进一步生成所需的本地化 **Makefile** 和工程文件，如 Unix 的 Makefile 或 Windows 的 Visual Studio 工程。从而做到“Write once, run everywhere”。显然，CMake 是一个比上述几种 make 更高级的编译配置工具。一些使用 CMake 作为项目架构系统的知名开源项目有 VTK、ITK、KDE、OpenCV、OSG 等
+  - CMakeList.txt：cmake根据一个叫CMakeLists.txt文件（学名：组态档）去生成makefile。
+  
+linux 平台下使用 CMake 生成 Makefile 并编译的流程如下：
+- 编写 CMake 配置文件 CMakeLists.txt 。
+- 执行命令 cmake PATH 或者 ccmake PATH 生成 Makefile, 其中， PATH 是 CMakeLists.txt 所在的目录。 ccmake 和 cmake 的区别在于前者提供了一个交互式的界面。                        
+- 使用 make 命令进行编译。
+
+[cmake 语法](https://www.cnblogs.com/taolusi/p/9239561.html)
 
 ![](https://pic3.zhimg.com/80/v2-497f031761c929e5c036138f938508c6_720w.jpg)
 
