@@ -233,6 +233,34 @@ print "hello"
 
 ![](https://images2017.cnblogs.com/blog/1221855/201708/1221855-20170819190958896-1029926791.png)
 
+【2021-12-21】多图排列：[Markdwon中多张图片的并排显示](https://blog.csdn.net/weixin_41010198/article/details/86639739)
+
+```html
+<!-- 居中并排 -->
+<center class="half">
+<img src="https://img-blog.csdnimg.cn/2019012511060017.png" width=00/>
+<img src="https://img-blog.csdnimg.cn/2019012511060017.png" width=200/>
+</center>
+<!-- 左对齐并排 -->
+<figure>
+<img src="https://img-blog.csdnimg.cn/2019012511060017.png" width=200/>
+<img src="https://img-blog.csdnimg.cn/2019012511060017.png" width=200/>
+<img src="https://img-blog.csdnimg.cn/2019012511060017.png" width=200/>
+</figure>
+<!-- 表格显示+图注 -->
+<table>
+    <tr>
+        <td ><center><img src="https://img-blog.csdn.net/20180731150122598?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMzODI2NTY0/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" >图1  范冰冰 </center></td>
+        <td ><center><img src="https://img-blog.csdn.net/20180731150122598?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMzODI2NTY0/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70"  >图2 范冰冰</center></td>
+    </tr>
+    <tr>
+        <td><center><img src="https://img-blog.csdn.net/20180731150144421?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMzODI2NTY0/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" >图3 高圆圆</center></td>
+        <td ><center><img src="https://img-blog.csdn.net/20180731150144421?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMzODI2NTY0/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70"  >图4 高圆圆</center> </td>
+    </tr>
+</table>
+```
+
+
 
 ### 公式嵌入
 
