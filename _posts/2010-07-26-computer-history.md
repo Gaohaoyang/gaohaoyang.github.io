@@ -23,16 +23,16 @@ mathjax: true
 
 ![](https://p5.toutiaoimg.com/img/tos-cn-i-0022/d2916c97afc94b9daa01bdaca34759a0~tplv-obj:1575:2227.image?from=post)
 
-# [计算机编程简史](https://coolshell.cn/articles/2724.html)
+# 计算机编程史
+
+[计算机编程简史](https://coolshell.cn/articles/2724.html)
 
 - 一张经典的图揭示计算机发展历史
 - 可以看到，其中很大一部分人都和Unix有着不解之缘
-   - 参见《[Unix传奇上篇](https://coolshell.cn/articles/2322.html)，[Unix传奇下篇](https://coolshell.cn/articles/2324.html)》
+  - 参见《[Unix传奇上篇](https://coolshell.cn/articles/2322.html)，[Unix传奇下篇](https://coolshell.cn/articles/2324.html)》
  
 *   [英文原版](http://www.smashingmagazine.com/2010/06/06/designing-the-world-of-programming-infographic/)
 *   [中文翻译版](http://www.mazingtech.com/cn/list.aspx/News/1/%E5%9B%BE%E8%AF%B4%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BC%96%E7%A8%8B%E7%AE%80%E5%8F%B2)
-
----
 
 [![](https://coolshell.cn/wp-content/uploads/2010/07/aboutprogramming04.eng_-409x1024.jpg "计算机编程简史图（英文版） ")](https://coolshell.cn/wp-content/uploads/2010/07/aboutprogramming04.eng_.jpg)
  
@@ -43,6 +43,7 @@ mathjax: true
 计算机编程简史图（中文版）
 
 ## 计算机之父
+
 - “计算机之父”这种笼统的称谓没有明确的结果。你可以认为是图灵，也可以认为是冯·诺依曼，你认为是谁就是谁。
 - 非要叫的话可以是：
    - `巴贝奇`Charles Babbage——**通用计算机**之父
@@ -395,22 +396,71 @@ X86电脑因考虑要适应各种应用的需求，其发展思路是：性能+�
 
 # 编程语言
 
-## 计算机课程
+[编程语言分类与关系](https://blog.csdn.net/coding_dong/article/details/80920571)
 
-计算机速成课 [Crash Course Computer Science](https://thecrashcourse.com/courses/computerscience)，Carrie Anne Philbin在本课程以入门级大学材料和AP计算机科学原理指南为基础。 笔记：[CPU中的程序是怎么运行起来的](https://blog.csdn.net/wgp2hpp/article/details/110790031)
-1. 概述计算机的历史以及为我们提供现代计算机的设计决策
-2. 描述编程和软件的基本要素
-3. 确定计算机硬件的基本组件及其作用
-4. 描述如何使用计算机以及计算机如何随着时间演变
-5. 了解计算机的普及程度以及
+## 编程语言大全
 
-[Youtube地址](https://www.youtube.com/playlist?list=PL8dPuuaLjXtNlUrzyH5r6jN9ulIgZBpdo)
+### 语言汇总
 
-<iframe src="//player.bilibili.com/player.html?aid=457294840&bvid=BV145411j7aH&cid=242822115&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+- TIOBE 公司，每月会发布一版编程语言的流行度[排行榜](https://www.tiobe.com/tiobe-index/)
+- 语言类型分布图：[知乎](https://www.zhihu.com/question/19918532)
+  - ![img](https://img-blog.csdn.net/20180705132612202?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NvZGluZ19kb25n/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+- [一图看懂编程语言分类](https://blog.csdn.net/acelit/article/details/62466679)
+  - ![img](https://img-blog.csdn.net/20170316225437760)
+- 各语言[关系图谱](https://exploring-data.com/vis/programming-languages-influence-network/)：（可交互）
+- 国外有一篇对主流编程语言进行优劣点评的文章《[These Modern Programming Languages Will Make You Suffer](https://betterprogramming.pub/modern-languages-suck-ad21cbc8a57c)》，非常精彩，强烈建议看一下。对其中 Meta Language 部分的翻译，见 《[一文解决现代编程语言选择困难：响应式编程](https://www.infoq.cn/article/zCMypl8ZzgT9U60sbZ9x)》
+- 从计算机最底层的硬件开始，按照贴近硬件的程度，主流编程语言的层次依赖关系图
+  - ![img](https://static001.geekbang.org/infoq/d3/d3cf643a29e9f428cc414994660ab0e4.jpeg?x-oss-process=image/resize,p_80/auto-orient,1)
+  - C 语言在计算机技术中有其它任何高级语言不可替代的作用。所谓 “0/1 生汇编，汇编生 C，C 生万物，乃编程之本”，任何想立志学好计算机的人都不可能跨过 C 语言。
+  - C 语言是面向**内存**的编程语言，用 C 编程的时候，需要知道每个数据在内存中样子，是直接在和计算机对话的。而其它语言，都是做各种各样的封装，屏蔽掉了底层的各种概念，让你都不知道计算机是怎么工作的。
+  - 知乎上有人给了一个比喻：如果不会 C 语言，以为自己学会了编程，其实嘛，在“编程”这个“城市”里是没有买“房子”的，没有房子就没有门，说白了，就是没入门，也就是门外汉。
+  - 系统地学习 C 语言，在实际产品研发中大规模使用 C 语言，会使你深刻掌握计算机底层的原理与机制，这才是是否能成为“牛”人的根本所在。
+- [九种编程语言大对比（图文版）](https://blog.csdn.net/kymdidicom/article/details/113449578)，9张信息图囊括了九种主流编程语言：Python、Java、C、C++、JavaScript、C#、Ruby、PHP以及Objective-C。对于每种编程语言，大家都能够看到由其打造的顶级应用成果，相关职位的平均薪酬（美国）以及该语言的优势与弊端。
+
+### 发展历史
+
+[计算机编程语言发展史](https://www.cnblogs.com/ambitious-to-49/p/10146437.html)
+
+主体脉络：**机器**语言 -> **汇编**语言 -> **高级**语言
+- **机器**语言：最初的计算机所使用的是由“0”和“1”组成的二进制数，二进制是计算机的语言的基础。计算机发明之初，计算机只能被少部分人使用，人  们需要用0、1组成的指令序列交由计算机执行，对于机器语言的使用与普及都是很令人头疼的问题。对于程序的移植能力几乎没有，从而时间成本，人力成本十分昂贵。但机器语言也不是没有优势，由于这种语言是直接对计算机硬件进行操作，所以在特定型号的计算机上面，运算效率也是很高的，机器语言的出 现对于未来的计算机语言发展起到了很好的推动作用，所以机器语言也是第一代计算机语言。
+- **汇编**语言：汇编语言是在机器语言的基础上诞生的一门语言，用一些简洁的英文字母、符号串来替代一个特定的指令的二进制串，这也提高了语言的记忆性和识别性。对于程序的开发与维护起到了积极作用。汇编语言同样也是直接对硬件进行操作，这样依然局限了它的移植性。但是使用汇编语言针对计算机特定硬件而编制的汇编语言程序，对于计算机硬件的功能和特长的发挥已有了很大进步，它精炼而质量高，所以至今仍是一种常用的程序开发语言。
+- **高级**语言：在与计算机的不断交流中，人们对计算机程序的移植性需求不断提高，此时急需要一种不依赖于特定型号的计算机的语言，用这种语言编写的程序能在在各种平台都正常运行。从最初的语言诞生至今，已经相继出现了几百种语言。高级语言的发展也从最初的结构化语言发展成为面向过程语言设计和面向对象语言设计。面向过程语言设计的代表有：C语言，Fortran，cobol，pascal，ada等等一系列语言，而面向对象语言设计的代表则为：java, c++,c#等。对于面向过程的程序来说，执行顺序是流水线似的，在一个模块被执行完成前，人们不能干别的事，也无法动态地改变程序的执行方向，这恰恰与人们的日常处理事情的方式相矛盾。而对于面相对象的程序设计来说，很好的将事物象的部分抽取归类，各个累与模块之间能相互组合，完成特定的功能，同时又能重复使用。对使用者的技术要求也相对降低。
+
+计算机编程语言的发展史：**机器**语言 -> **汇编**语言 -> **高级**语言
+- 1940s，产生了真正意义上的电子计算机，这个时期的语言由于内存和计算能力的有限，都是使用硬件相关的**汇编**语言；
+- 1950s~1960s，随着电子技术的进步，计算机进入大型机时代，一些**高级**语言被逐渐开发出来主要用于系统级编程和数学计算，
+  - Fortran（1950s由IBM团队发明的数学计算语言），
+  - COBOL（1950s由IBM等行业领袖推行的金融、商务系统开发语言），
+  - LISP（用于人工智能领域，主要的数据结构是Linked List，全名为List Process语言，引入了很多先进的特性如递归、动态类型、自动内存管理等特性）
+  - ALGOL（用于算法描述、学术领域，引入嵌套结构，语法范围等，很大的影响了BPCL，B，PASCAL等语言
+  - Basic（最早是为给非科学领域的学生所编写，Microsoft VB的前身）
+- 1970s，产生了C语言和一些早期的**面向对象**编程语言
+  - C（1970s由Dennis Ritchie和Brian Kernighan发明的为DEC机开发的系统编程语言，前身是BPCL，B语言）
+  - Simula（第一个支持面向对象的编程语言）
+  - SmallTalk（第一个完整实现面向对象特性的编程语言）
+- 1980s，向PC时代过渡，语言特性的合并、优化、发展
+  - C++（综合了SmallTalk面向对象特性和C语言语法，最为广泛应用的面向对象语言之一）
+  - MATLAB（工业领域，工程计算语言）
+  - Objective-C（iOS编程语言，已经是Top5的语言之一）
+  - Erlang（多重范式编程语言，函数式、并发式、分布式，80年代由爱立信发明用于通信网络编程，现已广泛应用于互联网高并发分布式计算领域，最有名的作品
+  - 括CouchDB/RabbitMQ）
+  - Perl（源于Unix脚本的动态语言，初衷是为了使报告更容易处理，借鉴了C/sh/AWK和SED）
+  - Tcl（曾经是很流行的测试脚本语言，现在已经没落）
+- 1990s，PC时代，互联网时代萌芽，产生了很多动态语言和可视化编程集成环境IDE
+  - Windows由于垄断PC市场，其基于VC/VB的桌面应用开发曾经是客户端开发技术的主流，随之而来催生了大量的基于Windows SDK客户端应用，MFC是其中最为知名的一个C++类库实现 Python/Ruby/Lua/PHP/JS
+  - Java（发展为3个体系，J2SE/J2EE/J2ME，J2EE包含一些企业特性如JDBC, JPA, JTA/JMS/EJB，J2ME是移动版本）
+  - Visual Basic/Visual C++/Delphi（Object Pascal）/Power Builder
+  - Javascript（浏览器客户端脚本，Netscape发明，包含ECMAScript核心脚本, DOM文档对象模型, BOM浏览器对象模型三部分）
+- 2000s~现在, 互联网/移动互联网时代，C/S模式进化为B/S模式，Java/PHP/.Net大行其道，并行计算/分布式计算越来越重要
+  - ActionScript（Adobe公司发明，面向对象的Flash开发语言）
+  - C#/Visual Basic.Net
+  - Groovy（由VMVare支持，基于Java平台的动态语言，支持元数据编程Metaprogramming，动态扩展对象数据，如反射，
+- 还比如范型编程（如C++的STL，最早版本由HP实现）能为语言提供运行时再确定的动态类型特性，可以大大简化编码）
+  - Go （C语言之父发明的并行计算语言）
+  - Node.js（服务器端的JS运行环境，Js语言在服务器端的延伸，具有单线程，高并发的特性）
 
 
-
-## 语言
+### Python太低级？
 
 - 各种编程语言之间确实有高低级之分，但不是培训班 Tony 老师告诉的高低级。 
   - ADD %EAX, 1 叫做**汇编**语言，是低级语言，而 Python 和 C++ 则同属于**高级**语言范畴。
@@ -428,6 +478,97 @@ X86电脑因考虑要适应各种应用的需求，其发展思路是：性能+�
 - 参考
   - 【2021-3-14】[Python太低级，我选 C++？码农带你揭穿少儿编程的骗局](https://www.toutiao.com/i6921532950840476174)
 
+## 编译型 vs 解释型
+
+编译型语言和解释型语言
+- 计算机不能直接的理解**高级语言**，只能直接理解**机器语言**，所以必须要把高级语言翻译成机器语言，计算机才能执行高级语言的编写的程序。翻译的方式有两种，一个是**编译**，一个是**解释**。两种方式只是翻译的**时间**不同。
+
+### 编译型
+
+编译型语言：
+- 需通过**编译器**（compiler）将源代码编译成机器码，之后才能执行的语言。一般需经过**编译**（compile）、**链接**（linker）这两个步骤。
+  - ![img](https://img-blog.csdn.net/20180705132835717?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NvZGluZ19kb25n/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+- 编译是把源代码编译成机器码，链接是把各个模块的机器码和依赖库串连起来生成可执行文件。编译和执行是分开的，但是**不能跨平台**。
+- 优点：
+  - 编译器一般会有预编译的过程对代码进行优化。因为编译只做一次，运行时不需要编译，所以编译型语言的程序**执行效率高**。可以脱离语言环境独立运行。
+- 缺点：
+  - 编译之后如果需要修改就需要整个模块重新编译。编译的时候根据对应的运行环境生成机器码，不同的操作系统之间移植就会有问题，需要根据运行的操作系统环境编译不同的可执行文件。
+- 代表语言：C、C++、Pascal、Object-C、swift等
+
+
+### 解释型
+
+解释型语言
+- 解释性语言的程序不需要编译，相比编译型语言省了道工序，解释性语言在运行程序的时候才逐行翻译。每一个语句都是执行的时候才能翻译。这样解释性语言每执行一次要翻译一次，**效率较低**。
+  - ![img](https://img-blog.csdn.net/20180705132541162?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NvZGluZ19kb25n/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+- 优点：
+  - 有良好的平台兼容性，在任何环境中都可以运行，前提是安装了解释器（虚拟机）。
+  - 灵活，修改代码的时候直接修改就可以，可以快速部署，不用停机维护。
+- 缺点：
+  - 每次运行的时候都要解释一遍，性能上不如编译型语言。
+- 代表语言：JavaScript、Python、Erlang、PHP、Perl、Ruby
+
+### 混合型
+
+混合型语言
+- 混合型语言也叫**半编译型**语言。比如java、C#，C#在编译的时候不是直接编译成机器码而是**中间码**，.NET平台提供了中间语言运行库运行中间码，中间语言运行库类似于**Java虚拟机**。.net在编译成IL代码后，保存在dll中，首次运行时由JIT在编译成机器码缓存在内存中，下次直接执行。
+  - ![img](https://img-blog.csdn.net/20180705132554135?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NvZGluZ19kb25n/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+- Java解释器 采用生成与系统无关的字节代码指令技术。也就是说，在任何不同的操作系统上，只要正确安装了java运行系统，就有了编写调试java程序的平台，在分布式应用中，java的这个特点使同一个java程序能在不同的系统上运行，从而提高了软件生产效率。可移植性是跨平台特性的一个延伸，即具有了跨平台性，就保证了可移植性。java程序、java类库、java编译器、java系统都具有可移植性。
+- 另外有一个特殊的情况，正常情况下JavaScript属于解释性语言，V8引擎是被设计用来提高网页浏览器内部JavaScript执行的性能，为了提高性能，v8会把js代码转换为高效的机器码，而不在是依赖于解释器去执行。v8引入了JIT在运行时把js代码进行转换为机器码。这里的主要区别在于V8不生成字节码或任何中间代码。这里的特殊之处在于JIT做代码优化(同时生成编译版本)；解释型语言无法做到这些。
+
+## 强类型语言和弱类型语言
+
+### 强类型语言
+
+强类型语言，一旦一个变量被指定了某个数据类型，如果不经过强制类型转换，那么它就永远是这个数据类型。你不能把一个整形变量当成一个字符串来处理。
+- 主要语言：Java、C#、Python、Object-C、Ruby
+
+### 弱类型语言
+
+数据类型可以被忽略，一个变量可以赋不同数据类型的值。一旦给一个整型变量a赋一个字符串值，那么a就变成字符类型。
+- 主要语言：JavaScript、PHP、C、C++（C和C++有争议，但是确实可以给一个字符变量赋整形值，可能初衷是强类型，形态上接近弱类型）
+
+
+## 动态和静态
+
+主要针对点是：运行时是否能够改变代码结构。
+
+注意：
+- 通常情况下**解释型**语言是**动态**类型语言，**编译型**语言是**静态**类型语言。但也不全是
+  - swift是编译型语言但是它也是动态类型语言
+  - C#和Java是解释型语言也是静态类型语言。
+
+### 动态结构语言
+
+是一类在运行时可以改变其结构的语言：例如新的函数、对象、甚至代码可以被引进，已有的函数可以被删除或是其他结构上的变化。通俗点说就是在运行时代码可以根据某些条件改变自身结构。
+- 主要动态语言：Object-C、C#、JavaScript、PHP、Python、Erlang。
+
+对数据类型检查的时间
+- 动态语言是在运行时确定数据类型的语言。变量使用之前不需要类型声明，通常变量的类型是被赋值的那个值的类型。
+- 主要语言：Python、Ruby、Erlang、JavaScript、swift、PHP、SQL、Perl。
+
+### 静态结构语言
+
+与动态语言相对应的，运行时结构不可变的语言就是静态语言。
+- 如Java、C、C++。
+
+对数据类型检查的时间
+- 静态语言是在编译时变量的数据类型即可确定的语言，多数静态类型语言要求在使用变量之前必须声明数据类型。 
+- 主要语言：C、C++、C#、Java、Object-C
+
+
+## 计算机课程
+
+计算机速成课 [Crash Course Computer Science](https://thecrashcourse.com/courses/computerscience)，Carrie Anne Philbin在本课程以入门级大学材料和AP计算机科学原理指南为基础。 笔记：[CPU中的程序是怎么运行起来的](https://blog.csdn.net/wgp2hpp/article/details/110790031)
+1. 概述计算机的历史以及为我们提供现代计算机的设计决策
+2. 描述编程和软件的基本要素
+3. 确定计算机硬件的基本组件及其作用
+4. 描述如何使用计算机以及计算机如何随着时间演变
+5. 了解计算机的普及程度以及
+
+[Youtube地址](https://www.youtube.com/playlist?list=PL8dPuuaLjXtNlUrzyH5r6jN9ulIgZBpdo)
+
+<iframe src="//player.bilibili.com/player.html?aid=457294840&bvid=BV145411j7aH&cid=242822115&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
 ## 代码如何被CPU执行
 
