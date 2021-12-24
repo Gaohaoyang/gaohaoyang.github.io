@@ -3,7 +3,7 @@ layout: post
 title:  "语音识别-Voice Detection"
 date:   2020-09-17 19:43:00
 categories: 深度学习
-tags: 语音识别 NLP ASR TTS 情感计算 声纹识别 说话人识别  直播 webrtc 智能外呼 智能客服 智能家居 手语合成 全双工 通信
+tags: 语音识别 NLP ASR TTS 情感计算 声纹识别 说话人识别  直播 webrtc 智能外呼 智能客服 智能家居 手语合成 全双工 通信 paddle
 excerpt: 语音识别技术笔记
 author: 鹤啸九天
 mathjax: true
@@ -14,6 +14,7 @@ mathjax: true
 
 # 总结
 
+- 【2021-12-24】百度paddle，[一行代码搞定中英语音识别+语音合成](https://mp.weixin.qq.com/s/h-7Z50ifeYvss44FQSPG7g)，代码库[paddlespeech](https://github.com/PaddlePaddle/PaddleSpeech)
 - 【2021-11-3】语音数据类创业公司**爱数智慧**：[女科学家创业：曾花300天整数据、被通知立刻搬家，如今她为超100家AI企业输送“原油”](https://mp.weixin.qq.com/s/j3bB2Jtzisd0HwkgqEfHfQ)
 - 语音识别系统框架 —— 参考：[中科院横评了 8 款主流智能音箱，百度智能音箱各项评测数据排名第一](https://zhuanlan.zhihu.com/p/96729745)
   - 自动语音识别技术（ASR）将语音信号转换为文字或者二进制代码、字符序列等能让电脑识别的模式。语音识别系统由：语音信号处理和特征提取、声学模型、语言模型和解码搜索组成。其中语音信号处理和特征提取可以看成语音识别系统的前端，声学模型、语言模型和解码作为系统的后端
