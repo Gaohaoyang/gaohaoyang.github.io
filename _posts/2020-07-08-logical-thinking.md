@@ -57,7 +57,7 @@ mathjax: true
 |---|---|---|-------|
 |基本归因错误|经常根据个性或者性格来定义别人，但会用情境因素帮自己开脱|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F33b5ff89j00r4h6uw000ad2005t008fg005t008f.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |Sally上课迟到，肯定是她懒；你自己迟到，就是因为早上太忙乱了|
 |自私偏见|失败总是有原因的，但成功全靠自己|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F179a41a4j00r4h6ux000ad2005r008hg005r008h.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |得奖是因为自己努力工作，而不是靠别人的帮助和运气。但如果考试不及格，只是因为睡眠不足而已|
-|自私偏见|失败总是有原因的，但成功全靠自己||得奖是因为自己努力工作，而不是靠别人的帮助和运气。但如果考试不及格，只是因为睡眠不足而已|
+|自私偏见|失败总是有原因的，但成功全靠自己|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F179a41a4j00r4h6ux000ad2005r008hg005r008h.jpg&thumbnail=650x2147483647&quality=80&type=jpg)|得奖是因为自己努力工作，而不是靠别人的帮助和运气。但如果考试不及格，只是因为睡眠不足而已|
 |组内偏爱|我们会更喜欢圈子内，而不是圈子外的人|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Fbb628b6fj00r4h6ux0009d2005v008fg005v008f.jpg&thumbnail=650x2147483647&quality=80&type=jpg)|Francis跟你一个教堂，所以你喜欢他多过Sally|
 |从众效应|随着越来越多的人接收到某些理念、时尚和信仰，这些理念的影响也会随之壮大|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F9b1142c7j00r4h6ux0008d2005t008eg005t008e.jpg&thumbnail=650x2147483647&quality=80&type=jpg)|Sally觉得指尖陀螺对孩子挺好的，Francis也这么觉得|
 |群体思维|人们更希望与团体能保持一致与和谐，为了尽量减少冲突，偶尔会做出一些不合理的决定|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Fbdef0888j00r4h6ux000bd2005r008jg005r008j.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |Sally想买冰淇淋，Francis想买T恤，所以你最终建议买印有冰淇淋图案的T恤|
