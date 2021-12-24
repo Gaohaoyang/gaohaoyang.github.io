@@ -38,13 +38,84 @@ mathjax: true
   - 可以尝试纠正写作错误，但不必惋惜语言退化。
   - 可以经常提醒自己为什么要努力追求良好写作风格，因为要传播思想，让世界更美丽。
 
-# 认知论、方法论
+## 认知论、方法论
 
 【2021-6-8】[硅谷王川](https://www.toutiao.com/w/i1701746579563528)：认识论，方法论这些东西确实非常重要。
 - 不懂**认识论**的时候，关注的问题是，张三的观点是不是正确的? 张三是不是 SB? 然后浪费大量时间去和观点不同的人争吵。
 - 重视**认识论**以后，关注的问题是，张三为什么会有这样的观点? 什么客观条件下，张三可能改变他的观点? 什么情况下，他根本不可能改变?
 - 不懂**方法论**的时候，关注的问题是，如何多块好省的达到目的。
 - 意识到**方法论**重要性的时候，关注的问题是，什么条件下，可以让自己的输入和输出效率提高更快，更有效。为什么自己会有这样的诉求和目的，阻挡我达到这个目的的最大瓶颈和障碍是什么，我是否可以通过别的地方建立的底层的优势，使这些障碍变得无关紧要。
+
+## 50个认知偏差
+
+[马斯克忽然在推上发了个“50种从小就该学的认知偏差”](http://www.huogua.net/a/46683)
+- ![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F5e36f8bcj00r4h6uw00end200q602fog00q602fo.jpg&thumbnail=650x2147483647&quality=80&type=jpg)
+- ![](https://p6.toutiaoimg.com/img/tos-cn-i-qvj2lq49k0/198ac362cdb84a459b76399cbe156e49~tplv-obj:1080:3618.image?from=post)
+
+
+|认知偏差|解释|图解|示例|
+|---|---|---|-------|
+|基本归因错误|经常根据个性或者性格来定义别人，但会用情境因素帮自己开脱|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F33b5ff89j00r4h6uw000ad2005t008fg005t008f.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |Sally上课迟到，肯定是她懒；你自己迟到，就是因为早上太忙乱了|
+|自私偏见|失败总是有原因的，但成功全靠自己|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F179a41a4j00r4h6ux000ad2005r008hg005r008h.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |得奖是因为自己努力工作，而不是靠别人的帮助和运气。但如果考试不及格，只是因为睡眠不足而已|
+|自私偏见|失败总是有原因的，但成功全靠自己||得奖是因为自己努力工作，而不是靠别人的帮助和运气。但如果考试不及格，只是因为睡眠不足而已|
+|组内偏爱|我们会更喜欢圈子内，而不是圈子外的人|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Fbb628b6fj00r4h6ux0009d2005v008fg005v008f.jpg&thumbnail=650x2147483647&quality=80&type=jpg)|Francis跟你一个教堂，所以你喜欢他多过Sally|
+|从众效应|随着越来越多的人接收到某些理念、时尚和信仰，这些理念的影响也会随之壮大|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F9b1142c7j00r4h6ux0008d2005t008eg005t008e.jpg&thumbnail=650x2147483647&quality=80&type=jpg)|Sally觉得指尖陀螺对孩子挺好的，Francis也这么觉得|
+|群体思维|人们更希望与团体能保持一致与和谐，为了尽量减少冲突，偶尔会做出一些不合理的决定|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Fbdef0888j00r4h6ux000bd2005r008jg005r008j.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |Sally想买冰淇淋，Francis想买T恤，所以你最终建议买印有冰淇淋图案的T恤|
+|光环效应|如果你认为一个人有积极的特质，这种积极印象就会辐射到那个人其它的特质当中（同样适用于负面特质）|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Fe2b6f4f3j00r4h6ux0009d2005v008ig005v008i.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |Taylor这么可爱，她肯定一点也不刻薄！|
+|道德运气|一个更好的结果会提高人们对其道德的评价，反之亦然|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Fb426e609j00r4h6ux000ad2005u008dg005u008d.jpg&thumbnail=650x2147483647&quality=80&type=jpg) |XX文化赢得了XX之争，是因为他们比输掉的人更有德行|
+|错误共识|现实中支持我们观点的人，要比我们想象中的少|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F80992d75j00r4h6uy0009d2005u008bg005u008b.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |“所有人都这么想！”|
+|知识的诅咒|一旦我们知道了某件事，就很容易假设其他人也同样知道这件事|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Fcf5ac67cj00r4h6uy0009d2005t008dg005t008d.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |Alice是一名教师，她很难理解新同学们看事情的角度。|
+|聚光灯效应|我们会高估人们对我们的行为和外表的关注程度|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Fe94f6d08j00r4h6uy0009d2005s008fg005s008f.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |Sally很担心大家会注意到她的冰淇淋T恤有多丑|
+|可用性启发式|判断时通常都依赖于脑海中出现的最直观的例子|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F8fe9d2f8j00r4h6uy0008d2005r008cg005r008c.jpg&thumbnail=650x2147483647&quality=80&type=jpg) |选择商店时，你通常会选择最近看到过广告的那家|
+|防御性归因|一件事故中，目击者会隐秘地担心自己也受到同样的指责，如果目击者与受害者的经历更相似，他们就会更少地责怪受害者，转而去攻击加害者。反之亦然|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Fdfc4ac02j00r4h6uz000dd2005r0089g005r0089.jpg&thumbnail=650x2147483647&quality=80&type=jpg)|ally等绿灯时一直在车里玩手机，结果被追尾了。目击事故的Greg也有开车发短信的习惯。所以他下了车，对撞了Sally的人大吼大叫|
+|世界公正假设|人们倾向于相信世界是公正的；因此，我们会认为出现不公正的事是有原因的|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F56653128j00r4h6uz000bd2005r008hg005r008h.jpg&thumbnail=650x2147483647&quality=80&type=jpg) |“Sally的钱包被偷了，看，她总因为T恤的事批评Francis，遭报应了吧。”|
+|朴素现实主义|我们习惯相信自己观察到的是客观事实，而其他人是不理性，不知情的或者有偏见的。|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F15266a02j00r4h6uz0008d2005s008ig005s008i.jpg&thumbnail=650x2147483647&quality=80&type=jpg) |“我看到了这个世界的真面目，其他人都很蠢”|
+|朴素犬儒主义|相信自己观察到的是客观事实，而其他人比他们表现出来的还要更加以自我为中心。|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F741534e2j00r4h6uz000bd2005r008dg005r008d.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |“这人对我好的唯一原因，肯定是想从我这得到点什么。”|
+|福勒效应（又名巴纳姆效应）|很容易接受一些含混不清，用途广泛的词来形容自己的性格|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F632bb374j00r4h6uz0009d2005r008gg005r008g.jpg&thumbnail=650x2147483647&quality=80&type=jpg)|“这个星座指南真是太准了!”|
+|邓宁·克鲁格效应|你知道的越少就越自信，知道的越多就越谦虚|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Ffd9ad9c5j00r4h6uz000ad2005r008eg005r008e.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |Francis自信地向大家保证，冰淇淋里绝对没有海带。海带也没有被用于乳制品行业|
+|锚定效应|做决定时非常依赖第一眼信息|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Fba0f906ej00r4h6v00007d2005t008cg005t008c.jpg&thumbnail=650x2147483647&quality=80&type=jpg)|“这东西写着打五折？那肯定老便宜了。”|
+|自动化系统偏差|很依赖自动化系统，甚至有时候会过于相信，导致真正正确的决策被修改了|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Faa7b620dj00r4h6v00009d2005q008cg005q008c.jpg&thumbnail=650x2147483647&quality=80&type=jpg)|你的手机会自动把“its”改为“it`s”，所以你会以为这是正确的用法|
+|谷歌效应（又名数码健忘症）|经常会忘记在搜索引擎中很容易找到的信息。|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F3fbc66f6j00r4h6v10009d2005v008fg005v008f.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |“那个喜剧片里的演员叫啥来着？？我都查了8次了”|
+|阻抗理论|自由受到限制时，我们会产生不快，所以会做出一些被禁止的行为来释放情绪|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F89ea97adj00r4h6v1000ad20062008xg0062008x.jpg&thumbnail=650x2147483647&quality=80&type=jpg) |老师和家长越让孩子去做作业，他越是不肯去|
+|确认偏差|我们倾向于找到并记住能证实我们想法的信息|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Fd1e16be2j00r4h6v10009d20065008ug0065008u.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |用不完整的证据得出一个阴谋论，却忽略那些反例|
+|逆火效应|当一个错误的信息被更正时，如果更正的信息与人原本的看法不符，反而会无端加深人们对错误信息的信任|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F1fd0086aj00r4h6v1000cd20069008zg0069008z.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |推翻你阴谋论的证据，很可能是政府伪造的！|
+|第三人效应|我们会认为别人比自己更受到大众媒体的影响|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Ffa7b6b66j00r4h6v10008d20067008ug0067008u.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |“你显然是被媒体洗脑了！”|
+|信念偏差|当我们判断一个观点是否可信时，凭借的不是这个观点是否正确，而是我们愿不愿意相信这个观点|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Fabbcebcdj00r4h6v1000cd20062008tg0062008t.jpg&thumbnail=650x2147483647&quality=80&type=jpg) |“Sally说她也支持你那个阴谋论。但她没说出什么证据来。”|
+|可用性级联|某些事情越是被公开和重复讨论，为了融入社会，我们就越会相信这件事的真实性|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F1e8643f6j00r4h6v2000ed20063008yg0063008y.jpg&thumbnail=650x2147483647&quality=80&type=jpg)|一个糖果里藏了剃须刀片的故事广为流传，最终许多美国人不再在万圣节时提供自制糖果|
+|衰落主义|我们会更倾向于将过去浪漫化，并消极地看待未来，认为全世界都在走下坡路。|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Fb5977848j00r4h6v2000ad20064008zg0064008z.jpg&thumbnail=650x2147483647&quality=80&type=jpg) |“在我们那个时代，孩子更懂得尊重！”|
+|现状偏见|更倾向于保持不变，认为即使是有利的变化也是一种损失|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Fd5a9d819j00r4h6v2000bd20065008yg0065008y.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |即使一个APP的服务条款侵犯了Sally的隐私，她也不愿意换另一个程序|
+|沉没成本谬误（又名承诺升级）|即使面临着负面的结果，人们也不愿意放弃前期投入，反而会在这些注定失败的事情上投入更多|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Febab8a9cj00r4h6v2000bd20064008wg0064008w.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |“来都来了，一不做二不休！”|
+|赌徒谬误|认为未来的可能性会受到过去事件的影响|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Fb45666b6j00r4h6v20009d20062008yg0062008y.jpg&thumbnail=650x2147483647&quality=80&type=jpg) |Alice猜硬币已经输了9次，下次肯定能猜中|
+|零风险偏差|人们会追求让小风险趋于零，却不会通过某种方式降低大风险的概率|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F9d4eb1aej00r4h6v30009d20066008wg0066008w.jpg&thumbnail=650x2147483647&quality=80&type=jpg) |“你应该买个保修服务”或者是“疫情来了，快多囤点厕纸”|
+|框架效应|人们经常从相同的信息中得出不同的结论，这取决于信息呈现的方式|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F1c30ad6bj00r4h6v3000ed20066008xg0066008x.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |Alice听说最喜欢的候选人以45%的支持率“大获全胜”；Sally听说候选人的支持率45%“让全国失望”；他们对相同的统计数据有不同的解释|
+|刻板印象|人们普遍认为，尽管没有具体的个人信息，但一个群体的成员肯定有某种相同的特征|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Fc5bc5342j00r4h6v3000ad20063008sg0063008s.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |那个留着精致小胡子的人肯定是个嬉皮士，估计还收集了一些黑胶唱片|
+|外群体同质性偏差|人们会认为圈外人千篇一律，而自己圈子里的人各个不同|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Fcb73479ej00r4h6v3000cd20066008vg0066008v.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |Alice不打游戏，但她觉得玩游戏的人都一样。|
+|权威偏见|我们信任权威人物的意见，并经常受其影响|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F907ae6fcj00r4h6v40007d20062008vg0062008v.jpg&thumbnail=650x2147483647&quality=80&type=jpg) |“我老师告诉我可以这么做。”|
+|安慰剂效应|当我们相信某种（原本无效的）治疗会奏效，它通常就会产生一点点生理上的效应|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F0a73bfa4j00r4h6v40009d20062008yg0062008y.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |Alice服用了一种安慰剂来止痛，结果疼痛真的减轻了|
+|幸存者偏差|人们更倾向于关注那些幸存下来的事物，而忽略那些失败了的|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F7aab1fb9j00r4h6v4000dd20065008vg0065008v.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |Greg告诉Alice，她的包包生意肯定很好，因为有一家成功的时尚公司运用了同样的策略。【但其实其它10家倒闭的公司也用了同样的策略】|
+|精神活动过速|我们对时间的感知取决于创伤、药物使用和体力消耗|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F36dbb762j00r4h6v40008d20065008tg0065008t.jpg&thumbnail=650x2147483647&quality=80&type=jpg) |当汽车差点撞到我的时候，时间都慢了下来……|
+|琐碎法则（又名自行车棚效应）|人们通常会对琐碎的问题给予不成比例的重视，同时又避免面对更复杂的问题|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Fe2094421j00r4h6v4000dd20062008tg0062008t.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |当地政府没有考虑如何解决流浪人口问题，而是花了大量时间讨论修建自行车道和车棚的问题|
+|蔡格尼克记忆效应|比起已经完成的任务，人们更容易记住未完成的任务|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F92bf4027j00r4h6v40009d20065008ug0065008u.jpg&thumbnail=650x2147483647&quality=80&type=jpg) |Greg因得自己什么事都没做而感到很沮丧，直到他看了自己的任务清单上已经划掉了很多项|
+|宜家效应|人们会更看重自己参与了一部分创造过程的东西|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Fc93a9de2j00r4h6v50008d20062008xg0062008x.jpg&thumbnail=650x2147483647&quality=80&type=jpg) |“你喜欢我花20块钱买的这个盆吗？我自己上的色。”|
+|本·富兰克林效应|人们喜欢帮助别人。如果我们已经帮了别人一个忙之后，我们会更期待去帮他另一个忙，而不是从他那得到一个回馈|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F4d26a1a0j00r4h6v5000dd20061008wg0061008w.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |Greg给Francis借了一支钢笔，等Francis又向Greg借5块钱时，Greg很爽快就借了|
+|旁观者效应|周围人越多，我们帮助受害者的可能性就越小|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Fe2279b52j00r4h6v50009d20062008tg0062008t.jpg&thumbnail=650x2147483647&quality=80&type=jpg) |一群学生看到有人打架受伤，没有人报警|
+|暗示感受性|我们尤其是儿童，有时候会将提问者的想法误认为是记忆|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F17e25835j00r4h6v50009d20062008vg0062008v.jpg&thumbnail=650x2147483647&quality=80&type=jpg) |“你从沙发上摔下来是在你妈妈打你之前还是之后？”，注：此处为陷阱式提问，很可能妈妈并没有打孩子，但孩子的回答极易被误导|
+|虚假记忆|我们会把想象误认为是真实的记忆|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F7633ea48j00r4h6v50009d20061008tg0061008t.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |Greg确定Sally说了一个关于菠萝的笑话，但这个笑话其实是他自己在电视里看到的|
+|潜隐记忆|我们也会把真实的记忆误认为是想象|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F4130c577j00r4h6v50009d20064008ug0064008u.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |Greg以为他去了墓地，但他确定自己只是做了个很可怕的梦|
+|聚类错觉|我们会在原本随机的数据信息中发现模式和规律|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F18dad893j00r4h6v60006d20060008yg0060008y.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |Alice！你看那朵云彩好像你的猫啊！|
+|悲观偏见|我们有时候会高估坏结果的概率|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Ffd21861cj00r4h6v60007d20066008wg0066008w.jpg&thumbnail=650x2147483647&quality=80&type=jpg) |“水只剩半杯了，啥都不会变好了。”|
+|乐观偏见|我们有时候会对好结果过于乐观| 
+![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F96153aa5j00r4h6v60006d2005z008sg005z008s.jpg&thumbnail=650x2147483647&quality=80&type=jpg) |“水还有半杯呢，一切都会好起来的！”|
+|偏见盲点|人们不认为自己有偏见，还会觉得别人比我们自己更偏激|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F0c6571b3j00r4h6v60007d20061008qg0061008q.jpg&thumbnail=650x2147483647&quality=80&type=jpg) |“我没有偏见！”|
+
+ 
+怎么说呢，似乎每个人都能在这些偏见当中找到自己曾经的影子。就比如……“谁会看这个啊！”
+- ![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F1fd38bbaj00r4h6v70007d200ct0038g00ct0038.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  
+ 
+ref：
+- [原文](https://www.titlemax.com/discovery-center/lifestyle/50-cognitive-biases-to-be-aware-of-so-you-can-be-the-very-best-version-of-you/)
+- [twitter](https://twitter.com/elonmusk/status/1472649843713757189)
+
 
 
 # 什么是逻辑
