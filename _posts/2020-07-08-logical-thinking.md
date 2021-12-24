@@ -48,7 +48,7 @@ mathjax: true
 
 ## 50个认知偏差
 
-[马斯克忽然在推上发了个“50种从小就该学的认知偏差”](http://www.huogua.net/a/46683)
+[马斯克忽然在推上发了个“50种从小就该学的认知偏差”](http://www.huogua.net/a/46683)，[文字注释](https://www.163.com/dy/article/GRPKI63S051484S5.html)
 - ![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F5e36f8bcj00r4h6uw00end200q602fog00q602fo.jpg&thumbnail=650x2147483647&quality=80&type=jpg)
 - ![](https://p6.toutiaoimg.com/img/tos-cn-i-qvj2lq49k0/198ac362cdb84a459b76399cbe156e49~tplv-obj:1080:3618.image?from=post)
 
