@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "名人传记：张一鸣"
+title:  "人物：张一鸣"
 date:   2020-06-27 08:57:00
-categories: 大人物
+categories: 人物
 tags: 张一鸣 创业
 excerpt: 传奇人物的传奇故事，以及传奇思考
 author: 鹤啸九天
