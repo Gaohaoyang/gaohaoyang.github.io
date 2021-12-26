@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "人物：柳传志"
-date:   2021-12-26 08:57:00
+date:   2021-12-26 12:00:00
 categories: 人物
 tags: 柳传志 联想 倪光南 孙宏斌 柳青 杨元庆
 excerpt: 联想发家史
