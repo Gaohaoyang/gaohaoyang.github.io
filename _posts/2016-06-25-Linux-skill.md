@@ -2038,6 +2038,13 @@ set nocompatible
 set nobackup
 ```
 
+缩进统一：tab -> 4个空格，只需在代码文件中加一行
+
+```python
+# */* vim: set expandtab ts=4 sw=4 sts=4 tw=400: */
+```
+
+
 ### vim技巧
 
 |命令|说明|备注|
