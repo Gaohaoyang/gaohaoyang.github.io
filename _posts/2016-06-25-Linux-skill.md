@@ -3,7 +3,7 @@ layout: post
 title:  "Linux开发技能"
 date:   2016-06-25 23:35:00
 categories: 编程语言
-tags: Linux Shell Git yaml github 文件服务 vscode
+tags: Linux Shell Git yaml github 文件服务 vscode crontab curl post
 excerpt: Linux环境开发技能总结
 mathjax: true
 ---
@@ -215,6 +215,96 @@ perf既然这么强大，那它的实现原理是什么呢？
 - tac的功能是将文件从最后一行开始倒过来将内容数据输出到屏幕上。我们可以发现，tac实际上是cat反过来写。这个命令不常用。
   - tac语法：tac 文件名。
 
+
+### curl 网络请求
+
+curl功能非常强大，命令行参数多达几十种。如果熟练的话，完全可以取代 Postman 这一类的图形界面工具。
+- curl支持包括HTTP、HTTPS、ftp等众多协议，还支持POST、cookies、认证、从指定偏移处下载部分文件、用户代理字符串、限速、文件大小、进度条等特征。
+  - GET: 
+    - curl http://127.0.0.1:8080/login?admin&passwd=12345678
+  - POST
+    - curl -d "user=admin&passwd=12345678" http://127.0.0.1:8080/login
+    - curl -H "Content-Type:application/json" -X POST -d '{"user": "admin", "passwd":"12345678"}' http://127.0.0.1:8000/login
+- [curl用法指南](https://blog.csdn.net/weixin_39715290/article/details/110611606)
+
+```shell
+# ------ GET --------
+# 直接GET请求
+curl https://www.example.com
+# 指定客户端的用户代理表头（User-Agent）， -A参数； 等效于直接使用chrome浏览器
+curl -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36' https://google.com
+curl -H 'User-Agent: php/1.0' https://google.com # -H 也可以直接指定标头，更改UA
+curl -H 'Accept-Language: en-US' https://google.com # 添加 HTTP 请求的标头
+curl -H 'Accept-Language: en-US' -H 'Secret-Message: xyzzy' https://google.com # 添加 HTTP 标头Accept-Language: en-US
+curl -d '{"login": "emma", "pass": "123"}' -H 'Content-Type: application/json' https://google.com/login # 添加两个标头
+# -i参数打印出服务器回应的 HTTP 标头
+curl -i https://www.example.com
+# -I参数向服务器发出 HEAD 请求，然会将服务器返回的 HTTP 标头打印出来
+curl -I https://www.example.com
+# --head参数等同于-I
+curl --head https://www.example.com
+# -k参数指定跳过 SSL 检测。不会检查服务器的 SSL 证书是否正确。
+curl -k https://www.example.com
+# -L参数会让 HTTP 请求跟随服务器的重定向。curl 默认不跟随重定向
+curl -L -d 'tweet=hi' https://api.twitter.com/tweet
+# --limit-rate用来限制 HTTP 请求和回应的带宽，模拟慢网速的环境
+curl --limit-rate 200k https://google.com # 每秒 200K 字节
+# -o参数将服务器的回应保存成文件，等同于wget命令
+curl -o example.html https://www.example.com # 将http://www.example.com保存成example.html
+# -O参数将服务器回应保存成文件，并将 URL 的最后部分当作文件名。
+curl -O https://www.example.com/foo/bar.html # 将服务器回应保存成文件，文件名为bar.html
+# -s参数将不输出错误和进度信息
+curl -s https://www.example.com
+curl -s -o /dev/null https://google.com # # 不产生任何输出
+curl -s -o /dev/null https://google.com # -S参数指定只输出错误信息，通常与-o一起使用
+# -u参数用来设置服务器认证的用户名和密码。
+curl -u 'bob:12345' https://google.com/login
+curl https://bob:12345@google.com/login # curl 能够识别 URL 里面的用户名和密码，将其转为上个例子里面的 HTTP 标头
+curl -u 'bob' https://google.com/login # 只设置了用户名，执行后，curl 会提示用户输入密码
+# -v参数输出通信的整个过程，用于调试。
+curl -v https://www.example.com
+# --trace参数也可以用于调试，还会输出原始的二进制数据。
+curl --trace - https://www.example.com
+# -x参数指定 HTTP 请求的代理。
+curl -x socks5://james:cats@myproxy.com:8080 https://www.example.com # 指定 HTTP 请求通过http://myproxy.com:8080的 socks5 代理发出。如果没有指定代理协议，默认为 HTTP。
+curl -x james:cats@myproxy.com:8080 https://www.example.com # 请求的代理使用 HTTP 协议。
+# -X参数指定 HTTP 请求的方法。
+curl -X POST https://www.example.com
+
+# 移出UA标头
+curl -A '' https://google.com
+# 发送cookie给服务器，生成一个标头Cookie: foo=bar
+curl -b 'foo=bar' https://google.com
+curl -b 'foo1=bar' -b 'foo2=baz' https://google.com # 两个cookie
+curl -b cookies.txt https://www.google.com # 本地文件cookies.txt
+# 服务器端cookie写入本地文件cookies.txt
+curl -c cookies.txt https://www.google.com 
+# -e参数用来设置 HTTP 的标头Referer，表示请求的来源
+curl -e 'https://google.com?q=example' https://www.example.com
+curl -H 'Referer: https://google.com?q=example' https://www.example.com # -H参数可以通过直接添加标头Referer，达到同样效果
+
+# ------ POST --------
+# -d参数，HTTP请求会自动加上标头Content-Type : application/x-www-form-urlencoded。并且会自动将请求转为 POST 方法，因此可以省略-X POST。
+curl -d 'login=emma＆password=123' -X POST https://google.com/login
+curl -d 'login=emma' -d 'password=123' -X POST  https://google.com/login
+curl -d '@data.txt' https://google.com/login # 省略-X POST； 读取data.txt文件的内容，作为数据体向服务器发送
+# --data-urlencode参数等同于-d，发送 POST 请求的数据体，区别在于会自动将发送的数据进行 URL 编码
+curl --data-urlencode 'comment=hello world' https://google.com/login
+
+
+# -F参数用来向服务器上传二进制文件
+curl -F 'file=@photo.png' https://google.com/profile # 给 HTTP 请求加上标头Content-Type: multipart/form-data，然后将文件photo.png作为file字段上传
+# -F参数可以指定 MIME 类型
+curl -F 'file=@photo.png;type=image/png' https://google.com/profile # 指定 MIME 类型为image/png，否则 curl 会把 MIME 类型设为application/octet-stream
+curl -F 'file=@photo.png;filename=me.png' https://google.com/profile # -F参数也可以指定文件名，原始文件名为photo.png，但是服务器接收到的文件名为me.png
+# -G参数用来构造 URL 的查询字符串
+curl -G -d 'q=kitties' -d 'count=20' https://google.com/search #  GET 请求，实际请求的 URL 为https://google.com/search?q=k...。如果省略--G，会发出一个 POST 请求。如果数据需要 URL 编码，可以结合--data--urlencode参数。
+curl -G --data-urlencode 'comment=hello world' https://www.example.com
+
+
+```
+
+
 ### 文件服务
 
 一行命令搭建文件服务
@@ -423,22 +513,52 @@ tail -n 2 /var/log/cron
 
 # 更新系统时间
 ntpdate time.windows.com
-
 ```
 
 - 每一行都代表一项任务，每行的每个字段代表一项设置，它的格式共分为六个字段，前五段是时间设定段，第六段是要执行的命令段，格式如下：minute hour day month week command
-  - minute： 表示分钟，可以是从0到59之间的任何整数。
-  - hour：表示小时，可以是从0到23之间的任何整数。
-  - day：表示日期，可以是从1到31之间的任何整数。
-  - month：表示月份，可以是从1到12之间的任何整数。
-  - week：表示星期几，可以是从0到7之间的任何整数，这里的0或7代表星期日。
-  - command：要执行的命令，可以是系统命令，也可以是自己编写的脚本文件。
+  1. minute： 表示分钟，可以是从0到59之间的任何整数。
+  1. hour：表示小时，可以是从0到23之间的任何整数。
+  1. day：表示日期，可以是从1到31之间的任何整数。
+  1. month：表示月份，可以是从1到12之间的任何整数。
+  1. week：表示星期几，可以是从0到7之间的任何整数，这里的0或7代表星期日。
+  1. command：要执行的命令，可以是系统命令，也可以是自己编写的脚本文件。
   - ![](https://images2015.cnblogs.com/blog/513841/201608/513841-20160812102124078-171184924.png)
 - 示例
 
 ```shell
+#分 时 天 月 周 命令
 * * * * * cd /home/work/code/training_platform/web && python t.py
+
+# 每一分钟执行一次 /bin/ls
+* * * * * /bin/ls
+# 12 月内, 每天的早上 6 点到 12 点，每隔 3 个小时 0 分钟执行一次 /usr/bin/backup
+0 6-12/3 * 12 * /usr/bin/backup
+# 周一到周五每天下午 5:00 寄一封信给 alex@domain.name：
+0 17 * * 1-5 mail -s "hi" alex@domain.name < /tmp/maildata
+# 每月每天的午夜 0 点 20 分, 2 点 20 分, 4 点 20 分....执行 echo "haha"：
+20 0-23/2 * * * echo "haha"
+
+0 */2 * * * /sbin/service httpd restart # 每两个小时重启一次apache 
+50 7 * * * /sbin/service sshd start # 每天7：50开启ssh服务 
+50 22 * * * /sbin/service sshd stop  # 每天22：50关闭ssh服务 
+0 0 1,15 * * fsck /home  # 每月1号和15号检查/home 磁盘 
+1 * * * * /home/bruce/backup  # 每小时的第一分执行 /home/bruce/backup这个文件 
+00 03 * * 1-5 find /home "*.xxx" -mtime +4 -exec rm {} \; # 每周一至周五3点钟，在目录/home中，查找文件名为*.xxx的文件，并删除4天前的文件。
+30 6 */10 * * ls # 每月的1、11、21、31日是的6：30执行一次ls命令
+
+# 当程序在你所指定的时间执行后，系统会发一封邮件给当前的用户，显示该程序执行的内容，若是你不希望收到这样的邮件，请在每一行空一格之后加上 > /dev/null 2>&1 即可
+20 03 * * * . /etc/profile;/bin/sh /var/www/runoob/test.sh > /dev/null 2>&1 
+
 ```
+
+[crontab无法执行](https://www.runoob.com/linux/linux-comm-crontab.html)
+- 用crontab来定时执行脚本无法执行，但是如果直接通过命令（如：./test.sh)又可以正常执行，这主要是因为**无法读取环境变量**。
+- 解决方法：
+  - 1、所有命令需要写成绝对路径形式，如: /usr/local/bin/docker。
+  - 2、在 shell 脚本开头使用以下代码，. /etc/profile; . ~/.bash_profile
+  - 3、在 /etc/crontab 中添加环境变量，在可执行命令之前添加命令 . /etc/profile;/bin/sh，使得环境变量生效
+    - 20 03 * * * . /etc/profile;/bin/sh /var/www/runoob/test.sh
+
 
 ## linux I/O模式
 
