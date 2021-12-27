@@ -1005,6 +1005,50 @@ typedef union epoll_data {
 
 ## 常规语法
 
+### 时间日期
+
+[date用法](https://www.cnblogs.com/alsodzy/p/8403870.html)
+
+```shell
+cal # 日历
+
+date +%Y%m%d 
+date +%F
+now=$(date +%y%m%d) # 获取今天时期
+date +%Y%m%d%H%M%S # 当前时间，时分秒
+date +%m%d%H%M%y.%S # 具体到毫秒
+date +%w    # 今天是星期几
+date +%W   # 当前为今年的第几周
+# 时间戳
+date +%s   # 获取时间戳
+date -d @1521563928  # 将时间戳换算成日期
+date +%s -d "2017-03-21 00:38:48" # 将日期换算成时间戳
+
+# 相对时间
+date -d 'now'    #显示当前时间
+date -d tomorrow +%y%m%d # 明天
+date -d yesterday +%Y%m%d # 获取昨天时期
+date -d '30 second ago'    #显示30秒前的时间
+date -d -2day +%Y%m%d # 获取前天日期
+date -d '7 days ago' +%Y%m%d # 一星期前
+date -d '1 weeks ago' +%Y%m%d # 一星期前
+date -d '2 days ago'    #显示2天前的时间
+date -d -10day +%Y%m% # 获取10天前的日期
+date -d `date +%y%m01`"-1 day" # 上月最后一天
+date -d '3 month 1 day'    # 显示3月零1天以后的时间
+date -d "n days ago" +%y%m%d # 或n天前的
+date -d '25 Dec' +%j    #显示12月25日在当年的哪一天
+
+date -d "-3 day" # 3天前
+date -d "+3 month"  # 3月后
+date -d "-3 year" # 3年前，类似的，hour、minute、second
+date -d `date -d "-3 month" +%y%m01`"-1 day" # 4个月前最后一天
+date -d `date -d "+12 month" +%y%m01`"-1 day" # 11个月后第一天
+date -d `date -d "+12 month" +%y%m01`"-1 day" +%Y%m%d # 11个月前最后一天
+
+```
+
+
 ### 数组
 
 - 代码：
