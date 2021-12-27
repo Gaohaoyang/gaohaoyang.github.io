@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "Linux开发技能"
+title:  "Linux技能大全"
 date:   2016-06-25 23:35:00
 categories: 编程语言
 tags: Linux Shell Git yaml github 文件服务 vscode crontab curl post
-excerpt: Linux环境开发技能总结
+excerpt: Linux使用技能总结，持续更新
 mathjax: true
 ---
 * content
