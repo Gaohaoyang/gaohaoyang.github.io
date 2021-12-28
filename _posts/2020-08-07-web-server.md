@@ -3,7 +3,7 @@ layout: post
 title:  "Web前端服务知识-Web-Serving"
 date:   2020-08-07 19:17:00
 categories: 技术工具
-tags: Web web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session RPC 微服务 GraphQL UML Gunicorn supervisor genvent grequests node.js vue 前端 低代码 拖拽 api 异步 celery 分布式
+tags: Web web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session RPC 微服务 GraphQL UML Gunicorn supervisor genvent grequests node.js vue 前端 低代码 拖拽 api 异步 celery 分布式 apache
 author : 鹤啸九天
 excerpt: Web开发相关技术知识点
 mathjax: true
@@ -971,6 +971,74 @@ int main()
   - Graphql Language Service: 一个用于构建 IDE 的 GraphQL 语言服务（诊断、自动完成等） 的接口。
   - quicktype (github): 在 TypeScript、Swift、golang、C#、C++ 等语言中为 GraphQL 查 询生成类型。
 - 想要获取更多关于Graphql的一些框架、工具，可以去awesome-graphql：一个神奇的社区，维护一系列库、资源等。更多Graphql的知识，可以去http://GraphQL.cn
+
+# LAMP
+
+
+## Apache
+
+Apache HTTP 服务器是世界上最广泛使用的 web 服务器。它是一个免费，开源，并且跨平台的 HTTP 服务器，包含强大的特性，并且可以使用很多模块进行扩展。
+
+[如何在 CentOS 8 上安装 Apache](https://cloud.tencent.com/developer/article/1626789)
+- Apache 在默认的 CentOS 源仓库中可用，并且安装非常直接。在基于 RHEL 的发行版中，Apache 软件包和服务被称为 httpd
+
+
+```shell
+# 安装Apache, 用 root 或者其他有 sudo 权限的用户身份
+yum install httpd httpd-devel
+# Apache 随系统启动：
+chkconfig --levels 235 httpd on
+# 启动apache服务
+/bin/systemctl start httpd.service
+```
+Apache专用：
+- 服务目录	/etc/httpd
+- 主配置文件	/etc/httpd/conf/httpd.conf
+- 网站数据目录	/var/www/html
+- 访问日志	/var/log/httpd/access_log
+- 错误日志	/var/log/httpd/error_log
+
+
+## PHP
+
+[centos下安装php环境](https://www.php.cn/centos/460292.html)的方法：
+- 首先安装并启动apache
+- 然后安装mysql；
+- “yum install php php-devel”命令安装php；
+- 最后重启apache，访问服务器所在ip即可
+  - apache默认就是使用80端口
+
+```shell
+# 安装Apache
+yum install httpd httpd-devel
+# 启动apache服务
+/bin/systemctl start httpd.service
+# 如果访问失败，需要关闭防火墙
+systemctl stop firewalld.service #停止firewall
+systemctl disable firewalld.service #禁止firewall开机启动
+firewall-cmd --state #查看默认防火墙状态（关闭后显示notrunning，开启后显示running）
+# 安装mysql
+yum install mysql mysql-server
+# 启动mysql
+systemctl start mysql.service
+# 安装php
+yum install php php-devel
+# /var/www/html/下建立一个PHP文件index.php,加入代码：/var/www/html/下建立一个PHP文件index.php,加入代码：
+# 注意：在centos7通过yum安装PHP7，首先在终端运行
+rpm -ivh http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm # 安装epel-release
+rpm -Uvh htt[ps](http://www.111cn.net/fw/photo.html)://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+# 启动php
+/bin/systemctl start httpd.service
+
+php -v # 显示当前PHP版本
+# 安装php扩展
+yum install php-mysql php-gd php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc
+# 再次重启Apache
+/bin/systemctl start httpd.service
+
+```
+
+
 
 # Python Web框架
 
