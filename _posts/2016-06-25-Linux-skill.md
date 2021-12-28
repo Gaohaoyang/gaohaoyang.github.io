@@ -1205,9 +1205,108 @@ echo ${str%%aa*}  #结果为 ---
 
 ### 彩色日志
 
-- 代码
+[shell彩色文字](https://blog.csdn.net/andylauren/article/details/60873400)
+- 特效格式
+  - \033[0m  关闭所有属性  
+  - \033[1m   设置高亮度  
+  - \03[4m   下划线  
+  - \033[5m   闪烁  
+  - \033[7m   反显  
+  - \033[8m   消隐  
+  - \033[30m ~ \033[37m   设置前景色  
+  - \033[40m ~ \033[47m   设置背景色
+- 光标位置
+  - \033[nA  光标上移n行  
+  - \03[nB   光标下移n行  
+  - \033[nC   光标右移n行  
+  - \033[nD   光标左移n行  
+  - \033[y;xH设置光标位置  
+  - \033[2J   清屏  
+  - \033[K   清除从光标到行尾的内容  
+  - \033[s   保存光标位置  
+  - \033[u   恢复光标位置  
+  - \033[?25l   隐藏光标  
+  - \33[?25h   显示光标
+- 特效可以叠加，需要使用“;”隔开
+  - 例如：闪烁+下划线+白底色+黑字为 \033[5;4;47;30m闪烁+下划线+白底色+黑字为\033[0m
+
+| 编码 | 颜色/动作 |
+| --- | --- |
+| 　　0 | 重新设置属性到缺省设置 |
+| 　　1 | 设置粗体 |
+| 　　2 | 设置一半亮度(模拟彩色显示器的颜色) |
+| 　　4 | 设置下划线(模拟彩色显示器的颜色) |
+| 　　5 | 设置闪烁 |
+| 　　7 | 设置反向图象 |
+| 　　22 | 设置一般密度 |
+| 　　24 | 关闭下划线 |
+| 　　25 | 关闭闪烁 |
+| 　　27 | 关闭反向图象 |
+| 　　30 | 设置黑色前景 |
+| 　　31 | 设置红色前景 |
+| 　　32 | 设置绿色前景 |
+| 　　33 | 设置棕色前景 |
+| 　　34 | 设置蓝色前景 |
+| 　　35 | 设置紫色前景 |
+| 　　36 | 设置青色前景 |
+| 　　37 | 设置白色前景 |
+| 　　38 | 在缺省的前景颜色上设置下划线 |
+| 　　39 | 在缺省的前景颜色上关闭下划线 |
+| 　　40 | 设置黑色背景 |
+| 　　41 | 设置红色背景 |
+| 　　42 | 设置绿色背景 |
+| 　　43 | 设置棕色背景 |
+| 　　44 | 设置蓝色背景 |
+| 　　45 | 设置紫色背景 |
+| 　　46 | 设置青色背景 |
+| 　　47 | 设置白色背景 |
+| 　　49 | 设置缺省黑色背景 |
+
 
 ```shell
+# !/bin/bash
+
+#【2021-12-28】
+echo -e "\033[4;31m 下划线红字 \033[0m" 
+echo -e "\033[5;34m 红字在闪烁 \033[0m" #闪烁
+echo -e "\033[8m 消隐 \033[0m " #反影
+
+# 彩色文字设置
+prefix="\033["
+Color_Off="0m" # Text Reset
+# Bold High Intensty
+BIBlack="30m" # "[1;90m" # Black
+BIRed="31m" # "[1;91m" # Red
+BIGreen="32m" # "[1;92m" # Green
+BIYellow="33m" # "[1;93m" # Yellow
+BIBlue="34m" # "[1;94m" # Blue
+BIPurple="35m" # "[1;95m" # Purple
+BICyan="36m" # "[1;96m" # Cyan
+BIWhite="37m" # "[1;97m" # White
+ 
+echo ${BRed} "===开始检测===!" ${Color_Off}
+function log(){
+    [ $# -eq 0 ]&& { echo "date [`"+%Y-%m-%d %H:%M:%S"`] 请输入要打印的日志！";exit 1; }
+    [ $# -eq 1 ]&& { level="INFO";log_info=$1; }
+    [ $# -gt 1 ]&& { level=$1;log_info=$2; }
+    #echo "[`"+%Y-%m-%d %H:%M:%S"`] [$level] $log_info"
+    cur_color="$BIWhite"
+    case $level in
+        "INFO") cur_color="$BIWhite";;
+        "WARNING") cur_color="$BIYellow";;
+        "ERROR") cur_color="$BIPurple";;
+        "FETAL") cur_color="$BIRed";;
+        *) cur_color="$BIWhite";;
+    esac
+	# echo -e "\033[4;31;42m 文字 \033[0m"
+    echo -e  "${prefix}${cur_color} [`date "+%Y-%m-%d %H:%M:%S"`] [$level] $log_info ${prefix}${Color_Off}"
+}
+log "INFO" "TEST INFO"
+log "WARNING" "TEST WARNING"
+log "ERROR" "TEST ERROR"
+log "FETAL" "TEST FETAL"
+
+# ------- 失效 -------
 【2018-10-12】
 # 彩色文字设置
 Color_Off="[0m" # Text Reset
