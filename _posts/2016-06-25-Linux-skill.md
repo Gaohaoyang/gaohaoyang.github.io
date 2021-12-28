@@ -66,6 +66,34 @@ linux文件权限的描述格式解读
 
 ![](https://p6-tt.byteimg.com/origin/pgc-image/3000314a51c249cab168bc400dd7c5f3?from=pc)
 
+### 文件大小
+
+du 是 Disk Usage 的缩写， Linux 上最受欢迎的命令之一，用来估算文件或目录占用的磁盘空间
+- -a: 显示目录中所有文件以及文件夹大小
+- -h: 以 Kb、Mb 、Gb 等易读的单位显示大小
+- --si: 类似 -h 选项，但是计算是用 1000 为基数而不是1024
+- -s: 显示目录总大小
+- -d: 是 --max-depth=N 选项的简写，表示深入到第几层目录,超过指定层数目录则忽略
+- -c: 除了显示目录大小外，额外一行显示总占用量
+- --time: 显示每一个目录下最近修改文件的时间
+- -t: 是 --threshold=SIZE 的简写，过滤掉小于 SIZE 大小的文件以及目录
+- --exclude=PATTERN：过滤与 PATTERN 匹配的文件名或者目录名
+
+[du命令详解](https://www.cnblogs.com/wanng/p/linux-du-command.html)
+
+```shell
+tree -d temp/ # 显示目录深度
+du -d 1 temp/ # 指定目录深度（1级）
+du --max-depth=2 temp/ # 最多两级
+du temp # 默认情况下只显示目录大小，不显示文件大小。即执行du temp/ 只会显示目录大小
+du -a temp/ # 子目录大小
+du -b temp/ # 默认显示的大小只有一个孤零零的数字，没有单位
+du -h temp/ # 易读方式显示
+du -sh temp/ # 易读方式显示目录总大小，基数是 1024
+du --si temp/ # --si 选项默认计算基数是 1000，更精确
+```
+
+
 ### 文件操作命令
 
 - [文件操作命令](https://p3-tt.byteimg.com/origin/pgc-image/6fe9b14521964698aad985d270cf6d9b?from=pc)
