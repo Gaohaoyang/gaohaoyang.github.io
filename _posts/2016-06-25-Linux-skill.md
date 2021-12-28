@@ -1360,6 +1360,94 @@ less error.txt | awk 'BEGIN {srand();OFS="\t"} {print $0,rand()*1000}' |sort -k2
 
 - 待补充
 
+
+## shell调度MapReduce任务
+
+案例：
+
+```shell
+#!/bin/bash
+# -*- coding: utf-8 -*-
+ 
+#===============================================================================
+#            File:  start_hadoop.sh [session]
+#           Usage:  
+#     Description:  pc端session日志的hadoop启动脚本 
+#    LastModified:  2013-3-28 12:51 PM 
+#         Created:  27/12/2012 11:17 AM CST
+#          AUTHOR:  wangqiwen(wangqiwen@baidu.com)
+#         COMPANY:  baidu Inc
+#         VERSION:  1.0
+#            NOTE:  
+#           input:  
+#          output:  
+#===============================================================================
+#:<<note
+# online 
+set -x
+if [ $# -ne 9 ]; then
+    echo "[$0] [ERROR] [`date "+%Y-%m-%d %H:%M:%S"`] [session] input error ! \$#=$# not 9"
+    exit -1
+fi
+hadoop=$1;input=${2//;/ -input };output=$3
+jobname=$4;main_dir=$5;date=$6;task_prefix=$7
+map_con_num=$8;reduce_num=$9
+#note
+
+:<<note
+# test
+date="20130314"
+jobname="session"
+hadoop="/home/work/hadoop-rp-rd-nj/hadoop/bin/hadoop"
+#input="/log/22307/nj_rpoffline_session_ting/$date/0000/szwg-ston-hdfs.dmop/0000"
+input="/log/22307/nj_rpoffline_session_ting/$date/0000/szwg-ston-hdfs.dmop/0000/part-00000"
+# baike http://cq01-test-nlp2.cq01.baidu.com:8130/table/view?table_id=347
+output="/user/rp-rd/wqw/test/sm/$jobname/$date/0000"
+map_con_num=200
+reduce_num=200
+main_dir="/home/work/wqw/sm-navi-data-cookie/new/bin"
+note
+
+echo "=========================$jobname start ============================="
+done_file="${output%/*}/${output##*/}.done"
+${hadoop} fs -test -e ${output} && ${hadoop} fs -rmr ${output}
+${hadoop} fs -test -e ${done_file} && ${hadoop} fs -rm ${done_file}
+echo "-------输出目录,标记文件清理完毕---------------------"
+echo "[$0] [NOTE] [`date "+%Y-%m-%d %H:%M:%S"`] [$jobname] start to commit hadoop job"
+${hadoop} streaming \
+        -jobconf mapred.job.name="${task_prefix}" \
+        -jobconf mapred.job.priority=HIGH \
+        -jobconf mapred.task.timeout=600000 \
+        -jobconf mapred.map.tasks=$map_con_num \
+        -jobconf mapred.reduce.tasks=$reduce_num \
+        -jobconf stream.memory.limit=1000 \
+        -jobconf stream.num.map.output.key.fields=2 \
+        -jobconf num.key.fields.for.partition=1 \
+        -cacheArchive /user/rp-product/dcache/thirdparty/python2.7.tar.gz#py27 \
+        -partitioner org.apache.hadoop.mapred.lib.KeyFieldBasedPartitioner \
+        -jobconf mapred.job.map.capacity=$map_con_num -jobconf mapred.job.reduce.capacity=$reduce_num \
+        -jobconf mapred.map.max.attempts=10 -jobconf mapred.reduce.max.attempts=10 \
+        -file $main_dir/hadoop_jobs/session/*.py \
+        -file $main_dir/tools/hadoop_tool/py27.sh \
+        -file $main_dir/tools/url_normalize/m \
+        -cmdenv date_of_data=$date \
+        -output ${output} \
+        -input ${input} \
+        -mapper "sh py27.sh mapper.py" \
+        -reducer "./m"
+ 
+if [ $? -ne 0 ]; then
+    echo "[$0] [Error] [`date "+%Y-%m-%d %H:%M:%S"`] [$jobname] job failed !"
+    exit -1
+fi
+#${hadoop} fs -touchz ${done_file}
+ 
+echo "[$0] [NOTE] [`date "+%Y-%m-%d %H:%M:%S"`] [$jobname] hadoop job finished"
+echo "=========================$jobname end ============================="
+exit 0
+```
+
+
 # 数学公式编辑
 
 ## Latex
