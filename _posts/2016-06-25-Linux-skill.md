@@ -1360,10 +1360,267 @@ less error.txt | awk 'BEGIN {srand();OFS="\t"} {print $0,rand()*1000}' |sort -k2
 
 - 待补充
 
+## shell案例
 
-## shell调度MapReduce任务
 
-案例：
+### 自定义通用函数
+
+common.sh包含的函数：
+- 打日志
+- 发邮件
+- 发短信
+- 多功能等待
+
+```shell
+#!/bin/bash
+# -*- coding: utf-8 -*-
+ 
+#===============================================================================
+#            File:  common.sh
+#           Usage:  sh common.sh
+#     Description:  定义了常用函数
+#    LastModified:  6/12/2012 16:28 PM CST
+#         Created:  1/4/2012 11:06 AM CST
+# 
+#          AUTHOR:  wangqiwen(wangqiwen@*.com)
+#         COMPANY:  baidu Inc
+#         VERSION:  1.0
+#            NOTE:  
+#           input:  
+#          output:  
+#===============================================================================
+ 
+ulimit -c unlimited
+#init_log <log_file>
+init_log()#清空log文件打一条日志
+{
+    >$LogFile # conf/var.sh中定义
+    log "====================================="
+    log "LogFile=$LogFile"
+    log "\t\tshort-cut-pretreat"
+    local day=`date "+%Y-%m-%d %H:%M:%S"`
+    log "\t\t$day"
+    log "====================================="
+    declare -i log_count=0 # 整型局部变量
+}
+ 
+log()
+{
+    let log_count++
+    echo -e "\n--------------------------[$log_count]th log--------------------------------\n"
+    echo -e `date "+%Y-%m-%d %H:%M:%S"`"\t$@"
+}
+ 
+#read_mail <mail.conf> 结果在mail_receivers变量中
+read_alarm_mail(){
+    declare -i flag=0 # 整型局部变量
+ 
+    if [ -f "$1" ];then
+        cut -d "#" -f 1 "$1" |grep -v "^$" >tmp.$$
+        while read line; do
+            if [ $flag -eq 0 ];then
+                mail_receivers=$line # 整型全局变量
+                flag=1
+            else
+                mail_receivers="$mail_receivers,$line"
+            fi
+        done < tmp.$$
+        rm -f tmp.$$
+    else
+        #设定一个默认值
+        mail_receivers="-"
+    fi
+    echo "报警邮件接收人:$mail_receivers"
+}
+ 
+#向指定的邮件发送邮件告警
+#$1:    告警主题
+#$2:    需要被告警的详细内容
+send_alarm_mail( )
+{
+        if [ $# -ne 2 ]; then
+                return -1
+        fi
+    #获取收件人列表
+        echo "$2" | mail -s "$1" "$mail_receivers"
+        if [ $? -ne 0 ]; then
+                log "[`date "+%Y-%m-%d %H:%M:%S"`] [ERROR] 发送到 $mail_receivers 的邮件($1)失败!"
+        else
+                log "[`date "+%Y-%m-%d %H:%M:%S"`] [NOTE] 成功将邮件($1---$2) 发送至 $mail_receivers !"
+        fi
+        return 0
+}
+#对所有手机报警
+#$1:    报警内容
+send_list_msgs( )
+{ # 传入两个参数: $1 --> 报警短信内容  $n (n>=2) --> 报警接收人的手机号
+        if [ $# -lt 2 ]; then
+        echo "短信报警函数send_list_msgs参数不够!"
+                return -1
+        fi
+    local i="-"
+    local phone_number="-"
+    for((i=2;i<=$#;i++))
+    do
+        eval "phone_number=\${$i}"
+        # 向$phone_number发送报警信息$1
+        gsmsend -s $GSMSERVER1:$GSMPORT1 -s $GSMSERVER2:$GSMPORT2 *$GSMPIORITY*"$phone_number@$1"
+        if [ $? -ne 0 ];then
+            log "[`date "+%Y-%m-%d %H:%M:%S"`] [ERROR] 报警短信发送失败 !"
+        else
+            log "[`date "+%Y-%m-%d %H:%M:%S"`] [NOTE] 报警信息 ($1) 成功发送到 $phone_number !"
+        fi 
+    done
+}
+#------------------------------------------------------
+# 2012-2-25 PM 22:33   wangqiwen@*.com
+# input: 每次等5min
+# type=1 检测多个目录，各目录tag文件命名规则一致，且都在上一级目录
+#(1) wait_hadoop_file   hadoop  time  1 tag_file   hadoop_dir1   hadoop_dir2   hadoop_dir3  
+# 公用tag文件名（非绝对路径，tag文件默认在目录的上一层）
+# 示例：wait_hadoop_file $hadoop 10   1  done        /a/b/c        /a/m/c       /a/m/d
+# 或：  wait_hadoop_file $hadoop 10   1  finish.txt  /a/b/c        /a/m/c       /a/m/d
+#   目录/a/b/c,/a/m/c,/a/m/d
+#   若tag文件分别为:/a/b/c.done和/a/m/c.done和/a/m/d.done，那么，tag_file="done"
+#   否则，所有目录的tag文件名相同，tag_file可自定义为某文件名
+#
+# type=2 检测多个目录，各目录的tag文件路径无规则，需直接指定其完整路径
+#(2) wait_hadoop_file hadoop    time   2  hadoop_dir1 tag_file1  hadoop_dir2 tag_file2  # 私用tag文件名，绝对路径
+# 示例：wait_hadoop_file $hadoop 10   2  /a/b/c      /a/b/c.done /a/m/c     /a/m/c.txt   /a/m/d     /a/m_d.txt 
+# 目录与tag文件要依次成对出现
+#
+# type=3 检测多个集群文件（非目录），无须tag文件
+#(3) wait_hadoop_file    hadoop    time   3 hadoop_file1    hadoop_file2   hadoop_file3   # 判断多个hadoop文件的存在性
+# 示例：wait_hadoop_file $hadoop    10    3     /a/b/file1.txt  /a/b/file2.txt  /a/m/file3.log 
+#
+# output: 通过变量FILE_READY记录，返回状态值0~3 
+#   0 : 检查完毕，或成功删除临时目录
+#   1 : 参数输入有误：个数、奇偶性不对。type=2时要保证tag文件与目录依次成对出现
+#   2 : 超时，停止检查
+#   3 : _temporary目录删除失败,但不影响hadoop任务，属于成功状态
+#   成功状态值: 0 和 3
+#------------------------------------------------------
+#shopt -s -o nounset  # 变量声明才能使用
+wait_hadoop_file(){
+    local FILE_READY=1 # 检查结果
+    local ARG_NUM=$# # 参数个数
+    [ $ARG_NUM -lt 4 ] && {  echo -e "input error ! $ARG_NUM < 4 , please check !\t参数有误，小于4个，请确认！";return $FILE_READY;} 
+    local HADOOP=$1 # Hadoop集群客户端地址
+    local HADOOP_CHECK_PATH="/" # 待检查的集群目录或文件
+    local HADOOP_TEMP_PATH="/" # _temporary目录
+    local HADOOP_CHECK_TAG="/"  # 待检查的tag文件
+    local HADOOP_WATI_TIME=$2 # 最长等待时间（单位：分钟）
+    local CURRENT_ERRORTIME=1 # 等待时间
+    local CURRENT_PATH=1  # 当前遍历目录数
+    local PATH_INDEX=0  # 当前检测目录所在的参数位置
+    local TAG_INDEX=0  # 当前检测tag文件所在的参数位置
+    local TAG_NAME="/"
+    local DIR_NUM=0  # 待检测目录数
+    local TYPE=$3  # type
+    # 根据类型分别处理
+    # type=1,2时，输入参数至少5个；type=3时，输入参数至少4个
+    case $TYPE in
+    1) 
+        [ $ARG_NUM -eq 4 ] && {  echo -e "input error ! $ARG_NUM < 5 , please check !\t参数有误，小于5个，请确认！";return $FILE_READY;}
+        DIR_NUM=$(($ARG_NUM-4));;  # 待检测的目录数
+    2)
+        [ $ARG_NUM -eq 4 ] && {  echo -e "input error ! $ARG_NUM < 5 , please check !\t参数有误，小于5个，请确认！";return $FILE_READY;}
+        [ $((($ARG_NUM-3)%2)) -ne 0 ] && { FILE_READY=1; echo -e "Input error ! Dirs miss to match tags in pairs ...";return $FILE_READY;} # 目录和tag文件不成对，退出case
+        DIR_NUM=$((($ARG_NUM-3)/2));;  # 待检测的目录数
+    3)  
+        DIR_NUM=$(($ARG_NUM-3));; # 待检测文件数
+    *)
+        echo "Input error ! Type value $TYPE illegal... type参数值错误，1-3，非$TYPE"
+        return $FILE_READY;;
+    esac
+ 
+    while [ $CURRENT_PATH -le $DIR_NUM ]
+    do
+        # path/tag参数位置获取
+        if [ $TYPE -eq 1 ];then
+            PATH_INDEX=$((4+$CURRENT_PATH))
+            TAG_INDEX=4
+            eval "HADOOP_CHECK_PATH=\${$PATH_INDEX}"  # 待检查的集群目录
+            eval "TAG_NAME=\${$TAG_INDEX}"
+            if [ "$TAG_NAME" == "done" ];then #tag文件在上一级目录
+                HADOOP_CHECK_TAG="${HADOOP_CHECK_PATH%/*}/${HADOOP_CHECK_PATH##*/}.$TAG_NAME" # tag文件名为：上一级目录名字.done
+            else
+                HADOOP_CHECK_TAG="${HADOOP_CHECK_PATH%/*}/$TAG_NAME" # 上一级目录自定义tag文件名
+            fi
+        elif [ $TYPE -eq 2 ];then
+            PATH_INDEX=$((4+2*($CURRENT_PATH-1))) 
+            TAG_INDEX=$(($PATH_INDEX+1))
+            eval "HADOOP_CHECK_PATH=\${$PATH_INDEX}"  # 待检查的集群目录
+            eval "HADOOP_CHECK_TAG=\${$TAG_INDEX}" # tag文件的绝对路径
+        else
+            PATH_INDEX=$((3+$CURRENT_PATH))
+            eval "HADOOP_CHECK_PATH=\${$PATH_INDEX}"  # 待检查的集群文件
+        fi
+        while [ $CURRENT_ERRORTIME -le $HADOOP_WATI_TIME ]
+        do
+            $HADOOP fs -test -e $HADOOP_CHECK_PATH  # 检测path目录是否存在
+            if [ $? -eq 0 ];then # 目录存在
+                break
+            else  # 目录不存在，等待生成
+                CURRENT_ERRORTIME=$(($CURRENT_ERRORTIME+1))
+                date "+%Y-%m-%d %H:%M:%S"
+                sleep 5m
+            fi
+        done
+        [ $CURRENT_ERRORTIME -gt $HADOOP_WATI_TIME ] && { FILE_READY=2; echo -e "Time out when checking dirs[$HADOOP_CHECK_PATH] ...\t等待超时，目录未检查完毕！" ;break;}
+        if [ $TYPE -eq  3 ];then
+            CURRENT_PATH=$(($CURRENT_PATH+1)) # 检查下一个目录
+        else
+            HADOOP_TEMP_PATH="${HADOOP_CHECK_PATH}/_temporary" # 临时目录
+            # 检测tag文件，并删除临时目录
+            while [ $CURRENT_ERRORTIME -le $HADOOP_WATI_TIME ]
+            do
+                $HADOOP fs -test -e $HADOOP_CHECK_TAG # 检测tag文件是否存在
+                if [ $? -eq 0 ];then  # tag文件存在  [2012-12-4]停止临时文件删除
+                    #$HADOOP fs -test -e $HADOOP_TEMP_PATH  # 检查临时目录是否存在
+                    #if [ $? -eq 0 ];then  # 临时目录存在
+                    #   $HADOOP fs -rmr $HADOOP_TEMP_PATH  # 删除临时目录
+                    #   [ $? -ne 0 ] && { FILE_READY=3; echo -e "Failed to delete temp dir[$HADOOP_TEMP_PATH]...\t临时目录删除失败";} #break 2; } # 删除失败，退出2重循环 [2012-2-23]不退出，继续检查
+                    #fi
+                    CURRENT_PATH=$(($CURRENT_PATH+1)) # 检查下一个目录
+                    break
+                else  # tag文件不存在，错误次数自增，循环等待
+                    CURRENT_ERRORTIME=$(($CURRENT_ERRORTIME+1))
+                    date "+%Y-%m-%d %H:%M:%S"
+                    sleep 5m
+                fi
+            done
+        fi
+    done
+    [ $CURRENT_PATH -gt $DIR_NUM ] && { [ $FILE_READY -ne 3 ] && FILE_READY=0;  echo "All dirs ready ! 目录检查完毕！";} # 所有目录都准备好,新增成功状态3,[2012-2-23]
+    return $FILE_READY
+}
+```
+
+### 循环任务
+
+从某个日期开始，往前递推N天，并启动任务
+
+```shell
+[ $# -ge 1 ] && date=$1 || date=`date -d "1 days ago" +%Y%m%d`
+readonly rp_hadoop="/home/work/bin/hadoop-client-rp-product/hadoop/bin/hadoop"
+i=1;n=3
+while [ $i -le $n ]
+do
+    d=`date -d "${i} days ago $date" +%Y%m%d`
+    echo "[`date "+%Y-%m-%d %H:%M:%S"`] 第 $i 天 ($d)"
+    sh start.sh $d
+    [ $? -ne 0 ] && { echo "[`date "+%Y-%m-%d %H:%M:%S"`] 第 $i 天 ($d) oneday-pretreat 执行失败...";exit -1; } || { echo "[`date "+%Y-%m-%d %H:%M:%S"`] 第 $i 天( $d ) oneday-pretreat 执行成功...";  }
+    cd ../../short-cut-pretreat-v2/navigation
+    sh start.sh $d
+    [ $? -ne 0 ] && { echo "[`date "+%Y-%m-%d %H:%M:%S"`] 第 $i 天 ($d) short-cut-pretreat 执行失败...";exit -1; } || { echo "[`date "+%Y-%m-%d %H:%M:%S"`] 第 $i 天( $d ) short-cut-pretreat 执行成功..."; ((i++)); }
+    cd -
+done
+```
+
+### shell调度MapReduce任务
+
+单次案例：
 
 ```shell
 #!/bin/bash
@@ -1375,7 +1632,7 @@ less error.txt | awk 'BEGIN {srand();OFS="\t"} {print $0,rand()*1000}' |sort -k2
 #     Description:  pc端session日志的hadoop启动脚本 
 #    LastModified:  2013-3-28 12:51 PM 
 #         Created:  27/12/2012 11:17 AM CST
-#          AUTHOR:  wangqiwen(wangqiwen@baidu.com)
+#          AUTHOR:  wangqiwen(wangqiwen@*.com)
 #         COMPANY:  baidu Inc
 #         VERSION:  1.0
 #            NOTE:  
@@ -1445,6 +1702,420 @@ fi
 echo "[$0] [NOTE] [`date "+%Y-%m-%d %H:%M:%S"`] [$jobname] hadoop job finished"
 echo "=========================$jobname end ============================="
 exit 0
+```
+
+多任务调度
+
+```shell
+#!/bin/bash
+# -*- coding: utf-8 -*-
+#
+#===============================================================================
+#            File:  start.sh [oneday-pretreat]
+#           Usage:  
+#                运行指定日期：    sh start.sh  20120104
+#        正常运行(昨天):   sh start.sh
+#        查看运行日志：    tail -f ../log/20120104/run_log_20120103.txt
+#     Description: oneday-pretreat总控脚本
+#    LastModified:  12/13/2012 15:29 AM CST
+#         Created:  1/4/2012 11:16 AM CST
+# 
+#          AUTHOR:  wangqiwen(wangqiwen@*.com)
+#         COMPANY:  baidu Inc
+#         VERSION:  1.0
+#            NOTE: 
+#       input:  mergeOneDay和dump
+#      output:  作为short-cut-pretreat的输入
+#===============================================================================
+ 
+#搭建执行环境
+source ./build.sh
+#读入路径、时间配置
+if [ $# -eq 1 ];then
+    date_check=`echo "$1" | sed -n '/^[0-9]\{8\}$/p'`
+    if [ -z $date_check ];then
+        # 如果字符串为空,表明输入参数不当
+        echo "[`date "+%Y-%m-%d %H:%M:%S"`] [ERROR] date of start.sh input error ... 启动脚本的日期参数错误!"
+        exit -1
+    else
+        source $ConfDir/vars.sh $1
+    fi
+else
+    source $ConfDir/vars.sh
+fi
+ 
+#####################for mini#############################
+export HADOOP_HOME=${rp_hadoop%/*/*}
+export JAVA_HOME=${HADOOP_HOME%/*}/java6
+# build.sh中读入BinDir
+source $BinDir/oneday_onlyUrl_mini/mini/output/jjpack2text/conf/dlb_env.sh
+export PATH=$PATH:$HADOOP_HOME/bin
+##########################################################
+ 
+#是否开启调试模式
+if [ $debug_on -eq 1 ];then
+        set -x
+else
+    set +x
+fi
+ 
+#导入公共函数
+source ./common.sh #增加./,防止与环境变量重名
+#日志初始化
+init_log  #common.sh中定义
+ 
+#重定向标准输入和输出到指定文件
+exec 3<>$LogFile  #LogFile在conf/var.sh中定义
+exec 1>&3 2>&1
+ 
+log "$alarm_module_info" #模块信息
+log "[`date "+%Y-%m-%d %H:%M:%S"`] [NOTE] load conf file 加载配置文件..."
+#读入邮件配置
+read_alarm_mail $ConfDir/mail.conf # read_alarm_mail源于common.sh
+#读入短信配置
+source $ConfDir/msg_conf.sh
+#=========================hadoop任务函数封装===================
+check_jobs_input()
+{  # 参数: job type name warning msg_receiver 外部依赖才有短信报警
+    [ $# -lt 5 ] && { echo "check_jobs_input input ($@) error ! ($#>= 5)";exit -1; }
+    local my_job=$1
+    local job_name="${my_job}-$date"
+    local my_type=$2
+    local hadoop_file="-"
+    case $my_type in
+    1)  # 内部依赖,超时仅发送邮件
+        eval "hadoop_file=\$${my_job}_input_tag_in";;
+    2)  # 外部依赖,超时发报警短信\短信，另外增加预警
+        eval "hadoop_file=\$${my_job}_input_tag_out";;
+    *)
+        echo "check_jobs_input input error ! type=[1,2]"
+        exit -1;;
+    esac
+    eval "local wait_time=\$${my_job}_wait_time" # 2012-5-22
+    local name=$3
+    local warning=$4  # 是否需要预警
+    local msg_receiver=$5
+    for((i=6;i<=$#;i++))
+    do
+        eval "msg_receiver=\"\$msg_receiver \${$i}\""
+    done
+    # 外部依赖，先等待，超时发出预警，继续等待最后时间
+    if [ $warning -ne 0 ];then
+        # 数据生成较晚，提醒相关人员关注
+        eval "local wait_time_notice=\$${my_job}_wait_time_notice"
+        # 验证${my_job}中是否定义提醒时间
+        [ -e $wait_time_notice ] && { log "[`date "+%Y-%m-%d %H:%M:%S"`] [ERROR] $job_name ---[check_jobs_input] 未定义的变量: ${my_job}_wait_time_notice ";exit -1; }    
+        wait_hadoop_file $rp_hadoop $wait_time_notice 3 $hadoop_file # 等待文件ready  2012-5-22
+        return_value=$?
+        if [ $return_value -ne 0 ];then
+            rest_time=$(echo $wait_time_notice | awk '{print $0/12.0}')
+            log "[`date "+%Y-%m-%d %H:%M:%S"`] [WARNING] [返回值: $return_value] $job_name 上游数据 ($date,$name) 还没生成,存在风险...再等待 $rest_time 小时..... "
+            [  $alarm_mail_off -eq 0 ] && send_alarm_mail "[oneday-pretreat] [WARNING] $job_name 预警时间已到,请及时推进" "[`date "+%Y-%m-%d %H:%M:%S"`] [WARNING] [返回值:$return_value] $job_name 预警时间已到,上游数据 ($date,$name) 还未生成,存在风险,再等待 $rest_time 小时...请 [$alarm_module_RP_rd] 及时跟进, $alarm_module_info" # 邮件报警
+            [  $alarm_msg_off -eq 0 -a $my_type -eq 2 ] && send_list_msgs  "[oneday-pretreat] [WARNING] [返回值]:$return_value] $job_name 预警时间已到,上游数据 ($date,$name) 还未生成,存在风险,再等待 $rest_time 小时,请 [$alarm_module_RP_rd] 及时跟进." $msg_receiver 
+        else
+            return 0  # 预警时间内，数据ready，函数退出
+        fi
+        # 最晚抢救时间已到，当天挖掘无法更新，进入自动补数据阶段
+        eval "local wait_time_warning=\$${my_job}_wait_time_warning"
+        # 验证${my_job}中是否定义预警时间
+        [ -e $wait_time_warning ] && { log "[`date "+%Y-%m-%d %H:%M:%S"`] [ERROR] $job_name --- [check_jobs_input] 未定义的变量: ${my_job}_wait_time_warning ";exit -1; } 
+        wait_hadoop_file $rp_hadoop $wait_time_warning 3 $hadoop_file # 等待文件ready  2012-5-22
+        return_value=$?
+        if [ $return_value -ne 0 ];then
+            rest_time=$(echo $wait_time_warning | awk '{print $0/12.0}')
+            log "[`date "+%Y-%m-%d %H:%M:%S"`] [WARNING] [返回值: $return_value ] $job_name 接口数据最晚等待时间已到! 上游数据 ($date,$name) 还没生成,当天挖掘赶不上,自动进入补数据阶段...再等待 $rest_time 小时...请及时处理."
+            [  $alarm_mail_off -eq 0 ] && send_alarm_mail "[oneday-pretreat] [WARNING] $job_name 预警时间已到,请及时推进..." "[`date "+%Y-%m-%d %H:%M:%S"`] [WARNING] [返回值:$return_value] $job_name 接口数据最晚等待时间已到 !上游数据 ($date,$name) 还未生成,当天挖掘赶不上,自动进入补数据阶段,再等待 $rest_time 小时...请 [$alalarm_module_RP_rd] 及时跟进,$alarm_module_info" # 邮件报警
+            [  $alarm_msg_off -eq 0 -a $my_type -eq 2 ] && send_list_msgs  "[oneday-pretreat] [WARNING] [返回值 $return_value ] $job_name 接口数据最晚等待时间已到 !,上游数据 ($date,$name) 还未生成,当天挖掘赶不上,自动进入补数据阶段,再等待 $rest_time 小时,请[ $alarm_module_RP_rd ]及时跟进." $msg_receiver
+        else
+            return 0   # 补数据成功，程序返回  
+        fi
+    fi
+    # 补数据超时失败,程序退出
+    wait_hadoop_file $rp_hadoop $wait_time 3 $hadoop_file # 等待文件ready  2012-5-22
+    return_value=$?
+    if [ $return_value -ne 0 ];then
+        log "[`date "+%Y-%m-%d %H:%M:%S"`] [ERROR] [返回值: $return_value] $job_name 等待超时 ! 上游数据 ($date,$name) 未按时生成..."  # 打运行日志
+        [  $alarm_mail_off -eq 0 ] && send_alarm_mail "[oneday-pretreat] [ERROR] $job_name 等待超时!" " [`date "+%Y-%m-%d %H:%M:%S"`][ERROR][返回值: $return_value] $job_name 失败! 上游数据 ($date,$name) 未按时生成..请联系 [$alarm_module_RP_rd] 处理,$alarm_module_info" # 邮件报警
+        [  $alarm_msg_off -eq 0 -a $my_type -eq 2 ] && send_list_msgs  "[oneday-pretreat] [ERROR] [返回值: $return_value] $job_name 等待超时!上游数据 ($date,$name) 未按时生成...请 [$alarm_module_RP_rd] 处理,$alarm_module_info" $msg_receiver # 短信报警 
+        exit -1 # 超时等待，退出
+    fi
+}
+ 
+hadoop_dir_search()
+{   # 参数: job_name type  name 
+    # 仅用于接口数据的自动查找,替换
+    [ $# -lt 3 ] && echo "[`date "+%Y-%m-%d %H:%M:%S"`] [ERROR] hadoop_dir_search input error ! ($# >= 3)"
+    local job_name=$1
+    local my_type=$2 # 区分正常产出数据(type=1)和转储日志(type非1)
+    local name=$3
+    local tmp_date='-'
+    local tmp_path='-'
+    local tmp_tag='-'
+    eval "local days=\$${name}_findDays"
+    eval "wait_hadoop_file \$rp_hadoop \$${name}_wait_time 3 \$${name}_tag"
+    return_value=$?
+    if [ $return_value -ne 0 ];then
+        log "[`date "+%Y-%m-%d %H:%M:%S"`] [WARNING] [$job_name] 当天目录 ${name}_dir/$date/0000.done 不存在,请核实 !"
+        [  $alarm_mail_off -eq 0 ] && send_alarm_mail "[oneday-pretreat] [WARNING] 上游数据 $name($date) 不存在!" "[`date "+%Y-%m-%d %H:%M:%S"`] [WARNING] 上游数据 $name($date) 不存在...请联系 [$alarm_module_RP_rd] 追查原因,$alarm_module_info"
+        # 当天数据超时未生成,common_query 需要自动搜索最近的数据
+        for((i=1;i<=$days;i++))
+        do
+            tmp_date=`date -d "-$i day $date" +%Y%m%d` # 获取前i天日期
+            if [ $my_type -eq 1 ];then
+                eval "tmp_path=\"\${${name}_dir%/*/*}/$tmp_date/0000\"" # 拼接临时目录----正常产出数据
+                eval "tmp_tag=\"\${${name}_dir%/*/*}/$tmp_date/0000.done\"" # 拼接临时目录----正常产出数据
+            else
+                eval "tmp_path=\"\${${name}_dir%/*/*/*}/$tmp_date/0000/0000\"" # 拼接临时目录----转储日志
+                eval "tmp_tag=\"\${${name}_dir%/*/*/*}/$tmp_date/0000/@manifest\"" # 拼接临时目录----转储日志
+            fi
+            $rp_hadoop fs -test -e $tmp_tag  # 检查默认的目录标记文件 [20130218]
+            if [ $? -eq 0 ];then
+                eval "${name}_dir=\"$tmp_path\""  # 更改原目录值
+                eval "${name}_tag=\"$tmp_tag\""   # 更改原标记文件
+                break
+            else
+                log "[`date "+%Y-%m-%d %H:%M:%S"`] [WARNING] [$job_name] $tmp_tag 不存在,请核实 !"
+                [  $alarm_mail_off -eq 0 ] && send_alarm_mail "[oneday-pretreat] [WARNING] 上游数据 $name($tmp_date) 不存在!" "[`date "+%Y-%m-%d %H:%M:%S"`] [WARNING] 上游数据 $name($d) 不存在...请联系 [$alarm_module_RP_rd] 追查原因,$alarm_module_info"
+            fi
+        done
+        [ $i -ge $days ] && exit -1
+    fi
+}
+start_hadoop_jobs()
+{  # 参数: jobname arg1 arg2 ...  不包括基本参数
+    [ $# -lt 1 ] && echo "start_hadoop_jobs input error ! ($# >= 1)"
+    local myjob=$1
+    local myjob_name="${1}-$date"
+    local args=""
+    if [ $# -ge 2 ];then
+        # 获取额外参数
+        for((i=2;i<=$#;i++))
+        do
+            eval "args=\"$args \${$i}\""
+        done
+    fi
+    #启动任务
+    eval "cd \$${myjob}_local_dir"
+    eval "\$shellBin start_hadoop.sh \$rp_hadoop \$${myjob}_input \$${myjob}_output \$myjob_name \$${myjob}_map_con_num \$${myjob}_reduce_num \$args"
+    return_value=$?
+    if [ $return_value -eq 0 ];then
+        log "[`date "+%Y-%m-%d %H:%M:%S"`] [NOTE] [返回值: $return_value] $myjob_name finished ! $myjob_name 执行成功..."
+        eval output=\$${myjob}_output
+        ${rp_hadoop} cr -register ${output} -cronID $cronID # zk注册数据状态
+        if [ $? -ne 0 ];then
+            log "[`date "+%Y-%m-%d %H:%M:%S"`] [ERROR] $myjob_name zk状态注册失败.."
+            [  $alarm_mail_off -eq 0 ] && send_alarm_mail "[oneday-pretreat] [ERROR] $myjob_name zk状态注册失败.."  " [`date "+%Y-%m-%d %H:%M:%S"`] [ERROR] $myjob_name zk状态注册失败...请联系 $alarm_module_stra_rd 处理,谢谢! $alarm_module_info"
+        fi
+    else
+        log "[`date "+%Y-%m-%d %H:%M:%S"`] [ERROR] [返回值: $return_value] $myjob_name failed ! $myjob_name 执行失败..."
+        [  $alarm_mail_off -eq 0 ] && send_alarm_mail "[oneday-pretreat] [ERROR] $myjob_name Failed !"  " [`date "+%Y-%m-%d %H:%M:%S"`] [ERROR] $myjob_name failed when running ! $myjob_name 执行过程中失败...请联系 $alarm_module_stra_rd 处理,谢谢! $alarm_module_info"
+        exit -1
+    fi
+    cd -
+}
+ 
+#=======================启动子任务==============================
+ 
+#---------------oneday_onlyUrl----------------------
+#  作用: 抽取URL,去重,方便下一步的网页库查询           |
+#  输入: mergeOneDay和database_dump                    |
+#  输出: oneday_onlyUrl                                       |
+#-------------------------------------------------------
+jobname1="oneday_onlyUrl"
+oneday_onlyUrl()
+{
+    # 等待接口数据
+    check_jobs_input $jobname1 2  "mergeOneDay&database_dump" 1 $MOBILE_LIST_ALL # 外部依赖,需要预警
+    #从集群上下载记录mergeOneDay信息的xml文件
+    local_xml_mergeOneDay_file="${DataDir}/${mergeOneDay_tag##*/}" #提取文件名
+    [ -e $local_xml_mergeOneDay_file ] && rm $local_xml_mergeOneDay_file # 删除已有文件
+    sleep 5 # 等待5S，防止原xml文件不完整
+    $rp_hadoop fs -copyToLocal $mergeOneDay_tag $DataDir #复制xml文件到本地
+    cd $CheckDir # 2012-12-11
+    $pythonBin mergeOneDay_check.py $local_xml_mergeOneDay_file #检验mergeOneDay数据源是否满足要求
+    cd - # 2012-12-11
+    return_value=$?
+    if [ $return_value -ne 0 ];then
+        log "[`date "+%Y-%m-%d %H:%M:%S"`] [ERROR] [返回值:$return_value] $jobname1 失败!上游数据 mergeOneDay-$date 缺失过多,不满足要求..."
+        [  $alarm_mail_off -eq 0 ] && send_alarm_mail "[oneday-pretreat] [ERROR] [返回值:$return_value] $jobname1 失败!" " [`date "+%Y-%m-%d %H:%M:%S"`] [ERROR] $jobname1 失败!上游数据 mergeOneDay-$date 数据源缺失过多,不满足要求...请联系 [$alarm_module_RP_rd] 追查原因,$alarm_module_info"
+        [  $alarm_msg_off -eq 0 ] && send_list_msgs  "[oneday-pretreat] [ERROR] [返回值:$return_value] $jobname1 失败!上游数据 mergeOneDay-$date 数据源缺失过多,不满足要求...请 [$alarm_module_RP_rd] 追查原因,谢谢! $alarm_module_info" $MOBILE_LIST_ALL
+        exit -1
+    fi
+    $rp_hadoop fs -touchz $mergeOneDay_ok # 数据验证通过，创建标记文件，通知下游模块启动 
+    start_hadoop_jobs "oneday_onlyUrl"
+}
+if [ $oneday_onlyUrl_pass -eq 0 ];then
+    oneday_onlyUrl
+    $rp_hadoop fs -touchz $mergeOneDay_ok # 数据验证通过，创建标记文件，通知下游模块启动 
+    ${rp_hadoop} cr -register $mergeOneDay_ok -cronID $cronID # 注册数据状态
+    if [ $? -ne 0 ];then
+        log "[`date "+%Y-%m-%d %H:%M:%S"`] [ERROR] mergeOneDay_ok zk状态注册失败.."
+        [  $alarm_mail_off -eq 0 ] && send_alarm_mail "[oneday-pretreat] [ERROR] mergeOneDay_ok zk状态注册失败.."  " [`date "+%Y-%m-%d %H:%M:%S"`] [ERROR] mergeOneDay_ok zk状态注册失败...请联系 $alarm_module_stra_rd 处理,谢谢! $alarm_module_info"
+        fi
+fi
+ 
+#-----------oneday_onlyUrl_mini-------------------------
+#  作用: mini网页库查询                                |
+#  输入: oneday_onlyUrl                                |
+#  输出: oneday_onlyUrl_mini                           |
+#-------------------------------------------------------
+jobname2="oneday_onlyUrl_mini"
+oneday_onlyUrl_mini()
+{
+     
+    check_jobs_input $jobname2 1  "oneday_onlyUrl" 0 $MOBILE_LIST_ALL # 内部依赖
+    cd $oneday_onlyUrl_mini_local_dir/mini/output
+    # ----------通过vars.sh中的路径配置,python程序解析修改test.xml
+    less $ConfDir/oneday_onlyUrl_mini_conf.xml | awk -v input=$oneday_onlyUrl_mini_hdfs_input -v output=$oneday_onlyUrl_mini_hdfs_output -v bin_path="$oneday_onlyUrl_mini_bin_path" '{
+        if($0~/<hdfs_input>.*<\/hdfs_input>/)
+            print "\t\t<hdfs_input>"input"</hdfs_input>"
+        else if($0~/<hdfs_output>.*<\/hdfs_output>/)
+            print "\t\t<hdfs_output>"output"</hdfs_output>"
+        else if($0~/<bin_path>.*<\/bin_path>/)
+            print "\t\t<bin_path>"bin_path"</bin_path>"
+        else
+            print $0
+    }' > test.xml 
+    echo "=======================mini网页库========================="
+    $pythonBin Xml2stream.py test.xml  # 启动网页库查询,后台操作
+    ${rp_hadoop} fs -test -e "${oneday_onlyUrl_mini_output}/part-00999" # part-00999存在才证明mini查询成功
+    if [ $? -eq 0 ];then
+        # 任务执行完毕后，创建便于检测的tag文件
+        $rp_hadoop fs -touchz "${oneday_onlyUrl_mini_output%/*}/${oneday_onlyUrl_mini_output##*/}.done"
+        ${rp_hadoop} cr -register ${oneday_onlyUrl_mini_output} -cronID $cronID # 注册数据状态
+        if [ $? -ne 0 ];then
+            log "[`date "+%Y-%m-%d %H:%M:%S"`] [ERROR] oneday_onlyUrl_mini zk状态注册失败.."
+            [  $alarm_mail_off -eq 0 ] && send_alarm_mail "[oneday-pretreat] [ERROR] oneday_onlyUrl_mini zk状态注册失败.."  " [`date "+%Y-%m-%d %H:%M:%S"`] [ERROR] oneday_onlyUrl_mini zk状态注册失败...请联系 $alarm_module_stra_rd 处理,谢谢! $alarm_module_info"
+        fi
+    fi
+    # 删除多余的临时目录
+    echo "----清除临时文件 $oneday_onlyUrl_mini_hdfs_tmp ------"
+    #exec 1>/dev/null 2>&1 # 将以下删除信息扔到位桶里
+    for dir in $oneday_onlyUrl_mini_hdfs_tmp
+    do
+ 
+        echo "删除临时目录:${oneday_onlyUrl_mini_output%/*}/$dir"
+        $rp_hadoop fs -rmr "${oneday_onlyUrl_mini_output%/*}/$dir" &>/dev/null
+    done
+    #exec 1>&3 2>&1  # 恢复重定向到日志文件
+    echo "========================结束============================"
+    cd -
+    log "[`date "+%Y-%m-%d %H:%M:%S"`] [NOTE] $jobname2 百灵库查询完毕..."
+}
+ 
+if [ $oneday_onlyUrl_mini_pass -eq 0 ];then
+    oneday_onlyUrl_mini 
+fi
+#------------oneday_baiduid---------------------------------
+#  作用:                                               |
+#  输入: mergeOneDay和baiduid                          |
+#  输出: oneday_baiduid                                |
+#-------------------------------------------------------
+jobname3="oneday_baiduid"
+#-----------后台等待baiduid---------------------
+oneday_baiduid(){
+    check_jobs_input $jobname3 2  "mergeOneDay" 0 $MOBILE_LIST_ALL # 外部依赖
+    start_hadoop_jobs $jobname3 $oneday_baiduid_max_freq $oneday_baiduid_min_time 
+}
+ 
+if [ $oneday_baiduid_pass -eq 0 ];then
+    oneday_baiduid &  # 后台运行
+fi
+ 
+#------------oneday_onlyUrl_mini_plus------------------
+#  作用: 网页库查询结果上附加unifyUrl和commonQuery     |
+#  输入: oneday_onlyUrl_mini,urlunify,commonQuery      |
+#  输出: oneday_onlyUrl_mini_plus                      |
+#-------------------------------------------------------
+jobname4="oneday_onlyUrl_mini_plus"
+oneday_onlyUrl_mini_plus(){
+    hadoop_dir_search $jobname4 1 "common_query" # 检查并查找可替代的commonQuery数据  统计产出(2013-5-15)
+    hadoop_dir_search $jobname4 1 "oneday_onlyUrl_mini" # 检查并查找可替代的mini数据  原始日志
+    #check_jobs_input $jobname4 1  "oneday_onlyUrl_mini" 0 $MOBILE_LIST_STRA  # 内部
+    oneday_onlyUrl_mini_plus_input="$urlunify_dir $common_query_dir $oneday_onlyUrl_mini_dir"
+    start_hadoop_jobs $jobname4 $oneday_onlyUrl_mini_plus_input_str1 $oneday_onlyUrl_mini_plus_input_str2 $oneday_onlyUrl_mini_plus_input_str3
+    reset_common_query # 恢复common_query原始值
+}
+if [ $oneday_onlyUrl_mini_plus_pass -eq 0 ];then
+    oneday_onlyUrl_mini_plus
+fi
+ 
+ 
+#------------oneday_baiduid_plus----------------------------
+#  作用: oneday_baiduid附加URL信息                         |
+#  输入: oneday_baiduid和oneday_onlyUrl_mini               |
+#  输出: oneday_baiduid_plus                               |
+#-------------------------------------------------------
+jobname5="oneday_baiduid_plus"
+oneday_baiduid_plus()
+{
+    check_jobs_input $jobname5 1  "oneday_baiduid|oneday_onlyUrl_mini_plus" 0 $MOBILE_LIST_STRA # 内部依赖
+    start_hadoop_jobs $jobname5 $oneday_baiduid_plus_input_str1 $oneday_baiduid_plus_input_str2
+}
+ 
+if [ $oneday_baiduid_plus_pass -eq 0 ];then
+    oneday_baiduid_plus
+fi
+ 
+#------------oneday_uid_plus----------------------------
+#  作用: baiduid映射成uid                              |
+#  输入: baiduid-uid-mapping和oneday_baiduid_plus      |
+#  输出: oneday_uid_plus                           |
+#-------------------------------------------------------
+jobname6="oneday_uid_plus"
+#-----------后台等待baiduid-uid-mapping-------------------
+oneday_uid_plus(){
+    hadoop_dir_search $jobname6 1 "baiduid_uid_mapping" # 检查并查找可替代的baiduid-uid数据---程序产出
+    check_jobs_input $jobname6 1  "oneday_baiduid_plus" 0 $MOBILE_LIST_STRA # 内部依赖
+    oneday_uid_plus_input="${baiduid_uid_mapping_dir} ${oneday_baiduid_plus_output}"
+    start_hadoop_jobs $jobname6  $oneday_uid_plus_input_str1 $oneday_uid_plus_input_str2 
+    reset_baiduid_uid_mapping # 恢复baiduid_uid_mapping原始值
+}
+ 
+if [ $oneday_uid_plus_pass -eq 0 ];then
+    oneday_uid_plus  & # 后台运行
+fi
+ 
+#------------oneday_activeBaiduid_plus------------------
+#  作用: baiduid映射成uid                              |
+#  输入: activeBaiduid和oneday_baiduid_plus           |
+#  输出: oneday_activeBaiduid_plus                     |
+#-------------------------------------------------------
+jobname7="oneday_activeBaiduid_plus"
+#-----------后台等待 activeBaiduid-------------------
+oneday_activeBaiduid_plus(){
+    hadoop_dir_search $jobname7 1 "activeBaiduid" # 检查并查找可替代的baiduid-uid数据---程序产出
+    check_jobs_input $jobname7 1  "oneday_baiduid_plus" 0 $MOBILE_LIST_STRA # 内部依赖
+    oneday_activeBaiduid_plus_input="${activeBaiduid_dir} ${oneday_baiduid_plus_output}"
+    start_hadoop_jobs $jobname7  $oneday_activeBaiduid_plus_input_str1 $oneday_activeBaiduid_plus_input_str2 
+    reset_activeBaiduid # 恢复activeBaiduid原始值
+}
+ 
+if [ $oneday_activeBaiduid_plus_pass -eq 0 ];then
+    oneday_activeBaiduid_plus
+fi
+ 
+#------------oneday_dump_urlUnify----------------------
+#  作用: 用网页库查询结果归一化全库数据database_dump   |
+#  输入: databse_dump和oneday_onlyUrl_mini             |
+#  输出: oneday_dump_urlUnify                          |
+#-------------------------------------------------------
+jobname8="oneday_dump_urlUnify"
+oneday_dump_urlUnify(){ # 后台运行
+    check_jobs_input $jobname8 2  "database_dump" 0 $MOBILE_LIST_ALL # 外部依赖
+    check_jobs_input $jobname8 1  "oneday_onlyUrl_mini_plus" 0 $MOBILE_LIST_STRA # 内部依赖
+    start_hadoop_jobs $jobname8 $oneday_dump_urlUnify_input_str1 $oneday_dump_urlUnify_input_str2
+}
+ 
+if [ $oneday_dump_urlUnify_pass -eq 0 ];then
+    oneday_dump_urlUnify  &
+fi
+ 
+#------------------end-----------------------
+log "[`date "+%Y-%m-%d %H:%M:%S"`] [NOTE] oneday-pretreat success ! oneday-pretreat 模块执行完毕！"
+ 
+#关闭重定向
+exec 3<&-
 ```
 
 
