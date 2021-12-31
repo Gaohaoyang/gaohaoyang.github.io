@@ -1030,6 +1030,121 @@ Kubernetes 的 kubectl 也就是 command tool，Kubernetes UI，或者有时候�
 
 # Docker
 
+Docker的三大核心概念：镜像、容器、仓库
+- **镜像**：类似虚拟机的镜像、用俗话说就是安装文件。
+- **容器**：类似一个轻量级的沙箱，容器是从镜像创建应用运行实例，可以将其启动、开始、停止、删除、而这些容器都是相互隔离、互不可见的。
+- **仓库**：类似代码仓库，是Docker集中存放镜像文件的场所。
+
+
+## docker安装
+
+资料
+- 【2020-03-26】[linux上安装Docker(非常简单的安装方法)](https://cloud.tencent.com/developer/article/1605163)
+- 【2019-05-13】[linux安装docker](https://www.jianshu.com/p/2dae7b13ce2f)
+
+centos下安装docker，前置条件：
+- 64-bit 系统
+- kernel 3.10+
+
+```shell
+# -------- 方法① ----------
+curl -sSL https://get.daocloud.io/docker | sh # 一键安装
+docker ps # 检测状态
+systemctl start docker.service # 启动服务
+#systemctl restart docker.service # 重启服务
+sudo systemctl enable docker # 开机自启
+# -------- 方法② ----------
+# 检查内核
+uname -r
+# 更新yum
+yum update
+# 添加yum仓库
+tee /etc/yum.repos.d/docker.repo <<-'EOF'
+[dockerrepo]
+name=Docker Repository
+baseurl=https://yum.dockerproject.org/repo/main/centos/$releasever/
+enabled=1
+gpgcheck=1
+gpgkey=https://yum.dockerproject.org/gpg
+EOF
+# 安装docker
+yum install -y docker-engine
+# 查看是否安装成功
+docker version
+# 启动docker
+systemctl start docker.service
+# 开机启动
+sudo systemctl enable docker
+# -------- 方法③ ---------- 阿里云镜像 ------
+# 安装依赖包
+sudo yum install -y yum-utils device-mapper-persistent-data lvm2 
+# 设置阿里云镜像源
+sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo 
+# 安装 Docker-CE
+sudo yum install docker-ce
+# 开机自启
+sudo systemctl enable docker 
+# 启动docker服务  
+sudo systemctl start docker
+# 添加docker用户组（可选）
+# 1. 建立 Docker 用户组
+sudo groupadd docker
+# 2.添加当前用户到 docker 组
+sudo usermod -aG docker $USER
+# 镜像加速配置
+# 加速器地址 ：
+# 阿里云控制台搜索容器镜像服务
+# 进入容器镜像服务， 左侧最下方容器镜像服务中复制加速器地址
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["你的加速器地址"]
+}
+EOF
+# 重启docker
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
+[dockerhub](https://hub.docker.com/search?q=&type=image)镜像
+- ![](https://upload-images.jianshu.io/upload_images/9494436-2a2035d70223703e.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp)
+
+
+```shell
+# 下载镜像：docker pull <镜像名:tag>    如：下载centos镜像
+sudo docker pull bitnami/tensorflow-serving # 安装TensorFlow serving
+docker pull centos
+docker pull sameersbn/redmine:latest
+# 查看已下载镜像
+docker images
+# 删除容器
+docker rm <容器名 or ID>
+# 查看容器日志
+docker logs -f <容器名 or ID>
+# 查看正在运行的容器
+docker ps
+# 查看所有的容器，包括已经停止的。
+docker ps -a 
+# 删除所有容器
+docker rm $(docker ps -a -q)
+# 停止、启动、杀死指定容器
+docker start <容器名 or ID> # 启动容器
+docker stop <容器名 or ID> # 启动容器
+docker kill <容器名 or ID> # 杀死容器
+# 后台运行 docker run -d <Other Parameters>
+docker run -d -p 127.0.0.1:33301:22 centos6-ssh
+# 暴露端口： 一共有三种形式进行端口映射
+docker -p ip:hostPort:containerPort # 映射指定地址的主机端口到容器端口
+# 例如：docker -p 127.0.0.1:3306:3306 映射本机3306端口到容器的3306端口
+docker -p ip::containerPort # 映射指定地址的任意可用端口到容器端口
+# 例如：docker -p 127.0.0.1::3306 映射本机的随机可用端口到容器3306端口
+docer -p hostPort:containerPort # 映射本机的指定端口到容器的指定端口
+# 例如：docker -p 3306:3306 # 映射本机的3306端口到容器的3306端口
+# 映射数据卷
+docker -v /home/data:/opt/data # 这里/home/data 指的是宿主机的目录地址，后者则是容器的目录地址
+```
+
+## 构建docker镜像
 
 构建Docker镜像有以下两种方法：
 - 1：使用docker commit命令。
@@ -1039,6 +1154,19 @@ Kubernetes 的 kubectl 也就是 command tool，Kubernetes UI，或者有时候�
 - 注意：源码文件和Dockerfile文件放到同一个目录下
   - Dockerfile
   - jdk-8u162-linux-x64.tar.gz
+
+## docker GUI 管理
+
+推荐使用 Portainer 作为容器的 GUI 管理方案。[官方地址](https://portainer.io/install.html)
+
+```shell
+# 安装
+docker volume create portainer_data
+docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+```
+
+ IP:9000 即可进入容器管理页面
+ - ![](https://upload-images.jianshu.io/upload_images/9494436-296c9fe77d4af513.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp)
 
 ## Docker命令
 
