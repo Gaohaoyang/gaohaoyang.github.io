@@ -538,7 +538,40 @@ netstat -ntulp | grep 3306   # 查看所有3306端口使用情况
 - kill -9 26993
 
 
-## 任务管理
+## 进程
+
+## linux进程
+
+一个进程包括代码、数据和分配给进程的资源。fork（）函数通过**系统调用**创建一个与原来进程几乎完全相同的进程，也就是两个进程可以做完全相同的事，但如果初始参数或者传入的变量不同，两个进程也可以做不同的事。
+- 一个进程调用fork（）函数后，系统先给新的进程分配资源，例如存储数据和代码的空间。
+- 然后把原来的进程的所有值都复制到新的新进程中，只有少数值与原来的进程的值不同。相当于克隆了一个自己。
+
+fork函数创建子进程
+
+```c++
+#include <unistd.h>  
+#include <stdio.h>   
+int main ()   
+{   
+    pid_t fpid; //fpid表示fork函数返回的值  
+    int count=0;  
+    fpid = fork();  // 创建子进程（克隆），返回0，错误时返回负数
+    if (fpid < 0)  
+        printf("error in fork!");   
+    else if (fpid == 0) {  
+        printf("i am the child process, my process id is %d\n", getpid());   
+        printf("我是爹的儿子\n");//对某些人来说中文看着更直白。  
+        count++;  
+    }  
+    else {  
+        printf("i am the parent process, my process id is %d\n", getpid());   
+        printf("我是孩子他爹\n");  
+        count++;  
+    }  
+    printf("统计结果是: %d\n",count);  
+    return 0;  
+}
+```
 
 ### crontab使用
 
@@ -622,6 +655,8 @@ ntpdate time.windows.com
 
 从事 Web 服务器开发的后端程序员，必然绕不开**网络编程**，而其中最基础也是最重要的部分就是 Linux **I/O模式** 及 **Socket 编程**。
 
+### 基础概念
+
 基础概念
 - 1.1、**用户**空间和**内核**空间
   - 对于32位操作系统而言，它的寻址空间是4G（2的32次方），注意这里的4G是**虚拟内存**空间大小。以 Linux 为例，它将最高的1G字节给内核使用，称为**内核空间**，剩下的3G给用户进程使用，称为**用户空间**。这样做的好处就是隔离，保证内核安全。
@@ -651,11 +686,322 @@ ntpdate time.windows.com
 1. **信号驱动** I/O（ signal driven IO）（很少见，可忽略）
 
 
-## socket编程
+## 网络编程（socket）
+
+socket编程基于**传输层**，是应用层和传输层之间的一个抽象层。在使用socket API时，实际上每创建一个socket，都会分配两个**缓冲区**：**输入**缓冲区和**输出**缓冲区（大小一般是8K）
+- Linux下**一切皆文件**的思想，两台主机在进行通信时，**write** 函数是向缓冲区里**写**，**read** 函数是从缓冲区里**读**，至于缓冲区里的数据什么时候被传输，有没有达到目标主机，这些都交给传输层的TCP/UDP来做。
+- 但Windows中，将 **socket文件** 和 **普通文件** 分开，所以不能用write函数和read函数实现，而是用**send**函数和**recv**函数。
+
+每次通信都打开了一个socket文件，所以通信结束后，在进程关闭前，要关闭所有的socket文件。
+
+进程通信的概念最初来源于单机系统。由于每个进程都在自己的地址范围内运行，为保证两个相互通信的进程之间既互不干扰又协调一致工作，操作系统为进程通信提供了相应设施，如
+- UNIX BSD有：**管道**（pipe）、**命名管道**（named pipe）**软中断信号**（signal）
+- UNIX system V有：**消息**（message）、**共享存储区**（shared memory）和**信号量**（semaphore)等.
+仅限于用在**本机**进程之间通信。**网间**进程通信要解决的是不同主机进程间的相互通信问题（同机进程通信是特例）。
+- 同一主机上，不同进程可用**进程号**（process ID）唯一标识。
+- 但在网络环境下，各主机独立分配的进程号不能唯一标识该进程。不同机器有相同进程号，另外，操作系统支持的网络协议众多，不同协议的工作方式不同，地址格式也不同。网间进程通信还要解决多重协议的识别问题。 
+- TCP/IP协议族已经解决了这个问题，网络层的“**ip地址**”可以唯一标识网络中的主机，而传输层的“**协议**+**端口**”可以唯一标识主机中的应用程序（进程）。这样利用**三元组**（ip地址，协议，端口）就可以标识网络的进程了，网络中的进程通信就可以利用这个标志与其它进程进行交互。
+TCP/IP协议的应用程序通常采用应用编程接口：UNIX  BSD的**套接字**（socket）和UNIX System V的**TLI**（已经被淘汰）来实现网络进程之间的通信。目前几乎所有的应用程序都是采用**socket**，而现在又是网络时代，网络中进程通信是无处不在，这就是我为什么说“**一切皆socket**”。
+
+### TCP -- 三次握手、四次挥手
+
+socket的API是在三次握手和四次挥手的基础上设置的接口
+- 结构体：ip地址 + 端口号，如：sockaddr、sockaddr_in
+总的来说，不管是 struct sockaddr 还是 struct sockaddr_in 都是存放了一个**ip地址**，一个**端口号**，和ip的**类型**(IPV4还是IPV6)
+
+注意：
+- 每次输入的ip要通过inet_addr(“127.0.0.1”)函数转化，将一个点分十进制ip转换成长无符号整形，头文件在<arpa/inet.h>中
+- 端口号要转换成小端
+
+三次握手
+- 一个客户端只有一个sock（文件描述符），而一个服务器最少有两个（一个是自己创建socket时的sock，剩下的是每有一个客户端连接服务器就生成一个sock文件描述符）。数据传输过程相当于文件的读写操作
+- ![img](https://img-blog.csdnimg.cn/20190406214540878.png)
+- ![img](https://img-blog.csdnimg.cn/20190406214552329.png)
+四次挥手
+- 四次挥手在socket API上的接口表示为关闭各自拥有的文件描述符即可
+
+### 什么是socket
 
 什么是 Socket 呢？简单理解，就是： **ip地址** + **端口号**。
 
-当两个进程间需要通信时，首先要创建**五元组**（源ip地址、目的ip地址、源端口号、目的端口号、协议），建立 tcp 连接，建立好连接之后，两个进程各自有一个 Socket 来标识，这两个 socket 组成的 socket pair 也就唯一标识了一个连接。有了连接之后，应用程序得要从 tcp 流上获取数据，然后再处理数据。于是，诞生了三种高效的 Socket 编程方法：**select**、**poll** 和 **epoll**.
+当两个进程间需要通信时，首先要创建**五元组**（源ip地址、目的ip地址、源端口号、目的端口号、协议），建立 tcp 连接，建立好连接之后，两个进程各自有一个 Socket 来标识，这两个 socket 组成的 socket pair 也就唯一标识了一个连接。有了连接之后，应用程序得要从 tcp 流上获取数据，然后再处理数据。
+
+### socket工作原理
+
+工作原理：“open—write/read—close”模式。
+- 服务器端先**初始化**Socket，然后与端口**绑定**(bind)，对端口进行**监听**(listen)，调用accept**阻塞**，等待客户端连接。
+- 这时如果有个客户端初始化一个Socket，然后连接服务器(connect)，如果连接成功，这时客户端与服务器端的连接就建立了。
+- 客户端发送数据请求，服务器端接收请求并处理请求，然后把回应数据发送给客户端，客户端读取数据
+- 最后关闭连接，一次交互结束。
+涉及的函数
+- （1）socket初始化：
+  - int  socket(int protofamily, int type, int protocol); //返回sockfd
+- （2）bind()函数把一个地址族中的特定地址赋给socket。
+  - int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+- （3）listen()：调用listen()来监听这个socket，如果客户端这时调用connect()发出连接请求，服务器端就会接收到这个请求
+  - int listen(int sockfd, int backlog); // backlog排队的最大连接个数
+  - socket()函数创建的socket默认是一个**主动**类型的，listen函数将socket变为**被动**类型的，等待客户的连接请求。
+- （4）connect()函数: 客户端通过调用connect函数来建立与TCP服务器的连接
+  - int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+- （5）accept()函数
+  - TCP服务器端依次调用socket()、bind()、listen()之后，就会监听指定的socket地址了。TCP客户端依次调用socket()、connect()之后就向TCP服务器发送了一个连接请求。TCP服务器监听到这个请求之后，就会调用accept()函数取接收请求，这样连接就建立好了。之后就可以开始网络I/O操作了，即类同于普通文件的读写I/O操作。
+  - int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen); //返回连接connect_fd
+- （6）read()、write()等函数：调用网络I/O进行读写操作
+  - read()/write()
+  - recv()/send()
+  - readv()/writev()
+  - recvmsg()/sendmsg() // 最通用的I/O函数
+  - recvfrom()/sendto()
+- （7）close()函数
+  - 在服务器与客户端建立连接之后，会进行一些读写操作，完成了读写操作就要关闭相应的socket描述字，好比操作完打开的文件要调用fclose关闭打开的文件。
+  - close一个TCP socket的缺省行为时把该socket标记为以关闭，然后立即返回到调用进程。该描述字不能再由调用进程使用，也就是说不能再作为read或write的第一个参数。
+  - 注意：close操作只是使相应socket描述字的引用计数-1，只有当引用计数为0的时候，才会触发TCP客户端向服务器发送终止连接请求。
+
+### socket 实现 TCP
+
+参考
+- [linux socket编程详解](https://www.cnblogs.com/jiangzhaowei/p/8261174.html)
+- [Linux下简单socket编程](https://blog.csdn.net/weixin_41249411/article/details/89060985)
+
+
+代码: 
+- 客户端向服务器发送数据
+- 服务器向客户端响应
+- C编译：gcc  socket_test.cpp -o socket
+- C++：g++  socket_test.cpp -o socket -std=c++11
+
+```c++
+// 一直监听本机的8000号端口，如果收到连接请求，将接收请求并接收客户端发来的消息，并向客户端返回消息。
+#include<stdio.h>  
+#include<stdlib.h>  
+#include<string.h>  
+#include<errno.h>  
+#include<sys/types.h>  
+#include<sys/socket.h>  
+#include<netinet/in.h>  
+#include <unistd.h> // fork/close
+
+#define DEFAULT_PORT 8000  
+#define MAXLINE 4096 
+
+int main(int argc, char** argv)  
+{  
+    int    socket_fd, connect_fd;  
+    struct sockaddr_in     servaddr;  
+    char    buff[4096];  
+    int     n;  
+    //初始化Socket  
+    if( (socket_fd = socket(AF_INET, SOCK_STREAM, 0)) == -1 ){  
+        printf("create socket error: %s(errno: %d)\n",strerror(errno),errno);  
+        exit(0);  
+    }  
+    //初始化  
+    memset(&servaddr, 0, sizeof(servaddr));  
+    servaddr.sin_family = AF_INET;  
+    servaddr.sin_addr.s_addr = htonl(INADDR_ANY); //IP地址设置成INADDR_ANY,让系统自动获取本机的IP地址。  
+    servaddr.sin_port = htons(DEFAULT_PORT); //设置的端口为DEFAULT_PORT  
+  
+    //将本地地址绑定到所创建的套接字上  
+    if( bind(socket_fd, (struct sockaddr*)&servaddr, sizeof(servaddr)) == -1){  
+        printf("bind socket error: %s(errno: %d)\n",strerror(errno),errno);  
+        exit(0);  
+    }  
+    //开始监听是否有客户端连接  
+    if( listen(socket_fd, 10) == -1){  
+        printf("listen socket error: %s(errno: %d)\n",strerror(errno),errno);  
+        exit(0);  
+    }  
+    printf("======waiting for client's request======\n");  
+    while(1){  
+//阻塞直到有客户端连接，不然多浪费CPU资源。  
+        if( (connect_fd = accept(socket_fd, (struct sockaddr*)NULL, NULL)) == -1){  
+            printf("accept socket error: %s(errno: %d)",strerror(errno),errno);  
+            continue;  
+        }  
+        //接受客户端传过来的数据  
+        n = recv(connect_fd, buff, MAXLINE, 0);  
+        //向客户端发送回应数据  
+        if(!fork()){ /*紫禁城*/  
+            if(send(connect_fd, "Hello,you are connected!\n", 26,0) == -1)  
+            perror("send error");  
+            close(connect_fd);  
+            exit(0);  
+        }  
+        buff[n] = '\0';  
+        printf("recv msg from client: %s\n", buff);  
+        close(connect_fd);  
+    }  
+    close(socket_fd);  
+}
+```
+
+```c++
+/* File Name: client.c */  
+#include<stdio.h>  
+#include<stdlib.h>  
+#include<string.h>  
+#include<errno.h>  
+#include<sys/types.h>  
+#include<sys/socket.h>  
+#include<netinet/in.h>  
+  
+#define MAXLINE 4096  
+
+int main(int argc, char** argv)  
+{  
+    int    sockfd, n,rec_len;  
+    char    recvline[4096], sendline[4096];  
+    char    buf[MAXLINE];  
+    struct sockaddr_in    servaddr;  
+  
+    if( argc != 2){  
+        printf("usage: ./client <ipaddress>\n");  
+        exit(0);  
+    }  
+  
+    if( (sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0){  
+        printf("create socket error: %s(errno: %d)\n", strerror(errno),errno);  
+        exit(0);  
+    }  
+  
+    memset(&servaddr, 0, sizeof(servaddr));  
+    servaddr.sin_family = AF_INET;  
+    servaddr.sin_port = htons(8000);  
+    // inet_pton 是Linux下IP地址转换函数，可以在将IP地址在“点分十进制”和“整数”之间转换 ，是inet_addr的扩展。
+    if( inet_pton(AF_INET, argv[1], &servaddr.sin_addr) <= 0){  
+        printf("inet_pton error for %s\n",argv[1]);  
+        exit(0);  
+    }  
+    if( connect(sockfd, (struct sockaddr*)&servaddr, sizeof(servaddr)) < 0){  
+        printf("connect error: %s(errno: %d)\n",strerror(errno),errno);  
+        exit(0);  
+    }  
+    printf("send msg to server: \n");  
+    fgets(sendline, 4096, stdin);  
+    if( send(sockfd, sendline, strlen(sendline), 0) < 0)  
+    {  
+        printf("send msg error: %s(errno: %d)\n", strerror(errno), errno);  
+        exit(0);  
+    }  
+    if((rec_len = recv(sockfd, buf, MAXLINE,0)) == -1) {  
+       perror("recv error");  
+       exit(1);  
+    }  
+    buf[rec_len]  = '\0';  
+    printf("Received : %s ",buf);  
+    close(sockfd);  
+    exit(0);  
+}  
+```
+
+测试：
+
+```shell
+# 编译server.c
+gcc -o server server.c
+# 启动进程：
+./server
+# 显示结果并等待客户端连接。
+# ======waiting for client's request======
+# 编译 client.c
+gcc -o client server.c
+# 客户端去连接server：
+./client 127.0.0.1 
+# 等待输入消息
+# 发送一条消息，输入：c++，服务端就能看到
+# 可以不用client,可以使用telnet来测试：
+telnet 127.0.0.1 8000
+```
+
+服务端：
+
+```c++
+/*serve_tcp.c*/
+#include<stdio.h>
+#include<sys/socket.h>
+#include<netinet/in.h>
+#include<stdlib.h>
+#include<arpa/inet.h>
+#include<unistd.h>
+#include<string.h>
+
+int main(){
+	//创建套接字
+	int serv_sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+
+	//初始化socket元素
+	struct sockaddr_in serv_addr;
+	memset(&serv_addr, 0, sizeof(serv_addr));
+	serv_addr.sin_family = AF_INET;
+	serv_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+	serv_addr.sin_port = htons(1234);
+
+	//绑定文件描述符和服务器的ip和端口号
+	bind(serv_sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr));
+
+	//进入监听状态，等待用户发起请求
+	listen(serv_sock, 20);
+	//接受客户端请求
+	//定义客户端的套接字，这里返回一个新的套接字，后面通信时，就用这个clnt_sock进行通信
+	struct sockaddr_in clnt_addr;
+	socklen_t clnt_addr_size = sizeof(clnt_addr);
+	int clnt_sock = accept(serv_sock, (struct sockaddr*)&clnt_addr, &clnt_addr_size);
+
+	//接收客户端数据，并相应
+	char str[256];
+	read(clnt_sock, str, sizeof(str));
+	printf("client send: %s\n",str);
+	strcat(str, "+ACK");
+	write(clnt_sock, str, sizeof(str));
+
+	//关闭套接字
+	close(clnt_sock);
+	close(serv_sock);
+
+	return 0;
+}
+```
+
+
+客户端：
+
+```c++
+/*client_tcp.c*/
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<unistd.h>
+#include<arpa/inet.h>
+#include<sys/socket.h>
+
+int main(){
+	//创建套接字
+	int sock = socket(AF_INET, SOCK_STREAM, 0);
+	//服务器的ip为本地，端口号1234
+	struct sockaddr_in serv_addr;
+	memset(&serv_addr, 0, sizeof(serv_addr));
+	serv_addr.sin_family = AF_INET;
+	serv_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+	serv_addr.sin_port = htons(1234);
+	//向服务器发送连接请求
+	connect(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr));
+	//发送并接收数据
+	char buffer[40];
+	printf("Please write:");
+	scanf("%s", buffer);
+	write(sock, buffer, sizeof(buffer));
+	read(sock, buffer, sizeof(buffer) - 1);
+	printf("Serve send: %s\n", buffer);
+	//断开连接
+	close(sock);
+
+	return 0;
+}
+```
+
+### Socket编程方法
+
+三种高效的 Socket 编程方法：**select**、**poll** 和 **epoll**.
 
 select，poll，epoll 都是 IO 多路复用的机制，它们都需要在读写事件就绪后自己负责进行读写，也就是说这个读写过程是阻塞的。select、poll、epoll 三者区别
 - ![](https://p26.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/38c2a3040b2046559f91e8872d0ebe7e?from=pc)
@@ -664,7 +1010,7 @@ select，poll，epoll 都是 IO 多路复用的机制，它们都需要在读写
 - epoll是 Linux 目前大规模网络并发程序开发的**首选**模型。在绝大多数情况下性能远超 select 和 poll。目前流行的高性能web服务器Nginx正式依赖于epoll提供的高效网络套接字轮询服务。
 - 但是，在并发连接不高的情况下，多线程 + 阻塞 IO 方式可能性能更好。
 
-### select
+### select -- 数组，O(N)
 
 select 最多能同时监视 1024 个 socket（因为 fd_set 结构体大小是 128 字节，每个 bit 表示一个文件描述符）。用户需要维护一个临时数组，存储文件描述符。当内核有事件发生时，内核将 fd_set 中没发生的文件描述符清空，然后拷贝到用户区。select 返回的是整个数组，它需要遍历整个数组才知道谁发生了变化。
 - ![](https://p26.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/f22c3ae6f83a435196360e909f8891cf?from=pc)
@@ -832,7 +1178,7 @@ int main(int argc,char* argv[])
 ```
 
 
-### poll
+### poll -- 链表，O(N)
 
 poll 就是把 select 中的 fd_set 数组换成了链表，其他和 select 没什么不同。
 - ![img](https://p26.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/8b557aa29c4a430b9585e5e868e4932e?from=pc)
@@ -994,7 +1340,7 @@ int main(int argc, char*argv[])
 
 ```
 
-### epoll
+### epoll -- 哈希，O(1)，主流
 
 epoll 是基于事件驱动的 IO 方式，它没有文件描述符个数限制，它将用户关心的文件描述符的事件存放到内核的一个事件表中（简单来说，就是由内核来负责存储（红黑树）有事件的 socket 句柄），这样在用户空间和内核空间的copy只需一次。优点如下：
 - 没有最大并发连接的限制，能打开的fd上限远大于1024（1G的内存能监听约10万个端口）
@@ -1017,6 +1363,7 @@ epoll 有两种工作方式：
 #include<stdlib.h>
 #include<string.h>
 #include<sys/epoll.h>
+
 static Usage(const char* proc)
 {
     printf("%s [local_ip] [local_port]\n",proc);
@@ -1168,6 +1515,8 @@ typedef union epoll_data {
   __uint64_t u64; 
 } epoll_data_t;
 ```
+
+
 
 # Shell语言
 
