@@ -209,6 +209,34 @@ sudo 的执行流程大致为：
 - 快捷键
   - ![](https://p6-tt.byteimg.com/origin/pgc-image/4621e6095a834b078b0a6ced28ebf5cc?from=pc)
 
+### 软件包
+
+linux软件包：如yum、apt等
+
+yum软件包
+
+```shell
+yum check-update # 列出所有可更新的软件清单
+yum update # 安装所有更新软件
+yum update gcc # 安装gcc更新软件
+yum -y update gcc # 安装gcc更新软件，自动yes
+yum install gcc # 仅安装指定的软件
+yum -y install gcc # 自动回答yes
+yum list # 列出所有可安裝的软件清单
+yum list pam* # pam开头的软件包
+yum search samba # 查找
+yum info samba # 显示软件信息
+yum remove samba # 删除samba
+# 清楚缓存
+yum clean all
+yum clean packages # 清除缓存目录下的软件包
+yum clean headers # 清除缓存目录下的 headers
+yum clean oldheaders # 清除缓存目录下旧的 headers
+yum clean, yum clean all (= yum clean packages; yum clean oldheaders) # 清除缓存目录下的软件包及旧的 headers
+yum makecache # 生成缓存
+```
+
+
 ## linux工具
 
 史上最全，[linux内核调试工具](https://www.toutiao.com/a1674325657904128)都在这里了，我们来看看：
