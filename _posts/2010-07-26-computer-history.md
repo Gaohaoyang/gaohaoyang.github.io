@@ -400,6 +400,9 @@ X86电脑因考虑要适应各种应用的需求，其发展思路是：性能+�
 
 ## 编程语言大全
 
+各门语言难度：[C++ 最难学？最易/难学习的编程语言 TOP 5 来了](https://www.toutiao.com/i7047434834607931940/)
+- ![img](https://p26.toutiaoimg.com/origin/tos-cn-i-tjoges91tu/St4ODUM6UmOGe6)
+
 ### 语言汇总
 
 - TIOBE 公司，每月会发布一版编程语言的流行度[排行榜](https://www.tiobe.com/tiobe-index/)
