@@ -129,10 +129,16 @@ mathjax: true
 ## 离财务自由更近一步
 
 
+### 自媒体
+
+【2022-1-3】从字节离职，全职做B站up主，2个月粉丝10w。我是雨蒙蒙
+
+<iframe src="//player.bilibili.com/player.html?aid=841695904&bvid=BV1854y1i7jL&cid=222037428&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 # 自由职业
 
 ## 转行
+
 - 【2020-1-9】[30岁那年转行，离开通信拥抱互联网](https://mp.weixin.qq.com/s?__biz=MzUzNzYxMzAxMA==&mid=2247483673&idx=1&sn=6be9ac2eebc71fba6275d63115eb1d0d&chksm=fae506a4cd928fb240fe1382dd81bee6def2e4434496738419a5f9f1940eff90794eab3dfb25&scene=21#wechat_redirect)
 
 ## [自由职业，你准备好了吗？ | 很多人的必经之路](https://mp.weixin.qq.com/s?__biz=MzI5NjQxMjkxMg==&mid=2247484380&idx=1&sn=0caf245dc346961ac7406cd3d2b31809&chksm=ec45f043db327955a3116b0f48c86e5b893a0e3c8a94ef910ba2933a823789e38692db9e1ccd&mpshare=1&scene=23&srcid&sharer_sharetime=1577682839914&sharer_shareid=b8d409494a5439418f4a89712efcd92a%23rd)
