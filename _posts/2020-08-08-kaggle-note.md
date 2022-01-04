@@ -176,9 +176,49 @@ NLU任务分成**意图识别**+**槽位抽取**两个子任务，实现上有�
 ## SemEval
 
 国际计算语言学协会（Association for Computational Linguistics, ACL）下属的 SIGLEX 主办。ACL 作为世界上影响力最大、最具活力的国际学术组织，其举办的计算语言学年会（Annual Meeting of the Association for Computational Linguistics）是国际自然语言处理的顶级会议。自 2001 年起，SemEval 至今已成功举办了十三届，吸引了世界范围内的多所大学和研究机构的参加，在业界和学术界具有极高的影响力。根据 Google Scholar 的数据，发表在 SemEval 的文章在 Computational Linguistics 领域的影响力仅次于 ACL/EMNLP/NAACL 三大顶会，位于 NLP 会议、期刊中的第四位。
+- [NLP 顶级赛事 SemEval 那个人居然夺得榜首](https://www.dreamwings.cn/semeval2020-task4-results/5582.html): 第十四届国际语义评测大赛（International Workshop on Semantic Evaluation 2020, SemEval 2020）落下帷幕。在 Task 4: Commonsense Validation and Explanation 常识验证与解释评测任务中，由我院 ICA 研究所的（我导师 + 联合培养的另一位老师）担任指导老师，千千、小雨等同学组成的参赛队成功获得子任务 B 第一名，子任务 A 第二名，撒花~ (●ˇ∀ˇ●)。本届比赛也吸引了包括哈尔滨工业大学、香港中文大学、雷丁大学等著名全球高校。
 
 - [SemEval 2022](https://semeval.github.io/SemEval2022/tasks)，跟ACL合作
-- [NLP 顶级赛事 SemEval 那个人居然夺得榜首](https://www.dreamwings.cn/semeval2020-task4-results/5582.html): 第十四届国际语义评测大赛（International Workshop on Semantic Evaluation 2020, SemEval 2020）落下帷幕。在 Task 4: Commonsense Validation and Explanation 常识验证与解释评测任务中，由我院 ICA 研究所的（我导师 + 联合培养的另一位老师）担任指导老师，千千、小雨等同学组成的参赛队成功获得子任务 B 第一名，子任务 A 第二名，撒花~ (●ˇ∀ˇ●)。本届比赛也吸引了包括哈尔滨工业大学、香港中文大学、雷丁大学等著名全球高校。
+
+浦发和百度合作搞semeval 2022
+
+Websites and contact information for individual tasks below.
+ 
+### Lexical semantics
+ 
+*   **[Task 1: CODWOE - COmparing Dictionaries and WOrd Embeddings](https://competitions.codalab.org/competitions/34022)** ([\[contact organizers\]](mailto:tmickus@atilf.fr) [\[task mailing list\]](mailto:semeval2022-dictionaries-and-word-embeddings@googlegroups.com))  Timothee Mickus, Denis Paperno, Mathieu Constant, Kees van Deemter
+*   **[Task 2: Multilingual Idiomaticity Detection and Sentence Embedding](https://sites.google.com/view/semeval2022task2-idiomaticity)** ([\[contact organizers\]](mailto:semeval-2022-task-2-mwe-organisers-group@sheffield.ac.uk) [\[task mailing list\]](mailto:semeval-2022-task-2-mwe@googlegroups.com))  Harish Tayyar Madabushi, Marcos Garcia, Carolina Scarton, Marco Idiart, Aline Villavicencio
+    
+*   **[Task 3: Presupposed Taxonomies - Evaluating Neural-network Semantics (PreTENS)](https://sites.google.com/view/semeval2022-pretens/)** ([\[contact organizers\]](mailto:semeval2022-task3-organizers@googlegroups.com) [\[task mailing list\]](mailto:semeval2022-task3@googlegroups.com))  Dominique Brunato, Cristiano Chesi, Shammur Absar Chowdhury, Felice Dell'Orletta, Simonetta Montemagni, Giulia Venturi, Roberto Zamparelli
+ 
+### Social factors & attitudes
+ 
+*   **[Task 4: Patronizing and Condescending Language Detection](https://sites.google.com/view/pcl-detection-semeval2022/)** ([\[contact organizers\]](mailto:semeval2022.task4.pcldetection@gmail.com) [\[task mailing list\]](mailto:pcl-detection-task4-semeval2022@googlegroups.com))  Carla Perez-Almendros, Luis Espinosa-Anke, Steven Schockaert
+    
+*   **[Task 5: MAMI - Multimedia Automatic Misogyny Identification](https://competitions.codalab.org/competitions/34175)** ([\[contact organizers\]](mailto:semeval2022-mami-organizers@googlegroups.com) [\[task mailing list\]](mailto:semeval2022-mami@googlegroups.com))  Elisabetta Fersini, Paolo Rosso, Francesca Gasparini, Alyssa Lees, Jeffrey Sorensen
+    
+*   **[Task 6: iSarcasmEval - Intended Sarcasm Detection in English and Arabic](https://sites.google.com/view/semeval2022-isarcasmeval)** ([\[contact organizers\]](mailto:semeval2022-isarcasmeval-organizers@googlegroups.com) [\[task mailing list\]](mailto:semeval2022-isarcasmeval@googlegroups.com))  Ibrahim Abu Farha, Silviu Oprea, Steve Wilson, Walid Magdy
+    
+ 
+### Discourse, documents, and multimodality
+ 
+*   **[Task 7: Identifying Plausible Clarifications of Implicit and Underspecified Phrases in Instructional Texts](https://clarificationtask.github.io/)** ([\[contact organizers\]](mailto:semeval2022-task7-organizers@googlegroups.com) [\[task mailing list\]](mailto:semeval2022-task7@googlegroups.com))  Michael Roth, Talita Kloppenburg-Anthonio, Anna Sauer
+    
+*   **[Task 8: Multilingual news article similarity](http://euagendas.org/semeval2022)** ([\[contact organizers\]](mailto:semeval-2022-task-8-organizers@euagendas.org) [\[task mailing list\]](mailto:semeval-2022-task-8-multilingual-news@googlegroups.com))  Xi Chen, Ali Zeynali, Chico Camargo, Fabian Flöck, Devin Gaffney, Przemyslaw A. Grabowicz, Scott A. Hale, David Jurgens, Mattia Samory
+    
+*   **[Task 9: R2VQ - Competence-based Multimodal Question Answering](https://competitions.codalab.org/competitions/34056)** ([\[contact organizers\]](mailto:semeval-2022-task9-organizers@googlegroups.com) [\[task mailing list\]](mailto:semeval-2022-task9@googlegroups.com))  James Pustejovsky, Jingxuan Tu, Marco Maru, Simone Conia, Roberto Navigli, Kyeongmin Rim, Kelley Lynch, Richard Brutti, Eben Holderness
+    
+ 
+### Information extraction
+ 
+*   **[Task 10: Structured Sentiment Analysis](https://competitions.codalab.org/competitions/33556)** ([\[contact organizers\]](mailto:jeremycb@ifi.uio.no) [\[task mailing list\]](mailto:structured-sent-participants@googlegroups.com))  Jeremy Barnes, Andrey Kutuzov, Jan Buchmann, Laura Ana Maria Oberländer, Enrica Troiano, Rodrigo Agerri, Lilja Øvrelid, Erik Velldal, Stephan Oepen
+    
+*   **[Task 11: MultiCoNER - Multilingual Complex Named Entity Recognition](https://multiconer.github.io/)** ([\[contact organizers\]](mailto:multiconer-semeval-organizers@googlegroups.com) [\[task mailing list\]](mailto:multiconer-semeval@googlegroups.com))  Shervin Malmasi, Besnik Fetahu, Anjie Fang, Sudipta Kar, Oleg Rokhlenko
+    
+*   **[Task 12: Symlink - Linking Mathematical Symbols to their Descriptions](https://competitions.codalab.org/competitions/34011)** ([\[contact organizers\]](mailto:semeval.2022.task.12.symlink@gmail.com) [\[task mailing list\]](mailto:semeval-2022-task-12-symlink@googlegroups.com))  Viet Dac Lai, Amir Ben Veyseh, Thien Huu Nguyen, Franck Dernoncourt
+
+
+
 
 # Kaggle
 
