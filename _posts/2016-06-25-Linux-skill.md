@@ -93,6 +93,67 @@ du -sh temp/ # 易读方式显示目录总大小，基数是 1024
 du --si temp/ # --si 选项默认计算基数是 1000，更精确
 ```
 
+### 时间戳
+
+[Linux下文件的三种时间标记](https://www.cnblogs.com/cherishry/p/5885098.html)
+
+三种时间戳
+- **访问**时间：读一次文件的内容，这个时间就会更新。比如more、cat等命令。ls、stat命令不会修改atime
+- **修改**时间：修改时间是文件内容最后一次被修改的时间。比如：vim操作后保存文件。ls -l列出的就是这个时间
+- 状态**改动**时间是该文件的inode节点最后一次被修改的时间，通过chmod、chown命令修改一次文件属性，这个时间就会更新。
+
+stat字段说明及ls命令查询时间戳
+
+| column | column | column|column|
+|--------|--------|
+| 字段 | 说明 |例子|ls(-l)|
+|st_atime| 文件内容最后访问时间 |read|-u|
+|st_mtime|文件内容的最后修改时间|write|缺省|
+|st_ctime|文件状态的最后更改时间|chown、chmod|-c|
+
+touch命令修改文件时间
+- -a 修改文件的存取时间
+- -c 不创建文件file
+- -m 修改文件file的修改时间
+- -r ref_file 将参照文件ref_file相应的时间戳的数值作为指定文件file时间戳记的新值
+- -t time 使用指定时间值time作为指定文件file相应时间戳的新值，此处的time规定如下形式的十进制数
+
+```shell
+#!/bin/bash
+stat filename # 显示三种时间戳
+stat -c %Y log_cron.txt  # 获取最后修改的时间戳
+date +%s -d "2022-01-04 09:00:17" # 字符串转时间戳
+
+# 时间戳比较
+date1="2008-4-09 12:00:00"
+date2="2008-4-10 15:00:00"
+t1=`date -d "$date1" +%s`
+t2=`date -d "$date2" +%s`
+if [ $t1 -gt $t2 ]; then
+    echo "$date1 > $date2"
+elif [ $t1 -eq $t2 ]; then
+    echo "$date1 == $date2"
+else
+    echo "$date1 < $date2"
+fi
+
+# 过期删除功能（超过两分钟）
+dir=`ls /root/20160705/`
+DIR_PATH="/root/20160705/"
+for fi in $dir
+do
+    FILE_NAME=${DIR_PATH}${fi}
+    echo $FILE_NAME
+    a=`stat -c %Y $FILE_NAME`
+    b=`date +%s`
+    if [ $[ $b - $a ] -gt 120 ];then
+       echo "delete file:$FILE_NAME"
+       rm -rf $FILE_NAME
+    fi
+done
+ 
+echo "done"
+```
 
 ### 文件操作命令
 
