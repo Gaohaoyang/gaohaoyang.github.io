@@ -2564,6 +2564,32 @@ An example of typical input would be something like this:
   - Rasa官方文档： [Build contextual chatbots and AI assistants with Rasa](https://rasa.com/docs/rasa/)
   - github地址：[RasaHQ/rasa](https://github.com/RasaHQ/rasa)
 
+### wechaty
+
+[wechaty官网](https://wechaty.js.org/),李卓桓, 谷歌开发者专家（机器学习方向）
+
+微信个人号功能非常强大和灵活，是一个非常适合用来做ChatBot的载体。它可以灵活不受限制的发送语音短信、视频、图片和文字，支持多人群聊。但是使用微信个人微信号作为ChatBot，需要通过非官方的第三方库接入微信。因为截至2018年底，微信尚无任何官方的ChatBot API发布。
+
+[Wechaty](https://github.com/wechaty/wechaty) 是一个开源的的对话机器人 SDK，支持 个人号 微信。它是一个使用Typescript 构建的Node.js 应用。支持多种微信接入方案，包括网页，ipad，ios，windows， android 等。同时支持Linux, Windows, Darwin(OSX/Mac) 和 Docker 多个平台。
+
+功能：
+- 消息处理：关键词回复
+- 群管理：自动入群，拉人，踢人
+- 自动处理好友请求
+- 智能对话：通过简单配置，即可加入智能对话系统，完成指定任务
+
+```shell
+git clone https://github.com/wechaty/wechaty-getting-started
+cd wechaty-getting-started
+npm install # 安装依赖
+npm start # 运行bot，实际上执行的命令是：node examples/starter-bot.js
+# 或者直接用node 运行代码
+node examples/starter-bot.js
+
+```
+
+登录限制：从2017年6月下旬开始，使用基于web版微信接入方案存在大概率的被限制登陆的可能性。 主要表现为：无法登陆Web 微信，但不影响手机等其他平台。验证是否被限制登陆： https://wx.qq.com 上扫码查看是否能登陆。
+
 
 ## 评估方法
 

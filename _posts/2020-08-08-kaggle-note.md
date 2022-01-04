@@ -3,7 +3,7 @@ layout: post
 title:  "算法竞赛知识点汇总-Algo-Competition-Note"
 date:   2020-08-08 11:27:00
 categories: 机器学习 数据挖掘
-tags: Kaggle XGBoot 天池 KDD 特征工程
+tags: Kaggle XGBoot 天池 KDD 特征工程 oov
 author : 鹤啸九天
 excerpt: 机器学习类竞赛知识点总结
 mathjax: true
@@ -16,41 +16,47 @@ mathjax: true
 
 - 汇总知名数据竞赛的经验信息
 
+# 算法竞赛
+
 ## 数据科学竞赛大全
 
 - 【2020-10-10】Data Science Challenge / Competition 数据科学挑战赛/数据科学竞赛，源自：[机器学习理论与数据竞赛实战](https://www.zhihu.com/column/DataAI)
 ![](https://pic3.zhimg.com/v2-af268652dc6a498641d8799862d61f2a_b.jpg)
-
-# 算法竞赛
+- 【2022-1-4】[coggle数据科学竞赛](https://coggle.club/)，汇总国内外竞赛信息，主办方、时间、题目、参赛人数等，[历次比赛经验总结](https://coggle.club/feed)
 
 ## KDD CUP
 
 - 【2020-8-28】[KDD CUP 2020 大奖出炉，中国团队包揽全部冠亚军](https://www.toutiao.com/i6865771958059926024/)
     - KDD CUP 2020 大赛结果终于在其官网上公布，其中，来自中国的团队如国立台湾大学、美团点评、北航、第四范式、东南大学、上海交大、国科大、清华大学包揽全部奖项的冠亚军
 - ACM SIGKDD，被中国计算机学会（CCF）推荐为A类国际学术会议，至今已举办26届。其中KDD CUP是由ACM知识发现和数据挖掘特别兴趣小组（领先的数据科学家专业组织）组织的年度国际数据挖掘和知识发现竞赛。素有“大数据领域世界杯”之誉，是目前数据挖掘领域最高水平、最具影响力、规模最大的国际顶级赛事。
-- 由于各种数据科学竞赛类型的日益普及，KDD CUP今年一共开设三个项目共四个赛道的比赛，分别是：
-    - 1、常规机器学习竞赛轨道（ML赛道1） “现代化电子商务平台挑战”(Challenges for Modern E-Commerce Platform)
-        - 由阿里巴巴、阿里巴巴达摩院、杜克大学、清华大学和UIUC赞助，竞赛选手需要通过考虑不同类型的复杂信息来学习高质量的跨模态表示，以及模态之间的紧密关系。然后，所学习的表示可以用于计算表示之间的相似度得分，并选择与文本相关的图像/视频。最后，将在测试数据集上评估每个提交的解决方案，该数据集将评估检索到的产品与真实值之间的对应关系。
-        - 多模态召回（Multimodalities Recall ）——冠军团队：WinnieTheBest（国立台湾大学）、亚军团队：MTDP_CVA（美团点评 ）、季军团队：aister（美团点评）
-        - 去偏差(Debiasing)——冠军团队：aister(美团点评)、亚军团队：DeepWisdom(深度赋智 )、季军团队：TheAvengers（北京航空航天大学）
-    - 2、常规机器学习竞赛轨道（ML赛道2） “学术图上的对抗性攻击和防御”(Adversarial Attacks and Defense on Academic Graph)
-        - 要求参赛者提交原始数据集的修改版本，以作为一种攻击形式，其外观应与原始图相似，但在基准模型上分类准确性较低。参赛者应准备好数据及并保存在比赛系统的后端。然后，所有团队都必须提交攻击和防御的解决方案。组织者将与所有团队的所有进攻方案和防御方案进行比赛，并得出排行榜。
-        - 冠军团队：SPEIT-卓工 （上海交通大学、上海交大-巴黎高科卓越工程师学院）、亚军团队：ADVERSAIRES （中山大学、杭州电子科技大学 ）、季军团队：DaftStone ( 中国科学技术大学）
-    - 3、AutoML机器学习竞赛轨道（AutoML赛道） “用于图表征学习的AutoML”(AutoML for Graph Representation Learning)
-        - AutoML机器学习赛道 “用于图表征学习的AutoML”由第四范式、ChaLearn、斯坦福大学和Google共同协办，该赛道邀请参赛者部署用于图表示学习的AutoML解决方案，其中节点分类作为评估学习的表示形式的质量的任务。
-        - 每个团队都有五个公共数据集来开发AutoML解决方案。组织方提供了五个反馈数据集，以使参与者能够评估他们的解决方案。这些解决方案将在没有人为干预的情况下使用五个新的数据集进行评估，优胜者将根据表现的最终排名进行选择。
-        - 冠军团队：aister（美团点评、中国科学院大学、清华大学 ）、亚军团队：PASA_NJU（南京大学）、季军团队：qqerret（蚂蚁金服）
-    - 4、强化学习竞赛赛道（RL赛道） “在移动点播平台上学习调度和重定位”(Learning to Dispatch and Reposition on a Mobility-on-Demand Platform)
-        - 强化学习赛道 “在移动点播平台上学习调度和重定位”由滴滴出行与DiDi AI Labs合作赞助，该赛道要求参与者应用机器学习工具来确定新颖的解决方案，用于在移动点播（MoD）平台上的订单分派（订单匹配）和车辆重新定位（车队管理）。具体地说，竞赛着眼于如何应用机器学习解决方案来提高MoD平台的效率。
-        - Dispatch任务：冠军：Polar Bear（北京航空航天大学、第四范式）、亚军：EM（中山大学）、季军：Team Hail Mary ( Lyft )
-            - 冠军思路：为了最大化平台上所有司机日均收入，在计算每个订单的收益时，北航联合第四范式团队采用基于强化学习的方法，不仅能考虑当前时刻的收入，还能兼顾未来可能的收益。同时，结合剪枝与C++实现的高效二分图匹配算法，能够在2秒的规定时限内，及时找到合适的订单分配方案，保证乘客的用户体验。最终团队以2359108.54的高分在Dispatch任务上夺冠。
-        - Repopsition任务获奖团队：冠军团队：TLab（普渡大学、东南大学）、亚军团队：wait a minute（南京大学LAMDA组）、季军团队：NTTDOCOMO LABS（日本NTTdocomo实验室）
-            - 冠军思路：参赛者需要解决网约车平台的订单匹配与车辆调度问题，其中订单匹配任务需要每两秒钟进行一次匹配，车辆调度任务则需要在成都8000余个六边形网格内进行运力调度。相关算法可将乘客潜在出行需求与合适的司机相匹配，从而更高效地利用空置车辆，提高车辆周转率，提升用户体验与司机收入水平，优化系统运营效率。
+由于各种数据科学竞赛类型的日益普及，KDD CUP今年一共开设三个项目共四个赛道的比赛，分别是：
+- 1、常规机器学习竞赛轨道（ML赛道1） “现代化电子商务平台挑战”(Challenges for Modern E-Commerce Platform)
+    - 由阿里巴巴、阿里巴巴达摩院、杜克大学、清华大学和UIUC赞助，竞赛选手需要通过考虑不同类型的复杂信息来学习高质量的跨模态表示，以及模态之间的紧密关系。然后，所学习的表示可以用于计算表示之间的相似度得分，并选择与文本相关的图像/视频。最后，将在测试数据集上评估每个提交的解决方案，该数据集将评估检索到的产品与真实值之间的对应关系。
+    - 多模态召回（Multimodalities Recall ）——冠军团队：WinnieTheBest（国立台湾大学）、亚军团队：MTDP_CVA（美团点评 ）、季军团队：aister（美团点评）
+    - 去偏差(Debiasing)——冠军团队：aister(美团点评)、亚军团队：DeepWisdom(深度赋智 )、季军团队：TheAvengers（北京航空航天大学）
+- 2、常规机器学习竞赛轨道（ML赛道2） “学术图上的对抗性攻击和防御”(Adversarial Attacks and Defense on Academic Graph)
+    - 要求参赛者提交原始数据集的修改版本，以作为一种攻击形式，其外观应与原始图相似，但在基准模型上分类准确性较低。参赛者应准备好数据及并保存在比赛系统的后端。然后，所有团队都必须提交攻击和防御的解决方案。组织者将与所有团队的所有进攻方案和防御方案进行比赛，并得出排行榜。
+    - 冠军团队：SPEIT-卓工 （上海交通大学、上海交大-巴黎高科卓越工程师学院）、亚军团队：ADVERSAIRES （中山大学、杭州电子科技大学 ）、季军团队：DaftStone ( 中国科学技术大学）
+- 3、AutoML机器学习竞赛轨道（AutoML赛道） “用于图表征学习的AutoML”(AutoML for Graph Representation Learning)
+    - AutoML机器学习赛道 “用于图表征学习的AutoML”由第四范式、ChaLearn、斯坦福大学和Google共同协办，该赛道邀请参赛者部署用于图表示学习的AutoML解决方案，其中节点分类作为评估学习的表示形式的质量的任务。
+    - 每个团队都有五个公共数据集来开发AutoML解决方案。组织方提供了五个反馈数据集，以使参与者能够评估他们的解决方案。这些解决方案将在没有人为干预的情况下使用五个新的数据集进行评估，优胜者将根据表现的最终排名进行选择。
+    - 冠军团队：aister（美团点评、中国科学院大学、清华大学 ）、亚军团队：PASA_NJU（南京大学）、季军团队：qqerret（蚂蚁金服）
+- 4、强化学习竞赛赛道（RL赛道） “在移动点播平台上学习调度和重定位”(Learning to Dispatch and Reposition on a Mobility-on-Demand Platform)
+    - 强化学习赛道 “在移动点播平台上学习调度和重定位”由滴滴出行与DiDi AI Labs合作赞助，该赛道要求参与者应用机器学习工具来确定新颖的解决方案，用于在移动点播（MoD）平台上的订单分派（订单匹配）和车辆重新定位（车队管理）。具体地说，竞赛着眼于如何应用机器学习解决方案来提高MoD平台的效率。
+    - Dispatch任务：冠军：Polar Bear（北京航空航天大学、第四范式）、亚军：EM（中山大学）、季军：Team Hail Mary ( Lyft )
+        - 冠军思路：为了最大化平台上所有司机日均收入，在计算每个订单的收益时，北航联合第四范式团队采用基于强化学习的方法，不仅能考虑当前时刻的收入，还能兼顾未来可能的收益。同时，结合剪枝与C++实现的高效二分图匹配算法，能够在2秒的规定时限内，及时找到合适的订单分配方案，保证乘客的用户体验。最终团队以2359108.54的高分在Dispatch任务上夺冠。
+    - Repopsition任务获奖团队：冠军团队：TLab（普渡大学、东南大学）、亚军团队：wait a minute（南京大学LAMDA组）、季军团队：NTTDOCOMO LABS（日本NTTdocomo实验室）
+        - 冠军思路：参赛者需要解决网约车平台的订单匹配与车辆调度问题，其中订单匹配任务需要每两秒钟进行一次匹配，车辆调度任务则需要在成都8000余个六边形网格内进行运力调度。相关算法可将乘客潜在出行需求与合适的司机相匹配，从而更高效地利用空置车辆，提高车辆周转率，提升用户体验与司机收入水平，优化系统运营效率。
 
 
 ## CCF
 
-- 比赛：[智能人机交互自然语言理解]()，
+- 比赛：[智能人机交互自然语言理解](https://www.datafountain.cn/competitions/511/datasets)，队伍（338） / 人数（386），奖金￥25,000
+
+【2022-1-4】贝壳参赛团队针对**小样本学习**问题，分别采用了半监督学习与迁移学习的混合技术。
+- 针对“**意图识别**”任务，有监督的分类模型往往需要大量的人工标注数据训练模型，很难适用于小样本数据。团队提出了一种**半监督**的分类模型，利用未标注的数据样本，可以半监督地为数据打上**软标签**，扩充小样本类别的数据数量，从而提高小样本意图识别准确率。
+- 针对“**槽位抽取**”任务，团队采用了经典的**BERT+BILSTM+CRF**网络架构，然而当槽位训练数据不足时，模型学习会出现**欠拟合**的情况。为此，团队采用了迁移学习的思路，利用槽位相似性，迁移不同领域下相似的槽位数据，从而达到增强小样本数据的目的。
+- 最终，贝壳在AB榜中均取得了第一名的成绩，准确率分别为84.3%，85.3%的高分。
 
 ### 赛题介绍
 
@@ -70,13 +76,21 @@ mathjax: true
 | Audio-Play |	50 | 	artist, name, tag, language, play_setting |
 | TVProgram-Play |	50 | 	datetime_time, datetime_date, channel, name |
 
-大赛需要参赛选手围绕所选赛题和特定任务，设置多种不同的技术场景，基于给定的数据训练算法模型，持续优化相关精度、效率等指标。因此该赛题除基本的学习任务外，还面临“域外检测”与“小样本学习”两个子任务：
+大赛需要参赛选手围绕所选赛题和特定任务，设置多种不同的技术场景，基于给定的数据训练算法模型，持续优化相关精度、效率等指标。因此该赛题除基本的学习任务外，还面临“**域外**检测”与“**小样本**学习”两个子任务：
 - 期望通过“**小样本**学习”任务减少产品对大量新类别标注数据的依赖。
 - 通过“**域外检测**”任务识别未知意图，摆脱对已知意图的干扰，同时达到尽可能好的学习效果。
 
+评测指标：**意图识别准确率**、**槽位F1值**、**句准确率**三项指标
+- 1）意图识别准确率（Intent Accuracy）：对识别结果中“意图”字段进行评判。
+- 2）槽位F1值：对于识别结果中“槽位:槽值”字段进行评判。
+  - ①槽位填充与意图识别结果相关，如意图类别预测错误，则该样本槽位填充结果均记为FP。
+  - ②对于槽位F1值指标，采用精准匹配对“槽位：槽值”键值对整体进行评判，如槽位及槽值中任意一项预测错误，则该样本槽位填充结果记为FP。
+- 3）句准确率（Sentence Accuracy）：对模型意图识别及槽位填充结果进行综合评判，仅当意图预测正确且各槽位填充均正确时，认定该样本预测正确，否则认定为预测错误。
+
+
 ### 技术路线
 
-NLU任务分成意图识别+槽位抽取两个子任务，实现上有两个方向：
+NLU任务分成**意图识别**+**槽位抽取**两个子任务，实现上有两个方向：
 - **串行**：先分类，在子类上做槽位抽取
 - **并行**：一步到位，直接给出意图及槽位
 
@@ -107,7 +121,7 @@ NLU任务分成意图识别+槽位抽取两个子任务，实现上有两个方�
   - tri-gram MLM：\[CLS] 播 放 中 央 \[MUSK] \[MUSK] \[MUSK] 的 \[MUSK] \[MUSK] \[MUSK] 声
 
 
-### 分类
+### 意图识别（分类）
 
 分类问题
 - （1）**常规**意图：直接加MLP，输出softmax结果
@@ -123,7 +137,52 @@ NLU任务分成意图识别+槽位抽取两个子任务，实现上有两个方�
 - （4）域外意图
   - 级联另一个专门预测other类别的模型，
 
-### 序列标注
+#### OOD识别
+
+[论文笔记 - 对话系统中的 OOD 问题](https://zhuanlan.zhihu.com/p/435989760)
+- ACL 2021: Enhancing the generalization for Intent Classification and Out-of-Domain Detection in SLU
+  - 无监督方法。不需要额外收集数据，通过在最后一层线性层加上 DRM 模块就能实现
+  - OOD 的预测有 confidence-based 和 feature-based 两类方法
+    - Confidence-based Methods 基于 softmax output 来输出 OOD 的预测分数
+    - Feature-based Methods 马氏距离修正了欧式距离中各个维度尺度不一致且相关的问题。马氏距离计算点与聚类（分布）之间的距离，在多维数据集异常检测，高维数据集分类应用中表现出色。
+- ACL 2021: Out-of-Scope Intent Detection with Self-Supervision and Discriminative Training
+  - 构建一系列的 pseudo outliers，然后把 intent classification 和 OOD 两个任务抽象为一个 K+1 的分类任务来做
+- EMNLP 2021: GOLD: Improving Out-of-Scope Detection in Dialogues using Data Augmentation
+  - 弱监督方式，在少量有标签的 OOD 数据（seed data）以及一个辅助的外部数据集 (source data)上进行数据增强，产生 pseudo-OOD data。任务是 in-domain/out-of-domain 二分类。
+- ACL 2021: Modeling Discriminative Representations for Out-of-Domain Detection with Supervised Contrastive Learning
+  - 有监督对比学习（SCL） + 交叉熵（CE）的方法，使用对抗攻击的方法实现正样本的增强。希望同一个意图下的样本互相接近，不同意图下的样本互相远离。有监督对比学习的表示学习方法可以通过最大化类间距离和最小化类内方差来提升特征的区分度。属于无监督的OOD检测方法，训练阶段用IND数据，测试阶段用 MSP/LOF/GDA 来检测 OOD。
+- NACCL 2021: Adversarial Self-Supervised Learning for Out-of-Domain Detection
+  - 这篇和上面一篇都是美团发的文，模型上一篇更简单，实验指标也是上一篇更好看，用 IND 数据和 CL loss 训练一个分类器，对 unlabeled data 进行对比学习，用 back translate 做正样本数据增强
+
+
+对话系统中的 domain 都是预先定义好的，而在实际应用场景中，会有很多现有系统回答不了的问题（out of the design scope），我们把系统支持的意图称为 in-domain (`IND`)，系统不支持的意图称为 out-of-domain (`OOD`)，OOD 是需要被拒识的。
+
+处理 OOD 问题一般分为有监督和无监督两类方法。
+- **有监督**方法相对更直接，收集好 OOD 数据，在 IND 和 OOD 上训练一个二分类器，或者直接学习一个 K+1 的分类器。
+  - 然而 OOD **数据获取困难**，所以有些研究是讨论怎么生成 pseudo outlier。
+  - 另外，从直觉上看，IND 和 OOD 数据**分布不一致**，IND/OOD 数据极不平衡，在选择 OOD 数据时存在一定的 selection bias，很难选择到高质量有代表性的数据，所以学习的模型对没见过的 OOD 数据很难泛化。
+- 而**无监督**方法往往在训练阶段只利用 IND 数据来学习 IND 的 decision boundaries（如 LMCL，SEG），在测试阶段使用额外的检测算法来检测 OOD。这类方法致力于更好的对 IND 数据建模，以及探索更好的检测方法。但由于训练和测试阶段的目标并不一致，容易对 OOD 数据产生 overconfident 的后验分数。下面是三类常见的检测方法：
+  - **概率阈值** Probability Threshold: 利用 IND 模型的输出概率分布来决定 OOD，如 Maximum Softmax Probability (MSP)，或者对输出的分数进行若干操作转化如 ODIN, Entropy，也有一些是在 reconstruction loss 或者 likelihood ratios 上设定阈值
+  - **异常检测** Outlier Distance： 异常检测的方法，看 outlier 到 in-scope 集合的距离是否足够远。通常是在 embedding function 或者距离函数上做文章，如 Local Outlier Factor (LOF)、马氏距离等
+  - **贝叶斯集成** Bayesian Ensembles： 在 16-18 年的工作比较多，近两年没怎么看到，通过 IND 模型输出的方差来决定是否是 OOD，如通过 ensemble / dropout 等方式看模型输出的方差如果够大，就认为是 OOD。
+
+
+【2022-1-4】北邮模式识别实验室[Modeling Discriminative Representations for Out-of-Domain Detection with Supervised Contrastive Learning](https://arxiv.org/pdf/2105.14289.pdf)，如何检测用户query中的跟task/domain不相关的问题。例如：银行的app语音助手
+- 我有多少余额，它检测该问题为in-domain (`IND`) 的问题，并给出回答；
+- 我们一起健身的小伙伴都怎样呀？我们不希望模型“不懂装懂”，而是希望它可以检测该问题为out-of-domain (`OOD`)，并引导用户提出domain相关的问题。
+- ![](https://pic3.zhimg.com/80/v2-b9fd96c433508b89bda629e06c8f88e2_720w.jpg)
+
+OOD的检测方法分为**有监督**和**无监督**两种。
+- 有监督的方式在训练时已知哪些数据OOD，所以在训练时可以将OOD的数据当成一个类型；
+- 无监督方式训练的时候只有标注的IND数据。常用的方法是先利用IND数据学习类别的特征 (分类器），然后使用**检测算法**计算IND样本和OOD样本的相似度。
+
+先验假设是：一个OOD检测模型依赖于高质量IND**类别表示**模型。
+- IND分类器虽然在IND数据上表现好，应用到OOD时性能不高，原因是**类别间隔很模糊**。
+- 所以核心是利用**对比学习**减小类内距离，增大类间距离。更好的IND聚类促使更好的OOD分类。
+
+是无监督OOD进行训练，策略是先用有监督对比学习在IND数据上训练，然后用cross-entropy损失对分类器fine-tune，有监督对比学习的目标是拉近IND中属于拉近同一类别的意图，推远不同类别的意图。
+
+### 槽位抽取（序列标注）
 
 槽位抽取
 - 常规槽位：
@@ -163,9 +222,50 @@ NLU任务分成意图识别+槽位抽取两个子任务，实现上有两个方�
 ## SemEval
 
 国际计算语言学协会（Association for Computational Linguistics, ACL）下属的 SIGLEX 主办。ACL 作为世界上影响力最大、最具活力的国际学术组织，其举办的计算语言学年会（Annual Meeting of the Association for Computational Linguistics）是国际自然语言处理的顶级会议。自 2001 年起，SemEval 至今已成功举办了十三届，吸引了世界范围内的多所大学和研究机构的参加，在业界和学术界具有极高的影响力。根据 Google Scholar 的数据，发表在 SemEval 的文章在 Computational Linguistics 领域的影响力仅次于 ACL/EMNLP/NAACL 三大顶会，位于 NLP 会议、期刊中的第四位。
+- [NLP顶级赛事SemEval那个人居然夺得榜首](https://www.dreamwings.cn/semeval2020-task4-results/5582.html): 第十四届国际语义评测大赛（International Workshop on Semantic Evaluation 2020, SemEval 2020）落下帷幕。在 Task 4: Commonsense Validation and Explanation 常识验证与解释评测任务中，由我院 ICA 研究所的（我导师 + 联合培养的另一位老师）担任指导老师，千千、小雨等同学组成的参赛队成功获得子任务 B 第一名，子任务 A 第二名，撒花~。本届比赛也吸引了包括哈尔滨工业大学、香港中文大学、雷丁大学等著名全球高校。
+- 2020年，全球规模最大的语义评测比赛 SemEval 2020 [百度基于飞桨平台自研的语义理解框架 ERNIE一举斩获5项世界冠军](https://tech.gmw.cn/2020-03/30/content_33698797.htm)，囊括视觉媒体的关键文本片段挖掘、多语攻击性语言检测和混合语种的情感分析
 
 - [SemEval 2022](https://semeval.github.io/SemEval2022/tasks)，跟ACL合作
-- [NLP 顶级赛事 SemEval 那个人居然夺得榜首](https://www.dreamwings.cn/semeval2020-task4-results/5582.html): 第十四届国际语义评测大赛（International Workshop on Semantic Evaluation 2020, SemEval 2020）落下帷幕。在 Task 4: Commonsense Validation and Explanation 常识验证与解释评测任务中，由我院 ICA 研究所的（我导师 + 联合培养的另一位老师）担任指导老师，千千、小雨等同学组成的参赛队成功获得子任务 B 第一名，子任务 A 第二名，撒花~ (●ˇ∀ˇ●)。本届比赛也吸引了包括哈尔滨工业大学、香港中文大学、雷丁大学等著名全球高校。
+
+浦发和百度合作搞semeval 2022
+
+Websites and contact information for individual tasks below.
+ 
+### Lexical semantics
+ 
+*   **[Task 1: CODWOE - COmparing Dictionaries and WOrd Embeddings](https://competitions.codalab.org/competitions/34022)** ([\[contact organizers\]](mailto:tmickus@atilf.fr) [\[task mailing list\]](mailto:semeval2022-dictionaries-and-word-embeddings@googlegroups.com))  Timothee Mickus, Denis Paperno, Mathieu Constant, Kees van Deemter
+*   **[Task 2: Multilingual Idiomaticity Detection and Sentence Embedding](https://sites.google.com/view/semeval2022task2-idiomaticity)** ([\[contact organizers\]](mailto:semeval-2022-task-2-mwe-organisers-group@sheffield.ac.uk) [\[task mailing list\]](mailto:semeval-2022-task-2-mwe@googlegroups.com))  Harish Tayyar Madabushi, Marcos Garcia, Carolina Scarton, Marco Idiart, Aline Villavicencio
+    
+*   **[Task 3: Presupposed Taxonomies - Evaluating Neural-network Semantics (PreTENS)](https://sites.google.com/view/semeval2022-pretens/)** ([\[contact organizers\]](mailto:semeval2022-task3-organizers@googlegroups.com) [\[task mailing list\]](mailto:semeval2022-task3@googlegroups.com))  Dominique Brunato, Cristiano Chesi, Shammur Absar Chowdhury, Felice Dell'Orletta, Simonetta Montemagni, Giulia Venturi, Roberto Zamparelli
+ 
+### Social factors & attitudes
+ 
+*   **[Task 4: Patronizing and Condescending Language Detection](https://sites.google.com/view/pcl-detection-semeval2022/)** ([\[contact organizers\]](mailto:semeval2022.task4.pcldetection@gmail.com) [\[task mailing list\]](mailto:pcl-detection-task4-semeval2022@googlegroups.com))  Carla Perez-Almendros, Luis Espinosa-Anke, Steven Schockaert
+    
+*   **[Task 5: MAMI - Multimedia Automatic Misogyny Identification](https://competitions.codalab.org/competitions/34175)** ([\[contact organizers\]](mailto:semeval2022-mami-organizers@googlegroups.com) [\[task mailing list\]](mailto:semeval2022-mami@googlegroups.com))  Elisabetta Fersini, Paolo Rosso, Francesca Gasparini, Alyssa Lees, Jeffrey Sorensen
+    
+*   **[Task 6: iSarcasmEval - Intended Sarcasm Detection in English and Arabic](https://sites.google.com/view/semeval2022-isarcasmeval)** ([\[contact organizers\]](mailto:semeval2022-isarcasmeval-organizers@googlegroups.com) [\[task mailing list\]](mailto:semeval2022-isarcasmeval@googlegroups.com))  Ibrahim Abu Farha, Silviu Oprea, Steve Wilson, Walid Magdy
+    
+ 
+### Discourse, documents, and multimodality
+ 
+*   **[Task 7: Identifying Plausible Clarifications of Implicit and Underspecified Phrases in Instructional Texts](https://clarificationtask.github.io/)** ([\[contact organizers\]](mailto:semeval2022-task7-organizers@googlegroups.com) [\[task mailing list\]](mailto:semeval2022-task7@googlegroups.com))  Michael Roth, Talita Kloppenburg-Anthonio, Anna Sauer
+    
+*   **[Task 8: Multilingual news article similarity](http://euagendas.org/semeval2022)** ([\[contact organizers\]](mailto:semeval-2022-task-8-organizers@euagendas.org) [\[task mailing list\]](mailto:semeval-2022-task-8-multilingual-news@googlegroups.com))  Xi Chen, Ali Zeynali, Chico Camargo, Fabian Flöck, Devin Gaffney, Przemyslaw A. Grabowicz, Scott A. Hale, David Jurgens, Mattia Samory
+    
+*   **[Task 9: R2VQ - Competence-based Multimodal Question Answering](https://competitions.codalab.org/competitions/34056)** ([\[contact organizers\]](mailto:semeval-2022-task9-organizers@googlegroups.com) [\[task mailing list\]](mailto:semeval-2022-task9@googlegroups.com))  James Pustejovsky, Jingxuan Tu, Marco Maru, Simone Conia, Roberto Navigli, Kyeongmin Rim, Kelley Lynch, Richard Brutti, Eben Holderness
+    
+ 
+### Information extraction
+ 
+*   **[Task 10: Structured Sentiment Analysis](https://competitions.codalab.org/competitions/33556)** ([\[contact organizers\]](mailto:jeremycb@ifi.uio.no) [\[task mailing list\]](mailto:structured-sent-participants@googlegroups.com))  Jeremy Barnes, Andrey Kutuzov, Jan Buchmann, Laura Ana Maria Oberländer, Enrica Troiano, Rodrigo Agerri, Lilja Øvrelid, Erik Velldal, Stephan Oepen
+    
+*   **[Task 11: MultiCoNER - Multilingual Complex Named Entity Recognition](https://multiconer.github.io/)** ([\[contact organizers\]](mailto:multiconer-semeval-organizers@googlegroups.com) [\[task mailing list\]](mailto:multiconer-semeval@googlegroups.com))  Shervin Malmasi, Besnik Fetahu, Anjie Fang, Sudipta Kar, Oleg Rokhlenko
+    
+*   **[Task 12: Symlink - Linking Mathematical Symbols to their Descriptions](https://competitions.codalab.org/competitions/34011)** ([\[contact organizers\]](mailto:semeval.2022.task.12.symlink@gmail.com) [\[task mailing list\]](mailto:semeval-2022-task-12-symlink@googlegroups.com))  Viet Dac Lai, Amir Ben Veyseh, Thien Huu Nguyen, Franck Dernoncourt
+
+
+
 
 # Kaggle
 
