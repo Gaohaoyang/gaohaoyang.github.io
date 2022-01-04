@@ -14,6 +14,7 @@ mathjax: true
 
 # 总结
 
+- 【2022-1-4】群消息：教育是富人的**装饰品**，穷人的**避难所**。富人、穷人才华横溢，富人还是富人，穷人还是穷人！
 - 【2021-11-21】呼兰脱口秀：讨厌的学霸-[音频](https://www.ixigua.com/7032442292862586125)，[视频](https://v.qq.com/x/page/m328008vnc1.html)，学渣更容易融入美国社会
 <iframe frameborder="0" src="https://v.qq.com/txp/iframe/player.html?vid=m328008vnc1" allowFullScreen="true" width="100%" height="600"></iframe>
 
