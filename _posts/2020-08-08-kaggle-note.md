@@ -16,12 +16,13 @@ mathjax: true
 
 - 汇总知名数据竞赛的经验信息
 
+# 算法竞赛
+
 ## 数据科学竞赛大全
 
 - 【2020-10-10】Data Science Challenge / Competition 数据科学挑战赛/数据科学竞赛，源自：[机器学习理论与数据竞赛实战](https://www.zhihu.com/column/DataAI)
 ![](https://pic3.zhimg.com/v2-af268652dc6a498641d8799862d61f2a_b.jpg)
-
-# 算法竞赛
+- 【2022-1-4】[coggle数据科学竞赛](https://coggle.club/)，汇总国内外竞赛信息，主办方、时间、题目、参赛人数等，[历次比赛经验总结](https://coggle.club/feed)
 
 ## KDD CUP
 
@@ -136,6 +137,23 @@ NLU任务分成**意图识别**+**槽位抽取**两个子任务，实现上有�
 - （4）域外意图
   - 级联另一个专门预测other类别的模型，
 
+#### OOD识别
+
+【2022-1-4】北邮模式识别实验室[Modeling Discriminative Representations for Out-of-Domain Detection with Supervised Contrastive Learning](https://arxiv.org/pdf/2105.14289.pdf)，如何检测用户query中的跟task/domain不相关的问题。例如：银行的app语音助手
+- 我有多少余额，它检测该问题为in-domain (`IND`) 的问题，并给出回答；
+- 我们一起健身的小伙伴都怎样呀？我们不希望模型“不懂装懂”，而是希望它可以检测该问题为out-of-domain (`OOD`)，并引导用户提出domain相关的问题。
+- ![](https://pic3.zhimg.com/80/v2-b9fd96c433508b89bda629e06c8f88e2_720w.jpg)
+
+OOD的检测方法分为**有监督**和**无监督**两种。
+- 有监督的方式在训练时已知哪些数据OOD，所以在训练时可以将OOD的数据当成一个类型；
+- 无监督方式训练的时候只有标注的IND数据。常用的方法是先利用IND数据学习类别的特征 (分类器），然后使用**检测算法**计算IND样本和OOD样本的相似度。
+
+先验假设是：一个OOD检测模型依赖于高质量IND**类别表示**模型。
+- IND分类器虽然在IND数据上表现好，应用到OOD时性能不高，原因是**类别间隔很模糊**。
+- 所以核心是利用**对比学习**减小类内距离，增大类间距离。更好的IND聚类促使更好的OOD分类。
+
+是无监督OOD进行训练，策略是先用有监督对比学习在IND数据上训练，然后用cross-entropy损失对分类器fine-tune，有监督对比学习的目标是拉近IND中属于拉近同一类别的意图，推远不同类别的意图。
+
 ### 槽位抽取（序列标注）
 
 槽位抽取
@@ -176,7 +194,8 @@ NLU任务分成**意图识别**+**槽位抽取**两个子任务，实现上有�
 ## SemEval
 
 国际计算语言学协会（Association for Computational Linguistics, ACL）下属的 SIGLEX 主办。ACL 作为世界上影响力最大、最具活力的国际学术组织，其举办的计算语言学年会（Annual Meeting of the Association for Computational Linguistics）是国际自然语言处理的顶级会议。自 2001 年起，SemEval 至今已成功举办了十三届，吸引了世界范围内的多所大学和研究机构的参加，在业界和学术界具有极高的影响力。根据 Google Scholar 的数据，发表在 SemEval 的文章在 Computational Linguistics 领域的影响力仅次于 ACL/EMNLP/NAACL 三大顶会，位于 NLP 会议、期刊中的第四位。
-- [NLP 顶级赛事 SemEval 那个人居然夺得榜首](https://www.dreamwings.cn/semeval2020-task4-results/5582.html): 第十四届国际语义评测大赛（International Workshop on Semantic Evaluation 2020, SemEval 2020）落下帷幕。在 Task 4: Commonsense Validation and Explanation 常识验证与解释评测任务中，由我院 ICA 研究所的（我导师 + 联合培养的另一位老师）担任指导老师，千千、小雨等同学组成的参赛队成功获得子任务 B 第一名，子任务 A 第二名，撒花~ (●ˇ∀ˇ●)。本届比赛也吸引了包括哈尔滨工业大学、香港中文大学、雷丁大学等著名全球高校。
+- [NLP顶级赛事SemEval那个人居然夺得榜首](https://www.dreamwings.cn/semeval2020-task4-results/5582.html): 第十四届国际语义评测大赛（International Workshop on Semantic Evaluation 2020, SemEval 2020）落下帷幕。在 Task 4: Commonsense Validation and Explanation 常识验证与解释评测任务中，由我院 ICA 研究所的（我导师 + 联合培养的另一位老师）担任指导老师，千千、小雨等同学组成的参赛队成功获得子任务 B 第一名，子任务 A 第二名，撒花~。本届比赛也吸引了包括哈尔滨工业大学、香港中文大学、雷丁大学等著名全球高校。
+- 2020年，全球规模最大的语义评测比赛 SemEval 2020 [百度基于飞桨平台自研的语义理解框架 ERNIE一举斩获5项世界冠军](https://tech.gmw.cn/2020-03/30/content_33698797.htm)，囊括视觉媒体的关键文本片段挖掘、多语攻击性语言检测和混合语种的情感分析
 
 - [SemEval 2022](https://semeval.github.io/SemEval2022/tasks)，跟ACL合作
 
