@@ -28,6 +28,11 @@ mathjax: true
 3. 没有**试错**资本。有钱家的孩子，可以试错，不断试，不断成长，实践出真知，一般家庭的孩子或许可以试错一两次，但大部分错一次就跌入谷底，然后起起伏伏，直到自己撞得头破血流了，尝尽疾苦，才能明白一些规则或积累一点资本，却被社会磨尽了锐气，像可怜的王士，育负看目已的家廷，跌入轮旦的循坏。
 4. **时间**成本。认知层次的领悟和传承，资本的积累与继承，都是需要时间的，老鼠的孩子会打洞，穷人家的孩子所有的一切都只能自己花时间去积累，学习，领悟，去提高一些层次，获得些资本!然而，很多大好的青春岁月和美好的事物就这样消失了，以及没有时间顾及下一代，孩子潜意识造成的缺陷永远难以弥补。别人的顺利，都是上一代人拒绝安稳、拼搏奋斗、不断试错传承来的。
 
+相比富人，穷人“晚熟”：
+1. 洞悉人性
+2. 交换利益
+3. 整合资源
+
 所以穷人的孩子不努力学习考学，不仅是财富积累的不容易，更大的是认识层次难跨越。
 
 救世主都说我不入地狱谁入地狱，众生皆苦吃的苦越多，越能达到更高的度，然而你却没说，得看我能不能扛得住。。
@@ -178,7 +183,9 @@ mathjax: true
 <iframe src="//player.bilibili.com/player.html?aid=73941898&bvid=BV1tE411b7RA&cid=126484672&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
-# [穷富翁大作战](https://mp.weixin.qq.com/s?__biz=MjM5ODY2OTQyNg==&mid=200524388&idx=1&sn=eee099777a7e34af500e6f30232370ce&chksm=28c05f791fb7d66f77ce7fa82e5f86fd0585b1bbb36d294705cd4bbe142e57f4dc274120efbc&token=1917001922&lang=zh_CN#rd)
+# 穷富翁大作战
+
+[穷富翁大作战](https://mp.weixin.qq.com/s?__biz=MjM5ODY2OTQyNg==&mid=200524388&idx=1&sn=eee099777a7e34af500e6f30232370ce&chksm=28c05f791fb7d66f77ce7fa82e5f86fd0585b1bbb36d294705cd4bbe142e57f4dc274120efbc&token=1917001922&lang=zh_CN#rd)
 
 《穷富翁大作战》是香港电台（RTHK）的一档真人秀节目，制作组希望以一种全新的形式探讨这个日益严峻的贫富差距问题。参加节目的富人将在5天的时间里，体验一个“穷”字怎么写：住进贫民窟的板房，甚至露宿街头，打工度日，体验一无所有的生活，进一步了解这个社会。
 
@@ -329,7 +336,9 @@ JuJu 继续她的艺人之路，做模特，演戏，选美。她说她要做传
 
 一切像是当年香港的复制
 
-# [【纪录片】中国式父亲](https://mp.weixin.qq.com/s?__biz=MjM5ODY2OTQyNg==&mid=2649768222&idx=1&sn=4189cac24560d45cda164efb856d7059&chksm=bec3dc0389b455158321a67daf3af7a2073f5a36c3207d36234a8a07b3b240cf697f545ea53c&token=1917001922&lang=zh_CN#rd)
+# 中国式父亲
+
+[【纪录片】中国式父亲](https://mp.weixin.qq.com/s?__biz=MjM5ODY2OTQyNg==&mid=2649768222&idx=1&sn=4189cac24560d45cda164efb856d7059&chksm=bec3dc0389b455158321a67daf3af7a2073f5a36c3207d36234a8a07b3b240cf697f545ea53c&token=1917001922&lang=zh_CN#rd)
 
 ![](https://i0.hdslb.com/bfs/article/watermark/4481be5476b96bc07a3d852f0099e08cce961ce5.jpg)
 
