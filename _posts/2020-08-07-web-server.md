@@ -974,6 +974,72 @@ int main()
 
 # LAMP
 
+LAMP 环境搭建指的是在 **Linux** 操作系统中分别安装 **Apache** 网页服务器、**MySQL** 数据库服务器和 **PHP** 开发服务器，以及一些对应的扩展软件。
+- ![](https://lamp.sh/usr/uploads/lamp.png)
+LAMP 环境是当前极为流行的搭建动态网站的开源软件系统，拥有良好的稳定性及兼容性。而且随着开源软件的蓬勃发展，越来越多的企业和个人选择在 LAMP 开发平台上搭建自己的网站。
+- LAMP占全球网站总数的 52.19％（2013 年 7 月数据），其余的网站平台（如 Microsoft IIS 开发平台、Linux Nginx 开发平台、Google 开发平台等）占用了剩余的份额。
+- LNMP环境中，使用 **Nginx** 网页服务器取代了 Apache 网页服务器。Nginx 是一款高性能的 HTTP 网页服务器和反向代理服务器，它的执行效率极高，配置相比 Apache 也较为简单，所以在短时间内被国内外很多大型公司所采用，大有取代 Apache 的势头（目前还是以 Apache 为主流的）。
+- WAMP环境：Windows
+- ![](https://img2020.cnblogs.com/blog/465934/202112/465934-20211214162329371-13136215.png)
+- 参考：[LAMP环境搭建和LNMP环境搭建](http://c.biancheng.net/linux_tutorial/16/)
+
+## LAMP一键安装
+
+[LAMP一键安装包](https://lamp.sh/), [github](https://github.com/teddysun/lamp) 是一个用 Linux Shell 编写的可以为 Amazon Linux/CentOS/Debian/Ubuntu 系统的 VPS 或服务器安装 LAMP(Linux + Apache + MySQL/MariaDB + PHP) 生产环境的 Shell 脚本。包含一些可选安装组件如：
+- Zend OPcache, ionCube Loader, PDFlib, XCache, APCu, imagick, gmagick, libsodium, memcached, redis, mongodb, swoole, yaf, yar, msgpack, psr, phalcon, grpc, xdebug
+- 其他诸如：OpenSSL, ImageMagick, GraphicsMagick, Memcached, phpMyAdmin, Adminer, Redis, re2c, KodExplorer
+- 同时还有一些辅助脚本如：虚拟主机管理、Apache、MySQL/MariaDB、PHP 及 PhpMyAdmin、Adminer 的升级等。
+
+程序目录
+- MySQL 安装目录: /usr/local/mysql
+- MySQL 数据库目录：/usr/local/mysql/data（默认路径，安装时可更改）
+- MariaDB 安装目录: /usr/local/mariadb
+- MariaDB 数据库目录：/usr/local/mariadb/data（默认路径，安装时可更改）
+- PHP 安装目录: /usr/local/php
+- Apache 安装目录： /usr/local/apache
+
+默认的网站根目录： /data/www/default
+
+```shell
+# wget/git
+yum -y install wget git      # for Amazon Linux/CentOS
+apt-get -y install wget git  # for Debian/Ubuntu
+# lamp包下载
+git clone https://github.com/teddysun/lamp.git
+cd lamp
+chmod 755 *.sh
+# 开始安装
+./lamp.sh
+# 使用方法
+lamp add     # 创建虚拟主机
+lamp del     # 删除虚拟主机
+lamp list    # 列出虚拟主机
+lamp version # 显示当前版本
+# 升级
+cd ~/lamp
+git reset --hard         # Resets the index and working tree
+git pull                 # Get latest version first
+chmod 755 *.sh
+./upgrade.sh             # Select one to upgrade
+./upgrade.sh apache      # Upgrade Apache
+./upgrade.sh db          # Upgrade MySQL or MariaDB
+./upgrade.sh php         # Upgrade PHP
+./upgrade.sh phpmyadmin  # Upgrade phpMyAdmin
+./upgrade.sh adminer     # Upgrade Adminer
+# 卸载
+./uninstall.sh
+
+# MySQL 或 MariaDB 命令
+/etc/init.d/mysqld (start|stop|restart|status)
+# Apache 命令
+/etc/init.d/httpd (start|stop|restart|status)
+# Memcached 命令（可选安装）
+/etc/init.d/memcached (start|stop|restart|status)
+# Redis 命令（可选安装）
+/etc/init.d/redis-server (start|stop|restart|status)
+
+```
+
 
 ## Apache
 
@@ -1001,12 +1067,16 @@ Apache专用：
 
 ## PHP
 
-[centos下安装php环境](https://www.php.cn/centos/460292.html)的方法：
-- 首先安装并启动apache
-- 然后安装mysql；
-- “yum install php php-devel”命令安装php；
-- 最后重启apache，访问服务器所在ip即可
-  - apache默认就是使用80端口
+### php安装
+
+- mac下安装php
+  - [官方安装方法](https://www.php.net/manual/zh/install.macosx.php)
+- [centos下安装php环境](https://www.php.cn/centos/460292.html)的方法：
+  - 首先安装并启动apache
+  - 然后安装mysql；
+  - “yum install php php-devel”命令安装php；
+  - 最后重启apache，访问服务器所在ip即可
+    - apache默认就是使用80端口
 
 ```shell
 # 安装Apache
@@ -1037,6 +1107,12 @@ yum install php-mysql php-gd php-imap php-ldap php-odbc php-pear php-xml php-xml
 /bin/systemctl start httpd.service
 
 ```
+
+### php语法
+
+[官方文档](https://www.php.net/manual/zh/index.php)
+
+
 
 
 
