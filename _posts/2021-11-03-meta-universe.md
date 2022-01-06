@@ -191,6 +191,12 @@ Roblox 对元宇宙概念的阐述虽然更加具体，但要素众多，每个�
  
 虽然例举了元宇宙可能涉及的监管问题，但目前言之尚早。元宇宙带给人们更多是机会和期待，相信随着技术的推进，元宇宙的实现或将开启互联网的全真时代。
 
+## 数字人
+
+- 【2022-1-6】元宇宙虚拟人物建模工具 [MetaHuman Creator](https://www.unrealengine.com/zh-CN/metahuman-creator) （源自3D创作公司[unrealengine](https://www.unrealengine.com/zh-CN/)）是一款基于云服务的应用，能帮助任何人在几分钟内创建照片级逼真的数字人类。韩国姑娘失业后通过此工具玩游戏主播，成立公司。[使用示例](https://www.ixigua.com/7047138696230931747)
+  - ![](https://i0.hdslb.com/bfs/article/4dffc65ff80a035e9ffcbaa827da4f1683faa533.png@942w_531h_progressive.webp)
+  - [分分钟打造超写实角色！MetaHuman这个黑科技怎么用？](http://www.gamelook.com.cn/2021/05/441678)
+
 
 ## 评论
 
