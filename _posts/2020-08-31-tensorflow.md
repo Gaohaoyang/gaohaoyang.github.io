@@ -492,9 +492,37 @@ model = tf.keras.models.Sequential([
 以上层叠结构并不能表示**任意**神经网络结构。
 
 Keras 提供了 **Functional API** 来建立更为复杂的模型
-- 例如: 多输入/输出或存在参数共享的模型。其使用方法是将层作为可调用的对象并返回张量，并将输入向量和输出向量提供给 tf.keras.Model 的 inputs 和 outputs 参数，示例如下：
+- 例如: 多输入/输出或存在参数共享的模型。其使用方法是将层作为可调用的对象并返回张量，并将输入向量和输出向量提供给 tf.keras.Model 的 inputs 和 outputs 参数
+
+Keras Functional 建立任意结构模型
+参考：
+- [keras Functional文档](https://keras-cn.readthedocs.io/en/latest/getting_started/functional_API/)
+- [Keras函数式(functional)API的使用](https://blog.csdn.net/huanghaocs/article/details/90574486)
+
+#### 多层感知器(Multilayer Perceptron)
 
 ```python
+##------ Multilayer Perceptron ------##
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Input, Dense
+from tensorflow.keras import backend as K
+
+K.clear_session() 
+
+# MLP model
+x = Input(shape=(32,))
+hidden1 = Dense(10, activation='relu')(x)
+hidden2 = Dense(20, activation='relu')(hidden1)
+hidden3 = Dense(10, activation='relu')(hidden2)
+output = Dense(1, activation='sigmoid')(hidden3)
+model = Model(inputs=x, outputs=output)
+
+# summarize layers
+model.summary()
+
+# ------- 或者：直接从tf导入 -------
+import tensorflow as tf
+
 # Keras Functional 建立任意结构模型
 inputs = tf.keras.Input(shape=(28, 28, 1)) # 单独定义inputs
 x = tf.keras.layers.Flatten()(inputs)
@@ -503,6 +531,222 @@ x = tf.keras.layers.Dense(units=10)(x)
 outputs = tf.keras.layers.Softmax()(x)  # 单独定义outputs
 # 通过 Model 组装输入、输出，构建任意结构模型
 model = tf.keras.Model(inputs=inputs, outputs=outputs)
+
+```
+
+#### 卷积神经网络(Convolutional Neural Network)
+
+用于图像分类的卷积神经网络。
+- 该模型接收3通道的64×64图像作为输入，然后经过两个卷积和池化层的序列作为特征提取器，接着过一个全连接层，最后输出层过softmax激活函数进行10个类别的分类。
+
+```python
+##------ Convolutional Neural Network ------##
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Input
+from tensorflow.keras.layers import Dense, Flatten
+from tensorflow.keras.layers import Conv2D, MaxPooling2D
+from tensorflow.keras import backend as K
+K.clear_session()
+
+# CNN model
+x = Input(shape=(64,64,3))
+conv1 = Conv2D(16, (5,5), activation='relu')(x)
+pool1 = MaxPooling2D((2,2))(conv1)
+conv2 = Conv2D(32, (3,3), activation='relu')(pool1)
+pool2 = MaxPooling2D((2,2))(conv2)
+conv3 = Conv2D(32, (3,3), activation='relu')(pool2)
+pool3 = MaxPooling2D((2,2))(conv3)
+flat = Flatten()(pool3)
+hidden1 = Dense(512, activation='relu')(flat)
+output = Dense(10, activation='softmax')(hidden1)
+model = Model(inputs=x, outputs=output)
+
+# summarize layers
+model.summary()
+```
+
+#### 循环神经网络(Recurrent Neural Network)
+
+一个用于文本序列分类的LSTM网络。
+- 该模型需要100个时间步长作为输入，然后经过一个Embedding层，每个时间步变成128维特征表示，然后经过一个LSTM层，LSTM输出过一个全连接层，最后输出用sigmoid激活函数用于进行二分类预测。
+
+```python
+##------ Recurrent Neural Network ------##
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Input
+from tensorflow.keras.layers import Dense, LSTM, Embedding
+from tensorflow.keras import backend as K
+K.clear_session()
+
+VOCAB_SIZE = 10000
+EMBED_DIM = 128
+
+x = Input(shape=(100,), dtype='int32')
+embedding = Embedding(VOCAB_SIZE, EMBED_DIM, mask_zero=True)(x)
+hidden1 = LSTM(64)(embedding)
+hidden2 = Dense(32, activation='relu')(hidden1)
+output = Dense(1, activation='sigmoid')(hidden2)
+model = Model(inputs=x, outputs=output)
+
+# summarize layers
+model.summary()
+
+```
+
+双向RNN, 双向循环神经网络，可以用来完成序列标注等任务，相比上面的LSTM网络，多了一个反向的LSTM，其它设置一样
+
+```python
+##------ Bidirectional recurrent neural network ------##
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Input, Embedding
+from tensorflow.keras.layers import Dense, LSTM, Bidirectional
+from tensorflow.keras import backend as K
+K.clear_session()
+
+VOCAB_SIZE = 10000
+EMBED_DIM = 128
+HIDDEN_SIZE = 64
+# input layer
+x = Input(shape=(100,), dtype='int32')
+# embedding layer
+embedding = Embedding(VOCAB_SIZE, EMBED_DIM, mask_zero=True)(x)
+# BiLSTM layer
+hidden = Bidirectional(LSTM(HIDDEN_SIZE, return_sequences=True))(embedding)
+# prediction layer
+output = Dense(10, activation='softmax')(hidden)
+model = Model(inputs=x, outputs=output)
+
+model.summary()
+```
+
+#### 共享输入层 (Shared Input Layer Model)
+
+定义了具有不同大小内核的多个卷积层来解释图像输入。
+- 该模型采用尺寸为64×64像素的3通道图像。 有两个共享此输入的CNN特征提取子模型; 第一个内核大小为5x5，第二个内核大小为3x3。把提取的特征展平为向量然后拼接成一个长向量，然后过一个全连接层，最后输出层完成10分类。
+
+```python
+##------ Shared Input Layer Model ------##
+
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Input
+from tensorflow.keras.layers import Dense, Flatten
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Concatenate
+from tensorflow.keras import backend as K
+K.clear_session()
+
+# input layer
+x = Input(shape=(64,64,3))
+# first feature extractor
+conv1 = Conv2D(32, (3,3), activation='relu')(x)
+pool1 = MaxPooling2D((2,2))(conv1)
+flat1 = Flatten()(pool1)
+# second feature extractor 
+conv2 = Conv2D(16, (5,5), activation='relu')(x)
+pool2 = MaxPooling2D((2,2))(conv2)
+flat2 = Flatten()(pool2)
+# merge feature
+merge = Concatenate()([flat1, flat2])
+# interpretation layer
+hidden1 = Dense(128, activation='relu')(merge)
+# prediction layer
+output = Dense(10, activation='softmax')(merge)
+model = Model(inputs=x, outputs=output)
+
+model.summary()
+```
+
+Shared Feature Extraction Layer
+- 定义一个共享特征抽取层的模型，这里共享的是LSTM层的输出
+
+```python
+##------ Shared Feature Extraction Layer ------##
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Input, Embedding
+from tensorflow.keras.layers import Dense, LSTM, Concatenate
+from tensorflow.keras import backend as K
+K.clear_session()
+
+# input layer
+x = Input(shape=(100,32))
+# feature extraction
+extract1 = LSTM(64)(x)
+# first interpretation model
+interp1 = Dense(32, activation='relu')(extract1)
+# second interpretation model
+interp11 = Dense(64, activation='relu')(extract1)
+interp12 = Dense(32, activation='relu')(interp11)
+# merge interpretation
+merge = Concatenate()([interp1, interp12])
+# output layer
+output = Dense(10, activation='softmax')(merge)
+model = Model(inputs=x, outputs=output)
+
+model.summary()
+
+```
+
+#### 多输入模型(Multiple Input Model)
+
+定义有两个输入的模型，这里测试的是输入两张图片，一个输入是单通道的64x64，另一个是3通道的32x32，两个经过卷积层、池化层后，展平拼接，最后进行二分类。
+
+```python
+##------ Multiple Input Model  ------##
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Input
+from tensorflow.keras.layers import Dense, Flatten
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Concatenate
+from tensorflow.keras import backend as K
+K.clear_session()
+
+# first input model
+input1 = Input(shape=(64,64,1))
+conv11 = Conv2D(32, (5,5), activation='relu')(input1)
+pool11 = MaxPooling2D(pool_size=(2,2))(conv11)
+conv12 = Conv2D(16, (3,3), activation='relu')(pool11)
+pool12 = MaxPooling2D(pool_size=(2,2))(conv12)
+flat1 = Flatten()(pool12)
+# second input model
+input2 = Input(shape=(32,32,3))
+conv21 = Conv2D(32, (5,5), activation='relu')(input2)
+pool21 = MaxPooling2D(pool_size=(2,2))(conv21)
+conv22 = Conv2D(16, (3,3), activation='relu')(pool21)
+pool22 = MaxPooling2D(pool_size=(2,2))(conv22)
+flat2 = Flatten()(pool22)
+# merge input models
+merge = Concatenate()([flat1, flat2])
+# interpretation model
+hidden1 = Dense(20, activation='relu')(merge)
+output = Dense(1, activation='sigmoid')(hidden1)
+model = Model(inputs=[input1, input2], outputs=output)
+
+model.summary()
+
+```
+
+#### 多输出模型(Multiple Output Model)
+
+定义有多个输出的模型，以文本序列输入LSTM网络为例，一个输出是对文本的分类，另外一个输出是对文本进行序列标注。
+
+```python
+##------ Multiple Output Model ------ ##
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Input
+from tensorflow.keras.layers import Dense, Flatten, TimeDistributed, LSTM
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Concatenate
+from tensorflow.keras import backend as K
+K.clear_session()
+
+x = Input(shape=(100,1))
+extract = LSTM(10, return_sequences=True)(x)
+
+class11 = LSTM(10)(extract)
+class12 = Dense(10, activation='relu')(class11)
+output1 = Dense(1, activation='sigmoid')(class12)
+output2 = TimeDistributed(Dense(1, activation='linear'))(extract)
+model = Model(inputs=x, outputs=[output1, output2])
+
+model.summary()
+
 ```
 
 ### 训练
