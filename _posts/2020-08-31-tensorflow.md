@@ -495,9 +495,60 @@ Keras 提供了 **Functional API** 来建立更为复杂的模型
 - 例如: 多输入/输出或存在参数共享的模型。其使用方法是将层作为可调用的对象并返回张量，并将输入向量和输出向量提供给 tf.keras.Model 的 inputs 和 outputs 参数
 
 Keras Functional 建立任意结构模型
+
 参考：
 - [keras Functional文档](https://keras-cn.readthedocs.io/en/latest/getting_started/functional_API/)
 - [Keras函数式(functional)API的使用](https://blog.csdn.net/huanghaocs/article/details/90574486)
+
+#### Keras
+
+- Keras是一个模型级的库，提供了快速构建深度学习网络的模块。
+- Keras并不处理如张量乘法、卷积等底层操作。这些操作依赖于某种特定的、优化良好的张量操作库。
+- Keras依赖于处理张量的库就称为“**后端引擎**”。
+
+[backend使用方法](https://keras-cn.readthedocs.io/en/latest/backend/#backend)
+- 将backend字段的值改写为你需要使用的后端：theano或tensorflow或者CNTK，即可完成后端的切换
+- 也可以通过定义环境变量KERAS_BACKEND来覆盖上面配置文件中定义的后端：
+  - KERAS_BACKEND=tensorflow python -c "from keras import backend;"
+
+```shell
+# 设置backend
+KERAS_BACKEND=tensorflow python -c "from keras import backend;"
+# 或json方式设置, ~/.keras/keras.json
+{
+    "image_data_format": "channels_last", # "channels_last"或"channels_first"，该选项指定了Keras将要使用的维度顺序，可通过keras.backend.image_data_format()来获取当前的维度顺序。对2D数据来说，"channels_last"假定维度顺序为(rows,cols,channels)而"channels_first"假定维度顺序为(channels, rows, cols)。对3D数据而言，"channels_last"假定(conv_dim1, conv_dim2, conv_dim3, channels)，"channels_first"则是(channels, conv_dim1, conv_dim2, conv_dim3)
+    "epsilon": 1e-07, # 防止除0错误的小数字
+    "floatx": "float32", # float16", "float32", "float64"之一，为浮点数精度
+    "backend": "tensorflow" # 所使用的后端，为"tensorflow"或"theano"
+}
+```
+
+框架无关的代码, 同时在Theano和TensorFlow两个后端上使用
+
+```python
+# tf, theano通用
+from keras import backend as K
+
+input = K.placeholder(shape=(2, 4, 5))
+# also works:
+input = K.placeholder(shape=(None, 4, 5))
+# also works:
+input = K.placeholder(ndim=3)
+
+val = np.random.random((3, 4, 5))
+var = K.variable(value=val)
+
+# all-zeros variable:
+var = K.zeros(shape=(3, 4, 5))
+# all-ones:
+var = K.ones(shape=(3, 4, 5))
+
+a = b + c * K.abs(d)
+c = K.dot(a, K.transpose(b))
+a = K.sum(b, axis=2)
+a = K.softmax(b)
+a = concatenate([b, c], axis=-1)
+```
 
 #### 多层感知器(Multilayer Perceptron)
 
