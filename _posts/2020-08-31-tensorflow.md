@@ -557,6 +557,7 @@ pip install pydot graphviz
 ```
 
 可视化：
+- ![](https://img-blog.csdnimg.cn/20200515152121550.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JyaWFub25l,size_16,color_FFFFFF,t_70)
 
 ```python
 import tensorflow as tf
@@ -969,13 +970,24 @@ class SparseCategoricalAccuracy(tf.keras.metrics.Metric):
 ## tf.function ：图执行模式(eager模式)
 
 - tf.function 模块，结合 AutoGraph 机制，仅需加一个简单的 @tf.function 修饰符，就能轻松将模型以图执行模式运行。
-    - @tf.function 使用名为 AutoGraph 的机制将函数中的 Python 控制流语句转换成 TensorFlow 计算图中的对应节点。
-    - 类似`编译器`
+  - @tf.function 使用名为 AutoGraph 的机制将函数中的 Python 控制流语句转换成 TensorFlow 计算图中的对应节点。类似`编译器`
 - 不是任何函数都可以被 @tf.function 修饰!
-    - @tf.function 使用静态编译将函数内的代码转换成计算图，因此对函数内可使用的语句有一定限制（仅支持 Python 语言的一个子集），且需要函数内的操作本身能够被构建为计算图
-- 建议在函数内只使用 TensorFlow 的原生操作，不要使用过于复杂的 Python 语句，函数参数只包括 TensorFlow 张量或 NumPy 数组
+  - @tf.function 使用静态编译将函数内的代码转换成计算图，因此对函数内可使用的语句有一定限制（仅支持 Python 语言的一个子集），且需要函数内的操作本身能够被构建为计算图
+- 建议在函数内只使用 TensorFlow 的**原生**操作，不要使用过于复杂的 Python 语句，函数参数只包括 TensorFlow 张量或 NumPy 数组
 - 直接获得 tf.function 所生成的计算图以进行进一步处理和调试，可以使用被修饰函数的 get_concrete_function 方法
 
+### 内在原理
+
+使用@tf.function的函数在执行时会生成一个计算图，里面的操作就是计算图的每个节点。下次调用相同的函数，且参数类型相同时，则会直接使用这个计算图计算。若函数名不同或参数类型不同时，则会另外生成一个新的计算图。
+
+注意：建议函数内只使用 TensorFlow 的**原生**操作，不要使用过于复杂的 Python 语句，函数参数最好只包括 TensorFlow 张量或 NumPy 数组。
+- 因为只有tf的原生操作才会在计算图中生产节点。（如python的原生print()函数不会生成节点，而tensorflow的tf.print()会）
+- 对于Tensorflow张量或Numpy数组作为参数的函数，只要类型相同便可重用之前的计算图。而对于python原声数据（如原生的整数、浮点数 1，1.5等）必须参数的值一模一样才会重用之前的计算图，否则的话会创建新的计算图。
+
+另外，当模型由较多小操作组成的时候， @tf.function 带来的提升效果较大。而当模型的操作数量较少，但单一操作均很耗时的时候，则 @tf.function 带来的性能提升不会太大。
+- [实验](https://www.cnblogs.com/amazingter/p/14258283.html)结论：不用@tf.function，训练时间大约为3秒。用@tf.function，训练时间仅需要0.5秒。快了很多倍。
+
+### 示例
 
 ```python
 import tensorflow as tf
@@ -1012,8 +1024,6 @@ a, b, c = array_write_and_read()
 # 使用底层API手工转换
 print(tf.autograph.to_code(square_if_positive.python_function))
 ```
-
-
 
 ## 模型保存
 
