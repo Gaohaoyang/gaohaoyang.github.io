@@ -550,7 +550,25 @@ a = K.softmax(b)
 a = concatenate([b, c], axis=-1)
 ```
 
+#### 模型可视化
+
+```shell
+pip install pydot graphviz
+```
+
+可视化：
+
+```python
+import tensorflow as tf
+
+tf.keras.utils.plot_model(model, './mutilModel.png', show_shapes=True)
+```
+
+
 #### 多层感知器(Multilayer Perceptron)
+
+-  95% 左右的准确率
+- ![](https://tf.wiki/_images/mlp.png)
 
 ```python
 ##------ Multilayer Perceptron ------##
@@ -586,6 +604,9 @@ model = tf.keras.Model(inputs=inputs, outputs=outputs)
 ```
 
 #### 卷积神经网络(Convolutional Neural Network)
+
+- 卷积神经网络 （Convolutional Neural Network, CNN）是一种结构类似于人类或动物的 视觉系统 的人工神经网络，包含一个或多个卷积层（Convolutional Layer）、池化层（Pooling Layer）和全连接层（Fully-connected Layer）
+- ![](https://tf.wiki/_images/cnn.png)
 
 用于图像分类的卷积神经网络。
 - 该模型接收3通道的64×64图像作为输入，然后经过两个卷积和池化层的序列作为特征提取器，接着过一个全连接层，最后输出层过softmax激活函数进行10个类别的分类。
@@ -944,11 +965,73 @@ class SparseCategoricalAccuracy(tf.keras.metrics.Metric):
         return self.count / self.total
 ```
 
-## 常用模块
+
+## tf.function ：图执行模式(eager模式)
+
+- tf.function 模块，结合 AutoGraph 机制，仅需加一个简单的 @tf.function 修饰符，就能轻松将模型以图执行模式运行。
+    - @tf.function 使用名为 AutoGraph 的机制将函数中的 Python 控制流语句转换成 TensorFlow 计算图中的对应节点。
+    - 类似`编译器`
+- 不是任何函数都可以被 @tf.function 修饰!
+    - @tf.function 使用静态编译将函数内的代码转换成计算图，因此对函数内可使用的语句有一定限制（仅支持 Python 语言的一个子集），且需要函数内的操作本身能够被构建为计算图
+- 建议在函数内只使用 TensorFlow 的原生操作，不要使用过于复杂的 Python 语句，函数参数只包括 TensorFlow 张量或 NumPy 数组
+- 直接获得 tf.function 所生成的计算图以进行进一步处理和调试，可以使用被修饰函数的 get_concrete_function 方法
+
+
+```python
+import tensorflow as tf
+
+# 函数转计算图
+@tf.function
+def square_if_positive(x):
+    # 自动将python函数转成计算图
+    if x > 0:
+        x = x * x
+    else:
+        x = 0
+    return x
+
+a = tf.constant(1)
+b = tf.constant(-1)
+print(square_if_positive(a), square_if_positive(b))
+
+# 动态数组
+@tf.function
+def array_write_and_read():
+    # 动态数组TensorArray
+    arr = tf.TensorArray(dtype=tf.float32, size=3)
+    arr = arr.write(0, tf.constant(0.0))
+    arr = arr.write(1, tf.constant(1.0))
+    arr = arr.write(2, tf.constant(2.0))
+    arr_0 = arr.read(0)
+    arr_1 = arr.read(1)
+    arr_2 = arr.read(2)
+    return arr_0, arr_1, arr_2
+
+a, b, c = array_write_and_read()
+
+# 使用底层API手工转换
+print(tf.autograph.to_code(square_if_positive.python_function))
+```
+
+
+
+## 模型保存
 
 [TensorFlow常用模块](https://tf.wiki/zh_hans/basic/tools.html)
 
-### 模型保存
+[TensorFlow 模型导出](https://tf.wiki/zh_hans/deployment/export.html)
+- TensorFlow 提供了SavedModel格式，将整个模型完整导出标准格式的文件，可在不同的平台上部署。
+- 与Checkpoint 不同，SavedModel 包含了一个 TensorFlow 程序的完整信息：不仅包含参数的权值，还包含计算的流程（即计算图）。
+- 导入时，无须构建源码即可运行，非常适合分享和部署，TensorFlow Serving（服务器端部署模型）、TensorFlow Lite（移动端部署模型）以及 TensorFlow.js 都会用到
+Keras 模型均可方便地导出为 SavedModel 格式。
+- 注意：SavedModel 基于计算图，所以继承 tf.keras.Model 类建立的 Keras 模型
+    - 导出到 SavedModel 格式的方法（比如 call ）时，都要使用 @tf.function 修饰。
+    - SavedModel载入后将无法使用 model() 直接进行推断，而需要使用 model.call()
+
+```python
+tf.saved_model.save(model, "save_dir") # 导出
+model = tf.saved_model.load("save_dir") # 导入
+```
 
 TensorFlow 提供了 tf.train.**Checkpoint** 这一强大的变量保存与恢复类，可以使用其 save() 和 restore() 方法将 TensorFlow 中所有包含 Checkpointable State 的对象进行保存和恢复。具体而言，tf.keras.optimizer 、 tf.Variable 、 tf.keras.Layer 或者 tf.keras.Model 实例都可以被保存。
 - tf.train.Checkpoint ：变量的保存与恢复
@@ -1100,13 +1183,359 @@ if __name__ == '__main__':
 ```
 
 
+## 模型部署 Tensorflow Serving
+
+Flask 等 Python 下的 Web 框架就能非常轻松地实现服务器 API, 不过生产环境就力不从心了。
+- TensorFlow Serving 组件能够在生产环境中灵活且高性能地部署机器学习模型
+  - 可直接读取 SavedModel 格式的模型进行部署
+  - 支持热更新，多模型，自动选择最大版本号
+  - 支持以 gRPC 和 RESTful API 调用以 TensorFlow Serving 部署的模型
+- Keras模型部署
+  - Keras Sequential 模式的输入和输出都很固定，因此这种类型的模型很容易部署，无需其他额外操作
+  - 继承tf.keras.Model 类建立的自定义 Keras模型的自由度相对更高。因此部署时，对导出的 SavedModel 文件也有更多的要求
+    - 不仅需要使用 @tf.function 修饰，还要在修饰时指定 input_signature 参数，以显式说明输入的形状。该参数传入一个由 tf.TensorSpec 组成的列表，指定每个输入张量的形状和类型
+    - 用 tf.saved_model.save 导出时，需要通过 signature 参数提供待导出的函数的签名（Signature）
+- tensorflow lite导入模型前需要用tflite_convert转换格式
+- Quantized 模型在模型大小和运行性能上相对 Float 模型都有非常大的提升，但对模型的识别精度还是有影响的。在边缘设备上资源有限，需要在模型大小、运行速度与识别精度上找到一个权衡
+
+```
+/saved_model_files
+    /1      # 版本号为1的模型文件
+        /assets
+        /variables
+        saved_model.pb
+    ...
+    /N      # 版本号为N的模型文件
+        /assets
+        /variables
+        saved_model.pb
+```
+
+
+```shell
+# 加载SavedModel格式
+tensorflow_model_server \
+    --rest_api_port=端口号（如8501） \
+    --model_name=模型名 \
+    --model_base_path="SavedModel格式模型的文件夹绝对地址（不含版本号）"
+```
+
+## 控制语句
+
+- TensorFlow 提供了几种操作和类用来控制计算图的执行流程和计算条件依赖
+计算图控制方法
+- tf.identity：和输入的 tensor 大小和数值都一样的 tensor ,类似于 y=x 操作
+- tf.tuple：op元组
+- tf.group：聚合多个 OP 的 OP 
+- tf.no_op：什么也不做，只是作为一个控制边界的占位符
+- tf.count_up_to：一个计数器，根据计数条件是否满足控制流程；它有两个主要参数，ref,limit，表示每次都在 ref 的基础上递增，直到等于 limit。
+- tf.cond：根据条件进行流程控制的函数，它有三个参数，pred, true_fn,false_fn
+- tf.case：多分枝流程控制函数
+- tf.while_loop：类似于 while 循环的函数，它有三个主要参数，cond, 循环条件，body，循环语句，loop_vars，循环控制变量。
+
+
+### tf.cond
+
+- 用于有条件的执行函数，当pred为True时，执行true_fn函数，否则执行false_fn函数
+- 参数说明
+    - pred：标量决定是否返回 true_fn 或 false_fn 结果。
+    - true_fn：如果 pred 为 true,则被调用。
+    - false_fn：如果 pred 为 false,则被调用。
+    - strict：启用/禁用 “严格”模式的布尔值。
+    - name：返回的张量的可选名称前缀。
+
+```python
+import tensorflow as tf
+
+x = tf.constant(4)
+y = tf.constant(3)
+z = tf.add(x, y)
+print('条件表达语句tf.cond')
+result = tf.cond(x < y, lambda: tf.add(x, z), lambda: tf.square(y))
+tf.print(result)
+print(result.numpy())
+```
+
+### tf.while_loop 循环
+
+实现如下循环逻辑
+
+```python
+i= 0
+n =10
+while(i < n):
+    i = i +1
+
+# tf实现
+loop = []
+while cond(loop):
+    loop = body(loop)
+```
+
+- tensorflow内部还是把循环转化为了**矩阵运算**，所以如果自己能显式的用矩阵运算代替while_loop的话，这样可以避免调入while_loop这么多坑里面
+
+```python
+#import tensorflow as tf
+import tensorflow.compat.v1 as tf
+
+tf.disable_v2_behavior()
+
+# tf版本
+i = tf.get_variable("i", dtype=tf.int32, shape=[], initializer=tf.ones_initializer())
+n = tf.constant(10)
+
+def cond(a, n): # 条件判断
+    return  a< n
+
+def body(a, n): # 主函数体
+    a = a + 1
+    return a, n
+
+i, n = tf.while_loop(cond, body, [i, n]) # 执行循环
+with tf.Session() as sess:
+    tf.global_variables_initializer().run()
+    res = sess.run([i, n])
+    print(res)
+```
+
+### tf.control_dependencies
+
+- 设置op的控制依赖关系
+
+```python
+with tf.control_dependencies([a, b]):
+    #c= tf.no_op(name='train')#tf.no_op；什么也不做
+    c= tf.group([a, b])
+sess.run(c)
+```
+
+## 常用函数
+
+### tf.slice
+
+- tf.slice(inputs, begin, size, name)
+- 从列表、数组、张量等对象中抽取一部分数据
+  - begin和size是两个多维列表，他们共同决定了要抽取的数据的开始和结束位置
+  - begin表示从inputs的哪几个维度上的哪个元素开始抽取 ，begin基于下标0开始
+  - size表示在inputs的各个维度上抽取的元素个数
+  - 若begin[]或size[]中出现-1,表示抽取对应维度上的所有元素
+- 注意
+  - size的大小不能大于切片刀下方表格数据的尺寸，维度数不能大于被切片数据的维度
+- 示例：
+  - ![](https://img-blog.csdnimg.cn/20181116133742315.png)
+- 提取原理
+  - ![](https://img-blog.csdnimg.cn/20181116133836264.png)
+
+```python
+import tensorflow as tf
+
+#这个代码演示测试tf.slice函数
+t=tf.constant([[[1,1,1],[2,2,2]],
+   [[3,3,3],[4,4,4]],
+   [[5,5,5],[6,6,6]]])
+s1=tf.slice(t,[1,0,0],[1,1,3])
+#begin=[1,0,0]，从第1维的[0,0]开始切片([3,3,3])
+#size=[1,1,3]表明切片后是1维，切片的尺寸为1行3列。
+s2=tf.slice(t,[0,1,1],[2,1,1])
+#begin=[0，1，1]，表明从第0维的[1,1]开始切片，也就是从[2，2，2]的第二个2开始
+#size=[2，1，1]表明切片后的尺寸为相邻的两张表，数据1行1列。
+print(s1)
+tf.print(s2)
+s1,s2
+```
+
+### tf.argmax
+
+
+```python
+import numpy as np
+import tensorflow as tf
+
+test = np.array([
+[1, 2, 3],
+ [2, 3, 4], 
+ [5, 4, 3], 
+ [8, 7, 2]])
+print('---numpy---')
+print(np.argmax(test, 0)) # 列向最大值下标：array([3, 3, 1]
+print(np.argmax(test, 1)) # 行向最大值下标：array([2, 2, 0, 0]
+print('---tensorflow--')
+print(tf.argmax(test).numpy())
+print(tf.argmax(test, 1))
+```
+
+
+### tf.equal
+
+- tf.cond
+
+```python
+print('--- tf 1.* ---')
+import tensorflow.compat.v1 as tf
+
+tf.disable_v2_behavior()
+a = [[1,2,3],[4,5,6]]
+b = [[1,0,3],[1,5,1]]
+with tf.Session() as sess:
+    print(sess.run(tf.equal(a,b)))
+
+print('--- tf 2.* ---')
+import tensorflow as tf
+
+a = [[1,2,3],[4,5,6]]
+b = [[1,0,3],[1,5,1]]
+# 张量元素逐个比较
+tf.equal(a, b).numpy().tolist()
+```
+
+### tf.transpose
+
+- 高维转置，[tf.transpose方法讲解](http://www.voidcn.com/article/p-piaahwxf-bqs.html)
+- tf.transpose的第二个参数perm=[0,1,2]
+   - 0代表三维数组的高（即为二维数组的个数）
+   - 1代表二维数组的行
+   - 2代表二维数组的列
+- [0, 1, 2]是正常显示，那么交换哪两个数字，就是把对应的输入张量的对应的维度对应交换即可。
+- tf.transpose(x, perm=[1,0,2])代表将三位数组的高和行进行转置。
+
+
+### softmax
+
+- 【2020-5-12】logis本身并不是一个概率，所以需要把logist的值变化成“概率模样”。这时Softmax函数该出场了。
+  - Softmax把一个系列的概率替代物（logits）从[-inf, +inf] 映射到[0,1]。
+  - 除此之外，Softmax还保证把所有参与映射的值累计之和等于1，变成诸如[0.95, 0.05, 0]的概率向量。
+- 这样一来，经过Softmax加工的数据可以当做概率来用.
+  - ![](https://img-blog.csdnimg.cn/20181204085359713.jpg)
+
+```python
+import tensorflow as tf
+
+#tf.disable_v2_behavior() # tf 1.*的特性
+labels = [[0.2,0.3,0.5],
+          [0.1,0.6,0.3]]
+logits = [[4,1,-2],
+          [0.1,1,3]]
+# tensorflow 2.* 直接显示动态图展示,不用加tf.session()
+logits_scaled = tf.nn.softmax(logits)
+print('-'*10)
+print(logits_scaled)
+print('-'*10)
+tf.print(logits_scaled)
+result = tf.nn.softmax_cross_entropy_with_logits(labels=labels, logits=logits)
+print('-'*10)
+print(result)
+print('-'*10)
+tf.print(result)
+#with tf.compat.v1.Session() as sess:
+#with tf.Session() as sess:
+#    print (sess.run(logits_scaled))
+#    print (sess.run(result))
+```
+
+
+### tf.nn.moments 矩
+
+- 矩：一阶矩对应均值，二阶矩对应方差
+- moments函数就是在 [0] 维度上求了个均值和方差
+- def moments(x, axes, name=None, keep_dims=False)
+    - x 可以理解为我们输出的数据，形如 [batchsize, height, width, kernels]
+    - axes 表示在哪个维度上求解，是个list，例如 [0, 1, 2]
+    - name 就是个名字，不多解释
+    - keep_dims 是否保持维度，不多解释
+
+```python
+import tensorflow.compat.v1 as tf
+
+img = tf.Variable(tf.random_normal([2, 3]))
+axis = list(range(len(img.get_shape()) - 1))
+mean, variance = tf.nn.moments(img, axis)
+print(mean, variance)
+```
+
+### tf.nn.batch_normalization
+
+- 批归一化
+  - def batch_normalization(x, mean, variance, offset, scale, variance_epsilon, name=None):
+  - ![](https://upload-images.jianshu.io/upload_images/2228224-aa7471263b754b04.jpg?imageMogr2/auto-orient/strip|imageView2/2/w/517/format/webp)
+- BN在神经网络进行training和testing的时候，所用的mean、variance是不一样的！
+
+```python
+update_moving_mean = moving_averages.assign_moving_average(moving_mean, mean, BN_DECAY)
+update_moving_variance = moving_averages.assign_moving_average(moving_variance, variance, BN_DECAY)
+tf.add_to_collection(UPDATE_OPS_COLLECTION, update_moving_mean)
+tf.add_to_collection(UPDATE_OPS_COLLECTION, update_moving_variance)
+mean, variance = control_flow_ops.cond(['is_training'], lambda: (mean, variance), lambda: (moving_mean, moving_variance))
+```
+
+### tf.train.ExponentialMovingAverage
+
+- 采用滑动平均的方法更新参数。这个函数初始化需要提供一个衰减速率（decay），用于控制模型的更新速度。这个函数还会维护一个影子变量（也就是更新参数后的参数值），这个影子变量的初始值就是这个变量的初始值，影子变量值的更新方式如下：
+  - shadow_variable = decay * shadow_variable + (1-decay) * variable
+- shadow_variable是影子变量，variable表示待更新的变量，也就是变量被赋予的值，decay为衰减速率。decay一般设为接近于1的数（0.99,0.999）。- decay越大模型越稳定，因为decay越大，参数更新的速度就越慢，趋于稳定。
+
+```python
+v1 = tf.Variable(0, dtype=tf.float32)
+step = tf.Variable(tf.constant(0))
+ 
+ema = tf.train.ExponentialMovingAverage(0.99, step)
+maintain_average = ema.apply([v1])
+```
+
+
+## Tensorflow 数据集
+
+
+### 内置数据集
+
+```python
+import tensorflow_datasets as tfds
+
+dataset = tfds.load("mnist", split=tfds.Split.TRAIN, as_supervised=True)
+```
+
+### 小数据集用tf.data——内存足够
+
+- tf.data.Dataset 类，提供了对数据集的高层封装,[API](https://www.tensorflow.org/versions/r2.0/api_docs/python/tf/data/Dataset)
+- Dataset.map(f) ：对数据集中的每个元素应用函数 f ，得到一个新的数据集（这部分往往结合 tf.io 进行读写和解码文件， tf.image 进行图像处理）；
+- Dataset.shuffle(buffer_size) ：将数据集打乱（设定一个固定大小的缓冲区（Buffer），取出前 buffer_size 个元素放入，并从缓冲区中随机采样，采样后的数据用后续数据替换）；
+- Dataset.batch(batch_size) ：将数据集分成批次，即对每 batch_size 个元素，使用 tf.stack() 在第 0 维合并，成为一个元素；
+- Dataset.prefetch()： 让数据集对象 Dataset 在训练时预取出若干个元素，使得在 GPU 训练的同时 CPU 可以准备数据，从而提升训练流程的效率
+  - ![](https://tf.wiki/_images/datasets_with_pipelining.png)
+- Dataset.repeat() （重复数据集的元素）
+-  Dataset.reduce() （与 Map 相对的聚合操作）
+- Dataset.take() （截取数据集中的前若干个元素）等
+
+### 大数据集用tfrecord
+
+- 将数据集处理为 TFRecord 格式，然后使用 tf.data.TFRocrdDataset() 进行载入
+- TFRecord 可以理解为一系列序列化的 tf.train.Example 元素所组成的列表文件，而每一个 tf.train.Example 又由若干个 tf.train.Feature 的字典组成。
+- tf.train.Feature 支持三种数据格式：
+    - tf.train.BytesList ：字符串或原始 Byte 文件（如图片），通过 bytes_list 参数传入一个由字符串数组初始化的 tf.train.BytesList 对象；
+    - tf.train.FloatList ：浮点数，通过 float_list 参数传入一个由浮点数数组初始化的 tf.train.FloatList 对象；
+    - tf.train.Int64List ：整数，通过 int64_list 参数传入一个由整数数组初始化的 tf.train.Int64List 对象。
+
+
+
 ## TensorFlow Board
 
+TensorFlow自带的一个强大的可视化工具
+
 查看模型训练过程中各个参数的变化情况（例如损失函数 loss 的值）。虽然可以通过命令行输出来查看，但有时显得不够直观。而 TensorBoard 就是一个能够帮助我们将训练过程可视化的工具。
+原理
+- 在运行过程中，记录结构化的数据
+- 运行一个本地服务器，监听6006端口
+- 请求时，分析记录的数据，绘制
+操作方法
 - 每运行一次 tf.summary.scalar() ，记录器就会向记录文件中写入一条记录。除了最简单的标量（scalar）以外，TensorBoard 还可以对其他类型的数据（如图像，音频等）进行可视化
 - 代码目录打开终端: tensorboard --logdir=./tensorboard
 - 默认情况下，TensorBoard 每 30 秒更新一次数据。不过也可以点击右上角的刷新按钮手动刷新。
 - ![](https://tf.wiki/_images/tensorboard.png)
+
+TensorFlow在MNIST实验数据上得到Tensorboard结果
+- Event: 展示训练过程中的统计数据（最值，均值等）变化情况
+- Image: 展示训练过程中记录的图像
+- Audio: 展示训练过程中记录的音频
+- Histogram: 展示训练过程中记录的数据的分布图
 
 注意事项：
 - 如果需要重新训练，需要删除掉记录文件夹内的信息并重启 TensorBoard（或者建立一个新的记录文件夹并开启 TensorBoard， --logdir 参数设置为新建立的文件夹）；
@@ -1145,6 +1574,76 @@ with summary_writer.as_default():
 ```
 
 ## 示例
+
+### 异或难题
+
+异或难题
+- minsky：异或门是神经网络的命门——诱发神经网络的第一次衰落
+
+问题介绍
+- ![图](https://aimatters.files.wordpress.com/2015/12/xor-graph.png?w=809![image.png](attachment:image.png))
+
+TensorFlow代码实现
+- [Solving XOR with a Neural Network in TensorFlow](https://aimatters.wordpress.com/2016/01/16/solving-xor-with-a-neural-network-in-tensorflow/)
+
+网络结构图（TensorBoard可视化）：
+- ![结构图](https://aimatters.files.wordpress.com/2016/01/tf_graph.png?w=809![image.png](attachment:image.png)
+
+```python
+#方法二：https://aimatters.wordpress.com/2016/01/16/solving-xor-with-a-neural-network-in-tensorflow/
+#There is one thing I did notice in putting this together: it’s quite slow. 
+#In Octave, I was able to run 10,000 epochs in about 9.5 seconds. 
+#The Python/NumPy example was able to run in 5.8 seconds. 
+#The above TensorFlow example runs in about 28 seconds on my laptop.
+import tensorflow as tf
+import time
+
+x_ = tf.placeholder(tf.float32, shape=[4,2], name = 'x-input')
+y_ = tf.placeholder(tf.float32, shape=[4,1], name = 'y-input')
+
+Theta1 = tf.Variable(tf.random_uniform([2,2], -1, 1), name = "Theta1")
+Theta2 = tf.Variable(tf.random_uniform([2,1], -1, 1), name = "Theta2")
+
+Bias1 = tf.Variable(tf.zeros([2]), name = "Bias1")
+Bias2 = tf.Variable(tf.zeros([1]), name = "Bias2")
+
+with tf.name_scope("layer2") as scope:
+    A2 = tf.sigmoid(tf.matmul(x_, Theta1) + Bias1)
+
+with tf.name_scope("layer3") as scope:
+    Hypothesis = tf.sigmoid(tf.matmul(A2, Theta2) + Bias2)
+
+with tf.name_scope("cost") as scope:
+    cost = tf.reduce_mean(( (y_ * tf.log(Hypothesis)) + ((1 - y_) * tf.log(1.0 - Hypothesis)) ) * -1)
+
+with tf.name_scope("train") as scope:
+    train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cost)
+
+XOR_X = [[0,0],[0,1],[1,0],[1,1]]
+XOR_Y = [[0],[1],[1],[0]]
+
+#init = tf.initialize_all_variables()
+init = tf.global_variables_initializer()
+sess = tf.Session()
+
+writer = tf.summary.FileWriter("./logs/xor_logs", sess.graph_def)
+
+sess.run(init)
+
+t_start = time.clock()
+for i in range(100000):
+    sess.run(train_step, feed_dict={x_: XOR_X, y_: XOR_Y})
+    if i % 1000 == 0:
+        print('Epoch ', i)
+        print('Hypothesis ', sess.run(Hypothesis, feed_dict={x_: XOR_X, y_: XOR_Y}))
+        print('Theta1 ', sess.run(Theta1))
+        print('Bias1 ', sess.run(Bias1))
+        print('Theta2 ', sess.run(Theta2))
+        print('Bias2 ', sess.run(Bias2))
+        print('cost ', sess.run(cost, feed_dict={x_: XOR_X, y_: XOR_Y}))
+t_end = time.clock()
+print('Elapsed time ', t_end - t_start)
+```
 
 ### 线性回归
 
