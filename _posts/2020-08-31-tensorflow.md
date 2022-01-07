@@ -63,9 +63,9 @@ mathjax: true
 
 ## TensorFlow基础知识
 
-- [TensorFlow](https://www.tensorflow.org/get_started/) 是一种采用数据流图（data flow graphs），用于数值计算的开源软件库。
+- [TensorFlow](https://www.tensorflow.org/get_started/) 是一种采用**数据流图**（data flow graphs），用于数值计算的开源软件库。
 - 其中 Tensor 代表传递的数据为张量（多维数组），Flow 代表使用计算图进行运算。
-- 数据流图用「结点」（nodes）和「边」（edges）组成的有向图来描述数学运算。
+- 数据流图用「**结点**」（nodes）和「**边**」（edges）组成的有向图来描述数学运算。
     - 「结点」一般用来表示施加的数学操作，但也可以表示数据输入的起点和输出的终点，或者是读取/写入持久变量（persistent variable）的终点。
         - 节点的类型可以分为三种：
             - **存储**节点：有状态的变量操作，通常用于存储模型参数
@@ -109,8 +109,7 @@ W = tf.Variable(initial_value=tf.random_normal(shape=(1, 4), mean=100, stddev=0.
 b = tf.Variable(tf.zeros([4]), name="b")
 
 # 2.使用get_variable的方式来创建
-my_int_variable = tf.get_variable("my_int_variable", [1, 2, 3], dtype=tf.int32,
-  initializer=tf.zeros_initializer)
+my_int_variable = tf.get_variable("my_int_variable", [1, 2, 3], dtype=tf.int32, initializer=tf.zeros_initializer)
 ```
 
 
@@ -241,7 +240,7 @@ tensorboard —logdir=./logs/xor_logs # server
 - 所有 Feature Column 都源自 FeatureColumn 类，并继承了三个子类 CategoricalColumn、DenseColumn 和 SequenceDenseColumn，分别对应稀疏特征、稠密特征、序列稠密特征。算法人员可以按照样本特征的类型找到对应的接口直接适配。
 - ![](https://img-blog.csdnimg.cn/img_convert/779703f3920ecde96972cd2f1614417d.png)
 
-## 单测
+## 单元测试
 
 - Tensorflow中有一个类tf.test用来做单元测试，它继承于类unittest.TestCase，里面包含了Tensorflow做单元测试相关的方法。
 - Tensorflow Unit Test 框架
@@ -276,63 +275,15 @@ if __name__ == "__main__":
 ```
 
 
-## TorchServe
-
-- 【2021-1-19】pytorch模型部署工具[TorchServe](https://github.com/pytorch/serve/blob/master/README.md#serve-a-model)
-- [如何评价 PyTorch 在 2020 年 4 月推出的 TorchServe？](https://www.zhihu.com/question/389731764)
-- TorchServe 旨在为大规模部署 PyTorch 模型推理，提供一个干净、兼容性好的工业级路径。其主要的特点包括有：
-    - 原生态 API：支持用于预测的推理 API，和用于管理模型服务器的管理 API。
-    - 安全部署：包括对安全部署的  HTTPS 支持。
-    - 强大的模型管理功能：允许通过命令行接口、配置文件或运行时 API 对模型、版本和单个工作线程进行完整配置。
-    - 模型归档：提供执行「模型归档」的工具，这是一个将模型、参数和支持文件打包到单个持久工件的过程。使用一个简单的命令行界面，可以打包和导出为单个「 .mar」文件，其中包含提供 PyTorch 模型所需的一切。该 .mar 文件可以共享和重用。
-    - 内置的模型处理程序：支持涵盖最常见用例，如图像分类、对象检测、文本分类、图像分割的模型处理程序。TorchServe 还支持自定义处理程序。
-    - 日志记录和指标：支持可靠的日志记录和实时指标，以监视推理服务和端点、性能、资源利用率和错误。还可以生成自定义日志并定义自定义指标。
-    - 模型管理：支持同时管理多个模型或同一模型的多个版本。你可以使用模型版本回到早期版本，或者将流量路由到不同的版本进行 A/B 测试。
-    - 预构建的图像：准备就绪后，可以在基于 CPU 和 NVIDIA GPU 的环境中，部署 TorchServe 的 Dockerfile 和 Docker 镜像。
-- 综上可知，这次的 TorchServe  在推理任务上，将会有很大的使用空间，对于广大开发者来说是一件好事。这一点可以留着以后去慢慢验证。对于这次 Facebook 和 AWS 合作，明显可以看出双方在各取所长，试图打造一个可以反抗谷歌 TensorFlow 垄断的方案。
-- 问题：
-    - 为什么TorchServe采用Java开发，而没有像TensorFlow Serving一样采用更好性能的C++，抑或是采用Golang?
-- TorchServe Architecture
-    - ![](https://user-images.githubusercontent.com/880376/83180095-c44cc600-a0d7-11ea-97c1-23abb4cdbe4d.jpg)
-
-- Model Server for PyTorch Documentation
-
-**Basic Features**
-
-* [Serving Quick Start](../README.md#serve-a-model) - Basic server usage tutorial
-* [Model Archive Quick Start](../model-archiver#creating-a-model-archive) - Tutorial that shows you how to package a model archive file.
-* [Installation](../README.md##install-torchserve) - Installation procedures
-* [Serving Models](server.md) - Explains how to use `torchserve`.
-  * [REST API](rest_api.md) - Specification on the API endpoint for TorchServe
-  * [gRPC API](grpc_api.md) - Specification on the gRPC API endpoint for TorchServe
-* [Packaging Model Archive](../model-archiver/README.md) - Explains how to package model archive file, use `model-archiver`.
-* [Logging](logging.md) - How to configure logging
-* [Metrics](metrics.md) - How to configure metrics
-* [Batch inference with TorchServe](batch_inference_with_ts.md) - How to create and serve a model with batch inference in TorchServe
-* [Model Snapshots](snapshot.md) - Describes how to use snapshot feature for resiliency due to a planned or unplanned service stop
-
- **Advanced Features**
-
-* [Advanced settings](configuration.md) - Describes advanced TorchServe configurations.
-* [Custom Model Service](custom_service.md) - Describes how to develop custom inference services.
-* [Unit Tests](../ts/tests/README.md) - Housekeeping unit tests for TorchServe.
-* [Benchmark](../benchmarks/README.md) - Use JMeter to run TorchServe through the paces and collect benchmark data
-
-**Default Handlers**
-
-* [Image Classifier](../ts/torch_handler/image_classifier.py) - This handler takes an image and returns the name of object in that image
-* [Text Classifier](../ts/torch_handler/text_classifier.py) - This handler takes a text (string) as input and returns the classification text based on the model vocabulary
-* [Object Detector](../ts/torch_handler/object_detector.py) - This handler takes an image and returns list of detected classes and bounding boxes respectively
-* [Image Segmenter](../ts/torch_handler/image_segmenter.py) - This handler takes an image and returns output shape as [CL H W], CL - number of classes, H - height and W - width
-
 
 # Tensorflow 2.*
 
 - [TF 2.0官方教程](https://www.tensorflow.org/tutorials/quickstart/beginner?hl=zh-cn)
 - [高效的TensorFlow 2.0 (tensorflow2官方教程翻译)](https://www.jianshu.com/p/599c79c3a537)
 - 官方教程导读: [ML Study Jam 2020](https://tf.wiki/zh_hans/mlstudyjam.html)
-
-在 TensorFlow 1.X 版本中， 必须 在导入 TensorFlow 库后调用 tf.enable_eager_execution() 函数以启用即时执行模式。在 TensorFlow 2 中，**即时执行**模式将成为**默认**模式，无需额外调用 tf.enable_eager_execution() 函数（不过若要关闭即时执行模式，则需调用 tf.compat.v1.disable_eager_execution() 函数）。
+注意
+- 在 TensorFlow 1.X 版本中， 导入TensorFlow库后必须调用 tf.enable_eager_execution() 函数以启用即时执行模式。
+- 在 TensorFlow 2 中，**即时执行**模式将成为**默认**模式，无需额外调用 tf.enable_eager_execution() 函数（不过若要关闭即时执行模式，则需调用 tf.compat.v1.disable_eager_execution() 函数）。
 
 
 ## tf 2 与 tf 1差异
@@ -382,23 +333,28 @@ print(A.numpy())    # 输出[[1. 2.]
 # op操作
 C = tf.add(A, B)    # 计算矩阵A和B的和
 D = tf.matmul(A, B) # 计算矩阵A和B的乘积
-
 ```
 
 ## 自动求导机制
 
-TensorFlow 提供了强大的 `自动求导机制 `来计算导数。在即时执行模式下，TensorFlow 引入了 tf.GradientTape() 这个 “求导记录器” 来实现自动求导。在机器学习中，更加常见的是对**多元函数**求偏导数，以及对向量或矩阵的求导
+TensorFlow 提供了强大的 `自动求导机制 `来计算导数。
+- 在**即时执行**模式下，TensorFlow 引入了 tf.GradientTape() 这个 “求导**记录**器” 来实现自动求导。
+- 机器学习中，更加常见的是对**多元函数**求偏导数，以及对向量或矩阵的求导
 
 以下代码展示了如何使用 tf.GradientTape() 计算函数 y(x) = x^2 在 x = 3 时的导数
-- x 是一个初始化为 3 的 变量 （Variable），使用 tf.Variable() 声明。与普通张量一样，变量同样具有**形状**、**类型**和**值**三种属性。使用变量需要有一个初始化过程，可以通过在 tf.Variable() 中指定 initial_value 参数来指定初始值。
-- 变量与普通张量的一个重要区别: 其默认能够被 TensorFlow 的**自动求导机制**所求导，因此往往被用于定义机器学习模型的参数。
-- tf.GradientTape() 是一个自动求导的**记录器**。只要进入了 with tf.GradientTape() as tape 的上下文环境，则在该环境中计算步骤都会被自动记录。比如在上面的示例中，计算步骤 y = tf.square(x) 即被自动记录。离开上下文环境后，记录将停止，但记录器 tape 依然可用，因此可以通过 y_grad = tape.gradient(y, x) 求张量 y 对变量 x 的导数。
-- 使用 tape.gradient(ys, xs) 自动计算梯度；用 optimizer.apply_gradients(grads_and_vars) 自动更新模型参数
+- x 是一个初始化为 3 的 **变量** （Variable），使用 tf.Variable() 声明。与普通张量一样，变量同样具有**形状**、**类型**和**值**三种属性。使用变量需要有一个初始化过程，可以通过在 tf.Variable() 中指定 initial_value 参数来指定初始值。
+- **变量**与普通**张量**的一个重要区别: 其默认能够被 TensorFlow 的**自动求导机制**所求导，因此往往被用于定义机器学习模型的参数。
+- tf.GradientTape() 是一个自动求导的**记录器**。只要进入了 with tf.GradientTape() as tape 的**上下文**环境，则在该环境中计算步骤都会被自动记录。
+  - 比如在上面的示例中，计算步骤 y = tf.square(x) 即被自动记录。
+  - 离开上下文环境后，记录将停止，但记录器 tape 依然可用，因此可以通过 y_grad = tape.gradient(y, x) 求张量 y 对变量 x 的导数。
+- 使用 tape.gradient(ys, xs) 自动计算梯度；
+- 用 optimizer.apply_gradients(grads_and_vars) 自动更新模型参数
 
 ```python
 import tensorflow as tf
 
 x = tf.Variable(initial_value=3.)
+# ------ 求导 -------
 with tf.GradientTape() as tape:     # 在 tf.GradientTape() 的上下文内，所有计算步骤都会被记录以用于求导
     y = tf.square(x)
 y_grad = tape.gradient(y, x)        # 计算y关于x的导数
@@ -414,27 +370,41 @@ w_grad, b_grad = tape.gradient(L, [w, b])        # 计算L(w, b)关于w, b的偏
 print(L, w_grad, b_grad)
 ```
 
-## TensorFlow 模型建立与训练
+## 模型建立与训练
 
-如何使用 TensorFlow 快速搭建动态模型。
-- 模型的构建： tf.keras.Model 和 tf.keras.layers
-- 模型的损失函数： tf.keras.losses
-- 模型的优化器： tf.keras.optimizer
-- 模型的评估： tf.keras.metrics
+### 基本流程
+
+如何使用 TensorFlow 快速搭建动态模型
+- 模型的**构建**： tf.keras.Model 和 tf.keras.layers
+- 模型的**损失函数**： tf.keras.losses
+- 模型的**优化器**： tf.keras.optimizer
+- 模型的**评估**： tf.keras.metrics
+
+- ![](https://tf.wiki/_images/model.png)
+
+- 解释
+    - 继承 tf.keras.Model 后，同时可以使用父类的若干方法和属性，例如在实例化类 model = Model() 后，可以通过 model.
+    - variables 这一属性直接获得模型中的所有变量，免去我们一个个显式指定变量的麻烦。
+- TensorFlow 的模型编写方式。在这一部分，我们依次进行以下步骤：
+    - 使用 `tf.keras.datasets` 获得数据集并预处理
+    - 使用 `tf.keras.Model` 和 `tf.keras.layers` 构建模型
+    - 构建模型训练流程，使用 `tf.keras.losses` 计算损失函数，并使用 `tf.keras.optimizer` 优化模型
+    - 构建模型评估流程，使用 `tf.keras.metrics` 计算评估指标
 
 ### 模型与层
 
-TensorFlow 中，推荐使用 Keras（ tf.keras ）构建模型。Keras 是一个广为流行的高级神经网络 API，简单、快速而不失灵活性，现已得到 TensorFlow 的官方内置和全面支持。
+TensorFlow 中，推荐使用 `Keras`（ tf.keras ）构建模型。`Keras` 是一个广为流行的高级神经网络 API，简单、快速而不失灵活性，现已得到 TensorFlow 的官方内置和全面支持。
 
-Keras 有两个重要的概念： **模型**（Model） 和 **层**（Layer） 。
-- 层将各种计算流程和变量进行了封装（例如基本的全连接层，CNN 的卷积层、池化层等）
-- 而模型则将各种层进行组织和连接，并封装成一个整体，描述了如何将输入数据通过各种层以及运算而得到输出。在需要模型调用的时候，使用 y_pred = model(X) 的形式即可。
+Keras 有两个重要的概念： `层`（Layer） 和 `模型`（Model）。
+- `层`将各种计算流程和变量进行了**封装**（例如基本的全连接层，CNN 的卷积层、池化层等）
+- `模型`则将各种层进行组织和连接，并封装成一个整体，描述了如何将输入数据通过各种层以及运算而得到输出。在需要模型调用的时候，使用 y_pred = model(X) 的形式即可。
 
-Keras 在 tf.keras.layers 下内置了深度学习中大量常用的的预定义层，同时也允许我们自定义层。
+`Keras` 在 tf.keras.layers 下内置了深度学习中大量常用的的**预定义**层，同时也允许我们自定义层。
 
-Keras 模型以**类**的形式呈现，可以通过继承 tf.keras.Model 这个 Python 类来定义自己的模型。在继承类中，需要重写 __init__() （构造函数，初始化）和 **call**(input) （模型调用）两个方法，同时也可以根据需要增加自定义的方法。
+Keras 模型以**类**的形式呈现，可以通过继承 tf.keras.Model 这个 Python 类来定义自己的模型。在继承类中，需要重写 \__init__() （**构造函数**，初始化）和 **call**(input) （**模型调用**）两个方法，同时也可以根据需要增加自定义的方法。
 - ![](https://tf.wiki/_images/model.png)
-- 继承 tf.keras.Model 后，我们同时可以使用父类的若干方法和属性，例如在实例化类 model = Model() 后，可以通过 model.variables 这一属性直接获得模型中的所有变量，免去我们一个个显式指定变量的麻烦。
+- 继承 tf.keras.Model 后，同时可以使用父类的若干方法和属性
+- 例如在实例化类 model = Model() 后，可以通过 model.variables 这一属性直接获得模型中的所有变量，免去我们一个个显式指定变量的麻烦。
 
 ```python
 class MyModel(tf.keras.Model):
@@ -462,15 +432,16 @@ X = tf.constant([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]])
 y = tf.constant([[10.0], [20.0]])
 
 class Linear(tf.keras.Model):
+    
     def __init__(self):
         super().__init__()
         self.dense = tf.keras.layers.Dense(
             units=1,
             activation=None,
+            # 问题：为什么权重矩阵的名字是kernel？让人联想到cnn的卷积核
             kernel_initializer=tf.zeros_initializer(),
             bias_initializer=tf.zeros_initializer()
         )
-
     def call(self, input):
         output = self.dense(input)
         return output
@@ -479,65 +450,94 @@ class Linear(tf.keras.Model):
 model = Linear()
 optimizer = tf.keras.optimizers.SGD(learning_rate=0.01)
 for i in range(100):
+    # ①定义自动求导
     with tf.GradientTape() as tape:
         y_pred = model(X)      # 调用模型 y_pred = model(X) 而不是显式写出 y_pred = a * X + b
         loss = tf.reduce_mean(tf.square(y_pred - y))
+    # ②计算梯度
     grads = tape.gradient(loss, model.variables)    # 使用 model.variables 这一属性直接获得模型中的所有变量
+    # ③更新梯度
     optimizer.apply_gradients(grads_and_vars=zip(grads, model.variables))
 print(model.variables)
 ```
+
+
 
 没有显式地声明 a 和 b 两个变量并写出 y_pred = a * X + b 这一线性变换，而是建立了一个继承了 tf.keras.Model 的模型类 Linear 。这个类在初始化部分实例化了一个 全连接层 （ tf.keras.layers.Dense ），并在 call 方法中对这个层进行调用，实现了线性变换的计算。
 - 如果需要显式地声明自己的变量并使用变量进行自定义运算，或者希望了解 Keras 层的内部原理，请参考 自定义层。
 
 ## Keras Pipeline
 
-Keras **Sequential**/**Functional** API 模式建立模型 
+有两种方式建立模型：
+- Keras **Sequential** API：串行结构，单输入单输出
+- Keras **Functional** API：任意结构，多输入多输出
 
-最典型和常用的神经网络结构是将一堆层按特定顺序叠加起来，那是不是只需要提供一个层的列表，就能由 Keras 将它们自动首尾相连，形成模型呢？Keras 的 Sequential API 正是如此。通过向 tf.keras.models.Sequential() 提供一个层的列表，就能快速地建立一个 tf.keras.Model 模型并返回：
+### Keras Sequential API 串行
+
+最典型和常用的神经网络结构是将一堆层按特定顺序**叠加**起来，只需要提供一个层的列表，Keras的 Sequential API就自动首尾相连，形成模型
+- 通过向 tf.keras.models.Sequential() 提供一个层的列表，就能快速地建立一个 tf.keras.Model 模型并返回
 
 ```python
-        model = tf.keras.models.Sequential([
-            tf.keras.layers.Flatten(),
-            tf.keras.layers.Dense(100, activation=tf.nn.relu),
-            tf.keras.layers.Dense(10),
-            tf.keras.layers.Softmax()
-        ])
+# Keras Sequential建立串行结构模型
+model = tf.keras.models.Sequential([
+    tf.keras.layers.Flatten(), # 展开
+    tf.keras.layers.Dense(100, activation=tf.nn.relu), # MLP全连接层
+    tf.keras.layers.Dense(10),  # MLP全连接层
+    tf.keras.layers.Softmax() #  # softmax层
+])
 ```
 
-不过，这种层叠结构并不能表示**任意**神经网络结构。为此，Keras 提供了 **Functional API**，帮助建立更为复杂的模型，例如: 多输入 / 输出或存在参数共享的模型。其使用方法是将层作为可调用的对象并返回张量（这点与之前章节的使用方法一致），并将输入向量和输出向量提供给 tf.keras.Model 的 inputs 和 outputs 参数，示例如下：
+### Keras Functional API 任意
+
+以上层叠结构并不能表示**任意**神经网络结构。
+
+Keras 提供了 **Functional API** 来建立更为复杂的模型
+- 例如: 多输入/输出或存在参数共享的模型。其使用方法是将层作为可调用的对象并返回张量，并将输入向量和输出向量提供给 tf.keras.Model 的 inputs 和 outputs 参数，示例如下：
 
 ```python
-        inputs = tf.keras.Input(shape=(28, 28, 1))
-        x = tf.keras.layers.Flatten()(inputs)
-        x = tf.keras.layers.Dense(units=100, activation=tf.nn.relu)(x)
-        x = tf.keras.layers.Dense(units=10)(x)
-        outputs = tf.keras.layers.Softmax()(x)
-        model = tf.keras.Model(inputs=inputs, outputs=outputs)
+# Keras Functional 建立任意结构模型
+inputs = tf.keras.Input(shape=(28, 28, 1)) # 单独定义inputs
+x = tf.keras.layers.Flatten()(inputs)
+x = tf.keras.layers.Dense(units=100, activation=tf.nn.relu)(x)
+x = tf.keras.layers.Dense(units=10)(x)
+outputs = tf.keras.layers.Softmax()(x)  # 单独定义outputs
+# 通过 Model 组装输入、输出，构建任意结构模型
+model = tf.keras.Model(inputs=inputs, outputs=outputs)
 ```
 
 ### 训练
 
-Keras Model 的 compile 、 fit 和 evaluate 方法训练和评估模型 
+Keras Model 的 `compile` 、 `fit` 和 `evaluate` 方法训练和评估模型 
+
+#### compile 函数
+
 当模型建立完成后，通过 tf.keras.Model 的 compile 方法配置训练过程：
 
 ```python
-    model.compile(
-        optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
-        loss=tf.keras.losses.sparse_categorical_crossentropy,
-        metrics=[tf.keras.metrics.sparse_categorical_accuracy]
-    )
+# 编译模型，配置相关组件（优化器、损失函数和衡量指标）
+model.compile(
+    optimizer=tf.keras.optimizers.Adam(learning_rate=0.001), # Adam优化器
+    loss=tf.keras.losses.sparse_categorical_crossentropy, # 分类损失函数
+    metrics=[tf.keras.metrics.sparse_categorical_accuracy] # 分类指标
+)
 ```
 
-tf.keras.Model.compile 接受 3 个重要的参数：
+tf.keras.Model.**compile** 接受 3 个重要的参数：
 - oplimizer ：优化器，可从 tf.keras.optimizers 中选择；
 - loss ：损失函数，可从 tf.keras.losses 中选择；
 - metrics ：评估指标，可从 tf.keras.metrics 中选择。
 
+#### fit 函数
+
 接下来，可以使用 tf.keras.Model 的 fit 方法训练模型：
 
 ```python
-    model.fit(data_loader.train_data, data_loader.train_label, epochs=num_epochs, batch_size=batch_size)
+# 训练模型
+# model.fit(data_loader.train_data, data_loader.train_label, epochs=num_epochs, batch_size=batch_size)
+model.fit(data_loader.train_data,  # x
+    data_loader.train_label, # y
+    epochs=num_epochs,  # 迭代epoch数
+    batch_size=batch_size) # batch size
 ```
 
 tf.keras.Model.fit 接受 5 个重要的参数：
@@ -548,20 +548,24 @@ tf.keras.Model.fit 接受 5 个重要的参数：
 - validation_data ：验证数据，可用于在训练过程中监控模型的性能。
 - Keras 支持使用 tf.data.Dataset 进行训练，详见 tf.data 。
 
+#### evaluate 函数
+
 最后，使用 tf.keras.Model.evaluate 评估训练效果，提供测试数据及标签即可：
 
 ```python
-    print(model.evaluate(data_loader.test_data, data_loader.test_label))
+# 评估效果
+print(model.evaluate(data_loader.test_data, data_loader.test_label))
 ```
 
 ### 自定义
 
-#### 自定义层
+#### 自定义-层
 
-[自定义层](https://tf.wiki/zh_hans/basic/models.html#zh-hans-custom-layer)需要继承 tf.keras.layers.Layer 类，并重写 __init__ 、 build 和 call 三个方法，如下所示：
+[自定义层](https://tf.wiki/zh_hans/basic/models.html#zh-hans-custom-layer)需要继承 tf.keras.layers.Layer 类，并重写 \__init__ 、 **build** 和 **call** 三个方法，如下所示：
 
 ```python
 class MyLayer(tf.keras.layers.Layer):
+
     def __init__(self):
         super().__init__()
         # 初始化代码
@@ -569,7 +573,7 @@ class MyLayer(tf.keras.layers.Layer):
     def build(self, input_shape):     # input_shape 是一个 TensorShape 类型对象，提供输入的形状
         # 在第一次使用该层的时候调用该部分代码，在这里创建变量可以使得变量的形状自适应输入的形状
         # 而不需要使用者额外指定变量形状。如果已经可以完全确定变量的形状，也可以在__init__部分创建变量
-        self.variable_0 = self.add_weight(...)
+        self.variable_0 = self.add_weight(...) # add_weight()函数中自己定义shape,将他的参数trainable=True
         self.variable_1 = self.add_weight(...)
 
     def call(self, inputs):
@@ -577,20 +581,22 @@ class MyLayer(tf.keras.layers.Layer):
         return output
 ```
 
-例如，如果要自己实现一个 本章第一节 中的全连接层（ tf.keras.layers.Dense ），可以按如下方式编写。此代码在 build 方法中创建两个变量，并在 call 方法中使用创建的变量进行运算：
+如果要自己实现一个全连接层（ tf.keras.layers.Dense ），可以按如下方式编写。
+- 此代码在 build 方法中创建两个变量，并在 call 方法中使用创建的变量进行运算：
 
 ```python
 class LinearLayer(tf.keras.layers.Layer):
+    """ 自定义MLP层：重写init、build和call函数 """
     def __init__(self, units):
         super().__init__()
         self.units = units
-
-    def build(self, input_shape):     # 这里 input_shape 是第一次运行call()时参数inputs的形状
+    # 层里涉及的变量
+    def build(self, input_shape):     # input_shape 是第一次运行call()时参数inputs的形状
         self.w = self.add_weight(name='w',
             shape=[input_shape[-1], self.units], initializer=tf.zeros_initializer())
         self.b = self.add_weight(name='b',
             shape=[self.units], initializer=tf.zeros_initializer())
-
+    # 组装成一层
     def call(self, inputs):
         y_pred = tf.matmul(inputs, self.w) + self.b
         return y_pred
@@ -600,31 +606,35 @@ class LinearLayer(tf.keras.layers.Layer):
 
 ```python
 class LinearModel(tf.keras.Model):
+    # 调用自定义层
     def __init__(self):
         super().__init__()
-        self.layer = LinearLayer(units=1)
+        self.layer = LinearLayer(units=1) # 直接调用
 
     def call(self, inputs):
         output = self.layer(inputs)
         return output
 ```
 
-#### 自定义损失函数和评估指标 
+#### 自定义-损失函数
 
-自定义损失函数需要继承 tf.keras.losses.Loss 类，重写 call 方法即可，输入真实值 y_true 和模型预测值 y_pred ，输出模型预测值和真实值之间通过自定义的损失函数计算出的损失值。下面的示例为均方差损失函数：
+自定义损失函数需要继承 tf.keras.losses.**Loss** 类，重写 call 方法即可，输入真实值 y_true 和模型预测值 y_pred ，输出模型预测值和真实值之间通过自定义的损失函数计算出的损失值。下面的示例为均方差损失函数：
 
 ```python
 class MeanSquaredError(tf.keras.losses.Loss):
+
     def call(self, y_true, y_pred):
         return tf.reduce_mean(tf.square(y_pred - y_true))
 ```
 
-#### 自定义评估指标
+#### 自定义-评估指标
 
-自定义评估指标需要继承 tf.keras.metrics.Metric 类，并重写 __init__ 、 update_state 和 result 三个方法。下面的示例对前面用到的 SparseCategoricalAccuracy 评估指标类做了一个简单的重实现：
+自定义评估指标需要继承 tf.keras.metrics.**Metric** 类，并重写 \__init__ 、 update_state 和 result 三个方法。
+- 下面的示例对前面用到的 SparseCategoricalAccuracy 评估指标类做了一个简单的重实现：
 
 ```python
 class SparseCategoricalAccuracy(tf.keras.metrics.Metric):
+
     def __init__(self):
         super().__init__()
         self.total = self.add_weight(name='total', dtype=tf.int32, initializer=tf.zeros_initializer())
@@ -643,10 +653,9 @@ class SparseCategoricalAccuracy(tf.keras.metrics.Metric):
 
 [TensorFlow常用模块](https://tf.wiki/zh_hans/basic/tools.html)
 
-
 ### 模型保存
 
-TensorFlow 提供了 tf.train.Checkpoint 这一强大的变量保存与恢复类，可以使用其 save() 和 restore() 方法将 TensorFlow 中所有包含 Checkpointable State 的对象进行保存和恢复。具体而言，tf.keras.optimizer 、 tf.Variable 、 tf.keras.Layer 或者 tf.keras.Model 实例都可以被保存。
+TensorFlow 提供了 tf.train.**Checkpoint** 这一强大的变量保存与恢复类，可以使用其 save() 和 restore() 方法将 TensorFlow 中所有包含 Checkpointable State 的对象进行保存和恢复。具体而言，tf.keras.optimizer 、 tf.Variable 、 tf.keras.Layer 或者 tf.keras.Model 实例都可以被保存。
 - tf.train.Checkpoint ：变量的保存与恢复
 - tf.train.Checkpoint() 接受的初始化参数比较特殊，是一个 **kwargs 。具体而言，是一系列的键值对，键名可以随意取，值为需要保存的对象。
 - checkpoint.save('./save/model.ckpt') ，save 目录下发现名为 checkpoint 、 model.ckpt-1.index 、 model.ckpt-1.data-00000-of-00001 的三个文件，这些文件就记录了变量信息。
@@ -680,11 +689,14 @@ checkpoint.restore(tf.train.latest_checkpoint('./save'))    # 从文件恢复模
 #  CheckpointManager 限制仅保留最后三个 Checkpoint 文件，并使用 batch 的编号作为 Checkpoint 的文件编号。
 manager = tf.train.CheckpointManager(checkpoint, directory='./save', checkpoint_name='model.ckpt', max_to_keep=k)
 manager.save()
-
 ```
 
 tf.train.**Checkpoint** 与以前版本常用的 tf.train.**Saver** 相比，强大之处在于其支持在即时执行模式下 “**延迟**” 恢复变量。
-- 具体而言，当调用了 checkpoint.restore() ，但模型中的变量还没有被建立的时候，Checkpoint 可以等到变量被建立的时候再进行数值的恢复。即时执行模式下，模型中各个层的初始化和变量的建立是在模型第一次被调用的时候才进行的（好处在于可以根据输入的张量形状而自动确定变量形状，无需手动指定）。这意味着当模型刚刚被实例化的时候，其实里面还一个变量都没有，这时候使用以往的方式去恢复变量数值是一定会报错的。比如，你可以试试在 train.py 调用 tf.keras.Model 的 save_weight() 方法保存 model 的参数，并在 test.py 中实例化 model 后立即调用 load_weight() 方法，就会出错，只有当调用了一遍 model 之后再运行 load_weight() 方法才能得到正确的结果。可见， tf.train.Checkpoint 在这种情况下可以给我们带来相当大的便利。另外， tf.train.Checkpoint 同时也支持图执行模式。
+- 当调用了 checkpoint.restore() ，但模型中的变量还没有被建立的时候，Checkpoint 可以等到变量被建立的时候再进行数值的恢复。
+- 即时执行模式下，模型中各个层的初始化和变量的建立是在模型第一次被调用的时候才进行的（好处在于可以根据输入的张量形状而自动确定变量形状，无需手动指定）。这意味着当模型刚刚被实例化的时候，其实里面还一个变量都没有，这时候使用以往的方式去恢复变量数值是一定会报错的。
+- 比如，在 train.py 调用 tf.keras.Model 的 save_weight() 方法保存 model 的参数，并在 test.py 中实例化 model 后立即调用 load_weight() 方法，就会出错，只有当调用了一遍 model 之后再运行 load_weight() 方法才能得到正确的结果。
+- 可见，tf.train.Checkpoint 在这种情况下可以给我们带来相当大的便利。
+- 另外，tf.train.Checkpoint 同时也支持图执行模式。
 
 ```python
 import tensorflow as tf
@@ -700,7 +712,6 @@ parser.add_argument('--batch_size', default=50)
 parser.add_argument('--learning_rate', default=0.001)
 args = parser.parse_args()
 data_loader = MNISTLoader()
-
 
 def train():
     model = MLP()
@@ -720,7 +731,6 @@ def train():
             path = checkpoint.save('./save/model.ckpt')         # 保存模型参数到文件
             print("model saved to %s" % path)
 
-
 def test():
     model_to_be_restored = MLP()
     # 实例化Checkpoint，设置恢复对象为新建立的模型model_to_be_restored
@@ -729,7 +739,6 @@ def test():
     y_pred = np.argmax(model_to_be_restored.predict(data_loader.test_data), axis=-1)
     print("test accuracy: %f" % (sum(y_pred == data_loader.test_label) / data_loader.num_test_data))
 
-
 if __name__ == '__main__':
     if args.mode == 'train':
         train()
@@ -737,7 +746,8 @@ if __name__ == '__main__':
         test()
 ```
 
-在代码目录下建立 save 文件夹并运行代码进行训练后，save 文件夹内将会存放每隔 100 个 batch 保存一次的模型变量数据。在命令行参数中加入 --mode=test 并再次运行代码，将直接使用最后一次保存的变量值恢复模型并在测试集上测试模型性能，可以直接获得 95% 左右的准确率。
+在代码目录下建立 save 文件夹并运行代码进行训练后，save 文件夹内将会存放每隔 100 个 batch 保存一次的模型变量数据。
+- 在命令行参数中加入 --mode=test 并再次运行代码，将直接使用最后一次保存的变量值恢复模型并在测试集上测试模型性能，可以直接获得 95% 左右的准确率。
 
 manager示例：
 
@@ -804,10 +814,8 @@ if __name__ == '__main__':
 - ![](https://tf.wiki/_images/tensorboard.png)
 
 注意事项：
-
-如果需要重新训练，需要删除掉记录文件夹内的信息并重启 TensorBoard（或者建立一个新的记录文件夹并开启 TensorBoard， --logdir 参数设置为新建立的文件夹）；
-
-记录文件夹目录保持全英文。
+- 如果需要重新训练，需要删除掉记录文件夹内的信息并重启 TensorBoard（或者建立一个新的记录文件夹并开启 TensorBoard， --logdir 参数设置为新建立的文件夹）；
+- 记录文件夹目录保持全英文。
 
 ```python
 import tensorflow as tf
@@ -849,10 +857,11 @@ with summary_writer.as_default():
 
 ```python
 import tensorflow as tf
+#tf.enable_eager_execution()
 import numpy as np
 
-X_raw = np.array([2013, 2014, 2015, 2016, 2017], dtype=np.float32)
-y_raw = np.array([12000, 14000, 15000, 16500, 17500], dtype=np.float32)
+X_raw = np.array([2013, 2014, 2015, 2016, 2017, 2018], dtype=np.float32)
+y_raw = np.array([12000, 14000, 15000, 16500, 17500, 19000], dtype=np.float32)
 
 X = (X_raw - X_raw.min()) / (X_raw.max() - X_raw.min())
 y = (y_raw - y_raw.min()) / (y_raw.max() - y_raw.min())
@@ -865,9 +874,10 @@ b = tf.Variable(initial_value=0.)
 variables = [a, b]
 
 num_epoch = 10000
-# 梯度下降 优化器 （Optimizer）
 optimizer = tf.keras.optimizers.SGD(learning_rate=5e-4)
 for e in range(num_epoch):
+    if e % 500 == 0:
+        print('step {}\ta={}\tb={}'.format(e, a.numpy(), b.numpy()))
     # 使用tf.GradientTape()记录损失函数的梯度信息
     with tf.GradientTape() as tape:
         y_pred = a * X + b
@@ -877,6 +887,10 @@ for e in range(num_epoch):
     # TensorFlow自动根据梯度更新参数
     optimizer.apply_gradients(grads_and_vars=zip(grads, variables))
 
+print(a, b)
+print(a.value().numpy())
+print(a.numpy())
+print(a.read_value())
 ```
 
 ## TensorFlow 分布式训练
@@ -1312,119 +1326,6 @@ tf.disable_v2_behavior()
     device_policy=None,
     execution_mode=None
 ) 
-```
-
-## 自动求导
-
-- 即时执行模式下，TensorFlow 引入了 tf.GradientTape() 这个 “求导记录器” 来实现自动求导
-
-```python
-import tensorflow as tf
-
-x = tf.Variable(initial_value=3.)
-with tf.GradientTape() as tape:     # 在tf.GradientTape()的上下文内，所有计算步骤都会被记录以用于求导
-    y = tf.square(x)
-y_grad = tape.gradient(y, x)        # 计算y关于x的导数
-print(y, y_grad)
-```
-
-
-## 线性回归
-
-示例
-
-```python
-import tensorflow as tf
-#tf.enable_eager_execution()
-import numpy as np
-
-X_raw = np.array([2013, 2014, 2015, 2016, 2017, 2018], dtype=np.float32)
-y_raw = np.array([12000, 14000, 15000, 16500, 17500, 19000], dtype=np.float32)
-
-X = (X_raw - X_raw.min()) / (X_raw.max() - X_raw.min())
-y = (y_raw - y_raw.min()) / (y_raw.max() - y_raw.min())
-
-X = tf.constant(X)
-y = tf.constant(y)
-
-a = tf.Variable(initial_value=0.)
-b = tf.Variable(initial_value=0.)
-variables = [a, b]
-
-num_epoch = 10000
-optimizer = tf.keras.optimizers.SGD(learning_rate=5e-4)
-for e in range(num_epoch):
-    if e % 500 == 0:
-        print('step {}\ta={}\tb={}'.format(e, a.numpy(), b.numpy()))
-    # 使用tf.GradientTape()记录损失函数的梯度信息
-    with tf.GradientTape() as tape:
-        y_pred = a * X + b
-        loss = tf.reduce_sum(tf.square(y_pred - y))
-    # TensorFlow自动计算损失函数关于自变量（模型参数）的梯度
-    grads = tape.gradient(loss, variables)
-    # TensorFlow自动根据梯度更新参数
-    optimizer.apply_gradients(grads_and_vars=zip(grads, variables))
-
-print(a, b)
-print(a.value().numpy())
-print(a.numpy())
-print(a.read_value())
-```
-
-## 模型搭建与训练
-
-- 使用 TensorFlow 快速搭建动态模型。
-    - 模型的构建： tf.keras.Model 和 tf.keras.layers
-    - 模型的损失函数： tf.keras.losses
-    - 模型的优化器： tf.keras.optimizer
-    - 模型的评估： tf.keras.metrics
-
-    ![](https://tf.wiki/_images/model.png)
-
-- 解释
-    - 继承 tf.keras.Model 后，同时可以使用父类的若干方法和属性，例如在实例化类 model = Model() 后，可以通过 model.
-    - variables 这一属性直接获得模型中的所有变量，免去我们一个个显式指定变量的麻烦。
-- TensorFlow 的模型编写方式。在这一部分，我们依次进行以下步骤：
-    - 使用 `tf.keras.datasets` 获得数据集并预处理
-    - 使用 `tf.keras.Model` 和 `tf.keras.layers` 构建模型
-    - 构建模型训练流程，使用 `tf.keras.losses` 计算损失函数，并使用 `tf.keras.optimizer` 优化模型
-    - 构建模型评估流程，使用 `tf.keras.metrics` 计算评估指标
-
-```python
-import tensorflow as tf
-
-X = tf.constant([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]])
-y = tf.constant([[10.0], [20.0]])
-
-class Linear(tf.keras.Model):
-    def __init__(self):
-        super().__init__()
-        self.dense = tf.keras.layers.Dense(
-            units=1,
-            activation=None,
-            # 问题：为什么权重矩阵的名字是kernel？让人联想到cnn的卷积核
-            kernel_initializer=tf.zeros_initializer(),
-            bias_initializer=tf.zeros_initializer()
-        )
-    def call(self, input):
-        output = self.dense(input)
-        return output
-
-# 以下代码结构与前节类似
-model = Linear()
-optimizer = tf.keras.optimizers.SGD(learning_rate=0.01)
-for i in range(100):
-    # ①定义自动求导
-    with tf.GradientTape() as tape:
-        # 调用模型 y_pred = model(X) 而不是显式写出 y_pred = a * X + b
-        y_pred = model(X)
-        loss = tf.reduce_mean(tf.square(y_pred - y))
-    # ②计算梯度
-    grads = tape.gradient(loss, model.variables)
-    # 使用 model.variables 直接获取模型中所有变量
-    # ③更新梯度
-    optimizer.apply_gradients(grads_and_vars=zip(grads, model.variables))
-print(model.variables)
 ```
 
 ## CNN分类
