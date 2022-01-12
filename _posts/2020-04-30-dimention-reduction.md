@@ -690,16 +690,18 @@ X_reduced=rbf_pca.fit_transform(X)
 
 ![](http://www.visiondummy.com/wp-content/ql-cache/quicklatex.com-3472e58fe7837e68dc4f98a8516cc5bc_l3.png)
 
-（1） $$ \ begin {equation *} V（d）= \ frac {\ pi ^ {d / 2}} {\ Gamma（\ frac {d} {2} + 1）} 0.5 ^ d。 \ {端方程*} $$
+（1） 
+
+$$ \ begin {equation *} V（d）= \frac{\pi ^ {d / 2}} {\Gamma（\frac {d} {2} + 1）} 0.5^d。 \ {端方程*} $$
 
 图10显示了当维度增加时，这个超球体的体积如何变化：
-![](http://www.visiondummy.com/wp-content/uploads/2014/04/hypersphere.png)
+- ![](http://www.visiondummy.com/wp-content/uploads/2014/04/hypersphere.png)
 随着维度的增加，超球体的体积趋向于零
 
 图10.随着维数的增加，超球面的体积趋向于零。
 
 则
-![](https://img-blog.csdnimg.cn/20190226160056763.png)
+- ![](https://img-blog.csdnimg.cn/20190226160056763.png)
 
 这表明，当维数趋于无穷大时，超球体的体积倾向于零，而周围超立方体的体积保持不变。这种令人惊讶且相当反直觉的观察部分地解释了与分类中的维度诅咒相关的问题：在高维空间中，大多数训练数据驻留在定义特征空间的超立方体的角落中。如前所述，特征空间角落中的实例比超球面质心周围的实例更难分类。这由图11示出，其示出了2D单位正方形，3D单位立方体以及具有2 ^ 8 = 256个角的8D超立方体的创造性可视化：
 
@@ -710,10 +712,9 @@ X_reduced=rbf_pca.fit_transform(X)
 图11.随着维度的增加，更大比例的训练数据驻留在要素空间的角落中。
 
 对于8维超立方体，大约98％的数据集中在其256个角上。因此，当特征空间的维数变为无穷大时，从样本点到质心的最小和最大欧几里得距离的差值与最小距离本身的比率趋向于零：
+- ![](http://www.visiondummy.com/wp-content/ql-cache/quicklatex.com-7ffb60f75669300ffbcf8768471ca99d_l3.png)
 
-![](http://www.visiondummy.com/wp-content/ql-cache/quicklatex.com-7ffb60f75669300ffbcf8768471ca99d_l3.png)
-
-$$ \ begin {equation *} \ lim_ {d \ to \ infty} \ frac {\ operatorname {dist} _ {\ _max}  -  \ operatorname {dist} _ {\ min}} {\ operatorname {dist} _ {\ min }到\ 0 \ end {equation *} $$
+$$ \ begin{equation *} \lim_{d \to \infty} \frac {\operatorname {dist} _{\_max}  -  \operatorname{dist} _ {\min}} {\operatorname{dist}_{\min}到\0 \end{equation *} $$
 
 因此，距离测量开始失去其在高维空间中测量不相似性的有效性。由于分类器依赖于这些距离测量（例如欧几里德距离，马哈拉诺比斯距离，曼哈顿距离），因此在较低维空间中分类通常更容易，其中较少特征用于描述感兴趣对象。类似地，高斯似然性在高维空间中变为平坦且重尾的分布，使得最小和最大似然之间的差异与最小似然本身的比率趋于零。
 
@@ -734,8 +735,7 @@ $$ \ begin {equation *} \ lim_ {d \ to \ infty} \ frac {\ operatorname {dist} _ 
 另一种方法是用一组M个特征替换N个特征的集合，每个特征是原始特征值的组合。试图找到原始特征的最佳线性或非线性组合以减少最终问题的维度的算法称为特征提取方法。一种众所周知的降维技术是[主成分分析](http://www.visiondummy.com/2014/05/feature-extraction-using-pca/)（PCA），它产生原始N特征的不相关的线性组合。PCA试图找到较低维度的线性子空间，以便保持原始数据的最大方差。但是，请注意，数据的最大差异不一定代表最具辨别力的信息。
 
 最后，在分类器训练期间用于检测和避免过度拟合的宝贵技术是交叉验证。交叉验证方法将原始训练数据分成一个或多个训练子集。在分类器训练期间，一个子集用于测试所得分类器的准确度和精度，而其他子集用于参数估计。如果用于训练的子集的分类结果与用于测试的子集的结果大不相同，则过度拟合正在发挥作用。如果只有有限数量的训练数据可用，则可以使用几种类型的交叉验证，例如k折交叉验证和留一交叉验证。
-
-![](https://upload.wikimedia.org/wikipedia/commons/1/1c/K-fold_cross_validation_EN.jpg)
+- ![](https://upload.wikimedia.org/wikipedia/commons/1/1c/K-fold_cross_validation_EN.jpg)
 
 Diagram of k-fold cross-validation with k=4
 

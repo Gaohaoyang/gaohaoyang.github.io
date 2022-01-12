@@ -101,7 +101,7 @@ mathjax: true
 ### 曼哈顿距离（Manhattan Distance）
 
 向量各坐标的绝对值做查后求和。
-- d(i,j)=|X1-X2|+|Y1-Y2|
+- d(i,j)=\|X1-X2\|+\|Y1-Y2\|
 - [img](https://img-blog.csdn.net/20170411163529421) ![](https://img-blog.csdn.net/20170411163529421)
 
 ### 明可夫斯基距离（Minkowski distance）
@@ -110,9 +110,9 @@ mathjax: true
 - [img](https://img-blog.csdn.net/20170411192555236) ![](https://img-blog.csdn.net/20170411192555236)
 - [img](https://img-blog.csdn.net/20170411163856462) ![](https://img-blog.csdn.net/20170411163856462)
 - 分析
-  - 当p==1,“明可夫斯基距离”变成“曼哈顿距离”
-  - 当p==2,“明可夫斯基距离”变成“欧几里得距离”
-  - 当p==∞,“明可夫斯基距离”变成“切比雪夫距离”
+  - 当 p == 1, “明可夫斯基距离”变成“**曼哈顿**距离”
+  - 当 p == 2, “明可夫斯基距离”变成“**欧几里得**距离”
+  - 当 p == ∞, “明可夫斯基距离”变成“**切比雪夫**距离”
 
 ### Jaccard 相似系数（Jaccard Coefficient）
  
