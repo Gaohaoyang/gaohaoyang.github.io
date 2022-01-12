@@ -19,10 +19,12 @@ mathjax: true
   - 深度学习仍有许多问题亟待解决，例如将知识迁移到新问题上的能力。许多关键问题都可以归结为OOD(out-of-distribution)问题。因为统计学习模型需要满足独立同分布(i.i.d.)假设，而很多情形下，这个假设不成立，这时候就需要因果推断了：如何学习一个可以在**不同分布**下工作、蕴含因果机制的**因果模型**(Causal Model)，并使用因果模型进行干预或反事实推断。
   - 然而，因果模型往往处理的是**结构化**数据，并不能处理机器学习中常见的高维的低层次的原始数据，如图像。为此，回到最初的问题，**因果表征**即可理解为可以用于因果模型的表征，因果表征学习即为将图像这样的原始数据转化为可用于因果模型的结构化变量。因果表征学习就是连接因果科学与机器学习的桥梁，解决这一及相关问题，就可以很好的将因果推断与机器学习结合起来，构建下一代更强大的AI。
 - 【2021-10-11】[因果推断研究获2021诺贝尔经济学奖](https://github.com/ZhangNanBei/Interview-all-in-one)，北京时间10月11日下午，2021年诺贝尔经济学奖揭晓，颁发给三位学者。其中Joshua D. Angrist和Guido W. Imbens因“对因果关系分析的方法学贡献”而获奖。
-- 【5】 Causal Inference in Educational Systems: A Graphical Modeling Approach
+- Causal Inference in Educational Systems: A Graphical Modeling Approach
   - 标题：教育系统中的因果推理：一种图形化建模方法
   - [链接](https://arxiv.org/abs/2108.00654)
-- 【2021-7-8】对比《思考：快与慢》书籍中的人脑的快系统和慢系统，他最近提出了一个类似人脑慢系统的 [System 2 Deep Learning](https://drive.google.com/file/d/1UT118pX3DzePaEEwj1tlaznqwHICSzhG/view)，做为一个目标为人类水平智能的范式，将因果推理能力的内容作为其核心组件。Bengio指出人的认知系统包含两个子系统：System1是直觉系统，主要负责快速、无意识、非语言的认知，这是目前深度学习主要做的事情；System2是逻辑分析系统，是有意识的、带逻辑、规划、推理以及可以语言表达的系统，这是未来深度学习需要着重考虑的。
+- 【2021-7-8】对比《思考：快与慢》书籍中的人脑的快系统和慢系统，他最近提出了一个类似人脑慢系统的 [System 2 Deep Learning](https://drive.google.com/file/d/1UT118pX3DzePaEEwj1tlaznqwHICSzhG/view)，做为一个目标为人类水平智能的范式，将因果推理能力的内容作为其核心组件。Bengio指出人的认知系统包含两个子系统：
+  - System1是**直觉**系统，主要负责快速、无意识、非语言的认知，这是目前深度学习主要做的事情；
+  - System2是**逻辑**分析系统，是有意识的、带逻辑、规划、推理以及可以语言表达的系统，这是未来深度学习需要着重考虑的。
 - 【2020-9-2】[Bengio讲授因果表示学习，Mila博士因果推理导论开课了](https://www.toutiao.com/i6867722568795685387)，从机器学习的角度编写的《Introduction to Causal Inference》秋季[课程](https://www.bradyneal.com/causal-inference-course#course-textbook)，[教材地址](https://www.bradyneal.com/Introduction_to_Causal_Inference-Aug27_2020-Neal.pdf)，[YouTube地址](https://www.youtube.com/watch?v=CfzO4IEMVUk&list=PLoazKTcS0Rzb6bb9L508cyJ1z-U9iWkA0&index=1)，由 Yoshua Bengio 高徒 Brady Neal 主讲，主要讲述因果推理相关知识。此外，该课程整合了来自许多不同领域的见解，如流行病学、经济学、政治学和机器学习等，这些领域都利用到了因果推理。
   - ![](https://p3-tt.byteimg.com/origin/pgc-image/50a7c51c7b664c4d97c6ffce404790e2?from=pc)
   - 内容：
@@ -40,19 +42,21 @@ mathjax: true
     - 【2020-12-9】中科院计算所在读博士李奉治 [因果阶梯与Do-演算：怎样完美地证明吸烟致癌？](https://mp.weixin.qq.com/s/SLBXgf8rkJaQwVzZhD_yAQ)，[视频地址](https://campus.swarma.org/course/1986)有向图中的路径，只会有这三种基础结构，对应了“因果流”的三种模式：
       1. A→B→C ：`链` (Chain) 接合，其中B被称作“中介变量” (Mediator). 如果控制了中介变量B，A与C之间的因果关系传递就会被阻断。
       2. A←B→C ：`叉` (Fork) 接合，其中B被称作“混杂因子” (Confounder). 如果控制了混杂因子B，A与C之间就失去了相关性。
-      3. A→B←C ：`对撞` (Collider) 接合，其中B被称作“对撞因子” (Collider). 原本A和C之间就是独立的，但如果控制了对撞因子B，根据辩解效应 (Pearl, 1988) 的存在，反而会打开A与C之间的因果关系传递通道。
-    - 上方的三种接合模式都有对应的控制因果流的传递方法。对于更大的因果图，如何阻断某两个结点之间的因果信息流呢？这里就提供了一个判据，被称为**d-分离**。强制干预一个变量，就是do-演算框架中的 **do算子**。为了算出直接干预一个变量后其他变量变化的结果，2011年图灵奖得主 Judea Pearl 提出了一个do-演算的公理体系，包含三条公理，对观察项和干预项进行转换。
-    - 中科大统计学在读博士生龚鹤扬 [因果科学：连接统计学、机器学习与自动推理的新兴交叉领域](https://mp.weixin.qq.com/s/l-05jRYabGI-JoXedU-PLA)， 哲学中关于因果关系讨论中，其因果的分类方法非常有启发性，把因果分成了两类，一类是 Type causality ，另一类是 Actual causality。Type  causality 关注的是某个原因会导致什么样的结果，例如吸烟是否导致肺癌，可理解成由因推果（Forward-looking），是一种干预思维，能帮助科学家进行预测；而 Actual causality 关注某个事件发生的具体原因是什么，例如恐龙灭亡的原因是六千万年的小行星撞地球导致的吗，它是由果推因（Backward-looking），与反事实思维思维密切相关。
+      3. A→B←C ：`对撞` (Collider) 接合，其中B被称作“对撞因子” (Collider). 原本A和C之间就是独立的，但如果控制了对撞因子B，根据辩解效应 (Pearl, 1988) 的存在，<font color='red'>反而会打开A与C之间的因果关系传递通道。</font>
+    - 上方的三种接合模式都有对应的控制因果流的传递方法。对于更大的因果图，如何阻断某两个结点之间的因果信息流呢？这里就提供了一个判据，被称为**d-分离**。强制干预一个变量，就是do-演算框架中的 **do算子**。为了算出直接干预一个变量后其他变量变化的结果，2011年图灵奖得主 Judea Pearl 提出了一个do-演算的公理体系，包含三条公理，对**观察项**和**干预项**进行转换。
+    - 中科大统计学在读博士生龚鹤扬 [因果科学：连接统计学、机器学习与自动推理的新兴交叉领域](https://mp.weixin.qq.com/s/l-05jRYabGI-JoXedU-PLA)， 哲学中关于因果关系讨论中，其因果的分类方法非常有启发性，把因果分成了两类，一类是 Type causality（**因推果**） ，另一类是 Actual causality（**果推因**）。
+      - Type causality 关注的是某个原因会导致什么样的结果，例如吸烟是否导致肺癌，可理解成由**因推果**（Forward-looking），是一种**干预**思维，能帮助科学家进行预测；
+      - 而 Actual causality 关注某个事件发生的具体原因是什么，例如恐龙灭亡的原因是六千万年的小行星撞地球导致的吗，它是由**果推因**（Backward-looking），与反事实思维思维密切相关。
   - 【2020-10-22】[如何在观测数据下进行因果效应评估](https://www.sohu.com/a/426630014_741733)：
-    - 相关性相比因果，更缺乏 **可解释性**（Explainability）、**稳定性**（Stability）（漂移）
-    - **可行动性**（Actionability）：这些虚假相关是由混淆变量产生的**混杂偏倚**（Confounding Bias），这种决策问题实际上是反事实问题，而不是预测问题。
-    - **公平性**（Fairness）：通过因果评估的框架，可以用**Do-演算**（Do-Calculus）等工具，干预收入的多少，来计算肤色与犯罪率之间真正的因果效应大小。
-    - 相关性有三种来源：**因果**、**混淆**和**样本选择**。
-      - ① 因果关联例子就是天下雨地面会湿，这种关系是能够被人类所理解的、是可解释的、稳定的（无论在任何国家或城市，天下雨地都会湿）。
-      - ② 混淆关联是由**混淆偏差**（Confounding Bias）造成的。比如图中X是T和Y的共同原因，但如果不对X进行观察，就会发现T和Y是具有相关性的，但T和Y之间是没有直接因果效应的，这就是产生了虚假相关。
-      - ③ 样本选择偏差（Selection Bias）也会产生相关性，比如之前的例子中，如果数据集中的狗都出现在沙滩上，而没有狗的图片都是草地，那么训练出的模型就会发现草地与狗之间是负相关的，这也产生了虚假相关。
-    - 虚假相关与因果关联相比，缺乏可解释性，且容易随着环境变化。在工业界和学术界中，我们都希望能判断两个变量之间的相关究竟是因果关联还是虚假相关。如果是虚假相关的话，可能会给实际的系统带来风险。
-    - 所以恢复因果可以提高可解释性，帮助决策，并在未来的数据集中做出稳定而鲁棒的预测，防止算法产生的偏差。无论数据集中有什么样的偏差，我们都希望能挖掘出没有偏差的因果关系，来指导算法。
+  - 相关性相比因果，更缺乏 **可解释性**（Explainability）、**稳定性**（Stability）（漂移）
+  - **可行动性**（Actionability）：这些虚假相关是由混淆变量产生的**混杂偏倚**（Confounding Bias），这种决策问题实际上是反事实问题，而不是预测问题。
+  - **公平性**（Fairness）：通过因果评估的框架，可以用**Do-演算**（Do-Calculus）等工具，干预收入的多少，来计算肤色与犯罪率之间真正的因果效应大小。
+  - **相关性**有三种来源：**因果**、**混淆**和**样本选择**。
+    - ① 因果关联例子就是天下雨地面会湿，这种关系是能够被人类所理解的、是可解释的、稳定的（无论在任何国家或城市，天下雨地都会湿）。
+    - ② 混淆关联是由**混淆偏差**（Confounding Bias）造成的。比如图中X是T和Y的共同原因（**叉**），但如果不对X进行观察，就会发现T和Y是具有相关性的，但T和Y之间是没有直接因果效应的，这就是产生了虚假相关。
+    - ③ **样本选择**偏差（Selection Bias）也会产生相关性，比如之前的例子中，如果数据集中的狗都出现在沙滩上，而没有狗的图片都是草地，那么训练出的模型就会发现草地与狗之间是负相关的，这也产生了虚假相关。
+  - 虚假相关与因果关联相比，缺乏可解释性，且容易随着环境变化。在工业界和学术界中，都希望能判断两个变量之间的相关究竟是因果关联还是虚假相关。如果是虚假相关的话，可能会给实际的系统带来风险。
+  - 所以恢复因果可以提高可解释性，帮助决策，并在未来的数据集中做出稳定而鲁棒的预测，防止算法产生的偏差。无论数据集中有什么样的偏差，我们都希望能挖掘出没有偏差的因果关系，来指导算法。
   - ![](https://swarma.org/wp-content/uploads/2020/05/wxsync-2020-05-381c31fa5614d7d4df7ae1b27e0d393c.png)
 
 - 【2020-9-23】[Introduction to Causal Inference](https://www.bradyneal.com/causal-inference-course)
@@ -103,13 +107,10 @@ mathjax: true
   - 从因果图模型开始，更广阔的定义了结构化的因果模型，以及如何从数据中识别因果关系。课程介绍了该领域当前（2017）比较前沿的研究，包括用传统机器学习方法进行因果推断的几篇论文。
   - MIT 因果推断 [Mini Lectures on Causality by Jonas Peters 2017](https://www.bilibili.com/video/av90067629/) (无字幕)
     - [ppt地址](https://stat.mit.edu/news/four-lectures-causality/)
-
-  <iframe src="//player.bilibili.com/player.html?aid=90067629&bvid=BV1o7411L7dp&cid=153821743&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="350px" height="266px" > </iframe>
-
+  - <iframe src="//player.bilibili.com/player.html?aid=90067629&bvid=BV1o7411L7dp&cid=153821743&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%" > </iframe>
 - 【2021-1-28】[将因果关系引入计算机视觉的"小学生"](https://mp.weixin.qq.com/s?__biz=MzA5ODEzMjIyMA==&mid=2247575503&idx=1&sn=1a3a0c3f99f2bee229e983ca5e4564be&chksm=9095ae5ca7e2274a817ca681ea37267e33c139c54c406f73a5f964b3c11691edb48595a7077f&mpshare=1&scene=23&srcid=0128c6xVJSEVLXRvMK6obR48&sharer_sharetime=1611811625919&sharer_shareid=b8d409494a5439418f4a89712efcd92a%23rd)
   - AI 仍是一个比人类更低维的生物，与人类之间存在很大差距，对事物的因果推理能力便是其中之一
   - 张含望创立并带领的机器推理与学习实验室（Machine Reasoning and Learning Lab，简称“MReal”）是全球第一个将因果关系推理引入计算机视觉研究中的团队。
-
 - 【因果推断】 [A Brief Introduction to Causal Inference by Brady Neal](https://www.bilibili.com/video/BV1CK4y1L7uA/?spm_id_from=333.788.videocard.5)
 - 【2021-3-29】[统计之都-因果推断专题](https://cosx.org/tags/%E5%9B%A0%E6%9E%9C%E6%8E%A8%E6%96%AD/)
   - [因果推断简介之一：从 Yule-Simpson’s Paradox 讲起](https://cosx.org/2012/03/causality1-simpson-paradox/) 辛普森悖论
@@ -118,8 +119,7 @@ mathjax: true
   - [因果推断简介之五：因果图 (Causal Diagram)](https://cosx.org/2012/10/causality5-causal-diagram/)
   
 - [Causal inference course written from a machine learning perspective](https://www.bradyneal.com/causal-inference-course)，包含课程ppt列表
-
-<iframe src="//player.bilibili.com/player.html?aid=885688534&bvid=BV1CK4y1L7uA&cid=267895326&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="350px" height="266px" > </iframe>
+  - <iframe src="//player.bilibili.com/player.html?aid=885688534&bvid=BV1CK4y1L7uA&cid=267895326&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%" > </iframe>
 
 
 # 因果推理书籍
@@ -138,13 +138,13 @@ mathjax: true
   - 导言：思维胜于数据
   - 第一章：**因果关系**之梯
   - 第二章：从海盗到豚鼠：因果推断的起源
-  - 第三章：从证据到因：当贝叶斯牧师遇见福尔摩斯先生
+  - 第三章：从证据到因：当贝叶斯牧师（**统计**）遇见福尔摩斯先生（**推理**）
   - 第四章：**混杂**和去混杂：或者，消灭潜伏变量
-    - [因果学习初探（2）——混杂和去混杂](https://zhuanlan.zhihu.com/p/360525040)：随机试验是可以对付自然精灵的黄金法则。随机化带来的两个实际好处：
+    - [因果学习初探（2）——混杂和去混杂](https://zhuanlan.zhihu.com/p/360525040)：**随机试验**是可以对付自然精灵的黄金法则。随机化带来的两个实际好处：
       - （1）消除了混杂偏移；
       - （2）能够量化不确定性（引出do算子）。
-    - 随机试验可以切断混杂因子，即使是那些我们不知道的，而非随机的试验很难做到，或者说不能做到。很多时候，因为一些伦理性的问题等，干预在事实上是不可行的。幸运的是，do算子为我们提供了一种科学的方法，让我们能够在非试验性研究中确定因果关系。借助do算子定义混杂: ![](https://www.zhihu.com/equation?tex=P%28Y%7CX%29%5Cne+P%28Y%7Cdo%28X%29%29)
-    - do算子和后门标准可以定义混杂、识别混杂，甚至是解决混杂因子带来的问题。除了三种结构外，我们引入另一条规则，控制一个变量的后代节点（替代物），如同部分的控制变量本身。为了去除X和Y之间的混杂，我们只需要阻断它们之间的非因果路径，而不去阻断或者干扰所有的因果路径就可以了。我们将后门路径定义为所有X和Y之间以指向X的箭头为开始的路径。我们要做的是对后门路径进行阻断，这些路径中有些需要进行约束，而有些不需要进行约束，来达到去混杂的目的。
+    - **随机试验**可以切断混杂因子，而非随机的试验很难做到。很多时候，因为一些伦理性的问题等，干预在事实上是不可行的。幸运的是，**do算子**提供了一种科学的方法，在**非试验性**研究中确定因果关系。借助do算子定义混杂: ![](https://www.zhihu.com/equation?tex=P%28Y%7CX%29%5Cne+P%28Y%7Cdo%28X%29%29)
+    - **do算子**和**后门标准**可以定义混杂、识别混杂，甚至是解决混杂因子带来的问题。除了三种结构外，我们引入另一条规则，控制一个变量的后代节点（替代物），如同部分的控制变量本身。为了去除X和Y之间的混杂，只需要阻断它们之间的非因果路径，而不去阻断或者干扰所有的因果路径就可以了。我们将后门路径定义为所有X和Y之间以指向X的箭头为开始的路径。对后门路径进行阻断，这些路径中有些需要进行约束，而有些不需要进行约束，来达到去混杂的目的。
   - 第五章：烟雾缭绕的争论：消除迷雾，澄清事实
   - 第六章：大量的**悖论**！
     - 谁能直面矛盾，谁就能触摸现实。**蒙提-霍尔**悖论，**伯克森**悖论，**辛普森**悖论
@@ -154,27 +154,25 @@ mathjax: true
   - 第十章：大数据，人工智能和大问题
 - 【2021-3-29】[《为什么：关于因果关系的新科学》思维导图](https://zhuanlan.zhihu.com/p/144562779)
 - 1、 文章结构
-  - 人类创造出了我们今天所享有的科技文明。所有这一切都源于我们的祖先提出了这样一个简单的问题：为什么？因果推断正是关于这个问题的严肃思考。因果革命背后有数学工具上的发展作为支撑，这种数学工具最恰当的名称应该是“因果关系演算法”。其一为因果图（causal diagrams），用以表达我们已知的事物，其二为类似代数的符号语言，用以表达我们想知道的事物。
-![](https://pic4.zhimg.com/80/v2-8bb7cbdd487fbd5c93d7a3f184f2def7_1440w.jpg)
+  - 人类创造出了我们今天所享有的科技文明。所有这一切都源于我们的祖先提出了这样一个简单的问题：<font color='blue'>为什么？</font>
+  - 因果推断正是关于这个问题的严肃思考。因果革命背后有数学工具上的发展作为支撑，这种数学工具最恰当的名称应该是“**因果关系演算**法”。其一为**因果图**（causal diagrams），用以表达我们已知的事物，其二为类似代数的**符号语言**，用以表达我们想知道的事物。
+  - ![](https://pic4.zhimg.com/80/v2-8bb7cbdd487fbd5c93d7a3f184f2def7_1440w.jpg)
 - 2、 **因果关系之梯**
-  - 如果第一层级对应的是观察到的世界，第二层级对应的是一个可被观察的美好新世界，那么第三层级对应的就是一个无法被观察的世界（因为它与我们观察到的世界截然相反）。为了弥合第三层级与前两个层级之间的差距，我们需要掌握一种理解力，建立一种理论，据此我们就可以预测在尚未经历甚至未曾设想过的情况下会发生什么——这显然是所有科学分支的圣杯。
+  - 如果第一层级对应的是**观察**到的世界，第二层级对应的是一个可被观察的美好**新世界**，那么第三层级对应的就是一个**无法被观察**的世界（因为它与我们观察到的世界截然相反）。
+  - 为了弥合第三层级与前两个层级之间的差距，我们需要掌握一种理解力，建立一种理论，据此预测在尚未经历甚至未曾设想过的情况下会发生什么——这显然是所有科学分支的圣杯。
 ![](https://pic3.zhimg.com/80/v2-d198dbac52e3e19e756ba4b5944a64c6_1440w.jpg)
 - 3、 **因果推断的起源**
   - 因果推断是用数学语言表达看似合理的因果知识，将其与经验数据相结合，回答具有实际价值的因果问题。将相关关系的知识与因果关系的知识相结合以获得某些结果的做法。而路径图在因果论和概率论之间建立的第一座桥梁，其跨越了因果关系之梯第二层级和第一层级之间的障碍。在建造了这座桥梁之后，就可以进行反向的实践，从根据数据测算出的相关性（第一层级）中发现隐藏在背后的因果量。
- 
-![](https://pic3.zhimg.com/80/v2-07a7bfe5722105fa283c20018babce6a_1440w.jpg)
+  - ![](https://pic3.zhimg.com/80/v2-07a7bfe5722105fa283c20018babce6a_1440w.jpg)
 - 4、 **混杂和对撞因子**
   - 我们在实际生活中似乎就是遵循着共因原则行事的，无论何时，只要观察到某种模式，我们就会去寻找一个因果解释。事实上，我们本能地渴望根据数据之外的某个稳定机制对观察结果做出解释。其中最令人满意的解释是直接因果关系：X导致Y。
- 
-![](https://pic4.zhimg.com/80/v2-f6d7aab9b26261f5c3b5f3f61e264337_1440w.jpg)
+  - ![](https://pic4.zhimg.com/80/v2-f6d7aab9b26261f5c3b5f3f61e264337_1440w.jpg)
 - 5、 **征服干预之峰**
   - 混杂因子是导致我们混淆“观察”与“干预”的主要障碍。在用“路径阻断”工具和后门标准消除这一障碍后，我们就能精确而系统地绘制出登上干预之峰的路线图。最安全的路线是后门调整和由此衍生的诸多同源路线，它们有些可以归于“前门调整”名下，有些则可以归于“工具变量”名下。一种通用的绘图工具，我们称之为“do演算”（do–calculus），它允许研究者探索并绘制出通往干预之峰的所有可能的路线，无论这些路线有多曲折。
- 
-![](https://pic4.zhimg.com/80/v2-76999a49fea61767d4e794e957a60dbf_1440w.jpg)
+  - ![](https://pic4.zhimg.com/80/v2-76999a49fea61767d4e794e957a60dbf_1440w.jpg)
 - 6、 **反事实**
   - “A导致B”解释为“假如没有A，则B就不会发生”。我们根本不需要争论这样的世界是否以物理或者形而上学的实体形式存在。如果我们的目的是解释人们所说的“A导致B”的含义，那么我们只需要假设人们有能力在头脑中想象出可能的世界，并能判断出哪个世界“更接近”我们的真实世界即可；最重要的是我们的想象和判断要前后一致，这有助于我们在群体中达成共识。
- 
-![](https://pic4.zhimg.com/80/v2-0edbbc63e8f6f20a1cb40e7059fa2ec7_1440w.jpg)
+  - ![](https://pic4.zhimg.com/80/v2-0edbbc63e8f6f20a1cb40e7059fa2ec7_1440w.jpg)
 
 
 ## （2）因果关系：模型、论证与推断
@@ -245,9 +243,9 @@ mathjax: true
 
 | Level (Symbol) | Typical  Activity | Typical Questions | Examples |
 |---|---|---|---|
-| 1. **Association** P(y|x) | Seeing | ①What is? ②How would seeing X change my belief inY ? | ①What does a symptom tell me about a disease?②What does a survey tell us about the election results? |
-| 2. **Intervention** P(y|do(x), z) | Doing Intervening | ①What if? ②What if I do X? | ① What if I take aspirin, will my headache be cured?②What if we ban cigarettes? |
-| 3. **Counterfactuals** P(yx|x', y') |  Imagining, Retrospection | ① Why? ②Was it X that caused Y ? ③What if I had acted differently? | ①Was it the aspirin that stopped my headache?②Would Kennedy be alive had Oswald not shot him? ③What if I had not been smoking the past 2 years? |
+| 1. <font color='green'>关联</font> **Association** P(y\|x) | Seeing | ①What is? <br>②How would seeing X change my belief inY ? | ①What does a symptom tell me about a disease?<br>②What does a survey tell us about the election results? |
+| 2. <font color='green'>干预</font> **Intervention** P(y\|do(x), z) | Doing Intervening | ①What if? <br>②What if I do X? | ① What if I take aspirin, will my headache be cured?<br>②What if we ban cigarettes? |
+| 3. <font color='green'>反事实</font> **Counterfactuals** P(yx\|x', y') |  Imagining, Retrospection | ① Why? <br>②Was it X that caused Y ? <br>③What if I had acted differently? | ①Was it the aspirin that stopped my headache?<br>②Would Kennedy be alive had Oswald not shot him? <br>③What if I had not been smoking the past 2 years? |
 
 - 【2021-3-31】[厘清因果逻辑后的机器学习可以脱胎换骨吗？](https://www.toutiao.com/i6945642299799896607/xs)
 - 人类与机器学习的一大不同即人类理解因果逻辑容易，机器学习理解因果却难如登天。机器学习算法，尤其是深度神经网络，擅长从大量数据中找出微妙的模式，但它们很难做出简单的因果推论，主要涉及的难题是独立和恒等分布数据（i.i.d）。
@@ -281,7 +279,7 @@ mathjax: true
 - 【2021-3-30】[ICLR 2020 反事实因果理论如何帮助深度学习？](https://zhuanlan.zhihu.com/p/136937643)
 - 一个巨大的问题是深度神经网络的**黑箱**问题和**不稳定性**问题。其中的一个根本原因，基于**相关性**的统计模型容易学习到数据中的“**伪关系**(spurious relation)”，而非因果关系，从而降低了泛化能力和对抗攻击的能力。
   - 一个潜在的方向，就是采用从90年代以来以Judea Pearl为代表的研究者们提出的**因果推断理论**来改进现有的表示学习技术。
-  - 然而<font color='blue'>**因果分析**框架和**表示学习**并非天生相容</font>。
+  - 然而<font color='blue'>因果分析框架和表示学习并非天生相容</font>。
     - **因果分析**通常是基于抽象的、高层次的统计特征来构建结构**因果图**；
     - 而**表示学习**则基于海量数据提取具体的、低层次的表示特征来辅助下游任务。
   - 为了结合这两者，MILA的Yoshua Bengio提出了**System 2**框架，Max Planck Institute的Bernhard Schölkopf提出的因果表示学习框架。这两者实际上的思考是一致的。ICLR 2020上因果表示学习的2项有代表性的工作：如何利用因果理论中的**反事实**（counterfactual）框架来提高算法的**稳定性**和**可解释性**。
@@ -1510,68 +1508,90 @@ CLD中的变量基于以下的直觉：
 
 ### DoWhy（微软）
 
-- [DoWhy工具](https://github.com/microsoft/dowhy) An end-to-end library for causal inference
-  - [开始使用dowhy](https://zhuanlan.zhihu.com/p/274281410)
+「因果推断」（causal inference）是基于观察数据进行**反事实估计**，分析干预与结果之间的因果关系的一门科学。虽然在因果推断领域已经有许多的框架与方法，但大部分方法缺乏稳定的实现。
 
+[DoWhy工具](https://github.com/microsoft/dowhy) An end-to-end library for causal inference
+- [开始使用dowhy](https://zhuanlan.zhihu.com/p/274281410)
 - 微软的DoWhy是一个基于python的因果推理和分析库，它试图简化在机器学习应用程序中采用因果推理的过程。受到朱迪亚·珀尔的因果推理演算的启发，DoWhy在一个简单的编程模型下结合了几种因果推理方法，消除了传统方法的许多复杂性。
-- DoWhy将工作流中的任何因果推理问题建模为四个基本步骤: **建模**、**识别**、**估计**和**反驳**。
-  - (1) **模型**: 从数据和给定的图创建一个因果模型。
-    - DoWhy使用因果关系图对每个问题建模。有助于使每个因果假设明确。该图不必是完整的，您可以提供一个**局部图**，以表示有关某些变量的先验知识。 DoWhy会自动将其余变量视为潜在的混杂因素。
-    - DoWhy的当前版本支持两种图形输入格式:`gml`(首选)和`dot`。图中可能包含了变量之间因果关系的先验知识，但DoWhy不做任何直接的假设。
-    - 因果假设：
-      - 「**图**」（Graph）：提供 gml 或 dot 形式的因果图，具体可以是文件或字符串格式
-      - 「**命名变量集合**」（Named variable sets）：直接提供变量的类型，包括「混杂因子」（common causes / cofounders）、「工具变量」（instrumental variables）、「结果修改变量」（effect modifiers）、「前门变量」（front-door variables）等
-    - model = `CausalModel`(data=data["df"], treatment=data["treatment_name"], outcome=data["outcome_name"], graph=data["gml_graph"])
-  - (2) **标识**: 识别因果效应并返回目标的估计量（estimands）
-    - 基于因果图，DoWhy根据图形模型找到所有可能的方法来标识期望的因果关系。它使用基于**图的准则**（graph-based criteria）和**do-演算**（do-calculus）来找到可能的方式来找到可以识别因果关系的表达式。
-    - 支持的识别准则有：
-      - 「后门准则」（Back-door criterion）
-      - 「前门准则」（Front-door criterion）
-      - 「工具变量」（Instrumental Variables）
-      - 「中介-直接或间接结果识别」（Mediation-Direct and indirect effect identification）
-    - identified_estimand = model.`identify_effect`()
-  - (3) **估计**: 基于可识别的目标量，使用统计方法估计目标量（这里是计算因果效应）
-    - DoWhy使用**匹配**或**工具变量**等统计方法估计因果效应。DoWhy的当前版本支持基于倾向性**分层**或倾向性**评分匹配**的估计方法，这些方法侧重于估计处理任务，以及侧重于估计响应面的回归技术。
-    - DoWhy支持基于**后门准则**（back-door criterion）和**工具变量**（ instrumental variables）的方法。它还提供了一个非参数置换检验（non-parametric permutation test）来检验估计到的估计量的统计显著性。
-    - 目前，其支持的后门准则的方法有
-      - （1）基于估计处理任务（the treatment assignment）的方法：
-        - Propensity-based Stratification
-        - Propensity Score Matching
-        - Inverse Propensity Weighting
-      - （2）基于响应层面（response surface）的方法：Regression, 其支持的基于工具变量的方法有
-        - Binary Instrument/Wald Estimator
-        - Regression discontinuity
-      - DoWhy 支持一系列基于上述识别准则的估计方法，此外还提供了非参数置信空间与排列测试来检验得到的估计的统计显著性。具体支持的估计方法列表如下：
-      - 「基于估计干预分配的方法」
+
+DoWhy 是微软发布的一个用于进行端到端因果推断的 Python 库，其特点在于：
+- 提供了一种原则性的方法将给定的问题转化为一张**因果图**，保证所有假设的明确性
+- 提供了一种面向多种常用因果推断方法的**统一接口**，并结合了两种主要的因果推断框架
+- 自动化测试假设的正确性及估计的鲁棒性
+如上所述，DoWhy 基于因果推断的两大框架构建：「**图模型**」与「**潜在结果模型**」。
+- 具体来说，其使用 **基于图的准则** 与 **do-积分** 来对假设进行建模并识别出非参数化的因果效应；
+- 而在估计阶段则主要基于潜在结果框架中的方法进行估计。
+
+DoWhy 的整个因果推断过程可以划分为四大步骤：
+- 「**建模**」（model）：利用假设（先验知识）对因果推断问题建模
+- 「**识别**」（identify）：在假设（模型）下识别因果效应的表达式（因果估计量）
+- 「**估计**」（estimate）：使用统计方法对表达式进行估计
+- 「**反驳**」（refute）：使用各种鲁棒性检查来验证估计的正确性
+
+DoWhy将工作流中的任何因果推理问题建模为四个基本步骤: **建模**、**识别**、**估计**和**反驳**。
+- ![](https://pic1.zhimg.com/80/v2-419e610ea5c3c400cc3864c892497a24_720w.jpg)
+- (1) **建模**: 从数据和给定的图创建一个因果模型。
+  - DoWhy使用因果关系图对每个问题建模。有助于使每个因果假设明确。该图不必是完整的，可以提供一个**局部图**，以表示有关某些变量的先验知识。 DoWhy会自动将其余变量视为潜在的混杂因素。
+  - DoWhy的当前版本支持两种图形输入格式:`gml`(首选)和`dot`。图中可能包含了变量之间因果关系的先验知识，但DoWhy不做任何直接的假设。
+  - DoWhy 支持如下形式的因果假设：
+    - 「**图**」（Graph）：提供 gml 或 dot 形式的因果图，具体可以是文件或字符串格式
+    - 「**命名变量集合**」（Named variable sets）：直接提供变量的类型，包括
+      - 「混杂因子」（common causes / cofounders）
+      - 「工具变量」（instrumental variables）
+      - 「结果修改变量」（effect modifiers）
+      - 「前门变量」（front-door variables）等
+  - 函数：model = `CausalModel`(data=data["df"], treatment=data["treatment_name"], outcome=data["outcome_name"], graph=data["gml_graph"])
+- (2) **识别**: 识别因果效应并返回目标的估计量（estimands）
+  - 基于因果图，DoWhy根据图形模型找到所有可能的方法来标识期望的因果关系。它使用基于 **图的准则**（graph-based criteria）和 **do-演算**（do-calculus）来找到可能的方式来找到可以识别因果关系的表达式。
+  - 支持的识别准则有：
+    - 「**后门**准则」（Back-door criterion）
+    - 「**前门**准则」（Front-door criterion）
+    - 「**工具变量**」（Instrumental Variables）
+    - 「**中介**-直接或间接结果识别」（Mediation-Direct and indirect effect identification）
+  - 函数：identified_estimand = model.`identify_effect`()
+- (3) **估计**: 基于可识别的目标量，使用统计方法估计目标量（这里是计算因果效应）
+  - DoWhy使用**匹配**或**工具变量**等统计方法估计因果效应。DoWhy的当前版本支持基于倾向性**分层**或倾向性**评分匹配**的估计方法，这些方法侧重于估计处理任务，以及侧重于估计响应面的回归技术。
+  - DoWhy支持基于**后门准则**（back-door criterion）和**工具变量**（ instrumental variables）的方法。它还提供了一个非参数置换检验（non-parametric permutation test）来检验估计到的估计量的统计显著性。
+  - 目前，其支持的后门准则的方法有
+    - （1）基于估计处理任务（the treatment assignment）的方法：
+      - Propensity-based Stratification
+      - Propensity Score Matching
+      - Inverse Propensity Weighting
+    - （2）基于响应层面（response surface）的方法：Regression, 其支持的基于工具变量的方法有
+      - Binary Instrument/Wald Estimator
+      - Regression discontinuity
+    - DoWhy 支持一系列基于上述识别准则的估计方法，此外还提供了**非参数**置信空间与排列测试来检验得到的估计的统计显著性。具体支持的估计方法列表如下：
+      - 「基于**估计干预分配**的方法」
         - 基于倾向的分层（Propensity-based Stratification）
         - 倾向得分匹配（Propensity Score Matching）
         - 逆向倾向加权（Inverse Propensity Weighting）
-      - 「基于估计结果模型的方法」
+      - 「基于**估计结果模型**的方法」
         - 线性回归（Linear Regression）
         - 广义线性模型（Generalized Linear Models）
-      - 「基于工具变量等式的方法」
+      - 「基于**工具变量等式**的方法」
         - 二元工具/Wald 估计器（Binary Instrument/Wald Estimator）
         - 两阶段最小二乘法（Two-stage least squares）
         - 非连续回归（Regression discontinuity）
-      - 「基于前门准则和一般中介的方法」
+      - 「基于**前门准则**和**一般中介**的方法」
         - 两层线性回归（Two-stage linear regression）
-      - 此外，DoWhy 还支持调用外部的估计方法，例如 EconML 与 CausalML。
-    - estimate = model.`estimate_effect`(identified_estimand, method_name="backdoor.propensity_score_matching")
-  - (4) **验证**: 使用多个鲁棒性的检查方法来反驳得到的估计，验证估计到的因果效应的有效性。
-    - DoWhy提供的方法有：
-      - Placebo Treatment
-      - Irrelevant Additional Confounder
-      - Subset validation
-    - refute_results = model.`refute_estimate`(identified_estimand, estimate, method_name="random_common_cause")
-    - DoWhy强调其输出的**可解释性**。分析时，我们都可以检查未经检验的假设，已确定的估计值（如果有）和估计值（如果有）。
-    - DoWhy 支持多种**反驳**方法来验证估计的正确性，具体列表如下：
-      - 「添加随机混杂因子」：添加一个随机变量作为混杂因子后估计因果效应是否会改变（期望结果：不会）
-      - 「安慰剂干预」：将真实干预变量替换为独立随机变量后因果效应是否会改变（期望结果：因果效应归零）
-      - 「虚拟结果」：将真实结果变量替换为独立随机变量后因果效应是否会改变（期望结果：因果效应归零）
-      - 「模拟结果」：将数据集替换为基于接近给定数据集数据生成过程的方式模拟生成的数据集后因果效应是否会改变（期望结果：与数据生成过程的效应参数相匹配）
-      - 「添加未观测混杂因子」：添加一个额外的与干预和结果相关的混杂因子后因果效应的敏感性（期望结果：不过度敏感）
-      - 「数据子集验证」：将给定数据集替换为一个随机子集后因果效应是否会改变（期望结果：不会）
-      - 「自助验证」：将给定数据集替换为同一数据集的自助样本后因果效应是否会改变（期望结果：不会）
+    - 此外，DoWhy 还支持调用外部的估计方法，例如 EconML 与 CausalML。
+  - estimate = model.`estimate_effect`(identified_estimand, method_name="backdoor.propensity_score_matching")
+- (4) **反驳**: 使用多个鲁棒性的检查方法来反驳得到的估计，验证估计到的因果效应的有效性。
+  - DoWhy提供的方法有：
+    - Placebo Treatment
+    - Irrelevant Additional Confounder
+    - Subset validation
+  - 函数：refute_results = model.`refute_estimate`(identified_estimand, estimate, method_name="random_common_cause")
+  - DoWhy强调其输出的**可解释性**。分析时，我们都可以检查未经检验的假设，已确定的估计值（如果有）和估计值（如果有）。
+  - DoWhy 支持多种**反驳**方法来验证估计的正确性，具体列表如下：
+    - 「添加**随机混杂因子**」：添加一个随机变量作为混杂因子后估计因果效应是否会改变（期望结果：不会）
+    - 「**安慰剂**干预」：将真实干预变量替换为独立随机变量后因果效应是否会改变（期望结果：因果效应归零）
+    - 「**虚拟**结果」：将真实结果变量替换为独立随机变量后因果效应是否会改变（期望结果：因果效应归零）
+    - 「**模拟**结果」：将数据集替换为基于接近给定数据集数据生成过程的方式模拟生成的数据集后因果效应是否会改变（期望结果：与数据生成过程的效应参数相匹配）
+    - 「添加**未观测**混杂因子」：添加一个额外的与干预和结果相关的混杂因子后因果效应的敏感性（期望结果：不过度敏感）
+    - 「数据子集验证」：将给定数据集替换为一个随机子集后因果效应是否会改变（期望结果：不会）
+    - 「自助验证」：将给定数据集替换为同一数据集的自助样本后因果效应是否会改变（期望结果：不会）
+
 DoWhy是根据两个指导原则创建的：明确要求因果假设，并测试对违反这些假设的估计的稳健性。换句话说，DoWhy将因果效应的识别与其相关性的估计分开，这使得能够推断出非常复杂的因果关系。
 - ![](https://img-blog.csdnimg.cn/img_convert/36044eb2132dc0c1a951bc4d50018a18.png)
 
@@ -1586,9 +1606,344 @@ DoWhy支持Python 3+，它需要以下包：
 
 - [Jupyter notebook示例](https://github.com/microsoft/dowhy/blob/master/docs/source/example_notebooks/dowhy_simple_example.ipynb)
 - ![](https://raw.githubusercontent.com/microsoft/dowhy/master/docs/images/dowhy-schematic.png)
-
 - [微软因果推理框架DoWhy入门](http://www.atyun.com/41349.html)
+
+
+安装
+
+```shell
+pip install dowhy
+# brew install graphviz
+pip install pygraphviz # 图可视化
+```
+
 - 代码示例
+- 因果图
+  - ![](https://pic4.zhimg.com/80/v2-dfa98f383e4a1ce81d1bfc88c7d38037_720w.jpg)
+-  
+
+```python
+import os, sys
+sys.path.append(os.path.abspath("../../../")) # 添加一个读取路径
+
+import numpy as np
+import pandas as pd
+
+import dowhy
+from dowhy import CausalModel
+import dowhy.datasets
+
+# ------- 数据准备 ---------
+# 模拟不同变量之间的「线性」关系
+data = dowhy.datasets.linear_dataset(beta=10, # beta 表示真实的因果效应
+        num_common_causes=5, # 混杂因子，用 W 表示，作用于干预变量和结果变量
+        num_instruments=2, # 工具变量，用 Z 表示，作用于干预变量（间接影响结果）
+        num_effect_modifiers=1, # 效果修改变量，用 X 表示，作用于结果变量
+        num_samples=10000, # 样本数量
+        treatment_is_binary=True, # 干预为二元变量，用 v 表示
+        num_discrete_common_causes=1)
+df = data["df"] # DoWhy 使用 pandas 的 dataframe 来载入数据
+print(df.head())
+print(data["dot_graph"]) # 还可以输出 gml_graph，内容一致只是表达形式不同
+
+# ------- 建模 ---------
+# 以 GML 图的形式构建因果图（「建模阶段」）
+# With graph
+model=CausalModel(
+        data = df,
+        treatment=data["treatment_name"],
+        outcome=data["outcome_name"],
+        graph=data["gml_graph"]
+        )
+# INFO:dowhy.causal_model:Model to find the causal effect of treatment ['v0'] on outcome ['y']
+model.view_model()
+from IPython.display import Image, display
+display(Image(filename="causal_model.png"))
+
+# Without graph 或者不带图
+model= CausalModel(
+        data=df,
+        treatment=data["treatment_name"],
+        outcome=data["outcome_name"],
+        instruments=data["instrument_names"], # 官网漏了这一行
+        common_causes=data["common_causes_names"],
+        effect_modifiers=data["effect_modifier_names"])
+# ------- 识别 ---------
+# 「识别阶段」可以脱离于数据，仅根据图进行识别，其给出的结果是一个用于计算的「表达式」。
+identified_estimand = model.identify_effect()
+print(identified_estimand)
+# 可以通过 proceed_when_unidentifiable=True 参数来忽略观察性数据中未观测混杂因子的 warning。
+
+# ------- 估计 ---------
+# 识别阶段得到的表达式将在「估计阶段」基于实际数据进行计算，注意这两个阶段是独立开来的
+estimate = model.estimate_effect(identified_estimand, method_name="backdoor.propensity_score_stratification")
+print(estimate)
+print("Causal Estimate is " + str(estimate.value))
+# 可以通过 target_units 参数来选择因果效应分析的群体，如 ate（群体层面）、att（干预组）、ate（对照组）。也可以指定结果修改变量来分析不同变量对结果的影响。
+
+# ------- 反驳 ---------
+# 添加一个随机的混杂因子变量
+res_random=model.refute_estimate(identified_estimand, estimate, method_name="random_common_cause")
+print(res_random)
+# Refute: Add a Random Common Cause
+# Estimated effect:9.124260741049653
+# New effect:9.13487620983324
+# 添加一个未观测的混杂因子变量
+res_unobserved=model.refute_estimate(identified_estimand, estimate, method_name="add_unobserved_common_cause",
+                                     confounders_effect_on_treatment="binary_flip", confounders_effect_on_outcome="linear",
+                                    effect_strength_on_treatment=0.01, effect_strength_on_outcome=0.02)
+print(res_unobserved)
+# Refute: Add an Unobserved Common Cause
+# Estimated effect:9.124260741049653
+# New effect:8.129085846396725
+
+# 用随机变量代替干预
+res_placebo=model.refute_estimate(identified_estimand, estimate, method_name="placebo_treatment_refuter", placebo_type="permute")
+print(res_placebo)
+# Refute: Use a Placebo Treatment
+# Estimated effect:9.124260741049653
+# New effect:-0.010832019791737903
+# p value:0.48
+# 移除数据的一个随机子集
+res_subset=model.refute_estimate(identified_estimand, estimate, method_name="data_subset_refuter", subset_fraction=0.9)
+print(res_subset)
+# Refute: Use a subset of data
+# Estimated effect:9.124260741049653
+# New effect:9.090515505813006
+# p value:0.37
+
+```
+
+酒店预订案例
+- 估计当消费者在预定酒店时，为其**分配与之前预定过的房间不同的房间**对消费者**取消当前预定**的影响。
+  - ![](https://pic4.zhimg.com/80/v2-efaad0728a0250f7c1d5b2052027a613_720w.jpg)
+- 分析此类问题的金标准是「**随机对照试验**」（Randomized Controlled Trials），即每位消费者被随机分配到两类干预中的一类：为其分配与之前预定过的房间相同或不同的房间。
+- 然而，实际上酒店其不可能进行这样的试验，只能使用历史数据（观察性数据）来进行评估。
+- 因果图
+  - ![](https://pic3.zhimg.com/80/v2-c90341ca18296b5f52685ae98f75f37a_720w.jpg)
+- 代码
+
+```python
+import dowhy
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import logging
+logging.getLogger("dowhy").setLevel(logging.INFO)
+
+dataset = pd.read_csv('https://raw.githubusercontent.com/Sid-darthvader/DoWhy-The-Causal-Story-Behind-Hotel-Booking-Cancellations/master/hotel_bookings.csv')
+dataset.columns # 参数说明
+# Index(['hotel', 'is_canceled', 'lead_time', 'arrival_date_year',
+#      'arrival_date_month', 'arrival_date_week_number',
+#      'arrival_date_day_of_month', 'stays_in_weekend_nights',
+#      'stays_in_week_nights', 'adults', 'children', 'babies', 'meal',
+#      'country', 'market_segment', 'distribution_channel',
+#      'is_repeated_guest', 'previous_cancellations',
+#      'previous_bookings_not_canceled', 'reserved_room_type',
+#      'assigned_room_type', 'booking_changes', 'deposit_type', 'agent',
+#      'company', 'days_in_waiting_list', 'customer_type', 'adr',
+#      'required_car_parking_spaces', 'total_of_special_requests',
+#      'reservation_status', 'reservation_status_date'],
+#     dtype='object')
+
+# 数据预处理，减少原始数据的维度。具体来说，我们将创建如下三个特征：
+# 「Total Stay」 = stays_in_weekend_nights + stays_in_week_nights
+# 「Guests」 = adults + children + babies
+# 「Different_room_assigned」 = 1 if reserved_room_type & assigned_room_type are different, 0 otherwise
+# Total stay in nights
+dataset['total_stay'] = dataset['stays_in_week_nights']+dataset['stays_in_weekend_nights']
+# Total number of guests
+dataset['guests'] = dataset['adults']+dataset['children'] +dataset['babies']
+# Creating the different_room_assigned feature
+dataset['different_room_assigned']=0
+slice_indices =dataset['reserved_room_type']!=dataset['assigned_room_type']
+dataset.loc[slice_indices,'different_room_assigned']=1
+# Deleting older features
+dataset = dataset.drop(['stays_in_week_nights','stays_in_weekend_nights','adults','children','babies'
+                        ,'reserved_room_type','assigned_room_type'],axis=1)
+# 对缺失值与布尔值进行预处理，并去除部分特征
+dataset.isnull().sum() # Country,Agent,Company contain 488,16340,112593 missing entries
+dataset = dataset.drop(['agent','company'],axis=1)
+# Replacing missing countries with most freqently occuring countries
+dataset['country']= dataset['country'].fillna(dataset['country'].mode()[0])
+
+dataset = dataset.drop(['reservation_status','reservation_status_date','arrival_date_day_of_month'],axis=1)
+dataset = dataset.drop(['arrival_date_year'],axis=1)
+
+# Replacing 1 by True and 0 by False for the experiment and outcome variables
+dataset['different_room_assigned']= dataset['different_room_assigned'].replace(1,True)
+dataset['different_room_assigned']= dataset['different_room_assigned'].replace(0,False)
+dataset['is_canceled']= dataset['is_canceled'].replace(1,True)
+dataset['is_canceled']= dataset['is_canceled'].replace(0,False)
+dataset.dropna(inplace=True) # 新增对NA值的处理
+dataset.columns
+# Index(['hotel', 'is_canceled', 'lead_time', 'arrival_date_month',
+#        'arrival_date_week_number', 'meal', 'country', 'market_segment',
+#        'distribution_channel', 'is_repeated_guest', 'previous_cancellations',
+#        'previous_bookings_not_canceled', 'booking_changes', 'deposit_type',
+#        'days_in_waiting_list', 'customer_type', 'adr',
+#        'required_car_parking_spaces', 'total_of_special_requests',
+#        'total_stay', 'guests', 'different_room_assigned'],
+#       dtype='object')
+# -------- 提取假设 -------
+# 针对目标变量 is_cancelled 与 different_room_assigned ，随机选取 1000 次观测查看有多少次上述两个变量的值相同（即可能存在因果关系），重复上述过程 10000 次取平均
+counts_sum=0
+for i in range(1,10000):
+    counts_i = 0
+
+    # （1）期望频数是 「518」，即两个变量有约 50% 的时间是不同的，目前还无法判断其中的因果关系。
+    rdf = dataset.sample(1000)
+    counts_i = rdf[rdf["is_canceled"]== rdf["different_room_assigned"]].shape[0]
+    # （2）分析预约过程中没有发生调整时（即变量booking_changes=0）两个变量相等的期望频数，结果为 「492」
+    rdf = dataset[dataset["booking_changes"]==0].sample(1000)
+    counts_i = rdf[rdf["is_canceled"]== rdf["different_room_assigned"]].shape[0]
+    # （3）再分析预约过程中发生调整时的期望频数，结果变成了 「663」，与之前产生了明显的差异，663 ≠ 492
+    rdf = dataset[dataset["booking_changes"]>0].sample(1000)
+    counts_i = rdf[rdf["is_canceled"]== rdf["different_room_assigned"]].shape[0]
+  
+    counts_sum+= counts_i
+counts_sum/10000
+# 可以不严谨地认为预约调整这一变量是一个「混杂因子」。类似地，我们对其他变量进行分析，并作出一些假设，作为因果推断的先验知识。DoWhy 并不需要完整的先验知识，未指明的变量将作为潜在的混杂因子进行推断。在本例中，我们将给出如下的假设：
+# - market_segment 参数有两种取值：TA 指旅行者，TO 指旅游公司，该参数会影响 lead_time（即预约和到达之间的时间间隔）
+# - country 参数会决定一个人是否会提早预订（即影响 lead_time ）以及其喜爱的食物（即影响 meal ）
+# - lead_time 会影响预订的等待时间（ days_in_waiting_list ）
+# - 预订的等待时间 days_in_waiting_list、总停留时间 total_stay 以及客人数量 guests 会影响预订是否被取消
+# - 之前预订的取消情况 previous_bookings_not_canceled 会影响该顾客是否为 is_repeated_guest；这两个变量也会影响预订是否被取消
+# - booking_changes 会影响顾客是否被分配到不同的房间，也会影响预订取消情况
+# - 除了 booking_changes 这一混杂因子外，一定还存在着其他混杂因子，同时影响干预和结果
+
+# -------- 创建因果图 -----------
+import pygraphviz
+causal_graph = """digraph {
+different_room_assigned[label="Different Room Assigned"];
+is_canceled[label="Booking Cancelled"];
+booking_changes[label="Booking Changes"];
+previous_bookings_not_canceled[label="Previous Booking Retentions"];
+days_in_waiting_list[label="Days in Waitlist"];
+lead_time[label="Lead Time"];
+market_segment[label="Market Segment"];
+country[label="Country"];
+U[label="Unobserved Confounders"];
+is_repeated_guest;
+total_stay;
+guests;
+meal;
+market_segment -> lead_time;
+lead_time->is_canceled; country -> lead_time;
+different_room_assigned -> is_canceled;
+U -> different_room_assigned; U -> lead_time; U -> is_canceled;
+country->meal;
+lead_time -> days_in_waiting_list;
+days_in_waiting_list ->is_canceled;
+previous_bookings_not_canceled -> is_canceled;
+previous_bookings_not_canceled -> is_repeated_guest;
+is_repeated_guest -> is_canceled;
+total_stay -> is_canceled;
+guests -> is_canceled;
+booking_changes -> different_room_assigned; booking_changes -> is_canceled;
+}"""
+# 构建因果模型
+model= dowhy.CausalModel(
+        data = dataset,
+        graph=causal_graph.replace("\n", " "),
+        treatment='different_room_assigned',
+        outcome='is_canceled')
+model.view_model()
+from IPython.display import Image, display
+display(Image(filename="causal_model.png"))
+
+# ------- 识别因果效应 -------
+# 称「干预」（Treatment）导致了「结果」（Outcome）当且仅当在其他所有状况不变的情况下，干预的改变引起了结果的改变。因果效应即干预发生一个单位的改变时，结果变化的程度。
+#Identify the causal effect
+identified_estimand = model.identify_effect()
+print(identified_estimand)
+
+# -------- 估计因果效应 ---------
+# 因果效应即干预进行单位改变时结果的变化程度。DoWhy 支持采用各种各样的方法计算因果效应估计量，并最终返回单个平均值。
+estimate = model.estimate_effect(identified_estimand,
+                                 method_name="backdoor.propensity_score_stratification",target_units="ate")
+# ATE = Average Treatment Effect
+# ATT = Average Treatment Effect on Treated (i.e. those who were assigned a different room)
+# ATC = Average Treatment Effect on Control (i.e. those who were not assigned a different room)
+# 选择估计平均干预效应（ATE），也可以选择估计干预组（ATT）或对照组（ATC）的因果效应。估计方法选择的是「倾向得分匹配」
+print(estimate)
+# ---------- 反驳结果  ---------
+# 上述因果并不是基于数据，而是基于所做的假设（即提供的因果图），数据只是用于进行统计学的估计。因此，需要验证假设的正确性。
+# DoWhy 支持通过各种各样的鲁棒性检查方法来测试假设的正确性。
+「添加随机混杂因子」。如果假设正确，则添加随机的混杂因子后，因果效应不会变化太多。
+refute1_results=model.refute_estimate(identified_estimand, estimate, method_name="random_common_cause")
+print(refute1_results)
+# Refute: Add a Random Common Cause
+# Estimated effect:-0.3359905635051836
+# New effect:-0.3365742386420179 # 基本保持稳定
+# 「安慰剂干预」。将干预替换为随机变量，如果假设正确，因果效应应该接近 0。
+refute2_results=model.refute_estimate(identified_estimand, estimate, method_name="placebo_treatment_refuter")
+print(refute2_results)
+# Refute: Use a Placebo Treatment
+# Estimated effect:-0.3359905635051836
+# New effect:-0.00028277666065981027 # 因果效应归零
+# p value:0.43999999999999995
+# p value 对比的是新的估计量与 0 之间的显著性差异（如果假设正确，则预期为无差异）
+
+#「数据子集验证」。在数据子集上估计因果效应，如果假设正确，因果效应应该变化不大。
+refute3_results=model.refute_estimate(identified_estimand, estimate, method_name="data_subset_refuter")
+print(refute3_results)
+# Refute: Use a subset of data
+# Estimated effect:-0.3359905635051836
+# New effect:-0.33647521997465524
+# p value:0.35
+
+# 因果模型基本可以通过上述几个测试（即取得预期的结果）。因此，根据估计阶段的结果，我们得出结论：当消费者在预定房间时，为其分配之前预定过的房间（ different_room_assigned = 0 ）所导致的平均预定取消概率（ is_canceled ）要比为其分配不同的房间（ different_room_assigned = 1 ）低 「33%」。
+```
+
+根据估计阶段的结果，我们得出结论：
+- 当消费者在预定房间时，为其分配之前预定过的房间（ different_room_assigned = 0 ）所导致的平均预定取消概率（ is_canceled ）要比为其分配不同的房间（ different_room_assigned = 1 ）低 「33%」
+- 用一个预测模型对数据进行训练，并分析不同特征的特征重要性。这里选择 XGBoost 作为预测模型
+
+```python
+# plot feature importance using built-in function
+from xgboost import XGBClassifier
+from xgboost import plot_importance
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, classification_report
+from matplotlib import pyplot
+# split data into X and y
+X = dataset_copy # 这里使用的是copy，请自行复制（处理完后的数据）
+y = dataset_copy['is_canceled']
+X = X.drop(['is_canceled'],axis=1)
+# One-Hot Encode the dataset
+X = pd.get_dummies(X)
+# split data into train and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=26)
+# fit model no training data
+model = XGBClassifier()
+model.fit(X_train, y_train)
+# make predictions for test data and evaluate
+y_pred = model.predict(X_test)
+predictions = [int(value) for value in y_pred] # 注意这里之前用的是round，会报错
+accuracy = accuracy_score(y_test, predictions)
+print("Accuracy: %.2f%%" % (accuracy * 100.0))
+print(classification_report(y_test, predictions))
+
+# Accuracy: 86.40%
+#               precision    recall  f1-score   support
+# 
+#        False       0.88      0.92      0.90     15001
+#         True       0.85      0.79      0.82      8877
+# 
+#     accuracy                           0.87     23878
+#    macro avg       0.86      0.85      0.86     23878
+# weighted avg       0.867     0.87      0.87     23878
+
+# plot feature importance
+# 特征重要性排行（这里权重值为特征在树中出现的次数）
+plot_importance(model,max_num_features=20)
+pyplot.show()
+```
+
+different_room_assigned 变量的特征权重并不是非常高，这与我们的因果推断结果有一定的差异性，这也体现了因果推断模型和传统机器学习模型在原理上的差异性，
+
+
 
 ```python
 import numpy as np
@@ -1617,16 +1972,13 @@ display(Image(filename="causal_model.png"))
 
 # 确定图标中的因果关系
 identified_estimand = model.identify_effect()
-
 # 估计因果关系
 estimate = model.estimate_effect(identified_estimand,
 method_name="backdoor.linear_regression")
 # Plot Slope of line between treamtent and outcome =causal effect
 dowhy.plotter.plot_causal_effect(estimate, df[data_dict["treatment_name"]], df[data_dict["outcome_name"]])
-
 # 反驳因果估计
 res_random=model.refute_estimate(identified_estimand, estimate, method_name="random_common_cause")
-
 ```
 
 - 结果
@@ -1708,29 +2060,18 @@ res_random=model.refute_estimate(identified_estimand, estimate, method_name="ran
 ![](http://p5.itc.cn/q_70/images03/20201023/76d7cd05ee374688a3d1510e467888d6.jpeg)
  
 - （1）相关性比因果性更缺乏 **可解释性**（Explainability）。这张图中，黑线是肯塔基州的结婚率，而红线是渔船事故死亡人数，两者具有很高的相关性，但两者之间却没有任何因果关系。我们在使用数据的时候就需要知道，这里的相关性是不可靠的、不可解释的。
- 
-![](http://p6.itc.cn/q_70/images03/20201023/00c9e83da59c454f85593c3522b22e88.jpeg)
- 
+- ![](http://p6.itc.cn/q_70/images03/20201023/00c9e83da59c454f85593c3522b22e88.jpeg)
 另外一个例子是太阳镜与冰淇淋的销售量之间的关系，两者之间呈现着明显的正相关性。但如果我们直接关闭太阳镜商店，进行干预，会影响冰淇淋的销量吗？并不会。因为两者之间的虚假相关性是由天气引发的，在太阳炎热时两者的消费量都会提升，强制干预其中一个的销量并不会直接影响另一个。
- 
-![](http://p5.itc.cn/q_70/images03/20201023/fe9e991d7ddb4707aa503a1adeb609f4.jpeg)
- 
+- ![](http://p5.itc.cn/q_70/images03/20201023/fe9e991d7ddb4707aa503a1adeb609f4.jpeg)
 - （2）相关性比因果性更缺乏 **稳定性**（Stability）。比如我们训练模型去识别图片中的狗，但数据集中90%的狗都是在草地上的，那么在这个数据集中草地与狗就十分相关。那么如果我们利用传统机器学习的方法，无论是逻辑斯蒂回归还是深度模型，大概率会把草地识别为重要的特征。但如果测试数据集中的狗是在沙滩上或者水中，模型就有很大概率会失败。
  
 传统机器学习使基于关联驱动的，对于未知的测试数据集很难达到稳定预测。传统机器学习在关联挖掘中会发现一些非因果特征，比如草地背景与标签的关系，并利用这种强的**虚假相关**（Spurious Correlation）进行预测。如果我们能够发现特征与标签之间的因果关系，比如我们人类在识别狗的时候就会去关注够的鼻子、眼睛和耳朵这些因果特征，那么无论狗是在什么背景下，我们都可以正确识别。
- 
-![](http://p6.itc.cn/q_70/images03/20201023/9d14e6e0cad6495db4e8b5a17f5e534d.jpeg)
- 
+- ![](http://p6.itc.cn/q_70/images03/20201023/9d14e6e0cad6495db4e8b5a17f5e534d.jpeg)
 - （3）第三个区别是 **可行动性**（Actionability）。比如某个电商在推广某个商品时，需要从两个广告推荐算法中进行选择，看哪个算法能带来的收益更大。
- 
 如图所示，前期的试验发现，新算法B比旧算法 A 的总体成功率更高。但如果将用户按收入分为两层，却会发现算法A在低收入人群和高收入人群中的效果反而都优于 B 。两个算法的试验对象中，收入分布的差别很大，如果不进行控制，就会产生错误的结果。而除了收入之外，可能还需要考虑地域、年龄等多个变量，否则就会产生算法与成功率之间的虚假相关。
- 
 这些虚假相关是由混淆变量产生的**混杂偏倚**（Confounding Bias）。这种决策问题实际上是反事实问题，而不是预测问题。
- 
-![](http://p2.itc.cn/q_70/images03/20201023/953de93e7051456094019c8ee6edb2ac.jpeg)
- 
+- ![](http://p2.itc.cn/q_70/images03/20201023/953de93e7051456094019c8ee6edb2ac.jpeg)
 - （4）第四个区别是 **公平性**（Fairness）。Google曾开发了根据人像判断犯罪率的软件，输入为黑人时犯罪率就会比白人更高。而肤色与犯罪率之间不应该存在因果关系，这就出现了公平性的问题。实际上如图所示，真正起决定性作用的变量是“收入”，黑人的收入普遍偏低，而低收入人群的犯罪率较高，因此肤色和犯罪率之间出现了虚假相关。
- 
 而通过因果评估的框架，我们可以利用**Do-演算**（Do-Calculus）等工具，干预收入的多少，来计算肤色与犯罪率之间真正的因果效应大小。实际上，收入和犯罪率才是强因果相关的，而肤色和犯罪率之间因果效应可以弱到忽略不计。
  
 ### 1.3 相关性的三种来源
@@ -1749,25 +2090,23 @@ res_random=model.refute_estimate(identified_estimand, estimate, method_name="ran
  
 ### 1.4 符号定义
  
-![](http://p8.itc.cn/q_70/images03/20201023/34285df4a17040638815b0ca971c038d.jpeg)
+- ![](http://p8.itc.cn/q_70/images03/20201023/34285df4a17040638815b0ca971c038d.jpeg)
  
 这里给出关于因果的一个比较实际的定义：变量 T 的变量 Y 的原因，变量 Y 是变量 T 的结果，当且仅当在控制其他所有变量不变时，改变 T 会引发 Y 的变化。而**因果效应**（Causal Effect）就是改变变量 T 一个单位时，变量 Y 发生改变的大小。这里的两个重点是：一、只修改 T 的值，二、保持其他变量不变。
- 
-![](http://p2.itc.cn/q_70/images03/20201023/08e7a1c467eb4cc58ded3d1ea80e7afa.jpeg)
+- ![](http://p2.itc.cn/q_70/images03/20201023/08e7a1c467eb4cc58ded3d1ea80e7afa.jpeg)
  
 这里给出**因果效应评估**（Causal Effect Estimation）的数学形式。以评估药物的因果效应为例，**干预变量**（Treatment Variable）T 的值为1时代表吃了药，0代表没吃药，而这对应了两者不同的潜在结果。**平均因果效应**（Average Causal Effect, ATE）就是吃药的潜在结果与不吃药的潜在结果在所有病人上的差值平均值。**个体因果效应**（Individual Causal Effect, ICE）就是吃药的潜在结果与不吃药的潜在结果在某个病人上的差值。
  
 这里还涉及反事实的问题：对于某个病人，我们只能观测到他吃药或不吃药其中一种情况的结果，想要探究未发生的另一种情况的结果，就需要假象存在一个平行世界，这个世界里病人做出了与之前不同的选择，除此之外都保持完全一致，对比两个世界的结果进行求解。
  
 在实际应用中，**随机化实验**（Randomized Experiments）是因果效应评估的金标准。比如在疫苗研发中，就需要做双盲实验和单盲实验以评估因果效应。在足够大的实验人群中，通过完全随机的方法使其中一半人接种疫苗，这样就排除了其他变量的影响，求得平均因果效应。这种方法在政策评估、健康医疗和市场营销等多个领域都有重要应用，但这种方法的花销巨大，且可能涉及伦理道德问题。那么我们可否在巨量的历史观测数据中进行挖掘，评估出因果效应呢？
- 
-![](http://p5.itc.cn/q_70/images03/20201023/374bcf917b9840078a24aa2eaf5965da.jpeg)
+- ![](http://p5.itc.cn/q_70/images03/20201023/374bcf917b9840078a24aa2eaf5965da.jpeg)
  
 比如在一个数据集中，有吃药和未吃药的两群人。如果在数据收集时是使用单盲或双盲实验，那么就可以直接去计算平均因果效应。但如果没有保证分配药物的随机性，就可能会有体质、性别、年龄等混杂因子 X 使结果产生偏倚。因果推理的本质就是去控制吃药和不吃药的两群人之间其他特征的分布。
  
 ## 2. 因果效应评估的方法
  
-![](http://p3.itc.cn/q_70/images03/20201023/195419e9e0924f50a50262743032e074.jpeg)
+- ![](http://p3.itc.cn/q_70/images03/20201023/195419e9e0924f50a50262743032e074.jpeg)
  
 现在我们考虑干预变量为二值的情况，要去平衡其他变量的分布，再做因果效应评估。在这里介绍三种方法：Matching、Propensity Score Based Methods 和 Directly Confounder Balancing。
  
@@ -1795,22 +2134,17 @@ Matching 的问题就是如何去评估两个个体的相似度，并需要设�
 ![](http://p3.itc.cn/q_70/images03/20201023/82377c908ed14366a41456128b0e8850.jpeg)
  
 倾向指数在实际应用中是观测不到的，但可以使用有监督学习的方法进行估计。根据估计到的倾向指数，第一种方法就是去做 Matching，这样能解决在高维数据中难以找到相似样本的问题。
- 
-![](http://p8.itc.cn/q_70/images03/20201023/c12e3f6f4c204a2d93717faad04249f8.jpeg)
- 
-![](http://p0.itc.cn/q_70/images03/20201023/bfd5bac5adce4f7798f8ecdc4eb355a3.jpeg)
- 
-![](http://p7.itc.cn/q_70/images03/20201023/a58e43d94704412cb0a9bc4600e9ebf3.jpeg)
+- ![](http://p8.itc.cn/q_70/images03/20201023/c12e3f6f4c204a2d93717faad04249f8.jpeg)
+- ![](http://p0.itc.cn/q_70/images03/20201023/bfd5bac5adce4f7798f8ecdc4eb355a3.jpeg)
+- ![](http://p7.itc.cn/q_70/images03/20201023/a58e43d94704412cb0a9bc4600e9ebf3.jpeg)
  
 第二种是使用 Inverse of Propensity Weighting 方法，对于干预变量为1的样本使用倾向指数的倒数进行加权，而对于为0的样本使用（1-倾向指数）的倒数进行加权，两类样本的加权平均值之差就是平均因果效应的大小。这里有一个假设，就是估计出的倾向指数与真实的倾向指数是相等的。
  
 因此这个方法有两个弱点，一是需要对倾向指数的估计足够精确；二是如果倾向指数过于趋近0或1，就会导致某些权重的值过高，使估计出的平均因果效应的方差过大。
- 
-![](http://p5.itc.cn/q_70/images03/20201023/7dd746d458784ac1b14a7e70cb39e204.jpeg)
+- ![](http://p5.itc.cn/q_70/images03/20201023/7dd746d458784ac1b14a7e70cb39e204.jpeg)
  
 第三种方法叫 Doubly Robust。这个方法需要根据已有数据，再学习一个预测的模型，反事实评估某个个体在干预变量变化后，结果变量的期望值。只要倾向指数的估计模型和反事实预测模型中有一个是对的，计算出的平均因果效应就是无偏的；但如果两个模型估计都是错误的，那产生的误差可能会非常大。
- 
-![](http://p8.itc.cn/q_70/images03/20201023/f381c9a03e8d4e61bd8dbfc82d5a18d4.jpeg)
+- ![](http://p8.itc.cn/q_70/images03/20201023/f381c9a03e8d4e61bd8dbfc82d5a18d4.jpeg)
  
 以上的这三种基于倾向指数的方法比较粗暴，把干预变量和结果变量之外的所有变量都当作混淆变量。而在高维数据中，我们需要精准地找出那些真正需要控制的混淆变量。我们提出了一种数据驱动的变量分解算法（D²VD），将干预变量和结果变量之外的其他变量分为了三类：
 1. **混淆**变量（Confounders）：既会影响到干预变量，还会影响到结果变量
@@ -1818,48 +2152,39 @@ Matching 的问题就是如何去评估两个个体的相似度，并需要设�
 3. **无关**变量：不会直接影响到干预变量与结果变量
  
 进行分类之后，就可以只用混淆变量集去估计倾向指数。而调整变量集会被视为对结果变量的噪声，进行消减。最后使用经过调整的结果，去估计平均因果效应。我们从理论上证明了，使用这种方法可以得到无偏的平均因果效应估计，而且估计结果的方差不会大于 Inverse of Propensity Weighting 方法。
- 
-![](http://p2.itc.cn/q_70/images03/20201023/7b32806ae2754a14920f5df48350fb73.jpeg)
+- ![](http://p2.itc.cn/q_70/images03/20201023/7b32806ae2754a14920f5df48350fb73.jpeg)
  
 我的学生又拓展了我的工作，与表征学习相结合，提出了 Decomposed Representation。其中增加了一类变量：
 
 4. 工具变量：与结果变量独立，但会影响到干预变量
  
 通过实验发现，与传统方法相比，此方法可以很准确地把变量分离出来，提高平均因果效应的准确性。
- 
-![](http://p9.itc.cn/q_70/images03/20201023/5e0c1611b9fb4402a6e60f913eb404eb.jpeg)
+- ![](http://p9.itc.cn/q_70/images03/20201023/5e0c1611b9fb4402a6e60f913eb404eb.jpeg)
  
 ### 2.3 Directly Confounder Balancing
  
 总的来说，基于倾向指数的方法还是需要估计倾向指数的模型是准确的。既然倾向指数就是用于计算权重的，我们可不可以直接去估计权重呢？
  
 第三类方法就是 Directly Confounder Balancing，直接对样本权重进行学习。这类方法的动机就是去控制在干预变量下其他特征变量的分布。而一个变量的所有阶的矩（moment）可以唯一确定它的分布，所以只需要去控制它所有阶的矩（比如一阶矩就是均值，二阶矩就是方差）就可了。在实验中我们发现，只考虑一阶矩就可以达到很好的效果，因此这里先不考虑二阶及以上的矩。通过这个手段就可以直接学习样本权重，进行平均因果效应估计了。
- 
-![](http://p2.itc.cn/q_70/images03/20201023/90f132e406c444ed92a047c1fd171284.jpeg)
+- ![](http://p2.itc.cn/q_70/images03/20201023/90f132e406c444ed92a047c1fd171284.jpeg)
  
 这个概念首先出现于 Entrophy Balancing 方法之中，通过学习样本权重，使特征变量的分布在一阶矩上一致，同时还约束了权重的熵（Entropy）。但这个方法的问题也是将所有变量都同等对待了，把过多变量考虑为混杂变量。
- 
-![](http://p0.itc.cn/q_70/images03/20201023/fe2f9012ce0148f6af689919f650ed96.jpeg)
+- ![](http://p0.itc.cn/q_70/images03/20201023/fe2f9012ce0148f6af689919f650ed96.jpeg)
  
 第二种方法叫 Approximate Residual Balancing。第一步也是通过计算样本权重使得一阶矩一致，第二步与 Doubly Robust 的思想一致，加入了回归模型，并在第三步结合了前两步的结果估计平均因果效应。只要样本权重的估计和反事实预测模型中有一个是对的，计算出的平均因果效应就是无偏的。但这里也是将所有变量都同等对待了。
- 
-![](http://p7.itc.cn/q_70/images03/20201023/daec4a16db754c18bd8603f0e7c0e890.jpeg)
- 
-![](http://p9.itc.cn/q_70/images03/20201023/c845c7c6a91a43a085a0a1c02fe0ee4f.jpeg)
+- ![](http://p7.itc.cn/q_70/images03/20201023/daec4a16db754c18bd8603f0e7c0e890.jpeg)
+- ![](http://p9.itc.cn/q_70/images03/20201023/c845c7c6a91a43a085a0a1c02fe0ee4f.jpeg)
  
 我们提出的方法叫做混淆变量区分性平衡（Differentiated Confounder Balancing, DCB），考虑到的就是不同的特征变量对于平均因果效应的影响是不同的。我们在传统方法上加入了混淆变量权重（Confounder Weights）β：当β为0时，代表所对应的变量不是混淆变量，对因果效应不会带来影响；当β较大时，说明此变量对因果效应的影响较大。其中的β正好是从干预变量的增广到结果变量的回归系数。通过一系列实验发现，我们的方法在高维数据下对平均因果效应的估计偏差几乎为0，优于其他方法。
- 
-![](http://p2.itc.cn/q_70/images03/20201023/7eed17426c9648248047a6756bd743c0.jpeg)
+- ![](http://p2.itc.cn/q_70/images03/20201023/7eed17426c9648248047a6756bd743c0.jpeg)
  
 ### 2.4 Generative Adversial De-confounding
  
 上述的所有方法中，干预变量都是二值的，那如何去处理多值的或者连续的干预变量呢？我们今年的一个工作 Generative Adversial De-confounding 就尝试估计这类复杂情况下干预变量与结果变量之间的因果效应。这里的核心思想就是如何保证干预变量与其他特征变量的分布相独立。我们利用了 GAN 的思想，去凭空构造出另一个干预变量与其他特征变量相独立的分布。
- 
-![](http://p2.itc.cn/q_70/images03/20201023/295cfe1f99ff47348fb5e610c61f1881.jpeg)
+- ![](http://p2.itc.cn/q_70/images03/20201023/295cfe1f99ff47348fb5e610c61f1881.jpeg)
  
 我们使用了随机打乱（Random Shuffle）的方法，只打乱干预变量，这样就可以使干预变量与其他特征变量相独，并保留了两者的分布。我们再使用样本权重估计的方法，使原来数据集的加权分布结果与构造出的分布相一致。在实验中，可以发现我们的方法成功降低了干预变量与其他特征变量的相关性，并有效提高了因果效应评估的准确性。
- 
-![](http://p1.itc.cn/q_70/images03/20201023/368e1e83dd6e4f75ada8add246a19404.jpeg)
+- ![](http://p1.itc.cn/q_70/images03/20201023/368e1e83dd6e4f75ada8add246a19404.jpeg)
 
 
 # 因果科学实践
