@@ -416,6 +416,17 @@ beale函数
 
 # 算法类型
 
+
+## 优化算法总结
+
+【2022-1-12】
+- [An overview of gradient descent optimization algorithms](http://ruder.io/optimizing-gradient-descent/)
+- [How to Escape Saddle Points Efficiently](http://www.offconvex.org/2017/07/19/saddle-efficiency/)
+- [SGD算法比较](https://blog.slinuxer.com/2016/09/sgd-comparison)，[代码](https://github.com/SwordYork/simplified-deeplearning/tree/master/sgd-comparison)
+- 如下图，注意：v是动量部分，g是梯度部分
+- ![](https://raw.githubusercontent.com/SwordYork/simplified-deeplearning/master/sgd-comparison/figures/relation.png) ![](http://ruder.io/content/images/2016/09/contours_evaluation_optimizers.gif) ![](http://ruder.io/content/images/2016/09/saddle_point_evaluation_optimizers.gif)
+
+
 ## 梯度下降 GD
 
 【2021-11-9】[梯度下降方法的视觉解释](https://www.toutiao.com/i6836422484028293640/)（动量，AdaGrad，RMSProp，Adam），原文：[A Visual Explanation of Gradient Descent Methods (Momentum, AdaGrad, RMSProp, Adam](https://towardsdatascience.com/a-visual-explanation-of-gradient-descent-methods-momentum-adagrad-rmsprop-adam-f898b102325c)
