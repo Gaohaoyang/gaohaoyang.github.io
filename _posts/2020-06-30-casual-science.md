@@ -1058,8 +1058,7 @@ H(p) = −p log(p)−(1−p) log(1−p)，香农熵。
 可是在实际生活中，我们无法获得完美的信息：
 1.  无法同时知晓 ![[公式]](https://www.zhihu.com/equation?tex=Y_c%28u%29) 与 ![[公式]](https://www.zhihu.com/equation?tex=Y_t%28u%29) 。由于每个人都是独一无二的，每个时间节点也是独一无二的，所以在受到了一种介入，并表现出新状态之后，这个系统不可能完美恢复到原来的状态，重新接受另一种介入。这种情况被称为「因果推断的根本问题」（the Fundamental Problem of Causal Inference，以下简称FPCI）。
 2.  无法同时知晓每个个体的情况。正如在检测手机在极端条件下的质量时，我们不可能去砸坏每一个手机一样，我们只能随机从群体中抽取样本，再利用样本的统计数据推断群体参数。
-    
- 
+
 「无法同时知晓每个个体」的问题，已经有常规的统计学手段解决。但为了避免FPCI，我们必须对群体参数的分布做出额外的假设，包括但不限于以下的一种或多种：
 1.  **个体处理效应稳定**假设（Stable unit treatment value assumption，简称SUTVA）：对于任意个体 ![[公式]](https://www.zhihu.com/equation?tex=u_1) 的干预不会影响到另一个任意个体 ![[公式]](https://www.zhihu.com/equation?tex=u_2) 的状态。SUTVA使我们可以把样本中每个个体的反应看作独立事件，从而降低了我们需要的样本体积、模型体积和建模时间。
 2.  **同效果**假设（assumption of constant effect）：对于所有的个体，某种介入方式造成的效果是相同的。例如，某个降压药对所有人的效果都是降低血压，不会产生增高血压的情况——即使有，也只不过是统计的噪声，可以用大样本、大数定理和中心极限定理消解。于是，我们可以得到 ![[公式]](https://www.zhihu.com/equation?tex=%5Chat%7B%5Cdelta%7D%28u%29%3D%5Cbar%7BY_t%7D%28u%29-%5Cbar%7BY_c%7D%28u%29) ，用样本内的平均效果估算这一介入方法对所有个体的因果效果。
@@ -1074,8 +1073,7 @@ H(p) = −p log(p)−(1−p) log(1−p)，香农熵。
 2.4. 贝叶斯网络
  
 贝叶斯网络是一种基于有向无环图（directed acyclic graph，简称DAG）的概率图模型。虽然贝叶斯网络并不能直接表示因果，只能表示相关，但是它的图结构是SCM的基础。
- 
-![](https://pic3.zhimg.com/80/v2-d9b0f455833ccf4bbf4c94feaca40196_1440w.jpg)
+- ![](https://pic3.zhimg.com/80/v2-d9b0f455833ccf4bbf4c94feaca40196_1440w.jpg)
  
 贝叶斯网络示例
  
@@ -1090,7 +1088,6 @@ H(p) = −p log(p)−(1−p) log(1−p)，香农熵。
 ![](https://pic2.zhimg.com/80/v2-92fbac23e221826585c55d4bddb09255_1440w.jpg)
  
 如图所示，对于一个贝叶斯网络中的三个节点/变量而言，一共有三种基本的结构。两种不同的条件独立假设。用 ![[公式]](https://www.zhihu.com/equation?tex=X+%5Cperp+Y)表示X与Y之间独立：
- 
 1.  cascade: ![[公式]](https://www.zhihu.com/equation?tex=A+%5Crightarrow+B+%5Crightarrow+C) ，则必有 ![[公式]](https://www.zhihu.com/equation?tex=%28A%5Cperp+C%29%7CB) 以及 ![[公式]](https://www.zhihu.com/equation?tex=A+%5Cnot%5Cperp+C) 。
 2.  common parent: ![[公式]](https://www.zhihu.com/equation?tex=A+%5Cleftarrow+B+%5Crightarrow+C)，同样有 ![[公式]](https://www.zhihu.com/equation?tex=%28A%5Cperp+C%29%7CB) 以及 ![[公式]](https://www.zhihu.com/equation?tex=A+%5Cnot%5Cperp+C) 。
 3.  V-structure: ![[公式]](https://www.zhihu.com/equation?tex=A+%5Crightarrow+B+%5Cleftarrow+C) ，必有 ![[公式]](https://www.zhihu.com/equation?tex=A+%5Cperp+C) 与 ![[公式]](https://www.zhihu.com/equation?tex=%28A+%5Cnot%5Cperp+C%29+%7C+B) ，与前两种基本结构的条件独立情况不同。
@@ -1104,15 +1101,13 @@ H(p) = −p log(p)−(1−p) log(1−p)，香农熵。
 2.  X→Y→Z且Y∉O
 3.  X←Y→Z且Y∉O
 4.  X→Y←Z且Y∈O。这种情况被称为伯克森悖论（Berkson's Paradox）：当两个独立事件的共同结果被观察到时，这两个独立事件就不再相互独立了。例如，扔两个硬币，硬币A朝上的面和硬币B朝上的面之间，应该是相互独立的；然而，如果我们已知「有一个硬币正面朝上」，那么A与B朝上的面之间就不再相互独立了。
-    
  
 相应地，如果给定O之后，一条路径P不是一条有效路径，那么我们称O节点集合 d分隔 了路径P。d分隔的概念适用于两个节点，也适用于两个节点之间的路径，后者在「后门准则」的定义中非常有用。
  
 如果两个变量没有被d分隔，那么它们之间的状态被称为d联结（d-connection）。
  
 d分隔能极大简化贝叶斯网络中 ![[公式]](https://www.zhihu.com/equation?tex=%28X%5Cperp+Y+%29%7C+Z) 等条件独立情况的判定。Pearl将其进一步泛化，提出了拟图（graphoid）的概念。一个graphoid是一组形如「已知变量Z，则变量X与变量Y相互独立」的陈述，服从以下五条拟图公理：
- 
-![](https://pic3.zhimg.com/80/v2-220c102184781b71c753f20ea7e824da_1440w.jpg)
+- ![](https://pic3.zhimg.com/80/v2-220c102184781b71c753f20ea7e824da_1440w.jpg)
  
 关于graphoid中文翻译的备注：graphoid尚无权威的中文翻译，而且在互联网上几乎没有任何相关的中文材料。我在选择译名时，参考了matroid的翻译。既然matrix是矩阵，而matroid是拟阵，那么graph是图，所以graphoid应该被称为拟图。
  
@@ -1127,7 +1122,6 @@ d分隔能极大简化贝叶斯网络中 ![[公式]](https://www.zhihu.com/equat
 此外，概率论「给定/已知随机变量Z」里的「给定/已知」只能用于表达观察，而非介入。例如，P(下雨\|地面是湿的)与P(地面是湿的\|下雨)的概率值都很高，其中「给定“地面是湿的”」与「给定“下雨”」都是观察而非介入的结果。用do(X)表示「介入，使得事件X发生」，现在考虑另一种情况：P(下雨\|do(地面是湿的))。根据直觉，显然P(下雨\|do(地面是湿的)) < P(下雨\|地面是湿的)，因为把地面弄湿并不能导致下雨。
  
 综上所述，贝叶斯网络虽然十分强大，但无法准确描述因果关系。下文的SEM将主要解决这个问题。在学习贝叶斯网络的过程中，我们也应该尽量避免使用「因果」相关的词语——贝叶斯网络中，A→B未必等同于A导致B。
- 
 
 2.5. 结构方程+结构因果模型
  
@@ -1142,14 +1136,12 @@ d分隔能极大简化贝叶斯网络中 ![[公式]](https://www.zhihu.com/equat
 传统的路径分析研究中， ![[公式]](https://www.zhihu.com/equation?tex=f_X) 通常是一个线性函数，因果律的定义也局限与 ![[公式]](https://www.zhihu.com/equation?tex=Y%3D%5Calpha+X+%2B+%5Cbeta) 中的 ![[公式]](https://www.zhihu.com/equation?tex=%5Calpha) 。但是，在数据越发复杂的现在，我们完全可以采用非线性函数、非参数模型。相对地，「因果」的定义也从路径参数 ![[公式]](https://www.zhihu.com/equation?tex=%5Calpha) 变成了更广义的「变化传递」，参见前文RCM的部分。作为一个广泛的模型框架，SCM可以产生各式各样的复杂模型。
  
 在最广泛的条件下，函数 ![[公式]](https://www.zhihu.com/equation?tex=f_X) 是不可逆的。我们需要把 ![[公式]](https://www.zhihu.com/equation?tex=X%3Df_X%28%5Cmathrm%7Bpa%7D%28X%29%2C%5Cmathrm%7Bu%7D%28X%29%29) 理解为「（大自然/模型本身）对X的赋值」，而不仅仅是一个普通的代数等式。SCM要求所有的箭头 ![[公式]](https://www.zhihu.com/equation?tex=A%5Cto+B) 必须表示「A直接导致B」。所以，在因果推断的过程中，我们必须按照因果箭头的方向进行推理，不能颠倒顺序。
- 
-![](https://pic1.zhimg.com/80/v2-2f59fbad01d5b57d7c151822c14712ac_1440w.jpg)
+- ![](https://pic1.zhimg.com/80/v2-2f59fbad01d5b57d7c151822c14712ac_1440w.jpg)
  
 图1：结构因果模型示意图
  
 如上图所示， ![[公式]](https://www.zhihu.com/equation?tex=U_X) 与 ![[公式]](https://www.zhihu.com/equation?tex=U_Y) 是外生变量， X与Y是内生变量，X可以导致Y。在图(a)中， ![[公式]](https://www.zhihu.com/equation?tex=U_X) 与 ![[公式]](https://www.zhihu.com/equation?tex=U_Y) 之间没有边相连，而在图(b)中， ![[公式]](https://www.zhihu.com/equation?tex=U_X) 与 ![[公式]](https://www.zhihu.com/equation?tex=U_Y) 之间有一条用虚线表示的双向箭头。在SCM里，我们用单向箭头表达直接的因果关系，用双向箭头表明两个外生变量之间可能存在未知的混杂因素（confounding variable）。
- 
-![[公式]](https://www.zhihu.com/equation?tex=U_X) 与 ![[公式]](https://www.zhihu.com/equation?tex=U_Y) 等外生变量可以表示「模型没有考虑到的环境噪音」，从而为看似非随机的结构方程模型加入随机的成分。因此，SEM并非完全确定，它也可以拥有概率、不确定性等特征；SCM比普通的贝叶斯网络更广泛。此外，一个SCM描述了数据的生成原理，而不仅是表面观测到的概率分布，所以SCM比贝叶斯网络更稳定。
+- ![[公式]](https://www.zhihu.com/equation?tex=U_X) 与 ![[公式]](https://www.zhihu.com/equation?tex=U_Y) 等外生变量可以表示「模型没有考虑到的环境噪音」，从而为看似非随机的结构方程模型加入随机的成分。因此，SEM并非完全确定，它也可以拥有概率、不确定性等特征；SCM比普通的贝叶斯网络更广泛。此外，一个SCM描述了数据的生成原理，而不仅是表面观测到的概率分布，所以SCM比贝叶斯网络更稳定。
  
 2.5.2. 介入
  
@@ -1163,13 +1155,11 @@ d分隔能极大简化贝叶斯网络中 ![[公式]](https://www.zhihu.com/equat
 在「观察」的基础上，SCM还能做到「介入」： ![[公式]](https://www.zhihu.com/equation?tex=P%28Y%7CE%3De%2C+do%28X%3Dx%29%29) 。其中，我们对系统进行介入，迫使一组变量X拥有值x。在X是一个空集的情况下，SCM与普通的贝叶斯网络差别不大。
  
 以下图为例，我将展示SCM实现介入的方法。
- 
-![](https://pic1.zhimg.com/80/v2-bfddee417c2bc99edd58383eae72548c_1440w.jpg)
+- ![](https://pic1.zhimg.com/80/v2-bfddee417c2bc99edd58383eae72548c_1440w.jpg)
 
 图2：一个SCM
  
 在这个SCM中，变量X、Y、Z之间的关系可以用以下的结构方程表示：
- 
 1.  ![[公式]](https://www.zhihu.com/equation?tex=Z%3Df_Z%28U_Z%29)
 2.  ![[公式]](https://www.zhihu.com/equation?tex=X%3Df_X%28Z%2C+U_X%29)
 3.  ![[公式]](https://www.zhihu.com/equation?tex=Y%3Df_Y%28X%2C+U_Y%29)
@@ -1181,17 +1171,14 @@ d分隔能极大简化贝叶斯网络中 ![[公式]](https://www.zhihu.com/equat
 1.  ![[公式]](https://www.zhihu.com/equation?tex=Z%3Df_Z%28U_Z%29)
 2.  ![[公式]](https://www.zhihu.com/equation?tex=X%3Dx_0)
 3.  ![[公式]](https://www.zhihu.com/equation?tex=Y%3Df_Y%28X%2C+U_Y%29)
-    
  
 综上所述，一个SCM（写作 ![[公式]](https://www.zhihu.com/equation?tex=M_1) ）估计 ![[公式]](https://www.zhihu.com/equation?tex=P_%7BM_1%7D%28Y%7CE%3De%2Cdo%28X%3Dx%29%29) 的方式为：完成对原有模型 ![[公式]](https://www.zhihu.com/equation?tex=M_1) 的介入 ![[公式]](https://www.zhihu.com/equation?tex=do%28X%3Dx%29) 之后，得到一个新的模型 ![[公式]](https://www.zhihu.com/equation?tex=M_2) 。随后，在 ![[公式]](https://www.zhihu.com/equation?tex=M_2) 上估计 ![[公式]](https://www.zhihu.com/equation?tex=P_%7BM_2%7D%28Y%7CE%3De%29) 。
  
 有人可能会产生疑问：「观察和介入，有什么本质区别吗？」
  
 一个日常例子式的回答如下：
- 
-用A代表「环境温度」，用B代表「温度计读数」，A与B之间的因果关系为 ![[公式]](https://www.zhihu.com/equation?tex=A+%5Cto+B) 。在默认状态下，温度计不会受到外在干预。因此，观察到温度计读数升高，我们可以推断出环境温度升高。但是，当我们直接干预温度计时（例如用手握住温度计），我们进行了介入 ![[公式]](https://www.zhihu.com/equation?tex=do%28B%3Db_1%29) ，使温度计的读数变成了 ![[公式]](https://www.zhihu.com/equation?tex=b_1) ；同时，因为是介入而非观察，从A到B的因果箭头被切断了，我们有 ![[公式]](https://www.zhihu.com/equation?tex=A%5Cnot%5Cto+B) 或 ![[公式]](https://www.zhihu.com/equation?tex=A+%5C+%5C+%5C+%5C+%5C+B) 。
- 
-假设 ![[公式]](https://www.zhihu.com/equation?tex=b_1) 是一个较高的温度，那么 ![[公式]](https://www.zhihu.com/equation?tex=P%28A%3Db_1%7CB%3Db_1%29) 代表「在自然状态下，观察到温度计的读数是 ![[公式]](https://www.zhihu.com/equation?tex=b_1) 时，实际的环境温度为 ![[公式]](https://www.zhihu.com/equation?tex=b_1) 的概率」； ![[公式]](https://www.zhihu.com/equation?tex=P%28A%3Db_1%7Cdo%28B%3Db_1%29%29) 代表「在外在干预使温度计读数成为 ![[公式]](https://www.zhihu.com/equation?tex=b_1) 时，实际的环境温度为 ![[公式]](https://www.zhihu.com/equation?tex=b_1) 的概率」。显然， ![[公式]](https://www.zhihu.com/equation?tex=P%28A%3Db_1%7CB%3Db_1%29+%3E+P%28A%3Db_1%7Cdo%28B%3Db_1%29%29) ，可见观察与介入是两种完全不同的行为。观察不会影响模型的自然状态，但介入会。
+- 用A代表「环境温度」，用B代表「温度计读数」，A与B之间的因果关系为 ![[公式]](https://www.zhihu.com/equation?tex=A+%5Cto+B) 。在默认状态下，温度计不会受到外在干预。因此，观察到温度计读数升高，我们可以推断出环境温度升高。但是，当我们直接干预温度计时（例如用手握住温度计），我们进行了介入 ![[公式]](https://www.zhihu.com/equation?tex=do%28B%3Db_1%29) ，使温度计的读数变成了 ![[公式]](https://www.zhihu.com/equation?tex=b_1) ；同时，因为是介入而非观察，从A到B的因果箭头被切断了，我们有 ![[公式]](https://www.zhihu.com/equation?tex=A%5Cnot%5Cto+B) 或 ![[公式]](https://www.zhihu.com/equation?tex=A+%5C+%5C+%5C+%5C+%5C+B) 。
+- 假设 ![[公式]](https://www.zhihu.com/equation?tex=b_1) 是一个较高的温度，那么 ![[公式]](https://www.zhihu.com/equation?tex=P%28A%3Db_1%7CB%3Db_1%29) 代表「在自然状态下，观察到温度计的读数是 ![[公式]](https://www.zhihu.com/equation?tex=b_1) 时，实际的环境温度为 ![[公式]](https://www.zhihu.com/equation?tex=b_1) 的概率」； ![[公式]](https://www.zhihu.com/equation?tex=P%28A%3Db_1%7Cdo%28B%3Db_1%29%29) 代表「在外在干预使温度计读数成为 ![[公式]](https://www.zhihu.com/equation?tex=b_1) 时，实际的环境温度为 ![[公式]](https://www.zhihu.com/equation?tex=b_1) 的概率」。显然， ![[公式]](https://www.zhihu.com/equation?tex=P%28A%3Db_1%7CB%3Db_1%29+%3E+P%28A%3Db_1%7Cdo%28B%3Db_1%29%29) ，可见观察与介入是两种完全不同的行为。观察不会影响模型的自然状态，但介入会。
  
 2.5.3. 因果推断的数学原理
  
@@ -1204,15 +1191,11 @@ d分隔能极大简化贝叶斯网络中 ![[公式]](https://www.zhihu.com/equat
 其中， ![[公式]](https://www.zhihu.com/equation?tex=v_i) 代表我们感兴趣的变量， ![[公式]](https://www.zhihu.com/equation?tex=%5Cmathrm%7Bpa%7D%28v_i%29) 代表它的父节点中的所有内生变量。利用因果马尔可夫条件，我们可以把一个联合概率分布分解为多个条件概率分布的积。
  
 一个符合因果马尔可夫条件的SCM经过介入之后，仍然符合因果马尔可夫条件，条件概率计算如下：
- 
-![[公式]](https://www.zhihu.com/equation?tex=P%28v_1%2C+v_2%2C+...%2C+v_n%7Cdo%28X%3Dx%29%29%3D%5Cprod_%7Bi%3D1%2C+v_i%5Cnotin+X%7D%5E%7Bn%7DP%28v_i%7C%5Cmathrm%7Bpa%7D%28v_i%29%29%7C_%7BX%3Dx%7D)
+- ![[公式]](https://www.zhihu.com/equation?tex=P%28v_1%2C+v_2%2C+...%2C+v_n%7Cdo%28X%3Dx%29%29%3D%5Cprod_%7Bi%3D1%2C+v_i%5Cnotin+X%7D%5E%7Bn%7DP%28v_i%7C%5Cmathrm%7Bpa%7D%28v_i%29%29%7C_%7BX%3Dx%7D)
  
 其中，X是一系列受到干预的变量，x是X中变量受干预之后的数值。 ![[公式]](https://www.zhihu.com/equation?tex=P%28v_i%7C%5Cmathrm%7Bpa%7D%28v_i%29%29%7C_%7BX%3Dx%7D) 表示， ![[公式]](https://www.zhihu.com/equation?tex=%5Cmathrm%7Bpa%7D%28v_i%29) 里同时也在X里（即在 ![[公式]](https://www.zhihu.com/equation?tex=%5Cmathrm%7Bpa%7D%28v_i%29+%5Ccup+X) 中）的变量将被赋值为 ![[公式]](https://www.zhihu.com/equation?tex=x) 的对应值。
- 
-![](https://pic1.zhimg.com/80/v2-bfddee417c2bc99edd58383eae72548c_1440w.jpg)
+- ![](https://pic1.zhimg.com/80/v2-bfddee417c2bc99edd58383eae72548c_1440w.jpg)
 
-图2
- 
 以图2为例，在干预之前， ![[公式]](https://www.zhihu.com/equation?tex=P%28Z%2C+Y%2C+X%29+%3D+P%28Z%29P%28X%7CZ%29P%28Y%7CX%29) ，而在干预 ![[公式]](https://www.zhihu.com/equation?tex=do%28X%3Dx_1%29) 之后， ![[公式]](https://www.zhihu.com/equation?tex=P%28Z%2C+Y%7Cdo%28X%3Dx_1%29%29+%3D+P%28Z%29P%28Y%7CX%3Dx_1%29) 。注意，由于从Z到X的因果箭头已经被切断， ![[公式]](https://www.zhihu.com/equation?tex=P%28Z%29%3DP%28Z%7Cdo%28X%3Dx_1%29%29) ，因为直接改变X无法影响Z。
  
 在《Causality》中，Pearl证明了一个更广泛的结论：
@@ -1224,25 +1207,19 @@ d分隔能极大简化贝叶斯网络中 ![[公式]](https://www.zhihu.com/equat
 2.5.4. 后门准则（back-door criterion）
  
 考虑如下图3所示的SCM：
- 
-![](https://pic1.zhimg.com/80/v2-6e12dd916d27ef0130aded624a625500_1440w.jpg)
- 
-图3
+- ![](https://pic1.zhimg.com/80/v2-6e12dd916d27ef0130aded624a625500_1440w.jpg)
  
 在SCM中，如果一条无向连接X与Y的路径有一条指向X的箭头，那么我们把这条路径称为从X到Y的后门路径。按照正常的因果链，「X导致Y」的结构应该是 ![[公式]](https://www.zhihu.com/equation?tex=X%5Cto+V_1+%5Cto+V_2+%5Cto+...+%5Cto+V_%7Bk-1%7D+%5Cto+V_%7Bk%7D+%5Cto+Y) ；然而，如果X与Y之间后门路径存在，那么实际结果中很可能出现虚假的统计相关性。
  
 因此，当一个变量集合S符合以下两个条件时，我们称S符合后门准则：
 1.  S中不包括X的后代。
 2.  S能d分隔所有从X到Y的后门路径。
-    
  
 例如，在图3里， ![[公式]](https://www.zhihu.com/equation?tex=%5C%7BZ_1%2C+Z_2%2C+Z_3%5C%7D%2C+%5C%7BZ_1%2C+Z_3%5C%7D%2C+%5C%7BW_1%2C+Z_3%5C%7D%2C+%5C%7BW_2%2C+Z_3%5C%7D) 等集合都满足后门准则，但 ![[公式]](https://www.zhihu.com/equation?tex=%5C%7BZ_3%5C%7D) 不满足后门准则。
  
 后门准则的重要性在于，它进一步泛化了2.5.3.结尾的公式。如果S满足从X到Y的后门准则，那么，我们可以推导得到：
- 
-![[公式]](https://www.zhihu.com/equation?tex=P%28Y+%3D+y%7Cdo%28X+%3D+x%29%2C+S+%3D+s%29+%3D+P%28Y+%3D+y%7CX+%3D+x%2C+S+%3D+s%29)
- 
-![[公式]](https://www.zhihu.com/equation?tex=P%28Y+%3D+y%7Cdo%28X+%3D+x%29%29+%3D+%5Csum_s+P%28Y+%3D+y%7CX+%3D+x%2C+S+%3D+s%29P%28S%3Ds%29%3D%5Csum_s+%5Cfrac%7BP%28Y+%3D+y%2C+X+%3D+x%2C+S+%3D+s%29%7D%7BP%28X%3Dx%2C+S%3Ds%29%7D)
+- ![[公式]](https://www.zhihu.com/equation?tex=P%28Y+%3D+y%7Cdo%28X+%3D+x%29%2C+S+%3D+s%29+%3D+P%28Y+%3D+y%7CX+%3D+x%2C+S+%3D+s%29)
+- ![[公式]](https://www.zhihu.com/equation?tex=P%28Y+%3D+y%7Cdo%28X+%3D+x%29%29+%3D+%5Csum_s+P%28Y+%3D+y%7CX+%3D+x%2C+S+%3D+s%29P%28S%3Ds%29%3D%5Csum_s+%5Cfrac%7BP%28Y+%3D+y%2C+X+%3D+x%2C+S+%3D+s%29%7D%7BP%28X%3Dx%2C+S%3Ds%29%7D)
  
 这极大简化了SCM推导时的运算。
  
@@ -1255,12 +1232,10 @@ d分隔能极大简化贝叶斯网络中 ![[公式]](https://www.zhihu.com/equat
 反事实推理与FPCI（因果推断的根本问题）息息相关。对于一个已经接受了实验组介入的样本u，我们只能观察到u的 ![[公式]](https://www.zhihu.com/equation?tex=Y_t%28u%29) ，却永远无法观察到 ![[公式]](https://www.zhihu.com/equation?tex=Y_c%28u%29) ，反之亦然。RCM（虚拟事实模型）对反事实推理有一定的描述，但RCM整体不如SCM清晰、明确、易解释。
  
 下面，我将用SCM重新表达2.2部分中提到的介入主义因果观。
- 
 *   RCM考虑的对象是一个种群 ![[公式]](https://www.zhihu.com/equation?tex=U) 内的所有个体 ![[公式]](https://www.zhihu.com/equation?tex=u) 。在很多情形下，同质性假设不成立，每个个体都不尽相同。在SCM中，个体的差异会被误差项 ![[公式]](https://www.zhihu.com/equation?tex=U_V) 表示（外生变量 ![[公式]](https://www.zhihu.com/equation?tex=U_V) 会相对应地影响内生变量 ![[公式]](https://www.zhihu.com/equation?tex=V) ）。除了 ![[公式]](https://www.zhihu.com/equation?tex=U_V) 之外，模型 ![[公式]](https://www.zhihu.com/equation?tex=M) 本身所代表的「自然法则」保持不变。
 *   RCM的表达式 ![[公式]](https://www.zhihu.com/equation?tex=Y_t%28u%29) 可以表示为 ![[公式]](https://www.zhihu.com/equation?tex=M.%5Cmathtt%7Bquery%7D%28P%28Y%7Cdo%28T%3Dt%29%2C+U%3Du%29%29) 。即：我们对模型M进行干预，使得变量T赋值为t；同时，我们观察到所有外生变量U的值为u；在此情况下，我们向模型M查询我们感兴趣变量Y的条件概率。
 *   RCM要求模型拥有一个「不受介入」的默认状态。显然，SCM符合要求：![[公式]](https://www.zhihu.com/equation?tex=Y_c%28u%29%3DM.%5Cmathtt%7Bquery%7D%28P%28Y%7CU%3Du%29%29)
-    
- 
+
 因此，SCM可以回答类似「假如 ![[公式]](https://www.zhihu.com/equation?tex=X%3Dx_1) 而非现实中的 ![[公式]](https://www.zhihu.com/equation?tex=X%3Dx_0) ，Y的值是什么？」的反事实问题。但是，在现实生活中，由于个体信息 ![[公式]](https://www.zhihu.com/equation?tex=U%3Du) 通常未知，而复杂的非线性结构方程可能会随着U的分布变化而变化，所以反事实推理普遍比较困难。
  
 总而言之，所有RCM均可以用SCM表达，而且SCM的白箱比RCM的黑箱更清晰、更稳定。
@@ -1278,8 +1253,7 @@ CLD中的变量基于以下的直觉：
 1.  因和果是某种过程，有一段持续的时间
 2.  因和果的持续时间段可以相互重叠
 3.  两个过程可以互为因果，甚至一个过程自身也可以形成因果环路
-
-![](https://pic4.zhimg.com/v2-2d54fa8887f3ca929ff3d1aca035c6ff_b.webp)
+- ![](https://pic4.zhimg.com/v2-2d54fa8887f3ca929ff3d1aca035c6ff_b.webp)
  
 因果环路图：银行存款与利息
  
