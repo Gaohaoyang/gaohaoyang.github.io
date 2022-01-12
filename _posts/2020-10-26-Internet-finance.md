@@ -3,7 +3,7 @@ layout: post
 title:  "互联网金融-Internet Finance"
 date:   2020-10-26 19:30:00
 categories: 技术工具
-tags: P2P 互联网 金融 四大行 股市 K线 对冲
+tags: P2P 互联网 金融 四大行 股市 K线 对冲 股票 预测 量化交易
 author : 鹤啸九天
 excerpt: 互联网金融未来发展
 mathjax: true
@@ -280,7 +280,9 @@ C轮之后有D轮，D轮之后有E轮，E轮之后还有中国股民。 在这�
 
 ## 股市知识点
 
-股市知识点
+股票市场分析分为两个部分——**基本面**分析和**技术**分析。
+- 基本面分析是根据公司目前的经营环境和财务状况，对公司未来的盈利能力进行分析。
+- 技术分析包括阅读图表和使用统计数字来确定股票市场的趋势。
 
 ### 「K线」怎么看？
 
@@ -372,6 +374,453 @@ C轮之后有D轮，D轮之后有E轮，E轮之后还有中国股民。 在这�
 - 私募的一般优于公募，但是起点要100万元，购买私募只要查询基金公司的官网和联系方式直接联系基金公司即可；
 - 公募基金起点低1000元甚至100元就可以买，各大银行、天天基金、基金公司官网都可以买到。
 国外的一家对冲基金公司——索罗斯的量子基金。这家公司大名鼎鼎，其运作的手法往往成为一种经典案例，还上了大学教科书
+
+## 炒股工具
+
+- 【2022-1-12】[WnStock](https://github.com/woniu201/WnStock/tree/master/Release), WnStock是个开源的查看股票行情软件，使用VC++/MFC开发，IDE选用Visual Studio 2010，如IDE版本非2010可能会存在编译错误
+
+
+## 机器学习与炒股
+
+- 【2019-1-4】[利用深度学习和机器学习预测股票市场](https://www.jiqizhixin.com/articles/2019-01-04-16)
+  - [英文](https://www.analyticsvidhya.com/blog/2018/10/predicting-stock-price-machine-learningnd-deep-learning-techniques-python/)
+- [DL炒股算法](https://mp.weixin.qq.com/s/locgmjGL_UkNiRrDKrOq_g)
+
+## 股票预测
+
+- 预测股市将如何变化历来是最困难的事情之一。这个预测行为中包含着如此之多的因素——包括物理或心理因素、理性或者不理性行为因素等等。所有这些因素结合在一起，使得股价波动剧烈，很难准确预测。
+- 事实证明：
+  - 股票价格没有特定的趋势或季节性
+  - 股价受到公司新闻和其他因素的影响，如公司的非货币化或合并/分拆。还有一些无形的因素往往是无法事先预测的。
+
+
+### 方法总结
+
+|预测方法|指标（RMSE）|效果|备注|
+|---|---|---|---|
+|移动平均|104.5141|![](https://image.jiqizhixin.com/uploads/editor/4587d49d-9db3-400b-b403-b8c4a721fbe8/1546595243783.png)|不理想|
+|线性回归|121.1629|![](https://image.jiqizhixin.com/uploads/editor/7daaa83b-d07a-4128-a942-872b50bfc8ef/1546595243852.png)|表现很差|
+|k近邻|115.1708|![](https://image.jiqizhixin.com/uploads/editor/03c14363-3758-4490-869e-1e0c08f27f48/1546595244252.png)|与线性回归模型近似|
+|自动ARMIA|44.9545|![](https://image.jiqizhixin.com/uploads/editor/1d05e083-6fe8-47af-8465-a3f0b4bee8d7/1546595244316.png)|忽略了季节的影响|
+|先知|57.4944|![](https://image.jiqizhixin.com/uploads/editor/6081d4af-16a4-4f8d-9d2a-b1adcd0e9307/1546595244513.png)|表现良好，但在本例中没有达到预期效果|
+|LSTM|11.7722|![](https://image.jiqizhixin.com/uploads/editor/7b8804e1-86dd-4993-a8a3-4465949bce0a/1546595245157.png)|轻松超越以上任何算法，但还不能确定未来涨跌|
+
+
+### 数据准备
+
+[Quandl](https://data.nasdaq.com/search?query=)为投资专业人士提供金融，经济和替代数据的首选平台，拥有海量的经济和金融数据。
+- 拥有超过500个与金融相关的数据集，里面的数据包括港股数据、沪深股、加拿大股票
+- 每个ip访问quandl有次数（50次）的限制，如果访问次数比较多的话，可以到官网注册一个账号。
+- 除了Python之外，quandl也支持用excel、R等来获取数据。
+- 更多参考：[Quandl快速入门](https://zhuanlan.zhihu.com/p/41063833)
+
+```python
+import quandl # pip install quandl
+# 获取数据集, Google股票数据
+df = quandl.get('WIKI/GOOGL')
+# 获得美国能源部的WTI原油价格：
+mydata = quandl.get("EIA/PET_RWTC_D") # 默认pandas
+mydata = quandl.get("EIA/PET_RWTC_D", returns="numpy") # 改变返回格式：numpy
+# 还可以改变获取的时间区间啊，只选择特定的栏位
+# 获取特定时间段的数据：
+data = quandl.get("FRED/GDP", start_date="2001-12-31", end_date="2005-12-31")
+# 获取特定列的数据：
+data = quandl.get(["NSE/OIL.1", "WIKI/AAPL.4"])
+# 获取特定行的数据：
+data = quandl.get("WIKI/AAPL", rows=5) #后5行
+# 改变采样频率：
+data = quandl.get("EIA/PET_RWTC_D", collapse="monthly") #按月份
+# 对数据进行基本的计算：
+data = quandl.get("EIA/PET_RWTC_D")					#原始数据
+data = quandl.get("EIA/PET_RWTC_D", transformation="diff") 	 	# 变化 
+data = quandl.get("EIA/PET_RWTC_D", transformation="rdiff") 		# 百分比变化 	 
+data = quandl.get("EIA/PET_RWTC_D", transformation="normalize") 	# 标准化为100 			
+data = quandl.get("EIA/PET_RWTC_D", transformation="cumul") 		# 累计和
+# 下载整个时间序列数据集
+quandl.bulkdownload("ZEA")
+# 调用整个数据表：数据表API限制每次调用10,000行，添加参数paginate=True则可以扩大到1,000,000行。
+data = quandl.get_table('MER/F1', paginate=True)
+
+```
+
+
+NSE-TATAGLOBAL
+- ![](https://image.jiqizhixin.com/uploads/editor/84be72d9-cbb9-412a-b469-faee2c78bfb3/1546595243480.png)
+- 数据集中有多个变量 —— 日期（date）、开盘价(open)、最高价(high)、最低价(low)、最后交易价(last)、收盘价(close)、总交易额(total_trade_quantity)和营业额(turnover)。
+  - **开盘价** 和 **收盘价** 代表股票在某一天交易的起始价和最终价。
+  - 最高价、最低价 和 **最后交易价** 表示当天股票的最高价、最低价和最后交易价格。
+  - **交易总量** 是指当天买卖的股票数量，而营业额(Lacs)是指某一特定公司在某一特定日期的营业额。
+- 注意：市场在周末和公共假期休市。
+  - 上表缺失了一些日期值——2/10/2018、6/10/2018、7/10/2018。其中2号是国庆节，6号和7号是周末。
+- 损益的计算通常由股票当日的**收盘价**决定，因此将收盘价作为目标变量。
+- ![](https://image.jiqizhixin.com/uploads/editor/7eb62fbd-195c-411f-b5a6-415b2039c331/1546595243216.png)
+
+```python
+import pandas as pd
+import numpy as np
+ 
+#to plot within notebook
+import matplotlib.pyplot as plt
+%matplotlib inline
+#setting figure size
+from matplotlib.pylab import rcParams
+rcParams['figure.figsize'] = 20,10
+#for normalizing data
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler(feature_range=(0, 1))
+#read the file
+df = pd.read_csv('NSE-TATAGLOBAL(1).csv'
+#print the head
+df.head()
+# 以收盘价为目标
+df['Date'] = pd.to_datetime(df.Date,format='%Y-%m-%d')
+df.index = df['Date']
+#plot
+plt.figure(figsize=(16,8))
+plt.plot(df['Close'], label='Close Price history')
+```
+
+### 统计：移动平均
+
+用一组先前观测值的平均值作为每天的预期收盘价。
+- 使用**移动平均法**，而不是使用简单的平均值
+- 移动平均法使用最近的一组数据计算预测值。对于后续的每个新的时间，在考虑预测值时，将从集合中删除最早的观测值，并加入上一个观测值。
+- ![](https://image.jiqizhixin.com/uploads/editor/d9785f0f-4965-4396-af28-eee8efbc92e6/1546595243295.png)
+
+```python
+data = df.sort_index(ascending=True, axis=0)
+new_data = pd.DataFrame(index=range(0,len(df)),columns=['Date', 'Close'])
+ 
+for i in range(0,len(data)):
+     new_data['Date'][i] = data['Date'][i]
+     new_data['Close'][i] = data['Close'][i]
+# 数据分割为训练和验证时，不能使用随机分割，因为这会破坏时间顺序。所以将去年的数据作为验证集，将之前4年的数据作为训练集。
+# splitting into train and validation
+train = new_data[:987] # 训练集
+valid = new_data[987:] # 验证集
+new_data.shape, train.shape, valid.shape # ((1235, 2), (987, 2), (248, 2))
+train['Date'].min(), train['Date'].max(), valid['Date'].min(), valid['Date'].max()
+# (Timestamp('2013-10-08 00:00:00'),
+# Timestamp('2017-10-06 00:00:00'),
+# Timestamp('2017-10-09 00:00:00'),
+# Timestamp('2018-10-08 00:00:00'))
+# 为验证集创建预测值，并使用真实值来检查RMSE误差
+# make predictions
+preds = []
+for i in range(0,248):
+    a = train['Close'][len(train)-248+i:].sum() + sum(preds)
+    b = a/248
+    preds.append(b)
+
+# ---------- 结果 ------------
+#calculate rmse
+rms=np.sqrt(np.mean(np.power((np.array(valid['Close'])-preds),2)))
+rms # 104.51415465984348
+# 仅仅检查RMSE并不能帮助我们评估模型预测效果的。
+#plot
+valid['Predictions'] = 0
+valid['Predictions'] = preds
+plt.plot(train['Close'])
+plt.plot(valid[['Close', 'Predictions']])
+
+```
+
+推论：
+- ![](https://image.jiqizhixin.com/uploads/editor/4587d49d-9db3-400b-b403-b8c4a721fbe8/1546595243783.png)
+- RMSE值接近105，但是结果不是很理想(从图中可以看出)。预测值与训练集的观测值的范围相同(开始有上升趋势，然后缓慢下降)。
+
+### 机器学习：线性回归
+
+最基本的机器学习算法是线性回归。线性回归模型生成一个确定自变量和因变量之间关系的方程。
+- ![](https://image.jiqizhixin.com/uploads/editor/64ad9e27-9232-4af6-a6f5-68b9510c90a9/1546595243334.png)
+- 股票预测中，没有太多的自变量，只有日期。于是用时间（date）列提取特征，如- day, month, year, mon/fri等，然后拟合线性回归模型。
+
+```python
+# 首先按升序对数据集进行排序，然后创建一个单独的数据集
+# setting index as date values
+df['Date'] = pd.to_datetime(df.Date,format='%Y-%m-%d')
+df.index = df['Date']
+# sorting
+data = df.sort_index(ascending=True, axis=0
+# creating a separate dataset
+new_data = pd.DataFrame(index=range(0,len(df)),columns=['Date', 'Close'])
+
+for i in range(0,len(data)):
+    new_data['Date'][i] = data['Date'][i]
+    new_data['Close'][i] = data['Close'][i]
+
+#create features
+from fastai.structured import  add_datepart # pip install fastai
+add_datepart(new_data, 'Date')
+new_data.drop('Elapsed', axis=1, inplace=True)  #elapsed will be the time stamp
+# ‘Year’, ‘Month’, ‘Week’, ‘Day’, ‘Dayofweek’, ‘Dayofyear’, ‘Is_month_end’, ‘Is_month_start’, ‘Is_quarter_end’, ‘Is_quarter_start’,  ‘Is_year_end’, and  ‘Is_year_start’
+# 创建星期特征（头、尾几天），如果是星期日或星期五，列值将为1，否则为0。
+new_data['mon_fri'] = 0
+for i in range(0,len(new_data)):
+    if (new_data['Dayofweek'][i] == 0 or new_data['Dayofweek'][i] == 4):
+        new_data['mon_fri'][i] = 1
+    else:
+        new_data['mon_fri'][i] = 0
+# 数据集划分
+#split into train and validation
+train = new_data[:987]
+valid = new_data[987:]
+
+x_train = train.drop('Close', axis=1)
+y_train = train['Close']
+x_valid = valid.drop('Close', axis=1)
+y_valid = valid['Close']
+
+#implement linear regression
+from sklearn.linear_model import LinearRegression
+model = LinearRegression()
+model.fit(x_train,y_train)
+# ------- 结果 --------
+#make predictions and find the rmse
+preds = model.predict(x_valid)
+rms = np.sqrt(np.mean(np.power((np.array(y_valid)-np.array(preds)),2)))
+rms # 121.16291596523156
+
+#plot
+valid['Predictions'] = 0
+valid['Predictions'] = preds
+
+valid.index = new_data[987:].index
+train.index = new_data[:987].index
+
+plt.plot(train['Close'])
+plt.plot(valid[['Close', 'Predictions']])
+
+```
+
+推论：
+- ![](https://image.jiqizhixin.com/uploads/editor/7daaa83b-d07a-4128-a942-872b50bfc8ef/1546595243852.png)
+- RMSE值高于之前的方法，这清楚地表明线性回归的表现很差。
+- 线性回归是一种简单的技术，很容易解释，但也有一些明显的缺点。使用回归算法的一个问题是，模型过度拟合了日期和月份。模型将考虑一个月前相同日期或一年前相同日期/月的值，而不是从预测的角度考虑以前的值。
+- 从上图可以看出，2016年1月和2017年1月，股价出现下跌。该模型预测2018年1月也将如此。线性回归技术可以很好地解决像大卖场销售这样的问题，在这些问题中，独立的特征对于确定目标值是有用的。
+
+### 机器学习：k-近邻
+
+另一个有趣的ML算法是kNN (k近邻)。基于自变量，kNN可以发现新数据点与旧数据点之间的**相似性**。
+
+```python
+from sklearn import neighbors
+from sklearn.model_selection import GridSearchCV
+from sklearn.preprocessing import MinMaxScaler
+
+scaler = MinMaxScaler(feature_range=(0, 1))
+
+#scaling data
+x_train_scaled = scaler.fit_transform(x_train)
+x_train = pd.DataFrame(x_train_scaled)
+x_valid_scaled = scaler.fit_transform(x_valid)
+x_valid = pd.DataFrame(x_valid_scaled)
+ 
+#using gridsearch to find the best parameter
+params = {'n_neighbors':[2,3,4,5,6,7,8,9]}
+knn = neighbors.KNeighborsRegressor()
+model = GridSearchCV(knn, params, cv=5)
+ 
+#fit the model and make predictions
+model.fit(x_train,y_train)
+preds = model.predict(x_valid)
+# --------- 结果 ---------
+#rmse
+rms=np.sqrt(np.mean(np.power((np.array(y_valid)-np.array(preds)),2)))
+rms # 115.17086550026721
+
+valid['Predictions'] = 0
+valid['Predictions'] = preds
+plt.plot(valid[['Close', 'Predictions']])
+plt.plot(train['Close'])
+```
+
+推论：
+- ![](https://image.jiqizhixin.com/uploads/editor/03c14363-3758-4490-869e-1e0c08f27f48/1546595244252.png)
+- RMSE值并没有太大的差异，但是一个预测值和实际值的曲线图应该提供一个更清晰的理解
+- RMSE值与线性回归模型近似，图中呈现出相同的模式。与线性回归一样，kNN也发现了2018年1月的下降，因为这是过去几年的模式。我们可以有把握地说，回归算法在这个数据集上表现得并不好。
+
+### 时间序列：自动ARIMA
+
+ARIMA是一种非常流行的时间序列预测统计方法。ARIMA模型使用过去的值来预测未来的值。ARIMA中有三个重要参数：
+- p (用来预测下一个值的过去值)
+- q (用来预测未来值的过去预测**误差**)
+- d (**差分**的顺序)
+
+ARIMA的参数优化需要大量时间。因此我们将使用 **自动ARIMA**，自动选择误差最小的(p,q,d)最佳组合。
+
+```python
+from pyramid.arima import auto_arima
+ 
+data = df.sort_index(ascending=True, axis=0)
+ 
+train = data[:987]
+valid = data[987:]
+ 
+training = train['Close']
+validation = valid['Close']
+ 
+model = auto_arima(training, start_p=1, start_q=1,max_p=3, max_q=3, m=12,start_P=0, seasonal=True,d=1, D=1, trace=True,error_action='ignore',suppress_warnings=True)
+model.fit(training)
+ 
+forecast = model.predict(n_periods=248)
+forecast = pd.DataFrame(forecast,index = valid.index,columns=['Prediction'])
+# --------- 结果 ----------
+rms=np.sqrt(np.mean(np.power((np.array(valid['Close'])-np.array(forecast['Prediction'])),2)))
+rms # 44.954584993246954
+#plot
+plt.plot(train['Close'])
+plt.plot(valid['Close'])
+plt.plot(forecast['Prediction'])
+```
+
+推论：
+- ![](https://image.jiqizhixin.com/uploads/editor/1d05e083-6fe8-47af-8465-a3f0b4bee8d7/1546595244316.png)
+- 自动**ARIMA**模型使用过去的数据来理解时间序列中的模式。利用这些值，该模型捕捉到该系列中的增长趋势。虽然使用这种技术的预测比以前实现的机器学习模型的预测要好得多，但是这些预测仍然与实际值相距甚远。
+- 该模型在序列中捕捉到了一种趋势，但忽略了季节的影响。
+
+### 时间序列：先知（Prophet）
+
+有许多时间序列技术可以用在股票预测数据集上，但是大多数技术在拟合模型之前需要**大量的数据预处理**。
+
+Prophet（先知）由 Facebook 设计和开发，是一个**时间序列预测库**，不需要数据预处理，并且非常容易实现。
+- 先知的输入是一个带有两列的数据框: 日期 和 目标(ds和y)。
+
+先知试图在过去的数据中捕捉季节性，并且在数据集很大的时候依然表现良好
+- ![](https://image.jiqizhixin.com/uploads/editor/6081d4af-16a4-4f8d-9d2a-b1adcd0e9307/1546595244513.png)
+
+```python
+from fbprophet import Prophet
+
+#creating dataframe
+new_data = pd.DataFrame(index=range(0,len(df)),columns=['Date', 'Close'])
+
+for i in range(0,len(data)):
+    new_data['Date'][i] = data['Date'][i]
+    new_data['Close'][i] = data['Close'][i]
+
+new_data['Date'] = pd.to_datetime(new_data.Date,format='%Y-%m-%d')
+new_data.index = new_data['Date']
+#preparing data
+new_data.rename(columns={'Close': 'y', 'Date': 'ds'}, inplace=True)
+#train and validation
+train = new_data[:987]
+valid = new_data[987:]
+#fit the model
+model = Prophet()
+model.fit(train)
+#predictions
+close_prices = model.make_future_dataframe(periods=len(valid))
+forecast = model.predict(close_prices)
+
+#rmse
+forecast_valid = forecast['yhat'][987:]
+rms=np.sqrt(np.mean(np.power((np.array(valid['y'])-np.array(forecast_valid)),2)))
+rms # 57.494461930575149
+#plot
+valid['Predictions'] = 0
+valid['Predictions'] = forecast_valid.values
+plt.plot(train['y'])
+plt.plot(valid[['y', 'Predictions']])
+```
+
+推论
+- 先知(像大多数时间序列预测技术一样)试图从过去的数据中捕捉趋势和季节性。该模型通常在时间序列数据集上表现良好，但在本例中没有达到预期效果。
+- 事实证明，股票价格没有特定的趋势或季节性。价格的涨跌很大程度上取决于目前市场上的情况。因此，像ARIMA、SARIMA和Prophet这样的预测技术并不能很好地解决这个特殊的问题。
+
+### 神经网络：长短期记忆网络(LSTM)
+
+LSTM 算法广泛应用于序列预测问题中，并被证明是一种非常有效的方法。它们之所表现如此出色，是因为LSTM能够存储重要的既往信息，并忽略不重要的信息。
+
+LSTM有三个门：
+- **输入**门：输入门将信息添加到细胞状
+- **遗忘**门：它移除模型不再需要的信
+- **输出**门：LSTM的输出门选择作为输出的信息
+
+
+```python
+from sklearn.preprocessing import MinMaxScaler
+from keras.models import Sequential
+from keras.layers import Dense, Dropout, LSTM
+ 
+#creating dataframe
+data = df.sort_index(ascending=True, axis=0)
+new_data = pd.DataFrame(index=range(0,len(df)),columns=['Date', 'Close'])
+for i in range(0,len(data)):
+    new_data['Date'][i] = data['Date'][i]
+    new_data['Close'][i] = data['Close'][i]
+ 
+#setting index
+new_data.index = new_data.Date
+new_data.drop('Date', axis=1, inplace=True)
+ 
+#creating train and test sets
+dataset = new_data.values
+ 
+train = dataset[0:987,:]
+valid = dataset[987:,:]
+ 
+#converting dataset into x_train and y_train
+scaler = MinMaxScaler(feature_range=(0, 1))
+scaled_data = scaler.fit_transform(dataset)
+ 
+x_train, y_train = [], []
+for i in range(60,len(train)):
+    x_train.append(scaled_data[i-60:i,0])
+    y_train.append(scaled_data[i,0])
+x_train, y_train = np.array(x_train), np.array(y_train)
+ 
+x_train = np.reshape(x_train, (x_train.shape[0],x_train.shape[1],1))
+ 
+# create and fit the LSTM network
+model = Sequential()
+model.add(LSTM(units=50, return_sequences=True, input_shape=(x_train.shape[1],1)))
+model.add(LSTM(units=50))
+model.add(Dense(1))
+ 
+model.compile(loss='mean_squared_error', optimizer='adam')
+model.fit(x_train, y_train, epochs=1, batch_size=1, verbose=2)
+ 
+#predicting 246 values, using past 60 from the train data
+inputs = new_data[len(new_data) - len(valid) - 60:].values
+inputs = inputs.reshape(-1,1)
+inputs  = scaler.transform(inputs)
+ 
+X_test = []
+for i in range(60,inputs.shape[0]):
+    X_test.append(inputs[i-60:i,0])
+X_test = np.array(X_test)
+ 
+X_test = np.reshape(X_test, (X_test.shape[0],X_test.shape[1],1))
+closing_price = model.predict(X_test)
+closing_price = scaler.inverse_transform(closing_price)
+# ------------- 结果 -----------
+rms=np.sqrt(np.mean(np.power((valid-closing_price),2)))
+rms # 11.772259608962642
+#for plotting
+train = new_data[:987]
+valid = new_data[987:]
+valid['Predictions'] = closing_price
+plt.plot(train['Close'])
+plt.plot(valid[['Close','Predictions']])
+
+```
+
+推论：
+- ![](https://image.jiqizhixin.com/uploads/editor/7b8804e1-86dd-4993-a8a3-4465949bce0a/1546595245157.png)
+- LSTM轻松地超越了目前看到的**任何**算法。
+- LSTM模型可以对各种参数进行调优，如改变LSTM层数、增加dropout值或增加训练迭代轮数（epoch）数。
+- 但LSTM的预测是否足以确定股票价格将上涨还是下跌? 当然不行！
+- 股价受到公司新闻和其他因素的影响，如公司的非货币化或合并/分拆。还有一些无形的因素往往是无法事先预测的。
+
+### 神经网络：STHAN-SR
+
+量化交易和投资决策是复杂的金融任务，依赖于准确的股票选择。目前深度学习学习的策略使用于股票的问题的方案面临两个重大局限。
+- 不直接优化利润方面的投资目标；
+- 将每只股票视为独立于其他股票，忽略了相关股票之间的丰富信号股票价格变动。
+本文基于该局限性，将股票预测重新表述为一个**学习排序**问题，并提出了STHAN-SR，一种用于股票选择的神经超图结构，从而定制一种新的时空注意超图网络结构，通过联合建模股票相互依赖性及其价格的时间演变，根据利润对股票进行排序。
+
+在三个市场上进行为期六年的实验，发现STHAN-SR显著优于最先进的神经股票预测方法。通过对STHAN-SR的空间和时间组件进行烧蚀和探索性分析来验证我们的设计选择，并证明其实用性。
 
 ## 股市影视剧
 
