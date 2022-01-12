@@ -15,9 +15,11 @@ mathjax: true
 # 总结
 
 - 【2021-2-3】[机器学习的可解释性](https://mp.weixin.qq.com/s/CYN5ZJhkdpI0DSg_9EapEQ)，[知乎地址](https://zhuanlan.zhihu.com/p/334636096)，[Github地址](https://github.com/floatingCatty/BAAI-Monthly-)，【知源月旦】团队完成的首篇综述，参考了Gilpin Leilani H.,et al. 发表在DSAA2018 上的文章，[ppt](https://event-cdn.baai.ac.cn/20210202/interpretability-slides-yzhang.pdf), 作者[视频讲解](https://hub.baai.ac.cn/activity/details/129)，南方科技大学张宇博士（唐珂教授2017级在读博士）发表一篇神经网络可解释性综述《A Survey on Neural Network Interpretability》
+
 <object type="application/pdf" data="https://event-cdn.baai.ac.cn/20210202/interpretability-slides-yzhang.pdf"
            id="review" style="width:100%;  height:800px; margin-top:0px;  margin-left:0px" >
 </object>
+
 - 模型可解释性的奠基性论文：[The Mythos of Model Interpretability](https://arxiv.org/pdf/1606.03490.pdf)，2016年，作者Zachary C. Lipton是UCSD的著名教授
 - 【2021-5-11】[「综述专栏」神经网络的可解释性综述](https://www.toutiao.com/i6960861660567486983),从方法论上来讲，都应“先见森林，再见树木”, 源自[知乎](https://zhuanlan.zhihu.com/p/368755357)对[A Survey on Neural Network Interpretability](https://arxiv.org/abs/2012.14261)的解读
 
