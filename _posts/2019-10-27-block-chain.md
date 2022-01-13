@@ -3,7 +3,7 @@ layout: post
 title:  "区块链-Block Chain"
 date:   2019-10-27 22:53:00
 categories: 资料汇总
-tags: 区块链 比特币 张首晟
+tags: 区块链 比特币 张首晟 桥水基金
 excerpt: 什么是区块链，有哪些应用，什么是比特币？
 mathjax: true
 ---
@@ -14,6 +14,8 @@ mathjax: true
 
 # 区块链
 
+- 【2022-1-13】桥水基金对比特币的看法：他们描绘了一幅高度不确定的画面。这就是为什么对我来说，比特币看起来像一个高度未知的未来的长期选择，我可以投入一笔钱，我不介意损失大约80%的钱。
+  - 翻译：[桥水基金对比特币的看法](https://macin.org/post/nCP_yJJ1s/), 原文：[What I Think of Bitcoin - Ray Dalio](https://www.bridgewater.com/research-and-insights/ray-dalio-what-i-think-of-bitcoin)
 - 【2017-12-24】[一个故事告诉你比特币的原理及运作机制](http://blog.codinglabs.org/articles/bitcoin-mechanism-make-easy.html)- 【2018-1-23】[如何简单易懂的介绍区块链](https://www.zhihu.com/question/37290469)
 - 【2018-2-19】[区块链讲解及Demo](https://anders.com/blockchain/)
 - 【2018-3-18】比特币在线Demo：[coinDemo](https://coindemo.io/),[blockchainDemo](https://blockchaindemo.io/)
