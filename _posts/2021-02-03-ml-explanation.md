@@ -77,7 +77,6 @@ visualizer = discrimination_threshold(LogisticRegression(multi_class="auto", sol
   - 置换重要性背后的思想是评分(准确度、精确度、召回等)如何随特征的存在或不存在而变化。从以上结果可以看出，displacement 的得分最高，为0.3013。当置换位移特征时，模型的精度会有0.3013的变化。正负号后面的值就是不确定值。置换重要性法的本质上是一个随机过程；这就是为什么我们有不确定值。
   - 位置越高，影响得分的特征就越关键。底部的一些特征显示一个负值，这很有趣，因为这意味着当我们排列特征时，该特征会增加得分。就我个人而言，ELI5 为我提供了足够的机器学习解释能力。
 
-
 ```python
 #Preparing the model and the dataset
 from sklearn.ensemble import RandomForestClassifier
