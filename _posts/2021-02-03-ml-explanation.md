@@ -15,10 +15,302 @@ mathjax: true
 # 总结
 
 - 【2021-2-3】[机器学习的可解释性](https://mp.weixin.qq.com/s/CYN5ZJhkdpI0DSg_9EapEQ)，[知乎地址](https://zhuanlan.zhihu.com/p/334636096)，[Github地址](https://github.com/floatingCatty/BAAI-Monthly-)，【知源月旦】团队完成的首篇综述，参考了Gilpin Leilani H.,et al. 发表在DSAA2018 上的文章，[ppt](https://event-cdn.baai.ac.cn/20210202/interpretability-slides-yzhang.pdf), 作者[视频讲解](https://hub.baai.ac.cn/activity/details/129)，南方科技大学张宇博士（唐珂教授2017级在读博士）发表一篇神经网络可解释性综述《A Survey on Neural Network Interpretability》
+
 <object type="application/pdf" data="https://event-cdn.baai.ac.cn/20210202/interpretability-slides-yzhang.pdf"
            id="review" style="width:100%;  height:800px; margin-top:0px;  margin-left:0px" >
 </object>
+
+- 模型可解释性的奠基性论文：[The Mythos of Model Interpretability](https://arxiv.org/pdf/1606.03490.pdf)，2016年，作者Zachary C. Lipton是UCSD的著名教授
 - 【2021-5-11】[「综述专栏」神经网络的可解释性综述](https://www.toutiao.com/i6960861660567486983),从方法论上来讲，都应“先见森林，再见树木”, 源自[知乎](https://zhuanlan.zhihu.com/p/368755357)对[A Survey on Neural Network Interpretability](https://arxiv.org/abs/2012.14261)的解读
+
+## 可解释性工具
+
+【2022-1-12】
+- （1）传统机器学习方法中具备解释能力的模型：LR（权重）、决策树（序列判断路径）
+- （2）深度学习方法解释性探索：Attention权重、因果，还有不少研究热点，比如Rationalizing Neural Predictions Tao Lei, Regina Barzilay, Tommi Jaakkola; EMNLP 2016，代码 github.com/taolei87/rcnn
+
+- 【2022-1-12】Awesome Explanatory Supervision [![Awesome](figures/awesome.svg)](https://github.com/stefanoteso/awesome-explanatory-supervision)，包含各种可解释性论文
+- [机器学习模型可解释性的6种Python工具包，总有一款适合你！](https://zhuanlan.zhihu.com/p/385424638)
+- [4 款算法模型可解释性工具包，总有一款适合你](https://zhuanlan.zhihu.com/p/374520737)
+
+
+### 1、Yellowbrick——侧重于特征和模型性能解释
+
+[Yellowbrick](https://www.scikit-yb.org/en/latest/about.html) 是一个开源的多用途 Python 包，它通过可视化分析和诊断工具扩展了 scikit-learn API。对数据科学家而言，Yellowbrick 用于评估模型性能和可视化模型行为。
+
+功能：
+- 相关系数可视化：默认皮尔逊，可定制
+  - ![](https://pic4.zhimg.com/80/v2-01189f46ca15f29eb13bae8eb978b51f_720w.jpg)
+- 判别阈值图，获取最佳阈值：解释模型在0.4概率阈值下表现最好
+  - ![](https://pic3.zhimg.com/80/v2-3e6eefa031fcef6b7b369e17efd1aeba_720w.jpg)
+
+```python
+#pip install yellowbrick
+# Pearson Correlation
+from yellowbrick.features import rank2d
+from yellowbrick.datasets import load_credit
+
+X, _ = load_credit()
+# （1）用 Pearson 相关方法来可视化特征之间的相关性
+visualizer = rank2d(X)
+# （2）判别阈值图，以找到分隔二进制类的最佳阈值
+from yellowbrick.classifier import discrimination_threshold
+from sklearn.linear_model import LogisticRegression
+from yellowbrick.datasets import load_spam
+X, y = load_spam()
+visualizer = discrimination_threshold(LogisticRegression(multi_class="auto", solver="liblinear"), X,y)
+```
+
+### 2、ELI5——侧重模型参数和预测结果
+
+如果 Yellowbrick 侧重于特征和模型性能解释，ELI5 侧重于模型参数和预测结果。
+
+[ELI5](https://github.com/TeamHG-Memex/eli5) 是一个 Python 包，有助于机器学习的可解释性。取自Eli5软件包，此软件包的基本用法是：
+- 检查模型**参数**，试图弄清楚模型是如何全局工作的
+  - 显示模型（决策树）权重 → 特征的重要性及其偏差
+  - ![](https://pic3.zhimg.com/80/v2-fb25a53d060279e5921504782ae628ea_720w.jpg)
+  - 'displacement'特征是最重要的特征，但是它们有很高的偏差，这表明模型中存在偏差。
+- 检查模型的**单个预测**，并找出模型做出决策的原因
+  - ![](https://pic4.zhimg.com/80/v2-41eb779097b560ae122994008747c53f_720w.jpg)
+- ELI5 提供了另一种基于模型度量来解释黑盒模型的方法——**置换重要性**(Permutation Importance)
+  - ![](https://pic1.zhimg.com/80/v2-fe5402e4b778487bd5421206d664fb7c_720w.jpg)
+  - 置换重要性背后的思想是评分(准确度、精确度、召回等)如何随特征的存在或不存在而变化。从以上结果可以看出，displacement 的得分最高，为0.3013。当置换位移特征时，模型的精度会有0.3013的变化。正负号后面的值就是不确定值。置换重要性法的本质上是一个随机过程；这就是为什么我们有不确定值。
+  - 位置越高，影响得分的特征就越关键。底部的一些特征显示一个负值，这很有趣，因为这意味着当我们排列特征时，该特征会增加得分。就我个人而言，ELI5 为我提供了足够的机器学习解释能力。
+
+```python
+#Preparing the model and the dataset
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+
+mpg = sns.load_dataset('mpg').dropna()
+mpg.drop('name', axis =1 , inplace = True)
+#Data splitting
+X_train, X_test, y_train, y_test = train_test_split(mpg.drop('origin', axis = 1), mpg['origin'], test_size = 0.2, random_state = 121)
+#Model Training
+clf = RandomForestClassifier()
+clf.fit(X_train, y_train)
+# ------------------------
+import eli5
+# 最基本的 ELI5 函数是表示分类器权重和分类器预测结果。
+eli5.show_weights(clf, feature_names = list(X_test.columns)) # 权重
+eli5.show_prediction(clf, X_train.iloc[0]) # 预测结果,show_prediction得到特征贡献信息
+# 置换重要性函数。
+#Permutation Importance
+perm = PermutationImportance(clf, scoring = 'accuracy',random_state=101).fit(X_test, y_test)
+show_weights(perm, feature_names = list(X_test.columns))
+
+```
+
+### 3、SHAP——经典工具
+
+讨论机器学习的解释性的经典工具：SHAP。
+- [SHAP](https://github.com/slundberg/shap)（SHapley Additive exPlanations）是一种**博弈论**方法，用来解释任何机器学习模型的输出。简单地说，SHAP 是使用 **SHAP值**来解释每个特性的重要性。
+
+功能
+- **全局可解释性**
+  - ![](https://pic2.zhimg.com/80/v2-ef0fa4e8b382802d55cc7a9397c4ed25_720w.jpg)
+  - 年龄特征对预测结果的贡献最大。
+  - 也可以看特定的类对预测的贡献
+  - ![](https://pic3.zhimg.com/80/v2-cea25fce73cf03255ee6a12c17753d1e_720w.jpg)
+  - 颜色越红，值越高，反之亦然。此外，当值为正时，它有助于0级预测结果概率。
+- 解释**单个数据集**
+  - ![](https://pic1.zhimg.com/80/v2-3753850b7e2e84546762482a0814fbb8_720w.png)
+  - 预测更接近于类0，因为它是由年龄和 sibsp 特征推送的，而parch特征只提供了一点贡献。
+
+
+```python
+#Installation via pip
+#pip install shap 
+#Installation via conda-forge 
+#conda install -c conda-forge shap
+# ---------------------
+# 用泰坦尼克号数据训练，试着用SHAP来解释数据。
+#Preparing the model and the dataset 
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split  
+
+titanic = sns.load_dataset('titanic').dropna() 
+titanic = titanic[['survived', 'age', 'sibsp', 'parch']]  
+#Data splitting for rfc 
+X_train, X_test, y_train, y_test = train_test_split(titanic.drop('survived', axis = 1), titanic['survived'], test_size = 0.2, random_state = 121)  
+#Model Training 
+clf = RandomForestClassifier() clf.fit(X_train, y_train)
+# ---------------------
+import shap 
+# 全局可解释性
+shap_values = shap.TreeExplainer(clf).shap_values(X_train) shap.summary_plot(shap_values, X_train)
+# 特定的类对预测的贡献
+shap.summary_plot(shap_values[0], X_train)
+# 解释单个数据集
+explainer = shap.TreeExplainer(clf)
+shap_value_single = explainer.shap_values(X = X_train.iloc[0,:])
+shap.force_plot(base_value = explainer.expected_value[1],shap_values = shap_value_single[1],features = X_train.iloc[0,:])
+
+```
+
+或：
+
+```python
+import xgboost
+import shap
+
+# train an XGBoost model
+X, y = shap.datasets.boston()
+model = xgboost.XGBRegressor().fit(X, y)
+
+# explain the model's predictions using SHAP
+# (same syntax works for LightGBM, CatBoost, scikit-learn, transformers, Spark, etc.)
+explainer = shap.Explainer(model)
+shap_values = explainer(X)
+
+# visualize the first prediction's explanation
+shap.plots.waterfall(shap_values[0])
+# visualize the first prediction's explanation with a force plot 力图可视化
+shap.plots.force(shap_values[0])
+```
+
+结果：
+- ![](https://pic1.zhimg.com/80/v2-38dcc6018b23e0ac4cd9682420203ebc_720w.jpg)
+- 每个功能都有助于将模型输出从基值推向模型输出的功能。推高预测的特征以红色显示，推低预测的特征以蓝色显示。
+- 力图可视化
+  - ![](https://pic4.zhimg.com/80/v2-e0180083e81635d5526e7e192413374b_720w.jpg)
+
+### 4、Mlxtend——二维特征
+
+Mlxtend 是一个用于数据科学日常工作的 Python 包。包中的api不仅限于可解释性，还扩展到各种功能，如统计评估、数据模式、图像提取等。
+- **Decision Regions** (决策区域) plot API 将生成一个 Decision region plot，以可视化特征如何决定分类模型预测。
+- ![](https://pic2.zhimg.com/80/v2-a7af09825c82a4e62c9b505d07e761e1_720w.jpg)
+- 当每个模型进行预测时，可以看到它们之间的差异。例如，一类的 Logistic 回归模型预测结果越大，X轴值越高，但Y轴上变化不大。与随机森林模型相比，在X轴值之后，划分没有很大变化，Y轴值在每次预测中都是常数。
+- 决策区域的唯一缺点是它只限于**二维特征**，因此，它比实际模型本身更适合于预分析。
+
+```python
+# pip install Mlxtend
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
+import itertools
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier
+from mlxtend.classifier import EnsembleVoteClassifier
+from mlxtend.data import iris_data
+from mlxtend.plotting import plot_decision_regions
+# Initializing Classifiers
+clf1 = LogisticRegression(random_state=0)
+clf2 = RandomForestClassifier(random_state=0)
+clf3 = SVC(random_state=0, probability=True)
+eclf = EnsembleVoteClassifier(clfs=[clf1, clf2, clf3], weights=[2, 1, 1], voting='soft')
+# Loading some example data
+X, y = iris_data()
+X = X[:,[0, 2]]
+# Plotting Decision Regions
+gs = gridspec.GridSpec(2, 2)
+fig = plt.figure(figsize=(10, 8))
+for clf, lab, grd in zip([clf1, clf2, clf3, eclf],['Logistic Regression', 'Random Forest','RBF kernel SVM', 'Ensemble'],itertools.product([0, 1], repeat=2)):
+    clf.fit(X, y)
+    ax = plt.subplot(gs[grd[0], grd[1]])
+    fig = plot_decision_regions(X=X, y=y, clf=clf, legend=2)
+    plt.title(lab)
+plt.show()
+```
+
+### 5、PDPBox
+
+PDP(Partial Dependence Plot) 是一个显示特征对机器学习模型预测结果的边际影响的图。它用于评估特征与目标之间的相关性是线性的、单调的还是更复杂的。
+- 检查模型预测分布函数以及特征。
+  - ![](https://pic4.zhimg.com/80/v2-70a46de339deb6615569d2b9a1b3c467_720w.jpg)
+- ![](https://pic4.zhimg.com/80/v2-a92d78a98827cd5deabe387b97094e43_720w.jpg)
+- 当性别特征为男性时，预测概率降低（意味着男性存活的可能性降低）
+
+```python
+# pip install pdpbox
+import pandas as pd
+from pdpbox import pdp, get_dataset, info_plots
+#We would use the data and model from the pdpbox
+test_titanic = get_dataset.titanic()
+titanic_data = test_titanic['data']
+titanic_features = test_titanic['features']
+titanic_model = test_titanic['xgb_model']
+titanic_target = test_titanic['target']
+# 用 info_plots 函数检查特征和目标之间的信息
+fig, axes, summary_df = info_plots.target_plot(df=titanic_data, feature='Sex', feature_name='gender', target=titanic_target)
+_ = axes['bar_ax'].set_xticklabels(['Female', 'Male'])
+# 检查模型预测分布函数以及特征
+fig, axes, summary_df = info_plots.actual_plot(model=titanic_model, X=titanic_data[titanic_features], feature='Sex', feature_name='gender')
+# 用PDP绘图函数来解释模型预测
+pdp_sex = pdp.pdp_isolate(model=titanic_model, dataset=titanic_data, model_features=titanic_features, feature='Sex')
+fig, axes = pdp.pdp_plot(pdp_sex, 'Sex')
+_ = axes['pdp_ax'].set_xticklabels(['Female', 'Male'])
+```
+
+### 6、InterpretML
+
+InterpretML 是一个Python包，它包含许多机器学习可解释性API。此包的目的是基于绘图图提供交互式绘图，以了解预测结果。
+- InterpretML 提供了许多方法来解释机器学习，方法包括使用讨论过的许多技术——即SHAP和PDP。
+- 此外，这个包拥有一个Glassbox模型API，它在开发模型时提供了一个可解释性函数。
+
+```python
+# pip install interpret
+from sklearn.model_selection import train_test_split
+from interpret.glassbox import ExplainableBoostingClassifier
+import seaborn as sns
+
+#the glass box model (using Boosting Classifier)
+ebm = ExplainableBoostingClassifier(random_state=120)
+titanic = sns.load_dataset('titanic').dropna()
+#Data splitting
+X_train, X_test, y_train, y_test = train_test_split(titanic.drop(['survived', 'alive'], axis = 1), titanic['survived'], test_size = 0.2, random_state = 121)
+#Model Training
+ebm.fit(X_train, y_train)
+# 自动对你的特征进行热编码，并设计交互特性。
+
+# 模型全局解释
+from interpret import set_visualize_provider
+from interpret.provider import InlineProvider
+set_visualize_provider(InlineProvider())
+from interpret import show
+ebm_global = ebm.explain_global()
+show(ebm_global)
+
+# 局部的可解释性
+#Select only the top 5 rows from the test data
+ebm_local = ebm.explain_local(X_test[:5], y_test[:5])
+show(ebm_local)
+```
+
+- 模型**全局**解释
+  - ![](https://pic3.zhimg.com/80/v2-7250fbdebfef1f47f0824d84bf687d56_720w.jpg)
+  - “可解释”是一个交互式绘图，可以使用它来更具体地解释模型。如果只在上图中看到摘要，可以选择另一个组件来指定要查看的功能。这样就可以解释模型中的特征是如何影响预测的。
+  - 低票价降低了生存的机会，但随着票价越来越高，它增加了生存的机会。然而，你可以看到密度和条形图-许多人来自较低的票价。
+- **局部**可解释
+  - ![](https://pic4.zhimg.com/80/v2-fb640ca0752be99e856b4e0c1b75f103_720w.jpg)
+  - 局部可解释性显示了单个预测是如何进行的。这里显示的值是来自模型的对数赔率分数，它们被添加并通过 logistic 函数传递，以得到最终预测。在这个预测中，我们可以看到男性对降低存活率的贡献最大。
+
+### 7、LIME——局部可解释性
+
+在机器学习模型事后局部可解释性研究中，一种代表性方法是由 Marco Tulio Ribeiro 等人提出的 Local Interpretable Model-Agnostic Explanation(LIME)。
+
+对于每一个输入实例，LIME首先利用该实例以及该实例的一组近邻数据训练一个易于解释的线性模型来拟合待解释模型的局部边界，然后基于该线性模型解释待解释模型针对该实例的决策依据，其中，线性模型的权重系数直接体现了当前决策中该实例的每一维特征重要性。
+
+[LIME](https://github.com/marcotcr/lime)主要提供三种解释方法，这三种方法都处理不同类型的数据：
+- 表格解释
+- 文字翻译
+- 图像解释。
+
+```python
+# pip install lime
+rfc.fit(vectorized_train_text,y)
+import lime
+from sklearn.pipeline import make_pipeline
+
+explainer = lime.lime_text.LimeTextExplainer(class_names=["Not Patient", "Patient"])
+pl = make_pipeline(vect,rfc)
+exp = explainer.explain_instance(train["combined_text"][689], pl.predict_proba)
+exp.show_in_notebook()
+
+```
+
+![](https://pic1.zhimg.com/80/v2-20b38b34fa9257ab933fa02148bea9c8_720w.jpg)
 
 ## 第一性原理
 
@@ -100,13 +392,23 @@ mathjax: true
   - 可解释性方法的**作用范围**：局部可解释性、全局可解释性。
 
 其中
-- 本质可解释性指的是对模型的架构进行限制，使其工作原理和中间结果能够较为容易地为人们所理解（例如，结构简单的决策树模型）；
-- 事后可解释性则指的是通过各种统计量、可视化方法、因果推理等手段，对训练后的模型进行解释。
+- **本质**可解释性指的是对模型的架构进行限制，使其工作原理和中间结果能够较为容易地为人们所理解（例如，结构简单的决策树模型）；
+- **事后**可解释性(post-hoc)指通过各种统计量、可视化方法、因果推理等手段，对训练后的模型进行解释。
+  - 比如：分析深度神经网络的**显著性映射**(Saliency Maps)
+  - 事后解释的目标是让用户理解 ML 模型的预测y，这是通过解释器 (Explainer)来实现的，使用一个算法来生成解释e(y)
  
+### 补充：事后可解释
+
+训练完成后，从模型中能了解到的东西，或者说，如何以自然语言来解释模型的决策，比如：分析深度神经网络的**显著性映射**(Saliency Maps)，注意力机制（attention）,[图源](https://www.mathworks.com/matlabcentral/fileexchange/28344-image-descriptors-features-and-saliency-maps)
+- ![](https://pic3.zhimg.com/80/v2-675e3f0bd1e8918cf2d2b4b9e6d95816_720w.jpg)
+- 事后解释的目标是让用户理解 ML 模型的预测y，这是通过解释器 (Explainer)来实现的，使用一个算法来生成解释e(y)
+- ![](https://pic2.zhimg.com/80/v2-9dba07a9ab6c2f8039c74d7339f371cd_720w.jpg)
+
+
 由于深度模型的广泛应用，本文将重点关注深度学习的可解释性，并同时设计一些机器学习方法的解释。
 
 【2021-5-11】可解释性分类
-![](https://p3-tt.byteimg.com/origin/pgc-image/2b0c490bb401445f8bdb841042aa996d?from=pc)
+- ![](https://p3-tt.byteimg.com/origin/pgc-image/2b0c490bb401445f8bdb841042aa996d?from=pc)
 
 ### 按照逻辑规则解释（Rule as Explanation）
  
@@ -192,9 +494,13 @@ featuremap_layout
 
 ### 总结
 
-![](https://p3-tt.byteimg.com/origin/pgc-image/f482fc685a8f48c9a51bfffa11d1d9df?from=pc)
-![](https://p6-tt.byteimg.com/origin/pgc-image/4ce7efea5d4042758b5f246bb9954e4b.png?from=pc)
+- ![](https://p3-tt.byteimg.com/origin/pgc-image/f482fc685a8f48c9a51bfffa11d1d9df?from=pc)
+- ![](https://p6-tt.byteimg.com/origin/pgc-image/4ce7efea5d4042758b5f246bb9954e4b.png?from=pc)
 
+
+【2022-1-12】机器学习模型可解释性对比：源自[机器学习模型可解释性](https://zhuanlan.zhihu.com/p/386295805)
+- ![](https://pic2.zhimg.com/v2-1a8ec6b5cef4aea9da09ffb10ba395a0_1440w.jpg?source=172ae18b)
+- 模型越简单，可解释性越强：<font color='red'>深度学习 ＞ 集成方法 ＞ SVM ＞ 贝叶斯 ＞ kNN ＞ 决策树 ＞ 罗辑回归 ＞ 规则 </font>
  
 # 二、深度学习的可解释性
  
