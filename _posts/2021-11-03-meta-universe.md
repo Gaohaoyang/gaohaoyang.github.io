@@ -14,6 +14,7 @@ mathjax: true
 
 # 总结
 
+- 【2022-1-13】[北大出品，最强元宇宙报告，200页干货](https://mp.weixin.qq.com/s/OuHXv30PCf_RoxHfdLCAzw)
 - 【2021-10-31】[清华大学：2021元宇宙研究报告](https://www.163.com/dy/article/GNL04QMN0519KHAT.html)
 
 
