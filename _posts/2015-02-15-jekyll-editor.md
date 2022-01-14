@@ -29,6 +29,8 @@ tags: jekyll markdown 插件 github gitee 码云 latex 公式
 
 ## 技巧汇总
 
+- 注意：千万不要在文本内容里嵌套双括号（代码区也不行）！会造成编译错误！
+
 ### jupyter notebook
 - 【2020-02-11】[Jekyll中支持Jupyter Notebook](https://www.jianshu.com/p/2857dba1c565)
 
