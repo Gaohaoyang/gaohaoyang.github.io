@@ -473,19 +473,30 @@ c.render("新房驻场客服-query空间关系.html")
 - [用t-SNE进行数据可视化-GoogleTechTalks出品](https://www.bilibili.com/video/BV1Ax411v7z5)
 <iframe src="//player.bilibili.com/player.html?aid=10560557&bvid=BV1Ax411v7z5&cid=17434638&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
-## LLE
+- 瑞士卷一个是二维流形的例子.简而言之，二维流形是一种二维形状，它可以在更高维空间中弯曲或扭曲。
 
-LLE：局部线性嵌入（Locally Linear Embedding）是一种非常有效的非线性降维（NLDR）方法。测量每个训练实例与其最近邻（c.n.）之间的线性关系，然后寻找能最好地保留这些局部关系的训练集的低维表示，擅长展开扭曲的流形。
+## VC维
 
-代码：
-
-```python
-from sklearn.manifold import LocallyLinearEmbedding
-lle=LocallyLinearEmbedding(n_components=2,n_neighbors=10)
-X_reduced=lle.fit_transform(X)
-```
-
-# 降维
+- [VC维与模型复杂度、样本复杂度](https://blog.csdn.net/JasonDing1354/article/details/42009157)
+- 物理意义：将假设集合的数量\|H\|比作假设集合的自由度，那么VC维就是假设集合在做二元分类的有效的自由度，即这个假设空间能够产生多少Dichotomies的能力（VC维说的是，到什么时候，假设集合还能shatter，还能产生最多的Dichotomies）
+- 假设空间的容量越大，VC维越大，那么模型就越难学习
+- [VC维来龙去脉](http://www.flickering.cn/machine_learning/2015/04/vc%E7%BB%B4%E7%9A%84%E6%9D%A5%E9%BE%99%E5%8E%BB%E8%84%89/)
+- [如何通俗的理解机器学习中的VC维、shatter和break point？](https://www.zhihu.com/question/38607822/answer/149407083)
+- 学习VC维要先知道的概念有：`增长函数`（growth function）、`对分`（dichotomy）、`打散`（shattering）和`断点`（break point）
+  - 1.增长函数
+    - 增长函数表示假设空间H对m个示例所能赋予标记的最大可能结果数。
+    - 比如说现在数据集有两个数据点，考虑一种二分类的情况，可以将其分类成A或者B，则可能的值有：AA、AB、BA和BB，所以这里增长函数的值为4.
+    - 增长函数值越大则假设空间H的表示能力越强，复杂度也越高，学习任务的适应能力越强。不过尽管H中可以有无穷多的假设h，但是增长函数却不是无穷大的：对于m个示例的数据集，最多只能有2^m个标记结果，而且很多情况下也达不到2^m的情况。
+  - 2.对分
+    - 对于二分类问题来说，H中的假设对D中m个示例赋予标记的每种可能结果称为对D的一种对分（dichotomy）。对分也是增长函数的一种上限。
+  - 3.打散
+    - 打散指的是假设空间H能实现数据集D上全部示例的对分，即增长函数=2^m。但是认识到不打散是什么则更加重要
+  - 4. 断点
+    - 假设空间H的VC维数就是最大的非break point值，也就是break point-1
+  - Vapink-Chervonenkis Dimension
+    - 引出VC维的定义了：假设空间H的VC维是能被H打散的最大的示例集（数据集）的大小
+    - 或：
+      - 对于一个假设空间H，如果存在m个数据样本能够被假设空间H中的函数按所有可能的2^h种形式分开 ，则称假设空间H能够把m个数据样本打散（shatter）。假设空间H的VC维就是能打散的最大数据样本数目m。若对任意数目的数据样本都有函数能将它们shatter，则假设空间H的VC维为无穷大
 
 ## 为什么要降维
 
@@ -508,14 +519,16 @@ X_reduced=lle.fit_transform(X)
 
 降低维度的两种主要方法：**投影**和**流形学习**。
 
-### 投影
+## 投影
 
 - 适合所有训练实例实际上位于（或接近）高维空间的**低维子空间**内，这样就可以采用投影的降维方法。
   -  如分布接近于2D子空间的3D数据集一个分布接近于2D子空间的3D数据集
   - ![](https://img-blog.csdnimg.cn/20190319231722249.jpg)
 - 但是，投影并不总是降维的最佳方法。在很多情况下，子空间可能会扭曲和转动，如瑞士卷型数据集，S形分布
 
-#### PCA
+
+
+## PCA
 
 - 代表示例：PCA系列（SVD分解），如：增量 PCA，随机 PCA，核PCA（非线性投影，如RBF核的kPCA）
 
@@ -555,35 +568,140 @@ X_reduced=rbf_pca.fit_transform(X)
 
 参考：[机器学习算法（降维）总结及sklearn实践——主成分分析（PCA）、核PCA、LLE、流形学习](https://blog.csdn.net/github_38486975/article/details/88384884)
 
-### 流形学习
 
-- 瑞士卷一个是二维流形的例子.简而言之，二维流形是一种二维形状，它可以在更高维空间中弯曲或扭曲。
+## LLE
 
-## VC维
+LLE：局部线性嵌入（Locally Linear Embedding）是一种非常有效的非线性降维（NLDR）方法。测量每个训练实例与其最近邻（c.n.）之间的线性关系，然后寻找能最好地保留这些局部关系的训练集的低维表示，擅长展开扭曲的流形。
 
-- [VC维与模型复杂度、样本复杂度](https://blog.csdn.net/JasonDing1354/article/details/42009157)
-- 物理意义：将假设集合的数量\|H\|比作假设集合的自由度，那么VC维就是假设集合在做二元分类的有效的自由度，即这个假设空间能够产生多少Dichotomies的能力（VC维说的是，到什么时候，假设集合还能shatter，还能产生最多的Dichotomies）
-- 假设空间的容量越大，VC维越大，那么模型就越难学习
+代码：
 
-### 基本概念
+```python
+from sklearn.manifold import LocallyLinearEmbedding
+lle=LocallyLinearEmbedding(n_components=2,n_neighbors=10)
+X_reduced=lle.fit_transform(X)
+```
 
-- [VC维来龙去脉](http://www.flickering.cn/machine_learning/2015/04/vc%E7%BB%B4%E7%9A%84%E6%9D%A5%E9%BE%99%E5%8E%BB%E8%84%89/)
-- [如何通俗的理解机器学习中的VC维、shatter和break point？](https://www.zhihu.com/question/38607822/answer/149407083)
-- 学习VC维要先知道的概念有：`增长函数`（growth function）、`对分`（dichotomy）、`打散`（shattering）和`断点`（break point）
-  - 1.增长函数
-    - 增长函数表示假设空间H对m个示例所能赋予标记的最大可能结果数。
-    - 比如说现在数据集有两个数据点，考虑一种二分类的情况，可以将其分类成A或者B，则可能的值有：AA、AB、BA和BB，所以这里增长函数的值为4.
-    - 增长函数值越大则假设空间H的表示能力越强，复杂度也越高，学习任务的适应能力越强。不过尽管H中可以有无穷多的假设h，但是增长函数却不是无穷大的：对于m个示例的数据集，最多只能有2^m个标记结果，而且很多情况下也达不到2^m的情况。
-  - 2.对分
-    - 对于二分类问题来说，H中的假设对D中m个示例赋予标记的每种可能结果称为对D的一种对分（dichotomy）。对分也是增长函数的一种上限。
-  - 3.打散
-    - 打散指的是假设空间H能实现数据集D上全部示例的对分，即增长函数=2^m。但是认识到不打散是什么则更加重要
-  - 4. 断点
-    - 假设空间H的VC维数就是最大的非break point值，也就是break point-1
-  - Vapink-Chervonenkis Dimension
-    - 引出VC维的定义了：假设空间H的VC维是能被H打散的最大的示例集（数据集）的大小
-    - 或：
-      - 对于一个假设空间H，如果存在m个数据样本能够被假设空间H中的函数按所有可能的2^h种形式分开 ，则称假设空间H能够把m个数据样本打散（shatter）。假设空间H的VC维就是能打散的最大数据样本数目m。若对任意数目的数据样本都有函数能将它们shatter，则假设空间H的VC维为无穷大
+## t-SNE
+
+t-SNE是最广泛使用的可视化技术之一，但其性能在大型数据集中会受到影响。
+
+
+## UMAP
+
+【2022-1-15】
+- [UMAP：强大的可视化&异常检测工具](https://mp.weixin.qq.com/s/4fmVX7eW3N1hz5QJ59Ypxg)
+- [UMAP的初步了解及与t-SNE的比较](https://cloud.tencent.com/developer/article/1654237)
+- [比t-SNE更好的降维算法UMAP](https://www.biaodianfu.com/umap.html)
+
+PCA和tSNE，但是这二者都存在一些问题，
+- PCA的速度相对很快，但代价是数据缩减后会丢很多底层的结构信息；
+- tSNE可以保留数据的底层结构，但速度非常慢；
+
+UMAP是McInnes等人的一项新技术。与t-SNE相比，它具有许多优势，最显著的是提高了**速度**并更好地保存了数据的**全局结构**。
+- 例如，UMAP可以在3min之内处理完784维，70000点的MNIST数据集，但是t-SNE则需要45min。
+- 此外，UMAP倾向于更好地保留数据的全局结构，这可以归因于UMAP强大的理论基础。
+- 相对于t-SNE，其主要特点：降维**快准狠**
+
+UMAP和t-SNE对一套784维Fashion MNIST高维数据集降维到3维的效果的比较。高清[3D图](https://pair-code.github.io/understanding-umap/)
+- ![](https://ask.qcloudimg.com/http-save/7469656/3kml9zn2ib.png?imageView2/2/w/1620)
+- 虽然这两种算法都表现出强大的局部聚类并将相似的类别分组在一起，但UMAP害将这些相似类别的分组彼此分开。另外，UMAP降维用了4分钟，而多核t-SNE用了27分钟。
+
+UMAP是2018年被提出的降维和可视化算法，它使用Uniform流形近似和投影（UMAP），既可以获得PCA的速度优势，同时还可以保留尽可能多的数据信息，而且其可视化效果也非常美观。UMAP在很多竞赛中也得到了广泛应用，比如在高维数据集中更快更准确的进行异常值检测。
+
+Uniform Manifold Approximation and Projection (UMAP，**统一流形近似和投影**) 是一种降维技术，它不仅可以进行降维，而且可用于可视化，类似于t-SNE，也可用于一般非线性降维。UMAP基于对数据的三个假设
+- 数据均匀分布在**黎曼流形**上（Riemannian manifold）；
+- 黎曼度量是**局部**const（或可以近似为局部const）；
+- 流形是局部连接的
+根据这些假设，可以用模糊拓扑结构对流形进行建模。UMAP的优点包括：
+- 速度很快，相较于tSNE等快了非常多；
+- 因为保留了尽可能多的数据信息，其可视化效果更好；
+- 还可以用于异常检测等；
+但UMAP的问题在于RAM消耗可能有些大。尤其是在装配和创建连接图等图表时，UMAP会消耗大量内存。
+
+### 常用参数
+
+umap包继承了sklearn类，因此与其他具有相同调用API的sklearn转换器紧密地放在一起。UMAP主要参数
+- n_neighbors：这决定了流形结构局部逼近中相邻点的个数。更大的值将导致更多的全局结构被保留，而失去了详细的局部结构。一般来说，这个参数应该在5到50之间，10到15是一个合理的默认值。
+- min_dist: 这控制了嵌入的紧密程度，允许压缩点在一起。数值越大，嵌入点分布越均匀;数值越小，算法对局部结构的优化越精确。合理的值在001到0.5之间，0.1是合理的默认值。
+- n_components：作为许多scikit学习降维算法的标准，UMAP提供了一个n_components参数选项，允许用户确定将数据嵌入的降维空间的维数。与其他一些可视化算法（如t-SNE）不同，UMAP在嵌入维度上具有很好的伸缩性，因此您可以使用它进行二维或三维的可视化。
+- metric: 这决定了在输入空间中用来测量距离的度量的选择。已经编写了各种各样的度量标准，用户定义的函数只要经过numba的JITd处理就可以传递。
+
+UMAP中两个最常用的参数：n_neighbors 和min_dist，它们可有效地用于控制最终结果中局部结构和全局结构之间的平衡。
+- n_neighbors 近似最近邻居数。它有效地控制了UMAP局部结构与全局结构的平衡，数据较小时，UMAP会更加关注局部结构，数据较大时，UMAP会趋向于代表大图结构，丢掉一些细节。
+- min_dist 点之间的最小距离。此参数控制UMAP聚集在一起的紧密程度，数据较小时，会更紧密。较大的值会更松散，而将重点放在保留广泛的拓扑结构上。
+- ![](https://ask.qcloudimg.com/http-save/7469656/df7o9qyxg4.png?imageView2/2/w/1620)
+
+### 代码实践
+
+- 以sklearn内置的Digits Data这个数字手写识别数据库为例
+
+```python
+# 安装：pip install umap-learn
+from sklearn.datasets import load_digits
+import matplotlib.pyplot as plt
+
+digits = load_digits()
+fig, ax_array = plt.subplots(20, 20)
+axes = ax_array.flatten()
+for i, ax in enumerate(axes):
+    ax.imshow(digits.images[i], cmap='gray_r')
+plt.setp(axes, xticks=[], yticks=[], frame_on=False)
+plt.tight_layout(h_pad=0.5, w_pad=0.01)
+plt.show()
+```
+
+- 用umap降至2维并绘制散点图
+
+```python
+from sklearn.datasets import load_digits
+import matplotlib.pyplot as plt
+import umap
+import numpy as np
+
+digits = load_digits()
+reducer = umap.UMAP(random_state=42)
+embedding = reducer.fit_transform(digits.data)
+print(embedding.shape)
+plt.scatter(embedding[:, 0], embedding[:, 1], c=digits.target, cmap='Spectral', s=5)
+plt.gca().set_aspect('equal', 'datalim')
+plt.colorbar(boundaries=np.arange(11) - 0.5).set_ticks(np.arange(10))
+plt.title('UMAP projection of the Digits dataset')
+plt.show()
+```
+
+- ![](https://www.biaodianfu.com/wp-content/uploads/2021/07/umap.png)
+
+
+```python
+import umap
+import umap.plot   
+from sklearn.impute import SimpleImputer
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import QuantileTransformer
+# 可视化
+pipe = make_pipeline(SimpleImputer(), QuantileTransformer())
+X_processed = pipe.fit_transform(X) 
+manifold = umap.UMAP().fit(X_processed, y)
+umap.plot.points(manifold, labels=y, theme="fire")
+
+# 和IsolationForest一起做异常检测
+
+from sklearn.ensemble import IsolationForest
+pipe = make_pipeline(SimpleImputer(), QuantileTransformer(), umap.UMAP(n_components=5))
+X_processed = pipe.fit_transform(X)
+
+# Fit IsolationForest and predict labels
+iso = IsolationForest(n_estimators=500, n_jobs=9)
+labels = iso.fit_predict(X_processed)
+
+```
+
+UMAP不足：
+- 宽而稀疏的cluster中有密集的cluster。UMAP无法分离两个嵌套的群集，尤其是在维数较高时。
+- ![](https://ask.qcloudimg.com/http-save/7469656/q6qeo1fwof.png?imageView2/2/w/1620)
+- UMAP在初始图形构造中局部距离的使用可以解释该算法无法处理情况的原因。由于高维点之间的距离趋于非常相似（维数的诅咒），所以可能会因此将其混合在一起。
+
+
 
 ## [理解维度诅咒](https://blog.csdn.net/z13653662052/article/details/87936713)
 - 原文[The Curse of Dimensionality in classification](http://www.visiondummy.com/2014/04/curse-dimensionality-affect-classification/)
