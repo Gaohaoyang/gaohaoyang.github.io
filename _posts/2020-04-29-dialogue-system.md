@@ -738,6 +738,42 @@ Mingke： 每一个行业都会诞生属于这个领域的智能服务，金融�
 
 与这个过程伴随出现的，还有配套的工具、平台、基础设施，以及其他“卖水给掘金者”的业务，都会纷纷出现。下一个时代可能是属于智能服务的，看上去像是由 to B 开始的，巅峰的时候可能是全面 to C。智能服务是我认为 AI to C 的方向最有可能出现的做法。 所以我对未来是非常期待的，如果有对这个行业感兴趣的小伙伴欢迎跟我讨论或者加入这个行业。 
 
+### 国外智能客服平台
+
+【2022-1-16】
+
+[serviceNow](https://docs.servicenow.com/bundle/rome-servicenow-platform/page/administer/general/reference/r_ServiceNowPlatform.html)智能客服平台演示-[Automate customer service with Now Intelligence](https://www.servicenow.com/demo/demonow.html?x=automate-customer-self-service-with-now-intelligence&filterTag=Customer%20Service), See Now Intelligence powering self-service 自助, automation 自动 and service improvement with Virtual Agent 虚拟助手, Predictive Intelligence and Performance Analytics.
+- Watch videos instantly
+- Experience a live in-depth demo
+
+NLU terminology NLU专业术语
+
+In NLU parlance, these terms identify the key language components the system uses to classify, parse, and otherwise process natural language content.
+- **Intent** 意图
+  - Something a user wants to do or what you want your application to handle, such as granting access.
+- **Utterance** 发言
+  - A natural language example of a user intent. For example, a text string in an incident's short description, a chat entry, or an email subject line. Utterances are used to build and train intents and should therefore not include several or ambiguous meanings or intents.
+- **Entity** 实体
+  - The object of, or context for, an action. For example: a laptop, a user role, or a priority level.
+  - **System defined** entity 系统定义实体
+    - These are predefined in an instance and have highly reusable meanings, such as date, time, and location.
+  - **User defined** entity 用户自定义实体
+    - These are created in the system by users and can be built from words in the utterances they create.
+  - **Common** Entity 公共实体
+    - A context commonly used and extracted via a pre-defined entity model, such as currency, organization, people, or quantity.
+- **Vocabulary** 词库，如近义词
+  - Vocabulary is used to define or overwrite word meanings. For example, you can assign the synonym “Microsoft” to the acronym “MS”.
+
+NLU Model
+- A collection of utterance examples and their associated intents and entities that the system uses as a reference to infer intents and entities in a new utterance. You can create default models tailored 特制的 to business unit consumers, such as an ITSM Model, a CSM Model, a Federal Model, or a Boeing Model.
+- This image illustrates how Natural Language Understanding processes and renders utterance examples into intents and entities in the system.
+- ![](https://docs.servicenow.com/bundle/rome-now-intelligence/page/administer/natural-language-understanding/images/natural-language-understanding-examples.png)
+
+NLU Workbench
+- Use the NLU Workbench to create morphological representations of human language. These models enable you to create intents and entities expressed in natural language utterances. Any ServiceNow application can invoke an NLU model to get an inference of intents and entities in a given utterance.
+- Using the nlu_admin role, you build your models in the NLU Workbench, where you create, train, test, and publish them iteratively.
+- ![](https://docs.servicenow.com/bundle/rome-now-intelligence/page/administer/natural-language-understanding/images/natural-language-understanding-modeling-Q.png)
+
 ## 智能外呼
 
 - 【2021-5-17】智能外呼机器人，[知乎](https://www.zhihu.com/question/268748598), [行业现状](https://pic2.zhimg.com/80/v2-843538439c23e20a0473028b5c1bcdef_1440w.jpg?source=1940ef5c)，[智能获客机器人](https://pic4.zhimg.com/80/v2-12cac2954590abe9960823a9c6918930_1440w.jpg?source=1940ef5c)
