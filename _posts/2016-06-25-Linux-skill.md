@@ -237,6 +237,7 @@ useradd -m wqw  # 添加用户：
 passwd wqw # 设置密码
 
 su wqw # 切换用户
+sudo -i -u aisearch # 【2022-1-16】root下切换账户
 userdel  -r  wqw # 删除用户
 # 类似useradd，但adduser更实用，交互式创建用户
 adduser tommy # 添加一个名为tommy的用户，
