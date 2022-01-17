@@ -1580,7 +1580,7 @@ DoWhy支持Python 3+，它需要以下包：
 
 - [Jupyter notebook示例](https://github.com/microsoft/dowhy/blob/master/docs/source/example_notebooks/dowhy_simple_example.ipynb)
 - ![](https://raw.githubusercontent.com/microsoft/dowhy/master/docs/images/dowhy-schematic.png)
-- [微软因果推理框架DoWhy入门](http://www.atyun.com/41349.html)
+- 参考：精华-[微软因果推理框架DoWhy入门](http://www.atyun.com/41349.html)
 
 
 安装
