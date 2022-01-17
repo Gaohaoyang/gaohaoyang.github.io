@@ -380,6 +380,11 @@ mathjax: true
 我们已经进入一个崭新的时代。人工智能仍将充满希望，裹挟着炒作与浮躁。它所带来的，也许将远远超过个人计算和互联网在过去30年对世界造成的改变。带着对未来的期许，让我们回到图灵一开始提的问题：“机器能思考吗？”可能不需要再次历经70年的求索，答案也许就在这个十年。
 
 
+# AI 大人物
+
+业界四大天王（或者五大）都是谁，他们都作出了哪些贡献？
+- 祖师爷Jordan（刚加入阿里），Geoffrey Hinton（Google），Yoshua Bengio（目前唯一留在学术界的中立人士），Yann LeCun（Facebook），Andrew NG（离开百度，好像去了她媳妇相关的公司）等等，华人的骄傲Feifei Li（李飞飞）加入Google，负责Google cloud部门，她的高徒Andrej Karpathy加入Tesla，而Tesla老板，钢铁侠原型，Elon Musk一直反AI，特地成立之际的OpenAI，以防止AI为少数人控制，祸害人类
+- LSTM发明人：Jürgen Schmidhuber，199*年发明LSTM，但名气被埋没。2016年GAN演讲现场，怼Ian Goodfellow，[视频地址](https://www.youtube.com/watch?v=AJVyzd0rqdc&t=3778s)
 
 
 # 人类唯一的出路：变成人工智能
