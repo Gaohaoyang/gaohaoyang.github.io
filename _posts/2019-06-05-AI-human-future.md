@@ -3,7 +3,7 @@ layout: post
 title:  "人工智能及未来畅想-AI and Future"
 date:   2019-06-05 23:41:00
 categories: 人工智能
-tags: 人工智能 AI 人类简史 人文 哲学 康德 汉字屋 清华大学 天机 自行车 AGI 类脑 类机 waitbutwhy 脑机接口 张首晟 姚期智 冯·诺依曼 天道 沈向洋 戴海琼 达摩院 Bengio SNN 神经网络 BP
+tags: 人工智能 AI 人类简史 人文 哲学 康德 汉字屋 清华大学 天机 自行车 AGI 类脑 类机 waitbutwhy 脑机接口 张首晟 姚期智 冯·诺依曼 天道 沈向洋 戴海琼 达摩院 Bengio SNN 神经网络 BP 三定律
 excerpt: 深度思考
 mathjax: true
 ---
