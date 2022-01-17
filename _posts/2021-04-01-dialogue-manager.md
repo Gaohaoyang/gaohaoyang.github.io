@@ -1014,11 +1014,9 @@ DST 主要分为三类方法：基于人工规则、基于生成式模型和基�
 ### DSTC
 
 - 讲到DST就不得不讲**DSTC**，DSTC是Dialog System Technology Challenge，主要包括6个Challenge。DSTC对DST的作用就相当于目标函数对机器学习任务的作用，真正起到了评估DST技术以及促进DST技术发展的作用。之所以先说DSTC是因为后面的很多DST的方法是在某个DSTC（大多是DSTC2、DSTC3、DSTC4、DSTC5）上做的。
-
 - ![](https://upload-images.jianshu.io/upload_images/17303794-b38b10790b64127f.jpg)
-
-
 - 详情参考：[任务型对话系统中状态追踪（DST）](https://www.jianshu.com/p/085eb0262284)
+- 【2022-1-17】[DSTC10开放领域对话评估比赛冠军方法总结](https://mp.weixin.qq.com/s/UKwN4pXQf_jhgtMefSzuDw)，国际竞赛DSTC10开放领域对话评估赛道的冠军方法MME-CRS，该方法设计了多种评估指标，并利用相关性重归一化算法来集成不同指标的打分，为对话评估领域设计更有效的评估指标提供了参考。相关方法已同步发表在AAAI 2022 Workshop上。希望能给从事该技术领域工作的同学一些启发或帮助。
 
 ## DP
 
