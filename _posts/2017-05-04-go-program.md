@@ -328,7 +328,7 @@ func typeDemo() {
     structArray := []struct {
         name string
         age  int
-    }{{"Tim", 18}, {"Jim", 20}}
+    } { {"Tim", 18}, {"Jim", 20} }
 
     // 数组遍历
     for i := 0; i < len(array); i++ {
