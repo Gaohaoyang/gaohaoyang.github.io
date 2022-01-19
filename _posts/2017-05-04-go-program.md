@@ -22,17 +22,19 @@ catalog: true
 # go语言
 
 - [Go语言教程](http://www.yiibai.com/go/go_start.html)
-- 酷壳：[go语言简洁](http://coolshell.cn/articles/8460.html)，[附加](http://coolshell.cn/articles/8489.html）
+- 酷壳：[go语言简洁](http://coolshell.cn/articles/8460.html)，[附加](http://coolshell.cn/articles/8489.html)
 - [Go的50坑：新Golang开发者要注意的陷阱、技巧和常见错误]()
 
 go是一种**编译型**（翻译成更低级的语言，如汇编）、具有**静态**类型和**类c**风格语法的语言，并具具备垃圾回收机制，编译型语言特点：运行快，开发慢；不同于解释型语言
 
-go vim颜色显示：进入目录 ~/.vim/bundle，git clone https://github.com/fatih/vim-go.git
+go vim颜色显示：
+- 进入目录 ~/.vim/bundle
+- git clone https://github.com/fatih/vim-go.git
 
 ## go常用命令
 
 命令行：
-- go env    显示go环境变量配置
+- go env: 显示go环境变量配置
 Go常用命令：
 - go get: 获取远程包，需提前安装git或hg
 - go build: 测试编译，检查是否有编译错误
@@ -50,9 +52,10 @@ Go常用命令：
   - win地址：https://go.dev/dl/go1.17.6.windows-amd64.msi
   - mac地址： wget https://go.dev/dl/go1.17.6.darwin-amd64.pkg
   - linux地址: wget https://go.dev/dl/go1.17.6.linux-amd64.tar.gz
-- 环境变量：vim ~/.bash_profile
+- 环境变量：
 
 ```shell
+# vim ~/.bash_profile
 export GOROOT=/usr/local/go
 export PATH=$PATH:$GOROOT/bin
 ```
@@ -137,11 +140,11 @@ Go 程序的执行（程序启动）顺序如下：
 1. 在完成这一切之后，main 也执行同样的过程，最后调用 main 函数开始执行程序。
 
 导入包的多种方式：三种模式：**正常**模式、**别名**模式、**简便**模式
-- 直接根据$GOPATH/src目录导入import "test/lib"(路径其实是$GOPATH/src/test/lib)
-- 别名导入：import alias_name "test/lib" ，这样使用的时候，可以直接使用别名
-- 使用点号导入：import . "test/lib"，作用是使用的时候直接省略包名
-- 使用下划线导入：improt _ "test/lib"，该操作其实只是引入该包。当导入一个包时，它所有的init()函数就会被执行，但有些时候并非真的需要使用这些包，仅仅是希望它的init()函数被执行而已。这个时候就可以使用_操作引用该包。即使用_操作引用包是无法通过包名来调用包中的导出函数，而是只是为了简单的调用其init函数()。往往这些init函数里面是注册自己包里面的引擎，让外部可以方便的使用，例如实现database/sql的包，在init函数里面都是调用了sql.Register(name string, driver driver.Driver)注册自己，然后外部就可以使用了。
-- 相对路径导入     import   "./model"  //当前文件同一目录的model目录，但是不建议这种方式import
+- **直接**根据 $GOPATH/src 目录导入 import "test/lib" (路径其实是 $GOPATH/src/test/lib )
+- **别名**导入：import alias_name "test/lib" ，这样使用的时候，可以直接使用别名
+- 使用**点号**导入：import . "test/lib"，作用是使用的时候直接省略包名
+- 使用**下划线**导入：improt _ "test/lib"，该操作其实只是引入该包。当导入一个包时，它所有的init()函数就会被执行，但有些时候并非真的需要使用这些包，仅仅是希望它的init()函数被执行而已。这个时候就可以使用_操作引用该包。即使用_操作引用包是无法通过包名来调用包中的导出函数，而是只是为了简单的调用其init函数()。往往这些init函数里面是注册自己包里面的引擎，让外部可以方便的使用，例如实现database/sql的包，在init函数里面都是调用了sql.Register(name string, driver driver.Driver)注册自己，然后外部就可以使用了。
+- **相对路径**导入 : import   "./model"  //当前文件同一目录的model目录，但是不建议这种方式import
 
 ```go
 package main  //必备，go程序在包中运行(每个包都有个相关的路径)
@@ -211,7 +214,7 @@ import (
 
 
 规范：
-1. 命名：骆驼命名法（不要用下划线）
+1. 命名：**骆驼**命名法（不要用下划线）
 
 命令:
 - go get github.com/coderzh/xxx
