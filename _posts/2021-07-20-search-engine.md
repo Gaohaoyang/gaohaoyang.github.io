@@ -477,6 +477,42 @@ Query扩展pair的挖掘方式和纠错差不多，可以建模为pair对判别�
 
 # 开源搜索引擎
 
+## 主流搜索引擎调用
+
+- 谷歌可以用：Google Custom Search API。[如何使用谷歌搜索API来获取结果](https://zhuanlan.zhihu.com/p/174666017)
+  - 接口地址: https://www.googleapis.com/customsearch/v1?key={YOUR_KEY}&q={SEARCH_WORDS}&cx={YOUR_CX}&start={10}&num={10}
+  - KEY 从 [谷歌云 API 控制台](https://console.developers.google.com/apis/credentials) 来的，需要有外币卡先注册谷歌云账号。但似乎付费的话就不用这个 KEY 了，仅用 CX 即可，这个待查。
+  - CX 是 id 标识，从 [谷歌可编程搜索](https://programmablesearchengine.google.com/cse/create/new) 中来
+  - 一天只有 100 次的免费搜索限额，但最高只能查询前 100 条。如需增加则 5 刀 1000 次，但一天上限 10000。 次，对于我来说已经足够用了
+- 百度没有公开api，自己分析：[LittleCoder](https://www.zhihu.com/question/46345033/answer/101028762)
+
+```python
+#coding=utf8
+import requests, re
+
+url = 'https://www.baidu.com/s'
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.87 Safari/537.36'}
+r = re.compile('<h3[\s\S]*?<a[^>]*?href[^>]*?"(.*?)"[^>]*?>(.*?)</a>')
+
+def baidu_search(keyword):
+    params = {'wd': keyword, 'pn': 0, 'ie': 'utf-8'}
+    try:
+        while 1:
+            for i in r.findall(requests.get(url, params, headers = headers).content):
+                yield (re.compile('<.*?>').sub('', i[1]).decode('utf8'), i[0])
+            params['pn'] += 10
+    except GeneratorExit:
+        pass
+    except:
+        while 1: yield ('', '')
+
+for i, result in enumerate(baidu_search(u'知乎')):
+    if 30 < i: break
+    print('%s: %s'%result)
+
+```
+
+
 ## MeiliSearch
 
 一款开源免费、功能强大、快速、易于使用和部署的搜索引擎 MeiliSearch。从搜索到展示结果速度达到小于 50 毫秒，可高度自由定制搜索与索引，能理解错字和拼写错误，支持中文字符、同义词等功能。
