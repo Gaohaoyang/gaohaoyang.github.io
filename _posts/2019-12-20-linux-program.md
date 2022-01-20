@@ -6053,11 +6053,14 @@ linux 平台下使用 CMake 生成 Makefile 并编译的流程如下：
 - 【2021-5-12】[CMakeList语法知识](https://www.jianshu.com/p/33efb7b67acc)
 - 实际项目中的C/C++文件不计其数、文件放置的位置也不同，Makefile定义了一系列的规则来指定，哪些文件需要先编译，哪些文件需要后编译，哪些文件需要重新编译，甚至于进行更复杂的功能操作。实现自动化的编译。
 - CMake是一种**跨平台**编译工具，比make更高级，使用更方便。**CMake**主要是编写**CMakeLists.txt**文件，通过cmake命令将CMakeLists.txt文件转化为make所需要的**Makefile文件**，最后用make命令编译源码生成**可执行程序或者库文件**。
-- cmake 指向CMakeLists.txt所在的目录，例如 cmake .. 表示CMakeLists.txt在当前目录的上一级目录。cmake后会生成很多编译的中间文件以及makefile文件，所以一般建议新建一个新的目录，专门用来编译
+- cmake 指向CMakeLists.txt所在的目录，例如
+  - cmake .. 表示CMakeLists.txt在当前目录的上一级目录。
+  - cmake后会生成很多编译的中间文件以及makefile文件，所以一般建议新建一个新的目录，专门用来编译
 
 **CMake方式编译生成库文件**
 
-CMake的语法,创建一个 test项目，项目结构如下:
+CMake的语法, 创建一个 test 项目，项目结构如下:
+
 ```shell
 ├── test目录 # 测试？
 │ ├── CMakeLists.txt 
@@ -6068,7 +6071,9 @@ CMake的语法,创建一个 test项目，项目结构如下:
 │ ├── lib目录 # lib库
 │ ├── biuld目录 # 构建项目
 ```
+
 myprint.h
+
 
 ```cpp
 #include<stdio.h>
@@ -6087,31 +6092,67 @@ void myprint(char* str) {
 }
 ```
 
+cmake常用变量
+- PROJECT_SOURCE_DIR：工程的根目录
+- PROJECT_BINARY_DIR：运行cmake命令的目录，通常为${PROJECT_SOURCE_DIR}/build
+- PROJECT_NAME：返回通过 project 命令定义的项目名称
+- CMAKE_CURRENT_SOURCE_DIR：当前处理的 CMakeLists.txt 所在的路径
+- CMAKE_CURRENT_BINARY_DIR：target 编译目录
+- CMAKE_CURRENT_LIST_DIR：CMakeLists.txt 的完整路径
+- EXECUTABLE_OUTPUT_PATH：重新定义目标二进制可执行文件的存放位置
+- LIBRARY_OUTPUT_PATH：重新定义目标链接库文件的存放位置
+
 CMakeLists.txt文件
+- CMakeLists.txt 的语法比较简单，由命令、注释和空格组成，其中命令是**不区分大小写**的。
+- 符号#后面的内容被认为是注释。
+- 命令由命令名称、小括号和参数组成，参数之间使用空格进行间隔。
 
 ```shell
-# 指定CMake编译最低要求版本
+# 添加本项目版本号：当前的项目的主版本号和副版本号
+set (Demo_VERSION_MAJOR 1) # 主版本
+set (Demo_VERSION_MINOR 0) # 副版本
+
+# 指定CMake编译最低要求版本；使用高版本cmake 特有的一些命令时需要加上这行，提醒用户升级到该版本之后再执行 cmake。
 CMAKE_MINIMUM_REQUIRED(VERSION 3.14)
+
 # 指定项目的名称，一般和项目的文件夹名称对应
-PROJECT(MYPRINT) # 或 project，这个命令非必须，但最好都加上。它会引入两个变量 demo_BINARY_DIR 和 demo_SOURCE_DIR，同时，cmake自动定义了两个等价的变量 PROJECT_BINARY_DIR 和 PROJECT_SOURCE_DIR。
-# 源文件目录
+PROJECT(MYPRINT) # 或 project，这个命令非必须，但最好都加上。
+# 引入两个变量 demo_BINARY_DIR 和 demo_SOURCE_DIR，同时，cmake自动定义了两个等价的变量 PROJECT_BINARY_DIR 和 PROJECT_SOURCE_DIR。
+
+# 指定源文件目录，自动获取目录下所有源文件到变量名DIR_SRCS，免得一个个添加源文件；
 AUX_SOURCE_DIRECTORY(src DIR_SRCS)
 # 收集c/c++文件并赋值给变量SRC_LIST_CPP  ${PROJECT_SOURCE_DIR}代表区当前项目录
 FILE(GLOB SRC_LIST_CPP ${PROJECT_SOURCE_DIR}/src/*.cpp)
 FILE(GLOB SRC_LIST_C ${PROJECT_SOURCE_DIR}/src/*.c)
+
+# -------- 添加子目录(嵌套包含cmakelists.txt) --------- 
+add_subdirectory(math) # 子目录math下也包含源码
+# 子目录中的 CMakeLists.txt
+# 查找当前目录下的所有源文件
+# 并将名称保存到 DIR_LIB_SRCS 变量
+aux_source_directory(. DIR_LIB_SRCS)
+# 生成链接库
+add_library (MathFunctions ${DIR_LIB_SRCS})
+# ---------------------------
+
 # 指定头文件目录
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/include)
 # 指定生成库文件的目录
 SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+
 # ==== 设置编译类型 =====
-# 去变量SRC_LIST_CPP 与SRC_LIST_C 指定生成libmyprint 动态库   默认生成静态库  SHARED指定生成库类型为动态库
+# 去变量SRC_LIST_CPP 与SRC_LIST_C 指定生成libmyprint 动态库，默认生成静态库，SHARED指定生成库类型为动态库
+# Linux 下  ：demo libcommon.a libcommon.so
+# Windows 下：demo.exe common.lib common.dll
 ADD_LIBRARY(myprint SHARED ${SRC_LIST_CPP} ${SRC_LIST_C})
 add_library(common STATIC util.cpp) # 生成静态库（默认）  libcommon.a(linux)/common.lib(windows)
 add_library(common SHARED util.cpp) # 生成动态库或共享库  libcommon.so(linux)/common.dll(windows)
+# 制定包含的源文件
 add_library(demo demo.cpp test.cpp util.cpp) # 指定demo包含的源文件
+
 # ===== 自定义搜索规则 =====
-file(GLOB SRC_LIST "*.cpp" "protocol/*.cpp")
-add_library(demo ${SRC_LIST})
+file(GLOB SRC_LIST "*.cpp" "protocol/*.cpp") # 将当前目录和protocol目录下的cpp文件找出来，存放到SRC_LIST变量中
+add_library(demo ${SRC_LIST}) # demo依赖以上源文件
 # 或者
 file(GLOB SRC_LIST "*.cpp")
 file(GLOB SRC_PROTOCOL_LIST "protocol/*.cpp")
@@ -6120,12 +6161,57 @@ add_library(demo ${SRC_LIST} ${SRC_PROTOCOL_LIST})
 aux_source_directory(. SRC_LIST)
 aux_source_directory(protocol SRC_PROTOCOL_LIST)
 add_library(demo ${SRC_LIST} ${SRC_PROTOCOL_LIST})
+# 查找库文件
 find_library(VAR name path) # 查找到指定的预编译库，并将它的路径存储在变量中
 # 类似的命令还有 find_file()、find_path()、find_program()、find_package()。
 
 aux_source_directory(. SRC_LIST) # 搜索当前目录下的所有.cpp文件, 并保存在变量SRC_LIST中
 add_library(demo ${SRC_LIST})
+
+# 生成可执行文件
 add_executable(demo demo.cpp) # 生成可执行文件 demo/demo.exe
+
+# 添加链接库
+target_link_libraries(Demo MathFunctions) # 可执行文件 main 需要连接一个名为 MathFunctions 的链接库
+
+# ------- 测试 ---------
+# 启用测试
+enable_testing()
+# 测试程序是否成功运行
+add_test (test_run Demo 5 2)
+# 测试帮助信息是否可以正常提示
+add_test (test_usage Demo)
+set_tests_properties (test_usage
+  PROPERTIES PASS_REGULAR_EXPRESSION "Usage: .* base exponent")
+
+# 定义一个宏，用来简化测试工作
+macro (do_test arg1 arg2 result)
+  add_test (test_${arg1}_${arg2} Demo ${arg1} ${arg2})
+  set_tests_properties (test_${arg1}_${arg2}
+    PROPERTIES PASS_REGULAR_EXPRESSION ${result})
+endmacro (do_test)
+# 使用该宏进行一系列的数据测试
+do_test (5 2 "is 25")
+do_test (10 5 "is 100000")
+
+# ------ gdb调试 ------
+set(CMAKE_BUILD_TYPE "Debug")
+set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb")
+set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
+
+# ------- 安装包 -------
+# 构建一个 CPack 安装包
+include (InstallRequiredSystemLibraries) # 导入 InstallRequiredSystemLibraries 模
+set (CPACK_RESOURCE_FILE_LICENSE # 设置一些 CPack 相关变量，包括版权信息和版本信息，
+  "${CMAKE_CURRENT_SOURCE_DIR}/License.txt")
+set (CPACK_PACKAGE_VERSION_MAJOR "${Demo_VERSION_MAJOR}")
+set (CPACK_PACKAGE_VERSION_MINOR "${Demo_VERSION_MINOR}")
+include (CPack) # 导入 CPack 模块
+# 生成二进制安装包：
+cpack -C CPackConfig.cmake
+# 生成源码安装包
+cpack -C CPackSourceConfig.cmake
+
 ```
 
 cd到项目biuld目录执行cmake命令, 将会在biuld目录下生成Makefile文件，执行make命令项目就会开始编译，在项目lib目录下生成libmyprint.so文件
@@ -6135,6 +6221,8 @@ mkdir build
 cd build
 cmake .. # cmakelists文件目录
 cmake -H. -Bbuild # 或指定输出目录
+ccmake .. # 可交互方式进行，字符界面
+
 # 生成makefile文件
 make # 开始编译
 # 生成libmyprint.dylib文件
@@ -6158,23 +6246,21 @@ int main() {
 CMAKE_MINIMUM_REQUIRED(VERSION 3.14)
 #指定项目名称
 PROJECT(HELLO)
-
 #将hello.cpp 赋值给SOURCE 变量
 SET(SOURCE ${PROJECT_SOURCE_DIR}/src/hello.cpp)
-
 #指定头文件目录
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/include)
 #指定链接库文件目录
 LINK_DIRECTORIES(${PROJECT_SOURCE_DIR}/lib)
-
 #将hello.cpp生成可执行文件hello 
 ADD_EXECUTABLE(hello ${SOURCE})
-
 #指定hello 链接库myprint
 TARGET_LINK_LIBRARIES(hello myprint)
 ```
 
 build目录下，重新执行一遍cmake及make，生成二进制文件 ./hello
+
+- 更多示例：[cmake语法与实战入门](https://zhuanlan.zhihu.com/p/267803605)
 
 CMakeLists.txt文件规则
 
