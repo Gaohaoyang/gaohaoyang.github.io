@@ -3,7 +3,7 @@ layout: post
 title:  BERT及预训练语言模型-BERT-and-Pretrain-Language-Model
 date:   2019-12-10 16:52:00
 categories: 深度学习 
-tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook TextCNN ES 田渊栋 彩票假设 自监督 Milvus ALBERT elasticsearch es 可视化 unilm simcse
+tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook TextCNN ES 田渊栋 彩票假设 自监督 Milvus ALBERT elasticsearch es 可视化 unilm simcse gpu
 excerpt: 预训练语言模型及BERT知识点汇总
 mathjax: true
 ---
@@ -223,7 +223,16 @@ PTMs-Papers:
 
 PyTorch实现了从语言中识别情绪情感反讽的DeepMoji模型：https://github.com/huggingface/torchMoji
 
-## transformers库
+## transformers 库
+
+【2022-1-21】[让 Transformer 的推理速度提高 4.5 倍，这个小 trick 还能给你省十几万](https://mp.weixin.qq.com/s/fYxFwBvfQFPTqMZL6UI5WQ)
+- NLP明星公司Hugging Face发布了一个叫做Infinity的产品，可以以1ms延时完成Transformer的推理，性能相当高了。但有点贵——1年至少要十几万块 （2万美元）
+- 有没有别的办法？Transformer-deploy：开源的、“不费吹灰之力”就可以达到Infinity一些公共基准的那种。并且现在，通过在该方法上施加一个小trick（GPU量化（quantization）），将Transformer的推理速度提高4.5倍！
+  - 用一行命令优化和部署Hugging Face上的Transformer模型，并支持大多数基于Transformer编码器的模型，比如Bert、Roberta、miniLM、Camembert、Albert、XLM-R、Distilbert等。
+  - Transformer-deploy推理服务器用的是Nvidia Triton。推理引擎为Microsoft ONNX Runtime（用于CPU和GPU推理）和Nvidia TensorRT（仅限 GPU）。如果想在GPU上获得一流的性能，Nvidia Triton+Nvidia TensorRT这样的组合无疑是最佳选择。虽然TensorRT用起来有点难，但它确实能比用Pytorch快5～10倍。
+  - 在实际性能测试中，Transformer-deploy在batch size为1、token分别为16和128的输入序列中的推理速度，都比付费的Hugging Face Infinity要快：Transformer-deploy在token为16时要1.52ms，Infinity则需要1.7ms；token为128时需要1.99ms，Infinity则需要2.5ms。
+
+### 介绍
 
 - 这个库最初的名称是 pytorch-pretrained-bert，它随着BERT一起应运而生。Google2018年10月底在开源了[BERT](https://github.com/google-research/bert) 的tensorflow实现。当时，BERT以其强劲的性能，引起NLPer的广泛关注。几乎与此同时，pytorch-pretrained-bert也开始了它的第一次提交。pytorch-pretrained-bert 用当时已有大量支持者的pytorch框架复现了BERT的性能，并提供预训练模型的下载，使没有足够算力的开发者们也能够在几分钟内就实现 state-of-art-fine-tuning。
 - 直到2019年7月16日，在repo上已经有了包括BERT，GPT，GPT-2，Transformer-XL，XLNET，XLM在内六个预训练语言模型，这时候名字再叫pytorch-pretrained-bert 就不合适了，于是改成了pytorch-transformers，势力范围扩大了不少。这还没完！
