@@ -825,6 +825,10 @@ LSTM有三个门：
 - **输出**门：LSTM的输出门选择作为输出的信息
 
 
+两种类型的时间序列分析：
+- **单**变量时间序列：如，日期 → 销量
+- **多**元时间序列：如，日期、月份、星期、天气等 → 销量
+
 ```python
 from sklearn.preprocessing import MinMaxScaler
 from keras.models import Sequential
