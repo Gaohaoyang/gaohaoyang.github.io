@@ -37,9 +37,11 @@ tags: jekyll markdown 插件 github gitee 码云 latex 公式
 **方法一** 转成markdown文件
 - 将ipynb文件直接转成markdown文件
 - nbconvert 命令：
+
 ```shell
 ipython nbconvert jekyll_test.ipynb --to markdown
 ```
+
 - 注意：转换图片会保存到jekyll_test_files, 即nb名_files文件夹
 - 参考：[Linode: Display Jupyter Notebooks with Jekyll](https://www.linode.com/docs/applications/project-management/jupyter-notebook-on-jekyll/)
 
@@ -47,10 +49,14 @@ ipython nbconvert jekyll_test.ipynb --to markdown
 - 用gem库：自动将ipynb转为html——更灵活
    - [Github: Jekyll Jupyter Notebook plugin](https://github.com/red-data-tools/jekyll-jupyter-notebook)
    - 安装命令：
+
 ```shell
 gem install jekyll-jupyter-notebook
 ```
-   - 改配置
+
+- 改配置
+
+
 ```shell
 # paginate 2020-2-15 增加jupyter文件自动转html功能
 plugins: [jekyll-paginate,jekyll-jupyter-notebook]
@@ -89,10 +95,11 @@ plugins: [jekyll-paginate,jekyll-jupyter-notebook]
 import os
 print "hello"
 ```
+
 - 字体大小
-   - <font size=2>二号字尺寸式样 </font> 
+  - <font size=2>二号字尺寸式样 </font> 
 - **加粗**, *斜体*
-- <font color='green'>彩色字体</font>
+  - <font color='green'>彩色字体</font>
 
 ### Jekyll admin插件
 
@@ -293,7 +300,7 @@ pdf文件直接显示，800px不能省略px，否则高度低
 
 
 ### 视频嵌入
----
+
 【2019-04-29】嵌入视频
 
 代码：
@@ -343,9 +350,6 @@ pdf文件直接显示，800px不能省略px，否则高度低
   <source src="https://vdn1.vzuu.com/SD/48e8724a-9521-11eb-a73c-be9fcf3af908.mp4?disable_local_cache=1&auth_key=1619412400-0-0-298e79ec9b1fd68667f15832b49df810&f=mp4&bu=pico&expiration=1619412400&v=hw" type="video/mp4" />
 </video>
 
-
-
----
 
 
 ### 脑图嵌入
