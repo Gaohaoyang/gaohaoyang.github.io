@@ -46,20 +46,40 @@ mathjax: true
   - ![](https://nimg.ws.126.net/?url=http%3A%2F%2Fcrawl.ws.126.net%2F7c94e843684192fbe3dd3a77e93778b7.jpg&thumbnail=660x2147483647&quality=80&type=jpg)
 
 
-- 百度虚拟人，
+### 案例
+
+#### 虚拟客服
+
+[“黑科技”出乎所料，百度终端虚拟人3.0重磅发布](https://new.qq.com/omn/20210402/20210402A0DZSY00.html)
+
+终端虚拟人3.0-虚拟客服智能大屏产品示意图
+- ![](https://inews.gtimg.com/newsapp_bt/0/13367913184/1000)
+
+2019年，通过百度智能云与浦发银行联合打造的金融数字人“小浦”就已亮相。百度基于人工智能、感知技术、数据驱动等技术，为金融服务构造了一个具有智能感知、自然交互和精准分析决策能力的数字世界的“人”。 作为国内首个银行“虚拟员工”，“小浦”具备3D形象，表情、动作、语气、语调逼真，不仅能实现视觉、听觉多感官的实时交流互动，还能利用深度学习技术学习专业领域知识，帮助员工完成标准业务流程。
+- ![](https://inews.gtimg.com/newsapp_bt/0/13367915051/1000)
 
 ### 虚拟人创建工具
 
+
+#### 国外MetaHuman
 - 【2022-1-6】元宇宙虚拟人物建模工具 [MetaHuman Creator](https://www.unrealengine.com/zh-CN/metahuman-creator) （源自3D创作公司[unrealengine](https://www.unrealengine.com/zh-CN/)）是一款基于云服务的应用，能帮助任何人在几分钟内创建照片级逼真的数字人类。韩国姑娘失业后通过此工具玩游戏主播，成立公司。[使用示例](https://www.ixigua.com/7047138696230931747)
   - ![](https://i0.hdslb.com/bfs/article/4dffc65ff80a035e9ffcbaa827da4f1683faa533.png@942w_531h_progressive.webp)
   - [分分钟打造超写实角色！MetaHuman这个黑科技怎么用？](http://www.gamelook.com.cn/2021/05/441678)
   - 渲染条件：一台可访问互联网的Windows或macOS计算机，以及一个Chrome、Edge（Chromium）、火狐或Safari网页浏览器。你还需要一个Epic Games账户。要下载MetaHuman则需要安装免费的虚拟现实引擎：[Quixel Bridge应用](https://quixel.com/bridge)。
+
+
+#### 百度智能云
 
 【2021-08-24】[简单、快捷、低成本的超写实虚拟人平台来了……](https://ai.baidu.com/support/news?action=detail&id=2575)
 
 新发布的百度智能云“数字明星运营平台与灿星计划”，有可能就是这样的平台，它正是朝着让超写实虚拟人开发，变得更简单快捷、更低成本、更易运营这一方向去的。
 - ![](https://baidu-ai-ar-1512380202189-8487.bj.bcebos.com/%E6%95%B0%E5%AD%97%E6%98%8E%E6%98%9F%E8%BF%90%E8%90%A5%E5%B9%B3%E5%8F%B0.mp4)
 - [视频](https://baidu-ai-ar-1512380202189-8487.bj.bcebos.com/%E6%95%B0%E5%AD%97%E6%98%8E%E6%98%9F%E8%BF%90%E8%90%A5%E5%B9%B3%E5%8F%B0.mp4)
+
+<video width="620" height="440" controls="controls" autoplay="autoplay">
+  <source src="https://baidu-ai-ar-1512380202189-8487.bj.bcebos.com/%E6%95%B0%E5%AD%97%E6%98%8E%E6%98%9F%E8%BF%90%E8%90%A5%E5%B9%B3%E5%8F%B0.mp4" type="video/mp4" />
+</video>
+
 百度“数字明星运营平台”能做到：
 - 用 AI 智能的方式 快速打造数字虚拟偶像 
   - 打造的虚拟偶像既有 3D 超写实的、直接在真人基础上生成的，也有半写实或二维的、宠物化的，都能做到高效、快速生成。而且是一体化智能平台，既能打造 IP 也能运营 IP，和我期望的新平台非常接近。
@@ -76,7 +96,11 @@ mathjax: true
 - 第一步，用高精度 4D 扫描技术，对人体进行全方位扫描，捕捉真人的细腻表现。
 - 第二步，用人工智能机器深度学习扫描数据，并用人工智能算法组合驱动丰富真实的实时面部表现，从而超高精度还原真人模特。
   - ![](https://ai.bdstatic.com/file/AD3144C562E7463889E2D41C8FAC72BB)
-  - ![](https://baidu-ai-ar-1512380202189-8487.bj.bcebos.com/%E5%8A%A8%E6%80%81%E7%B2%BE%E6%A8%A1.mp4)
+
+<video width="620" height="440" controls="controls" autoplay="autoplay">
+  <source src="https://baidu-ai-ar-1512380202189-8487.bj.bcebos.com/%E5%8A%A8%E6%80%81%E7%B2%BE%E6%A8%A1.mp4" type="video/mp4" />
+</video>
+
 - 第三步，设定五个关键维度，即表情、口型、毛发、布料、身型，来打造超写实虚拟明星，尤其是加入了表情可变的口型合成算法，让用户观感更亲切自然，彻底解决口型和表情失真的问题。
 
 - （1）真人
