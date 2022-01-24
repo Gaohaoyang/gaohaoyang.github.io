@@ -128,9 +128,6 @@ mathjax: true
 - 待补充
 
 
-### 图灵机
-
-
 ### 图灵机历史
 
 [图灵机：计算机世界的理论基石](https://zhuanlan.zhihu.com/p/135251031)
@@ -150,6 +147,11 @@ mathjax: true
 - 1936年，两位年轻的数学家分别用不同的方法给出了判定问题的解答。
   - 一位是来自美国的阿隆佐·邱奇（Alonzo Church），他引入了一种叫**λ演算**的方法，并最终证明没有任何通用算法可以判定任意两个λ表达式是否相等；
   - 另一位就是来自英国的艾伦·图灵（Alan Turing），和枯燥的数学推理不同，他使用了一种更有趣、更形象的模型，邱奇给了它一个响亮的名字——`图灵机`（Turing machine）。
+
+【2022-1-24】二进制原理
+- ![](https://p26.toutiaoimg.com/img/tos-cn-i-qvj2lq49k0/5ba41d7c1788478d891cd6cf4b505709~tplv-obj:400:224.gif)
+- ![](https://p26.toutiaoimg.com/img/tos-cn-i-qvj2lq49k0/3f1744b7623c42408114a178ff63f71d~tplv-obj:320:240.gif)
+
 
 #### 图灵机介绍
 
