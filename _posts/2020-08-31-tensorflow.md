@@ -370,26 +370,45 @@ w_grad, b_grad = tape.gradient(L, [w, b])        # 计算L(w, b)关于w, b的偏
 print(L, w_grad, b_grad)
 ```
 
+## 数据
+
+### tf.data
+
+若要使用大型数据集或多设备训练，要使用Dateset API ，将tf.data.Dataset实例传递给fit方法：
+
+```python
+# 实例化玩具数据集实例：
+dataset = tf.data.Dataset.from_tensor_slices((data, labels))
+dataset = dataset.batch(32)
+dataset = dataset.repeat()
+
+# 在数据集上调用`fit`时，不要忘记指定`steps_per_epoch`
+model.fit(dataset, epochs=10, steps_per_epoch=30)
+```
+
+
 ## 模型建立与训练
 
 ### 基本流程
 
-如何使用 TensorFlow 快速搭建动态模型
-- 模型的**构建**： tf.keras.Model 和 tf.keras.layers
-- 模型的**损失函数**： tf.keras.losses
-- 模型的**优化器**： tf.keras.optimizer
-- 模型的**评估**： tf.keras.metrics
+如何使用 TensorFlow 快速搭建**动态**模型
+- **模型构建**： tf.keras.Model 和 tf.keras.layers
+- **损失函数**： tf.keras.losses
+- **优化器**： tf.keras.optimizer
+- **评估方法**： tf.keras.metrics
 
 - ![](https://tf.wiki/_images/model.png)
 
-- 解释
-    - 继承 tf.keras.Model 后，同时可以使用父类的若干方法和属性，例如在实例化类 model = Model() 后，可以通过 model.
-    - variables 这一属性直接获得模型中的所有变量，免去我们一个个显式指定变量的麻烦。
-- TensorFlow 的模型编写方式。在这一部分，我们依次进行以下步骤：
-    - 使用 `tf.keras.datasets` 获得数据集并预处理
-    - 使用 `tf.keras.Model` 和 `tf.keras.layers` 构建模型
-    - 构建模型训练流程，使用 `tf.keras.losses` 计算损失函数，并使用 `tf.keras.optimizer` 优化模型
-    - 构建模型评估流程，使用 `tf.keras.metrics` 计算评估指标
+解释
+- 继承 tf.keras.Model 后，同时可以使用父类的若干方法和属性
+  - 例如在实例化类 model = Model() 后，可以通过 model.
+- variables 这一属性直接获得模型中的所有变量，不用一个个显式指定变量的麻烦。
+
+TensorFlow 的模型编写方式，依次进行以下步骤：
+- 使用 `tf.keras.datasets` 获得数据集并预处理
+- 使用 `tf.keras.Model` 和 `tf.keras.layers` 构建模型
+- 训练流程，使用 `tf.keras.losses` 计算损失函数，并使用 `tf.keras.optimizer` 优化模型
+- 评估流程，使用 `tf.keras.metrics` 计算评估指标
 
 ### 模型与层
 
@@ -397,9 +416,33 @@ TensorFlow 中，推荐使用 `Keras`（ tf.keras ）构建模型。`Keras` 是�
 
 Keras 有两个重要的概念： `层`（Layer） 和 `模型`（Model）。
 - `层`将各种计算流程和变量进行了**封装**（例如基本的全连接层，CNN 的卷积层、池化层等）
-- `模型`则将各种层进行组织和连接，并封装成一个整体，描述了如何将输入数据通过各种层以及运算而得到输出。在需要模型调用的时候，使用 y_pred = model(X) 的形式即可。
+- `模型`则将各种层进行组织和连接，并封装成一个整体，描述了如何将输入数据通过各种层以及运算而得到输出。
+  - 在需要模型调用的时候，使用 y_pred = model(X) 的形式即可。
 
-`Keras` 在 tf.keras.layers 下内置了深度学习中大量常用的的**预定义**层，同时也允许我们自定义层。
+#### layer
+
+`Keras` 在 tf.keras.layers 下内置了深度学习中大量常用的的**预定义**层，同时也允许自定义层。
+
+[tf.keras.layers](https://www.tensorflow.org/api_docs/python/tf/keras/layers) 一些常见的构造函数参数：
+- `activation`：设置层的**激活函数**。 此参数由内置函数的名称或可调用对象指定。 默认情况下，不使用任何激活。
+- `kernel_initializer`和`bias_initializer`：分别指定层的**核**（原文是Kernel，可以理解为weights）和**偏置**（bias）的初始化器（initializer）。 参数是名称或可调用对象。 默认为“Glorot uniform”初始化器。
+- `kernel_regularizer`和`bias_regularizer`：分别指定层的核（Kernel）和偏置（bias）的**正则化**方案，例如L1或L2正则化。 默认情况下，不使用正则化。
+
+构造函数参数实例化[tf.keras.layers.Dense](https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dense)
+
+```python
+# 创建一个sigmoid层:
+layers.Dense(64, activation='sigmoid') # 字符串方式
+layers.Dense(64, activation=tf.sigmoid) # 对象方式
+# 定义一个线性层(linear layer)，设置正则化项
+layers.Dense(64, kernel_regularizer=tf.keras.regularizers.l1(0.01)) # 核矩阵（kernel matrix）使用一个因子为0.01的L1正则化器
+layers.Dense(64, bias_regularizer=tf.keras.regularizers.l2(0.01)) # 偏置向量（ bias vector）使用一个因子为0.01的L2正则化器
+# 定义了一个线性层，设置初始化项
+layers.Dense(64, kernel_initializer='orthogonal') # 核使用的初始化器为orthogonal（核会被初始化为一个随机正交矩阵）
+layers.Dense(64, bias_initializer=tf.keras.initializers.constant(2.0)) # 偏置向量的初始化去器为constant（偏置向量的所有元素都会被初始化为2.0）
+```
+
+#### model
 
 Keras 模型以**类**的形式呈现，可以通过继承 tf.keras.Model 这个 Python 类来定义自己的模型。在继承类中，需要重写 \__init__() （**构造函数**，初始化）和 **call**(input) （**模型调用**）两个方法，同时也可以根据需要增加自定义的方法。
 - ![](https://tf.wiki/_images/model.png)
@@ -461,16 +504,16 @@ for i in range(100):
 print(model.variables)
 ```
 
-
-
 没有显式地声明 a 和 b 两个变量并写出 y_pred = a * X + b 这一线性变换，而是建立了一个继承了 tf.keras.Model 的模型类 Linear 。这个类在初始化部分实例化了一个 全连接层 （ tf.keras.layers.Dense ），并在 call 方法中对这个层进行调用，实现了线性变换的计算。
 - 如果需要显式地声明自己的变量并使用变量进行自定义运算，或者希望了解 Keras 层的内部原理，请参考 自定义层。
 
 ## Keras Pipeline
 
+[Tensorflow keras入门教程](https://blog.csdn.net/DumpDoctorWang/article/details/83718054)
+
 有两种方式建立模型：
-- Keras **Sequential** API：串行结构，单输入单输出
-- Keras **Functional** API：任意结构，多输入多输出
+- Keras **Sequential** API：**串行**结构，单输入单输出
+- Keras **Functional** API：**任意**结构，多输入多输出
 
 ### Keras Sequential API 串行
 
@@ -500,7 +543,7 @@ Keras Functional 建立任意结构模型
 - [keras Functional文档](https://keras-cn.readthedocs.io/en/latest/getting_started/functional_API/)
 - [Keras函数式(functional)API的使用](https://blog.csdn.net/huanghaocs/article/details/90574486)
 
-#### Keras
+#### Keras backend
 
 - Keras是一个模型级的库，提供了快速构建深度学习网络的模块。
 - Keras并不处理如张量乘法、卷积等底层操作。这些操作依赖于某种特定的、优化良好的张量操作库。
@@ -663,7 +706,6 @@ model = Model(inputs=x, outputs=output)
 
 # summarize layers
 model.summary()
-
 ```
 
 双向RNN, 双向循环神经网络，可以用来完成序列标注等任务，相比上面的LSTM网络，多了一个反向的LSTM，其它设置一样
@@ -690,6 +732,60 @@ output = Dense(10, activation='softmax')(hidden)
 model = Model(inputs=x, outputs=output)
 
 model.summary()
+```
+
+双向LSTM
+- ![](https://tensorflow.google.cn/text/tutorials/images/bidirectional.png)
+- encoder: 将字符转id，额外准备词表，oov单词统一设置为UNK；字符串 → id列表
+- embedding：一个单词一个向量（维数可定义），权重可修改，训练完毕后，相近单词词向量越近 —— 词向量副产物
+- rnn层：逐个元素迭代，时间步
+- dense层：全连接，对接回归（mse）、分类任务（logit）
+
+Tensorflow实现：
+
+```python
+# 序列结构
+model = tf.keras.Sequential([
+    encoder,
+    tf.keras.layers.Embedding(
+        input_dim=len(encoder.get_vocabulary()), # 设置词表
+        output_dim=64, # 嵌入维度
+        # Use masking to handle the variable sequence lengths
+        mask_zero=True), # 用0来填充空白位置
+    tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(64)), # 双向LSTM
+    tf.keras.layers.Dense(64, activation='relu'), # 全连接层
+    tf.keras.layers.Dense(1) # 目标值
+])
+# predict on a sample text without padding.
+sample_text = ('The movie was cool. The animation and the graphics '
+               'were out of this world. I would recommend this movie.')
+# 不用padding
+predictions = model.predict(np.array([sample_text]))
+# 使用padding
+padding = "the " * 2000
+predictions = model.predict(np.array([sample_text, padding]))
+print(predictions[0])
+
+# Compile the Keras model to configure the training process:
+model.compile(loss=tf.keras.losses.BinaryCrossentropy(from_logits=True),
+              optimizer=tf.keras.optimizers.Adam(1e-4),
+              metrics=['accuracy'])
+# Train the model
+history = model.fit(train_dataset, epochs=10,
+                    validation_data=test_dataset,
+                    validation_steps=30)
+# 评估效果
+test_loss, test_acc = model.evaluate(test_dataset)
+print('Test Loss:', test_loss)
+print('Test Accuracy:', test_acc)
+# 绘图
+plt.figure(figsize=(16, 8))
+plt.subplot(1, 2, 1)
+plot_graphs(history, 'accuracy')
+plt.ylim(None, 1)
+plt.subplot(1, 2, 2)
+plot_graphs(history, 'loss')
+plt.ylim(0, None)
 ```
 
 #### 共享输入层 (Shared Input Layer Model)
@@ -828,7 +924,22 @@ Keras Model 的 `compile` 、 `fit` 和 `evaluate` 方法训练和评估模型
 
 #### compile 函数
 
-当模型建立完成后，通过 tf.keras.Model 的 compile 方法配置训练过程：
+当模型建立完成后，通过 tf.keras.Model 的 compile 方法配置训练过程
+
+tf.keras.Model.**compile** 有三个重要参数（建议参考下[Keras compile document](https://keras.io/getting-started/sequential-model-guide/#compilation)）：
+- `optimizer`：指定**优化器**。 从tf.train模块传递优化器实例，例如
+  - [tf.train.AdamOptimizer](https://www.tensorflow.org/api_docs/python/tf/train/AdamOptimizer)
+  - [tf.train.RMSPropOptimizer](https://www.tensorflow.org/api_docs/python/tf/train/RMSPropOptimizer)
+  - [tf.train.GradientDescentOptimizer](https://www.tensorflow.org/api_docs/python/tf/train/GradientDescentOptimizer)
+- `loss`：**优化函数**。 损失函数由名称或通过从[tf.keras.losses](https://www.tensorflow.org/api_docs/python/tf/keras/losses)模块传递可调用对象来指定。常见的选择包括:
+  - **均方误差**（mse）
+  - categorical_crossentropy
+  - binary_crossentropy。 
+- `metrics`：设置训练中**评估指标**(原文为metrics，指标)组成的列表，如准确率（accuracy）。 指标是来自tf.keras.metrics模块的字符串名称或可调用对象组成的list。
+
+两种传参方式：
+- 字符串
+- 可调用的对象
 
 ```python
 # 编译模型，配置相关组件（优化器、损失函数和衡量指标）
@@ -837,48 +948,170 @@ model.compile(
     loss=tf.keras.losses.sparse_categorical_crossentropy, # 分类损失函数
     metrics=[tf.keras.metrics.sparse_categorical_accuracy] # 分类指标
 )
+
+# 编译均方误差回归模型（a model for mean-squared error regression）
+model.compile(optimizer=tf.train.AdamOptimizer(0.01),
+              loss='mse',       # 最小均方误差（mean squared error）
+              metrics=['mae'])  # 平均绝对误差（mean absolute error）
+
+# 编译一个分类模型（a model for categorical classification）
+# 多元分类问题例子，比如手写数字识别
+model.compile(optimizer=tf.train.RMSPropOptimizer(0.01),
+              loss=tf.keras.losses.categorical_crossentropy,
+              metrics=[tf.keras.metrics.categorical_accuracy])
+# 功能同上，字符串方式
+model.compile(optimizer='rmsprop',
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+
+# 二元分类例子
+model.compile(optimizer='rmsprop',
+              loss='binary_crossentropy',
+              metrics=['accuracy'])
+
 ```
 
-tf.keras.Model.**compile** 接受 3 个重要的参数：
-- oplimizer ：优化器，可从 tf.keras.optimizers 中选择；
-- loss ：损失函数，可从 tf.keras.losses 中选择；
-- metrics ：评估指标，可从 tf.keras.metrics 中选择。
+
 
 #### fit 函数
 
-接下来，可以使用 tf.keras.Model 的 fit 方法训练模型：
-
-```python
-# 训练模型
-# model.fit(data_loader.train_data, data_loader.train_label, epochs=num_epochs, batch_size=batch_size)
-model.fit(data_loader.train_data,  # x
-    data_loader.train_label, # y
-    epochs=num_epochs,  # 迭代epoch数
-    batch_size=batch_size) # batch size
-```
-
-tf.keras.Model.fit 接受 5 个重要的参数：
+[tf.keras.Model.fit](https://www.tensorflow.org/api_docs/python/tf/keras/Model#fit) 接受 5 个重要的参数：
 - x ：训练数据；
 - y ：目标数据（数据标签）；
 - epochs ：将训练数据迭代多少遍；
 - batch_size ：批次的大小；
 - validation_data ：验证数据，可用于在训练过程中监控模型的性能。
-- Keras 支持使用 tf.data.Dataset 进行训练，详见 tf.data 。
+- Keras 支持使用 tf.data.Dataset 进行训练，详见 tf.data
+
+三个重要参数：
+- `epochs`：训练多少个epoch。 一个epoch是对整个训练数据集的一次训练（这是以较小的批次完成的）。
+- `batch_size`：当传递NumPy数据时，模型将数据分成较小的批次（batch），并在训练期间训练这些批次。 此整数指定每个批次的大小。 请注意，如果样本总数不能被批次大小整除，则最后一批可能会更小。
+- `validation_data`：在对模型进行原型设计时，若要监控其在某些验证数据集上的性能。 传递由（输入，标签）组成的元组， 模型在每个epoch的末尾显示损失和指标。
+
+fit方法函数steps_per_epoch参数: 这是模型在训练集上训练一遍（也就是一个epoch）的训练步数。 由于Dataset生成批次数据，因此此代码段不需要batch_size。
+
+用 tf.keras.Model 的 fit 方法训练模型：
+
+```python
+import numpy as np
+
+data = np.random.random((1000, 32))
+labels = np.random.random((1000, 10))
+
+val_data = np.random.random((100, 32))
+val_labels = np.random.random((100, 10))
+# 训练模型
+model.fit(data, labels, epochs=10, batch_size=32,
+    validation_data=(val_data, val_labels))
+# model.fit(data_loader.train_data, data_loader.train_label, epochs=num_epochs, batch_size=batch_size)
+model.fit(data_loader.train_data,  # x
+    data_loader.train_label, # y
+    epochs=num_epochs,  # 迭代epoch数
+    batch_size=batch_size) # batch size
+
+# 使用tf.data时，不用设置batch_size，但要指定steps_per_epoch
+# 实例化玩具数据集实例：
+dataset = tf.data.Dataset.from_tensor_slices((data, labels))
+dataset = dataset.batch(32)
+dataset = dataset.repeat()
+# 在数据集上调用`fit`时，不要忘记指定`steps_per_epoch`
+model.fit(dataset, epochs=10, steps_per_epoch=30)
+
+# 使用验证集
+dataset = tf.data.Dataset.from_tensor_slices((data, labels))
+dataset = dataset.batch(32).repeat()
+
+val_dataset = tf.data.Dataset.from_tensor_slices((val_data, val_labels))
+val_dataset = val_dataset.batch(32).repeat()
+
+model.fit(dataset, epochs=10, steps_per_epoch=30,
+          validation_data=val_dataset,
+          validation_steps=3)
+```
 
 #### evaluate 函数
 
-最后，使用 tf.keras.Model.evaluate 评估训练效果，提供测试数据及标签即可：
+最后，使用 [tf.keras.Model.evaluate](https://www.tensorflow.org/api_docs/python/tf/keras/Model#evaluate) 评估训练效果，提供测试数据及标签即可：
 
 ```python
+model.evaluate(data, labels, batch_size=32)
+model.evaluate(dataset, steps=30)
 # 评估效果
 print(model.evaluate(data_loader.test_data, data_loader.test_label))
 ```
+
+#### predict 函数
+
+[tf.keras.Model.predict](https://www.tensorflow.org/api_docs/python/tf/keras/Model#predict)
+
+```python
+result = model.predict(data, batch_size=32)
+print(result.shape)
+```
+
 
 ### 自定义
 
 #### 自定义-层
 
-[自定义层](https://tf.wiki/zh_hans/basic/models.html#zh-hans-custom-layer)需要继承 tf.keras.layers.Layer 类，并重写 \__init__ 、 **build** 和 **call** 三个方法，如下所示：
+[自定义层](https://tf.wiki/zh_hans/basic/models.html#zh-hans-custom-layer)需要继承 [tf.keras.layers.Layer](https://www.tensorflow.org/api_docs/python/tf/keras/layers/Layer) 类，并重写 \__init__ 、 **build** 和 **call** 三个方法
+- `build`：创建图层的权重。 使用add_weight函数来创建。
+- `call`：定义前向传播。
+- `compute_output_shape`：计算在给定的输入的shape时，计算出输出的shape。
+- 可以通过实现`get_config`方法和`from_config`方法来序列化层。不过是可选的。
+
+```python
+class MyLayer(layers.Layer):
+
+  def __init__(self, output_dim, **kwargs):
+    self.output_dim = output_dim
+    super(MyLayer, self).__init__(**kwargs)
+
+  def build(self, input_shape):
+    shape = tf.TensorShape((input_shape[1], self.output_dim))
+    # 为此层创建一个可训练的权重
+    self.kernel = self.add_weight(name='kernel',
+                                  shape=shape,
+                                  initializer='uniform',
+                                  trainable=True)
+    # 确保在函数结束时调用下面的语句
+    super(MyLayer, self).build(input_shape)
+
+  def call(self, inputs):
+    # 这里定义了这层要实现的操作，也就是前向传播的操作
+    return tf.matmul(inputs, self.kernel)
+
+  def compute_output_shape(self, input_shape):
+    # 计算输出tensor的shape
+    shape = tf.TensorShape(input_shape).as_list()
+    shape[-1] = self.output_dim
+    return tf.TensorShape(shape)
+
+  def get_config(self):
+    base_config = super(MyLayer, self).get_config()
+    base_config['output_dim'] = self.output_dim
+    return base_config
+
+  @classmethod
+  def from_config(cls, config):
+    return cls(**config)
+```
+
+调用
+
+```python
+model = tf.keras.Sequential([
+    MyLayer(10),
+    layers.Activation('softmax')])
+
+model.compile(optimizer=tf.train.RMSPropOptimizer(0.001),
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+
+model.fit(data, labels, batch_size=32, epochs=5)
+```
+
+
 
 ```python
 class MyLayer(tf.keras.layers.Layer):
@@ -1025,6 +1258,28 @@ a, b, c = array_write_and_read()
 print(tf.autograph.to_code(square_if_positive.python_function))
 ```
 
+## 回调
+
+回调是传递给模型的对象，用于在训练模型期间自定义和扩展其行为。 可以编写自己的自定义回调，或使用以下内置的[_tf.keras.callbacks_](https://www.tensorflow.org/api_docs/python/tf/keras/callbacks)：
+*   [_tf.keras.callbacks.ModelCheckpoint_](https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ModelCheckpoint)：定期保存模型的检查点（checkpoint）。
+*   [_tf.keras.callbacks.LearningRateScheduler_](https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/LearningRateScheduler)：动态改变学习率。
+*   [_tf.keras.callbacks.EarlyStopping_](https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/EarlyStopping)：在校验集的性能停止提升时，中断训练。
+*   [_tf.keras.callbacks.TensorBoard_](https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/TensorBoard)：使用TensorBoard监控模型的行为。
+
+若要使用[_tf.keras.callbacks.Callback_](https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback)，请将其传递给模型的_fit_方法：
+
+```python
+callbacks = [
+  # 如果`val_loss`在超过两个epoch都没有提升，那么中断训练
+  tf.keras.callbacks.EarlyStopping(patience=2, monitor='val_loss'),
+  # 把TensorBoard的日志写入文件夹`./logs`
+  tf.keras.callbacks.TensorBoard(log_dir='./logs')
+]
+model.fit(data, labels, batch_size=32, epochs=5, callbacks=callbacks,
+          validation_data=(val_data, val_labels))
+```
+
+
 ## 模型保存
 
 [TensorFlow常用模块](https://tf.wiki/zh_hans/basic/tools.html)
@@ -1035,12 +1290,41 @@ print(tf.autograph.to_code(square_if_positive.python_function))
 - 导入时，无须构建源码即可运行，非常适合分享和部署，TensorFlow Serving（服务器端部署模型）、TensorFlow Lite（移动端部署模型）以及 TensorFlow.js 都会用到
 Keras 模型均可方便地导出为 SavedModel 格式。
 - 注意：SavedModel 基于计算图，所以继承 tf.keras.Model 类建立的 Keras 模型
-    - 导出到 SavedModel 格式的方法（比如 call ）时，都要使用 @tf.function 修饰。
-    - SavedModel载入后将无法使用 model() 直接进行推断，而需要使用 model.call()
+  - 导出到 SavedModel 格式的方法（比如 call ）时，都要使用 @tf.function 修饰。
+  - SavedModel载入后将无法使用 model() 直接进行推断，而需要使用 model.call()
+
+[tf.keras.Model.save_weights](https://www.tensorflow.org/api_docs/python/tf/keras/Model#save_weights)
 
 ```python
+# ----- tf.keras -----
+# 把权重保存为TensorFlow Checkpoint文件
+model.save_weights('./weights/my_model')
+# 载入权重。要求模型和保存权重的模型具有相同的架构
+model.load_weights('./weights/my_model')
+# 把权重保存为HDF5这种格式的文件
+model.save_weights('my_model.h5', save_format='h5')
+# 保存模型配置
+json_string = model.to_json()
+print(json_string)
+# 从json字符串恢复模型
+fresh_model = tf.keras.models.model_from_json(json_string)
+# 模型序列化为YAML格式
+yaml_string = model.to_yaml()
+print(yaml_string)
+# YAML字符串恢复模型: 注意：子类化模型不可序列化，因为它们的体系结构由call函数中的Python代码定义。
+fresh_model = tf.keras.models.model_from_yaml(yaml_string)
+# 载入权重
+model.load_weights('my_model.h5')
+# 保存整个模型
+# 将整个模型保存到HDF5文件
+model.save('my_model.h5')
+# 重新创建完全相同的模型，包括权重和优化器。
+model = tf.keras.models.load_model('my_model.h5')
+
+# ---- tf -----
 tf.saved_model.save(model, "save_dir") # 导出
 model = tf.saved_model.load("save_dir") # 导入
+
 ```
 
 TensorFlow 提供了 tf.train.**Checkpoint** 这一强大的变量保存与恢复类，可以使用其 save() 和 restore() 方法将 TensorFlow 中所有包含 Checkpointable State 的对象进行保存和恢复。具体而言，tf.keras.optimizer 、 tf.Variable 、 tf.keras.Layer 或者 tf.keras.Model 实例都可以被保存。
@@ -1191,6 +1475,12 @@ if __name__ == '__main__':
     if args.mode == 'test':
         test()
 ```
+
+## Eager execution
+ 
+[Eager execution](https://www.tensorflow.org/guide/eager)是一个必要的编程环境，可以立即评估操作。 这对于Keras不是必需的，但是由_tf.keras_支持，对于检查程序和调试很有用。  
+- 所有_tf.keras_ API都与Eager execution兼容。 虽然可以使用顺序模型和函数式API，但是Eager execution尤其有利于模型子类化和构建自定义层 。  
+- 有关使用具有自定义训练和[_tf.GradientTape_](https://www.tensorflow.org/api_docs/python/tf/GradientTape)的Keras模型的示例，请参阅[Eager execution 指南](https://www.tensorflow.org/guide/eager#build_a_model)。
 
 
 ## 模型部署 Tensorflow Serving
@@ -1882,6 +2172,29 @@ strategy = tf.distribute.experimental.TPUStrategy(tpu)
 ```
 
 [colab代码](https://colab.research.google.com/github/huan/tensorflow-handbook-tpu/blob/master/tensorflow-handbook-tpu-example.ipynb)
+
+### Estimators
+ 
+[Estimators](https://www.tensorflow.org/guide/estimators) API用于分布式环境的训练模型的API。 可以导出模型进行大型数据集的分布式训练，并得到可以商用的模型。  
+使用[_tf.keras.estimator.model\_to\_estimator_](https://www.tensorflow.org/api_docs/python/tf/keras/estimator/model_to_estimator)将模型转换为[_tf.estimator.Estimator_](https://www.tensorflow.org/api_docs/python/tf/estimator/Estimator)对象，就可以使用[_tf.estimator_](https://www.tensorflow.org/api_docs/python/tf/estimator) API训练[_tf.keras.Model_](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model)。 请参阅[Creating Estimators from Keras models](https://www.tensorflow.org/guide/estimators#creating_estimators_from_keras_models)。
+
+```python
+model = tf.keras.Sequential([layers.Dense(10,activation='softmax'),
+                          layers.Dense(10,activation='softmax')])
+
+model.compile(optimizer=tf.train.RMSPropOptimizer(0.001),
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+# 把模型转换为Estimator
+estimator = tf.keras.estimator.model_to_estimator(model)
+```
+
+*   注意：要检查Estimator的[输入函数](https://www.tensorflow.org/guide/premade_estimators#create_input_functions)和查看数据时，请启用[Eager Execution](https://www.tensorflow.org/guide/eager)。
+
+多GPU训练
+- _tf.keras_模型可以使用[_tf.contrib.distribute.DistributionStrategy_](https://www.tensorflow.org/api_docs/python/tf/contrib/distribute/DistributionStrategy)在多个GPU上训练。 此API在多个GPU上提供分布式训练，几乎不对现有代码进行任何更改。  
+- 目前，[_tf.contrib.distribute.MirroredStrategy_](https://www.tensorflow.org/api_docs/python/tf/contrib/distribute/MirroredStrategy)是唯一受支持的分布式策略。 要将DistributionStrategy与Keras一起使用，请使用[_tf.keras.estimator.model\_to\_estimator_](https://www.tensorflow.org/api_docs/python/tf/keras/estimator/model_to_estimator)将_tf.keras.Model_转换为_tf.estimator.Estimator_，然后训练Estimator。  
+
 
 ## TensorFlow Datasets
 
