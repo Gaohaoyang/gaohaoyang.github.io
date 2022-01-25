@@ -1791,6 +1791,45 @@ for voice in voices:
 engine.runAndWait()
 ```
 
+### 案例：自动阅读网页新闻
+
+【2022-1-25】[自动化阅读网页新闻](https://www.toutiao.com/i7056585992664269344)，从网页中抓取文本，然后自动化语音朗读
+
+代码分为两大部分，第一通过爬虫抓取网页文本呢，第二通过阅读工具来朗读文本。
+
+需要的第三方库：
+- Beautiful Soup - 经典的HTML/XML文本解析器，用来提取爬下来的网页信息
+- requests - 好用到逆天的HTTP工具，用来向网页发送请求获取数据
+- Pyttsx3 - 将文本转换为语音，并控制速率、频率和语音
+
+```python
+import pyttsx3
+import requests
+from bs4 import BeautifulSoup
+
+engine = pyttsx3.init('sapi5')
+voices = engine.getProperty('voices')
+newVoiceRate = 130 # Reduce The Speech Rate
+engine.setProperty('rate',newVoiceRate)
+engine.setProperty('voice', voices[1].id)
+
+def speak(audio):
+  engine.say(audio)
+  engine.runAndWait()
+text = str(input("Paste article\n"))
+res = requests.get(text)
+soup = BeautifulSoup(res.text,'html.parser')
+
+articles = []
+for i in range(len(soup.select('.p'))):
+    article = soup.select('.p')[i].getText().strip()
+    articles.append(article)
+text = " ".join(articles)
+speak(text)
+# engine.save_to_file(text, 'test.mp3') ## If you want to save the speech as a audio file
+engine.runAndWait()
+```
+
 
 ### google tts
 
