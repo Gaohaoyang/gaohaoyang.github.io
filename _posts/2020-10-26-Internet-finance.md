@@ -824,6 +824,59 @@ LSTM有三个门：
 - **遗忘**门：它移除模型不再需要的信
 - **输出**门：LSTM的输出门选择作为输出的信息
 
+双向LSTM
+- ![](https://tensorflow.google.cn/text/tutorials/images/bidirectional.png)
+- encoder: 将字符转id，额外准备词表，oov单词统一设置为UNK；字符串 → id列表
+- embedding：一个单词一个向量（维数可定义），权重可修改，训练完毕后，相近单词词向量越近 —— 词向量副产物
+- rnn层：逐个元素迭代，时间步
+- dense层：全连接，对接回归（mse）、分类任务（logit）
+
+Tensorflow实现：
+
+```python
+# 序列结构
+model = tf.keras.Sequential([
+    encoder,
+    tf.keras.layers.Embedding(
+        input_dim=len(encoder.get_vocabulary()), # 设置词表
+        output_dim=64, # 嵌入维度
+        # Use masking to handle the variable sequence lengths
+        mask_zero=True), # 用0来填充空白位置
+    tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(64)), # 双向LSTM
+    tf.keras.layers.Dense(64, activation='relu'), # 全连接层
+    tf.keras.layers.Dense(1) # 目标值
+])
+# predict on a sample text without padding.
+sample_text = ('The movie was cool. The animation and the graphics '
+               'were out of this world. I would recommend this movie.')
+# 不用padding
+predictions = model.predict(np.array([sample_text]))
+# 使用padding
+padding = "the " * 2000
+predictions = model.predict(np.array([sample_text, padding]))
+print(predictions[0])
+
+# Compile the Keras model to configure the training process:
+model.compile(loss=tf.keras.losses.BinaryCrossentropy(from_logits=True),
+              optimizer=tf.keras.optimizers.Adam(1e-4),
+              metrics=['accuracy'])
+# Train the model
+history = model.fit(train_dataset, epochs=10,
+                    validation_data=test_dataset,
+                    validation_steps=30)
+# 评估效果
+test_loss, test_acc = model.evaluate(test_dataset)
+print('Test Loss:', test_loss)
+print('Test Accuracy:', test_acc)
+# 绘图
+plt.figure(figsize=(16, 8))
+plt.subplot(1, 2, 1)
+plot_graphs(history, 'accuracy')
+plt.ylim(None, 1)
+plt.subplot(1, 2, 2)
+plot_graphs(history, 'loss')
+plt.ylim(0, None)
+```
 
 两种类型的时间序列分析：
 - **单**变量时间序列：如，日期 → 销量
@@ -903,6 +956,7 @@ plt.plot(valid[['Close','Predictions']])
 - LSTM模型可以对各种参数进行调优，如改变LSTM层数、增加dropout值或增加训练迭代轮数（epoch）数。
 - 但LSTM的预测是否足以确定股票价格将上涨还是下跌? 当然不行！
 - 股价受到公司新闻和其他因素的影响，如公司的非货币化或合并/分拆。还有一些无形的因素往往是无法事先预测的。
+
 
 ### 神经网络：STHAN-SR
 
