@@ -205,7 +205,7 @@ PyTorch实现了从语言中识别情绪情感反讽的DeepMoji模型：https://
 ### 安装
 
 安装：
-- transforers包所需的tensorflow版本至少为2.2.0，而该版本对应的CUDA版本可能不同，如笔者使用的2.4.0版本tensorflow对应的CUDA是11版本
+- transformers 包所需的 tensorflow 版本至少为2.2.0，而该版本对应的CUDA版本可能不同，如笔者使用的2.4.0版本tensorflow对应的CUDA是11版本
 
 ```shell
 pip install transformers==2.2.0
@@ -291,29 +291,27 @@ model = transformers.BertModel.from_pretrained(MODEL_PATH,config = model_config)
 ```
 
 transformers库中RobertaTokenizer和BertTokenizer的不同
-- transformers库中RobertaTokenizer需要同时读取vocab_file和merges_file两个文件，不同于BertTokenizer只需要读取vocab_file一个词文件。主要原因是两种模型采用的编码不同：
-- Bert采用的是字符级别的BPE编码，直接生成词表文件，官方词表中包含3w左右的单词，每个单词在词表中的位置即对应Embedding中的索引，Bert预留了100个[unused]位置，便于使用者将自己数据中重要的token手动添加到词表中。
-- Roberta采用的是byte级别的BPE编码，官方词表包含5w多的byte级别的token。merges.txt中存储了所有的token，而vocab.json则是一个byte到索引的映射，通常频率越高的byte索引越小。所以转换的过程是，先将输入的所有tokens转化为merges.txt中对应的byte，再通过vocab.json中的字典进行byte到索引的转化。
+- transformers库中`RobertaTokenizer`需要**同时读取vocab_file和merges_file两个文件**，不同于`BertTokenizer`只需要读取vocab_file一个词文件。主要原因是两种模型采用的编码不同：
+- Bert采用的是**字符**级别的BPE编码，直接生成词表文件，官方词表中包含**3w**左右的单词，每个单词在词表中的位置即对应Embedding中的索引，Bert预留了100个\[unused]位置，便于使用者将自己数据中重要的token手动添加到词表中。
+- Roberta采用的是**byte**级别的BPE编码，官方词表包含**5w**多的byte级别的token。merges.txt中存储了所有的token，而vocab.json则是一个byte到索引的映射，通常频率越高的byte索引越小。所以转换的过程是，先将输入的所有tokens转化为merges.txt中对应的byte，再通过vocab.json中的字典进行byte到索引的转化。
 
-由于中文的特殊性不太适合采用byte级别的编码，所以大部分开源的中文Roberta预训练模型仍然采用的是单字词表，所以直接使用BertTokenizer读取即可， 不需要使用RobertaTokenizer。
+由于中文的特殊性不太适合采用byte级别的编码，所以大部分开源的中文Roberta预训练模型仍然采用的是**单字词表**，所以直接使用BertTokenizer读取即可， 不需要使用RobertaTokenizer。
 
 ### 模型保存
 
 
 ```python
-
-tokenizer.save_pretrained(save_directory)
-model.save_pretrained(save_directory)
+tokenizer.save_pretrained(save_directory) # 保存词表
+model.save_pretrained(save_directory) # 保存模型
 ```
-
 
 ### pipeline
 
-pipeline API可以快速体验 Transformers。它将模型的预处理, 后处理等步骤包装起来，使得我们可以直接定义好任务名称后，输出文本，直接得到我们需要的结果。这是一个高级的API，可以让我们领略到transformers 这个库的强大且友好。
+pipeline API可以快速体验 Transformers。它将模型的预处理、后处理等步骤包装起来，直接定义好任务名称后输出文本，得到结果。这是一个高级的API，可以领略到transformers 这个库的强大且友好。
 
 用 pipeline API，输入任务名称，默认会选择特定已经存好的模型文件，然后会进行下载并且缓存。
 
-主要有以下三个步骤被包装起来了： preprocess -> fit model -> postprocessing
+主要有以下三个步骤被包装起来了： **preprocess** -> **fit model** -> **postprocessing**
 - 输入文本被预处理成机器可以理解的格式
   - 将输入的文本进行分词，例如变成：words，subwords，或者symbols，这些统称为token
   - 将每个token映射为一个integer
@@ -325,8 +323,7 @@ pipeline API可以快速体验 Transformers。它将模型的预处理, 后处�
 
 注意：
 - 所有的预处理阶段（Preprocessing），都要**与模型预训练阶段保持一致**，所以要从Model Hub 中下载预处理的信息。
-- 我们可以使用 AutoTokenizer 的 from_pretrained 方法进行tokenizer 的加载，通过把tokenizer 的checkpoint 导入，它可以自动获取tokenizer需要的数据并进行缓存（下次无需下载）。
-
+- 用 AutoTokenizer 的 from_pretrained 方法进行tokenizer 的加载，通过把tokenizer 的checkpoint 导入，它可以自动获取tokenizer需要的数据并进行缓存（下次无需下载）。
 
 目前支持的pipeline 如下：
 - feature-extraction (get the vector representation of a text) 特征抽取
@@ -951,6 +948,7 @@ class BertPooler(nn.Module):
 
 基于BERT的模型都写在/models/bert/modeling_bert.py里面，包括BERT预训练模型和BERT分类模型，UML图如下：
 - ![](https://pic1.zhimg.com/80/v2-0e126f74d40d2db8bc133bc67f8055b4_720w.png)
+
 BERT模型一图流（建议保存后放大查看）
 
 首先，以下所有的模型都是基于BertPreTrainedModel这一抽象基类的，而后者则基于一个更大的基类PreTrainedModel。这里我们关注BertPreTrainedModel的功能：
@@ -961,6 +959,7 @@ BERT模型一图流（建议保存后放大查看）
 众所周知，BERT预训练任务包括两个：
 - Masked Language Model（MLM）：在句子中随机用[MASK]替换一部分单词，然后将句子传入 BERT 中编码每一个单词的信息，最终用[MASK]的编码信息预测该位置的正确单词，这一任务旨在训练模型根据上下文理解单词的意思；
 - Next Sentence Prediction（NSP）：将句子对A和B输入BERT，使用[CLS]的编码信息进行预测B是否A的下一句，这一任务旨在训练模型理解预测句子间的关系。
+
 ![](https://pic4.zhimg.com/80/v2-778b166945e69e7689cccfe7532e74e3_720w.jpg)
 
 对应到代码中，这一融合两个任务的模型就是BertForPreTraining。略
