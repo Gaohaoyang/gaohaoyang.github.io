@@ -3,7 +3,7 @@ layout: post
 title:  BERT及预训练语言模型-BERT-and-Pretrain-Language-Model
 date:   2019-12-10 16:52:00
 categories: 深度学习 
-tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook TextCNN ES 田渊栋 彩票假设 自监督 Milvus ALBERT elasticsearch es 可视化 unilm simcse gpu
+tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook TextCNN ES 田渊栋 彩票假设 自监督 Milvus ALBERT elasticsearch es 可视化 unilm simcse gpu 迁移学习
 excerpt: 预训练语言模型及BERT知识点汇总
 mathjax: true
 ---
@@ -16,131 +16,97 @@ mathjax: true
 - [The Annotated Transformer](http://nlp.seas.harvard.edu/2018/04/03/attention.html),Harvard NLP出品，含pytorch版代码实现
 - [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/)
 - [Transformer模型的PyTorch实现](https://luozhouyang.github.io/transformer/),[A PyTorch implementation of the Transformer model in "Attention is All You Need"](https://github.com/jadore801120/attention-is-all-you-need-pytorch)
-
 - 【2021-6-7】[一文了解预训练语言模型](https://mp.weixin.qq.com/s/meDVXt91pypl4Gn_1A6iVg), 配套书籍，预训练语言模型，2021-5出版
 - 【2021-6-17】[预训练模型最新综述：过去、现在和未来](https://zhuanlan.zhihu.com/p/381121057) [Pre-Trained Models: Past, Present and Future](https://arxiv.org/abs/2106.07139)，全面回顾了 PTM 的最新突破。这些突破是由计算能力的激增和数据可用性增加推动的，朝着四个重要方向发展：设计有效的架构、利用丰富的上下文、提高计算效率以及进行解释和理论分析。PTM发展过程：
-  - ![](https://pic2.zhimg.com/80/v2-67138799a41ee6e489727b15c0b1e731_720w.jpg)
   - ![](https://pic2.zhimg.com/80/v2-d82cd793c1b59c20ee7f97d95f53c675_720w.jpg)
-
+- 迁移学习分类
+  - ![](https://pic2.zhimg.com/80/v2-67138799a41ee6e489727b15c0b1e731_720w.jpg)
 - 【2020-8-13】[打破BERT天花板：11种花式炼丹术刷爆NLP分类SOTA！](https://blog.csdn.net/abcdefg90876/article/details/108016310)
-![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy81ZmtuYjQxaWI5cUgxd240a08wQ1FpYkJlZGNiZzduemZCUTNKMTlPcTNnRFZxY1ZFbU1lMjhPWjlwZkQ0SkswanV1YVVZNjYwTEtzcUJteE5BUTU4WlRnLzY0MA?x-oss-process=image/format,png)
+  - <img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy81ZmtuYjQxaWI5cUgxd240a08wQ1FpYkJlZGNiZzduemZCUTNKMTlPcTNnRFZxY1ZFbU1lMjhPWjlwZkQ0SkswanV1YVVZNjYwTEtzcUJteE5BUTU4WlRnLzY0MA" height="100%" width="100" />
 - NLP分类模型时间线
-    - ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy81ZmtuYjQxaWI5cUYzaWJLQ05yOG9FakZjRDF5bE9pY1o5VHVHTlpKcUN1N0ZtcWliMHZKbmU3c0V5Z2ljQkFzdTc3RDdTbjN2a0pTR1hDaWM5OUZRelRpY0dqU3cvNjQw?x-oss-process=image/format,png)
+  - ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy81ZmtuYjQxaWI5cUYzaWJLQ05yOG9FakZjRDF5bE9pY1o5VHVHTlpKcUN1N0ZtcWliMHZKbmU3c0V5Z2ljQkFzdTc3RDdTbjN2a0pTR1hDaWM5OUZRelRpY0dqU3cvNjQw)
 
 # 自监督表示学习
 
 - 【2020-6-19】[NLP中的自监督表示学习](https://www.toutiao.com/i6839892851711541764),[英文原文](https://amitness.com/2020/05/self-supervised-learning-nlp/)  
 
-虽然计算机视觉在自监督学习方面取得了惊人的进展，但在很长一段时间内，自监督学习一直是NLP研究领域的一等公民。语言模型早在90年代就已经存在，甚至在“自我监督学习”这个术语出现之前。2013年的Word2Vec论文推广了这一模式，在许多问题上应用这些自监督的方法，这个领域得到了迅速的发展。
+虽然计算机视觉在自监督学习方面取得了惊人的进展，但在很长一段时间内，**自监督**学习一直是NLP研究领域的一等公民。语言模型早在90年代就已经存在，甚至在“自我监督学习”这个术语出现之前。2013年的Word2Vec论文推广了这一模式，在许多问题上应用这些自监督的方法，这个领域得到了迅速的发展。
 
-这些自监督的方法的核心是一个叫做 “pretext task” 的框架，它允许我们使用数据本身来生成标签，并使用监督的方法来解决非监督的问题。这些也被称为“auxiliary task”或“pre-training task“。通过执行此任务获得的表示可以用作我们的下游监督任务的起点。
- 
-![NLP中的自监督表示学习，全是动图，很过瘾的](https://p1-tt.byteimg.com/origin/pgc-image/47ba10919c1440c781c0b14f1c14de82?from=pc)
-
-在这篇文章中，我将概述研究人员在没有明确的数据标注的情况下从文本语料库中学习表示的各种pretext tasks。本文的重点是任务的制定，而不是实现它们的架构。
+这些自监督方法的核心是一个叫做 “pretext task” 的框架，使用数据本身来生成标签，并使用监督的方法来解决非监督的问题。这些也被称为“auxiliary task”（**辅助**任务）或“pre-training task“（**预训练**任务）。通过执行此任务获得的表示可以用作下游监督任务的起点。
+- ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p1-tt.byteimg.com/origin/pgc-image/47ba10919c1440c781c0b14f1c14de82?from=pc)
+下面概述研究人员在没有明确的数据标注的情况下从文本语料库中学习表示的各种pretext tasks。
+- 重点是任务的制定，而不是实现它们的架构。
 
 自监督的方案
 
-## 1. 预测中心词
+## 1. 预测中心词（word2vec的CBOW模型）
  
-在这个公式中，我们取一定窗口大小的一小块文本，我们的目标是根据周围的单词预测中心单词。
- 
-![NLP中的自监督表示学习，全是动图，很过瘾的](https://p3-tt.byteimg.com/origin/pgc-image/b217d92b952d4601937a1629bc867642?from=pc)
-
-例如，在下面的图中，我们有一个大小为1的窗口，因此我们在中间单词的两边各有一个单词。使用这些相邻的词，我们需要预测中心词。
- 
-![NLP中的自监督表示学习，全是动图，很过瘾的](https://p3-tt.byteimg.com/origin/pgc-image/62516862aa444fed9885c34aaf955b05?from=pc)
-
+在这个公式中，取一定窗口大小的一小块文本，我们的目标是根据周围的单词预测中心单词。
+- ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p3-tt.byteimg.com/origin/pgc-image/b217d92b952d4601937a1629bc867642?from=pc)
+  - 例如，下图中，有一个大小为1的窗口，在中间单词的两边各有一个单词，用这些相邻的词预测中心词。
+- ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p3-tt.byteimg.com/origin/pgc-image/62516862aa444fed9885c34aaf955b05?from=pc)
 这个方案已经在著名的Word2Vec论文的“Continuous Bag of Words”方法中使用过。
  
-## 2. 预测邻居词
+## 2. 预测邻居词（word2vec的skip-gram模型）
 
-在这个公式中，我们取一定窗口大小的文本张成的空间，我们的目标是在给定中心词的情况下预测周围的词。
- 
-![NLP中的自监督表示学习，全是动图，很过瘾的](https://p6-tt.byteimg.com/origin/pgc-image/63df64f4f6af401db506372dc06c0b2f?from=pc)
- 
+在这个公式中，取一定窗口大小的文本张成的空间，目标是在给定中心词的情况下预测周围的词。
+- ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p6-tt.byteimg.com/origin/pgc-image/63df64f4f6af401db506372dc06c0b2f?from=pc)
 这个方案已经在著名的Word2Vec论文的“skip-gram”方法中实现。
  
-## 3. 相邻句子的预测
+## 3. 相邻句子的预测（Skip-Thought Vectors，句子级别的skip-gram）
  
-在这个公式中，我们取三个连续的句子，设计一个任务，其中给定中心句，我们需要生成前一个句子和下一个句子。它类似于之前的skip-gram方法，但适用于句子而不是单词。
- 
-![NLP中的自监督表示学习，全是动图，很过瘾的](https://p6-tt.byteimg.com/origin/pgc-image/6c88f0845d7e4ae38ea626bb3bfd9000?from=pc)
-
+在这个公式中，取三个连续的句子，设计一个任务，其中给定中心句，生成前一个句子和下一个句子。它类似于之前的skip-gram方法，但适用于句子而不是单词。
+- ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p6-tt.byteimg.com/origin/pgc-image/6c88f0845d7e4ae38ea626bb3bfd9000?from=pc)
 这个方案已经在Skip-Thought Vectors的论文中使用过。
  
-## 4. 自回归语言建模
+## 4. 自回归语言建模（n-gram/gpt）
  
-在这个公式中，我们取大量未标注的文本，并设置一个任务，根据前面的单词预测下一个单词。因为我们已经知道下一个来自语料库的单词是什么，所以我们不需要手工标注的标签。
- 
-![NLP中的自监督表示学习，全是动图，很过瘾的](https://p1-tt.byteimg.com/origin/pgc-image/bf36697cfb06464c8faf6ab3c88a2493?from=pc)
-
-例如，我们可以通过预测给定前一个单词的下一个单词来将任务设置为从左到右的语言建模。
- 
-![NLP中的自监督表示学习，全是动图，很过瘾的](https://p6-tt.byteimg.com/origin/pgc-image/1ddb11e50efa4a6f955bac7e14218b1b?from=pc)
-
-我们也可以用这个方案来通给定未来的单词预测之前的单词，方向是从右到左。
- 
-![NLP中的自监督表示学习，全是动图，很过瘾的](https://p6-tt.byteimg.com/origin/pgc-image/bbb35ee25289497a9c40e3eeee901fe0?from=pc)
-
+在这个公式中，取大量未标注的文本，并设置一个任务，根据前面的单词预测下一个单词。因为下一个来自语料库的单词已知，所以不需要手工标注。
+- ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p1-tt.byteimg.com/origin/pgc-image/bf36697cfb06464c8faf6ab3c88a2493?from=pc)
+  - 例如，通过预测给定前一个单词的下一个单词来将任务设置为**从左到右**的语言建模。
+- ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p6-tt.byteimg.com/origin/pgc-image/1ddb11e50efa4a6f955bac7e14218b1b?from=pc)
+  - 也可以用这个方案来通给定未来的单词预测之前的单词，方向是**从右到左**。
+- ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p6-tt.byteimg.com/origin/pgc-image/bbb35ee25289497a9c40e3eeee901fe0?from=pc)
 这个方案已经使用在许多论文中，从n-gram模型到神经网络模型比如神经概率语言模型 (GPT) 。
  
-## 5. 掩码语言建模
+## 5. 掩码语言建模（bert系列）
  
-在这个方案中，文本中的单词是随机掩码的，任务是预测它们。与自回归公式相比，我们在预测掩码单词时可以同时使用前一个词和下一个词的上下文。
+在这个方案中，文本中的单词是随机掩码的，任务是预测它们。与自回归公式相比，在预测掩码单词时可以同时使用前一个词和下一个词的上下文。
+- ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p1-tt.byteimg.com/origin/pgc-image/a9b530083051422f9f88c1613eff489f?from=pc)
+这个方案已经在BERT、RoBERTa和ALBERT的论文中使用过。与自回归相比，在这个任务中，只预测了一小部分掩码词，因此从每句话中学到的东西更少。
  
-![NLP中的自监督表示学习，全是动图，很过瘾的](https://p1-tt.byteimg.com/origin/pgc-image/a9b530083051422f9f88c1613eff489f?from=pc)
- 
-这个方案已经在BERT、RoBERTa和ALBERT的论文中使用过。与自回归相比，在这个任务中，我们只预测了一小部分掩码词，因此从每句话中学到的东西更少。
- 
-## 6. 下一个句子预测
+## 6. 下一个句子预测（NSP任务，bert使用）
  
 在这个方案中，我们取文件中出现的两个连续的句子，以及同一文件或不同文件中随机出现的另一个句子。
- 
-![NLP中的自监督表示学习，全是动图，很过瘾的](https://p3-tt.byteimg.com/origin/pgc-image/8d58e6c913dc445d895429086cc50ae9?from=pc)
-
+- ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p3-tt.byteimg.com/origin/pgc-image/8d58e6c913dc445d895429086cc50ae9?from=pc)
 然后，任务是区分两个句子是否是连贯的。
- 
-![NLP中的自监督表示学习，全是动图，很过瘾的](https://p3-tt.byteimg.com/origin/pgc-image/f50ff4fe179a4678926ddcc3769289f0?from=pc)
-
+- ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p3-tt.byteimg.com/origin/pgc-image/f50ff4fe179a4678926ddcc3769289f0?from=pc)
 在BERT的论文中，它被用于提高下游任务的性能，这些任务需要理解句子之间的关系，比如自然语言推理(NLI)和问题回答。然而，后来的研究对其有效性提出了质疑。
  
-## 7. 句子顺序的预测
+## 7. 句子顺序的预测（albert，取代NSP）
  
 在这个方案中，我们从文档中提取成对的连续句子。然后互换这两个句子的位置，创建出另外一对句子。
- 
-![NLP中的自监督表示学习，全是动图，很过瘾的](https://p1-tt.byteimg.com/origin/pgc-image/0638806390584a488e06c82a11832455?from=pc)
- 
-我们的目标是对一对句子进行分类，看它们的顺序是否正确。
- 
-![NLP中的自监督表示学习，全是动图，很过瘾的](https://p1-tt.byteimg.com/origin/pgc-image/2ba2388f8dfa4778ba4684a8bbbc57fe?from=pc)
-
+- ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p1-tt.byteimg.com/origin/pgc-image/0638806390584a488e06c82a11832455?from=pc)
+目标是对一对句子进行分类，看顺序是否正确。
+- ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p1-tt.byteimg.com/origin/pgc-image/2ba2388f8dfa4778ba4684a8bbbc57fe?from=pc)
 在ALBERT的论文中，它被用来取代“下一个句子预测”任务。
  
-## 8. 句子重排
+## 8. 句子重排（bart）
  
-在这个方案中，我们从语料库中取出一个连续的文本，并破开的句子。然后，对句子的位置进行随机打乱，任务是恢复句子的原始顺序。
- 
-![NLP中的自监督表示学习，全是动图，很过瘾的](https://p6-tt.byteimg.com/origin/pgc-image/451d926ff39a4ce6b3f2ef4b97d18469?from=pc)
- 
+在这个方案中，从语料库中取出一个连续的文本，并破开的句子。然后，对句子的位置进行随机打乱，任务是恢复句子的原始顺序。
+- ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p6-tt.byteimg.com/origin/pgc-image/451d926ff39a4ce6b3f2ef4b97d18469?from=pc)
 它已经在BART的论文中被用作预训练的任务之一。
  
-## 9. 文档旋转
+## 9. 文档旋转（bart）
  
 在这个方案中，文档中的一个随机token被选择为旋转点。然后，对文档进行旋转，使得这个token成为开始词。任务是从这个旋转的版本中恢复原来的句子。
- 
-![NLP中的自监督表示学习，全是动图，很过瘾的](https://p3-tt.byteimg.com/origin/pgc-image/8095d77a0fc440978eb825289a83acf6?from=pc)
- 
-  
- 
+- ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p3-tt.byteimg.com/origin/pgc-image/8095d77a0fc440978eb825289a83acf6?from=pc)
 它已经在BART的论文中被用作预训练的任务之一。直觉上，这将训练模型开始识别文档。
  
 ## 10. 表情符号预测
  
-这个方案被用在了DeepMoji的论文中，并利用了我们使用表情符号来表达我们所发推文的情感这一想法。如下所示，我们可以使用推特上的表情符号作为标签，并制定一个监督任务，在给出文本时预测表情符号。
- 
-![NLP中的自监督表示学习，全是动图，很过瘾的](https://p1-tt.byteimg.com/origin/pgc-image/501d4092a3c4433298824a230c07eeb1?from=pc)
- 
+这个方案被用在了DeepMoji的论文中，用表情符号来表达推文的情感。如下所示，用推特上的表情符号作为标签，并制定一个监督任务，在给出文本时预测表情符号。
+- ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p1-tt.byteimg.com/origin/pgc-image/501d4092a3c4433298824a230c07eeb1?from=pc)
 DeepMoji的作者们使用这个概念对一个模型进行了12亿条推文的预训练，然后在情绪分析、仇恨语言检测和侮辱检测等与情绪相关的下游任务上对其进行微调。
 
 # 预训练语言模型（PLMs）
@@ -149,45 +115,42 @@ DeepMoji的作者们使用这个概念对一个模型进行了12亿条推文的�
 - 【2020-9-9】[预训练语言模型(PLMs)走的飞快](https://zhuanlan.zhihu.com/p/93781241)
 - ![](https://pic1.zhimg.com/v2-447ae7707604e7ac520555249332c42c_1440w.jpg)
 - 预训练模型在经历中4个时代
-    - 第一个是轰动性的**词嵌入**（Word Embedding）时代， 杰出代表是Word2Vec和Glove；
-    - 第二个是**上下文嵌入**（Context Word Embedding），代表为CoVe和ELMO；
-    - 第三个时代是**预训练模型**，代表是GPT和BERT； 
-    - 第四个时代是**改进型**和**领域定制型**。 
-        - 改进型代表为ALBERT和XLNet
-        - 领域定制化(Domain Specific)代表为SciBert (Scientific Bert) 和BioBert(Biomedical Bert)。 
+  - 第一个是轰动性的**词嵌入**（Word Embedding）时代， 杰出代表是Word2Vec和Glove；
+  - 第二个是**上下文嵌入**（Context Word Embedding），代表为CoVe和ELMO；
+  - 第三个时代是**预训练模型**，代表是GPT和BERT； 
+  - 第四个时代是**改进型**和**领域定制型**。 
+    - 改进型代表为ALBERT和XLNet
+    - 领域定制化(Domain Specific)代表为SciBert (Scientific Bert) 和BioBert(Biomedical Bert)。 
 - 【2020-9-30】nlp中的预训练语言模型
-    - ![](https://pic4.zhimg.com/v2-0e78a280939451bef50bc0b1a521c45b_1440w.jpg)
+  - ![](https://pic4.zhimg.com/v2-0e78a280939451bef50bc0b1a521c45b_1440w.jpg)
 - 主要包括3大方面，涉及到的模型有：
-    - **单向**特征表示的**自回归**预训练语言模型，统称为**单向模型**：ELMO/ULMFiT/SiATL/GPT1.0/GPT2.0；
-    - **双向**特征表示的**自编码**预训练语言模型，统称为**BERT系列模型**：(BERT/MASS/UNILM/ERNIE1.0/ERNIE(THU)/MTDNN/ERNIE2.0/SpanBERT/RoBERTa)
-    - **双向**特征表示的**自回归**预训练语言模型：XLNet；
-
+  - **单向**特征表示的**自回归**预训练语言模型，统称为**单向模型**：ELMO/ULMFiT/SiATL/GPT1.0/GPT2.0；
+  - **双向**特征表示的**自编码**预训练语言模型，统称为**BERT系列模型**：(BERT/MASS/UNILM/ERNIE1.0/ERNIE(THU)/MTDNN/ERNIE2.0/SpanBERT/RoBERTa)
+  - **双向**特征表示的**自回归**预训练语言模型：XLNet；
 - PTMs: Pre-trained-Models in NLP，[NLP预训练模型的全面总结(持续更新中)](https://github.com/loujie0822/Pre-trained-Models/blob/master/README.md)
 - 2020年3月18日，邱锡鹏老师发表了关于NLP预训练模型的综述《[Pre-trained Models for Natural Language Processing: A Survey](https://zhuanlan.zhihu.com/p/115014536?utm_source=qq&utm_medium=social&utm_oi=27211553832960#ref_1)》
-- 知乎文章1:  [全面总结！PTMs：NLP预训练模型](https://zhuanlan.zhihu.com/p/115014536)   ![图片下载](https://github.com/loujie0822/Pre-trained-Models/blob/master/resources/PTMs.jpg)
+- 知乎文章1:  [全面总结！PTMs：NLP预训练模型](https://zhuanlan.zhihu.com/p/115014536)，[图片下载](https://github.com/loujie0822/Pre-trained-Models/blob/master/resources/PTMs.jpg)
 - 知乎文章2：[nlp中的预训练语言模型总结](https://zhuanlan.zhihu.com/p/76912493)
 - 知乎文章3：[nlp中的词向量对比](https://zhuanlan.zhihu.com/p/56382372)
 
 <img src="https://pic3.zhimg.com/80/v2-0ace60ca3d843fc9b69c6965731f288e_720w.jpg" style="zoom:20%;" />
 
 - 对比分析，摘自：[论文笔记 - Pre-trained Models for Natural Language Processing](http://www.shuang0420.com/2020/05/07/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%20-%20Pre-trained%20Models%20for%20Natural%20Language%20Processing/)，[Pre-trained Models for Natural Language Processing: A Survey](https://arxiv.org/abs/2003.08271)
-   - LM（Language Modeling）是 NLP 中最常见的无监督任务，通常特指自回归或单向语言建模，BiLM 虽然结合了两个方向的语言模型，但只是两个方向的简单拼接，并不是真正意义上的双向语言模型。
-   - MLM（Masked Language Modeling）可以克服传统单向语言模型的缺陷，结合双向的信息，但是 [MASK] 的引入使得预训练和 fine-tune 之间出现 gap
-   - PLM（Permuted Language Modeling）则克服了这个问题，实现了双向语言模型和自回归模型的统一。
-   - DAE（Denoising Autoencoder）接受部分损坏的输入，并以恢复原始输入为目标。与 MLM 不同，DAE 会给输入额外加一些噪声。
-   - CTL（Contrastive Learning） 的原理是在对比中学习，其假设是一些 observed pairs of text 在语义上比随机采样的文本更为接近。CTL 比 LM 计算复杂度更低。
-- 综述从四个方面（Representation Types、Architectures、Pre-training Task Types、Extensions）对现有 PTMs (Pre-trained Models) 进行了系统分类，一幅图来概括全文精华：
-   - ![](http://images.shuang0420.com/images/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%20-%20Pre-trained%20Models%20for%20Natural%20Language%20Processing/taxonomy.png)
+   - `LM`（Language Modeling）是 NLP 中最常见的无监督任务，通常特指自回归或单向语言建模，BiLM 虽然结合了两个方向的语言模型，但只是两个方向的简单拼接，并不是真正意义上的双向语言模型。
+   - `MLM`（Masked Language Modeling）可以克服传统**单向**语言模型的缺陷，结合双向的信息，但是 \[MASK] 的引入使得预训练和 fine-tune 之间出现 gap
+   - `PLM`（Permuted Language Modeling）则克服了这个问题，实现了**双向**语言模型和**自回归**模型的**统一**。
+   - `DAE`（Denoising Autoencoder）接受部分损坏的输入，并以恢复原始输入为目标。与 MLM 不同，DAE 会给输入额外加一些**噪声**。
+   - `CTL`（Contrastive Learning） 的原理是在**对比**中学习，其假设是一些 observed pairs of text 在语义上比随机采样的文本更为接近。CTL 比 LM 计算复杂度更低。
+- 综述从四个方面（Representation Types、Architectures、Pre-training Task Types、Extensions）对现有 PTMs (Pre-trained Models) 进行了系统分类，一幅[图](http://images.shuang0420.com/images/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%20-%20Pre-trained%20Models%20for%20Natural%20Language%20Processing/taxonomy.png)来概括全文精华：
 
 ## 1、论文汇总：
 
-PTMs-Papers:
-
-1. https://github.com/thunlp/PLMpapers
-2. https://github.com/tomohideshibata/BERT-related-papers
-3. https://github.com/cedrickchee/awesome-bert-nlp
-4. https://bertlang.unibocconi.it/
-5. https://github.com/jessevig/bertviz
+PTMs-Papers
+1. 清华[PLMpapers](https://github.com/thunlp/PLMpapers)
+2. [BERT-related-papers](https://github.com/tomohideshibata/BERT-related-papers)
+3. [awesome-bert-nlp](https://github.com/cedrickchee/awesome-bert-nlp)
+4. [bertlang](https://bertlang.unibocconi.it/)
+5. [bertviz](https://github.com/jessevig/bertviz)
 
 ## 2. PTMs单模型解读
 
