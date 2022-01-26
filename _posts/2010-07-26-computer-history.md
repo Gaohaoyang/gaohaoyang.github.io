@@ -27,20 +27,19 @@ mathjax: true
 
 [计算机编程简史](https://coolshell.cn/articles/2724.html)
 
-- 一张经典的图揭示计算机发展历史
-- 可以看到，其中很大一部分人都和Unix有着不解之缘
+- 一张经典的图揭示计算机发展历史，可以看到，其中很大一部分人都和Unix有着不解之缘
   - 参见《[Unix传奇上篇](https://coolshell.cn/articles/2322.html)，[Unix传奇下篇](https://coolshell.cn/articles/2324.html)》
  
 *   [英文原版](http://www.smashingmagazine.com/2010/06/06/designing-the-world-of-programming-infographic/)
 *   [中文翻译版](http://www.mazingtech.com/cn/list.aspx/News/1/%E5%9B%BE%E8%AF%B4%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BC%96%E7%A8%8B%E7%AE%80%E5%8F%B2)
 
-[![](https://coolshell.cn/wp-content/uploads/2010/07/aboutprogramming04.eng_-409x1024.jpg "计算机编程简史图（英文版） ")](https://coolshell.cn/wp-content/uploads/2010/07/aboutprogramming04.eng_.jpg)
- 
-计算机编程简史图（英文版）
- 
-[![](https://coolshell.cn/wp-content/uploads/2010/07/aboutprogramming04_cn-409x1024.jpg "计算机编程简史图（中文版） ")](https://coolshell.cn/wp-content/uploads/2010/07/aboutprogramming04_cn.jpg)
- 
-计算机编程简史图（中文版）
+计算机编程简史图（英文版）（中文版）
+
+|英文|中文|
+|---|---|
+|[![](https://coolshell.cn/wp-content/uploads/2010/07/aboutprogramming04.eng_-409x1024.jpg "计算机编程简史图（英文版） ")](https://coolshell.cn/wp-content/uploads/2010/07/aboutprogramming04.eng_.jpg)|[![](https://coolshell.cn/wp-content/uploads/2010/07/aboutprogramming04_cn-409x1024.jpg "计算机编程简史图（中文版） ")](https://coolshell.cn/wp-content/uploads/2010/07/aboutprogramming04_cn.jpg)|
+|||
+
 
 ## 计算机之父
 
