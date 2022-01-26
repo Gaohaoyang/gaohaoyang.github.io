@@ -1805,6 +1805,7 @@ url_for('admin.index') # /admin/
 
 ### 自动生成APIs文档
 
+- 【2022-1-26】国产[apidoc](https://apidocjs.com/), [github](https://github.com/apidoc/apidoc), [创业公司，在沙河碧水庄园别墅办公，月薪高达10w](https://www.ixigua.com/7056418647228547615)
 - 【2020-8-22】[自动为Flask写的API生成帮助文档](https://segmentfault.com/a/1190000013420209)
     - ![](https://segmentfault.com/img/remote/1460000013420214?w=1760&h=1424)
 - [使用swagger 生成 Flask RESTful API](https://segmentfault.com/a/1190000010144742)
