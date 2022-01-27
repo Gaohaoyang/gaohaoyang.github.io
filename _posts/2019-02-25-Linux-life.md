@@ -10,6 +10,7 @@ mathjax: true
 * content
 {:toc}
 
+- Linux（全称GNU/Linux）由Linus于1991年首次发布，是一种免费使用和自由传播的类UNIX操作系统，当时的发布被称作开启Linux时代，至今对互联网影响深远。
 - 摘自地址：[Linus，一生只为寻找欢笑（完全版）](https://www.oschina.net/news/72562/linus-smell)
    - 更多资料：《[Unix传奇上篇](https://coolshell.cn/articles/2322.html)，[Unix传奇下篇](https://coolshell.cn/articles/2324.html)》
 ![linux](https://dn-linuxcn.qbox.me/data/attachment/album/201605/02/213759pnatcn5nm0ishaly.jpg)
