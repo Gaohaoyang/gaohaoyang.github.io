@@ -630,6 +630,193 @@ if __name__ == '__main__':
     #app.run(host='10.200.24.101', port=8092)
 ```
 
+## 自动生成APIs文档
+
+- 【2022-1-26】国产[apidoc](https://apidocjs.com/), [github](https://github.com/apidoc/apidoc), [创业公司，在沙河碧水庄园别墅办公，月薪高达10w](https://www.ixigua.com/7056418647228547615)
+- 【2020-8-22】[自动为Flask写的API生成帮助文档](https://segmentfault.com/a/1190000013420209)
+  - ![](https://segmentfault.com/img/remote/1460000013420214?w=1760&h=1424)
+- [使用swagger 生成 Flask RESTful API](https://segmentfault.com/a/1190000010144742)
+- [Flask 系列之 构建 Swagger UI 风格的 WebAPI](https://www.cnblogs.com/hippieZhou/p/10848023.html), 基于 Flask 而创建 Swagger UI 风格的 WebAPI 包有很多，如
+    - [flasgger](https://github.com/rochacbruno/flasgger)
+    - [flask-swagger-ui](https://github.com/sveint/flask-swagger-ui)
+    - [swagger-ui-py](https://github.com/PWZER/swagger-ui-py)
+    - [flask_restplus](https://www.cnblogs.com/leejack/p/9162367.html)
+    - ![](https://img2018.cnblogs.com/blog/749711/201905/749711-20190511131630516-1117259038.png)
+
+### swagger
+
+[Swagger UI](https://swagger.io/tools/swagger-ui/)是一款Restful接口的文档在线自动生成+功能测试功能软件；通过swagger能够清晰、便捷地调试符合Restful规范的API；
+- [体验地址](https://petstore.swagger.io/?_ga=2.77229205.1805143947.1643255578-735781494.1643255578#/pet/addPet)
+- ![](https://static1.smartbear.co/swagger/media/images/tools/opensource/swagger_ui.png?ext=.png)
+
+#### flasgger
+
+flasgger 配置文件解析：
+- 在flasgger的配置文件中，以**yaml格式**描述了flasgger页面的内容；
+- **tags标签**中可以放置对这个api的描述和说明；
+- **parameters标签**中可以放置这个api所需的参数
+  - 如果是GET方法，可以放置url中附带的请求参数
+  - 如果是POST方法，可以将参数放置在body参数 **schema子标签**下面；
+- responses标签中可以放置返回的信息，以状态码的形式分别列出，每个状态码下可以用schema标签放置返回实体的格式；
+
+- 【2020-8-26】页面测试功能（try it out）对GET/POST无效，传参失败
+  - 已提交issue：[Failed to get parameters by POST method in “try it out” feature](https://github.com/flasgger/flasgger/issues/428)
+- 【2021-7-19】参考帖子[Parameter in body does not work in pydoc #461](https://github.com/flasgger/flasgger/issues/461)，正确的使用方法：parameter针对url path里的参数，如果启用post需要新增body参数，里面注明post参数信息
+
+- 安装：
+    - flask_restplus实践失败，个别依赖不满足，放弃
+    - pip install [flasgger](https://github.com/flasgger/flasgger)
+- 测试：如下 
+
+
+```python
+# coding:utf8
+
+# **************************************************************************
+# * 
+# * Copyright (c) 2020, Inc. All Rights Reserved
+# * 
+# **************************************************************************
+# * @file main.py
+# * @author wangqiwen
+# * @date 2020/08/22 08:32
+# **************************************************************************
+
+from flask import Flask, request, render_template, jsonify, request
+#from flask_restplus import Api
+from flasgger import Swagger, swag_from
+
+app = Flask(__name__)
+# swagger api封装，每个接口的注释文档中按照yaml格式排版
+Swagger(app)
+
+@app.route('/api/<arg>')
+#@app.route("/index",methods=["GET","POST"])
+#@app.route("/index/<int,>")
+def hello_world():
+
+    """
+    API说明
+    副标题（点击才能显示）
+    ---
+    tags:
+      - 自动生成示例
+    parameters:
+      - name: arg # path参数区
+        in: path # （1）字段形式，输入框
+        type: string
+        enum: ['all', 'rgb', 'cmyk'] # 枚举类型
+        required: false
+        description: 变量含义（如取值 all/rgb/cmyk）
+        schema: # 设置默认值，如detail （可省略）
+          type: string
+          example: rgb
+      - name: body  # post 参数区（与get冲突, GET方法下去掉body类型！）
+        in: body # （2）body形式，文本框格式
+        required: true
+        schema:
+          id: 用户注册
+          required:
+            - username
+            - password
+          properties:
+            username:
+              type: string
+              description: 用户名.
+            password:
+              type: string
+              description: 密码.
+            inn_name:
+              type: string
+              description: 客栈名称.
+    responses:
+      500:
+        description: 自定义服务端错误
+      200:
+        description: 自定义状态描述
+        schema:
+          id: awesome
+          properties:
+            language:
+              type: string
+              description: The language name
+              default: Lua
+    """ 
+    res = {"code":0, "msg":'-', "data":{}}
+    if request.method == 'GET':
+        req_data = request.values # 表单形式
+    elif request.method == 'POST':
+        req_data = request.json # json形式
+    else:
+        res['msg'] = '异常请求(非GET/POST)'
+        res['status'] = -1
+    # return jsonify(result) # 方法①
+    # return json.dumps(res, ensure_ascii=False) # 方法②
+    return render_template('index.html')
+
+@app.route("/tmp",methods=["GET","POST"])
+def tmp():
+    """
+        临时接口
+    """
+    #return null # 【2022-1-27】swagger上回报错！
+    return {} # 返回非空才行，如json或字典格式
+
+if __name__ == '__main__':
+    #app.run()
+    #app.run(debug=True)
+    app.run(debug=True, host='10.26.15.30', port='8044')
+
+# */* vim: set expandtab ts=4 sw=4 sts=4 tw=400: */
+```
+只要将yaml格式的flasgger描述性程序放置在两组双引号之间的位置，即可实现flasgger的基本功能
+
+flasgger配置文件解析：
+- 在flasgger的配置文件中，以yaml的格式描述了flasgger页面的内容；
+- tags 标签中可以放置对这个api的描述和说明；
+- parameters 标签中可以放置这个api所需的参数，如果是GET方法，可以放置url中附带的请求参数，如果是POST方法，可以将参数放置在 schema 子标签下面；
+- responses 标签中可以放置返回的信息，以状态码的形式分别列出，每个状态码下可以用schema标签放置返回实体的格式；
+
+注意
+- 以上yaml描述文本可以单独放在文件中，api用@符号引入，示例：
+
+```python
+import random
+from flask import Flask, jsonify, request
+from flasgger import Swagger
+from flasgger.utils import swag_from
+
+app = Flask(__name__)
+Swagger(app)
+
+@app.route('/api/<string:language>/', methods=['GET'])
+@swag_from('index.yml') # 引用yaml描述文档
+def index(language):
+    language = language.lower().strip()
+    features = [
+        "awesome", "great", "dynamic", 
+        "simple", "powerful", "amazing", 
+        "perfect", "beauty", "lovely"
+    ]
+    size = int(request.args.get('size', 1))
+    if language in ['php', 'vb', 'visualbasic', 'actionscript']:
+        return "An error occurred, invalid language for awesomeness", 500
+    return jsonify(
+        language=language,
+        features=random.sample(features, size)
+    )
+
+app.run(debug=True)
+```
+
+![](https://changsiyuan.github.io/images/flasgger/flasgger.png)
+
+flasgger的不足
+- flasgger的配置文件中，对于POST方法，在描述POST body的 schema 标签中，不支持以yaml格式描述的数组或嵌套的object，这使得页面上面无法显示这类POST body的example；
+- 解决方案：将这类POST body的example放置在 description 部分（三横杠”—“上面的部分），由于 description 部分是用html格式解析的，所以可以以html的语法编写；
+
+[python--Flasgger使用心得](https://changsiyuan.github.io/2017/05/20/2017-5-20-flasgger/)
+
 # SDK
 
 SDK是什么
@@ -1802,135 +1989,6 @@ app.register_blueprint(admin,url_prefix='/admin')
 
 url_for
 url_for('admin.index') # /admin/
-
-### 自动生成APIs文档
-
-- 【2022-1-26】国产[apidoc](https://apidocjs.com/), [github](https://github.com/apidoc/apidoc), [创业公司，在沙河碧水庄园别墅办公，月薪高达10w](https://www.ixigua.com/7056418647228547615)
-- 【2020-8-22】[自动为Flask写的API生成帮助文档](https://segmentfault.com/a/1190000013420209)
-    - ![](https://segmentfault.com/img/remote/1460000013420214?w=1760&h=1424)
-- [使用swagger 生成 Flask RESTful API](https://segmentfault.com/a/1190000010144742)
-- [Flask 系列之 构建 Swagger UI 风格的 WebAPI](https://www.cnblogs.com/hippieZhou/p/10848023.html), 基于 Flask 而创建 Swagger UI 风格的 WebAPI 包有很多，如
-    - [flasgger](https://github.com/rochacbruno/flasgger)
-    - [flask-swagger-ui](https://github.com/sveint/flask-swagger-ui)
-    - [swagger-ui-py](https://github.com/PWZER/swagger-ui-py)
-    - [flask_restplus](https://www.cnblogs.com/leejack/p/9162367.html)
-    - ![](https://img2018.cnblogs.com/blog/749711/201905/749711-20190511131630516-1117259038.png)
-
-flasgger配置文件解析：
-- 在flasgger的配置文件中，以**yaml格式**描述了flasgger页面的内容；
-- **tags标签**中可以放置对这个api的描述和说明；
-- **parameters标签**中可以放置这个api所需的参数
-  - 如果是GET方法，可以放置url中附带的请求参数
-  - 如果是POST方法，可以将参数放置在body参数 **schema子标签**下面；
-- responses标签中可以放置返回的信息，以状态码的形式分别列出，每个状态码下可以用schema标签放置返回实体的格式；
-
-- 【2020-8-26】页面测试功能（try it out）对GET/POST无效，传参失败
-  - 已提交issue：[Failed to get parameters by POST method in “try it out” feature](https://github.com/flasgger/flasgger/issues/428)
-- 【2021-7-19】参考帖子[Parameter in body does not work in pydoc #461](https://github.com/flasgger/flasgger/issues/461)，正确的使用方法：parameter针对url path里的参数，如果启用post需要新增body参数，里面注明post参数信息
-
-- 安装：
-    - flask_restplus实践失败，个别依赖不满足，放弃
-    - pip install [flasgger](https://github.com/flasgger/flasgger)
-- 测试：如下 
-
-
-```python
-# coding:utf8
-
-# **************************************************************************
-# * 
-# * Copyright (c) 2020, Inc. All Rights Reserved
-# * 
-# **************************************************************************
-# * @file main.py
-# * @author wangqiwen
-# * @date 2020/08/22 08:32
-# **************************************************************************
-
-from flask import Flask, request, render_template, jsonify, request
-#from flask_restplus import Api
-from flasgger import Swagger, swag_from
-
-app = Flask(__name__)
-# swagger api封装，每个接口的注释文档中按照yaml格式排版
-Swagger(app)
-
-@app.route('/api/<arg>')
-#@app.route("/index",methods=["GET","POST"])
-#@app.route("/index/<int,>")
-def hello_world():
-
-    """
-    API说明
-    副标题（点击才能显示），url请求示例：[点击](http://10.200.24.101:8082/nlu?query_info=%E4%BD%A0%E5%A5%BD%E5%B0%8F%E8%B4%9D,%E5%8C%97%E4%BA%AC%E6%98%AF%E4%B8%AA%E5%A4%A7%E5%9F%8E%E5%B8%82&action_info=ner||seg||pos||keyword||summary)
-    ---
-    tags:
-      - 自动生成示例
-    parameters:
-      - name: arg # path参数区
-        in: path
-        type: string
-        enum: ['all', 'rgb', 'cmyk'] # 枚举类型
-        required: false
-        description: 变量含义
-      - name: body  # post 参数区（与get冲突）
-        in: body
-        required: true
-        schema:
-          id: 用户注册
-          required:
-            - username
-            - password
-          properties:
-            username:
-              type: string
-              description: 用户名.
-            password:
-              type: string
-              description: 密码.
-            inn_name:
-              type: string
-              description: 客栈名称.
-    responses:
-      500:
-        description: 自定义服务端错误
-      200:
-        description: 自定义状态描述
-        schema:
-          id: awesome
-          properties:
-            language:
-              type: string
-              description: The language name
-              default: Lua
-    """ 
-    res = {"code":0, "msg":'-', "data":{}}
-    if request.method == 'GET':
-        req_data = request.values # 表单形式
-    elif request.method == 'POST':
-        req_data = request.json # json形式
-    else:
-        res['msg'] = '异常请求(非GET/POST)'
-        res['status'] = -1
-    # return jsonify(result) # 方法①
-    # return json.dumps(res, ensure_ascii=False) # 方法②
-    return render_template('index.html')
-
-@app.route("/tmp",methods=["GET","POST"])
-def tmp():
-    """
-        临时接口
-    """
-    return render_template('index.html')
-
-if __name__ == '__main__':
-    #app.run()
-    #app.run(debug=True)
-    app.run(debug=True, host='10.26.15.30', port='8044')
-
-# */* vim: set expandtab ts=4 sw=4 sts=4 tw=400: */
-```
-
 
 
 ### 全局变量
