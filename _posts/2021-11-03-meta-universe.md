@@ -16,7 +16,8 @@ mathjax: true
 
 - 【2022-1-13】[北大出品，最强元宇宙报告，200页干货](https://mp.weixin.qq.com/s/OuHXv30PCf_RoxHfdLCAzw)
 - 【2021-10-31】[清华大学：2021元宇宙研究报告](https://www.163.com/dy/article/GNL04QMN0519KHAT.html)
-
+- 【2022-1-28】Meta: You will own nothing, and you will be happy... 元宇宙：让你一无所有却难以自拔
+  - ![](https://p3.toutiaoimg.com/large/tos-cn-i-qvj2lq49k0/cbd33023b2d342ab96037fa934106cb6)
 
 # 元宇宙
 
