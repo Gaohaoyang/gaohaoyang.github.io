@@ -422,6 +422,7 @@ chatbot:我也是，不过总有一天就会好起来的
 
 ## 智能客服
 
+- 【2022-1-28】北京12345平台，公众号上嵌入的智能客服[插件](http://www.beijing.gov.cn/jj/bj12345/)
 - 【2021-6-15】[浅谈智能客服机器人的产品设计](https://blog.csdn.net/plusli/article/details/100596982)
 
 ### 商业空间
