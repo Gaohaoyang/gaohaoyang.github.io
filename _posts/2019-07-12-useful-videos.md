@@ -13,6 +13,10 @@ mathjax: true
 
 # 视频资源
 
+【2022-1-29】北京风景、城市风貌缩影，[摄影师眼中最好的北京](https://www.bilibili.com/video/BV1Nb411q7JR)
+
+<iframe src="//player.bilibili.com/player.html?aid=45430348&bvid=BV1Nb411q7JR&cid=79543443&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 ## 自制视频
 
 - 【2020-1-3】[东方曼哈顿实拍（北京CBD探秘）](https://www.bilibili.com/video/BV1FJ411L7gq)
