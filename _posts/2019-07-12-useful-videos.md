@@ -17,6 +17,11 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=45430348&bvid=BV1Nb411q7JR&cid=79543443&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+[《品味北京》250秒带你领略4K震撼帝都](https://www.bilibili.com/video/BV164411p79V/)
+
+<iframe src="//player.bilibili.com/player.html?aid=53769402&bvid=BV164411p79V&cid=94054501&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+
 ## 自制视频
 
 - 【2020-1-3】[东方曼哈顿实拍（北京CBD探秘）](https://www.bilibili.com/video/BV1FJ411L7gq)
