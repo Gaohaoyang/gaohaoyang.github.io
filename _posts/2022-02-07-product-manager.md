@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "产品经理-Product Manager"
-date:   2020-02-07 13:30:00
+date:   2022-02-07 13:30:00
 categories: 互联网
 tags: 互联网 产品
 excerpt: 互联网产品经理工作内容
