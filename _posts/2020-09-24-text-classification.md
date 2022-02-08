@@ -3,7 +3,7 @@ layout: post
 title:  "文本分类-Text Classification"
 date:   2020-09-24 14:52:00
 categories: 深度学习
-tags: 文本分类
+tags: 文本分类 负采样
 excerpt: NLP子领域文本分类知识汇总
 author: 鹤啸九天
 mathjax: true
@@ -20,30 +20,34 @@ mathjax: true
   - 实际上，落地时主要还是和数据的博弈。数据决定模型的上限，大多数人工标注的准确率达到95%以上就很好了，而文本分类通常会对准确率的要求更高一些，与其苦苦调参想fancy的结构，不如好好看看badcase，做一些数据增强提升模型鲁棒性更实用。
 - 【2021-8-5】[深度学习文本分类模型综述+代码+技巧](https://zhuanlan.zhihu.com/p/349086747)，文本分类方法快速选型[导图](https://pic1.zhimg.com/80/v2-23b33b3f7116181bcb26161f5a0fab14_720w.jpg)
   - ![](https://pic1.zhimg.com/80/v2-23b33b3f7116181bcb26161f5a0fab14_720w.jpg)
-  - 上线吗(不：BERT) → 文本长吗(短：CNN/FastText) → 任务难吗（还行：RNN/ALBERT） → 别做了
+  - 上线吗(不：BERT) → 文本长吗(短：TextCNN/FastText) → 任务难吗（还行：RNN/ALBERT） → 别做了
   - 落地时主要还是和数据的博弈。数据决定模型的上限，大多数人工标注的准确率达到95%以上就很好了，而文本分类通常会对准确率的要求更高一些，与其苦苦调参想fancy的结构，不如好好看看badcase，做一些数据增强提升模型鲁棒性更实用。
 - 【2021-9-16】[NLP文本分类 落地实战五大利器](https://mp.weixin.qq.com/s/v4qpz3Izt1U5_qHXDdvz7A), 从工业的角度浅谈实际落地中文本分类的种种常见问题和优化方案. 公开数据集讲解。
   - Baseline用Roberta_base版本，把最后一层Transformer的输出进行mean和max后进行拼接，再连接全连接层，最后进行标签分类，由于Bert限制最大长度为512，对于长文本来说，可以通过「transfomrer-XL等改造模型」或者通过「截取字符」（从前面截取，或从中间截取，或从末尾截取）或「把文本进行分块」，分别输入模型中，再取概率平均，对于一般的任务，主要采用截取字符的方法，实现简单
   - Micro F1值作为评价标准，分数，短文本 0.8932，长文本 0.5579，长文本由于标签类别多，加上标签数据不太充分，难度比短文本难不少。
-- 提升方法
-  - （1）数据增强：EDA、对抗训练
-    - **EDA**（easy data augmentation）方法：**同义词替换**，**回译**，**近音字替换**，**随机插入**，**随机交换**，**随机删除**等等，效果最好的是「同义词替换」和「回译」
-      - 同义词替换：常用的同义词词表是哈工大的是**nlpcda库**
-      - 回译：把中文翻译成英文或法文或日本，再翻译回中文；长文本并不适用于回译，改进：随机对长文本中的单句进行回译，而不是把整个长文本进行回译。）
-      - 注意：「增强后的样本要和实际预测的样本分布要相似」，这样才能得到比较好的正向效果。
-    - **对抗训练**：对抗训练用于文本这几年基本成为算法比赛获奖方案的标配，如FGM、PGD、YOPO、FreeLB 等一些系列的思想。它属于数据增强的一部分，因为在深度学习进行文本分类中，无外乎将字或词映射成向量作为模型输入。
-  - （2）数据去燥
-    - 算法工程师80%在洗数据，20%时间在跑模型；制约模型效果再上一步的，往往是数据质量，而不是模型，文本分类任务中，标注准确率95%就是非常好了
-    - 如何清洗标注数据？常用方法是根据业务规则来清洗、交叉验证清洗
-  - （3）类别不平衡
-    - 过采样、欠采样，推荐改造代价损失函数，因为前两者会带来噪声，后者不会，常用方法focal loss
-  - （4）半监督学习：
-    - consistency loss
-    - sharpening predictions
-    - tsa
-    - confidence mask
-  - （5）模型轻量化
 
+提升方法
+- （1）数据增强：**EDA**、**对抗训练**
+  - **EDA**（easy data augmentation）方法：**同义词替换**，**回译**，**近音字替换**，**随机插入**，**随机交换**，**随机删除**等等，效果最好的是「同义词替换」和「回译」
+    - 同义词替换：常用的同义词词表是哈工大的是**nlpcda库**
+    - 回译：把中文翻译成英文或法文或日本，再翻译回中文；
+      - 长文本并不适用于回译 → 改进：随机对长文本中的**单句**进行回译，而不是把整个长文本进行回译。）
+    - 注意：「增强后的样本要和实际预测的样本**分布要相似**」，这样才能得到比较好的正向效果。
+  - **对抗训练**：对抗训练用于文本这几年基本成为算法比赛获奖方案的标配，如FGM、PGD、YOPO、FreeLB 等一些系列的思想。它属于数据增强的一部分，因为在深度学习进行文本分类中，无外乎将字或词映射成向量作为模型输入。
+- （2）数据去燥
+  - 算法工程师80%在洗数据，20%时间在跑模型；制约模型效果再上一步的，往往是数据质量，而不是模型，文本分类任务中，标注准确率95%就是非常好了
+  - 如何清洗标注数据？常用方法是根据业务规则来清洗、交叉验证清洗
+- （3）类别不平衡
+  - 过采样、欠采样，推荐改造代价损失函数，因为前两者会带来噪声，后者不会，常用方法 focal loss
+- （4）**半监督**学习：
+  - consistency loss
+  - sharpening predictions
+  - tsa
+  - confidence mask
+- （5）模型轻量化
+
+效果评测
+- 短文本效果明显
 
 |方法|短文本	|长文本|
 |---|---|---|
@@ -53,7 +57,10 @@ mathjax: true
 
 ## 数据集
 
-两个公开数据集：今日头条的短文本分类 和 科大讯飞的长文本分类，数据集的下载见[github的链接](https://github.com/zhoujx4/NLP-Series-text-cls)。
+两个公开数据集：
+- 今日头条的**短**文本分类
+- 科大讯飞的**长**文本分类
+数据集的下载见[github的链接](https://github.com/zhoujx4/NLP-Series-text-cls)。
 
 数据集的label个数、训练集、验证集和测试集的数量分布：
 
@@ -96,10 +103,11 @@ mathjax: true
 
 # 评估方法
 
-- 不同类型的文本分类往往有不同的评价指标，具体如下：
-  - 二分类：accuracy，precision，recall，f1-score，...
-  - 多分类: Micro-Averaged-F1， Macro-Averaged-F1, ...
-  - 多标签分类：Jaccard相似系数, ...
+不同类型的文本分类往往有不同的评价指标，具体如下：
+- **二**分类：accuracy，precision，recall，f1-score，...
+- **多**分类: Micro-Averaged-F1， Macro-Averaged-F1, ...
+- **多标签**分类：Jaccard相似系数, ... 
+  - 为什么是jaccard？各类别不互（正交），不能用传统指标
 
 
 # 常规分类方法
@@ -126,17 +134,17 @@ from sklearn.metrics import recall_score
 from sklearn.metrics import classification_report
 
 
-train_data = pd.read_csv(sys.argv[1],sep='|',names=["a","b","c","label"])
-test_data = pd.read_csv(sys.argv[2],sep='|',names=["a","b","c","label"])
+train_data = pd.read_csv(sys.argv[1],sep='|', names=["a","b","c","label"])
+test_data = pd.read_csv(sys.argv[2],sep='|', names=["a","b","c","label"])
 
 def pre_process(df):
     df['real_path'] = df['c'].apply(lambda x:x.split("\\"))
     df['real_path'] = df['real_path'].apply(lambda x:" ".join(x))
     return df
 
-train_data = pre_process(train_data)
-test_data = pre_process(test_data)
-data = train_data.append(test_data)
+train_data = pre_process(train_data) # 训练集
+test_data = pre_process(test_data) # 测试集
+data = train_data.append(test_data) # 全集
 #vectorizer = CountVectorizer()
 #transformer = TfidfTransformer()
 #tfidf = transformer.fit_transform(vectorizer.fit_transform(data['real_path']))
@@ -185,18 +193,100 @@ print(classification_report(y_predict, y_test))
 
 ### Skip-Gram
 
-- Skip-Gram的模型图与CBOW恰好相反
-![](https://pic2.zhimg.com/80/v2-ec71505b54d3419e74dc28e4cdb28dbc_720w.jpg)
+Skip-Gram的模型图与CBOW恰好相反
+- ![](https://pic2.zhimg.com/80/v2-ec71505b54d3419e74dc28e4cdb28dbc_720w.jpg)
 
 ### 层次softmax和负采样
 
-- 由于softmax层非常昂贵，每次计算的复杂度为o(v) ，所以用层次softmax或者负采样来替换掉输出层，降低复杂度。
-- 层次softmax是一棵huffman树，树的叶子节点是训练文本中所有的词，非叶子节点都是一个逻辑回归二分类器，每个逻辑回归分类器的参数都不同
-  - 基于层次softmax的CBOW
-    - ![](https://pic3.zhimg.com/80/v2-504f3d895521feb43aaafc5bef952749_720w.jpg)
-- 负采样实际上是采样负例来帮助训练的手段，与层次softmax一样，用来提升模型的训练速度。
-  - 模型对正例的预测概率是越大越好，模型对负例的预测概率是越小越好。由于正例的数量少，很容易保证每个正例的预测概率尽可能大，而负例的数量特别多，所以负采样的思路就是根据某种负采样的策略随机挑选一些负例，然后保证挑选的这部分负例的预测概率尽可能小。
-  - 所以，负采样策略是对模型的效果影响很大，word2vec常用的负采样策略有**均匀负采样**、**按词频率采样**等等。
+由于softmax层非常昂贵，每次计算的复杂度为o(v) ，所以用层次softmax或者负采样来替换掉输出层，降低复杂度。
+
+**层次softmax**是一棵huffman树，树的叶子节点是训练文本中所有的词，非叶子节点都是一个**逻辑回归**二分类器，每个逻辑回归分类器的参数都不同
+- 基于层次softmax的CBOW
+  - ![](https://pic3.zhimg.com/80/v2-504f3d895521feb43aaafc5bef952749_720w.jpg)
+
+**负采样**实际上是采样负例来帮助训练的手段，与层次softmax一样，用来提升模型的训练速度。
+- 模型对正例的预测概率是越大越好，模型对负例的预测概率是越小越好。由于正例的数量少，很容易保证每个正例的预测概率尽可能大，而负例的数量特别多，所以负采样的思路就是根据某种负采样的策略随机挑选一些负例，然后保证挑选的这部分负例的预测概率尽可能小。
+- 所以，负采样策略是对模型的效果影响很大，word2vec常用的负采样策略有**均匀负采样**、**按词频率采样**等等。
+
+### 附加：采样策略
+
+【2022-2-8】[语言模型采样策略](https://zhuanlan.zhihu.com/p/267471193)，源自论文：THE CURIOUS CASE OF NEURAL TEXT DeGENERATION
+
+语言模型都是基于给定的一段文本，然后预测下一个token的概率。
+- 给定"我喜欢美味的热"，模型可能会预测下一个token为： "狗" **80%** 概率，饼干 **5%** 概率，等等。
+基于这种模式，可以生成**任意**长度的序列。
+- 比如，可以输入"我喜欢", 模型可以输出一个token，"一个", 一起得到"我喜欢一个"。然后在输入进模型可以得到下一个token的概率分布，可以一直循环这个过程。但是<font color='red'>这样迭代下去最终会陷入死循环，或者偏离话题。</font>
+
+如果总是对**最可能**的单词进行采样，最终的结果可能变成："我爱你爱我爱你爱我..." —— `退化`(degenerate)问题
+- 这不符合常理，但是语言模型中模型的大部分注意力仅集中在最新的一些token上。
+- 另外，常用的采样方法是基于**分布**的采样。存在的问题是，如果有5万种可能的选择，即使最低的25000个token每个都不太可能，但是他们的概率加起来可能有30%。
+- 这意味着，对于每个样本都有33%的概率完全偏离训练的结果。 由于前面提到的上下文一般较短，每个待生成的token比较依赖历史最近生成的文本，这样会导致误差不但传递放大。
+
+解决方法：
+- （1）Temperature sampling **退火采样**
+  - temperature sampling是受统计热力学启发的，其中高温意味着更可能遇到低能态。 在概率模型中，logit起着能量的作用，可以通过将logit除以temperature, 然后在softmax，获得概率分布。 
+  - 较低的temperature可以让模型对最佳选择越来越有信息，当temperature大于1，则会降低，0则相当于 argmax/max ，inf则相当于均匀采样。
+  - ![](https://pic2.zhimg.com/80/v2-86fb6641c4d081722f0f0a87e104673d_720w.jpg)
+- （2）Top k sampling **Top k采样**
+  - Top k sampling表示对概率进行排序，然后对位置kth之后的概率转换成0
+  - 很显然，这样能提升长尾那部分概率的干扰，降低跑偏的可能性，但有些例子中，很多词确实是可以从合理范围采样(见下图broad distribution)， 某些情况下，则不可以（narrow distribution）
+  - ![](https://pic2.zhimg.com/80/v2-e95fdf3ba7313637e6e1a73318311df1_720w.jpg)
+- （3）Top p sampling **Top p采样**
+  - 为了解决top k问题，作者提出了top p sampling - aka nucleus sampling, 通过对概率分布进行累加，然后当累加的值超过设定的阈值p，则对之后的概率进行置0，在上面的例子里面，在broad distribution中，可能要去top 100个token才能达到0.9。在narrow distribution中，可能只需要 hot和 warm 2个token就可以达到0.9。通过这种方式，可以避免长尾部分的干扰，同时当top token的置信度不高的时候，仍旧保证多样性。
+  - 一般情况下，在训练的过程中，即使模型预测错了，也会人为的扭转成正确的token，然后结合之前的token，预测下一个token, 这就导致模型不会出现这种复合错误，在测试的时候，它需要使用自己生成的token，来预测，这可能是导致maximum likelihood sampling失效的原因。
+- （4）自动选取超参-p&k
+  - 目标是通过top k 和 top p来最大化下一个预测最大概率的token为真实token。对于k， 可以直接找到真实token对应的sorted之后的index, 对于p, 可以看真实token对应的累计之后的位置。
+  - 比如"我喜欢吃热"，真实token是“狗”，而模型top 1置信度对应的token是"煎饼"，top 1对应的累加概率为60%，往低概率的token继续查找，如果发现”狗“对应的index是3，此时对应的累加概率是85%，这时候就找到了最优的p了。
+
+超参搜索
+- 如果是在训练集上评估模型，最好设置top k = 1, 但是模型结果的不确定性，可能真实答案是比较低的预测概率。而且，一个大的词表，比如5w, 可能有1半的词，在很多数据集上都不会出现，但是模型对这些不确定，通过top k或者top p的方法对这部分概率的置0，相当于合并了这些模型从来没见过的token。
+
+代码
+
+```python
+import torch
+import torch.nn.functional as F
+
+a = torch.tensor([1,2,3,4.])
+# （1）退火采样
+F.softmax(a, dim=0)
+# tensor([0.0321, 0.0871, 0.2369, 0.6439])
+F.softmax(a/.5, dim=0)
+# tensor([0.0021, 0.0158, 0.1171, 0.8650])
+F.softmax(a/1.5, dim=0)
+# tensor([0.0708, 0.1378, 0.2685, 0.5229])
+F.softmax(a/1e-6, dim=0)
+# tensor([0., 0., 0., 1.])
+
+# （2）top k/p采样计算
+
+def top_k_top_p_filtering(logits, top_k=0, top_p=0.0, filter_value=-float('Inf')):
+    
+    top_k = min(top_k, logits.size(-1))
+    if top_k > 0:
+        indices_to_remove = logits < torch.topk(logits, top_k)[0][..., -1, None]
+        logits[indices_to_remove] = filter_value
+    if top_p > 0.0:
+        sorted_logits, sorted_indices = torch.sort(logits, descending=True)
+        cumulative_probs = torch.cumsum(F.softmax(sorted_logits, dim=-1), dim=-1)
+        sorted_indices_to_remove = cumulative_probs >= top_p
+        sorted_indices_to_remove[..., 1:] = sorted_indices_to_remove[..., :-1].clone()
+        sorted_indices_to_remove[..., 0] = 0
+        indices_to_remove = torch.zeros_like(logits, dtype=torch.uint8).scatter_(
+            dim=-1, index=sorted_indices, src=sorted_indices_to_remove )
+        logits[indices_to_remove] = filter_value
+    return logits
+
+# 超参搜索
+def best_k_p(logits, golden, verbose=False):
+    sorted_logits, sorted_indices = torch.sort(logits, descending=True)
+    cumulative_probs = torch.cumsum(F.softmax(sorted_logits, dim=-1), dim=-1)
+    ks = (sorted_indices == golden).nonzero()[:, 1]
+    ps = cumulative_probs[sorted_indices == golden]
+    #print('top 5:', enc_.decode(sorted_indices[0, :5].tolist()))
+    return ks, ps
+```
+
 
 ## FastText —— 适合长文本
 
