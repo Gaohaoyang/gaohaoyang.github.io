@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  BERT及预训练语言模型-BERT-and-Pretrain-Language-Model
-date:   2019-12-10 16:52:00
+date:   2019-12-15 16:52:00
 categories: 深度学习 
 tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook TextCNN ES 田渊栋 彩票假设 自监督 Milvus ALBERT elasticsearch es 可视化 unilm simcse gpu 迁移学习
 excerpt: 预训练语言模型及BERT知识点汇总
