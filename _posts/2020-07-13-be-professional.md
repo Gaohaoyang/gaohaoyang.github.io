@@ -518,7 +518,9 @@ Trello 用作查看任务、进度、统计等的工具，而非日程管理工�
 - 点开一个 card，description 记了网址，直接点开就可以开始学习。每次学习以后就在评论（Comment）记录
   - ![](https://pic3.zhimg.com/80/v2-74dafa41add181a7591611a83ce42f74_720w.jpg?source=1940ef5c)
 
-<blockquote class="trello-card"><a href="https:&#x2F;&#x2F;trello.com&#x2F;c&#x2F;DTrUDniC&#x2F;18-2022-%E6%B8%85%E5%8D%95">2022 清单</a></blockquote><script src="https://p.trellocdn.com/embed.min.js"></script>
+【2022-2-9】trello卡片嵌入，可编辑
+
+<blockquote class="trello-card"><a href="https:&#x2F;&#x2F;trello.com&#x2F;c&#x2F;nBoUdPRF&#x2F;17-%E3%80%90%E6%8A%80%E6%9C%AF%E6%A0%88%E3%80%91%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E5%AE%8C%E5%96%84">【技术栈】知识体系完善</a></blockquote><script src="https://p.trellocdn.com/embed.min.js"></script>
 
 
 ### 解除焦虑，安心躺平
