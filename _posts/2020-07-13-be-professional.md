@@ -518,6 +518,7 @@ Trello 用作查看任务、进度、统计等的工具，而非日程管理工�
 - 点开一个 card，description 记了网址，直接点开就可以开始学习。每次学习以后就在评论（Comment）记录
   - ![](https://pic3.zhimg.com/80/v2-74dafa41add181a7591611a83ce42f74_720w.jpg?source=1940ef5c)
 
+<blockquote class="trello-card"><a href="https:&#x2F;&#x2F;trello.com&#x2F;c&#x2F;DTrUDniC&#x2F;18-2022-%E6%B8%85%E5%8D%95">2022 清单</a></blockquote><script src="https://p.trellocdn.com/embed.min.js"></script>
 
 
 ### 解除焦虑，安心躺平
