@@ -34,6 +34,7 @@ mathjax: true
 
 这些自监督方法的核心是一个叫做 “pretext task” 的框架，使用数据本身来生成标签，并使用监督的方法来解决非监督的问题。这些也被称为“auxiliary task”（**辅助**任务）或“pre-training task“（**预训练**任务）。通过执行此任务获得的表示可以用作下游监督任务的起点。
 - ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p1-tt.byteimg.com/origin/pgc-image/47ba10919c1440c781c0b14f1c14de82?from=pc)
+
 下面概述研究人员在没有明确的数据标注的情况下从文本语料库中学习表示的各种pretext tasks。
 - 重点是任务的制定，而不是实现它们的架构。
 
@@ -45,18 +46,21 @@ mathjax: true
 - ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p3-tt.byteimg.com/origin/pgc-image/b217d92b952d4601937a1629bc867642?from=pc)
   - 例如，下图中，有一个大小为1的窗口，在中间单词的两边各有一个单词，用这些相邻的词预测中心词。
 - ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p3-tt.byteimg.com/origin/pgc-image/62516862aa444fed9885c34aaf955b05?from=pc)
+
 这个方案已经在著名的Word2Vec论文的“Continuous Bag of Words”方法中使用过。
  
 ## 2. 预测邻居词（word2vec的skip-gram模型）
 
 在这个公式中，取一定窗口大小的文本张成的空间，目标是在给定中心词的情况下预测周围的词。
 - ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p6-tt.byteimg.com/origin/pgc-image/63df64f4f6af401db506372dc06c0b2f?from=pc)
+
 这个方案已经在著名的Word2Vec论文的“skip-gram”方法中实现。
  
 ## 3. 相邻句子的预测（Skip-Thought Vectors，句子级别的skip-gram）
  
 在这个公式中，取三个连续的句子，设计一个任务，其中给定中心句，生成前一个句子和下一个句子。它类似于之前的skip-gram方法，但适用于句子而不是单词。
 - ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p6-tt.byteimg.com/origin/pgc-image/6c88f0845d7e4ae38ea626bb3bfd9000?from=pc)
+
 这个方案已经在Skip-Thought Vectors的论文中使用过。
  
 ## 4. 自回归语言建模（n-gram/gpt）
@@ -67,28 +71,34 @@ mathjax: true
 - ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p6-tt.byteimg.com/origin/pgc-image/1ddb11e50efa4a6f955bac7e14218b1b?from=pc)
   - 也可以用这个方案来通给定未来的单词预测之前的单词，方向是**从右到左**。
 - ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p6-tt.byteimg.com/origin/pgc-image/bbb35ee25289497a9c40e3eeee901fe0?from=pc)
+
 这个方案已经使用在许多论文中，从n-gram模型到神经网络模型比如神经概率语言模型 (GPT) 。
  
 ## 5. 掩码语言建模（bert系列）
  
 在这个方案中，文本中的单词是随机掩码的，任务是预测它们。与自回归公式相比，在预测掩码单词时可以同时使用前一个词和下一个词的上下文。
 - ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p1-tt.byteimg.com/origin/pgc-image/a9b530083051422f9f88c1613eff489f?from=pc)
+
 这个方案已经在BERT、RoBERTa和ALBERT的论文中使用过。与自回归相比，在这个任务中，只预测了一小部分掩码词，因此从每句话中学到的东西更少。
  
 ## 6. 下一个句子预测（NSP任务，bert使用）
  
 在这个方案中，我们取文件中出现的两个连续的句子，以及同一文件或不同文件中随机出现的另一个句子。
 - ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p3-tt.byteimg.com/origin/pgc-image/8d58e6c913dc445d895429086cc50ae9?from=pc)
+
 然后，任务是区分两个句子是否是连贯的。
 - ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p3-tt.byteimg.com/origin/pgc-image/f50ff4fe179a4678926ddcc3769289f0?from=pc)
+
 在BERT的论文中，它被用于提高下游任务的性能，这些任务需要理解句子之间的关系，比如自然语言推理(NLI)和问题回答。然而，后来的研究对其有效性提出了质疑。
  
 ## 7. 句子顺序的预测（albert，取代NSP）
  
 在这个方案中，我们从文档中提取成对的连续句子。然后互换这两个句子的位置，创建出另外一对句子。
 - ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p1-tt.byteimg.com/origin/pgc-image/0638806390584a488e06c82a11832455?from=pc)
+
 目标是对一对句子进行分类，看顺序是否正确。
 - ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p1-tt.byteimg.com/origin/pgc-image/2ba2388f8dfa4778ba4684a8bbbc57fe?from=pc)
+
 在ALBERT的论文中，它被用来取代“下一个句子预测”任务。
  
 ## 8. 句子重排（bart）
@@ -101,12 +111,14 @@ mathjax: true
  
 在这个方案中，文档中的一个随机token被选择为旋转点。然后，对文档进行旋转，使得这个token成为开始词。任务是从这个旋转的版本中恢复原来的句子。
 - ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p3-tt.byteimg.com/origin/pgc-image/8095d77a0fc440978eb825289a83acf6?from=pc)
+
 它已经在BART的论文中被用作预训练的任务之一。直觉上，这将训练模型开始识别文档。
  
 ## 10. 表情符号预测
  
 这个方案被用在了DeepMoji的论文中，用表情符号来表达推文的情感。如下所示，用推特上的表情符号作为标签，并制定一个监督任务，在给出文本时预测表情符号。
 - ![NLP中的自监督表示学习，全是动图，很过瘾的](https://p1-tt.byteimg.com/origin/pgc-image/501d4092a3c4433298824a230c07eeb1?from=pc)
+
 DeepMoji的作者们使用这个概念对一个模型进行了12亿条推文的预训练，然后在情绪分析、仇恨语言检测和侮辱检测等与情绪相关的下游任务上对其进行微调。
 
 # 预训练语言模型（PLMs）
