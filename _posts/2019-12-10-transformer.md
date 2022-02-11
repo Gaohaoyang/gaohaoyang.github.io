@@ -3,7 +3,7 @@ layout: post
 title:  Transformer知识点汇总
 date:   2019-12-10 16:52:00
 categories: 深度学习 
-tags: 深度学习 NLP Transformer BERT GPT Attention BeamSearch seq2seq 杨植麟 XLNet
+tags: 深度学习 NLP Transformer BERT GPT Attention BeamSearch seq2seq 杨植麟 XLNet 循环智能
 excerpt: Attention is all you need!
 mathjax: true
 ---
@@ -1940,9 +1940,13 @@ XLNet引入了自回归语言模型以及自编码语言模型
 
 ### 作者：杨植麟
 
+[循环智能（Recurrent）：用AI重塑沟通](https://www.cyzone.cn/article/557072.html)
+
 【2022-1-17】杨植麟博士，**循环智能**（Recurrent AI）联合创始人，清华大学交叉信息院助理教授，智源青年科学家。
 
-其联合创办的Recurrent AI累计融资4亿元，连续三年营收增长超200%，服务银行保险等行业的头部客户，日均处理对话一亿条、覆盖数百万终端用户。
+2016年5月联合创办的Recurrent AI，核心技术包括自然语言理解、语音识别、语气识别、声纹识别和推荐系统。其中，自然语言理解来自公司的核心原创算法XLNet，这套算法刷新了18项NLP（自然语言处理）任务。如今累计融资4亿元，连续三年营收增长超200%，服务银行保险等行业的头部客户，日均处理对话一亿条、覆盖数百万终端用户。
+- ![](https://oss.cyzone.cn/2019/0926/631f26ab025a8c33d218a4a09424bbb4.png?x-oss-process=image/format,png)
+- 循环智能创始团队，从左到右：COO揭发、CTO张宇韬、CEO陈麒聪以及AI和产品负责人杨植麟
 
 其研究成果累计Google Scholar引用10,000余次；作为第一作者发表Transformer-XL 和 XLNet ，对NLP领域产生重大影响，分别是ACL 2019和NeurIPS 2019最高引论文之一；主导开发的盘古NLP大模型获2021年世界人工智能大会“卓越人工智能引领者之星奖”。曾入选2021年福布斯亚洲30 under 30；曾效力于Google Brain和Facebook AI。博士毕业于美国卡内基梅隆大学，本科毕业于清华大学
  
