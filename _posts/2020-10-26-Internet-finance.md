@@ -29,6 +29,14 @@ mathjax: true
 - 【2019-03-07】2008年金融危机的电影[大空头](https://www.365yg.com/a6624281300087865859#mid=1556765139678210)
 
 
+# 金融
+
+## 金融体系
+
+【2022-2-11】金融制度宏观研究体系，[220209 宏观研究体系](https://mp.weixin.qq.com/s/YVmC4YinLqt5KOQ-VvrS_g)，更多图解资料打包下载，[阿里云盘](https://www.aliyundrive.com/s/wGnSLCPzTLH)
+- ![](https://p26.toutiaoimg.com/img/tos-cn-i-qvj2lq49k0/adb2468942fc4025bb398ea2f522c33d~tplv-obj:3307:2339.image)
+
+
 ## 金融制度运转
 
 - 万维财经经济学视频[系列](https://www.365yg.com/c/user/51414569980/),覆盖经济规律、通货膨胀、货币等，通俗易懂，如：[经济机器是怎样运行的](http://www.365yg.com/i6617283549709992455/#mid=51415239994)， [【经济学】经济机器是怎样运行的 by Ray Dalio](https://www.bilibili.com/video/BV15s411b7xr),管理着世界上最大的对冲基金——桥水基金的创始人：Ray Dalio用30分钟的时间来阐释经济机器是如何运行的
