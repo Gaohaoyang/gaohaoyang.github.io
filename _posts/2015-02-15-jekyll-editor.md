@@ -145,6 +145,7 @@ print "hello"
 - colspan：规定单元格可纵深的列数
 - rowspan：规定单元格可横跨的行数
 
+```html
 <table>
     <tr>
         <td>张</td>
@@ -154,9 +155,11 @@ print "hello"
         <td colspan="2">姓氏</td>
     <tr>
 </table>
+```
 
 合并列：
 
+```html
 <table>
     <tr>
         <td>类别</td>
@@ -177,9 +180,11 @@ print "hello"
         <td>王</td>
     </tr>
 </table>
+```
 
 有行有列；
 
+```html
 <table>
     <tr>
         <td>类别</td>
@@ -200,13 +205,14 @@ print "hello"
         <td>张</td>
     </tr>
 </table>
-
+```
 
 ### 图片嵌入
 
 - 默认方法
    - ![](https://img3.doubanio.com/lpic/s28012945.jpg)
    - 解析成：
+
 ```html
 <image title="name" alt="name" src="url">
 ```
@@ -225,6 +231,7 @@ print "hello"
 ```
 
 或者：
+
 ```shell
 # 简洁模式
 ![](/wqw/fig/3brown1blue.png)
@@ -236,11 +243,11 @@ print "hello"
 *Fig. 25. 图片注释*
 {:.image-caption}
 ```
+
 ![](/wqw/fig/3brown1blue.png)
 
 【2021-4-9】图片放大，Jekyll添加[FancyBox](https://www.cnblogs.com/Grand-Jon/p/7397652.html)插件，
-
-![](https://images2017.cnblogs.com/blog/1221855/201708/1221855-20170819190958896-1029926791.png)
+- ![](https://images2017.cnblogs.com/blog/1221855/201708/1221855-20170819190958896-1029926791.png)
 
 【2021-12-21】多图排列：[Markdwon中多张图片的并排显示](https://blog.csdn.net/weixin_41010198/article/details/86639739)
 
