@@ -655,14 +655,14 @@ Python实现前缀树比较简单的方案就是利用字典结构来实现嵌�
 
 #### 随机采样(sampling)
 
-- 随机采样：格局解码器输出的词典中每个词的概率分布随机抽样。
+- 随机采样：根据解码器输出的词典中每个词的概率分布随机抽样。
     - 相比于按概率“掐尖”，这样会增大所选词的范围，引入更多的随机性。
-- 采样的时候有一个可以控制的超参数，称为**温度**(temperature, $T$)。
+- 采样的时候有一个可以控制的超参数，称为**温度**(temperature, T)。
     - 模型蒸馏里用到
-- 解码器的输出层后面通常会跟一个softmax函数来将输出概率归一化，通过改变$T$可以控制概率的形貌。
+- 解码器的输出层后面通常会跟一个softmax函数来将输出概率归一化，通过改变T可以控制概率的形貌。
 - softmax的公式如下
-    - 当$T$大的时候，概率分布趋向平均，随机性增大；
-    - 当$T$小的时候，概率密度趋向于集中，即强者俞强，随机性降低，会更多地采样出“放之四海而皆准”的词汇。
+    - 当T大的时候，概率分布趋向平均，随机性增大；
+    - 当T小的时候，概率密度趋向于集中，即强者俞强，随机性降低，会更多地采样出“放之四海而皆准”的词汇。
 
 - 谷歌开放式聊天机器人Meena采用的方式，论文结论是：
     - 这种随机采样的方法远好于Beam Search。
@@ -672,9 +672,9 @@ Python实现前缀树比较简单的方案就是利用字典结构来实现嵌�
 #### top-k采样
 
 - 采样前将输出的概率分布截断，取出概率最大的k个词构成一个集合，然后将这个子集词的概率再归一化，最后重新的概率分布中采样词汇。
-- 据说可以获得比Beam Search好很多的效果，但有个问题，就是这个k不太好选。
-    - 概率分布变化比较大，有时候可能很均匀(flat)，有的时候比较集中(peaked)。
-    - ![](http://www.wuyuanhao.com/wp-content/uploads/2020/03/distribution.png)
+- 据说可以获得比Beam Search好很多的效果，但有个问题，就是这个**k不太好选**。
+    - 概率分布变化比较大，有时候可能很**均匀**(flat)，有的时候比较**集中**(peaked)。
+    - [图](http://www.wuyuanhao.com/wp-content/uploads/2020/03/distribution.png) ![图](http://www.wuyuanhao.com/wp-content/uploads/2020/03/distribution.png)
     - 对于集中的情况还好说，当分布均匀时，一个较小的k容易丢掉很多优质候选词。
     - 但如果k定的太大，这个方法又会退化回普通采样。
 
@@ -1002,6 +1002,7 @@ attention机制也可以分成很多种。[Attention? Attention!](https://lilian
 那么我们的Transformer模型，采用的是哪种呢？答案是：**scaled dot-product attention**。
 
 ### Scaled dot-product attention是什么？
+
 论文[Attention is all you need](https://arxiv.org/abs/1706.03762)里面对于attention机制的描述是这样的：
 > An attention function can be described as a query and a set of key-value pairs to an output, where the query, keys, values, and output are all vectors. The output is computed as a weighted sum of the values, where the weight assigned to each value is computed by a compatibility of the query with the corresponding key.
 
@@ -1009,9 +1010,9 @@ attention机制也可以分成很多种。[Attention? Attention!](https://lilian
 
 用公式来描述更加清晰：
 
-$$\text{Attention}(Q,K,V)=softmax(\frac{QK^T}{\sqrt d_k})V$$
+$$ \text{Attention}(Q,K,V)=softmax(\frac{QK^T}{\sqrt d_k})V $$
 
-**scaled dot-product attention**和**dot-product attention**唯一的区别就是，**scaled dot-product attention**有一个缩放因子$\frac{1}{\sqrt d_k}$。
+**scaled dot-product attention**和**dot-product attention**唯一的区别就是，**scaled dot-product attention**有一个缩放因子 $ \frac{1}{\sqrt d_k} $。
 
 上面公式中的$d_k$表示的是K的维度，在论文里面，默认是`64`。
 
@@ -1022,11 +1023,10 @@ $$\text{Attention}(Q,K,V)=softmax(\frac{QK^T}{\sqrt d_k})V$$
 为什么是$\frac{1}{\sqrt d_k}$呢？论文没有进一步说明。个人觉得你可以使用其他缩放因子，看看模型效果有没有提升。
 
 论文也提供了一张很清晰的结构图，供大家参考：  
-![scaled_dot_product_attention_arch](http://blog.stupidme.me/wp-content/uploads/2018/09/scaled_dot_product_attention_arch.png)  
+- ![scaled_dot_product_attention_arch](http://blog.stupidme.me/wp-content/uploads/2018/09/scaled_dot_product_attention_arch.png)  
 *Figure 3. Scaled dot-product attention architecture.*  
 
 首先说明一下我们的K、Q、V是什么：
-
 * 在encoder的self-attention中，Q、K、V都来自同一个地方（相等），他们是上一层encoder的输出。对于第一层encoder，它们就是word embedding和positional encoding相加得到的输入。
 * 在decoder的self-attention中，Q、K、V都来自于同一个地方（相等），它们是上一层decoder的输出。对于第一层decoder，它们就是word embedding和positional encoding相加得到的输入。但是对于decoder，我们不希望它能获得下一个time step（即将来的信息），因此我们需要进行**sequence masking**。
 * 在encoder-decoder attention中，Q来自于decoder的上一层的输出，K和V来自于encoder的输出，K和V是一样的。
@@ -1083,14 +1083,15 @@ class ScaledDotProductAttention(nn.Module):
 理解了Scaled dot-product attention，Multi-head attention也很简单了。论文提到，他们发现将Q、K、V通过一个线性映射之后，分成 $h$ 份，对每一份进行**scaled dot-product attention**效果更好。然后，把各个部分的结果合并起来，再次经过线性映射，得到最终的输出。这就是所谓的**multi-head attention**。上面的超参数 $$h$$ 就是**heads**数量。论文默认是`8`。
 
 下面是multi-head attention的结构图：  
-![multi-head attention_architecture](http://blog.stupidme.me/wp-content/uploads/2018/09/multi_head_attention_arch.png)  
+- ![multi-head attention_architecture](http://blog.stupidme.me/wp-content/uploads/2018/09/multi_head_attention_arch.png)  
 *Figure 4: Multi-head attention architecture.*  
 
 值得注意的是，上面所说的**分成 $h$ 份**是在 $d_k、d_q、d_v$ 维度上面进行切分的。因此，进入到scaled dot-product attention的 $d_k$ 实际上等于未进入之前的 $D_K/h$ 。
 
 Multi-head attention允许模型加入不同位置的表示子空间的信息。
 
-Multi-head attention的公式如下：$$\text{MultiHead}(Q,K,V) = \text{Concat}(\text{head}_ 1,\dots,\text{head}_ h)W^O$$
+Multi-head attention的公式如下：
+- $$\text{MultiHead}(Q,K,V) = \text{Concat}(\text{head}_ 1,\dots,\text{head}_ h)W^O$$
 
 其中，$\text{head}_ i = \text{Attention}(QW_i^Q,KW_i^K,VW_i^V)$
 
@@ -1103,7 +1104,6 @@ Multi-head attention的公式如下：$$\text{MultiHead}(Q,K,V) = \text{Concat}(
 ```python
 import torch
 import torch.nn as nn
-
 
 class MultiHeadAttention(nn.Module):
 
@@ -1168,7 +1168,7 @@ class MultiHeadAttention(nn.Module):
 ## Residual connection是什么？
 
 残差连接其实很简单！给你看一张示意图你就明白了：  
-![residual_conn](http://blog.stupidme.me/wp-content/uploads/2018/09/residual_connection.png)  
+- ![residual_conn](http://blog.stupidme.me/wp-content/uploads/2018/09/residual_connection.png)  
 *Figure 5. Residual connection.*  
 
 假设网络中某个层对输入`x`作用后的输出是$F(x)$，那么增加**residual connection**之后，就变成了：$F(x)+x$
@@ -1187,6 +1187,7 @@ def residual(sublayer_fn,x):
 至此，**residual connection**的问题理清楚了。更多关于残差网络的介绍可以看文末的参考文献。
 
 ## Layer normalization是什么？
+
 [GRADIENTS, BATCH NORMALIZATION AND LAYER NORMALIZATION](https://theneuralperspective.com/2016/10/27/gradient-topics/)一文对normalization有很好的解释：
 > Normalization有很多种，但是它们都有一个共同的目的，那就是把输入转化成均值为0方差为1的数据。我们在把数据送入激活函数之前进行normalization（归一化），因为我们不希望输入数据落在激活函数的饱和区。
 
@@ -1197,14 +1198,13 @@ BN的主要思想就是：在每一层的每一批数据上进行归一化。
 我们可能会对输入数据进行归一化，但是经过该网络层的作用后，我们的的数据已经不再是归一化的了。随着这种情况的发展，数据的偏差越来越大，我的反向传播需要考虑到这些大的偏差，这就迫使我们只能使用较小的学习率来防止梯度消失或者梯度爆炸。
 
 BN的具体做法就是对每一小批数据，在批这个方向上做归一化。如下图所示：  
-![batch_normalization](http://blog.stupidme.me/wp-content/uploads/2018/09/batch_normalization.png)  
+- ![batch_normalization](http://blog.stupidme.me/wp-content/uploads/2018/09/batch_normalization.png)  
 *Figure 6. Batch normalization example.(From [theneuralperspective.com](https://theneuralperspective.com/2016/10/27/gradient-topics/))*  
 
 可以看到，右半边求均值是**沿着数据批量N的方向进行的**！
 
 Batch normalization的计算公式如下：
-
-$$BN(x_i)=\alpha\times\frac{x_i-u_B}{\sqrt{\sigma_B^2+\epsilon}}+\beta$$
+- $$BN(x_i)=\alpha\times\frac{x_i-u_B}{\sqrt{\sigma_B^2+\epsilon}}+\beta$$
 
 具体的实现可以查看上图的链接文章。
 
@@ -1213,14 +1213,13 @@ $$BN(x_i)=\alpha\times\frac{x_i-u_B}{\sqrt{\sigma_B^2+\epsilon}}+\beta$$
 那么什么是Layer normalization呢？:它也是归一化数据的一种方式，不过LN是**在每一个样本上计算均值和方差，而不是BN那种在批方向计算均值和方差**！
 
 下面是LN的示意图：  
-![layer_normalization](http://blog.stupidme.me/wp-content/uploads/2018/09/layer_normalization.png)  
+- ![layer_normalization](http://blog.stupidme.me/wp-content/uploads/2018/09/layer_normalization.png)  
 *Figure 7. Layer normalization example.*  
 
 和上面的BN示意图一比较就可以看出二者的区别啦！
 
 下面看一下LN的公式，也BN十分相似：
-
-$$LN(x_i)=\alpha\times\frac{x_i-u_L}{\sqrt{\sigma_L^2+\epsilon}}+\beta$$
+- $$LN(x_i)=\alpha\times\frac{x_i-u_L}{\sqrt{\sigma_L^2+\epsilon}}+\beta$$
 
 ### Layer normalization的实现
 
@@ -1260,8 +1259,8 @@ class LayerNorm(nn.Module):
         # 在X的最后一个维度求方差，最后一个维度就是模型的维度
         std = x.std(-1, keepdim=True)
         return self.gamma * (x - mean) / (std + self.epsilon) + self.beta
-
 ```
+
 顺便提一句，**Layer normalization**多用于RNN这种结构。
 
 ## Mask是什么？
@@ -1312,14 +1311,12 @@ def sequence_mask(seq):
 ```
 
 哈佛大学的文章[The Annotated Transformer](http://nlp.seas.harvard.edu/2018/04/03/attention.html)有一张效果图:
-
-![sequence_mask](http://blog.stupidme.me/wp-content/uploads/2018/09/sequence_mask.png)  
+- ![sequence_mask](http://blog.stupidme.me/wp-content/uploads/2018/09/sequence_mask.png)  
 *Figure 8. Sequence mask.*
 
 值得注意的是，本来mask只需要二维的矩阵即可，但是考虑到我们的输入序列都是批量的，所以我们要把原本二维的矩阵扩张成3维的张量。上面的代码可以看出，我们已经进行了处理。
 
 回到本小结开始的问题，`attn_mask`参数有几种情况？分别是什么意思？
-
 * 对于decoder的self-attention，里面使用到的scaled dot-product attention，同时需要`padding mask`和`sequence mask`作为`attn_mask`，具体实现就是两个mask相加作为attn_mask。
 * 其他情况，`attn_mask`一律等于`padding mask`。
 
