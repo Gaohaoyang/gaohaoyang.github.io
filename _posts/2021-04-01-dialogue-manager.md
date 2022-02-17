@@ -1620,7 +1620,16 @@ gparallel主要思想有3个：
 - ![](https://pic3.zhimg.com/80/v2-38b164fe0fcbffdf5794bd45db8f72d2_720w.jpg)
 - ![](https://pic3.zhimg.com/80/v2-01d3dc3f702666c3338678fe6c8aa41a_720w.jpg)
 
+#### flow-chart
 
+【2022-2-17】网页格式的流程图编辑：[flow-chart](https://github.com/zhangyuanliang/flowchart), [示例](https://zhangyuanliang.github.io/flowchart/flowchart.html)
+
+SVG实现流程图绘制，前端页面应用：jquery.js/d3.js/ semantic.css; 功能包括：
+- 流程图块生成、拖拽、连线
+- 放大缩小功能
+- 导入导出json数据
+- 产生相应的xml和xpdl
+- 保存（还未完成，待更新）
 
 # DM案例
 
