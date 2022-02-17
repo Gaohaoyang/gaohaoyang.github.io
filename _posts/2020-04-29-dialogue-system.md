@@ -2303,9 +2303,14 @@ NL2SQL 方向已经有 WikiSQL、Spider、WikiTableQuestions、ATIS 等诸多公
 
 
 
-## 对话机器人工程实现
+## 工程实现
 
 - 各类聊天机器人框架
+- [开源问答系统开源软件](https://blog.csdn.net/iteye_18039/article/details/82611100), [7个开源问答平台](https://blog.csdn.net/cumj63710/article/details/107388951)
+  - [OSQA](http://www.oschina.net/p/osqa), 演化为[Askbot](https://github.com/ASKBOT/askbot-devel), 是一款免费且开源的问答系统，采用Python的Django开发框架，基于中国优秀的问答系统CNProg，非常类似国外著名的技术问答网站[stackoverflow](http://stackoverflow.com)
+  - 问答网站软件 shapado : shapado 是一个用 Ruby 开发的类似 stackoverflow 的问答网站软件，基于 Mongodb 开发。
+  - PHP问答系统 [Question2Answer](http://www.oschina.net/p/question2answer) 是一个用 PHP 实现的类 StackOverflow 网站的问答系统
+  - [WeCenter](http://www.oschina.net/p/wecenter) 是一个类似知乎以问答为基础的完全开源的社交网络建站程序，基于 PHP + MYSQL 应用架构，它集合了问答，digg，wiki 等多个程序的优点，帮助用户轻松搭建专业的知识 库和在线问答社区
 
 ### JSGF
 
@@ -2402,7 +2407,9 @@ matching = grammar.find_matching_rules("hello world")
 print("Matching: %s" % matching[0])
 ```
 
-### Google [Dialogflow](https://dialogflow.com/)
+### Dialogflow Google
+
+[Dialogflow](https://dialogflow.com/)
 
 ![](https://ss.csdn.net/p?http://mmbiz.qpic.cn/mmbiz_png/rFWVXwibLGtw9fIXO7xspXUwFLRz3hDqY3RomibnP9iaEcSYibnqE8ypnJ8BvTZemsWD1zGQDhAJquFNmQic28JYyGQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1)
 - DialogFlow是基于谷歌的Duplex技术开发，该技术使得客户获得更好的人机交互体验，使得对话聊天更加自然。推出 Dialogflow (https://dialogflow.com)，用于替代 API.AI，将 Dialogflow 打造成您构建出色的对话体验的端到端平台
@@ -2477,9 +2484,10 @@ print("Matching: %s" % matching[0])
 
 
 
-### [Chatterbot](https://github.com/gunthercox/ChatterBot)
+### Chatterbot
 
-![](https://camo.githubusercontent.com/b6aaad134a52f6a76001c91321fe81a2c889c45f/68747470733a2f2f692e696d6775722e636f6d2f623353436d47542e706e67)
+[Chatterbot](https://github.com/gunthercox/ChatterBot)
+- ![](https://camo.githubusercontent.com/b6aaad134a52f6a76001c91321fe81a2c889c45f/68747470733a2f2f692e696d6775722e636f6d2f623353436d47542e706e67)
 
 - 安装
   - pip install chatterbot
@@ -2498,7 +2506,6 @@ chatbot.get_response("Hello, how are you today?")
 ```
 
 An example of typical input would be something like this:
-
 >- user: Good morning! How are you doing?
 >- bot: I am doing very well, thank you for asking.
 >- user: You're welcome.
@@ -2626,6 +2633,54 @@ node examples/starter-bot.js
 ```
 
 登录限制：从2017年6月下旬开始，使用基于web版微信接入方案存在大概率的被限制登陆的可能性。 主要表现为：无法登陆Web 微信，但不影响手机等其他平台。验证是否被限制登陆： https://wx.qq.com 上扫码查看是否能登陆。
+
+
+### AnyQ 百度
+
+【2022-2-17】[AnyQ](https://github.com/baidu/AnyQ) (ANswer Your Questions) 开源项目主要包含面向FAQ集合的问答系统框架、文本语义匹配工具SimNet。
+- 问答系统框架采用了配置化、插件化的设计，各功能均通过插件形式加入，当前共开放了20+种插件。开发者可以使用AnyQ系统快速构建和定制适用于特定业务场景的FAQ问答系统，并加速迭代和升级。
+- SimNet是百度自然语言处理部于2013年自主研发的语义匹配框架，该框架在百度各产品上广泛应用，主要包括BOW、CNN、RNN、MM-DNN等核心网络结构形式，同时基于该框架也集成了学术界主流的语义匹配模型，如MatchPyramid、MV-LSTM、K-NRM等模型。
+- AnyQ 使用 SimNet模型 语义匹配模型构建文本语义相似度，克服了传统基于字面匹配方法的局限。
+- ![](https://pic4.zhimg.com/80/v2-5baedb4a621d41b243f006ba0dea01f3_720w.jpg)
+
+
+FAQ问答系统框架
+- [AnyQ系统框架](https://pic4.zhimg.com/80/v2-a412d3e30066d3197c48ad38332db413_720w.jpg)主要由Question Analysis、Retrieval、Matching、Re-Rank等部分组成，框架中包含的功能均通过插件形式加入，如Analysis中的中文切词，Retrieval中的倒排索引、语义索引，Matching中的Jaccard特征、SimNet语义匹配特征，当前共开放了20+种插件。AnyQ系统的配置化、插件化设计有助于开发者快速构建、快速定制适用于特定业务场景的FAQ问答系统，加速迭代和升级。
+- ![](https://pic4.zhimg.com/80/v2-a412d3e30066d3197c48ad38332db413_720w.jpg)
+
+AnyQ系统集成了检索和匹配的众多插件，通过配置的方式生效；以检索方式和文本匹配相似度计算中的插件为例：
+- **检索**方式(Retrieval)
+  - 倒排索引：基于开源倒排索引Solr，加入百度开源分词
+  - 语义检索：基于SimNet语义表示，使用ANNOY进行ANN检索
+  - 人工干预：通过提供精准答案，控制输出
+- **匹配**计算(Matching)
+  - 字面匹配相似度：在对中文问题进行切词等处理之后，计算字面匹配特征
+    - Cosine相似度
+    - Jaccard相似度
+    - BM25
+- 语义匹配**相似度**
+  - SimNet语义匹配：使用语义匹配SimNet架构训练的模型，构建问题在语义层面的相似度
+
+
+```shell
+# 编译demo cpp程序
+cd AnyQ
+mkdir build && cd build && cmake .. & make
+
+# 获取anyq定制solr，并将数据导入到Solr库中，启动solr
+cp ../tools/anyq_deps.sh .
+sh anyq_deps.sh
+cp ../tools/solr -rp solr_script
+sh solr_script/anyq_solr.sh solr_script/sample_docs
+# 这一步中如果数据导入失败，可以在宿主机的AnyQ/build目录下（不要退出docker），尝试运行sh solr_script/anyq_solr.sh solr_script/sample_docs, 启动Solr服务，然后在docker中重复改步骤。
+# 运行demo
+./run_server
+```
+
+打开浏览器
+- 访问：http://localhost:8900/solr/#/ 查看Solr搜索引擎的admin页面
+- 浏览器或者Postman中，可以调用接口查看调用结果
+  - 地址：localhost:8999/anyq?question=需要使用什么账号登录
 
 
 ## 评估方法
