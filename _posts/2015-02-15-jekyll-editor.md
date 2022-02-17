@@ -389,6 +389,28 @@ pdf文件直接显示，800px不能省略px，否则高度低
 - 【2020-8-21】[如何绘制泳道图](https://www.jianshu.com/p/787d918c0120)，[processon泳道图示例](https://v3.processon.com/view/559632e3e4b018f0e50364a7)
 - [visual-paradigm](https://online.visual-paradigm.com/cn/)
 
+【2022-2-17】Github支持流程图，将绘图插件 [Mermaid](https://github.com/mermaid-js/mermaid) 集成进了 Markdown，并推出了一项「图表绘制」功能。[](https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/)
+- Mermaid 是一款受到 Markdown 语法启发而诞生的 JavaScript 图表工具，由开发者 Knut Sveidqvist 所负责维护，目前在 GitHub 已积累 42000 Star
+- ![](https://img-blog.csdnimg.cn/img_convert/89c969121aa68a5383158aa891fed248.png)
+
+
+```mermaid
+  flowchart  TD;
+      A-->B;
+      A-->C;
+      B-->D;
+      C-->D;
+```
+
+网页格式的流程图编辑：[flow-chart](https://github.com/zhangyuanliang/flowchart), [示例](https://zhangyuanliang.github.io/flowchart/flowchart.html)
+
+SVG实现流程图绘制，前端页面应用：jquery.js/d3.js/ semantic.css; 功能包括：
+- 流程图块生成、拖拽、连线
+- 放大缩小功能
+- 导入导出json数据
+- 产生相应的xml和xpdl
+- 保存（还未完成，待更新）
+
 ### 任务管理
 
 - atlassian家族之[trello](https://trello.com/)，我的[个人trello](https://trello.com/b/ZmU6ki20/%E9%B9%A4%E5%95%B8%E4%B9%9D%E5%A4%A9)
