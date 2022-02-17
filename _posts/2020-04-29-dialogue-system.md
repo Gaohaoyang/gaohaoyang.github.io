@@ -2638,6 +2638,7 @@ node examples/starter-bot.js
 ### AnyQ 百度
 
 【2022-2-17】[AnyQ](https://github.com/baidu/AnyQ) (ANswer Your Questions) 开源项目主要包含面向FAQ集合的问答系统框架、文本语义匹配工具SimNet。
+- 资料：[AnyQ是什么](https://zhuanlan.zhihu.com/p/55403810)
 - 问答系统框架采用了配置化、插件化的设计，各功能均通过插件形式加入，当前共开放了20+种插件。开发者可以使用AnyQ系统快速构建和定制适用于特定业务场景的FAQ问答系统，并加速迭代和升级。
 - SimNet是百度自然语言处理部于2013年自主研发的语义匹配框架，该框架在百度各产品上广泛应用，主要包括BOW、CNN、RNN、MM-DNN等核心网络结构形式，同时基于该框架也集成了学术界主流的语义匹配模型，如MatchPyramid、MV-LSTM、K-NRM等模型。
 - AnyQ 使用 SimNet模型 语义匹配模型构建文本语义相似度，克服了传统基于字面匹配方法的局限。
