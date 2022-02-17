@@ -3,7 +3,7 @@ layout: post
 title:  "服务部署及在线实验笔记-online-experimentation"
 date:   2020-08-03 18:22:00
 categories: 技术工具 数学基础
-tags: A/B实验 假设检验 因果推理 灰度发布 nginx 平滑发布 金丝雀 反向代理 interleaving 统计 偏差 谬误 测试 压测 单元测试 k8s docker
+tags: A/B实验 假设检验 因果推理 灰度发布 nginx 平滑发布 金丝雀 反向代理 interleaving 统计 偏差 谬误 测试 k8s docker
 excerpt: 互联网公司常用的服务部署、在线实验方法讲解
 author: 鹤啸九天
 mathjax: true
