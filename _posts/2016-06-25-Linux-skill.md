@@ -1935,6 +1935,9 @@ iconv -f gbk -t utf8 pattern_0603.txt > pattern.txt
 ```shell
 test="cluster	8	平使用面积|你有啥用|使用多少？|使用年限|使用率|使用率多少|套内使用面积|车位使用权多久"
 echo $test | awk '{split($3,a,"|");for(i in a) print $2"\t"a[i]}' > out.txt
+# split用法，将真个字符串按照:切割，结果存入数组a中
+echo "12:34:56" | awk '{split($0,a,":" ); print a[1]}'     # 输出 12
+
 echo "123" | awk '{print length}' # 字符串长度
 awk -F ',' '{print substr($3,6)}'  # 表示是从第3个字段里的第6个字符开始，一直到设定的分隔符","结束.
 substr($3,10,8)  # 表示是从第3个字段里的第10个字符开始，截取8个字符结束.
