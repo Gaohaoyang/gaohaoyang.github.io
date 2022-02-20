@@ -361,7 +361,7 @@ mathjax: true
 - 实质上，一个有效的工作同态加密模型意味着敏感数据的暴露程度较低，不仅对尝试访问系统的外部用户还是内部用户都是如此。使用同态加密模型，可以保护隐私不受数据处理者身的影响：无法查看正在处理的个人详细信息，只能看到处理的最终结果。企业可以对他们收集的数据感到更加安全，无论是在组织内部的团队成员还是组织外部的处理者手中，由于持有更强大的工具或专业知识，他们可能需要执行一些数据任务作为中间人。特别是云计算可以从同态加密方案中受益，因为它们可以运行计算而无需访问原始未加密的数据。
 - 其实，不仅对试图访问系统的外部参与者，还是对内部处理器来说，一个有效的同态加密模型意味着敏感数据的暴露更少。使用同态加密模型，隐私受到保护，不受处理器本身的影响:<font color='green'>无法查看正在处理的个人的个人详细信息，只有处理的最终结果</font>。无论这些数据是掌握在内部团队成员或者组织的外部人员中，企业都会对收集到的数据感到很安全。因为他们作为企业的中介为企业执行一些数据任务，拥有强大的工具或者是专业知识是必要的。云计算尤其可以从同态加密方案中获益，因为它们可以在不访问原始未加密数据的情况下运行计算。
 
- ### 02  Sounds great , sign me up ! 听起来不错，怎么不赶紧用起来？
+### 02  Sounds great , sign me up ! 听起来不错，怎么不赶紧用起来？
 
 谁，放慢速度...。
 - 首先，虽然密码学者渴望看到同态加密适应，但要明确一点，<font color='red'>同态加密现在仍然是理论阶段</font>。即使Craig Gentry自己也承认还没有真正实现：比如说，他自己的方案需要巨大的处理能力：bit/30min，而普通PC处理128000000000bit/s（通过64位双核2GHz处理器），它还有很长的路要走。像TFHE的第二代处理器，速度更快，但还未准备好进行常规操作。
@@ -404,9 +404,8 @@ mathjax: true
 
 摘取其中区块链问答环节：
 
-“所以你提到共识，以及工作证明系统取得共识，通过分散以及通过增加统一性。”
-
-“是的。”
+>- “所以你提到共识，以及工作证明系统取得共识，通过分散以及通过增加统一性。”
+>- “是的。”
 
 ### “那它在空间统一系统怎么取得呢？”
 
@@ -509,20 +508,21 @@ mathjax: true
 ## 区块链基础
 
 ### 电子书
-* 《区块链技术指南》 https://www.gitbook.com/book/yeasy/blockchain_guide/details
-* 《精通比特币》 http://book.8btc.com/master_bitcoin
-* 《精通比特币》的英文原版 *Mastering Bitcoin* 主页 https://www.bitcoinbook.info/ Github 地址 https://github.com/bitcoinbook/bitcoinbook
-* 《精通比特币第二版》 https://github.com/tianmingyun/MasterBitcoin2CN 或 https://www.8btc.com/book/281955
-* 《精通以太坊》中文翻译版本 https://github.com/inoutcode/ethereum_book
-* 巴比特汇总的电子书 http://book.8btc.com/
+* 《[区块链技术指南](https://www.gitbook.com/book/yeasy/blockchain_guide/details)》
+* 《[精通比特币](http://book.8btc.com/master_bitcoin)
+* 《精通比特币》的英文原版 *Mastering Bitcoin* [主页](https://www.bitcoinbook.info/), [Github 地址](https://github.com/bitcoinbook/bitcoinbook)
+* 《精通比特币第二版》 [MasterBitcoin2CN](https://github.com/tianmingyun/MasterBitcoin2CN) 或 [8btc](https://www.8btc.com/book/281955)
+* 《精通以太坊》中文[翻译版本](https://github.com/inoutcode/ethereum_book)
+* 巴比特汇总的[电子书](http://book.8btc.com/)
 
 ### 白皮书与协议规范
-* 比特币白皮书中文翻译 http://www.8btc.com/wiki/bitcoin-a-peer-to-peer-electronic-cash-system
-* 以太坊白皮书中文翻译 https://github.com/ethereum/wiki/wiki/%5B%E4%B8%AD%E6%96%87%5D-%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%99%BD%E7%9A%AE%E4%B9%A6
-* 以太坊黄皮书 https://ethereum.github.io/yellowpaper/paper.pdf
-* 超级账本白皮书[英文] https://docs.google.com/document/d/1Z4M_qwILLRehPbVRUsJ3OF8Iir-gqS-ZYe7W-LE9gnE/edit?usp=sharing
-* 超级账本白皮书[中文翻译] http://www.8btc.com/hyperledger-whitepaper
-* Libra 白皮书[中文] https://libra.org/zh-CN/white-paper/?noredirect=1
+
+* 比特币白皮书[中文翻译](http://www.8btc.com/wiki/bitcoin-a-peer-to-peer-electronic-cash-system)
+* 以太坊白皮书[中文翻译](https://github.com/ethereum/wiki/wiki/%5B%E4%B8%AD%E6%96%87%5D-%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%99%BD%E7%9A%AE%E4%B9%A6)
+* 以太坊[黄皮书](https://ethereum.github.io/yellowpaper/paper.pdf)
+* 超级账本白皮书[英文](https://docs.google.com/document/d/1Z4M_qwILLRehPbVRUsJ3OF8Iir-gqS-ZYe7W-LE9gnE/edit?usp=sharing)
+* 超级账本白皮书[中文翻译](http://www.8btc.com/hyperledger-whitepaper)
+* Libra 白皮书[中文](https://libra.org/zh-CN/white-paper/?noredirect=1)
 * [工信部中国区块链技术和应用发展白皮书](assets/中国区块链技术和应用发展白皮书（2016）.pdf)
 * [腾讯区块连方案白皮书](assets/腾讯区块连方案白皮书（2017）.pdf)
 * [BCOS 平台白皮书](assets/BCOS_Whitepaper.pdf)
@@ -534,51 +534,56 @@ mathjax: true
 * [2018年中国区块链产业白皮书](assets/2018年中国区块链产业白皮书.pdf)
 
 ### 相关工具
-* 比特币地址、私钥等 Demo 演示页面 https://gobittest.appspot.com/
+
+* 比特币地址、私钥等 Demo [演示页面](https://gobittest.appspot.com/)
 
 ### 学习资源
-* 技术博客：深入浅出区块链 https://learnblockchain.cn/
-* RAFT 算法演示 http://thesecretlivesofdata.com/raft/
+
+* 技术博客：[深入浅出区块链](https://learnblockchain.cn/)
+* RAFT [算法演示](http://thesecretlivesofdata.com/raft/)
 * [金链盟-区块链平台调研与分析（2017）](assets/金链盟-区块链平台调研与分析（2017）.pdf)
 
 ### 区块链安全
-* 区块链安全技术文章收录 https://blockchain-sec.com
-* 以太坊智能合约 —— 最佳安全开发指南 https://github.com/ConsenSys/smart-contract-best-practices/blob/master/README-zh.md
-* 以太坊 Solidity 合约 call 函数簇滥用导致的安全风险 https://mp.weixin.qq.com/s/YItZsy4_M64LbUHPo-4xEQ
 
-----------
+* 区块链安全技术文章[收录](https://blockchain-sec.com)
+* 以太坊智能合约 —— [最佳安全开发指南](https://github.com/ConsenSys/smart-contract-best-practices/blob/master/README-zh.md)
+* 以太坊 Solidity 合约 call 函数簇滥用导致的[安全风险](https://mp.weixin.qq.com/s/YItZsy4_M64LbUHPo-4xEQ)
 
 ## 以太坊
 
 ### 安装部署
-* 以太坊安装部署 https://yeasy.gitbooks.io/blockchain_guide/ethereum/install.html
-* 私有链搭建操作指南 https://my.oschina.net/u/2349981/blog/865256
-* 以太坊-私有链搭建初步实践 https://github.com/xiaoping378/blog/blob/master/posts/%E4%BB%A5%E5%A4%AA%E5%9D%8A-%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA%E5%88%9D%E6%AD%A5%E5%AE%9E%E8%B7%B5.md
+
+* 以太坊[安装部署](https://yeasy.gitbooks.io/blockchain_guide/ethereum/install.html)
+* 私有链搭建[操作指南](https://my.oschina.net/u/2349981/blog/865256)
+* 以太坊-私有链搭建初步[实践](https://github.com/xiaoping378/blog/blob/master/posts/%E4%BB%A5%E5%A4%AA%E5%9D%8A-%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA%E5%88%9D%E6%AD%A5%E5%AE%9E%E8%B7%B5.md)
 
 ### 智能合约教程
-* Solidity 官方文档 https://solidity.readthedocs.io
-* Solidity 官方文档中文版 https://solidity-cn.readthedocs.io/zh/latest/
-* Solidity 编程语言学习 http://www.tryblockchain.org/
-* Solidity 学习入门 http://me.tryblockchain.org/Solidity%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97.html
-* 以太坊智能合约编程教程 http://ethfans.org/posts/101-noob-intro
-* 以太坊智能合约开发指南 https://www.gitbook.com/book/luren5/dapp-develop/details
-* Build Your First Ethereum Smart Contract with Solidity — Tutorial https://codeburst.io/build-your-first-ethereum-smart-contract-with-solidity-tutorial-94171d6b1c4b
+
+* Solidity [官方文档](https://solidity.readthedocs.io)
+* Solidity [官方文档中文版](https://solidity-cn.readthedocs.io/zh/latest/)
+* Solidity [编程语言学习](http://www.tryblockchain.org/)
+* Solidity [学习入门](http://me.tryblockchain.org/Solidity%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97.html)
+* [以太坊智能合约编程教程](http://ethfans.org/posts/101-noob-intro)
+* [以太坊智能合约开发指南](https://www.gitbook.com/book/luren5/dapp-develop/details)
+* [Build Your First Ethereum Smart Contract with Solidity — Tutorial](https://codeburst.io/build-your-first-ethereum-smart-contract-with-solidity-tutorial-94171d6b1c4b)
 
 ### 智能合约示例
-* 以太坊官网 ERC20 代币合约 https://www.ethereum.org/token
-* 基于 OpenZeppelin 编写安全的合约 https://github.com/OpenZeppelin/openzeppelin-solidity
+
+* 以太坊官网 ERC20 [代币合约](https://www.ethereum.org/token)
+* [基于 OpenZeppelin 编写安全的合约](https://github.com/OpenZeppelin/openzeppelin-solidity)
 
 ### 以太坊开发
 * [Ethereum Development with Go —— 用 go 作为服务端开发与区块链交互的必备手册](assets/ethereum-development-with-go.pdf)
-* Ethereum Development with Go 中英文在线阅读 https://goethereumbook.org/
+* Ethereum Development with Go 中英文[在线阅读](https://goethereumbook.org/)
 
 ### 以太坊 API 接口文档
-* JSON RPC API https://github.com/ethereum/wiki/wiki/JSON-RPC
-* JSON RPC management API https://github.com/ethereum/go-ethereum/wiki/Management-APIs
-* Web3.js API https://github.com/ethereum/wiki/wiki/JavaScript-API
-* Web3.js API 官方文档 https://docs.readthedocs.io
-* Web3.js API 中文文档翻译 http://web3.tryblockchain.org/index.html
-* Web3j 文档 - for Java & Android https://web3j.readthedocs.io
+
+* [JSON RPC API](https://github.com/ethereum/wiki/wiki/JSON-RPC)
+* [JSON RPC management API](https://github.com/ethereum/go-ethereum/wiki/Management-APIs)
+* [Web3.js API](https://github.com/ethereum/wiki/wiki/JavaScript-API)
+* [Web3.js API 官方文档](https://docs.readthedocs.io)
+* [Web3.js API 中文文档翻译](http://web3.tryblockchain.org/index.html)
+* [Web3j 文档 - for Java & Android](https://web3j.readthedocs.io)
 
 ### 学习资源
 * 一张图了解以太坊区块链机制 [Ethereum Blockchain Mechanism - An interpretation of the Ethereum Project Yellow Paper](assets/Ethereum%20Blockchain%20Mechanism%20-%20An%20interpretation%20of%20the%20Ethereum%20Project%20Yellow%20Paper.jpg)
@@ -586,46 +591,49 @@ mathjax: true
 * 加密僵尸（类似加密猫）：一步步构建自己的 DApps 向导教程 https://cryptozombies.io
 
 ### 网站资源
-* 以太坊区块链浏览器 https://etherscan.io/
-* 以太坊网络状态查看 https://ethstats.net/
-* 网络历史的统计信息 https://ethernodes.org
-* 以太坊上运行的 DApp 的信息 https://dapps.ethercasts.com/
 
-----------
+* [以太坊区块链浏览器](https://etherscan.io/)
+* [以太坊网络状态查看](https://ethstats.net/)
+* [网络历史的统计信息](https://ethernodes.org)
+* [以太坊上运行的 DApp 的信息](https://dapps.ethercasts.com)
 
 ## Hyperledger Fabric
 
 ### 协议规范
-* Hyperledger fabric 0.6 中文协议规范 https://github.com/gymgle/fabric-0.6.1-preview/blob/master/docs/protocol-spec_zh.md
-* Fabric 最新在线文档 https://hyperledger-fabric.readthedocs.io/
+
+* Hyperledger fabric 0.6 [中文协议规范](https://github.com/gymgle/fabric-0.6.1-preview/blob/master/docs/protocol-spec_zh.md)
+* [Fabric 最新在线文档](https://hyperledger-fabric.readthedocs.io/)
 
 ### Fabric 部署
-* Fabric 1.0 多物理节点部署 https://github.com/hainingzhang/articles/tree/master/fabric_multi_nodes
-* Ubuntu 中部署并测试 Fabric 1.0 Beta http://www.cnblogs.com/studyzy/p/6973334.html
-* Ubuntu 中部署 Fabric 0.6 多节点视频演示 https://g2ex.github.io/2017/06/16/fabric-0.6-demo-vedio/
-* Ubuntu 14.04 中基于 Docker 部署 Fabric 0.6 https://github.com/imac-cloud/blockchain-tutorial/blob/master/hyperledger/hyperledger-docker.md
+
+* [Fabric 1.0 多物理节点部署](https://github.com/hainingzhang/articles/tree/master/fabric_multi_nodes)
+* [Ubuntu 中部署并测试 Fabric 1.0 Beta](http://www.cnblogs.com/studyzy/p/6973334.html)
+* [Ubuntu 中部署 Fabric 0.6 多节点视频演示](https://g2ex.github.io/2017/06/16/fabric-0.6-demo-vedio/)
+* [Ubuntu 14.04 中基于 Docker 部署 Fabric 0.6](https://github.com/imac-cloud/blockchain-tutorial/blob/master/hyperledger/hyperledger-docker.md)
 
 ### 链码开发
-* 基于 Hyperledger fabric 0.6 版本，如何编写基本链码，如何在 IBM Bluemix 上部署和交互 https://github.com/IBM-Blockchain/learn-chaincode
-* Hyperledger fabric 0.6 的 learn-chaincode 中文翻译 https://github.com/gymgle/learn-chaincode/blob/master/README_zh-cn.md
-* Hyperledger fabric 源码分析 https://github.com/yeasy/hyperledger_code_fabric
-* IBM Blockchain 101：开发人员快速入门指南 https://www.ibm.com/developerworks/cn/cloud/library/cl-ibm-blockchain-101-quick-start-guide-for-developers-bluemix-trs/index.html
-* 面向开发人员的区块链链代码深入研究：使用 Go 编写智能合约（基于 Fabric 0.6） https://www.ibm.com/developerworks/cn/cloud/library/cl-ibm-blockchain-chaincode-development-using-golang/index.html
+
+* 基于 Hyperledger fabric 0.6 版本，如何编写基本链码，如何在 IBM Bluemix 上[部署和交互](https://github.com/IBM-Blockchain/learn-chaincode)
+* Hyperledger fabric 0.6 的 learn-chaincode [中文翻译](https://github.com/gymgle/learn-chaincode/blob/master/README_zh-cn.md)
+* Hyperledger fabric [源码分析](https://github.com/yeasy/hyperledger_code_fabric)
+* IBM Blockchain 101：[开发人员快速入门指南](https://www.ibm.com/developerworks/cn/cloud/library/cl-ibm-blockchain-101-quick-start-guide-for-developers-bluemix-trs/index.html)
+* 面向开发人员的区块链链代码深入研究：[使用 Go 编写智能合约（基于 Fabric 0.6）](https://www.ibm.com/developerworks/cn/cloud/library/cl-ibm-blockchain-chaincode-development-using-golang/index.html)
 
 ### 学习资源
-* 2017 IBM 开源技术微讲堂 —— 区块链和 Hyperledger 系列 https://www.ibm.com/developerworks/community/blogs/3302cc3b-074e-44da-90b1-5055f1dc0d9c/entry/opentech-blockchain
+
+* 2017 IBM 开源技术微讲堂 —— [区块链和 Hyperledger 系列](https://www.ibm.com/developerworks/community/blogs/3302cc3b-074e-44da-90b1-5055f1dc0d9c/entry/opentech-blockchain)
 * [PBFT 算法简介 PPT](assets/PBFT.pdf)
 * [比特币与区块链技术分享 PPT](assets/比特币与区块链技术分享_201707.pdf)
 
 ### 网站资源
-* IBM 超能云（SuperVessel）区块链服务的公测地址，创建自己的区块链演示 http://crl.ptopenlab.com:8800/bc
-* IBM Bluemix Blockchain 托管服务，免费部署 4 节点 fabric 区块链网络，功能比上者更强，提供 APIs 调用 https://console.ng.bluemix.net/catalog/services/blockchain
+* IBM 超能云（SuperVessel）区块链服务的公测地址，创建自己的[区块链演示](http://crl.ptopenlab.com:8800/bc)
+* IBM Bluemix Blockchain 托管服务，免费部署 4 节点 fabric 区块链网络，功能比上者更强，提供 [APIs 调用](https://console.ng.bluemix.net/catalog/services/blockchain)
 
 
 ## Pi
-- [2019最火的手机挖矿Pi](https://zhuanlan.zhihu.com/p/86726105)
 
-![](https://pic1.zhimg.com/80/v2-a29666a78c59ddbd123a39f789ec421c_hd.jpg)
+- [2019最火的手机挖矿Pi](https://zhuanlan.zhihu.com/p/86726105)
+- ![](https://pic1.zhimg.com/80/v2-a29666a78c59ddbd123a39f789ec421c_hd.jpg)
 
 - 1：Pi是什么？ What is Pi?
    - Pi network是一款APP，是一款手机社交裂变的挖矿区块链项目，你不需要去购买它，只需在手机上下载一个应用程序，简单注册后就可以持续获取（挖矿），不费流量不费电，兼容IOS和Android，但不是国内推出的，Pi的创始团队是美国斯坦福大学的一个博士团队。当你下载并注册Pi的APP之后，能够定时挖掘赚取Pi APP所提供给你的Pi币，Pi network旨在成为世界上使用最广泛的加密货币。
