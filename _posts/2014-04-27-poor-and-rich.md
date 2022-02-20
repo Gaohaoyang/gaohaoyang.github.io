@@ -109,8 +109,13 @@ mathjax: true
 ## 中国富二代留学生
 
 - 【2021-7-6】[【纪录片】中国富二代留学生在海外的真实生活](https://www.bilibili.com/video/BV1zt411U7Ug/)
-- <iframe src="//player.bilibili.com/player.html?aid=35850699&bvid=BV1zt411U7Ug&cid=62913180&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%> </iframe>
 
+<iframe src="//player.bilibili.com/player.html?aid=35850699&bvid=BV1zt411U7Ug&cid=62913180&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%> </iframe>
+
+【有钱人的世界】[Tamara's World Ep1-6](https://www.bilibili.com/video/BV1wW411z77C) 【全集】
+- 英国身价36亿美元的多金社交名媛Tamara Ecclestone，是F1总裁的千金，也是《福布斯》全球20富豪女继承人之一。她与英国独立电视台ITV合作的真人秀『有钱人的世界』
+
+<iframe src="//player.bilibili.com/player.html?aid=18065783&bvid=BV1wW411z77C&cid=29495211&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%> </iframe>
 
 
 ## 22位富豪家庭出身
