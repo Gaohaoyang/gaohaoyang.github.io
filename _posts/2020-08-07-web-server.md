@@ -2712,6 +2712,11 @@ if __name__ == "__main__":
 - Django在线教程：[Django Book](http://djangobook.py3k.cn/)，[中文](http://djangobook.py3k.cn/2.0/)
 
 
+### Django+vue
+
+【2022-2-22】[Django+Vue前后端分离实战](https://www.cnblogs.com/zhangxue521/p/12957816.html)
+- ![](https://img2020.cnblogs.com/blog/1004904/202005/1004904-20200525162859257-1990729941.png)
+
 
 ## Fastapi
 
@@ -3289,9 +3294,106 @@ node.js、npm、vue、webpack之间的关系
 - **WebPack** webpack能够把.vue后缀名的文件打包成浏览器能够识别的js，而这个.vue文件装换需要打包器vue-loader→npm下载→node包管理工具
   - 可以看做是模块打包机，它做的事情：分析你的项目结构，找到JavaScript模块以及其它的一些浏览器不能直接运行的拓展语言（Scss，TypeScript等），并将其转换和打包为合适的格式供浏览器使用。
 
+## bootstrap
+
+[bootstrap模板集合](http://www.cssmoban.com/cssthemes/houtaimoban/)
+
+
 ## vue
 
 【2021-7-21】[vue学习笔记（超详细）](https://blog.csdn.net/fmk1023/article/details/111381876)
+
+[（Web前端）优秀的后台管理框架收集](https://blog.csdn.net/Mr_Quinn/article/details/88565830)
+
+### npm与yarn
+
+Facebook、Google、Exponent 和 Tilde 联合推出了一个新的 JS 包管理工具 — Yarn
+
+Yarn 是为了弥补 npm 的一些缺陷而出现的：
+- npm 安装包（packages）的速度不够快，拉取的 packages 可能版本不同
+- npm 允许在安装 packages 时执行代码，这就埋下了安全隐患
+
+Yarn 没想要完全替代 npm，它只是一个新的 CLI 工具，拉取的 packages 依然来自 npm 仓库。仓库本身不会变，所以获取或者发布模块的时候和原来一样。
+
+### vue-element-admin（个人）
+
+- [vue-element-admin](https://panjiachen.github.io/vue-element-admin-site/zh/)，[github](https://github.com/PanJiaChen/vue-admin-template/blob/master/README-zh.md)：极简的 vue admin 管理后台。它只包含了 Element UI & axios & iconfont & permission control & lint, demo体验地址
+- ![](https://img-blog.csdnimg.cn/20190315091844174.png)
+
+【2022-2-22】滴滴机器人平台采用这个模板，django+vue框架，前后端分离
+- [前端地址](https://github.com/rhyspang/bot_fe)
+- [后端地址](https://github.com/rhyspang/bot_service), 庞胜
+
+```shell
+# ------ 前端部分 -------
+# brew install yarn
+# install dependency
+yarn install # 安装依赖包
+# npm install
+# develop
+yarn run dev # 运行前端环境
+# npm run dev
+```
+
+后端：
+- Django执行manage.py 提示 NameError: name '_mysql' is not defined 问题
+- 原因是：Mysqldb 不兼容 python3.5 以后的版本
+- 解决：用pymysql代替MySQLdb，[参考](https://www.jianshu.com/p/1f0c8e3c438b)
+  - 打开项目在setting.py的init.py，或直接在当前py文件最开头添加
+  - import pymysql 
+  - pymysql.install_as_MySQLdb()
+
+```shell
+# ------ 后端部分 -------
+pip install -r requirements.txt
+# 准备mysql环境
+mysql -h 127.0.0.1 -P 3306 -u root -pwangqiwen
+vim bot_service/settings.py # 修改mysql连接信息，DATABASES选项
+pip install pymysql # 安装Python的mysql接口；默认连接Python2版本的MySQL，需要改成pymysql
+vim bot_service/__init__.py # 添加以下内容
+# import pymysql
+# pymysql.install_as_MySQLdb()
+
+# 注释ready函数，自动创建数据库、表
+vim bot_service/apps/knowledge/apps.py
+# 否则报错：启动本地数据库，创建as_bot
+#    报错：as_bot.knowledge...表不存在，哪里有建表语句？
+
+python manage.py makemigrations knowledge # 建库
+python manage.py migrate # 
+python manager.py createsuperuser # 创建管理员账户，wqw，robot@123
+# 启动后端服务
+python manage.py runserver 127.0.0.1:8000
+```
+
+
+【2022-2-22】[Django+Vue前后端分离实战](https://www.cnblogs.com/zhangxue521/p/12957816.html)
+
+```shell
+# 克隆项目
+git clone https://github.com/PanJiaChen/vue-admin-template.git
+# 也可以多下载个完整的模版，用到组件时，copy过来
+# git clone https://github.com/PanJiaChen/vue-element-admin.git
+
+# 进入项目目录
+cd vue-admin-template
+
+# 安装依赖， 建议不要用 cnpm 安装 会有各种诡异的bug 可以通过如下操作解决 npm 下载速度慢的问题
+npm install --registry=https://registry.npm.taobao.org
+
+# 本地开发 启动项目
+npm run dev
+# ps：启动的时候报错了，提示提示vue-cli-service: command not found
+# 进入到项目目录下，执行：rm –rf node_modules and npm install
+```
+
+
+### Layui
+
+[Layui](https://www.layui.com/)
+
+
+
 
 ### Flask + Vue
 
