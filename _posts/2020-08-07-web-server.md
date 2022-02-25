@@ -2820,6 +2820,33 @@ async def read_item(
 
 ```
 
+## 跨域 —— CORS
+
+【2022-2-25】
+
+
+### flask解法
+
+安装CORS包：
+
+```shell
+pip install -U flask-cors
+```
+
+添加2行代码：
+
+```python
+from flask import Flask
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)
+
+@app.route("/")
+def helloWorld():
+  return "Hello, cross-origin-world!"
+```
+
 
 # 前端
 
