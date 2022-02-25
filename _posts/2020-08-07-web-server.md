@@ -2712,6 +2712,92 @@ if __name__ == "__main__":
 - Django在线教程：[Django Book](http://djangobook.py3k.cn/)，[中文](http://djangobook.py3k.cn/2.0/)
 
 
+### Django是什么？
+
+Django是一个开放源代码的Web应用框架，由Python写成。采用了MVC的软件设计模式，即模型M，视图V和控制器C（注：实际上是MTV！）。它最初是被开发来用于管理劳伦斯出版集团旗下的一些以新闻内容为主的网站的。并于2005年7月在BSD许可证下发布。这套框架是以比利时的吉普赛爵士吉他手Django Reinhardt来命名的。
+- Django的主要目标是使得开发复杂的、数据库驱动的网站变得简单。
+- Django注重组件的重用性和“可插拔性”，**敏捷开发**和**DRY法则**（Don't Repeat Yourself）。
+在Django中Python被普遍使用，甚至包括配置文件和数据模型。
+
+### MVC模式
+
+MVC 由（试图View/控制器Controller/模型Model）组成，实际应用中
+- **模型**（Model）用来处理应用程序数据逻辑
+- **视图**（View）用来处理我们从M拿过来的数据（页面渲染，template）
+- **控制器**（Controller）定义程序行为选择相应的视图
+
+大部分开发语言中都有MVC框架，MVC框架的核心思想是解耦，降低各功能模块之间的耦合性，方便变更，更容易重构代码，最大程度上实现代码的重用
+
+### MTV开发模式
+
+Django是一个基于MVC构造的框架。但是在Django中，控制器接受用户输入的部分由框架自行处理，所以 Django 里更关注的是**模型**（Model）、**模板**(Template)和**视图**（Views），称为**MTV模式**。它们各自的职责如下：
+- (1) **模型**（Model），即数据存取层——处理与数据相关的所有事务：如何存取、如何验证有效性、包含哪些行为以及数据之间的关系等。
+- (2) **视图**（View），即表现层——处理与表现相关的决定：如何在页面或其他类型文档中进行显示。
+- (3) **模板**(Template)，即业务逻辑层——存取模型及调取恰当模板的相关逻辑。模型与模板的桥梁。
+
+MTV基于MVC，并在MVC的基础上做了更细的划分，区别主要在于C和T,C之前是控制器，现在变成了Template,把C融入到了View里。
+
+MTV模式包含：**视图**（View）负责**业务逻辑**，并在适当时候调用Model和Template 模板（Template）负责如何把页面展示给用户 模型（Model）处理应用程序数据逻辑
+Django的MTV模式
+
+
+### Django项目结构
+
+Django文件结构
+- urls.py 网址入口，关联到对应的views.py中的一个函数（或者generic类），访问网址就对应一个函数。
+- views.py 处理用户发出的请求，从urls.py中对应过来, 通过渲染templates中的网页可以将显示内容，比如登陆后的用户名，用户请求的数据，输出到网页。
+- models.py 与数据库操作相关，存取数据时用到，不用数据库时可省略。
+- forms.py 表单，用户在浏览器上输入数据提交，对数据的验证工作以及输入框的生成等工作，可选。
+- templates 文件夹 ，views.py 中的函数渲染templates中的Html模板，得到动态内容的网页，可用缓存来提高速度。
+- settings.py Django 的设置，配置文件，比如 DEBUG 的开关，静态文件的位置等
+- admin.py 后台，Django自带强大的后台功能和ORM框架，可以用很少量的代码就拥有一个强大的后台。
+  - manage.py统计目录下运行下列两个命令使数据库生效。
+
+```shell
+python manage.py syncdb # Django 1.6.x 及以下
+# Django 1.7 及以上的版本需要用以下命令
+python manage.py makemigrations [appname] #appname 即为此处的Blog
+python manage.py migrate
+# 创建超级用户
+python manage.py createsuperuser
+python manage.py changepassword username # 修改用户密码
+```
+
+可以通过 http://localhost:8000/admin/ 来访问后台
+
+### 创建django项目
+
+[django基本命令教程](https://code.ziqiangxuetang.com/django/django-basic.html)
+
+- （1）创建项目
+  - django-admin startproject mysite
+  - mysite下的文件： #整个项目的容器文件夹，这个名称可以随意起 
+    - \__init__.py # 这个文件告诉python这个目录是一个包 
+    - settings.py # 该Django项目的配置/设置 
+    - urls.py  # Django项目的总路由管理文件
+    - wsgi.py  #一个兼容的web服务器入口，在项目运行发布的时候用到 
+    - manage.py #一个实用的命令行工具，可以让我们以各种方式和Django项目进行交互
+- （2）启动服务：
+  - cd mysite
+  - python manage.py runserver
+  - python manage.py runserver 8000 # 指定端口
+  - python manage.py runserver 0.0.0.0:8000 # 监听机器所有ip（机器可能有多个ip）http://10.200.24.101:8080/
+  - python manage.py runserver 10.200.24.101:8080 # 监听指定ip（需要提前添加到settings里的ALLOW_HOST中）
+  - 访问：http://127.0.0.1:8000/
+- （3）创建blog应用
+  - python manage.py startapp blog
+  - 目录结构
+    - blog/ \__init__.py     admin.py     migrations/ \__init__.py     models.py     tests.py     views.py app.py
+- （4）编辑settings.py文件
+  - 在文件尾部找到INSTALLED_APPS元组。把新建的app以模块的形式添加到元组里
+- （5）Controller：
+  - 路由urls.py（有3种方式：函数、类和外部
+- （6）建立数据模型
+- （7）修改view
+- （8）创建超级用户admin
+- （9）启动服务器
+
+
 ### Django+vue
 
 【2022-2-22】[Django+Vue前后端分离实战](https://www.cnblogs.com/zhangxue521/p/12957816.html)
@@ -2836,15 +2922,15 @@ pip install -U flask-cors
 添加2行代码：
 
 ```python
-from flask import Flask
-from flask_cors import CORS
+from flask import Flask
+from flask_cors import CORS
 
-app = Flask(__name__)
+app = Flask(__name__)
 CORS(app)
 
 @app.route("/")
-def helloWorld():
-  return "Hello, cross-origin-world!"
+def helloWorld():
+  return "Hello, cross-origin-world!"
 ```
 
 
@@ -3069,7 +3155,7 @@ document.write(location.href);
   - 上一页/下一页
 
 ```html
-<script type="text/javascript"> 
+<script type="text/javascript"> 
     自己编写的js代码
 </script>
 <!-- ① 将上面的代码放在<head></head>或者<body></body>之间 -->
