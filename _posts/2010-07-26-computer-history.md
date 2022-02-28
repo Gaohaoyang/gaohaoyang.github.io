@@ -13,6 +13,7 @@ mathjax: true
 
 # 总结
 
+-【2022-2-28】MIT出品的The Missing Semester of Your CS Education的[中文翻译地址](http://missing-semester-cn.github.io/),讲授shell命令行、强大的文本编辑器vim的使用、使用版本控制系统git提供的多种特性, 调试性能分析，元编程，密码学，大杂烩等等。
 - 【2021-6-16】[你管这玩意儿叫CPU？](https://www.toutiao.com/i6974241663241683463/). 过去200年人类最重要的发明是什么？蒸汽机？电灯？火箭？这些可能都不是，最重要的是晶体管,无论程序员编写的程序多么复杂，软件承载的功能最终都是通过这个小东西简单的开闭完成的. 组成与或非门。
 - 【2021-3-31】[图灵奖今日出炉](https://mp.weixin.qq.com/s/Q6kbBomC85xbmKS2SLllfA)，“龙书” 作者、编程语言大佬 Alfred Aho 和 Jeffrey Ullman 获奖
 - 【2020-10-29】源自linux之父的名言：**talk is cheap，show me the code**，汉化版：**北沙滩**（别瞎谈），**亮马桥**（亮码瞧）
