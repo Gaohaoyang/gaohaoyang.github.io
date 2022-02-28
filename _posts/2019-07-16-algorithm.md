@@ -15,6 +15,7 @@ mathjax: true
 
 # 总结
 
+- 【2022-2-28】[labuladong 的算法小抄](https://mp.weixin.qq.com/s/yN4cHQRsFa5SWlacopHXYQ)，[fucking-algorithm](https://github.com/labuladong/fucking-algorithm)，[GitHub Pages](https://labuladong.github.io/algo/)，总共 60 多篇原创文章，都是基于 LeetCode 的题目，涵盖了所有题型和技巧，而且一定要做到举一反三，通俗易懂，绝不是简单的代码堆砌，后面有目录。刷题刷题，刷的是题，培养的是思维，本仓库的目的就是传递这种算法思维。
 - 【2021-11-7】[The Algorithms](https://the-algorithms.com/#aboutUs)，[项目地址](https://github.com/TheAlgorithms), 分别提供了用 Python、Java、C、C++ 等数十种编程语言实现的算法，每种语言都有自己的 GitHub 算法代码库。如下领域的算法：
   - 排序（Sorts）算法
   - 搜索（Searches）算法
