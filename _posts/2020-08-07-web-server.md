@@ -3516,8 +3516,18 @@ src下文件：
 ```
 
 
+### MVVM模式
 
+[Vue.js 60分钟快速入门](https://www.cnblogs.com/keepfool/p/5619070.html)
 
+MVVM模式（Model-View-ViewModel）在Vue.js中ViewModel是如何和View以及Model进行交互的
+- ![](http://cn.vuejs.org/images/mvvm.png)
+
+ViewModel是Vue.js的核心，它是一个Vue实例。Vue实例是作用于某一个HTML元素上的，这个元素可以是HTML的body元素，也可以是指定了id的某个元素。
+当创建了ViewModel后，双向绑定是如何达成的呢？
+- 首先，我们将上图中的DOM Listeners和Data Bindings看作两个工具，它们是实现双向绑定的关键。
+- 从View侧看，ViewModel中的DOM Listeners工具会帮我们监测页面上DOM元素的变化，如果有变化，则更改Model中的数据；
+- 从Model侧看，当我们更新Model中的数据时，Data Bindings工具会帮我们更新页面中的DOM元素。
 
 ### vue语法
 
@@ -3559,6 +3569,17 @@ export default {
 }
 </style>
 ```
+
+Vue.js的指令是以v-开头的，它们作用于**HTML元素**，指令提供了一些特殊的特性，将指令绑定在元素上时，指令会为绑定的目标元素添加一些特殊的行为，我们可以将指令看作特殊的HTML特性（attribute）。
+
+Vue.js提供了一些常用的内置指令，接下来我们将介绍以下几个内置指令：
+- v-if 指令：**条件渲染**指令，它根据表达式的真假来删除和插入元素
+- v-show 指令：也是**条件渲染**指令，和v-if指令不同的是，使用v-show指令的元素始终会被渲染到HTML，它只是简单地为元素设置CSS的style属性。
+- v-else 指令：为v-if或v-show添加一个“else块”。v-else元素必须立即跟在v-if或v-show元素的后面——否则它不能被识别。
+- v-for 指令：基于一个数组渲染一个列表，它和JavaScript的遍历语法相似
+- v-bind 指令：v-bind指令可以在其名称后面带一个参数，中间放一个冒号隔开，这个参数通常是HTML元素的特性（attribute），如 v-bind:class
+- v-on 指令：用于给监听DOM事件，它的用语法和v-bind是类似的，例如监听< a >元素的点击事件，如 < a v-on:click="doSomething">
+  - 两种形式调用方法：绑定一个方法（让事件指向方法的引用），或者使用内联语句。
 
 
 
