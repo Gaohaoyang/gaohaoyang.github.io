@@ -1006,15 +1006,35 @@ curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=*****' \
    -d '{
         "msgtype": "text",
         "mentioned_list":["wangqiwen004@ke.com","fanbingbing019@ke.com"],
+        "mentioned_mobile_list":["1380000000","@all"],
         "text": {
             "content": "贝壳小冰，你好呀~ @某人 测试" 
         }
    }'
 # 更多参数
 # "mentioned_mobile_list":["13800001111","@all"]
+# -------------
+echo "图文格式测试"
+curl "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=$key" \
+   -H 'Content-Type: application/json' \
+   -d '{
+    "msgtype": "news",
+    "news": {
+       "articles" : [
+           {
+               "title" : "图文格式测试：吃饭啦~",
+               "description" : "吃饭不积极，**有问题",
+               "url" : "https://bpic.588ku.com/element_origin_min_pic/19/06/28/181fceffd5e9a9782dc2d88345df09d9.jpg",
+               "picurl" : "http://www.biaoqingb.com/uploads/img1/20200414/96af725485d3cbe70299f59b39ee841c.jpg"
+           }
+        ]
+    }
+}'
 ```
 
 当前自定义机器人支持：`文本`（text）、`markdown`（markdown）、`图片`（image）、`图文`（news）四种消息类型。
+- 亲测markdown格式可用、图片/文件也行，只是需要单独上传图片/文件到腾讯服务器
+- @群成员功能无效
 
 
 # 现状
