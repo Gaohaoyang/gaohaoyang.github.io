@@ -3428,7 +3428,143 @@ Yarn 是为了弥补 npm 的一些缺陷而出现的：
 
 Yarn 没想要完全替代 npm，它只是一个新的 CLI 工具，拉取的 packages 依然来自 npm 仓库。仓库本身不会变，所以获取或者发布模块的时候和原来一样。
 
-### vue-element-admin（个人）
+### vue示例
+
+简易示例：
+- html、js、css分离
+- html中变量引用自js代码
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+</head>
+
+<body>
+<div id="app">
+  <p>{{ message }}</p>
+	<br>{{v}}
+</div>
+
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue.js!',
+	  v : "你好"
+  }
+})
+</script>
+
+</body>
+</html>
+```
+
+
+### vue目录结构
+
+顶级目录：
+
+| 目录/文件 | 	说明|
+|---|---|
+| build	| 项目构建(webpack)相关代码 |
+| config |	配置目录，包括端口号等。我们初学可以使用默认的。|
+| node_modules |	npm 加载的项目依赖模块 |
+| src | 这里是我们要开发的目录，基本上要做的事情都在这个目录里。里面包含了几个目录及文件：<br> - assets: 放置一些图片，如logo等。
+<br> - components: 目录里面放了一个组件文件，可以不用。<br> - App.vue: 项目入口文件，我们也可以直接将组件写这里，而不使用 components 目录。<br> - main.js: 项目的核心文件。
+| static |	静态资源目录，如图片、字体等。|
+| test |	初始测试目录，可删除 |
+| .xxxx文件	| 这些是一些配置文件，包括语法配置，git配置等。|
+| index.html |	首页入口文件，你可以添加一些 meta 信息或统计代码啥的。|
+| package.json	| 项目配置文件。|
+| README.md	| 项目的说明文档，markdown 格式|
+
+APP.vue 文件 是项目核心
+
+src下文件：
+
+```shell
+-src
+    -assets # 静态资源
+        -css 
+        -js 
+    -components # 公共组件
+        index.js #  整合公共组件
+    -filters # 过滤器
+        index.js # 整合过滤器
+    -pages # 路由组件
+        -home # 某个路由组件
+            home.vue  # 路由组件
+            -components # 路由组件的子组件
+                banner.vue
+                list.vue
+    -router # 路由
+        index.js
+    -store # 仓库
+        index.js # 创建仓库并导出
+        mutations.js # 根级别下 的state mutations getters
+        acions.js # 根级别下的actions
+        -modules # 模块
+    -utils # 工具类
+        alert.js # 弹框
+        request.js # 数据交互
+    App.vue # 根组件
+    main.js # 入口文件
+```
+
+
+
+
+
+### vue语法
+
+【2022-3-1】[vue教程](https://www.runoob.com/vue2/vue-start.html)
+
+打开页面 http://localhost:8080/，一般修改后会自动刷新，显示效果如下所示
+- ![](https://www.runoob.com/wp-content/uploads/2017/01/AEDE7289-0479-4F14-A9C9-898470E5620E.jpg)
+
+```js
+<!-- 展示模板 -->
+<template>
+  <div id="app">
+    <img src="./assets/logo.png">
+    <hello></hello>
+  </div>
+</template>
+ 
+<script>
+// 导入组件
+import Hello from './components/Hello'
+ 
+export default {
+  name: 'app',
+  components: {
+    Hello
+  }
+}
+</script>
+
+<!-- 样式代码 -->
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>
+```
+
+
+
+### vue框架
+
+#### vue-element-admin（个人）
 
 - [vue-element-admin](https://panjiachen.github.io/vue-element-admin-site/zh/)，[github](https://github.com/PanJiaChen/vue-admin-template/blob/master/README-zh.md)：极简的 vue admin 管理后台。它只包含了 Element UI & axios & iconfont & permission control & lint, demo体验地址
 - ![](https://img-blog.csdnimg.cn/20190315091844174.png)
@@ -3501,14 +3637,12 @@ npm run dev
 ```
 
 
-### Layui
+#### Layui
 
 [Layui](https://www.layui.com/)
 
 
-
-
-### Flask + Vue
+#### Flask + Vue
 
 【2021-11-25】[浅谈如何用使用flask和vue，快速开发常用应用](https://baiyue.one/archives/1694.html), flask是python的一种通用的web框架，诞生至今已有10年了，虽然官网界面比较复古极简，但使用者还是不在少数。纯后端的api开发，还可以看向fastapi，都是当今最主流的两个选择。
 - ![](https://cdn.jsdelivr.net/gh/Baiyuetribe/yyycode@dev/img/20/yyycode_com20200924111604.png)
