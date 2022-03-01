@@ -1032,9 +1032,14 @@ curl "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=$key" \
 }'
 ```
 
-当前自定义机器人支持：`文本`（text）、`markdown`（markdown）、`图片`（image）、`图文`（news）四种消息类型。
+当前自定义机器人支持：`文本`（text）、`markdown`（markdown）、`图片`（image）、`图文`（news）四种消息类型。可以定制[模板卡片](https://developer.work.weixin.qq.com/document/path/91770#%E6%A8%A1%E7%89%88%E5%8D%A1%E7%89%87%E7%B1%BB%E5%9E%8B)
 - 亲测markdown格式可用、图片/文件也行，只是需要单独上传图片/文件到腾讯服务器
+  - 示例：https://qyapi.weixin.qq.com/cgi-bin/webhook/upload_media?key=693a91f6-7xxx-4bc4-97a0-0ec2sifa5aaa&type=file
+  - type取值：图片（image）、语音（voice）、视频（video），普通文件(file)
+  - 文件大小在5B~20M之间
+  - 返回：media_id，媒体文件上传后获取的唯一标识，3天内有效
 - @群成员功能无效
+  - userid的列表，提醒群中的指定成员(@某个成员)，@all表示提醒所有人，如果开发者获取不到userid，可以使用mentioned_mobile_list
 
 
 # 现状
