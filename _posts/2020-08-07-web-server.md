@@ -1427,7 +1427,7 @@ Gunicorn是主流的WSGI容器之一，它易于配置，兼容性好，CPU消�
 
 - ![](https://img.jbzj.com/file_images/article/201907/2019722104302288.jpg?2019622104331)
 
-Gunicorn(Green Unicorn)是一个WSGI HTTP服务器,python自带的有个web服务器，叫做 wsgiref，Gunicorn的优势在于，它使用了pre-fork worker模式，gunicorn在启动时，会在主进程中预先fork出指定数量的worker进程来处理请求，gunicorn依靠操作系统来提供负载均衡，推进的worker数量是(2*$num_cores)+1
+Gunicorn(Green Unicorn)是一个WSGI HTTP服务器,python自带的有个web服务器，叫做 wsgiref，Gunicorn的优势在于，它使用了pre-fork worker模式，gunicorn在启动时，会在主进程中预先fork出指定数量的worker进程来处理请求，gunicorn依靠操作系统来提供负载均衡，推荐的worker数量是(2*$num_cores)+1
 python是单线程的语言，当进程阻塞时，后续请求将排队处理。所用pre-fork worker模式，极大提升了服务器请求负载。
 
 安装
@@ -1871,16 +1871,66 @@ print u'消耗了{}秒'.format(T)
 
 ## Flask
 
+Flask作为Web框架，它的作用主要是为了开发Web应用程序。
+
+flask内核内置了两个最重要的组件，所有其它的组件都是通过易扩展的插件系统集成进来的。这两个内置的组件分别是werkzeug和jinja2。
+- werkzeug是一个用于编写Python WSGI程序的工具包，它的结构设计和代码质量在开源社区广受褒扬，其源码被尊为Python技术领域最值得阅读的开源库之一。
+- jinja2是一个功能极为强大的模板系统，它完美支持unicode中文，每个模板都运行在安全的沙箱环境中，使用jinja2编写的模板代码非常优美。
+
 - 【2021-3-18】flask 1.0和1.1版本的差异，api返回值类型不同，前者不能直接返回python的dict类型，需要用json.dumps转换为string，后者可以直接返回dict结构，自动转换
-
-![](https://pic3.zhimg.com/v2-ddbbe5dcf4fa4b35f11bca5f0546ecc3_1440w.jpg?source=172ae18b)
-
+- ![](https://pic3.zhimg.com/v2-ddbbe5dcf4fa4b35f11bca5f0546ecc3_1440w.jpg?source=172ae18b)
 - [用Python 的Flask实现 RESTful API(学习篇)](https://zhuanlan.zhihu.com/p/32202156)
 
+### Web原理
 
-### 部署
+Web应用程序 (World Wide Web)诞生最初的目的，是为了利用互联网交流工作文档
+- ![](https://pic1.zhimg.com/80/v2-9ea20556dcf97872c66cf8f3b4b51f20_1440w.jpg)
 
-- 示例代码
+一切从**客户端**发起**请求**开始
+- 所有Flask程序都必须创建一个程序**实例**。
+- 当客户端想要获取资源时，一般会通过**浏览器**发起**HTTP请求**。
+- 此时，Web服务器使用一种名为**WEB服务器网关接口**的`WSGI`（Web Server Gateway Interface）协议，把来自客户端的请求都交给Flask程序实例。
+- Flask使用`Werkzeug`来做**路由分发**（URL请求和视图函数之间的对应关系）。根据每个URL请求，找到具体的**视图**函数。
+- 在Flask程序中，**路由**一般是通过程序实例的装饰器实现。通过调用视图函数，获取到数据后，把数据传入HTML**模板**文件中，模板引擎负责渲染HTTP响应数据，然后由Flask返回响应数据给浏览器，最后浏览器显示返回的结果。
+
+
+- 安装：pip install flask
+
+werkzeug用法
+
+```python
+from werkzeug.wrappers import Request, Response
+
+@Request.application
+def application(request):
+    return Response('Hello World!')
+
+if __name__ == '__main__':
+    from werkzeug.serving import run_simple
+    run_simple('localhost', 4000, application)
+```
+
+
+
+### 快速入门
+
+
+【2022-3-2】[Python Web 开发框架Flask快速入门](https://zhuanlan.zhihu.com/p/146874556)
+
+网站项目开发的基本模式
+- ![](https://pic4.zhimg.com/80/v2-1bd35ee5ed0fbe27f1b00b4d86f8e17b_1440w.jpg)
+
+一个Web应用程序包含了三个部分，前端，服务端，数据库。
+- 数据库负责存储数据，作为数据存储和查询的引擎；
+- 前端网站作为用户直接查看的页面，负责展示数据。
+- Flask 负责对数据库进行操作，将数据库中的数据渲染至前端。
+
+大致工作：
+- ![](https://pic4.zhimg.com/80/v2-b40de7859d3c2dd906749c3841996767_1440w.jpg)
+
+#### 原始版本
+
+新建一个Python文件，比如叫做 helloFlask.py
 
 ```python
 from flask import Flask
@@ -1891,21 +1941,606 @@ def hello_world():
     return 'Hello World!'
 
 if __name__ == '__main__':
+    #app.run() # 本地访问：只能从你自己的计算机上访问
+    app.run(host='0.0.0.0') # 外网可访问
+
+```
+
+- 运行：python helloFlask.py
+- 浏览器上输入 http://127.0.0.1:5000/，便会看到 Hello World！ 字样
+- ![](https://picb.zhimg.com/80/v2-ea6c68e52462fb5025992cbb6b9728ed_720w.jpg)
+
+#### 改进：路由
+
+不访问索引页，而是直接访问想要的那个页面？
+- route() 装饰器把一个函数绑定到对应的 URL 上
+
+```python
+@app.route('/')
+def index():
+    return 'Index Page'
+# 路由到字页面
+#   注：也可以在一个函数上附着多个规则
+@app.route('/hello')
+def hello():
+    return 'Hello World'
+```
+
+#### 改进：模板
+
+怎么给服务器的用户呈现一个漂亮的页面呢？
+- 肯定需要用到 html、css ，如果想要更炫的效果还要加入 js
+- 问题：这么一大堆字段串全都写到视图中通过 return 返回，这样定义就太麻烦了吧，因为定义字符串是不会出任何效果和错误的，如果有一个专门定义前端页面的地方就好了。
+- Flask 配备了 [Jinja2 模板引擎](https://docs.jinkan.org/docs/jinja2/)。
+
+jinja2是一个功能极为强大的模板系统，它完美支持unicode中文，每个模板都运行在安全的沙箱环境中，使用jinja2编写的模板代码非常优美。
+
+jinjia2示例：
+
+```html
+{% extends "layout.html" %}
+{% block body %}
+  <ul>
+  {% for user in users %}
+    <li><a href="{{ user.url }}">{{ user.username }}</a></li>
+  {% endfor %}
+  </ul>
+{% endblock %}
+```
+
+Flask 会在 templates 文件夹里寻找模板。如在templates下面创建模板index.html
+
+```python
+from flask import render_template
+# render_template() 方法来渲染模板
+@app.route('/index/')
+def hello(name=None):
+    name = "张三"
+    return render_template('index.html', name=name)
+```
+
+html文件调用变量
+
+```html
+<!doctype html>
+<title>Hello from Flask</title>
+<!-- 使用模板判断语句：if else endif -->
+{% if name %}
+  <h1>Hello {{ name }}!</h1>
+{% else %}
+  <h1>Hello World!</h1>
+{% endif %}
+<!-- 使用循环语句 -->
+{% for i in range(1,10) %}
+    {% for j in range(1,i+1) %}
+        {{ j }} x {{ i }} = {{ i*j }}
+    {% endfor %}
+    <br>
+{% endfor %}
+```
+
+输入 127.0.0.1:5000/index，即可看到：
+- ![](https://pic1.zhimg.com/80/v2-b03185816de1197a546da550d12aa4d4_1440w.jpg)
+
+模板中使用变量：
+- 在 html 中定义 \{\{ 变量名 \}\}
+- 在 flask 中设定变量的key 和 value：render_template('index.html', name="张三")
+
+#### 改进：缓存
+
+【2022-3-2】[Github上最受欢迎的Python轻量级框架Flask入门](https://zhuanlan.zhihu.com/p/37750930)
+
+为了避免重复计算，将已经计算的 pi(n)值缓存起来，下次直接查询。同时不再只返回一个单纯的字符串，我们返回一个json串，里面有一个字段cached用来标识当前的结果是否从缓存中直接获取的。
+- 为什么缓存类PiCache需要使用RLock呢？因为考虑到**多线程**环境下Python的字典读写不是完全线程**安全**的，需要使用**锁**来保护一下数据结构。
+
+```python
+import math
+import threading
+
+from flask import Flask, request
+from flask.json import jsonify
+
+app = Flask(__name__)
+
+class PiCache(object):
+    """ 计算圆周率 """
+    def __init__(self):
+        self.pis = {}
+        self.lock = threading.RLock() # 使用进程锁
+
+    def set(self, n, pi):
+        with self.lock: # 开锁
+            self.pis[n] = pi
+
+    def get(self, n):
+        with self.lock: # 开锁
+            return self.pis.get(n)
+# 全局变量用于缓存
+cache = PiCache()
+
+
+@app.route("/pi")
+def pi():
+    n = int(request.args.get('n', '100'))
+    result = cache.get(n)
+    if result:
+        return jsonify({"cached": True, "result": result})
+    s = 0.0
+    for i in range(1, n):
+        s += 1.0/i/i
+    result = math.sqrt(6*s)
+    cache.set(n, result)
+    return jsonify({"cached": False, "result": result})
+
+if __name__ == '__main__':
     app.run()
 ```
 
-- 浏览器上输入http://127.0.0.1:5000/，便会看到 Hello World！ 字样
-- ![](https://picb.zhimg.com/80/v2-ea6c68e52462fb5025992cbb6b9728ed_720w.jpg)
+运行python flask_pi.py，打开浏览器访问http://localhost:5000/pi?n=1000000，可以看到页面输出
 
+```shell
+{
+  "cached": false,
+  "result": 3.141591698659554
+}
+```
+
+#### 改进：分布式缓存——redis
+
+上面的缓存仅仅是内存缓存，有问题：
+- 进程重启后，缓存结果消失，下次计算又得重新开始。
+- 如果开启第二个端口5001来提供服务，那这第二个进程也无法享受第一个进程的内存缓存，而必须重新计算。
+所以这里要引入**分布式缓存**Redis来共享计算缓存，避免跨进程重复计算，避免重启重新计算。
+
+```python
+import math
+import redis
+
+from flask import Flask, request
+from flask.json import jsonify
+
+app = Flask(__name__)
+
+
+class PiCache(object):
+    # 使用redis实现分布式缓存
+    def __init__(self, client):
+        self.client = client # redis连接
+
+    def set(self, n, result):
+        # 设置值
+        self.client.hset("pis", str(n), str(result))
+
+    def get(self, n):
+        # 获取值
+        result = self.client.hget("pis", str(n))
+        if not result:
+            return
+        return float(result)
+
+client = redis.StrictRedis() # redis客户端
+cache = PiCache(client) # 缓存值
+
+
+@app.route("/pi")
+def pi():
+    n = int(request.args.get('n', '100'))
+    result = cache.get(n)
+    if result:
+        return jsonify({"cached": True, "result": result})
+    s = 0.0
+    for i in range(1, n):
+        s += 1.0/i/i
+    result = math.sqrt(6*s)
+    cache.set(n, result)
+    return jsonify({"cached": False, "result": result})
+
+if __name__ == '__main__':
+    app.run('127.0.0.1', 5000)
+```
+
+#### 改进：数据库
+
+sql语句就可以操作数据库
+
+ORM框架
+- O是object，也就**类对象**的意思，R是relation，翻译成中文是**关系**，也就是关系数据库中**数据表**的意思，M是mapping，是**映射**的意思。
+- ORM框架帮我们把类和数据表进行了一个映射，可以通过**类**和**类对象**就能操作所对应的表格中的数据。
+- ORM框架还有一个功能，可以根据我们设计的类**自动生成数据库中的表格**，省去了自己建表的过程。
+- ![](https://pic4.zhimg.com/80/v2-65fcb5f05e5d322adb53136ba320a65b_1440w.jpg)
+
+用Flask进行数据库开发的步骤如下：
+- 配置连接数据库的选项
+- 定义模型类
+- 通过类和对象完成数据库增删改查操作
+
+
+```python
+from flask import Flask
+# Flask中使用mysql数据库，需要安装一个flask-sqlalchemy的扩展
+# pip install flask-sqlalchemy
+# 要连接mysql数据库，还需要安装 flask-mysqldb
+# pip install flask-mysqldb
+from flask_sqlalchemy import SQLAlchemy
+
+
+app = Flask(__name__)
+
+#设置连接数据库的URL
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:mysql@127.0.0.1:3306/Flask_test'
+#设置每次请求结束后会自动提交数据库中的改动
+app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+#查询时会显示原始SQL语句
+app.config['SQLALCHEMY_ECHO'] = True
+db = SQLAlchemy(app)
+
+class Role(db.Model):
+    # 定义表名
+    __tablename__ = 'roles'
+    # 定义列对象
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64), unique=True)
+    us = db.relationship('User', backref='role')
+
+
+class User(db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64), unique=True, index=True)
+    email = db.Column(db.String(64),unique=True)
+    pswd = db.Column(db.String(64))
+    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
+
+if __name__ == '__main__':
+    db.drop_all() # 删表
+    db.create_all() # 建表
+    ro1 = Role(name='admin')
+    ro2 = Role(name='user')
+    #db.session.add(ro1) # 插入数据——单挑
+    db.session.add_all([ro1,ro2]) # 插入数据——多条
+    db.session.commit() # 修改已有表，需要额外commit才生效
+    us1 = User(name='wang',email='wang@163.com',pswd='123456',role_id=ro1.id)
+    us2 = User(name='zhang',email='zhang@189.com',pswd='201512',role_id=ro2.id)
+    us3 = User(name='chen',email='chen@126.com',pswd='987654',role_id=ro2.id)
+    us4 = User(name='zhou',email='zhou@163.com',pswd='456789',role_id=ro1.id)
+    db.session.add_all([us1,us2,us3,us4])
+    db.session.commit()
+    User.query.get(name='wang') # 查询主键
+    #查询roles表id为1的角色
+    ro1 = Role.query.get(1)
+    #查询该角色的所有用户
+    ro1.us
+    User.query.all() # 返回所有查询结果
+    User.query.first() # 返回查询结果第一个
+    User.query.filter_by(name='wang').all() # 查询：wang
+    User.query.filter(User.name!='wang').all() # 逻辑非，返回名字不等于wang的所有数据
+    User.query.filter(User.name.endswith('g')).all() # 模糊查询
+    # 逻辑与
+    from sqlalchemy import and_
+    User.query.filter(and_(User.name!='wang',User.email.endswith('163.com'))).all()
+    # 逻辑或
+    from sqlalchemy import or_
+    User.query.filter(or_(User.name!='wang',User.email.endswith('163.com'))).all()
+    user = User.query.first()
+    user.name = 'dong' # 更新数据
+    User.query.filter_by(name='zhang').update({'name':'li'}) # 更新数据：update
+    db.session.commit()
+    
+    db.session.delete(user) # 删除数据
+    db.session.commit()
+    User.query.all()
+    
+    app.run(debug=True)
+```
+
+表结构
+
+| 列名 | 说明 | 类型 | 
+| --- | --- | --- | 
+| id | 表id（自动递增，主键） | int | 
+| provincename | 省名 | varchar |
+ | cityname | 省会名 | varchar |
+| usernumber | 用户数量 | int |
+
+完整代码：
+
+```python
+from flask import Flask,render_template,request,redirect
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+
+#设置数据库连接
+host='127.0.0.1'
+user='root'
+passwd="wangqiwen"
+port=3306
+db='newhouse_database'
+#设置连接数据库的URL
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:asd8283676@127.0.0.1:3306/web'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://{user}:{passwd}@{host}:{port}/{db}'
+app.logger.info(app.config['SQLALCHEMY_DATABASE_URI'])
+#设置每次请求结束后会自动提交数据库中的改动
+app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+#查询时会显示原始SQL语句
+app.config['SQLALCHEMY_ECHO'] = True
+db = SQLAlchemy(app) # [2022-3-2]注意：先配置app再包sql！否则报错！https://blog.csdn.net/weixin_45455015/article/details/100059108
+
+#设置数据库连接
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:asd8283676@127.0.0.1:3306/web'
+
+#定义模型
+class City(db.Model):
+    # 表模型
+    id = db.Column(db.Integer,primary_key=True,autoincrement=True)
+    provincename = db.Column(db.String(255))
+    cityname = db.Column(db.String(255))
+    usernumber = db.Column(db.Integer)
+
+#查询所有数据
+@app.route("/select")
+def selectAll():
+    cityList = City.query.order_by(City.id.desc()).all()
+    return render_template("index.html",city_list = cityList)
+
+@app.route('/')
+def index():
+    return selectAll()
+
+#添加数据
+@app.route('/insert',methods=['GET','POST'])
+def insert():
+    #进行添加操作
+    province = request.form['province']
+    cityname = request.form['city']
+    number = request.form['number']
+    city = City(provincename=province,cityname=cityname,usernumber=number)
+    db.session.add(city)
+    db.session.commit()
+    #添加完成重定向至主页
+    return redirect('/')
+
+@app.route("/insert_page")
+def insert_page():
+    #跳转至添加信息页面
+    return render_template("insert.html")
+
+
+#删除数据
+@app.route("/delete",methods=['GET'])
+def delete():
+    #操作数据库得到目标数据，before_number表示删除之前的数量，after_name表示删除之后的数量
+    id = request.args.get("id")
+    city = City.query.filter_by(id=id).first()
+    db.session.delete(city)
+    db.session.commit()
+    return redirect('/')
+
+#修改操作
+@app.route("/alter",methods=['GET','POST'])
+def alter():
+    # 可以通过请求方式来改变处理该请求的具体操作
+    # 比如用户访问/alter页面  如果通过GET请求则返回修改页面 如果通过POST请求则使用修改操作
+    if request.method == 'GET':
+        id = request.args.get("id")
+        province = request.args.get("provincename")
+        cityname = request.args.get("cityname")
+        usernumber = request.args.get("usernumber")
+        city = City(id = id,provincename=province,cityname=cityname,usernumber = usernumber)
+        return render_template("alter.html",city = city)
+    else:
+        #接收参数，修改数据
+        id = request.form["id"]
+        province = request.form['province']
+        cityname = request.form['city']
+        number = request.form['number']
+        city = City.query.filter_by(id = id).first()
+        city.provincename = province
+        city.cityname = cityname
+        city.usernumber = number
+        db.session.commit()
+        return redirect('/')
+
+if __name__ == "__main__":
+    db.create_all() # 必须有，自动建表
+    app.run(debug = True,host='0.0.0.0',port=8080)
+```
+
+定义模板：
+- index.html
+- alter.html
+- insert.html
+
+网页美化：
+- 将[Layui](https://layuiweb.com/index.htm)相关文件放入项目的static目录下（static目录用于存放静态文件如css，js文件可以让网站看起来更加美观）
+  - ![](https://pic2.zhimg.com/80/v2-d14699e06ba1c46ca539de4596b98e91_1440w.jpg)
+- 添加到各个html页面：引入LayUI需要在HTML文件中导入LayUI的CSS文件和JS模块
+
+效果：
+- ![](https://pic4.zhimg.com/80/v2-7f4c4182f3534b952c6b9b3ee58a02a3_1440w.jpg)
+- ![](https://pic3.zhimg.com/80/v2-0ea376382cd4496789b12a3965c55bd6_1440w.jpg)
+
+
+#### 改进：域名
+
+购买域名
+- 在公网的机器上部署好的服务器，现在还只能通过公网访问，要想通过域名能访问网站，还需要设置域名解析。
+- 要给 web服务配置上域名，还需要到服务商网站购买域名，例如：阿里云、腾讯云等等。
+域名备案
+- 购买了域名之后无法直接使用，需要进行域名备案，同样在服务商那里备案即可。
+
+#### 改进：反向代理
+
+反向代理
+- 域名解析完成之后，还需要做的工作是反向代理。
+- 使用 nginx 服务器可以作为域名代理服务。
+
+通过这几个步骤就可以让你的web服务成为面向互联网的web服务啦。
+
+可以参考的最简单 nginx 配置文件配置如下：
+- 这个代表将 http://flask.codejiaonang.com 域名，映射到本地web服务器的8848端口
+
+```json
+server {
+listen 80;
+autoindex on;
+server_name flask.codejiaonang.com;
+access_log /usr/local/nginx/logs/access.log combined;
+location / {
+        proxy_pass http://127.0.0.1:8848/;
+
+        }
+}
+```
+
+#### 扩展：类形式api,MethodView
+
+【2022-3-2】[Github上最受欢迎的Python轻量级框架Flask入门](https://zhuanlan.zhihu.com/p/37750930)
+
+类似Django，Flask也支持**类形式**的API编写方式。下面使用Flask原生支持的MethodView来改写一下上面的服务
+
+```python
+import math
+import redis
+
+from flask import Flask, request
+from flask.json import jsonify
+from flask.views import MethodView
+
+app = Flask(__name__)
+
+
+class PiCache(object):
+
+    def __init__(self, client):
+        self.client = client
+
+    def set(self, n, result):
+        self.client.hset("pis", str(n), str(result))
+
+    def get(self, n):
+        result = self.client.hget("pis", str(n))
+        if not result:
+            return
+        return float(result)
+
+client = redis.StrictRedis()
+cache = PiCache(client)
+
+class PiAPI(MethodView):
+
+    def __init__(self, cache):
+        self.cache = cache
+
+    def get(self, n):
+        result = self.cache.get(n)
+        if result:
+            return jsonify({"cached": True, "result": result})
+        s = 0.0
+        for i in range(1, n):
+            s += 1.0/i/i
+        result = math.sqrt(6*s)
+        self.cache.set(n, result)
+        return jsonify({"cached": False, "result": result})
+
+# as_view提供了参数可以直接注入到MethodView的构造器中
+# 我们不再使用request.args，而是将参数直接放进URL里面，这就是RESTFUL风格的URL
+app.add_url_rule('/pi/<int:n>', view_func=PiAPI.as_view('pi', cache))
+
+
+if __name__ == '__main__':
+    app.run('127.0.0.1', 5000)
+```
+
+flask默认的MethodView挺好用，但是也不够好用，它无法在一个类里提供多个不同URL名称的API服务。所以接下来引入flask的扩展flask-classy来解决这个问题。
+
+```python
+import math
+import redis
+
+from flask import Flask
+from flask.json import jsonify
+from flask_classy import FlaskView, route  # 扩展
+
+app = Flask(__name__)
+
+# pi的cache和fib的cache要分开
+class PiCache(object):
+
+    def __init__(self, client):
+        self.client = client
+
+    def set_fib(self, n, result):
+        self.client.hset("fibs", str(n), str(result))
+
+    def get_fib(self, n):
+        result = self.client.hget("fibs", str(n))
+        if not result:
+            return
+        return int(result)
+
+    def set_pi(self, n, result):
+        self.client.hset("pis", str(n), str(result))
+
+    def get_pi(self, n):
+        result = self.client.hget("pis", str(n))
+        if not result:
+            return
+        return float(result)
+
+
+client = redis.StrictRedis()
+cache = PiCache(client)
+
+
+class MathAPI(FlaskView):
+
+    @route("/pi/<int:n>")
+    def pi(self, n):
+        result = cache.get_pi(n)
+        if result:
+            return jsonify({"cached": True, "result": result})
+        s = 0.0
+        for i in range(1, n):
+            s += 1.0/i/i
+        result = math.sqrt(6*s)
+        cache.set_pi(n, result)
+        return jsonify({"cached": False, "result": result})
+
+    @route("/fib/<int:n>")
+    def fib(self, n):
+        result, cached = self.get_fib(n)
+        return jsonify({"cached": cached, "result": result})
+
+    def get_fib(self, n): # 递归，n不能过大，否则会堆栈过深溢出stackoverflow
+        if n == 0:
+            return 0, True
+        if n == 1:
+            return 1, True
+        result = cache.get_fib(n)
+        if result:
+            return result, True
+        result = self.get_fib(n-1)[0] + self.get_fib(n-2)[0]
+        cache.set_fib(n, result)
+        return result, False
+
+MathAPI.register(app, route_base='/')  # 注册到app
+
+
+if __name__ == '__main__':
+    app.run('127.0.0.1', 5000)
+```
 
 ### 传参
 
-- 传递请求参数的方式有两种
-    - 一是打包成 JSON 之后再传递
-        - 一般用 POST 请求来传递参数，然后用 FLASK 中 request 模块的 get_json() 方法获取参数。
-    - 二是直接放进 URL 进行传递 。
-        - 一般用 GET 请求传递参数，然后从 request.args 中用 get() 方法获取参数
-    - 不过需要说明的是用 POST 请求也可以通过 URL 的方式传递参数，而且获取参数的方式与 GET 请求相同。
+传递请求参数的方式有两种
+- 一是打包成 JSON 之后再传递
+  - 一般用 POST 请求来传递参数，然后用 FLASK 中 request 模块的 get_json() 方法获取参数。
+- 二是直接放进 URL 进行传递 。
+  - 一般用 GET 请求传递参数，然后从 request.args 中用 get() 方法获取参数
+  - 不过需要说明的是用 POST 请求也可以通过 URL 的方式传递参数，而且获取参数的方式与 GET 请求相同。
 
 ```python
 from flask import request, jsonify
@@ -3658,7 +4293,9 @@ npm run dev
 
 #### Layui
 
-[Layui](https://www.layui.com/)
+[Layui](https://layuiweb.com/index.htm)，或[站点](https://layui.org.cn/demo/table.html)，[官方文档](https://layuiweb.com/doc/index.htm)
+
+layui（谐音：类 UI) 是一套开源的 Web UI 解决方案，采用自身经典的模块化规范，并遵循原生 HTML/CSS/JS 的开发方式，极易上手，拿来即用。其风格简约轻盈，而组件优雅丰盈，从源代码到使用方法的每一处细节都经过精心雕琢，非常适合网页界面的快速开发。layui 区别于那些基于 MVVM 底层的前端框架，却并非逆道而行，而是信奉返璞归真之道。准确地说，它更多是面向后端开发者，你无需涉足前端各种工具，只需面对浏览器本身，让一切你所需要的元素与交互，从这里信手拈来。
 
 
 #### Flask + Vue
