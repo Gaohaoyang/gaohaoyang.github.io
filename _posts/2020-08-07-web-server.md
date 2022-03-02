@@ -249,7 +249,6 @@ https://api.example.com/v{n}
 	code: 500,
 	msg: ""
 }
-
 ```
 
 #### 典型数据字段
@@ -300,6 +299,7 @@ https://api.example.com/v{n}
   - 参数的校验如果不使用第三方库，会在代码中多出很多的冗余代码，所以，最好使用oval、hibernate validate或者Spring等参数校验方式，可以大幅度美观代码。
 
 #### 字段
+
 - 数据脱敏
   - 用户手机号、用户邮箱、身份证号、支付账号、邮寄地址等要进行脱敏，部分数据加 * 号处理。
 - 属性名命名时，建议使用**驼峰**命名，首字母小写。
@@ -405,9 +405,8 @@ API接口：
 - 2、需要有一些api突破restful规范原则。
 - 3、特别是移动互联网的api设计，更需要有一些特定的api来优化数据请求的交互。
 
-1)、删除单个 | 批量删除  ： DELETE  /v1/product      body参数{ids：[]}
-
-2)、页面级API :  把当前页面中需要用到的所有数据通过一个接口一次性返回全部数据
+- 1)、删除单个，批量删除  ： DELETE  /v1/product      body参数{ids：[]}
+- 2)、页面级API :  把当前页面中需要用到的所有数据通过一个接口一次性返回全部数据
 
 ### 接口文档
 
@@ -3628,7 +3627,6 @@ vim bot_service/__init__.py # 添加以下内容
 vim bot_service/apps/knowledge/apps.py
 # 否则报错：启动本地数据库，创建as_bot
 #    报错：as_bot.knowledge...表不存在，哪里有建表语句？
-
 python manage.py makemigrations knowledge # 建库
 python manage.py migrate # 
 python manager.py createsuperuser # 创建管理员账户，wqw，robot@123
