@@ -1990,14 +1990,14 @@ jinja2是一个功能极为强大的模板系统，它完美支持unicode中文�
 jinjia2示例：
 
 ```html
-{% extends "layout.html" %}
-{% block body %}
+\{% extends "layout.html" %\}
+\{% block body %\}
   <ul>
-  {% for user in users %}
+  \{% for user in users %\}
     <li><a href="{{ user.url }}">{{ user.username }}</a></li>
-  {% endfor %}
+  \{% endfor %\}
   </ul>
-{% endblock %}
+\{% endblock %\}
 ```
 
 Flask 会在 templates 文件夹里寻找模板。如在templates下面创建模板index.html
@@ -2017,18 +2017,18 @@ html文件调用变量
 <!doctype html>
 <title>Hello from Flask</title>
 <!-- 使用模板判断语句：if else endif -->
-{% if name %}
+\{% if name %\}
   <h1>Hello {{ name }}!</h1>
-{% else %}
+\{% else %\}
   <h1>Hello World!</h1>
-{% endif %}
+\{% endif %\}
 <!-- 使用循环语句 -->
-{% for i in range(1,10) %}
-    {% for j in range(1,i+1) %}
+\{% for i in range(1,10) %\}
+    \{% for j in range(1,i+1) %\}
         {{ j }} x {{ i }} = {{ i*j }}
-    {% endfor %}
+    \{% endfor %\}
     <br>
-{% endfor %}
+\{% endfor %\}
 ```
 
 输入 127.0.0.1:5000/index，即可看到：
