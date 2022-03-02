@@ -1936,8 +1936,20 @@ if __name__ == '__main__':
 from flask import Flask
 app = Flask(__name__)
 
+# 日志系统配置
+handler = logging.FileHandler('app.log', encoding='UTF-8')
+#设置日志文件，和字符编码
+logging_format = logging.Formatter(
+            '%(asctime)s - %(levelname)s - %(filename)s - %(funcName)s - %(lineno)s - %(message)s')
+handler.setFormatter(logging_format)
+app.logger.addHandler(handler)
+#设置日志存储格式，也可以自定义日志格式满足不同的业务需求
+
 @app.route('/')
 def hello_world():
+    app.logger.info('hi...')
+    # app.logger.info('message info is %s', message, exc_info=1)。
+    #app.logger.exception('%s', e) # 异常信息
     return 'Hello World!'
 
 if __name__ == '__main__':
@@ -2154,13 +2166,55 @@ ORM框架
 - 定义模型类
 - 通过类和对象完成数据库增删改查操作
 
+详见：[flask的orm框架(SQLAlchemy)](https://www.cnblogs.com/chichung/p/9782919.html)
+
+| 名字	| 备注| 
+| SQLALCHEMY_DATABASE_URI	| 用于连接的数据库 URI 。例如: sqlite:////tmp/test.dbmysql://username:password@server/db |
+| SQLALCHEMY_BINDS |	一个映射 binds 到连接 URI 的字典。更多 binds 的信息见用 Binds 操作多个数据库。|
+| SQLALCHEMY_ECHO	| 如果设置为Ture， SQLAlchemy 会记录所有 发给 stderr 的语句，这对调试有用。(打印sql语句) |
+| SQLALCHEMY_RECORD_QUERIES	| 可以用于显式地禁用或启用查询记录。查询记录 在调试或测试模式自动启用。更多信息见get_debug_queries()。|
+| SQLALCHEMY_NATIVE_UNICODE	| 可以用于显式禁用原生 unicode 支持。当使用 不合适的指定无编码的数据库默认值时，这对于 一些数据库适配器是必须的（比如 Ubuntu 上 某些版本的 PostgreSQL ）。|
+| SQLALCHEMY_POOL_SIZE	| 数据库连接池的大小。默认是引擎默认值（通常 是 5 ）|
+| SQLALCHEMY_POOL_TIMEOUT	| 设定连接池的连接超时时间。默认是 10 。|
+| SQLALCHEMY_POOL_RECYCLE	| 多少秒后自动回收连接。这对 MySQL 是必要的， 它默认移除闲置多于 8 小时的连接。注意如果 使用了 MySQL ， Flask-SQLALchemy 自动设定 这个值为 2 小时。|
+
+字段类型
+
+| 类型名 | python中类型 | 说明 |
+|---|---|---|
+| Integer | int | 普通整数，一般是32位 |
+| SmallInteger | int | 取值范围小的整数，一般是16位 |
+| BigInteger | int或long | 不限制精度的整数 |
+| Float | float | 浮点数 |
+| Numeric | decimal.Decimal | 普通整数，一般是32位 |
+| String | str | 变长字符串 |
+| Text | str | 变长字符串，对较长或不限长度的字符串做了优化 |
+| Unicode | unicode | 变长Unicode字符串 |
+| UnicodeText | unicode | 变长Unicode字符串，对较长或不限长度的字符串做了优化 |
+| Boolean | bool | 布尔值 |
+| Date | datetime.date | 时间 |
+| Time | datetime.datetime | 日期和时间 |
+| LargeBinary | str | 二进制文件 |
+
+字段属性：
+
+| 选项名 | 说明 | 
+|---|---|
+| primary_key | 如果为True，代表表的主键 | 
+| unique | 如果为True，代表这列不允许出现重复的值 | 
+| index | 如果为True，为这列创建索引，提高查询效率 | 
+| nullable | 如果为True，允许有空值，如果为False，不允许有空值 | 
+| default | 为这列定义默认值 | 
+
 
 ```python
 from flask import Flask
+
 # Flask中使用mysql数据库，需要安装一个flask-sqlalchemy的扩展
 # pip install flask-sqlalchemy
 # 要连接mysql数据库，还需要安装 flask-mysqldb
 # pip install flask-mysqldb
+
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -2178,7 +2232,7 @@ db = SQLAlchemy(app)
 class Role(db.Model):
     # 定义表名
     __tablename__ = 'roles'
-    # 定义列对象
+    # 定义列对象，字段属性
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), unique=True)
     us = db.relationship('User', backref='role')
