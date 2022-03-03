@@ -3433,13 +3433,13 @@ web页面代码 (为了避开jeklly语法冲突，%号和{中间间用空格隔�
          <title> welcome to flask </title>        
     { % endif % }
     <!-- 判断语句：算术运算 -->
-    {% if age == 1 %}
+    { % if age == 1 % }
         <p>age为1</p>
-    {% elif age == 2 %}
+    { % elif age == 2 % }
         <p>age为2</p>
-    {% else %}
+    { % else % }
         <p>age不为1和2</p>
-    {% endif %}
+    { % endif % }
  </head>
 
  <body>
