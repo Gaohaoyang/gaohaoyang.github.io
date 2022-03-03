@@ -970,6 +970,33 @@ embed()
 #### 企业微信
 
 - [企业微信应用接入](https://work.weixin.qq.com/api/doc/90001/90146/90568)
+- 【2022-3-3】[用企微账号api发消息](https://www.cnblogs.com/mengyu/p/10073140.html)，只需要access_token就能发消息，这个公司企微管理员应该能看到
+  - [企业微信接口文档](https://work.weixin.qq.com/api/doc#90000/90135/90664)；企业微信提供了好几种发送消息的模式，主要应用支持推送文本、图片、视频、文件、图文等类型；
+
+可以将消息发送至对应的用户组，这里需要注意access_token 的有效期7200s，而且接口的请求次数有限制，所以我们需要对返回的token值进行缓存，可以存储在redis或者MySQL，过期以后进行重复获取；
+
+```python
+# 获取微信access_token
+def get_token():
+    payload_access_token = {'corpid': 'wwfcdce534bxxxxx', 'corpsecret': '-hpCA42o4cm1DzgSfS23XtEZ93ZI3VNwDgcP-xxxxxUd4X6Q'}
+    token_url = 'https://qyapi.weixin.qq.com/cgi-bin/gettoken'
+    r = requests.get(token_url, params=payload_access_token)
+    dict_result = (r.json())
+    return dict_result['access_token']
+
+def send_message():
+    url = "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=%s" % get_token()
+    data = {"toparty": 1, "msgtype": "text", "agentid": xxxxx, "text": {"content": "提现成功"}, "safe": 0}
+    data = json.dumps(data, ensure_ascii=False)
+    r = requests.post(url=url, data=data.encode("utf-8").decode("latin1"))
+    return r.json()
+
+
+if __name__ == '__main__':
+    send_message()
+```
+
+
 - [企业微信接入第三方应用（以服务商身份）](https://blog.csdn.net/anyuetiantang/article/details/97516853)
   - ![](https://img-blog.csdnimg.cn/20190727151609707.png)
 - 企业微信[接入机器人步骤](https://blog.csdn.net/weixin_41635750/article/details/117002704)
