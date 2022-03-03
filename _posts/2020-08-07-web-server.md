@@ -57,6 +57,7 @@ HTTP常见的方法：
 
 ## post/get参数获取
 
+
 - [flask的post,get请求及获取不同格式的参数](https://www.cnblogs.com/leijiangtao/p/11757554.html)
 - ![](https://img2018.cnblogs.com/blog/594801/201910/594801-20191029104937449-1769417565.png)
 
@@ -1962,6 +1963,7 @@ if __name__ == '__main__':
 - 浏览器上输入 http://127.0.0.1:5000/，便会看到 Hello World！ 字样
 - ![](https://picb.zhimg.com/80/v2-ea6c68e52462fb5025992cbb6b9728ed_720w.jpg)
 
+
 #### 改进：路由
 
 不访问索引页，而是直接访问想要的那个页面？
@@ -1987,17 +1989,17 @@ def hello():
 
 jinja2是一个功能极为强大的模板系统，它完美支持unicode中文，每个模板都运行在安全的沙箱环境中，使用jinja2编写的模板代码非常优美。
 
-jinjia2示例：
+jinjia2示例：使用时，去掉%与大括号中间的空格（规避jekyll语法）
 
 ```html
-\{% extends "layout.html" %\}
-\{% block body %\}
+{ % extends "layout.html" % }
+{ % block body % }
   <ul>
-  \{% for user in users %\}
+  { % for user in users % }
     <li><a href="{{ user.url }}">{{ user.username }}</a></li>
-  \{% endfor %\}
+  { % endfor % }
   </ul>
-\{% endblock %\}
+{ % endblock % }
 ```
 
 Flask 会在 templates 文件夹里寻找模板。如在templates下面创建模板index.html
@@ -2017,18 +2019,18 @@ html文件调用变量
 <!doctype html>
 <title>Hello from Flask</title>
 <!-- 使用模板判断语句：if else endif -->
-\{% if name %\}
+{ % if name % }
   <h1>Hello {{ name }}!</h1>
-\{% else %\}
+{ % else % }
   <h1>Hello World!</h1>
-\{% endif %\}
+{ % endif % }
 <!-- 使用循环语句 -->
-\{% for i in range(1,10) %\}
-    \{% for j in range(1,i+1) %\}
+{ % for i in range(1,10) % }
+    { % for j in range(1,i+1) % }
         {{ j }} x {{ i }} = {{ i*j }}
-    \{% endfor %\}
+    { % endfor % }
     <br>
-\{% endfor %\}
+{ % endfor % }
 ```
 
 输入 127.0.0.1:5000/index，即可看到：
@@ -2587,14 +2589,140 @@ if __name__ == '__main__':
     app.run('127.0.0.1', 5000)
 ```
 
+
+### app配置
+
+
+```python
+app = Flask(__name__)    # 这是实例化一个Flask对象，最基本的写法
+app = Flask(__name__, template_folder='templates', static_url_path='/xxxxxx')
+
+# Flask初始化
+def __init__(self, import_name, static_path=None, static_url_path=None,
+                 static_folder='static', template_folder='templates',
+                 instance_path=None, instance_relative_config=False,
+                 root_path=None):
+
+app.run('127.0.0.1', 5000) # 设置ip、端口
+app.run(debug=True)  # debug = True 是指进入调试模式
+```
+
+其它参数：
+- template_folder：**模板**所在文件夹的名字
+- root_path：可以不用填，会自动找到，当前执行文件，所在目录地址，在return render_template时会将上面两个进行拼接，找到对应的模板地址
+- static_folder：**静态文件**所在文件的名字，默认是static，可以不用填
+- static_url_path：静态文件的**地址前缀**，写成什么，访问静态文件时，就要在前面加上这个
+  - 在根目录下创建目录，templates和static，则return render_template时，可以找到里面的模板页面；
+  - 如在static文件夹里存放11.png，在引用该图片时，静态文件地址为：/xxxxxx/11.png
+- instance_relative_config：默认为False，当设置为True时，from_pyfile会从instance_path指定的地址下查找文件。
+- instsnce_path：指定from_pyfile查询文件的路径，不设置时，默认寻找和app.run()的执行文件同级目录下的instance文件夹；如果配置了instance_path（注意需要是绝对路径），就会从指定的地址下里面的文件
+  - instance_path和instance_relative_config是配合来用的、这两个参数是用来**找配置文件**的，当用 app.config.from_pyfile('settings.py')这种方式导入配置文件的时候会用到
+
+
+### 路由
+
+添加路由关系的本质：
+- 将url和视图函数封装成一个**Rule对象**，添加到Flask的url_map字段中
+
+#### 绑定方式
+
+路由绑定的两种方式
+
+```python
+#方式一
+@app.route('/index.html',methods=['GET','POST'],endpoint='index')
+def index():
+    return 'Index'
+        
+#方式二
+def index():
+    return "Index"
+
+self.add_url_rule(rule='/index.html', endpoint="index", view_func=index, methods=["GET","POST"])    #endpoint是别名
+# 或
+app.add_url_rule(rule='/index.html', endpoint="index", view_func=index, methods=["GET","POST"])
+app.view_functions['index'] = index
+```
+
+#### 路由参数
+
+可传入参数：
+
+```python
+@app.route('/user/<username>')   # 常用   不加参数的时候默认是字符串形式的
+@app.route('/post/<int:post_id>')  # 常用   #指定int，说明是整型的
+@app.route('/post/<float:post_id>')
+@app.route('/post/<path:path>')
+@app.route('/login', methods=['GET', 'POST'])
+
+# 类型说明
+DEFAULT_CONVERTERS = {
+    'default':          UnicodeConverter,
+    'string':           UnicodeConverter,
+    'any':              AnyConverter,
+    'path':             PathConverter,
+    'int':              IntegerConverter,
+    'float':            FloatConverter,
+    'uuid':             UUIDConverter,
+}
+```
+
+#### 反向生成URL： url_for
+
+endpoint("name")   # 别名，相当于django中的name
+
+ 
+```python
+from flask import Flask, url_for
+
+@app.route('/index',endpoint="xxx")  #endpoint是别名
+def index():
+    v = url_for("xxx")
+    print(v)
+    return "index"
+
+@app.route('/zzz/<int:nid>',endpoint="aaa")  #endpoint是别名
+def zzz(nid):
+    v = url_for("aaa",nid=nid)
+    print(v)
+    return "index2"
+
+# =============== 子域名访问============
+@app.route("/static_index", subdomain="admin")
+def static_index():
+    return "admin.bjg.com"
+
+# ===========动态生成子域名===========
+@app.route("/index",subdomain='<xxxxx>')
+def index(xxxxx):
+    return "%s.bjg.com" %(xxxxx,)
+
+```
+
 ### 传参
 
 传递请求参数的方式有两种
 - 一是打包成 JSON 之后再传递
-  - 一般用 POST 请求来传递参数，然后用 FLASK 中 request 模块的 get_json() 方法获取参数。
+  - 一般用 `POST` 请求来传递参数，然后用 FLASK 中 request 模块的 get_json() 方法获取参数。
 - 二是直接放进 URL 进行传递 。
-  - 一般用 GET 请求传递参数，然后从 request.args 中用 get() 方法获取参数
+  - 示例URL:　 http://127.0.0.1:5000/login?name=%27%E8%83%A1%E5%86%B2%27&nid=2
+  - 一般用 `GET` 请求传递参数，然后从 request.args 中用 get() 方法获取参数
   - 不过需要说明的是用 POST 请求也可以通过 URL 的方式传递参数，而且获取参数的方式与 GET 请求相同。
+
+获取请求数据，及相应
+- request
+  - request.form   # POST请求的数据
+  - request.args   # GET请求的数据，不是完全意义上的字典，通过.to_dict可以转换成字典
+  - request.querystring  #GET请求，bytes形式的
+- response
+  - return render_tempalte()    
+  - return redirect()
+  - return ""
+  - v = make_response(返回值)  #可以把返回的值包在了这个函数里面，然后再通过.set_cookie绑定cookie等
+- session
+  - 存在浏览器上，并且是加密的
+  - 依赖于：secret_key
+
 
 ```python
 from flask import request, jsonify
@@ -2693,6 +2821,8 @@ url_for('admin.index') # /admin/
 
 - 代码示例：[flask中4种全局变量](https://www.jianshu.com/p/f24e2c9b548e)
 
+#### session
+
 **Session设置**
 
 - 代码
@@ -2701,7 +2831,10 @@ url_for('admin.index') # /admin/
 from flask import Flask,session
 import os
 from datetime import timedelta
+
 app = Flask(__name__)
+app.secret_key = "sdsfdsgdfgdfgfh"   # 设置session时，必须要加盐，否则报错
+
 app.config['SECRET_KEY'] = os.urandom(24)
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)
 #SESSION_TYPE = "redis"
