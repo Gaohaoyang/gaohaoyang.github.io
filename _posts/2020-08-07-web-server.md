@@ -3392,7 +3392,8 @@ if __name__ == '__main__':
     app.run(debug=True)
 ```
 
-web页面代码 (为了避开jeklly语法冲突，%号和{中间间用空格隔开，实际使用时去掉！)
+web页面代码 
+- 注意：为了避开jeklly语法冲突，<font color='blue'>{号、%号和{或}中间间用空格隔开，实际使用时去掉！</font>
 
 ```html
  <html>
