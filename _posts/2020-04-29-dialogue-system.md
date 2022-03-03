@@ -973,11 +973,15 @@ embed()
 - 【2022-3-3】[用企微账号api发消息](https://www.cnblogs.com/mengyu/p/10073140.html)，只需要access_token就能发消息，这个公司企微管理员应该能看到
   - [企业微信接口文档](https://work.weixin.qq.com/api/doc#90000/90135/90664)；企业微信提供了好几种发送消息的模式，主要应用支持推送文本、图片、视频、文件、图文等类型；
 
-可以将消息发送至对应的用户组，这里需要注意access_token 的有效期7200s，而且接口的请求次数有限制，所以我们需要对返回的token值进行缓存，可以存储在redis或者MySQL，过期以后进行重复获取；
+企业微信官方[开发前必读](https://developer.work.weixin.qq.com/document/path/90664)
+- 可以将消息发送至对应的用户组，这里需要注意access_token 的有效期7200s，而且接口的请求次数有限制，所以我们需要对返回的token值进行缓存，可以存储在redis或者MySQL，过期以后进行重复获取；
+- ![](http://p.qpic.cn/pic_wework/3138313977/8187638d87c642e4dfdc5be2382183d41f1bc5e446580dbc/0)
+- 开发者需要缓存access_token，用于后续接口的调用（注意：不能频繁调用gettoken接口，否则会受到频率拦截）
 
 ```python
 # 获取微信access_token
 def get_token():
+    # https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=ID&corpsecret=SECRET
     payload_access_token = {'corpid': 'wwfcdce534bxxxxx', 'corpsecret': '-hpCA42o4cm1DzgSfS23XtEZ93ZI3VNwDgcP-xxxxxUd4X6Q'}
     token_url = 'https://qyapi.weixin.qq.com/cgi-bin/gettoken'
     r = requests.get(token_url, params=payload_access_token)
