@@ -3310,12 +3310,56 @@ flower监控面板
 
 ### 模板使用
 
+[Flask模板引擎：Jinja2常用语法整理](https://www.jianshu.com/p/0a5f87332dea)
+
+在jinja2中，存在三种语法：
+- 1、控制结构 { % % }
+- 2、变量取值 {{ }}
+- 3、注释 {# #}
+
+jinja2支持python中所有的Python数据类型比如列表、字段、对象等
 
 if/for控制语句
 
 前端的Jinja2语法中，if可以进行判断：存在的参数是否满足条件。
 - 跟python很像，只是需要添加：大括号+百分号
 - ![](https://pic2.zhimg.com/80/v2-7c8b008840b966bee55a1ae71caf5e11_720w.jpg)
+
+Jinja2的for循环变量不需要{{ }}传入，不支持continue和break，但是和Python一样可以对Python的可迭代对象进行循环遍历。
+- 每一次循环的对象是一个字段，使用.key直接拿到value值，如：{{ good.name }}，或 {{ good[ "name" ] }}
+- 问题：如果不知道字典中key呢？当做list遍历key即可
+
+在一个循环代码块内部调用loop的属性可以获得循环中的状态数据
+- loop.index: 当前迭代的索引（从1开始）
+- loop.index0: 当前迭代的索引（从0开始）
+- loop.first: 是否是第一次迭代，返回True，False
+- loop.last: 是否是最后一次迭代，返回True，False
+- loop.length: 返回序列长度
+
+过滤器
+- 过滤器的本质是一个转换函数，有时候不仅需要输出程序参数还要对参数进行修改转换才能输出，此时需要用到过滤器，过滤器写在变量后面，中间用 | 隔开，|左右没有空格
+
+自定义过滤器
+- 可以自己用Python语言实现一个自定义过滤器使用add_template_filter进行注册调用，或者使用修饰器template_filter注册
+
+```python
+@app.template_filter('t_func')
+def t_func(t):
+    t2 = time.time()
+    diff = t2 - t
+    if diff < 60:
+        return "刚刚"
+    elif 60 <= diff < 60 * 60:
+        return "%d分钟之前" % int(diff / 60)
+    elif 3600 <= diff < 3600 * 24:
+        return "%d小时之前" % int(diff / 3600)
+    else:
+        return "很久之前"
+# 另一种注册方式
+# app.add_template_filter(t_func, 't_func')
+```
+
+完整示例：
 
 ```python
 from flask import Flask  #导入模块
@@ -3329,7 +3373,7 @@ def choice():
              {'name':'口红', 'price':'300元'}, \
              {'name':'冰淇淋', 'price':'20元'}]
     # locals指定所有变量
-    return render_template('goods.html', **locals())
+    return render_template('goods.html', **locals()) # 直接传入局部变量
 
 @app.route('/user')
 def user():
@@ -3342,6 +3386,7 @@ def user():
  def loop():
     fruit = ['apple','orange','pear','grape']
     return render_template('loop.html',fruit=fruit)
+    #return render_template('first.html', **locals()) # 直接把当前所有变量传下去
 
 if __name__ == '__main__':
     app.run(debug=True)
@@ -3351,7 +3396,35 @@ web页面代码 (为了避开jeklly语法冲突，%号和{中间间用空格隔�
 
 ```html
  <html>
- <head>
+ <head> 
+   <!-- 过滤器 -->
+   <p>{{ name|default('小明', true)}}</p>
+   <p>{{ name or '小明'}}</p>
+   <p>{{ name|default('小明')|replace('小', '大')}}</p> <!-- 多个过滤器可以连续写 -->
+   <p>{{ '   去除收尾空格   '|trim }}</p>
+   <p>{{ '我和'~name~'出去玩了'}}</p> <!-- 字符串连接，用~ -->
+   <!-- 可迭代对象过滤器 -->
+   <p>第一个元素{{ items|first }}</p> <!-- 第一个元素 -->
+   <p>最后一个元素{{ items|last }}</p> <!-- 最后一个元素 -->
+   <!-- 函数 -->
+   <p>列表长度{{ items|count }}</p>
+   <p>{{ 2.22|string + '你好'}}</p> <!-- 转string -->
+   <p>{{ 2.222|int }}</p>
+   <p>{{ -2.222|abs }}</p>
+   <p>{{ 2.222|round(2) }}</p>  <!-- 保留小数，比如保留2为小数 -->
+   <p>{{ ent_scores|max }}</p> 
+   <p>{{ ent_scores|min }}</p>
+   <p>{{ [1, 2, 3, 4, 5]|reverse|join(',')}}</p> <!-- 反转、连接 -->
+   <p>列表转字符串{{ items|join(',') }}</p> <!-- 元素连接 -->
+   <p>列表升序{{ items|sort }}</p>
+   <p>列表降序{{ items|sort(true) }}</p> <!-- 降序排列 -->
+   <!-- items = [{"name": "苹果", "price": 23}, {"name": "西瓜", "price": 33}, {"name": "西红柿", "price": 25}] -->
+    <p>根据某个属性排序{{ items|sort(attribute='price', reverse=true) }}</p>
+    { % for item in items|sort(attribute='price', reverse=true) % }
+        <p>{{ item.name }}</p>
+    { % endfor % }
+    <p>文章发表于{{ t| t_func }}</p> <!-- 自定义过滤器 -->
+   <!-- 判断语句 -->
      { % if user % }
         <title> hello {{user}} </title>
         <!-- <title> hello {{user[0]}} </title> -->
@@ -3359,11 +3432,19 @@ web页面代码 (为了避开jeklly语法冲突，%号和{中间间用空格隔�
     { % else % }
          <title> welcome to flask </title>        
     { % endif % }
+    <!-- 判断语句：算术运算 -->
+    {% if age == 1 %}
+        <p>age为1</p>
+    {% elif age == 2 %}
+        <p>age为2</p>
+    {% else %}
+        <p>age不为1和2</p>
+    {% endif %}
  </head>
 
  <body>
      <h1>hello world</h1>
-    <ul>
+    <ul> <!-- 循环遍历语句：列表 -->
         { % for index in fruit % }
             <li>{{ index }}</li>
         { % endfor % }
@@ -3374,21 +3455,33 @@ web页面代码 (为了避开jeklly语法冲突，%号和{中间间用空格隔�
           <th>商品名称</th>
           <th>商品价格</th>
       </thead>
-      <tbody>
+      <tbody> <!-- 循环遍历语句：字典 -->
       { % for good in goods % }
           <tr>
               <td>{{good.name}}    </td>
               <td>{{good.price}}    </td>
           </tr>
+        <!-- 使用loop关键词获取循环信息 -->
+        <p>循环长度{{ loop.length }}</p>
+        <p>当前索引{{ loop.index0 }}</p>
+        <p>是否结束{{ loop.last }}</p>
+      { % endfor % }
+      <!-- 字典遍历，不用指定key -->
+      { % for k in goods % }
+        {{ k }} -> {{ goods[k] }}
       { % endfor % }
       </tbody>
     </table>
-  <!-- 临时变量 -->
+  <!-- 变量赋值 -->
   { % set links = [
       ('home',url_for('.home')),
       ('service',url_for('.service')),
       ('about',url_for('.about')),
-    ] %-}
+    ] % }
+  <p>set的值{{ a }}</p> <!-- 变量赋值：另一种 -->
+  { % with b='321' % }
+    <p>with的值{{ b }}</p>
+  { % endwith % }
   <nav>
       { % for label,link in links % }
           <!-- loop获取循环信息，loop.index表示下标, 从1开始 -->
@@ -3400,6 +3493,16 @@ web页面代码 (为了避开jeklly语法冲突，%号和{中间间用空格隔�
           ">{{ label }}</a>
       { % endfor % }
   </nav>
+<!-- 静态文件加载：url_for -->
+  <script src="{{ url_for('static', filename='js/tmp.js') }}"></script>
+  <script type="text/javascript" src="static/js/tmp.js"></script> <!-- 或更直接的方式 -->
+   <!-- 空白控制 -->
+<div>
+    { % if True % }
+        yay
+    { % endif % }
+</div>
+
  </body>
  </html>
  ```
