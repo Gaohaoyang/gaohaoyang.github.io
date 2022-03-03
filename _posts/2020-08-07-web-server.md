@@ -3415,14 +3415,22 @@ web页面代码 (为了避开jeklly语法冲突，%号和{中间间用空格隔�
    <p>{{ ent_scores|max }}</p> 
    <p>{{ ent_scores|min }}</p>
    <p>{{ [1, 2, 3, 4, 5]|reverse|join(',')}}</p> <!-- 反转、连接 -->
+   
+  { % with items=[4,1,7,2] % }
+    <p>with的值{{ b }}</p>
    <p>列表转字符串{{ items|join(',') }}</p> <!-- 元素连接 -->
    <p>列表升序{{ items|sort }}</p>
    <p>列表降序{{ items|sort(true) }}</p> <!-- 降序排列 -->
+  { % endwith % }
+
+   { % with items = [{"name": "苹果", "price": 23}, {"name": "西瓜", "price": 33}, {"name": "西红柿", "price": 25}] % }
    <!-- items = [{"name": "苹果", "price": 23}, {"name": "西瓜", "price": 33}, {"name": "西红柿", "price": 25}] -->
     <p>根据某个属性排序{{ items|sort(attribute='price', reverse=true) }}</p>
     { % for item in items|sort(attribute='price', reverse=true) % }
         <p>{{ item.name }}</p>
     { % endfor % }
+   { % endwith % }
+
     <p>文章发表于{{ t| t_func }}</p> <!-- 自定义过滤器 -->
    <!-- 判断语句 -->
      { % if user % }
@@ -3432,7 +3440,7 @@ web页面代码 (为了避开jeklly语法冲突，%号和{中间间用空格隔�
     { % else % }
          <title> welcome to flask </title>        
     { % endif % }
-    
+
     <!-- 判断语句：算术运算 -->
     { % if age == 1 % }
         <p>age为1</p>
