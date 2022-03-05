@@ -1856,7 +1856,26 @@ print u'消耗了{}秒'.format(T)
 ```
 
 
-## web框架对比
+## web框架
+
+### 常见web框架
+
+![](https://p3.toutiaoimg.com/large/tos-cn-i-qvj2lq49k0/4106964c366b40e390b15fbaed9e7bfe)
+
+如图：
+1. 浏览器发起http请求，与服务器交互
+1. wsgi服务器接收到流量后，转由各个Python web框架处理
+1. 常规web框架包含三个部分：
+  - 框架控制逻辑：依次为 路由系统、业务逻辑、耦合适配（数据库+模板）
+  - 网页静态资源：html、js、css等，一般放static目录下
+  - 数据库：通过ORM交互
+1. 路由系统
+1. 业务处理逻辑
+1. 适配：模板、数据库
+
+基于python的web框架，如tornado、flask、webpy都是在这个范围内进行增删裁剪的。例如tornado用的是自己的异步非阻塞“wsgi”，flask则只提供了最精简和基本的框架。Django则是直接使用了WSGI，并实现了大部分功能。
+
+### 对比
 
 - Python web框架的性能响应排行榜
     - 从并发性上看Fastapi完全碾压了 Flask (实际上也领先了同为异步框架的tornado 不少)
@@ -3678,13 +3697,37 @@ Django的MTV模式
 
 ### Django项目结构
 
-Django文件结构
-- urls.py 网址入口，关联到对应的views.py中的一个函数（或者generic类），访问网址就对应一个函数。
-- views.py 处理用户发出的请求，从urls.py中对应过来, 通过渲染templates中的网页可以将显示内容，比如登陆后的用户名，用户请求的数据，输出到网页。
-- models.py 与数据库操作相关，存取数据时用到，不用数据库时可省略。
+每个django**项目**中可以包含多个APP（**应用**），相当于一个大型项目中的分系统、**子模块**、功能部件等等，相互之间比较独立，但也有联系。所有的APP共享项目资源。
+
+Django文件结构：以新建应用test为例
+- `manage.py` ： django管理主程序，一个项目一个
+  - 创建数据库：python manage.py makemigrations，# 执行后，生成migrations目录，000*开头的文件里面包含sql语句
+  - python manage.py migrate
+  - 启动服务：python manage.py runserver 127.0.0.1:8000
+  - django默认有跨站请求保护机制，settings文件中将它关闭
+- `wsgi.py` ： 网络通信主接口
+  - 设置项目使用哪个settings.py
+  - os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'test.settings')
+  - application = get_wsgi_application()
+- `urls.py` ：url路由文件，网址入口，关联到对应的views.py中的一个函数（或者generic类），访问网址就对应一个函数。
+  - 新建应用路由导入：更改urls.py文件，新增 from test import urls
+  - url_patterns 中新增test应用的路由规则，如：path(r'api/', include(test.urls))
+- `settings.py` ：Django 的设置，配置文件，比如 DEBUG 的开关，静态文件的位置等
+  - 变量 INSTALLED_APPS 引入新建的app
+  - 如果网页模板位置不在 templates，就需要修改：TEMPLATES 变量
+  - 如果静态资源位置不在 statics ，就需要修改：STATIC_URL 变量
+  - 配置数据库相关参数，如果用自带的sqlite，不需要修改。否则修改 DATABASE 变量，在mysql数据库创建mysite库
+- `views.py` 处理用户发出的请求，调用 model.py
+  - 从urls.py中对应过来, 通过渲染templates中的网页可以将显示内容，比如登陆后的用户名，用户请求的数据，输出到网页。
+  - test/views.py 文件中记录业务处理逻辑，函数必须继承自 request，且返回不能是字符串！
+  - def index(request)
+  - return render(request, 'index.html', {模板变量})
+- `templates` ：文件夹 ，views.py 中的函数渲染templates中的Html模板，得到动态内容的网页，可用缓存来提高速度。
+  - 引用 static 目录下静态资源
+  - 包含 jinja2 语法规则
+- `models.py` 与数据库操作相关，定义数据库表格式，一张表一个类，存取数据时用到，不用数据库时可省略。
+  - 必须继承自 model.Model，如：class UserInfo(model.Model)
 - forms.py 表单，用户在浏览器上输入数据提交，对数据的验证工作以及输入框的生成等工作，可选。
-- templates 文件夹 ，views.py 中的函数渲染templates中的Html模板，得到动态内容的网页，可用缓存来提高速度。
-- settings.py Django 的设置，配置文件，比如 DEBUG 的开关，静态文件的位置等
 - admin.py 后台，Django自带强大的后台功能和ORM框架，可以用很少量的代码就拥有一个强大的后台。
   - manage.py统计目录下运行下列两个命令使数据库生效。
 
