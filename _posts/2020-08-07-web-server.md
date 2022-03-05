@@ -3737,8 +3737,18 @@ python manage.py syncdb # Django 1.6.x 及以下
 python manage.py makemigrations [appname] #appname 即为此处的Blog
 python manage.py migrate
 # 创建超级用户
-python manage.py createsuperuser
-python manage.py changepassword username # 修改用户密码
+python manage.py createsuperuser # 密码以密文形式存储
+# ------ 修改密码 -------
+# 方法①
+python manage.py changepassword username # 修改用户密码——这种方式会校验密码强度
+# 方法②
+python manage.py shell # 进入shell环境，执行以下代码：
+# 此方法不会校验密码强度，可设置简单的密码
+from django.contrib.auth.models import User
+user = User.objects.get(username='用户名')
+user.set_password('新的密码')
+user.save()
+
 ```
 
 可以通过 http://localhost:8000/admin/ 来访问后台
