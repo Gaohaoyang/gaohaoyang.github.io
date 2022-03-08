@@ -1403,7 +1403,19 @@ gunicorn 的优点如下
 
 PS: 如果没有静态资源并且无需反向代理的话，抛弃 Nginx 直接使用 Gunicorn 和 Flask app 也能搞定。
 
-## Gunicorn
+## Gunicorn 多进程实现并发
+
+### 问题
+
+【2022-3-8】gunicorn是多进程，多个进程之间session不共享！详见[地址](https://blog.csdn.net/lpwmm/article/details/103951609)
+- Gunicorn中的worker实际上对应的是**多进程**,默认配置每个worker之间是**独立**存在的进程, worker会实例化一个新的Flask对象跑起来
+
+解决方法：
+- 使用固定的SECRET_KEY
+- 将session数据存放到数据库中
+这样Gunicorn中使用worker实现的多进程之间就不会出现数据不同步的情况了.
+
+### 介绍
 
 Gunicorn（“绿色独角兽”）是一个被广泛使用的**高性能**的python WSGI UNIX HTTP服务器，移植自Ruby的独角兽（Unicorn）项目，使用pre-fork worker模式具有使用非常简单，轻量级的资源消耗，以及高性能等特点。
 - pre-fork worker模式: 一个中央master进程来管理一系列的工作进程，master并不知道各个独立客户端。所有的请求和响应完全由工作进程去完成。master通过一个循环不断监听各个进程的信号并作出相应反应，这些信号包括TTIN、TTOU和CHLD。TTIN和TTOU告诉master增加或者减少正在运行的进程数，CHLD表明一个子进程被终止了，在这种情况下master进程会自动重启这个失败的进程。
