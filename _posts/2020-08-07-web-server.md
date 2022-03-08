@@ -1411,8 +1411,8 @@ PS: 如果没有静态资源并且无需反向代理的话，抛弃 Nginx 直接
 - Gunicorn中的worker实际上对应的是**多进程**,默认配置每个worker之间是**独立**存在的进程, worker会实例化一个新的Flask对象跑起来
 
 解决方法：
-- 使用固定的SECRET_KEY，app.config\['SECRET_KEY'] = 'XXXXX'
-- 将session数据存放到数据库中, 如使用redis
+- 使用固定的SECRET_KEY，app.config\['SECRET_KEY'] = 'XXXXX' —— 【注】仅限单机有效，无法解决多机部署同步
+- 将session数据存放到数据库中, 如使用redis —— 【注】多机有效，更靠谱
 这样Gunicorn中使用worker实现的多进程之间就不会出现数据不同步的情况了.
 
 ### 介绍
