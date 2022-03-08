@@ -3887,6 +3887,295 @@ user.save()
 - （9）启动服务器
 
 
+### view 视图
+
+views.py文件：
+
+```python
+from django.http import HttpResponse
+# 视图函数 hello
+def hello(request):
+  # 每个视图函数至少要有一个参数，通常叫request。
+  # 这是一个触发这个视图、包含当前Web请求信息的对象，是类django.http.HttpRequest的一个实例
+  return HttpResponse("Hello world") # 啥也不做，返回一个HttpResponse对象
+
+# ----- 接收参数 ------
+from django.http import Http404, HttpResponse
+import datetime
+# 从url正则里提取的参数offset
+def hours_ahead(request, offset):
+    try:
+        offset = int(offset) # 字符串值转换为整数
+    except ValueError:
+        raise Http404() # 解析错误时，返回404页面
+    dt = datetime.datetime.now() + datetime.timedelta(hours=offset)
+    html = "<html><body>In %s hour(s), it will be %s.</body></html>" % (offset, dt)
+    return HttpResponse(html)
+
+
+```
+
+运行：python manage.py runserver，将看到Django的欢迎页面，而看不到Hello world显示页面。
+- 因为mysite项目还对hello视图一无所知。需要通过一个详细描述的URL来显式的告诉并且激活这个视图。
+
+### 路由
+
+用 URLconf 绑定视图函数和URL
+- RLconf 就像是 Django 所支撑网站**目录**。 
+- 本质是 URL 模式以及要为该 URL 模式调用的视图函数之间的**映射表**。 
+- 以这种方式告诉 Django，对于这个 URL 调用这段代码，对于那个 URL 调用那段代码。
+
+URLconf（即 urls.py 文件）
+
+```python
+from django.conf.urls.defaults import * # Django URLconf的基本构造。 包含了一个patterns函数。
+
+# Uncomment the next two lines to enable the admin:
+# from django.contrib import admin
+# admin.autodiscover()
+
+urlpatterns = patterns('',
+    # Example:
+    # (r'^mysite/', include('mysite.foo.urls')),
+
+    # Uncomment the admin/doc line below and add 'django.contrib.admindocs'
+    # to INSTALLED_APPS to enable admin documentation:
+    # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
+
+    # Uncomment the next line to enable the admin:
+    # (r'^admin/', include(admin.site.urls)),
+)
+# Django 期望能从 ROOT_URLCONF 模块中找到它。 urlpatterns 变量定义了 URL 以及用于处理这些 URL 的代码之间的映射关系。
+
+# -----------
+from django.conf.urls.defaults import * 
+from mysite.views import hello # 引入了 hello 视图
+
+# 所有指向 URL /hello/ 的请求都应由 hello 这个视图函数来处理
+urlpatterns = patterns('',
+    ('^hello/$', hello), # 把hello视图函数作为一个对象传递，而不是调用它
+    (r'^time/plus/(\d+)/$', hours_ahead), # 通配符，提取到offset变量中，如：def hours_ahead(request, offset)
+)
+# ------------ 流线型化(Streamlining)函数导入 -----------
+from django.conf.urls.defaults import *
+# 传入一个包含模块名和函数名的字符串，而不是函数对象本身
+# 使用这个技术，就不必导入视图函数了；Django 会在第一次需要它时根据字符串所描述的视图函数的名字和路径，导入合适的视图函数。
+urlpatterns = patterns('',
+    (r'^hello/$', **'mysite.views.hello'** ),
+    (r'^time/$', **'mysite.views.current_datetime'** ),
+    (r'^time/plus/(d{1,2})/$', **'mysite.views.hours_ahead'** ),
+)
+# 进一步简化：公共前缀提前
+urlpatterns = patterns(**'mysite.views'** ,
+    (r'^hello/$', **'hello'** ),
+    (r'^time/$', **'current_datetime'** ),
+    (r'^time/plus/(d{1,2})/$', **'hours_ahead'** ),
+)
+# 多视图混合
+urlpatterns = patterns('',
+    (r'^hello/$', 'mysite.views.hello'),
+    (r'^time/$', 'mysite.views.current_datetime'),
+    (r'^time/plus/(\d{1,2})/$', 'mysite.views.hours_ahead'),
+    (r'^tag/(\w+)/$', 'weblog.views.tag'),
+)
+# 改进：，分隔开
+urlpatterns = patterns('mysite.views',
+    (r'^hello/$', 'hello'),
+    (r'^time/$', 'current_datetime'),
+    (r'^time/plus/(\d{1,2})/$', 'hours_ahead'),
+)
+urlpatterns += patterns('weblog.views',
+    (r'^tag/(\w+)/$', 'tag'),
+)
+# 改进：使用include
+urlpatterns = patterns('',
+    (r'^(?P<username>\w+)/blog/', include('foo.urls.blog')),
+)
+
+```
+
+### templates 模板
+
+将页面的设计和Python的代码分离开，会更干净简洁更容易维护。 
+- 使用 Django的 **模板系统** (Template System)来实现这种模式
+
+模板是一个文本，用于分离文档的表现形式和内容。 模板定义了占位符以及各种用于规范文档该如何显示的各部分基本逻辑（模板标签）。 模板通常用于产生HTML，但是Django的模板也能产生任何基于文本格式的文档。
+
+```html
+<html>
+<head><title>Ordering notice</title></head>
+
+<body>
+
+<h1>Ordering notice</h1>
+
+<p>Dear \{{ person_name }\},</p>
+<p>Thanks for placing an order from \{{ company }\}. It's scheduled to
+ship on \{{ ship_date|date:"F j, Y" }\}.</p>
+<p>Here are the items you've ordered:</p>
+
+<ul>
+\{% for item in item_list %\}
+    <li>{{ item }}</li>
+\{% endfor %\}
+</ul>
+
+\{% if ordered_warranty %\}
+    <p>Your warranty information will be included in the packaging.</p>
+\{% else %\}
+    <p>You didn't order a warranty, so you're on your own when
+    the products inevitably stop working.</p>
+\{% endif %\}
+
+<p>Sincerely,<br />\{{ company }\}</p>
+
+</body>
+</html>
+```
+
+Django 模板含有很多内置的tags和filters
+- 用两个大括号括起来的文字（例如 \{{ person_name }\} ）称为 `变量`(variable)
+- 被大括号和百分号包围的文本(例如 \{% if ordered_warranty %\} )是 `模板标签`(template tag)
+- filter过滤器是一种最便捷的转换变量输出格式的方式, \{{ship_date\|date:”F j, Y” }\}
+
+使用Django模板的最基本方式如下：
+- 用原始的模板代码字符串创建一个 Template 对象， Django同样支持用指定模板文件路径的方式来创建 Template 对象;
+- 调用模板对象的render方法，并且传入一套变量context。它将返回一个基于模板的展现字符串，模板中的变量和标签会被context值替换。
+
+```python
+from django import template
+t = template.Template('My name is \{{ name }\}.')
+c = template.Context({'name': 'Adrian'}) # 环境变量
+print t.render(c) # My name is Adrian. # 填充模板
+c = template.Context({'name': 'Fred'})
+print t.render(c) # My name is Fred.
+```
+
+句点查找可以多级深度嵌套
+
+句点查找规则可概括为： 当模板系统在变量名中遇到点时，按照以下顺序尝试进行查找：
+- 字典类型查找 （比如 foo["bar"] )
+- 属性查找 (比如 foo.bar )
+- 方法调用 （比如 foo.bar() )
+- 列表类型索引查找 (比如 foo[bar] )
+  - 不能使用负数列表索引！，如 item.-1
+
+
+### model 模型
+
+Web 应用中，主观逻辑经常牵涉到与数据库的交互。 数据库驱动网站 在后台连接数据库服务器，从中取出一些数据，然后在 Web 页面用漂亮的格式展示这些数据。
+
+```python
+from django.shortcuts import render_to_response
+from mysite.books.models import Book
+
+def book_list(request):
+    books = Book.objects.order_by('name')
+    return render_to_response('book_list.html', {'books': books})
+```
+
+把数据存取逻辑、业务逻辑和表现逻辑组合在一起的概念有时被称为软件架构的 Model-View-Controller (MVC)模式。 在这个模式中， Model 代表数据存取层，View 代表的是系统中选择显示什么和怎么显示的部分，Controller 指的是系统中根据用户输入并视需要访问模型，以决定使用哪个视图的那部分。
+
+```python
+# 创建应用books：python manage.py startapp books
+# 
+from django.db import models
+
+class Publisher(models.Model):
+    name = models.CharField(max_length=30)
+    address = models.CharField(max_length=50)
+    city = models.CharField(max_length=60)
+    state_province = models.CharField(max_length=30)
+    country = models.CharField(max_length=50)
+    website = models.URLField()
+
+class Author(models.Model):
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=40)
+    email = models.EmailField()
+
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    authors = models.ManyToManyField(Author) # 多对多字段 叫做 authors 
+    publisher = models.ForeignKey(Publisher)
+    publication_date = models.DateField()
+```
+
+Django 可以根据 model.py 自动生成这些 CREATE TABLE 语句
+- 除非单独指明，否则Django会自动为每个模型生成一个自增长的整数主键字段每个Django模型都要求有单独的主键id
+
+模型激活：在数据库中创建这些表
+- 编辑 settings.py 文件， 找到 INSTALLED_APPS 设置
+- 添加‘mysite.books’ 到 INSTALLED_APPS 的末尾
+- 创建数据库表：
+  - python manage.py validate # 检查语法
+  - python manage.py sqlall books # 执行
+  - python manage.py syncdb # 提交到数据库
+
+
+### form 表单
+
+HttpRequest对象包含当前请求URL的一些信息：
+
+| 属性/方法	| 说明	| 举例 |
+| request.path	| 除域名以外的请求路径，以正斜杠开头	| "/hello/" |
+| request.get_host()	| 主机名（比如，通常所说的域名）	| "127.0.0.1:8000" or "www.example.com" |
+| request.get_full_path()	| 请求路径，可能包含查询字符串	| "/hello/?print=true" |
+| request.is_secure()	| 如果通过HTTPS访问，则此方法返回True， 否则返回False	| True 或者 False |
+
+还有：
+- request.META 是一个Python字典，包含了所有本次HTTP请求的Header信息，比如用户IP地址和用户Agent（通常是浏览器的名称和版本号）。 注意，Header信息的完整列表取决于用户所发送的Header信息和服务器端设置的Header信息。
+- HttpRequest对象还有两个属性包含了用户所提交的信息： request.GET 和 request.POST。二者都是类字典对象，可以通过它们来访问GET和POST数据。
+  - request.GET和request.POST都有get()、keys()和values()方法，你可以用用 for key in request.GET 获取所有的键。
+  - POST数据是来自HTML中的〈form〉标签提交的，而GET数据可能来自〈form〉提交也可能是URL中的查询字符串(the query string)。
+
+view函数里，要始终用这个属性或方法来得到URL，而不要手动输入
+
+```python
+# BAD!
+def current_url_view_bad(request):
+    return HttpResponse("Welcome to the page at /current/")
+# GOOD
+def current_url_view_good(request):
+    return HttpResponse("Welcome to the page at %s" % request.path)
+```
+
+[示例](http://djangobook.py3k.cn/2.0/chapter07/)：
+
+```html
+<html>
+<head>
+    <title>Search</title>
+</head>
+<body>
+    <form action="/search/" method="get">
+        <input type="text" name="q">
+        <input type="submit" value="Search">
+    </form>
+</body>
+</html>
+```
+
+
+```python
+# urls.py
+urlpatterns = patterns('',
+    # ...
+    (r'^search-form/$', views.search_form),
+    (r'^search/$', views.search),  # 指向search方法
+    # ...
+)
+
+# views.py
+def search(request):
+    if 'q' in request.GET:
+        message = 'You searched for: %r' % request.GET['q'] # q 对应html里的input内容
+    else:
+        message = 'You submitted an empty form.'
+    return HttpResponse(message)
+```
+
+
 ### Django+vue
 
 【2022-2-22】[Django+Vue前后端分离实战](https://www.cnblogs.com/zhangxue521/p/12957816.html)
