@@ -1870,6 +1870,95 @@ print u'消耗了{}秒'.format(T)
 
 ## web框架
 
+### 为什么要有web框架？（MVC）
+
+不用框架设计 Python 网页应用程序
+- 最原始、直接的办法是使用CGI标准（1998年流行）。 
+- 从应用角度解释它是如何工作： 
+  - 首先开发一个Python脚本，输出HTML代码
+  - 然后保存成.cgi扩展名的文件，latestbooks.cgi，上传至服务器
+  - 通过浏览器访问此文件。
+
+代码示例：
+
+```python
+#!/usr/bin/env python
+import MySQLdb
+# 输出html内容
+print "Content-Type: text/html\n"
+print "<html><head><title>Books</title></head>"
+print "<body>"
+print "<h1>Books</h1>"
+print "<ul>"
+# 连接数据库
+connection = MySQLdb.connect(user='me', passwd='letmein', db='my_db')
+cursor = connection.cursor()
+cursor.execute("SELECT name FROM books ORDER BY pub_date DESC LIMIT 10")
+# 取数，组装html元素
+for row in cursor.fetchall():
+    print "<li>%s</li>" % row[0]
+
+print "</ul>"
+print "</body></html>"
+# 关闭连接
+connection.close()
+```
+
+简单、直接，易懂，但是带来的问题：
+- 代码冗余：如果多处连接数据库，那每个独立的CGI脚本，不应该重复写数据库连接的代码。 比较实用的办法是写一个共享函数，可被多个代码调用。
+- 开发效率低，容易出错：开发者不用关注如何输出Content-Type以及完成所有操作后去关闭数据库，初始化和释放 相关的工作应该交给一些通用的框架来完成。
+- 不安全：每个页面都分别对应独立的数据库和密码
+- 初学者容易出错：没有Python开发经验的web设计师，页面显示的逻辑与从数据库中读取书本记录分隔开，这样 Web设计师的重新设计不会影响到之前的业务逻辑。
+
+Web框架为应用程序提供了一套程序框架， 这样可以专注于编写清晰、易维护的代码，而无需从头做起。如用django框架实现以上功能：
+- 分成4个Python的文件，(models.py , views.py , urls.py ) 和html模板文件 (latest_books.html )
+
+```python
+# ① models.py (the database tables)
+
+from django.db import models
+
+class Book(models.Model):
+    name = models.CharField(max_length=50)
+    pub_date = models.DateField()
+
+# ② views.py (the business logic)
+from django.shortcuts import render_to_response
+from models import Book
+
+def latest_books(request):
+    book_list = Book.objects.order_by('-pub_date')[:10]
+    return render_to_response('latest_books.html', {'book_list': book_list})
+
+# ③ urls.py (the URL configuration)
+from django.conf.urls.defaults import *
+import views
+
+urlpatterns = patterns('',
+    (r'^latest/$', views.latest_books),
+)
+
+# ④ latest_books.html (the template)
+<html><head><title>Books</title></head>
+<body>
+<h1>Books</h1>
+<ul>
+\{% for book in book_list %\}
+<li>\{{ book.name }\}</li>
+\{% endfor %\}
+</ul>
+</body></html>
+```
+
+不用关心语法细节；只要用心感觉整体的设计。 这里只关注分割后的几个文件：
+- models.py 文件主要用一个 Python 类来描述数据表。 称为 `模型`(model) 。 运用这个类，可以通过简单的 Python 的代码来创建、检索、更新、删除 数据库中的记录而无需写一条又一条的SQL语句。
+- views.py文件包含了页面的**业务逻辑**。 latest_books()函数叫做`视图`。
+- urls.py 指出了什么样的 URL 调用什么的视图。 在这个例子中 /latest/ URL 将会调用 latest_books() 这个函数。 如果你的域名是example.com，任何人浏览网址 http://example.com/latest/ 将会调用latest_books()这个函数。
+- latest_books.html 是 html `模板`，描述了这个页面的设计是如何的。 使用带基本逻辑声明的模板语言，如\{% for book in book_list %\}
+
+这些部分松散遵循的模式称为**模型-视图-控制器**(MVC)。 简单的说， MVC 是一种软件开发的方法，它把代码的定义和数据访问的方法（`模型`）与请求逻辑 （`控制器`）还有用户接口（`视图`）分开来。
+
+
 ### 常见web框架
 
 ![](https://p3.toutiaoimg.com/large/tos-cn-i-qvj2lq49k0/4106964c366b40e390b15fbaed9e7bfe)
