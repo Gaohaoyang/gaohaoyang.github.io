@@ -4175,6 +4175,145 @@ def search(request):
     return HttpResponse(message)
 ```
 
+### Django REST Framework
+
+前后端分离的架构设计越来越流行，业界甚至出现了API优先的趋势。显然API开发已经成为后端程序员的必备技能了，那作为Python程序员特别是把Django作为自己主要的开发框架的程序员，推荐使用Django REST framework（DRF）这个API框架。
+
+Django REST framework（DRF）框架文档齐全，社区较稳定，而且由于它是基于Django这个十分全面的框架而设计开发的，能够让开发者根据自己的业务需要，使用极少的代码量快速的开发一套符合RESTful风格的API，并且还支持自动生成API文档。
+
+[快速入门文档](https://www.django.cn/course/show-20.html)
+
+```shell
+# 创建项目目录mkdir tutorial
+cd tutorial# 创建一个virtualenv来隔离我们本地的包依赖关系virtualenv env
+source env/bin/activate  # 在Windows下使用 `env\Scripts\activate`# 在创建的虚拟环境中安装 Django 和 Django REST frameworkpip install django
+pip install djangorestframework# 创建一个新项目和一个单个应用django-admin.py startproject tutorial .  # 注意结尾的'.'符号cd tutorial
+django-admin.py startapp quickstart
+cd ..
+python manage.py migrate
+python manage.py createsuperuser
+```
+
+#### （1）定义序列化程序
+
+创建一个名为 tutorial/quickstart/serializers.py的文件，用于数据表示。
+
+```python
+from django.contrib.auth.models import User, Group
+from rest_framework import serializers
+
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        fields = ('url', 'username', 'email', 'groups')
+
+
+class GroupSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Group
+        fields = ('url', 'name')
+```
+
+#### （2）编写视图
+
+打开 tutorial/quickstart/views.py 文件开始写视图代码
+
+```python
+from django.contrib.auth.models import User, Group
+from rest_framework import viewsets
+from tutorial.quickstart.serializers import UserSerializer, GroupSerializer
+
+# 将所有常见行为分组写到叫 ViewSets 的类中
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    允许用户查看或编辑的API路径。
+    """
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
+
+class GroupViewSet(viewsets.ModelViewSet):
+    """
+    允许组查看或编辑的API路径。
+    """
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+```
+
+#### 编写路由
+
+在tutorial/urls.py中开始写连接API的URLs。
+
+```python
+from django.conf.urls import url, include
+from rest_framework import routers
+from tutorial.quickstart import views
+
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
+
+# 使用自动URL路由连接我们的API。
+# 另外，我们还包括支持浏览器浏览API的登录URL。
+urlpatterns = [
+    url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+]
+```
+
+#### 全局设置
+
+想打开分页，希望API只能由管理员使用。设置模块都在 tutorial/settings.py 中。
+
+```python
+INSTALLED_APPS = (
+    ...
+    'rest_framework',
+)
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAdminUser',
+    ],
+    'PAGE_SIZE': 10
+}
+```
+
+#### 测试api
+
+命令行启动服务器。
+- python manage.py runserver
+
+现在可以从命令行访问我们的API，使用诸如 curl ...
+
+```shell
+curl -H 'Accept: application/json; indent=4' -u admin:password123 http://127.0.0.1:8000/users/
+# 或使用httpie
+http -a admin:password123 http://127.0.0.1:8000/users/
+# 返回结果
+{
+    "count": 2,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "email": "admin@example.com",
+            "groups": [],
+            "url": "http://127.0.0.1:8000/users/1/",
+            "username": "admin"
+        },
+        {
+            "email": "tom@example.com",
+            "groups": [                ],
+            "url": "http://127.0.0.1:8000/users/2/",
+            "username": "tom"
+        }
+    ]
+}
+```
+
+或直接通过浏览器，转到URL http://127.0.0.1:8000/users/
+- ![](https://www.django.cn/media/upimg/quickstart_20180907202647_560.png)
 
 ### Django+vue
 
