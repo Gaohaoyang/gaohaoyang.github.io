@@ -5178,9 +5178,9 @@ if __name__ == "__main__":
   - ![](https://p9.toutiaoimg.com/origin/pgc-image/61b16a01a9bc46ae88391a5165c8b3e2?from=pc)
 - magic-api（后端）：magic-api 是一个基于 Java 的接口快速开发框架，编写接口将通过 magic-api 提供的 UI 界面完成，自动映射为 HTTP 接口，无需定义 Controller、Service、Dao、Mapper、XML、VO 等 Java 对象即可完成常见的 HTTP API 接口开发。
 
-【2022-3-9】GO语言实现的客户关系管理系统 YAO，开源低代码应用引擎：Yao，无需编写一行代码，即可快速创建 Web 服务和管理后台，大幅解放生产力。该工具内置了一套数据管理系统，通过编写 JSON，帮助开发者完成数据库模型、API 接口编写、管理后台界面搭建等工作，实现 90% 常见界面交互功能。
+【2022-3-9】GO语言实现的客户关系管理系统 YAO，开源低代码应用引擎：Yao，无需编写一行代码，即可快速创建 Web 服务和管理后台，大幅解放生产力。该工具内置了一套数据管理系统，通过编写 JSON，帮助开发者完成数据库模型、API 接口编写、管理后台界面搭建等工作，实现 90% 常见界面交互功能。内置管理系统与 Yao 并不耦合，开发者亦可采用 VUE、React 等任意前端技术实现管理界面。
 - 项目示例 [IoT管理平哪台](https://github.com/YaoApp/yao)：An example of cloud + edge IoT application, an unattended intelligent warehouse management system that supports face recognition and RFID.
-- ![](https://github.com/YaoApp/yao/raw/main/docs/1.intro.png)
+- ![](https://p3.toutiaoimg.com/img/tos-cn-i-qvj2lq49k0/cac9a04840b5412fb20f132603cef688~tplv-obj:1747:960.image?from=post)
 
 ### python生成前端代码
 
