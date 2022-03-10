@@ -5046,7 +5046,6 @@ src下文件：
     main.js # 入口文件
 ```
 
-
 ### MVVM模式
 
 [Vue.js 60分钟快速入门](https://www.cnblogs.com/keepfool/p/5619070.html)
