@@ -4945,6 +4945,17 @@ Yarn 是为了弥补 npm 的一些缺陷而出现的：
 
 Yarn 没想要完全替代 npm，它只是一个新的 CLI 工具，拉取的 packages 依然来自 npm 仓库。仓库本身不会变，所以获取或者发布模块的时候和原来一样。
 
+### vue安装
+
+1. 安装nodejs，命令行输入 node –v检测安装是否成功
+2. 安装vue-cli脚手架：npm i -g @vue/cli-init,命令行输入 vue –v检测安装是否成功
+3. 新建项目vue init webpack myVue
+4. 打开项目文件夹 myVue，npm install 下载依赖
+5. 运行项目 npm start
+
+项目结构：
+- ![](https://p26.toutiaoimg.com/img/tos-cn-i-qvj2lq49k0/a82831d256f94bea8bcaaa301a4470b6~tplv-obj:1067:1858.image?from=post)
+
 ### vue示例
 
 简易示例：
@@ -4982,6 +4993,9 @@ new Vue({
 
 
 ### vue目录结构
+
+Vue项目结构：
+- ![](https://p26.toutiaoimg.com/img/tos-cn-i-qvj2lq49k0/a82831d256f94bea8bcaaa301a4470b6~tplv-obj:1067:1858.image?from=post)
 
 顶级目录：
 
@@ -5045,6 +5059,34 @@ ViewModel是Vue.js的核心，它是一个Vue实例。Vue实例是作用于某�
 - 首先，我们将上图中的DOM Listeners和Data Bindings看作两个工具，它们是实现双向绑定的关键。
 - 从View侧看，ViewModel中的DOM Listeners工具会帮我们监测页面上DOM元素的变化，如果有变化，则更改Model中的数据；
 - 从Model侧看，当我们更新Model中的数据时，Data Bindings工具会帮我们更新页面中的DOM元素。
+
+【2022-3-10】[图解vue的MVVM架构](https://www.toutiao.com/w/i1726646484331596)
+
+Vue是MVVM架构，响应式，轻量级框架。
+
+主要特点：
+- 1、轻量级
+- 2、双向数据绑定
+- 3、指令
+- 4、组件化
+- 5、客户端路由
+- 6、状态管理
+
+MVVM架构是指：
+- 数据层（Model）：应用数据以及逻辑。
+- 视图层（View）：页面UI组件。
+- 视图数据模型（ViewModel）：数据与视图关联起来，数据和 DOM 已经建立了关联，是响应式的，使编程人员脱离复杂的界面操作
+  - ViewModel主要功能是实现数据双向绑定：
+  - 1.数据变化后更新视图
+  - 2.视图变化后更新数据
+
+与jQuery比较会更清晰：
+- jQuery想要修改界面中某个标签，需要以下几步：
+  1. 搜索web页面DOM树 
+  2. 根据选择器选择到DOM  
+  3. 将数据更新到节点
+
+![](https://p9.toutiaoimg.com/img/tos-cn-i-qvj2lq49k0/b963a949aab044f8acd8a2bc50f8d3f0~tplv-obj:2002:2009.image?from=post)
 
 ### vue语法
 
