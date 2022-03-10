@@ -2074,6 +2074,33 @@ func BenchmarkAdd(b *testing.B) {  
 
 ## Web服务
 
+### caddy
+
+【2022-3-10】[自带 HTTPS 的开源 Web 服务器](https://www.toutiao.com/i7064892846268006924/)
+
+常见的开源 Web 服务器有久负盛名的 `Apache`、性能强劲的 `Nginx`。
+
+采用 Go 编写的 Web 服务端“后起之秀”：[Caddy](github.com/caddyserver/caddy)
+- 拥有下载无需安装就能用、零配置实现 HTTPS 等特点，从而在强者如云的 Web 服务器中占据了一席之地。
+- Caddy 凭借无需额外配置自动 HTTPS，分分钟完成 HTTPS 站点搭建，使它成为了中小型 Web 服务的首选服务器。Caddy 深受开源爱好者们的喜爱，2014 年开源至今共收获了 3.6 万颗星。
+
+Caddy 可以在 Linux、Mac、Windows 上快速部署 http(s) 站点或反向代理服务。支持：
+- HTTP/1.1 和 HTTP/2
+- 同时接受 HTTPS 自动签发和手动管理
+- 虚拟主机 (多个站点工作在单个端口上)
+- 原生 IPv4 和 IPv6 支持
+- 静态文件分发
+- 平滑重启/重载
+- 反向代理 (HTTP 或 WebSocket)
+- 负载均衡和健康性检查
+- Markdown 渲染
+- 文件浏览服务
+与传统的 Nginx 或者 Apache 相比，Caddy 整体只有一个可执行文件，安装便捷不易出现奇怪的依赖问题，配置文件结构清晰语法简单易于上手，依托于模块化架构可以使用 Go 语言快速开发扩展模块。
+
+![](https://p6.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/e02138991e5346baa4d53e43fedc5bbb?from=pc)
+
+### 输入提示
+
 【2022-1-19】用go实现输入提示功能，[suggestion代码](https://github.com/wklken/suggestion);
 - 在搜索输入框等位置,用户输入关键词,系统提示可以使用的关键字,提升用户体验
 - ![](https://raw.githubusercontent.com/wklken/gallery/master/suggestion/suggestion.gif)
