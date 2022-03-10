@@ -165,18 +165,15 @@ mathjax: true
 |潜隐记忆|我们也会把真实的记忆误认为是想象|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F4130c577j00r4h6v50009d20064008ug0064008u.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |Greg以为他去了墓地，但他确定自己只是做了个很可怕的梦|
 |聚类错觉|我们会在原本随机的数据信息中发现模式和规律|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F18dad893j00r4h6v60006d20060008yg0060008y.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  |Alice！你看那朵云彩好像你的猫啊！|
 |悲观偏见|我们有时候会高估坏结果的概率|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2Ffd21861cj00r4h6v60007d20066008wg0066008w.jpg&thumbnail=650x2147483647&quality=80&type=jpg) |“水只剩半杯了，啥都不会变好了。”|
-|乐观偏见|我们有时候会对好结果过于乐观| 
-![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F96153aa5j00r4h6v60006d2005z008sg005z008s.jpg&thumbnail=650x2147483647&quality=80&type=jpg) |“水还有半杯呢，一切都会好起来的！”|
+|乐观偏见|我们有时候会对好结果过于乐观| ![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F96153aa5j00r4h6v60006d2005z008sg005z008s.jpg&thumbnail=650x2147483647&quality=80&type=jpg) |“水还有半杯呢，一切都会好起来的！”|
 |偏见盲点|人们不认为自己有偏见，还会觉得别人比我们自己更偏激|![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F0c6571b3j00r4h6v60007d20061008qg0061008q.jpg&thumbnail=650x2147483647&quality=80&type=jpg) |“我没有偏见！”|
 
- 
 怎么说呢，似乎每个人都能在这些偏见当中找到自己曾经的影子。就比如……“谁会看这个啊！”
 - ![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1222%2F1fd38bbaj00r4h6v70007d200ct0038g00ct0038.jpg&thumbnail=650x2147483647&quality=80&type=jpg)  
  
 ref：
 - [原文](https://www.titlemax.com/discovery-center/lifestyle/50-cognitive-biases-to-be-aware-of-so-you-can-be-the-very-best-version-of-you/)
 - [twitter](https://twitter.com/elonmusk/status/1472649843713757189)
-
 
 
 # 什么是逻辑
