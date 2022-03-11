@@ -1943,9 +1943,9 @@ urlpatterns = patterns('',
 <body>
 <h1>Books</h1>
 <ul>
-\{% for book in book_list %\}
+{ % for book in book_list % }
 <li>\{{ book.name }\}</li>
-\{% endfor %\}
+{ % endfor % }
 </ul>
 </body></html>
 ```
@@ -1954,7 +1954,7 @@ urlpatterns = patterns('',
 - models.py 文件主要用一个 Python 类来描述数据表。 称为 `模型`(model) 。 运用这个类，可以通过简单的 Python 的代码来创建、检索、更新、删除 数据库中的记录而无需写一条又一条的SQL语句。
 - views.py文件包含了页面的**业务逻辑**。 latest_books()函数叫做`视图`。
 - urls.py 指出了什么样的 URL 调用什么的视图。 在这个例子中 /latest/ URL 将会调用 latest_books() 这个函数。 如果你的域名是example.com，任何人浏览网址 http://example.com/latest/ 将会调用latest_books()这个函数。
-- latest_books.html 是 html `模板`，描述了这个页面的设计是如何的。 使用带基本逻辑声明的模板语言，如\{% for book in book_list %\}
+- latest_books.html 是 html `模板`，描述了这个页面的设计是如何的。 使用带基本逻辑声明的模板语言，如{ % for book in book_list % }
 
 这些部分松散遵循的模式称为**模型-视图-控制器**(MVC)。 简单的说， MVC 是一种软件开发的方法，它把代码的定义和数据访问的方法（`模型`）与请求逻辑 （`控制器`）还有用户接口（`视图`）分开来。
 
@@ -4015,17 +4015,17 @@ ship on \{{ ship_date|date:"F j, Y" }\}.</p>
 <p>Here are the items you've ordered:</p>
 
 <ul>
-\{% for item in item_list %\}
+{ % for item in item_list % }
     <li>{{ item }}</li>
-\{% endfor %\}
+{ % endfor % }
 </ul>
 
-\{% if ordered_warranty %\}
+{ % if ordered_warranty % }
     <p>Your warranty information will be included in the packaging.</p>
-\{% else %\}
+{ % else % }
     <p>You didn't order a warranty, so you're on your own when
     the products inevitably stop working.</p>
-\{% endif %\}
+{ % endif % }
 
 <p>Sincerely,<br />\{{ company }\}</p>
 
@@ -4035,7 +4035,7 @@ ship on \{{ ship_date|date:"F j, Y" }\}.</p>
 
 Django 模板含有很多内置的tags和filters
 - 用两个大括号括起来的文字（例如 \{{ person_name }\} ）称为 `变量`(variable)
-- 被大括号和百分号包围的文本(例如 \{% if ordered_warranty %\} )是 `模板标签`(template tag)
+- 被大括号和百分号包围的文本(例如 { % if ordered_warranty % } )是 `模板标签`(template tag)
 - filter过滤器是一种最便捷的转换变量输出格式的方式, \{{ship_date\|date:”F j, Y” }\}
 
 使用Django模板的最基本方式如下：
