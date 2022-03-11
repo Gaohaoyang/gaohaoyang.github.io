@@ -1944,7 +1944,7 @@ urlpatterns = patterns('',
 <h1>Books</h1>
 <ul>
 { % for book in book_list % }
-<li>\{{ book.name }\}</li>
+<li>{ { book.name } }</li>
 { % endfor % }
 </ul>
 </body></html>
