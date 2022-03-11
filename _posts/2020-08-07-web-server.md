@@ -2157,7 +2157,7 @@ html文件调用变量
 - ![](https://pic1.zhimg.com/80/v2-b03185816de1197a546da550d12aa4d4_1440w.jpg)
 
 模板中使用变量：
-- 在 html 中定义 \{\{ 变量名 \}\}
+- 在 html 中定义 \{\{ 变量名 \} }
 - 在 flask 中设定变量的key 和 value：render_template('index.html', name="张三")
 
 #### 改进：缓存
@@ -2878,7 +2878,7 @@ def post_data():
     
     # 将 DataFrame  数据再次打包为 JSON 并传回
     # 方法一
-    res = '\{\{"obj": {} \}\}'.format(res.to_json(orient = "records", force_ascii = False))
+    res = '\{\{"obj": {} \} }'.format(res.to_json(orient = "records", force_ascii = False))
     # 方法二
     # res = jsonify({"obj":res.to_json(orient = "records", force_ascii = False)})
     
@@ -3434,7 +3434,7 @@ flower监控面板
 
 在jinja2中，存在三种语法：
 - 1、控制结构 { % % }
-- 2、变量取值 \{\{ \}\}
+- 2、变量取值 \{\{ \} }
 - 3、注释 \{\# \#\}
 
 jinja2支持python中所有的Python数据类型比如列表、字段、对象等
@@ -3445,8 +3445,8 @@ if/for控制语句
 - 跟python很像，只是需要添加：大括号+百分号
 - ![](https://pic2.zhimg.com/80/v2-7c8b008840b966bee55a1ae71caf5e11_720w.jpg)
 
-Jinja2的for循环变量不需要\{\{ \}\}传入，不支持continue和break，但是和Python一样可以对Python的可迭代对象进行循环遍历。
-- 每一次循环的对象是一个字段，使用.key直接拿到value值，如：\{\{ good.name \}\}，或 \{\{ good[ "name" ] \}\}
+Jinja2的for循环变量不需要\{\{ \} }传入，不支持continue和break，但是和Python一样可以对Python的可迭代对象进行循环遍历。
+- 每一次循环的对象是一个字段，使用.key直接拿到value值，如：\{\{ good.name \} }，或 \{\{ good[ "name" ] \} }
 - 问题：如果不知道字典中key呢？当做list遍历key即可
 
 在一个循环代码块内部调用loop的属性可以获得循环中的状态数据
@@ -4009,9 +4009,9 @@ urlpatterns = patterns('',
 
 <h1>Ordering notice</h1>
 
-<p>Dear \{{ person_name }\},</p>
-<p>Thanks for placing an order from \{{ company }\}. It's scheduled to
-ship on \{{ ship_date|date:"F j, Y" }\}.</p>
+<p>Dear { { person_name } },</p>
+<p>Thanks for placing an order from { { company } }. It's scheduled to
+ship on { { ship_date|date:"F j, Y" } }.</p>
 <p>Here are the items you've ordered:</p>
 
 <ul>
@@ -4027,16 +4027,16 @@ ship on \{{ ship_date|date:"F j, Y" }\}.</p>
     the products inevitably stop working.</p>
 { % endif % }
 
-<p>Sincerely,<br />\{{ company }\}</p>
+<p>Sincerely,<br />{ { company } }</p>
 
 </body>
 </html>
 ```
 
 Django 模板含有很多内置的tags和filters
-- 用两个大括号括起来的文字（例如 \{{ person_name }\} ）称为 `变量`(variable)
+- 用两个大括号括起来的文字（例如 { { person_name } } ）称为 `变量`(variable)
 - 被大括号和百分号包围的文本(例如 { % if ordered_warranty % } )是 `模板标签`(template tag)
-- filter过滤器是一种最便捷的转换变量输出格式的方式, \{{ship_date\|date:”F j, Y” }\}
+- filter过滤器是一种最便捷的转换变量输出格式的方式, { {ship_date\|date:”F j, Y” } }
 
 使用Django模板的最基本方式如下：
 - 用原始的模板代码字符串创建一个 Template 对象， Django同样支持用指定模板文件路径的方式来创建 Template 对象;
@@ -4044,7 +4044,7 @@ Django 模板含有很多内置的tags和filters
 
 ```python
 from django import template
-t = template.Template('My name is \{{ name }\}.')
+t = template.Template('My name is { { name } }.')
 c = template.Context({'name': 'Adrian'}) # 环境变量
 print t.render(c) # My name is Adrian. # 填充模板
 c = template.Context({'name': 'Fred'})
@@ -5339,7 +5339,7 @@ if __name__ == "__main__":
 ```
 
 最终效果
-- 由于flask采用的是jinja模板，也就是采用\{\{\}\}模式与web页面交互，因此会与vue的默认分隔符号相冲突，因此在script里需要修改delimiters: [ "[["," ]]"]。当然还有其他修改方式，这里推荐的也是相对简单的方法。
+- 由于flask采用的是jinja模板，也就是采用\{\{\} }模式与web页面交互，因此会与vue的默认分隔符号相冲突，因此在script里需要修改delimiters: [ "[["," ]]"]。当然还有其他修改方式，这里推荐的也是相对简单的方法。
 - ![](https://cdn.jsdelivr.net/gh/Baiyuetribe/yyycode@dev/img/20/yyycode_com20200924113511.png)
 
 ## 低代码平台
