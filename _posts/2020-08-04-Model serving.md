@@ -988,14 +988,14 @@ Tensorflow Serving 内部的工作流如下图所示。
 ### 解决依赖
 
 - 若使用 Python 作为 Client , 安装对应包即可：
-    - pip install tensorflow-serving-api
+  - pip install tensorflow-serving-api
 - 若使用 Java 作为 Client，则需要编译 proto 文件，好处是用户可以编译自定义的API。编译流程参考了[前人文档](https://github.com/junwan01/tensorflow-serve-client)，此外还有一些要注意的点
-    - 获取 protobuf 文件
-        - 注意版本问题，因为由 .proto 文件编译出来的 java class 依赖 tensorflow的 jar 包，可能存在不兼容问题
-    - 生成 Java 源码
-        - 向maven项目中添加依赖
-        - 安装 protoc 工具
-        - 编译protobuf文件，两种方法可选择，通过插件编译或者手动编译
+  - 获取 protobuf 文件
+    - 注意版本问题，因为由 .proto 文件编译出来的 java class 依赖 tensorflow的 jar 包，可能存在不兼容问题
+  - 生成 Java 源码
+    - 向maven项目中添加依赖
+    - 安装 protoc 工具
+    - 编译protobuf文件，两种方法可选择，通过插件编译或者手动编译
 
 ### Client编写
 
@@ -1011,10 +1011,10 @@ Tensorflow Serving 内部的工作流如下图所示。
 ### 性能测试
 
 - 以文本分类任务为例，这边一共训练了四个模型，基本覆盖了主流网络结构（Cnn/Rnn/Transformer）：
-    - Fast text
-    - Text Cnn
-    - Rcnn (1 layer Bilstm + pooling)
-    - BERT (12 layer)
+  - Fast text
+  - Text Cnn
+  - Rcnn (1 layer Bilstm + pooling)
+  - BERT (12 layer)
 - 此外，还针对单线程和多线程请求作了对比测试。
 
 
