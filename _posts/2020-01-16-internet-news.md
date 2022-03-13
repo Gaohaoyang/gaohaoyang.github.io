@@ -945,6 +945,54 @@ mathjax: true
 
 ![](https://pic4.zhimg.com/80/v2-2829edce6aed0ad09500a1a4ce74baeb_1440w.jpg)
 
+## 腾讯
+
+### 信息
+
+【2022-3-12】听说pcg裁员4000（20-25%），csig裁员2000（20-25%），腾讯一共60k的人，每个组抽人杀，或者整个组可能over
+
+### 管理层
+
+管理层
+- 董事长、CEO：马化腾
+- 总裁：刘炽平
+- 首席信息官：许晨晔
+- 首席运营官：任宇昕
+- 首席战略官、SEVP：James Mitchell
+- 首席探索官、SEVP：网大为
+- 首席财务官、SEVP：罗硕瀚
+
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X2pwZy9WZk9ZTzF5cWhtNkZpY2E4S2ljTE1wSHNCOHdMQ3BWaWJDc1l5SmpHTUYyaWJiTXhmVTJnY0VxQktUVmxlMmRlS0psZmlhaWJ3VGliankzQnp5RFNUUXJqQkNWaWNRLzY0MA?x-oss-process=image/format,png)
+
+### 腾讯组织架构
+
+- [七大事业群](https://blog.csdn.net/kymdidicom/article/details/111503565)
+  - 企业发展事业群（`CDG`）
+  - 互动娱乐事业群（`IEG`）
+  - 技术工程事业群（`TEG`）
+  - 微信事业群（`WXG`）；
+  - 移动互联网事业群（`MIG`）
+  - 社交网络事业群（`SNG`）
+  - 网络媒体事业群（`OMG`）
+- 2018年9月29日，腾讯宣布在BU化的基础上进行组织架构调整，将原有七大事业群调整为六大事业群
+  - 解散MIG/SNG/OMG，新成立云与智慧产业事业群（CSIG）、平台与内容事业群（PCG）。其中CSIG主要将整合包括腾讯云、智慧零售、安全产品、腾讯地图、优图等核心产品线以及医疗、教育、交通、LBS等行业解决方案，面向产业，负责人汤道生；PCG主要包括QQ、QQ空间、浏览器、网络文学影音、腾讯视频、腾讯体育、腾讯影业、腾讯新闻、天天快报等内容业务，负责人任宇昕。IEG将进行剥离，只保留游戏业务；将成立技术委员会，协调内部创新，提高技术资源利用效率，鼓励技术研发文化。
+  - `CDG`：Corporate Development Group。**企业发展**事业群
+    - CDG作为公司新业务孵化和新业态探索的平台，负责推动包括基础支付、金融应用内的金融科技业务、广告营销服务等重要领域的发展和创新。同时作为专业支持平台，为公司及各事业群提供战略规划、投资并购、国际拓展、市场公关等专业支持。
+  - `IEG`：Interactive Entertainment Group。**互动娱乐**事业群
+    - 负责公司游戏、电竞等互动娱乐业务的研发、运营与发展。诵过系统性研究及前沿科技的探索和应用，不断为户创造更高品质的互动娱乐内容体验，助力公司在全球互动娱乐领域取得领先地位，并朕动公司相关业务共建繁荣向上的内容生态。
+  - `TEG`：Technology and Engineering Group。**技术工程**事业群
+    - 负责为公司及各事业群提供技术及运营平台支持，负责研发管理和数据中心的建设与运营，并为用户提供全线产品和客户服务。同时牵头腾讯技术委员会，通过内部分布式开源协同，加强基础研发，建设技术中台等措施，支持业务创新。
+  - `WXG`：Weixin Group。**微信**事业群
+    - 负责微信生态体系的搭建和运营，依托微信基础产品，以及微信公众平台、小程序、微信支付、企业微信、微信搜索等开放平台，为各行各业的智慧化升级提供解决方案和连接能力。同时负责QQ邮箱、微信读书等产品的开发及运营。
+  - `CSIG`：Cloud and Smart Industries Group。**云与智慧产业**事业群
+    - 负责推进公司云与产业互联网战略，依托云、AI等技术创新，打造智慧产业升级方案，探索用户与产业的创新互动，助力零售、医疗、教育、交通等产业数字化升级，同时协助企业更智能地服务用户，构建连接户与商业的智能产业新生态。
+  - `PCG`：Platform and Content Group。**平台与内容**事业群
+    - 负责公司互朕网平台和内容文化生态融合发展，整合QQ、QQ空间等社交平台，和应宝、浏览器等流量平台，以及新闻资讯、视频、体育、直播、动漫、影业等内容业务，推动IP跨平台、多形态发展，为更多户创造海量的优质数字内容体验。
+- ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X2pwZy9WZk9ZTzF5cWhtNkZpY2E4S2ljTE1wSHNCOHdMQ3BWaWJDc2liZlFIQVlJQUdkaWJLb1VUYjEzcmhZNUlyS2U4QTJlWjZIRzNqa1dZbWpLZFFCMkgwUXRmVjlBLzY0MA?x-oss-process=image/format,png)
+
+原文链接：https://blog.csdn.net/kymdidicom/article/details/111503565
+
+
 ## 阿里
 
 【2021-11-17】一个支付宝的朋友跟我说，支付宝今年困难重重，鸭梨山大
