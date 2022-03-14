@@ -412,7 +412,7 @@ X86电脑因考虑要适应各种应用的需求，其发展思路是：性能+�
 ## 操作系统基本架构
 
 [操作系统初识](https://www.jianshu.com/p/d46d82238518)
-- ![](https://upload-images.jianshu.io/upload_images/2111160-98608484cd10d510.jpg?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp)
+- ![](https://upload-images.jianshu.io/upload_images/2111160-98608484cd10d510.jpg)
 
 
 ## 进程、线程、协程
