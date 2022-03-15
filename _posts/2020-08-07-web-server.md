@@ -4221,6 +4221,8 @@ ORM：Object Relational Mapping(关系对象映射)
 - 类属性对应 --> 数据库里的字段
 - 类实例对应 --> 数据库表里的一行数据
 
+![](https://images2018.cnblogs.com/blog/1308093/201805/1308093-20180510154540784-44644315.png)
+
 obj.id  obj.name.....类实例对象的属性
 
 Django orm的优势：
