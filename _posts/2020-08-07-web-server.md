@@ -54,6 +54,11 @@ HTTP常见的方法：
 - 响应三要素
   - ![](https://img-blog.csdn.net/20180824101548255)
 
+## URL
+
+【2022-3-15】[图解浏览器URL构成](https://www.toutiao.com/w/i1727282566350855)
+- ![](https://p6.toutiaoimg.com/img/tos-cn-i-qvj2lq49k0/df328540238d4940ab1e779194f9135a~tplv-obj:1200:673.image?from=post)
+
 
 ## post/get参数获取
 
