@@ -54,6 +54,11 @@ HTTP常见的方法：
 - 响应三要素
   - ![](https://img-blog.csdn.net/20180824101548255)
 
+## URL
+
+【2022-3-15】[图解浏览器URL构成](https://www.toutiao.com/w/i1727282566350855)
+- ![](https://p6.toutiaoimg.com/img/tos-cn-i-qvj2lq49k0/df328540238d4940ab1e779194f9135a~tplv-obj:1200:673.image?from=post)
+
 
 ## post/get参数获取
 
@@ -1943,9 +1948,9 @@ urlpatterns = patterns('',
 <body>
 <h1>Books</h1>
 <ul>
-\{% for book in book_list %\}
-<li>\{{ book.name }\}</li>
-\{% endfor %\}
+{ % for book in book_list % }
+<li>{ { book.name } }</li>
+{ % endfor % }
 </ul>
 </body></html>
 ```
@@ -1954,7 +1959,7 @@ urlpatterns = patterns('',
 - models.py 文件主要用一个 Python 类来描述数据表。 称为 `模型`(model) 。 运用这个类，可以通过简单的 Python 的代码来创建、检索、更新、删除 数据库中的记录而无需写一条又一条的SQL语句。
 - views.py文件包含了页面的**业务逻辑**。 latest_books()函数叫做`视图`。
 - urls.py 指出了什么样的 URL 调用什么的视图。 在这个例子中 /latest/ URL 将会调用 latest_books() 这个函数。 如果你的域名是example.com，任何人浏览网址 http://example.com/latest/ 将会调用latest_books()这个函数。
-- latest_books.html 是 html `模板`，描述了这个页面的设计是如何的。 使用带基本逻辑声明的模板语言，如\{% for book in book_list %\}
+- latest_books.html 是 html `模板`，描述了这个页面的设计是如何的。 使用带基本逻辑声明的模板语言，如{ % for book in book_list % }
 
 这些部分松散遵循的模式称为**模型-视图-控制器**(MVC)。 简单的说， MVC 是一种软件开发的方法，它把代码的定义和数据访问的方法（`模型`）与请求逻辑 （`控制器`）还有用户接口（`视图`）分开来。
 
@@ -2157,7 +2162,7 @@ html文件调用变量
 - ![](https://pic1.zhimg.com/80/v2-b03185816de1197a546da550d12aa4d4_1440w.jpg)
 
 模板中使用变量：
-- 在 html 中定义 \{\{ 变量名 \}\}
+- 在 html 中定义 \{\{ 变量名 \} }
 - 在 flask 中设定变量的key 和 value：render_template('index.html', name="张三")
 
 #### 改进：缓存
@@ -2878,7 +2883,7 @@ def post_data():
     
     # 将 DataFrame  数据再次打包为 JSON 并传回
     # 方法一
-    res = '\{\{"obj": {} \}\}'.format(res.to_json(orient = "records", force_ascii = False))
+    res = '\{\{"obj": {} \} }'.format(res.to_json(orient = "records", force_ascii = False))
     # 方法二
     # res = jsonify({"obj":res.to_json(orient = "records", force_ascii = False)})
     
@@ -3434,7 +3439,7 @@ flower监控面板
 
 在jinja2中，存在三种语法：
 - 1、控制结构 { % % }
-- 2、变量取值 \{\{ \}\}
+- 2、变量取值 \{\{ \} }
 - 3、注释 \{\# \#\}
 
 jinja2支持python中所有的Python数据类型比如列表、字段、对象等
@@ -3445,8 +3450,8 @@ if/for控制语句
 - 跟python很像，只是需要添加：大括号+百分号
 - ![](https://pic2.zhimg.com/80/v2-7c8b008840b966bee55a1ae71caf5e11_720w.jpg)
 
-Jinja2的for循环变量不需要\{\{ \}\}传入，不支持continue和break，但是和Python一样可以对Python的可迭代对象进行循环遍历。
-- 每一次循环的对象是一个字段，使用.key直接拿到value值，如：\{\{ good.name \}\}，或 \{\{ good[ "name" ] \}\}
+Jinja2的for循环变量不需要\{\{ \} }传入，不支持continue和break，但是和Python一样可以对Python的可迭代对象进行循环遍历。
+- 每一次循环的对象是一个字段，使用.key直接拿到value值，如：\{\{ good.name \} }，或 \{\{ good[ "name" ] \} }
 - 问题：如果不知道字典中key呢？当做list遍历key即可
 
 在一个循环代码块内部调用loop的属性可以获得循环中的状态数据
@@ -3889,6 +3894,8 @@ user.save()
 
 ### view 视图
 
+#### view
+
 views.py文件：
 
 ```python
@@ -3911,12 +3918,15 @@ def hours_ahead(request, offset):
     dt = datetime.datetime.now() + datetime.timedelta(hours=offset)
     html = "<html><body>In %s hour(s), it will be %s.</body></html>" % (offset, dt)
     return HttpResponse(html)
-
-
 ```
 
 运行：python manage.py runserver，将看到Django的欢迎页面，而看不到Hello world显示页面。
 - 因为mysite项目还对hello视图一无所知。需要通过一个详细描述的URL来显式的告诉并且激活这个视图。
+
+#### viewset
+
+针对同个资源的查询, 只是数量不同, 却需要定义两个不同的类视图, 太过冗余，于是, 视图集出现了, 它的作用就是将对同一资源的不同请求方式整合到一个视图当中.
+
 
 ### 路由
 
@@ -4009,34 +4019,34 @@ urlpatterns = patterns('',
 
 <h1>Ordering notice</h1>
 
-<p>Dear \{{ person_name }\},</p>
-<p>Thanks for placing an order from \{{ company }\}. It's scheduled to
-ship on \{{ ship_date|date:"F j, Y" }\}.</p>
+<p>Dear { { person_name } },</p>
+<p>Thanks for placing an order from { { company } }. It's scheduled to
+ship on { { ship_date|date:"F j, Y" } }.</p>
 <p>Here are the items you've ordered:</p>
 
 <ul>
-\{% for item in item_list %\}
+{ % for item in item_list % }
     <li>{{ item }}</li>
-\{% endfor %\}
+{ % endfor % }
 </ul>
 
-\{% if ordered_warranty %\}
+{ % if ordered_warranty % }
     <p>Your warranty information will be included in the packaging.</p>
-\{% else %\}
+{ % else % }
     <p>You didn't order a warranty, so you're on your own when
     the products inevitably stop working.</p>
-\{% endif %\}
+{ % endif % }
 
-<p>Sincerely,<br />\{{ company }\}</p>
+<p>Sincerely,<br />{ { company } }</p>
 
 </body>
 </html>
 ```
 
 Django 模板含有很多内置的tags和filters
-- 用两个大括号括起来的文字（例如 \{{ person_name }\} ）称为 `变量`(variable)
-- 被大括号和百分号包围的文本(例如 \{% if ordered_warranty %\} )是 `模板标签`(template tag)
-- filter过滤器是一种最便捷的转换变量输出格式的方式, \{{ship_date\|date:”F j, Y” }\}
+- 用两个大括号括起来的文字（例如 { { person_name } } ）称为 `变量`(variable)
+- 被大括号和百分号包围的文本(例如 { % if ordered_warranty % } )是 `模板标签`(template tag)
+- filter过滤器是一种最便捷的转换变量输出格式的方式, { {ship_date\|date:”F j, Y” } }
 
 使用Django模板的最基本方式如下：
 - 用原始的模板代码字符串创建一个 Template 对象， Django同样支持用指定模板文件路径的方式来创建 Template 对象;
@@ -4044,7 +4054,8 @@ Django 模板含有很多内置的tags和filters
 
 ```python
 from django import template
-t = template.Template('My name is \{{ name }\}.')
+
+t = template.Template('My name is { { name } }.')
 c = template.Context({'name': 'Adrian'}) # 环境变量
 print t.render(c) # My name is Adrian. # 填充模板
 c = template.Context({'name': 'Fred'})
@@ -4062,6 +4073,172 @@ print t.render(c) # My name is Fred.
 
 
 ### model 模型
+
+#### 1. 创建数据库
+
+创建数据库 （注意设置 数据的字符编码）
+- 由于Django自带的orm是data_first类型的ORM，使用前必须先创建数据库
+
+```sql
+create database day70 default character set utf8 collate utf8_general_ci;
+```
+
+#### 2. 数据库设置
+
+修改project中的settings.py文件中设置；
+- 连接 MySQL数据库（Django默认使用的是sqllite数据库）
+
+```python
+DATABASES = {
+    'default': {
+    'ENGINE': 'django.db.backends.mysql',
+    'NAME':'day70',
+    'USER': 'eric',
+    'PASSWORD': '123123',
+    'HOST': '192.168.182.128',
+    'PORT': '3306',
+    }
+}
+# 增加以下语句，可以查看orm操作执行的原生SQL语句
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console':{
+            'level':'DEBUG',
+            'class':'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level':'DEBUG',
+        },
+    }
+}
+```
+
+#### 3.  修改mysql默认方式
+
+修改project 中的__init__py 文件设置 Django默认连接MySQL的方式
+
+```python
+import pymysql
+pymysql.install_as_MySQLdb()
+```
+
+#### 4. 注册
+
+setings文件注册APP
+
+```python
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'app01.apps.App01Config',
+]
+```
+
+#### 5. models.py创建表
+
+```python
+# 新增字段可以为空（免得迁移时报错）
+startdate = models.CharField(max_length=255, verbose_name="任务开始时间",null=True, blank=True)
+# （1）字符串类
+name=models.CharField(max_length=32)
+# models.CharField  对应的是MySQL的varchar数据类型
+# char 和 varchar的区别 :
+# char和varchar的共同点是存储数据的长度，不能 超过max_length限制，
+# 不同点是varchar根据数据实际长度存储，char按指定max_length（）存储数据；所有前者更节省硬盘空间；
+# 详情：
+EmailField(CharField)：
+IPAddressField(Field)
+URLField(CharField)
+SlugField(CharField)
+UUIDField(Field)
+FilePathField(Field)
+FileField(Field)
+ImageField(FileField)
+CommaSeparatedIntegerField(CharField)
+# （2）时间字段
+models.DateTimeField(null=True)
+date=models.DateField()
+# （3）数字字段
+(max_digits=30,decimal_places=10)总长度30小数位 10位）
+# 数字：
+num = models.IntegerField()
+num = models.FloatField() # 浮点
+price=models.DecimalField(max_digits=8,decimal_places=3) # 精确浮点
+ # （4）枚举字段
+ choice=(
+        (1,'男人'),
+        (2,'女人'),
+        (3,'其他')
+    )
+lover=models.IntegerField(choices=choice) #枚举类型
+# （5）其它字段
+db_index = True # 表示设置索引
+unique(唯一的意思) = True # 设置唯一索引
+# 联合唯一索引
+class Meta:
+unique_together = (
+ ('email','ctime'),
+)
+# 联合索引（不做限制）
+index_together = (
+('email','ctime'),
+)
+ManyToManyField(RelatedField)  #多对多操作
+```
+
+更多字段介绍见[原文](https://www.cnblogs.com/sss4/articles/7070942.html)
+
+
+
+#### 6. 数据迁移
+
+在winds cmd或者Linux shell的项目的manage.py目录下执行
+
+```shell
+python manage.py makemigrations  # 把你写在models中的代码翻译成增、删、改的 SQL 语句
+python manage.py migrate         # 将上述翻译的SQL语句去数据库执行
+python manage.py migrate --fake    # 假设 migrate 把所有SQL语句执行成功
+python manage.py inspectdb > models.py # 检查DB中已经创建完毕的表结构，生成model.py
+```
+
+表创建之时，新增字段既没有设置默认值，也没有设置新增字段可为空，去对应原有数据导致
+
+
+### ORM 对象关系映射
+
+ORM：Object Relational Mapping(关系对象映射)
+- 类名 --> 数据库中的表名
+- 类属性对应 --> 数据库里的字段
+- 类实例对应 --> 数据库表里的一行数据
+
+![](https://images2018.cnblogs.com/blog/1308093/201805/1308093-20180510154540784-44644315.png)
+
+obj.id  obj.name.....类实例对象的属性
+
+Django orm的优势：
+- Django的orm操作本质上会根据对接的数据库引擎，翻译成对应的sql语句；用Django开发的项目无需关心程序底层使用的是MySQL、Oracle、sqlite....，如果数据库迁移，只需要更换Django的数据库引擎即可；
+
+```shell
+python manage.py makemigrations  #根据app下的migrations目录中的记录，检测当前model层代码是否发生变化？
+python manage.py migrate         #把orm代码转换成sql语句去数据库执行
+python manage.py migrate --fake    #只记录变化，不提交数据库操作
+python manage.py inspectdb > models.py #检查DB中已经创建完毕的表结构，生成model.py
+```
+
+ https://www.cnblogs.com/sss4/articles/7070942.html
+
+
+#### 示例
 
 Web 应用中，主观逻辑经常牵涉到与数据库的交互。 数据库驱动网站 在后台连接数据库服务器，从中取出一些数据，然后在 Web 页面用漂亮的格式展示这些数据。
 
@@ -4111,6 +4288,33 @@ Django 可以根据 model.py 自动生成这些 CREATE TABLE 语句
   - python manage.py validate # 检查语法
   - python manage.py sqlall books # 执行
   - python manage.py syncdb # 提交到数据库
+
+#### ORM连接
+
+把一对多，多对多，分为**正向**和**反向**查找两种方式。
+
+正向查找：ForeignKey在 UserInfo表中，如果从UserInfo表开始向其他的表进行查询，这个就是正向操作，反之如果从UserType表去查询其他的表这个就是反向操作。
+- 一对多：models.ForeignKey(其他表)
+- 多对多：models.ManyToManyField(其他表)
+- 一对一：models.OneToOneField(其他表)
+
+正向连表操作总结：
+- 所谓正、反向连表操作的认定无非是Foreign_Key字段在哪张表决定的，
+- Foreign_Key字段在哪张表就可以哪张表使用Foreign_Key字段连表，反之没有Foreign_Key字段就使用与其关联的 小写表名；
+- 1对多：对象.外键.关联表字段，values(外键字段__关联表字段)
+- 多对多：外键字段.all()
+
+反向连表操作总结：
+- 通过value、value_list、fifter 方式反向跨表：小写表名__关联表字段
+- 通过对象的形式反向跨表：小写表面_set().all()
+
+应用场景：
+- **一对多**：当一张表中创建一行数据时，有一个单选的下拉框（可以被重复选择）
+  - 例如：创建用户信息时候，需要选择一个用户类型【普通用户】【金牌用户】【铂金用户】等。
+- **多对多**：在某表中创建一行数据是，有一个可以多选的下拉框
+  - 例如：创建用户信息，需要为用户指定多个爱好
+- **一对一**：在某表中创建一行数据时，有一个单选的下拉框（下拉框中的内容被用过一次就消失了
+  - 例如：原有含10列数据的一张表保存相关信息，经过一段时间之后，10列无法满足需求，需要为原来的表再添加5列数据
 
 
 ### form 表单
@@ -5741,7 +5945,7 @@ if __name__ == "__main__":
 ```
 
 最终效果
-- 由于flask采用的是jinja模板，也就是采用\{\{\}\}模式与web页面交互，因此会与vue的默认分隔符号相冲突，因此在script里需要修改delimiters: [ "[["," ]]"]。当然还有其他修改方式，这里推荐的也是相对简单的方法。
+- 由于flask采用的是jinja模板，也就是采用\{\{\} }模式与web页面交互，因此会与vue的默认分隔符号相冲突，因此在script里需要修改delimiters: [ "[["," ]]"]。当然还有其他修改方式，这里推荐的也是相对简单的方法。
 - ![](https://cdn.jsdelivr.net/gh/Baiyuetribe/yyycode@dev/img/20/yyycode_com20200924113511.png)
 
 ## 低代码平台

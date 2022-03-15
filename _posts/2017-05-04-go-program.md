@@ -1981,7 +1981,26 @@ func main() {
 
 ## 打日志-log使用
 
+### 官方log包
+
 Golang的标准库提供了log的机制，但是该模块的功能较为简单（看似简单，其实他有他的设计思路）。不过比手写fmt. Printxxx还是强很多的。至少在输出的位置做了线程安全的保护。其官方手册见Golang log (天朝的墙大家懂的)。
+
+log包定义了Logger类型，该类型提供了一些格式化输出的方法。
+
+```go
+type Logger struct {
+    mu     sync.Mutex // ensures atomic writes; protects the following fields
+    prefix string     // prefix on each line to identify the logger (but see Lmsgprefix)
+    flag   int        // properties
+    out    io.Writer  // destination for output
+    buf    []byte     // for accumulating text to write
+}
+```
+
+- mu属性主要是为了确保原子操作
+- prefix设置每一行的前缀
+- flag设置输出的各种属性，比如时间、行号、文件路径等。
+- out输出的方向，用于把日志存储文件。
 
 一个简单使用的例子：
 
@@ -1990,12 +2009,125 @@ package main
 import ( 
     "log"
 )
-func main(){ 
-    log.Fatal("Come with fatal,exit with 1 \n")
+func main(){
+    log.Print("常规日志输出，相当于 info \n")
+    log.Println("常规日志输出，相当于 info（不用换行）")
+    v := "优雅的"
+    log.Printf("这是一个%s日志\n", v)
+    log.Panic("日志输出，相当于 warning \n")
+    log.Panicln("日志输出，相当于 warning \n")
+    log.Fatal("错误日志输出，相当于 fatal \n")
+    log.Fatalln("错误日志输出，相当于 fatal \n")
 }
 ```
 
 编译运行后，会看到程序打印了 Come with fatal,exit with 1 然后就退出了，如果用 echo $? 查看退出码，会发现是 “1”。
+
+### 优化log包
+
+[Golang中log日志包的使用](https://blog.csdn.net/MrKorbin/article/details/110422715)
+
+基于官方的log包，封装出自己的log日志包
+- 获取当前事件
+- 对 Logger实例进行加锁操作
+- 判断Logger的标志位是否包含 Lshortfile 或 Llongfile,　如果包含进入步骤4, 如果不包含进入步骤5
+- 获取当前函数调用所在的文件和行号信息
+- 格式化数据，并将数据写入到 l.out 中，完成输出
+- 解锁操作
+
+```go
+// logger.go
+package logger
+
+import (
+	"io"
+	"log"
+	"os"
+)
+
+const (
+	flag           = log.Ldate | log.Ltime | log.Lshortfile
+	preDebug       = "[DEBUG]"
+	preInfo        = "[INFO]"
+	preWarning     = "[WARNING]"
+	preError       = "[ERROR]"
+)
+
+var (
+	logFile       io.Writer
+	debugLogger   *log.Logger
+	infoLogger    *log.Logger
+	warningLogger *log.Logger
+	errorLogger   *log.Logger
+	defaultLogFile = "/var/log/web.log"
+)
+
+func init() {
+	var err error
+	logFile, err = os.OpenFile(defaultLogFile, os.O_CREATE|os.O_APPEND|os.O_RDWR, 0666)
+	if err != nil {
+		defaultLogFile = "./web.log"
+		logFile, err = os.OpenFile(defaultLogFile, os.O_CREATE|os.O_APPEND|os.O_RDWR, 0666)
+		if err != nil {
+			log.Fatalf("create log file err %+v", err)
+		}
+	}
+	debugLogger = log.New(logFile, preDebug, flag)
+	infoLogger = log.New(logFile, preInfo, flag)
+	warningLogger = log.New(logFile, preWarning, flag)
+	errorLogger = log.New(logFile, preError, flag)
+}
+
+func Debugf(format string, v ...interface{}) {
+	debugLogger.Printf(format, v...)
+}
+
+func Infof(format string, v ...interface{}) {
+	infoLogger.Printf(format, v...)
+}
+
+func Warningf(format string, v ...interface{}) {
+	warningLogger.Printf(format, v...)
+}
+
+func Errorf(format string, v ...interface{}) {
+	errorLogger.Printf(format, v...)
+}
+
+func SetOutputPath(path string) {
+	var err error
+	logFile, err = os.OpenFile(path, os.O_CREATE|os.O_APPEND|os.O_RDWR, 0666)
+	if err != nil {
+		log.Fatalf("create log file err %+v", err)
+	}
+	debugLogger.SetOutput(logFile)
+	infoLogger.SetOutput(logFile)
+	warningLogger.SetOutput(logFile)
+	errorLogger.SetOutput(logFile)
+}
+```
+
+调用logger包
+
+```go
+package main
+import "yourPath/logger"
+
+func main() {
+	author := "korbin"
+	logger.Debugf("hello,%s",author)
+	logger.Infof("hello,%s",author)
+	logger.Warningf("hello,%s",author)
+	logger.Errorf("hello,%s",author)
+}
+/*
+[DEBUG]2020/12/01 11:33:07 logger.go:43: hello,korbin
+[INFO]2020/12/01 11:33:07 logger.go:47: hello,korbin
+[WARNING]2020/12/01 11:33:07 logger.go:51: hello,korbin
+[ERROR]2020/12/01 11:33:07 logger.go:55: hello,korbin
+*/
+```
+
 
 ## 单元测试
 
@@ -2074,7 +2206,7 @@ func BenchmarkAdd(b *testing.B) {  
 
 ## Web服务
 
-### caddy
+### caddy web服务框架
 
 【2022-3-10】[自带 HTTPS 的开源 Web 服务器](https://www.toutiao.com/i7064892846268006924/)
 
@@ -2134,6 +2266,93 @@ go run test_web.go # 有web服务
 # 输入检索词，input
 ```
 
+test_web.go 代码
+
+```go
+package main
+
+import (
+	"./darts"
+	"encoding/json"
+	"fmt"
+	"log"
+	"net/http"
+	//"strings"
+	// "path"
+)
+
+type ValueJson struct {
+	Value string `json:"value"`
+}
+
+func dartsInit() (darts.Darts, error) {
+	d, err := darts.Import("data.txt", "data.lib")
+	if err != nil {
+		fmt.Println("ERROR: darts initial failed!")
+	} else {
+		fmt.Println("INFO: darts initial success!")
+	}
+	return d, err
+}
+
+var dart, err = dartsInit()
+
+// 输入提示api
+func simpleSuggest(w http.ResponseWriter, r *http.Request) {
+	// valueList := make([]ValueJson, 10)
+	var valueList []ValueJson
+	r.ParseForm() //解析参数，默认是不会解析的
+	keyword := r.Form["keyword"]
+	fmt.Println("keyword:", keyword)
+	if len(keyword) == 0 {
+	} else {
+		results := dart.Search([]rune(keyword[0]), 0)
+		for i := 0; i < len(results); i++ {
+			var value ValueJson
+			value.Value = string(results[i].Key)
+			valueList = append(valueList, value)
+		}
+	}
+	if len(valueList) > 10 {
+		valueList = valueList[:10]
+	}
+	fmt.Println("return", valueList)
+	if len(valueList) > 0 {
+		b, err := json.Marshal(valueList)
+		if err != nil {
+			fmt.Println("json err:", err)
+		}
+		fmt.Fprintf(w, string(b)) //这个写入到w的是输出到客户端的
+	} else {
+		fmt.Fprintf(w, "[]") //这个写入到w的是输出到客户端的
+	}
+	return
+}
+// 主页api
+func index(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "templates/index.html")
+}
+
+func main() {
+	// index
+	http.HandleFunc("/", index) //设置访问的路由
+	// suggest
+	http.HandleFunc("/suggest/", simpleSuggest) //设置访问的路由
+	// static
+	http.HandleFunc("/static/", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, r.URL.Path[1:])
+	})
+	var host = "127.0.0.1"
+	var port = "9090"
+	var url = host + ":" + port
+	err := http.ListenAndServe(url, nil) //设置监听的端口
+	if err != nil {
+		log.Fatal("ListenAndServe: ", err)
+	}else {
+		log.Println("服务开启："+url)
+	}
+}
+```
 
 
 # 经验总结

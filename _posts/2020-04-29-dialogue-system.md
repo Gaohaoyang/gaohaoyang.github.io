@@ -1072,6 +1072,151 @@ curl "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=$key" \
 - @群成员功能无效
   - userid的列表，提醒群中的指定成员(@某个成员)，@all表示提醒所有人，如果开发者获取不到userid，可以使用mentioned_mobile_list
 
+【2022-3-11】企微机器人发送图片，参考：[官方文档](https://developer.work.weixin.qq.com/document/path/91770)，应用案例-[python生成折线图并调用企业微信群机器人发送图片消息](https://zhuanlan.zhihu.com/p/138583880)
+- ![](https://pic2.zhimg.com/80/v2-288cf675ef43a9381959bb900b08e1a9_1440w.jpg)
+
+```python
+# -*- coding: utf-8 -*-
+# s = '中文'  # 注意这里的 str 是 str 类型的，而不是 unicode
+# s.encode('gb2312')
+
+import time
+import pymssql
+import requests
+import matplotlib.pyplot as plt
+import hashlib
+import os
+import base64
+
+   
+# 获取文件的Base64编码
+def get_file_base64(filepath):
+    if not os.path.isfile(filepath):
+        return
+    with open(filepath, "rb") as f:
+        image = f.read()
+        image_base64 = str(base64.b64encode(image), encoding='utf-8')  # 这里要说明编码，否则不成功
+    return image_base64
+
+
+# 获取文件md5函数
+def get_file_md5(filepath):
+    # 获取文件的md5
+    if not os.path.isfile(filepath):
+        return
+    myhash = hashlib.md5()
+    f = open(filepath, "rb")
+    while True:
+        b = f.read(8096)
+        if not b:
+            break
+        myhash.update(b)
+    f.close
+    # print(myhash.hexdigest())
+    return myhash.hexdigest()
+
+
+# 发送消息函数, msgtype定义：text 发送字符串消息，markdown 发送图片消息，image 发送图片消息， news 发送图文消息
+def postmsg(url, post_data, msgtype):
+    # sss = "这是一条用python发送的测试信息，请忽略！"
+    post_data = '{"msgtype" : "%s", "%s" : %s}' % (msgtype, msgtype, post_data)
+    # post_data = '{"msgtype": "markdown","markdown": {"content": "%s"}}' % sss
+    # print(post_data)
+
+    if url == '':
+        print('URL地址为空！')
+    else:
+        r = requests.post(url, data=post_data.encode())
+        rstr = r.json()
+        if r.status_code == 200 and 'error' not in rstr:
+            result = '发送成功'
+            return result
+        else:
+            return 'Error'
+
+
+def querySQL():
+    # 数据库连接配置
+    config_dict = {
+        'user': '***',
+        'password': '******',
+        'host': '******',
+        'database': '******'
+    }
+
+    def conn():
+        connect = pymssql.connect(**config_dict)
+        if connect:
+            print("connect success!!!")
+            return connect
+        else:
+            print("连接失败！请检查配置信息！")
+
+    conn = conn()
+    cursor = conn.cursor()
+    sql = "select * from [TableName] order by [Fields]"  # 编写SQL查询字符串
+    cursor.execute(sql)
+    col = cursor.description
+    resultdata = cursor.fetchall()
+    return resultdata, col
+    cursor.close()
+    conn.close()
+
+
+if __name__ == '__main__':
+
+    url = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=*******-****-****-****-******" # 群机器人地址
+    resultdata, col = querySQL()
+    # print(resultdata)
+    # print(col) 查询到的表的列名
+
+    datelist = []
+    for i in range(len(resultdata)):
+        datelist.append(resultdata[i][0])
+    # print(datelist)
+    saleslist = []
+    for j in range(len(resultdata)):
+        saleslist.append(int(resultdata[j][1]))
+    # print(saleslist)  # 销售数据清单
+
+    # 刻度和序列值
+    x_data = datelist
+    y_data = saleslist
+    # plt.plot(x_data, y_data)
+    # 设置画布大小
+    plt.figure(figsize=(16, 8))
+    plt.title("The Recent 7 Days Sales")
+    plt.plot(x_data, y_data, label='金额', linewidth=3, color='black', marker='o', markerfacecolor='r',
+             markersize=10)  # 标记点
+    # 设置数字标签
+    for a, b in zip(x_data, y_data):
+        plt.text(a, b, b, ha='center', va='bottom', fontsize=14)
+
+    # 取当前时间为文件名
+    pic_full_name = './' + time.strftime("%Y%m%d%H%M%S", time.localtime()) + '.jpg'
+    plt.savefig(pic_full_name)
+    pic_md5 = get_file_md5(pic_full_name)
+    pic_base64s = get_file_base64(pic_full_name)
+
+    # print(pic_md5)
+    # print(pic_base64s)
+
+    # plt.show()  # 显示图表
+
+    out_mk_msg = "### 最近七天市场业绩：\n"
+    for i in range(len(resultdata)):
+        out_mk_msg = out_mk_msg + r">日期:%s , 业绩:<font color = \"warning\">%d</font> , 店数:%s , 新会员：%s , 老会员：%s " % (
+        resultdata[i][0], resultdata[i][1], resultdata[i][2], resultdata[i][3], resultdata[i][4]) + "\n"
+
+    out_mk_msg = '{"content": "%s"}' % out_mk_msg
+    # print(out_mk_msg)
+    # 调用postmsg向接口提交数据，分别提并markdwon格式及图片格式消息
+    result = postmsg(url, out_mk_msg, "markdown")
+    # print(result)
+    out_pic_msg = '{"base64":"%s", "md5":"%s"}' % (pic_base64s, pic_md5)
+    result = postmsg(url, out_pic_msg, "image")
+    print(result)
+```
 
 # 现状
 
