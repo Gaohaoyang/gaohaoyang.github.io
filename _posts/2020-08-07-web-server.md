@@ -4026,7 +4026,7 @@ ship on { { ship_date|date:"F j, Y" } }.</p>
 
 <ul>
 { % for item in item_list % }
-    <li>{{ item }}</li>
+    <li>{ { item } }</li>
 { % endfor % }
 </ul>
 
@@ -5576,8 +5576,34 @@ var app2 = new Vue({
 ```html
 <div id="app-3">
   <p v-if="seen">现在你看到我了</p>
+  <!-- 加else -->
+  <h1 v-if="awesome">Vue is awesome!</h1>
+  <h1 v-else>Oh no 😢</h1>
 </div>
+<!-- if-else-if -->
+<div v-if="type === 'A'">
+  A
+</div>
+<div v-else-if="type === 'B'">
+  B
+</div>
+<div v-else>
+  Not A/B
+</div>
+
+<!-- 应用到多个元素上 -->
+<template v-if="ok">
+  <h1>Title</h1>
+  <p>Paragraph 1</p>
+  <p>Paragraph 2</p>
+</template>
 ```
+
+注：
+- v-else 元素必须紧跟在带 v-if 或者 v-else-if 的元素的后面，否则它将不会被识别
+- v-else-if 也必须紧跟在带 v-if 或者 v-else-if 的元素之后。
+- v-if只能添加到一个元素上，如何应用到多个元素上？template
+
 
 ```js
   var app3 = new Vue({
@@ -5590,21 +5616,81 @@ var app2 = new Vue({
 
 不仅可以把数据绑定到 DOM 文本或 attribute，还可以绑定到 DOM 结构。此外，Vue 也提供一个强大的过渡效果系统，可以在 Vue 插入/更新/移除元素时自动应用过渡效果。
 
+#### v-show（条件展示）
+
+另一个用于根据条件展示元素的选项是 v-show 指令。用法大致一样，不同的是带有 v-show 的元素始终会被渲染并保留在 DOM 中。v-show 只是简单地切换元素的 CSS property display。
+
+注意
+- v-show 不支持 < template > 元素，也不支持 v-else。
+
+```html
+<h1 v-show="ok">Hello!</h1>
+```
+
+v-if 与 v-show：
+- v-if 是“真正”的条件渲染，因为它会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建。
+- v-if 也是惰性的：如果在初始渲染时条件为假，则什么也不做——直到条件第一次变为真时，才会开始渲染条件块。
+- 相比之下，v-show 就简单得多——不管初始条件是什么，元素总是会被渲染，并且只是简单地基于 CSS 进行切换。
+一般来说，v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。因此，如果需要非常频繁地切换，则使用 v-show 较好；如果在运行时条件很少改变，则使用 v-if 较好。
+
 #### v-for 
 
 v-for 指令可以绑定数组的数据来渲染一个项目列表
 - 在控制台里，输入 app4.todos.push({ text: '新项目' })，会发现列表最后添加了一个新项目。
+- 数据方法
+  - push()
+  - pop()
+  - shift()
+  - unshift()
+  - splice()
+  - sort()
+  - reverse()
 
 ```html
 <div id="app-4">
   <ol>
+    <!-- 可以用of代替in -->
     <li v-for="todo in todos">
       { { todo.text } }
     </li>
   </ol>
+<!-- 可以访问所有父作用域的 property（如parentMessage），以及索引index -->
+  <ul id="app-4">
+  <li v-for="(item, index) in items">
+    { { parentMessage } } - { { index } } - { { item.message } }
+  </li>
+</ul>
+<!-- 第二个参数 -->
+<div v-for="(value, name) in object">
+  { { name } }: { { value } }
 </div>
+<!-- 第三个参数 -->
+<div v-for="(value, name, index) in object">
+  { { index } }. { { name } }: { { value } }
+</div>
+<!-- 遍历对象属性 -->
+<ul id="app-4" class="demo">
+  <li v-for="value in object">
+    { { value } }
+  </li>
+</ul>
+<!-- 指定遍历时采用的key -->
+<div v-for="item in items" v-bind:key="item.id">
+  <!-- 内容 -->
+</div>
+<!-- template分组 -->
+<ul>
+  <template v-for="item in items">
+    <li>{ { item.msg } }</li>
+    <li class="divider" role="presentation"></li>
+  </template>
+</ul>
+
+</div>
+
 ```
 
+js部分
 
 ```js
 var app4 = new Vue({
@@ -5614,10 +5700,46 @@ var app4 = new Vue({
       { text: '学习 JavaScript' },
       { text: '学习 Vue' },
       { text: '整个牛项目' }
-    ]
+    ],
+    parentMessage: 'Parent',
+    items: [
+      { message: 'Foo' },
+      { message: 'Bar' }
+    ],
+    object: {
+      title: 'How to do lists in Vue',
+      author: 'Jane Doe',
+      publishedAt: '2016-04-10'
+    }
   }
 })
 ```
+
+注：
+- 不推荐同时使用 v-if 和 v-for。请查阅风格指南以获取更多信息。
+- 当 v-if 与 v-for 一起使用时，v-for 具有比 v-if 更高的优先级。请查阅列表渲染指南以获取详细信息。
+
+数组过滤
+
+```html
+<ul v-for="set in sets">
+  <li v-for="n in even(set)">{ { n } }</li>
+</ul>
+```
+
+```js
+data: {
+  sets: [[ 1, 2, 3, 4, 5 ], [6, 7, 8, 9, 10]]
+},
+methods: {
+  even: function (numbers) { // 过滤部分数据
+    return numbers.filter(function (number) {
+      return number % 2 === 0
+    })
+  }
+}
+```
+
 
 #### v-on事件监听（处理用户输入）
 
@@ -5745,6 +5867,42 @@ var app7 = new Vue({
   </ol>
 </div>
 ```
+
+### 计算属性和侦听器
+
+待补充
+
+
+### vue路由
+
+直接路由，不用路由库
+- computed成员 --> ViewComponent()方法 --> 路由到路径字典routes
+
+```js
+const NotFound = { template: '<p>Page not found</p>' }
+const Home = { template: '<p>home page</p>' }
+const About = { template: '<p>about page</p>' }
+
+const routes = {
+  '/': Home,
+  '/about': About
+}
+
+new Vue({
+  el: '#app',
+  data: {
+    currentRoute: window.location.pathname
+  },
+  computed: {
+    ViewComponent () {
+      return routes[this.currentRoute] || NotFound
+    }
+  },
+  render (h) { return h(this.ViewComponent) }
+})
+```
+
+第三方路由，如 Page.js 或者 Director，整合起来也一样简单
 
 
 ### vue框架
