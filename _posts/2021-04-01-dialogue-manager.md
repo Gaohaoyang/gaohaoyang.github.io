@@ -1845,22 +1845,80 @@ An example of typical input would be something like this:
 
 ## Rasa
 
-- 为什么使用Rasa而不是使用wit、luis、dialogflow这些服务？
-  - （1）不必把数据交给FaceBook/MSFT/Google；
-    - 已有的NLU工具，大多是以服务的方式，通过调用远程http的restful API来对目标语句进行解析完成上述两个任务。如Google的[API.ai](http://api.ai/)（收购后更名为Dialogueflow）, Microsoft的[Luis.ai](http://luis.at/), Facebook的[Wit.ai](http://wit.ai/)等。刚刚被百度收购的[Kitt.ai](http://kitt.ai/)除了百度拿出来秀的语音唤醒之外，其实也有一大部分工作是在NLU上面，他们很有启发性的的Chatflow就包含了一个自己的NLU引擎。
-    - 对于数据敏感的用户来说，开源的NLU工具如Rasa.ai提供了另一条路。更加重要的是，可以本地部署，针对实际需求训练和调整模型，据说对一些特定领域的需求效果要比那些通用的在线NLU服务还要好很多。
-    - Rasa NLU本身是只支持英文和德文的。中文因为其特殊性需要加入特定的tokenizer（如jieba）作为整个流水线的一部分。代码在[github](https://github.com/crownpku/rasa_nlu_chi)上。
-  - （2）不必每次都做http请求；
-  - （3）你可以在特殊的场景中调整模型，保证更有效。
-- 示例
-  - [RASA中文聊天机器人项目](https://github.com/jiangdongguo/ChitChatAssistant)
-  - [使用Rasa_core和Rasa_nls框架搭建问答机器人](https://blog.csdn.net/Solitarily/article/details/84251628)，训练，在线学习
-  - ![](https://img-blog.csdnimg.cn/2018111915173690.jpg)
+Rasa是一个开源机器学习框架，用于构建上下文AI助手和聊天机器人
 
-- Rasa是一个开源机器学习框架，用于构建上下文AI助手和聊天机器人。
-  - 安装：
-    - pip install rasa_nlu
-    - pip install rasa_core[tensorflow]
+### 为什么用rasa
+
+为什么使用Rasa而不是使用wit、luis、dialogflow这些服务？
+- （1）不必把数据交给FaceBook/MSFT/Google；
+  - 已有的NLU工具，大多是以服务的方式，通过调用远程http的restful API来对目标语句进行解析完成上述两个任务。如Google的[API.ai](http://api.ai/)（收购后更名为Dialogueflow）, Microsoft的[Luis.ai](http://luis.at/), Facebook的[Wit.ai](http://wit.ai/)等。刚刚被百度收购的[Kitt.ai](http://kitt.ai/)除了百度拿出来秀的语音唤醒之外，其实也有一大部分工作是在NLU上面，他们很有启发性的的Chatflow就包含了一个自己的NLU引擎。
+  - 对于数据敏感的用户来说，开源的NLU工具如Rasa.ai提供了另一条路。更加重要的是，可以本地部署，针对实际需求训练和调整模型，据说对一些特定领域的需求效果要比那些通用的在线NLU服务还要好很多。
+  - Rasa NLU本身是只支持英文和德文的。中文因为其特殊性需要加入特定的tokenizer（如jieba）作为整个流水线的一部分。代码在[github](https://github.com/crownpku/rasa_nlu_chi)上。
+- （2）不必每次都做http请求；
+- （3）你可以在特殊的场景中调整模型，保证更有效。
+
+### rasa示例
+
+示例
+- [RASA中文聊天机器人项目](https://github.com/jiangdongguo/ChitChatAssistant)
+- [使用Rasa_core和Rasa_nls框架搭建问答机器人](https://blog.csdn.net/Solitarily/article/details/84251628)，训练，在线学习
+- ![](https://img-blog.csdnimg.cn/2018111915173690.jpg)
+
+### rasa项目创建
+
+安装
+
+```shell
+# 官方安装
+python3 -m venv ./venv
+source ./venv/bin/activate
+pip3 install -U pip
+pip3 install rasa
+# 或单独安装
+pip install rasa_nlu
+pip install rasa_core[tensorflow]
+```
+
+rasa是一个聊天机器人框架，所以它有自己的项目结构，就跟Python的Django一样
+
+```shell
+rasa init # 新建rasa项目，目录结构如下
+# .
+# ├── actions
+# │   ├── actions.py
+# │   └── __init__.py
+# ├── config.yml
+# ├── credentials.yml
+# ├── data
+# │   ├── nlu.yml
+# │   ├── rules.yml
+# │   └── stories.yml
+# ├── domain.yml
+# ├── endpoints.yml
+# ├── models
+# │   └── 20220225-154216-short-triad.tar.gz
+# └── tests
+#     └── test_stories.yml
+rasa shell # 测试对话效果
+```
+
+rasa项目的开发流程
+- 聊天机器人本身是一个复杂的系统，一般包含`ASR`（自动语音识别）、`NLU`（自然语音理解）、`DM`（对话管理）、`NLG`（自然语言生成）、`TTS`（文本转语音）五个部分。
+- 基于rasa的对话系统可以处理`NLU`、`DM`和`NLG`三个部分，一般分为`rasa nlu`和`rasa core`
+
+用rasa来开发一个聊天机器人大致可以分为如下几步：
+- 项目初始化
+- 准备NLU训练数据
+- 配置NLU所需模型
+- 准备story数据
+- 定义domain
+- 配置core模型
+- 训练模型
+- 对话测试
+- 部署
+
+### rasa框架
+
 - Rasa有两个主要模块：
   - **Rasa NLU** （`NLU`）：用于理解用户消息，包括意图识别和实体识别，它会把用户的输入转换为结构化的数据。
     - 支持不同的 Pipeline，其后端实现可支持spaCy、MITIE、MITIE + sklearn 以及 tensorflow，其中 spaCy 是官方推荐的，另外值得注意的是从 0.12 版本后，MITIE 就被列入 Deprecated 了。
