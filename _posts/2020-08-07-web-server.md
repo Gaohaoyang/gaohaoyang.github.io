@@ -226,17 +226,17 @@ https://api.example.com/v{n}
 ```json
 // 接口正常
 {
-	code: 200, 
-	msg: null,
-	data: {
+    code: 200, 
+    msg: null,
+    data: {
         "name": "张三",
         "age": 108
-	}
+    }
 }
 // 接口异常
 {
-	code: 500,
-	msg: "系统开小差了，稍后再试吧。"
+    code: 500,
+    msg: "系统开小差了，稍后再试吧。"
 }
 ```
 
@@ -252,8 +252,8 @@ https://api.example.com/v{n}
 }
 // 异常
 {
-	code: 500,
-	msg: ""
+    code: 500,
+    msg: ""
 }
 ```
 
@@ -263,12 +263,12 @@ https://api.example.com/v{n}
 
 ```shell
 {
-	#返回状态码
-	code:integer,		
-	#返回信息描述
-	message:string,
-	#返回值
-	data:object
+    #返回状态码
+    code:integer,       
+    #返回信息描述
+    message:string,
+    #返回值
+    data:object
 }
 ```
 
@@ -566,20 +566,20 @@ def recommend():
     res['data'] = {
             "project_id": 671289,
             "project_name": "天朗·富春原颂", 
-			"pv": 230, # 楼盘累计请求数（包含点击、文字、语音所有触发请求的行为）
-			"percent": 0.02, # 累计累计请求数占比
+            "pv": 230, # 楼盘累计请求数（包含点击、文字、语音所有触发请求的行为）
+            "percent": 0.02, # 累计累计请求数占比
             "question_num": 9, # 累计点击问题数
             "click_num": 24, # 累计点击次数，含：更多问题
             "question_list":
             [ # 字段说明：问题id，点击次数，点击占比（分母限该楼盘），楼盘名
                 {"pos": 1, "question_id": 8, "click_num": 5, "click_percent": 26.316, "question_name": "项目基本信息"}, 
-				{"pos": 2, "question_id": 1, "click_num": 5, "click_percent": 26.316, "question_name": "售楼处地址及接待信息"}, 
-				{"pos": 3, "question_id": 2, "click_num": 3, "click_percent": 15.789, "question_name": "在售户型信息？"}, 
-				{"pos": 4, "question_id": 6, "click_num": 2, "click_percent": 10.526, "question_name": "此项目激励政策是什么？"}, 
-				{"pos": 5, "question_id": 13, "click_num": 1, "click_percent": 5.263, "question_name": "带看规则及注意事项是什么？"}, 
-				{"pos": 6, "question_id": 10, "click_num": 1, "click_percent": 5.263, "question_name": "物业信息"}, 
-				{"pos": 7, "question_id": 4, "click_num": 1, "click_percent": 5.263, "question_name": "当前有哪些开发商优惠？"}, 
-				{"pos": 8, "question_id": 3, "click_num": 1, "click_percent": 5.263, "question_name": "在售楼栋信息？"}
+                {"pos": 2, "question_id": 1, "click_num": 5, "click_percent": 26.316, "question_name": "售楼处地址及接待信息"}, 
+                {"pos": 3, "question_id": 2, "click_num": 3, "click_percent": 15.789, "question_name": "在售户型信息？"}, 
+                {"pos": 4, "question_id": 6, "click_num": 2, "click_percent": 10.526, "question_name": "此项目激励政策是什么？"}, 
+                {"pos": 5, "question_id": 13, "click_num": 1, "click_percent": 5.263, "question_name": "带看规则及注意事项是什么？"}, 
+                {"pos": 6, "question_id": 10, "click_num": 1, "click_percent": 5.263, "question_name": "物业信息"}, 
+                {"pos": 7, "question_id": 4, "click_num": 1, "click_percent": 5.263, "question_name": "当前有哪些开发商优惠？"}, 
+                {"pos": 8, "question_id": 3, "click_num": 1, "click_percent": 5.263, "question_name": "在售楼栋信息？"}
             ],
     }
     res['errno'] = 0
@@ -1252,11 +1252,11 @@ chkconfig --levels 235 httpd on
 /bin/systemctl start httpd.service
 ```
 Apache专用：
-- 服务目录	/etc/httpd
-- 主配置文件	/etc/httpd/conf/httpd.conf
-- 网站数据目录	/var/www/html
-- 访问日志	/var/log/httpd/access_log
-- 错误日志	/var/log/httpd/error_log
+- 服务目录  /etc/httpd
+- 主配置文件 /etc/httpd/conf/httpd.conf
+- 网站数据目录    /var/www/html
+- 访问日志  /var/log/httpd/access_log
+- 错误日志  /var/log/httpd/error_log
 
 
 ## PHP
@@ -1602,7 +1602,7 @@ case $1 in
         source $MATRIX_PRIVDATA_DIR/venv/bin/activate
         cd $MATRIX_CODE_DIR
         #source install.sh
-		# gunicorn --pid=run.pid --config gunicorn_config.py --daemon start_all:app
+        # gunicorn --pid=run.pid --config gunicorn_config.py --daemon start_all:app
         $MATRIX_PRIVDATA_DIR/venv/bin/gunicorn \
                 --pid=$LOG_FILE/run.pid \
                 --config bin/gunicorn_config.py \
@@ -1618,7 +1618,7 @@ case $1 in
                 --pid=$LOG_FILE/run.pid \
                 --config bin/gunicorn_config.py \
                 start_all:app
- 	;;
+    ;;
     *)
         echo "Using option{start|run|stop}"
     ;;
@@ -1663,12 +1663,12 @@ app = FastAPI()
 
 @app.get("/")
 def root():
-	return {"name":"wangqien", "value":23}
+    return {"name":"wangqien", "value":23}
 
 # 异步接口
 @app.get("/index")
 async def index():
-	return {"name":"wangqien", "value":23}
+    return {"name":"wangqien", "value":23}
 
 @app.get("/items/{item_id}")
 async def read_item(item_id: str, q: str = None, short: bool = False):
@@ -1857,7 +1857,7 @@ monkey.patch_all()
 datali = [x for x in range(100)]
 task = []
 def func(i):
-	print u'第{}个请求'.format(i)
+    print u'第{}个请求'.format(i)
     url = "http://hao.jobbole.com/python-docx/"
     resp = requests.get(url=url)
     return resp
@@ -2295,15 +2295,15 @@ ORM框架
 
 详见：[flask的orm框架(SQLAlchemy)](https://www.cnblogs.com/chichung/p/9782919.html)
 
-| 名字	| 备注| 
-| SQLALCHEMY_DATABASE_URI	| 用于连接的数据库 URI 。例如: sqlite:////tmp/test.dbmysql://username:password@server/db |
-| SQLALCHEMY_BINDS |	一个映射 binds 到连接 URI 的字典。更多 binds 的信息见用 Binds 操作多个数据库。|
-| SQLALCHEMY_ECHO	| 如果设置为Ture， SQLAlchemy 会记录所有 发给 stderr 的语句，这对调试有用。(打印sql语句) |
-| SQLALCHEMY_RECORD_QUERIES	| 可以用于显式地禁用或启用查询记录。查询记录 在调试或测试模式自动启用。更多信息见get_debug_queries()。|
-| SQLALCHEMY_NATIVE_UNICODE	| 可以用于显式禁用原生 unicode 支持。当使用 不合适的指定无编码的数据库默认值时，这对于 一些数据库适配器是必须的（比如 Ubuntu 上 某些版本的 PostgreSQL ）。|
-| SQLALCHEMY_POOL_SIZE	| 数据库连接池的大小。默认是引擎默认值（通常 是 5 ）|
-| SQLALCHEMY_POOL_TIMEOUT	| 设定连接池的连接超时时间。默认是 10 。|
-| SQLALCHEMY_POOL_RECYCLE	| 多少秒后自动回收连接。这对 MySQL 是必要的， 它默认移除闲置多于 8 小时的连接。注意如果 使用了 MySQL ， Flask-SQLALchemy 自动设定 这个值为 2 小时。|
+| 名字    | 备注| 
+| SQLALCHEMY_DATABASE_URI   | 用于连接的数据库 URI 。例如: sqlite:////tmp/test.dbmysql://username:password@server/db |
+| SQLALCHEMY_BINDS |    一个映射 binds 到连接 URI 的字典。更多 binds 的信息见用 Binds 操作多个数据库。|
+| SQLALCHEMY_ECHO   | 如果设置为Ture， SQLAlchemy 会记录所有 发给 stderr 的语句，这对调试有用。(打印sql语句) |
+| SQLALCHEMY_RECORD_QUERIES | 可以用于显式地禁用或启用查询记录。查询记录 在调试或测试模式自动启用。更多信息见get_debug_queries()。|
+| SQLALCHEMY_NATIVE_UNICODE | 可以用于显式禁用原生 unicode 支持。当使用 不合适的指定无编码的数据库默认值时，这对于 一些数据库适配器是必须的（比如 Ubuntu 上 某些版本的 PostgreSQL ）。|
+| SQLALCHEMY_POOL_SIZE  | 数据库连接池的大小。默认是引擎默认值（通常 是 5 ）|
+| SQLALCHEMY_POOL_TIMEOUT   | 设定连接池的连接超时时间。默认是 10 。|
+| SQLALCHEMY_POOL_RECYCLE   | 多少秒后自动回收连接。这对 MySQL 是必要的， 它默认移除闲置多于 8 小时的连接。注意如果 使用了 MySQL ， Flask-SQLALchemy 自动设定 这个值为 2 小时。|
 
 字段类型
 
@@ -2854,7 +2854,7 @@ from flask import request, jsonify
 
 @app.route('/', methods = ["GET", "POST"])
 def post_data():
-	# 假设有如下 JSON 数据
+    # 假设有如下 JSON 数据
     #{"obj": [{"name":"John","age":"20"}] }
     
     #可以通过 request 的 args 属性来获取GET参数
@@ -4321,11 +4321,11 @@ Django 可以根据 model.py 自动生成这些 CREATE TABLE 语句
 
 HttpRequest对象包含当前请求URL的一些信息：
 
-| 属性/方法	| 说明	| 举例 |
-| request.path	| 除域名以外的请求路径，以正斜杠开头	| "/hello/" |
-| request.get_host()	| 主机名（比如，通常所说的域名）	| "127.0.0.1:8000" or "www.example.com" |
-| request.get_full_path()	| 请求路径，可能包含查询字符串	| "/hello/?print=true" |
-| request.is_secure()	| 如果通过HTTPS访问，则此方法返回True， 否则返回False	| True 或者 False |
+| 属性/方法 | 说明    | 举例 |
+| request.path  | 除域名以外的请求路径，以正斜杠开头 | "/hello/" |
+| request.get_host()    | 主机名（比如，通常所说的域名）   | "127.0.0.1:8000" or "www.example.com" |
+| request.get_full_path()   | 请求路径，可能包含查询字符串    | "/hello/?print=true" |
+| request.is_secure()   | 如果通过HTTPS访问，则此方法返回True， 否则返回False | True 或者 False |
 
 还有：
 - request.META 是一个Python字典，包含了所有本次HTTP请求的Header信息，比如用户IP地址和用户Agent（通常是浏览器的名称和版本号）。 注意，Header信息的完整列表取决于用户所发送的Header信息和服务器端设置的Header信息。
@@ -4799,9 +4799,9 @@ console.log(2);
 - JSON
   - JSON 是一种轻量级的数据交换格式；JSON是独立的语言 ；JSON 易于理解。
 - 输出方式
-  - document.write()	//向body中写入字符串，输出到页面，会以HTML的语法解析里面的内容
-  - cosole.log()	//向控制台输出
-  - alert()		//弹出框，会以文本的原格式输出
+  - document.write()    //向body中写入字符串，输出到页面，会以HTML的语法解析里面的内容
+  - cosole.log()    //向控制台输出
+  - alert()     //弹出框，会以文本的原格式输出
   - prompt('提示文字'，'默认值') // 输入框---不常用
 
 ```javascript
@@ -4810,12 +4810,12 @@ myObj =  { "name":"Nya", "age":21, "car":null };
 x = myObj.name;
 x = myObj["name"];
 
-console.log(typeof null);	//返回object
+console.log(typeof null);   //返回object
 
 function demo(){  
-	console.log('demo');  
+    console.log('demo');  
 }  
-console.log(typeof demo);	// 返回function 
+console.log(typeof demo);   // 返回function 
 // 分支
 var a = 1;
 switch(a){
@@ -4835,11 +4835,11 @@ function p(i){
     document.write("<br>");
  }
 for(var i = 0; i < 10; i++){
- 	 p(i);
+     p(i);
  }
 // for in
 for (x in myObj){
-	document.write(myObj[x] + "<br />")
+    document.write(myObj[x] + "<br />")
 }
 
 //new创建对象
@@ -4852,7 +4852,7 @@ person.sex = "男";
 function person(name, age, sex){
     this.name = name;
     this.age = age;
-    this.sex = sex	//在JS中，this通常指向的是我们正在执行的函数本身，或者是指向该函数所属的对象（运行时）
+    this.sex = sex  //在JS中，this通常指向的是我们正在执行的函数本身，或者是指向该函数所属的对象（运行时）
 }
 //创建对象实例
 var myFather = new person("Ton", 51, "男");
@@ -4884,16 +4884,16 @@ document.write(location.href);
 
 <input type="button" value="Back" onclick="goBack()">
 <script>
-	function goBack(){
-    	window.history.back()
-	}
+    function goBack(){
+        window.history.back()
+    }
 </script>
 
 <input type="button" value="Forward" onclick="goForward()">
 <script>
     function goBack(){
-    	window.history.forwardk()
-	}
+        window.history.forwardk()
+    }
 </script>
 
 <!-- 交互事件 -->
@@ -5046,7 +5046,7 @@ console.log(document.cookie)
         alert('你已选择：'+value);
         //sessionStorage.setItem("product", value); // 本地session
         //var product = window.sessionStorage.getItem('product');
-    	//content.innerHTML += product;
+        //content.innerHTML += product;
     }
     function SetIndex(v){
       var s=document.getElementById('selectSS');
@@ -5227,18 +5227,18 @@ Vue项目结构：
 
 顶级目录：
 
-| 目录/文件 | 	说明|
+| 目录/文件 |   说明|
 |---|-----|
-| build	| 项目构建(webpack)相关代码 |
-| config |	配置目录，包括端口号等。我们初学可以使用默认的。|
-| node_modules |	npm 加载的项目依赖模块 |
+| build | 项目构建(webpack)相关代码 |
+| config |  配置目录，包括端口号等。我们初学可以使用默认的。|
+| node_modules |    npm 加载的项目依赖模块 |
 | src | 这里是我们要开发的目录，基本上要做的事情都在这个目录里。里面包含了几个目录及文件：<br> - assets: 放置一些图片，如logo等。<br> - components: 目录里面放了一个组件文件，可以不用。<br> - App.vue: 项目入口文件，我们也可以直接将组件写这里，而不使用 components 目录。<br> - main.js: 项目的核心文件。|
-| static |	静态资源目录，如图片、字体等。|
-| test |	初始测试目录，可删除 |
-| .xxxx文件	| 这些是一些配置文件，包括语法配置，git配置等。|
-| index.html |	首页入口文件，你可以添加一些 meta 信息或统计代码啥的。|
-| package.json	| 项目配置文件。|
-| README.md	| 项目的说明文档，markdown 格式|
+| static |  静态资源目录，如图片、字体等。|
+| test |    初始测试目录，可删除 |
+| .xxxx文件   | 这些是一些配置文件，包括语法配置，git配置等。|
+| index.html |  首页入口文件，你可以添加一些 meta 信息或统计代码啥的。|
+| package.json  | 项目配置文件。|
+| README.md | 项目的说明文档，markdown 格式|
 
 APP.vue 文件 是项目核心
 
