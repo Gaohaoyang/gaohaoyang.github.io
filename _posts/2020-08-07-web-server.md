@@ -5749,10 +5749,17 @@ var app7 = new Vue({
 
 ### vue框架
 
+#### 拖拽生成页面
+
+【2022-3-16】低代码平台 [Variant Form](https://www.vform666.com/)，只用拖拖拽拽就生成vue页面代码，体验地址：[vform表单设计器](http://120.92.142.115/)
+
+
 #### vue-element-admin（个人）
 
-- [vue-element-admin](https://panjiachen.github.io/vue-element-admin-site/zh/)，[github](https://github.com/PanJiaChen/vue-admin-template/blob/master/README-zh.md)：极简的 vue admin 管理后台。它只包含了 Element UI & axios & iconfont & permission control & lint, demo体验地址
+- [vue-element-admin](https://panjiachen.github.io/vue-element-admin-site/zh/)，[github](https://github.com/PanJiaChen/vue-admin-template/blob/master/README-zh.md)：极简的 vue admin 管理后台。它只包含了 Element UI & axios & iconfont & permission control & lint, [demo体验地址](https://panjiachen.github.io/vue-element-admin/#/dashboard)
 - ![](https://img-blog.csdnimg.cn/20190315091844174.png)
+
+#### 机器人平台demo
 
 【2022-2-22】滴滴机器人平台采用这个模板，django+vue框架，前后端分离
 - [前端地址](https://github.com/rhyspang/bot_fe)
@@ -5967,6 +5974,9 @@ if __name__ == "__main__":
 【2022-3-9】GO语言实现的客户关系管理系统 YAO，开源低代码应用引擎：Yao，无需编写一行代码，即可快速创建 Web 服务和管理后台，大幅解放生产力。该工具内置了一套数据管理系统，通过编写 JSON，帮助开发者完成数据库模型、API 接口编写、管理后台界面搭建等工作，实现 90% 常见界面交互功能。内置管理系统与 Yao 并不耦合，开发者亦可采用 VUE、React 等任意前端技术实现管理界面。
 - 项目示例 [IoT管理平哪台](https://github.com/YaoApp/yao)：An example of cloud + edge IoT application, an unattended intelligent warehouse management system that supports face recognition and RFID.
 - ![](https://p3.toutiaoimg.com/img/tos-cn-i-qvj2lq49k0/cac9a04840b5412fb20f132603cef688~tplv-obj:1747:960.image?from=post)
+
+【2022-3-16】低代码平台 [Variant Form](https://www.vform666.com/)，只用拖拖拽拽就生成vue页面代码，体验地址：[vform表单设计器](http://120.92.142.115/)
+
 
 ### python生成前端代码
 
