@@ -14,7 +14,98 @@ mathjax: true
 
 # 总结
 
-- 待定
+- [前端和后端区别](https://zhuanlan.zhihu.com/p/83515211)
+- [到底什么是前端、后端、后台啊？](https://www.zhihu.com/question/21923056)
+
+## 前端、后端
+
+前后端关系形象比喻: 前端是好看的皮囊，后端是复杂的肌肉骨骼，没有后者，前者啥也不是
+- ![](https://pic3.zhimg.com/80/v2-a547451490a6aa70b0b4e66b30588a68_720w.jpg?source=1940ef5c)
+- ![](https://pic1.zhimg.com/80/v2-bc6de7eff610c350e402c3fa22989bd0_720w.jpg?source=1940ef5c)
+
+[前端与后端的关系](https://blog.csdn.net/m0_37105443/article/details/72961524)：近几年，前后端分离的思想主键深入，客户端+浏览器形成大前端，技术架构上逐渐的从传统的 后台MVC 向RESUFUI API+前端MV* 迁移，前端项目通过RESTful服务获取数据，RESTful API就是前后端的边界和桥梁。
+
+前后端分离的好处是前端关注页面展现，后端关注业务逻辑，分工明确，职责清晰，前端工程师和后端工程师并行工作，提高开发效率。
+- ![](https://pic3.zhimg.com/80/v2-5639c53c35af2954363b29664a52e278_720w.jpg?source=1940ef5c)
+
+### 前后端演变历史
+
+网站、应用等产品中，有三个很重要的东西 —— `浏览器`、`服务器`、`数据库`。
+
+以php（也可以是python、java等）项目常见的流程，其过程一般是类似于下面这张图。
+- ![](https://pic1.zhimg.com/80/v2-ea14325ee79f60d878d1b412d1e2a76d_720w.jpg?source=1940ef5c)
+- 浏览器：“翻译”（即渲染）程序猿写的代码给用户看的，html文档主要会使用html、css、JavaScript三种语言
+- 数据库：存放业务数据
+- 服务器：自动操作（读写）数据库，如经常被提到的java、C++。
+
+演变：
+- 擅长html、css、JavaScript的程序猿，进化成了`前端工程狮`，天天倒腾浏览器，他们对用户体验负责。
+- 擅长java的程序猿，进化成了`后端攻城狮`，天天倒腾数据库和服务器，他们对服务器性能及数据负责。
+为了防止这两种不同的攻城狮工作内容混杂，双方约定一个发送请求的地址，和请求格式。
+- 这种请求的地址和其相应的格式，又被称为`API`（接口）。
+至此，做好API文档后，前端和后端终于可以老死不相往来，各自调试各自的代码。
+
+这一不相往来的概念，也被称为`前后端分离`。于是诞生了一种新的"变态"——Node.js，这个玩意虽然是用前端最爱的JavaScript语言，但是可以操作服务器。不过Node.js主要是被前端用来做中间件（可以理解为为了分离的更彻底一点）的，因此很多时候也被纳入前端范畴。
+
+随着互联网的迅猛发展，逐步进化出了更多生物：
+- 擅长美工的人成了 `UI` （`美工`）
+- 擅长沟通的人成了`产品经理` `PM` ，把客户和老板讲的东西理成结构化的文档，或是把用户的需求收集起来理成将来要做成软件的样子。
+- 往网站上写文章，填内容实在是麻烦，而且要把网站流量做大，还得找个人出出主意，于是，`运营`也诞生了。
+- 上线后服务器怎么老是不稳定，后端大佬们都去做新项目了，得找个hold的住服务器和机房的专家，然后`运维`出现了
+
+### 前端
+
+web前端分为网页设计师、网页美工、web前端开发工程师
+- `网页设计师`是对网页的架构、色彩以及网站的整体页面代码负责
+- `网页美工`只针对UI这块的东西，比如网站是否做的漂亮
+- `web前端开发工程师`是负责交互设计的，需要和程序员进行交互设计的配合。
+
+前端工程师主要的工作职责分为三大部分
+
+| 类型 | 设备端 | 备注 |
+|---|---|---|
+| 传统的Web前端开发 | PC | - |
+| 移动端开发 | APP：Android/iOS/小程序开发 | 移动端的开发任务量是比较大 |
+| 大数据呈现端开发 | PC | 基于已有的平台完可视化展现，如大屏 | 
+
+Web开发、APP开发以及小程序开发又统称为`大前端`
+
+从应用范围来看，前端开发不仅被常人所知、且应用场景也要比后端广泛的太多太多。
+- 一是`PC` (Personal Computer) 即个人电脑。目前电脑端仍是前端一个主要的领域，主要分为面向大众的各类网站，如新闻媒体、社交、电商、论坛等和面向管理员的各种 CMS (内容管理系统)和其它的后台管理系统。
+- 二 Web `App` 是指使用 Web 开发技术，实现的有较好用户体验的 Web 应用程序。它是运行在手机和桌面端浏览中，随着移动端网络速度的提升，Web App 为我们提供了很大的便利。此外近两年 Google 提出了一种新的 Web App 形态，即 PWA(渐进增强 Web APP) 。
+- 三 `WeChat` (微信) 这个平台，拥有大量的用户群体，因此它也是我们前端开发另一个重要的领域。微信的公众号与订阅号为市场营销和自媒体从业者，打造了一个新的天地。
+- 四 `Hybrid` App (混合应用) 是指介于 Web App、原生 App (主要是 Android 或 iOS )之间的 App，它兼具原生 App 良好用户交互体验的优势和 Web App 跨平台开发的优势。
+- 五 `Game`（游戏），HTML5 游戏从 2014 年 Egret 引擎开发的神经猫引爆朋友圈之后，就开始一发不可收拾。不过现在游戏开发变得越来越复杂，需要制作各种炫丽炫丽的效果，还要制作各炫丽于 2D 或者 3D 的场景。
+- 六 `Desktop`桌面应用软件，就是我们日常生活中电脑中安装的各类软件。早期要开发桌面应用程序，就需要有专门的语言 UI (界面) 库支持，如 C++ 中的 Qt 库、MFC 库，Java 的 Swing、Python 的 PyQT 等，否则语言是没办法进行快速界面开发。
+- 七 `Server` Node.js 一发布，立刻在前端工程师中引起了轩然大波，前端工程师们几乎立刻对这一项技术表露出了相当大的热情和期待。看到 Node.js 这个名字，初学者可能会误以为这是一个 Java 应用，事实上，Node.js 采用 C++ 语言编写而成，是一个 Java 的运行环境。
+
+前端开发涉及到的内容包括Html、CSS、JavaScript、Android开发（采用Java或者kotlin）、iOS开发（采用OC或者Swift）、各种小程序开发技术（类Html），随着前端开发任务的不断拓展，前端开发后端化也是一个较为明显的趋势，比如Nodejs的应用。
+
+### 后端
+
+后端工程师分三大部分
+- 平台设计：搭建后端的支撑服务容器
+- 接口设计：针对于不同行业进行相应的功能接口设计，通常一个平台有多套接口，就像卫星导航平台设有民用和军用两套接口一样
+- 功能实现：完成具体的业务逻辑实现。
+
+后端开发通常需要根据业务场景进行不同语言的选择，另外后端开发的重点在于算法设计、数据结构、性能优化等方面，在具体的功能实现部分可以采用Java、Python或者PHP等编程语言来实现。
+
+### 前端与后端技术栈
+
+- 前端开发技术：html5、css3、javascript、ajax、jquery、Bootstrap、Node.js 、Webpack，AngularJs，ReactJs，VueJs等技术。
+- 后端开发技术：  asp、php、jsp、.NET，以java为例，Struts spring springmvc Hibernate Http协议 Servlet Tomcat服务器等技术。
+
+| 前端	| 后端|
+|---|---|
+| 编程语言 | HTML，CSS，JavaScript	| PHP，Python，SQL，Java，Ruby，.NET，Perl |
+| 框架	| Angular.JS，React.JS，Backbone.JS，Vue.JS，Sass，Ember.JS，NPM	| Laravel，CakePHP，Express，CodeIgniter，Ruby on Rails，Pylon，ASP.NET |
+| 数据库	| Local Storage, Core Data, SQLite, Cookies, Sessions	| MySQL，Casandra，Postgre SQL，MongoDB，Oracle，Sybase，SQL Server |
+| 服务器	| -	| Ubuntu，Apache，Nginx，Linux，Windows |
+| 其他	| AJAX，AMP，Atom，Babel，BEM，Blaze，Bourbon，Broccoli，Dojo，Flux，GraphQL，Gulp，Polymer，Socket.IO，Sublime Text	| - |
+
+
+## 后端
+
 
 # HTTP
 
