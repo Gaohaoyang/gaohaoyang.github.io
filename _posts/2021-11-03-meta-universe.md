@@ -165,7 +165,9 @@ mathjax: true
 - 【2022-1-24】iphone 手机自带标签迁移功能，imessage里可以通过摄像头捕捉表情，并应用到动画形象上。个性化拟人表情：选取肤色、头饰、眼镜等等
   - ![](https://help.apple.com/assets/61606EE5D7F26F422E7EB450/61606EEAD7F26F422E7EB46F/zh_CN/c98ffa684190ba59c66227ff40372418.png)
   - [官方指南](https://support.apple.com/zh-cn/guide/iphone/iph37b0bfe7b/ios)
-
+- 【2022-3-18】asr与面部表情同步生成，Talking Head, 通过语音信号和一张常见的2d真人照片或者卡通图片，来生成一段与输入音频同步的人脸动画视频.
+  - 论文：[MakeItTalk: Speaker-Aware Talking-Head Animation](https://zhuanlan.zhihu.com/p/410570384)
+  - ![](https://pic1.zhimg.com/80/v2-7f4b2961268cb1ba600f34600b3af920_1440w.jpg)
 
 ## 评论
 
