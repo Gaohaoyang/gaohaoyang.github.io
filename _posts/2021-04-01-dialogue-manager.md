@@ -1410,11 +1410,103 @@ Image('fsm.png')
 - 结果
 ![](https://upload-images.jianshu.io/upload_images/618241-70acdf59c5f312c8.png)
 
+【2022-3-23】案例实践
+
+```python
+from transitions.extensions import GraphMachine
+# 定义模型
+class Matter(object):
+    def hello(self):
+        print('\t-->进入')
+    def bye(self):
+        print('\t-->退出')
+m = Matter()
+        
+# 状态定义：简单
+states = ['固体', '液体', '气体', '结束']
+# 定义方式：复杂
+states_new = [
+    {'name':'固体', 'on_enter':['hello'], 'on_exit':['bye']},
+    {'name':'液体'},
+    {'name':'气体', 'on_enter':['hello'], 'on_exit':['bye']},
+]
+# 定义转移集合
+transitions = [
+    ['熔化', '固体', '液体'],
+    ['凝固', '液体', '固体'],
+    ['升华', '固体', '气体'], # * 表示任何位置
+    ['凝华', '气体', '固体'],
+    ['液化', '气体', '液体'],
+    ['汽化', '液体', '气体']
+]
+# 不用模型
+#machine = GraphMachine(states=states, transitions=transitions, initial='固体',
+#                       auto_transitions=False, show_conditions=True)
+# 用模型
+machine = GraphMachine(m, states=states_new, transitions=transitions, initial='固体',
+                       auto_transitions=False, show_conditions=True)
+# 临时新增转移条件
+machine.add_transition('静默', source='*', dest='结束')    # 有效
+print('状态机所有状态：', machine.states)
+print('到液体的所有转化条件：', machine.get_triggers('液体')) # 获取到某个状态的transition
+print('---- 状态机测试 -----')
+print('初始状态：', m.state)
+print('当前状态是否固体：', m.is_固体()) # 格式：is_{状态名}
+# m.to_液体() # 状态名中文不便调用
+# 调用transition
+print('动作：升华')
+m.升华() # 方法①
+print('当前状态：', m.state)
+print('动作：液化')
+m.trigger('液化') # 方法②
+print('当前状态：', m.state)
+print('判断当前状态：', m.is_固体()) # 格式：is_{状态名}
+print('---- 绘制状态机 -----')
+machine.get_graph().draw('fsm-状态机.png', prog='dot')
+from IPython.display import Image
+Image('fsm-状态机.png')
+```
+
+
+### C++版：DM Kit
+
+FSM实现：
+- [DM Kit](https://github.com/baidu/unit-dmkit)，百度UNIT平台使用，含可视化编辑功能
+  - DMKit作为UNIT的开源对话管理模块，可以无缝对接UNIT的理解能力，并赋予开发者多状态的复杂对话流程管理能力，还可以低成本对接外部知识库，迅速丰富话术信息量。
+- [【C语言】有限状态机FSM](https://zhuanlan.zhihu.com/p/110872751)
+- [一个有限状态机的C++实现](https://zhuanlan.zhihu.com/p/50421568)，含代码解读
+  - 用C++11实现的FSM的代码: [kuafu](https://github.com/DavidLiuXh/kuafu)
+
+一件事可能会经过多个不同状态的转换, 转换依赖于在不同时间发生的不同事件来触发, 举个例子,比如 TCP的状态转换图, 在实现上就可以用FSM
+
+FSM的实现方案
+根据具体的业务需要, 将业务的处理流程定义为一个**状态机**, 此状态机中存在以下必要元素
+- 根据业务拆解抽象出若干个不同**状态** `State`, 并确定此状态机的**初始状态**;
+- 抽象出用于触发状态转换的**事件** `Event`;
+- 为了处理一个Event, 需要定义状态的**转换过程** `Transition`;
+- 状态机要先判断当前所处的状态是否与当前发生的Event匹配 (注意: 相同的状态可能同时匹配多个Event);
+
+![](https://pic3.zhimg.com/80/v2-3a689fa356b1ca11387123d6807303ca_720w.jpg)
+
+注：
+1. MachineSet可以同时管理多个Machine;
+1. 外部触发的Event进入到MachineSet的事件队列;
+1. 事件队列里的Event被顺序处理, 被Dispatch到match的Machine;
+1. Machine根据当前的所处的state和Event类型来判断当前Event是否有效;
+1. 如果上面(4)中的Event有效, 则进行状态转换;
+1. 状态转换具体来说涉及到三个回调函数: 6.1 当前state离开, 是第一个回调,需要使用者根据实际需要处理; 6.2 trasition这个转换过程, 是第二个回调; 6.3 新state的进入, 是第三个回调;
+1. 一个简单的状态机,差不多就是上面这些内容, 剩下的就是用程序语言把它实现出来了;
+
+实现简介: 主要就是按上面的思路, 封装了 MachineSet, Machine, Event, Transition, Predicate
+
+对于Event的处理, 提供两种方案:
+- 直接使用MachineSet提供的StartBackground, 开启一个work thread, 在这个work thread中不断从存储event的fifo队列中获取event后dispatch到各个machine;
+- 不使用MachineSet提供的event fifo, 实现自己的MachineSetHandler, 将其实例注册到MachineSet, 从event的派发;
 
 ### 状态机适用条件
 
 - 状态机问题
-  - ① 状态机模型的最大缺陷：<font color='blue'>所有状态都提前预知了才能够规划代码</font>，所以也叫有限状态机。以有限的状态应对可能比预期更多的状态，一旦遇到新增一个状态，全部状态机代码都得重审一遍，以免遗漏状态切换。
+  - ① 状态机模型的最大缺陷：<font color='blue'>所有状态都提前预知了才能够规划代码</font>，所以也叫`有限状态机`。以有限的状态应对可能比预期更多的状态，一旦遇到新增一个状态，全部状态机代码都得重审一遍，以免遗漏状态切换。
   - ② 还有大量的数据一般都是共享的，状态机模型对数据的封闭不利，对一些本来适合在函数参数中传递的变量，适合在private中封闭掉的数据，常常被迫敞开。
   - ③ 状态机的架构不太适合多线程模型，有限状态机流行的年代，高效多线程架构还不流行，这方面都是欠缺的。
 - 最重要的是状态清晰，粒度适中，状态迁移图明确可靠。一般的状态机状态数量4到8个，太少太简单，太多要注意适当切分。
@@ -2087,15 +2179,15 @@ rasa项目的开发流程
 
 ## 百度 DM Kit
 
-【2022-3-23】百度unit平台，支持图谱问答、文档问答
+【2022-3-23】百度unit平台，支持图谱问答、文档问答; UNIT平台多轮[可视化编辑体验](https://ai.baidu.com/unit/v2#/servicesecondary/S53838/test_multi_turn/taskflow)
 - 百度unit：图谱问答、对话式文档问答，[官方介绍](https://ai.baidu.com/unit/v2#/innovationtec/home)
-②
-③合同智能处理：https://ai.baidu.com/solution/contract
-④医疗病例结构化：https://ai.baidu.com/solution/mtp
+- [合同智能处理](https://ai.baidu.com/solution/contract)
+- [医疗病例结构化](https://ai.baidu.com/solution/mtp)
 
 百度开源 DM工具 [DMKit](https://ai.baidu.com/unit/v2#/dmKit)
 - [github 源码](https://github.com/baidu/unit-dmkit)
 - [DMKit 快速上手](https://github.com/baidu/unit-dmkit/blob/master/docs/tutorial.md)
+
 
 
 DMKit关注其中的**对话管理**模块（Dialog Manager），解决对话系统中状态管理、对话逻辑处理等问题。在实际应用中，单个技能下对话逻辑一般都是根据NLU结果中意图与槽位值，结合当前对话状态，确定需要进行处理的子流程。子流程或者返回固定话术结果，或者根据NLU中槽位值与对话状态访问内部或外部知识库获取资源数据并生成话术结果返回，在返回结果的同时也对对话状态进行更新。我们将这部分对话处理逻辑进行抽象，提供一个通过配置快速构建对话流程，可复用的对话管理模块，即Reusable Dialog Manager。
