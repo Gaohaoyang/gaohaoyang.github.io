@@ -360,6 +360,28 @@ N阶对话建模需要解决的问题:
 
 ![](https://pic3.zhimg.com/v2-838c2141adab54758263ea0de49b07d2_r.jpg)
 
+## 总结
+
+对话管理是对话系统的”中枢神经“，dialogue manager，简称DM，发展至今，DM方法经历了几个阶段
+1. 问答匹配方法（点）
+  - 即常见的简单问答模式，单点映射
+  - 简单易用，但功能受限
+2. Programmatic方法（规则，序列）
+  - 将对话控制逻辑（线性→树状→图状）直接用代码写死
+  - 可控但很不灵活，每次业务逻辑变更都要升级代码
+3. Finite-state graph方法（FSM有限状态机，图）
+  - 规则升级版，成功实现了 对话设计 与 控制执行 的 解耦
+  - 设计与控制解耦，相对灵活
+  - 但仍然不完美：见下文
+4. 基于Frame的方法（槽填充，树）
+  - 典型代表：VoiceXML
+  - 提升泛化能力，不在限制对话路径
+5. 基于目标的方法（树+栈+字典）
+  - 跨场景，模仿人类对话，用树实现场景内控制，栈做历史场景记忆，字典存储全局信息
+6. Data-driven方法（完备性）
+  - 纯数据驱动，希望用模型从海量数据中学习对话逻辑
+  - 理想很美好，现实很骨感
+
 ## 方法
 
 对话管理的一些方法，主要有三大类：
@@ -942,7 +964,7 @@ _图 9 微软 Conversational Learner - Interactive Learning 交互界面_
 虽然微软的 Conversational Learner 和 Rasa-X 都还只是实验性的产品，但它所支持的功能比较好的解决了一部分机器学习应用的困难（应用的困难详细讨论请见 [文章系列第二篇](https://zhuanlan.zhihu.com/p/71787538)：interactive learning 降低了企业准备对话语料的成本，hybrid 模式给了企业足够的逻辑控制权，end-to-end 算法让企业有了自动化设计对话的能力。随着 chatbot 在企业级的应用范围越来越广，应用场景越来越深入，这种新的对话设计模式势必会受到越来越多的关注。
 
  
-### 目前正在尝试的优化方案
+### 正在尝试的优化方案
  
 文章最后简要聊一下我们正在对自家产品做的优化。上文中讨论了很多对话管理的方法，以及具体场景下可能会出现的问题，在我们实际项目中感受很深。为了提高多轮对话的易用性和扩展性，我们主要从两个方面做了优化，一是改用基于目标的对话模型，二是使用机器学习辅助 VUI 设计。
  
@@ -964,7 +986,7 @@ _图 9 微软 Conversational Learner - Interactive Learning 交互界面_
 
 
 
-# DM组成
+# DM 子模块
 
 ## DST
 
@@ -1128,8 +1150,9 @@ DST 主要分为三类方法：基于人工规则、基于生成式模型和基�
   - ![](https://pic3.zhimg.com/80/v2-a499aef3d6e5bf09ea9e4239415c1ee6_hd.jpg)
 
 
-### 有限状态机FSM
+## 有限状态机FSM
 
+### FSM 简介
 - `有限状态机`（Finite-state machine, `FSM`），又称**有限状态自动机**，简称`状态机`，表示有限个状态以及在这些状态之间的转移和动作等行为的数学模型。
   - FSM是一种算法思想，简单而言，有限状态机由一组`状态`、一个`初始状态`、`输入`和根据输入及现有状态转换为下一个状态的`转换函数`组成。
 - 描述有限状态机时，`状态`、`事件`、`转换`和`动作`是经常会碰到的几个基本概念。
@@ -1140,11 +1163,37 @@ DST 主要分为三类方法：基于人工规则、基于生成式模型和基�
 
 生活中有大量有限个状态的系统：钟表系统、电梯系统、交通信号灯系统、通信协议系统、正则表达式、硬件电路系统设计、软件工程，编译器等，有限状态机的概念就是来自于现实世界中的这些有限系统。
 
+### FSM 优缺点
+
+【2022-3-23】[AI应用：对话系统之有限状态机（FSM）优缺点](https://zhuanlan.zhihu.com/p/486292005)
+
+- （1）FSM优点
+  - ① 用户表达限制在预定于词汇、短语里→易于ASR/NLU识别
+  - ② 对话逻辑结构化：简单可控，易开发，适合流程稳定的任务
+- （2）FSM缺点
+  - ① 用户表达受限→无法处理复杂对话逻辑，如识别失败、对话流变种、错误恢复/对话修复、非原子结构
+  - ② 用户难以初始化→基础行为硬编码、无法建模
+- （3）FSM适合场景
+  - 扁平结构、选项少的简单任务
+  - 订票、天气预报、订餐、银行交易等
+- （4）不适合
+  - 路径不确定的子任务
+  - 需要灵活处理用户请求：纠错、越界
+  - 对话过程相对确定
+  - 复杂依赖
+
+![](https://pic1.zhimg.com/80/v2-39949bd375f8eb062027f71d25f7d878_720w.jpg)
+
+![](https://pic4.zhimg.com/80/v2-8a8a450a87d63e5fc0743075136c62c7_720w.jpg)
+
+
+### FSM 实现
+
 - FSME 是一个基于Qt的有限状态机工具，它能够让用户通过图形化的方式来对程序中所需要的状态机进行建模，并且还能够自动生成用C++或者Python实现的状态机框架代码。
 - 类似的还有[QFSM](http://qfsm.sourceforge.net/download.html)：A graphical tool for designing finite state machines
 - ![](https://www.ibm.com/developerworks/cn/linux/l-fsmachine/image/2.jpg)
 
-#### java版 FSM
+### java版 FSM
 
 Akka fsm,squirrel-foundation
 - [FSM-Java](https://gitlab.com/tengbai/fsm-java)，项目中共有4中状态机的实现方式。参考：[Java有限状态机4种实现对比](https://zhuanlan.zhihu.com/p/97442825)
@@ -1156,7 +1205,7 @@ Akka fsm,squirrel-foundation
 
 ![](https://camo.githubusercontent.com/c7aa76914060369995ee7ac173c16512634ab0cb/687474703a2f2f68656b61696c69616e672e6769746875622e696f2f737175697272656c2f696d616765732f41544d53746174654d616368696e652e706e67)
 
-#### Python版：transitions
+### Python版：transitions
 
 transitions 是一个由Python实现的轻量级的、面向对象的有限状态机框架。
 
@@ -2036,6 +2085,23 @@ rasa项目的开发流程
   - Rasa官方文档： [Build contextual chatbots and AI assistants with Rasa](https://rasa.com/docs/rasa/)
   - github地址：[RasaHQ/rasa](https://github.com/RasaHQ/rasa)
 
+## 百度 DM Kit
+
+【2022-3-23】百度unit平台，支持图谱问答、文档问答
+- 百度unit：图谱问答、对话式文档问答，[官方介绍](https://ai.baidu.com/unit/v2#/innovationtec/home)
+②
+③合同智能处理：https://ai.baidu.com/solution/contract
+④医疗病例结构化：https://ai.baidu.com/solution/mtp
+
+百度开源 DM工具 [DMKit](https://ai.baidu.com/unit/v2#/dmKit)
+- [github 源码](https://github.com/baidu/unit-dmkit)
+- [DMKit 快速上手](https://github.com/baidu/unit-dmkit/blob/master/docs/tutorial.md)
+
+
+DMKit关注其中的**对话管理**模块（Dialog Manager），解决对话系统中状态管理、对话逻辑处理等问题。在实际应用中，单个技能下对话逻辑一般都是根据NLU结果中意图与槽位值，结合当前对话状态，确定需要进行处理的子流程。子流程或者返回固定话术结果，或者根据NLU中槽位值与对话状态访问内部或外部知识库获取资源数据并生成话术结果返回，在返回结果的同时也对对话状态进行更新。我们将这部分对话处理逻辑进行抽象，提供一个通过配置快速构建对话流程，可复用的对话管理模块，即Reusable Dialog Manager。
+
+- 针对状态繁多、跳转复杂的垂类，DMKit支持通过可视化编辑工具进行状态跳转流程的编辑设计，并同步转化为对话基础配置供对话管理引擎加载执行。
+- 用开源的mxgraph可视化库，对话开发者可在可视化工具上进行图编辑，而该可视化库支持从图转化为xml文件, [官方说明](https://github.com/baidu/unit-dmkit/blob/master/docs/visual_tool.md)
 
 ## 美团
 
