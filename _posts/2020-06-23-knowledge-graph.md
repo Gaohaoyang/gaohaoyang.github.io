@@ -3,7 +3,7 @@ layout: post
 title:  "知识图谱-Knowledge-Graph"
 date:   2020-06-23 21:14:00
 categories: 自然语言处理
-tags: 深度学习 NLP KG KB-QA 知识图谱 表示学习 jena
+tags: 深度学习 NLP KG KB-QA 知识图谱 表示学习 jena neo4j
 excerpt: 知识图谱（Knowledge Graph）发展历史，主要类型，前沿研究及应用场景等
 author: 鹤啸九天
 mathjax: true
@@ -517,30 +517,36 @@ Instructions for connecting to the following graph databases:
 
 ## Neo4j
 
+
 - [Neo4J](https://neo4j.com/download/)是由Java实现的开源图数据库。自2003年开始开发，直到2007年正式发布第一版，并托管于GitHub上。在线[demo](http://console.neo4j.org/)
-  - 安装：先装[java](https://www.oracle.com/java/technologies/javase-jdk15-downloads.html),必须是open jdk 11以上版本, open JDK[清华源下载](https://mirror.tuna.tsinghua.edu.cn/AdoptOpenJDK/15/jdk/x64/linux/)
-  - 配置环境变量：见下面代码
-  - 查看版本：java --version
-  - 社区版neo4j下载：（免登记，直接下载，版本号可定制）
-    - windows：https://neo4j.com/artifact.php?name=neo4j-community_windows-x64_3_1_0.exe
-    - linux：https://neo4j.com/artifact.php?name=neo4j-community-3.1.0-unix.tar.gz
-    - mac：https://neo4j.com/artifact.php?name=neo4j-community_macos_3_1_0.dmg
-  - 更改配置, conf/neo4j.conf
-    - To accept non-local connections, uncomment this line:
-    - dbms.default_listen_address=0.0.0.0 # 注释掉此行
-  - 安装完成后，启动服务
-  - Web Demo：http://localhost:7474/browser/
-    - 默认账户，用户名：neo4j 密码 ：neo4j
-    - 密码修改:server change-password
-- Neo4J支持ACID，集群、备份和故障转移。目前Neo4J最新版本为3.5，分为**社区版**和**企业版**
-  - 社区版只支持单机部署，功能受限。
-  - 企业版支持**主从复制**和**读写分离**，包含可视化管理工具。
+
 - 标记属性图模型
   - 节点
   - 关系
   - 属性
   - 标签
 - ![](https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/uploads/20170731095054/Property-Graph-Concepts-Simple.svg)
+
+### 安装
+
+安装：先装[java](https://www.oracle.com/java/technologies/javase-jdk15-downloads.html),必须是open jdk 11以上版本, open JDK[清华源下载](https://mirror.tuna.tsinghua.edu.cn/AdoptOpenJDK/15/jdk/x64/linux/)
+- 配置环境变量：见下面代码
+- 查看版本：java --version
+- 社区版neo4j下载：（免登记，直接下载，版本号可定制）
+  - windows：https://neo4j.com/artifact.php?name=neo4j-community_windows-x64_3_1_0.exe
+  - linux：https://neo4j.com/artifact.php?name=neo4j-community-3.1.0-unix.tar.gz
+  - mac：https://neo4j.com/artifact.php?name=neo4j-community_macos_3_1_0.dmg
+- 更改配置, conf/neo4j.conf
+  - To accept non-local connections, uncomment this line:
+  - dbms.default_listen_address=0.0.0.0 # 注释掉此行
+- 安装完成后，启动服务
+- Web Demo：http://localhost:7474/browser/
+  - 默认账户，用户名：neo4j 密码 ：neo4j
+  - 密码修改:server change-password
+
+- Neo4J支持ACID，集群、备份和故障转移。目前Neo4J最新版本为3.5，分为**社区版**和**企业版**
+  - 社区版只支持单机部署，功能受限。
+  - 企业版支持**主从复制**和**读写分离**，包含可视化管理工具。
 
 ```shell
 # 环境变量如下
@@ -551,6 +557,10 @@ export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
 alias java=$JAVA_HOME/bin/java # 如果系统已有java，加此行覆盖
 ```
 
+### 使用方法
+
+
+#### 面向过程代码
 
 - 代码
 
@@ -614,6 +624,115 @@ def main():#pylint:disable=too-many-statements,too-many-branches,too-many-locals
 if __name__ == '__main__':
     main()
 ```
+
+
+#### 面向对象代码
+
+[谷歌Colab笔记本](https://colab.research.google.com/drive/1J9__HotNoINHpucoipLH-4qWc48GALAk?usp=sharing)
+
+工具
+- Neo4j Python驱动程序(4.2版)
+- jupiter notebook/Lab或谷歌Colab(可选)
+- pandas
+
+数据示例
+- 三种不同的节点类型与之对应:作者、论文和类别。
+- ![](https://p3.toutiaoimg.com/origin/pgc-image/9d56b9ee7b4246b99217828142e8fea0)
+- ![](https://p3.toutiaoimg.com/origin/pgc-image/b8201793e6d54267a6fe5db2a3657657)
+
+Neo4j沙箱可以对Neo4j免费使用。你可以启动一个实例，该实例将持续3天并开始工作!
+
+```python
+class Neo4jConnection:
+    """
+      neo4j 连接对象
+    """
+    def __init__(self, uri, user, pwd):
+        self.__uri = uri
+        self.__user = user
+        self.__pwd = pwd
+        self.__driver = None
+        try:
+            self.__driver = GraphDatabase.driver(self.__uri, auth=(self.__user, self.__pwd))
+        except Exception as e:
+            print("Failed to create the driver:", e)
+        
+    def close(self):
+        if self.__driver is not None:
+            self.__driver.close()
+        
+    def query(self, query, parameters=None, db=None):
+        assert self.__driver is not None, "Driver not initialized!"
+        session = None
+        response = None
+        try: 
+            session = self.__driver.session(database=db) if db is not None else self.__driver.session() 
+            response = list(session.run(query, parameters))
+        except Exception as e:
+            print("Query failed:", e)
+        finally: 
+            if session is not None:
+                session.close()
+        return response
+
+# 链接neo4j沙箱
+conn = Neo4jConnection(uri="bolt://52.87.205.91:7687", 
+                       user="neo4j",              
+                       pwd="difficulties-pushup-gaps")
+# 创建约束（避免节点重复），建立索引
+conn.query('CREATE CONSTRAINT papers IF NOT EXISTS ON (p:Paper)     ASSERT p.id IS UNIQUE')
+conn.query('CREATE CONSTRAINT authors IF NOT EXISTS ON (a:Author) ASSERT a.name IS UNIQUE')
+conn.query('CREATE CONSTRAINT categories IF NOT EXISTS ON (c:Category) ASSERT c.category IS UNIQUE')
+# 创建三个函数来为category和author节点创建数据框
+def add_categories(categories):
+    # 向Neo4j图中添加类别节点。
+    query = '''
+            UNWIND $rows AS row
+            MERGE (c:Category {category: row.category})
+            RETURN count(*) as total
+            '''
+    return conn.query(query, parameters = {'rows':categories.to_dict('records')})
+
+
+def add_authors(rows, batch_size=10000):
+    # #以批处理作业的形式将作者节点添加到Neo4j图中。
+    query = '''
+            UNWIND $rows AS row
+            MERGE (:Author {name: row.author})
+            RETURN count(*) as total
+            '''
+    return insert_data(query, rows, batch_size)
+
+
+def insert_data(query, rows, batch_size = 10000):
+    # 以批处理方式更新Neo4j数据库
+    total = 0
+    batch = 0
+    start = time.time()
+    result = None
+    
+    while batch * batch_size < len(rows):
+
+        res = conn.query(query, 
+                         parameters= {
+                         'rows': rows[batch*batch_sizebatch+1)*batch_size].to_dict('records')})
+        total += res[0]['total']
+        batch += 1
+        result = {"total":total, 
+                  "batches":batch, 
+                  "time":time.time()-start}
+        print(result)
+        
+    return result
+# 其它操作见原文
+```
+
+命令运行：
+
+```sql
+MATCH (a:Author)-[:AUTHORED]->(p:Paper)-[:IN_CATEGORY]->(c:Category) RETURN a, p, c LIMIT 300
+```
+
 
 
 ### Cypher
