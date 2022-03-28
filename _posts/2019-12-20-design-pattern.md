@@ -38,8 +38,11 @@ catalog: true
 - 行为型模式，共11种：策略模式、模板方法模式、观察者模式、迭代子模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介者模式、解释器模式。
 - 其实还有两类：**并发**型模式和**线程池**模式。
 
-【2020-1-27】[图解23种设计模式](https://cloud.tencent.com/developer/article/1190060)，两张图；另一个[版本](https://www.jianshu.com/p/4a02646f7c9d)，包含23种模式总结
 
+- 【2020-1-27】[图解23种设计模式](https://cloud.tencent.com/developer/article/1190060)，两张图；另一个[版本](https://www.jianshu.com/p/4a02646f7c9d)，包含23种模式总结
+- 【2022-3-27】[非常简洁的设计模式备忘录，英文、中文各一版](https://www.toutiao.com/w/1728260246562827)
+- ![](https://p9.toutiaoimg.com/img/tos-cn-i-qvj2lq49k0/2100743ddc4040389bfe4750acd56c7b~tplv-obj:1700:2200.image?from=post)
+- ![](https://p9.toutiaoimg.com/img/tos-cn-i-qvj2lq49k0/4239b80af4ec4448b4db2606d96ddba4~tplv-obj:1700:2200.image?from=post)
 
 
 
