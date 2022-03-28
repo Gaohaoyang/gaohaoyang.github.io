@@ -267,6 +267,8 @@ mathjax: true
 
 ![](https://pic4.zhimg.com/80/v2-8248f2e0ece454bd036b3ab97dc30b77_720w.jpg)
 
+### 亚马逊 DGL-KE
+
 - 【2021-2-7】[DGL-KE：亚马逊开源知识图谱嵌入库，亲测快到飞起](https://zhuanlan.zhihu.com/p/347803335)，[github地址](https://github.com/awslabs/dgl-ke)
   - DGL-KE 是一个高性能、易于使用且可扩展的知识图谱嵌入工具包，它是依赖 Deep Graph Library (DGL) 库实现的，支持 CPU、GPU、分布式训练，包括 TransE、TransR、RESCAL、DistMult、ComplEx 和 RotatE 等一系列经典模型。
   - DGL-KE 正在继续开发中，预计一个月之后会加入 SimplE 模型、图神经网络 GNN 等。
@@ -278,6 +280,32 @@ mathjax: true
 |---|---|---|
 |OpenKE|	1小时|	1000|
 |DGL-KE|	|15分钟|	100000|
+
+### TransX TF实现
+
+【2022-3-28】[GraphEmbedding-TransX](https://gitee.com/hcxy0729/GraphEmbedding-TransX)
+- TensorFlow实现对知识图谱的表征学习，包括transe\transd\transh\transr
+
+在config.py文件中对模型参数进行设置，在models.py与main.py文件中的参数均不需要修改，如果在使用代码中出现未知错误，请在config.py中修改参数并提交request
+
+内容
+- ./data/KG_name/entity2id.txt 该文件是实体与实体ID的映射，每一行是 实体\t实体ID
+- ./data/KG_name/relation2id.txt 该文件是关系与关系ID的映射，每一行是 关系\t关系ID
+- ./data/KG_name/triple.txt 该文件是在知识图谱中三元组数据，每一行是 头实体\t尾实体\t关系
+  - 注：默认知识图谱中用**三元组**来表示，如果知识图谱中的表达比三元组要更加丰富，需要在模型中增加一个向量并修改loss的计算方法
+- ./config.py 参数设置文件
+- ./Models.py 模型文件，其中共有transe\transd\trasnh\transr四个模型类，每个类均是独立的，如果出现未知错误仅需修改对应类并提交request
+- ./get_parameter.py 在训练完成之后加载模型参数以便使用
+- ./Main.py 主文件，修改config.py文件中的参数设置，运行该文件即可
+
+### KG Attention
+
+[Knowledge Graph Attention Network](https://gitee.com/hcxy0729/knowledge_graph_attention_network)
+- 论文：KGAT: Knowledge Graph Attention Network for Recommendation
+- Knowledge Graph Attention Network (KGAT) is a new recommendation framework tailored to knowledge-aware personalized recommendation. Built upon the graph neural network framework, KGAT explicitly models the high-order relations in collaborative knowledge graph to provide better recommendation with item side information.
+
+
+## 知识图谱
 
 
 # 事理图谱-Event Graph
