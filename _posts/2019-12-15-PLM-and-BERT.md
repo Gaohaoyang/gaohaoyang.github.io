@@ -1962,7 +1962,25 @@ https://github.com/bojone/SimCSE
 - 英文语料：SimCSE**明显优于**BERT-flow和BERT-whitening
 - 中文语料：除了PAWSX这个“异类”外，SimCSE相比BERT-whitening确实有压倒性优势，有些任务还能好10个点以上，在BQ上SimCSE还比有监督训练过的SimBERT要好，而且像SimBERT这种已经经过监督训练的模型还能获得进一步的提升，这些都说明确实强大
 
+### BERT真的有理解能力吗
 
+【2019-07-12】
+- ACL 2019，[论文1：Probing Neural Network Comprehension of Natural Language Arguments](https://arxiv.org/abs/1907.07355), 台湾成功大学计算机科学与信息工程系智能知识管理实验室，一作 Timothy Niven，ARCT一个数据集
+  - [台湾小哥一篇论文把 BERT 拉下神坛](https://zhuanlan.zhihu.com/p/74652696)
+  - [把BERT拉下神坛！ACL论文只靠一个“Not”，就把AI阅读理解骤降到盲猜水平](https://bbs.huaweicloud.com/blogs/107657)
+  - We are surprised to find that BERT's peak performance of 77% on the **Argument Reasoning Comprehension Task** reaches just three points below the average untrained human baseline. However, we show that this result is entirely accounted for by exploitation of spurious statistical cues in the dataset. We analyze the nature of these cues and demonstrate that a range of models all exploit them. This analysis informs the construction of an **adversarial dataset** on which <font color='red'>all models achieve random accuracy</font>. Our adversarial dataset provides a more robust assessment of argument comprehension and should be adopted as the standard in future work.
+- ACL 2019, [论文2：Right for the Wrong Reasons: Diagnosing Syntactic Heuristics in Natural Language Inference](https://arxiv.org/abs/1902.01007)，只不过，数据集不一样了。这篇论文里BERT是在**多类型语言推理数据集** (MNLI) 上训练的，而测试集则是研究团队自制的HANS数据集，一些简单的句子变换，就能让AI做出错误的判断。
+  - A machine learning system can score well on a given test set by relying on heuristics that are effective for **frequent example types** but break down in more challenging cases. We study this issue within **natural language inference** (NLI), the task of determining whether one sentence entails another. We hypothesize that statistical NLI models may adopt three fallible syntactic heuristics: the lexical overlap heuristic, the subsequence heuristic, and the constituent heuristic. To determine whether models have adopted these heuristics, we introduce a **controlled evaluation set** called `HANS` (Heuristic Analysis for NLI Systems), which contains many examples where the heuristics fail. We find that models trained on MNLI, including BERT, a state-of-the-art model, perform very poorly on HANS, suggesting that they have indeed adopted these heuristics. We conclude that there is substantial room for improvement in NLI systems, and that the HANS dataset can motivate and measure progress in this area
+- 论文3：What does BERT Learn from Multiple-Choice Reading Comprehension Datasets? 在数据集中添加干扰文本，结果显示BERT的表现非常差
+- 研究认为，包括BERT在内，许多模型的成功都是建立在**虚假的线索**上。团队用了去年诞生的`观点推理理解任务` (ARCT) 考验了BERT。结果发现，只要做个**对抗数据集**，准确率就从77%降到53%，几乎等同于随机猜
+  - 对抗并不是把o变成0、把I变成1的小伎俩
+  - BERT是依靠数据集里 “**虚假的统计学线索** (Spurious Statistical Cues) ”来推理的，BERT是利用了一些线索词来判断，特别是“Not”这个词, 它并不能真正分析出句子之间的逻辑关系。
+  - `观点推理理解任务` (ARCT) ，是Habernal和小伙伴们提出的阅读理解任务，考察的是语言模型的**推理能力**，中选了NAACL 2018。一个`观点`，包含`前提` (Premise) ，和`主张` (Claim) 。除此之外，观点又有它的`原因` (Reasoning) ，以及它的`佐证` (Warrant) 。
+- 这篇ACL论文打击了以BERT为首的众多阅读理解模型
+
+Reddit评论区补充说：
+> - 每隔几个月就会听到有关NLP的新进展，更新、更好的模型层出不穷。但当有人实际用数据集测试时，会发现这些模型并没有真正学习到什么。优化模型的竞赛该放缓脚步了，我们更应该仔细研究研究数据集，看看它们是否真的有意义。
+> - 并不否认BERT和其他新模型的价值，但是并不相信一些Benchmark。
 
 ## BERT应用
 
