@@ -3,7 +3,7 @@ layout: post
 title:  "机器阅读理解-Machine-Reading-Comprehension"
 date:   2021-03-28 00:00:00
 categories: 自然语言处理 
-tags:  阅读理解 神经网络
+tags:  阅读理解 神经网络 文本摘要
 excerpt: 机器阅读理解笔记
 author: 鹤啸九天
 mathjax: true
@@ -59,6 +59,22 @@ mathjax: true
    - `自由作答`：给定一个问题、一段背景文字，生成单词序列作为答案。
 - 多项选择和完形填空属于客观类答案，测评时可以将模型答案直接与正确答案比较，并以准确率作为评测标准，易于计算。
 - [A Gentle Introduction to Text Summarization in Machine Learning](https://blog.floydhub.com/gentle-introduction-to-text-summarization-in-machine-learning/)
+
+## 文本摘要
+
+[Bert-MRC](https://github.com/jasoncao11/nlp-notebook/tree/master/3-1.Bert-MRC)
+
+文本摘要生成
+
+### 1). 生成式
+- 4-1. [Seq2seq 模型](https://github.com/jasoncao11/nlp-notebook/tree/master/4-1.Seq2seq)
+- 4-2. [Seq2seq 模型+注意力机制](https://github.com/jasoncao11/nlp-notebook/tree/master/4-2.Seq2seq_Att)
+- 4-3. [Transformer 模型](https://github.com/jasoncao11/nlp-notebook/tree/master/4-3.Transformer)
+- 4-4. [GPT 摘要生成](https://github.com/jasoncao11/nlp-notebook/tree/master/4-4.GPT)
+- 4-5. [Bert-seq2seq](https://github.com/jasoncao11/nlp-notebook/tree/master/4-5.Bert-seq2seq)
+
+### 2). 抽取式
+- 4-6. [Bert-extractive-summarizer](4-6.Bert-extractive-summarizer)
 
 # 分类
 
