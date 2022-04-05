@@ -103,6 +103,11 @@ MAC 地址：长度 48 位，固话在设备硬件上，用十六进制表示的
 
 【2018-11-3】[IP地址详解](http://blog.51cto.com/6930123/2112403)
 
+【2022-4-5】[计算机是如何通信的？IP地址与mac地址是什么？](https://www.ixigua.com/6958363991613637133)
+
+<iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/6958363991613637133?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
+
+
 ### ip地址介绍
 
 `IP地址`（Internet Protocol Address），缩写为IP Adress，是一种在Internet上的给主机统一编址的地址格式，也称为**网络协议**（IP协议）地址。它为互联网上的每一个网络和每一台主机分配一个**逻辑地址**，常见的IP地址，分为IPv4与IPv6两大类，当前广泛应用的是IPv4，目前IPv4几乎耗尽，下一阶段必然会进行版本升级到IPv6；如无特别注明，一般我们讲的的IP地址所指的是IPv4。
@@ -255,6 +260,11 @@ A记录也有一些好处，例如可以在输入域名时不用输入WWW.来访
 - [理解几个网络硬件（调制解调器、路由器、交换机）的基本作用](https://blog.csdn.net/pan_tian/article/details/12339629)
 - [调制解调器、中继器、集线器、网桥、交换机、路由、网关](https://blog.csdn.net/qingkongyeyue/article/details/52279893)
 
+【2022-4-5】[家庭网络如何通过路由器上网？](https://www.ixigua.com/6962843320791859749)
+
+<iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/6962843320791859749?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
+
+
 ## 传播方式
 
 - 单播：一对一的数据发送方式。
@@ -347,6 +357,10 @@ OSI模型上，交换机位于第二层的Datalink层，路由器位于第三层
 
 很多家用网络设备都兼具多项功能，如图里的路由器既有路由器功能也具有交换机的功能，路由功能联通内部局域网和外部的Internet网络，还有交换机的功能，可以在内网中联通多台设备。
 -  TP-LINK TL-WR541G+ 54M无线路由器，含有4个10/100M局域网接口，无线网络速率可达到54Mb/s
+
+【2022-4-5】[交换器和路由器区别](https://www.ixigua.com/6960673453431226893)
+
+<iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/6960673453431226893?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
 
 ### WAN/LAN/WLAN
 
@@ -521,6 +535,11 @@ TCP/IP模型是互联网的基础，它是一系列网络协议的总称。这�
   - ![](https://p26.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/b2655db145564181b815eb00fefdae31?from=pc)
 - 物理层：OSI 模型的第 1 层，这一层的服务是规范物理传输的相关标准，实现信号在两个设备之间进行传输。
   - ![](https://p26.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/45a14a1b8e4d4d99bea0c482147d3749?from=pc)
+
+[一条视频讲清楚TCP协议与UDP协议-什么是三次握手与四次挥手](https://www.ixigua.com/6965440376727732739)
+
+<iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/6965440376727732739?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
+
 
 ## 发送过程
 
