@@ -400,6 +400,9 @@ C轮之后有D轮，D轮之后有E轮，E轮之后还有中国股民。 在这�
 - 事实证明：
   - 股票价格没有特定的趋势或季节性
   - 股价受到公司新闻和其他因素的影响，如公司的非货币化或合并/分拆。还有一些无形的因素往往是无法事先预测的。
+- 【2022-4-7】kaggle股票预测比赛：[Tokyo Stock Exchange Prediction](https://www.kaggle.com/competitions/jpx-tokyo-stock-exchange-prediction/rules)
+- How do you know when to buy a stock or derivative? When should you sell instead? Your data science skills could help you predict markets and explore quantitative trading.This competition will compare your models against real future returns after the training phase is complete. This dataset contains historic data for a variety of Japanese stocks and options. Your challenge is to predict future returns. The competition will involve building portfolios from around 2,000 stocks eligible for predictions. Specifically, each participant will rank the stocks from highest to lowest expected returns and be evaluated on the difference between the returns of the highest and lowest 200 stocks.
+
 
 ### 用LR预测股票
 
