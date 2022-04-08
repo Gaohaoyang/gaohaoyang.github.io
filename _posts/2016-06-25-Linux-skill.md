@@ -3439,6 +3439,10 @@ git checkout foo/bar.txt # 恢复本地
 
 ## 终端
 
+- 【2022-4-8】[运维神器！一个可以通过Web访问Linux终端的工具](https://www.toutiao.com/article/7083860657581670951)——rtty
+  - rtty由客户端和服务端组成。客户端采用纯C实现，服务端采用GO语言实现，前端界面采用vue实现。使用rtty可以在任何地方通过Web访问您的设备的终端，通过设备ID来区分您的不同的设备。rtty非常适合远程维护Linux设备。
+  - ![](https://p26.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/ac2f8ae6dc5946f1b8ec4881d058a351?from=pc)
+  - ![](https://p26.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/ca37b04be909420cab976e1f998c0623?from=pc)
 - 【2021-5-15】Next Terminal 是一款开源的远程登录工具，需要自己部署，可以在任何一个浏览器远程访问Windows/Linux/macOS系统，方便快捷。Next Terminal 基于 Apache Guacamole 开发，使用到了guacd 服务。在线[DEMO](https://next-terminal.typesafe.cn/)，即开即用,（用户名/密码 test/test），打开后就能看到后台了
 - 具体功能如下：
   - 授权凭证管理（密码、密钥）
