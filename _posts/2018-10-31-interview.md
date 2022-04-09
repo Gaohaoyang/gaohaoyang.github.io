@@ -663,6 +663,39 @@ NLP
 如何做出科学的决策？不偏听，不盲从，多方求证，理性分析，最大程度的降低感性的影响。有人说，所谓的选择困难症，就是穷；我想说，那是因为信息不对称，另一种意义上的穷。
 
 
+## IT英语
+
+### 如何学机器学习？
+
+【2022-4-9】作者：吴恩达, [链接](https://www.zhihu.com/question/266291909/answer/2429781356)
+
+Do you want to become an AI professional? The key to machine learning mastery is to approach your learning systematically!  
+- Machine learning is the science of making a computer perform work without explicit programming.  In the past decade, machine learning has enabled utilities such as **self-driving cars** 自动驾驶, **real-time speech recognition** 实时语音识别, efficient web search 网络搜索, and boosting our knowledge of the human genome 人类基因组. 
+- Many researchers believe that machine learning promises the greatest possibility in realizing **human-level AI**. 
+- Here, I‘d like to share **three steps** to learn machine learning in a systematic way: 
+- First, you should learn **coding basics** 编程基础. 
+- Second, you should study machine learning and deep learning. 
+- Third, you should focus on the **role** you would like to have.  
+
+Fundamental programming skills are a prerequisite for building machine learning systems. You will need to be able to write a simple computer program (function calls 函数调用, for loops 循环, conditional statements 条件语句, basic mathematical operations 基础数学操作) before you can start implementing preliminary machine learning algorithms. 
+
+Knowing more math can give you an edge, but it won’t be necessary to spend much time on specific mathematical issues such as linear algebra, probability and statistics. 
+
+Having gained some fundamental coding skills, you can officially begin your journey of machine learning. My Machine Learning course from Stanford University is a great choice. It provides a general introduction to **machine learning**, **data mining**, and the statistical approach of **pattern recognition**. The course will also help you to develop your practical understanding of how to use machine learning in the **real world**. For instance, when to use supervised learning, unsupervised learning, and machine learning.  The machine learning course draws insights from （洞察力） numerous case studies and applications. It is suitable for learning how to apply algorithms to a wide-variety of tasks, such as **intelligent robots** building (perception, control), natural language understanding NLU领域 (web search, anti-spam emails), **computer vision** (identifying diseases in medical imagery, finding defects in manufacturing), and much more. 
+
+Deep learning is a subset 子集 of machine learning that is growing more important, and is worth your attention as well. It uses neural networks to make powerful predictions, and is the driving force behind many of today’s most exciting technologies. For example, self-driving cars, advanced web search, and face recognition all use deep learning. The Deep Learning Specialization, developed by DeepLearning.AI, covers the knowledge you need to build deep learning applications in fields such as computer vision, natural language processing, and speech recognition. You will conduct **case studies** 案例分析 in healthcare, **autonomous driving**, **sign language reading** 收拾语言理解, **music creation** 音乐创作, and natural language processing NLP领域, so you can familiarize yourself with the practical application of deep learning in various industries while mastering theoretical knowledge 理论知识 at the same time. 
+
+Once you have learned the foundations of machine learning and deep learning, the next move depends on the role you have in mind. For example, do you want to be a **data scientist** 数据科学家,  **engineer** 工程师, or machine learning researcher? 研究院 Or, do you consider developing AI skills to complement your existing expertise? If so, you can learn AI as a way to better apply your expertise to real-world problems. 
+
+After deciding the role, it's time to move on to real practice. You’ll want to get experience working on projects 项目经验 and as a part of a team 团队协作. Identifying viable 可行的 and valuable 有价值的 projects is an important skill, and it’s one that you’ll continue to develop throughout your career. The best way to start is to volunteer to help with other peoples’ projects. Eventually 最终 you will develop the confidence and experience to **lead your own** 独当一面. 
+
+For completing a project, **teamwork** is more likely to succeed than **solo** effort 单打独斗. It is critical to have the ability to collaborate with others, give and take advice, as this helps you build connections. Teamwork also helps you build out your network of professional connections. You can call on people who you have worked with in the past to provide advice and support as you move through your career.  
+
+The ultimate goal 终极目标, of course, is to find a job in machine learning. This will come after you have acquired both **theoretical knowledge** 理论知识 as well as **practical experience** 实际经验. When looking for a job, don’t be shy about reaching out to people you have met while taking courses or working on projects. You can also connect directly with professionals who are already working in the field. Many of them are happy to **act as your mentor**.  
+
+Finding your first job, however, is a small step in a long-term career 职业生涯. It is important to cultivate **self-discipline** 自律 and commit to **constant learning** 持续学习. People around you may not be able to tell whether you spend your weekends studying or on your smartphone, but day by day, and year over year, it will make a difference. Discipline ensures that you move forward while staying healthy. 
+
+I hope these suggestions could open the door to machine learning and help get you job-ready. The journey ahead will surely be a bumpy （ˈbʌmpi] 曲折的）one, but rest assured that what you encounter along the way will help you succeed. By the way, courses from DeepLearning.AI will be available on Zhihu soon. **Stay tuned** 敬请 and see you next time! Keep Learning! Andrew
 
 
 # 算法入门
