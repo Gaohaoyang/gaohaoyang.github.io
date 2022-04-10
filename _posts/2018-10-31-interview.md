@@ -621,7 +621,38 @@ NLP
   - 输出：
 - 方法：
 
+[用于Transformer的6种注意力的数学原理和代码实现](https://www.toutiao.com/article/7081075103982731808)
 
+Full Attention: 2017的《Attention is All You Need》中的编码器-解码器结构实现中提出。它结构并不复杂，所以不难理解。
+- ![](https://p26.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/612d7a3ac49c4847ac1702c5df8b9c25?from=pc)
+左侧显示了 Scaled Dot-Product Attention 的机制。
+- ![](https://p26.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/af533feb4f1044fe92cfae366b08accd?from=pc)
+
+```python
+class FullAttention(nn.Module):
+  def __init__(self, mask_flag=True, factor=5, scale=None, attention_dropout=0.1, output_attention=False):
+    super(FullAttention, self).__init__()
+    self.scale = scale
+    self.mask_flag = mask_flag
+    self.output_attention = output_attention
+    self.dropout = nn.Dropout(attention_dropout)
+
+  def forward(self, queries, keys, values, attn_mask):
+    B, L, H, E = queries.shape
+    _, S, _, D = values.shape
+    scale = self.scale or 1. / sqrt(E)
+    scores = torch.einsum("blhe,bshe->bhls", queries, keys)
+    if self.mask_flag:
+    if attn_mask is None:
+    attn_mask = TriangularCausalMask(B, L, device=queries.device)
+    scores.masked_fill_(attn_mask.mask, -np.inf)
+    A = self.dropout(torch.softmax(scale * scores, dim=-1))
+    V = torch.einsum("bhls,bshd->blhd", A, values)
+    if self.output_attention:
+      return (V.contiguous(), A)
+    else:
+      return (V.contiguous(), None)
+```
 
 
 ### 开放问题
