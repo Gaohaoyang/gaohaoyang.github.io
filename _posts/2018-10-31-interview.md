@@ -13,7 +13,7 @@ tags: 实习 应届生 AI 算法工程师 面试
 
 # 面试
 
-Facebook（Meta）[机会](https://www.metacareers.com/life/investing-in-the-future-introducing-new-work-choices-in-emea)
+Facebook（Meta）[Investing in the Future: Introducing New Work Choices in EMEA](https://www.metacareers.com/life/investing-in-the-future-introducing-new-work-choices-in-emea)
 
 ## 企业需求
 
