@@ -44,6 +44,11 @@ mathjax: true
 
 # 比特币
 
+【2022-4-5】[比特币背后的逻辑](https://www.ixigua.com/6950292223799853604)
+
+<iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/6950292223799853604?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
+
+
 ## 资讯
 
 ### 中本聪

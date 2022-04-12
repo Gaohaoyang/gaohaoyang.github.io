@@ -200,11 +200,36 @@ Skip-Gram的模型图与CBOW恰好相反
 
 word2vec在预测词语并进行梯度传播时，最后一层是个**多分类**，会计算整个词典中每个词的概率。但这个词表往往是很大的，所以softmax本身的**计算量非常大**，但在反向传播时大部分参数的**梯度都是0**，造成了很大的**资源浪费**，间接降低了训练的速度。
 
-由于softmax层非常昂贵，每次计算的复杂度为o(v) ，所以用层次softmax或者负采样来替换掉输出层，降低复杂度。
+由于softmax层非常昂贵，每次计算的复杂度为o(v) ，所以用**层次softmax**或者**负采样**来替换掉输出层，降低复杂度。
+
+论文：[《Bag of Tricks for Efficient Text Classification》](https://www.aclweb.org/anthology/E17-2068)
+- FastText模型只有三层：输入层、隐含层、输出层（Hierarchical Softmax）。输入是多个单词的**词向量**，隐含层是对多个输入的词向量的叠加的**平均**，输出是一个特定的**label**。
+- { x1, x2, x3 } -> hidden(平均) -> label
+- [drawio](https://viewer.diagrams.net/?tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1&title=test.drawio#R7ZhPc6MgGMY%2FjcfdUcGox%2BZf97Kznc1h2yMjVJmiuIiN2U%2B%2FWDGKNpM004keeorvw8sLPvwiqAVWaXUvUJ785Jgwy7VxZYG15boO8Dz1UyuHRvF9pxFiQbFO6oQd%2FUe0aGu1pJgURqLknEmam2LEs4xE0tCQEHxvpj1zZo6ao5iMhF2E2Fj9Q7FMGjVw%2FU7%2FQWictCM7i7BpSVGbrO%2BkSBDm%2B54ENhZYCc5lc5VWK8Jq81pfmn7bE63HiQmSyUs6%2FArwX7gtH1CwfSlhDhP4%2B%2F6brvKKWKlv%2BFFLhTy0HgheZpjUZRwLLPcJlWSXo6hu3atVV1oiU6abdUEiJKlOztQ53r8Ch%2FCUSHFQKbqDG8Kmi2YGthbuuxWAi0ZKeua3aUiveXys3NmiLrQzH3DJHbvkTu4SWATzcgmMXQKTuwShPS%2BX4MilhGJMssmdAr7pFPAmdsobOcVLmZdydk65%2FsROLUZOjTwiGb6rt0MVRQwVBY1MWzoPbRUpI8ThsQ6%2Be234pDPfgnXVz1wfdNQMS%2FBoTx1YqzZxJGIiz%2F1PxkvQs7jls29xqwnCkKSv5jTe812P8MCpmmC3wuGJp0ZbouCliIju1d90B4WGj58jOm2hxodRoTcMjrd9PRn%2BXMggFZW9bip66rV0nerg4zQ1y3F%2Bb5o3ddAeUAeupc4GJnXBbakLvqjrn65nTp0zoA5eS50zoC68LXXhXKj7RILghQR5kxLkDgjyriXINQk6PhBvRFD7T%2BgjtPGsZWgtQX0Rrq3AH0GlDpLSxKiQgr%2BQFWdcKCXjmcpcPlPGBhJiNM5qFhUXROnL%2BlhKI8TudEOqXg3qYd491JqwWp%2FwruSY790A6iP4mXPtcJu64Fyrwu7LR7N83fcjsPkP)
+
+<iframe src="https://viewer.diagrams.net/?tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1&title=test.drawio#R7ZhPc6MgGMY%2FjcfdUcGox%2BZf97Kznc1h2yMjVJmiuIiN2U%2B%2FWDGKNpM004keeorvw8sLPvwiqAVWaXUvUJ785Jgwy7VxZYG15boO8Dz1UyuHRvF9pxFiQbFO6oQd%2FUe0aGu1pJgURqLknEmam2LEs4xE0tCQEHxvpj1zZo6ao5iMhF2E2Fj9Q7FMGjVw%2FU7%2FQWictCM7i7BpSVGbrO%2BkSBDm%2B54ENhZYCc5lc5VWK8Jq81pfmn7bE63HiQmSyUs6%2FArwX7gtH1CwfSlhDhP4%2B%2F6brvKKWKlv%2BFFLhTy0HgheZpjUZRwLLPcJlWSXo6hu3atVV1oiU6abdUEiJKlOztQ53r8Ch%2FCUSHFQKbqDG8Kmi2YGthbuuxWAi0ZKeua3aUiveXys3NmiLrQzH3DJHbvkTu4SWATzcgmMXQKTuwShPS%2BX4MilhGJMssmdAr7pFPAmdsobOcVLmZdydk65%2FsROLUZOjTwiGb6rt0MVRQwVBY1MWzoPbRUpI8ThsQ6%2Be234pDPfgnXVz1wfdNQMS%2FBoTx1YqzZxJGIiz%2F1PxkvQs7jls29xqwnCkKSv5jTe812P8MCpmmC3wuGJp0ZbouCliIju1d90B4WGj58jOm2hxodRoTcMjrd9PRn%2BXMggFZW9bip66rV0nerg4zQ1y3F%2Bb5o3ddAeUAeupc4GJnXBbakLvqjrn65nTp0zoA5eS50zoC68LXXhXKj7RILghQR5kxLkDgjyriXINQk6PhBvRFD7T%2BgjtPGsZWgtQX0Rrq3AH0GlDpLSxKiQgr%2BQFWdcKCXjmcpcPlPGBhJiNM5qFhUXROnL%2BlhKI8TudEOqXg3qYd491JqwWp%2FwruSY790A6iP4mXPtcJu64Fyrwu7LR7N83fcjsPkP"> </iframe>
 
 **层次softmax**是一棵huffman树，树的叶子节点是训练文本中所有的词，非叶子节点都是一个**逻辑回归**二分类器，每个逻辑回归分类器的参数都不同
 - 基于层次softmax的CBOW
   - ![](https://pic3.zhimg.com/80/v2-504f3d895521feb43aaafc5bef952749_720w.jpg)
+
+用Hierarchical Softmax来降低训练时间，首先根据每个label出现的概率，对所有的label，构造一棵赫夫曼树。如下图，若有n个label，则该赫夫曼树有n个叶结点，n-1个非叶结点， 每个非叶结点都对应一个**参数**Θ，其中每个**叶节点**都有一个唯一对应的**赫夫曼编码**（假设左子树为0，右子树为1），则图中叶节点y2的赫夫曼编码为001。
+
+假设当前训练样本的标签为y2，y2的赫夫曼编码为001，则训练步骤如下：
+- 从根结点n(y2,1)开始，赫夫曼编码当前为0，使用二分类，计算向左走的概率
+- 走到n(y2,2)结点，赫夫曼编码当前为0，使用二分类，计算向左走的概率
+- 走到n(y2,3)结点，赫夫曼编码当前为1，使用二分类，计算向右走的概率
+- 最后走到了叶节点y2，则损失函数就是各个叶节点进行二分类的概率的乘积
+- 根据损失函数，更新所走过的路径上的非叶结点的参数Θ
+实质上就是从根节点开始，沿着Huffman树不断的进行二分类，并且不断的修正各中间向量Θ
+- ![img](https://img-blog.csdnimg.cn/20190131111003879.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbmNodWhhaQ==,size_16,color_FFFFFF,t_70)
+
+Hierarchical Softmax的**核心思想**就是**将一次多分类，分解为多次二分类**， 举个例子，有 [ 1,2,3,4,5,6,7,8 ] 这8个分类，想要判断词A属于哪个分类，我们可以一步步来，首先判断A是属于 [ 1,2,3,4 ]还是属于[ 5,6,7,8 ]。如果判断出属于[ 1,2,3,4 ]，那么就进一步分析是属于[ 1,2 ]还是[ 3,4 ]，以此类推。这样一来，就把时间复杂度从o(hN)降为o(hlogN)
+
+结合Hierarchical Softmax的思想后，FastText模型如下图所示，其中hidden layer的节点与哈夫曼树的每个非叶节点进行连接
+- ![img](https://img-blog.csdnimg.cn/20190603203144626.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2tpbmdzb255b3VuZw==,size_16,color_FFFFFF,t_70)
+
+[Pytorch实现FastText模型对AG_news数据集进行四分类预测（torchtext实现数据预处理）](https://blog.csdn.net/kingsonyoung/article/details/90757879)
 
 ### 负采样
 
@@ -306,7 +331,7 @@ def best_k_p(logits, golden, verbose=False):
 - 特点
   - 当类别数量较大时，使用Hierachical Softmax将N-gram融入特征中，并且使用Hashing trick[Weinberger et al.2009]提高效率
 
-- 【2021-2-2】[论文](https://arxiv.org/abs/1607.01759)，[代码](https://github.com/facebookresearch/fastText)
+- 【2021-2-2】[论文](https://arxiv.org/abs/1607.01759)，[代码](https://github.com/facebookresearch/fastText), [2-2.FastText](https://github.com/jasoncao11/nlp-notebook/tree/master/2-2.FastText)
 - Fasttext是Facebook推出的一个便捷的工具，包含**文本分类**和**词向量训练**两个功能。
 - Fasttext的分类思想：把输入转化为词向量，取平均，再经过线性分类器得到类别。输入的词向量可以是预先训练好的，也可以随机初始化，跟着分类任务一起训练。
 - fastText模型架构和word2vec的CBOW模型架构非常相似
@@ -319,7 +344,6 @@ def best_k_p(logits, golden, verbose=False):
 - fastText单词的embedding跟常见的embedding方法没什么不同，都是先随机初始化，然后再通过反向传播学习参数，维度就是人工指定的一个超参数，是词向量的维度。不过有两点要注意的地方
   - 第一是如果fastText的embedding是通过supervised的方式来训练一个文本分类器并同时学习embedding的话，那么这个embedding的学习过程就是有监督的，与word2vec等无监督的模型是有一定区别的；
   - 第二是fastText还会学习n-gram（这里的n-gram其实有两种，分别是char-n-gram和word-n-gram）的embedding，这使得它可以在一定程度上捕捉词序信息。为了节省空间，fastText在原作者的实现中并不是每一个n-gram都学习一个单独的embedding，而是首先将n-gram进行hash，hash到同一个位置的多个n-gram是会共享一个embedding的。
-
 
 - 字符级n-gram的引入，有以下几点好处：
   - 对于像英语、芬兰语这种形态学比较丰富的语言，字符级的n-gram抓住了单词的形态学信息。在fasttext词向量中直接利用了构词学中的信息。
@@ -374,6 +398,8 @@ print(recall_score(test_df['label'].values,val_pred))
 print(classification_report(test_df['label'].values,val_pred))
 ```
 
+[Pytorch实现FastText模型对AG_news数据集进行四分类预测（torchtext实现数据预处理）](https://blog.csdn.net/kingsonyoung/article/details/90757879)
+
 
 # 深度学习文本分类
 
@@ -384,8 +410,7 @@ print(classification_report(test_df['label'].values,val_pred))
 ### TextCNN —— 适合中短文本
 
 [textcnn结构图](https://pic1.zhimg.com/80/v2-a4c1ce1360613599af01d4266734618c_720w.jpg)
-
-![textcnn结构图](https://pic1.zhimg.com/80/v2-a4c1ce1360613599af01d4266734618c_720w.jpg)
+- ![textcnn结构图](https://pic1.zhimg.com/80/v2-a4c1ce1360613599af01d4266734618c_720w.jpg)
 
 - TextCNN是Yoon Kim小哥在2014年提出的模型，开创了用CNN编码n-gram特征的先河
   - textcnn的[论文](https://arxiv.org/abs/1408.5882)
@@ -550,10 +575,7 @@ class TextCNN(nn.Module):
         # project the features to the labels
         x = self.linear1(x)
         x = x.view(-1, 2)
-
         return x
-      
-
 
 model = TextCNN().to(device)
 criterion = nn.CrossEntropyLoss().to(device)
@@ -573,20 +595,18 @@ for epoch in range(2):
     optimizer.step()
     
 # test eval
-
-
 ## Test
 ## Predict
 model = model.eval()
 predict = model(input_batch_test).data.max(1, keepdim=True)[1]
 print("this is the precision:")
 print(precision_score(test_labels,predict))
-
 print("this is the recall:")
 print(recall_score(test_labels,predict))
-
 print(classification_report(test_labels,predict))
 ```
+
+[2-1.TextCNN](https://github.com/jasoncao11/nlp-notebook/blob/master/2-1.TextCNN/model.py)
 
 
 ### DPCNN——TextCNN改进

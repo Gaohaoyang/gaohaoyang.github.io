@@ -1907,6 +1907,27 @@ def tts_baidu(text):
     save_wav(ret.content, "siyue.wav")
 ```
 
+### 讯飞语音
+
+[利用 Python 打造一个语音合成系统](https://mp.weixin.qq.com/s/rFvwsz4Bh7RciKwTVgBVhg)
+- 语音合成系统是一个基于语音合成的工具，但是这个东西由于很多厂家都提供了API的形式，因此开发难度大大降低，只需要调用几个API即可实现属于自己的语音合成工具；麻雀虽小，五脏俱全。
+- 讯飞开放平台的[WebAPI接口](https://www.xfyun.cn/doc/tts/online_tts/API.html)
+
+申请账号，3个东西：
+- APPID
+- APISecret
+- APIKey
+
+安装：
+
+```shell
+pip install websocket-client
+pip install playsound
+```
+
+带UI的代码见原文
+
+
 
 ## windows下tts
 

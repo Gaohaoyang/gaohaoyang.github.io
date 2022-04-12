@@ -20,7 +20,37 @@ mathjax: true
 - 【2021-5-27】[SimCLR: 用对比学习生成图像表征](https://www.toutiao.com/i6966574071790256679/)，利用对比学习生成图像表征的算法 SimCLR，SimCLR 出自 Google 的论文《A Simple Framework for Contrastive Learning of Visual Representations》
   - 《[SimCSE: 通过对比学习获得句子向量](https://www.toutiao.com/a6963651410546197005/?channel=&source=search_tab)》：SimCSE 采用对比学习训练得到句子向量
 
-# 介绍
+# 对比学习
+
+很多自然语言处理任务来说，学习到一个良好的句向量表示是非常重要的。例如在**向量检索**，**文本语义匹配**等任务中，模型将输入的两个句子进行编码得到句向量，然后计算句向量之间的相似度，从而判断两个句子是否匹配。
+
+## 句子相似度
+
+### BERT改造成句向量
+
+最直接的做法：将两个句子输入到BERT模型中，使用\[CLS]对应的输出或者整个句子序列的输出的平均向量作为句向量，然后再计算两个句向量的相似度。
+- 但是由于BERT模型的MLM与NSP这两个预训练任务的**局限性**，模型无法很好地学习到句子表征能力。
+- ![](https://weixin.aisoutu.com/cunchu7/2022-04-05/4_16491763759351976.png)
+
+为什么经过MLM与NSP任务训练之后，BERT无法学习到良好的句向量表示呢？我们简单回顾一下MLM与NSP任务的做法。
+- MLM任务是遮住某个**单词**，让模型去预测遮住的单词:
+  - 在这个训练中，模型并没有显式地对\[CLS]向量进行训练，没有告诉模型\[CLS]这个向量就是用来编码句子的语义信息的。在MLM任务中\[CLS]学习到的并不是句子的语义表征。
+- NSP任务是给定两个句子，让模型判断两个句子是否为**上下文关系**，使用\[CLS]的输出来进行二分类。
+  - 在这个任务中，\[CLS]是用来编码两个句子之间的关系的，而不是描述某个句子的语义信息。
+
+综上所述，未经过fintune的BERT模型，必然无法得到良好的句子的语义表征。
+
+### BERT坍塌
+
+美团的ConSERT论文表明，如果BERT模型不经过微调的话，**模型输出的句向量会坍塌到一个非常小的区域内**。下图所展示的是在STS数据集中，文本相似度的分布情况，其中横坐标表示人类标注的句子相似度等级，纵坐标表示没有经过finetune的BERT模型预测的句子相似度分布。可以很明显看到模型预测的所有句子对的相似度，几乎都落到了0.6-1.0这个区间，即使含义完全相反的两个句子，模型输出的相似度也非常高。这便是BERT的句子表示的“坍塌”现象。
+- ![](https://weixin.aisoutu.com/cunchu7/2022-04-05/4_16491702735732915.png)
+- BERT的句向量的坍缩和句子中的**高频词**有关。当使用整个句子序列的输出的**平均向量**作为句向量时，句子中的**高频词将会主导句向量**，使得任意两个句向量之间的相似度都非常高。为了验证该想法，美团的ConSERT论文对此也进行了实验。
+- ![](https://weixin.aisoutu.com/cunchu7/2022-04-05/4_16491711685264032.png)
+
+结论：BERT的MLM与NSP预训练任务难以胜任下游的语义匹配任务。
+
+为了解决该问题，可以使用对比学习的方法对模型进行预训练，从而使模型能够学习到更好的句子语义表示，并且更好地应用到下游任务中。
+
 
 ## 基本概念
 
@@ -28,9 +58,10 @@ mathjax: true
 
 **对比学习**可以看作是一种新型的自监督学习范式，具备广阔发展前景。对比学习跟以下两个目前比较流行的技术关联较深。
 - Bert采用的**自监督学习**。Bert采用自监督学习，节约了大量的人工标注成本，可以有效发挥海量数据的潜力。对比学习借鉴了自监督学习的思路，旨在充分利用海量的无标注数据；
-- **度量学习**。度量学习的基本思路是让**正例**特征编码内容距离**拉近**，**负例**编码结果距离**推远**。其中的正例一般是源自有监督数据。对比学习主体思路跟度量学习接近，最大的区别在于其正例是由自监督方式得来。
+- **度量学习**。`度量学习`的基本思路是让**正例**特征编码内容距离**拉近**，**负例**编码结果距离**推远**。其中的正例一般是源自有监督数据。对比学习主体思路跟度量学习接近，最大的区别在于其正例是由自监督方式得来。
 综上，可以认为对比学习是一种**自监督**版本的**度量学习**。
 
+对比学习起源于计算机视觉任务，核心思想是拉近每个样本与正样本之间的距离，拉远其与负样本之间的距离。
 
 ## 方法
 
@@ -46,8 +77,6 @@ mathjax: true
 - 样本到特征的**映射函数**f如何设计？对比学习中样本通过encoder之后，经过映射函数f将其投影至单位超球面。所以，投影空间的选择和投影函数的设计构造也是一个关键问题。
 - **损失函数**如何设计？前文所说InfoNCE是一个具体损失函数，在实际应用时并非一成不变，应该根据使用场景灵活设计。
 
----
-
 **表示学习**的目标是为输入x学习一个表示z，最好的情况就是知道z就能知道x. 
 
 无监督表示学习的第一种做法：**生成式**自监督学习。比如还原句子中被mask的字，或者还原图像中被mask的像素。但这种方式的前提需要假设被mask的元素是相互独立的，不符合真实情况。
@@ -60,7 +89,7 @@ mathjax: true
 另一方面，研究者们也质疑如此细粒度的还原是否真正必要。记住的事物特征，不一定是像素级别的，而是更高维度的. 如用编码去做分类任务，我们不需要知道每个数据的细节，只要抓住每个类别的主要特征，自然就能把他们分开了
 
 不重构数据，那如何衡量表示z的好坏呢？这时也可以用互信息I(X,Z)，代表我们知道了Z之后，X的信息量减少了多少。 
-![](https://ask.qcloudimg.com/http-save/yehe-7043804/nm4eqehaze.jpeg?imageView2/2/w/1620)
+- ![](https://ask.qcloudimg.com/http-save/yehe-7043804/nm4eqehaze.jpeg?imageView2/2/w/1620)
 
 ## A.引入
  
@@ -93,8 +122,7 @@ mathjax: true
 ## B. 对比引入
  
 【拿我的画举个例子】我们可以看到下面两张图的马头和精细程度都是不同的，但是我们显然能判断这两张是类似的图，这是为什么呢
- 
-![](https://pic1.zhimg.com/80/v2-b6ae7a4cd25a39566b6a674322735828_1440w.jpg)
+- ![](https://pic1.zhimg.com/80/v2-b6ae7a4cd25a39566b6a674322735828_1440w.jpg)
  
 对于某个固定锚点x来说，其位置是由与其他点相对位置决定的，而不是画布的绝对位置。
  
@@ -103,31 +131,27 @@ A中与 x 邻近的点在B图中相应点距 x' 距离小，A中与 x 相距较�
 在一定误差范围内，二者近似相等。
  
 可以这么认为，通过对比学习，忽略了细节，找到并确定所以关键点相对位置。
- 
-![](https://pic4.zhimg.com/80/v2-496bbbbce22383725d4da5b9c603059f_1440w.jpg)
+- ![](https://pic4.zhimg.com/80/v2-496bbbbce22383725d4da5b9c603059f_1440w.jpg)
  
 ## C. 聚类思想
  
 在这里，我们将之前的想法进行抽象，用空间考虑对比学习。
- 
-![](https://pic2.zhimg.com/80/v2-7f0cb4f5a90df300585de6e24a516bad_1440w.jpg)
- 
+- ![](https://pic2.zhimg.com/80/v2-7f0cb4f5a90df300585de6e24a516bad_1440w.jpg)
 最终目标:
- 
-![[公式]](https://www.zhihu.com/equation?tex=d%28f%28x%29%2Cf%28x%5E%2B%29%29%5Cll+d%28f%28x%29%2Cf%28x%5E-%29%29%5C%5C+%E6%88%96%5C%5C+s%28f%28x%29%2Cf%28x%5E%2B%29%29%5Cgg+s%28f%28x%29%2Cf%28x%5E-%29%29)
- 
-缩小与正样本间的距离，扩大与负样本间的距离，使正样本与锚点的距离远远小于负样本与锚点的距离，（或使正样本与锚点的相似度远远大于负样本与锚点的相似度），从而达到他们间原有空间分布的真实距离。
-*   丈量二者距离：欧几里得距离，余弦相似度，马氏距离（没人试过，但原理是一样的）
-*   目标：给定锚点，通过空间变换，使得锚点与正样本间距离尽可能小，与负样本距离尽可能大
+- ![[公式]](https://www.zhihu.com/equation?tex=d%28f%28x%29%2Cf%28x%5E%2B%29%29%5Cll+d%28f%28x%29%2Cf%28x%5E-%29%29%5C%5C+%E6%88%96%5C%5C+s%28f%28x%29%2Cf%28x%5E%2B%29%29%5Cgg+s%28f%28x%29%2Cf%28x%5E-%29%29)
+
+<font color='red'>缩小与正样本间的距离，扩大与负样本间的距离，使正样本与锚点的距离远远小于负样本与锚点的距离</font>，（或使正样本与锚点的相似度远远大于负样本与锚点的相似度），从而达到他们间原有空间分布的真实距离。
+*  距离度量：欧几里得距离，余弦相似度，马氏距离（没人试过，但原理是一样的）
+*  目标优化：给定锚点，通过空间变换，使得锚点与正样本间距离尽可能小，与负样本距离尽可能大
     
  
 ## D. 对比思想
  
-动机：人类不仅能从积极的信号中学习，还能从纠正不良行为中获益。
- 
-对比学习其实是无监督学习的一种范式。根据经典的SIMCLR，我在这里就直接提供了对比学习中模型的常见形式。
- 
-![](https://pic4.zhimg.com/80/v2-a17404a49d4f980ac69653464dbcc3fb_1440w.jpg)
+动机：
+- 人类不仅能从**积极**信号中学习，还能从纠正**不良行为**中获益。
+
+**对比学习**其实是**无监督学习**的一种**范式**。根据经典的SIMCLR，我在这里就直接提供了对比学习中模型的常见形式。
+- ![](https://pic4.zhimg.com/80/v2-a17404a49d4f980ac69653464dbcc3fb_1440w.jpg)
  
 ## E. 对比损失【重要*数学警告】
  
@@ -142,86 +166,61 @@ A中与 x 邻近的点在B图中相应点距 x' 距离小，A中与 x 相距较�
 ### 2. 对比损失定义
  
 由Hadsell, R. , Chopra, S. , & Lecun, Y. . (2006)提出\[1\] ,原文只是作为一种降维方法：只需要训练样本空间的相对关系（对比平衡关系）即可在空间内表示向量。
- 
+
 损失定义如下：
- 
-![[公式]](https://www.zhihu.com/equation?tex=+L%28W%2C%28Y%2C%5Cvec%7BX_1%7D%2C%5Cvec%7BX_2%7D%29%5Ei%29%3D%281-Y%29L_S%28D_W%5Ei%28%5Cvec%7BX_1%7D%2C%5Cvec%7BX_2%7D%29%29%2BYL_D%28D_W%5Ei%28%5Cvec%7BX_1%7D%2C%5Cvec%7BX_2%7D%29%29%5C%5C)
- 
-![[公式]](https://www.zhihu.com/equation?tex=%5C+L%28W%29%3D%5Csum%5EP_%7Bi%3D1%7DL%28W%2C%28Y%2C%5Cvec%7BX_1%7D%2C%5Cvec%7BX_2%7D%29%5Ei%29+%5C%5C)
+- ![[公式]](https://www.zhihu.com/equation?tex=+L%28W%2C%28Y%2C%5Cvec%7BX_1%7D%2C%5Cvec%7BX_2%7D%29%5Ei%29%3D%281-Y%29L_S%28D_W%5Ei%28%5Cvec%7BX_1%7D%2C%5Cvec%7BX_2%7D%29%29%2BYL_D%28D_W%5Ei%28%5Cvec%7BX_1%7D%2C%5Cvec%7BX_2%7D%29%29%5C%5C)
+- ![[公式]](https://www.zhihu.com/equation?tex=%5C+L%28W%29%3D%5Csum%5EP_%7Bi%3D1%7DL%28W%2C%28Y%2C%5Cvec%7BX_1%7D%2C%5Cvec%7BX_2%7D%29%5Ei%29+%5C%5C)
  
 为了下文方便解释，这里的参数详细解释如下：
- 
-![[公式]](https://www.zhihu.com/equation?tex=W) ：网络权重；
- 
-![[公式]](https://www.zhihu.com/equation?tex=Y) ：标志符，
- 
-![[公式]](https://www.zhihu.com/equation?tex=Y%3D+%5Cbegin%7Bcases%7D+0%2C%5Cquad+X_1%2CX_2%E5%90%8C%E7%B1%BB%5C%5C+1%2C+%5Cquad+X_1%2CX_2%E4%B8%8D%E5%90%8C%E7%B1%BB+%5Cend%7Bcases%7D%5C%5C)
- 
-![[公式]](https://www.zhihu.com/equation?tex=D_W) ：是 ![[公式]](https://www.zhihu.com/equation?tex=X_1) 与 ![[公式]](https://www.zhihu.com/equation?tex=X_2) 在潜变量空间的欧几里德距离。
- 
-![[公式]](https://www.zhihu.com/equation?tex=i) ：表示第i组向量对。
- 
-![[公式]](https://www.zhihu.com/equation?tex=L) ：研究中常常在这里做文章，定义合理的能够完成最终目标的损失函数往往就成功了大半。
+- ![[公式]](https://www.zhihu.com/equation?tex=W) ：网络权重；
+- ![[公式]](https://www.zhihu.com/equation?tex=Y) ：标志符，
+  - ![[公式]](https://www.zhihu.com/equation?tex=Y%3D+%5Cbegin%7Bcases%7D+0%2C%5Cquad+X_1%2CX_2%E5%90%8C%E7%B1%BB%5C%5C+1%2C+%5Cquad+X_1%2CX_2%E4%B8%8D%E5%90%8C%E7%B1%BB+%5Cend%7Bcases%7D%5C%5C)
+- ![[公式]](https://www.zhihu.com/equation?tex=D_W) ：是 ![[公式]](https://www.zhihu.com/equation?tex=X_1) 与 ![[公式]](https://www.zhihu.com/equation?tex=X_2) 在潜变量空间的欧几里德距离。
+- ![[公式]](https://www.zhihu.com/equation?tex=i) ：表示第i组向量对。
+- ![[公式]](https://www.zhihu.com/equation?tex=L) ：研究中常常在这里做文章，定义合理的能够完成最终目标的损失函数往往就成功了大半。
  
 2.1 细节定义
  
- ![[公式]](https://www.zhihu.com/equation?tex=L_S+) 只需满足红色虚线趋势。
- 
-![[公式]](https://www.zhihu.com/equation?tex=L_D) 只需满足蓝线趋势【都有趋于0的区域】。
- 
-![](https://pic4.zhimg.com/80/v2-942ad9d07bc2fc665c1b47adb3dfe8cf_1440w.jpg)
+- ![[公式]](https://www.zhihu.com/equation?tex=L_S+) 只需满足红色虚线趋势。
+- ![[公式]](https://www.zhihu.com/equation?tex=L_D) 只需满足蓝线趋势【都有趋于0的区域】。
+- ![](https://pic4.zhimg.com/80/v2-942ad9d07bc2fc665c1b47adb3dfe8cf_1440w.jpg)
  
 2.2 过程/主流程
  
 原文类比弹性势能，将正负样本分类讨论。
  
 正样本：
- 
-当与锚点是正样本时，由于对比思想，二者之间会逐渐靠近。原文将它假设成一个原长 ![[公式]](https://www.zhihu.com/equation?tex=l+%5Crightarrow+0+) 的弹簧，那么就会将正样本无限的拉近，从而完成聚类。
- 
-![[公式]](https://www.zhihu.com/equation?tex=%5Cvec%7BF%7D%3D-%5Cvec%7Bx%7D%5C%5C)
+- 当与锚点是正样本时，由于对比思想，二者之间会逐渐靠近。原文将它假设成一个原长 ![[公式]](https://www.zhihu.com/equation?tex=l+%5Crightarrow+0+) 的弹簧，那么就会将正样本无限的拉近，从而完成聚类。
+- ![[公式]](https://www.zhihu.com/equation?tex=%5Cvec%7BF%7D%3D-%5Cvec%7Bx%7D%5C%5C)
  
 将锚点设为势能零点：
- 
-![[公式]](https://www.zhihu.com/equation?tex=E%3D0-%5Cint%5Cvec%7BF%7Dd%5Cvec%7Bx%7D%3D%5Cfrac+1+2++x%5E2%5C%5C+)
- 
+- ![[公式]](https://www.zhihu.com/equation?tex=E%3D0-%5Cint%5Cvec%7BF%7Dd%5Cvec%7Bx%7D%3D%5Cfrac+1+2++x%5E2%5C%5C+)
 那么 E 即可作为![[公式]](https://www.zhihu.com/equation?tex=L_S) ，且满足定义要求：
- 
-![[公式]](https://www.zhihu.com/equation?tex=L_S%3D%5Cfrac+1+2++D_W%5E2%5C%5C)
- 
-![](https://pic3.zhimg.com/80/v2-39b85f4203e7ba9f2c21783567e42a72_1440w.jpg)
+- ![[公式]](https://www.zhihu.com/equation?tex=L_S%3D%5Cfrac+1+2++D_W%5E2%5C%5C)
+- ![](https://pic3.zhimg.com/80/v2-39b85f4203e7ba9f2c21783567e42a72_1440w.jpg)
  
 负样本
  
 当与锚点是负样本时，由于对比思想，二者之间会逐渐原理。原文将它假设成一个原长 ![[公式]](https://www.zhihu.com/equation?tex=l+%5Crightarrow+m) 的弹簧，那么就会将负样本至少拉至m，从而完成划分。
- 
-![[公式]](https://www.zhihu.com/equation?tex=%5Cvec%7BF%7D%3D%5Cvec%7Bm%7D-%5Cvec%7Bx%7D%5C%5C)
+- ![[公式]](https://www.zhihu.com/equation?tex=%5Cvec%7BF%7D%3D%5Cvec%7Bm%7D-%5Cvec%7Bx%7D%5C%5C)
  
 将锚点设为势能零点：
- 
-![[公式]](https://www.zhihu.com/equation?tex=E%3D0-%5Cint%5Cvec%7BF%7Dd%5Cvec%7Bx%7D%3D%5Cfrac+1+2++%28m-x%29%5E2%5C%5C+L_D%3D%5Cfrac+1+2+%28max%5C%7B0%2Cm-D_W%5C%7D%29%5E2)
- 
-![](https://pic1.zhimg.com/80/v2-628d09285fa99649351012310b624708_1440w.jpg)
+- ![[公式]](https://www.zhihu.com/equation?tex=E%3D0-%5Cint%5Cvec%7BF%7Dd%5Cvec%7Bx%7D%3D%5Cfrac+1+2++%28m-x%29%5E2%5C%5C+L_D%3D%5Cfrac+1+2+%28max%5C%7B0%2Cm-D_W%5C%7D%29%5E2)
+- ![](https://pic1.zhimg.com/80/v2-628d09285fa99649351012310b624708_1440w.jpg)
  
 L原定义:
  
 这样我们就获得了Loss函数最基本的定义：
- 
-![[公式]](https://www.zhihu.com/equation?tex=L%28W%2CY%2C%5Cvec%7BX_1%7D%2C%5Cvec%7BX_2%7D%29%3D%281-Y%29D_W%5E2%2BY%5Ccdot+%5Cfrac+1+2+%28max%5C%7B0%2Cm-D_W%5C%7D%29%5E2%5C%5C)
- 
-当Y=0，调整参数最小化 ![[公式]](https://www.zhihu.com/equation?tex=D_W%28%5Cvec%7BX_1%7D%2C%5Cvec%7BX_2%7D%29) 。
- 
-当Y=1，设二者向量最大距离为m，
- 
-如果 ![[公式]](https://www.zhihu.com/equation?tex=D_W%28%5Cvec%7BX_1%7D%2C%5Cvec%7BX_2%7D%29%3Cm) , 则增大两者距离到m；
- 
-如果 ![[公式]](https://www.zhihu.com/equation?tex=D_W%28%5Cvec%7BX_1%7D%2C%5Cvec%7BX_2%7D%29%5Cgeq+m) ，则不做优化。
+- ![[公式]](https://www.zhihu.com/equation?tex=L%28W%2CY%2C%5Cvec%7BX_1%7D%2C%5Cvec%7BX_2%7D%29%3D%281-Y%29D_W%5E2%2BY%5Ccdot+%5Cfrac+1+2+%28max%5C%7B0%2Cm-D_W%5C%7D%29%5E2%5C%5C)
+- 当Y=0，调整参数最小化 ![[公式]](https://www.zhihu.com/equation?tex=D_W%28%5Cvec%7BX_1%7D%2C%5Cvec%7BX_2%7D%29) 。
+- 当Y=1，设二者向量最大距离为m，
+- 如果 ![[公式]](https://www.zhihu.com/equation?tex=D_W%28%5Cvec%7BX_1%7D%2C%5Cvec%7BX_2%7D%29%3Cm) , 则增大两者距离到m；
+- 如果 ![[公式]](https://www.zhihu.com/equation?tex=D_W%28%5Cvec%7BX_1%7D%2C%5Cvec%7BX_2%7D%29%5Cgeq+m) ，则不做优化。
  
 空间角度：
  
 空间内点间相互作用力动态平衡。
- 
-![](https://pic2.zhimg.com/80/v2-db3c4432db10f18fbb9a73405de5ba35_1440w.jpg)
+- ![](https://pic2.zhimg.com/80/v2-db3c4432db10f18fbb9a73405de5ba35_1440w.jpg)
  
 ### 2.3 效果
  
@@ -270,7 +269,7 @@ L原定义:
  
 ![](https://pic4.zhimg.com/80/v2-834682b972f2d25a91fad527978ec7f7_1440w.jpg)
  
-### 4\. NCE Loss
+### 4. NCE Loss
  
 【注：后续研究并没有怎么使用原始的NCELoss，而是只使用这里的结论，这里引入是为了说明应该多采用负样本。】
  
@@ -284,7 +283,7 @@ L原定义:
  
 ![[公式]](https://www.zhihu.com/equation?tex=k%3D%5Cfrac%7Bnum%28x%5E-%29%7D%7Bnum%28x%5E%2B%29%7D) 越大，约接近NCE 对于噪声分布的依赖程度也就越小，越接近真实期望。 ![[公式]](https://www.zhihu.com/equation?tex=J%5Ec_%7BNCE%7D%3D%5Cmathbb+%7BE%7D_%7Bw%5Cthicksim++%5Ctilde+p%28w%7Cc%29%7D+%5Clog%5Cfrac%7Bu_%5Ctheta%28w%2Cc%29%7D%7Bu_%5Ctheta%28w%2Cc%29%2Bkq%28w%29%7D+%2Bk%5Cmathbb+%7BE%7D_%7Bw%5Cthicksim+q%28w%29%7D+%5Clog+%5Cfrac%7Bkq%28w%29%7D%7Bu_%5Ctheta%28w%2Cc%29%2Bkq%28w%29%7D%5C%5C%5C+J_%7BNCE%7D%3D%5Csum_c+P%28c%29J%5Ec_%7BNCE%7D%5C%5C)
  
-### 5\. 互信息
+### 5. 互信息
  
 在预测未来信息时，我们将目标x（预测）和上下文c（已知）编码成一个紧凑的分布式向量表示(通过非线性学习映射），其方式最大限度地保留了定义为的原始信号x和c的互信息
  
@@ -298,7 +297,7 @@ L原定义:
  
 互信息下界估计：增加互信息，即对比学习（CL）的目标。【后来也有CLUB上界估计和下界估计一起使用的对比学习。】
  
-### 6\. InfoNCE Loss
+### 6. InfoNCE Loss
  
 具体详见CPC论文1.3节。
  
@@ -931,6 +930,38 @@ InfoNCE 是在\[6\]CPC中提出的。CPC(对比预测编码) 就是一种通过�
 
 - 【2021-5-27】[SimCLR: 用对比学习生成图像表征](https://www.toutiao.com/i6966574071790256679/)，利用对比学习生成图像表征的算法 SimCLR，SimCLR 出自 Google 的论文《A Simple Framework for Contrastive Learning of Visual Representations》
 - 《[SimCSE: 通过对比学习获得句子向量](https://www.toutiao.com/a6963651410546197005/?channel=&source=search_tab)》：SimCSE 采用对比学习训练得到句子向量
+
+
+## SimCSE
+
+【2022-4-7】[SimCSE:简单有效的句向量对比学习方法](https://www.aisoutu.com/a/2363026)
+- EMNLP2021的一篇[论文](https://arxiv.org/abs/2104.08821)：SimCSE。一种简单有效的NLP对比学习方法，通过Dropout的方式进行正样本增强，模型能够学习到良好的句向量表示。
+- [实验复现代码](https://github.com/yangjianxin1/SimCSE)
+- 中文数据集的复现结果可以参考[苏剑林的复现实验](https://kexue.fm/archives/8348)
+
+对比学习起源于计算机视觉任务，它的核心思想是，拉近每个样本与正样本之间的距离，拉远其与负样本之间的距离。
+
+如何为每个样本构造**正样本与负样本**是对比学习中的关键问题。
+- 负样本的构造往往比较容易，随机采样或者把同一个batch里面的其他样本作为负样本即可，难点在于如何构造正样本。
+- 对于图像来说，对图像进行翻转、裁剪、旋转、扭曲等操作即可很容易地生成正样本。
+- 对于NLP来说，往往会采用替换、删除、添加词语的方法来进行正样本构造，但是上述操作非常容易引入噪声，并且改变原有文本的语义。
+  - 例如对【我爱你】进行替换操作得到【我恨你】，就改变的原来的文本的语义。
+
+为了解决上述问题，SimCSE论文中提出了一种基于Dropout的**无监督对比学习**方法，同时也对有监督对比学习方法进行了探索。
+- ![](https://weixin.aisoutu.com/cunchu7/2022-04-05/4_16491711085915213.png)
+
+### 无监督SimCSE
+
+Dropout是一种用来防止神经网络过拟合的方法，在训练的时候，通过dropout mask的方式，模型中的每个神经元都有一定的概率会失活。所以在训练的每个step中，都相当于在训练一个不同的模型。在推理阶段，模型最终的输出相当于是多个模型的组合输出
+- Dropout可以视为一种数据增强的手段，通过dropout mask的方式，模型在编码同一个句子的时候，引入了数据噪声，从而为同一个句子生成不同的句向量，并且不影响其语义信息。其中dropout rate的大小可以视为引入的噪声的强度。
+- 为了验证模型dropout rate对无监督SimCSE的影响，作者在STS-B数据集上进行了消融实验，其中训练数据是作者从维基百科中随机爬取的十万个句子。
+
+### 有监督SimCSE
+
+作者还尝试了使用各种人工标注的数据集对模型进行有监督训练，包括QQP、Flickr30k、ParaNMT、NLI数据集。
+- 与无监督SimCSE一样，作者利用数据集中人工标注的正样本对，使用InfoNCE loss对模型进行训练，可以看到使用SNLI+MNLI数据集训练的模型效果最好，并且其指标也比无监督SimCSE提高了2.4个点。
+
+对于无监督SimCSE与有监督SimCSE，论文的实验结果如下表，可以看到，在STS任务中，无论是无监督还是有监督的训练方法，都比之前的方法有了较大幅度的提高，这证明了论文方法的有效性。
 
 ## 1. 概述
  

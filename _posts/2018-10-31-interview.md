@@ -13,6 +13,7 @@ tags: 实习 应届生 AI 算法工程师 面试
 
 # 面试
 
+Facebook（Meta）[Investing in the Future: Introducing New Work Choices in EMEA](https://www.metacareers.com/life/investing-in-the-future-introducing-new-work-choices-in-emea)
 
 ## 企业需求
 
@@ -117,9 +118,103 @@ tags: 实习 应届生 AI 算法工程师 面试
 注：
 > 个人品质最容易忽略，因为大部分人的品质都没啥问题，即便是有问题的，也难以通过几次面试锁定，所以这一块一般指态度
 
+### 评分原则
+
+基本原则
+- 找亮点：我手比较松，一般很少挂人，总是会试图找应聘者的亮点、时间紧时也会让应聘者自述亮点，所以对于应聘者来说最好把自己的亮点准备好，在一个小时的面试时间中尽量展现。
+- 只问简历上写了的知识点、当然-如果知识面窄是不会拿到高分的。
+
+挂什么样的人
+- 态度恶劣，尤其是傲娇的
+- 答不上来时找各种理由强行解释的，比如说“你问的太细了、这问题太底层了、这问题太偏理论了”等等，这是个学习态度问题，大方承认这是自己的知识盲区并表示会学习补上并不难，每个人都会有盲区、不可耻、可耻的是不敢承认自己的不足、还要为不足强行找理由。
+
+考察哪些方面
+- coding、算法、数学，面试过程中也会看出一个人的沟通能力、team work能力、学习能力等。
+
+对于转专业
+- 一般会问问他们自学历程+cs基本知识，如果自学时间短、水平也够 -- 那说明此人够聪明、是加分项。
+
 ## 面试问题
 
+
+### 基础算法
+
+#### top k 问题
+
+【20】[拜托，面试别再问我TopK了](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651961587&idx=1&sn=54bf39db7043cc638315caf70f24d94b&chksm=bd2d0d2f8a5a84395246be4522d10fbfc1f744658047d5fb3fad8e9f3c3d76baab3a2ce84867&mpshare=1&scene=23&srcid=1105ZuGdQ1PGSyatSFc4tzqt%23rd)
+
+TopK，是问得比较多的几个问题之一，到底有几种方法，这些方案里蕴含的优化思路究竟是怎么样的
+- 问题描述：从 arr[1, n] 这n个数中，找出最大的k个数，这就是经典的TopK问题。
+- 栗子：从 arr[1, 12] = {5,3,7,1,8,2,9,4,7,2,6,6} 这n=12个数中，找出最大的k=5个。
+
+TopK，不难；其思路优化过程，不简单：
+1. **全局排序**，<font color='red'>O(n*lg(n))</font>
+  - 最简单：将n个数排序之后，取出最大的k个
+  - 分析：明明只需要TopK，却将全局都排序了，这也是这个方法复杂度非常高的原因。那能不能不全局排序，而只局部排序呢？
+1. **局部排序**，只排序TopK个数，<font color='red'>O(n*k)</font>
+  - 不再全局排序，只对最大的k个排序；冒泡是一个很常见的排序方法，每冒一个泡，找出最大值，冒k个泡，就得到TopK。
+  - 分析：冒泡，将全局排序优化为了局部排序，非TopK的元素是不需要排序的，节省了计算资源。不少朋友会想到，需求是TopK，是不是这最大的k个元素也不需要排序呢？这就引出了第三个优化方法。
+1. **堆**，TopK个数也**不排序**了，<font color='red'>O(n*lg(k))</font>
+  - 思路：只找到TopK，不排序TopK，将冒泡的TopK排序优化为了TopK不排序，节省了计算资源
+    - 先用前k个元素生成一个**小顶堆**，这个小顶堆用于存储，当前最大的k个元素
+    - 接着从第k+1个元素开始扫描，和**堆顶**（堆中最小的元素）比较，如果被扫描的元素大于堆顶，则替换堆顶的元素，并调整堆，以保证堆内的k个元素，总是当前最大的k个元素。
+    - 直到，扫描完所有n-k个元素，最终堆中的k个元素，就是猥琐求的Top
+1. TopK的另一个解法：随机选择+partition
+  - 随机选择算在是《算法导论》中一个经典的算法，其时间复杂度为O(n)，是一个线性复杂度的方法。核心算法思想是，分治法。
+  - `分治法`（ Divide & Conquer），把一个大的问题，转化为若干个子问题（Divide），每个子问题“都”解决，大的问题便随之解决（Conquer）。这里的关键词是“都”。从伪代码里可以看到，快速排序递归时，先通过partition把数组分隔为两个部分，两个部分“都”要再次递归。
+  - `减治法`（ Reduce & Conquer），分治法特例,把一个大的问题，转化为若干个子问题（Reduce），这些子问题中“只”解决一个，大的问题便随之解决（Conquer）。这里的关键词是“只”。二分查找binary_search，BS，是一个典型的运用减治法思想的算法
+  - 分治法：每个分支“都要”递归，例如：快速排序，<font color='red'>O(n*lg(n))</font>
+  - 减治法：分治法特例叫减治法。“只要”递归一个分支，例如：二分查找O(lg(n))，随机选择O(n); 二分查找，大问题可以用一个mid元素，分成左半区，右半区两个子问题。而左右两个子问题，只需要解决其中一个，递归一次，就能够解决二分查找全局的问题。
+  - 通过分治法与减治法的描述，可以发现，分治法的复杂度一般来说是大于减治法的：
+  - TopK是希望求出 arr[ 1,n] 中最大的k个数，那如果找到了第k大的数，做一次partition，不就一次性找到最大的k个数了么？问题变成了arr[1, n]中找到第k大的数
+  - **随机选择**（randomized_select），找到arr[1, n]中第k大的数，再进行一次partition，就能得到TopK的结果
+知其然，知其所以然。思路比结论重要。
+
+
+分治和减治
+- 分治法，大问题分解为小问题，小问题都要递归各个分支，例如：快速排序 O(n*lg(n))
+- 减治法，大问题分解为小问题，小问题只要递归一个分支，例如：二分查找 O(lg(n))，随机选择
+
+```c++
+// 快排伪代码 —— 分治算法
+void quick_sort(int[]arr, int low, inthigh){
+         if(low== high) return;
+         int i = partition(arr, low, high); // 快排核心，比i小的放左边，否则右边，保持整体大致有序
+         quick_sort(arr, low, i-1);
+         quick_sort(arr, i+1, high);
+}
+// 二分法伪代码 —— 减治算法
+int BS(int[]arr, int low, inthigh, int target){
+         if(low> high) return -1;
+         mid= (low+high)/2;
+         if(arr[mid]== target) return mid;
+         if(arr[mid]> target)
+                   return BS(arr, low, mid-1, target);
+         else
+                   return BS(arr, mid+1, high, target);
+}
+// 随机选择算法randomized_select，RS —— 减治算法
+int RS(arr, low, high, k){
+  if(low== high) return arr[low];
+  i= partition(arr, low, high);
+  temp= i-low; //数组前半部分元素个数
+  if(temp>=k)
+      return RS(arr, low, i-1, k); //求前半部分第k大
+  else
+      return RS(arr, i+1, high, k-i); //求后半部分第k-i大
+}
+```
+
+
 ### 数学问题
+
+#### 跳台阶
+
+有十五级台阶，每次最多跳三下，需要跳多少次能跳完
+
+#### 扑克牌
+
+有一百张牌，每张牌有一个数字，依次翻牌看牌后面的数字，用什么样的策略能保证拿到的牌是最大的
 
 #### 赛马问题
 
@@ -147,6 +242,35 @@ tags: 实习 应届生 AI 算法工程师 面试
 ### 机器学习
 
 [百度2015校招机器学习笔试题](http://www.itmian4.com/thread-7042-1-1.html)
+
+特征工程
+- 离散、连续特征一般怎么处理（onehot、归一化、why、方法 等）；
+- 特征变换、构造/衍生新特征（woe、iv、统计量 等）；
+- 特征筛选（离散、连续、多重共线性 等）；
+- 采样（除了随机呢？）；
+- 缺失值处理（离散、连续）...
+算法模型
+- 常用loss、正则、sgd、l-bfgs、auc公式及优缺点、数据不平衡时的调参...
+- booting：gbdt的loss、分裂节点依据、防过拟合；
+- xgb的loss选择、泰勒展开、正则（gbdt能加么）、并行、vs lightGBM；
+- lambdaMart的loss--如何直接优化metric（如NDCG）--学习/train过程；
+- svm的优化目标、软间隔、调参；
+- lr；rf；
+
+深度学习
+- dnn为什么要“deep”、deep后带来的信息传递/梯度传递问题及其优化策略（可以从网络结构、activation、normalization等方面阐述）；
+- 卷积层学习过程（前后向）及参数数量估计；
+- polling作用、优缺点、why用的越来越少；
+- rnn长依赖问题、梯度问题；
+- lstm的input output forget gate作用于哪、gru的update gate呢？
+- 常用loss（分类、回归）、activation、optimizer（从一阶矩估计到二阶）、加了BN后做predict均值方差从哪来、常用的attention举例
+
+强化学习
+- 什么问题适合RL/MLE的缺陷、trail-and-error search、policy-based vs value-based、on-policy vs off-policy等
+- q learning中q值得更新（其实很好记：当前q值 += 学习率*（环境reward+ 新状态下最大的q值*衰减值）、为什么要乘衰减值）；
+- DQN使用network代替q_table的初衷（q表规模大时维护成本高）、两个network（结构一致、参数交替更新）、存储记忆 off-policy；（经验回放+固定目标）
+- policy gradients如何学习/拟合目标（ -log(prob)*vt 像不像交叉熵...）、按概率选action vs epsilon-greedy；
+- Actor-Critic中的actor与critic、优缺点、收敛问题、DDPG、
 
 #### 机器学习流程
 
@@ -412,6 +536,16 @@ hash冲突：关键字值不同的元素可能会映象到哈希表的同一地�
 
 - 实现precision、recall计算
 
+#### NLP考题
+
+NLP
+- 词法/序列标注相关：hmm、crf、lstm、lstm+crf（细节：对于转移特征、转移概率 hmm crf lstm+crf分别是怎么学的？）
+- 句法：有了依存关系 如何确定主谓宾、举几个例子
+- word2vector：层次softmax、负采样、 vs GloVe
+- topic相关：lsa（可以引到svd、基于mse的fm）；lda why引入共轭先验分布、调参（针对两个先验）；
+- +DL：cnn filter的设计、seq2seq+attention的padding问题（对padding的字符如何做attention、如何忽略、用tensorflow/pytorch大致写一下）、tree lstm
+- 任务相关：beam search做生成、dialog中对回复做lable smooth 提高回复多样性...
+
 
 #### NLP：词频统计
 
@@ -482,18 +616,55 @@ hash冲突：关键字值不同的元素可能会映象到哈希表的同一地�
 
 #### NLP：transformer QKV计算
 
+
 - 背景：
 - 需求：
   - 输入：
   - 输出：
 - 方法：
 
+[用于Transformer的6种注意力的数学原理和代码实现](https://www.toutiao.com/article/7081075103982731808)
+
+Full Attention: 2017的《Attention is All You Need》中的编码器-解码器结构实现中提出。它结构并不复杂，所以不难理解。
+- ![](https://p26.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/612d7a3ac49c4847ac1702c5df8b9c25?from=pc)
+左侧显示了 Scaled Dot-Product Attention 的机制。
+- ![](https://p26.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/af533feb4f1044fe92cfae366b08accd?from=pc)
+
+```python
+class FullAttention(nn.Module):
+  def __init__(self, mask_flag=True, factor=5, scale=None, attention_dropout=0.1, output_attention=False):
+    super(FullAttention, self).__init__()
+    self.scale = scale
+    self.mask_flag = mask_flag
+    self.output_attention = output_attention
+    self.dropout = nn.Dropout(attention_dropout)
+
+  def forward(self, queries, keys, values, attn_mask):
+    B, L, H, E = queries.shape
+    _, S, _, D = values.shape
+    scale = self.scale or 1. / sqrt(E)
+    scores = torch.einsum("blhe,bshe->bhls", queries, keys)
+    if self.mask_flag:
+    if attn_mask is None:
+    attn_mask = TriangularCausalMask(B, L, device=queries.device)
+    scores.masked_fill_(attn_mask.mask, -np.inf)
+    A = self.dropout(torch.softmax(scale * scores, dim=-1))
+    V = torch.einsum("bhls,bshd->blhd", A, values)
+    if self.output_attention:
+      return (V.contiguous(), A)
+    else:
+      return (V.contiguous(), None)
+```
 
 
+### 开放问题
 
-### 软素质
+开放性问题：
+- 对XX公司有什么了解，知道这个职位是做的吗？
+- 对XX公司什么看法，看好还是看衰，对自己的职业规划
+- 未来的打算，认为自己有什么优势劣势，做最成功和最失败的事情是什么
 
-为什么离开上家公司
+### 为什么离开上家公司
 
 【2021-10-10】猎头：面试被问**短板是什么**、**为什么要离开上一家公司**，怎么办？
 1. 建议坦诚但积极。本质上不是面试官想知道答案，而是想通过你的回答，看出你是一个什么样的人。而且，不少公司都会做背景调查，所以如果离职原因和真实的原因相差太远，那么在做背调时很难过关。回答起来确实是有些不舒服的，这是面试官在刻意施压，撇开具体的回答不说，光从回答问题的方式，就能看出如何化解压力，同时还可以了解是否有自知之明。
@@ -501,21 +672,63 @@ hash冲突：关键字值不同的元素可能会映象到哈希表的同一地�
 3. 比如，面试中问有哪些短板。我自己在应聘一家企业的企业大学校长一职的时候就被CEO问过这个问题。根据刚才那个**坦诚但积极**的回答方式，回答：首先非常坦诚的说，自己在做执行的过程中，往往因为追求速度，而忽视细节。并且举一个真实的例子，在某个项目中，我因为决策速度太快，在一个执行细节上考虑不周全，结果险些造成损失。但是如果就这么回答，显然，对方是不会请一个这么急躁的人来做企业大学校长的。我接着说道：第一，通过复盘我意识到了，自己的确有决策时候太过追求效率的缺点。其次，现在自己养成了一个习惯，也就是每次在帮自己做决策时，必须要拿出，笔和纸，用金字塔原理，把问题拆解清楚，做到不重复不遗漏。所以像上次那样的决策失误，几乎就再也没有出现过。这就是积极，不但告诉了面试官如何在具体的某件事情上进步，而且我的学习能力快，这个优点，也符合企业大学的这个角色的要求。
 4. 尤其是不要把一盆脏水全泼到上一家公司，对前东家大放阙词，这会给HR传递一个非常不好的信息，你是一个刺头。其实，正常来说，一个人的离职原因，HR们也心知肚明，要么就是钱没给够，要么就是发展不够顺。你可以更注重，对于应聘公司的仰慕出发，谈一谈这家公司，在你的职业发展目标中扮演什么样的角色。是因为这家公司吸引了你，而不是因为上一家公司耽误了你。
 
+## Q&A
 
-# 算法工程师
+【2018-11-13】
+### 问题：公司文化真的存在吗？
 
-【2021-9-18】[数十位算法工程师的经验总结](https://www.toutiao.com/w/i1711154806904832/)
+答：比如百度发邮件没写标题就请吃鸡翅，同事相互之间称同学，穿着越随意级别越高；阿里多是拜山头，老大一发话，大家撸起袖子拼命干，做好了一起荣华富贵，做差了，各自散伙儿，hr权利尤其大，对技术人员拥有一票否决权；腾讯，没呆过，不清楚
 
-总结mm中对于算法工作的论述，虽然有调侃之意，但对于指导工作难道没有意义吗？
-1. 从0到1，用**简单模型**；可解释性强，简单易实现，能快速验证思路，也有利于奠定后期的提升空间；（指标：78％）
-2. 加强**特征工程**工作，特征离散化，特征交叉，新增特征等等。（指标：81％）
-3. 换用经典的**高级模型**，如从LR到GBDT，再到DeepFM，DIN等等。（指标：85％）
-4. **精细化**调整，分人群优化，针对badcase优化；（指标：85.5％）
-5. **模型调参**，尝试各种前沿模型结构，调整数据采样方式，增加统计特征，清洗数据等等（85.6％）
-6. 继续想各种**鬼点子**优化（85.66％）
-运气好的话，赶上环比波动，赶紧上线总结（到底是不是模型带来的，就是玄学了，哈哈）；
+### 问：这种文化来源上级的灌输吗？
 
-运气不好的话，模型指标莫名其妙下跌，大家怎么应对呢？
+答：也许不是上级，但很可能是上级的上级，权利多大，影响力就多大，大到可以改变一个公司的文化，中国公司，乃至亚洲公司普遍服从权力，所谓官高一级压死人，这是皇权社会根深蒂固的影响，人治大于法制，这点逊于欧美公司，当然他们也有类似情形，只是程度不同
+
+### 问：公司文化和个人兴趣哪个更重要？
+
+答：这就是环境与个人的关系，不得不承认，人是渺小的，极易受环境影响，能出淤泥而不染的少之又少，更不用说改变环境的。如果文化与兴趣冲突，要么适应要么离开，不过别担心，大体上公司文化不太会与个人冲突，除了个别的条例，比如过度侵犯个人隐私，甚至过于扭曲的价值观
+
+### 问题：知识图谱+公司选择
+
+我在阿里iDST做过一段时间的知识图谱，也听过不少大拿的讲座，这个领域在电商上，大概就是各个商品的关系了，图谱方向五年前百度、搜狗就发力了，后来被深度学习盖过去了。kg其实是个持续半个世纪的老话题，语义网，本体，图谱，换汤不换药。Google在2000年左右就开始做了，长达8年，才有一个像样的图谱，据说准确率83%左右，看着很高，但还不能大规模商用，实际情形太复杂了，对图谱的要求很高，目前看开放领域图谱基本没有出路，垂直领域倒是可以试试，不过少不了一大堆脏活累活。图谱的未来是光明的，但道路是坎坷的，只是不知道渺小的个体能否熬到黎明的那一刻；这条路相对较窄，作为应届生，不建议刚开始就进入一条窄胡同
+关于图谱方向，你可以看看鲍捷的系列文章；关于jd，我的感觉整体氛围偏传统风格，老气横秋，技术人员没有普通互联网公司那么阳光。具体有什么问题，你可以整理下，我找内部人员给你解答
+面试时，遇到同道中人都会兴奋，酒逢知己千杯少，这种感觉很难碰到。个人的局限性一方面在于能力，另一面在于视野。选择大于努力。国内互联网格局上看，jd的发展受限于阿里和腾讯，只要阿里在，jd就是腾讯的马前卒，千年老二。如果是想做研究，不推荐上班，国外读博更好。企业研究院虽是研究，但有业务压力，不可能心无旁骛，所以像阿里iDST一样出现了既要学术成果，又要工程落地，还要商业变现的三不像，结果就是分分合合，不成大器。面试时聊的技术，实际应用中未必用，大多用来筛选、吓唬人的。工业届做的做法可能low到想吐。另外，DL领域，技术更新换代很快，这个时候的GAN，过五年十年就烟消云散了。
+还是那个话题，个人与环境的关系，绝大部分人都是环境的影响者，只有极个别的聪明人和傻子能减少影响。比如绝顶聪明的天才elon musk，做了30年冷板凳的hinton，改变了环境；不过也有另一个极端，坚持下去越来越孤独，直至自我灭亡，遁入另一个世界。个人与潮流，重在借势。
+如何做出科学的决策？不偏听，不盲从，多方求证，理性分析，最大程度的降低感性的影响。有人说，所谓的选择困难症，就是穷；我想说，那是因为信息不对称，另一种意义上的穷。
+
+
+## IT英语
+
+### 如何学机器学习？
+
+【2022-4-9】作者：吴恩达, [链接](https://www.zhihu.com/question/266291909/answer/2429781356)
+
+Do you want to become an AI professional? The key to machine learning mastery is to approach your learning systematically!  
+- Machine learning is the science of making a computer perform work without explicit programming.  In the past decade, machine learning has enabled utilities such as **self-driving cars** 自动驾驶, **real-time speech recognition** 实时语音识别, efficient web search 网络搜索, and boosting our knowledge of the human genome 人类基因组. 
+- Many researchers believe that machine learning promises the greatest possibility in realizing **human-level AI**. 
+- Here, I‘d like to share **three steps** to learn machine learning in a systematic way: 
+- First, you should learn **coding basics** 编程基础. 
+- Second, you should study machine learning and deep learning. 
+- Third, you should focus on the **role** you would like to have.  
+
+Fundamental programming skills are a prerequisite for building machine learning systems. You will need to be able to write a simple computer program (function calls 函数调用, for loops 循环, conditional statements 条件语句, basic mathematical operations 基础数学操作) before you can start implementing preliminary machine learning algorithms. 
+
+Knowing more math can give you an edge, but it won’t be necessary to spend much time on specific mathematical issues such as linear algebra, probability and statistics. 
+
+Having gained some fundamental coding skills, you can officially begin your journey of machine learning. My Machine Learning course from Stanford University is a great choice. It provides a general introduction to **machine learning**, **data mining**, and the statistical approach of **pattern recognition**. The course will also help you to develop your practical understanding of how to use machine learning in the **real world**. For instance, when to use supervised learning, unsupervised learning, and machine learning.  The machine learning course draws insights from （洞察力） numerous case studies and applications. It is suitable for learning how to apply algorithms to a wide-variety of tasks, such as **intelligent robots** building (perception, control), natural language understanding NLU领域 (web search, anti-spam emails), **computer vision** (identifying diseases in medical imagery, finding defects in manufacturing), and much more. 
+
+Deep learning is a subset 子集 of machine learning that is growing more important, and is worth your attention as well. It uses neural networks to make powerful predictions, and is the driving force behind many of today’s most exciting technologies. For example, self-driving cars, advanced web search, and face recognition all use deep learning. The Deep Learning Specialization, developed by DeepLearning.AI, covers the knowledge you need to build deep learning applications in fields such as computer vision, natural language processing, and speech recognition. You will conduct **case studies** 案例分析 in healthcare, **autonomous driving**, **sign language reading** 收拾语言理解, **music creation** 音乐创作, and natural language processing NLP领域, so you can familiarize yourself with the practical application of deep learning in various industries while mastering theoretical knowledge 理论知识 at the same time. 
+
+Once you have learned the foundations of machine learning and deep learning, the next move depends on the role you have in mind. For example, do you want to be a **data scientist** 数据科学家,  **engineer** 工程师, or machine learning researcher? 研究院 Or, do you consider developing AI skills to complement your existing expertise? If so, you can learn AI as a way to better apply your expertise to real-world problems. 
+
+After deciding the role, it's time to move on to real practice. You’ll want to get experience working on projects 项目经验 and as a part of a team 团队协作. Identifying viable 可行的 and valuable 有价值的 projects is an important skill, and it’s one that you’ll continue to develop throughout your career. The best way to start is to volunteer to help with other peoples’ projects. Eventually 最终 you will develop the confidence and experience to **lead your own** 独当一面. 
+
+For completing a project, **teamwork** is more likely to succeed than **solo** effort 单打独斗. It is critical to have the ability to collaborate with others, give and take advice, as this helps you build connections. Teamwork also helps you build out your network of professional connections. You can call on people who you have worked with in the past to provide advice and support as you move through your career.  
+
+The ultimate goal 终极目标, of course, is to find a job in machine learning. This will come after you have acquired both **theoretical knowledge** 理论知识 as well as **practical experience** 实际经验. When looking for a job, don’t be shy about reaching out to people you have met while taking courses or working on projects. You can also connect directly with professionals who are already working in the field. Many of them are happy to **act as your mentor**.  
+
+Finding your first job, however, is a small step in a long-term career 职业生涯. It is important to cultivate **self-discipline** 自律 and commit to **constant learning** 持续学习. People around you may not be able to tell whether you spend your weekends studying or on your smartphone, but day by day, and year over year, it will make a difference. Discipline ensures that you move forward while staying healthy. 
+
+I hope these suggestions could open the door to machine learning and help get you job-ready. The journey ahead will surely be a bumpy （ˈbʌmpi] 曲折的）one, but rest assured that what you encounter along the way will help you succeed. By the way, courses from DeepLearning.AI will be available on Zhihu soon. **Stay tuned** 敬请 and see you next time! Keep Learning! Andrew
 
 
 # 算法入门
@@ -539,6 +752,71 @@ AI初学者不要过于迷信企业项目，忽略基本功的学习，不要mni
 - ①实习，参与到企业项目中，慢慢体会，实际应用总是跟想象的不一样。大多数实习生做不了多少核心工作，大多打杂，提升工程能力
 - ②精耕细作，找一个小项目，哪怕是mnist，想各种办法，不停的优化，尽可能提升泛化能力，黑白mnist玩腻了，换服装领域试试？换cfair-10试试？换web demo，实施手写识别试试？很多人容易犯的错就是，浅尝辄止，好高骛远，以为跑一边github的demo，就会深度学习了，too simple，sometimes naive！这种学习态度是不可能学会深度学习的
 - ③多看多动手多做笔记，构建自己的知识体系。
+
+## 算法工程师职业道路
+
+【2021-9-18】[数十位算法工程师的经验总结](https://www.toutiao.com/w/i1711154806904832/)
+
+总结mm中对于算法工作的论述，虽然有调侃之意，但对于指导工作难道没有意义吗？
+1. 从0到1，用**简单模型**；可解释性强，简单易实现，能快速验证思路，也有利于奠定后期的提升空间；（指标：78％）
+2. 加强**特征工程**工作，特征离散化，特征交叉，新增特征等等。（指标：81％）
+3. 换用经典的**高级模型**，如从LR到GBDT，再到DeepFM，DIN等等。（指标：85％）
+4. **精细化**调整，分人群优化，针对badcase优化；（指标：85.5％）
+5. **模型调参**，尝试各种前沿模型结构，调整数据采样方式，增加统计特征，清洗数据等等（85.6％）
+6. 继续想各种**鬼点子**优化（85.66％）
+运气好的话，赶上环比波动，赶紧上线总结（到底是不是模型带来的，就是玄学了，哈哈）；
+
+运气不好的话，模型指标莫名其妙下跌，大家怎么应对呢？
+
+[算法工程师危机](https://mp.weixin.qq.com/s?__biz=MzUzNzYxMzAxMA==&mid=2247484241&idx=1&sn=68cd7a36e67a2d057d1f62908c8ca277&chksm=fae504eccd928dfa975321ae8cf66a09528fe234291e06aba000fbdc78d47e92c25a7c133d6a&mpshare=1&scene=23&srcid=1120QSdMTsxIETt9bSx0UKgP#rd), [地址](https://www.cnblogs.com/buptzym/p/9790828.html)
+- ![](https://pic1.zhimg.com/80/v2-badb5a43ca548e8817edde30c1b7abdc_720w.jpg)
+- 讯飞AI同传语音造假的新闻刷爆科技圈，科大讯飞股价应声下跌3.89%（不是65.3%，标题党文章害死人）。 吃瓜群众纷纷感慨，有多少人工，就有多少智能。
+- NIPS会议，人满为患，改改网络结构，弄个激活函数就想水一篇paper; 到处都是AI算法的培训广告，三个月，让你年薪45万！在西二旗或望京的地铁车厢里打个喷嚏，就能让10个算法工程师第二天因为感冒请假。
+- 谁也不知道这波热潮还能持续多久，但笔者作为一线算法工程师，已经能明显感受到危机的味道：以大红大紫的图像为例，图像方向简历堆满了HR的办公台，连小学生都在搞单片机和计算机视觉。
+- 人工智能部门正在从早前研究院性质的组织架构分别向**前台**和**后台**迁移：
+  - 前者进入业务部门，背上繁重的KPI，与外部竞争者贴身肉搏；
+  - 后者则完全融入基础架构，像数据库一样普通和平凡。
+- 之前安逸的偏研究生活被打破， AI早已走下神坛。
+
+算法工程师危机包含两部分：
+- 一方面是来自**人的竞争**，大量便宜的毕业生和培训生涌入这个行业，人才缺口被迅速填满甚至饱和，未来的竞争会更激烈；
+- 另一方面则是来自**机器的竞争**，大量算法工程师会很快被他们每天研究的算法所代替。 这两者互相恶化，AI人才市场终会变成一片红海。
+
+- 工具和框架本身的发展，让设计模型所需的代码写得越来越简洁。10年前从头用C++和矩阵库实现梯度下降还是有不小的门槛的，动辄上千行。而当今几十行Keras甚至图形化的模型构建工具，让小学生都能设计出可用的二分类模型。
+- **强大的类库吞噬了知识，掩盖了内部的复杂性**，但也给从业者带来了不小的**惰性**。从业者的技术水平，和使用模型的复杂程度关系不大，越是大牛，用的技术更底层更make sense。
+- 深度学习本身的性质，造成了明显的数学鸿沟。与SVM, 决策树不同，由于模型存在大量的非线性和复杂的层次关系，且输入信号（例如图像，文本）也很复杂，因此严格的数学论证是需要极高的抽象技巧的。
+- 只有凤毛棱角的专家，能深入到模型最深处，用数值分析和理论证明给出严谨的答案。 大部分人在入门后便进入漫长的平台期，美其名曰参数调优，实际就像太上老君炼丹一样。
+
+AI学习曲线，左侧是稍显陡峭的入门期，需要学习基本的矩阵论，微积分和编程，之后便是漫长的平台期。 随着复杂性越来越高，其学习曲线也越来越陡峭，大部分人也就止步于此。 越来越易用的工具，让曲线左侧变得平坦，入门期变短，却并不能改变右侧的陡峭程度。
+- ![](https://pic1.zhimg.com/80/v2-69f8c2c2824bab13472a1486becdf404_720w.jpg)
+
+入门容易深入难，这条曲线同时也能描述AI人才的收入水平。而真正处于危机的，莫过于夹在中间的芸芸众人：对理论一知半解，对工具非常依赖。可替代性很强，一旦AI浪潮过去，就知道谁是在裸泳。
+
+市场和业务变化越来越快，能有哪些核心业务，是能让工程师静心调个一年半载的呢？当一个从培训学校里出来的人都能做模型时，有多少业务能让公司多花两三倍的人力成本，而仅带来1%的性能提升呢？
+
+算法岗比工程岗更容易被取代。 在现有技术下，由于业务需求的复杂性， 自动生成一套软件App或服务几乎不可能的（否则就已经进入强人工智能时代了），但模型太容易被形式化地定义了。根据数据性质，自动生成各个领域的端到端(end2end)的模型也逐渐在工业上可用了：图像语音和广告推荐的飞速发展，直接套用即可。理论和经验越来越完善，人变得越来越可替代。
+- 以前需要大力气搭建的数据回流和预测的链路，已经成了公司的基础组件，数据工程师没事干了； 
+- 特征可以自动生成和优选，特征工程师失业了；
+- 深度网络采用经典结构即能满足一般业务需求，参数搜索在AutoML下变得越来越方便，调参工程师的饭碗也丢了 。
+- 此处引用老板经常说的一句话：机器都能干了，要你干吗？
+
+应用领域
+- **广告/推荐**领域已经逐渐成熟，很多技巧沉淀为一整套方法论，已进入平台期；
+- 下一个即将被攻陷的领域应该是**图像**；
+- 而**文本**由于其内在的抽象性和模糊性，应该是算法工程师最后的一块净土，但这个门槛，五年内就会有爆发式的突破
+  - 2018年谷歌BERT横扫11项NLP任务记录，麻蛋。
+
+人工智能一定会更加两极化：偏基础的功能一般程序员就能搞定，像白开水一样普通。而针对更复杂模型甚至强人工智能的研究会成为少数人的专利。
+
+传统意义的软件开发和产品设计，远比AI算法的需求来的多。算法永远是锦上添花，而非雪中送炭，再好的算法也拯救不了落后的业务和商业模式。一旦经济下行，企业首要干掉的就是锦上添花且人力成本较高的部分。
+
+如果你是顶级的算法专家，这样的问题根本不需担心。但是，对大部分人来说，如何找到自己的梯度上升方向，实现最优的人生优化器呢？
+
+一些不成熟的小建议，供读者抛砖引玉：
+- 首先是**深入原理和底层**，类似TensorFlow的核心代码至少要读一遍吧？就算没有严格的理论基础，最起码也不能瞎搞啊。 切莫不能被工具带来的易用性迷惑双眼。要熟悉工具箱里每种函数的品性，对流动在模型里的数据有足够的嗅觉，在调参初期就能对不靠谱的参数快速剪枝。
+- 其次，**工程能力不能丢**，太多做算法眼高手低的例子了：一个文件写所有，毫无架构和封装；遍地是临时方案和trick，前人挖坑后人栽；稳定性考虑不足，导致线上服务经常挂掉。 没有工程和架构的积累，在团队作战时可能还不是太大问题，单兵打天下则处处碰壁。
+  - 按个人理解，做算法带来的最大收获是科学精神和实验思维，这是做工程很难培养出来的。以前看论文看了introduction和模型设计，草草地读一下实验结果就完事儿了。殊不知AB实验设计很可能才是论文的核心：实验样本是否无偏，实验设计是否严谨，核心效果是否合理，是否能证明论文结论。也许一行代码和一个参数的修改，背后是艰辛的思考和实验，做算法太需要严谨和缜密的思维了。即使未来不做算法，这些经验都会是非常宝贵的财富。
+- 再者是尽早面向**领域**，面向**人**和**业务**。AI本身只是工具，它的抽象性并不能让其成为各个领域的灵丹妙药。 如果不能和AI专家在深度上竞争，就在业务领域专精深挖，拥有比业务人员更好的数据敏感度，成为跨界专家。现在已经有大量AI+金融， AI+医疗，AI+体育的成功案例。 人能熟悉领域背后的数据，背后的人性，这是机器短时间内无法代替的，跨界带来的组合爆炸，也许暗含着危机中的机会吧。
 
 ## [停止学习框架，专注基础知识](https://ai.yanxishe.com/page/blogDetail/10548)
 - 【2019-05-08】[Stop Learning Frameworks](https://sizovs.net/2018/12/17/stop-learning-frameworks/)
