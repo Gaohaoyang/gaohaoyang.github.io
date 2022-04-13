@@ -1028,7 +1028,6 @@ BERT模型一图流（建议保存后放大查看）
 
 不止BERT，所有huggingface实现的PLM的word embedding和masked language model的预测权重在初始化过程中都是共享的：
 
-
 #### Fine-Tuning
 
 微调也就是下游任务阶段，也有两个值得注意的地方。
@@ -1726,15 +1725,30 @@ python run_language_modeling.py \
 - 2018年11月底，谷歌发布了基于双向 `Transformer` 的大规模预训练语言模型 `BERT`，该预训练模型能高效抽取文本信息并应用于各种 NLP 任务，该研究凭借预训练模型刷新了 11 项 NLP 任务的当前最优性能记录。
 - 技术博主 Jay Alammar 近日发文[illustrated-bert](https://jalammar.github.io/illustrated-bert/)，通过图解方式生动地讲解了 BERT 的架构和方法基础。
 - 2018 年是机器学习模型处理文本（更准确地说是自然语言处理，简称 NLP）的一个转折点。
-
-![](https://image.jiqizhixin.com/uploads/editor/5442b9f1-17ca-49b3-a259-e5fb52107534/1544732034404.png)
-
-![](https://image.jiqizhixin.com/uploads/editor/87b820e3-dc5c-4f9f-97f6-6a01360156b7/1544732034725.png)
+- ![](https://image.jiqizhixin.com/uploads/editor/5442b9f1-17ca-49b3-a259-e5fb52107534/1544732034404.png)
+- ![](https://image.jiqizhixin.com/uploads/editor/87b820e3-dc5c-4f9f-97f6-6a01360156b7/1544732034725.png)
 
 
-- 下游任务
+下游任务
+- ![](https://image.jiqizhixin.com/uploads/editor/41afd366-28b8-4aa1-8464-5f10d253cb48/1544732037865.png)
 
-![](https://image.jiqizhixin.com/uploads/editor/41afd366-28b8-4aa1-8464-5f10d253cb48/1544732037865.png)
+## BERT介绍
+
+语言模型的预训练用在下游任务的策略主要有两种：
+- 基于**特征**（feature-base）：也就是**词向量**，预训练模型训练好后输出的词向量直接应用在下游模型中。
+  - 如ELMo用了一个**双向LSTM**，一个负责用前几个词预测下一个词，另一个相反，用后面几个词来预测前一个词，一个从左看到右，一个从右看到左，能够很好地捕捉到上下文的信息，不过只能输出一个词向量，需要针对不同的下游任务构建新的模型。
+- 基于**微调**（fine-tuning）：先以**自监督**的形式预训练好一个很大的模型，然后根据下游任务接一个**输出层**，不需要再重新去设计模型架构
+  - 如OpenAI-GPT，但是GPT用的是一个**单向transformer**，训练时用前面几个词来预测后面一个词，只能从左往右看，不能够很好的捕捉到上下文的信息。
+ELMo虽然用了两个单向的LSTM来构成一个双向的架构，能够捕捉到上下文信息，但是只能输出词向量，下游任务的模型还是要自己重新构建，而GPT虽然是基于微调，直接接个输出层就能用了，但是是单向的模型，只能基于上文预测下文，没有办法很好的捕捉到整个句子的信息。
+
+**BERT**（Bidirectional Encoder Representations from Transformers）把这两个模型的思想融合了起来
+- 首先，用基于**微调**的策略，在下游有监督任务里面只需要换个输出层就行
+- 其次，训练时用了一个transformer的encoder来基于**双向**的上下文来表示**词元**
+
+ELMo、GPT和BERT的区别
+- ![](https://pic2.zhimg.com/80/v2-59c61eca79848c14285c302564cfe3d9_720w.jpg)
+
+BERT很好的融合了ELMo和GPT的优点，论文中提到在11种自然语言处理任务中（文本分类、自然语言推断、问答、文本标记）都取得了SOTA的成绩。
 
 ## 思考
 
