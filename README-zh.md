@@ -75,17 +75,17 @@
 
 ### Demo
 
-I use *[Masonry](http://masonry.desandro.com/)* to rewrite the waterfall responsive layout. Better interactive experience.
+我使用 *[Masonry](http://masonry.desandro.com/)* 去重写瀑布流响应样式，它有更好的计算机体验。
 
 ### About
 
-The user can write some introduction about theirselves and their site with `markdown` syntax.
+用户可以使用`markdown`语法来撰写关于他们自己和网站的介绍。
 
 ### Comments
 
-This theme supports both [disqus](https://disqus.com/) and [多说评论 duoshuo comments](http://duoshuo.com/). It's very easy to config your comments module.
+这个主题同时支持 [disqus](https://disqus.com/) 和[多说评论](http://duoshuo.com/)。设置你的评论模块非常简单。
 
-The only thing you need do is to change the `short_name` in the file `_config.yml`. As follows.
+你只需要模仿下面修改`_config.yml`中的`short_name`参数。
 
 ```yml
 # comments
@@ -96,13 +96,13 @@ disqus_shortname: xxx
 
 ### Post Contents
 
-The post contents is fixed at the right side while page is scrolling. There will be a scroll bar on contents while it is outside the window height.
+当页面滚动时文章内容将固定在右边。当内容超出屏幕高度时内容旁边将会有一个滚动条。
 
 ### Code Highlight
 
-While the jekyll is update to 3.x.x, you can use github flavored markdown to write code.
+当 jekyll 被升级到 3.x.x 时，你可以使用 github 的 markdown 方言来写代码。
 
-More info to see [syntax-highlighter-changed](https://jekyllrb.com/docs/upgrading/2-to-3/#syntax-highlighter-changed).
+更多信息可以查看[语法高亮更改](https://jekyllrb.com/docs/upgrading/2-to-3/#syntax-highlighter-changed)。
 
 ### Light Shadow
 
