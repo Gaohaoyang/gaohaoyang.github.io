@@ -31,6 +31,99 @@ catalog: true
 一张图总结 [23种设计模式关系](https://cloud.tencent.com/developer/article/1034577)
 - ![](http://dl.iteye.com/upload/attachment/0083/1179/57a92d42-4d84-3aa9-a8b9-63a0b02c2c36.jpg)
 
+## 22种设计模式的C++实现
+
+[22种设计模式的C++实现](https://zhuanlan.zhihu.com/p/476220724)
+- [代码仓库](https://github.com/TOMO-CAT/CppDesignPattern)
+
+### 前置知识
+
+* [UML类图与面向对象编程](https://www.yuque.com/tomocat/txc11h/ggfxqt)
+* [软件设计原则与SOLID原则](https://www.yuque.com/tomocat/txc11h/smpv9w)
+
+### 创建型模式
+
+1. [工厂方法模式（Factory Method）](https://www.yuque.com/tomocat/txc11h/ibccsp)
+2. [抽象工厂模式（Abstract Factory）](https://www.yuque.com/tomocat/txc11h/idexyk)
+3. [生成器模式（Builder）](https://www.yuque.com/tomocat/txc11h/lzc73y)
+4. [原型模式（Prototype）](https://www.yuque.com/tomocat/txc11h/uanyqa)
+5. [单例模式（Singleton）](https://www.yuque.com/tomocat/txc11h/dq5xse)
+
+```c++
+//========== Singleton.h ===========
+#ifndef SINGLETON_H_
+#define SINGLETON_H_
+
+#include <iostream>
+#include <string>
+
+class Singleton {
+ public:
+    static Singleton* GetInstance() {
+        if (instance_ == nullptr) {
+            instance_ = new Singleton();
+        }
+        return instance_;
+    }
+ private:
+    Singleton() {}
+    static Singleton* instance_;
+};
+
+#endif  // SINGLETON_H_
+// ================= Singlton.cpp =========
+#include "Singleton.h"
+
+// 静态变量instance初始化不要放在头文件中, 如果多个文件包含singleton.h会出现重复定义问题
+Singleton* Singleton::instance_ = nullptr;
+//================== main.cpp ===========
+#include <iostream>
+#include "Singleton.h"
+
+int main() {
+    Singleton *s1 = Singleton::GetInstance();
+    Singleton *s2 = Singleton::GetInstance();
+
+    std::cout << "s1地址: " << s1 << std::endl;
+    std::cout << "s2地址: " << s2 << std::endl;
+    return 0;
+}
+
+```
+
+编译运行：
+
+```shell
+g++ -g main.cpp Singleton.cpp -std=c++11 -o singleton
+./singleton 
+# s1地址: 0x95a040
+# s2地址: 0x95a040
+```
+
+
+### 结构型模式
+
+1. [适配器模式（Adapter）](https://www.yuque.com/tomocat/txc11h/gxqi5t)
+2. [桥接模式（Bridge）](https://www.yuque.com/tomocat/txc11h/uprdy7)
+3. [组合模式（Composite）](https://www.yuque.com/tomocat/txc11h/ma2o38)
+4. [装饰模式（Decorator）](https://www.yuque.com/tomocat/txc11h/xpq6gl)
+5. [外观模式（Facade）](https://www.yuque.com/tomocat/txc11h/hn35tg)
+6. [享元模式（Flyweight）](https://www.yuque.com/tomocat/txc11h/nlepg2)
+7. [代理模式（Proxy）](https://www.yuque.com/tomocat/txc11h/rckuhg)
+
+### 行为型模式
+
+1. [责任链模式（Chain of Responsibility）](https://www.yuque.com/tomocat/txc11h/wrxva9)
+2. [命令模式（Command）](https://www.yuque.com/tomocat/txc11h/ot2s5n)
+3. [迭代器模式（Iterator）](https://www.yuque.com/tomocat/txc11h/gnnfxz)
+4. [中介者模式（Mediator）](https://www.yuque.com/tomocat/txc11h/oao48u)
+5. [备忘录模式（Memento）](https://www.yuque.com/tomocat/txc11h/tyg1v4)
+6. [观察者模式（Observer）](https://www.yuque.com/tomocat/txc11h/if8ga9)
+7. [状态模式（State）](https://www.yuque.com/tomocat/txc11h/cm34i3)
+8. [策略模式（Strategy）](https://www.yuque.com/tomocat/txc11h/pql7er)
+9. [模板方法模式（Template Method）](https://www.yuque.com/tomocat/txc11h/fm5hlm)
+10. [访问者模式（Vistor）](https://www.yuque.com/tomocat/txc11h/uix9hy)
+
 ## 分类
 
 - 创建型模式，共5种：工厂方法模式、抽象工厂模式、单例模式、建造者模式、原型模式。
@@ -38,18 +131,18 @@ catalog: true
 - 行为型模式，共11种：策略模式、模板方法模式、观察者模式、迭代子模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介者模式、解释器模式。
 - 其实还有两类：**并发**型模式和**线程池**模式。
 
-
 - 【2020-1-27】[图解23种设计模式](https://cloud.tencent.com/developer/article/1190060)，两张图；另一个[版本](https://www.jianshu.com/p/4a02646f7c9d)，包含23种模式总结
 - 【2022-3-27】[非常简洁的设计模式备忘录，英文、中文各一版](https://www.toutiao.com/w/1728260246562827)
 - ![](https://p9.toutiaoimg.com/img/tos-cn-i-qvj2lq49k0/2100743ddc4040389bfe4750acd56c7b~tplv-obj:1700:2200.image?from=post)
 - ![](https://p9.toutiaoimg.com/img/tos-cn-i-qvj2lq49k0/4239b80af4ec4448b4db2606d96ddba4~tplv-obj:1700:2200.image?from=post)
 
 
-
 ## 设计模式原则
 
 总原则：**开闭原则**（Open Close Principle）
 - 开闭原则就是说对扩展开放，对修改关闭。在程序需要进行拓展的时候，不能去修改原有的代码，而是要扩展原有代码，实现一个热插拔的效果。所以一句话概括就是：为了使程序的扩展性好，易于维护和升级。想要达到这样的效果，我们需要使用接口和抽象类等，后面的具体设计中我们会提到这点。
+
+软件设计原则与SOLID原则
 
 ## 1、单一职责原则
 
@@ -80,34 +173,33 @@ catalog: true
 原则是尽量首先使用合成/聚合的方式，而不是使用继承。
 
 
-# 0 C++ 面向对象设计
+## C++ 面向对象设计
 
 - 封装：隐藏内部实现
 - 继承：复用现有代码
 - 多态：改写对象行为
 
-设计模式关键在于分解和抽象;
-
-设计模式的主要目的是**易于变化**
+设计模式关键在于**分解**和**抽象**; 设计模式的主要目的是**易于变化**
 
 **面向对象设计原则--比设计模式更加重要**
+
 违背了设计原则，设计模式是错误的。
 
-- 依赖倒置原则(DIP)--实现隔离变化
+- **依赖倒置原则**(DIP)--实现隔离变化
   - 高层模块(稳定)不应该依赖于底层模块(变化)，二者都应该依赖于抽象(稳定)。
   - 抽象(稳定)不应该依赖于实现细节(变化)，细节应该依赖于抽象(稳定)。
   - 解释，将需要变动的部分，作为稳定公共抽象基类的子类，将公共方法写在基类中，关键方法作为虚函数交给子类实现。调用公共函数时，只用管理基类指针，使用基类指针调用公共虚函数，就可以调用对应的子函数。实现稳定与不稳定的隔离。
-- 开放封闭原则(OCP):
+- **开放封闭原则**(OCP):
   - 对扩展开放，对更改封闭
   - 类模块应该是可扩展的，但是不可修改。
   - 解释：增加中间抽象，避免过多的更改，保证可扩展性。
-- 单一职责原则(SRP)
+- **单一职责原则**(SRP)
   - 一个类应该仅有一个引起它变化的原因。
   - 变化的方向隐含着类的责任
-- Liskov替换原则(LSP)
+- **Liskov替换原则**(LSP)
   - 子类必须能够替换他们的基类(IS-A)
   - 继承表达抽象。
-- 接口隔离(ISP)
+- **接口隔离**(ISP)
   - 不应该强迫客户程序依赖它们不用的方法。
   - 接口应该小而完备。
 - 优先使用对象组合，而不是类继承
@@ -127,7 +219,7 @@ catalog: true
 - 设计模式：描述“类与相互通信的对象之间的组织关系，包括它们的角色，职责，协作方式等方面”。
 - 架构模式：描述系统中与基本结构组织关系密切的高层模式，包括子系统划分，职责，以及如果组织它们之间关系的规则。
 
-# 0.1 C++ 模板化方法
+## C++ 模板化方法
 
 COF-23设计模式分类
 
@@ -161,12 +253,12 @@ COF-23设计模式分类
 
 ![设计模式](https://img-blog.csdn.net/2018051615452165?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dpS2lfU3U=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
+
 # 看懂UML类图和时序图
  
 ## 图说设计模式阅读笔记-创建型模式
 
 ## 简单工厂模式( Simple Factory Pattern )
-========================================
 
 
 ### 1.1 模式动机
@@ -180,7 +272,7 @@ COF-23设计模式分类
 
 
 ### 1.3 模式结构
---------------------
+
 简单工厂模式包含如下角色：
 
 - Factory：工厂角色
@@ -346,24 +438,26 @@ int main(int argc, char *argv[])
 1. JDK类库中广泛使用了简单工厂模式，如工具类java.text.DateFormat，它用于格式化一个本地日期或者时间。
 
 ```java
-
-    public final static DateFormat getDateInstance();
-    public final static DateFormat getDateInstance(int style);
-    public final static DateFormat getDateInstance(int style,Locale 
-    locale);
+public final static DateFormat getDateInstance();
+public final static DateFormat getDateInstance(int style);
+public final static DateFormat getDateInstance(int style, Locale locale);
 ```
+
 2. Java加密技术
 
-获取不同加密算法的密钥生成器::
+获取不同加密算法的密钥生成器:
+
 ```java
-    KeyGenerator keyGen=KeyGenerator.getInstance("DESede");
+KeyGenerator keyGen=KeyGenerator.getInstance("DESede");
 ```
-创建密码器::
+
+创建密码器:
+
 ```java
-    Cipher cp=Cipher.getInstance("DESede");
+Cipher cp=Cipher.getInstance("DESede");
 ```
+
 ### 1.12 总结
---------------------
 
 - 创建型模式对类的实例化过程进行了抽象，能够将对象的创建与对象的使用过程分离。
 - 简单工厂模式又称为静态工厂方法模式，它属于类创建型模式。在简单工厂模式中，可以根据参数的不同返回不同类的实例。简单工厂模式专门定义一个类来负责创建其他类的实例，被创建的实例通常都具有共同的父类。
@@ -391,12 +485,10 @@ int main(int argc, char *argv[])
 - ConcreteFactory：具体工厂
 
 模式结构：
-
-![模式结构](https://design-patterns.readthedocs.io/zh_CN/latest/_images/FactoryMethod.jpg)
+- ![模式结构](https://design-patterns.readthedocs.io/zh_CN/latest/_images/FactoryMethod.jpg)
 
 时序图：
-
-![时序图](https://design-patterns.readthedocs.io/zh_CN/latest/_images/seq_FactoryMethod.jpg)
+- ![时序图](https://design-patterns.readthedocs.io/zh_CN/latest/_images/seq_FactoryMethod.jpg)
 
 ### 2.4 代码分析
 
@@ -426,10 +518,8 @@ int main(int argc, char *argv[])
 	//创建对应产品
     Product * prod = fc->factoryMethod();
 	prod->use();
-	
 	delete fc;
 	delete prod;
-	
 	return 0;
 }
 ```
@@ -445,12 +535,10 @@ int main(int argc, char *argv[])
 某系统日志记录器要求支持多种日志记录方式，如文件记录、数据库记录等，且用户可以根据要求动态选择日志记录方式， 现使用工厂方法模式设计该系统。
 
 结构图：
-
-![结构图](https://design-patterns.readthedocs.io/zh_CN/latest/_images/loger.jpg)
+- ![结构图](https://design-patterns.readthedocs.io/zh_CN/latest/_images/loger.jpg)
 
 时序图：
-
-![时序图](https://design-patterns.readthedocs.io/zh_CN/latest/_images/seq_loger.jpg)
+- ![时序图](https://design-patterns.readthedocs.io/zh_CN/latest/_images/seq_loger.jpg)
 
 ### 2.8 工厂方法模式的优先
 
@@ -515,8 +603,7 @@ int main(int argc, char *argv[])
 ![抽象工厂模式](https://design-patterns.readthedocs.io/zh_CN/latest/_images/AbatractFactory.jpg)
 
 时序图：
-
-![时序图](https://design-patterns.readthedocs.io/zh_CN/latest/_images/seq_AbatractFactory.jpg)
+- ![时序图](https://design-patterns.readthedocs.io/zh_CN/latest/_images/seq_AbatractFactory.jpg)
 
 ### 3.5 代码分析
 
@@ -638,7 +725,6 @@ void ProductA1::use(){
 ### 4.5 代码分析
 
 ```c
-
 #include <iostream>
 #include "ConcreteBuilder.h"
 #include "Director.h"
@@ -673,7 +759,6 @@ int main(int argc, char *argv[])
 ///////////////////////////////////////////////////////////
 
 #include "ConcreteBuilder.h"
-
 
 ConcreteBuilder::ConcreteBuilder(){
 
@@ -2537,18 +2622,6 @@ int main()
 ```
 
 > 2019-11-10 21:41:49
-
-# 图说设计模式阅读笔记
-
-_参考链接：_ 
-
-- [github地址](https://github.com/me115/design_patterns)
-- [图说设计模式](https://design-patterns.readthedocs.io/zh_CN/latest/)
-- [设计模式C++实现笔记](https://www.jianshu.com/c/c3f6140b8315)
-- [C++ 设计模式](https://blog.csdn.net/liang19890820/article/details/66974516)
-- [C++设计模式代码地址](https://github.com/Waleon/DesignPatterns)
-- [设计模式(可复用面向对象的软件的基础)](https://pan.baidu.com/disk/home#/all?path=%2FLearning_Note%2F%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E4%B9%A6%2F%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%92%8C%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86&vmode=list)
-- [C++设计模式视频](https://www.bilibili.com/video/av52251106)
 
 # 行为型模式
 
@@ -4443,6 +4516,8 @@ I’m cleaning up the garbage of Terracotta Warriors!
 - 一个对象结构包含多个类型的对象，希望对这些对象实施一些依赖其具体类型的操作。在访问者中针对每一种具体的类型都提供了一个访问操作，不同类型的对象可以有不同的访问操作。
 - 需要对一个对象结构中的对象进行很多不同的并且不相关的操作，而需要避免让这些操作“污染”这些对象的类，也不希望在增加新操作时修改这些类。访问者模式使得我们可以将相关的访问操作集中起来定义在访问者类中，对象结构可以被多个不同的访问者类所使用，将对象本身与对象的访问操作分离。
 - 对象结构中对象对应的类很少改变，但经常需要在此对象结构上定义新的操作。
+
+
 
 
 # 结束
