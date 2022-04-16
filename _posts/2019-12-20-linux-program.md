@@ -6662,9 +6662,9 @@ g++ -o hello main.cpp function1.cpp function2.cpp
 ```makefile
 # Makefile (井号为注释)
 all:
-        g++ -o hello main.cpp function1.cpp function2.cpp
+    g++ -o hello main.cpp function1.cpp function2.cpp
 clean:
-        rm -rf *.o hello
+    rm -rf *.o hello
 ```
  
 （注意上面代码片段的缩进，是一个<tab>而不是4个或者8个空格。）
@@ -6679,15 +6679,15 @@ clean:
 ```makefile
 all: hello
 hello: main.o function1.o function2.o
-        g++ main.o function1.o function2.o -o hello
+    g++ main.o function1.o function2.o -o hello
 main.o: main.cpp
-        g++ -c main.cpp
+    g++ -c main.cpp
 function1.o: function1.cpp
-        g++ -c function1.cpp
+    g++ -c function1.cpp
 function2.o: function2.cpp
-        g++ -c function2.cpp
+    g++ -c function2.cpp
 clean:
-        rm -rf *.o hello
+    rm -rf *.o hello
 ```
  
 上面的 Makefile 包含了一条重要的语法：<target>:<dependencies>。即，目标：目标依赖的文件。
@@ -6725,15 +6725,15 @@ LFLAGS = -Wall
  
 all: hello
 hello: main.o function1.o function2.o
-        $(CC) $(LFLAGS) main.o function1.o function2.o -o hello
+    $(CC) $(LFLAGS) main.o function1.o function2.o -o hello
 main.o: main.cpp
-        $(CC) $(CFLAGS) main.cpp
+    $(CC) $(CFLAGS) main.cpp
 function1.o: function1.cpp
-        $(CC) $(CFLAGS) function1.cpp
+    $(CC) $(CFLAGS) function1.cpp
 function2.o: function2.cpp
-        $(CC) $(CFLAGS) function2.cpp
+    $(CC) $(CFLAGS) function2.cpp
 clean:
-        rm -rf *.o hello
+    rm -rf *.o hello
 ```
 
 上面的 Makefile 中，开头定义了三个变量：CC，CFLAGS，和 LFLAGS。其中 CC 表示选择的编译器（也可以改成 gcc）；CFLAGS 表示编译选项，-c 即 g++ 中的 -c，-Wall 表示显示编译过程中遇到的所有 warning；LFLAGS 表示链接选项，它就不加 -c 了。这些名字都是自定义的，真正起作用的是它们保存的内容，因此只要后面的代码正确引用，将它们定义成阿猫阿狗都没问题。容易看出，引用变量名时需要用 $() 将其括起来，表示这是一个变量名。
@@ -6743,7 +6743,7 @@ clean:
 第三版的 Makefile 还是不够简洁，例如我们的 dependencies 中的内容，往往和 g++ 命令中的内容重复：
 ```makefile
 hello: main.o function1.o function2.o
-        $(CC) $(LFLAGS) main.o function1.o function2.o -o hello
+    $(CC) $(LFLAGS) main.o function1.o function2.o -o hello
 ```
 
 我们不想敲那么多字，能不能善用 <target>:<dependencies> 中的内容呢？这就需要引入下面几个特殊符号了（也正是这些特殊符号，把 Makefile 搞得像是天书，吓退了很多初学者）：$@ ，$<，$^。
@@ -6757,7 +6757,7 @@ hello: main.o function1.o function2.o
  
 ```makefile
 hello: main.o function1.o function2.o
-        $(CC) $(LFLAGS) $^ -o $@
+    $(CC) $(LFLAGS) $^ -o $@
 ```
  
 而第四版 Makefile 就是这样的：
@@ -6769,15 +6769,15 @@ LFLAGS = -Wall
  
 all: hello
 hello: main.o function1.o function2.o
-        $(CC) $(LFLAGS) $^ -o $@
+    $(CC) $(LFLAGS) $^ -o $@
 main.o: main.cpp
-        $(CC) $(CFLAGS) $<
+    $(CC) $(CFLAGS) $<
 function1.o: function1.cpp
-        $(CC) $(CFLAGS) $<
+    $(CC) $(CFLAGS) $<
 function2.o: function2.cpp
-        $(CC) $(CFLAGS) $<
+    $(CC) $(CFLAGS) $<
 clean:
-        rm -rf *.o hello
+    rm -rf *.o hello
 ```
  
 但是手动敲文件名还是有点麻烦，能不能自动检测目录下所有的 cpp 文件呢？此外 main.cpp 和 main.o 只差一个后缀，能不能自动生成对象文件的名字，将其设置为源文件名字后缀换成 .o 的形式？
@@ -6794,7 +6794,7 @@ clean:
 SOURCE_DIR = . # 如果是当前目录，也可以不指定
 SOURCE\_FILE = $(wildcard $(SOURCE\_DIR)/*.cpp)
 target:
-        @echo $(SOURCE_FILE)
+    @echo $(SOURCE_FILE)
 ```
 make 后发现，输出的为当前目录下所有的 .cpp 文件：
  
@@ -6812,8 +6812,8 @@ patsubst 应该是 pattern substitution 的缩写。用它可以方便地将 .cp
 SOURCES = main.cpp function1.cpp function2.cpp
 OBJS = $(patsubst %.cpp, %.o, $(SOURCES))
 target:
-        @echo $(SOURCES)
-        @echo $(OBJS)
+    @echo $(SOURCES)
+    @echo $(OBJS)
 ```
  
 输出的结果为：
@@ -6834,16 +6834,16 @@ LFLAGS = -Wall
  
 all: hello
 hello: $(OBJS)
-        $(CC) $(LFLAGS) $^ -o $@
+    $(CC) $(LFLAGS) $^ -o $@
 main.o: main.cpp
-        $(CC) $(CFLAGS) $< -o $@
+    $(CC) $(CFLAGS) $< -o $@
 function1.o: function1.cpp
-        $(CC) $(CFLAGS) $< -o $@
+    $(CC) $(CFLAGS) $< -o $@
 function2.o: function2.cpp
-        $(CC) $(CFLAGS) $< -o $@
+    $(CC) $(CFLAGS) $< -o $@
  
 clean:
-        rm -rf *.o hello
+    rm -rf *.o hello
 ```
  
 然而这一版的 Makefile 还有提升空间，它的 main.o，function1.o，function2.o 使用的都是同一套模板，不过换了个名字而已。第六版的 Makefile 将处理这个问题。
@@ -6865,12 +6865,12 @@ LFLAGS = -Wall
  
 all: hello
 hello: $(OBJS)
-        $(CC) $(LFLAGS) $^ -o $@
+    $(CC) $(LFLAGS) $^ -o $@
 $(OBJS):%.o:%.cpp
-        $(CC) $(CFLAGS) $< -o $@
+    $(CC) $(CFLAGS) $< -o $@
  
 clean:
-        rm -rf *.o hello
+    rm -rf *.o hello
 ```
  
 ### 杂
@@ -6883,11 +6883,10 @@ clean:
 CC = g++
 LIBS = -lm
 out: fun.cpp
-        $(CC) -o $@ $^ $(LIBS)
+    $(CC) -o $@ $^ $(LIBS)
 ```
  
 ### 总结
---
  
 本文介绍了如何写 Makefile，主要的知识点有：
 *   在 Makefile 中定义变量并引用
