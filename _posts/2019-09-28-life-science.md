@@ -98,6 +98,7 @@ mathjax: true
    - ①`平行宇宙`，量子叠加态，另一个我同时存在，你却看不到
    - ②`熵增定律`，宇宙终归死寂
    - ③`光速限制`，永远看不到宇宙尽头
+     - [两分钟带你了解光速的使用方法，纯属脑洞](https://www.ixigua.com/7075690245890834980?logTag=4116eda516c6c6c3b64b)，太阳发出的光要8分30秒才能达到地球，我们看到的一切影响都源自过去
 
 
 <iframe src="//player.bilibili.com/player.html?aid=542697065&bvid=BV1Mi4y1L7o9&cid=252132939&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
@@ -145,12 +146,17 @@ mathjax: true
 
 ### 生命真的来自进化论吗
 
-【2022-4-19】人体内的超级马达：大肠杆菌
-- [人体细菌内纳米“发动机”每分钟转速大约一万到两万之间](https://www.ixigua.com/7076788838861013535?logTag=fbb7f8d8049a6b27e071)，相当于猎豹60m/s的距离，这些全靠大肠杆菌尾部的鞭毛驱动，整个发动机只用了30个蛋白质，包括转子、定子、传动轴、拐弯链接、离合器等，还能反向驱动，能量转换几乎100%，动力方面吊打任何发动机
+【2022-4-19】
+- （1）人体内的超级马达：大肠杆菌
+  - [人体细菌内纳米“发动机”每分钟转速大约一万到两万之间](https://www.ixigua.com/7076788838861013535?logTag=fbb7f8d8049a6b27e071)，相当于猎豹60m/s的距离，这些全靠大肠杆菌尾部的鞭毛驱动，整个发动机只用了30个蛋白质，包括转子、定子、传动轴、拐弯链接、离合器等，还能反向驱动，能量转换几乎100%，动力方面吊打任何发动机
+- （2）噬菌体：一种“噬菌体”的病毒，它的构造就更为精致，明显是经过设计的产物，[细菌的天敌，就像一个微观世界中的机械战警，进攻的噬菌体](https://www.ixigua.com/7078566558397792776?logTag=45a1405adb8ddb9b0c1d)
+- （3）驱动蛋白：[身体里不动脑的工作狂，每天不停的搬](https://www.ixigua.com/7084577397667955237?logTag=021b975bf9ffac92053e)，跑起来白细胞都赶不上
 - 所有的生命包括植物动物，能动的不会动的，天上飞的地上跑的会是自然进化来的吗？所有的一切都设计的精美精巧，相互之间又有那么复杂繁琐的关系。。。
+- 达尔文的进化论学说，越高等的生命越高级，所拥有的和创造的，都比低等生物科技含量更高。
 
 <iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/7076788838861013535?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
 
+<iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/7078566558397792776?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
 
 ## 第一期 技术本身是带有时代性的
 
