@@ -577,6 +577,9 @@ It’s grind season homie. # /ɡraɪnd/ 摩擦
 
 ## 音乐舞蹈
 
+【2022-4-23】[【时长6小时36分】值得你单曲循环的100首宝藏热歌合集！](https://www.bilibili.com/video/BV1sw411971F?p=1)，无损高清，立体声
+- <iframe src="//player.bilibili.com/player.html?aid=334283843&bvid=BV1sw411971F&cid=375586015&page=44" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 - 【2019-12-14】[碰碰彭碰彭](https://space.bilibili.com/15960317)法国街头古筝表演，带着古筝曲旅行系列：[赤伶](https://www.bilibili.com/video/av52853616)，[芒种](https://www.bilibili.com/video/av66929315)，[琵琶行](https://www.bilibili.com/video/av47721380)，[左手指月](https://www.bilibili.com/video/av77421571)，[好汉歌](https://www.bilibili.com/video/av78404421)，[刀剑如梦-郎朗](https://www.bilibili.com/video/av71998231)
 
 <iframe src="//player.bilibili.com/player.html?aid=52853616&cid=92476407&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
