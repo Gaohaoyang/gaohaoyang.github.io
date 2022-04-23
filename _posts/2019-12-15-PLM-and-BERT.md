@@ -3,7 +3,7 @@ layout: post
 title:  BERT及预训练语言模型-BERT-and-Pretrain-Language-Model
 date:   2019-12-15 16:52:00
 categories: 深度学习 
-tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook TextCNN ES 田渊栋 彩票假设 自监督 Milvus ALBERT elasticsearch es 可视化 unilm simcse gpu 迁移学习
+tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook TextCNN ES 田渊栋 彩票假设 自监督 Milvus ALBERT elasticsearch es 可视化 unilm simcse gpu 迁移学习 sentence
 excerpt: 预训练语言模型及BERT知识点汇总
 mathjax: true
 ---
@@ -1750,7 +1750,7 @@ ELMo、GPT和BERT的区别
 
 BERT很好的融合了ELMo和GPT的优点，论文中提到在11种自然语言处理任务中（文本分类、自然语言推断、问答、文本标记）都取得了SOTA的成绩。
 
-## 思考
+## BERT进阶思考
 
 ### BERT学到了什么
 
@@ -1866,10 +1866,39 @@ call_html()
 head_view(attention, tokens)
 ```
 
+### 语义匹配
 
+#### sentence BERT
+
+【2020-3-25】[Sentence-Bert论文笔记](https://zhuanlan.zhihu.com/p/113133510)
+- 论文: [Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks](https://arxiv.org/abs/1908.10084)，代码 [sentence-transformers](https://github.com/UKPLab/sentence-transformers)
+
+Bert模型已经在NLP各大任务中都展现出了强者的姿态。在**语义相似度计算**（semantic textual similarity）任务上也不例外，但由于bert模型规定，在计算语义相似度时，需要将两个句子同时进入模型，进行信息交互，这造成大量的计算开销。
+- 例如，有1w个句子，我们想要找出最相似的句子对，需要计算（10000*9999/2）次，需要大约**65小时**。
+Bert模型的构造使得它既不适合**语义相似度**搜索，也不适合**非监督**任务，比如聚类。
+- 问答系统任务中，往往会人为配置一些常用并且描述清晰的问题及其对应的回答，即“**标准问**”。当用户进行提问时，常常将用户的问题与所有配置好的标准问进行相似度计算，找出与用户问题最相似的标准问，并返回其答案给用户，这样就完成了一次问答操作。
+- 如果使用bert模型，那么每次用户问题都需要与标准问库计算一遍。在实时交互的系统中，是不可能上线的。
+Sentence-BERT网络结构可以解决bert模型的不足。简单通俗地讲，借鉴**孪生网络**模型的框架，将不同的句子输入到两个bert模型中（但这两个bert模型是参数共享的，也可以理解为是同一个bert模型），获取到每个句子的句子表征向量；而最终获得的**句子表征向量**，可以用于**语义相似度计算**，也可以用于无监督**聚类**任务。
+- 对于同样的10000个句子，我们想要找出最相似的句子对，只需要计算10000次，需要大约5秒就可计算完全。从65小时到5秒钟，这真是恐怖的差距。
+
+Sentence-BERT网络结构
+- 文中定义了三种通过bert模型求句子向量的策略，分别是**CLS向量**，**平均**池化和**最大值**池化。
+- （1）**CLS向量**策略，就是将bert模型中，开始标记【cls】向量，作为整句话的句向量。
+- （2）**平均池化**策略，就是将句子通过bert模型得到的句子中所有的字向量进行求均值操作，最终将均值向量作为整句话的句向量。
+- （3）**最大值池化**策略，就是将句子通过bert模型得到的句子中所有的字向量进行求最大值操作，最终将最大值向量作为整句话的句向量。
+对bert模型进行微调时，设置了三个目标函数，用于不同任务的训练优化，假设两个待比较的向量分别为 u 和 v 
+- （1）Classification Objective Function：u、v以及\|u-v\|拼接起来，加softmax
+  - ![](https://www.zhihu.com/equation?tex=o+%3D+softmax%28W_%7Bt%7D%28u%2Cv%2C%7Cu-v%7C%29%29)
+  - ![](https://pic1.zhimg.com/80/v2-75a858c4c766a4a3158fa3970badc628_720w.jpg)
+- （2）Regression Objective Function：目标函数是，直接对两句话的句子向量 u 和 v 计算余弦相似度
+  - ![](https://pic3.zhimg.com/80/v2-1aeacdd9a1d3ee03655f08304d00f726_720w.jpg)
+- （3）Triplet Objective Function: 将原来的两个输入，变成三个句子输入。
+  - 给定一个锚定句 a ，一个肯定句 p 和一个否定句 n ，模型通过使 a-p 的距离小于 a-n 的距离，来优化模型。使其目标函数o最小
+  - ![](https://www.zhihu.com/equation?tex=max%28%7C%7Cs_%7Ba%7D-s_%7Bp%7D%7C%7C-%7C%7Cs_%7Ba%7D-s_%7Bn%7D%7C%7C%2B%5Cepsilon%2C+0%29)
+
+大量实验比较三种求句子向量策略的好坏，认为**平均池化**策略最优，并且在多个数据集上进行了效果验证。虽然效果没有bert输入两句话的效果好，但是比其他方法还是要好的，并且速度很快。
 
 ### BERT降维
-
 
 #### BERT-flow
 
@@ -1996,12 +2025,10 @@ Reddit评论区补充说：
 > - 每隔几个月就会听到有关NLP的新进展，更新、更好的模型层出不穷。但当有人实际用数据集测试时，会发现这些模型并没有真正学习到什么。优化模型的竞赛该放缓脚步了，我们更应该仔细研究研究数据集，看看它们是否真的有意义。
 > - 并不否认BERT和其他新模型的价值，但是并不相信一些Benchmark。
 
-## BERT应用
-
-- ![](https://pic3.zhimg.com/80/v2-09c5df603126e72b4ba2b0a9a45ee1b6_720w.jpg)
-
 
 ## BERT服务
+
+- ![](https://pic3.zhimg.com/80/v2-09c5df603126e72b4ba2b0a9a45ee1b6_720w.jpg)
 
 ### ES里的BERT索引
 
