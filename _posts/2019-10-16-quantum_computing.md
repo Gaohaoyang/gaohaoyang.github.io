@@ -24,6 +24,8 @@ mathjax: true
 
 - [一文读懂量子计算](https://zhuanlan.zhihu.com/p/67683009)
   - 量子计算机是怎样工作的、为什么它如此强大、它可能在哪些方面最具用途？
+- Nielsen 的 [Quantum Computing for the Very Curious](https://quantum.country/qcvc) 
+- [量子计算入门](https://zhuanlan.zhihu.com/p/422530661)
 
 ## 什么是量子比特？
 
@@ -34,10 +36,88 @@ mathjax: true
   - 一个属性称为**叠加**（Superposition）
   - 另一个则称为**纠缠**（Entanglement）。
 
+**比特**（Bit）：数学上的 0 或者 1，物理上，一个比特可以被任何一种物理系统所表示，只要这种物理系统总是处在两个不同状态中的一个。常见的例子有：具有正反两面的银币，只有开和关的电子开关，只允许两个不同电压的电路。
+
+计算机是由许多**比特**组成的，与之相似，`量子计算机`是由**量子比特**（Qubit）组成的。量子比特也被称为`量子位`。
+- 像比特一样，`量子比特`也有状态。比特的状态要么是 0，要么是 1。量子比特的状态却是一个矢量。更准确地说，量子比特的状态是一个存在于**二维复矢量空间**的矢量。这个矢量空间被叫做**状态空间**。比如，这是量子比特的一个可能状态：[ 0,1 ]
+- 用量子状态表示比特状态0:
+  - ![](https://www.zhihu.com/equation?tex=%7C0%5Crangle+%3A%3D+%5Cleft%5B+%5Cbegin%7Barray%7D%7Bc%7D+1+%5C%5C+0+%5Cend%7Barray%7D+%5Cright%5D)
+- 量子状态表示比特状态1
+  - ![](https://www.zhihu.com/equation?tex=%7C1%5Crangle+%3A%3D+%5Cleft%5B+%5Cbegin%7Barray%7D%7Bc%7D+0+%5C%5C+1+%5Cend%7Barray%7D+%5Cright%5D.)
+
+物理上，量子比特可以是任何一种**双态系统**，它拥有两个不同的基态，对应于二维矢量空间中的基矢。
+- 比如，电子的**自旋**，**向上**或**向下**。又或者是光子的**极化**，**垂直**极化和**水平**极化。在一个经典的系统中，一个比特必须处在两个状态中的一个，这时100%确定的。然而，量子力学允许量子比特处在一种两个基态的**叠加态**中，即一个任意二维矢量可以被两个基矢量表示。当您观察量子比特时，结果总是是随机的从两个基态种挑选一个，您永远无法预先确定的知道它的结果。叠加态是量子力学和量子计算的基本性质。
+
 ## 什么是量子叠加？
 
 - 量子比特（Qubits）可以同时代表1和0的多种可能性组合，而这种同时处于多种状态的特性称之为叠加（Superposition）。研究人员使用精密激光或微波束操纵量子比特以使它们能处于叠加态。
 - 具有多个量子比特叠加的量子计算机可以同时使得大量潜在的计算结果相互消融，导致其量子比特状态“坍塌（collapse）”为1或0，因此计算的最终结果，仅在测量量子比特时出现。
+
+### 量子比特的任意状态
+ 
+计算基础状态![[公式]](https://www.zhihu.com/equation?tex=%7C0%5Crangle) 和 ![[公式]](https://www.zhihu.com/equation?tex=%7C1%5Crangle) 只是一个量子比特可以处于的无穷多种状态中的两个。毕竟，一个量子状态是一个二维矢量。这是一个比特作为标量所不具备的特质。
+ 
+有个图示，强调了量子态的矢量本质。
+- ![](https://pic4.zhimg.com/80/v2-e684e4b0d034f5ec50c39263ba6296f3_1440w.jpg)
+
+在这个例子中，态 0.6![[公式]](https://www.zhihu.com/equation?tex=%7C0%5Crangle) \+ 0.8![[公式]](https://www.zhihu.com/equation?tex=%7C1%5Crangle)代表了一种叠加态，它表示0.6倍的![[公式]](https://www.zhihu.com/equation?tex=%7C0%5Crangle)基矢加上0.8倍的![[公式]](https://www.zhihu.com/equation?tex=%7C1%5Crangle)基矢。也可以用常见的矩阵符号表示如下
+- ![[公式]](https://www.zhihu.com/equation?tex=0.6%7C0%5Crangle+%2B+0.8+%7C1%5Crangle+%3D+0.6+%5Cleft%5B+%5Cbegin%7Barray%7D%7Bc%7D+1+%5C%5C+0+%5Cend%7Barray%7D+%5Cright%5D+%2B+0.8+%5Cleft%5B+%5Cbegin%7Barray%7D%7Bc%7D+0+%5C%5C+1+%5Cend%7Barray%7D+%5Cright%5D+%3D+%5Cleft%5B+%5Cbegin%7Barray%7D%7Bc%7D+0.6+%5C%5C+0.8+%5Cend%7Barray%7D+%5Cright%5D.)
+
+
+## 量子逻辑门
+
+为了进行量子计算，仅仅了解量子态是不够的。我们还需要能够利用他们做一些有有意义的事！我们使用**量子逻辑门** (Quantum Logic Gates)来做到这一点。
+- 门其实就是量子力学中的**算子**。
+量子逻辑门只是一种操纵量子信息的方式，量子信息被量子状态表示。它们类似于普通日常计算机中使用的经典**逻辑门**——诸如 AND、OR 和 NOT 之类的门。而且，就像经典门在传统计算机中的作用一样，量子门是量子计算的基本构建模块。它们也是描述许多其他量子信息处理任务的便捷方式（例如量子隐形传态）。
+
+特别是，就像任何经典计算都可以使用 AND、OR 和 NOT 门构建一样，我们在接下来的几节中描述的量子门足以进行任何量子计算。
+
+### 量子非门
+
+量子非门（Quantum NOT Gate）是经典非门的推广。在计算基础状态上测量，量子非门完全符合您的预期，模仿经典非门。也就是说，它将 ![[公式]](https://www.zhihu.com/equation?tex=%7C0%5Crangle) 状态变为 ![[公式]](https://www.zhihu.com/equation?tex=%7C1%5Crangle)，反之亦然：
+- ![[公式]](https://www.zhihu.com/equation?tex=NOT%7C0%5Crangle+%3D+%7C1%5Crangle)
+- ![[公式]](https://www.zhihu.com/equation?tex=NOT%7C1%5Crangle+%3D+%7C0%5Crangle)
+ 
+将非门应用于一般叠加态，它是一个线性算符，
+- ![[公式]](https://www.zhihu.com/equation?tex=NOT+%28%5Calpha%7C0%5Crangle+%2B%5Cbeta%7C1%5Crangle%29+%3D+%5Calpha%7C1%5Crangle%2B%5Cbeta+%7C0%5Crangle.)
+ 
+由于历史原因，从事量子计算的人们通常使用不同的符号，量子非门的符号是![[公式]](https://www.zhihu.com/equation?tex=X)而不是NOT。
+
+### 量子电路
+
+量子电路（Quantum Circuit）是一种对量子计算可视化的表达，它对于我们理解量子计算至关重要。
+
+以上表达 ![[公式]](https://www.zhihu.com/equation?tex=X) 门工作的方式用的是的非常代数的方法。还有另一种表示，**量子电路**（Quantum Circuit）表示。在量子电路中，如果我们描绘一个 ![[公式]](https://www.zhihu.com/equation?tex=X) 门，将如下所示：
+- ![](https://pic4.zhimg.com/80/v2-bca1a71287968f9510983d6ca3fbb7fb_1440w.jpg)
+ 
+从左到右的线就是所谓的**量子线**(Quantum Wire)。量子线代表单个量子位。术语“线”及其绘制方式看起来就像量子位在空间中移动。但是，将从左到右绘制的线视为代表时间的流逝才是正确的。所以最初的线段代表时间的流逝，量子位没有任何变化。然后![[公式]](https://www.zhihu.com/equation?tex=X) 门被应用到量子位 ，量子位的状态改变。时间继续流逝，量子位的状态不再变化。
+ 
+有时我们会将输入和输出的状态明确地画在量子电路中，比如：
+- ![](https://pic2.zhimg.com/80/v2-434b7ac0b7eb4d62ce1a855e8794f245_1440w.jpg)
+
+量子计算的Hello World！
+
+```python
+from qiskit import QuantumCircuit, BasicAer, execute
+
+# create a quantum circuit with one qubit and one bit
+qc = QuantumCircuit(1,1)  
+# apply not gate to the qubit with index 0
+qc.x(0)
+# measue the qubit with index 0 and store the result to bit with index 0
+qc.measure(0,0)
+# plot the circuit
+qc.draw('mpl')
+# simulation: run the quantum circuit 1000 times and print all results
+backend = BasicAer.get_backend('qasm_simulator') 
+result = execute(qc, backend, shots=1000).result()
+counts  = result.get_counts(qc)
+print(counts)
+```
+
+![](https://pic1.zhimg.com/80/v2-a740a7a5affd696e65ec8c04fcfe4400_1440w.jpg)
+
+
 
 ## 什么是量子纠缠？
 
@@ -91,11 +171,126 @@ mathjax: true
 
 最后一点：在隐形传态协议结束时，Alice 不再拥有量子态 ![[公式]](https://www.zhihu.com/equation?tex=%7C%5Cpsi%5Crangle)。 特别是，她的测量使她的两个量子位处于四种状态之一，![[公式]](https://www.zhihu.com/equation?tex=%7C00%5Crangle)、![[公式]](https://www.zhihu.com/equation?tex=%7C01%5Crangle)、![[公式]](https://www.zhihu.com/equation?tex=%7C10%5Crangle) 或 ![[公式]](https://www.zhihu.com/equation?tex=%7C11%5Crangle)。 因此，您不应将传送视为复制状态 ![[公式]](https://www.zhihu.com/equation?tex=%7C%5Cpsi%5Crangle)，而是将其视为接近光速移动状态的一种方式。
 
-
 量子隐形传态（量子传送）在几个方面与人们通常认为的**传送/瞬移**不同，后者因星际迷航而闻名。
 - 一方面，这与传送**复杂物体**（例如人类）无关。相反，它是关于传送**基本量子系统**的。尽管原则上可以传送更复杂的物体，但在可预见的未来似乎极不可能。
 - 另一个区别是量子隐形传态不是物体在一个位置消失，然后在另一个位置**立即重新出现**。必须发送经典信息，并且 Bob 执行相应的操作。这让一些人感觉被骗了：“这不是真正的瞬移！”虽然“量子隐形传态”这个名字是伟大的营销，但它确实有点误导。
 - 另一方面，量子隐形传态仍然令人震惊。测量量子态以确定其振幅是不可能的。直觉上，这应该使像量子隐形传态这样的事情变得不可能。然而，不知何故，仍然可以使用测量将状态从一个位置传输到另一个位置。
+
+## 代码实现：Qiskit实现
+ 
+IBM的开源Python量子计算框架[Qiskit](https://quantum-computing.ibm.com/)，让我们可以足不出户，通过网络操作量子计算机。安装Python Qiskit Library。也可以直接在云端运行，[IBM Quantum Lab](https://quantum-computing.ibm.com/)
+
+
+```python
+from math import sqrt, pi
+from qiskit import QuantumCircuit, BasicAer, execute
+from qiskit.visualization import plot_bloch_multivector
+
+# change alpha beta as you want
+alpha = 1/sqrt(2)
+beta = 1j/sqrt(2)
+# 2D complex vector representing the quantum state
+vector = [alpha, beta]
+# create a quantum circuit with only one qubit
+qc = QuantumCircuit(1)
+# initialzie the qubit as the vector we defined
+# arg 0 is the index of the only qubit we created
+qc.initialize(vector, 0)
+# simulate the state
+# note that statevector_simulator is used for calculating statevector (Quantum State)
+backend = BasicAer.get_backend('statevector_simulator')
+result = execute(qc, backend).result()
+state = result.get_statevector(qc)
+
+# plot the state on a Bloch sphere
+plot_bloch_multivector(state)
+```
+
+![](https://pic3.zhimg.com/80/v2-2864ca7141c5fa032e9f910a46761b1e_1440w.jpg)
+
+
+### Example 7: 量子隐形传态
+ 
+在这个练习中您将传送量子态 ![[公式]](https://www.zhihu.com/equation?tex=%5Csqrt%7B0.70%7D%5Cvert0%5Crangle+%2B+%5Csqrt%7B0.30%7D%5Cvert1%5Crangle)
+ 
+从 Alice 的量子位到 Bob 的量子位. 回顾传送算法包含的四个主要步骤：
+1.  初始化需要被传送的量子态。我们将在 Alice 的量子位 `q0` 上做这件事。
+2.  创造相互纠缠的两个量子位。我们将使用 `q1` 和 `q2` 做这件事。Alice 拥有 `q1`，Bob拥有 `q2`。
+3.  对 Alice 拥有的 `q0` 和 `q1` 进行 Bell 测量。
+4.  对 Bob 拥有的 `q2` 执行经典受控的操作，具体操作取决于第三步的测量结果。
+
+```python
+# 1.)
+def initialize_qubit(given_circuit, qubit_index):
+    import numpy as np
+    given_circuit.initialize([np.sqrt(0.70), np.sqrt(0.30)], qubit_index)
+    return given_circuit
+# 2.）
+def entangle_qubits(given_circuit, qubit_Alice, qubit_Bob):
+    given_circuit.h(qubit_Alice)
+    given_circuit.cx(qubit_Alice, qubit_Bob)
+    return given_circuit
+# 3.)
+def bell_meas_Alice_qubits(given_circuit, qubit1_Alice, qubit2_Alice, clbit1_Alice, clbit2_Alice):
+    given_circuit.cx(qubit1_Alice, qubit2_Alice)
+    given_circuit.h(qubit1_Alice)
+    given_circuit.barrier()
+    given_circuit.measure(qubit1_Alice, clbit1_Alice)
+    given_circuit.measure(qubit2_Alice, clbit2_Alice)
+    return given_circuit
+# 4.）对 Bob 的量子位执行受控操作：
+# 一个 X 门被施加在 Bob 的量子位上，如果对于 Alice 的第二个量子位的测量结果是1，即 clbit2_Alice=1。
+# 一个 Z 门被施加在 Bob 的量子位上，如果对于 Alice 的第一个量子位的测量结果是1，即 clbit1_Alice=1。
+def controlled_ops_Bob_qubit(given_circuit, qubit_Bob, clbit1_Alice, clbit2_Alice):
+    given_circuit.x(qubit_Bob).c_if(clbit2_Alice, 1)
+    given_circuit.z(qubit_Bob).c_if(clbit1_Alice, 1)   
+    return given_circuit
+# 汇总
+### imports
+from qiskit import QuantumCircuit
+from qiskit import QuantumRegister, ClassicalRegister
+
+### set up the qubits and classical bits
+all_qubits_Alice = QuantumRegister(2)
+all_qubits_Bob = QuantumRegister(1)
+creg1_Alice = ClassicalRegister(1)
+creg2_Alice = ClassicalRegister(1)
+
+### quantum teleportation circuit here
+# Initialize
+mycircuit = QuantumCircuit(all_qubits_Alice, all_qubits_Bob, creg1_Alice, creg2_Alice)
+initialize_qubit(mycircuit, 0)
+mycircuit.barrier()
+# Entangle
+entangle_qubits(mycircuit, 1, 2)
+mycircuit.barrier()
+# Do a Bell measurement
+bell_meas_Alice_qubits(mycircuit, all_qubits_Alice[0], all_qubits_Alice[1], creg1_Alice, creg2_Alice)
+mycircuit.barrier()
+# Apply classically controlled quantum gates
+controlled_ops_Bob_qubit(mycircuit, all_qubits_Bob[0], creg1_Alice, creg2_Alice)
+
+### Look at the complete circuit
+mycircuit.draw()
+
+# --------
+from qiskit import BasicAer, execute
+backend = BasicAer.get_backend('statevector_simulator')
+result = execute(mycircuit, backend).result()
+state = result.get_statevector(mycircuit)
+
+import math
+print(math.sqrt(0.7)) # 0.8366600265340756
+print(math.sqrt(0.3)) # 0.5477225575051661
+```
+
+![](https://pic1.zhimg.com/80/v2-252fe058ddb9bbeb5bc7cb45e98801d4_1440w.jpg)
+
+整个量子电路的最终状态一定属于下面四种情况的一种：
+- ![[公式]](https://www.zhihu.com/equation?tex=00%5Cotimes+%5Cleft%28+%5Csqrt%7B0.70%7D%5Cvert0%5Crangle+%2B+%5Csqrt%7B0.30%7D%5Cvert1%5Crangle+%5Cright%29)
+- ![[公式]](https://www.zhihu.com/equation?tex=01%5Cotimes+%5Cleft%28+%5Csqrt%7B0.70%7D%5Cvert0%5Crangle+%2B+%5Csqrt%7B0.30%7D%5Cvert1%5Crangle+%5Cright%29)
+- ![[公式]](https://www.zhihu.com/equation?tex=10%5Cotimes+%5Cleft%28+%5Csqrt%7B0.70%7D%5Cvert0%5Crangle+%2B+%5Csqrt%7B0.30%7D%5Cvert1%5Crangle+%5Cright%29)
+- ![[公式]](https://www.zhihu.com/equation?tex=11%5Cotimes+%5Cleft%28+%5Csqrt%7B0.70%7D%5Cvert0%5Crangle+%2B+%5Csqrt%7B0.30%7D%5Cvert1%5Crangle+%5Cright%29)
 
 # 量子计算机
 
