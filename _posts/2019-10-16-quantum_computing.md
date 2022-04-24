@@ -66,8 +66,52 @@ mathjax: true
 - 量子计算机也非常适合用于优化问题的解决方案
 - 量子计算机可能还需要一些时间才能充分发挥其作用。目前从事该领域研究工作的大学和企业正面临着人才严重短缺的问题，而且缺乏一些关键部件的供应商。但是如果这些新构建的量子计算机能够发挥其性能，它们将颠覆整个行业的发展并推动全球新局面。
 
+## 量子隐形传态——量子传输
 
-# 量子计算机竞赛
+【2022-4-24】[量子隐形传态](https://zhuanlan.zhihu.com/p/454186812)
+
+`量子隐形传态`（Quantum Teleportaion）又被翻译成`量子传送` 。
+
+根据一个古老的墨西哥民间故事，1593年10月24日，一个名叫吉尔-佩雷斯的西班牙士兵在马尼拉（即今天的菲律宾）守卫总督府。总督在前一天晚上被海盗刺杀，守卫宫殿的士兵们已经筋疲力尽。佩雷斯也不例外，他靠在墙上，睡了过去。
+
+当他睁开眼睛时，他已经不在马尼拉了。不知何故，奇迹般地，他被瞬间传送到了太平洋彼岸。他在Zócalo，墨西哥城的大公共广场。他被卫兵发现，卫兵因他的制服而怀疑他是个逃兵，并把他扔进了监狱。为了自救，他告诉了卫兵总督在马尼拉死亡的消息，却不被相信。几个月后，当总督死亡的消息乘船抵达时，佩雷斯的故事得到了证实，他也被释放。
+
+这是一个有趣的故事。几个世纪以来，传送尤其是传送人类, 一直是民间故事、魔术表演和科幻小说中的情节。但在1993年，一群物理学家发现了一种真正的**量子传送**，它能使量子状态被远距离传送，而不需要直接交换该量子状态的实例。
+
+最初的**量子传送**论文是理论性的，使用量子力学的数学规则来预测传送现象。此后，这一预测被许多实验所证实，证明了这一效果。此外，事实证明，量子传送不仅仅是一个有趣的技巧。它是量子计算以及更广泛的量子信息科学中许多其他现象的基础。例如，它可以被用于减少噪音对量子计算机的影响，以及创造一种新的量子计算机。量子传送今天被看作是量子信息科学的一个核心原素。
+
+量子隐形传态的电路表示如下：
+- ![](https://pic3.zhimg.com/80/v2-2e4b4752bf108ab97edbd9097dbae396_1440w.jpg)
+
+传送是通过四个步骤实现的：
+1.  初始状态： Alice 从单个量子位的量子状态 ![[公式]](https://www.zhihu.com/equation?tex=%7C%5Cpsi%5Crangle) 开始。 Alice 和 Bob 还共享两个量子位的量子态，![[公式]](https://www.zhihu.com/equation?tex=%5Cfrac%7B%7C00%5Crangle%2B%7C11%5Crangle%7D%7B%5Csqrt+2%7D)。
+2.  爱丽丝做了什么： 为了完成她的协议部分，爱丽丝在 ![[公式]](https://www.zhihu.com/equation?tex=%7C%5Cpsi%5Crangle) 和她的另一个量子位之间执行 CNOT 门，然后对第一个量子位应用哈达玛门。 然后 Alice 在计算基础状态上测量她的两个量子位，得到结果 ![[公式]](https://www.zhihu.com/equation?tex=z+%3D+0) 或 1 和 ![[公式]](https://www.zhihu.com/equation?tex=x+%3D+0) 或 1。四种测量结果中每一个出现的概率是 1/4。
+3.  经典通信： Alice 将经典位 ![[公式]](https://www.zhihu.com/equation?tex=z) 和 ![[公式]](https://www.zhihu.com/equation?tex=x) 发送给 Bob。
+4.  Bob 恢复量子态 ![[公式]](https://www.zhihu.com/equation?tex=%7C%5Cpsi%5Crangle)： Bob 将 ![[公式]](https://www.zhihu.com/equation?tex=Z%5Ez+X%5Ex) 应用于他的量子位，恢复原始状态 ![[公式]](https://www.zhihu.com/equation?tex=%7C%5Cpsi%5Crangle)。
+
+最后一点：在隐形传态协议结束时，Alice 不再拥有量子态 ![[公式]](https://www.zhihu.com/equation?tex=%7C%5Cpsi%5Crangle)。 特别是，她的测量使她的两个量子位处于四种状态之一，![[公式]](https://www.zhihu.com/equation?tex=%7C00%5Crangle)、![[公式]](https://www.zhihu.com/equation?tex=%7C01%5Crangle)、![[公式]](https://www.zhihu.com/equation?tex=%7C10%5Crangle) 或 ![[公式]](https://www.zhihu.com/equation?tex=%7C11%5Crangle)。 因此，您不应将传送视为复制状态 ![[公式]](https://www.zhihu.com/equation?tex=%7C%5Cpsi%5Crangle)，而是将其视为接近光速移动状态的一种方式。
+
+
+量子隐形传态（量子传送）在几个方面与人们通常认为的**传送/瞬移**不同，后者因星际迷航而闻名。
+- 一方面，这与传送**复杂物体**（例如人类）无关。相反，它是关于传送**基本量子系统**的。尽管原则上可以传送更复杂的物体，但在可预见的未来似乎极不可能。
+- 另一个区别是量子隐形传态不是物体在一个位置消失，然后在另一个位置**立即重新出现**。必须发送经典信息，并且 Bob 执行相应的操作。这让一些人感觉被骗了：“这不是真正的瞬移！”虽然“量子隐形传态”这个名字是伟大的营销，但它确实有点误导。
+- 另一方面，量子隐形传态仍然令人震惊。测量量子态以确定其振幅是不可能的。直觉上，这应该使像量子隐形传态这样的事情变得不可能。然而，不知何故，仍然可以使用测量将状态从一个位置传输到另一个位置。
+
+# 量子计算机
+
+[十分钟看懂现代量子计算机到底是什么](https://zhuanlan.zhihu.com/p/53896253)
+
+## 视频
+
+- [7分钟了解量子计算机](https://www.bilibili.com/video/av48599013)
+
+<iframe src="//player.bilibili.com/player.html?aid=48599013&cid=85105799&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+- [三分钟了解量子计算机](https://www.bilibili.com/video/av22814161/)
+
+<iframe src="//player.bilibili.com/player.html?aid=22814161&cid=37892694&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+## 量子计算机竞赛
 
 - 国际主流观点认为，量子计算机的发展将有三个阶段：
   - 第一阶段，研制50个到100个量子比特的专用量子计算机，实现“量子优越性”里程碑式突破。
@@ -110,21 +154,6 @@ mathjax: true
 ## 社会比赛
 
 【2022-4-7】[CCF"司南杯"：量子计算编程挑战赛](https://contest.originqc.com.cn/)，比赛限定使用QPanda/pyQPanda编程框架
-
-
-
-# [十分钟看懂现代量子计算机到底是什么](https://zhuanlan.zhihu.com/p/53896253)
-
-## 视频
-
-- [7分钟了解量子计算机](https://www.bilibili.com/video/av48599013)
-
-<iframe src="//player.bilibili.com/player.html?aid=48599013&cid=85105799&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
-
-- [三分钟了解量子计算机](https://www.bilibili.com/video/av22814161/)
-
-<iframe src="//player.bilibili.com/player.html?aid=22814161&cid=37892694&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
-
 
 ## 文字
 
@@ -286,7 +315,7 @@ mathjax: true
 
 # 应用
 
-- 潘建伟：量子计算机在原理上具有超快的并行计算能力，可望通过特定算法在密码破译、大数据优化、天气预报、材料设计、药物分析等领域，提供比传统计算机更强的算力支持
+- 潘建伟：量子计算机在原理上具有超快的**并行**计算能力，可望通过特定算法在密码破译、大数据优化、天气预报、材料设计、药物分析等领域，提供比传统计算机更强的算力支持
 
 ## 量子力学的忽悠局
 
