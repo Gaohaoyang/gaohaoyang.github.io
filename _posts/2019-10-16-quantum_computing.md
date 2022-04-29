@@ -245,6 +245,24 @@ git clone https://github.com/OriginQ/QPanda-2.git
 
 [PyQPanda](https://pyqpanda-toturial.readthedocs.io/zh/latest/index.html) python 版 QPanda, 为了兼容高效与便捷，通过pybind11工具，以一种直接和简明的方式，对QPanda中的函数、类进行封装，并且提供了几乎完美的映射功能。 封装部分的代码在QPanda2编译时会生成为动态库，从而可以作为python的包引入。
 
+```python
+from pyqpanda import *
+
+if __name__ == "__main__":
+   init(QMachineType.CPU)
+   qubits = qAlloc_many(3)
+   control_qubits = [qubits[0], qubits[1]]
+   prog = create_empty_qprog()
+   # 构建量子程序
+   prog  << H(qubits) \
+         << H(qubits[0]).dagger() \
+         << X(qubits[2]).control(control_qubits)
+   # 对量子程序进行概率测量
+   result = prob_run_dict(prog, qubits, -1)
+   # 打印测量结果
+   print(result)
+   finalize()
+```
 
 ### hello world
 
