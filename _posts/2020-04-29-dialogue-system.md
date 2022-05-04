@@ -445,6 +445,27 @@ chatbot:我也是，不过总有一天就会好起来的
 - 问答型和任务型机器人的优化目标在于：用最短的对话轮次，满足用户的需求。
 - 用户的诉求是：通过最短路径，获得精准、直接的答案以及很好地完成任务
 
+#### 银行客服机器人
+
+【2022-5-4】银行机器人**快宝**:
+- 【快宝】快宝解锁新表情，在线征名 https://www.bilibili.com/video/BV1eZ4y1j7VH
+- 【快宝】快宝的日常怼人 https://www.bilibili.com/video/BV1rC4y147oc/
+- 【快宝】不能欺负快宝哦！会被爸爸揍的！ https://www.bilibili.com/video/BV1Fi4y187z8/
+- 【安安】客户：你先跳个舞我就办个信用卡 安安：不！您先办卡我在跳舞
+
+<iframe src="//player.bilibili.com/player.html?aid=370388227&bvid=BV15Z4y147GZ&cid=183005027&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+- 评论：我亲戚就是干这个的，在四线城市工资2700元。这机器人**70万**一台，客户每年还要缴**5万元**维护费，有两种模式，一个是**人工**后台聊天，一个是像天猫精灵那种大数据，上班时间我老姨就陪人聊天，下班或者中午吃饭就换另外一种**AI模式**或者直接关机，但AI模式像天猫精灵那种比较智障，说话没有感情，由于大数据你问他天文地理或者加减乘除他都知道，但随机应变自我学习完全不行，人的大脑神经细胞，中枢神经极为复杂。网上这些特别厉害的机器人都是后台人工在和你聊天，你不信问他个**3位数的乘法**它一定回答不上来。另外网上这些小视频比较短，其实现实中长时间对话会出现磕巴，不利索，断断续续的情况，毕竟能做到像新闻联播主持人一样就不会干这个了
+
+<iframe src="//player.bilibili.com/player.html?aid=78378466&bvid=BV13J411q7ya&cid=134113155&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+
+#### 图书馆机器人
+
+[图书馆两个机器人互相吵架，笑死个人](https://www.bilibili.com/video/BV1TK4y1W77w)
+
+<iframe src="//player.bilibili.com/player.html?aid=886081515&bvid=BV1TK4y1W77w&cid=278958449&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+
 ### 产品架构
 
 客服机器人目前被大量使用在电商、金融、银行等系统中，所以我们以银行业务为例分析使用客服的业务场景后，将用户的问答归为下面几类：
