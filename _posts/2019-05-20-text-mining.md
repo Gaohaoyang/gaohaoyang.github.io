@@ -1388,10 +1388,14 @@ if __name__ == '__main__':
 
 ## 身份证解析
 
+【2022-5-6】身份证识别，做成小程序
+- 百度AI提供的[身份证识别接口](https://ai.baidu.com/tech/ocr_cards/idcard)，将图片转码为base64编码，上传到百度服务器；
+  - 类似功能：人脸认证、文字识别、发票识别、银行卡识别、营业执照识别、户口本识别等
+  - 费用：一次调用0.01~0.02元
 - 【2020-8-3】从身份证号码中提取出生年月日、籍贯信息（具体到区/县）
 - 依赖文件
-    - user.txt：[name card_id]
-    - 行政区划表：身份证行政地区码对照表(2020版).xls, [下载地址](https://download.csdn.net/download/caishenye/12104214)
+  - user.txt：[name card_id]
+  - 行政区划表：身份证行政地区码对照表(2020版).xls, [下载地址](https://download.csdn.net/download/caishenye/12104214)
 - 代码如下：
 
 ```python
