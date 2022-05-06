@@ -34,6 +34,13 @@ mathjax: true
 
 ## MLOps
 
+【2022-5-6】机器学习**端到端**流程比较复杂，涉及：数据探索与分析、特征工程、模型开发、模型训练、模型评估、模型部署和效果评估等多个环节。`机器学习下的持续交付`(Continuous Delivery For Machine Learning，`CD4ML`)，涉及`数据`(Data)、`代码`(Code)和`模型`(Model)3个维度的交付，任何一个维度的更新，都会触发持续交付的流程。
+
+Ops=Operation，`MLOps`深刻继承了`DevOps`干活的思路与方法，都涉及一组最佳实践、流程、工具和理念。尽管存在相似之处，但后者复杂得一言难尽。机器学习模型高质量规模化交付很困难。
+- DevOps：传统软件开发运维流程：<font color='blue'>计划 → 构建 → 测试 → 部署 → 运维调试 → 监控 </font>
+- MLOps：AI应用模型效率化生产平台流程：<font color='blue'>设计 → 开发 → 测试 → 部署 → 训练 → 迭代 → 评估 </font>
+- ![](https://p26.toutiaoimg.com/img/tos-cn-i-qvj2lq49k0/faa2d1c6130b40ccb4afaa20d967f972~tplv-obj:1280:894.image?from=post)
+
 ![](https://img-blog.csdnimg.cn/20210410095830948.png)
 ![](https://img-blog.csdnimg.cn/20210410095837503.png)
 
