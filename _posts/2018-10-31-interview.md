@@ -4,7 +4,7 @@ title:  "面试指南-The Guide for Interview"
 date:   2018-10-31 20:08:00
 categories: 人生规划
 excerpt : AI初学者不要过于迷信企业项目，忽略基本功的学习，不要mnist都没研究透彻就嫌简单，直奔难度更大的resnet，好高骛远，得不偿失，学东西请务必戒骄戒躁，一步一个脚印，才能越走越远。企业项目的事实跟你想象的大不一样
-tags: 实习 应届生 AI 算法工程师 面试 工业界 学术界
+tags: 实习 应届生 AI 算法工程师 面试 工业界 学术界 简历
 ---
 
 * content
@@ -730,6 +730,23 @@ Finding your first job, however, is a small step in a long-term career 职业生
 
 I hope these suggestions could open the door to machine learning and help get you job-ready. The journey ahead will surely be a bumpy （ˈbʌmpi] 曲折的）one, but rest assured that what you encounter along the way will help you succeed. By the way, courses from DeepLearning.AI will be available on Zhihu soon. **Stay tuned** 敬请 and see you next time! Keep Learning! Andrew
 
+## 简历
+
+
+### 简历范例
+
+【2022-5-7】[HR喜欢什么样的简历](https://www.toutiao.com/w/1732040255594510)
+
+有工作经验的朋友，简历的内容要包含个人信息，求职意向，教育经历，工作经历(项目经历)、相关技能及自我介绍几个板块
+1. `个人信息`: 别的不强调了，开始工作时间要写上，毕竟不少公司还是“越老越吃香”的，这样也方便判定从业年限。(在这个位置要标注下求职岗位以及到岗时间，【薪资部分】可写可不写)
+2. `教育经历`: 工作以后，教育经历就没必要放在黄金位置了，除非背景特别好的，如果想罗列教育经历，只写专业排名以及和岗位沾边的专业课即可
+3. `工作经历`: 三要素一定要有，工作**所属行业**、**岗位**及从业**起止时间**，要多展现数据，同一类型的工作内容只写【最优解】即可，往期的待遇可以标注，也给用人方一个参考范围(这部分可以对照着岗位的 JD去写，邀约率更高)
+4. `项目经历`: 这个是加分项，经历过项目的朋友，对全局更加有把握，项目经历要遵从【**5W1H**】的原则，将项目的起止时间、个人角色以及取得怎样的结果说清楚
+  - 5W1H：
+5. `岗位技能`: 有证书是最好的，没证书的要要将工作内容进行拆解，拿新媒体运营岗位举例子，可以说具备内容编写、平台发布等技能
+6. `自我评价`: 自我评价我建议可以放在黄金位置，通过对个人过往的总结，可以让用人方迅速了解到你的能力，减少筛选时间
+
+![](https://p3.toutiaoimg.com/img/tos-cn-i-qvj2lq49k0/ccea536aac674d5e925fc0ca396a1099~tplv-obj:1080:1439.image?from=post)
 
 # 算法入门
 
