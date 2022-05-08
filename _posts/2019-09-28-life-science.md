@@ -423,6 +423,15 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=73865746&cid=126353505&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
+
+【2022-5-8】[弦论的创始人演讲《全息宇宙论—我们的世界是虚拟的》](https://www.bilibili.com/video/BV1tp4y1b7Rp)
+- **黑洞**是把三维物体所包含的信息分解为低维像素点的转化器，**黑洞**就是**二向箔**，而且比二向箔厉害多了，二向箔只是三维降成二维, 黑洞是降成像素点
+- 三维物体包含的信息巨大, 所以降维时，黑洞表面会产生开天辟地的恐怖能量
+- 爱丽丝(三维物体)掉进黑洞的时候，从外面看是直接被撕碎了，但是爱丽丝本人并不知道，她还是以完整的形态活着，她的物理结构还是完整的只不过构成她的信息在经过被黑洞时因为被低维化展示了，外面的人看她被分解成了无数个基本粒子撕碎了实际上只是观察她的角度不同，这是三维世界的人看被降维的物体产生的错觉，举个栗子，你用X光观察一个人你只能看见骨头，不代表这个人只剩下骨头了，这个人的身体依然是完整的，只不过展现给你看的方式不同
+- 另外爱丽丝事实上也应该不是活着，而是处于生死叠加状态的，外面的人看不见爱丽丝的生死，如果能看见，那就需要黑洞表面般开天辟地的能量打上去才能反射回来看见爱丽丝，而这么高的能量会直接把爱丽丝杀死，所以只要你看到她就会让她的生死状态坍塌为死亡
+- <iframe src="//player.bilibili.com/player.html?aid=972800735&bvid=BV1tp4y1b7Rp&cid=331539394&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+
 ## 万物的本质：一切都是虚空
 
 [万物的本质：一切都是虚空](http://baijiahao.baidu.com/s?id=1648083245868724035&wfr=spider&for=pc)
