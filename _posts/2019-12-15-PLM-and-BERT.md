@@ -1750,6 +1750,26 @@ ELMo、GPT和BERT的区别
 
 BERT很好的融合了ELMo和GPT的优点，论文中提到在11种自然语言处理任务中（文本分类、自然语言推断、问答、文本标记）都取得了SOTA的成绩。
 
+## BERT要点
+
+Bert细节：
+- 在输入上，Bert的输入是两个segment，其中每个segment可以包含多个句子，两个segment用\[SEP]拼接起来。
+- 模型结构上，使用 Transformer，这点跟Roberta是一致的。
+- 学习目标上，使用两个目标：
+  1. Masked Language Model(`MLM`) **掩码语言模型**: 其中**15%**的token要被Mask，在这15%里，有80%被替换成\[Mask]标记，有10%被随机替换成其他token，有10%保持不变。
+  1. Next Sentence Prediction(`NSP`) **下一句预测**: 判断segment对中第二个是不是第一个的后续。随机采样出**50%**是和50%不是。
+- Optimizations 算法优化:
+  - Adam, beta1=0.9, beta2=0.999, epsilon=1e-6, L2 weight decay=0.01
+  - learning rate, 前10000步会增长到1e-4, 之后再**线性下降**。
+  - dropout=0.1
+  - GELU激活函数
+  - 训练步数：1M
+  - mini-batch: 256
+  - 输入长度: 512
+- Data
+  - BookCorpus + English Wiki = 16GB
+
+
 ## BERT进阶思考
 
 ### BERT学到了什么
@@ -2692,13 +2712,58 @@ ALBERT标志着构建语言模型的重要一步，该模型不仅达到了SOTA�
 
 ## RoBERTa
 
-RoBERTa 是BERT的成功变种之一，主要有四个简单有效的变化：
+【2022-5-9】[Roberta: Bert调优](https://zhuanlan.zhihu.com/p/260693956)
+
+Roberta，是Robustly Optimized BERT Approach的简称。
+- Robustly用词很赞，既有“鲁棒的”，又有”体力的”。Roberta是一片实验为基础的论文，有点体力活的意思，但是结果又非常的鲁棒可信赖。
+
+RoBERTa 是BERT的成功变种之一，主要有4个简单有效的变化：
 - 1）去除NSP任务；
-- 2）训练步骤更多，batch size更大，数据更多；
+- 2）大语料与更长的训练步数：batch size更大，数据更多；
 - 3）更长的训练句子；
-- 4）动态改变 [ MASK ] 模式。
+- 4）Masking策略——静态与动态：动态改变 [ MASK ] 模式。
 
 RoBERTa 在 BERT 的基础上取得了令人印象深刻的结果。而且，RoBERTa 已经指出，**NSP 任务对于 BERT 的训练来说相对没用**。
+
+结论：
+- NSP不是必须的loss
+- Mask的方式虽不是最优但是已接近。
+- 增大batch size和增大训练数据能带来较大的提升。
+
+由于Roberta出色的性能，现在很多应用都是基于Roberta而不是原始的Bert去微调了。
+
+（1）动态 mask
+- Bert中是在训练数据中静态的标上Mask标记，然后在训练中是不变的，这种方式就是静态的。
+- Roberta尝试了一种动态的方式，说是动态，其实也是用静态的方式实现的，把数据复制10份，每一份中采用不同的Mask。这样就有了10种不同的Mask数据。
+- 从结果中，可以看到动态mask能带来微小的提升。
+
+（2）NSP任务
+
+Bert的模型输入中是由两个segment组成的，因而就有两个问题：
+- 两个segment是不是必要？
+- 为什么是segment而不是单个的句子？
+
+因此设置了四个实验：
+- Segment-Pair + NSP
+- Sentence-Pair + NSP: 只用了sentence以后，输入的长度会变少，为了使得每一步训练见到的token数类似，在这里会增大batch size
+- Full-Sentence: 每一个样本都是从一个文档中连续sample出来的，如果跨过文档边界，就添加一个[SEP]的标记，没有NSP损失。
+- Doc-Sentence: 类似于Full-Sentence，但是不会跨过文档边界。
+从实验结果中可以看到，改用Sentence-Pair会带来一个较大的损失。猜测是因为这样无法捕捉long-term的依赖。
+
+另外，Full-Sentence和Doc-Sentence能够带来微小的提升，说明NSP不是必须的。
+- 这点跟Bert中的消融实验结论相反，但是请注意它们的输入还是不同的，原始Bert中的输入是Segment-Pair，有50%/50%的采样，而Full/Doc-Sentence中则是从文章中连续sample来的句子。
+
+因为Doc-Sentence会导致不同的batch_size（因为要保证每个batch见到的token数类似），所以在Roberta中，使用Full-Sentence模式。
+
+
+（3）Large-Batch
+
+现在越来越多的实验表明增大batch_size会使得收敛更快，最后的效果更好。原始的Bert中，batch_size=256，同时训练1M steps。
+
+在Roberta中，实验了两个设置：
+- batch_size=2k, 训练125k steps。
+- batch_size=8k, 训练31k steps。
+从结果中看，batch_size=2k时结果最好。
 
 ## XLNet
 
