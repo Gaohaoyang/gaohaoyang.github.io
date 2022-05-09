@@ -16,8 +16,13 @@ mathjax: true
 - [The Annotated Transformer](http://nlp.seas.harvard.edu/2018/04/03/attention.html),Harvard NLP出品，含pytorch版代码实现
 - [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/)
 - [Transformer模型的PyTorch实现](https://luozhouyang.github.io/transformer/),[A PyTorch implementation of the Transformer model in "Attention is All You Need"](https://github.com/jadore801120/attention-is-all-you-need-pytorch)
+
+
+## 预训练语言模型
+
 - 【2021-6-7】[一文了解预训练语言模型](https://mp.weixin.qq.com/s/meDVXt91pypl4Gn_1A6iVg), 配套书籍，预训练语言模型，2021-5出版
-- 【2021-6-17】[预训练模型最新综述：过去、现在和未来](https://zhuanlan.zhihu.com/p/381121057) [Pre-Trained Models: Past, Present and Future](https://arxiv.org/abs/2106.07139)，全面回顾了 PTM 的最新突破。这些突破是由计算能力的激增和数据可用性增加推动的，朝着四个重要方向发展：设计有效的架构、利用丰富的上下文、提高计算效率以及进行解释和理论分析。PTM发展过程：
+- 【2021-6-17】[预训练模型最新综述：过去、现在和未来](https://zhuanlan.zhihu.com/p/381121057) [Pre-Trained Models: Past, Present and Future](https://arxiv.org/abs/2106.07139)，全面回顾了 PTM 的最新突破。这些突破是由计算能力的激增和数据可用性增加推动的，朝着四个重要方向发展：设计有效的架构、利用丰富的上下文、提高计算效率以及进行解释和理论分析。
+- PTM发展过程 [github](https://github.com/thunlp/PLMpapers)：清华大学的两位同学——王晓智和张正彦（在读本科生）整理的一份关于预训练模型的关系图，则可以从功能方面更简单明了的帮我们理解该类模型类别。
   - ![](https://pic2.zhimg.com/80/v2-d82cd793c1b59c20ee7f97d95f53c675_720w.jpg)
 - 迁移学习分类
   - ![](https://pic2.zhimg.com/80/v2-67138799a41ee6e489727b15c0b1e731_720w.jpg)
@@ -2775,8 +2780,56 @@ Bert的模型输入中是由两个segment组成的，因而就有两个问题：
 ## ERNIE（融合知识）
 
 思路：
-- 百度版：全词mask
-- 清华版：知识图谱融入
+- 百度版：**全词**mask
+- 清华版：**知识图谱**融入
+
+
+## 挪吒（华为）
+
+[华为开源预训练语言模型「哪吒」：编码、掩码升级，提升多项中文 NLP 任务性能](https://www.leiphone.com/category/yanxishe/YmSMHZUOCekn9Cyr.html)
+
+【2019-12-5】华为诺亚方舟实验室语音语义团队与海思、云BU等团队合作，共同研究大规模预训练模型的训练技术，发布了自己的中文预训练语言模型NEZHA(NEural ContextualiZed Representation for CHinese LAnguage Understanding，中文：哪吒)。
+
+- NEZHA [论文地址](https://arxiv.org/pdf/1909.00204.pdf)
+- 关于知识蒸馏模型 TinyBERT 详细解读，可参考[往期内容](https://mp.weixin.qq.com/s/f2vxlhaGW1wnu8UYrvh-tA)
+- Github [开源地址](https://github.com/huawei-noah/Pretrained-Language-Model)（包含 NEZHA 与 TinyBERT )  
+
+NEZHA是基于预训练语言模型BERT的改进模型，BERT通过使用大量无监督文本进行预训练，其包含两个预训练任务：Masked Language Modeling（MLM）和Next Sentence Prediction （NSP），分别预测句子里被Mask的字（在构造训练数据时，句子里的部分字被Mask）和判断训练句对里面是不是真实的上下句。
+
+三头六臂 NEZHA（哪吒）
+- 函数式相对位置编码
+- 全词覆盖的实现
+
+### 函数式相对位置编码
+
+位置编码有**函数式**和**参数式**两种
+- 函数式通过定义函数直接计算就可以了。
+- 参数式中位置编码涉及两个概念，一个是距离；二是维度。其中，Word Embedding 一般有几百维，每一维各有一个值，一个位置编码的值正是通过位置和维度两个参数来确定。
+
+NEZHA 预训练模型则采用了**函数式**相对位置编码，其输出与注意力得分的计算涉及到他们相对位置的正弦函数，这一灵感正是来源于 Transformer 的绝对位置编码，而相对位置编码则解决了在 Transformer 中，每个词之间因为互不知道相隔的距离引发的一系列资源占用问题。
+
+Transformer 最早只考虑了**绝对位置编码**，而且是函数式的；后来 BERT 的提出就使用了参数式，而参数式训练则会受收到句子长度的影响，BERT 起初训练的句子最长为 512，如果只训练到 128 长度的句子，在 128~520 之间的位置参数就无法获得，所以必须要训练更长的语料来确定这一部分的参数。
+
+而在 NEZHA 模型中，距离和维度都是由正弦函数导出的，并且在模型训练期间是固定的。也就是说，位置编码的每个维度对应一个正弦，不同维度的正弦函数具有不同的波长，而选择固定正弦函数，则可以使该模型具有更强的扩展性；即当它遇到比训练中序列长度更长的序列时，依然可以发挥作用。
+
+### 全词覆盖
+
+现在的神经网络模型无论是在语言模型还是机器翻译任务中，都会用到一个词表；而在 Softmax 时，每个词都要尝试比较一下。每次运算时，所有词要都在词表中对比一遍，往往一个词表会包含几万个词，而机器翻译则经常达到六七万个词，因此，词表是语言模型运算中较大的瓶颈。
+
+而 NEZHA 预训练模型，则采用了全词覆盖（WWM）策略，当一个汉字被覆盖时，属于同一个汉字的其他汉字都被一起覆盖。该策略被证明比 BERT 中的随机覆盖训练（即每个符号或汉字都被随机屏蔽）更有效。
+- ![](https://static.leiphone.com/uploads/new/images/20191205/5de8d5448fe36.jpg?imageView2/2/w/740)
+
+### 混合精度训练及 LAMB 优化器
+
+在 NEZHA 模型的预训练中，研究者采用了混合精度训练技术。该技术可以使训练速度提高 2-3 倍，同时也减少了模型的空间消耗，从而可以利用较大的批量。
+
+传统的深度神经网络训练使用 FP32（即单精度浮点格式）来表示训练中涉及的所有变量（包括模型参数和梯度）；而混合精度训练在训练中采用了多精度。具体而言，它重点保证模型中权重的单精度副本（称为主权重），即在每次训练迭代中，将主权值舍入 FP16（即半精度浮点格式），并使用 FP16 格式存储的权值、激活和梯度执行向前和向后传递；最后将梯度转换为 FP32 格式，并使用 FP32 梯度更新主权重。
+
+
+## MacBERT
+
+[MacBERT: 中文自然语言预训练模型](https://zhuanlan.zhihu.com/p/333202482)
+
 
 
 ## 其它
