@@ -238,6 +238,38 @@ int RS(arr, low, high, k){
 [逆采样(Inverse Sampling)和拒绝采样(Reject Sampling)原理详解](https://blog.csdn.net/anshuai_aw1/article/details/84840446)
 - 通过F的反函数将一个0到1均匀分布的随机数转换成了符合exp分布的随机数，注意，以上推导对于CDF可逆的分布都是一样的
 
+#### 被父母打的概率
+
+【2022-5-10】[知乎](https://www.zhihu.com/question/441647108/answer/2271041327)，考试砸了回到家，母亲打我的概率是 1/2，父亲打我的概率也是 1/2，那我被打的概率是多少？
+
+被打的概率P主要取决于你爸妈行为之间的相关性ρ（注意P和ρ是两个不同字母）先看三种比较特殊ρ值的情况。
+- （1）假设ρ=0，也即你爸是否打你和你妈是否打你两个随机变量之间**完全相互独立**，那么你被打的概率等于1减去你不被打的概率，也即1-1/2*1/2 = 3/4，也即75%。
+- （2）假设ρ=1，也即你爸妈的行为**完全相关**，也就是完全趋同。如果其中一个打你，另外一个也会一起打你。如果其中一个放过你，另外一个也放过你。那么你被打的概率是 1/2，也即50%。
+- （3）假设ρ=-1，也即假设你爸妈的行为**完全负相关**，也就是完全反着来。如果其中一个打你，另外一个选择放过你。如果其中一个选择放过你，另外一个就一定打你。那么很遗憾，你被打的概率是1，也即100%。
+
+假设ρ取[-1 ,1]区间的其它值，就需要有P关于ρ的表达式，推理稍微有些复杂。但由于概率P和相关性ρ之间的线性关系（严格来说需要证明），而且根据上面三种特殊情况，已经明确的知道了直线上三个特殊点的坐标分别为（0 , 0.75）、(1 , 0.5)、(-1 , 1)。通过其中任意两点可以推出P关于ρ的线性关系式为:
+- P = 0.75 - 0.25ρ 。 
+可见概率P的取值范围是[0.5 , 1]区间。整体趋势而言是你爸妈的行为越趋同，你被打的概率越低。行为越趋反，你挨打的概率越高。所以我的建议是，如果你爸妈平时感情很好总是夫唱妇随的话，你勇敢进家门就好了，好歹有约一半的概率不被打（当然也有约一半的概率遭遇男女混合双打）。如果他俩喜欢唱反调，或者总是喜欢红脸黑脸地演戏，你看下今晚能不能去爷爷奶奶家或者同学家借住一宿。
+
+严格解答：
+
+设随机变量![[公式]](https://www.zhihu.com/equation?tex=X%3D%5Cbegin%7Bcases%7D0%2C%26%E7%88%B6%E4%BA%B2%E4%B8%8D%E6%89%93%E4%BD%A0%3B%5C%5C1%2C%26%E7%88%B6%E4%BA%B2%E6%89%93%E4%BD%A0%2C%5Cend%7Bcases%7D)![[公式]](https://www.zhihu.com/equation?tex=Y%3D%5Cbegin%7Bcases%7D0%2C%26%E6%AF%8D%E4%BA%B2%E4%B8%8D%E6%89%93%E4%BD%A0%3B%5C%5C1%2C%26%E6%AF%8D%E4%BA%B2%E6%89%93%E4%BD%A0%2C%5Cend%7Bcases%7D)则 ![[公式]](https://www.zhihu.com/equation?tex=X%2C+Y%5Csim+B%281%2C1%2F2%29) 。设你会挨打的概率是 ![[公式]](https://www.zhihu.com/equation?tex=p) , 则
+- ![[公式]](https://www.zhihu.com/equation?tex=P%5C%7BX%3D0%2CY%3D0%5C%7D%3DP%5C%7BX%3D1%2CY%3D1%5C%7D%3D1-p%2C+)
+- ![[公式]](https://www.zhihu.com/equation?tex=P%5C%7BX%3D0%2CY%3D1%5C%7D%3DP%5C%7BX%3D1%2CY%3D0%5C%7D%3Dp-1%2F2.)
+因此 ![[公式]](https://www.zhihu.com/equation?tex=1%2F2%5Cle+p%5Cle+1) . 设 ![[公式]](https://www.zhihu.com/equation?tex=%5Crho%3D%5Crho_%7BXY%7D) 为 ![[公式]](https://www.zhihu.com/equation?tex=X%2CY) 的相关系数，则我们有
+- ![[公式]](https://www.zhihu.com/equation?tex=%5Cfrac%7B%5Crho%7D%7B4%7D%3D%5Cmathrm%7BCov%7D%28X%2CY%29%3DE%28XY%29-EX%5Ccdot+EY%3D%5Cfrac34-p%2C+%5Cquad+p%3D%5Cfrac%7B3-%5Crho%7D%7B4%7D.)
+ 
+由 ![[公式]](https://www.zhihu.com/equation?tex=1%2F2%5Cle+p%5Cle+1) 可知 ![[公式]](https://www.zhihu.com/equation?tex=-1%5Cle%5Crho%5Cle1) .
+ 
+**结论**：父母行动越一致，你被打的概率越低。
+*   如果父母喜欢同时行动，那么你只有 ![[公式]](https://www.zhihu.com/equation?tex=1%2F2) 几率会被打；
+*   如果两人行动完全不相关，此时两人的行动恰好也是独立的（由联合分布律可知），挨打几率为 ![[公式]](https://www.zhihu.com/equation?tex=3%2F4) ；
+*   如果两人喜欢对着干，相关系数为 ![[公式]](https://www.zhihu.com/equation?tex=-1) ，那你就惨了， ![[公式]](https://www.zhihu.com/equation?tex=100%5C%25) 被打。
+
+注意![[公式]](https://www.zhihu.com/equation?tex=100%5C%25)被打并不代表一定会被打。举个例子，从 ![[公式]](https://www.zhihu.com/equation?tex=%5B0%2C1%5D) 上取点，父亲在小于 ![[公式]](https://www.zhihu.com/equation?tex=0.5) 时打你，母亲在大于 ![[公式]](https://www.zhihu.com/equation?tex=0.5) 时打你，此时 ![[公式]](https://www.zhihu.com/equation?tex=%5Crho%3D-1) ，你虽然不被打几率是 ![[公式]](https://www.zhihu.com/equation?tex=0%5C%25) ，但仍可能发生。实际上此时有 ![[公式]](https://www.zhihu.com/equation?tex=P%5C%7BX%3D1-Y%5C%7D%3D1) ，而必定被打指的是 ![[公式]](https://www.zhihu.com/equation?tex=X%3D1-Y) 。
+ 
+最后注意如果父母打你几率不正好都是 ![[公式]](https://www.zhihu.com/equation?tex=%5Cfrac12) ，相关系数 ![[公式]](https://www.zhihu.com/equation?tex=%5Crho_%7BXY%7D) 一般不能取满 ![[公式]](https://www.zhihu.com/equation?tex=%5B-1%2C1%5D) 。
+
 
 ### 机器学习
 
@@ -847,7 +879,9 @@ AI学习曲线，左侧是稍显陡峭的入门期，需要学习基本的矩阵
   - 按个人理解，做算法带来的最大收获是科学精神和实验思维，这是做工程很难培养出来的。以前看论文看了introduction和模型设计，草草地读一下实验结果就完事儿了。殊不知AB实验设计很可能才是论文的核心：实验样本是否无偏，实验设计是否严谨，核心效果是否合理，是否能证明论文结论。也许一行代码和一个参数的修改，背后是艰辛的思考和实验，做算法太需要严谨和缜密的思维了。即使未来不做算法，这些经验都会是非常宝贵的财富。
 - 再者是尽早面向**领域**，面向**人**和**业务**。AI本身只是工具，它的抽象性并不能让其成为各个领域的灵丹妙药。 如果不能和AI专家在深度上竞争，就在业务领域专精深挖，拥有比业务人员更好的数据敏感度，成为跨界专家。现在已经有大量AI+金融， AI+医疗，AI+体育的成功案例。 人能熟悉领域背后的数据，背后的人性，这是机器短时间内无法代替的，跨界带来的组合爆炸，也许暗含着危机中的机会吧。
 
-## [停止学习框架，专注基础知识](https://ai.yanxishe.com/page/blogDetail/10548)
+## 停止学习框架，专注基础知识
+
+[停止学习框架，专注基础知识](https://ai.yanxishe.com/page/blogDetail/10548)
 - 【2019-05-08】[Stop Learning Frameworks](https://sizovs.net/2018/12/17/stop-learning-frameworks/)
 
 ### 观点：直接学tensorflow、pytorch，别学数学+python了
