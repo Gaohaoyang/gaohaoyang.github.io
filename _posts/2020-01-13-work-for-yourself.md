@@ -3,7 +3,7 @@ layout: post
 title:  "自由职业之路-How to work for yourself"
 date:   2020-01-13 10:29:00
 categories: 读书笔记
-tags: 工作 996 斜杠青年 咸鱼 创业 自由职业 财务自由 公司注册
+tags: 工作 996 斜杠青年 咸鱼 创业 自由职业 财务自由 公司注册 远程
 excerpt: “只上班、不工作”还是“只工作、不上班”？
 author: 鹤啸九天
 mathjax: true
@@ -426,6 +426,33 @@ mathjax: true
 <iframe src="//player.bilibili.com/player.html?aid=841695904&bvid=BV1854y1i7jL&cid=222037428&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 # 自由职业
+
+
+## 远程工作
+
+图灵远程工作
+
+【2022-5-13】[Turing](https://developers.turing.com/)：Work full-time with top US companies
+
+I saw your profile online and wanted to **reach out**! You might be a great fit for many of the remote software engineering roles that top U.S. companies are hiring for on Turing.
+
+Turing is based in Palo Alto, California, U.S.A., also known as “Silicon Valley”. We connect exceptional software engineers from around the world to top U.S. and Silicon Valley companies that are hiring for full-time remote software positions.
+- ● Live anywhere **地点自由**, enjoy rapid career growth: Live anywhere in the world, enjoy career growth opportunities formerly only available to engineers living in the Silicon Valley 
+  - Work with former Tech Leads and Engineering Managers from Google, Facebook, Microsoft, Amazon, & various top tech companies and advance rapidly towards your professional goals.
+- ● Full-Time, Long term opportunities **全职、长期机会**: 
+  - Turing only partners with U.S companies that are hiring for full-time long term roles remotely and also work hard on re-matching you to subsequent long term opportunities. If you register and pass Turing’s tests and interviews, you may never have to interview for a job again.
+- ● Compensation **丰厚薪酬**:
+  - Turing engineers are compensated with salaries more than local companies in most countries.
+- ● Find jobs across levels **各个层级**: 
+  - Turing hires mid level （中级）, senior level（高级） as well as tech lead level （技术负责人） engineers.
+- ● Find jobs in 100+ Skills: **多种技能**
+  - Get hired for React, Node, Python, Angular, Swift, React Native, Android, Java, Rails, Golang, PHP, Vue, Devops, Machine Learning etc.
+
+Once you've sent the invite, your friend will need to complete these steps before you receive the $250 reward:
+- Click on the invite link in the referral email and sign up.
+- Pass required Turing Tests and the Technical Assessment.
+- After getting matched with Turing's U.S. partner company, your friend must work full-time for at least 30 days with Turing's U.S. partner company.
+
 
 ## 转行
 
