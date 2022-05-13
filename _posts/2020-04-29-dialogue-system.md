@@ -3155,6 +3155,9 @@ ConvLab支持：**Multi-agent learning**、**Multi-task learning**和**Role play
 - ③**数据层**：由一组数据库组成，这些数据库存储收集到的人类会话数据(文本对或文本图像对)、用于核心会话和技能的非会话数据和知识图，以及小冰和所有注册用户的个人档案。
 - ![](https://img.huxiucdn.com/article/content/201812/28/162450034922.jpg?imageView2/2/w/1000/format/jpg/interlace/1/q/85)
   
+【2022-5-13】[周力博士：小冰AI+AI对谈技术的探索与应用](https://mp.weixin.qq.com/s/S25x75Cl_yPfJbiHEBi74g)
+- 红棉小冰，小冰公司打造了一个类似的实验平台：小冰岛。希望能找到一个更复杂的交互场景，打破一对一的对话下20%易感用户的局限，从而找到人和AI更好交互的方式。
+
 
 ### 聊天机器人
 
