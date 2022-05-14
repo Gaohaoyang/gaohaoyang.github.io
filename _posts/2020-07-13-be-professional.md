@@ -423,8 +423,23 @@ mathjax: true
 
 ## 如何开会？
 
-- [Facebook、Google、Amazon 是如何高效开会的](https://blog.csdn.net/y4x5M0nivSrJaY3X92c/article/details/78921668)
+【2018-8-9】How Google works? [pdf下载](https://download.csdn.net/download/leee77/8149425), [知乎评价](https://www.zhihu.com/question/30360173)，[英文版](https://download.csdn.net/download/baby6046/9386857)
+ 
+[如何开一场高效的会议？](https://36kr.com/p/5125303.html)
+*   `会前`：明确目标，普及信息，精选人员
+  *   明确会议目标：决策型，讨论型
+  *   选择合适的会议类型、场地、时长
+  *   准备议程：提前发出
+  *   只邀请必要的人：不超过10人
+*   `会中`：高效沟通必备的三个技巧
+  *   角色扮演：掌控职责
+  *   计时器：掌握时间
+  *   议题清单：掌握进度
+*   `会后`：有结论，有责任
+  *   尽早发出会议纪要
+  *   分配到责任人
 
+- [Facebook、Google、Amazon 是如何高效开会的](https://blog.csdn.net/y4x5M0nivSrJaY3X92c/article/details/78921668)
 - Google
    - **保持会议精简**：Google 的历任高管都曾强调会议精简的重要性。想要让会议精简，首先必须控制人，然后是控制时间。
       - 2011 年 Larry Page 回归 Google 重新出任 CEO 时，甚至要求全公司每个会议最多不超过 10 个人。
