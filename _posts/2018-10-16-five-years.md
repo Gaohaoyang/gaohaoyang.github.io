@@ -13,6 +13,60 @@ mathjax: true
 
 # 总结
 
+## 读研有什么用
+ 
+【2018-7-27】比文凭、技能更重要的是**独立思考**的习惯+**解决问题**的能力：
+*   遇到问题（选题）
+*   分析问题（文献综述）：旁征博引，海纳百川
+*   提出方法（解决方法）：独立思考
+*   不断实践（实验论证）：逻辑推理，反复论证
+*   沉淀反思（总结展望）: 完善知识体系（广度+深度）+方法论
+参考：
+- [读研究生的意义在哪里？ - Leee的回答](https://www.zhihu.com/question/53405587/answer/136671441)
+- [读研究生的意义](https://www.zhihu.com/question/53405587)
+
+什么是博士？
+- ![](https://pic3.zhimg.com/80/v2-57b8823fbf9213c4661ab132527b9f68_720w.jpg?source=1940ef5c)
+- 英文原文：[what is a Ph.D.](https://matt.might.net/articles/phd-school-in-pictures/)----by Dr. Matt Might
+- 中文版：[什么是博士？看完我懂了。最佳图解——人类知识的拓荒者！](https://mp.weixin.qq.com/s/biiguNS_4Cn8PHKuooA8SQ)，进一步扩展
+
+解析
+- 1. 圆圈表示人类现有知识的总和 
+  - Imagine a circle that contains all of human knowledge
+- 2. 上完初中，学了一点常识
+  - By the time you finish elementary school, you know a little
+- 3. 高中毕业已经掌握了数理化生，基础扎实很重要
+  - By the time you finish high school, you know a bit more
+- 4. 大学分专业，对知识不可能面面俱到了，专业知识占主导，图中有了小突起
+  - With a bachelor's degree, you gain a specialty
+- 5. 研究生阶段更加深入，在领域内的高深知识开始触及。(这里不讨论研究生毕业)
+  - A master's degree deepens that specialty
+- 6. 博士阶段，导师给了方向，看了很多文献，触及到人类知识的边缘
+  - Reading research papers takes you to the edge of human knowledge
+- 7. 瞄准一个点，这个点或许是一个参数、一个可能性，开始攻克
+  - Once you're at the boundary, you focus
+- 8. 努力做实验，心无旁骛，again and again
+  - You push at the boundary for a few years
+- 9. 有一天，成功了！突破了知识边界
+  - Until one day, the boundary gives way
+- 10. 因为这份成果，可以申请博士学位了
+  - And, that dent you've made is called a Ph.D.
+- 11. 会当凌绝顶，一览众山小！博士很自豪，很开心，突破了人类知识极限
+  - Of course, the world looks different to you now
+- 12. 但对于整个人类知识圈来说，这个突破也是极小极小的。积跬步以至千里，一个博士很渺小的。
+  - So, don't forget the bigger picture，Keep pushing.
+
+[最佳图解——人类知识的拓荒者！](https://mp.weixin.qq.com/s/biiguNS_4Cn8PHKuooA8SQ)
+- Q1：上面的博士生涯看似很简单，为什么需要5年甚至更久？
+- A1：因为不是所有方向都能有所突破，导师给博士一个课题，就像下面这张图:
+  - 博士接到课题，需要自己去找领域的边界，不断看文献、学习、买药品、搭设备…然后很可能做不出来，博士毕业前换几个方向很正常，所以需要大量的试错时间。
+- Q2：博士既然这么独立，导师有什么用？
+- A2：提供平台和物质基础；教基础知识，带入门；告诉博士可能的突破点；在博士突破之后帮助他把论文发出来；津贴等等。
+- Q3：导师不能做什么？
+- A3：最最重要的是，导师不知道准确的突破方案，大罗神仙都不能预测，不能难为导师，他不是高中老师。这事得博士去探索，**博士是知识的主要拓荒者**。
+
+## 博士经验
+
 - 【2022-1-5】[田渊栋2021年总结](https://zhuanlan.zhihu.com/p/451903256)
   - （1）战略上，**分清主次**。没必要的工作不用做，搞清楚什么是对自己最重要，什么该果断放弃，说一句“没时间”并不丢人，反而是逐渐走向成熟的体现。
     - 博士毕业之后，特别是最近几年，开始奉行“deadline前做不出来就放到下个deadline”的原则
