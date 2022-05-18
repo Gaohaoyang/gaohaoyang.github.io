@@ -977,6 +977,475 @@ public void reverse(TreeNode node1, TreeNode node2) {
 
 ## 常见问题
 
+### 最长公共子串
+
+【2022-5-17】[最长公共子序列和最长公共子串](https://zhuanlan.zhihu.com/p/68409952)
+
+问题描述：
+- 给定两个序列：X[ 1...m ] 和 Y[ 1...n ]，求在两个序列中同时出现的**最长子序列**的长度。
+- 假设 X 和 Y 的序列如下：
+  - X[ 1...m] = {A, B, C, B, D, A, B}
+  - Y[ 1...n] = {B, D, C, A, B, A}
+
+**最长公共子串**（Longest Common Substring）与**最长公共子序列**（Longest Common Subsequence）的区别： 
+- 子串要求在原字符串中是**连续**的，而子序列则只需保持**相对顺序**，并不要求连续。
+- 例如 X = {a, Q, 1, 1}; Y = {a, 1, 1, d, f}，那么，{a, 1, 1}是X和Y的最长公共子序列，但不是它们的最长公共字串。
+
+#### 最长公共子串
+
+X 和 Y 的最长公共子串有：BD, AB
+
+最大公共子串要求的字串是连续的
+
+求子串的方法和求子序列方法类似：
+- 当str1\[i] == str2\[j]时，子序列长度veca\[i]\[j] = veca\[i - 1][j - 1] + 1；
+- 当str1\[i] != str2\[j]时，veca\[i]\[j]长度要为0，而不是 max{ veca\[i - 1]\[j], veca\[i][j - 1] }。
+
+下面是求解时的动态规划表，可以看出 X 和 Y 的最长公共子串的长度为2：
+- ![](https://pic1.zhimg.com/80/v2-b59f7f61a57d7b648af3783ee6eaa7bc_720w.jpg)
+
+```c++
+// 动态规划求解LCS问题
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+ 
+int max(int a, int b) 
+{
+	return (a>b)? a:b;
+}
+ 
+/**
+ * 返回X[0...m-1]和Y[0...n-1]的LCS的长度 
+ */
+int lcs(string &X, string &Y, int m, int n)
+{
+	int biggest = 0;
+	// 动态规划表，大小(m+1)*(n+1)
+	vector<vector<int>> table(m+1,vector<int>(n+1));  
+ 
+	for(int i=0; i<m+1; ++i)
+	{
+		for(int j=0; j<n+1; ++j)
+		{
+			// 第一行和第一列置0
+			if (i == 0 || j == 0)
+				table[i][j] = 0;
+			else if(X[i-1] == Y[j-1])
+			{
+				table[i][j] = table[i-1][j-1] + 1;
+				if(table[i][j] > biggest)  // 增加了一个最大值
+                                        biggest = table[i][j];
+			}
+			else
+				table[i][j] = 0;  // 此处变化
+		}
+	}
+ 
+	return biggest;
+}
+ 
+int main()
+{
+	string X = "ABCBDAB";
+	string Y = "BDCABA";
+ 
+	cout << "The length of LCS is " << lcs(X, Y, X.length(), Y.length());
+	cout << endl;
+ 
+	getchar();
+	return 0;
+}
+```
+
+求解时的动态规划表，可以看出 X 和 Y 的最长公共子串的长度为2：
+- ![](https://pic3.zhimg.com/80/v2-541861d0d359988663b6d6100ffa719a_720w.jpg)
+
+输出最长公共子串很简单，只需要判断table\[i]\[j]是否等于**最长公共子串的长度**即可，然后沿着**对角线**往左上角找大于等于1的数字即可；
+- 如果table\[i]\[j] == lcs_len（lcs_len指最长公共子串长度），则把这个字符放入LCS中，并跳入table\[i-1]\[j-1]中继续进行判断；
+- 直到table\[i]\[j] < 1为止；倒序输出LCS放入set中。
+从上图的红色路径显示，X 和 Y 的最长公共子串有 3 个，分别为 “BD”、“AB”、“AB”。因“AB”与“AB”重复，故只输出“BD”、“AB”即可。
+
+```c++
+// 动态规划求解并输出所有LCS
+#include <iostream>
+#include <string>
+#include <vector>
+#include <set>
+#include <algorithm>
+using namespace std;
+
+string x = "ABCBDAB";
+string y = "BDCABA";
+vector<vector<int>> table; // 动态规划表
+set<string> setOflcs;      // set保存所有的LCS
+
+/**
+ * 构造表，并返回X和Y的LCS的长度
+ */
+int lcs(int m, int n)
+{
+    int biggest = 0;
+    // 表的大小为(m+1)*(n+1)
+    table = vector<vector<int>>(m+1, vector<int>(n+1));
+    for(int i = 0; i < m+1; i++)
+    {
+        for(int j = 0; j < n+1; j++)
+        {
+            // 第一行和第一列置0
+            if(i == 0 || j == 0)
+                table[i][j] = 0;
+            else if(x[i-1] == y[j-1])
+            {
+		table[i][j] = table[i-1][j-1] + 1;
+		if(table[i][j] > biggest)
+                    biggest = table[i][j]; // 存放LCS的长度
+	    }
+	    else
+		table[i][j] = 0;
+        }
+    }
+    return biggest;
+}
+
+/**
+ * 求出所有的最长公共子串，并放入set中
+ */
+void traceBack(int m, int n, int lcs_len)
+{
+    string strOflcs;
+    for(int i = 1; i < m+1; i++)
+    {
+        for(int j = 1; j < n+1; j++)
+        {
+            // 查到等于lcs_len的值，取字符
+            if(table[i][j] == lcs_len)
+            {
+                int ii = i, jj = j;
+                while(table[ii][jj] >= 1)
+                {
+                    strOflcs.push_back(x[ii-1]);
+                    ii--;
+                    jj--;
+                }
+                string str(strOflcs.rbegin(), strOflcs.rend()); // strOflcs逆序
+                if((int)str.size() == lcs_len)                       // 判断str的长度是否等于lcs_len
+                {
+                    setOflcs.insert(str);
+                    strOflcs.clear();                           // 清空strOflcs
+                }
+            }
+        }
+    }
+}
+
+// 输出set
+void print()
+{
+    set<string>::iterator iter = setOflcs.begin();
+    for(; iter != setOflcs.end(); iter++)
+        cout << *iter << endl;
+}
+
+int main()
+{
+    int m = x.length();
+    int n = y.length();
+    int res = lcs(m, n);
+    cout << "res = " << res << endl;
+
+    traceBack(m, n, res);
+    print();
+
+    getchar();
+    return 0;
+}
+```
+
+#### 最长公共子序列 
+
+X 和 Y 的最长公共子序列有 “BDAB”、“BCAB”、“BCBA”，即长度为4。
+
+（1）穷举法
+
+用穷举法来解决这个问题，即求出 X 中所有子序列，看 Y 中是否存在该子序列。
+- X 有多少子序列 —— 2m 个
+- 检查一个子序列是否在 Y 中 —— θ(n)
+穷举法在最坏情况下的时间复杂度是 θ(n * 2m)，也就是说花费的时间是**指数级**的
+
+（2）动态规划
+
+LCS 问题是否具有动态规划问题的两个特性。
+- ① 最优子结构
+  - 设 C[ i,j] = | LCS(x[ 1...i], y[ 1...j]) |，即 C[ i,j] 表示序列 X[ 1...i] 和 Y[ 1...j] 的最长公共子序列的长度，则 C[ m,n] = |LCS(x,y)|就是问题的解。
+  - 递归推导式：
+    - ![](https://pic2.zhimg.com/80/v2-0df332d4e230d9ab8f14744991ef3a01_720w.jpg)
+  - 从这个递归公式可以看出，问题具有**最优子结构**性质！
+- ② 重叠子问题
+  - 求LCS长度的递归伪代码：
+
+```c++
+LCS(x,y,i,j)
+if x[i] = y[j]
+	then C[i,j] ← LCS(x,y,i-1,j-1)+1
+else C[i,j] ← max{LCS(x,y,i-1,j),LCS(x,y,i,j-1)}
+	return C[i,j]
+```
+
+【2022-5-17】小冰命中一次，写成半成品
+
+```python
+# x = "ace"
+# y = "bcedf"
+# dp: lcs -> f(n) = max{ f(n-1)+1, f(n-1) }
+max_seq = []
+
+def lcs(x, y, max_seq):
+	""" 最长公共子串 """
+	# (0 ) 边界条件
+	if not ( len(x) and len(y)):
+		return 0
+	# (1) 最后一位相同
+	if x[0] == y[0]:
+		max_seq.append(x[0])
+		return lcs(x[1:], y[1:], max_seq)
+	else: # (2) 最后一位不同，取大
+		tmp = [lcs(x[1:], y, max_seq), lcs(x, y[1:], max_seq), lcs(x[1:], y[1:], max_seq)]
+		# 字符串不连续时清空
+		if tmp[0] == tmp[2]:
+			max_seq = []
+		return max(tmp)
+
+print(''.join(max_seq))
+# 效率：O(mn)
+# 优化：备忘录、DP Table
+```
+
+
+c++简单递归求解
+
+```c++
+// 简单的递归求解LCS问题
+#include <iostream>
+#include <string>
+using namespace std;
+ 
+int max(int a, int b) 
+{
+	return (a>b)? a:b;
+}
+ 
+// Return the length of LCS for X[0...m-1] and Y[0...n-1]
+int lcs(string &X, string &Y, int m, int n)
+{
+	if (m == 0 || n == 0)
+		return 0;
+	if (X[m-1] == Y[n-1])
+		return lcs(X, Y, m-1, n-1) + 1;
+	else
+		return max(lcs(X, Y, m, n-1), lcs(X, Y, m-1, n));
+}
+
+int main()
+{
+	string X = "ABCBDAB";
+	string Y = "BDCABA";
+	// 输出最长公共子序列长度
+	cout << "The length of LCS is " << lcs(X, Y, X.length(), Y.length());
+	cout << endl;
+	getchar();
+	return 0;
+}
+```
+
+简单递归，在**最坏**情况下（X 和 Y 的所有字符都不匹配，即LCS的长度为0）的时间复杂度为 **θ(2n)**。这和**穷举法**一样还是**指数级**的，太慢了。
+
+根据程序中 X 和 Y 的初始值，画出部分递归树：
+- ![](https://pic2.zhimg.com/80/v2-601c7c49b6e50bf006285865a1c6af89_720w.jpg)
+递归树中**红框**标记的部分被调用了两次。画出完整的递归树后，可以发现有很多重复调用，这个问题具有**重叠子问题**的特性。
+
+递归之所以和穷举法一样慢，因为在递归过程中进行了大量的重复调用。而**动态规划**就是解这个问题的，通过用一个**表**来保存子问题的结果，避免重复的计算，以**空间**换**时间**。前面已经证明，最长公共子序列问题具有动态规划所要求的两个特性，所以 LCS 问题可以用动态规划来求解。
+- ![](https://pic3.zhimg.com/80/v2-2a9422e517d8fc878a7583388204bdda_720w.jpg)
+
+改进版：DP Table存储，防止重复计算数值
+
+```c++
+// 动态规划求解LCS问题 
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+ 
+int max(int a, int b) 
+{
+	return (a>b)? a:b;
+}
+ 
+/**
+ * 返回X[0...m-1]和Y[0...n-1]的LCS的长度 
+ */
+int lcs(string &X, string &Y, int m, int n)
+{
+	// 动态规划表，大小(m+1)*(n+1)
+	vector<vector<int>> table(m+1,vector<int>(n+1));  
+ 
+	for(int i=0; i<m+1; ++i)
+	{
+		for(int j=0; j<n+1; ++j)
+		{
+			// 第一行和第一列置0
+			if (i == 0 || j == 0)
+				table[i][j] = 0;
+			else if(X[i-1] == Y[j-1])
+				table[i][j] = table[i-1][j-1] + 1;
+			else
+				table[i][j] = max(table[i-1][j], table[i][j-1]);
+		}
+	}
+	return table[m][n];
+}
+ 
+int main()
+{
+	string X = "ABCBDAB";
+	string Y = "BDCABA";
+ 
+	cout << "The length of LCS is " << lcs(X, Y, X.length(), Y.length());
+	cout << endl;
+ 
+	getchar();
+	return 0;
+}
+```
+
+动态规划解决LCS问题的时间复杂度为**θ(mn)**，这比简单递归实现要快多了。
+- 空间复杂度是θ(mn)，因为使用了一个**动态规划表**。
+- 当然，空间复杂度还可以进行优化，即根据递推式可以只保存填下一个位置所用到的几个位置就行了。
+
+总结：
+- 动态规划将原来具有**指数级**时间复杂度的搜索算法改进成了具有**多项式**时间复杂度的算法。
+- 其中的关键在于解决**冗余**（重复计算），这是动态规划算法的根本目的。
+- 动态规划实质上是一种**以空间换时间**的技术，它在实现的过程中，不得不存储产生过程中的各种状态，所以它的空间复杂度要大于其它的算法。
+
+动态规划解决最优化问题的一般步骤：
+1. 分析最优解的性质，并刻划其结构特征。
+1. 递归地定义最优值。
+1. 以自底向上的方式或自顶向下的记忆化方法计算出最优值。
+1. 根据计算最优值时得到的信息，构造一个最优解。
+
+步骤(1)—(3)是动态规划算法的基本步骤。在只需要求出最优值的情形，步骤(4)可以省略，若需要求出问题的一个最优解，则必须执行步骤(4)。此时，在步骤(3)中计算最优值时，通常需记录更多的信息，以便在步骤(4)中，根据所记录的信息，快速地构造出一个最优解。
+
+输出一个最长公共子序列并不难（网上很多相关代码），难点在于输出**所有**的最长公共子序列，因为 LCS 通常不唯一。
+
+总之，需要在动态规划表上进行**回溯** —— 从table\[m][n]，即右下角的格子，开始进行判断：
+- 如果格子table\[i]\[j]对应的X\[i-1] == Y\[j-1]，则把这个字符放入 LCS 中，并跳入table\[i-1]\[j-1]中继续进行判断；
+- 如果格子table\[i]\[j]对应的 X\[i-1] ≠ Y\[j-1]，则比较table\[i-1]\[j]和table\[i]\[j-1]的值，跳入值较大的格子继续进行判断；
+- 直到 i 或 j 小于等于零为止，倒序输出 LCS 。
+如果出现table\[i-1]\[j]等于table\[i]\[j-1]的情况，说明最长公共子序列有多个，故两边都要进行回溯（这里用到递归）
+- ![](https://pic1.zhimg.com/80/v2-b0f663ab82935625d3e28c18d9f3ff3c_720w.jpg)
+- 从上图的红色路径显示，X 和 Y 的最长公共子序列有 3 个，分别为 “BDAB”、“BCAB”、“BCBA”。
+
+```c++
+// 动态规划求解并输出所有LCS
+#include <iostream>
+#include <string>
+#include <vector>
+#include <set>
+#include <algorithm>
+using namespace std;
+
+string X = "ABCBDAB";
+string Y = "BDCABA";
+vector<vector<int>> table; // 动态规划表
+set<string> setOfLCS;      // set保存所有的LCS
+
+int max(int a, int b)
+{
+	return (a>b)? a:b;
+}
+
+/**
+ * 构造表，并返回X和Y的LCS的长度
+ */
+int lcs(int m, int n)
+{
+	// 表的大小为(m+1)*(n+1)
+	table = vector<vector<int>>(m+1,vector<int>(n+1));
+
+	for(int i=0; i<m+1; ++i)
+	{
+		for(int j=0; j<n+1; ++j)
+		{
+			// 第一行和第一列置0
+			if (i == 0 || j == 0)
+				table[i][j] = 0;
+			else if(X[i-1] == Y[j-1])
+				table[i][j] = table[i-1][j-1] + 1;
+			else
+				table[i][j] = max(table[i-1][j], table[i][j-1]);
+		}
+	}
+
+	return table[m][n];
+}
+
+/**
+ * 求出所有的最长公共子序列，并放入set中
+ */
+void traceBack(int i, int j, string lcs_str, int lcs_len)
+{
+	while (i>0 && j>0)
+	{
+		if (X[i-1] == Y[j-1])
+		{
+			lcs_str.push_back(X[i-1]);
+			--i;
+			--j;
+		}
+		else
+		{
+			if (table[i-1][j] > table[i][j-1])
+				--i;
+			else if (table[i-1][j] < table[i][j-1])
+				--j;
+			else   // 相等的情况
+			{
+				traceBack(i-1, j, lcs_str, lcs_len);
+				traceBack(i, j-1, lcs_str, lcs_len);
+				return;
+			}
+		}
+	}
+
+	string str(lcs_str.rbegin(), lcs_str.rend()); // lcs_str逆序
+        if((int)str.size() == lcs_len)                // 判断str的长度是否等于lcs_len
+            setOfLCS.insert(str);
+}
+
+void print()
+{
+    set<string>::iterator beg = setOfLCS.begin();
+	for( ; beg!=setOfLCS.end(); ++beg)
+		cout << *beg << endl;
+}
+int main()
+{
+	int m = X.length();
+	int n = Y.length();
+	int length = lcs(m, n);
+	cout << "The length of LCS is " << length << endl;
+
+	string str;
+	traceBack(m, n, str, length);
+	print();
+
+	getchar();
+	return 0;
+}
+```
+
+
 ### 反转一个链表（招银网络二面）
 
 ```c++
