@@ -3,7 +3,7 @@ layout: post
 title:  "多任务学习-Multi-Task-Learning"
 date:   2020-07-28 15:26:00
 categories: 机器学习 深度学习
-tags: 多任务学习 深度学习 神经网络 广告预估
+tags: 多任务学习 深度学习 神经网络 广告预估 CTR CVR
 excerpt: 多任务学习相关知识点
 author: 鹤啸九天
 mathjax: true
@@ -117,6 +117,7 @@ mathjax: true
     + [Model-Protected Multi-Task Learning](https://arxiv.org/abs/1809.06546)
 
 ### 多任务学习方法
+
 * 多任务Logistic回归
     + [Multi-task logistic regression in brain-computer interfaces](https://github.com/vinay-jayaram/MTlearning)
 * 多任务贝叶斯方法
@@ -135,6 +136,7 @@ mathjax: true
     + [Robust-Multitask-RL](https://github.com/Alfo5123/Robust-Multitask-RL)
 
 ## 凸优化 Convex Optimization
+
 * [EE364a: Convex Optimization I Professor Stephen Boyd, Stanford University](http://web.stanford.edu/class/ee364a/)
 * [EE227BT: Convex Optimization  —  Fall 2013](https://people.eecs.berkeley.edu/~elghaoui/Teaching/EE227A/index.html)
 * [CRAN - Package ADMM](http://cran.stat.ucla.edu/web/packages/ADMM/)
@@ -302,7 +304,25 @@ MLT 主要有两种形式，一种是基于参数的共享，另一种是基于�
 
 ## ESMM模型
 
+- 【2022-5-18】[多任务学习模型ESMM原理与实现](https://mp.weixin.qq.com/s/LpJCrVpTzT50L953J6A7Vg)
 - 【2021-4-1】[多任务学习(MTL)在转化率预估上的应用](https://mp.weixin.qq.com/s/uSP3oKe3eiPplWvbgaZJtQ)
+
+SIGIR’2018 的论文《[Entire Space Multi-Task Model: An Eﬀective Approach for Estimating Post-Click Conversion Rate](https://arxiv.org/abs/1804.07931)》
+- 基于 Multi-Task Learning (MTL) 的思路，提出一种名为ESMM的CVR预估模型，有效解决了真实场景中CVR预估面临的**数据稀疏**以及**样本选择偏差**这两个关键问题。后续还会陆续介绍MMoE，PLE，DBMTL等多任务学习模型。
+- 工业中使用的推荐算法已不只局限在单目标（ctr）任务上，还需要关注后续的转换链路，如是否评论、收藏、加购、购买、观看时长等目标。
+
+`CVR预估`面临两个关键问题：
+1. **样本选择偏差**：Sample Selection Bias (SSB)
+  - 转化是在点击之后才“有可能”发生的动作，传统CVR模型通常以点击数据为训练集，其中点击未转化为**负例**，点击并转化为**正例**。但是训练好的模型实际使用时，则是对整个空间的样本进行预估，而非只对点击样本进行预估。
+  - 即训练数据与实际要预测的数据来自**不同分布**，这个偏差对模型的泛化能力构成了很大挑战，导致模型上线后，线上业务效果往往一般。
+2. **数据稀疏** Data Sparsity (DS)
+  - `CVR预估`任务的使用的训练数据（即点击样本）**远小于** `CTR预估`训练使用的曝光样本。仅使用数量较小的样本进行训练，会导致深度模型拟合困难。
+  - 一些策略可以缓解这两个问题，例如从曝光集中对unclicked样本抽样做负例缓解SSB，对转化样本过采样缓解DS等。但无论哪种方法，都没有从实质上解决上面任一个问题。
+  - 由于 **点击** => **转化**，本身是两个强相关的连续行为，作者希望在模型结构中显示考虑这种“行为链关系”，从而可以在整个空间上进行训练及预测。这涉及到CTR与CVR两个任务，因此使用`多任务学习`（MTL）是一个自然的选择，论文的关键亮点正在于“如何搭建”这个MTL。
+
+首先需要重点区分下，CVR预估任务与CTCVR预估任务。
+- `CVR` = `转化数`/`点击数`。是预测“假设item被点击，那么它被转化”的概率。CVR预估任务，与CTR没有绝对的关系。一个item的ctr高，cvr不一定同样会高，如标题党文章的浏览时长往往较低。这也是不能直接使用全部样本训练CVR模型的原因，因为无法确定那些曝光未点击的样本，假设他们被点击了，是否会被转化。如果直接使用0作为它们的label，会很大程度上误导CVR模型的学习。
+- `CTCVR` = `转换数`/`曝光数`。是预测“item被点击，然后被转化”的概率。
 
 - ESMM：**完整空间多任务模型**(Entire Space Multi-Task Model)，是阿里2018年提出的模型思想，是一个**hard**参数共享的MTL模型。主要为了解决传统CVR建模过程中样本选择偏差(sample selection bias, SSB)和数据稀疏(data sparsity,DS)问题。
 - **样本选择偏差**：用户在广告上的行为属于顺序行为模式impression -> click -> conversion，传统CVR建模训练时是在click的用户集合中选择正负样本，模型最终是对整个impression的用户空间进行CVR预估，由于click用户集合和impression用户集合存在差异（如下图），引起样本选择偏差。
@@ -314,6 +334,15 @@ MLT 主要有两种形式，一种是基于参数的共享，另一种是基于�
   - 用户历史行为属于不定长行为，比如曾经点击过的ID列表，一般我们对这种行为引入网络中的时候，会将不定长进行截断成统一长度（比如：平均长度）的定长行为，方便网络使用。很多用户行为没有达到平均长度，则会在后面统一补0，这会导致用户embedding结果里面包含很多并未去过的节点0的信息。这里我们提出一种聚合-分发的特征处理方式，使得网络的特征embedding层可以处理不定长的特征。
   - 由于单个特征节点的embedding结果是和用户无关的，比如：用户A点击k，用户B也点击了k，最终embedding得到的k结果是唯一的，对A和B两个用户访问的k都是一样的。基于该前提，我们采用聚合-分发的处理思想。将min-batch的所有用户的不定长行为聚合拼接成一维的长矩阵，并记录下各个用户行为的索引，在embedding完成之后，根据索引将各个用户的实际行为进行还原，并降维成固定长度，输入到dense层使用。
 - b. 由于训练正负样本差异比较大，模型引入Focal Loss，使训练过程更加关注数量较少的正样本
+
+### 代码实现
+
+- 【2022-5-18】[多任务学习模型ESMM原理与实现](https://mp.weixin.qq.com/s/LpJCrVpTzT50L953J6A7Vg)
+
+基于EasyRec推荐算法框架，我们实现了ESMM算法，具体实现可移步至github：[EasyRec-ESMM](https://github.com/alibaba/EasyRec/blob/master/easy_rec/python/model/esmm.py)。 [EasyRec](https://github.com/Alibaba/EasyRec)
+
+EasyRec介绍：
+- EasyRec是阿里云计算平台机器学习PAI团队开源的大规模分布式推荐算法框架，EasyRec 正如其名字一样，简单易用，集成了诸多优秀前沿的推荐系统论文思想，并且有在实际工业落地中取得优良效果的特征工程方法，集成训练、评估、部署，与阿里云产品无缝衔接，可以借助 EasyRec 在短时间内搭建起一套前沿的推荐系统。作为阿里云的拳头产品，现已稳定服务于数百个企业客户。
 
 
 ## [Google 多任务学习框架 MMoE](https://www.toutiao.com/i6838966189872382475/?tt_from=mobile_qq&utm_campaign=client_share&timestamp=1595857174&app=news_article&utm_source=mobile_qq&utm_medium=toutiao_android&use_new_style=1&req_id=20200727213933010147084145261AF78B&group_id=6838966189872382475)
