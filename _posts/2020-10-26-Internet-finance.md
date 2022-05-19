@@ -31,6 +31,10 @@ mathjax: true
 
 # 金融
 
+## 招聘
+
+【2022-5-19】[兴业证券](http://www.hotjob.cn/wt/xyzq/web/index/social)
+
 ## 金融体系
 
 【2022-2-11】金融制度宏观研究体系，[220209 宏观研究体系](https://mp.weixin.qq.com/s/YVmC4YinLqt5KOQ-VvrS_g)，更多图解资料打包下载，[阿里云盘](https://www.aliyundrive.com/s/wGnSLCPzTLH)
