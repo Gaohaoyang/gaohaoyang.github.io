@@ -339,13 +339,16 @@ Levenshtein.jaro_winkler('abc', 'aecfaf') # 0.7
 【2022-5-18】[关于神经网络，一个学术界搞错了很多年的问题](https://mp.weixin.qq.com/s/i_tldPMzYDUZwdXDCJTjPw)
 
 人们普遍认为较大的神经网络中包含很多**局部极小值**（local minima），使得算法容易陷入到其中某些点。这种看法持续二三十年，至少数万篇论文中持有这种说法。比如，如著名的Ackley函数 。对于基于梯度的算法，一旦陷入到其中某一个局部极值，就很难跳出来了。
+- ![](https://zhengwen.aminer.cn/LDDRQt9JmGgtf)
 
 2014年，一篇论文《Identifying and attacking the saddle point problem in high-dimensional non-convex optimization》，指出**高维优化问题中根本没有那么多局部极值**。作者依据统计物理，随机矩阵理论和神经网络理论的分析，以及一些经验分析提出高维**非凸**优化问题之所以困难，是因为存在大量的`鞍点`（梯度为零并且Hessian矩阵特征值有正有负）而不是局部极值。
+- ![](https://zhengwen.aminer.cn/B2KCcVJQiRvNk)
 
 `鞍点`（saddle point)如下图（来自wiki）和`局部极小值`
 - 相同点：在该点处的梯度都等于零
 - 不同点：在鞍点附近Hessian矩阵有正的和负的特征值，即是**不定**的，而在局部极值附近的Hessian矩阵是**正定**的。
 鞍点附近，基于梯度的优化算法（几乎目前所有的实际使用的优化算法都是基于梯度的）会遇到较为严重的问题，可能会长时间卡在该点附近。在鞍点数目极大的时候，这个问题会变得非常严重
+- ![](https://zhengwen.aminer.cn/JZpNdRuLbXRMB)
 
 造成神经网络难以优化的一个重要（乃至主要）原因是存在大量鞍点。造成局部极值这种误解的原因在于，人们把低维的直观认识直接推到高维的情况。
 
