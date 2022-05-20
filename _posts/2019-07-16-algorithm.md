@@ -46,6 +46,13 @@ mathjax: true
 	- 重构代码的能力如何？
 	- 会不会测试自己写好的程序？
 
+## 代码实战
+
+【2022-5-20】[wqw547243068/DS_Algorithm](https://github.com/wqw547243068/DS_Algorithm/blob/master/LeetCode%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.ipynb)
+- crack the coding interview： C++ 编写
+- 剑指offer
+
+
 # 数据结构与算法
 
 - 【2020-1-2】[清华大学邓俊辉](https://dsa.cs.tsinghua.edu.cn/~deng/ds/dsacpp/)数据结构,[视频](https://www.bilibili.com/video/av81804191)
@@ -86,6 +93,142 @@ mathjax: true
 - [x] [第二十三节 有序表原理及扩展](https://dairongpeng.github.io/algorithm-note/23)
 - [x] [第二十四节 AC自动机和卡特兰数](https://dairongpeng.github.io/algorithm-note/23)
 
+## 基础结构
+
+C++类来表示节点的结构如下：[参考](http://c.biancheng.net/view/1570.html)
+
+```c
+struct Node{
+   int m_data;//存储数据部分
+   Node* m_next;//存储下一个节点的地址
+};
+// 或者
+struct ListNode
+{
+    double value;
+    ListNode *next;
+};
+// 定义链表：定义一个空的head指针即可
+ListNode *head = nullptr;
+// 创建链表
+head = new ListNode; //分配新结点
+head->value = 12.5; //存储值
+head->next = nullptr; //表示链表的结尾
+
+
+List a;//创建一个链表对象a
+a.push_back(1);//将整数1放入链表a
+
+void push_back(Node*& b, int i)
+{
+    b = new Node;
+    b->m_data = i;
+    b->m_next = nullptr;
+}
+
+Node* a = nullptr;
+push_back(a, 1);
+push_back(a, 2); // 错误，指针没有移动
+// 改正
+push_back(a, 1);
+push_back(a->m_next, 2);
+push_back(a->m_next->m_next, 3);
+push_back(a->m_next->m_next->m_next, 4);
+// 改进，增加尾指针
+Node* a = nullptr; 
+Node* tail = nullptr;
+push_back(a, 1); 
+tail = a;
+push_back(tail->m_next, 2); 
+tail = tail->m_next;
+push_back(tail->m_next, 3); 
+tail = tail->m_next;
+
+```
+
+C++ 方式
+- 给它提供一个或多个构造函数，那将会带来很大的方便，因为这样将使得结点在创建时即可初始化。前文还曾经提到过，构造函数可以像常规函数一样，使用默认形参来定义，而为结点的后继指针提供一个默认的 nullptr 形参是很常见的。
+
+```c++
+struct ListNode
+{
+    double value;
+    ListNode *next;
+    //构造函数
+    ListNode(double valuel, ListNode *nextl = nullptr)
+    {
+        value = value1;
+        next = next1;
+    }
+};
+// 创建链表
+ListNode *secondPtr = new ListNode(13.5);
+ListNode *head = new ListNode(12.5, secondPtr);
+// 循环创建链表
+double number;
+while (numberFile >> number)
+{
+    //创建一个结点以保存该数字
+    numberList = new ListNode(number, numberList);
+}
+// 遍历链表
+ListNode *ptr = numberList;
+while (ptr != nullptr)
+{
+    cout << ptr->value << " "; //处理结点（显示结点内容）
+    ptr = ptr->next; //移动到下一个结点
+}
+```
+
+完整示例
+
+```c++
+// This program illustrates the building
+// and traversal of a linked list.
+#include <iostream>
+#include <fstream>
+using namespace std;
+struct ListNode
+{
+    double value;
+    ListNode *next;
+    // Constructor
+    ListNode(double value1, ListNode *next1 = nullptr)
+    {
+        value = value1; next = next1;
+    }
+};
+
+int main()
+{
+    double number; // Used to read the file
+    ListNode *numberList = nullptr; // List of numbers
+    // Open the file
+    ifstream numberFile("numberFile•dat");
+    if (!numberFile)
+    {
+        cout << "Error in opening the file of numbers.";
+        exit (1);
+    }
+    //Read the file into a linked list
+    cout << "The contents of the file are: " << endl;
+    while (numberFile >> number)
+    {
+        cout << number << " ";
+        // Create a node to hold this number
+        numberList = new ListNode(number, numberList);
+    }
+    // Traverse the list while printing
+    cout << endl << "The contents of the list are: " << endl;
+    ListNode *ptr = numberList;
+    while (ptr != nullptr)
+    {
+        cout << ptr->value << " "; // Process node
+        ptr = ptr->next; // Move to next node
+    }
+    return 0;
+}
+```
 
 
 ## 排序算法
