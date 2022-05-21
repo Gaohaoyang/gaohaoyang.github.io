@@ -22,21 +22,25 @@ mathjax: true
 
 # 对比学习
 
-很多自然语言处理任务来说，学习到一个良好的句向量表示是非常重要的。例如在**向量检索**，**文本语义匹配**等任务中，模型将输入的两个句子进行编码得到句向量，然后计算句向量之间的相似度，从而判断两个句子是否匹配。
+很多自然语言处理任务都需要学习到一个良好的句向量表示。例如**向量检索**，**文本语义匹配**等任务中，模型将输入的两个句子进行编码得到句向量，然后计算句向量之间的相似度，从而判断两个句子是否匹配。
 
 ## 句子相似度
 
+[SimCSE：简单有效的句向量对比学习方法](https://mp.weixin.qq.com/s/7glAjhvBfiWG3bWP-uI5Qg), EMNLP2021的一篇论文SimCSE。这是一种简单有效的NLP对比学习方法，通过Dropout的方式进行正样本增强，模型能够学习到良好的句向量表示。按照惯例，我们也对该模型在STS-B数据集上进行了实验复现。
+- [论文链接](https://arxiv.org/abs/2104.08821)
+- [实验复现代码](https://github.com/yangjianxin1/SimCSE)
+
 ### BERT改造成句向量
 
-最直接的做法：将两个句子输入到BERT模型中，使用\[CLS]对应的输出或者整个句子序列的输出的平均向量作为句向量，然后再计算两个句向量的相似度。
-- 但是由于BERT模型的MLM与NSP这两个预训练任务的**局限性**，模型无法很好地学习到句子表征能力。
+最直接的做法：将两个句子输入到BERT模型中，使用\[CLS]对应的输出或者整个句子序列的输出的**平均向量**作为句向量，然后再计算两个句向量的相似度。
+- 但是由于BERT模型的`MLM`与`NSP`这两个预训练任务的**局限性**，模型无法很好地学习到句子表征能力。
 - ![](https://weixin.aisoutu.com/cunchu7/2022-04-05/4_16491763759351976.png)
 
-为什么经过MLM与NSP任务训练之后，BERT无法学习到良好的句向量表示呢？我们简单回顾一下MLM与NSP任务的做法。
-- MLM任务是遮住某个**单词**，让模型去预测遮住的单词:
+为什么经过`MLM`与`NSP`任务训练之后，BERT无法学习到良好的句向量表示呢？回顾一下MLM与NSP任务的做法。
+- `MLM`任务是遮住某个**单词**，让模型去预测遮住的单词:
   - 在这个训练中，模型并没有显式地对\[CLS]向量进行训练，没有告诉模型\[CLS]这个向量就是用来编码句子的语义信息的。在MLM任务中\[CLS]学习到的并不是句子的语义表征。
-- NSP任务是给定两个句子，让模型判断两个句子是否为**上下文关系**，使用\[CLS]的输出来进行二分类。
-  - 在这个任务中，\[CLS]是用来编码两个句子之间的关系的，而不是描述某个句子的语义信息。
+- `NSP`任务是给定两个句子，让模型判断两个句子是否为**上下文关系**，使用\[CLS]的输出来进行**二分类**。
+  - 在这个任务中，\[CLS]是用来编码两个句子之间的**关系**的，而不是描述某个句子的语义信息。
 
 综上所述，未经过fintune的BERT模型，必然无法得到良好的句子的语义表征。
 
@@ -46,10 +50,10 @@ mathjax: true
 - ![](https://weixin.aisoutu.com/cunchu7/2022-04-05/4_16491702735732915.png)
 - BERT的句向量的坍缩和句子中的**高频词**有关。当使用整个句子序列的输出的**平均向量**作为句向量时，句子中的**高频词将会主导句向量**，使得任意两个句向量之间的相似度都非常高。为了验证该想法，美团的ConSERT论文对此也进行了实验。
 - ![](https://weixin.aisoutu.com/cunchu7/2022-04-05/4_16491711685264032.png)
+- 去除若干高频词后，BERT模型在STS数据集上的Spearman得分。得分越高，说明模型在数据集上的表现越好。可以看到，当计算句向量时，如果去除若干个top-k的高频词，Spearman得分显著提高，句向量的坍塌现象得到了一定程度的缓解。
+结论：BERT的MLM与NSP预训练任务难以胜任下游的**语义匹配**任务。
 
-结论：BERT的MLM与NSP预训练任务难以胜任下游的语义匹配任务。
-
-为了解决该问题，可以使用对比学习的方法对模型进行预训练，从而使模型能够学习到更好的句子语义表示，并且更好地应用到下游任务中。
+为了解决该问题，可以使用**对比学习**的方法对模型进行预训练，从而使模型能够学习到更好的句子语义表示，并且更好地应用到下游任务中。
 
 
 ## 基本概念
@@ -935,11 +939,11 @@ InfoNCE 是在\[6\]CPC中提出的。CPC(对比预测编码) 就是一种通过�
 ## SimCSE
 
 【2022-4-7】[SimCSE:简单有效的句向量对比学习方法](https://www.aisoutu.com/a/2363026)
-- EMNLP2021的一篇[论文](https://arxiv.org/abs/2104.08821)：SimCSE。一种简单有效的NLP对比学习方法，通过Dropout的方式进行正样本增强，模型能够学习到良好的句向量表示。
+- EMNLP2021的一篇[论文](https://arxiv.org/abs/2104.08821)：SimCSE。一种简单有效的NLP**对比学习**方法，通过Dropout的方式进行正样本增强，模型能够学习到良好的句向量表示。
 - [实验复现代码](https://github.com/yangjianxin1/SimCSE)
 - 中文数据集的复现结果可以参考[苏剑林的复现实验](https://kexue.fm/archives/8348)
 
-对比学习起源于计算机视觉任务，它的核心思想是，拉近每个样本与正样本之间的距离，拉远其与负样本之间的距离。
+对比学习起源于计算机视觉任务，它的核心思想是，**拉近**每个样本与**正**样本之间的距离，拉**远**其与**负**样本之间的距离。
 
 如何为每个样本构造**正样本与负样本**是对比学习中的关键问题。
 - 负样本的构造往往比较容易，随机采样或者把同一个batch里面的其他样本作为负样本即可，难点在于如何构造正样本。
@@ -956,12 +960,58 @@ Dropout是一种用来防止神经网络过拟合的方法，在训练的时候�
 - Dropout可以视为一种数据增强的手段，通过dropout mask的方式，模型在编码同一个句子的时候，引入了数据噪声，从而为同一个句子生成不同的句向量，并且不影响其语义信息。其中dropout rate的大小可以视为引入的噪声的强度。
 - 为了验证模型dropout rate对无监督SimCSE的影响，作者在STS-B数据集上进行了消融实验，其中训练数据是作者从维基百科中随机爬取的十万个句子。
 
+损失函数计算方法
+
+```python
+def simcse_unsup_loss(y_pred, device, temp=0.05):
+    """无监督的损失函数
+    y_pred (tensor): bert的输出, [batch_size * 2, dim]
+    """
+    # 得到y_pred对应的label, [1, 0, 3, 2, ..., batch_size-1, batch_size-2]
+    y_true = torch.arange(y_pred.shape[0], device=device)
+    y_true = (y_true - y_true % 2 * 2) + 1
+    # batch内两两计算相似度, 得到相似度矩阵(对角矩阵)
+    sim = F.cosine_similarity(y_pred.unsqueeze(1), y_pred.unsqueeze(0), dim=-1)
+    # 将相似度矩阵对角线置为很小的值, 消除自身的影响
+    sim = sim - torch.eye(y_pred.shape[0], device=device) * 1e12
+    # 相似度矩阵除以温度系数
+    sim = sim / temp
+    # 计算相似度矩阵与y_true的交叉熵损失
+    # 计算交叉熵，每个case都会计算与其他case的相似度得分，得到一个得分向量，目的是使得该得分向量中正样本的得分最高，负样本的得分最低
+    loss = F.cross_entropy(sim, y_true)
+    return torch.mean(loss)
+```
+
+
 ### 有监督SimCSE
 
 作者还尝试了使用各种人工标注的数据集对模型进行有监督训练，包括QQP、Flickr30k、ParaNMT、NLI数据集。
 - 与无监督SimCSE一样，作者利用数据集中人工标注的正样本对，使用InfoNCE loss对模型进行训练，可以看到使用SNLI+MNLI数据集训练的模型效果最好，并且其指标也比无监督SimCSE提高了2.4个点。
 
 对于无监督SimCSE与有监督SimCSE，论文的实验结果如下表，可以看到，在STS任务中，无论是无监督还是有监督的训练方法，都比之前的方法有了较大幅度的提高，这证明了论文方法的有效性。
+
+损失函数计算方法
+
+```python
+def simcse_sup_loss(y_pred, device, temp=0.05):
+    """
+    有监督损失函数
+    y_pred (tensor): bert的输出, [batch_size * 3, dim]
+    """
+    similarities = F.cosine_similarity(y_pred.unsqueeze(0), y_pred.unsqueeze(1), dim=2)
+    row = torch.arange(0, y_pred.shape[0], 3)
+    col = torch.arange(0, y_pred.shape[0])
+    col = col[col % 3 != 0]
+
+    similarities = similarities[row, :]
+    similarities = similarities[:, col]
+    similarities = similarities / temp
+
+    y_true = torch.arange(0, len(col), 2, device=device)
+    loss = F.cross_entropy(similarities, y_true)
+    return loss
+```
+
 
 ## 1. 概述
  
