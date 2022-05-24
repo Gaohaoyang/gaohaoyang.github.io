@@ -15,6 +15,14 @@ mathjax: true
 
 # 总结
 
+- 【2022-5-24】[脉脉帖子](https://maimai.cn/web/gossip_detail/30456623): 近期面试了100多人，大部分人能力都比较差。
+  - 凸包算法，经提示能写出来的2个。
+  - 二叉树的 morris 遍历，能写出来的5个。
+  - 孤岛问题，10来个人。
+  - 接雨水，能想到双指针法的10个不到，动规或单调栈的10来个，哪怕最起码暴力解也不到一半人。
+  - 最简单的二分，依然有30％以上做不出来。
+  - 是我收到简历的质量太差了吗？看脉脉，几乎人均秒 medium , hard 也不是什么难事；
+  - 有趣的是，我向大家透露了社招真实环境里这些题目的能写出来的比例，这可比 lc 上的 ac 率真实多了，被一顿狂喷。那些喷我的人，他们下次当面试官时，照样去 Ic 上找几道 medium 甚至 hard ，稍微改改考面试者。
 - 【2022-2-28】[labuladong 的算法小抄](https://mp.weixin.qq.com/s/yN4cHQRsFa5SWlacopHXYQ)，[fucking-algorithm](https://github.com/labuladong/fucking-algorithm)，[GitHub Pages](https://labuladong.github.io/algo/)，总共 60 多篇原创文章，都是基于 LeetCode 的题目，涵盖了所有题型和技巧，而且一定要做到举一反三，通俗易懂，绝不是简单的代码堆砌，后面有目录。刷题刷题，刷的是题，培养的是思维，本仓库的目的就是传递这种算法思维。
 - 【2021-11-7】[The Algorithms](https://the-algorithms.com/#aboutUs)，[项目地址](https://github.com/TheAlgorithms), 分别提供了用 Python、Java、C、C++ 等数十种编程语言实现的算法，每种语言都有自己的 GitHub 算法代码库。如下领域的算法：
   - 排序（Sorts）算法
