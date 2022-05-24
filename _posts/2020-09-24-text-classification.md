@@ -439,6 +439,8 @@ fasttext在进行文本分类时，huffmax树叶子节点处是每一个类别�
 
 #### C++版本
 
+编译成二进制文件，当做命令行使用
+
 ```sh
 # 数据准备
 # 无监督语料——wiki百科
@@ -561,6 +563,51 @@ $ ./fasttext analogies result/fil9.bin
 # 带概率的结果
 ./fasttext predict-prob model.bin test.txt k
 ```
+
+C++代码调用
+
+```c++
+#include <iostream>  // cin, cout, endl, getline
+#include <sstream>   // istringstream
+#include <string>   // string
+#include <vector>   // vector
+#include <utility>  // pair
+
+#include "fasttext.h"  // fasttext::FastText
+
+using namespace std;
+
+int main(int argc, char** argv) {
+    if (argc < 2){
+        cout << "<model>" << endl;
+        return 0;
+    }
+    // 新建一个模型对象
+    fasttext::FastText* model = new fasttext::FastText();
+    // 从模型文件中加载模型数据
+    model->loadModel(argv[1]);
+
+    string line;
+    std::vector< std::pair<float, std::string> > tags;
+
+    while (getline(cin, line)) {
+        // 从标准输入中读入一行（假设已经分好词）
+        istringstream iss(line);
+        tags.clear();
+        // 预测Top5个标签: 从iss中读入一行, 预测5个Top概率的标签, 输出到tags中,概率阈值为0.5
+        model->predictLine(iss, tags, 5, 0.5);
+        // 输出到标准输出
+        for (auto&& tag: tags) {
+            cout << tag.second << ":" << tag.first<< " ";
+        }
+        cout << endl;
+    }
+
+    delete model;
+    return 0;
+}
+```
+
 
 #### Python版本
 
