@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "深度学习框架Tensorflow学习笔记"
+title:  "Tensorflow学习笔记"
 date:   2020-08-31 17:25:00
 categories: 编程语言
 tags: Tensorflow Python 深度学习 Pytorch TensorRT 推理加速 onnx
@@ -25,7 +25,6 @@ mathjax: true
 2019 年 4 月，Jeff Hale 发布了第二份调查结果。这次，他调研了几个框架在过去 6 个月（此次调研与上次调研之间的时间间隔）里的增长情况。结果发现，TensorFlow 仍然是当时需求量最大、增长最快的框架，但 PyTorch 也不容小觑，在过去的六个月增速超过了原来的第二名 Keras。
 - ![](https://p6-tt.byteimg.com/origin/pgc-image/8320537b60dc4ccca8f3c4b85a38328b?from=pc)
 - 2020：PyTorch 顶会独领风骚，职场优势追赶 TensorFlow
-
 
 ## Tensorflow v.s. Pytorch
 
