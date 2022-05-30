@@ -180,18 +180,50 @@ mathjax: true
 - 链式存储结构，用一组任意的存储单元来存储数据元素，不要求物理存储单元的连续性，由一系列结点组成，每个结点除了要存储数据外，还需存储指向后继结点或前驱结点的存储地址。
 - ![](https://images2015.cnblogs.com/blog/1024555/201610/1024555-20161022155916467-1811275833.png)
 
+
 ### 栈
 
 顺序栈（Sequence Stack）
 - 基本思想：后进先出（先进后出）即栈中元素被处理时，按后进先出的顺序进行，栈又叫后进先出表（LIFO）。
 
+（1）数组实现栈
+- C：[stack_usingarray.c](https://github.com/LeechanX/Data-Structures-and-Algorithms-in-C/blob/master/Stack/stack_usingarray.c)
+
 ```c++
+#include <stdio.h>
+#include <stdlib.h>
+// 完整版
+struct Stack{
+	int capability;
+	int sp;
+	int *data;
+};
+typedef struct Stack *slink;
+
+// 精简版
 typedef struct {
-    ElemType *elem;
-    int top;
-    int size;
+    ElemType *elem; // 元素类型
+    int top; // 栈顶元素位置
+    int size; // 栈空间
     int increment;
 } SqSrack;
+```
+
+（2）链表实现栈
+- C：[stack_usinglist.c](https://github.com/LeechanX/Data-Structures-and-Algorithms-in-C/blob/master/Stack/stack_usinglist.c)
+
+```c++
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Stack{
+	int size;
+	struct List{ // 链表节点
+		int item;
+		struct List *next;
+	} *head; // 定义链表
+};
+typedef struct Stack *slink;
 ```
 
 ### 队列
@@ -211,7 +243,20 @@ typedef struct {
 
 队列数据结构
 
+（1）使用数组实现队列
+
 ```c++
+#include <stdio.h>
+#include <stdlib.h>
+// 完整格式
+struct Queue{
+	int capibility; // 容量
+	int *data; // 数组内容指针
+	int head; // 头元素位置
+	int rear; // 尾元素位置
+};
+typedef struct Queue *qlink;
+// 精简格式
 typedef struct {
     ElemType * elem;
     int front;
@@ -219,6 +264,32 @@ typedef struct {
     int maxSize;
 }SqQueue;
 ```
+
+完整代码：
+- C：[queue_usingarray.c](https://github.com/LeechanX/Data-Structures-and-Algorithms-in-C/blob/master/Queue/queue_usingarray.c)
+
+（2）使用链表list实现队列
+
+```c++
+#include <stdio.h>
+#include <stdlib.h>
+// 定义链表
+struct List{
+	int item;
+	struct List *next;
+};
+// 定义队列
+struct Queue{
+	int size; // 队列大小
+	struct List *head; // 头指针
+	struct List *rear; // 尾指针
+};
+typedef struct Queue *qlink; // 定义队列
+```
+
+完整代码
+- C：[queue_usinglist.c](https://github.com/LeechanX/Data-Structures-and-Algorithms-in-C/blob/master/Queue/queue_usinglist.c)
+
 
 循环队列
 - ![](https://pic2.zhimg.com/80/v2-fdd496a89d7dba22ed9f5ad7c7fda4fd_1440w.jpg)
@@ -271,12 +342,26 @@ typedef struct {
 代码
 
 ```c++
-// 链表结构
+// 定义链表节点
+struct LinkNode
+{
+	int data; // 数据域
+	struct LinkNode *next; // 指针域
+	//struct LinkNode *pre; // 双链表
+};
+// 定义链表，一个指向节点的指针即可
+typedef struct LinkNode *llink; 
+
+// 精简版：链表结构
 typedef struct LNode {
     ElemType data;
     struct LNode *next;
 } LNode, *LinkList; 
 ```
+
+完整函数实现：
+- C：[list.h](https://github.com/LeechanX/Data-Structures-and-Algorithms-in-C/blob/master/List/list.h)
+- C++ 
 
 
 C++类来表示节点的结构如下：[参考](http://c.biancheng.net/view/1570.html)
@@ -789,8 +874,7 @@ int main(){
 ### 基本概念
 
 [图](https://img-blog.csdn.net/20140424155921046)
-
-![](https://img-blog.csdn.net/20140424155921046)
+- ![](https://img-blog.csdn.net/20140424155921046)
 
 - 1、结点的度
   - 结点的度是子结点的个数。例如：结点1有三个字结点2，3，4，所以结点1的度为3。
@@ -811,6 +895,21 @@ int main(){
 - 1、树可以有多个子结点，二叉树最多只能两个结点。
 - 2、树中的子结点是无序的，二叉树是分左子结点和右子结点。
 - 3、二叉树不是特殊树，而是独立的数据结构。
+
+### 代码定义
+
+C 完整代码
+- C：[binarytree.h](https://github.com/LeechanX/Data-Structures-and-Algorithms-in-C/blob/master/Tree/BinaryTree/binarytree.h)
+
+```c++
+struct BTree{
+	int vertex;
+	struct BTree *left;
+	struct BTree *right;
+};
+typedef struct BTree *btlink;
+```
+
 
 ### 二叉树
 
