@@ -1819,6 +1819,91 @@ public void reverse(TreeNode node1, TreeNode node2) {
 
 以此实现后序遍历结果。由于相比较其他两种遍历，后序遍历多了逆序访问的过程，其时间复杂度与链表长度成正比。因此后序遍历的时间复杂度仍然为O(n)。
 
+# 编程实践
+
+
+## 代码示例
+
+
+### C++ 示例
+
+【2022-6-1】[LeetCode C++代码](https://github.com/kamyu104/LeetCode-Solutions/tree/master/C%2B%2B)
+
+两数和的实现代码：[add-two-numbers.cpp](https://github.com/kamyu104/LeetCode-Solutions/blob/master/C%2B%2B/add-two-numbers.cpp)
+- (1) 定义数据结构
+- (2) 定义solution类，写public方法
+
+```c++
+// Time:  O(n) 时间复杂度
+// Space: O(1) 空间复杂度
+
+// Definition for singly-linked list.
+// 定义数据结构——单链表
+struct ListNode {
+    int val; // 元素取值
+    ListNode *next;	 // 指节点针
+	// 构造函数，同类
+    ListNode(int x) : val(x), next(NULL) {}
+};
+// 定义求解类
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode dummy{0}; // 初始化只有一个元素0的单链表
+        auto curr = &dummy;
+
+        auto carry = 0;
+        while (l1 || l2 || carry) {
+            auto a = l1? l1->val : 0, b = l2? l2->val : 0;
+            auto val = carry + a + b;
+            curr->next = new ListNode(val % 10);
+            carry = val / 10;
+			// 链表往下遍历一位
+            l1 = l1 ? l1->next : nullptr;
+            l2 = l2 ? l2->next : nullptr;
+            curr = curr->next;
+        }
+
+        return dummy.next;
+    }
+};
+```
+
+二叉树复制
+- [add-one-row-to-tree.cpp](https://github.com/kamyu104/LeetCode-Solutions/blob/master/C%2B%2B/add-one-row-to-tree.cpp)
+
+```c++
+// Time:  O(n)
+// Space: O(h)
+
+// Definition for a binary tree node.
+// 定义二叉树结构
+struct TreeNode {
+    int val; // data取值
+    TreeNode *left; // 左孩子
+    TreeNode *right; // 右孩子
+	// 构造函数
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+class Solution {
+public:
+    TreeNode* addOneRow(TreeNode* root, int v, int d) {
+        if (d == 0 || d == 1) {
+            auto node = new TreeNode(v);
+            (d == 1 ? node->left : node->right) = root;
+            return node;
+        }
+        if (root && d >= 2) {
+            root->left  = addOneRow(root->left,  v, d > 2 ? d - 1 : 1);
+            root->right = addOneRow(root->right, v, d > 2 ? d - 1 : 0);
+        }
+        return root;
+    }
+};
+```
+
+
 ## 常见问题
 
 ### 最长公共子串
