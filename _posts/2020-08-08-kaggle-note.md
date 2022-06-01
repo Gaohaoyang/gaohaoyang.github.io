@@ -132,6 +132,8 @@ NLU任务分成**意图识别**+**槽位抽取**两个子任务，实现上有�
 | NeZha |	相对位置编码；全词掩码；混合精度训练；LAMB Optimizer | 采用 |
 | MacBERT |	MLM作为校正 | 采用 |
 
+三个bert模型集成（macbert近义词替换+roberta讯飞+nezha华为哪吒），投票或取平均，训练7-8h，几千数据推理要30min；核心点：预训练+数据增强+半监督训练http://10.200.24.101:8090/notebooks/work/nlu_data/newhouse/%E6%96%B0%E6%88%BF%E9%A9%BB%E5%9C%BA%E5%AE%A2%E6%9C%8D-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90.ipynb
+
 ### 自监督
 
 自监督预训练：分别用RoBERTa、NeZha和MacBERT执行MLM的预训练任务
