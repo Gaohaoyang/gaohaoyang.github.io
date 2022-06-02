@@ -1336,7 +1336,7 @@ TextGCN：一种文本分类的图神经网络方法。第一次将整个语料�
 
 
 
-# 情感分析
+## 情感分析
 
 - 【2020-11-23】大连理工工具包cncenti，[github地址](https://github.com/thunderhit/cnsenti)
 
@@ -1371,7 +1371,53 @@ print('情感计算：', result3)
 
 ```
 
+【2022-6-2】实际案例，调用情绪识别接口
 
+```python
+import requests
+import json
+
+url = f'http://test.speech.analysis.ke.com/inspections/capability'
+## headers中添加上content-type这个参数，指定为json格式
+headers = {'Content-Type': 'application/json'}
+text = "测！！"
+data = {"biz_id":"utopia","app_id":"utopia","create_time":"2021-07-29 15:51:06",
+        "sentence":[
+            {"sentence_id":1,"text":"谢谢"},
+            {"sentence_id":2,"text":"你好"},
+            {"sentence_id":3,"text":"不好"},
+            {"sentence_id":4,"text":"怎么搞的"},
+            {"sentence_id":5,"text":"这也太慢了吧"},
+            {"sentence_id":6,"text":"妈的，到底管不管"},
+            #{"sentence_id"2,"text":f"{text}"}
+        ],
+        "capability_id":"new_zhuangxiu_emotion_capability",
+        "audio_key":"","extend":{"context":[]}}
+## post的时候，将data字典形式的参数用json包转换成json格式。 
+response = requests.post(url=url,data=json.dumps(data),headers=headers)
+print(data)
+# 接口说明：http://weapons.ke.com/project/6424/interface/api/632026
+# 表扬＞交流＞中性＞抱怨＞不满＞愤怒
+# pos_appr 应该是 positive_appraisal   
+# pos_comm 应该是 positive_communication  
+# neu_neut 应该是neutral_neutral    
+# neg_comp 应该是 negative_complaint    
+# neg_dis 应该是negative_disappointed      
+# neg_angr 应该是negative_angry
+type_info = {"pos_appr":"（正向）表扬型",
+ "pos_comm":"（正向）交流型",
+ "neu_neut":"中性型",
+ "neg_comp":"（负向）抱怨型",
+  "neg_dis":"（负向）不满型",
+  "neg_angr":"（负向）愤怒型"
+}
+res = eval(response.text)
+print('-'*20)
+print(res.keys())
+print(res)
+print('-'*20)
+print('\n'.join(['%s\t%s\t%s\t%s'%(i['result'][0]['text'],i['result'][0]['type'], type_info.get(i['result'][0]['type'],'未知'), i['result'][0]['confidence']) for i in res['sentence']]))
+```
 
 
 # 结束
