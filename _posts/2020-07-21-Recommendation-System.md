@@ -3,7 +3,7 @@ layout: post
 title:  "推荐系统-Recommendation-System"
 date:   2020-07-21 21:05:00
 categories: 推荐系统
-tags: 推荐系统 CTR FM Wide&Deep 评分卡
+tags: 推荐系统 CTR FM Wide&Deep 评分卡 kaggle
 excerpt: 推荐系统常用技术方案
 author: 鹤啸九天
 mathjax: true
