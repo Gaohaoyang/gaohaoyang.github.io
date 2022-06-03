@@ -3,7 +3,7 @@ layout: post
 title:  "自由职业之路-How to work for yourself"
 date:   2020-01-13 10:29:00
 categories: 读书笔记
-tags: 工作 996 斜杠青年 咸鱼 创业 自由职业 财务自由 公司注册
+tags: 工作 996 斜杠青年 咸鱼 创业 自由职业 财务自由 公司注册 远程 外包
 excerpt: “只上班、不工作”还是“只工作、不上班”？
 author: 鹤啸九天
 mathjax: true
@@ -14,6 +14,22 @@ mathjax: true
 
 # 资料
 
+- 【2022-5-20】军哥手记（视频号），前饿了么总监
+  - （1）**ABZ计划**：
+    - A是主业，即常规上班
+    - B是副业，空闲时间发展下，积累长期收入，遇到紧急情况可以缓解经济压力，必要时，可以升级为A
+    - Z是个人资产，资金收益，炒股、理财、房产等。这是退路，如果有一天A/B计划都失败，Z计划可以维持现有生活水平，提供从头再来的机会
+    - 刚开始以A为基础，努力发展B，有一定资金实力后，拓展Z的增值能力；B最好与A相关，从公司的业务模式中发现机遇
+  - （2）**财务计划**：从投资角度，你的选择会不一样。一般分四种
+    - 进攻型资产，如股票、期货，收益大，风险也大
+    - 助攻型资产，如债券、基金，收益小，风险也小
+    - 防守型资产，如保险，用于基本保障，很少增值
+    - 流动型资产，余额宝等
+    - 四种资产如何配置？股票投资有个80法则：80岁 - 当前年龄 = 现在应该投入的资产比例
+  - （3）**健康计划**：35岁后，还像年轻时那样996，拼命工作，无异于自杀；30岁后，几件事情要做：
+    - 锻炼身体
+    - 买健康保险
+    - 定期体检
 - 【2021-10-11】猎头组织的各公司工作强度汇总，[协同文档](https://docs.qq.com/sheet/DVmhnRG15TG1Tb2Js)，[github备份](https://github.com/ZhangNanBei/WokerLifeMatters)，覆盖互联网、金融、地产等行业
 - 2019年，[996.ICU](https://996.icu/#/zh_CN)异军突起，短时间内冲上了github第一名，可见国内上班族对工作强度的怨念有多深
 - 难道只能忍受吗，能不能做些改变？
@@ -298,13 +314,36 @@ mathjax: true
 
 ### 红娘
 
+#### 陌上花开
+
 【2022-1-1】[月亮：放弃百万年薪，我全职当红娘啦！](https://mp.weixin.qq.com/s?__biz=MzU3MzQ3NTkzNw==&mid=2247535641&idx=1&sn=966ced188ca785454961d8d9db4f1085&chksm=fcc31117cbb4980135faa49bdd58d9465d38125b63c7b045b48adb0f139d1c47c026755d6b93&mpshare=1&scene=23&srcid=0101dApvn5XByNxUYRnHybR2&sharer_sharetime=1641051005800&sharer_shareid=b8d409494a5439418f4a89712efcd92a#rd)
 - 92年清华经管学院文科生（云南第5-6名）、北大经管硕士，从投行辞职，专职做“陌上花开”；2015年1月1日，也就是我和乐乐读研时创立陌上（公众号）的日子；2021年8月，我们把服务从公众号迁移到了小程序，9月运行一个月数据反馈不错，但也有很多bug需要改进。但我开始起飞的本职投资工作变得很忙，很难兼顾被我们戏称为“毛坯房”的小程序。
 - 大学四年我没有谈恋爱，一门心思学习或是实习。大四努力保研到北大光华，熟背华尔街100问，参加了无数的模拟面试，终于拿到了香港投行的实习机会。对一个伟大的公司如何从0到1充满好奇，于是我作为5号员工加入了他的团队，成为了CEO助理；香港投行实习生活，每天衣着光鲜亮丽，出入高大上的办公室，拿着丰厚的报酬。一份材料我检查了上百遍希望不要有一丁点格式不一致，分析师做好的财务模型我翻来覆学习想把快捷键烂熟于心。我很累很吃力，带我的分析师说看得出我不适合这里。我很委屈，觉得又一次没能“证明”自己。真正的投资人应该具备的能力：**整合一切资源形成更接近真相的行业洞察，从而建立自己的投资框架**。大半年的时间里，几乎跑遍了业内大大小小各类公司，既见过大公司领军人物的深刻洞见，也蹲过工厂调研听了不少黑幕。但我内心一直有一个声音，作为投资人审视这些公司让我无法满足，我想加入他们，从0到1做一件事，做一件能给世界创造更多价值的事。
 - 认清自我与世界的关系，寻找值得全情投入的领域，在爱与被爱中使心智成熟；
 - 职业规划：“做有趣的人，做有意义的事”。
 
+#### 二狗
 
+【2022-5-20】前腾讯员工李二狗，90后，创立单身交友平台，[90后腾讯员工辞职创业，帮10万人脱单，月入百万](https://www.ixigua.com/7099063791085847043)。
+- 起因：参加了单身交友活动，让他发征婚帖到腾讯bbs里。2018年，发帖数第一、阅读量第一；每天整理资料，忙到三四点，严重影响工作，要么放弃发帖，要么辞职创业？
+- 创业：婚恋市场需求很大，有一大堆平台，如世纪佳缘、百合网等，鱼龙混杂，相亲效率低，线下服务不透明，隐藏了各类海王海后，去年爆出的“杀猪盘”让人触目惊心；
+  - 对李二狗来说，种子用户是现成的，腾讯员工，要服务好这群用户，必须确保人员属于同一层次
+  - 2019年6月，二狗单身青年自救平台成立，李二狗开启了新一轮创业，他给平台设立了较高的门槛，身份证、学位证和工作证，且仅限大学以上学历才能通过，否则只能浏览，不能聊天，通过认证后，还需填写详细自我介绍，上传真实照片，这样交流时，大家就得对自己言论负责，也对别人的时间负责；对发恶意言论的人，平台会严厉处罚，对于心怀不轨的人，一旦确认，平台会群发信息，曝光给私聊过的所有用户，净化平台环境；
+  - 商业模式：虚拟货币，狗粮，一次好友申请需要100狗粮（对应20元），如果被拒绝，狗粮退回，即没兴趣不收钱；
+  - 创立半年，二狗单身青年用户数突破30w，没打一分钱广告，全靠口碑传播
+  - 2021年初，用户数达到300w，仅凭买狗粮，月营收超过100w
+  - 2022年初，用户突破400w，成功帮助至少10w人脱单；
+  - 2021年，李二狗开始提供线下服务，满足工作忙没时间交友的人群，13999元，4个月约见4个人，并立下这行独有的规矩，只要服务不满意，剩余次数马上返回，运行一年，脱单率达到37%，0纠纷，0投诉
+  - 融资故事：天使轮后，坚持不融资，拒绝了几十家投资机构，包括头部大厂，如果放开赚钱，平台一年营收2-3亿，但李二狗认为平台更重要的是为用户提供更多的价值，让用户为这些价值付费
+
+<iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/7099063791085847043?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
+
+## 废品回收
+
+【2022-5-26】河南郑州，[95后姑娘做废品回收，年入百万](https://www.ixigua.com/7101528801414270238?wid_try=1)
+- 我不要的衣服都是打包放垃圾桶旁边，从不丢进“旧衣服回收箱”，因为那些箱子打着捐赠的旗号，却全部拿去卖掉;
+- 小区里回收旧衣服的熊猫箱子，说的是寄给贫困地区了。说捐给贫困地区、有的好心人还洗好叠好放进去、结果晚上一个大货车过来拉就是用被单包着的, 被他们免费收走了;
+- 这些一般都卖给大的分拣中心，然后通过外贸出口，主要是非洲，只有夏季衣服能赚钱，其余的衣服都是不赚钱的，而且自己没有定价权，很容易被压价，一般人真干不了
 
 ## 离财务自由更近一步
 
@@ -426,6 +465,109 @@ mathjax: true
 <iframe src="//player.bilibili.com/player.html?aid=841695904&bvid=BV1854y1i7jL&cid=222037428&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 # 自由职业
+
+
+## 远程工作
+
+【2022-6-1】[2022年最新程序员接单平台汇总](https://www.toutiao.com/article/7103869535362662924/)
+
+### 接单须知
+
+- 1、**判断项目是否靠谱**
+  - ① 和互联网公司合作，比传统公司沟通阻力小很多，反工，扯皮，对需求的隐形成本低很多；
+  - ② 有需求文档的项目，成功率翻倍的高，连自己需求都说不清的尽量别接；哪些功能点要实现事前要说好
+  - ③ **非法**的碰都别碰，涉及到**爬虫**，**逆向**，**棋牌游戏**，**区块链**的多留几个心眼，灰色地带的打听清楚；为了几万块钱吃国家饭不划算
+- 2、如何**保护自己的收益**
+  - ① 私人接活，朋友介绍之类的，尽量**不给钱**（定金）**不开工**，这一点一定要记住，否则很容易付出了劳动得不到应得的收入。
+  - ② 不给完钱，**不交完整代码**。代码不像设计稿，还能给个加水印版本；又很容易复制，很多时候交付了就交付了；除非有平台担保，或者真的特别熟。遇到过好多例了，引到私人对接，拿到代码不给钱，微信一删，维权成本很高的。
+    - 部分时候项目就是**协同开发**，这个时候甚至没法保护好自己的劳动产出，那事先最好有纸质的合同说明，出了事找的到人。
+  - ③ 大项目要谈好**付款节点**，大项目吭哧吭哧干，花了几个月，结果最后别人又压你价钱，这时候你的时间沉没成本就高了
+- 3、**工作中**需知
+  - ① 多和客户反馈**项目进度**，别人花了钱，一直看不到东西，连个信也没有也是有点慌的
+  - ② 事前说好的功能点出bug了，能解决就给别人解决了，多条路；但无限制的加需求肯定要另外收费
+
+
+### 接单平台
+
+远程工作是未来的工作模式，国内外现在已经有不少平台了：
+
+#### 一、国内远程工作平台：
+
+1. `程序员客栈`：[程序员客栈](proginn.com)-领先的程序员自由远程工作平台 
+  - 程序员客栈是中国非常领先的自由工作平台，为中高端程序员、产品经理和设计师等等互联网相关人员提供线上工作机会，包括自由工作、远程工作和兼职工作，还支持按需雇佣，工作模式非常多，推荐大家尝试一下。
+2. `CODING`码市：[码市](codemart.com) - 互联网软件外包服务平台 
+  - 著名的Coding旗下的互联网软件外包服务平台，具有较全面的软件开发服务，平台以外包为主。提供了保险先行赔付措施来保障企业可能面临的开发商烂尾、大幅延期等问题。
+3. `开源众包`：项目大厅-[开源众包](oschina.net) 
+  - 开源中国的众包平台，上面的项目以众包为主。接包方质量较好，它的协助开发工具比较完善。
+4. `英选`：可信赖的软件外包服务, [英选](yingxuan.io)，用优秀的人，做优秀的产品 
+  - 平台以定制开发外包服务为主，也是外包项目平台。它的项目管理方面是特色，阶段确认和及时反馈较好。
+5. `快码众包`：[快码](kuaimacode.com) - 私域程序员平台 - 程序员灵活用工平台
+  - 企业与平台直接签订合同，由平台提供需求分析、任务拆解、开发分配、后期维护等一系列的服务，给程序员的反馈较为及时。
+6. `码易`：[码易](mayigeek.com)_企业应用商店_软件众包_软件服务_云市场_云课堂_云计算平台网站！
+  - 该平台可以对企业应用软件一站式采购，即买即用，平台交易有保障。而且上面的所有项目均与平台直接签署，没有中间环节。
+7. `开发邦`：[开发邦](kaifabang.com) - 互联网软件定制开发与软件外包开发服务
+  - 开发邦自有开发框架，能提供灵活的基于表单驱动的数据管理模型；服务范围明确，客户需求相对比较明确。
+8. `人人开发`：[人人开发](rrkf.com) - 集可视化开发，应用市场，威客众包，PaaS云于一体的企业级应用服务平台 
+9. `智城外包`：[智城外包网](taskcity.com) - 零佣金开发资源平台 认证担保 全程无忧 、专业的软件外包网和项目外包、项目开发、人力外派、短期招聘、人力资源交易平台 | 智城外包网 - 零佣金开发资源平台 认证担保 全程无忧 
+10. `电鸭社区`：[电鸭社区](eleduck.com) - 远程工作、自由职业、兼职外包，自由从这开始 
+11. `外包大师`：[外包大师](waibaodashi.com), 专注产品创新+研发管理的数字化服务公司 
+12. `解放号`：[解放号](jfh.com)数智版—伴行数字化转型的软件产业互联网 
+  - 解放号在需求分析与项目评估方面做的比较好，同时，它的协助开发工具相当完善。
+13. `实现网`：[实现网](shixian.com) - 按需雇佣 BAT 工程师、设计师 
+14. `Sxsoft`：软件项目交易网 [Sxsoft](sxsoft.com) -软件外包、外包服务平台 
+15. `一品威客`：[一品威客网](epwk.com),创新型知识技能共享服务平台 
+16. `自由职客`：[自由职客](freekeer.com)智能撮合平台-IT技术,自由职客灵活用工交易平台_自由职客 
+
+#### 二、国外远程工作平台
+
+国外接私活因为有**英文门槛**，而且结算用的是**美元**，工资相较于国内会高一些；但是想在这些网站上找到兼职得有比较好的网速，因为稍有不慎这些单子就会被**东南亚**和**印度**那边的程序员以价格优势给拿下。
+1. Upwork：Upwork, The World’s Work Marketplace
+  - Upwork 是全球最大的、最优秀的、最规范的综合类人力外包服务平台，由著名的 Elance 和 oDesk 合并。这里聚集 900 万来自全球各地的自由工作者，项目很多，机会也很多，但是最近平台上有不少。
+2. Stackoverflow：Stack Overflow - Where Developers Learn, Share, & Build Careers
+  - Stackoverflow 本身就是全球程序员非常热爱的一个社区，而且它也是一个提倡全民远程工作的公司，为程序员提供了远程工作的服务，Stackoverflow Jobs 里有远程职位的筛选，这里有丰富的远程技术职位。而且Stackoverflow 本身的被认可度就非常的高，相较于其他国外的接单网站，其占据很大优势。
+3. Freelancer：Freelance.com : 370 000 consultants et experts
+  - Freelancer的工作类型覆盖了很多不同的领域，由程序开发到市场营销、广告、会计、法务等一系列的可以远程的工作，而且Freelancer有一个优势就是支持中文版本，门槛相对更低，也因此平台上的项目单价、客户质量都比Upwork低一些。但是大家要注意，最近上面骗子挺多的，要注意甄别项目的真实性和可行性。
+4. Dribbble：Graphic Design Jobs - Browse 100s of Design Jobs , Dribbble
+  - Dribbble 不只是全球最受欢迎的设计师社区，同样是设计师寻找远程工作的好出处。自从被 Tiny 收购后，Dribbble 的招聘属性正在慢慢增强，你可以试着持续 PO 出自己的好作品，等待你的伯乐；同样你可以关注 Jobs 页面，给心仪的 Team 提交简历
+5. topcoder：Top Website Designers, Developers, Freelancers for Your Next Project, Topcoder
+  - TopCoder是一个面向平面设计师和程序员的网站。它采用比赛、评分、支酬等方式吸引众多平面设计师和程序员业余工作。网站主要领域均在编程方面。
+  - 值得注意的是，Topcoder 通过算法比赛吸引世界顶级的程序员，他会将一下大型项目分割成很多小模块，通过竞赛的模式交给用户来做，优胜者可以拿到制定模块的奖金。
+6. Toptal ：Toptal - Hire Freelance Talent from the Top 3%
+  - Toptal 号称全球精英自由职业者平台，所以平台审核相当严格，每年申请10万多人中，只有3%自由职业者能成功入驻，对申请者的要求有英语沟通能力，还有限时算法测试、现场编程等。平台上面项目单笔成交金额较大，有实力的小伙伴可以去尝试下。
+7. AngelList：Find Startup Jobs Near You and Remote Jobs | AngelList Talent
+  - AngelList 主要是服务于初创公司和天使投资人的平台，这里还有初创公司提供的远程工作的机会，如果对远程加入初创公司感兴趣的，可以尝试一下。
+8. Remote ok：Remote Jobs in Programming, Design, Sales and more #OpenSalaries (remoteok.com)
+  - Remoteok不仅提供最初的兼职类远程工作，还有全职类，签署合同类和实习类的工作。网站开发者本人Pieter Levels就是一个digital nomad。
+9. Guru：Find Freelance Projects and Jobs on Guru - Work Your Way
+  - 你可以在guru的平台上很好的展示自己的作品，并且针对你的技能，guru会为你推送适合的工作项目。
+10. WWR：We Work Remotely: Remote jobs in design, programming, marketing and more
+  - WWR是 WE WORK REMOTELY的缩写，这个网站也是面向程序员远程工作的一个网站，但是市面上相关的信息比较少，目前还是一片蓝海，具有较高的探索价值。
+
+### 图灵
+
+图灵远程工作
+
+【2022-5-13】[Turing](https://developers.turing.com/)：Work full-time with top US companies
+
+I saw your profile online and wanted to **reach out**! You might be a great fit for many of the remote software engineering roles that top U.S. companies are hiring for on Turing.
+
+Turing is based in Palo Alto, California, U.S.A., also known as “Silicon Valley”. We connect exceptional software engineers from around the world to top U.S. and Silicon Valley companies that are hiring for full-time remote software positions.
+- ● Live anywhere **地点自由**, enjoy rapid career growth: Live anywhere in the world, enjoy career growth opportunities formerly only available to engineers living in the Silicon Valley 
+  - Work with former Tech Leads and Engineering Managers from Google, Facebook, Microsoft, Amazon, & various top tech companies and advance rapidly towards your professional goals.
+- ● Full-Time, Long term opportunities **全职、长期机会**: 
+  - Turing only partners with U.S companies that are hiring for full-time long term roles remotely and also work hard on re-matching you to subsequent long term opportunities. If you register and pass Turing’s tests and interviews, you may never have to interview for a job again.
+- ● Compensation **丰厚薪酬**:
+  - Turing engineers are compensated with salaries more than local companies in most countries.
+- ● Find jobs across levels **各个层级**: 
+  - Turing hires mid level （中级）, senior level（高级） as well as tech lead level （技术负责人） engineers.
+- ● Find jobs in 100+ Skills: **多种技能**
+  - Get hired for React, Node, Python, Angular, Swift, React Native, Android, Java, Rails, Golang, PHP, Vue, Devops, Machine Learning etc.
+
+Once you've sent the invite, your friend will need to complete these steps before you receive the $250 reward:
+- Click on the invite link in the referral email and sign up.
+- Pass required Turing Tests and the Technical Assessment.
+- After getting matched with Turing's U.S. partner company, your friend must work full-time for at least 30 days with Turing's U.S. partner company.
+
 
 ## 转行
 
@@ -674,6 +816,17 @@ ps：和自由职业有关的书也有不少，比如说最近几年比较火的
 - 果然，没有人能随随便便成功！准备好后，小美再次挑战，产品定位、大数据选品、优化标题文案图片等，把老师教授的运营推广技巧一一实操，曝光量很快以万为单位上涨，爆品也很快就来了！一个品就有16万+的免费曝光，日销上百单，这就是风口的力量。最重要的是，还不用操心囤货发货！一有客户下单，小美就直接从货源平台一件代发，而她要做的就是收钱，收钱，收钱！美滋滋赚差价！
 - 如今，小美靠闲鱼早已月入2-5万+，足不出户，不需要学历、技术、资金、货源，每天按照老师教的方法上架产品，做做运营就有钱收，正规、合法又暴利！
 - 当然，小美并没有满足现状，因为那些月入10万+的玩家都在学习，她有什么理由停止进步呢？要知道，有钱人之所以有钱，都是有原因的。面对贫穷，有的人一筹莫展，天天喊穷却不行动，越忙越穷！但有人抓紧紅利期，不懈努力，提前10年过上想要的生活！闲魚的紅利至少还能持续到2年，门槛空前的低，入局越早赚钱越快，想不到有什麽借口可以错过了！蛮幸运的是，带过小美还有很多闲魚玩家的谭老师，现在也开启了新一轮的學员招募，他的赚钱方法，任何普通人都可以复制！
+
+【2022-5-18】个体户创业思路
+
+|商业模式|边际效应|成本收益|客户群|详情|
+|---|---|---|---|---|
+|软件外包|1:1|成本中，收益高|B端|不定期承接软件开发需求|
+|技能培训|1:n|成本低，收益低|C端|通过自媒体打造影响力，积累潜在用户群|
+|产品孵化|1:x|成本高，收益高|B/C|真正意义上的创业，有自己独立产品|
+
+<iframe src='https://viewer.diagrams.net/?tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1&title=tmp.drawio#R7Vtbc5s4FP41ekwHBALpEXzZzmx3pjN5aHffFKPYbDHyYDmJ%2B%2BtXAmEDkonj2iZ11g8ZdIS4nE%2FnOzcCvNHy5Y%2BCrhZ%2F8YRlADrJC%2FDGAELiIPlXCbaVABG3EsyLNKlEDcF9%2BpNpoaOlmzRh69aJgvNMpKu2cMbznM1ES0aLgj%2B3T3vkWfuuKzpnhuB%2BRjNT%2Bi1NxKKSYhju5Z9ZOl%2FUd3YDUs0saX2yfpP1gib8uSHyJsAbFZyL6mj5MmKZ0l2tl2rd9MDs7sEKlotjFghnevedF2722UF%2FLuff%2Fsm95M71q8s80Wyj31g%2FrdjWKmCJ1Ige8kIs%2BJznNJvspXHBN3nC1H0cOdqf84XzlRS6UvgvE2Kr4aUbwaVoIZaZnn3kudCTUF2iegZ144Mvq0VrvilmrO8N9aahxZyJnvPQDhK5lRlfMlFs5bqCZVSkT%2B3noHpTzXfn7fUuD7Tq3wKDicIkADgC2AETDLAH4jGYhABDEBMToCyT5qCAeF6kgt2vaKmRZ2mQHTWnWTbiGS%2FKdd4jTUiCpHwtCv6DNWYo810Pqpl606rl6x9MzBYaZTtkT6wQ7KUfNFPJeoGnLUVTBXT0%2BHlveG5tTYuG0WHnUrDAW7cOeKR14EGtw3uXMEhlF9vv%2Bnrl4G81%2BITq4filOTne6tEA8IVDwneEEe2xcV9nseM5aV7QJJVKrZkt5znr0KAWGQw4Kn%2Fn4TXo%2BC1ic48lNs%2B5FLNZLGqCQOwAPFV%2BJpI%2BJy4lkZJcCS7TPYV0ZgPnwQ%2BQ1Ol5wIG4DU5ogoOt2FwIGmSBJgRkCqKxigUiGQUEYEJABEEdS98qNN2AAKJhoQn6wrQAkBGIpspq8BiQSB1EEwXTTWMEvTZGxDQfck2M6sTxnQULZ3T64ZFOnwzq9E0Y4tKzxMpGbIB8oQ8sayuRZuk8l8czqSMmN2%2Bstmoqk%2FNITyzTJKnwYuv0J30or6fUveJpLsp3QjFA4zYgLtLjhk1Uvz6b0BUGfROwy%2BubEPbsyIMWdOd88hwPtqxIxwtHQ6Uv%2FlW9deMU%2Fvi4lluki%2BXuGU6HN7TGD5EPSFAS4AhgVMLtAOKXkulw3urBYR4LbEzoMOxgfB4m9DveyvWOjPLQxajQUlZ4B1TIXlLxXc%2Bp40bWJEf7pEkNLpAz4SvRZ7k0Kgq6bZygeck0Wb2JAtQJeRBqboO3ni8Pqic4q%2FFDc1%2BNPiq393OC4nbiBy2I6mLfqeRe0w20XvXy1I8t1G%2FWKpHKWGJSZiwTlbp8JOqHg1M%2FsYAUKlcsM3uFFgZxaEAitbxSh5tlFs0EbxplacBf%2BToVKVfG%2BcCF4EuL1QregY5vRJbmUvN1f8Y5GU9dqzlQ1TkDjqH7esLpWWAMLubBbcUADGRCFSFVA5CAVqlnjFWoJSXYBcQzkJUqER2LatnD4cLY8TRtM%2BF27HDVZgKsW3QaS1tZJzChvFxeaiseSJZEZTnHVwiqmkGgLDRyy9rbyFZ7%2B4BQ%2Bj5qQTl4icHMfqQaFGjTErRRXQOqga1sNBopYH9jPN3AjK2mU0f%2BzoRz2MbZxRY3WlPidZA2gx2FdG5Dukp%2Fo%2F%2BRPgFpODjSdWrcHzFVhYzIK7Od26%2B%2F10s0Sp4%2FMPFCW9vKV02qqMRGRj64dJ0y34iRLkSRYCCQhsk9PDh07gHf5zdFp7brBy5Xad29Wq6qbONX61VGmcHz2r1rI9epXkCv6qlU%2BX5nn9b0Xl%2BoekPjQmcrWtlSqUCROsG6VUfGuuVNzNz4tni90%2FK2UMZV%2B6rQlhuVvL6LsBSvE4VQVE2NFdnv%2BgoKNlflUrpBXrUcZEZlMs9vFIWd77u6Nt42DxFeFW9L%2B6iL02xTPO3sjeVJpD7mVdrP6HqdztoQtpWb0PVit%2FSVqHZXGz6F5ncuxX2bSzmjezi2GXzIPTT2AOoJEn7RiwTdICU80YsE%2BEC084oXeXMfxmnfp%2F4e%2FdBzIWJ%2Frsv2YczsNE0Y1emKfKJJ%2Ba0Qud2eTD%2FvBWEbFNfvITQ7rnedS8DuF3mn9FnkcP%2FZf3X6%2Fn8nvMl%2F' frameborder='0' scrolling='no' allowfullscreen="true"  width='900'></iframe>
+
 
 
 ## 公司注册

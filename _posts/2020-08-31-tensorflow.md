@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "深度学习框架Tensorflow学习笔记"
+title:  "Tensorflow学习笔记"
 date:   2020-08-31 17:25:00
 categories: 编程语言
-tags: Tensorflow Python 深度学习 Pytorch TensorRT
+tags: Tensorflow Python 深度学习 Pytorch TensorRT 推理加速 onnx
 excerpt: Tensorflow编程技能汇总
 author: 鹤啸九天
 mathjax: true
@@ -25,7 +25,6 @@ mathjax: true
 2019 年 4 月，Jeff Hale 发布了第二份调查结果。这次，他调研了几个框架在过去 6 个月（此次调研与上次调研之间的时间间隔）里的增长情况。结果发现，TensorFlow 仍然是当时需求量最大、增长最快的框架，但 PyTorch 也不容小觑，在过去的六个月增速超过了原来的第二名 Keras。
 - ![](https://p6-tt.byteimg.com/origin/pgc-image/8320537b60dc4ccca8f3c4b85a38328b?from=pc)
 - 2020：PyTorch 顶会独领风骚，职场优势追赶 TensorFlow
-
 
 ## Tensorflow v.s. Pytorch
 
@@ -2489,14 +2488,48 @@ class CNN(tf.keras.Model):
         return output
 ```
 
+# 推理加速
 
-# TensorRT
+## ONNX
+
+【2022-5-17】[ONNX 和 Azure 机器学习：创建和加速 ML 模型](https://docs.microsoft.com/zh-cn/azure/machine-learning/concept-onnx)
+
+推理或模型评分是将部署的模型用于**预测**（通常针对生产数据）的阶段，ONNX 来帮助优化机器学习模型的推理
+
+### 什么是ONNX
+
+开放神经网络交换（Open Neural Network Exchange） `ONNX` 是**微软**和**Facebook**提出，用来表示深度学习模型的**开放格式**。
+- ONNX定义了一组和环境平台均无关的标准格式，来增强各种AI模型的可交互性。
+优化用于**推理**（或模型评分）的机器学习模型非常困难，因为需要调整模型和推理库，充分利用硬件功能。 在不同类型的平台（云/Edge、CPU/GPU 等）上获得最佳性能，异常困难，因为每个平台都有不同的功能和特性。 如果模型来自需要在各种平台上运行的多种框架，会极大增加复杂性。 优化框架和硬件的所有不同组合非常耗时。 
+
+ONNX就是解决方法，在首选框架中训练一次后能在云或 Edge 上的**任意**位置运行。
+
+许多框架中的模型都可以导出或转换为标准 **ONNX 格式**。 模型采用 ONNX 格式后，可在各种平台和设备上运行。
+- 各种平台包括 TensorFlow、PyTorch、SciKit-Learn、Keras、Chainer、MXNet、MATLAB 和 SparkML
+**ONNX 运行时**是一种用于将 ONNX 模型部署到生产环境的**高性能推理引擎**。 它针对云和 Edge 进行了优化，适用于 Linux、Windows 和 Mac。
+- ONNX文件不仅仅存储了神经网络模型的权重(Protobuf格式)，同时也存储了模型的结构信息以及网络中每一层的输入输出和一些其它的辅助信息。
+- 用 C++ 编写，还包含 C、Python、C#、Java 和 JavaScript (Node.js) API，可在各种环境中使用。 
+- ONNX 运行时同时支持 DNN 和传统 ML 模型，并与不同硬件上的**加速器**（例如，NVidia GPU 上的 `TensorRT`、Intel 处理器上的 `OpenVINO`、Windows 上的 `DirectML` 等）集成。 
+通过使用 ONNX 运行时，可以从大量的生产级优化、测试和不断改进中受益。
+
+![](https://docs.microsoft.com/zh-cn/azure/machine-learning/media/concept-onnx/onnx.png)
+
+### 示例
+
+yolov3-tiny的[onnx模型](https://github.com/onnx/models/tree/master/vision/object_detection_segmentation/tiny-yolov3/model),Netron可视化
+- ![](https://pic2.zhimg.com/80/v2-d21635b818ed67dfdb4c834324fa1555_1440w.jpg)
+
+更多使用方法见: [ONNX学习笔记](https://zhuanlan.zhihu.com/p/346511883)
+
+
+
+## TensorRT
 
 - 【2021-5-21】[TensorRT入门指北](https://zhuanlan.zhihu.com/p/371239130)
 [显卡算力查看](https://developer.nvidia.com/zh-cn/cuda-gpus)
 
 
-## 什么是TensorRT
+### 什么是TensorRT
 
 - TensorRT是由Nvidia推出的C++语言开发的高性能神经网络推理库，是一个用于生产部署的优化器和运行时引擎。其高性能计算能力依赖于Nvidia的图形处理单元。它专注于推理任务，与常用的神经网络学习框架形成互补，包括TensorFlow、Caffe、PyTorch、MXNet等。可以直接载入这些框架的已训练模型文件，也提供了API接口通过编程自行构建模型。
   - ![](https://img-blog.csdnimg.cn/20210425231146908.png)
@@ -2505,7 +2538,7 @@ class CNN(tf.keras.Model):
 - TensorRT是半开源的，除了核心部分其余的基本都开源了。
 ![](https://pic4.zhimg.com/80/v2-bc9b29cc831bb9793a0aeaaa3061e223_720w.jpg)
 
-## TensorRT的使用场景
+### TensorRT的使用场景
 
 TensorRT的使用场景很多。服务端、嵌入式端、家用电脑端都是我们的使用场景。
 - 服务端对应的显卡型号为A100、T4、V100等
@@ -2514,7 +2547,7 @@ TensorRT的使用场景很多。服务端、嵌入式端、家用电脑端都是
 
 当然这不是固定的，只要我们显卡满足TensorRT的先决条件，用就对了。
 
-## TensorRT安装
+### TensorRT安装
 
 安装TensorRT的方式有很多，[官方](https://developer.nvidia.com/zh-cn/tensorrt)提供了多种方式：Debian or RPM packages, a pip wheel file, a tar file, or a zip file.
 - 如下载TensorRT-7.2.3.4.Ubuntu-18.04.x86_64-gnu.cuda-11.1.cudnn8.1.tar.gz
@@ -2530,7 +2563,7 @@ export LD_LIBRARY_PATH=/path/to/TensorRT-7.2.3.4/lib:$LD_LIBRARY_PATH
 export LIBRARY_PATH=/path/to/TensorRT-7.2.3.4/lib::$LIBRARY_PATH
 ```
 
-## TensorRT 工作流
+### TensorRT 工作流
 
 工作流主要分为两个阶段：建造阶段(build  phase)和执行阶段(compile phase)。
 - 在建造阶段，TensorRT 接收外部提供的网络定义(也可包含权值 weights)和超参数，根据当前编译的设备进行网络运行的优化(optimization), 并生成推理引擎 inference  engine(可以以 PLAN 形式存在在硬盘上)；
@@ -2539,7 +2572,7 @@ export LIBRARY_PATH=/path/to/TensorRT-7.2.3.4/lib::$LIBRARY_PATH
 
 ![](https://img-blog.csdnimg.cn/20190810162851400.png)
 
-## TensorRT 接口
+### TensorRT 接口
 
 必备接口流程图
 ![](https://img-blog.csdnimg.cn/20210425232029160.png
@@ -2558,7 +2591,7 @@ TensorRT核心库中，最关键的几种接口类型有：
 接口详情参考：[TensorRT入门](https://blog.csdn.net/Ango_/article/details/116140436)
 
 
-## TensorRT的加速效果怎么样
+### TensorRT的加速效果怎么样
 
 加速效果取决于模型的类型和大小，也取决于所使用的显卡类型。
 
@@ -2575,7 +2608,7 @@ TensorRT核心库中，最关键的几种接口类型有：
 - resnet系列的分类模型，加速3倍左右(Keras)
 - GAN、分割模型系列比较大的模型，加速7-20倍左右(Pytorch)
 
-## TensorRT有哪些黑科技
+### TensorRT有哪些黑科技
 
 为什么TensorRT能够提升我们模型在英伟达GPU上运行的速度，当然是做了很多对提速有增益的优化：
 - 算子融合(层与张量融合)：简单来说就是通过融合一些计算op或者去掉一些多余op来减少数据流通次数以及显存的频繁使用来提速
@@ -2588,7 +2621,7 @@ TensorRT的这些优化策略代码虽然是闭源的，但是大部分的优化
 ![](https://pic3.zhimg.com/80/v2-41d4cde8f1a25ffb0ed0ac22a4dcc782_720w.jpg)
 
 
-## 什么模型可以转换为TensorRT
+### 什么模型可以转换为TensorRT
 
 TensorRT官方支持Caffe、Tensorflow、Pytorch、ONNX等模型的转换(不过Caffe和Tensorflow的转换器Caffe-Parser和UFF-Parser已经有些落后了)，也提供了三种转换模型的方式：
 - 使用TF-TRT，将TensorRT集成在TensorFlow中
@@ -2602,7 +2635,7 @@ TensorRT官方支持Caffe、Tensorflow、Pytorch、ONNX等模型的转换(不过
 
 总而言之，理论上95%的模型都可以转换为TensorRT，条条大路通罗马嘛。只不过有些模型可能转换的难度比较大。如果遇到一个无法转换的模型，先不要绝望，再想想，再想想，看看能不能通过其他方式绕过去。
 
-## TensorRT支持哪几种权重精度
+### TensorRT支持哪几种权重精度
 
 支持FP32、FP16、INT8、TF32等，这几种类型都比较常用。
 - FP32：单精度浮点型，没什么好说的，深度学习中最常见的数据格式，训练推理都会用到；

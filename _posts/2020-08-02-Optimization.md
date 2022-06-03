@@ -14,14 +14,14 @@ mathjax: true
 
 # 总结
 
-- 比较各种优化算法的性质，包括传统的 SGD，Momentum SGD，AdaGrad，RMSProp 和 Adam 等
-- 可视化分析
-    - SGD optimization on loss surface contours
-    - ![](https://picb.zhimg.com/v2-5d5166a3d3712e7c03af74b1ccacbeac_b.webp)
-        - 不同算法在损失面等高线图中的学习过程，它们均同同一点出发，但沿着不同路径达到最小值点。其中 Adagrad、Adadelta、RMSprop 从最开始就找到了正确的方向并快速收敛；SGD 找到了正确方向但收敛速度很慢；SGD-M 和 NAG 最初都偏离了航道，但也能最终纠正到正确方向，SGD-M 偏离的惯性比 NAG 更大。
-    - SGD optimization on saddle point
-    - ![](https://pic4.zhimg.com/v2-4a3b4a39ab8e5c556359147b882b4788_b.webp)
-        - 不同算法在鞍点处的表现。这里，SGD、SGD-M、NAG 都受到了鞍点的严重影响，尽管后两者最终还是逃离了鞍点；而 Adagrad、RMSprop、Adadelta 都很快找到了正确的方向。
+【2022-5-19】[关于神经网络，一个学术界搞错了很多年的问题](https://mp.weixin.qq.com/s/i_tldPMzYDUZwdXDCJTjPw)
+- 比较各种优化算法的性质，包括传统的 SGD，Momentum SGD，AdaGrad，RMSProp 和 Adam 等;可视化分析
+- SGD optimization on loss surface contours
+- ![](https://picb.zhimg.com/v2-5d5166a3d3712e7c03af74b1ccacbeac_b.webp)
+    - 不同算法在损失面等高线图中的学习过程，它们均同同一点出发，但沿着不同路径达到最小值点。其中 Adagrad、Adadelta、RMSprop 从最开始就找到了正确的方向并快速收敛；SGD 找到了正确方向但收敛速度很慢；SGD-M 和 NAG 最初都偏离了航道，但也能最终纠正到正确方向，SGD-M 偏离的惯性比 NAG 更大。
+- SGD optimization on saddle point
+- ![](https://pic4.zhimg.com/v2-4a3b4a39ab8e5c556359147b882b4788_b.webp)
+    - 不同算法在鞍点处的表现。这里，SGD、SGD-M、NAG 都受到了鞍点的严重影响，尽管后两者最终还是逃离了鞍点；而 Adagrad、RMSprop、Adadelta 都很快找到了正确的方向。
 
 - [最优化算法-避开鞍点](http://www.csuldw.com/2016/07/10/2016-07-10-saddlepoints/)
 
@@ -304,8 +304,8 @@ Levenshtein.jaro_winkler('abc', 'aecfaf') # 0.7
 ## 分类
 
 - 目标函数分为两大类。
-    - 第一类是最大化，包括最大化盈利，最大化效率。
-    - 另一类是最小化，包括最小化费用、时间和错误率。在金融行业，我们可以最大化预测股价的正确率，也可以最小化费用、最小化时间和错误率。
+  - 第一类是最大化，包括最大化盈利，最大化效率。
+  - 另一类是最小化，包括最小化费用、时间和错误率。在金融行业，我们可以最大化预测股价的正确率，也可以最小化费用、最小化时间和错误率。
 - 当然，我们可以同时最大化盈利，最小化费用和时间。所以通常在很多的优化问题中，这两种任务可以组合起来出现在同一个问题框架下，这就是对于目标函数的定义。
 
 ## 凸函数
@@ -334,6 +334,36 @@ Levenshtein.jaro_winkler('abc', 'aecfaf') # 0.7
 
 ![](https://p1-tt.byteimg.com/origin/pgc-image/1a67811e997e4f41a6bc035aeddf93d0?from=pc)
 
+### 高维优化为什么难？
+
+【2022-5-18】[关于神经网络，一个学术界搞错了很多年的问题](https://mp.weixin.qq.com/s/i_tldPMzYDUZwdXDCJTjPw)
+
+人们普遍认为较大的神经网络中包含很多**局部极小值**（local minima），使得算法容易陷入到其中某些点。这种看法持续二三十年，至少数万篇论文中持有这种说法。比如，如著名的Ackley函数 。对于基于梯度的算法，一旦陷入到其中某一个局部极值，就很难跳出来了。
+- ![](https://zhengwen.aminer.cn/LDDRQt9JmGgtf)
+
+2014年，一篇论文《Identifying and attacking the saddle point problem in high-dimensional non-convex optimization》，指出**高维优化问题中根本没有那么多局部极值**。作者依据统计物理，随机矩阵理论和神经网络理论的分析，以及一些经验分析提出高维**非凸**优化问题之所以困难，是因为存在大量的`鞍点`（梯度为零并且Hessian矩阵特征值有正有负）而不是局部极值。
+- ![](https://zhengwen.aminer.cn/B2KCcVJQiRvNk)
+
+`鞍点`（saddle point)如下图（来自wiki）和`局部极小值`
+- 相同点：在该点处的梯度都等于零
+- 不同点：在鞍点附近Hessian矩阵有正的和负的特征值，即是**不定**的，而在局部极值附近的Hessian矩阵是**正定**的。
+鞍点附近，基于梯度的优化算法（几乎目前所有的实际使用的优化算法都是基于梯度的）会遇到较为严重的问题，可能会长时间卡在该点附近。在鞍点数目极大的时候，这个问题会变得非常严重
+- ![](https://zhengwen.aminer.cn/JZpNdRuLbXRMB)
+
+造成神经网络难以优化的一个重要（乃至主要）原因是存在大量鞍点。造成局部极值这种误解的原因在于，人们把低维的直观认识直接推到高维的情况。
+
+#### 知识点
+
+- `鞍点`也是`驻点`，鞍点处的梯度为零，在一定范围内沿梯度下降会沿着鞍点附近走，这个区域很平坦，梯度很小。
+- 优化过程不是卡在鞍点不动了(像人们以为的局部极值那样)，而是在**鞍点附近梯度很小**，于是变动的幅度越来越小，loss看起来就像是卡住了。但是和local minima的差别在于，如果运行时间足够长，SGD一类的算法是可以走出鞍点附近的区域的（看下面的两个链接）。由于这需要很长时间，在loss上看来就像是卡在local minima了。然而，从一个鞍点附近走出来，很可能会很快就进入另一个鞍点附近了。
+- 直观来看增加一些扰动，从下降的路径上跳出去就能绕过鞍点。但在高维的情形，这个鞍点附近的平坦区域范围可能非常大。此外，即便从一个鞍点跳过，这个跳出来的部分很可能很快进入另一个鞍点的平坦区域—— 鞍点的数量(可能)是指数级的。
+
+#### 遗传算法和进化算法（EA）
+
+先说优点，EA通常是不依赖于函数值的，而只依赖于点之间的大小关系，comparison-based，这样进行迭代的时候不会受到梯度太小的影响。看起来似乎是一个可行的路子？下面说一下缺点。
+- 先说CMA-ES， 这是效果最好最成功的进化算法之一，尤其是在ill-conditioned 问题和non-separable 问题上。CMA-ES （Covariance Matrix Adaptation-Evolution Strategy）和EDA (Estimation of Distribution Algorithm)的特点是 model-based，他们从一个正态分布采样产生一组新解，使用较好的一部分（一半）新解更新分布的参数（mean， cov或对应的Cholesky factor，对CMA-ES来说还有一个独立步长）。CMA-ES和EDA这样基于分布的算法大体上都能从information geometric optimization （IGO） 用natural gradient 得到。IGO流的收敛性和算法本身在一类问题上的收敛性都不是问题，Evolution path更是动量的类似。然而这些方法最大的问题在于，由于依赖随机采样，当维度很高的时候采样的空间极大，需要极多的样本来逐渐估计cov ()量级），采样产生新解的时候的复杂度是(不低于）)。EA的论文普遍只测试30,50-100维，500-1000维以上的极少，即便是各种large scale的变种也大多止步于1000。对于动辄 量级的神经网络优化，基本是不可行的。
+- DE/PSO这类算法。特点是无模型，不实用概率分布采样的方法产生新解，使用多个点（称为一个种群，population)之间的相互（大小）关系来模拟一个下降方向。这种基于种群的方法对有较多局部极值的问题效果较好，但是对ill-conditioned 问题性能较差，在non-separable+ill-conditioned问题效果有限。更进一步的，这类算法为了维持种群多样性，通常只进行两两比较（两两比较的选择压力小于截断选择，即某些新解不比父本好，但是比种群中其他解好，这样的解被丢弃了），好的个体进入下一代。然而随着维度增加，新生个体比父代好的比例急剧下降，在ellipsoid函数上100维左右的时候就已经降低到5%以下。实验研究 Differential Evolution algorithms applied to Neural Network training suffer from stagnation
+总体上，EA在连续优化问题上的主要问题就是搜索效率不高，相比基于梯度的算法要多倍的搜索。与此相似的实际上是坐标下降法（coordinate descent），同样不使用梯度，同样要求多倍的搜索。
 
 ## 最优化问题的两大类：连续优化与离散优化
 

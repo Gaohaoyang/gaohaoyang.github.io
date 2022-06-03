@@ -38,6 +38,16 @@ mathjax: true
 
 # 管理
 
+## 为什么要晋升管理
+
+【2022-5-27】为什么这么多人想当leader？[脉脉](https://maimai.cn/web/gossip_detail/30457801?src=app&webid=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MzA0NTc4MDEsInUiOjM1MzksImVnaWQiOiJmNTkzMTQ5NGYyODY0OTZjYTExYzZmOWE3MmI3OGQ3YSJ9.cAo_NxlEhrzGKrK8LnuoQdRtQ7MYABbVkapC56qwTzY&share_channel=2)
+1. 钱多，整天拉会写ppt，周末合并周报，只用跟项目进度，半pm职责
+1. 信息差，你知道部门的项目规划，优先级，你屏蔽后把每项任务都可以安排给人，然后说成很重视，他们就不会拒绝
+1. 你不想做的乏味的事可以安排给别人，你自己专注于解决有难度有挑战性的事
+1. 实在太有挑战性,超出自己能力范围了，你可以物色组内技术高手或对外求助，但成果你是第一位的
+1. 相对稳定。小伙子还是经验少，等公司不景气要裁员的时候，你就知道当leader的好处了，好处就是你有生杀大权，裁员的时候可以决定员工的去留。因为组内人的产出都是他的。你即使技术职级比他高很多级，你的产出也是他的
+1. 空间大。国内技术线都是假的，只有leader才能赚钱多，不像国外
+
 ## 什么是管理能力
 
 普通管理者和有些管理者区别

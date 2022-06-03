@@ -22,41 +22,50 @@ mathjax: true
 
 # 对比学习
 
-很多自然语言处理任务来说，学习到一个良好的句向量表示是非常重要的。例如在**向量检索**，**文本语义匹配**等任务中，模型将输入的两个句子进行编码得到句向量，然后计算句向量之间的相似度，从而判断两个句子是否匹配。
+很多自然语言处理任务都需要学习到一个良好的句向量表示。例如**向量检索**，**文本语义匹配**等任务中，模型将输入的两个句子进行编码得到句向量，然后计算句向量之间的相似度，从而判断两个句子是否匹配。
+
+- 【2022-5-25】[从各大顶会看对比学习在句子表征研究进展](https://mp.weixin.qq.com/s/HW9-9Oa5HjkeCV-FnBDwVA)
 
 ## 句子相似度
 
+[SimCSE：简单有效的句向量对比学习方法](https://mp.weixin.qq.com/s/7glAjhvBfiWG3bWP-uI5Qg), EMNLP2021的一篇论文SimCSE。这是一种简单有效的NLP对比学习方法，通过Dropout的方式进行正样本增强，模型能够学习到良好的句向量表示。按照惯例，我们也对该模型在STS-B数据集上进行了实验复现。
+- [论文链接](https://arxiv.org/abs/2104.08821)
+- [实验复现代码](https://github.com/yangjianxin1/SimCSE)
+
 ### BERT改造成句向量
 
-最直接的做法：将两个句子输入到BERT模型中，使用\[CLS]对应的输出或者整个句子序列的输出的平均向量作为句向量，然后再计算两个句向量的相似度。
-- 但是由于BERT模型的MLM与NSP这两个预训练任务的**局限性**，模型无法很好地学习到句子表征能力。
+最直接的做法：将两个句子输入到BERT模型中，使用\[CLS]对应的输出或者整个句子序列的输出的**平均向量**作为句向量，然后再计算两个句向量的相似度。
+- 但是由于BERT模型的`MLM`与`NSP`这两个预训练任务的**局限性**，模型无法很好地学习到句子表征能力。
 - ![](https://weixin.aisoutu.com/cunchu7/2022-04-05/4_16491763759351976.png)
 
-为什么经过MLM与NSP任务训练之后，BERT无法学习到良好的句向量表示呢？我们简单回顾一下MLM与NSP任务的做法。
-- MLM任务是遮住某个**单词**，让模型去预测遮住的单词:
+为什么经过`MLM`与`NSP`任务训练之后，BERT无法学习到良好的句向量表示呢？回顾一下MLM与NSP任务的做法。
+- `MLM`任务是遮住某个**单词**，让模型去预测遮住的单词:
   - 在这个训练中，模型并没有显式地对\[CLS]向量进行训练，没有告诉模型\[CLS]这个向量就是用来编码句子的语义信息的。在MLM任务中\[CLS]学习到的并不是句子的语义表征。
-- NSP任务是给定两个句子，让模型判断两个句子是否为**上下文关系**，使用\[CLS]的输出来进行二分类。
-  - 在这个任务中，\[CLS]是用来编码两个句子之间的关系的，而不是描述某个句子的语义信息。
+- `NSP`任务是给定两个句子，让模型判断两个句子是否为**上下文关系**，使用\[CLS]的输出来进行**二分类**。
+  - 在这个任务中，\[CLS]是用来编码两个句子之间的**关系**的，而不是描述某个句子的语义信息。
 
 综上所述，未经过fintune的BERT模型，必然无法得到良好的句子的语义表征。
 
 ### BERT坍塌
 
-美团的ConSERT论文表明，如果BERT模型不经过微调的话，**模型输出的句向量会坍塌到一个非常小的区域内**。下图所展示的是在STS数据集中，文本相似度的分布情况，其中横坐标表示人类标注的句子相似度等级，纵坐标表示没有经过finetune的BERT模型预测的句子相似度分布。可以很明显看到模型预测的所有句子对的相似度，几乎都落到了0.6-1.0这个区间，即使含义完全相反的两个句子，模型输出的相似度也非常高。这便是BERT的句子表示的“坍塌”现象。
+美团的ConSERT论文表明，如果BERT模型不经过微调的话，**模型输出的句向量会坍塌到一个非常小的区域内**。
 - ![](https://weixin.aisoutu.com/cunchu7/2022-04-05/4_16491702735732915.png)
+- 图示是在STS数据集中，文本相似度的分布情况，其中横坐标表示人类标注的句子**相似度等级**，纵坐标表示没有经过finetune的BERT模型预测的句子**相似度分布**。可以很明显看到模型预测的所有句子对的相似度，几乎都落到了0.6-1.0这个区间，即使含义完全相反的两个句子，模型输出的相似度也非常高。这便是BERT的句子表示的“**坍塌**”现象。
 - BERT的句向量的坍缩和句子中的**高频词**有关。当使用整个句子序列的输出的**平均向量**作为句向量时，句子中的**高频词将会主导句向量**，使得任意两个句向量之间的相似度都非常高。为了验证该想法，美团的ConSERT论文对此也进行了实验。
 - ![](https://weixin.aisoutu.com/cunchu7/2022-04-05/4_16491711685264032.png)
+- 去除若干高频词后，BERT模型在STS数据集上的Spearman得分。得分越高，说明模型在数据集上的表现越好。可以看到，当计算句向量时，如果去除若干个top-k的高频词，Spearman得分显著提高，句向量的坍塌现象得到了一定程度的缓解。
 
-结论：BERT的MLM与NSP预训练任务难以胜任下游的语义匹配任务。
+结论：
+- BERT的MLM与NSP预训练任务难以胜任下游的**语义匹配**任务。
 
-为了解决该问题，可以使用对比学习的方法对模型进行预训练，从而使模型能够学习到更好的句子语义表示，并且更好地应用到下游任务中。
+为了解决该问题，可以使用**对比学习**的方法对模型进行预训练，从而使模型能够学习到更好的句子语义表示，并且更好地应用到下游任务中。
 
 
 ## 基本概念
 
 【2021-8-31】[张俊林：对比学习在微博内容表示的应用](https://mp.weixin.qq.com/s/MteoquDoks4kuVPA9jzT_Q)
 
-**对比学习**可以看作是一种新型的自监督学习范式，具备广阔发展前景。对比学习跟以下两个目前比较流行的技术关联较深。
+**对比学习**可以看作是一种新型的**自监督学习范式**，具备广阔发展前景。对比学习跟以下两个目前比较流行的技术关联较深。
 - Bert采用的**自监督学习**。Bert采用自监督学习，节约了大量的人工标注成本，可以有效发挥海量数据的潜力。对比学习借鉴了自监督学习的思路，旨在充分利用海量的无标注数据；
 - **度量学习**。`度量学习`的基本思路是让**正例**特征编码内容距离**拉近**，**负例**编码结果距离**推远**。其中的正例一般是源自有监督数据。对比学习主体思路跟度量学习接近，最大的区别在于其正例是由自监督方式得来。
 综上，可以认为对比学习是一种**自监督**版本的**度量学习**。
@@ -253,21 +262,12 @@ L原定义:
 当然在比例尺上看来， ![[公式]](https://www.zhihu.com/equation?tex=d%28x%2Cx%5E%2B%29) 也会趋于0。
  
 原文将所有三元组的状态分为三类：
- 
-*   hard triplets  
-    正样本离锚点的距离比负样本还大
-    
-*   semi-hard triplets  
-    正样本离锚点的距离比负样本小，但未满足
-    
-*   easy triplets  
-    满足 ![[公式]](https://www.zhihu.com/equation?tex=d%28x%2Cx%5E-%29%3E+d%28x%2Cx%5E%2B%29%2B%5Calpha)
-    
- 
+*  hard triplets  正样本离锚点的距离比负样本还大
+*  semi-hard triplets  正样本离锚点的距离比负样本小，但未满足
+*  easy triplets  满足 ![[公式]](https://www.zhihu.com/equation?tex=d%28x%2Cx%5E-%29%3E+d%28x%2Cx%5E%2B%29%2B%5Calpha)
   
 前两个状态会通过loss逐渐变成第三个状态。
- 
-![](https://pic4.zhimg.com/80/v2-834682b972f2d25a91fad527978ec7f7_1440w.jpg)
+- ![](https://pic4.zhimg.com/80/v2-834682b972f2d25a91fad527978ec7f7_1440w.jpg)
  
 ### 4. NCE Loss
  
@@ -617,9 +617,6 @@ G. NLP近年论文
 ![](https://pic3.zhimg.com/80/v2-52ec7bfd30e719909e5e7249a4d02caa_1440w.jpg)
  
 ![](https://pic1.zhimg.com/80/v2-fa4b23a3923b4513b18a24745ebbc778_1440w.jpg)
-
-# 附录
-
  
 ## 互信息
  
@@ -673,6 +670,71 @@ VAE的思想是用 ![[公式]](https://www.zhihu.com/equation?tex=r%28c%29) 【�
  
 ### Triplet Loss
  
+### 核心代码
+
+```python
+def cl_forward(cls,...): #对比学习的部分代码
+    return_dict = return_dict if return_dict is not None else cls.config.use_return_dict
+    ori_input_ids = input_ids
+    batch_size = input_ids.size(0)
+    # Number of sentences in one instance
+    # 2: pair instance; 3: pair instance with a hard negative
+    num_sent = input_ids.size(1)
+
+    mlm_outputs = None
+    # Flatten input for encoding
+    input_ids = input_ids.view((-1, input_ids.size(-1))) # (bs * num_sent, len)
+    attention_mask = attention_mask.view((-1, attention_mask.size(-1))) # (bs * num_sent len)
+    if token_type_ids is not None:
+        token_type_ids = token_type_ids.view((-1, token_type_ids.size(-1))) # (bs * num_sent, len)
+
+    # Get raw embeddings，得到原句子特征
+    outputs = encoder(
+        input_ids,
+        attention_mask=attention_mask,
+        token_type_ids=token_type_ids,
+        position_ids=position_ids,
+        head_mask=head_mask,
+        inputs_embeds=inputs_embeds,
+        output_attentions=output_attentions,
+        output_hidden_states=True if cls.model_args.pooler_type in ['avg_top2', 'avg_first_last'] else False,
+        return_dict=True,
+    )
+
+    # MLM auxiliary objective，执行MLM任务
+    if mlm_input_ids is not None:
+        mlm_input_ids = mlm_input_ids.view((-1, mlm_input_ids.size(-1)))
+        mlm_outputs = encoder( #得到特征
+            mlm_input_ids,
+            attention_mask=attention_mask,
+            token_type_ids=token_type_ids,
+            position_ids=position_ids,
+            head_mask=head_mask,
+            inputs_embeds=inputs_embeds,
+            output_attentions=output_attentions,
+            output_hidden_states=True if cls.model_args.pooler_type in ['avg_top2', 'avg_first_last'] else False,
+            return_dict=True,
+        )
+
+    # Pooling，池化
+    pooler_output = cls.pooler(attention_mask, outputs)
+    pooler_output = pooler_output.view((batch_size, num_sent, pooler_output.size(-1))) # (bs, num_sent, hidden)
+
+    # If using "cls", we add an extra MLP layer
+    # (same as BERT's original implementation) over the representation.
+    if cls.pooler_type == "cls":
+        pooler_output = cls.mlp(pooler_output)
+
+    # Separate representation，分别得到两个表示z1，z2
+    z1, z2 = pooler_output[:,0], pooler_output[:,1]
+    
+    cos_sim = cls.sim(z1.unsqueeze(1), z2.unsqueeze(0)) #计算对比loss
+    
+    labels = torch.arange(cos_sim.size(0)).long().to(cls.device)
+    loss_fct = nn.CrossEntropyLoss()
+    loss = loss_fct(cos_sim, labels)
+```
+
 ### 结论
  
 我们将三元组重新描述为 ![[公式]](https://www.zhihu.com/equation?tex=%28x%2Cx%5E%2B%2Cx%5E-%29) 。
@@ -935,11 +997,11 @@ InfoNCE 是在\[6\]CPC中提出的。CPC(对比预测编码) 就是一种通过�
 ## SimCSE
 
 【2022-4-7】[SimCSE:简单有效的句向量对比学习方法](https://www.aisoutu.com/a/2363026)
-- EMNLP2021的一篇[论文](https://arxiv.org/abs/2104.08821)：SimCSE。一种简单有效的NLP对比学习方法，通过Dropout的方式进行正样本增强，模型能够学习到良好的句向量表示。
+- EMNLP2021的一篇[论文](https://arxiv.org/abs/2104.08821)：SimCSE。一种简单有效的NLP**对比学习**方法，通过Dropout的方式进行正样本增强，模型能够学习到良好的句向量表示。
 - [实验复现代码](https://github.com/yangjianxin1/SimCSE)
 - 中文数据集的复现结果可以参考[苏剑林的复现实验](https://kexue.fm/archives/8348)
 
-对比学习起源于计算机视觉任务，它的核心思想是，拉近每个样本与正样本之间的距离，拉远其与负样本之间的距离。
+对比学习起源于计算机视觉任务，它的核心思想是，**拉近**每个样本与**正**样本之间的距离，拉**远**其与**负**样本之间的距离。
 
 如何为每个样本构造**正样本与负样本**是对比学习中的关键问题。
 - 负样本的构造往往比较容易，随机采样或者把同一个batch里面的其他样本作为负样本即可，难点在于如何构造正样本。
@@ -950,11 +1012,38 @@ InfoNCE 是在\[6\]CPC中提出的。CPC(对比预测编码) 就是一种通过�
 为了解决上述问题，SimCSE论文中提出了一种基于Dropout的**无监督对比学习**方法，同时也对有监督对比学习方法进行了探索。
 - ![](https://weixin.aisoutu.com/cunchu7/2022-04-05/4_16491711085915213.png)
 
+有两种形式：
+- **无监督** unsupervised SimCSE。将相同的输入语句两次传递给经过预训练的编码器，并通过应用独立采样的dropout掩码获得两个嵌入，作为“正例对”。通过仔细的分析，作者们发现dropout本质上是作为数据扩充来使用，而删除它会导致表示崩溃。
+- **有监督** supervised SimCSE。利用了基于**自然语言推理**（NLI）数据集进行句子嵌入学习，并将受监督的句子对纳入对比学习中。
+
 ### 无监督SimCSE
 
 Dropout是一种用来防止神经网络过拟合的方法，在训练的时候，通过dropout mask的方式，模型中的每个神经元都有一定的概率会失活。所以在训练的每个step中，都相当于在训练一个不同的模型。在推理阶段，模型最终的输出相当于是多个模型的组合输出
 - Dropout可以视为一种数据增强的手段，通过dropout mask的方式，模型在编码同一个句子的时候，引入了数据噪声，从而为同一个句子生成不同的句向量，并且不影响其语义信息。其中dropout rate的大小可以视为引入的噪声的强度。
 - 为了验证模型dropout rate对无监督SimCSE的影响，作者在STS-B数据集上进行了消融实验，其中训练数据是作者从维基百科中随机爬取的十万个句子。
+
+损失函数计算方法
+
+```python
+def simcse_unsup_loss(y_pred, device, temp=0.05):
+    """无监督的损失函数
+    y_pred (tensor): bert的输出, [batch_size * 2, dim]
+    """
+    # 得到y_pred对应的label, [1, 0, 3, 2, ..., batch_size-1, batch_size-2]
+    y_true = torch.arange(y_pred.shape[0], device=device)
+    y_true = (y_true - y_true % 2 * 2) + 1
+    # batch内两两计算相似度, 得到相似度矩阵(对角矩阵)
+    sim = F.cosine_similarity(y_pred.unsqueeze(1), y_pred.unsqueeze(0), dim=-1)
+    # 将相似度矩阵对角线置为很小的值, 消除自身的影响
+    sim = sim - torch.eye(y_pred.shape[0], device=device) * 1e12
+    # 相似度矩阵除以温度系数
+    sim = sim / temp
+    # 计算相似度矩阵与y_true的交叉熵损失
+    # 计算交叉熵，每个case都会计算与其他case的相似度得分，得到一个得分向量，目的是使得该得分向量中正样本的得分最高，负样本的得分最低
+    loss = F.cross_entropy(sim, y_true)
+    return torch.mean(loss)
+```
+
 
 ### 有监督SimCSE
 
@@ -962,6 +1051,29 @@ Dropout是一种用来防止神经网络过拟合的方法，在训练的时候�
 - 与无监督SimCSE一样，作者利用数据集中人工标注的正样本对，使用InfoNCE loss对模型进行训练，可以看到使用SNLI+MNLI数据集训练的模型效果最好，并且其指标也比无监督SimCSE提高了2.4个点。
 
 对于无监督SimCSE与有监督SimCSE，论文的实验结果如下表，可以看到，在STS任务中，无论是无监督还是有监督的训练方法，都比之前的方法有了较大幅度的提高，这证明了论文方法的有效性。
+
+损失函数计算方法
+
+```python
+def simcse_sup_loss(y_pred, device, temp=0.05):
+    """
+    有监督损失函数
+    y_pred (tensor): bert的输出, [batch_size * 3, dim]
+    """
+    similarities = F.cosine_similarity(y_pred.unsqueeze(0), y_pred.unsqueeze(1), dim=2)
+    row = torch.arange(0, y_pred.shape[0], 3)
+    col = torch.arange(0, y_pred.shape[0])
+    col = col[col % 3 != 0]
+
+    similarities = similarities[row, :]
+    similarities = similarities[:, col]
+    similarities = similarities / temp
+
+    y_true = torch.arange(0, len(col), 2, device=device)
+    loss = F.cross_entropy(similarities, y_true)
+    return loss
+```
+
 
 ## 1. 概述
  
@@ -1061,6 +1173,154 @@ SimCLR 迁移学习和有监督学习
 *   SimCLR: A Simple Framework for Contrastive Learning of Visual Representations [「链接」](https://arxiv.org/pdf/2002.05709.pdf)
 *   代码 [「链接」](https://github.com/google-research/simclr)
 *   博客: The Illustrated SimCLR Framework [「链接」](https://amitness.com/2020/03/illustrated-simclr/)
+
+
+# 应用
+
+## nlp领域研究进展
+
+Bert在NLP领域应用广泛，但是它学习到的句子表征在向量空间内倾向于产生**坍塌现象**。这是因为输入语料存在大量**高频词**，所以语义的高阶表征容易被高频词主导，使得很多句子的高阶语义特征在空间中十分相近。对比学习可以很好地解决这一问题。
+
+美团提出了**ConSERT**，发现在数据增广方法中，feature cutoff 和 shuffle 在对比学习中最有效。
+
+**SimCSE**发现仅仅使用dropout就可以有效地解决**语义坍塌**的问题，且其性能优于ConSERT。出现这一现象的原因在于
+- ConSERT集中在Embedding layer和Pool layer的扰动上
+- 而SimCSE在**网络结构**中加入了扰动
+
+所以这启发了我们在做数据增广时不仅需要考虑特征层面，也要考虑模型层面的增广。
+
+## cv领域研究进展
+
+对比学习在CV领域的研究
+- 首先，由于对比学习在使用越大的batch size得到的效果越好，但是受限于GPU的**内存限制**，无法使得batch size无限增大，而**MoCo**提出了**memory bank**的设计，它将样本的表征保存在一个字典中作为之后batch的负样本。
+- 此外，MoCo的encoder采用了**动量更新**，保证embedding更新的稳定性。
+- 随后Google提出了**SimCLR**框架，它舍弃了memory bank的结构，认为采用**数据增广**和加入**线性头**的方法就足以保证对比学习的模型效果。实际上，MoCo的改进版本也采用了这一策略，发现最终的效果比SimCLR更优。
+  - SimSiam采用了**非对称**的网络结构，创造性地提出在对比学习框架中不需要引入负样本，也不需要采用动量更新的方法优化encoder，而仅仅需要在没有线性头的分支加入stop gradient就可以达到防止模型坍塌，同时取得很好的性能的目的。
+
+
+## 推荐系统与对比学习
+
+【2022-5-30】[罗清：对比学习在快手推荐排序的应用](https://mp.weixin.qq.com/s/2GgIt38uO_qmLGskfB_lfQ)，[pdf下载](https://www.waitang.com/report/47713.html)
+
+推荐系统存在数据**分布偏差**与**数据稀疏**的问题，主要体现在
+- 群体兴趣与用户个性化的差异不易捕捉
+- 部分反馈信号稀疏
+- 负反馈不灵敏等
+
+分布偏差+数据稀疏
+- 虽然整体数据量并不少，但是对于每个user，或者item来说，还是过于稀疏，产生了流行度偏差
+- 模型在训练的时候也更容易**主导梯度**。这些问题严重影响了用户体验，比如，推送的都是很相似的视频，用户点击了dislike，还会出现类似视频，所以解决这些问题可以带来更好的推荐质量
+
+而对比学习可以在一定程度上缓解上述问题，提高推荐质量，带来更好的内生态和用户体验。
+- 解决**数据稀疏**问题的常用方法有**数据降维**（用更泛化的特征）和**减少模型参数**等。
+  - 但是这两个方法会损失一定的有用信息。
+- 解决**数据分布偏差**问题的常用方法有**IPW**和**重采样**。
+  - 但是IPW需要计算高方差的概率，使得它在稀疏数据中的稳定性和准确性存在一定限制。
+
+对比学习的优势在于：
+- 通过挖掘数据本身蕴含的**标签信息**，缓解数据稀疏的问题；
+- 通过**样本增广**拟合数据的真实分布，缓解数据分布偏差问题；
+- 通过**自监督**信号抽取数据中包含的通用知识，为主任务提供有效的信息。
+
+总的来说，对比学习通过挖掘自身数据的信息来为模型提供额外信号，从而带来信息增益，以此缓解数据稀疏和数据分布偏差的问题。
+
+对比学习是一种自监督学习方法，用于在**没有标签**的情况下，通过让模型学习哪些数据**相似**或**相异**来学习数据集的一般特征。
+- 图例中，使用对比学习给模型输入一部分包含**猫**的图片和另一部分包含**狗**的图片，可以不使用任何图片标签的情况下使得模型学习猫的特征和狗的特征。随后再使用**很少**的标签信号对模型进行有监督训练即可得到很好的分类效果。
+
+经典的SimCLR框架
+- 首先输入一张图片，通过**数据增广**（裁剪、旋转等）得到两种不同的图片。
+- 随后它们分别经过一个encoder得到图片的**表征**
+- 再经过**线性投影**至同一**向量空间**中
+- 最后，通过**最大化**空间中两个表征之间的相似度来学习更好的encoder表征。
+
+经过优化的表征可以被用于下游任务中，使用fine-tuning来提升模型在目标任务的效果。
+
+对比学习有以下三个常见的研究方向：
+- 如何**构造代理任务**
+  - 常见的有图像与增广图像、图像与文本、句子与句子、句子与情感进行对比学习。不同应用场景构造相应的代理任务来达到自监督学习的目的。
+- 如何**防止模型坍塌**
+  - 模型坍塌即特征经过encoder后得到的embedding都会聚类至空间的一个点上。解决这一问题的常见方法有采集更多的**负样本**（使用memory bank）、使用**非对称**的**模型结构**（网络一个分支包含线性头而另一分支不使用线性头）以及非对称的**梯度更新**。
+- 如何**增广样本**
+  - 常用的方法有裁剪、旋转、mask、shuffle、dropout等。这里的增广样本其实对于防止模型坍塌也是非常重要的一环，因为增广的样本不能让模型太难学，也不能太简单，所以实践中会采用多种增广来尝试。
+
+对比学习一般采用InfoNCE作为**损失函数**，其来源于Contrastive Predictive Coding任务，目标是最大化当前item和上下文c的互信息，使用的方法是利用NCE最大化互信息的下界估计。
+
+NCE是一种近似的**最大似然估计**，它通过对噪音样本的分布估计来推断真实分布。在softmax计算中，分母的归一化项计算开销大。NCE将多分类任务转化为每个样本与标签的二分类任务来避免归一化的计算开销。如果负样本的数量趋近于无穷大，那么NCE就是最大似然估计。所以在对比学习中，采样的负样本数量越多，效果越好。
+
+对比学习最终学习的理想表征需要满足alignment与uniformity两个性质。
+- 前者alignment代表着**相似样本**在学习的向量空间中距离尽可能小
+- 后者uniformity代表着样本表征在学习的向量空间中的**分布尽可能均匀**。
+
+### 推荐领域研究进展
+
+对比学习在推荐系统领域的研究进展
+- 阿里巴巴借鉴了MoCo的思路，加入了memory bank来减少曝光偏差。相较于将曝光未点击的样本作为**负样本**，他们认为memory bank中存储的负样本更加符合全局的样本分布。在此基础之上，他们还提出了**多意图对比学习**推荐系统Multi-CLRec，在全局的memory bank的基础之上加入了意图层面的memory bank。在负采样时，他们不仅从全局memory bank中选取负样本，还在所有不同意图的memory bank中抽取负样本。
+- 美团提出了S^3-Rec模型，首先使用设计的自监督训练目标对模型进行预训练，然后根据推荐任务对模型进行微调。此工作的主要新颖之处在预训练阶段，我们基于MIM的统一形式精心设计了四个自监督的辅助任务：
+  - item与attribute的对比学习
+  - sequence与item的对比学习（通过将sequence中的一个item进行mask操作来实现）
+  - sequence与attribute的对比学习以
+  - sequence与segment子序列的对比学习。
+- 因此，S^3-Rec能够以统一的方式来表征不同粒度级别或不同形式数据之间的相关性，并且也可以灵活地适应新的数据类型或关联模式。通过这样的预训练方法，可以有效地融合各种上下文数据，并学习属性感知的上下文化的数据表示。
+
+ICL认为用户在点击商品时存在多种意图，但这些意图都是隐性的，潜藏在用户行为序列里，我们如果利用好它就能提高推荐的效果。核心思路就是从用户的行为序列里面学习用户隐式意图的分布函数，然后构造对比学习任务，同一类的拉近，不同类的拉远。具体地，ICL对用户的行为序列经过一个encoder后得到表征，并将所有表征进行K-means聚类操作。如果一个行为序列位于其中一个聚类空间中， 拉近该user到他聚类中心的距离，拉远到其他聚类中心的距离。每次迭代优化后的表征将会在新的循环中重新进行K-means聚类得到新的意图类。对比学习子任务辅助推荐主任务，最终在实验中得到了不错的效果。
+
+CauseRec结合了因果推断的思想。它认为用户的行为序列中存在部分噪声信息，所以它希望判断行为序列中的item是否可以被替代。进一步，它分别将可替代的item与不可替代的item进行mask操作，使用对比学习的思想将mask可替代item的序列作为正例，mask不可替代item的序列作为负例。可替代性是通过该item与用户的兴趣表征以及target item的相关性排名来进行定义。
+
+### 快手视频推荐应用
+
+快手的推荐场景是短视频，可以获取的监督信号有观看时长、喜欢（like）、dislike、收藏、转发等。
+- 之前的做法是对每一种反馈信号都预估一次，最后将预测结果经过线性加权的方式进行打分排序。但是，由于不同类型的标签分布不一致，且它们的量纲也有一定差异，所以**线性加权并不合适**。
+- 业界通用的做法是使用各类反馈信号的rank值，但是这一做法丢弃了每一类预测分数之间的绝对值信息。
+- 最后，快手定义了**短视频组合收益**，其计算公式如上图所示。随后，我们借鉴了youtube的损失函数设计做了改进，它的好处在于数据兼容性较好，相比回归，模型的预估值在0到1之间。而且，相比回归任务，分类任务更加鲁棒。
+
+快手排序模型的整体框架。其中
+- 绿色框中的排序模型可以使用不同的base模型进行加载。框架中加入了三个辅助任务：
+  - user和item之间的辅助对比学习任务
+  - user和user之间的辅助对比学习任务
+  - user的正例子序列和负例子序列的辅助对比学习任务。
+
+### Q&A
+
+问答
+
+- Q：对比学习和pair-wise建模有什么区别？
+- A：Pair-wise旨在学习排序层面**两个**item的**相对次序**，而对比学习的目的是学习正负样本直接的**表征相似度**。
+
+- Q：短视频组合收益公式中各参数的具体含义是什么？
+- A：每一项表示一个item是否被收到一类正反馈。如果item得到了相应的正反馈信号那么就取1，反之则取0。公式中的参数a，b是超参数。
+
+- Q：行为序列少的用户会被采样到吗？
+- A：会。我们需要保证采样的序列符合样本的分布，从而尽可能保证分布的无偏性。
+
+- Q：模型的耗时是在什么数量级？
+- A：排序模型使用在**重排**阶段，它的耗时较低，大约为**40~50ms**。值得注意的是，对比学习的辅助任务不参与inference，**只在模型训练阶段使用**。
+
+- Q：召回时使用对比学习框架后，有没有具体数据证明它对长尾item有效果提升？
+- A：我们做过相应的分析，发现在**召回**阶段对比学习对长尾item的效果提升十分明显。由于今天分享的主题是排序相关应用，所以没有展示召回阶段的结果分析。
+
+- Q：排序阶段的效果提升有没有可能是统计量随机误差导致的？
+- A：事实上，在相对效果提升层面不存在统计上的随机误差，因为在快手推荐场景下存在一个置信区间，一般为0.1%。而使用对比学习所带来的的增益已经超过了这一置信区间。
+
+- Q：组合收益公式为什么是加法而不是乘法？
+- A：因为在快手场景，点赞、评论、进入个人页等都是独立的，没有先点击再点赞的关系，所以我们采用的是加法，乘法一般用于这种有先后关系的场景。
+
+- Q：**负采样**和**样本增广**分别有什么作用？
+- A：样本增广的目的是让模型接受难度适中的输入来学习更好的向量表征。负采样需要考虑曝光偏差带来的影响，因为一般情况下我们任务曝光未点击的item为负样本，曝光且点击的样本为正样本，使用我们的负采样方法可以使用未曝光的样本。
+
+- Q：模型更新的粒度是什么样的？训练数据有多大？
+- A：模型是根据数据流实时更新的，训练数据的体量是公司内部资产，不方便详细透露。
+
+- Q：如何离线验证对比学习的效果以及debias的效果？
+- A：离线实验中我们与当前state-of-the-art的模型进行对比，即在同一基准模型的基础上加入对比学习框架后观察实验指标的提升程度。我们不仅使用了快手的数据集，还在学术界最新的推荐数据集上做了对比实验，最终都观察到了效果的提升。针对长尾item，我们将数据中的长尾商品单独抽取出来进行指标的计算与对比，最后也得到了更优的效果。
+
+- Q：第三个辅助任务中正反馈的类型很多，那么在具体训练时有没有用到所有类型的正反馈？不同类型的正反馈的权重是一样的吗？
+- A：不同类型的正反馈的权重不一样。我们目前采用的正反馈类型有关注、喜欢和转发。我们会对这三种反馈按权重做随机采样，构造正反馈队列。相对地，由于负反馈较为稀疏，“hate”反馈是被全部采用的，对于”hate”反馈过少的，采用短播序列补充。
+
+- Q：In-batch负采样需要**流式纠偏**吗？
+- A：需要进行纠偏。由于In-batch负采样对长尾item存在偏差，所以我们在负采样时是按照曝光频率进行采样的。此外，为了进一步接近无偏性，还加入了全局负采样。
+
+- Q：针对全局负采样和In-batch负采样有没有做过消融实验验证效果吗？
+- A：因为这一想法参考了youtube的文章中提出的方法，所以我们没有进行消融实验，而是认为使用这一方法可以得到增益。
 
 
 

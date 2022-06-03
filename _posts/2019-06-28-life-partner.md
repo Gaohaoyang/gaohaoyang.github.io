@@ -27,6 +27,20 @@ mathjax: true
 
 [为什么说找一个聊得来的人很重要？](https://www.zhihu.com/question/43445138/answer/111219554)
 
+【2022-5-22】[不同类型的聊天方式](https://www.bilibili.com/video/BV13A4y1S7cp)
+- 单身聊天技巧第一式-**正常**聊天型
+- 单身聊天技巧第二式-**尬聊**型
+- 单身聊天技巧第三式-**斗图**型
+- 单身聊天技巧第四式-**说教**型
+- 单身聊天技巧第五式-**无效沟通**型
+- 单身聊天技巧第六式-**无脑追问**型
+- 单身聊天技巧第七式-**自负**型
+- 单身聊天技巧第八式-**强硬**型
+- 凄惨版
+  - 我：在干嘛？
+  - 对方：一天无应答
+- <iframe src="//player.bilibili.com/player.html?aid=896347703&bvid=BV13A4y1S7cp&cid=714184371&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+
 - 【2021-12-2】男人的世界其实非常单纯，[脱口秀](https://www.ixigua.com/7035606107716390182)，独居、群居时不做计划，不做防备，一声吆喝就出门
 
 参考文章：
@@ -129,9 +143,9 @@ mathjax: true
 - [单身狗速进！如何科学有效地脱单？](https://www.bilibili.com/video/av75629882)
    - `最优停止问题`或`37%法则`，先谈37%*N次恋爱，再看后来者是否比前面优秀，据此决定是否结婚
    - 应用前提：单向性，一次一个，只能选择一次，无法回头，如招聘（秘书问题）、租房、谈恋爱等情形
-<iframe src="//player.bilibili.com/player.html?aid=75629882&cid=129377172&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- <iframe src="//player.bilibili.com/player.html?aid=75629882&cid=129377172&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 - [李永乐老师和西瓜妹现场解析：什么是爱情？如何寻找真命天子？](https://www.ixigua.com/i6618463993403015688/)
-<iframe src="https://www.ixigua.com/i6618463993403015688" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- <iframe src="https://www.ixigua.com/i6618463993403015688" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 ## 是做海王，还是从一而终？
 
@@ -1195,12 +1209,10 @@ mathjax: true
 韩国Solfa TV做了个社会实验：`1 VS 40 相亲，能找到对的人吗？`，邀请一位男生与 40 位女生同时相亲，通过群聊的形式，男生提出各种问题，不符合的女生就离场，可在不断严苛的限制条件下，真的能找到最合适自己的人吗？
 
 - [男版](https://www.bilibili.com/video/av23785599?zw)
-
-<iframe src="//player.bilibili.com/player.html?aid=23785599&cid=39766775&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+- <iframe src="//player.bilibili.com/player.html?aid=23785599&cid=39766775&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
 - [女版](https://www.bilibili.com/video/av15000343)
-
-<iframe src="//player.bilibili.com/player.html?aid=15000343&cid=24433607&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+- <iframe src="//player.bilibili.com/player.html?aid=15000343&cid=24433607&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
 所以，不要列太多条条框框，尤其是外在条件，多从内心去判断。
 

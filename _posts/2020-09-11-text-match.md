@@ -3,7 +3,7 @@ layout: post
 title:  "文本匹配-Text Matching"
 date:   2020-09-11 20:43:00
 categories: 深度学习
-tags: 深度学习 NLP
+tags: 深度学习 NLP 相似度
 excerpt: 深度学习在NLP子领域——文本匹配的应用汇总
 author: 鹤啸九天
 mathjax: true
@@ -88,7 +88,6 @@ mathjax: true
 
 - 如何定义“相似”也是个开放问题
 - 常见方法：PI、SSEI、STS、IR-QA、Ad-hoc retrieval
-
 
 - [2020-12-28][机器学习中“距离与相似度”计算汇总](https://zhuanlan.zhihu.com/p/336946131)
   - 涵盖了常用到的距离与相似度计算方式，其中包括欧几里得距离、标准化欧几里得距离、曼哈顿距离、汉明距离、切比雪夫距离、马氏距离、兰氏距离、闵科夫斯基距离、编辑距离、余弦相似度、杰卡德相似度、Dice系数。
@@ -774,6 +773,21 @@ def average_precision(gt, pred):
 
 
 # 匹配模型
+
+【2022-5-23】[交互模型你快跑，双塔要卷过来了](https://mp.weixin.qq.com/s/jFQWOVnDZHdvSAOKafbDqw)
+
+**文本匹配**是NLP的一个重要任务，应用场景也十分广泛，比如**搜索**中query和doc的匹配、**问答**中query和answer的匹配、甚至再泛化点来讲，也可应用到**推荐**、**多模态**图文匹配中，甚至**NER**、**分类**都可以用匹配来解。[文本匹配的综述](https://mp.weixin.qq.com/s?__biz=MzAxMTk4NDkwNw==&mid=2247486128&idx=1&sn=3c77c96c6891a94de629677911b42553&scene=21#wechat_redirect)，分别列举了匹配任务中的两种范式，双塔式和交互式：
+- `双塔`：两个句子分别encode成向量后，再融合
+- `交互`：两个句子先合并，encode直接得到融合向量
+
+优缺点：
+- `双塔`（左图）的**速度很快**，但是由于缺少两个句子的细粒度交互，**效果始终有限**
+- `交互`（右图）则完全相反，**效果很好**，但速度一言难尽
+
+有没有什么方法，既有双塔的速度，又有交互的精度呢？万能的蒸馏；有三篇paper都在做这件事
+- 2021年12月8号，中科大和美团合作的文章，提出了一个Virtual Interaction机制，在训练阶段，把attention的交互信息蒸馏到双塔中。为了更好地利用上一点学到的交互知识，作者在双塔模型的metric计算上又加了一个attention机制，名为VIRT-adapted Interaction
+- 哈工大和微软合作的工作，跟VIRT的时间算是前后脚，2021年12月16号挂到arxiv上，不过这篇工作主要是做**图像和文本**匹配的。出发点和VIRT也比较相似，只不过是用**KL散度**来蒸馏（老实说L2、KL散度、交叉墒在蒸馏时都可以用，具体效果我实践下来差距还不小，很玄学），并且在最后没有增加额外的attention
+- 2022年5月18号，百度挂在arxiv的工作，不过他们没有对每层的attention进行蒸馏，而是重点攻克最后一层。作者主要参考了ColBERT，ColBERT在最后的交互上使用了一个MaxSim机制
 
 ## 发展历史
 
