@@ -524,6 +524,10 @@ mathjax: true
 
 ## 光的本质：波
 
+[光的本质](https://www.bilibili.com/video/BV1JS4y117sr?)
+
+<iframe src="//player.bilibili.com/player.html?aid=725358687&bvid=BV1JS4y117sr&cid=566459856&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 【2022-6-3】[波：光，声音和现实的本质](https://www.bilibili.com/video/BV1uE41137qw/), 转自[YouTube](https://www.youtube.com/watch?v=Io-HXZTepH4)
 - **波**的物理学: 包括**量子波**，**声波**和**光波**。解释折射、反射等许多容易理解的话题。
 - 重要更正: 在折射部分，颜色是相反的。紫光在水中比红光慢得多，因此当紫光从空气过渡到水中时，它比红光更容易弯曲。
