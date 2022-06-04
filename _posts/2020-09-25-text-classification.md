@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  "文本分类-Text Classification"
-date:   2020-09-24 14:52:00
+date:   2020-09-25 14:52:00
 categories: 深度学习
-tags: 文本分类 负采样 fasttext
+tags: 文本分类 负采样 fasttext kaggle
 excerpt: NLP子领域文本分类知识汇总
 author: 鹤啸九天
 mathjax: true
@@ -1204,9 +1204,9 @@ TextGCN：一种文本分类的图神经网络方法。第一次将整个语料�
 
 # 经验总结
 
-参考：[工业界文本分类避坑指南](https://zhuanlan.zhihu.com/p/201239352)
-
 ## 一、问题拆解和数据
+
+参考：[工业界文本分类避坑指南](https://zhuanlan.zhihu.com/p/201239352)
 
 ### Q1 构建文本分类标签体系有哪些坑？
  
@@ -1335,6 +1335,83 @@ TextGCN：一种文本分类的图神经网络方法。第一次将整个语料�
 ![](https://picb.zhimg.com/80/v2-d23b71afed7cf7fd2a947cd1fe5e237d_720w.jpg)
 
 
+## 比赛经验
+
+###  Google QUEST Q&A Labeling
+
+[Google QUEST Q&A Labeling](https://www.kaggle.com/c/google-quest-challenge)
+
+【2022-6-3】[新手入门 Kaggle NLP类比赛总结](https://zhuanlan.zhihu.com/p/109992475)
+- 最初是跟着教程跑入门赛 [Bag of Words Meets Bags of Popcorn](https://www.kaggle.com/c/word2vec-nlp-tutorial) 入坑 kaggle NLP 类比赛, 被一步步的**文本预处理**搞得心累
+- 后来 BERT 横空出世，文本预处理已不再重要，NLP 类比赛变得像传统挖掘类比赛一样简单，现成的开源框架加上 kaggle 平台上免费的 GPU 资源，似乎已经没什么障碍了
+
+#### BERT家族
+
+BERT 类模型的使用方法是**预训练** + **finetune**
+- ![](https://pic1.zhimg.com/80/v2-4c71018820a9b70236f2398c3548ec68_1440w.jpg)
+- 绿色的**数据部分**，主要包括对数据进行**采样**，转换成 BERT 输入的格式。
+  - NLP 类比赛中的数据大致可分为**文本数据**和**非文本数据**
+    - 文本数据为主，一般以句子、段落或篇章的形式存在；
+    - 非文本数据是指数值变量或分类变量，这类变量的处理方法与传统挖掘类比赛一样，因为不是重点，不需要太复杂的处理或转换，并且一般只是作为补充信息被整合到 BERT 模型中，不妨称它们为 **meta 特征**。
+- 粉色的是**模型部分**，拆成了两块 **Encoder** 和 **Classifier**，在实际使用中其实是放在同一个神经网络里的。拆开表示主要是因为 
+  - Encoder 部分就是**预训练语言模型**，不论是网络结构还是权重都是现成的，直接拿来用，基本不需要做改动；
+  - 而 Classifier 部分是随着任务的不同而改变的，它一般是一层或多层**全连接网络**(FCNN)。
+  - 大致的流程是文本特征(也可以有 meta 特征)经过 Encoder 层会被编码成**向量表示**(Vector Representation)，再通过 Classifier 得到最终的预测结果。
+- meta 特征既能以 special tokens 的方式和文本特征一起进入 Encoder 进行编码；也可以不过 Encoder 而在 Classifier 部分进行 Embedding，然后与文本的 Vector Representation 进行融合后作为 Classifier 的输入。
+
+BERT家族
+- `BERT`：MLM 和 NSP任务
+  - 基于 Transformer Encoder来构建的预训练语言模型，它是通过 Masked Lanauge Model(MLM) 和 Next Sentence Prediction(NSP) 两个任务在大规模语料上训练得到的
+  - 开源的 Bert 模型分为 base 和 large，它们的差异在模型大小上。大模型有更大的参数量，性能也有会几个百分点的提升，当然需要消耗更多的算力
+- `BERT-WWM`：mask策略由token 级别升级为词级别
+- `Roberta`：BERT优化版，更多数据+迭代步数+去除NSP+动态mask
+- `XLNet`：模型结构和训练方式上与BERT差别较大
+  - Bert 的 MLM 在预训练时有 MASK 标签，但在推理时却没有，导致训练和推理出现不一致；并且 MLM 不属于 Autoregressive LM，不能做**生成类**任务。
+  - XLNet 采用 PML(Permutation Language Model) 避免了 MASK 标签的使用，且属于 Autoregressive LM，可以做生成任务。
+  - Bert 使用的 Transformer 结构对文本的长度**有限制**，为更好地处理长文本，XLNet 采用升级版的 Transformer-XL。
+- `Albert`：BERT简化版，更少的数据，得到更好的结果（70% 参数量的削减，模型性能损失<3% ）；两个方面减少模型的参数量：
+  - 对 Vocabulary Embedding 进行矩阵分解，将原来的矩阵V x E分解成两个矩阵V x H和H x E（H << E）。
+  - 跨层参数共享，每层的 attention map 有相似的pattern，可以考虑共享。
+
+这些模型的性能在不同的数据集上有差异，需要试了才知道哪个表现更好，但总体而言 `XLNet` 和 `Roberta` 会比 `Bert` 效果略好，large 会比 base 略好，更多情况下，它们会被一起使用，最后做 ensemble。
+
+#### Encoder
+
+Encoder 都是基于 transformer 结构的预训练语言模型，包括了 Bert 及其后继者 Bert-WWM()、Roberta、XLNet、Albert 等，统称为 **BERT 家族**。
+
+它们不仅在结构上很相似，而且在使用方法上更是高度一致，可以在 [huggingface/transformers](https://github.com/huggingface/transformers) 全家桶中直接调用
+
+#### 硬负采样 Hard negative sampling
+
+在 NLP 问答任务中，需要从一篇文章中寻找答案，一种常用的建模方法是将文章分割成多个 segment，分别与问题构成句子对，然后做**二分类**。这时候只有一个正样本，其他都是负样本，如果不对负样本做**下采样**的话，数据集会非常庞大，并且模型看到的多数都是负例。下采样可以减小数据集规模，从而节省模型训练的时间和资源消耗，这样才有可能尝试更多的模型和策略。
+
+那么该使用什么样的下采样策略呢？最简单的可以直接**随机下采样**，当然有更好的选择，这里推荐使用 **hard negative sampling**， 它的思想是保留那些对模型而言比较“**难**”的负样本，这样可以增加难度，迫使模型学到更多有用的特征。
+
+对负样本“难易”程度的衡量多是基于一些**启发式规则**，比如
+- 与正样本比较接近的可能更有迷惑性，因此可以通过定义**句子间距离**，保留那些与正样本“距离”比较近的负样本。
+- 再比如可以先用一个简单、运算量小的模型对训练集做预测，把那些容易预测错的负样本作为“难”的保留下来。
+
+#### 伪标签 Pseudo-labeling
+
+**伪标注**是一种**半监督**方法，在众多比赛中被验证有效而广泛使用，步骤如下：
+1. 训练集上训练得到 model1；
+2. 使用 model1 在测试集上做预测得到有伪标签的测试集；
+3. 使用训练集+带伪标签的测试集训练得最终模型 model2；
+
+伪标签数据可以作为训练数据而被加入到训练集中，是因为神经网络模型有一定的容错能力。需要注意的是伪标签数据质量可能会很差，在使用过程中要多加小心，比如不要用在 validation set 中。
+
+#### Ensemble
+
+打比赛的小伙伴对 Ensemble 应该不会陌生，在经验分享中看到有人只靠从 Public Kernal 中筛选一些得分高的模型，稍做修改后融合在一起就能拿到铜牌，足见 Ensemble 的威力。
+
+在挖掘类比赛中经常见到复杂的 Ensemble 策略，多个模型做 **blending**，然后再 **stacking** 好几层，以至于有时候自己都搞不清最终的提交是由哪些模型融合而来的。但在 NLP 比赛中，Ensemble 会简单很多，一个重要的原因是深度模型都很大，最终提交会有资源限制，没法跑太多模型。
+
+常用的 Ensemble 策略其实就是多个模型的输出求 average(**算数平均**、**几何平均**或**秩平均**)。
+
+因为深度模型消耗的运算资源大，并且结果有很大的随机性，因此出现了一些适合深度模型的 Ensemble 方法。
+- SWA(Stochastic Weight Averaging) 通过对训练过程中多个时间点的模型**权重求平均**达到集成的效果，基本不增加运算量，详细原理可以参考[论文](https://arxiv.org/abs/1803.05407)
+- Checkpoint / Seed / Fold average
+  - 因为深度模型的随机性，同样的模型结构，使用不同的随机种子、KFold 分割、训练过程中的检查点，都可以做 average 提升模型的泛化能力。
 
 ## 情感分析
 
