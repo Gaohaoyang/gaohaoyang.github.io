@@ -1733,7 +1733,6 @@ python run_language_modeling.py \
 - ![](https://image.jiqizhixin.com/uploads/editor/5442b9f1-17ca-49b3-a259-e5fb52107534/1544732034404.png)
 - ![](https://image.jiqizhixin.com/uploads/editor/87b820e3-dc5c-4f9f-97f6-6a01360156b7/1544732034725.png)
 
-
 下游任务
 - ![](https://image.jiqizhixin.com/uploads/editor/41afd366-28b8-4aa1-8464-5f10d253cb48/1544732037865.png)
 
@@ -1754,6 +1753,139 @@ ELMo、GPT和BERT的区别
 - ![](https://pic2.zhimg.com/80/v2-59c61eca79848c14285c302564cfe3d9_720w.jpg)
 
 BERT很好的融合了ELMo和GPT的优点，论文中提到在11种自然语言处理任务中（文本分类、自然语言推断、问答、文本标记）都取得了SOTA的成绩。
+
+## BERT结构
+
+BERT结构
+- ![](https://pic1.zhimg.com/80/v2-b80e8506c78fbf64fe80b8203abff7e8_1440w.jpg)
+
+### 输入格式
+
+Bert 的输入格式如下：
+
+```
+tokens     : [CLS] Sentence 1 [SEP] Sentence 2 [SEP]
+input_ids  :  101     3322     102     9987     102
+segment_ids:   0        0       0        1       1
+```
+
+文本特征
+- **单句**或者**句子对**(或叫上下句)经过 Word Piece Tokenize 后变成 tokens，然后通过一个**词表**(vocab)被映射成 input_ids。
+- 上下句信息会被编码成 segment_ids，连同 input_ids 一起进入 Bert
+- 经过多层 transformer 被转换成 Vector Representation，文本信息也就被编码到向量中了。
+
+注意
+- tokens 总长度的**限制**(Seq Length)：
+  - 一方面是**硬性限制**，即不能超过 512；
+  - 另一方面是**资源限制**，GPU 显存消耗会随着 Seq Length 的增加而显著增加。
+- Google 给出的在单个 Titan X GPU(12G RAM) 上 Bert 的资源消耗情况。
+  - ![](https://pic2.zhimg.com/80/v2-ebd0eb2aab87ca8357953bdce3f608f5_1440w.jpg)
+
+真实的数据集中，每条数据的文本长度是不相同的，一般呈现**长尾分布**，需要简单分析后确定一个 Seq Length。
+- 以 Google QUEST Q&A Labeling 比赛为例，文本特征包括 question_title、question_body 和 answer，tokenize 后分布
+- ![](https://pic3.zhimg.com/80/v2-7f5802f65d1e427daebdbc61d84b75c2_1440w.jpg)
+- ![](https://pic1.zhimg.com/80/v2-983e93c94c883f2d0f6770b60e60e300_1440w.jpg)
+- 使用 question_title + question_body + answer 的方式，则有75%左右的样本满足512的长度限制，另外**25%**需要做truncate截断处理；
+- 使用 question_title + question_body 和 answer 分开编码的方式，则有92%左右的样本满足512的长度限制，不过这时候需要使用两个 Bert；
+
+常用的截断的策略有三种：
+- pre-truncate
+- post-truncate
+- middle-truncate (head + tail)：最优
+
+研究对比了三种策略的效果，head + tail 最优，这也符合直觉，一般文章或段落的**开头结尾**往往会包含重要信息，截掉中间部分信息丢失最少。
+- 当然，这也不是绝对的，建议三种方法都尝试，比较后挑选，或者都保留，后期做融合。
+- 另外，也可以根据具体的场景**自定义**截断策略，比如在上面的例子中，可以通过设定 question_title 不超过 50，question_body 不超过 200，answer 不超过 200 等。
+
+### 特殊符号
+
+在 Bert 输入端，通过添加 special tokens
+
+Google QUEST Q&A Labeling 比赛举例，比如对于每条问答数据，有一个类别信息，类别可以是 culture、science 等，可以设计两个 special tokens [CAT=CULTURE] 和 [CAT=SCIENCE] 加入到文本中：
+
+```
+tokens     : [CLS] [CAT=CULTURE] question [SEP] answer [SEP]
+input_ids  :  101       1          3322    102   9987   102
+segment_ids:   0        0           0       0      1     1
+```
+
+当然，新增的 special tokens 需要相应地在词表中添加，实现方法也很简单，具体可以查看相关框架的文档。
+
+### 输出
+
+在 Bert 输出端
+- 直接做 embedding
+- 另一种方式是直接在 Bert 的输出端对 meta 特征进行 embedding，然后与文本特征的 Vector Representation 进行融合。
+
+实现方法也非常简单，下面是一个简单的代码示意：
+
+```python
+emb = nn.Embedding(10, 32)    # 初始化一个 Embedding 层
+meta_vector = emb(cat)    # 将类别编码成 vector
+logits = torch.cat([txt_vector, meta_vector], dim=-1)    # 文本向量和类别向量融合
+两种方式都可以尝试
+```
+
+### 向量表示 Vector Representation
+
+文本特征经过 Encoder 编码后变成了啥？
+- 以12层的 bert-base 为例，得到了 transformer 12层的 hidden states，每一层的维度为 B x L x H (B 表示 batch size，L 表示 Seq Length，H 表示 Hidden dim)。一般认为最后一层的第一个 token (也即 \[CLS]) 对应的向量可以作为整个句子(或句子对)的向量表示，也即，包含了从文本中提取的有效信息。但在比赛中可以看到各种花式操作，并且都得到了明显的效果提升，比如：
+- 取最后一层所有 token 对应的向量做融合；
+- 取所有层的第一个 token 对应的向量做融合；
+- 取最后四层的所有 token 对应的向量，加权重(可学习)融合；
+- ...
+
+![](https://pic3.zhimg.com/80/v2-0a675ad3cd5c24a6f3338b01f2554bc2_1440w.jpg)
+
+### 分类器 Classifier
+
+一般为一层或多层的全连接网络，最终把特征的向量表示映射到 label (target) 维度上。这部分比较灵活，可以做很多尝试，比如使用不同的激活函数、Batch Normalization、dropout、使用不同的损失函数甚至根据比赛 metric 自定义损失函数等。
+
+广泛使用的小技巧：
+
+（1）**Multi-Sample Dropout**
+
+使用连续的dropout，可以加快模型收敛，增加泛化能力，详细见论文，代码实现如下：
+
+```python
+dropouts = nn.ModuleList([
+    nn.Dropout(0.5) for _ in range(5)
+])
+
+for j, dropout in enumerate(dropouts):
+    if j == 0:
+        logit = self.fc(dropout(h))
+    else:
+        logit += self.fc(dropout(h))
+```
+
+（2）**辅助任务**
+
+多任务学习在 NLP 领域也很常见，通过设计一些与目标任务相关的辅助任务，有时也可以获得不错的提升。在 Jigsaw Unintended Bias in Toxicity Classification 比赛中，1st place solution 就采用了辅助任务的方法。
+- ![](https://pic4.zhimg.com/v2-47e66fc3817e1d2ceb5dfed653b3f323_r.jpg)
+
+图中 Target 是比赛要预测的目标，is male mentioned、is christian mentioned 等是一些**辅助目标**，通过这些辅助目标提供的监督信号，也可以对模型的训练和最终效果提供帮助。
+
+### 采样
+
+当一种神经网络框架很强大时(比如 transformer 结构)，对网络结构的小的改进(比如在 classifier 中增加几层全连接层、改变一下激活函数、使用dropout等)收益都是非常小的，这时候大的提升点往往是在数据层面。
+
+### 文本扩增
+
+比较常用且有效的方法是基于翻译的，叫做 back translation （**回译法**）。原理简单，是将文本翻译成另一种语言，然后再翻译回来，比如：
+
+```shell
+# 原始文本
+Take care not to believe your own bullshit, see On Bullshit.
+# EN -> DE -> EN
+Be careful not to trust your own nonsense, see On Bullshit.
+# EN -> FR -> EN
+Be careful not to believe your own bullshit, see On Bullshit.
+# EN -> ES -> EN
+Be careful not to believe in your own shit, see Bullshit.
+```
+
+因为 Google 翻译已经做到了很高的准确率，所以 back translation 基本不会出现太大的语义改变，不过需要有办法搞到 Google 翻译的 api，目前似乎没有免费可用的了。
 
 ## BERT要点
 
@@ -2292,7 +2424,7 @@ tokenizer_output = ["un", "##aff", "##able"]
 
 # BERT变种
 
-## BERT改进总结
+## 改进总结
 
 - 【2022-5-26】[BERT模型的优化改进方法](https://zhuanlan.zhihu.com/p/514849987), 论文《BERT模型的主要优化改进方法研究综述》的阅读笔记，对 BERT主要优化改进方法进行了研究梳理。
 
@@ -2304,20 +2436,37 @@ BERT 模型使用两个预训练目标来完成文本内容特征的学习。
 - **掩藏语言模型**（Masked Language Model，MLM）通过将单词掩盖，从而学习其上下文内容特征来预测被掩盖的单词
 - **相邻句预测**（Next Sentence Predication，NSP）通过学习句子间关系特征，预测两个句子的位置是否相邻
 
+### BERT家族
+
+- `BERT`：MLM 和 NSP任务
+  - 基于 Transformer Encoder来构建的预训练语言模型，它是通过 Masked Lanauge Model(MLM) 和 Next Sentence Prediction(NSP) 两个任务在大规模语料上训练得到的
+  - 开源的 Bert 模型分为 base 和 large，它们的差异在模型大小上。大模型有更大的参数量，性能也有会几个百分点的提升，当然需要消耗更多的算力
+- `BERT-WWM`：mask策略由token 级别升级为词级别
+- `Roberta`：BERT优化版，更多数据+迭代步数+去除NSP+动态mask
+- `XLNet`：模型结构和训练方式上与BERT差别较大
+  - Bert 的 MLM 在预训练时有 MASK 标签，但在推理时却没有，导致训练和推理出现不一致；并且 MLM 不属于 Autoregressive LM，不能做**生成类**任务。
+  - XLNet 采用 PML(Permutation Language Model) 避免了 MASK 标签的使用，且属于 Autoregressive LM，可以做生成任务。
+  - Bert 使用的 Transformer 结构对文本的长度**有限制**，为更好地处理长文本，XLNet 采用升级版的 Transformer-XL。
+- `Albert`：BERT简化版，更少的数据，得到更好的结果（70% 参数量的削减，模型性能损失<3% ）；两个方面减少模型的参数量：
+  - 对 Vocabulary Embedding 进行矩阵分解，将原来的矩阵V x E分解成两个矩阵V x H和H x E（H << E）。
+  - 跨层参数共享，每层的 attention map 有相似的pattern，可以考虑共享。
+
+这些模型的性能在不同的数据集上有差异，需要试了才知道哪个表现更好，但总体而言 XLNet 和 Roberta 会比 Bert 效果略好，large 会比 base 略好，更多情况下，它们会被一起使用，最后做 ensemble。
+
 ### 分支1：改进预训练
 
 自然语言的特点在于丰富多变，很多研究者针对更丰富多变的文本表达形式，在这两个训练目标的基础上进一步完善和改进，提升了模型的文本特征学习能力。
 
 #### 1.1 改进掩藏语言模型 —— 全词覆盖（wwm/ERNIE/SpanBERT）
 
-在BERT模型中，对文本的预处理都按照**最小单位**进行了切分。例如对于英文文本的预处理采用了Google的wordpiece方法以解决其未登录词的问题。
+在BERT模型中，对文本的预处理都按照**最小单位**进行了切分。例如对于英文文本的预处理采用了Google的 wordpiece 方法以解决其未登录词的问题。
 - MLM中掩盖的对象多数情况下为**词根**（subword），并不是完整的词；
 - 对于中文则直接按**字**切分，直接对单个字进行掩盖。这种掩盖策略导致了模型对于词语信息学习的不完整。
   - 汉语的词语几乎可以用无穷无尽来形容。但中文常用的汉字也就**4000**多个，BERT训练很容易实现，所以最初BERT对中文任务是以**汉字**为单位实现训练的。
   - 问题：既然是以汉字为单位训练的，其训练出的就是孤零零的汉字向量，而在现代汉语中，单个汉字是远不足以表达像词语或者短语那样丰富的语义的，这就造成了BERT在很多中文任务上表现并不理想的情况。
 针对这一不足，大部分研究者改进了MLM的掩盖策略。
 
- BERT-WWM 模型中，提出了**全词覆盖**的方式。
+BERT-WWM 模型中，提出了**全词覆盖**的方式。
 - 2019年7月，哈工大发布的 BERT-Chinese-wwm 利用中文分词，将组成一个完整词语的所有单字同时掩盖。
 - 2019年4月，ERNIE 扩展了中文全词掩盖策略，扩展到对于中文分词、短语及命名实体的全词掩盖。
   - 百度版：全词mask，**隐式**输入知识信息，mask训练阶段将知识实体全部mask
@@ -2378,7 +2527,7 @@ BART引入了**降噪自编码器**，丰富了文本的破坏方式。例如随
 - ![](https://pic3.zhimg.com/80/v2-27d3a08c1e6cff3d55f201ac7adc97ee_1440w.jpg)
 
 
-#### 1.3 引入替代词检测 —— 替代词检测 ELECTRA
+#### 1.3 引入替代词检测 —— ELECTRA
 
 MLM 对文本中的\[MASK]标记的词进行预测，以试图恢复原始文本。其预测结果可能完全正确，也可能预测出一个不属于原文本中的词。
 
@@ -2413,7 +2562,7 @@ BERT可以将任意文本表示为特征向量的形式，因此可以考虑采�
  
 在知识图谱技术中，大量丰富的外部知识被用来直接进行模型训练，形成了多种训练任务。
 - `ERNIE`以DAE的方式在BERT中引入了**实体对齐**训练目标，WKLM通过随机替换维基百科文本中的实体，让模型预测正误，从而在预训练过程中嵌入知识。
- 
+
 ### 分支3：改进Transformer
  
 由于Transformer结构自身的限制，BERT等一系列采用 Transformer 的模型所能处理的最大文本长度为 512个token。
@@ -2683,6 +2832,12 @@ P-tuning重新审视了关于模版的定义，放弃了“模版由自然语言
 - [ALBERT: A LITE BERT FOR SELF-SUPERVISED LEARNING OF LANGUAGE REPRESENTATIONS](https://arxiv.org/pdf/1909.11942.pdf)
 - ![](https://pic4.zhimg.com/80/v2-237353aaeb0f6a2a8fe24bcd585cc65b_720w.jpg)
 
+Albert 的目的是想对 Bert 瘦身，希望用更简单的模型，更少的数据，得到更好的结果。它主要从以下两个方面减少模型的参数量：
+- 对 Vocabulary Embedding 进行**矩阵分解**，将原来的矩阵V x E分解成两个矩阵 V x H 和 H x E（H << E）。
+- **跨层参数共享**，每层的 attention map 有相似的pattern，可以考虑共享。
+
+效果是 70% 参数量的削减，模型性能损失 < 3%，但有很多文章指出 Albert 的计算量并没有减少太多，并且如果达到超过 Bert 性能，需要使用更大的模型以及相应的算力。
+
 【2020-5-20】[BERT的youxiu变体：ALBERT论文图解介绍](https://zhuanlan.zhihu.com/p/142416395)
 
 ALBERT(一个Lite BERT)(Lan等人，2019)主要解决了更高的**内存消耗**和BERT**训练速度慢**的问题。 
@@ -2876,7 +3031,7 @@ ALBERT标志着构建语言模型的重要一步，该模型不仅达到了SOTA�
 - albert的[中文预训练模型](https://github.com/brightmart/albert_zh)
 
 
-## RoBERTa
+## RoBERTa —— 数据量+训练方式
 
 【2022-5-9】[Roberta: Bert调优](https://zhuanlan.zhihu.com/p/260693956)
 
@@ -2887,7 +3042,13 @@ RoBERTa 是BERT的成功变种之一，主要有4个简单有效的变化：
 - 1）去除NSP任务；
 - 2）大语料与更长的训练步数：batch size更大，数据更多；
 - 3）更长的训练句子；
-- 4）Masking策略——静态与动态：动态改变 [ MASK ] 模式。
+- 4）Masking策略——静态与动态：**动态**改变 [ MASK ] 模式。复制多份数据
+
+Bert 的优化版，模型结构与 Bert 完全一样，只是在数据量和训练方法上做了改进。简单说就是更大的数据量，更好的训练方式，训练得更久一些。
+- 相比原生 Bert 的16G训练数据，RoBerta 训练数据量达到了161G；
+- 去除了 NSP 任务，研究表明 NSP 任务太过简单，不仅不能提升反倒有损模型性能；
+- MLM 换成 Dynamic Masking LM；
+- 更大的 Batch size 以及其他超参数的调优；
 
 RoBERTa 在 BERT 的基础上取得了令人印象深刻的结果。而且，RoBERTa 已经指出，**NSP 任务对于 BERT 的训练来说相对没用**。
 
@@ -2899,7 +3060,7 @@ RoBERTa 在 BERT 的基础上取得了令人印象深刻的结果。而且，RoB
 由于Roberta出色的性能，现在很多应用都是基于Roberta而不是原始的Bert去微调了。
 
 （1）动态 mask
-- Bert中是在训练数据中静态的标上Mask标记，然后在训练中是不变的，这种方式就是静态的。
+- Bert中是在训练数据中静态的标上Mask标记，然后在训练中是不变的，这种方式就是**静态**的。
 - Roberta尝试了一种动态的方式，说是动态，其实也是用静态的方式实现的，把数据复制10份，每一份中采用不同的Mask。这样就有了10种不同的Mask数据。
 - 从结果中，可以看到动态mask能带来微小的提升。
 
@@ -2932,6 +3093,13 @@ Bert的模型输入中是由两个segment组成的，因而就有两个问题：
 
 ## XLNet
 
+XLNet 对 Bert 做了较大的改动，二者在**模型结构**和**训练方式**上都有不小的差异。
+- Bert 的 MLM 在预训练时有 MASK 标签，但在使用时却没有，导致训练和使用时出现不一致；并且 MLM 不属于 Autoregressive LM，不能做生成类任务。
+- XLNet 采用 PML(Permutation Language Model) 避免了 MASK 标签的使用，且属于 Autoregressive LM，可以做生成任务。
+
+Bert 使用的 Transformer 结构对文本的**长度有限制**，为更好地处理长文本，XLNet 采用升级版的 Transformer-XL。
+
+要点
 - 全排列语言模型
 - transformer-XL
 - 跟多的数据
@@ -2950,7 +3118,7 @@ Yang等人(2019年)认为，现有的基于自编码的预训练语言模型(例
 
 ERNIE(通过知识整合增强表示)(Sun等人，2019a)旨在优化BERT的masking过程，其中包括**实体**级masking和**短语**级masking。 与在输入中选择随机单词不同，实体级mask将mask通常由多个单词组成的命名实体。短语级mask是mask连续的单词，类似于N-gram mask策略
 
-## 挪吒（华为）
+## NeZha 挪吒（华为）
 
 [华为开源预训练语言模型「哪吒」：编码、掩码升级，提升多项中文 NLP 任务性能](https://www.leiphone.com/category/yanxishe/YmSMHZUOCekn9Cyr.html)
 
@@ -2960,10 +3128,10 @@ ERNIE(通过知识整合增强表示)(Sun等人，2019a)旨在优化BERT的maski
 - 关于知识蒸馏模型 TinyBERT 详细解读，可参考[往期内容](https://mp.weixin.qq.com/s/f2vxlhaGW1wnu8UYrvh-tA)
 - Github [开源地址](https://github.com/huawei-noah/Pretrained-Language-Model)（包含 NEZHA 与 TinyBERT )  
 
-NEZHA是基于预训练语言模型BERT的改进模型，BERT通过使用大量无监督文本进行预训练，其包含两个预训练任务：Masked Language Modeling（MLM）和Next Sentence Prediction （NSP），分别预测句子里被Mask的字（在构造训练数据时，句子里的部分字被Mask）和判断训练句对里面是不是真实的上下句。
+NEZHA是基于预训练语言模型BERT的改进模型，BERT通过使用大量无监督文本进行预训练，其包含两个预训练任务：Masked Language Modeling（MLM）和 Next Sentence Prediction （NSP），分别预测句子里被Mask的字（在构造训练数据时，句子里的部分字被Mask）和判断训练句对里面是不是真实的上下句。
 
 三头六臂 NEZHA（哪吒）
-- 函数式相对位置编码
+- **函数式**相对位置编码
 - 全词覆盖的实现
 
 ### 函数式相对位置编码
@@ -2992,16 +3160,16 @@ Transformer 最早只考虑了**绝对位置编码**，而且是函数式的；�
 传统的深度神经网络训练使用 FP32（即单精度浮点格式）来表示训练中涉及的所有变量（包括模型参数和梯度）；而混合精度训练在训练中采用了多精度。具体而言，它重点保证模型中权重的单精度副本（称为主权重），即在每次训练迭代中，将主权值舍入 FP16（即半精度浮点格式），并使用 FP16 格式存储的权值、激活和梯度执行向前和向后传递；最后将梯度转换为 FP32 格式，并使用 FP32 梯度更新主权重。
 
 
-## MacBERT
+## MacBERT —— RoBERTa改进
 
 [MacBERT: 中文自然语言预训练模型](https://zhuanlan.zhihu.com/p/333202482)
 
-MacBERT在多个方面对RoBERTa进行了改进，尤其是采用MLM作为校正(Mac)的masked策略。用相似单词mask，减轻了预训练和微调阶段两者之间的差距，这已被证明对下游任务是有效的
+MacBERT在多个方面对RoBERTa进行了改进，尤其是采用 MLM 作为校正(Mac)的masked策略。用**相似单词**mask，减轻了预训练和微调阶段两者之间的差距，这已被证明对下游任务是有效的
 
 MacBERT与BERT共享相同的预训练任务，但有一些修改。 对于MLM任务，我们执行以下修改。
-- • 用**全词**masked以及**Ngram** masked策略来选择候选token来masked，单词级别的unigram到4-gram的比例为40％，30％，20％，10％。
-- • 不要使用\[MASK] token进行mask，因为在token 微调阶段**从未出现过**\[MASK]，提议用**类似单词**进行masking。 通过使用基于word2vec(Mikolov et al。，2013)相似度计算的同义词工具包(Wang and Hu，2017)获得相似的单词。 如果选择一个N-gram进行masked，分别找到相似的单词。 在极少数情况下，当没有相似的单词时，会降级以使用**随机单词**替换。
-- • 对15％比例的输入单词进行masking，其中80％替换为相似的单词，10％将替换为随机单词，其余10％则保留原始单词。
+- 用**全词**masked以及 **Ngram** masked策略来选择候选token来masked，单词级别的unigram到4-gram的比例为40％，30％，20％，10％。
+- 不用\[MASK] token进行mask，因为在token 微调阶段**从未出现过**\[MASK]，提议用**类似单词**进行masking。 通过使用基于word2vec(Mikolov et al。，2013)相似度计算的同义词工具包(Wang and Hu，2017)获得相似的单词。 如果选择一个N-gram进行masked，分别找到相似的单词。 在极少数情况下，当没有相似的单词时，会降级以使用**随机单词**替换。
+- 对15％比例的输入单词进行masking，其中80％替换为相似的单词，10％将替换为随机单词，其余10％则保留原始单词。
 对于类似NSP的任务，执行ALBERT (Lan等人，2019)引入的句子顺序预测(SOP)任务，其中通过切换两个连续句子的原始顺序来创建负样本。
 
 ## 其它
