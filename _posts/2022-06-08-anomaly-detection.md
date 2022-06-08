@@ -14,7 +14,7 @@ mathjax: true
 
 # 总结
 
-- 异常检测方法总结
+- 【2022-6-8】[异常检测方法总结](https://zhuanlan.zhihu.com/p/521329756)
 
 
 # 异常检测方法
