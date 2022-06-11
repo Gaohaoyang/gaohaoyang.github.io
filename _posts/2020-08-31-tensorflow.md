@@ -16,6 +16,7 @@ mathjax: true
 
 - 【2020-8-31】[30天吃掉那只TensorFlow2](https://github.com/lyhue1991/eat_tensorflow2_in_30_days)，[20天吃掉那只Pytorch](https://jackiexiao.github.io/eat_pytorch_in_20_days/)
 - [入门级解读：小白也能看懂的TensorFlow介绍](https://www.toutiao.com/a6389412632331419906/),日本东京 TensorFlow 聚会联合组织者 Hin Khor 所写的 TensorFlow 系列介绍
+- ![](https://pica.zhimg.com/v2-4722a5639a0dafc705be6199c5920a08_1440w.jpg)
 
 ## 深度学习框架
 
@@ -443,7 +444,7 @@ layers.Dense(64, bias_initializer=tf.keras.initializers.constant(2.0)) # 偏置�
 
 #### model
 
-Keras 模型以**类**的形式呈现，可以通过继承 tf.keras.Model 这个 Python 类来定义自己的模型。在继承类中，需要重写 \__init__() （**构造函数**，初始化）和 **call**(input) （**模型调用**）两个方法，同时也可以根据需要增加自定义的方法。
+Keras 模型以**类**的形式呈现，可以通过继承 tf.keras.Model 这个 Python 类来定义自己的模型。在继承类中，需要重写 __init__() （**构造函数**，初始化）和 **call**(input) （**模型调用**）两个方法，同时也可以根据需要增加自定义的方法。
 - ![](https://tf.wiki/_images/model.png)
 - 继承 tf.keras.Model 后，同时可以使用父类的若干方法和属性
 - 例如在实例化类 model = Model() 后，可以通过 model.variables 这一属性直接获得模型中的所有变量，免去我们一个个显式指定变量的麻烦。
@@ -1053,7 +1054,7 @@ print(result.shape)
 
 #### 自定义-层
 
-[自定义层](https://tf.wiki/zh_hans/basic/models.html#zh-hans-custom-layer)需要继承 [tf.keras.layers.Layer](https://www.tensorflow.org/api_docs/python/tf/keras/layers/Layer) 类，并重写 \__init__ 、 **build** 和 **call** 三个方法
+[自定义层](https://tf.wiki/zh_hans/basic/models.html#zh-hans-custom-layer)需要继承 [tf.keras.layers.Layer](https://www.tensorflow.org/api_docs/python/tf/keras/layers/Layer) 类，并重写 __init__ 、 **build** 和 **call** 三个方法
 - `build`：创建图层的权重。 使用add_weight函数来创建。
 - `call`：定义前向传播。
 - `compute_output_shape`：计算在给定的输入的shape时，计算出输出的shape。
@@ -1178,7 +1179,7 @@ class MeanSquaredError(tf.keras.losses.Loss):
 
 #### 自定义-评估指标
 
-自定义评估指标需要继承 tf.keras.metrics.**Metric** 类，并重写 \__init__ 、 update_state 和 result 三个方法。
+自定义评估指标需要继承 tf.keras.metrics.**Metric** 类，并重写 __init__ 、 update_state 和 result 三个方法。
 - 下面的示例对前面用到的 SparseCategoricalAccuracy 评估指标类做了一个简单的重实现：
 
 ```python
@@ -2175,7 +2176,7 @@ strategy = tf.distribute.experimental.TPUStrategy(tpu)
 ### Estimators
  
 [Estimators](https://www.tensorflow.org/guide/estimators) API用于分布式环境的训练模型的API。 可以导出模型进行大型数据集的分布式训练，并得到可以商用的模型。  
-使用[_tf.keras.estimator.model\_to\_estimator_](https://www.tensorflow.org/api_docs/python/tf/keras/estimator/model_to_estimator)将模型转换为[_tf.estimator.Estimator_](https://www.tensorflow.org/api_docs/python/tf/estimator/Estimator)对象，就可以使用[_tf.estimator_](https://www.tensorflow.org/api_docs/python/tf/estimator) API训练[_tf.keras.Model_](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model)。 请参阅[Creating Estimators from Keras models](https://www.tensorflow.org/guide/estimators#creating_estimators_from_keras_models)。
+使用[_tf.keras.estimator.model_to_estimator_](https://www.tensorflow.org/api_docs/python/tf/keras/estimator/model_to_estimator)将模型转换为[_tf.estimator.Estimator_](https://www.tensorflow.org/api_docs/python/tf/estimator/Estimator)对象，就可以使用[_tf.estimator_](https://www.tensorflow.org/api_docs/python/tf/estimator) API训练[_tf.keras.Model_](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model)。 请参阅[Creating Estimators from Keras models](https://www.tensorflow.org/guide/estimators#creating_estimators_from_keras_models)。
 
 ```python
 model = tf.keras.Sequential([layers.Dense(10,activation='softmax'),
@@ -2192,7 +2193,7 @@ estimator = tf.keras.estimator.model_to_estimator(model)
 
 多GPU训练
 - _tf.keras_模型可以使用[_tf.contrib.distribute.DistributionStrategy_](https://www.tensorflow.org/api_docs/python/tf/contrib/distribute/DistributionStrategy)在多个GPU上训练。 此API在多个GPU上提供分布式训练，几乎不对现有代码进行任何更改。  
-- 目前，[_tf.contrib.distribute.MirroredStrategy_](https://www.tensorflow.org/api_docs/python/tf/contrib/distribute/MirroredStrategy)是唯一受支持的分布式策略。 要将DistributionStrategy与Keras一起使用，请使用[_tf.keras.estimator.model\_to\_estimator_](https://www.tensorflow.org/api_docs/python/tf/keras/estimator/model_to_estimator)将_tf.keras.Model_转换为_tf.estimator.Estimator_，然后训练Estimator。  
+- 目前，[_tf.contrib.distribute.MirroredStrategy_](https://www.tensorflow.org/api_docs/python/tf/contrib/distribute/MirroredStrategy)是唯一受支持的分布式策略。 要将DistributionStrategy与Keras一起使用，请使用[_tf.keras.estimator.model_to_estimator_](https://www.tensorflow.org/api_docs/python/tf/keras/estimator/model_to_estimator)将_tf.keras.Model_转换为_tf.estimator.Estimator_，然后训练Estimator。  
 
 
 ## TensorFlow Datasets
@@ -2490,9 +2491,12 @@ class CNN(tf.keras.Model):
 
 # 推理加速
 
+![](https://pica.zhimg.com/v2-4722a5639a0dafc705be6199c5920a08_1440w.jpg)
+
 ## ONNX
 
-【2022-5-17】[ONNX 和 Azure 机器学习：创建和加速 ML 模型](https://docs.microsoft.com/zh-cn/azure/machine-learning/concept-onnx)
+- 【2022-5-17】[ONNX 和 Azure 机器学习：创建和加速 ML 模型](https://docs.microsoft.com/zh-cn/azure/machine-learning/concept-onnx)
+- 【2022-6-9】[ONNX推理加速技术文档](https://zhuanlan.zhihu.com/p/524023964)
 
 推理或模型评分是将部署的模型用于**预测**（通常针对生产数据）的阶段，ONNX 来帮助优化机器学习模型的推理
 
@@ -2522,7 +2526,378 @@ yolov3-tiny的[onnx模型](https://github.com/onnx/models/tree/master/vision/obj
 更多使用方法见: [ONNX学习笔记](https://zhuanlan.zhihu.com/p/346511883)
 
 
+### 二、直接使用onnx进行推理
+ 
+onnx文件可以直接进行推理，这时的代码就已经与框架无关了，可以与训练阶段解耦。但是，为了推理的顺利进行，你依然需要为onnx选择一个后端，以TensorFlow为例。
+ 
+```python
+import onnx
+import tensorflow as tf
+from onnx_tf.backend import prepare
+import onnx_tf...# 包装一个TF后端
+predictor = onnx.load(onnx_path)
+onnx.checker.check_model(predictor)
+onnx.helper.printable_graph(predictor.graph)
+tf_rep = prepare(predictor, device="CUDA:0")  # default CPU
+# 使用TF进行预测
+gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.7)  # defalut 0.5
+tfconfig = tf.ConfigProto(allow_soft_placement=True, gpu_options=gpu_options)... 
+with tf.Session(config=tfconfig) as persisted_sess:
+    persisted_sess.graph.as_default()
+    tf.import_graph_def(tf_rep.graph.as_graph_def(), name='')
+    tf_input = persisted_sess.graph.get_tensor_by_name(
+        tf_rep.tensor_dict[tf_rep.inputs[0]].name
+    )
+    tf_scores = persisted_sess.graph.get_tensor_by_name(
+        tf_rep.tensor_dict[tf_rep.outputs[0]].name
+    )
+    tf_boxes = persisted_sess.graph.get_tensor_by_name(
+        tf_rep.tensor_dict[tf_rep.outputs[1]].name
+    )
+ 
+    for file_path in listdir:
+        ...
+        confidences, boxes = persisted_sess.run([tf_scores, tf_boxes], {tf_input: image})
+        ...
+```
+ 
+### 三、使用onnxruntime加速推理
+ 
+事实上，可以更高效地使用onnx。onnxruntime是一个对onnx模型提供推理加速的库，支持CPU和GPU加速，GPU加速版本为onnxruntime-gpu，默认版本为CPU加速。安装:
+ 
+```shell
+pip install onnxruntime  # CPU
+pip install onnxruntime-gpu # GPU
+```
+ 
+使用onnxruntime对onnx模型加速非常简单，只需要几行代码。这里给出一个示例：
+ 
+```python
+import onnxruntime as ort
 
+class NLFDOnnxCpuInferBase:
+    """only support in CPU and accelerate with onnxruntime."""
+ 
+    __metaclass__ = ABCMeta
+   ...
+   def __init__(self,
+                 onnx_path=ONNX_PATH):
+        """pytorch和onnx可以很好地结合        :param onnx_path: .onnx文件路径        """
+        self._onnx_path = onnx_path
+        # 使用onnx模型初始化ort的session
+        self._ort_session = ort.InferenceSession(self._onnx_path)
+        self._input_img = self._ort_session.get_inputs()[0].name
+   ...
+ 
+   # 使用run推理
+   def _detect_img_utils(self, img: np.ndarray):
+        """batch is ok."""
+        feed_dict = {self._input_img: img}
+        scores_before_nms, rois_before_nms = self._ort_session.run(None,input_feed=feed_dict)
+        return rois_before_nms, scores_before_nms
+```
+ 
+onnxruntime会自动帮你检查onnx中的无关节点并删除，也利用了一些加速库优化推理图，从而加速推理。一些log:
+ 
+```shell
+python3 inference/ulfd/onnx_cpu_infer.py
+# 2020-01-16 12:03:49.259044 [W:onnxruntime:, graph.cc:2412 CleanUnusedInitializers] Removing initializer 'base_net.9.4.num_batches_tracked'. It is not used by any node and should be removed from the model.
+# 2020-01-16 12:03:49.259478 [W:onnxruntime:, graph.cc:2412 CleanUnusedInitializers] Removing initializer 'base_net.9.1.num_batches_tracked'. It is not used by any node and should be removed from the model.
+# 2020-01-16 12:03:49.259492 [W:onnxruntime:, graph.cc:2412 CleanUnusedInitializers] Removing initializer 'base_net.8.4.num_batches_tracked'. It is not used by any node and should be removed from the model.
+# 2020-01-16 12:03:49.259501 [W:onnxruntime:, graph.cc:2412 CleanUnusedInitializers] Removing initializer 'base_net.8.1.num_batches_tracked'. It is not used by any node and should be removed from the model.
+```
+ 
+### 四、实验结果
+ 
+在人脸检测ULFD模型上，未使用onnxruntime加速，对于320x240分辨率的图片，在CPU上需要跑要50~60ms;使用onnxruntime加速后，在CPU需要8~11ms.
+ 
+### 五、请优雅地使用Numpy
+ 
+在图像处理中经常会出现归一化处理，即使在推理的时候也需要。而在推理时需要考虑性能问题，最近发现numpy的张量计算的不同方式，会对性能有很大影响。如果你的均值化处理中的每个通道减去的均值都是一样的比如127.
+ 
+```python
+# 普通的做法是：(请不要使用这种做法)
+image_mean = np.array([127, 127, 127])
+image = (image - image_mean) / 128 # 实际上会由于numpy的广播运算消耗更多的时间
+# 你应该采用：(保证数据类型的一致以及减去一个常量的效率更高)
+image = (image - 127.) / 128.
+```
+ 
+*   _实验代码 相同均值_
+    
+ 
+```python
+# coding: utf-8
+import cv2
+import time
+import numpy as np
+
+if __name__ == '__main__':
+    test_w, test_h = 500, 500
+ 
+    test_path = 'logs/test0.jpg'
+    test_img = cv2.imread(test_path)
+    resize_img = cv2.resize(test_img, (test_w, test_h))
+
+    test_count = 1000
+    print('width: {0}, height: {1}, test_count: {2}'.format(test_w, test_h, test_count))
+ 
+    t1 = time.time()
+    image_mean = np.array([127, 127, 127])
+    for _ in range(test_count):
+        image = (resize_img - image_mean) / 128
+    t2 = time.time()
+    print('total_time_ugly: {0}s, mean_time_ugly: {1}ms'.format(
+        (t2-t1), (t2-t1)*1000/test_count
+    ))
+    t3 = time.time()
+    for _ in range(test_count):
+        image = (resize_img - 127.) / 128.
+    t4 = time.time()
+    print('total_time_elegant: {0}s, mean_time_elegant: {1}ms'.format(
+        (t4 - t3), (t4 - t3) * 1000 / test_count
+    ))
+```
+ 
+实验结果：
+- ![](https://pic2.zhimg.com/80/v2-46ca71eacd67ea8f9b279e6dc83289fd_1440w.jpg)
+ 
+但是当你确实要对不同的通道用到不同的均值时呢？ 也请你这样做，以下是另一个测试结果。
+ 
+* _实验代码 不同均值_
+    
+ 
+```python
+# coding: utf-8
+import cv2
+import time
+import numpy as np
+ 
+if __name__ == '__main__':
+    test_w, test_h = 100, 100
+ 
+    test_path = 'logs/test0.jpg'
+    test_img = cv2.imread(test_path)
+    resize_img = cv2.resize(test_img, (test_w, test_h))
+ 
+ 
+    test_count = 100
+    print('width: {0}, height: {1}, test_count: {2}'.format(test_w, test_h, test_count))
+    print('-'*100)
+    t1 = time.time()
+    image_mean = np.array([127, 120, 107])
+    for _ in range(test_count):
+        image = (resize_img - image_mean) / 128
+    t2 = time.time()
+    print('total_time_ugly: {0}s, mean_time_ugly: {1}ms'.format(
+        (t2 - t1), (t2 - t1) * 1000 / test_count
+    ))
+    t3 = time.time()
+    image = np.zeros_like(resize_img)
+    for _ in range(test_count):
+        image[:, :, 0] = (resize_img[:, :, 0] - 127.) / 128.
+        image[:, :, 1] = (resize_img[:, :, 1] - 120.) / 128.
+        image[:, :, 2] = (resize_img[:, :, 2] - 107.) / 128.
+    t4 = time.time()
+    print('total_time_elegant: {0}s, mean_time_elegant: {1}ms'.format(
+        (t4 - t3), (t4 - t3) * 1000 / test_count
+    ))
+```
+ 
+实验结果
+- ![](https://pic2.zhimg.com/80/v2-1a79d361282b74a108592b1c48f24259_1440w.jpg)
+ 
+简单来说就是，只要你愿意动手修改几行代码，就能带来5ms~15ms的性能提升。这比采用TensorRT/ONNX等各种加速工具要简单太多了。
+
+
+## 模型文件转换
+ 
+### 1.1 pth文件转onnx
+ 
+pytorch框架集成了**onnx模块**，属于官方支持，onnx也覆盖了pytorch框架中的大部分算子。因此将pth模型文件转换为onnx文件非常简单。
+
+以下是一个代码示例。需要注意的是，在转换之前，需要对pth模型的输入size进行冻结。比如：
+ 
+```python
+batch_size = 1
+dummy_input = torch.randn(batch_size, 3, 240, 320).to(device)
+```
+ 
+输入一旦冻结后，就只会有固定的batch_size，在使用转换后的onnx文件进行模型推理时，推理时输入的batch_size必须和冻结时保持一致。对于这个示例，你只能batch_size=1进行推理。如果你需要在推理时采用不同的batch_size，比如10，你只能在保存onnx模型之前修改冻结的输入节点，代码如下：
+ 
+```python
+batch_size = 10
+dummy_input = torch.randn(batch_size, 3, 240, 320).to(device)
+```
+ 
+这样，你就拥有了一个bacth_size=10的onnx模型。导出onnx文件，只需要使用torch.onnx.export()函数，代码如下：
+ 
+```python
+    model_name = model_path.split("/")[-1].split(".")[0]
+    model_path = f"inference/ulfd/onnx/{model_name}-batch-{batch_size}.onnx"
+ 
+    dummy_input = torch.randn(batch_size, 3, 240, 320).to(device)
+    # dummy_input = torch.randn(1, 3, 480, 640).to("cuda") #if input size is 640*480
+    torch.onnx.export(net, dummy_input, model_path,
+                      verbose=False, input_names=['input'],
+                      output_names=['scores', 'boxes'])
+```
+ 
+完整的转换代码：
+ 
+```python
+# -*- coding: utf-8 -*-
+"""This code is used to convert the pytorch model into an onnx format model."""
+import argparse
+import sys
+import torch.onnx
+from models.ulfd.lib.ssd.config.fd_config import define_img_size
+
+input_img_size = 320  # define input size ,default optional(128/160/320/480/640/1280)
+define_img_size(input_img_size)
+from models.ulfd.lib.ssd.mb_tiny_RFB_fd import create_Mb_Tiny_RFB_fd
+from models.ulfd.lib.ssd.mb_tiny_fd import create_mb_tiny_fd
+
+def get_args():
+    parser = argparse.ArgumentParser(description='convert model to onnx')
+    parser.add_argument("--net", dest='net_type', default="RFB",
+                        type=str, help='net type.')
+    parser.add_argument('--batch', dest='batch_size', default=1,
+                        type=int, help='batch size for input.')
+    args_ = parser.parse_args()
+ 
+    return args_if __name__ == '__main__':
+ 
+    # net_type = "slim"  # inference faster,lower precision
+    args = get_args()
+ 
+    net_type = args.net_type  # inference lower,higher precision
+    batch_size = args.batch_size
+ 
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+ 
+    label_path = "models/ulfd/voc-model-labels.txt"
+    class_names = [name.strip() for name in open(label_path).readlines()]
+    num_classes = len(class_names)
+ 
+    if net_type == 'slim':
+        model_path = "baseline/ulfd/version-slim-320.pth"
+        # model_path = "models/pretrained/version-slim-640.pth"
+        net = create_mb_tiny_fd(len(class_names), is_test=True, device=device)
+    elif net_type == 'RFB':
+        model_path = "baseline/ulfd/version-RFB-320.pth"
+        # model_path = "models/pretrained/version-RFB-640.pth"
+        net = create_Mb_Tiny_RFB_fd(len(class_names), is_test=True, device=device)
+ 
+    else:
+        print("unsupport network type.")
+        sys.exit(1)
+    net.load(model_path)
+    net.eval()
+    net.to(device)
+ 
+    model_name = model_path.split("/")[-1].split(".")[0]
+    model_path = f"inference/ulfd/onnx/{model_name}-batch-{batch_size}.onnx"
+ 
+    dummy_input = torch.randn(batch_size, 3, 240, 320).to(device)
+    # dummy_input = torch.randn(1, 3, 480, 640).to("cuda") #if input size is 640*480
+    torch.onnx.export(net, dummy_input, model_path,
+                      verbose=False, input_names=['input'],
+                      output_names=['scores', 'boxes'])
+    print('onnx model saved ', model_path)
+ 
+    """    PYTHONPATH=. python3 inference/ulfd/pth_to_onnx.py --net RFB --batch 16    PYTHONPATH=. python inference/ulfd/pth_to_onnx.py --net RFB --batch 3    """
+```
+ 
+### 1.2 pb文件转onnx
+ 
+pb文件转onnx可以使用**tf2onnx**库，但必须说明的是，TensorFlow并没有官方支持onnx，tf2onnx是一个第三方库。格式转化onnx格式文件将tensorflow的pb文件转化为onnx格式的文件 安装tf2onnx。 
+- 参考：[tensorrt-cubelab-docs](https://link.zhihu.com/?target=https%3A//dev.pandateacher.com/cube-lab/document/tutorial/tensorrt.html) tf2onnx安装
+ 
+```shell
+pip install tf2onnx
+```
+
+格式转化指令:
+ 
+```shell
+python -m tf2onnx.convert --input ./checkpoints/new_model.pb --inputs intent_network/inputs:0,intent_network/seq_len:0 --outputs logits:0 --output ./pb_models/model.onnx --fold_const # SAVE_MODEL保存为save_model
+```
+
+```python
+from tensorflow.python.compiler.tensorrt import trt_convert as trt
+converter = trt.TrtGraphConverter(input_saved_model_dir=input_saved_model_dir)
+converter.convert()
+converter.save(output_saved_model_dir)
+```
+
+```shell
+python -m tf2onnx.convert --saved_model saved_model_dir --output model.onnx # .pb 文件
+python -m tf2onnx.convert --input frozen_graph.pb  --inputs X:0,X1:0 --outputs output:0 --output model.onnx --fold_const # .ckpt 文件
+python -m tf2onnx.convert --checkpoint checkpoint.meta  --inputs X:0 --outputs output:0 --output model.onnx --fold_const
+```
+ 
+### 1.3 onnx转pb文件
+ 
+有时候，我们需要对模型进行**跨框架**的转换，比如用pytorch训练了一个模型，但需要集成到TensorFlow中以便和其他的模型保持一致，方便部署。
+
+此时就可以通过将pth转换成onnx，然后再将onnx转换成pb文件，如果转换成功，那么就可以在TensorFlow使用pb文件进行推理了。之所以强调如果，是因为TensorFlow并没有官方支持onnx，有可能会因为一些算子不兼容的问题导致转换后的pb文件在TF推理时出问题。 将onnx转换pb文件可以使用onnx-tf库，安装
+
+```
+pip install onnx-tf
+```
+ 
+完整的转换代码：
+ 
+```python
+# -*- coding: utf-8 -*-
+"""
+    @File  : onnx_to_pb.py@Author: qiuyanjun@Date  : 2020-01-10 19:22@Desc  : 
+"""
+import cv2
+import numpy as np
+import onnx
+import tensorflow as tf
+from onnx_tf.backend import prepare
+import onnx_tf
+model = onnx.load('models/onnx/version-RFB-320.onnx')
+tf_rep = prepare(model)
+img = cv2.imread('imgs/1.jpg')
+image = cv2.resize(img, (320, 240))# 测试是否能推理
+image_mean = np.array([127, 127, 127])
+image = (image - image_mean) / 128
+image = np.transpose(image, [2, 0, 1])
+image = np.expand_dims(image, axis=0)
+image = image.astype(np.float32)
+output = tf_rep.run(image)
+print("output mat: \\n", output)
+print("output type ", type(output))# 建立Session并获取输入输出节点信息
+with tf.Session() as persisted_sess:
+    print("load graph")
+    persisted_sess.graph.as_default()
+    tf.import_graph_def(tf_rep.graph.as_graph_def(), name='')
+    inp = persisted_sess.graph.get_tensor_by_name(
+        tf_rep.tensor_dict[tf_rep.inputs[0]].name
+    )
+    print('input_name: ', tf_rep.tensor_dict[tf_rep.inputs[0]].name)
+    print('input_names: ', tf_rep.inputs)
+    out = persisted_sess.graph.get_tensor_by_name(
+        tf_rep.tensor_dict[tf_rep.outputs[0]].name
+    )
+    print('output_name_0: ', tf_rep.tensor_dict[tf_rep.outputs[0]].name)
+    print('output_name_1: ', tf_rep.tensor_dict[tf_rep.outputs[1]].name)
+    print('output_names: ', tf_rep.outputs)
+    res = persisted_sess.run(out, {inp: image})
+    print(res)
+    print("result is ", res)# 保存成pb文件
+    tf_rep.export_graph('version-RFB-320.pb')
+    print('onnx to pb done.')
+    
+"""cmd
+PYTHONPATH=. python3 onnx_to_pb.py
+"""
+```
+ 
 ## TensorRT
 
 - 【2021-5-21】[TensorRT入门指北](https://zhuanlan.zhihu.com/p/371239130)

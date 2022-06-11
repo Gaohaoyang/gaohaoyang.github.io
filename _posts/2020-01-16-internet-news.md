@@ -577,7 +577,10 @@ mathjax: true
 
 # 互联网公司
 
+
 ## 高德业务沟通
+
+### 高德重组讲话
 
 俞永福，公司文化：简单、透明，更加平等；去总化（消肿）
 - ① 团队层面的KSF：释放、激活、高T
@@ -607,7 +610,6 @@ mathjax: true
 - 三四百人时，企业需要蜕变，**游击队** → **正规军**，游击队只能对**战斗**，不能打**战役**。企业需要二级管理者。很多企业长不大，因为无法完成转变
 - 两千人时，**正规军** → **野战军**
 
-
 企业文化用哪个？尚不清楚高德文化，阿里文化（信仰、信任的追求比其他人更极致）、uc文化（大五文化，简单阳光快乐）。淘宝（店小二）和支付宝文化不同，多元文化
 
 互联网中心：美国硅谷技术中心，中国北京市场中心。
@@ -625,6 +627,8 @@ mathjax: true
 最危险的是创造用户需求（海市蜃楼，直接拍死），互联网要的是满足需求
 - 越**原生**的需求越强烈，`3G`（ **girl** 、 **game** 、 **gamble** ）。高德地图最原始的需求是出行，pc时代是存量市场，移动时代是增量需求（好处是水涨船高，借大势）。
 
+### 2021年饿了么讲话
+
 【2021-12-8】俞永福饿了么：永福内部邮件解析，[脉脉](https://maimai.cn/web/gossip_detail?src=app&webid=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Mjk2OTQwOTYsInUiOjM1MzksImVnaWQiOiJkMGMzZDc4MjU4NDExMWVjOWY5YTgwMTg0NGUyZDg2YyJ9.0yFtjY3zUMHi1jVnQBlxHZX2IfCPfR3p4IxRDwuK6z8&share_channel=2)
 
 本地侧目前我是绝对的老板（但临危授命）并非我一厢情愿，观察梳理了100天后我才出发颁布圣旨，但你们叫我老班长就行了。
@@ -635,6 +639,13 @@ mathjax: true
 5. 大家不要BB了，现在哥来了，认同的，踏踏实实的跟哥一起干，不认同的一年内要优化。
 
 永福，洗洗睡之前发2021.12.8
+
+### 地图行业观察
+
+国内外互联网地图鄙视链，[图](https://p9.toutiaoimg.com/img/tos-cn-i-qvj2lq49k0/c3fc6005ef2949999fec210dd6a2b127~tplv-obj:1080:1073.image)
+- 海外地图：Google谷歌地图 ＞ Apple苹果地图
+- 国内地图：高德地图 ＞ 百度地图 ＞ 腾讯地图 ＞ 搜狗地图（已卖身）
+- ![](https://p9.toutiaoimg.com/img/tos-cn-i-qvj2lq49k0/c3fc6005ef2949999fec210dd6a2b127~tplv-obj:1080:1073.image?from=post)
 
 
 ## 移动互联网两超三强
