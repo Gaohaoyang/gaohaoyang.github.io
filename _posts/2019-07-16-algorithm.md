@@ -63,6 +63,53 @@ mathjax: true
 - 剑指offer
 
 
+## 解题技巧
+
+【2022-6-19】Question List Tips Acknowledgements 
+
+|条件|首选思路|其他|
+|---|---|---|
+|数组已排序 input array is sorted|二分查找（Binary search）、双指针（Two pointers）||
+|全排列/子集 asked for all permutations/subsets|回溯 Backtracking||
+|树 given a tree|DFS，BFS||
+|图 graph|DFS，BFS||
+|链表  given a linked lis|双指针（Two pointers）||
+|禁止递归 recursion is banned| 栈 stack||
+|空间限制 must solve in-place|交换数值 Swap corresponding values，指针存放多个值 Store one or more different values in the same pointer ||
+|最大/最小 序列/子集/选项 asked for maximum/minimum subarray/subset/options|动态规划 Dynamic programming ||
+|最大最小k个 asked for top/least k items|堆 Heap||
+|公共子串 asked for common strings| Map，Trie；Map/Set for 0(1) time & 0( n ) space；Sort input for 0(nlogn) time and 0(1) space ||
+||||
+
+- （1）If input array is sorted then 
+  - Binary search 
+  - Two pointers 
+- （2）If asked for all permutations / subsets then 
+  - Backtracking 
+-（3）If given a treethen 
+  - DFS 
+  - BFS 
+- （4）If given a graph then 
+  - DFS 
+  - BFS 
+- （4）If given a linked list then 
+  - Two pointerS 
+- （5）If recursion is banned then 
+  - Stack 
+- （6）If must solve in-place then 
+  - Swap corresponding values 
+  - Store one or more different values in the same pointer 
+- （7） If asked for maximum / minimum subarray / subset / options then 
+  - Dynamic programming 
+- （8）If asked for top / least k items then 
+  - Heap 
+- （9）If asked for common strings then 
+  - Map 
+  - Trie 
+- ELse 
+  - Map / Set for 0(1) time & 0( n ) space - Sort input for 0( nlogn ) time and 0(1) space 
+
+
 # 数据结构与算法
 
 - 数据结构算法可视化网站[visualgo](https://visualgo.net/en)
