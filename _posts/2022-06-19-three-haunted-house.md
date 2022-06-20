@@ -17,6 +17,16 @@ author: HyG
 
 
 
+本节完成效果，在线 [demo 链接](https://gaohaoyang.github.io/threeJourney/17-haunted-house/)
+
+可扫码访问
+
+二维码 | 手机截图
+--- | ---
+![](https://gw.alicdn.com/imgextra/i1/O1CN01LLkkbc1dluhbtAtt4_!!6000000003777-2-tps-200-200.png) | ![](https://gw.alicdn.com/imgextra/i2/O1CN01p7NrBp1gsjRfaPGeE_!!6000000004198-2-tps-750-1334.png)
+
+[demo 源码](https://github.com/Gaohaoyang/threeJourney/tree/main/src/17-haunted-house)
+
 开始之前先约定一下关于长度单位的问题。
 
 根据不同场景，我们可以认为1代表的长度不同，例如创建比较宏大的场景如陆地地图可以认为1代表1km，创建房屋可以认为1代表1m，创建小场景可以认为1代表1cm。接下来就开始吧
@@ -226,7 +236,7 @@ for (let i = 0; i < 50; i += 1) {
 }
 ```
 
-![https://gw.alicdn.com/imgextra/i4/O1CN01XyIkeC1KWoxANDv2k_!!6000000001172-2-tps-1128-542.png]
+![](https://gw.alicdn.com/imgextra/i4/O1CN01XyIkeC1KWoxANDv2k_!!6000000001172-2-tps-1128-542.png)
 
 # 光
 
@@ -404,6 +414,49 @@ brickRoughnessTexture.wrapT = THREE.RepeatWrapping
 ![](https://gw.alicdn.com/imgextra/i1/O1CN012GUi8L1VgrPAkgH10_!!6000000002683-2-tps-1130-546.png)
 
 增加一些地面的纹理
+
+```js
+const floorColorTexture = textureLoader.load('../assets/textures/floor/baseColor.jpg')
+const floorAmbientOcclusionTexture = textureLoader.load(
+  '../assets/textures/floor/ambientOcclusion.jpg',
+)
+const floorHeightTexture = textureLoader.load('../assets/textures/floor/height.png')
+const floorNormalTexture = textureLoader.load('../assets/textures/floor/normal.jpg')
+const floorRoughnessTexture = textureLoader.load('../assets/textures/door2/roughness.jpg')
+floorColorTexture.repeat.set(8, 8)
+floorAmbientOcclusionTexture.repeat.set(8, 8)
+floorHeightTexture.repeat.set(8, 8)
+floorNormalTexture.repeat.set(8, 8)
+floorRoughnessTexture.repeat.set(8, 8)
+
+floorColorTexture.wrapS = THREE.RepeatWrapping
+floorAmbientOcclusionTexture.wrapS = THREE.RepeatWrapping
+floorHeightTexture.wrapS = THREE.RepeatWrapping
+floorNormalTexture.wrapS = THREE.RepeatWrapping
+floorRoughnessTexture.wrapS = THREE.RepeatWrapping
+
+floorColorTexture.wrapT = THREE.RepeatWrapping
+floorAmbientOcclusionTexture.wrapT = THREE.RepeatWrapping
+floorHeightTexture.wrapT = THREE.RepeatWrapping
+floorNormalTexture.wrapT = THREE.RepeatWrapping
+floorRoughnessTexture.wrapT = THREE.RepeatWrapping
+
+// ground
+const plane = new THREE.Mesh(
+  new THREE.PlaneGeometry(40, 40),
+  new THREE.MeshStandardMaterial({
+    map: floorColorTexture,
+    aoMap: floorAmbientOcclusionTexture,
+    displacementMap: floorHeightTexture,
+    displacementScale: 0.01,
+    normalMap: floorNormalTexture,
+    roughnessMap: floorRoughnessTexture,
+  }),
+)
+plane.rotation.set(-Math.PI / 2, 0, 0)
+plane.position.set(0, 0, 0)
+scene.add(plane)
+```
 
 ![](https://gw.alicdn.com/imgextra/i3/O1CN01vMStUI20ZIxeiBYdi_!!6000000006863-2-tps-1135-544.png)
 
