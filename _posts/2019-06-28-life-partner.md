@@ -1171,8 +1171,9 @@ mathjax: true
 # 第五部分 心得
 
 - 大城市剩女多，小地方剩男多，为什么？**上迁婚**， [图](https://pic2.zhimg.com/80/v2-4b3a56c4251fd0103d58a757027bcdec_hd.jpg)
-
-![](https://pic2.zhimg.com/80/v2-4b3a56c4251fd0103d58a757027bcdec_hd.jpg)
+- ![](https://pic2.zhimg.com/80/v2-4b3a56c4251fd0103d58a757027bcdec_hd.jpg)
+- 实际情况更加贫富不均
+- ![](https://p3-sign.bdxiguaimg.com/tos-cn-i-jcdsk5yqko/208dbe16a9a94d06a7cc09d74874ac36~640x0.jpeg?x-expires=1658381975&x-signature=QjY96pkKyfJUAaE97tjRY804SVs%3D)
 
 - 源自[知乎-为什么一线城市大龄未婚女性越来越多?](https://www.zhihu.com/question/313988752/answer/628518054)
 
