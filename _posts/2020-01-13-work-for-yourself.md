@@ -50,6 +50,11 @@ mathjax: true
 
 # 书籍：只工作、不上班
 
+【2022-6-27】自由职业是大龄职场人的理想选择
+- Freelancing is an ideal choice for older workers
+- 自由职业；freelance work、liberal professions
+
+
 ## 引言
 - 2019年9月出版，作者[林安](https://www.douban.com/people/xtutux/)
 
