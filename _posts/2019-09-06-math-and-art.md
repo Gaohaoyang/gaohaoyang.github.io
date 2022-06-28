@@ -15,7 +15,6 @@ mathjax: true
 
 - 【2021-3-9】[130张炫酷动图, 让你秒懂高中理科所有原理——物理篇](https://mp.weixin.qq.com/s/CD2GtHreMsq6G6lQoX8qLw)
 
-
 # 数学简史
 
 - [数学的深渊](https://www.bilibili.com/video/BV1vJ411C7hn/?spm_id_from=333.788.videocard.1)
@@ -620,7 +619,12 @@ mathjax: true
 
 在我看来，罗丹教导我们的，何止是艺术，他每一句话都可用在科研的创新上，我们用我们真摰纯朴的感情去找寻大自然的美丽，大自然的真实。我们都感谢以前的大师，我们在他们的肩膀上向前摸索，但我们也知道他们的道路不是唯一的，让我们勇往直前，建立我们自己了解大自然的道路！
 
-# [动图演示数学之美](https://www.toutiao.com/a6761755895421469195/?timestamp=1574431644&app=news_article_lite&group_id=6761755895421469195&req_id=20191122220723010012065149084A006D)
+# 资料
+
+
+## 动图演示数学之美
+
+[动图演示数学之美](https://www.toutiao.com/a6761755895421469195/?timestamp=1574431644&app=news_article_lite&group_id=6761755895421469195&req_id=20191122220723010012065149084A006D)
 
 学数学，就要看动图！
 
@@ -665,4 +669,10 @@ mathjax: true
 
 
 
+## 影视资源
+
+- 心灵捕手：
+  - <iframe src="//player.bilibili.com/player.html?aid=755449482&bvid=BV1hr4y1c7F7&cid=260242134&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+- 美丽心灵
+  - <iframe src="//player.bilibili.com/player.html?aid=9786625&bvid=BV1Cx411S7Sw&cid=16178821&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
