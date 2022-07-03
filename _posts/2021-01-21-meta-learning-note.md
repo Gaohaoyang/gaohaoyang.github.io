@@ -2,7 +2,7 @@
 layout: post
 title:  "元学习-Meta-Learning: Learning to Learn Fast"
 date: 2021-01-21 00:00:00
-tags: meta-learning 元学习 小样本学习 半监督 主动学习
+tags: meta 元学习 小样本学习 半监督 主动学习
 categories: 深度学习
 excerpt: 元学习介绍
 author: Lily
@@ -99,7 +99,6 @@ mathjax: true
   - 在 stream-based 的场景中，每次只给算法输入**一个无标签**样本，由算法决定到底是交给 oracle 标注还是直接拒绝。有点类似流水线上的次品检测员，过来一个产品就需要立刻判断是否为次品，而不能在开始就根据这一批产品的综合情况来考量。
   - 在 pool-based 的场景中，每次给算法输入一个**批量**的无标签样本，然后算法根据策略挑选出一个或几个样本交给 oracle 进行标注。这样的场景在生活中更容易出现，算法也可以根据这一批量样本进行互相比较和综合考虑。
 
-
 Settles, Burr 的 Active Learning Literature Survey 文章为经典的主动学习工作进行了总结。经典的基于池的主动学习框架。
 - 在每次的主动学习循环中，根据任务模型和无标签数据的信息，查询策略选择最有价值的样本交给专家进行标注并将其加入到有标签数据集中继续对任务模型进行训练。因为主动学习的过程中存在人的标注，所以主动学习又属于 Human-in-the-Loop Machine Learning 的一种。
 
@@ -147,22 +146,17 @@ Settles, Burr 的 Active Learning Literature Survey 文章为经典的主动学�
 强化学习系统通常从大量数据中学习，需要海量计算资源，因而它们被列入其中似乎是一个非直观类别。强化学习被襄括进来，是因为它们使用的数据通常是在系统训练时生成的——多在模拟的环境中——而不是预先收集和标记。在强化学习问题中，智能体与环境交互的能力至关重要。
 
 
-
-
-# Few shot learning 小样本学习
-
-- 人类非常擅长通过**极少量**的样本识别一个新物体，比如小孩子只需要书中的一些图片就可以认识什么是“斑马”，什么是“犀牛”。在人类的快速学习能力的启发下，研究人员希望机器学习模型在学习了一定类别的大量数据后，对于新的类别，只需要少量的样本就能快速学习，这就是 Few-shot Learning 要解决的问题。
-- 方法体系：数据、模型和算法
-  - ![](https://pic4.zhimg.com/80/v2-34c21e6e6a6b07fa5d327b05d33fbc47_720w.jpg)
-
-- 【2021-2-19】分类：The GPT-3 model is evaluated in three different settings
-  - 少样本学习 Few-shot learning, when the model is given a few demonstrations of the task (typically, 10 to 100) at inference time but with no weight updates allowed.
-  - 单样本学习 One-shot learning, when only one demonstration is allowed, together with a natural language description of the task.
-  - 零样本学习 Zero-shot learning, when no demonstrations are allowed and the model has access only to a natural language description of the task.
-- [2020’s Top AI & Machine Learning Research Papers](https://www.topbots.com/ai-machine-learning-research-papers-2020/#ai-paper-2020-5)
-
-
 ## 半监督
+
+
+**半监督学习**（Semi-Supervised Learning）是利用**少量标注**数据和**大量无标注**数据进行学习的模式。
+
+半监督学习侧重于在有监督的分类算法中加入无标记样本来实现半监督分类。
+
+常见的半监督学习算法有Pseudo-Label、Π-Model、Temporal Ensembling、Mean Teacher、VAT、UDA、MixMatch、ReMixMatch、FixMatch等。
+
+
+### 半监督分类
 
 - 【2021-2-20】[不要浪费没有标注的数据！超强文本半监督方法MixText来袭！](https://mp.weixin.qq.com/s/j_1wgIUhhfJ4FcPRh5HhUw),ACL20的paper《[MixText: Linguistically-Informed Interpolation of Hidden Space for Semi-Supervised Text Classification](https://arxiv.org/pdf/2004.12239)》, [代码地址](https://github.com/GT-SALT/MixText)
   - MixText主要针对的是半监督文本分类场景，其主要的亮点有：
@@ -175,6 +169,21 @@ Settles, Burr 的 Active Learning Literature Survey 文章为经典的主动学�
   - **自训练**：通过self-training的方式，让模型在未标注数据上生成高置信度的标签；
   - **一致性训练**：通过 对抗噪声 或者 数据增强 的方式对未标注数据进行一致性训练；
   - **微调预训练模型**：在大规模无标注数据上进行预训练，在下游标注数据上微调；
+
+
+
+# Few shot learning 小样本学习
+
+- 人类非常擅长通过**极少量**的样本识别一个新物体，比如小孩子只需要书中的一些图片就可以认识什么是“斑马”，什么是“犀牛”。在人类的快速学习能力的启发下，研究人员希望机器学习模型在学习了一定类别的大量数据后，对于新的类别，只需要少量的样本就能快速学习，这就是 Few-shot Learning 要解决的问题。
+- 方法体系：数据、模型和算法
+  - ![](https://pic4.zhimg.com/80/v2-34c21e6e6a6b07fa5d327b05d33fbc47_720w.jpg)
+
+- 【2021-2-19】分类：The GPT-3 model is evaluated in three different settings
+  - **少样本**学习 Few-shot learning, when the model is given a few demonstrations of the task (typically, 10 to 100) at inference time but with no weight updates allowed.
+  - **单样本**学习 One-shot learning, when only one demonstration is allowed, together with a natural language description of the task.
+  - **零样本**学习 Zero-shot learning, when no demonstrations are allowed and the model has access only to a natural language description of the task.
+- [2020’s Top AI & Machine Learning Research Papers](https://www.topbots.com/ai-machine-learning-research-papers-2020/#ai-paper-2020-5)
+
 
 ## 背景
 
@@ -210,9 +219,9 @@ Settles, Burr 的 Active Learning Literature Survey 文章为经典的主动学�
   - 5 way 1 shot 示例
     - ![](https://pic3.zhimg.com/80/v2-7bae6075712b14614b52f515c593573e_720w.jpg)
   - 2-way 5-shot 示例
-     -  ![](https://pic2.zhimg.com/80/v2-425a4cceb747a125d92b07add5917b09_720w.jpg)
-     -  meta training 阶段构建了一系列 meta-task 来让模型学习如何根据 support set 预测 batch set 中的样本的标签；
-     -  meta testing 阶段的输入数据的形式与训练阶段一致（2-way 5-shot），但是会在全新的类别上构建 support set 和 batch。
+    -  ![](https://pic2.zhimg.com/80/v2-425a4cceb747a125d92b07add5917b09_720w.jpg)
+    -  meta training 阶段构建了一系列 meta-task 来让模型学习如何根据 support set 预测 batch set 中的样本的标签；
+    -  meta testing 阶段的输入数据的形式与训练阶段一致（2-way 5-shot），但是会在全新的类别上构建 support set 和 batch。
 - 训练过程中，每次训练（episode）都会采样得到不同 meta-task，所以总体来看，训练包含了不同的类别组合，这种机制使得模型学会不同 meta-task 中的共性部分，比如如何提取重要特征及比较样本相似等，忘掉 meta-task 中 task 相关部分。通过这种学习机制学到的模型，在面对新的未见过的 meta-task 时，也能较好地进行分类。
 
 【2021-10-13】结合最新的Prompt Tuning的思想，PaddleNLP中集成了三大前沿FSL算法：
