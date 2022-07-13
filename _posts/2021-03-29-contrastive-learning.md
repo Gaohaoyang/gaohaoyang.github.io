@@ -100,6 +100,39 @@ mathjax: true
 不重构数据，那如何衡量表示z的好坏呢？这时也可以用互信息I(X,Z)，代表我们知道了Z之后，X的信息量减少了多少。 
 - ![](https://ask.qcloudimg.com/http-save/yehe-7043804/nm4eqehaze.jpeg?imageView2/2/w/1620)
 
+## 对比学习经典方法
+
+对比学习是无监督表示学习中一种非常有效的方法，核心思路是训练query和key的Encoder，让这个Encoder对相匹配的query和key生成的编码距离接近，不匹配的编码距离远。想让对比学习效果好，一个核心点是扩大对比样本（负样本）的数量，即每次更新梯度时，query见到的不匹配key的数量。负样本数量越多，越接近对比学习的实际目标，即query和所有不匹配的key都距离远。
+
+对比学习目前有[4种最典型的范式](https://posts.careerengine.us/p/62b9ba214ef14834be502655)，分别为 End-to-End、Memory Bank、Momentum Encoder以及In-Batch Negtive。这几种对比学习结构的差异主要体现在对负样本的处理上，4种方法是一种逐渐演进的关系。
+- ![](https://static.careerengine.us/api/aov2/https%3A_%7C__%7C_mmbiz.qpic.cn_%7C_sz_mmbiz_png_%7C_dcUv9UF2OUWiaHaPQNb8ib5TPcbuVo1oG8x6RS0YnjbTUGJ9OYHaPGVVPsZC1kSuZtg7VOekj5cYQsd8qiaNYFEYg_%7C_640%3Fwx_fmt%3Dpng)
+
+### End-to-End
+
+End-to-End是一种最直接的对比学习方法，对于一个query，每次采样一个正样本以及多个负样本，使用对比学习loss计算损失，正样本和负样本都进行梯度反向传播。
+
+
+### Memory Bank
+
+针对End-to-End负样本采样数量受GPU内存限制的问题，基于Memory Bank的方法进入人们视野。Memory Bank的核心思路是，将某一轮模型对数据集中所有样本的表示存储起来，这些样本在作为负样本时，可以不进行梯度更新，极大提升了每个batch负样本数量。
+- Memory Bank对比学习的主要论文是Unsupervised feature learning via non-parametric instance discrimination（ICLR 2018）
+- 利用InfoNCE loss来近似拟合softmax多分类损失，它与层次softmax、negative sampling都是解决类别较多时多分为问题的高效方法。InfoNCE loss将多分类问题转换为多个二分类问题，原来是预测当前样本属于哪个类别，转换成判断每个样本（一个正样本和多个负样本）是否和当前样本匹配，或区分数据样本和噪声样本。
+
+问题
+- Model Bank中存储的样本表示不是最新训练的encoder产出的，和当前encoder生成的表示有一定差异，导致模型训练过程存在问题，例如当前encoder产出的编码可能要和n轮迭代之前产出的encoder编码做比较。同时，Model Bank侧两次样本表示更新不具备连续性，也会导致训练不稳定
+
+### Momentum Encoder
+
+Momentum Encoder主要为了解决Model Bank中每个样本缓存的表示和Encoder更新不一致的问题。Momentum Encoder的核心思路是，模型在key侧的encoder不进行训练，而是平滑拷贝query侧encoder的参数
+
+典型的Momentum Encoder工作是Facebook提出的MoCo，论文Momentum Contrast for Unsupervised Visual Representation Learning
+
+### In-Batch Negtive
+
+In-Batch Negtive也是对比学习中经常采用的一种扩大**负样本**数量的方法。对于匹配问题，假设每个batch内有N个正样本对，那么让这N个正样本之间互为负样本，这样每个样本就自动生成了2*(N-1)个负样本。
+
+在图像和文本匹配的多模态领域，In-Batch Negtive也非常常用，例如Learning Transferable Visual Models From Natural Language Supervision提出的CLIP模型。In-Batch Negtive的优点是非常简单，计算量不会显著增加。缺点是负样本只能使用每个batch内的数据，是随机采样的，无法针对性的构造负样本。
+
 ## A.引入
  
 ![](https://pic3.zhimg.com/80/v2-379099fa00fca7e8750bf6abe849d3aa_1440w.jpg)
@@ -165,7 +198,42 @@ A中与 x 邻近的点在B图中相应点距 x' 距离小，A中与 x 相距较�
 ## E. 对比损失【重要*数学警告】
  
 本章的数学公式可以只看结论（NCE可以不看），如果想了解细节请仔细阅读【附录】，如果不懂可以评论私信，或者移步参考博客学习。
- 
+
+### 损失函数总结
+
+[对比学习的7大损失函数](https://posts.careerengine.us/p/62a3152b8c182324c338fd54)
+- 表示学习的目的是将原始数据转换成更好的表达，以提升下游任务的效果。在表示学习中，损失函数的设计一直是被研究的热点。损失指导着整个表示学习的过程，直接决定了表示学习的效果。
+- 表示学习中的7大损失函数的发展历程，以及它们演进过程中的设计思路，主要包括 contrastive loss、triplet loss、n-pair loss、infoNce loss、focal loss、GHM loss、circle loss。
+- (1) contrastive loss：对比损失
+  - Dimensionality Reduction by Learning an Invariant Mapping（CVPR 2006）
+  - 输入两个样本，经过相同的编码器得到两个样本的编码。如果两个样本属于同一类别，则优化目标为让两个样本在某个空间内的距离小；如果两个样本不属于同一类别，并且两个样本之间的距离小于一个超参数m，则优化目标为让两个样本距离接近m。
+  - ![](https://static.careerengine.us/api/aov2/https%3A_%7C__%7C_mmbiz.qpic.cn_%7C_sz_mmbiz_png_%7C_dcUv9UF2OUXeictpRMQCiaqU1daVsfFzu6twjmP9fFtjPB27nmAQhHia49k7YKkjLn4T18aI1iaiaJMglSSn9kIxnXg_%7C_640%3Fwx_fmt%3Dpng)
+  - Contrastive Loss是后面很多表示学习损失函数的基础，通过这种对比的方式，让模型生成的表示满足相似样本距离近，不同样本距离远的条件，实现更高质量的表示生成
+- (2) triplet loss：三元组损失
+  - FaceNet: A unified embedding for face recognition and clustering（CVPR 2015）
+  - triplet loss需要比较3个样本，分别为anchor、position和negtive。其目标为让anchor和positive样本（类别相同）的距离尽可能近，而和negtive样本（类别不同）的距离尽可能远。因此triplet loss设计为，让anchor和positive样本之间的距离比anchor和negtive样本要小，并且要小至少一个margin的距离才不计入loss。
+  - ![](https://static.careerengine.us/api/aov2/https%3A_%7C__%7C_mmbiz.qpic.cn_%7C_sz_mmbiz_png_%7C_dcUv9UF2OUXeictpRMQCiaqU1daVsfFzu60zibIic9TpnTUeRvgibBdMN5fqV7gaZN6fFgZOesN6hb9qS0vgqzCf08Q_%7C_640%3Fwx_fmt%3Dpng)
+- (3) n-pair loss：n对损失
+  - Improved Deep Metric Learning with Multi-class N-pair Loss Objective（NIPS 2016）
+  - 之前提出的contrastive loss和triplet loss中，每次更新只会使用一个负样本，而无法见到多种其他类型负样本信息，因此模型优化过程只会保证当前样本的embedding和被采样的负样本距离远，无法保证和所有类型的负样本都远，会影响模型收敛速度和效果。即使多轮更新，但是这种情况仍然会导致每轮更新的不稳定性，导致学习过程持续震荡。
+  - 为了解决这个问题，让模型在每轮更新中见到更多的负样本，提出了N-pair loss，主要改进是每次更新的时候会使用多个负样本的信息。N-pair loss可以看成是一种triplet loss的扩展
+  - ![](https://static.careerengine.us/api/aov2/https%3A_%7C__%7C_mmbiz.qpic.cn_%7C_sz_mmbiz_png_%7C_dcUv9UF2OUXeictpRMQCiaqU1daVsfFzu6ddA2qGyffhK7aWGzRudxia7cRJEZEjNVvgaic4cVIEiadSZjIwVF7PtzA_%7C_640%3Fwx_fmt%3Dpng)
+- (4) infoNce loss：噪声对比损失
+  - Representation learning with contrastive predictive coding（2018）
+  - infoNce loss，是对比学习中最常用的loss之一，它和softmax的形式很相似，主要目标是给定一个query，以及k个样本，k个样本中有一个是和query匹配的正样本，其他都是负样本。当query和正样本相似，并且和其他样本都不相似时，loss更小。InfoNCE loss可以表示为如下形式，其中r代表temperature，采用内积的形式度量两个样本生成向量的距离，InfoNCE loss也是近两年比较火的对比学习中最常用的损失函数之一;相比softmax，InfoNCE loss使用了temperature参数，以此将样本的差距拉大，提升模型的收敛速度
+  - ![](https://static.careerengine.us/api/aov2/https%3A_%7C__%7C_mmbiz.qpic.cn_%7C_sz_mmbiz_png_%7C_dcUv9UF2OUXeictpRMQCiaqU1daVsfFzu6eyto2pic187meAMcyxSgy68gjR0QcC0UdbDFiaClM1nndsxHJbPG9P5A_%7C_640%3Fwx_fmt%3Dpng)
+- (5) focal loss：聚焦损失
+  - Focal Loss for Dense Object Detection（2018）
+  - 最开始主要是为了解决目标检测中的问题，但是在很多其他领域也可以适用。Focal Loss解决的核心问题是，当数据中有很多容易学习的样本和较少的难学习样本时，如何调和难易样本的权重。如果数据中容易的样本很多，难的样本很少，容易的样本就会对主导整体loss，对难样本区分能力弱。
+  - 为了解决这个问题，Focal Loss根据模型对每个样本的打分结果给该样本的loss设置一个权重，减小容易学的样本（即模型打分置信的样本）的loss权重。
+- (6) GHM loss：
+  - Focal Loss中强制让模型关注难分类的样本，但是数据中可能也存在一些异常点，过度关注这些难分类样本，反而会让模型效果变差。
+  - Gradient Harmonized Single-stage Detector（AAAI 2019）提出了GHM Loss
+- (7) circle loss
+  - Circle Loss: A Unified Perspective of Pair Similarity Optimization（CVPR 2020）
+  - circle loss，从一个统一的视角融合了class-level loss和pair-wise loss。这两种优化目标，其实都是在最小化sn-sp，其中sn表示between-class similarity，即不同类别的样本表示距离应该尽可能大；sp表示within-class similarity，即相同类别的样本表示距离尽可能小。
+
+
 ### 1. 欧几里得距离
  
 在线性空间中，上述相似度就可以表示为二者向量间的欧几里得距离：
