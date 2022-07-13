@@ -3118,6 +3118,8 @@ git config   --global --unset  user.name # 取消命名
 
 # 生成公钥
 ssh-keygen -t rsa
+# 公钥位置，添加到GitHub里的setting设置中
+cat ~/.ssh/id_rsa.pub
 
 # [2020-9-1]
 git log # 查看历史提交信息
