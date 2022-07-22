@@ -1929,13 +1929,19 @@ ACL 2019最新收录的论文：[What does BERT learn about the structure of lan
   - 3.深度学习可视化工具Visual DL; Visual DL是百度开发的，基于echar和PaddlePaddle，支持PaddlePaddle，PyTorch和MXNet等主流框架。ps：这个是我最喜欢的，毕竟echar的渲染能力不错哈哈哈，可惜不支持caffe和tensorflow。[地址](https://github.com/PaddlePaddle/VisualDL)
   - 4.结构可视化工具PlotNeuralNet, 萨尔大学计算机科学专业的一个学生开发。[地址](https://github.com/HarisIqbal88/PlotNeuralNet)
   - [CNN Explainer](https://poloclub.github.io/cnn-explainer/) [github](https://github.com/poloclub/cnn-explainer), 交互可视化CNN类神经网络，使用 TensorFlow.js 加载预训练模型进行可视化效果，交互方面则使用 Svelte 作为框架并使用 D3.js 进行可视化。最终的成品即使对于完全不懂的新手来说，也没有使用门槛。
+  - [VisualDL](https://github.com/PaddlePaddle/VisualDL), a visualization analysis tool of PaddlePaddle；类似tensorboard
+    - ![](https://user-images.githubusercontent.com/48054808/103188111-1b32ac00-4902-11eb-914e-c2368bdb8373.gif)
+- NLP可视化
+  - [NLPReViz](https://nlpreviz.github.io/): An Interactive Tool for Natural Language Processing on Clinical Text
+  - [NLPVis](https://github.com/shusenl/nlpvis) web系统，visualize the attention of neural network based natural language models.
+    - ![](https://github.com/shusenl/nlpvis/raw/master/teaser.png?raw=true)
+  - [Visualizing BERT](https://home.ttic.edu/~kgimpel/viz-bert/viz-bert.html)
+  - kaggle上外国人分享的[Visualizing BERT embeddings with t-SNE](https://www.kaggle.com/wqw547243068/visualizing-bert-embeddings-with-t-sne/edit)
+  - SHAP
+    - ![](https://www.nowhere.co.jp/blog/wp-content/uploads/2022/07/SHAP-for-translation.png)
+  - [BertViz](https://github1s.com/jessevig/bertviz)是BERT可视化工具包，支持[transformers](https://github.com/huggingface/transformers) 库的大部分模型 (BERT, GPT-2, XLNet, RoBERTa, XLM, CTRL, BART, etc.)，继承于[Tensor2Tensor visualization tool](https://github.com/tensorflow/tensor2tensor/tree/master/tensor2tensor/visualization)
 
-
-- [Visualizing BERT](https://home.ttic.edu/~kgimpel/viz-bert/viz-bert.html)
-- kaggle上外国人分享的[Visualizing BERT embeddings with t-SNE](https://www.kaggle.com/wqw547243068/visualizing-bert-embeddings-with-t-sne/edit)
-
-
-[BertViz](https://github1s.com/jessevig/bertviz)是BERT可视化工具包，支持[transformers](https://github.com/huggingface/transformers) 库的大部分模型 (BERT, GPT-2, XLNet, RoBERTa, XLM, CTRL, BART, etc.)，继承于[Tensor2Tensor visualization tool](https://github.com/tensorflow/tensor2tensor/tree/master/tensor2tensor/visualization)
+#### BERTViz
 
 ```shell
 # pip安装
@@ -2031,6 +2037,85 @@ call_html()
 # 用BertViz可视化
 head_view(attention, tokens)
 ```
+
+
+#### SHAP
+
+SHapley Additive exPlanations 
+
+![](https://www.nowhere.co.jp/blog/wp-content/uploads/2022/07/SHAP-for-translation.png)
+
+All the code and outputs are provided at the end of this blood. Please refer to it while reading and feel free to run it in [Google Colab notebook](https://colab.research.google.com/gist/Cheto01/1285f09b81d043856b6ba2b13f2ec942/shap-example.ipynb)
+
+
+（1）Explaining a transformers-based model —— 分类模型
+
+SHAP or ECCO have the potential to provide substantial syntactic information captured from an NLP model’s attention.
+
+SHAP can be used to visualize and interpret what a complex transformers-based model sees when applied to a classification task.
+
+```python
+#import the necessary libraries
+import pandas as pd
+import shap
+import sklearn
+
+import transformers
+import datasets
+import torch
+import numpy as np
+import scipy as sp
+
+# load a BERT sentiment analysis model
+tokenizer = transformers.DistilBertTokenizerFast.from_pretrained("distilbert-base-uncased")
+model = transformers.DistilBertForSequenceClassification.from_pretrained(
+    "distilbert-base-uncased-finetuned-sst-2-english"
+).cuda()
+
+# define a prediction function
+def f(x):
+    tv = torch.tensor([tokenizer.encode(v, padding='max_length', max_length=500, truncation=True) for v in x]).cuda()
+    outputs = model(tv)[0].detach().cpu().numpy()
+    scores = (np.exp(outputs).T / np.exp(outputs).sum(-1)).T
+    val = sp.special.logit(scores[:,1]) # use one vs rest logit units
+    return val
+
+# build an explainer using a token masker
+explainer = shap.Explainer(f, tokenizer)
+
+# explain the model's predictions on IMDB reviews
+imdb_train = datasets.load_dataset("imdb")["train"]
+shap_values = explainer(imdb_train[:30], fixed_context=1, batch_size=2)
+
+# plot a sentence's explanation
+shap.plots.text(shap_values[27])
+```
+
+This visualization uses the probability scores of the model’s prediction. By taking into account the underlying patterns inside the layers, it uses the neuron activations values, more precisely the non-negative matrix factorization.
+
+
+（2）NLP Model for Translation
+
+Imagining what happens inside a sequence-to-sequence model could be described easier than a classifier. Our intuition for a translation could even show us more precisely which token or words have been mistranslated.
+
+By hovering over the translated text, you will notice that those neuron activations carry embeddings scores. The non-latent embedding scores can be translated into embedding space where word similarity can easily be visualized. For example, in the embedding space, for “father”, “brother” will be what “sister” is for “mother”. This can be visualized even through a sentiment classification where each word is represented by its embedding score.  
+
+```python
+import numpy as np
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+import shap
+import torch
+
+tokenizer = AutoTokenizer.from_pretrained("Helsinki-NLP/opus-mt-en-fr")
+model = AutoModelForSeq2SeqLM.from_pretrained("Helsinki-NLP/opus-mt-en-fr").cuda()
+
+s=["In my family, we are six: my father, my mother, my elder sister, my younger brother and sister"]
+
+explainer = shap.Explainer(model,tokenizer)
+
+shap_values = explainer(s)
+```
+
 
 ### 语义匹配
 
