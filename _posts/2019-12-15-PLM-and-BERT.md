@@ -1922,6 +1922,15 @@ ACL 2019最新收录的论文：[What does BERT learn about the structure of lan
 
 ### BERT可视化
 
+【2022-7-22】[最全深度学习训练过程可视化工具](https://mp.weixin.qq.com/s/QQgKfYi-m9psUOJUZUxZ0Q)
+- 深度学习训练过程一直处于黑匣子状态，有很多同学问我具体怎么解释？其实很多还是无法可解释，但是通过可视化，具体可以知道深度学习在训练过程到底学习了哪些特征？到底对该目标的哪些特征感兴趣？
+  - 1.深度学习网络结构画图工具，[地址](https://cbovar.github.io/ConvNetDraw/)
+  - 2.caffe可视化工具,输入：caffe配置文件 输出：网络结构; [地址](http://ethereon.github.io/netscope/#/editor)
+  - 3.深度学习可视化工具Visual DL; Visual DL是百度开发的，基于echar和PaddlePaddle，支持PaddlePaddle，PyTorch和MXNet等主流框架。ps：这个是我最喜欢的，毕竟echar的渲染能力不错哈哈哈，可惜不支持caffe和tensorflow。[地址](https://github.com/PaddlePaddle/VisualDL)
+  - 4.结构可视化工具PlotNeuralNet, 萨尔大学计算机科学专业的一个学生开发。[地址](https://github.com/HarisIqbal88/PlotNeuralNet)
+  - [CNN Explainer](https://poloclub.github.io/cnn-explainer/) [github](https://github.com/poloclub/cnn-explainer), 交互可视化CNN类神经网络，使用 TensorFlow.js 加载预训练模型进行可视化效果，交互方面则使用 Svelte 作为框架并使用 D3.js 进行可视化。最终的成品即使对于完全不懂的新手来说，也没有使用门槛。
+
+
 - [Visualizing BERT](https://home.ttic.edu/~kgimpel/viz-bert/viz-bert.html)
 - kaggle上外国人分享的[Visualizing BERT embeddings with t-SNE](https://www.kaggle.com/wqw547243068/visualizing-bert-embeddings-with-t-sne/edit)
 
