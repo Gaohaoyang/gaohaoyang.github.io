@@ -225,6 +225,11 @@ mathjax: true
 
 土地财政走向终点，谁又能成为新的王者呢？下期：开征吧，房产税。
 
+### 土地财政的未来
+
+【2022-7-23】[土地财政走到尽头，中国的出路在哪里？](https://www.bilibili.com/video/BV1JY411T7QK/)
+- 各地楼市松绑政策井喷式出现，从新一线省会到三四线县城，降低首付、契税优惠、放宽年限、取消限购、鼓励公积金贷款等等措施五花八门……这些地方上的举措，到房地产被纳入实体经济接受救济，背后的态度显而易见。于是就有朋友问，这些举措会不会进一步推升房价？房住不炒喊了那么多年难道就是一句空话？
+- <iframe src="//player.bilibili.com/player.html?aid=257612741&bvid=BV1JY411T7QK&cid=748960506&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 ## 房地产政策
 
