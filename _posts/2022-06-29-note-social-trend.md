@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "【读书笔记】-普通人改变命运的几次机会-change your life"
+title:  "【读书笔记】-改变命运的几次机会-change your life"
 date:   2022-06-29 12:24:00
 categories: 读书笔记
 tags: 认知 社会 命运
-excerpt: 近40年，中国人是如何借势改变个人命运的？
+excerpt: 近40年，中国人是如何借势改变个人命运的？一共7次机会，首富许家印抓住了4次，看你抓住了几次。
 author: 鹤啸九天
 mathjax: true
 ---
