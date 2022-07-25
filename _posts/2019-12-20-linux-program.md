@@ -5,7 +5,7 @@ subtitle:   Linux程序开发
 date:   2019-12-20 15:43:00
 author:  鹤啸九天
 categories: 编程语言
-tags: Linux 编程技能 操作系统 C/C++ MakeFile GCC cmake
+tags: Linux 编程技能 C/C++ MakeFile GCC cmake
 excerpt: Linux程序开发，含C/C++编译工具（make）
 mathjax: true
 header-img: img/post-bg-ios10.jpg
