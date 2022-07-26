@@ -149,6 +149,7 @@ mathjax: true
 ## 房产逻辑
 
 【2022-7-23】[一个视频搞懂中国房地产内在逻辑，看完就能明白现在发生的一切](https://www.toutiao.com/video/7122834670739587615)
+- <iframe src="//player.bilibili.com/player.html?aid=601241893&bvid=BV1PB4y1h71p&cid=780014233&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 [一个视频搞懂中国房地产整个内在逻辑，看完就能明白现在发生的一切，以及未来大趋势](https://www.bilibili.com/video/BV1PB4y1h71p)
 - <iframe src="//player.bilibili.com/player.html?aid=601241893&bvid=BV1PB4y1h71p&cid=780014233&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
