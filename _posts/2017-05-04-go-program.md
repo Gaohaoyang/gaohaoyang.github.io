@@ -2460,11 +2460,29 @@ func BenchmarkAdd(b *testing.B) {  
 
 ## Web服务
 
-### Web示例
+### 浏览原理
+
+浏览器访问过程
+- 浏览器本身是一个**客户端**，当你输入 URL 的时候，首先浏览器会去请求 **DNS 服务器**，通过 DNS 获取相应的域名对应的 **IP**
+- 然后通过 IP 地址找到 IP 对应的**服务器**后，要求建立 **TCP 连接**，等浏览器发送完 HTTP Request（请求）包后，服务器接收到请求包之后才开始处理请求包，服务器调用自身服务，返回 HTTP Response（响应）包；
+- 客户端收到来自服务器的响应后开始渲染这个 Response 包里的主体（body），等收到全部的内容随后断开与该服务器之间的 TCP 连接。
+- ![](https://cdn.learnku.com/build-web-application-with-golang/images/3.1.web2.png?raw=true)
+
+Web 服务器的工作原理可以简单地归纳为：
+- 客户机通过 TCP/IP 协议建立到服务器的 TCP 连接
+- 客户端向服务器发送 HTTP 协议请求包，请求服务器里的资源文档
+- 服务器向客户机发送 HTTP 协议应答包，如果请求的资源包含有动态语言的内容，那么服务器会调用动态语言的解释引擎负责处理 “动态内容”，并将处理得到的数据返回给客户端
+- 客户机与服务器断开。由客户端解释 HTML 文档，在客户端屏幕上渲染图形结果
+
+
+### Go自带的Web服务：net/http
+
+Go 语言里面提供了一个完善的 `net/http` 包，通过 http 包可以很方便的就搭建起来一个可以运行的 Web 服务。同时使用这个包能很简单地对 Web 的路由，静态文件，模版，cookie 等数据进行设置和操作。
 
 【2022-7-28】启动web服务
 
 ```go
+// web_test.go
 package main
 
 import (
@@ -2492,6 +2510,77 @@ func main() {
     err := http.ListenAndServe(":9090", nil) // 设置监听的端口
     if err != nil {
         log.Fatal("ListenAndServe: ", err)
+    }
+}
+```
+
+过程
+- go build web_test.go
+- ./web_test
+- 浏览器访问：http://localhost:9090，页面显示：Hello astaxie!
+- 换一个地址：http://localhost:9090/?url_long=111&url_long=222，浏览器显示输入的参数
+
+注：
+- PHP 程序员也许就会问，nginx、apache 服务器不需要吗？—— Go 就是不需要这些，因为直接就监听 tcp 端口了，做了 nginx 做的事情，然后 sayhelloName 这个其实就是我们写的逻辑函数了，跟 php 里面的控制层（controller）函数类似。
+- Python 程序员，会觉得跟 tornado 代码很像—— 没错，Go 就是拥有类似 Python 这样动态语言的特性，写 Web 应用很方便。
+- Ruby 程序员会发现和 ROR 的 /script/server 启动有点类似。
+
+### http包原理
+
+服务器端的几个概念
+- Request：用户请求的信息，用来解析用户的请求信息，包括 post、get、cookie、url 等信息
+- Response：服务器需要反馈给客户端的信息
+- Conn：用户的每次请求链接
+- Handler：处理请求和生成返回信息的处理逻辑
+
+工作模式流程图
+- ![](https://cdn.learnku.com/build-web-application-with-golang/images/3.3.http.png)
+
+http 包执行流程
+- 创建 Listen Socket, 监听指定的端口，等待客户端请求到来。
+- Listen Socket 接受客户端的请求，得到 Client Socket, 接下来通过 Client Socket 与客户端通信。
+- 处理客户端的请求，首先从 Client Socket 读取 HTTP 请求的协议头，如果是 POST 方法，还可能要读取客户端提交的数据，然后交给相应的 handler 处理请求，handler 处理完毕准备好客户端需要的数据，通过 Client Socket 写给客户端。
+
+问题
+- 如何监听端口？
+- 如何接收客户端请求？
+- 如何分配 handler？
+
+Go 是通过一个函数 ListenAndServe 来处理这些事情的，这个底层其实这样处理的：
+- 初始化一个 server 对象，然后调用了 net.Listen("tcp", addr)，也就是底层用 TCP 协议搭建了一个服务，然后监控我们设置的端口。
+
+源码
+
+```go
+// 处理接收客户端的请求信息
+func (srv *Server) Serve(l net.Listener) error {
+    defer l.Close()
+    var tempDelay time.Duration // how long to sleep on accept failure
+    // 循环接受 Listener 请求
+    for {
+        rw, e := l.Accept()
+        if e != nil {
+            if ne, ok := e.(net.Error); ok && ne.Temporary() {
+                if tempDelay == 0 {
+                    tempDelay = 5 * time.Millisecond
+                } else {
+                    tempDelay *= 2
+                }
+                if max := 1 * time.Second; tempDelay > max {
+                    tempDelay = max
+                }
+                log.Printf("http: Accept error: %v; retrying in %v", e, tempDelay)
+                time.Sleep(tempDelay)
+                continue
+            }
+            return e
+        }
+        tempDelay = 0
+        c, err := srv.newConn(rw)
+        if err != nil {
+            continue
+        }
+        go c.serve()
     }
 }
 ```
