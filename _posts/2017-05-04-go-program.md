@@ -5,7 +5,7 @@ subtitle:  新语言
 date:   2017-05-04 15:17:00
 author:  wangqiwen
 categories: 编程语言
-tags: go web 输入提示
+tags: go web 输入提示 模型部署
 excerpt: 编程语言知识点
 mathjax: true
 header-img: img/post-bg-ios10.jpg
@@ -2730,6 +2730,89 @@ func main() {
 	}else {
 		log.Println("服务开启："+url)
 	}
+}
+```
+
+## 模型部署
+
+【2022-8-2】[Go 语言部署TensorFlow机器学习模型](https://www.knowlesys.cn/ab/qa/2020-12-05/c4fa60df527fe4b4ee2bfefd4b26c92b.html)
+
+Python 是当下最流行的机器学习语言，有很多开源资源可以使用。而 Go语言的**速度快**，能很好地处理**并发**，可以编译成单一的二进制文件。所以在实际开发时综合二者的优势，用 Python做**模型训练**，用Go做**预测服务**。
+
+### TensorFlow模型
+
+保存模型
+
+```python
+from tensorflow.python.saved_model.builder_impl import SavedModelBuilder
+
+with tf.Session() as session:  
+    # 训练模型操作。。。
+    
+    # 保存模型
+    builder = SavedModelBuilder("存储路径")
+    # 保存时需要定义tag
+    builder.add_meta_graph_and_variables(session, ["tag"])
+    builder.save()
+```
+
+### Go 推理模型
+
+注意：
+- 载入模型时，需要传参：
+  - 模型保存路径，Python保存模型时定义的Tag。这里tag 需要为[]string{}类型。
+- 模型入参需要通过 tf.NewTensor() 转为 Tensor；
+- 输入输出节点操作名称需要根据Python定义的模型操作节点名称填写；
+- 输出节点和Python类似，可以传递多个操作名获取多个值。
+
+```go
+package main
+
+import (
+	"fmt"
+	tf "github.com/tensorflow/tensorflow/tensorflow/go"
+)
+
+func main() {
+	m, err := tf.LoadSavedModel("modelPath", []string{"modelTag"}, nil) // 载入模型
+	if err != nil {
+		// 模型加载失败
+		fmt.Printf("err: %v", err)
+	}
+	// 打印出所有的Operator
+	for _, op := range m.Graph.Operations() {
+		fmt.Printf("Op name: %v", op.Name())
+	}
+	// 构造输入Tensor。根据你的模型入参格式来定义
+	x := [1][8]int32{
+		{0,1,2,3,4,5,6,7},
+	}
+	tensor_x, err := tf.NewTensor(x)
+	if err != nil {
+		fmt.Printf("err: %s", err.Error())
+		return
+	}
+	kb, err := tf.NewTensor(float32(1))
+	if err != nil {
+		fmt.Printf("err: %s", err.Error())
+		return
+	}
+	s := m.Session
+	feeds := map[tf.Output]*tf.Tensor{
+		// operation name 需要根据你的模型入参来写
+		m.Graph.Operation("input_x").Output(0): tensor_x,
+		m.Graph.Operation("keep_prob").Output(0): kb,
+	}
+	fetches := []tf.Output{
+		// 输出层的name 也要根据你的模型写
+		m.Graph.Operation("score/ArgMax").Output(0),
+	}
+	result, err:= s.Run(feeds, fetches,nil)
+	if err != nil {
+		// 模型预测失败
+		fmt.Printf("err: %s  ", err.Error())
+	}
+	fmt.Printf("%#v", result)
 }
 ```
 
