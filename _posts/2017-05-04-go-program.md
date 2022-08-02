@@ -2585,6 +2585,12 @@ func (srv *Server) Serve(l net.Listener) error {
 }
 ```
 
+![](https://cdn.learnku.com/build-web-application-with-golang/images/3.3.illustrator.png?raw=true)
+
+Go 的 http 有两个核心功能：Conn、ServeMux
+
+
+
 ### caddy web服务框架
 
 【2022-3-10】[自带 HTTPS 的开源 Web 服务器](https://www.toutiao.com/i7064892846268006924/)
