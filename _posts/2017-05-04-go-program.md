@@ -2560,9 +2560,13 @@ import (
     "net/http"
     "strings"
     "log"
+    "sync"
 )
 
-func sayhelloName(w http.ResponseWriter, r *http.Request) {
+var mu sync.Mutex // 互斥锁
+var count int // 全局变量
+
+func sayhello(w http.ResponseWriter, r *http.Request) {
     r.ParseForm()  // 解析参数，默认是不会解析的
     fmt.Println(r.Form)  // 这些信息是输出到服务器端的打印信息
     fmt.Println("path", r.URL.Path)
@@ -2575,18 +2579,32 @@ func sayhelloName(w http.ResponseWriter, r *http.Request) {
     fmt.Fprintf(w, "Hello astaxie!") // 这个写入到 w 的是输出到客户端的
 }
 
+func counter(w http.ResponseWriter, r *http.Request) {
+    mu.Lock()
+    fmt.Fprintf(w, "Count %d\n", count)
+    mu.Unlock()
+}
+
 func main() {
-    http.HandleFunc("/", sayhelloName) // 设置访问的路由
+    http.HandleFunc("/", sayhello) // 设置访问的路由
+    http.HandleFunc("/count", counter) // 另一个路由
     err := http.ListenAndServe(":9090", nil) // 设置监听的端口
     if err != nil {
         log.Fatal("ListenAndServe: ", err)
     }
+    // 更新全局变量
+    mu.Lock()
+    count++
+    mu.Unlock()
+
 }
 ```
 
 过程
 - go build web_test.go
 - ./web_test
+- 或直接运行：
+  - go run web_test.go &
 - 浏览器访问：http://localhost:9090，页面显示：Hello astaxie!
 - 换一个地址：http://localhost:9090/?url_long=111&url_long=222，浏览器显示输入的参数
 
