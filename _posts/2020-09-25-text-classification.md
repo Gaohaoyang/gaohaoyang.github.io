@@ -3,7 +3,7 @@ layout: post
 title:  "文本分类-Text Classification"
 date:   2020-09-25 14:52:00
 categories: 深度学习
-tags: 文本分类 负采样 fasttext kaggle
+tags: 文本分类 负采样 fasttext kaggle 增强
 excerpt: NLP子领域文本分类知识汇总
 author: 鹤啸九天
 mathjax: true
@@ -93,6 +93,26 @@ mathjax: true
 |---|---|---|
 |16|射击游戏|星际激斗战斗重燃，《星空要塞》是一个基于未来科学背景的策略游戏。。。。|
 
+## 文本增强
+
+【2022-8-5】
+
+```shell
+pip install nlpcda
+```
+
+[中文数据增强工具](https://mp.weixin.qq.com/s/6nUAZ28dkZczyLWFO0kz6Q) [nlpcda](https://github.com/425776024/nlpcda)，支持：
+1. 随机实体替换
+2. 近义词
+3. 近义近音字替换
+4. 随机字删除（内部细节：数字时间日期片段，内容不会删）
+5. NER类 BIO 数据增强
+6. 随机置换邻近的字：研表究明，汉字序顺并不定一影响文字的阅读理解<<是乱序的
+7. 中文等价字替换（1 一 壹 ①，2 二 贰 ②）
+8. 翻译互转实现的增强
+9. 使用simbert做生成式相似句生成
+
+经过细节特殊处理，比如不改变年月日数字，尽量保证不改变原文语义。即使改变也能被猜出来、能被猜出来、能被踩出来、能被菜粗来、被菜粗、能菜粗来。
 
 ## 资料
 
