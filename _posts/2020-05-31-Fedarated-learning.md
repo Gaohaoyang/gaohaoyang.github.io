@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  "联邦学习-Federated Learning"
-date:   2020-05-30 08:27:00
+date:   2020-05-31 08:27:00
 categories: 机器学习
-tags: 机器学习 联邦学习 同态加密 群体学习
+tags: 机器学习 联邦学习 同态加密 群体学习 tensorflow
 excerpt: 如何保护用户隐私的同时也能充分利用各类数据？
 author: 鹤啸九天
 mathjax: true
@@ -16,7 +16,7 @@ mathjax: true
 
 - 【2020-8-6】联邦学习Python实践：[Federated Learning Demo in Python using Socket Programming](https://github.com/ahmedfgad/FederatedLearning)
 - 【2021-1-8】[字节跳动在联邦学习领域的探索及实践](https://www.toutiao.com/i6915250800906338819/)，联邦学习在广告投放和金融等场景中的应用模式、算法研究、软件系统及实践经验
-- 【2021-3-14】[联邦学习:Tensorflow中的逐步实现](https://www.toutiao.com/i6814051104825803278/)
+- 【2020-4-10】[联邦学习:Tensorflow中的逐步实现](https://www.toutiao.com/i6814051104825803278/)
 - 【2021-6-17】[AI新算法**群体学习**（Swarm Learning，以下简称SL）登Nature封面！解决医疗数据隐私问题，超越联邦学习？](https://mp.weixin.qq.com/s/75VjJkJvCmLpor2GZURZpQ)比联邦学习更安全，SL可保障医疗数据共享. 联邦学习方法（Federated Learning）解决了其中的一些问题。数据保存在数据所有者本地，保密性问题得到解决，但参数设置仍要中央协调员协调。此外，这种星型架构降低了容错能力。更好的选择是采取完全去中心化的人工智能解决方案，即SL来克服已有方案的不足，适应医学领域固有的分散式数据结构以及数据隐私和安全法规的要求。
   - SL具有以下优势：
     - （1）将大量医疗数据保存至数据所有者本地；
@@ -213,7 +213,6 @@ Google首先将联邦学习运用在Gboard（Google键盘）上，联合用户�
 - 每个Client在每次通信中使用一个样本来计算梯度并局部更新参数，将参数传给Server。Server汇总平均后更新模型参数再返回给Clients。这样的效率对于通信受限的联邦学习框架是难以承受的。
 - 因此，为了提高通信效率，Federated Averaging考虑每个Client首先在本地多次通过SGD更新模型，再将更新后的模型参数传给Server进行汇总平均。
 
-
 # 应用
 
 ## 风控
@@ -237,6 +236,9 @@ Google首先将联邦学习运用在Gboard（Google键盘）上，联合用户�
 
 # 工程实现
 
+FL架构的基本形式包括一个位于中心的管理员或服务器，负责协调训练活动。客户端主要是**边缘设备**，可以达到**数百万**。这些设备在每次训练迭代中至少与服务器通信**两次**。首先，它们各自从服务器接收当前全局模型的权重，在各自的本地数据上对其进行训练，以生成更新后的参数，然后将这些参数上传到服务器进行汇总。这种通信循环一直持续到达到预先设定的epochs数或准确度条件为止。在联邦平均算法中，汇总仅仅意味着平均操作。
+- ![](https://p3-sign.toutiaoimg.com/pgc-image/66d33ac16b7e4951870bb12b2a6ae363~noop.image)
+
 ## 数据集
 
 （1）数据集
@@ -244,9 +246,245 @@ Google首先将联邦学习运用在Gboard（Google键盘）上，联合用户�
 2. Stackoverflow数据集： 该数据集由Stack Overflow的问答组成，并带有时间戳、分数等元数据。训练数据集包含342,477多个用户和135,818,730个例子。其中的时间戳信息有助于模拟传入数据的模式。[下载地址](https://www.kaggle.com/stackoverflow/stackoverflow)
 3. Shakespeare数据集： 该数据是从The Complete Works of William Shakespeare获得的语言建模数据集。由715个字符组成，其连续行是Client数据集中的示例。训练集样本量为16,068，测试集为2,356。
 
-## 工具包
 
-（2）开源软件包
+## TensorFlow实现
+
+【2020-4-10】[联邦学习:Tensorflow中的逐步实现](https://www.toutiao.com/i6814051104825803278/)
+
+Tensorflow中从头开始构建一个FL，并在Kaggle的[MNIST数据集](https://www.kaggle.com/scolianni/mnistasjpg)上对其进行训练。
+- 使用MNIST数据集的jpeg版本。它由42000个数字图像组成，每个类保存在单独的文件夹中。我将使用一下Python代码片段将数据加载到内存中，并保留10%的数据，以便稍后测试经过训练的全局模型。
+
+```python
+import numpy as np
+import random
+import cv2
+import os
+from imutils import paths
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelBinarizer
+from sklearn.model_selection import train_test_split
+from sklearn.utils import shuffle
+from sklearn.metrics import accuracy_score
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv2D
+from tensorflow.keras.layers import MaxPooling2D
+from tensorflow.keras.layers import Activation
+from tensorflow.keras.layers import Flatten
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.optimizers import SGD
+from tensorflow.keras import backend as K
+from fl_mnist_implementation_tutorial_utils import *
+
+# 加载数据
+# 从磁盘读取每个图像作为灰度，然后将其flattened
+def load(paths, verbose=-1):    
+    '''expects images for each class in seperate dir,     e.g all digits in 0 class in the directory named 0 '''
+    data = list()    
+    labels = list()    # loop over the input images    
+    for (i, imgpath) in enumerate(paths):        # load the image and extract the class labels        
+        im_gray = cv2.imread(imgpath, cv2.IMREAD_GRAYSCALE)  #9        
+        image = np.array(im_gray).flatten()        
+        label = imgpath.split(os.path.sep)[-2]        # scale the image to [0, 1] and add to list   
+        # 将图像缩放到[0,1]，以减弱像素亮度变化的影响
+        data.append(image/255)   #13        
+        labels.append(label)        # show an update every `verbose` images        
+        if verbose > 0 and i > 0 and (i + 1) % verbose == 0:            
+            print("[INFO] processed {}/{}".format(i + 1, len(paths)))    # return a tuple of the data and labels    
+            return data, labels
+# load函数来获得图像列表(现在是numpy数组)和标签列表
+
+# 数据集划分
+# declear path to your mnist data folder
+img_path = '/path/to/your/training/dataset'#get the path list using the path object
+image_paths = list(paths.list_images(img_path))#apply our function
+# 获得图像列表(现在是numpy数组)和标签列表
+image_list, label_list = load(image_paths, verbose=10000)#binarize the labels
+# 用来自sklearn的LabelBinarizer对象对标签进行one-hot编码，适配交叉熵损失函数
+lb = LabelBinarizer()
+label_list = lb.fit_transform(label_list)#split data into training and test set
+# 数据拆分成比例为9:1的train/test
+X_train, X_test, y_train, y_test = train_test_split(image_list,  label_list,  test_size=0.1,  random_state=42)
+```
+
+联邦成员(客户端)
+- 在FL的实际实现中，每个联邦成员将独立拥有自己的数据。请记住，FL的目标是将模型传递到数据。
+- 将训练集分成10个碎片，每个客户一个
+
+```python
+def create_clients(image_list, label_list, num_clients=10, initial='clients'):    
+    ''' return: a dictionary with keys clients' names and value as data shards - tuple of images and label lists.
+        args:
+            image_list: a list of numpy arrays of training images
+            label_list:a list of binarized labels for each image
+            num_client: number of fedrated members (clients)
+            initials: the clients'name prefix, e.g, clients_1
+    '''    
+    #create a list of client names  
+    # 用前缀字符串创建了一个客户端名称列表  
+    client_names = ['{}_{}'.format(initial, i+1) for i in range(num_clients)]  #13    
+    #randomize the data    
+    # 将数据和标签压缩，将所得的元组列表随机化并分片为所需数量的客户端（num_clients）
+    data = list(zip(image_list, label_list))    
+    random.shuffle(data)    #shard data and place at each client    
+    size = len(data)//num_clients    
+    shards = [data[i:i + size] for i in range(0, size*num_clients, size)]    #number of clients must equal number of shards    
+    assert(len(shards) == len(client_names))    
+    # 返回了一个字典，其中包含作为键的每个客户端名称和作为值的它们的数据共享
+    return {client_names[i] : shards[i] for i in range(len(client_names))}   #26
+
+#create clients
+clients = create_clients(X_train, y_train, num_clients=10, initial='client')
+
+```
+
+批处理客户端和测试数据
+- 接下来是将每个客户端数据处理为tensorflow数据集并进行批处理。为了简化这个步骤并避免重复，将这个过程封装到一个名为batch_data的小函数中。
+
+```python
+def batch_data(data_shard, bs=32):    
+    '''Takes in a clients data shard and create a tfds object off it    
+    args:        shard: a data, label constituting a client's data shard        
+    bs:batch size    
+    return:        tfds object
+    '''    
+    #seperate shard into data and labels lists    
+    data, label = zip(*data_shard)    #9    
+    dataset = tf.data.Dataset.from_tensor_slices((list(data), list(label)))    
+    return dataset.shuffle(len(label)).batch(bs)
+# 每个客户端数据集都是以create_clients中的数据/标签元组列表的形式出现的。
+
+#process and batch the training data for each client
+clients_batched = dict()
+for (client_name, data) in clients.items():    
+    clients_batched[client_name] = batch_data(data)    #process and batch the test set  
+    test_batched = tf.data.Dataset.from_tensor_slices((X_test, y_test)).batch(len(y_test))
+
+```
+
+创建模式
+
+```python
+# 2层MLP作为分类任务的模型
+class SimpleMLP:    
+    @staticmethod    
+    def build(shape, classes):        
+        model = Sequential()        
+        model.add(Dense(200, input_shape=(shape,)))        
+        model.add(Activation("relu"))        
+        model.add(Dense(200))        
+        model.add(Activation("relu"))        
+        model.add(Dense(classes))        
+        model.add(Activation("softmax"))        
+        return model
+# 优化器、损失函数和度量
+# SGD是默认优化器。损失函数为categorical_crossentropy，度量为accuracy。
+lr = 0.01 
+comms_round = 100 # 全局epochs(aggregations)数量
+loss='categorical_crossentropy'
+metrics = ['accuracy']
+optimizer = SGD(lr=lr, decay=lr / comms_round,  momentum=0.9)  
+
+```
+
+模型汇总（加权平均）
+- 数据是水平分区的，因此将简单地进行**组件级**参数平均，并根据每个参与客户端贡献的数据点的比例进行加权。
+- 这是用的联邦平均方程
+- ![](https://p3-sign.toutiaoimg.com/pgc-image/fcc284697e1f4a7a8039083a456340cd~noop.image)
+- 右侧根据单个客户端持有的每个数据点上记录的损失值来估计权重参数。
+- 左侧缩放了客户的参数并对结果求和
+
+封装成三个函数
+- （1）weight_scalling_factor 计算客户的本地训练数据在所有客户持有的总体训练数据中所占的比例。
+  - 首先，我们估计客户的批次大小，然后使用它来计算自己的数据点数量。
+  - 然后，我们获得了第6行上的总体全局训练数据大小。
+  - 最后，我们在第9行以分数的形式计算了比例因子。这当然不可能是实际应用程序中的方法。任何客户都不能访问合并的训练数据。在这种情况下，在每个本地训练步骤之后用新参数更新服务器时，每个客户机都应该指出它们所持有的数据点的数量。
+- （2）scale_model_weights根据（1）中计算的比例因子的值来缩放每个局部模型的权重
+- （3）sum_scaled_weights将所有客户的比例权重加在一起
+
+```python
+def weight_scalling_factor(clients_trn_data, client_name):    
+    client_names = list(clients_trn_data.keys())    #get the bs    
+    bs = list(clients_trn_data[client_name])[0][0].shape[0]    #first calculate the total training data points across clinets    
+    global_count = sum([tf.data.experimental.cardinality(clients_trn_data[client_name]).numpy() 
+    for client_name in client_names])*bs    # get the total number of data points held by a client    
+        local_count = tf.data.experimental.cardinality(clients_trn_data[client_name]).numpy()*bs    
+    return local_count/global_count
+
+def scale_model_weights(weight, scalar):    
+    '''function for scaling a models weights'''    
+    weight_final = []    
+    steps = len(weight)    
+    for i in range(steps):        
+        weight_final.append(scalar * weight[i])    
+        return weight_final
+
+def sum_scaled_weights(scaled_weight_list):    
+    '''Return the sum of the listed scaled weights. The is equivalent to scaled avg of the weights'''    
+    avg_grad = list()    #get the average grad accross all client gradients    
+    for grad_list_tuple in zip(*scaled_weight_list):        
+        layer_mean = tf.math.reduce_sum(grad_list_tuple, axis=0)        
+        avg_grad.append(layer_mean)            
+        return avg_grad
+
+def test_model(X_test, Y_test,  model, comm_round):    
+    cce = tf.keras.losses.CategoricalCrossentropy(from_logits=True)    
+    #logits = model.predict(X_test, batch_size=100)    
+    logits = model.predict(X_test)    loss = cce(Y_test, logits)    
+    acc = accuracy_score(tf.argmax(logits, axis=1), tf.argmax(Y_test, axis=1))    
+    print('comm_round: {} | global_acc: {:.3%} | global_loss: {}'.format(comm_round, acc, loss))    
+    return acc, loss
+```
+
+联邦模型训练
+- 训练逻辑有两个主循环，外循环用于全局迭代，内循环用于迭代每个客户端的本地训练。
+- 首先构建全局模型，输入形状为(784)，数字类为10。然后我进入了外循环。首先获得全局模型的初始化权值。第15行和第16行随机化了客户端字典顺序。然后开始遍历客户端。
+- 对于每个客户端，我初始化一个新的模型对象，编译它，并将它的初始化权重设置为全局模型的当前参数。然后对局部模型(客户端)进行一个epoch的训练。在训练之后，新的权重将被缩放并附加到scaled_local_weight_list中。
+- 回到第41行的外循环，我获取了所有缩放后的局部训练权重的总和，并将全局模型更新为这个新的汇总。这样就结束了完整的全局训练epoch。按照前面声明的comms_round参数的规定，我运行了100个全局训练循环。
+- 最后在第48行，我使用预留的测试集，在每一轮通信结束后，对训练好的全局模型进行测试
+
+```python
+#initialize global models
+mlp_global = SimpleMLP()
+global_model = smlp_global.build(784, 10)        #commence global training loop
+for comm_round in range(comms_round):                # get the global model's weights - will serve as the initial weights for all local models    
+    global_weights = global_model.get_weights()        #initial list to collect local model weights after scalling    
+    scaled_local_weight_list = list()    #randomize client data - using keys    
+    client_names= list(clients_batched.keys())  #15    
+    random.shuffle(client_names)        #loop through each client and create new local model    
+    for client in client_names:        
+        smlp_local = SimpleMLP()        
+        local_model = smlp_local.build(784, 10)        
+        local_model.compile(loss=loss,optimizer=optimizer,metrics=metrics)                #set local model weight to the weight of the global model        
+        local_model.set_weights(global_weights)                #fit local model with client's data        
+        local_model.fit(clients_batched[client], epochs=1, verbose=0)                #scale the model weights and add to list        
+        scaling_factor = weight_scalling_factor(clients_batched, client)        
+        scaled_weights = scale_model_weights(local_model.get_weights(), scaling_factor)        scaled_local_weight_list.append(scaled_weights)                #clear session to free memory after each communication round        
+        K.clear_session()            #to get the average over all the local model, we simply take the sum of the scaled weights    
+        average_weights = sum_scaled_weights(scaled_local_weight_list)   #41        
+        #update global model     
+        global_model.set_weights(average_weights)    #test global model and print out metrics after each communications round    
+        for(X_test, Y_test) in test_batched:        
+            global_acc, global_loss = test_model(X_test, Y_test, global_model, comm_round)  #48
+
+def test_model(X_test, Y_test,  model, comm_round):    
+    cce = tf.keras.losses.CategoricalCrossentropy(from_logits=True)    
+    #logits = model.predict(X_test, batch_size=100)    
+    logits = model.predict(X_test)    
+    loss = cce(Y_test, logits)    
+    acc = accuracy_score(tf.argmax(logits, axis=1), tf.argmax(Y_test, axis=1))    
+    print('comm_round: {} | global_acc: {:.3%} | global_loss: {}'.format(comm_round, acc, loss))    
+    return acc, loss
+
+```
+
+结果
+- 测试结果有10个客户端，每个客户端运行1个本地epoch，并进行100次全局通信
+
+FL模型测试结果很好，经过100轮通信后，测试准确率达到了96.5%。但它与在相同数据集上训练的标准SGD模型相比如何呢?我将在联邦训练数据上训练一个模型(而不是像在FL中那样训练10个模型)。为此，我将使用分区之前的预处理训练数据来训练完全相同的2层MLP模型。
+
+## Google TFF 框架
+
 1. **TensorFlow Federated**： TensorFlow框架，专门针对研究用例，提供大规模模拟功能来控制抽样。支持在模拟环境中加载分散数据集，每个Client的ID对应于TensorFlow数据集对象。
   - 【2021-3-14】[联邦学习:Tensorflow中的逐步实现](https://www.toutiao.com/i6814051104825803278/)
   - FL架构的基本形式包括一个位于中心的管理员或服务器，负责协调训练活动。客户端主要是边缘设备，可以达到数百万的数量。这些设备在每次训练迭代中至少与服务器通信两次。首先，它们各自从服务器接收当前全局模型的权重，在各自的本地数据上对其进行训练，以生成更新后的参数，然后将这些参数上传到服务器进行汇总。这种通信循环一直持续到达到预先设定的epochs数或准确度条件为止。在联邦平均算法中，汇总仅仅意味着平均操作。
