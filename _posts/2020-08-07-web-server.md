@@ -3,7 +3,7 @@ layout: post
 title:  "Web前端服务知识-Web-Serving"
 date:   2020-08-07 19:17:00
 categories: 技术工具
-tags: Web web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session RPC 微服务 GraphQL UML Gunicorn supervisor genvent grequests node.js vue 前端 低代码 拖拽 api 异步 celery 分布式 apache qps
+tags: Web web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session RPC 微服务 GraphQL UML Gunicorn supervisor genvent grequests node.js vue 前端 低代码 拖拽 api 异步 celery 分布式 apache qps 性能
 author : 鹤啸九天
 excerpt: Web开发相关技术知识点
 mathjax: true
@@ -984,6 +984,61 @@ RT（Response-time）响应时间：执行一个请求从开始到最后收到�
 
 比如：当有多个线程在操作时，如果系统只有一个 CPU，则它根本不可能真正同时进行一个以上的线程，它只能把 CPU 运行时间划分成若干个时间段，再将时间段分配给各个线程执行，在一个时间段的线程代码运行时,其它线程处于挂起状态，这种方式我们称之为并发（Concurrent）。
 - ![](https://p3.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/f50ef8a818c4459a984cd02dee46277f?from=pc)
+
+【2022-8-5】[性能之巅-优化你的程序](https://www.toutiao.com/article/6725742697404957191/)
+- outline：关注&指标&度量，基础理论知识，工具&方法，最佳实践，参考资料
+
+性能优化关注：CPU、内存、磁盘IO、网络IO等四个方面
+- CPU：
+  - 处理器、核心
+  - 超线程、多线程
+  - 协程
+  - 调度、上下文切换
+- 内存
+  - 虚拟内存、地址空间
+  - 分页、换页
+  - 总线
+  - 分配器、对象池
+- 磁盘IO
+  - 缓存
+  - 控制器
+  - 交换分区
+  - 磁盘文件映射
+- 网络IO
+  - 套接字、连接
+  - 网卡和中断、
+  - 协议、tcp/udp
+  - select/epoll
+- ![](https://p3-sign.toutiaoimg.com/pgc-image/76ee0b5d28f44d079bf476600ca1beb4~noop.image?_iz=58558&from=article.pc_detail&x-expires=1660284418&x-signature=PiFiq5KLvPGO%2FxRq0TV7FJPVYdQ%3D)
+
+性能指标：经常关注的指标
+- 吞吐率
+  - 吞吐量（throughtput）：评价工作执行的速率，每秒操作量
+- 响应时间（RT）、延迟（latency）
+  - 一次操作完成的时间，包括等待+服务时间，也包括返回结果，req-resp延时，延迟跟吞吐量相关联，吞吐量增大，延迟会升高
+- QPS/IOPS
+  - 并发数：同时能处理的连接数
+  - QPS：每秒查询数
+  - IOPS：每秒i/o操作量
+- TP99
+  - 响应时间的分布，通常关心的是top 90
+- 资源使用率
+  - 资源使用比例，繁忙程度；CPU、存储和网络贷款
+​
+时间度量：从cpu cycle到网络IO，自上到下，时间量级越大。
+- 网络i/o：内网（几ms），公网（几时ms）
+- 磁盘i/o：1-10ms
+- 固态硬盘i/o（山村）：50-150us
+- CPU访问主存DRAM：100ns
+- L1-L3 Cache：1-20ns
+- CPU cycle：0.2-0.3 ns
+- ![](https://p3-sign.toutiaoimg.com/pgc-image/18b287bf905f4d64a2f1fd91f56e5b40~noop.image?_iz=58558&from=article.pc_detail&x-expires=1660284418&x-signature=Va6MphOEt9OvSU6UdPSjiffqJ9w%3D)
+
+注：
+- 1s = 10^3 ms（毫秒） = 10^6 us（微秒） = 10^9 ns（纳秒） = 10^10 ps（皮秒）
+
+性能分析工具
+- ![](https://p3-sign.toutiaoimg.com/pgc-image/7c6b1a9cda24431993cea2182fec0180~noop.image?_iz=58558&from=article.pc_detail&x-expires=1660284418&x-signature=9QEepr%2FTP2P3UGltReSOJGGUh7I%3D)
 
 # SDK
 
