@@ -5,7 +5,7 @@ subtitle:  新语言
 date:   2017-05-04 15:17:00
 author:  wangqiwen
 categories: 编程语言
-tags: go web 输入提示 模型部署
+tags: go web 输入提示 模型部署 hertz
 excerpt: 编程语言知识点
 mathjax: true
 header-img: img/post-bg-ios10.jpg
@@ -2677,6 +2677,37 @@ func (srv *Server) Serve(l net.Listener) error {
 
 Go 的 http 有两个核心功能：Conn、ServeMux
 
+### hertz
+
+【2022-8-8】字节跳动开源的go微服务框架hertz
+- [CloudWeGo](https://www.cloudwego.io/): A leading practice for building enterprise cloud native middleware!
+- 包含的开源组件：
+  - [Kitex](https://www.cloudwego.io/docs/kitex/): Kitex \[kaɪt’eks] is a high-performance and strong-extensibility Golang `RPC` framework
+  - [Hertz](https://www.cloudwego.io/docs/hertz/): Hertz \[həːts] is a high-performance, high-usability, extensible `HTTP` framework for Go; 
+    - Hertz was inspired by other open-source frameworks like [fasthttp](https://github.com/valyala/fasthttp), [gin](https://github.com/gin-gonic/gin), and [echo](https://github.com/labstack/echo), in combination with unique challenges faced by ByteDance, Hertz has become production ready and powered ByteDance’s internal services over the years.
+    - Hertz supports Linux, macOS, and Windows systems.
+  - [Netpoll](https://www.cloudwego.io/docs/netpoll/)：Netpoll is a high-performance non-blocking I/O networking framework, which focused on RPC scenarios, developed by ByteDance.
+    - RPC is usually heavy on processing logic and therefore cannot handle I/O serially. But Go’s standard library net is designed for blocking I/O APIs, so that the RPC framework can only follow the One Conn One Goroutine design. It will waste a lot of cost for context switching, due to a large number of goroutines under high concurrency. Besides, net.Conn has no API to check Alive, so it is difficult to make an efficient connection pool for RPC framework, because there may be a large number of failed connections in the pool.
+    - On the other hand, the open source community currently lacks Go network libraries that focus on RPC scenarios. Similar repositories such as: evio, gnet, etc., are all focus on scenarios like Redis, HAProxy.
+    - But now, Netpoll was born and solved the above problems. It draws inspiration from the design of evio and netty, has excellent Performance, and is more suitable for microservice architecture. Also Netpoll provides a number of Features, and it is recommended to replace net in some RPC scenarios.
+    - We developed the RPC framework Kitex and HTTP framework Hertz (coming soon) based on Netpoll, both with industry-leading performance.
+
+架构图
+- ![](https://www.cloudwego.io/img/docs/hertz.png)
+
+
+安装
+
+```shell
+# hertz源码
+git clone https://github.com/cloudwego/hertz.git
+# go命令行安装hertz
+# 确保PATH、GOPATH 已配置
+# export GOPATH=~/go
+# export PATH=${PATH}:${GOPATH}/bin;
+# export PATH=$GOPATH/bin:$PATH # 或
+go install github.com/cloudwego/hertz/cmd/hz@latest
+```
 
 
 ### caddy web服务框架
