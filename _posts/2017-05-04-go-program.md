@@ -2695,8 +2695,16 @@ Go 的 http 有两个核心功能：Conn、ServeMux
 架构图
 - ![](https://www.cloudwego.io/img/docs/hertz.png)
 
+hertz 命令行工具
+- hz 是 Hertz 框架提供的一个用于**生成代码**的**命令行**工具。
+- 目前，hz 可以基于 thrift 和 protobuf 的 IDL 生成 Hertz 项目的脚手架
+- 使用 thrift 或 protobuf 的 IDL 生成代码，需要安装相应的编译器：[thriftgo](https://github.com/cloudwego/thriftgo) 或 [protoc](https://github.com/protocolbuffers/protobuf/releases) 
+- hz 生成的代码里
+  - 一部分是底层的**编译器**生成的（通常是关于 IDL 里定义的结构体）
+  - 另一部分是 IDL 中用户定义的**路由、method** 等信息。用户可直接运行该代码。
+- 从执行流上来说，当 hz 使用 thrift IDL 生成代码时，hz 会调用 thriftgo 来生成 go 结构体代码，并将自身作为 thriftgo 的一个插件（名为 thrift-gen-hertz）来执行来生成其他代码。当用于 protobuf IDL 时亦是如此。
 
-安装
+安装 [hertz](https://github.com/cloudwego/hertz)
 
 ```shell
 # hertz源码
@@ -2706,6 +2714,7 @@ git clone https://github.com/cloudwego/hertz.git
 # export GOPATH=~/go
 # export PATH=${PATH}:${GOPATH}/bin;
 # export PATH=$GOPATH/bin:$PATH # 或
+# 安装命令行工具hz
 go install github.com/cloudwego/hertz/cmd/hz@latest
 ```
 
