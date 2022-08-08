@@ -52,6 +52,20 @@ mathjax: true
 - 2017年2月15日，TensorFlow v1.0发布，提高了速度和灵活性，并且承诺提供稳定的Python API。
 - 2019年10月1日，TensorFlow在经历七个多月(2019年3月1日-2019年10月1日)的2.0 Alpha 版本的更新迭代后发布 2.0 正式版
 
+## 安装
+
+
+### Mac 环境安装
+
+【2022-8-8】2020年10月后，新版TensorFlow（2以后）支持64位、3.5-3.7的Python！
+
+As of October 2020:
+- Tensorflow only supports the 64-bit version of Python
+- Tensorflow only supports Python 3.5 to 3.8
+
+So, if you're using an out-of-range version of Python (older or newer) or a 32-bit version, then you'll need to use a different version.
+
+
 # Tensorflow 1.*
 
 主要的是：
