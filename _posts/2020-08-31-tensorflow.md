@@ -58,6 +58,12 @@ mathjax: true
 ### Mac 环境安装
 
 【2022-8-8】2020年10月后，新版TensorFlow（2以后）支持64位、3.5-3.7的Python！
+- [3.7.9版本下载地址](https://www.python.org/downloads/release/python-379/)
+
+```shell
+# 3.7.9
+wget https://www.python.org/ftp/python/3.7.9/python-3.7.9-macosx10.9.pkg
+```
 
 As of October 2020:
 - Tensorflow only supports the 64-bit version of Python
