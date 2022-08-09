@@ -902,9 +902,25 @@ func main() {
 
 # GO语法
 
-## Go语言圣经
+## Go教程
 
-【2022-7-28】[Go语言圣经（中文版）](https://books.studygolang.com/gopl-zh/ch0/ch0-03.html)
+- 【2022-7-28】[Go语言圣经（中文版）](https://books.studygolang.com/gopl-zh/ch0/ch0-03.html)
+- [Go语言101](https://gfw.go101.org/article/101.html)是关于Go语言编程的一系列丛书。 [github](https://github.com/golang101/golang101) 目前本系列丛书包括：
+  - 《Go语言（基础知识）101》是一本着墨于Go语法语义（除了自定义泛型）以及运行时相关知识点的编程指导书。
+  - 《Go自定义泛型101》详细介绍了Go自定义泛型中的方方面面。
+  - 《Go编程优化101》列出了一些Go编程中的一些性能优化技巧和建议。
+  - 《Go细节和小技巧101》搜集了很多Go编程中的细节和小技巧。
+
+```shell
+git clone https://github.com/golang101/golang101.git
+cd golang101
+git pull
+go run . # 启动服务: 本地阅读
+# 未打开浏览器？手动访问 http://localhost:12345
+# 命令行选项：
+# -port=1234
+# -theme=light # 或者 dark （默认为 auto）
+```
 
 ## 单引号、双引号、反引号
 
