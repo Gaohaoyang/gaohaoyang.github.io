@@ -3,7 +3,7 @@ layout: post
 title:  "文本生成&评价-Text Generation and Evaluation"
 date:   2020-04-28 21:39:00
 categories: 自然语言处理
-tags: 深度学习 NLP GAN Seq2seq 对话系统 文本评价 BLEU 多模态 好未来 paraphrase 复述
+tags: 深度学习 NLP GAN Seq2seq 对话系统 文本评价 BLEU 多模态 好未来 paraphrase 复述 gpt
 excerpt: 深度学习在NLP子领域——文本生成的应用汇总，如seq2seq、GAN系列
 author: 鹤啸九天
 mathjax: true
@@ -652,6 +652,89 @@ train_perp = math.exp(float(mean_loss)) if mean_loss < 300 else math.inf
 # 应用
 
 
+## 趣味文本生成
+
+### 狗屁不通文章
+
+- 【2019-11-6】[狗屁不通文本生成器](https://suulnnka.github.io/BullshitGenerator/index.html); [这款“狗屁不通”文章生成器火了，效果确实比GPT 2差太远](https://www.sohu.com/a/352083213_99979179) 
+- BullshitGenerator 没有用到任何自然语言处理相关算法，只是简单地撸代码就可以达到效果。
+- “狗屁不通生成器”是一个文本生成器，用来生成一些中文文字用于 GUI 开发时测试文本渲染。由于此项目的目的只是用于 GUI 开发时测试文本渲染，所以对文本的连贯性和含义要求不高，这也就是“狗屁不通”的含义了
+- <iframe src="https://suulnnka.github.io/BullshitGenerator/index.html" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+
+```python
+if __name__ == "__main__": 
+  xx = input("请输入文章主题:") 
+  for x in xx: 
+    tmp = str 
+    while ( len(tmp) < 6000 ) : 
+      分支 = random.randint(0,100) 
+      if 分支 < 5: 
+        tmp += 另起一段 
+      elif 分支 < 20 : 
+        tmp += 来点名人名言 
+      else: 
+        tmp += next(下一句废话) 
+        tmp = tmp.replace("x",xx) 
+        print(tmp)
+```
+
+生成文本的方式就是从本地读取到的文本中按照一定规律随机读取，并且替换掉文本中“x”为指定的主题文本，并未使用深度学习方法。不难发现，生成的文本会存在句子不连贯、重复性高的特点。
+
+### 互联网黑话生成
+
+输出结果：
+> 生命周期是发力快速响应，赋能行业引爆点。商业模式是细分载体体验度量，通过平台化和便捷性达到短平快。完善逻辑是在底层逻辑采用玩法打法达成强化认知。复用打法资源倾斜作为打法为产品赋能，信息屏障作为体系的评判标准。亮点是维度，优势是闭环。聚焦整个顶层设计，扩展规模迁移垂直领域。颗粒度是组合拳达到影响力标准。
+
+
+
+```python
+import random
+
+stencil = '{n40}是{v0}{n41}，{v1}行业{n30}。{n42}是{v2}{n20}{n43}，通过{n31}和{n32}达到{n33}。' \
+          '{n44}是在{n45}采用{n21}打法达成{n46}。{n47}{n48}作为{n22}为产品赋能，{n49}作为{n23}' \
+          '的评判标准。亮点是{n24}，优势是{n25}。{v3}整个{n410}，{v4}{n26}{v5}{n411}。{n34}是{n35}' \
+          '达到{n36}标准。'
+
+num = {'v': 6, 'n2': 7, 'n3': 7, 'n4': 12}
+
+
+# 二字动词
+v = '皮实、复盘、赋能、加持、沉淀、倒逼、落地、串联、协同、反哺、兼容、包装、重组、履约、' \
+    '响应、量化、发力、布局、联动、细分、梳理、输出、加速、共建、共创、支撑、融合、解耦、聚合、' \
+    '集成、对标、对齐、聚焦、抓手、拆解、拉通、抽象、摸索、提炼、打通、吃透、迁移、分发、分层、' \
+    '封装、辐射、围绕、复用、渗透、扩展、开拓、给到、死磕、破圈'.split('、')
+
+# 二字名词
+n2 = '漏斗、中台、闭环、打法、纽带、矩阵、刺激、规模、场景、维度、格局、形态、生态、话术、' \
+     '体系、认知、玩法、体感、感知、调性、心智、战役、合力、赛道、基因、因子、模型、载体、横向、' \
+     '通道、补位、链路、试点'.split('、')
+
+# 三字名词
+n3 = '新生态、感知度、颗粒度、方法论、组合拳、引爆点、点线面、精细化、差异化、平台化、结构化、' \
+     '影响力、耦合性、易用性、便捷性、一致性、端到端、短平快、护城河'.split('、')
+
+# 四字名词
+n4 = '底层逻辑、顶层设计、交付价值、生命周期、价值转化、强化认知、资源倾斜、完善逻辑、抽离透传、' \
+     '复用打法、商业模式、快速响应、定性定量、关键路径、去中心化、结果导向、垂直领域、归因分析、' \
+     '体验度量、信息屏障'.split('、')
+
+v_list = random.sample(v, num['v'])
+n2_list = random.sample(n2, num['n2'])
+n3_list = random.sample(n3, num['n3'])
+n4_list = random.sample(n4, num['n4'])
+lists = {'v': v_list, 'n2': n2_list, 'n3': n3_list, 'n4': n4_list}
+
+dic = {}
+for current_type in ['v', 'n2', 'n3', 'n4']:
+    current_list = lists[current_type]
+    for i in range(0, len(current_list)):
+        dic[current_type + str(i)] = current_list[i]
+
+result = stencil.format(**dic)
+print(result)
+```
+
+
 ## data2text
 
 【2022-7-16】[腾讯刘天宇：可控、可靠的数据到文本生成技术](https://www.toutiao.com/article/7120933821176037888), 聚焦data2text任务
@@ -724,6 +807,11 @@ data2text（数据到文本生成）的任务定义。
 - Q：隐式模型训练之前会有一些对冷启动的处理吗？
   - 冷启动的处理是可以的，比如预训一个数据描述的网络，输入还是有x的，输入还有一个z，z是隐变量，如果p(y)从一个很好的预训练语言模型开始，整个表现会更好。
 
+## GPT
+
+GPT 2 是 OpenAI 推出的一个中文生成模型，由加拿大工程师 Adam King 制作的网站上，任何人都能调教简化版的 GPT-2，它能够识别从新闻、歌词、诗歌、食谱、代码的各种输入，甚至还为《复仇者联盟》写了一个细节丰富的续集，内容可读性相当高。
+
+[GPT2 中文项目](https://github.com/Morizeyao/GPT2-Chinese)
 
 # 资料
 
