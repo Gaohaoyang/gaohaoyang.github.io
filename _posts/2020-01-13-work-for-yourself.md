@@ -56,23 +56,23 @@ mathjax: true
 
 
 ## 引言
+
 - 2019年9月出版，作者[林安](https://www.douban.com/people/xtutux/)
 
 <img src="https://img3.doubanio.com/view/thing_review/l/public/3525520.webp" height="100%" width="300" />
 
 - 注意：不是”只上班、不工作”——想摸鱼是吗？o(*￣︶￣*)o
-   - 打卡充数不干活白拿钱，看似好，细想一下消耗一生
+  - 打卡充数不干活白拿钱，看似好，细想一下消耗一生
 - 通过20几个人的真实案例，解释什么是工作，什么是上班，怎么样才能不上班，怎样的人生才有意义，给大家启发
-   - 班可以不坐，活要干，干有意义的活，自由支配时间选择地点
+  - 班可以不坐，活要干，干有意义的活，自由支配时间选择地点
 - 资料
-   - 豆瓣帖子：[采访100个不上班的人：“我只是想和别人不一样”](https://book.douban.com/review/10588140/)
-      - ![](https://img1.doubanio.com/view/thing_review/l/public/3525518.webp)
-   - B站视频：[【100个不上班的人】](https://space.bilibili.com/18937939), [旅行博主：那个睡陌生人家沙发，睡上电视的女孩](https://www.bilibili.com/video/av69166304)
-      - ![](https://img1.doubanio.com/view/thing_review/l/public/3525519.webp)
+  - 豆瓣帖子：[采访100个不上班的人：“我只是想和别人不一样”](https://book.douban.com/review/10588140/)
+    - ![](https://img1.doubanio.com/view/thing_review/l/public/3525518.webp)
+  - B站视频：[【100个不上班的人】](https://space.bilibili.com/18937939), [旅行博主：那个睡陌生人家沙发，睡上电视的女孩](https://www.bilibili.com/video/av69166304)
+    - ![](https://img1.doubanio.com/view/thing_review/l/public/3525519.webp)
 <iframe src="//player.bilibili.com/player.html?aid=69166304&cid=119869704&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 # 案例
-
 
 【2021-12-30】36 Kr出品，[2022年可复制的暴富指南](https://36kr.com/topics/1547045484980483?channel=qq)
 
