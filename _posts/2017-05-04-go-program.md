@@ -5,7 +5,7 @@ subtitle:  新语言
 date:   2017-05-04 15:17:00
 author:  wangqiwen
 categories: 编程语言
-tags: go web 输入提示 模型部署 hertz
+tags: go web 输入提示 模型部署 hertz oop 面向对象
 excerpt: 编程语言知识点
 mathjax: true
 header-img: img/post-bg-ios10.jpg
@@ -2119,6 +2119,296 @@ func main() {
     waitgroup.Wait() //.Wait()这里会发生阻塞，直到队列中所有的任务结束就会解除阻塞
 }
 ```
+
+## 面向对象
+
+面向对象特征
+- 封装，是面向对象方法的重要原则，就是把对象的属性和操作（或服务）结合为一个独立的整体，并尽可能隐藏对象的内部实现细节。
+- 继承是指这样一种能力：它可以使用现有类的所有功能，并在无需重新编写原来的类的情况下对这些功能进行扩展。
+- 多态性（polymorphisn）是允许你将父对象设置成为和一个或更多的他的子对象相等的技术，赋值之后，父对象就可以根据当前赋值给它的子对象的特性以不同的方式运作
+
+【2022-8-12】[详解go面向对象](https://blog.csdn.net/qq_38378384/article/details/123322069)
+
+### go 是面向对象语言吗
+
+官方回答：是也不是
+- go是明显允许面向对象的编程风格的，但同时又缺乏一些Java和C++中的常见类型或者说是关键字。
+- Go的interface也和Java中的用法十分不同, 官方觉得这一套挺好的，更加的容易使用且通用性更强。大多数情况下我们都是使用OOP 的思想来组织 go 项目的，但是如果你要完全按照 Java 这种思想去思考 go，会发现十分的别扭。
+
+### go 如何实现面向对象
+
+GO没有 class、extend 怎么才能实现面向对象呢？
+- go以结构体的方式去定义一个所谓的类，将相关的方法绑定在这个结构体上，作为一个整体的集合, 也就是类。
+
+#### 结构体
+
+```go
+type Person struct {
+	name string
+	age int32
+}
+// 类实例化的两种方式
+p1 := new(Persion)
+p2 := &Person{
+	name : "MClink"
+	age : 25
+}
+p3 := &Person{}
+p4 := &Person{"MClink", 25}
+var p5  Person{}
+```
+
+- p1 和 p3 的效果是一样的，但是分配的内存大小是不同，类的属性在不主动初始化赋值的情况下都是默认的**零值**。
+  - 字符串的零值是 “”， int32 的零值是 0。
+- p2 、p4 则是在实例化的同时，对属性也做了相应的赋值。
+
+所谓的**类**实际上是一种**类型**。因此 new 函数实际上的形参是一种类型，而不是值，返回的是这个类型的零值的指针。
+
+
+### 方法
+
+- go 种的方法实际上是依附于某个**类**（结构体类型，或者说是接收者）的 func。
+- go 的 func 是支持**多返回值**的，十分特别的。以前，如果要返回多个返回值，一般通过使用数组或者集合的方式进行返回。
+- 两个方法的接收者有点不同，一个是 p *T ，一个是 p T，分别称之为 **指针方法**和**值方法**
+- 指针方法集合包含了值方法的集合；如果返回值需要改动，就用指针方法。
+
+```go
+// 指针方法
+func (p *Person) GetName(name string) error {
+	p.name = name 
+	return nil
+}
+// 值方法
+func (p Person) SetName() (string, error) {
+	return p.name, nil
+}
+```
+
+### 继承
+
+Go 语言没有 public、protected、private 三种范围修饰词；
+- Go 使用组合的方式来实现继承
+- 组合方式，让一些公共的部分单独抽离出来，像搭积木那样，将多个积木进行组合，达到自己所需的功能集合。组合内外如果出现名字重复问题，只会访问到最外层，内层会被隐藏，不会报错，即类似java中方法覆盖/重写。
+
+```go
+type Person struct {
+	name string
+	age int32
+}
+
+func (p *Person) GetName(name string) error {
+	p.name = name 
+	return nil
+}
+
+func (p Person) SetName() (string, error) {
+	return p.name, nil
+}
+
+type Man struct {
+	Person // 继承了Person类的所有方法和成员属性
+	phone string
+}
+
+type WoMan struct {
+	*Person // 以指针继承了 Person类的所有方法和成员属性
+	phone string
+}
+```
+
+### 接口
+
+Go 保留了**接口**。接口的作用主要是将定义与实现分离，降低耦合度。
+
+接口是一堆方法的集合，定义了对象的一组行为，主要是用来规范行为的。
+- 其他语言的接口实现是**显式**的，一般使用 implement 显式实现。
+- 而Go是隐式的，只要实现了 接口内的所有方法，便是继承了这个接口。
+
+```go
+func (p *Man) Say() string {
+	return ""
+}
+
+func (p *Man) Eat(something string) error {
+	fmt.Print("man eat " +  something)
+	return nil
+}
+
+func (w *WoMan) Say() string {
+	return ""
+}
+
+func (w *WoMan) Eat(something string) error {
+	fmt.Print("woman eat " +  something)
+	return nil
+}
+
+type ManI interface {
+	Say() string
+	Eat(something string) error
+}
+
+var mi ManI = new(Man)
+mi.Say()
+var mi2 ManI = new（Woman)
+mi2.Eat("好吃的")
+```
+
+Man 类就实现了 ManI 接口。只要类实现了该接口的所有方法，即可将该类赋值给这个接口，接口主要用于多态化方法。即对接口定义的方法，不同的实现方式。
+
+接口赋值
+
+```go
+// 接口赋值
+func Call (mi ManI) {
+    mi.Eat("牛肉粿条")
+}
+
+var mi ManI
+t := "woman"
+switch t {
+case "woman":
+    mi = new(Woman)
+case "man":
+    mi = new(Man)
+}
+Call(mi)
+```
+
+也可以将一个接口赋值给另一个接口，需要满足以下的条件
+- 两个接口拥有相同的方法列表（与次序无关），即使是两个相同的接口，也可以相互赋值
+- 接口赋值只需要接口A的方法列表是接口B的子集（即假设接口A中定义的所有方法，都在接口B中有定义），那么B接口的实例可以赋值给A的对象。反之不成立。
+
+```go
+type ManI interface {
+	Say() string
+	Eat(something string) error
+}
+
+type ManI2 interface {
+	Say() string
+}
+
+func (p *Man) Say() string {
+	return ""
+}
+
+func (p *Man) Eat(something string) error {
+	return nil
+}
+var mi ManI
+var mi2 ManI2
+mi = mi2 // 会报错
+mi2 = mi // 可以
+
+```
+
+接口的判断
+- 可以使用类型断言的方式，判断一个接口类型是否实现了某个接口。
+
+```go
+func (p *Man) Say() string {
+	return ""
+}
+
+func (p *Man) Eat(something string) error {
+	return nil
+}
+
+type Man struct {
+	Person // 继承了 Person类的所有方法
+	phone  string
+}
+
+type ManI interface {
+	Say() string
+	Eat(something string) error
+}
+
+func main() {
+	var mi ManI = &Man{
+  		Person: Person{},
+  		phone:  "",
+	 }
+	if _, ok := mi.(*Man); ok {
+		fmt.Print("true") //结果是true
+	} else {
+		fmt.Println("false")
+	}
+	return
+}
+```
+
+接口的组合
+- 接口和类型一样，也是可以组合的。几个小接口可以组合成一个大接口
+
+```go
+type Human interface {
+	ManI
+	WoManI
+}
+
+type ManI interface {
+	Say() string
+	Eat(something string) error
+}
+
+type WoManI interface {
+	Born() error
+}
+```
+
+万能的黑洞
+- 空接口 interface{} 是一个没有方法的接口，因此任何类型都是他的实现，当你的参数无法确定类型时，interface{} 就是一个很好的容器。
+
+### oop实例
+
+```go
+package main
+
+import "fmt"
+
+// 定义接口
+type Human interface {
+	Say(string)
+	Eat(string)
+}
+
+// 定义类
+type Man struct {
+}
+// 实例化方法，一般是 New+类名作为实例化的方法
+func NewMan() *Man {
+ return &Man{}
+}
+// 实现Human接口的Say
+func (m *Man) Say(something string) {
+	fmt.Println(something)
+}
+// 实现Human接口的Eat
+func (m *Man) Eat(something string) {
+	fmt.Println(something)
+}
+
+// 定义员工类，其中包含 Human 接口的值
+type employees struct {
+	man Human
+}
+// 实现实例化方法
+func newEmployees() *employees {
+ return &employees{
+		man: NewMan(), // 实现该类型的接口值可以赋值该类型的对象
+	}
+}
+
+func main() {
+ // 获取员工类实例化对象
+ emp := newEmployees()
+ // 通过员工类中包含的 Human 接口值间接调用 Man 类的 Say 方法
+ emp.man.Say("EAT")
+}
+```
+
 
 # 辅助功能
 
