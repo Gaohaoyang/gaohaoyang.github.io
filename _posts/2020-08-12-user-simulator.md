@@ -14,11 +14,16 @@ mathjax: true
 
 # 总结
 
+
+## 资料
+
 - 【2021-7-26】[机器人性格综述](https://max.book118.com/html/2017/0525/109104518.shtm)
 - 【2019-8-5】阿里小蜜：[最新综述：对话系统之用户模拟器](https://blog.csdn.net/c9yv2cf9i06k2a9e/article/details/98549007)
-- 资料
-  - 论文1《A User Simulator for Task-Completion Dialogues》
-  - 论文2《End-to-End Task-Completion Neural Dialogue Systems》
+
+### 论文
+
+- 论文1《A User Simulator for Task-Completion Dialogues》
+- 论文2《End-to-End Task-Completion Neural Dialogue Systems》
 
 ## 实例
 
@@ -27,9 +32,7 @@ mathjax: true
 <iframe src="//player.bilibili.com/player.html?aid=47805723&bvid=BV1Rb411W7PG&cid=83737221&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
-
-# 基本原理
-
+# 用户模拟器
 
 ## 用户模拟器产生背景
 
@@ -83,7 +86,7 @@ mathjax: true
 - 比如：生成对话数据，对话评测，它们的 Goal 和 Profile 都可以不一样，这样既保证是一套统一的建模框架，同时又保证了系统的灵活性。
 
 
-# 用户模拟器的实现方法
+## 用户模拟器实现方法
 
 - 用户模拟器的实现方法大致分成两类：
   - 基于规则的方法
@@ -96,7 +99,7 @@ mathjax: true
   - 话术简单清晰的填槽式对话任务
 
 
-## 基于规则的方法
+### 基于规则的方法
 
 - 基于规则的方法需要专家手动构建
   - 优点是可以冷启动，用户行为完全可控；
@@ -107,7 +110,7 @@ mathjax: true
 - 基于议程的方法
   - 代表论文：The Hidden Agenda User Simulation Model, [论文链接](https://ieeexplore.ieee.org/document/4806280/)
 
-### 基于议程（Agenda-based）的方法
+#### 基于议程（Agenda-based）的方法
 
 1. The hidden agenda user simulation model——通过一个栈的结构把对话的议程定下来，对话的过程就变成进栈和出栈的动作，上下文关联性很强，保证了用户动作生成的一致性，一般不会出现异常用户行为。
 2. Agenda-based user simulation for bootstrapping a POMDP dialogue system
@@ -115,7 +118,7 @@ mathjax: true
 4. A User Simulator for Task-Completion Dialogues
 
 
-## 基于模型的方法
+### 基于模型的方法
 
 - 总结
   - 优点：
@@ -125,32 +128,32 @@ mathjax: true
   - 适用场景
     - 语料丰富的领域
 
-### 端到端有监督学习
+#### 端到端有监督学习
 
 1. A Sequence-to-Sequence Model for User Simulation in Spoken Dialogue Systems——将对话上下文序列作为输入，然后输出用户动作序列。
 2. Neural User Simulation for Corpus-based Policy Optimization for Spoken Dialogue Systems——提出了基于 RNN 的 Neural User Simulator (NUS) 模型。首先 NUS 通过用户目标生成器，对原对话数据中的对话状态标签进行预处理，得到一个完整对话中每一轮的具体用户目标，这样就相当于对用户目标改变进行了某种程度上的建模。
 
-### 联合优化策略
+#### 联合优化策略
 
 Iterative Policy Learning in End-to-End Trainable Task-Oriented Neural Dialog Models——对用户模拟器和对话系统分别采用了 RNN 进行端到端的建模并使用同一个回报函数优化，两者交替训练共同最大化累计回报。
 
-### 逆强化学习
+#### 逆强化学习
 
 User Simulation in Dialogue Systems using Inverse Reinforcement Learning——在马尔科夫决策过程  (MDP)  的框架下, 强化学习在是回报函数（reward function）给定下，找出最优策略以最大化累计反馈，而逆强化学习（Inverse reinforcement learning, IRL）就是通过给出最优策略估计出回报函数。
 
-### 协同过滤方法
+#### 协同过滤方法
 
 Collaboration-based User Simulation for Goal-oriented Dialog Systems——在有高质量语料库的情况下，我们可以考虑直接根据对话上下文，从语料库中推荐出最恰当的用户语句作为用户模拟器的回复。
 
 
-# 问题及挑战
+## 问题及挑战
 
 用户模拟器面临的挑战
 1. 对话行为**一致性**（Coherence）：对话行为要保证前后连贯，符合语境，避免出现不符合逻辑的对话行为。如何综合考虑对话上下文和 User Goal 等因素，保证用户行为序列在多轮交互过程中的一致性是一个有挑战的课题。
 2. 对话行为**多样性**（Diversity）：模拟用户群的行为特性，需要建模这个群体的行为分布。例如某用户群是健谈的还是寡言的，是犹豫的还是果断的，各部分占比多少，这里引入用户群体画像特征，使得用户模拟器的行为更加丰富多样，贴近目标用户群体。这个方向学术界有一些研究进展，值得继续深入研究。
 3. 对话行为的**泛化性**（Generalization）：目前来看，无论是基于规则方法还是基于模型学习的用户模拟器，在遇到语料中未曾出现的对话上下文时，表现出的泛化能力依旧比较有限。对话行为的泛化性直接体现了用户模拟器是否表现得如同真实用户一样处理更多未见的复杂的对话场景。这个方向有待学界更深入的探索。
 
-# 模拟器评价方式
+## 模拟器评价方式
 
 - 一个好的用户模拟器的评价方式需要满足以下几点要求：
   - 能够衡量生成的对话动作的一致性；
@@ -166,14 +169,14 @@ Collaboration-based User Simulation for Goal-oriented Dialog Systems——在有
     - 将用户模型和对话系统进行真实交互，完成训练后的对话系统所能达到的任务完成率（通过记录对话系统是否完成用户目标得到）和平均每个对话的轮数可以作为评价与用户模型整体效果的有效指标。
 
 
-# 工程实现
+## 工程实现
 
 - 【2021-2-23】[user-simulator](https://github.com/wyshi/user-simulator)，Codebase for [How to Build User Simulators to Train RL-based Dialog Systems](https://arxiv.org/pdf/1909.01388.pdf), published as a long paper in EMNLP 2019. The sequicity part is developed based on [Sequicity: Simplifying Task-oriented Dialogue Systems with Single Sequence-to-Sequence Architectures](https://github.com/WING-NUS/sequicity).
   - RL training with agenda-based simulator: python run_mydata_new.py
   - RL training with supervised-learning-based simulator: python run_mydata_seq_new.py
   - Interacting with trained policies: policies are under simulator/policy/
 
-## TC-Bot
+### TC-Bot
 
 - 台大的TC-Bot框架提供了一种开发和比较不同算法和模型的方法。 
 - 对话系统由两部分组成：代理和用户模拟器。
@@ -181,7 +184,7 @@ Collaboration-based User Simulation for Goal-oriented Dialog Systems——在有
 
 - [End-to-End Task-Completion Neural Dialogue Systems](https://github.com/MiuLab/TC-Bot), [代码](https://github.com/MiuLab/TC-Bot)
 
-### 如何构建自己的代理？
+#### 如何构建自己的代理？
 
 - 对于所有代理，它们都从Agent类（agent.py）继承，该类为用户提供了一些实现其代理的通用接口。 在agent_baseline.py文件中，实现了五个基于规则的基本代理：
   - InformAgent：每次依次通知所有槽位； 它不请求任何信息/槽位。
@@ -211,12 +214,12 @@ agent_cmd.py提供了命令行代理（agt = 0），作为代理可以与用户�
 - 为了结束对话，代理的最后一个回合通常是对话通知形式的thank（）或自然语言中的“感谢”。
 
 
-### 如何构建自己的用户模拟器？
+#### 如何构建自己的用户模拟器？
         
 - 有一个用户模拟器类（usersim.py），它提供了一些通用接口来实现其用户模拟器。 所有用户模拟器都是从此类继承的，并且应该重新实现以下两个函数：initialize_episode（）和next（）。 usersim_rule.py文件实现了基于规则的用户模拟器。 这里的next（）函数实现了所有规则和根据上一个代理动作来发出下一个用户动作。这是例子usersim_rule.py：
 
 
-### 如何构建一个对话管理器
+#### 如何构建一个对话管理器
 
 - dialog_manager.py类中包含的主要函数介绍：
 - 根据历史的对话状态，生成当前论的对话
@@ -247,7 +250,7 @@ agent_cmd.py提供了命令行代理（agt = 0），作为代理可以与用户�
 - get_current_kb_results（）：获取当前状态的kb_results
 - update（）：根据最新动作更新状态
 
-### 如何构建一个自然语言生成模块
+#### 如何构建一个自然语言生成模块
 
 nlu.py主要函数介绍：主要是讲自然语言解析成Dia-Act
 - generate_dia_act（）： generate the Dia-Act with NLU model通过NLU模型生成Dia-Act
@@ -256,7 +259,7 @@ nlu.py主要函数介绍：主要是讲自然语言解析成Dia-Act
 - parse_nlu_to_diaact（）：将BIO和意图解析以后放入到dia_act中
 - refine_diaact_by_rules（）：通过规则细化dia_act
 
-### 如何构建一个自然语言理解模块
+#### 如何构建一个自然语言理解模块
 
 nlg.py主要函数介绍：主要功能是将动作转换成自然语言。
 - post_process（）：填充模板语句中的空的槽位
@@ -266,7 +269,7 @@ nlg.py主要函数介绍：主要功能是将动作转换成自然语言。
 - diaact_to_nl_slot_filling（）：用槽位的真实值去填充槽位信息。
 - load_predefine_act_nl_pairs（）：加载预定义好的 Dia_Act&NL键值对。
 
-### 如何构建一个用户模拟器的DQN模型
+#### 如何构建一个用户模拟器的DQN模型
 
 dqn.py主要函数介绍：DQN主要是训练一个强化学习的对话过程。
 - getStruct（）：返回模型的其他参数
@@ -279,37 +282,226 @@ dqn.py主要函数介绍：DQN主要是训练一个强化学习的对话过程�
 - singleBatch():单批次整个模型的计算过程
 - predict():预测
 
-### 如何构建用户模拟器的数据结构
+#### 如何构建用户模拟器的数据结构
 
 
-### 训练时注意事项
+#### 训练时注意事项
 
 - 为了训练RL代理，需要从一些规则策略经历（用户和代理的一个完整对话过程）元组开始初始化一个经历重放缓冲池，也可以从一个空的经历重放缓冲池开始。 建议使用某些规则或监督策略来初始化经历重放缓冲池，很多相关研究已经证明了这种方式的优势处，例如，良好的初始化策略可以加快RL训练的速度。 在这里，我们使用非常简单的基于规则的策略来初始化经历重放缓冲池。
 
 - RL代理是DQN网络。 在训练中，我们使用e-greedy策略和动态经历重放缓冲池。 经历重放缓冲池的大小是动态变化的。 一个重要的DQN的技巧是通过引入目标网络，这样网络会缓慢更新和计算目标网络短期内达到的目标值。
 
 - 训练过程可以这样定义：在每个epoch中，我们模拟N个对话，并将这些状态转换元组（st，at，rt，st + 1）添加到经历重放缓冲池中，训练和更新当前的DQN网络。在一个epoch中，当前DQN网络将在批次结束时进行多次更新，具体取决于批次大小和经历重放缓冲池的当前大小。 在一个模拟epoch中，目标网络将被当前DQN网络取代，目标DQN网络仅在一个epoch中更新一次。经历重放缓冲池更新策略如下：首先，我们将从模拟中累积所有经验元组，并刷新经历重放缓冲池，直到当前RL代理达到成功率阈值（即，success_rate_threshold = 0.30），然后使用当前RL代理的经验元组重新填充缓冲区。一般而言DQN的初始性能不好，无法生成足够好的经历重放元组，因此，在当前的RL代理可以达到一定成功率之前，我们不会刷新经历重放缓冲池。接下来的训练过程，在每个epoch中，我们都会估算当前DQN代理的成功率，如果当前DQN代理足够好（即比目标网络更好），则将刷新并将经历重播缓冲区进行轮询-填充。图1显示了没有NLU的RL代理的学习曲线和NLG，图2是带有NLU和NLG的RL代理的学习曲线，训练RL代理以适应NLU和NLG的错误和噪声需要花费更长的时间。
-
 - 表1显示了由基于规则的代理和RL代理与电影订票中的用户模拟器交互生成的一个成功和一个失败对话示例。 为了提供信息，我们还在对话的开头明确显示用户目标，但是代理对用户目标一无所知，其目标是帮助用户实现此目标并预订正确的电影票。
-
 - 表2是用户模拟器与SimpleRL-SoftKB和End2End-RL代理之间的对话。Critic_rating槽位值是用户模拟器中常见的错误源，因此，所有学习到的策略都倾向于多次请求该值。
+- 图1：没有NLU和NLG的策略训练学习曲线：绿线是规则代理，我们使用它来初始化体验重播缓冲池； 蓝线是RL代理； 橙色线是最佳上限，它是通过代理数据库中可达到的用户目标数与用户目标总数的比。
+- 图2：使用NLU和NLG进行的端到端策略训练的学习曲线：绿线是规则我们用来初始化经历重放缓冲池的代理； 蓝线是学习RL代理的曲线； 橙色线是最佳上限，由代理程序数据库中可达到的用户目标数与用户目标总数之比。
+- 表1：基于规则的代理和RL代理与用户模拟器生成的两个示例对话：左列显示规则和RL代理均成功； 右列显示基于规则的代理失败，而RL代理成功。
+- 表2：用户模拟器与SimpleRL-SoftKB和End2End-RL代理之间的对话示例。 在每次对话结束时，代理会告知KB后验的前5个结果。 已经通知的用户目标以粗体显示。
 
-图1：没有NLU和NLG的策略训练学习曲线：绿线是规则代理，我们使用它来初始化体验重播缓冲池； 蓝线是RL代理； 橙色线是最佳上限，它是通过代理数据库中可达到的用户目标数与用户目标总数的比。
+## 数据集
 
-图2：使用NLU和NLG进行的端到端策略训练的学习曲线：绿线是规则我们用来初始化经历重放缓冲池的代理； 蓝线是学习RL代理的曲线； 橙色线是最佳上限，由代理程序数据库中可达到的用户目标数与用户目标总数之比。
+google-research-datasets [simulated-dialogue](https://github.com/google-research-datasets/simulated-dialogue)
 
-表1：基于规则的代理和RL代理与用户模拟器生成的两个示例对话：左列显示规则和RL代理均成功； 右列显示基于规则的代理失败，而RL代理成功。
+用户模拟的数据集，包括：
+- 餐馆预订
+- 电影票预定
 
-表2：用户模拟器与SimpleRL-SoftKB和End2End-RL代理之间的对话示例。 在每次对话结束时，代理会告知KB后验的前5个结果。 已经通知的用户目标以粗体显示。
+We are releasing two datasets containing dialogues for **booking a restaurant table** and **buying a movie ticket**. The number of dialogues in each dataset are listed below. 
+
+| Dataset            | Slots                | Train | Dev | Test |
+| ------------------ | -------------------- | ----- | --- | ---- |
+| Sim-R (Restaurant) | price\_range, location, restaurant\_name,<br>category, num\_people, date, time | 1116  | 349 | 775  |
+| Sim-M (Movie)      | theatre\_name, movie, date, time,<br>num\_people                               | 384   | 120 | 264  |
+| Sim-GEN (Movie)    | theatre\_name, movie, date, time,<br>num\_people                               | 100K  | 10K | 10K  |
+
+源自：[Dialogue Learning with Human Teaching and Feedback in End-to-End Trainable Task-Oriented Dialogue Systems](https://arxiv.org/pdf/1804.06512.pdf) uses Sim-GEN
+
+### Sim-GEN
+
+Simulator Generated Dataset (sim-GEN)
+
+This directory contains an expanded set of dialogues generated via dialogue **self-play** between a user simulator and a system agent, as follows:
+-   The dialogues collected using the M2M framework for the movie ticket booking task (sim-M) are used as a seed set to form a crowd-sourced corpus of natural language utterances for the user and the system agents.
+-   Subsequently, many more dialogue outlines are generated using self-play between the simulated user and system agent.
+-   The dialogue outlines are converted to natural language dialogues by replacing each dialogue act in the outline with an utterance sampled from the set of crowd-sourced utterances collected with M2M.
+
+In this manner, we can generate an arbitrarily large number of dialogue outlines and convert them automatically to natural language dialogues without any additional crowd-sourcing step. Although the diversity of natural language in the dataset does not increase, the number of unique dialogue states present in the dataset will increase since a larger variety of dialogue outlines will be available in the expanded dataset.
+
+This dataset was used for experiments reported in [this paper](https://arxiv.org/abs/1804.06512). 
+
+The data splits are made available as a .zip file containing dialogues in JSON
+format. Each dialogue object contains the following fields:
+
+*   **dialogue\_id** - *string* unique identifier for each dialogue.
+*   **turns** - *list* of turn objects:
+    *   **system\_acts** - *list* of system dialogue acts for this system turn:
+        *   **name** - *string* system act name
+        *   **slot\_values** - *optional dictionary* mapping slot names to
+            values
+    *   **system\_utterance** - *string* natural language utterance
+        corresponding to the system acts for this turn
+    *   **user\_utterance** - *string* natural language user utterance following
+        the system utterance in this turn
+    *   **dialogue\_state** - *dictionary* ground truth slot-value mapping after
+        the user utterance
+    *   **database\_state** - database results based on current dialogue state:
+        *   **scores** - *list* of scores, between 0.0 and 1.0, of top 5
+            database results. 1.0 means matches all constraints and 0.0 means no
+            match
+        *   **has\_more\_results** - *boolean* whether backend has more matching
+            results
+        *   **has\_no\_results** - *boolean* whether backend has no matching
+            results
+
+An additional file **db.json** is provided which contains the set of values for each slot.
+
+Note: The date values in the dataset are normalized as the constants, "base_date_plus_X", for X from 0 to 6. X=0 corresponds to the current date (i.e. 'today'), X=1 is 'tomorrow', etc. This is done to allow handling of relative references to dates (e.g. 'this weekend', 'next Wednesday', etc). The parsing of such phrases should be done as a separate pre-processing step.
 
 
-# 论文解读
+### Sim-M
 
-## You Impress Me: Dialogue Generation via Mutual Persona Perception
+Each dialogue is represented as a json object with the following fields:
+*   **dialogue\_id** - A unique identifier for a dialogue.
+*   **turns** - A list of annotated agent and user utterance pairs having the
+    following fields:
+    *   **system\_acts** - A list of system actions. An action consists of an
+        action type, and optional slot and value arguments. Each action has the
+        following fields:
+        *   **type** - An action type. Possible values are listed below.
+        *   **slot** - Optional slot argument.
+        *   **value** - Optional value argument. If value is present, slot must
+            be present.
+    *   **system\_utterance** - The system utterance having the following
+        fields.
+        *   **text** - The text of the utterance.
+        *   **tokens** - A list containing tokenized version of text.
+        *   **slots** - A list containing locations of mentions of values
+            corresponding to slots in the utterance, having the following
+            fields:
+            *   **slot** - The name of the slot
+            *   **start** - The index of the first token corresponding to a slot
+                value in the tokens list.
+            *   **exclusive\_end** - The index of the token succeeding the last
+                token corresponding to the slot value in the tokens list. In
+                python, `tokens[start:exclusive_end]` gives the tokens for slot
+                value.
+    *   **user\_acts** - A list of user actions. Has the same structure as
+        system\_acts.
+    *   **user\_utterance** - The user utterance. It has three fields, similar
+        to system\_utterance.
+    *   **user_intents** - A list of user intents specified in the current turn.
+        Possible values are listed below.
+    *   **dialogue\_state** - Contains the preferences for the different slots
+        as specified by the user upto the current turn of the dialogue.
+        Represented as a list containing:
+        *   **slot** - The name of the slot.
+        *   **value** - The value assigned to the slot.
+
+The list of action types is inspired from the Cambridge dialogue act schema
+([DSTC2 Handbook](http://camdial.org/~mh521/dstc/downloads/handbook.pdf), Pg 19)
+. The possible values are:
+*   AFFIRM
+*   CANT\_UNDERSTAND
+*   CONFIRM
+*   INFORM
+*   GOOD\_BYE
+*   GREETING
+*   NEGATE
+*   OTHER
+*   NOTIFY\_FAILURE
+*   NOTIFY\_SUCCESS
+*   OFFER
+*   REQUEST
+*   REQUEST\_ALTS
+*   SELECT
+*   THANK\_YOU
+
+The possible values of user intents are:
+*   BUY\_MOVIE\_TICKETS
+
+
+### Sim-R
+
+Each dialogue is represented as a json object with the following fields:
+*   **dialogue\_id** - A unique identifier for a dialogue.
+*   **turns** - A list of annotated agent and user utterance pairs having the
+    following fields:
+    *   **system\_acts** - A list of system actions. An action consists of an
+        action type, and optional slot and value arguments. Each action has the
+        following fields:
+        *   **type** - An action type. Possible values are listed below.
+        *   **slot** - Optional slot argument.
+        *   **value** - Optional value argument. If value is present, slot must
+            be present.
+    *   **system\_utterance** - The system utterance having the following
+        fields.
+        *   **text** - The text of the utterance.
+        *   **tokens** - A list containing tokenized version of text.
+        *   **slots** - A list containing locations of mentions of values
+            corresponding to slots in the utterance, having the following
+            fields:
+            *   **slot** - The name of the slot
+            *   **start** - The index of the first token corresponding to a slot
+                value in the tokens list.
+            *   **exclusive\_end** - The index of the token succeeding the last
+                token corresponding to the slot value in the tokens list. In
+                python, `tokens[start:exclusive_end]` gives the tokens for slot
+                value.
+    *   **user\_acts** - A list of user actions. Has the same structure as
+        system\_acts.
+    *   **user\_utterance** - The user utterance. It has three fields, similar
+        to system\_utterance.
+    *   **user_intents** - A list of user intents specified in the current turn.
+        Possible values are listed below.
+    *   **dialogue\_state** - Contains the preferences for the different slots
+        as specified by the user upto the current turn of the dialogue.
+        Represented as a list containing:
+        *   **slot** - The name of the slot.
+        *   **value** - The value assigned to the slot.
+
+The list of action types is inspired from the Cambridge dialogue act schema ([DSTC2 Handbook](http://camdial.org/~mh521/dstc/downloads/handbook.pdf), Pg 19). The possible values are:
+*   AFFIRM
+*   CANT\_UNDERSTAND
+*   CONFIRM
+*   INFORM
+*   GOOD\_BYE
+*   GREETING
+*   NEGATE
+*   OTHER
+*   NOTIFY\_FAILURE
+*   NOTIFY\_SUCCESS
+*   OFFER
+*   REQUEST
+*   REQUEST\_ALTS
+*   SELECT
+*   THANK\_YOU
+
+The possible values of user intents are:
+*   FIND\_RESTAURANT
+*   RESERVE\_RESTAURANT
+
+
+
+## 论文解读
+
+### Dual Task Framework for Improving Persona-grounded Dialogue Dataset
+
+- [Dual Task Framework for Improving Persona-grounded Dialogue Dataset](https://www.aaai.org/AAAI22Papers/AAAI-8011.KimM.pdf)
+
+摘要：
+- This paper introduces a simple yet effective data-centric approach for the task of improving **persona-conditioned** dialogue agents. Prior model-centric approaches unquestioningly depend on the raw crowdsourced benchmark datasets such as Persona-Chat. In contrast, we aim to fix annotation artifacts in benchmarking, which is orthogonally applicable to any dialogue model. Specifically, we augment relevant personas to improve dialogue dataset/agent, by leveraging the primal-dual structure of the two tasks, predicting dialogue responses and personas based on each other. Experiments on Persona-Chat show that our approach outperforms pretrained LMs by an 11.7 point gain in terms of accuracy
+
+<object type="application/pdf" data="https://www.aaai.org/AAAI22Papers/AAAI-8011.KimM.pdf"
+           id="review" style="width:100%;  height:800px; margin-top:0px;  margin-left:0px" >
+</object>
+
+### You Impress Me: Dialogue Generation via Mutual Persona Perception
  
+- [You Impress Me: Dialogue Generation via Mutual Persona Perception](https://aclanthology.org/2020.acl-main.131.pdf)
 - April 11, 2020，[作者主页](https://siviltaram.github.io/publication/2020-04-11-you)
 - **个性化对话生成**（Personalized Dialogue Generation）是对话生成领域近几年的一个研究热点（Zhang et al. 2018）。个性的引入可以帮助对话生成模型产生更一致的、更有趣的回复。然而大部分工作仍像对待普通开放域对话生成那样，关注模型生成回复的流畅性，较少关注对话中对话者之间的互动和了解。相比于已有工作，我们显式地建模了对话者之间的了解，从而使得对话生成的结果更加有趣，且更加符合对话者的个性。
-- 这篇论文提出了一个 Transmitter-Receiver 的框架来显式建模对话者之间的了解，其中 Transmitter 负责对话生成，而 Receiver 负责个性了解。在这个框架下，我们引入一个新颖的概念“相互个性感知”，来刻画对话者之间的信息交流，即对话者对彼此个性的了解程度。众所周知，高效的沟通能够让对话的双方充分了解并达成共识，所以相互个性感知的提升在一定程度上也代表了对话质量的提高。为了达成这个目标，我们首先按照传统的监督学习来训练Transmitter，然后让两个训练好的 Transmitter 通过互相对话进行自我学习（self-play）。在它们对话若干轮后，借助 Receiver 提供的个性感知奖励微调 Transmitter。
+- 这篇论文提出了一个 Transmitter-Receiver 的框架来显式建模对话者之间的了解，其中 Transmitter 负责对话生成，而 Receiver 负责个性了解。在这个框架下，我们引入一个新颖的概念“相互个性感知”，来刻画对话者之间的信息交流，即对话者对彼此个性的了解程度。众所周知，高效的沟通能够让对话的双方充分了解并达成共识，所以相互个性感知的提升在一定程度上也代表了对话质量的提高。为了达成这个目标，我们首先按照传统的监督学习来训练Transmitter，然后让两个训练好的 Transmitter 通过互相对话进行**自我学习**（self-play）。在它们对话若干轮后，借助 Receiver 提供的个性感知奖励微调 Transmitter。
 
 ![](https://www.msra.cn/wp-content/uploads/2020/07/acl-2020-25.png)
  
@@ -330,8 +522,20 @@ dqn.py主要函数介绍：DQN主要是训练一个强化学习的对话过程�
            id="review" style="width:100%;  height:800px; margin-top:0px;  margin-left:0px" >
 </object>
 
+### 2021 ACL Transferable Dialogue Systems and User Simulators
+
+[Transferable Dialogue Systems and User Simulators](https://aclanthology.org/2021.acl-long.13.pdf)
+
+- 对话系统训练的困难之一：缺乏训练数据 --> 通过对话系统与用户模拟器之间的交互来自学习
+- One of the difficulties in training dialogue systems is the **lack of training data**. We explore the possibility of creating dialogue data through the interaction between a **dialogue system** and a **user simulator**. Our goal is to develop a modelling framework that can incorporate new dialogue scenarios through **self-play** between the two agents. In this framework, we first pre-train the two agents on a collection of source domain dialogues, which equips the agents to converse with each other via natural language. With further fine-tuning on a small amount of target domain data, the agents continue to interact with the aim of improving their behaviors using reinforcement learning with structured reward functions. In experiments on the MultiWOZ dataset, two practical transfer learning problems are investigated:
+- 1) **domain adaptation** and 
+- 2) **single-to-multiple**
+- domain transfer. We demonstrate that the proposed framework is highly effective in bootstrapping the performance of the two agents in transfer learning. We also show that our method leads to improvements in dialogue system performance on complete datasets.
 
 
+<object type="application/pdf" data="https://aclanthology.org/2021.acl-long.13.pdf"
+           id="review" style="width:100%;  height:800px; margin-top:0px;  margin-left:0px" >
+</object>
 
 # 结束
 
