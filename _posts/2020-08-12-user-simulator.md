@@ -3,7 +3,7 @@ layout: post
 title:  "用户模拟器-User Simulator"
 date:   2020-08-12 20:46:00
 categories: 深度学习
-tags: 对话系统 用户模拟器 性格模拟 角色模拟 论文
+tags: 对话系统 用户模拟器 性格模拟 角色模拟 论文 simulator
 excerpt: 对话系统之用户模拟器专题
 author: 鹤啸九天
 mathjax: true
