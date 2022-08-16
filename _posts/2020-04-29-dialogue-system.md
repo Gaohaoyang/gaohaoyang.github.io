@@ -3,7 +3,7 @@ layout: post
 title:  "对话系统-Dialogue System"
 date:   2020-04-29 21:45:00
 categories: 深度学习
-tags: 深度学习 NLP 对话系统 QA KB-QA 多轮 闲聊 沈向洋 FSM 有限状态机 GPT 台大 陈蕴侬 JSGF 图灵测试 推荐系统 阅读理解 智能音箱 个人助理 智能客服 BERT faiss nl2sql 知识库
+tags: 深度学习 NLP 对话系统 QA kbqa document 多轮 闲聊 沈向洋 FSM 有限状态机 GPT 台大 陈蕴侬 JSGF 图灵测试 推荐系统 阅读理解 智能音箱 个人助理 智能客服 BERT faiss nl2sql 知识库
 excerpt: 对话系统技术图谱
 author: 鹤啸九天
 mathjax: true
@@ -2231,7 +2231,6 @@ Sebastian将QA的研究分为了5个阶段。
 虽然学术界的进展已经很多了，但研究所用的数据集是没法覆盖现实的复杂情况的，同时深度学习模型的鲁棒性也一直是个大问题，因此目前工业界还在封闭域问答挣扎，即使是封闭域也要先对问题进行分类，应对各种长尾case。
 
 
-
 ### 问答技术框架
 
 - 【2021-3-29】[开放领域问答梳理系列](https://zhuanlan.zhihu.com/p/360572095)
@@ -2356,7 +2355,86 @@ Sebastian将QA的研究分为了5个阶段。
   - 用户输入NewQ，首先用Wu_Manber算法扫描NewQ，把其中包含的字典中的字符串片段都找出来，比如找出了A,B,C三个片段；使用A,B,C三个片段，从倒排索引中找出同时包含三个片段的模板集合QSet；现在有了用户输入NewQ和一个小的模板集合QSet，可以采用正则表达等传统的方式去进行模式匹配，找出其中某个模式或者一个模式也匹配不上。因为这个QSet相比原先整个模板集合来说，数据量是极小的，绝大多数时候只有一个或者几个，所以这个步骤不会太耗时间。
   - 总结：多模式匹配和倒排索引来快速找到一些候选的模板集合，这个模板集合大小相对原先整个模板集合来说相当小，然后在这个小集合上进行常规的模式匹配。
 
-### TableQA
+### 自动Q/A
+
+【2022-8-16】[各类QA问答系统的总结与技术实现](https://blog.csdn.net/u012892939/article/details/79476756)
+
+从知识的来源、答案类型、交互方式、业务场景及问题类型五个方面对QA任务进行分类
+
+- 回答一个问题需要有依据，人类在回答问题时，会去大脑中搜索相关的内容，然后给出答案；
+- 而机器要想实现自动问答，也需要从外部获取知识（或依据）。
+- 好比学生上学时学习知识，并把知识存在大脑中；考试时看到考题，会回忆学习过的相关知识，从而给出答案。
+
+机器没有学习知识的过程，我们需要将知识作为结构化或非结构话的数据供其访问，作为其回答问题的依据。
+
+根据知识来源的不同，问答系统可以分为以下三种任务：基于**知识库**的问答、基于**文档**的问答、**答案选择**。
+- （1）基于`知识库`的问答：
+  - 给定自然语言问题，通过对问题进行语义理解和解析，利用知识库进行查询、推理得出答案。
+  - 特点是回答的答案是知识库中的实体。
+  - 如：百度询问 2016年奥斯卡最佳男主角 时，百度会根据知识库进行查询和推理，返回答案 “莱昂纳多”
+  - 知识库通常由大量的三元组组成，每一条三元组包括：entity - relation - entity，如果我们把实体看作是结点，把实体关系（包括属性，类别等等）看作是一条边，那么包含了大量三元组的知识库就成为了一个庞大的知识图。
+  - 根据问题的复杂程度，又可以分为两类：
+    - **简单**问句：这种问题只需要一个三元组就能搞定，比较基础的通过LR的方法： Antoine Bordes, Jason Weston, Nicolas Usunier. Open question answering with weakly su-pervised embedding models；或者结合CNN、RNN神经网络的方法：Character-Level Question Answering with Attention
+    - **复杂**问句：需要多个三元组，有时需要进一步的推理或者做一些计算。回答这类问题目前采用下面基于语义解析一类的方法效果较好。贴个微软目前比较新的工作 Wen-tau Yih, Ming-Wei Chang, Xiaodong He, and Jianfeng Gao. 2015. Semantic parsing via staged query graph generation: Question answering with knowledge base.
+- （2）基于`文档`的问答
+  - 这一类型的任务通常也称为**阅读理解**问答任务，最有名的是斯坦福基于SQuAD数据集展开的比赛（https://rajpurkar.github.io/SQuAD-explorer/）
+  - 对于每个问题，会给定几段文本作为参考，这些文本通常根据问题检索得到，每段文本中可能包含有答案，也可能只与问题描述相关，而不含有答案。我们需要从这些文本中抽取出一个词或几个词作为答案。
+- （3）Answer Select 答案选择
+  - Applying Deep Learning To Answer Selection: A Study And An Open [Task](http://www.52nlp.cn/qa问答系统中的深度学习技术实现)
+  - 按答案类型划分
+    - **事实**型问题
+    - **列举**型问题
+    - **定义**型问题
+    - **交互**型问题
+      - 单轮
+      - 多轮交互
+
+
+[自动问答综述](https://github.com/BrambleXu/knowledge-graph-learning/issues/47)
+- ![](https://user-images.githubusercontent.com/10768193/54733086-f234a180-4bda-11e9-9091-3fce8ec9cfe2.png)
+- [北大文档](http://sewm.pku.edu.cn/QA/reference/%D7%D4%B6%AF%CE%CA%B4%F0%D7%DB%CA%F6.pdf)
+
+
+### Document Q/A
+
+这项创新技术，开发者无需梳理意图、词槽，无需进行问题和答案的整理，只需准备文本格式的业务文档，通过平台上传，即可一键获取基于文档的对话技能。无需智能对话技术基础也可以利用该技术，秒变AI达人。
+
+对话式文档问答技能，可以对传统需要人工抽取FAQ或梳理意图的业务文档进行**自动学习**，通过搜索与语义理解技术，构建了用户输入的问题与业务文档之间的桥梁，使得用户的问题可以由技能自动找到文档中的对应答案片段，使用端到端的多文档阅读理解模型V-NET和自然语言生成技术，技能得以返回更为精准的答案。整个问答技能的构建对开发者来说没有任何技术门槛，且对话式文档问答技能具有自主学习能力，可持续优化，大大提高问答系统的开发人效。
+
+开发者在上传文档后，平台进行模型训练，经过以下几部分处理：
+1. 基础处理：比如编码处理，冗余字符处理，切分完整语义片段，进行词法分析等，让机器人对用户上传的文档有基础了解；
+2. 获取文档关键信息并完成倒排索引：此过程采用了TF-IDF及TextRank等多种算法综合片段的重要性，并进行打分；
+3. 构建基于词向量的KNN分类器：基于大规模语料，使用skip-gram模型，训练并得到词向量，并完成构建KNN分类器。
+
+UNIT 文档对话示例
+- 测试模式
+  - ![图](https://ai.bdstatic.com/file/8A11A0B9575D45A5AE102CC5C97816DA)
+- 调优模式
+  - ![图](https://ai.bdstatic.com/file/4815485BC6CC49D5A275AD3AE3720FC9)
+
+2020年，[美团智能问答技术探索与实践](https://www.infoq.cn/article/bvmbionj6xwgykuof3dq)
+- 从非结构化文档中提取答案，即`文档问答` ( Document QA )。近年来基于深度神经网络的`机器阅读理解` ( Machine Reading Comprehension，MRC ) 技术得到了快速的发展，逐渐成为问答和对话系统中的关键技术。MRC 模型以问题和文档为输入，通过阅读文档内容预测问题的答案。根据需要预测的答案形式不同，阅读理解任务可以分为`填空式` ( Cloze-style )、`多项选择式` ( Multi-choice )、`片段提取式` ( Span-extraction ) 和`自由文本` ( Free-form )。在实际问答系统中最常使用的是片段提取式阅读理解 ( MRC )，该任务需要从文档中提取连续的一段文字作为答案。最具影响力的片段提取式 MRC 公开数据集有 SQuAD 和 MSMARCO 等，这些数据集的出现促进了 MRC 模型的发展。在模型方面，深度神经网络结构被较早的应用到了机器阅读理解任务中，并采用基于边界预测(boundary-based prediction)方式解决片段提取式阅读理解任务。这些模型采用多层循环神经网络+注意力机制的结构获得问题和文档中每个词的上下文向量表示，在输出层预测答案片段的起始位置和终止位置。近年来预训练语言模型如 BERT，RoBERTa 和 XLNet 等在众多 NLP 任务上取得突破性进展，尤其是在阅读理解任务上。这些工作在编码阶段采用 Transformer 结构获得问题和文档向量表示，在输出层同样采用边界预测方式预测答案在文档中的位置。目前在单文档阅读理解任务 SQuAD 上，深度神经网络模型的预测 EM/F1 指标已经超越了人类标注者的水平，说明了模型在答案预测上的有效性。
+
+文档问答系统的答案预测流程包含三个步骤：
+- (1) 文档检索与选择 ( Retriever )：根据 Query 关键字检索景点等商户下的相关详情和 UGC 评论，根据相关性排序，筛选出相关的评论用于提取候选答案；
+- (2) 候选答案提取 ( Reader )：利用 MRC 模型在每个相关评论上提取一段文字作为候选答案，同时判断当前评论是否有答案，预测有答案和无答案的概率；
+- (3) 答案排序 ( Ranker )：根据候选答案的预测得分排序。这样能够同时处理多篇相关评论，比较并选择最优答案，同时根据无答案概率和阈值判断是否拒绝回答，避免无答案时错误回答。
+
+Document QA 问答系统架构如下图所示：
+- ![](https://static001.infoq.cn/resource/image/bf/02/bffd6b4945c8db71e8557bdaaeb2ca02.png)
+- 文档检索和排序：上图①表示文档检索的过程，首先根据用户询问的商户名定位到具体商户，通过关键字或向量召回该商户下与 Query 相关评论或详情信息的 TopN 篇文档。
+- 答案片段预测：在答案提取任务中，将每条详情或评论作为一个文档 ( Document )，把用户 Query 和文档拼接起来，中间加入分割符号\[SEP]，并在 Query 前加入特殊分类符号\[CLS]；把拼接后的序列依次通过②中的模型，在每条评论上提取一段文字作为候选答案，并预测有答案概率 ( HA Score ) 和无答案概率 ( NA Score )。长度分别为 N 和 M 的 Query 和 Document，每一个 token 经过 BERT Encoder，分别得到隐层向量表示 Ti (i=1,2,...,N) 和 Tj'(j=1,2,...,M)。将 Document 的向量表示经过全连接层和 Softmax 计算后得到每个 Token 作为答案起始和终止位置的概率 Pistart 和 Pjend，然后找到 PistartPjend (i,j=1,2,...,M,i＜j) 最大的组合，将位置 i 和 j 之间文字作为候选答案，PistartPjend 作为有答案概率 ( HA Score )。
+- 答案排序：答案重排序部分如③所示，根据前一步的候选答案得分 ( HA Score ) 排序，选择最相关的一个或多个答案输出。
+- 无答案判断：在实际使用中还会面临召回文档无答案问题，需要在答案提取的同时加入无答案判断任务。我们的具体做法是联合训练，将 BERT 模型的\[CLS]位置的向量表示 C 经过额外的全连接层和二分类 Softmax，得到无答案概率 ( NA Score )，根据无答案概率 ( NA Score ) 和人为设定的阈值判断是否需要拒绝回答。
+
+
+实践
+- allenai的[document-qa](https://github.com/allenai/document-qa), 2017年的[paper Simple and Effective Multi-Paragraph Reading Comprehension](https://arxiv.org/abs/1710.10723)
+- hugging face的[document qa demo](https://huggingface.co/spaces/Gradio-Blocks/document-qa)，不管用
+- 2019，百度的[UNIT 3.0详解之对话式文档问答——上传文档获取对话能力](https://ai.baidu.com/forum/topic/show/955837)
+- 最新[sota模型](https://duebenchmark.com/leaderboard/document-qa),
+
+### Table Q/A
 
 - 【2021-12-3】[首个中文表格预训练模型！达摩院AliceMind上新，序列到结构详解](https://www.toutiao.com/i7036970750120755725/)
 - 【2021-2-24】[达摩院Conversational AI研究进展及应用](https://t.cj.sina.com.cn/articles/view/2674405451/9f68304b01900tdaj)
@@ -2422,6 +2500,21 @@ Sebastian将QA的研究分为了5个阶段。
 - 【2021-7-20】基于neo4j的医疗领域知识图谱问答[demo代码](https://github.com/zhihao-chen/QASystemOnMedicalGraph)
 - 【2020-4-22】[KB-QA研究进展](https://www.jianshu.com/p/92ea00b7a4cc)，[图](https://upload-images.jianshu.io/upload_images/9298309-c4a3c66f7965460e.png)
 - ![](https://upload-images.jianshu.io/upload_images/9298309-c4a3c66f7965460e.png)
+
+基于`知识库`的问答：
+- 给定自然语言问题，通过对问题进行语义理解和解析，利用知识库进行查询、推理得出答案。
+- 特点是回答的答案是知识库中的实体。
+- 如：百度询问 2016年奥斯卡最佳男主角 时，百度会根据知识库进行查询和推理，返回答案 “莱昂纳多”
+- 知识库通常由大量的三元组组成，每一条三元组包括：entity - relation - entity，如果我们把实体看作是结点，把实体关系（包括属性，类别等等）看作是一条边，那么包含了大量三元组的知识库就成为了一个庞大的知识图。
+- 根据问题的复杂程度，又可以分为两类：
+  - **简单**问句：这种问题只需要一个三元组就能搞定，比较基础的通过LR的方法： Antoine Bordes, Jason Weston, Nicolas Usunier. Open question answering with weakly su-pervised embedding models；或者结合CNN、RNN神经网络的方法：Character-Level Question Answering with Attention
+  - **复杂**问句：需要多个三元组，有时需要进一步的推理或者做一些计算。回答这类问题目前采用下面基于语义解析一类的方法效果较好。贴个微软目前比较新的工作 Wen-tau Yih, Ming-Wei Chang, Xiaodong He, and Jianfeng Gao. 2015. Semantic parsing via staged query graph generation: Question answering with knowledge base.
+
+传统的解决方法可以分为三类：
+- 语义解析（Semantic Parsing）
+- 信息抽取（Information Extraction）
+- 向量建模（Vector Modeling）
+
 
 - [美团智能问答技术探索与实践](https://mp.weixin.qq.com/s?__biz=MzU1NTMyOTI4Mw==&mid=2247517833&idx=1&sn=0cb67429fa434d3dcd5afd6167754313&chksm=fbd734e5cca0bdf3f0cf43b588153d8117dec25d130240dcb9c42d5219cd94b972e463b55063&mpshare=1&scene=1&srcid=1221TKOk0XWVMxG3wT9wowUP&sharer_sharetime=1610600327445&sharer_shareid=b8d409494a5439418f4a89712efcd92a&version=3.1.0.6189&platform=mac#rd)
 - KBQA是一种基于知识图谱的问答技术，其主要任务是将自然语言问题 ( NLQ ) 通过不同方法映射到结构化的查询，并在知识图谱中获取答案。相比非结构化文本问答方法利用图谱丰富的语义关联信息，能够深入理解用户问题、解决更多复杂推理类问题。
