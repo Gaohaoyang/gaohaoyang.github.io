@@ -3,7 +3,7 @@ layout: post
 title:  "文本匹配-Text Matching"
 date:   2020-09-11 20:43:00
 categories: 深度学习
-tags: 深度学习 NLP 相似度
+tags: 深度学习 NLP 相似度 语义
 excerpt: 深度学习在NLP子领域——文本匹配的应用汇总
 author: 鹤啸九天
 mathjax: true
@@ -13,6 +13,9 @@ mathjax: true
 {:toc}
 
 # 总结
+
+- 【2022-8-19】腾讯AI Lab开发的近义词查询工具：[近邻词汇检索](https://tool.mingdawoo.com/lang/nearby_word/search?q=%E7%A5%9E%E9%A9%AC&ds=1)
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/2d04c2364fac4cdea886ef3ab1bf8ef0~noop.image)
 
 ## 资料
 
