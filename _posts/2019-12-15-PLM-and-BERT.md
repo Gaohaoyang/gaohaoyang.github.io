@@ -3908,6 +3908,8 @@ PLUG还能为目标任务做针对性优化。GPT-3并没有利用**微调**和*
 
 # 向量化
 
+- 【2022-8-19】腾讯AI Lab开发的近义词查询工具：[近邻词汇检索](https://tool.mingdawoo.com/lang/nearby_word/search?q=%E7%A5%9E%E9%A9%AC&ds=1)
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/2d04c2364fac4cdea886ef3ab1bf8ef0~noop.image)
 
 ## ES句向量
 
