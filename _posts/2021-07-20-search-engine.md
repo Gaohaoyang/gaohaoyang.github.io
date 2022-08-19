@@ -115,6 +115,16 @@ SEO主要研究搜索引擎是工作的原理（什么人搜索，输入什么�
 
 还有一些其它手段，短期内可能会有很好的排名效果，但是不利于网站的长期排名，所有的分享都是基于**白帽SEO**，如果想学习黑帽SEO可以在网上搜索其他SEOer。
 
+【2022-8-19】[什么是语义搜索？它是如何影响SEO的](https://ahrefs.com/blog/zh/semantic-search/)
+
+SEO调整的提示和技巧
+1.  [目标主题，而非关键词](https://ahrefs.com/blog/zh/semantic-search/#topics-over-keywords)
+2.  [评估搜索意图](https://ahrefs.com/blog/zh/semantic-search/#search-intent)
+3.  [使用语义HTML](https://ahrefs.com/blog/zh/semantic-search/#semantic-html)
+4.  [使用Scheme标记](https://ahrefs.com/blog/zh/semantic-search/#schema-markup)
+5.  [打造自己的品牌，成为知识图谱实体](https://ahrefs.com/blog/zh/semantic-search/#brand-building)
+6.  [通过链接建立相关性](https://ahrefs.com/blog/zh/semantic-search/#link-building)
+
 ### 向搜索引擎提交网站
 
 目前大多数搜索引擎提供了网站的提交路口，我们可以通过他们提供的入口提交站点，让搜索引擎能够及时抓取网站的数据。
@@ -567,6 +577,24 @@ Query扩展pair的挖掘方式和纠错差不多，可以建模为pair对判别�
 【2022-8-19】[什么是语义搜索？它是如何影响SEO的](https://ahrefs.com/blog/zh/semantic-search/)
 - 语义搜索是现代搜索引擎用来返回最相关搜索结果的一种信息检索过程。它侧重于搜索查询背后的意图，而不是传统的关键词匹配。
 - 大约40%的英语单词是多义词——它们有两个或更多的含义。这可以说是语义搜索要解决的最重大的挑战。
+
+到2020年，语义搜索发展到今天的成果，一共经历了四个重要的里程碑。
+*  （1） [知识图谱](https://ahrefs.com/blog/zh/semantic-search/#knowledge-graph)
+  - 启动并实现了从关键字匹配到语义匹配转变的技术。
+  - 向知识图谱提供信息的方法主要有两种：
+    - 结构化数据（稍后详述）
+    - 从文本中提取实体
+  - 第二点，需要搜索引擎理解自然语言，3个算法如下：
+*  （2） [蜂鸟算法](https://ahrefs.com/blog/zh/semantic-search/#hummingbird)
+  - 早在2013年，Google推出了一个名为[Hummingbird](https://searchengineland.com/google-hummingbird-172816)（蜂鸟）的搜索算法，以返回更好的搜索结果。 这个算法尤其有助于应对复杂的搜索查询。
+  - 蜂鸟算法是第一个重大更新，它更加强调搜索请求背后的意图，而非单个关键词。 它极速催化了“为话题而创作内容”的热潮，而不是“为单个关键词而写作”。
+*  （3） [RankBrain算法](https://ahrefs.com/blog/zh/semantic-search/#rankbrain)——升级版
+  - Google用RankBrain算法解决了LSI(潜在语义索引)产生的问题: 搜索请求中所使用的语言和所需内容之间的不匹配
+  - Google的RankBrain采用了优于LSI的技术。通俗地说，通过使用复杂的机器学习算法，RankBrain甚至可以理解不熟悉的单词和短语的含义。
+   - 而考虑到[15%的搜索请求都是新的](https://blog.google/products/search/our-latest-quality-improvements-search/)，这可是一项巨大的工程。可以认为 `RankBrain` 是 `蜂鸟算法` 的升级版，而不是一个独立的搜索算法。它是[最强的排名信号](https://searchengineland.com/faq-all-about-the-new-google-rankbrain-algorithm-234440)之一，但你能主动为其做出的优化，也就只有[满足搜索意图](https://ahrefs.com/blog/zh/search-intent/)了。
+*  （4） [BERT模型](https://ahrefs.com/blog/zh/semantic-search/#bert)
+  - 基于Transformer的双向编码器表示（BERT）这一自然语言表示模型，是对语义搜索运作方式的最新的重大升级。自2019年底以来，它影响了大约[10%的查询](https://www.blog.google/products/search/search-language-understanding-bert/)。
+  - BERT可以提高对长而复杂的句子以及查询的理解。它是一种处理歧义和细微差别的解决方案，因为它力图更好地理解单词的上下文。
 
 ### Omnity
 
