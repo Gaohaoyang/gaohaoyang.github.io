@@ -88,10 +88,11 @@ mathjax: true
 
 ## 可解释性工具
 
+【2022-8-23】[6个顶级的可解释AI (XAI)的Python框架推荐](https://www.toutiao.com/article/7125604710991593988)
+
 【2022-1-12】
 - （1）传统机器学习方法中具备解释能力的模型：LR（权重）、决策树（序列判断路径）
 - （2）深度学习方法解释性探索：Attention权重、因果，还有不少研究热点，比如Rationalizing Neural Predictions Tao Lei, Regina Barzilay, Tommi Jaakkola; EMNLP 2016，代码 github.com/taolei87/rcnn
-
 - 【2022-1-12】Awesome Explanatory Supervision [![Awesome](figures/awesome.svg)](https://github.com/stefanoteso/awesome-explanatory-supervision)，包含各种可解释性论文
 - [机器学习模型可解释性的6种Python工具包，总有一款适合你！](https://zhuanlan.zhihu.com/p/385424638)
 - [4 款算法模型可解释性工具包，总有一款适合你](https://zhuanlan.zhihu.com/p/374520737)
@@ -140,6 +141,16 @@ visualizer = discrimination_threshold(LogisticRegression(multi_class="auto", sol
   - 置换重要性背后的思想是评分(准确度、精确度、召回等)如何随特征的存在或不存在而变化。从以上结果可以看出，displacement 的得分最高，为0.3013。当置换位移特征时，模型的精度会有0.3013的变化。正负号后面的值就是不确定值。置换重要性法的本质上是一个随机过程；这就是为什么我们有不确定值。
   - 位置越高，影响得分的特征就越关键。底部的一些特征显示一个负值，这很有趣，因为这意味着当我们排列特征时，该特征会增加得分。就我个人而言，ELI5 为我提供了足够的机器学习解释能力。
 
+ELI5有两种主要的方法来解释分类或回归模型:
+- 检查模型参数并说明模型是如何全局工作的;
+- 检查模型的单个预测并说明什么模型会做出这样的决定
+
+目前支持以下机器学习框架:
+- scikit-learn
+- XGBoost、LightGBM CatBoost
+- Keras
+
+
 ```python
 #Preparing the model and the dataset
 from sklearn.ensemble import RandomForestClassifier
@@ -167,7 +178,10 @@ show_weights(perm, feature_names = list(X_test.columns))
 ### 3、SHAP——经典工具
 
 讨论机器学习的解释性的经典工具：SHAP。
+- SHapley Additive explanation (SHapley Additive explanation)是一种解释**任何**机器学习模型输出的**博弈论**方法。它利用博弈论中的**经典Shapley值**及其相关扩展将最优信贷分配与局部解释联系起来。
+- 数据集中每个特征对模型预测的贡献由Shapley值解释。Lundberg和Lee的SHAP算法最初发表于2017年，这个算法被社区在许多不同的领域广泛采用。
 - [SHAP](https://github.com/slundberg/shap)（SHapley Additive exPlanations）是一种**博弈论**方法，用来解释任何机器学习模型的输出。简单地说，SHAP 是使用 **SHAP值**来解释每个特性的重要性。
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/3b158ef4ffb946d4ab6e9c074667d6cc~noop.image?_iz=58558&from=article.pc_detail&x-expires=1661838843&x-signature=En5y%2FKPdeD%2BdeCFIq67XdskoI%2Bo%3D)
 
 功能
 - **全局可解释性**
@@ -183,9 +197,9 @@ show_weights(perm, feature_names = list(X_test.columns))
 
 ```python
 #Installation via pip
-#pip install shap 
+pip install shap 
 #Installation via conda-forge 
-#conda install -c conda-forge shap
+conda install -c conda-forge shap
 # ---------------------
 # 用泰坦尼克号数据训练，试着用SHAP来解释数据。
 #Preparing the model and the dataset 
@@ -237,6 +251,11 @@ shap.plots.force(shap_values[0])
 - 每个功能都有助于将模型输出从基值推向模型输出的功能。推高预测的特征以红色显示，推低预测的特征以蓝色显示。
 - 力图可视化
   - ![](https://pic4.zhimg.com/80/v2-e0180083e81635d5526e7e192413374b_720w.jpg)
+- 瀑布图
+  - ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/36bae18a2ad34c71ac7d804b148029d9~noop.image?_iz=58558&from=article.pc_detail&x-expires=1661838843&x-signature=CTmyv27Bboyt7WyyQolF%2FDvY3j4%3D)
+- 构建Beeswarm图
+  - ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/9c21f7d1fff64c9c933fa354a944800d~noop.image?_iz=58558&from=article.pc_detail&x-expires=1661838843&x-signature=FRIqhDW1RTFzGD%2FLYGP5Onh65Ak%3D)
+
 
 ### 4、Mlxtend——二维特征
 
@@ -308,6 +327,15 @@ _ = axes['pdp_ax'].set_xticklabels(['Female', 'Male'])
 
 ### 6、InterpretML
 
+InterpretML是一个开源的Python包，它向研究人员提供机器学习可解释性算法。InterpretML支持训练可解释模型(glassbox)，以及解释现有的ML管道(blackbox)。
+
+InterpretML展示了两种类型的可解释性：
+- **glassbox模型**——为可解释性设计的机器学习模型(如:线性模型、规则列表、广义可加模型)
+- **黑箱可解释性技术**——用于解释现有系统(如:部分依赖，LIME)。
+
+使用统一的API并封装多种方法，拥有内置的、可扩展的可视化平台，该包使研究人员能够轻松地比较可解释性算法。
+- InterpretML还包括了explanation Boosting Machine的第一个实现，这是一个强大的、可解释的、glassbox模型，可以像许多黑箱模型一样精确。
+
 InterpretML 是一个Python包，它包含许多机器学习可解释性API。此包的目的是基于绘图图提供交互式绘图，以了解预测结果。
 - InterpretML 提供了许多方法来解释机器学习，方法包括使用讨论过的许多技术——即SHAP和PDP。
 - 此外，这个包拥有一个Glassbox模型API，它在开发模型时提供了一个可解释性函数。
@@ -349,11 +377,14 @@ show(ebm_local)
   - ![](https://pic4.zhimg.com/80/v2-fb640ca0752be99e856b4e0c1b75f103_720w.jpg)
   - 局部可解释性显示了单个预测是如何进行的。这里显示的值是来自模型的对数赔率分数，它们被添加并通过 logistic 函数传递，以得到最终预测。在这个预测中，我们可以看到男性对降低存活率的贡献最大。
 
-### 7、LIME——局部可解释性
+### 7、LIME——局部可解释性(最早出名)
 
 在机器学习模型事后局部可解释性研究中，一种代表性方法是由 Marco Tulio Ribeiro 等人提出的 Local Interpretable Model-Agnostic Explanation(LIME)。
 
-对于每一个输入实例，LIME首先利用该实例以及该实例的一组近邻数据训练一个易于解释的线性模型来拟合待解释模型的局部边界，然后基于该线性模型解释待解释模型针对该实例的决策依据，其中，线性模型的权重系数直接体现了当前决策中该实例的每一维特征重要性。
+可解释性领域最早出名的方法之一是 `LIME`。 它可以帮助解释机器学习模型正在学习什么以及为什么他们以某种方式预测。 Lime目前支持对表格的数据，文本分类器和图像分类器的解释。
+- 知道为什么模型会以这种方式进行预测对于调整算法是至关重要的。借助LIME的解释，能够理解为什么模型以这种方式运行。如果模型没有按照计划运行，那么很可能在数据准备阶段就犯了错误。
+- 对于每一个输入实例，LIME首先利用该实例以及该实例的一组近邻数据训练一个易于解释的线性模型来拟合待解释模型的局部边界，然后基于该线性模型解释待解释模型针对该实例的决策依据，其中，线性模型的权重系数直接体现了当前决策中该实例的每一维特征重要性。
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/0e9da5697fb642db864a32051925f456~noop.image?_iz=58558&from=article.pc_detail&x-expires=1661838843&x-signature=HKsExYT%2BbzqkJ%2B2%2BTvWC%2Bj4CThA%3D)
 
 [LIME](https://github.com/marcotcr/lime)主要提供三种解释方法，这三种方法都处理不同类型的数据：
 - 表格解释
@@ -370,10 +401,40 @@ explainer = lime.lime_text.LimeTextExplainer(class_names=["Not Patient", "Patien
 pl = make_pipeline(vect,rfc)
 exp = explainer.explain_instance(train["combined_text"][689], pl.predict_proba)
 exp.show_in_notebook()
-
 ```
 
+- LIME 构建的局部解释图
+  - ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/c9506fc1e28448cb986b986dc0c0836c~noop.image?_iz=58558&from=article.pc_detail&x-expires=1661838843&x-signature=il%2BQG7%2Fi4j0si0KGFzHlxZT7m9E%3D)
+- LIME构建的Beeswarm 图
+  - ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/43bbd67b8a0b4c10b9fc1b4e443781ae~noop.image?_iz=58558&from=article.pc_detail&x-expires=1661838843&x-signature=%2FhKw4l8Sd2x8mfQaOKaeNGccjCE%3D)
+
+
 - ![](https://pic1.zhimg.com/80/v2-20b38b34fa9257ab933fa02148bea9c8_720w.jpg)
+
+### Shapash
+
+Shapash是一个使机器学习对每个人都可以进行解释和理解Python库。
+- Shapash提供了几种类型的可视化，显示了每个人都能理解的明确标签。
+- 数据科学家可以更轻松地理解他们的模型并分享结果。 最终用户可以使用最标准的摘要来理解模型是如何做出判断的。
+
+为了表达数据中包含故事、见解和模型的发现，互动性和漂亮的图表必不可少。 业务和数据科学家/分析师向AI/ML结果展示和互动的最佳方法是将其可视化并且放到web中。Shapash库可以生成交互式仪表盘，并收集了许多可视化图表。与外形/石灰解释性有关。 它可以使用SHAP/Lime作为后端，也就是说他只提供了更好看的图表。
+
+- 使用Shapash构建特征贡献图
+  - ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/92e610d4cded41d98e41803d1c4e8001~noop.image?_iz=58558&from=article.pc_detail&x-expires=1661838843&x-signature=g6eAFMyR%2BjLN6Up2yhL%2B2MpHMm8%3D)
+- 使用Shapash库创建的交互式仪表板
+  - ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/3614bf5036d2444f96093e109df4c681~noop.image?_iz=58558&from=article.pc_detail&x-expires=1661838843&x-signature=366%2BSw57AWQ0RonawwxOYSA%2FFak%3D)
+- Shapash构建的局部解释图
+  - ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/5f75ff7da489400890d40abe55c9099f~noop.image?_iz=58558&from=article.pc_detail&x-expires=1661838843&x-signature=z6x85%2B3MMiq6PbPiCeHqmDcWCDA%3D)
+
+
+
+### OmniXAI
+
+OmniXAI (Omni explained AI的简称)，是Salesforce最近开发并开源的Python库。它提供全方位可解释的人工智能和可解释的机器学习能力来解决实践中机器学习模型在产生中需要判断的几个问题。对于需要在ML过程的各个阶段解释各种类型的数据、模型和解释技术的数据科学家、ML研究人员，OmniXAI希望提供一个一站式的综合库，使可解释的AI变得简单。
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/51dda110eac747e28ea8d6f839f8e162~noop.image?_iz=58558&from=article.pc_detail&x-expires=1661838843&x-signature=olHuZWFYR6ZzXOGEjK7Hc%2FoepEM%3D)
+
+OmniXAI提供的与其他类似库的对比
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/37e5c5c049d34a3398c30066368a4226~noop.image?_iz=58558&from=article.pc_detail&x-expires=1661838843&x-signature=ItlDIJ9FfTDdPOqG%2FOPrJtnK2pQ%3D)
 
 
 # 一、机器学习的可解释性研究概述
