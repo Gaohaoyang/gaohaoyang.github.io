@@ -14,7 +14,7 @@ mathjax: true
 
 # 总结
 
-江湖名言：<font color=’red’ size=5 face=”黑体”>数据和特征决定了机器学习的上限，而模型和算法只是逼近这个上限而已</font>
+江湖名言：<font color='red' size=5 face='黑体'>数据和特征决定了机器学习的上限，而模型和算法只是逼近这个上限而已</font>
 - ![](http://images2015.cnblogs.com/blog/927391/201606/927391-20160628112051062-1290708859.jpg)
 
 
