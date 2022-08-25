@@ -709,7 +709,11 @@ ReactDOM.render(React.createElement(App), domContainer);
 
 卡尔曼滤波假设两个变量（位置和速度）都是随机且符合高斯分布。每个变量都有一个均值 u，它是随机分布的中心；有一个方差 δ，它衡量组合的不确定性。
 
-<center class="half">
+|||
+|---|---|
+|![](https://pic1.zhimg.com/80/v2-ebb864b7af322d063c9e75b79d28957c_1440w.jpg)|![](https://pic4.zhimg.com/80/v2-d474e950b50b865fec1cd454b3059b57_1440w.jpg)|
+
+<center>
 <img src="https://pic1.zhimg.com/80/v2-ebb864b7af322d063c9e75b79d28957c_1440w.jpg" width=00/>
 <img src="https://pic4.zhimg.com/80/v2-d474e950b50b865fec1cd454b3059b57_1440w.jpg" width=200/>
 </center>
