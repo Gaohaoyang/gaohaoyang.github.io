@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "可视化信息论-Information Theory"
+title:  "概率统计与信息论 - Probability and Information Theory"
 date:   2019-10-23 16:53:00
-categories: 资料汇总
-tags: 信息论 熵 相对熵 交叉熵 互信息
+categories: 数学基础
+tags: 概率 统计 信息论 熵 相对熵 交叉熵 互信息
 excerpt: 通俗易懂讲解信息论
 mathjax: true
 ---
@@ -11,15 +11,35 @@ mathjax: true
 * content
 {:toc}
 
-# 信息论基础
+
+# 概率统计
+
+- 【2020-9-2】
+
+## 概率函数的统计度量
+
+概率中常见的统计度量，首先是均值和方差，其定义与前面在统计学中看到的定义没有区别。
+- 1．`偏度`（Skewness）
+  - 它表示了一个概率分布的横向偏差，即偏离中心的程度或对称性（非对称性）。一般来说，如果偏度为负，则表示向右偏离；如果为正，则表示向左偏离。下图描绘了偏度的统计分布。
+    - ![](https://p6-tt.byteimg.com/origin/pgc-image/c4cf3f83211d4dc9a7cd588ee69a5082?from=pc)
+  - 分布形状对偏度的影响
+    - ![](https://p6-tt.byteimg.com/origin/pgc-image/21b0d5c29dd24b91a4575ddcea334682?from=pc)
+- 2．`峰度`（Kurtosis）
+  - 峰度显示了分布的中心聚集程度。它定义了中心区域的锐度，也可以反过来理解，就是函数尾部的分布方式。
+  - 峰度的表达式如下。
+    - ![](https://p1-tt.byteimg.com/origin/pgc-image/23ab302b08f448b4a65a60eb071b8af7?from=pc)
+  - 直观地理解这些新的度量。分布形状对峰度的影响
+    - ![](https://p1-tt.byteimg.com/origin/pgc-image/7dd08103a08a479893dabaaeac867626?from=pc)
+- 摘自：[机器学习需要哪些数学基础？](https://www.toutiao.com/i6843281715314557444/)
+
+
+# 信息论
 
 ## 介绍
 
 ![](https://pic4.zhimg.com/50/v2-853a14194fe0d2900209694d54edc0f7_hd.jpg)
 
 克劳德·艾尔伍德·香农（英语：Claude Elwood Shannon，1916年4月30日－2001年2月26日），美国数学家、电子工程师和密码学家，被誉为信息论的创始人。香农是密歇根大学学士，麻省理工学院博士。1948年，香农发表了划时代的论文——通信的数学原理，奠定了现代信息论的基础。
-
-
 
 ## 基本知识
 摘自：[信息论基础](https://github.com/songyingxin/NLPer-Interview/blob/master/1-%E5%9F%BA%E7%A1%80%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/%E4%BF%A1%E6%81%AF%E8%AE%BA.md)
@@ -30,37 +50,14 @@ mathjax: true
   > - 比较不可能发生的事件具有更大的信息量
   > - 独立事件应具有增量的信息。例如，投掷的硬币两次正面朝上传递的信息量，应该是投掷一次硬币正面朝上的信息量的两倍。
 
-
-## 概率统计
-
-- 【2020-9-2】
-
-### 概率函数的统计度量
-
-- 概率中常见的统计度量，首先是均值和方差，其定义与前面在统计学中看到的定义没有区别。
-  - 1．偏度（Skewness）
-    - 它表示了一个概率分布的横向偏差，即偏离中心的程度或对称性（非对称性）。一般来说，如果偏度为负，则表示向右偏离；如果为正，则表示向左偏离。下图描绘了偏度的统计分布。
-      - ![](https://p6-tt.byteimg.com/origin/pgc-image/c4cf3f83211d4dc9a7cd588ee69a5082?from=pc)
-    - 分布形状对偏度的影响
-      - ![](https://p6-tt.byteimg.com/origin/pgc-image/21b0d5c29dd24b91a4575ddcea334682?from=pc)
-  - 2．峰度（Kurtosis）
-    - 峰度显示了分布的中心聚集程度。它定义了中心区域的锐度，也可以反过来理解，就是函数尾部的分布方式。
-    - 峰度的表达式如下。
-      - ![](https://p1-tt.byteimg.com/origin/pgc-image/23ab302b08f448b4a65a60eb071b8af7?from=pc)
-    - 直观地理解这些新的度量。分布形状对峰度的影响
-      - ![](https://p1-tt.byteimg.com/origin/pgc-image/7dd08103a08a479893dabaaeac867626?from=pc)
-  - 摘自：[机器学习需要哪些数学基础？](https://www.toutiao.com/i6843281715314557444/)
-
-
 ## 熵
 
 - Shannon提出了熵的概念。熵是一个随机变量不确定性的度量
-- 信息论之父克劳德·香农给出的信息熵的三个性质：
-  - **单调性**，发生概率越高的事件，其携带的信息量越低；
-  - **非负性**，信息熵可以看作为一种广度量，非负性是一种合理的必然；
-  - **累加性**，即多随机事件同时发生存在的总不确定性的量度是可以表示为各事件不确定性的量度的和，这也是广度量的一种体现。
 
-
+信息论之父克劳德·香农给出的信息熵的三个性质：
+- **单调性**，发生概率越高的事件，其携带的信息量越低；
+- **非负性**，信息熵可以看作为一种广度量，非负性是一种合理的必然；
+- **累加性**，即多随机事件同时发生存在的总不确定性的量度是可以表示为各事件不确定性的量度的和，这也是广度量的一种体现。
 
 ## 1. `自信息` ，`信息熵`，`互信息`
 
@@ -118,9 +115,9 @@ $$
 
 - 含义：在离散型变量的情况下， `KL散度`衡量的是：**当我们使用一种被设计成能够使得概率分布 Q 产生的消息的长度最小的编码，发送包含由概率分布 P 产生的符号的消息时，所需要的额外信息量。**
 
-- 性质：
-  > - **非负**: KL散度为 0,当且仅当P 和 Q 在离散型变量的情况下是相同的分布，或者在连续型变量的情况下是“几乎处处”相同的.
-  > - **不对称**：$D_p(q) != D_q(p)$
+性质：
+> - **非负**: KL散度为 0,当且仅当P 和 Q 在离散型变量的情况下是相同的分布，或者在连续型变量的情况下是“几乎处处”相同的.
+> - **不对称**：$D_p(q) != D_q(p)$
 
 ### 2. 交叉熵 - cross entropy
 
@@ -135,9 +132,10 @@ $$
 ### 3. `交叉熵`与`KL散度`的关系
 
 - **针对 Q 最小化交叉熵等价于最小化 P 对 Q 的 KL散度**，因为 Q 并不参与被省略的那一项。
-  $$
+
+$$
   H_P(Q) = H(P) + D_P(Q)最大似然估计中，最小化 KL 散度其实就是在最小化分布之间的交叉熵。
-  $$
+$$
 
 - `最大似然估计`中，最小化 `KL散度`其实就是在最小化分布之间的`交叉熵`。
 
@@ -151,6 +149,7 @@ H(Y| X) = H(X,Y) - H(X)
 $$
 
 联合熵与条件熵的推导过程如下：
+
 $$
 \begin{align}
 H(X, Y) - H(X) &= -\sum_{x,y} p(x,y) log \, p(x,y) + \sum_x p(x) log \, p(x) \\
@@ -174,7 +173,7 @@ $$
 
 
 
-# 可视化信息论
+## 可视化信息论
 
 原文链接：[Visual Information Theory](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com)
 
@@ -184,7 +183,7 @@ $$
 
 不幸的是很多人认为信息论挺难，其实并不是，可能是有些书写的太糟糕了，实际上完全可以用可视化的方法说清楚。
 
-## 可视化概率分布
+### 可视化概率分布
 
 深入研究信息论之前，思考下如何可视化简单的概率分布。
 
@@ -207,14 +206,12 @@ $$
 当变量相互作用时，特定变量的概率和其他变量的概率都会丢失。我穿着外套并且下雨的可能性很大，因为变量是相关的，它们使对方更有可能。更有可能的是，我在下雨的那天穿着外套，而不是我在一天穿外套的可能性，而在其他一些随机的日子下雨。
 
 在视觉上，这看起来像一些方块以更大的概率膨胀，而其他方块缩小，因为这对事件不太可能在一起：
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/prob-2D-dependant-rain-squish.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/prob-2D-dependant-rain-squish.png)
 
 虽然这可能看起来很酷，但它对于理解正在发生的事情并不是很有用。
 
 相反，让我们关注一个像天气一样的变量。我们知道它是晴天还是下雨的可能性。对于这两种情况，我们可以查看*条件概率*。如果天气晴朗，我穿T恤的可能性有多大？如果下雨，我穿外套的可能性有多大？
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/prob-2D-factored-rain-arrow.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/prob-2D-factored-rain-arrow.png)
 
 下雨的几率是25％。如果下雨，我有75％的机会穿上外套。因此，下雨和我穿着外套的概率是25％的75％，大约是19％。下雨的概率乘以我穿着外套下雨的概率，是下雨时我穿外套的概率。我们写这个：
 
@@ -240,89 +237,76 @@ $$
 
 （您可能听说过贝叶斯定理。如果您愿意，您可以将其视为在这两种显示概率分布的不同方式之间进行转换的方式！）
 
-## 旁白：`辛普森悖论`
+### 旁白：`辛普森悖论`
 
 用于可视化概率分布的这些技巧是否真的有用？我认为有用！将它们用于可视化信息论之前还需要一段时间，所以我想继续研究它并用它们来探索`辛普森悖论`。辛普森悖论是一个非常不直观的统计情况。在直观的层面上真的很难理解。迈克尔·尼尔森写了一篇可爱的文章[重塑诠释](http://michaelnielsen.org/reinventing_explanation/)，探讨了不同的解释方法。我想尝试自己解释它，使用我们在上一节中创造的技巧。
 
 测试了两种肾结石治疗方法。一半患者接受治疗A而另一半接受治疗B。接受治疗B的患者比接受治疗A的患者更有可能存活。
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/simpson-margin.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/simpson-margin.png)
 
 然而，如果他们接受治疗，患有小肾结石的患者更有可能存活。如果他们接受治疗A，患有大肾结石的患者也更有可能存活！怎么会这样？
 
 问题的核心是该研究没有适当随机化。接受治疗A的患者可能患有大量肾结石，而接受治疗B的患者更可能患有小结石。
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/simpson-participants.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/simpson-participants.png)
 
 事实证明，小肾结石患者更容易存活。
 
 为了更好地理解这一点，我们可以结合前两个图表。结果是一个三维图表，存活率分为小型和大型肾结石。
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/simpson-separated-note.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/simpson-separated-note.png)
 
 我们现在可以*看到*，在小病例和大病例中，方案A与方案B比较，方案B似乎更好，因为它应用的患者更有可能在第一时间存活！
 
-## 编码
+### 编码
 
 现在我们有了可视化概率的方法，我们可以深入研究信息论。
 
 让我告诉你我想象中的朋友鲍勃。鲍勃真的很喜欢动物。他经常把动物挂在嘴边。事实上，他只说了四个字：“狗”，“猫”，“鱼”和“鸟”。
 
 几个星期前，出乎意料，鲍勃搬到了澳大利亚。促进了他，他只想以二进制方式进行交流。来自Bob的所有（虚构的）消息都是这样的：
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/message.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/message.png)
 
 为了进行交流，Bob和我必须建立一种编码，一种将字映射到位序列的方法。
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/code-2bit.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/code-2bit.png)
 
 为了发送消息，Bob用相应的码字替换每个符号（字），然后将它们连接在一起以形成编码的字符串。
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/encode-2bit.png)
 
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/encode-2bit.png)
-
-## 可变长度代码
+### 可变长度代码
 
 不幸的是，想象中的澳大利亚的通信服务很昂贵。我每次必须从Bob收到的每条消息支付5美元。我是否曾提到鲍勃很喜欢说话？为了避免我破产，Bob和我决定我们应该研究是否有某种方法可以缩短我们的平均消息长度。
 
 事实证明，鲍勃经常没有说出所有的话。鲍勃真的很喜欢狗。他一直在说狗。有时，他会说其他动物 - 特别是他的狗喜欢追逐的猫 - 但大多数时候他都在谈论狗。这是他的词频图：
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/DogWordFreq.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/DogWordFreq.png)
 
 这似乎很有希望。我们的旧代码使用2位长的代码字，无论它们有多常见。
 
 有一种可视化的方法。在下图中，我们使用垂直轴来显示每个单词的概率p(x)，并使用水平轴可视化相应代码字的长度L(x)。请注意，该区域是我们发送的代码字的平均长度 - 在本例中为2位。
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/OldCode.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/OldCode.png)
 
 也许我们可以非常聪明地制作一个可变长度的代码，其中常见字的代码字特别短。问题在于代码字之间存在竞争 - 使得一些短的迫使我们使其他代码更长。为了最小化消息长度，我们将所有代码字都理想化缩短，但我们特别希望使用常用代码字。因此，生成的代码对于常见单词（如“dog”）具有较短的代码字，对于较不常见的单词（如“bird”）具有较长的代码字。
-
-![img](https://colah.github.io/posts/2015-09-Visual-Information/img/code.png)
+- ![img](https://colah.github.io/posts/2015-09-Visual-Information/img/code.png)
 
 让我们再次想象一下。请注意，最常见的代码字变得更短，即使不常见的代码字变得更长。结果是，在网上，面积较小。这对应于较小的预期码字长度。平均来说，代码字的长度现在是1.75位！
-
-![img](https://colah.github.io/posts/2015-09-Visual-Information/img/NewCode.png)
+- ![img](https://colah.github.io/posts/2015-09-Visual-Information/img/NewCode.png)
 
 >（您可能想知道：为什么不将1本身用作代码字？悲伤的是，当我们解码编码的字符串时，这会导致歧义。我们将在稍后讨论这个问题。）
 
 事实证明，这段代码是最好的代码。对于这种分布，没有代码可以为我们提供小于1.75位的平均代码字长度。
 
 只有一个基本限制。传达所说的是什么，发生了这种分布的事件，要求我们平均至少传播1.75位。无论我们的代码多么聪明，都不可能让平均消息长度更短。我们将此基本限制称为熵分布 - 我们将在稍后更详细地讨论它。
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/EntropOptimalLengthExample.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/EntropOptimalLengthExample.png)
 
 如果我们想要理解这个限制，那么问题的关键在于理解在使一些代码字缩短和其他代码字长之间的权衡。一旦我们理解了这一点，我们就能够理解最好的代码是什么样的。
 
-## 代码字的空间
+### 代码字的空间
 
 有两个长度为1位的代码：0和1，有四个长度为2位的代码：00,01,10和11。添加的每个位都可能会使代码的数量翻倍。
-
-![img](https://colah.github.io/posts/2015-09-Visual-Information/img/CodeSpace.png)
+- ![img](https://colah.github.io/posts/2015-09-Visual-Information/img/CodeSpace.png)
 
 我们对可变长度代码感兴趣，其中一些代码字比其他代码字长。我们可能有一些简单的情况，我们有8个3位长的代码字。也可能有更复杂的混合，比如长度为2的两个代码字和长度为3的四个代码字。是什么决定了我们可以有多少不同长度的代码字？
 
 回想一下，Bob通过将每个单词替换为其代码字并将它们连接起来，将其消息转换为代码字符串。
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/encode.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/encode.png)
 
 在制作可变长度代码时，需要注意一个比较微妙的问题。我们如何将编码后的字符串拆分回代码字？当所有代码字长度相同时，很容易 - 只需每隔几步拆分字符串即可。但由于存在不同长度的代码字，我们需要关注实际内容。
 
@@ -331,32 +315,27 @@ $$
 制作不可唯一解码的代码是非常可能的。例如，假设0和01都是代码字。然后不清楚代码字符串0100111的第一个代码字是什么 - 它可能是！我们想要的属性是，如果我们看到一个特定的代码字，就不应该有一个更长的版本也是一个代码字。另一种说法是，没有代码字应该是另一个代码字的前缀。这称为前缀属性，遵守它的代码称为前缀代码。
 
 考虑这一点的一个有用方法是每个代码字都需要从可能的代码字空间中牺牲。如果我们使用代码字01，我们将无法使用任何代码字，它是前缀。由于含糊不清，我们不能再使用010或011010110 - 我们失去了它们。
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/CodeSpaceUsed.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/CodeSpaceUsed.png)
 
 由于所有代码字的四分之一都以01开头，因此我们牺牲了所有可能字的四分之一。这就是我们付出的代价，以换取一个只有2位长的代码字！反过来，这种牺牲意味着所有其他代码字需要更长一些。在不同代码字的长度之间总是存在这种权衡。短代码字要求您牺牲更多可能的代码字空间，以防止其他代码字变短。我们需要弄清楚正确的权衡取舍是什么！
 
-## 最佳编码
+### 最佳编码
 
 您可以将此视为使用有限的预算来获取短代码字。我们通过牺牲一小部分可能的代码字来得到一个代码字。
 
 购买长度为0的代码字的成本是1，所有可能的代码字 - 如果你想要一个长度为0的代码字，你就不能拥有任何其他代码字。长度为1的代码字的成本，如“0”，是1/2，因为一半可能的代码字以“0”开头。长度为2的代码字的成本，如“01”，是1/4，因为所有可能的代码字中有四分之一以“01”开头。通常，代码字的成本随着代码字的长度*呈指数*下降。
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/code-costonly.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/code-costonly.png)
 
 请注意，如果成本以（自然）指数衰减，则它既是高度又是面积！[3](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fn3)
 
 我们想要短代码字，因为我们想要短的平均消息长度。每个码字使得平均消息长度的概率乘以代码字的长度。例如，如果我们需要在50％的时间内发送4位长的代码字，那么我们的平均消息长度比不发送代该码字时的长2位。我们可以把它描绘成一个矩形。
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/code-lengthcontrib.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/code-lengthcontrib.png)
 
 这两个值与代码字的长度有关。我们支付的总数决定了代码字的长度。代码字的长度控制它增加平均消息长度的程度。我们可以将这两者结合在一起，就像这样。
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/code-cost.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/code-cost.png)
 
 短代码字减少了平均消息长度但是很昂贵，而长代码字增加了平均消息长度但是便宜。
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/code-cost-longshort.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/code-cost-longshort.png)
 
 使用有限预算的最佳方式是什么？我们应该在每个事件的代码字上花多少钱？
 
@@ -367,26 +346,22 @@ $$
 *以下证据是直观的，应该是可读的，但是需要工作才能完成，这绝对是本文中最难的部分。读者可以随意跳过接受这个并转到下一部分。*
 
 让我们描绘一个具体的例子，我们需要传达两个可能发生的事件中的某一个。事件a发生时间p(a) 和事件b发生时间p(b) 。我们以上述自然方式分配我们的预算，花费p(a) 用于获得a一个短代码字，以及p(b) 获得b一个短代码字。
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/code-auction-balanced-noderivs.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/code-auction-balanced-noderivs.png)
 
 成本和长度贡献边界排列地很好。这有什么意义吗？
 
 好吧，如果我们略微改变代码字的长度，请考虑成本和长度贡献会发生什么。如果我们略微增加代码字的长度，则消息长度贡献将与其在边界处的高度成比例地增加，而成本将与其在边界处的高度成比例地减小。
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/code-derivs.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/code-derivs.png)
 
 因此，使a的代码字更短的成本是p(a)。与此同时，我们并不关心每个代码字的长度，我们关心它们与我们使用它们的程度成正比。在a的情况下，即p(a)。使a的代码字缩短的好处是p(a)。
 
-有趣的是，两种衍生物都是相同的。这意味着我们的初始预算具有有趣的属性，如果您有更多的花费，那么投资使任何代码字更短也同样好。最后，我们真正关心的是利益/成本比率 - 这就决定了我们应该投入更多资金。在这种情况下，比率为p(a)/p(a)，等于一。这与p(a)的值无关- 它总是一。我们可以将相同的参数应用于其他事件。利益/成本总是一，所以在任何一个方面投入更多都是同等重要的。
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/code-auction-balanced.png)
+有趣的是，两种衍生物都是相同的。这意味着我们的初始预算具有有趣的属性，如果您有更多的花费，那么投资使任何代码字更短也同样好。最后，我们真正关心的是利益/成本比率 - 这就决定了我们应该投入更多资金。在这种情况下，比率为p(a)/p(a)，等于一。这与p(a)的值无关它总是一。我们可以将相同的参数应用于其他事件。利益/成本总是一，所以在任何一个方面投入更多都是同等重要的。
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/code-auction-balanced.png)
 
 无限小，改变预算没有意义。但这并不能证明它是最好的预算。为了证明这一点，我们将考虑一个不同的预算，我们在一个代码字上花费一些额外费用而牺牲另一个代码字。我们会将ϵ少投资于b，并将其投资于a。这使得a的代码字更短，而b的代码字更长一些。
 
 现在购买a的较短代码字的成本是p(a)+ϵ，购买b的较短代码字的成本是p(b)-ϵ。但利益仍然是一样的。这导致购买的利益成本比p(a)/(p(a)+ϵ) 小于一。另一方面，购买b的利益成本比是p(b)/(p(b)−ϵ)，它大于1。
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/code-auction-eps.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/code-auction-eps.png)
 
 价格不再平衡。 **baba**。
 
@@ -396,11 +371,10 @@ $$
 
 （细心的读者可能已经注意到，我们的最佳预算可能会建议代码字具有小数长度的代码。这似乎有什么关系？这是什么意思？当然，实际上，如果你想通过发送单个代码字，你必须四舍五入（round）。但正如我们稍后会看到的，有一个非常真实的意义，当我们一次发送多个代码字时可以发送小数代码字！请你耐心等待！）
 
-## 计算熵
+### 计算熵
 
 回想一下，长度为L的消息的成本是1/2^L。 我们给定量的消息的长度，可以将其反向处理获得花费成本：log2⁡（1/cost）。 由于我们在x的代码字上花费p(x)，因此长度为log2⁡(1/p(x))。这些是长度的最佳选择。
-
-![img](https://colah.github.io/posts/2015-09-Visual-Information/img/entropy-def-notitle.png)
+- ![img](https://colah.github.io/posts/2015-09-Visual-Information/img/entropy-def-notitle.png)
 
 早些时候，我们讨论了如何从一个特定的概率分布中获得平均消息来传递事件的短暂性的基本限制，p。 这个限制，即使用最佳代码的平均消息长度，称为p的熵，H(p)。 现在我们知道了代码字的最佳长度，实际上我们可以计算它！
 
@@ -416,7 +390,7 @@ $$
 
 结果越不确定，平均来说，当我发现发生了什么时，我知道的越多。
 
-## 交叉熵
+### 交叉熵
 
 在他搬到澳大利亚之前不久，鲍勃娶了爱丽丝，这是我想象中的另一个虚构。 为了让我自己以及我头脑中的其他人物感到惊讶，爱丽丝不是一个爱狗的人。 她是一个猫爱好者。 尽管如此，他们两人能够在他们对动物的共同喜好和词汇量非常有限的情况下找到共同点。
 
@@ -443,20 +417,17 @@ $$
 这不一定像人们想象的那样直观。例如，我们可以看到Hp(q)≠Hq(p)。有什么方法可以看出这四个值如何相互关联？
 
 在下图中，每个子图表示这4种可能性中的一种。每个子图可视化了平均消息长度，与我们之前的图表一样。它们被放在了一个正方形中，因此如果消息来自相同的分布，则图形彼此相邻，并且如果它们使用了相同的代码，则它们相互叠加。这允许您在视觉上将分布和代码一起滑动。
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/CrossEntropyCompare.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/CrossEntropyCompare.png)
 
 你能明白为什么Hp(q) ≠ Hq(p)吗？ Hq(p)很大，因为在p下有一个非常常见的事件（蓝色）但得到一个长代码，因为它在q下非常罕见。 另一方面，q下的常见事件在p下较不常见，但差别不那么大，因此Hp(q) 不那么高。
 
 交叉熵不是对称的。
 
 那么，为什么要关心交叉熵呢？ 好吧，交叉熵为我们提供了一种表达不同的两种概率分布的方法。 分布p和q越不同，p相对于q的交叉熵就越大于p的熵。
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/CrossEntropyQP.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/CrossEntropyQP.png)
 
 同样，p与q越不一样，q相对p的交叉熵就越大于q的熵。
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/CrossEntropyPQ.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/CrossEntropyPQ.png)
 
 真正有趣的是熵和交叉熵之间的差异。这种差异是我们的消息需要多长时间，因为我们使用了针对不同分布而优化的代码。如果分布相同，则此差异将为零。随着差异的增大，它会变得更大。
 
@@ -468,21 +439,18 @@ $$
 
 交叉熵和KL分歧在机器学习中非常有用。通常，我们希望一个分布与另一个分布接近。例如，我们可能希望预测的分布接近基本事实。 KL分歧为我们提供了一种自然的方式来实现这一目标，因此它无处不在。
 
-## 熵和多变量
+### 熵和多变量
 
 让我们回到之前的天气和衣服示例：
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/prob-2D-factored1-detail.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/prob-2D-factored1-detail.png)
 
 像许多父母一样，我的母亲有时会担心我不能适应天气。（她有合理的怀疑理由 - 我经常在冬天不穿外套。）所以，她经常想知道天气和我穿的衣服。 我要发送多少比特才能传达这个消息给她？
 
 好吧，简单的方法是把概率分布拉平：
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/prob-2D-factored1-flat.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/prob-2D-factored1-flat.png)
 
 现在我们可以计算出这些概率事件的最优代码字，并计算平均消息长度：
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/Hxy-flat.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/Hxy-flat.png)
 
 我们称之为X和Y的联合熵
 
@@ -491,36 +459,31 @@ $$
 这与我们的正常定义完全相同，除了是两个变量而不是一个变量之外。
 
 考虑这个问题的一种稍好一点的方法是避免使分布变平，只需将代码长度看作第三维。 现在熵就是体积！
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/Hxy-3D.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/Hxy-3D.png)
 
 但是假设我妈妈已经知道天气了。 她可以在新闻上查看。 现在我需要提供多少信息？
 
 似乎我需要发送更多的信息来传达我穿的衣服。但实际上我发送的更少了，因为天气强烈暗示我会穿什么衣服！ 让我们分别考虑下雨和晴天的情况。
-
-![img](https://colah.github.io/posts/2015-09-Visual-Information/img/HxCy-sep.png)
+- ![img](https://colah.github.io/posts/2015-09-Visual-Information/img/HxCy-sep.png)
 
 在这两种情况下，我不需要平均发送大量信息，因为天气让我很好地猜测了正确答案。 当天气晴朗时，我可以使用一个特殊的晴天优化代码，当下雨时我可以使用下雨优化的代码。 在这两种情况下，我发送的信息少于我使用通用代码的情况。为了获得我需要发送给我妈妈的平均信息量，我只是将这两个案例放在一起......
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/HxCy.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/HxCy.png)
 
 我们称之为条件熵。如果你把它形式化成一个方程，你会得到：
 
 > H(X\|Y)=∑yp(y)∑xp(x\|y)log2⁡(1p(x\|y))=∑x,yp(x,y)log2⁡(1p(x\|y))
 
-## 互信息
+### 互信息
 
 在上一节中，我们观察到知道一个变量可能意味着传递另一个变量需要更少的信息。
 
 考虑这个问题的一个好方法是将大量信息想象成条形。 如果它们之间存在共享信息，则这些条重叠。 例如，X和Y中的一些信息在它们之间共享，因此H(X) 和H(Y) 是重叠条。 并且由于H(X,Y) 是两者中的信息，它是条形H(X) 和H(Y) 的并集。[7](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fn7)
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/Hxy-info-1.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/Hxy-info-1.png)
 
 一旦我们以这种方式思考问题，会更容易看到很多事情。
 
 例如，我们之前注意到它需要更多信息来传达X和Y（“联合熵”，H(X,Y) 而不是仅仅需要 通信X（“边际熵”，H(X)）。但是，如果你已经知道Y，那么传递X（“条件熵”，H(X\|Y)）所需的信息比你没有做的要少！
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/Hxy-overview.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/Hxy-overview.png)
 
 这听起来有点复杂，但是当我们从条形图的角度来考虑时，它非常简单。H(X\|Y) 是我们需要发送以将X发送给已经知道Y的人的信息，X中的信息不在Y中。从可视化来看，这意味着H(X\|Y)是H(X)条的一部分，它与H(Y)不重叠。
 
@@ -544,7 +507,7 @@ $$
 
 ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/Hxy-info.png)
 
-## 分数位
+### 分数位
 
 关于信息论的一个非常不直观的事情是我们可以得到小数位。这很奇怪。 一半是什么意思？
 
@@ -553,22 +516,18 @@ $$
 但这个答案实际上是在回避这个问题。 通常，代码字的最佳长度是分数。 那是什么意思？
 
 具体来说，让我们考虑概率分布，其中一个事件a发生概率为71％，另一个事件b发生概率为29％。
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/halfbit-ab.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/halfbit-ab.png)
 
 最佳代码将使用0.5位来表示a，使用1.7位来表示b。 好吧，如果我们想发送这些代码字中的一个，这是不可能了。 我们被迫四舍五入到整数位，平均发送1位。
 
 ...但如果我们一次发送多条消息，事实证明我们可以做得更好。 让我们考虑从这个分发版中发送两个事件。 如果我们独立发送它们，我们需要发送两位。 我们可以做得更好吗？
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/halfbit-ab2.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/halfbit-ab2.png)
 
 有一半的时间，我们需要发送aa，21％的时间我们需要发送ab或ba和花费8%的通信时间bb。 同样，理想的代码涉及小数位。
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/halfbit-ab-idealcode.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/halfbit-ab-idealcode.png)
 
 如果我们四舍五入代码字的长度，我们会得到这样的结果：
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/halfbit-ab-code.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/halfbit-ab-code.png)
 
 此代码为我们提供了1.8位的平均消息长度。当我们独立发送它们时，它小于2位。另一种思考方式是我们平均每个事件发送0.9位。如果我们要一次发送更多事件，它会变得更小。由于n趋于无穷大，由于四舍五入我们的代码而导致的开销将消失，并且每个代码字的位数将接近熵。
 
@@ -629,11 +588,10 @@ Cover & Thomas的信息论元素似乎是标准参考。我发现这很有用。
 - 9. 有一整个量子信息论领域。 我对这个问题一无所知，但我敢打赌，基于Michael的其他工作，Michael Nielsen和Issac Chuang的Quantum Computation和Quantum Information是一个很好的介绍。[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref9)
 - 10. 作为一个对统计物理一无所知的人，我会非常紧张地试图勾勒出与我所理解的信息论的联系。
 
-	在Shannon发现信息论之后，许多人注意到热力学方程和信息论方程之间存在可疑的相似性。E.T. Jaynes 发现了一个非常深刻和有原则的联系。 假设您有一些系统，并进行一些测量，如压力和温度。 您认为系统的特定状态是多大概率？ Jaynes建议我们应该假设概率分布，在我们测量条件的约束下，它最大化熵。 （请注意，这个“最大熵原理”比物理学更为普遍！）也就是说，我们应该假设具有最未知信息的可能性。 从这个角度可以得出许多结果。
+在Shannon发现信息论之后，许多人注意到热力学方程和信息论方程之间存在可疑的相似性。E.T. Jaynes 发现了一个非常深刻和有原则的联系。 假设您有一些系统，并进行一些测量，如压力和温度。 您认为系统的特定状态是多大概率？ Jaynes建议我们应该假设概率分布，在我们测量条件的约束下，它最大化熵。 （请注意，这个“最大熵原理”比物理学更为普遍！）也就是说，我们应该假设具有最未知信息的可能性。 从这个角度可以得出许多结果。
 
-    （阅读杰恩斯论文的前几节([part 1](http://bayes.wustl.edu/etj/articles/theory.1.pdf), [part 2](http://bayes.wustl.edu/etj/articles/theory.2.pdf)) 他们十分易读切让我印象深刻）
-
-    如果您对这种联系感兴趣但又不想完成论文的原始工作，那么Cover＆Thomas中有一个部分可以从马尔可夫链中获得热力学第二定律的统计版本！[↩](https://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref10)
+-  （阅读杰恩斯论文的前几节([part 1](http://bayes.wustl.edu/etj/articles/theory.1.pdf), [part 2](http://bayes.wustl.edu/etj/articles/theory.2.pdf)) 他们十分易读切让我印象深刻）
+- 如果您对这种联系感兴趣但又不想完成论文的原始工作，那么Cover＆Thomas中有一个部分可以从马尔可夫链中获得热力学第二定律的统计版本！[↩](https://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref10)
 
 - 11. 信息理论与赌博之间的联系最初是由约翰凯利在他的论文“[信息率的新解释](http://www.princeton.edu/~wbialek/rome/refs/kelly_56.pdf)”中提出的。 这是一篇非常容易阅读的论文，虽然它需要我们在本文中没有提出的一些想法。
 
