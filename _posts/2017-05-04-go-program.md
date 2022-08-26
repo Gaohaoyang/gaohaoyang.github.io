@@ -1190,38 +1190,8 @@ fmt.println(newInt()) //1
 }
 ```
 
-## go routine
 
-Go Routine主要是使用go关键字来调用函数，还可以使用匿名函数。可以把go关键字调用的函数想像成pthread_create，创建线程。
- 
-```go
-package main
-import "fmt"
-func f(msg string) {
-    fmt.Println(msg)
-}
-func main(){
-    go f("goroutine")
- 
-    go func(msg string) {
-        fmt.Println(msg)
-    }("going")
-}
-```
 
-并发安全性
-- goroutine有个特性，也就是说，如果一个goroutine没有被阻塞，那么别的goroutine就不会得到执行。这并不是真正的并发，如果你要真正的并发，你需要在你的main函数的第一行加上下面的这段代码：
-
-```go
-import "runtime"
-...
-runtime.GOMAXPROCS(4)
-```
-
-以上代码存在并发安全性问题，需要上锁
-
-[参考地址](http://coolshell.cn/articles/8489.html)
- 
 ## 数据类型
 
 | 编号| 类型 | 说明 |
@@ -1814,39 +1784,289 @@ Go具有两个分配内存的机制，分别是内建的函数new和make。他�
 
 new不常使用
 
-## 通道channel
+## go routine
 
-通道是连接并发goroutine的管道。（队列，先进先出，非栈）
+### 高并发
+
+目前比较主流的并发实现方式：
+
+1. 多线程：每个线程一次处理一个请求，线程越多可并发处理的请求数就越多，但是在高并发下，多线程开销会比较大。
+2. 协程：无需抢占式的调度，开销小，可以有效的提高线程的并发性，从而避免了线程的缺点的部分
+3. 基于异步回调的IO模型
+  - 比如nginx使用的就是epoll模型，通过事件驱动的方式与异步IO回调，使得服务器持续运转，来支撑高并发的请求
+
+为了追求更高效和低开销的并发，golang的goroutine来了
+
+### go routine 简介
+
+goroutine的简介
+- 定义：在go里面，每一个并发执行的**活动**成为goroutine。
+- 详解：goroutine 是**轻量级**的**线程**，与创建线程相比，创建成本和开销都很小，每个goroutine的堆栈只有几kb，并且堆栈可根据程序的需要增长和缩小(线程的堆栈需指明和固定)，所以go程序从语言层面支持了**高并发**。
+- 程序执行的背后：当一个程序启动的时候，只有一个goroutine来调用main函数，称它为**主goroutine**，新的goroutine通过**go语句**进行创建。
+
+### go routine 使用
+
+Go Routine主要是使用go关键字来调用函数，还可以使用匿名函数。可以把go关键字调用的函数想像成pthread_create，创建线程。
+
+【2022-8-25】[一看就懂系列之Golang的goroutine和通道](https://blog.csdn.net/u011957758/article/details/81159481)
+
+#### 单个goroutine创建
+
+在函数或者方法前面加上关键字go，即创建一个并发运行的新goroutine
+- 注意：main函数返回时，所有的gourutine都是**暴力终结**的，然后程序退出。
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func HelloWorld() {
+	fmt.Println("Hello world goroutine")
+}
+
+func main() {
+	go HelloWorld() // 开启一个新的并发运行
+	time.Sleep(1*time.Second) // 执行速度很快，一定要加sleep，不然你一定可以看到goroutine里头的输出
+    // 匿名函数
+    go func(msg string) {
+        fmt.Println(msg)
+    }("going")
+    fmt.Println("我后面才输出来")
+}
+```
+
+输出：
+- Hello world goroutine
+- 我后面才输出来
+
+#### 多个goroutine创建
+
+当程序执行go FUNC()的时候，只是简单的调用然后就立即返回了，并不关心函数里头发生的故事情节，所以不同的goroutine直接不影响，main会继续按顺序执行语句。
+- DelayPrint里头有sleep，第二个goroutine并不会堵塞/等待
+
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func DelayPrint() {
+	for i := 1; i <= 4; i++ {
+		time.Sleep(250 * time.Millisecond)
+		fmt.Println(i)
+	}
+}
+
+func HelloWorld() {
+	fmt.Println("Hello world goroutine")
+}
+
+func main() {
+	go DelayPrint()    // 开启第一个goroutine
+	go HelloWorld()    // 开启第二个goroutine
+	time.Sleep(2*time.Second)
+	fmt.Println("main function")
+}
+```
+
+输出
+
+```shell
+Hello world goroutine
+1
+2
+3
+4
+5
+main function
+```
+
+### go routine 死锁
+
+并发安全性
+- goroutine有个特性，也就是说，如果一个goroutine没有被阻塞，那么别的goroutine就不会得到执行。这并不是真正的并发，如果你要真正的并发，你需要在你的main函数的第一行加上下面的这段代码：
+
+```go
+import "runtime"
+...
+runtime.GOMAXPROCS(4)
+```
+
+以上代码存在并发安全性问题，需要上锁
+- [参考地址](http://coolshell.cn/articles/8489.html)
+
+死锁现场
+
+```go
+// (1) 现场一
+package main
+
+func main() {
+	ch := make(chan int)
+	<- ch // 阻塞main goroutine, 通道被锁
+}
+// (2) 现场二
+package main
+
+func main() {
+	cha, chb := make(chan int), make(chan int)
+	go func() {
+		cha <- 1 // cha通道的数据没有被其他goroutine读取走，堵塞当前goroutine
+		chb <- 0
+	}()
+	<- chb // chb 等待数据的写
+}
+// (3) 例外
+func main() {
+    ch := make(chan int)
+    go func() {
+       ch <- 1
+    }()
+}
+```
+
+为什么会有死锁的产生？
+- 非缓冲通道上如果发生了流入无流出，或者流出无流入，就会引起死锁。
+- goroutine的非缓冲通道里头一定要一进一出，成对出现才行。
+
+上面例子属于：
+- (1) 流出无流入；
+  - fatal error: all goroutines are asleep - deadlock!
+- (2) 流入无流出
+  - fatal error: all goroutines are asleep - deadlock!
+- (3) 无报错，因为没有数据流入，不会被阻塞报错——goroutine还没执行完，main函数自己就跑完了
+
+如何解决死锁？
+1. 把没取走的取走便是
+1. 创建缓冲通道
+
+```go
+package main
+
+func main() {
+	cha, chb := make(chan int), make(chan int)
+	go func() {
+		cha <- 1 // cha通道的数据没有被其他goroutine读取走，堵塞当前goroutine
+		chb <- 0
+	}()
+	<- cha // 取走便是
+	<- chb // chb 等待数据的写
+}
+```
+
+```go
+package main
+
+func main() {
+	cha, chb := make(chan int, 3), make(chan int)
+	go func() {
+		cha <- 1 // cha通道的数据没有被其他goroutine读取走，堵塞当前goroutine
+		chb <- 0
+	}()
+	<- chb // chb 等待数据的写
+}
+```
+
+
+## 通道channel (goroutine间通信机制)
+
+### 什么是通道
+
+如果说`goroutine`是Go并发的**执行体**，那么`通道`就是他们之间的**连接**。
+- 通道: 让一个goroutine发送特定值到另外一个goroutine的**通信机制**
+- goroutine1 -> chan -> goroutine2
+
+通道是连接并发goroutine的`管道`。（`队列`，先进先出，非栈）
 - 可以从一个goroutine向通道发送值，并在另一个goroutine中接收到这些值。
-- 使用make(chan val-type)创建一个新通道，通道由输入的值传入。
+- 使用 make(chan val-type)创建一个**新通道**，通道由输入的值传入。
 - 使用通道 <- 语法将值发送到通道
 
-### 通道
+```go
+var ch chan int      // 声明一个传递int类型的channel
+ch := make(chan int) // 使用内置函数make()定义一个channel
+//=========
+ch <- value          // 将一个数据value写入至channel，这会导致阻塞，直到有其他goroutine从这个channel中读取数据
+value := <-ch        // 从channel中读取数据，如果channel之前没有写入数据，也会导致阻塞，直到channel中被写入数据为止
+// 注意：阻塞是默认的channel的接收和发送，其实也有非阻塞的
+//=========
+close(ch)            // 关闭channel
+```
+
+### 通道种类
+
+四种通道使用
+1. `无缓冲通道`
+  - 无缓冲通道上的发送操作将会被阻塞，直到另一个goroutine在对应的通道上执行接收操作，此时值才传送完成，两个goroutine都继续执行。
+1. `管道`：通道可以用来连接goroutine，这样一个的输出是另一个输入。
+  - goroutine1 -> chan -> goroutine2 -> chan -> goroutine3
+1. `单向通道类型`
+  - 当程序则够复杂的时候，为了代码可读性更高，拆分成一个一个的小函数是需要的。
+  - go提供了单向通道的类型，来实现函数之间channel的传递。
+1. `缓冲管道`
+  - goroutine的通道默认是是阻塞的，那么有什么办法可以缓解阻塞？加一个缓冲区。
+
+### 无缓冲通道
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+var done chan bool
+
+func HelloWorld() {
+	fmt.Println("Hello world goroutine")
+	time.Sleep(1*time.Second)
+	done <- true
+}
+func main() {
+	done = make(chan bool)  // 创建一个无缓冲channel
+	go HelloWorld()
+	<-done
+}
+```
+
+示例：
 
 ```go
 package main  
 import "fmt" 
 
 func main() {      
-// Create a new channel with `make(chan val-type)`.     
-// Channels are typed by the values they convey.     
-messages := make(chan string)//默认无缓冲，只能存储一个值
-messages := make(chan string, 2) //设置缓冲，存储2个值（先进先出）
-// _Send_ a value into a channel using the `channel <-`     
-// syntax. Here we send `"ping"`  to the `messages`     
-// channel we made above, from a new goroutine.     
-go func() { messages <- "ping" }() //匿名函数 
-// The `<-channel` syntax _receives_ a value from the     
-// channel. Here we'll receive the `"ping"` message     
-// we sent above and print it out.     
-msg := <-messages     
-fmt.Println(msg) 
+    // Create a new channel with `make(chan val-type)`.     
+    // Channels are typed by the values they convey.     
+    messages := make(chan string)//默认无缓冲，只能存储一个值
+    //messages := make(chan string, 2) //设置缓冲，存储2个值（先进先出）
+    // _Send_ a value into a channel using the `channel <-`     
+    // syntax. Here we send `"ping"`  to the `messages`     
+    // channel we made above, from a new goroutine.     
+    go func() { messages <- "ping" }() //匿名函数 
+    // The `<-channel` syntax _receives_ a value from the     
+    // channel. Here we'll receive the `"ping"` message     
+    // we sent above and print it out.     
+    msg := <-messages     
+    fmt.Println(msg) 
 }
 ```
 
 ### 缓冲通道
 
+goroutine的通道默认是是阻塞的，那么有什么办法可以缓解阻塞？
+- 答案是：加一个**缓冲区**。
+
 ```go
+ch := make(chan string, 3) // 创建了缓冲区为3的通道
+len(ch)   // 长度计算
+cap(ch)   // 容量计算
+//=========
 // Here we `make` a channel of strings buffering up to  2 values.     
 messages := make(chan string, 2)      
 // Because this channel is buffered, we can send these values into the channel without a corresponding concurrent receive.     
@@ -1857,6 +2077,78 @@ fmt.Println(<-messages)    
 fmt.Println(<-messages) //输出buffered、channel
 ```
 
+### 管道
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+var echo chan string
+var receive chan string
+
+// 定义goroutine 1 
+func Echo() {
+	time.Sleep(1*time.Second)
+	echo <- "咖啡色的羊驼"
+}
+
+// 定义goroutine 2
+func Receive() {
+	temp := <- echo // 阻塞等待echo的通道的返回
+	receive <- temp
+}
+
+func main() {
+	echo = make(chan string)
+	receive = make(chan string)
+	go Echo()
+	go Receive()
+	getStr := <-receive   // 接收goroutine 2的返回
+	fmt.Println(getStr)
+}
+```
+
+不一定要去关闭channel，因为底层的垃圾回收机制会根据它是否可以访问来决定是否自动回收它
+
+### 单向通道
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+// 定义goroutine 1
+func Echo(out chan<- string) {   // 定义输出通道类型
+	time.Sleep(1*time.Second)
+	out <- "咖啡色的羊驼"
+	close(out)
+}
+// 定义goroutine 2
+func Receive(out chan<- string, in <-chan string) { // 定义输出通道类型和输入类型
+	temp := <-in // 阻塞等待echo的通道的返回
+	out <- temp
+	close(out)
+}
+
+func main() {
+	echo := make(chan string)
+	receive := make(chan string)
+
+	go Echo(echo)
+	go Receive(receive, echo)
+
+	getStr := <-receive   // 接收goroutine 2的返回
+
+	fmt.Println(getStr)
+}
+```
+
+
 ### 通道通信
 
 类似信号量
@@ -1865,19 +2157,20 @@ fmt.Println(<-messages) //输出buffered、channel
 package main  
 import "fmt" 
 import "time"  
+
 // This is the function we'll run in a goroutine. The `done` channel will be used to notify another goroutine that this function's work is done. 
 func worker(done chan bool) {     
-fmt.Print("working...")     
-time.Sleep(time.Second)     
-fmt.Println("done")      
-// Send a value to notify that we're done.     
-done <- true 
+    fmt.Print("working...")     
+    time.Sleep(time.Second)     
+    fmt.Println("done")      
+    // Send a value to notify that we're done.     
+    done <- true 
 }  
 func main() {      
     // Start a worker goroutine, giving it the channel to   notify on.     
-done := make(chan bool, 1)     
-go worker(done)      
-// Block until we receive a notification from the  worker on the channel.        <-done 
+    done := make(chan bool, 1)     
+    go worker(done)      
+    // Block until we receive a notification from the  worker on the channel.        <-done 
 }
 ```
  
@@ -1887,7 +2180,178 @@ go worker(done)     
  
 ### select多通道等待
 
-Go语言的选择(select)可等待多个通道操作。将goroutine和channel与select结合是Go语言的一个强大功能。
+Go语言的`选择`(select)可等待多个通道操作。将goroutine和channel与select结合是Go语言的一个强大功能。
+
+定义：
+- select功能与epoll(nginx)/poll/select的功能类似，都是坚挺IO操作，当IO操作发生的时候，触发相应的动作。
+
+【2022-8-25】[一看就懂系列之Golang的goroutine和通道](https://blog.csdn.net/u011957758/article/details/81159481)
+
+#### select用法
+
+select有几个重要的点要强调：
+1. 如果有多个case都可以运行，select会随机公平地选出一个执行，其他不会执行
+2. case后面必须是channel操作，否则报错。
+3. select中的default子句总是可运行的。所以没有default的select才会阻塞等待事件
+4. 没有运行的case，那么将会阻塞事件发生报错(死锁)
+
+```go
+package main
+import "fmt"
+
+func main() {
+	ch := make (chan int, 1)
+	ch<-1 // 如果注释此句，会报错！没有输入 → 死锁报错
+	select {
+	case <-ch:
+		fmt.Println("咖啡色的羊驼")
+	case <-ch:
+		fmt.Println("黄色的羊驼")
+    //case 3: // case后面（3）非channel操作，报错！
+	//	fmt.Println("黄色的羊驼")
+    default: // default子句总是可运行的。没有default的select会阻塞等待事件
+		fmt.Println("黄色的羊驼")
+	}
+}
+// 输出：两种羊驼随机出现
+```
+
+#### select应用场景
+
+select应用场景
+1. timeout 机制(超时判断)
+2. 判断channel是否阻塞(或者说channel是否已经满了)
+3. 退出机制
+
+（1）超时判断
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	timeout := make (chan bool, 1)
+	go func() {
+		time.Sleep(1*time.Second) // 休眠1s，如果超过1s还没I操作则认为超时，通知select已经超时啦～
+		timeout <- true
+	}()
+	ch := make (chan int)
+	select {
+	case <- ch:
+	case <- timeout:
+		fmt.Println("超时啦!")
+	}
+}
+```
+
+正规版
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	ch := make (chan int)
+	select {
+	case <-ch:
+	case <-time.After(time.Second * 1): // 利用time来实现，After代表多少时间后执行输出东西
+		fmt.Println("超时啦!")
+	}
+}
+```
+
+（2）判断是否阻塞
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	ch := make (chan int, 1)  // 注意这里给的容量是1
+	ch <- 1
+	select {
+	case ch <- 2:
+	default:
+		fmt.Println("通道channel已经满啦，塞不下东西了!")
+	}
+}
+```
+
+（3）退出机制
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	i := 0
+	ch := make(chan string, 0)
+	defer func() {
+		close(ch)
+	}()
+
+	go func() {
+		DONE: 
+		for {
+			time.Sleep(1*time.Second)
+			fmt.Println(time.Now().Unix())
+			i++
+
+			select {
+			case m := <-ch:
+				println(m)
+				break DONE // 跳出 select 和 for 循环
+			default:
+			}
+		}
+	}()
+
+	time.Sleep(time.Second * 4)
+	ch<-"stop"
+}
+```
+
+
+#### select死锁
+
+select不注意也会发生死锁
+1. 如果没有数据需要发送，select中又存在接收通道数据的语句，那么将发送死锁
+1. 空select，也会引起死锁
+
+```go
+package main
+// （1）没有数据要发送
+func main() {  
+    ch := make(chan string)
+    select {
+    case <-ch:
+    }
+}
+// （2）空select
+package main
+
+func main() {  
+    select {}
+}
+
+```
+
+
 
 ### 超时等待
 
