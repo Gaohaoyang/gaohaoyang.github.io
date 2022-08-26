@@ -14,6 +14,7 @@ mathjax: true
 
 # 总结
 
+- 【2022-8-26】[数学与AI：AI的拓补几何基础](https://www.toutiao.com/article/7136025214269342247)
 - 【2020-9-9】[流形学习t-SNE，LLE，Isomap](https://www.toutiao.com/i6870113106081612292)
 - 【2020-9-19】流形学习前沿方向：隐图学习，[Latent graph neural networks: Manifold learning 2.0?](https://towardsdatascience.com/manifold-learning-2-99a25eeb677d)
 ![](https://wx2.sinaimg.cn/mw690/5396ee05ly1ginkjd7x4ij20d40aetdm.jpg)
@@ -434,24 +435,56 @@ c.render("新房驻场客服-query空间关系.html")
 
 # 流形学习
 
-- [Neural Networks, Manifolds, and Topology](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/)，中文翻译版：[神经网络、流形和拓扑](https://www.jianshu.com/p/12667309bf23)
-  - 一个双曲正切层tanh⁡(Wx+b)由以下组成：
-    - 1、由“权重”矩阵W的线性变换；
-    - 2、由矢量b的转换；
-    - 3、双曲正切函数的逐点应用。
-  - 连续变换如下图：
-  - ![](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/img/simple2_1.png)
-  - 更复杂的网络，4个隐含层网络，“原始”表示转移到更高层次为了对数据进行分类。而螺旋最初是纠结的，最终他们是线性可分的。
-  - ![](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/img/spiral.1-2.2-2-2-2-2-2.gif)
-  - ![](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/img/topology_2D-2D_train.gif)
-  - 更多动图可视化见：Andrej Karpathy有很好的演示基于[ConvnetJS](http://cs.stanford.edu/people/karpathy/convnetjs//demo/classify2d.html)，让您可以交互式地浏览网络
-  - 双曲正切层的拓扑
-    - 每一层都会拉伸和挤压空间，但永远不会切割、断裂和褶皱它。直观地说，tanh保留了拓扑性质。例如，一组数据将在转化后依然保持连接状态。
-    - 定理：<font color='blue'>具有N个输入和N个输出的层是同胚，如果权重矩阵W是非奇异的</font>
+[Neural Networks, Manifolds, and Topology](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/)，中文翻译版：[神经网络、流形和拓扑](https://www.jianshu.com/p/12667309bf23)
+- 一个双曲正切层tanh⁡(Wx+b)由以下组成：
+  - 1、由“权重”矩阵W的线性变换；
+  - 2、由矢量b的转换；
+  - 3、双曲正切函数的逐点应用。
+- 连续变换如下图：
+- ![](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/img/simple2_1.png)
+- 更复杂的网络，4个隐含层网络，“原始”表示转移到更高层次为了对数据进行分类。而螺旋最初是纠结的，最终他们是线性可分的。
+- ![](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/img/spiral.1-2.2-2-2-2-2-2.gif)
+- ![](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/img/topology_2D-2D_train.gif)
+- 更多动图可视化见：Andrej Karpathy有很好的演示基于[ConvnetJS](http://cs.stanford.edu/people/karpathy/convnetjs//demo/classify2d.html)，让您可以交互式地浏览网络
+- 双曲正切层的拓扑
+  - 每一层都会拉伸和挤压空间，但永远不会切割、断裂和褶皱它。直观地说，tanh保留了拓扑性质。例如，一组数据将在转化后依然保持连接状态。
+  - 定理：<font color='blue'>具有N个输入和N个输出的层是同胚，如果权重矩阵W是非奇异的</font>
 
 这样的转换，不影响拓扑结构，被称为同胚。在形式上，他们是连续函数的双向映射。
 
 作者：[树石](https://www.jianshu.com/p/4d9efddf8d54)
+
+【2022-8-26】[数学与AI：AI的拓补几何基础](https://www.toutiao.com/article/7136025214269342247)
+- 从几何角度而言，深度学习本质上是在学习高维背景空间中低维**数据流形**上的概率分布。
+- 流形结构的学习基于`Whitney流形嵌入`理论，由编码解码器来万有逼近；
+- 概率分布的学习依赖于`最优传输`理论，在Wasserstein空间中做变分优化；
+
+目前深度学习模型设计有内在缺陷，基本问题不可避免，例如模式坍塌。我们基于最优传输理论的几何观点，揭示模式坍塌的根本原因，提出基于几何变分的学习模型，提高计算准确性、稳定性和效率。
+
+Manifold Distribution Principle（流形分布定则）
+- Helmholtz Hypothesis （亥姆霍兹假设）
+  - 深度学习究竟在学什么？在脑神经科学中，有许多研究成果，其中一个叫做**Helmholtz假设**。这是说人类视觉中枢通过观看自然界的各种景象会产生相应的**概念**，这些概念都被记录在特定的神经元之中，从而形成某种表示。
+  - 数学语言：人脑视觉中的每个概念都可以归结于物理世界中的一个数据集，不同的概念实际上对应着不同的**概率分布**。
+  - 深度学习的第一步就是将这个曲面打到二维平面上，把每一个图像变成一个特征向量，从而实现了降维。深度学习所学习的概念最终是由概率统计的语言来描述的，某种特定的概率分布，这个概率分布是定义在高维背景空间中的某个低维数据流形上面的。
+- Low Dimensional Example （低维算例）
+  - 假设二维弥勒佛曲面嵌入在三维欧氏空间之中，曲面上存在一个均匀分布。对于深度学习而言，第一步就要实现降维，计算由三维曲面到二维平面的映射。
+  - ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/3cf8f95fb0a9449694a582cc9204f325~noop.image)
+  - ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/4b5af215fd114706aa2ced73d75d88cb~noop.image)
+  - 降维的过程被称为**编码**，逆过程被称为**解码**。两种编码映射都将弥勒佛曲面映到平面单位圆盘上。第一种是基于黎曼映照的保角变换，第二种是基于最优传输的保面元映射。
+  - 深度学习的终极目的：第一是学会模型的拓扑结构，实现降维并将其映射到特征空间上；第二要保留数据流形上本来的概率分布，在特征空间上的概率分布保持原来流形上的真实分布。
+- Central Tasks for DL （深度学习的中心任务）深度学习究竟想学什么？主要是有两个中心任务：
+  - （1）数据流形的拓扑结构
+  - （2）数据流形上的概率分布
+- Generative Model Framework （生成模型的框架
+  - ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/4da84eaa891d4dc3bdefeb5f6fbd1ded~noop.image)
+  - 上行中，`编码`映射将手写体数字流形映射到**特征空间**，将流形上的概率分布映射到隐空间上的概率分布；`解码`映射将隐空间映回数据流形。
+  - 下行中，`最优传输`映射将长方形内的均匀分布映射到隐空间中的数据分布，这里最优传输映射是某一凸函数的梯度映射，此凸函数被称为是`Brenier势能`。
+- Whitney Manifold Embedding（Whitney流形嵌入）
+  - Whitney流形定理是说任意给一个m维拓扑流形，我们可以将其嵌入在欧式空间中，欧氏空间的维数大约是流形维数的两倍。现在很多深度学习的算法本质上就是Whitney定理的实现。Whitney定理的证明需要先用一族开集覆盖流形，将每个开集嵌入到欧氏空间，然后用所谓的单位分解把局部嵌入整体粘起来得到一个全局嵌入。这时嵌入空间的维数等于流形的维数乘以开集的个数，我们在将嵌入的流形依次向低维线性子空间投影，直至无法进一步投影，这时子空间的维数等于流形维数的两倍。
+- Universal Approximation（万有逼近）
+  - 深度神经网络具有万有逼近的性质，即只要给定一个连续映射，给定任意的逼近精度，都存在某个深度神经网络来进行逼近。这个性质的理论基础实际上是来自Hilbert 第13问题：任意一个多变元的连续函数，都可以由两个单变元函的有限复合以任意精度来逼近。我们可以看到深度学习的逼近理论大多是基于这个定理。
+
+## 流形假设
 
 - **Manifold Hypothesis**（`流形假设`）
   - 流形假设：“自然的原始数据是低维的流形嵌入于(embedded in)原始数据所在的高维空间”
@@ -460,10 +493,8 @@ c.render("新房驻场客服-query空间关系.html")
 - 流形学习假设所有处于高维空间的数据点都分布在一个低维的流形上。流形学习的目的就在于寻找一种映射，从高维空间中恢复出低维流形来，从而利用流形的低维坐标表示高位空间的数据点，实现数据降维的目的。常用的算法有`Isomap`, `LLE`（Locally Linear Embedding）, `LE`（Laplacian Eigenmaps），`LLP`（Locality Preserving Projection）等
 
 - 虽然有一些维度缩减的变体是有监督的（例如线性/二次判别分析），**流形学习通常指的是无监督的降维**，其中类别没有提供给算法（虽然可能存在）
-
-![](https://p1-tt.byteimg.com/origin/pgc-image/18fd608d47914f9c90c2227d2dd56a9e)
-![](https://p3-tt.byteimg.com/origin/pgc-image/c0574ea8081f49af95604bb350657bd2)
-
+- ![](https://p1-tt.byteimg.com/origin/pgc-image/18fd608d47914f9c90c2227d2dd56a9e)
+- ![](https://p3-tt.byteimg.com/origin/pgc-image/c0574ea8081f49af95604bb350657bd2)
 
 - 降维的目的在于寻找数据的“内在变量”,如图，丢弃掉数据之间你的公共信息（“A”的形状），发掘数据之间的变化信息（缩放尺度及旋转角度）。由于缩放尺度与旋转角度并非是线性分布的，因此更适合采用非线性降维方法。
 ![](https://img-blog.csdnimg.cn/20190401202159198.jpg)
@@ -483,13 +514,13 @@ c.render("新房驻场客服-query空间关系.html")
 - [VC维来龙去脉](http://www.flickering.cn/machine_learning/2015/04/vc%E7%BB%B4%E7%9A%84%E6%9D%A5%E9%BE%99%E5%8E%BB%E8%84%89/)
 - [如何通俗的理解机器学习中的VC维、shatter和break point？](https://www.zhihu.com/question/38607822/answer/149407083)
 - 学习VC维要先知道的概念有：`增长函数`（growth function）、`对分`（dichotomy）、`打散`（shattering）和`断点`（break point）
-  - 1.增长函数
+  - 1. 增长函数
     - 增长函数表示假设空间H对m个示例所能赋予标记的最大可能结果数。
     - 比如说现在数据集有两个数据点，考虑一种二分类的情况，可以将其分类成A或者B，则可能的值有：AA、AB、BA和BB，所以这里增长函数的值为4.
     - 增长函数值越大则假设空间H的表示能力越强，复杂度也越高，学习任务的适应能力越强。不过尽管H中可以有无穷多的假设h，但是增长函数却不是无穷大的：对于m个示例的数据集，最多只能有2^m个标记结果，而且很多情况下也达不到2^m的情况。
-  - 2.对分
+  - 2. 对分
     - 对于二分类问题来说，H中的假设对D中m个示例赋予标记的每种可能结果称为对D的一种对分（dichotomy）。对分也是增长函数的一种上限。
-  - 3.打散
+  - 3. 打散
     - 打散指的是假设空间H能实现数据集D上全部示例的对分，即增长函数=2^m。但是认识到不打散是什么则更加重要
   - 4. 断点
     - 假设空间H的VC维数就是最大的非break point值，也就是break point-1
@@ -584,6 +615,7 @@ X_reduced=lle.fit_transform(X)
 ## t-SNE
 
 t-SNE是最广泛使用的可视化技术之一，但其性能在大型数据集中会受到影响。
+- t-SNE映射是可逆的连续双射，即**拓扑同胚**。
 
 
 ## UMAP
