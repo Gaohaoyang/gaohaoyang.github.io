@@ -1508,19 +1508,19 @@ i *p = 21         // 通过指针 p 设置 i
 | [Go指针数组](http://www.yiibai.com/go/go_array_of_pointers.html)| 可以定义数组来保存一些指针|
 | Go指针的指针| Go允许有指针指向指针等等|
 | 传递指针到函数| 通过引用或地址传递参数都允许被调用函数在调用函数中更改传递的参数。|
- 
+
+
 ## 结构体
 
-一个结构体( struct )就是一个字段的集合。(而 type 的含义跟其字面意思相符。)
+一个结构体(struct)就是一个字段的集合。(而type的含义跟其字面意思相符。)
 - Go的结构体和C的基本上一样，不过在初始化时有些不一样，Go支持带名字的初始化
 - go中的struct可以实现oop中的类、方法。go语言中的struct成员可以是任何类型，如普通类型、复合类型、函数、struct、interface等。
- 
+
 ```go
 type Vertex struct {
     X int     
     Y int 
 }
-
 func main() {     
     fmt.Println(Vertex{1, 2}) //大括号！初始化
     fmt.Println(v.X)
@@ -1533,9 +1533,9 @@ func main() {    
     p  = &Vertex{1, 2} // 类型为 *Vertex
 }
 ```
- 
-注意：Go语言中没有public, protected, private的关键字，所以，如果你想让一个方法可以被别的包访问的话，你需要把这个方法的第一个字母大写。这是一种约定。
 
+注意：
+- Go语言中没有public, protected, private的关键字，所以，如果想让一个方法可以被别的包访问的话，就需要把这个方法的第一个字母大写。这是一种约定。
 
 ```go
 // 【2017-6-8】
