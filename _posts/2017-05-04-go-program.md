@@ -5,7 +5,7 @@ subtitle:  新语言
 date:   2017-05-04 15:17:00
 author:  wangqiwen
 categories: 编程语言
-tags: go web 输入提示 模型部署 hertz oop 面向对象
+tags: go Go web 输入提示 模型部署 hertz oop 面向对象
 excerpt: 编程语言知识点
 mathjax: true
 header-img: img/post-bg-ios10.jpg
@@ -2477,8 +2477,311 @@ func main() {
 }
 ```
 
+## 设计模式
 
-# 辅助功能
+[go设计模式实践](https://lailin.xyz/post/go-design-pattern.html)
+- [代码仓库](https://github.com/mohuishou/go-design-pattern)
+
+### 设计原则
+
+SOLID设计原则
+- ![](https://img.lailin.xyz/image/1612154616603-6328f638-0536-407e-afdf-7f2b33a97f91.jpeg)
+
+### go设计模式
+
+Go 设计模式
+- 单例模式包含饿汉式和懒汉式两种实现
+- 工厂模式包含简单工厂、工厂方法、抽象工厂、DI 容器
+- 代理模式包含静态代理、动态代理（采用 go generate 模拟）
+- 观察者模式包含观察者模式、eventbus
+
+汇总: [img](https://img.lailin.xyz/image/1612154618733-bb131bea-bf76-4244-bb78-8bed8bfdddf1.jpeg)
+- ![](https://img.lailin.xyz/image/1612154618733-bb131bea-bf76-4244-bb78-8bed8bfdddf1.jpeg)
+
+|  **类型**  |                                                  **设计模式（Github）**                                                   | **常用** |                                       **博客**                                        |
+| :--------: | :-----------------------------------------------------------------------------------------------------------------------: | :------: | :-----------------------------------------------------------------------------------: |
+| **创建型** |       [单例模式(Singleton Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/01_singleton)       |    ✅     |            [Go设计模式01-单例模式](https://lailin.xyz/post/singleton.html)            |
+|            |         [工厂模式(Factory Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/02_factory)         |    ✅     |         [Go设计模式02-工厂模式&DI容器](https://lailin.xyz/post/factory.html)          |
+|            |        [建造者模式(Builder Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/03_builder)        |    ✅     |            [Go设计模式03-建造者模式](https://lailin.xyz/post/builder.html)            |
+|            |       [原型模式(Prototype Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/04_prototype)       |    ❌     |            [Go设计模式04-原型模式](https://lailin.xyz/post/prototype.html)            |
+| **结构型** |           [代理模式(Proxy Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/05_proxy)           |    ✅     | [Go设计模式06-代理模式(generate实现类似动态代理)](https://lailin.xyz/post/proxy.html) |
+|            |          [桥接模式(Bridge Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/06_bridge)          |    ✅     |             [Go设计模式07-桥接模式](https://lailin.xyz/post/bridge.html)              |
+|            |      [装饰器模式(Decorator Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/07_decorator)      |    ✅     |           [Go设计模式08-装饰器模式](https://lailin.xyz/post/decorator.html)           |
+|            |        [适配器模式(Adapter Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/08_adapter)        |    ✅     |            [Go设计模式09-适配器模式](https://lailin.xyz/post/adapter.html)            |
+|            |          [门面模式(Facade Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/09_facade)          |    ❌     |             [Go设计模式10-门面模式](https://lailin.xyz/post/facade.html)              |
+|            |       [组合模式(Composite Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/10_composite)       |    ❌     |            [Go设计模式11-组合模式](https://lailin.xyz/post/composite.html)            |
+|            |       [享元模式(Flyweight Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/11_flyweight)       |    ❌     |            [Go设计模式12-享元模式](https://lailin.xyz/post/flyweight.html)            |
+| **行为型** |       [观察者模式(Observer Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/12_observer)       |    ✅     | [Go设计模式13-观察者模式(实现简单的EventBus)](https://lailin.xyz/post/observer.html)  |
+|            |    [模板模式(Template Method Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/13_template)     |    ✅     |            [Go模板模式14-模板模式](https://lailin.xyz/post/template.html)             |
+|            |    [策略模式(Strategy Method Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/14_strategy)     |    ✅     |            [Go设计模式15-策略模式](https://lailin.xyz/post/strategy.html)             |
+|            | [职责链模式(Chain Of Responsibility Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/15_chain) |    ✅     |    [Go设计模式16-职责链模式(Gin的中间件实现)](https://lailin.xyz/post/chain.html)     |
+|            |           [状态模式(State Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/16_state)           |    ✅     |              [Go设计模式17-状态模式](https://lailin.xyz/post/state.html)              |
+|            |       [迭代器模式(Iterator Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/17_iterator)       |    ✅     |           [Go设计模式18-迭代器模式](https://lailin.xyz/post/iterator.html)            |
+|            |  [访问者模式(Visitor Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/18_visitor/visitor.go)   |    ❌     |            [Go设计模式19-访问者模式](https://lailin.xyz/post/visitor.html)            |
+|            |        [备忘录模式(Memento Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/19_memento)        |    ❌     |            [Go设计模式20-备忘录模式](https://lailin.xyz/post/memento.html)            |
+|            |         [命令模式(Command Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/20_command)         |    ❌     |             [Go设计模式21-命令模式](https://lailin.xyz/post/command.html)             |
+|            |    [解释器模式(Interpreter Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/21_interpreter)    |    ❌     |          [Go设计模式22-解释器模式](https://lailin.xyz/post/interpreter.html)          |
+|            |        [中介模式(Mediator Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/22_mediator)        |    ❌     |            [Go设计模式23-中介模式](https://lailin.xyz/post/mediator.html)             |
+
+# 专项功能
+
+## 命令行参数
+
+```go
+package main
+ 
+import (
+    "flag"
+    "fmt"
+    "os"
+)
+//先编译 go build -o args.exe args_test.go
+//执行 args.exe -name ..
+func main() {
+    // ----- 第一种 ------
+    //获取命令行参数
+    //fmt.Print(os.Args)
+    for i,v := range os.Args{
+        fmt.Print(i,v)
+    }
+     
+    //------ 第二种 ------
+    //自定义命令行参数
+    //定义参数
+    //String代表获取的参数类型为字符串，参数的名字为-name，值默认为空，usage为提示
+    namePtr := flag.String("name", "", "姓名")
+    agePtr := flag.Int("age",18,"年龄")
+    rmbPtr := flag.Float64("rmb",10000,"资产")
+    alivePtr := flag.Bool("alive",true,"是否健在")
+ 
+    //解析获取参数，丢入参数的指针中
+    flag.Parse()
+    fmt.Print(*namePtr,*agePtr,*rmbPtr,*alivePtr)
+ 
+    //------ 第三种 ------
+    //var name *string 这里在栈里面占了名字，但是没有分配内存空间，所以没有地址
+    //  //flag.StringVar(name,"name", "", "姓名")
+    var name string//这里是有地址的
+    var age int
+    var rmb float64
+    var alive bool
+    flag.StringVar(&name,"name", "", "姓名")
+    flag.IntVar(&age,"age",18,"年龄")
+    flag.Float64Var(&rmb,"rmb",10000,"资产")
+    flag.BoolVar(&alive,"alive",true,"是否健在")
+    flag.Parse()
+    fmt.Print(name,age,rmb,alive)
+}
+```
+
+## os库
+
+```go
+package main
+ 
+import (
+    "fmt"
+    "os"
+)
+ 
+func main(){
+    //获得当前工作目录：默认当前工程目录
+    dir,err := os.Getwd()
+    fmt.Print(dir)
+    fmt.Print(err)
+ 
+    //获得指定环境变量
+    //paths := os.Getenv(key:"Path")
+    //goroot := os.Getenv(key:"GOROOT")
+    //fmt.Print(paths)
+    //fmt.Print(goroot)
+ 
+ 
+    //修改文件访问时间和修改时间
+    //err2 := os.Chtimes(
+    //  name:"",
+    //  time.Now().AddDate(years:-1,months:0,days:0)
+    //  )
+ 
+    //获得所有环境变量
+    envs := os.Environ()
+    for _,env :=  range envs{
+        fmt.Print(env)
+    }
+ 
+    //在网络中的主机名
+    hostname,err := os.Hostname()
+    if err == nil {
+        fmt.Print(hostname)
+    }else {
+        fmt.Print("出错了")
+    }
+ 
+    //获得系统的临时文件夹路径：临时数据的保存路径
+    fmt.Print(os.TempDir())
+ 
+    //判断某字符是否路径分隔符
+    fmt.Print("//是路径分隔符吗？",os.IsPathSeparator('\\'))
+    //fmt.Print("\\是路径分隔符吗？",os.IsPathSeparator(c:'\'))
+    fmt.Print("$是路径分隔符吗？",os.IsPathSeparator('\\'))
+ 
+    //fmt.Print(os.IsPathSeparator(c:'\\'))
+    //fmt.Print(os.IsPathSeparator(c:'$'))
+ 
+    //获得文件信息
+    fileInfo,err := os.Stat("C:/users/...")
+    if err == nil {
+        fmt.Print(fileInfo)
+    }else {
+        fmt.Print("出错了")
+    }
+}
+```
+
+## 时间处理
+
+time库使用
+
+```go
+package main
+
+import (
+"time"
+"fmt"
+)
+ 
+func main(){
+    //本地时间
+    nowTime := time.Now()
+    //年月日
+    year := nowTime.Year()
+    fmt.Printf("%s",year)
+    month := nowTime.Month()
+    fmt.Printf("%s",month)
+    y,m,d := nowTime.Date()
+    fmt.Printf("%d:%d:%d",y,m,d)
+    //周月年中的第几天
+    day := nowTime.Day()
+    fmt.Printf("%d",day)
+    yearDay := nowTime.YearDay()
+    fmt.Printf("%d",yearDay)
+    weekDay := nowTime.Weekday()
+    fmt.Printf("%d",weekDay)
+    //时分秒
+    fmt.Printf("%s",nowTime.Hour())
+    fmt.Printf("%s",nowTime.Minute())
+    fmt.Printf("%s",nowTime.Second())
+    fmt.Printf("%s",nowTime.Nanosecond())
+    //创建时间
+    date := time.Date(2019,time.September,8,15,0,0,0,time.Now().Location())
+    fmt.Printf("%s",date)
+    //Add方法和Sub方法是相反的
+    //获取t0和t1的时间距离d是使用Sub
+    //将t0加d获取t1就是使用Add方法
+    now := time.Now()
+    //一天之前
+    duration,_ := time.ParseDuration("-24h0m0s")
+    fmt.Printf("%s",now.Add(duration))
+    //一周之前
+    fmt.Printf("%s",now.Add(duration * 7))
+    //一月之前
+    fmt.Printf("%s",now.Add(duration * 30))
+    //计算时间差
+    fmt.Printf("%s",now.Sub(now.Add(duration)))
+}
+```
+
+
+```go
+// 01: 获取当前时间
+dateTime := time.Now()
+fmt.Println(dateTime)
+// 02: 获取年 月 日 时 分 秒 纳秒
+year := time.Now().Year() //年
+fmt.Println(year)
+month := time.Now().Month() //月
+fmt.Println(month)
+day := time.Now().Day() //日
+fmt.Println(day)
+hour := time.Now().Hour() //小时
+fmt.Println(hour)
+minute := time.Now().Minute() //分钟
+fmt.Println(minute)
+second := time.Now().Second() //秒
+fmt.Println(second)
+nanosecond := time.Now().Nanosecond() //纳秒
+fmt.Println(nanosecond)
+// 03: 获取当前时间戳
+timeUnix := time.Now().Unix()         //单位秒
+timeUnixNano := time.Now().UnixNano() //单位纳秒
+fmt.Println(timeUnix)
+fmt.Println(timeUnixNano)
+// 04: 将时间戳格式化
+fmt.Println(time.Now().Format("2006-01-02 15:04:05"))
+// 05: 时间戳转为go格式的时间
+var timeUnix int64 = 1562555859
+fmt.Println(time.Unix(timeUnix,0))
+// 之后可以用Format 比如
+fmt.Println(time.Unix(timeUnix, 0).Format("2006-01-02 15:04:05"))
+// 06: str格式化时间转时间戳
+t := time.Date(2014, 1, 7, 5, 50, 4, 0, time.Local).Unix()
+fmt.Println(t)
+// 时间的计算
+// 01: 获取今天0点0时0分的时间戳
+currentTime := time.Now()
+startTime := time.Date(currentTime.Year(), currentTime.Month(), currentTime.Day(), 0, 0, 0, 0, currentTime.Location())
+fmt.Println(startTime)
+fmt.Println(startTime.Format("2006/01/02 15:04:05"))
+// 02: 获取今天23:59:59秒的时间戳
+currentTime := time.Now()
+endTime := time.Date(currentTime.Year(), currentTime.Month(), currentTime.Day(), 23, 59, 59, 0, currentTime.Location())
+fmt.Println(endTime)
+fmt.Println(endTime.Format("2006/01/02 15:04:05"))
+// 03: 获取1分钟之前的时间
+m, _ := time.ParseDuration("-1m")
+result := currentTime.Add(m)
+fmt.Println(result)
+fmt.Println(result.Format("2006/01/02 15:04:05"))
+// 04: 获取1小时之前的时间
+m, _ := time.ParseDuration("-1h")
+result := currentTime.Add(m)
+fmt.Println(result)
+fmt.Println(result.Format("2006/01/02 15:04:05"))
+// 05: 获取1分钟之后的时间
+m, _ := time.ParseDuration("1m")
+result := currentTime.Add(m)
+fmt.Println(result)
+fmt.Println(result.Format("2006/01/02 15:04:05"))
+// 06: 获取1小时之后的时间
+m, _ := time.ParseDuration("1h")
+result := currentTime.Add(m)
+fmt.Println(result)
+fmt.Println(result.Format("2006/01/02 15:04:05"))
+// 07 :计算两个时间戳
+afterTime, _ := time.ParseDuration("1h")
+result := currentTime.Add(afterTime)
+beforeTime, _ := time.ParseDuration("-1h")
+result2 := currentTime.Add(beforeTime)
+m := result.Sub(result2)
+fmt.Printf("%v 分钟 \n", m.Minutes())
+h := result.Sub(result2)
+fmt.Printf("%v小时 \n", h.Hours())
+d := result.Sub(result2)
+fmt.Printf("%v 天\n", d.Hours()/24)
+// 08: 判断一个时间是否在一个时间之后
+stringTime, _ := time.Parse("2006-01-02 15:04:05", "2019-12-12 12:00:00")
+beforeOrAfter := stringTime.After(time.Now())
+if true == beforeOrAfter {
+    fmt.Println("2019-12-12 12:00:00在当前时间之后!")
+} else {
+    fmt.Println("2019-12-12 12:00:00在当前时间之前!")
+}
+// 09: 判断一个时间相比另外一个时间过去了多久
+startTime := time.Now()
+time.Sleep(time.Second * 5)
+fmt.Println("离现在过去了：", time.Since(startTime))
+```
+
 
 ## 正则表达式（regexp）
 
