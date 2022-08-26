@@ -1454,7 +1454,14 @@ default:  fmt.Printf("%s.", os)    
 
 Go语言引入了Defer来确保那些被打开的文件能被关闭
 
-Go的defer语句预设一个函数调用（延期的函数），该调用在函数执行defer返回时立刻运行。该方法显得不同常规，但却是处理上述情况很有效，无论函数怎样返回，都必须进行资源释放。
+Go的defer语句预设一个函数调用（延期的函数），该调用在函数执行defer返回时立刻运行。该方法显得不同常规，但却是处理上述情况很有效，无论函数怎样返回，都必须进行资源释放。[img](https://ask.qcloudimg.com/http-save/yehe-3346134/4hqkf6c9jv.jpeg?imageView2/2/w/1620)
+- ![](https://ask.qcloudimg.com/http-save/yehe-3346134/4hqkf6c9jv.jpeg?imageView2/2/w/1620)
+- [聊聊golang的defer](https://cloud.tencent.com/developer/article/1755347)
+
+defer
+- return先赋值(对于命名返回值)，然后执行defer，最后函数返回
+- defer函数调用的执行顺序与它们分别所属的defer语句的执行顺序相反
+- defer后面的表达式可以是func或者是method的调用，如果defer的函数为nil，则会panic
 
 一个defer函数的示例：
 
@@ -1790,9 +1797,9 @@ new不常使用
 
 目前比较主流的并发实现方式：
 
-1. 多线程：每个线程一次处理一个请求，线程越多可并发处理的请求数就越多，但是在高并发下，多线程开销会比较大。
-2. 协程：无需抢占式的调度，开销小，可以有效的提高线程的并发性，从而避免了线程的缺点的部分
-3. 基于异步回调的IO模型
+1. **多线程**：每个线程一次处理一个请求，线程越多可并发处理的请求数就越多，但是在高并发下，多线程开销会比较大。
+2. **协程**：无需抢占式的调度，开销小，可以有效的提高线程的并发性，从而避免了线程的缺点的部分
+3. 基于**异步回调**的IO模型
   - 比如nginx使用的就是epoll模型，通过事件驱动的方式与异步IO回调，使得服务器持续运转，来支撑高并发的请求
 
 为了追求更高效和低开销的并发，golang的goroutine来了
@@ -2010,6 +2017,11 @@ close(ch)            // 关闭channel
   - go提供了单向通道的类型，来实现函数之间channel的传递。
 1. `缓冲管道`
   - goroutine的通道默认是是阻塞的，那么有什么办法可以缓解阻塞？加一个缓冲区。
+
+图解
+- [The Nature Of Channels In Go](https://www.ardanlabs.com/blog/2014/02/the-nature-of-channels-in-go.html)
+- ![](https://www.ardanlabs.com/images/goinggo/Screen+Shot+2014-02-16+at+10.10.54+AM.png)
+- ![](https://www.ardanlabs.com/images/goinggo/Screen+Shot+2014-02-17+at+8.38.15+AM.png)
 
 ### 无缓冲通道
 
