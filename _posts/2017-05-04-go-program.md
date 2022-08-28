@@ -5,7 +5,7 @@ subtitle:  新语言
 date:   2017-05-04 15:17:00
 author:  wangqiwen
 categories: 编程语言
-tags: go web 输入提示 模型部署 hertz oop 面向对象
+tags: go Go web 输入提示 模型部署 hertz oop 面向对象
 excerpt: 编程语言知识点
 mathjax: true
 header-img: img/post-bg-ios10.jpg
@@ -1703,6 +1703,29 @@ func main() {
 }
 ```
 
+注意：没有break！
+
+## Defer栈
+
+Go语言引入了Defer来确保那些被打开的文件能被关闭
+
+Go的defer语句预设一个函数调用（延期的函数），该调用在函数执行defer返回时立刻运行。该方法显得不同常规，但却是处理上述情况很有效，无论函数怎样返回，都必须进行资源释放。[img](https://ask.qcloudimg.com/http-save/yehe-3346134/4hqkf6c9jv.jpeg?imageView2/2/w/1620)
+- ![](https://ask.qcloudimg.com/http-save/yehe-3346134/4hqkf6c9jv.jpeg?imageView2/2/w/1620)
+- [聊聊golang的defer](https://cloud.tencent.com/developer/article/1755347)
+
+defer
+- return先赋值(对于命名返回值)，然后执行defer，最后函数返回
+- defer函数调用的执行顺序与它们分别所属的defer语句的执行顺序相反
+- defer后面的表达式可以是func或者是method的调用，如果defer的函数为nil，则会panic
+
+一个defer函数的示例：
+
+```go
+for i := 0; i < 5; i++ {  
+    defer fmt.Printf("%d ", i) 
+}
+```
+
 注意：<font color='red'>没有break！</font>
 
 ## 指针
@@ -1726,7 +1749,8 @@ i *p = 21         // 通过指针 p 设置 i
 | [Go指针数组](http://www.yiibai.com/go/go_array_of_pointers.html)| 可以定义数组来保存一些指针|
 | Go指针的**指针**| Go允许有指针指向指针等等|
 | 传递指针到函数| 通过引用或地址传递参数都允许被调用函数在调用函数中更改传递的参数。|
- 
+
+
 ## 结构体
 
 一个`结构体`( struct )就是一个字段的**集合**。(而 type 的含义跟其字面意思相符。)
@@ -1928,14 +1952,265 @@ Go具有两个分配内存的机制，分别是内建的函数`new`和`make`。�
 
 new不常使用
 
-## 通道channel
+## go routine
 
-通道是连接并发goroutine的管道。（队列，先进先出，非栈）
+### 高并发
+
+目前比较主流的并发实现方式：
+
+1. **多线程**：每个线程一次处理一个请求，线程越多可并发处理的请求数就越多，但是在高并发下，多线程开销会比较大。
+2. **协程**：无需抢占式的调度，开销小，可以有效的提高线程的并发性，从而避免了线程的缺点的部分
+3. 基于**异步回调**的IO模型
+  - 比如nginx使用的就是epoll模型，通过事件驱动的方式与异步IO回调，使得服务器持续运转，来支撑高并发的请求
+
+为了追求更高效和低开销的并发，golang的goroutine来了
+
+### go routine 简介
+
+goroutine的简介
+- 定义：在go里面，每一个并发执行的**活动**成为goroutine。
+- 详解：goroutine 是**轻量级**的**线程**，与创建线程相比，创建成本和开销都很小，每个goroutine的堆栈只有几kb，并且堆栈可根据程序的需要增长和缩小(线程的堆栈需指明和固定)，所以go程序从语言层面支持了**高并发**。
+- 程序执行的背后：当一个程序启动的时候，只有一个goroutine来调用main函数，称它为**主goroutine**，新的goroutine通过**go语句**进行创建。
+
+### go routine 使用
+
+Go Routine主要是使用go关键字来调用函数，还可以使用匿名函数。可以把go关键字调用的函数想像成pthread_create，创建线程。
+
+【2022-8-25】[一看就懂系列之Golang的goroutine和通道](https://blog.csdn.net/u011957758/article/details/81159481)
+
+#### 单个goroutine创建
+
+在函数或者方法前面加上关键字go，即创建一个并发运行的新goroutine
+- 注意：main函数返回时，所有的gourutine都是**暴力终结**的，然后程序退出。
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func HelloWorld() {
+	fmt.Println("Hello world goroutine")
+}
+
+func main() {
+	go HelloWorld() // 开启一个新的并发运行
+	time.Sleep(1*time.Second) // 执行速度很快，一定要加sleep，不然你一定可以看到goroutine里头的输出
+    // 匿名函数
+    go func(msg string) {
+        fmt.Println(msg)
+    }("going")
+    fmt.Println("我后面才输出来")
+}
+```
+
+输出：
+- Hello world goroutine
+- 我后面才输出来
+
+#### 多个goroutine创建
+
+当程序执行go FUNC()的时候，只是简单的调用然后就立即返回了，并不关心函数里头发生的故事情节，所以不同的goroutine直接不影响，main会继续按顺序执行语句。
+- DelayPrint里头有sleep，第二个goroutine并不会堵塞/等待
+
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func DelayPrint() {
+	for i := 1; i <= 4; i++ {
+		time.Sleep(250 * time.Millisecond)
+		fmt.Println(i)
+	}
+}
+
+func HelloWorld() {
+	fmt.Println("Hello world goroutine")
+}
+
+func main() {
+	go DelayPrint()    // 开启第一个goroutine
+	go HelloWorld()    // 开启第二个goroutine
+	time.Sleep(2*time.Second)
+	fmt.Println("main function")
+}
+```
+
+输出
+
+```shell
+Hello world goroutine
+1
+2
+3
+4
+5
+main function
+```
+
+### go routine 死锁
+
+并发安全性
+- goroutine有个特性，也就是说，如果一个goroutine没有被阻塞，那么别的goroutine就不会得到执行。这并不是真正的并发，如果你要真正的并发，你需要在你的main函数的第一行加上下面的这段代码：
+
+```go
+import "runtime"
+...
+runtime.GOMAXPROCS(4)
+```
+
+以上代码存在并发安全性问题，需要上锁
+- [参考地址](http://coolshell.cn/articles/8489.html)
+
+死锁现场
+
+```go
+// (1) 现场一
+package main
+
+func main() {
+	ch := make(chan int)
+	<- ch // 阻塞main goroutine, 通道被锁
+}
+// (2) 现场二
+package main
+
+func main() {
+	cha, chb := make(chan int), make(chan int)
+	go func() {
+		cha <- 1 // cha通道的数据没有被其他goroutine读取走，堵塞当前goroutine
+		chb <- 0
+	}()
+	<- chb // chb 等待数据的写
+}
+// (3) 例外
+func main() {
+    ch := make(chan int)
+    go func() {
+       ch <- 1
+    }()
+}
+```
+
+为什么会有死锁的产生？
+- 非缓冲通道上如果发生了流入无流出，或者流出无流入，就会引起死锁。
+- goroutine的非缓冲通道里头一定要一进一出，成对出现才行。
+
+上面例子属于：
+- (1) 流出无流入；
+  - fatal error: all goroutines are asleep - deadlock!
+- (2) 流入无流出
+  - fatal error: all goroutines are asleep - deadlock!
+- (3) 无报错，因为没有数据流入，不会被阻塞报错——goroutine还没执行完，main函数自己就跑完了
+
+如何解决死锁？
+1. 把没取走的取走便是
+1. 创建缓冲通道
+
+```go
+package main
+
+func main() {
+	cha, chb := make(chan int), make(chan int)
+	go func() {
+		cha <- 1 // cha通道的数据没有被其他goroutine读取走，堵塞当前goroutine
+		chb <- 0
+	}()
+	<- cha // 取走便是
+	<- chb // chb 等待数据的写
+}
+```
+
+```go
+package main
+
+func main() {
+	cha, chb := make(chan int, 3), make(chan int)
+	go func() {
+		cha <- 1 // cha通道的数据没有被其他goroutine读取走，堵塞当前goroutine
+		chb <- 0
+	}()
+	<- chb // chb 等待数据的写
+}
+```
+
+
+## 通道channel (goroutine间通信机制)
+
+### 什么是通道
+
+如果说`goroutine`是Go并发的**执行体**，那么`通道`就是他们之间的**连接**。
+- 通道: 让一个goroutine发送特定值到另外一个goroutine的**通信机制**
+- goroutine1 -> chan -> goroutine2
+
+通道是连接并发goroutine的`管道`。（`队列`，先进先出，非栈）
 - 可以从一个goroutine向通道发送值，并在另一个goroutine中接收到这些值。
-- 使用make(chan val-type)创建一个新通道，通道由输入的值传入。
+- 使用 make(chan val-type)创建一个**新通道**，通道由输入的值传入。
 - 使用通道 <- 语法将值发送到通道
 
 ### 通道定义
+
+
+```go
+var ch chan int      // 声明一个传递int类型的channel
+ch := make(chan int) // 使用内置函数make()定义一个channel
+//=========
+ch <- value          // 将一个数据value写入至channel，这会导致阻塞，直到有其他goroutine从这个channel中读取数据
+value := <-ch        // 从channel中读取数据，如果channel之前没有写入数据，也会导致阻塞，直到channel中被写入数据为止
+// 注意：阻塞是默认的channel的接收和发送，其实也有非阻塞的
+//=========
+close(ch)            // 关闭channel
+```
+
+### 通道种类
+
+四种通道使用
+1. `无缓冲通道`
+  - 无缓冲通道上的发送操作将会被阻塞，直到另一个goroutine在对应的通道上执行接收操作，此时值才传送完成，两个goroutine都继续执行。
+1. `管道`：通道可以用来连接goroutine，这样一个的输出是另一个输入。
+  - goroutine1 -> chan -> goroutine2 -> chan -> goroutine3
+1. `单向通道类型`
+  - 当程序则够复杂的时候，为了代码可读性更高，拆分成一个一个的小函数是需要的。
+  - go提供了单向通道的类型，来实现函数之间channel的传递。
+1. `缓冲管道`
+  - goroutine的通道默认是是阻塞的，那么有什么办法可以缓解阻塞？加一个缓冲区。
+
+图解
+- [The Nature Of Channels In Go](https://www.ardanlabs.com/blog/2014/02/the-nature-of-channels-in-go.html)
+- ![](https://www.ardanlabs.com/images/goinggo/Screen+Shot+2014-02-16+at+10.10.54+AM.png)
+- ![](https://www.ardanlabs.com/images/goinggo/Screen+Shot+2014-02-17+at+8.38.15+AM.png)
+
+### 无缓冲通道
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+var done chan bool
+
+func HelloWorld() {
+	fmt.Println("Hello world goroutine")
+	time.Sleep(1*time.Second)
+	done <- true
+}
+func main() {
+	done = make(chan bool)  // 创建一个无缓冲channel
+	go HelloWorld()
+	<-done
+}
+```
+
+示例：
 
 ```go
 package main  
@@ -1945,7 +2220,7 @@ func main() {     
     // Create a new channel with `make(chan val-type)`.     
     // Channels are typed by the values they convey.     
     messages := make(chan string)//默认无缓冲，只能存储一个值
-    messages := make(chan string, 2) //设置缓冲，存储2个值（先进先出）
+    // messages := make(chan string, 2) //设置缓冲，存储2个值（先进先出）
     // _Send_ a value into a channel using the `channel <-`     
     // syntax. Here we send `"ping"`  to the `messages`     
     // channel we made above, from a new goroutine.     
@@ -1960,7 +2235,14 @@ func main() {     
 
 ### 缓冲通道
 
+goroutine的通道默认是是阻塞的，那么有什么办法可以缓解阻塞？
+- 答案是：加一个**缓冲区**。
+
 ```go
+ch := make(chan string, 3) // 创建了缓冲区为3的通道
+len(ch)   // 长度计算
+cap(ch)   // 容量计算
+//=========
 // Here we `make` a channel of strings buffering up to  2 values.     
 messages := make(chan string, 2)      
 // Because this channel is buffered, we can send these values into the channel without a corresponding concurrent receive.     
@@ -1971,6 +2253,78 @@ fmt.Println(<-messages)    
 fmt.Println(<-messages) //输出buffered、channel
 ```
 
+### 管道
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+var echo chan string
+var receive chan string
+
+// 定义goroutine 1 
+func Echo() {
+	time.Sleep(1*time.Second)
+	echo <- "咖啡色的羊驼"
+}
+
+// 定义goroutine 2
+func Receive() {
+	temp := <- echo // 阻塞等待echo的通道的返回
+	receive <- temp
+}
+
+func main() {
+	echo = make(chan string)
+	receive = make(chan string)
+	go Echo()
+	go Receive()
+	getStr := <-receive   // 接收goroutine 2的返回
+	fmt.Println(getStr)
+}
+```
+
+不一定要去关闭channel，因为底层的垃圾回收机制会根据它是否可以访问来决定是否自动回收它
+
+### 单向通道
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+// 定义goroutine 1
+func Echo(out chan<- string) {   // 定义输出通道类型
+	time.Sleep(1*time.Second)
+	out <- "咖啡色的羊驼"
+	close(out)
+}
+// 定义goroutine 2
+func Receive(out chan<- string, in <-chan string) { // 定义输出通道类型和输入类型
+	temp := <-in // 阻塞等待echo的通道的返回
+	out <- temp
+	close(out)
+}
+
+func main() {
+	echo := make(chan string)
+	receive := make(chan string)
+
+	go Echo(echo)
+	go Receive(receive, echo)
+
+	getStr := <-receive   // 接收goroutine 2的返回
+
+	fmt.Println(getStr)
+}
+```
+
+
 ### 通道通信
 
 类似信号量
@@ -1979,6 +2333,7 @@ fmt.Println(<-messages) //输出buffered、channel
 package main  
 import "fmt" 
 import "time"  
+
 // This is the function we'll run in a goroutine. The `done` channel will be used to notify another goroutine that this function's work is done. 
 func worker(done chan bool) {     
     fmt.Print("working...")     
@@ -2001,7 +2356,177 @@ func main() {     
  
 ### select多通道等待
 
-Go语言的选择(select)可等待多个通道操作。将goroutine和channel与select结合是Go语言的一个强大功能。
+Go语言的`选择`(select)可等待多个通道操作。将goroutine和channel与select结合是Go语言的一个强大功能。
+
+定义：
+- select功能与epoll(nginx)/poll/select的功能类似，都是坚挺IO操作，当IO操作发生的时候，触发相应的动作。
+
+【2022-8-25】[一看就懂系列之Golang的goroutine和通道](https://blog.csdn.net/u011957758/article/details/81159481)
+
+#### select用法
+
+select有几个重要的点要强调：
+1. 如果有多个case都可以运行，select会随机公平地选出一个执行，其他不会执行
+2. case后面必须是channel操作，否则报错。
+3. select中的default子句总是可运行的。所以没有default的select才会阻塞等待事件
+4. 没有运行的case，那么将会阻塞事件发生报错(死锁)
+
+```go
+package main
+import "fmt"
+
+func main() {
+	ch := make (chan int, 1)
+	ch<-1 // 如果注释此句，会报错！没有输入 → 死锁报错
+	select {
+	case <-ch:
+		fmt.Println("咖啡色的羊驼")
+	case <-ch:
+		fmt.Println("黄色的羊驼")
+    //case 3: // case后面（3）非channel操作，报错！
+	//	fmt.Println("黄色的羊驼")
+    default: // default子句总是可运行的。没有default的select会阻塞等待事件
+		fmt.Println("黄色的羊驼")
+	}
+}
+// 输出：两种羊驼随机出现
+```
+
+#### select应用场景
+
+select应用场景
+1. timeout 机制(超时判断)
+2. 判断channel是否阻塞(或者说channel是否已经满了)
+3. 退出机制
+
+（1）超时判断
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	timeout := make (chan bool, 1)
+	go func() {
+		time.Sleep(1*time.Second) // 休眠1s，如果超过1s还没I操作则认为超时，通知select已经超时啦～
+		timeout <- true
+	}()
+	ch := make (chan int)
+	select {
+	case <- ch:
+	case <- timeout:
+		fmt.Println("超时啦!")
+	}
+}
+```
+
+正规版
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	ch := make (chan int)
+	select {
+	case <-ch:
+	case <-time.After(time.Second * 1): // 利用time来实现，After代表多少时间后执行输出东西
+		fmt.Println("超时啦!")
+	}
+}
+```
+
+（2）判断是否阻塞
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	ch := make (chan int, 1)  // 注意这里给的容量是1
+	ch <- 1
+	select {
+	case ch <- 2:
+	default:
+		fmt.Println("通道channel已经满啦，塞不下东西了!")
+	}
+}
+```
+
+（3）退出机制
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	i := 0
+	ch := make(chan string, 0)
+	defer func() {
+		close(ch)
+	}()
+
+	go func() {
+		DONE: 
+		for {
+			time.Sleep(1*time.Second)
+			fmt.Println(time.Now().Unix())
+			i++
+
+			select {
+			case m := <-ch:
+				println(m)
+				break DONE // 跳出 select 和 for 循环
+			default:
+			}
+		}
+	}()
+
+	time.Sleep(time.Second * 4)
+	ch<-"stop"
+}
+```
+
+
+#### select死锁
+
+select不注意也会发生死锁
+1. 如果没有数据需要发送，select中又存在接收通道数据的语句，那么将发送死锁
+1. 空select，也会引起死锁
+
+```go
+package main
+// （1）没有数据要发送
+func main() {  
+    ch := make(chan string)
+    select {
+    case <-ch:
+    }
+}
+// （2）空select
+package main
+
+func main() {  
+    select {}
+}
+
+```
+
 
 ### 超时等待
 
@@ -2591,6 +3116,310 @@ func main() {
 }
 ```
 
+## 设计模式
+
+[go设计模式实践](https://lailin.xyz/post/go-design-pattern.html)
+- [代码仓库](https://github.com/mohuishou/go-design-pattern)
+
+### 设计原则
+
+SOLID设计原则
+- ![](https://img.lailin.xyz/image/1612154616603-6328f638-0536-407e-afdf-7f2b33a97f91.jpeg)
+
+### go设计模式
+
+Go 设计模式
+- 单例模式包含饿汉式和懒汉式两种实现
+- 工厂模式包含简单工厂、工厂方法、抽象工厂、DI 容器
+- 代理模式包含静态代理、动态代理（采用 go generate 模拟）
+- 观察者模式包含观察者模式、eventbus
+
+汇总: [img](https://img.lailin.xyz/image/1612154618733-bb131bea-bf76-4244-bb78-8bed8bfdddf1.jpeg)
+- ![](https://img.lailin.xyz/image/1612154618733-bb131bea-bf76-4244-bb78-8bed8bfdddf1.jpeg)
+
+|  **类型**  |                                                  **设计模式（Github）**                                                   | **常用** |                                       **博客**                                        |
+| :--------: | :-----------------------------------------------------------------------------------------------------------------------: | :------: | :-----------------------------------------------------------------------------------: |
+| **创建型** |       [单例模式(Singleton Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/01_singleton)       |    ✅     |            [Go设计模式01-单例模式](https://lailin.xyz/post/singleton.html)            |
+|            |         [工厂模式(Factory Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/02_factory)         |    ✅     |         [Go设计模式02-工厂模式&DI容器](https://lailin.xyz/post/factory.html)          |
+|            |        [建造者模式(Builder Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/03_builder)        |    ✅     |            [Go设计模式03-建造者模式](https://lailin.xyz/post/builder.html)            |
+|            |       [原型模式(Prototype Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/04_prototype)       |    ❌     |            [Go设计模式04-原型模式](https://lailin.xyz/post/prototype.html)            |
+| **结构型** |           [代理模式(Proxy Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/05_proxy)           |    ✅     | [Go设计模式06-代理模式(generate实现类似动态代理)](https://lailin.xyz/post/proxy.html) |
+|            |          [桥接模式(Bridge Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/06_bridge)          |    ✅     |             [Go设计模式07-桥接模式](https://lailin.xyz/post/bridge.html)              |
+|            |      [装饰器模式(Decorator Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/07_decorator)      |    ✅     |           [Go设计模式08-装饰器模式](https://lailin.xyz/post/decorator.html)           |
+|            |        [适配器模式(Adapter Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/08_adapter)        |    ✅     |            [Go设计模式09-适配器模式](https://lailin.xyz/post/adapter.html)            |
+|            |          [门面模式(Facade Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/09_facade)          |    ❌     |             [Go设计模式10-门面模式](https://lailin.xyz/post/facade.html)              |
+|            |       [组合模式(Composite Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/10_composite)       |    ❌     |            [Go设计模式11-组合模式](https://lailin.xyz/post/composite.html)            |
+|            |       [享元模式(Flyweight Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/11_flyweight)       |    ❌     |            [Go设计模式12-享元模式](https://lailin.xyz/post/flyweight.html)            |
+| **行为型** |       [观察者模式(Observer Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/12_observer)       |    ✅     | [Go设计模式13-观察者模式(实现简单的EventBus)](https://lailin.xyz/post/observer.html)  |
+|            |    [模板模式(Template Method Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/13_template)     |    ✅     |            [Go模板模式14-模板模式](https://lailin.xyz/post/template.html)             |
+|            |    [策略模式(Strategy Method Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/14_strategy)     |    ✅     |            [Go设计模式15-策略模式](https://lailin.xyz/post/strategy.html)             |
+|            | [职责链模式(Chain Of Responsibility Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/15_chain) |    ✅     |    [Go设计模式16-职责链模式(Gin的中间件实现)](https://lailin.xyz/post/chain.html)     |
+|            |           [状态模式(State Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/16_state)           |    ✅     |              [Go设计模式17-状态模式](https://lailin.xyz/post/state.html)              |
+|            |       [迭代器模式(Iterator Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/17_iterator)       |    ✅     |           [Go设计模式18-迭代器模式](https://lailin.xyz/post/iterator.html)            |
+|            |  [访问者模式(Visitor Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/18_visitor/visitor.go)   |    ❌     |            [Go设计模式19-访问者模式](https://lailin.xyz/post/visitor.html)            |
+|            |        [备忘录模式(Memento Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/19_memento)        |    ❌     |            [Go设计模式20-备忘录模式](https://lailin.xyz/post/memento.html)            |
+|            |         [命令模式(Command Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/20_command)         |    ❌     |             [Go设计模式21-命令模式](https://lailin.xyz/post/command.html)             |
+|            |    [解释器模式(Interpreter Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/21_interpreter)    |    ❌     |          [Go设计模式22-解释器模式](https://lailin.xyz/post/interpreter.html)          |
+|            |        [中介模式(Mediator Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/22_mediator)        |    ❌     |            [Go设计模式23-中介模式](https://lailin.xyz/post/mediator.html)             |
+
+# 专项功能
+
+## 命令行参数
+
+```go
+package main
+ 
+import (
+    "flag"
+    "fmt"
+    "os"
+)
+//先编译 go build -o args.exe args_test.go
+//执行 args.exe -name ..
+func main() {
+    // ----- 第一种 ------
+    //获取命令行参数
+    //fmt.Print(os.Args)
+    for i,v := range os.Args{
+        fmt.Print(i,v)
+    }
+     
+    //------ 第二种 ------
+    //自定义命令行参数
+    //定义参数
+    //String代表获取的参数类型为字符串，参数的名字为-name，值默认为空，usage为提示
+    namePtr := flag.String("name", "", "姓名")
+    agePtr := flag.Int("age",18,"年龄")
+    rmbPtr := flag.Float64("rmb",10000,"资产")
+    alivePtr := flag.Bool("alive",true,"是否健在")
+ 
+    //解析获取参数，丢入参数的指针中
+    flag.Parse()
+    fmt.Print(*namePtr,*agePtr,*rmbPtr,*alivePtr)
+ 
+    //------ 第三种 ------
+    //var name *string 这里在栈里面占了名字，但是没有分配内存空间，所以没有地址
+    //  //flag.StringVar(name,"name", "", "姓名")
+    var name string//这里是有地址的
+    var age int
+    var rmb float64
+    var alive bool
+    flag.StringVar(&name,"name", "", "姓名")
+    flag.IntVar(&age,"age",18,"年龄")
+    flag.Float64Var(&rmb,"rmb",10000,"资产")
+    flag.BoolVar(&alive,"alive",true,"是否健在")
+    flag.Parse()
+    fmt.Print(name,age,rmb,alive)
+}
+```
+
+## os库
+
+```go
+package main
+ 
+import (
+    "fmt"
+    "os"
+)
+ 
+func main(){
+    //获得当前工作目录：默认当前工程目录
+    dir,err := os.Getwd()
+    fmt.Print(dir)
+    fmt.Print(err)
+ 
+    //获得指定环境变量
+    //paths := os.Getenv(key:"Path")
+    //goroot := os.Getenv(key:"GOROOT")
+    //fmt.Print(paths)
+    //fmt.Print(goroot)
+ 
+ 
+    //修改文件访问时间和修改时间
+    //err2 := os.Chtimes(
+    //  name:"",
+    //  time.Now().AddDate(years:-1,months:0,days:0)
+    //  )
+ 
+    //获得所有环境变量
+    envs := os.Environ()
+    for _,env :=  range envs{
+        fmt.Print(env)
+    }
+ 
+    //在网络中的主机名
+    hostname,err := os.Hostname()
+    if err == nil {
+        fmt.Print(hostname)
+    }else {
+        fmt.Print("出错了")
+    }
+ 
+    //获得系统的临时文件夹路径：临时数据的保存路径
+    fmt.Print(os.TempDir())
+ 
+    //判断某字符是否路径分隔符
+    fmt.Print("//是路径分隔符吗？",os.IsPathSeparator('\\'))
+    //fmt.Print("\\是路径分隔符吗？",os.IsPathSeparator(c:'\'))
+    fmt.Print("$是路径分隔符吗？",os.IsPathSeparator('\\'))
+ 
+    //fmt.Print(os.IsPathSeparator(c:'\\'))
+    //fmt.Print(os.IsPathSeparator(c:'$'))
+ 
+    //获得文件信息
+    fileInfo,err := os.Stat("C:/users/...")
+    if err == nil {
+        fmt.Print(fileInfo)
+    }else {
+        fmt.Print("出错了")
+    }
+}
+```
+
+## 时间处理
+
+time库使用
+
+```go
+package main
+
+import (
+"time"
+"fmt"
+)
+ 
+func main(){
+    //本地时间
+    nowTime := time.Now()
+    //年月日
+    year := nowTime.Year()
+    fmt.Printf("%s",year)
+    month := nowTime.Month()
+    fmt.Printf("%s",month)
+    y,m,d := nowTime.Date()
+    fmt.Printf("%d:%d:%d",y,m,d)
+    //周月年中的第几天
+    day := nowTime.Day()
+    fmt.Printf("%d",day)
+    yearDay := nowTime.YearDay()
+    fmt.Printf("%d",yearDay)
+    weekDay := nowTime.Weekday()
+    fmt.Printf("%d",weekDay)
+    //时分秒
+    fmt.Printf("%s",nowTime.Hour())
+    fmt.Printf("%s",nowTime.Minute())
+    fmt.Printf("%s",nowTime.Second())
+    fmt.Printf("%s",nowTime.Nanosecond())
+    //创建时间
+    date := time.Date(2019,time.September,8,15,0,0,0,time.Now().Location())
+    fmt.Printf("%s",date)
+    //Add方法和Sub方法是相反的
+    //获取t0和t1的时间距离d是使用Sub
+    //将t0加d获取t1就是使用Add方法
+    now := time.Now()
+    //一天之前
+    duration,_ := time.ParseDuration("-24h0m0s")
+    fmt.Printf("%s",now.Add(duration))
+    //一周之前
+    fmt.Printf("%s",now.Add(duration * 7))
+    //一月之前
+    fmt.Printf("%s",now.Add(duration * 30))
+    //计算时间差
+    fmt.Printf("%s",now.Sub(now.Add(duration)))
+}
+```
+
+
+```go
+// 01: 获取当前时间
+dateTime := time.Now()
+fmt.Println(dateTime)
+// 02: 获取年 月 日 时 分 秒 纳秒
+year := time.Now().Year() //年
+fmt.Println(year)
+month := time.Now().Month() //月
+fmt.Println(month)
+day := time.Now().Day() //日
+fmt.Println(day)
+hour := time.Now().Hour() //小时
+fmt.Println(hour)
+minute := time.Now().Minute() //分钟
+fmt.Println(minute)
+second := time.Now().Second() //秒
+fmt.Println(second)
+nanosecond := time.Now().Nanosecond() //纳秒
+fmt.Println(nanosecond)
+// 03: 获取当前时间戳
+timeUnix := time.Now().Unix()         //单位秒
+timeUnixNano := time.Now().UnixNano() //单位纳秒
+fmt.Println(timeUnix)
+fmt.Println(timeUnixNano)
+// 04: 将时间戳格式化
+fmt.Println(time.Now().Format("2006-01-02 15:04:05"))
+// 05: 时间戳转为go格式的时间
+var timeUnix int64 = 1562555859
+fmt.Println(time.Unix(timeUnix,0))
+// 之后可以用Format 比如
+fmt.Println(time.Unix(timeUnix, 0).Format("2006-01-02 15:04:05"))
+// 06: str格式化时间转时间戳
+t := time.Date(2014, 1, 7, 5, 50, 4, 0, time.Local).Unix()
+fmt.Println(t)
+// 时间的计算
+// 01: 获取今天0点0时0分的时间戳
+currentTime := time.Now()
+startTime := time.Date(currentTime.Year(), currentTime.Month(), currentTime.Day(), 0, 0, 0, 0, currentTime.Location())
+fmt.Println(startTime)
+fmt.Println(startTime.Format("2006/01/02 15:04:05"))
+// 02: 获取今天23:59:59秒的时间戳
+currentTime := time.Now()
+endTime := time.Date(currentTime.Year(), currentTime.Month(), currentTime.Day(), 23, 59, 59, 0, currentTime.Location())
+fmt.Println(endTime)
+fmt.Println(endTime.Format("2006/01/02 15:04:05"))
+// 03: 获取1分钟之前的时间
+m, _ := time.ParseDuration("-1m")
+result := currentTime.Add(m)
+fmt.Println(result)
+fmt.Println(result.Format("2006/01/02 15:04:05"))
+// 04: 获取1小时之前的时间
+m, _ := time.ParseDuration("-1h")
+result := currentTime.Add(m)
+fmt.Println(result)
+fmt.Println(result.Format("2006/01/02 15:04:05"))
+// 05: 获取1分钟之后的时间
+m, _ := time.ParseDuration("1m")
+result := currentTime.Add(m)
+fmt.Println(result)
+fmt.Println(result.Format("2006/01/02 15:04:05"))
+// 06: 获取1小时之后的时间
+m, _ := time.ParseDuration("1h")
+result := currentTime.Add(m)
+fmt.Println(result)
+fmt.Println(result.Format("2006/01/02 15:04:05"))
+// 07 :计算两个时间戳
+afterTime, _ := time.ParseDuration("1h")
+result := currentTime.Add(afterTime)
+beforeTime, _ := time.ParseDuration("-1h")
+result2 := currentTime.Add(beforeTime)
+m := result.Sub(result2)
+fmt.Printf("%v 分钟 \n", m.Minutes())
+h := result.Sub(result2)
+fmt.Printf("%v小时 \n", h.Hours())
+d := result.Sub(result2)
+fmt.Printf("%v 天\n", d.Hours()/24)
+// 08: 判断一个时间是否在一个时间之后
+stringTime, _ := time.Parse("2006-01-02 15:04:05", "2019-12-12 12:00:00")
+beforeOrAfter := stringTime.After(time.Now())
+if true == beforeOrAfter {
+    fmt.Println("2019-12-12 12:00:00在当前时间之后!")
+} else {
+    fmt.Println("2019-12-12 12:00:00在当前时间之前!")
+}
+// 09: 判断一个时间相比另外一个时间过去了多久
+startTime := time.Now()
+time.Sleep(time.Second * 5)
+fmt.Println("离现在过去了：", time.Since(startTime))
+```
 
 ## 正则表达式（regexp）
 
