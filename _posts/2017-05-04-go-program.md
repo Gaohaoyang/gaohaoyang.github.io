@@ -1027,6 +1027,71 @@ Go语言中，行分隔符键是语句终止符，无需指明用;分割
 - Boolean：true 或 false
 - Derived：分 Pointer、Array、Structure、Mp以及Interface
 
+| 编号 | 类型 | 说明 |
+|---|---|---|
+| 1| **布尔**类型 | 由两个预定义常量组成：(a) true (b) false|
+| 2| **数字**类型 | 算术类型，在整个程序中表示：<br>a)整数类型<br>b)浮点值。|
+| 3| **字符串**类型 | 字符串类型表示字符串值的集合。它的值是一个字节序列。 字符串是不可变的类型，一旦创建后，就不可能改变字符串的内容。预先声明的字符串类型是string。|
+| 4| **派生**类型 | 包括<br>(a)指针类型<br>(b)数组类型<br>(c)结构类型<br>(d)联合类型<br>(e)函数类型<br>(f)切片类型<br>(g)函数类型<br>(h)接口类型<br>(i) 类型|
+ 
+所有类型：
+- bool  
+- string  
+- int  int8  int16  int32  int64 
+- uint uint8 uint16 uint32 uint64 uintptr  
+- byte // uint8 的别名  
+- rune // int32 的别名。代表一个Unicode码  
+- float32 float64  
+- complex64 complex128
+- int，uint 和 uintptr 类型在32位的系统上一般是32位，而在64位系统上是64位。当你需要使用一个整数类型时，应该首选 int，仅当有特别的理由才使用定长整数类型或者无符号整数类型。
+
+```go
+package main
+
+import (
+    "fmt"
+    "math/cmplx" 
+)  
+
+var ( //组合定义变量
+     ToBe   bool       = false
+     MaxInt uint64     = 1<<64 – 1
+     z      complex128 = cmplx.Sqrt(-5 + 12i) 
+     x // 变量在定义时没有明确的初始化时会赋值为 零值(“”,0,false…) 
+    var i int = 42
+         var f float64 = float64(i) //类型强转,不同于C，必须显示转换，不存在隐式转换
+         f := float64(i) //短声明，简洁形式
+         const Pi = 3.14 //定义常量
+         const World = "世界"
+)  
+const (     
+         Big   = 1 << 100     
+         Small = Big >> 99 
+)
+ 
+func main() {
+    const f = "%T(%v)\n"
+    fmt.Printf(f, ToBe, ToBe)
+    fmt.Printf(f, MaxInt, MaxInt)
+    fmt.Printf(f, z, z) 
+}
+```
+
+### 自定义类型 type
+
+type-keyword创建的模板
+
+```go
+type people []string
+
+func main() {
+    var stu = people{"max", "anna"}
+    fmt.Println(stu)
+}
+```
+
+
+
 ## 变量
 
 Go标识符是用于标识变量，函数或任何其他用户定义项目的名称。标识符以字母A到Z或a到z或下划线_开头，后跟零个或多个字母，下划线和数字(0到9)组成。
@@ -1222,71 +1287,6 @@ runtime.GOMAXPROCS(4)
 
 [参考地址](http://coolshell.cn/articles/8489.html)
  
-## 数据类型
-
-| 编号| 类型 | 说明 |
-|---|---|---|
-| 1| 布尔类型 | 它们是布尔类型，由两个预定义常量组成：(a)true(b)false|
-| 2| 数字类型 | 它们是算术类型，在整个程序中表示：a)整数类型或 b)浮点值。|
-| 3| 字符串类型 | 字符串类型表示字符串值的集合。它的值是一个字节序列。 字符串是不可变的类型，一旦创建后，就不可能改变字符串的内容。预先声明的字符串类型是string。|
-| 4| 派生类型 | 包括(a)指针类型，(b)数组类型，(c)结构类型，(d)联合类型和(e)函数类型(f)切片类型(g)函数类型(h)接口类型(i) 类型|
- 
-所有类型：
-- bool  
-- string  
-- int  int8  int16  int32  int64 
-- uint uint8 uint16 uint32 uint64 uintptr  
-- byte // uint8 的别名  
-- rune // int32 的别名。代表一个Unicode码  
-- float32 float64  
-- complex64 complex128
-- int，uint 和 uintptr 类型在32位的系统上一般是32位，而在64位系统上是64位。当你需要使用一个整数类型时，应该首选 int，仅当有特别的理由才使用定长整数类型或者无符号整数类型。
-
-```go
-package main
-
-import (
-    "fmt"
-    "math/cmplx" 
-)  
-
-var ( //组合定义变量
-     ToBe   bool       = false
-     MaxInt uint64     = 1<<64 – 1
-     z      complex128 = cmplx.Sqrt(-5 + 12i) 
-     x // 变量在定义时没有明确的初始化时会赋值为 零值(“”,0,false…) 
-    var i int = 42
-         var f float64 = float64(i) //类型强转,不同于C，必须显示转换，不存在隐式转换
-         f := float64(i) //短声明，简洁形式
-         const Pi = 3.14 //定义常量
-         const World = "世界"
-)  
-const (     
-         Big   = 1 << 100     
-         Small = Big >> 99 
-)
- 
-func main() {
-    const f = "%T(%v)\n"
-    fmt.Printf(f, ToBe, ToBe)
-    fmt.Printf(f, MaxInt, MaxInt)
-    fmt.Printf(f, z, z) 
-}
-```
-
-### 自定义类型 type
-
-type-keyword创建的模板
-
-```go
-type people []string
-
-func main() {
-    var stu = people{"max", "anna"}
-    fmt.Println(stu)
-}
-```
-
 
 ## 字符串
 
