@@ -394,28 +394,16 @@ func typeDemo() {
         v3 string
     )
     //var p *int // 指针类型
-
-    // 变量初始化
-    var v4 int = 10
-    // 等价于:
-    var v5 = 10
-    // 一般这样就好
-    v6 := 10
-
-    // 赋值，多重赋值
-    v1 = 10
-    v2, v3 = 20, "test"
-    // 匿名变量 _
-    _, v4 = v5, v6
-
+    var v4 int = 10 // 变量初始化
+    var v5 = 10 // 等价于:
+    v6 := 10 // 一般这样就好
+    v1 = 10 // 赋值
+    v2, v3 = 20, "test" // 多重赋值
+    _, v4 = v5, v6 // 匿名变量 _
     fmt.Println(v1, v2, v3, v4)
-
-    // 常量
-    const Pi float64 = 3.1415926
+    const Pi float64 = 3.1415926 // 常量
     const MaxPlayer = 10
-
-    // 枚举
-    const (
+    const ( // 枚举
         Sunday = iota // iota从0递增
         Mondy
         Tuesday
@@ -423,47 +411,32 @@ func typeDemo() {
     )
 
     // 类型
-    // 1. 布尔
-    var b1 bool
+    var b1 bool // 1. 布尔
     b1 = true
     b1 = (1 == 2)
-
     fmt.Println(b1)
 
     // 2. 整形
     // int8 uint8 int16 uint16 int32 uint32 int64 uint64 int uint uintptr
     var i32 int32
-    // 强制转换
-    i32 = int32(64)
+    i32 = int32(64) // 强制转换
     // 运算：+, -, *, /, %（求余）
     // 比较：>, <, ==, >=, <=, !=
     // 位运算：x << y, x >> y, x ^ y, x & y, x | y, ^x （取反）
-
     fmt.Println(i32)
-
     // 3. 浮点
-    // float32, float64
-    var f1 float64 = 1.0001
+    var f1 float64 = 1.0001 // float32, float64
     var f2 float64 = 1.0002
-    // 浮点比较
-    isEqual := math.Dim(f1, f2) < 0.0001
-
+    isEqual := math.Dim(f1, f2) < 0.0001 // 浮点比较
     fmt.Println(isEqual)
-
     // 4. 字符串
     var s1 string
     s1 = "abc"
-    // 字符串连接
-    s1 = s1 + "ddd"
-    // 取长度
-    n := len(s1)
-    // 取字符
-    c1 := s1[0]
-    // 反引号，不转义，常用于正则表达式
-    s1 = `\w+`
-
+    s1 = s1 + "ddd" // 字符串连接
+    n := len(s1) // 取长度
+    c1 := s1[0] // 取字符
+    s1 = `\w+` // 反引号，不转义，常用于正则表达式
     fmt.Println(c1)
-
     fmt.Println(strings.HasPrefix("prefix", "pre")) // true
     fmt.Println(strings.HasSuffix("suffix", "fix")) // true
 
@@ -497,7 +470,6 @@ func typeDemo() {
         fmt.Println(i, v)
     }
     // 数组是值类型，每次参数传递都是一份拷贝
-
     // 数组切片Slice
     var mySlice []int = arr1[:2]
     mySlice1 := make([]int, 5)
@@ -519,20 +491,15 @@ func typeDemo() {
         1: "a",
         2: "b",
     }
-
-    delete(m2, 1)
-
+    delete(m2, 1) // 删除map元素
     value, ok := m1[1]
     if ok {
         fmt.Println(value)
     }
-
     for k, v := range m2 {
         fmt.Println(k, v)
     }
-
 }
-
 // 3. 流程控制
 func flowDemo() {
     // if else
@@ -542,7 +509,6 @@ func flowDemo() {
     } else {
         // ..
     }
-
     // switch
     switch a {
     case 0:
@@ -552,8 +518,7 @@ func flowDemo() {
     default:
         fmt.Println("default")
     }
-
-    switch {
+    switch { // 无判断条件
     case a < 10:
         fmt.Println("<10")
     case a < 20:
@@ -573,12 +538,10 @@ func flowDemo() {
             // break JLoop
         }
     }
-
     goto JLoop
 
 JLoop:
     // break to here
-
 }
 
 // 4. 函数
@@ -592,7 +555,6 @@ func sum1(value1 int, value2 int) (result int, err error) {
 func sum2(value1, value2 int) int {
     return value1 + value2
 }
-
 // 不定参数
 // myFunc(1, 2, 3, 4, 5)
 func myFunc(args ...int) {
@@ -623,7 +585,6 @@ func anonymousFunc() {
     f := func(a, b int) int {
         return a + b
     }
-
     f(1, 2)
 }
 
@@ -633,7 +594,6 @@ func deferDemo(path string) {
     if err != nil {
         return
     }
-
     defer f.Close()
     // or
     defer func() {
@@ -645,17 +605,13 @@ func deferDemo(path string) {
 
 // 5. 结构体
 type Rect struct {
-    // 小写为private
-    x, y float64
-    // 大写为public
-    Width, Height float64
+    x, y float64 // 小写为private
+    Width, Height float64 // 首字母大写为public
 }
-
 // 大写方法为public，小写为private
 func (r *Rect) Area() float64 {
     return r.Width * r.Height
 }
-
 func netRect(x, y, width, height float64) *Rect {
     // 实例化结构体
     // rect1 := new(Rect)
@@ -664,11 +620,10 @@ func netRect(x, y, width, height float64) *Rect {
     return &Rect{x, y, width, height}
 }
 
-// 匿名组合
+// 匿名组合： “类”的继承顺序：Base → Foo → Bar
 type Base struct {
     Name string
 }
-
 func (base *Base) Foo() {}
 func (base *Base) Bar() {}
 
@@ -676,7 +631,6 @@ type Foo struct {
     Base
     *log.Logger
 }
-
 func (foo *Foo) Bar() {
     foo.Base.Bar()
     // ...
@@ -702,7 +656,6 @@ func (file *File) Write(buf []byte) (n int, err error) {
 func interfaceDemo() {
     // 只要实现了Read, Write方法即可
     var file IFile = new(File)
-
     // 接口查询
     // 是否实现了IFile接口
     if file2, ok := file.(IFile); ok {
@@ -712,7 +665,6 @@ func interfaceDemo() {
     if file3, ok := file.(*File); ok {
         file3.Read([]byte{})
     }
-
     // 类型查询
     switch v := file.(type) {
     }
@@ -734,7 +686,6 @@ func channelDemo() {
         // }
         go counting(chs[i])
     }
-
     for _, ch := range chs {
         <-ch
         // channel select
@@ -746,11 +697,9 @@ func channelDemo() {
             }
         */
     }
-
     // 单向Channel
     var ch1 chan<- int // 只能写入int
     var ch2 <-chan int // 只能读出int
-
     // 关闭Channel
     close(ch1)
     _, ok := <-ch2
@@ -767,34 +716,26 @@ func lockDemo() {
     // do something
     defer m.Unlock()
 }
-
 // 全局唯一操作
 var once sync.Once
-
-// once.Do(someFunction)
-
+once.Do(someFunction)
 // 7. 网络编程
-// import "net"
-// net.Dial("tcp", "127.0.0.1:8080")
-
+import "net"
+net.Dial("tcp", "127.0.0.1:8080")
 // 8. json处理
-// import "encoding/json"
-// json.Marshal(obj) 序列化
-// json.Unmarshal() 反序列化
-
+import "encoding/json"
+json.Marshal(obj) 序列化
+json.Unmarshal() 反序列化
 // 9. Web开发
-// import "net/http"
-// 模板
-// import "html/template"
-
+import "net/http"
+import "html/template" // 模板
 // 10. 常用库
-// import "os"
-// import "io"
-// import "flag"
-// import "strconv"
-// import "crypto/sha1"
-// import "crypto/md5"
-
+import "os"
+import "io"
+import "flag"
+import "strconv"
+import "crypto/sha1"
+import "crypto/md5"
 // 11. 单元测试
 // _test结尾的go文件： xxx_test.go
 // 函数名以Test开头
@@ -803,7 +744,6 @@ func TestDemo(t *testing.T) {
     if r != 5 {
         t.Errorf("sum2(2, 3) failed. Got %d, expect 5.", r)
     }
-
     assert.Equal(t, 1, 1)
 }
 
@@ -821,17 +761,13 @@ func benchmarkAdd(b *testing.B) {
 // 1. 遍历文件 filepath.Walk
 // import "path/filepath"
 func doHashWalk(dirPath string) error {
-
     fullPath, err := filepath.Abs(dirPath)
-
     if err != nil {
         return err
     }
-
     callback := func(path string, fi os.FileInfo, err error) error {
         return hashFile(fullPath, path, fi, err)
     }
-
     return filepath.Walk(fullPath, callback)
 }
 
@@ -848,7 +784,7 @@ func hashFile(root string, path string, fi os.FileInfo, err error) error {
 }
 
 // 2. 读取文件
-// import "io/ioutil"
+import "io/ioutil"
 func readFileDemo(filename string) {
     content, err := ioutil.ReadFile(filename)
     if err != nil {
@@ -857,14 +793,12 @@ func readFileDemo(filename string) {
     lines := strings.Split(string(content), "\n")
     fmt.Println("line count:", len(lines))
 }
-
 // 判断目录或文件是否存在
 func existsPathCheck(path string) (bool, error) {
     // 判断不存在
     if _, err := os.Stat(path); os.IsNotExist(err) {
         // 不存在
     }
-
     // 判断是否存在
     _, err := os.Stat(path)
     if err == nil {
@@ -875,13 +809,11 @@ func existsPathCheck(path string) (bool, error) {
     }
     return true, err
 }
-
 // 文件目录操作
 func fileDirDemo() {
     // 级联创建目录
     os.MkdirAll("/path/to/create", 0777)
 }
-
 // 拷贝文件
 func copyFile(source string, dest string) (err error) {
     sf, err := os.Open(source)
@@ -900,11 +832,9 @@ func copyFile(source string, dest string) (err error) {
         if err != nil {
             err = os.Chmod(dest, si.Mode())
         }
-
     }
     return
 }
-
 // 拷贝目录
 func copyDir(source string, dest string) (err error) {
     fi, err := os.Stat(source)
@@ -937,32 +867,26 @@ func copyDir(source string, dest string) (err error) {
     }
     return nil
 }
-
 // 3. 时间处理
-// import "time"
+import "time"
 func TestTimeDemo(t *testing.T) {
     // Parse
     postDate, err := time.Parse("2006-01-02 15:04:05", "2015-09-30 19:19:00")
     fmt.Println(postDate, err)
-
     // Format
     assert.Equal(t, "2015/Sep/30 07:19:00", postDate.Format("2006/Jan/02 03:04:05"))
     assert.Equal(t, "2015-09-30T19:19:00Z", postDate.Format(time.RFC3339))
 }
-
 // 4. 正则表达式
-// import "regexp"
+import "regexp"
 func TestRegexp(t *testing.T) {
     // 查找匹配
     re := regexp.MustCompile(`(\d+)-(\d+)`)
     r := re.FindAllStringSubmatch("123-666", -1)
-
     assert.Equal(t, 1, len(r))
     assert.Equal(t, "123", r[0][1])
     assert.Equal(t, "666", r[0][2])
-
 }
-
 func main() {
     helloWorld()
 }
@@ -1120,7 +1044,7 @@ package main
 import s "strings" //strings取个别名
 import "fmt"
 
-var p = fmt.Println//我们给 fmt.Println 一个短名字的别名，我们随后将会经常用到。
+var p = fmt.Println//给 fmt.Println 一个短名字的别名，随后将会经常用到。
 func main() {
 //注意都是包中的函数，不是字符串对象自身的方法，调用时传递字符作为第一个参数进行传递。
     p("Contains:  ", s.Contains("test", "es")) // true,包含判断，注意s.Contains("", "")=true
@@ -1264,7 +1188,7 @@ func main() {
     pow := make([]int, 10)     
     for i := range pow {  // 取index
         pow[i] = 1 << uint(i)     
-    }     
+    }
     for _, value := range pow { //取value（index用_忽略）
         fmt.Printf("%d\n", value)     
     }
@@ -1276,45 +1200,40 @@ func main() {
 `映射`(Map)，它将唯一键映射到值。 键是用于在检索值的对象。 给定一个键和一个值就可以在Map对象中设置值
 
 ```go
-var countryCapitalMap map[string]string    
-/* create a map*/    
-countryCapitalMap = make(map[string]string) //string -> string
+var countryCapitalMap map[string]string  // 创建map
+countryCapitalMap = make(map[string]string) // string -> string
 /* insert key-value pairs in the map*/    
-countryCapitalMap["France"] = "Paris"
-delete(countryCapitalMap,"France");//删除
+countryCapitalMap["France"] = "Paris" // 插入元素
+delete(countryCapitalMap,"France"); // 删除
    /* print map using keys*/    
-for country := range countryCapitalMap {       
+for country := range countryCapitalMap {    // （1）按照key遍历map   
    fmt.Println("Capital of",country,"is",countryCapitalMap[country])    
 }
 // `range` on map iterates over key/value pairs.     
 kvs := map[string]string{"a": "apple", "b": "banana"} //初始化！
-for k, v := range kvs {         
+for k, v := range kvs {    // （2）按照键值对遍历map
     fmt.Printf("%s -> %s\n", k, v)     
 }      
 // `range` can also iterate over just the keys of a map.     
-for k := range kvs {         
+for k := range kvs {    // （1）按照key遍历map
     fmt.Println("key:", k)     
 }      
 // `range` on strings iterates over Unicode code points. The first value is the starting byte index of the `rune` and the second the `rune` itself.     
 for i, c := range "go" {  //字符串时遍历字符
    fmt.Println(i, c)     
 }
-//嵌套map
-m := map[string]map[string]string{}
+m := map[string]map[string]string{} // 嵌套map
 mm, ok := m["kkk"]
 if !ok {
     mm = make(map[string]string)
     m["kkk"] = mm
 }
 mm[k1k1k1] = "sssss"
-```
+//【2017-06-21】map存在性判断
+//【教训】go禁止对map成员取地址。。。但slice成员可以，好变态
+if _, ok := map[key]; ok {//存在
+}
 
-- 【2017-06-21】map存在性判断
-
-if _, ok := map\[key]; ok {//存在}
-- 【教训】go禁止对map成员取地址。。。但slice成员可以，好变态
-
-```go
 test := map[string]int{"a":1,"b":2}
 // ./multi_map.go:34: cannot take the address of test["a"]
 fmt.Println("三层取地址:",&copyWriteDict["female"][1]) //slice成员可以取地址
@@ -1368,7 +1287,6 @@ func main(){
     fmt.Print("输入了值："+first+"\n")
 }
 ```
-
 
 ## 关键词
 
@@ -1448,7 +1366,6 @@ func main() {
     arg := os.Args[1] // 访问第二个参数，即 name
     fmt.Println(arg) // 输出 max
 }
-
 ```
 
 ### 函数参数
@@ -1462,7 +1379,6 @@ func add(x int, y int) int {
 func add(x, y int) int {
     return x + y 
 }
-
 ```
 
 
@@ -1474,7 +1390,7 @@ func add(x, y int) int {
 package main
 import "fmt"
 
-var x string = "hello"//错误！字符串要用双引号，字节才是单引号
+var x string = "hello" //错误！字符串要用双引号，字节才是单引号
 var sms = [...]string{"a","b","x"} //可变参数
 
 // 这个函数可以传入任意数量的整型参数
@@ -1506,14 +1422,13 @@ Golang项目中，一次只应有一个main.go，但是所有文件都可以使�
 - 运行；go run greet.go main.go
 
 ```go
-// main.go
+//-------- main.go ----------
 package main
 
 func main() {
     greet()
 }
-//------------------
-// greet.go
+//--------greet.go----------
 package main
 import "fmt"
 
@@ -1522,9 +1437,8 @@ func greet() {
 }
 ```
 
-### 自定义包导入失败
 
-#### 相对导入
+### 相对导入
 
 【2022-1-19】
 
@@ -1559,7 +1473,7 @@ func main() {
 }
 ```
 
-#### go.mod导入
+### go.mod导入
 
 代码结构：
 
