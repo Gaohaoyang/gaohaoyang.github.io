@@ -1764,41 +1764,6 @@ func main() {    
 }
 ```
 
-## go routine
-
-Go Routine可以使用**go关键字**来调用函数，还可以使用**匿名函数**。
-- go关键字调用的函数想像成 pthread_create，<font color='blue'>创建线程。</font>
- 
-```go
-package main
-import "fmt"
-
-func f(msg string) {
-    fmt.Println(msg)
-}
-func main(){
-    // （1）go关键词使用 go routine
-    go f("goroutine")
-    // （2）匿名函数调用 go routine
-    go func(msg string) {
-        fmt.Println(msg)
-    }("going")
-}
-```
-
-并发安全性
-- goroutine有个特性，如果一个goroutine没有被阻塞，那么别的goroutine就不会得到执行。这并不是真正的并发，如果要真正并发，在main函数的第一行加上下面的这段代码：
-
-```go
-import "runtime"
-runtime.GOMAXPROCS(4) // 真正的并发
-```
-
-以上代码存在并发安全性问题，需要上锁
-- [参考地址](http://coolshell.cn/articles/8489.html)
-
-
-
 ## 一般接口
 
 Golang's log模块主要提供了3类接口。分别是: `Print` 、`Panic` 、`Fatal`。当然是用前先包含log包。
@@ -1868,6 +1833,7 @@ new不常使用
 
 ## go routine
 
+
 ### 高并发
 
 目前比较主流的并发实现方式：
@@ -1890,7 +1856,37 @@ goroutine的简介
 
 Go Routine主要是使用go关键字来调用函数，还可以使用匿名函数。可以把go关键字调用的函数想像成pthread_create，创建线程。
 
-【2022-8-25】[一看就懂系列之Golang的goroutine和通道](https://blog.csdn.net/u011957758/article/details/81159481)
+Go Routine可以使用**go关键字**来调用函数，还可以使用**匿名函数**。
+- go关键字调用的函数想像成 pthread_create，<font color='blue'>创建线程。</font>
+ 
+```go
+package main
+import "fmt"
+
+func f(msg string) {
+    fmt.Println(msg)
+}
+func main(){
+    // （1）go关键词使用 go routine
+    go f("goroutine")
+    // （2）匿名函数调用 go routine
+    go func(msg string) {
+        fmt.Println(msg)
+    }("going")
+}
+```
+
+并发安全性
+- goroutine有个特性，如果一个goroutine没有被阻塞，那么别的goroutine就不会得到执行。这并不是真正的并发，如果要真正并发，在main函数的第一行加上下面的这段代码：
+
+```go
+import "runtime"
+runtime.GOMAXPROCS(4) // 真正的并发
+```
+
+以上代码存在并发安全性问题，需要上锁
+- [参考地址](http://coolshell.cn/articles/8489.html)
+- 【2022-8-25】[一看就懂系列之Golang的goroutine和通道](https://blog.csdn.net/u011957758/article/details/81159481)
 
 #### 单个goroutine创建
 
@@ -2463,223 +2459,16 @@ func main() {
 此范围在从队列接收到的每个元素上进行迭代。因为关闭了上面的通道，迭代在接收到2个元素后终止。
 
 
-## 文件读写
-
-两种方案
-
-```go
-package main
-
-import (
-    "bufio" //这是什么包？
-    "fmt"
-    "io"
-    "io/ioutil"
-    "os"
-)
-
-// Reading files requires checking most calls for errors.This helper will streamline our error checks below.
-func check(e error) {
-    if e != nil {
-        panic(e)
-    }
-}
-
-func main() {
-    // Perhaps the most basic file reading task is slurping（咕噜咕噜的喝） a file's entire contents into memory.
-    dat, err := ioutil.ReadFile("/tmp/dat") //一次性加载到内存
-    check(err)
-    fmt.Print(string(dat))
-    // You'll often want more control over how and what parts of a file are read. For these tasks, start by `Open`ing a file to obtain an `os.File` value.
-    f, err := os.Open("/tmp/dat") //
-    check(err)
-    // Read some bytes from the beginning of the file. Allow up to 5 to be read but also note how many actually were read.
-    b1 := make([]byte, 5)
-    n1, err := f.Read(b1) //读一部分内容
-    check(err)
-    fmt.Printf("%d bytes: %s\n", n1, string(b1))
-    // You can also `Seek` to a known location in the file and `Read` from there.
-    o2, err := f.Seek(6, 0) //自定义开始点
-    check(err)
-    b2 := make([]byte, 2)
-    n2, err := f.Read(b2)
-    check(err)
-    fmt.Printf("%d bytes @ %d: %s\n", n2, o2, string(b2))
-    // The `io` package provides some functions that may be helpful for file reading. For example, reads like the ones above can be more robustly implemented with `ReadAtLeast`.
-    o3, err := f.Seek(6, 0)
-    check(err)
-    b3 := make([]byte, 2)
-    n3, err := io.ReadAtLeast(f, b3, 2)
-    check(err)
-    fmt.Printf("%d bytes @ %d: %s\n", n3, o3, string(b3))
-    // There is no built-in rewind, but `Seek(0, 0)` accomplishes this.
-    _, err = f.Seek(0, 0)
-    check(err)
-    // The `bufio` package implements a buffered reader that may be useful both for its efficiency with many small reads and because of the additional reading methods it provides.
-    r4 := bufio.NewReader(f)
-    b4, err := r4.Peek(5)
-    check(err)
-    fmt.Printf("5 bytes: %s\n", string(b4)
-    // Close the file when you're done (usually this would be scheduled immediately after `Open`ing with `defer`).
-    f.Close()
-//开始写文件部分
-    // To start, here's how to dump a string (or just bytes) into a file.
-    d1 := []byte("hello\ngo\n")
-    err := ioutil.WriteFile("dat1.txt", d1, 0644)//一次性写文件
-    check(err)
-    // For more granular（粒状，精细） writes, open a file for writing.
-    f, err := os.Create("dat2.txt")
-    check(err)
-    // It's idiomatic（惯用的） to defer a `Close` immediately after opening a file.
-    defer f.Close()
-    // You can `Write` byte slices as you'd expect.
-    d2 := []byte{115, 111, 109, 101, 10}
-    n2, err := f.Write(d2)
-    check(err)
-    fmt.Printf("wrote %d bytes\n", n2)
-    // A `WriteString` is also available.
-    n3, err := f.WriteString("writes\n")
-    fmt.Printf("wrote %d bytes\n", n3)
-    // Issue a `Sync` to flush writes to stable storage.
-    f.Sync()
-    // `bufio` provides buffered writers in addition to the buffered readers we saw earlier.
-    w := bufio.NewWriter(f)
-    n4, err := w.WriteString("buffered\n")
-    fmt.Printf("wrote %d bytes\n", n4)
-    // Use `Flush` to ensure all buffered operations have been applied to the underlying writer.
-    w.Flush()
-//追加
-f, err := os.OpenFile(fileName, os.O_WRONLY|os.O_APPEND, 0666)
-}
-```
-
-## 定时器
-
-在将来的某个时间点执行Go代码，或者在某个时间间隔重复执行。 Go的内置计时器和自动接收器功能使这两项任务变得容易。
-
-定时器代表未来的一个事件。可告诉定时器您想要等待多长时间，它提供了一个通道，在当将通知时执行对应程序
-
-```go
-package main
-import "time"
-import "fmt"
-
-func main() {
-    // Timers represent a single event in the future. You tell the timer how long you want to wait, and it provides a channel that will be notified at that time. This timer will wait 2 seconds.
-    timer1 := time.NewTimer(time.Second * 2)
-    // The `<-timer1.C` blocks on the timer's channel `C` until it sends a value indicating that the timer expired.
-    <-timer1.C  //<-timer1.C阻塞定时器的通道C，直到它发送一个指示定时器超时的值。如果只是想等待，可以使用time.Sleep。定时器可能起作用的一个原因是在定时器到期之前取消定时器
-    fmt.Println("Timer 1 expired")
-    // If you just wanted to wait, you could have used `time.Sleep`. One reason a timer may be useful is that you can cancel the timer before it expires.Here's an example of that.
-    timer2 := time.NewTimer(time.Second)
-    go func() {
-        <-timer2.C
-        fmt.Println("Timer 2 expired")
-    }()
-    stop2 := timer2.Stop() //提前取消计时器
-    if stop2 {
-        fmt.Println("Timer 2 stopped")
-    }
-t := time.Tick(10)//
-<- t // 
-}
-```
-
-## socket编程
-
-系统调用
-
-执行命令行
-
-用标准输入输出
-
-命令行参数：用os.Args，像python的getops一样
-
-## 随机数
-
-[go获取随机数](http://www.tuicool.com/articles/ZVrmQjr)
-
-```go
-package main
-
-import (
-	"fmt"
-	"math/rand"
-)
-
-func main() {
-// 根据时间设置随机数种子
-    	rand.Seed(int64(time.Now().Nanosecond()))
-	// 获取随机整数
-	for i := 0; i < 5; i++ {
-		fmt.Printf("%v ", rand.Int())
-	}
-	fmt.Println()
-
-	// 获取随机的32位整数
-	for i := 0; i < 5; i++ {
-		fmt.Printf("%v ", rand.Int31())
-	}
-	fmt.Println()
-
-	// 获取指定范围内的随机数
-	for i := 0; i < 5; i ++ {
-		fmt.Printf("%v ", rand.Intn(10))
-	}
-	fmt.Println()
-
-	// 获取浮点型数[0.0, 1.0)之间
-	for i := 0; i < 5; i ++ {
-		fmt.Printf("%v ", rand.Float32())
-	}
-	fmt.Println()
-}
-//获取两个数字之间的数字
-func RandInt64(min,max int64) int64{
-    maxBigInt:=big.NewInt(max)
-    i,_:=rand.Int(rand.Reader,maxBigInt)
-    if i.Int64()<min{
-        RandInt64(min,max)    
-    }
-    return i.Int64()
-}
-//产生不重复的随机数
-//rand库的Perm方法可以返回[0,n)直接的随机数
-```
-
-
-## 时间
-
-时间戳 
-- 当前时间戳
-  - fmt.Println(time.Now().Unix())  # 1389058332
-- str格式化时间
-  - 当前格式化时间
-  - fmt.Println(time.Now().Format("2006-01-02 15:04:05"))  // 这是个奇葩,必须是这个时间点, 据说是go诞生之日, 记忆方法:6-1-2-3-4-5 # 2014-01-07 09:42:20
-- 时间戳转str格式化时间
-  - str_time := time.Unix(1389058332, 0).Format("2006-01-02 15:04:05")
-  - fmt.Println(str_time) # 2014-01-07 09:32:12
-- str格式化时间转时间戳
-  - the_time := time.Date(2014, 1, 7, 5, 50, 4, 0, time.Local)
-  - unix_time := the_time.Unix()
-  - fmt.Println(unix_time) # 389045004
-- 还有一种方法,使用time.Parse
-
-```go
-the_time, err := time.Parse("2006-01-02 15:04:05", "2014-01-08 09:04:41")
-if err == nil {
-        unix_time := the_time.Unix()
-	fmt.Println(unix_time)		
-}
-// 1389171881
-```
 
 
 ## Sync 用法
 
 刚才看golang的sync的包，看见一个很有用的功能。就是WaitGroup。
-先说说WaitGroup的用途：它能够一直等到所有的goroutine执行完成，并且阻塞主线程的执行，直到所有的goroutine执行完成。
-这里要注意一下，他们的执行结果是没有顺序的，调度器不能保证多个 goroutine 执行次序，且进程退出时不会等待它们结束。
+
+WaitGroup的用途：它能够一直等到所有的goroutine执行完成，并且阻塞主线程的执行，直到所有的goroutine执行完成。
+
+注意：执行结果是没有顺序的，调度器不能保证多个 goroutine 执行次序，且进程退出时不会等待它们结束。
+
 WaitGroup总共有三个方法：Add(delta int),Done(),Wait()。简单的说一下这三个方法的作用。
 - Add:添加或者减少等待goroutine的数量
 - Done:相当于Add(-1)
@@ -3193,6 +2982,30 @@ func main(){
 
 ## 时间处理
 
+时间戳 
+- 当前时间戳
+  - fmt.Println(time.Now().Unix())  # 1389058332
+- str**格式化**时间
+  - 当前格式化时间
+  - fmt.Println(time.Now().Format("2006-01-02 15:04:05"))  // 这是个奇葩,必须是这个时间点, 据说是go诞生之日, 记忆方法:6-1-2-3-4-5 # 2014-01-07 09:42:20
+- **时间戳**转str**格式化**时间
+  - str_time := time.Unix(1389058332, 0).Format("2006-01-02 15:04:05")
+  - fmt.Println(str_time) # 2014-01-07 09:32:12
+- str**格式化**时间转**时间戳**
+  - the_time := time.Date(2014, 1, 7, 5, 50, 4, 0, time.Local)
+  - unix_time := the_time.Unix()
+  - fmt.Println(unix_time) # 389045004
+- 还有一种方法,使用time.Parse
+
+```go
+the_time, err := time.Parse("2006-01-02 15:04:05", "2014-01-08 09:04:41")
+if err == nil {
+        unix_time := the_time.Unix()
+	fmt.Println(unix_time)		
+}
+// 1389171881
+```
+
 time库使用
 
 ```go
@@ -3207,34 +3020,26 @@ func main(){
     //本地时间
     nowTime := time.Now()
     //年月日
-    year := nowTime.Year()
-    fmt.Printf("%s",year)
-    month := nowTime.Month()
-    fmt.Printf("%s",month)
-    y,m,d := nowTime.Date()
-    fmt.Printf("%d:%d:%d",y,m,d)
+    year := nowTime.Year(); fmt.Printf("%s",year)
+    month := nowTime.Month(); fmt.Printf("%s",month)
+    y,m,d := nowTime.Date(); fmt.Printf("%d:%d:%d",y,m,d)
     //周月年中的第几天
-    day := nowTime.Day()
-    fmt.Printf("%d",day)
-    yearDay := nowTime.YearDay()
-    fmt.Printf("%d",yearDay)
-    weekDay := nowTime.Weekday()
-    fmt.Printf("%d",weekDay)
+    day := nowTime.Day(); fmt.Printf("%d",day)
+    yearDay := nowTime.YearDay(); fmt.Printf("%d",yearDay)
+    weekDay := nowTime.Weekday(); fmt.Printf("%d",weekDay)
     //时分秒
     fmt.Printf("%s",nowTime.Hour())
     fmt.Printf("%s",nowTime.Minute())
     fmt.Printf("%s",nowTime.Second())
     fmt.Printf("%s",nowTime.Nanosecond())
     //创建时间
-    date := time.Date(2019,time.September,8,15,0,0,0,time.Now().Location())
-    fmt.Printf("%s",date)
+    date := time.Date(2019,time.September,8,15,0,0,0,time.Now().Location()); fmt.Printf("%s",date)
     //Add方法和Sub方法是相反的
     //获取t0和t1的时间距离d是使用Sub
     //将t0加d获取t1就是使用Add方法
     now := time.Now()
     //一天之前
-    duration,_ := time.ParseDuration("-24h0m0s")
-    fmt.Printf("%s",now.Add(duration))
+    duration,_ := time.ParseDuration("-24h0m0s"); fmt.Printf("%s",now.Add(duration))
     //一周之前
     fmt.Printf("%s",now.Add(duration * 7))
     //一月之前
@@ -3609,6 +3414,190 @@ func main() {
 [WARNING]2020/12/01 11:33:07 logger.go:51: hello,korbin
 [ERROR]2020/12/01 11:33:07 logger.go:55: hello,korbin
 */
+```
+
+## 文件读写
+
+两种方案
+
+```go
+package main
+
+import (
+    "bufio" //这是什么包？
+    "fmt"
+    "io"
+    "io/ioutil"
+    "os"
+)
+
+// Reading files requires checking most calls for errors.This helper will streamline our error checks below.
+func check(e error) {
+    if e != nil {
+        panic(e)
+    }
+}
+
+func main() {
+    // Perhaps the most basic file reading task is slurping（咕噜咕噜的喝） a file's entire contents into memory.
+    dat, err := ioutil.ReadFile("/tmp/dat") //一次性加载到内存
+    check(err)
+    fmt.Print(string(dat))
+    // You'll often want more control over how and what parts of a file are read. For these tasks, start by `Open`ing a file to obtain an `os.File` value.
+    f, err := os.Open("/tmp/dat") //
+    check(err)
+    // Read some bytes from the beginning of the file. Allow up to 5 to be read but also note how many actually were read.
+    b1 := make([]byte, 5)
+    n1, err := f.Read(b1) //读一部分内容
+    check(err)
+    fmt.Printf("%d bytes: %s\n", n1, string(b1))
+    // You can also `Seek` to a known location in the file and `Read` from there.
+    o2, err := f.Seek(6, 0) //自定义开始点
+    check(err)
+    b2 := make([]byte, 2)
+    n2, err := f.Read(b2)
+    check(err)
+    fmt.Printf("%d bytes @ %d: %s\n", n2, o2, string(b2))
+    // The `io` package provides some functions that may be helpful for file reading. For example, reads like the ones above can be more robustly implemented with `ReadAtLeast`.
+    o3, err := f.Seek(6, 0)
+    check(err)
+    b3 := make([]byte, 2)
+    n3, err := io.ReadAtLeast(f, b3, 2)
+    check(err)
+    fmt.Printf("%d bytes @ %d: %s\n", n3, o3, string(b3))
+    // There is no built-in rewind, but `Seek(0, 0)` accomplishes this.
+    _, err = f.Seek(0, 0)
+    check(err)
+    // The `bufio` package implements a buffered reader that may be useful both for its efficiency with many small reads and because of the additional reading methods it provides.
+    r4 := bufio.NewReader(f)
+    b4, err := r4.Peek(5)
+    check(err)
+    fmt.Printf("5 bytes: %s\n", string(b4)
+    // Close the file when you're done (usually this would be scheduled immediately after `Open`ing with `defer`).
+    f.Close()
+//开始写文件部分
+    // To start, here's how to dump a string (or just bytes) into a file.
+    d1 := []byte("hello\ngo\n")
+    err := ioutil.WriteFile("dat1.txt", d1, 0644)//一次性写文件
+    check(err)
+    // For more granular（粒状，精细） writes, open a file for writing.
+    f, err := os.Create("dat2.txt")
+    check(err)
+    // It's idiomatic（惯用的） to defer a `Close` immediately after opening a file.
+    defer f.Close()
+    // You can `Write` byte slices as you'd expect.
+    d2 := []byte{115, 111, 109, 101, 10}
+    n2, err := f.Write(d2)
+    check(err)
+    fmt.Printf("wrote %d bytes\n", n2)
+    // A `WriteString` is also available.
+    n3, err := f.WriteString("writes\n")
+    fmt.Printf("wrote %d bytes\n", n3)
+    // Issue a `Sync` to flush writes to stable storage.
+    f.Sync()
+    // `bufio` provides buffered writers in addition to the buffered readers we saw earlier.
+    w := bufio.NewWriter(f)
+    n4, err := w.WriteString("buffered\n")
+    fmt.Printf("wrote %d bytes\n", n4)
+    // Use `Flush` to ensure all buffered operations have been applied to the underlying writer.
+    w.Flush()
+//追加
+f, err := os.OpenFile(fileName, os.O_WRONLY|os.O_APPEND, 0666)
+}
+```
+
+## 定时器
+
+在将来的某个时间点执行Go代码，或者在某个时间间隔重复执行。 Go的内置计时器和自动接收器功能使这两项任务变得容易。
+
+定时器代表未来的一个事件。可告诉定时器您想要等待多长时间，它提供了一个通道，在当将通知时执行对应程序
+
+```go
+package main
+import "time"
+import "fmt"
+
+func main() {
+    // Timers represent a single event in the future. You tell the timer how long you want to wait, and it provides a channel that will be notified at that time. This timer will wait 2 seconds.
+    timer1 := time.NewTimer(time.Second * 2)
+    // The `<-timer1.C` blocks on the timer's channel `C` until it sends a value indicating that the timer expired.
+    <-timer1.C  //<-timer1.C阻塞定时器的通道C，直到它发送一个指示定时器超时的值。如果只是想等待，可以使用time.Sleep。定时器可能起作用的一个原因是在定时器到期之前取消定时器
+    fmt.Println("Timer 1 expired")
+    // If you just wanted to wait, you could have used `time.Sleep`. One reason a timer may be useful is that you can cancel the timer before it expires.Here's an example of that.
+    timer2 := time.NewTimer(time.Second)
+    go func() {
+        <-timer2.C
+        fmt.Println("Timer 2 expired")
+    }()
+    stop2 := timer2.Stop() //提前取消计时器
+    if stop2 {
+        fmt.Println("Timer 2 stopped")
+    }
+t := time.Tick(10)//
+<- t // 
+}
+```
+
+## socket编程
+
+系统调用
+
+执行命令行
+
+用标准输入输出
+
+命令行参数：用os.Args，像python的getops一样
+
+## 随机数
+
+[go获取随机数](http://www.tuicool.com/articles/ZVrmQjr)
+
+```go
+package main
+
+import (
+	"fmt"
+	"math/rand"
+)
+
+func main() {
+// 根据时间设置随机数种子
+    	rand.Seed(int64(time.Now().Nanosecond()))
+	// 获取随机整数
+	for i := 0; i < 5; i++ {
+		fmt.Printf("%v ", rand.Int())
+	}
+	fmt.Println()
+
+	// 获取随机的32位整数
+	for i := 0; i < 5; i++ {
+		fmt.Printf("%v ", rand.Int31())
+	}
+	fmt.Println()
+
+	// 获取指定范围内的随机数
+	for i := 0; i < 5; i ++ {
+		fmt.Printf("%v ", rand.Intn(10))
+	}
+	fmt.Println()
+
+	// 获取浮点型数[0.0, 1.0)之间
+	for i := 0; i < 5; i ++ {
+		fmt.Printf("%v ", rand.Float32())
+	}
+	fmt.Println()
+}
+//获取两个数字之间的数字
+func RandInt64(min,max int64) int64{
+    maxBigInt:=big.NewInt(max)
+    i,_:=rand.Int(rand.Reader,maxBigInt)
+    if i.Int64()<min{
+        RandInt64(min,max)    
+    }
+    return i.Int64()
+}
+//产生不重复的随机数
+//rand库的Perm方法可以返回[0,n)直接的随机数
 ```
 
 
