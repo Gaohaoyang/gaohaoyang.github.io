@@ -1037,13 +1037,13 @@ Go语言中，行分隔符键是语句终止符，无需指明用;分割
 所有类型：
 - bool  
 - string  
-- int  int8  int16  int32  int64 
+- int  int8(byte)  int16  int32(rune)  int64 
 - uint uint8 uint16 uint32 uint64 uintptr  
 - byte // uint8 的别名  
 - rune // int32 的别名。代表一个Unicode码  
 - float32 float64  
 - complex64 complex128
-- int，uint 和 uintptr 类型在32位的系统上一般是32位，而在64位系统上是64位。当你需要使用一个整数类型时，应该首选 int，仅当有特别的理由才使用定长整数类型或者无符号整数类型。
+- int，uint 和 uintptr 类型在**32位**的系统上一般是32位，而在**64位**系统上是64位。当需要使用一个整数类型时，应该首选 int，仅当有特别的理由才使用定长整数类型或者无符号整数类型。
 
 ```go
 package main
@@ -1051,22 +1051,22 @@ package main
 import (
     "fmt"
     "math/cmplx" 
-)  
+) 
 
 var ( //组合定义变量
      ToBe   bool       = false
      MaxInt uint64     = 1<<64 – 1
      z      complex128 = cmplx.Sqrt(-5 + 12i) 
      x // 变量在定义时没有明确的初始化时会赋值为 零值(“”,0,false…) 
-    var i int = 42
-         var f float64 = float64(i) //类型强转,不同于C，必须显示转换，不存在隐式转换
-         f := float64(i) //短声明，简洁形式
-         const Pi = 3.14 //定义常量
-         const World = "世界"
-)  
+     var i int = 42
+     var f float64 = float64(i) //类型强转,不同于C，必须显示转换，不存在隐式转换
+     f := float64(i) //短声明，简洁形式
+     const Pi = 3.14 //定义常量
+     const World = "世界"
+) 
 const (     
-         Big   = 1 << 100     
-         Small = Big >> 99 
+     Big   = 1 << 100     
+     Small = Big >> 99 
 )
  
 func main() {
@@ -1090,13 +1090,250 @@ func main() {
 }
 ```
 
+## 字符串
+
+
+### 字符串定义
+
+```go
+package main 
+import (
+  "fmt"  
+ "strings" 
+) 
+
+func main() {    
+    greetings :=  []string{"Hello","world!"}    
+    fmt.Println(strings.Join(greetings, " "))  //字符串连接
+}
+```
+ 
+- 前缀：strings.HasPrefix("prefix", "pre")
+- 后缀：strings.HasSuffix("suffix", "fix")
+
+### 字符串操作
+
+strings使用方法
+
+```go
+package main
+import s "strings" //strings取个别名
+import "fmt"
+
+var p = fmt.Println//我们给 fmt.Println 一个短名字的别名，我们随后将会经常用到。
+func main() {
+//注意都是包中的函数，不是字符串对象自身的方法，调用时传递字符作为第一个参数进行传递。
+    p("Contains:  ", s.Contains("test", "es")) // true,包含判断，注意s.Contains("", "")=true
+    p(s.ContainsAny("test", "e")) // e&s(且),e|s(或)
+    p(s.ContainsRune("我爱中国", '我'))  //字符匹配，注意是单引号！
+    p(s.EqualFold("Go", "go")) //判等，忽略大小写
+    p(s.Fields("a b c")) //字符串变列表["a" "b" "c"]
+    p("Count:     ", s.Count("test", "t")) //2 计数
+    p("HasPrefix: ", s.HasPrefix("test", "te"))// true 前缀判断
+    p("HasSuffix: ", s.HasSuffix("test", "st"))// true 后缀判断
+    p("Index:     ", s.Index("test", "e"))// 1 查找子串
+    p("Index:     ", s.IndexAny("我是中国人", "中"))// 返回任意一个
+    p("Index:     ", s.IndexRune("我是中国人", '中'))// 字符
+    p("Index:     ", s.LastIndex("go gopher", "go"))// 1 查找子串
+    p("Index:     ", s.LastIndexAny("go gopher", "go"))// 1 查找子串
+    rot13 := func(r rune) rune {
+        switch {
+            case r >= 'A' && r <= 'Z':
+                return 'A' + (r-'A'+13)%26
+            case r >= 'a' && r <= 'z':
+                return 'a' + (r-'a'+13)%26
+		}
+		return r
+	}
+    fmt.Println(strings.Map(rot13, "'Twas brillig and the slithy gopher...")) //相当于python中的map
+    p("Join:      ", s.Join([]string{"a", "b"}, "-")) //a-b slice连接成字符串
+    p("Repeat:    ", s.Repeat("a", 5)) // aaaaa 重复
+    p("Replace:   ", s.Replace("foo", "o", "0", -1)) //f00 全部替换
+    p("Replace:   ", s.Replace("foo", "o", "0", 1))//f0o 1次替换
+    p("Split:     ", s.Split("a-b-c-d-e", "-"))//[a b c d e] string转array（slice？）
+    fmt.Printf("%qn", strings.SplitAfter("/home/m_ta/src", "/")) //["/" "home/" "m_ta/" "src"]
+    fmt.Printf("%qn", strings.SplitAfterN("/home/m_ta/src", "/", 2)) //["/" "home/m_ta/src"]
+    fmt.Printf("%qn", strings.SplitN("/home/m_ta/src", "/", 2)) //["/" "home/" "m_ta/" "src"]
+   fmt.Printf("%qn", strings.SplitN("/home/m_ta/src", "/", -1)) //["" "home" "m_ta" "src"]
+    fmt.Println(strings.Title("her royal highness")) //首字符大写？
+    fmt.Println(strings.ToTitle("loud noises"))
+    p("ToLower:   ", s.ToLower("TEST"))//test 小写
+    p("ToUpper:   ", s.ToUpper("test"))//TEST 大写
+    fmt.Printf("[%q]", strings.Trim(" !!! Achtung !!! ", "! ")) // ["Achtung"]
+    fmt.Printf("[%q]", strings.TrimLeft(" !!! Achtung !!! ", "! ")) // ["Achtung !!! "]
+    fmt.Println(strings.TrimSpace(" tn a lone gopher ntrn")) // a lone gopher
+    p("Len: ", len("hello"))// 5 长度
+    p("Char:", "hello"[1])// 101 取字符
+}
+```
+
+参考：[go字符串操作示例](http://studygolang.com/articles/771)
+
+## 数组（array）—— 固定大小
+
+```go
+var a [10]int //定义数组时需要制定大小s
+var stu = [2]string{"a", "b"}
+stu[0] = "c"
+ftm.Println(stu)
+// 变长数组
+var stu = []string{"a", "b"}
+std = append(std, "c")
+fmt.Println(stu)
+// 遍历数组
+for i, v := range stu {
+    fmt.Println(i, v)
+}
+// 不要下标
+for _, v := range stu {
+    fmt.Println(v)
+}
+```
+
+- 数组的长度是其类型的一部分，因此数组不能改变大小——怎么办？用slice！
+- 数组在Go语言中很重要，应该需要了解更多的信息。
+
+以下几个与数组相关的重要概念应该向Go程序员明确：
+
+| 概念| 描述|
+|---|---|
+|多维数组|Go支持多维数组，多维数组的最简单的形式是二维数组。|
+| 将数组传递给函数| 可以通过指定数组的名称而不使用索引，将指向数组的指针传递给函数。|
+ 
+ 
+## 切片(slice) —— 大小不定
+ 
+一个 slice 会指向一个序列的值，并且包含了长度信息。slice包含了array的基本操作
+
+```go
+func main() {
+    x := [3]int{3,5,6} //指明大小就是array！否则slice
+    x := [3]int{} // 数组
+    s := []int{2, 3, 5, 7, 11, 13} // slice
+    a := make([]int, 5)  // len(a)=5,用make构造slice（默认取值0）
+    b := make([]int, 0, 5) // len(b)=0, cap(b)=5，指定容量
+    var z []int //nil slice空切片,z=nil
+    z = append(z, 0) //append追加元素
+    z = append(z, 1,4,3)//多个元素
+    copy(a,b) //复制
+    fmt.Println("s ==", s)      
+    fmt.Println("s[1:4] ==", s[1:4]) //s[:4],s[:5]同python
+    game := [][]string{ //二维切片
+       []string{"_", "_", "_"}, 
+       []string{"_", "_", "_"}
+    }
+    for i := 0; i < len(s); i++ {         
+        fmt.Printf("s[%d] == %d\n", i, s[i])  
+            fmt.Printf("%s\n", strings.Join(s[i], " ")) //连接二维切片里的一维
+    } 
+}
+
+func test_array(array [5]int){ //array值传递，未改变原参数值 
+    newarray := array 
+    newarray[0] = 88 
+}
+func test_slice(slice []int){ //slice引用传递，值改变了
+    newslice := slice
+    newslice[0] = 88
+}
+```
+
+- 不只是数组，go语言中的大多数类型在函数中当作参数传递都是**值**语义的。任何值语义的一种类型当作参数传递到调用的函数中，都会经过一次内容的copy，从一个方法栈中copy到另一个方法栈
+- go不是一种纯粹的面向对象语言，更多的是一种更**简单高效的C**，所以在参数传递上跟C保持着基本的一致性。一些较大的数据类型，比如结构体、数组等，最好使用传递指针的方式，这样就能避免在函数传递时对数据的copy。
+- 虽然slice在传递时是按照引用语义传递，但是又因为append()操作的问题，导致即使是引用传递还是不能顺利解决一些问题
+
+## 范围（range）
+
+range关键字在for循环中用于遍历数组，切片，通道或映射的项目
+
+| 范围表达式 | 第1个值 | 第2个值(可选)|
+|---|---|---|
+| 数组或切片a\[n]E | 索引 i 整数 | a\[i]E|
+| Strubg s字符串| 索引 i 整数| 符文整数|
+| map m map\[K]V| key k K | value m\[k] V
+| channel c chan E | element e E | none |
+
+循环遍历slice、map
+
+```go
+var pow = []int{1, 2, 4, 8, 16, 32, 64, 128}  
+func main() {
+   for i, v := range pow { //取index、value
+        fmt.Printf("2**%d = %d\n", i, v)     
+   }
+    pow := make([]int, 10)     
+    for i := range pow {  // 取index
+        pow[i] = 1 << uint(i)     
+    }     
+    for _, value := range pow { //取value（index用_忽略）
+        fmt.Printf("%d\n", value)     
+    }
+}
+```
+
+## 哈希map
+
+`映射`(Map)，它将唯一键映射到值。 键是用于在检索值的对象。 给定一个键和一个值就可以在Map对象中设置值
+
+```go
+var countryCapitalMap map[string]string    
+/* create a map*/    
+countryCapitalMap = make(map[string]string) //string -> string
+/* insert key-value pairs in the map*/    
+countryCapitalMap["France"] = "Paris"
+delete(countryCapitalMap,"France");//删除
+   /* print map using keys*/    
+for country := range countryCapitalMap {       
+   fmt.Println("Capital of",country,"is",countryCapitalMap[country])    
+}
+// `range` on map iterates over key/value pairs.     
+kvs := map[string]string{"a": "apple", "b": "banana"} //初始化！
+for k, v := range kvs {         
+    fmt.Printf("%s -> %s\n", k, v)     
+}      
+// `range` can also iterate over just the keys of a map.     
+for k := range kvs {         
+    fmt.Println("key:", k)     
+}      
+// `range` on strings iterates over Unicode code points. The first value is the starting byte index of the `rune` and the second the `rune` itself.     
+for i, c := range "go" {  //字符串时遍历字符
+   fmt.Println(i, c)     
+}
+//嵌套map
+m := map[string]map[string]string{}
+mm, ok := m["kkk"]
+if !ok {
+    mm = make(map[string]string)
+    m["kkk"] = mm
+}
+mm[k1k1k1] = "sssss"
+```
+
+- 【2017-06-21】map存在性判断
+
+if _, ok := map\[key]; ok {//存在}
+- 【教训】go禁止对map成员取地址。。。但slice成员可以，好变态
+
+```go
+test := map[string]int{"a":1,"b":2}
+// ./multi_map.go:34: cannot take the address of test["a"]
+fmt.Println("三层取地址:",&copyWriteDict["female"][1]) //slice成员可以取地址
+fmt.Println("三层取地址:",&copyWriteDict["female"][1]["real"]) //cannot take the address of copy
+```
+
+解决办法：
+- （1）不传指针 
+- （2）提前用临时变量缓存，再传非map类的地址
 
 
 ## 变量
 
-Go标识符是用于标识变量，函数或任何其他用户定义项目的名称。标识符以字母A到Z或a到z或下划线_开头，后跟零个或多个字母，下划线和数字(0到9)组成。
+Go标识符是用于标识**变量**、**函数**或任何其他用户定义项目的名称。
+- 标识符以字母A到Z或a到z或下划线_开头，后跟零个或多个字母，下划线和数字(0到9)组成。
 - 标识符 = \[字母_] {字母 | unicode数字_}。
-Go不允许在标识符中使用标点符号，例如@, $ 和 %。 Go是一种区分大小写的编程语言。 因此，Manpower和manpower在Go中是两个不同的标识符
+
+Go不允许在标识符中使用**标点符号**，例如@, $ 和 %。 Go是一种区分大小写的编程语言。 
+- 因此，Manpower和manpower在Go中是两个不同的标识符
 
 go 变量的特殊之处：没有空值描述尚未分配值的变量的值。而是，每个变量类型都有一个默认值，具体取决于变量的数据类型。
 - 如果声明没有值的变量，则必须指定数据类型，否则变量类型是可选的
@@ -1135,13 +1372,16 @@ func main(){
 
 ## 关键词
 
-break,default,func,interface,select,case,defer,go,map,struct,chan,else,goto,package,switch,const,fallthrough,if,range,type,continue,for,import,return,var
+关键词总结
+- break, default, func, interface, select, case, defer, go, map, struct, chan, else, goto, package, switch, const, fallthrough, if, range, type, continue, for, import, return, var
  
 ## 函数
 
 - 类型：按**值**调用、按**引用**调用
-- 局部变量、全局变量（main函数之外定义）
-- 函数可以接受任意参数（类型在变量后面），返回任意参数
+- **局部**变量、**全局**变量（main函数之外定义）
+- 函数可以接受**任意**参数（类型在变量后面），返回任意参数
+
+### 显式函数
 
 ```go
 package main
@@ -1168,12 +1408,35 @@ func main() {
 }
 ```
 
+### 匿名函数
+
+Go语言支持**匿名**函数，通过**闭包方式**实现。匿名函数在想要定义函数而不必命名时非常有用（**内联函数**）
+
+```go
+import "fmt"
+
+func intSeq() func() int {   //i记录调用次数，相当于计数器
+    i := 0     //定义初始值
+    return func() int { //通过闭包方式隐藏变量i    
+        i += 1         
+        return i     
+    } 
+}
+func main(){
+    nextInt := intSeq() // 返回函数，nextInt是函数名
+    fmt.println(nextInt())  //1,每次调用都会更新
+    fmt.println(nextInt())  //2
+    newInt := intSeq()
+    fmt.println(newInt()) //1
+}
+```
+
 ## 参数
 
 ### 外部参数
 
 运行：
-- go run main.go name = max
+- go run main.go <font color='blue'>name = max </font>
 
 ```go
 import (
@@ -1205,6 +1468,8 @@ func add(x, y int) int {
 
 ### 变参函数
 
+参数数量不确定时，可以使用变参
+
 ```go
 package main
 import "fmt"
@@ -1233,141 +1498,11 @@ func main() {
 }
 ```
 
-## 匿名函数
-
-Go语言支持匿名函数，通过**闭包方式**实现。匿名函数在想要定义函数而不必命名时非常有用（内联函数）
-
-```go
-import "fmt"
-func intSeq() func() int {   //i记录调用次数，相当于计数器
-i := 0     //定义初始值
-return func() int { //通过闭包方式隐藏变量i    
-     i += 1         
-     return i     
-} 
-}
-func main(){
-nextInt := intSeq() // 返回函数，nextInt是函数名
-fmt.println(nextInt())  //1,每次调用都会更新
-fmt.println(nextInt())  //2
-newInt := intSeq()
-fmt.println(newInt()) //1
-}
-```
-
-## go routine
-
-Go Routine主要是使用go关键字来调用函数，还可以使用匿名函数。可以把go关键字调用的函数想像成pthread_create，创建线程。
- 
-```go
-package main
-import "fmt"
-func f(msg string) {
-    fmt.Println(msg)
-}
-func main(){
-    go f("goroutine")
- 
-    go func(msg string) {
-        fmt.Println(msg)
-    }("going")
-}
-```
-
-并发安全性
-- goroutine有个特性，也就是说，如果一个goroutine没有被阻塞，那么别的goroutine就不会得到执行。这并不是真正的并发，如果你要真正的并发，你需要在你的main函数的第一行加上下面的这段代码：
-
-```go
-import "runtime"
-...
-runtime.GOMAXPROCS(4)
-```
-
-以上代码存在并发安全性问题，需要上锁
-
-[参考地址](http://coolshell.cn/articles/8489.html)
- 
-
-## 字符串
-
-```go
-package main 
-import (
-  "fmt"  
- "strings" 
-) 
-
-func main() {    
-    greetings :=  []string{"Hello","world!"}    
-    fmt.Println(strings.Join(greetings, " "))  //字符串连接
-}
-```
- 
-- 前缀：strings.HasPrefix("prefix", "pre")
-- 后缀：strings.HasSuffix("suffix", "fix")
-
-strings使用方法
-
-```go
-package main
-import s "strings" //strings取个别名
-import "fmt"
-
-var p = fmt.Println//我们给 fmt.Println 一个短名字的别名，我们随后将会经常用到。
-func main() {
-//注意都是包中的函数，不是字符串对象自身的方法，调用时传递字符作为第一个参数进行传递。
-    p("Contains:  ", s.Contains("test", "es")) // true,包含判断，注意s.Contains("", "")=true
- p(s.ContainsAny("test", "e")) // e&s(且),e|s(或)
- p(s.ContainsRune("我爱中国", '我'))  //字符匹配，注意是单引号！
- p(s.EqualFold("Go", "go")) //判等，忽略大小写
- p(s.Fields("a b c")) //字符串变列表["a" "b" "c"]
-    p("Count:     ", s.Count("test", "t")) //2 计数
-    p("HasPrefix: ", s.HasPrefix("test", "te"))// true 前缀判断
-    p("HasSuffix: ", s.HasSuffix("test", "st"))// true 后缀判断
-    p("Index:     ", s.Index("test", "e"))// 1 查找子串
-p("Index:     ", s.IndexAny("我是中国人", "中"))// 返回任意一个
-p("Index:     ", s.IndexRune("我是中国人", '中'))// 字符
-p("Index:     ", s.LastIndex("go gopher", "go"))// 1 查找子串
-p("Index:     ", s.LastIndexAny("go gopher", "go"))// 1 查找子串
-rot13 := func(r rune) rune {
-	switch {
-		case r >= 'A' && r <= 'Z':
-			return 'A' + (r-'A'+13)%26
-		case r >= 'a' && r <= 'z':
-			return 'a' + (r-'a'+13)%26
-		}
-		return r
-	}
-    fmt.Println(strings.Map(rot13, "'Twas brillig and the slithy gopher...")) //相当于python中的map
-    p("Join:      ", s.Join([]string{"a", "b"}, "-")) //a-b slice连接成字符串
-    p("Repeat:    ", s.Repeat("a", 5)) // aaaaa 重复
-    p("Replace:   ", s.Replace("foo", "o", "0", -1)) //f00 全部替换
-    p("Replace:   ", s.Replace("foo", "o", "0", 1))//f0o 1次替换
-    p("Split:     ", s.Split("a-b-c-d-e", "-"))//[a b c d e] string转array（slice？）
-fmt.Printf("%qn", strings.SplitAfter("/home/m_ta/src", "/")) //["/" "home/" "m_ta/" "src"]
-fmt.Printf("%qn", strings.SplitAfterN("/home/m_ta/src", "/", 2)) //["/" "home/m_ta/src"]
-fmt.Printf("%qn", strings.SplitN("/home/m_ta/src", "/", 2)) //["/" "home/" "m_ta/" "src"]
-   fmt.Printf("%qn", strings.SplitN("/home/m_ta/src", "/", -1)) //["" "home" "m_ta" "src"]
-fmt.Println(strings.Title("her royal highness")) //首字符大写？
-fmt.Println(strings.ToTitle("loud noises"))
-    p("ToLower:   ", s.ToLower("TEST"))//test 小写
-    p("ToUpper:   ", s.ToUpper("test"))//TEST 大写
-    fmt.Printf("[%q]", strings.Trim(" !!! Achtung !!! ", "! ")) // ["Achtung"]
-fmt.Printf("[%q]", strings.TrimLeft(" !!! Achtung !!! ", "! ")) // ["Achtung !!! "]
-fmt.Println(strings.TrimSpace(" tn a lone gopher ntrn")) // a lone gopher
-    p("Len: ", len("hello"))// 5 长度
-    p("Char:", "hello"[1])// 101 取字符
-}
-```
-
-参考：[go字符串操作示例](http://studygolang.com/articles/771)
-
-
 ## 包：文件导入
 
 Golang项目中，一次只应有一个main.go，但是所有文件都可以使用同一个包，即main。
 - 只需要在使用它的文件中导入像fmt这样的外部包即可
-如 main.go 和 greet.go
+- 如 main.go 和 greet.go
 - 运行；go run greet.go main.go
 
 ```go
@@ -1385,33 +1520,124 @@ import "fmt"
 func greet() {
     fmt.Println("hello")
 }
-
 ```
 
+### 自定义包导入失败
 
+#### 相对导入
+
+【2022-1-19】
+
+- 错误信息：
+  - build command-line-arguments: cannot find module for path XXX
+- 原因：
+- 解决办法：参考[解法](https://blog.csdn.net/qq_43265072/article/details/120389784)
+  - 执行：go env -w GO111MODULE=auto
+
+src/add/add.go
+
+```go
+package add
+
+func Add(a int ,b int) int {
+	return a+b
+}
+```
+
+文件：src/main.go
+
+```go
+package main
+ 
+import (
+	"fmt"
+	"./add"
+)
+func main() {
+	res := add.Add(10, 20)
+	fmt.Println(res)
+}
+```
+
+#### go.mod导入
+
+代码结构：
+
+```yaml
+- cfg
+  - test.go
+- go.mod
+- main.go
+```
+
+包代码
+
+```go
+//test.go 
+package cfg
+import "fmt"
+
+func Test() {
+    fmt.Println("test")
+}
+```
+
+主函数代码
+
+```go
+package main
+
+import (
+    "fmt"
+    "demo/cfg" // 错误用法, demo包不存在
+    //"app/cfg" // 正确用法, demo→app
+)
+
+func main() {
+    cfg.Test()
+    fmt.println("Hello")
+}
+```
+
+- 错误信息：local import "./cfg" in non-local package
+- 原因：命令 go mod init **app** 和代码 import "demo/cfg" 不对应
+- 解决办法：包名保持一致，[详情](https://www.jianshu.com/p/246ffe580ebd)
+
+运行：
+
+```shell
+go mod init app # 创建本地包app
+go build # 编译
+```
+
+注意：
+- **module名**和工程所在**文件夹名**无必然关联。
 
 ## 控制流
  
-Go编程语言提供以下类型的决策语句。单击以下相关链接以学习或了解其详细信息。
+Go编程语言提供以下类型的决策语句。
 
 | 语句| 描述| 
 |---|---|
 | if语句| if语句由布尔表达式后跟一个或多个语句组成。|
 | if…else语句| if语句后面可以是一个可选的else语句，当布尔表达式为false时执行else语句。|
 | 嵌套if语句| 可在另一个if或else if语句中使用一个if或else if语句。|
-|switch语句| switch语句允许根据值列表测试变量的相等性。|
-|select语句| select语句与switch语句类似，因为case语句指的是通道通信。|
+| switch语句| switch语句允许根据值列表测试变量的相等性。|
+| select语句| select语句与switch语句类似，因为case语句指的是通道通信。|
 
-循环控制语句：break、continue、goto
+循环控制语句：
+- break、continue、goto
 
-### for
+### for 循环
 
-Go 只有一种循环结构 —— for 循环。（while语句通过for实现）
+Go **只有**一种循环结构 —— for 循环。（while语句通过for实现）
 
 基本的 for 循环包含三个由分号分开的组成部分：
 - 初始化语句：在第一次循环执行前被执行
 - 循环条件表达式：每轮迭代开始前被求值
+  - 注意：<font color='red'>for循环部分没有()!</font>
 - 后置语句：每轮迭代后被执行
+
 初始化语句一般是一个短变量声明，这里声明的变量仅在整个 for 循环语句可见。如果条件表达式的值变为 false，那么迭代将终止。
 - 注意：不像 C，Java，或者 Javascript 等其他语言，for 语句的三个组成部分并不需要用括号括起来，但循环体必须用{ }括起来。
 
@@ -1446,73 +1672,42 @@ for {
 }
 ```
 
+### if 语句
 
-### if
-
-就像 for 循环一样，Go 的 if 语句也不要求用( ) 将条件括起来，同时，{ }还是必须有的
+就像 for 循环一样，Go 的 if 语句也不要求用 () 将条件括起来，同时，{}还是必须有的
 - 跟 for 语句一样， if 语句可以在条件之前执行一个简单语句
 
 ```go
 if x < 0 { 
-//if v := math.Pow(x, n); v < lim { //判断前增加一条语句,v的作用于尽在if-else中
-return sqrt(-x) + "i"     
+    //if v := math.Pow(x, n); v < lim { //判断前增加一条语句,v的作用于尽在if-else中
+    return sqrt(-x) + "i"     
 } else {         
    fmt.Printf("%g >= %g\n", v, lim)     
 }
 //v变量此处失效
 ```
 
-### switch
+### switch 语句
 
 从上至下，直至匹配成功才停止
 
 ```go
 func main() {
-fmt.Print("Go runs on ")     
-//switch {//没有条件的 switch 同 switch true 一样,等效于if-then-else
-switch os := runtime.GOOS; os {     
-case "darwin": fmt.Println("OS X.")     
-case "linux":  fmt.Println("Linux.")     
-default:  fmt.Printf("%s.", os)     
-} 
+    fmt.Print("Go runs on ")     
+    //switch {//没有条件的 switch 同 switch true 一样,等效于if-then-else
+    switch os := runtime.GOOS; os {     
+        case "darwin": fmt.Println("OS X.")     
+        case "linux":  fmt.Println("Linux.")     
+        default:  fmt.Printf("%s.", os)     
+    } 
 }
 ```
 
-注意：没有break！
+注意：<font color='red'>没有break！</font>
 
-## Defer栈
-
-Go语言引入了Defer来确保那些被打开的文件能被关闭
-
-Go的defer语句预设一个函数调用（延期的函数），该调用在函数执行defer返回时立刻运行。该方法显得不同常规，但却是处理上述情况很有效，无论函数怎样返回，都必须进行资源释放。
-
-一个defer函数的示例：
-
-```go
-for i := 0; i < 5; i++ {  
-    defer fmt.Printf("%d ", i) 
-}
-```
-
-被延期的函数以**后进先出**（LIFO）的顺行执行，因此以上代码在返回时将打印 4 3 2 1 0
-
-defer 语句会延迟函数的执行直到上层函数返回。
-- 延迟调用的参数会立刻生成，但是在上层函数返回前函数都不会被调用
-- 延迟的函数调用被压入一个栈中。当函数返回时， 会按照后进先出的顺序调用被延迟的函数调用。
- 
-```go
-func main() {     
-fmt.Println("counting")      
-for i := 0; i < 10; i++ {  //defer会将后面的语句压栈
-   defer fmt.Println(i)     
-} //输出9，8，7，。。。
-fmt.Println("done") 
-}
-```
- 
 ## 指针
 
-类型 *T 是指向类型 T的值的指针。其零值是 nil 。不同于C，go指针没有指针运算！
+类型 *T 是指向类型 T的值的指针, 零值是 nil 。不同于C，<font color='red'>go指针没有指针运算！</font>
 
 ```go
 var p *int
@@ -1529,15 +1724,18 @@ i *p = 21         // 通过指针 p 设置 i
 |概念| 描述|
 |---|---|
 | [Go指针数组](http://www.yiibai.com/go/go_array_of_pointers.html)| 可以定义数组来保存一些指针|
-| Go指针的指针| Go允许有指针指向指针等等|
+| Go指针的**指针**| Go允许有指针指向指针等等|
 | 传递指针到函数| 通过引用或地址传递参数都允许被调用函数在调用函数中更改传递的参数。|
  
 ## 结构体
 
-一个结构体( struct )就是一个字段的集合。(而 type 的含义跟其字面意思相符。)
-- Go的结构体和C的基本上一样，不过在初始化时有些不一样，Go支持带名字的初始化
-- go中的struct可以实现oop中的类、方法。go语言中的struct成员可以是任何类型，如普通类型、复合类型、函数、struct、interface等。
+一个`结构体`( struct )就是一个字段的**集合**。(而 type 的含义跟其字面意思相符。)
+- Go的结构体和C的基本上一样，不过在初始化时有些不一样，<font color='blue'>Go支持带名字的初始化</font>
+- go中的struct可以实现oop中的类、方法——**面向对象编程**
+- go语言中的struct成员可以是任何类型，如普通类型、复合类型、函数、struct、interface等。
  
+### 结构体定义
+
 ```go
 type Vertex struct {
     X int     
@@ -1546,6 +1744,7 @@ type Vertex struct {
 
 func main() {     
     fmt.Println(Vertex{1, 2}) //大括号！初始化
+    v = Vertex{}
     fmt.Println(v.X)
     p := &v //结构体指针
     p.X = 19
@@ -1557,8 +1756,9 @@ func main() {    
 }
 ```
  
-注意：Go语言中没有public, protected, private的关键字，所以，如果你想让一个方法可以被别的包访问的话，你需要把这个方法的第一个字母大写。这是一种约定。
-
+注意：
+- Go语言中<font color='red'>没有public, protected, private的关键字</font>
+- 让一个方法可以被别的包访问，需要把这个方法的**第一个字母大写**。这是一种约定。
 
 ```go
 // 【2017-6-8】
@@ -1571,9 +1771,11 @@ type B struct {
 }
 ```
 
-## 结构体方法
+### 结构体方法
 
-go语言中的oop很另类，类在go里面叫做receiver，receiver可以是除了interface之外的任何类型。方法和类并非组织在一起，传统的oop方法和类放在一个文件里面，而go语言只要在同一个包里就可，可分散在不同文件里。go的理念就是数据和实现分离
+go语言中的oop很另类，**类**在go里面叫做**receiver**，receiver可以是除了interface之外的任何类型。
+- 方法和类并非组织在一起，传统的oop方法和类放在一个文件里面，而go语言只要在同一个包里就可，可分散在不同文件里。
+- go的理念就是**数据**和**实现**分离
 
 ```go
 type IntVector []int
@@ -1594,176 +1796,88 @@ u.Iter() //会转换成&User
  // 大写方法为public，小写为private
 ```
 
-## 数组（array）
+## defer栈
+
+Go语言引入了Defer来确保那些被打开的文件能被关闭
+
+Go的defer语句预设一个**函数调用**（**延期**的函数），该调用在函数执行defer返回时立刻运行。该方法显得不同常规，但却是处理上述情况很有效，无论函数怎样返回，都必须进行资源释放。
+
+一个defer函数的示例：
 
 ```go
-var a [10]int //定义数组时需要制定大小s
-var stu = [2]string{"a", "b"}
-stu[0] = "c"
-ftm.Println(stu)
-// 变长数组
-var stu = []string{"a", "b"}
-std = append(std, "c")
-fmt.Println(stu)
-// 遍历数组
-for i, v := range stu {
-    fmt.Println(i, v)
-}
-// 不要下标
-for _, v := range stu {
-    fmt.Println(v)
+for i := 0; i < 5; i++ {  
+    defer fmt.Printf("%d ", i) 
 }
 ```
 
-- 数组的长度是其类型的一部分，因此数组不能改变大小——怎么办？用slice！
-- 数组在Go语言中很重要，应该需要了解更多的信息。以下几个与数组相关的重要概念应该向Go程序员明确：
+被延期的函数以**后进先出**（LIFO）的顺行执行，因此以上代码在返回时将打印：4 3 2 1 0
 
-| 概念| 描述|
-|---|---|
-|多维数组|Go支持多维数组，多维数组的最简单的形式是二维数组。|
-| 将数组传递给函数| 可以通过指定数组的名称而不使用索引，将指向数组的指针传递给函数。|
+defer 语句会延迟函数的执行直到上层函数返回。
+- 延迟调用的参数会立刻生成，但是在上层函数返回前函数都不会被调用
+- 延迟的函数调用被压入一个`栈`中。当函数返回时， 会按照**后进先出**的顺序调用被延迟的函数调用。
  
+```go
+func main() {     
+    fmt.Println("counting")      
+    for i := 0; i < 10; i++ {  //defer会将后面的语句压栈
+       defer fmt.Println(i)     
+    } //输出9，8，7，。。。
+    fmt.Println("done") 
+}
+```
+
+## go routine
+
+Go Routine可以使用**go关键字**来调用函数，还可以使用**匿名函数**。
+- go关键字调用的函数想像成 pthread_create，<font color='blue'>创建线程。</font>
  
-## 切片(slice)
- 
-一个 slice 会指向一个序列的值，并且包含了长度信息。slice包含了array的基本操作
-
 ```go
-func main() {
-    x := [3]int{3,5,6} //指明大小就是array！否则slice
-    x := [3]int{} //数组
-    s := []int{2, 3, 5, 7, 11, 13}
-    a := make([]int, 5)  // len(a)=5,用make构造slice（默认取值0）
-    b := make([]int, 0, 5) // len(b)=0, cap(b)=5，指定容量
-    var z []int //nil slice空切片,z=nil
-    z = append(z, 0) //append追加元素
-    z = append(z, 1,4,3)//多个元素
-    copy(a,b) //复制
-    fmt.Println("s ==", s)      
-    fmt.Println("s[1:4] ==", s[1:4]) //s[:4],s[:5]同python
-    game := [][]string{ //二维切片
-       []string{"_", "_", "_"}, 
-       []string{"_", "_", "_"}
-    }
-    for i := 0; i < len(s); i++ {         
-        fmt.Printf("s[%d] == %d\n", i, s[i])  
-            fmt.Printf("%s\n", strings.Join(s[i], " ")) //连接二维切片里的一维
-    } 
-}
+package main
+import "fmt"
 
-func test_array(array [5]int){ //array值传递，未改变原参数值 
-newarray := array 
-newarray[0] = 88 
+func f(msg string) {
+    fmt.Println(msg)
 }
- func test_slice(slice []int){ //slice引用传递，值改变了
-newslice := slice
-newslice[0] = 88
+func main(){
+    // （1）go关键词使用 go routine
+    go f("goroutine")
+    // （2）匿名函数调用 go routine
+    go func(msg string) {
+        fmt.Println(msg)
+    }("going")
 }
 ```
 
-- 不只是数组，go语言中的大多数类型在函数中当作参数传递都是值语义的。也就是任何值语义的一种类型当作参数传递到调用的函数中，都会经过一次内容的copy，从一个方法栈中copy到另一个方法栈
-- go说到底不是一种纯粹的面向对象的语言，更多的是一种更简单高效的C，所以在参数传递上跟C保持着基本的一致性。一些较大的数据类型，比如结构体、数组等，最好使用传递指针的方式，这样就能避免在函数传递时对数据的copy。
-- 虽然slice在传递时是按照引用语义传递，但是又因为append()操作的问题，导致即使是引用传递还是不能顺利解决一些问题
-
-## 范围（range）
-
-range关键字在for循环中用于遍历数组，切片，通道或映射的项目
-
-| 范围表达式 | 第1个值 | 第2个值(可选)|
-|---|---|---|
-| 数组或切片a\[n]E | 索引 i 整数 | a\[i]E|
-| Strubg s字符串| 索引 i 整数| 符文整数|
-| map m map\[K]V| key k K | value m\[k] V
-| channel c chan E | element e E | none |
-
-循环遍历slice、map
+并发安全性
+- goroutine有个特性，如果一个goroutine没有被阻塞，那么别的goroutine就不会得到执行。这并不是真正的并发，如果要真正并发，在main函数的第一行加上下面的这段代码：
 
 ```go
-var pow = []int{1, 2, 4, 8, 16, 32, 64, 128}  
-func main() {
-   for i, v := range pow { //取index、value
-        fmt.Printf("2**%d = %d\n", i, v)     
-   }
-    pow := make([]int, 10)     
-    for i := range pow {  // 取index
-        pow[i] = 1 << uint(i)     
-    }     
-    for _, value := range pow { //取value（index用_忽略）
-        fmt.Printf("%d\n", value)     
-    }
-}
+import "runtime"
+runtime.GOMAXPROCS(4) // 真正的并发
 ```
 
-## 哈希map
+以上代码存在并发安全性问题，需要上锁
+- [参考地址](http://coolshell.cn/articles/8489.html)
 
-映射(Map)，它将唯一键映射到值。 键是用于在检索值的对象。 给定一个键和一个值就可以在Map对象中设置值
-
-```go
-var countryCapitalMap map[string]string    
-/* create a map*/    
-countryCapitalMap = make(map[string]string) //string -> string
-/* insert key-value pairs in the map*/    
-countryCapitalMap["France"] = "Paris"
-delete(countryCapitalMap,"France");//删除
-   /* print map using keys*/    
-for country := range countryCapitalMap {       
-   fmt.Println("Capital of",country,"is",countryCapitalMap[country])    
-}
-// `range` on map iterates over key/value pairs.     
-kvs := map[string]string{"a": "apple", "b": "banana"} //初始化！
-for k, v := range kvs {         
-fmt.Printf("%s -> %s\n", k, v)     
-}      
-// `range` can also iterate over just the keys of a map.     
-for k := range kvs {         
-    fmt.Println("key:", k)     
-}      
-// `range` on strings iterates over Unicode code points. The first value is the starting byte index of the `rune` and the second the `rune` itself.     
-for i, c := range "go" {  //字符串时遍历字符
-   fmt.Println(i, c)     
-}
-//嵌套map
-m := map[string]map[string]string{}
-mm, ok := m["kkk"]
-if !ok {
-    mm = make(map[string]string)
-    m["kkk"] = mm
-}
-mm[k1k1k1] = "sssss"
-```
-
-- 【2017-06-21】map存在性判断
-
-if _, ok := map[key]; ok {//存在}
-- 【教训】go禁止对map成员取地址。。。但slice成员可以，好变态
-
-```go
-test := map[string]int{"a":1,"b":2}
-// ./multi_map.go:34: cannot take the address of test["a"]
-fmt.Println("三层取地址:",&copyWriteDict["female"][1]) //slice成员可以取地址
-fmt.Println("三层取地址:",&copyWriteDict["female"][1]["real"]) //cannot take the address of copy
-```
-
-解决办法：
-- （1）不传指针 
-- （2）提前用临时变量缓存，再传非map类的地址
 
 
 ## 一般接口
 
-Golang's log模块主要提供了3类接口。分别是 “Print 、Panic 、Fatal ”。当然是用前先包含log包。
+Golang's log模块主要提供了3类接口。分别是: `Print` 、`Panic` 、`Fatal`。当然是用前先包含log包。
 - import( "log")
+
 为了方便是用，Golang和Python一样，在提供接口时，提供一个简单的包级别的使用接口。不同于Python，其输出默认定位到标准错误 可以通过SetOutput 进行修改。
 对每一类接口其提供了3中调用方式，分别是 "Xxxx 、 Xxxxln 、Xxxxf" 比如对于Print就有:
 - log.Print, log.Printf, log.Println
 - log.Print ：表示其参数的调用方式和 fmt.Print 是类似的，即输出对象而不用给定特别的标志符号。
 - log.Printf ： 表示其参数的调用方式和 fmt.Printf 是类似的，即可以用C系列的格式化标志表示输出对象的类型，具体类型表示 可以参考fmt.Printf的文档
 - log.Println： 表示其调用方式和fmt.Println 类似，其和log.Print基本一致，仅仅是在输出的时候多输出一个换行
+
 更多[参考](http://gotaly.blog.51cto.com/8861157/1405754)
 
 ## 接口interface
 
-Go编程提供了另一种称为接口(interfaces)的数据类型，它代表一组方法签名。struct数据类型实现这些接口以具有接口的方法签名的方法定义。
+Go编程提供了另一种称为`接口`(interfaces)的数据类型，它代表一组方法签名。struct数据类型实现这些接口以具有接口的方法签名的方法定义。
 类似面向对象里的多态
 
 ```go
@@ -1799,18 +1913,18 @@ Go编程提供了一个非常简单的错误处理框架，以及内置的错误
 
 ```go
 func Sqrt(value float64)(float64, error) {    
-if(value < 0){ 
-    return 0, errors.New("Math: negative number passed to Sqrt")    
-}    
-return math.Sqrt(value) 
+    if(value < 0){ 
+        return 0, errors.New("Math: negative number passed to Sqrt")    
+    }    
+    return math.Sqrt(value) 
 }
 ```
  
 ## 内存分配new和make
 
-Go具有两个分配内存的机制，分别是内建的函数new和make。他们所做的事不同，所应用到的类型也不同，这可能引起混淆，但规则却很简单。
-- new 是一个分配内存的内建函数，但不同于其他语言中同名的new所作的工作，它只是将内存清零，而不是初始化内存。new(T)为一个类型为T的新项目分配了值为零的存储空间并返回其地址，也就是一个类型为*T的值。用Go的术语来说，就是它返回了一个指向新分配的类型为T的零值的指针。
-- make(T, args)函数的目的与new(T)不同。它仅用于创建切片、map和chan（消息管道），并返回类型T（不是*T）的一个被初始化了的（不是零）实例。这种差别的出现是由于这三种类型实质上是对在使用前必须进行初始化的数据结构的引用。例如，切片是一个具有三项内容的描述符，包括指向数据（在一个数组内部）的指针、长度以及容量，在这三项内容被初始化之前，切片值为nil。对于切片、映射和信道，make初始化了其内部的数据结构并准备了将要使用的值
+Go具有两个分配内存的机制，分别是内建的函数`new`和`make`。他们所做的事不同，所应用到的类型也不同，这可能引起混淆，但规则却很简单。
+- new 是一个**分配内存**的内建函数，但不同于其他语言中同名的new所作的工作，它只是将内存清零，而不是初始化内存。new(T)为一个类型为T的新项目分配了值为零的存储空间并返回其地址，也就是一个类型为*T的值。用Go的术语来说，就是它返回了一个指向新分配的类型为T的零值的指针。
+- make(T, args)函数的目的与new(T)不同。它仅用于创建**切片、map和chan**（消息管道），并返回类型T（不是*T）的一个被初始化了的（不是零）实例。这种差别的出现是由于这三种类型实质上是对在使用前必须进行初始化的数据结构的引用。例如，切片是一个具有三项内容的描述符，包括指向数据（在一个数组内部）的指针、长度以及容量，在这三项内容被初始化之前，切片值为nil。对于切片、映射和信道，make初始化了其内部的数据结构并准备了将要使用的值
 
 new不常使用
 
@@ -1821,26 +1935,26 @@ new不常使用
 - 使用make(chan val-type)创建一个新通道，通道由输入的值传入。
 - 使用通道 <- 语法将值发送到通道
 
-### 通道
+### 通道定义
 
 ```go
 package main  
 import "fmt" 
 
 func main() {      
-// Create a new channel with `make(chan val-type)`.     
-// Channels are typed by the values they convey.     
-messages := make(chan string)//默认无缓冲，只能存储一个值
-messages := make(chan string, 2) //设置缓冲，存储2个值（先进先出）
-// _Send_ a value into a channel using the `channel <-`     
-// syntax. Here we send `"ping"`  to the `messages`     
-// channel we made above, from a new goroutine.     
-go func() { messages <- "ping" }() //匿名函数 
-// The `<-channel` syntax _receives_ a value from the     
-// channel. Here we'll receive the `"ping"` message     
-// we sent above and print it out.     
-msg := <-messages     
-fmt.Println(msg) 
+    // Create a new channel with `make(chan val-type)`.     
+    // Channels are typed by the values they convey.     
+    messages := make(chan string)//默认无缓冲，只能存储一个值
+    messages := make(chan string, 2) //设置缓冲，存储2个值（先进先出）
+    // _Send_ a value into a channel using the `channel <-`     
+    // syntax. Here we send `"ping"`  to the `messages`     
+    // channel we made above, from a new goroutine.     
+    go func() { messages <- "ping" }() //匿名函数 
+    // The `<-channel` syntax _receives_ a value from the     
+    // channel. Here we'll receive the `"ping"` message     
+    // we sent above and print it out.     
+    msg := <-messages     
+    fmt.Println(msg) 
 }
 ```
 
@@ -1867,17 +1981,17 @@ import "fmt"
 import "time"  
 // This is the function we'll run in a goroutine. The `done` channel will be used to notify another goroutine that this function's work is done. 
 func worker(done chan bool) {     
-fmt.Print("working...")     
-time.Sleep(time.Second)     
-fmt.Println("done")      
-// Send a value to notify that we're done.     
-done <- true 
+    fmt.Print("working...")     
+    time.Sleep(time.Second)     
+    fmt.Println("done")      
+    // Send a value to notify that we're done.     
+    done <- true 
 }  
 func main() {      
     // Start a worker goroutine, giving it the channel to   notify on.     
-done := make(chan bool, 1)     
-go worker(done)      
-// Block until we receive a notification from the  worker on the channel.        <-done 
+    done := make(chan bool, 1)     
+    go worker(done)      
+    // Block until we receive a notification from the  worker on the channel.        <-done 
 }
 ```
  
@@ -2477,8 +2591,6 @@ func main() {
 }
 ```
 
-
-# 辅助功能
 
 ## 正则表达式（regexp）
 
@@ -3326,93 +3438,6 @@ func main() {
 
 
 # 经验总结
-
-
-## 踩过的坑儿
-
-### 自定义包导入失败
-
-#### 相对导入
-
-【2022-1-19】
-
-- 错误信息：
-  - build command-line-arguments: cannot find module for path XXX
-- 原因：
-- 解决办法：参考[解法](https://blog.csdn.net/qq_43265072/article/details/120389784)
-  - 执行：go env -w GO111MODULE=auto
-
-文件：src/main.go
-
-```go
-package main
- 
-import (
-	"fmt"
-	"./add"
-)
-func main() {
-	res := add.Add(10, 20)
-	fmt.Println(res)
-}
-```
-
-src/add/add.go
-
-```go
-package add
-
-func Add(a int ,b int) int {
-	return a+b
-}
-```
-
-#### go.mod导入
-
-- 错误信息：local import "./cfg" in non-local package
-- 原因：命令 go mod init app 和代码 import "demo/cfg" 不对应
-- 解决办法：包名保持一致，[详情](https://www.jianshu.com/p/246ffe580ebd)
-
-代码结构：
-- cfg
-  - test.go
-- go.mod
-- main.go
-
-```go
-//test.go 
-package cfg
-import "fmt"
-
-func Test() {
-    fmt.Println("test")
-}
-```
-
-```go
-package main
-
-import (
-    "fmt"
-    "demo/cfg" // 错误用法, demo包不存在
-    //"app/cfg" // 正确用法, demo→app
-)
-
-func main() {
-    cfg.Test()
-    fmt.println("Hello")
-}
-```
-
-运行：
-
-```shell
-go mod init app # 创建本地包app
-go build # 编译
-```
-
-注意：module名和工程所在文件夹名无必然关联。
-
 
 ## Go的50坑：新Golang开发者要注意的陷阱、技巧和常见错误
 
