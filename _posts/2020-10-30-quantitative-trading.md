@@ -753,6 +753,64 @@ plt.plot(valid[['Close','Predictions']])
 在三个市场上进行为期六年的实验，发现STHAN-SR显著优于最先进的神经股票预测方法。通过对STHAN-SR的空间和时间组件进行烧蚀和探索性分析来验证我们的设计选择，并证明其实用性。
 
 
+## 工程实践
+
+[关于高频量化交易的代码项目](https://zhuanlan.zhihu.com/p/558902211)
+
+### 基础教程
+ 
+- [stochastic](https://github.com/crflynn/stochastic): 常见随机过程的实现，包括连续、离散、扩散过程、噪声等类别；
+- [ou_noise](https://github.com/jwergieluk/ou_noise): O-U过程的生成、检验和参数估计；
+- [hawkes](https://github.com/stmorse/hawkes): 关于单变量以及多变量Hawkes过程的生成与参数估计，采用MAP EM算法进行参数估计；
+- [TimeSeriesAnalysisWithPython](https://github.com/AileenNielsen/TimeSeriesAnalysisWithPython): 基础时间序列教程，包括时间序列数据的读取、趋势成分与季节成分的分解、谱分析、聚类等内容；
+- [yangwohenmai](https://github.com/yangwohenmai): 进阶时间序列教程，包括基于统计学、基于LSTM、基于深度学习进行时间序列预测的内容；
+- [leetcode-master](https://github.com/youngyangyang04/leetcode-master): 数据结构与算法的刷题攻略，持续更新中；
+- [Advanced-Algorithmic-Trading](https://github.com/dummydoo/Advanced-Algorithmic-Trading): 《Advanced Algorithmic Trading》一书的代码实现，使用语言为python/R；
+- [bukosabino](https://github.com/bukosabino): 一位Affirm算法工程师的项目主页，内容丰富，包括TA库的实现、时间序列预测、特征工程选择等，主要集中于机器学习领域；
+ 
+### 订单簿分析与做市策略
+ 
+- [LOB-feature-analysis](https://github.com/nicolezattarin/LOB-feature-analysis): 对限价订单簿进行特征工程分析，包括订单大小的分布、用于价格预测的订单不平衡、知情交易的概率、波动性等方面。作者的文档与代码简洁清晰，包含部分原始文献；
+- [HFT_Bitcoin](https://github.com/ghgr/HFT_Bitcoin): BTC订单簿的数据分析以及一些传统高频策略的实例图示；
+- [High-Frequency](https://github.com/yudai-il/High-Frequency): 基于level-2限价订单簿和分笔交易数据的研究，考察了订单不平衡与买卖压力的盘口拓展；
+- [High-Frequency-Data---Limit-Order-Books](https://github.com/jeremymck/High-Frequency-Data---Limit-Order-Books): 本项目包括高频数据描述性分析，Hawkes过程的生成与参数估计以及限价订单簿的模拟；
+- [https://github.com/Macosh/Order_Book](https://github.com/Macosh/Order_Book): 一个订单簿模拟器，实现了创建不同类型的订单、订单匹配、模拟生成，数据库存储历史订单等功能；
+- [avellaneda-stoikov](https://github.com/fedecaccia/avellaneda-stoikov): Avellaneda-Stoikov做市算法的实现；
+- [Avellaneda-Stoikov](https://github.com/mdibo/Avellaneda-Stoikov): Avellaneda-Stoikov做市算法另一个实现版本，比前者更简明些；
+- [jshellen/HFT](https://github.com/jshellen/HFT): 采用随机最优控制方法求解AS做市算法及其变种，包含HJB方程的求解程序以及AS做市策略的输出框架；
+- [OptimalExecution_stochastic_control](https://github.com/huangzz119/OptimalExecution_stochastic_control): 本项目实现了Frei, C. and N. Westray (2015). Optimal execution of a vwap order: a stochastic control approach. Mathematical Finance 25(3), 612–639.一文提出的VWAP算法的最优执行，项目包括数据过程，参数校准，存货变动轨迹等；
+- [Order-Execution-Strategy](https://github.com/kousik97/Order-Execution-Strategy): 三种最优订单执行策略的实现，此外还有Almgren-Chriss框架下的市场冲击函数的实现；
+- [machine-learning-market-maker](https://github.com/mmargenot/machine-learning-market-maker): 《Intelligent Market-Making in Artificial Financial Market》一文的实现，基于贝叶斯估计的做市策略模型；
+- [armoreal/hft](https://github.com/armoreal/hft): 高频交易策略，测试了隐马尔科夫模型（HMM）与O-U过程对限价订单簿数据的拟合情况；此外，还测试了几种典型的高频因子；
+ 
+### 传统技术分析、对冲
+ 
+- [quantitative_research_report](https://gitee.com/xuezhihuan/my-over-sea-cloud/tree/master/quantitative_research_report): 一些券商研报的复现；
+- [bitmex-algo](https://github.com/eyeseaevan/bitmex-algo): 基于BitMEX平台ETH/USDT和XBT/USDT1分钟的交易数据的交易策略，采用传统技术分析指标进行交易；
+- [AlgoBot](https://github.com/Davarco/AlgoBot): 一个使用均值回归或趋势跟踪策略的自动交易机器人；
+- [High-Frequency-of-BTC-strategy](https://github.com/JunqiLin/High-Frequency-of-BTC-strategy): 跨交易所的BTC高频对冲策略；
+- [options-market-making](https://github.com/rlindland/options-market-making): 基于期权市场的交易机器人，包含做市、统计套利、delta和vega对冲等；
+- [World\_Quant\_Alphas](https://github.com/Harvey-Sun/World_Quant_Alphas): World Quant 101 alphas的计算和策略化；
+ 
+### 机器学习
+ 
+- [SGX-Full-OrderBook-Tick-Data-Trading-Strategy](https://github.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy): 采用机器学习方法对限价订单簿动态进行建模的量化策略，包括数据获取、特征选择、模型选择，可作为机器学习类策略的baseline；
+
+### 深度学习
+ 
+- [《Pytorch深度学习实践》课程对应的代码](https://blog.csdn.net/bit452/category_10569531.html), 很好的深度学习入门指引；
+- [lstm](https://github.com/nicodjimenez/lstm): 一个LSTM的简单实现；
+- [HighFrequency](https://github.com/rune-l/HighFrequency): 采用神经网络方法预测微观层面的价格跳跃，项目完整度较高，从获取数据、异常值清洗、跳跃的统计检验到LSTM、CNN、注意力机制等方法的预测应用；
+- [AlgorithmicTrading-MachineLearning](https://github.com/umeshpalai/AlgorithmicTrading-MachineLearning): 用RNN，LSTM，GRU预测股价变动；
+ 
+### 强化学习
+ 
+- [drlformm](https://github.com/BGasperov/drlformm):《Deep Reinforcement Learning for Market Making Under a Hawkes Process-Based Limit Order Book Model》一文的代码实现，基于Hawkes过程的深度强化学习做市策略；
+- [algorithmicTrader](https://github.com/lucasrea/algorithmicTrader): 一个采用强化学习进行算法交易的项目；
+- [moneyMaker](https://github.com/gucciwang/moneyMaker): 一个基于强化学习的算法交易策略；
+- [TikhonJelvis/RL-book](https://github.com/TikhonJelvis/RL-book): 《Foundations of Reinforcement Learning with Applications in Finance》一书的对应代码实现；
+- [dq-MM](https://github.com/mfrdixon/dq-MM): Deep Q-Learning用于做市，依赖于开源项目Trading Gym；
+
 # 结束
 
 
