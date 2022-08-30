@@ -93,13 +93,20 @@ mathjax: true
 
 # Embedding（嵌入）
 
+
+## 词嵌入
+
 - 【2021-5-6】国立台湾大学陈蕴侬的[word embedding](https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/200331_WordEmbeddings.pdf)，更多[课件](https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/)
+
+<object type="application/pdf" data="https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/200331_WordEmbeddings.pdf"
+           id="review" style="width:100%;  height:800px; margin-top:0px;  margin-left:0px" >
+</object>
 
 ## 基本概念
 
-- Embedding（嵌入）是**拓扑学**里面的词，在深度学习领域经常和`Manifold`（流形）搭配使用。
-  - 三维空间的球体是一个二维流形嵌入在三维空间（2D manifold embedded in 3D space）。球上的任意一个点只需要用一个二维的经纬度来表达就可以了。
-  - 一个二维空间的旋转矩阵是2x2的矩阵，其实只需要一个角度就能表达了，这是一维流形嵌入在2x2的矩阵空间。
+Embedding（嵌入）是**拓扑学**里面的词，在深度学习领域经常和`Manifold`（流形）搭配使用。
+- 三维空间的球体是一个二维流形嵌入在三维空间（2D manifold embedded in 3D space）。球上的任意一个点只需要用一个二维的经纬度来表达就可以了。
+- 一个二维空间的旋转矩阵是2x2的矩阵，其实只需要一个角度就能表达了，这是一维流形嵌入在2x2的矩阵空间。
 
 作者：[刘斯坦](https://www.zhihu.com/question/38002635/answer/1382442522)
 
@@ -112,14 +119,17 @@ Embedding 就是把一个东西映射到一个向量 x。如果两个东西很�
 
 ## 作用
 
-Embedding 是一个将离散变量转为连续向量表示的一个方式。在神经网络中，embedding是非常有用的，因为它不光可以减少离散变量的空间维数，同时还可以有意义的表示该变量。
+Embedding 是一个将**离散**变量转为**连续**向量表示的一个方式。在神经网络中，embedding是非常有用的，因为它不光可以减少离散变量的空间维数，同时还可以有意义的表示该变量。
 
 Embedding 有以下 3 个主要目的：
-- 在 embedding 空间中查找最近邻，这可以很好的用于根据用户的兴趣来进行推荐。
-- 作为监督性学习任务的输入。
-- 用于可视化不同离散变量之间的关系。
+- 在 embedding 空间中查找**最近邻**，这可以很好的用于根据用户的兴趣来进行推荐。
+- 作为监督学习任务的**输入**。
+- 用于**可视化**不同离散变量之间的关系。
 
-Embedding这个概念在深度学习领域最原初的切入点是所谓的**Manifold Hypothesis**（**流形假设**）。流形假设是指“**自然的原始数据是低维的流形嵌入于(embedded in)原始数据所在的高维空间**”。深度学习的任务就是把**高维**原始数据（图像，句子）映射到**低维**流形，使得高维的原始数据被映射到低维流形之后变得可分，而这个映射就叫嵌入（Embedding）。比如Word Embedding，就是把单词组成的句子映射到一个表征向量。但后来不知咋回事，开始把低维流形的表征向量叫做Embedding，其实是一种误用。。。如果按照现在深度学习界通用的理解（其实是偏离了原意的），Embedding就是从原始数据提取出来的Feature，也就是那个通过神经网络映射之后的低维向量。
+Embedding这个概念在深度学习领域最原初的切入点是所谓的**Manifold Hypothesis**（**流形假设**）。
+- 流形假设：自然的原始数据是低维的流形**嵌入**(embedded in)原始数据所在的高维空间”。
+- 深度学习的任务就是把**高维**原始数据（图像，句子）映射到**低维**流形，使得高维的原始数据被映射到低维流形之后变得可分，而这个映射就叫`嵌入`（Embedding）。
+- 比如Word Embedding是把单词组成的句子映射到一个**表征向量**。但后来不知咋回事，开始把低维流形的表征向量叫做Embedding，其实是一种误用。。。如果按照现在深度学习界通用的理解（其实是偏离了原意的），Embedding就是从原始数据提取出来的Feature，也就是那个通过神经网络映射之后的低维向量。
 
 2014年的经典文章：[Neural Networks, Manifolds, and Topology](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/)
 
@@ -138,11 +148,11 @@ Embedding 最酷的一个地方在于可以用来可视化出表示的数据的�
 - 其作为 TensorFlow 的一部分，能带来类似 [A.I. Experiment](http://aiexperiments.withgoogle.com/) 的效果。同时，谷歌也在 projector.tensorflow.org 放出了一个可以单独使用的版本，让用户无需安装和运行 TensorFlow 即可进行高维数据的可视化
 - [论文](https://arxiv.org/pdf/1611.05469v1.pdf), [A.I. Experiment](http://aiexperiments.withgoogle.com/), [Embedding Projector体验地址](https://projector.tensorflow.org/)，[使用介绍](https://www.tensorflow.org/versions/master/how_tos/embedding_viz/index.html)
 - ![nlp降维图示](https://pic1.zhimg.com/80/v2-7abbe32b5feb0ab869db33a55e2b8b7c_720w.png)
-  - Label by：可以选择Label和Index，将鼠标放到相应的点上，可以显示该点的Label或者Index
-  - Color by：可选Label和No color map，前者会根据不同的label给点赋予不同的颜色，后者不涂色，一律为黑白，如图所示。
-  - ![](https://img-blog.csdn.net/20180710170658512)
-  - 可以根据Label查找某个类，如图，我们可以找到Label为4的点。
-  - ![](https://img-blog.csdn.net/20180710170727330)
+- Label by：可以选择Label和Index，将鼠标放到相应的点上，可以显示该点的Label或者Index
+- Color by：可选Label和No color map，前者会根据不同的label给点赋予不同的颜色，后者不涂色，一律为黑白，如图所示。
+- ![](https://img-blog.csdn.net/20180710170658512)
+- 可以根据Label查找某个类，如图，我们可以找到Label为4的点。
+- ![](https://img-blog.csdn.net/20180710170727330)
 
 <video width="620" height="440" controls="controls" autoplay="autoplay">
   <source src="https://vdn1.vzuu.com/SD/7191e9f4-ec77-11ea-acfd-5ab503a75443.mp4?disable_local_cache=1&auth_key=1619512352-0-0-9d84f1b7e6c1920c1c9a0a2806ca2132&f=mp4&bu=pico&expiration=1619512352&v=hw" type="video/mp4" />
@@ -194,9 +204,7 @@ def train(mnist):
             learning_rate_decay,
             staircase=True
         )
-
         train_step = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss,global_step=global_step)
-
         train_op = tf.group(train_step,ema_op)
 
     with tf.Session() as sess:
@@ -204,12 +212,9 @@ def train(mnist):
         for i in range(training_steps):
             xs,ys = mnist.train.next_batch(batch_size)
             _,loss_value,step = sess.run([train_op,loss,global_step],feed_dict={x:xs,y_:ys})
-
             if step % 100 == 0 :
                 print('step:{},loss:{}'.format(step,loss_value))
-
         final_result = sess.run(y,feed_dict={x:mnist.test.images})
-
     return final_result
 
 def visualisation(final_result):
@@ -217,14 +222,12 @@ def visualisation(final_result):
     y = tf.Variable(final_result,name=tensor_name)
     #定义日志文件writer
     summary_writer = tf.summary.FileWriter(log_dir)
-
     #ProjectorConfig帮助生成日志文件
     config = projector.ProjectorConfig()
     #添加需要可视化的embedding
     embedding = config.embeddings.add()
     #将需要可视化的变量与embedding绑定
     embedding.tensor_name = y.name
-
     #指定embedding每个点对应的标签信息，
     #这个是可选的，没有指定就没有标签信息
     embedding.metadata_path = meta_file
@@ -233,10 +236,8 @@ def visualisation(final_result):
     embedding.sprite.image_path = sprite_file
     #指定sprite图中单张图片的大小
     embedding.sprite.single_image_dim.extend([28,28])
-
     #将projector的内容写入日志文件
     projector.visualize_embeddings(summary_writer,config)
-
     #初始化向量y，并将其保存到checkpoints文件中，以便于TensorBoard读取
     sess = tf.InteractiveSession()
     sess.run(tf.global_variables_initializer())
@@ -246,7 +247,6 @@ def visualisation(final_result):
 
 def main(_):
     mnist = input_data.read_data_sets('MNIST_data',one_hot=True)
-
     final_result = train(mnist)
     visualisation(final_result)
 
@@ -283,7 +283,6 @@ def create_sprite_image(images):
             cur = i * num + j
             if cur < images.shape[0]:
                 sprite_image[i*img_h:(i+1)*img_h,j*img_w:(j+1)*img_w] = images[cur]
-
     return sprite_image
 
 if __name__ == '__main__':
@@ -291,37 +290,30 @@ if __name__ == '__main__':
     #黑底白字变成白底黑字
     to_visualise = 1 - np.reshape(mnist.test.images,[-1,28,28])
     sprite_image = create_sprite_image(to_visualise)
-
     #存储展示图像
     path_mnist_sprite = os.path.join(log_dir,sprite_file)
     plt.imsave(path_mnist_sprite,sprite_image,cmap='gray')
     plt.imshow(sprite_image,cmap='gray')
-
     #存储每个下标对应的标签
     path_mnist_metadata = os.path.join(log_dir,meta_file)
     with open(path_mnist_metadata,'w') as f:
         f.write('Index\tLabel\n')
         for index,label in enumerate(mnist.test.labels):
             f.write('{}\t{}\n'.format(index,label))
-
 ```
 
 执行tensorboard –logdir=log后，浏览器打开localhost:6006，即可观察到相应结果。每个高维向量都被投影到一个三维坐标系中，同一个类别的向量彼此靠近，形成一个一个的簇，且界限明显，可见分类效果较好
-
-![](https://img-blog.csdn.net/2018071017062698)
+- ![](https://img-blog.csdn.net/2018071017062698)
 
 t-sne效果较好
-
-![](https://img-blog.csdn.net/20180710170707473)
-
+- ![](https://img-blog.csdn.net/20180710170707473)
 
 摘自：[Embedding的理解](https://zhuanlan.zhihu.com/p/46016518)，[英文原文](https://towardsdatascience.com/neural-network-embeddings-explained-4d028e6f0526)
 
 ## word2vec
 
 优质文章：[The Illustrated Word2vec](https://jalammar.github.io/illustrated-word2vec/)，[中文版](https://mp.weixin.qq.com/s?__biz=MjM5MTQzNzU2NA==&mid=2651669277&idx=2&sn=bc8f0590f9e340c1f1359982726c5a30&chksm=bd4c648e8a3bed9817f30c5a512e79fe0cc6fbc58544f97c857c30b120e76508fef37cae49bc&scene=0&xtrack=1#rd)
-
-![](https://jalammar.github.io/images/word2vec/personality-two-persons.png)
+- ![](https://jalammar.github.io/images/word2vec/personality-two-persons.png)
 
 ## 实现
 
@@ -342,7 +334,6 @@ embed = tf.nn.embedding_lookup(embeddings, train_inputs)
 # 执行
 print(sess.run(input_embedding, feed_dict={input_ids:[[1, 2], [2, 1], [3, 3]]}))
 ```
-
 
 ## pyecharts可视化
 
@@ -387,17 +378,15 @@ print(query_label[10],X_new[10]) # 输出label、降维后的向量
 from sklearn.decomposition import PCA
 
 pca=PCA(n_components=3)
-
 ```
+
 - 数据加载、可视化
 
 ```python
-
 import random
 from pyecharts import options as  opts
 from pyecharts.charts import Scatter3D
 from pyecharts.faker import Faker
-
 # --------- 加载数据 ---------
 vec_tsne = np.load('/home/wangqiwen004/work/nlu_data/newhouse/vec_tsne.npy')
 vec_label = np.load('/home/wangqiwen004/work/nlu_data/newhouse/vec_label.npy')
@@ -410,7 +399,6 @@ np.hstack((vec_tsne[:3], vec_label[:3]))
 #Scatter_data = vec_tsne[:10].tolist()
 N = 50000
 Scatter_data = np.hstack((vec_tsne, vec_label))[:N].tolist()
-
 # --------- 绘图 ---------
 c = (
     Scatter3D(init_opts = opts.InitOpts(width='1500px',height='900px'))  #初始化
@@ -431,7 +419,6 @@ c = (
 c.render("新房驻场客服-query空间关系.html")
 #c.render_notebook() # 渲染到jupyter notebook页面
 ```
-
 
 # 流形学习
 
@@ -475,13 +462,13 @@ Manifold Distribution Principle（流形分布定则）
 - Central Tasks for DL （深度学习的中心任务）深度学习究竟想学什么？主要是有两个中心任务：
   - （1）数据流形的拓扑结构
   - （2）数据流形上的概率分布
-- Generative Model Framework （生成模型的框架
+- Generative Model Framework （**生成模型**的框架)
   - ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/4da84eaa891d4dc3bdefeb5f6fbd1ded~noop.image)
   - 上行中，`编码`映射将手写体数字流形映射到**特征空间**，将流形上的概率分布映射到隐空间上的概率分布；`解码`映射将隐空间映回数据流形。
   - 下行中，`最优传输`映射将长方形内的均匀分布映射到隐空间中的数据分布，这里最优传输映射是某一凸函数的梯度映射，此凸函数被称为是`Brenier势能`。
-- Whitney Manifold Embedding（Whitney流形嵌入）
+- Whitney Manifold Embedding（**Whitney流形嵌入**）
   - Whitney流形定理是说任意给一个m维拓扑流形，我们可以将其嵌入在欧式空间中，欧氏空间的维数大约是流形维数的两倍。现在很多深度学习的算法本质上就是Whitney定理的实现。Whitney定理的证明需要先用一族开集覆盖流形，将每个开集嵌入到欧氏空间，然后用所谓的单位分解把局部嵌入整体粘起来得到一个全局嵌入。这时嵌入空间的维数等于流形的维数乘以开集的个数，我们在将嵌入的流形依次向低维线性子空间投影，直至无法进一步投影，这时子空间的维数等于流形维数的两倍。
-- Universal Approximation（万有逼近）
+- Universal Approximation（**万有逼近**）
   - 深度神经网络具有万有逼近的性质，即只要给定一个连续映射，给定任意的逼近精度，都存在某个深度神经网络来进行逼近。这个性质的理论基础实际上是来自Hilbert 第13问题：任意一个多变元的连续函数，都可以由两个单变元函的有限复合以任意精度来逼近。我们可以看到深度学习的逼近理论大多是基于这个定理。
 
 ## 流形假设
