@@ -30,36 +30,41 @@ $\LaTeX$ 的数学公式有两种：**行中**公式和**独立**公式。
 
 行中公式可以用如下方法表示：
 
-:    $ 数学公式 $
+: $ 数学公式 $
 
-独立公式可以用如下方法表示：
+独立公式可以用如下方法表示：（块级表示法）
 
-:    $$ 数学公式 $$
+: $$ 数学公式 $$
 
 自动编号的公式可以用如下方法表示：
-:    若需要手动编号，参见“[大括号和行标的使用](#14大括号和行标的使用)”。
+:  若需要手动编号，参见“[大括号和行标的使用](#14大括号和行标的使用)”。
 
-:  \begin{equation}
+$$
+\begin{equation}
     数学公式
     \label{eq:当前公式名}
 \end{equation}
+$$
 
 **自动编号后的公式可在全文任意处使用 `\eqref{eq:公式名}` 语句引用。**
 
 - 例子：
-```
+
+```latex
 $ J_\alpha(x) = \sum_{m=0}^\infty \frac{(-1)^m}{m! \Gamma (m + \alpha + 1)} {\left({ \frac{x}{2} }\right)}^{2m + \alpha} \text {，行内公式示例} $
 ```
 - 显示：$ J_\alpha(x) = \sum_{m=0}^\infty \frac{(-1)^m}{m! \Gamma (m + \alpha + 1)} {\left({ \frac{x}{2} }\right)}^{2m + \alpha} \text {，行内公式示例} $
 
 - 例子：
-```
+
+```latex
 $$ J_\alpha(x) = \sum_{m=0}^\infty \frac{(-1)^m}{m! \Gamma (m + \alpha + 1)} {\left({ \frac{x}{2} }\right)}^{2m + \alpha} \text {，独立公式示例} $$
 ```
 - 显示：$$ J_\alpha(x) = \sum_{m=0}^\infty \frac{(-1)^m}{m! \Gamma (m + \alpha + 1)} {\left({ \frac{x}{2} }\right)}^{2m + \alpha} \text {，独立公式示例} $$
 
 - 例子：
-```
+
+```latex
 $$ 在公式 \eqref{eq:sample} 中，我们看到了这个被自动编号的公式。$$
 
 \begin{equation}
@@ -69,19 +74,21 @@ $$ 在公式 \eqref{eq:sample} 中，我们看到了这个被自动编号的公�
 ```
 - 显示：
 
-$$ 在公式 \eqref{eq:sample} 中，我们看到了这个被自动编号的公式。$$
+ 在公式 $\eqref{eq:sample}$ 中，我们看到了这个被自动编号的公式。
 
+$$
 \begin{equation}
     E=mc^2 \text{，自动编号公式示例}
     \label{eq:sample}
 \end{equation}
+$$
 
 ## 2．如何输入上下标
 
 `^` 表示上标, `_` 表示下标。如果上下标的内容多于一个字符，需要用 `{}` 将这些内容括成一个整体。上下标可以嵌套，也可以同时使用。
 
 - 例子：
-```
+```latex
 $$ x^{y^z}=(1+{\rm e}^x)^{-2xy^w} $$
 ```
 - 显示：$$ x^{y^z}=(1+{\rm e}^x)^{-2xy^w} $$
@@ -89,7 +96,7 @@ $$ x^{y^z}=(1+{\rm e}^x)^{-2xy^w} $$
 另外，如果要在左右两边都有上下标，可以使用 `\sideset` 命令；也可以简单地在符号前面多打一个上下标，此时会以行内公式渲染。
 
 - 例子：
-```
+```latex
 $$ \sideset{^1_2}{^3_4}\bigotimes \quad or \quad {^1_2}\bigotimes {^3_4} $$
 ```
 - 显示：$$\sideset{^1_2}{^3_4}\bigotimes \quad or \quad {^1_2}\bigotimes {^3_4} $$
@@ -99,6 +106,7 @@ $$ \sideset{^1_2}{^3_4}\bigotimes \quad or \quad {^1_2}\bigotimes {^3_4} $$
 `()`、`[]` 和 `|` 表示符号本身，使用 `\{\}` 来表示 `{}` 。当要显示大号的括号或分隔符时，要用 `\left` 和 `\right` 命令。
 
 一些特殊的括号：
+
 |输入|显示|输入|显示|
 |:--:|:--:|:--:|:--:|
 |\langle|$\langle$|\rangle|$\rangle$|
@@ -112,7 +120,7 @@ $$ \sideset{^1_2}{^3_4}\bigotimes \quad or \quad {^1_2}\bigotimes {^3_4} $$
 <span style="text-align: center; display: block"> `\lVert \boldsymbol{X}_i - \boldsymbol{S}_j \rVert^2` → $\lVert \boldsymbol{X}_i - \boldsymbol{S}_j \rVert^2$ </span>
 
 - 例子：
-```
+```latex
 $$ f(x,y,z) = 3y^2z \left( 3+\frac{7x+5}{1+y^2} \right) $$
 ```
 - 显示：$$ f(x,y,z) = 3y^2z \left( 3+\frac{7x+5}{1+y^2} \right) $$
@@ -120,7 +128,7 @@ $$ f(x,y,z) = 3y^2z \left( 3+\frac{7x+5}{1+y^2} \right) $$
 有时要用 `\left.` 或 `\right.` 进行匹配而不显示本身。
 
 - 例子：
-```
+```latex
 $$ \left. \frac{ {\rm d}u}{ {\rm d}x} \right| _{x=0} $$
 ```
 - 显示：$$ \left. \frac{ {\rm d}u}{ {\rm d}x} \right| _{x=0} $$
@@ -132,7 +140,7 @@ $$ \left. \frac{ {\rm d}u}{ {\rm d}x} \right| _{x=0} $$
 通常使用 `\frac {分子} {分母}` 来生成一个分数，分数可多层嵌套。如果分式较为复杂，亦可使用 `分子 \over 分母` 此时分数仅有一层。
 
 - 例子：
-```
+```latex
 $$ \frac{a-1}{b-1} \quad or \quad {a+1 \over b+1} $$
 ```
 - 显示：$$ \frac{a-1}{b-1} \quad or \quad {a+1 \over b+1} $$
@@ -140,7 +148,7 @@ $$ \frac{a-1}{b-1} \quad or \quad {a+1 \over b+1} $$
 当分式 **仅有两个字符时** 可直接输入 `\frac ab` 来快速生成一个 $\large\frac ab$ 。
 
 - 例子：
-```
+```latex
 $$ \frac 12,\frac 1a,\frac a2 \quad \mid \quad \text{2 letters only:} \quad \frac 12a \,, k\frac q{r^2} $$
 ```
 - 显示：$$ \frac 12,\frac 1a,\frac a2 \quad \mid \quad \text{2 letters only:} \quad \frac 12a \,, k\frac q{r^2} $$
@@ -150,7 +158,7 @@ $$ \frac 12,\frac 1a,\frac a2 \quad \mid \quad \text{2 letters only:} \quad \fra
 使用 `\sqrt [根指数，省略时为2] {被开方数}` 命令输入开方。
 
 - 例子：
-```
+```latex
 $$ \sqrt{2} \quad or \quad \sqrt[n]{3} $$
 ```
 - 显示：$$ \sqrt{2} \quad or \quad \sqrt[n]{3} $$
@@ -160,7 +168,7 @@ $$ \sqrt{2} \quad or \quad \sqrt[n]{3} $$
 数学公式中常见的省略号有两种，`\ldots` 表示与 **文本底线** 对齐的省略号，`\cdots` 表示与 **文本中线** 对齐的省略号。
 
 - 例子：
-```
+```latex
 $$ f(x_1,x_2,\underbrace{\ldots}_{\rm ldots} ,x_n) = x_1^2 + x_2^2 + \underbrace{\cdots}_{\rm cdots} + x_n^2 $$
 ```
 - 显示：$$ f(x_1,x_2,\underbrace{\ldots}_{\rm ldots} ,x_n) = x_1^2 + x_2^2 + \underbrace{\cdots}_{\rm cdots} + x_n^2 $$
@@ -170,13 +178,13 @@ $$ f(x_1,x_2,\underbrace{\ldots}_{\rm ldots} ,x_n) = x_1^2 + x_2^2 + \underbrace
 使用 `\vec{向量}` 来自动产生一个向量。也可以使用 `\overrightarrow` 等命令自定义字母上方的符号。
 
 - 例子：
-```
+```latex
 $$ \vec{a} \cdot \vec{b}=0 $$
 ```
 - 显示：$$ \vec{a} \cdot \vec{b}=0 $$
 
 - 例子：
-```
+```latex
 $$ xy \text{ with arrows:} \quad \overleftarrow{xy} \; \mid \; \overleftrightarrow{xy} \; \mid \; \overrightarrow{xy} $$
 ```
 - 显示：$$ xy \text{ with arrows:} \quad \overleftarrow{xy} \; \mid \; \overleftrightarrow{xy} \; \mid \; \overrightarrow{xy} $$
@@ -186,7 +194,7 @@ $$ xy \text{ with arrows:} \quad \overleftarrow{xy} \; \mid \; \overleftrightarr
 使用 `\int_积分下限^积分上限 {被积表达式}` 来输入一个积分。
 
 例子：
-```
+```latex
 $$ \int_0^1 {x^2} \,{\rm d}x $$
 ```
 显示：$$ \int_0^1 {x^2} \,{\rm d}x $$
@@ -198,7 +206,7 @@ $$ \int_0^1 {x^2} \,{\rm d}x $$
 使用 `\lim_{变量 \to 表达式} 表达式` 来输入一个极限。如有需求，可以更改 `\to` 符号至任意符号。
 
 例子：
-```
+```latex
 $$ \lim_{n \to \infty} \frac{1}{n(n+1)} \quad and \quad \lim_{x\leftarrow{示例}} \frac{1}{n(n+1)} $$
 ```
 显示：$$ \lim_{n \to \infty} \frac{1}{n(n+1)} \quad and \quad \lim_{x\leftarrow{示例}} \frac{1}{n(n+1)} $$
@@ -209,7 +217,7 @@ $$ \lim_{n \to \infty} \frac{1}{n(n+1)} \quad and \quad \lim_{x\leftarrow{示例
 此类符号在行内显示时上下标表达式将会移至右上角和右下角，如 $\sum_{i=1}^n \frac{1}{i^2}$。
 
 - 例子：
-```
+```latex
 $$ \sum_{i=1}^n \frac{1}{i^2} \quad and \quad \prod_{i=1}^n \frac{1}{i^2} \quad and \quad \bigcup_{i=1}^{2} \Bbb{R} $$
 ```
 - 显示：$$ \sum_{i=1}^n \frac{1}{i^2} \quad and \quad \prod_{i=1}^n \frac{1}{i^2} \quad and \quad \bigcup_{i=1}^{2} \Bbb{R} $$
@@ -289,7 +297,7 @@ MathJax 针对任意元素均提供从小至大 `\tiny` `\Tiny` `\scriptsize` `\
 |\sin|$\sin$|\cos|$\cos$|\tan|$\tan$|
 |\csc|$\csc$|\sec|$\sec$|\cot|$\cot$|
 
-###(5)．微积分运算符
+### (5)．微积分运算符
 
 |输入|显示|输入|显示|输入|显示|
 |:--:|:--:|:--:|:--:|:--:|:--:|
@@ -317,14 +325,14 @@ MathJax 针对任意元素均提供从小至大 `\tiny` `\Tiny` `\scriptsize` `\
 若需要在特定文字顶部\底部放置内容，可使用 `\overset{顶部内容}{正常内容}` 和 `\underset{底部内容}{正常内容}` 命令。
 
 - 例子：
-```
+```latex
 $$ \verb+\overset{above}{level}+ \qquad \overset{xx}{ABC} \;\; \mid \quad \overset{x^2}{\longmapsto}\ \, \mid \quad \overset{\bullet\circ\circ\bullet}{T} $$
 ```
 - 显示：
 $$ \verb+\overset{above}{level}+ \qquad \overset{xx}{ABC} \;\; \mid \quad \overset{x^2}{\longmapsto}\ \, \mid \quad \overset{\bullet\circ\circ\bullet}{T} $$
 
 - 例子：
-```
+```latex
 $$ \verb+\underset{below}{level}+ \qquad \underset{xx}{ABC} \;\; \mid \quad \underset{x^2}{\longmapsto}\ \, \mid \quad \underset{\bullet\circ\circ\bullet}{T} $$
 ```
 - 显示：
@@ -398,7 +406,7 @@ $$ \rm{2OH^{\bullet}_{O(STN)}+2O^{\times}_{O(YSZ)} \; \overset{Surface/bulk}{\un
 转换字体十分常用，例如在积分中：
 
 - 例子：
-```
+```latex
 \begin{array}{cc}
     \mathrm{Bad} & \mathrm{Better} \\
     \hline \\
@@ -406,11 +414,13 @@ $$ \rm{2OH^{\bullet}_{O(STN)}+2O^{\times}_{O(YSZ)} \; \overset{Surface/bulk}{\un
 \end{array}
 ```
 - 显示：
+$$
 \begin{array}{cc}
     \mathrm{Bad} & \mathrm{Better} \\
     \hline \\
     \int_0^1 x^2 dx & \int_0^1 x^2 \,{\rm d}x
 \end{array}
+$$
 
 注意比较两个式子间 $dx$ 与 ${\rm d} x$ 的不同。
 使用 `\operatorname` 命令也可以达到相同的效果，详见“[定义新的运算符](#1定义新的运算符-operatorname)”。
@@ -421,7 +431,7 @@ $$ \rm{2OH^{\bullet}_{O(STN)}+2O^{\times}_{O(YSZ)} \; \overset{Surface/bulk}{\un
 底色和框颜色支持详见“[更改文字颜色](#4更改文字颜色-color)”，边距及框宽度支持 `绝对像素 px` 或 `相对大小 em`，框类型支持 `实线 solid` 或 `虚线 dashed`。
 
 - 例子：
-```
+```latex
 $$
 \bbox[yellow]{
     e^x=\lim_{n\to\infty} \left( 1+\frac{x}{n} \right)^n \qquad (1)
@@ -435,7 +445,7 @@ $$
 }
 $$
 - 例子：
-```
+```latex
 $$
 \bbox[#9ff, 5px]{ % 此处向外添加 5 像素的边距
     e^x=\lim_{n\to\infty} \left( 1+\frac{x}{n} \right)^n \qquad (1)
@@ -449,7 +459,7 @@ $$
 }
 $$
 - 例子：
-```
+```latex
 $$
 % 此处使用 0.5 倍行高作为边距，附加 2 像素的实线边框（Ctrl+Alt+Y 可见）
 \bbox[#2f3542, 0.5em, border:2px solid #f1f2f6]{
@@ -470,7 +480,7 @@ $$
 在每个公式末尾前使用 `\tag {行标}` 来实现行标。
 
 - 例子：
-```
+```latex
 $$
 f\left(
    \left[ 
@@ -507,7 +517,7 @@ $$
 如果你需要在不同的行显示对应括号，可以在每一行对应处使用 `\left.` 或 `\right.` 来放一个“不存在的括号”。
 
 - 例子：
-```
+```latex
 $$
 \begin{align*}
     a=&\left(1+2+3+ \cdots \right. \\
@@ -526,7 +536,7 @@ $$
 如果你需要将大括号里面显示的分隔符也变大，可以使用 `\middle` 命令，此处分别使用单竖线 `|` 和双竖线 `\\|` 。
 
 - 例子：
-```
+```latex
 $$
 \left\langle  
     q \; \middle|
@@ -551,7 +561,7 @@ $$
 当需要使用的运算符不在 MathJax 的内置库中时，程序可能会报错或产生错误的渲染结果。此时可以使用 `\operatorname` 命令定义一个新的运算符号。
 
 - 反例： 
-```
+```latex
 \begin{array}{c|c}
     \mathrm{Error} & \text{Wrong rendering} \\
     \hline \\
@@ -560,17 +570,19 @@ $$
 \end{array}
 ```
 - 显示： 
+$$
 \begin{array}{c|c}
     \mathrm{Error} & \text{Wrong rendering} \\
     \hline \\
     \arsinh(x) & arsinh(x) \\
     \Res_{z=1} & Res_{z=1}{\frac{1}{z^2-z}=1} \\
 \end{array}
+$$
 
 使用 `\operatorname{运算符}{式子}` 来生成一个普通运算，或使用 `\operatorname*{运算符}_{下标}^{上标}{式子}` 来生成一个含上下标的自定义运算。
 
 - 例子：
-```
+```latex
 \begin{array}{c|c}
     \text{Normal Operator} & \text{Operator with label above and below} \\
     \hline \\
@@ -579,12 +591,14 @@ $$
 \end{array}
 ```
 - 显示： 
+$$
 \begin{array}{c|c}
     \text{Normal Operator} & \text{Operator with label above and below} \\
     \scriptsize\text{\operatorname{arsinh}{x}} & \scriptsize\text{\operatorname*{Res}_{z=1}{\frac{1}{z^2-z}=1}} \\[2ex]
     \hline \\
     \operatorname{arsinh}{x} & \operatorname*{Res}_{z=1}{\frac{1}{z^2-z}=1}
 \end{array}
+$$
 
 查询[关于此命令的定义](http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference/15077#15077)和[关于此命令的讨论](http://meta.math.stackexchange.com/search?q=operatorname)来进一步了解此命令。
 
@@ -593,7 +607,7 @@ $$
 在 `\text {文字}` 中仍可以使用 `$公式$` 插入其它公式。
 
 - 例子：
-```
+```latex
 $$ f(n)= \begin{cases} n/2, & \text {if $n$ is even} \\ 3n+1, & \text{if $n$ is odd} \end{cases} $$
 ```
 - 显示：
@@ -607,7 +621,7 @@ $$ f(n)= \begin{cases} n/2, & \text {if $n$ is even} \\ 3n+1, & \text{if $n$ is 
 
 
 - 例子：
-```
+```latex
 \begin{array}{c|c}
     \text{Spaces} & \text{Negative Space in Units} \\
     \hline \\
@@ -615,16 +629,18 @@ $$ f(n)= \begin{cases} n/2, & \text {if $n$ is even} \\ 3n+1, & \text{if $n$ is 
 \end{array}
 ```
 - 显示：
+$$
 \begin{array}{c|c}
     \text{Spaces} & \text{Negative Space in Units} \\
     \hline \\
     \overbrace{a \! b}^{\text{\!}} \mid \underbrace{ab}_{\rm{default}} \mid \overbrace{a \, b}^{\text{\,}} \mid \underbrace{a \; b}_{\text{\;}} \mid \overbrace{a \quad b}^{\text{\quad}} \mid \underbrace{a \qquad b}_{\text{\qquad}} & \mathrm{N}\!\cdot\!\mathrm{m} \mid \mathrm{s}\!\cdot\!\mathrm{A} \mid \mathrm{kg}\!\cdot\!\mathrm{m}^2 \\ 
 \end{array}
+$$
 
 一些常见的公式单位可表达如下：
 
 - 例子：
-```
+```latex
 $$ \mu_0=4\pi\times10^{-7} \ \left.\mathrm{\mathrm{T}\!\cdot\!\mathrm{m}}\middle/\mathrm{A}\right. $$
 $$ 180^\circ=\pi \ \mathrm{rad} $$
 $$ \mathrm{N_A} = 6.022\times10^{23} \ \mathrm{mol}^{-1} $$
@@ -654,7 +670,7 @@ $$ \mu_0=4\pi\times10^{-7} \ \left.\mathrm{\mathrm{T}\!\cdot\!\mathrm{m}}\middle
 输入 `\color {#rgb} {text}` 来自定义更多的颜色，其中 `#rgb` 或 `#rrggbb` 的 `r` `g` `b` 可输入 `0-9` 和 `a-f` 来表示红色、绿色和蓝色的纯度（饱和度）。
 
 - 例子：
-```
+```latex
 \begin{array}{|rrrrrrrr|}\hline
     \verb+#000+ & \color{#000}{text} & & &
     \verb+#00F+ & \color{#00F}{text} & & \\
@@ -667,6 +683,7 @@ $$ \mu_0=4\pi\times10^{-7} \ \left.\mathrm{\mathrm{T}\!\cdot\!\mathrm{m}}\middle
 \hline\end{array}
 ```
 - 显示：
+$$
 \begin{array}{|rrrrrrrr|}\hline
     \verb+#000+ & \color{#000}{text} & & &
     \verb+#00F+ & \color{#00F}{text} & & \\
@@ -677,9 +694,10 @@ $$ \mu_0=4\pi\times10^{-7} \ \left.\mathrm{\mathrm{T}\!\cdot\!\mathrm{m}}\middle
     & & \verb+#FF0+ & \color{#FF0}{text} &
     & & \verb+#FFF+ & \color{#FFF}{text} \\
 \hline\end{array}
+$$
 
 - 例子：
-```
+```latex
 \begin{array}{|rrrrrrrr|}\hline
     \verb+#000+ & \color{#000}{text} & \verb+#005+ & \color{#005}{text} & \verb+#00A+ & \color{#00A}{text} & \verb+#00F+ & \color{#00F}{text}  \\
     \verb+#500+ & \color{#500}{text} & \verb+#505+ & \color{#505}{text} & \verb+#50A+ & \color{#50A}{text} & \verb+#50F+ & \color{#50F}{text}  \\
@@ -698,6 +716,7 @@ $$ \mu_0=4\pi\times10^{-7} \ \left.\mathrm{\mathrm{T}\!\cdot\!\mathrm{m}}\middle
 \hline\end{array}
 ```
 - 显示：
+$$
 \begin{array}{|rrrrrrrr|}\hline
     \verb+#000+ & \color{#000}{text} & \verb+#005+ & \color{#005}{text} & \verb+#00A+ & \color{#00A}{text} & \verb+#00F+ & \color{#00F}{text}  \\
     \verb+#500+ & \color{#500}{text} & \verb+#505+ & \color{#505}{text} & \verb+#50A+ & \color{#50A}{text} & \verb+#50F+ & \color{#50F}{text}  \\
@@ -714,6 +733,7 @@ $$ \mu_0=4\pi\times10^{-7} \ \left.\mathrm{\mathrm{T}\!\cdot\!\mathrm{m}}\middle
     \verb+#AF0+ & \color{#AF0}{text} & \verb+#AF5+ & \color{#AF5}{text} & \verb+#AFA+ & \color{#AFA}{text} & \verb+#AFF+ & \color{#AFF}{text}  \\
     \verb+#FF0+ & \color{#FF0}{text} & \verb+#FF5+ & \color{#FF5}{text} & \verb+#FFA+ & \color{#FFA}{text} & \verb+#FFF+ & \color{#FFF}{text}  \\
 \hline\end{array}
+$$
 
 ### (5)．添加删除线
 
@@ -723,7 +743,7 @@ $$ \mu_0=4\pi\times10^{-7} \ \left.\mathrm{\mathrm{T}\!\cdot\!\mathrm{m}}\middle
 声明片段删除线后，使用 `\cancel{字符}`、`\bcancel{字符}`、`\xcancel{字符}` 和 `\cancelto{字符}` 来实现各种片段删除线效果。
 
 - 例子：
-```
+```latex
 $$
 \require{cancel}
 \begin{array}{rl}
@@ -754,7 +774,7 @@ $$
 其中，删除线效果有 `horizontalstrike`、`verticalstrike`、`updiagonalstrike` 和 `downdiagonalstrike`，可叠加使用。
 
 - 例子：
-```
+```latex
 $$
 \require{enclose}
 \begin{array}{rl}
@@ -784,7 +804,8 @@ $$
 
 |分别使用 `circle` 和 `roundedbox` 包围的公式|
 |:--:|
-```
+
+```latex
 $$
 \require{enclose}
 \begin{array}{c}
@@ -793,9 +814,11 @@ $$
 \end{array}
 $$
 ```
+
 |使用 `box` 框住所有公式|
 |:--:|
-```
+
+```latex
 $$
 \require{enclose}
 \enclose{box}{
@@ -810,21 +833,23 @@ $$
 
 |分别使用 `circle` 和 `roundedbox` 包围的公式|使用 `box` 框住所有公式|
 |:--:|:--:|
-|$$
+
+$$
 \require{enclose}
 \begin{array}{c}
     \enclose{circle}{f(\top),\, f^2(\top),\, f^3(\top) \,\cdots\, f^n(\top)} \\
     \enclose{roundedbox}{f(\bot),\, f^2(\bot),\, f^3(\bot) \,\cdots\, f^n(\bot)} \\
 \end{array}
-$$|$$
+$$
+
+$$
 \require{enclose}
 \enclose{box}{
     \begin{array}{c}
         f(\top),\, f^2(\top),\, f^3(\top) \,\cdots\, f^n(\top) \\
         f(\bot),\, f^2(\bot),\, f^3(\bot) \,\cdots\, f^n(\bot) \\
     \end{array}
-}
-$$|
+}$$
 
 此例语法可参见“[如何输入一个数组或表格](#五数组与表格使用参考)”。
 
@@ -836,7 +861,7 @@ $$|
 使用矩阵时必须声明 `$` 或 `$$` 符号。
 
 - 例子：
-```
+```latex
 $$
 \begin{matrix}
     1 & x & x^2 \\
@@ -859,7 +884,7 @@ $$
 在开头将 `matrix` 替换为 `pmatrix` `bmatrix` `Bmatrix` `vmatrix` `Vmatrix` 。
 
 - 例子：
-```
+```latex
 $ \begin{matrix} 1 & 2 \\ 3 & 4 \\ \end{matrix} $
 $ \begin{pmatrix} 1 & 2 \\ 3 & 4 \\ \end{pmatrix} $
 $ \begin{bmatrix} 1 & 2 \\ 3 & 4 \\ \end{bmatrix} $
@@ -868,6 +893,7 @@ $ \begin{vmatrix} 1 & 2 \\ 3 & 4 \\ \end{vmatrix} $
 $ \begin{Vmatrix} 1 & 2 \\ 3 & 4 \\ \end{Vmatrix} $
 ```
 - 显示：
+
 |matrix|pmatrix|bmatrix|Bmatrix|vmatrix|Vmatrix|
 |:--:|:--:|:--:|:--:|:--:|:--:|
 |$ \begin{matrix} 1 & 2 \\ 3 & 4 \\ \end{matrix} $|$ \begin{pmatrix} 1 & 2 \\ 3 & 4 \\ \end{pmatrix} $|$ \begin{bmatrix} 1 & 2 \\ 3 & 4 \\ \end{bmatrix} $|$ \begin{Bmatrix} 1 & 2 \\ 3 & 4 \\ \end{Bmatrix} $|$ \begin{vmatrix} 1 & 2 \\ 3 & 4 \\ \end{vmatrix} $|$ \begin{Vmatrix} 1 & 2 \\ 3 & 4 \\ \end{Vmatrix} $|
@@ -877,7 +903,7 @@ $ \begin{Vmatrix} 1 & 2 \\ 3 & 4 \\ \end{Vmatrix} $
 使用 `\cdots` $\cdots$ , `\ddots` $\ddots$ , `\vdots` $\vdots$ 来输入省略符号。
 
 - 例子：
-```
+```latex
 $$
 \begin{pmatrix}
     1 & a_1 & a_1^2 & \cdots & a_1^n \\
@@ -902,7 +928,7 @@ $$
 详见"[数组使用参考](#五数组与表格使用参考)"。
 
 - 例子：
-```
+```latex
 $$
 \left[
     \begin{array}{cc|c}
@@ -930,7 +956,7 @@ $$
 使用`\bigl(\begin{smallmatrix} ... \end{smallmatrix}\bigr)`。
 
 - 例子：
-```
+```latex
 这是一个行中矩阵的示例 $\bigl(\begin{smallmatrix} a & b \\ c & d \end{smallmatrix}\bigr)$ 。
 ```
 
@@ -945,7 +971,7 @@ $$
 **请注意 `{align}` 语句是自动编号的，使用 `{align*}` 声明不自动编号。**
 
 - 例子：
-```
+```latex
 \begin{align}
     \sqrt{37} & = \sqrt{\frac{73^2-1}{12^2}} \\
               & = \sqrt{\frac{73^2}{12^2}\cdot\frac{73^2-1}{73^2}} \\ 
@@ -955,6 +981,7 @@ $$
 \end{align}
 ```
 - 显示：
+$$
 \begin{align}
     \sqrt{37} & = \sqrt{\frac{73^2-1}{12^2}} \\
               & = \sqrt{\frac{73^2}{12^2}\cdot\frac{73^2-1}{73^2}} \\ 
@@ -962,6 +989,7 @@ $$
               & = \frac{73}{12}\sqrt{1-\frac{1}{73^2}} \\ 
               & \approx \frac{73}{12}\left(1-\frac{1}{2\cdot73^2}\right) \\
 \end{align}
+$$
 
 本例中每行公式的编号续自“[如何插入公式](#1如何插入公式)”中的自动编号公式\eqref{eq:sample} 。
 
@@ -970,7 +998,7 @@ $$
 在 `{align}` 中后添加 `&` 符号来自动对齐后面的内容，可灵活组合 `\text` 和 `\tag` 语句。`\tag` 语句编号优先级高于自动编号。
 
 - 例子：
-```
+```latex
 \begin{align}
     v + w & = 0  & \text{Given} \tag 1 \\
        -w & = -w + 0 & \text{additive identity} \tag 2 \\
@@ -978,11 +1006,13 @@ $$
 \end{align}
 ```
 - 显示：
+$$
 \begin{align}
     v + w & = 0  & \text{Given} \tag 1 \\
        -w & = -w + 0 & \text{additive identity} \tag 2 \\
    -w + 0 & = -w + (v + w) & \text{equations $(1)$ and $(2)$} \\
 \end{align}
+$$
 
 本例中第一、第二行的自动编号被 `\tag` 语句覆盖，第三行的编号为自动编号。
 
@@ -996,7 +1026,7 @@ $$
 使用 `\begin{cases}…\end{cases}` 来创造一组条件表达式，在每一行条件中插入 `&` 来指定需要对齐的内容，并在每一行结尾处使用 `\\`。
 
 - 例子：
-```
+```latex
 $$
     f(n) =
         \begin{cases}
@@ -1021,7 +1051,7 @@ $$
 若想让文字在**左侧对齐显示**，则有如下方式：
 
 - 例子：
-```
+```latex
 $$
     \left.
         \begin{array}{l}
@@ -1048,9 +1078,11 @@ $$
 在一些情况下，条件表达式中某些行的行高为非标准高度，此时使用 `\\[2ex]` 语句代替该行末尾的 `\\` 来让编辑器适配。
 
 - 例子：
+
 |不适配[2ex]|
 |:--:|
-```
+
+```latex
 $$
 f(n) = 
     \begin{cases}
@@ -1061,7 +1093,7 @@ $$
 ```
 |适配[2ex]|
 |:--:|
-```
+```latex
 $$
 f(n) = 
     \begin{cases}
@@ -1071,21 +1103,25 @@ f(n) =
 $$
 ```
 - 显示：
+
 |不适配[2ex]|适配[2ex]|
 |:--:|:--:|
-|$$
+
+$$
 f(n) = 
     \begin{cases}
         \frac{n}{2}, & \text{if $n$ is even} \\
         3n+1, & \text{if $n$ is odd} \\
     \end{cases}
-$$|$$
+$$
+
+$$
 f(n) = 
     \begin{cases}
         \frac{n}{2}, & \text{if $n$ is even} \\[2ex]
         3n+1, & \text{if $n$ is odd} \\
     \end{cases}
-$$|
+$$
 
 **一个 `[ex]` 指一个 "X-Height"，即 x 字母高度。可以根据情况指定多个 `[ex]`，如 `[3ex]`、`[4ex]` 等。**
 
@@ -1102,7 +1138,7 @@ $$|
 
 - 例子：
 
-```
+```latex
 \begin{array}{c|lcr}
     n & \text{左对齐} & \text{居中对齐} & \text{右对齐} \\
     \hline
@@ -1112,13 +1148,14 @@ $$|
 \end{array}
 ```
 - 显示：
+$$
 \begin{array}{c|lcr}
     n & \text{左对齐} & \text{居中对齐} & \text{右对齐} \\
     \hline
     1 & 0.24 & 1 & 125 \\
     2 & -1 & 189 & -8 \\
     3 & -20 & 2000 & 1+10i \\
-\end{array}
+\end{array} $$
 
 ## 2．如何输入一个嵌套的数组或表格
 
@@ -1126,7 +1163,7 @@ $$|
 使用嵌套前必须声明 `$$` 符号。
 
 - 例子：
-```
+```latex
 $$
 \begin{array}{c} % 总表格
     \begin{array}{cc} % 第一行内分成两列
@@ -1200,7 +1237,7 @@ $$
 可以使用 `\begin{array} … \end{array}` 和 `\left\{ … \right.` 来创建一个方程组：
 
 - 例子：
-```
+```latex
 $$
 \left\{ 
     \begin{array}{c}
@@ -1225,7 +1262,7 @@ $$
 或使用条件表达式组 `\begin{cases} … \end{cases}` 来实现相同效果：
 
 - 例子：
-```
+```latex
 \begin{cases}
     a_1x+b_1y+c_1z=d_1 \\ 
     a_2x+b_2y+c_2z=d_2 \\ 
@@ -1233,11 +1270,13 @@ $$
 \end{cases}
 ```
 - 显示：
+$$
 \begin{cases}
     a_1x+b_1y+c_1z=d_1 \\ 
     a_2x+b_2y+c_2z=d_2 \\ 
     a_3x+b_3y+c_3z=d_3 \\
 \end{cases}
+$$
 
 # 六、连分数使用参考
 
@@ -1246,7 +1285,7 @@ $$
 就像输入分式时使用 `\frac` 一样，使用 `\cfrac` 来创建一个连分数。
 
 - 例子：
-```
+```latex
 $$
 x = a_0 + \cfrac{1^2}{a_1 +
             \cfrac{2^2}{a_2 +
@@ -1275,7 +1314,7 @@ $$
 不要使用普通的 `\frac` 或 `\over` 来生成连分数，这样会看起来**很恶心**。
 
 - 反例：
-```
+```latex
 $$
 x = a_0 + \frac{1^2}{a_1 +
             \frac{2^2}{a_2 +
@@ -1304,7 +1343,7 @@ $$
 当然，你可以使用 `\frac` 来表达连分数的**紧缩记法**。
 
 - 例子：
-```
+```latex
 $$
 x = a_0 + \frac{1^2}{a_1 +}
           \frac{2^2}{a_2 +}
@@ -1334,7 +1373,7 @@ $$
 声明交换图表后，语法与矩阵相似，在开头使用 `\begin{CD}`，在结尾使用 `\ end{CD}`，在中间插入图表元素，每个元素之间插入 `&` ，并在每行结尾处使用 `\\`。
 
 - 例子：
-```
+```latex
 $$
 \require{AMScd}
 \begin{CD}
@@ -1358,7 +1397,7 @@ $$
 在 `@>>>` 的 `>>>` 之间任意插入文字即代表该箭头的注释文字。
 
 - 例子：
-```
+```latex
 $$
 \require{AMDcd}
 \begin{CD}
@@ -1381,7 +1420,7 @@ $$
 在本例中，`very long label` 自动延长了它所在箭头以及对应箭头的长度，因而交换图表十分适合进行化学反应式的书写。
 
 - 例子：
-```
+```latex
 $$
 \require{AMDcd}
 \begin{CD}
@@ -1411,7 +1450,7 @@ Don't use `\frac` in exponents or limits of integrals; it looks bad and can be c
 在以 $e$ 为底的指数函数、极限和积分中尽量不要使用 `\frac` 符号——它会使整段函数看起来很奇怪并可能产生歧义，因此它在专业数学排版中几乎从不出现。可试着横着写这些分式，中间使用斜线间隔 `/` （用斜线代替分数线）。
 
 - 例子：
-```
+```latex
 \begin{array}{cc}
     \mathrm{Bad} & \mathrm{Better} \\
     \hline \\
@@ -1420,19 +1459,21 @@ Don't use `\frac` in exponents or limits of integrals; it looks bad and can be c
 \end{array}
 ```
 - 显示：
+$$
 \begin{array}{cc}
     \mathrm{Bad} & \mathrm{Better} \\
     \hline \\
     \large e^{i\frac{\pi}2} \quad e^{\frac{i\pi}2}& \large e^{i\pi/2} \\[2ex]
     \int_{-\frac\pi2}^\frac\pi2 \sin x\,dx & \int_{-\pi/2}^{\pi/2}\sin x\,dx \\
 \end{array}
+$$
 
 The `|` symbol has the wrong spacing when it is used as a divider, for example in set comprehensions. Use `\mid` instead:
 
 使用 `|` 符号作为分隔符时会产生错误的间距，因此在需要分隔时最好使用 `\mid` 来代替它。
 
 - 例子:
-```
+```latex
 \begin{array}{cc}
     \mathrm{Bad} & \mathrm{Better} \\
     \hline \\
@@ -1441,11 +1482,13 @@ The `|` symbol has the wrong spacing when it is used as a divider, for example i
 ```
 
 - 显示：
+$$
 \begin{array}{cc}
     \mathrm{Bad} & \mathrm{Better} \\
     \hline \\
     \{x|x^2\in\Bbb Z\} & \{x\mid x^2\in\Bbb Z\} \\
 \end{array}
+$$
 
 For double and triple integrals, don't use `\int\int` or `\int\int\int`. Instead use the special forms `\iint` and `\iiint`:
 
@@ -1453,7 +1496,7 @@ For double and triple integrals, don't use `\int\int` or `\int\int\int`. Instead
 个人补充：在表示面积分和体积分时下标建议使用 `\boldsymbol{S}` 和 `\boldsymbol{V}` 符号；对于多维函数的超体积，可使用 `\idotsint`，如下面的例子所示。
 
 - 例子：
-```
+```latex
 \begin{array}{cc}
     \mathrm{Bad} & \mathrm{Better} \\
     \hline \\
@@ -1482,7 +1525,7 @@ Use `\,`, to insert a thin space before differentials; without this $\TeX$ will 
 使用多重积分时，在被积变量后加入 `\,` （或在微分符号 ${\rm d}$ 之前）来插入一个小的间距，否则各种被积变量将会挤成一团。注意比较 ${\rm d}z{\rm d} y{\rm d} x$ 的不同。
 
 - 例子：
-```
+```latex
 \begin{array}{cc}
     \mathrm{Bad} & \mathrm{Better} \\
     \hline \\
@@ -1491,11 +1534,13 @@ Use `\,`, to insert a thin space before differentials; without this $\TeX$ will 
 ```
 
 - 显示：
+$$
 \begin{array}{cc}
     \mathrm{Bad} & \mathrm{Better} \\
     \hline \\
     \iiint_V f(x){\rm d}z {\rm d}y {\rm d}x & \iiint_{\boldsymbol{V}} f(x)\,{\rm d}z\,{\rm d}y\,{\rm d}x \\
 \end{array}
+$$
 
 ---
 
