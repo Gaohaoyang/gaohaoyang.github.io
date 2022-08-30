@@ -3,7 +3,7 @@ layout: post
 title:  "异常检测-anomaly-detection"
 date:   2022-06-08 20:57:00
 categories: 机器学习
-tags: 异常检测
+tags: 异常检测 风控
 excerpt: 异常检测方法总结
 author: 鹤啸九天
 mathjax: true
@@ -17,21 +17,113 @@ mathjax: true
 - 【2022-6-8】[异常检测方法总结](https://zhuanlan.zhihu.com/p/521329756)
 
 
-# 异常检测方法
+# 异常检测
 
 
-## 方法总结
+## 应用场景
+
+`异常检测`（Anomaly Detection或Outlier Detection）指的是通过数据挖掘手段识别数据中的“**异常点**”，常见的使用案例包括风控领域（如识别信用卡诈骗），网络通信领域发现异常信息流，或机械加工领域识别未达标的产品等。
+- 金融领域：从金融数据中识别”欺诈案例“，如识别信用卡申请欺诈、虚假信贷等；
+- 网络安全：从流量数据中找出”入侵者“，并识别新的网络入侵模式；
+- 电商领域：从交易数据中识别”恶意买家“，如羊毛党、恶意刷屏团伙；
+- 生态灾难预警：基于对风速、降雨量、气温等指标的预测，判断未来可能出现的极端天气；
+- 工业界：可通过异常检测手段进行工业产品的瑕疵检测，代替人眼进行测量和判断。
+
+除此之外，还有很多行业都在使用异常检测技术来帮助企业降低风险，并为业务提供指导建议。
+
+
+## 方法分类
+
+一般可以从以下四个角度作区分：
+- 时序相关 VS 时序独立
+- 全局检测 VS 局部检测
+- 输出形式：标签 VS 异常分数
+- 根据不同的模型特征
+
+### 时序相关 VS 时序独立
+
+首先可以根据该场景的异常是否与**时间**维度相关。
+- 在时序相关问题中，我们假设异常的发生与时间的变化相关，比如一个人平时的信用卡消费约为每月5000元，但11月的消费达到了10000元，那这种异常的出现就明显与时间维度相关，可能是因为”万恶“的双十一。
+- 而在时序独立问题中，我们假设时间的变化对异常是否发生是无影响的，在后续的分析建模中，也就不会代入时间维度。
+
+### 全局检测 VS 局部检测
+
+- 在全局检测方法中，针对每个点进行检测时，是以其余全部点作为参考对象的，其基本假设是正常点的分布很集中，而异常点分布在离集中区域较远的地方。
+  - 这类方法缺点：在针对每个点进行检测时，其他的异常点也在参考集内，这可能会导致结果可能存在一定偏差。
+- 而局部检测方法仅以部分点组成的**子集**作为参考对象，基于的假设是，正常点中可能存在**多种不同模式**，与这些模式均不同的少数点为异常点。
+  - 该类方法在使用过程中的缺点是，参考子集的选取比较困难。
+
+### 输出形式：标签 VS 异常分数
+
+这种分类方式是根据模型的输出形式，即直接输出**标签**还是**异常分数**。
+- 输出标签的方法比较简单直观，可以直接根据模型输出的结果判断每个点是否为异常点。
+- 使用可以输出异常得分的模型，可以进一步看哪些点的异常程度更高，也可以根据需要设定阈值，比如设定百分比，找出异常程度排在前10%的异常点。
+
+### 根据不同的模型特征
+
+最后，还可以根据模型本身的特点进行分类，大致可以分为以下几种：
+- 统计检验方法
+- 基于深度的方法
+- 基于偏差的方法
+- 基于距离的方法
+- 基于密度的方法
+- 深度学习方法
+
+如今用于异常检测的算法已经非常多了，但万变不离其宗，无论优化到什么程度，它们都是由一些原始的模型和思想衍生出来的。
+
+### 数据挖掘
+
+从数据挖掘算法角度看，常见的算法可以被粗略归类为：
+- 概率与极值分析（假设数据分布并找到超过中心特定范围的数据）
+- 线性模型（如PCA计算重构误差或者分析协方差矩阵的）
+- 相似度模型（如ABOD，LOF、LOCI、LoOP和kNN等）
+- 决策树集成（Isolation Forest、Feature Bagging）
+- 基于SVM的方法如One-class SVM
+- 基于神经网络的算法（用auto-encoder计算重构误差）等各种算法。
+
+### 样本角度
+
+目前比较公认的分类方式是分为三种：
+- （1）`单点异常`（Global Outliers）：也可以称为**全局异常**，即某个点与全局大多数点都不一样，那么这个点构成了单点异常。
+  - 例如，和三只小黄人相比，海绵宝宝的混入就可以算作是单点异常。
+  - <img src="https://picx.zhimg.com/50/v2-7c39422478a01528dda6d48b6e8f77db_720w.jpg?source=1940ef5c" data-caption="" data-size="normal" data-rawwidth="720" data-rawheight="194" class="origin_image zh-lightbox-thumb" width="720" data-original="https://picx.zhimg.com/v2-7c39422478a01528dda6d48b6e8f77db_r.jpg?source=1940ef5c"/>
+  - →_→ 最右边这只看起来不太一样！
+- （2）`上下文异常`（Contextual Outliers）：这类异常多为**时间序列**数据中的异常，即某个时间点的表现与前后时间段内存在较大的差异，那么该异常为一个上下文异常点。
+  - 例如，在某个温带城市夏天的气温时序数据中，其中有一天温度为10℃，而前后的气温都在25-35℃的范围，那么这一天的气温就可以说是一个上下文异常。
+- （3）`集体异常`（Collective Outliers）：这类异常是由多个对象组合构成的，即单独看某个个体可能并不存在异常，但这些个体同时出现，则构成了一种异常。
+  - 集体异常可能存在多种组成方式，可能是由若干个单点组成的，也可能由几个序列组成。
+  - 某小区某天有一户人家搬家了，这是一件很正常的事，但如果同一天有10户同时搬家了，那就构成了集体异常，显然这不是一个正常小区会时常发生的事情
 
 一些常见的异常检测方法
 -  ![](https://pic3.zhimg.com/80/v2-8d7aafacc594570b545ad68c8363309e_1440w.jpg)
- 
+
+## 异常检测难点
+
+异常检测中经常遇到哪些困难？
+1. 在大多数实际的场景中，数据本身是**没有标签**的，也存在一些数据集有标签，但标签的可信度非常低，导致放入模型后效果很差，这就导致我们无法直接使用一些成熟的有监督学习方法。
+2. 常常存在**噪音**和异常点混杂在一起的情况，难以区分。
+3. 在一些欺诈检测的场景中，**多种诈骗数据**都混在一起，很难区分不同类型的诈骗，因为不了解每种诈骗的具体定义。由于没有准确的标签，也没有对具体诈骗类型的理解，就导致陷入**鸡生蛋** or **蛋生鸡**的循环之中。
+  - 目前比较常用的手段是，将**无监督学习**方法和**专家经验**相结合，基于无监督学习得到检测结果，并让领域专家基于检测结果给出反馈，以便于我们及时调整模型，反复进行迭代，最终得到一个越来越准确的模型。
+  - 到这里，我们都发现了，在风控场景中最重要的一环就是：**专家经验**。
+
+
 ## 一、基于分布的方法
- 
+
+基本假设：
+- 正常的数据是遵循**特定分布形式**的，并且占了很大比例，而异常点的位置和正常点相比存在比较大的偏移。
+
+【2022-8-30】[常见的异常检测算法有哪些](https://www.zhihu.com/question/280696035/answer/2504261484)
+
 ### 1. 3sigma  
+
+- 比如**高斯分布**，在平均值加减3倍标准差以外的部分仅占了0.2%左右的比例，一般把这部分数据就标记为**异常数据**。
+- ![](https://picx.zhimg.com/80/v2-75ace636aa2c4973914fdb58830d35f9_1440w.jpg?source=1940ef5c)
 
 基于**正态分布**，3sigma准则认为超过3sigma的数据为异常点。
 - ![](https://pic2.zhimg.com/80/v2-14486846ac19f0ca6624313e1a1966c9_1440w.jpg)
-- 图1: 3sigma
+
+问题
+- 均值和方差本身都对异常值很敏感，因此如果数据本身不具备**正态性**，就不适合使用这种检测方法。
  
 ```python
 def three_sigma(s):
@@ -44,14 +136,14 @@ def three_sigma(s):
  
 Z-score为**标准分数**，测量数据点和平均值的距离
 - 若A与平均值相差2个标准差，Z-score为2。
-- 当把Z-score=3作为阈值去剔除异常点时，便相当于3sigma。
+- 当把 Z-score=3 作为阈值去剔除异常点时，便相当于3sigma。
 
 ```python
 def z_score(s):
 	z_score = (s - np.mean(s)) / np.std(s)
 	return z_score
 ```
- 
+
 ### 3. boxplot
  
 箱线图时基于四分位距（IQR）找异常点的。
@@ -70,7 +162,7 @@ def boxplot(s):
  
 资料来源：
 - [1] 时序预测竞赛之异常检测算法综述 - 鱼遇雨欲语与余，知乎：[https://zhuanlan.zhihu.com/p/336944097](https://zhuanlan.zhihu.com/p/336944097)
-- [2] 剔除异常值栅格计算器_数据分析师所需的统计学：异常检测 - weixin_39974030，CSDN：[https://blog.csdn.net/weixin_39974030/article/details/112569610](https://link.zhihu.com/?target=https%3A//blog.csdn.net/weixin_39974030/article/details/112569610)
+- [2] 剔除异常值栅格计算器_数据分析师所需的统计学：异常检测 - weixin_39974030，CSDN：[https://blog.csdn.net/weixin_39974030/article/details/112569610](https://blog.csdn.net/weixin_39974030/article/details/112569610)
  
 Grubbs’Test 为一种**假设检验**的方法，常被用来检验服从**正态分布**的**单变量**数据集（univariate data set）Y中的单个异常值。若有异常值，则其必为数据集中的最大值或最小值。原假设与备择假设如下：
 - ● H0: 数据集中没有异常值
@@ -99,8 +191,28 @@ print(grubbs.max_test_indices([8, 9, 10, 50, 9], alpha=0.05))
 - 2、无法精确的输出正常区间
 - 3、它的判断机制是“逐一剔除”，所以每个异常值都要单独计算整个步骤，数据量大吃不消。
 - 4、需假定数据服从正态分布或**近正态分布**
- 
+
+## 基于偏差的方法
+
+- 一种比较简单的统计方法，最初是为**单维**异常检测设计的。
+- 给定一个数据集后，对每个点进行检测，如果一个点自身的值与整个集合的指标存在过大的**偏差**，则该点为**异常点**。
+
+具体的实现方法
+- 定义一个指标 SF（Smooth Factor），含义是当把某个点从集合剔除后方差所降低的差值，通过设定一个阈值，与这些偏差值进行比较来确定哪些点存在异常。
+- Arning 在1996年首次提出
+
+
 ## 二、基于距离的方法
+
+计算每个点与周围点的距离，来判断一个点是不是存在异常。基于的假设是正常点的周围存在很多个近邻点，而异常点距离周围点的距离都比较远。
+
+### DB模型
+
+有一个比较古老的DB基础模型，是1997年被首次提出的，基本思想是：
+- 给定一个半径 ε 和比例 π，假设对点 p 进行异常检测，若与 p 点的距离小于半径 ε 的点在所有点中的占比低于 π，则点 p 为异常点。比如下图中的 p1 和 p2 两个点，它们方圆 ε 的范围内没有点，就会被模型标记异常。
+- <img src="https://pic1.zhimg.com/50/v2-13438cc4581a6a63311941c66e4346a8_720w.jpg?source=1940ef5c" data-caption="" data-size="normal" data-rawwidth="443" data-rawheight="226" class="origin_image zh-lightbox-thumb" width="443" data-original="https://picx.zhimg.com/v2-13438cc4581a6a63311941c66e4346a8_r.jpg?source=1940ef5c"/>
+
+之后基于最初这个模型，又出现了基于嵌套循环、基于网格的距离模型，再之后就是熟知的 kNN、KMeans，都可以通过计算距离来做异常检测。
  
 ### 1. KNN
  
@@ -121,7 +233,17 @@ y_train_pred = clf.labels_
 y_train_scores = clf.decision_scores_
 ```
  
-## 三、基于密度的方法
+## 三、基于密度的方法——距离方法改进
+
+与基于距离的方法类似，该类方法是针对所研究的点，计算它的周围密度和其临近点的周围密度，基于这两个密度值计算出**相对密度**，作为异常分数。即相对密度越大，异常程度越高。
+
+基于的假设
+- **正常点**与其近邻点的密度是相**近**的，而**异常点**的密度和周围的点存在较大差异。
+
+设计这种方法的动机
+- 基于距离的异常检测方法不能很好地处理一些**密度**存在差异的数据集。
+- 如下图中的数据点分布，如果使用基于距离的模型，半径和比例已经设定好了，点 o2 很容易被识别为异常点，因为右上的 C1 子集中很多点与周围点的距离要比 o2 还小，其中很多点就会被标为正常点。但如果从密度的角度来看，o2 更像是一个正常点。所以无论单从哪个角度看，我们都可能会忽略另一个维度上的特征，因此还是要根据具体场景和目标任务，以及数据集本身的特点来进行算法的选择，或是进行算法的结合。
+
  
 ### 1. Local Outlier Factor (LOF)
  
@@ -230,7 +352,6 @@ DBSCAN算法（Density-Based Spatial Clustering of Applications with Noise）的
 - ● 输入：数据集，邻域半径Eps，邻域中数据对象数目阈值MinPts;
 - ● 输出：密度联通簇。
 - ![](https://pic1.zhimg.com/80/v2-cdf5f61bf1a338295d69c76dec506f88_1440w.jpg)
-- 图9：DBSCAN
  
 处理流程如下
  1. 从数据集中任意选取一个数据对象点p；
@@ -254,13 +375,29 @@ array([ 0,  0,  0,  1,  1, -1])
 ```
  
 ## 五、基于树的方法
+
+### 基于深度的方法
+
+基于深度的方法，即从点空间的边缘定位异常点，按照不同程度的需求，决定层数及异常点的个数。
+
+如下图所示，圆中密密麻麻的黑点代表一个个数据点，基于的假设是
+- 点空间中心这些分布比较集中、密度较高的点都是**正常点**
+- 而异常点都位于外层，即分布比较稀疏的地方。
+
+<img src="https://pica.zhimg.com/50/v2-356c247fc68acc7bf399060f24a3803e_720w.jpg?source=1940ef5c" data-caption="" data-size="normal" data-rawwidth="318" data-rawheight="298" class="content_image" width="318"/>
+
+如下图，最外层点的深度为1，再往内几层深度一次为2、3、4…… 若我们设置阈值k=2，那么深度小于等于2的点就全部为异常点。这一方法最早由 Tukey 在1997年首次提出。
+
+<img src="https://pica.zhimg.com/50/v2-2aa883b73fdb508059e819ef0a201bc8_720w.jpg?source=1940ef5c" data-caption="" data-size="normal" data-rawwidth="444" data-rawheight="246" class="origin_image zh-lightbox-thumb" width="444" data-original="https://pica.zhimg.com/v2-2aa883b73fdb508059e819ef0a201bc8_r.jpg?source=1940ef5c"/>
+
+但这个基础模型仅适用于二维、三维空间。现在有很多流行的算法都借鉴了这种模型的思想，但通过改变计算深度的方式，已经可以实现高维空间的异常检测，如孤立森林算法。
  
 ### 1. Isolation Forest (iForest)
- 
+
 资料来源：
 - [8] 异常检测算法 -- 孤立森林（Isolation Forest）剖析 - 风控大鱼，知乎：[https://zhuanlan.zhihu.com/p/74508141](https://zhuanlan.zhihu.com/p/74508141)
 - [9] 孤立森林(isolation Forest)-一个通过瞎几把乱分进行异常检测的算法 - 小伍哥聊风控，知乎：[https://zhuanlan.zhihu.com/p/484495545](https://zhuanlan.zhihu.com/p/484495545)
-- [10] 孤立森林阅读 - Mark_Aussie，博文：[https://blog.csdn.net/MarkAustralia/article/details/120181899](https://link.zhihu.com/?target=https%3A//blog.csdn.net/MarkAustralia/article/details/120181899)
+- [10] 孤立森林阅读 - Mark_Aussie，博文：[https://blog.csdn.net/MarkAustralia/article/details/120181899](https://blog.csdn.net/MarkAustralia/article/details/120181899)
  
 孤立森林中的 “孤立” (isolation) 指的是 “把异常点从所有样本中孤立出来”，论文中的原文是 “separating an instance from the rest of the instances”。  
  
@@ -478,7 +615,28 @@ scored.head()
  
 
 ## 七、基于分类的方法
+
+把异常检测看成是数据**不平衡**下的**分类**问题。
+- （1）如果数据条件允许，优先使用**有监督**的异常检测
+- （2）仅有少量标签的情况下，也可采用**半监督**异常检测模型；如把无监督学习作为一种特征抽取方式来**辅助**监督学习，和stacking比较类似
+- （3）没有标签的，训练数据中并未标出哪些是异常点，因此必须使用**无监督**学习。
  
+### 无监督异常检测
+
+无监督异常检测模型可以大致分为：
+- （1）**统计与概率**模型（statistical and probabilistic and models）：主要是对**数据分布**做出假设，并找出假设下所定义的“异常”，因此往往会使用极值分析或者假设检验。
+  - 比如对最简单的一维数据假设**高斯分布**，然后将距离均值特定范围以外的数据当做异常点。而推广到高维后，可以假设每个维度各自独立，并将各个维度上的异常度相加。如果考虑特征间的相关性，也可以用马氏距离（mahalanobis distance）来衡量数据的异常度。
+  - 不难看出，这类方法最大的好处就是速度一般比较快，但因为存在比较强的“假设”，效果不一定很好。稍微引申一点的话，其实给每个维度做个直方图做**密度估计**，再加起来就是HBOS。
+- （2）**线性模型**（linear models）：假设数据在低维空间上有嵌入，那么无法、或者在低维空间投射后表现不好的数据可以认为是离群点。
+  - 举个简单的例子，PCA可以用于做异常检测，一种方法就是找到k个特征向量（eigenvector），并计算每个样本再经过这k个特征向量投射后的重建误差（reconstruction error），而正常点的重建误差应该小于异常点。同理，也可以计算每个样本到这k个选特征向量所构成的超空间的加权欧氏距离（特征值越小权重越大）。在相似的思路下，我们也可以直接对协方差矩阵进行分析，并把样本的马氏距离（在考虑特征间关系时样本到分布中心的距离）作为样本的异常度，而这种方法也可以被理解为一种软性（Soft PCA）。
+  - 另一种经典算法One-class SVM也一般被归类为线性模型。
+- （3）基于**相似度衡量**的模型（proximity based models）：异常点因为和正常点的分布不同，因此相似度较低，由此衍生了一系列算法通过相似度来识别异常点。
+  - 比如最简单的K近邻就可以做异常检测，一个样本和它第k个近邻的距离就可以被当做是异常值，显然异常点的k近邻距离更大。同理，基于密度分析如LOF、LOCI和LoOP主要是通过局部的数据密度来检测异常。显然，异常点所在空间的数据点少，密度低。相似的是，Isolation Forest通过划分超平面来计算“孤立”一个样本所需的超平面数量（可以想象成在想吃蛋糕上的樱桃所需的最少刀数）。在密度低的空间里（异常点所在空间中），孤例一个样本所需要的划分次数更少。
+  - 另一种相似的算法ABOD是计算每个样本与所有其他样本对所形成的夹角的方差，异常点因为远离正常点，因此方差变化小。换句话说，大部分异常检测算法都可以被认为是一种估计相似度，无论是通过密度、距离、夹角或是划分超平面。通过聚类也可以被理解为一种相似度度量，比较常见不再赘述。
+- （4）**集成**异常检测与模型融合：在无监督学习时，提高模型的鲁棒性很重要，因此集成学习就大有用武之地。比如上面提到的Isolation Forest，就是基于构建多棵决策树实现的。最早的集成检测框架feature bagging与分类问题中的随机森林（random forest）很像，先将训练数据随机划分（每次选取所有样本的d/2-d个特征，d代表特征数），得到多个子训练集，再在每个训练集上训练一个独立的模型（默认为LOF）并最终合并所有的模型结果（如通过平均）。值得注意的是，因为没有标签，异常检测往往是通过bagging和feature bagging比较多，而boosting比较少见。boosting情况下的异常检测，一般需要生成伪标签。集成异常检测是一个新兴但很有趣的领域。
+- （5）特定领域上的异常检测：比如图像异常检测，顺序及流数据异常检测（时间序列异常检测），以及高维空间上的异常检测，比如前文提到的Isolation Forest就很适合高维数据上的异常检测。
+
+
 ### 1. One-Class SVM
  
 资料来源：
@@ -489,7 +647,7 @@ One-Class SVM，这个算法的思路非常简单，就是寻找一个超平面�
 - ![](https://pic3.zhimg.com/80/v2-0a2bc3c5116a35e6f1abff1f27d78c9a_1440w.jpg)
 - 图12：One-Class SVM
  
-One-Class SVM又一种推导方式是SVDD（Support Vector Domain Description，支持向量域描述），对于SVDD来说，我们期望所有不是异常的样本都是正类别，同时它采用一个超球体，而不是一个超平面来做划分，该算法在特征空间中获得数据周围的球形边界，期望最小化这个超球体的体积，从而最小化异常点数据的影响。
+One-Class SVM又一种推导方式是SVDD（Support Vector Domain Description，支持向量域描述），对于SVDD来说，期望所有不是异常的样本都是正类别，同时它采用一个超球体，而不是一个超平面来做划分，该算法在特征空间中获得数据周围的球形边界，期望最小化这个超球体的体积，从而最小化异常点数据的影响。
  
 假设产生的超球体参数为中心 o 和对应的超球体半径r>0，超球体体积V(r)被最小化，中心o是支持行了的线性组合；跟传统SVM方法相似，可以要求所有训练数据点xi到中心的距离严格小于r。但是同时构造一个惩罚系数为C的松弛变量 ζi，优化问题入下所示：
 - ![[公式]](https://www.zhihu.com/equation?tex=%5Cbegin%7Barray%7D%7Bc%7D%5Cunderbrace%7B%5Cmin+%7D_%7Br+%5Crho%7D+V%28r%29%2BC+%5Csum_%7Bi%3D1%7D%5E%7Bm%7D+%5Czeta_%7Bi%7D+%5C%5C%5Cleft%5C%7Cx_%7Bi%7D-o%5Cright%5C%7C_%7B2%7D+%5Cleq+r%2B%5Cxi_%7Bi%7D%2C+i-1%2C2%2C3+%5Cldots+m+%5C%5C%5Cxi_%7Bi%7D+%5Cgeq+0%2C+i%3D1%2C2%2C+%5Cldots+m%5Cend%7Barray%7D)
@@ -508,22 +666,31 @@ n_error_outlier = y_pred[y_pred == -1].size
 ## 八、基于预测的方法
  
 资料来源：
-- [17] 【TS技术课堂】时间序列异常检测 - 时序人，文章：[https://mp.weixin.qq.com/s/9TimTB_ccPsme2MNPuy6uA](https://link.zhihu.com/?target=https%3A//mp.weixin.qq.com/s/9TimTB_ccPsme2MNPuy6uA)
+- [17] 【TS技术课堂】时间序列异常检测 - 时序人，文章：[https://mp.weixin.qq.com/s/9TimTB_ccPsme2MNPuy6uA](https://mp.weixin.qq.com/s/9TimTB_ccPsme2MNPuy6uA)
  
 对于单条时序数据，根据其预测出来的时序曲线和真实的数据相比，求出每个点的残差，并对残差序列建模，利用KSigma或者分位数等方法便可以进行异常检测。具体的流程如下：
 - ![](https://pic2.zhimg.com/80/v2-60b4bef47418cfa831066ece990508b1_1440w.jpg)
 - 图13：基于预测的方法
- 
+
+
+## 深度学习方法
+
+目前最常用于异常检测的深度学习方法要非 Autoencoder 莫属了。
+
+Autoencoder 的中文名叫**自编码器**，由 Encoder（编码器）和 Decoder（解码器）两部分构成
+- ![](https://picx.zhimg.com/80/v2-f7da88847ba8cee1b3b8e93519fcbb77_1440w.jpg?source=1940ef5c)
+- 左边部分为编码器，它可以把高维的输入压缩成低维的形式来表示，在此过程中，神经网络会尽量留下有用的信息，去除掉一些不重要的信息和噪声。右边部分为解码器，它负责把压缩了的数据再进行还原，努力恢复成原本的样子。
+- ![](https://pic1.zhimg.com/80/v2-ae1210b1037a6de06cacf0770e064a28_1440w.jpg?source=1940ef5c)
+- 使用辛普森家人中爷爷的图像进行这个模型的测试，此时模型有很好的还原表现，因为丽莎和爷爷很像，模型之前已经知道如何处理这种数据了
 
 ## 九、总结
 
 异常检测方法总结如下：
 - ![](https://pic3.zhimg.com/80/v2-8d7aafacc594570b545ad68c8363309e_1440w.jpg)
- 
 
 参考资料
 - [1] 时序预测竞赛之异常检测算法综述 - 鱼遇雨欲语与余，知乎：[https://zhuanlan.zhihu.com/p/336944097](https://zhuanlan.zhihu.com/p/336944097)
-- [2] 剔除异常值栅格计算器_数据分析师所需的统计学：异常检测 - weixin_39974030，CSDN：[https://blog.csdn.net/weixin_39974030/article/details/112569610](https://link.zhihu.com/?target=https%3A//blog.csdn.net/weixin_39974030/article/details/112569610)
+- [2] 剔除异常值栅格计算器_数据分析师所需的统计学：异常检测 - weixin_39974030，CSDN：[https://blog.csdn.net/weixin_39974030/article/details/112569610](https://blog.csdn.net/weixin_39974030/article/details/112569610)
 - [3] 异常检测算法之(KNN)-K Nearest Neighbors - 小伍哥聊风控，知乎：[https://zhuanlan.zhihu.com/p/501691799](https://zhuanlan.zhihu.com/p/501691799)
 - [4] 一文读懂异常检测 LOF 算法（Python代码）- 东哥起飞，知乎：[https://zhuanlan.zhihu.com/p/448276009](https://zhuanlan.zhihu.com/p/448276009)
 - [5] Nowak-Brzezińska, A., & Horyń, C. (2020). Outliers in rules-the comparision of LOF, COF and KMEANS algorithms. *Procedia Computer Science*, *176*, 1420-1429.
@@ -531,14 +698,14 @@ n_error_outlier = y_pred[y_pred == -1].size
 - [7] 异常检测之SOS算法 - 呼广跃，知乎：[https://zhuanlan.zhihu.com/p/34438518](https://zhuanlan.zhihu.com/p/34438518)
 - [8] 异常检测算法 -- 孤立森林（Isolation Forest）剖析 - 风控大鱼，知乎：[https://zhuanlan.zhihu.com/p/74508141](https://zhuanlan.zhihu.com/p/74508141)
 - [9] 孤立森林(isolation Forest)-一个通过瞎几把乱分进行异常检测的算法 - 小伍哥聊风控，知乎：[https://zhuanlan.zhihu.com/p/484495545](https://zhuanlan.zhihu.com/p/484495545)
-- [10] 孤立森林阅读 - Mark_Aussie，博文：[https://blog.csdn.net/MarkAustralia/article/details/12018189](https://link.zhihu.com/?target=https%3A//blog.csdn.net/MarkAustralia/article/details/12018189)
+- [10] 孤立森林阅读 - Mark_Aussie，博文：[https://blog.csdn.net/MarkAustralia/article/details/12018189](https://blog.csdn.net/MarkAustralia/article/details/12018189)
 - [11] 机器学习-异常检测算法（三）：Principal Component Analysis - 刘腾飞，知乎：[https://zhuanlan.zhihu.com/p/29091645](https://zhuanlan.zhihu.com/p/29091645)
 - [12] Anomaly Detection异常检测--PCA算法的实现 - CC思SS，知乎：[https://zhuanlan.zhihu.com/p/48110105](https://zhuanlan.zhihu.com/p/48110105)
 - [13] 利用Autoencoder进行无监督异常检测(Python) - [http://SofaSofa.io](https://link.zhihu.com/?target=http%3A//SofaSofa.io)，知乎：[https://zhuanlan.zhihu.com/p/46188296](https://zhuanlan.zhihu.com/p/46188296)
 - [14] 自编码器AutoEncoder解决异常检测问题（手把手写代码） - 数据如琥珀，知乎：[https://zhuanlan.zhihu.com/p/260882741](https://zhuanlan.zhihu.com/p/260882741)
 - [15] Python机器学习笔记：One Class SVM - zoukankan，博文：[http://t.zoukankan.com/wj-1314-p-10701708.html](https://link.zhihu.com/?target=http%3A//t.zoukankan.com/wj-1314-p-10701708.html)
 - [16] 单类SVM: SVDD - 张义策，知乎：[https://zhuanlan.zhihu.com/p/65617987](https://zhuanlan.zhihu.com/p/65617987)
-- [17] 【TS技术课堂】时间序列异常检测 - 时序人，文章：[https://mp.weixin.qq.com/s/9Tim](https://link.zhihu.com/?target=https%3A//mp.weixin.qq.com/s/9TimTB_ccPsme2MNPuy6uA)
+- [17] 【TS技术课堂】时间序列异常检测 - 时序人，文章：[https://mp.weixin.qq.com/s/9Tim](https://mp.weixin.qq.com/s/9TimTB_ccPsme2MNPuy6uA)
 
 
 

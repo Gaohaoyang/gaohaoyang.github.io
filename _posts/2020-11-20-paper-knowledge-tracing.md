@@ -30,8 +30,10 @@ mathjax: true
 
 ## 什么是知识追踪
 
-- **Knowledge Tracing** 
-  - Def:  Knowledge tracing is the task of modelling student knowledge over time so that we can accurately predict how students will perform on future interactions. Usually by observing the correctness of doing exercises.
+**Knowledge Tracing** 
+
+> Def:  Knowledge tracing is the task of modelling student knowledge over time so that we can accurately predict how students will perform on future interactions. Usually by observing the correctness of doing exercises.
+
 - **知识追踪**是基于学生行为序列进行建模，预测学生对知识的掌握程度。知识追踪是构建**自适应教育系统**的核心和关键。在自适应的教育系统中，无论是做精准推送，学生**学习路径规划**或**知识图谱构建**，第一步都是能够精准预测学生对知识的掌握程度。
 - ![](https://img-blog.csdnimg.cn/20200919221855940.png)
 
@@ -60,6 +62,7 @@ KT能能估计考试吗？
 
 英语/语文可以使用KT模型吗？
 - 英语有很多公司是使用KT来预测的，这块公开的研究也比较多。但是其主要作用是提升了产品的留存率，即是在体验方面的提升。语文可能也是类似的，模型可能非常依赖做题数据来估计人的能力和题目的难度。
+
 
 ## 知识追踪发展
 
@@ -488,6 +491,12 @@ Transformer 发布后，基于 Transformer 的语言模型在各种自然语言�
 - 使用`零样本学习`和对文本进行**预训练**并在代码上进行**微调**的神经网络（OpenAI Codex code-davinci-002）合成的程序可以自动解决课程问题中的 71%和 MATH 基准测试问题中的72.2%。
 - 使用相同的神经网络 Codex 再加上少样本学习，便可自动解决课程中 81% 的问题和 MATH 基准测试中 81.1% 的问题。
 - 而其余模型无法自动解决的 19% 的课程问题和 18.9% 的MATH基准问题，最后通过手动提示解决。
+
+## 代码实现
+
+【2022-8-30】paperwithcode 里的Deep Knowledge Tracing [sota榜单](https://paperswithcode.com/paper/deep-knowledge-tracing#code)
+- [DeepKnowledgeTracing-DKT-Pytorch](https://github.com/chsong513/DeepKnowledgeTracing-DKT-Pytorch.git)
+- [deepKT](https://github.com/jdxyw/deepKT)
 
 
 # 结束

@@ -93,13 +93,20 @@ mathjax: true
 
 # Embedding（嵌入）
 
+
+## 词嵌入
+
 - 【2021-5-6】国立台湾大学陈蕴侬的[word embedding](https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/200331_WordEmbeddings.pdf)，更多[课件](https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/)
+
+<object type="application/pdf" data="https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/200331_WordEmbeddings.pdf"
+           id="review" style="width:100%;  height:800px; margin-top:0px;  margin-left:0px" >
+</object>
 
 ## 基本概念
 
-- Embedding（嵌入）是**拓扑学**里面的词，在深度学习领域经常和`Manifold`（流形）搭配使用。
-  - 三维空间的球体是一个二维流形嵌入在三维空间（2D manifold embedded in 3D space）。球上的任意一个点只需要用一个二维的经纬度来表达就可以了。
-  - 一个二维空间的旋转矩阵是2x2的矩阵，其实只需要一个角度就能表达了，这是一维流形嵌入在2x2的矩阵空间。
+Embedding（嵌入）是**拓扑学**里面的词，在深度学习领域经常和`Manifold`（流形）搭配使用。
+- 三维空间的球体是一个二维流形嵌入在三维空间（2D manifold embedded in 3D space）。球上的任意一个点只需要用一个二维的经纬度来表达就可以了。
+- 一个二维空间的旋转矩阵是2x2的矩阵，其实只需要一个角度就能表达了，这是一维流形嵌入在2x2的矩阵空间。
 
 作者：[刘斯坦](https://www.zhihu.com/question/38002635/answer/1382442522)
 
@@ -112,14 +119,17 @@ Embedding 就是把一个东西映射到一个向量 x。如果两个东西很�
 
 ## 作用
 
-Embedding 是一个将离散变量转为连续向量表示的一个方式。在神经网络中，embedding是非常有用的，因为它不光可以减少离散变量的空间维数，同时还可以有意义的表示该变量。
+Embedding 是一个将**离散**变量转为**连续**向量表示的一个方式。在神经网络中，embedding是非常有用的，因为它不光可以减少离散变量的空间维数，同时还可以有意义的表示该变量。
 
 Embedding 有以下 3 个主要目的：
-- 在 embedding 空间中查找最近邻，这可以很好的用于根据用户的兴趣来进行推荐。
-- 作为监督性学习任务的输入。
-- 用于可视化不同离散变量之间的关系。
+- 在 embedding 空间中查找**最近邻**，这可以很好的用于根据用户的兴趣来进行推荐。
+- 作为监督学习任务的**输入**。
+- 用于**可视化**不同离散变量之间的关系。
 
-Embedding这个概念在深度学习领域最原初的切入点是所谓的**Manifold Hypothesis**（**流形假设**）。流形假设是指“**自然的原始数据是低维的流形嵌入于(embedded in)原始数据所在的高维空间**”。深度学习的任务就是把**高维**原始数据（图像，句子）映射到**低维**流形，使得高维的原始数据被映射到低维流形之后变得可分，而这个映射就叫嵌入（Embedding）。比如Word Embedding，就是把单词组成的句子映射到一个表征向量。但后来不知咋回事，开始把低维流形的表征向量叫做Embedding，其实是一种误用。。。如果按照现在深度学习界通用的理解（其实是偏离了原意的），Embedding就是从原始数据提取出来的Feature，也就是那个通过神经网络映射之后的低维向量。
+Embedding这个概念在深度学习领域最原初的切入点是所谓的**Manifold Hypothesis**（**流形假设**）。
+- 流形假设：自然的原始数据是低维的流形**嵌入**(embedded in)原始数据所在的高维空间”。
+- 深度学习的任务就是把**高维**原始数据（图像，句子）映射到**低维**流形，使得高维的原始数据被映射到低维流形之后变得可分，而这个映射就叫`嵌入`（Embedding）。
+- 比如Word Embedding是把单词组成的句子映射到一个**表征向量**。但后来不知咋回事，开始把低维流形的表征向量叫做Embedding，其实是一种误用。。。如果按照现在深度学习界通用的理解（其实是偏离了原意的），Embedding就是从原始数据提取出来的Feature，也就是那个通过神经网络映射之后的低维向量。
 
 2014年的经典文章：[Neural Networks, Manifolds, and Topology](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/)
 
@@ -138,11 +148,11 @@ Embedding 最酷的一个地方在于可以用来可视化出表示的数据的�
 - 其作为 TensorFlow 的一部分，能带来类似 [A.I. Experiment](http://aiexperiments.withgoogle.com/) 的效果。同时，谷歌也在 projector.tensorflow.org 放出了一个可以单独使用的版本，让用户无需安装和运行 TensorFlow 即可进行高维数据的可视化
 - [论文](https://arxiv.org/pdf/1611.05469v1.pdf), [A.I. Experiment](http://aiexperiments.withgoogle.com/), [Embedding Projector体验地址](https://projector.tensorflow.org/)，[使用介绍](https://www.tensorflow.org/versions/master/how_tos/embedding_viz/index.html)
 - ![nlp降维图示](https://pic1.zhimg.com/80/v2-7abbe32b5feb0ab869db33a55e2b8b7c_720w.png)
-  - Label by：可以选择Label和Index，将鼠标放到相应的点上，可以显示该点的Label或者Index
-  - Color by：可选Label和No color map，前者会根据不同的label给点赋予不同的颜色，后者不涂色，一律为黑白，如图所示。
-  - ![](https://img-blog.csdn.net/20180710170658512)
-  - 可以根据Label查找某个类，如图，我们可以找到Label为4的点。
-  - ![](https://img-blog.csdn.net/20180710170727330)
+- Label by：可以选择Label和Index，将鼠标放到相应的点上，可以显示该点的Label或者Index
+- Color by：可选Label和No color map，前者会根据不同的label给点赋予不同的颜色，后者不涂色，一律为黑白，如图所示。
+- ![](https://img-blog.csdn.net/20180710170658512)
+- 可以根据Label查找某个类，如图，我们可以找到Label为4的点。
+- ![](https://img-blog.csdn.net/20180710170727330)
 
 <video width="620" height="440" controls="controls" autoplay="autoplay">
   <source src="https://vdn1.vzuu.com/SD/7191e9f4-ec77-11ea-acfd-5ab503a75443.mp4?disable_local_cache=1&auth_key=1619512352-0-0-9d84f1b7e6c1920c1c9a0a2806ca2132&f=mp4&bu=pico&expiration=1619512352&v=hw" type="video/mp4" />
@@ -194,9 +204,7 @@ def train(mnist):
             learning_rate_decay,
             staircase=True
         )
-
         train_step = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss,global_step=global_step)
-
         train_op = tf.group(train_step,ema_op)
 
     with tf.Session() as sess:
@@ -204,12 +212,9 @@ def train(mnist):
         for i in range(training_steps):
             xs,ys = mnist.train.next_batch(batch_size)
             _,loss_value,step = sess.run([train_op,loss,global_step],feed_dict={x:xs,y_:ys})
-
             if step % 100 == 0 :
                 print('step:{},loss:{}'.format(step,loss_value))
-
         final_result = sess.run(y,feed_dict={x:mnist.test.images})
-
     return final_result
 
 def visualisation(final_result):
@@ -217,14 +222,12 @@ def visualisation(final_result):
     y = tf.Variable(final_result,name=tensor_name)
     #定义日志文件writer
     summary_writer = tf.summary.FileWriter(log_dir)
-
     #ProjectorConfig帮助生成日志文件
     config = projector.ProjectorConfig()
     #添加需要可视化的embedding
     embedding = config.embeddings.add()
     #将需要可视化的变量与embedding绑定
     embedding.tensor_name = y.name
-
     #指定embedding每个点对应的标签信息，
     #这个是可选的，没有指定就没有标签信息
     embedding.metadata_path = meta_file
@@ -233,10 +236,8 @@ def visualisation(final_result):
     embedding.sprite.image_path = sprite_file
     #指定sprite图中单张图片的大小
     embedding.sprite.single_image_dim.extend([28,28])
-
     #将projector的内容写入日志文件
     projector.visualize_embeddings(summary_writer,config)
-
     #初始化向量y，并将其保存到checkpoints文件中，以便于TensorBoard读取
     sess = tf.InteractiveSession()
     sess.run(tf.global_variables_initializer())
@@ -246,7 +247,6 @@ def visualisation(final_result):
 
 def main(_):
     mnist = input_data.read_data_sets('MNIST_data',one_hot=True)
-
     final_result = train(mnist)
     visualisation(final_result)
 
@@ -283,7 +283,6 @@ def create_sprite_image(images):
             cur = i * num + j
             if cur < images.shape[0]:
                 sprite_image[i*img_h:(i+1)*img_h,j*img_w:(j+1)*img_w] = images[cur]
-
     return sprite_image
 
 if __name__ == '__main__':
@@ -291,37 +290,30 @@ if __name__ == '__main__':
     #黑底白字变成白底黑字
     to_visualise = 1 - np.reshape(mnist.test.images,[-1,28,28])
     sprite_image = create_sprite_image(to_visualise)
-
     #存储展示图像
     path_mnist_sprite = os.path.join(log_dir,sprite_file)
     plt.imsave(path_mnist_sprite,sprite_image,cmap='gray')
     plt.imshow(sprite_image,cmap='gray')
-
     #存储每个下标对应的标签
     path_mnist_metadata = os.path.join(log_dir,meta_file)
     with open(path_mnist_metadata,'w') as f:
         f.write('Index\tLabel\n')
         for index,label in enumerate(mnist.test.labels):
             f.write('{}\t{}\n'.format(index,label))
-
 ```
 
 执行tensorboard –logdir=log后，浏览器打开localhost:6006，即可观察到相应结果。每个高维向量都被投影到一个三维坐标系中，同一个类别的向量彼此靠近，形成一个一个的簇，且界限明显，可见分类效果较好
-
-![](https://img-blog.csdn.net/2018071017062698)
+- ![](https://img-blog.csdn.net/2018071017062698)
 
 t-sne效果较好
-
-![](https://img-blog.csdn.net/20180710170707473)
-
+- ![](https://img-blog.csdn.net/20180710170707473)
 
 摘自：[Embedding的理解](https://zhuanlan.zhihu.com/p/46016518)，[英文原文](https://towardsdatascience.com/neural-network-embeddings-explained-4d028e6f0526)
 
 ## word2vec
 
 优质文章：[The Illustrated Word2vec](https://jalammar.github.io/illustrated-word2vec/)，[中文版](https://mp.weixin.qq.com/s?__biz=MjM5MTQzNzU2NA==&mid=2651669277&idx=2&sn=bc8f0590f9e340c1f1359982726c5a30&chksm=bd4c648e8a3bed9817f30c5a512e79fe0cc6fbc58544f97c857c30b120e76508fef37cae49bc&scene=0&xtrack=1#rd)
-
-![](https://jalammar.github.io/images/word2vec/personality-two-persons.png)
+- ![](https://jalammar.github.io/images/word2vec/personality-two-persons.png)
 
 ## 实现
 
@@ -342,7 +334,6 @@ embed = tf.nn.embedding_lookup(embeddings, train_inputs)
 # 执行
 print(sess.run(input_embedding, feed_dict={input_ids:[[1, 2], [2, 1], [3, 3]]}))
 ```
-
 
 ## pyecharts可视化
 
@@ -387,17 +378,15 @@ print(query_label[10],X_new[10]) # 输出label、降维后的向量
 from sklearn.decomposition import PCA
 
 pca=PCA(n_components=3)
-
 ```
+
 - 数据加载、可视化
 
 ```python
-
 import random
 from pyecharts import options as  opts
 from pyecharts.charts import Scatter3D
 from pyecharts.faker import Faker
-
 # --------- 加载数据 ---------
 vec_tsne = np.load('/home/wangqiwen004/work/nlu_data/newhouse/vec_tsne.npy')
 vec_label = np.load('/home/wangqiwen004/work/nlu_data/newhouse/vec_label.npy')
@@ -410,7 +399,6 @@ np.hstack((vec_tsne[:3], vec_label[:3]))
 #Scatter_data = vec_tsne[:10].tolist()
 N = 50000
 Scatter_data = np.hstack((vec_tsne, vec_label))[:N].tolist()
-
 # --------- 绘图 ---------
 c = (
     Scatter3D(init_opts = opts.InitOpts(width='1500px',height='900px'))  #初始化
@@ -431,7 +419,6 @@ c = (
 c.render("新房驻场客服-query空间关系.html")
 #c.render_notebook() # 渲染到jupyter notebook页面
 ```
-
 
 # 流形学习
 
@@ -475,13 +462,13 @@ Manifold Distribution Principle（流形分布定则）
 - Central Tasks for DL （深度学习的中心任务）深度学习究竟想学什么？主要是有两个中心任务：
   - （1）数据流形的拓扑结构
   - （2）数据流形上的概率分布
-- Generative Model Framework （生成模型的框架
+- Generative Model Framework （**生成模型**的框架)
   - ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/4da84eaa891d4dc3bdefeb5f6fbd1ded~noop.image)
   - 上行中，`编码`映射将手写体数字流形映射到**特征空间**，将流形上的概率分布映射到隐空间上的概率分布；`解码`映射将隐空间映回数据流形。
   - 下行中，`最优传输`映射将长方形内的均匀分布映射到隐空间中的数据分布，这里最优传输映射是某一凸函数的梯度映射，此凸函数被称为是`Brenier势能`。
-- Whitney Manifold Embedding（Whitney流形嵌入）
+- Whitney Manifold Embedding（**Whitney流形嵌入**）
   - Whitney流形定理是说任意给一个m维拓扑流形，我们可以将其嵌入在欧式空间中，欧氏空间的维数大约是流形维数的两倍。现在很多深度学习的算法本质上就是Whitney定理的实现。Whitney定理的证明需要先用一族开集覆盖流形，将每个开集嵌入到欧氏空间，然后用所谓的单位分解把局部嵌入整体粘起来得到一个全局嵌入。这时嵌入空间的维数等于流形的维数乘以开集的个数，我们在将嵌入的流形依次向低维线性子空间投影，直至无法进一步投影，这时子空间的维数等于流形维数的两倍。
-- Universal Approximation（万有逼近）
+- Universal Approximation（**万有逼近**）
   - 深度神经网络具有万有逼近的性质，即只要给定一个连续映射，给定任意的逼近精度，都存在某个深度神经网络来进行逼近。这个性质的理论基础实际上是来自Hilbert 第13问题：任意一个多变元的连续函数，都可以由两个单变元函的有限复合以任意精度来逼近。我们可以看到深度学习的逼近理论大多是基于这个定理。
 
 ## 流形假设
@@ -735,58 +722,56 @@ UMAP不足：
 
 
 
-## [理解维度诅咒](https://blog.csdn.net/z13653662052/article/details/87936713)
+## 维度诅咒
+
+[理解维度诅咒](https://blog.csdn.net/z13653662052/article/details/87936713)
 - 原文[The Curse of Dimensionality in classification](http://www.visiondummy.com/2014/04/curse-dimensionality-affect-classification/)
 
 ### 介绍
 
-在本文中，我们将讨论所谓的“维度诅咒”，并解释在设计分类器时它的重要性。在下面的章节中，我将提供这个概念的直观解释，由一个由于维数诅咒而过度拟合的明显例子说明。
+讨论所谓的“维度诅咒”，并解释在设计分类器时它的重要性。提供这个概念的直观解释，由一个由于维数诅咒而过度拟合的明显例子说明。
 
-考虑一个例子，其中我们有一组图像，每个图像描绘一只猫或一只狗。我们想创建一个能够自动区分狗和猫的分类器。为此，我们首先需要考虑可以用数字表示的每个对象类的描述符，这样数学算法（即分类器）可以使用这些数字来识别对象。例如，我们可以说猫和狗的颜色通常不同。区分这两个类的可能描述符可以由三个数组成; 正在考虑的图像的平均红色，平均绿色和平均蓝色。例如，一个简单的线性分类器可以线性地组合这些特征来决定类标签：
+例子，一组图像，每个图像描绘一只猫或一只狗。想创建一个能够自动区分狗和猫的分类器。为此，首先考虑可以用数字表示的每个对象类的描述符，这样数学算法（即分类器）可以使用这些数字来识别对象。例如，我们可以说猫和狗的颜色通常不同。区分这两个类的可能描述符可以由三个数组成; 正在考虑的图像的平均红色，平均绿色和平均蓝色。例如，一个简单的线性分类器可以线性地组合这些特征来决定类标签：
 
-> If 0.5*red + 0.3*green + 0.2*blue > 0.6 : return cat;
-> else return dog;
+> - If 0.5*red + 0.3*green + 0.2*blue > 0.6 : 
+>   - return cat;
+> - else return dog;
 
 然而，这三种颜色描述数字，称为特征，显然不足以获得完美的分类。因此，我们可以决定添加一些描述图像纹理的特征，例如通过计算X和Y方向的平均边缘或梯度强度。我们现在有5个特征组合在一起，可以通过分类算法来区分猫和狗。
 
 为了获得更准确的分类，我们可以根据颜色或纹理直方图，统计矩等添加更多功能。也许我们可以通过仔细定义几百个这些功能来获得完美的分类？这个问题的答案可能听起来有点违反直觉：不，我们不能！。事实上，在某一点之后，通过添加新功能来增加问题的维度实际上会降低分类器的性能。这由图1说明，并且通常被称为“维度的诅咒”。
-
-![](http://www.visiondummy.com/wp-content/uploads/2014/04/dimensionality_vs_performance.png)
-
-特征维度与分类器性能
+- ![](http://www.visiondummy.com/wp-content/uploads/2014/04/dimensionality_vs_performance.png)
+- 特征维度与分类器性能
 
 图1.随着维度的增加，分类器的性能会提高，直到达到最佳要素数。进一步增加维度而不增加训练样本的数量导致分类器性能的降低。
 
 在接下来的部分中，我们将回顾上述原因是什么，以及如何避免维度的诅咒。
 
 ### 维度和过度拟合的诅咒
+
 在早先介绍的猫和狗的例子中，我们假设有无数的猫和狗生活在我们的星球上。然而，由于我们有限的时间和处理能力，我们只能获得10张猫狗照片。然后，分类的最终目标是基于这10个训练实例训练分类器，该分类器能够正确地分类我们不了解的无限数量的狗和猫实例。
 
 现在让我们使用一个简单的线性分类器，并尝试获得一个完美的分类。我们可以从一个特征开始，例如图像中的平均“红色”颜色：
-
-![](http://www.visiondummy.com/wp-content/uploads/2014/04/1Dproblem.png)
+- ![](http://www.visiondummy.com/wp-content/uploads/2014/04/1Dproblem.png)
 
 一维分类问题，图2.单个功能不会导致我们的训练数据完美区分。
 
 图2显示，如果仅使用单个特征，则无法获得完美的分类结果。因此，我们可能决定添加另一个特征，例如图像中的平均“绿色”颜色：
-
-![](http://www.visiondummy.com/wp-content/uploads/2014/04/2Dproblem.png)
+- ![](http://www.visiondummy.com/wp-content/uploads/2014/04/2Dproblem.png)
 
 二维分类问题
 
 图3.添加第二个特征仍然不会导致线性可分的分类问题：在此示例中，没有一条线可以将所有猫与所有狗分开。
 
 最后，我们决定添加第三个特征，例如图像中的平均“蓝色”颜色，从而产生三维特征空间：
-
-![](http://www.visiondummy.com/wp-content/uploads/2014/04/3Dproblem.png)
+- ![](http://www.visiondummy.com/wp-content/uploads/2014/04/3Dproblem.png)
 
 3D分类问题
 
 图4.在我们的示例中，添加第三个特征会导致线性可分的分类问题。存在一种将狗与猫完美分开的平面。
 
 在三维特征空间中，我们现在可以找到一个完美地将狗与猫分开的平面。这意味着可以使用这三个特征的线性组合来获得10幅图像的训练数据的完美分类结果：
-
-![](http://www.visiondummy.com/wp-content/uploads/2014/04/3Dproblem_separated.png)
+- ![](http://www.visiondummy.com/wp-content/uploads/2014/04/3Dproblem_separated.png)
 
 线性可分的分类问题
 
@@ -797,8 +782,7 @@ UMAP不足：
 在1D情况下（图2），10个训练实例覆盖了完整的1D特征空间，其宽度为5个单位间隔。因此，在1D情况下，样品密度为10/5 = 2个样品/间隔。然而，在二维情况下（图3），我们仍然有10个训练实例，现在覆盖了一个面积为5×5 = 25个单位正方形的2D特征空间。因此，在2D情况下，样品密度为10/25 = 0.4个样品/间隔。最后，在3D情况下，10个样本必须覆盖5x5x5 = 125个单位立方体的特征空间体积。因此，在3D情况下，样品密度为10/125 = 0.08个样品/间隔。
 
 如果我们继续添加特征，则特征空间的维度会增长，并变得更稀疏和稀疏。由于这种稀疏性，找到可分离的超平面变得更加容易，因为当特征的数量变得无限大时，训练样本位于最佳超平面的错误侧的可能性变得无限小。但是，如果我们将高维分类结果投影回较低维空间，则与此方法相关的严重问题变得明显：
-
-![](http://www.visiondummy.com/wp-content/uploads/2014/04/overfitting.png)
+- ![](http://www.visiondummy.com/wp-content/uploads/2014/04/overfitting.png)
 
 过度拟合
 
@@ -807,8 +791,7 @@ UMAP不足：
 图6显示了投影到2D特征空间的3D分类结果。尽管数据在3D空间中是线性可分的，但在较低维度的特征空间中却不是这种情况。实际上，添加第三维以获得完美的分类结果，简单地对应于在较低维特征空间中使用复杂的非线性分类器。因此，分类器学习我们的训练数据集的特例和异常。因此，生成的分类器将在真实世界数据上失败，包括通常不遵守这些异常的无限量的看不见的猫和狗。
 
 这个概念被称为过度拟合，是维度诅咒的直接结果。图7显示了仅使用2个特征而不是3个特征训练的线性分类器的结果：
-
-![](http://www.visiondummy.com/wp-content/uploads/2014/04/no_overfitting.png)
+- ![](http://www.visiondummy.com/wp-content/uploads/2014/04/no_overfitting.png)
 
 线性分类器,图7.尽管训练数据未被完美分类，但该分类器在看不见的数据上比图5中的数据获得更好的结果。
 
@@ -817,8 +800,7 @@ UMAP不足：
 下面的解释非常经典
 
 图8以不同的方式说明了上述内容。假设我们想要仅使用一个值为0到1的单个特征来训练分类器。让我们假设这个特征对于每只猫和狗都是唯一的。如果我们希望我们的训练数据覆盖此范围的20％，那么所需的训练数据量将占整个猫狗数量的20％。现在，如果我们添加另一个特征，生成2D特征空间，事情会发生变化; 为了覆盖20％的2D特征范围，我们现在需要在每个维度中获得猫和狗总数的45％（0.45 ^ 2 = 0.2）。在3D情况下，这变得更糟：要覆盖20％的3D特征范围，我们需要在每个维度中获得总数的58％（0.58 ^ 3 = 0.2）。
-
-![](http://www.visiondummy.com/wp-content/uploads/2014/04/curseofdimensionality.png)
+- ![](http://www.visiondummy.com/wp-content/uploads/2014/04/curseofdimensionality.png)
 
 训练数据量随着维度的数量呈指数增长
 
@@ -829,16 +811,14 @@ UMAP不足：
 在上面的例子中，我们展示了维度的诅咒引入了训练数据的稀疏性。我们使用的特征越多，数据就越稀疏，因此准确估计分类器的参数（即其决策边界）变得更加困难。维度诅咒的另一个影响是，这种稀疏性不是均匀分布在搜索空间上。实际上，原点周围的数据（在超立方体的中心）比搜索空间的角落中的数据要稀疏得多。这可以理解如下：
 
 想象一个代表2D特征空间的单位正方形。特征空间的平均值是该单位正方形的中心，距离该中心单位距离内的所有点都在一个单位圆内，该单位圆内接单位正方形。不属于该单位圆的训练样本更靠近搜索空间的角落而不是其中心。这些样本难以分类，因为它们的特征值差异很大（例如，单位正方形的相对角上的样本）。因此，如果大多数样本落在内接单位圆内，则分类更容易，如图9所示：
-
-![](http://www.visiondummy.com/wp-content/uploads/2014/04/inscribed_circle.png)
+- ![](http://www.visiondummy.com/wp-content/uploads/2014/04/inscribed_circle.png)
 
 单位距离平均单位圆内的特征
 
 图9.位于单位圆外的训练样本位于特征空间的角落，并且比特征空间中心附近的样本更难分类。
 
 现在一个有趣的问题是，当我们增加特征空间的维数时，圆（超球面）的体积如何相对于正方形（超立方体）的体积发生变化。尺寸d的单位超立方体的体积总是1 ^ d = 1. 尺寸d和半径0.5 的内切超球体的体积可以计算为：
-
-![](http://www.visiondummy.com/wp-content/ql-cache/quicklatex.com-3472e58fe7837e68dc4f98a8516cc5bc_l3.png)
+- ![](http://www.visiondummy.com/wp-content/ql-cache/quicklatex.com-3472e58fe7837e68dc4f98a8516cc5bc_l3.png)
 
 （1） 
 
