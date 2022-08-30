@@ -19,6 +19,8 @@ tags: latex 公式 markdown
 【2022-8-30】参考
 - [Cmd Markdown 公式指导手册](https://www.zybuluo.com/codeep/note/163962)
 
+[TOC]
+
 # 一、公式使用参考
 
 ## 1．如何插入公式
