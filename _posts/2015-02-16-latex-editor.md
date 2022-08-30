@@ -261,7 +261,7 @@ MathJax 针对任意元素均提供从小至大 `\tiny` `\Tiny` `\scriptsize` `\
 
 > [若找不到需要的符号，推荐使用 $\large\rm{Detexify}$ 来画出想要的符号](http://detexify.kirelabs.org/classify.html)
 <span style="text-align: center; display: block">
-![detexify_t](https://cdn.ericp.cn/img/202009/b0fe4b234a3fc.png)</span>
+- ![detexify_t](https://cdn.ericp.cn/img/202009/b0fe4b234a3fc.png)</span>
 
 ### (1)．关系运算符
 
@@ -325,10 +325,12 @@ MathJax 针对任意元素均提供从小至大 `\tiny` `\Tiny` `\scriptsize` `\
 若需要在特定文字顶部\底部放置内容，可使用 `\overset{顶部内容}{正常内容}` 和 `\underset{底部内容}{正常内容}` 命令。
 
 - 例子：
+
 ```latex
 $$ \verb+\overset{above}{level}+ \qquad \overset{xx}{ABC} \;\; \mid \quad \overset{x^2}{\longmapsto}\ \, \mid \quad \overset{\bullet\circ\circ\bullet}{T} $$
 ```
 - 显示：
+
 $$ \verb+\overset{above}{level}+ \qquad \overset{xx}{ABC} \;\; \mid \quad \overset{x^2}{\longmapsto}\ \, \mid \quad \overset{\bullet\circ\circ\bullet}{T} $$
 
 - 例子：
@@ -336,10 +338,12 @@ $$ \verb+\overset{above}{level}+ \qquad \overset{xx}{ABC} \;\; \mid \quad \overs
 $$ \verb+\underset{below}{level}+ \qquad \underset{xx}{ABC} \;\; \mid \quad \underset{x^2}{\longmapsto}\ \, \mid \quad \underset{\bullet\circ\circ\bullet}{T} $$
 ```
 - 显示：
+
 $$ \verb+\underset{below}{level}+ \qquad \underset{xx}{ABC} \;\; \mid \quad \underset{x^2}{\longmapsto}\ \, \mid \quad \underset{\bullet\circ\circ\bullet}{T} $$
 
 此命令可叠加嵌套使用，生成类似化学反应式的多重条件符号，
 如 `\overset{H_2}{\underset{1300℃}{\Longleftrightarrow}}`：
+
 $$ \rm{SrO+V^{''}_{Sr} \overset{H_2}{\underset{1300℃}{\Longleftrightarrow}} Sr^{\times}_{Sr}+2e^{'}+\frac 12O_2(g)} $$ 和 `\overset{Surface/bulk}{\underset{diffusion}{\longleftrightarrow}}`：
 $$ \rm{2OH^{\bullet}_{O(STN)}+2O^{\times}_{O(YSZ)} \; \overset{Surface/bulk}{\underset{diffusion}{\longleftrightarrow}} \;\; 2OH^{\bullet}_{O(YSZ)}+2O^{\times}_{O(STN)}} $$
 
@@ -368,6 +372,7 @@ $$ \rm{2OH^{\bullet}_{O(STN)}+2O^{\times}_{O(YSZ)} \; \overset{Surface/bulk}{\un
 ### (9)．箭头符号
 
 - 推荐使用符号：
+
 |输入|显示|输入|显示|输入|显示|
 |:--:|:--:|:--:|:--:|:--:|:--:|
 |\to|$\to$|\mapsto|$\mapsto$|\underrightarrow{1℃/min} | $\underrightarrow{1℃/min}$ |
@@ -375,6 +380,7 @@ $$ \rm{2OH^{\bullet}_{O(STN)}+2O^{\times}_{O(YSZ)} \; \overset{Surface/bulk}{\un
 
 
 - 其它可用符号：
+
 |输入|显示|输入|显示|
 |:--:|:--:|:--:|:--:|
 |\uparrow|$\uparrow$|\Uparrow|$\Uparrow$|
@@ -414,6 +420,7 @@ $$ \rm{2OH^{\bullet}_{O(STN)}+2O^{\times}_{O(YSZ)} \; \overset{Surface/bulk}{\un
 \end{array}
 ```
 - 显示：
+
 $$
 \begin{array}{cc}
     \mathrm{Bad} & \mathrm{Better} \\
@@ -439,6 +446,7 @@ $$
 $$
 ```
 - 显示：
+
 $$
 \bbox[yellow]{
     e^x=\lim_{n\to\infty} \left( 1+\frac{x}{n} \right)^n \qquad (1)
@@ -453,6 +461,7 @@ $$
 $$
 ```
 - 显示：
+
 $$
 \bbox[#9ff, 5px]{
     e^x=\lim_{n\to\infty} \left( 1+\frac{x}{n} \right)^n \qquad (1)
@@ -468,6 +477,7 @@ $$
 $$
 ```
 - 显示：
+
 $$
 \bbox[#2f3542, 0.5em, border:2px solid #f1f2f6]{
     \color{#f1f2f6}{e^x=\lim_{n\to\infty} \left( 1+\frac{x}{n} \right)^n \qquad (1)}
@@ -498,6 +508,7 @@ f\left(
 $$
 ```
 - 显示：
+
 $$
 f\left(
    \left[ 
@@ -526,6 +537,7 @@ $$
 $$
 ```
 - 显示：
+
 $$
 \begin{align*}
     a=&\left(1+2+3+ \cdots \right. \\
@@ -546,6 +558,7 @@ $$
 $$
 ```
 - 显示：
+
 $$
 \left\langle  
     q \; \middle|
@@ -570,6 +583,7 @@ $$
 \end{array}
 ```
 - 显示： 
+
 $$
 \begin{array}{c|c}
     \mathrm{Error} & \text{Wrong rendering} \\
@@ -591,6 +605,7 @@ $$
 \end{array}
 ```
 - 显示： 
+
 $$
 \begin{array}{c|c}
     \text{Normal Operator} & \text{Operator with label above and below} \\
@@ -611,6 +626,7 @@ $$
 $$ f(n)= \begin{cases} n/2, & \text {if $n$ is even} \\ 3n+1, & \text{if $n$ is odd} \end{cases} $$
 ```
 - 显示：
+
 $$ f(n)= \begin{cases} n/2, & \text {if $n$ is even} \\ 3n+1, & \text{if $n$ is odd} \end{cases} $$
 
 ### (3)．在字符间加入空格
@@ -629,6 +645,7 @@ $$ f(n)= \begin{cases} n/2, & \text {if $n$ is even} \\ 3n+1, & \text{if $n$ is 
 \end{array}
 ```
 - 显示：
+
 $$
 \begin{array}{c|c}
     \text{Spaces} & \text{Negative Space in Units} \\
@@ -646,6 +663,7 @@ $$ 180^\circ=\pi \ \mathrm{rad} $$
 $$ \mathrm{N_A} = 6.022\times10^{23} \ \mathrm{mol}^{-1} $$
 ```
 - 显示：
+
 $$ \mu_0=4\pi\times10^{-7} \ \left.\mathrm{\mathrm{T}\!\cdot\!\mathrm{m}}\middle/\mathrm{A}\right. $$ $$ 180^\circ=\pi \ \mathrm{rad} $$ $$ \mathrm{N_A} = 6.022\times10^{23} \ \mathrm{mol}^{-1} $$
 
 ### (4)．更改文字颜色 \color
@@ -683,6 +701,7 @@ $$ \mu_0=4\pi\times10^{-7} \ \left.\mathrm{\mathrm{T}\!\cdot\!\mathrm{m}}\middle
 \hline\end{array}
 ```
 - 显示：
+
 $$
 \begin{array}{|rrrrrrrr|}\hline
     \verb+#000+ & \color{#000}{text} & & &
@@ -716,6 +735,7 @@ $$
 \hline\end{array}
 ```
 - 显示：
+
 $$
 \begin{array}{|rrrrrrrr|}\hline
     \verb+#000+ & \color{#000}{text} & \verb+#005+ & \color{#005}{text} & \verb+#00A+ & \color{#00A}{text} & \verb+#00F+ & \color{#00F}{text}  \\
@@ -757,6 +777,7 @@ $$
 $$
 ```
 - 显示：
+
 $$
 \require{cancel}
 \begin{array}{rl}
@@ -787,6 +808,7 @@ $$
 $$
 ```
 - 显示：
+
 $$
 \require{enclose}
 \begin{array}{rl}
@@ -871,6 +893,7 @@ $$
 $$
 ```
 - 显示：
+
 $$
 \begin{matrix}
     1 & x & x^2 \\
@@ -914,6 +937,7 @@ $$
 $$
 ```
 - 显示：
+
 $$
 \begin{pmatrix}
     1 & a_1 & a_1^2 & \cdots & a_1^n \\
@@ -939,6 +963,7 @@ $$
 $$
 ```
 - 显示：
+
 $$
 \left[
     \begin{array}{cc|c}
@@ -981,6 +1006,7 @@ $$
 \end{align}
 ```
 - 显示：
+
 $$
 \begin{align}
     \sqrt{37} & = \sqrt{\frac{73^2-1}{12^2}} \\
@@ -1006,6 +1032,7 @@ $$
 \end{align}
 ```
 - 显示：
+
 $$
 \begin{align}
     v + w & = 0  & \text{Given} \tag 1 \\
@@ -1036,6 +1063,7 @@ $$
 $$
 ```
 - 显示：
+
 $$
     f(n) =
         \begin{cases}
@@ -1063,6 +1091,7 @@ $$
 $$
 ```
 - 显示：
+
 $$
     \left.
         \begin{array}{l}
@@ -1093,6 +1122,7 @@ $$
 ```
 |适配[2ex]|
 |:--:|
+
 ```latex
 $$
 f(n) = 
@@ -1148,6 +1178,7 @@ $$
 \end{array}
 ```
 - 显示：
+
 $$
 \begin{array}{c|lcr}
     n & \text{左对齐} & \text{居中对齐} & \text{右对齐} \\
@@ -1199,6 +1230,7 @@ $$
 ```
 
 - 显示：
+
 $$
 \begin{array}{c} % 总表格
     \begin{array}{cc} % 第一行内分成两列
@@ -1249,6 +1281,7 @@ $$
 $$
 ```
 - 显示：
+
 $$
 \left\{ 
     \begin{array}{c}
@@ -1270,6 +1303,7 @@ $$
 \end{cases}
 ```
 - 显示：
+
 $$
 \begin{cases}
     a_1x+b_1y+c_1z=d_1 \\ 
@@ -1299,6 +1333,7 @@ x = a_0 + \cfrac{1^2}{a_1 +
 $$
 ```
 - 显示：
+
 $$
 x = a_0 + \cfrac{1^2}{a_1 +
             \cfrac{2^2}{a_2 +
@@ -1328,6 +1363,7 @@ x = a_0 + \frac{1^2}{a_1 +
 $$
 ```
 - 显示：
+
 $$
 x = a_0 + \frac{1^2}{a_1 +
             \frac{2^2}{a_2 +
@@ -1353,6 +1389,7 @@ x = a_0 + \frac{1^2}{a_1 +}
 $$
 ```
 - 显示：
+
 $$
 x = a_0 + \frac{1^2}{a_1 +}
           \frac{2^2}{a_2 +}
@@ -1384,6 +1421,7 @@ $$
 $$
 ```
 - 显示：
+
 $$
 \require{AMScd}
 \begin{CD}
@@ -1408,6 +1446,7 @@ $$
 $$
 ```
 - 显示：
+
 $$
 \require{AMDcd}
 \begin{CD}
@@ -1429,6 +1468,7 @@ $$
 $$
 ```
 - 显示：
+
 $$
 \require{AMDcd}
 \begin{CD}
@@ -1459,6 +1499,7 @@ Don't use `\frac` in exponents or limits of integrals; it looks bad and can be c
 \end{array}
 ```
 - 显示：
+
 $$
 \begin{array}{cc}
     \mathrm{Bad} & \mathrm{Better} \\
@@ -1482,6 +1523,7 @@ The `|` symbol has the wrong spacing when it is used as a divider, for example i
 ```
 
 - 显示：
+
 $$
 \begin{array}{cc}
     \mathrm{Bad} & \mathrm{Better} \\
@@ -1508,6 +1550,7 @@ For double and triple integrals, don't use `\int\int` or `\int\int\int`. Instead
 ```
 
 - 显示：
+
 $$
 \require{AMSmath}
 \begin{array}{cc}
@@ -1534,6 +1577,7 @@ Use `\,`, to insert a thin space before differentials; without this $\TeX$ will 
 ```
 
 - 显示：
+
 $$
 \begin{array}{cc}
     \mathrm{Bad} & \mathrm{Better} \\
