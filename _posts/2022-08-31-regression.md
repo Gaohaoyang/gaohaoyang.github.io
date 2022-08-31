@@ -504,7 +504,7 @@ evaluation(y,y_pred,index_name='enet_reg ')
     - ![](https://pic4.zhimg.com/80/v2-69592ce03a7d8e0a5bb3d1ab8a1b50e3_720w.jpg)
 
 
-## 时间序列回归
+# 时间序列回归
 
 - 【2022-8-31】[利用Auto ARIMA构建高性能时间序列模型](https://www.toutiao.com/a6623502388156187143)
 - 【2020-9-30】[时间序列预测的7种方法](https://www.biaodianfu.com/python-time-series-forecasting-methods.html), [7 methods to perform Time Series forecasting](https://www.analyticsvidhya.com/blog/2018/02/time-series-forecasting-methods/) (with Python codes)
@@ -515,14 +515,14 @@ evaluation(y,y_pred,index_name='enet_reg ')
 - 预测高铁乘客量
 - ![](https://www.biaodianfu.com/wp-content/uploads/2020/09/data-train-and-test-1024x546-1.png)
 
-### 什么是时间序列
+## 什么是时间序列
 
 时间序列的定义：一系列在**相同**时间间隔内测量到的数据点。
 - 时间序列是指以**固定**的时间间隔记录下的特定值
 - 时间间隔可以是小时、每天、每周、每10天等等。
 - 时间序列的特殊性：该序列中的每个数据点都与先前的数据点**相关**。
 
-#### 什么是平稳
+### 什么是平稳
 
 【2022-8-31】[手把手教你用Python处理非平稳时间序列](https://www.toutiao.com/article/6625018412370231821)
 
@@ -539,7 +539,7 @@ evaluation(y,y_pred,index_name='enet_reg ')
 大多数统计模型都要求序列是平稳的，这样才能进行有效和精确的预测。
 - 平稳时间序列是一个不依赖**时间**变化 (即均值、方差和协方差不随时间变化)的时间序列。
 
-#### 如何验证平稳
+### 如何验证平稳
 
 如何检验序列是否平稳？
 - 人工检验
@@ -551,7 +551,7 @@ evaluation(y,y_pred,index_name='enet_reg ')
     - KPSS检验结果：KPSS检验-检验统计量、p-值和临界值和置信区间分别为1%、2.5%、5%和10%。
     - 平稳性检验：如果检验统计量大于临界值，则拒绝原假设(序列不是平稳的)。如果检验统计量小于临界值，则不能拒绝原假设(序列是平稳的)
 
-#### 平稳种类
+### 平稳种类
 
 平稳的种类
 - `严格平稳`：严格平稳序列满足平稳过程的数学定义。严格平稳序列的均值、方差和协方差均不是时间的函数。我们的目标是将一个非平稳序列转化为一个严格平稳序列，然后对它进行预测。
@@ -564,16 +564,16 @@ evaluation(y,y_pred,index_name='enet_reg ')
 - 结果3：KPSS =平稳；ADF =非平稳->趋势平稳，去除趋势后序列严格平稳
 - 结果4：KPSS =非平稳；ADF =平稳->差分平稳，利用差分可使序列平稳。
 
-#### 时序平稳化
+### 时序平稳化
 
 为了建立时间序列预测模型，必须首先将任何非平稳序列转换为平稳序列
 - 差分：计算序列中连续项的差值， yt‘ = yt – y(t-1)
 - 季节差分：计算观察值与同一季节的先前观察值之间的差异，yt‘ = yt – y(t-n)
 - 变换：变换用于对方差为非常数的序列进行平稳化。常用的变换方法包括幂变换、平方根变换和对数变换。
 
-### 时间序列预测方法
+## 时间序列预测方法
 
-#### 数据集准备
+### 数据集准备
 
 2012-2014 年两年每个小时的乘客数量。为了解释每种方法的不同之处，以每天为单位构造和聚合了一个数据集。
 - 从 2012 年 8 月- 2013 年 12 月的数据中构造一个数据集。
@@ -615,7 +615,7 @@ test.Count.plot(figsize=(15,8), title= 'Daily Ridership', fontsize=14)
 plt.show()
 ```
 
-#### 总结
+### 总结
 
 方法
 1. `朴素预测法`：在这种预测方法中，新数据点预测值等于前一个数据点的值。
@@ -631,7 +631,7 @@ plt.show()
 - ![](https://www.biaodianfu.com/wp-content/uploads/2020/09/model-rank.png)
 
 
-#### 朴素法
+### 朴素法
 
 朴素法：
 - 假设第一个预测点和上一个观察点**相等**的预测方法
@@ -663,7 +663,7 @@ print(rms) # 43.91640614391676
 
 
 
-#### 简单平均法
+### 简单平均法
 
 数据在一定时期内出现小幅变动，但每个时间段的平均值确实保持不变。
 - 预测出第二天的价格大致和过去天数的价格平均值一致。
@@ -689,7 +689,7 @@ print(rms) # 109.88526527082863
 
 ![](https://www.biaodianfu.com/wp-content/uploads/2020/09/avg-3.png)
 
-#### 移动平均法——改进
+### 移动平均法——改进
 
 用某些窗口期计算平均值的预测方法就叫`移动平均法`。
 - 思想：最近的数据更重要
@@ -722,7 +722,7 @@ print(rms) # 46.72840725106963
 - $\hat{y}_{l}=\frac{1}{m}\left(w_{1} * y_{i-1}+w_{2} * y_{i-2}+w_{3} * y_{i-3}+\ldots+w_{m} * y_{i-m}\right)$
 
 
-#### 简单指数平滑法
+### 简单指数平滑法
 
 简单平均法和加权移动平均法在选取时间点的思路上存在较大的差异。两种方法之间折中，将所有数据考虑在内的同时也能给数据赋予不同非权重。
 - 相比更早时期内的观测值，它会给近期的观测值赋予更大的权重。按照这种原则工作的方法就叫做`简单指数平滑法`。
@@ -755,7 +755,7 @@ print(rms) # 43.357625225228155
 - ![](https://www.biaodianfu.com/wp-content/uploads/2020/09/SES-3-1536x768.png)
 - α值为0.6，用测试集继续调整参数以生成一个更好的模型。
 
-#### 霍尔特(Holt)线性趋势法
+### 霍尔特(Holt)线性趋势法
 
 问题
 - 以上方法都没有考虑趋势因素：一段时间内观察到的价格的总体模式
@@ -805,7 +805,7 @@ print(rms) # 43.056259611507286
 - ![](https://www.biaodianfu.com/wp-content/uploads/2020/09/holt-5-1536x768.png)
 - 这种方法能够准确地显示出趋势，因此比前面的几种模型效果更好。如果调整一下参数，结果会更好。
 
-#### Holt-Winters季节性预测模型
+### Holt-Winters季节性预测模型
 
 如果每年夏季的收入会远高于其它季节，那么这种重复现象叫做“**季节性**”（Seasonality）。如果数据集在一定时间段内的固定区间内呈现相似的模式，那么该数据集就具有季节性。
 - ![](https://www.biaodianfu.com/wp-content/uploads/2020/09/Holt-Winters-1.jpg)
@@ -845,7 +845,7 @@ print(rms) # 23.961492566159794
 - ![](https://www.biaodianfu.com/wp-content/uploads/2020/09/Holt-Winters-3-1536x768.png)
 - 趋势和季节性的预测准确度都很高。选择了 seasonal_period = 7作为每周重复的数据。也可以调整其它其它参数，我在搭建这个模型的时候用的是默认参数。
 
-#### 自回归移动平均模型（ARIMA）
+### 自回归移动平均模型（ARIMA）
 
 另一个场景的时序模型是`自回归移动平均模型`（ARIMA）。
 - 指数平滑模型都是基于数据中的**趋势**和**季节性**的描述
@@ -876,7 +876,7 @@ print(rms) # 26.052705330843708
 - ![](https://www.biaodianfu.com/wp-content/uploads/2020/09/ARIMA-1-1536x768.png)
 - 季节性 ARIMA 的效果和Holt-Winters差不多。根据 `ACF`（**自相关**函数）和 `PACF`（**偏自相关**） 图选择参数。如果你为 ARIMA 模型选择参数时遇到了困难，可以用 R 语言中的 auto.arima。
 
-### ARIMA
+## ARIMA
 
 ARIMA是一种非常流行的时间序列预测方法，它是`自回归综合移动平均`（Auto-Regressive Integrated Moving Averages）的首字母缩写。
 
@@ -889,7 +889,7 @@ ARIMA有三个分量：`AR`(自回归项)、`I`(差分项)和`MA`(移动平均�
 - MA项定义了预测未来值时过去预测误差的数目。ARIMA中的参数‘q’代表MA项。ACF图用于识别正确的‘q’值，
 - 差分顺序规定了对序列执行差分操作的次数，对数据进行差分操作的目的是使之保持平稳。像ADF和KPSS这样的测试可以用来确定序列是否是平稳的，并有助于识别d值。
 
-#### ARIMA计算步骤
+### ARIMA计算步骤
 
 通用步骤如下：
 1. 加载数据：构建模型的第一步当然是加载数据集。
@@ -903,7 +903,7 @@ ARIMA有三个分量：`AR`(自回归项)、`I`(差分项)和`MA`(移动平均�
 9. 计算RMSE：通过检查RMSE值来检查模型的性能，用验证集上的预测值和实际值检查RMSE值。
 
 
-#### Auto ARIMA
+### Auto ARIMA
 
 虽然ARIMA是一个非常强大的预测时间序列数据的模型，但是数据准备和参数调整过程是非常耗时的。在实现ARIMA之前，需要使数据保持平稳，并使用前面讨论的ACF和PACF图确定p和q的值。Auto ARIMA让整个任务实现起来非常简单，因为它去除了我们在上一节中提到的步骤3至6。下面是实现AUTO ARIMA应该遵循的步骤：
 1. 加载数据：此步骤与ARIMA实现步骤1相同。将数据加载到笔记本中。
@@ -919,7 +919,74 @@ ARIMA有三个分量：`AR`(自回归项)、`I`(差分项)和`MA`(移动平均�
 Auto ARIMA如何选择参数
 - 仅需用.efit()命令来拟合模型，而不必选择p、q、d的组合，但是模型是如何确定这些参数的最佳组合的呢？Auto ARIMA生成AIC和BIC值(正如你在代码中看到的那样)，以确定参数的最佳组合。`AIC`(赤池信息准则)和`BIC`(贝叶斯信息准则)值是用于比较模型的评估器。这些值越低，模型就越好。
 
+## Prophet（先知）
 
+Facebook开源的[Prophet: Automatic Forecasting Procedure](https://github.com/facebook/prophet)
+- Prophet is a procedure for forecasting time series data based on an additive model where non-linear trends are fit with yearly, weekly, and daily seasonality, plus holiday effects. It works best with time series that have strong seasonal effects and several seasons of historical data. Prophet is robust to missing data and shifts in the trend, and typically handles outliers well.
+- [Facebook 时间序列预测算法 Prophet 的研究](https://zhuanlan.zhihu.com/p/52330017)
+- ![](https://pic4.zhimg.com/80/v2-8f31f13695126cec5775e83835d14587_1440w.jpg)
+
+Prophet 中，用户一般可以设置以下四种参数：
+- Capacity：在增量函数是逻辑回归函数的时候，需要设置的容量值。
+- Change Points：可以通过 n_changepoints 和 changepoint_range 来进行等距的变点设置，也可以通过人工设置的方式来指定时间序列的变点。
+- 季节性和节假日：可以根据实际的业务需求来指定相应的节假日。
+- 光滑参数：
+  - t=changepoint_prior_scale 可以用来控制趋势的灵活度
+  - δ=seasonality_prior_scale 用来控制季节项的灵活度
+  - v=holidays prior scale 用来控制节假日的灵活度
+
+推论
+- 先知(像大多数时间序列预测技术一样)试图从过去的数据中捕捉趋势和季节性。该模型通常在时间序列数据集上表现良好，但在本例中没有达到预期效果。
+- 事实证明，股票价格没有特定的趋势或季节性。价格的涨跌很大程度上取决于目前市场上的情况。因此，像ARIMA、SARIMA和Prophet这样的预测技术并不能很好地解决这个特殊的问题。
+
+```shell
+python -m pip install prophet
+```
+
+[入门笔记](https://github.com/facebook/prophet/blob/main/notebooks/quick_start.ipynb)
+
+```python
+import pandas as pd
+from prophet import Prophet
+
+df = pd.read_csv('https://raw.githubusercontent.com/facebook/prophet/main/examples/example_wp_log_peyton_manning.csv')
+df.head()
+# 重命名
+# df = df.rename(columns={'timestamp':'ds', 'value':'y'})
+# df['ds'] = pd.to_datetime(df['ds'],unit='s') # 将时间戳转成时间格式（YYYY-MM-DD hh:mm:ss）
+m = Prophet() # 模型初始化，默认使用linear增长函数
+#m = Prophet(growth='logistic') 
+m.fit(df) # 开始训练
+# 计算预测值：periods 表示需要预测的点数，freq 表示时间序列的频率。
+future = m.make_future_dataframe(periods=365)
+future.tail()
+
+forecast = m.predict(future) # 预测
+forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].tail()
+# 画出预测图
+fig1 = m.plot(forecast)
+# 画出时间序列的分量
+fig2 = m.plot_components(forecast)
+# ------------ Prophet默认参数 --------
+def __init__(
+    self,
+    growth='linear',
+    changepoints=None,
+    n_changepoints=25, 
+    changepoint_range=0.8,
+    yearly_seasonality='auto',
+    weekly_seasonality='auto',
+    daily_seasonality='auto',
+    holidays=None,
+    seasonality_mode='additive',
+    seasonality_prior_scale=10.0,
+    holidays_prior_scale=10.0,
+    changepoint_prior_scale=0.05,
+    mcmc_samples=0,
+    interval_width=0.80,
+    uncertainty_samples=1000,
+)
+```
 
 
 # 结束
