@@ -216,6 +216,8 @@ hm = sns.heatmap(cm,cbar=True,annot=True,square=True,fmt='.2f',annot_kws={'size'
 逻辑回归是一个学习f: X −> Y 方程或 P(Y|X)的方法
 - Y是离散取值的
 - X = < X1,X2...,Xn > 是任意一个向量其中每个变量离散或者连续取值。
+- ![](https://ask.qcloudimg.com/http-save/yehe-1421130/n0rhhoc47d.jpeg?imageView2/2/w/1620)
+- ![](https://ask.qcloudimg.com/http-save/yehe-1421130/lxc2avm3bh.jpeg?imageView2/2/w/1620)
 
 重点：
 - 逻辑回归广泛用于**分类**问题。
@@ -225,6 +227,10 @@ hm = sns.heatmap(cm,cbar=True,annot=True,square=True,fmt='.2f',annot_kws={'size'
 - 自变量不应相互关联，即不存在**多重共线性**。然而，在分析和建模中，可以选择包含分类变量相互作用的影响。
 - 如果因变量的值是**序数**，则称之为序数逻辑回归。
 - 如果因变量是**多类别**的，则称之为多元逻辑回归。
+
+【2022-8-31】数说工作室：[logistic回归：从生产到使用【上：使用篇】](https://cloud.tencent.com/developer/article/1076919)
+
+
 
 ### LR回归的组成部分
 
