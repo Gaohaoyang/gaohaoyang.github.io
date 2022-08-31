@@ -28,7 +28,6 @@ mathjax: true
       - 只添加alpha虽然可以平衡正负样本的重要性，但是无法解决简单与困难样本的问题。
       - gamma调节简单样本权重降低的速率，当gamma为0时即为交叉熵损失函数，当gamma增加时，调整因子的影响也在增加。实验发现gamma为2是最优。
 
-
 > * 原文地址：[How to Handle Imbalanced Classes in Machine Learning](https://elitedatascience.com/imbalanced-classes)
 > * 原文作者：[elitedatascience](https://elitedatascience.com/imbalanced-classes)
 > * 译文出自：[掘金翻译计划](https://github.com/xitu/gold-miner)
@@ -61,7 +60,47 @@ mathjax: true
 # 不平衡问题解法
 
 以Albert+TextCNN为基础框架，将已有的长尾问题损失函数解决方案集成进该基础框架进行多标签文本分类,数据的长尾问题是经常会遇见的一个棘手的问题，更为极端的情况甚至极个别的类的trainning sample等于0。这对一个模型的性能影响是非常大的。
-![](https://pic2.zhimg.com/v2-8a3ccd7ed59de691a27406065477b3b9_720w.jpg?source=3af55fa1)
+- ![](https://pic2.zhimg.com/v2-8a3ccd7ed59de691a27406065477b3b9_720w.jpg?source=3af55fa1)
+
+## 重采样
+
+【2022-8-31】[对"样本不均衡"一顿操作](https://zhuanlan.zhihu.com/p/366768794)
+
+使用频率最高的方式：对“多数”样本**降采样**，也可以对“少数”样本**过采样**
+- ![](https://pic1.zhimg.com/80/v2-8c2953af30a7eb02bb0527e888cce9a8_1440w.jpg)
+
+重采样缺点比较明显
+- 过采样对少数样本"过度捕捞"
+- 降采样会丢失大量信息
+
+重采样的方案也有很多
+- 最简单的就是**随机**过采样/降采样，使得各个类别的数量大致相同。
+- 复杂的采样方式，比如先对样本**聚类**，在需要降采样的样本上，按类别进行降采样，这样能丢失较少的信息。
+
+过采样的话，可以不用简单的copy，可以加一点点"噪声"，生成更多的样本。
+
+### 降采样：Tomek links
+
+Tomek连接指的是在空间上"最近"的样本，但是是不同类别的样本。删除这些pair中，占大多数类别的样本。通过这种降采样方式，有利于分类模型的学习
+- ![](https://pic4.zhimg.com/80/v2-f2210f618d41d37dc58fcd92a678011f_1440w.jpg)
+
+### 降采样：NearMiss
+
+通过距离计算，删除掉一些无用的点。
+- NearMiss-1：在多数类样本中选择与最近的3个少数类样本的平均距离最小的样本。
+- NearMiss-2：在多数类样本中选择与最远的3个少数类样本的平均距离最小的样本。
+- NearMiss-3：对于每个少数类样本，选择离它最近的给定数量的多数类样本。
+
+对比
+- NearMiss-1考虑的是与最近的3个少数类样本的平均距离，是局部的；
+- NearMiss-2考虑的是与最远的3个少数类样本的平均距离，是全局的。
+- NearMiss-1方法得到的多数类样本分布也是“不均衡”的，它倾向于在比较集中的少数类附近找到更多的多数类样本，而在孤立的（或者说是离群的）少数类附近找到更少的多数类样本，原因是NearMiss-1方法考虑的局部性质和平均距离。
+- NearMiss-3方法则会使得每一个少数类样本附近都有足够多的多数类样本，显然这会使得模型的精确度高、召回率低。
+
+### 过采样：SMOTE
+
+这个方法可以给少数样本做扩充，SMOTE在样本空间中少数样本随机挑选一个样本，计算k个邻近的样本，在这些样本之间插入一些样本做扩充，反复这个过程，直到样本均衡
+- ![](https://pic1.zhimg.com/80/v2-5d28a02f926a8b40adb182a067eb69c0_1440w.jpg)
 
 ## 加权交叉熵损失函数
 
@@ -129,7 +168,9 @@ def test_softmax_focal_ce_3(gamma, alpha, logits, label):
     return tf.reduce_mean(reduced_fl)
 ```
 
-## **[Dice Loss](http://link.zhihu.com/?target=https%3A//arxiv.org/abs/1606.04797) 与** **[DSC Loss](http://link.zhihu.com/?target=https%3A//arxiv.org/pdf/1911.02855.pdf)**
+## Dice Loss
+
+**[Dice Loss](http://link.zhihu.com/?target=https%3A//arxiv.org/abs/1606.04797) 与** **[DSC Loss](http://link.zhihu.com/?target=https%3A//arxiv.org/pdf/1911.02855.pdf)**
 
  
 Dice Loss最先是在[VNet](http://link.zhihu.com/?target=https%3A//arxiv.org/abs/1606.04797) 这篇文章中被提出，后来被广泛的应用在了医学影像语义分割之中。Dice loss提出来是用来解决图像中前景与背景像素数目不平衡的问题。而正也正好对应到了分类问题中的正例与负例。在包括多标签文本分类的分类问题中，正例与负例的不平衡一直是一个很棘手的问题。
@@ -244,8 +285,22 @@ def dsc_loss(y_true, y_pred, varepsilon):
 
 在开始实现之前，需要注意的一点是，在使用基于sigmoid的损失进行训练时，使用b=-log(C-1)初始化最后一层的偏差，其中C是类的数量，而不是0。这是因为设置b=0会在训练开始时造成巨大的损失，因为每个类的输出概率接近0.5。因此，我们可以假设先验类是1/C，并相应地设置b的值。
 
-## **实验结果**
-    
+## 评估指标
+
+为了避免对模型的误判，避免使用Accuracy，可以用confusion matrix，precision，recall，f1-score，AUC，ROC等指标
+
+惩罚项
+- 对少数样本预测错误增大惩罚，是一个比较直接的方式。
+
+使用多种算法
+- 模型融合不止能提升效果，也能解决样本不均的问题，经验上，树模型对样本不均的解决帮助很大，特别是随机森林，Random Forest，XGB，LGB等。因为树模型作用方式类似于if/else，所以迫使模型对少数样本也非常重视。
+
+正确使用K-fold
+- 当我们对样本过采样时，对过采样的样本使用k-fold，那么模型会过拟合我们过采样的样本，所以交叉验证要在过采样前做。在过采样过程中，应当增加些随机性，避免过拟合。
+
+## 实验
+
+**实验结果**
  
 | 方法 | recall | precision | F1 |
 |---|---|---|---|
