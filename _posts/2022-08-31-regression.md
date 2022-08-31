@@ -3,7 +3,7 @@ layout: post
 title:  "回归分析 - Regession"
 date:   2013-07-31 23:02:00
 categories: 机器学习
-tags: 回归 数据挖掘 机器学习 数据分析 统计学 分布 逻辑回归
+tags: 回归 数据挖掘 机器学习 数据分析 统计学 分布 逻辑回归 时间序列
 excerpt: 机器学习分支之一：回归分析，总结各类回归方法（逻辑回归、多项式回归、保序回归等）
 author: 鹤啸九天
 mathjax: true
@@ -496,6 +496,424 @@ evaluation(y,y_pred,index_name='enet_reg ')
     - ![](https://pic2.zhimg.com/80/v2-dd57a1a65e5f91b5aac1ecec6c28b031_720w.jpg)
     - ![](https://pic3.zhimg.com/80/v2-bfcc530aecc00a33a6f5981aa3aca062_720w.jpg)
     - ![](https://pic4.zhimg.com/80/v2-69592ce03a7d8e0a5bb3d1ab8a1b50e3_720w.jpg)
+
+
+## 时间序列回归
+
+- 【2022-8-31】[利用Auto ARIMA构建高性能时间序列模型](https://www.toutiao.com/a6623502388156187143)
+- 【2020-9-30】[时间序列预测的7种方法](https://www.biaodianfu.com/python-time-series-forecasting-methods.html), [7 methods to perform Time Series forecasting](https://www.analyticsvidhya.com/blog/2018/02/time-series-forecasting-methods/) (with Python codes)
+
+典型任务
+- 根据历史数据预测比特币价格。
+- ![](https://cdn.analyticsvidhya.com/wp-content/uploads/2018/01/Screen-Shot-2018-01-23-at-12.44.42-PM.png)
+- 预测高铁乘客量
+- ![](https://www.biaodianfu.com/wp-content/uploads/2020/09/data-train-and-test-1024x546-1.png)
+
+### 什么是时间序列
+
+时间序列的定义：一系列在**相同**时间间隔内测量到的数据点。
+- 时间序列是指以**固定**的时间间隔记录下的特定值
+- 时间间隔可以是小时、每天、每周、每10天等等。
+- 时间序列的特殊性：该序列中的每个数据点都与先前的数据点**相关**。
+
+#### 什么是平稳
+
+【2022-8-31】[手把手教你用Python处理非平稳时间序列](https://www.toutiao.com/article/6625018412370231821)
+
+“平稳”是处理时间序列数据时遇到的最重要的概念之一：
+- 平稳序列是指其特性-`均值`、`方差`和`协方差`不随时间而变化的序列。
+- ![](https://p3-sign.toutiaoimg.com/pgc-image/333e961528464dc88ef2046c6b4a3910~noop.image)
+- 第一幅图中，均值随时间而变化(增加)，呈现上升的趋势。因此，这是一个非平稳序列。平稳序列不应该呈现出随时间变化的趋势。
+- 第二幅图显然看不到序列的趋势，但序列的变化是一个时间的函数。正如前面提到的，平稳序列的方差必须是一个常数。
+- 第三幅图，随着时间的增加，序列传播后变得更近，这意味着协方差是时间的函数。
+
+三个例子均是非平稳时间序列, 均值、方差和协方差都是常数，才是`平稳时间序列`。
+- ![](https://p3-sign.toutiaoimg.com/pgc-image/913532334264440cb33c45b6c45d4738~noop.image)
+
+大多数统计模型都要求序列是平稳的，这样才能进行有效和精确的预测。
+- 平稳时间序列是一个不依赖**时间**变化 (即均值、方差和协方差不随时间变化)的时间序列。
+
+#### 如何验证平稳
+
+如何检验序列是否平稳？
+- 人工检验
+- 统计检验：如单位根平稳检验。单位根表名给定序列的统计特性（均值，方差和协方差）不是时间的常数，这是平稳时间序列的先决条件。最常用的单位根平稳检测方法：
+  - ① ADF（增补迪基-福勒）检验
+    - ADF检验结果：ADF检验的统计量为1%，p值为5%，临界值为10%，置信区间为10%。
+    - 平稳性检验：如果检验统计量小于临界值，可以拒绝原假设(也就是序列是平稳的)。当检验统计量大于临界值时，不能拒绝原假设(这意味着序列不是平稳的)。
+  - ② KPSS（科瓦特科夫斯·基菲利普·斯施密特·辛）检验KPSS检验是另一种用于检查时间序列的平稳性 (与迪基-福勒检验相比稍逊一筹) 的统计检验方法。KPSS检验的原假设与备择假设与ADF检验的原假设与备择假设相反，常造成混淆。
+    - KPSS检验结果：KPSS检验-检验统计量、p-值和临界值和置信区间分别为1%、2.5%、5%和10%。
+    - 平稳性检验：如果检验统计量大于临界值，则拒绝原假设(序列不是平稳的)。如果检验统计量小于临界值，则不能拒绝原假设(序列是平稳的)
+
+#### 平稳种类
+
+平稳的种类
+- `严格平稳`：严格平稳序列满足平稳过程的数学定义。严格平稳序列的均值、方差和协方差均不是时间的函数。我们的目标是将一个非平稳序列转化为一个严格平稳序列，然后对它进行预测。
+- `趋势平稳`：没有单位根但显示出趋势的序列被称为趋势平稳序列。一旦去除趋势之后，产生的序列将是严格平稳的。在没有单位根的情况下，KPSS检测将该序列归类为平稳。这意味着序列可以是严格平稳的，也可以是趋势平稳的。
+- `差分平稳`：通过差分可以使时间序列成为严格平稳的时间序列。ADF检验也称为差分平稳性检验。
+
+应用两种平稳检验后的可能结果：
+- 结果1：两种检验均得出结论：序列是非平稳的->序列是非平稳的
+- 结果2：两种检验均得出结论：序列是平稳的->序列是平稳的
+- 结果3：KPSS =平稳；ADF =非平稳->趋势平稳，去除趋势后序列严格平稳
+- 结果4：KPSS =非平稳；ADF =平稳->差分平稳，利用差分可使序列平稳。
+
+#### 时序平稳化
+
+为了建立时间序列预测模型，必须首先将任何非平稳序列转换为平稳序列
+- 差分：计算序列中连续项的差值， yt‘ = yt – y(t-1)
+- 季节差分：计算观察值与同一季节的先前观察值之间的差异，yt‘ = yt – y(t-n)
+- 变换：变换用于对方差为非常数的序列进行平稳化。常用的变换方法包括幂变换、平方根变换和对数变换。
+
+### 时间序列预测方法
+
+#### 数据集准备
+
+2012-2014 年两年每个小时的乘客数量。为了解释每种方法的不同之处，以每天为单位构造和聚合了一个数据集。
+- 从 2012 年 8 月- 2013 年 12 月的数据中构造一个数据集。
+- 创建 train/test 文件用于建模。
+  - 前 14 个月（ 2012年8月-2013年10月）用作**训练**数据
+  - 后2个月（2013年11月–2013年12月）用作**测试**数据。
+- 以每天为单位聚合数据集。
+- ![](https://www.biaodianfu.com/wp-content/uploads/2020/09/data-train-and-test-1024x546-1.png)
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Subsetting the dataset
+# Index 11856 marks the end of year 2013
+df = pd.read_csv('train.csv', nrows=11856)
+
+# Creating train and test set
+# Index 10392 marks the end of October 2013
+train = df[0:10392]
+test = df[10392:]
+
+# Aggregating the dataset at daily level
+df['Timestamp'] = pd.to_datetime(df['Datetime'], format='%d-%m-%Y %H:%M')
+df.index = df['Timestamp']
+df = df.resample('D').mean()
+
+train['Timestamp'] = pd.to_datetime(train['Datetime'], format='%d-%m-%Y %H:%M')
+train.index = train['Timestamp']
+train = train.resample('D').mean()
+
+test['Timestamp'] = pd.to_datetime(test['Datetime'], format='%d-%m-%Y %H:%M')
+test.index = test['Timestamp']
+test = test.resample('D').mean()
+
+#Plotting data
+train.Count.plot(figsize=(15,8), title= 'Daily Ridership', fontsize=14)
+test.Count.plot(figsize=(15,8), title= 'Daily Ridership', fontsize=14)
+plt.show()
+```
+
+#### 总结
+
+方法
+1. `朴素预测法`：在这种预测方法中，新数据点预测值等于前一个数据点的值。
+2. `简单平均值法`：下一个值是所有先前值的**平均数**。该方法优于“朴素预测法”，但是在简单平均值法中，过去的所有值都被考虑进去了，而这些值可能并不都是有用的
+3. `移动平均法`：这是对前两个方法的改进。不取前面所有点的平均值，而是将n个先前的点的平均值作为预测值
+4. `加权移动平均法`：加权移动平均是带权重的移动平均，先前的n个值被赋予不同的权重。 
+5. `简单指数平滑法`：更大的权重被分配给更近期的观测结果，来自遥远过去的观测值则被赋予较小的权重
+6. `霍尔特（Holt）线性趋势模型`：该方法考虑了数据集的**趋势**（数据的递增或递减的性质）。假设旅馆的预订数量每年都在增加，那么可以说预订数量呈现出增加的趋势。该方法的预测函数是值和趋势的函数。
+7. `霍尔特-温特斯（Holt Winters）`方法：该算法同时考虑了数据的**趋势**和**季节性**。例如，一家酒店的预订数量在周末很高，而在工作日则很低，并且每年都在增加；因此存在每周的季节性和增长的趋势。
+8. `ARIMA`：ARIMA是一种非常流行的时间序列建模方法。它描述了数据点之间的相关性，并考虑了数值之间的差异。ARIMA的改进版是SARIMA (或季节性ARIMA)。
+
+几种模型的准确度
+- ![](https://www.biaodianfu.com/wp-content/uploads/2020/09/model-rank.png)
+
+
+#### 朴素法
+
+朴素法：
+- 假设第一个预测点和上一个观察点**相等**的预测方法
+- $ \hat{y}_{t+1}=y_{t} $
+
+```python
+dd = np.asarray(train['Count'])
+y_hat = test.copy()
+y_hat['naive'] = dd[len(dd) - 1]
+plt.figure(figsize=(12, 8))
+plt.plot(train.index, train['Count'], label='Train')
+plt.plot(test.index, test['Count'], label='Test')
+plt.plot(y_hat.index, y_hat['naive'], label='Naive Forecast')
+plt.legend(loc='best')
+plt.title("Naive Forecast")
+plt.show()
+# ----- 评估效果 -------
+from sklearn.metrics import mean_squared_error
+from math import sqrt
+rms = sqrt(mean_squared_error(test['Count'], y_hat['naive']))
+print(rms) # 43.91640614391676
+```
+
+![](https://www.biaodianfu.com/wp-content/uploads/2020/09/native-3.png)
+
+分析
+- 朴素法并不适合**变化很大**的数据集，最适合**稳定性**很高的数据集。
+
+
+
+
+#### 简单平均法
+
+数据在一定时期内出现小幅变动，但每个时间段的平均值确实保持不变。
+- 预测出第二天的价格大致和过去天数的价格平均值一致。
+
+这种将预期值等同于之前所有观测点的**平均值**的预测方法就叫`简单平均法`。
+- $\hat{y}_{x+1}=\frac{1}{x} \sum_{i=1}^{x} y_{i}$
+
+```python
+y_hat_avg = test.copy()
+y_hat_avg['avg_forecast'] = train['Count'].mean()
+plt.figure(figsize=(12,8))
+plt.plot(train['Count'], label='Train')
+plt.plot(test['Count'], label='Test')
+plt.plot(y_hat_avg['avg_forecast'], label='Average Forecast')
+plt.legend(loc='best')
+plt.show()
+# ===========
+from sklearn.metrics import mean_squared_error
+from math import sqrt
+rms = sqrt(mean_squared_error(test['Count'], y_hat_avg['avg_forecast']))
+print(rms) # 109.88526527082863
+```
+
+![](https://www.biaodianfu.com/wp-content/uploads/2020/09/avg-3.png)
+
+#### 移动平均法——改进
+
+用某些窗口期计算平均值的预测方法就叫`移动平均法`。
+- 思想：最近的数据更重要
+- 移动平均值涉及到一个有时被称为“**滑动窗口**”的大小值p。使用简单的移动平均模型，根据之前数值的固定有限数p的平均值预测某个时序中的下一个值
+
+公式
+- $\hat{y}_{l}=\frac{1}{p}\left(y_{i-1}+y_{i-2}+y_{i-3}+\ldots+y_{i-p}\right)$
+
+```python
+y_hat_avg = test.copy()
+# 窗口为60
+y_hat_avg['moving_avg_forecast'] = train['Count'].rolling(60).mean().iloc[-1]
+plt.figure(figsize=(16,8))
+plt.plot(train['Count'], label='Train')
+plt.plot(test['Count'], label='Test')
+plt.plot(y_hat_avg['moving_avg_forecast'], label='Moving Average Forecast')
+plt.legend(loc='best')
+plt.show()
+# ===========
+from sklearn.metrics import mean_squared_error
+from math import sqrt
+rms = sqrt(mean_squared_error(test['Count'], y_hat_avg['moving_avg_forecast']))
+print(rms) # 46.72840725106963
+```
+
+效果
+- ![](https://www.biaodianfu.com/wp-content/uploads/2020/09/mov-3-1536x768.png)
+- 这个数据集里，`朴素法`比`简单平均法`和`移动平均法`的表现要好
+- 可以试试简单指数平滑法，它比移动平均法的一个进步之处就是相当于对移动平均法进行了加权。加权移动平均法其实还是一种移动平均法，只是“滑动窗口期”内的值被赋予不同的权重，通常来讲，最近时间点的值发挥的作用更大了。
+- $\hat{y}_{l}=\frac{1}{m}\left(w_{1} * y_{i-1}+w_{2} * y_{i-2}+w_{3} * y_{i-3}+\ldots+w_{m} * y_{i-m}\right)$
+
+
+#### 简单指数平滑法
+
+简单平均法和加权移动平均法在选取时间点的思路上存在较大的差异。两种方法之间折中，将所有数据考虑在内的同时也能给数据赋予不同非权重。
+- 相比更早时期内的观测值，它会给近期的观测值赋予更大的权重。按照这种原则工作的方法就叫做`简单指数平滑法`。
+- 通过加权平均值计算出预测值，其中**权重**随着观测值从早期到晚期的变化呈**指数级**下降，最小的权重和最早的观测值相关
+- $\hat{y}_{T+1 \mid T}=\alpha y_{T}+\alpha(1-\alpha) y_{T-1}+\alpha(1-\alpha)^{2} y_{T-2}+\ldots$
+- 0≤α≤1是平滑参数。对时间点T+1的单步预测值是时序y1,…,yT的所有观测值的加权平均数。权重下降的速率由参数α控制
+- $\hat{y}_{t+1 \mid t}=\alpha y_{t}+(1-\alpha) \hat{y}_{t-1 \mid t}$
+- 用两个权重α和1−α得到一个加权移动平均值
+
+```python
+from statsmodels.tsa.api import SimpleExpSmoothing
+
+y_hat_avg = test.copy()
+fit = SimpleExpSmoothing(np.asarray(train['Count'])).fit(smoothing_level=0.6, optimized=False)
+y_hat_avg['SES'] = fit.forecast(len(test))
+plt.figure(figsize=(16, 8))
+plt.plot(train['Count'], label='Train')
+plt.plot(test['Count'], label='Test')
+plt.plot(y_hat_avg['SES'], label='SES')
+plt.legend(loc='best')
+plt.show()
+# ==========
+rom sklearn.metrics import mean_squared_error
+from math import sqrt
+rms = sqrt(mean_squared_error(test['Count'], y_hat_avg['SES']))
+print(rms) # 43.357625225228155
+```
+
+效果
+- ![](https://www.biaodianfu.com/wp-content/uploads/2020/09/SES-3-1536x768.png)
+- α值为0.6，用测试集继续调整参数以生成一个更好的模型。
+
+#### 霍尔特(Holt)线性趋势法
+
+问题
+- 以上方法都没有考虑趋势因素：一段时间内观察到的价格的总体模式
+
+无需假设的情况下，准确预测出价格趋势，这种考虑数据集变化趋势的方法就叫做`霍尔特线性趋势法`。
+- 每个时序数据集可以分解为相应的几个部分：`趋势`（Trend），`季节性`(Seasonal)和`残差`(Residual)。任何呈现某种趋势的数据集都可以用`霍尔特线性趋势法`用于预测。
+
+```python
+import statsmodels.api as sm
+
+sm.tsa.seasonal_decompose(train['Count']).plot()
+result = sm.tsa.stattools.adfuller(train['Count'])
+plt.show()
+```
+
+数据集特征
+- ![](https://www.biaodianfu.com/wp-content/uploads/2020/09/holt-2.png)
+- 数据集呈上升趋势。因此用霍尔特线性趋势法预测未来价格。
+- 该算法包含三个方程：一个**水平**方程，一个**趋势**方程，一个方程将二者相**加**以得到预测值, 也可以将两者相**乘**得到一个乘法预测方程
+  - 当趋势呈**线性**增加/下降时，用相加得到的方程；
+  - 当趋势呈**指数级**增加/下降时，用相乘得到的方程。
+- 用相乘得到的方程，预测结果会更稳定，但用相加得到的方程，更容易理解。
+- ![](https://www.biaodianfu.com/wp-content/uploads/2020/09/holt-4.png)
+
+```python
+from statsmodels.tsa.api import Holt
+
+y_hat_avg = test.copy()
+
+fit = Holt(np.asarray(train['Count'])).fit(smoothing_level=0.3, smoothing_slope=0.1)
+y_hat_avg['Holt_linear'] = fit.forecast(len(test))
+
+plt.figure(figsize=(16, 8))
+plt.plot(train['Count'], label='Train')
+plt.plot(test['Count'], label='Test')
+plt.plot(y_hat_avg['Holt_linear'], label='Holt_linear')
+plt.legend(loc='best')
+plt.show()
+# ========
+from sklearn.metrics import mean_squared_error
+from math import sqrt
+rms = sqrt(mean_squared_error(test['Count'], y_hat_avg['Holt_linear']))
+print(rms) # 43.056259611507286
+```
+
+效果
+- ![](https://www.biaodianfu.com/wp-content/uploads/2020/09/holt-5-1536x768.png)
+- 这种方法能够准确地显示出趋势，因此比前面的几种模型效果更好。如果调整一下参数，结果会更好。
+
+#### Holt-Winters季节性预测模型
+
+如果每年夏季的收入会远高于其它季节，那么这种重复现象叫做“**季节性**”（Seasonality）。如果数据集在一定时间段内的固定区间内呈现相似的模式，那么该数据集就具有季节性。
+- ![](https://www.biaodianfu.com/wp-content/uploads/2020/09/Holt-Winters-1.jpg)
+- 5种模型在预测时并没有考虑到数据集的季节性
+
+`Holt-Winters`季节性预测模型是一种**三次指数平滑**预测，其背后的理念就是除了水平和趋势外，还将指数平滑应用到季节分量上。
+
+Holt-Winters季节性预测模型由预测函数和三次平滑函数
+- ① 水平函数 ℓt
+- ② 一个是趋势函数 bt
+- ③ 一个是季节分量 st
+- ④ 以及平滑参数 α,β和γ
+- s 为季节循环的长度，0≤α≤ 1, 0 ≤β≤ 1 ， 0≤γ≤ 1。
+- 水平函数为季节性调整的观测值和时间点t处非季节预测之间的加权平均值。
+
+```python
+from statsmodels.tsa.api import ExponentialSmoothing
+
+y_hat_avg = test.copy()
+fit1 = ExponentialSmoothing(np.asarray(train['Count']), seasonal_periods=7, trend='add', seasonal='add', ).fit()
+y_hat_avg['Holt_Winter'] = fit1.forecast(len(test))
+plt.figure(figsize=(16, 8))
+plt.plot(train['Count'], label='Train')
+plt.plot(test['Count'], label='Test')
+plt.plot(y_hat_avg['Holt_Winter'], label='Holt_Winter')
+plt.legend(loc='best')
+plt.show()
+# =========
+from sklearn.metrics import mean_squared_error
+from math import sqrt
+
+rms = sqrt(mean_squared_error(test['Count'], y_hat_avg['Holt_Winter']))
+print(rms) # 23.961492566159794
+```
+
+效果
+- ![](https://www.biaodianfu.com/wp-content/uploads/2020/09/Holt-Winters-3-1536x768.png)
+- 趋势和季节性的预测准确度都很高。选择了 seasonal_period = 7作为每周重复的数据。也可以调整其它其它参数，我在搭建这个模型的时候用的是默认参数。
+
+#### 自回归移动平均模型（ARIMA）
+
+另一个场景的时序模型是`自回归移动平均模型`（ARIMA）。
+- 指数平滑模型都是基于数据中的**趋势**和**季节性**的描述
+- 而自回归移动平均模型的目标是描述数据中彼此之间的关系。
+
+ARIMA的一个优化版就是**季节性ARIMA**。它像Holt-Winters季节性预测模型一样，也把数据集的季节性考虑在内。
+
+```python
+import statsmodels.api as sm
+
+y_hat_avg = test.copy()
+fit1 = sm.tsa.statespace.SARIMAX(train.Count, order=(2, 1, 4), seasonal_order=(0, 1, 1, 7)).fit()
+y_hat_avg['SARIMA'] = fit1.predict(start="2013-11-1", end="2013-12-31", dynamic=True)
+plt.figure(figsize=(16, 8))
+plt.plot(train['Count'], label='Train')
+plt.plot(test['Count'], label='Test')
+plt.plot(y_hat_avg['SARIMA'], label='SARIMA')
+plt.legend(loc='best')
+plt.show()
+# =======
+from sklearn.metrics import mean_squared_error
+from math import sqrt
+rms = sqrt(mean_squared_error(test['Count'], y_hat_avg['SARIMA']))
+print(rms) # 26.052705330843708
+```
+
+效果
+- ![](https://www.biaodianfu.com/wp-content/uploads/2020/09/ARIMA-1-1536x768.png)
+- 季节性 ARIMA 的效果和Holt-Winters差不多。根据 `ACF`（**自相关**函数）和 `PACF`（**偏自相关**） 图选择参数。如果你为 ARIMA 模型选择参数时遇到了困难，可以用 R 语言中的 auto.arima。
+
+### ARIMA
+
+ARIMA是一种非常流行的时间序列预测方法，它是`自回归综合移动平均`（Auto-Regressive Integrated Moving Averages）的首字母缩写。
+
+ARIMA模型建立在以下假设的基础上：
+- 数据序列是平稳的，即均值和方差不应随时间而变化。通过**对数变换**或**差分**可以使序列**平稳**。
+- 输入的数据必须是**单变量**序列，因为ARIMA利用过去的数值预测未来的数值。
+
+ARIMA有三个分量：`AR`(自回归项)、`I`(差分项)和`MA`(移动平均项)。
+- AR项是指用于预测下一个值的过去值。AR项由ARIMA中的参数‘p’定义。“p”的值是由PACF图确定的。
+- MA项定义了预测未来值时过去预测误差的数目。ARIMA中的参数‘q’代表MA项。ACF图用于识别正确的‘q’值，
+- 差分顺序规定了对序列执行差分操作的次数，对数据进行差分操作的目的是使之保持平稳。像ADF和KPSS这样的测试可以用来确定序列是否是平稳的，并有助于识别d值。
+
+#### ARIMA计算步骤
+
+通用步骤如下：
+1. 加载数据：构建模型的第一步当然是加载数据集。
+2. 预处理：根据数据集定义预处理步骤。包括创建时间戳、日期/时间列转换为d类型、序列单变量化等。
+3. 序列平稳化：为了满足假设，应确保序列平稳。这包括检查序列的平稳性和执行所需的转换。
+4. 确定d值：为了使序列平稳，执行差分操作的次数将确定为d值。
+5. 创建ACF和PACF图：这是ARIMA实现中最重要的一步。用ACF PACF图来确定ARIMA模型的输入参数。
+6. 确定p值和q值：从上一步的ACF和PACF图中读取p和q的值。
+7. 拟合ARIMA模型：利用从前面步骤中计算出来的数据和参数值，拟合ARIMA模型。
+8. 在验证集上进行预测：预测未来的值。
+9. 计算RMSE：通过检查RMSE值来检查模型的性能，用验证集上的预测值和实际值检查RMSE值。
+
+
+#### Auto ARIMA
+
+虽然ARIMA是一个非常强大的预测时间序列数据的模型，但是数据准备和参数调整过程是非常耗时的。在实现ARIMA之前，需要使数据保持平稳，并使用前面讨论的ACF和PACF图确定p和q的值。Auto ARIMA让整个任务实现起来非常简单，因为它去除了我们在上一节中提到的步骤3至6。下面是实现AUTO ARIMA应该遵循的步骤：
+1. 加载数据：此步骤与ARIMA实现步骤1相同。将数据加载到笔记本中。
+2. 预处理数据：输入应该是单变量，因此删除其他列。
+3. 拟合Auto ARIMA：在单变量序列上拟合模型。
+4. 在验证集上进行预测：对验证集进行预测。
+5. 计算RMSE：用验证集上的预测值和实际值检查RMSE值。
+
+完全绕过了选择p和q的步骤。
+
+将使用国际航空旅客[数据集](https://datamarket.com/data/set/22u3/international-airline-passengers-monthly-totals-in-thousands-jan-49-dec-60#!ds=22u3&display=line)，此数据集包含每月乘客总数(以千为单位)，有两栏-月份和乘客数。
+
+Auto ARIMA如何选择参数
+- 仅需用.efit()命令来拟合模型，而不必选择p、q、d的组合，但是模型是如何确定这些参数的最佳组合的呢？Auto ARIMA生成AIC和BIC值(正如你在代码中看到的那样)，以确定参数的最佳组合。`AIC`(赤池信息准则)和`BIC`(贝叶斯信息准则)值是用于比较模型的评估器。这些值越低，模型就越好。
+
+
 
 
 # 结束
