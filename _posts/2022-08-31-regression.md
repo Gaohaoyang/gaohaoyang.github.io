@@ -167,7 +167,6 @@ df=pd.DataFrame(data.data,columns=data.feature_names)
 target=pd.DataFrame(data.target,columns=['MEDV'])
 
 # 可视化分析
-
 import matplotlib.pyplot as plt
 import seaborn as sns
 sns.set(style="whitegrid", color_codes=True)
@@ -178,7 +177,6 @@ for ax in g.axes.flat:
 plt.tight_layout()
 
 # 相关系数图
-
 cm = np.corrcoef(data[list(data.columns)[:5]].values.T)   #corrcoef方法按行计算皮尔逊相关系数,cm是对称矩阵
 #使用np.corrcoef(a)可计算行与行之间的相关系数,np.corrcoef(a,rowvar=0)用于计算各列之间的相关系数,输出为相关系数矩阵。
 sns.set(font_scale=1.5)   #font_scale设置字体大小
@@ -186,7 +184,6 @@ cols=list(data.columns)[:5]
 hm = sns.heatmap(cm,cbar=True,annot=True,square=True,fmt='.2f',annot_kws={'size': 15},yticklabels=cols,xticklabels=cols)
 # plt.tight_layout()
 # plt.savefig('./figures/corr_mat.png', dpi=300)
-
 ```
 
 - 可视化分析
@@ -229,8 +226,6 @@ hm = sns.heatmap(cm,cbar=True,annot=True,square=True,fmt='.2f',annot_kws={'size'
 - 如果因变量是**多类别**的，则称之为多元逻辑回归。
 
 【2022-8-31】数说工作室：[logistic回归：从生产到使用【上：使用篇】](https://cloud.tencent.com/developer/article/1076919)
-
-
 
 ### LR回归的组成部分
 
@@ -313,15 +308,11 @@ from sklearn.preprocessing import PolynomialFeatures
  
 poly_reg = PolynomialFeatures(degree = 4)
 X_Poly = poly_reg.fit_transform(X)
- 
 lin_reg_2 =linear_model.LinearRegression()
 lin_reg_2.fit(X_Poly, y)
- 
 y_pred=lin_reg_2.predict(poly_reg.fit_transform(X))
- 
 evaluation(y,y_pred,index_name=['poly_reg'])
 ```
-
 
 - 最小二乘法
 
@@ -334,25 +325,19 @@ y=target['MEDV'].values
  
 #add constant
 X=sm.add_constant(X)
- 
 # build model
 model=sm.OLS(y,X).fit()
 prediction=model.predict(X)
 print(model.summary())
-
 # （2）sklearn 实现
 from sklearn import linear_model
- 
+
 lm = linear_model.LinearRegression()
 model = lm.fit(X,y)
- 
 y_pred = lm.predict(X)
 lm.score(X,y)
- 
-#系数
-lm.coef_
-#截距
-lm.intercept_<br><br>evaluation(y,y_pred)
+lm.coef_ #系数
+lm.intercept_<br><br>evaluation(y,y_pred) #截距
 ```
 
 
@@ -398,9 +383,7 @@ from sklearn.linear_model import Ridge
  
 ridge_reg = Ridge(alpha=1, solver="cholesky")
 ridge_reg.fit(X, y)
- 
-y_pred=ridge_reg.predict(X
- 
+y_pred=ridge_reg.predict(X)
 evaluation(y,y_pred,index_name='ridge_reg')
 ```
 
@@ -457,7 +440,7 @@ evaluation(y,y_pred,index_name='enet_reg ')
 
 ## 广义线性模型
 
-- 【2020-12-09】[广义线性模型(GLM)从人话到鬼话连篇](https://zhuanlan.zhihu.com/p/110268967)
+【2020-12-09】[广义线性模型(GLM)从人话到鬼话连篇](https://zhuanlan.zhihu.com/p/110268967)
 - 了解一个模型的顺序是：
   - 1）为什么要用这个模型解决问题？
   - 2）这个模型是什么，可以解决什么问题？
