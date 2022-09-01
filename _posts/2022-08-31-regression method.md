@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "回归分析 - Regession"
+title:  "机器学习之回归分析 - Regession Methods in Machine Learning"
 date:   2022-08-31 17:02:00
 categories: 机器学习
 tags: 回归 数据挖掘 机器学习 数据分析 统计学 分布 逻辑回归 时间序列
