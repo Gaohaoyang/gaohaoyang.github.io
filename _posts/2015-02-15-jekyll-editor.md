@@ -63,10 +63,10 @@ plugins: [jekyll-paginate,jekyll-jupyter-notebook]
 ```
 
 - （1）直接生成html
-   - 将notebook文件放入到_post/文件夹内, 并保持2018-01-01-titile.ipynb 类似的格式. 在执行jekyll server后, 会将ipynb转换成html格式, 会生成/2018/01/01/title/index.html.
+  - 将notebook文件放入到_post/文件夹内, 并保持2018-01-01-titile.ipynb 类似的格式. 在执行jekyll server后, 会将ipynb转换成html格式, 会生成/2018/01/01/title/index.html.
 - （2）嵌入markdown
-   - 注意：ipynb文件不能像上述一样放在_post内, 否则转换后不能使用
-   - 嵌入命令：
+  - 注意：ipynb文件不能像上述一样放在_post内, 否则转换后不能使用
+  - 嵌入命令：
 
 ```shell
 \{\% jupyter_notebook "/notebook/sample.ipynb" \%\}
@@ -88,6 +88,7 @@ plugins: [jekyll-paginate,jekyll-jupyter-notebook]
 
 ### 编辑功能
 
+#### 段落格式
 
 - 注释
 
@@ -97,6 +98,8 @@ plugins: [jekyll-paginate,jekyll-jupyter-notebook]
 
 : 定义段落
 
+#### 代码高亮
+
 - 代码高亮
 
 ```python
@@ -104,21 +107,49 @@ import os
 print "hello"
 ```
 
+#### 文字大小
+
 - 字体大小
   - <font size=2>二号字尺寸式样 </font> 
 - **加粗**, *斜体*, 颜色显示
   - <font color='green'>彩色字体</font>
 
+#### 文字颜色
+
 ```html
 <font color='green'>彩色字体</font>
-This is *red红色*{: style="color: red"}
+This is *red红色*{: style="color: red"} 去掉*后颜色失效
 This is <span style="color: red">written in red</span>.
+This is <p style="color: red">written in red</p>.
+<p style="color:#0000ff">This text is blue.</p>
+<p style="color:rgb(106, 90, 203)">This text is violet.</p>
+<p style="color:red">This text is red.</p>
 ```
-
 
 - This is *red红色*{: style="color: red"}
 - This is <span style="color: red">written in
 red</span>.
+
+#### 脚注
+
+分为：
+- 按编号引用
+- 按别名引用
+
+```markdown
+Here is a simple footnote[^1].
+
+A footnote can also have multiple lines[^2].  
+
+You can also use words, to fit your writing style more closely[^note].
+
+[^1]: My reference.
+[^2]: Every new line should be prefixed with 2 spaces.  
+  This allows you to have a footnote with multiple lines.
+[^note]:
+    Named footnotes will still render with numbers instead of the text but allow easier identification and linking.  
+    This footnote also has been made with a different syntax using 4 spaces for new lines.
+```
 
 
 ### Jekyll admin插件
