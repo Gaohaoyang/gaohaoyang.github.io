@@ -682,7 +682,7 @@ landslide readme.md -i -o > slide.html # 转换
 ### html→markdown
 
 - 看到一篇好文章，想发布到markdown博客上，结果，图片太多，人肉代价大
-- 【2020-7-5】可以使用[富文本编辑器](https://www.bejson.com/convert/ueditor2markdown/)转换，复制→粘贴→微调
+- 【2020-7-5】可以使用富文本编辑器：[ueditor2markdown](https://www.bejson.com/convert/ueditor2markdown/)转换，复制→粘贴→微调
 
 ## Jekyll语法
 
@@ -690,7 +690,6 @@ landslide readme.md -i -o > slide.html # 转换
 - 【2018-6-10】[github page jeklly主题](https://github.com/Gaohaoyang/gaohaoyang.github.io/blob/master/README-zh-cn.md)
 - 【2021-4-16】[GitHub Pages 与 Gitee Pages 上的 Jekyll](https://www.cnblogs.com/xjtu-blacksmith/p/jekyll-of-pages.html)
 - 【2019-04-29】[Jeklly主题大全](http://jekyllthemes.org/)
-
 - [Jekyll](https://jekyllrb.com/)中的配置和模板语法
 
 ## Jekyll目录结构
@@ -709,7 +708,6 @@ jekyll结构
 |-- _site
 `-- index.html
 ```
-
 
 - _config.yml 配置文件，最为重要，包含了所有配置信息
   - title: Blog名称
@@ -811,6 +809,20 @@ watch为了检测文件夹内的变化，即修改后不需要重新启动jekyll
 ---
 
 ## 可能出现的问题
+
+### 个别文章不显示
+
+【2022-8-31】新增一篇文章，部署正常，但是迟迟不显示，[My Github page failed to deploy fully](https://github.com/orgs/community/discussions/31491#discussioncomment-3523380)
+- Today, I extracted some paragraphs from one post, and merged into a new post
+  - The original page: [dm-note](https://github.com/wqw547243068/wqw547243068.github.io/blob/master/_posts/2013-07-31-dm-note.md)
+  - The newly created page: [regression](https://github.com/wqw547243068/wqw547243068.github.io/blob/master/_posts/2022-08-31-regression.md)
+- Both pages are <font color='red'> deployed correctly,</font> the [old one](https://wqw547243068.github.io/2013/07/31/dm-note) is displayed normally, but the newly [created page](https://wqw547243068.github.io/2022/08/31/regression) is <font color='red'>never displayed</font>
+- 去GitHub社区发帖咨询，热心网友[airtower-luna](https://github.com/airtower-luna)定位到问题
+- 文章日期早于发布时间，导致文章不显示
+  - The [build log](https://github.com/wqw547243068/wqw547243068.github.io/runs/8114786643?check_suite_focus=true#step:4:187) tells you why: Indeed the date listed in the file metadata is over 2h from now (2022-08-31 14:40 UTC):
+  - date: 2022-08-31 17:02:00
+  - Adjust the date to one that's in the past, or redeploy after the time has passed.
+
 
 ### 页面无法加载（模板语言冲突）
 
