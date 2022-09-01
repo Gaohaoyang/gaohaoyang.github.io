@@ -1930,6 +1930,48 @@ iconv -f gbk -t utf8 pattern_0603.txt > pattern.txt
 
 - awk是逐行处理的，逐行处理的意思就是说，当awk处理一个文本时，会一行一行进行处理，处理完当前行，再处理下一行，awk默认以"换行符"为标记，识别每一行，也就是说，awk跟我们人类一样，每次遇到"回车换行"，就认为是当前行的结束，新的一行的开始，awk会按照用户指定的分割符去分割当前行，如果没有指定分割符，默认使用空格作为分隔符。
 
+### awk内建变量
+
+变量
+- $0 当前记录（这个变量中存放着整个行的内容）
+- $1~$n 当前记录的第n个字段，字段间由FS分隔
+- FS 输入字段分隔符 默认是空格或Tab
+- NF 当前记录中的字段个数，就是有多少列，如果加上$符号，即$NF，表示一行的最后一个字段
+- NR 已经读出的记录数，就是行号，从1开始，如果有多个文件话，这个值也是不断累加中。
+- FNR 当前记录数，与NR不同的是，这个值会是各个文件自己的行号
+- RS 输入的记录分隔符， 默认为换行符
+- OFS 输出字段分隔符， 默认也是空格
+- ORS 输出的记录分隔符，默认为换行符
+- FILENAME 当前输入文件的名字
+- ARGC 命令行参数个数
+- ARGV 命令行参数排列
+- ENVIRON 支持队列中系统环境变量的使用
+- BEGIN{这里面放的是执行前的语句}
+- END{这里面放的是处理完所有的行后要执行的语句}
+- {这里面放的是处理每一行时要执行的语句}
+
+![](https://community.linuxmint.com/img/screenshots/original-awk.png)
+
+### 常用命令
+
+```shell
+awk '{print $1, $3}' netstat.txt
+awk '{printf "%-8s %-8s %-18s %-22s %-15s\n",$1,$3,$4,$5,$6}' netstat.txt
+awk '$3 == 0 && $6 == "LAST_ACK"' netstat.txt
+awk '$3 > 0 && NR != 1 {print $3}' netstat.txt
+awk 'BEGIN{FS=":"} {print $1,$3,$6}' semi_colon_FS #awk -F: '{print $1,$3,$6}' semi_colon_FS
+awk '/WAIT/' netstat.txt
+awk 'NR != 1 {print > $6}' netstat.txt
+awk 'NR!=1{a[$6]++;} END {for (i in a) print i ", " a[i];}' netstat.txt
+cat shuf.txt | awk 'BEGIN{srand()} {print rand() "\t" $0}' | sort -n | cut -f2- #shuffle一个文件
+awk 'BEGIN{FS="  "}{if ($1 == "payment") {print;}}' /data/log/maui.data.log #抽出所有第一个字段是payment的行
+awk 'BEGIN{FS="  "}$1 == "payment"' /data/log/maui.data.log #或者ACTION部分不要用花括号圈引，则自动打印符合条件的相应行
+awk '$2 == "beat"{print $3}' /data/log/budweiser.data.log | sort | uniq -c #取出第二列等于beat的行的第3列，然后统计出现的数量
+awk '$2 == "beat"{print $3}' logfile | sort | uniq -c
+awk '{ print length, $0 }' file | sort -nrk1 -s | cut -d" " -f2- #根据文件的每行长度进行排序
+```
+
+
 ### 字符串切割
 
 ```shell
@@ -1964,7 +2006,67 @@ less error.txt | awk 'BEGIN {srand();OFS="\t"} {print $0,rand()*1000}' |sort -k2
 
 ## sed
 
-- 待补充
+- sed是一款优秀的文本处理程序，但是其不同版本在用法和参数上存在着较大差异，建议大家在使用时一定要查询相关文档，以免出错。
+
+```shell
+# 删除只有空白字符行
+sed -i -e '/^\s\+$/d' file #GNU
+
+sed '1!G;h;$!d' pets.txt #反转一个文件的行
+sed 'N; s/\n  /, /' pets.txt #将两行合并，并用逗号分开
+sed -e 's/'$(echo -e "\x15")'//g' file # sed用于去除ascii不可打印的控制字符
+
+# 常规的替换功能
+sed "s/my/Hao Chen's/" pets.txt
+sed "3s/my/your/" pets.txt
+sed "3,6s/my/your/" pets.txt #只替换第3到第6行的文本
+
+sed -n '/cat/,/fish/p' pets.txt # 只打印匹配cat和fish之前的行，-n表示不输出那些未匹配的行
+
+sed -e 3,6{ -e /This/d -e } pets.txt
+sed '3,6{/This/d;}' pets.txt #BSD sed, must add semi-colon
+
+sed '3,6 {/This/{/fish/d;};}' pets.txt
+sed '1,${/This/d;s/^ *//g;}' pets.txt
+sed -E '/dog/{N;N;N;s/(^|\n)/&# /g;}' pets.txt #BSD sed
+sed '/dog/,+3s/^/# /g' pets.txt #GNU sed
+sed = pets.txt | sed 'N;s/\n/'$'\t''/' > line_num_pets.txt
+sed = my.txt | sed 'N; s/^/    /; s/\(.\{5,\}\)\n/\1 /' #对文件中的所有行编号（行号在左，文字左端对齐）。
+#sed = my.txt | sed -E 'N; s/(.*)\n/    \1 /' #貌似，我也可以这么写
+sed '/'"$name"'/,/};/d' back_slash.txt
+#实际应用，用来做代码重构时：(err) -> next err  =>   next
+find . -name '*.coffee' | xargs sed -i '' -E '/\(err\) ->/{N;s/\(err\) ->\n +next err/next/g;}'
+#在多行的时候，[[:space:]]才会匹配换行符\n，只有单行的时候，字符串尾部的换行符已经被sed截掉，所以匹配不到
+
+#使用GNU sed去掉首行的BOM
+find . -name '*.srt' -exec gsed -i -e '1s/^\xEF\xBB\xBF//' {} \;
+
+gsed '1~2G' -i *.txt #奇数行后加空行
+gsed -i -e '$a\' file #如果文件末尾没有换行符，则自动添加，解决"No newline at end of file"的问题，OSX sed中：sed -i '' -e '$a\'
+
+# 在第1行插入内容
+sed "1i\\"$'\n'"my monkey's name is wukong"$'\n' my.txt
+# 在最后一行追加内容
+sed "$ a \\"$'\n'"my monkey's name is wukong"$'\n' my.txt
+# 在匹配行之前插入内容
+sed "/fish/i\\"$'\n'"my monkey's name is wukong"$'\n' my.txt
+# 在指定行修改为特定内容
+sed "2c \\"$'\n'"my monkey's name is wukong"$'\n' my.txt
+
+# 匹配行后追加内容
+gsed -i '/matchpattern/a content' tmp.txt
+# 如果content是以空白字符开头，比如tab或者空格，则用一个反斜线标记出来
+gsed -i '/matchpattern/a \ content' tmp.txt
+# 命令行中输入tab键：先按ctrl+v，然后再按tab
+gsed -i '/matchpattern/a \	content' tmp.txt
+# 匹配行后追加多行内容，可以把需要追加的内容写到一个文件中，然后使用r命令
+gsed -i '/abcd/r otherfile.txt' tmp.txt
+
+# 删除匹配行之前的内容，也就是保留匹配行之后的所有内容
+sed -i '/^package /,$!d' *.go
+# 显示一定范围内的行
+sed -n '190,200p' tmp.txt
+```
 
 ## grep
 
