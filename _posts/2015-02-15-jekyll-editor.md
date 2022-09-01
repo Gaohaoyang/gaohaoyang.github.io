@@ -78,16 +78,24 @@ plugins: [jekyll-paginate,jekyll-jupyter-notebook]
 
 
 ### Markdown使用
+
 * [github官方markdown指南](https://guides.github.com/features/mastering-markdown/ "英文版")
 * [github readme语法简介](http://blog.csdn.net/guodongxiaren/article/details/23690801?utm_source=tuicool&utm_medium=referral "跟一般markdown语法不同")
 * [MarkDown语法笔记（完整版）](http://blog.csdn.net/witnessai1/article/details/52551362)
 * [马克飞象markdown语法在线测试](https://maxiang.io/ "可以在线测试MD语言！")
 
+【2022-9-1】jekyll默认的markdown：[kramdown](https://kramdown.gettalong.org/quickref.html) (Jekyll's default markdown parser) 
 
 ### 编辑功能
+
+
 - 注释
 
 > 注释在此。。。
+
+定义
+
+: 定义段落
 
 - 代码高亮
 
@@ -98,8 +106,20 @@ print "hello"
 
 - 字体大小
   - <font size=2>二号字尺寸式样 </font> 
-- **加粗**, *斜体*
+- **加粗**, *斜体*, 颜色显示
   - <font color='green'>彩色字体</font>
+
+```html
+<font color='green'>彩色字体</font>
+This is *red红色*{: style="color: red"}
+This is <span style="color: red">written in red</span>.
+```
+
+
+- This is *red红色*{: style="color: red"}
+- This is <span style="color: red">written in
+red</span>.
+
 
 ### Jekyll admin插件
 
@@ -289,6 +309,16 @@ print "hello"
   - $$f \left( x _ { n + 1 } \right) - f \left( x _ { n } \right) = f ^ { \prime } \left( x _ { n } \right) \left( x _ { n + 1 } - x _ { n } \right)$$
 - 知乎提供公式生成图片服务：https://www.zhihu.com/equation?tex=y+%3D+%5Cphi%28%5Csum+W_%7Bij%7DX_j+%2B+b%29+
   - 效果：![](https://www.zhihu.com/equation?tex=y+%3D+%5Cphi%28%5Csum+W_%7Bij%7DX_j+%2B+b%29+)
+
+【2022-9-1】注意：jekyll博客中默认不能展示数学公式，需要增加插件
+- 参考：[display equation in jekyll blog in latex format on github pages](https://stackoverflow.com/questions/37899183/display-equation-in-jekyll-blog-in-latex-format-on-github-pages)
+- 文件： _layouts/post.html
+- 内容如下
+
+```html
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+```
+
 
 
 ### 文档嵌入
