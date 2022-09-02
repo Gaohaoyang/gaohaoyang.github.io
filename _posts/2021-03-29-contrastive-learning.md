@@ -13,7 +13,7 @@ mathjax: true
 {:toc}
 
 # 总结
-
+- [Contrastive Learning 学习笔记](https://tobiaslee.top/2020/05/18/contrastive-learning-notes/), 最近深度学习两巨头 Bengio 和  LeCun 在 ICLR 2020 上点名 Self-Supervised Learning（SSL，自监督学习） 是 AI 的未来，而其的代表的 Framework 便是 Contrastive Learning（CL，对比学习）。 另一巨头 Hinton 和 Kaiming 两尊大神也在这问题上隔空过招，MoCo、SimCLR、MoCo V2 打得火热
 - 【2021-10-26】[张俊林：从对比学习视角，重新审视推荐系统的召回粗排模型](https://mp.weixin.qq.com/s?__biz=MzU1NTMyOTI4Mw==&mid=2247555301&idx=1&sn=60fa796f07e86c9251a4401bc93b94d0&chksm=fbd7aa89cca0239f7cb2bc75bc7e2dc50f421c45cd454e55107e4eec3508d79f315f9c242e71&mpshare=1&scene=1&srcid=1026zqb3mMRj0Ly6RxMqfHGQ&sharer_sharetime=1635214668358&sharer_shareid=b8d409494a5439418f4a89712efcd92a&version=3.1.0.6189&platform=mac#rd)
 - [对比学习（Contrastive Learning）综述](https://zhuanlan.zhihu.com/p/346686467)
 - 【2021-4-11】[一文梳理2020年大热的对比学习模型](https://blog.csdn.net/moxibingdao/article/details/111027188)：对比学习的概念很早就有了，但真正成为热门方向是在2020年的2月份，Hinton组的Ting Chen提出了SimCLR，用该框架训练出的表示以7%的提升刷爆了之前的SOTA，甚至接近有监督模型的效果。
