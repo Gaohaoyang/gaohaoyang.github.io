@@ -896,47 +896,71 @@ DDL 与其说它是一种对话描述语言，不如说是一种**对话编程�
 
 ### Dialog-Flow
  
+【2022-9-2】[快速上手Dialogflow交互机器人](https://www.toutiao.com/article/7138301940056441381/)
+
+Dialogflow 是Google 提供的一款人机交互平台，通过该平台可以轻松地设计出属于自己的交互机器人，比如常见的网页聊天机器人，电话智能客服等。借助Dialogflow甚至可以用于扫地机器人交互系统或者更高级的使用。
+- 马航的订票查票机器人:马来西亚航空公司和 Amadeus 创建了一个聊天机器人，使客户能够搜索、预订和支付航班，从而使航空公司能够满足未来的需求并增加数字渠道的收入。
+- 达美乐披萨的订餐机器人
+  - ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/adfeaeb0ac294879b3c20d4ac01490ae~noop.image)
+- KLM预定、打包机器人: KLM 于 2016 年开始探索为客户提供体验的方法。他们在测试多个平台后选择了 Dialogflow。
+
+Dialogflow 通过客户输入的语音或者文字甚至情感分析，来识别客户的**意图**（Intens)，结合**实体**(Entities)，来进行相应的回复。
+
+Dialogflow的几个优点：
+- 识别准确率高，响应速度快
+- 支持 30 多种语言和语言变体
+- 上手简单：图形界面配置；官方文档丰富、详细；网络上有案例可供参考
+- 有问题易解决：开发者社区超过150万名开发者
+
+常用工具
+- 一、内置 Small Talk
+  - Small Talk 用于为闲聊对话提供响应。 此功能可以解答代理范围之外的常见问题，极大地提升最终用户体验。
+  - Small Talk 有两种版本：
+    - 内置 Small Talk：为代理启用 Small Talk 后，它会自动处理闲聊对话，无需向代理添加意图。
+    - 预建 Small Talk：导入预建 Small Talk 代理时，它会提供处理闲聊对话的意图。
+- 二、prebuilt agent
+  - 由 Dialogflow 提供的一组代理，适用于常见的使用场景。 您可以这些代理为基础，构建涵盖特定场景（如外出就餐、酒店预订和导航）的对话。
+
+如何制作一个自己的天气&新闻语音问答机器人
+- 使用了文字输入Dialogflow 的方式, 通过speech-to-text将音频麦克风流到Dialogflow 的文本意图检测API
+- 案例使用了以下GCP产品：
+  - Dialogflow ES & Knowledge Bases
+  - Speech to Text
+- 其它组件：
+  - Webhook
+  - Weathers & News API
+在这个demo中你可以使用麦克风输入，然后返回新闻或者天气
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/287efca8c0fa48ebb43694f2bf29a48e~noop.image?_iz=58558&from=article.pc_detail&x-expires=1662698585&x-signature=ltA%2BkMLbLV9TgcZQczCJVmBRVrE%3D)
+
 **Dialog flow** 是业界最常用的解决方案（这里并不是指 Google 的 [DialogFlow](https://dialogflow.com/)），在语音对话系统中（Spoken Dialog System）一般叫做 **Call Flow**，它用一种对话流程图工具来描述对话逻辑。目前市面上的 bot 平台大部分都采用这个方案，其本质都是状态流程图，是 handcrafted 方法，不同产品之间最主要的区别可能就是状态节点的抽象程度不同。
  
 [第一篇](https://zhuanlan.zhihu.com/p/71785382)介绍对话管理方法的时候介绍过，根据对话描述的灵活程度，可将 handcrafted 方法分成 **finite-state**、**frame-based**、**goal-based**等等。从 VUI 表现层来说，这些方法的对话节点有不同的抽象能力，抽象程度最低的是 finite-state，它每个状态节点只完成一件事，交互逻辑完全表现在状态图中，这会导致 dialog flow 在 VUI 表现层上显得非常复杂。而抽象比较高的是 goal-based，它的对话流程图是 hierarchical 的，一个节点可以代表多个对话交互，复杂的逻辑可以隐藏在一个节点中。
 
 较低抽象程度的 dialog flow 一般会根据状态，将对话节点分成多个类型，例如条件节点、回复节点、API 节点、澄清节点、实体节点等等。每个节点有其特定的功能，是对话交互设计的最小逻辑单元，我们暂且将这种方法称为「基于状态的 dialog flow」。其设计 VUI 的过程是：使用不同类型的节点完成每一时刻的对话逻辑，连接相互依赖的节点完成状态间的跳转，类似 finite-state 方法。例如「条件节点」仅支持当前时刻的对话状态条件判断，根据条件将对话导向不同的分支，跳转后的对话交互由其他节点承担；「API 节点」仅支持 API 接口调用，调用后数据如何使用、对话逻辑如何发展，由后续节点负责；「实体节点」仅用来做槽填充和填槽过程中的交互；「回复节点」仅用来表示回复用户的内容，等等。举个实际例子，[Kore.ai](https://zhuanlan.zhihu.com/p/71788365/kore.ai) 是一款功能非常完善的 chatbot 平台，其多轮对话共有 8 种类型节点，图 2 是 kore 提供的一个航班查询 demo 机器人，每个节点右上角的标签是节点类型。例如 intent/entity 节点表示根据用户意图/实体做状态跳转、webhook/script/message 节点表示 bot 执行相应 action 后做状态跳转。VUI 上每个节点的功能非常清晰，所有对话逻辑都在 graph 上以节点功能和状态跳转的形式呈现。
- 
-![](https://pic3.zhimg.com/80/v2-e53dd6a5e92721bd9ad471502c9f9562_1440w.jpg)
- 
-_图 2 Kore.ai VUI 示例图_
+- ![](https://pic3.zhimg.com/80/v2-e53dd6a5e92721bd9ad471502c9f9562_1440w.jpg)
+- _图 2 Kore.ai VUI 示例图_
  
 国内的大多数对话系统平台也都是采用类似的方案，比如百度 [Kitt.ai](https://zhuanlan.zhihu.com/p/71788365/kitt.ai)、阿里 Dialog Studio（内嵌在钉钉后台）、 [竹间智能](https://www.emotibot.com/) 、[网易七鱼](https://m.qiyukf.com/)。这里需要澄清一点，虽然我个人将该类型的设计模式理解为「抽象程度较低」，但并不是想表达这种方式不好，基于状态的 dialog flow 有几个非常大的优点。首先它的设计与我们常用的流程图是一致的，很多公司对话交互逻辑的起点都是 visio 流程图，VUI developer 拿到 visio 图后并不需要进行模式转换，很自然地能将设计图映射成 VUI 实现。其次，用这种模式设计出的 VUI 几乎将所有的对话交互逻辑都表现在了流程图上，有利于流程检查和整体 review。还有一个优点，这种模式的节点功能很聚焦，职责很清晰，新增一种节点对原有节点都没有影响，节点依据功能和状态而相互解耦，方便 VUI 增删改查。
  
 另外一类 dialog flow 使用的是较高抽象程度的设计模式，虽然这类也是流程图设计，但它并没有根据功能划分节点类型。相反，其对话节点只有一种类型，节点的设计模式是统一的，一个节点可承载多个对话逻辑。这种方式非常适用于基于目标的对话设计（Goal-based 对话模型可参见第一篇 [对话管理基本方法](https://zhuanlan.zhihu.com/p/71785382)），每个节点完成一个具体对话目标，一个目标所涉及到的对话交互都由这个节点来完成。一个对话任务通常包含多个子目标，子目标的跳转表示相互之间有依赖关系。如此，一个对话任务的 VUI 就可以表示成子目标的流程图，由于很多逻辑细节被隐藏在了目标节点，节点抽象程度很高，VUI 在表现层会显得非常简洁，我们暂且称这类模式为「基于目标的 dialog flow 设计」。
  
 为了理解对话节点如何完成一个具体的目标，我们来看一下基于目标节点的生命周期。这种节点的生命周期通常包括三部分：节点触发、节点依赖和节点动作（trigger、requirements and actions）。首先一个目标通常有其触发条件，用来表示在什么场景下系统需要完成这个目标。例如一个处理超时的节点，其触发条件是超时的信号事件，收到超时信号后，该节点可能会优先触发。接下来，完成一个目标通常需要用户反馈一些信息，以便满足用户的不同需求（例如业务 API 调用需要必备参数），这些信息可称为节点的依赖，通常用槽填充来实现。节点依赖设置中也保存了槽位信息的交互逻辑，例如没有识别到槽位实体时机器人应如何反馈。如果顺利的话，最后机器人将执行一些动作以完成对话目标。对话动作（dialog action）的范围非常宽泛，机器回复、变量保存、API 调用、代码执行、节点跳转等等都称为动作。机器完成节点目标所要求的一系列的动作后，该节点的生命周期即告一段落，节点处于 inactive 状态，等待下一次触发。 图 3 是基于目标的节点描述，这一套设计模式非常统一，灵活的节点配置可以支持任意复杂的交互逻辑。
- 
-![](https://pic1.zhimg.com/80/v2-2af501142613ca6e1fce69ef2830f1f8_1440w.jpg)
- 
-_图 3 基于目标的节点设计模式_
+- ![](https://pic1.zhimg.com/80/v2-2af501142613ca6e1fce69ef2830f1f8_1440w.jpg)
+- _图 3 基于目标的节点设计模式_
  
 采用基于目标的 dialog flow 典型的产品有 [SAP Conversational AI](https://link.zhihu.com/?target=https%3A//cai.tools.sap/) 和 [IBM Watson](https://link.zhihu.com/?target=https%3A//www.ibm.com/cloud/watson-assistant/)。SAP Conversation AI 的前身是 Recast.ai，一家非常优秀的创业公司，被 SAP 收购后成了 SAP Conversational AI 的重要产品。如图 4，SAP 的对话节点都是采用同一种设计模式，三个部分 triggers、requirements、actions 和我们上一段讲的非常类似。IBM Watson 虽然借用了大名鼎鼎的 Watson 机器人的名字，但这里指的是 IBM 推出的对话 AI 平台。Watson VUI 与其他 dialog flow 产品有些差异，使用的是 VUI tree 而不是 graph 来描述对话逻辑。类似的，Watson 的对话节点也是统一的，如图 5 每个节点的生命周期包括触发条件、依赖信息、机器响应和节点跳转，对话节点的抽象程度高，能实现复杂的交互逻辑和条件判断。
- 
-![](https://pic1.zhimg.com/80/v2-9ee5d3def5cdc94c15b80fe4dfe6a85c_1440w.jpg)
- 
-_图 4 SAP Conversation AI 多轮对话节点描述_
- 
-![](https://pic4.zhimg.com/80/v2-a3a90eaf47d8bdafe5b989a48b59e413_1440w.jpg)
- 
-_图 5 IBM Waston 多轮对话节点描述_
+- ![](https://pic1.zhimg.com/80/v2-9ee5d3def5cdc94c15b80fe4dfe6a85c_1440w.jpg)
+- _图 4 SAP Conversation AI 多轮对话节点描述_
+- ![](https://pic4.zhimg.com/80/v2-a3a90eaf47d8bdafe5b989a48b59e413_1440w.jpg)
+- _图 5 IBM Waston 多轮对话节点描述_
  
 相比于基于状态的 dialog flow，基于目标的设计模型有几个很好的特性：较高的抽象程度、统一的节点类型、面向目标的设计理念，但凡事有两面，第一种方法的优点正是这种方法的不足：高抽象的流程图导致 developer 不能在 VUI graph 上直观地审阅所有的对话交互逻辑，设计模式的不同导致 developer 需要花功夫将 visio 流程图「翻译」成新的 VUI 设计。
  
 为了清楚认识两种方法的优劣势以及使用场景，图 6 和图 7 是我用 Kore.ai 和 SAP 两家产品实现的信用卡还款对话任务（仅仅只是 demo，真实的场景会更复杂）。需要说明一点，由于两个产品支持的功能和设计模式都有差异，很难设计出两个完全相同的 VUI 交互场景，不过尽管用户在体验上可能会感觉有细微的差异，但大体的对话任务交互走向都是一致的。图 6 Kore.ai 的实现可以一目了然看到整个交互逻辑，每个状态节点上都清晰显示了对话的逻辑细节。这个 VUI 的缺点也十分明显，这么简单的对话任务，流程图已经显得十分复杂，当任务复杂度显著提高后，流程维护将是一个很大问题。对比图 7 SAP，对话任务被拆分成了 4 个子目标，每个对话节点封装了一个子目标的交互逻辑，实现的 VUI 看起来非常简洁。并且，这种方式很容易能实现对话中的全局节点，每个全局节点就是一个对话目标，可以在不修改主流程的情况下，增加机器人的处理能力。但在 SAP VUI graph 上并不能看出完整的对话交互，需要进入节点中才能进行流程检查，对 VUI 设计师要求会比较高。
- 
-![](https://pic1.zhimg.com/80/v2-561c2b7e237f2199842dfcac1e7d143c_1440w.jpg)
- 
-_图 6 两种产品构建的信用卡流程对比 - Kore.ai_
- 
-![](https://pic3.zhimg.com/80/v2-6545fb8881da2ca043814cf9770fd3a2_1440w.jpg)
- 
-_图 7 两种产品构建的信用卡流程对比 - SAP Conversational AI_
+- ![](https://pic1.zhimg.com/80/v2-561c2b7e237f2199842dfcac1e7d143c_1440w.jpg)
+- _图 6 两种产品构建的信用卡流程对比 - Kore.ai_
+- ![](https://pic3.zhimg.com/80/v2-6545fb8881da2ca043814cf9770fd3a2_1440w.jpg)
+- _图 7 两种产品构建的信用卡流程对比 - SAP Conversational AI_
  
 ### Task form
  
