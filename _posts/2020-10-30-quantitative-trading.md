@@ -39,7 +39,7 @@ mathjax: true
 ## 炒股工具
 
 - 【2022-1-12】[WnStock](https://github.com/woniu201/WnStock/tree/master/Release), WnStock是个开源的查看股票行情软件，使用VC++/MFC开发，IDE选用Visual Studio 2010，如IDE版本非2010可能会存在编译错误
-
+- [股票告警分析工具](https://github.com/lusson-luo/stock_tool)
 
 ## 机器学习炒股
 
@@ -756,6 +756,12 @@ plt.plot(valid[['Close','Predictions']])
 ## 工程实践
 
 [关于高频量化交易的代码项目](https://zhuanlan.zhihu.com/p/558902211)
+
+### 数据源
+
+实时股价数据
+- 新浪股票实时数据接口: http://hq.sinajs.cn/list=sh600389
+
 
 ### 基础教程
  
