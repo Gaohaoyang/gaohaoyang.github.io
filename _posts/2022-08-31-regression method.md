@@ -971,6 +971,17 @@ def __init__(
 )
 ```
 
+## NeuralProphet
+
+【2022-9-3】[NeuralProphet：基于神经网络的时间序列建模库](https://www.toutiao.com/article/6903317463598039566)
+
+[NeuralProphet](https://github.com/ourownstory/neural_prophet) 是一个python库，用于基于神经网络对时间序列数据进行建模。 它建立在PyTorch之上，并受到Facebook Prophet和AR-Net库的极大启发。Facebook的Prophet库和NeuralProphet之间的主要区别：
+- 使用PyTorch的Gradient Descent进行优化，使建模过程比Prophet快得多
+- 使用AR-Net建模时间序列自相关（也称为序列相关）
+- 自定义损失和指标
+- 具有前馈神经网络的可配置非线性层，
+
+使用[示例](github/e-alizadeh/medium/blob/master/notebooks/NeuralProphet/neural_prophet.ipynb)
 
 # 结束
 
