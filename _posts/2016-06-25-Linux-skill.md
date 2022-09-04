@@ -3,7 +3,7 @@ layout: post
 title:  "Linux技能大全"
 date:   2016-06-25 23:35:00
 categories: 编程语言
-tags: Linux Shell Git yaml github 文件服务 vscode crontab curl post
+tags: Linux linux Shell Git yaml github 文件服务 vscode crontab curl post jupyter
 excerpt: Linux使用技能总结，持续更新
 mathjax: true
 ---
@@ -3749,6 +3749,34 @@ Image.open(img_file)
 from IPython.display import Image
 Image(img_file)
 ```
+
+## 常见命令
+
+魔法命令如下：
+
+```python
+# %%file方法可以将脚本代码写入本地Py文件。
+%%file hello.py
+# 直接执行Py文件，通过%run方法来实现。
+%run hello.py
+# 监控代码运行时间
+%timeit [x**2 for x in range(100)] 
+# 调用系统命令
+my_dir = 'new_dir'
+!mkdir $my_dir
+# 快速调试debug
+def some_func():
+    var = 'hello world'
+    for i in range(5):
+        print(i)
+    i / 0
+    return 'finished'
+
+%debug
+some_func()
+
+```
+
 
 # java
 
