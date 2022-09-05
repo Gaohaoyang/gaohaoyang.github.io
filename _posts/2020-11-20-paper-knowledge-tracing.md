@@ -16,7 +16,7 @@ mathjax: true
 
 - 【2022-8-5】[可解释深度知识追踪模型](https://crad.ict.ac.cn/CN/10.7544/issn1000-1239.2021.20211021)
   - 当前知识追踪方法多针对知识点建模，忽略了习题信息建模与用户个性化表征，并且对于预测结果缺乏可解释性.
-  - 针对以上问题，提出了一个可解释的深度知识追踪框架.首先引入习题的上下文信息挖掘习题与知识点间的隐含关系，得到更有表征能力的习题与知识点表示，缓解数据稀疏问题.接着建模用户答题序列获得其当前知识状态，并以此学习个性化注意力，进而得到当前习题基于用户知识状态的个性化表示.最后，对于预测结果，依据个性化注意力选择一条推理路径作为其解释.相较于现有方法，所提模型不仅取得了更好的预测结果，还能为预测结果提供推理路径层面的解释，体现了其优越性.
+  - 针对以上问题，提出了一个**可解释**的深度知识追踪框架.首先引入习题的上下文信息挖掘习题与知识点间的隐含关系，得到更有表征能力的习题与知识点表示，缓解数据稀疏问题.接着建模用户答题序列获得其当前知识状态，并以此学习个性化注意力，进而得到当前习题基于用户知识状态的个性化表示.最后，对于预测结果，依据个性化注意力选择一条推理路径作为其解释.相较于现有方法，所提模型不仅取得了更好的预测结果，还能为预测结果提供推理路径层面的解释，体现了其优越性.
 - [knowledge-tracing最新进展](https://paperswithcode.com/task/knowledge-tracing)
   - [GIKT: A Graph-based Interaction Model for Knowledge Tracing](https://paperswithcode.com/paper/gikt-a-graph-based-interaction-model-for)
 - [深度知识追踪（Deep Knowledge Tracing）论文学习](https://blog.csdn.net/sereasuesue/article/details/108686717)
@@ -25,6 +25,12 @@ mathjax: true
   - `SKT`：只建模知识点
   - `DIKT`：同时建模问题、知识点
 
+$$
+\require{AMScd}
+\begin{CD}
+  DKT @>建模知识点>> SKT @>建模问题和知识点>> DIKT
+\end{CD}
+$$
 
 # 知识追踪
 
