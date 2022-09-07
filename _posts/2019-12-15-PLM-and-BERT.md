@@ -203,6 +203,9 @@ PTMs-Papers
 
 PyTorch实现了从语言中识别情绪情感反讽的DeepMoji模型：https://github.com/huggingface/torchMoji
 
+【2022-9-7】注册账户后[申请token](https://huggingface.co/settings/tokens)才能下载模型
+- passwd for Huggingface3721
+
 ## transformers 库
 
 【2022-1-21】[让 Transformer 的推理速度提高 4.5 倍，这个小 trick 还能给你省十几万](https://mp.weixin.qq.com/s/fYxFwBvfQFPTqMZL6UI5WQ)
@@ -3914,9 +3917,8 @@ PLUG还能为目标任务做针对性优化。GPT-3并没有利用**微调**和*
 ## ES句向量
 
 - 【2020-9-15】[ElasticTransformers](https://github.com/md-experiments/elastic_transformers)
-    - Elastic Transformers：Jupyter Notebook里的可扩展BERT语义搜索
+  - Elastic Transformers：Jupyter Notebook里的可扩展BERT语义搜索
 - ![](https://github.com/md-experiments/elastic_transformers/raw/master/assets/architecture.png)
-
 
 
 ## Faiss简介
