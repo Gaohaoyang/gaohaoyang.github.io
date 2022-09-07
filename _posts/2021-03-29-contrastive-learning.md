@@ -13,6 +13,7 @@ mathjax: true
 {:toc}
 
 # 总结
+
 - [Contrastive Learning 学习笔记](https://tobiaslee.top/2020/05/18/contrastive-learning-notes/), 最近深度学习两巨头 Bengio 和  LeCun 在 ICLR 2020 上点名 Self-Supervised Learning（SSL，自监督学习） 是 AI 的未来，而其的代表的 Framework 便是 Contrastive Learning（CL，对比学习）。 另一巨头 Hinton 和 Kaiming 两尊大神也在这问题上隔空过招，MoCo、SimCLR、MoCo V2 打得火热
 - 【2021-10-26】[张俊林：从对比学习视角，重新审视推荐系统的召回粗排模型](https://mp.weixin.qq.com/s?__biz=MzU1NTMyOTI4Mw==&mid=2247555301&idx=1&sn=60fa796f07e86c9251a4401bc93b94d0&chksm=fbd7aa89cca0239f7cb2bc75bc7e2dc50f421c45cd454e55107e4eec3508d79f315f9c242e71&mpshare=1&scene=1&srcid=1026zqb3mMRj0Ly6RxMqfHGQ&sharer_sharetime=1635214668358&sharer_shareid=b8d409494a5439418f4a89712efcd92a&version=3.1.0.6189&platform=mac#rd)
 - [对比学习（Contrastive Learning）综述](https://zhuanlan.zhihu.com/p/346686467)
@@ -132,6 +133,39 @@ Momentum Encoder主要为了解决Model Bank中每个样本缓存的表示和Enc
 In-Batch Negtive也是对比学习中经常采用的一种扩大**负样本**数量的方法。对于匹配问题，假设每个batch内有N个正样本对，那么让这N个正样本之间互为负样本，这样每个样本就自动生成了2*(N-1)个负样本。
 
 在图像和文本匹配的多模态领域，In-Batch Negtive也非常常用，例如Learning Transferable Visual Models From Natural Language Supervision提出的CLIP模型。In-Batch Negtive的优点是非常简单，计算量不会显著增加。缺点是负样本只能使用每个batch内的数据，是随机采样的，无法针对性的构造负样本。
+
+### 聚类对比学习
+
+【2022-9-7】[聚类对比学习：SwAV & PCL模型浅析](https://mp.weixin.qq.com/s/poN-0EbfB_I8ZWyypnkBxA)
+- 作为一种自监督学习方法，`对比学习`（Contrastive Learning）由于在表征学习上有效性和在不同领域中的普适性，已经成为了近年来的研究热点之一，这篇文章将介绍对比学习的一个分支——聚类对比学习，涉及到两篇论文：SwAV 和 PCL
+
+对比学习是通过比较正负样本对来进行学习的，对于一般的对比学习方法
+- **正样本**往往是从样本自身得到的，比如对该样本做增强（augmentation）
+- 而**负样本**则是从 batch 中随机挑选的样本。
+
+然而这种构造方法可能会面临两个问题：
+1. 为了加强模型的分辨能力，往往需要在一个 batch 中加入**足够多**的负样本，许多实验也表明大的 batch size 可以提高模型性能。然而由于一般的对比学习方法需要对 batch 中的样本进行两两比较，计算复杂度为 $O(N^2)$，这就导致 batch size 会受到**显存**大小的约束，给对比学习的应用带来了障碍。
+2. **随机**挑选负样本的方式可能会将一些实际上很**相似**的样本作为**负样本**，这样可能会影响模型的性能。
+  - 例如若锚定样本是一只狗的图片，而随机挑出来的负样本恰好也是一只狗的图片，那么即使两个样本实际上很相似，模型也会将其作为负样本
+
+`聚类对比学习`就是想要解决上述的问题，顾名思义，该方法不直接做两两样本的对比，而是先对样本进行**聚类**，然后在类之间进行对比学习，由于样本的“类别”是通过无监督的聚类方法得到的，因此整个学习过程中并不需要样本标签，仍然还是在做自监督学习。通过聚类后再对比的操作，我们就可以大大减小对比的数量，降低计算复杂度，而且同一类下的不同样本也互为正样本，不会将相似的样本当做负样本。
+
+ SwAV 和 PCL，两者都将聚类的思想引入到了对比学习当中
+
+SwAV
+- 论文标题：[Unsupervised Learning of Visual Features by Contrasting Cluster Assignments](https://arxiv.org/abs/2006.09882)
+- [代码链接](https://github.com/facebookresearch/swav)
+
+要想在对比学习中引入聚类，首先需要解决的就是聚类稳定性的问题，即要避免所有样本都被分到同一类这种极端情况。因此这里 SwAV 就设计了一种聚类的方法，使得模型可以直接对 batch 中的样本进行稳定的聚类，然后按照聚类结果进行对比学习，帮助模型获得样本表征。
+
+先简单说一下 SwAV 的思路，SwAV 与传统对比学习的区别如下所示。为了帮助聚类，模型中引入了 K 个原型（prototype）变量，每个 prototype 可以理解为是一类样本的通用特征，一共有 K 类；模型会根据原型变量，online 计算出 batch 中的样本属于某类的概率，然后再通过不同 view 的对比，令正样本对的属于同一类的概率更大（即相似的样本属于同一类的概率更大），以此来实现对于样本表征的学习。
+
+PCL
+- 论文标题：[Prototypical Contrastive Learning of Unsupervised Representations](https://arxiv.org/abs/2005.04966)
+- [代码链接](https://github.com/salesforce/PCL)
+
+PCL 采用了期望-最大化框架，即 EM 算法的思路，流程如下图所示，简单来说可以分为 E 步和 M 步
+
 
 ## A.引入
  
