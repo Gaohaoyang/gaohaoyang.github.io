@@ -341,6 +341,12 @@ You can also use words, to fit your writing style more closely[^note].
 - 知乎提供公式生成图片服务：https://www.zhihu.com/equation?tex=y+%3D+%5Cphi%28%5Csum+W_%7Bij%7DX_j+%2B+b%29+
   - 效果：![](https://www.zhihu.com/equation?tex=y+%3D+%5Cphi%28%5Csum+W_%7Bij%7DX_j+%2B+b%29+)
 
+除了`$$`，也可以使用math提示语显示分块公式
+
+```math
+\sqrt{3}
+```
+
 【2022-9-1】注意：jekyll博客中默认不能展示数学公式，需要增加插件
 - 参考：[display equation in jekyll blog in latex format on github pages](https://stackoverflow.com/questions/37899183/display-equation-in-jekyll-blog-in-latex-format-on-github-pages)
 - 文件： _layouts/post.html
