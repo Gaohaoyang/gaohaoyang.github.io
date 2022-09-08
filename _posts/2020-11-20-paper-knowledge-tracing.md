@@ -138,6 +138,22 @@ Knowledge Tracing任务有一些开源的数据集：Synthetic、Assistments、J
 EdNet 论文中对比数据集的数据情况
 - ![](https://pic3.zhimg.com/80/v2-79ddbc08ec04f7e8cb628a1cf16eb436_1440w.jpg)
 
+
+### Assistments
+
+- [数据集](https://sites.google.com/site/assistmentsdata/datasets/2015-assistments-skill-builder-data)
+- 格式说明，处理后的[数据集](https://github.com/jdxyw/deepKT/tree/master/data)
+- Each line contains two fields separated by `\t`. 
+- The first field is the question id sequence answered by the user. 
+- The second filed is the corresponding answer sequence. 1 means correct, 0 means wrong.
+
+|编号|题目编号序列|答题结果序列（0/1）|
+|---|---|---|
+| 1 | 45,45,45,47,47,47,28,28,28,28,28,17,17,17,28,28,28	| 1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1 |
+| 2 | 19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19	| 0,0,0,0,0,0,0,1,0,0,1,1,0,1,1,1 |
+| 3 | 49,49,49,49,49,49,49,92,92,92,92,92,26,26,26,26,26,26	| 0,1,0,0,1,1,1,0,0,1,1,1,1,0,0,1,1,1 |
+
+
 ## 专题比赛
 
 同时，EdNet在Kaggle上的RIID比赛：[Riiid Answer Correctness Prediction](https://www.kaggle.com/competitions/riiid-test-answer-prediction)
@@ -272,7 +288,7 @@ BKT是对学生知识点的一个变化进行追踪，可以知道学生知识�
 - 最后，用于建模转换的**二元**响应数据限制了可以建模的练习类型。
 
 
-## DKT（明显优于BKT）
+## 【2015】DKT（明显优于BKT）
 
 人类的学习受到许多不同属性的支配（材料、上下文、呈现的时间进程和涉及的个人），其中许多属性很难**量化**，只依靠第一原则为练习分配属性或构建图形模型。
 
@@ -281,6 +297,9 @@ BKT是对学生知识点的一个变化进行追踪，可以知道学生知识�
 2. 行为数据建模：可以高效的使用各种行为数据，比如做题用时，看解答时间
 3. 跨场景建模：可以对学习、练习、考试等场景进行综合建模
 4. 多模态建模：可以利用行为数据、语音、图像等数据建模
+
+
+### DKT模型
 
 DKT的内容：
 - ![](https://pic1.zhimg.com/80/v2-f83067f9ddb315e9035e75b0feb8978c_1440w.jpg)
@@ -294,6 +313,11 @@ DKT算法明显优于BKT算法。
 
 介绍完深度知识追踪模型之后，如何将遗忘机制加入到DKT模型当中。首先要介绍的是与遗忘相关的信息。
 
+```html
+<object type="application/pdf" data="http://stanford.edu/~cpiech/bio/papers/deepKnowledgeTracing.pdf"
+           id="review" style="width:100%;  height:800px; margin-top:0px;  margin-left:0px" >
+</object>
+```
 
 ### 改进
 
@@ -331,8 +355,115 @@ DKT算法明显优于BKT算法。
 - [论文阅读笔记【17，考虑问题之间关系得知识追踪】](https://zhuanlan.zhihu.com/p/138116440)
 - 密歇根州立大学与TAL AI lab的一篇论文Deep Knowledge Tracing with Side Information，论文的目的依旧是知识追踪。该论文的创新点在于考虑了习题与习题之间的相关性。该论文基于传统模型DKT加以改进，提出了全新的模型DKTS，新模型考虑了问题之间的相关性。
 - 众所周知，众多的习题并不是单独的个体，而是具有相关性的。不同的习题可能考察了相同的知识点，从而具有相关性。可能是考察相似的技能，从而具有相关性。但是传统模型DKT仅仅关注到学生对于习题的练习历史，但是并没有考虑到习题之间的相关性。
- 
-![](https://pic4.zhimg.com/80/v2-220e251b4a5b216b617bcee872f3a4fb_1440w.jpg)
+- ![](https://pic4.zhimg.com/80/v2-220e251b4a5b216b617bcee872f3a4fb_1440w.jpg)
+
+### 代码实现
+
+DKT模型实现，[github](https://github.com/jdxyw/deepKT/blob/master/deepkt/model/dkt.py)
+
+```python
+import torch
+import torch.nn as nn
+
+class DKT(nn.Module):
+    def __init__(self, embed_dim, input_dim,  hidden_dim, layer_num, output_dim, dropout, device="cpu", cell_type="lstm", ):
+        """ 
+          第一个DKT模型
+          The first deep knowledge tracing network architecture.
+            embed_dim: int, the embedding dim for each skill.
+            input_dim: int, the number of skill(question) * 2.
+            hidden_dim: int, the number of hidden state dim.
+            layer_num: int, the layer number of the sequence number.
+            output_dim: int, the number of skill(question).
+            device: str, 'cpu' or 'cuda:0', the default value is 'cpu'.
+            cell_type: str, the sequence model type, it should be 'lstm', 'rnn' or 'gru'.
+        """
+        super(DKT, self).__init__()
+        self.embed_dim = embed_dim # 嵌入维度
+        self.input_dim = input_dim # 字典大小，问题数*2
+        self.hidden_dim = hidden_dim # 隐含层维度
+        self.layer_num = layer_num # 层数
+        self.output_dim = output_dim + 1 # 输出维度，问题数
+        self.dropout = dropout
+        self.device = device # 默认cpu，'cpu' or 'cuda:0'
+        self.cell_type = cell_type # 基本单元：RNN，LSTM，GRU
+        self.rnn = None # 基本单元组件
+        # 问题嵌入矩阵，向量化，最后一个编号作为填充值
+        self.skill_embedding = nn.Embedding(
+            self.input_dim, self.embed_dim, padding_idx=self.input_dim - 1
+        )
+        # 基本单元适配
+        if cell_type.lower() == "lstm":
+            self.rnn = nn.LSTM(
+                self.embed_dim,
+                self.hidden_dim,
+                self.layer_num,
+                batch_first=True,
+                dropout=self.dropout,
+            )
+        elif cell_type.lower() == "rnn":
+            self.rnn = nn.RNN(
+                self.embed_dim,
+                self.hidden_dim,
+                self.layer_num,
+                batch_first=True,
+                dropout=self.dropout,
+            )
+        elif cell_type.lower() == "gru":
+            self.rnn = nn.GRU(
+                self.embed_dim,
+                self.hidden_dim,
+                self.layer_num,
+                batch_first=True,
+                dropout=self.dropout,
+            )
+        # 全连接层
+        self.fc = nn.Linear(self.hidden_dim, self.output_dim)
+        # 异常参数，非lstm、rnn和gru
+        if self.rnn is None:
+            raise ValueError("cell type only support lstm, rnn or gru type.")
+
+    def forward(self, q, qa, state_in=None):
+        """ 定义网络结构
+        :param x: The input is a tensor(int64) with 2 dimension, like [H, k]. H is the batch size,
+        k is the length of user's skill/question id sequence.
+        :param state_in: optional. The state tensor for sequence model.
+        :return:
+        """
+        # 问题编号映射
+        qa = self.skill_embedding(qa)
+        h0 = torch.zeros((self.layer_num, qa.size(0), self.hidden_dim), device=self.device)
+        c0 = torch.zeros((self.layer_num, qa.size(0), self.hidden_dim), device=self.device)
+        # 使用默认权重
+        if state_in is None:
+            state_in = (h0, c0)
+        # 使用自定义权重
+        state, state_out = self.rnn(qa, state_in)
+        logits = self.fc(state) # 全连接层
+        return logits, state_out
+```
+
+简版实现：参考[地址](https://zhuanlan.zhihu.com/p/326198350)
+
+```python
+class DKT(nn.Module):
+    def __init__(self, input_dim, hidden_dim, layer_dim, output_dim):
+        super(DKT, self).__init__()
+        self.hidden_dim = hidden_dim
+        self.layer_dim = layer_dim
+        self.output_dim = output_dim
+        # 直接使用RNN单元
+        self.rnn = nn.RNN(input_dim, hidden_dim, layer_dim, batch_first=True, nonlinearity='tanh')
+        self.fc = nn.Linear(self.hidden_dim, self.output_dim)
+        self.sig = nn.Sigmoid()
+
+    def forward(self, x):
+        h0 = Variable(torch.zeros(self.layer_dim, x.size(0), self.hidden_dim))
+        out,hn = self.rnn(x, h0)
+        res = self.sig(self.fc(out))
+        return res
+```
+
 
 ## DKVMN模型
 
