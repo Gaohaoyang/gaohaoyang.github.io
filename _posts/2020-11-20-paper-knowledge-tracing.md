@@ -138,7 +138,7 @@ Knowledge Tracing任务有一些开源的数据集：Synthetic、Assistments、J
 EdNet 论文中对比数据集的数据情况
 - ![](https://pic3.zhimg.com/80/v2-79ddbc08ec04f7e8cb628a1cf16eb436_1440w.jpg)
 
-### kaggle比赛
+## 专题比赛
 
 同时，EdNet在Kaggle上的RIID比赛：[Riiid Answer Correctness Prediction](https://www.kaggle.com/competitions/riiid-test-answer-prediction)
 - kaggle上公开的方案主要是采用的ML方法，复现SAKT算法，并开放了提交的完整代码，开放的Baseline模型AUC为0.751，是目前开源KT类模型中效果最好的。
@@ -146,6 +146,16 @@ EdNet 论文中对比数据集的数据情况
 - 代码：
   - [A self-Attentive model for Knowledge Tracing](https://www.kaggle.com/code/wangsg/a-self-attentive-model-for-knowledge-tracing/notebook)
   - [SAINT+: A Transformer-based model for correctness prediction](https://www.kaggle.com/competitions/riiid-test-answer-prediction/discussion/193250)
+
+
+### 知识追踪SOTA
+
+【2022-9-8】[Knowledge Tracing on EdNet](https://paperswithcode.com/sota/knowledge-tracing-on-ednet)
+- 当前各种算法效果排名
+- <span style="color:red"> $ SAINT+ > SAINT > 	PEBG+DKT > PEBG+DKVMN > DKVMN > SAKT > DKT > GIKT $ </span>
+
+<iframe src="https://paperswithcode.com/sota/knowledge-tracing-on-ednet">
+
 
 ## 传统方法
 
@@ -346,7 +356,7 @@ DKT算法明显优于BKT算法。
 - 模型遗忘机制不完善
 
 
-## SAKT——DKVMN改进：处理稀疏数据
+## 【2019】SAKT——DKVMN改进：处理稀疏数据
 
 - 2015年，Deep Knowledge Tracing这篇论文首次将**知识追踪任务**转换为**Seq-to-Seq**任务，并用**RNN**实现，取得的跨越式的进展。但是，由于DKT用的是RNN，<span style="color:red">局限性还比较大</span>。
 - 2019年，A Self-Attentive model for Knowledge Tracing这篇论文用Self-Attention模型取代了RNN，取得了更好的性能。同时，后期基于Transformer类的一些论文，可以说都是在SAKT的基础上进行改进的，因此本篇文章主要是根据论文用pytorch实现模型。
@@ -366,6 +376,57 @@ DKT算法明显优于BKT算法。
 - 【2019年】代码实现
   - [pytorch版本](https://github.com/arshadshk/SAKT-pytorch)
   - [TensorFlow版本](https://github.com/shalini1194/SAKT)
+
+## 【2020】SAINT——改进SAKT，引入transfomer
+
+一个基于transformer的知识跟踪模型
+
+论文：[解说](https://zhuanlan.zhihu.com/p/439458114)
+- [SAINT:Towards an Appropriate Query, Key, and Value Computation for Knowledge Tracing](https://arxiv.org/abs/2002.07033)
+- SAINT: Separated Self-AttentIve Neural Knowledge Tracing
+- The empirical evaluations on a large-scale knowledge tracing dataset show that SAINT achieves the state-of-the-art performance in knowledge tracing with the improvement of AUC by **1.8%** compared to the current state-of-the-art models.
+
+### SAINT模型
+
+论文模型本质就是 transformer，和 SAKT 不同，这里使用了 encoder 和 decoder 两部分
+
+SAKT两个缺点
+- ![](https://pic4.zhimg.com/80/v2-cfa75c21ad8effbb3a1415643a10b033_1440w.jpg)
+- 注意力层浅，特征捕获能力弱。First, the models have attention layers too shallow to capture the complex relationships among different exercises and responses.
+- 依赖做题练习。Second, the models rely on the same recipe: exercises for queries and interactions for keys and values.
+
+模型结构改进
+- ![](https://pic4.zhimg.com/80/v2-1becb0980a25d6260fc65fe34203adf3_1440w.jpg)
+
+SAINT贡献：
+- 1）SAINT中，exercise embedding sequence 和the response embedding sequence分别独立的进入encoder 和decoder。
+- 2）SAINT使用深度自注意力有效的捕捉了练习题和答案之间复杂的关系。
+- 3）SAINT比目前优秀的模型完成了AUC的1.8%的提升。
+
+
+### 基于transformer的变种
+
+Transformer based Variants
+
+SAINT with three different architectures based on multiple stacked attention layers:
+- Lower Triangular Masked Transformer withInteraction sequence (LTMTI)
+- Upper Triangular Masked Transformer with Interaction sequence (UTMTI)
+- Stacked variant of SAKT (SSAKT)
+
+
+### 【2021】改进版：SAINT+
+
+- [SAINT+: Integrating Temporal Features for EdNet Correctness Prediction](https://arxiv.org/pdf/2010.12042.pdf)
+- 引入 temporal feature embeddings，Experimental results show that SAINT+ achieves state-of-the-art performance in knowledge tracing with an improvement of 1.25% in area under receiver operating characteristic curve compared to SAINT, the current state-of-the-art model in EdNet dataset.
+
+
+### 代码实践
+
+代码：
+- [Papers With Code](https://paperswithcode.com/paper/towards-an-appropriate-query-key-and-value)
+- [pytorch实现](https://link.zhihu.com/?target=https%3A//github.com/arshadshk/SAINT-pytorch)
+
+- ![](https://pic3.zhimg.com/80/v2-3d82eb022eb5c6b8bfbab40dbeece6d6_1440w.jpg)
 
 
 ## GKT——知识点图谱化
