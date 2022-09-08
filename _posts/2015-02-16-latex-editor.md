@@ -7,7 +7,7 @@ excerpt: "latex语法学习"
 tags: latex 公式 markdown
 ---
 
-* content
+* content 目录
 {:toc}
 
 > 本文为 MathJax 在 [Cmd Markdown](https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown) 环境下的常用语法指引。Cmd Markdown 编辑阅读器支持 $\LaTeX$ 编辑显示支持，例如：$\sum_{i=1}^n a_i=0$，访问 [MathJax](http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference) 以参考更多使用方法。
@@ -18,8 +18,7 @@ tags: latex 公式 markdown
 
 【2022-8-30】参考
 - [Cmd Markdown 公式指导手册](https://www.zybuluo.com/codeep/note/163962)
-
-[TOC]
+- 【2022-9-8】latex在表格中显示异常，[github markdown](https://github.com/wqw547243068/wqw547243068.github.io/blob/master/_posts/2015-02-16-latex-editor.md)正常，jekyll page显示异常
 
 # 一、公式使用参考
 
@@ -403,13 +402,12 @@ $$ \rm{2OH^{\bullet}_{O(STN)}+2O^{\times}_{O(YSZ)} \; \overset{Surface/bulk}{\un
 示例中 **全部大写** 的字体仅大写可用。
 
 |输入|全字母可用|显示|输入|仅大写可用|显示|
-|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+|:--:|:--:|:--:|:--:|:--:|:--:|
 |\rm|罗马体|$\rm{Sample}$|**\mathcal**|**花体（数学符号等）**|$\mathcal{SAMPLE}$|
 |\it|斜体|$\it{Sample}$|**\mathbb**|**黑板粗体（定义域等）**|$\mathbb{SAMPLE}$|
 |\bf|粗体|$\bf{Sample}$|\mit|数学斜体|$\mit{SAMPLE}$|
 |\sf|等线体|$\sf{Sample}$|\scr|手写体|$\scr{SAMPLE}$|
-|\tt|打字机体|$\tt{Sample}$|
-|\frak|旧德式字体|$\frak{Sample}$|
+|\tt|打字机体|$\tt{Sample}$|\frak|旧德式字体|$\frak{Sample}$|
 
 > **@lymd** `\boldsymbol{\alpha}` 用来表示向量或者矩阵的加粗斜体，如向量 $\boldsymbol{\vec\alpha}$。
 
