@@ -56,6 +56,7 @@ $$
 ```latex
 $ J_\alpha(x) = \sum_{m=0}^\infty \frac{(-1)^m}{m! \Gamma (m + \alpha + 1)} {\left({ \frac{x}{2} }\right)}^{2m + \alpha} \text {，行内公式示例} $
 ```
+
 - 显示：$ J_\alpha(x) = \sum_{m=0}^\infty \frac{(-1)^m}{m! \Gamma (m + \alpha + 1)} {\left({ \frac{x}{2} }\right)}^{2m + \alpha} \text {，行内公式示例} $
 
 - 例子：
@@ -63,6 +64,7 @@ $ J_\alpha(x) = \sum_{m=0}^\infty \frac{(-1)^m}{m! \Gamma (m + \alpha + 1)} {\le
 ```latex
 $$ J_\alpha(x) = \sum_{m=0}^\infty \frac{(-1)^m}{m! \Gamma (m + \alpha + 1)} {\left({ \frac{x}{2} }\right)}^{2m + \alpha} \text {，独立公式示例} $$
 ```
+
 - 显示：$$ J_\alpha(x) = \sum_{m=0}^\infty \frac{(-1)^m}{m! \Gamma (m + \alpha + 1)} {\left({ \frac{x}{2} }\right)}^{2m + \alpha} \text {，独立公式示例} $$
 
 - 例子：
@@ -75,6 +77,7 @@ $$ 在公式 \eqref{eq:sample} 中，我们看到了这个被自动编号的公�
     \label{eq:sample}
 \end{equation}
 ```
+
 - 显示：
 
  在公式 $\eqref{eq:sample}$ 中，我们看到了这个被自动编号的公式。
@@ -91,6 +94,7 @@ $$
 `^` 表示上标, `_` 表示下标。如果上下标的内容多于一个字符，需要用 `{}` 将这些内容括成一个整体。上下标可以嵌套，也可以同时使用。
 
 - 例子：
+
 ```latex
 $$ x^{y^z}=(1+{\rm e}^x)^{-2xy^w} $$
 ```
@@ -99,9 +103,11 @@ $$ x^{y^z}=(1+{\rm e}^x)^{-2xy^w} $$
 另外，如果要在左右两边都有上下标，可以使用 `\sideset` 命令；也可以简单地在符号前面多打一个上下标，此时会以行内公式渲染。
 
 - 例子：
+
 ```latex
 $$ \sideset{^1_2}{^3_4}\bigotimes \quad or \quad {^1_2}\bigotimes {^3_4} $$
 ```
+
 - 显示：$$\sideset{^1_2}{^3_4}\bigotimes \quad or \quad {^1_2}\bigotimes {^3_4} $$
 
 ## 3．如何输入括号和分隔符
@@ -123,6 +129,7 @@ $$ \sideset{^1_2}{^3_4}\bigotimes \quad or \quad {^1_2}\bigotimes {^3_4} $$
 <span style="text-align: center; display: block"> `\lVert \boldsymbol{X}_i - \boldsymbol{S}_j \rVert^2` → $\lVert \boldsymbol{X}_i - \boldsymbol{S}_j \rVert^2$ </span>
 
 - 例子：
+
 ```latex
 $$ f(x,y,z) = 3y^2z \left( 3+\frac{7x+5}{1+y^2} \right) $$
 ```
@@ -131,9 +138,11 @@ $$ f(x,y,z) = 3y^2z \left( 3+\frac{7x+5}{1+y^2} \right) $$
 有时要用 `\left.` 或 `\right.` 进行匹配而不显示本身。
 
 - 例子：
+
 ```latex
 $$ \left. \frac{ {\rm d}u}{ {\rm d}x} \right| _{x=0} $$
 ```
+
 - 显示：$$ \left. \frac{ {\rm d}u}{ {\rm d}x} \right| _{x=0} $$
 - 注意：【2022-8-30】为了避免与jekyll语法冲突，两个{之间加了空格
 
@@ -143,17 +152,21 @@ $$ \left. \frac{ {\rm d}u}{ {\rm d}x} \right| _{x=0} $$
 通常使用 `\frac {分子} {分母}` 来生成一个分数，分数可多层嵌套。如果分式较为复杂，亦可使用 `分子 \over 分母` 此时分数仅有一层。
 
 - 例子：
+
 ```latex
 $$ \frac{a-1}{b-1} \quad or \quad {a+1 \over b+1} $$
 ```
+
 - 显示：$$ \frac{a-1}{b-1} \quad or \quad {a+1 \over b+1} $$
 
 当分式 **仅有两个字符时** 可直接输入 `\frac ab` 来快速生成一个 $\large\frac ab$ 。
 
 - 例子：
+
 ```latex
 $$ \frac 12,\frac 1a,\frac a2 \quad \mid \quad \text{2 letters only:} \quad \frac 12a \,, k\frac q{r^2} $$
 ```
+
 - 显示：$$ \frac 12,\frac 1a,\frac a2 \quad \mid \quad \text{2 letters only:} \quad \frac 12a \,, k\frac q{r^2} $$
 
 ## 5．如何输入开方
@@ -161,9 +174,11 @@ $$ \frac 12,\frac 1a,\frac a2 \quad \mid \quad \text{2 letters only:} \quad \fra
 使用 `\sqrt [根指数，省略时为2] {被开方数}` 命令输入开方。
 
 - 例子：
+
 ```latex
 $$ \sqrt{2} \quad or \quad \sqrt[n]{3} $$
 ```
+
 - 显示：$$ \sqrt{2} \quad or \quad \sqrt[n]{3} $$
 
 ## 6．如何输入省略号
@@ -257,14 +272,15 @@ $$ \sum_{i=1}^n \frac{1}{i^2} \quad and \quad \prod_{i=1}^n \frac{1}{i^2} \quad 
 
 ## 12．如何输入其它特殊字符
 
-> **完整的 $\LaTeX$ 可用符号列表可以在 [这份文档](https://mirror.its.dal.ca/ctan/info/symbols/comprehensive/symbols-a4.pdf) 中查阅（极长，共 348 页），大部分常用符号可以参阅 [这份精简版文档](https://pic.plover.com/MISC/symbols.pdf) 查询。**需要注意的是，$\LaTeX$ 符号并不保证在 MathJax v2.2 中可用，即在 Cmd Markdown 编辑阅读器中可能并不支持所输入的特定命令。
+- 完整的 $\LaTeX$ 可用符号列表可以在 [这份文档](https://mirror.its.dal.ca/ctan/info/symbols/comprehensive/symbols-a4.pdf) 中查阅（极长，共 348 页），大部分常用符号可以参阅 [这份精简版文档](https://pic.plover.com/MISC/symbols.pdf) 查询。
+- 需要注意的是，$\LaTeX$ 符号并不保证在 MathJax v2.2 中可用，即在 Cmd Markdown 编辑阅读器中可能并不支持所输入的特定命令。
 
 > 若需要显示更大或更小的字符，在符号前插入 `\large` 或 `\small` 命令。
 MathJax 针对任意元素均提供从小至大 `\tiny` `\Tiny` `\scriptsize` `\small` `*默认值 \normalsize` `\large` `\Large` `\LARGE` `\huge` `\Huge` 共十种渲染大小，详见[官方文档](http://docs.mathjax.org/en/latest/input/tex/extensions/textmacros.html#size-control)。
 
 > [若找不到需要的符号，推荐使用 $\large\rm{Detexify}$ 来画出想要的符号](http://detexify.kirelabs.org/classify.html)
-<span style="text-align: center; display: block">
-- ![detexify_t](https://cdn.ericp.cn/img/202009/b0fe4b234a3fc.png)</span>
+
+<span style="text-align: center; display: block"> ![detexify_t](https://cdn.ericp.cn/img/202009/b0fe4b234a3fc.png)</span>
 
 ### (1)．关系运算符
 
@@ -909,6 +925,7 @@ $$
 在开头将 `matrix` 替换为 `pmatrix` `bmatrix` `Bmatrix` `vmatrix` `Vmatrix` 。
 
 - 例子：
+
 ```latex
 $ \begin{matrix} 1 & 2 \\ 3 & 4 \\ \end{matrix} $
 $ \begin{pmatrix} 1 & 2 \\ 3 & 4 \\ \end{pmatrix} $
@@ -917,6 +934,7 @@ $ \begin{Bmatrix} 1 & 2 \\ 3 & 4 \\ \end{Bmatrix} $
 $ \begin{vmatrix} 1 & 2 \\ 3 & 4 \\ \end{vmatrix} $
 $ \begin{Vmatrix} 1 & 2 \\ 3 & 4 \\ \end{Vmatrix} $
 ```
+
 - 显示：
 
 |matrix|pmatrix|bmatrix|Bmatrix|vmatrix|Vmatrix|
@@ -1076,7 +1094,7 @@ $$
 
 > **@Sherlockk** 用 markdown+math 编辑时 `\text` 内需用 `\(equation\)`
 
-##2．如何输入一个左侧对齐的条件表达式
+## 2．如何输入一个左侧对齐的条件表达式
 
 若想让文字在**左侧对齐显示**，则有如下方式：
 
