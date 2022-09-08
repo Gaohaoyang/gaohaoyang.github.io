@@ -21,7 +21,7 @@ mathjax: true
 - 【2018-3-18】比特币在线Demo：[coinDemo](https://coindemo.io/),[blockchainDemo](https://blockchaindemo.io/)
 - 【2021-2-9】金融纪录片，[比特币：钱的终结](https://www.bilibili.com/video/BV1D54y1C7vd)
   - <iframe src="//player.bilibili.com/player.html?aid=842054725&bvid=BV1D54y1C7vd&cid=234432929&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
-
+- 【2022-9-8】2018年拍摄的纪录片[区块链之新](https://www.ixigua.com/6911550712887378446)，6集
 
 ## 什么是区块链
 
