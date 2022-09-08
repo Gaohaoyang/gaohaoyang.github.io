@@ -346,7 +346,7 @@ DKT算法明显优于BKT算法。
 - 模型遗忘机制不完善
 
 
-## SAKT
+## SAKT——DKVMN改进：处理稀疏数据
 
 - 2015年，Deep Knowledge Tracing这篇论文首次将**知识追踪任务**转换为**Seq-to-Seq**任务，并用**RNN**实现，取得的跨越式的进展。但是，由于DKT用的是RNN，<span style="color:red">局限性还比较大</span>。
 - 2019年，A Self-Attentive model for Knowledge Tracing这篇论文用Self-Attention模型取代了RNN，取得了更好的性能。同时，后期基于Transformer类的一些论文，可以说都是在SAKT的基础上进行改进的，因此本篇文章主要是根据论文用pytorch实现模型。
@@ -356,11 +356,51 @@ DKT算法明显优于BKT算法。
 - **Knowledge tracing** is the task of modeling each student's mastery of **knowledge concepts** (KCs) as (s)he engages with a sequence of learning activities. Each student's knowledge is modeled by estimating the performance of the student on the learning activities. It is an important research area for providing a personalized learning platform to students. 
 - In recent years, methods based on **Recurrent Neural Networks** (RNN) such as **Deep Knowledge Tracing** (DKT) and **Dynamic Key-Value Memory Network** (DKVMN) outperformed all the traditional methods because of their ability to capture complex representation of human learning. 
 - However, these methods face the issue of not **generalizing** well while dealing with **sparse data** which is the case with real-world data as students interact with few KCs. 
+- DKT模型的**解释性**差。
+- DKVMN具有更好的解释性：key：知识概念矩阵，value:知识状态表达矩阵。
+- 但这两个模型都不能很好的泛化处理**稀疏数据**。
 - In order to address this issue, we develop an approach that identifies the KCs from the student's past activities that are $ \textit{relevant}$ to the given KC and predicts his/her mastery based on the relatively few KCs that it picked. Since predictions are made based on relatively few past activities, it handles the data sparsity problem better than the methods based on RNN. For identifying the relevance between the KCs, we propose a **self-attention** based approach, **Self Attentive Knowledge Tracing** (SAKT). Extensive experimentation on a variety of real-world dataset shows that our model outperforms the state-of-the-art models for knowledge tracing, improving AUC by **4.43%** on average.
+- SAKT首先识别学生过去所有交互的相关性，然后预测学生的表现。比如学习方程前，学生要先掌握加减乘除
+
 
 - 【2019年】代码实现
   - [pytorch版本](https://github.com/arshadshk/SAKT-pytorch)
   - [TensorFlow版本](https://github.com/shalini1194/SAKT)
+
+
+## GKT——知识点图谱化
+
+论文：[解说](https://codeantenna.com/a/g9AMvc3DTl)
+- Graph-based Knowledge Tracing: Modeling Student Proficiency Using Graph Neural Network
+- 基于图的知识追踪：利用图神经网络建模学生熟练度
+
+### 缘由
+
+从数据结构的角度来看，课程作业可以潜在地结构化为**图**。而将图结构的性质这种**先验知识**合并到知识追踪模型中可以提高模型的性能。
+- 而以往的基于深度学习的方法，如DKT，并没有考虑这种性质。以往基于深度学习的方法的体系架构，如RNN，虽然在序列数据上通常表现良好，但不能有效地处理图结构数据。
+
+### GNN
+
+GNN对图形结构数据建模具有相当强的表达能力
+- Battaglia等人[^2]从**关系型归纳偏差**的角度解释了GNN的表达能力，关系型归纳偏差通过结合人类对数据性质的先验知识提高了机器学习模型的样本效率。
+
+然而，在一些知识追踪设置的情况下，图结构本身即关联的知识点和这种关联的强度，并没有明确提供。
+- 尽管研究人员可以启发式地和手动地注释知识点关联，但这个工作需要深厚的领域知识和大量的时间，因此很难预先定义一个在线学习平台中所有知识点的图结构。作者称这个问题为隐式图结构问题。
+- 一个解决方案：使用简单的统计数据来定义图结构，这些统计数据可以自动从数据中导出，比如知识点回答的转移概率。
+- 另一种解决方案：在学习图结构本身的同时并行优化主要任务。
+
+### GKT诞生
+
+基于GNN的知识跟踪方法，即基于图的知识跟踪(GKT)。这种模型将知识跟踪重新表述为GNN中的一个**时间序列**节点级分类问题，能够在考虑潜在知识结构的同时预测作业熟练程度的过程。
+
+这种表述基于三个假设：
+- 课程知识能够被分解成一定数量的知识点。
+- 学生有自己的时序的知识状态，这代表了学生对课程知识点的掌握程度。
+- 课程知识被构造成一个图，它能够影响学生知识状态的更新：如果学生回答了一个概念，无论正确与否，他/她的知识状态不仅会受到所回答的知识点的影响，还会受到其他相关知识点的影响，这些相关知识点在图中以邻居节点的形式表示。
+
+### 模型结构
+
+![](https://codeantenna.com/image/https://img-blog.csdnimg.cn/e1e9d02c3a11449bab3b3de461a6201f.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5Y-26Zyc5p6r,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
 
 
 ## 深度学习方法
