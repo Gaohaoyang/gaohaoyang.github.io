@@ -386,6 +386,12 @@ DKT算法明显优于BKT算法。
 - SAINT: Separated Self-AttentIve Neural Knowledge Tracing
 - The empirical evaluations on a large-scale knowledge tracing dataset show that SAINT achieves the state-of-the-art performance in knowledge tracing with the improvement of AUC by **1.8%** compared to the current state-of-the-art models.
 
+```html
+<object type="application/pdf" data="https://arxiv.org/pdf/2010.12042.pdf"
+           id="review" style="width:100%;  height:800px; margin-top:0px;  margin-left:0px" >
+</object>
+```
+
 ### SAINT模型
 
 论文模型本质就是 transformer，和 SAKT 不同，这里使用了 encoder 和 decoder 两部分
