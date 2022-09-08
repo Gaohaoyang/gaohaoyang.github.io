@@ -356,6 +356,8 @@ You can also use words, to fit your writing style more closely[^note].
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 ```
 
+【2022-9-8】GitHub Page（jekyll服务）不支持在markdown table中嵌入latex公式
+- [How to display Latex cell in markdown table?](https://github.com/orgs/community/discussions/32281)
 
 
 ### 文档嵌入
