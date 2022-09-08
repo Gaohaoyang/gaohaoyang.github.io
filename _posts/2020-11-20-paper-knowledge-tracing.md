@@ -43,6 +43,8 @@ $$
 
 - **知识追踪**是基于学生行为序列进行建模，预测学生对知识的掌握程度。知识追踪是构建**自适应教育系统**的核心和关键。在自适应的教育系统中，无论是做精准推送，学生**学习路径规划**或**知识图谱构建**，第一步都是能够精准预测学生对知识的掌握程度。
 - ![](https://img-blog.csdnimg.cn/20200919221855940.png)
+- 这个学生一共做了50道题(横轴)，在深度知识追踪中，每道**题**关联一个**知识点**，在上面这50道题中，共考察了6个**知识点**，如左边显示，<span style="color:blue">深蓝色</span>表示“Line graph intuition”这个知识点，<span style="color:yellow">橘黄色</span>表示“Slope of a line”这个知识点等等，学生的实际答题情况由图上方的圆圈表示，**圆圈**的颜色表示了这道题考察的是哪个知识点，**实心圆**表示答对，**空心圆**表示答错。图中间的<span style="color:green">蓝绿色</span>网格表示模型的预测结果，由<span style="color:blue">深蓝色</span>到浅绿色表示答对概率越来越高。
+- 具体解释一下，这个学生开始答对了两道红棕色的题(考察知识点“Square roots”)，那么网格前两列，对于知识点“Square roots”模型预测其作答准确率就很绿(答对概率高)，而对于其它没考察的知识点就很蓝(答对概率低)，第三道题做错一道浅蓝色的题，第四到第九道题都是做错了紫色的题，那么对浅蓝色知识点和紫色知识点会预测其答对概率降低。
 
 知识追踪问题可以描述为： 
 - 给定一学生的观测序列  $ x_0 ,……, x_t $ 预测下次表现 $x_{(t+1)}$ ，通常 $ x_t = { qt , at }$,  $x_t={q_t,a_t}$ ，其中
@@ -133,11 +135,42 @@ KT能能估计考试吗？
 
 ## 数据集
 
+
+### 数据集汇总
+
 Knowledge Tracing任务有一些开源的数据集：Synthetic、Assistments、Junyi和Ednet等
 
 EdNet 论文中对比数据集的数据情况
 - ![](https://pic3.zhimg.com/80/v2-79ddbc08ec04f7e8cb628a1cf16eb436_1440w.jpg)
 
+### 数据组织方式
+
+一个学生做了**8**道题，考察了**5**个知识点，如果：
+- 每道题考察**1个**知识点：<span style="color:blue">one-hot</span>
+- 每道题考察**多个**知识点：one-hot 换成 <span style="color:blue">muti-hot</span>
+
+one-hot编码：
+- 数据共考察了M个知识点，所有题目都属于这M个知识点
+- 将输入$x_t$设置为学生交互元组$h_t={q_t,a_t}$的一次one-hot编码，$q_t$表示题目标签，$a_t$表示是否答对(0/1)
+- 对于某道考察了第i个知识点的题
+  - 做<span style="color:green">对</span>时, 向量的第M+i个位置为1，其余位置为0；
+  - 做<span style="color:blue">错</span>时, 第i个位置为1，其余位置为0，向量总长度为2M，因此 $x_t\in{0,1}^{2M}$
+- 为什么将题目标签和是否答对连接起来呢？
+  - 因为**单独表示**会降低性能。
+- one-hot表示比较方便，但是一旦知识点的数量非常大之后，向量就会变得**高维**、**稀疏**。
+  - 解法：压缩感知机，一个针对信号采样的技术，在采样过程中完成了数据的压缩。通过压缩感知算法将高维稀疏的输入数据进行压缩到低维空间($log_2^M$)中
+
+| 题目id | 知识点id	| 作答结果 | 编码向量 |
+|---|---|---|---|
+| 1 |	2 |	0 | \[<span style="color:blue">0,1,0,0,0</span>,<span style="color:green">0,0,0,0,0</span>] |
+| 2 |	4 |	1 | \[<span style="color:blue">0,0,0,0,0</span>,<span style="color:green">0,0,0,1,0</span>] |
+| 3 |	1 |	1 | \[<span style="color:blue">0,0,0,0,0</span>,<span style="color:green">1,0,0,0,0</span>]|
+| 4 |	1 |	1 | \[<span style="color:blue">0,0,0,0,0</span>,<span style="color:green">1,0,0,0,0</span>]|
+| 5 |	2 |	0 | \[<span style="color:blue">0,1,0,0,0</span>,<span style="color:green">0,0,0,0,0</span>]|
+| 6 |	5 |	0 | \[<span style="color:blue">0,0,0,0,0</span>,<span style="color:green">0,0,0,0,1</span>]|
+| 7 |	5 |	1 | \[<span style="color:blue">0,0,0,0,0</span>,<span style="color:green">0,0,0,0,1</span>]|
+| 8 |	3 |	0 | \[<span style="color:blue">0,0,1,0,0</span>,<span style="color:green">0,0,0,0,0</span>]|
+| 8 |	3,5 |	0 | \[<span style="color:blue">0,0,1,0,0</span>,<span style="color:green">0,0,0,0,1</span>]|
 
 ### Assistments
 
@@ -301,9 +334,10 @@ BKT是对学生知识点的一个变化进行追踪，可以知道学生知识�
 
 ### DKT模型
 
-DKT的内容：
+DKT的内容：[img](https://pic1.zhimg.com/80/v2-24f7ac3b103029b722e3e69cc31495ec_1440w.jpg)
+- ![](https://pic1.zhimg.com/80/v2-24f7ac3b103029b722e3e69cc31495ec_1440w.jpg)
 - ![](https://pic1.zhimg.com/80/v2-f83067f9ddb315e9035e75b0feb8978c_1440w.jpg)
- 
+
 其中向量 ![[公式]](https://www.zhihu.com/equation?tex=x_%7Bt%7D) 表示的是用户答题记录的独热编码，由于独热编码太长，太稀疏，所以我们将其降维成小一些的向量 ![[公式]](https://www.zhihu.com/equation?tex=v_%7Bt%7D) ，之后将向量 ![[公式]](https://www.zhihu.com/equation?tex=v_%7Bt+%7D) 输入到循环神经网络中。其中循环神经网络中隐向量 ![[公式]](https://www.zhihu.com/equation?tex=h_%7Bt%7D) 表示的是用户的知识建模，循环神经网络输出向量 ![[公式]](https://www.zhihu.com/equation?tex=y_%7Bt%7D) 表示的是用户接下来做对题目的概率。
 - ![](https://pic2.zhimg.com/80/v2-9057d82db0a9004dcee7386803dc9f65_1440w.png)
 - ![](https://pic2.zhimg.com/80/v2-2cb602dff25c60356d6ab0b494349c99_1440w.png)
@@ -361,6 +395,7 @@ DKT算法明显优于BKT算法。
 
 DKT模型实现，[github](https://github.com/jdxyw/deepKT/blob/master/deepkt/model/dkt.py)
 
+
 ```python
 import torch
 import torch.nn as nn
@@ -380,15 +415,15 @@ class DKT(nn.Module):
         """
         super(DKT, self).__init__()
         self.embed_dim = embed_dim # 嵌入维度
-        self.input_dim = input_dim # 字典大小，问题数*2
+        self.input_dim = input_dim # 字典大小，知识点数*2
         self.hidden_dim = hidden_dim # 隐含层维度
         self.layer_num = layer_num # 层数
-        self.output_dim = output_dim + 1 # 输出维度，问题数
+        self.output_dim = output_dim + 1 # 输出维度，知识点数
         self.dropout = dropout
         self.device = device # 默认cpu，'cpu' or 'cuda:0'
         self.cell_type = cell_type # 基本单元：RNN，LSTM，GRU
         self.rnn = None # 基本单元组件
-        # 问题嵌入矩阵，向量化，最后一个编号作为填充值
+        # 知识点嵌入矩阵，向量化，最后一个编号作为填充值
         self.skill_embedding = nn.Embedding(
             self.input_dim, self.embed_dim, padding_idx=self.input_dim - 1
         )
@@ -455,6 +490,7 @@ class DKT(nn.Module):
         # 直接使用RNN单元
         self.rnn = nn.RNN(input_dim, hidden_dim, layer_dim, batch_first=True, nonlinearity='tanh')
         self.fc = nn.Linear(self.hidden_dim, self.output_dim)
+        # 二分类：sigmoid函数转化成概率
         self.sig = nn.Sigmoid()
 
     def forward(self, x):
