@@ -308,9 +308,13 @@ Levenshtein.jaro_winkler('abc', 'aecfaf') # 0.7
   - 另一类是最小化，包括最小化费用、时间和错误率。在金融行业，我们可以最大化预测股价的正确率，也可以最小化费用、最小化时间和错误率。
 - 当然，我们可以同时最大化盈利，最小化费用和时间。所以通常在很多的优化问题中，这两种任务可以组合起来出现在同一个问题框架下，这就是对于目标函数的定义。
 
-## 凸函数
+## 凸优化
 
-- 【2021-5-31】[理解凸性:为什么梯度下降适用于线性回归](https://www.toutiao.com/i6817344123704443404)
+
+### 凸函数
+
+
+【2021-5-31】[理解凸性:为什么梯度下降适用于线性回归](https://www.toutiao.com/i6817344123704443404)
 
 首先，通过凸集和凸函数定义凸度。凸集的定义如下:
 - ![理解凸性:为什么梯度下降适用于线性回归](https://p3-tt.byteimg.com/origin/pgc-image/9eda7c3599bd4983babdbc0edd64044c?from=pc)
@@ -326,39 +330,63 @@ Levenshtein.jaro_winkler('abc', 'aecfaf') # 0.7
 - ![理解凸性:为什么梯度下降适用于线性回归](https://p3-tt.byteimg.com/origin/pgc-image/edbe443661144544ae4ef6fda5fd9a42?from=pc)
 - （左）具有唯一优化器的凸函数，（中）非凸函数，（右）具有多个优化器的凸函数
  
-我们可以看到中间的图不是凸的，因为当我们绘制连接图上两个点的线段时，有一些点（x，f（x））大于f（x）上对应的点。
+可以看到中间的图不是凸的，因为当我们绘制连接图上两个点的线段时，有一些点（x，f（x））大于f（x）上对应的点。
  
 左边和右边的图形都是凸的。不管你在这些图上画什么线段，这个线段总是在函数图的上面或者等于函数图。
 
 梯度下降以最简单的形式没有找到全局最小化器。
+- ![](https://p1-tt.byteimg.com/origin/pgc-image/1a67811e997e4f41a6bc035aeddf93d0?from=pc)
 
-![](https://p1-tt.byteimg.com/origin/pgc-image/1a67811e997e4f41a6bc035aeddf93d0?from=pc)
+注：y=wx+b 既是凸函数，又是凹函数
+
+### 神经网络损失函数
+
+神经网络损失函数是凸函数吗？不是
+
+要点
+- 全局最优不一定是好的解，局部最优不一定是差的解
+- NN中设计得激活函数是为了引入非线性变换，凸不凸都可以；
+  - NN不凸，是多个隐藏层导致的，即使每一层激活函数都是凸的，目标函数依旧是非凸问题。
+- 激活函数设计为凸就可以得到凸的优化目标，然而NN不凸，是多个隐藏层导致的，即使每一层激活函数都是凸的，目标函数依旧是非凸问题
+- 凸的NN，以前也有人做过。比如：Yoshua Bengio的Convex Neural Networks，还有 Convex Deep Learning via Normalized Kernels。
+
+activation 是凸函数，多层之后好多凸函数的composition 也不一定是凸的。
+- $f(x)=e^{-x}f(x)=e^{-x}$
+
+多层神经网络，大部分局部极小值都在底部 ，已经非常接近全局最小值
+- [img](https://pica.zhimg.com/80/f301045327715acec1a67db7848d7171_1440w.jpg?source=1940ef5c) ![](https://pica.zhimg.com/80/f301045327715acec1a67db7848d7171_1440w.jpg?source=1940ef5c)
+
+deep learning是在一个非常**高维**的世界里做**梯度下降**。这时的 local minimum 很难形成，因为局部最小值要求函数在所有维度上都是局部最小。更实际得情况是，函数会落到一个saddle-point上
+- [img](https://pica.zhimg.com/80/3275d4735030d2d4130a15435f42eef4_1440w.jpg?source=1940ef5c) ![](https://pica.zhimg.com/80/3275d4735030d2d4130a15435f42eef4_1440w.jpg?source=1940ef5c)
+- saddle-point上会有一大片很平坦的平原，让梯度几乎为0，导致无法继续下降。反倒是local/global minimum的问题，大家发现其实不同的local minimum其实差不多（反正都是over-fitting training data，lol）
+
+作者：[Filestorm](https://www.zhihu.com/question/38549801/answer/77047264)
 
 ### 高维优化为什么难？
 
 【2022-5-18】[关于神经网络，一个学术界搞错了很多年的问题](https://mp.weixin.qq.com/s/i_tldPMzYDUZwdXDCJTjPw)
 
 人们普遍认为较大的神经网络中包含很多**局部极小值**（local minima），使得算法容易陷入到其中某些点。这种看法持续二三十年，至少数万篇论文中持有这种说法。比如，如著名的Ackley函数 。对于基于梯度的算法，一旦陷入到其中某一个局部极值，就很难跳出来了。
-- ![](https://zhengwen.aminer.cn/LDDRQt9JmGgtf)
+- [img](https://zhengwen.aminer.cn/LDDRQt9JmGgtf) ![](https://zhengwen.aminer.cn/LDDRQt9JmGgtf)
 
 2014年，一篇论文《Identifying and attacking the saddle point problem in high-dimensional non-convex optimization》，指出**高维优化问题中根本没有那么多局部极值**。作者依据统计物理，随机矩阵理论和神经网络理论的分析，以及一些经验分析提出高维**非凸**优化问题之所以困难，是因为存在大量的`鞍点`（梯度为零并且Hessian矩阵特征值有正有负）而不是局部极值。
-- ![](https://zhengwen.aminer.cn/B2KCcVJQiRvNk)
+- [img](https://zhengwen.aminer.cn/B2KCcVJQiRvNk) ![](https://zhengwen.aminer.cn/B2KCcVJQiRvNk)
 
 `鞍点`（saddle point)如下图（来自wiki）和`局部极小值`
 - 相同点：在该点处的梯度都等于零
 - 不同点：在鞍点附近Hessian矩阵有正的和负的特征值，即是**不定**的，而在局部极值附近的Hessian矩阵是**正定**的。
 鞍点附近，基于梯度的优化算法（几乎目前所有的实际使用的优化算法都是基于梯度的）会遇到较为严重的问题，可能会长时间卡在该点附近。在鞍点数目极大的时候，这个问题会变得非常严重
-- ![](https://zhengwen.aminer.cn/JZpNdRuLbXRMB)
+- [img](https://zhengwen.aminer.cn/JZpNdRuLbXRMB) ![](https://zhengwen.aminer.cn/JZpNdRuLbXRMB)
 
 造成神经网络难以优化的一个重要（乃至主要）原因是存在大量鞍点。造成局部极值这种误解的原因在于，人们把低维的直观认识直接推到高维的情况。
 
-#### 知识点
+### 鞍点
 
 - `鞍点`也是`驻点`，鞍点处的梯度为零，在一定范围内沿梯度下降会沿着鞍点附近走，这个区域很平坦，梯度很小。
 - 优化过程不是卡在鞍点不动了(像人们以为的局部极值那样)，而是在**鞍点附近梯度很小**，于是变动的幅度越来越小，loss看起来就像是卡住了。但是和local minima的差别在于，如果运行时间足够长，SGD一类的算法是可以走出鞍点附近的区域的（看下面的两个链接）。由于这需要很长时间，在loss上看来就像是卡在local minima了。然而，从一个鞍点附近走出来，很可能会很快就进入另一个鞍点附近了。
 - 直观来看增加一些扰动，从下降的路径上跳出去就能绕过鞍点。但在高维的情形，这个鞍点附近的平坦区域范围可能非常大。此外，即便从一个鞍点跳过，这个跳出来的部分很可能很快进入另一个鞍点的平坦区域—— 鞍点的数量(可能)是指数级的。
 
-#### 遗传算法和进化算法（EA）
+### 遗传算法和进化算法（EA）
 
 先说优点，EA通常是不依赖于函数值的，而只依赖于点之间的大小关系，comparison-based，这样进行迭代的时候不会受到梯度太小的影响。看起来似乎是一个可行的路子？下面说一下缺点。
 - 先说CMA-ES， 这是效果最好最成功的进化算法之一，尤其是在ill-conditioned 问题和non-separable 问题上。CMA-ES （Covariance Matrix Adaptation-Evolution Strategy）和EDA (Estimation of Distribution Algorithm)的特点是 model-based，他们从一个正态分布采样产生一组新解，使用较好的一部分（一半）新解更新分布的参数（mean， cov或对应的Cholesky factor，对CMA-ES来说还有一个独立步长）。CMA-ES和EDA这样基于分布的算法大体上都能从information geometric optimization （IGO） 用natural gradient 得到。IGO流的收敛性和算法本身在一类问题上的收敛性都不是问题，Evolution path更是动量的类似。然而这些方法最大的问题在于，由于依赖随机采样，当维度很高的时候采样的空间极大，需要极多的样本来逐渐估计cov ()量级），采样产生新解的时候的复杂度是(不低于）)。EA的论文普遍只测试30,50-100维，500-1000维以上的极少，即便是各种large scale的变种也大多止步于1000。对于动辄 量级的神经网络优化，基本是不可行的。
