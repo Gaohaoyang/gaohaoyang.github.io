@@ -730,6 +730,13 @@ _layout/post.html添加插件
 
 - [如何加百度地图插件](http://www.shejidaren.com/tian-jia-baidu-di-tu-dai-ma.html)
 
+### 博客导流公众号
+
+【2022-9-10】openwrite提供的[博客导流公众号工具](https://openwrite.cn/guide/readmore/readmore.html)
+- 整合后的博客文章内容将自动隐藏一半，同时显示“阅读全文”按钮(重点：虽然隐藏，但只是视觉上的，并不影响SEO)：
+- ![](https://openwrite.cn/readmore/readmore-5.png)
+- ![](https://openwrite.cn/images/202206/readmore/1654941000718.png)
+
 ### Markdown写作
 
 - 制作文档
