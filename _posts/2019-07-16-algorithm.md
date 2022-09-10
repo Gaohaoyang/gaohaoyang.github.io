@@ -956,6 +956,47 @@ int main(){
 - 折半查找（迭代）
 - 归并查找（迭代）
 
+### 阿克曼函数
+
+阿克曼(Ackermann)函数是一种增长"极快"的函数.
+- [img](http://ddrvcn.oss-cn-hangzhou.aliyuncs.com/2019/11/vQnYrm.png) ![](http://ddrvcn.oss-cn-hangzhou.aliyuncs.com/2019/11/vQnYrm.png)
+- 比如如果输入为4,2,这个数字大于全世界的原子数量总和.
+
+阿克曼(Ackmann)函数A(m，n)中，m，n定义域是非负整数(m<=3,n<=10)，函数值定义为：
+- akm(m,n) = n+1;         (m=0时)
+- akm(m,n) = akm(m-1,1);  (m>0,n=0时)
+- akm(m,n) = akm(m-1,akm(m, n-1)); （m,n>0时)
+
+
+```c++
+#include <iostream>
+
+using namespace std;
+long int answer = 0;
+ 
+int Ackermann(int m,int n){// 递归函数
+	if (m == 0){
+		answer = n + 1;
+		return answer;
+	}
+	if (m != 0 && n == 0){
+		answer = Ackermann(m - 1,1);
+		return answer;
+	}
+	if (m != 0 && n != 0){
+		answer = Ackermann(m - 1,Ackermann(m,n-1));
+		return answer;
+	}
+}
+ 
+int main(){
+	cout<<"阿克曼函数测试, 请输入m和n"<<endl;
+	int m,n;
+	cin >> m >> n;
+	cout << Ackermann(m,n);
+	return 0;
+}
+```
 
 ## 树
 
