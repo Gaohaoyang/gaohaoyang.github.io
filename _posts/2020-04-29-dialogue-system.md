@@ -3137,6 +3137,13 @@ sh solr_script/anyq_solr.sh solr_script/sample_docs
 - 浏览器或者Postman中，可以调用接口查看调用结果
   - 地址：localhost:8999/anyq?question=需要使用什么账号登录
 
+### 异步聊天 nonebot2
+
+【2022-9-13】[跨平台Python异步聊天机器人框架，支持QQ、飞书、钉钉等渠道](https://www.toutiao.com/article/7142459487696208422)
+- NoneBot2 是一个现代、跨平台、可扩展的 Python 聊天机器人框架，它基于 Python 的类型注解和异步特性，能够为你的需求实现提供便捷灵活的支持
+- [开源地址](https://github.com/nonebot/nonebot2)
+- [开发教程](https://nb2.baka.icu/docs/tutorial/create-project)
+
 
 ## 评估方法
 
