@@ -203,8 +203,6 @@ one-hot编码：
 - 当前各种算法效果排名
 - <span style="color:red"> $ SAINT+ > SAINT > 	PEBG+DKT > PEBG+DKVMN > DKVMN > SAKT > DKT > GIKT $ </span>
 
-<iframe src="https://paperswithcode.com/sota/knowledge-tracing-on-ednet">
-
 
 ## 传统方法
 
