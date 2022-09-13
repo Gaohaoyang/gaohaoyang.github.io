@@ -15,7 +15,9 @@ tags: jekyll markdown 插件 github gitee 码云 latex 公式
 - 使用jekyll搭建github静态页面
 - 汇总各类小技巧
 
-## markdown编辑环境
+## 笔记软件
+
+### markdown编辑环境
 
 - 【2021-3-24】[Typora+PicGo+Gitee笔记方案](https://blog.csdn.net/lin455989875/article/details/104621967)
 - [Typora+PicGo+Github/Gitee搭建免费稳定的图床](https://www.jianshu.com/p/a1e2cf01e05f)，github图床设置，gitee
@@ -25,6 +27,38 @@ tags: jekyll markdown 插件 github gitee 码云 latex 公式
    - [PicGo](https://molunerfinn.com/PicGo/)实现自动上传图片并返回markdown格式的图片url，这是自动上传的，也就是在Typora中插入图片就自动帮你上传替换图片的url，对于我们用户是透明的，十分舒服。
      - 覆盖的图床有8个平台：SM.MS图床、腾讯云COS、微博图床、GitHub图床、七牛图床、Imgur图床、阿里云OSS、又拍云图床
 - [原文链接](https://blog.csdn.net/lin455989875/article/details/104621967)
+
+### obsidian
+
+【2022-9-13】笔记软件：[obsidian](https://obsidian.md/)
+- The human brain is non-linear: we jump from idea to idea, all the time. Your second brain should work the same.
+- In Obsidian, making and following connections is frictionless. Tend to your notes like a gardener; at the end of the day, sit back and marvel at your own knowledge graph.
+- The graph is your knowledge at a glance. Explore, observe, and stay motivated. With group, filter, and display options, see things your way. Local graph shows connections around you. Get inspired while writing.
+- ![](https://obsidian.md/images/screenshot.png)
+
+[聊聊Zettelkasten如何构建第二大脑](https://cubox.pro/share/eSnVcz)
+打开尘封已久的第二大脑
+
+一个人常常有两种焦虑：
+- 一种是**事情太多，处理不过来**，看不清这些事情背后的本质和彼此间的联系，无法判断**轻重缓急**，因此在做某个具体事的时候，脑子里总还想着另一个更紧急、更糟心的事，没办法静下心来，专注解决当下的问题，导致重要的事情处理不好，又产生一连串的后续问题，陷入事务处理的恶性循环。到最后干脆交给时间去解决，随大流了。
+- 另一种焦虑是**信息过载**，大量的信息无从用起，一方面花了大量的时间，主动或者被动的看了听了读了大量的信息，另一方面一旦到要用到的时候要么一脸懵逼，要么总是感觉似曾相识，但就是想不起来，还得继续重复去造轮子。
+
+知识焦虑
+
+这两种焦虑都是缺少**整体观**导致的，大脑不擅于记忆那些陈年旧事，他擅于在多个思维之间**跳跃**思考，擅于发现多个信息背后的**联系**，也擅于聚焦在某个问题上进行**深入思考**。在同一个时间片内只有一个任务可以得到处理。所以，我们要把大脑的特性发挥好，把大脑不擅长的事情交给系统去做，交给**第二大脑**去做。当我们的大脑开始思考、联想、专注于当下解决问题时，我们的第二大脑能快速定位、实时提供所需要的经验积累、认知积累，提供所有事项的安排优先级，让我们自己的大脑放下焦虑，全身心聚焦在当下的觉知上，这种状态才是大脑的最佳状态。很多难题、创意的突破，很多美好体验、感受的安利都是大脑在这种状态下涌现的。
+
+所以，我们需要一个上帝视角，即整体观，安放好所有的事项，让我们的心无挂碍。安放好所有过往的认知和思想，让大脑专注于当下要解决的问题，激荡涌现出新的认知，释放出活力和创造力。在整体观视角下，鸟瞰我们的思维所在的位置，鸟瞰我们在做的事在所有待办事项中的位置，无论是思想、认知、经验、重要事项还是各类琐事，都给他们一个安放的位置，随用随调，按需所取，随心所欲。这样我们的心才安定，行动起来才能游刃有余。我们需要设计一个可以信任的系统来处理这些，只有当你信任你的系统，只有当你真的看到一切都会被处理好时，你的大脑才会放开，让你专注在当下的事情上。
+
+上帝视角鸟瞰知识
+- ![](https://image.cubox.pro/article/2022040618154888366/98025.jpg)
+
+简单概括一下：
+- 1、大脑需要对存量信息和经验按需提取，减少思维切换衔接的时间消耗。
+- 2、大脑需要排除对未完成事项的顾虑和干扰，专注在当下。而这些都可以通过第二大脑的设计和配合来完成。
+
+想象一下，你的第二大脑就像是你的化身，任何时候，你把想法通过笔记的方式记录下来，就像是把思想传递给了你的化身，当你开始思考时，不在从零开始，而是和你的化身进行对话，他记录了你过去所有的认知和经验，你和他进行讨论和思考，过往的经验和当下的认知交汇激荡，新的认知不断涌现，这是一种多么奇妙的感觉，仿佛自己的大脑连接到了一个新世界，而这些都是你本该拥有的，只是被记忆和大脑的各类干扰尘封已久！
+
+> Zettelkasten第二大脑 = 滑箱结构（Slipbox） + 工作流程（Workflow）
 
 
 ## 技巧汇总
