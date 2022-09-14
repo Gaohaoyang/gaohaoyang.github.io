@@ -66,6 +66,7 @@ tags: jekyll markdown 插件 github gitee 码云 latex 公式
 - 注意：千万不要在文本内容里嵌套双括号（代码区也不行）！会造成编译错误！
 
 ### jupyter notebook
+
 - 【2020-02-11】[Jekyll中支持Jupyter Notebook](https://www.jianshu.com/p/2857dba1c565)
 
 **方法一** 转成markdown文件
@@ -184,7 +185,6 @@ You can also use words, to fit your writing style more closely[^note].
     Named footnotes will still render with numbers instead of the text but allow easier identification and linking.  
     This footnote also has been made with a different syntax using 4 spaces for new lines.
 ```
-
 
 ### Jekyll admin插件
 
@@ -392,7 +392,10 @@ You can also use words, to fit your writing style more closely[^note].
 
 【2022-9-8】GitHub Page（jekyll服务）不支持在markdown table中嵌入latex公式
 - [How to display Latex cell in markdown table?](https://github.com/orgs/community/discussions/32281)
-
+- There is no straightforward solution as Jekyll does not support that out of the box but you can get it to work:
+1. Change your Pages source to GitHub Actions (this is in beta)
+1. Add a "vanilla" Jekyll workflow to your repository ([example](https://github.com/actions/starter-workflows/blob/main/pages/jekyll.yml))
+1. Use this plugin: [jekyll-spaceship](https://github.com/jeffreytse/jekyll-spaceship)
 
 ### 文档嵌入
 
