@@ -14,6 +14,8 @@ mathjax: true
 
 # 总结
 
+- 【2022-5-11】[Google Keynote (Google I/O ‘22) ](https://www.youtube.com/watch?v=nP-nMZpLM1A)，Google I/O用多模态唤醒语音设备，不再需要重复说唤醒词，还能识别说话人的表述状态，没说完就继续等待，第33分钟
+  - [2022 谷歌 I/O 大会来了，我们为你挑了 10 个重点](https://36kr.com/p/1737776511679753)
 - 【2020-01-23】[哈工大张伟男：任务型对话系统](https://www.jiqizhixin.com/articles/2020-01-31-7)
 - 【2021-3-29】[开放领域问答梳理系列](https://zhuanlan.zhihu.com/p/360572095), 两阶段系统：基于信息检索（information Retrieval， IR）+机器阅读理解（Machine Reading Comprehension， MRC）（retriever-reader）的开放领域问答系统
   - ![](https://pic3.zhimg.com/80/v2-4c8be13f06c586b374df8783620b677a_1440w.jpg)
