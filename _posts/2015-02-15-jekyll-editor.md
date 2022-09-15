@@ -151,6 +151,8 @@ print "hello"
 
 #### 文字颜色
 
+颜色色阶选取[参考](https://htmlcolorcodes.com/zh/yanse-ming/), 包含常用颜色：红、粉、橙、黄、紫、绿、蓝、白、灰
+
 ```html
 <font color='green'>彩色字体</font>
 This is *red红色*{: style="color: red"} 去掉*后颜色失效
@@ -164,6 +166,20 @@ This is <p style="color: red">written in red</p>.
 - This is *red红色*{: style="color: red"}
 - This is <span style="color: red">written in
 red</span>.
+
+  <h1 style="color:IndianRed">Indian Red Title Text</h1>
+  <p style="color:SlateGray">Slate gray paragraph text</p>
+
+[改变Markdown中文字的颜色](https://codeantenna.com/a/Ulr5tITBGx)
+
+$\color{#4285f4}{更}
+\color{#ea4335}{丰}
+\color{#fbbc05}{富}
+\color{#4285f4}{的}
+\color{#34a853}{颜}
+\color{#ea4335}{色}$
+
+
 
 #### 脚注
 
