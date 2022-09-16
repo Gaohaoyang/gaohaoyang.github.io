@@ -1022,9 +1022,9 @@ func main() {
 ```go
 package main 
 import (
-  "fmt"  
- "strings" 
-) 
+  "fmt"
+  "strings" 
+)
 
 func main() {    
     greetings :=  []string{"Hello","world!"}    
@@ -1035,9 +1035,82 @@ func main() {   
 - 前缀：strings.HasPrefix("prefix", "pre")
 - 后缀：strings.HasSuffix("suffix", "fix")
 
-### 字符串操作
+### 字符串格式化
+
+【2022-9-16】[fmt.Sprintf 格式化字符串](https://www.runoob.com/go/go-fmt-sprintf.html)
+
+sprintf
+- 格式化样式：字符串形式，格式化符号以 % 开头， %s 字符串格式，%d 十进制的整数格式。
+- 参数列表：多个参数以逗号分隔，个数必须与格式化样式中的个数一一对应，否则运行时会报错。
+
+| 格式 | 描述 | 示例 |
+|---|---|---|
+| %v |按值的本来值输出 | {1 2} |
+| %+v |在基础上，对结构体字段名和值进行展开 | {x:1 y:2} |
+| %#v |输出Go 语言语法格式的值 | main.point{x:1, y:2} |
+| %T |输出Go 语言语法格式的类型和值 | main.point |
+| %% |输出%本体 | |
+| %b |整型以二进制方式显示 | |
+| %o |整型以八进制方式显示 | |
+| %d |整型以十进制方式显示 | |
+| %x |整型以十六进制方式显示 | |
+| %X |整型以十六进制、字母大写方式显示 | |
+| %U |Unicode字符 | |
+| %f |浮点数 | |
+| %p |指针，十六进制方式显示 | |
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+)
+
+type point struct {
+    x, y int
+}
+
+func main() {
+    p := point{1, 2}
+    fmt.Printf("%v\n", p) // {1 2}
+    fmt.Printf("%+v\n", p) // {x:1 y:2}
+    fmt.Printf("%#v\n", p) // main.point{x:1, y:2}
+    fmt.Printf("%T\n", p) // main.point
+    fmt.Printf("%t\n", true)
+    fmt.Printf("%d\n", 123)
+    fmt.Printf("%b\n", 14)
+    fmt.Printf("%c\n", 33)
+    fmt.Printf("%x\n", 456)
+    fmt.Printf("%f\n", 78.9)
+    fmt.Printf("%e\n", 123400000.0)
+    fmt.Printf("%E\n", 123400000.0)
+    fmt.Printf("%s\n", "\"string\"")
+    fmt.Printf("%q\n", "\"string\"")
+    fmt.Printf("%x\n", "hex this")
+    fmt.Printf("%p\n", &p)
+    fmt.Printf("|%6d|%6d|\n", 12, 345)
+    fmt.Printf("|%6.2f|%6.2f|\n", 1.2, 3.45)
+    fmt.Printf("|%-6.2f|%-6.2f|\n", 1.2, 3.45)
+    fmt.Printf("|%6s|%6s|\n", "foo", "b")
+    fmt.Printf("|%-6s|%-6s|\n", "foo", "b")
+    s := fmt.Sprintf("a %s", "string")
+    fmt.Println(s)
+    fmt.Fprintf(os.Stderr, "an %s\n", "error")
+}
+```
+
+
+### 字符串操作大全
 
 strings使用方法
+- Contains* 包含
+- Count 技术
+- HasPrefix，HasSuffix 前缀、后缀判断
+- Index* 找子串
+- Join 连接
+- Split 分割
+- Replace 替换
 
 ```go
 package main
@@ -1051,10 +1124,18 @@ func main() {
     p(s.ContainsAny("test", "e")) // e&s(且),e|s(或)
     p(s.ContainsRune("我爱中国", '我'))  //字符匹配，注意是单引号！
     p(s.EqualFold("Go", "go")) //判等，忽略大小写
+	// Fields 去除s字符串的空格字符，并按照空格分割返回slice
+	fmt.Println(strings.Fields("  I love you   !  ")) // 返回 ["I","love","you","!"]
     p(s.Fields("a b c")) //字符串变列表["a" "b" "c"]
     p("Count:     ", s.Count("test", "t")) //2 计数
     p("HasPrefix: ", s.HasPrefix("test", "te"))// true 前缀判断
     p("HasSuffix: ", s.HasSuffix("test", "st"))// true 后缀判断
+    // Contains 字符串s中是否包含substr，返回bool值
+	fmt.Println(strings.Contains("seafood", "foo"))
+	fmt.Println(strings.Contains("seafood", "bar"))
+    // Index 在字符串s中查找substr所在的位置，返回位置值，找不到返回-1
+	fmt.Println(strings.Index("zhaoxu", "ox"))
+	fmt.Println(strings.Index("zhaoxu", "oocc"))
     p("Index:     ", s.Index("test", "e"))// 1 查找子串
     p("Index:     ", s.IndexAny("我是中国人", "中"))// 返回任意一个
     p("Index:     ", s.IndexRune("我是中国人", '中'))// 字符
@@ -1070,10 +1151,18 @@ func main() {
 		return r
 	}
     fmt.Println(strings.Map(rot13, "'Twas brillig and the slithy gopher...")) //相当于python中的map
+    // Join 字符串连接，将slice a通过sep连接
+	fmt.Println(strings.Join([]string{"I", "Love", "You"}, "-->"))
     p("Join:      ", s.Join([]string{"a", "b"}, "-")) //a-b slice连接成字符串
+    // Repeat 重复s，count次，返回重复的字符串
+	fmt.Println(strings.Repeat("Love", 5))
     p("Repeat:    ", s.Repeat("a", 5)) // aaaaa 重复
     p("Replace:   ", s.Replace("foo", "o", "0", -1)) //f00 全部替换
     p("Replace:   ", s.Replace("foo", "o", "0", 1))//f0o 1次替换
+    p("Replace:   ", s.Replace("foo", "o", "0", 2))//f0o 2次替换，从前往后逐个替换
+    // Split 把字符串按照sep分割，返回分割后的slice
+	fmt.Println(strings.Split("I love you", " ")) // 按空格分隔字符串
+	fmt.Println(strings.Split(" zxy ", ""))
     p("Split:     ", s.Split("a-b-c-d-e", "-"))//[a b c d e] string转array（slice？）
     fmt.Printf("%qn", strings.SplitAfter("/home/m_ta/src", "/")) //["/" "home/" "m_ta/" "src"]
     fmt.Printf("%qn", strings.SplitAfterN("/home/m_ta/src", "/", 2)) //["/" "home/m_ta/src"]
@@ -1083,6 +1172,7 @@ func main() {
     fmt.Println(strings.ToTitle("loud noises"))
     p("ToLower:   ", s.ToLower("TEST"))//test 小写
     p("ToUpper:   ", s.ToUpper("test"))//TEST 大写
+    // 截断
     fmt.Printf("[%q]", strings.Trim(" !!! Achtung !!! ", "! ")) // ["Achtung"]
     fmt.Printf("[%q]", strings.TrimLeft(" !!! Achtung !!! ", "! ")) // ["Achtung !!! "]
     fmt.Println(strings.TrimSpace(" tn a lone gopher ntrn")) // a lone gopher
@@ -1113,6 +1203,55 @@ for _, v := range stu {
     fmt.Println(v)
 }
 ```
+
+### 字符串替换
+
+字符串替换
+- sprintf
+  - 格式化样式：字符串形式，格式化符号以 % 开头， %s 字符串格式，%d 十进制的整数格式。
+  - 参数列表：多个参数以逗号分隔，个数必须与格式化样式中的个数一一对应，否则运行时会报错。
+- os.Expand：参考[go模板替换](https://blog.csdn.net/puss0/article/details/120897665)
+- 正则表达式
+
+```go
+package main
+
+import (
+    "fmt"
+    "io"
+    "os"
+)
+
+func main() {
+    // ======= 方法一 ========
+    // go 中格式化字符串并赋值给新串，使用 fmt.Sprintf
+    // %s 表示字符串
+    var stockcode="000987"
+    var enddate="2020-12-31"
+    var url="Code=%s&endDate=%s"
+    var target_url=fmt.Sprintf(url,stockcode,enddate)
+    fmt.Println(target_url)
+    // 另外一个实例，%d 表示整型
+    const name, age = "Kim", 22
+    s := fmt.Sprintf("%s is %d years old.\n", name, age)
+    io.WriteString(os.Stdout, s) // 简单起见，忽略一些错误
+    // ======== 方法二 ========
+    var config = `
+    app.name = ${appName}
+    app.ip = ${appIP}
+    app.port = ${appPort}
+    `
+    var dev = map[string]string{
+        "appName": "my_app",
+        "appIP":   "0.0.0.0",
+        "appPort": "8080",
+    }
+    // config 字符串模板（占位符 ${x},其中{}是可以省略），dev是变量字典，通过匿名函数来实现替换
+    s := os.Expand(config, func(k string) string { return dev[k] })
+	fmt.Println(s)
+}
+```
+
 
 - 数组的长度是其类型的一部分，因此数组不能改变大小——怎么办？用slice！
 - 数组在Go语言中很重要，应该需要了解更多的信息。
