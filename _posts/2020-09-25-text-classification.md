@@ -3,7 +3,7 @@ layout: post
 title:  "文本分类-Text Classification"
 date:   2020-09-25 14:52:00
 categories: 深度学习
-tags: 文本分类 负采样 fasttext kaggle 增强
+tags: 文本分类 负采样 fasttext kaggle 增强 层次分类
 excerpt: NLP子领域文本分类知识汇总
 author: 鹤啸九天
 mathjax: true
@@ -1221,6 +1221,16 @@ TextGCN：一种文本分类的图神经网络方法。第一次将整个语料�
   - Capsule Network被证明在多标签迁移的任务上性能远超CNN和LSTM，但这方面的研究在18年以后就很少了。
   - TextGCN则可以学到更多的global信息，用在半监督场景中，但碰到较长的需要序列信息的文本表现就会差些
 
+### 层次分类 HTC
+
+【2022-9-19】[<层次文本分类>Seq2Tree：用seq2seq方式解决HTC问题](https://zhuanlan.zhihu.com/p/558718402)
+- 论文：[Constrained Sequence-to-Tree Generation for Hierarchical Text Classification](https://arxiv.org/abs/2204.00811)
+
+大部分模型不考虑层次文本分类的路径问题，基本上都是直接进行标签预测，导致可能出现上下层label冲突的问题
+
+用T5-Base作为backbone来实现「seq2Tree」，主要做了两部分的设定和改造：
+- 「DFS based label linearization」: 这部分主要是为了适配seq2seq，「对样本的gold label进行序列化改造」。具体就是提出了一个基于DFS的标签线性化方法，因为一般层次标签体系都是树，而用DFS可以保证能够访问到同一条path内从上到下的所有节点。
+- 「Seq2Tree with Constrained Decoding」: 就是在decoding的时候，利用层次标签体系和当前步预测出来的label「对下一步的label的值域进行限制」，避免下一个预测出来的label不在可能的路径上。
 
 # 经验总结
 
