@@ -3,7 +3,7 @@ layout: post
 title:  "文本生成&评价-Text Generation and Evaluation"
 date:   2020-04-28 21:39:00
 categories: 自然语言处理
-tags: 深度学习 NLP GAN Seq2seq 对话系统 文本评价 BLEU 多模态 好未来 paraphrase 复述 gpt
+tags: 深度学习 NLP GAN Seq2seq 对话系统 文本评价 BLEU 多模态 好未来 paraphrase 复述 gpt VAE vae 扩散
 excerpt: 深度学习在NLP子领域——文本生成的应用汇总，如seq2seq、GAN系列
 author: 鹤啸九天
 mathjax: true
@@ -111,6 +111,62 @@ mathjax: true
 - 右边是一个比较新的数据集，提供了数据结构化数据，并规定了**逻辑表达式**。我们根据给定的逻辑表达式产生对应的描述。
 
 【2022-7-16】[腾讯刘天宇：可控、可靠的数据到文本生成技术](https://www.toutiao.com/article/7120933821176037888), 聚焦data2text任务
+
+
+## 生成模型
+
+生成模型是什么？
+- 从一批样本数据 $X$ 中学习分布 $p(X)$ ，这样就能学习到样本外的数据。用这个分布 $p(X)$ 就能随意采样，获得新的生成结果
+- 然而，这样的分布 $p(X)$ 无法直接获取，只能通过一个隐变量 $Z$ 来生成 $X$, 假设 $Z$ 服从正态分布，随便取一个 $Z$，用 $Z$ 和 $X$ 的关系计算 $p(X)$ 。
+- 公式：$p(X)=\sum_{Z} p(X \mid Z) p(Z)$
+- $p(X \mid Z)$ 是后验分布，$p(Z)$ 是先验分布 
+
+## VAE：Variational AutoEncoder
+
+VAE和GAN一样，都是从隐变量 Z 生成目标数据 X 。
+- 假设**隐变量**服从某种常见的**概率分布**（比如`正态分布`）
+- 然后希望训练一个模型$X=g(Z)$，将原来的概率分布映射到训练集的概率分布，也就是**分布变换**。
+- 注意，<span style='color=red'>VAE和GAN的本质都是**概率分布**的映射</span>。
+- ![img](https://pic4.zhimg.com/80/v2-c542a560b9c83f6a41ca8dc6c4775a63_1440w.jpg)
+- 先用某种分布随机生成一组隐变量，然后这个隐变量会经过一个生成器生成一组目标数据。VAE和GAN都希望这组数据的分布 $\hat{X}$ 和目标分布 $X$ <span style='color=blue'>尽量接近</span>
+
+然而这种方法本质上难以奏效，因为“尽量接近”并没有一个确定的关于 $X$ 和 $\hat{X}$ 的相似度的评判标准。
+- 难在必须去猜测“<span style='color=blue'>它们的分布相等吗</span>”这个问题，而缺少真正interpretable的价值判断。KL散度y不行，因为KL散度是针对两个已知的概率分布求相似度的，而 $\hat{X}$ 和 $X$ 的概率分布目前都是未知。
+
+GAN直接把这个度量标准也学过来就行，相当生猛。但问题是依然不可解释（interpretable），非常不优雅。
+- VAE的做法就优雅很多了，先来看VAE是怎么做的，理解了VAE以后再去理解Diffussion就很自然了。
+
+### VAE核心 
+
+VAE的核心：不仅假设 $p(Z)$ 是正态分布，而且假设每个 $p(X_k \mid Z)$  也是正态分布。
+- ![](https://pic3.zhimg.com/80/v2-2d3bc38e5252d002fc03bba90a3d4ca2_1440w.jpg)
+- 均值和方差的计算本质上都是encoder。VAE其实利用了两个encoder去分别学习均值和方差。
+- $Z_k$ 是专属于（针对于）$X_k$  的隐变量，那么和 $\hat{X}_k$  本身就有对应关系，因此右边的蓝色方框内的“生成器”是一一对应的生成。
+
+为什么VAE要在AE前面加一个Variational?
+- 希望方差能够持续存在，从而带来噪声！
+
+![](https://pic2.zhimg.com/80/v2-0a94951a280d38af6b69bbfb01ec701d_1440w.jpg)
+
+VAE的本质：
+- VAE在AE的基础上对均值的encoder添加**高斯噪声**（正态分布的随机采样），使得decoder（就是右边那个生成器）有噪声鲁棒性；为了防止噪声消失，将所有 p(Z \mid X) 趋近于标准正态分布，将encoder的均值尽量降为 0，而将方差尽量保持住。这样当decoder训练的不好的时候，整个体系就可以降低噪声；当decoder逐渐拟合的时候，就会增加噪声。
+- 和GAN很像！VAE是**生成对抗encoder**
+
+### Diffusion Model（扩散模型，DM）
+
+【2022-9-20】[如何通俗理解扩散模型？](https://zhuanlan.zhihu.com/p/563543020)
+
+本质上说，Diffusion就是VAE的升级版。
+- ![](https://pic1.zhimg.com/80/v2-ccd746ab0863e621aba3f1a84885c3b8_1440w.jpg)
+
+Diffusion本质就是借鉴了GAN这种训练目标单一的思路和VAE这种不需要判别器的隐变量变分的思路，糅合一下，起作用了
+
+Diffusion的本质
+- VAE和diffussion的区别
+- ![](https://pic1.zhimg.com/80/v2-3c18778f37765c84fdd2c2be57ba3d20_1440w.jpg)
+- VAE本质是一个基于**梯度**的 <span style='color=blue'>encoder-decoder架构</span>，encoder用来学**高斯分布**的均值和方差，decoder用**变分后验**来学习生成能力，而将标准高斯映射到数据样本是自己定义的。
+- 而扩散模型本质是一个 <span style='color=blue'>SDE/Markov架构</span>，虽然也借鉴了神经网络的前向传播/反向传播概念，但是并不基于可微的梯度，属于数学层面上的创新。两者都定义了高斯分布 $Z$ 作为隐变量，但是VAE将 $Z$ 作为先验条件（变分先验），而diffusion将 $Z$ 作为类似于变分后验的**马尔可夫链的平稳分布**。
+
 
 # Seq2seq方向
 
