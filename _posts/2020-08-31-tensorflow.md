@@ -71,6 +71,11 @@ As of October 2020:
 
 So, if you're using an out-of-range version of Python (older or newer) or a 32-bit version, then you'll need to use a different version.
 
+### 编译安装
+
+- 官网指南：[macos下编译安装tensorflow](https://www.tensorflow.org/install/source?hl=zh-cn)
+- 【2022-9-21】macos下编译失败
+
 
 # Tensorflow 1.*
 
