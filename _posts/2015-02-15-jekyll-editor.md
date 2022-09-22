@@ -223,14 +223,14 @@ detail组件
 ruby插件
 
 ```ruby
-{ % details Read more about that **thing**... % }
+{% details Read more about that **thing**... %}
   That **thing** is...
 
   ```py
   import tensorflow as tf
   print(tf.__version__)
   ```
-{ % enddetails % }
+{% enddetails %}
 ```
 
 #### 文字属性（大小、颜色）
