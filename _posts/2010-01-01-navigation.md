@@ -7,7 +7,7 @@ tags: 阅读 导航 指南 鹤啸九天
 excerpt: 怎样才能快乐的在这个博客徜徉？
 author: 鹤啸九天
 mathjax: true
-permalink: navi
+permalink: /navi
 ---
 
 * content
