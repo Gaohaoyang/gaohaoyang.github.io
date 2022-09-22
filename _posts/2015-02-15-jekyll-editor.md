@@ -223,14 +223,14 @@ detail组件
 ruby插件
 
 ```ruby
-{% details Read more about that **thing**... %}
-  That **thing** is...
+{ % details Read more about that **thing**... % }
+  That **thing** is... 代码块无法用jekyll渲染
 
-  ```py
+  #```py
   import tensorflow as tf
   print(tf.__version__)
-  ```
-{% enddetails %}
+  #```
+{ % enddetails % }
 ```
 
 #### 文字属性（大小、颜色）
