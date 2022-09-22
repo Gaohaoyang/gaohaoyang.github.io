@@ -3902,9 +3902,123 @@ Web 服务器的工作原理可以简单地归纳为：
 - 客户机与服务器断开。由客户端解释 HTML 文档，在客户端屏幕上渲染图形结果
 
 
-### Go自带的Web服务：net/http
+### net/http
+
+#### 简介
 
 Go 语言里面提供了一个完善的 `net/http` 包，通过 http 包可以很方便的就搭建起来一个可以运行的 Web 服务。同时使用这个包能很简单地对 Web 的路由，静态文件，模版，cookie 等数据进行设置和操作。
+- net/http涵盖了HTTP客户端和服务端具体的实现方式。内置的net/http包提供了最简洁的HTTP客户端实现方式，无须借助第三方网络通信库，就可以直接使用HTTP中用得最多的GET和POST方式请求数据。
+
+#### 使用方法
+
+(1) HTTP协议客户端实现
+
+- request请求：含GET/POST
+  - http.NewRequest()
+- GET方法
+  - client.Get()
+  - http.Get()
+- POST方法
+  - client.Post() 或 client.PostForm()
+  - http.Post() 或 http.PostForm()
+  - http的Post()函数或PostForm()，就是对DefaultClient.Post()或DefaultClient.PostForm()的封装
+
+(2) HTTP协议服务端实现
+
+HTTP服务器主要应完成如下功能
+- ① 处理动态请求：处理浏览网站，登录帐户或发布图片等用户传入的请求。
+  - 用 http.HandleFunc 函数注册一个新的 Handler 来处理动态请求。
+    - 第一个参数是请求路径的匹配模式
+    - 第二个参数是一个函数类型，表示针对这个请求要执行的功能。
+- ② 提供静态文件：将JavaScript，CSS和图像等静态文件提供给浏览器，服务于用户。
+  - http.FileServer() 方法提供 Javascript，CSS或图片等静态文件。
+  - 参数是文件系统接口，可以使用http.Dir()来指定文件所在的路径。如果该路径中有index.html文件，则会优先显示html文件，否则会显示文件目录。
+- ③ 接受连接请求：HTTP服务器必须监听指定端口从而接收来自网络的连接请求。
+  - http.ListenAndServer()函数用来启动HTTP服务器，并且在指定的 IP 地址和端口上监听客户端请求
+- ④ 获取客户端数据
+  - 客户端提交的数据全部位于 *http.Request 中
+
+
+```go
+package main
+
+import (
+	"fmt"
+	"net/http"
+)
+
+func main() {
+	testHttpNewRequest()
+    // 处理动态请求
+    http.HandleFunc("/", func (w http.ResponseWriter, r *http.Request) {
+        fmt.Fprint(w, "Welcome to my website!")
+    })
+    // 提供静态文件
+    fs := http.FileServer(http.Dir("static/")) // 返回值是 Handler 类型
+    http.Handle("/static/", http.StripPrefix("/static/", fs)) // 添加路由
+    // 接收请求，两个参数：监听地址、HTTP处理器 Handler
+    http.ListenAndServe(":80", nil)
+}
+
+func testHttpNewRequest() {
+	//1.创建一个客户端
+	client := http.Client{}
+	//2. 创建一个请求，请求方式可以是GET或POST
+	request, err := http.NewRequest("GET", "http://www.baidu.com", nil)
+	checkErr(err)
+    // 或调用http/client.Get方法
+    response, err := http.Get("http://www.baidu.com")
+    response, err := client.Get("http://www.baidu.com")
+    checkErr(err)
+    fmt.Printf("响应状态码: %v\n", response.StatusCode)
+    if response.StatusCode == 200 {
+		fmt.Println("网络请求成功")
+		defer response.Body.Close()
+	}
+    // 或调用client.Post 方法
+    resp, err := http.Post("http://example.com/upload", "image/jpeg", &buf)
+    // 或调用client.PostForm 方法
+    resp, err := http.PostForm("http://example.com/form",
+	url.Values{"key": {"Value"}, "id": {"123"}})
+	//3.客户端发送请求
+	cookName := &http.Cookie{Name: "username", Value: "Steven"}
+	//添加cookie
+	request.AddCookie(cookName)
+	response, err := client.Do(request)
+	checkErr(err)
+	//设置请求头
+	request.Header.Set("Accept-Lanauage", "zh-cn")
+	defer response.Body.Close()
+	//查看请求头的数据
+	fmt.Printf("Header:%+v\n", request.Header)
+	fmt.Printf("响应状态码: %v\n", response.StatusCode)
+	//4.操作数据
+	if response.StatusCode == 200 {
+		fmt.Println("网络请求成功")
+		checkErr(err)
+	} else {
+		fmt.Println("网络请求失败", response.Status)
+	}
+}
+
+//检查错误
+func checkErr(err error) {
+	defer func() {
+		if ins, ok := recover().(error); ok {
+			fmt.Println("程序出现异常: ", ins.Error())
+		}
+	}()
+	if err != nil {
+		panic(err)
+	}
+}
+```
+
+详见：[Golang启动HTTP服务器](https://shuzang.github.io/2020/golang-start-http-server/)
+
+
+
+#### 代码示例
 
 【2022-7-28】启动web服务
 
@@ -3925,15 +4039,23 @@ var count int // 全局变量
 
 func sayhello(w http.ResponseWriter, r *http.Request) {
     r.ParseForm()  // 解析参数，默认是不会解析的
-    fmt.Println(r.Form)  // 这些信息是输出到服务器端的打印信息
-    fmt.Println("path", r.URL.Path)
-    fmt.Println("scheme", r.URL.Scheme)
-    fmt.Println(r.Form["url_long"])
+    fmt.Print("path: ", r.URL.Path, "\tscheme: ", r.URL.Scheme, "\turl_long: ", r.Form["url_long"])
+    // 读取表单
     for k, v := range r.Form {
-        fmt.Println("key:", k)
-        fmt.Println("val:", strings.Join(v, ""))
+        fmt.Println("key: ", k, "\tval: ", strings.Join(v, ""))
     }
+    // 读取Header
+    for name, headers := range req.Header {
+        for _, h := range headers {
+            fmt.Fprintf(w, "%v: %v\n", name, h)
+        }
+    }
+    // 输出信息到客户端: Fprintf
     fmt.Fprintf(w, "Hello astaxie!") // 这个写入到 w 的是输出到客户端的
+}
+
+type indexHandler struct {
+    content string
 }
 
 func counter(w http.ResponseWriter, r *http.Request) {
@@ -3943,6 +4065,9 @@ func counter(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+    // 注册路由: Handle, HandleFunc这两个函数最终都由 DefaultServeMux 调用 Handle 方法来完成路由的注册
+    // 区别：Handle直接返回结构体信息，不用经过自定义函数
+    http.Handle("/", &indexHandler{content: "hello world!"}) // 直接返回内容
     http.HandleFunc("/", sayhello) // 设置访问的路由
     http.HandleFunc("/count", counter) // 另一个路由
     err := http.ListenAndServe(":9090", nil) // 设置监听的端口
@@ -3985,6 +4110,16 @@ http 包执行流程
 - 创建 Listen Socket, 监听指定的端口，等待客户端请求到来。
 - Listen Socket 接受客户端的请求，得到 Client Socket, 接下来通过 Client Socket 与客户端通信。
 - 处理客户端的请求，首先从 Client Socket 读取 HTTP 请求的协议头，如果是 POST 方法，还可能要读取客户端提交的数据，然后交给相应的 handler 处理请求，handler 处理完毕准备好客户端需要的数据，通过 Client Socket 写给客户端。
+
+基于 HTTP 构建的网络应用包括两个端，即`客户端` ( Client ) 和`服务端` ( Server )。
+- 两个端的交互行为包括从客户端发出 request、服务端接受 request 进行处理并返回 response 以及客户端处理 response。
+- http 服务器的工作就在于如何接受来自客户端的 request，并向客户端返回 response。
+
+典型的 http 服务端的处理流程：
+- 服务器在接收到请求时，首先会进入路由 ( router )，这是一个 Multiplexer，路由的工作在于为这个 request 找到对应的处理器 ( handler )
+- 处理器对 request 进行处理，并构建 response。
+- Golang 实现的 http server 同样遵循这样的处理流程。
+
 
 问题
 - 如何监听端口？
