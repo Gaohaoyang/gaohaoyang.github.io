@@ -182,14 +182,19 @@ print "hello"
 
 - （3）区块折叠：3种方法
 - There are three options for hiding/display text that can be expanded, also known by these keywords: text expand, expand/collapse, collapsible markdown, details element.
+- ① 使用js脚本：expand，只能展开，不能收回
+- ② 使用 details 组件，可以展开、收回，但不是所有浏览器都支持，长文本里的内容未被jekyll语法转换
+- ③ polyfill：jquery实现的组件，详见[文章](http://movb.de/jekyll-details-support.html)
+  - 安装js工具：zepto 和 jquery
+- ④ ruby组件：安装ruby插件，详见[文章](http://movb.de/jekyll-details-support.html)
 
 - [2022-9-22] 区块折叠功能，[参考](https://jekyllcodex.org/without-plugin/text-expand/)
 - Sometimes when you want to create a ‘read more’ link, it is overkill to create a whole new page. In that case a text expand functionality, using javascript is very useful. On this website it is used for clarity and brevity.
 - How it works
 - The script looks for an \[expand] tag on a single line and then looks for the \[/expand] tag (again on a single line, thus being the only content of its paragraph). When it finds these it will add some classes and hide everything in between. It will show a ‘read more →’ link, indicating the text can be expanded.
-- ① Download the file `text-expand.html` into the `_includes` directory. 
-- ② Then edit the `_layouts/default.html` and add this before the closing body tag
-- ③ 文章内容中，增加标签：\[expand]，\[/expand] —— 这种方法展开后，无法收回
+- Download the file `text-expand.html` into the `_includes` directory. 
+- Then edit the `_layouts/default.html` and add this before the closing body tag
+- 文章内容中，增加标签：\[expand]，\[/expand] —— 这种方法展开后，无法收回
 - 改进：[Jekyll Text Expand or Collapsible Markdown](https://www.tomordonez.com/jekyll-text-expand-collapsible-markdown/)
 
 ```html
@@ -200,6 +205,8 @@ print "hello"
 	</pre>
 </details>
 ```
+
+detail组件
 
 <details>
 	<summary>Click to expand</summary>
@@ -213,6 +220,16 @@ print "hello"
 	</pre>
 </details>
 
+ruby插件
+
+{% details Read more about that **thing**... %}
+  That **thing** is...
+
+  ```py
+  import tensorflow as tf
+  print(tf.__version__)
+  ```
+{% enddetails %}
 
 #### 文字大小
 
