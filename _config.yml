@@ -74,13 +74,8 @@ excerpt_separator: "\n\n\n\n"
 # 【2022-9-22】扩充（Ruby）插件，paginate 
 plugins: 
   - jekyll-paginate
-  - details_tag
 
 paginate: 25
-
-whitelist:
-  - jekyll-paginate
-  - details_tag
 
 # useful websites
 useful_urls:
