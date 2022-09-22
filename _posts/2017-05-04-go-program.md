@@ -10,6 +10,7 @@ excerpt: 编程语言知识点
 mathjax: true
 header-img: img/post-bg-ios10.jpg
 catalog: true
+permalink: /go
 ---
 
 * content
@@ -105,7 +106,8 @@ func main() {   // 声明 main 主函数
 ```
 
 现在运行test.go查看结果并验证输出结果如下：
-- go run test.go Hello, World!
+- go run test.go
+- Hello, World!
 
 ### vim语法高亮
 
@@ -212,7 +214,22 @@ Go常用命令：
 
 ## go编译
 
+### 编译命令
+
 Go语言是编译型的静态语言（和C语言一样），所以在运行Go语言程序之前，先要将其编译成二进制的可执行文件。
+- go build: **go文件** --(go build 编译)--> **可执行文件** --(运行)--> **结果**
+- go run:   **go文件** --(go run 编译+运行)--> **结果**
+
+```shell
+go build test.go # 先编译再运行（推荐build）
+go run test.go # 直接运行
+# 可以自定义生成可执行文件名，在mac/linux上是可执行文件，在window下必须是.exe后缀
+go build -o 自定义文件名 test.go # 自定义名字
+go build -o myHelloWorld HelloWorld.go # mac
+go build -o myHelloWorld.exe HelloWorld.go # win
+```
+
+参考：[go build和run区别](https://chowdera.com/2022/02/202202080303161398.html)
 
 ### go 编译器
 
