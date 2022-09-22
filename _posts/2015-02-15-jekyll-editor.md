@@ -222,6 +222,7 @@ detail组件
 
 ruby插件
 
+```ruby
 {% details Read more about that **thing**... %}
   That **thing** is...
 
@@ -230,6 +231,7 @@ ruby插件
   print(tf.__version__)
   ```
 {% enddetails %}
+```
 
 #### 文字属性（大小、颜色）
 
