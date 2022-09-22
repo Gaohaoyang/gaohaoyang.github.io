@@ -930,6 +930,21 @@ landslide readme.md -i -o > slide.html # 转换
 - 看到一篇好文章，想发布到markdown博客上，结果，图片太多，人肉代价大
 - 【2020-7-5】可以使用富文本编辑器：[ueditor2markdown](https://www.bejson.com/convert/ueditor2markdown/)转换，复制→粘贴→微调
 
+
+### SEO优化
+
+【2022-9-22】_config.yml文件 添加
+
+```yaml
+	plugins:
+- jekyll-paginate
+- jekyll-seo-tag
+```
+
+_includes文件夹下 head.html文件在 </head>之前添加
+- { % seo % }
+
+
 ## Jekyll语法
 
 - [Jekyll 语法简单笔记](http://github.tiankonguse.com/blog/2014/11/10/jekyll-study.html)
