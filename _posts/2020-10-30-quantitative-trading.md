@@ -52,10 +52,6 @@ mathjax: true
 - 事实证明：
   - 股票价格没有特定的趋势或季节性
   - 股价受到公司新闻和其他因素的影响，如公司的非货币化或合并/分拆。还有一些无形的因素往往是无法事先预测的。
-- 【2022-4-7】kaggle股票预测比赛：[Tokyo Stock Exchange Prediction](https://www.kaggle.com/competitions/jpx-tokyo-stock-exchange-prediction/rules)
-- How do you know when to buy a stock（股票） or derivative（衍生品）? When should you sell instead? Your data science skills could help you predict markets and explore `quantitative trading`（\[ˈkwɑːntəteɪtɪv], 量化交易）.This competition will compare your models against real **future returns** after the training phase is complete. This dataset contains historic data for a variety of Japanese stocks（股票） and options（期权）. Your challenge is to predict future returns. The competition will involve building `portfolio`s ( \[portˈfolɪˌo]，档案，文件夹，证券投资组合) from around 2,000 stocks eligible for predictions. Specifically, each participant will rank the stocks from highest to lowest expected returns and be evaluated on the difference between the returns of the highest and lowest 200 stocks.
-- `Sharpe ratio`：`夏普指数`，用来衡量每单位风险所能换得的平均报酬率
-
 
 ### 用LR预测股票
 
@@ -756,6 +752,134 @@ plt.plot(valid[['Close','Predictions']])
 ## 工程实践
 
 [关于高频量化交易的代码项目](https://zhuanlan.zhihu.com/p/558902211)
+
+### kaggle股票预测
+
+#### 比赛介绍
+
+- 【2022-4-7】kaggle股票预测比赛：[Tokyo Stock Exchange Prediction](https://www.kaggle.com/competitions/jpx-tokyo-stock-exchange-prediction/rules)
+- How do you know when to buy a stock（股票） or derivative（衍生品）? When should you sell instead? Your data science skills could help you predict markets and explore `quantitative trading`（\[ˈkwɑːntəteɪtɪv], 量化交易）.This competition will compare your models against real **future returns** after the training phase is complete. This dataset contains historic data for a variety of Japanese stocks（股票） and options（期权）. Your challenge is to predict future returns. The competition will involve building `portfolio`s ( \[portˈfolɪˌo]，档案，文件夹，证券投资组合) from around 2,000 stocks eligible for predictions. Specifically, each participant will rank the stocks from highest to lowest expected returns and be evaluated on the difference between the returns of the highest and lowest 200 stocks.
+- `Sharpe ratio`：`夏普指数`，用来衡量每单位风险所能换得的平均报酬率
+
+【2022-9-22】比赛分析：[JPX 东京证券交易所预测01 理解竞赛](https://zhuanlan.zhihu.com/p/539578422)
+- 任何金融市场的成功都需要确定可靠的投资。当股票或衍生品的价值被低估时，购买就是有意义的。如果它被高估，也许就可以考虑出售。
+- 虽然这些财务决策历来是由专业人士手动做出的，但技术为**散户**投资者带来了新的机会。数据科学家通过编程，根据训练模型的预测做出决策，探索量化交易。 现有大量量化交易工作用于分析金融市场和制定投资策略。创建和执行这样的策略需要**历史**和**实时**数据，但是散户投资者很难获得这些数据，因为本次比赛提供了日本市场的金融数据，以便散户对市场进行最全面的分析。
+- Japan Exchange Group, Inc. (JPX) 是一家控股公司，经营着世界上最大的证券交易所之一，包括东京证券交易所 (TSE) 以及衍生品交易所大阪交易所 (OSE) 和东京商品交易所 (TOCOM)。 JPX 是本次比赛的主办方，并得到了 AI 技术公司 AlpacaJapan Co.,Ltd. 的支持。
+
+#### 目标
+
+本次比赛将在训练阶段完成后将模型与真实的未来回报进行比较。比赛将从符合预测条件的**股票**（约 2,000 只股票）中建立**投资组合**。具体来说，每个参与者从最高到最低的预期回报对股票进行排名，并根据前 200 只股票和后 200 只股票之间的回报差异进行评估。比赛提供日本市场的财务数据，例如股票信息和历史股票价格，以训练和测试模型。
+
+```python
+#导入需要的库
+import numpy as np 
+import pandas as pd 
+import os
+import matplotlib.pyplot as plt
+sample = pd.read_csv(r"jpx-tokyo-stock-exchange-prediction\example_test_files\sample_submission.csv")
+sample
+sample.nunique() # 按日期和证券代码（股票）预测排名
+```
+
+按日期和证券代码（股票）预测排名。
+
+```
+Date	SecuritiesCode	Rank	
+0	2021-12-06	1301	0
+1	2021-12-06	1332	1
+2	2021-12-06	1333	2
+3	2021-12-06	1375	3
+4	2021-12-06	1376	4
+```
+
+Rank 表示 2000 只股票中每只股票次日和次日收盘价（Close）变化率的排名，从 2000 只股票中最大的一个开始排序。（变化率大的话就是正方向，变化率小的话就是负方向大。）
+
+#### 评估指标
+
+评估指标
+- 提交是根据每日买卖价差的`夏普比率`(sharpe ratio)进行评估的，需要对给定日期的每只活跃股票进行排名。单日回报将排名最高的 200 只股票（例如 0 到 199）视为**买入**，将排名最低的 200 只股票（例如 1999 到 1800 股）视为**卖空**。 然后根据股票的排名对股票进行加权，并假设股票在第二天购买并在第二天卖出，从而计算投资组合的总回报。
+
+#### 数据概览
+
+数据概览
+- stock_prices.csv 核心数据集,包括每只股票的每日收盘价和目标行。
+- options.csv 基于大盘的各种期权的状态数据。许多选项包括对股票市场未来价格的隐含预测，因此即使这些选项没有直接评分，也可能会引起人们的兴趣。
+- secondary_stock_prices.csv 核心数据集涵盖了2000 种最常交易的股票，但许多流动性较低的证券也在东京市场上交易。该文件包含这些证券的数据，这些证券没有评分，但可能对评估整个市场有帮助。
+- trades.csv 上一个交易周的交易量汇总。
+- Financials.csv 季度收益报告的结果。
+- stock_list.csv - 安全码和公司名称之间的对应关系，以及有关公司所在行业的一般信息
+
+#### 计算过程
+
+过程
+- 计算rate值：计算出来的rate与原数据中的target是一致的
+  - ![](https://pic4.zhimg.com/80/v2-ab7c8e405a6211856aa25e43593a5e5f_1440w.jpg)
+- 排序计算
+  - 只关注一天内的情况。（请注意，并非所有 2000 只股票都有数据，具体取决于日期。）
+- 每日价差收益
+  - ![](https://pic3.zhimg.com/80/v2-2f584c18661f43e2d8bde97426c7038a_1440w.jpg)
+- 分数计算
+  - ![](https://pic2.zhimg.com/80/v2-910893c6edc579a45a902930b63bf1c1_1440w.jpg)
+
+```py
+stock_prices = pd.read_csv(r"jpx-tokyo-stock-exchange-prediction\train_files\stock_prices.csv")
+stock_prices["Date"] = pd.to_datetime(stock_prices["Date"])
+# 仅看一支股票
+tmpdf = stock_prices[stock_prices["SecuritiesCode"]==1301].reset_index(drop=True)
+tmpdf.head(3)
+# 计算rate值
+tmpdf["Close_shift1"] = tmpdf["Close"].shift(-1)
+tmpdf["Close_shift2"] = tmpdf["Close"].shift(-2)
+tmpdf["rate"] = (tmpdf["Close_shift2"] - tmpdf["Close_shift1"]) / tmpdf["Close_shift1"]
+# 排序结果计算
+tmpdf2 = stock_prices[stock_prices["Date"]=="2021-12-02"].reset_index(drop=True)
+#按目标降序排列。Rank与0-1999绑定，所以不要忘记-1（不输入会报错）
+tmpdf2["rank"] = tmpdf2["Target"].rank(ascending=False,method="first")-1
+tmpdf2 = tmpdf2.sort_values("rank").reset_index(drop=True)
+# 计算每日价差
+#前200支股票
+tmpdf2_top200 = tmpdf2.iloc[:200,:]
+# tmpdf2_top200 = tmpdf2_top200.sort_values("rank",ascending = False).reset_index(drop=True)
+weights = np.linspace(start=2, stop=1, num=200)
+tmpdf2_top200["weights"] = weights
+tmpdf2_top200["calc_weights"] = tmpdf2_top200["Target"] * tmpdf2_top200["weights"]
+Sup = tmpdf2_top200["calc_weights"].sum()/np.mean(weights)
+#后200支股票
+tmpdf2_bottom200 = tmpdf2.iloc[-200:,:]
+tmpdf2_bottom200 = tmpdf2_bottom200.sort_values("rank",ascending = False).reset_index(drop=True)
+tmpdf2_bottom200["weights"] = weights
+tmpdf2_bottom200["calc_weights"] = tmpdf2_bottom200["Target"] * tmpdf2_bottom200["weights"]
+Sdown= tmpdf2_bottom200["calc_weights"].sum()/np.mean(weights)
+
+daily_spread_return = Sup - Sdown
+daily_spread_return
+# 分数计算
+#定义一个函数实现上述过程
+import numpy as np
+import pandas as pd
+
+def calc_spread_return_sharpe(df: pd.DataFrame, portfolio_size: int = 200, toprank_weight_ratio: float = 2) -> float: 
+    """
+    Args:
+        df (pd.DataFrame): 预测结果
+        portfolio_size (int): 投资组合规模
+        toprank_weight_ratio (float):  排名最高的股票与排名最低的股票的相对权重。
+    Returns:
+        (返回一个浮点数): sharpe ratio 夏普比率
+    """
+    def _calc_spread_return_per_day(df, portfolio_size, toprank_weight_ratio):
+        assert df['Rank'].min() == 0  #不出错则跳过，出错则返回异常
+        assert df['Rank'].max() == len(df['Rank']) - 1
+        weights = np.linspace(start=toprank_weight_ratio, stop=1, num=portfolio_size)
+        Sup= (df.sort_values(by='Rank')['Target'][:portfolio_size] * weights).sum() / weights.mean()
+        Sdowm = (df.sort_values(by='Rank', ascending=False)['Target'][:portfolio_size] * weights).sum() / weights.mean()
+        return purchase - short
+     #按照日期计算每天的价差收益
+    buf = df.groupby('Date').apply(_calc_spread_return_per_day, portfolio_size, toprank_weight_ratio) 
+    sharpe_ratio = buf.mean() / buf.std()
+    return sharpe_ratio
+```
+
 
 ### 数据源
 
