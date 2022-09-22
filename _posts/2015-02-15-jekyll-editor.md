@@ -175,7 +175,7 @@ print "hello"
 
 - （2）显示行号
 
-{% highlight ruby linenos %}
+{% highlight python linenos %}
 import os
 print "hello"
 {% endhighlight %}
@@ -231,14 +231,14 @@ ruby插件
   ```
 {% enddetails %}
 
-#### 文字大小
+#### 文字属性（大小、颜色）
+
+The HTML style attribute is used to add styles to an element, such as **color**, font, **size**, and more.
 
 - 字体大小
   - <font size=2>二号字尺寸式样 </font> 
 - **加粗**, *斜体*, 颜色显示
   - <font color='green'>彩色字体</font>
-
-#### 文字颜色
 
 颜色色阶选取[参考](https://htmlcolorcodes.com/zh/yanse-ming/), 包含常用颜色：红、粉、橙、黄、紫、绿、蓝、白、灰
 
@@ -250,14 +250,17 @@ This is <p style="color: red">written in red</p>.
 <p style="color:#0000ff">This text is blue.</p>
 <p style="color:rgb(106, 90, 203)">This text is violet.</p>
 <p style="color:red">This text is red.</p>
+<p style="font-size:50px;">I am big</p>
+<p style="font-size:50px;color:red">I am big and red</p>
+<p style="font-size:50px;color:red;background-color:powderblue;">I am big and red and background</p>
 ```
 
 - This is *red红色*{: style="color: red"}
 - This is <span style="color: red">written in
 red</span>.
 
-  <h1 style="color:IndianRed">Indian Red Title Text</h1>
-  <p style="color:SlateGray">Slate gray paragraph text</p>
+<h1 style="color:IndianRed">Indian Red Title Text</h1>
+<p style="color:SlateGray">Slate gray paragraph text</p>
 
 [改变Markdown中文字的颜色](https://codeantenna.com/a/Ulr5tITBGx)
 
@@ -267,6 +270,8 @@ $\color{#4285f4}{更}
 \color{#4285f4}{的}
 \color{#34a853}{颜}
 \color{#ea4335}{色}$
+
+更多：[sytle样式在线调试](https://www.w3schools.com/html/html_styles.asp)
 
 #### 脚注
 
