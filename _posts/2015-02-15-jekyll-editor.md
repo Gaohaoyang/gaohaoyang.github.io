@@ -17,6 +17,37 @@ tags: jekyll markdown 插件 github gitee 码云 latex 公式
 
 ## 笔记软件
 
+### 自定义页面URL
+
+站点上任何 HTML 文件，包括主页，都可以使用 layout 和 include 中的内容作为公用的内容，如页面的 header 和 footer. 将合适的部分抽出放到布局中。
+
+定义静态页面的几种方法
+- （1）直接在根目录下，与 _posts 目录同级：主页 (homepage), 关于 (about), 和一个联系 (contact) 页
+- （2）创建文件夹，包含 index.html 即可 —— 好处是不用再URL里显示扩展名，服务端自动找目录下index文件
+- （3）_posts 目录下的文章md文件中，头信息中定义　permalink
+  - permalink: /other
+  - 访问：http://example.com/other即可
+
+```shell
+.
+|-- _config.yml
+|-- _includes/
+|-- _layouts/
+|-- _posts/
+|-- _site/
+|-- about.html    # => 方法① http://example.com/about.html
+|-- index.html    # => http://example.com/
+|-- other.md      # => http://example.com/other.html
+|── other/        # 方法② 子目录
+|   └── index.md    # => http://example.com/other/
+└── contact.html  # => http://example.com/contact.html
+# -------- 方法③ ----------
+permalink: /other
+
+```
+
+参考：jekyll官方[文档](http://jekyllcn.com/docs/pages/)
+
 ### markdown编辑环境
 
 - 【2021-3-24】[Typora+PicGo+Gitee笔记方案](https://blog.csdn.net/lin455989875/article/details/104621967)
@@ -90,7 +121,6 @@ gem install jekyll-jupyter-notebook
 ```
 
 - 改配置
-
 
 ```shell
 # paginate 2020-2-15 增加jupyter文件自动转html功能
@@ -178,8 +208,6 @@ $\color{#4285f4}{更}
 \color{#4285f4}{的}
 \color{#34a853}{颜}
 \color{#ea4335}{色}$
-
-
 
 #### 脚注
 
