@@ -71,8 +71,11 @@ tag_dir: tag/
 # excerpt
 excerpt_separator: "\n\n\n\n"
 
-# paginate 
-plugins: [jekyll-paginate]
+# 【2022-9-22】扩充（Ruby）插件，paginate 
+plugins: 
+  - jekyll-paginate
+  - details
+
 paginate: 25
 
 
