@@ -164,14 +164,55 @@ plugins: [jekyll-paginate,jekyll-jupyter-notebook]
 
 : 定义段落
 
-#### 代码高亮
+#### 代码高亮、折叠
 
-- 代码高亮
+- （1）代码高亮
 
 ```python
 import os
 print "hello"
 ```
+
+- （2）显示行号
+
+{% highlight ruby linenos %}
+import os
+print "hello"
+{% endhighlight %}
+
+- （3）区块折叠：3种方法
+- There are three options for hiding/display text that can be expanded, also known by these keywords: text expand, expand/collapse, collapsible markdown, details element.
+
+- [2022-9-22] 区块折叠功能，[参考](https://jekyllcodex.org/without-plugin/text-expand/)
+- Sometimes when you want to create a ‘read more’ link, it is overkill to create a whole new page. In that case a text expand functionality, using javascript is very useful. On this website it is used for clarity and brevity.
+- How it works
+- The script looks for an \[expand] tag on a single line and then looks for the \[/expand] tag (again on a single line, thus being the only content of its paragraph). When it finds these it will add some classes and hide everything in between. It will show a ‘read more →’ link, indicating the text can be expanded.
+- ① Download the file `text-expand.html` into the `_includes` directory. 
+- ② Then edit the `_layouts/default.html` and add this before the closing body tag
+- ③ 文章内容中，增加标签：\[expand]，\[/expand] —— 这种方法展开后，无法收回
+- 改进：[Jekyll Text Expand or Collapsible Markdown](https://www.tomordonez.com/jekyll-text-expand-collapsible-markdown/)
+
+```html
+<details>
+	<summary>Click to expand</summary>
+	<pre>
+	Long content here
+	</pre>
+</details>
+```
+
+<details>
+	<summary>Click to expand</summary>
+	<pre>
+	Long content here
+  这是长文本
+  ```py
+  import tensorflow as tf
+  print(tf.__version__)
+  ```
+	</pre>
+</details>
+
 
 #### 文字大小
 
