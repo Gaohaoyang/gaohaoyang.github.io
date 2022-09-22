@@ -7,6 +7,7 @@ tags: IoT 物联网 车辆网 自动驾驶 无人驾驶 滴滴 何晓飞 飞步 
 author : 鹤啸九天
 excerpt: 车联网及无人驾驶相关技术总结
 mathjax: true
+permalink: /drving
 ---
 
 * content

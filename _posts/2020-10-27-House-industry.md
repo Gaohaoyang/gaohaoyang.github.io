@@ -7,6 +7,7 @@ tags: 房产 房价 房贷 利息 贝壳 幸福里 安居客 cps cpm 麦田
 author : 鹤啸九天
 excerpt: 房产行业发展趋势，新房、二手、租赁、家装、家居等业务观察
 mathjax: true
+permalink: /house
 ---
 
 * content

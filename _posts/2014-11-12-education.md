@@ -7,6 +7,7 @@ tags: 贫富差距 家庭教育 留学生 凉子访谈录 衡水中学 海淀学
 excerpt: 穷人一直穷，富人一直富吗？
 author: 鹤啸九天
 mathjax: true
+permalink: /edu
 ---
 
 * content

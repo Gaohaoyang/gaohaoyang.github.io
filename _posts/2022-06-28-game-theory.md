@@ -6,6 +6,7 @@ categories: 数学基础
 tags: 博弈论 纳什 内卷
 excerpt: 如何用博弈论解决内卷？
 mathjax: true
+permalink: /game-theory
 ---
 
 * content

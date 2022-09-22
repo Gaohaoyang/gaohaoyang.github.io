@@ -6,6 +6,7 @@ categories: 自然科学
 tags: 梁冬 华大基因 生命 自然 宇宙 神学 中医 西医 病毒 细菌 真菌 SARS SARI 武汉肺炎 埃博拉 蝙蝠 血型 薛定谔的猫 芝诺的乌龟 拉普拉斯兽 麦克斯韦妖 量子力学 微积分 经典力学 热力学第二定律 甲醛 癌症 果壳 饮酒 地理 寿命
 excerpt: 生命是什么，人类是地球统治者吗，科学的尽头是神学吗？
 mathjax: true
+permalink: /science
 ---
 
 * content

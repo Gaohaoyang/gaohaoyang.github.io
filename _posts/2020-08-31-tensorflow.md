@@ -7,6 +7,7 @@ tags: Tensorflow Python 深度学习 Pytorch TensorRT 推理加速 onnx
 excerpt: Tensorflow编程技能汇总
 author: 鹤啸九天
 mathjax: true
+permalink: /tensorflow
 ---
 
 * content

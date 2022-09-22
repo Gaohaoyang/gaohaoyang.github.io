@@ -7,6 +7,7 @@ tags: 深度学习 NLP GAN Seq2seq 对话系统 文本评价 BLEU 多模态 好�
 excerpt: 深度学习在NLP子领域——文本生成的应用汇总，如seq2seq、GAN系列
 author: 鹤啸九天
 mathjax: true
+permalink: /text-generation
 ---
 
 * content

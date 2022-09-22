@@ -7,6 +7,7 @@ tags: 拖延症 软素质 工作效率 心理学 认知
 excerpt: 软素质
 author: 鹤啸九天
 mathjax: true
+permalink: /skill
 ---
 
 * content

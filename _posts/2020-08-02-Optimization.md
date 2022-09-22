@@ -7,6 +7,7 @@ tags: 最优化 梯度下降 牛顿法 斯坦福 凸优化 KKT 损失函数 距�
 excerpt: 机器学习中常见的优化算法
 author: 鹤啸九天
 mathjax: true
+permalink: /optimization
 ---
 
 * content

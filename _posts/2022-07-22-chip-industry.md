@@ -7,6 +7,7 @@ tags: 芯片 操作系统 硬件
 author : 鹤啸九天
 excerpt: 芯片知识汇总
 mathjax: true
+permalink: /chip
 ---
 
 * content

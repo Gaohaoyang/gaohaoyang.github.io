@@ -7,6 +7,7 @@ tags: 语音识别 NLP ASR TTS 情感计算 声纹识别 说话人识别  直播
 excerpt: 语音识别技术笔记
 author: 鹤啸九天
 mathjax: true
+permalink: /voice
 ---
 
 * content

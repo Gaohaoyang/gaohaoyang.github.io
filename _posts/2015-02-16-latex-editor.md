@@ -5,6 +5,7 @@ date:   2015-02-16 23:40:00
 categories: 技术工具
 excerpt: "latex语法学习" 
 tags: latex 公式 markdown
+permalink: /latex
 ---
 
 * content 目录

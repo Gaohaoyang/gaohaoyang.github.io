@@ -6,6 +6,7 @@ categories: 计算机基础
 tags: 操作系统
 excerpt: 计算机操作系统知识点
 mathjax: true
+permalink: /os
 ---
 
 * content

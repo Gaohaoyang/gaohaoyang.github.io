@@ -6,6 +6,7 @@ categories: 人生规划
 tags: 人生伴侣 三观 选择 王志文 孤独 聊得来 约会 婚姻 pua
 excerpt: 如何过好这一生
 mathjax: true
+permalink: /partner
 ---
 
 * content

@@ -7,6 +7,7 @@ tags: 深度学习 NLP 对话系统 QA kbqa document 多轮 闲聊 沈向洋 FSM
 excerpt: 对话系统技术图谱
 author: 鹤啸九天
 mathjax: true
+permalink: /dialogue-system
 ---
 
 * content

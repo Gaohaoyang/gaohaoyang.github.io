@@ -5,6 +5,7 @@ date:   2015-02-15 22:14:54
 categories: 技术工具
 excerpt: "jekyll用法汇总" 
 tags: jekyll markdown 插件 github gitee 码云 latex 公式
+permalink: /jekyll
 ---
 
 * content

@@ -6,6 +6,7 @@ categories: 深度学习
 tags: 深度学习 自然语言处理 NLP Transformer BERT GPT Attention 蒸馏 Faiss Facebook TextCNN ES 田渊栋 彩票假设 自监督 Milvus ALBERT elasticsearch es 可视化 unilm simcse gpu 迁移学习 sentence 句向量 向量化
 excerpt: 预训练语言模型及BERT知识点汇总
 mathjax: true
+permalink: /bert
 ---
 
 * content

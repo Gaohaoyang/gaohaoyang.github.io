@@ -6,6 +6,7 @@ categories: 编程语言
 tags: Linux linux Shell Git yaml github 文件服务 vscode crontab curl post jupyter
 excerpt: Linux使用技能总结，持续更新
 mathjax: true
+permalink: /linux
 ---
 * content
 {:toc}

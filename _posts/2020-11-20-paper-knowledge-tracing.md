@@ -7,6 +7,7 @@ tags: 知识追踪 HMM 在线教育 认知诊断 可解释 GPT
 excerpt: 教育、培训领域，跟踪学员对某个知识点的掌握情况
 author: 鹤啸九天
 mathjax: true
+permalink: /dkt
 ---
 
 * content

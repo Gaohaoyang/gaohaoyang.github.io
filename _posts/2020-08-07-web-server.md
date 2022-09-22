@@ -7,6 +7,7 @@ tags: Web web Python Flask Django Fastapi Restful Swagger HTML JavaScript Sessio
 author : 鹤啸九天
 excerpt: Web开发相关技术知识点
 mathjax: true
+permalink: /web
 ---
 
 * content

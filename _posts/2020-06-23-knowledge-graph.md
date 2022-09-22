@@ -7,6 +7,7 @@ tags: 深度学习 NLP KG KB-QA 知识图谱 表示学习 jena neo4j
 excerpt: 知识图谱（Knowledge Graph）发展历史，主要类型，前沿研究及应用场景等
 author: 鹤啸九天
 mathjax: true
+permalink: /kg
 ---
 
 * content

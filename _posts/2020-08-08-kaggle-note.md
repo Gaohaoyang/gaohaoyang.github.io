@@ -7,6 +7,7 @@ tags: Kaggle XGBoot 天池 KDD 特征工程 oov
 author : 鹤啸九天
 excerpt: 机器学习类竞赛知识点总结
 mathjax: true
+permalink: /kaggle
 ---
 
 * content

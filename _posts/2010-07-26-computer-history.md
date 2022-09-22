@@ -6,6 +6,7 @@ categories: 计算机基础
 tags: 高德纳 图灵 冯·诺依曼 陈皓 少儿编程 网络 操作系统 体系结构 CPU arm x86 OSI 进程 线程 协程 编程语言
 excerpt: 计算机发展历史，编程语言诞生过程，及几位关键人物
 mathjax: true
+permalink: /computer
 ---
 
 * content

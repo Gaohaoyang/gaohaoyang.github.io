@@ -7,6 +7,7 @@ tags: 文本分类 负采样 fasttext kaggle 增强 层次分类
 excerpt: NLP子领域文本分类知识汇总
 author: 鹤啸九天
 mathjax: true
+permalink: /classification
 ---
 
 * content

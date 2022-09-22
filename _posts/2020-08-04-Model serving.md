@@ -7,6 +7,7 @@ tags: Tensorflow Web gRPC Restful 服务部署 HTTP PS 参数服务器 分布式
 excerpt: 如何将算法模型部署到线上？有哪些方法、工具及经验？
 author: 鹤啸九天
 mathjax: true
+permalink: /model
 ---
 
 * content

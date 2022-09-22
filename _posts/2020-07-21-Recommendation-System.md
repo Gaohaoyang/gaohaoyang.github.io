@@ -7,6 +7,7 @@ tags: 推荐系统 CTR FM Wide&Deep 评分卡 kaggle
 excerpt: 推荐系统常用技术方案
 author: 鹤啸九天
 mathjax: true
+permalink: /recommendation-system
 ---
 
 * content

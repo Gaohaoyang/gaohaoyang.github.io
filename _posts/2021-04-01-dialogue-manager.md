@@ -7,6 +7,7 @@ tags: 深度学习 对话系统 多轮 FSM 有限状态机 陈蕴侬 AIML DAG �
 excerpt: 对话管理器技术总结
 author: 鹤啸九天
 mathjax: true
+permalink: /dialogue-manager
 ---
 
 * content

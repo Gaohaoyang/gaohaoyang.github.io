@@ -6,6 +6,7 @@ tags:  数据结构 算法 KMP Morris 二叉树 字符串 leetcode 面试 图 �
 author: 风之筝
 excerpt: 有哪些经典算法让人拍手称快、赞叹不已？
 mathjax: true
+permalink: /algorithm
 ---
 
 * content

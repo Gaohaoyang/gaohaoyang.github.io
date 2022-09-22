@@ -7,6 +7,7 @@ tags: 互联网 BAT TMD 陆奇 朱松纯 张一鸣 平安科技 在线教育 谷
 excerpt: 互联网行业资讯及各大厂信息汇总
 author: 鹤啸九天
 mathjax: true
+permalink: /internet-news
 ---
 
 * content

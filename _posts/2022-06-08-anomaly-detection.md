@@ -7,6 +7,7 @@ tags: 异常检测 风控
 excerpt: 异常检测方法总结
 author: 鹤啸九天
 mathjax: true
+permalink: /anomaly
 ---
 
 * content

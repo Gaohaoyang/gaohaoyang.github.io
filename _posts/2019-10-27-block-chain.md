@@ -6,6 +6,7 @@ categories: 资料汇总
 tags: 区块链 比特币 张首晟 桥水基金 加密 智能合约 零知识证明
 excerpt: 什么是区块链，有哪些应用，什么是比特币？
 mathjax: true
+permalink: /block-chain
 ---
 
 * content

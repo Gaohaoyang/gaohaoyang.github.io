@@ -7,6 +7,7 @@ tags: 搜索 索引 正排 倒排 pagerank 谷歌 Google 百度 ES es seo magi o
 excerpt: 搜索引擎技术汇总
 author: 鹤啸九天
 mathjax: true
+permalink: /search
 ---
 
 * content

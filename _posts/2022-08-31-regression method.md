@@ -7,6 +7,7 @@ tags: 回归 数据挖掘 机器学习 数据分析 统计学 分布 逻辑回�
 excerpt: 机器学习分支之一：回归分析，总结各类回归方法（逻辑回归、多项式回归、保序回归等）
 author: 鹤啸九天
 mathjax: true
+permalink: /regression
 ---
 
 * content

@@ -7,6 +7,7 @@ tags: 财务自由 人生规划 穷爸爸 富爸爸 罗伯特清崎 经济周期
 excerpt: 如何走向财务自由？
 author: 鹤啸九天
 mathjax: true
+permalink: /freedom
 ---
 
 * content

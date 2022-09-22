@@ -7,6 +7,7 @@ tags: 生活大爆炸 NLP 自然语言处理 台词 可视化 身份证 华为 �
 excerpt: 深入挖掘分析生活大爆炸（Big Bang）的台词信息，看看各个角色的常用词汇有哪些
 author: 鹤啸九天
 mathjax: true
+permalink: /text-mining
 ---
 
 * content

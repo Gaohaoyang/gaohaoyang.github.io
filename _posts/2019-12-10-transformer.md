@@ -6,6 +6,7 @@ categories: 深度学习
 tags: 深度学习 NLP Transformer BERT GPT Attention BeamSearch seq2seq 杨植麟 XLNet 循环智能
 excerpt: Attention is all you need!
 mathjax: true
+permalink: /transformer
 ---
 
 * content

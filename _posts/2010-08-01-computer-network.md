@@ -6,6 +6,7 @@ categories: 计算机基础
 tags: 网络 OSI 路由器 交换器 调制解调器 猫 lan wan wlan ap tcp udp
 excerpt: 计算机网络知识点
 mathjax: true
+permalink: /network
 ---
 
 * content

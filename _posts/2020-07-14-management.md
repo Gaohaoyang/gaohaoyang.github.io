@@ -7,6 +7,7 @@ tags: KPI OKR 孙子兵法 三十六计 创新扩散曲线 情商 人脉 招聘
 excerpt: 为什么有的人虽然工作十年，但实际上只有一年经验？
 author: 鹤啸九天
 mathjax: true
+permalink: /management
 ---
 
 * content

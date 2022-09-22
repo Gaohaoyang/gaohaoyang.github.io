@@ -7,6 +7,7 @@ tags: 深度学习 NLP 相似度 语义
 excerpt: 深度学习在NLP子领域——文本匹配的应用汇总
 author: 鹤啸九天
 mathjax: true
+permalink: /text-match
 ---
 
 * content

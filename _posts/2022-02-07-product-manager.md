@@ -7,6 +7,7 @@ tags: 互联网 产品
 excerpt: 互联网产品经理工作内容
 author: 鹤啸九天
 mathjax: true
+permalink: /product
 ---
 
 * content

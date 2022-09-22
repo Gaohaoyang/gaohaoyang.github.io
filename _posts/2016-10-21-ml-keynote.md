@@ -6,6 +6,7 @@ categories: 机器学习
 tags: 机器学习 周志华 通用逼近定理 归纳 演绎 凸函数 漂移 可解释 逼近 本质
 excerpt: 机器学习的本质到底是什么？有哪些优缺点，存在哪些局限性
 mathjax: true
+permalink: /ml
 ---
 
 * content
