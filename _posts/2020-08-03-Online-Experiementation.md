@@ -1301,7 +1301,7 @@ docker ps -a -q
 # 获取镜像mysql:5.7的元信息。  
 docker inspect mysql:5.7  
 # 获取正在运行的容器mymysql的 IP。  
-docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' mymysql  
+docker inspect --format='\{\{range .NetworkSettings.Networks\}\}\{\{.IPAddress\}\}\{\{end\}\}' mymysql  
 
 # 查看容器mymysql的进程信息。  
 docker top mymysql  

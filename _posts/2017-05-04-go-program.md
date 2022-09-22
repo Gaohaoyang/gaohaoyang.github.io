@@ -4235,10 +4235,10 @@ Go模板语法定义一个 hello.tmpl 的模板文件
     <title>Hello</title>
 </head>
 <body>
-    <p>Hello \{\{.\}}</p>
-    <p>Hello {{.Name}}</p>
-    <p>性别：{{.Gender}}</p>
-    <p>年龄：{{.Age}}</p>
+    <p>Hello \{\{.\}\}</p>
+    <p>Hello \{\{.Name\}\}</p>
+    <p>性别：\{\{.Gender\}\}</p>
+    <p>年龄：\{\{.Age\}\}</p>
     <img src="https://go.dev/images/gophers/motorcycle.svg" width=400>
 </body>
 </html>
