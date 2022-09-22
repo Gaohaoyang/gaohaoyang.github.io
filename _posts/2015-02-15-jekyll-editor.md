@@ -11,10 +11,33 @@ permalink: /jekyll
 * content
 {:toc}
 
-## 简介
+# Jekyll编辑
 
 - 使用jekyll搭建github静态页面
 - 汇总各类小技巧
+
+## Jekyll 简介
+
+Jekyll 是一个简单的，博客感知的，静态网站生成器。可以认为，Jekyll 是一个基于文件的内容管理系统（CMS）。它使用 Ruby 编写，通过 Markdown 和 Liquid 模板生成内容。
+
+Jekyll 最初由 GitHub co-founder、前首席执行官 Tom Preston-Werner 创立。
+
+目前，Jekyll 的维护者是 Parker Moore，他本人也于2016年初加入了 GitHub。
+
+[Jekyll 使用技巧](https://crispgm.com/page/48-tips-for-jekyll-you-should-know.html)
+
+## Jekyll 部署
+
+步骤：
+- 安装 Ruby： brew install ruby
+- 安装jekyll：gem install jekyll
+- 生成站点
+  - jekyll build
+- 编译
+  - jekyll serve
+  - jekyll server
+  - jekyll s
+- 通过 http://localhost:4000 进行访问
 
 ## 笔记软件
 
