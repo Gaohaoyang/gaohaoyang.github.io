@@ -78,6 +78,9 @@ plugins:
 
 paginate: 25
 
+whitelist:
+  - jekyll-paginate
+  - details_tag
 
 # useful websites
 useful_urls:
