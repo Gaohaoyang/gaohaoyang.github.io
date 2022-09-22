@@ -3812,7 +3812,7 @@ func BenchmarkAdd(b *testing.B) {  
 - BenchmarkAdd 2000000000 0.72 ns/op
 - ok github.com/my 1.528s
 
-# 案例
+# 专项功能
 
 ## 图片
 
@@ -4168,6 +4168,132 @@ func (srv *Server) Serve(l net.Listener) error {
 ![](https://cdn.learnku.com/build-web-application-with-golang/images/3.3.illustrator.png?raw=true)
 
 Go 的 http 有两个核心功能：Conn、ServeMux
+
+### http/template 模板引擎
+
+【2022-9-22】[Go语言标准库之http/template](https://www.liwenzhou.com/posts/Go/go_template/)
+
+html/template包实现了**数据驱动**的模板，用于生成可防止代码注入的安全的HTML内容。它提供了和text/template包相同的接口，Go语言中输出HTML的场景都应使用html/template这个包
+- 模板：事先定义好的HTML文档文件
+- 模板渲染机制：文本替换操作–使用相应的数据去替换HTML文档中事先准备好的标记。
+- 类似Python语言中Flask框架中使用的jinja2模板引擎。
+
+Go语言内置文本模板引擎 **text**/template 和 用于HTML文档的 **html**/template。
+
+text/template与html/tempalte的区别
+- html/template针对的是需要返回HTML内容的场景，在模板渲染过程中会对一些有风险的内容进行转义，以此来防范跨站脚本攻击。
+
+作用机制归纳如下：
+- 模板文件通常定义为 .tmpl 和 .tpl 为后缀（也可以使用其他的后缀），必须使用UTF8编码。
+- 模板文件中使用\{{和\}}包裹和标识需要传入的数据。
+- 传给模板这样的数据就可以通过点号（.）来访问，如果数据是复杂类型的数据，可以通过{ \{ .FieldName \}}来访问它的字段。
+- 除\{{和\}}包裹的内容外，其他内容均不做修改原样输出。
+
+#### 模板引擎组成
+
+Go语言模板引擎的使用可以分为三部分：
+- **定义**模板文件: 按照相关语法规则去编写
+- **解析**模板文件: 常用方法去解析模板文件，得到模板对象
+  - func (t \*Template) <span style='color:blue'>Parse</span>(src string) (*Template, error)
+  - func <span style='color:blue'>ParseFiles</span>(filenames ...string) (*Template, error)
+  - func <span style='color:blue'>ParseGlob</span>(pattern string) (*Template, error)
+  - 用func <span style='color:blue'>New</span>(name string) *Template函数创建一个名为name的模板
+- 模板**渲染**: 用数据去填充模板，当然实际上可能会复杂很多
+  - func (t *Template) <span style='color:blue'>Execute</span>(wr io.Writer, data interface{}) error
+  - func (t *Template) <span style='color:blue'>ExecuteTemplate</span>(wr io.Writer, name string, data interface{}) error
+
+#### 模板引擎示例
+
+Go模板语法定义一个 hello.tmpl 的模板文件
+- 模板语法都包含在双大括号中，其中的.表示当前对象
+- 传入结构体对象时，可以根据.来访问结构体的对应字段
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hello</title>
+</head>
+<body>
+    <p>Hello \{\{.\}}</p>
+    <p>Hello {{.Name}}</p>
+    <p>性别：{{.Gender}}</p>
+    <p>年龄：{{.Age}}</p>
+    <img src="https://go.dev/images/gophers/motorcycle.svg" width=400>
+</body>
+</html>
+```
+
+HTTP server端代码: main.go
+
+```go
+type UserInfo struct {
+	Name   string
+	Gender string
+	Age    int
+}
+
+func sayHello(w http.ResponseWriter, r *http.Request) {
+	// 解析指定文件生成模板对象
+	tmpl, err := template.ParseFiles("./hello.tmpl")
+	if err != nil {
+		fmt.Println("create template failed, err:", err)
+		return
+	}
+    user := UserInfo{
+		Name:   "小王子",
+		Gender: "男",
+		Age:    18,
+	}
+	// 利用给定数据渲染模板，并将结果写入w
+	// tmpl.Execute(w, "沙河小王子")
+    tmpl.Execute(w, user) // 传入结构体
+}
+func main() {
+	http.HandleFunc("/", sayHello)
+	err := http.ListenAndServe(":9090", nil)
+	if err != nil {
+		fmt.Println("HTTP server failed,err:", err)
+		return
+	}
+}
+```
+
+将上面的main.go文件编译执行，然后使用浏览器访问http://127.0.0.1:9090就能看到页面上显示了“Hello 沙河小王子”。
+
+
+#### 模板语法
+
+- \{\{\}\}: 模板变量
+- pipeline：管道操作，\|连接
+- 移出空格： \{\{- .Name -\}\}, 去除模板内容左侧的所有空白符号
+- 条件判断
+  - \{\{if pipeline\}\} T1 \{\{end\}\}
+  - \{\{if pipeline\}\} T1 \{\{else\}\} T0 \{\{end\}\}
+  - \{\{if pipeline\}\} T1 \{\{else if pipeline\}\} T0 \{\{end\}\}
+- range: 遍历元素，数组、切片、字典或者通道
+  - \{\{range x\}\} T1 \{\{end\}\} x长度为0，不会有任何输出
+  - \{\{range x\}\} T1 \{\{else\}\} T0 \{\{end\}\} x长度为0，会执行T0
+- with: 
+  - \{\{with pipeline\}\} T1 \{\{end\}\}
+  - 如果pipeline为empty不产生输出，否则将dot设为pipeline的值并执行T1。不修改外面的dot。
+  - \{\{with pipeline\}\} T1 \{\{else\}\} T0 \{\{end\}\}
+  - 如果pipeline为empty，不改变dot并执行T0，否则dot设为pipeline的值并执行T1。
+- 预定义函数
+  - 执行模板时，函数从两个函数字典中查找：首先是模板函数字典，然后是全局函数字典。一般不在模板内定义函数，而是使用Funcs方法添加函数到模板里
+  - and, or, not, len, index, print, printf, println, html, urlquery, js, call
+- 比较函数
+  - eq, ne, lt, le, gt, ge
+- 自定义函数: go中定义，tmpl中调用
+- 嵌套template: 单独的模板文件、代码块
+  - \{\{template "ol.tmpl"\}\}
+- block：定义模板和执行模板的缩写
+- 修改默认的标识符
+  - 自定义标志符，不用\{\{\}\}
+  - template.New("test").Delims("{[", "]}").ParseFiles("./t.tmpl")
 
 ### hertz
 
