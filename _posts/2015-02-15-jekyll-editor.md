@@ -648,7 +648,7 @@ pdf文件直接显示，800px不能省略px，否则高度低
 - 用户旅行图 user diagram
 - git图 Git diagram
 
-除了插件安装，还支持连接展示（类似draw.io）
+除了插件安装，还支持连接展示（类似draw.io，点击图片即进入原图编辑模式）
 - [![](https://mermaid.ink/img/pako:eNpVj82qwkAMRl8lZOUF-wJdCNdW3QgKuut0EdrUGXR-mKZcpO2736luNKvAOd9HMmLjW8Ycb5GChmupHKT5rQodTS-W-hqybDMdWMB6x88JtquDh177EIy7_bz97SJBMR4XjUG0cff5jYpX_uR4grI6UhAf6k9y_fMT7Cpz1qn-m-jIKbWvOso7yhqKUFCscY2WoyXTprPHJaBQNFtWmKe15Y6GhyhUbk4qDeIvT9dgLnHgNQ6hJeHSUHrYYup99Dz_A1H0VDQ)](https://mermaid.live/edit#pako:eNpVj82qwkAMRl8lZOUF-wJdCNdW3QgKuut0EdrUGXR-mKZcpO2736luNKvAOd9HMmLjW8Ycb5GChmupHKT5rQodTS-W-hqybDMdWMB6x88JtquDh177EIy7_bz97SJBMR4XjUG0cff5jYpX_uR4grI6UhAf6k9y_fMT7Cpz1qn-m-jIKbWvOso7yhqKUFCscY2WoyXTprPHJaBQNFtWmKe15Y6GhyhUbk4qDeIvT9dgLnHgNQ6hJeHSUHrYYup99Dz_A1H0VDQ)
 
 ```mermaid
@@ -672,6 +672,20 @@ SVG实现流程图绘制，前端页面应用：jquery.js/d3.js/ semantic.css; �
 - 导入导出json数据
 - 产生相应的xml和xpdl
 - 保存（还未完成，待更新）
+
+flowchart[添加方法](https://www.cnblogs.com/lindexi/p/12086789.html)
+
+```html
+<div class="flow">
+<textarea class="flowcode">
+st=>start: Start 
+e=>end           
+ldata=>operation: 进入csdn 
+
+st->ldata->e 
+</textarea>
+</div>
+```
 
 ### 任务管理
 

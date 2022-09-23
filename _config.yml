@@ -71,9 +71,15 @@ tag_dir: tag/
 # excerpt
 excerpt_separator: "\n\n\n\n"
 
+# 新增插件
+gems:
+  - jekyll-mermaid
+
 # 【2022-9-22】扩充（Ruby）插件，paginate 
 plugins: 
   - jekyll-paginate
+  - jekyll-seo-tag
+  - jekyll-spaceship
 
 paginate: 25
 
