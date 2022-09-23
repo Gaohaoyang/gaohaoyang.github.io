@@ -80,6 +80,11 @@ plugins:
   - jekyll-paginate
   - jekyll-seo-tag
   - jekyll-spaceship
+  - jekyll-mermaid
+# 【2022-9-23】规避github page里的safe模式，测试
+whitelist: 
+  - jekyll-spaceship
+  - jekyll-mermaid
 
 paginate: 25
 
