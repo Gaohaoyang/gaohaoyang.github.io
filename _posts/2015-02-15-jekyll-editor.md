@@ -699,6 +699,10 @@ pdf文件直接显示，800px不能省略px，否则高度低
       C-->D;
 ```
 
+【2022-9-24】亲测通过，不用jekyll插件，改用html的js格式
+- ① 添加cdn缓存的js文件到header.html里的< head >内
+- ② 使用html里的div来显示流程图
+
 添加：
 
 ```html
