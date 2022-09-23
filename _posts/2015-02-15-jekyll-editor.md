@@ -39,6 +39,18 @@ Jekyll 最初由 GitHub co-founder、前首席执行官 Tom Preston-Werner 创�
   - jekyll s
 - 通过 http://localhost:4000 进行访问
 
+## Jekyll 插件
+
+【2022-9-23】Github Page对jekyll的支持是很到位的, 唯一的不足可能也是其本身基于安全考虑而使得jekyll始终都是运行在**safe模式**, 目前[放开的插件列表](https://help.github.com/articles/using-jekyll-plugins-with-github-pages/)非常有限, 所以很多jekyll的插件都无法使用
+- jekyll plugin的集合地: [Jekyll-Plugins](http://www.jekyll-plugins.com/)
+
+如何安装Jekyll插件？
+- （1）换：不用github page服务，改用别的支持jekyll的公共服务
+- （2）推：github page本质上支持的是静态页面，所以，可以在本地编译好jekyll，然后把build后的_site文件夹推送到Page上
+- （3）绕：推送还是麻烦的话，可以使用github的project page。
+  - 新建一个repo, 然后在master分支管理原始代码, 在gh-pages分支存放生成的site代码. 然后通过xxx.github.io/repo-name来访问了，详细做法参考 [Github Pages 中使用Jekyll插件](https://taoalpha.github.io/blog/2015/05/29/tech-use-jekyll-plugin-with-github-page/)
+
+
 ## 笔记软件
 
 ### 自定义页面URL
@@ -188,6 +200,10 @@ plugins: [jekyll-paginate,jekyll-jupyter-notebook]
 : 定义段落
 
 #### 代码高亮、折叠
+
+Jekyll 使用与 Pygments 兼容的 Rouge突显工具。 [官方资料](https://docs.github.com/cn/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll#%E8%AF%AD%E6%B3%95%E7%AA%81%E5%87%BA%E6%98%BE%E7%A4%BA)
+- Pygments 已被弃用，在 Jekyll 4 中不受支持。 如果在 _config.yml 文件中指定 Pygments，则 Rouge 将用作后备。 Jekyll 不能使用任何其他语法突显工具
+- 如果想使用其他突显工具，如 highlight.js，则必须更新项目的 _config.yml 文件来禁用 Jekyll 的语法突出显示。
 
 - （1）代码高亮
 
@@ -696,6 +712,7 @@ st->ldata->e
 <iframe src='https://trello.com/b/ZmU6ki20/%E9%B9%A4%E5%95%B8%E4%B9%9D%E5%A4%A9' width='750' height='540' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
 
 ### 访问统计
+
 - 国外的插件
 
 代码
@@ -712,9 +729,6 @@ st->ldata->e
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
 ```
-
-
-
 
 ### 评论插件
 
@@ -1039,22 +1053,18 @@ jekyll结构
 官网下载 [http://rubygems.org/pages/download](http://rubygems.org/pages/download) rubygems-2.4.5.zip   
 
 cd到RubyGems目录   
-
-![](http://ww1.sinaimg.cn/large/7011d6cfjw1f2ue1l2yscj20gk02amxj.jpg)
+- ![](http://ww1.sinaimg.cn/large/7011d6cfjw1f2ue1l2yscj20gk02amxj.jpg)
 
 执行安装   
-
-![](http://ww1.sinaimg.cn/large/7011d6cfjw1f2ue1w8eqnj20bx00hglg.jpg)  
+- ![](http://ww1.sinaimg.cn/large/7011d6cfjw1f2ue1w8eqnj20bx00hglg.jpg)  
 
 ### 用RubyGems安装Jekyll
 
 执行下面的语句安装   
-
-![](http://ww4.sinaimg.cn/large/7011d6cfjw1f2ue2g2p3uj207x00ft8j.jpg)
+- ![](http://ww4.sinaimg.cn/large/7011d6cfjw1f2ue2g2p3uj207x00ft8j.jpg)
 
 安装结束画面   
-
-![](http://ww4.sinaimg.cn/large/7011d6cfjw1f2ue32drwhj20hv09xq5m.jpg)
+- ![](http://ww4.sinaimg.cn/large/7011d6cfjw1f2ue32drwhj20hv09xq5m.jpg)
 
 至此jekyll就已经安装完毕了，后续就是个性化的自己设定了。
 
@@ -1065,34 +1075,27 @@ cd到RubyGems目录
 cd到jekyllWorkspace   
 
 执行jekyll new name创建新的工作区   
-
-![](http://ww3.sinaimg.cn/large/7011d6cfjw1f2ue3lt31nj20cj02nt8u.jpg)
+- ![](http://ww3.sinaimg.cn/large/7011d6cfjw1f2ue3lt31nj20cj02nt8u.jpg)
 
 文件结构如下：
-
-![](http://ww1.sinaimg.cn/large/7011d6cfjw1f2ue3ujsybj20ek06wabh.jpg)
+- ![](http://ww1.sinaimg.cn/large/7011d6cfjw1f2ue3ujsybj20ek06wabh.jpg)
 
 cd到博客文件夹，开启服务器   
-
-![](http://ww1.sinaimg.cn/large/7011d6cfjw1f2ue47y9lgj20ao00f0sl.jpg)
+- ![](http://ww1.sinaimg.cn/large/7011d6cfjw1f2ue47y9lgj20ao00f0sl.jpg)
 
 watch为了检测文件夹内的变化，即修改后不需要重新启动jekyll
 
 我的环境下启动报错(你的可能没有)，再安装yajl-ruby和rouge  
-
-![](http://ww4.sinaimg.cn/large/7011d6cfjw1f2ue4nelnxj20dd077q49.jpg)
+- ![](http://ww4.sinaimg.cn/large/7011d6cfjw1f2ue4nelnxj20dd077q49.jpg)
 
 再次启动服务器成功
-
-![](http://ww4.sinaimg.cn/large/7011d6cfjw1f2ue4v42koj20g505bdgy.jpg)
+- ![](http://ww4.sinaimg.cn/large/7011d6cfjw1f2ue4v42koj20g505bdgy.jpg)
 
 访问 http://localhost:4000/   
-
-![](http://ww1.sinaimg.cn/large/7011d6cfjw1f2ue56ckwoj20je0eumz3.jpg)
+- ![](http://ww1.sinaimg.cn/large/7011d6cfjw1f2ue56ckwoj20je0eumz3.jpg)
 
 详细文章页面   
-
-![](http://ww2.sinaimg.cn/large/7011d6cfjw1f2ue5f3j9cj20je0gyq7a.jpg)
+- ![](http://ww2.sinaimg.cn/large/7011d6cfjw1f2ue5f3j9cj20je0gyq7a.jpg)
 
 ## 后续
 
