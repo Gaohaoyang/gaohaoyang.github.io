@@ -599,6 +599,7 @@ pdf文件直接显示，800px不能省略px，否则高度低
 
 
 ### 脑图嵌入
+
 - processon
 
 ```html
@@ -616,6 +617,8 @@ pdf文件直接显示，800px不能省略px，否则高度低
 
 ### 流程图
 
+#### draw.io
+
 - 【2020-7-4】[draw.io](https://www.draw.io/)，[客户端版本下载](https://www.cnblogs.com/HGNET/p/11893280.html)，[Chrome APP插件](https://chrome.google.com/webstore/detail/drawio-desktop/pebppomjfocnoigkeepgbmcifnnlndla/related?hl=en-GB)
    - [使用drawio进行画图真的很方便(WEB版/Chrome APP版/桌面版)](https://blog.csdn.net/dog250/article/details/89272808)
    - ![](https://tukuimg.bdstatic.com/scrop/468c0e017cdff12b6a2413b2c82c88a2.gif)
@@ -628,10 +631,25 @@ pdf文件直接显示，800px不能省略px，否则高度低
 - 【2020-8-21】[如何绘制泳道图](https://www.jianshu.com/p/787d918c0120)，[processon泳道图示例](https://v3.processon.com/view/559632e3e4b018f0e50364a7)
 - [visual-paradigm](https://online.visual-paradigm.com/cn/)
 
-【2022-2-17】Github支持流程图，将绘图插件 [Mermaid](https://github.com/mermaid-js/mermaid) 集成进了 Markdown，并推出了一项「图表绘制」功能。[](https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/)
+#### Mermaid
+
+【2022-2-17】Github支持流程图，将绘图插件 [Mermaid](https://github.com/mermaid-js/mermaid) 集成进了 Markdown，并推出了一项「图表绘制」功能。[mermaid](https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/)
 - Mermaid 是一款受到 Markdown 语法启发而诞生的 JavaScript 图表工具，由开发者 Knut Sveidqvist 所负责维护，目前在 GitHub 已积累 42000 Star
 - ![](https://img-blog.csdnimg.cn/img_convert/89c969121aa68a5383158aa891fed248.png)
 
+功能
+- 流程图 flowchart
+- 序列图 sequence diagram
+- 类图 class diagram
+- 状态图 state diagram
+- 甘特图 Gantt diagram
+- 饼图 pie chart
+- ER图 ER diagram
+- 用户旅行图 user diagram
+- git图 Git diagram
+
+除了插件安装，还支持连接展示（类似draw.io）
+- [![](https://mermaid.ink/img/pako:eNpVj82qwkAMRl8lZOUF-wJdCNdW3QgKuut0EdrUGXR-mKZcpO2736luNKvAOd9HMmLjW8Ycb5GChmupHKT5rQodTS-W-hqybDMdWMB6x88JtquDh177EIy7_bz97SJBMR4XjUG0cff5jYpX_uR4grI6UhAf6k9y_fMT7Cpz1qn-m-jIKbWvOso7yhqKUFCscY2WoyXTprPHJaBQNFtWmKe15Y6GhyhUbk4qDeIvT9dgLnHgNQ6hJeHSUHrYYup99Dz_A1H0VDQ)](https://mermaid.live/edit#pako:eNpVj82qwkAMRl8lZOUF-wJdCNdW3QgKuut0EdrUGXR-mKZcpO2736luNKvAOd9HMmLjW8Ycb5GChmupHKT5rQodTS-W-hqybDMdWMB6x88JtquDh177EIy7_bz97SJBMR4XjUG0cff5jYpX_uR4grI6UhAf6k9y_fMT7Cpz1qn-m-jIKbWvOso7yhqKUFCscY2WoyXTprPHJaBQNFtWmKe15Y6GhyhUbk4qDeIvT9dgLnHgNQ6hJeHSUHrYYup99Dz_A1H0VDQ)
 
 ```mermaid
   flowchart  TD;
@@ -640,6 +658,11 @@ pdf文件直接显示，800px不能省略px，否则高度低
       B-->D;
       C-->D;
 ```
+
+[mermaid在线编辑](https://mermaid.live/)
+
+
+#### flowchart
 
 网页格式的流程图编辑：[flow-chart](https://github.com/zhangyuanliang/flowchart), [示例](https://zhangyuanliang.github.io/flowchart/flowchart.html)
 
@@ -942,7 +965,7 @@ landslide readme.md -i -o > slide.html # 转换
 ```
 
 _includes文件夹下 head.html文件在 </head>之前添加
-- { % seo % }
+- \{\% seo \%\}
 
 
 ## Jekyll语法
