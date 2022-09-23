@@ -19,10 +19,8 @@ permalink: /jekyll
 ## Jekyll 简介
 
 Jekyll 是一个简单的，博客感知的，静态网站生成器。可以认为，Jekyll 是一个基于文件的内容管理系统（CMS）。它使用 Ruby 编写，通过 Markdown 和 Liquid 模板生成内容。
-
-Jekyll 最初由 GitHub co-founder、前首席执行官 Tom Preston-Werner 创立。
-
-目前，Jekyll 的维护者是 Parker Moore，他本人也于2016年初加入了 GitHub。
+- Jekyll 最初由 GitHub co-founder、前首席执行官 Tom Preston-Werner 创立。
+- 目前，Jekyll 的维护者是 Parker Moore，他本人也于2016年初加入了 GitHub。
 
 [Jekyll 使用技巧](https://crispgm.com/page/48-tips-for-jekyll-you-should-know.html)
 
@@ -41,7 +39,7 @@ Jekyll 最初由 GitHub co-founder、前首席执行官 Tom Preston-Werner 创�
 
 ## Jekyll 插件
 
-【2022-9-23】Github Page对jekyll的支持是很到位的, 唯一的不足可能也是其本身基于安全考虑而使得jekyll始终都是运行在**safe模式**, 目前[放开的插件列表](https://help.github.com/articles/using-jekyll-plugins-with-github-pages/)非常有限, 所以很多jekyll的插件都无法使用
+【2022-9-23】Github Page对jekyll的支持是很到位的, 唯一的不足可能也是其本身基于安全考虑而使得jekyll始终都是运行在**safe模式**, 目前[放开的插件列表](https://help.github.com/articles/using-jekyll-plugins-with-github-pages/)非常有限（白名单[插件详情](https://pages.github.com/versions/)）, 所以很多jekyll的插件都无法使用
 - jekyll plugin的集合地: [Jekyll-Plugins](http://www.jekyll-plugins.com/)
 
 如何安装Jekyll插件？
@@ -49,6 +47,10 @@ Jekyll 最初由 GitHub co-founder、前首席执行官 Tom Preston-Werner 创�
 - （2）推：github page本质上支持的是静态页面，所以，可以在本地编译好jekyll，然后把build后的_site文件夹推送到Page上
 - （3）绕：推送还是麻烦的话，可以使用github的project page。
   - 新建一个repo, 然后在master分支管理原始代码, 在gh-pages分支存放生成的site代码. 然后通过xxx.github.io/repo-name来访问了，详细做法参考 [Github Pages 中使用Jekyll插件](https://taoalpha.github.io/blog/2015/05/29/tech-use-jekyll-plugin-with-github-page/)
+
+Tip: 
+>- Note that GitHub Pages runs in **safe mode** and only allows a set of whitelisted plugins. 
+>- To use the gem in GitHub Pages, you need to build locally（本地编译） or use CI (e.g. travis, github workflow) and deploy to your gh-pages branch.
 
 
 ## 笔记软件
@@ -366,12 +368,15 @@ You can also use words, to fit your writing style more closely[^note].
 [站内文章链接]({{ site.baseurl}}{% post_url 2010-01-01-navigation %}#home)
 ```
 
-### 表格
+### 表格编辑
 
 |左对齐|右对齐（设置宽度）|居中|
 |:---|----------:|:-----:|
 |你好|你好|你好|
 |hello<br>world| hello world||
+
+
+#### 复杂单元格用html
 
 合并单元格直接使用HTML来达到效果。
 
@@ -440,6 +445,19 @@ You can also use words, to fit your writing style more closely[^note].
     </tr>
 </table>
 ```
+
+#### 表格功能扩展
+
+【2022-9-23】表格内无法使用公式
+- 【2022-9-8】latex在表格中显示异常，[github markdown](https://github.com/wqw547243068/wqw547243068.github.io/blob/master/_posts/2015-02-16-latex-editor.md)正常，jekyll page显示异常
+- 解法（1）：需要安装[spaceship插件](https://github.com/jeffreytse/jekyll-spaceship#installation)
+  - A Jekyll plugin to provide powerful supports for table, mathjax, plantuml, mermaid, emoji, video, audio, youtube, vimeo, dailymotion, soundcloud, spotify, etc.
+
+- 发帖咨询：[How to display Latex cell in markdown table?](https://github.com/orgs/community/discussions/32281)
+- There is no straightforward solution as Jekyll does not support that out of the box but you can get it to work:
+1. Change your Pages source to <span style='color:blue'>GitHub Actions</span> (this is in beta)
+1. Add a "vanilla" Jekyll workflow to your repository ([example](https://github.com/actions/starter-workflows/blob/main/pages/jekyll.yml))
+1. Use this plugin: [jekyll-spaceship](https://github.com/jeffreytse/jekyll-spaceship)
 
 ### 图片嵌入
 
@@ -664,8 +682,14 @@ pdf文件直接显示，800px不能省略px，否则高度低
 - 用户旅行图 user diagram
 - git图 Git diagram
 
-除了插件安装，还支持连接展示（类似draw.io，点击图片即进入原图编辑模式）
-- [![](https://mermaid.ink/img/pako:eNpVj82qwkAMRl8lZOUF-wJdCNdW3QgKuut0EdrUGXR-mKZcpO2736luNKvAOd9HMmLjW8Ycb5GChmupHKT5rQodTS-W-hqybDMdWMB6x88JtquDh177EIy7_bz97SJBMR4XjUG0cff5jYpX_uR4grI6UhAf6k9y_fMT7Cpz1qn-m-jIKbWvOso7yhqKUFCscY2WoyXTprPHJaBQNFtWmKe15Y6GhyhUbk4qDeIvT9dgLnHgNQ6hJeHSUHrYYup99Dz_A1H0VDQ)](https://mermaid.live/edit#pako:eNpVj82qwkAMRl8lZOUF-wJdCNdW3QgKuut0EdrUGXR-mKZcpO2736luNKvAOd9HMmLjW8Ycb5GChmupHKT5rQodTS-W-hqybDMdWMB6x88JtquDh177EIy7_bz97SJBMR4XjUG0cff5jYpX_uR4grI6UhAf6k9y_fMT7Cpz1qn-m-jIKbWvOso7yhqKUFCscY2WoyXTprPHJaBQNFtWmKe15Y6GhyhUbk4qDeIvT9dgLnHgNQ6hJeHSUHrYYup99Dz_A1H0VDQ)
+编辑方法详见：[官方文档](http://mermaid-js.github.io/mermaid/#/README)
+
+安装方法
+- （1）直接用URL链接生成图片（类似draw.io，点击图片即进入原图编辑模式）
+  - [mermaid在线编辑](https://mermaid.live/)
+  - [![](https://mermaid.ink/img/pako:eNpVj82qwkAMRl8lZOUF-wJdCNdW3QgKuut0EdrUGXR-mKZcpO2736luNKvAOd9HMmLjW8Ycb5GChmupHKT5rQodTS-W-hqybDMdWMB6x88JtquDh177EIy7_bz97SJBMR4XjUG0cff5jYpX_uR4grI6UhAf6k9y_fMT7Cpz1qn-m-jIKbWvOso7yhqKUFCscY2WoyXTprPHJaBQNFtWmKe15Y6GhyhUbk4qDeIvT9dgLnHgNQ6hJeHSUHrYYup99Dz_A1H0VDQ)](https://mermaid.live/edit#pako:eNpVj82qwkAMRl8lZOUF-wJdCNdW3QgKuut0EdrUGXR-mKZcpO2736luNKvAOd9HMmLjW8Ycb5GChmupHKT5rQodTS-W-hqybDMdWMB6x88JtquDh177EIy7_bz97SJBMR4XjUG0cff5jYpX_uR4grI6UhAf6k9y_fMT7Cpz1qn-m-jIKbWvOso7yhqKUFCscY2WoyXTprPHJaBQNFtWmKe15Y6GhyhUbk4qDeIvT9dgLnHgNQ6hJeHSUHrYYup99Dz_A1H0VDQ)
+- （2）安装插件，详情：[Jekyll 中 使用 Markdown 画流程图](http://blog.sudoyc.com/2016/09/05/draw-flowchart-in-markdown/)
+  - 【2022-9-23】实验失败，插件安装流程失败
 
 ```mermaid
   flowchart  TD;
@@ -675,7 +699,6 @@ pdf文件直接显示，800px不能省略px，否则高度低
       C-->D;
 ```
 
-[mermaid在线编辑](https://mermaid.live/)
 
 
 #### flowchart
@@ -983,6 +1006,19 @@ landslide readme.md -i -o > slide.html # 转换
 
 
 ### SEO优化
+
+[Jekyll-seo-tag](https://jekyll.github.io/jekyll-seo-tag/)
+- A Jekyll plugin to add metadata tags for search engines and social networks to better index and display your site's content.
+
+Jekyll SEO Tag adds the following meta tags to your site:
+- Page title, with site title or description appended
+- Page description
+- Canonical URL
+- Next and previous URLs on paginated pages
+- JSON-LD Site and post metadata for richer indexing
+- Open Graph title, description, site title, and URL (for Facebook, LinkedIn, etc.)
+- Twitter Summary Card metadata
+- While you could theoretically add the necessary metadata tags yourself, Jekyll SEO Tag provides a battle-tested template of crowdsourced best-practices.
 
 【2022-9-22】_config.yml文件 添加
 
