@@ -699,7 +699,32 @@ pdf文件直接显示，800px不能省略px，否则高度低
       C-->D;
 ```
 
+添加：
 
+```html
+<!-- 【2022-9-24】 Mermaid CDN -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+    mermaid.initialize({ startOnLoad: true });
+</script>
+```
+
+Here is one mermaid diagram:
+<div class="mermaid">
+    graph TD 
+    A[Client] --> B[Load Balancer] 
+    B --> C[Server1] 
+    B --> D[Server2]
+</div>
+
+And here is another:
+<div class="mermaid">
+    graph TD 
+    A[Client] -->|tcp_123| B
+    B(Load Balancer) 
+    B -->|tcp_456| C[Server1] 
+    B -->|tcp_456| D[Server2]
+</div>
 
 #### flowchart
 
