@@ -12,11 +12,22 @@ permalink: /game-theory
 * content
 {:toc}
 
-# 总结
-
-- 【2021-5-26】[这次终于把“内卷”讲明白了！](https://www.sohu.com/a/468770316_499002)
 
 # 博弈论
+
+## 资料
+
+- 【2021-5-26】[这次终于把“内卷”讲明白了！](https://www.sohu.com/a/468770316_499002)
+- 【2022-9-23】复旦大学博弈论[讲义](https://cces.fudan.edu.cn/info/1031/2711.htm)
+
+
+### 斯坦福博弈论
+
+- 【2022-9-23】[斯坦福 Game Theory 博弈论中文笔记](https://github.com/apachecn/stanford-game-theory-notes-zh), 斯坦福 Game Theory 为斯坦福博弈论课程，课程分两部分，Game Theory I: An Introduction 博弈论介绍，一共八周课程20个小时，斯坦福博弈论1课程信息；Game Theory II: Advanced Applications 博弈论高级应用，一共五次课程15个小时，斯坦福博弈论2课程信息，coursera中的最新课程为2016年8月10号录制
+- [Coursera 博弈论1](https://www.bilibili.com/video/BV1it411s7ji/?spm_id_from=333.788.recommend_more_video.0)
+- 斯坦福-博弈论2 [视频](https://www.bilibili.com/video/av63545278/)
+
+<iframe src="//player.bilibili.com/player.html?aid=63545278&bvid=BV1y4411S72T&cid=110343978&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 ## 博弈论定义
 
@@ -69,7 +80,7 @@ permalink: /game-theory
 - 【美丽心灵】改编自西尔维娅·娜萨写作的同名传记 《A Beautiful Mind: Genius, Schizophrenia and Recovery in the Life of a Nobel Laureate》
 - <img src="https://pic4.zhimg.com/80/v2-79d8a7373220b693fdeab871ad88a633_720w.jpg" height="100%" width="100" />
 
-<iframe src="//player.bilibili.com/player.html?aid=9786625&bvid=BV1Cx411S7Sw&cid=16178821&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=9786625&bvid=BV1Cx411S7Sw&cid=16178821&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
 ## 内卷与博弈
 
