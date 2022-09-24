@@ -123,6 +123,14 @@ DM在对话系统中的位置
 
 一个典型的对话系统的交互过程是这样的：
 
+<div class="mermaid">
+sequenceDiagram
+    actor Alice
+    actor Bob
+    Alice->>Bob: Hi Bob
+    Bob->>Alice: Hi Alice
+</div>
+
 |角色|类型|内容|
 |---|---|---|
 |用户|User Dialog Act：greeting|**你好**|
