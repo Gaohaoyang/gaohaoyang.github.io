@@ -428,6 +428,18 @@ c.render("新房驻场客服-query空间关系.html")
 流形是拓扑和微分几何中最为基本的概念，本质上就是很多**欧氏空间**粘贴在一起构成的空间。
 - 一个流形（manifold）是一个拓扑空间
 
+- 什么是`流形学习`？传统的机器学习方法中，数据点之间的距离和映射函数f都是定义在欧式空间中的，然而在实际情况中，这些数据点可能不是分布在欧式空间中的，因此传统欧式空间的度量难以用于真实世界的非线性数据，从而需要对数据的分布引入新的假设。`流形`(Manifold)是局部具有欧式空间性质的空间，包括各种纬度的曲线曲面，例如球体、弯曲的平面等。流形是线性子空间的一种非线性推广。参考[流形学习的简单介绍](https://jlunevermore.github.io/2016/06/25/43.%E6%B5%81%E5%BD%A2%E5%AD%A6%E4%B9%A0/)
+- `流形学习`：本质上，`流形学习`就是给数据降维的过程。这里假设数据是一个随机样本，采样自一个高维欧氏空间中的`流形`（manifold），流形学习的任务就是把这个高维流形映射到一个低维（例如2维）的空间里。流形学习可以分为线性算法和非线性算法，前者包括主成分分析（PCA）和线性判别分析（LDA），后者包括等距映射（Isomap），拉普拉斯特征映射（LE）等。流形学习可以用于特征的降维和提取，为后续的基于特征的分析，如聚类和分类，做铺垫，也可以直接应用于数据可视化等。注：摘自[集智百科流形学习（优质，包含代码及案例）](http://wiki.swarma.net/index.php/%E6%B5%81%E5%BD%A2%E5%AD%A6%E4%B9%A0)。
+  - 拟合线性的流形学习模型：LLE, LTSA, Hessian LLE, 和Modified LLE
+  - 拟合非线性的流形学习模型：Isomap，MDS和Spectral Embedding
+  - 效果示意如下：![降维效果](http://wiki.swarma.net/images/thumb/a/ad/Manifoldlearning_figure_1.png/800px-Manifoldlearning_figure_1.png)
+ - [浙大何晓飞的流形学习ppt](http://www.cad.zju.edu.cn/reports/%C1%F7%D0%CE%D1%A7%CF%B0.pdf),讲的很清楚，全面，最佳资料
+
+<object type="application/pdf" data="http://www.cad.zju.edu.cn/reports/%C1%F7%D0%CE%D1%A7%CF%B0.pdf"
+           id="review" style="width:100%;  height:800px; margin-top:0px;  margin-left:0px" >
+</object>
+
+
 ## 流形学习与深度学习
 
 [Neural Networks, Manifolds, and Topology](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/)，中文翻译版：[神经网络、流形和拓扑](https://www.jianshu.com/p/12667309bf23)
