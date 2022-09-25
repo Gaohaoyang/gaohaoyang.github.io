@@ -5268,10 +5268,124 @@ console.log(document.cookie)
 
 ## HTML
 
-- 【2020-8-24】Web页面分栏效果实现
-    - HTML中Frame实现左右分栏或上下分栏
-    - FrameSet中的Cols属性就控制了页面中的左右分篮，相应的rows则控制上下分栏
-    - 分栏的比例就有用逗号分开的10，*来确定
+### 文字效果
+
+【2022-9-25】[html文字效果](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Introduction_to_HTML/Advanced_text_formatting)
+
+六个标题元素标签 —— < h1 >、< h2 >、< h3 >、< h4 >、< h5 >、< h6 >。每个元素代表文档中不同级别的内容;
+-  < h1 > 表示主标题（the main heading）
+- < h2 > 表示二级子标题（subheadings）
+- < h3 > 表示三级子标题（sub-subheadings），等等
+- < span > 任一元素看起来像一个顶级标题, span元素没有语义。当想要对它用 CSS（或者 JS）时，可以用它包裹内容，且不需要附加任何额外的意义
+
+斜体、加粗、下划线
+- < i > 被用来传达传统上用**斜体**表达的意义：外国文字，分类名称，技术术语，一种思想……
+- < b > 被用来传达传统上用**粗体**表达的意义：关键字，产品名称，引导句……
+- < u > 被用来传达传统上用**下划线**表达的意义：专有名词，拼写错误……
+
+大量的 HTML 元素可以来标记计算机代码：
+- < code>: 用于标记计算机通用代码。
+- < pre>: 用于保留空白字符（通常用于代码块）——如果您在文本中使用缩进或多余的空白，浏览器将忽略它，您将不会在呈现的页面上看到它。但是，如果您将文本包含在< pre> < /pre>标签中，那么空白将会以与你在文本编辑器中看到的相同的方式渲染出来。
+- < var>: 用于标记具体变量名。
+- < kbd>: 用于标记输入电脑的键盘（或其他类型）输入。
+- < samp>: 用于标记计算机程序的输出。
+
+HTML 还支持将时间和日期标记为可供机器识别的格式的 < time> 元素
+
+```html
+<p>我是一个段落，千真万确。</p>
+<h1>我是文章的标题</h1>
+
+<h1>静夜思</h1>
+<p>床前明月光 疑是地上霜</p>
+<p>举头望明月 低头思故乡</p>
+
+<span style="font-size: 32px; margin: 21px 0;">这是顶级标题吗？</span>
+
+无序列表
+<ul>
+  <li>豆浆</li>
+  <li>油条</li>
+  <li>豆汁</li>
+  <li>焦圈</li>
+</ul>
+
+有序列表，可以嵌套
+
+<ol>
+  <li>沿着条路走到头</li>
+  <li>右转</li>
+  <li>直行穿过第一个十字路口</li>
+  <li>在第三个十字路口处左转</li>
+  <li>继续走 300 米，学校就在你的右手边</li>
+  <ul>
+    <li>豆浆</li>
+    <li>焦圈</li>
+  </ul>
+</ol>
+
+<p>This liquid is <strong>highly toxic（加粗）</strong> —
+if you drink it, <strong>you may <em>die（斜体）</em></strong>.</p>
+
+<p>
+  红喉北蜂鸟（学名：<i>Archilocus colubris（斜体）</i>）
+  菜单上有好多舶来词汇，比如 <i lang="uk-latn">vatrushka</i>（东欧乳酪面包）,
+  <i lang="id">nasi goreng</i>（印尼炒饭）以及<i lang="fr">soupe à l'oignon</i>（法式洋葱汤）。
+  <b>加粗</b>，<u>下划线</u>
+  总有一天我会改掉写<u style="text-decoration-line: underline; text-decoration-style: wavy;">措字（下划线，波浪线）</u>的毛病。
+</p>
+缩略语：abbr用法
+<p>第 33 届 <abbr title="夏季奥林匹克运动会">奥运会</abbr> 将于 2024 年 8 月在法国巴黎举行。</p>
+
+上标、下标
+<p> 上标：X<sup>2, 下标<sub>3 </p>
+
+<pre><code>const para = document.querySelector('p');
+
+para.onclick = function() {
+  alert('噢，噢，噢，别点我了。');
+}</code></pre>
+
+<p>请不要使用 <code>&lt;font&gt;</code> 、 <code>&lt;center&gt;</code> 等表象元素。</p>
+
+<p>在上述的 JavaScript 示例中，<var>para</var> 表示一个段落元素。</p>
+
+
+<p>按 <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>A</kbd> 选择全部内容。</p>
+
+<pre>$ <kbd>ping mozilla.org</kbd>
+<samp>PING mozilla.org (63.245.215.20): 56 data bytes
+64 bytes from 63.245.215.20: icmp_seq=0 ttl=40 time=158.233 ms</samp></pre>
+
+<time datetime="2016-01-20">2016 年 1 月 20 日</time>
+<!-- 标准简单日期 -->
+<time datetime="2016-01-20">20 January 2016</time>
+<!-- 只包含年份和月份-->
+<time datetime="2016-01">January 2016</time>
+<!-- 只包含月份和日期 -->
+<time datetime="01-20">20 January</time>
+<!-- 只包含时间，小时和分钟数 -->
+<time datetime="19:30">19:30</time>
+<!-- 还可包含秒和毫秒 -->
+<time datetime="19:30:01.856">19:30:01.856</time>
+<!-- 日期和时间 -->
+<time datetime="2016-01-20T19:30">7.30pm, 20 January 2016</time>
+<!-- 含有时区偏移值的日期时间 -->
+<time datetime="2016-01-20T19:30+01:00">7.30pm, 20 January 2016 is 8.30pm in France</time>
+<!-- 调用特定的周 -->
+<time datetime="2016-W04">The fourth week of 2016</time>
+
+```
+
+
+### 分栏
+
+【2020-8-24】Web页面分栏效果实现
+- HTML中Frame实现左右分栏或上下分栏
+- FrameSet中的Cols属性就控制了页面中的左右分篮，相应的rows则控制上下分栏
+- 分栏的比例就有用逗号分开的10，*来确定
+
+
 
 ```html
 <frameset border=10 framespacing=10 cols=”10,*” frameborder="1"   TOPMARGIN="0"  LEFTMARGIN="0" MARGINHEIGHT="0" MARGINWIDTH="0">
@@ -5279,6 +5393,9 @@ console.log(document.cookie)
  <frame>
 </framset>
 ```
+
+
+
 
 ### 下拉框
 
