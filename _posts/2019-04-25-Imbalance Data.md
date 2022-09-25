@@ -20,13 +20,22 @@ mathjax: true
 - [非平衡数据集 focal loss 多类分类](https://www.yanxishe.com/TextTranslation/1646)
 - [Focal Loss理解](https://www.cnblogs.com/king-lps/p/9497836.html)：降低了大量简单负样本在训练中所占的权重，也可理解为一种困难样本挖掘
 - ![](https://images2018.cnblogs.com/blog/1055519/201808/1055519-20180818162755861-24998254.png)
-      - 普通的交叉熵对于正样本而言，输出概率越大损失越小。对于负样本而言，输出概率越小则损失越小。此时的损失函数在大量简单样本的迭代过程中比较缓慢且可能无法优化至最优
-      - ![](https://images2018.cnblogs.com/blog/1055519/201808/1055519-20180818174944824-933422059.png)
-      - ![](https://images2018.cnblogs.com/blog/1055519/201808/1055519-20180818174822290-765890427.png)
-      - ![](https://images2018.cnblogs.com/blog/1055519/201808/1055519-20180818170840882-453549240.png)
-      - 在原有的基础上加了一个因子，其中gamma>0使得减少易分类样本的损失。使得更关注于困难的、错分的样本。
-      - 只添加alpha虽然可以平衡正负样本的重要性，但是无法解决简单与困难样本的问题。
-      - gamma调节简单样本权重降低的速率，当gamma为0时即为交叉熵损失函数，当gamma增加时，调整因子的影响也在增加。实验发现gamma为2是最优。
+- 普通的交叉熵对于正样本而言，输出概率越大损失越小。对于负样本而言，输出概率越小则损失越小。此时的损失函数在大量简单样本的迭代过程中比较缓慢且可能无法优化至最优
+- ![](https://images2018.cnblogs.com/blog/1055519/201808/1055519-20180818174944824-933422059.png)
+- ![](https://images2018.cnblogs.com/blog/1055519/201808/1055519-20180818174822290-765890427.png)
+- ![](https://images2018.cnblogs.com/blog/1055519/201808/1055519-20180818170840882-453549240.png)
+- 在原有的基础上加了一个因子，其中gamma>0使得减少易分类样本的损失。使得更关注于困难的、错分的样本。
+- 只添加alpha虽然可以平衡正负样本的重要性，但是无法解决简单与困难样本的问题。
+- gamma调节简单样本权重降低的速率，当gamma为0时即为交叉熵损失函数，当gamma增加时，调整因子的影响也在增加。实验发现gamma为2是最优。
+
+不平衡数据集如何处理？研究表明，在某些应用下，<span style='color:red'>1∶35</span>的比例就会使某些分类方法无效，甚至<span style='color:red'>1∶10</span>的比例也会使某些分类方法无效。
+- [分类问题中不平衡数据集的解决方案](https://www.52ml.net/16294.html)，正负样本玄虚
+- 1.过抽样：简单赋值负样本——最常用，容易过拟合，SVM模型里用途不大
+- 2.欠抽样：随机减少正样本——造成信息丢失
+- 3.算法层面：（1）重构训练集，按错分代价对训练集重构（2）代价敏感函数，大样本高代价，小样本低代价
+- 4.特征选择：选取有区分度的特征
+- [解决真实世界的问题：如何在不平衡数据集上使用机器学习](https://www.52ml.net/17957.html?utm_source=tuicool&utm_medium=referral)，[非平衡数据机器学习](https://www.cnblogs.com/waring/p/5890214.html)，【2019-04-25】[如何处理机器学习中的不平衡类别问题-含代码实现](https://github.com/xitu/gold-miner/blob/master/TODO/how-to-handle-imbalanced-classes-in-machine-learning.md)
+- ![图解](http://images2015.cnblogs.com/blog/594991/201609/594991-20160920201204715-235828797.png)
 
 > * 原文地址：[How to Handle Imbalanced Classes in Machine Learning](https://elitedatascience.com/imbalanced-classes)
 > * 原文作者：[elitedatascience](https://elitedatascience.com/imbalanced-classes)
