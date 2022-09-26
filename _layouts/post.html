@@ -14,8 +14,7 @@ layout: default
             </div>
 
             <div class="label-card">
-                {% if page.author %}<i class="fa fa-user"></i>{{ page.author }}
-                {% endif %}
+                {% if page.author %}<i class="fa fa-user"></i>{{ page.author }} {% endif %}
             </div>
 
             <div class="label-card">
@@ -29,7 +28,8 @@ layout: default
             <div class="label-card">
             {% include tag.html %}
             </div>
-
+            <!-- 【2022-9-26】站点访问统计 -->>
+            总阅读量<span id="busuanzi_value_page_pv"></span>次
         </div>
         
         <!-- 导读区 -->
@@ -44,11 +44,6 @@ layout: default
         
         <!-- 打赏 -->
         {% include tool_award.html %}
-        
-        <!-- 【2022-9-26】站点访问统计 -->>
-        <p>
-            访问量<span id="busuanzi_value_site_pv"></span>次，访客数<span id="busuanzi_value_site_uv"></span>人次，总阅读量<span id="busuanzi_value_page_pv"></span>次
-        </p>
 
         <!-- 分享工具 -->
         <h2 id="share">Share</h2>
@@ -137,6 +132,5 @@ layout: default
 
 <script src="{{ "/js/pageContent.js " | prepend: site.baseurl }}" charset="utf-8"></script>
 
-<!-- 【2022-9-1】支持latex数学公式显示 -->
+<!-- 【2022-9-1】  支持latex数学公式显示 -->
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-
