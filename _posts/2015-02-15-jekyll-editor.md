@@ -836,11 +836,13 @@ st->ldata->e
 
 ### 评论插件
 
-- 评论插件 [Share.js](https://github.com/overtrue/share.js/)，一键分享到微博、QQ空间、QQ好友、微信、腾讯微博、豆瓣、Facebook、Twitter、Linkedin、Google+、点点等
-
-![](https://cloud.githubusercontent.com/assets/1472352/11433126/05f8b0e0-94f4-11e5-9fca-74dc9d1b633f.png)
+评论插件
+- gitment：利用GitHub的issue实现评论功能，已经无人维护
+- gitalk：原理类似，维护中
 
 - 来必力，源自韩国
+
+#### 韩国来必力
 
 ```html
 <!-- 来必力City版安装代码 -->
@@ -860,6 +862,12 @@ st->ldata->e
 <!-- City版安装代码已完成 -->
 ```
 
+#### gitalk
+
+[Gitalk插件](https://gitalk.github.io/?)
+- 官方[安装说明](https://github.com/gitalk/gitalk/blob/master/readme-cn.md)
+- 【2022-9-27】报错：Error: Bad credentials，官方issue[发帖](https://github.com/gitalk/gitalk/issues/363)
+
 #### [GitMent评论系统](https://frankjkl.github.io/2019/01/08/blogbuild-在Jekyll博客添加gitment评论系统)
 
 本文章转载于http://xichen.pub/2018/01/31/2018-01-31-gitment/，并在其基础上进行完善
@@ -868,11 +876,11 @@ st->ldata->e
 
 - 在[setting - OAuth Application 注册页面](https://github.com/settings/applications/new)完成注册
 
-```
-Application Name: gitment评论 //随便填
-Homepage Url: https://frankjkl.github.io //博客的域名
-Application description: //随便填，留空也可以
-Authorization Callback URL: https://frankjkl.github.io //一定要写自己Github Pages的URL
+```yaml
+Application Name: gitment评论 # 随便填
+Homepage Url: https://frankjkl.github.io # 博客的域名
+Application description: # 随便填，留空也可以
+Authorization Callback URL: https://frankjkl.github.io # 一定要写自己Github Pages的URL
 ```
 
 注册成功后会得到`Client ID`和`Client Secret`
@@ -909,22 +917,21 @@ gitment.render('container')
 接下来，介绍一下如何初始化评论系统
 
 1. 上面第2步代码添加成功并上传后，你就可以在你的博文页下面看到一个评论框，还有看到以下错误`Error: Comments Not Initialized`，提示该篇博文的评论系统还没初始化
-
-   ![1546944230319](https://frankjkl.github.io/assert/1546944230319.png)
-
+- ![1546944230319](https://frankjkl.github.io/assert/1546944230319.png)
 2. 点击`Login with GitHub`后，使用自己的github账号（必须跟第二步owner用户名相同的账号）登录后，就可以在上面错误信息处看到一个`Initialize Comments`的按钮
-
-   ![](https://jacobpan3g.github.io/img/gitment-in-jekyll.png)
-
+- ![](https://jacobpan3g.github.io/img/gitment-in-jekyll.png)
 3. 点击`Initialize Comments`按钮后，就可以开始对该篇博文开始评论了， 同时也可以在对应的github仓库看到相应的issue
+- ![1546944090342](https://frankjkl.github.io/assert/1546944090342.png)
 
-   ![1546944090342](https://frankjkl.github.io/assert/1546944090342.png)
+#### 问题
+
+##### Error: Bad credentials
+
+【2022-9-27】gitment和gitalk都出现这种错误提示，暂未解决
+- 官方issue[发帖](https://github.com/gitalk/gitalk/issues/363)
 
 
-
-##### 遇到的一些坑
-
-###### Error：NOT FOUND
+##### Error：NOT FOUND
 
 owner或者repo配置错误了，照着第二步来就好，网页端生成后如下
 
@@ -943,14 +950,12 @@ owner或者repo配置错误了，照着第二步来就好，网页端生成后�
 </script>
 ```
 
-
-
-###### Error: Comments Not Initialized
+##### Error: Comments Not Initialized
 
 - 在步骤一中，给`Authorization callback URL`指定的地址错了
 - 还没有在该页面的Gitment评论区登陆GitHub账号
 
-###### Object ProgressEvent
+##### Object ProgressEvent
 
 最近gitment作者的服务器过期了，所以登陆GitHub时一直报Object ProgressEvent。我在本文第二步添加的gitment代码是没有这个问题的。
 
@@ -979,7 +984,7 @@ owner或者repo配置错误了，照着第二步来就好，网页端生成后�
 
 登陆时就不会再报错了，这是别人新搭建的服务器。参考https://github.com/jjeejj/jjeejj.github.io/issues/8
 
-###### Error：validation failed
+##### Error：validation failed
 
 **发生时间：**评论的初始化时
 
@@ -997,6 +1002,10 @@ gitment.js中`labels: labels.concat(['gitment', id])`id默认为`window.location
 
 ### 分享插件
 
+- 评论插件 [Share.js](https://github.com/overtrue/share.js/)，一键分享到微博、QQ空间、QQ好友、微信、腾讯微博、豆瓣、Facebook、Twitter、Linkedin、Google+、点点等
+- ![](https://cloud.githubusercontent.com/assets/1472352/11433126/05f8b0e0-94f4-11e5-9fca-74dc9d1b633f.png)
+
+
 - 采用百度分享
 
 ```html
@@ -1011,8 +1020,7 @@ gitment.js中`labels: labels.concat(['gitment', id])`id默认为`window.location
 </script>
 ```
 - 【2019-11-05】直接使用[Share工具](https://github.com/overtrue/share.js), 添加以下代码即可
-
-![](https://cloud.githubusercontent.com/assets/1472352/11433126/05f8b0e0-94f4-11e5-9fca-74dc9d1b633f.png)
+- ![](https://cloud.githubusercontent.com/assets/1472352/11433126/05f8b0e0-94f4-11e5-9fca-74dc9d1b633f.png)
 
 ```html
 <!-- https://github.com/overtrue/share.js -->

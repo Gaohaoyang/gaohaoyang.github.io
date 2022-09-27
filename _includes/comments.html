@@ -1,3 +1,4 @@
+<p> --gitment-- </p>
 <!-- Gitment评论插件: https://frankjkl.github.io/2019/01/08/blogbuild-%E5%9C%A8Jekyll%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0gitment%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/ -->
 <div id="gitmentContainer"></div>
 <!-- <link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css"> -->
@@ -10,7 +11,7 @@
 
 <script>
 var gitment = new Gitment({
-    id : '{{ page.date }}',
+    id : '{{ page.title }}',
     owner: '{{site.github_username}}',
     repo: '{{site.comment_gitalk_repo}}',
     oauth: {
@@ -21,7 +22,7 @@ var gitment = new Gitment({
 gitment.render('gitmentContainer');
 </script>
 
-<p> ---- </p>
+<p> --gitalk-- </p>
 
 <!-- gitalk评论插件: https://github.com/gitalk/gitalk/blob/master/readme-cn.md -->
 <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
@@ -45,6 +46,8 @@ gitment.render('gitmentContainer');
 </script> 
 <!-- Gitalk end -->
 
+<p> --多说-- </p>
+
 {% if site.duoshuo_shortname %}
 <!-- 多说评论框 start -->
 <div class="ds-thread" data-thread-key="{{ site.url }}{{ page.url }}" data-title="{{page.title}}" data-url="{{ site.url }}{{ page.url }}"></div>
@@ -66,7 +69,7 @@ gitment.render('gitmentContainer');
 <!-- 多说公共JS代码 end -->
 {% endif %}
 
-
+<p> --disqus-- </p>
 <!-- disqus插件 -->
 {% if site.disqus_shortname %}
 <div id="disqus_thread"></div>
@@ -75,7 +78,6 @@ gitment.render('gitmentContainer');
      * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
      * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
      */
-
     var disqus_config = function() {
         this.page.url = '{{ site.url }}{{ page.url }}'; // Replace PAGE_URL with your page's canonical URL variable
         this.page.identifier = '{{ site.url }}{{ page.url }}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
@@ -94,7 +96,7 @@ gitment.render('gitmentContainer');
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 {% endif %}
 
-
+<p> --来必力-- </p>
 <!-- 来必力评论插件 -->
     {% if not (site.duoshuo and site.duoshuo.shortname) and not site.duoshuo_shortname and not site.disqus_shortname and not site.hypercomments_id and not site.gentie_productKey %}
         {% if site.livere_uid %}
