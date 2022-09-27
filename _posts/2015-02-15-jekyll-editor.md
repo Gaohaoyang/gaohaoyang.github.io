@@ -812,6 +812,11 @@ st->ldata->e
 
 ### 访问统计
 
+常见统计插件
+- Google analytics：谷歌统计
+- 百度统计，查看[地址](https://tongji.baidu.com/main/overview/25943928/overview/index)
+
+
 - 国外的插件
 
 代码
