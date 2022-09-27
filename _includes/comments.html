@@ -1,3 +1,47 @@
+<!-- Gitment评论插件: https://frankjkl.github.io/2019/01/08/blogbuild-%E5%9C%A8Jekyll%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0gitment%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/ -->
+<div id="gitmentContainer"></div>
+<!-- <link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css"> -->
+<link rel="stylesheet" href="{{ site.baseurl }}/css/gitment.css">
+<!-- <script src="https://jjeejj.github.io/js/gitment.js"></script> -->
+<script src="{{ site.baseurl }}/js/gitment.js"></script>
+<!-- 【2020-1-14】以上方法失效，下面两行代码是补丁 -->
+<!-- <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.js"></script> -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.css"/> -->
+
+<script>
+var gitment = new Gitment({
+    id : '{{ page.date }}',
+    owner: '{{site.github_username}}',
+    repo: '{{site.comment_gitalk_repo}}',
+    oauth: {
+        client_id: '{{site.comment_gitalk_clientId}}',
+        client_secret: '{{site.comment_gitalk_clientSecret}}',
+    },
+});
+gitment.render('gitmentContainer');
+</script>
+
+<!-- gitalk评论插件: https://github.com/gitalk/gitalk/blob/master/readme-cn.md -->
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<!-- Gitalk start -->
+<div id="gitalk-container"></div> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script> 
+<script>
+    var gitalk  = new Gitalk ({
+        id: window.location.pathname,   // Ensure uniqueness and length less than 50
+        clientID: '{{site.comment_gitalk_clientId}}',
+        clientSecret: '{{site.comment_gitalk_clientSecret}}',
+        repo: '{{site.comment_gitalk_repo}}',
+        owner: '{{site.github_username}}',
+        admin: ['{{site.github_username}}'],
+	distractionFreeMode: False  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
+</script> 
+<!-- Gitalk end -->
+
 {% if site.duoshuo_shortname %}
 <!-- 多说评论框 start -->
 <div class="ds-thread" data-thread-key="{{ site.url }}{{ page.url }}" data-title="{{page.title}}" data-url="{{ site.url }}{{ page.url }}"></div>
@@ -82,51 +126,5 @@
 <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
 </div>
 <!-- City版安装代码已完成 -->
-
-<!-- Gitment评论插件: https://frankjkl.github.io/2019/01/08/blogbuild-%E5%9C%A8Jekyll%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0gitment%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/ -->
-<div id="gitmentContainer"></div>
-<!-- <link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css"> -->
-<link rel="stylesheet" href="{{ site.baseurl }}/css/gitment.css">
-<!-- <script src="https://jjeejj.github.io/js/gitment.js"></script> -->
-<script src="{{ site.baseurl }}/js/gitment.js"></script>
-<!-- 【2020-1-14】以上方法失效，下面两行代码是补丁 -->
-<!-- <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.js"></script> -->
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.css"/> -->
-
-<script>
-var gitment = new Gitment({
-    id : '{{ page.date }}',
-    owner: '{{site.github_username}}',
-    repo: '{{site.comment_gitalk_repo}}',
-    oauth: {
-        client_id: '{{site.comment_gitalk_clientId}}',
-        client_secret: '{{site.comment_gitalk_clientSecret}}',
-    },
-});
-gitment.render('gitmentContainer');
-</script>
-
-<!-- gitalk评论插件: https://github.com/gitalk/gitalk/blob/master/readme-cn.md -->
-  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-
-<!-- Gitalk start -->
-<div id="gitalk-container"></div> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script> 
-<script>
-    var gitalk  = new Gitalk ({
-        id: window.location.pathname,   // Ensure uniqueness and length less than 50
-        clientID: '{{site.comment_gitalk_clientId}}',
-        clientSecret: '{{site.comment_gitalk_clientSecret}}',
-        repo: '{{site.comment_gitalk_repo}}',
-        owner: '{{site.github_username}}',
-        admin: ['{{site.github_username}}'],
-	distractionFreeMode: False  // Facebook-like distraction free mode
-    })
-    gitalk.render('gitalk-container')
-</script> 
-<!-- Gitalk end -->
-
-
 
 
