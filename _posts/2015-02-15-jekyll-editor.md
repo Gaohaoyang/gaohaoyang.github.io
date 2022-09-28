@@ -844,6 +844,8 @@ st->ldata->e
 
 #### 多说
 
+【2022-9-28】已失效
+
 ```html
 {% if site.duoshuo_shortname %}
 <!-- 多说评论框 start -->

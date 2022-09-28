@@ -12,18 +12,19 @@ type: page
 ## 关于我
 
 - [你好，我是码农！](https://mp.weixin.qq.com/s?__biz=MjM5ODY2OTQyNg==&mid=502284435&idx=1&sn=b40f727830cae264e65c29c75f75ee70&chksm=3ec3dd8e09b45498b3bc2efccc3fe52a2f79e8f424774dc4afaedb84b3bfc0954968b7a678de&mpshare=1&scene=23&srcid&sharer_sharetime=1564480271727&sharer_shareid=b8d409494a5439418f4a89712efcd92a%23rd)
-- 普通程序猿，些许爱好，容易沉浸在自己的世界里，发发呆，于是有了公众号（[鹤啸九天](http://mp.weixin.qq.com/mp/homepage?__biz=MjM5ODY2OTQyNg==&hid=1&sn=259f54743846ee6be7585e06be6e267e&scene=18%23wechat_redirect)）和这个技术博客
-   - 动静结合
-      - 动：长跑、游泳、爬山
-      - 静：诗词书画，一颗伪文艺的心
+- 普通程序猿，些许爱好，爱思考，偶尔发发呆，公众号（[鹤啸九天](http://mp.weixin.qq.com/mp/homepage?__biz=MjM5ODY2OTQyNg==&hid=1&sn=259f54743846ee6be7585e06be6e267e&scene=18%23wechat_redirect)）和这个技术博客
+- 动静结合
+  - 动：长跑、游泳、爬山
+  - 静：诗词书画，一颗伪文艺的心
 - BAT江湖混迹多年，工作内容上
 
-```从推荐系统、Hadoop/Hive，到数据挖掘、机器学习，再到深度学习、聊天机器人、计算机视觉和自然语言处理等。```
+> 从推荐系统、Hadoop/Hive，到数据挖掘、机器学习，再到深度学习、聊天机器人、计算机视觉和自然语言处理等。
 
 > 崇尚终身学习,自律更自由，平凡不平庸
 
  <div>My Moment (微信公众号)</div>
-   <img src="{{site.url}}/wqw/fig/wqw.png" alt="欢迎关注鹤啸九天" height="200" width="200" />
+
+<img src="{{site.url}}/wqw/fig/wqw.png" alt="欢迎关注鹤啸九天" height="200" width="200" />
 
 ## 相关项目
 
@@ -33,7 +34,7 @@ type: page
 - 大数据文摘+清华+SoAI共同承办的AI培训班：[The School of AI Beijing](https://wqw547243068.github.io/school-of-ai-beijing)
 ![](https://wqw547243068.github.io/school-of-ai-beijing/other/bdd_siraj.png)
 - 雷锋网上开的Python入门AI课程：[有趣的Python](https://wqw547243068.github.io/Python-learning), [AI研习社课程](https://mooc.yanxishe.com/course/489)
-[![](http://static.mooc.ai/files/course/2018/05-08/17590372d80d143595.jpg)](http://www.mooc.ai/course/489)
+[![](https://static.mooc.ai/files/course/2018/05-08/17590372d80d143595.jpg)](http://www.mooc.ai/course/489)
 
 ## 联系我
 
@@ -51,6 +52,7 @@ type: page
 欢迎大家提一些对本站主题的建议，可以直接在下面留言或者新建一个 [Issue](https://github.com/wqw547243068/wqw547243068.github.io/issues)。
 
 - 百度分享
+
 <!-- [2019-08-05]百度分享插件, 失效 -->
 <div class="bdsharebuttonbox">
     <a href="#" class="bds_more" data-cmd="more"></a>
@@ -59,8 +61,9 @@ type: page
     <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
     <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
 </div>
+
 <script>
-    window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"鹤啸九天的技术博客","bdMini":"2","bdMiniList":false,"bdPic":"http://news.zx123.cn/uploadfile/news68/1800961ad02811e7b1c400163e010ef1.jpg","bdStyle":"0","bdSize":"32"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"32"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"鹤啸九天的技术博客","bdMini":"2","bdMiniList":false,"bdPic":"http://news.zx123.cn/uploadfile/news68/1800961ad02811e7b1c400163e010ef1.jpg","bdStyle":"0","bdSize":"32"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"32"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='https://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
 </script>
 
 
@@ -76,7 +79,8 @@ type: page
 
 ## Location
 
-![]({{site.url}}/wqw/fig/beijing_north.png)
+位置信息
+- ![]({{site.url}}/wqw/fig/beijing_north.png)
 
 <iframe src="{{ site.url }}/wqw/demo/tool_map.html" width='100%' height='100%' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
 
@@ -85,16 +89,21 @@ type: page
 ## 每日任务
 
 - 【2020-7-4】绘图软件 [draw.io](https://www.draw.io/)
-   - ![](https://tukuimg.bdstatic.com/scrop/468c0e017cdff12b6a2413b2c82c88a2.gif)
+  - ![](https://tukuimg.bdstatic.com/scrop/468c0e017cdff12b6a2413b2c82c88a2.gif)
 - 类似于Gliffy Diagrams for Confluence
-- 参考
-   - [10款流程图工具](https://baijiahao.baidu.com/s?id=1668266730880239997)
+
+参考
+- [10款流程图工具](https://baijiahao.baidu.com/s?id=1668266730880239997)
 
 - atlassian家族之[trello](https://trello.com/)，我的[个人trello](https://trello.com/b/ZmU6ki20/%E6%AF%8F%E6%97%A5%E4%BB%BB%E5%8A%A1)
 - [我的confluence主页](https://wangqiwen.atlassian.net/wiki/spaces/WQW)
 
-
+```html
 <iframe src='https://trello.com/b/ZmU6ki20/%E6%AF%8F%E6%97%A5%E4%BB%BB%E5%8A%A1' width='750' height='540' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
+```
+
+以上语句已失效
+
 
 ## 友情链接
 
