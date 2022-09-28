@@ -79,7 +79,7 @@ type: page
 
 ![]({{site.url}}/wqw/fig/beijing_north.png)
 
-<iframe src="{{ site.baseurl }}/includes/tool_map.html" width='750' height='540' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
+<iframe src="{{ site.url }}/wqw/demo/tool_map.html" width='100%' height='80%' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
 
 ## 每日任务
 
