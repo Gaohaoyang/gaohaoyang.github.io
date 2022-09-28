@@ -1125,6 +1125,20 @@ jekyll 插件安装失败
 </script>
 ```
 
+使用
+- 跟其他插件一样放在 includes 中，tool_map.html，会导致本页面无法渲染，原因未知
+- 解决：将tool_map.html挪到外面（wqw/demo/tool_map.html），当做独立页面，通过iframe方式嵌入
+
+
+```html
+<!-- 使用  -->
+<iframe src="{{ site.url }}/wqw/demo/tool_map.html" width='100%' height='100%' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
+```
+
+效果：
+
+<iframe src="{{ site.url }}/wqw/demo/tool_map.html" width='100%' height='100%' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
+
 ### 博客导流公众号
 
 【2022-9-10】openwrite提供的[博客导流公众号工具](https://openwrite.cn/guide/readmore/readmore.html)
