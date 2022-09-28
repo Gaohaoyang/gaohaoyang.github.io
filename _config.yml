@@ -26,17 +26,17 @@ dribbble_username:
 
 description_footer: 学习资料汇总
 
+# ======= 评论插件 ============
 # comments
 comments: true
 # two ways to comment, only choose one, and use your own short name
 # 两种评论插件，选一个就好了，使用自己的 short_name
-#duoshuo_shortname: wqw547243068
-#disqus_shortname: wqw # [2019-04-29]vpn，通过google账号申请，https://wqw.disqus.com/admin/install/platforms/jekyll/
+duoshuo_shortname: wqw547243068
+disqus_shortname: wqw # [2019-04-29]vpn，通过google账号申请，https://wqw.disqus.com/admin/install/platforms/jekyll/
+
 # 【2019-07-25】韩国来必力评论系统 Support for LiveRe comments system.
 # You can get your uid from https://livere.com/insight/myCode (General web site)
 livere_uid: MTAyMC80NTU2OC8yMjA3OQ==
-
-# [2019-10-30]
 
 # [2019-11-01]gittalk评论插件， https://aerolith.ink/2018/08/25/Gitalk/
 
@@ -44,7 +44,7 @@ livere_uid: MTAyMC80NTU2OC8yMjA3OQ==
 comment_gitalk_clientId: a34109f2e38d41848408
 comment_gitalk_clientSecret: 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
 comment_gitalk_repo: wqw547243068.github.io
-
+# ======== 网站统计 =========
 # statistic analysis 统计代码
 # 百度统计 id，将统计代码替换为自己的百度统计id，即
 # hm.src = "//hm.baidu.com/hm.js?xxxxxxxxxxxx";
@@ -53,7 +53,7 @@ baidu_tongji_id: 0600ccce38264ecba9a3c1b652c83b75
 #baidu_tongji_id: cf8506e0ef223e57ff6239944e5d46a4
 google_analytics_id: UA-139247575-1 # google 分析追踪id
 
-
+# ======== markdown ========
 # Build settings
 markdown: kramdown
 
