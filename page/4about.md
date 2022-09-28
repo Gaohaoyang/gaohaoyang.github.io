@@ -66,7 +66,7 @@ type: page
 位置信息
 - ![]({{site.url}}/wqw/fig/beijing_north.png)
 
-<iframe src="{{ site.url }}/wqw/demo/tool_map.html" width='100%' height='100%' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
+<iframe src="{{ site.url }}/wqw/demo/tool_map.html" frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
 
 
 ## 每日任务
