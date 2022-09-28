@@ -79,8 +79,6 @@ type: page
 
 ![]({{site.url}}/wqw/fig/beijing_north.png)
 
- <!-- {% include tool_map.html %} -->
-
 
 ## 每日任务
 
