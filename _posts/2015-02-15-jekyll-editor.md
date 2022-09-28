@@ -839,8 +839,37 @@ st->ldata->e
 评论插件
 - gitment：利用GitHub的issue实现评论功能，已经无人维护
 - gitalk：原理类似，维护中
-
+- disqus：国外的评论插件，支持Facebook、twitter、google分享，emoji表情评论（Upvote、Funny、Love、Surprised、Angry、Sad）
 - 来必力，源自韩国
+
+#### 多说
+
+```html
+{% if site.duoshuo_shortname %}
+<!-- 多说评论框 start -->
+<div class="ds-thread" data-thread-key="{{ site.url }}{{ page.url }}" data-title="{{page.title}}" data-url="{{ site.url }}{{ page.url }}"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    var duoshuoQuery = {
+        short_name: "{{site.duoshuo_shortname}}"
+    };
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';
+        ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+{% endif %}
+```
+
+#### disqus
+
+- 【2019-04-29】 vpn，通过google账号申请，[disqus评论](https://wqw.disqus.com/admin/install/platforms/jekyll/)
 
 #### 韩国来必力
 
