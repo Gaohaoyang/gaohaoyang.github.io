@@ -1061,7 +1061,8 @@ _layout/post.html添加插件
 
 ### 加地图插件
 
-- [如何加百度地图插件](http://www.shejidaren.com/tian-jia-baidu-di-tu-dai-ma.html)
+【2022-9-28】[百度地图开放平台](https://lbsyun.baidu.com/apiconsole/key#/home)，申请、查看自己的api密钥 ak，[JavaScript API GL使用指南](https://lbs.baidu.com/index.php?title=jspopularGL)
+- 百度地图JavaScript API GL 是一套由JavaScript语言编写的应用程序接口，使用了WebGL对地图、覆盖物等进行渲染，支持3D视角展示地图。帮助开发者在网站中构建功能丰富、交互性强的地图应用，支持PC端和移动端基于浏览器的地图应用开发。JavaScript API GL提供了丰富的功能接口，包括地图展示、定位、覆盖物、检索、路线规划等，适配多样化的业务场景
 
 ### 博客导流公众号
 
