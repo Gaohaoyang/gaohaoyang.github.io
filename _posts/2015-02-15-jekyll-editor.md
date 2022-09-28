@@ -1094,22 +1094,24 @@ _layout/post.html添加插件
 - 百度地图JavaScript API GL 是一套由JavaScript语言编写的应用程序接口，使用了WebGL对地图、覆盖物等进行渲染，支持3D视角展示地图。帮助开发者在网站中构建功能丰富、交互性强的地图应用，支持PC端和移动端基于浏览器的地图应用开发。JavaScript API GL提供了丰富的功能接口，包括地图展示、定位、覆盖物、检索、路线规划等，适配多样化的业务场景
 
 jekyll 插件安装失败
+- 注意：百度api地址用https，而不是http！要不然jekyll加载时会不显示，因为主站用https，不允许外部api用http，不安全
 
 示例代码
 
 ```html
 <!-- [2022-09-28]百度地图插件 -->
+<html>
 <head>
 <style type="text/css">
     body, html,#allmap {width: 100%;height: 80%;overflow: hidden;margin:0;font-family:"微软雅黑";}
 </style>
-<script type="text/javascript" src="http://api.map.baidu.com/api?type=webgl&v=1.0&ak=cSFvkPGbNRbd3vxO30IotLEk"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?type=webgl&v=1.0&ak=cSFvkPGbNRbd3vxO30IotLEk"></script>
 </head>
 
 <body>
     <div id="allmap"></div>	
 </body>
-
+</html>
 <script type="text/javascript">
     // GL版命名空间为BMapGL
     // 按住鼠标右键，修改倾斜角和角度

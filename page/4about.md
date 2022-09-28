@@ -72,14 +72,15 @@ type: page
 ## 其它
 
 - 文章质量不好？
-
-![](https://static.segmentfault.com/v-5d2ffc9a/global/img/404.svg)
+- ![](https://static.segmentfault.com/v-5d2ffc9a/global/img/404.svg)
 
 ## Location
 
 ![]({{site.url}}/wqw/fig/beijing_north.png)
 
-<iframe src="{{ site.url }}/wqw/demo/tool_map.html" width='100%' height='80%' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
+<iframe src="{{ site.url }}/wqw/demo/tool_map.html" width='100%' height='100%' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
+
+{% include tool_map.html %}
 
 ## 每日任务
 
