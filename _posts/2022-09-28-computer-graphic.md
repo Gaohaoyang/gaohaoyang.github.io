@@ -182,7 +182,19 @@ WebGL学习有门槛，[Three.js](https://threejs.org/) 作为方向入门，就
 
 自定义开发Demo
 
-<iframe src="{{ site.url }}/wqw/demo/three.js.html" width='100%' height='600' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
+<iframe src="{{ site.url }}/wqw/demo/three.js.html" frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
+
+- [鞋子](https://threejs.org/examples/webgl_loader_gltf_variants.html)
+  - <iframe src="https://threejs.org/examples/webgl_loader_gltf_variants.html" width='100%' height='600' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
+- 室内场景：[果盘](https://threejs.org/examples/webgl_loader_gltf_transmission.html)
+  - <iframe src="https://threejs.org/examples/webgl_loader_gltf_transmission.html" width='100%' height='600' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
+- [初音未来](https://threejs.org/examples/webgl_loader_mmd.html)
+  - <iframe src="https://threejs.org/examples/webgl_loader_mmd.html" width='100%' height='600' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
+- [人物模型](https://threejs.org/examples/webgl_loader_obj_mtl.html)
+  - <iframe src="https://threejs.org/examples/webgl_loader_obj_mtl.html" width='100%' height='600' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
+- [沙滩豪车](https://threejs.org/examples/webgl_materials_envmaps_groundprojected.html)
+  - <iframe src="https://threejs.org/examples/webgl_materials_envmaps_groundprojected.html" width='100%' height='600' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
+
 
 
 # 结束
