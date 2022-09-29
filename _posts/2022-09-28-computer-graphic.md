@@ -195,7 +195,7 @@ WebGL学习有门槛，[Three.js](https://threejs.org/) 作为方向入门，就
 - [沙滩豪车](https://threejs.org/examples/webgl_materials_envmaps_groundprojected.html)
   - <iframe src="https://threejs.org/examples/webgl_materials_envmaps_groundprojected.html" width='100%' height='600' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
 
-
+3D游戏：[First Three.js Game](https://discourse.threejs.org/t/smelly-cat-first-three-js-game/12894), [smelly cat](https://defnetuncer98.github.io/smellycat/#)
 
 # 结束
 
