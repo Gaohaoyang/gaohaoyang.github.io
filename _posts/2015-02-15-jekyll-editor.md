@@ -842,6 +842,8 @@ st->ldata->e
 - disqus：国外的评论插件，支持Facebook、twitter、google分享，emoji表情评论（Upvote、Funny、Love、Surprised、Angry、Sad）
 - 来必力，源自韩国
 
+【2022-9-28】gitment和gitalk都出现故障，Error: Bad credentials，[gitment帖子](https://github.com/imsun/gitment/issues/145)，[gitalk帖子](https://github.com/gitalk/gitalk/issues/363)
+
 #### 多说
 
 【2022-9-28】已失效
