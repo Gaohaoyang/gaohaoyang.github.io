@@ -182,7 +182,7 @@ WebGL学习有门槛，[Three.js](https://threejs.org/) 作为方向入门，就
 
 自定义开发Demo
 
-<iframe src="{{ site.url }}/wqw/demo/tool_map.html" width='100%' height='100%' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
+<iframe src="{{ site.url }}/wqw/demo/three.js.html" width='100%' height='100%' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
 
 
 # 结束
