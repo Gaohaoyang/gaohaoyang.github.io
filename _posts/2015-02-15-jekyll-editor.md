@@ -872,6 +872,15 @@ stateDiagram-v2
     固体 --> 液体:融化
     液体 --> 固体:凝固
     固体 --> 气体:挥发
+    
+    state other {
+        direction LR
+        a --> b
+    }
+    气体 --> other
+    other --> [*]
+
+    note left of other : 子图包裹
 </div>
 
 
