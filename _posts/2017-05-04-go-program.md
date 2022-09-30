@@ -29,8 +29,8 @@ go语言不像C或C++那样难于学习，但速度仍然很快，并且拥有�
 
 go是一种**编译型**（翻译成更低级的语言，如汇编）、具有**静态**类型和**类c**风格语法的语言，并具具备垃圾回收机制，编译型语言特点：运行快，开发慢；不同于解释型语言
 
-Go程序员常常被称为`地鼠`（gopher）
-- ![](https://go.dev/images/gophers/motorcycle.svg)
+Go程序员常常被称为`地鼠`（gopher）, [img](https://go.dev/images/gophers/motorcycle.svg)
+- <img src="https://go.dev/images/gophers/motorcycle.svg" height="100%" width="100" />
 
 ### go 优点
 
@@ -77,6 +77,11 @@ Go有很多特性，有一些是独特的，有一些借鉴于一些其它编程
 - **语法简洁**且和其它流行语言相似。 这使得具有一定编程经验的程序员很容易上手Go编程。 当然，对于没有编程经验的初学者，Go也比很多其它流行编程语言更容易上手一些。
 - **标准库齐全**。这个标准库提供了很多常用的功能。
 - 活跃和回应快速的社区。 社区贡献了[大量高质量的第三方库包和应用](https://github.com/avelino/awesome-go)。
+
+### go入门路线图
+
+【2022-9-30】go学习路线图
+- ![](https://www.topgoer.com/static/kaiyuan/luxian.png)
 
 ## Go安装
 
@@ -4181,8 +4186,64 @@ Web 服务器的工作原理可以简单地归纳为：
 - 服务器向客户机发送 HTTP 协议应答包，如果请求的资源包含有动态语言的内容，那么服务器会调用动态语言的解释引擎负责处理 “动态内容”，并将处理得到的数据返回给客户端
 - 客户机与服务器断开。由客户端解释 HTML 文档，在客户端屏幕上渲染图形结果
 
+### Web 框架
 
-### net/http
+Go 提供的 net/http库 对于HTTP协议实现非常好，基于此再构造框架会更容易，因此生态中出现了很多框架。
+
+常见的web框架
+- Echo，[教程](http://echo.topgoer.com/)
+- Beego，[教程](https://www.topgoer.com/beego%E6%A1%86%E6%9E%B6/)
+- Gin，[教程](https://www.topgoer.com/gin%E6%A1%86%E6%9E%B6/)
+- Revel，教程
+- Chi，教程
+- Iris，[教程](https://www.topgoer.com/Iris/%E5%85%B3%E4%BA%8E.html)
+
+<div class="mermaid">
+    graph LR
+    O(web框架):::s
+    classDef s fill:#C8D64B;
+    style A fill:#F7CF6B;
+    style B fill:#6BE0F7;
+    style C fill:#6BE0F7;
+    style D fill:#6BE0F7;
+    style H fill:#5CF77B;
+    A[net/http] -->|国际,无session,ORM,日志| B(Gin)
+    O -->|Go语言| A
+    A -->|国内,无测试框架,路由冲突| C(Beego)
+    A -->|国际,无日志,ORM| D(Iris)
+    A --> E(Echo)
+    A --> F(Revel)
+    A --> G(Buffalo)
+    A -->|国内,模块化| H(GoFrame)
+</div>
+
+
+#### 主流框架对比
+
+【2019-10-14】
+- [Golang六款优秀Web框架对比](https://www.51cto.com/article/604248.html)
+- [Golang框架选型比较: goframe, beego, iris和gin](https://goframe.org/pages/viewpage.action?pageId=3673375), 最终采用 GoFrame，但性能不如 gin
+
+六款Web框架
+- 从流行度、社区支持及内建功能等角度对六款知名Go语言Web框架做对比。
+
+|框架|代码|流行度（stars）|简介|优点|缺点|
+|---|---|---|---|---|---|
+|[Gin](https://gin-gonic.github.io/gin)|[gin](https://github.com/gin-gonic/gin)|24181|Go语言编写的HTTP Web框架，它以更好的性能实现了类似Martini的API，性能更好|||
+|[Beego](https://beego.me)|[beego](https://github.com/astaxie/beego)|18812|面向Go编程语言的开源高性能web框架|||
+|[Iris](https://iris-go.com)|[iris](https://github.com/kataras/iris)|13565|全宇宙最快的Go语言Web框架，完备MVC支持，拥抱未来|||
+|[Echo](https://echo.labstack.com)|[echo](https://github.com/labstack/echo)|12861|高性能、极简Go语言Web框架|||
+|[Revel](https://revel.github.io) | [revel](https://github.com/revel/revel) |10723|Go语言的高效、全栈Web框架 |||
+|[Buffalo](https://gobuffalo.io)|[buffalo](https://github.com/gobuffalo/buffalo)|3935|使用Go语言快速构建Web应用|||
+
+Web框架核心功能对比 [img](https://s1.51cto.com/oss/201910/14/ea751b3b6f5c3c20b9e896912eadd9b3.jpg)
+- ![](https://s1.51cto.com/oss/201910/14/ea751b3b6f5c3c20b9e896912eadd9b3.jpg)
+
+几个知名的Go语言Web框架(Echo、Gin和Buffalo)由于没有完备支持所有功能，并不能算是真正意义上的Web框架，但大部分go社区认为是，因此，将这几个框架也列在表格中可以和Iris、Beego、Revel做比较。
+- 以上这些框架，除了Beego和Revel之外，都可以适配任意 net/http中间件，其中一部分框架可以轻松地做适配，另外一些可能就需要额外的努力
+- 目测goframe类似django，Gin类似flask。
+
+### net/http （原生）
 
 #### 简介
 
