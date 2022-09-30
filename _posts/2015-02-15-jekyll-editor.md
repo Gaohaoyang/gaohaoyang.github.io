@@ -713,13 +713,66 @@ pdf文件直接显示，800px不能省略px，否则高度低
 </script>
 ```
 
+流程图（flowchart）
+
+Possible FlowChart orientations are:
+- TB - top to bottom
+- TD - top-down/ same as top to bottom
+- BT - bottom to top
+- RL - right to left
+- LR - left to right
+
 Here is one mermaid diagram:
 <div class="mermaid">
-    graph TD 
-    A[Client] --> B[Load Balancer] 
-    B --> C[Server1] 
-    B --> D[Server2]
+    graph TD
+    O(开始):::someclass --- A & A1 & A2
+    classDef someclass fill:#f96;
+    A[矩形框] --> B(圆角矩形)
+    B -->|标注| C([椭圆形])
+    B --标注--> D[[两边双线边框]]
+    B -.-> E[(圆柱体)]
+    B -.虚线标注.-> F((圆形))
+    B ==>|加粗| G>标签状]
+    B ==加粗标注==> H{菱形}
+    H --> I{{六角形}}
+    H --o J[/平行四边形/]
+    H --x K[\平行四边形\]
+    H <-->|双向箭头| L[/梯形\]
+    H --> M[\梯形/]
+    F --> N(((圆形)))
+    subgraph 子图
+        direction LR
+        X --> Y
+        style X fill:#f9f,stroke:#333,stroke-width:4px;
+        style Y fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+    end
 </div>
+
+```shell
+    graph TD
+    O(开始):::someclass --- A & A1 & A2
+    classDef someclass fill:#f96;
+    A[矩形框] --> B(圆角矩形)
+    B -->|标注| C([椭圆形])
+    B --标注--> D[[两边双线边框]]
+    B -.-> E[(圆柱体)]
+    B -.虚线标注.-> F((圆形))
+    B ==>|加粗| G>标签状]
+    B ==加粗标注==> H{菱形}
+    H --> I{{六角形}}
+    H --o J[/平行四边形/]
+    H --x K[\平行四边形\]
+    H <-->|双向箭头| L[/梯形\]
+    H --> M[\梯形/]
+    F --> N(((圆形)))
+    subgraph 子图
+        direction LR
+        X --> Y
+        style X fill:#f9f,stroke:#333,stroke-width:4px;
+        style Y fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+    end
+```
+
 
 And here is another:
 <div class="mermaid">
