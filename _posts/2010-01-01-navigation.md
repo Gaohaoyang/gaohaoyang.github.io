@@ -32,6 +32,23 @@ permalink: /navi
 
 ## 内容导航
 
+### 简介
+
+- [博客主页](https://wqw547243068.github.io/)：顶栏有导航按钮，快速直达：
+   - Archives：文章列表（按时间倒序）
+   - categories：文章列表（按栏目划分）
+   - Tags：文章列表（按标签划分）
+   - Collections：资料汇总（持续更新），覆盖了2015年以来收集的各类资料链接
+   - Demo：各类有趣好玩的demo展示
+   - About：联系作者（终于可以找到我了）
+- 底栏有邮件订阅、评论和友情链接（好多大牛的主页！）
+- 文章页面
+
+一点直达
+- [学习资料汇总（持续更新）](https://wqw547243068.github.io/collection/)
+
+### 可视化导航
+
 <div class="mermaid">
     graph LR
     A(Home):::s
@@ -42,7 +59,7 @@ permalink: /navi
     style D fill:#6BE0F7;
     style H fill:#5CF77B;
     style I fill:#f02;
-    A -->|存档| B(Archives)
+    A -->|文章目录| B(Archives)
     A -->|大类目| C(categories)
     A -->|标签| D(Tags)
     A -->|大杂烩| E(Collections)
@@ -50,20 +67,15 @@ permalink: /navi
     A -->|联系我| G(About)
     A -->|找大牛| H(Links)
     A -->|找主题文章| I(搜索框)
+    click A "https://wqw547243068.github.io/" "主页"
+    click B "https://wqw547243068.github.io/archive" "文章目录"
+    click C "https://wqw547243068.github.io/category" "大类目"
+    click D "https://wqw547243068.github.io/tag" "标签索引"
+    click E "https://wqw547243068.github.io/collection" "大类目"
+    click F "https://wqw547243068.github.io/demo" "Demo"
+    click G "https://wqw547243068.github.io/about" "找我"
 </div>
 
-- 方向盘
-  - [博客主页](https://wqw547243068.github.io/)：顶栏有导航按钮，快速直达：
-    - Archives：文章列表（按时间倒序）
-    - categories：文章列表（按栏目划分）
-    - Tags：文章列表（按标签划分）
-    - Collections：资料汇总（持续更新），覆盖了2015年以来收集的各类资料链接
-    - Demo：各类有趣好玩的demo展示
-    - About：联系作者（终于可以找到我了）
-  - 底栏有邮件订阅、评论和友情链接（好多大牛的主页！）
-  - 文章页面
-- 一点直达
-  - [学习资料汇总（持续更新）](https://wqw547243068.github.io/collection/)
 
 ## 联系作者
 
