@@ -832,6 +832,7 @@ sequenceDiagram
 
 [状态图](https://mermaid-js.github.io/mermaid/#/stateDiagram)
 
+```html
 <div class="mermaid">
 stateDiagram-v2
     direction LR
@@ -857,7 +858,22 @@ stateDiagram-v2
     if_state --> True : if n >= 0
 
     note right of IsPositive : 条件判断
-</div>   
+</div>
+```
+
+以上代码渲染失败，精简如下：
+
+<div class="mermaid">
+    stateDiagram-v2
+    direction LR
+    [*] --> 气体
+    气体 --> 液体:冷却
+    气体 --> 固体:固化
+    固体 --> 液体:融化
+    液体 --> 固体:凝固
+    固体 --> 气体:挥发
+</div>
+
 
 #### flowchart
 
