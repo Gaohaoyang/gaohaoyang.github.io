@@ -77,6 +77,10 @@ Go程序员常常被称为`地鼠`（gopher）
   - win地址：https://go.dev/dl/go1.17.6.windows-amd64.msi
   - mac地址： wget https://go.dev/dl/go1.17.6.darwin-amd64.pkg
   - linux地址: wget https://go.dev/dl/go1.17.6.linux-amd64.tar.gz
+
+
+### go环境变量
+
 - 环境变量：
 
 ```shell
@@ -85,9 +89,13 @@ export GOROOT=/usr/local/go
 export PATH=$PATH:$GOROOT/bin
 ```
 
-go vim颜色显示：
-- 进入目录 ~/.vim/bundle
-- git clone https://github.com/fatih/vim-go.git
+安装新包时，会下载到 GOPATH/src下
+
+```shell
+# go get github.com/jmoiron/sqlx
+import "github.com/test"
+# 下载到 src/github.com/test
+```
 
 ### helloworld
 
@@ -111,6 +119,10 @@ func main() {   // 声明 main 主函数
 
 ### vim语法高亮
 
+go vim颜色显示：
+- 进入目录 ~/.vim/bundle
+- git clone https://github.com/fatih/vim-go.git
+
 [配置方法](https://aceld.gitbooks.io/how-do-go/content/1-gohuan-jing-de-an-zhuang/vim-pei-zhi-go-yu-fa-gao-liang.html)
  
 ```shell
@@ -124,65 +136,12 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 - ![](https://aceld.gitbooks.io/how-do-go/content/assets/go3.png)
 
 
-```vim
-"--------------------------------------"
-"  Vundle.vim 
-"--------------------------------------
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-" Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
-" Git plugin not hosted on GitHub
-" Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
-Plugin 'fatih/vim-go'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-"--------------------------------------
-"  Vundle.vim (end)
-"--------------------------------------
-```
-
-
 ## go命令
 
 命令行：
 - go version 查看版本
 - go env: 显示go环境变量配置
+
 Go常用命令：
 - go build: 测试编译，检查是否有编译错误
 - go **build** 将Go语言程序代码编译成二进制的可执行文件，但是需要手动运行该二进制文件；
@@ -196,8 +155,12 @@ Go常用命令：
   - 编译后直接运行Go语言程序，编译过程中会产生一个临时文件，但不会生成可执行文件，这个特点很适合用来调试程序。
 - go fmt: **格式化**源码(部分IDE在保存时自动调用)，使用同一种代码风格
 - go install: 编译包文件并编译整个程序
-  - go install example.com/program@latest 来安装一个第三方Go程序的最新版本（至GOBIIN目录）。 
-  - 在Go官方工具链1.16版本之前，对应的命令是 go get -u example.com/program（现在已经被废弃而不再推荐被使用了）。
+  - go install example.com/<span style='color:blue'>program</span>@latest 来安装一个第三方Go程序的最新版本（至GOBIIN目录）。 
+  - Go官方工具链1.16版本前，命令：go get -u example.com/program（现在已经被废弃而不再推荐被使用了）。
+  - 实际上, go get = git clone + go install
+  - go install 是 Go 中自动包安装工具：如需要将包安装到本地它会从远端仓库下载包：检出、编译和安装一气呵成。
+  - go install 只是将编译的中间文件放在 GOPATH 的 pkg 目录下，以及固定地将编译结果放在 GOPATH 的 bin 目录下。
+  - 分成了两步操作：第一步是生成**结果文件**（可执行文件或者 .a 包），第二步会把编译好的结果移到 $GOPATH/pkg 或者 $GOPATH/bin。
 - go test: 运行测试文件
 - go doc: 查看文档(chm手册)
   - 在浏览器上浏览go官方网站：命令行输入：go doc -http=:8080    即可在浏览器输入：localhost:8080查看
@@ -208,9 +171,107 @@ Go常用命令：
   - go mod tidy命令用来通过扫描当前项目中的所有代码来添加未被记录的依赖至go.mod文件或从go.mod文件中删除不再被使用的依赖。
 - go get: 获取远程包，需提前安装git或hg
   - go get命令用拉添加、升级、降级或者删除单个依赖。此命令不如go mod tidy命令常用。
+  - 第三方包下载并解压到GOPATH路径下的src文件夹里面
 
 注意：
 - go run 只是用来临时运行单个文件，正式项目不推荐使用 → go build
+
+### go install
+
+【2022-9-29】[go install命令——编译并安装](http://c.biancheng.net/view/122.html)
+
+go install 只是将编译的中间文件放在 GOPATH 的 pkg 目录下，以及固定地将编译结果放在 GOPATH 的 bin 目录下。
+
+这个命令在内部实际上分成了两步操作：
+- 第一步是生成结果文件（可执行文件或者 .a 包）
+- 第二步会把编译好的结果移到 $GOPATH/pkg 或者 $GOPATH/bin。
+
+本小节需要用到的代码位置是./src/chapter11/goinstall。
+
+go install 的编译过程有如下规律：
+- go install 是建立在 GOPATH 上的，无法在独立的目录里使用 go install。
+- GOPATH 下的 bin 目录放置的是使用 go install 生成的可执行文件，可执行文件的名称来自于编译时的包名。
+- go install 输出目录始终为 GOPATH 下的 bin 目录，无法使用-o附加参数进行自定义。
+- GOPATH 下的 pkg 目录放置的是编译期间的中间文件。
+
+使用 go install 来执行代码，参考下面的 shell：
+
+```shell
+export GOPATH=/home/davy/golangbook/code
+go install chapter11/goinstall
+```
+
+编译完成后的目录结构如下：
+
+```go
+.
+├── bin
+│   └── goinstall
+├── pkg
+│   └── linux_amd64
+│       └── chapter11
+│           └── goinstall
+│               └── mypkg.a
+└── src
+    └── chapter11
+        ├── gobuild
+        │   ├── lib.go
+        │   └── main.go
+        └── goinstall
+            ├── main.go
+            └── mypkg
+                └── mypkg.go
+```
+
+### go mod
+
+go module 是go官方自带的go**依赖管理库**。go module可以将某个项目(文件夹)下的所有依赖整理成一个 go.mod 文件,里面写入了依赖的版本等，使用go module之后不需要关心GOPATH，也不用将代码放置在src下了。
+- GO111MODULE=off: 不使用 modules 功能。
+- GO111MODULE=on: 使用 modules 功能，不会去 GOPATH 下面查找依赖包。
+- GO111MODULE=auto: Golang 自己检测是不是使用 modules 功能。
+
+推荐使用 Go 模块时将 GO111MODULE 设置为 on而不是atuo，将以下语句添加进 ~/bashrc 中，然后重开Terminal
+
+```shell
+gedit ~/.bashrc
+# 添加 
+export GO111MODULE=on
+```
+
+第一次使用 GO MODULE(项目中还没有go.mod文件) ，cd进入项目文件夹，初始化 MODULE
+
+```shell
+cd /home/zhongzhanhui/GoProject/Seckill   
+go mod init Seckill  	#Seckill是项目名
+```
+
+此时项目根目录会出现一个 go.mod 文件，此时的 go.mod 文件只标识了项目名和go的版本,这是正常的,因为只是初始化了。 go.mod 文件内容如下：
+
+```go
+module SecKill
+
+go 1.13
+```
+
+go mod tidy
+
+tidy会检测该文件夹目录下所有引入的依赖,写入 go.mod 文件，写入后会发现 go.mod 文件有所变动
+
+```go
+module SecKill
+
+go 1.13
+
+require (
+	github.com/gin-contrib/sessions v0.0.1
+	github.com/gin-gonic/gin v1.5.0
+	github.com/jinzhu/gorm v1.9.11
+	github.com/kr/pretty v0.1.0 // indirect
+	gopkg.in/yaml.v2 v2.2.2
+)
+```
+
+【2022-9-29】[go安装依赖包（go get, go module）](https://blog.csdn.net/weixin_41519463/article/details/103501485)
 
 ## go编译
 
@@ -259,14 +320,21 @@ Go程序生成的二进制可执行文件常常拥有以下优点：
 
 目前，Go主要用于网络开发、系统工具开发、数据库开发和区块链开发。 随着从Go 1.18开始支持自定义泛型，预期Go会在更多开发领域流行起来，比如图形界面、游戏、大数据和人工智能等。
 
-## Go项目
+## Go目录结构
+
+Go语言中通过包来组织代码文件，可以引用第三方包也可以发布自己的包，但为了防止不同包的项目名冲突，通常使用**顶级域名**来作为包名的**前缀**，这样就规避了项目名冲突问题。
+
+因为不是每个个人开发者都拥有自己的顶级域名，所以目前流行的方式是使用个人的github用户名来区分不同的包。
+
+示意[图](https://www.topgoer.com/static/2/7.png)
+- ![](https://www.topgoer.com/static/2/7.png)
 
 注：设置 **GoRoot**（安装目录）和 **GoPath** （工作目录）！
 
 一个Go语言项目的目录一般包含以下三个子目录：
-- src 目录：放置项目和库的源文件；
-- pkg 目录：放置编译后生成的包/库的归档文件；
-- bin 目录：放置编译后生成的可执行文件。
+- src 目录：放置项目和库的**源**文件；
+- pkg 目录：放置编译后生成的包/库的**归档**文件；
+- bin 目录：放置编译后生成的**可执行**文件。
 
 GoPath：go项目工作目录，需在环境变量中设置，多个用分号隔开
 - /src：项目源文件
@@ -278,8 +346,24 @@ GoPath：go项目工作目录，需在环境变量中设置，多个用分号隔
 - /pkg：编译后的包文件（hello.a）
 注：bin和pkg可不用创建，执行go install会自动创建
 
+```shell
+# GOPATH
+bin # 存放编译后的二进制文件
+pkg # 存放编译后的库文件，如 go module
+src # 自己的代码
+\-- github.com
+------ project1
+------------ module1
+------------ module2
+------ project2
+```
+
+![](https://www.topgoer.com/static/2/6.png)
+
 - 问题：如何避免新增一个GO项目就要往GOPATH中增加一个路径？
 - 答：加入脚本：《[go目录结构](http://blog.studygolang.com/2012/12/go%E9%A1%B9%E7%9B%AE%E7%9A%84%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/)》
+
+
 
 ### 大项目
 
@@ -290,6 +374,8 @@ GoPath：go项目工作目录，需在环境变量中设置，多个用分号隔
 
 
 ## 包的使用
+
+### go包介绍
 
 Go语言以“包”作为管理单位，每个 Go 源文件必须先声明它所属的包，所以我们会看到每个 Go 源文件的开头都是一个 package 声明
 
@@ -311,6 +397,8 @@ Go 程序的执行（程序启动）顺序如下：
 1. 如果该包又导入了其它的包，则从第一步开始递归执行，但是每个包只会被导入一次。
 1. 然后以相反的顺序在每个包中初始化常量和变量，如果该包含有 init 函数的话，则调用该函数。
 1. 在完成这一切之后，main 也执行同样的过程，最后调用 main 函数开始执行程序。
+
+### go包导入
 
 导入包的多种方式：三种模式：**正常**模式、**别名**模式、**简便**模式
 - **直接**根据 $GOPATH/src 目录导入 import "test/lib" (路径其实是 $GOPATH/src/test/lib )
@@ -350,6 +438,114 @@ func main() { // 括号必须这种方式，否则报错！
 
 生成go.mod包
 - go mod init suggestion
+
+### 安装第三方包
+
+【2022-9-29】安装汉字转拼音工具包 [go-pinyin](https://github.com/mozillazg/go-pinyin)
+
+原理
+- 将所有的汉字对应的 rune码，对应上它的拼音，也即是，有一个这样的 map[rune]string, 其中 key 为汉字的 rune码，value 就是汉字的拼音了。这个 map 是通过文件来生成的。
+
+文件内容示例
+- 其中的拼音都是带声调的。不需要声调的话，可以替换成没有声调的字符。
+
+```shell
+3400=>qiū
+3401=>tiàn
+3404=>kuà
+3405=>wǔ
+3406=>yǐn
+340C=>yí
+3416=>xié
+341C=>chóu
+```
+
+Mode 介绍
+- InitialsInCapitals: 首字母大写, 不带音调
+- WithoutTone: 全小写,不带音调
+- Tone: 全小写带音调
+
+
+```shell
+# 安装pinyin
+go install github.com/mozillazg/go-pinyin/cmd/pinyin@latest
+# 1.8之前用get get
+# go get github.com/chain-zhang/pinyin
+```
+
+[pinyin](https://www.jianshu.com/p/57b86a6bd9f9) 示例
+
+```go
+package main
+
+import(
+    "fmt"
+     "github.com/chain-zhang/pinyin"
+)
+
+func main()  {
+    str, err := pinyin.New("我是中国人").Split("").Mode(InitialsInCapitals).Convert()
+    if err != nil {
+        // 错误处理
+    }else{
+        fmt.Println(str)
+    }
+
+    str, err = pinyin.New("我是中国人").Split(" ").Mode(pinyin.WithoutTone).Convert()
+    if err != nil {
+        // 错误处理
+    }else{
+        fmt.Println(str)
+    }
+
+    str, err = pinyin.New("我是中国人").Split("-").Mode(pinyin.Tone).Convert()
+    if err != nil {
+        // 错误处理
+    }else{
+        fmt.Println(str)
+    }
+
+    str, err = pinyin.New("我是中国人").Convert()
+    if err != nil {
+        // 错误处理
+    }else{
+        fmt.Println(str)
+    }   
+}
+```
+
+测试代码：go-pinyin
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/mozillazg/go-pinyin"
+)
+
+func main() {
+	hans := "中国人"
+	// 默认
+	a := pinyin.NewArgs()
+	fmt.Println(pinyin.Pinyin(hans, a)) // [[zhong] [guo] [ren]]
+	// 包含声调
+	a.Style = pinyin.Tone
+	fmt.Println(pinyin.Pinyin(hans, a)) // [[zhōng] [guó] [rén]]
+	// 声调用数字表示
+	a.Style = pinyin.Tone2
+	fmt.Println(pinyin.Pinyin(hans, a)) // [[zho1ng] [guo2] [re2n]]
+	// 开启多音字模式
+	a = pinyin.NewArgs()
+	a.Heteronym = true
+	fmt.Println(pinyin.Pinyin(hans, a)) // [[zhong zhong] [guo] [ren]]
+	a.Style = pinyin.Tone2
+	fmt.Println(pinyin.Pinyin(hans, a)) // [[zho1ng zho4ng] [guo2] [re2n]]
+	fmt.Println(pinyin.LazyPinyin(hans, pinyin.NewArgs())) // [zhong guo ren]
+	fmt.Println(pinyin.Convert(hans, nil)) // [[zhong] [guo] [ren]]
+	fmt.Println(pinyin.LazyConvert(hans, nil)) // [zhong guo ren]
+}
+```
 
 
 ## go语言极速入门
