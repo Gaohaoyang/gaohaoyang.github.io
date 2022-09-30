@@ -34,7 +34,7 @@ permalink: /navi
 
 <div class="mermaid">
     graph LR
-    A(首页):::s
+    A(Home):::s
     classDef s fill:#C8D64B;
     style A fill:#F7CF6B;
     style B fill:#6BE0F7;
@@ -48,7 +48,7 @@ permalink: /navi
     A -->|大杂烩| E(Collections)
     A -->|小玩意儿| F(Demo)
     A -->|联系我| G(About)
-    A -->|找大牛| H(友情链接)
+    A -->|找大牛| H(Links)
     A -->|找主题文章| I(搜索框)
 </div>
 
