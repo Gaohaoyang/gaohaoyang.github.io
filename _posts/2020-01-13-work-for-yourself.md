@@ -991,7 +991,7 @@ ps：和自由职业有关的书也有不少，比如说最近几年比较火的
 
 <iframe src='https://viewer.diagrams.net/?tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1&title=tmp.drawio#R7Vtbc5s4FP41ekwHBALpEXzZzmx3pjN5aHffFKPYbDHyYDmJ%2B%2BtXAmEDkonj2iZ11g8ZdIS4nE%2FnOzcCvNHy5Y%2BCrhZ%2F8YRlADrJC%2FDGAELiIPlXCbaVABG3EsyLNKlEDcF9%2BpNpoaOlmzRh69aJgvNMpKu2cMbznM1ES0aLgj%2B3T3vkWfuuKzpnhuB%2BRjNT%2Bi1NxKKSYhju5Z9ZOl%2FUd3YDUs0saX2yfpP1gib8uSHyJsAbFZyL6mj5MmKZ0l2tl2rd9MDs7sEKlotjFghnevedF2722UF%2FLuff%2Fsm95M71q8s80Wyj31g%2FrdjWKmCJ1Ige8kIs%2BJznNJvspXHBN3nC1H0cOdqf84XzlRS6UvgvE2Kr4aUbwaVoIZaZnn3kudCTUF2iegZ144Mvq0VrvilmrO8N9aahxZyJnvPQDhK5lRlfMlFs5bqCZVSkT%2B3noHpTzXfn7fUuD7Tq3wKDicIkADgC2AETDLAH4jGYhABDEBMToCyT5qCAeF6kgt2vaKmRZ2mQHTWnWTbiGS%2FKdd4jTUiCpHwtCv6DNWYo810Pqpl606rl6x9MzBYaZTtkT6wQ7KUfNFPJeoGnLUVTBXT0%2BHlveG5tTYuG0WHnUrDAW7cOeKR14EGtw3uXMEhlF9vv%2Bnrl4G81%2BITq4filOTne6tEA8IVDwneEEe2xcV9nseM5aV7QJJVKrZkt5znr0KAWGQw4Kn%2Fn4TXo%2BC1ic48lNs%2B5FLNZLGqCQOwAPFV%2BJpI%2BJy4lkZJcCS7TPYV0ZgPnwQ%2BQ1Ol5wIG4DU5ogoOt2FwIGmSBJgRkCqKxigUiGQUEYEJABEEdS98qNN2AAKJhoQn6wrQAkBGIpspq8BiQSB1EEwXTTWMEvTZGxDQfck2M6sTxnQULZ3T64ZFOnwzq9E0Y4tKzxMpGbIB8oQ8sayuRZuk8l8czqSMmN2%2Bstmoqk%2FNITyzTJKnwYuv0J30or6fUveJpLsp3QjFA4zYgLtLjhk1Uvz6b0BUGfROwy%2BubEPbsyIMWdOd88hwPtqxIxwtHQ6Uv%2FlW9deMU%2Fvi4lluki%2BXuGU6HN7TGD5EPSFAS4AhgVMLtAOKXkulw3urBYR4LbEzoMOxgfB4m9DveyvWOjPLQxajQUlZ4B1TIXlLxXc%2Bp40bWJEf7pEkNLpAz4SvRZ7k0Kgq6bZygeck0Wb2JAtQJeRBqboO3ni8Pqic4q%2FFDc1%2BNPiq393OC4nbiBy2I6mLfqeRe0w20XvXy1I8t1G%2FWKpHKWGJSZiwTlbp8JOqHg1M%2FsYAUKlcsM3uFFgZxaEAitbxSh5tlFs0EbxplacBf%2BToVKVfG%2BcCF4EuL1QregY5vRJbmUvN1f8Y5GU9dqzlQ1TkDjqH7esLpWWAMLubBbcUADGRCFSFVA5CAVqlnjFWoJSXYBcQzkJUqER2LatnD4cLY8TRtM%2BF27HDVZgKsW3QaS1tZJzChvFxeaiseSJZEZTnHVwiqmkGgLDRyy9rbyFZ7%2B4BQ%2Bj5qQTl4icHMfqQaFGjTErRRXQOqga1sNBopYH9jPN3AjK2mU0f%2BzoRz2MbZxRY3WlPidZA2gx2FdG5Dukp%2Fo%2F%2BRPgFpODjSdWrcHzFVhYzIK7Od26%2B%2F10s0Sp4%2FMPFCW9vKV02qqMRGRj64dJ0y34iRLkSRYCCQhsk9PDh07gHf5zdFp7brBy5Xad29Wq6qbONX61VGmcHz2r1rI9epXkCv6qlU%2BX5nn9b0Xl%2BoekPjQmcrWtlSqUCROsG6VUfGuuVNzNz4tni90%2FK2UMZV%2B6rQlhuVvL6LsBSvE4VQVE2NFdnv%2BgoKNlflUrpBXrUcZEZlMs9vFIWd77u6Nt42DxFeFW9L%2B6iL02xTPO3sjeVJpD7mVdrP6HqdztoQtpWb0PVit%2FSVqHZXGz6F5ncuxX2bSzmjezi2GXzIPTT2AOoJEn7RiwTdICU80YsE%2BEC084oXeXMfxmnfp%2F4e%2FdBzIWJ%2Frsv2YczsNE0Y1emKfKJJ%2Ba0Qud2eTD%2FvBWEbFNfvITQ7rnedS8DuF3mn9FnkcP%2FZf3X6%2Fn8nvMl%2F' frameborder='0' scrolling='no' allowfullscreen="true"  width='900'></iframe>
 
-
+# 开公司
 
 ## 公司注册
 
@@ -1214,6 +1214,92 @@ ps：和自由职业有关的书也有不少，比如说最近几年比较火的
 - （二）从事井下、高空、高温、特别繁重体力劳动或者其他有害身体健康的工作，男年满55周岁、女年满45周岁，连续工龄满10年的。本项规定也适用于工作条件与工人相同的基层干部。
 - （三）男年满50周岁，女年满45周岁，连续工龄满10年，由医院证明，并经劳动鉴定委员会确认，完全丧失劳动能力的。
 - （四）因工致残，由医院证明，并经劳动鉴定委员会确认，完全丧失劳动能力的。
+
+## 公司财务
+
+假如 公司今年营收 120万，然后成本是30万，那么90万是作为税收征收的数目; 运营成本靠发票来抵扣
+
+### 发票抵税
+
+【2022-6-21】[千万别扔！这些发票都能抵税！90%的人都不知道](https://mp.weixin.qq.com/s?__biz=MzU2MjAyMDcxNA==&mid=2247508581&idx=3&sn=4f7e4c722f7294575f737552d4d2fba0&chksm=fc6d0a60cb1a83764736cceb2733e2178c7e4f2db32f1125bd8e39b4eb3dc0d208912a380092&scene=27), 发票种类繁多复杂，最常见的就有成本类、费用类、税金类等等，你知道都有哪些发票可以拿来抵企业所得税吗？
+
+#### （1）成本类
+
+成本类发票是我们平常见过最多的，主要分为两大类：
+  1. 实际发生的与公司主营业务相关的票据。
+  2. 一般纳税人的进项发票可以抵扣增值税也可抵所得税。
+
+问题来了，不同行业都有哪些可以抵扣企业所得税的发票种类呢？
+- 生产企业
+  - 发票种类：采购原材料，辅料、运费，生产用的机器设备，安装调试费，后期维护费，燃料等发票。
+- 商贸企业
+  - 发票种类：购进的商品发票。
+- 服务行业
+  - 发票种类：其他服务机构开出的服务费、劳务费发票。
+
+#### （2）费用类
+
+费用类发票常见的有三大类：
+- 一、管理费用
+  1. 办公费
+    - 发票种类：快递费、电话费、物业费、水电费、宽带费、取暖费、饮用水、饮水机、电脑配件、办公耗材、绿植、日用品、灭火器、灯具，家具。
+    - 其中需要注意的是：
+    - ① 个人的电话费可以开具个人名称，前提此人属于该公司员工；
+    - ② 办公用品需要明细。
+  2. 交通费
+    - 发票种类：公交车票、公交一卡通充值票、出租车票、滴滴打车票等交通费。
+    - 提醒：虽然原则上金额无限制，但一定要在合理范围内，一个打车费报销三万多一看就不正常。
+  3. 差旅费
+    - 发票种类：住宿费、餐费、外地的公交车票、出租车票、火车票、轮船票、飞机票。
+    - 提醒：票据上的人员信息必须与工资表人员信息一致。
+  4. 福利费
+    - 发票种类：住宿费、餐费、旅游出行门票及车费、职工礼品、团建费、职工医药费。
+    - 提醒：不能超过工资薪金总额14%
+  5. 车辆使用费
+    - 发票种类：公司名下的车辆保险费、保养费、维修费、拖车费、救援费、停车费、过路费、燃油费、ETC充值票、代驾费、车位费。
+    - 提醒：① 必须是公司名下车辆发生的费用；② 有租车发票后车辆视同自有，可以报销车辆所有费用。
+  6. 租赁费
+    - 发票种类：租车发票、租房发票、设备租赁发票。
+    - 提醒：承租方为个人的可以去税务局代开发票。
+  7. 固定资产
+    - 发票种类：房屋建筑物、车辆、机械和其他生产设备、与生产经营活动有关的器具、工具、家具，电子设备等。
+    - 提醒：①单价5000元以下可记入办公费；②根据使用年限，逐年摊销抵扣。
+  8. 工资、社保与公积金
+    - 发票种类：有员工签字的工资表；银行扣款回单及社保缴费明细；银行扣款回单及公积金缴费明细。
+    - 提醒：①社保、公积金、工资，三项申报标准需一致；②工资5000元以上部分要缴纳个税，有专项附加扣除的需要填写完整。
+  9. 残保金
+    - 发票种类：银行扣款回单。
+    - 提醒：企业安排残疾人就业可以减免残保金。
+  10. 招待费
+  - 发票种类：餐费发票，住宿费发票，购买礼品的发票。
+  - 提醒：不得超过自身发生额的60%与销售收入的5‰，按照孰低原则（存货的成本低于市价时按成本计价；存货的市价低于成本的按市价计价）。
+- 二、销售费用
+  - 1、广告及业务宣传费
+  - 发票种类：宣传费、推广费，图书、报纸、杂志、广播、电视、电影、路牌、招贴、橱窗、霓虹灯、灯箱等形式的广告公司开具的发票。
+  - 提醒：广告费不超过当年销售（营业）收入15%的部分，准予扣除；超过部分，准予在以后纳税年度结转扣除。
+  - 2、运输费、装卸费、包装费、展览费
+  - 发票种类：铁路运输费、水运输费、汽车运输费、航空运输费和管道运输费；
+  - 入舱费、理舱费、平舱费；
+  - 包装、加固、拼装、改装、捆扎、打包等业务所发生的各项费用票；
+  - 展会搭建举办场地费、招展和招商的费用、展会宣传推广的费用、展会搭建设计费、展会开幕费用、嘉宾接待费、展会现场布置费。
+  - 提醒：同样无限制，但得在合理范围内。
+  - 3、租赁费
+    - 发票种类：场地租赁 、设备租赁 、汽车租赁 、会场租赁等的费用发票。
+    - 提醒：租赁费不应包括融资租赁费。
+- 三、财务费用
+  - 切记，在财务费用中，民间借款利息不得高于银行同期借款利率的部分。
+  - 1、利息支出
+    - 发票类型：短期借款利息、长期借款利息、应付票据利息、票据贴现利息、应付债券利息、银行存款利息。
+  - 2、汇兑损失
+    - 发票类型：外汇而产生的银行买入、卖出价与记账所采用的汇率之间的差额。
+  - 3、手续费
+    - 发票类型：银行转账手续费、网银服务费，债券所需支付的手续费、开出汇票的银行手续费、调剂外汇手续费。
+
+#### （3） 税金及附加
+
+- 发票类型：消费税、城市维护建设税、资源税、教育费附加及房产税、土地使用税、车船使用税、印花税等相关税费。
+- 提醒：①公司名下有房需要做房产信息备案，每年4月及10月申报。②印花税需根据合同内容申报。
+
 
 ## 劳动法
 
