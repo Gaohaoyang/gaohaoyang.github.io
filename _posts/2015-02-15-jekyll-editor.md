@@ -830,6 +830,35 @@ sequenceDiagram
     Bob->>Alice: Hi Alice
 </div>
 
+[状态图](https://mermaid-js.github.io/mermaid/#/stateDiagram)
+
+<div class="mermaid">
+stateDiagram-v2
+    direction LR
+    [*] --> 气体
+    气体 --> 液体:冷却
+    气体 --> 固体:固化
+    固体 --> 液体:融化
+    液体 --> 固体:凝固
+    固体 --> 气体:挥发
+    state other {
+        direction LR
+        a --> b
+    }
+    气体 --> other
+    other --> [*]
+
+    note left of other : 子图包裹
+    
+    state if_state <<choice>>
+    [*] --> IsPositive
+    IsPositive --> if_state
+    if_state --> False: if n < 0
+    if_state --> True : if n >= 0
+
+    note right of IsPositive : 条件判断
+</div>   
+
 #### flowchart
 
 网页格式的流程图编辑：[flow-chart](https://github.com/zhangyuanliang/flowchart), [示例](https://zhangyuanliang.github.io/flowchart/flowchart.html)

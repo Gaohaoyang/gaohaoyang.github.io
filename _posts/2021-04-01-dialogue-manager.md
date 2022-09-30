@@ -1253,6 +1253,33 @@ Akka fsm,squirrel-foundation
 
 transitions 是一个由Python实现的轻量级的、面向对象的有限状态机框架。
 
+<div class="mermaid">
+stateDiagram-v2
+    direction LR
+    [*] --> 气体
+    气体 --> 液体:冷却
+    气体 --> 固体:固化
+    固体 --> 液体:融化
+    液体 --> 固体:凝固
+    固体 --> 气体:挥发
+    state other {
+        direction LR
+        a --> b
+    }
+    气体 --> other
+    other --> [*]
+
+    note left of other : 子图包裹
+    
+    state if_state <<choice>>
+    [*] --> IsPositive
+    IsPositive --> if_state
+    if_state --> False: if n < 0
+    if_state --> True : if n >= 0
+
+    note right of IsPositive : 条件判断
+</div>   
+
 **Python版本**
 
 - [Transitions](https://github.com/pytransitions/transitions), 扩展插件：异步状态机 [transitions-anyio](https://github.com/pytransitions/transitions-anyio), 支持web形式展示、编辑
