@@ -146,42 +146,42 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ## go命令
 
 命令行：
-- go version 查看版本
-- go env: 显示go环境变量配置
+- go `version` 查看版本
+- go `env`: 显示go环境变量配置
 
 Go常用命令：
-- go build: 测试编译，检查是否有编译错误
+- go `build`: 测试编译，检查是否有编译错误
 - go **build** 将Go语言程序代码编译成二进制的可执行文件，但是需要手动运行该二进制文件；
-  - ①有参数：
+  - ①**有参数**：
     - main包：生成一个与第一个 fileName 同名的可执行文件
     - 非main包：编译器将只对该包进行语法检查，不生成可执行文件。
-  - ②无参数：如果当前目录下存在 main 包，则会生成一个与当前目录名同名的“目录名.exe”可执行文件
+  - ②**无参数**：如果当前目录下存在 main 包，则会生成一个与当前目录名同名的“目录名.exe”可执行文件
     - 有main包：生成一个与当前目录名同名的“目录名.exe”可执行文件
     - 无main包：只对当前目录下的程序源码进行语法检查，不会生成可执行文件。
-- go **run**: 直接运行程序；命令则更加方便，go run命令将编译和执行指令合二为一
+- go `run`: 直接运行程序；命令则更加方便，go run命令将编译和执行指令合二为一
   - 编译后直接运行Go语言程序，编译过程中会产生一个临时文件，但不会生成可执行文件，这个特点很适合用来调试程序。
-- go fmt: **格式化**源码(部分IDE在保存时自动调用)，使用同一种代码风格
-- go install: 编译包文件并编译整个程序
-  - go install example.com/<span style='color:blue'>program</span>@latest 来安装一个第三方Go程序的最新版本（至GOBIIN目录）。 
-  - Go官方工具链1.16版本前，命令：go get -u example.com/program（现在已经被废弃而不再推荐被使用了）。
-  - 实际上, go get = git clone + go install
+- go `fmt`: **格式化**源码(部分IDE在保存时自动调用)，使用同一种代码风格
+- go `install`: 编译包文件并编译整个程序
+  - go `install` example.com/<span style='color:blue'>program</span>@latest 来安装一个第三方Go程序的最新版本（至GOBIIN目录）。 
+  - Go官方工具链1.16版本前，命令：go get -u example.com/program（已废弃）。
+  - 实际上, <span style='color:blue'>go get = git clone + go install</span>
   - go install 是 Go 中自动包安装工具：如需要将包安装到本地它会从远端仓库下载包：检出、编译和安装一气呵成。
   - go install 只是将编译的中间文件放在 GOPATH 的 pkg 目录下，以及固定地将编译结果放在 GOPATH 的 bin 目录下。
   - 分成了两步操作：第一步是生成**结果文件**（可执行文件或者 .a 包），第二步会把编译好的结果移到 $GOPATH/pkg 或者 $GOPATH/bin。
-- go test: 运行测试文件
-- go doc: 查看文档(chm手册)
+- go `test`: 运行测试文件
+- go `doc`: 查看文档(chm手册)
   - 在浏览器上浏览go官方网站：命令行输入：go doc -http=:8080    即可在浏览器输入：localhost:8080查看
-- go vet
+- go `vet`
   - 子命令可以用来检查可能的代码逻辑错误（即警告）；run、build和install不会输出代码逻辑错误！
-- go mod：go模块特性，简化依赖管理
+- go `mod`：go模块特性，简化依赖管理
   - go mod init example.com/myproject命令可以用来在当前目录中生成一个go.mod文件。 当前目录将被视为一个名为example.com/myproject的模块（即当前项目）的根目录。 此go.mod文件将被用来记录当前项目需要的依赖模块和版本信息。 我们可以手动编辑或者使用go子命令来修改此文件。
   - go mod tidy命令用来通过扫描当前项目中的所有代码来添加未被记录的依赖至go.mod文件或从go.mod文件中删除不再被使用的依赖。
-- go get: 获取远程包，需提前安装git或hg
-  - go get命令用拉添加、升级、降级或者删除单个依赖。此命令不如go mod tidy命令常用。
+- go `get`: 获取远程包，需提前安装git或hg
+  - go get命令用拉添加、升级、降级或者删除单个依赖。此命令不如 go mod tidy 命令常用。
   - 第三方包下载并解压到GOPATH路径下的src文件夹里面
 
 注意：
-- go run 只是用来临时运行单个文件，正式项目不推荐使用 → go build
+- <span style='color:blue'>go run 只是用来临时运行单个文件，正式项目不推荐使用</span> → go build
 
 ### go install
 
@@ -232,18 +232,27 @@ go install chapter11/goinstall
 
 ### go mod
 
-go module 是go官方自带的go**依赖管理库**。go module可以将某个项目(文件夹)下的所有依赖整理成一个 go.mod 文件,里面写入了依赖的版本等，使用go module之后不需要关心GOPATH，也不用将代码放置在src下了。
-- GO111MODULE=off: 不使用 modules 功能。
-- GO111MODULE=on: 使用 modules 功能，不会去 GOPATH 下面查找依赖包。
-- GO111MODULE=auto: Golang 自己检测是不是使用 modules 功能。
+go module 是go官方自带的go**依赖管理库**，在**1.13版本**正式推荐使用。
+- go module可以将某个项目(文件夹)下的所有依赖整理成一个go.mod 文件,写入了依赖的版本等
+  - 用go module之后<span style='color:red'>不用关心GOPATH，也不用将代码放置在src下了</span>。
+- go module 管理依赖后, 在项目根目录下生成两个文件 `go.mod`（记录当前项目的所依赖）和 `go.sum`（记录每个依赖库的版本和哈希值）
 
-推荐使用 Go 模块时将 GO111MODULE 设置为 on而不是atuo，将以下语句添加进 ~/bashrc 中，然后重开Terminal
+GO111MODULE是 go modules 功能的开关
+- GO111MODULE=**off**: 不使用 modules 功能。
+- GO111MODULE=**on**: 使用 modules 功能，不会去 GOPATH 下面查找依赖包。
+- GO111MODULE=**auto**: Golang 自己检测是不是使用 modules 功能。这种情况下可以分为两种情形：
+  - （1）当前目录在GOPATH/src之外且该目录包含go.mod文件，开启模块支持。
+  - （2）当前文件在包含go.mod文件的目录下面。
+
+推荐使用 Go 模块时，将 GO111MODULE 设置为 on 而不是 atuo，将以下语句添加进 ~/bashrc 中，然后重开Terminal
 
 ```shell
 gedit ~/.bashrc
 # 添加 
 export GO111MODULE=on
 ```
+
+#### go mod 配置
 
 第一次使用 GO MODULE(项目中还没有go.mod文件) ，cd进入项目文件夹，初始化 MODULE
 
@@ -261,8 +270,7 @@ go 1.13
 ```
 
 go mod tidy
-
-tidy会检测该文件夹目录下所有引入的依赖,写入 go.mod 文件，写入后会发现 go.mod 文件有所变动
+- tidy会检测该文件夹目录下所有引入的依赖,写入 go.mod 文件，写入后会发现 go.mod 文件有所变动
 
 ```go
 module SecKill
@@ -279,6 +287,32 @@ require (
 ```
 
 【2022-9-29】[go安装依赖包（go get, go module）](https://blog.csdn.net/weixin_41519463/article/details/103501485)
+
+#### go mod命令
+
+```shell
+# 初始化模块：
+go mod init <项目模块名称>
+# 依赖关系处理，根据go.mod文件
+go mod tidy
+# 将依赖包复制到项目的vendor目录
+go mod vendor
+# 显示依赖关系
+go list -m all
+# 显示详细依赖关系
+go list -m -json all
+# 下载依赖
+go mod download [path@version]
+```
+
+
+#### go mod 错误信息
+
+【2022-9-30】如果设置为on，但是当前目录没有go.mod文件，就会出现错误信息，[详见](https://blog.csdn.net/longgeaisisi/article/details/121288696)
+> no required module provides package xxx: go.mod file not found in current directory or any parent directory; see 'go help modules'
+
+解决方法
+- go env -w GO111MODULE=auto
 
 ## go编译
 
@@ -455,12 +489,14 @@ func main() { // 括号必须这种方式，否则报错！
 生成go.mod包
 - go mod init suggestion
 
-### 安装第三方包
+### 安装第三方包: 汉字转拼音
 
-【2022-9-29】安装汉字转拼音工具包 [go-pinyin](https://github.com/mozillazg/go-pinyin)
+【2022-9-29】安装汉字转拼音工具包
+- [go-pinyin](https://github.com/mozillazg/go-pinyin)
+- [pinyin](https://github.com/chain-zhang/pinyin)
 
 原理
-- 将所有的汉字对应的 rune码，对应上它的拼音，也即是，有一个这样的 map[rune]string, 其中 key 为汉字的 rune码，value 就是汉字的拼音了。这个 map 是通过文件来生成的。
+- 将所有的汉字对应的 rune码，对应上它的拼音，也即是，有一个这样的 map\[rune]string, 其中 key 为汉字的 rune码，value 就是汉字的拼音了。这个 map 是通过文件来生成的。
 
 文件内容示例
 - 其中的拼音都是带声调的。不需要声调的话，可以替换成没有声调的字符。
@@ -484,10 +520,23 @@ Mode 介绍
 
 ```shell
 # 安装pinyin
-go install github.com/mozillazg/go-pinyin/cmd/pinyin@latest
+#go install github.com/mozillazg/go-pinyin/cmd/pinyin@latest
 # 1.8之前用get get
-# go get github.com/chain-zhang/pinyin
+
+# 新建测试目录
+mkdir pinyin && cd pinyin
+touch pinyin_test.go 
+echo "...." > pinyin_test.go  # 内容如下
+# 初始化当前目录为模块，解除path依赖
+go mod init
+# 获取 go-pinyin工具包
+go get github.com/mozillazg/go-pinyin
+#go get github.com/chain-zhang/pinyin 
+# 执行测试脚本
+go run pinyin_test.go
 ```
+
+#### pinyin (失败)
 
 [pinyin](https://www.jianshu.com/p/57b86a6bd9f9) 示例
 
@@ -529,6 +578,8 @@ func main()  {
     }   
 }
 ```
+
+#### go-pinyin (测试通过)
 
 测试代码：go-pinyin
 
