@@ -288,6 +288,15 @@ Go语言是编译型的静态语言（和C语言一样），所以在运行Go语
 - go build: **go文件** --(go build 编译)--> **可执行文件** --(运行)--> **结果**
 - go run:   **go文件** --(go run 编译+运行)--> **结果**
 
+<div class="mermaid">
+    graph LR
+    A(源码文件.go) -->|go build 编译| B(可执行文件)
+    A & B -->|go run 运行| C(执行结果)
+    style A fill:#f96;
+    style C fill:#f02;
+</div>
+
+
 ```shell
 go build test.go # 先编译再运行（推荐build）
 go run test.go # 直接运行
@@ -370,7 +379,6 @@ src # 自己的代码
 
 - 问题：如何避免新增一个GO项目就要往GOPATH中增加一个路径？
 - 答：加入脚本：《[go目录结构](http://blog.studygolang.com/2012/12/go%E9%A1%B9%E7%9B%AE%E7%9A%84%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/)》
-
 
 
 ### 大项目
