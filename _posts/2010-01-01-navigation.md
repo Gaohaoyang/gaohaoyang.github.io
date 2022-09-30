@@ -49,6 +49,9 @@ permalink: /navi
 
 ### 可视化导航
 
+- 点击对应方块就能快速跳转
+- Click these blocks below to jump pages quickly ...
+
 <div class="mermaid">
     graph LR
     A(Home):::s
