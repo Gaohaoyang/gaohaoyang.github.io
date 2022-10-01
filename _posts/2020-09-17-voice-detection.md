@@ -45,7 +45,6 @@ permalink: /voice
 - 【2021-5-18】[搜狗发布全球首个手语合成主播](https://www.ixigua.com/6963167753645589029)，小聪
 <iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/6963167753645589029?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
 
-
 ## 业界音箱产品评测
 
 - 【2019-12-9】中科院物联网研究发展中心：[智能音箱的智能技术解析及其成熟度测评](http://www.ciotc.org/?from=timeline#/articaltwoinfo?id=20191209112501276114675&ids=18)
