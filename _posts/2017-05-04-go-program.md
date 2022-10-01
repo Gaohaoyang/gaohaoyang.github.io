@@ -1668,7 +1668,6 @@ fmt.Println("三层取地址:",&copyWriteDict["female"][1]["real"]) //cannot tak
 - （1）不传指针 
 - （2）提前用临时变量缓存，再传非map类的地址
 
-
 ## 变量
 
 Go标识符是用于标识**变量**、**函数**或任何其他用户定义项目的名称。
@@ -1723,6 +1722,43 @@ func main(){
 - **局部**变量、**全局**变量（main函数之外定义）
 - 函数可以接受**任意**参数（类型在变量后面），返回任意参数
 
+注意
+- 函数必须包含return语句！
+
+### 自定义函数
+
+Go中自定义函数由6部分组成：关键字`func`、`函数名`、`参数列表`、`返回值类型`(可选）、`函数体`、关键字`return`（可选）
+- 其中参数列表又分为带参数和不带参数两种类型
+- 如果带参数的话，必须在参数列表里指明该参数的数据类型。
+
+注意
+- 自定义函数中如果注明了返回值类型，就必须包含return关键字
+- 如果缺失了return关键字的话，系统会报错"missing return at end of function"提醒
+
+自定义函数还可以作为另一个自定义函数中的参数，称为`自定义函数嵌套`。
+
+```go
+package main
+
+import "fmt"
+
+// 自定义函数：有返回值类型，所以必须有return
+func hostname(model string, number string) string {
+    result := model + "-" + number
+    return result
+}
+// 自定义函数：无返回值类型，其中一个参数是函数
+func hostname_with_ip(original_hostname func(string, string) string, ip string) {
+    result := original_hostname("ISR4400", "1")
+    fmt.Println(result + "-" + ip)
+}
+
+func main() {
+    // 将函数当做参数传入
+    hostname_with_ip(hostname, "192.168.1.1")
+}
+```
+
 ### 显式函数
 
 ```go
@@ -1771,6 +1807,65 @@ func main(){
     newInt := intSeq()
     fmt.println(newInt()) //1
 }
+```
+
+### 特殊函数
+
+自定义函数时要避开系统内置的特殊函数
+
+#### init函数
+
+init函数
+- init 函数最主要的作用，就是完成一些初始化的工作
+- 每个源文件都可以包含一个 init  函数，该函数会在 main 函数执行前，被 Go 运行框架调用，也就是说 init 会在 main 函数前被调用
+- 如果文件同时包含全局变量定义，init  函数和 main  函数，则执行的流程是：
+  - 全局变量定义 -> init函数 -> main 函数。
+
+```go
+package main
+import "fmt"
+
+var g_a int = 10 // 全局变量
+
+type new_type struct {
+	x int
+	y string
+}
+
+func init(){
+	fmt.Println("系统自动调用：main函数前")
+	fmt.Println("init: ", g_a)
+}
+
+func change(p *new_type){
+	p.x = 5
+	p.y = "changing ..."
+}
+
+
+func main(){
+	fmt.Println("hello")
+	s := new_type{x:3, y:"world"}
+	fmt.Println(s)
+	fmt.Println(s.y)
+	//change(s)
+	change(&s)
+	fmt.Println(s)
+	g_a = 30
+	fmt.Println("main: ", g_a)
+}
+```
+
+输出
+
+```shell
+系统自动调用：main函数前
+init:  10
+hello
+{3 world}
+world
+{5 changing ...}
+main:  30
 ```
 
 ## 参数
@@ -2092,7 +2187,7 @@ i *p = 21         // 通过指针 p 设置 i
 ## 结构体
 
 一个`结构体`( struct )就是一个字段的**集合**。(而 type 的含义跟其字面意思相符。)
-- Go的结构体和C的基本上一样，不过在初始化时有些不一样，<font color='blue'>Go支持带名字的初始化</font>
+- Go的结构体和C基本上一样，不过在初始化时有些不一样，<font color='blue'>Go支持带名字的初始化</font>
 - go中的struct可以实现oop中的类、方法——**面向对象编程**
 - go语言中的struct成员可以是任何类型，如普通类型、复合类型、函数、struct、interface等。
  
