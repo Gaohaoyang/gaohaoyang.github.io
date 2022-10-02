@@ -53,6 +53,7 @@ permalink: /navi
 - Click these blocks below to jump pages quickly ...
 
 <div class="mermaid">
+%% 导航
     graph LR
     A(Home):::s
     classDef s fill:#C8D64B;
