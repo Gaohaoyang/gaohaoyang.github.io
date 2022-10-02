@@ -3,7 +3,7 @@ layout: post
 title:  "优质视频资源汇总"
 date:   2019-07-12 23:08:00
 categories: 视频
-tags: 王阳明 人生意义 思考 财经 哲学 科技
+tags: 王阳明 人生意义 思考 财经 哲学 科技 风景
 excerpt: 汇总优质视频，启发思考，开阔视野
 mathjax: true
 permalink: /video
@@ -13,6 +13,11 @@ permalink: /video
 {:toc}
 
 # 视频资源
+
+## 城市风景
+
+【2022-10-02】[全球经典实况直播](https://www.skylinewebcams.com/zh/webcam.html)，如：[罗马斗兽场](https://www.skylinewebcams.com/zh/webcam/italia/lazio/roma/roma-colosseo.html)
+- <a href="https://www.skylinewebcams.com/zh/webcam/italia/lazio/roma/roma-colosseo.html" target="_blank"><img src="https://embed.skylinewebcams.com/img/1151.jpg" alt="【LIVE】 罗马-罗马竞技场 | SkylineWebcams"></a>
 
 【2022-1-29】北京风景、城市风貌缩影，[摄影师眼中最好的北京](https://www.bilibili.com/video/BV1Nb411q7JR)
 
