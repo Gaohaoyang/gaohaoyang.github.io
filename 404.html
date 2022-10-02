@@ -41,8 +41,18 @@
         <div class="content-404">
             <p>Uh-oh! We couldn't find the page you are looking for. Suggest you returning to the <a href="/">home page</a>
             <p>不好，页面丢失，建议回到<a href="/">主页</a>，自行搜索（右上角）想要看的文章</p>
-            {% include tool_search.html %}
         </div>
+
+        <div>
+            <!-- HTML elements for search -->
+            <input type="text" id="search-input" placeholder="Search blog posts..">
+            <ul id="results-container"></ul>
+        
+            <!-- script pointing to jekyll-search.js -->
+            <script src="{{ site.baseurl }}/js/simple-jekyll-search.min.js"></script>
+            <!-- <script src="https://cdn.rawgit.com/christian-fei/Simple-Jekyll-Search/master/dest/simple-jekyll-search.min.js"></script> -->
+        </div>
+        
         <p>
             <a href="/">Check our home page (好的, 回到主页)</a>
         </p>
@@ -51,4 +61,19 @@
     </main>
     
 </body>
+
 </html>
+
+<!-- [2022-10-02]搜索框 -->
+<script>
+    window.simpleJekyllSearch = new SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '{{ site.baseurl }}/search.json',
+        searchResultTemplate: '<li><a href="{url}?query={query}" title="{desc}">{title}</a></li>',
+        noResultsText: 'No results found',
+        limit: 10,
+        fuzzy: false,
+        exclude: ['Welcome']
+    })
+    </script>
