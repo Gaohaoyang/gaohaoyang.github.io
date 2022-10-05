@@ -49,6 +49,9 @@ permalink: /block-chain
 
 <iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/6950292223799853604?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
 
+【2022-10-5】[为什么你在进入学习网站的时候总会卡一下](https://www.toutiao.com/video/7137983408562556198/)，站点打开后，往往会停顿一段时间才弹出界面，大部人以为只是网页卡顿原因，毕竟裤子都脱了不在乎这点时间，导致成千上万人身体倍榨干的同时还帮黑客赚了钱
+- 只是为了赚取一点广告费吗？那就太天真了，很多颜色网站会内置挖矿程序，植入js脚本，这样做的不只是颜色网站，还有免费电影、小说网站，只要进入此类网站，js脚本就会自动执行，占用大量CPU资源，挖取大量虚拟币，使电脑卡顿发热
+
 ## 观点
 
 【2021-05-05】[卢麒元：比特币是资本外逃的核心工具](http://www.szhgh.com/Article/opinion/xuezhe/2021-05-05/267287.html)，[视频](https://www.toutiao.com/video/7148656610724806693/)
