@@ -166,8 +166,6 @@ mathjax: true
 每一个层次想要跃迁到另外一个阶层都很难，穷人要**节衣缩食**，中产要**克制**自己，富人要不断**学习**，所以说控制不住自己的人性，就无法完成阶层的跃迁。
 
 
-
-
 # 超级富豪
 
 ## 富豪生活
@@ -185,6 +183,35 @@ mathjax: true
 
 <iframe src="//player.bilibili.com/player.html?aid=18065783&bvid=BV1wW411z77C&cid=29495211&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+## 富豪如何白手起家
+
+
+### 美国真人秀：富豪谷底求翻身
+
+【2022-10-05】电视节目：[富豪谷底求翻身](https://www.bilibili.com/video/BV14U4y1g7JN/)，[亿万富豪抛弃一切，挑战90天内用100美金，赚到100万美金](https://www.toutiao.com/video/7121275640237523496/)：富豪如何东山再起？
+- <iframe src="//player.bilibili.com/player.html?aid=676496384&bvid=BV14U4y1g7JN&cid=434560890&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- 从0到1比1到10难多了
+- 先找客户（需求），再找产品，通过资源整合挣钱
+1. 积极应对焦虑和懒惰。找不到工作，睡卡车不是事，真正会让自己的行动力下降，让自己不体面不被人看中的原因，是自己心态崩了。
+2. 脸皮要厚，但对话技巧很重要。不要觉得向别人寻求帮助是丢脸的事情，珍惜一时的尊严可能会损失更大的尊严。
+3. 先找市场，再找客户。
+4. 多沟通，并尽可能的表现真诚。给对方说一点自己的故事，一步步的下套，让对方了解自己并产生好感。心理学有familiarity rule，当对方跟你认识的越久、了解的越多，无论他对你初印象如何，都会更喜欢你。只有这样才能拓展人脉，寻求机会。
+5. 虚心学习可能能学到的，少抬杠。
+
+### 香港真人秀：穷富翁大作战
+
+- 穷富翁大作战,[第一季](https://www.bilibili.com/video/av2884835?from=search&seid=930398290238770510), [第二季](https://www.bilibili.com/video/av12560324)
+- 香港电视台的《穷富翁大作战》邀请了很多，律师 名嘴 企业家 等精英阶层，去体验底层人民的工作，看他们不靠家庭和财富在每天工作15个小时以及下一顿的压力下，还能不能改变生活提升自己发家致富，结果这群“精英人士”没有一个做得到！有个富豪体验过后说得好，“这个社会在及其严厉的惩罚读不好书的低学历人士太残酷了！”
+- 富人和穷人的区别其实就是一只鸡的区别：富人可以等着鸡下蛋生鸡、穷人就只能杀了吃，因为不吃就活不下去
+- 丑小鸭之所以在日后能发生改变是因为它本来就是天鹅的孩子
+- 勤劳致富只是小富想大富还是要剥削，把别人的东西合理合法的，弄到你手里。你就成功了
+- 赚大钱的方法都在刑法里，活命的方法都在劳动法上
+- 社会在严厉惩罚不好好读书的人。现在很多家长谈学校压力大作业多要给学生减负，但其实越有钱会让小孩学更多的东西，教育如果产业化形成，阶级就真的固化严重不容打破了。
+
+- 穷富翁大作战（富人体验穷人生活的真人秀）[第一季 01](https://www.bilibili.com/video/BV1Us411g77S)
+- <iframe src="//player.bilibili.com/player.html?aid=28821869&bvid=BV1Us411g77S&cid=49950438&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+<iframe src="//player.bilibili.com/player.html?aid=2884835&cid=4507553&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 ## 22位富豪家庭出身
 
