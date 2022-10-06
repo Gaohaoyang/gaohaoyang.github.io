@@ -345,6 +345,10 @@ QQ一上线就迅速获得了大量用户，但也迅速落入了三大门户曾
 
 相较于ICQ，腾讯的QQ做了两件事，一件事是**产品**层面的改动，另一件事是在**商业模式**上的探索。这两件事其实都不是颠覆性的，但正是类似这样的“**微创新**”，让它能够更好适应中国市场，并且一举抓住了中国互联网市场爆发的红利。
 
+【2022-10-7】2005年的QQ、网聊、网吧，那时候还没有美颜滤镜，[场景](https://www.toutiao.com/video/7150596428845419809/)，[b站](https://www.bilibili.com/video/BV1sq4y1S7Co/)
+
+<iframe src="//player.bilibili.com/player.html?aid=589834976&bvid=BV1sq4y1S7Co&cid=387169237&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 #### 百度
 
 百度也不完全是对谷歌的照搬。
