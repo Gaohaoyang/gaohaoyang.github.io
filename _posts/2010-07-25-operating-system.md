@@ -17,6 +17,20 @@ permalink: /os
 
 【2022-1-26】linux操作系统发明人 [Linus Torvalds](https://github.com/torvalds)，[github源码](https://github.com/torvalds/linux)
 
+## 硬件
+
+### 电脑进化史
+
+【2022-10-7】[【电脑】演变历史 1936 - 2020](https://www.bilibili.com/video/BV1J441147LB)
+
+<iframe src="//player.bilibili.com/player.html?aid=51338556&bvid=BV1J441147LB&cid=89865965&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+### 手机进化史
+
+【2022-10-7】[【智能手机】手机发展演变历史过程](https://www.bilibili.com/video/BV1tE411c7q3)
+
+<iframe src="//player.bilibili.com/player.html?aid=98559388&bvid=BV1tE411c7q3&cid=168243993&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 ## 操作系统介绍
 
 【2022-3-13】[关于LMOS自主操作系统的发展，大家有什么建议？](https://www.zhihu.com/question/30866956)
@@ -25,6 +39,40 @@ permalink: /os
 - 桑文峰，从2012年到2014年，花了两年时间研究清楚了操作系统底层是怎么实现的，并且实现了一个小的os，可以fork和exec新任务，还在网上开了一门视频课程。github地址： 《跟着瓦利哥学写OS》的[课程代码和课件](https://github.com/sangwf/walleclass)
 - [自己动手写操作系统](https://item.taobao.com/item.htm), 用c语言和汇编语言编写出一个具备操作系统基本功能的操作系统框架。本书不同于其他的理论型书籍，而是提供给读者一个动手实践的路线图。
 - 日本：[30天自制操作系统](https://detail.tmall.com/item.htm)
+
+### 著名操作系统
+
+全球四大桌面操作系统：
+- Windows，
+- MacOS，
+- Linux（Ubuntu代替），
+- ChromeOS(FydeOS代替)
+
+
+## Windows
+
+【2022-10-7】【进化编年史】[万物皆有其进化史~Windows操作系统进化历程](https://www.bilibili.com/video/BV1EY4y1r7oS)
+
+<iframe src="//player.bilibili.com/player.html?aid=638965781&bvid=BV1EY4y1r7oS&cid=716461078&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+【进化史】[Windows系统（1985-2021）精益求精](https://www.bilibili.com/video/BV1C64y1Q7N1)
+- 第二期进化史为微软（Microsoft）的Windows系统进化史
+- 视频盘点了从最初的Windows1.0、Windows2.0、Windows3.0系统，是微软对于图形化系统探索的起点；90年代的WindowsNT、Windows95、Windows98系统，是Windows系统概念的发源地；之后便是Windows2000、WindowsME、WindowsXP这几个经典的诞生；再到现在的WindowsVista、Windows7、Windows8、Windows10、Window11
+
+<iframe src="//player.bilibili.com/player.html?aid=758974733&bvid=BV1C64y1Q7N1&cid=363244221&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+## Linux
+
+
+## Mac
+
+[Mac os苹果操作系统的历史进化之路](https://www.bilibili.com/video/BV1oW411z73P)
+
+<iframe src="//player.bilibili.com/player.html?aid=32428101&bvid=BV1oW411z73P&cid=56738995&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+[Mac OS发展史(实机演示)](https://www.bilibili.com/video/BV1Xi4y1w7np)
+
+<iframe src="//player.bilibili.com/player.html?aid=545025905&bvid=BV1Xi4y1w7np&cid=322975564&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 ## 操作系统基本架构
 
@@ -41,7 +89,6 @@ permalink: /os
 - **应用程序**则是具有某种功能的程序，程序是运行于操作系统之上的。
 
 - 程序 = 数据结构 + 算法
-
 
 ![](https://ask.qcloudimg.com/http-save/6667215/le0t3hqy8t.jpeg)
 
