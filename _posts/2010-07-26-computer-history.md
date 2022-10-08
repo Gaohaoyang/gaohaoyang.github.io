@@ -404,17 +404,61 @@ X86电脑因考虑要适应各种应用的需求，其发展思路是：性能+�
 各门语言难度：[C++ 最难学？最易/难学习的编程语言 TOP 5 来了](https://www.toutiao.com/i7047434834607931940/)
 - ![img](https://p26.toutiaoimg.com/origin/tos-cn-i-tjoges91tu/St4ODUM6UmOGe6)
 
+### 高级语言 vs 低级语言
+
+高级语言并不是特指的某一种具体的语言，而是包括很多编程语言：
+- 如流行的java，c，c++，python，易语言，JavaScript等等，这些语言的语法、命令格式都不相同。
+
+低级语言分`机器语言`（二进制语言）和`汇编语言`（符号语言），这两种语言都是面向**机器**的语言，和具体机器的指令系统密切相关。
+- `机器语言`用**指令代码**编写程序，而`符号语言`用**指令助记符**来编写程序。
+- 低级语言包括机器语言（0或1组成的一串代码）和汇编语言（将常用的机器代码用一些标记符代替）。
+
+高级语言包括c c++ java c# 等等。这些语言符合开发者的思维习惯，可以不需要多计算机硬件有过多的了解。也可以进行程序开发。
+
+### 编程语言变迁
+
+【2022-10-8】[编程语言变迁图](https://www.infoq.cn/article/7eywx_3ap7drb5ledzup)，[原图](https://apenwarr.ca/img/programmer-migration.svg)
+- ![](https://static.geekbang.org/infoq/5cd27e1a0383b.png)
+- 终极节点包括：Rust、 Java、 Go、 Python 3、Javascript 和 node.js（node.js 作为一种特殊的 Javascript，在这里特别指出）
+
+高级语言都是用什么语言写的？
+- `C语言`（偏向底层的硬件性编程语言）
+  - C语言是一门通用计算机编程语言，应用广泛。C语言的设计目标是提供一种能以简易的方式编译、处理低级存储器、产生少量的机器码以及不需要任何运行环境支持便能运行的编程语言。
+  - 尽管C语言提供了许多低级处理的功能，但仍然保持着良好跨平台的特性，以一个标准规格写出的C语言程序可在许多电脑平台上进行编译，甚至包含一些嵌入式处理器(单片机或称MCU)以及超级电脑等作业平台。
+- `Shell`语言 ← `C语言`
+  - Shell 是一个用C语言编写的程序，它是用户使用Linux 的桥梁。 Shell 既是一种命令语言，又是一种程序设计语言。 Shell 是指一种应用程序，这个应用程序提供了一个界面，用户通过这个界面访问操作系统内核的服务。
+- `Python`（脚本语言）← `C语言`
+  - Python的底层是用C语言写的，很多标准库和第三方库也都是用C写的，运行速度非常快
+  - Python是纯粹的自由软件， 源代码和解释器CPython遵循 GPL(GNU General Public License)协议 。Python语法简洁清晰，特色之一是强制用空白符(white space)作为语句缩进。Python具有丰富和强大的库。它常被昵称为胶水语言，能够把用其他语言制作的各种模块(尤其是C/C++)很轻松地联结在一起。
+- `Java`语言 ← `C语言`
+  - Java是由C语言发展而来的高级语言，并且内核是由c编写的。JAVA虚拟机（JVM）是用`C语言`和`汇编语言`编写的
+  - Java是面向对象编程语言，从C++发展而来的, 不仅吸收了C++语言的各种优点，还摒弃了C++里难以理解的多继承、指针等概念，因此Java语言具有功能强大和简单易用两个特征。
+- JavaScript 语言
+  - JavaScript®（通常简写为JS）是一种轻量的、解释性的、面向对象的头等函数语言，其最广为人知的应用是作为网页的脚本语言，但同时它也在很多非浏览器环境下使用。 JS 是一种动态的基于原型和多范式的脚本语言，支持面向对象、命令式和函数式的编程风格。
+  - google chrome的js引擎是v8，nodejs用的也是这个，据说是目前速度最快的，用c++写的，[代码](http://code.google.com/p/v8/)
+- `PHP`语言：(超文本预处理器) ← `C语言`
+  - PHP语言的内核就是C语言写成的。
+  - PHP(外文名:PHP: Hypertext Preprocessor，中文名：“超文本预处理器”)是一种通用开源脚本语言。语法吸收了C语言、Java和Perl的特点，利于学习，使用广泛，主要适用于Web开发领域。PHP 独特的语法混合了C、Java、Perl以及PHP自创的语法。
+- `Go`语言 ← `C语言`
+  - 早期Go是用`汇编语言`和`C语言`实现的，后来Go成熟了之后，Go语言就开始**自举**、用早期版本重写了Go语言编译器
+
+
+
 ### 语言汇总
 
 - TIOBE 公司，每月会发布一版编程语言的流行度[排行榜](https://www.tiobe.com/tiobe-index/)
-- 语言类型分布图：[知乎](https://www.zhihu.com/question/19918532)
-  - ![img](https://img-blog.csdn.net/20180705132612202?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NvZGluZ19kb25n/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-- [一图看懂编程语言分类](https://blog.csdn.net/acelit/article/details/62466679)
-  - ![img](https://img-blog.csdn.net/20170316225437760)
+- 语言类型分布图：[知乎](https://www.zhihu.com/question/19918532)，[img](https://img-blog.csdn.net/20180705132612202?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NvZGluZ19kb25n/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+  - 划分维度：动态(dynamic)/静态(static)、强类型(strong)/弱类型(weak)
+  - static & weak: C、C++
+  - static & strong: Java
+  - dynamic & weak: JavaScript、Perl、PHP、VB
+  - dynamic & strong: Python、Ruby、Erlong
+- [一图看懂编程语言分类](https://blog.csdn.net/acelit/article/details/62466679)，[img](https://img-blog.csdn.net/20170316225437760)
+  - Venn图，多个维度混合：编译型/解释型、动态类型/静态类型、强类型/弱类型、动态/静态
 - 各语言[关系图谱](https://exploring-data.com/vis/programming-languages-influence-network/)：（可交互）
 - 国外有一篇对主流编程语言进行优劣点评的文章《[These Modern Programming Languages Will Make You Suffer](https://betterprogramming.pub/modern-languages-suck-ad21cbc8a57c)》，非常精彩，强烈建议看一下。对其中 Meta Language 部分的翻译，见 《[一文解决现代编程语言选择困难：响应式编程](https://www.infoq.cn/article/zCMypl8ZzgT9U60sbZ9x)》
-- 从计算机最底层的硬件开始，按照贴近硬件的程度，主流编程语言的层次依赖关系图
-  - ![img](https://static001.geekbang.org/infoq/d3/d3cf643a29e9f428cc414994660ab0e4.jpeg?x-oss-process=image/resize,p_80/auto-orient,1)
+- 从计算机最底层的硬件开始，按照贴近硬件的程度，主流编程语言的层次依赖关系图，[img](https://static001.geekbang.org/infoq/d3/d3cf643a29e9f428cc414994660ab0e4.jpeg)
+  - 从底向上逐层依赖：**硬件层级** → **汇编层级**（机器语言/汇编语言） → **系统层级**（C语言） → **应用层级**（C++/Java/object-c等） → 脚本层级（Python/JavaScript/Ruby/Perl）
   - C 语言在计算机技术中有其它任何高级语言不可替代的作用。所谓 “0/1 生汇编，汇编生 C，C 生万物，乃编程之本”，任何想立志学好计算机的人都不可能跨过 C 语言。
   - C 语言是面向**内存**的编程语言，用 C 编程的时候，需要知道每个数据在内存中样子，是直接在和计算机对话的。而其它语言，都是做各种各样的封装，屏蔽掉了底层的各种概念，让你都不知道计算机是怎么工作的。
   - 知乎上有人给了一个比喻：如果不会 C 语言，以为自己学会了编程，其实嘛，在“编程”这个“城市”里是没有买“房子”的，没有房子就没有门，说白了，就是没入门，也就是门外汉。

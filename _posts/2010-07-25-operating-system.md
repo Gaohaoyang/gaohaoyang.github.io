@@ -3,7 +3,7 @@ layout: post
 title:  "操作系统-Operating System"
 date:   2010-07-25 15:09:00
 categories: 计算机基础
-tags: 操作系统
+tags: 操作系统 进程 线程 协程
 excerpt: 计算机操作系统知识点
 mathjax: true
 permalink: /os
@@ -11,10 +11,6 @@ permalink: /os
 
 * content
 {:toc}
-
-# 总结
-
-
 
 
 # 操作系统
@@ -192,6 +188,7 @@ permalink: /os
 
 常连接是指一个客户的多次请求可以复用一个TCP连接。那么，在设计进程池时还需要考虑：一个客户连接上的所有任务是否始终由一个子进程来处理。如果说客户任务是无状态的，那么我们可以考虑使用不同的子进程来为该客户的不同请求服务
 - ![](https://pic1.zhimg.com/80/v2-dd3b5cca54c84d095e6310b124bc2edc_1440w.jpg)
+
 
 ## 国产操作系统
 
