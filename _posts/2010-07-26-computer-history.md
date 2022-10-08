@@ -463,7 +463,8 @@ X86电脑因考虑要适应各种应用的需求，其发展思路是：性能+�
     style B fill:#6BE0F7;
     style C fill:#5CF77B;
     style D fill:#6BE0F7;
-    style H fill:#5CF77B;
+    style F fill:#5CF77B;
+    %%style H fill:#5CF77B;
     style I fill:#6BE0F7;
     style J fill:#F7CF6B;
     A -->|高级语言| C(C语言)
@@ -474,11 +475,11 @@ X86电脑因考虑要适应各种应用的需求，其发展思路是：性能+�
     C -->|面向对象| F(C++)
     F -->|面向对象| E(Java)
     F -->|Web编程| G(JavaScript)
-    F -->|服务端| K(Node.js)
+    F -->|服务端| J(Node.js)
     C -->|Web后端| H(PHP)
     A -->|高级语言| I(Go)
     C -->|高级语言| I(Go)
-    C -->|脚本语言| L(Perl)
+    C -->|脚本语言| K(Perl)
 
     click B "https://wqw547243068.github.io/linux#shell语言" "shell用法"
     click C "https://wqw547243068.github.io/c#c语言" "c/c++语言"
