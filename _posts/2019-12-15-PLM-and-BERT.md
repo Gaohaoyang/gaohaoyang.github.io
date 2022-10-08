@@ -627,6 +627,11 @@ translator("Ce cours est produit par Hugging Face.")
 [{'translation_text': 'This course is produced by Hugging Face.'}]
 ```
 
+### Demo发布
+
+【2022-10-8】[Spaces](https://huggingface.co/spaces) ：Discover amazing ML apps made by the community! 展示各种DEMO
+- [Hugging Face Spaces](https://huggingface.co/spaces) will host the interface on its servers and provide you with a link you can share.
+
 ## transformers源码
 
 参考：
