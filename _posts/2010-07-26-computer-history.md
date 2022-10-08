@@ -433,7 +433,7 @@ X86电脑因考虑要适应各种应用的需求，其发展思路是：性能+�
 - `Java`语言 ← `C语言`
   - Java是由C语言发展而来的高级语言，并且内核是由c编写的。JAVA虚拟机（JVM）是用`C语言`和`汇编语言`编写的
   - Java是面向对象编程语言，从C++发展而来的, 不仅吸收了C++语言的各种优点，还摒弃了C++里难以理解的多继承、指针等概念，因此Java语言具有功能强大和简单易用两个特征。
-- JavaScript 语言
+- `JavaScript` 语言
   - JavaScript®（通常简写为JS）是一种轻量的、解释性的、面向对象的头等函数语言，其最广为人知的应用是作为网页的脚本语言，但同时它也在很多非浏览器环境下使用。 JS 是一种动态的基于原型和多范式的脚本语言，支持面向对象、命令式和函数式的编程风格。
   - google chrome的js引擎是v8，nodejs用的也是这个，据说是目前速度最快的，用c++写的，[代码](http://code.google.com/p/v8/)
 - `PHP`语言：(超文本预处理器) ← `C语言`
@@ -442,7 +442,36 @@ X86电脑因考虑要适应各种应用的需求，其发展思路是：性能+�
 - `Go`语言 ← `C语言`
   - 早期Go是用`汇编语言`和`C语言`实现的，后来Go成熟了之后，Go语言就开始**自举**、用早期版本重写了Go语言编译器
 
+编程语言演化图
 
+<div class="mermaid">
+%% 编程语言演化图
+    graph TD
+    A(汇编语言):::s
+    classDef s fill:#C8D64B;
+    style A fill:#F7CF6B;
+    style B fill:#6BE0F7;
+    style C fill:#6BE0F7;
+    style D fill:#6BE0F7;
+    style H fill:#5CF77B;
+    style I fill:#f02;
+    A -->|高级语言| C(C语言)
+    C -->|操作机器| B(Shell)
+    C -->|脚本语言| D(Python)
+    C -->|高级语言| E(Java)
+    A -->|高级语言| E(Java)
+    C -->|面向对象| F(C++)
+    F -->|Web编程| G(JavaScript)
+    C -->|Web后端| H(PHP)
+    A -->|高级语言| I(Go)
+    C -->|高级语言| I(Go)
+    click B "https://wqw547243068.github.io/linux#shell语言" "shell用法"
+    click C "https://wqw547243068.github.io/c#c语言" "c/c++语言"
+    click D "https://wqw547243068.github.io/python" "Python语言"
+    click F "https://wqw547243068.github.io/c#c" "c/c++语言"
+    click G "https://wqw547243068.github.io/web#js" "web开发"
+    click I "https://wqw547243068.github.io/go" "go语言"
+</div>
 
 ### 语言汇总
 
