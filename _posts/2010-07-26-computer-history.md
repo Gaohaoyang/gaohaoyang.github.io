@@ -467,10 +467,9 @@ X86电脑因考虑要适应各种应用的需求，其发展思路是：性能+�
 |Java|1990|詹姆斯·高斯林（James Gosling）|![](https://inews.gtimg.com/newsapp_bt/0/12180973617/1000)|1955年出生在加拿大一个小村庄，12岁就会利用废物做电子游戏机和修理报废收割机，22岁获得计算机学士学位，28岁博士毕业并开始工作，1990年（35岁）与人合作“绿色计划”并发展一套语言叫做“Oak”，后改名为Java。|
 |Ruby|1993|松本行弘(Yukihiro Matsumoto)|![](https://inews.gtimg.com/newsapp_bt/0/12180973618/1000)|1965年出生，日本人，日本筑波大学毕业。Ruby是一种面向对象的计算机编程语言。由日本人松本行弘于1993年发明，明显比其他类似的编程语言（如Python）年轻，又因为Ruby是日本人发明的，所以早期的非日文资料和程序都比较贫乏，所以在网上仍然可以找到Ruby的资料太少之类的批评。约于2000年，Ruby开始进入美国，英文的资料开始发展。Ruby归根结底源于Perl和Python两类语言，与C，C++，C#，java是不同大类。|
 |JavaScript|1995|布兰登·艾奇（Brendan Eich）|![](https://inews.gtimg.com/newsapp_bt/0/12180973619/1000)|1961年出生，美国人，毕业于伊利诺伊大学香槟分校。原名LiveScript，起初它的主要目的是处理以前由服务器端负责的一些表单验证。1995年34岁的布兰登·艾奇加入了当时走在技术革新最前沿的Netscape（网景）公司，他尝试用LiveScript同时在浏览器和服务器中使用。为了赶在发布日期前完成LiveScript的开发，Netscape与Sun公司成立了一个开发联盟。而此时，Netscape为了搭上媒体热炒Java的顺风车，临时把LiveScript改名为JavaScript。|
-|R语言|1995|Ross Ihaka和Robert Gentleman|![](https://inews.gtimg.com/newsapp_bt/0/12180974941/1000)|创始人有两个：<br>（1）乔治·罗斯·伊哈卡（George Ross Ihaka），1954年出生，美国人，加州大学伯克利分校获得博士学位。<br>（2）罗伯特·克利福德·杰特曼（Robert Clifford Gentleman），1959年出生，加拿大人，不列颠哥伦比亚大学获得主修数学的理学士学位，华盛顿大学统计学博士学位。
-<br>R语言前身是1976年美国贝尔实验室开发的S语言，1995年正式问世，因两名主要研发者Ross Ihaka和Robert Gentleman姓名首字母均为R而得名。可惜两人已分道扬镳，各奔前程，开发和维护工作由早期核心团队的其他成员来共同接管。|
+|R语言|1995|Ross Ihaka和Robert Gentleman|![](https://inews.gtimg.com/newsapp_bt/0/12180974941/1000)|创始人有两个：<br>（1）乔治·罗斯·伊哈卡（George Ross Ihaka），1954年出生，美国人，加州大学伯克利分校获得博士学位。<br>（2）罗伯特·克利福德·杰特曼（Robert Clifford Gentleman），1959年出生，加拿大人，不列颠哥伦比亚大学获得主修数学的理学士学位，华盛顿大学统计学博士学位。<br>R语言前身是1976年美国贝尔实验室开发的S语言，1995年正式问世，因两名主要研发者Ross Ihaka和Robert Gentleman姓名首字母均为R而得名。可惜两人已分道扬镳，各奔前程，开发和维护工作由早期核心团队的其他成员来共同接管。|
 |PHP|1995|拉斯马斯·勒德尔夫（Rasmus Lerdorf）|![](https://inews.gtimg.com/newsapp_bt/0/12180974943/1000)|1968年出生，国籍加拿大-丹麦，加拿大滑铁卢大学(University of Waterloo)大学系统设计工程专业应用科学学士。<br>在1994创建PHP，刚刚开始只是一个简单的用Perl语言编写的程序，用来统计他自己网站的访问者。后来又用C语言重新编写，包括可以访问数据库。1995年他发布了PHP1.0版本，到现在最新版本PHP8.0已有25个年头，各方面特性不断在加强，近几年更是发展迅猛，从编程语言排行榜50名开外挤进了前10，进步神速。|
-|C#|2000|安德斯·海尔斯伯格（Anders Hejlsberg）||1960年出生，丹麦人。在丹麦技术大学读过书，与众不同的是他没毕业，但无妨，他是当时世界上少有的编程天才<br>在安德斯加入微软后，成为微软开发工具大军的领军人物，微软的编译器技术飞速提高，C#也就是在2000年由微软发布，.net framework也紧跟着在2002年发布，安德斯迎来了真正的人生的巅峰。|
+|C#|2000|安德斯·海尔斯伯格（Anders Hejlsberg）|![](https://inews.gtimg.com/newsapp_bt/0/12180976820/1000)|1960年出生，丹麦人。在丹麦技术大学读过书，与众不同的是他没毕业，但无妨，他是当时世界上少有的编程天才<br>在安德斯加入微软后，成为微软开发工具大军的领军人物，微软的编译器技术飞速提高，C#也就是在2000年由微软发布，.net framework也紧跟着在2002年发布，安德斯迎来了真正的人生的巅峰。|
 |Go|2009|罗布·派克（Rob Pike）|![](https://inews.gtimg.com/newsapp_bt/0/12180976822/1000)|1956年出生，加拿大人，这个人实在不知道该怎么介绍，在他身上有太多不同类别的闪光点|
 
 Go之父闪光点
@@ -502,21 +501,23 @@ Go之父闪光点
     %%style H fill:#5CF77B;
     style I fill:#6BE0F7;
     style J fill:#F7CF6B;
-    A -->|高级语言,1972| C(C语言)
+    A -->|1972,高级语言| C(C语言)
     C -->|操作机器| B(Shell)
-    C -->|脚本语言,1989| D(Python)
+    C -->|1989,脚本语言| D(Python)
     C -->|虚拟机| E(Java)
-    A -->|高级语言,1990| E(Java)
-    C -->|面向对象,1979| F(C++)
+    A -->|1990,高级语言| E(Java)
+    C -->|1979,面向对象| F(C++)
     F -->|面向对象| E
-    F -->|Web编程,1995| G(JavaScript)
+    F -->|1995,Netscape| G(JavaScript)
+    %%E -.->|蹭热度| G
     F -->|服务端| J(Node.js)
     C -->|Web后端,1995| H(PHP)
-    A -->|高级语言,2009| I(Go)
-    C -->|高级语言| I(Go)
+    A -->|2009,Google| I(Go)
+    C -->|高级语言| I
     C -->|脚本语言| K(Perl)
-    K -->|脚本语言,1993| L(Ruby)
+    K -->|1993,脚本语言| L(Ruby)
     K -.-> H
+    C -->|2000,Microsoft| M(C#)
 
     click B "https://wqw547243068.github.io/linux#shell语言" "shell用法"
     click C "https://wqw547243068.github.io/c#c语言" "c/c++语言"
