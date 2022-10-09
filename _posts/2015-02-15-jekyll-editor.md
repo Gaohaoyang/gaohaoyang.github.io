@@ -282,11 +282,32 @@ The HTML style attribute is used to add styles to an element, such as **color**,
   - <font size=2>二号字尺寸式样 </font> 
 - **加粗**, *斜体*, 颜色显示
   - <font color='green'>彩色字体</font>
+- 中文字体：face 属性规定 font 元素中文本的字体。
+  - <font color=#0099ff size=5 face='Yuanti SC'>中文-圆体</font>
+  - 在 HTML 4中 face 属性已废弃，HTML 4.01 Strict DTD 或 XHTML 1.0 Strict DTD 已不支持该属性，可以使用 CSS 代替
+- 字体：[CSS font-family中文字体对应的英文名称一览表](https://www.zhangxinxu.com/study/201703/font-family-chinese-english.html)
 
 颜色色阶选取[参考](https://htmlcolorcodes.com/zh/yanse-ming/), 包含常用颜色：红、粉、橙、黄、紫、绿、蓝、白、灰
 
 ```html
 <font color='green'>彩色字体</font>
+
+<font color=#0099ff size=5 face='STHeiti'>中文-黑体</font>
+
+<font color=#0099ff size=5 face='Yuanti SC'>中文-圆体</font>
+
+<font color=#0099ff size=5 face='Weibei SC'>中文-魏碑</font>
+
+<font color=#0099ff size=5 face='STKaiti'>中文-楷体</font>
+
+<font color=#0099ff size=5 face='Xingkai SC'>中文-行楷</font>
+
+<font color=#0099ff size=5 face='STLiti'>中文-隶书</font>
+
+<p style="font-family:Yuanti SC">This is a paragraph中文.</p>
+<font face='Yuanti SC'>测试</font>
+<p style="font-family:'Courier New'">This is another paragraph.</p>
+
 This is *red红色*{: style="color: red"} 去掉*后颜色失效
 This is <span style="color: red">written in red</span>.
 This is <p style="color: red">written in red</p>.
