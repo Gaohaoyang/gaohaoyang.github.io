@@ -30,6 +30,17 @@ permalink: /dkt
 
 > Def:  Knowledge tracing is the task of modelling student knowledge over time so that we can accurately predict how students will perform on future interactions. Usually by observing the correctness of doing exercises.
 
+
+- **认知诊断**在在线智能教育领域是一个非常经典的问题。根据学生的答题历史记录，分析学生对于各个知识点的掌握情况。如图1所示，总共有4道习题，学生对四道习题进行作答，认知诊断模型将<font color='blue'>根据学生的作答记录分析出学生对于题目中包含知识点的掌握情况</font>。
+- ![](https://pic4.zhimg.com/80/v2-4657227c217b78a23e23c7f96a3cf3e7_1440w.jpg)
+
+**认知诊断**问题需要从以下三个方面去考虑：**学生**模型，**试题**模型，**学生试题交互**模型。
+1. **学生**模型：将学生对于各个知识点的掌握程度向量![](https://www.zhihu.com/equation?tex=F%5E%7Bs%7D)作为学生建模结果。
+1. **试题**建模：试题建模分为两个部分
+  - 其一是试题中包含哪些**知识点**，这些都是通过人工标注的Q矩阵得到的；
+  - 其二就是试题本身的特征，比如**试题难度**，试题的**区分度**等等。
+1. **学生-试题**交互建模：通过神经网络模拟学生与试题之间的交互建模。向网络中输入学生模型与试题模型，最终输出学生做出各个习题的概率。
+
 - **知识追踪**是基于学生行为序列进行建模，预测学生对知识的掌握程度。知识追踪是构建**自适应教育系统**的核心和关键。在自适应的教育系统中，无论是做精准推送，学生**学习路径规划**或**知识图谱构建**，第一步都是能够精准预测学生对知识的掌握程度。
 - ![](https://img-blog.csdnimg.cn/20200919221855940.png)
 - 这个学生一共做了50道题(横轴)，在深度知识追踪中，每道**题**关联一个**知识点**，在上面这50道题中，共考察了6个**知识点**，如左边显示
@@ -54,18 +65,6 @@ permalink: /dkt
 
 知识追踪简单的说就是“<span style="color:blue">边学边测</span>”问题，连续追踪学生在学习过程中的能力变化(即tracing)。
 - 这个概念区别于专注于测试学生**能力水平**的模型，如`项目反应理论`(IRT)模型，测试场景的目标是快速、准确的测量出学生的水平。
-
-## 介绍
-
-- **认知诊断**在在线智能教育领域是一个非常经典的问题。根据学生的答题历史记录，分析学生对于各个知识点的掌握情况。如图1所示，总共有4道习题，学生对四道习题进行作答，认知诊断模型将<font color='blue'>根据学生的作答记录分析出学生对于题目中包含知识点的掌握情况</font>。
-- ![](https://pic4.zhimg.com/80/v2-4657227c217b78a23e23c7f96a3cf3e7_1440w.jpg)
-
-**认知诊断**问题需要从以下三个方面去考虑：**学生**模型，**试题**模型，**学生试题交互**模型。
-1. **学生**模型：将学生对于各个知识点的掌握程度向量![](https://www.zhihu.com/equation?tex=F%5E%7Bs%7D)作为学生建模结果。
-1. **试题**建模：试题建模分为两个部分
-  - 其一是试题中包含哪些**知识点**，这些都是通过人工标注的Q矩阵得到的；
-  - 其二就是试题本身的特征，比如**试题难度**，试题的**区分度**等等。
-1. **学生-试题**交互建模：通过神经网络模拟学生与试题之间的交互建模。向网络中输入学生模型与试题模型，最终输出学生做出各个习题的概率。
 
 ### Q&A
 
@@ -108,33 +107,47 @@ $$
 
 
 <div class="mermaid">
-%% 编程语言演化图
-    graph TD
-    %% 根节点设置（非必须）
-    A(IRT-项目反应理论):::s
-    classDef s fill:#f02;
-    %% 颜色设置
+graph TD
+    %%知识追踪发展历程
+    %%根节点
+    A(CTT-经典测验模型):::light
+    %%classDef s fill:#6BE0F7; %%颜色定义
     style A fill:#C8D64B;
     style B fill:#6BE0F7;
     style C fill:#5CF77B;
     style D fill:#6BE0F7;
     style F fill:#5CF77B;
-    %%style H fill:#5CF77B;
-    style I fill:#6BE0F7;
-    style J fill:#F7CF6B;
-    %% 依赖关系设置
-    A -->|1972,LR→Bayes| C(C语言)
-    K -.-> H
-    C -->|2000,Microsoft| M(C#)
-
-    click B "https://wqw547243068.github.io/linux#shell语言" "shell用法"
-    click C "https://wqw547243068.github.io/c#c语言" "c/c++语言"
+    style L fill:#5CF77B;
+    style S fill:#6BE0F7;
+    style M fill:#F7CF6B;
+    style N fill:#f02;
+    %%节点关系定义
+    A -->|1951,多维度| B(IRT-项目反应理论)
+    B -->|1995,LR换Bayes| C(BKT-贝叶斯追踪)
+    C -->|2015,Bayes换LSTM,seq2seq| D(DKT-深度知识追踪)
+    D -->|2016,LSTM换单样本学习| E(MANN-记忆增强神经网络)
+    E -->|2017,自动学习概念状态| F(DKVMN-动态键值记忆网络)
+    C -.->|借鉴| F
+    D -.->|借鉴| F
+    F -->|2021,模拟学习记忆过程| L(LPKT-基于学习过程的知识追踪)
+    E -.->|借鉴| L
+    F -->|2019,图神经网络| G(GKT-图知识追踪)
+    F -->|2019,自注意力| S(SAKT-自注意力知识追踪)
+    S -->|2020,transformer| M(SAINT-深度自注意力追踪)
+    M -->|2021,时序特征嵌入| N(SAINT+纠错预测)
+    %%点击行为设置
+    click C "https://wqw547243068.github.io/dkt#bkt" "bkt"
+    click D "https://wqw547243068.github.io/dkt#dkt" "dkt"
+    click F "https://wqw547243068.github.io/dkt#dkvmn%E6%A8%A1%E5%9E%8B" "dkvmn"
 </div>
 
 
 ### 知识追踪方法总结
 
-三种模型对学生的知识点掌握状况进行一个追踪判断：
+对学生的知识点掌握状况进行一个追踪判断：
+- `CTT` `经典测验模型`
+  - 根据学生做题分数衡量学生能力
+  - 问题：不够客观，精确
 - `IRT`（Item response theory）  `项目反应理论`
   - IRT理论即`项目反应理论`(Item Response Theory, IRT)。F. Lord 在 1951年 从普林斯顿大学毕业时的博士论文《A Theory of Test Scores》被认为是IRT理论的开端之作。IRT最早使用在心理学领域，目的是做能力评估。现在已广泛应用于教育行业，用于校准评估测试、潜在特征的评分等。
   - 使用结构化的因子（人的**能力**、题的**难度**、题的**区分度**）。可以给出题目难度、区分度，学生能力值等数据。
@@ -142,7 +155,7 @@ $$
 - `BKT`（Bayesin knowledge tracing） 基于**贝叶斯网络**的学生知识点追踪模型
   - 1995年，Corbett, A. T. 和 Anderson, J. R. 提出 贝叶斯知识追踪(Bayesian Knowledge Tracing,BKT)
   - 早期的知识追踪模型都是依赖于一阶**马尔科夫模型**，例如**贝叶斯知识追踪**（Bayesian Knowledge Tracing）
-  - 虽然BKT模型在很多场景下效果良好，但还是存在一些不足。其中一个是，BKT是对”**知识点**“进行建模的，没有包含”**学生个体**”和”**题目**”的差异信息。
+  - 虽然BKT模型在很多场景下效果良好，但还是存在一些不足。如，BKT是对”**知识点**“进行建模的，没有包含”**学生个体**”和”**题目**”的差异信息。
   - 缺点：
     - 需要标记数据
     - 对每个知识点分别进行表达
@@ -259,7 +272,7 @@ one-hot编码：
 - 给学生们统一出了一份卷子，固定好每道题的分值，然后通过学生对这一份卷子的答题结果进行评价，学生得多少分就代表他的能力。
 - 同样，卷子难度的评价也是通过学生对这道题的答题情况分布来进行的。
 
-但是，这显而非常不够客观，如何能够更快更精确的评价学生的能力呢？
+但是，这样不够客观，如何能够更快更精确的评价学生的能力呢？
 
 
 ## IRT 项目反应理论
@@ -394,14 +407,13 @@ IRT模型起源于上世纪60年代，是机器学习算法的一种。大部分
 #### （2）深度知识追踪
 
 深度知识追踪就是把学生的做题记录当成一个序列，目前主要基于RNN模型进行训练。
-- ① 【深度知识追踪(Deep Knowledge Tracing, DKT)】模型：一种seq2seq的循环神经网络模型， 每一个时刻的输出是对下一个时刻学习者表现情况的预测；
+- ① 【深度知识追踪(Deep Knowledge Tracing, `DKT`)】模型：一种seq2seq的循环神经网络模型， 每一个时刻的输出是对下一个时刻学习者表现情况的预测；
 - ② 【DKT-Tree】通过决策树加入了更多的题目属性；
-- ③ 【DKT+forgetting】向DKT中引入了三种遗忘特征；
-- ④ 【PDKT-C 】融合了知识点先后序关系；
-- ⑤ 【DKVMN(Dynamic Key-Value Memory Networks)】将学习者的学习过程建模为读和写两个过程；
+- ③ 【DKT+forgetting】向DKT中引入了三种**遗忘**特征；
+- ④ 【PDKT-C 】融合了知识点先后**序关系**；
+- ⑤ 【DKVMN(Dynamic Key-Value Memory Networks)】将学习者的学习过程建模为**读和写**两个过程；
 - ⑥ 【EERNN（Exercise-Enhanced Recurrent Neural Network）】提出用试题文本来增强深度知识追踪；
 - ⑦ 【EKT（Exercise-aware Knowledge Tracing) 】添加了题目的知识点属性，使用了内存网络衡量学习者在学习每一个练习题时，对其多维知识掌握的影响程度，其精确性和可解释性都很大程度优于以往的模型。
-
 
 
 参考
@@ -411,7 +423,7 @@ IRT模型起源于上世纪60年代，是机器学习算法的一种。大部分
 
 
 
-## BKT
+## BKT 贝叶斯知识追踪
 
 ### BKT介绍
 
@@ -645,6 +657,12 @@ class DKT(nn.Module):
         return res
 ```
 
+## MANN 记忆增强神经网络（one-shot learning）
+
+2016年Google deepmind的论文：[Meta-Learning with Memory-Augmented Neural Networks](https://proceedings.mlr.press/v48/santoro16.pdf)
+
+- Despite recent breakthroughs in the applications of deep neural networks, one setting that presents a persistent challenge is that of “one-shot learning.” Traditional gradient-based networks require a lot of data to learn, often through extensive iterative training. When new data is encountered, the models must inefficiently relearn their parameters to adequately incorporate the new information without catastrophic interference. Architectures with augmented memory capacities, such as Neural Turing Machines (NTMs), offer the ability to quickly encode and retrieve new information, and hence can potentially obviate the downsides of conventional models. Here, we demonstrate the ability of a memory-augmented neural network to rapidly assimilate new data, and leverage this data to make accurate predictions after only a few samples. We also introduce a new method for accessing an external memory that focuses on memory content, unlike previous methods that additionally use memory locationbased focusing mechanisms.
+
 
 ## DKVMN模型
 
@@ -658,15 +676,23 @@ class DKT(nn.Module):
 - 为解决上述问题，本文提出了`动态键值记忆网络`（DKVMN），可以利用基础概念之间的关系，直接输出学生对每个概念的掌握程度。与利用单个记忆矩阵或多个静态记忆矩阵的记忆增强神经网络不同，我们的模型有一个静态矩阵（键）用来存储知识概念，还有一个动态矩阵（值）用来存储和更新对应概念的掌握程度。DKVMN模型可以自动发现通常由人类注释执行的练习的基本概念，并描绘学生不断变化的知识状态。
 - ![](https://pic1.zhimg.com/80/v2-d696acc7f760c07340058ee05d7b74c0_720w.jpg)
 
-## LPKT
+## LPKT 学习过程一致的知识追踪
 
-[基于深度学习的知识追踪](https://segmentfault.com/a/1190000038939682)
+2021年，中科大，[基于深度学习的知识追踪](https://segmentfault.com/a/1190000038939682)
 - Knowledge Tracking Model Based on Learning Process一文中，介绍了一种知识追踪模型`LPKT`。这是一种基于现存深度学习的知识追踪模型的改进，该模型采用了`记忆增强神经网络`（MANN）的思想。
 
 现存模型的缺陷
 - 对于计算知识增长的局限性
 - 模型遗忘机制不完善
 
+现有的 KT 方法大多追求学生成绩预测的高精度，而忽略了学生不断变化的知识状态与学习过程的一致性。这存在一个默认的假设，即未来更高精度的预测近似于知识状态的更好估计。
+- ![](https://pic2.zhimg.com/80/v2-1e48f56c3a8f9e5a0d20eae4e169ca21_1440w.webp)
+- 当学生回答关于3个不同知识点的15个练习时，DKT不断跟踪学生关于这3个知识点的知识状态。红框表示DKT认为学生回答错误后知识状态会下降。尽管学生在犯错后知识状态的这种下降趋势可能会带来未来成绩预测的高准确性，但这并不符合认知理论，因为<font color='red'>错误也能学得知识</font>。
+
+2021年，KDD论文：
+- [Learning Process-consistent Knowledge Tracing](https://dl.acm.org/doi/abs/10.1145/3447548.3467237)
+- [论文解读](https://zhuanlan.zhihu.com/p/406698330)
+- [ppt解读](http://staff.ustc.edu.cn/~huangzhy/files/slides/ShuanghongShen-KDD2021-slide.pdf)
 
 ## 【2019】SAKT——DKVMN改进：处理稀疏数据
 
@@ -747,11 +773,23 @@ SAINT with three different architectures based on multiple stacked attention lay
 - ![](https://pic3.zhimg.com/80/v2-3d82eb022eb5c6b8bfbab40dbeece6d6_1440w.jpg)
 
 
-## GKT——知识点图谱化
+## 【2019】GKT——知识点图谱化
+
+2019 ACM，[Graph-based Knowledge Tracing: Modeling Student Proficiency Using Graph Neural Network](https://dl.acm.org/doi/10.1145/3350546.3352513)
+- 论文题目：《基于图的知识追踪：基于图神经网络的学生能力建模》
+- 代码地址：[代码](https://github.com/jhljx/GKT)
 
 论文：[解说](https://codeantenna.com/a/g9AMvc3DTl)
 - Graph-based Knowledge Tracing: Modeling Student Proficiency Using Graph Neural Network
 - 基于图的知识追踪：利用图神经网络建模学生熟练度
+
+受图神经网络的启发，本文提出了一种基于图神经网络的知识跟踪方法，即基于图的知识跟踪。将知识结构转化为一个图，使得我们能够将知识跟踪任务重新表述为GNN中的时间序列节点级分类问题。
+- ![](https://jishushequ.oss-cn-shenzhen.aliyuncs.com/jishushequ/2021-11-23/e3c02ce50b95434299981d565c3944f7-20210122103402981.png)
+
+本文基于以下三个假设：
+- 1）课程知识被分解成一定数量的知识概念。
+- 2） 学生有自己的时间知识状态，代表他们对课程概念的熟练程度。
+- 3） 课程知识的结构是一个图形，它影响着学生知识状态的更新：如果学生正确或错误地回答了一个概念，那么他/她的知识状态不仅会受到所回答概念的影响，还会受到其他相关概念的影响，这些概念在图形中表示为相邻节点。
 
 ### 缘由
 
