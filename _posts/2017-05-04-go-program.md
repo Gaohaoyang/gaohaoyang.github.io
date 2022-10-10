@@ -343,7 +343,6 @@ Go语言是编译型的静态语言（和C语言一样），所以在运行Go语
     classDef orange fill:#F7CF6B;
 </div>
 
-graph TD %%知识追踪发展历程 %%根节点 A(CTT-经典测验模型):::light %%classDef s fill:#6BE0F7; %%颜色定义 classDef red fill:#f02; classDef green fill:#5CF77B; classDef blue fill:#6BE0F7; classDef orange fill:#F7CF6B; classDef start fill:#C8D64B; %%style N fill:#f02; %%节点关系定义 A -->|1951,多维度| B(IRT-项目反应理论):::blue B -->|1995,LR换Bayes| C(BKT-贝叶斯追踪):::green C -->|2015,Bayes换LSTM,seq2seq| D(DKT-深度知识追踪):::green D -->|2016,LSTM换单样本学习| E(MANN-记忆增强神经网络) E -->|2017,自动学习概念状态| F(DKVMN-动态键值记忆网络):::green C -.->|借鉴| F D -.->|借鉴| F F -->|2021,模拟学习记忆过程| L(LPKT-基于学习过程的知识追踪):::blue E -.->|借鉴| L F -->|2019,图神经网络| G(GKT-图知识追踪) F -->|2019,自注意力| S(SAKT-自注意力知识追踪):::blue S -->|2020,transformer| M(SAINT-深度自注意力追踪):::orange M -->|2021,时序特征嵌入| N(SAINT+纠错预测):::red %%注释 subgraph 图例 direction TB x(当前sota):::red y(次sota):::orange z(重要模型):::green x -.->y -.->z end %%点击行为设置 click C "https://wqw547243068.github.io/dkt#bkt" "bkt" click D "https://wqw547243068.github.io/dkt#dkt" "dkt" click F "https://wqw547243068.github.io/dkt#dkvmn%E6%A8%A1%E5%9E%8B" "dkvmn"
 
 ```shell
 go build test.go # 先编译再运行（推荐build）
