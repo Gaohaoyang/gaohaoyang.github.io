@@ -175,11 +175,16 @@ Breiman是美国国家科学院院士 （应用数学学部），不仅在概率
     %%节点关系定义
     A -->|0阶| B(总概率):::blue
     A -->|1阶| C(均值/mean):::green
+    C -.-|位置| O[[描述特性]]
     A -->|2阶| D(方差/variance):::green
     %%C -.->|依赖| D
+    D -.-|波动| O
     D -->|多元变量| E(协方差):::green
+    E -.-|波动| O
     A -->|3阶| F(偏度/skewness):::orange
+    F -.-|歪斜| O
     A -->|4阶| G(峰度/kurtosis):::orange
+    G -.-|尾巴胖瘦| O
 
     %%注释
     %%subgraph 图例
