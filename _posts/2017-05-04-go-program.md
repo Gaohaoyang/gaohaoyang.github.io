@@ -32,6 +32,9 @@ go是一种**编译型**（翻译成更低级的语言，如汇编）、具有**
 Go程序员常常被称为`地鼠`（gopher）, [img](https://go.dev/images/gophers/motorcycle.svg)
 - <img src="https://go.dev/images/gophers/motorcycle.svg" height="100%" width="100" />
 
+更多编程语言介绍：
+- [编程语言发展历史]({{ site.baseurl}}{% post_url 2010-07-26-computer-history %}#编程语言变迁)
+
 ### go 优点
 
 优点

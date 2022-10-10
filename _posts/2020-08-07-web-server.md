@@ -4934,6 +4934,9 @@ def helloWorld():
 
 - JavaScript一种直译式脚本语言，一种基于对象和事件驱动并具有安全性的客户端脚本语言；也是一种广泛应用客户端web开发的脚本语言。简单地说，JavaScript是一种运行在浏览器中的解释型的编程语言。
 
+更多编程语言介绍：
+- [编程语言发展历史]({{ site.baseurl}}{% post_url 2010-07-26-computer-history %}#编程语言变迁)
+
 ### 运行机制
 
 - 【2020-8-26】[JavaScript运行机制](https://www.toutiao.com/i6748661672522547719/)

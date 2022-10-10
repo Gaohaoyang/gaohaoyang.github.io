@@ -3,7 +3,7 @@ layout: post
 title:  "经济发展研判 - research of future economy"
 date:   2022-08-10 19:30:00
 categories: 经济
-tags: 经济 房产 金融 互联网
+tags: 经济 房产 金融 互联网 gdp
 author : 鹤啸九天
 excerpt: 互联网金融未来发展
 mathjax: true
@@ -21,6 +21,14 @@ mathjax: true
 【2022-8-9】魏杰教授：中国经济今明两年深度研判
 - [图片版本](https://posts.careerengine.us/p/62f258846d77797f9ee26220)，[文字版](https://m.aisixiang.com/data/135798.html), [公众号文章](https://mp.weixin.qq.com/s/vgHTMRWH7k_VROksEeN5vg)
 - [文档地址](https://www.baogaoting.com/info/174429)
+
+## 中国GDP
+
+【2022-10-9】[中国的经济体量有多大](https://www.toutiao.com/w/1746091086136320)？
+- 19.9万亿美元，比美国的25.3万亿美元依然少了不少，但是中国的体量已经相当于印度、韩国、日本、德国、英国和法国的经济总量之和。他们的总量为20.6万亿美元，而如果我们把台湾地区的8410亿美元也算进去的话，我们就超过了这个总数！
+- 中国这么大的经济体量，这么完整的工业体系和产业链，这么欣欣向上的高科技发展速度，美国当然是非常担心的！
+- 中国不输出战争，专心专意谋发展，就足以让美国感到后怕和心慌！
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/1edef7e8dd6a4079945322cd2a5cde3b~tplv-obj:1200:1850.image?from=post&x-expires=1673020800&x-signature=5toiLaZ6ScxqKerRwWlv1xGz7Gc%3D)
 
 ## 引言
 
