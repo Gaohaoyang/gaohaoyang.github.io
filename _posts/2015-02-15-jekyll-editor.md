@@ -525,8 +525,8 @@ You can also use words, to fit your writing style more closely[^note].
 #### 图片点击放大
 
 【2021-4-9】图片放大，Jekyll添加[FancyBox](https://www.cnblogs.com/Grand-Jon/p/7397652.html)插件，
-- ![](https://images2017.cnblogs.com/blog/1221855/201708/1221855-20170819190958896-1029926791.png)
-
+- fancyBox 是一个 JavaScript 库，它以优雅的方式展示图片，视频和一些 html 内容。它包含你所期望的一切特性 —— 支持触屏，响应式和高度自定义。
+- [FancyBox3 中文文档](https://www.lovestu.com/fancybox3doc.html)
 - 【2022-10-11】使用[fancyapp插件](https://fancyapps.com/docs/ui/quick-start)，其中有fancybox工具，效果示例见：[Jekyll添加FancyBox 插件](https://www.cnblogs.com/Grand-Jon/p/7397652.html)
 
 添加方法
@@ -539,6 +539,11 @@ You can also use words, to fit your writing style more closely[^note].
   href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
 />
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+<!-- 国内CDN引用地址 -->
+<!--head区-->
+<link href="https://cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.css" rel="stylesheet">
+<!--body区-->
+<script src="https://cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js"></script>
 ```
 
 使用时，添加如下代码
@@ -546,6 +551,10 @@ You can also use words, to fit your writing style more closely[^note].
 ```html
 <a href="https://lipsum.app/id/1/1024x768" data-fancybox="gallery" data-caption="Optional caption">链接形式</a>
 <img src="https://lipsum.app/id/1/1024x768" data-fancybox="gallery" data-caption="图片点击测试"  height="100%" width="300">
+
+<a data-fancybox href="https://vimeo.com/191947042?color=f00">
+  Vimeo video - custom color 视频弹窗播放
+</a>
 ```
 
 <a href="https://lipsum.app/id/1/1024x768" data-fancybox="gallery" data-caption="Optional caption">链接形式</a>
@@ -553,6 +562,11 @@ You can also use words, to fit your writing style more closely[^note].
 对比测试：点击第一张图，会出现放大效果，第二章不会
 - <img src="https://lipsum.app/id/1/1024x768" data-fancybox="gallery" data-caption="图片点击测试"  height="100%" width="300">
 - <img src="https://lipsum.app/id/1/1024x768">
+
+data-fancybox取值
+- gallery 艺术画廊模式
+- images 小图预览，点击放大
+- group 分组展示
 
 #### 多图展示
 
