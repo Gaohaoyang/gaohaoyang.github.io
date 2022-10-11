@@ -77,4 +77,18 @@
 
 <!-- 【2022-10-11】 图片点击效果插件fancybox -->
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
-
+<script>
+  // 给图片添加链接
+  $(document).ready(function() {
+    $("p img").each(function() {
+      var strA = "<a id='yourid' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+    });
+  });
+  
+  // fancybox
+  $("#yourid").fancybox({
+    openEffect	: 'elastic',
+    closeEffect	: 'elastic',
+  });
+  </script>

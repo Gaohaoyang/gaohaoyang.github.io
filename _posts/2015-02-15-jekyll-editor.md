@@ -522,10 +522,10 @@ You can also use words, to fit your writing style more closely[^note].
 
 ![](/wqw/fig/3brown1blue.png)
 
-#### 图片点击放大
+#### 图片点击放大 fancybox
 
 【2021-4-9】图片放大，Jekyll添加[FancyBox](https://www.cnblogs.com/Grand-Jon/p/7397652.html)插件，
-- fancyBox 是一个 JavaScript 库，它以优雅的方式展示图片，视频和一些 html 内容。它包含你所期望的一切特性 —— 支持触屏，响应式和高度自定义。
+- [fancyBox](https://github.com/fancyapps/fancybox) 是一个 JavaScript 库，它以优雅的方式展示图片，视频和一些 html 内容。它包含你所期望的一切特性 —— 支持触屏，响应式和高度自定义。
 - [FancyBox3 中文文档](https://www.lovestu.com/fancybox3doc.html)
 - 【2022-10-11】使用[fancyapp插件](https://fancyapps.com/docs/ui/quick-start)，其中有fancybox工具，效果示例见：[Jekyll添加FancyBox 插件](https://www.cnblogs.com/Grand-Jon/p/7397652.html)
 
@@ -544,7 +544,25 @@ You can also use words, to fit your writing style more closely[^note].
 <link href="https://cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.css" rel="stylesheet">
 <!--body区-->
 <script src="https://cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+<script>
+// 给图片添加链接，这样不用每个图片使用html
+$(document).ready(function() {
+  $("p img").each(function() {
+    var strA = "<a id='yourid' href='" + this.src + "'></a>";
+    $(this).wrapAll(strA);
+  });
+});
+
+// fancybox
+$("#yourid").fancybox({
+  openEffect	: 'elastic',
+  closeEffect	: 'elastic',
+});
+</script>
 ```
+
+自动添加转换代码，源自：[给 Jekyll 添加 FancyBox](https://havee.me/internet/2013-10/add-fancybox-on-jekyll.html)
+
 
 使用时，添加如下代码
 
@@ -566,7 +584,10 @@ You can also use words, to fit your writing style more closely[^note].
 data-fancybox取值
 - gallery 艺术画廊模式
 - images 小图预览，点击放大
+- lightbox 图片排列显示
 - group 分组展示
+- dialog 对话框形式展现子页面
+- video-gallery 多组视频弹窗播放
 
 #### 多图展示
 
