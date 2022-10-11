@@ -70,9 +70,9 @@ permalink: /regression
 ## 回归分析种类
 
 一共有19种回归分析
-- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/fc0059943f4b44af9dd5d15594fc3816~noop.image)
+- <img src="https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/fc0059943f4b44af9dd5d15594fc3816~noop.image" data-fancybox="gallery" data-caption="回归分析方法汇总"  height="100%">
 - 这19种回归都可以在SPSSAU上面找到，关于各类回归方法的使用以及具体原理，可查看SPSSAU官网，以及可使用SPSSAU上面的案例数据，逐一进行操作分析。
-- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/d234da3591a944cb93cce7295d0a7b31~noop.image?_iz=58558&from=article.pc_detail&x-expires=1662529711&x-signature=o1A8OB1ODEh0P8JN6zU0asttnpQ%3D)
+- <img src="https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/d234da3591a944cb93cce7295d0a7b31~noop.image" data-fancybox="gallery" data-caption="回归分析方法汇总"  height="100%">
 
 常见的回归分析中，`线性回归`和`logistic回归`最为常见。也是当前研究最多，并且使用最为普遍，以及最为人接受容易理解的研究方法。
 
@@ -80,7 +80,7 @@ permalink: /regression
 - 自变量的个数
 - 因变量的类型
 - 回归线的形状
-- ![](https://pic2.zhimg.com/80/v2-b9205bbba53244dba9692dafe411f27d_720w.jpg)
+- <img src="https://pic2.zhimg.com/80/v2-b9205bbba53244dba9692dafe411f27d_720w.jpg" data-fancybox="gallery" data-caption="回归分析方法汇总"  height="100%">
 
 ### 按回归目标Y的类型分类
 
@@ -88,7 +88,8 @@ permalink: /regression
 - 如果是定量且1个（比如身高），通常我们会使用`线性回归`
 - 如果Y为定类且1个（比如是否愿意购买苹果手机），此时叫`logistic回归`
 - 如果Y为定量且多个，此时应该使用`PLS回归`（即偏最小二乘回归）
-- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/7f318328c74c47ae8f097dd1f7ac9aa1~noop.image?_iz=58558&from=article.pc_detail&x-expires=1662529711&x-signature=jyJWnYhpS8pEoh2cH1YmXR%2FKFRk%3D)
+- <img src="https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/7f318328c74c47ae8f097dd1f7ac9aa1~noop.image" data-fancybox="gallery" data-caption="按Y分类"  height="100%">
+
 
 细分
 - （1）线性回归再细分：
@@ -134,12 +135,14 @@ permalink: /regression
 
 - 因变量是连续的，自变量可以是连续的也可以是离散的，回归线的性质是线性的。
 - 线性回归使用最佳的拟合直线（也就是回归线）在因变量（Y）和一个或多个自变量（X）之间建立一种关系。
-- 用一个方程式来表示它，即 Y=a+b*X + e，其中a表示截距，b表示直线的斜率，e是误差项。
-  - ![](https://pic1.zhimg.com/80/v2-6a7dc02e44d306bb5a90dbf6ff780624_720w.jpg)
+- 用一个方程式来表示它，即 Y=a+b*X + e，其中a表示截距，b表示直线的斜率，e是误差项。[img](https://pic1.zhimg.com/80/v2-6a7dc02e44d306bb5a90dbf6ff780624_720w.jpg)
+  - <img src="https://pic1.zhimg.com/80/v2-6a7dc02e44d306bb5a90dbf6ff780624_720w.jpg" data-fancybox="gallery" data-caption="按Y分类"  height="100%">
 - 多元线性回归有（>1）个自变量，而一元线性回归通常只有1个自变量。
 - 最小二乘法是拟合回归线最常用的方法。对于观测数据，它通过最小化每个数据点到线的垂直偏差平方和来计算最佳拟合线。因为在相加时，偏差先平方，所以正值和负值没有抵消。
-  - ![](https://pic3.zhimg.com/80/v2-d1f57df439896295e079cb5daec7abb2_720w.jpg)
-  - ![](https://pic3.zhimg.com/80/v2-ea12ae4dd1a177974c2a38e6f77f82a6_720w.jpg)
+  - [img](https://pic3.zhimg.com/80/v2-d1f57df439896295e079cb5daec7abb2_720w.jpg)
+  - [img](https://pic3.zhimg.com/80/v2-ea12ae4dd1a177974c2a38e6f77f82a6_720w.jpg)
+  - <img src="https://pic3.zhimg.com/80/v2-d1f57df439896295e079cb5daec7abb2_720w.jpg" data-fancybox="gallery" data-caption="按Y分类"  height="100%">
+  - <img src="https://pic3.zhimg.com/80/v2-ea12ae4dd1a177974c2a38e6f77f82a6_720w.jpg" data-fancybox="gallery" data-caption="按Y分类"  height="100%">
 - R-square指标来评估模型性能。要点：
   - ● 自变量与因变量之间必须有线性关系。
   - ● 多元回归存在多重共线性，自相关性和异方差性。
