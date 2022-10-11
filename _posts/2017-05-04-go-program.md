@@ -327,15 +327,20 @@ go mod download [path@version]
 ### 编译命令
 
 Go语言是编译型的静态语言（和C语言一样），所以在运行Go语言程序之前，先要将其编译成二进制的可执行文件。
-- go build: **go文件** --(go build 编译)--> **可执行文件** --(运行)--> **结果**
-- go run:   **go文件** --(go run 编译+运行)--> **结果**
+- go build: `go文件` --(go build 编译)--> `可执行文件` --(运行)--> `结果`
+- go run:   `go文件` --(go run 编译+运行)--> `结果`
 
 <div class="mermaid">
     graph LR
-    A(源码文件.go) -->|go build 编译| B(可执行文件)
-    A & B -->|go run 运行| C(执行结果)
-    style A fill:#f96;
-    style C fill:#f02;
+    A(源码文件.go):::orange -->|编译,go build| B(可执行文件):::green
+    B -->|执行| C(执行结果):::blue
+    A -->|编译+执行,go run|C
+    %%A & B -->|运行,go run | C(执行结果)
+
+    classDef red fill:#f02; 
+    classDef green fill:#5CF77B; 
+    classDef blue fill:#6BE0F7; 
+    classDef orange fill:#F7CF6B;
 </div>
 
 
