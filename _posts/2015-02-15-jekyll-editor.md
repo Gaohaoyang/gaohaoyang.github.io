@@ -543,16 +543,16 @@ You can also use words, to fit your writing style more closely[^note].
 
 使用时，添加如下代码
 
-<a
-  href="https://lipsum.app/id/1/1024x768"
-  data-fancybox="gallery"
-  data-caption="Optional caption"
->Image</a>
+```html
+<a href="https://lipsum.app/id/1/1024x768" data-fancybox="gallery" data-caption="Optional caption">链接形式</a>
+<img src="https://lipsum.app/id/1/1024x768" data-fancybox="gallery" data-caption="图片点击测试"  height="100%" width="300">
+```
 
-对比测试：
+<a href="https://lipsum.app/id/1/1024x768" data-fancybox="gallery" data-caption="Optional caption">链接形式</a>
+
+对比测试：点击第一张图，会出现放大效果，第二章不会
 - <img src="https://lipsum.app/id/1/1024x768" data-fancybox="gallery" data-caption="图片点击测试"  height="100%" width="300">
 - <img src="https://lipsum.app/id/1/1024x768">
-- ![](https://lipsum.app/id/1/1024x768)
 
 #### 多图展示
 
