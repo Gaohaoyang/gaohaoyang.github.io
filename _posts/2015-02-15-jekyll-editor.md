@@ -488,7 +488,7 @@ You can also use words, to fit your writing style more closely[^note].
 - 解析成：
 
 ```html
-<image title="name" alt="name" src="url">
+<img title="name" alt="name" src="url">
 ```
 
 #### 自定义图片大小
@@ -547,9 +547,12 @@ You can also use words, to fit your writing style more closely[^note].
   href="https://lipsum.app/id/1/1024x768"
   data-fancybox="gallery"
   data-caption="Optional caption"
->
-  Image
-</a>
+>Image</a>
+
+对比测试：
+- <img src="https://lipsum.app/id/1/1024x768" data-fancybox="gallery" data-caption="图片点击测试"  height="100%" width="300">
+- <img src="https://lipsum.app/id/1/1024x768">
+- ![](https://lipsum.app/id/1/1024x768)
 
 #### 多图展示
 
