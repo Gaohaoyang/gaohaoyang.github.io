@@ -594,8 +594,9 @@ function wrapImageWithFancyBox() {
 </script>
 ```
 
-自动添加转换代码，源自：[给 Jekyll 添加 FancyBox](https://havee.me/internet/2013-10/add-fancybox-on-jekyll.html)
-
+自动添加转换代码：
+- [给 Jekyll 添加 FancyBox](https://havee.me/internet/2013-10/add-fancybox-on-jekyll.html) —— 不管用！
+- [fancybox自动化高级设置](https://www.ytjia.xyz/blog/2022/05/08/jekyll-image-zoom.html) —— <span style='color:red'>测试通过</span>
 
 使用时，添加如下代码
 
