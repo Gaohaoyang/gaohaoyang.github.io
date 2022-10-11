@@ -19,6 +19,13 @@
     <link  href="{{ "/css/myreward.css " | prepend: site.baseurl }}" rel="stylesheet"  type="text/css"> 
     <!-- [2019-08-07]搜索框功能 -->
     <link  href="{{ "/css/search.css " | prepend: site.baseurl }}" rel="stylesheet"  type="text/css"> 
+    <!-- 【2022-10-11】 图片点击效果插件fancybox -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
+    />
+
+</head>
 
 {% if site.baidu_tongji_id %}
     <script>
@@ -47,17 +54,17 @@
 {% endif %}
 
 {% if page.mathjax %}
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-    tex2jax: { inlineMath: [["$","$"],["\\(","\\)"]] },
-    "HTML-CSS": {
-      linebreaks: { automatic: true, width: "container" }
-    }
-});
-</script>
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+      tex2jax: { inlineMath: [["$","$"],["\\(","\\)"]] },
+      "HTML-CSS": {
+        linebreaks: { automatic: true, width: "container" }
+      }
+  });
+  </script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
 {% endif %}
 
 <!-- 【2022-9-22】SEO优化 -->
@@ -69,10 +76,5 @@
 </script>
 
 <!-- 【2022-10-11】 图片点击效果插件fancybox -->
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
-/>
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
 
-</head>
