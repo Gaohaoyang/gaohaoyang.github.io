@@ -534,30 +534,63 @@ You can also use words, to fit your writing style more closely[^note].
 
 ```html
 <!-- 【2022-10-11】 图片点击效果插件fancybox -->
+
+<!-- 国外CDN引用地址 -->
 <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
 />
+<!-- 前置条件，如果已经导入，去掉此行 -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
 <!-- 国内CDN引用地址 -->
 <!--head区-->
 <link href="https://cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.css" rel="stylesheet">
 <!--body区-->
 <script src="https://cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+
 <script>
 // 给图片添加链接，这样不用每个图片使用html
+/*
 $(document).ready(function() {
   $("p img").each(function() {
     var strA = "<a id='yourid' href='" + this.src + "'></a>";
     $(this).wrapAll(strA);
   });
 });
-
 // fancybox
 $("#yourid").fancybox({
   openEffect	: 'elastic',
   closeEffect	: 'elastic',
 });
+*/
+
+// 以上不管用，要设置yourid，设置后，又无法引用fancybox
+
+$(document).ready(function() {
+    wrapImageWithFancyBox();
+});
+/**
+ * Wrap images with fancybox support.
+ */
+function wrapImageWithFancyBox() {
+    $('img').not('.sidebar-image img').not('#author-avatar img').not(".mdl-menuimg").not(".something-else-logo img").not('.avatar').not('.share-body img').each(function() {
+        var $image = $(this);
+        var alt = $image.attr('alt');
+        var src = $image.attr('src');
+        $imageWrapLink = $image.wrap('<a data-fancybox=gallery data-caption="'+ alt +'" href="' + src + '"></a>');
+    });
+    $().fancybox({
+        selector: '[data-fancybox="images"]',
+        thumbs: false,
+        hash: true,
+        loop: false,
+        fullScreen: false,
+        slideShow: false,
+        protect: true,
+    });
+}
 </script>
 ```
 

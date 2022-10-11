@@ -76,19 +76,31 @@
 </script>
 
 <!-- 【2022-10-11】 图片点击效果插件fancybox -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
 <script>
   // 给图片添加链接
   $(document).ready(function() {
-    $("p img").each(function() {
-      var strA = "<a id='yourid' href='" + this.src + "'></a>";
-      $(this).wrapAll(strA);
+    wrapImageWithFancyBox();
+});
+/**
+ * Wrap images with fancybox support.
+ */
+function wrapImageWithFancyBox() {
+    $('img').not('.sidebar-image img').not('#author-avatar img').not(".mdl-menuimg").not(".something-else-logo img").not('.avatar').not('.share-body img').each(function() {
+        var $image = $(this);
+        var alt = $image.attr('alt');
+        var src = $image.attr('src');
+        $imageWrapLink = $image.wrap('<a data-fancybox=gallery data-caption="'+ alt +'" href="' + src + '"></a>');
     });
-  });
-  
-  // fancybox
-  $("#yourid").fancybox({
-    openEffect	: 'elastic',
-    closeEffect	: 'elastic',
-  });
+    $().fancybox({
+        selector: '[data-fancybox="images"]',
+        thumbs: false,
+        hash: true,
+        loop: false,
+        fullScreen: false,
+        slideShow: false,
+        protect: true,
+    });
+}
   </script>
