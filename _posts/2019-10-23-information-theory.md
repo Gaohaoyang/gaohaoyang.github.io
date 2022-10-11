@@ -237,7 +237,7 @@ Breiman是美国国家科学院院士 （应用数学学部），不仅在概率
     classDef green fill:#5CF77B;
     classDef blue fill:#6BE0F7;
     classDef orange fill:#F7CF6B;
-    classDef start fill:#C8D64B;
+    classDef grass fill:#C8D64B;
     %%节点关系定义
     A(均匀分布/uniform):::start
     B(伯努利分布/Bernoulli-扔1次硬币):::blue
@@ -248,22 +248,21 @@ Breiman是美国国家科学院院士 （应用数学学部），不仅在概率
     P -->|泊松过程间隔分布|E(指数分布/exponential):::green
     E -->|n次实验第k次时成功r次| NB(负二项分布/negative binomial)
     G -->|成功r次| NB
-    E -->|演进| W(韦布儿分布/weibull)
+    E -->|扩展:k=1是指数分布| W(韦布儿分布/weibull):::grass
     B -->|扔n次成功r次,不放回| H(超几何分布/hypergeometric)
-    BI -->|n趋近无穷大| P(泊松分布/possion):::green
-    P -->|演进| N(正态分布/normal):::orange
+    BI -->|n趋近无穷大,np小,才成功| P(泊松分布/possion):::green
+    BI -->|n趋近无穷大,np大,成功次数,连续| N(正态分布/高斯分布/normal):::grass
     N -->|取值服从对数分布| L(对数正态分布/log normal)
     N -->|小样本预估整体| S(学生分布/student's t)
-    N -->|平方 X^2| K(卡方分布/chi-squared)
-    K -->|演进| M(伽马分布/gamma)
-    BI -->|共轭,p未知但有主观经验| T(贝塔分布/Beta):::start
-    F -->|共轭分布| D(狄利克莱分布/Dirichlet):::start
-    %%C -.->|依赖| D
-    
+    N -->|多个X^2之和| K(卡方分布/chi-squared)
+    K -->|扩展,卡方分布是特例| M(伽马分布/gamma)
+    BI -->|共轭,p未知但有主观经验| T(贝塔分布/Beta):::grass
+    F -->|共轭分布| D(狄利克莱分布/Dirichlet):::grass    
+
     %%注释
     subgraph 图例
         direction TB
-        x(连续):::start
+        x(连续):::grass
         y(其它都是离散)
         z(重要):::green
     end
@@ -539,11 +538,14 @@ Beta分布与Dirichlet分布的定义域均为\[0,1\]，在实际使用中，通
 - Beta分布可作为**二项**分布的先验概率
 - Dirichlet分布可作为**多项**分布的先验概率
 
-### 伽马分布（Gamma）
+### 伽马分布（Gamma分布）
 
 Gamma 函数是对阶乘在实数领域的扩展
 - 据PRML第71页(2.14)式，Gamma函数在Beta分布和Dirichlet分布中起到了**归一化**的作用
 
+伽马分布与卡方分布关系
+- 一方面，自由度为n的卡方分布=自由度为n/2与1/2的伽马分布，即gamma(n/2,1/2)
+- 另一方面，卡方分布只有一个参量，伽马分布有两个，从而`卡方分布`是`伽马分布`的一个**特例**
 
 ### 正态分布（二项分布另一种极限）
 
@@ -729,6 +731,19 @@ plt.title('norm, mu:{}; sigma:{}'.format(mu, sigma))
 学生t 检验改进了Z检验（Z-test），因为在小样本中，Z检验以总体标准差已知为前提，Z检验用在小样本会产生很大的误差，因此必须改用学生t 检验以求准确。但若在样本数足够大（普遍认为超过30个即足够）时，可依据中心极限定理近似正态分布，以Z检验来求得近似值，
 
 在总体标准差数未知的情况下，不论样本数量大或小皆可应用t检验。在待比较的数据有三组以上时，因为误差无法被压低，此时可以用方差分析（ANOVA）代替t检验
+
+### 韦布尔分布
+
+即韦伯分布（Weibull distribution），又称`韦氏分布`或`威布尔分布`，是可靠性分析和寿命检验的理论基础。
+- 威布尔分布在可靠性工程中被广泛应用，尤其适用于机电类产品的磨损累计失效的分布形式。由于它可以利用概率值很容易地推断出它的分布参数，被广泛应用于各种寿命试验的数据处理。
+
+Weibull Distribution是连续性的概率分布
+- $f(x ; \lambda, k)=\left\{\begin{array}{ll} \frac{k}{\lambda}\left(\frac{x}{\lambda}\right)^{k-1} e^{-(x / \lambda)^{k}} & x \geq 0 \\ 0 & x<0 \end{array}\right.$
+- x是随机变量，λ>0是比例参数（scale parameter），k>0是形状参数（shape parameter）
+- 韦布尔分布的**累积**分布函数是扩展的指数分布函数
+- Weibull distribution与很多分布都有关系。
+  - k=1，它是指数分布；
+  - k=2，是Rayleigh distribution（瑞利分布）。
 
 ### 幂律分布
 
