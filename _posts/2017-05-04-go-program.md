@@ -3703,12 +3703,39 @@ func main() {
 
 ## go与json
 
-Go内置了对JSON数据的编码和解码，这些数据的类型包括内置数据类型和自定义数据类型。
+Go内置了对JSON数据的**编码**和**解码**，这些数据的类型包括内置数据类型和自定义数据类型。
 内置的encoding/json反序列化方法：《[go语言json简洁](http://cizixs.com/2016/12/19/golang-json-guide)》
 - struct：需要提前知道json内容格式
 - interface：未限定格式，任意动态的内容都可以解析成 interface，但缺点是必须自己做类型转换
 - 延迟解析：json.RawMessage
 - 自定义解析
+
+```go
+package main
+import "fmt"
+import "encoding/json"
+
+type Student struct {
+   Name string   `json:"name"`
+   Age  int      `json:"age"`
+   Data []string `json:"data"`
+}
+
+func main() {
+   jsonString := `{"name":"张三","age":20,"data":["男","未婚"]}`
+   // 指定解析格式
+   var stu Student
+   // 不指定格式
+   // m := make(map[string]interface{}, 4)
+   err := json.Unmarshal([]byte(jsonString), &stu)
+   if err!= nil {
+      fmt.Println(err)
+      return
+   }
+   fmt.Println(stu)
+}
+
+```
 
 simplejson工具
 
@@ -3723,10 +3750,11 @@ type Response1 struct {
     Page   int
     Fruits []string
 }
+// 【2022-10-11】json里的变量名(page)要加双引号！
 type Response2 struct {
     Page   int      `json:"page"`
     Fruits []string `json:"fruits"`
-} //golang json里的struct变量首字母需要大写的，如果给你的json是小写咋办？在type后面跟着别名就可以了，格式是 json:"字段名"
+} //golang json里的struct变量首字母需要大写的，如果json是小写咋办？在type后面跟着别名就可以了，格式是 json:"字段名"
 // http://xiaorui.cc/2016/03/06/golang%E8%A7%A3%E6%9E%90%E5%88%9B%E5%BB%BA%E5%A4%8D%E6%9D%82%E5%B5%8C%E5%A5%97%E7%9A%84json%E6%95%B0%E6%8D%AE/
 
 func main() {
@@ -4199,8 +4227,6 @@ func BenchmarkAdd(b *testing.B) {  
 - PASS
 - BenchmarkAdd 2000000000 0.72 ns/op
 - ok github.com/my 1.528s
-
-# 专项功能
 
 ## 图片
 
@@ -4856,6 +4882,7 @@ import (
 	// "path"
 )
 
+//【2022-10-11】json字符串转结构体时，转换后变量名(value)要加双引号!
 type ValueJson struct {
 	Value string `json:"value"`
 }
