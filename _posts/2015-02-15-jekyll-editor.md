@@ -482,20 +482,23 @@ You can also use words, to fit your writing style more closely[^note].
 
 ### 图片嵌入
 
-- 默认方法
-   - ![](https://img3.doubanio.com/lpic/s28012945.jpg)
-   - 解析成：
+#### 默认方法
+
+- ![](https://img3.doubanio.com/lpic/s28012945.jpg)
+- 解析成：
 
 ```html
 <image title="name" alt="name" src="url">
 ```
 
-- 限制大小
-   - <img src="https://img3.doubanio.com/lpic/s28012945.jpg" height="100%" width="100" />
+#### 自定义图片大小
 
-- 【2020-6-20】如何插入自己的图片？[Jekyll博客中如何用相对路径来加载图片？](https://www.zhihu.com/question/31123165)
-   - 不要在\_posts下面建立目录，在根目录,也就是 yourname.github.io/ 下面建立一个新目录pics放图片。
-   - 然后引用即可。 
+限制大小
+- <img src="https://img3.doubanio.com/lpic/s28012945.jpg" height="100%" width="100" />
+
+【2020-6-20】如何插入自己的图片？[Jekyll博客中如何用相对路径来加载图片？](https://www.zhihu.com/question/31123165)
+- 不要在\_posts下面建立目录，在根目录,也就是 yourname.github.io/ 下面建立一个新目录pics放图片。
+- 然后引用即可。 
    
 ```html
 <figure>
@@ -519,10 +522,39 @@ You can also use words, to fit your writing style more closely[^note].
 
 ![](/wqw/fig/3brown1blue.png)
 
+#### 图片点击放大
+
 【2021-4-9】图片放大，Jekyll添加[FancyBox](https://www.cnblogs.com/Grand-Jon/p/7397652.html)插件，
 - ![](https://images2017.cnblogs.com/blog/1221855/201708/1221855-20170819190958896-1029926791.png)
 
+- 【2022-10-11】使用[fancyapp插件](https://fancyapps.com/docs/ui/quick-start)，其中有fancybox工具，效果示例见：[Jekyll添加FancyBox 插件](https://www.cnblogs.com/Grand-Jon/p/7397652.html)
+
+添加方法
+- includes/head.html里添加如下代码
+
+```html
+<!-- 【2022-10-11】 图片点击效果插件fancybox -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+```
+
+使用时，添加如下代码
+
+<a
+  href="https://lipsum.app/id/1/1024x768"
+  data-fancybox="gallery"
+  data-caption="Optional caption"
+>
+  Image
+</a>
+
+#### 多图展示
+
 【2021-12-21】多图排列：[Markdwon中多张图片的并排显示](https://blog.csdn.net/weixin_41010198/article/details/86639739)
+
 
 ```html
 <!-- 居中并排 -->
