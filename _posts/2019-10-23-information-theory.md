@@ -125,6 +125,10 @@ Breiman是美国国家科学院院士 （应用数学学部），不仅在概率
 
 ## 概率统计量
 
+可能性描述
+- `impossible`（不可能，p=0） → `unlikely`（不太可能，p=1/6） → `even chance`（等概率） → `likely`（很有可能，p=4/5） → `certain`（确定，p=1）
+- ![](https://ask.qcloudimg.com/http-save/yehe-7145566/5dift89zap.jpeg?imageView2/2/w/1620)
+
 【2020-5-29】用4个数来概括一个分布
 - **均值** mean: 第一矩。表位置
 - **方差** variance: 第二矩。表胖瘦
@@ -201,7 +205,374 @@ Breiman是美国国家科学院院士 （应用数学学部），不仅在概率
 
 六大分布：**伯努利**分布、**二项**分布、**多项式**分布、**Beta**分布、Dirichlet分布、**高斯**分布
 
-### 正态分布
+### 概率分布概览
+
+
+#### 概率分布总结
+
+一维随机变量的概率分布：
+
+|概率分布|数据类型|特点|举例|
+|---|---|---|---|
+| 伯努利分布|  离散| 抛硬币，二选一 |扔1次硬币|
+| 二项分布 |   离散| n重伯努利，出现k次“是”|扔n次硬币🪙|
+| 多项分布 |   离散| n重伯努利，出现k次“是”|扔n次骰子🎲|
+| 泊松分布 |   离散| 二项分布的极限 |每天供应多少馒头<br>某地出现交通事故次数|
+| 几何分布 |   离散| n重伯努利，第k次首次出现“是”|n次实验才成功的概率|
+| 负二项分布 | 离散| 几何分布的和 |巴拿赫火柴盒|
+| 超几何分布 | 离散| 不放回抽样的二项分布|n件产品中m件不合格的概率|
+|-|-|-|-|
+| 均匀分布 | 连续 | 古典派中的几何概型 |等公交车时间|
+| 正态分布 | 连续 | 二项分布的另外一种极限 |身高分布<br>考试分数|
+| 指数分布 | 连续 | 泊松分布的间隔，连续的几何分布 |灯泡寿命<br>第一位客人上门，店主等待时间|
+
+#### 图解概率分布演进
+
+【2022-10-10】概率统计量演进
+
+<div class="mermaid">
+    graph TD
+    %%颜色定义
+    classDef red fill:#f02;
+    classDef green fill:#5CF77B;
+    classDef blue fill:#6BE0F7;
+    classDef orange fill:#F7CF6B;
+    classDef start fill:#C8D64B;
+    %%节点关系定义
+    A(均匀分布/uniform):::start
+    B(伯努利分布/Bernoulli-扔1次硬币):::blue
+    A-->|离散化,二元|B
+    B -->|n次实验出现k次| BI(二项分布/binomial):::green
+    BI -->|推广:硬币变骰子|F(多项分布/multinomial):::green
+    BI -->|n次实验第k次才成功|G(几何分布/geometric):::green
+    P -->|泊松过程间隔分布|E(指数分布/exponential):::green
+    E -->|n次实验第k次时成功r次| NB(负二项分布/negative binomial)
+    G -->|成功r次| NB
+    E -->|演进| W(韦布儿分布/weibull)
+    B -->|扔n次成功r次,不放回| H(超几何分布/hypergeometric)
+    BI -->|n趋近无穷大| P(泊松分布/possion):::green
+    P -->|演进| N(正态分布/normal):::orange
+    N -->|取值服从对数分布| L(对数正态分布/log normal)
+    N -->|小样本预估整体| S(学生分布/student's t)
+    N -->|平方 X^2| K(卡方分布/chi-squared)
+    K -->|演进| M(伽马分布/gamma)
+    BI -->|共轭,p未知但有主观经验| T(贝塔分布/Beta):::start
+    F -->|共轭分布| D(狄利克莱分布/Dirichlet):::start
+    %%C -.->|依赖| D
+    
+    %%注释
+    subgraph 图例
+        direction TB
+        x(连续):::start
+        y(其它都是离散)
+        z(重要):::green
+    end
+</div>
+
+【2022-10-10】[Relationship between probability distributions](https://math.stackexchange.com/questions/3050352/relationship-between-probability-distributions)
+- ![](https://i.stack.imgur.com/sau6I.png)
+- ![](https://miro.medium.com/max/1400/1*JJ0QqPK0MhFni17MPYsL7A.png)
+- ![](https://i.stack.imgur.com/Mx16O.jpg)
+
+### 均匀分布
+
+问题背景: 古典派中的几何概型
+- 设车每10分钟来一班，且随机到来，问等车时间。
+
+概率密度函数: X = U(a,b)
+- $X=U(a,b)$
+- $p(x)=\left\{\begin{array}{ll} \frac{1}{b-a} & a \leq x \leq b \\ 0 & \text { else } \end{array}\right$
+- 期望和方差：$\frac{a+b}{2} , \frac{(b-a)^2}{12} $
+
+### 伯努利分布
+
+问题背景: 概率不同的是非题。
+- 抛一枚硬币，是正面还是反面?
+- 进来的顾客买还是不买东西?
+- 人的眼睛是不是绿色?
+
+概率质量函数
+- $p(x)=p^{x}(1-p)^{1-x} , x=1,0$
+- 期望:p
+- 方差:p(1−p)
+
+```python
+import numpy as np #数组包
+from scipy import stats #统计计算包的统计模块
+import matplotlib.pyplot as plt #绘图包
+
+# 生成pmf
+# --------分布参数---------
+p = 0.5 # 得到"是"的概率
+# ------------------------
+
+X = np.arange(0,2,1) # [0,1]
+p_list = stats.bernoulli.pmf(X,p) # [0.5,0.5] 
+
+# 制图
+plt.plot(X, p_list, linestyle='None', marker='o')
+plt.vlines(X,0,p_list)
+plt.xlabel("Random variable X ,X(Pos)=1,X(Neg)=0")
+plt.ylabel('Probability')
+plt.title("Bernuulli: p={}".format(p))
+```
+
+### 二项分布（n重伯努利出现k次）
+
+问题背景: n重伯努利实验，出现k次是。
+- 抛一枚硬币n次，出现k次正面。
+- 随机抽n个人，有k个人眼睛是绿色。
+
+概率质量函数
+- $X \sim b(n, p) , p(k)=P(X=k)=\left(\begin{array}{l} n \\ k \end{array}\right) p^{k}(1-p)^{n-k}, \quad k=0,1, \cdots, n$
+- 期望: np
+- 方差: np(1-p)
+
+```python
+import numpy as np #数组包
+from scipy import stats #统计计算包的统计模块
+import matplotlib.pyplot as plt #绘图包
+
+# --------分布参数---------
+p = 0.5 # 得到"是"的概率
+n = 50 # 实验次数
+# ------------------------
+
+X = np.arange(0, n+1, 1)
+p_list = stats.binom.pmf(X,n,p)
+
+plt.plot(X, p_list, linestyle='None', marker='o')
+plt.vlines(X, 0, p_list)
+plt.xlabel('Random Variable: X, X(Experimental Result) = the num of Pos')
+plt.ylabel('Probability')
+plt.title('binom n:{};p:{}'.format(n,p))
+```
+
+### 泊松分布（二项分布的极限）
+
+问题背景: 二项分布 n → + ∞ 的极限。
+- 每天应该供应多少馒头。
+- 每天一个路口出现事故的次数。
+- 一定时间内，某放射性物质放射出的α粒子数目。
+
+总之，满足泊松分布的事件有着三个特性。
+- 平稳性: 在一段时间T内，事件发生的概率相同。
+- 独立性: 事件的发生彼此独立，没有关联或关联很弱。
+- 普通性: 将T划分为无限个小的 $\Delta T$ , 在每个ΔT内，事件发生多次的概率几乎为0.
+
+概率质量函数: X∼P(λ)
+- $X \sim P(\lambda)$
+- $ p(X=k)=\frac{\lambda^{k}}{k!} e^{-\lambda}$
+- 期望: λ 
+- 方差: λ
+
+```python
+import numpy as np #数组包
+from scipy import stats #统计计算包的统计模块
+import matplotlib.pyplot as plt #绘图包
+
+# --------分布参数---------
+lam = 5 # 每天卖的馒头均值
+# -----------------------------
+X = np.arange(0, 21, 1)
+p_list = stats.poisson.pmf(X,lam)
+
+plt.plot(X, p_list, linestyle='None', marker='o')
+plt.vlines(X, 0, p_list)
+plt.xticks(np.arange(0, 21, 1))
+plt.xlabel('Random Variable: X, X(Experimental Result) = the num of things happen in time interval T')
+plt.ylabel('Probability')
+plt.title('poisson, lambda:{}'.format(lam))
+```
+
+### 几何分布（n重伯努利第k次首次出现）
+
+问题背景: n重伯努利实验，第k次首次出现是。
+- 每次表白成功概率p, 表白k次才成功概率。
+
+概率质量函数
+- $p(k)=P(X=k)=(1-p)^{k-1} p, k=1,2, \cdots$
+- 期望、方差：$E(X)=\frac{1}{p}, \operatorname{Var}(X)=\frac{1-p}{p^{2}}$
+
+```python
+import numpy as np #数组包
+from scipy import stats #统计计算包的统计模块
+import matplotlib.pyplot as plt #绘图包
+# --------分布参数-------------
+p = 0.5  # 每次得到"是"的概率
+# -----------------------------
+X = np.arange(0, 21, 1)
+p_list = stats.geom.pmf(X,p)
+
+plt.plot(X, p_list, linestyle='None', marker='o')
+plt.vlines(X, 0, p_list)
+plt.xticks(np.arange(0, 21, 1))
+plt.xlabel('Random Variable: X, X(Experimental Result) = First happen in k')
+plt.ylabel('Probability')
+plt.title('geom, p:{}'.format(p))
+```
+
+### 超几何分布（二项分布+不放回）
+
+问题背景: 不放回抽样的二次分布.
+- 有N件产品，其中有M件不合格品，随机抽取n件产品，则其中含有m件不合格产品的概率为多少
+
+概率质量函数:X∼h(n,N,M)
+- $X \sim h(n, N, M)$
+- $P(X=m)=\frac{\left(\begin{array}{l} M \\ m \end{array}\right)\left(\begin{array}{l} N-M \\ n-m \end{array}\right)}{\left(\begin{array}{l} N \\n \end{array}\right)}, m=0,1, \cdots, r $
+- 期望和方差：$E(X)=n \frac{M}{N}, \operatorname{Var}(X)=n \frac{M}{N}\left(1-\frac{M}{N}\right)\left(1-\frac{n-1}{N-1}\right)$
+
+```python
+import numpy as np #数组包
+from scipy import stats #统计计算包的统计模块
+import matplotlib.pyplot as plt #绘图包
+# --------分布参数-------------
+n = 10 # 抽n次
+N = 50 # 总共N个产品
+M = 20 # 有M个次品
+# -----------------------------
+X = np.arange(0, n+1, 1)
+p_list = stats.hypergeom.pmf(X,N,M,n)
+plt.plot(X, p_list, linestyle='None', marker='o')
+plt.vlines(X, 0, p_list)
+plt.xticks(np.arange(0, n+1, 1))
+plt.xlabel('Random Variable: X, X(Experimental Result) = # of inferior product')
+plt.ylabel('Probability')
+plt.title('hypergeom, n:{};N:{};M:{}'.format(n,N,M))
+```
+
+### 负二项分布（n重伯努利成功k次）
+
+问题背景: 几何分布的和
+- [巴拿赫火柴盒问题](https://wenku.baidu.com/view/5f8ef10c76c66137ee061985.html)
+
+概率质量函数:
+- $X \sim N b(r, p) \\ p(k)=P(X=k)=\left(\begin{array}{l} k-1 \\ r-1 \end{array}\right) p^{r}(1-p)^{k-r}, k=r, r+1, \cdots$
+- 期望、方差：$E(X)=\frac{r}{p}, \operatorname{Var}(X)=\frac{r(1-p)}{p^{2}}$
+
+### 指数分布（泊松过程时间间隔）
+
+指数分布是描述泊松过程中的事件之间的时间的概率分布，即事件以恒定平均速率连续且独立地发生的过程
+
+问题背景: 泊松分布的间隔，连续的几何分布
+- 灯泡的寿命
+- 等待小卖部第一位客人上门的等待时间。
+
+概率密度函数：X∼Exp(λ)
+- $X \sim Exp(\lambda)$
+- $p(x)=\left\{\begin{array}{ll}\lambda e^{-\lambda x} & \lambda \geq 0 \\ 0 & \text { else } \end{array}\right.$
+- 期望和方差：$E(X)=\frac{1}{\lambda},Var(X)=\frac{1}{\lambda^2} $
+
+```python
+import numpy as np #数组包
+from scipy import stats #统计计算包的统计模块
+import matplotlib.pyplot as plt #绘图包
+# --------分布参数-------------
+lam = 5 # 每天来5个人
+offset = 0 # 偏移量，从offset开始
+# -----------------------------
+X = np.arange(0, 20, 0.01)
+p_list = stats.expon.pdf(X,0,1/lam)  # 内置函数是使用1/lam作为参数，即间隔(每天来的人之间的间隔时间)。
+plt.plot(X, p_list, linestyle='None', marker='.')
+plt.xlabel('Random Variable: X, X(Experimental Result) = the interval between two happen things')
+plt.ylabel('Probability')
+plt.title('norm, lam:{}'.format(lam))
+```
+
+### 贝塔分布
+
+贝塔分布(Beta distribution)需要先明确一下先验概率、后验概率、似然函数以及共轭分布的概念。
+- 先验概率就是事情尚未发生前，我们对该事发生概率的估计。利用过去历史资料计算得到的先验概率，称为客观先验概率； 当历史资料无从取得或资料不完全时，凭人们的主观经验来判断而得到的先验概率，称为主观先验概率。例如抛一枚硬币头向上的概率为0.5，这就是主观先验概率。
+- 后验概率是指通过调查或其它方式获取新的附加信息，利用贝叶斯公式对先验概率进行修正，而后得到的概率。
+- 先验概率和后验概率的区别：
+  - 先验概率不是根据有关自然状态的全部资料测定的，而只是利用现有的材料(主要是历史资料)计算的；
+  - 后验概率使用了有关自然状态更加全面的资料，既有先验概率资料，也有补充资料。
+  - 另外一种表述：先验概率是在缺乏某个事实的情况下描述一个变量；而后验概率（Probability of outcomes of an experiment after it has been performed and a certain event has occured.）是在考虑了一个事实之后的条件概率。
+- 似然函数
+- 共轭分布(conjugacy)：后验概率分布函数与先验概率分布函数具有相同形式;共轭先验就是先验分布是beta分布，而后验分布同样是beta分布
+
+在试验数据比较少的情况下，直接用**最大似然法**估计二项分布的参数可能会出现**过拟合**的现象
+- 比如，扔硬币三次都是正面，那么最大似然法预测以后的所有抛硬币结果都是正面
+
+为了避免这种情况的发生，可以考虑引入**先验概率分布**来控制参数，防止出现过拟合现象。
+- 贝塔分布作为先验概率
+
+Beta分布描述的是定义在区间\[0,1\]上随机变量的概率分布，由两个参数和决定
+
+#### Beta分布通俗讲解
+
+beta分布可以看作一个概率的概率分布，当不知道事件的具体概率是多少时，它可以给出了所有概率出现的可能性大小。
+- 熟悉棒球运动的都知道有一个指标就是**棒球击球率**(batting average)，就是用一个运动员击中的球数除以击球的总数，一般认为0.266是正常水平的击球率，而如果击球率高达0.3就被认为是非常优秀的。
+- 现在有一个棒球运动员，希望能够预测他在这一赛季中的棒球击球率是多少。可能就会直接计算棒球击球率，用击中的数除以击球数，但是如果这个棒球运动员只打了一次，而且还命中了，那么他就击球率就是100%了，这显然是不合理的，因为根据棒球的历史信息，我们知道这个击球率应该是0.215到0.36之间才对啊。
+- 对于这个问题，可以用一个二项分布表示（一系列成功或失败），一个最好的方法来表示这些经验（在统计中称为先验信息）就是用beta分布，这表示在我们没有看到这个运动员打球之前，我们就有了一个大概的范围。beta分布的定义域是(0,1)这就跟概率的范围是一样的。
+- 将这些先验信息转换为beta分布的参数，一个击球率应该是平均0.27左右，而他的范围是0.21到0.35，那么根据这个信息，可以取α=81,β=219
+- ![](https://pic1.zhimg.com/80/v2-52a90cd77902248029c7e9c21bc2dce2_1440w.webp?source=1940ef5c)
+
+之所以取这两个参数是因为：
+- beta分布的均值是α/α+β=81/(81+219)=0.27
+- $\frac{\alpha}{\alpha+\beta}=\frac{81}{81+219}=0.27$
+- 从图中可以看到这个分布主要落在了(0.2,0.35)间，这是从经验中得出的合理的范围
+
+有了先验信息后，现在考虑一个运动员只打一次球，那么他现在的数据就是”1中;1击”。这时候就可以更新分布了，让这个曲线做一些移动去适应新信息。
+- beta分布在数学上就提供了这一性质，他与二项分布是**共轭先验**的（Conjugate_prior）。
+- Beta(α0+hits,β0+misses) 
+- $\mbox{Beta}(\alpha_0+\mbox{hits}, \beta_0+\mbox{misses}) $ 其中α0和β0是一开始的参数，在这里是81和219。
+- 所以在这一例子里，α增加了1(击中了一次)。β没有增加(没有漏球)。分布其实没多大变化，这是因为只打了1次球并不能说明什么问题。但是如果得到了更多的数据，假设一共打了300次，其中击中了100次，200次没击中，那么这一新分布就是： beta(81+100,219+200)
+- $\mbox{beta}(81+100, 219+200)$ 
+- <img src="https://picx.zhimg.com/50/v2-6d7b59081beaed718fc86f7f9cef63b0_720w.jpg?source=1940ef5c" data-caption="" data-size="normal" data-rawwidth="504" data-rawheight="504" class="origin_image zh-lightbox-thumb" width="504" data-original="https://pic1.zhimg.com/v2-6d7b59081beaed718fc86f7f9cef63b0_r.jpg?source=1940ef5c"/>
+- 这个曲线变得更加尖，并且平移到了一个右边的位置，表示比平均水平要高
+
+对于一个不知道概率是什么，而又有一些合理猜测时，beta分布能很好的作为一个表示概率的概率分布。
+
+作者：[链接](https://www.zhihu.com/question/30269898/answer/123261564)
+
+### 狄利克雷分布（多项分布共轭）
+
+狄利克雷分布(Dirichlet distribution)是多项分布的共轭分布，也就是它与多项分布具有相同形式的分布函数。
+- Dirichlet分布是关于定义在区间\[0,1\]上的多个随机变量的联合概率分布
+
+Beta分布与Dirichlet分布的定义域均为\[0,1\]，在实际使用中，通常将两者作为概率的分布
+- Beta分布描述的是单变量分布
+- Dirichlet分布描述的是多变量分布
+
+因此
+- Beta分布可作为**二项**分布的先验概率
+- Dirichlet分布可作为**多项**分布的先验概率
+
+### 伽马分布（Gamma）
+
+Gamma 函数是对阶乘在实数领域的扩展
+- 据PRML第71页(2.14)式，Gamma函数在Beta分布和Dirichlet分布中起到了**归一化**的作用
+
+
+### 正态分布（二项分布另一种极限）
+
+问题背景: 二项分布的另一种极限
+- 人群中的身高分布。
+- 考试中的分数分布。
+
+总之，如果一个时间受很多因素影响。比如考试分数：受到智商、考试状态、任课老师水平等等因素影响，这些因素本身各有分布，由`中心极限定理`，这些分布加起来的分布就是`正态分布`。
+
+概率密度函数: X∼N(u,σ^2)
+- $X \sim N(u, \sigma^2)$
+- $p(x)=\frac{1}{\sigma \sqrt{2 \pi}} e^{-\frac{(x-u)^{2}}{2 \sigma^{2}}}$
+- 期望和方差：$E(X)=u, \operatorname{Var}(X)=\sigma^{2}$
+
+```python
+import numpy as np #数组包
+from scipy import stats #统计计算包的统计模块
+import matplotlib.pyplot as plt #绘图包
+# --------分布参数-------------
+mu = 160  # 均值
+sigma = 5  # 方差
+# -----------------------------
+X = np.arange(150, 170, 0.1)
+p_list = stats.norm.pdf(X,mu, sigma)
+plt.plot(X, p_list, linestyle='None', marker='.')
+plt.xlabel('Random Variable: X, X(Experimental Result) = The height of human')
+plt.ylabel('Probability')
+plt.title('norm, mu:{}; sigma:{}'.format(mu, sigma))
+```
 
 - 【2021-5-2】[高中就开始学的正态分布，原来如此重要](https://www.toutiao.com/i6711190906105496077/)
 
@@ -342,6 +713,22 @@ Breiman是美国国家科学院院士 （应用数学学部），不仅在概率
 正态分布启示我们，要用整体的观点来看事物。用整体来看事物才能看清楚事物的本来面貌，才能得出事物的根本特性。不能只见树木不见森林，也不能以偏概全。同时正态分布曲线及面积分布图告诉我们一定要抓住重点，因为重点就是事物的主要矛盾，它对事物的发展起主要的、支配性的作用。正态分布是科学的世界观，也是科学的方法论，是我们认识和改造世界的最重要和最根本的工具之一，对我们的理论和实践有重要的指导意义。
  
 正态分布如此重要，不仅因为它在自然界普遍存在，还因为它是被证明的、其他复杂概率分布的演化结果，可以说是所有概率分布的最终宿命。根据“熵增”原理，一个孤立系统的熵总是在不断增大。而对一个已知均值和方差的分布，正态分布的熵值最大，即这个孤立系统中的所有结果持续演化，最终一定是呈正态分布的稳定状态。对于宇宙熵增的最终稳定态，是宇宙各部分能量达到平衡，失去活力，陷入热寂。
+
+### 对数正态分布
+
+`对数正态分布`：Log-normal distribution
+- 在自然界有很多事物有增长速度很慢，甚至可以忽略不计（small percentage changes），但是其效果是对整个事物的影响，即<span style='color:blue'>每次增长都是对前面增长的乘积运算</span>，但如果把他放入对数域，则可以放大他们的增长效果。
+- ![](https://img2018.cnblogs.com/blog/1146801/201810/1146801-20181026172250616-1459668653.png)
+- ![](https://img2018.cnblogs.com/blog/1146801/201810/1146801-20181026163442534-524138315.png)
+
+### 学生氏分布
+
+司徒顿t分布（Student's t-distribution），简称 t分布，在概率论及统计学中用于根据**小样本**来估计总体呈**正态分布**且**标准差未知**的期望值。
+- 若总体标准差已知，或是样本数足够大时（依据中心极限定理渐进正态分布），则应使用正态分布来进行估计。其为对两个样本期望值差异进行显著性测试的学生t检验之基础。
+
+学生t 检验改进了Z检验（Z-test），因为在小样本中，Z检验以总体标准差已知为前提，Z检验用在小样本会产生很大的误差，因此必须改用学生t 检验以求准确。但若在样本数足够大（普遍认为超过30个即足够）时，可依据中心极限定理近似正态分布，以Z检验来求得近似值，
+
+在总体标准差数未知的情况下，不论样本数量大或小皆可应用t检验。在待比较的数据有三组以上时，因为误差无法被压低，此时可以用方差分析（ANOVA）代替t检验
 
 ### 幂律分布
 
