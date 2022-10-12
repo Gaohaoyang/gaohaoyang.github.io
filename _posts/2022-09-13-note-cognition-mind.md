@@ -112,6 +112,8 @@ mathjax: true
 
 ### 学习区-成长区-舒适区
 
+<div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers tags lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-10-12T11:06:13.418Z\&quot; agent=\&quot;5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;2DEBSM9mhR3V3Td6JWdK\&quot; version=\&quot;20.2.0\&quot;&gt;&lt;diagram id=\&quot;xdYpP7w1t2VaaceZiyqw\&quot; name=\&quot;第 1 页\&quot;&gt;7Zddb5swFIZ/jS9b8enYl5CQTJUmTcukaZcUTPBqcOo4Jd2vnw2GQCFSI1FlmpqbHL/H+ON9OAaAuyxOGxHv8688JQw4VnoC7go4ju24nvrTymujLCBqhJ2gqel0Frb0DzGiZdQjTclh0FFyziTdD8WElyVJ5ECLheDVsFvG2XDWfbwjI2GbxGys/qSpzBsVOYuz/oXQXd7ObEPcZIq47Wx2csjjlFc9yY2AuxScyyYqTkvCtHmtL8116wvZbmGClPI9F9w9rLZR+UCr794T55A8P6+yO7cZ5SVmR7Nhs1j52jqgRlFmq0ZY5VSS7T5OdKZSvJWWy4Kplq3C+LBvCGT0RNSkYcZLaYg6ukNGGVtyxkU9sJtlmZMkSj9IwZ9IL5PCR+hDlRnv0Wz7hQhJTj3J7HlDeEGkeFVd2iw2/nc34L0aulaqM1AHw3tkmOY9nn09NrfSrpvj7LYKjOFXmG/f1HwCL5i/wI+WNY/53c1vzLc9a2S9vbDGvnfi7KY7Y9MjBBACWAUYIAsgFfgALUEYfAwPG0/wQAmZ5vGIfM+fi4fvDXmgMY8pHB9Gw57C4YNgBQIIIg+EGATWZRxq23Lo+9C+kpfkjddGihndlaqZKDOJ0kNtIlXnfmASBU1Tdgm04Mcy1VhX1gRawWUsKS9NullS+/Rw5yHp2sPKciYqC0+QdGcgWW1+hVlAmfzh5Zvy228hgmLqMIsgQDZQq9BBjfD/BDmiNsH2Msj2haEtSXxjkFMVCeuK7AK/Lk11aq5qolgH/z5R7z1E9QW9w1f/1ut5SDve8PDtHo63Ij3x8nfmCgGuYevaRXURY4B9EK4/SV9/OMMbk/YmSC80TrSuuQYgjNq3H0unwiUI8Cfpq0/v7rt1ftKqef5YrHO9T243+gs=&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+
 无论个体还是群体，其能力都以“舒适区—拉伸区—困难区”的形式分布，要想让自己高效成长，必须让自己始终处于舒适区的边缘，贸然跨到困难区会让自己受挫，而始终停留在舒适区会让自己停滞。
 - “刻意练习四要素”：定义明确的目标、极度的专注、有效的反馈、在拉伸区练习。
 - 在拉伸区内学习难度最小、需求最贴合、见效也最快，很容易产生心流。
@@ -128,8 +130,7 @@ mathjax: true
 
 归结起来，焦虑的原因就两条：<span style='color:red'>想同时做很多事，又想立即看到效果</span>。
 
-王小波说：
-- <font color=#0099ff size=5 face='Weibei SC' background='yellow'>人的一切痛苦，本质上都是对自己无能的愤怒。</font>
+王小波说：<font color=#0099ff size=5 face='Weibei SC' background='yellow'>人的一切痛苦，本质上都是对自己无能的愤怒。</font>
 
 
 焦虑的本质也契合这一观点：自己的欲望大于能力，又极度缺乏耐心。焦虑就是因为欲望与能力之间差距过大。
