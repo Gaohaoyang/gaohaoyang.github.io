@@ -20,6 +20,7 @@ permalink: /latex
 【2022-8-30】参考
 - [Cmd Markdown 公式指导手册](https://www.zybuluo.com/codeep/note/163962)
 - 【2022-9-8】latex在表格中显示异常，[github markdown](https://github.com/wqw547243068/wqw547243068.github.io/blob/master/_posts/2015-02-16-latex-editor.md)正常，jekyll page显示异常
+- overleaf的教程：[Learn LaTeX in 30 minutes](https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes)
 
 # 一、公式使用参考
 
@@ -1613,4 +1614,22 @@ $$
 - [Cmd Markdown 简明语法手册](https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown)
 - [Cmd Markdown 高阶语法手册](https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#cmd-markdown-高阶语法手册)。
 
+# 绘图
 
+【2022-10-12】[LaTeX—pgfplots宏包入门使用教程](https://zhuanlan.zhihu.com/p/128341873)
+- ![](https://pic3.zhimg.com/v2-b095266cf8cda018e512f9f9b3f8fc6e_1440w.jpg?source=172ae18b)
+
+Pgfplots是一种可视化工具，可简化在文档中包含绘图的过程。基本思想是，用户提供输入数据/公式，然后pgfplots 宏包会帮助用户绘制响应的图像。
+
+pgfplots 宏包可以帮助用户绘制2D 和3D 的函数图像，比如想要绘制一个2D 的函数图像  $f(x)=e^x$，
+
+```latex
+%Ex1:f(x)=exp(x)
+\begin{tikzpicture}
+    \begin{axis}
+        \addplot[color=red]{exp(x)};
+    \end{axis}
+\end{tikzpicture}
+```
+
+# 结束
