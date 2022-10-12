@@ -814,6 +814,11 @@ pdf文件直接显示，800px不能省略px，否则高度低
 
 <script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
 
+注意：
+- draw.io 导出为SVG格式，再通过图片形式嵌入md，可以得到 mermaid 图的效果，支持复制、超链接
+
+UML图[示例](https://app.diagrams.net/#Uhttps%3A%2F%2Fraw.githubusercontent.com%2Fjgraph%2Fdrawio-github%2Fmaster%2Fdiagram.png)
+- 更多[用法](http://jgraph.github.io/drawio-github/self-editing.html)
 
 #### Mermaid
 
