@@ -4940,11 +4940,12 @@ def helloWorld():
 ### 运行机制
 
 - 【2020-8-26】[JavaScript运行机制](https://www.toutiao.com/i6748661672522547719/)
-- JavaScript语言的一大特点就是单线程，也就是说，同一个时间只能做一件事。那么，为什么JavaScript不能有多个线程呢？这样能提高效率啊。
+- JavaScript语言的一大特点就是**单线程**，也就是说，同一个时间只能做一件事。那么，为什么JavaScript不能有多个线程呢？这样能提高效率啊。
 - JavaScript的单线程，与它的用途有关。作为浏览器脚本语言，JavaScript的主要用途是与用户互动，以及操作DOM。这决定了它只能是单线程，否则会带来很复杂的同步问题。比如，假定JavaScript同时有两个线程，一个线程在某个DOM节点上添加内容，另一个线程删除了这个节点，这时浏览器应该以哪个线程为准？
 - 所以，为了避免复杂性，从一诞生，JavaScript就是单线程，这已经成了这门语言的核心特征，将来也不会改变。
-- 所有任务分成两种，一种是同步任务（synchronous）
-    - 另一种是异步任务（asynchronous）。同步任务指的是，在主线程上排队执行的任务，只有前一个任务执行完毕，才能执行后一个任务；
+- 所有任务分成两种
+  - 一种是**同步任务**（synchronous）
+  - 另一种是**异步任务**（asynchronous）。同步任务指的是，在主线程上排队执行的任务，只有前一个任务执行完毕，才能执行后一个任务；
     - 异步任务指的是，不进入主线程、而进入”任务队列”（task queue）的任务，只有”任务队列”通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行。
         - 异步执行的运行机制如下：(这种运行机制又称为Event Loop（事件循环）)
             - 所有同步任务都在主线程上执行，形成一个执行栈（execution context stack）。
@@ -4961,6 +4962,114 @@ console.log(3);
 console.log(2);
 //请问数字打印顺序是什么？
 ```
+
+### html引入js
+
+js在html中的应用一般有两种方式：内联和外链；
+- 内嵌：内联就是在html文件中通过在**script标签**里面直接写js语法
+- 外链：外链是指在html文件中通过**script标签**的**src属性**引入js文件
+
+推荐使用外链的方式，把js和html分离，方便开发和日后维护
+
+#### 一、在页面中嵌入js
+
+这是在页面使用js最简单的方式了。用 \<\script\>\<\/script\> 把js代码标识清楚。
+
+最好是把script元素写在</body>前面，script元素的内容就是js代码。
+
+像这样：
+
+```html
+<script>
+// 在这里写js
+function test(){
+alert('hello，world');
+}
+test();
+</script>
+```
+
+#### 二、引用外部js文件
+
+引用外部js文件，可以使js文件和HTML文件相分离、一个js文件可被多个HTML文件使用、维护起来也更方便等等。
+- 1、先写好js代码，存为后缀为.js的文件，如jquery-1.7.1min.js
+- 2、在HTML文件中的 < /body > 前添加代码，src是js文件的路径
+- 3、如果js文件里，有函数，在HTML文件里，用 a href="#" onclick="js_method();return false;" 这种方法进行触发调用
+
+```html
+<script src="../js/jquery-1.7.1min.js"></script>
+...
+</body>
+```
+
+#### 总结
+
+HTML中嵌入JavaScript的三种方式
+- οnclick="js代码“
+- script 脚本块
+- script src引入外部js文件
+
+```html
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML中嵌入JavaScript的第三种方式</title>
+</head>
+<body>
+  <!-- 第一种方式: onclick -->
+     <!--点击按钮弹出消息框-->
+    <input type="button" value="Hello" onclick="window.alert('Hello JavaScript!')"/>
+    <input type="button" value="Hello" onclick="window.alert ('Hello MengYangChen');
+                                                alert('Hello MengYang')
+                                                alert('Hello Meng')"/>
+  <!-- 第二种方式: 脚本块 -->
+    <input type="button" value="我是一个。。"/>
+    <script type="text/javascript">
+        window.alert("hello world!");
+    </script>
+    <input type="button" value="我是一个按钮对象"/>
+  <!-- 第三种方式: 外部js引用 -->
+  <script type="text/javascript" src="file/JS1.js"></script>
+</body>
+</html>
+```
+
+### 加载顺序
+
+js加载顺序
+- 计算机读代码的顺序是从上往下读的, html文件中的顺序: <span style='color:blue'> <\head> → <\body> → body后方</span>
+
+javascript代码位置
+- (1) <\head> 里面：
+  - 网页主体（body）还未加载，所以这里适合放一些**立即执行且不需要引入什么参数**来进行操作的的**自定义函数**，立即执行的语句则很可能会出错（视浏览器而定）
+- (2) <\body> 里面：
+  - 这里可以放函数也可以放立即执行的语句，但是如果需要和网页元素互动的（比如获取某个标签的值或者给某个标签赋值），Javascript代码务必在标签的后面
+- (3) <\body> 下面：
+  - 整个网页已经**加载完毕**，所以最适合放需要立即执行的命令，而自定义函数之类的则不适合。
+
+推荐位置
+- 规范起见，推荐放到body结束标签的末尾，包含到body标签内
+
+```html
+<body>
+    <div>
+        <span>这里是你页面的内容</span>
+    </div>
+    <!-- js内容放在</body>上面,页面内容下面 -->
+    <script src="js/jquery-1.12.1.min.js" type="text/javascript"></script>
+    <script>
+        function hello(){
+            console.log("你好");
+        }
+    </script>
+</body>
+```
+
+这样处理的好处是
+- 1、无需担心因页面未完成加载，造成DOM节点获取不到，使脚本报错的问题
+- 2、而且能避免因脚本运行缓慢造成页面卡死的问题。
+
+另外，Yahoo的前端优化指南里就有这一条。[参考](https://zhuanlan.zhihu.com/p/372362414)
 
 ### 基础知识
 
