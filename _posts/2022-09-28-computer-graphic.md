@@ -3,7 +3,7 @@ layout: post
 title:  "计算机图形学 - Computer Graphic"
 date:   2022-09-28 09:03:00
 categories: 计算机基础
-tags: 图形学 opengl webgl three.js
+tags: 图形学 opengl webgl three.js 游戏
 excerpt: 计算机图形学及相关应用
 mathjax: true
 permalink: /graphic
@@ -227,7 +227,19 @@ WebGL学习有门槛，[Three.js](https://threejs.org/) 作为方向入门，就
 - [沙滩豪车](https://threejs.org/examples/webgl_materials_envmaps_groundprojected.html)
   - <iframe src="https://threejs.org/examples/webgl_materials_envmaps_groundprojected.html" width='100%' height='600' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
 
+## 游戏
+
+### Three.js
+
 3D游戏：[First Three.js Game](https://discourse.threejs.org/t/smelly-cat-first-three-js-game/12894), [smelly cat](https://defnetuncer98.github.io/smellycat/#)
+
+### Godot
+
+【2022-10-13】[Godot 引擎](https://godotengine.org/)是一款免费、由开源社区驱动的 2D 和 3D 游戏引擎
+- [中文文档](https://docs.godotengine.org/zh_CN/latest/getting_started/first_2d_game/index.html)
+
+[程序员用12小时复刻《羊了个羊》，代码已开源](https://www.toutiao.com/article/7153542634227876383)
+- [Godot版羊了个羊](https://gitcode.net/hello_tute/SheepASheep)
 
 # 结束
 
