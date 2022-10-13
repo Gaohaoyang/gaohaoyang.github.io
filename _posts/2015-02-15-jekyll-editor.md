@@ -579,6 +579,9 @@ function wrapImageWithFancyBox() {
         var $image = $(this);
         var alt = $image.attr('alt');
         var src = $image.attr('src');
+        //【2022-10-13】反防盗链
+        var src = 'https://images.weserv.nl/?url=' + $image.attr('src');
+        $image.attr('src',src.replace(/“|”/,''));// 替换掉中文双引号
         $imageWrapLink = $image.wrap('<a data-fancybox=gallery data-caption="'+ alt +'" href="' + src + '"></a>');
     });
     $().fancybox({
@@ -664,7 +667,7 @@ data-fancybox取值
   - 缺点： 占用服务器的空间，访问速度没有豆瓣提供的稳点。有些网站是静态的如 hexo 就无法实现。
 2. 第三方代理 —— <span style='color:green'>测试通过</span>
   - 缺点： 不稳点，第三方代理可能在国内访问不稳定，在国内没有好的推荐。也可以自己做一个代理，之前有人用 GO 做过一个。
-  - url 后面填上豆瓣 Api 返回的图片地址
+  - [images.weserv.nl](https://images.weserv.nl/)提供这样的服务，使用方法：url后面填上豆瓣 Api 返回的图片地址，详见代码示例
 3. 还有一种比较友好和奢侈的，上传 CDN 调用 CDN 的地址，
   - 缺点： 有点奢侈，因为所有图片都存到 CND 占用大量空间，CND 可能需要钱购买，CND 服务商提供图片上传的 API
 4. 删除 Header 中的 Referrer
@@ -683,7 +686,9 @@ data-fancybox取值
 ```
 
 反防盗链示例：盗用豆瓣[图片](https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2544866651.jpg)
-- <img src=”https://images.weserv.nl/?url=https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2544866651.jpg" />
+- <img src="https://images.weserv.nl/?url=https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2544866651.jpg" />
+
+可以讲以上转换动作放到fancybox的js脚本中，统一对所有图片使用反防盗链
 
 
 ### 公式嵌入
