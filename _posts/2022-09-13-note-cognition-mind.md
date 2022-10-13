@@ -49,10 +49,12 @@ mathjax: true
 
 ### 大脑
 
-三重脑
-- [点击弹出](https://viewer.diagrams.net/?tags=%7B%7D&edit=_blank&layers=1&nav=1#R7Zhdb5swFIZ%2FjS9bgc2HfQkhyVRp0rRMmnZJwQSvBKfEbZL9%2Bh3ANKE4U7slTVclNzHvMWC%2FD%2BfYgMhosZlW8TL%2FLFNeIGylG0QihLGNiQN%2FtbJtFd%2BjrTCvRKo77YSZ%2BMW1aGn1QaR81euopCyUWPbFRJYlT1RPi6tKrvvdMln077qM53wgzJK4GKrfRaryVqXY3%2BmfuJjn3Z1tj7WRRdx11jNZ5XEq13sSGSMyqqRUbWuxGfGiNq%2FzpT1vciD6NLCKl%2BolJ1zdRLNxeSPWX507KT1%2Bfx9lV6S9ymNcPOgJ68GqbecAXAXMhoNwnQvFZ8s4qSNr4A1arhYFHNnQjFfLlkAmNhxuGmayVJoorjtkoihGspBVc2GSZRlOEtBXqpJ3fC%2BSeree60FkOEc97UdeKb7Zk%2FScp1wuuKq20EVHse1dY7c9a9s9W%2BTa19J6BxV7OznfY7qvx%2Fpxmj%2FdZ%2Bc4NLTprwBgnxUA9w4A8NmtZR0JQJcAnfuONbDe9q2h70%2Fi0U3HQ9PHHmIjFIzQmCJKUBg1DQcx%2BzQ8bGbgQRNu5nFLXcc9Fg%2FS54GtIQ8TjpPRsM04gAJ10dhHYYiC4DAOmLbq%2B963r5Qlf%2Ba1luJCzEs4TMBMDnpYmyig9gc6sBBpWhwCXcmHMq2xRpYBbSVVrIQsdbgdUreCkOOQJFDHbNKHiYcwmQEmOQLM9fRHmAWiUN%2BcfFp%2B%2BVlVwcJUzwAhDIF6TY4xFH5UlgNwBrwHWTqW9b5AmpLSR5TqGhnYiELDRTRAAW1CDAXsPyDqvIRofcJe%2Fa1%2Fk8lxSD9fD7FhPXxT0oY9IHBlpMlUB4WQsuRC%2Bi9Ik%2Bc5fW7SjoG0U2OuScNCa9dr7YXrq2v1ubm6xgyGHA2dJnGB8UTvcNnkgwK2LMac6EQl2jszYM8AmCEWIda%2BucB67F4A%2F0NlPjdg3wDYq3dbMArI4LBJ5QvXV1fmc3Ol5hWX1nsoyGAKm6k%2FfGl4f4Df6nWIYKcH0j0ZRzjcfYNtYntfssn4Nw%3D%3D)
+#### 三重脑图解
 
-<div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers tags lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-10-12T09:55:23.407Z\&quot; agent=\&quot;5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;iTw_U0KMZUyyGfZo4U-Q\&quot; version=\&quot;20.2.0\&quot;&gt;&lt;diagram id=\&quot;xdYpP7w1t2VaaceZiyqw\&quot; name=\&quot;第 1 页\&quot;&gt;7Zhdb5swFIZ/jS9bgc2HfQkhyVRp0rRMmnZJwQSvBKfEbZL9+h3ANKE4U7slTVclNzHvMWC/D+fYgMhosZlW8TL/LFNeIGylG0QihLGNiQN/tbJtFd+jrTCvRKo77YSZ+MW1aGn1QaR81euopCyUWPbFRJYlT1RPi6tKrvvdMln077qM53wgzJK4GKrfRaryVqXY3+mfuJjn3Z1tj7WRRdx11jNZ5XEq13sSGSMyqqRUbWuxGfGiNq/zpT1vciD6NLCKl+olJ1zdRLNxeSPWX507KT1+fx9lV6S9ymNcPOgJ68GqbecAXAXMhoNwnQvFZ8s4qSNr4A1arhYFHNnQjFfLlkAmNhxuGmayVJoorjtkoihGspBVc2GSZRlOEtBXqpJ3fC+Seree60FkOEc97UdeKb7Zk/Scp1wuuKq20EVHse1dY7c9a9s9W+Ta19J6BxV7OznfY7qvx/pxmj/dZ+c4NLTprwBgnxUA9w4A8NmtZR0JQJcAnfuONbDe9q2h70/i0U3HQ9PHHmIjFIzQmCJKUBg1DQcx+zQ8bGbgQRNu5nFLXcc9Fg/S54GtIQ8TjpPRsM04gAJ10dhHYYiC4DAOmLbq+963r5Qlf+a1luJCzEs4TMBMDnpYmyig9gc6sBBpWhwCXcmHMq2xRpYBbSVVrIQsdbgdUreCkOOQJFDHbNKHiYcwmQEmOQLM9fRHmAWiUN+cfFp++VlVwcJUzwAhDIF6TY4xFH5UlgNwBrwHWTqW9b5AmpLSR5TqGhnYiELDRTRAAW1CDAXsPyDqvIRofcJe/a1/k8lxSD9fD7FhPXxT0oY9IHBlpMlUB4WQsuRC+i9Ik+c5fW7SjoG0U2OuScNCa9dr7YXrq2v1ubm6xgyGHA2dJnGB8UTvcNnkgwK2LMac6EQl2jszYM8AmCEWIda+ucB67F4A/0NlPjdg3wDYq3dbMArI4LBJ5QvXV1fmc3Ol5hWX1nsoyGAKm6k/fGl4f4Df6nWIYKcH0j0ZRzjcfYNtYntfssn4Nw==&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+三重脑
+- [点击弹出](https://viewer.diagrams.net/?tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1#R7Zpbd5s4EMc%2FjR7jY5C46BF8SU%2FP7mm22VsfOSDbajFKsVLb%2BfQ7AoENkhsntd1tjvtSGAmB%2Fj%2FNaDQOwqPl5rZMHha%2Fi4zlyB1mG4THyHUdFxP4T1m2tSVwnNowL3mmO%2B0M9%2FyJaeNQWx95xladjlKIXPKHrjEVRcFS2bElZSnW3W4zkXff%2BpDMmWG4T5PctP7DM7moraEb7OzvGJ8vmjc7Pq1blknTWc9ktUgysd4z4QnCo1IIWV8tNyOWK%2FEaXernpgda2w8rWSGPeeCPDym%2FzYunp7u%2FP2DvZvvXb0l809D4luSPesb6a%2BW2kQCGAbXhJl4vuGT3D0mqWtYAHGwLuczhzoHLGc%2FzkchFWT2HZ7OZm6ZgX8lSfGFNSyEKNVYrh3pSfwQrJdscnJ7TigarjYklk%2BUWuugH2hWzbRaQvl%2FvsGHXG3i1dbEPjequiV4s83b0nZ5woSV9ibzuOeVl%2FgXl3UnXCOx4hsDtYu%2FI659NXnxGecOUXVBebMhLzPXbrumOvM4J5F3ffopnEc%2Fln2RxW9x9LstoeWOJDZMAgbOEPpr4iFIUR2gSopAg6hjCgxiyq7BVyX3ZtSnJ%2BbyA2xTEY2CPlbQcYnKkG5Y8y%2FJDSEvxWGRMzWuohheF1LuKQ6tWmUguCt1cf1IT2XEL0yBn4XsQJsG0DzMwYfoWlvhcKC1xCFCGIYpGimDkoBAuPBRGKAqrJooi%2BgswJccwVQ%2Fsubb6N52ehrVL%2FMEw6MKmJmx6SdiWqAhoKa7claAY%2FBZfYb8CNnZJ37F%2FNmtiYQ00Y0QrskA8Cq70TxPW%2F3%2F0PaunA82YVIgB97TaqkeITt8o4uGQUjI%2BUTT3nX40dy1prm3rds%2FF2Ld6OB0j6lZoYff2roxfEMRJ2HPj9ui4h9i7pBsHFsS%2Bys4gmIAbx5U%2FX8k%2BG6BJP%2B%2B2kSWXJBtayEJQDtWmC14cwu47vh6hrJlWB6R3uY3WWmk4po5TZJEqOCrV82S14mkXXVdUtuHyX92irj8pO6ze%2Bm682es23rZKJ6Vs3qFB15%2FBMqOKaYi%2FEo9lqnvdvB%2FfT4r3fP2RfBHCZ1%2B%2FjmdtsQreMmfyO4v6ALpnomdjK1kOy%2Bdb93ttwPQb7gSHmeyc3OlnYZj0qNcz1c%2FtV0T7Q%2Fn9odx%2BJbDWwhiqWkPt1I9aVt%2BVvB%2F5MQq9Kn2PUXQtsRy1iTuBJU%2FzzWXYpHMnDxHH1CJfFiKKbMrzpu01AeN1wcE6O%2B9n%2Brzl3B32MB7r89h7dqjT%2BfxhJQ2Xh%2By9LsWB78dvNSX4sRK5Fwx8fITPD8LAXImnOJ5Zcdpzd%2BqjeFhVyyMUTRROyOCj8BfA%2BZokfjrtVFl%2BCLOZxDuEtOD383jLL3lny%2F%2BohTIwnaizmdqnR029Das9u9653%2Bxp%2FJS4MTHiMTGd2qO2323dc23lzalxD%2FfHqrBGquOaV%2F0GFlYVtpEqq14xP19Y60MOBo7p0yfjDLe7v6yod%2B7d36fgyX8%3D)
+
+<div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers tags lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-10-13T02:07:27.896Z\&quot; agent=\&quot;5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;nhB4fVNn2rCv1KCf8RTh\&quot; version=\&quot;20.4.0\&quot;&gt;&lt;diagram id=\&quot;xdYpP7w1t2VaaceZiyqw\&quot; name=\&quot;第 1 页\&quot;&gt;7Zpbd5s4EMc/jR7jY5C46BF8SU/P7mm22VsfOSDbajFKsVLb+fQ7AoENkhsntd1tjvtSGAmB/j/NaDQOwqPl5rZMHha/i4zlyB1mG4THyHUdFxP4T1m2tSVwnNowL3mmO+0M9/yJaeNQWx95xladjlKIXPKHrjEVRcFS2bElZSnW3W4zkXff+pDMmWG4T5PctP7DM7moraEb7OzvGJ8vmjc7Pq1blknTWc9ktUgysd4z4QnCo1IIWV8tNyOWK/EaXernpgda2w8rWSGPeeCPDym/zYunp7u/P2DvZvvXb0l809D4luSPesb6a+W2kQCGAbXhJl4vuGT3D0mqWtYAHGwLuczhzoHLGc/zkchFWT2HZ7OZm6ZgX8lSfGFNSyEKNVYrh3pSfwQrJdscnJ7TigarjYklk+UWuugH2hWzbRaQvl/vsGHXG3i1dbEPjequiV4s83b0nZ5woSV9ibzuOeVl/gXl3UnXCOx4hsDtYu/I659NXnxGecOUXVBebMhLzPXbrumOvM4J5F3ffopnEc/ln2RxW9x9LstoeWOJDZMAgbOEPpr4iFIUR2gSopAg6hjCgxiyq7BVyX3ZtSnJ+byA2xTEY2CPlbQcYnKkG5Y8y/JDSEvxWGRMzWuohheF1LuKQ6tWmUguCt1cf1IT2XEL0yBn4XsQJsG0DzMwYfoWlvhcKC1xCFCGIYpGimDkoBAuPBRGKAqrJooi+gswJccwVQ/subb6N52ehrVL/MEw6MKmJmx6SdiWqAhoKa7claAY/BZfYb8CNnZJ37F/NmtiYQ00Y0QrskA8Cq70TxPW/3/0PaunA82YVIgB97TaqkeITt8o4uGQUjI+UTT3nX40dy1prm3rds/F2Ld6OB0j6lZoYff2roxfEMRJ2HPj9ui4h9i7pBsHFsS+ys4gmIAbx5U/X8k+G6BJP++2kSWXJBtayEJQDtWmC14cwu47vh6hrJlWB6R3uY3WWmk4po5TZJEqOCrV82S14mkXXVdUtuHyX92irj8pO6ze+m682es23rZKJ6Vs3qFB15/BMqOKaYi/Eo9lqnvdvB/fT4r3fP2RfBHCZ1+/jmdtsQreMmfyO4v6ALpnomdjK1kOy+db93ttwPQb7gSHmeyc3OlnYZj0qNcz1c/tV0T7Q/n9odx+JbDWwhiqWkPt1I9aVt+VvB/5MQq9Kn2PUXQtsRy1iTuBJU/zzWXYpHMnDxHH1CJfFiKKbMrzpu01AeN1wcE6O+9n+rzl3B32MB7r89h7dqjT+fxhJQ2Xh+y9LsWB78dvNSX4sRK5Fwx8fITPD8LAXImnOJ5Zcdpzd+qjeFhVyyMUTRROyOCj8BfA+ZokfjrtVFl+CLOZxDuEtOD383jLL3lny/+ohTIwnaizmdqnR029Das9u9653+xp/JS4MTHiMTGd2qO2323dc23lzalxD/fHqrBGquOaV/0GFlYVtpEqq14xP19Y60MOBo7p0yfjDLe7v6yod+7d36fgyX8=&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
 
 <script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
 
@@ -71,6 +73,41 @@ mathjax: true
 - 与洋葱不同，这颗“倒洋葱”越外层越新，越中心越老。
 - 这种结构导致了脑很难剥离老旧的内部，即新皮层很难不受到老旧内部的影响。
 - 人用了20年让三重脑发育成熟，人将用余生去亲历三重脑的斗争。
+
+#### 三重脑假说
+
+`三重脑假说`（Triune brain, [wikipedia](在我们的大脑里，由内到外至少有三重大脑：年代久远的**本能脑**、相对古老的**情绪脑**和非常年轻的**理智脑**。
+- 约3.6亿年前，为了适应陆地生活，爬行动物演化出了最初的“**本能脑**”。本能脑的结构很简单，只有一个原始的反射模块，可以让爬行动物对环境快速做出本能反应。
+- 到了大约2亿年前，哺乳动物为了更好地适应环境，不仅让体温保持恒定，还进化出了情绪。相应的，哺乳动物的大脑里也发展出一个独特的情感区域（边缘系统），脑科学家称之为“**情绪脑**”。
+- 直到距今约250万年前，人类才在大脑的前额区域进化出了“新皮层”。这个新皮层直到7万~20万年前才真正成形，新的脑区称为“**理智脑**” 。
+- 本能脑早在婴儿时期就比较完善了。
+- 情绪脑则要等到青春期早期才趋于完善。
+- 而理智脑最晚，要等到成年早期才基本发育成熟。
+
+我们大致可以认为它们分别在2岁、12岁、22岁左右发育成熟，算起来各阶段时间相差约10年，所以在人生的前20年里，我们总是显得心智幼稚不成熟。
+
+读作者“三重脑”的论述，有种读👉📖人类简史的感觉。
+- 脑的进化伴随着生命的进化，脑好比就像是一颗倒着长的洋葱。
+- 与洋葱不同，这颗“倒洋葱”越外层越新，越中心越老。
+- 这种结构导致了脑很难剥离老旧的内部，即新皮层很难不受到老旧内部的影响。
+- 人用了20年让三重脑发育成熟，人将用余生去亲历三重脑的斗争。)）是一个由美国医生、神经科学家保罗·D·麦克莱恩（英语：Paul D. MacLean）所提出，用以描述脊椎动物前脑与行为的演化过程的模型。此模型将人类的前脑分为三个各自具有有主观性、智能、空间与时间感的脑区。
+- 麦克莱恩最初在1960年代建构此模型，并且在他1990年出版的书三重脑的演化里提出了这个假说。
+- 三重脑包含`爬虫脑复合区`、`古哺乳动物脑`(**边缘系统**)、`新哺乳动物脑`(**新皮质**)，它们在演化的过程中逐步加入前脑的结构。
+- 卡尔·萨根在1977年获得普立兹奖的著作伊甸之龙使得三重脑假说广为大众所悉。这个理论被某些精神医学家与情感神经科学家所接受。
+- 然而，这个假说在2000年代后已不被主流神经科学界采纳。
+
+##### 爬虫脑复合区
+
+麦克莱恩所谓的爬虫脑复合区，又称作R复合区、爬虫脑，即为现今所称的基底核。爬虫脑复合区在脑部发育时衍生自前脑底部。选用这个术语是因为神经解剖学家曾经相信此结构主宰爬虫类与鸟类的前脑。麦克莱恩认为爬虫脑复合区负责物种的典型本能行为，诸如侵略、支配、领域行为与仪式化行为。有时爬虫脑复合区会主导脑部的活动，从而导致较原始的行为。此一现象即使是在人类身上亦可能发生。发育良好、正常的新皮质会监视爬虫脑复合区的活动。就演化的角度而言，爬虫脑复合区是大脑最原始的成功结构，同时，本结构为哺乳动物与爬行动物所共有大脑的最高级部分。
+
+##### 古哺乳动物脑
+
+古哺乳动物脑由中膈、杏仁核、下视丘与海马回组成。麦克莱恩最初是在1952年的论文中以边缘系统称呼这一组互相连结的脑部结构。学界普遍认为麦克莱恩最大的贡献在于提出边缘系统，并将其视为主要的功能结构。麦克莱恩主张此一结构是在早期哺乳动物的前脑演化出来的(因此称之为古哺乳动物脑)，且此结构负责觅食、生殖与育幼行为的动机与情绪。
+
+##### 新哺乳动物脑
+
+新哺乳动物脑由大脑新皮质组成，这种结构只在高等哺乳类动物，特别是人类身上出现。麦克莱恩认为，哺乳动物大脑最近一次演化出的结构即为新哺乳动物脑。该演化事件造成了高等哺乳动物的语言、抽象思考、计划与认知能力。
+
 
 ### 为什么看抖音停不下来？
 
