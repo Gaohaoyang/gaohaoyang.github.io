@@ -3367,8 +3367,8 @@ Go 设计模式
 汇总: [img](https://img.lailin.xyz/image/1612154618733-bb131bea-bf76-4244-bb78-8bed8bfdddf1.jpeg)
 - ![](https://img.lailin.xyz/image/1612154618733-bb131bea-bf76-4244-bb78-8bed8bfdddf1.jpeg)
 
-|  **类型**  |                                                  **设计模式（Github）**                                                   | **常用** |                                       **博客**                                        |
-| :--------: | :-----------------------------------------------------------------------------------------------------------------------: | :------: | :-----------------------------------------------------------------------------------: |
+|  **类型**  |   **设计模式（Github）**   | **常用** |     **博客**      |
+| :--------: | :----------------------: | :------: | :--------------: |
 | **创建型** |       [单例模式(Singleton Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/01_singleton)       |    ✅     |            [Go设计模式01-单例模式](https://lailin.xyz/post/singleton.html)            |
 |            |         [工厂模式(Factory Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/02_factory)         |    ✅     |         [Go设计模式02-工厂模式&DI容器](https://lailin.xyz/post/factory.html)          |
 |            |        [建造者模式(Builder Design Pattern)](https://github.com/mohuishou/go-design-pattern/blob/master/03_builder)        |    ✅     |            [Go设计模式03-建造者模式](https://lailin.xyz/post/builder.html)            |
@@ -3802,7 +3802,6 @@ func main() {
     strs := dat["strs"].([]interface{})
     str1 := strs[0].(string)
     fmt.Println(str1) //a
-
     // 我们还可以将JSON解码为自定义数据类型，这有个好处是可以为我们的程序增加额外的类型安全并且不用再在访问数据的时候进行类型断言
     str := `{"page": 1, "fruits": ["apple", "peach"]}`
     res := &Response2{}
@@ -3887,7 +3886,6 @@ import (
 	"log"
 	"os"
 )
-
 const (
 	flag           = log.Ldate | log.Ltime | log.Lshortfile
 	preDebug       = "[DEBUG]"
@@ -3895,7 +3893,6 @@ const (
 	preWarning     = "[WARNING]"
 	preError       = "[ERROR]"
 )
-
 var (
 	logFile       io.Writer
 	debugLogger   *log.Logger
@@ -3904,7 +3901,6 @@ var (
 	errorLogger   *log.Logger
 	defaultLogFile = "/var/log/web.log"
 )
-
 func init() {
 	var err error
 	logFile, err = os.OpenFile(defaultLogFile, os.O_CREATE|os.O_APPEND|os.O_RDWR, 0666)
@@ -4328,22 +4324,23 @@ Go 提供的 net/http库 对于HTTP协议实现非常好，基于此再构造框
 - Iris，[教程](https://www.topgoer.com/Iris/%E5%85%B3%E4%BA%8E.html)
 
 <div class="mermaid">
-    graph LR
-    O(web框架):::s
-    classDef s fill:#C8D64B;
-    style A fill:#F7CF6B;
-    style B fill:#6BE0F7;
-    style C fill:#6BE0F7;
-    style D fill:#6BE0F7;
-    style H fill:#5CF77B;
-    A[net/http] -->|国际,无session,ORM,日志| B(Gin)
-    O -->|Go语言| A
-    A -->|国内,无测试框架,路由冲突| C(Beego)
-    A -->|国际,无日志,ORM| D(Iris)
+    flowchart LR
+    classDef red fill:#f02;
+    classDef green fill:#5CF77B;
+    classDef blue fill:#6BE0F7;
+    classDef orange fill:#F7CF6B;
+    classDef grass fill:#C8D64B;
+
+    O(web框架) -->|Go自带| A[net/http]:::grass
+    A -->|国际,无session,ORM,日志| B(Gin):::blue
+    A -->|国内,无测试框架,路由冲突| C(Beego):::blue
+    A -->|国际,无日志,ORM| D(Iris):::blue
     A --> E(Echo)
     A --> F(Revel)
     A --> G(Buffalo)
-    A -->|国内,模块化| H(GoFrame)
+    A -->|国内,模块化| GF(GoFrame):::green
+    B -->|2016,字节| G1(Ginex) -->|2020| H(Hertz):::orange
+    B -->|2016,rpc框架| Kite -->|2020| KiteX:::orange
 </div>
 
 
@@ -4767,6 +4764,9 @@ func main() {
 
 ### hertz
 
+
+#### hertz 简介
+
 【2022-8-8】字节跳动开源的go微服务框架hertz
 - [CloudWeGo](https://www.cloudwego.io/): A leading practice for building enterprise cloud native middleware!
 - 包含的开源组件：
@@ -4783,14 +4783,43 @@ func main() {
 架构图
 - ![](https://www.cloudwego.io/img/docs/hertz.png)
 
-hertz 命令行工具
-- hz 是 Hertz 框架提供的一个用于**生成代码**的**命令行**工具。
-- 目前，hz 可以基于 thrift 和 protobuf 的 IDL 生成 Hertz 项目的脚手架
-- 使用 thrift 或 protobuf 的 IDL 生成代码，需要安装相应的编译器：[thriftgo](https://github.com/cloudwego/thriftgo) 或 [protoc](https://github.com/protocolbuffers/protobuf/releases) 
-- hz 生成的代码里
-  - 一部分是底层的**编译器**生成的（通常是关于 IDL 里定义的结构体）
-  - 另一部分是 IDL 中用户定义的**路由、method** 等信息。用户可直接运行该代码。
-- 从执行流上来说，当 hz 使用 thrift IDL 生成代码时，hz 会调用 thriftgo 来生成 go 结构体代码，并将自身作为 thriftgo 的一个插件（名为 thrift-gen-hertz）来执行来生成其他代码。当用于 protobuf IDL 时亦是如此。
+#### hertz 发展历史
+
+大约 2014 年左右，字节就已经开始尝试做一些 Golang 业务的转型。
+- 2016 年，基于已开源的 Golang HTTP 框架 Gin 框架，封装了 Ginex。
+- 2020 年初 Hertz 立项
+- 2020 年 10 月，Hertz 发布第一个可用版本。
+- 2022 年 6 月，Hertz 正式开源。 
+- 截至目前，Hertz 在字节内部已经支撑超过 1.4 万个业务服务，日峰值 QPS 超过 5000 万。
+
+##### Ginex
+
+2017 - 2019 年期间，也就是 Ginex 发布之后，问题逐渐显现。
+
+主要有以下几点：
+- 迭代受开源项目限制
+  - Ginex 是一个基于 Gin 的开源封装，所以它本身在迭代方面是受到一些限制的。一旦有针对公司级的需求开发，以及 Bugfix 等等，我们都需要和开源框架 Gin 做联合开发和维护，这个周期不能完全由我们自己控制。
+- 代码混乱膨胀、维护困难
+  - 由于和业务同学共同开发和维护 Ginex 框架，因此对于控制整个框架的走向没有完全的自主权，从而导致了整体代码混乱膨胀，到后期发现越来越难维护。
+- 无法满足性能敏感业务需求
+  - 另外，能用 Gin 做的性能优化非常少，因为 Gin 的底层是基于 Golang 的一个原生库，所以如果要做优化，需要在原生库的基础上做很多改造，这个其实是非常困难的。
+- 无法满足不同场景的功能需求
+  - 内部逐渐出现了一些新的场景，因此会有对 HTTP Client 的需求，支持 Websocket、支持 HTTP/2 以及支持 HTTP/3 等等需求，而在原生的 Ginex 上还是很难扩展的这些功能需求。
+
+[字节跳动大规模企业级 HTTP 框架 Hertz 设计实践](https://www.toutiao.com/article/7153881024156664320)
+
+##### KiteX
+
+- 2016年，Kite 和 Ginex 发布
+  - 由于很多功能版本过低，包括 Thrift 当时只有 v0.9.2，它们其实存在很多问题，再加上 Golang 迎来数轮大版本迭代，Kite 甚至连 golang context 参数都没有 。
+  - 综上种种原因，Kite 已经满足不了内部使用需求。
+- 2019 年中，服务框架团队正式启动了 Kite 这个字节自有 RPC 框架的重构。
+  - 这是一个自下而上的整体升级重构，围绕性能和可扩展性的诉求展开设计。
+- 2020 年 10 月，团队完成了 KiteX 发布，仅仅两个月后，KiteX 就已经接入超过 1000 个服务。
+
+[字节跳动微服务架构体系演进](https://zhuanlan.zhihu.com/p/382833278)
+
+#### hertz 安装
 
 安装 [hertz](https://github.com/cloudwego/hertz)
 
@@ -4805,6 +4834,19 @@ git clone https://github.com/cloudwego/hertz.git
 # 安装命令行工具hz
 go install github.com/cloudwego/hertz/cmd/hz@latest
 ```
+
+#### hertz 命令行
+
+
+hertz 命令行工具
+- hz 是 Hertz 框架提供的一个用于**生成代码**的**命令行**工具。
+- 目前，hz 可以基于 thrift 和 protobuf 的 IDL 生成 Hertz 项目的脚手架
+- 使用 thrift 或 protobuf 的 IDL 生成代码，需要安装相应的编译器：[thriftgo](https://github.com/cloudwego/thriftgo) 或 [protoc](https://github.com/protocolbuffers/protobuf/releases) 
+- hz 生成的代码里
+  - 一部分是底层的**编译器**生成的（通常是关于 IDL 里定义的结构体）
+  - 另一部分是 IDL 中用户定义的**路由、method** 等信息。用户可直接运行该代码。
+- 从执行流上来说，当 hz 使用 thrift IDL 生成代码时，hz 会调用 thriftgo 来生成 go 结构体代码，并将自身作为 thriftgo 的一个插件（名为 thrift-gen-hertz）来执行来生成其他代码。当用于 protobuf IDL 时亦是如此。
+
 
 
 ### caddy web服务框架
