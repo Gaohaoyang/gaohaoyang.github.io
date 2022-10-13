@@ -17,6 +17,7 @@ mathjax: true
 
 [豆瓣读书](https://book.douban.com/subject/35193035/)
 - ![](https://img2.doubanio.com/view/subject/s/public/s33713442.jpg)
+- <img src=“https://img2.doubanio.com/view/subject/s/public/s33713442.jpg” referrerPolicy=“no-referrer” />
 
 ## 引言
 
