@@ -3,7 +3,7 @@ layout: post
 title:  "【读书笔记】- 认知觉醒 - Cognition of Mind"
 date:   2022-09-13 09:19:00
 categories: 读书笔记
-tags: 认知 大脑 第二大脑 
+tags: 认知 大脑 第二大脑 本我 自我 超我 心理学
 excerpt: 大脑工作原理是什么样的，如何利用大脑特点高效学习思考？
 author: 鹤啸九天
 mathjax: true
@@ -52,9 +52,9 @@ mathjax: true
 #### 三重脑图解
 
 三重脑
-- [点击弹出](https://viewer.diagrams.net/?tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1#R7Zpbd5s4EMc%2FjR7jY5C46BF8SU%2FP7mm22VsfOSDbajFKsVLb%2BfQ7AoENkhsntd1tjvtSGAmB%2Fj%2FNaDQOwqPl5rZMHha%2Fi4zlyB1mG4THyHUdFxP4T1m2tSVwnNowL3mmO%2B0M9%2FyJaeNQWx95xladjlKIXPKHrjEVRcFS2bElZSnW3W4zkXff%2BpDMmWG4T5PctP7DM7moraEb7OzvGJ8vmjc7Pq1blknTWc9ktUgysd4z4QnCo1IIWV8tNyOWK%2FEaXernpgda2w8rWSGPeeCPDym%2FzYunp7u%2FP2DvZvvXb0l809D4luSPesb6a%2BW2kQCGAbXhJl4vuGT3D0mqWtYAHGwLuczhzoHLGc%2FzkchFWT2HZ7OZm6ZgX8lSfGFNSyEKNVYrh3pSfwQrJdscnJ7TigarjYklk%2BUWuugH2hWzbRaQvl%2FvsGHXG3i1dbEPjequiV4s83b0nZ5woSV9ibzuOeVl%2FgXl3UnXCOx4hsDtYu%2FI659NXnxGecOUXVBebMhLzPXbrumOvM4J5F3ffopnEc%2Fln2RxW9x9LstoeWOJDZMAgbOEPpr4iFIUR2gSopAg6hjCgxiyq7BVyX3ZtSnJ%2BbyA2xTEY2CPlbQcYnKkG5Y8y%2FJDSEvxWGRMzWuohheF1LuKQ6tWmUguCt1cf1IT2XEL0yBn4XsQJsG0DzMwYfoWlvhcKC1xCFCGIYpGimDkoBAuPBRGKAqrJooi%2BgswJccwVQ%2Fsubb6N52ehrVL%2FMEw6MKmJmx6SdiWqAhoKa7claAY%2FBZfYb8CNnZJ37F%2FNmtiYQ00Y0QrskA8Cq70TxPW%2F3%2F0PaunA82YVIgB97TaqkeITt8o4uGQUjI%2BUTT3nX40dy1prm3rds%2FF2Ld6OB0j6lZoYff2roxfEMRJ2HPj9ui4h9i7pBsHFsS%2Bys4gmIAbx5U%2FX8k%2BG6BJP%2B%2B2kSWXJBtayEJQDtWmC14cwu47vh6hrJlWB6R3uY3WWmk4po5TZJEqOCrV82S14mkXXVdUtuHyX92irj8pO6ze%2Bm682es23rZKJ6Vs3qFB15%2FBMqOKaYi%2FEo9lqnvdvB%2FfT4r3fP2RfBHCZ1%2B%2FjmdtsQreMmfyO4v6ALpnomdjK1kOy%2Bdb93ttwPQb7gSHmeyc3OlnYZj0qNcz1c%2FtV0T7Q%2Fn9odx%2BJbDWwhiqWkPt1I9aVt%2BVvB%2F5MQq9Kn2PUXQtsRy1iTuBJU%2FzzWXYpHMnDxHH1CJfFiKKbMrzpu01AeN1wcE6O%2B9n%2Brzl3B32MB7r89h7dqjT%2BfxhJQ2Xh%2By9LsWB78dvNSX4sRK5Fwx8fITPD8LAXImnOJ5Zcdpzd%2BqjeFhVyyMUTRROyOCj8BfA%2BZokfjrtVFl%2BCLOZxDuEtOD383jLL3lny%2F%2BohTIwnaizmdqnR029Das9u9653%2Bxp%2FJS4MTHiMTGd2qO2323dc23lzalxD%2FfHqrBGquOaV%2F0GFlYVtpEqq14xP19Y60MOBo7p0yfjDLe7v6yod%2B7d36fgyX8%3D)
+- [点击弹出](https://viewer.diagrams.net/?tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1#R7Zpdd5s4EIZ%2FjS7jY5D40CX4Iz09u6fZzW53e8kB2dYWoxQrtZ1fvyMQ2CC5cVLbbXOcm8BICPQ%2BmtFoEoRHy81tmTwsfhcZy5E7zDYIj5HrOi4m8EtZtrUlcJzaMC95pjvtDPf8iWnjUFsfecZWnY5SiFzyh64xFUXBUtmxJWUp1t1uM5F33%2FqQzJlhuE%2BT3LT%2BwzO5qK2hG%2Bzs7xifL5o3Oz6tW5ZJ01nPZLVIMrHeM%2BEJwqNSCFlfLTcjlivxGl3q56YHWtsPK1khj3ngjw8pv82Lp6e7jx%2Bwd7P9%2B7ckvmlofE3yRz1j%2FbVy20gAw4DacBOvF1yy%2B4ckVS1rAA62hVzmcOfA5Yzn%2BUjkoqyew7PZzE1TsK9kKT6zpqUQhRqrlUM9qT%2BClZJtDk7PaUWD1cbEkslyC130A%2B2K2TYLSN%2Bvd9iw6w282rrYh0Z110Qvlnk7%2Bk5PuNCSvkRe95zyMv%2BC8u6kawR2PEPgdrF35PXPJi8%2Bo7xhyi4oLzbkJeb6bdd0R17nBPKubz%2FFs4jn8i%2ByuC3u%2FivLaHljiQ2TAIGzhD6a%2BIhSFEdoEqKQIOoYwoMYsquwVcl92bUpyfm8gNsUxGNgj5W0HGJypBuWPMvyQ0hL8VhkTM1rqIYXhdS7ikOrVplILgrdXH9SE9lxC9MgZ%2BF7ECbBtA8zMGH6Fpb4XCgtcQhQhiGKRopg5KAQLjwURigKqyaKIvoLMCXHMFUP7Lm2%2BplOT8PaJf5gGHRhUxM2vSRsS1QEtBRX7kpQDH6Lr7BfARu7pO%2FYP5o1sbAGmjGiFVkgHgVX%2BqcJ6z8ffc%2Fq6UAzJhViwD2ttuoRotM3ing4pJSMTxTNfacfzV1Lmmvbut1zMfatHk7HiLoVWti9vSvjFwRxEvbcuD067iH2LunGgQWxr7IzCCbgxnHlz1eyzwZo0s%2B7bWTJJcmGFrIQlEO16YIXh7D7jq9HKGum1QHpXW6jtVYajqnjFFmkCo5K9TxZrXjaRdcVlW24%2FFe3qOtPyg6rt74bb%2Fa6jbet0kkpm3do0PVnsMyoYhrir8RjmepeN%2B%2FH95PiPV%2F%2FST4L4bMvX8aztlgFb5kz%2BY1FfQDdM9GzsZUsh%2BXztfu9NmD6DXeCw0x2Tu70szBMetTrmern9iui%2FaH8%2FlBuvxJYa2EMVa2hdupHLatvSt6P%2FBiFXpW%2Bxyi6lliO2sSdwJKn%2BeYybNK5k4eIY2qRLwsRRTbledP2moDxuuBgnZ33I33ecu4OexiP9XnsPTvU6Xz%2BsJKGy0P2XpfiwPfjt5oSfF%2BJ3AsGPj7C5wdhYK7EUxzPrDjtuTv1UTysquURiiYKJ2TwUfgL4HxNEj%2Bddqos34XZTOIdQlrw%2B3m85S95Z8v%2FqIUyMJ2os5nap0dNvQ2rPbveud%2FsafyUuDEx4jExndqjtr%2FbuufayptTYw93HZH1gdzc3a9wzXJaH20wcExPPhlduN39P0W9X%2B%2F%2BKwVP%2Fgc%3D)
 
-<div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers tags lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-10-13T02:07:27.896Z\&quot; agent=\&quot;5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;nhB4fVNn2rCv1KCf8RTh\&quot; version=\&quot;20.4.0\&quot;&gt;&lt;diagram id=\&quot;xdYpP7w1t2VaaceZiyqw\&quot; name=\&quot;第 1 页\&quot;&gt;7Zpbd5s4EMc/jR7jY5C46BF8SU/P7mm22VsfOSDbajFKsVLb+fQ7AoENkhsntd1tjvtSGAmB/j/NaDQOwqPl5rZMHha/i4zlyB1mG4THyHUdFxP4T1m2tSVwnNowL3mmO+0M9/yJaeNQWx95xladjlKIXPKHrjEVRcFS2bElZSnW3W4zkXff+pDMmWG4T5PctP7DM7moraEb7OzvGJ8vmjc7Pq1blknTWc9ktUgysd4z4QnCo1IIWV8tNyOWK/EaXernpgda2w8rWSGPeeCPDym/zYunp7u/P2DvZvvXb0l809D4luSPesb6a+W2kQCGAbXhJl4vuGT3D0mqWtYAHGwLuczhzoHLGc/zkchFWT2HZ7OZm6ZgX8lSfGFNSyEKNVYrh3pSfwQrJdscnJ7TigarjYklk+UWuugH2hWzbRaQvl/vsGHXG3i1dbEPjequiV4s83b0nZ5woSV9ibzuOeVl/gXl3UnXCOx4hsDtYu/I659NXnxGecOUXVBebMhLzPXbrumOvM4J5F3ffopnEc/ln2RxW9x9LstoeWOJDZMAgbOEPpr4iFIUR2gSopAg6hjCgxiyq7BVyX3ZtSnJ+byA2xTEY2CPlbQcYnKkG5Y8y/JDSEvxWGRMzWuohheF1LuKQ6tWmUguCt1cf1IT2XEL0yBn4XsQJsG0DzMwYfoWlvhcKC1xCFCGIYpGimDkoBAuPBRGKAqrJooi+gswJccwVQ/subb6N52ehrVL/MEw6MKmJmx6SdiWqAhoKa7claAY/BZfYb8CNnZJ37F/NmtiYQ00Y0QrskA8Cq70TxPW/3/0PaunA82YVIgB97TaqkeITt8o4uGQUjI+UTT3nX40dy1prm3rds/F2Ld6OB0j6lZoYff2roxfEMRJ2HPj9ui4h9i7pBsHFsS+ys4gmIAbx5U/X8k+G6BJP++2kSWXJBtayEJQDtWmC14cwu47vh6hrJlWB6R3uY3WWmk4po5TZJEqOCrV82S14mkXXVdUtuHyX92irj8pO6ze+m682es23rZKJ6Vs3qFB15/BMqOKaYi/Eo9lqnvdvB/fT4r3fP2RfBHCZ1+/jmdtsQreMmfyO4v6ALpnomdjK1kOy+db93ttwPQb7gSHmeyc3OlnYZj0qNcz1c/tV0T7Q/n9odx+JbDWwhiqWkPt1I9aVt+VvB/5MQq9Kn2PUXQtsRy1iTuBJU/zzWXYpHMnDxHH1CJfFiKKbMrzpu01AeN1wcE6O+9n+rzl3B32MB7r89h7dqjT+fxhJQ2Xh+y9LsWB78dvNSX4sRK5Fwx8fITPD8LAXImnOJ5Zcdpzd+qjeFhVyyMUTRROyOCj8BfA+ZokfjrtVFl+CLOZxDuEtOD383jLL3lny/+ohTIwnaizmdqnR029Das9u9653+xp/JS4MTHiMTGd2qO2323dc23lzalxD/fHqrBGquOaV/0GFlYVtpEqq14xP19Y60MOBo7p0yfjDLe7v6yod+7d36fgyX8=&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers tags lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-10-13T02:53:37.710Z\&quot; agent=\&quot;5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;Lxmb2jvg02V5rb8TIOLs\&quot; version=\&quot;20.4.0\&quot;&gt;&lt;diagram id=\&quot;xdYpP7w1t2VaaceZiyqw\&quot; name=\&quot;第 1 页\&quot;&gt;7Zpdd5s4EIZ/jS7jY5D40CX4Iz09u6fZzW53e8kB2dYWoxQrtZ1fvyMQ2CC5cVLbbXOcm8BICPQ+mtFoEoRHy81tmTwsfhcZy5E7zDYIj5HrOi4m8EtZtrUlcJzaMC95pjvtDPf8iWnjUFsfecZWnY5SiFzyh64xFUXBUtmxJWUp1t1uM5F33/qQzJlhuE+T3LT+wzO5qK2hG+zs7xifL5o3Oz6tW5ZJ01nPZLVIMrHeM+EJwqNSCFlfLTcjlivxGl3q56YHWtsPK1khj3ngjw8pv82Lp6e7jx+wd7P9+7ckvmlofE3yRz1j/bVy20gAw4DacBOvF1yy+4ckVS1rAA62hVzmcOfA5Yzn+Ujkoqyew7PZzE1TsK9kKT6zpqUQhRqrlUM9qT+ClZJtDk7PaUWD1cbEkslyC130A+2K2TYLSN+vd9iw6w282rrYh0Z110Qvlnk7+k5PuNCSvkRe95zyMv+C8u6kawR2PEPgdrF35PXPJi8+o7xhyi4oLzbkJeb6bdd0R17nBPKubz/Fs4jn8i+yuC3u/ivLaHljiQ2TAIGzhD6a+IhSFEdoEqKQIOoYwoMYsquwVcl92bUpyfm8gNsUxGNgj5W0HGJypBuWPMvyQ0hL8VhkTM1rqIYXhdS7ikOrVplILgrdXH9SE9lxC9MgZ+F7ECbBtA8zMGH6Fpb4XCgtcQhQhiGKRopg5KAQLjwURigKqyaKIvoLMCXHMFUP7Lm2+plOT8PaJf5gGHRhUxM2vSRsS1QEtBRX7kpQDH6Lr7BfARu7pO/YP5o1sbAGmjGiFVkgHgVX+qcJ6z8ffc/q6UAzJhViwD2ttuoRotM3ing4pJSMTxTNfacfzV1Lmmvbut1zMfatHk7HiLoVWti9vSvjFwRxEvbcuD067iH2LunGgQWxr7IzCCbgxnHlz1eyzwZo0s+7bWTJJcmGFrIQlEO16YIXh7D7jq9HKGum1QHpXW6jtVYajqnjFFmkCo5K9TxZrXjaRdcVlW24/Fe3qOtPyg6rt74bb/a6jbet0kkpm3do0PVnsMyoYhrir8RjmepeN+/H95PiPV//ST4L4bMvX8aztlgFb5kz+Y1FfQDdM9GzsZUsh+Xztfu9NmD6DXeCw0x2Tu70szBMetTrmern9iui/aH8/lBuvxJYa2EMVa2hdupHLatvSt6P/BiFXpW+xyi6lliO2sSdwJKn+eYybNK5k4eIY2qRLwsRRTbledP2moDxuuBgnZ33I33ecu4OexiP9XnsPTvU6Xz+sJKGy0P2XpfiwPfjt5oSfF+J3AsGPj7C5wdhYK7EUxzPrDjtuTv1UTysquURiiYKJ2TwUfgL4HxNEj+ddqos34XZTOIdQlrw+3m85S95Z8v/qIUyMJ2os5nap0dNvQ2rPbveud/safyUuDEx4jExndqjtr/buufayptTYw93HZH1gdzc3a9wzXJaH20wcExPPhlduN39P0W9X+/+KwVP/gc=&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
 
 <script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
 
@@ -114,6 +114,28 @@ mathjax: true
 “新哺乳动物脑”，又称新皮层（Neocortex），按细胞与纤维排列情况，自皮层表面到髓质大致可分为六层。新皮层首次出现于灵长类动物的大脑。人类大脑中，新皮层占据了整个脑容量的三分之二，分为左右两个半球，就是为人们所熟知的左右脑（图 3B）。左侧的脑皮层控制着身体的右侧，右侧的脑皮层控制着身体的左侧。并且，右脑更多地决定了人的空间感、抽象思维、音乐感与艺术性，而左脑则更多控制着人的线性逻辑，理性思考与言语能力。特别重要的是其中的额叶前端，它是我们大脑中的“总司令”，不但控制着我们一系列的高级认知功能，还能抑制一些低级中枢（比如，“爬行动物脑”）的活动，防止我们做出一些不恰当的行为。
 
 [人类有三个大脑？ ——有趣的Triune Brain假说](https://zhuanlan.zhihu.com/p/24839679)
+
+#### 人格结构理论：本我、自我、超我
+
+弗洛依德的人格结构理论
+
+根据弗洛伊德提出的人格结构，人的`人格`由"本我"、"自我"、"超我" 三部分构成。
+- 三者之间相互作用、相互依存、相互制约，形成不同的人格心理表现。具体来说
+- "本我"是原始的自己，人格的基本结构，遵循"享乐原则"；
+  - "本我"包含先天本能、欲望、冲动、生命力在内的多种生理需要构成的能动系统，其欲望冲动受自然律的支配，不受逻辑、理性、社会习俗等因素的约束。
+  - 弗洛伊德认为，本能驱动是形成人格的基本要素，是动机的启动者。
+- "自我"，即现实的自己，人格的表现型，属于人格的个人意识部分，遵循现实原则；
+  - "自我"具有意识，会对"本我"的冲动加以调节。由于遵从"现实原则"，"自我"充当"本我"与"超我"的调节者，起到个体适应自然和社会环境的作用。
+- "超我"，即理想的自己，人格的高层结构，遵循道德原则，是道德化的"自我"；
+  - "超我"由社会规范、伦理道德、价值观念内化而来，受环境因素的影响，是社会化的结果。 
+  - "超我"也影响和调节"自我"，使其向道德、宗教和审美等理想形态"升华"。
+- ![](http://www.ibp.cas.cn/kxcb_157836/kpwz_157839/202010/W020201013448433202465.jpg)
+
+将麦克林的三位一体学说与弗洛依德的人格机构论结合在一起。
+- "本我"与古皮层和原始皮层的功能相关，因为它们决定了人的动物本能，而新皮层与"超我"相关，因为新皮层的进化，代表了人脑区别其他动物的基本特性。而自我则负责调节"本我"与"超我"。
+- ![](http://www.ibp.cas.cn/kxcb_157836/kpwz_157839/202010/W020201013448433261463.jpg)
+
+中科院生物物理研究所：[我命由我不由天](http://www.ibp.cas.cn/kxcb_157836/kpwz_157839/202010/t20201013_5715626.html)
 
 ### 为什么看抖音停不下来？
 
