@@ -162,7 +162,7 @@ mathjax: true
     classDef orange fill:#F7CF6B;
     classDef start fill:#C8D64B;
     %%节点关系定义
-    O(环境)-->A(自我):::green
+    O[(环境)]-->A(自我):::green
     A --> B(本我):::blue
     B --> D
     B --> E
