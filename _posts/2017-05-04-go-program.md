@@ -4337,10 +4337,12 @@ Go 提供的 net/http库 对于HTTP协议实现非常好，基于此再构造框
     A -->|国际,无日志,ORM| D(Iris):::blue
     A --> E(Echo)
     A --> F(Revel)
+    A --> F1(Fasthttp)
     A --> G(Buffalo)
     A -->|国内,模块化| GF(GoFrame):::green
-    B -->|2016,字节| G1(Ginex) -->|2020| H(Hertz):::orange
-    B -->|2016,rpc框架| Kite -->|2020| KiteX:::orange
+    B -->|2016,字节| G1(Ginex) -->|2020,微服务,2022开源| H(Hertz):::orange
+    B -->|2016,rpc框架| Kite -->|2020,微服务,2021开源| KiteX:::orange
+    E & F1 -- 借鉴 --> H
 </div>
 
 
@@ -4816,6 +4818,15 @@ func main() {
 - 2019 年中，服务框架团队正式启动了 Kite 这个字节自有 RPC 框架的重构。
   - 这是一个自下而上的整体升级重构，围绕性能和可扩展性的诉求展开设计。
 - 2020 年 10 月，团队完成了 KiteX 发布，仅仅两个月后，KiteX 就已经接入超过 1000 个服务。
+
+Kite 作为字节跳动第一代 Golang RPC 框架，主要存在以下缺陷：
+- Kite 为了快速支持业务发展需求，不可避免地耦合了部分中台业务的功能；
+- Kite 对 Go modules 支持不友好（Go modules 在 2019 年才进入语言核心）；
+- Kite 自身的代码拆分成多仓库，版本更新时推动业务升级困难；
+- Kite 强耦合了早期版本的 Apache Thrift，协议和功能拓展困难；
+- Kite 的生成代码逻辑与框架接口强耦合，成为了性能优化的天花板。
+
+因此，业务的快速发展和需求场景的多样化，催生了新一代 Golang RPC 框架 Kitex。
 
 [字节跳动微服务架构体系演进](https://zhuanlan.zhihu.com/p/382833278)
 
