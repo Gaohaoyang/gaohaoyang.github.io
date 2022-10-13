@@ -653,6 +653,37 @@ data-fancybox取值
 </table>
 ```
 
+#### 图片防盗链
+
+【2022-10-13】markdown里引用第三方图片时，经常出现图片无法显示，原因是第三方网站使用了防盗链功能，导致外部图片请求被禁止
+- 网站设置了防盗链的策略，会在后台判断请求的Referrer属性是不是来自于一个非本域名的网站，如果来源不是本域名就返回 403 forbidden
+
+
+解决的方案
+1. 使用后台的预下载（把图片下载下来放到服务器下）
+  - 缺点： 占用服务器的空间，访问速度没有豆瓣提供的稳点。有些网站是静态的如 hexo 就无法实现。
+2. 第三方代理 —— <span style='color:green'>测试通过</span>
+  - 缺点： 不稳点，第三方代理可能在国内访问不稳定，在国内没有好的推荐。也可以自己做一个代理，之前有人用 GO 做过一个。
+  - url 后面填上豆瓣 Api 返回的图片地址
+3. 还有一种比较友好和奢侈的，上传 CDN 调用 CDN 的地址，
+  - 缺点： 有点奢侈，因为所有图片都存到 CND 占用大量空间，CND 可能需要钱购买，CND 服务商提供图片上传的 API
+4. 删除 Header 中的 Referrer
+  - content 有四个值可以选择 never,always,origin,default 这是来自于 whatwg 标准，浏览器对他的支持还是很好的。 MDN 标准，还多了一个 no-referrer
+5. 添加 ReferrerPolicy 属性 —— <span style='color:green'>测试失败</span>
+  - 添加 meta 标签相当于对文档中的所有链接都取消了 referrer，
+  - 而ReferrerPolicy 则更精确的指定了某一个资源的referrer策略。
+  - 关于这个策略的定义可以参照MDN。比如我想只对某一个图片取消referrer，如下编写即可:
+
+```html
+<!-- url后面就是要反防盗链的图片 -->
+<img src=”https://images.weserv.nl/?url=https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2544866651.jpg" />
+<!-- 方法5示例：放head区，不管用 -->
+<img src=“xxxx.jpg” referrerPolicy=“no-referrer” />
+<meta id="referrer" name="referrer" content="always" />
+```
+
+反防盗链示例：盗用豆瓣[图片](https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2544866651.jpg)
+- <img src=”https://images.weserv.nl/?url=https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2544866651.jpg" />
 
 
 ### 公式嵌入

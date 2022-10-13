@@ -15,9 +15,8 @@ mathjax: true
 
 # 认知觉醒
 
-[豆瓣读书](https://book.douban.com/subject/35193035/)
-- ![](https://img2.doubanio.com/view/subject/s/public/s33713442.jpg)
-- <img src=“https://img2.doubanio.com/view/subject/s/public/s33713442.jpg” referrerPolicy=“no-referrer” />
+[豆瓣读书](https://book.douban.com/subject/35193035/), [img](https://img2.doubanio.com/view/subject/s/public/s33713442.jpg)
+- <img src="https://images.weserv.nl/?url=https://img2.doubanio.com/view/subject/s/public/s33713442.jpg" >
 
 ## 引言
 
