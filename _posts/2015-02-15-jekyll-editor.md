@@ -581,7 +581,9 @@ function wrapImageWithFancyBox() {
         var src = $image.attr('src');
         //【2022-10-13】反防盗链
         var src = 'https://images.weserv.nl/?url=' + $image.attr('src');
-        $image.attr('src',src.replace(/“|”/,''));// 替换掉中文双引号
+        // 替换掉中文双引号
+        src = src.replace(/“|”/,''); // 缩略图地址修正
+        $image.attr('src',src); // 点击后原始图地址修正
         $imageWrapLink = $image.wrap('<a data-fancybox=gallery data-caption="'+ alt +'" href="' + src + '"></a>');
     });
     $().fancybox({
