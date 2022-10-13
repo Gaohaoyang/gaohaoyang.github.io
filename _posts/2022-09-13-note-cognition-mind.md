@@ -129,11 +129,53 @@ mathjax: true
 - "超我"，即理想的自己，人格的高层结构，遵循道德原则，是道德化的"自我"；
   - "超我"由社会规范、伦理道德、价值观念内化而来，受环境因素的影响，是社会化的结果。 
   - "超我"也影响和调节"自我"，使其向道德、宗教和审美等理想形态"升华"。
-- ![](http://www.ibp.cas.cn/kxcb_157836/kpwz_157839/202010/W020201013448433202465.jpg)
+- [img](http://www.ibp.cas.cn/kxcb_157836/kpwz_157839/202010/W020201013448433202465.jpg)
+
+<div class="mermaid">
+    flowchart LR
+    %% 节点颜色
+    classDef red fill:#f02;
+    classDef green fill:#5CF77B;
+    classDef blue fill:#6BE0F7;
+    classDef orange fill:#F7CF6B;
+    classDef grass fill:#C8D64B;
+    %%节点关系定义
+    O(场景):::grass-.->|触发决策|A(本我):::blue
+    A -->|3.也许还可以妥协| B(自我):::green
+    A -->|1.我现在要这么做| C(超我):::orange
+    C -->|2.这么做是不对的| A
+    B -.->|理性| C
+    B -.->|感性| A
+</div>
 
 将麦克林的三位一体学说与弗洛依德的人格机构论结合在一起。
 - "本我"与古皮层和原始皮层的功能相关，因为它们决定了人的动物本能，而新皮层与"超我"相关，因为新皮层的进化，代表了人脑区别其他动物的基本特性。而自我则负责调节"本我"与"超我"。
-- ![](http://www.ibp.cas.cn/kxcb_157836/kpwz_157839/202010/W020201013448433261463.jpg)
+- [img](http://www.ibp.cas.cn/kxcb_157836/kpwz_157839/202010/W020201013448433261463.jpg)
+
+
+<div class="mermaid">
+    flowchart LR
+    %% 节点颜色
+    classDef red fill:#f02;
+    classDef green fill:#5CF77B;
+    classDef blue fill:#6BE0F7;
+    classDef orange fill:#F7CF6B;
+    classDef start fill:#C8D64B;
+    %%节点关系定义
+    O(环境)-->A(自我):::orange
+    A --> B(本我):::blue
+    B --> D
+    B --> E
+    A --> C(超我):::green
+    C --> F
+    subgraph new [大脑结构]
+        direction TB
+        D(原始皮层,脑干)
+        E(古皮层,边缘系统)
+        F(新皮层,前额叶)
+        D -.->|进化-哺乳动物| E -.->|进化-高级哺乳动物,灵长类| F
+    end
+</div>
 
 中科院生物物理研究所：[我命由我不由天](http://www.ibp.cas.cn/kxcb_157836/kpwz_157839/202010/t20201013_5715626.html)
 
