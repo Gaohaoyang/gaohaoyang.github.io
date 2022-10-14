@@ -641,6 +641,18 @@ netstat -ntulp | grep 3306   # 查看所有3306端口使用情况
 命令杀死进程
 - kill -9 26993
 
+### java安装
+
+- 【2021-1-20】
+- 安装：先装[java](https://www.oracle.com/java/technologies/javase-jdk15-downloads.html), open JDK[清华源下载](https://mirror.tuna.tsinghua.edu.cn/AdoptOpenJDK/15/jdk/x64/linux/)
+- 配置环境变量：vim /etc/profile
+- 查看版本：java -version
+
+```shell
+export JAVA_HOME=/usr/local/src/jdk1.8.0_171 #根据自己的完整路径修改
+export PATH=$PATH:$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH
+export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
+```
 
 ## 进程
 
@@ -2833,31 +2845,6 @@ log "[`date "+%Y-%m-%d %H:%M:%S"`] [NOTE] oneday-pretreat success ! oneday-pretr
 exec 3<&-
 ```
 
-
-# 数学公式编辑
-
-## Latex
-
-- [LaTeX快速入门：一文浅谈TeX排版语法](https://blog.csdn.net/qingdujun/article/details/80805613)
-- 行内公式：是$a^2+b^2=c^2$行内公式
-- 单行公式：勾股定理$$3^2+4^2=5^2$$其中
-- 求和：$$\sum_{i=1}^{n}i=\frac{n(n+1)}{2}$$
-- 极限：$$\lim_{x\rightarrow{\infty}}(1+\frac{1}{x})^{x}=e$$
-- 积分：$$\int_{a}^{b}f(x)dx=F(b)-F(a)$$
-- 求导：$$\frac{\partial f(x)}{\partial x}=x^2$$
-- 多行公式：
-\begin{eqnarray}
-x+y = z\\a=4
-\end{eqnarray}
-- 矩阵
-\begin{array}{ccc}
- a_{11} &  a_{12} & a_{13}   \\
-  a_{21}&  a_{22} & a_{23}  \\
-  a_{31}&  a_{32} & a_{33}  
-\end{array}
-- 状态图
-
-
 # Git使用
 
 - 待补充
@@ -3689,9 +3676,10 @@ pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 - 代码：
 
 ```shell
-# 安装扩展插件
+# 安装扩展插件，含目录插件
 pip install jupyter_contrib_nbextensions
 jupyter contrib nbextension install --user
+# 跟上面什么区别？
 pip install jupyter_nbextensions_configurator
 jupyter nbextensions_configurator enable --user
 #重启jupyter
@@ -3779,17 +3767,6 @@ def some_func():
 some_func()
 
 ```
-
-
-# java
-
-- 【2021-1-20】
-- 安装：先装[java](https://www.oracle.com/java/technologies/javase-jdk15-downloads.html), open JDK[清华源下载](https://mirror.tuna.tsinghua.edu.cn/AdoptOpenJDK/15/jdk/x64/linux/)
-- 配置环境变量：vim /etc/profile
-   - export JAVA_HOME=/usr/local/src/jdk1.8.0_171 （根据自己的完整路径修改）
-   - export PATH=$PATH:$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH
-   - export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
-- 查看版本：java -version
 
 
 # python开发环境
