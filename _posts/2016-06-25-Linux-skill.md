@@ -3671,9 +3671,16 @@ pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
 
-## 自定义主题
+## 扩展功能：加强版+自定义主题
 
-- 代码：
+安装以下插件可以启动加强版功能
+- 功能：
+  - 目录：Table of Content
+  - 自动保存：autosave time
+  - 代码折叠：codfolding、codefolding in editor
+  - 颜色高亮：选中单词高亮，highlighter、 highlight selected word
+  - 启动jupyter服务后，在web主页，点击"Nbextensions"，勾选对应功能
+- 主题定制
 
 ```shell
 # 安装扩展插件，含目录插件
@@ -3691,8 +3698,8 @@ pip install --upgrade jupyterthemes
 # 启用主题
 jt -t grade3 -f fira -fs 13 -cellw 90% -ofs 11 -dfs 11 -T 
 # 启动jupyter服务
-
 ```
+
 
 ## 远程访问
 
