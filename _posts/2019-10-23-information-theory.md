@@ -303,7 +303,7 @@ Breiman是美国国家科学院院士 （应用数学学部），不仅在概率
 
 概率密度函数: X = U(a,b)
 - $X=U(a,b)$
-- $p(x)=\left\{\begin{array}{ll} \frac{1}{b-a} & a \leq x \leq b \\ 0 & \text { else } \end{array}\right.$
+- $ p(x)=\left\{\begin{array}{ll} \frac{1}{b-a} & a \leq x \leq b \\ 0 & \text { else } \end{array}\right. $
 - 期望和方差：$\frac{a+b}{2} , \frac{(b-a)^2}{12} $
 
 ### 伯努利分布
