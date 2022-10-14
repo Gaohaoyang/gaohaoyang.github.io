@@ -91,12 +91,12 @@ function wrapImageWithFancyBox() {
     $('img').not('.sidebar-image img').not('#author-avatar img').not(".mdl-menuimg").not(".something-else-logo img").not('.avatar').not('.share-body img').each(function() {
         var $image = $(this);
         var alt = $image.attr('alt');
-        //var src = $image.attr('src');
-        //【2022-10-13】反防盗链
-        var src = 'https://images.weserv.nl/?url=' + $image.attr('src');
+        var src = $image.attr('src');
+        //【2022-10-13】反防盗链, 图片加载速度慢，关闭此功能
+        //var src = 'https://images.weserv.nl/?url=' + $image.attr('src');
         // 替换掉中文双引号
-        src = src.replace(/“|”/,''); // 缩略图地址修正
-        $image.attr('src',src); // 点击后原始图地址修正
+        //src = src.replace(/“|”/,''); // 缩略图地址修正
+        //$image.attr('src',src); // 点击后原始图地址修正
         $imageWrapLink = $image.wrap('<a data-fancybox=gallery data-caption="'+ alt +'" href="' + src + '"></a>');
     });
     $().fancybox({
