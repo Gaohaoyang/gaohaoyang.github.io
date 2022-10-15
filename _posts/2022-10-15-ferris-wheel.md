@@ -72,7 +72,7 @@ export default getPos
 
 我们尝试使用其渲染一下
 
-```jsx
+```js
 <div className={styles.ferris}>
   <div className={styles.wheel} ref={wheelDomRef}>
     <div className={styles.roomsArea}>
