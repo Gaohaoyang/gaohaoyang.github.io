@@ -295,6 +295,7 @@ mathjax: true
 
 【2022-10-15】[如何降低90%以上的烦恼，一条视频告诉你！](https://www.ixigua.com/7146530683911930405)
 - 视频文字内容由小程序（视频语音转文字神器）生成，直接输入视频链接，产出文字
+- <iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/7146530683911930405?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
 
 <span style='color:red'>只要你不当救世主，不天天想着去改变任何人，你就能避免90%以上的烦恼。</span>
 - 你必须明白，<span style='color:blue'>所有人都是有限的，包括你自己</span>。
