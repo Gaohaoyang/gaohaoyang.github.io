@@ -72,7 +72,7 @@ export default getPos
 
 我们尝试使用其渲染一下
 
-```html
+```js
 <div className={styles.ferris}>
   <div className={styles.wheel} ref={wheelDomRef}>
     <div className={styles.roomsArea}>
@@ -82,8 +82,8 @@ export default getPos
             key={index}
             className={`${styles.room} wheelRooms`}
             style={{
-              top: `${item.y}px`,
-              left: `${item.x - 20}px`,
+              top: item.y + 'px',
+              left: item.x - 20 + 'px',
             }}
           />
         ))
