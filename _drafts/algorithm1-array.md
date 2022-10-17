@@ -15,6 +15,10 @@ tags: algorithm
 
 正是因为数组的在内存空间的地址是连续的，所以我们在删除或者增添元素的时候，就难免要移动其他元素的地址。数组的元素是不能删的，只能覆盖。
 
+
+
+
+
 # 二分查找
 
 ## leetCode 704 二分查找
@@ -128,10 +132,10 @@ Your memory usage beats 89.92 % of javascript submissions (43.8 MB)
 
 提示:
 
-- 1 <= nums.length <= 104
-- -104 <= nums[i] <= 104
+- 1 <= nums.length <= 10e4
+- -10e4 <= nums[i] <= 10e4
 - nums 为 无重复元素 的 升序 排列数组
-- -104 <= target <= 104
+- -10e4 <= target <= 10e4
 
 ### 思路
 
@@ -188,4 +192,156 @@ Accepted
 64/64 cases passed (60 ms)
 Your runtime beats 67.55 % of javascript submissions
 Your memory usage beats 36.2 % of javascript submissions (41.2 MB)
+```
+
+## leetCode 34 在排序数组中查找元素的第一个和最后一个位置
+
+给你一个按照非递减顺序排列的整数数组 nums，和一个目标值 target。请你找出给定目标值在数组中的开始位置和结束位置。
+
+如果数组中不存在目标值 target，返回 [-1, -1]。
+
+你必须设计并实现时间复杂度为 O(log n) 的算法解决此问题。
+
+
+示例 1：
+
+输入：nums = [5,7,7,8,8,10], target = 8
+输出：[3,4]
+示例 2：
+
+输入：nums = [5,7,7,8,8,10], target = 6
+输出：[-1,-1]
+示例 3：
+
+输入：nums = [], target = 0
+输出：[-1,-1]
+
+
+提示：
+
+- 0 <= nums.length <= 10e5
+- -10e9 <= nums[i] <= 10e9
+- nums 是一个非递减数组
+- -10e9 <= target <= 10e9
+
+### 思路
+
+1. 首先使用二分法得到 target 的位置
+2. 寻找 target 左右两边是否有相等的值
+
+### 解法
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var searchRange = function (nums, target) {
+  // 二分法
+  let left = 0
+  let right = nums.length - 1
+
+  while (left <= right) {
+    const middle = Math.floor(left + (right - left) / 2)
+    if (target > nums[middle]) {
+      left = middle + 1
+    } else if (target < nums[middle]) {
+      right = middle - 1
+    } else {
+      // 最后再寻找左右边界
+      let leftMove = 1
+      while (nums[middle] === nums[middle - leftMove]) {
+        leftMove++
+      }
+      let rightMove = 1
+      while (nums[middle] === nums[middle + rightMove]) {
+        rightMove++
+      }
+      return [middle - leftMove + 1, middle + rightMove - 1]
+    }
+  }
+  return [-1, -1]
+}
+```
+
+```
+Accepted
+88/88 cases passed (48 ms)
+Your runtime beats 98.98 % of javascript submissions
+Your memory usage beats 79.4 % of javascript submissions (41.5 MB)
+```
+
+## leetcode 69 x 的平方根
+
+给你一个非负整数 x ，计算并返回 x 的 算术平方根 。
+
+由于返回类型是整数，结果只保留 整数部分 ，小数部分将被 舍去 。
+
+注意：不允许使用任何内置指数函数和算符，例如 pow(x, 0.5) 或者 x ** 0.5 。
+
+示例 1：
+
+输入：x = 4
+输出：2
+示例 2：
+
+输入：x = 8
+输出：2
+解释：8 的算术平方根是 2.82842..., 由于返回类型是整数，小数部分将被舍去。
+
+
+提示：
+
+0 <= x <= 2^31 - 1
+
+### 思路
+
+我们知道大于1的数字的平方根大于这个数的一半，所以我们在定义二分法区间的时候将 right 定义为 `x / 2`，当然这里定义为 x 也是可以的，仅仅多一次循环而已
+
+每次循环取 left 到 right 的中间值 mid，计算出 mid 的平方
+
+如果 mid 的平方 大于 x，则 mid 过大，可以将边界 right 赋值为 mid - 1
+
+如果 mid 的平方 小于 x，则 mid 过小，可以将边界 left 赋值为 mid + 1
+
+最后返回 left - 1 的值，因为如果没有完全平方的话，最后一次循环会将 left + 1 再退出 while，所以这里 - 1
+
+
+### 解法
+
+```js
+/**
+ * @param {number} x
+ * @return {number}
+ */
+var mySqrt = function (x) {
+  if (x === 1) {
+    return 1
+  }
+  let left = 0
+  // 大于1的数字的平方根大于这个数的一半
+  // 所以我们在定义二分法区间的时候将 right 定义为 x / 2
+  // 当然这里定义为 x 也是可以的，仅仅多一次循环而已
+  let right = x / 2
+  while (left <= right) {
+    const mid = Math.floor(left + (right - left) / 2)
+    const r = mid * mid
+    if (r > x) { // 过大
+      right = mid - 1
+    } else if (r < x) { // 过小
+      left = mid + 1
+    } else {
+      return mid
+    }
+  }
+  return left - 1
+}
+```
+
+```
+Accepted
+1017/1017 cases passed (64 ms)
+Your runtime beats 89.63 % of javascript submissions
+Your memory usage beats 29.38 % of javascript submissions (42.6 MB)
 ```
