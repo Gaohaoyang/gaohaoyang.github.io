@@ -272,7 +272,7 @@ Your runtime beats 98.98 % of javascript submissions
 Your memory usage beats 79.4 % of javascript submissions (41.5 MB)
 ```
 
-## leetcode 69 x 的平方根
+## leetCode 69 x 的平方根
 
 给你一个非负整数 x ，计算并返回 x 的 算术平方根 。
 
@@ -344,4 +344,65 @@ Accepted
 1017/1017 cases passed (64 ms)
 Your runtime beats 89.63 % of javascript submissions
 Your memory usage beats 29.38 % of javascript submissions (42.6 MB)
+```
+
+## leetCode 367 有效的完全平方数
+
+给定一个 正整数 num ，编写一个函数，如果 num 是一个完全平方数，则返回 true ，否则返回 false 。
+
+进阶：不要 使用任何内置的库函数，如  sqrt 。
+
+示例 1：
+
+输入：num = 16
+输出：true
+示例 2：
+
+输入：num = 14
+输出：false
+
+
+提示：
+
+1 <= num <= 2^31 - 1
+
+## 思路
+
+做过上一题，这一题就简单多了，直接二分法。
+
+## 解法
+
+```js
+/**
+ * @param {number} num
+ * @return {boolean}
+ */
+var isPerfectSquare = function (num) {
+  if (num === 1) {
+    return true
+  }
+
+  let left = 0
+  let right = num / 2
+  while (left <= right) {
+    const mid = Math.floor(left + (right - left) / 2)
+    const r = mid * mid
+    if (r > num) {
+      right = mid - 1
+    } else if (r < num) {
+      left = mid + 1
+    } else {
+      return true
+    }
+  }
+  return false
+}
+```
+
+
+```
+Accepted
+70/70 cases passed (56 ms)
+Your runtime beats 84.94 % of javascript submissions
+Your memory usage beats 69.41 % of javascript submissions (40.8 MB)
 ```
