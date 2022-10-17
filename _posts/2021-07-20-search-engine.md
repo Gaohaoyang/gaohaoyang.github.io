@@ -17,12 +17,13 @@ permalink: /search
 
 - 【2022-1-19】[搜索引擎api汇总](https://www.cnblogs.com/select/archive/2011/08/26/2154639.html)
 - 【2022-8-19】腾讯AI Lab开发的近义词查询工具：[近邻词汇检索](https://tool.mingdawoo.com/lang/nearby_word/search?q=%E7%A5%9E%E9%A9%AC&ds=1)
-- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/2d04c2364fac4cdea886ef3ab1bf8ef0~noop.image)
+- [img](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/2d04c2364fac4cdea886ef3ab1bf8ef0~noop.image)
 
 
 # 搜索引擎简介
 
 - [搜索引擎技术之概要预览](https://blog.csdn.net/v_july_v/article/details/6827391)
+
 从最基本的搜索引擎的概念谈起，到全文检索的概念，由网络蜘蛛，分词技术，系统架构，排序的讲解（结合google搜索引擎的技术原理），而后到图片搜索的原理，最后是几个开源搜索引擎软件的介绍。
 
 ## 什么是搜索引擎
@@ -36,7 +37,7 @@ permalink: /search
 - 接受**查询**：用户向搜索引擎发出查询，搜索引擎接受查询并向用户返回资料。搜索引擎每时每刻都要接到来自大量用户的几乎是同时发出的查询，它按照每个用户的要求检查自己的索引，在极短时间内找到用户需要的资料，并返回给用户。
 
 ## 网络蜘蛛
-    
+
 网络蜘蛛即Web Spider，是一个很形象的名字。把互联网比喻成一个蜘蛛网，那么Spider就是在网上爬来爬去的蜘蛛。网络蜘蛛是通过网页的链接地址来寻找网页，从网站某一个页面（通常是首页）开始，读取网页的内容，找到在网页中的其它链接地址，然后通过这些链接地址寻找下一个网页，这样一直循环下去，直到把这个网站所有的网页都抓取完为止。如果把整个互联网当成一个网站，那么网络蜘蛛就可以用这个原理把互联网上所有的网页都抓取下来。
 
 在抓取网页的时候，网络蜘蛛一般有两种策略：**广度优先**和**深度优先**。
@@ -81,7 +82,6 @@ PageRank的原理类似于科技论文中的引用机制：**谁的论文被引�
 - 链接指向A的网页，其链出的个数越多，A的级别越低。即A的级别和指向A的网页自己的网页链出个数成反比，在公式中现实，网页N链出个数越多，A的级别越低。
 
 每个网页有一个PageRank值，这样形成一个巨大的方程组，对这个方程组求解，就能得到每个网页的PageRank值。互联网上有上百亿个网页，那么这个方程组就有上百亿个未知数，这个方程虽然是有解，但计算毕竟太复杂了，不可能把这所有的页面放在一起去求解的。
-
 
 ## SEO 搜索引擎优化
 
@@ -849,17 +849,17 @@ ElasticSearch 是分布式数据库，允许多台服务器协同工作，每台
 - 启动es
   - 进入/bin目录执行命令：./elasticsearch
   - 后台启动：./elasticsearch -d
-  - 查看es进程：ps -ef|grep elasticsearch
-- 注：
-  - ①若提示内存不够，elasticsearch使用java的jvm默认是使用1G的内存，需要修改配置vim ./config/jvm.options， -Xms200m
-    - 【2021-8-12】错误提示：max virtual memory areas vm.max_map_count [ 65530 ] is too low, increase to at least [ 262144 ]
-      - [解法](https://blog.csdn.net/qq_43655835/article/details/104633359)：sysctl -w vm.max_map_count=262144
-  - ②can not run elasticsearch as root：不能使用root用户操作，添加一个其他的用户：
-    - 添加用户：adduser es
-    - 输入密码：passwd es
-    - 更改目录所属用户：chown es /usr/local/elasticsearch-7.1.1/ -R
-    - 编辑配置：/etc/security/limits.conf
-    - 后续详细配置见：[Linux安装Elasticsearch7.x](https://blog.csdn.net/luo1544943710/article/details/93196147)
+  - 查看es进程：ps -ef \| grep elasticsearch
+注：
+- ①若提示内存不够，elasticsearch使用java的jvm默认是使用1G的内存，需要修改配置vim ./config/jvm.options， -Xms200m
+  - 【2021-8-12】错误提示：max virtual memory areas vm.max_map_count [ 65530 ] is too low, increase to at least [ 262144 ]
+    - [解法](https://blog.csdn.net/qq_43655835/article/details/104633359)：sysctl -w vm.max_map_count=262144
+- ②can not run elasticsearch as root：不能使用root用户操作，添加一个其他的用户：
+  - 添加用户：adduser es
+  - 输入密码：passwd es
+  - 更改目录所属用户：chown es /usr/local/elasticsearch-7.1.1/ -R
+  - 编辑配置：/etc/security/limits.conf
+  - 后续详细配置见：[Linux安装Elasticsearch7.x](https://blog.csdn.net/luo1544943710/article/details/93196147)
 
 
 参考：
@@ -902,16 +902,20 @@ curl -XGET 'http://localhost:9200/_count?pretty' -d '
 elasticsearch默认是英文分词器，所以我们需要安装一个中文分词插件 elasticsearch-analysis-ik （注意和elasticsearch的版本对应），安装之后重新启动 Elasticsearch 自动加载安装好的插件
 - 命令：elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v6.5.4/elasticsearch-analysis-ik-6.5.4.zip  
 
-1. 创建 Index  --  es.indices.create(index=' ')
+1. 创建 Index  
+-  es.indices.create(index=' ')
 - 即字段，每个 Document 都类似一个 JSON 结构，它包含了许多字段，每个字段都有其对应的值；可以类比 MySQL 数据表中的字段。
-2. 删除 Index  --  es.indices.delete(index='news')
+2. 删除 Index  
+-  es.indices.delete(index='news')
 
 ```python
 result = es.indices.delete(index='news', ignore=[400, 404])
 print(result)
 ```
 
-3. 插入数据  --  es.create()  &  es.index()
+3. 插入数据
+
+-  es.create()  &  es.index()
 
 ```python
 es.indices.create(index='news', ignore=400)
@@ -948,7 +952,9 @@ result = es.delete(index='news', doc_type='politics', id=1)
 print(result)
 ```
 
-6. 查询数据 -- 优势：其异常强大的检索功能
+6. 查询数据 
+
+- 优势：其异常强大的检索功能
 
 新建一个索引并指定需要分词的字段, 更新 mapping 信息
 
@@ -1203,29 +1209,23 @@ Xapian 除了提供原生的C++编程接口之外，还提供了Perl，PHP，Pyt
 
 [xunsearch github](https://github.com/hightman/xunsearch)
  
+## C++搜索引擎 CLucene
+ 
+CLucene是Lucene的一个C++端口，Lucene即是上面所讲到的一个基于java的高性能的全文搜索引擎。CLucene因为使用C++编写，所以理论上要比lucene快。
+ 
 ## Java搜索引擎 Lucene
  
 Lucene是一套用于全文检索和搜寻的开源程式库，由Apache软件基金会支持和提供。Lucene提供了一个简单确强大的应用程式接口，能够做全文索引和搜寻，在Java开发环境里Lucene是一个成熟的免费开放源代码工具;就其本身而论，Lucene是现在并且是这几年，最受欢迎的免费java资讯检索程式库。人们经常提到资讯检索程式库，就像是搜寻引擎，但是不应该将资讯检索程式库与网搜索引擎相混淆。
 
 Lucene最初是由Doug Cutting所撰写的，是一位资深全文索引/检索专家，曾经是V-Twin搜索引擎的主要开发者，后来在Excite担任高级系统架构设计师，目前从事 于一些INTERNET底层架构的研究。他贡献出Lucene的目标是为各种中小型应用程式加入全文检索功能。
- 
-  
- 
-## C++搜索引擎 CLucene
- 
-CLucene是Lucene的一个C++端口，Lucene即是上面所讲到的一个基于java的高性能的全文搜索引擎。CLucene因为使用C++编写，所以理论上要比lucene快。
- 
+
 ## 搜索引擎 Nutch
  
 Nutch 是一个开源Java 实现的搜索引擎。它提供了我们运行自己的搜索引擎所需的全部工具。包括全文搜索和Web爬虫。
- 
-  
- 
+
 尽管Web搜索是漫游Internet的基本要求, 但是现有web搜索引擎的数目却在下降. 并且这很有可能进一步演变成为一个公司垄断了几乎所有的web搜索为其谋取商业利益.这显然 不利于广大Internet用户.
  
-  
 Nutch为我们提供了这样一个不同的选择. 相对于那些商用的搜索引擎, Nutch作为开放源代码 搜索引擎将会更加透明, 从而更值得大家信赖. 现在所有主要的搜索引擎都采用私有的排序算法, 而不会解释为什么一个网页会排在一个特定的位置. 除此之外, 有的搜索引擎依照网站所付的 费用, 而不是根据它们本身的价值进行排序. 与它们不同, Nucth没有什么需要隐瞒, 也没有 动机去扭曲搜索的结果. Nutch将尽自己最大的努力为用户提供最好的搜索结果.
- 
   
 Nutch 致力于让每个人能很容易, 同时花费很少就可以配置世界一流的Web搜索引擎. 为了完成这一宏伟的目标, Nutch必须能够做到:
 - 每个月取几十亿网页
@@ -1233,8 +1233,6 @@ Nutch 致力于让每个人能很容易, 同时花费很少就可以配置世界
 - 对索引文件进行每秒上千次的搜索
 - 提供高质量的搜索结果
 - 以最小的成本运作
-
-
 
 
 # 结束
