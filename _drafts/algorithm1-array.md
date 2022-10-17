@@ -366,11 +366,11 @@ Your memory usage beats 29.38 % of javascript submissions (42.6 MB)
 
 1 <= num <= 2^31 - 1
 
-## 思路
+### 思路
 
 做过上一题，这一题就简单多了，直接二分法。
 
-## 解法
+### 解法
 
 ```js
 /**
