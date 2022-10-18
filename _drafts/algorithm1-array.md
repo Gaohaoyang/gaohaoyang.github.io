@@ -406,3 +406,174 @@ Accepted
 Your runtime beats 84.94 % of javascript submissions
 Your memory usage beats 69.41 % of javascript submissions (40.8 MB)
 ```
+
+# 移除元素（双指针法）
+
+## leetCode 27 移除元素
+
+给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。
+
+不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。
+
+元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。
+
+说明:
+
+为什么返回数值是整数，但输出的答案是数组呢?
+
+请注意，输入数组是以「引用」方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。
+
+你可以想象内部操作如下:
+
+```
+// nums 是以“引用”方式传递的。也就是说，不对实参作任何拷贝
+int len = removeElement(nums, val);
+
+// 在函数里修改输入数组对于调用者是可见的。
+// 根据你的函数返回的长度, 它会打印出数组中 该长度范围内 的所有元素。
+for (int i = 0; i < len; i++) {
+    print(nums[i]);
+}
+```
+
+
+示例 1：
+
+```
+输入：nums = [3,2,2,3], val = 3
+输出：2, nums = [2,2]
+解释：函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。你不需要考虑数组中超出新长度后面的元素。例如，函数返回的新长度为 2 ，而 nums = [2,2,3,3] 或 nums = [2,2,0,0]，也会被视作正确答案。
+```
+
+示例 2：
+
+```
+输入：nums = [0,1,2,2,3,0,4,2], val = 2
+输出：5, nums = [0,1,4,0,3]
+解释：函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。注意这五个元素可为任意顺序。你不需要考虑数组中超出新长度后面的元素。
+```
+
+
+提示：
+
+0 <= nums.length <= 100
+0 <= nums[i] <= 50
+0 <= val <= 100
+
+### 思路
+
+数组的元素在内存地址中是连续的，不能单独删除数组中的某个元素，只能覆盖。
+
+双指针法（快慢指针法）在数组和链表的操作中是非常常见的，很多考察数组、链表、字符串等操作的面试题，都使用双指针法。
+
+### 解法
+
+```js
+// @lc code=start
+/**
+ * @param {number[]} nums
+ * @param {number} val
+ * @return {number}
+ */
+var removeElement = function(nums, val) {
+  let slow = 0 // 慢指针
+  for (let fast = 0; fast < nums.length; fast++) { // 快指针遍历
+    if (nums[fast] !== val) { // 非移除元素
+      nums[slow] = nums[fast] // 赋值给慢指针的索引值
+      slow++ // 慢指针右移
+    }
+  }
+  return slow // 返回慢指针，移除元素后的数组长度
+};
+```
+
+```
+Accepted
+113/113 cases passed (60 ms)
+Your runtime beats 71.31 % of javascript submissions
+Your memory usage beats 86.34 % of javascript submissions (41 MB)
+```
+
+## leetCode 283 移动零
+
+给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
+
+请注意 ，必须在不复制数组的情况下原地对数组进行操作。
+
+示例 1:
+
+输入: nums = [0,1,0,3,12]
+输出: [1,3,12,0,0]
+示例 2:
+
+输入: nums = [0]
+输出: [0]
+
+
+提示:
+
+1 <= nums.length <= 10^4
+-2^31 <= nums[i] <= 2^31 - 1
+
+### 思路
+
+方法一，使用快慢指针，快指针遇到非0元素时，将元素的值赋给慢指针，慢指针 + 1，最后再对末尾的0进行操作
+
+方法二，使用快慢指针，快指针遇到非0元素时，直接进行交换，慢指针 + 1，这样就将0直接交换到了最后，一次循环搞定
+
+### 解法
+
+方法一
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+var moveZeroes = function (nums) {
+  let slow = 0
+  for (let fast = 0; fast < nums.length; fast++) {
+    if (nums[fast] !== 0) {
+      nums[slow] = nums[fast]
+      slow++
+    }
+  }
+  for (let i = slow; i < nums.length; i++) {
+    nums[i] = 0
+  }
+}
+```
+
+```
+Accepted
+74/74 cases passed (72 ms)
+Your runtime beats 98.08 % of javascript submissions
+Your memory usage beats 59.63 % of javascript submissions (45.8 MB)
+```
+
+方法二
+
+也可以优化为，直接交换元素，这里用了 es2015 里的解构语法
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+var moveZeroes = function (nums) {
+  let slow = 0
+  for (let fast = 0; fast < nums.length; fast++) {
+    if (nums[fast] !== 0) {
+      [nums[fast], nums[slow]] = [nums[slow], nums[fast]]
+      slow++
+    }
+  }
+}
+```
+
+```
+Accepted
+74/74 cases passed (64 ms)
+Your runtime beats 99.88 % of javascript submissions
+Your memory usage beats 38.6 % of javascript submissions (45.9 MB)
+```
