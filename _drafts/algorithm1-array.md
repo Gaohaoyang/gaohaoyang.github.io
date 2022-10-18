@@ -577,3 +577,80 @@ Accepted
 Your runtime beats 99.88 % of javascript submissions
 Your memory usage beats 38.6 % of javascript submissions (45.9 MB)
 ```
+
+## leetCode 844 比较含退格的字符串
+
+给定 s 和 t 两个字符串，当它们分别被输入到空白的文本编辑器后，如果两者相等，返回 true 。# 代表退格字符。
+
+注意：如果对空文本输入退格字符，文本继续为空。
+
+
+示例 1：
+
+输入：s = "ab#c", t = "ad#c"
+输出：true
+解释：s 和 t 都会变成 "ac"。
+示例 2：
+
+输入：s = "ab##", t = "c#d#"
+输出：true
+解释：s 和 t 都会变成 ""。
+示例 3：
+
+输入：s = "a#c", t = "b"
+输出：false
+解释：s 会变成 "c"，但 t 仍然是 "b"。
+
+
+提示：
+
+1 <= s.length, t.length <= 200
+s 和 t 只含有小写字母以及字符 '#'
+
+## 思路
+
+使用双指针，快指针遍历，慢指针生成最后的数组。
+
+快指针遇到退格符号后，慢指针回退一次
+
+需要注意不能直接操作字符串，需要将字符串先 split 为数组后操作
+
+## 解法
+
+```js
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+var backspaceCompare = function (s, t) {
+  if (processStr(s) === processStr(t)) {
+    return true
+  }
+  return false
+}
+
+function processStr(str) {
+  const strArr = str.split('')
+  let slow = 0
+  for (let fast = 0; fast < strArr.length; fast++) {
+    if (strArr[fast] !== '#') {
+      strArr[slow] = strArr[fast]
+      slow++
+    } else {
+      if (slow !== 0) {
+        slow--
+      }
+    }
+  }
+  return strArr.slice(0, slow).join('')
+}
+```
+
+```
+Accepted
+114/114 cases passed (60 ms)
+Your runtime beats 80.48 % of javascript submissions
+Your memory usage beats 86.45 % of javascript submissions (41.2 MB)
+```
+
