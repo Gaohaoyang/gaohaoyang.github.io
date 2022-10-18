@@ -198,7 +198,7 @@ PTMs-Papers
 
 ### Hugging face 简介
 
-[Hugging Face](https://huggingface.co/)是一家总部位于纽约的聊天机器人初创服务商，开发的应用在青少年中颇受欢迎，相比于其他公司，Hugging Face更加注重产品带来的情感以及环境因素。
+[Hugging Face](https://huggingface.co/) ![](https://huggingface.co/front/assets/huggingface_logo-noborder.svg) 是一家总部位于纽约的聊天机器人初创服务商，开发的应用在青少年中颇受欢迎，相比于其他公司，Hugging Face更加注重产品带来的情感以及环境因素。
 
 但更令它广为人知的是Hugging Face专注于NLP技术，拥有大型的开源社区。尤其是在github上开源的自然语言处理，预训练模型库 `Transformers`，已被下载超过一百万次，github上超过24000个star。[Transformers](https://github.com/huggingface/transformers) 提供了NLP领域大量state-of-art的 预训练语言模型结构的模型和调用框架。
 
@@ -627,10 +627,12 @@ translator("Ce cours est produit par Hugging Face.")
 [{'translation_text': 'This course is produced by Hugging Face.'}]
 ```
 
-### Demo发布
+### Demo发布（space）
 
 【2022-10-8】[Spaces](https://huggingface.co/spaces) ：Discover amazing ML apps made by the community! 展示各种DEMO
 - [Hugging Face Spaces](https://huggingface.co/spaces) will host the interface on its servers and provide you with a link you can share.
+- 更多用法，参考另一篇日志：[Python下的模型快速部署](https://wqw547243068.github.io/python?#%E6%A8%A1%E5%9E%8B%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2)
+
 
 ## transformers源码
 
