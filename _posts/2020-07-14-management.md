@@ -2,7 +2,7 @@
 layout: post
 title:  "技术管理之路-Path to Management"
 date:   2020-07-14 12:00:00
-categories: 软素质
+categories: 人生规划
 tags: KPI OKR 孙子兵法 三十六计 创新扩散曲线 情商 人脉 招聘
 excerpt: 为什么有的人虽然工作十年，但实际上只有一年经验？
 author: 鹤啸九天

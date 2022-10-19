@@ -2,7 +2,7 @@
 layout: post
 title:  "论文解读：指针网络系列-Paper Reading：Pointer Network"
 date:   2021-03-30 20:00:00
-categories: 论文
+categories: 技术工具
 tags: 自然语言处理 sota 
 excerpt: 指针网络系列论文串联
 author: 鹤啸九天

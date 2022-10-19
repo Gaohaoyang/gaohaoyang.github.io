@@ -2,7 +2,7 @@
 layout: post
 title:  毛泽东思想
 date:   2014-07-13 00:26
-categories: 软素质
+categories: 人文科学
 tags: 历史 文化 哲学 政治 毛泽东 毛选
 excerpt: 毛泽东思想系列笔记
 author: 鹤啸九天

@@ -2,7 +2,7 @@
 layout: post
 title:  "职业化要点-Points to Be More Professional"
 date:   2020-07-13 12:00:00
-categories: 软素质
+categories: 人生规划
 tags: 工作效率 会议效率 舒适区 时间管理 二八定律 KPI OKR 复盘 昨天 今天 明天 表达
 excerpt: 为什么有的人虽然工作十年，但实际上只有一年经验？
 author: 鹤啸九天

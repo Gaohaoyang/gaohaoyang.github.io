@@ -2,7 +2,7 @@
 layout: post
 title:  "Web前端服务知识-Web-Serving"
 date:   2020-08-07 19:17:00
-categories: 技术工具
+categories: 技术工具 编程语言
 tags: Web web Python Flask Django Fastapi Restful Swagger HTML JavaScript Session RPC 微服务 GraphQL UML Gunicorn supervisor genvent grequests node.js vue 前端 低代码 拖拽 api 异步 celery 分布式 apache qps 性能
 author : 鹤啸九天
 excerpt: Web开发相关技术知识点

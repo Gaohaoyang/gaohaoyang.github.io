@@ -2,7 +2,7 @@
 layout: post
 title:  "车联网&自动驾驶-V2X & Auto Driving"
 date:   2021-05-24 10:30:00
-categories: 技术工具
+categories: 技术工具 新技术
 tags: IoT 物联网 车辆网 自动驾驶 无人驾驶 滴滴 何晓飞 飞步 造车 微软 黄埔军校 驾照 汽车 定位 北斗 gps geohash
 author : 鹤啸九天
 excerpt: 车联网及无人驾驶相关技术总结

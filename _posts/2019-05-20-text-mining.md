@@ -2,8 +2,8 @@
 layout: post
 title:  "文本挖掘实战-Text Mining Implementation"
 date:   2019-05-20 13:00:00
-categories: 实战案例
-tags: 生活大爆炸 NLP 自然语言处理 台词 可视化 身份证 华为 微信 诗歌 simhash
+categories: 技术工具
+tags: 生活大爆炸 NLP 自然语言处理 台词 可视化 身份证 华为 微信 诗歌 simhash 实战
 excerpt: 深入挖掘分析生活大爆炸（Big Bang）的台词信息，看看各个角色的常用词汇有哪些
 author: 鹤啸九天
 mathjax: true

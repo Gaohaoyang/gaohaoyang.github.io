@@ -2,7 +2,7 @@
 layout: post
 title:  思维认知培养笔记-How-to-cultivate-logical-thinking
 date:   2020-07-08 10:14:00
-categories: 软素质
+categories: 人文科学
 tags: 逻辑 推理 思维 哲学 三段论 亚里士多德 学习方法 认知 BBC 纪录片 方法论 长尾分布 幂律分布 二八原则 心智 命运 互联网 优越感 数学 读书 内耗
 excerpt: 如何培养自己的逻辑思维能力，一眼看到问题本质，发现漏洞，深度思考？
 author: 鹤啸九天

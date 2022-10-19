@@ -2,7 +2,7 @@
 layout: post
 title:  "计算机图形学 - Computer Graphic"
 date:   2022-09-28 09:03:00
-categories: 计算机基础
+categories: 计算机基础 计算机视觉
 tags: 图形学 opengl webgl three.js 游戏
 excerpt: 计算机图形学及相关应用
 mathjax: true

@@ -2,7 +2,7 @@
 layout: post
 title:  "量化交易-Quantitative Trading"
 date:   2020-10-30 11:04:00
-categories: 经济
+categories: 技术工具
 tags: 股票 预测 量化交易 时间序列
 author : 鹤啸九天
 excerpt: 用技术来辅助炒股，优化交易

@@ -7,7 +7,6 @@ tags: 对话系统 教育 培训 机器人
 excerpt: 智能培训在在线教育中的探索、应用
 author: 鹤啸九天
 mathjax: true
-permalink: /dialogue-system
 ---
 
 * content

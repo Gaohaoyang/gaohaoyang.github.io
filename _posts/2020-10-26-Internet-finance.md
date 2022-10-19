@@ -2,7 +2,7 @@
 layout: post
 title:  "互联网金融-Internet Finance"
 date:   2020-10-26 19:30:00
-categories: 经济
+categories: 人文科学
 tags: P2P 互联网 金融 四大行 股市 K线 对冲 股票 风控
 author : 鹤啸九天
 excerpt: 互联网金融未来发展

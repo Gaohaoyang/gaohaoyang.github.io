@@ -2,7 +2,7 @@
 layout: post
 title:  互联网极客们
 date:   2019-09-15 17:06:00
-categories: 互联网
+categories: 互联网 人物
 tags: 互联网 MIT Aaron_Swartz 季逸超 Magi 阿桑奇 斯诺登 棱镜门 迈克菲
 excerpt: 一个计算机天才的理想道路
 mathjax: true
