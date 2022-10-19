@@ -45,10 +45,13 @@
     }
   })
 
-  // backToTopA.addEventListener('click',function (e) {
-  //     e.preventDefault()
-  //     window.scrollTo(0,0)
-  // })
+  backToTopA.addEventListener('click',function (e) {
+      e.preventDefault()
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    })
+  })
 }());
 
 //////////////////////////hover on demo//////////////////////////////

@@ -5,8 +5,8 @@ categories: JavaScript
 tags: algorithm
 ---
 
-- content
-  {:toc}
+* content
+{:toc}
 
 数组是存放在连续内存空间上的相同类型数据的集合。需要两点注意的是
 
@@ -607,7 +607,7 @@ Your memory usage beats 38.6 % of javascript submissions (45.9 MB)
 1 <= s.length, t.length <= 200
 s 和 t 只含有小写字母以及字符 '#'
 
-## 思路
+### 思路
 
 使用双指针，快指针遍历，慢指针生成最后的数组。
 
@@ -615,7 +615,7 @@ s 和 t 只含有小写字母以及字符 '#'
 
 需要注意不能直接操作字符串，需要将字符串先 split 为数组后操作
 
-## 解法
+### 解法
 
 ```js
 /**
@@ -654,3 +654,69 @@ Your runtime beats 80.48 % of javascript submissions
 Your memory usage beats 86.45 % of javascript submissions (41.2 MB)
 ```
 
+## leetCode 977 有序数组的平方
+
+给你一个按 非递减顺序 排序的整数数组 nums，返回 每个数字的平方 组成的新数组，要求也按 非递减顺序 排序。
+
+示例 1：
+
+输入：nums = [-4,-1,0,3,10]
+输出：[0,1,9,16,100]
+解释：平方后，数组变为 [16,1,0,9,100]
+排序后，数组变为 [0,1,9,16,100]
+示例 2：
+
+输入：nums = [-7,-3,2,3,11]
+输出：[4,9,9,49,121]
+
+
+提示：
+
+1 <= nums.length <= 10^4
+-10^4 <= nums[i] <= 10^4
+nums 已按 非递减顺序 排序
+
+### 思路
+
+![](https://gw.alicdn.com/imgextra/i1/O1CN01ilkNrm1yIF01zYlLZ_!!6000000006555-1-tps-614-386.gif)
+
+取原数组两端，作为2个指针
+
+使用 while 判断 left <= right 时
+
+对比 left 和 right 大小，取大数的平方，存入一个新数组
+
+### 解法
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var sortedSquares = function(nums) {
+  // 高级 api
+  // return nums.map((item) => item * item).sort((a, b) => a - b)
+
+  // 双指针
+  let left = 0
+  let right = nums.length - 1
+  const result = []
+  while (left <= right) {
+    if (Math.abs(nums[left]) < Math.abs(nums[right])) {
+      result.unshift(nums[right] * nums[right])
+      right--
+    } else {
+      result.unshift(nums[left] * nums[left])
+      left++
+    }
+  }
+  return result
+};
+```
+
+```
+Accepted
+137/137 cases passed (152 ms)
+Your runtime beats 15.69 % of javascript submissions
+Your memory usage beats 35.91 % of javascript submissions (47.5 MB)
+```
