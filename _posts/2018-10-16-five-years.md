@@ -2,7 +2,7 @@
 layout: post
 title:  "博士经验总结-Experience about Doctor's life"
 date:   2018-10-16 23:00:00
-categories: 大人物
+categories: 人生规划
 tags: 田渊栋 博士 Facebook 李沐 陈天奇
 excerpt: 值得深思的好文章，现任Facebook人工智能研究院（FAIR LAB）研究员/研究经理，前Google无人驾驶部门软件工程师。本科和硕士毕业于上海交通大学，并在卡内基梅隆大学获得机器人方向博士学位。
 mathjax: true

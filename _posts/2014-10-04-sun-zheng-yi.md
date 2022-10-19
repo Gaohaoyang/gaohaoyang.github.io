@@ -2,7 +2,7 @@
 layout: post
 title:  "【读书笔记】孙正义自传"
 date:   2014-10-04 22:23:00
-categories: 读书笔记 大人物
+categories: 读书笔记 人物
 tags: 投资 孙正义 自传
 excerpt: 日本投资大神孙正义的自传
 mathjax: true
