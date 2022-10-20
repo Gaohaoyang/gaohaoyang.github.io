@@ -15,12 +15,17 @@ mathjax: true
 
 # 总结
 
+- 【2018-2-18】[【直观详解】让你永远忘不了的傅里叶变换解析](https://charlesliuyx.github.io/2018/02/18/%E3%80%90%E7%9B%B4%E8%A7%82%E8%AF%A6%E8%A7%A3%E3%80%91%E8%AE%A9%E4%BD%A0%E6%B0%B8%E8%BF%9C%E5%BF%98%E4%B8%8D%E4%BA%86%E7%9A%84%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E8%A7%A3%E6%9E%90/)
 - 【2021-3-18】[如何理解傅里叶变换](https://www.zhihu.com/question/19714540/answer/514107420)
   - 简易[动图视频](https://vdn1.vzuu.com/SD/d223de46-23a7-11eb-95ec-fe27a5b7ef44.mp4), [傅里叶画小猫](https://vdn1.vzuu.com/SD/558491cc-23ad-11eb-8d25-96e8993416ca.mp4)
 - 知乎上对[傅立叶变换、拉普拉斯变换、Z变换的联系？为什么要进行这些变换。研究的都是什么？](https://www.zhihu.com/question/22085329/answer/26047106)问题的回答
 - 参考：[深入理解傅里叶变换](https://tracholar.github.io/math/2017/03/12/fourier-transform.html)
 
 ## 傅里叶 Demo
+
+[3Blue1Brown 视频讲解](https://www.bilibili.com/video/av19141078/?vd_source=ec1c777505e146eb20d947449d6bba6e)
+
+<iframe src="//player.bilibili.com/player.html?aid=19141078&bvid=BV1pW411J7s8&cid=31220967&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 动图解释傅里叶
 
