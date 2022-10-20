@@ -241,6 +241,16 @@ WebGL学习有门槛，[Three.js](https://threejs.org/) 作为方向入门，就
 [程序员用12小时复刻《羊了个羊》，代码已开源](https://www.toutiao.com/article/7153542634227876383)
 - [Godot版羊了个羊](https://gitcode.net/hello_tute/SheepASheep)
 
+
+### 微信跳一跳
+
+2018年风靡一时的小游戏：跳一跳，背后原理分析，[微信跳一跳解题报告](https://charlesliuyx.github.io/2018/01/19/%E5%BE%AE%E4%BF%A1%E8%B7%B3%E4%B8%80%E8%B7%B3%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/#%E6%B8%B8%E6%88%8F%E6%9C%BA%E5%88%B6)
+1. 问题描述
+2. 游戏机制
+3. 解决方案
+
+
+
 # 结束
 
 
