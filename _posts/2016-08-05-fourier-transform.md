@@ -16,8 +16,21 @@ mathjax: true
 # 总结
 
 - 【2021-3-18】[如何理解傅里叶变换](https://www.zhihu.com/question/19714540/answer/514107420)
-  - 简易[动图视频](https://vdn1.vzuu.com/SD/d223de46-23a7-11eb-95ec-fe27a5b7ef44.mp4), [傅里叶画小猫](https://vdn1.vzuu.com/SD/558491cc-23ad-11eb-8d25-96e8993416ca.mp4?disable_local_cache=1&auth_key=1616043161-0-0-8cbf2f8d73d82c3bfd25e646628a7035&f=mp4&bu=pico&expiration=1616043161&v=hw)
+  - 简易[动图视频](https://vdn1.vzuu.com/SD/d223de46-23a7-11eb-95ec-fe27a5b7ef44.mp4), [傅里叶画小猫](https://vdn1.vzuu.com/SD/558491cc-23ad-11eb-8d25-96e8993416ca.mp4)
 - 知乎上对[傅立叶变换、拉普拉斯变换、Z变换的联系？为什么要进行这些变换。研究的都是什么？](https://www.zhihu.com/question/22085329/answer/26047106)问题的回答
+
+## 傅里叶 Demo
+
+动图解释傅里叶
+
+- <iframe src="https://vdn1.vzuu.com/SD/d223de46-23a7-11eb-95ec-fe27a5b7ef44.mp4" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+
+傅里叶变换画小猫
+
+<video width="620" height="440" controls="controls" autoplay="autoplay">
+  <source src="https://vdn1.vzuu.com/SD/558491cc-23ad-11eb-8d25-96e8993416ca.mp4" type="video/mp4" />
+</video>
+
 
 ## 什么是傅里叶变换
 
@@ -31,7 +44,6 @@ $$
 
 ![waveforms.svg](/assets/images/waveforms.svg)
 
-
 下图是矩形波分解为多个正弦波的示意图，随着正弦波数目的增加，可以无限地逼近矩形波。
 对于非周期信号，我们不能简单地将它展开为可数个正弦波的叠加，但是可以利用傅里叶变换展开为不可数的正弦波的叠加，其表达式可以通过$$f_0 \rightarrow \infty$$简单得到。
 
@@ -42,9 +54,7 @@ $$
 我们日常遇到的琴音、震动等都可以分解为正弦波的叠加，电路中的周期电压信号等信号都可以分解为正弦波的叠加。
 那么问题来了，**为什么我们要将信号分解为正弦波的叠加呢？这里面包含两个问题，为什么要分解？为什么是正弦波（或余弦波），可不可以是其他的波？另一个问题是对通信的同学的，我们学过多个变换那么这些变换之间有哪些关系？** 在下面的篇章中，我将回答这三个问题。
 
-
 ![fourier_series.svg](/assets/images/fourier_series.svg)
-
 
 ## 为什么要分解为正弦波的叠加
 这个问题可以追溯到傅里叶变换的创始人傅里叶解热传导方程的时候，因为热传导方程要求读者对热力学有一定了解，这里我以简谐振子系统为例来说明这个问题。没有阻尼的简谐振子系统可以用下面这个微分方程来描述
