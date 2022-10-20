@@ -18,6 +18,7 @@ mathjax: true
 - 【2021-3-18】[如何理解傅里叶变换](https://www.zhihu.com/question/19714540/answer/514107420)
   - 简易[动图视频](https://vdn1.vzuu.com/SD/d223de46-23a7-11eb-95ec-fe27a5b7ef44.mp4), [傅里叶画小猫](https://vdn1.vzuu.com/SD/558491cc-23ad-11eb-8d25-96e8993416ca.mp4)
 - 知乎上对[傅立叶变换、拉普拉斯变换、Z变换的联系？为什么要进行这些变换。研究的都是什么？](https://www.zhihu.com/question/22085329/answer/26047106)问题的回答
+- 参考：[深入理解傅里叶变换](https://tracholar.github.io/math/2017/03/12/fourier-transform.html)
 
 ## 傅里叶 Demo
 
@@ -41,8 +42,7 @@ s(x) = \frac{A_0}{2} + \sum_{n=1}^{\infty} A_n\cdot \sin(2\pi n f_0 x+\phi_n).
 $$
 
 这里$$f_0$$被称为这些波的基频，$$A_0/2$$代表直流系数，系数$$A_n$$被称为幅度，$$\phi_n$$被称作相位。根据幅度和相位可以利用反变换恢复信号的波形，因此幅度和相位包含了信号的全部信息。这里的幅度关于频率的函数，我们称之为频谱，相位关于频率的函数，称之为相位谱。
-
-![waveforms.svg](/assets/images/waveforms.svg)
+- ![waveforms.svg](https://tracholar.github.io/assets/images/waveforms.svg)
 
 下图是矩形波分解为多个正弦波的示意图，随着正弦波数目的增加，可以无限地逼近矩形波。
 对于非周期信号，我们不能简单地将它展开为可数个正弦波的叠加，但是可以利用傅里叶变换展开为不可数的正弦波的叠加，其表达式可以通过$$f_0 \rightarrow \infty$$简单得到。
@@ -53,8 +53,7 @@ $$
 
 我们日常遇到的琴音、震动等都可以分解为正弦波的叠加，电路中的周期电压信号等信号都可以分解为正弦波的叠加。
 那么问题来了，**为什么我们要将信号分解为正弦波的叠加呢？这里面包含两个问题，为什么要分解？为什么是正弦波（或余弦波），可不可以是其他的波？另一个问题是对通信的同学的，我们学过多个变换那么这些变换之间有哪些关系？** 在下面的篇章中，我将回答这三个问题。
-
-![fourier_series.svg](/assets/images/fourier_series.svg)
+- ![fourier_series.svg](https://tracholar.github.io/assets/images/fourier_series.svg)
 
 ## 为什么要分解为正弦波的叠加
 这个问题可以追溯到傅里叶变换的创始人傅里叶解热传导方程的时候，因为热传导方程要求读者对热力学有一定了解，这里我以简谐振子系统为例来说明这个问题。没有阻尼的简谐振子系统可以用下面这个微分方程来描述
@@ -135,14 +134,11 @@ $$
 
 从模拟信号$$x(t)$$开始，如果模型信号能量是有限的，那么我们可以对它做傅里叶变换，把它用频域表达为$$X(w)$$。如果信号的能量是无限的，那么傅里叶变换将不会收敛，这种时候可以对它做拉普拉斯变换$$X(s)$$。
 如果我们将拉普拉斯的$$s=\sigma+j w$$域画出来，他是一个复平面，拉普拉斯变换$$X(s)$$是这个复平面上的一个复变函数。而这个函数沿虚轴$$j w$$的值$$X(jw)$$就是傅里叶变换。
-
-
-![LaplaceFourier](/assets/images/LaplaceFourier.gif)
+- ![LaplaceFourier](https://tracholar.github.io/assets/images/LaplaceFourier.gif)
 
 
 拉普拉斯变换和傅里叶变换广泛应用在模拟电路分析当中，下图就是对模拟电路中基本元件的$$s$$域建模示意图，当$$s=jw$$时，就是傅里叶变换了。
-
-![S-Domain_circuit_equivalents](/assets/images/S-Domain_circuit_equivalents.svg)
+- ![S-Domain_circuit_equivalents](https://tracholar.github.io/assets/images/S-Domain_circuit_equivalents.svg)
 
 需要明确一个观点，不管使用时域还是频域（或s域）来表示一个信号，他们表示的都是同一个信号！也就是说，上面的时域表达、频域表达和$$s$$域表达都表示的是同一个模拟信号。关于这一点，你可以从线性空间的角度理解。同一个信号，如果采用不同的坐标框架（或者说基向量），那么他们的坐标就不同。例如，采用$$\{\delta(t-\tau )|\tau \in R\}$$作为坐标，那么信号就可以表示为$$x(t)$$，而采用$$\{e^{i w t}|w\in R\}$$则表示为傅里叶变换的形式$$X(w)$$。
 两个不同坐标框架下，同一个向量的坐标可以通过一个线性变换联系起来，如果是有限维的空间，则可以表示为一个矩阵，在这里是无限维，这个线性变换就是傅里叶变换。
@@ -153,7 +149,7 @@ $$
 X_{\text{sampling}}(s) = X(s) \sum_{n=-\infty}^{\infty} e^{n s/f_s}
 $$
 
-![sampling](/assets/images/sampling.jpg)
+![sampling](https://tracholar.github.io/assets/images/sampling.jpg)
 
 对于采样后的信号，可以利用指数变换将$$s$$域的带状区域变换到单位圆内。这就是z变换，它可以看做拉普拉斯变换的一种特殊形式，即做了一个代换$$z=e^ {-s/ f_s}$$，$$f_s$$是采样频率。这个变换将信号从s域变换到z域。请注意，**s域和z域表示的是同一个信号，即采样完了之后的信号，只有采样才会改变信号本身**！从复平面上来看，这个变换将与$$\sigma$$轴平行的条带变换到z平面的一个单叶分支$$2k\pi\le\theta \le 2(k+1)\pi$$，并且将虚轴映射到单位圆。$$z = e^{-jw/f_s}$$时也称作离散时间傅里叶变换(DTFT)。你会看到前面采样导致的周期延拓产生的条带重叠在一起了，因为具有周期性，所以z域不同的分支的函数值$$X(z)$$是相同的。换句话说，如果没有采样，直接进行z变换，将会得到一个多值的复变函数！所以一般只对采样完了后的信号做z变换！
 
