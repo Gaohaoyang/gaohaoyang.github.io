@@ -37,8 +37,18 @@ mathjax: true
   <source src="https://vdn1.vzuu.com/SD/558491cc-23ad-11eb-8d25-96e8993416ca.mp4" type="video/mp4" />
 </video>
 
+### 傅里叶变换通俗入门
+
+【2022-10-20】【精华】[傅里叶变换交互式入门](https://www.jezzamon.com/fourier/zh-cn.html)
+- 交互式讲解，包含 波形→音乐的交互体验
+- 绘制任意形状的图形，自动生成傅里叶变换动画
+- [GitHub](https://github.com/Jezzamonn/fourier)
+
+<iframe src="https://www.jezzamon.com/fourier/zh-cn.html" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
 
 ## 什么是傅里叶变换
+
 
 高等数学中一般是从周期函数的傅里叶级数开始介绍的，这里也不例外。简单的说，从高中我们就学过一个理想的波可以用三角函数来描述，但是实际上的波可以是各种奇形怪状的。首先我们来看具有固定周期的波，下图中展示了4种常见的周期波。傅里叶级数告诉我们，这些周期信号都可以分解为有限或无限个正弦波或余弦波的叠加，且这些波的频率都是原始信号频率$$f_0$$的整数倍。
 
