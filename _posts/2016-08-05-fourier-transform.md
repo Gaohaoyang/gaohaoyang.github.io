@@ -29,7 +29,9 @@ mathjax: true
 
 动图解释傅里叶
 
-- <iframe src="https://vdn1.vzuu.com/SD/d223de46-23a7-11eb-95ec-fe27a5b7ef44.mp4" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+<video width="620" height="440" controls="controls" autoplay="autoplay">
+  <source src="https://vdn1.vzuu.com/SD/d223de46-23a7-11eb-95ec-fe27a5b7ef44.mp4" type="video/mp4" />
+</video>
 
 傅里叶变换画小猫
 
@@ -44,7 +46,7 @@ mathjax: true
 - 绘制任意形状的图形，自动生成傅里叶变换动画
 - [GitHub](https://github.com/Jezzamonn/fourier)
 
-<iframe src="https://www.jezzamon.com/fourier/zh-cn.html" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+<iframe src="https://www.jezzamon.com/fourier/zh-cn.html" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
 ## 什么是傅里叶变换
