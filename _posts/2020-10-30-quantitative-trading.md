@@ -46,6 +46,12 @@ mathjax: true
 
 - ![](https://pic4.zhimg.com/80/v2-aa0d26c1ef5d3d649af97cf01fc91a27_1440w.webp?source=1940ef5c)
 
+### 高频交易 vs 量化交易
+
+【2022-10-21】[高频交易与量化交易到底有什么区别？](https://www.zhihu.com/question/62536190/answer/2466460823)
+- 高频策略对比低频策略有什么优势呢？Marcos Lopez的著名大作《Advances in Financial Machine Learning》第15章给出了数学推导。
+- 高频交易几乎成为量化交易的代名词，主要原因可能不是它的效果比低频好，而是它能充分发挥计算机的算力优势，无论是训练过程还是执行交易过程，计算机在高频方面有天然的优势，人脑无法踏入这个领域。而如果是低频策略的话，人脑也能生成，未必需要用到计算机。
+
 ## 量化交易历史
 
 ![](https://pic1.zhimg.com/80/v2-430a7d184b6b1c4c0ee8151d3a3d6d5b_1440w.webp?source=1940ef5c)
@@ -100,12 +106,37 @@ mathjax: true
 - 【2019-1-4】[利用深度学习和机器学习预测股票市场](https://www.jiqizhixin.com/articles/2019-01-04-16)
   - [英文](https://www.analyticsvidhya.com/blog/2018/10/predicting-stock-price-machine-learningnd-deep-learning-techniques-python/)
 - [DL炒股算法](https://mp.weixin.qq.com/s/locgmjGL_UkNiRrDKrOq_g)
-- [深度学习做股票预测靠谱吗？](https://www.zhihu.com/question/54542998/answer/226949686)
 
+### 机器学习预测靠谱吗
+
+- [深度学习做股票预测靠谱吗？](https://www.zhihu.com/question/54542998/answer/226949686)
 - 预测股市将如何变化历来是最困难的事情之一。这个预测行为中包含着如此之多的因素——包括物理或心理因素、理性或者不理性行为因素等等。所有这些因素结合在一起，使得股价波动剧烈，很难准确预测。
 - 事实证明：
   - 股票价格没有特定的趋势或季节性
   - 股价受到公司新闻和其他因素的影响，如公司的非货币化或合并/分拆。还有一些无形的因素往往是无法事先预测的。
+
+【2022-10-21】[为何机器学习不被二级市场玩家重用？](https://www.zhihu.com/question/424147928/answer/2548318643)
+- 金融市场本身的低`信噪比` (signal-to-noise) 导致机器学习很容易出现`过拟合`。而这一特性导致投资管理人员很难有针对性地对投资组合进行调控。因此机器学习这一工具本身在选股场景下的应用场景还有待商榷。
+
+#### 机器学习的优势
+
+2019年，Keywan Christian Rasekhschaffe 和Robert C. Jones 两位作者就在CFA旗下期刊Financial Analyst Journal (FAJ)发表论文论述机器学习在选股方面的应用。
+- 在机器学习本身的特性，使得其能够帮助挖掘传统线性回归等统计工具所难以发现的规律，例如非线性关系以及解决多重共线性方面具备无可比拟的优势。论文原文链接: [Machine Learning for Stock Selection](​www.tandfonline.com/doi/full/10.1080/0015198X.2019.1596678)
+
+#### 机器学习的缺点
+
+机器学习的缺点也显而易见，金融市场本身数据噪音很大。这和传统机器学习擅长的数据场景有很大的不同。
+- 以图像识别为例，一张照片到底是猫还是狗本身的争议性基本上很小很小。
+- 但一个公司在某一阶段能否产生超额的资产回报这件事儿本身就见仁见智了，而且很可能存在市场内个别资产在某一时间内非理性的大涨大跌，而干扰整个数据集。
+
+这也是为什么在金融市场应用中，常常见到的量化策略在<span style='color:red'>样本内猛如虎，样本外哈士奇</span>的原因。更可怕的是，典型的机器学习算法，在面对如此低信噪比的数据时，很容易出现过拟合的问题。
+
+二位作者利用模拟数据测算，基本上在50次迭代 (iteration) 后，算法模型在样本外的误差不降反升，基本上只是在做过拟合的无用功。
+- <img src="https://pic1.zhimg.com/50/v2-6d7e44f0936d83d5597d2f9da7dbaec4_720w.jpg?source=1940ef5c" data-size="normal" data-rawwidth="624" data-rawheight="296" data-default-watermark-src="https://pic2.zhimg.com/50/v2-e1e6c1547703dcc1fbd9982d2d1589ce_720w.jpg?source=1940ef5c" class="origin_image zh-lightbox-thumb" width="624" data-original="https://pica.zhimg.com/v2-6d7e44f0936d83d5597d2f9da7dbaec4_r.jpg?source=1940ef5c"/>
+
+模拟数据内，机器学习迭代次数和样本外误差的关系当然，两位作者同样提及了一些技术性的解决方案，例如
+- 合并多个算法模型的结果，基于不同样本、风险因子库数据、时间窗口进行数据训练和预测，并采用合并结果等等。
+- 特征工程(feature engineering)则是采用另一种思路，对数据进行处理变形以提升数据本身的信噪比。最终结果也非常惊艳，合并算法的选股收益高于任何单一算法的收益，在纸面上取得了每年接近2%的超额回报，Rank IC达到了惊人的6.5%。绝对是优秀的主动管理组合的水平。
 
 ### 用LR预测股票
 
