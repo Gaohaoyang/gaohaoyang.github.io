@@ -720,3 +720,81 @@ Accepted
 Your runtime beats 15.69 % of javascript submissions
 Your memory usage beats 35.91 % of javascript submissions (47.5 MB)
 ```
+
+# 滑动区间（双指针）
+
+## leetCode 209 长度最小的子数组
+
+给定一个含有 n 个正整数的数组和一个正整数 target 。
+
+找出该数组中满足其和 ≥ target 的长度最小的 连续子数组 [numsl, numsl+1, ..., numsr-1, numsr] ，并返回其长度。如果不存在符合条件的子数组，返回 0 。
+
+示例 1：
+
+输入：target = 7, nums = [2,3,1,2,4,3]
+输出：2
+解释：子数组 [4,3] 是该条件下的长度最小的子数组。
+示例 2：
+
+输入：target = 4, nums = [1,4,4]
+输出：1
+示例 3：
+
+输入：target = 11, nums = [1,1,1,1,1,1,1,1]
+输出：0
+
+提示：
+
+1 <= target <= 10^9
+1 <= nums.length <= 10^5
+1 <= nums[i] <= 10^5
+
+## 思路
+
+使用双指针，滑动窗口的思路
+
+![](https://gw.alicdn.com/imgextra/i2/O1CN01bpmyGx1SdFSgBYuBB_!!6000000002269-1-tps-558-432.gif)
+
+1. 快指针正常遍历
+2. 累加快指针的值
+3. 判断累加值是否大于等于 target，获取子串的长度
+4. 累加值减去慢指针的值
+5. 慢指针 + 1
+6. 循环 3-5
+7. 循环 1-6
+
+## 解法
+
+```js
+/**
+ * @param {number} target
+ * @param {number[]} nums
+ * @return {number}
+ */
+var minSubArrayLen = function (target, nums) {
+  // 双指针滑动区间
+  let slow = 0 // 滑动窗口的起始位置
+  let sum = 0 // 滑动窗口数值之和
+  let subLength = 0 // 滑动窗口的长度
+  let result = nums.length + 1 // 最终结果
+  for (let fast = 0; fast < nums.length; fast++) {
+    // fast 为滑动窗口的终点位置
+    sum += nums[fast]
+    while (sum >= target) {
+      // 如果满足条件，寻找最小的子序列
+      subLength = fast - slow + 1
+      result = Math.min(result, subLength)
+      sum -= nums[slow]
+      slow += 1
+    }
+  }
+  return result === nums.length + 1 ? 0 : result
+}
+```
+
+```
+Accepted
+20/20 cases passed (68 ms)
+Your runtime beats 64.23 % of javascript submissions
+Your memory usage beats 77.99 % of javascript submissions (45.1 MB)
+```
