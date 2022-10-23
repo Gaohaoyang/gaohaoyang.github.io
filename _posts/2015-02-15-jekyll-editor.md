@@ -966,6 +966,32 @@ Here is one mermaid diagram:
     end
 ```
 
+简易模板
+
+<div class="mermaid">
+    flowchart LR
+    %% 节点颜色
+    classDef red fill:#f02;
+    classDef green fill:#5CF77B;
+    classDef blue fill:#6BE0F7;
+    classDef orange fill:#F7CF6B;
+    classDef grass fill:#C8D64B;
+    %%节点关系定义
+    O[(环境)]-->A(自我):::green
+    A --> B(本我):::blue
+    B --> D
+    B --> E
+    A --> C(超我):::orange
+    C --> F
+    subgraph new [大脑结构]
+        direction TB
+        D(原始皮层,脑干)
+        E(古皮层,边缘系统)
+        F(新皮层,前额叶)
+        D -.->|进化-哺乳动物| E -.->|进化-高级哺乳动物,灵长类| F
+    end
+</div>
+
 
 And here is another:
 <div class="mermaid">
