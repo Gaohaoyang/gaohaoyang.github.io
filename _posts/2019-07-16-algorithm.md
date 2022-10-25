@@ -2,7 +2,7 @@
 layout: post
 title:  "计算机经典基础算法总结-Classical Algorithm"
 categories: 计算机基础
-tags:  数据结构 算法 KMP Morris 二叉树 字符串 leetcode 面试 图 匹配 匈牙利
+tags:  数据结构 算法 KMP Morris 二叉树 字符串 leetcode 面试 图 匹配 匈牙利 牛顿法 二分法
 author: 风之筝
 excerpt: 有哪些经典算法让人拍手称快、赞叹不已？
 mathjax: true
@@ -898,6 +898,52 @@ int main(){
 
 注意：折半查找需要注意给定的序列必须是一个有序序列。
 
+二分查找的前提
+- 目标函数的**单调性**（单调递增或者递减）
+- 存在**上下界**（bounded）
+- 能够通过**索引**访问（index accessible）
+
+示例：求 $\sqrt{x}$ 的值, [leetcode 题目](https://leetcode-cn.com/problems/sqrtx/)
+
+```python
+# 二分查找方式解决
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        l, r, ans = 0, x, -1
+        while l <= r:
+            mid = (l + r) // 2
+            if mid * mid <= x:
+                ans = mid
+                l = mid + 1
+            else:
+                r = mid - 1
+        return ans
+```
+
+C语言版本
+
+```c
+int sqrt(int x)
+{
+    if (x < 2)	// 处理特殊情况
+        return x;
+    
+    int left = 1, right = x / 2;
+    while (left <= right) {
+        # 避免溢出，相当于 mid = (left + right) / 2
+        int mid = left + ((right - left) >> 1);
+        if (mid == x / mid)
+            return mid;
+        else if (mid > x / mid)
+            right = mid - 1;
+        else
+            left = mid + 1;
+    }
+    return right;
+}
+```
+
+
 #### 分块查找（折中）
 
 基本原理：
@@ -909,6 +955,47 @@ int main(){
 - 建立了索引表，索引表按关键字有序。
 
 [img](https://img-blog.csdn.net/20140515153642875) ![img](https://img-blog.csdn.net/20140515153642875)
+
+
+#### 牛顿查找（查找加速）
+
+`牛顿—拉弗森迭代法`（简称`牛顿法`）使用以直代曲的思想，是一种求解函数的方法，不仅仅适用于求解开方计算。当然使用牛顿法求解函数也存在很多坑，但对于求解开方而言，牛顿法是安全的。
+
+牛顿迭代法：
+- 在迭代过程中，以直线代替曲线，用一阶泰勒展开式（即在当前点的切线）代替原曲线，求直线与x轴的交点，重复这个过程直到收敛。[img](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/11/15/16e6e894c3690a21~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.image)
+- ![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/11/15/16e6e894c3690a21~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.image)
+
+$\begin{aligned}
+& y-f\left(x_{i}\right)=f\left(x_{i}\right)^{\prime}\left(x-x_{i}\right) \\
+\Longrightarrow & y-\left(x_{i}^{2}-n\right)=2 x_{i}\left(x-x_{i}\right) \\
+\Longrightarrow & y+x_{i}^{2}+n=2 x_{i} x
+\end{aligned}$
+
+
+```python
+# 牛顿迭代法解决（python）
+class Solution(object):
+    def mySqrt(self, x):
+        r = x
+        while r*r > x:
+            r = (r + x/r) / 2
+        return r
+```
+
+C语言版本
+
+```c
+// 牛顿迭代法解决（C语言）
+float InvSqrt(float x){
+    float xhalf = 0.5f*x;
+    int i = *(int*)&x;
+    i = 0x5f3759df   // Magic Number
+    x = *(float*)&i;
+    x = x*(1.5f - xhalf*x*x);
+    return x;
+}
+```
+
 
 ### 动态查找（修改表）
 
