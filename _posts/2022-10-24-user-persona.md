@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "用户画像 User persona"
-date:   2022-10-26 13:30:00
+date:   2022-10-24 13:30:00
 categories: 数据挖掘
 tags: 用户画像 标签
 excerpt: 如何刻画用户特征？用户画像有哪些类别，标签如何构建，怎么使用画像？
