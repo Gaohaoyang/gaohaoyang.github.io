@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "机器学习本质-The-Essense-of-Machine Learning"
+title:  "机器学习本质 The-Essense-of-Machine Learning"
 date:   2016-10-21 18:32:00
 categories: 机器学习
-tags: 机器学习 周志华 通用逼近定理 归纳 演绎 凸函数 漂移 可解释 逼近 本质
+tags: 机器学习 周志华 通用逼近定理 归纳 演绎 漂移 可解释 逼近 本质
 excerpt: 机器学习的本质到底是什么？有哪些优缺点，存在哪些局限性
 mathjax: true
 permalink: /ml
@@ -14,17 +14,18 @@ permalink: /ml
 
 # 总结
 
-## 机器学习与函数拟合
+## 机器学习学科关系
 
 - 【2021-4-6】[图灵奖得主Jeff Ullman直言：机器学习不是数据科学的全部！统计学也不是](https://blog.csdn.net/BAAIBeijing/article/details/115410720), [原文链接](http://sites.computer.org/debull/A20june/p8.pdf)
   - 我并不认为机器学习可以完全取代数据库社区开发的算法
-- 三个问题:
-1. 统计真的是数据科学的重要组成部分吗？
-2. 机器学习就是数据科学的全部吗？
-3. 数据科学是否会对社会规范是否构成威胁？
-我对这三个问题的回答都是“no”。
-- [学科关系图](https://img-blog.csdnimg.cn/img_convert/356d169890f926178ca74e71e8ba8406.png)
-  - ![](https://img-blog.csdnimg.cn/img_convert/356d169890f926178ca74e71e8ba8406.png)
+
+三个问题:
+1. 统计真的是数据科学的重要组成部分吗？<span style='red'>no</span>
+2. 机器学习就是数据科学的全部吗？<span style='red'>no</span>
+3. 数据科学是否会对社会规范是否构成威胁？<span style='red'>no</span>
+
+[学科关系图](https://img-blog.csdnimg.cn/img_convert/356d169890f926178ca74e71e8ba8406.png)
+- ![](https://img-blog.csdnimg.cn/img_convert/356d169890f926178ca74e71e8ba8406.png)
 - 几乎图表中的每一个区域在某种程度上都有误导性。
   - 1、首先，一个小问题: 所谓的“实质性专门知识”一般要统称为”领域知识”或类似的东西。
   - 2、最严重的问题是将计算机科学称为“黑客技能”。计算机科学给数据科学带来的远不止是编写代码的能力。我们提供算法、模型和框架，来解决各种各样的问题。所有这些在处理数据时都是必不可少的。
@@ -37,16 +38,18 @@ permalink: /ml
 - 机器学习的黑箱理论一直让人诟病，不放心
 - 那么，机器学习的本质到底是什么？怎么提升可解释性？
 
-- 【2020-8-5】机器学习的本质（摘自：[机器学习漫谈](https://tracholar.github.io/machine-learning/2017/12/07/machine-learning-talk.html)）
-  - 归纳法：机器学习本质上就是在做**归纳推理**，并且是不完全的归纳法
-    - 利用某种算法从数据中自动归纳出有意义的规律的一种方法
-    - 人类的推理方法大致可以分为两种
-      - 一种是`演绎`法：从一般到特殊
-      - 另一种是`归纳`法：从特殊到一般
-  - `函数拟合`：监督学习本质上就是在函数拟合，而且很多模型可以拟合任意连续函数
-    - 分类和回归的区别在于拟合的目标变量y的取值构成的是**无限**集合（回归）还是**有限**集合（分类）
-    - 模型拟合能力，事实上已经有很多模型可以做到对任意连续函数做到任意精度的逼近。
-    - 通用逼近定理（[Universal approximation theorem](https://en.wikipedia.org/wiki/Universal_approximation_theorem)）：单隐层神经网络即可任意逼近闭集上的任意连续函数，只要隐层节点数量足够多
+## 机器学习本质
+
+【2020-8-5】机器学习的本质（摘自：[机器学习漫谈](https://tracholar.github.io/machine-learning/2017/12/07/machine-learning-talk.html)），要点：<span style='blue'>机器学习的本质是归纳推理（不完全归纳）、监督学习本质是函数拟合（任意连续函数）</span>
+- `归纳法`：机器学习本质上就是在做**归纳推理**，并且是不完全归纳法
+  - 利用某种算法从数据中自动归纳出有意义的规律的一种方法
+  - 人类的推理方法大致可以分为两种
+    - 一种是`演绎`法：从一般到特殊
+    - 另一种是`归纳`法：从特殊到一般
+- `函数拟合`：监督学习本质上就是在**函数拟合**，而且很多模型可以拟合**任意连续函数**
+  - 分类和回归的区别在于拟合的目标变量y的取值构成的是**无限**集合（回归）还是**有限**集合（分类）
+  - 模型拟合能力，事实上已经有很多模型可以做到对任意连续函数做到任意精度的逼近。
+  - 通用逼近定理（[Universal approximation theorem](https://en.wikipedia.org/wiki/Universal_approximation_theorem)）：单隐层神经网络即可任意逼近闭集上的任意连续函数，只要隐层节点数量足够多
 
 【2022-7-11】[鄂维南：从数学角度，理解机器学习的“黑魔法”，并应用于更广泛的科学问题](https://new.qq.com/omn/20220711/20220711A047PL00.html)
 
@@ -71,10 +74,12 @@ permalink: /ml
 
 从数学出发，理解机器学习的“黑魔法”：监督学习的数学理论
 
-机器学习本质上是高维中的数学问题。
-- **神经网络**是**高维函数逼近**的有效手段；这便为人工智能领域、科学以及技术领域提供了众多新的可能性。
+<span style='blue'>机器学习本质上是高维中的数学问题</span>。
+- **神经网络**是**高维函数逼近**的有效手段；为人工智能领域、科学以及技术领域提供了众多新的可能性。
 
-这也开创了数学领域的一个新主题：**高维分析学**。总结如下：
+这也开创了数学领域的一个新主题：**高维分析学**。
+
+总结如下：
 - 监督学习：高维函数理论；
 - 无监督学习：高维概率分布理论；
 - 强化学习：高维Bellman方程；
@@ -82,131 +87,12 @@ permalink: /ml
 
 ## 概念漂移
 
-- 概念漂移【2020-3-26】摘自：[为什么机器学习模型会在生产过程中退化？](https://www.toutiao.com/a6757502924768674316/)
+- 概念漂移
+  - 【2020-3-26】摘自：[为什么机器学习模型会在生产过程中退化？](https://www.toutiao.com/a6757502924768674316/)
   - 所有ML项目中，预测数据将如何随时间变化
   - 【概念漂移】: 表示模型试图预测的目标变量的统计特性随着时间以不可预见的方式发生变化。这导致了一些问题，因为随着时间的推移，预测的准确性会降低。
   - 在概念漂移的情况下，对数据的解释随时间而变化，而数据分布则没有变化。这导致最终用户将模型预测解释为随着时间的推移，对相同/相似数据的预测已经恶化。数据和概念都可能同时漂移，使问题更加棘手。
   - 大多数模型只能捕获训练数据的模式。好的模型捕获了这些数据的基本部分，而忽略了不重要的部分。这创建了泛化的性能，但是任何模型都有一定程度的局限性。
-
-【2020-9-2】logistic 回归当约束 所有的参数为非负的时候还是有全局最优的吗？
-- LR是凸函数，已被证明（[逻辑回归目标函数为凸函数证明](https://zhuanlan.zhihu.com/p/76639936)）；损失函数的海塞矩阵是正定的
-  - 如何判定凸函数？ 若函数二阶导数为正， 则该函数为凸函数， 同理， 对于多元函数，则是其Hessian矩阵 为正定矩阵， 则该函数为凸函数；
-  - 凸函数的局部最优解即是全局最优解
-  - 凸优化：**目标函数**是`凸函数`而且优化变量的**可行域**是`凸集`，是因为缺其中任何一个条件都不能保证局部最优解是全局最优解
--  kkt 是个必要条件， 不敢完全判断带约束的也是有全局最优的解；
-- 带约束的优化， 可行域如果不是凹区域， 凸函数在这个可行域上也是有全局最优解；如果可行域是凸集，则凸函数在这个可行域上也是有全局最优解的，参考：[理解凸优化](https://zhuanlan.zhihu.com/p/37108430)，[熊军的笔记](https://note.youdao.com/ynoteshare1/index.html?id=a49d2e78bb131dcb591291a5f6126b78&type=note)
-
-- 代码
-
-```python
-# coding=utf8
-"""
-本代码主要实现两种带约束的lr的算法步骤：
-数据集： iris 数据集
-"""
-
-import torch
-from torch.nn.functional import cross_entropy
-from torch.optim import SGD
-from sklearn.datasets import load_iris
-from torch.utils.data import dataset
-from torch.utils.data import dataloader
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-
-class Ds(dataset.Dataset):
-    """
-    构建一个dataset类， 继承torch官方的Dataset
-    """
-    def __init__(self):
-        super(dataset.Dataset, self).__init__()
-        iris_data = load_iris()
-        self.data = iris_data['data']
-        self.labels = iris_data['target']
-
-    def __len__(self):
-        return len(self.labels)
-
-    def __getitem__(self, item):
-        x = self.data[item]
-        y = self.labels[item]
-        x = torch.Tensor(x)
-        y = torch.LongTensor([y])
-        return x, y
-
-
-class Trainer(object):
-    def __init__(self):
-        """
-        训练集合的特征个数是4， 类别是3
-        """
-        self.model = torch.nn.Linear(4, 3)
-        self.zeros = torch.zeros(3, 4)
-        self.modify_weight()
-        # 打印初始的模型参数， 确保所有的参数大于等于0
-        print(self.model.weight)
-
-    def train(self, epochs=1000, batch_size=16, lr=0.01):
-        dl = self.get_data_loader(batch_size)
-        loss_func = cross_entropy  # 定义损失函数为logistic的损失函数
-        optimizer = SGD(self.model.parameters(), lr=lr)
-        loss_arr = []
-        for epoch in range(epochs):
-            cur_loss = self.train_epoch(epoch, dl, loss_func, optimizer)
-            loss_arr.append(cur_loss)
-
-        print("*" * 100)
-        print("following is the parameters of the model")
-        for name, parameters in self.model.named_parameters():
-            print(name)
-            print(parameters.data)
-        print(loss_arr)
-        do_plot(list(range(epochs)), loss_arr)
-
-    def train_epoch(self, epoch, dl, loss_func, optimizer):
-        self.model.train()
-        loss_arr = []
-        for batch in dl:
-            self.model.zero_grad()  # 将所有的gradient 重置为0
-            x, y = batch
-            y = torch.squeeze(y, 1)  # 将里面的二维数组变成一维数组
-            pred = self.model(x)
-            loss = loss_func(pred, y)  # 计算logloss
-            loss.backward()
-            optimizer.step()
-            self.modify_weight()
-            print(f"epoch is: {epoch}, training loss is: {loss.item()}")
-            loss_arr.append(loss.item())
-        return sum(loss_arr) / len(loss_arr)
-
-    def get_data_loader(self, batch_size):
-        # 初始化iris 的dataset
-        ds = Ds()
-        dl = dataloader.DataLoader(ds, batch_size)
-        return dl
-
-    def modify_weight(self):
-        """
-        用来修改模型，让模型参数在可行区域
-        """
-        new_para = torch.max(self.zeros, self.model.weight.data)
-        self.model.weight.data.copy_(new_para)
-
-
-def do_plot(epoch_arr, loss_arr):
-    """
-    用来画不同epoch 对应的loss
-    """
-    sns.lineplot(x="epoch", y="loss", data={"epoch": epoch_arr, "loss": loss_arr})
-    plt.show()
-
-
-if __name__ == "__main__":
-    trainer = Trainer()
-    trainer.train()
-
-```
 
 
 ## 周志华：机器学习本质
