@@ -12,12 +12,12 @@ mathjax: true
 * content
 {:toc}
 
-# 总结
 
 - 【2022-1-13】[北大出品，最强元宇宙报告，200页干货](https://mp.weixin.qq.com/s/OuHXv30PCf_RoxHfdLCAzw)
 - 【2021-10-31】[清华大学：2021元宇宙研究报告](https://www.163.com/dy/article/GNL04QMN0519KHAT.html)
 - 【2022-1-28】Meta: You will own nothing, and you will be happy... 元宇宙：让你一无所有却难以自拔
   - ![](https://p3.toutiaoimg.com/large/tos-cn-i-qvj2lq49k0/cbd33023b2d342ab96037fa934106cb6)
+- 【2022-10-26】[可视化数字人技术在 Soul 的应用](https://mp.weixin.qq.com/s/79toed_WdjFhdP6Enb0ITA),凭借自己的虚拟化身，基于自己的信息图谱或推荐，体验多样的沉浸式社交场景，在接近真实的体验中去交流娱乐，最终找到与自己志同道合的朋友建立社交关系。
 
 # 元宇宙
 
