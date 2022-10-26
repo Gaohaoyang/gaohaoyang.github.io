@@ -3,7 +3,7 @@ layout: post
 title:  "Tensorflow学习笔记"
 date:   2020-08-31 17:25:00
 categories: 编程语言
-tags: Tensorflow Python 深度学习 Pytorch TensorRT 推理加速 onnx
+tags: Tensorflow Python 深度学习 Pytorch tensorrt 推理加速 onnx
 excerpt: Tensorflow编程技能汇总
 author: 鹤啸九天
 mathjax: true
