@@ -798,3 +798,187 @@ Accepted
 Your runtime beats 64.23 % of javascript submissions
 Your memory usage beats 77.99 % of javascript submissions (45.1 MB)
 ```
+
+## leetCode 904 水果成篮
+
+你正在探访一家农场，农场从左到右种植了一排果树。这些树用一个整数数组 fruits 表示，其中 fruits[i] 是第 i 棵树上的水果 种类 。
+
+你想要尽可能多地收集水果。然而，农场的主人设定了一些严格的规矩，你必须按照要求采摘水果：
+
+你只有 两个 篮子，并且每个篮子只能装 单一类型 的水果。每个篮子能够装的水果总量没有限制。
+你可以选择任意一棵树开始采摘，你必须从 每棵 树（包括开始采摘的树）上 恰好摘一个水果 。采摘的水果应当符合篮子中的水果类型。每采摘一次，你将会向右移动到下一棵树，并继续采摘。
+一旦你走到某棵树前，但水果不符合篮子的水果类型，那么就必须停止采摘。
+给你一个整数数组 fruits ，返回你可以收集的水果的 最大 数目。
+
+
+
+示例 1：
+
+输入：fruits = [1,2,1]
+输出：3
+解释：可以采摘全部 3 棵树。
+示例 2：
+
+输入：fruits = [0,1,2,2]
+输出：3
+解释：可以采摘 [1,2,2] 这三棵树。
+如果从第一棵树开始采摘，则只能采摘 [0,1] 这两棵树。
+示例 3：
+
+输入：fruits = [1,2,3,2,2]
+输出：4
+解释：可以采摘 [2,3,2,2] 这四棵树。
+如果从第一棵树开始采摘，则只能采摘 [1,2] 这两棵树。
+示例 4：
+
+输入：fruits = [3,3,3,1,2,1,1,2,3,3,4]
+输出：5
+解释：可以采摘 [1,2,1,1,2] 这五棵树。
+
+
+提示：
+
+1 <= fruits.length <= 10^5
+0 <= fruits[i] < fruits.length
+
+## 思路
+
+我们可以使用滑动窗口解决本题，`left` 和 `right` 分别表示满足要求的窗口的左右边界，同时我们使用哈希表存储这个窗口内的数以及出现的次数。
+
+我们每次将 `right` 移动一个位置，并将 `fruits[right]` 加入哈希表。如果此时哈希表不满足要求（即哈希表中出现超过两个键值对），那么我们需要不断移动 `left`，并将 `fruits[left]` 从哈希表中移除，直到哈希表满足要求为止。
+
+需要注意的是，将 `fruits[left]` 从哈希表中移除的时候，如果 `fruits[left]` 在哈希表中的出现次数减少为 `0`，需要将对应的键值对从哈希表中移除。
+
+## 解法
+
+```js
+/**
+ * @param {number[]} fruits
+ * @return {number}
+ */
+var totalFruit = function(fruits) {
+  // 我们可以使用滑动窗口解决本题，left 和 right 分别表示满足要求的窗口的左右边界，同时我们使用哈希表存储这个窗口内的数以及出现的次数。
+
+  // 我们每次将 right 移动一个位置，并将 fruits[right] 加入哈希表。如果此时哈希表不满足要求（即哈希表中出现超过两个键值对），那么我们需要不断移动 left，并将 fruits[left] 从哈希表中移除，直到哈希表满足要求为止。
+
+  // 需要注意的是，将 fruits[left] 从哈希表中移除的时候，如果 fruits[left] 在哈希表中的出现次数减少为 0，需要将对应的键值对从哈希表中移除。
+
+  let res = 0
+  let left = 0
+
+  const cateObj = {}
+
+  for (let right = 0; right < fruits.length; right++) {
+    cateObj[fruits[right]] = (cateObj[fruits[right]] || 0) + 1
+    while (Object.keys(cateObj).length > 2) {
+      cateObj[fruits[left]] -= 1
+      if (cateObj[fruits[left]] === 0) {
+        delete cateObj[fruits[left]]
+      }
+      left++
+    }
+    res = Math.max(res, right - left + 1)
+  }
+  return res
+};
+```
+
+```
+Accepted
+91/91 cases passed (396 ms)
+Your runtime beats 8.35 % of javascript submissions
+Your memory usage beats 5.85 % of javascript submissions (56.7 MB)
+```
+
+# 螺旋矩阵
+
+## leetCode
+
+给你一个正整数 n ，生成一个包含 1 到 n2 所有元素，且元素按顺时针顺序螺旋排列的 n x n 正方形矩阵 matrix 。
+
+
+示例 1：
+
+![](https://gw.alicdn.com/imgextra/i4/O1CN01HyfCt21Q222qwT65l_!!6000000001917-2-tps-242-242.png)
+
+输入：n = 3
+输出：[[1,2,3],[8,9,4],[7,6,5]]
+示例 2：
+
+输入：n = 1
+输出：[[1]]
+
+
+提示：
+
+1 <= n <= 20
+
+## 思路
+
+最外层用 while 进行圈数循环，然后沿着各个边进行循环，填写相应的值
+
+## 解法
+
+```js
+/**
+ * @param {number} n
+ * @return {number[][]}
+ */
+var generateMatrix = function (n) {
+  let loop = 0
+  let startX = 0
+  let startY = 0
+  let offset = 1
+  let count = 1
+  let i = 0
+  let j = 0
+
+  // 初始化二位数组
+  const res = []
+  for (let i = 0; i < n; i++) {
+    const temp = []
+    for (let j = 0; j < n; j++) {
+      temp.push(0)
+    }
+    res.push(temp)
+  }
+
+  // 旋转的圈数
+  while (loop < n / 2) {
+    // 四条边进行循环
+    for (j = startY; j < n - offset; j += 1) {
+      res[startX][j] = count
+      count += 1
+    }
+    for (i = startX; i < n - offset; i += 1) {
+      res[i][j] = count
+      count += 1
+    }
+    for (; j > startY; j -= 1) {
+      res[i][j] = count
+      count += 1
+    }
+    for (; i > startX; i -= 1) {
+      res[i][j] = count
+      count += 1
+    }
+    startX += 1
+    startY += 1
+    offset += 1
+    loop += 1
+  }
+
+  // 奇数有个中心值
+  if (n % 2 === 1) {
+    res[i][j] = count
+  }
+  return res
+}
+```
+
+```
+Accepted
+20/20 cases passed (52 ms)
+Your runtime beats 95.38 % of javascript submissions
+Your memory usage beats 89.85 % of javascript submissions (41 MB)
+```
