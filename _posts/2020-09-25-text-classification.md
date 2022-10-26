@@ -3,7 +3,7 @@ layout: post
 title:  "文本分类-Text Classification"
 date:   2020-09-25 14:52:00
 categories: 深度学习
-tags: 文本分类 负采样 fasttext kaggle 增强 层次分类
+tags: 文本分类 负采样 fasttext kaggle 增强 层次分类 bert tensorrt
 excerpt: NLP子领域文本分类知识汇总
 author: 鹤啸九天
 mathjax: true
@@ -94,6 +94,14 @@ permalink: /classification
 |---|---|---|
 |16|射击游戏|星际激斗战斗重燃，《星空要塞》是一个基于未来科学背景的策略游戏。。。。|
 
+
+### THUCNews-清华
+
+[中文文本分类数据集THUCNews](http://thuctc.thunlp.org/#%E4%B8%AD%E6%96%87%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%E6%95%B0%E6%8D%AE%E9%9B%86THUCNews)
+- THUCNews是根据新浪新闻RSS订阅频道2005~2011年间的历史数据筛选过滤生成，包含**74万**篇新闻文档（2.19 GB），均为 UTF-8 纯文本格式。
+- 原始新浪新闻分类体系的基础上，重新整合划分出**14个**候选分类类别：财经、彩票、房产、股票、家居、教育、科技、社会、时尚、时政、体育、星座、游戏、娱乐。
+- 使用THUCTC工具包在此数据集上进行评测，准确率可以达到**88.6%**。
+
 ## 文本增强
 
 【2022-8-5】
@@ -122,7 +130,7 @@ pip install nlpcda
 - 【2021-2-2】文本分类方法[表格汇总](https://github.com/leerumor/nlp_tutorial/blob/main/README.md#para2cls)
 
 
-# 评估方法
+## 评估方法
 
 不同类型的文本分类往往有不同的评价指标，具体如下：
 - **二**分类：accuracy，precision，recall，f1-score，...
@@ -153,7 +161,6 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
 from sklearn.metrics import classification_report
-
 
 train_data = pd.read_csv(sys.argv[1],sep='|', names=["a","b","c","label"])
 test_data = pd.read_csv(sys.argv[2],sep='|', names=["a","b","c","label"])
@@ -1197,6 +1204,38 @@ HAN：一种采用了attention机制的用于文本分类的分层注意力模�
 ### BERT
 
 BERT：Pre-training of Deep Bidirectional Transformers for Language Understanding，双向的Transformers的Encoder，是谷歌于2018年10月提出的。主要是一种预训练的模型，通过双向transformer实现的，通过mask的机制，随机遮挡部分的单词进行词向量的预训练，同时在每个位置token表征的时候引入了token向量，segment向量和position向量相结合的方式，能更全面的语义进行表征，同时通过mask的机制使得单次的训练中，词向量的学习过程能同时引入前后文的信息，而不是通过双向RNN那种生硬拼接的方式，从结果上来说，该模型的效果在很多任务上表现显著。
+
+#### BERT分类
+
+【2022-10-26】[How to Fine-Tune BERT for Text Classification?](https://arxiv.org/abs/1905.05583), [code](https://github.com/xuyige/BERT4doc-Classification)
+- 单任务：[run_classifier.py](https://github.com/xuyige/BERT4doc-Classification/blob/master/codes/fine-tuning/run_classifier.py)
+- 多任务：[run_classifier_multitask.py](https://github.com/xuyige/BERT4doc-Classification/blob/master/codes/fine-tuning/run_classifier_multitask.py)
+
+#### BERT加速
+
+【2022-10-26】[BERT文本分类最佳解决方案](https://zhuanlan.zhihu.com/p/464711536)
+- BERT文本分类指的是在\[CLS\]后面接一个 FFN + softmax，然后用标记数据微调BERT参数。
+- BERT文本分类微调可以说是**多分类**的sota模型了。但是，在生产应用中，<span style='color:red'>推理速度一直是个瓶颈</span>。
+
+BERT文本分类最佳解决方案（之一）就是用 TensorFlow 2 进行训练，再用 TensorRT 进行推理。
+- 在RTX 3090单卡上，单条文本耗时可达<span style='color:green'>4.00毫秒</span>。
+
+keras加成的tf2变得非常好用了，丝滑程度不输Pytorch。
+
+- 训练BERT分类模型的代码库是[bert-classification-train-tf2](https://gitee.com/nlp_pupil/bert-classification-train-tf2)，该代码库使用简单，只需要准备标记数据即可。
+- TensorRT是在NVIDIA各种GPU硬件平台下运行的一个C++推理框架。
+- 利用Pytorch、TF或者其他框架训练好的模型，可以转化为TensorRT的格式，然后利用TensorRT推理引擎去运行我们这个模型，从而提升这个模型在英伟达GPU上运行的速度。
+
+BERT分类模型推理的代码库是[bert-classification-inference-trt](https://gitee.com/nlp_pupil/bert-classification-inference-trt)。
+
+运行结束后，最后两行显示：
+- 准确率: <span style='color:green'>94.92%</span>
+- 平均每条文本耗时: <span style='color:green'>4.00毫秒</span>
+
+基于TensorRT推理，准确率有1个百分点的损失
+
+对比
+- fasttex 训练好的模型在测试集上的准确率是92.9%，比TensorRT预测结果小2个百分点，比BERT微调训练小3个百分点
 
 ### XLNet
 
