@@ -2,7 +2,7 @@
 layout: post
 title:  "计算机经典基础算法总结-Classical Algorithm"
 categories: 计算机基础
-tags:  数据结构 算法 KMP Morris 二叉树 字符串 leetcode 面试 图 匹配 匈牙利 牛顿法 二分法
+tags:  数据结构 算法 KMP Morris 二叉树 字符串 leetcode 面试 图 匹配 匈牙利 牛顿法 二分法 字节
 author: 风之筝
 excerpt: 有哪些经典算法让人拍手称快、赞叹不已？
 mathjax: true
@@ -2806,6 +2806,1376 @@ int rand7(){
 每次拿起一块巧克力，掰一下（无论横着还是竖着）都会变成两块，因为所有的巧克力共有N\*M块，所以要掰N\*M-1次，-1是因为最开始的一块是不用算进去的。
 
 每一场辩论赛参加两个人，消失一个人，所以可以看作是每一场辩论赛减少一个人，直到最后剩下1个人，所以是1000-1=999场。
+
+
+## 大厂高频题
+
+### 字节高频题目
+
+【2022-10-27】[字节高频算法题](https://zhuanlan.zhihu.com/p/546395751)，整体分布
+- ![](https://pic2.zhimg.com/80/v2-2a746c23031dfa09880eb7129e14be25_1440w.webp)
+
+#### 最长子串
+
+[3\. 无重复字符的最长子串](https://leetcode.cn/problems/longest-substring-without-repeating-characters/)
+ 
+思路：滑动窗口
+ 
+```python
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        i,j = 0,0
+        maxlen = 0
+ 
+        while j<len(s):
+            
+            while True:
+                if s\[j\] not in s\[i:j\]:
+                    break
+                i+=1
+            
+            maxlen = max(maxlen,j-i+1)
+            j+=1
+            
+        return maxlen
+```
+ 
+#### 最小栈
+ 
+[155\. 最小栈](https://leetcode.cn/problems/min-stack/)
+ 
+思路：辅助栈
+ 
+```python
+class MinStack:
+    def \_\_init\_\_(self):
+        self.stack = \[\]
+        self.min_stack = \[math.inf\]
+ 
+    def push(self, x: int) -> None:
+        self.stack.append(x)
+        self.min\_stack.append(min(x, self.min\_stack\[-1\]))
+ 
+    def pop(self) -> None:
+        self.stack.pop()
+        self.min_stack.pop()
+ 
+    def top(self) -> int:
+        return self.stack\[-1\]
+ 
+    def getMin(self) -> int:
+        return self.min_stack\[-1\]
+```
+
+#### 接雨水
+
+[42\. 接雨水](https://leetcode.cn/problems/trapping-rain-water/)
+ 
+思路：单调栈
+ 
+```python
+class Solution:
+    def trap(self, height: List\[int\]) -> int:
+        ans = 0
+        current = 0
+        stack = \[\]
+        while current<len(height):
+            while len(stack)>0 and height\[current\]>height\[stack\[-1\]\] :
+                top = stack.pop()
+                if len(stack)==0:
+                    break
+                distance = current-stack\[-1\]-1
+                bounded_height = min(height\[stack\[-1\]\],height\[current\])-height\[top\]
+                ans+=distance*bounded_height
+            
+            stack.append(current)
+            current+=1
+        return ans
+```
+ 
+#### 买卖股票时机
+ 
+[121\. 买卖股票的最佳时机](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/)
+ 
+思路：动态规划
+ 
+```python
+class Solution:
+    def maxProfit(self, prices: List\[int\]) -> int:
+ 
+        dp = \[0\]*len(prices)
+        min_prices = prices\[0\]
+ 
+        for i in range(1,len(prices)):
+            dp\[i\] = max(dp\[i-1\],prices\[i\]-min_prices)
+            min\_prices = min(min\_prices,prices\[i\])
+ 
+        return dp\[-1\]
+```
+ 
+#### 二叉树右视图
+ 
+[199\. 二叉树的右视图](https://leetcode.cn/problems/binary-tree-right-side-view/)
+ 
+思路：层序遍历
+ 
+```python
+# class TreeNode:
+#     def \_\_init\_\_(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def rightSideView(self, root: Optional\[TreeNode\]) -> List\[int\]:
+     # deque来自collections模块，不在力扣平台时，需要手动写入
+     # 'from collections import deque' 导入
+     # deque相比list的好处是，list的pop(0)是O(n)复杂度，deque的popleft()是O(1)复杂度
+     
+        if not root:
+            return \[\]
+        
+        queue = deque(\[root\])
+        right_list = \[\]
+ 
+        while queue:
+            node = queue\[-1\]
+            right_list.append(node.val)
+ 
+            for _ in range(len(queue)):
+                node = queue.popleft()
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+        
+        return right_list
+```
+ 
+#### 栈实现队列
+ 
+[232\. 用栈实现队列](https://leetcode.cn/problems/implement-queue-using-stacks/)
+ 
+思路：两个栈互相倒酒
+ 
+```python
+class MyQueue:
+ 
+    def \_\_init\_\_(self):
+        self.stack_in = \[\]
+        self.stack_out = \[\]
+ 
+    def empty(self) -> bool:
+        return not (self.stack\_in or self.stack\_out)
+ 
+    def push(self, x: int) -> None:
+        self.stack_in.append(x)
+ 
+    def pop(self) -> int:
+        if self.empty():
+            return None
+        if self.stack_out:
+            return self.stack_out.pop()
+        else:
+            for i in range(len(self.stack_in)):
+                self.stack\_out.append(self.stack\_in.pop())
+            return self.stack_out.pop()
+ 
+ 
+    def peek(self) -> int:
+        """
+        Get the front element.
+        """
+        ans = self.pop()
+        self.stack_out.append(ans) #取出来 还要放回去
+        return ans
+ 
+ 
+ 
+# Your MyQueue object will be instantiated and called as such:
+# obj = MyQueue()
+# obj.push(x)
+# param_2 = obj.pop()
+# param_3 = obj.peek()
+# param_4 = obj.empty()
+```
+ 
+#### 前序、中序构建二叉树
+ 
+[105\. 从前序与中序遍历序列构造二叉树](https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
+ 
+思路：递归
+ 
+```python
+# class TreeNode:
+#     def \_\_init\_\_(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def buildTree(self, preorder: List\[int\], inorder: List\[int\]) -> TreeNode:
+        # 实际上inorder 和 postorder一定是同时为空的，因此你无论判断哪个都行
+        if not preorder:
+            return None
+        root = TreeNode(preorder\[0\])
+ 
+        i = inorder.index(root.val)
+        root.left = self.buildTree(preorder\[1:i + 1\], inorder\[:i\])
+        root.right = self.buildTree(preorder\[i + 1:\], inorder\[i+1:\])
+ 
+        return root
+```
+ 
+#### 最长回文子串
+ 
+[5\. 最长回文子串](https://leetcode.cn/problems/longest-palindromic-substring/)
+ 
+思路：递归
+ 
+```python
+class Solution:
+    def expandAroundCenter(self, s, left, right):
+        while left >= 0 and right < len(s) and s\[left\] == s\[right\]:
+            left -= 1
+            right += 1
+        return left + 1, right - 1
+        # 注意这里是left+1 和 right-1
+ 
+    def longestPalindrome(self, s: str) -> str:
+        start, end = 0, 0
+        for i in range(len(s)):
+            left1, right1 = self.expandAroundCenter(s, i, i)
+            left2, right2 = self.expandAroundCenter(s, i, i + 1)
+            if right1 - left1 > end - start:
+                start, end = left1, right1
+            if right2 - left2 > end - start:
+                start, end = left2, right2
+        return s\[start: end + 1\]
+```
+ 
+#### 对称二叉树
+ 
+[101\. 对称二叉树](https://leetcode.cn/problems/symmetric-tree/)
+ 
+思路：递归 出口写好来
+ 
+```python
+class Solution:
+    def isSymmetric(self, root: Optional\[TreeNode\]) -> bool:
+ 
+        def compare(p, q):
+            if p==None and q!=None:
+                return False
+            if p!=None and q==None:
+                return False
+            if p==None and q==None:
+                return True
+ 
+            if p!=None and q!=None:
+ 
+                if p.val != q.val:
+                    return False
+                else:
+                    return compare(p.left, q.right) and compare(p.right, q.left)
+        
+        if not root:
+            return True
+        
+        return compare(root.left, root.right)
+```
+ 
+#### 打家劫舍
+ 
+[198\. 打家劫舍](https://leetcode.cn/problems/house-robber/)
+ 
+思路：动态规划
+ 
+```python
+class Solution:
+    def rob(self, nums: List\[int\]) -> int:
+        dp = \[0\]*len(nums)
+        dp\[0\] = nums\[0\]
+        for i in range(1,len(nums)):
+            if(i<2):
+                dp\[i\]= max(dp\[i-1\],nums\[i\])
+            else:
+                dp\[i\] = max(dp\[i-1\],dp\[i-2\]+nums\[i\])
+ 
+        return dp\[-1\]
+```
+ 
+#### x平方根
+ 
+[69\. x 的平方根](https://leetcode.cn/problems/sqrtx/)
+ 
+思路：二分法
+ 
+```python
+class Solution(object):
+    def mySqrt(self, x):
+        if x == 0 or x == 1:
+            return x
+ 
+        low, high, res = 1, x, -1
+ 
+        while low <= high:
+            mid = (low + high) // 2
+            if mid * mid <= x:
+                res = mid
+                low = mid + 1
+            else:
+                high = mid - 1
+ 
+        return res
+```
+ 
+#### 链表倒数第k个节点
+ 
+[剑指 Offer 22. 链表中倒数第k个节点](https://leetcode.cn/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/)
+ 
+思路：双指针
+ 
+```python
+# class ListNode:
+#     def \_\_init\_\_(self, x):
+#         self.val = x
+#         self.next = None
+ 
+class Solution:
+    def getKthFromEnd(self, head: ListNode, k: int) -> ListNode:
+ 
+        fast, slow = head, head
+        for i in range(k):
+            fast = fast.next
+        
+        while fast:
+            slow = slow.next
+            fast = fast.next
+        return slow
+```
+ 
+#### 环形链表
+ 
+[142\. 环形链表 II](https://leetcode.cn/problems/linked-list-cycle-ii/)
+ 
+思路：双指针
+ 
+```python
+class Solution:
+    def detectCycle(self, head: ListNode) -> ListNode:
+        slow, fast = head, head
+ 
+        while fast!=None and fast.next!=None:
+            slow = slow.next
+            fast = fast.next.next
+ 
+            if slow==fast:
+                p = head
+                q = slow
+                while p!=q:
+                    p = p.next
+                    q = q.next
+ 
+                return p
+ 
+        return None
+```
+ 
+#### 寻找重复数
+ 
+[287\. 寻找重复数](https://leetcode.cn/problems/find-the-duplicate-number/)
+ 
+思路：双指针
+ 
+```python
+class Solution:
+    def findDuplicate(self, nums: List\[int\]) -> int:
+ 
+        slow, fast = 0, 0
+        while True:
+            slow = nums\[slow\]           # 类比链表slow=slow.next
+            fast = nums\[nums\[fast\]\]     # 类比链表fast=fast.next.next
+            if fast == slow:    # 首次相遇点
+                break
+        
+        fast = 0                # fast回到起点
+        while slow != fast:     # 再次相遇点即为重复数字
+            slow = nums\[slow\]
+            fast = nums\[fast\]
+        
+        return fast
+```
+ 
+#### 滑动窗口最大值
+ 
+[239\. 滑动窗口最大值](https://leetcode.cn/problems/sliding-window-maximum/)
+ 
+思路：双向队列
+ 
+```python
+class Solution:
+    def maxSlidingWindow(self, nums: List\[int\], k: int) -> List\[int\]:
+ 
+        # 如果数组为空或 k = 0，直接返回空
+        if not nums or not k:
+            return \[\]
+        # 如果数组只有1个元素，直接返回该元素
+        if len(nums) == 1:
+            return \[nums\[0\]\]
+ 
+        # 初始化队列和结果，队列存储数组的下标
+        queue = \[\]
+        res = \[\]
+ 
+        for i in range(len(nums)):
+            # 如果当前队列最左侧存储的下标等于 i-k 的值，代表目前队列已满。
+            # 但是新元素需要进来，所以列表最左侧的下标出队列
+            if queue and queue\[0\] == i - k:
+                queue.pop(0)
+ 
+            # 对于新进入的元素，如果队列前面的数比它小，那么前面的都出队列
+            while queue and nums\[queue\[-1\]\] < nums\[i\]:
+                queue.pop()
+            # 新元素入队列
+            queue.append(i)
+ 
+            # 当前的大值加入到结果数组中
+            if i >= k-1:
+                res.append(nums\[queue\[0\]\])
+ 
+        return res
+```
+ 
+#### 反转链表
+ 
+[剑指 Offer II 024. 反转链表](https://leetcode.cn/problems/UHnkqh/)
+ 
+思路：双指针迭代
+ 
+```python
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        cur, pre = head, None
+        while cur:
+            tmp = cur.next # 暂存后继节点 cur.next
+            cur.next = pre # 修改 next 引用指向
+            pre = cur      # pre 暂存 cur
+            cur = tmp      # cur 访问下一节点
+        return pre
+```
+ 
+#### k个数组翻转链表
+ 
+[25\. K 个一组翻转链表](https://leetcode.cn/problems/reverse-nodes-in-k-group/)
+ 
+思路：多指针
+ 
+[力扣](https://leetcode.cn/problems/reverse-nodes-in-k-group/solution/k-ge-yi-zu-fan-zhuan-lian-biao-by-leetcode-solutio/)
+ 
+```python
+class Solution:
+    # 翻转一个子链表，并且返回新的头与尾
+    def reverse(self, head: ListNode, tail: ListNode):
+        prev = tail.next
+        p = head
+        while prev != tail:
+            nex = p.next
+            p.next = prev
+            prev = p
+            p = nex
+        return tail, head
+ 
+    def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
+        hair = ListNode(0)
+        hair.next = head
+        pre = hair
+ 
+        while head:
+            tail = pre
+            # 查看剩余部分长度是否大于等于 k
+            for i in range(k):
+                tail = tail.next
+                if not tail:
+                    return hair.next
+            nex = tail.next
+            head, tail = self.reverse(head, tail)
+            # 把子链表重新接回原链表
+            pre.next = head
+            tail.next = nex
+            pre = tail
+            head = tail.next
+        
+        return hair.next
+```
+ 
+#### 字符串相加
+ 
+[415\. 字符串相加](https://leetcode.cn/problems/add-strings/)
+ 
+思路：双指针
+ 
+```python
+class Solution:
+    def addStrings(self, num1: str, num2: str) -> str:
+        res = ""
+        i, j, carry = len(num1) - 1, len(num2) - 1, 0
+        while i >= 0 or j >= 0:
+            n1 = int(num1\[i\]) if i >= 0 else 0
+            n2 = int(num2\[j\]) if j >= 0 else 0
+            tmp = n1 + n2 + carry
+            carry = tmp // 10
+            res = str(tmp % 10) + res
+            i, j = i - 1, j - 1
+        return "1" + res if carry else res
+```
+ 
+#### 相交链表
+ 
+[160\. 相交链表](https://leetcode.cn/problems/intersection-of-two-linked-lists/)
+ 
+思路：双指针
+ 
+```python
+class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+        A, B = headA, headB
+        while A != B:
+            A = A.next if A else headB
+            B = B.next if B else headA
+        return A
+```
+ 
+#### 有效的括号
+ 
+[20\. 有效的括号](https://leetcode.cn/problems/valid-parentheses/)
+ 
+思路：用栈匹配
+ 
+```python
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stack = \[\]
+        
+        for item in s:
+            if item == '(':
+                stack.append(')')
+            elif item == '\[':
+                stack.append('\]')
+            elif item == '{':
+                stack.append('}')
+            elif not stack or stack\[-1\] != item:
+                return False
+            else:
+                stack.pop()
+        
+        return True if not stack else False
+```
+ 
+#### 最长递增子序列
+ 
+[300\. 最长递增子序列](https://leetcode.cn/problems/longest-increasing-subsequence/)
+ 
+思路：动态规划
+ 
+```python
+class Solution:
+    def lengthOfLIS(self, nums: List\[int\]) -> int:
+        if not nums: return 0
+        dp = \[1\] * len(nums)
+        for i in range(len(nums)):
+            for j in range(i):
+                if nums\[j\] < nums\[i\]: # 如果要求非严格递增，将此行 '<' 改为 '<=' 即可。
+                    dp\[i\] = max(dp\[i\], dp\[j\] + 1)
+        return max(dp)
+```
+ 
+二分法：
+ 
+```python
+class Solution:
+    def lengthOfLIS(self, nums: \[int\]) -> int:
+        tails, res = \[0\] * len(nums), 0
+        for num in nums:
+            i, j = 0, res
+            while i < j:
+                m = (i + j) // 2
+                if tails\[m\] < num: i = m + 1 # 如果要求非严格递增，将此行 '<' 改为 '<=' 即可。
+                else: j = m
+            tails\[i\] = num
+            if j == res: res += 1
+        return res
+```
+ 
+#### 二叉树最近公共祖先
+ 
+[236\. 二叉树的最近公共祖先](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/)
+ 
+思路：递归
+ 
+```python
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        # 当前节点为空，直接返回空
+        if root == None:
+            return None
+        # 如果 root 等于 p 或者 q，那最近公共祖先一定是 p 或者 q
+        if root == p or root == q:
+            return root
+        # 递归左右子树，保存递归结果
+        left = self.lowestCommonAncestor(root.left, p, q)
+        right = self.lowestCommonAncestor(root.right, p, q)
+        # 如果 left 和 right 都非空，那证明 p 和 q 一边一个，那么最近公共祖先就是 root
+        if left and right:
+            return root
+        # 如果 right 为空，只需要看 left
+        if left and right == None:
+            return left
+        # 如果 left 为空，只需要看 right 
+        if left == None and right:
+            return right
+        # 如果都为空，返回空
+        if left == None and right == None:
+            return None
+```
+ 
+#### 岛屿数量
+ 
+[200\. 岛屿数量](https://leetcode.cn/problems/number-of-islands/)
+ 
+思路：dfs 或 bfs
+ 
+```python
+class Solution:
+    def numIslands(self, grid: \[\[str\]\]) -> int:
+        def dfs(grid, i, j):
+            if not 0 <= i < len(grid) or not 0 <= j < len(grid\[0\]) or grid\[i\]\[j\] == '0': return
+            grid\[i\]\[j\] = '0'
+            dfs(grid, i + 1, j)
+            dfs(grid, i, j + 1)
+            dfs(grid, i - 1, j)
+            dfs(grid, i, j - 1)
+        count = 0
+        for i in range(len(grid)):
+            for j in range(len(grid\[0\])):
+                if grid\[i\]\[j\] == '1':
+                    dfs(grid, i, j)
+                    count += 1
+        return count
+```
+ 
+  
+ 
+```python
+class Solution:
+    def numIslands(self, grid: \[\[str\]\]) -> int:
+        def bfs(grid, i, j):
+            queue = \[\[i, j\]\]
+            while queue:
+                \[i, j\] = queue.pop(0)
+                if 0 <= i < len(grid) and 0 <= j < len(grid\[0\]) and grid\[i\]\[j\] == '1':
+                    grid\[i\]\[j\] = '0'
+                    queue += \[\[i + 1, j\], \[i - 1, j\], \[i, j - 1\], \[i, j + 1\]\]
+        count = 0
+        for i in range(len(grid)):
+            for j in range(len(grid\[0\])):
+                if grid\[i\]\[j\] == '0': continue
+                bfs(grid, i, j)
+                count += 1
+        return count
+```
+ 
+#### 螺旋矩阵
+ 
+[54\. 螺旋矩阵](https://leetcode.cn/problems/spiral-matrix/)
+ 
+思路：找规律 按规律来
+ 
+```python
+class Solution:
+    def spiralOrder(self, matrix: List\[List\[int\]\]) -> List\[int\]:
+        m = len(matrix)
+        n = len(matrix\[0\])
+        res = \[\]
+        l, r, t, b = 0, n - 1, 0, m - 1
+        num, tar = 1, m * n
+        while num <= tar:
+            if t<=b:
+                for i in range(l, r + 1): # left to right
+                    res.append(matrix\[t\]\[i\])
+                    num+=1
+            t += 1
+            if l<=r:
+                for i in range(t, b + 1): # top to bottom
+                    res.append(matrix\[i\]\[r\])
+                    num+=1
+            r -= 1
+            if t<=b:
+                for i in range(r, l - 1, -1): # right to left
+                    res.append(matrix\[b\]\[i\])
+                    num+=1
+            b -= 1
+            if l<=r:
+                for i in range(b, t - 1, -1): # bottom to top
+                    res.append(matrix\[i\]\[l\])
+                    num+=1
+            l += 1
+        return res
+ 
+function= Solution()
+matrix = \[\[1,2,3,4\],\[5,6,7,8\],\[9,10,11,12\]\]
+print(function.spiralOrder(matrix))
+```
+ 
+#### 合并有序数组
+ 
+[88\. 合并两个有序数组](https://leetcode.cn/problems/merge-sorted-array/)
+ 
+思路：双指针
+ 
+```python
+class Solution:
+    def merge(self, nums1: List\[int\], m: int, nums2: List\[int\], n: int) -> None:
+        """
+        Do not return anything, modify nums1 in-place instead.
+        """
+        sorted = \[\]
+        p1, p2 = 0, 0
+        while p1 < m or p2 < n:
+            if p1 == m:
+                sorted.append(nums2\[p2\])
+                p2 += 1
+            elif p2 == n:
+                sorted.append(nums1\[p1\])
+                p1 += 1
+            elif nums1\[p1\] < nums2\[p2\]:
+                sorted.append(nums1\[p1\])
+                p1 += 1
+            else:
+                sorted.append(nums2\[p2\])
+                p2 += 1
+        nums1\[:\] = sorted
+```
+ 
+  
+ 
+也可以把list2加到list1后 快排 或者 归并排序
+ 
+#### 多数元素
+ 
+[169\. 多数元素](https://leetcode.cn/problems/majority-element/)
+ 
+思路：动脑筋
+ 
+```python
+class Solution:
+    def majorityElement(self, nums: List\[int\]) -> int:
+        nums.sort()
+        return nums\[len(nums) // 2\]
+```
+ 
+#### 路径总和
+ 
+[113\. 路径总和 II](https://leetcode.cn/problems/path-sum-ii/)
+ 
+思路：dfs+回溯
+ 
+```python
+class Solution:
+    def pathSum(self, root: Optional\[TreeNode\], targetSum: int) -> List\[List\[int\]\]:
+ 
+        def addpath(root, presum):
+            
+            if not root.left and not root.right:
+                if presum == 0:
+                    result.append(path\[:\])
+                    return 
+ 
+            if root.left:
+                path.append(root.left.val)
+                addpath(root.left, presum-root.left.val)
+                path.pop()
+            if root.right:
+                path.append(root.right.val)
+                addpath(root.right, presum-root.right.val)
+                path.pop()
+ 
+ 
+        result = \[\]
+        
+        if not root:
+            return \[\]
+        path = \[root.val\]
+        addpath(root,targetSum-root.val)
+        return result
+```
+ 
+#### 反转链表
+ 
+[92\. 反转链表 II](https://leetcode.cn/problems/reverse-linked-list-ii/)
+ 
+思路：双指针
+ 
+![](https://pic2.zhimg.com/80/v2-5b6ff0d69c9a5538e57a058571000469_1440w.webp)
+ 
+```python
+class Solution:
+    def reverseBetween(self, head: ListNode, left: int, right: int) -> ListNode:
+        def reverse\_linked\_list(head: ListNode):
+            # 也可以使用递归反转一个链表
+            pre = None
+            cur = head
+            while cur:
+                next = cur.next
+                cur.next = pre
+                pre = cur
+                cur = next
+ 
+        # 因为头节点有可能发生变化，使用虚拟头节点可以避免复杂的分类讨论
+        dummy_node = ListNode(-1)
+        dummy_node.next = head
+        pre = dummy_node
+        # 第 1 步：从虚拟头节点走 left - 1 步，来到 left 节点的前一个节点
+        # 建议写在 for 循环里，语义清晰
+        for _ in range(left - 1):
+            pre = pre.next
+ 
+        # 第 2 步：从 pre 再走 right - left + 1 步，来到 right 节点
+        right_node = pre
+        for _ in range(right - left + 1):
+            right\_node = right\_node.next
+        # 第 3 步：切断出一个子链表（截取链表）
+        left_node = pre.next
+        curr = right_node.next
+ 
+        # 注意：切断链接
+        pre.next = None
+        right_node.next = None
+ 
+        # 第 4 步：同第 206 题，反转链表的子区间
+        reverse\_linked\_list(left_node)
+        # 第 5 步：接回到原来的链表中
+        pre.next = right_node
+        left_node.next = curr
+        return dummy_node.next
+```
+ 
+#### rand7实现rand10
+ 
+[470\. 用 Rand7() 实现 Rand10()](https://leetcode.cn/problems/implement-rand10-using-rand7/)
+ 
+思路：玩脑袋
+ 
+```python
+class Solution:
+    def rand10(self) -> int:
+        while True:
+            row = rand7()
+            col = rand7()
+            idx = (row - 1) * 7 + col
+            if idx <= 40:
+                return 1 + (idx - 1) % 10
+```
+ 
+#### 搜索二维矩阵
+ 
+[74\. 搜索二维矩阵](https://leetcode.cn/problems/search-a-2d-matrix/)
+ 
+思路：二分法
+ 
+```python
+class Solution:
+    def searchMatrix(self, matrix: List\[List\[int\]\], target: int) -> bool:
+        '''两次二分法'''
+        """
+        思路：
+            第一次二分法确定目标位于哪一行
+            第二次二分法，判断是否在这一行
+        """
+        # 第一次二分法确定目标位于哪一行
+        m = len(matrix)
+        n = len(matrix\[0\])
+        l = 0
+        r = m - 1
+        while l < r:
+            mid = (l + r + 1) // 2
+            if matrix\[mid\]\[0\] < target:
+                l = mid 
+            elif matrix\[mid\]\[0\] > target:
+                r = mid - 1
+            else:
+                return True
+        row = l  # 记录在哪一行
+ 
+        # 第二次二分法，判断是否在这一行
+        l = 0
+        r = n - 1
+        while l <= r:
+            mid = (l + r) // 2
+            if matrix\[row\]\[mid\] < target:
+                l = mid + 1
+            elif matrix\[row\]\[mid\] > target:
+                r = mid - 1
+            else:
+                return True
+        return False
+```
+ 
+#### 单词搜索
+ 
+[79\. 单词搜索](https://leetcode.cn/problems/word-search/)
+ 
+思路：dfs+回溯
+ 
+```python
+class Solution:
+    def exist(self, board: List\[List\[str\]\], word: str) -> bool:
+ 
+        m = len(board)
+        n = len(board\[0\])
+        if(len(word)>m*n):
+            return False
+        track = \[\]
+        res = \[\]
+ 
+ 
+        def dfs(board, i,j, step):
+ 
+            if(len(track)==len(word)):
+                res.append(track)
+ 
+            if (not 0<=i<=m-1 or not 0<=j<=n-1 or len(track)>len(word) or step>len(word)-1 or board\[i\]\[j\]!=word\[step\] or board\[i\]\[j\] == '#'):
+                return
+            
+            track.append(board\[i\]\[j\])
+            
+            tmp = board\[i\]\[j\]
+            board\[i\]\[j\] = '#'
+ 
+            dfs(board, i-1, j, step+1)
+            dfs(board,i,j-1,step+1) 
+            dfs(board,i+1,j,step+1) 
+            dfs(board, i,j+1,step+1)
+ 
+            board\[i\]\[j\] = tmp
+            track.pop()
+ 
+ 
+        for i in range(m):
+            for j in range(n):
+                step = 0
+ 
+                if(board\[i\]\[j\]==word\[0\]):
+                    dfs(board,i,j,step)
+                    
+        if(len(res)!=0):
+            return True
+ 
+        else:
+            return False
+```
+ 
+#### 有序数组中找头尾位置
+ 
+[34\. 在排序数组中查找元素的第一个和最后一个位置](https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/)
+ 
+思路：二分法 注意范围
+ 
+```python
+class Solution:
+    def searchRange(self, nums: List\[int\], target: int) -> List\[int\]:
+        result = \[\]
+        left, right = 0, len(nums)-1
+        while left<right:
+            mid = (left+right)//2
+            if(target>nums\[mid\]):
+                left = mid+1
+            elif(target<nums\[mid\]):
+                right = mid-1
+            else:
+                right = mid
+        if(len(nums)>left>-1 and nums\[left\]==target):
+            result.append(left)
+        else:
+            result.append(-1)
+        #print(result)
+        left, right = 0, len(nums)-1
+        while left<right:
+            mid = ceil((left+right)/2)
+            if(target>nums\[mid\]):
+                left = mid+1
+            elif(target<nums\[mid\]):
+                right = mid-1
+            else:
+                left = mid
+        if(len(nums)>right>-1 and nums\[right\]==target):
+            result.append(right)
+        else:
+            result.append(-1)
+        
+        return result
+```
+ 
+#### 三数之和
+
+[15\. 三数之和](https://leetcode.cn/problems/3sum/)
+ 
+思路：双指针
+ 
+```python
+class Solution:
+    def threeSum(self, nums):
+        ans = \[\]
+        n = len(nums)
+        nums.sort()
+        for i in range(n):
+            left = i + 1
+            right = n - 1
+            if nums\[i\] > 0:
+                break
+            if i >= 1 and nums\[i\] == nums\[i - 1\]:
+                continue
+            while left < right:
+                total = nums\[i\] + nums\[left\] + nums\[right\]
+                if total > 0:
+                    right -= 1
+                elif total < 0:
+                    left += 1
+                else:
+                    ans.append(\[nums\[i\], nums\[left\], nums\[right\]\])
+                    while left != right and nums\[left\] == nums\[left + 1\]: left += 1
+                    while left != right and nums\[right\] == nums\[right - 1\]: right -= 1
+                    left += 1
+                    right -= 1
+        return ans
+```
+ 
+#### 两数之和
+ 
+[1\. 两数之和](https://leetcode.cn/problems/two-sum/)
+ 
+思路：哈希表匹配
+ 
+```python
+class Solution:
+    def twoSum(self, nums: List\[int\], target: int) -> List\[int\]:
+        hashtable = dict()
+        for i, num in enumerate(nums):
+            if target - num in hashtable:
+                return \[hashtable\[target - num\], i\]
+            hashtable\[nums\[i\]\] = i
+        return \[\]
+```
+ 
+#### 二叉树的锯齿形层序遍历
+ 
+[103\. 二叉树的锯齿形层序遍历](https://leetcode.cn/problems/binary-tree-zigzag-level-order-traversal/)
+ 
+思路：层序遍历
+ 
+```python
+class Solution:
+    def maxSubArray(self, nums: List\[int\]) -> int:
+        sum_ = float('-inf')
+        result = float('-inf')
+        for i in range(len(nums)):
+            if sum_>0:
+                sum_ = sum_ + nums\[i\]
+            else:
+                sum_ = nums\[i\]
+            
+            result = max(sum_, result)
+        return result
+```
+ 
+#### 环形链表
+ 
+[141\. 环形链表](https://leetcode.cn/problems/linked-list-cycle/)
+ 
+思路：双指针
+ 
+```python
+class Solution:
+    def hasCycle(self, head: Optional\[ListNode\]) -> bool:
+        slow, fast = head, head
+ 
+        while fast!=None and fast.next!=None:
+            slow = slow.next
+            fast = fast.next.next
+ 
+            if slow==fast:
+                return True
+ 
+        return False
+```
+ 
+#### 合并两个有序链表
+ 
+[21\. 合并两个有序链表](https://leetcode.cn/problems/merge-two-sorted-lists/)
+ 
+思路：双指针
+ 
+```python
+class Solution:
+    def mergeTwoLists(self, list1: Optional\[ListNode\], list2: Optional\[ListNode\]) -> Optional\[ListNode\]:
+        result = ListNode(0)
+        real = result
+        p1 = list1
+        p2 = list2
+        while p1!=None and p2!=None:
+            if(p1.val<=p2.val):
+                tmp = ListNode(p1.val)
+                result.next = tmp
+                result = tmp
+                p1 = p1.next
+            else:
+                tmp = ListNode(p2.val)
+                result.next = tmp
+                result = tmp
+                p2 = p2.next
+        
+        if(p1!=None):
+            result.next = p1
+        if(p2!=None):
+            result.next = p2
+        
+        return real.next
+```
+ 
+#### 颠倒字符串单词
+
+[151\. 颠倒字符串中的单词](https://leetcode.cn/problems/reverse-words-in-a-string/)
+ 
+思路：双指针
+ 
+```python
+class Solution:
+    #1.去除多余的空格
+        def trim_spaces(self,s):     
+            n=len(s)
+            left=0
+            right=n-1
+        
+            while left<=right and s\[left\]==' ':       #去除开头的空格
+                left+=1
+            while left<=right and s\[right\]==' ':        #去除结尾的空格
+                right-=1
+            tmp=\[\]
+            while left<=right:                                    #去除单词中间多余的空格
+                if s\[left\]!=' ':
+                    tmp.append(s\[left\])
+                elif tmp\[-1\]!=' ':                                  
+                    #当前位置是空格，但是相邻的上一个位置不是空格，则该空格是合理的
+                    tmp.append(s\[left\])
+                left+=1
+            return tmp
+    #2.翻转字符数组
+        def reverse_string(self,nums,left,right):
+            while left<right:
+                nums\[left\], nums\[right\]=nums\[right\],nums\[left\]
+                left+=1
+                right-=1
+            return None
+    #3.翻转每个单词
+        def reverse\_each\_word(self, nums):
+            start=0
+            end=0
+            n=len(nums)
+            while start<n:
+                while end<n and nums\[end\]!=' ':
+                    end+=1
+                self.reverse_string(nums,start,end-1)
+                start=end+1
+                end+=1
+            return None
+ 
+    #4.翻转字符串里的单词
+        def reverseWords(self, s): #测试用例："the sky is blue"
+            l = self.trim_spaces(s)                     
+            #输出：\['t', 'h', 'e', ' ', 's', 'k', 'y', ' ', 'i', 's', ' ', 'b', 'l', 'u', 'e'
+            self.reverse_string( l,  0, len(l) - 1)   
+            #输出：\['e', 'u', 'l', 'b', ' ', 's', 'i', ' ', 'y', 'k', 's', ' ', 'e', 'h', 't'\]
+            self.reverse\_each\_word(l)               
+            #输出：\['b', 'l', 'u', 'e', ' ', 'i', 's', ' ', 's', 'k', 'y', ' ', 't', 'h', 'e'\]
+            return ''.join(l)
+```
+ 
+#### 全排列
+ 
+[46\. 全排列](https://leetcode.cn/problems/permutations/)
+ 
+思路：dfs 回溯
+ 
+```python
+class Solution:
+    def permute(self, nums: List\[int\]) -> List\[List\[int\]\]:
+ 
+        track = \[\]
+        tracklist = \[\]
+ 
+        def dfs(nums,track,tracklist):
+            
+             
+            if(len(track)==len(nums)):
+                tracklist.append(track.copy())
+                return 
+            
+            
+            for i in range(len(nums)):
+                if(nums\[i\] in track):
+                    continue
+                track.append(nums\[i\])
+                dfs(nums,track,tracklist)
+                track.pop()
+ 
+        dfs(nums,track,tracklist)
+        return tracklist
+```
+ 
+#### 验证二叉搜索树
+ 
+[98\. 验证二叉搜索树](https://leetcode.cn/problems/validate-binary-search-tree/)
+ 
+思路：中序遍历 看是否升序
+ 
+```python
+class Solution:
+    def isValidBST(self, root: Optional\[TreeNode\]) -> bool:
+        candidate_list = \[\]
+        # 中序遍历
+ 
+        def traverse(root):
+ 
+            if not root:
+                return 
+            traverse(root.left)
+            candidate_list.append(root.val)
+            traverse(root.right)
+ 
+        def issorted(nums):
+            for i in range(1, len(nums)):
+                if nums\[i\]<=nums\[i-1\]:
+                    return False
+ 
+            return True
+ 
+        traverse(root)
+        return issorted(candidate_list)
+```
+ 
+#### 回文链表
+ 
+[234. 回文链表](https://leetcode.cn/problems/palindrome-linked-list/)  
+
+思路：双指针
+ 
+> 快指针走到末尾，慢指针刚好到中间。其中慢指针将前半部分反转。然后比较。
+ 
+```
+class Solution:
+    def isPalindrome(self, head: ListNode) -> bool:
+        slow = head
+        fast = head
+        pre = head
+        prepre = None
+        while fast and fast.next:
+            #pre记录反转的前半个列表，slow一直是原表一步步走
+            pre = slow
+            slow = slow.next
+            fast = fast.next.next
+ 
+            pre.next = prepre
+            prepre = pre
+ 
+        if fast:#长度是奇数还是偶数对应不同情况 进入后是奇数
+            slow = slow.next  
+        
+        while slow and pre:
+            if slow.val != pre.val:
+                return False
+            slow = slow.next
+            pre = pre.next
+        return True
+```
+ 
+  
+ 
+[739\. 每日温度](https://leetcode.cn/problems/daily-temperatures/)
+ 
+思路：单调栈 存下标（好处：能记住位置 也能对应到值）
+ 
+```
+class Solution:
+    def dailyTemperatures(self, temperatures: List\[int\]) -> List\[int\]:
+ 
+        res = \[0\]*len(temperatures)
+        stack = \[\]
+ 
+        for i in range(len(temperatures)):
+            while stack and temperatures\[i\]>temperatures\[stack\[-1\]\]:
+                small = stack.pop()
+                res\[small\] = i-small
+ 
+            stack.append(i)
+ 
+        return res
+```
+ 
+#### 二叉树展开为链表
+ 
+[114\. 二叉树展开为链表](https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/)
+ 
+思路：多指针移动
+ 
+```python
+class Solution:
+    def flatten(self, root: TreeNode) -> None:
+        curr = root
+        while curr:
+            if curr.left:
+                predecessor = nxt = curr.left
+                while predecessor.right:
+                    predecessor = predecessor.right
+                predecessor.right = curr.right
+                curr.left = None
+                curr.right = nxt
+            curr = curr.right
+```
+ 
+  
+ 
+```python
+class Solution:
+    def mergeKLists(self, lists: List\[ListNode\]) -> ListNode:
+        if not lists:
+            return None
+        n = len(lists)
+        return self.merge_sort(lists, 0, n - 1)
+    
+ 
+    def merge_sort(self, lists: List\[ListNode\], l: int, r: int) -> ListNode:
+        if l == r:
+            return lists\[l\]
+        mid = (l + r) // 2
+        L = self.merge_sort(lists, l, mid)
+        R = self.merge_sort(lists, mid + 1, r)
+        return self.merge(L, R)
+    
+    def merge(self, a: ListNode, b: ListNode) -> ListNode:
+        dummy = ListNode(-1)
+        x = dummy
+        while a and b:
+            if a.val < b.val:
+                x.next = a
+                a = a.next
+            else:
+                x.next = b
+                b = b.next
+            x = x.next
+        if a:
+            x.next = a
+        if b:
+            x.next = b
+        return dummy.next
+```
 
 
 # Done
