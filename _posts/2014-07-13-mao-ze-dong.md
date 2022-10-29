@@ -7,6 +7,7 @@ tags: 历史 文化 哲学 政治 毛泽东 毛选
 excerpt: 毛泽东思想系列笔记
 author: 鹤啸九天
 mathjax: true
+permalink: /mao
 ---
 
 * content
