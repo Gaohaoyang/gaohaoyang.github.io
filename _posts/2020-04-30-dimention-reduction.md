@@ -3,7 +3,7 @@ layout: post
 title:  "流形学习&降维-Manifold Learning&Dimention Reduction"
 date:   2020-04-30 14:21:00
 categories: 机器学习
-tags: 深度学习 流形学习 降维 无监督学习 维数灾难 embedding word2vec t-sne pca
+tags: 表示学习 流形学习 降维 无监督学习 维数灾难 embedding word2vec t-sne pca
 excerpt: 机器学习无监督学习中的降维技术，线性（pca/lda），非线性（t-sne/isomap/mds），及背后的流形学习原理
 author: 鹤啸九天
 mathjax: true
@@ -91,16 +91,164 @@ mathjax: true
 - 完备的内积空间称为希尔伯特空间，希尔伯特空间的概念还可以推广到复线性空间上。
 
 
-# Embedding（嵌入）
+# 表示学习
 
+机器学习的一个分支，复杂非线性问题经过特殊变换后变成简单的线性可分。
 
-## 词嵌入
+## NLP领域表示学习
 
-- 【2021-5-6】国立台湾大学陈蕴侬的[word embedding](https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/200331_WordEmbeddings.pdf)，更多[课件](https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/)
+在 NLP 的应用场景里，做分类、聚类、摘要、机器翻译，首先要将要处理的具体文本转换成模型能够处理的数学形式，并且要求这种表示能够反映文本的独特信息。这就是所谓「Representation」，其实也就是特征提取了。
+
+representation 是 NLP 的核心，在其他机器学习相关的领域，**特征表达**非常重要，特征设计、特征筛选在以前甚至现在依然是非常重要的一个学术和应用问题。
+
+Embedding（嵌入）2013年在自然语言处理领域频繁出现
+- NLP统计学习时代：一般通过one-hot（独热编码）+VSM（向量空间)模型将文本向量化。
+- 深度学习时代：广泛使用词嵌入方法来实现文本向量化
+
+【2021-5-6】国立台湾大学陈蕴侬的[word embedding](https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/200331_WordEmbeddings.pdf)，更多[课件](https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/)
 
 <object type="application/pdf" data="https://www.csie.ntu.edu.tw/~miulab/s108-adl/doc/200331_WordEmbeddings.pdf"
            id="review" style="width:100%;  height:800px; margin-top:0px;  margin-left:0px" >
 </object>
+
+从词向量到意义向量——意义向量表征研究
+- [From Word to Sense Embeddings: A Survey on Vector Representations of Meaning](https://arxiv.org/pdf/1805.04032.pdf)
+
+### 词表示
+
+one-hot到embedding
+- 顺序编号 → 独热编号 → 词嵌入
+
+#### （1）顺序编号（离散）
+
+**顺序**编号：单个字符因为不具有语义，所以一般不对其表示方法作过多探讨(暂不考虑汉语)。
+
+词作为我们认识语言的基本单元，最简单的表示方法是为词进行编号
+- 比如有一个包含 1 万个词的词典，第一个词就记为「1」，第二个记为「2」，依次类推。
+
+潜在假设
+- <span style='color:blue'>词之间没有任何关系</span>
+
+这种方法一些简单的任务（如文本分类）问题不大，比如可以统计不同 id 的词在两个文本中出现的频次来判断两个文本的相似程度。
+- 但问题：id 是一个类别变量值，**不能用于比较、计算**，词本身是对等的，相互独立，而编号数值无法体现这种特性
+- 假想一下要构造一个简单的 NNLM ，某次输入的 N-gram 中包含了 id 为 10000 的词，如果直接输入到模型中，这个巨大的值会导致网络产生严重的偏差。
+
+#### （2）独热编码（离散）
+
+为了解决顺序编码的问题，`独热编码`诞生
+
+`独热编码`：一般用「one-hot representation」来表示一个词
+- 每个词都表示为一个向量，其中只有一个维度的值为 1，其他维度的值全为 0，且不同词值为 1 的维度都不同。
+
+比如要处理的语料中一共包含 5 个词，将这 5 个词编号后，可以分别表示为:
+> - 第一个词: [1 0 0 0 0]
+> - 第二个词: [0 1 0 0 0]
+> - 第三个词: [0 0 1 0 0]
+> - 第四个词: [0 0 0 1 0]
+> - 第五个词: [0 0 0 0 1]
+
+这就是 one-hot 的含义所在，每个词的向量表示中，只有一个位置是「<span style='color:red'>激活的</span>」（独热）。
+- 经过独热编码表示的<span style='color:blue'>单词向量相互独立（正交）</span>，不能直接比较，满足类别特点
+
+one-hot 表示 应用广泛，但有几个问题:
+1. 缺乏**语义信息**，两个词之间无法进行**相似性**比较
+  - 假设词之间没有任何关系 —— 显然不符合实际
+1. 数据稀疏，一个包含 10000 个词的问题，每个词都要表示为长度 10000 的向量，但只有一个位置是有值的，这将会造成很大的存储开销，容易造成`维数灾难`
+  - 改进版：`多热编码`，一个词向量可以有多个位置激活，舍弃独立假设
+1. 【补充】扩展不便：新增一个词就需要改变维数
+
+#### （3）词嵌入（连续）
+
+鉴于独热编码存在的若干问题（无法表示语义+维数灾难+不易扩展），诞生了词嵌入表示方法
+- harris `分布式假说`，类似 <span style='color:green'>近朱者赤，近墨者黑</span>
+
+Word Embedding（**词嵌入**）
+- 2003年,Bengio 提出 NPLM 的时候，在模型中去学习每个词的一个**连续**向量表示
+- 2013年,经过 Tomas Mikolov 等人努力，发展出「Word Embedding」这一表示方法。
+
+比如说前面那五个词的表示，用 word embedding 表示:
+> - 第一个词: [0.2 0.3 0.5]
+> - 第二个词: [0.7 0.1 0.2]
+> - 第三个词: [0.1 0.2 0.3]
+> - 第四个词: [0.2 0.3 0.4]
+> - 第五个词: [0.3 0.4 0.6]
+
+这样两个词之间就可以比较了, 而且 维数降低（5→3），k 随意指定
+- 当然，这种表示下相似值高的两个词，并不一定具有相同语义的，它只能反映两者经常在**相近上下文环境**中出现。
+
+但无论如何，one-hot 表示的两大问题，word embedding 都给出了一个解决方案。
+
+- word embedding 反映的词与词之间的相似性，可能在语义层面，并不能说是真正的相似(取决于如何定义「相似」了)，但「两个 word embedding 接近的词，它们是相关的」这一点是毋庸置疑的。
+- word embedding 还能一定程度上反映语言的**内在规律** (linguistic regularity)
+  - 比如说 '<span style='color:blue'>king - man + woman = queen</span>' 之类的，当然这个特定在实际应用场景里是很少用到的
+
+
+### 句子表示
+
+单词表示有了，句子如何表示？
+- 句子及更高层级数据的表示: `VSM` 和 `embedding`
+
+#### VSM 与 BoW
+
+在文本分类、文本相似度量等应用场景中，以前常用**向量空间模型**(Vector Space Model, VSM)来表示一段文本。
+- VSM 经常和**词袋模型**(Bag Of Words, BOW)联系在一起。
+- BOW 假设<span style='color:blue'>词和词之间是互相独立</span>的，认为词和词之间的位置信息是不重要的，可以算作是 VSM 的一个前提、假设。
+
+BOW 的解释也很形象，假想有一个袋子，每遇到一个词就将其丢进袋子中，直到处理完所有文本。
+
+在此基础上， VSM 要求用一个向量来表示各个文档，这个向量的长度要与词袋中不同词的数量一致。比如说我们有下面两段文本:
+> - (1) John likes to watch movies. Mary likes movies too.
+> - (2) John also likes to watch football games.
+
+那么词袋中包含的词就是 $ (John, likes, to, watch, movies, also, football, games, Mary, too)$ 共 10 个词，这样两段文本可以分别表示为:
+> - (1) [1, 2, 1, 1, 2, 0, 0, 0, 1, 1]
+> - (2) [1, 1, 1, 1, 0, 1, 1, 1, 0, 0]
+
+不同位置的值为对应的词在文本中的权重，这里使用的是**词频**。
+
+#### 相似度计算
+
+这样两段文本之间的相似程度可以简单地通过算`余弦距离`来得到。
+
+#### TF-IDF
+
+实际上，希望不同维度值是能反映对应的词在文本中的「重要程度」的，而直接使用词频不能达到这个目的，事实上有一些常用的词会在很多的文本里都具有较高的频次，但它们本身并不包含重要的信息。
+
+于是用 `TF-IDF`(`词频-逆文档频率`)来作为词的权重
+
+#### VSM的问题
+
+VSM 的问题
+- （1）特征表示往往会很**稀疏**
+  - 想象一个包含了 100,000 个不同词汇的文本集合
+  - 解决方法：将一些文档频率很高的词去除，因为这样的词不能为文本与文本之间的区分性作出贡献，这样的方法能有效地降低向量的维度并保留有效的信息。
+- （2）**缺乏语义**信息。比如说下面两个句子表达的意义是不一样的，但在 VSM 中，两者的表示会一模一样
+  - Mary loves John
+  - John loves Mary
+
+#### n-gram
+
+- 问题(2)的解决办法是使用 **N-gram** 而非 word 来作为基本单元，比如用 Bigram，上述两句话得到的词袋会是: (Mary loves, loves John, John loves, loves Mary)，对应的，两个句子可以表示为:
+  - [1, 1, 0, 0]
+  - [0, 0, 1, 1]
+
+#### 神经网络表示
+
+另外一个办法就是使用**句子级别**的 embedding 表示。
+
+常用的方法有 RNN 和 CNN 两种。
+- RNN 比较简单，将句子中的词逐个输入到模型中，结束时取隐藏层的输出即可。
+  - 因为 RNN 隐藏层的输出是由之前的「记忆」和当前的输入计算得到的，可以认为是「整个句子的记忆」，也就是一个句子的特征表示了
+- CNN 是将句子中的词的向量表示拼接成一个矩阵，然后在上面进行卷积，最后得到一个向量表示
+
+CNN 和 RNN 得到的 sentence embedding，同 word embedding 一样，可以进行相似性的对比，语义相近的句子，其向量表示在空间中也会比较接近
+
+### 段落、篇章表示
+
+既然可以得到 sentence embedding，能不能得到 paragraph embedding 乃至 document embedding 呢？
+- 对于前者，Tomas Mikolov 在 2014 年提出了「Paragraph Vector」5，后者的话似乎还没见到过。
+- 在 Mikolov 的实验中，paragraph vector 在情感分析上和信息检索两个任务上都取得了比其他模型更好的结果。
+- 不过和 word embedding 一样，sentence embedding 和 paragraph embedding 的**可解释性**仍然存在问题。
 
 ## 基本概念
 
