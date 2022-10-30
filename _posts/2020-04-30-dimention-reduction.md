@@ -7,6 +7,7 @@ tags: 表示学习 流形学习 降维 无监督学习 维数灾难 embedding wo
 excerpt: 机器学习无监督学习中的降维技术，线性（pca/lda），非线性（t-sne/isomap/mds），及背后的流形学习原理
 author: 鹤啸九天
 mathjax: true
+permalink: /manifold
 ---
 
 * content
