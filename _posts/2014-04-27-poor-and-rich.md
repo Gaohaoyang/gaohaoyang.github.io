@@ -896,6 +896,28 @@ JuJu 继续她的艺人之路，做模特，演戏，选美。她说她要做传
 从这个意义上来说，《出路》的启发意义也许远远超越了“阶层固化，贫富差距”这样的丧。它打破了一切幻想，答案也就随之而来：不把上学当做救命稻草，才是真正的出路。
 
 
+## 贫困人群
+
+
+### 年轻人
+
+【2022-10-31】[【NHK记录】为什么日本贫穷的年轻女性越来越多？](https://www.bilibili.com/video/BV16j411f7BJ)
+- 日本女性不上大学好像很难找到全职的工作，不是全职就没有正常工作的各种福利工资也低很多，一半都不到，正常工作计算工龄加工资的她们也没有，因为总是打工，打一辈子工还是这点钱……同样的工作男性工资就高，所以这个视频里才会说，靠女性的工资很难养孩子
+- <iframe src="//player.bilibili.com/player.html?aid=91089154&bvid=BV16j411f7BJ&cid=155539063&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+[NHK街访录 人生最大的危机 女性篇](https://www.bilibili.com/video/BV1zt411u7zV)
+- <iframe src="//player.bilibili.com/player.html?aid=62025154&bvid=BV1zt411u7zV&cid=107832703&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+[【纪录片】日本网吧难民4部](https://www.bilibili.com/video/BV1W7411c79r/)
+- 日本租房子不容易,首先要有钱,举个例子,如果你租3000块钱一个月的房子,先准备3万再考虑找房,而且很多都需要担保, 要说租金，东京6-8万日元的单身公寓（20-30平米左右）还是不少的，但房主或中介一般会要求有长期稳定工作以及其他担保和证明，所以这些工作不稳定的人就没法租了，只能去这种面积4-5平方米的网咖。我之前看过一家人租了3个网咖房，每个月租金都要17-18万日元了。但换句话说，这些人还是陷入欲望的枷锁太深，自己没那个实力，还偏偏要留在东京。
+- <iframe src="//player.bilibili.com/player.html?aid=90867647&bvid=BV1W7411c79r&cid=155173337&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+### 老年人
+
+【2022-10-31】[nhk纪录片日本：老后贫困](https://www.bilibili.com/video/BV1RW411z7j3)
+- <iframe src="//player.bilibili.com/player.html?aid=32427940&bvid=BV1RW411z7j3&cid=56738818&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+
 # 资料
 
 - [【字幕】穷富翁大作战第一季](https://www.bilibili.com/video/av2884835)
