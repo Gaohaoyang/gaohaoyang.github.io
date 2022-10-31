@@ -18,6 +18,7 @@
         padding: 20px 30px;
         line-height: 1.6;
         font-size: 16px;
+        font-family: 'KaiTi';
         background-color: #f8f8fd;
         box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
         >h1 {
@@ -52,16 +53,16 @@
                 .categories {
                     padding: 0 15px;
                     i {
-                        color: #9e9d9d;
+                        color: #1c8404;
                     }
                     a {
                         padding: 0 5px;
-                        background-color: #9e9d9d;
-                        color: #fff;
+                        background-color: #96cfd3;
+                        color: rgb(11, 115, 142);
                         font-size: 90%;
                         transition: 0.3s ease;
                         &:hover {
-                            background-color: #b6b6b9;
+                            background-color: #b1cd0f;
                         }
                     }
                 }
@@ -79,7 +80,7 @@
                         font-size: 90%;
                         transition: 0.3s ease;
                         &:hover {
-                            background-color: #c0ddc7;
+                            background-color: #ecf32e;
                         }
                     }
                 }
