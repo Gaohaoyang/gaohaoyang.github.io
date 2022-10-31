@@ -286,6 +286,9 @@ The HTML style attribute is used to add styles to an element, such as **color**,
   - <font color=#0099ff size=5 face='Yuanti SC' background='yellow'>中文-圆体</font>
   - 在 HTML 4中 face 属性已废弃，HTML 4.01 Strict DTD 或 XHTML 1.0 Strict DTD 已不支持该属性，可以使用 CSS 代替
 - 字体：[CSS font-family中文字体对应的英文名称一览表](https://www.zhangxinxu.com/study/201703/font-family-chinese-english.html)
+- PC，移动端中英文站通用配置：
+  - 'Helvetica Neue', Helvetica, 'Microsoft YaHei', STXihei, 'PingFang SC','Hiragino Sans GB', Arial, sans-serif;
+
 
 颜色色阶选取[参考](https://htmlcolorcodes.com/zh/yanse-ming/), 包含常用颜色：红、粉、橙、黄、紫、绿、蓝、白、灰
 
