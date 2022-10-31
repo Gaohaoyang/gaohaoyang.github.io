@@ -288,6 +288,14 @@ The HTML style attribute is used to add styles to an element, such as **color**,
 - 字体：[CSS font-family中文字体对应的英文名称一览表](https://www.zhangxinxu.com/study/201703/font-family-chinese-english.html)
 - PC，移动端中英文站通用配置：
   - 'Helvetica Neue', Helvetica, 'Microsoft YaHei', STXihei, 'PingFang SC','Hiragino Sans GB', Arial, sans-serif;
+- [如何优雅的选择字体(font-family)](https://segmentfault.com/a/1190000006110417)
+
+font-family,好看常用的字体, [转载](http://www.zreading.cn/ican/2014/10/css-font-family/)
+- 例1（小米米官网）：font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+- 例2（淘宝技术研发中心）：font: 12px/1.5 Tahoma,Helvetica,Arial,'宋体',sans-serif;
+- 例3（加网 ）：font: 14px/1.5 'Microsoft YaHei',arial,tahoma,\5b8b\4f53,sans-serif;
+- 例4（淘宝UED）：font: 12px/1 Tahoma,Helvetica,Arial,"\5b8b\4f53",sans-serif;
+- 例5（一淘UX）:font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
 
 
 颜色色阶选取[参考](https://htmlcolorcodes.com/zh/yanse-ming/), 包含常用颜色：红、粉、橙、黄、紫、绿、蓝、白、灰
