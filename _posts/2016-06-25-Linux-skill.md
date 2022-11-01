@@ -3,7 +3,7 @@ layout: post
 title:  "Linux技能大全"
 date:   2016-06-25 23:35:00
 categories: 编程语言
-tags: Linux linux Shell Git yaml github 文件服务 vscode crontab curl post jupyter
+tags: Linux linux Shell Git yaml github 文件服务 vscode crontab curl post jupyter ssh 加密
 excerpt: Linux使用技能总结，持续更新
 mathjax: true
 permalink: /linux
@@ -419,6 +419,74 @@ curl -F 'file=@photo.png;filename=me.png' https://google.com/profile # -F参数�
 curl -G -d 'q=kitties' -d 'count=20' https://google.com/search #  GET 请求，实际请求的 URL 为https://google.com/search?q=k...。如果省略--G，会发出一个 POST 请求。如果数据需要 URL 编码，可以结合--data--urlencode参数。
 curl -G --data-urlencode 'comment=hello world' https://www.example.com
 ```
+
+### ssh
+
+
+#### sshkey-gen
+
+【2022-11-01】sshkey-gen的作用
+- 通过数字签名RSA或DSA让两个linux机器之间使用ssh，而不需要用户名和密码。
+
+ssh-keygen 用于 生成、管理和转换认证密钥
+
+常用参数
+- -t type:指定要生成的**密钥类型**，有 rsa1(SSH1), dsa(SSH2), ecdsa(SSH2), rsa(SSH2) 等类型，较为常用的是 rsa类型
+- -C comment：提供一个**新注释**
+- -b bits：指定要生成的**密钥长度** (单位:bit)，对于RSA类型的密钥，最小长度768bits,默认长度为2048bits。DSA密钥必须是1024bits
+- -f filename: 指定生成的密钥**文件**名字
+
+```shell
+ssh-keygen # [rsa|dsa]，默认生成密钥文件和私钥文件 id_rsa,id_rsa.pub或id_dsa,id_dsa.pub
+# RSA身份认证，使用指定邮箱登录某机器
+ssh-keygen -t rsa -C "wangqiwen.at@163.com"
+# 生成 id_ras.pub 文件
+cat ~/.ssh/id_rsa.pub # 查看公钥
+# 添加pub key
+
+```
+
+本机生成一个公钥和一个私钥文件
+
+```shell
+ls ~/.ssh
+```
+
+注意
+- `公钥`相当于**锁**，`私钥`相当于**钥匙**
+- 这里相当于在客户端创建一对**钥匙**和**锁**，SSH免密码登录就相当于将锁分发到服务端并装锁，然后客户端就可以利用这个钥匙开锁。
+
+ssh-copy-id命令将本机上的公钥文件拷贝到服务器上(服务器用户名比如为liujiakun，IP地址为192.168.3.105)
+
+```shell
+# 拷贝公钥文件到指定机器
+ssh-copy-id -i ~/.ssh/id_ras.pub user@192.168.1.104
+# 指定端口
+ssh-copy-id -i ~/.ssh/id_ras.pub "-p 3300 user@192.168.1.104"
+# ssh-add 指令将私钥 加进来
+ssh-add ~/.ssh/id_rsa
+# 服务器上查询~/.ssh/目录下多了一个文件:authorized_keys
+```
+
+**单向**登陆的操作过程：
+- 1、登录A机器 
+- 2、ssh-keygen -t [rsa|dsa]，将会生成密钥文件和私钥文件 id_rsa,id_rsa.pub或id_dsa,id_dsa.pub
+- 3、将 .pub 文件复制到B机器的 .ssh 目录， 并 cat id_dsa.pub >> ~/.ssh/authorized_keys
+- 4、大功告成，从A机器登录B机器的目标账户，不再需要密码了；（直接运行 #ssh 192.168.20.60 ）
+
+**双向**登陆的操作过程：
+- 1、ssh-keygen做密码验证可以使在向对方机器上ssh ,scp不用使用密码.具体方法如下:
+- 2、两个节点都执行操作：#ssh-keygen -t rsa 
+  - 然后全部回车,采用默认值.
+- 3、这样生成了一对密钥，存放在用户目录的~/.ssh下。
+  - 将公钥考到对方机器的用户目录下 ，并将其复制到~/.ssh/authorized_keys中（操作命令：#cat id_dsa.pub >> ~/.ssh/authorized_keys ）。
+- 4、设置文件和目录权限：
+  - 设置authorized_keys权限: chmod 600 authorized_keys 
+  - 设置.ssh目录权限: chmod 700 -R .ssh
+- 5、要保证.ssh和authorized_keys都只有用户自己有写权限。否则验证无效。（今天就是遇到这个问题，找了好久问题所在），其实仔细想想，这样做是为了不会出现系统漏洞。
+
+[ssh-keygen使用及参数详解](https://www.jianshu.com/p/807ec99cea21)
+
 
 ### 文件服务
 
