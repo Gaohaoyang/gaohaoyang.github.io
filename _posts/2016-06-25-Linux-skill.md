@@ -158,19 +158,20 @@ echo "done"
 
 ### 文件操作命令
 
-- [文件操作命令](https://p3-tt.byteimg.com/origin/pgc-image/6fe9b14521964698aad985d270cf6d9b?from=pc)
-![](https://p3-tt.byteimg.com/origin/pgc-image/6fe9b14521964698aad985d270cf6d9b?from=pc)
-![](https://p1-tt.byteimg.com/origin/pgc-image/dba5dffe4dcd446987f9b252f0b21c50?from=pc)
-![](https://p1-tt.byteimg.com/origin/pgc-image/80d9bc3abcf34b3eb7efc9655698e6f6?from=pc)
-- 文件压缩
-  - .tar 使用tar命令压缩或解压
-    - tar cvfz archive.tar.gz dir/
-    - tar xvfz. archive.tar.gz
-  - .bz2 使用bzip2命令操作
-  - .gz 使用gzip命令操作
-  - .zip 使用unzip命令解压
-  - .rar 使用unrar命令解压
-  - ![](https://p3-tt.byteimg.com/origin/pgc-image/0ffce7c93b324bed86a2e5dabdf92049?from=pc)
+[文件操作命令](https://p3-tt.byteimg.com/origin/pgc-image/6fe9b14521964698aad985d270cf6d9b?from=pc)
+- ![](https://p3-tt.byteimg.com/origin/pgc-image/6fe9b14521964698aad985d270cf6d9b?from=pc)
+- ![](https://p1-tt.byteimg.com/origin/pgc-image/dba5dffe4dcd446987f9b252f0b21c50?from=pc)
+- ![](https://p1-tt.byteimg.com/origin/pgc-image/80d9bc3abcf34b3eb7efc9655698e6f6?from=pc)
+
+文件压缩
+- .tar 使用tar命令压缩或解压
+- tar cvfz archive.tar.gz dir/
+- tar xvfz. archive.tar.gz
+- .bz2 使用bzip2命令操作
+- .gz 使用gzip命令操作
+- .zip 使用unzip命令解压
+- .rar 使用unrar命令解压
+- ![](https://p3-tt.byteimg.com/origin/pgc-image/0ffce7c93b324bed86a2e5dabdf92049?from=pc)
 
 ### 解压命令
 
@@ -191,11 +192,10 @@ echo "done"
 ## 常用命令
 
 - [linux常用命令脑图](https://www.cnblogs.com/hzg110/p/6914963.html)
-
-![](https://images2015.cnblogs.com/blog/31127/201705/31127-20170530141401383-1329040140.png)
+- ![](https://images2015.cnblogs.com/blog/31127/201705/31127-20170530141401383-1329040140.png)
 
 - [linux命令汇总](https://www.toutiao.com/w/i1694976027465741/)
-![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/057f03b362234ad5a702ad00c5f9f797~tplv-obj:975:1280.image?from=post)
+- ![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/057f03b362234ad5a702ad00c5f9f797~tplv-obj:975:1280.image?from=post)
 
 ### 账户管理
 
@@ -334,7 +334,6 @@ perf既然这么强大，那它的实现原理是什么呢？
 - tac的功能是将文件从最后一行开始倒过来将内容数据输出到屏幕上。我们可以发现，tac实际上是cat反过来写。这个命令不常用。
   - tac语法：tac 文件名。
 
-
 ### curl 网络请求
 
 curl功能非常强大，命令行参数多达几十种。如果熟练的话，完全可以取代 Postman 这一类的图形界面工具。
@@ -419,10 +418,7 @@ curl -F 'file=@photo.png;filename=me.png' https://google.com/profile # -F参数�
 # -G参数用来构造 URL 的查询字符串
 curl -G -d 'q=kitties' -d 'count=20' https://google.com/search #  GET 请求，实际请求的 URL 为https://google.com/search?q=k...。如果省略--G，会发出一个 POST 请求。如果数据需要 URL 编码，可以结合--data--urlencode参数。
 curl -G --data-urlencode 'comment=hello world' https://www.example.com
-
-
 ```
-
 
 ### 文件服务
 
@@ -524,11 +520,9 @@ echo "This is the mail body" | mpack -s "Subject" 2daygeek@gmail.com -a test1.tx
 echo -e "Subject: Test Mail\nThis is the mail body" > /tmp/send-mail.txt
 # 发送
 sendmail 2daygeek@gmail.com < send-mail.txt
-
 # ---------- ssmtp ------------
 echo -e "Subject: Test Mail\nThis is the mail body" > /tmp/ssmtp-mail.txt
 ssmtp 2daygeek@gmail.com < /tmp/ssmtp-mail.txt
-
 ```
 
 #### Python自动发送多封邮件
