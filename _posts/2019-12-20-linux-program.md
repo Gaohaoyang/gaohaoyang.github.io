@@ -10,7 +10,7 @@ excerpt: Linux程序开发，含C/C++编译工具（make）
 mathjax: true
 header-img: img/post-bg-ios10.jpg
 catalog: true
-permalink: /linux
+permalink: /linux-program
 ---
 
 * content
