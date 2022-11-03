@@ -37,6 +37,19 @@ Jekyll 是一个简单的，博客感知的，静态网站生成器。可以认�
   - jekyll s
 - 通过 http://localhost:4000 进行访问
 
+### 时差
+
+【2022-11-2】新增一篇文章，jekyll编译正常，但页面无法显示，原因是中美时差，action编译日志中显示有未来日期
+> Skipping: _posts/2022-11-02-note-think-fast-slow.md has a future date
+
+美国就比中国晚13个小时，所以，如果使用当前时间，则需要等待13h后才能看到文章
+- 中国的时区横跨东五区、东六区、东七区、东八区、东九区的五个时区
+  - 东八区作为全国统一的标准，这个时区的子午线比较接近杭州，所以也可以称为杭州时间，一般称为北京时间。现在，中国大陆、中国台湾、中国香港、中国澳门所使用的都是东八区的时间。所以在中国有一个有趣的现象，在新疆等地，可能晚上11点天还是大亮的。
+  - ![](https://e-images.juwaistatic.com/2017/06/p13067231.jpg)
+- 美国的时区：
+  - 美国并没有采取一个时区，而是把全国分成了6个时区
+  - ![](https://e-images.juwaistatic.com/2017/06/p13067045.jpg)
+
 ## Jekyll 插件
 
 【2022-9-23】Github Page对jekyll的支持是很到位的, 唯一的不足可能也是其本身基于安全考虑而使得jekyll始终都是运行在**safe模式**, 目前[放开的插件列表](https://help.github.com/articles/using-jekyll-plugins-with-github-pages/)非常有限（白名单[插件详情](https://pages.github.com/versions/)）, 所以很多jekyll的插件都无法使用
