@@ -2290,6 +2290,9 @@ CPM按展现付费，看起来可能要便宜些，CPC按点击付费，价格�
 - 知乎：[居理新房是一家怎样的公司？](https://www.zhihu.com/question/60531465)
 - [居理新房的倒闭之路](https://c.m.163.com/news/a/H1Q3QJ3505525O8Q.html)
 
+代言人：[迪丽热巴](https://imgslim.geekpark.net/uploads/image/file/e4/7f/e47f189c1072c820db5083e24c740be6.jpg)
+- ![](https://imgslim.geekpark.net/uploads/image/file/e4/7f/e47f189c1072c820db5083e24c740be6.jpg)
+
 ### 互联网
 
 互联网一直以为自己可以改造地产中介：
