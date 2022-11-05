@@ -3,7 +3,7 @@ layout: post
 title:  "【读书笔记】思考：快与慢 - Thinking, Fast and Slow"
 date:   2022-11-02 23:15:00
 categories: 读书笔记
-tags: 认知 大脑 心理学 诺贝尔
+tags: 认知 大脑 心理学 诺贝尔 三重脑
 excerpt: 《思考，快与慢》——诺贝尔经济学奖获得者的杰作
 author: 鹤啸九天
 mathjax: true
@@ -370,6 +370,41 @@ Kahneman 由于和 Amos Tversky 一起提出了`前景理论`，获得了2002年
 
 在最后，附上了我和阿莫斯一起写的两篇文章，第一篇是我早期写的关于在面对不确定性因素时作出判断的评论。第二篇发表于1984年，总结了前景理论和我们关于框架效应的研究成果。文章中有被诺贝尔委员会引用的投稿，你可能会惊讶地发现这些投稿是多么简单。读这些能让你明白我们早期的知识有多少，也能让你知道我们这几十年来的进步有多大。
 
+## 重要知识点
+
+### system1 and system2 系统1和系统2
+
+两个虚拟出来的角色
+- `系统1`（主角）: 无意识、快速、不费脑力、没有感觉、完全自主控制；
+- `系统2`（配角）: 费脑力，通常与行为、选择和专注等相关联，需注意力并付出努力；对系统2有高需求的活动同时需要自我控制，自我控制既有损耗又很枯燥；
+- 脑海中最先出现的是来自系统1的直觉，必须得从头到尾思索一遍，三思而后行。
+
+【2022-11-4】[Unconscious bias System 1 & 2 thinking](https://www.fairhire.org/quest/system-one-and-system-two-decoding-bias-in-recruitment/)
+
+- ![](https://d3p02o27lvr4nj.cloudfront.net/main/nottx_quest_header_q_50_001_1.jpg)
+- ![](https://www.researchgate.net/profile/Daniel-Vanderbyl/publication/335840928/figure/fig3/AS:803778378870785@1568647107389/System-1-vs-System-2-Thinking-upfrontanalyticscom-nd.jpg)
+
+System One
+- System one is our **automatic** thinking system. This system unconsciously makes fast and reactive decisions which require little effort. These decisions can be based on emotions and situational factors, using situations we recognise and responses that were successful in the past. So rather than consciously thinking about putting one foot in front of the other, we can simultaneously devote our attention towards more complex tasks. System one is typically characterised as error-prone and impulsive, yet it is estimated to control around 95% of our thinking.
+
+System Two
+- System two is our reflective thinking system. This system is slower and more effortful than system one. We consciously use system two to control ourselves and our thoughts, to carry out complicated computations, and to act in line with our long-term goals. System two can also be used to justify and excuse poor decisions or behaviour. For example, although overconsumption is generally associated with giving in to our impulses, a study found that people ate more as a result of rationalising and justifying to themselves that they could.
+
+详见：三重脑[解释](2022/09/13/note-cognition-mind/#三重脑图解)
+
+
+<div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers tags lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-10-13T02:53:37.710Z\&quot; agent=\&quot;5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;Lxmb2jvg02V5rb8TIOLs\&quot; version=\&quot;20.4.0\&quot;&gt;&lt;diagram id=\&quot;xdYpP7w1t2VaaceZiyqw\&quot; name=\&quot;第 1 页\&quot;&gt;7Zpdd5s4EIZ/jS7jY5D40CX4Iz09u6fZzW53e8kB2dYWoxQrtZ1fvyMQ2CC5cVLbbXOcm8BICPQ+mtFoEoRHy81tmTwsfhcZy5E7zDYIj5HrOi4m8EtZtrUlcJzaMC95pjvtDPf8iWnjUFsfecZWnY5SiFzyh64xFUXBUtmxJWUp1t1uM5F33/qQzJlhuE+T3LT+wzO5qK2hG+zs7xifL5o3Oz6tW5ZJ01nPZLVIMrHeM+EJwqNSCFlfLTcjlivxGl3q56YHWtsPK1khj3ngjw8pv82Lp6e7jx+wd7P9+7ckvmlofE3yRz1j/bVy20gAw4DacBOvF1yy+4ckVS1rAA62hVzmcOfA5Yzn+Ujkoqyew7PZzE1TsK9kKT6zpqUQhRqrlUM9qT+ClZJtDk7PaUWD1cbEkslyC130A+2K2TYLSN+vd9iw6w282rrYh0Z110Qvlnk7+k5PuNCSvkRe95zyMv+C8u6kawR2PEPgdrF35PXPJi8+o7xhyi4oLzbkJeb6bdd0R17nBPKubz/Fs4jn8i+yuC3u/ivLaHljiQ2TAIGzhD6a+IhSFEdoEqKQIOoYwoMYsquwVcl92bUpyfm8gNsUxGNgj5W0HGJypBuWPMvyQ0hL8VhkTM1rqIYXhdS7ikOrVplILgrdXH9SE9lxC9MgZ+F7ECbBtA8zMGH6Fpb4XCgtcQhQhiGKRopg5KAQLjwURigKqyaKIvoLMCXHMFUP7Lm2+plOT8PaJf5gGHRhUxM2vSRsS1QEtBRX7kpQDH6Lr7BfARu7pO/YP5o1sbAGmjGiFVkgHgVX+qcJ6z8ffc/q6UAzJhViwD2ttuoRotM3ing4pJSMTxTNfacfzV1Lmmvbut1zMfatHk7HiLoVWti9vSvjFwRxEvbcuD067iH2LunGgQWxr7IzCCbgxnHlz1eyzwZo0s+7bWTJJcmGFrIQlEO16YIXh7D7jq9HKGum1QHpXW6jtVYajqnjFFmkCo5K9TxZrXjaRdcVlW24/Fe3qOtPyg6rt74bb/a6jbet0kkpm3do0PVnsMyoYhrir8RjmepeN+/H95PiPV//ST4L4bMvX8aztlgFb5kz+Y1FfQDdM9GzsZUsh+Xztfu9NmD6DXeCw0x2Tu70szBMetTrmern9iui/aH8/lBuvxJYa2EMVa2hdupHLatvSt6P/BiFXpW+xyi6lliO2sSdwJKn+eYybNK5k4eIY2qRLwsRRTbledP2moDxuuBgnZ33I33ecu4OexiP9XnsPTvU6Xz+sJKGy0P2XpfiwPfjt5oSfF+J3AsGPj7C5wdhYK7EUxzPrDjtuTv1UTysquURiiYKJ2TwUfgL4HxNEj+ddqos34XZTOIdQlrw+3m85S95Z8v/qIUyMJ2os5nap0dNvQ2rPbveud/safyUuDEx4jExndqjtr/buufayptTYw93HZH1gdzc3a9wzXJaH20wcExPPhlduN39P0W9X+/+KwVP/gc=&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+
+<script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
+
+大脑里由内到外至少有三重大脑：年代久远的**本能脑**、相对古老的**情绪脑**和非常年轻的**理智脑**。
+- ![](https://pic3.zhimg.com/80/v2-1612471cee2d32b9210ec60b66f01809_1440w.webp?source=1940ef5c)
+-  (1) 约3.6亿年前，为了适应陆地生活，爬行动物演化出了最初的“**本能脑**”。本能脑的结构很简单，只有一个原始的反射模块，可以让爬行动物对环境快速做出本能反应。
+-  (2) 到了大约2亿年前，哺乳动物为了更好地适应环境，不仅让体温保持恒定，还进化出了情绪。相应的，哺乳动物的大脑里也发展出一个独特的情感区域（边缘系统），脑科学家称之为“**情绪脑**”。
+-  (3) 直到距今约250万年前，人类才在大脑的前额区域进化出了“新皮层”。这个新皮层直到7万~20万年前才真正成形，新的脑区称为“**理智脑**” 。
+- 本能脑早在婴儿时期就比较完善了。
+- 情绪脑则要等到青春期早期才趋于完善。
+- 而理智脑最晚，要等到成年早期才基本发育成熟。
 
 # 结束
 

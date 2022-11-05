@@ -3,7 +3,7 @@ layout: post
 title:  "生命科学-Life Science"
 date:   2019-09-28 09:30:00
 categories: 自然科学
-tags: 梁冬 华大基因 生命 自然 宇宙 神学 中医 西医 病毒 细菌 真菌 SARS SARI 武汉肺炎 埃博拉 蝙蝠 血型  微积分 经典力学 热力学第二定律 地理 寿命
+tags: 梁冬 华大基因 生命 自然 宇宙 神学 病毒 细菌 真菌 SARS SARI 武汉肺炎 埃博拉 蝙蝠 血型  微积分 经典力学 热力学第二定律 地理 寿命 施一公
 excerpt: 生命是什么，人类是地球统治者吗，科学的尽头是神学吗？
 mathjax: true
 permalink: /science
@@ -94,6 +94,11 @@ permalink: /science
 
 <iframe src="//player.bilibili.com/player.html?aid=52012946&bvid=BV1z4411Y7tX&cid=365220412&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+
+### 施一公：我感知的世界并不真实的
+
+【2022-11-4】[人类感知的世界并不是真实的世界-清华大学生命学院校长施一公](https://www.bilibili.com/video/BV1Fg411K7v4)
+- <iframe src="//player.bilibili.com/player.html?aid=506956933&bvid=BV1Fg411K7v4&cid=449958937&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
 ## 地球历史
 
@@ -478,6 +483,11 @@ permalink: /science
 
 
 ## 免疫系统
+
+### 免疫系统工作原理
+
+【2022-11-4】[我们的免疫系统是这样工作的](https://www.ixigua.com/6852266392797446664)
+- <iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/6852266392797446664?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
 
 ### 身体是如何对抗疾病的？
 
