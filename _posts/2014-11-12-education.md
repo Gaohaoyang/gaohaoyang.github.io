@@ -47,7 +47,9 @@ permalink: /edu
 - 【KBS纪录片】[学习的人.Homo.Academics](https://www.bilibili.com/video/av23959550/)，一共五集
   - <iframe src="//player.bilibili.com/player.html?aid=23959550&bvid=BV1rp411R7Uo&cid=40098655&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  width="100%" height="600"> </iframe>
 
+
 ## 美国教育
+
 
 ### 学渣更容易融入美国社会
 
@@ -80,7 +82,18 @@ permalink: /edu
 - 描写美国教育的纪录片：[等待超人](https://www.bilibili.com/video/av55720483/)
 <iframe src="//player.bilibili.com/player.html?aid=55720483&bvid=BV1w441157Mj&cid=97406142&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  width="100%" height="600"> </iframe>
 
+## 读书翻身
 
+### 风雨哈佛路
+
+【2022-11-6】[励志片：从贫民窟到哈佛，她创造了奇迹，若你正绝望就一定要看看](https://www.ixigua.com/7078542361713869323)，真实故事改编
+- <iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/7078542361713869323?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
+
+### 垫底辣妹
+
+【2022-11-6】韩国电影：垫底辣妹，真实事件改编：[倒数第一的女学渣，高三一年逆袭，考上最顶尖大学](https://www.ixigua.com/7072686517646262791?logTag=215f18f71b2ca8e14aa9)
+- <iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/7072686517646262791?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
+- <iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/6935685348181836321?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
 
 ## 家庭教育
 
