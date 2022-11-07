@@ -1892,6 +1892,18 @@ import (
 func main() {
     arg := os.Args[1] // 访问第二个参数，即 name
     fmt.Println(arg) // 输出 max
+    // os.Args[0] 是程序本身
+    // 一次性输出所有参数
+    fmt.Println(os.Args[1:]) // 不在乎输出格式
+    fmt.Println(strings.Join(os.Args[1:], " ")) // 空格分隔
+    // 批量处理外部参数
+    var s, sep string
+    // for _, arg := range os.Args[1:] { // range 方法遍历
+    for i := 1; i < len(os.Args); i++ { // for 遍历
+        s += sep + os.Args[i]
+        sep = " "
+    }
+    fmt.Println(s)
 }
 ```
 
