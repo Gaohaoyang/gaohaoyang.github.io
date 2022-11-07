@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "家庭教育与人生-Education & Life"
+title:  "教育与人生-Education & Life"
 date:   2014-11-12 14:02:00
 categories: 读书笔记
 tags: 贫富差距 家庭教育 留学生 凉子访谈录 衡水中学 海淀学区 脱口秀 原生家庭
@@ -16,10 +16,13 @@ permalink: /edu
 # 总结
 
 - 【2022-1-4】群消息：教育是富人的**装饰品**，穷人的**避难所**。富人、穷人才华横溢，富人还是富人，穷人还是穷人！
-- 【2021-11-21】呼兰脱口秀：讨厌的学霸-[音频](https://www.ixigua.com/7032442292862586125)，[视频](https://v.qq.com/x/page/m328008vnc1.html)，学渣更容易融入美国社会
-  - <iframe frameborder="0" src="https://v.qq.com/txp/iframe/player.html?vid=m328008vnc1" allowFullScreen="true" width="100%" height="600"></iframe>
 
 # 世界各国教育
+
+- 【2021-5-8】[30年俯身躬耕，这位大蕲校长感动荆楚，梦想再启程](https://www.sohu.com/a/290343429_120053425) 
+  - ![](http://5b0988e595225.cdn.sohucs.com/images/20190120/9da17eb0236f4b4286c6aef74d2f7b35.jpeg)
+
+## 韩国教育
 
 - 【2021-2-28】韩国KBS的纪录片《**学习的战争**》，读书笔记：[怎样才是最好的学习？](https://mp.weixin.qq.com/s/7W5Z96goUqbiDCGZNnGv1g)
   - 该纪录片筹备数年，拍摄历经18个月，走访了包括中国，日本，韩国，美国，法国，英国，以色列，印度等全世界教育先进的地区，调查了解这些地区教育的特色和优缺点，探究其背后的深层次的文化原因。目的是帮助所有家长教育工作者，以及学生了解全世界各种先进的教育，好在哪，为什么好，和哪不好，让读者在全方位了解这种教育方式、理念后，可以根据自身的实际情况，真正选择适合自己孩子的学习、教育方式。
@@ -44,10 +47,55 @@ permalink: /edu
 - 【KBS纪录片】[学习的人.Homo.Academics](https://www.bilibili.com/video/av23959550/)，一共五集
   - <iframe src="//player.bilibili.com/player.html?aid=23959550&bvid=BV1rp411R7Uo&cid=40098655&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  width="100%" height="600"> </iframe>
 
-- 【2021-5-8】[30年俯身躬耕，这位大蕲校长感动荆楚，梦想再启程](https://www.sohu.com/a/290343429_120053425) 
-  - ![](http://5b0988e595225.cdn.sohucs.com/images/20190120/9da17eb0236f4b4286c6aef74d2f7b35.jpeg)
 
-## 家庭教育与心理学
+## 美国教育
+
+
+### 学渣更容易融入美国社会
+
+- 【2021-11-21】呼兰脱口秀：讨厌的学霸-[音频](https://www.ixigua.com/7032442292862586125)，[视频](https://v.qq.com/x/page/m328008vnc1.html)，学渣更容易融入美国社会
+  - <iframe frameborder="0" src="https://v.qq.com/txp/iframe/player.html?vid=m328008vnc1" allowFullScreen="true" width="100%" height="600"></iframe>
+
+### 美国教育阶层化
+
+美国教育的阶层化：
+- 上层培养领袖
+- 中产培养精英
+- 下层培养螺丝钉
+
+【2020-10-9】[美国教育的阶层化：上层培养领袖，中产培养精英，下层培养螺丝钉](https://mp.weixin.qq.com/s?__biz=MzU3OTU5Mzg5Mw==&mid=2247501204&idx=1&sn=89a68438705209560abdb347b9471658&chksm=fd61365eca16bf48f94aab581a95527278ffdfbb6955ada70b4f70e162fd0823c6a821176324&mpshare=1&scene=1&srcid=1009oYbO1q8aPlsTWyLkcjAx&sharer_sharetime=1602215363086&sharer_shareid=f80d27e138f322dfa5a79b35132765db&key=e898af26a858d804e839041a01a72225c61fd9153324b320185eb1fef4aa5765ae9dcd596b962962ba233c3d8cbca943002d0fae7ecb0c38a3188f416e84d6ad606aff00e5ad789a523cb72a5c705737fc36b49d62dac73285e565cc0cd9db4e70228dbc9de117b7cc603deecfa0fafd2093445e57f7d5e4cc5571762c7b69c1&ascene=1&uin=OTY1NzE1MTYw&devicetype=Windows+10+x64&version=62090529&lang=zh_CN&exportkey=AQnQ3gmxiJUMPhYBGXfqdjI%3D&pass_ticket=yThDhQ9hyFhVYWcY%2ByCBgg%2BVIIEs5JcBgtG5m30jZliLRt76hrcF0Uq8n9gzMefz&wx_header=0)，旅美作家、教育问题研究者万维钢（笔名同人于野）在他的《智识分子——做个复杂的现代人》中，基于自己的亲身感受，分析了美国不同阶层的教育，指出了国内大多数人在中美教育上的一些不太全面的认知，值得一读。
+- （1）**底层**家庭对教育的期待是培养**工具**，以**找工作**为目的。
+  - 普通工人阶层的学校强调遵守规章流程。整个教学充满死记硬背的机械式程序，几乎没有做选择和做决定的机会。
+- （2）**中层**家庭对教育的期待是培养**工艺品**，以提升**个人价值**为目的。
+  - 美国一般中产阶层的学校也是这样，一切为找工作和上大学服务。专业人士（医生、律师）阶层的学校强调创造性和独立性。收入不菲，对生活和职业都有很好的规划
+- （3）**上层**家庭对教育的期待是培养**主人翁**，以**欣赏、选择和改变周围世界**为目的。
+  - 资本家阶层，学生家长是这个国家的统治者和拥有者，他们当然没必要训练怎么遵守别人的章程，他们不用关心怎么用漂亮的简历取悦雇主。
+  - 这个阶层的学生学的不是怎么遵守规则，而是怎么制定规则。教育的核心目标，是决策和选择。
+  - [Greate!](https://www.greatschools.org/)上可以查到美国中小学得分
+- 思考：阶层比分数重要，因为各阶层的教学方法和培养目标完全不同。
+  - 现代流水线式的教育只能把人送到第一层；
+  - 想要进入第二层，家庭必须出力，争取去精英大学；
+  - 而第三层，则几乎完全是家庭和个人的事情，学校教育的作用很小。
+
+### 等待超人
+
+- 描写美国教育的纪录片：[等待超人](https://www.bilibili.com/video/av55720483/)
+<iframe src="//player.bilibili.com/player.html?aid=55720483&bvid=BV1w441157Mj&cid=97406142&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  width="100%" height="600"> </iframe>
+
+## 读书翻身
+
+### 风雨哈佛路
+
+【2022-11-6】[励志片：从贫民窟到哈佛，她创造了奇迹，若你正绝望就一定要看看](https://www.ixigua.com/7078542361713869323)，真实故事改编
+- <iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/7078542361713869323?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
+
+### 垫底辣妹
+
+【2022-11-6】韩国电影：垫底辣妹，真实事件改编：[倒数第一的女学渣，高三一年逆袭，考上最顶尖大学](https://www.ixigua.com/7072686517646262791?logTag=215f18f71b2ca8e14aa9)
+- <iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/7072686517646262791?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
+- <iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/6935685348181836321?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
+
+## 家庭教育
 
 ### 如何教育孩子
 
@@ -177,7 +225,9 @@ permalink: /edu
 学校实力
 - ![](https://p3.toutiaoimg.com/large/tos-cn-i-qvj2lq49k0/6da2407fabf44119b024e242d20f026a)
 
-# [一个清华学生留学香港后对人生的思考](https://mp.weixin.qq.com/s?__biz=MjM5ODY2OTQyNg==&mid=200945260&idx=1&sn=37f11020da912382deb04b8011465b65&chksm=28c9b3711fbe3a67824aa0761f85a57240bb8bdad3de6da6c48fc9063df5b97c1fdad0c5759f&token=1917001922&lang=zh_CN#rd)
+# 香港留学思考
+
+[一个清华学生留学香港后对人生的思考](https://mp.weixin.qq.com/s?__biz=MjM5ODY2OTQyNg==&mid=200945260&idx=1&sn=37f11020da912382deb04b8011465b65&chksm=28c9b3711fbe3a67824aa0761f85a57240bb8bdad3de6da6c48fc9063df5b97c1fdad0c5759f&token=1917001922&lang=zh_CN#rd)
 
 98年本科毕业，又顺利地被保研，当时的我只是一个憨憨的书呆子，纯洁的如同高中生，在清华这种和尚庙一般的理工学校里呆了四年，**女孩似乎是山下的老虎，神秘得让我一见就脸红心跳**。未来是什么对于我就是“读完研再说”，反正成绩还行，不读白不读。天上掉了馅饼，用我的兄弟的话来说。香港正好回归一周年，教育部要选派一批本科毕业生去香港科技大学读研，以加强两地的教育和科研交流。清华当然要占不少名额，系里的几个牛人去了美国，所以这个饼就掉到了我头上，确实是个不错的饼，不用考G、考托、全额奖学金，连什么手续都是学校和教育部包办了，我分文不花，后来香港科大的联络人抱怨中国的办事效率和程序烦琐，至于怎样的麻烦过程，我至今都一无所知。
 
