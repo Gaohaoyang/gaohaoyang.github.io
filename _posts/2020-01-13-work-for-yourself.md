@@ -321,9 +321,9 @@ permalink: /work
 5.  效率胜过质量：大多数情况下，完美主义不过是一个路障，完成比试图做到完美要好
 
 
-### 红娘
+## 红娘
 
-#### 陌上花开
+### 陌上花开
 
 【2022-1-1】[月亮：放弃百万年薪，我全职当红娘啦！](https://mp.weixin.qq.com/s?__biz=MzU3MzQ3NTkzNw==&mid=2247535641&idx=1&sn=966ced188ca785454961d8d9db4f1085&chksm=fcc31117cbb4980135faa49bdd58d9465d38125b63c7b045b48adb0f139d1c47c026755d6b93&mpshare=1&scene=23&srcid=0101dApvn5XByNxUYRnHybR2&sharer_sharetime=1641051005800&sharer_shareid=b8d409494a5439418f4a89712efcd92a#rd)
 - 92年清华经管学院文科生（云南第5-6名）、北大经管硕士，从投行辞职，专职做“陌上花开”；2015年1月1日，也就是我和乐乐读研时创立陌上（公众号）的日子；2021年8月，我们把服务从公众号迁移到了小程序，9月运行一个月数据反馈不错，但也有很多bug需要改进。但我开始起飞的本职投资工作变得很忙，很难兼顾被我们戏称为“毛坯房”的小程序。
@@ -331,7 +331,7 @@ permalink: /work
 - 认清自我与世界的关系，寻找值得全情投入的领域，在爱与被爱中使心智成熟；
 - 职业规划：“做有趣的人，做有意义的事”。
 
-#### 二狗
+### 二狗
 
 【2022-5-20】前腾讯员工李二狗，90后，创立单身交友平台，[90后腾讯员工辞职创业，帮10万人脱单，月入百万](https://www.ixigua.com/7099063791085847043)。
 - 起因：参加了单身交友活动，让他发征婚帖到腾讯bbs里。2018年，发帖数第一、阅读量第一；每天整理资料，忙到三四点，严重影响工作，要么放弃发帖，要么辞职创业？
@@ -630,6 +630,62 @@ Tiktok的变现方式有很多种，目前我主要运营的是**短视频带货
 
 # 自由职业
 
+
+## 技术创业
+
+### BuiltWith
+
+【2022-11-8】[一个人、一家公司、年入一个亿！](https://www.toutiao.com/article/7163262534219366952), 英文原文:[How BuiltWith generates $14 million a year while having zero employees](https://5to9.beehiiv.com/p/builtwith-generates-14-million-year-zero-employees?continueFlag=1838bf3e0269217efe76e92490560e86)
+- 程序员 Gary Brewer 创建的 BuiltWith 背后没有销售团队，没有服务团队，也没有工程师。年入 1400 万美元，“BuiltWith”是一个揭秘网站搭建技术的网站。
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/TM5C4foNdu6R0~noop.image?_iz=58558&from=article.pc_detail&x-expires=1668481514&x-signature=qyq9O6zkcVAAzFnA3%2FP1L1cPLvo%3D)
+
+最初 Gary Brewer 其实无心创业的，直至 2006 年他参加了一场在悉尼举行的创业会议，会后他收获了两个心得：
+- 每个人都可以创业；
+- 但他个人并不喜欢管理企业琐事和推销行为。
+
+因此在接下来的几个月里，Gary Brewer 除全职工作之外，业余时间还尝试开发了多个工具和产品，虽然最后都以失败告终，但他很享受创建每一个产品的过程和经验。
+
+当 Gary Brewer 上网寻找下一个产品的定位时，他突然在浏览某网站源代码时灵光一闪：
+> 源码里有一段 Java 特有的代码，可以推断出该网站是用 Java 建立的……欸，如果能知道每个网站使用的确切技术岂不是很棒？
+
+对此十分感兴趣的 Gary Brewer，行动力也很强。
+- 他火速注册了 BuiltWith 这个域名，并开始搭建 Scraper 及其技术数据库，将某些代码段映射到对应技术上。
+- 例如，某些代码段可用于识别网站是否使用了 Adsense 与 Adzerk 或其他广告方法。
+
+不久后，BuiltWith 正式发布，并立即涌进了大量流量。Gary Brewer 还为 BuiltWith 的发布联系了一家出版社 ReadWriteWeb 写了一篇独家稿件，并一举在当时主流社交分享网站 Digg 上获得了第一名。
+
+不过，对 BuiltWith 来说最重要的转折点在于 Gary Brewer 和 AboutUs 创始人 Raymond King 的会面（AboutUs 是一个包含数百万企业信息的互联网域名目录）。
+
+在 Gary Brewer 向 Raymond King 展示了 BuiltWith 的功能后，Raymond King 便立即同意在 AboutUs 索引中的每条记录都添加一个 BuiltWith.com 链接，以提供每个网站所使用的确切技术作为参考。
+
+结果可想而知：
+- AboutUs 包含数百万个企业信息，其每条索引都能链接到 BuiltWith.com——BuiltWith 的流量呈爆炸式增长，SEO 排名也迅速上升。
+
+
+通过 BuiltWith 获得竞争优势
+
+说到这里，可能很多人都觉得，这 BuiltWith 不就只能分析网站背后使用的技术，它为什么能年入 1400 万美元？主要原因在于：
+> 企业可以从中获得竞争优势——能通过 BuiltWith 了解更多对手信息，挖掘更多客户，赚到更多的钱。
+
+BuiltWith 有两个版本，免费版本和付费版本：
+- `免费`版本：你可以通过 BuiltWith 了解你的竞争对手在使用什么技术。
+- `付费`版本：你可以用特定的关键词和技术找到每一个符合条件的网站，甚至可以按地点、消费和社会关注度对它们进行细分——这无疑是一个收集潜在客户的完美场所。
+
+举个例子：
+- 如果你有一个更好、更简单、更现代的 WordPress 版本，你就可以用 BuiltWith 搜索 WordPress，找到每一个使用 WordPress 的网站，向他们推荐你的产品，把他们转化为你的客户。
+
+简单概括来说，因为 BuiltWith 几乎已经成为一个互联网背后的巨大技术**数据库**，很多企业把它等同于一个能产生潜在客户并快速跟踪构建功能的数据库，因此 BuiltWith 超过 50% 的流量都来自直接访问。
+
+以下是 5to9 统计的 BuiltWith 相关数据：
+- 没有员工；
+- 年营收 1400 万美元；
+- 每月 200 万的页面浏览量，其中直接访问占 57% ，36% 来自搜索引擎，没有付费关键词广告。
+
+BuiltWith 的运营，一人足矣
+
+由于 BuiltWith 功能的特点，实际上企业在进入 BuiltWith.com 前，是否要为其付费就已经是一件既定的事情了，无需多加推销：要么有目的性地成为高级付费用户，挖掘更多潜在客户；要么就坚决“白嫖”，只需知道竞争对手在用什么技术即可。
+
+甚至因为 BuiltWith 的使用方法简单，Gary Brewer 都不需要向客户解释什么，简单制作一个 20 秒的视频教程作为参考就够了——换句话说，BuiltWith 的运营已经完全自动化，并不需要工程师等员工来推送功能或添加资源等。
 
 ## 远程工作
 
