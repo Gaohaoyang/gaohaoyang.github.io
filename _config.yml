@@ -199,6 +199,10 @@ useful_urls:
     name : 全球架构师峰会
     url : https://archsummit.infoq.cn/2019/shenzhen/
     desc : 架构师领域技术交流
+    -
+    name : 5to9
+    url : https://5to9.beehiiv.com/
+    desc : 国外创业案例
   -
     name : 黄海广博士的学习总结(github)
     url : https://github.com/fengdu78
