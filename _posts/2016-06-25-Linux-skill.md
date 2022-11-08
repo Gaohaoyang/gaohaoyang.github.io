@@ -94,6 +94,29 @@ du -sh temp/ # 易读方式显示目录总大小，基数是 1024
 du --si temp/ # --si 选项默认计算基数是 1000，更精确
 ```
 
+### 文件颜色
+
+颜色区分不同类型文件，[详见](https://blog.51cto.com/u_12039705/5077330)
+- 白色：普通文件
+- 蓝色：目录
+- 绿色：可执行文件
+- 浅蓝色：链接文件
+- 黄色：设备文件
+- 红色：压缩文件
+- 红色闪烁：链接的文件有问题
+- 灰色：其它文件
+
+如果遇到linux系统上，文件夹与文件颜色无区分，非蓝色，可以这么做：
+
+```shell
+vim ~/.bashrc
+# 添加以下代码
+alias ls="ls --color" # 默认蓝色
+export LS_COLORS=${LS_COLORS}:'di=01;37;44' # 【可忽略】自定义：灰色字体，蓝色背景
+source ~/.bashrc
+```
+
+
 ### 时间戳
 
 [Linux下文件的三种时间标记](https://www.cnblogs.com/cherishry/p/5885098.html)
@@ -3768,34 +3791,65 @@ jt -t grade3 -f fira -fs 13 -cellw 90% -ofs 11 -dfs 11 -T
 - 【2017-12-18】参考：[远程访问Jupyter Notebook](http://www.cnblogs.com/zhanglianbo/p/6109939.html)
 
 详细步骤如下：
-- 查看服务端ip：ifconfig \| grep "inet " \| grep -v 127.0.0.1，如ip=10.97.182.142
+- 查看服务端ip：
+
+```shell
+ifconfig \| grep "inet " \| grep -v 127.0.0.1 # 如ip=10.97.182.142
+```
+
 - 生成配置文件：
-  - 服务端：jupyter notebook --generate-config
-- 打开ipython，生成密码：
-  - 服务端终端输入：ipython
-  - 继续输入：
-    - from notebook.auth import passwd;passwd() # python2
-    - from IPython.lib import passwd;passwd() # python3
-  - 输入访问密码
-  - 复制生成的密文：'sha:ce.....',
+
+```shell
+# 服务端
+jupyter notebook --generate-config
+```
+
+打开ipython，生成密码：
+- 服务端终端输入：`ipython`
+- 继续输入：
+
+```python
+from notebook.auth import passwd;passwd() # python2
+from IPython.lib import passwd;passwd() # python3
+# 输入访问密码
+# 复制生成的密文：'sha:ce.....',
+```
+
 - 修改配置文件
-  - vim ~/.jupyter/jupyter_notebook_config.py
-  - 更新如下参数：
-    - c.NotebookApp.ip='*' # 就是设置所有ip皆可访问
-    - c.NotebookApp.password = u'sha:ce...刚才复制的那个密文'
-    - c.NotebookApp.open_browser = False # 禁止自动打开浏览器
-    - c.NotebookApp.port =8888 #随便指定一个端口
+
+```shell
+vim ~/.jupyter/jupyter_notebook_config.py
+# 更新如下参数：
+c.NotebookApp.ip='*' # 就是设置所有ip皆可访问
+c.NotebookApp.password = u'sha:ce...' # 刚才复制的那个密文'
+c.NotebookApp.open_browser = False # 禁止自动打开浏览器
+c.NotebookApp.port =8888 # 随便指定一个端口
+```
+
 - 启动服务端jupyter
-  - 执行：jupyter notebook --ip=10.84.154.79 # ip可以省略
-  - 扔后台：nohup jupyter notebook --ip=10.84.154.79 &
+
+```shell
+# 执行：
+jupyter notebook --ip=10.84.154.79 # ip可以省略
+# 扔后台：
+nohup jupyter notebook --ip=10.84.154.79 &
+```
+
 - 客户端访问：http://10.97.182.142:8888/tree
   - 初次需要账户登录，输入设置过的访问密码
 - 注：请及时替换ip
-  - jupyter notebook --no-browser --port 6000 --ip=192.168.1.103
-- [2018-1-4]如果依赖python虚拟环境(virtualenv)，需要先激活再启动notebook
-  - source ~/wqw/bin/activate
-  - nohup jupyter notebook --ip=`ifconfig eth | awk '/inet/{print $2}'` &>log.txt &
 
+```shell
+jupyter notebook --no-browser --port 6000 --ip=192.168.1.103
+```
+
+- [2018-1-4]如果依赖python虚拟环境(virtualenv)，需要先激活再启动notebook
+
+```shell
+source ~/wqw/bin/activate
+nohup jupyter notebook --ip=`ifconfig eth | awk '/inet/{print $2}'` &>log.txt &
+nohup jupyter notebook --ip=10.37.139.225 &>log_notebook.txt & # 不指定ip也行
+```
 
 ## 显示图片
 
