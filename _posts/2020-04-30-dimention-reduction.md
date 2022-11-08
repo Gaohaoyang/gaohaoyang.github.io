@@ -22,10 +22,11 @@ permalink: /manifold
 - 【2014-3】[NN-Manifolds-Topology](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/)
 - 【2021-4-25】比如，三维空间的球体是一个二维流形嵌入在三维空间（2D manifold embedded in 3D space）。之所以是二维流形，是因为球上的任意一个点只需要用一个二维的经纬度来表达就可以了。
 - 又如一个二维空间的旋转矩阵是2x2的矩阵，其实只需要一个角度就能表达了，这就是一个一维流形嵌入在2x2的矩阵空间。
-- 深度学习里的Embedding？
-  - Embedding这个概念在深度学习领域最原初的切入点是所谓的**Manifold Hypothesis**（**流形假设**）。
-  - 流形假设是指“<font color='blue'>自然的原始数据是低维的流形嵌入于(embedded in)原始数据所在的高维空间</font>”。
-  - 那么，深度学习的任务就是把高维原始数据（图像，句子）映射到低维流形，使得高维的原始数据被映射到低维流形之后变得可分，而这个映射就叫**嵌入**（Embedding）。比如Word Embedding，就是把单词组成的句子映射到一个表征向量。但后来不知咋回事，开始**把低维流形的表征向量叫做Embedding**，其实是一种误用
+
+深度学习里的Embedding？
+- Embedding这个概念在深度学习领域最原初的切入点是所谓的**Manifold Hypothesis**（**流形假设**）。
+- 流形假设是指“<font color='blue'>自然的原始数据是低维的流形嵌入于(embedded in)原始数据所在的高维空间</font>”。
+- 那么，深度学习的任务就是把高维原始数据（图像，句子）映射到低维流形，使得高维的原始数据被映射到低维流形之后变得可分，而这个映射就叫**嵌入**（Embedding）。比如Word Embedding，就是把单词组成的句子映射到一个表征向量。但后来不知咋回事，开始**把低维流形的表征向量叫做Embedding**，其实是一种误用
 
 [知乎刘斯坦](https://www.zhihu.com/question/38002635/answer/1382442522)
 
@@ -37,11 +38,28 @@ permalink: /manifold
   - 非欧空间中，这个问题就不一定了。
 - 马鞍形的双曲抛物面，就是一个非欧空间的例子。
   - 粉色和黄色线都平行于蓝线，且都经过同一点。更重要的是，蓝色和黄色的平行线并非与欧式空间中的平行线一样处处距离相等。
-  - ![](https://img-blog.csdn.net/20170901223551309)
+  - ![img](https://img-blog.csdn.net/20170901223551309)
 
 - [理解数学空间，从距离到希尔伯特空间](https://blog.csdn.net/shijing_0214/article/details/51052208)
 - 演变关系
   - **线性空间**（向量空间， 对数乘和向量加法封闭所组成的空间）--（定义范数）-->**赋范线性空间**（向量具有的长度）--（定义内积）-->**内积空间**（向量之间具有了角度）--（完备化）-->**希尔伯特空间**→**欧式空间**（有限维）。
+
+<div class="mermaid">
+    flowchart TD
+    %% 节点颜色
+    classDef red fill:#f02;
+    classDef green fill:#5CF77B;
+    classDef blue fill:#6BE0F7;
+    classDef orange fill:#F7CF6B;
+    classDef grass fill:#C8D64B;
+    %%节点关系定义
+    O[(向量)]-->|加法+数乘|A(线性空间):::blue
+    A -->|定义范数|B(赋范线性空间):::blue
+    B -->|定义内积|C(内积空间):::blue
+    C -->|完备化|D(希尔伯特空间):::blue
+    D -->|有限维|E(欧式空间):::green
+</div>
+
 - 总结
   - 距离⟶范数⟶内积 
   - 向量空间+范数⟶赋范空间+线性结构⟶+线性结构⟶线性赋范空间+内积运算⟶内积空间+完备性⟶希尔伯特空间 
