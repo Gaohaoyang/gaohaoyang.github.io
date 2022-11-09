@@ -265,7 +265,7 @@ permalink: /house
 
 ### 为什么开发商明明缺钱，却不降价？
 
-【2022-3-24】[最缺钱的那批开发商，已经到了拒绝降价的地步](https://mp.weixin.qq.com/s/D4xOYEUueEHDRjuSweusjw)
+【2022-3-24】[最缺钱的那批开发商，已经到了拒绝降价的地步](https://mp.weixin.qq.com/s/D4xOYEUueEHDRjuSweusjw)，源自知乎专题：[为什么2022年房地产突然炒不快了？](https://www.zhihu.com/question/519528854)
 - 想法：房产行情不好，能不能找人买点便宜资产
 - 思路：找最缺钱的那批开发商，市场传言越缺钱的开发商同意降价的概率越大
 - 事实截然相反: <span style='color:blue'>资金链健康的开发商反而愿意降价，越缺钱的越不降价</span>。
