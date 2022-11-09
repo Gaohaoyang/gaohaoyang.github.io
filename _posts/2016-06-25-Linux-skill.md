@@ -28,6 +28,88 @@ permalink: /linux
 
 ![](https://static.oschina.net/uploads/space/2017/0206/122129_TqPO_12.jpeg)
 
+## 环境
+
+为什么ssh登录linux服务器后，bashrc里的变量没生效？非要单独source一遍？
+
+### bash文件
+
+bash的startup文件
+
+Linux shell是用户与Linux系统进行交互的媒介，而bash作为目前Linux系统中最常用的shell，它支持的startup文件也并不单一，甚至容易让人感到费解。本文以CentOS7系统为例
+- `/etc/profile`：登入时执行，The systemwide initialization file, executed for login shells
+- `/etc/bash.bash_logout`：登出时执行，The systemwide login shell cleanup file, executed when a login shell exits
+- `~/.bash_profile`：用户自定义，The personal initialization file, executed for login shells
+- `~/.bashrc`：The individual per-interactive-shell startup file
+- `~/.bash_logout`：The individual login shell cleanup file, executed when a login shell exits
+
+此外，bash还支持~/.bash_login和~/.profile文件，作为对其他shell的兼容，它们与~/.bash_profile文件的作用是相同的。
+
+备注：Debian系统会使用~/.profile文件取代~/.bash_profile文件，因此在相关细节上，会与CentOS略有不同。
+
+#### .bashrc和.bash_profile之间的差异
+
+[.bashrc与.bash_profile区别](https://www.myfreax.com/bashrc-vs-bash-profile/)
+- 当Bash作为交互式登录shell调用时，将读取并执行.bash_profile
+- 对于交互式非登录shell，则执行.bashrc。
+- 仅应运行一次的命令应该使用.bash_profile ，例如自定义 \$PATH 环境变量。
+- 将每次启动新Shell时应该运行的命令放在.bashrc文件中。 这包括您的别名和function，自定义提示，历史记录自定义等。
+
+通常，~/.bash_profile包含以下类似于.bashrc文件来源的行。 这意味着每次您登录到终端时，都会读取并执行两个文件。
+
+```shell
+if [ -f ~/.bashrc ]; then
+	. ~/.bashrc
+fi
+```
+
+大多数Linux发行版都使用`~/.profile`而不是`~/.bash_profile`。 所有Shell程序都读取~/.profile文件，而Bash仅读取~/.bash_profile文件。
+
+如果系统上没有任何启动文件，则可以创建该文件。
+
+### 登录顺序
+
+bash的运行模式
+- “登陆shell”启动时会加载“profile”系列的startup文件
+  - “profile”系列的代表文件为~/.bash_profile，它用于“登录shell”的环境加载，这个“登录shell”既可以是“交互式”的，也可以是“非交互式”的。
+- 而“交互式非登陆shell”启动时会加载“rc”系列的startup文件
+
+总结：
+- `交互式shell`是读取和写入用户终端的shell程序
+  - 交互式shell程序可以是登录shell程序，也可以是非登录shell程序。
+- 而`非交互式shell`程序是与终端无关的shell程序，例如**执行脚本**时。
+
+CentOS规定了startup文件的加载顺序如下：
+
+#### 交互式登陆shell
+
+**登陆**过程：
+1. 读取并执行`/etc/profile`文件；
+2. 读取并执行`~/.bash_profile`文件；
+  - 若文件不存在，则读取并执行`~/.bash_login`文件；
+  - 若文件不存在，则读取并执行`~/.profile`文件；
+
+当Bash作为交互式非登录shell程序调用时，它会从`~/.bashrc`中读取并执行命令（如果该文件存在并且可读)
+
+**登出**过程：
+1. 读取并执行`~/.bash_logout`文件；
+2. 读取并执行`/etc/bash.bash_logout`文件；
+
+#### 非交互式登陆shell
+
+对于非交互式的登陆shell而言，CentOS规定了startup文件的加载顺序如下：
+
+登陆过程：
+1. 读取并执行`/etc/profile`文件；
+2. 读取并执行`~/.bash_profile`文件；
+  - 若文件不存在，则读取并执行`~/.bash_login`文件；
+  - 若文件不存在，则读取并执行`~/.profile`文件；
+
+与“交互式登陆shell”相比，“非交互式登陆shell”并没有登出的过程
+
+
+[原文链接](https://blog.csdn.net/sch0120/article/details/70256318)
+
 
 ## 文件
 
