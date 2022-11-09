@@ -3850,6 +3850,21 @@ syntax enable
 colorscheme monokai
 ```
 
+【2022-11-9】monokai主题
+- 去github上下载 [monokai.vim](https://github.com/sickill/vim-monokai/blob/6fb52e32863646e38cdebce57ae0d1688f334a79/colors/monokai.vim)文件
+- 放到指定目录: ~/.vim/colors 中
+- 开启主题
+
+```shell
+# 下载主题, 进入github中monokai.vim文件页面，点raw按钮
+wget https://raw.githubusercontent.com/sickill/vim-monokai/6fb52e32863646e38cdebce57ae0d1688f334a79/colors/monokai.vim
+mkdir ~/.vim/colors
+mv monokai.vim ~/.vim/colors
+# 编辑 vimrc 文件
+syntax enable
+colorscheme monokai
+```
+
 ### vim 配置
 
 Vim 的配置不太容易，它有自己的语法，许多命令
@@ -3857,6 +3872,21 @@ Vim 的配置不太容易，它有自己的语法，许多命令
 Vim 的全局配置一般在`/etc/vim/vimrc`或者`/etc/vimrc`，对所有用户生效。用户个人的配置在`~/.vimrc`。
 - 如果只对**单次**编辑启用某个配置项，可以在命令模式下，先输入一个冒号，再输入配置。
 - 如果是批量设置设置，详见：阮一峰的[Vim配置入门](https://www.ruanyifeng.com/blog/2018/09/vimrc.html)
+
+精简
+
+```python
+set showmode " 在底部显示，当前处于命令模式还是插入模式
+set number " 显示行号
+syntax on " 打开语法高亮。自动识别代码，使用多种颜色显示
+set cursorline " 光标所在的当前行高亮
+set autoindent " 按下回车键后，下一行的缩进会自动跟上一行的缩进保持一致。
+set tabstop=4 " 按下 Tab 键时，Vim 显示的空格数
+set encoding=utf-8 " 编码，可以解决vim下的中文乱码问题
+" colorscheme monokai " 配色
+```
+
+完整介绍
 
 ```python
 " ========== 一次性 =========
@@ -3943,8 +3973,6 @@ set hlsearch " 搜索时，高亮显示匹配结果
 set incsearch " 输入搜索模式时，每输入一个字符，就自动跳到第一个匹配的结果。
 set ignorecase " 搜索时忽略大小写
 set smartcase " 如果同时打开了ignorecase，那么对于只有一个大写字母的搜索词，将大小写敏感；其他情况都是大小写不敏感。比如，搜索Test时，将不匹配test；搜索test时，将匹配Test
-
-
 ```
 
 缩进统一：tab -> 4个空格，只需在代码文件中加一行
@@ -3952,7 +3980,6 @@ set smartcase " 如果同时打开了ignorecase，那么对于只有一个大写
 ```python
 # */* vim: set expandtab ts=4 sw=4 sts=4 tw=400: */
 ```
-
 
 ### vim技巧
 
