@@ -3858,7 +3858,7 @@ colorscheme monokai
 ```shell
 # 下载主题, 进入github中monokai.vim文件页面，点raw按钮
 wget https://raw.githubusercontent.com/sickill/vim-monokai/6fb52e32863646e38cdebce57ae0d1688f334a79/colors/monokai.vim
-mkdir ~/.vim/colors
+mkdir -p ~/.vim/colors
 mv monokai.vim ~/.vim/colors
 # 编辑 vimrc 文件
 syntax enable
