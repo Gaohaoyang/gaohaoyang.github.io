@@ -211,6 +211,19 @@ echo "done"
 - (10) *.xz 用 xz -d 解压
 - (11) *.tar.xz 用 tar -zJf 解压
 
+### 中文乱码
+
+linux 文件里中文乱码
+
+```shell
+locale # 显示的字体中，没有zh cn，意味着没有中文语言
+# 下载安装中文语言包
+yum groupinstall chinese-support
+# error: libssl.so.1.0.0: cannot open shared object file: No such file or directory
+# 设置中文字体
+LANG="zh_CN.UTF-8"
+```
+
 
 ## 常用命令
 
@@ -298,6 +311,21 @@ sudo 的执行流程大致为：
 ### 软件包
 
 linux软件包：如yum、apt等
+
+#### yum 软件包
+
+```shell
+apt install yum # 通过apt安装yum
+# 或下载安装
+wget http://yum.baseurl.org/download/3.2/yum-3.2.28.tar.gz
+tar xvf yum-3.2.28.tar.gz
+cd yum-3.2.28
+sudo apt install yum
+# 更新到新版
+yum check-update
+yum update
+yum clean all
+```
 
 yum软件包
 
