@@ -1620,6 +1620,19 @@ Jekyll SEO Tag adds the following meta tags to your site:
 _includes文件夹下 head.html文件在 </head>之前添加
 - \{\% seo \%\}
 
+### 相关文章卡片
+
+【2022-11-10】[3分钟实现响应式卡片悬停效果 html+css](https://juejin.cn/post/6969204776437301261)
+- ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/399c76328c96419390ce48022a897415~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.image)
+
+使用方法
+- css代码复制到 `/css/card.css`，新增css引用代码 < head > 区域里link
+- < div class="kapian" > 部分代码复制到 `_includes/previousAndNext.html` 
+
+注意
+- 去掉css里的*和body部分，免得干扰整体布局
+
+更多[卡片样式](https://code.z01.com/v4/components/card.html)
 
 ## Jekyll语法
 
