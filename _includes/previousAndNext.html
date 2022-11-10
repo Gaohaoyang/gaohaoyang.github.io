@@ -16,14 +16,23 @@
     </div>
 </div>
 
-{% if page.next %}
 <div class="kapian">
+    {% if page.previous %}
     <div class="tu">
        <img src="https://img.zcool.cn/community/01493a5cc98256a801214168b8995d.jpg">
     </div>
     <div class="wenben">
-          <p><a href="{{ page.next.url | prepend: site.baseurl }}">标题：{{ page.next.title }}</a></p>
-          <p style="padding-bottom: 20px;">摘要：{{ page.next.excerpt }}</p>
+          <p><a href="{{ page.previous.url | prepend: site.baseurl }}">标题：{{ page.previous.title }}</a></p>
+          <p style="padding-bottom: 20px;">摘要：{{ page.previous.excerpt }}</p>
     </div>
+    {% endif %}
+    {% if page.next %}
+    <div class="tu">
+        <img src="https://img.zcool.cn/community/01493a5cc98256a801214168b8995d.jpg">
+     </div>
+     <div class="wenben">
+           <p><a href="{{ page.next.url | prepend: site.baseurl }}">标题：{{ page.next.title }}</a></p>
+           <p style="padding-bottom: 40px;">摘要：{{ page.next.excerpt }}</p>
+     </div>
+     {% endif %}
 </div>
-{% endif %}
