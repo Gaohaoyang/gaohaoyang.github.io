@@ -1637,6 +1637,7 @@ _includes文件夹下 head.html文件在 </head>之前添加
 ### 组件特效
 
 【2022-11-10】[Bootstrap](https://code.z01.com/v4/docs/)
+- 【2022-11-10】bootstrap里的css不宜打开，否则破坏整体布局，字体变粗，代码区变黑色，无法辨认 
 
 ```html
 <!-- head -->
@@ -1681,7 +1682,6 @@ _includes文件夹下 head.html文件在 </head>之前添加
 <a href="#" class="badge badge-dark">Dark</a>
 <!-- 气泡提示 -->
 <button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">点击体验 popover提示框效果</button>
-
 ```
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
