@@ -1865,6 +1865,14 @@ Go语言支持**匿名**函数，通过**闭包方式**实现。匿名函数在�
 ```go
 import "fmt"
 
+// 匿名函数→初始化变量值
+r1, r2 := func() (string, string) {
+    x := []string{"hello", "world"}
+    return x[0], x[1]
+}()
+// => hello world
+fmt.Println(r1, r2)
+
 func intSeq() func() int {   //i记录调用次数，相当于计数器
     i := 0     //定义初始值
     return func() int { //通过闭包方式隐藏变量i    
@@ -1879,6 +1887,22 @@ func main(){
     newInt := intSeq()
     fmt.println(newInt()) //1
 }
+
+```
+
+### 值函数
+
+函数赋给变量，不同于匿名函数，<span style='color:red'>函数体末尾没有双括号（）</span>！
+
+```go
+func main() {
+  // 将函数赋给名称
+  add := func(a, b int) int {
+      return a + b
+  }
+  // 使用名称调用函数
+  fmt.Println(add(3, 4)) // => 7
+}
 ```
 
 ### 特殊函数
@@ -1892,11 +1916,24 @@ init函数
 - 每个源文件都可以包含一个 init  函数，该函数会在 main 函数执行前，被 Go 运行框架调用，也就是说 init 会在 main 函数前被调用
 - 如果文件同时包含全局变量定义，init  函数和 main  函数，则执行的流程是：
   - 全局变量定义 -> init函数 -> main 函数。
+  - import --> const --> var --> init()
 
 ```go
 package main
 import "fmt"
 
+var num = setNumber()
+func setNumber() int {
+  return 42
+}
+func init() {
+  num = 0
+}
+func main() {
+  fmt.Println(num) // => 0
+}
+
+// ----------------------
 var g_a int = 10 // 全局变量
 
 type new_type struct {
@@ -1914,7 +1951,6 @@ func change(p *new_type){
 	p.y = "changing ..."
 }
 
-
 func main(){
 	fmt.Println("hello")
 	s := new_type{x:3, y:"world"}
@@ -1926,6 +1962,7 @@ func main(){
 	g_a = 30
 	fmt.Println("main: ", g_a)
 }
+
 ```
 
 输出
@@ -1938,6 +1975,37 @@ hello
 world
 {5 changing ...}
 main:  30
+```
+
+#### 关闭
+
+关闭 1
+
+```go
+func scope() func() int{
+  outer_var := 2
+  foo := func() int {return outer_var}
+  return foo
+}
+// Outpus: 2
+fmt.Println(scope()())
+```
+
+关闭 2
+
+```go
+func outer() (func() int, int) {
+    outer_var := 2
+    inner := func() int {
+        outer_var += 99
+        return outer_var
+    }
+    inner()
+    return inner, outer_var
+}
+inner, val := outer()
+fmt.Println(inner()) // => 200
+fmt.Println(val)     // => 101
 ```
 
 ## 参数
@@ -1978,10 +2046,17 @@ func add(x int, y int) int {
     return x + y 
     //return // 裸返回：没有参数的 return 语句返回各个返回变量的当前值
 }
-// 参数简写
+// 多个参数简写
 func add(x, y int) int {
     return x + y 
 }
+// 多个返回值
+func vals() (int, int) {
+  return 3, 7
+}
+a, b := vals()
+fmt.Println(a)    // => 3
+fmt.Println(b)    // => 7
 ```
 
 
@@ -2024,6 +2099,8 @@ Golang项目中，一次只应有一个main.go，但是所有文件都可以使�
 - 如 main.go 和 greet.go
 - 运行；go run greet.go main.go
 
+main.go
+
 ```go
 //-------- main.go ----------
 package main
@@ -2031,6 +2108,11 @@ package main
 func main() {
     greet()
 }
+```
+
+greet.go
+
+```go
 //--------greet.go----------
 package main
 import "fmt"
@@ -2076,7 +2158,7 @@ func main() {
 }
 ```
 
-### go.mod导入
+### go.mod 导入
 
 代码结构：
 
@@ -2088,13 +2170,14 @@ func main() {
 ```
 
 包代码
+- 导出函数名首字母大写！
 
 ```go
 //test.go 
 package cfg
 import "fmt"
 
-func Test() {
+func Test() { // 导出函数名首字母大写！
     fmt.Println("test")
 }
 ```
@@ -2355,7 +2438,12 @@ type Vertex struct {
     Y int 
 }
 
-func main() {     
+func main() {
+    v := Vertex{X: 1, Y: 2} // 完整初始化
+    // Field names can be omitted
+    v := Vertex{1, 2} // 省略变量名称，按顺序逐个赋值
+    // Y is implicit
+    v := Vertex{X: 1} // 省略部分变量
     fmt.Println(Vertex{1, 2}) //大括号！初始化
     v = Vertex{}
     fmt.Println(v.X)
