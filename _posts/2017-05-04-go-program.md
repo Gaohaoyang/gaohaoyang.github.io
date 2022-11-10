@@ -1232,7 +1232,9 @@ Go语言中，行分隔符键是语句终止符，无需指明用;分割
 
 ## 数据类型
 
-四种重要的数据类型，即整数，浮点数，字符串和布尔值。
+### 基础类型
+
+四种重要的数据类型，即`整数`，`浮点数`，`字符串`和`布尔值`。
 - 整数是整数，浮点数是数字，字符串是"文本"，布尔值是真值，因此是true或false。
 - 无符号变量，数值永远不能为负。使用带符号的变量，可以为负
 
@@ -1294,6 +1296,24 @@ func main() {
 }
 ```
 
+### 类型转换
+
+用法同C
+
+```go
+i := 90
+f := float64(i)
+u := uint(i)
+// 将等于字符Z
+s := string(i)
+
+// int->字符串
+i := 90
+// 需要导入“strconv”
+s := strconv.Itoa(i)
+fmt.Println(s) // Outputs: 90
+```
+
 ### 自定义类型 type
 
 type-keyword创建的模板
@@ -1317,6 +1337,7 @@ package main
 import (
   "fmt"
   "strings" 
+  // s "strings" // 包别名
 )
 
 func main() {    
@@ -1478,6 +1499,15 @@ func main() {
 
 ## 数组（array）—— 固定大小
 
+```sh
+┌────┬────┬────┬────┬─────┬─────┐
+| 2  | 3  | 5  | 7  | 11  | 13  |
+└────┴────┴────┴────┴─────┴─────┘
+  0    1    2    3     4     5
+```
+
+### 数组定义
+
 ```go
 var a [10]int //定义数组时需要制定大小s
 var stu = [2]string{"a", "b"}
@@ -1495,6 +1525,28 @@ for i, v := range stu {
 for _, v := range stu {
     fmt.Println(v)
 }
+// ---------------------
+var a [2]string
+a[0] = "Hello"
+a[1] = "World"
+fmt.Println(a[0], a[1]) //=> Hello World
+fmt.Println(a)   // => [Hello World]
+// 切片操作
+primes := [...]int{2, 3, 5, 7, 11, 13}
+fmt.Println(len(primes)) // => 6
+// 输出：[2 3 5 7 11 13]
+fmt.Println(primes)
+// 与 [:3] 相同，输出：[2 3 5]
+fmt.Println(primes[0:3])
+// ----- 二维数组 ------
+var twoDimension [2][3]int
+for i := 0; i < 2; i++ {
+    for j := 0; j < 3; j++ {
+        twoDimension[i][j] = i + j
+    }
+}
+// => 2d:  [[0 1 2] [1 2 3]]
+fmt.Println("2d: ", twoDimension)
 ```
 
 ### 字符串替换
@@ -1675,6 +1727,18 @@ fmt.Println("三层取地址:",&copyWriteDict["female"][1]["real"]) //cannot tak
 解决办法：
 - （1）不传指针 
 - （2）提前用临时变量缓存，再传非map类的地址
+
+## 常量(Constants)
+
+不同于C，变量后面类型可有可无
+
+```go
+const s string = "constant"
+const Phi = 1.618
+const n = 500000000
+const d = 3e20 / n
+fmt.Println(d)
+```
 
 ## 变量
 
@@ -2081,6 +2145,31 @@ Go编程语言提供以下类型的决策语句。
 循环控制语句：
 - break、continue、goto
 
+### if 语句
+
+就像 for 循环一样，Go 的 if 语句也不要求用 () 将条件括起来，同时，{}还是必须有的
+- 跟 for 语句一样， if 语句可以在条件之前执行一个简单语句
+
+```go
+if x < 0 { 
+    //if v := math.Pow(x, n); v < lim { //判断前增加一条语句,v的作用于尽在if-else中
+    return sqrt(-x) + "i"
+} else if x < 20 {
+    fmt.Println("%d", x)
+else {         
+   fmt.Printf("%g\n", x)     
+}
+// ------- if 组合语句 -------
+x := "hello go!"
+if count := len(x); count > 0 {
+    fmt.Println("Yes")
+}
+// 常见写法，执行某个命令，处理异常情形
+if _, err := doThing(); err != nil {
+    fmt.Println("Uh oh")
+}
+```
+
 ### for 循环
 
 Go **只有**一种循环结构 —— for 循环。（while语句通过for实现）
@@ -2109,10 +2198,18 @@ func main() {
          sum += sum     
     }
     fmt.Println(sum) 
+    // range 遍历
+    nums := []int{2, 3, 4}
+    sum := 0
+    for _, num := range nums {
+        sum += num
+    }
 }
 ```
 
 ### while（没有）
+
+没有while关键词，通过for循环实现
 
 ```go
 // 用for循环实现while效果
@@ -2123,21 +2220,12 @@ for 6 > 5 {
 for {
     fmt.Println("hi")
 }
-```
-
-### if 语句
-
-就像 for 循环一样，Go 的 if 语句也不要求用 () 将条件括起来，同时，{}还是必须有的
-- 跟 for 语句一样， if 语句可以在条件之前执行一个简单语句
-
-```go
-if x < 0 { 
-    //if v := math.Pow(x, n); v < lim { //判断前增加一条语句,v的作用于尽在if-else中
-    return sqrt(-x) + "i"     
-} else {         
-   fmt.Printf("%g >= %g\n", v, lim)     
+// --------
+i := 1
+for i <= 3 {
+  fmt.Println(i)
+  i++
 }
-//v变量此处失效
 ```
 
 ### switch 语句
@@ -2154,9 +2242,46 @@ func main() {
         default:  fmt.Printf("%s.", os)     
     } 
 }
+// ----------
+x := 42.0
+switch x {
+  case 0:
+  case 1, 2:
+      fmt.Println("Multiple matches")
+  case 42:   // Don't "fall through".
+      fmt.Println("reached")
+  case 43:
+      fmt.Println("Unreached")
+  default:
+      fmt.Println("Optional")
+}
 ```
 
 注意：没有break！
+
+### continue
+
+Continue 关键字
+
+```go
+for i := 0; i <= 5; i++ {
+  if i % 2 == 0 {
+      continue
+  }
+  fmt.Println(i)
+}
+```
+
+### break
+
+Break 关键字
+
+```go
+for {
+  fmt.Println("loop")
+  break
+}
+```
 
 ## Defer栈
 
@@ -2181,7 +2306,7 @@ for i := 0; i < 5; i++ {
 
 注意：<font color='red'>没有break！</font>
 
-## 指针
+## 指针(Pointers)
 
 类型 *T 是指向类型 T的值的指针, 零值是 nil 。不同于C，<font color='red'>go指针没有指针运算！</font>
 
@@ -2191,11 +2316,22 @@ i := 42
 p = &i // 取地址
 fmt.Println(*p) // 通过指针 p 读取内容
 i *p = 21         // 通过指针 p 设置 i
+// -----------
+func main () {
+  b := *getPointer()
+  fmt.Println("Value is", b)
+}
+
+func getPointer () (myPointer *int) {
+  a := 234
+  return &a
+}
+
+a := new(int)
+*a = 234
 ```
 
-指针有很多但很简单的概念，它们对Go编程非常重要。
-
-下面几个重要的指针概念，对于Go程序员应该要清楚：
+指针有很多但很简单的概念，它们对Go编程非常重要。下面几个重要的指针概念，对于Go程序员应该要清楚：
 
 |概念| 描述|
 |---|---|
