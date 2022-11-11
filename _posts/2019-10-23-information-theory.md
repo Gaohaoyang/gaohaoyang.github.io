@@ -152,6 +152,17 @@ Breiman是美国国家科学院院士 （应用数学学部），不仅在概率
 - `impossible`（不可能，p=0） → `unlikely`（不太可能，p=1/6） → `even chance`（等概率） → `likely`（很有可能，p=4/5） → `certain`（确定，p=1）
 - ![](https://ask.qcloudimg.com/http-save/yehe-7145566/5dift89zap.jpeg?imageView2/2/w/1620)
 
+how often do you exercise
+- 100% Always
+- 90% Usually
+- 80% Nomally
+- 70% Often
+- 50% Sometimes
+- 30% Occasionaly
+- 10% Seldom
+- 5% Hardly ever
+- 0% Never 
+
 【2020-5-29】用4个数来概括一个分布
 - **均值** mean: 第一矩。表位置
 - **方差** variance: 第二矩。表胖瘦
