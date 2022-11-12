@@ -11,8 +11,10 @@ type: page
 
 ## 关于我
 
-- [你好，我是码农！](https://mp.weixin.qq.com/s?__biz=MjM5ODY2OTQyNg==&mid=502284435&idx=1&sn=b40f727830cae264e65c29c75f75ee70&chksm=3ec3dd8e09b45498b3bc2efccc3fe52a2f79e8f424774dc4afaedb84b3bfc0954968b7a678de&mpshare=1&scene=23&srcid&sharer_sharetime=1564480271727&sharer_shareid=b8d409494a5439418f4a89712efcd92a%23rd)
+[你好，我是码农！](https://mp.weixin.qq.com/s?__biz=MjM5ODY2OTQyNg==&mid=502284435&idx=1&sn=b40f727830cae264e65c29c75f75ee70&chksm=3ec3dd8e09b45498b3bc2efccc3fe52a2f79e8f424774dc4afaedb84b3bfc0954968b7a678de&mpshare=1&scene=23&srcid&sharer_sharetime=1564480271727&sharer_shareid=b8d409494a5439418f4a89712efcd92a%23rd)
 - 普通程序猿，些许爱好，爱思考，偶尔发发呆，公众号（[鹤啸九天](http://mp.weixin.qq.com/mp/homepage?__biz=MjM5ODY2OTQyNg==&hid=1&sn=259f54743846ee6be7585e06be6e267e&scene=18%23wechat_redirect)）和这个技术博客
+  - 2007年，[全国大学生数学建模竞赛](http://www.mcm.edu.cn/index_cn.html)省一等奖, 总教练[汪晓银](https://www.x-mol.com/university/faculty/99162)
+  - 2010年，[研究生数学建模竞赛国家二等奖](https://news.cau.edu.cn/art/2010/12/6/art_10889_213074.html)
 - 动静结合
   - 动：长跑、游泳、爬山
   - 静：诗词书画，一颗伪文艺的心
@@ -29,8 +31,10 @@ type: page
 ## 相关项目
 
 讲过的AI课程
-- 2017年在雷锋网上主讲的深度学习读书分享，[BAT资深算法工程师「Deep Learning」读书系列分享（一） 分享总结](https://www.leiphone.com/news/201708/LEBNjZzvm0Q3Ipp0.html)
-   - ![](https://static.leiphone.com/uploads/new/article/740_740/201708/598fd35654561.jpg)
+- 2017年在雷锋网上主讲的深度学习读书分享
+  - 文字版：[BAT资深算法工程师「Deep Learning」读书系列分享（一） 分享总结](https://www.leiphone.com/news/201708/LEBNjZzvm0Q3Ipp0.html)
+  - 视频版：[腾讯云](https://cloud.tencent.com/edu/learning/course-1042-825)、[AI研习社](https://www.yanxishe.com/center/teachingCourses/4101350)
+  - ![](https://static.leiphone.com/uploads/new/article/740_740/201708/598fd35654561.jpg)
 - 大数据文摘+清华+SoAI共同承办的AI培训班：[The School of AI Beijing](https://wqw547243068.github.io/school-of-ai-beijing)
 ![](https://wqw547243068.github.io/school-of-ai-beijing/other/bdd_siraj.png)
 - 雷锋网上开的Python入门AI课程：[有趣的Python](https://wqw547243068.github.io/Python-learning), [AI研习社课程](https://mooc.yanxishe.com/course/489)
