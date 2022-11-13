@@ -145,11 +145,25 @@ permalink: /house
 
 ## 房产逻辑
 
+### 房地产各方关系
+
+
+【2016-6-10】[房地产搞这么多地王干啥啊啊啊啊啊](https://www.sohu.com/a/82359121_355089)
+- ![](http://img.mp.itc.cn/upload/20160611/b6c183544b244504adeb73f499db4e3a_th.jpg)
+- ![](http://img.mp.itc.cn/upload/20160611/a6ea54f55d0e476b9defc0ddf2f56b23_th.jpg)
+
+【2022-11-13】绘制各方关系图
+
+<div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers tags lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-11-13T14:48:14.462Z\&quot; agent=\&quot;5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36\&quot; etag=\&quot;9NSPw4zpQXi8JxGwF6DY\&quot; version=\&quot;20.4.0\&quot;&gt;&lt;diagram id=\&quot;xdYpP7w1t2VaaceZiyqw\&quot; name=\&quot;第 1 页\&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
+
+
+### 中国房地产内在逻辑
+
 【2022-7-23】[一个视频搞懂中国房地产内在逻辑，看完就能明白现在发生的一切](https://www.toutiao.com/video/7122834670739587615)
 - <iframe src="//player.bilibili.com/player.html?aid=601241893&bvid=BV1PB4y1h71p&cid=780014233&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- [一个视频搞懂中国房地产整个内在逻辑，看完就能明白现在发生的一切，以及未来大趋势](https://www.bilibili.com/video/BV1PB4y1h71p)
 
-[一个视频搞懂中国房地产整个内在逻辑，看完就能明白现在发生的一切，以及未来大趋势](https://www.bilibili.com/video/BV1PB4y1h71p)
-- <iframe src="//player.bilibili.com/player.html?aid=601241893&bvid=BV1PB4y1h71p&cid=780014233&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 ### 中美房产对比
 
@@ -399,6 +413,9 @@ permalink: /house
 
 ## 房产知识
 
+### 房产开发流程
+
+![](https://pic3.zhimg.com/80/v2-53a8a9cdea906740dc1c3ad3a3c99ede_1440w.webp)
 
 ### 小区名字
 
