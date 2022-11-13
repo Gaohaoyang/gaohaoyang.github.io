@@ -147,7 +147,6 @@ permalink: /house
 
 ### 房地产各方关系
 
-
 【2016-6-10】[房地产搞这么多地王干啥啊啊啊啊啊](https://www.sohu.com/a/82359121_355089)
 - ![](http://img.mp.itc.cn/upload/20160611/b6c183544b244504adeb73f499db4e3a_th.jpg)
 - ![](http://img.mp.itc.cn/upload/20160611/a6ea54f55d0e476b9defc0ddf2f56b23_th.jpg)
@@ -414,6 +413,13 @@ permalink: /house
 ## 房产知识
 
 ### 房产开发流程
+
+流程
+1. 拿地
+1. 产品规划
+1. 销售
+1. 交付
+1. 物业
 
 ![](https://pic3.zhimg.com/80/v2-53a8a9cdea906740dc1c3ad3a3c99ede_1440w.webp)
 
