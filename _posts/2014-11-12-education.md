@@ -208,6 +208,19 @@ permalink: /edu
 
 ## 北京学区
 
+### 海淀鸡娃
+
+【2022-11-14】[海淀妈妈自曝尴尬现状：“我，海归学霸、谷歌高管，花千万买学区房，却养出个「学渣」”](https://www.toutiao.com/article/7132302495971361294)
+
+学霸一直都是父母们羡慕的“别人家的孩子”，但现实往往是孩子是“学渣”。纪录片《了不起的妈妈》中的海淀妈妈李琦的做法却值得每位父母学习。面对成绩平平的儿子，李琦以尊重、平等作为自己教育的底色，不纠结于眼前的分数、名校，而是培养儿子自己的喜好和特长，以及家庭的精气神。
+
+
+<iframe src="//player.bilibili.com/player.html?aid=341923372&bvid=BV1k94y1U7qJ&cid=728818600&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="600"> </iframe>
+
+火爆全网的纪录片《了不起的妈妈》，直击当代妈妈教育焦虑，关注女性自我成长
+- <iframe src="//player.bilibili.com/player.html?aid=260602495&bvid=BV1ze411T7Ej&cid=833352327&page=2" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+- <iframe src="//player.bilibili.com/player.html?aid=260602495&bvid=BV1ze411T7Ej&cid=833350392&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="600"> </iframe>
+
 ### 北京牛校
 
 【2022-11-12】海淀“六小强”、西城“四金刚”
@@ -316,6 +329,8 @@ permalink: /edu
 
 学校实力
 - ![](https://p3.toutiaoimg.com/large/tos-cn-i-qvj2lq49k0/6da2407fabf44119b024e242d20f026a)
+
+
 
 # 香港留学思考
 
