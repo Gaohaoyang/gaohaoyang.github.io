@@ -159,31 +159,29 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 Go常用命令：
 - go `build`: 测试编译，检查是否有编译错误
-- go **build** 将Go语言程序代码编译成二进制的可执行文件，但是需要手动运行该二进制文件；
-  - ①**有参数**：
-    - main包：生成一个与第一个 fileName 同名的可执行文件
-    - 非main包：编译器将只对该包进行语法检查，不生成可执行文件。
-  - ②**无参数**：如果当前目录下存在 main 包，则会生成一个与当前目录名同名的“目录名.exe”可执行文件
-    - 有main包：生成一个与当前目录名同名的“目录名.exe”可执行文件
-    - 无main包：只对当前目录下的程序源码进行语法检查，不会生成可执行文件。
-- go `run`: 直接运行程序；命令则更加方便，go run命令将编译和执行指令合二为一
-  - 编译后直接运行Go语言程序，编译过程中会产生一个临时文件，但不会生成可执行文件，这个特点很适合用来调试程序。
+- go **build** 将Go语言程序代码编译成**二进制**的可执行文件，但是需要手动运行该二进制文件；
+  - (1) main包：生成一个与第一个 fileName 同名的可执行文件
+  - (2) 非main包：编译器将只对该包进行语法检查，不生成可执行文件
+- go `run`: **直接**运行程序；命令则更加方便，go run命令将**编译**和**执行**指令合二为一
+  - 编译后直接运行Go语言程序，编译过程中会产生一个临时文件，但不会生成可执行文件，很适合用来调试程序。
 - go `fmt`: **格式化**源码(部分IDE在保存时自动调用)，使用同一种代码风格
 - go `install`: 编译包文件并编译整个程序
   - go `install` example.com/<span style='color:blue'>program</span>@latest 来安装一个第三方Go程序的最新版本（至GOBIIN目录）。 
   - Go官方工具链1.16版本前，命令：go get -u example.com/program（已废弃）。
   - 实际上, <span style='color:blue'>go get = git clone + go install</span>
-  - go install 是 Go 中自动包安装工具：如需要将包安装到本地它会从远端仓库下载包：检出、编译和安装一气呵成。
+  - go install 是 Go 中自动包安装工具：如需要将包安装到本地, 会从远端仓库下载包：检出、编译和安装一气呵成。
   - go install 只是将编译的中间文件放在 GOPATH 的 pkg 目录下，以及固定地将编译结果放在 GOPATH 的 bin 目录下。
-  - 分成了两步操作：第一步是生成**结果文件**（可执行文件或者 .a 包），第二步会把编译好的结果移到 $GOPATH/pkg 或者 $GOPATH/bin。
+  - 分成了两步操作：第一步是生成**结果文件**（可执行文件或者 .a 包），第二步会把编译好的结果移到 `$GOPATH/pkg` 或者 `$GOPATH/bin`。
 - go `test`: 运行测试文件
 - go `doc`: 查看文档(chm手册)
-  - 在浏览器上浏览go官方网站：命令行输入：go doc -http=:8080    即可在浏览器输入：localhost:8080查看
+  - 在浏览器上浏览go官方网站：
+  - 命令行输入：go doc -http=:8080    
+  - 即可在浏览器输入：localhost:8080查看
 - go `vet`
   - 子命令可以用来检查可能的代码逻辑错误（即警告）；run、build和install不会输出代码逻辑错误！
 - go `mod`：go模块特性，简化依赖管理
-  - go mod init example.com/myproject命令可以用来在当前目录中生成一个go.mod文件。 当前目录将被视为一个名为example.com/myproject的模块（即当前项目）的根目录。 此go.mod文件将被用来记录当前项目需要的依赖模块和版本信息。 我们可以手动编辑或者使用go子命令来修改此文件。
-  - go mod tidy命令用来通过扫描当前项目中的所有代码来添加未被记录的依赖至go.mod文件或从go.mod文件中删除不再被使用的依赖。
+  - go mod init example.com/myproject 命令可以用来在当前目录中生成一个go.mod文件。 当前目录将被视为一个名为example.com/myproject的模块（即当前项目）的根目录。 此go.mod文件将被用来记录当前项目需要的依赖模块和版本信息。 可以手动编辑或者使用go子命令来修改此文件。
+  - go mod tidy 命令用来通过扫描当前项目中的所有代码来添加未被记录的依赖至go.mod文件或从go.mod文件中删除不再被使用的依赖。
 - go `get`: 获取远程包，需提前安装git或hg
   - go get命令用拉添加、升级、降级或者删除单个依赖。此命令不如 go mod tidy 命令常用。
   - 第三方包下载并解压到GOPATH路径下的src文件夹里面
