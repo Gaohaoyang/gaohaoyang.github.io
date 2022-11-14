@@ -3,7 +3,7 @@ layout: post
 title:  "计算机图形学 - Computer Graphic"
 date:   2022-09-28 09:03:00
 categories: 计算机基础 计算机视觉
-tags: 图形学 opengl webgl three.js 游戏
+tags: 图形学 opengl webgl three.js 游戏 vtk
 excerpt: 计算机图形学及相关应用
 mathjax: true
 permalink: /graphic
@@ -249,6 +249,42 @@ WebGL学习有门槛，[Three.js](https://threejs.org/) 作为方向入门，就
 2. 游戏机制
 3. 解决方案
 
+
+# 三维可视化
+
+## VTK
+
+C++三维可视化工具包：[Visualization Toolkit](https://vtk.org/) (VTK)
+
+### pyVista
+
+#### 简介
+
+【2022-11-14】[pyvista](https://github.com/pyvista/pyvista)
+- 3D plotting and mesh analysis through a streamlined interface for the Visualization Toolkit (VTK)
+
+PyVista is...
+- Pythonic VTK: a high-level API to the [Visualization Toolkit](https://vtk.org/) (VTK)
+- mesh data structures and filtering methods for spatial datasets
+- 3D plotting made simple and built for large/complex data geometries
+
+PyVista is a helper module for the Visualization Toolkit (VTK) that wraps the VTK library through NumPy and direct array access through a variety of methods and classes. This package provides a Pythonic, well-documented interface exposing VTK's powerful visualization backend to facilitate rapid prototyping, analysis, and visual integration of spatially referenced datasets.
+
+This module can be used for scientific plotting for presentations and research papers as well as a supporting module for other mesh 3D rendering dependent Python modules; see Connections for a list of projects that leverage PyVista.
+
+#### 代码示例
+
+[文档](https://docs.pyvista.org/), [example](https://docs.pyvista.org/examples/index.html)
+- ![](https://docs.pyvista.org/examples/index.html)
+
+```python
+from pyvista import examples
+mesh = examples.download_st_helens()
+warped = mesh.warp_by_scalar('Elevation')
+surf = warped.extract_surface().triangulate()
+surf = surf.decimate_pro(0.75)  # reduce the density of the mesh by 75%
+surf.plot(cmap='gist_earth')
+```
 
 
 # 结束
