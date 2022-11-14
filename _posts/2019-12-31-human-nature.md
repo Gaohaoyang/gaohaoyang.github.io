@@ -47,6 +47,9 @@ mathjax: true
 ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/a394e22a7da645ebb5bf8f025f5c94bf~tplv-obj:1080:1920.image?from=post&x-expires=1671379200&x-signature=OdQKk%2BhoEd1GhZjvXN%2FC2lzJbxk%3D)
 
 
+60分钟看完《天道》
+- <iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/7165335879232586276?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
+
 ## 局人事失
 
 作者：[盐九](https://www.zhihu.com/question/20865270/answer/809359141)
