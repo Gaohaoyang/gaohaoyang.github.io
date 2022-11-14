@@ -854,6 +854,9 @@ O来自哪里？
 ### 项目管理工具
 
 gitlab & jira, and teambition do have local deploy service too. Cheapest is GitLab. If you need more enterprise features, then teambition / jira it is
+- Issue and Kanban（看板，发音同中文） boards project management guidelines
+- [Issue board](https://docs.gitlab.com/ee/user/project/issue_board.html)
+- ![](https://docs.gitlab.com/ee/user/project/img/issue_boards_core_v14_1.png)
 
 #### Gitlab
 
