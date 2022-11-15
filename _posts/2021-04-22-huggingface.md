@@ -530,23 +530,32 @@ BertTokenizer 是基于`BasicTokenizer`和`WordPieceTokenizer` 的分词器：
   - 例如，tokenizer这个词就可以拆解为“token”和“##izer”两部分，注意后面一个词的“##”表示接在前一个词后面。
 
 BertTokenizer 有以下常用方法：
-- from_pretrained：从包含词表文件（vocab.txt）的目录中初始化一个分词器；
-- tokenize：将文本（词或者句子）分解为子词列表；
-- convert_tokens_to_ids：将子词列表转化为子词对应**下标**的列表；
-- convert_ids_to_tokens ：与上一个相反；
-- convert_tokens_to_string：将subword列表按“##”拼接回词或者句子；
-- encode：对于单个句子输入，分解词并加入特殊词形成“[CLS], x, [SEP]”的结构并转换为词表对应下标的列表；对于两个句子输入（多个句子只取前两个），分解词并加入特殊词形成“[CLS], x1, [SEP], x2, [SEP]”的结构并转换为下标列表；
-- decode：可以将encode方法的输出变为完整句子。
+- `from_pretrained`：从包含词表文件（vocab.txt）的目录中初始化一个分词器；
+- `tokenize`：将文本（词或者句子）分解为子词列表；
+- `convert_tokens_to_ids`：将子词列表转化为子词对应**下标**的列表；
+- `convert_ids_to_tokens` ：与上一个相反；
+- `convert_tokens_to_string`：将subword列表按“##”拼接回词或者句子；
+- `encode`：
+  - 对于**单个句子**输入，分解词并加入特殊词形成“\[CLS], x, \[SEP]”的结构并转换为词表对应下标的列表；
+  - 对于**两个句子**输入（多个句子只取前两个），分解词并加入特殊词形成“\[CLS], x1, \[SEP], x2, \[SEP]”的结构并转换为下标列表；
+- `decode`：可以将encode方法的输出变为完整句子。
+
+#### 变换图解
+
+<div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers tags lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-11-15T09:07:14.862Z\&quot; agent=\&quot;5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36\&quot; etag=\&quot;OcJGtBmAAmw-OcPVQzF3\&quot; version=\&quot;20.5.3\&quot;&gt;&lt;diagram id=\&quot;Lw-1uFHNzwHmlxUDpAkU\&quot; name=\&quot;第 1 页\&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
 
 ### Model（BertModel）
 
-和BERT模型有关的代码主要写在/models/bert/modeling_bert.py中，这一份代码有一千多行，包含BERT模型的基本结构和基于它的微调模型等。继承自class BertModel(BertPreTrainedModel)
+和BERT模型有关的代码主要写在`/models/bert/modeling_bert.py`中，这份代码有1k多行，包含BERT模型的基本结构和基于它的微调模型等。继承自class BertModel(BertPreTrainedModel)
 
-BertModel主要为transformer encoder结构，包含三个部分：
+BertModel主要为 transformer encoder 结构，包含三个部分：
 - `embeddings`，即BertEmbeddings类的实体，对应词嵌入；
 - `encoder`，即BertEncoder类的实体；
 - `pooler`， 即BertPooler类的实体，这一部分是可选的。
-补充：注意BertModel也可以配置为Decoder，不过下文中不包含对这一部分的讨论。
+
+补充：
+- BertModel也可以配置为Decoder，不过下文中不包含对这一部分的讨论。
 
 BertModel的前向传播过程中各个参数的含义以及返回值：
 
@@ -568,46 +577,53 @@ def forward(
     return_dict=None,
 ): ...
 ```
-说明：
-- input_ids：经过tokenizer分词后的subword对应的下标列表；
-- attention_mask：在self-attention过程中，这一块mask用于标记subword所处句子和padding的区别，将padding部分填充为0；
-- token_type_ids： 标记subword当前所处句子（第一句/第二句/padding）；
-- position_ids： 标记当前词所在句子的位置下标；
-- head_mask： 用于将某些层的某些注意力计算无效化；
-- inputs_embeds： 如果提供了，那就不需要input_ids，跨过embedding lookup过程直接作为Embedding进入Encoder计算；
-- encoder_hidden_states： 这一部分在BertModel配置为decoder时起作用，将执行cross-attention而不是self-attention；
-- encoder_attention_mask： 同上，在cross-attention中用于标记encoder端输入的padding；
-- past_key_values：这个参数貌似是把预先计算好的K-V乘积传入，以降低cross-attention的开销（因为原本这部分是重复计算）；
-- use_cache： 将保存上一个参数并传回，加速decoding；
-- output_attentions：是否返回中间每层的attention输出；
-- output_hidden_states：是否返回中间每层的输出；
-- return_dict：是否按键值对的形式（ModelOutput类，也可以当作tuple用）返回输出，默认为真。
-补充：注意，这里的head_mask对注意力计算的无效化，和下文提到的注意力头剪枝不同，而仅仅把某些注意力的计算结果给乘以这一系数。
 
-返回值不但包含了encoder和pooler的输出，也包含了其他指定输出的部分（hidden_states和attention等，这一部分在encoder_outputs[1:]）方便取用
+说明：
+- `input_ids`：经过 tokenizer 分词后的`subword`对应的下标列表；
+- `attention_mask`：在self-attention过程中，这一块mask用于标记`subword`所处句子和`padding`的区别，将padding部分填充为0；
+- `token_type_ids`： 标记subword当前所处句子（第一句/第二句/padding）；
+- `position_ids`： 标记当前词所在句子的位置下标；
+- `head_mask`： 用于将某些层的某些注意力计算无效化；
+- `inputs_embeds`： 如果提供了，那就不需要input_ids，跨过embedding lookup过程直接作为Embedding进入Encoder计算；
+- `encoder_hidden_states`： 这一部分在BertModel配置为decoder时起作用，将执行cross-attention而不是self-attention；
+- `encoder_attention_mask`： 同上，在cross-attention中用于标记encoder端输入的padding；
+- `past_key_values`：这个参数貌似是把预先计算好的K-V乘积传入，以降低cross-attention的开销（因为原本这部分是重复计算）；
+- `use_cache`： 将保存上一个参数并传回，加速decoding；
+- `output_attentions`：是否返回中间每层的attention输出；
+- `output_hidden_states`：是否返回中间每层的输出；
+- `return_dict`：是否按键值对的形式（ModelOutput类，也可以当作tuple用）返回输出，默认为真。
+
+注意
+- 这里的head_mask对注意力计算的无效化，和下文提到的注意力头剪枝不同，而仅仅把某些注意力的计算结果给乘以这一系数。
+
+返回值不但包含了encoder和pooler的输出，也包含了其他指定输出的部分（hidden_states和attention等，这一部分在encoder_outputs\[1:]）方便取用
 
 BertModel还有以下的方法，方便BERT玩家进行各种骚操作：
-- get_input_embeddings：提取embedding中的word_embeddings即词向量部分；
-- set_input_embeddings：为embedding中的word_embeddings赋值；
-- _prune_heads：提供了将注意力头剪枝的函数，输入为{layer_num: list of heads to prune in this layer}的字典，可以将指定层的某些注意力头剪枝。
-补充：剪枝是一个复杂的操作，需要将保留的注意力头部分的Wq、Kq、Vq和拼接后全连接部分的权重拷贝到一个新的较小的权重矩阵（注意先禁止grad再拷贝），并实时记录被剪掉的头以防下标出错。具体参考BertAttention部分的prune_heads方法。
+- `get_input_embeddings`：提取embedding中的word_embeddings即词向量部分；
+- `set_input_embeddings`：为embedding中的word_embeddings赋值；
+- `_prune_heads`：提供了将注意力头剪枝的函数，输入为 {layer_num: list of heads to prune in this layer} 的字典，可以将指定层的某些注意力头剪枝。
+
+补充：
+- **剪枝**是一个复杂的操作，需要将保留的注意力头部分的Wq、Kq、Vq和拼接后全连接部分的权重拷贝到一个新的较小的权重矩阵（注意先禁止grad再拷贝），并实时记录被剪掉的头以防下标出错。具体参考BertAttention部分的prune_heads方法。
 
 #### BertEmbeddings
 
 包含三个部分求和得到：
 - ![结构图](https://pic3.zhimg.com/80/v2-58b65365587f269bc76358016414dc26_720w.jpg)
-- word_embeddings，上文中subword对应的嵌入。
-- token_type_embeddings，用于表示当前词所在的句子，辅助区别句子与padding、句子对间的差异。
-- position_embeddings，句子中每个词的位置嵌入，用于区别词的顺序。和transformer论文中的设计不同，这一块是训练出来的，而不是通过Sinusoidal函数计算得到的固定嵌入。一般认为这种实现不利于拓展性（难以直接迁移到更长的句子中）。
-三个embedding不带权重相加，并通过一层LayerNorm+dropout后输出，其大小为(batch_size, sequence_length, hidden_size)。
+- `word_embeddings`，上文中`次词`subword对应的嵌入。
+- `token_type_embeddings`，用于表示当前词所在的句子，辅助区别句子与padding、句子对间的差异。
+- `position_embeddings`，句子中每个词的**位置**嵌入，用于区别词的顺序。和transformer论文中的设计不同，这一块是训练出来的，而不是通过Sinusoidal函数计算得到的固定嵌入。一般认为这种实现不利于拓展性（难以直接迁移到更长的句子中）。
 
-补充：这里为什么要用LayerNorm+Dropout呢？为什么要用LayerNorm而不是BatchNorm？可以参考一个不错的[回答](https://www.zhihu.com/question/395811291/answer/1260290120)
+三个embedding不带权重相加，并通过一层 LayerNorm+dropout 后输出，其大小为 $(batch_size, sequence_length, hidden_size)$。
+
+补充：
+- 为什么要用LayerNorm+Dropout呢？为什么要用LayerNorm而不是BatchNorm？可以参考一个不错的[回答](https://www.zhihu.com/question/395811291/answer/1260290120)
 
 #### BertEncoder
 
 包含多层BertLayer，这一块本身没有特别需要说明的地方，不过有一个细节值得参考：
 - 利用gradient checkpointing技术以降低训练时的显存占用。
-补充：gradient checkpointing即梯度检查点，通过减少保存的计算图节点压缩模型占用空间，但是在计算梯度的时候需要重新计算没有存储的值，参考论文《Training Deep Nets with Sublinear Memory Cost》，过程如下[示意图](https://pic2.zhimg.com/v2-24dfc50af29690e09dd5e8cc3319847d_b.webp)
+- 补充：gradient checkpointing即梯度检查点，通过减少保存的计算图节点压缩模型占用空间，但是在计算梯度的时候需要重新计算没有存储的值，参考论文《Training Deep Nets with Sublinear Memory Cost》，过程如下[示意图](https://pic2.zhimg.com/v2-24dfc50af29690e09dd5e8cc3319847d_b.webp)
 - ![](https://pic2.zhimg.com/v2-24dfc50af29690e09dd5e8cc3319847d_b.webp)
 
 在BertEncoder中，gradient checkpoint是通过torch.utils.checkpoint.checkpoint实现的，使用起来比较方便，可以参考[文档](https://link.zhihu.com/?target=https%3A//pytorch.org/docs/stable/checkpoint.html)
@@ -618,7 +634,8 @@ BertModel还有以下的方法，方便BERT玩家进行各种骚操作：
 
 理论上，这里顺序调用三个子模块就可以，没有什么值得说明的地方。
 
-细节：apply_chunking_to_forward和feed_forward_chunk了吗（为什么要整这么复杂，直接调用它不香吗？
+细节：
+- apply_chunking_to_forward和feed_forward_chunk了吗（为什么要整这么复杂，直接调用它不香吗？
 - 节约显存的技术——包装了一个切分小batch或者低维数操作的功能：这里参数chunk_size其实就是切分的batch大小，而chunk_dim就是一次计算维数的大小，最后拼接起来返回。
 - 不过，在默认操作中不会特意设置这两个值（在源代码中默认为0和1），所以会直接等效于正常的forward过程。
 
