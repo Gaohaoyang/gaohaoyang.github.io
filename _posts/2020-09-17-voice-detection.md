@@ -2101,7 +2101,61 @@ pip install playsound
 
 带UI的代码见原文
 
+### openai whisper
 
+【2022-11-15】[whisper](https://github.com/openai/whisper)
+- Whisper is a general-purpose speech recognition model. It is trained on a large dataset of diverse audio and is also a multi-task model that can perform multilingual speech recognition as well as speech translation and language identification.
+
+```shell
+apt install ffmpeg # 安装音频处理工具
+pip install git+https://github.com/openai/whisper.git # 下载whisper
+```
+
+There are five model sizes, four with English-only versions, offering speed and accuracy tradeoffs. Below are the names of the available models and their approximate memory requirements and relative speed. 
+
+
+|  Size  | Parameters | English-only model | Multilingual model | Required VRAM | Relative speed |
+|:------:|:----------:|:------------------:|:------------------:|:-------------:|:--------------:|
+|  tiny  |    39 M    |     `tiny.en`      |       `tiny`       |     ~1 GB     |      ~32x      |
+|  base  |    74 M    |     `base.en`      |       `base`       |     ~1 GB     |      ~16x      |
+| small  |   244 M    |     `small.en`     |      `small`       |     ~2 GB     |      ~6x       |
+| medium |   769 M    |    `medium.en`     |      `medium`      |     ~5 GB     |      ~2x       |
+| large  |   1550 M   |        N/A         |      `large`       |    ~10 GB     |       1x       |
+
+For English-only applications, the `.en` models tend to perform better, especially for the `tiny.en` and `base.en` models. We observed that the difference becomes less significant for the `small.en` and `medium.en` models.
+
+Whisper's performance varies widely depending on the language. The figure below shows a WER breakdown by languages of Fleurs dataset, using the `large` model. More WER and BLEU scores corresponding to the other models and datasets can be found in Appendix D in [the paper](https://cdn.openai.com/papers/whisper.pdf).
+
+测试文件的ASR
+
+```shell
+# 用 CPU、FP32跑
+whisper audio.mp3 --model tiny --device cpu --fp16 False
+```
+
+注
+- fp16是指采用2字节(16位)进行编码存储的一种数据类型；
+- 同理fp32是指采用4字节(32位)
+
+fp16和fp32相比对训练的优化：
+1. 内存占用减少：很明显，应用fp16内存占用比原来更小，可以设置更大的batch_size
+2. 加速计算：加速计算只在最近的一些新gpu中，这一块我还没有体验到好处...有论文指出fp16训练速度可以是fp32的2-8倍
+
+python脚本
+- [How can I switch from FP16 to FP32 in the code to avoid the warning?](https://github.com/openai/whisper/discussions/301)
+
+```python
+import whisper
+
+model = whisper.load_model("base")
+result = model.transcribe("audio.mp3")
+# 方法①
+# options = whisper.DecodingOptions(language= 'en', fp16=False)
+# result = whisper.decode(model, mel, options)
+# 方法②
+# result = model.transcribe(audioPath, fp16=False, language='English')
+print(result["text"])
+```
 
 ## windows下tts
 
@@ -2151,6 +2205,48 @@ btn.grid(row=3,column=0,padx=20,pady=10)
 tts.mainloop()
 ```
 
+## 音频处理
+
+### 音频格式转换
+
+m4a → mp3：
+- [M4A转MP3 - 在线转换音频文件](https://www.aconvert.com/cn/audio/m4a-to-mp3/)，格式多，但下载受阻
+- [m4a->mp3](https://m4atomp3.net/zh)，可以下载
+
+### ffmpeg
+
+[测试人工智能自动语音识别系统](https://cloud.tencent.com/developer/article/1644302)
+
+样本是这四句话：
+> - Due to delays, we need to reconsider our schedule this week.
+> - As we've discussed, we need to put our most experienced staff on this.
+> - Can you suggest an alternative to the restructuring?
+> - We'll implement quality assurance processes before the final review.
+
+故意读得磕磕巴巴，每个音频大约在13秒。
+
+但是录制出来的是m4a格式，得转换下，这里用ffmpeg
+
+#### 一、ffmpeg安装
+
+1. ffmpeg[下载](http://ffmpeg.org/download.html)
+2. 解压到指定目录，将bin文件目录添加到path路径（电脑-属性-高级系统设置-环境变量-path-新建）
+3. 命令行（windows+r 输入cmd）输入：ffmpeg -version 出结果表示成功。
+
+#### 二、ffmpeg使用
+
+1. 视频格式转换：ffmpeg -i num.mp4 -codec copy num2.avi
+- 将num.mp4复制并转换为num2.avi
+- 注：-i 后表示要进行操作的文件
+2. gif制作：ffmpeg -i num.mp4 -vframes 20 -y -f gif num3.gif
+- 将num.mp4的前20帧制作为gif并命名为num3
+3. 视频截取：ffmpeg -i num.mp4 -ss 0 -t 3 -codec copy cut1.mp4
+- -ss后数字表示截取时刻，-t后数字表示截取时长
+- 截取视频某一时刻为图片：ffmpeg -i num.mp4 -y -f image2 -ss 2 -t 0.001 -s 400x300 pic.jpg
+- 将2s时刻截取为400x300大小的名为pic.jpg的图片（-ss后的数字为截取时刻）
+4. 每秒截取一张图片：ffmpeg -i num.mp4 -r 1 image%d.jpg
+- 将视频num.mp4进行每秒截取一张图片，并命名为imagei.jpg（i=1，2，3...）
+- 注：-r后的数字表示每隔多久截取一张。
 
 
 
