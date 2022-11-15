@@ -2157,6 +2157,40 @@ result = model.transcribe("audio.mp3")
 print(result["text"])
 ```
 
+#### 评测
+
+kaggle上GPU测试（P100）
+
+| 模型版本 | 模型加载时间 | asr时间 | asr效果 | asr样例 |
+|---|---|---|---|---|
+| small版 | 13.80 | 81.49 | 一般，70% | 操作的时候肯定是得去一点点弄这个都是早知道要费时间还是其他的一个环节早知道环节这段其实老海就有还有大概三个因为不会是说他那些其他东西都用不好了只用了这么大的你这三个表演好几个秒像那个色料然后然后吃点去你们弄的对我弄的不太好吃用色料跟挺好搭的会简单一些对一会讲大概两三个小时还要两个小时子龙的两个小时这么久吗 |
+| medium版 | 19.20s | 136.82s | 较好，93% | 操作中肯定是得就是去一点点的弄这个都是找资料废食还是其他的一些环节就是整个环节资料其中脑海只有还有大概三个四个小时吧因为不会是说他那些提干的东西都运用好了只用录音的那一个塞表上好几个秒像资料然后操作对然后吃脸是你们弄的吗对吃脸也是你们弄的不弄是不点吗只弄资料跟提款达会简单一些吗对肯定会简单大概那怎么弄两三个小时还要两个小时只弄这两个部分有两个小时 |
+| large版 | 56.84 | 214.82 | 较好，95% | 超的时候肯定是得去一点点的弄这个都是找资料废食还是其他的一些环节肯定是找个环节资料其实脑海中有还有没嘛大概三四个小时吧因为不会是说他那些体肝那些东西都已经弄好了只用录一个这么大的那个好几个资料一个资料表上好几个表相互资料然后套单对然后吃点是你们弄的吗对对如果不弄就不念了只用资料跟听到答案会简单一些吗对肯定会简单大概能够两三个小时两个小时还要两个小时只弄了两部分也要两个小时对这么久吗 |
+
+
+```python
+import time
+import whisper
+
+start_load = time.time()
+model_type = 'small' # tiny,base,small,medium,large
+model = whisper.load_model(model_type)
+start_asr = time.time()
+# 测试数据：15min的录音，有环境噪音（音乐），文件占15m
+audioPath = '../input/audio-test/output_m4atomp3.net.mp3'
+#result = model.transcribe("audio.mp3")
+#result = model.transcribe("audio.mp3",fp16=False) # CPU版
+#result = model.transcribe(audioPath, fp16=False, language='English')
+#result = model.transcribe(audioPath, fp16=False, language='Chinese')
+result = model.transcribe(audioPath, language='Chinese')
+end_asr = time.time()
+time_load = start_asr - start_load
+time_asr = end_asr - start_asr
+print("模型加载时间：{:.2f}\nasr时间：{:.2f}".format(time_load, time_asr))
+print(result["text"])
+```
+
+
 ## windows下tts
 
 - 运行环境：Anaconda3（Python 3.7）+ windows 10
