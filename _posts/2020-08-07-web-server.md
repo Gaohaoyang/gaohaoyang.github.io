@@ -734,6 +734,16 @@ if __name__ == '__main__':
     #app.run(host='10.200.24.101', port=8092)
 ```
 
+### 微服务
+
+【2022-11-15】“微服务”真是言过其实，带给全社会巨量的人力物力财力的浪费！
+- 马斯克也发话了：“今天的部分工作将是关闭 "微服务 "臃肿的软件。实际上，只有不到20%的人需要Twitter来工作。”
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/0d2c86a248d6474994493e0d045b99e8~tplv-obj:677:323.image?from=post&x-expires=1676217600&x-signature=U7veNrybOQNmAOm6sRNU2qLY5rM%3D)
+
+现在已是“后微服务”时代，已经全面进入对微服务反思的阶段。
+- 知名的Spring框架也对微服务进行了反思，推出了“Spring Modulith”。它告诉我们一个良好的应用是从构建优秀的“模块化单体”应用开始的。
+Spring Modulith地址：网页链接
+
 ## 自动生成APIs文档
 
 - 【2022-1-26】国产[apidoc](https://apidocjs.com/), [github](https://github.com/apidoc/apidoc), [创业公司，在沙河碧水庄园别墅办公，月薪高达10w](https://www.ixigua.com/7056418647228547615)
