@@ -2103,13 +2103,45 @@ pip install playsound
 
 ### openai whisper
 
-【2022-11-15】[whisper](https://github.com/openai/whisper)
+#### whisper 介绍
+
+【2022-11-15】[whisper](https://github.com/openai/whisper)，Open AI [Introducing Whisper](https://openai.com/blog/whisper/) 强调 Whisper 的语音识别能力已达到人类水准。
 - Whisper is a general-purpose speech recognition model. It is trained on a large dataset of diverse audio and is also a multi-task model that can perform multilingual speech recognition as well as speech translation and language identification.
+- Whisper 是一个自动语音识别（ASR，Automatic Speech Recognition）系统，OpenAI 通过从网络上收集了 68 万小时的多语言（98 种语言）和多任务（multitask）监督数据对 Whisper 进行了训练。OpenAI 认为使用这样一个庞大而多样的数据集，可以提高对口音、背景噪音和技术术语的识别能力。除了可以用于语音识别，Whisper 还能实现多种语言的转录，以及将这些语言翻译成英语。OpenAI 开放模型和推理代码，希望开发者可以将 Whisper 作为建立有用的应用程序和进一步研究语音处理技术的基础。
+
+相比目前市面上的其他现有方法通常使用较小的、更紧密配对的「音频 - 文本」训练数据集，或使用广泛但无监督的音频预训练集。因为 Whisper 是在一个大型和多样化的数据集上训练的，而<span style='color:red'>没有针对任何特定的数据集进行微调</span>，虽然它没有击败专攻 LibriSpeech 性能的模型（著名的语音识别基准测试），然而在许多不同的数据集上测量 Whisper 的 Zero-shot（不需要对新数据集重新训练，就能得到很好的结果）性能时，研究人员发现它比那些模型要稳健得多，犯的错误要少 50%。
+
+#### 执行过程
+
+Whisper 执行操作的大致过程：
+- 输入的音频文件被分割成 30 秒的小段、转换为 log-Mel频谱图，然后传递到编码器。
+- 解码器经过训练以预测相应的文字说明，并与特殊的标记进行混合，这些标记指导单一模型执行诸如语言识别、短语级别的时间戳、多语言语音转录和语音翻译等任务。
+- ![](https://cdn.openai.com/whisper/draft-20220919a/asr-details-desktop.svg)
+
+
+#### 安装
 
 ```shell
 apt install ffmpeg # 安装音频处理工具
 pip install git+https://github.com/openai/whisper.git # 下载whisper
 ```
+
+【2022-11-16】[OpenAI 开源音频转文字模型 Whisper 尝鲜](https://sspai.com/post/75953)
+
+已装 conda 和 ffmpeg 的话，简单的配置大概是：
+
+```shell
+# 创建虚拟环境
+conda create -n whisper python=3.9
+conda activate whisper
+pip install git+https://github.com/openai/whisper.git
+whisper audio.mp3 --model medium --language Chinese # ASR
+```
+
+#### 模型
+
+模型结构
+- ![](https://cdn.openai.com/whisper/asr-summary-of-model-architecture-desktop.svg)
 
 There are five model sizes, four with English-only versions, offering speed and accuracy tradeoffs. Below are the names of the available models and their approximate memory requirements and relative speed. 
 
@@ -2125,6 +2157,15 @@ There are five model sizes, four with English-only versions, offering speed and 
 For English-only applications, the `.en` models tend to perform better, especially for the `tiny.en` and `base.en` models. We observed that the difference becomes less significant for the `small.en` and `medium.en` models.
 
 Whisper's performance varies widely depending on the language. The figure below shows a WER breakdown by languages of Fleurs dataset, using the `large` model. More WER and BLEU scores corresponding to the other models and datasets can be found in Appendix D in [the paper](https://cdn.openai.com/papers/whisper.pdf).
+
+中文而言，Whisper各模型：
+- `tiny` 是没有做断句的，或者说，直接根据停顿断句
+- `base` 已经开始根据逻辑断句，但会出语法错误
+- `small` 已经很少语法错误，但断句水平却直线下降，很奇怪
+- `medium` 不仅能够完美的断句，还能判断语气
+
+
+#### 使用方法
 
 测试文件的ASR
 
@@ -2156,6 +2197,41 @@ result = model.transcribe("audio.mp3")
 # result = model.transcribe(audioPath, fp16=False, language='English')
 print(result["text"])
 ```
+
+#### 评测
+
+[OpenAI 开源音频转文字模型 Whisper 尝鲜](https://sspai.com/post/75953)
+
+音频采用的是：
+- [李厚辰的翻转电台最新一期：FULL 形而上学大全巫术的产生（孔子29）-翻电2.0](https://www.xiaoyuzhoufm.com/episode/6332c6ab120ae67f87491292)
+
+节选开头一段
+
+将飞书妙记和Whisper在各等级模型下跑的结果作对比：
+- ![飞书妙记](https://cdn.sspai.com/2022/09/27/a088bf0cf94aaa5f186f1f48678476d0.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1)
+
+Whisper 识别结果
+- ![tiny 模型](https://cdn.sspai.com/2022/09/27/66d17bfdab57bc3f1731c3a03fda15f3.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1)
+- ![base 模型](https://cdn.sspai.com/2022/09/27/8b80fc9d871dc41b38d9f4dabae6ed60.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1)
+- ![small 模型](https://cdn.sspai.com/2022/09/27/3ad55f7203ba0f9abcf0c006b239a3da.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1)
+- ![medium 模型](https://cdn.sspai.com/2022/09/27/53ae1d09b97f7f3b85d6bcce29feab04.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1)
+
+飞书妙记给用户开放的转写能力大约在 tiny 到 base 之间（转写速度也在 tiny 左右，已经很快了）
+- 对比目的并不是比较二者的技术，否则对于飞书妙计相当的不公平，作为一款消费级应用，它不可能给用户跑medium等级的模型来做转写
+- 对比意义是，Whisper作为一个开源模型，和消费级产品比起来怎么样？
+
+答案是，<span color='color:red'>完全可以替代</span>
+- 用 small 模型足以实现当下的免费体验了。
+- 用 medium 以上的模型，可以用「时间」换「好得多的使用体验」
+
+从对比截图也能看到，Whisper在medium模型下的断句水平就已经让人欣喜了，不是说技术有多先进，而是，这是开源模型啊, 做到同样水平的转写，基本属于付费服务了
+
+不足
+- 在词汇上，Whisper偶尔不那么准确，但它是准确识别发音的，也就是说，这是词库的问题，相信开源社区很快就会有针对中文的优化模型出现
+
+意义是什么呢？
+- 很快互联网上的音频和视频资料中的对话台词，也可以搜索了吧，就像音乐可以搜歌词一样，音频不再是监管的法外之地了
+- 对于播客爱好者来说，很快，拥有自动高质量转写的播客客户端不再是梦
 
 #### 评测
 
