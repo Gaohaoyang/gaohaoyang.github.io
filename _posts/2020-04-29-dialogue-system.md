@@ -15,6 +15,7 @@ permalink: /dialogue-system
 
 # 总结
 
+- 【2022-11-16】直接向一本书提问 [Ask My Book](https://askmybook.com/)
 - 【2022-5-11】[Google Keynote (Google I/O ‘22) ](https://www.youtube.com/watch?v=nP-nMZpLM1A)，Google I/O用多模态唤醒语音设备，不再需要重复说唤醒词，还能识别说话人的表述状态，没说完就继续等待，第33分钟
   - Google 将更完善语音和自然语言理解模型放在设备本地，以此提高 Google 助理理解语音指令过程中的语气和停顿，下次还没想好要问啥时，就不用从头再来了。
   - [2022 谷歌 I/O 大会来了，我们为你挑了 10 个重点](https://36kr.com/p/1737776511679753)
