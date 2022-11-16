@@ -638,6 +638,39 @@ curl -G -d 'q=kitties' -d 'count=20' https://google.com/search #  GET 请求，�
 curl -G --data-urlencode 'comment=hello world' https://www.example.com
 ```
 
+### wget
+
+【2022-11-16】wget用法：[wget用法详解](https://www.jianshu.com/p/59bb131bc2ab)
+
+```python
+# wget http://cn.wordpress.org/wordpress-3.1-zh_CN.zip
+filename = 'http://cn.wordpress.org/wordpress-3.1-zh_CN.zip'
+
+wget ${filename} # 下载单个文件, 以默认名字显示
+wget -O wordpress.zip ${filename} # 下载并命名文件
+wget -o download.log ${filename} # 下载日志
+wget –limit-rate=300k ${filename} # 限速下载
+wget –c ${filename} # 断点续传，下载大文件时突然由于网络等原因中断，不用重新下载
+wget –b ${filename} # 后台下载
+tail -f wget-log # 后台下载，查看进度
+wget –user-agent="Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16" ${filename} # 伪装代理下载
+wget –spider  ${filename} # 测试下载链接
+wget –tries=40 ${filename} # 设置重试次数
+wget -i filelist.txt # 批量下载，filelist.txt 中一行一个链接
+wget –mirror -p –convert-links -P ./LOCAL ${filename} # 使用镜像下载 
+# –miror:开户镜像下载 
+# -p:下载所有为了html页面显示正常的文件 
+# –convert-links:下载后，转换成本地的链接 
+# -P ./LOCAL：保存所有文件和目录到本地指定目录 
+wget –reject=gif ${filename} # 过滤特定格式的文件
+wget -Q5m -i filelist.txt # 递归下载时，限制文件大小 5m
+wget -r -A.pdf ${filename} # 下载一个网站里指定格式的文件
+wget ftp-url # ftp匿名下载
+wget –ftp-user=USERNAME –ftp-password=PASSWORD ${filename} # ftp使用账户下载
+
+```
+
+
 ### ssh
 
 
