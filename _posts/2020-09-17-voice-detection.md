@@ -2111,6 +2111,60 @@ pip install playsound
 
 相比目前市面上的其他现有方法通常使用较小的、更紧密配对的「音频 - 文本」训练数据集，或使用广泛但无监督的音频预训练集。因为 Whisper 是在一个大型和多样化的数据集上训练的，而<span style='color:red'>没有针对任何特定的数据集进行微调</span>，虽然它没有击败专攻 LibriSpeech 性能的模型（著名的语音识别基准测试），然而在许多不同的数据集上测量 Whisper 的 Zero-shot（不需要对新数据集重新训练，就能得到很好的结果）性能时，研究人员发现它比那些模型要稳健得多，犯的错误要少 50%。
 
+#### Demo
+
+#### 实时转写
+
+##### Live ASR Engine
+
+[Live ASR Engine](https://github.com/openai/whisper/discussions/508)
+
+I have implemented (not from scratch) LiveASREngine using whisper using the following [codebase](https://github.com/oliverguhr/wav2vec2-live)
+
+The only change I made was in the wav2vec2_inference.py: initialized whisper model with hugging face pipeline.
+my [code](https://github.com/Dimlight/LiveASREngine)
+
+The problem I am facing now:
+- If I do not say anything and the entire room is silent, the engine continuously prints "you" or "thank you", I tested the system in a quiet room. still getting the same issue.
+
+##### stream-translator 
+
+[stream-translator](https://github.com/fortypercnt/stream-translator)
+
+Command line utility to transcribe or translate audio from livestreams in real time. Uses streamlink to get livestream URLs from various services and OpenAI's whisper for transcription/translation. This script is inspired by audioWhisper which transcribes/translates desktop audio.
+- issue: [Livestream transcription/translation](https://github.com/openai/whisper/discussions/225)
+
+#####  Webui demo（加 VAD）
+
+huggingface [whisper-webui](https://huggingface.co/spaces/aadnk/whisper-webui)
+- 源自：[Whisper WebUI with a VAD for more accurate non-English transcripts](https://github.com/openai/whisper/discussions/397) (Japanese)
+- For longer audio files (>10 minutes) not in English, it is recommended that you select Silero VAD (Voice Activity Detector) in the VAD option.
+- Max audio file length: 600 s
+- ![](https://camo.githubusercontent.com/1f7fd1ac75e283c63a197187dea8658b3115cf0fbf3fb5de42665e6a6d432ebc/68747470733a2f2f692e696d6775722e636f6d2f577658715952772e706e67)
+
+Using a VAD is necessary, as unfortunately Whisper suffers from a number of minor and major issues that is particularly apparent when applied to transcribing non-English content - from producing incorrect text (wrong kanji), setting incorrect timings (lagging), to even getting into an infinite loop outputting the same sentence over and over again.
+- 加 VAD：[whisper-webui/blob/main/cli.py](https://huggingface.co/spaces/aadnk/whisper-webui/blob/main/cli.py)
+
+##### 视频字幕
+
+【2022-11-17】[YouTube Video Transcription with Whisper ](https://marferca-yt-whisper-demo-streamlit-app-luptcq.streamlit.app/)，将 youtube 视频实时提取文本、字幕文件
+- 用 Streamlit 搭建
+- github 代码：[yt-whisper-demo](https://github.com/marferca/yt-whisper-demo)
+- ![](https://github.com/marferca/yt-whisper-demo/raw/main/media/streamlit_app.gif)
+
+```sh
+# text
+Have you ever seen a polar bear playing bass? Or robot painted like a Picasso? Didn\'t think so. Dali2 is a new AI system from OpenAI that can take simple text descriptions like a quality-dunking a basketball and turn them into photo realistic images that have never existed before. 
+# 字幕文件
+1
+00:00:00,000 --> 00:00:03,400
+Have you ever seen a polar bear playing bass?
+
+2
+00:00:03,400 --> 00:00:05,800
+Or robot painted like a Picasso?
+```
+
 #### 执行过程
 
 Whisper 执行操作的大致过程：
@@ -2170,17 +2224,27 @@ Whisper's performance varies widely depending on the language. The figure below 
 测试文件的ASR
 
 ```shell
-# 用 CPU、FP32跑
-whisper audio.mp3 --model tiny --device cpu --fp16 False
+whisper "audio.mp3" --task transcribe --model base # 执行转写任务
+whisper audio.mp3 --model tiny --device cpu --fp16 False # 用 CPU、FP32跑
+whisper --language Chinese --model large audio.wav # 指定模型 large
+# [00:00.000 --> 00:08.000] 如果他们使用航空的方式运输货物在某些航线上可能要花几天的时间才能卸货和通关
+whisper --language Chinese --model large audio.wav --initial_prompt "以下是普通話的句子。"  # traditional 默认是繁体
+# [00:00.000 --> 00:08.000] 如果他們使用航空的方式運輸貨物,在某些航線上可能要花幾天的時間才能卸貨和通關。
+$ whisper --language Chinese --model large audio.wav --initial_prompt "以下是普通话的句子。"  # simplified 指定简体中文
+# [00:00.000 --> 00:08.000] 如果他们使用航空的方式运输货物,在某些航线上可能要花几天的时间才能卸货和通关。
 ```
 
 注
 - fp16是指采用2字节(16位)进行编码存储的一种数据类型；
 - 同理fp32是指采用4字节(32位)
+- 使用简体中文，参考：[Simplified Chinese rather than traditional? ](https://github.com/openai/whisper/discussions/277)
 
 fp16和fp32相比对训练的优化：
 1. 内存占用减少：很明显，应用fp16内存占用比原来更小，可以设置更大的batch_size
 2. 加速计算：加速计算只在最近的一些新gpu中，这一块我还没有体验到好处...有论文指出fp16训练速度可以是fp32的2-8倍
+
+By default, terminal uses beam search which generally performs better than greedy search (python's default).
+- 默认情况下，终端模式使用 beam search，而python使用 greedy search
 
 python脚本
 - [How can I switch from FP16 to FP32 in the code to avoid the warning?](https://github.com/openai/whisper/discussions/301)
@@ -2189,6 +2253,11 @@ python脚本
 import whisper
 
 model = whisper.load_model("base")
+voice_file = "audio.mp3"
+# jupyter 中播放语音
+import IPython
+IPython.display.Audio(audioPath, autoplay=True)
+# 执行 ASR
 result = model.transcribe("audio.mp3")
 # 方法①
 # options = whisper.DecodingOptions(language= 'en', fp16=False)
@@ -2197,6 +2266,28 @@ result = model.transcribe("audio.mp3")
 # result = model.transcribe(audioPath, fp16=False, language='English')
 print(result["text"])
 ```
+
+#### 转写结果
+
+返回字典结构
+- text：最终输出的总文本
+- segments：分段详情信息
+- language：语言类型
+
+```json
+{
+  "text": "项目的物业 富华行物业 管理长安俱乐部长安俱乐部是十大俱乐部之首 物业费是24块钱一瓶", 
+  "segments": [
+    {"id": 0, "seek": 0, "start": 0.0, "end": 7.0, "text": "项目的物业 富华行物业 管理长安俱乐部", "tokens": [50364, 10178, 117, 11386, 1546, 23516, 940, 248, 220, 47564, 5322, 236, 8082, 23516, 940, 248, 220, 23131, 13876, 32271, 16206, 7792, 109, 44365, 13470, 50714, 50714, 32271, 16206, 7792, 109, 44365, 13470, 1541, 20145, 3582, 7792, 109, 44365, 13470, 9574, 25444, 220, 23516, 940, 248, 18464, 117, 1541, 7911, 47734, 39623, 2257, 163, 241, 114, 50964], "temperature": 0.0, "avg_logprob": -0.14029632765671302, "compression_ratio": 0.41346153846153844, "no_speech_prob": 0.14019320905208588}, 
+    {"id": 1, "seek": 700, "start": 7.0, "end": 36.0, "text": "长安俱乐部是十大俱乐部之首 物业费是24块钱一瓶", "tokens": [50364, 32271, 16206, 7792, 109, 44365, 13470, 1541, 20145, 3582, 7792, 109, 44365, 13470, 9574, 25444, 220, 23516, 940, 248, 18464, 117, 1541, 7911, 47734, 39623, 2257, 163, 241, 114, 51814], "temperature": 0.0, "avg_logprob": -0.10979152470827103, "compression_ratio": 0.3380281690140845, "no_speech_prob": 0.0005883726407773793}], 
+  "language": "Chinese"
+}
+```
+
+问题
+- VAD 功能不足：当音频分片不足30s时，最后一个分片的截止时间错误, 详见[issue](https://github.com/openai/whisper/discussions/179), [VAD讨论](https://github.com/openai/whisper/discussions/96)
+  - In the \["segment"\] field of the dictionary returned by the function transcribe(), each item will have segment-level details, and there is `no_speech_prob` that contains the probability of the token \<\|nospeech\|\>. This combined with the log probability threshold and the compression ratio threshold performs a crude VAD in transcribe(), but you might find a better result by combining with a separate VAD tool that's more accurate.
+
 
 #### 评测
 
