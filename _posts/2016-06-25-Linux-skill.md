@@ -4070,10 +4070,18 @@ set smartcase " 如果同时打开了ignorecase，那么对于只有一个大写
 |x	|删除当前字符||
 |H M L	|屏幕的上 / 中 / 下||
 
-- 积累常见问题解决方法
+#### vim 疑难杂症
+
+积累常见问题解决方法
 1. vim粘贴多行文本时，编辑器自动换行，格式乱
-   - 解决：粘贴前，使用命令：set paste即可, 如果想恢复自动换行，set nopaste
-1. 待定
+  - 解决：粘贴前，使用命令：set paste即可, 如果想恢复自动换行，set nopaste
+1. 【2022-11-16】web shell下打开vim，编辑后，无法退出
+  - 原因：`esc` 退出这个是无法屏蔽的，chrome 等浏览器把 esc 作为逃逸键，没有信号可以拦截
+  - 解法：vim 可以考虑使用 `ctrl`+`c` 代替 `esc`; 
+    - ① Ctrl+C，vim就从编辑模式进入命令模式；Control + C 可以将代替 Esc 将 Vim 从 insert 模式切换到 normal 模式
+    - ② 按大写的ZZ，退出
+    - 参考：[ESC退出全屏模式和vi编辑模式的ESC键冲突](https://github.com/jumpserver/jumpserver/issues/4091)
+
 
 # jupyter notebook
 
@@ -4187,18 +4195,6 @@ nohup jupyter notebook --ip=`ifconfig eth | awk '/inet/{print $2}'` &>log.txt &
 nohup jupyter notebook --ip=10.37.139.225 &>log_notebook.txt & # 不指定ip也行
 ```
 
-## 显示图片
-
-- 【2020-8-4】两种方法，代码如下：
-```python
-img_file = 'fsm.png'
-# （1）pillow包
-from PIL import Image
-Image.open(img_file)
-# （2）Ipython包
-from IPython.display import Image
-Image(img_file)
-```
 
 ## 常见命令
 
@@ -4227,6 +4223,100 @@ some_func()
 
 ```
 
+## 特殊功能
+
+### 显示图片
+
+- 【2020-8-4】两种方法，代码如下：
+
+```python
+img_file = 'fsm.png'
+# （1）pillow包
+from PIL import Image
+Image.open(img_file)
+# （2）Ipython包
+from IPython.display import Image
+Image(img_file)
+```
+
+### 音频播放
+
+#### 使用 ipython
+
+```python
+import IPython
+IPython.display.Audio('voice_data/v02e0dg10001cddpltbc77uaeqp95020.mp3', autoplay=True)
+```
+
+#### 魔法命令
+
+Additionally, use a magic cell:
+
+```python
+%%HTML
+<video width="320" height="240" controls>
+  <source src="path/to/your.mp4" type="video/mp4">
+</video>
+```
+
+![](https://i.stack.imgur.com/0usNe.png)
+
+#### markdown
+
+```markdown
+<video controls src="voice_data/v02e0dg10001cddpltbc77uaeqp95020.mp3" />
+```
+
+### 视频播放
+
+#### ipython
+
+【2022-11-17】Just do:
+
+```python
+from IPython.display import Video
+
+Video("test.mp4")
+```
+
+If you get an error No video with supported format or MIME type found, just pass embed=True to the function: Video("test.mp4", embed=True).
+
+Or if you want to use the HTML element:
+
+```python
+from IPython.display import HTML
+
+HTML("""
+    <video alt="test" controls>
+        <source src="test.mp4" type="video/mp4">
+    </video>
+""")
+# 设置 版面大小
+HTML("""
+<video width="320" height="240" controls>
+  <source src="path/to/your.mp4" type="video/mp4">
+</video>
+""")
+# iframe
+HTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/S_f2qV2_U00?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>')
+```
+
+#### 魔法命令
+
+或者使用魔法命令
+
+```python
+%%HTML
+<audio controls>
+  <source src="AUDIO-FILE.mp3">
+</audio>
+```
+
+#### markdown
+
+```markdown
+<video controls src="path/to/video.mp4" />
+```
 
 # python开发环境
 
