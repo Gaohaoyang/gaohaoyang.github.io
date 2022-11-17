@@ -18,7 +18,7 @@ mathjax: true
 
 ## 统计学的核心是什么
 
-【2021-11-5】[统计学的核心到底是什么？](https://mp.weixin.qq.com/s/C-WO50yHUjqSyKUemtO7vw)，作者朱宏图，有幸重新拜读Breiman教授的访谈录，跟几年前相比，我在字里行间中体会了许多新东西。这个可能是因为我最近6年的不同于学术生活的经历了，用四个字来形容“人生如梦！”。我从UNC一个高校，到MD Anderson一个顶级癌症医院，到滴滴出行一个创业公司，再回UNC，转了一个大圈子。由此认识了各种背景的人，特别是学界和工业界（含医院和科技公司），我在跟这些同仁的交往之中感受了他们对这个世界的看法和探索的方式是如此的不同。我个人从一个做数理统计开始，到做生物统计，到神经病研究，到近年做双边市场，再到神经科学，这个过程当中接触了不同层面的问题，使得我在认知水平上的经历了一个巨大的变化。
+【2021-11-5】[统计学的核心到底是什么？](https://mp.weixin.qq.com/s/C-WO50yHUjqSyKUemtO7vw)，作者`朱宏图`，有幸重新拜读Breiman教授的访谈录，跟几年前相比，我在字里行间中体会了许多新东西。这个可能是因为我最近6年的不同于学术生活的经历了，用四个字来形容“人生如梦！”。我从UNC一个高校，到MD Anderson一个顶级癌症医院，到滴滴出行一个创业公司，再回UNC，转了一个大圈子。由此认识了各种背景的人，特别是学界和工业界（含医院和科技公司），在跟这些同仁的交往之中感受了他们对这个世界的看法和探索的方式是如此的不同。我从一个做数理统计开始，到做生物统计，到神经病研究，到近年做双边市场，再到神经科学，这个过程当中接触了不同层面的问题，使得在认知水平上的经历了一个巨大的变化。
 
 Breiman教授 的几句话：
 
@@ -26,11 +26,10 @@ Breiman教授 的几句话：
 就统计应用的角度而言，我知道工业机构和政府在发生些什么，但是目前进行的学术研究却似乎离我们无比遥远，好像只是抽象数学的某一分支一样。
 > - 统计精髓之处是在收集和利用数据，来解决现实世界中有趣而又重要的问题
 
-Breiman是美国国家科学院院士 （应用数学学部），不仅在概率论、统计、机器学习，做出了许多有巨大影响力的工作，特别他的CART和bagging这些东西已经是科技公司每天都在用的工具；而且在咨询各个行业躬身力行，笃行不怠。可以说他是既懂数学，又懂统计，也懂应用的全才。
+`Breiman`是美国国家科学院院士 （应用数学学部），不仅在概率论、统计、机器学习，做出了许多有巨大影响力的工作，特别是`CART`和`bagging`这些东西已经是科技公司每天都在用的工具；而且在咨询各个行业躬身力行，笃行不怠。可以说他是既懂数学，又懂统计，也懂应用的全才。
 
-我的看法跟Breiman教授的观点几乎一样：“统计学一开始就从**实践**中来，通过数据来认识这个世界，最终去解决大的实践问题。” 一言而概之：  
-统计学的核心是**应用**和**数据**，就是通过分析数据来深刻地探索这个世界。
-- 统计学跟数学不一样
+跟Breiman教授的观点几乎一样：“统计学一开始就从**实践**中来，通过数据来认识这个世界，最终去解决大的实践问题。” 一言而概之：统计学的核心是**应用**和**数据**，就是通过分析数据来深刻地探索这个世界。
+- 统计学跟**数学**不一样
   - 虽然统计学要用到数学的许多工具来把整个体系完备化，但是统计学中根本性的0-1大突破一定是从为了解决重大应用问题而产生的。比如，随机梯度算法就是Robbins和Monro (1951，统计年刊)为了做一个实验设计的问题提出来并解决的, 而它现在是深度学习和强化学习最重要的优化工具。那些高深的数学工具大概率不能给统计学的带来革命性的变革。
 - 统计不是从工具到应用
   - 许多统计学家主要是在做各种统计工具，讨论许多理论性质特别强调数学的美；有的会去找各种数据来试，看看能不能用的起来，只关心能不能发顶刊，根本不关心实际应用中的价值。这也是为什么Breiman说 “统计中吸引人的东西与目前的学术研究已经相去甚远，分道扬镳了”。其实最近20年，统计学在某种程度上是偏离了这个应用的本质。另外一方面，越来越多的智能型数据产品的出现，比如说最近Deepmind在Nature连续发了两篇文章，这些产品对蛋白质结构的预测，用到了好几个最新的分析方法，比如embedding，预训练，知识蒸馏，变换器，和图模型的表示。这些工具就是Breiman教授说 “我与机器学习和神经网络区域的人走得很近，因为他们正在为一些复杂的、困难的预测问题做一些非常重要的应用工作。他们以数据为方向，所做的也与Webster对统计的定义相一致，然而，他们几乎全都不是受过训练的统计学家！”。这些工具已经不能算是传统的统计方法，你可以说在最底层，它们跟统计非常有关系，但是其中有核心的创新是非统计的，是革命性的。这些突破带来不仅仅是学界的认可，它同时会影响政府机构（含各个funding机构）和金融投资机构。比如，美国NSF最近就成立了数十个AI相关的研究中心，但这些和统计社区关系不大，最终可能会进入一个恶性循环的生态环境。
@@ -44,17 +43,20 @@ Breiman是美国国家科学院院士 （应用数学学部），不仅在概率
   - 第五个例子是**因果推断**。比如今年诺贝尔经济学奖就给了两个做因果推断的人，他们推广了Donald Rubin的因果模型，我认为Don能够做出这样漂亮的统计框架大部分归于他多年咨询工作中积攒的数据和应用相关分析的工作经验、收集数据能力的极大提升和最近因果模型的相关应用和研究的深入。并且随着收集数据能力特别是时空数据的极大提升，因果模型的相关应用和研究会越来越多和越来越深入，由此相关落地会产生出更大的影响力。
 - 未来一段时间应用的核心
   - 最近机器学习大佬Michael Jordan强调了机器学习与市场的融合。这一代人工智能的发展主要是落地在衣，食，住，行，教育，医疗，人力，和养老等相关的市场，系统地将消费者和商品紧密连接，把人、数据和现实中的问题和需求进行整合，成为一个可以创建经济新业态的平台。统计学必须从收集和提炼信息的阶段来思考如何搭建有效的数据平台，在推动业务发展的过程中逐渐从分析方法上抽象出一套完整的统计学基础理论，来推动人工智能在产业的落地，并产生巨大的社会价值。
-因此，我呼吁统计同仁们重视数据和应用，多思考应用的大问题，通过收集和清洗数据，来解决实际问题，进而发展出几个牛掰的统计工具，再证明几个深刻的数学公式，这样统计学就有着辉煌的未来。
+
+因此，统计同仁们重视数据和应用，多思考应用的大问题，通过收集和清洗数据，来解决实际问题，进而发展出几个牛掰的统计工具，再证明几个深刻的数学公式，这样统计学就有着辉煌的未来。
 
 ## 概率与统计
 
 概率论和统计学的区别
-- 简单来说，概率论和统计学解决的问题是互逆的。假设有一个具有不确定性**过程**（process），然后这个过程可以随机的产生不同的**结果**（outcomes）。则概率论和统计学的区别可以描述为：
-  - `概率论`（probability theory）中，已知该过程的概率模型，该模型的不确定性由相应的概率分布来描述；概率论要回答的问题是该过程产生某个结果的可能性有多大这类问题。
-  - `统计学`（statistics）中，该过程的概率模型是未知的，但是有一系列该过程产生的结果的观测值；希望通过这些观测值来推断出这个过程中的不确定性是什么样的。
-- 总结来说就是：（类似归纳与演绎）
-  - 通过已知的概率模型来精确的计算各种结果的可能性就是`概率论`；——`演绎`
-  - 根据观测的结果来推断模型的不确定性就是`统计学`。——`归纳`
+
+简单来说，概率论和统计学解决的问题是互逆的。假设有一个具有不确定性**过程**（process），然后这个过程可以随机的产生不同的**结果**（outcomes）。则概率论和统计学的区别可以描述为：
+- `概率论`（probability theory）中，已知该过程的概率模型，该模型的不确定性由相应的概率分布来描述；概率论要回答的问题是该过程产生某个结果的可能性有多大这类问题。
+- `统计学`（statistics）中，该过程的概率模型是未知的，但是有一系列该过程产生的结果的观测值；希望通过这些观测值来推断出这个过程中的不确定性是什么样的。
+
+总结来说就是：（类似归纳与演绎）
+- 通过已知的概率模型来精确的计算各种结果的可能性就是`概率论`；——`演绎`
+- 根据观测的结果来推断模型的不确定性就是`统计学`。——`归纳`
 
 <div class="mermaid">
     flowchart LR
@@ -121,12 +123,20 @@ Breiman是美国国家科学院院士 （应用数学学部），不仅在概率
 >- A Bayesian is one who, vaguely expecting a horse, and catching a glimpse of a donkey, strongly believes he has seen a mule.
 >- 一个贝叶斯学派的学者是这样的：模糊的期待着一匹马（**先验**），却看到了一头驴（**证据**），于是便自信的认为那是一头骡子（**后验**）。
 
-- [频率学派与贝叶斯学派之争](http://www.cnblogs.com/549294286/archive/2013/04/08/3009073.html)：[知乎网友解释](https://www.zhihu.com/question/20587681/answer/21294468),频率学派最先出现，疯狂打压新生的贝叶斯学派，贝叶斯很凄惨，就跟艺术圈的梵高一样，死后的论文才被自己的学生发表，经过拉普拉斯之手发扬光大，目前二派就像华山派的剑宗和气宗。频率学派挺煞笔的，非得做大量实验才能给出结论，比如你今年高考考上北大的概率是多少啊？频率学派就让你考100次，然后用考上的次数除以100。而贝叶斯学派会找几个高考特级教师对你进行一下考前测验和评估，然后让这几个教师给出一个主观的可能性，比如说：你有9成的把握考上北大。这个区别说大也大，说小也小。
-  - （1）往大了说，**世界观**就不同，频率派认为参数是客观存在，不会改变，虽然未知，但却是固定值；贝叶斯派则认为参数是随机值，因为没有观察到，那么和是一个随机数也没有什么区别，因此参数也可以有分布，个人认为这个和量子力学某些观点不谋而合。
-  - （2） 往小处说，频率派最常关心的是**似然函数**，而贝叶斯派最常关心的是**后验分布**。我们会发现，后验分布其实就是似然函数乘以先验分布再normalize一下使其积分到1。因此两者的很多方法都是相通的。贝叶斯派因为所有的参数都是随机变量，都有分布，因此可以使用一些基于采样的方法（如MCMC）使得我们更容易构建复杂模型。频率派的优点则是没有假设一个先验分布，因此更加客观，也更加无偏，在一些保守的领域（比如制药业、法律）比贝叶斯方法更受到信任。
-   - 频率 vs 贝叶斯 =   P(X;w)  vs  P(X\|w) 或 P(X,w)
-   - 频率学派认为参数固定，通过无数字实验可以估计出参数值——客观；
-   - 贝叶斯学派认为参数和数据都是随机的，参数也服从一定的分布，需要借助经验——主观
+[频率学派与贝叶斯学派之争](http://www.cnblogs.com/549294286/archive/2013/04/08/3009073.html)：[知乎网友解释](https://www.zhihu.com/question/20587681/answer/21294468)
+- `频率学派`最先出现，疯狂打压新生的`贝叶斯学派`，贝叶斯很凄惨，就跟艺术圈的梵高一样，死后的论文才被自己的学生发表，经过拉普拉斯之手发扬光大，目前二派就像`华山派`的`剑宗`和`气宗`。
+- `频率学派`挺煞笔的，非得做大量实验才能给出结论，比如今年高考考上北大的概率是多少啊？`频率学派`就让考100次，然后用考上的次数除以100。
+- 而`贝叶斯学派`会找几个高考特级教师对你进行一下考前测验和评估，然后让这几个教师给出一个主观的可能性，比如说：你有9成的把握考上北大。这个区别说大也大，说小也小。
+- （1）往大了说，**世界观**就不同
+  - 频率派认为<span style='color:blue'>参数客观存在，不会改变</span>，虽然未知，但却是固定值；
+  - 贝叶斯派则认为<span style='color:blue'>参数是随机值</span>，因为没有观察到，和随机数也没区别，因此参数也可以有**分布**，个人认为这个和量子力学某些观点不谋而合。
+- （2）往小处说，频率派最常关心的是**似然函数**，而贝叶斯派最常关心的是**后验分布**。
+  - `后验分布`其实就是`似然函数`乘以`先验分布`再normalize一下使其积分到1。因此两者的很多方法都是相通的。
+  - `贝叶斯派`因为所有的参数都是随机变量，都有分布，因此可以使用一些基于采样的方法（如MCMC）使得我们更容易构建复杂模型。
+  - `频率派`的优点则是没有假设一个先验分布，因此更加客观，也更加无偏，在一些保守的领域（比如制药业、法律）比贝叶斯方法更受到信任。
+  - 频率 vs 贝叶斯 =  $ P(X;w)$  vs  $ P(X|w)$ 或 $P(X,w)$
+  - 频率学派认为参数固定，通过无数字实验可以估计出参数值——客观；
+  - 贝叶斯学派认为参数和数据都是随机的，参数也服从一定的分布，需要借助经验——主观
 
 ## 参数估计
 
@@ -150,6 +160,13 @@ Breiman是美国国家科学院院士 （应用数学学部），不仅在概率
 
 可能性描述
 - `impossible`（不可能，p=0） → `unlikely`（不太可能，p=1/6） → `even chance`（等概率） → `likely`（很有可能，p=4/5） → `certain`（确定，p=1）
+
+p值
+- p=0  : `impossible`（不可能）
+- p=1/6: `unlikely`（不太可能）
+- p=1/N: `even chance`（等概率）
+- p=4/5: `likely`（很有可能）
+- p=1  :  `certain`（确定）
 - ![](https://ask.qcloudimg.com/http-save/yehe-7145566/5dift89zap.jpeg?imageView2/2/w/1620)
 
 how often do you exercise
@@ -164,37 +181,37 @@ how often do you exercise
 - 0% Never 
 
 【2020-5-29】用4个数来概括一个分布
-- **均值** mean: 第一矩。表位置
-- **方差** variance: 第二矩。表胖瘦
-- **偏度** skewness: 第三矩。表歪斜
-- **峰度** kurtosis: 第四矩。表尾巴胖瘦
+- **均值** mean: 第一矩, 表位置
+- **方差** variance: 第二矩, 表胖瘦
+- **偏度** skewness: 第三矩, 表歪斜
+- **峰度** kurtosis: 第四矩, 表尾巴胖瘦
 
 概率中常见的统计度量，首先是均值和方差，其定义与前面在统计学中看到的定义没有区别。
 - 1．`偏度`（Skewness）
   - 它表示了一个概率分布的横向偏差，即偏离中心的程度或对称性（非对称性）。一般来说，如果偏度为负，则表示向右偏离；如果为正，则表示向左偏离。下图描绘了偏度的统计分布。
-    - ![](https://p6-tt.byteimg.com/origin/pgc-image/c4cf3f83211d4dc9a7cd588ee69a5082?from=pc)
+  - ![](https://p6-tt.byteimg.com/origin/pgc-image/c4cf3f83211d4dc9a7cd588ee69a5082?from=pc)
   - 分布形状对偏度的影响
-    - ![](https://p6-tt.byteimg.com/origin/pgc-image/21b0d5c29dd24b91a4575ddcea334682?from=pc)
+  - ![](https://p6-tt.byteimg.com/origin/pgc-image/21b0d5c29dd24b91a4575ddcea334682?from=pc)
 - 2．`峰度`（Kurtosis）
   - 峰度显示了分布的中心聚集程度。它定义了中心区域的锐度，也可以反过来理解，就是函数尾部的分布方式。
   - 峰度的表达式如下。
-    - ![](https://p1-tt.byteimg.com/origin/pgc-image/23ab302b08f448b4a65a60eb071b8af7?from=pc)
+  - ![](https://p1-tt.byteimg.com/origin/pgc-image/23ab302b08f448b4a65a60eb071b8af7?from=pc)
   - 直观地理解这些新的度量。分布形状对峰度的影响
-    - ![](https://p1-tt.byteimg.com/origin/pgc-image/7dd08103a08a479893dabaaeac867626?from=pc)
-- 摘自：[机器学习需要哪些数学基础？](https://www.toutiao.com/i6843281715314557444/)
+  - ![](https://p1-tt.byteimg.com/origin/pgc-image/7dd08103a08a479893dabaaeac867626?from=pc)
+  
+摘自：[机器学习需要哪些数学基础？](https://www.toutiao.com/i6843281715314557444/)
 
+力学上的`矩`，质量（mass）：
+- 0 阶矩：是总**质量**；
+- 1 阶矩除以总质量是**质心**（质量中心）；
+- 2 阶矩是**惯性矩**（moment of inertia）
 
-- 力学上的`矩`，质量（mass）：
-  - 0 阶矩：是总**质量**；
-  - 1 阶矩除以总质量是**质心**（质量中心）；
-  - 2 阶矩是**惯性矩**（moment of inertia）
-
-- 统计学上的`矩`
-  - 0 阶矩：`总概率`，也就是 1；
-  - 1 阶矩：`均值`，
-  - 2 阶中心矩：`方差`；如果是多元，对应协方差
-  - 3 阶中心矩：`偏度`（skewness）
-  - 4 阶中心矩（归一化和平移）：`峰态`（kurtosis）
+统计学上的`矩`
+- 0 阶矩：`总概率`，也就是 1；
+- 1 阶矩：`均值`，
+- 2 阶中心矩：`方差`；如果是多元，对应协方差
+- 3 阶中心矩：`偏度`（skewness）
+- 4 阶中心矩（归一化和平移）：`峰态`（kurtosis）
 
 ### 图解概率统计量
 
@@ -247,7 +264,6 @@ how often do you exercise
 常见的情况：
 1. 通过`置信度`（confidence level），`置信区间`（confidence interval），`总体数量`（population），来计算`样本数`（sample size）；
 2. 通过`置信度`（confidence level），`总体数量`（population），`样本数量`（sample size），`比例`（percentage），来计算`置信区间`（confidence interval）；
-
 
 #### 随机抽样
 
@@ -387,7 +403,7 @@ how often do you exercise
 
 概率密度函数: X = U(a,b)
 - $X=U(a,b)$
-- $ p(x)=\left\{\begin{array}{ll} \frac{1}{b-a} & a \leq x \leq b \\ 0 & \text { else } \end{array}\right. $
+- $ p(x)=\left \{\begin{array}{ll} \frac{1}{b-a} & a \leq x \leq b \\ 0 & \text { else } \end{array} \right. $
 - 期望和方差：$\frac{a+b}{2} , \frac{(b-a)^2}{12} $
 
 ### 伯努利分布
@@ -587,7 +603,7 @@ plt.title('norm, lam:{}'.format(lam))
 
 ### 贝塔分布
 
-贝塔分布(Beta distribution)需要先明确一下先验概率、后验概率、似然函数以及共轭分布的概念。
+`贝塔分布`(Beta distribution)需要先明确一下先验概率、后验概率、似然函数以及共轭分布的概念。
 - 先验概率就是事情尚未发生前，我们对该事发生概率的估计。利用过去历史资料计算得到的先验概率，称为客观先验概率； 当历史资料无从取得或资料不完全时，凭人们的主观经验来判断而得到的先验概率，称为主观先验概率。例如抛一枚硬币头向上的概率为0.5，这就是主观先验概率。
 - 后验概率是指通过调查或其它方式获取新的附加信息，利用贝叶斯公式对先验概率进行修正，而后得到的概率。
 - 先验概率和后验概率的区别：
@@ -595,7 +611,7 @@ plt.title('norm, lam:{}'.format(lam))
   - 后验概率使用了有关自然状态更加全面的资料，既有先验概率资料，也有补充资料。
   - 另外一种表述：先验概率是在缺乏某个事实的情况下描述一个变量；而后验概率（Probability of outcomes of an experiment after it has been performed and a certain event has occured.）是在考虑了一个事实之后的条件概率。
 - 似然函数
-- 共轭分布(conjugacy)：后验概率分布函数与先验概率分布函数具有相同形式;共轭先验就是先验分布是beta分布，而后验分布同样是beta分布
+- `共轭分布`(conjugacy)：后验概率分布函数与先验概率分布函数具有相同形式;共轭先验就是先验分布是beta分布，而后验分布同样是beta分布
 
 在试验数据比较少的情况下，直接用**最大似然法**估计二项分布的参数可能会出现**过拟合**的现象
 - 比如，扔硬币三次都是正面，那么最大似然法预测以后的所有抛硬币结果都是正面
@@ -634,10 +650,10 @@ beta分布可以看作一个概率的概率分布，当不知道事件的具体�
 
 ### 狄利克雷分布（多项分布共轭）
 
-狄利克雷分布(Dirichlet distribution)是多项分布的共轭分布，也就是它与多项分布具有相同形式的分布函数。
+`狄利克雷分布`(Dirichlet distribution)是多项分布的共轭分布，也就是它与多项分布具有相同形式的分布函数。
 - Dirichlet分布是关于定义在区间\[0,1\]上的多个随机变量的联合概率分布
 
-Beta分布与Dirichlet分布的定义域均为\[0,1\]，在实际使用中，通常将两者作为概率的分布
+`Beta分布`与`Dirichlet分布`的定义域均为\[0,1\]，在实际使用中，通常将两者作为概率的分布
 - Beta分布描述的是单变量分布
 - Dirichlet分布描述的是多变量分布
 
@@ -720,11 +736,12 @@ plt.title('norm, mu:{}; sigma:{}'.format(mu, sigma))
   - Python 的 sci-kit learn 提供了合适的函数：
   - sklearn.preprocessing.PowerTransformer(method=’yeo-johnson’, standardize=True, copy=True)
 
-注意：没有做任何分析的情况下不能轻易假设变量服从正态分布，以泊松分布（Poisson distribution）、t 分布（student-t 分布）或二项分布（Binomial distribution）的样本为例，如果错误地假设变量服从正态分布可能会得到错误的结果。
+注意：
+- 没有做任何分析的情况下不能轻易假设变量服从正态分布，以泊松分布（Poisson distribution）、t 分布（student-t 分布）或二项分布（Binomial distribution）的样本为例，如果错误地假设变量服从正态分布可能会得到错误的结果。
 
 【2021-6-14】[正态分布：核心的概率分布](https://www.toutiao.com/i6969855712692306464/)
 
-常见的概率分布有泊松分布，二项分布，伯努利分布，正态分布，均匀分布。其中正态分布是最为核心的概率分布。
+常见的概率分布有`泊松分布`，`二项分布`，`伯努利分布`，`正态分布`，`均匀分布`。其中正态分布是最为核心的概率分布。
 
 #### 一、认识正态分布
  
@@ -832,7 +849,7 @@ plt.title('norm, mu:{}; sigma:{}'.format(mu, sigma))
 
 ### 学生氏分布
 
-司徒顿t分布（Student's t-distribution），简称 t分布，在概率论及统计学中用于根据**小样本**来估计总体呈**正态分布**且**标准差未知**的期望值。
+司徒顿`t分布`（Student's t-distribution），简称 t分布，在概率论及统计学中用于根据**小样本**来估计总体呈**正态分布**且**标准差未知**的期望值。
 - 若总体标准差已知，或是样本数足够大时（依据中心极限定理渐进正态分布），则应使用正态分布来进行估计。其为对两个样本期望值差异进行显著性测试的学生t检验之基础。
 
 学生t 检验改进了Z检验（Z-test），因为在小样本中，Z检验以总体标准差已知为前提，Z检验用在小样本会产生很大的误差，因此必须改用学生t 检验以求准确。但若在样本数足够大（普遍认为超过30个即足够）时，可依据中心极限定理近似正态分布，以Z检验来求得近似值，
@@ -841,7 +858,7 @@ plt.title('norm, mu:{}; sigma:{}'.format(mu, sigma))
 
 ### 韦布尔分布
 
-即韦伯分布（Weibull distribution），又称`韦氏分布`或`威布尔分布`，是可靠性分析和寿命检验的理论基础。
+即`韦伯分布`（Weibull distribution），又称`韦氏分布`或`威布尔分布`，是可靠性分析和寿命检验的理论基础。
 - 威布尔分布在可靠性工程中被广泛应用，尤其适用于机电类产品的磨损累计失效的分布形式。由于它可以利用概率值很容易地推断出它的分布参数，被广泛应用于各种寿命试验的数据处理。
 
 Weibull Distribution是连续性的概率分布
@@ -896,13 +913,12 @@ Weibull Distribution是连续性的概率分布
 
 统计物理学家习惯把服从幂律分布的现象称为无标度现象，即系统中个体的尺度相差悬殊，缺乏一个优选的规模。凡有生命、有进化、有竞争的地方都会出现不同程度的无标度现象。
 
-
-
 ## 说人话的统计学合辑
 
 - 优质文章：[说人话的统计学合辑](http://www.360doc.com/content/17/1104/08/41417155_700749710.shtml)
  
 ###  第1章  高屋建瓴看统计
+
 *   [你真的懂p值吗？](http://mp.weixin.qq.com/s?__biz=MzAxMDA4NjU3OA==&mid=207134405&idx=1&sn=8a4e661a0cd0fad97d869845f2e4b1a2&scene=21#wechat_redirect)
 *   [做统计，多少数据才算够？（上）](http://mp.weixin.qq.com/s?__biz=MzAxMDA4NjU3OA==&mid=207643438&idx=1&sn=20fbf90250185008f841fffe28bf4e9b&scene=21#wechat_redirect)
 *   [做统计，多少数据才算够？（下）](http://mp.weixin.qq.com/s?__biz=MzAxMDA4NjU3OA==&mid=207981601&idx=1&sn=ec4235c0df795e858ed99020381473c0&scene=21#wechat_redirect)
@@ -910,12 +926,15 @@ Weibull Distribution是连续性的概率分布
 *   [你的科研成果都是真的吗？](http://mp.weixin.qq.com/s?__biz=MzAxMDA4NjU3OA==&mid=208129350&idx=1&sn=734fa50cf19fec17afb7103c11fd6439&scene=21#wechat_redirect)
 *   [见识数据分析的「独孤九剑」](http://mp.weixin.qq.com/s?__biz=MzAxMDA4NjU3OA==&mid=208295028&idx=1&sn=d22dea627fff86bf0daded79959bd019&scene=21#wechat_redirect)
 *   [贝叶斯vs频率派：武功到底哪家强？](http://mp.weixin.qq.com/s?__biz=MzAxMDA4NjU3OA==&mid=208453473&idx=1&sn=8d16e540580c3aced266a6c9041f996c&scene=21#wechat_redirect)
+
 ### 第2章  算术平均数与正态分布
+
 *   [数据到手了，第一件事先干啥？](http://mp.weixin.qq.com/s?__biz=MzAxMDA4NjU3OA==&mid=400430409&idx=1&sn=03b30d4122d177650543f50649195ebd&scene=21#wechat_redirect)
 *   [算术平均数：简单背后有乾坤](http://mp.weixin.qq.com/s?__biz=MzAxMDA4NjU3OA==&mid=400735492&idx=1&sn=dc2b5dae73740cd2841dabf2c420f842&scene=21#wechat_redirect)
 *   [正态分布到底是怎么来的？](http://mp.weixin.qq.com/s?__biz=MzAxMDA4NjU3OA==&mid=401781634&idx=1&sn=4cbabdb7191b8d49df95f0988943e18b&scene=21#wechat_redirect)
  
 ### 第3章  t检验：两组平均数的比较
+
 *   [想玩转t检验？你得从这一篇看起](http://mp.weixin.qq.com/s?__biz=MzAxMDA4NjU3OA==&mid=402713181&idx=1&sn=eafb0bd061c6d22fba9582ba230a942c&scene=21#wechat_redirect)
 *   [就是要实用！t 检验的七十二变](http://mp.weixin.qq.com/s?__biz=MzAxMDA4NjU3OA==&mid=403019527&idx=1&sn=9d279713517f96a204d4541e3ff68023&scene=21#wechat_redirect)
 *   [不是正态分布，t 检验还能用吗？](http://mp.weixin.qq.com/s?__biz=MzAxMDA4NjU3OA==&mid=403375449&idx=1&sn=2fb2c79f8b272686d3908c38ad03b6b1&scene=21#wechat_redirect)
@@ -931,6 +950,7 @@ Weibull Distribution是连续性的概率分布
 *   [要做 t 检验，这两口毒奶可喝不得！](http://mp.weixin.qq.com/s?__biz=MzAxMDA4NjU3OA==&mid=2652549476&idx=1&sn=d571ebf331f5ad08413f9e9a57c73b3c&scene=21#wechat_redirect)
  
 ###  第4章  方差分析(ANOVA)：多组平均数的比较
+
 *   [要比较三组数据，t 检验还能用吗？](http://mp.weixin.qq.com/s?__biz=MzAxMDA4NjU3OA==&mid=2652549639&idx=1&sn=877daad6e64e689dfb72b8ab7b95bb18&scene=21#wechat_redirect)
 *   [ANOVA在手，多组比较不犯愁](http://mp.weixin.qq.com/s?__biz=MzAxMDA4NjU3OA==&mid=2652549791&idx=1&sn=e7079f101ccc4ca5a2f9899d163d2e60&scene=21#wechat_redirect)
 *   [ANOVA的基本招式你掌握了吗？](http://mp.weixin.qq.com/s?__biz=MzAxMDA4NjU3OA==&mid=2652549926&idx=1&sn=7dc7d10bd57a8833ebe67a2e33f7f0dd&chksm=80bba2fbb7cc2bedc1d37f5b35e2b581479c327bf0edb1a5b39392027c7ee977c8644c8eca7d&scene=21#wechat_redirect)
@@ -982,13 +1002,16 @@ Weibull Distribution是连续性的概率分布
 克劳德·艾尔伍德·香农（英语：Claude Elwood Shannon，1916年4月30日－2001年2月26日），美国数学家、电子工程师和密码学家，被誉为信息论的创始人。香农是密歇根大学学士，麻省理工学院博士。1948年，香农发表了划时代的论文——通信的数学原理，奠定了现代信息论的基础。
 
 ## 基本知识
+
 摘自：[信息论基础](https://github.com/songyingxin/NLPer-Interview/blob/master/1-%E5%9F%BA%E7%A1%80%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/%E4%BF%A1%E6%81%AF%E8%AE%BA.md)
-- 基本思想:
-   - 一件不太可能的事情发生, 要比一件非常可能的事情发生提供更多的信息
-- 性质:
-  > - 非常可能发生的事情信息量较少,并且极端情况下,一定能够发生的事件应该没有信息量
-  > - 比较不可能发生的事件具有更大的信息量
-  > - 独立事件应具有增量的信息。例如，投掷的硬币两次正面朝上传递的信息量，应该是投掷一次硬币正面朝上的信息量的两倍。
+
+基本思想:
+- 一件不太可能的事情发生, 要比一件非常可能的事情发生提供更多的信息
+
+性质:
+> - 非常可能发生的事情信息量较少,并且极端情况下,一定能够发生的事件应该没有信息量
+> - 比较不可能发生的事件具有更大的信息量
+> - 独立事件应具有增量的信息。例如，投掷的硬币两次正面朝上传递的信息量，应该是投掷一次硬币正面朝上的信息量的两倍。
 
 ## 熵
 
@@ -1074,8 +1097,6 @@ Weibull Distribution是连续性的概率分布
 
 尽管熵并不总是最佳的损失函数（尤其是在目标函数p尚未明确定义的情况下），但熵通常表现为性能增强，这说明了熵在任何地方都存在。
 
-
-
 ## 1. `自信息` ，`信息熵`，`互信息`
 
 ### `自信息` - self-information
@@ -1103,14 +1124,14 @@ $$
 
 信息论中，记 `0log0 = 0`
 - 当且仅当某个 $P(X_i)=1$，其余的都等于0时， H(X)= 0。
-- 当且仅当某个$P(X_i)=1/n，i=1， 2，……， n$时，$H(X)$ 有极大值 log n。
+- 当且仅当某个$P(X_i)=\frac{1}{n}，i=1， 2，……， n$时，$H(X)$ 有极大值 log n。
 
 熵可以表示样本集合的不确定性，**`熵`越大，样本的不确定性就越大**。
 
 ### `互信息`
 
-- 在概率论和信息论中，两个随机变量的互信息（mutual Information，简称MI）或转移信息（transinformation）是变量间相互依赖性的量度。 不同于相关系数，互信息并不局限于实值随机变量，它更加一般且决定着联合分布p(X,Y) 和分解的边缘分布的乘积p(X)p(Y) 的相似程度。
-   - [信息论：熵与互信息](https://my.oschina.net/u/3579120/blog/1508147)
+在概率论和信息论中，两个随机变量的互信息（mutual Information，简称MI）或转移信息（transinformation）是变量间相互依赖性的量度。 不同于相关系数，互信息并不局限于实值随机变量，它更加一般且决定着联合分布p(X,Y) 和分解的边缘分布的乘积p(X)p(Y) 的相似程度。
+- [信息论：熵与互信息](https://my.oschina.net/u/3579120/blog/1508147)
 ![](https://static.oschina.net/uploads/img/201708/14005354_faKf.png)
 
 $$
@@ -1130,7 +1151,8 @@ $$
 D_P(Q) =\sum_{x \in X}P(x)log(\frac{P(x)}{Q(x)})
 $$
 
-- 含义：在离散型变量的情况下， `KL散度`衡量的是：**当我们使用一种被设计成能够使得概率分布 Q 产生的消息的长度最小的编码，发送包含由概率分布 P 产生的符号的消息时，所需要的额外信息量。**
+含义：
+- 在离散型变量的情况下， `KL散度`衡量的是：**当我们使用一种被设计成能够使得概率分布 Q 产生的消息的长度最小的编码，发送包含由概率分布 P 产生的符号的消息时，所需要的额外信息量。**
 
 性质：
 > - **非负**: KL散度为 0,当且仅当P 和 Q 在离散型变量的情况下是相同的分布，或者在连续型变量的情况下是“几乎处处”相同的.
@@ -1151,15 +1173,15 @@ $$
 - **针对 Q 最小化交叉熵等价于最小化 P 对 Q 的 KL散度**，因为 Q 并不参与被省略的那一项。
 
 $$
-  H_P(Q) = H(P) + D_P(Q)最大似然估计中，最小化 KL 散度其实就是在最小化分布之间的交叉熵。
+H_P(Q) = H(P) + D_P(Q)最大似然估计中，最小化 KL 散度其实就是在最小化分布之间的交叉熵。
 $$
 
 - `最大似然估计`中，最小化 `KL散度`其实就是在最小化分布之间的`交叉熵`。
 
 ## 3. `联合熵`与`条件熵`
 
-- 联合熵 $H(X,Y)$：两个随机变量X，Y的联合分布。
-- 条件熵 $H(Y\| X)$：在随机变量X发生的前提下，随机变量Y发生所新带来的熵定义为Y的条件熵，用来衡量在已知随机变量X的条件下随机变量Y的不确定性。
+- `联合熵` $H(X,Y)$：两个随机变量X，Y的联合分布。
+- `条件熵` $H(Y|X)$：在随机变量X发生的前提下，随机变量Y发生所新带来的熵定义为Y的条件熵，用来衡量在已知随机变量X的条件下随机变量Y的不确定性。
 
 $$
 H(Y| X) = H(X,Y) - H(X)
@@ -1205,16 +1227,13 @@ $$
 深入研究信息论之前，思考下如何可视化简单的概率分布。
 
 比如加利福尼亚有时下雨，但大多都是晴天，也就是说晴天的概率是75％。
-
-![img](https://colah.github.io/posts/2015-09-Visual-Information/img/prob-1D-rain.png)
+- ![img](https://colah.github.io/posts/2015-09-Visual-Information/img/prob-1D-rain.png)
 
 大多数时候，我都穿着T恤，但有时候会穿外套。假设穿外套的概率是38％。
-
-![img](https://colah.github.io/posts/2015-09-Visual-Information/img/prob-1D-coat.png)
+- ![img](https://colah.github.io/posts/2015-09-Visual-Information/img/prob-1D-coat.png)
 
 怎么同时可视化这两个事件？如果不相关，很容易，独立即可。例如，今天我穿T恤或雨衣是不是真的与下周的天气相互作用。可以用轴代表不同因素：
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/prob-2D-independent-rain.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/prob-2D-independent-rain.png)
 
 注意垂直线和水平线一直通过。*这就是独立的样子！* [1](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fn1)
 
@@ -1230,25 +1249,20 @@ $$
 相反，让我们关注一个像天气一样的变量。我们知道它是晴天还是下雨的可能性。对于这两种情况，我们可以查看*条件概率*。如果天气晴朗，我穿T恤的可能性有多大？如果下雨，我穿外套的可能性有多大？
 - ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/prob-2D-factored-rain-arrow.png)
 
-下雨的几率是25％。如果下雨，我有75％的机会穿上外套。因此，下雨和我穿着外套的概率是25％的75％，大约是19％。下雨的概率乘以我穿着外套下雨的概率，是下雨时我穿外套的概率。我们写这个：
+下雨的几率是25％。如果下雨，我有75％的机会穿上外套。因此，下雨和我穿着外套的概率是25％的75％，大约是19％。下雨的概率乘以我穿着外套下雨的概率，是下雨时我穿外套的概率。写这个：$ p(rain,coat) = p(rain)*p(coat|rain) $
 
-> p(rain,coat) = p(rain) ⋅ p(coat \| rain) 
+这是概率论最基本身份之一：$p(x,y) = p(x) * p(y|x)$
 
-这是概率论最基本身份之一：
-
-> p(x,y) = p(x) ⋅ p(y \| x)
-
-我们将分配*考虑在内*，将其分解为两件产品。首先，我们看一个变量（如天气）将采取某个值的概率。然后我们看一下另一个变量（如我的衣服）在第一个变量上采用某个值的概率。
+将分配*考虑在内*，将其分解为两件产品。首先，我们看一个变量（如天气）将采取某个值的概率。然后我们看一下另一个变量（如我的衣服）在第一个变量上采用某个值的概率。
 
 选择哪个变量是任意的。我们可以轻松地开始专注于我的衣服，然后看看它的天气条件。这可能感觉有点不那么直观，因为我们知道天气的因果关系会影响我穿什么而不是反过来...但它仍然有效！
 
 我们来看一个例子吧。如果我们选择一个随机的日子，那么我有38％的机会穿着外套。如果我们知道我穿着外套，下雨的可能性有多大？嗯，我更有可能在雨中穿一件外套而不是在阳光下，但在加利福尼亚州下雨很少见，所以它有50％的可能性在下雨。因此，下雨和我穿外套的可能性是我穿着外套的概率（38％），如果我穿着外套（50％）是下雨的可能性的概率是约19％。
 
-> p(rain,coat)=p(coat) ⋅ p(rain \| coat)
+$ p(rain,coat)=p(coat)*p(rain|coat) $
 
-这为我们提供了一种完全相同概率分布的可视化方法。
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/prob-2D-factored1-clothing-B.png)
+这提供了一种完全相同概率分布的可视化方法。
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/prob-2D-factored1-clothing-B.png)
 
 请注意，标签的含义与上图相比略有不同：T恤和外套现在是*边缘概率*，即我在不考虑天气的情况下衣服的可能性。另一方面，现在有两个下雨和晴天标签，因为他们的概率是以T恤和外套为条件的。
 
@@ -1313,7 +1327,7 @@ $$
 只有一个基本限制。传达所说的是什么，发生了这种分布的事件，要求我们平均至少传播1.75位。无论我们的代码多么聪明，都不可能让平均消息长度更短。我们将此基本限制称为熵分布 - 我们将在稍后更详细地讨论它。
 - ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/EntropOptimalLengthExample.png)
 
-如果我们想要理解这个限制，那么问题的关键在于理解在使一些代码字缩短和其他代码字长之间的权衡。一旦我们理解了这一点，我们就能够理解最好的代码是什么样的。
+如果想要理解这个限制，那么问题的关键在于理解在使一些代码字缩短和其他代码字长之间的权衡。一旦我们理解了这一点，就能够理解最好的代码是什么样的。
 
 ### 代码字的空间
 
@@ -1338,7 +1352,7 @@ $$
 
 ### 最佳编码
 
-您可以将此视为使用有限的预算来获取短代码字。我们通过牺牲一小部分可能的代码字来得到一个代码字。
+可以将此视为使用有限的预算来获取短代码字。通过牺牲一小部分可能的代码字来得到一个代码字。
 
 购买长度为0的代码字的成本是1，所有可能的代码字 - 如果你想要一个长度为0的代码字，你就不能拥有任何其他代码字。长度为1的代码字的成本，如“0”，是1/2，因为一半可能的代码字以“0”开头。长度为2的代码字的成本，如“01”，是1/4，因为所有可能的代码字中有四分之一以“01”开头。通常，代码字的成本随着代码字的长度*呈指数*下降。
 - ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/code-costonly.png)
@@ -1393,9 +1407,7 @@ $$
 回想一下，长度为L的消息的成本是1/2^L。 我们给定量的消息的长度，可以将其反向处理获得花费成本：log2⁡（1/cost）。 由于我们在x的代码字上花费p(x)，因此长度为log2⁡(1/p(x))。这些是长度的最佳选择。
 - ![img](https://colah.github.io/posts/2015-09-Visual-Information/img/entropy-def-notitle.png)
 
-早些时候，我们讨论了如何从一个特定的概率分布中获得平均消息来传递事件的短暂性的基本限制，p。 这个限制，即使用最佳代码的平均消息长度，称为p的熵，H(p)。 现在我们知道了代码字的最佳长度，实际上我们可以计算它！
-
-> H(p)=∑p(x)log2⁡(1/p(x))
+早些时候，我们讨论了如何从一个特定的概率分布中获得平均消息来传递事件的短暂性的基本限制，p。 这个限制，即使用最佳代码的平均消息长度，称为p的熵，H(p)。 现在知道了代码字的最佳长度，可以计算: $ H(p)=\sum {p(x)log_2⁡\frac{1}{p(x)}}$
 
 *（人们经常使用标识 H(p)=−∑p(x)log2⁡(p(x)) 改写成 log⁡(1/a)=−log⁡(a).我认为前者更直观，并将继续在本文中使用它。）*
 
@@ -1410,8 +1422,7 @@ $$
 ### 交叉熵
 
 在他搬到澳大利亚之前不久，鲍勃娶了爱丽丝，这是我想象中的另一个虚构。 为了让我自己以及我头脑中的其他人物感到惊讶，爱丽丝不是一个爱狗的人。 她是一个猫爱好者。 尽管如此，他们两人能够在他们对动物的共同喜好和词汇量非常有限的情况下找到共同点。
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/DogCatWordFreq.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/DogCatWordFreq.png)
 
 他们俩说不同频率的同一个词。 鲍勃一直在说狗，爱丽丝一直在说猫。
 
@@ -1420,8 +1431,7 @@ $$
 这个长度 - 从一个分布传递事件与另一个分布的最佳代码的平均长度 - 称为交叉熵。 形式上，我们可以将交叉熵定义为：[4](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fn4)  Hp(q)=Σq(x)log2⁡(1/p(x))
 
 在这种情况下，爱丽丝的交叉熵是猫爱好者的单词频率相对于鲍勃爱好者的单词频率。
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/CrossEntropyDef.png)
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/CrossEntropyDef.png)
 
 为了降低通信成本，我让Alice使用自己的代码。令我宽慰的是，这降低了她的平均消息长度。但它引入了一个新问题：有时Bob会不小心使用Alice的代码。令人惊讶的是，鲍勃不小心使用Alice的代码而Alice使用了Bob的代码，这样会更糟糕！
 
@@ -1448,9 +1458,9 @@ $$
 
 真正有趣的是熵和交叉熵之间的差异。这种差异是我们的消息需要多长时间，因为我们使用了针对不同分布而优化的代码。如果分布相同，则此差异将为零。随着差异的增大，它会变得更大。
 
-我们将这种差异称为Kullback-Leibler分歧，或KL分歧。p相对于q，Dq(p)，[5](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fn5) 的KL偏差定义为：[6](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fn6)
+这种差异称为 Kullback-Leibler分歧，或 KL分歧。p相对于q，Dq(p)，[5](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fn5) 的KL偏差定义为：[6](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fn6)
 
-> Dq(p) = Hq(p)−H(p)
+$ Dq(p) = Hq(p)−H(p) $
 
 关于KL分歧的真正好处在于它就像两个分布之间的距离。它可以量化分布间的不同！ （如果你认真对待这个想法，最终会得到信息几何。）
 
@@ -1469,11 +1479,9 @@ $$
 现在我们可以计算出这些概率事件的最优代码字，并计算平均消息长度：
 - ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/Hxy-flat.png)
 
-我们称之为X和Y的联合熵
+我们称之为X和Y的联合熵 $ H(X,Y)=\sum_{x,y}p(x,y)log_2⁡{p(x,y)}$
 
-> H(X,Y)=∑x,yp(x,y)log2⁡(1p(x,y))
-
-这与我们的正常定义完全相同，除了是两个变量而不是一个变量之外。
+这与正常定义完全相同，除了是两个变量而不是一个变量之外。
 
 考虑这个问题的一种稍好一点的方法是避免使分布变平，只需将代码长度看作第三维。 现在熵就是体积！
 - ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/Hxy-3D.png)
@@ -1486,13 +1494,11 @@ $$
 在这两种情况下，我不需要平均发送大量信息，因为天气让我很好地猜测了正确答案。 当天气晴朗时，我可以使用一个特殊的晴天优化代码，当下雨时我可以使用下雨优化的代码。 在这两种情况下，我发送的信息少于我使用通用代码的情况。为了获得我需要发送给我妈妈的平均信息量，我只是将这两个案例放在一起......
 - ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/HxCy.png)
 
-我们称之为条件熵。如果你把它形式化成一个方程，你会得到：
-
-> H(X\|Y)=∑yp(y)∑xp(x\|y)log2⁡(1p(x\|y))=∑x,yp(x,y)log2⁡(1p(x\|y))
+条件熵。如果你把它形式化成一个方程，会得到：$ H(X|Y)=\sum{y}p(y)=∑_xp(x|y)log_2⁡ p(x|y)=∑_{x,y}p(x,y)log_2⁡ p(x|y) $
 
 ### 互信息
 
-在上一节中，我们观察到知道一个变量可能意味着传递另一个变量需要更少的信息。
+在上一节中，观察到知道一个变量可能意味着传递另一个变量需要更少的信息。
 
 考虑这个问题的一个好方法是将大量信息想象成条形。 如果它们之间存在共享信息，则这些条重叠。 例如，X和Y中的一些信息在它们之间共享，因此H(X) 和H(Y) 是重叠条。 并且由于H(X,Y) 是两者中的信息，它是条形H(X) 和H(Y) 的并集。[7](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fn7)
 - ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/Hxy-info-1.png)
@@ -1502,15 +1508,13 @@ $$
 例如，我们之前注意到它需要更多信息来传达X和Y（“联合熵”，H(X,Y) 而不是仅仅需要 通信X（“边际熵”，H(X)）。但是，如果你已经知道Y，那么传递X（“条件熵”，H(X\|Y)）所需的信息比你没有做的要少！
 - ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/Hxy-overview.png)
 
-这听起来有点复杂，但是当我们从条形图的角度来考虑时，它非常简单。H(X\|Y) 是我们需要发送以将X发送给已经知道Y的人的信息，X中的信息不在Y中。从可视化来看，这意味着H(X\|Y)是H(X)条的一部分，它与H(Y)不重叠。
+这听起来有点复杂，但是当我们从条形图的角度来考虑时，它非常简单。$ H(X|Y)$ 是我们需要发送以将X发送给已经知道Y的人的信息，X中的信息不在Y中。从可视化来看，这意味着 $ H(X|Y)$ 是H(X)条的一部分，它与H(Y)不重叠。
 
-您现在可以从下图中读取不等式H(X,Y)≥H(X)≥H(X\|Y)。
+现在可以从下图中读取不等式 $ H(X,Y)≥H(X)≥H(X|Y) $。
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/Hxy-info-4.png)
 
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/Hxy-info-4.png)
-
-另一个标识是H(X,Y)=H(Y)+H(X\|Y)。 也就是说，X和Y中的信息是 Y中的信息加上X不在Y中的信息。
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/Hxy-overview-sum.png)
+另一个标识是 $ H(X,Y)=H(Y)+H(X|Y) $。 也就是说，X和Y中的信息是 Y中的信息加上X不在Y中的信息。
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/Hxy-overview-sum.png)
 
 同样，在方程中很难看到这些，但是如果你正在考虑这些重叠的信息条，那么很容易就可以看出来。
 
@@ -1520,9 +1524,8 @@ $$
 
 这与KL分歧有什么关系？这也给了我们一个距离概念？好吧，KL分歧给出了两个分布在同一个变量或一组变量上的距离。相反，信息的变化给出了两个联合分布变量之间的距离。 KL分歧在分布之间，分布内的信息变化。
 
-我们可以将所有这些结合在一张图表，将所有这些不同的信息联系起来：
-
-![img](http://colah.github.io/posts/2015-09-Visual-Information/img/Hxy-info.png)
+可以将所有这些结合在一张图表，将所有这些不同的信息联系起来：
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/Hxy-info.png)
 
 ### 分数位
 
@@ -1583,8 +1586,6 @@ Cover & Thomas的信息论元素似乎是标准参考。我发现这很有用。
 还要感谢我的前两个神经网络研讨会系列，作为这些想法的实验对象。
 
 最后，感谢那些发现错误和遗漏的读者。 特别感谢Connor Zwick，Kai Arulkumaran，Jonathan Heusser，Otavio Good和一位匿名评论者。
-
-
 - 1. 用这个来可视化朴素的贝叶斯分类器很有趣，它们假设独立......[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref1)
 - 2. 但非常低效！ 如果我们在代码中使用了额外的符号，那么只在代码字的末尾使用它就会是一种可怕的浪费。[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref2)
 - 3. 我在这里作弊。 我一直在使用底数为2的指数，这不是真的，我将切换到自然指数。 这节省了我们在证明中有很多log(2)s，并阅读体验更好。[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref3)
@@ -1592,16 +1593,14 @@ Cover & Thomas的信息论元素似乎是标准参考。我发现这很有用。
 - 5. 也是非标准的表示法。[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref5)
 - 6. 如果扩展KL分歧的定义，你得到：Dq(p)=∑p(x)log2⁡(p(x)/q(x)) 这可能看起来有点奇怪。 我们该怎么解释呢？ 那么，log2⁡(p(x)/q(x))就是为q优化的代码和为p优化的代码将使用多少位之间的差异 表示x。 表达式作为整体是两个代码将使用多少位的预期差异。[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref6)
 - 7. 这构建了Raymond W. Yeung论文中对信息理论的集合解释 [A New Outlook on Shannon’s Information Measures](http://www.cnd.mcgill.ca/~ivan/it_ineq_script/Raymond%20Yeung%20papers/A%20New%20Outlook%20on%20Shannon%E2%80%99s%20Information%20Measures%2000079902.pdf).[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref7)
-- 8. 如果扩展互信息的定义，您会得到：
-> I(X,Y)=∑p(x,y)log2⁡(p(x,y)/(p(x)p(y)))
+- 8. 如果扩展互信息的定义，您会得到：$ I(X,Y)=∑p(x,y)log_2⁡ \frac{p(x,y)}{p(x)p(y)} $
 
-   这看起来像 KL 分歧！
+这看起来像 KL 分歧！这是怎么回事？ 
+- 嗯，这是 KL 分歧。 它是 P(X,Y) 的KL分歧和它的朴素近似P(X)P(Y)。 也就是说，如果知道它们之间的关系而不是假设它们是独立的，那么您保存的位数代表X和Y.
 
-   这是怎么回事？ 嗯，这是 KL 分歧。 它是P(X,Y) 的KL分歧和它的朴素近似P(X)P(Y)。 也就是说，如果知道它们之间的关系而不是假设它们是独立的，那么您保存的位数代表X和Y.
+一种很有趣的方法是把一个分布和它的朴素近似之间的比例画出来:
+- ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/mutual-visual-eq.png)
 
-   一种很有趣的方法是把一个分布和它的朴素近似之间的比例画出来:
-
-   ![img](http://colah.github.io/posts/2015-09-Visual-Information/img/mutual-visual-eq.png)
 - 9. 有一整个量子信息论领域。 我对这个问题一无所知，但我敢打赌，基于Michael的其他工作，Michael Nielsen和Issac Chuang的Quantum Computation和Quantum Information是一个很好的介绍。[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref9)
 - 10. 作为一个对统计物理一无所知的人，我会非常紧张地试图勾勒出与我所理解的信息论的联系。
 
@@ -1612,16 +1611,16 @@ Cover & Thomas的信息论元素似乎是标准参考。我发现这很有用。
 
 - 11. 信息理论与赌博之间的联系最初是由约翰凯利在他的论文“[信息率的新解释](http://www.princeton.edu/~wbialek/rome/refs/kelly_56.pdf)”中提出的。 这是一篇非常容易阅读的论文，虽然它需要我们在本文中没有提出的一些想法。
 
-    凯利对他的工作有一个有趣的动机。 他注意到熵正在许多成本函数中使用，这些函数与编码信息无关，并且需要一些原则性的原因。 在写这篇文章的时候，我也被同样的事情所困扰，并且非常感谢凯利的工作作为一个额外的视角。 也就是说，我并不觉得它完全令人信服：凯利只是因为他考虑了迭代投注，每次投注重新投入所有资金。 不同的设置不会导致熵。
+凯利对他的工作有一个有趣的动机。 他注意到熵正在许多成本函数中使用，这些函数与编码信息无关，并且需要一些原则性的原因。 在写这篇文章的时候，我也被同样的事情所困扰，并且非常感谢凯利的工作作为一个额外的视角。 也就是说，我并不觉得它完全令人信服：凯利只是因为他考虑了迭代投注，每次投注重新投入所有资金。 不同的设置不会导致熵。
 
-    关于凯利在博彩和信息理论之间联系的一个很好的讨论可以在信息理论的标准参考资料中找到，即Cover＆Thomas的“信息理论要素”。[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref11)
+关于凯利在博彩和信息理论之间联系的一个很好的讨论可以在信息理论的标准参考资料中找到，即Cover＆Thomas的“信息理论要素”。[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref11)
 
 - 12. 它并没有解决这个问题，但我无法抗拒为KL分歧提供进一步的防御。
 
-    有一个结果，盖斯和托马斯称斯坦因的引理，虽然它似乎与通常称为斯坦因引理的结果无关。从高层次来看，它是这样的：
+有一个结果，盖斯和托马斯称斯坦因的引理，虽然它似乎与通常称为斯坦因引理的结果无关。从高层次来看，它是这样的：
 
-    假设您知道某些数据来自两个概率分布中的一个。你有信心确定它来自哪两个分发版？通常，随着获得更多数据点，信心应该呈指数级增长。例如，平均而言，对于看到的每个数据点，你可能会对哪个分布的真实性有1.5倍的信心。
+假设您知道某些数据来自两个概率分布中的一个。你有信心确定它来自哪两个分发版？通常，随着获得更多数据点，信心应该呈指数级增长。例如，平均而言，对于看到的每个数据点，你可能会对哪个分布的真实性有1.5倍的信心。
 
-    信心增加多少取决于分布的差异。如果它们非常不同，您可能会很快变得自信。但如果它们只是略有不同，那么在你有一个肯定自信的答案之前，你可能需要看到大量的数据。
+信心增加多少取决于分布的差异。如果它们非常不同，您可能会很快变得自信。但如果它们只是略有不同，那么在你有一个肯定自信的答案之前，你可能需要看到大量的数据。
 
-    Stein的Lemma简单地说，乘以的数量是由KL分歧控制的。 （关于假阳性和假阴性之间的权衡有一些微妙之处。）这似乎是关心KL分歧的一个非常好的理由！[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref12)
+Stein的Lemma简单地说，乘以的数量是由KL分歧控制的。 （关于假阳性和假阴性之间的权衡有一些微妙之处。）这似乎是关心KL分歧的一个非常好的理由！[↩](http://colah.github.io/posts/2015-09-Visual-Information/?from=hackcv&hmsr=hackcv.com&utm_medium=hackcv.com&utm_source=hackcv.com#fnref12)
