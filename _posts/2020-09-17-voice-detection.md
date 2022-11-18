@@ -2343,8 +2343,6 @@ Whisper 识别结果
 - 很快互联网上的音频和视频资料中的对话台词，也可以搜索了吧，就像音乐可以搜歌词一样，音频不再是监管的法外之地了
 - 对于播客爱好者来说，很快，拥有自动高质量转写的播客客户端不再是梦
 
-#### 评测
-
 kaggle上GPU测试（P100）
 
 | 模型版本 | 模型加载时间 | asr时间 | asr效果 | asr样例 |
@@ -2375,6 +2373,15 @@ time_asr = end_asr - start_asr
 print("模型加载时间：{:.2f}\nasr时间：{:.2f}".format(time_load, time_asr))
 print(result["text"])
 ```
+
+#### finetune
+
+
+fine-tune 实践
+- Check-out this blog for fine-tuning Whisper for multilingual [ASR with Hugging Face Transformers](https://huggingface.co/blog/fine-tune-whisper)
+  - It provides a step-by-step guide to fine-tuning, right from data preparation to evaluation 🤗 There'a Google Colab so you can also run it as a notebook
+- [run_speech_recognition_whisper](https://huggingface.co/sanchit-gandhi/whisper-medium-switchboard-5k/blob/main/run_speech_recognition_whisper.py)
+- Fine Tuning code in [Japanese Kana](https://colab.research.google.com/drive/1P4ClLkPmfsaKn2tBbRp0nVjGMRKR-EWz?usp=sharing)
 
 
 ## windows下tts
