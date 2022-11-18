@@ -4225,6 +4225,97 @@ some_func()
 
 ## 特殊功能
 
+### 魔法操作介绍
+
+【2022-11-18】[魔法操作介绍](https://zhuanlan.zhihu.com/p/29942003)
+
+IPython 有一个 %% script 魔法操作符, 可以在一个子进程中运行其它语言的解释器，包括: bash, ruby, perl, zsh, R, 等等
+
+```s
+# ------ python ------
+%%script python3
+import sys
+print('hello from Python: %s' % sys.version)
+# ------ ruby ------
+%%ruby
+puts "Hello from Ruby #{RUBY_VERSION}" # Hello from Ruby 2.1.5
+# ------ shell -----
+%%bash
+echo "hello from $BASH" # hello from /bin/bash
+```
+
+显示魔法命令
+
+```s
+%lsmagic
+```
+
+### shell
+
+shell 代码块
+
+```s
+%%!
+ls -l
+pwd
+```
+
+
+### 执行时间 
+
+```s
+# ---------
+import numpy as np
+%timeit np.linalg.eigvals(np.random.rand(100,100)) # 单行命令计时
+%time # 整个格子一起计时
+print("hi")
+# CPU times: user 5 µs, sys: 0 ns, total: 5 µs
+# Wall time: 10 µs
+```
+
+### 捕获输出内容
+
+capture 魔法，用于捕获 stdout/err, 可以直接显示，也可以存到变量里备用:
+
+```s
+# --------- ① capture -------- 
+%%capture capt
+from __future__ import print_function
+import sys
+print('Hello stdout')
+print('and stderr', file=sys.stderr)
+
+capt.stdout, capt.stderr # ('Hello stdout\n', 'and stderr\n')
+capt.show() # Hello stdout and stderr
+# --------- ② shell中捕获输出到特定文件 ------
+%%bash --out output --err error
+echo "hi, stdout"
+echo "hello, stderr" >&2
+print(error) # hi, stdout
+print(output) # hello, stderr
+```
+
+### 写文件，调用文件
+
+writefile 魔法，将后续的语句写入文件中:
+
+```s
+%%writefile foo.py
+print('Hello world') # Writing foo.py
+# 调用文件内容
+%run foo # Hello world, 方法①
+%%script python ./foo.py # 方法②
+# ----- 后台运行 -----
+%%ruby --bg --out ruby_lines # 使用 --bg即可
+for n in 1...10
+    sleep 1
+    puts "line #{n}"
+    STDOUT.flush
+end
+```
+
+
+
 ### 显示图片
 
 - 【2020-8-4】两种方法，代码如下：
