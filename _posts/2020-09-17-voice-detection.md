@@ -2242,6 +2242,8 @@ Whisper 执行操作的大致过程：
 
 #### 安装
 
+First, we need to install the depedencies we need. We will install `FFmpeg` - tool to <span style='color:blue'>record, convert and stream</span> audio and video
+
 ```shell
 apt install ffmpeg # 安装音频处理工具
 pip install git+https://github.com/openai/whisper.git # 下载whisper
@@ -2259,7 +2261,10 @@ pip install git+https://github.com/openai/whisper.git
 whisper audio.mp3 --model medium --language Chinese # ASR
 ```
 
-#### 模型
+#### 模型原理
+
+李沐解读：[OpenAI Whisper 精读](https://www.bilibili.com/video/BV1VG4y1t74x)【论文精读】
+- <iframe src="//player.bilibili.com/player.html?aid=817455090&bvid=BV1VG4y1t74x&cid=884717958&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
 模型结构
 - ![](https://cdn.openai.com/whisper/asr-summary-of-model-architecture-desktop.svg)
@@ -2333,6 +2338,109 @@ result = model.transcribe("audio.mp3")
 # result = model.transcribe(audioPath, fp16=False, language='English')
 print(result["text"])
 ```
+
+#### 参数详解
+
+##### DecodingOptions
+
+[DecodingOptions](https://github.com/openai/whisper/blob/eff383b27b783e280c089475852ba83f20f64998/whisper/decoding.py#L72) 类定义：
+- task: 任务类型，transcribe（转写任务） 或 translate（翻译任务）
+- language: 语种，如果为空，自动启动语言检测任务
+- fp16: 使用GPU，False时表示CPU
+- 采样参数
+  - temperature: 采样温度
+  - sample_len: 最大采样长度
+  - best_of: 独立样本数
+  - beam_size: beam search数
+  - patience: beam search里的耐心指数？
+- length_penalty: 生成（beam或n-best）候选句子排序中的长度惩罚
+- 提示、前缀、字符压缩
+  - prompt: 上文提示
+  - prefix: 当前句子前缀
+  - suppress_blank: 是否压缩空格
+  - suppress_tokens: 需要压缩的特殊字符，如 -1
+- 时间采样
+  - without_timestamps: 是否省略时间信息？
+  - max_initial_timestamp: 最大初始时间
+
+```python
+@dataclass(frozen=True)
+class DecodingOptions:
+    task: str = "transcribe"  # whether to perform X->X "transcribe" or X->English "translate"
+    language: Optional[str] = None  # language that the audio is in; uses detected language if None
+
+    # sampling-related options
+    temperature: float = 0.0
+    sample_len: Optional[int] = None  # maximum number of tokens to sample
+    best_of: Optional[int] = None     # number of independent samples to collect, when t > 0
+    beam_size: Optional[int] = None   # number of beams in beam search, when t == 0
+    patience: Optional[float] = None  # patience in beam search (https://arxiv.org/abs/2204.05424)
+
+    # options for ranking generations (either beams or best-of-N samples)
+    length_penalty: Optional[float] = None   # "alpha" in Google NMT, None defaults to length norm
+
+    # prompt, prefix, and token suppression
+    prompt: Optional[Union[str, List[int]]] = None   # text or tokens for the previous context
+    prefix: Optional[Union[str, List[int]]] = None   # text or tokens to prefix the current context
+    suppress_blank: bool = True                      # this will suppress blank outputs list of tokens ids (or comma-separated token ids) to suppress
+    # "-1" will suppress a set of symbols as defined in `tokenizer.non_speech_tokens()`
+    suppress_tokens: Optional[Union[str, Iterable[int]]] = "-1"
+
+    # timestamp sampling options
+    without_timestamps: bool = False              # use <|notimestamps|> to sample text tokens only
+    max_initial_timestamp: Optional[float] = 1.0  # the initial timestamp cannot be later than this
+
+    # implementation details
+    fp16: bool = True  # use fp16 for most of the calculation
+```
+
+##### transcribe
+
+[transcribe函数定义](https://github.com/openai/whisper/blob/main/whisper/transcribe.py)
+
+```python
+def transcribe(
+    model: "Whisper",
+    audio: Union[str, np.ndarray, torch.Tensor],
+    *,
+    verbose: Optional[bool] = None,
+    temperature: Union[float, Tuple[float, ...]] = (0.0, 0.2, 0.4, 0.6, 0.8, 1.0),
+    compression_ratio_threshold: Optional[float] = 2.4,
+    logprob_threshold: Optional[float] = -1.0,
+    no_speech_threshold: Optional[float] = 0.6,
+    condition_on_previous_text: bool = True,
+    **decode_options,
+) 
+```
+
+transcribe 参数说明
+- `verbose`: 是否输出调试信息到终端 Whether to display the text being decoded to the console.
+  - True: 显示所有调试信息（segment片段），displays all the details 
+  - False: 只显示解码进度, displays minimal details.
+  - None: 不显示。does not display anything
+- `temperature`: 采样温度
+  - Temperature for sampling. It can be a tuple of temperatures, which will be successfully used upon failures according to either `compression_ratio_threshold` or `logprob_threshold`.
+- `compression_ratio_threshold`: float 压缩率最低阈值
+  - If the gzip compression ratio is above this value, treat as failed
+- `logprob_threshold`: float log似然最低阈值
+  - If the average log probability over sampled tokens is below this value, treat as failed
+- `no_speech_threshold`: float 静音阈值，用来判断是否静音分片
+  - If the no_speech probability is higher than this value AND the average log probability over sampled tokens is below `logprob_threshold`, consider the segment as silent
+- `condition_on_previous_text`: bool 是否使用上一句结果作为提示语, 关闭后，不容易陷入循环、时间戳不一致，但同时前后分片可能不一致
+  - if True, the previous output of the model is provided as a **prompt** for the next window; 
+  - if false, disabling may make the text **inconsistent** across windows, but the model becomes less prone to getting stuck in a failure loop, such as repetition looping or timestamps going out of sync.
+- `decode_options`: dict 全局参数 DecodingOptions
+  - Keyword arguments to construct `DecodingOptions` instances
+
+
+```s
+# verbose = True
+[00:00.000 --> 00:16.000] 中央政务区的成立,东城区人口总量将会严格管控,坚决落实老城不再拆,保证单头的政委,使得二环内乃至东城区未来都将不再有新增土地。
+# verbose = False
+100%|██████████| 1767/1767 [00:04<00:00, 395.72frames/s]
+
+```
+
 
 #### 转写结果
 
@@ -2424,13 +2532,19 @@ print(result["text"])
 
 #### finetune
 
-
 fine-tune 实践
 - Check-out this blog for fine-tuning Whisper for multilingual [ASR with Hugging Face Transformers](https://huggingface.co/blog/fine-tune-whisper)
   - It provides a step-by-step guide to fine-tuning, right from data preparation to evaluation 🤗 There'a Google Colab so you can also run it as a notebook
 - [run_speech_recognition_whisper](https://huggingface.co/sanchit-gandhi/whisper-medium-switchboard-5k/blob/main/run_speech_recognition_whisper.py)
 - Fine Tuning code in [Japanese Kana](https://colab.research.google.com/drive/1P4ClLkPmfsaKn2tBbRp0nVjGMRKR-EWz?usp=sharing)
 
+
+#### whisper + diffsion
+
+【2022-11-19】[Stable Diffusion and OpenAI Whisper prompt guide: Generating pictures based on speech - Whisper & Stable Diffusion](https://lablab.ai/t/whisper-sd)
+- Thanks to recently published models, we have the ability to create images from the spoken words. This opens up a lot of possibilities for us. 
+
+![](https://storage.googleapis.com/lablab-static-eu/images/tutorials/result.jpg)
 
 ## windows下tts
 
