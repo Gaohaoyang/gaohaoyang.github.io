@@ -1951,7 +1951,7 @@ typedef union epoll_data {
 
 更多编程语言介绍：
 - [编程语言发展历史]({{ site.baseurl}}{% post_url 2010-07-26-computer-history %}#编程语言变迁)
-
+- 【2022-11-20】[linux bash shell 最常用的函数和指令](https://www.toutiao.com/article/7167905628231565827)
 ## Shell知识点
 
 在 Linux 的基础上再度深入学习 Shell，可以极大的减少重复工作的压力。毕竟批量处理才是工作的常态呢~
@@ -1960,6 +1960,276 @@ typedef union epoll_data {
 - ![](https://raw.githubusercontent.com/woaielf/woaielf.github.io/master/_posts/Pic/1709/170920-3.png)
 
 ## 常规语法
+
+### 执行shell
+
+```sh
+# ----- test.sh -----
+#!/bin/bash
+VAR="world"
+echo "Hello $VAR!" # => Hello world!
+# -------------------
+# 执行
+bash test.sh # 执行shell脚本
+source "${0%/*}/../share/foo.sh" # 当前shell中执行
+(cd somedir; echo "I'm now in $PWD") # 执行子shell
+# 条件执行
+git commit && git push # 成功才继续
+git commit || echo "Commit failed" # 失败才继续
+# 命令嵌入: ${}或``
+echo "I'm in $(PWD)"
+# Same as:
+echo "I'm in `pwd`"
+```
+
+### 系统命令
+
+```sh
+history # 显示历史
+sudo !! # 使用 sudo 运行上一个命令
+shopt -s histverify # 不要立即执行扩展结果
+!$ # 展开最新命令的最后一个参数
+!* # 展开最新命令的所有参数
+!-n # 展开第 n 个最近的命令
+!n # 展开历史中的第 n 个命令
+!<command> # 展开最近调用的命令 <command>
+!! # 再次执行最后一条命令 
+!!:s/<FROM>/<TO>/ # 在最近的命令中将第一次出现的 <FROM> 替换为 <TO> 
+!!:gs/<FROM>/<TO>/ # 在最近的命令中将所有出现的 <FROM> 替换为 <TO> 
+!$:t # 仅从最近命令的最后一个参数扩展基本名称 
+!$:h # 仅从最近命令的最后一个参数展开目录 
+# !! 和 !$ 可以替换为任何有效的扩展
+# 切片 Slices
+!!:n # 仅扩展最近命令中的第 n 个标记（命令为 0；第一个参数为 1） 
+!^ # 从最近的命令展开第一个参数 
+!$ # 从最近的命令中展开最后一个标记 
+!!:n-m # 从最近的命令扩展令牌范围 
+!!:n-$ # 从最近的命令中将第 n 个标记展开到最后
+# 重定向
+python hello.py > output.txt   # 标准输出到（文件）
+python hello.py >> output.txt  # 标准输出到（文件），追加
+python hello.py 2> error.log   # 标准错误到（文件）
+python hello.py 2>&1           # 标准错误到标准输出
+python hello.py 2>/dev/null    # 标准错误到（空null）
+python hello.py &>/dev/null    # 标准输出和标准错误到（空null）
+python hello.py < foo.txt      # 将 foo.txt 提供给 python 的标准输入
+```
+
+### 变量
+
+sheel变量
+
+```sh
+# 默认值
+${FOO:-val} # $FOO，如果未设置，则为 val
+${FOO:=val} # 如果未设置，则将 $FOO 设置为 val
+${FOO:+val} # val 如果设置了$FOO
+${FOO:?message} # 如果 $FOO 未设置，则显示消息并退出
+
+NAME="John"
+echo ${NAME}    # => John (变量)
+echo $NAME      # => John (变量)
+echo "$NAME"    # => John (变量)
+echo '$NAME'    # => $NAME (字符串原样输出)，单引号时，不解析变量
+echo "${NAME}!" # => John! (变量)
+NAME = "John"   # => 报错：Error (注意不能有空格)
+# {}扩展
+echo {A,B} # 与 A B 相同
+echo {A..D}.js # 与 A.js B.js C.js D.js相同
+echo {1..5} # 与 1 2 3 4 5 相同
+# 数值计算
+a=2
+$((a + 200))      # Add 200 to $a
+$(($RANDOM%200))  # 随机数 Random number 0..199
+# 特殊变量
+$? # 最后一个任务的退出状态
+$! # 最后一个后台任务的 PID
+$$ # shell PID
+$0 # shell 脚本的文件名
+
+# 注释：多行注释使用 :' 打开和 ' 关闭
+: '
+这是一个
+非常整洁的
+bash 注释
+'
+# Heredoc
+cat <<END
+hello world
+END
+```
+
+### 函数参数
+
+#### 函数
+
+```sh
+# function get_name() { # function 关键字可以省略
+get_name() {
+    echo "John $1"
+}
+echo "You are $(get_name)"
+# 带返回值的函数
+myfunc() {
+    local myresult='some value'
+    echo $myresult
+}
+result="$(myfunc)"
+
+```
+
+#### 参数
+
+```sh
+$0 # 脚本本身的名称
+$1 … $9 # 参数 1 ... 9
+$1 # 第一个参数
+${10} # 位置参数 10
+$# # 参数数量
+$$ # shell 的进程 id
+$* # 所有参数
+$@ # 所有参数，从第一个开始
+$- # 当前选项
+$_ # 上一个命令的最后一个参数
+```
+
+### 控制
+
+#### 条件判断
+
+```sh
+# 字符串比较
+[[ -z STR ]] # 空字符串
+[[ -n STR ]] # 非空字符串
+[[ STR == STR ]] # 相等
+[[ STR = STR ]] # 相等（同上）
+[[ STR < STR ]] # 小于 (ASCII)
+[[ STR > STR ]] # 大于 (ASCII)
+[[ STR != STR ]] # 不相等
+[[ STR =~ STR ]] # 正则表达式
+# 整数比较
+[[ NUM -eq NUM ]] # 等于 Equal
+[[ NUM -ne NUM ]] # 不等于 Not equal
+[[ NUM -lt NUM ]] # 小于 Less than
+[[ NUM -le NUM ]] # 小于等于 Less than or equal
+[[ NUM -gt NUM ]] # 大于 Greater than
+[[ NUM -ge NUM ]] # 大于等于 Greater than or equal
+(( NUM < NUM )) # 小于
+(( NUM <= NUM )) # 小于或等于
+(( NUM > NUM )) # 比...更大
+(( NUM >= NUM )) # 大于等于
+# 文件
+[[ -e FILE ]] # 存在
+[[ -d FILE ]] # 目录
+[[ -f FILE ]] # 文件
+[[ -h FILE ]] # 符号链接
+[[ -s FILE ]] # 大小 > 0 字节
+[[ -r FILE ]] # 可读
+[[ -w FILE ]] # 可写
+[[ -x FILE ]] # 可执行文件
+[[ f1 -nt f2 ]] # f1 比 f2 新
+[[ f1 -ot f2 ]] # f2 比 f1 新
+[[ f1 -ef f2 ]] # 相同的文件
+# 高级
+[[ X && Y ]] # 条件组合
+[[ "$A" == "$B" ]] # 是否相等
+[[ -o noclobber ]] # 如果启用 OPTION
+[[ ! EXPR ]] # 不是 Not
+[[ X && Y ]] # 和 And
+[[ X || Y ]] # 或者 Or
+```
+
+```sh
+# 整型
+if (( $a < $b )); then
+   echo "$a is smaller than $b"
+fi
+# 字符串
+if [[ -z "$string" ]]; then
+    echo "String is empty"
+elif [[ -n "$string" ]]; then
+    echo "String is not empty"
+fi
+# 正则表达式
+if [[ '1. abc' =~ ([a-z]+) ]]; then
+    echo ${BASH_REMATCH[1]}
+fi
+
+# 文件是否存在
+if [[ -e "file.txt" ]]; then
+    echo "file exists"
+fi
+# 逻辑运算
+if [ "$1" = 'y' -a $2 -gt 0 ]; then
+    echo "yes"
+fi
+if [ "$1" = 'n' -o $2 -lt 0 ]; then
+    echo "no"
+fi
+
+```
+
+#### for
+
+```sh
+# 基本 for 循环
+for i in /etc/rc.*; do
+    echo $i
+done
+# 类似 C 的 for 循环
+for ((i = 0 ; i < 100 ; i++)); do
+    echo $i
+done
+# 范围
+for i in {1..5}; do
+# for i in {5..50..5}; do # 设置步长
+    echo "Welcome $i"
+done
+# 自动递增
+i=1
+while [[ $i -lt 4 ]]; do
+    echo "Number: $i"
+    ((i++))
+done
+# 自动递减
+i=3
+while [[ $i -gt 0 ]]; do
+    echo "Number: $i"
+    ((i--))
+done
+# Continue, break
+for number in $(seq 1 3); do
+    if [[ $number == 2 ]]; then
+        continue;
+        # break;
+    fi
+    echo "$number"
+done
+# Until
+count=0
+until [ $count -gt 10 ]; do
+    echo "$count"
+    ((count++))
+done
+# 死循环
+# while :; do # 简写
+while true; do
+    # here is some code.
+done
+```
+
+#### Case/switch
+
+```sh
+case "$1" in
+    start | up)
+    vagrant up
+    ;;
+    *)
+    echo "Usage: $0 {start|stop|ssh}"
+    ;;
+esac
+```
 
 ### 时间日期
 
@@ -2001,7 +2271,72 @@ date -d "-3 year" # 3年前，类似的，hour、minute、second
 date -d `date -d "-3 month" +%y%m01`"-1 day" # 4个月前最后一天
 date -d `date -d "+12 month" +%y%m01`"-1 day" # 11个月后第一天
 date -d `date -d "+12 month" +%y%m01`"-1 day" +%Y%m%d # 11个月前最后一天
+```
 
+### 字符串
+
+特殊的字符串处理方法
+- #前 %后
+
+```sh
+# ----- 总结 -----
+${FOO%suffix} # 删除后缀
+${FOO#prefix} # 删除前缀
+${FOO%%suffix} # 去掉长后缀
+${FOO##prefix} # 删除长前缀
+${FOO/from/to} # 替换第一个匹配项
+${FOO//from/to} # 全部替换
+${FOO/%from/to} # 替换后缀
+${FOO/#from/to} # 替换前缀
+echo ${food:-Cake}  #=> $food or "Cake"
+${FOO:0:3} # 子串 (位置，长度)
+${FOO:(-3):3} # 从右边开始的子串
+${#FOO} # $FOO 的长度
+
+# -------------
+STR="/path/to/foo.cpp"
+echo ${STR%.cpp}    # /path/to/foo 删短后缀
+echo ${STR%.cpp}.o  # /path/to/foo.o
+echo ${STR%/*}      # /path/to
+echo ${STR##*.}     # cpp (extension)
+echo ${STR##*/}     # foo.cpp (basepath)
+echo ${STR#*/}      # path/to/foo.cpp
+echo ${STR##*/}     # foo.cpp
+echo ${STR/foo/bar} # /path/to/bar.cpp
+
+url="http://c.biancheng.net/index.html"
+echo ${url#*/}    # 结果为 /c.biancheng.net/index.html
+echo ${url##*/}   # 结果为 index.html
+str="---aa+++aa@@@"
+echo ${str#*aa}   # 结果为 +++aa@@@
+echo ${str##*aa}  # 结果为 @@@
+echo ${url%/*}  # 结果为 http://c.biancheng.net
+echo ${url%%/*}  # 结果为 http:
+str="---aa+++aa@@@"
+echo ${str%aa*}  # 结果为 ---aa+++
+echo ${str%%aa*}  # 结果为 ---
+# ---- 切片 -----
+# 切片 Slicing
+name="John"
+echo ${name}           # => John
+echo ${name:0:2}       # => Jo
+echo ${name::2}        # => Jo
+echo ${name::-1}       # => Joh
+echo ${name:(-1)}      # => n 逆序
+echo ${name:(-2)}      # => hn 逆序
+echo ${name:(-2):2}    # => hn 逆序
+length=2
+echo ${name:0:length}  # => Jo
+# 大小写转换：,小写 ^大写
+STR="HELLO WORLD!"
+echo ${STR,}      # => hELLO WORLD! 首字母小写
+echo ${STR,,}     # => hello world! 全部小写
+STR="hello world!"
+echo ${STR^}      # => Hello world! 首字符大写
+echo ${STR^^}     # => HELLO WORLD! 全部大写
+ARR=(hello World)
+echo "${ARR[@],}" # => hello world 数组元素首字母小写
+echo "${ARR[@]^}" # => Hello World 数组元素首字母大写
 ```
 
 
@@ -2014,29 +2349,76 @@ string="hello,shell,split,test"
 #将,替换为空格 
 array=(${string//,/ })  # 空格区分，用()转数组
 array=(`echo $string | tr ',' ' '` ) # 方法2
-
-for var in ${array[@]}
+# 元素遍历
+for var in ${array[@]} # 元素值遍历
 do
    echo $var
-done 
+done
+for i in "${!array[@]}"; do # 下标遍历
+  printf "%s\t%s\n" "$i" "${array[$i]}"
+done
+
+Fruits=('Apple' 'Banana' 'Orange') # 一次性定义
+Fruits[0]="Apple" # 逐个赋值
+Fruits[1]="Banana"
+Fruits[2]="Orange"
+# 批量定义
+ARRAY1=(foo{1..2}) # => foo1 foo2
+ARRAY2=({A..D})    # => A B C D
+# 合并 => foo1 foo2 A B C D
+ARRAY3=(${ARRAY1[@]} ${ARRAY2[@]})
+# 声明构造
+declare -a Numbers=(1 2 3)
+Numbers+=(4 5) # 附加 => 1 2 3 4 5
+# 索引含义
+${Fruits[0]} # 第一个元素
+${Fruits[-1]} # 最后一个元素
+${Fruits[*]} # 所有元素
+${Fruits[@]} # 所有元素 ""包围每个元素
+${#Fruits[@]} # 总数
+${#Fruits} # 第一节长度
+${#Fruits[3]} # 第n个长度
+${Fruits[@]:3:2} # 范围
+${!Fruits[@]} # 所有 Key，索引index
+# 数组操作
+Fruits=("${Fruits[@]}" "Watermelon")         # 添加
+Fruits+=('Watermelon')                       # 也是添加
+Fruits=( ${Fruits[@]/Ap*/} )                 # 通过正则表达式匹配删除
+unset Fruits[2]                              # 删除一项
+Fruits=("${Fruits[@]}")                      # 复制
+Fruits=("${Fruits[@]}" "${Veggies[@]}")      # 连接
+lines=(`cat "logfile"`)                      # 从文件中读取
+# 数组作为参数
+function extract()
+{
+  local -n myarray=$1
+  local idx=$2
+  echo "${myarray[$idx]}"
+}
+Fruits=('Apple' 'Banana' 'Orange')
+extract Fruits 2     # => Orangle
 ```
 
-### 字符串
+### 字典
 
-- 特殊的字符串处理方法
-
-```shell
-url="http://c.biancheng.net/index.html"
-echo ${url#*/}    #结果为 /c.biancheng.net/index.html
-echo ${url##*/}   #结果为 index.html
-str="---aa+++aa@@@"
-echo ${str#*aa}   #结果为 +++aa@@@
-echo ${str##*aa}  #结果为 @@@
-echo ${url%/*}  #结果为 http://c.biancheng.net
-echo ${url%%/*}  #结果为 http:
-str="---aa+++aa@@@"
-echo ${str%aa*}  #结果为 ---aa+++
-echo ${str%%aa*}  #结果为 ---
+```sh
+declare -a sounds # 生命字典
+# declare -A sounds # 生命字典, A在mac下执行失败
+sounds[dog]="bark" # 赋值
+sounds[cow]="moo"
+# 取值
+echo ${sounds[dog]} # Dog's sound
+echo ${sounds[@]}   # All values 所有取值
+echo ${!sounds[@]}  # All keys 所有key
+echo ${#sounds[@]}  # Number of elements 元素个数
+unset sounds[dog]   # Delete dog
+# 遍历元素
+for val in "${sounds[@]}"; do
+    echo $val
+done
+for key in "${!sounds[@]}"; do
+    echo $key
+done
 ```
 
 ### 彩色日志
@@ -2236,12 +2618,39 @@ wc -l /home/phoneNum.txt
 ```
 
 
-## 文本处理
+## 输出
 
-- grep 、sed、awk被称为linux中的"三剑客"。
-   - grep 更适合单纯的查找或匹配文本
-   - sed 更适合编辑匹配到的文本
-   - awk 更适合格式化文本，对文本进行较复杂格式处理
+### 系统输出
+
+echo 和 printf
+
+```sh
+echo -n "Proceed? [y/n]: "
+echo -e "a\tb" # 支持转移
+read ans # 读入到变量 ans
+read -n 1 ans    # 只有一个字符
+echo $ans
+
+printf
+printf "Hello %s, I'm %s" Sven Olga #=> "Hello Sven, I'm Olga
+printf "1 + 1 = %d" 2 #=> "1 + 1 = 2"
+printf "Print a float: %f" 2 #=> "Print a float: 2.000000"
+```
+
+### 文件读取
+
+```sh
+cat file.txt | while read line; do
+    echo $line
+done
+```
+
+### 三剑客
+
+grep 、sed、awk被称为linux中的"三剑客"。
+- grep 更适合单纯的查找或匹配文本
+- sed 更适合编辑匹配到的文本
+- awk 更适合格式化文本，对文本进行较复杂格式处理
 
 ## 编码转换
 
@@ -2252,6 +2661,14 @@ wc -l /home/phoneNum.txt
 iconv -f gbk -t utf8 pattern_0603.txt -o pattern.txt
 # 上面命令失败的用下面
 iconv -f gbk -t utf8 pattern_0603.txt > pattern.txt
+```
+
+## grep
+
+```sh
+if grep -q 'foo' ~/.bash_history; then
+    echo "您过去似乎输入过“foo”"
+fi
 ```
 
 ## awk
