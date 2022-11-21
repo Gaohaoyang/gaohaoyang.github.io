@@ -2389,7 +2389,21 @@ result = model.transcribe("audio.mp3")
 # result = model.transcribe(audioPath, fp16=False, language='English')
 # 语音翻译 task='translate'
 # result = model.transcribe(audioPath, task='translate',language='zh',verbose=True,initial_prompt=prompt)
+result = model.transcribe("audio.mp3", initial_prompt='vocabulary' )
 print(result["text"])
+```
+
+【2022-11-21】提示, 参考: [Where do I use --initial-prompt in python code?](https://github.com/openai/whisper/discussions/355)
+- prompt可以是词库列表，如 prompt="Tensorflow pytorch"，添加方式
+- （1）一次性生效 
+- （2）批量生效
+
+```py
+#    （1）一次性生效，临时配置
+result = model.transcribe(audioPath, language='zh',verbose=True,initial_prompt=prompt)
+#    （2）批量生效，使用全局配置
+options = whisper.DecodingOptions(fp16=False)
+result = whisper.decode(model, mel, options)
 ```
 
 #### 参数详解
