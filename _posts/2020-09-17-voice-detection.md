@@ -2071,6 +2071,13 @@ speak(text)
 engine.runAndWait()
 ```
 
+### 字节
+
+【2022-11-21】火山引擎的工具 [SAMI](https://sami.bytedance.net/#/?locale=zh), SAMI团队 (Speech, Audio & Music Intelligence team) 致力于语音、音频、音乐等技术的研发和产品创新。我们的使命是通过多模态音频技术赋能内容创作和互动，让内容消费和创作变得更简单、愉悦和多元。 SAMI团队支持包括语音合成、音频处理和理解、音乐理解和生成等技术方向，并以中台形式服务于公司众多业务线
+- [ASR DEMO](https://sami.bytedance.net/#/capability/ASRDemo?locale=zh)
+- [TTS DEMO](https://sami.bytedance.net/#/capability/TTSDemo?locale=zh)，支持方言(东北话、四川话、台湾话)、特定角色（如熊二）
+- 音乐分析：[相似音乐推荐](https://sami.bytedance.net/#/capability/MusicRecommendDemo?locale=zh)、[歌曲合成](https://sami.bytedance.net/#/capability/MemeSongDemo?locale=zh)，包含 APP
+
 
 ### google tts
 
@@ -2537,6 +2544,7 @@ transcribe 参数说明
 问题
 - VAD 功能不足：当音频分片不足30s时，最后一个分片的截止时间错误, 详见[issue](https://github.com/openai/whisper/discussions/179), [VAD讨论](https://github.com/openai/whisper/discussions/96)
   - In the \["segment"\] field of the dictionary returned by the function transcribe(), each item will have segment-level details, and there is `no_speech_prob` that contains the probability of the token \<\|nospeech\|\>. This combined with the log probability threshold and the compression ratio threshold performs a crude VAD in transcribe(), but you might find a better result by combining with a separate VAD tool that's more accurate.
+  - 【2022-11-21】作者[回复](https://github.com/openai/whisper/discussions/89)：需要加参数，just added `--condition_on_previous_text` False option. 
 
 
 #### 评测
