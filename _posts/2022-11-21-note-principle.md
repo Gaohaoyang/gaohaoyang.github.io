@@ -44,31 +44,27 @@ Ray Dalio是怎样管理团队的？怎样让团队的决策水平高于同行�
 - 为了得到事实的真相，他认为每个人必须独立思考，将想法公开出来，然后鼓励大家自由讨论，让真相浮出水面。
 - Ray Dalio在他的TED演讲中介绍了公司的管理思想，其中提到，为了追求透明度，他创造了一个文化，可以让员工给出真实的意见。
 - 他们内部使用一个强大的即时评分机制：用iPad上使用一个叫“Dots”的App，随时随地给身边的同事打分，“Dots”可以打分的特质有上百种，比如：可观度、批判力、目标设定能力、线性思考力、创造力，打分是随时随地、完全公开、实名制的。
-- <img src="https://pica.zhimg.com/50/v2-242763d9f07c86a75da029a657aca557\_720w.jpg?source=1940ef5c"  width="100%"/>￼
 - Dalio提到一个案例，有一次他们内部开了会，一起讨论特朗普上台后的经济形势问题。
-- <img src="https://pic1.zhimg.com/50/v2-af465b5c301e8436d93c63ec134feba7\_720w.jpg?source=1940ef5c" />￼
 - Ray Dalio没有提前准备这次会议，观点不够符合逻辑，一个24岁的新入员工立刻给了他一个较低的分数。
-- <img src="https://pic1.zhimg.com/50/v2-6f36c6e042b6740441de922866a2875d\_720w.jpg?source=1940ef5c" />
 - Dalio为这种直接的、真诚的文化感到骄傲，即使是刚毕业的大学生员工也可以直接批评他的上司甚至老板。Ray Dalio鼓励员工这么做，他认为别人的批评只是一种反馈，处理好这些反馈信息可以获得真相。了解真相，才能解决问题。在这次会议中，新同事打了3分给Ray Dalio在“自信但倾听”的特质上。（10分为最高，7分为平均值）。他认为Dalio的观点不够符合逻辑，但是又拒绝听取别人的建议。
-- <img src="https://pic1.zhimg.com/50/v2-486af526691f61dae463edb5022441e5\_720w.jpg?source=1940ef5c" />￼
+- ![](https://picd.zhimg.com/80/v2-486af526691f61dae463edb5022441e5_1440w.webp?source=1940ef5c)
 - 新同事还会给其他人的不同素质打分，因为他们也参加了这次会议。
-- <img src="https://pic1.zhimg.com/50/v2-b1222b564a6bd2a1ecb1bf70232aac53\_720w.jpg?source=1940ef5c" />￼
+- ![](https://pica.zhimg.com/80/v2-b1222b564a6bd2a1ecb1bf70232aac53_1440w.webp?source=1940ef5c)
 - 你也不用担心评价过于片面，因为在Dalio的“自信且倾听”的特质上，有人了9分，他的理由是Dalio主持会议讨论的方法很好。
-- <img src="https://pica.zhimg.com/50/v2-cc34d492e26fedb4a54d9665fd2a8223\_720w.jpg?source=1940ef5c"  />￼
+- ![](https://picd.zhimg.com/80/v2-cc34d492e26fedb4a54d9665fd2a8223_1440w.webp?source=1940ef5c)
 - 所有的评分都是公开的，大家可以在会上看到他自己和同事实时的表现。
-- <img src="https://picx.zhimg.com/50/v2-3f22ef6092ea3a119091a3a9fcdc9649\_720w.jpg?source=1940ef5c" />￼
+- ![](https://picd.zhimg.com/80/v2-3f22ef6092ea3a119091a3a9fcdc9649_1440w.webp?source=1940ef5c)
 - Dalio正在观看这些评分，并且做出解释和改善自己的行为。
-- <img src="https://picd.zhimg.com/50/v2-9a9bb1f2b37ab0703646fbcafaa089d5\_720w.jpg?source=1940ef5c" />
+- ![](https://picd.zhimg.com/80/v2-9a9bb1f2b37ab0703646fbcafaa089d5_1440w.webp?source=1940ef5c)
 - 数据多了后，会通过一定的算法，让每个人获得一个自己的“决策靠谱度”。
-- <img src="https://pic1.zhimg.com/50/v2-64e2a7d9a1b326d8f79a320783071108\_720w.jpg?source=1940ef5c" />￼
 - 桥水的CIO Bob提到，他收到了约11000个“Dots”打分，他的“决策靠谱度”与其他同事完全不同。桥水内部打分并非是为了传统的考核，这些分数经过算法计算后，会得出每个同事的靠谱度，在需要做决策时，靠谱度越高，权重越大，反之亦然。他给了一个案例，在会议上某个投票结果，如果按照传统方法，13人的支持大于4人的反对，人多为胜。
-- <img src="https://pic1.zhimg.com/50/v2-d1e4d5c2d2954a49aa72ea5f382fca57\_720w.jpg?source=1940ef5c" />￼
+- ![](https://picx.zhimg.com/80/v2-d1e4d5c2d2954a49aa72ea5f382fca57_1440w.webp?source=1940ef5c)
 - 但是当他利用“决策靠谱度”来重新看待投票结果时，人数少的选项却胜出了。表面上看13个人大于4人的投票，但是Dots的打分显示，这4个人更靠谱，所以投票胜出。
-- <img src="https://picd.zhimg.com/50/v2-b88b6bce61a160aaba448737cebf20bc\_720w.jpg?source=1940ef5c"/>￼
+- ![](https://picd.zhimg.com/80/v2-b88b6bce61a160aaba448737cebf20bc_1440w.webp?source=1940ef5c)
 - 这套极度追求透明、追求真相的管理文化理念，帮助桥水基金做出了比同行更多的正确决策。
 
 这个系统把我震撼到了，居然有公司把沟通透明做到如此疯狂，即使明道也推崇透明沟通，也做了帮助反馈员工表现的明道Score打分系统，但是这一套“Dots”系统还是刷新了我们的产品认知。
-- <img src="https://picd.zhimg.com/50/v2-22c016c7ba09d8c25c1eb798273ab9bf\_720w.jpg?source=1940ef5c"/>
+- ![](https://picx.zhimg.com/80/v2-22c016c7ba09d8c25c1eb798273ab9bf_1440w.webp?source=1940ef5c)
 - 明道的Score系统，可以看到员工的三个表现￼我们也曾想过将明道Score升级，做成这样一套类似的产品，但以目前来看，国内能接受的企业恐怕很少。
 
 正如在另一个与桥水有关的知乎问题下的描述
@@ -91,10 +87,10 @@ Ray Dalio是怎样管理团队的？怎样让团队的决策水平高于同行�
 
 |作品|资源|简介|
 |---|---|---|
-|Principles for Success|<img width="100%" height="200" src="https://www.principles.com/assets/book-cover-tall-principles-for-success-5faa43ee1d8414e01bef0af71c5b64e79fee2ebe61db3ccb75e9c37d38dbad22.png"/>￼|[video](Principles For Success by Ray Dalio (In 30 Minutes))|
-|Principles: Life & Work|<img width="100%" height="200" src="https://www.principles.com/assets/book-cover-tall-principles-56e834304a4509f7dd17798fb044702d6a3611c43e4df647a4b39920227cc901.png"/>￼||
-|Big Debt Crises|<img width="100%" height="200" src="https://www.principles.com/assets/book-cover-tall-big-debt-crises-43a22823fc369de0db39aa983e0b5ffe3e2779addc3241b4c6347ad1ab75146b.png"/>￼||
-|The Changing World Order|<img width="100%" height="200" src="https://www.principles.com/assets/changing-world-order-book-f864f63e392496dcedd183ede75bdaeb8ba7c2620d3b7a21ab79a9bf4cde92c9.png"/>￼||
+|Principles for Success|<img width="100%" height="200" src="https://www.principles.com/assets/book-cover-tall-principles-for-success-5faa43ee1d8414e01bef0af71c5b64e79fee2ebe61db3ccb75e9c37d38dbad22.png">￼|[video](Principles For Success by Ray Dalio (In 30 Minutes))|
+|Principles: Life & Work|<img width="100%" height="200" src="https://www.principles.com/assets/book-cover-tall-principles-56e834304a4509f7dd17798fb044702d6a3611c43e4df647a4b39920227cc901.png">￼||
+|Big Debt Crises|<img width="100%" height="200" src="https://www.principles.com/assets/book-cover-tall-big-debt-crises-43a22823fc369de0db39aa983e0b5ffe3e2779addc3241b4c6347ad1ab75146b.png">￼||
+|The Changing World Order|<img width="100%" height="200" src="https://www.principles.com/assets/changing-world-order-book-f864f63e392496dcedd183ede75bdaeb8ba7c2620d3b7a21ab79a9bf4cde92c9.png">￼||
 
 
 [Principles for Dealing with the Changing World Order by Ray Dalio](https://www.youtube.com/watch?v=xguam0TKMw8)
@@ -110,10 +106,7 @@ How the Economic Machine Works
 > - 如果我能早一点知道这个人，或许我能做出更多明智的选择。
 
 《原则》中做了真正“言无不尽”的描述。核心是这样一句话：
-
-<div class="alert alert-primary" role="alert">
-我们必须渴求真相，要渴求到为了换取真相甚至不惜被羞辱的地步。
-</div>
+> 我们必须渴求真相，要渴求到为了换取真相甚至不惜被羞辱的地步。
 
 
 ## 内容
