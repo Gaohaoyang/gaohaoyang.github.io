@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "【读书笔记】Ray Dalio 系列书籍: 原则 - The Principle"
-date:   2022-11-22 09:15:00
+date:   2022-11-21 09:15:00
 categories: 读书笔记
 tags: 认知 励志 达利欧
 excerpt: 桥水基金创始人 Ray Dalio（瑞-达利欧）的一本成本书籍
