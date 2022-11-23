@@ -2442,28 +2442,23 @@ result = whisper.decode(model, mel, options)
 class DecodingOptions:
     task: str = "transcribe"  # whether to perform X->X "transcribe" or X->English "translate"
     language: Optional[str] = None  # language that the audio is in; uses detected language if None
-
     # sampling-related options
     temperature: float = 0.0
     sample_len: Optional[int] = None  # maximum number of tokens to sample
     best_of: Optional[int] = None     # number of independent samples to collect, when t > 0
     beam_size: Optional[int] = None   # number of beams in beam search, when t == 0
     patience: Optional[float] = None  # patience in beam search (https://arxiv.org/abs/2204.05424)
-
     # options for ranking generations (either beams or best-of-N samples)
     length_penalty: Optional[float] = None   # "alpha" in Google NMT, None defaults to length norm
-
     # prompt, prefix, and token suppression
     prompt: Optional[Union[str, List[int]]] = None   # text or tokens for the previous context
     prefix: Optional[Union[str, List[int]]] = None   # text or tokens to prefix the current context
     suppress_blank: bool = True                      # this will suppress blank outputs list of tokens ids (or comma-separated token ids) to suppress
     # "-1" will suppress a set of symbols as defined in `tokenizer.non_speech_tokens()`
     suppress_tokens: Optional[Union[str, Iterable[int]]] = "-1"
-
     # timestamp sampling options
     without_timestamps: bool = False              # use <|notimestamps|> to sample text tokens only
     max_initial_timestamp: Optional[float] = 1.0  # the initial timestamp cannot be later than this
-
     # implementation details
     fp16: bool = True  # use fp16 for most of the calculation
 ```
@@ -2475,6 +2470,27 @@ prompt 和 prefix 的作用，[官方作答](https://github.com/openai/whisper/d
 
 Below shows where prompt and prefix go in the tokens:
 - ![](https://user-images.githubusercontent.com/266841/192138518-5e3e4e0d-3459-40f6-8402-f7251fb4c40c.png)
+
+initial_prompt 源码解读
+- 用 GPT2TokenizerFast 分词器，将 prompt 参数导入的文本分字
+
+```py
+# prompt 文本里的字符扩充到token集合中
+initial_prompt = decode_options.pop("initial_prompt", None) or []
+if initial_prompt:
+    initial_prompt = tokenizer.encode(" " + initial_prompt.strip())
+    all_tokens.extend(initial_prompt)
+
+def encode(self, text, **kwargs):
+    return self.tokenizer.encode(text, **kwargs)
+
+# https://github.com/openai/whisper/blob/eff383b27b783e280c089475852ba83f20f64998/whisper/tokenizer.py#L137
+class Tokenizer:
+  """A thin wrapper around `GPT2TokenizerFast` providing quick access to special tokens"""
+  tokenizer: "GPT2TokenizerFast"
+  def decode(self, token_ids: Union[int, List[int], np.ndarray, torch.Tensor], **kwargs):
+      return self.tokenizer.decode(token_ids, **kwargs)
+```
 
 ##### transcribe
 
@@ -2545,7 +2561,6 @@ transcribe 参数说明
 - VAD 功能不足：当音频分片不足30s时，最后一个分片的截止时间错误, 详见[issue](https://github.com/openai/whisper/discussions/179), [VAD讨论](https://github.com/openai/whisper/discussions/96)
   - In the \["segment"\] field of the dictionary returned by the function transcribe(), each item will have segment-level details, and there is `no_speech_prob` that contains the probability of the token \<\|nospeech\|\>. This combined with the log probability threshold and the compression ratio threshold performs a crude VAD in transcribe(), but you might find a better result by combining with a separate VAD tool that's more accurate.
   - 【2022-11-21】作者[回复](https://github.com/openai/whisper/discussions/89)：需要加参数，just added `--condition_on_previous_text` False option. 
-
 
 #### 评测
 
