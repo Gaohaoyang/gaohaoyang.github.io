@@ -20,13 +20,16 @@ permalink: /mao
   - 接着周牵线到延安见毛，就几盘小菜，军民关系不大一样；毛没有说国军的坏话，反而用真心把监视的人“策反”了，并说国军也是人民依赖的力量，需要合作
   - 陈当即决定所有物质捐给共军，并说本以为中国没希望，去了延安才知道，救星就是毛；[陈嘉庚病逝，举国同悲，周恩来、朱德亲自执绋为他送行](https://www.ixigua.com/7014656264869249549?logTag=79f1ef054fc66560a81c)
 - 沙盘上的战争
-  - [长征-甘孜会师（上） 红2、6军团渡金沙江](https://www.ixigua.com/6961981175585997320?logTag=3b7eeee556ae6154fd73)
-    - <iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/6961981175585997320?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
+- [长征-甘孜会师（上） 红2、6军团渡金沙江](https://www.ixigua.com/6961981175585997320?logTag=3b7eeee556ae6154fd73)
+- <iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/6961981175585997320?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
 
 
 # 毛泽东选集
 
 【2021-9-13】[《毛泽东选集》读书笔记](https://mp.weixin.qq.com/s/7G8hOZtV7PPPVfnMN2kP8g)
+
+【2022-11-23】伟人说：
+> 一个有能力的人，就是逢山开路遇水架桥，实在过不去就绕个弯也要前进，这就是能力。
 
 ## 毛选第一卷
 
