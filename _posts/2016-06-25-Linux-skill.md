@@ -967,7 +967,6 @@ export PATH=$PATH:$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH
 export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
 ```
 
-## 进程
 
 ## linux进程
 
@@ -1001,6 +1000,20 @@ int main ()
     return 0;  
 }
 ```
+
+### top/htop
+
+[htop官网](http://hisham.hm/htop/index.php)是Linux系统中的一个**互动**的进程查看器，一个文本模式的应用程序（在控制台orX终端中），需要ncurses。
+- 与Linux传统的`top`相比，`htop`更加人性化。它可以让用户交互式操作，支持颜色主题，可横向或者纵向滚动浏览进程列表，并支持鼠标操作。
+
+与top相比，htop有以下优点：
+- 可以横向或纵向滚动浏览进程列表，以便看到所有的进程和完整命令行；
+- 在启动时，比top要快；
+- 杀进程时不需要输入进程号；
+- htop支持鼠标操作；
+- top已经很老了；
+
+
 
 ### crontab使用
 
