@@ -1191,6 +1191,24 @@ Once you've sent the invite, your friend will need to complete these steps befor
 
 ## 创业
 
+### 商业思维
+
+【2022-11-25】[最后还是输给了这个大叔](https://www.ixigua.com/7168023853476744459)，如何卖橘子？
+- 传统方法：摆地摊，3.5元/斤，蹲点守候
+- 新方法：不按斤，而是按袋子卖，15元/袋，客户随便装，只要不漏出来。
+  - 利益分析：一个袋子最多装4-5斤，橘子成本价 2元/斤，这样袋子装满后，成本价 2*5=10元，卖 15元，利润：15 - 2 * 5 = 5 元
+  - 如果是老方法，5斤卖 3.5 * 5 = 17.5元，多2.5元，但是，速度慢，未必卖的完
+  - ① 引流：事件营销，打个广告，袋子15块钱一个, 客户觉得新奇，都过来买，一下子就卖完了
+  - ② 留存：买橘子必须关注抖音号，建立用户池子（第一粉丝），便于精准画像，这些用户都是住附近，属于精准用户
+  - ③ 转单：用户加入到粉丝群，每天发一个红包，发个2-5都行，可以当做优惠券，抵10倍的来买水果，香蕉、橘子、菠萝等（不是橘子），这叫生单
+  - ④ 裂变：用户口碑，介绍更多用户过来，分发贵宾卡，可以免费领半斤橘子
+- 总结：`引流` → `留存` → `转单` → `裂变`，其实就是把**陌生人**变成**自己人**，生意才会自运转，就像这个水果店一样
+  - 不摆摊，去开水果店，这样就有了商业模式
+
+<iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/7168023853476744459?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
+
+
+
 ### 28岁以后，我再也没为工作拼过命
 
 【2021-2-20】[28岁以后，我再也没为工作拼过命](https://mp.weixin.qq.com/s?__biz=MzAwMzcyNjA1OA==&mid=2247491239&idx=1&sn=19753891dd3443ea3b2227c53f9a96e5&chksm=9b379122ac401834daf2dbee0a619cbcdf94d567b1dd8a7a19d025d31b8bedb618b1d1a86e13&mpshare=1&scene=1&srcid=02202kQVFbKZNWwIrektCcP4&sharer_sharetime=1613788028512&sharer_shareid=b8d409494a5439418f4a89712efcd92a&version=3.1.0.6189&platform=mac#rd)
