@@ -486,7 +486,7 @@ translator("Ce cours est produit par Hugging Face.")
 - 更多用法，参考另一篇日志：[Python下的模型快速部署](https://wqw547243068.github.io/python?#%E6%A8%A1%E5%9E%8B%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2)
 
 
-## transformers源码
+## transformers BERT 源码
 
 参考：
 - [BERT源码详解（一）——HuggingFace Transformers最新版本源码解读](https://zhuanlan.zhihu.com/p/360988428)
@@ -514,6 +514,20 @@ translator("Ce cours est produit par Hugging Face.")
   - 4.2 Fine-Tuning
     - 4.2.1 AdamW
     - 4.2.2 Warmup
+
+### BERT 快速调用
+
+5行代码
+
+```py
+from transformers import BertTokenizer, BertModel
+
+tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
+model = BertModel.from_pretrained("bert-base-uncased")
+
+inputs = tokenizer("Hello world!")
+outputs = model(**inputs)
+```
 
 
 ### Tokenization（BertTokenizer）
