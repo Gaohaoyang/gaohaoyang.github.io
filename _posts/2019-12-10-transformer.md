@@ -56,42 +56,98 @@ permalink: /transformer
 - ![](https://img-blog.csdn.net/20170730100057611?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTGVmdF9UaGluaw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 - ![](https://img-blog.csdnimg.cn/img_convert/b670881b8e5cd7b52b4ebe69ace1654b.png)
 
-## Seq2seq结构
+## Seq2seq
 
-编码-解码结构
+深度学习中，对序列数据进行训练，一般会用到`RNN`和`LSTM`模型，对**定长**序列模型生成出和相同长度的模型
+- 但是对于输入长度已知但**输出长度未知**的任务，比如机器翻译，上面提到的两个模型就不能满足要求。
+- 因此就有了Sequence to Sequence模型，简称 `Seq2Seq`
 
-### Seq2Seq 模型
+### 序列任务与RNN
 
-参考：[Seq2Seq 模型详解](https://www.jianshu.com/p/80436483b13b)
+序列任务类型
+- （1）`N to N` 多对多
+  - 该模型处理的一般是输入和输出序列**长度相等**的任务，模型结构[图](https://img-blog.csdnimg.cn/20210420103950126.png)，应用如：
+    - 词性标注
+    - 语言模型（Language Modeling）
+- （2）`1 to N` 一对多
+  - 此类结构的输入长度为1，输出长度为N，一般又可以分为两种：
+    - 一种是将输入**只输入到第一个神经元**, [img](https://img-blog.csdnimg.cn/20210420104214211.png)
+    - 另一种将输入输入到**所有神经元**。[img](https://img-blog.csdnimg.cn/20210420104250996.png)
+  - 一般用于以下任务：
+    - 图像生成文字，一般输入 X 为图片，输出为一段图片描述性的文字；
+    - 输入音乐类别，生成对应的音乐
+    - 根据小说（新闻情感）类别，生成对应的文字
+- （3）`N to 1` 多对一
+  - 和1 to N相反，x是序列，y是单个数值，[img](https://img-blog.csdnimg.cn/20210420105020933.png)，一般常见任务有：
+    - 序列分类任务，如给定一段文本或语音序列，归类（情感分类，主题分类等）
+- （4）`N to M` 多对多
+  - `N to N`的扩展，RNN系列方法无法解决，此时采用 seq2seq 结构
 
-Seq2Seq 是一种RNN模型，使用的是 **Encoder-Decoder**结构，可以理解为一种 N * M 的模型
-- 即 **Encoder** 长度可以为N，**Decoder** 长度可以为M。多对多的序列结构
+### Seq2Seq 模型介绍
+
+RNN结构大多对序列的**长度**比较局限，对于类似于机器翻译的任务，输入和输出长度并不对等，为 N to M 的结构，简单的RNN束手无策，因此便有了新的模型，`Encoder-Decoder模型`，也就是`Seq2Seq模型`。
+
+模型一般由两部分组成：
+- 第一部分是`Encoder`部分，用于对输入的N长度的序列进行表征；
+- 第二部分是`Decoder`部分，用于将Encoder提取出的表征建立起到输出的M长度序列的**映射**。
+
+参考：
+- [Seq2Seq 模型详解](https://www.jianshu.com/p/80436483b13b)
+- [csdn](https://blog.csdn.net/angus_huang_xu/article/details/115873866)
+- [深度学习对话系统理论篇--seq2seq+Attention机制模型详](https://bigquant.com/wiki/doc/shendu-xitong-lilun-seq-2-jizhi-moxing-xiangjie-8WJqjtLtxW#h-seq-to-seq-with-attention%E5%90%84%E7%A7%8D%E5%8F%98%E5%BD%A2)
+
+Seq2Seq 是一种RNN模型，使用的是 **Encoder-Decoder**结构，可以理解为一种 N * M 的模型，即 **Encoder** 长度可以为N，**Decoder** 长度可以为M。多对多的序列结构
 - **Encoder** 用于编码序列的信息，将任意长度的序列信息编码到一个向量 **c** 里。
-- 而 **Decoder** 是解码器，解码器得到上下文信息向量 **c** 之后可以将信息解码，并输出为序列。
+- **Decoder** 是解码器，解码器得到上下文信息向量 **c** 之后可以将信息解码，并输出为序列。
 
-### 常见的 Seq2Seq 结构
+![](https://pic4.zhimg.com/80/v2-da236bc59ab10c0622df4fe74d592eef_1440w.webp)
+- `Input` 是输入的序列数据，比如翻译系统的词向量等；
+- `Encoder` 内部是RNN/LSTM，目的是将输入的向量转换成隐藏层向后传播的隐藏向量；
+- `State` 就是隐藏向量，可以理解为RNN中向前传播的隐藏层状态，即包含过去信息的状态；
+- `Decoder` 就是解码部分，对输入的时序数据进行解析处理，这也是整个Seq2Seq最核心的部分，比如对于翻译系统来说输入英文在解码器中会解析为目标语言；
+- `Output` 是将解析好的数据输出。
 
-Seq2Seq的模型结构也有很多种，常见的有下面几种，**Encoder**都相同，区别主要在于**Decoder**
+### Seq2Seq 模型结构
+
+Seq2Seq的模型结构也有很多种，常见的有几种，**Encoder**都相同，区别主要在于**Decoder**.
+
+演进过程
+- （1）单向量 C
+- （2）
+- （3）
+- （4）
 
 #### 第一种Seq2Seq
 
-Encoder & Decoder：
-- ![img](https://gitee.com/summerrat/images/raw/master/img/20030902-f3b85bfbaae7d8b1.png)
+- 论文：[Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation]()
 
-单看 Decoder：
-- ![img](https://gitee.com/summerrat/images/raw/master/img/20030902-6f461e520d31cb27.png)
+整体结构：
+- ![](https://bigquant.com/community/uploads/default/original/3X/8/e/8e9babcc3d63da57d5ecefa321a597814f08b218.jpg)
+- Encoder阶段将整个source序列编码成一个**固定**维度的**向量C**（也就是RNN最终的隐藏状态hT,保存了source序列的信息）
+- 将其传入Decoder阶段即可，在每次进行decode时，仍然使用RNN神经元进行处理
+
+Encoder & Decoder：[img](https://gitee.com/summerrat/images/raw/master/img/20030902-f3b85bfbaae7d8b1.png)
+
+单看 Decoder：[img](https://gitee.com/summerrat/images/raw/master/img/20030902-6f461e520d31cb27.png)
 
 这种**Decoder**比较简单：
-- 将上下文向量 **c** 当成是 RNN 的初始隐藏状态输入到 RNN 中
+- 将上下文向量 **C** 当成是 RNN 的初始隐藏状态输入到 RNN 中
 - 后续只接受上一个神经元的隐藏层状态 **h'** 而不接收其他的输入 **x**
 
 #### 第二种Seq2Seq
 
-Encoder & Decoder：
-- ![img](https://gitee.com/summerrat/images/raw/master/img/20030902-479f2b802293c8c5.png)
+- 论文：[Sequence to Sequence Learning with Neural Networks]()
 
-单看 Decoder：
-- ![img](https://gitee.com/summerrat/images/raw/master/img/20030902-177f158afe2216bf.png)
+模型结构
+- ![](https://bigquant.com/community/uploads/default/original/3X/7/1/715c3f86e57fb2e5c8d7e1039970dbf05db8c2ac.jpg)
+
+区别在于
+- source编码后的**向量C**直接作为Decoder阶段RNN的初始化state，而不是在每次decode时都作为RNN cell的输入。
+- 此外，decode时RNN的输入是**目标值**，而不是前一时刻的输出。
+
+Encoder & Decoder：[img](https://gitee.com/summerrat/images/raw/master/img/20030902-479f2b802293c8c5.png)
+
+单看 Decoder：[img](https://gitee.com/summerrat/images/raw/master/img/20030902-177f158afe2216bf.png)
 -  Decoder 结构有了自己的初始隐藏层状态 **h'0**
 -  不再把上下文向量 **c** 当成是 RNN 的初始隐藏状态，而是当成 RNN 每一个神经元的输入
 
@@ -106,6 +162,61 @@ Encoder & Decoder：
 - Decoder 结构和第二种类似，但是在输入的部分多了上一个神经元的输出 **y'**。
 - 即每一个神经元的输入包括：上一个神经元的隐藏层向量 **h'**，上一个神经元的输出 **y'**，当前的输入 **c** (Encoder 编码的上下文向量)。
 - 对于第一个神经元的输入 **y'**0，通常是句子起始标志位的 embedding 向量。
+
+#### 改进版：Attention
+
+Seq-to-Seq with Attention（NMT）
+- 论文：[Neural Machine Translation by Jointly Learning to Align and Translate]()
+
+模型结构
+- ![](https://bigquant.com/community/uploads/default/original/3X/c/6/c6f7aabe0c7ead563e63dc38fb575057274b7ce0.jpg)
+
+区别：**向量C变矩阵**
+- 前面两个模型都是将source序列编码成一个固定维度的向量，但是这样做对于长序列将会丢失很多信息导致效果不好
+- 所以作者提出将encoder阶段所有的隐层状态保存在一个**列表**中，然后接下来decode的时候，根据前一时刻状态st-1去计算T个隐层状态与其相关程度，在进行加权求和得到编码信息ci，也就是说每个解码时刻的c向量都是不一样
+- ![](https://bigquant.com/community/uploads/default/original/3X/a/8/a80cb4394ffe789957df180d10f5ae9083f5c88a.jpg)
+
+#### 改进版：Attention变形
+
+Attention各种变形
+- 论文：[Effective Approaches to Attention-based Neural Machine Translation]
+
+这篇论文提出了两种 Seq-to-Seq模型, 分别是**global Attention**和**local Attention**
+- ① `global Attention`，跟上面的思路差不多，也是采用**soft Attention**的机制，对上面模型进行了稍微的修改
+  - 模型结构图如下所示：原理上与NMT区别不大，只是aij计算方法稍有区别，这里的score函数从上面的神经网络变成了三种选择，包括`内积`、`general`、`concat`
+  - ![](https://bigquant.com/community/uploads/default/original/3X/f/1/f175f199c9a244d51165697c37b2bfc57fc256b5.jpg)
+- ② `local Attention`
+  - `soft Attention`和`hard Attention`。
+  - global模型属于`soft Attention`，缺点
+    - 每次decode时都要计算所有的向量，导致**计算复杂度较高**
+    - 而且有些source跟本次decode根本没有任何关系，所以计算他们之间的相似度有些**多余**；
+    - 当source序列**较长**时，这种方法的**效果**也会有所下降。
+  - 而`hard Attention`每次仅选择一个相关的source进行计算。缺点：**不可微**，没有办法进行反向传播，只能借助强化学习等手段进行训练。
+    - 详见论文：[Show, Attend and Tell: Neural Image Caption Generation with Visual Attention](https://arxiv.org/pdf/1502.03044)
+
+#### 改进版： Beam-Search 提速
+
+前面几种Seq-to-Seq模型都是从**模型结构**上改进，从训练的层面上改善模型效果。
+- beam-search是在测试的时候才用到的技术。
+- 注意：Beam Search只用于**测试**，不用于**训练**过程。
+
+一般使用 `greedy search`（贪心搜索），在进行解码的时候，每一步都选择**概率最大**的那个词作为输出，然后再将这个词作为下一解码时刻的输入传递进去。以此类推，直到输出\<EOS\>符号为止，最终会获得一个概率最大的序列当做是解码的输出。
+
+缺点
+- 某一步的错误输出可能会导致后面整个输出序列都发生错误
+
+那么改进方案：`beam search`（集束搜索）
+- 每次都选择概率最大的k个词（beam size）作为输出，并在下一时刻传入RNN进行解码，以此类推。
+- ![](https://pic2.zhimg.com/80/v2-54c0a12148c0033fde012ff8797211f5_1440w.webp)
+- beam size=1时，beam search就会退化为贪心算法
+- 好处：可以通过增加搜索范围来保证一定的正确率。beam size等于2时效果就已经不错了，到10以上就不会再有很大提升
+
+### 训练优化
+
+训练技巧
+- Teacher Forcing
+- Attention 机制
+- 束搜索（Beam Search）
 
 ### seq2seq实现
 
