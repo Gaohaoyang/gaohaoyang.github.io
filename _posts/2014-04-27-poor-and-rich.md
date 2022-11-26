@@ -3,7 +3,7 @@ layout: post
 title:  "【读书笔记】-你为什么穷？- why you are poor"
 date:   2014-04-27 12:02:00
 categories: 读书笔记
-tags: 人生规划 贫富差距 家庭教育 富豪 社会阶级 留学生 教育 穷人 翻身 阶层 潜规则 幂律分布 社会 出路
+tags: 人生规划 贫富差距 家庭教育 富豪 社会阶级 留学生 教育 穷人 翻身 阶层 潜规则 幂律分布 社会 出路 俱乐部
 excerpt: 穷人一直穷，富人一直富吗？
 author: 鹤啸九天
 mathjax: true
@@ -585,6 +585,217 @@ JuJu 继续她的艺人之路，做模特，演戏，选美。她说她要做传
 所以，很多时候，我们努力奋斗，也许这一代人只是往上走一点点，但是能够给孩子留下一个更高的起点，也已经功德圆满了。
 
 最后，这里统计的是超级富豪们的出身，并分析这种现象产生的原因。如果你也曾梦想成为超级富豪，或者希望后代成为超级富豪，可以把上面的统计和分析结果作为参考。而如果你并不想成为超级富豪，也不奢望后代成为超级富豪，当个八卦看看即可。毕竟，人生有无数条路可以走，谁说一定要成为超级富豪，才算成功呢。
+
+## 富豪联盟
+
+
+### 中国企业家俱乐部
+
+#### 简介
+
+[中国企业家俱乐部](https://baike.baidu.com/item/%E4%B8%AD%E5%9B%BD%E4%BC%81%E4%B8%9A%E5%AE%B6%E4%BF%B1%E4%B9%90%E9%83%A8/10202132)（CEC）是2006年由二十余位中国创业企业家共同发起成立的非营利组织。俱乐部服务于社会和经济可持续发展，帮助中小企业协同发展，并积极投身社会公益慈善事业。
+- 中国企业家俱乐部理事是中国改革开放时代创业者的优秀代表，现任理事50余位，现任理事长是新奥集团创始人王玉锁先生
+- 中国第一顶级富豪俱乐部
+
+#### 成员名单
+
+| 姓名 | 俱乐部职务 | 社会职务 |
+|---|---|---|
+|[王玉锁](https://baike.baidu.com/item/%E7%8E%8B%E7%8E%89%E9%94%81/647751?fromModule=lemma_inlink) | 理事长 | 新奥集团股份有限公司董事局主席 |
+|[程虹](https://baike.baidu.com/item/%E7%A8%8B%E8%99%B9/5960691?fromModule=lemma_inlink)|副理事长|中国企业家俱乐部常务副理事长兼秘书长|
+|[吴乐斌](https://baike.baidu.com/item/%E5%90%B4%E4%B9%90%E6%96%8C/3117985?fromModule=lemma_inlink)|副理事长|企业绿色发展研究院院长、中科院创投董事长|
+|[刘东华](https://baike.baidu.com/item/%E5%88%98%E4%B8%9C%E5%8D%8E/41884?fromModule=lemma_inlink)|副理事长|正和岛创始人兼首席架构师|
+|[方洪波](https://baike.baidu.com/item/%E6%96%B9%E6%B4%AA%E6%B3%A2/8197799?fromModule=lemma_inlink)|副理事长|美的集团董事长|
+|[田溯宁](https://baike.baidu.com/item/%E7%94%B0%E6%BA%AF%E5%AE%81/3183358?fromModule=lemma_inlink)|副理事长|亚信集团联合创始人、宽带资本董事长|
+|[孙强](https://baike.baidu.com/item/%E5%AD%99%E5%BC%BA/19392214?fromModule=lemma_inlink)|副理事长|TPG集团中国管理合伙人|
+|[王毅然](https://baike.baidu.com/item/%E7%8E%8B%E6%AF%85%E7%84%B6/24100633?fromModule=lemma_inlink)|副理事长|广州视源电子科技股份有限公司董事长|
+|[丁立国](https://baike.baidu.com/item/%E4%B8%81%E7%AB%8B%E5%9B%BD/8718043?fromModule=lemma_inlink)|理事|德龙控股有限公司董事局主席|
+|[刁志中](https://baike.baidu.com/item/%E5%88%81%E5%BF%97%E4%B8%AD/5764213?fromModule=lemma_inlink)|理事|广联达科技股份有限公司董事长|
+|[马蔚华](https://baike.baidu.com/item/%E9%A9%AC%E8%94%9A%E5%8D%8E/9913460?fromModule=lemma_inlink)|理事|联合国可持续发展目标影响力指导委员会成员、国家科技成果转化引导基金理事会理事长、国际公益学院董事会主席|
+|[王中军](https://baike.baidu.com/item/%E7%8E%8B%E4%B8%AD%E5%86%9B/5812151?fromModule=lemma_inlink)|理事|华谊兄弟传媒股份有限公司创始人、董事长|
+|[王文京](https://baike.baidu.com/item/%E7%8E%8B%E6%96%87%E4%BA%AC/1400836?fromModule=lemma_inlink)|理事|用友网络科技股份有限公司董事长|
+|[王伟斌](https://baike.baidu.com/item/%E7%8E%8B%E4%BC%9F%E6%96%8C/1290144?fromModule=lemma_inlink)|理事|双全集团董事局主席、普祥健康集团董事长、神玉艺术馆馆长|
+|[王均金](https://baike.baidu.com/item/%E7%8E%8B%E5%9D%87%E9%87%91/8198104?fromModule=lemma_inlink)|理事|上海均瑶（集团）有限公司董事长|
+|王兵|理事|爱佑慈善基金会理事长|
+|[王若雄](https://baike.baidu.com/item/%E7%8E%8B%E8%8B%A5%E9%9B%84/1710303?fromModule=lemma_inlink)|理事|天泰集团创始人|
+|[王雪红](https://baike.baidu.com/item/%E7%8E%8B%E9%9B%AA%E7%BA%A2/3990?fromModule=lemma_inlink)|理事|宏达国际电子股份有限公司董事长兼首席执行官|
+|[邓锋](https://baike.baidu.com/item/%E9%82%93%E9%94%8B/35200?fromModule=lemma_inlink)|理事|北极光创投创始人、董事总经理|
+|[卢志强](https://baike.baidu.com/item/%E5%8D%A2%E5%BF%97%E5%BC%BA/12499?fromModule=lemma_inlink)|理事|中国泛海控股集团董事长|
+|[冯仑](https://baike.baidu.com/item/%E5%86%AF%E4%BB%91/10345267?fromModule=lemma_inlink)|理事|御风投资控股有限公司董事长|
+|[宁高宁](https://baike.baidu.com/item/%E5%AE%81%E9%AB%98%E5%AE%81/4951851?fromModule=lemma_inlink)|理事|中国中化原董事长、党组书记|
+|[朱一明](https://baike.baidu.com/item/%E6%9C%B1%E4%B8%80%E6%98%8E/8904184?fromModule=lemma_inlink)|理事|北京兆易创新科技股份有限公司董事长|
+|[朱保国](https://baike.baidu.com/item/%E6%9C%B1%E4%BF%9D%E5%9B%BD/10880597?fromModule=lemma_inlink)|理事|健康元药业集团股份有限公司董事长|
+|[刘乐飞](https://baike.baidu.com/item/%E5%88%98%E4%B9%90%E9%A3%9E/628545?fromModule=lemma_inlink)|理事|中信产业投资基金管理有限公司董事长兼首席执行官|
+|[刘永好](https://baike.baidu.com/item/%E5%88%98%E6%B0%B8%E5%A5%BD/2674639?fromModule=lemma_inlink)|理事|新希望集团董事长、中国民生银行副董事长|
+|[刘庆峰](https://baike.baidu.com/item/%E5%88%98%E5%BA%86%E5%B3%B0/1966964?fromModule=lemma_inlink)|理事|科大讯飞股份有限公司董事长、总裁|
+|[刘君](https://baike.baidu.com/item/%E5%88%98%E5%90%9B/26997?fromModule=lemma_inlink)|理事|鹰谷国际集团控股（南非）有限公司董事长|
+|[刘积仁](https://baike.baidu.com/item/%E5%88%98%E7%A7%AF%E4%BB%81/3053145?fromModule=lemma_inlink)|理事|东软集团股份有限公司董事长兼首席执行官|
+|[李东生](https://baike.baidu.com/item/%E6%9D%8E%E4%B8%9C%E7%94%9F/7086914?fromModule=lemma_inlink)|理事|TCL集团股份有限公司董事长兼首席执行官|
+|[李振福](https://baike.baidu.com/item/%E6%9D%8E%E6%8C%AF%E7%A6%8F/51124?fromModule=lemma_inlink)|理事|德福资本董事长兼首席执行官|
+|[李革](https://baike.baidu.com/item/%E6%9D%8E%E9%9D%A9/57622?fromModule=lemma_inlink)|理事|药明康德创始人、董事长、首席执行官|
+|[杨绍鹏](https://baike.baidu.com/item/%E6%9D%A8%E7%BB%8D%E9%B9%8F/5177931?fromModule=lemma_inlink)|理事|海丰国际控股有限公司董事局主席|
+|[沈国军](https://baike.baidu.com/item/%E6%B2%88%E5%9B%BD%E5%86%9B/6511821?fromModule=lemma_inlink)|理事|银泰集团创始人兼董事长|
+|[张茵](https://baike.baidu.com/item/%E5%BC%A0%E8%8C%B5/69?fromModule=lemma_inlink)|理事|玖龙纸业（控股）有限公司董事长|
+|[张勇](https://baike.baidu.com/item/%E5%BC%A0%E5%8B%87/4202988?fromModule=lemma_inlink)|理事|海底捞国际控股有限公司董事长|
+|[张文中](https://baike.baidu.com/item/%E5%BC%A0%E6%96%87%E4%B8%AD/1854066?fromModule=lemma_inlink)|理事|物美科技集团有限公司、多点生活创始人兼董事长|
+|[张懿宸](https://baike.baidu.com/item/%E5%BC%A0%E6%87%BF%E5%AE%B8/1613020?fromModule=lemma_inlink)|理事|中信资本控股有限公司董事长兼首席执行官|
+|[陈丹](https://baike.baidu.com/item/%E9%99%88%E4%B8%B9/5572086?fromModule=lemma_inlink)|理事|广东恒兴集团有限公司董事长|
+|[陈东升](https://baike.baidu.com/item/%E9%99%88%E4%B8%9C%E5%8D%87/7524742?fromModule=lemma_inlink)|理事|泰康保险集团股份有限公司创始人、董事长兼CEO|
+|[苗鸿冰](https://baike.baidu.com/item/%E8%8B%97%E9%B8%BF%E5%86%B0/5986346?fromModule=lemma_inlink)|理事|白领时装有限公司董事长|
+|[胡葆森](https://baike.baidu.com/item/%E8%83%A1%E8%91%86%E6%A3%AE/3037203?fromModule=lemma_inlink)|理事|建业集团董事长|
+|[贾跃亭](https://baike.baidu.com/item/%E8%B4%BE%E8%B7%83%E4%BA%AD/5757030?fromModule=lemma_inlink)|理事|乐视创始人、Faraday Future创始人|
+|[夏华](https://baike.baidu.com/item/%E5%A4%8F%E5%8D%8E/72240?fromModule=lemma_inlink)|理事|依文集团董事长|
+|[郭广昌](https://baike.baidu.com/item/%E9%83%AD%E5%B9%BF%E6%98%8C/806129?fromModule=lemma_inlink)|理事|复星国际董事长|
+|[徐井宏](https://baike.baidu.com/item/%E5%BE%90%E4%BA%95%E5%AE%8F/9506243?fromModule=lemma_inlink)|理事|中关村龙门投资有限公司董事长、亚杰商会（AAMA）会长|
+|[唐越](https://baike.baidu.com/item/%E5%94%90%E8%B6%8A/785884?fromModule=lemma_inlink)|理事|小赢科技董事长兼CEO|
+|[曹国伟](https://baike.baidu.com/item/%E6%9B%B9%E5%9B%BD%E4%BC%9F/2373379?fromModule=lemma_inlink)|理事|新浪董事长兼首席执行官|
+|[常振明](https://baike.baidu.com/item/%E5%B8%B8%E6%8C%AF%E6%98%8E/833318?fromModule=lemma_inlink)|理事|中信集团原董事长，十三届全国政协委员|
+|[蒋锡培](https://baike.baidu.com/item/%E8%92%8B%E9%94%A1%E5%9F%B9/9137530?fromModule=lemma_inlink)|理事|远东控股集团有限公司董事局主席|
+|[雷军](https://baike.baidu.com/item/%E9%9B%B7%E5%86%9B/1968?fromModule=lemma_inlink)|理事|小米科技有限责任公司创始人、董事长兼首席执行官|
+|[虞锋](https://baike.baidu.com/item/%E8%99%9E%E9%94%8B/2681189?fromModule=lemma_inlink)|理事|云锋基金联合创始人、主席；云锋金融集团主席|
+|[吴敬琏](https://baike.baidu.com/item/%E5%90%B4%E6%95%AC%E7%90%8F/1078404?fromModule=lemma_inlink)|经济顾问|国务院发展研究中心研究员|
+|[龙永图](https://baike.baidu.com/item/%E9%BE%99%E6%B0%B8%E5%9B%BE/557400?fromModule=lemma_inlink)|经济顾问|中国入世首席谈判代表、博鳌亚洲论坛原秘书长|
+|[张维迎](https://baike.baidu.com/item/%E5%BC%A0%E7%BB%B4%E8%BF%8E/283699?fromModule=lemma_inlink)|经济顾问|北京大学国家发展研究院经济学教授|
+|[许小年](https://baike.baidu.com/item/%E8%AE%B8%E5%B0%8F%E5%B9%B4/7316764?fromModule=lemma_inlink)|经济顾问|经济学家、中欧国际工商学院终身荣誉教授|
+|[钱颖一](https://baike.baidu.com/item/%E9%92%B1%E9%A2%96%E4%B8%80/10403975?fromModule=lemma_inlink)|经济顾问|清华大学经济管理学院教授、前院长|
+|[李灿](https://baike.baidu.com/item/%E6%9D%8E%E7%81%BF/24862?fromModule=lemma_inlink)|科技顾问|中国科学院大连物理化学所研究员，中国科学院院士|
+|[陈勇](https://baike.baidu.com/item/%E9%99%88%E5%8B%87/3446298?fromModule=lemma_inlink)|科技顾问|中国科学院广州能源研究所研究员，中国工程院院士，国际欧亚科学院院士|
+|[张锁江](https://baike.baidu.com/item/%E5%BC%A0%E9%94%81%E6%B1%9F/5537486?fromModule=lemma_inlink)|科技顾问|中国科学院过程研究所所长，中国科学院院士|
+|[康乐](https://baike.baidu.com/item/%E5%BA%B7%E4%B9%90/4857592?fromModule=lemma_inlink)|科技顾问|中国科学院动物研究所研究员，中国科学院院士，美国科学院院士，欧亚科学院院士，河北大学校长|
+|[阎锡蕴](https://baike.baidu.com/item/%E9%98%8E%E9%94%A1%E8%95%B4/10537508?fromModule=lemma_inlink)|科技顾问|中国科学院生物物理所研究员，中国科学院院士，中国生物物理学会副理事长|
+|牛根生||蒙牛集团创始人,老牛基金会创始人、名誉会长|
+|马云||中国企业家俱乐部主席，阿里巴巴集团董事局主席|
+
+#### 事迹
+
+【2022-11-26】[“中国第一顶级富豪俱乐部”的江湖局](https://www.toutiao.com/article/6865286850118943246)
+
+##### 01 成立之初
+
+2020年1月11日，一场被称为“大象的聚会”的中国商界春晚“2020道农会”在北京举行。作为一场由中国企业家俱乐部主办的跨界领袖年度聚会，道农会已经迈过了11个年头。
+- 看看出席晚会的名单：马云、柳传志、牛根生、王中军、雷军、曹国伟、马蔚华、刘永好、梁建章、冯仑，这些耳熟能详的名字几乎垄断了各个领域的顶级资源。
+
+在这家超万亿俱乐部中，没有前浪和后浪，只有强者与更强者。在“生逢其时”的晚会主题下，这些摸爬滚打的企业家们按照规定要自发上台表演节目，可单人，也可组团。
+- 俱乐部主席马云不遑多让，又一次表演了魔术，虽然依旧不怎么专业，但好过之前几届的穿帮。
+- ![](https://p3-sign.toutiaoimg.com/pgc-image/d7c82d506b8940af90a54dc64e3cb0ce~noop.image?_iz=58558&from=article.pc_detail&x-expires=1670031488&x-signature=SGcZrIDYOY2qc6t0IblMvms91OE%3D)
+- 理事马蔚华和冯仑也紧随其后魔术登场，而自称五音不全的李东生、曹国伟、傅成玉和王文京在粤语版《万里长城永不倒》中唤起台下无数伴唱。
+- 观众里，曾经的理事长柳传志面带笑容地看着这些后辈们的大秀，从不缺席俱乐部活动的牛根生也饶有兴趣地拍着巴掌伴奏。
+
+在这场一年一度的狂欢里，永远穿帮的魔术师马云、唱歌总是跑调的柳传志、喝多后站在桌子上引吭高歌的俞敏洪，都是司空见惯的场面。
+- ![](https://p3-sign.toutiaoimg.com/pgc-image/86ca1ed513724250acbecba15d48f177~noop.image?_iz=58558&from=article.pc_detail&x-expires=1670031488&x-signature=s9lchuljM8VciW28Vie9Cb%2Bfx7Q%3D)
+
+无论是情绪的发泄还是性情的洒露，在纵情背后，马云们背后的中国企业家俱乐部逐渐露出了冰山一角，庞大帝国浮隐沉现。  
+ 
+##### 02 圈子规则
+ 
+2006年初，时任《中国企业家》杂志社社长的刘东华在多次报道企业家之后，萌发了搭建一个属于中国企业家沟通的平台的想法，希望让大佬们有更多的互动和交流，组成个不一样的圈子。
+- 很快，这个想法得到柳传志、张醒生、王健林等20多名商界大佬的积极响应，甚至还邀请到龙永图、吴建民、吴敬琏、张维迎、许小年等外交家、经济学家成为顾问。
+
+2006年11月，中国企业家俱乐部正式成立，俱乐部采取的是理事制，第一届理事长是柳传志。
+- ![](https://p3-sign.toutiaoimg.com/pgc-image/18c01af9a2354e1381cc9949a045be9b~noop.image?_iz=58558&from=article.pc_detail&x-expires=1670031488&x-signature=5OFKA78I%2FQdGAGgnnSnq%2B9QtD4I%3D)
+
+不同于普通的商会组织，中国企业家俱乐部**规模极其庞大**，现有理事所领导的企业年营业收入合计达5.26万亿元人民币，员工总人数达229万人，妥妥的中国第一顶级富豪俱乐部。
+- 举个例子，俱乐部出访国外时，一般会有所在国的元首接见，国内考察也都有省级领导陪同。
+- ![](https://p3-sign.toutiaoimg.com/pgc-image/d89548dd2e574e2ca86ee851868094bf~noop.image?_iz=58558&from=article.pc_detail&x-expires=1670031488&x-signature=0QHX%2Fwvp6Fbifby6n2v8mUAXUGY%3D)
+ 
+没办法，这是一群谁也不能小看的“财神爷”。不过，加入这个圈子并不容易。中国企业家俱乐部都采取**理事会制**，申请会员必须满足两个条件：
+- 第一，必须是行业前三或者千亿规模的企业创始人；
+- 第二，必须热衷慈善和公益事业。
+
+不仅如此，想要成为会员还必须得到现有理事成员的**全票**通过，有一个人反对都入不了会。而一旦成为会员，不管名声再大，口袋再阔，同样必须严格遵守俱乐部的会规。
+- 就拿日常的出访和接见活动来说，理事会规定出访集合时迟到1分钟罚款100美元，超过五分钟大巴拒载开走，还要另交1000美元罚款。
+- 在这里，各自雄踞地盘的老大们必须遵守俱乐部的规则，否则只能是丢人丢面子。
+
+也正因为如此，在这个时刻被约束的“新国度”里，一个资本守望纵横交错的圈子向上升起。
+ 
+##### 03 江湖救急
+
+对圈子感受最深的，当属蒙牛的`牛根生`。
+
+2008年10月，就在北京奥运会结束后不久，与外资投行摩根士丹利赌得火热，急于谋求蒙牛迅猛增长的牛根生忧心忡忡。
+ 
+由于遭遇三鹿婴幼儿奶粉“三聚氰胺”的信任危机，作为牛奶大户，蒙牛奶粉也被查疑似有三聚氰胺。政府进驻，经销商倒戈，消费者退货，牛根生苦心经营九年的蒙牛声誉毁于一旦，一天赔掉2000万，直接损失20亿。
+- ![](https://p3-sign.toutiaoimg.com/pgc-image/8812ea6a1c8040289f3032588ec0892f~noop.image?_iz=58558&from=article.pc_detail&x-expires=1670031488&x-signature=jlgNQH%2FuqSTcWJGtcYW%2BkR5z8NQ%3D)
+
+尽管牛根生将2008年之前生产的乳品全部下架销毁，但跌入深渊的蒙牛已经成了一只待宰割的羔羊，随时可能被外资并购。在“外资并购”和“信任危机”的内忧外患下，刚满50岁的牛根生泪眼婆娑地向数月前刚刚来蒙牛考察过的中国企业家俱乐部诸多好友发出“**万言书**”求救。老牛有难，八方支援。
+- 时任理事长的`柳传志`二话没说，不到两天就将2亿元直接打到了老牛基金会的账户上；
+- 新东方的`俞敏洪`随后送上5000万现金；
+- 分众传媒的`江南春`也送去了5000万救急。
+- ![](https://p3-sign.toutiaoimg.com/pgc-image/7fb3151e9d864ba099e5c383e0d20e5d~noop.image?_iz=58558&from=article.pc_detail&x-expires=1670031488&x-signature=CKntihZ0jvx0di5Rf%2BnJiLJOLKg%3D)
+- 不光如此，在一年之后的8月1号，蒙牛成立十周年这天，同为俱乐部理事的中粮集团掌门人`宁高宁`又给牛根生送来一份大礼：价值60亿元的“红帽子”。
+- 中粮集团宣布，将与厚朴基金投资组建一家新公司(中粮集团持股70%)，以港币每股17.6元的价格投资61亿港币，分别向蒙牛认购新股以及向老股东购买现有股份。而新公司将持有蒙牛扩大后股本的20%，成为蒙牛乳业的第一大股东。就资本市场来看，这是第一例大型国企以市场化手段参与整合外资和民营企业的案例。
+- ![](https://p3-sign.toutiaoimg.com/pgc-image/21d24702fdf6469cab256b847def35d6~noop.image?_iz=58558&from=article.pc_detail&x-expires=1670031488&x-signature=bQSS%2BFLZjDqLUmL1Loy%2BaVdbaxE%3D)
+
+得到诸多支持的蒙牛勉强挺过难关，牛根生也总算松了口气。而在这次引资过程中，牛根生背后的“中国企业家俱乐部”愈发响亮。
+- 嗯，有朋友真好，<span style='color:red'>有一群有钱的朋友更好</span>。
+
+对于牛根生来说，俱乐部所给予的，不只是钱，更重要的是资源以及高人的指点。
+ 
+##### 04 资源整合
+ 
+大佬的圈子，不缺利益，也从不缺故事。
+
+2006年，华谊兄弟总裁`王中军`接到了冯小刚递过来的一个新剧本《集结号》。在冯小刚的设计下，这部场面浩大的战争片，制作均拟邀请来自海内外的一线团队。此时的华谊，靠着冯式“贺岁片”的以小博大，正在迅速抢占电影市场份额。不过，虽然华谊靠着几部热卖电影赚了些钱，可投资近亿元的《集结号》还是让现金流尚不充裕的华谊兄弟有些捉襟见肘。
+- ![](https://p3-sign.toutiaoimg.com/pgc-image/7aad317801f34fd5a4a9fb39e16de31d~noop.image?_iz=58558&from=article.pc_detail&x-expires=1670031488&x-signature=Cnr%2F4J%2BxL5p8rEKug4swjJlN7ik%3D)
+
+但作为企业家俱乐部的理事，王中军并不担心。与`马云`向来交好的他在听说同是俱乐部理事的华旗资讯总裁`冯军`赞助了纪录片《大国崛起》一事之后，动起了心思。在俱乐部的一次活动上，王中军拉住冯军足足说了半个小时剧本的故事。被故事感动的冯军随后不仅掏出数百万赞助，还邀请主演张涵予当品牌代言人，并在品牌宣传中密集宣传该片。
+
+不过，华谊虽然得到了冯军的赞助和支持，但这距离一个亿的小目标还差得远。关键时候，还是马云点拨了他：“<span style='color:blue'>靠赞助不是办法，你得学会资本运作</span>，我们不是还有银行家的会员么。” 一语惊醒梦中人，王中军随即找到同样是俱乐部理事，时任招商银行行长的马慰华商议贷款拍电影的事情。
+- ![](https://p3-sign.toutiaoimg.com/pgc-image/9064c6c4953348b7ac6d44272605d67e~noop.image?_iz=58558&from=article.pc_detail&x-expires=1670031488&x-signature=fCnnwaDtUhmxUo%2BlhVy0so1Nsco%3D)
+
+虽然招行历史上从没有贷款拍电影的先例，但在王中军的运筹帷幄下，招行最终同意贷款5000万给《集结号》剧组，首开国内银行为影视产业贷款的先河。
+
+2007年，《集结号》内地票房2.7亿，是当时难得高票房的战争片，王中军赚得盆满钵满。尝到甜头的王中军正志得意满，马云又语重心长地叮嘱“<span style='color:blue'>一定要借助资本的力量，资本风生水起后，影视的游戏规则就变了</span>。”
+
+王中军心领神会，多次邀请俱乐部成员去华谊考察交流，推杯换盏之间互诉衷肠。也是在这一年，华谊股东名单里多了个熟悉的名字：`马云`。
+- ![](https://p3-sign.toutiaoimg.com/pgc-image/bf806d942b484429a12b7b3138d1e0d1~noop.image?_iz=58558&from=article.pc_detail&x-expires=1670031488&x-signature=xWXITHg6L3FwPjp0XSFk9DiuORU%3D)
+
+2009年10月30日，在`马云`的介绍下，`江南春`、`虞锋`和`鲁伟鼎`等投资人纷纷加盟，华谊兄弟在创业板顺利上市。而持股1382.4万的马云，占到发行前总股本的10.97%，仅次于`王中军`和`王中磊`兄弟。随后，马云通过兑现和减持华谊股票，套现8.44亿元，获利达到200倍。
+
+对于“没有马云，就没有今天的华谊兄弟”的坊间传闻，王中军还有些不服气：“资本市场对我没有本质上的压力，他们是认准我的人”。不过，他很清楚的是，<span style='color:blue'>在资本的集结号中，只有赢家，没有输家</span>。
+
+##### 05 俱乐部矛盾
+
+有人说，现在的中国企业家俱乐部就是马云的又一个“江南会”。
+ 
+2006年，就在刘东华联络各界大佬筹备中国企业家俱乐部时，代表互联网行业的马云虽说刚被雅虎以10亿美元价格收购了约40%股份，但无论是年龄还是资历，马云都只能算理事会中的小字辈。好在马云也不在乎。因为就在同一年，在紧锣密鼓筹备阿里巴巴香港上市的同时，心灵眼活的马云找来冯根生、郭广昌、沈国军、鲁伟鼎、宋卫平、丁磊、陈天桥，八位浙商悄悄组建了一个“**江南会**”（见守捉使往期《江南会：顶级浙商沉浮录》）。
+- ![](https://p3-sign.toutiaoimg.com/pgc-image/8075c1de43f94bd6a41b7a340cce1efb~noop.image?_iz=58558&from=article.pc_detail&x-expires=1670031488&x-signature=6rBd2mItzHmMS8DGRjEtIyB%2BgAQ%3D)
+
+风水轮流转。
+
+2017年，在短短一年的时间内，<span style='color:blue'>王健林、王石、俞敏洪、李书福等传统行业的大佬几乎全部退出了企业家俱乐部</span>。传言，不少人退出时情绪极大，还一度拍了桌子。而这，和接替`柳传志`执掌俱乐部的`马主席`脱不了干系。
+
+做事从不循规蹈矩的`马云`在上任之后，不仅筹划着将理事会**60人**的上限改为**100人**，还放出话要将一些“没落贵族”清理出俱乐部。很明显，马主席并不想只是做个慈祥的“大家长”，而更希望成为中国商业领袖中的“**带头大哥**”。
+
+新人要出头，元老自然不买账，最后也只能落了个一哄而散。大刀阔斧改革的马主席，也直言不讳地表示：不指望任何人都喜欢我，习惯了。
+- ![](https://p3-sign.toutiaoimg.com/pgc-image/0c859a8ca394449689b90ce68d2a3ece~noop.image?_iz=58558&from=article.pc_detail&x-expires=1670031488&x-signature=kP3puAuLDzXb8dgLdpqjjLZ9Ews%3D)
+
+此时的马云，已经不再是当年坐在角落里的小辈，在阿里帝国的支撑下，踏步江湖之间，花名“风清扬”的马云已然一枝独秀。
+
+06
+ 
+伴随着杀伐决断，一切也走向过眼云烟。
+ 
+2019年10月，马云卸任阿里董事局主席，宣布“退休”，身价早过千亿的他终于可以大大方方说“自己对钱不感兴趣”。
+ 
+而在这十年的时间里，俱乐部的成员却乐此不疲，满怀期待地奔向资本市场。遗憾的是，资本市场并没有看上去的那么美，早先上市后意气风发的各位理事仿佛一个个陷入到资本魔咒，进退维谷。
+- 曾得到众人救助的`牛根生`在辞去董事会主席之后再次复出，虽然对蒙牛当前利润持续下跌的境况只字不提，却也挽救不了蒙牛的名声和颓局。
+- 而曾经多次出手相助的盟主`柳传志`，估计也想不到曾经作为业内老大的联想，如今居然需要帮扶才能维持生计。
+- ![](https://p3-sign.toutiaoimg.com/pgc-image/9d0f595797984cbda8b8207a911854da~noop.image?_iz=58558&from=article.pc_detail&x-expires=1670031488&x-signature=hmhgmZDNTAU1VWLhi1QTYBs%2Bqdg%3D)
+- 截止2020年7月，`联想`连续15个季度亏损，负债率近90%。联想总裁`杨元庆`表示，希望政府出台促进消费的扶持补贴，把个人电脑作为战略必需品。
+- 而高调宣布打造中国娱乐帝国的`王中军`，在被传出过于冒进的资本扩张计划导致资金链断裂，以及影视寒潮之后，华谊的债务积压越来越大，质押股权越来越频繁。甚至一度要靠卖房卖藏品来填补亏空，只能一心指望新上映的《八佰》再次翻盘。
+- 即便是俱乐部里曾经风头无二的**房产**、**服装**和**投资**集团如今日子也不好过。
+  - SOHO中国的`潘石屹`在接连甩卖中国资产之后，如今只剩下一个微博帐号。
+  - 新希望集团的`刘永好`负债近800亿，最近刚募集的百亿融资中有90亿要用于偿债。
+  - “不走寻常路”的`美特斯邦威`周成建亏损严重，几乎无路可走。
+  - 而复星的`郭广昌`在经过短时间的“失踪”后，一改曾经的高调也沉默了许多。
+- ![](https://p3-sign.toutiaoimg.com/pgc-image/9a8c5fbc66784d6090a83cc49b232fe8~noop.image?_iz=58558&from=article.pc_detail&x-expires=1670031488&x-signature=uc717KR8jpvmJGnmyMAwU%2FV1QxU%3D)
+
+当风起云涌的资本市场大潮翻腾时，自顾不暇的同行人哪里还顾得上守望相助。不过，有人哭，也就有人笑。前人退场，后人上位。深情款款的雷军在期待着下一个十年，而恒大的`许家印`则转身变成一头新的大象。
+
+时间拨回到今年的“道农会”，马云说了这样一句话：“除了我们感恩时代，还要敬畏时代，顺应时代，更重要的是去创造时代，这样才有生逢其时的感觉。”
+ 
+浪花跟着大潮涌动，分分合合之间，只有变，没有停。这就是江湖。
 
 # 为什么穷
 
