@@ -81,6 +81,20 @@ permalink: /science
 
 ### 宇宙
 
+#### 地球
+
+地球的宇宙坐标：
+- 拉尼亚凯亚超星系团-室女座星系团-本星系群-银河系-户臂-古尔德带-本地泡-本星际云-奥尔特云-太阳系的第三行星。
+- English: Earth--- Earth-Moon System --- Solar System--- Orion Arm --- MilkyWay --- Local Group --- Virgo Supercluster --- Laniakea Supercluster--- Universe.
+- ![](https://iknow-pic.cdn.bcebos.com/8718367adab44aed68a83c76a11c8701a08bfbba?x-bce-process=image%2Fresize%2Cm_lfit%2Cw_600%2Ch_800%2Climit_1%2Fquality%2Cq_85%2Fformat%2Cf_auto)
+
+地球是距离太阳的第三颗行星，也是目前已知的**唯一**孕育和支持生命的天体。
+- 地球表面的大约 29.2% 是由大陆和岛屿组成的陆地。
+- 剩余的 70.8% 被水覆盖，大部分被海洋、海湾和其他咸水体覆盖，也被湖泊、河流和其他淡水覆盖，它们共同构成了水圈。
+- 地球的大部分极地地区都被冰覆盖。
+
+宇宙的大超乎我们的想象，或许穷极人类文明的长度都永远无法知道地球地处于宇宙中怎样的位置，而我们每个人的一生也仅有数十年，我们的一生对于浩瀚宇宙的演化史来说只是一瞬间，正如浮游的一生对于我们来说，我们普普通通的一天，对于它来说就是一生的尺度。
+
 #### 终究毁灭
 
 【2022-11-26】[银河系和仙女座星系的碰撞有可能已经开始，太阳系的命运会如何？](https://www.163.com/dy/article/HAQMKGD805534CSQ.html)
