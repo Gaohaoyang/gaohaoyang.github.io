@@ -892,23 +892,21 @@ pdf文件直接显示，800px不能省略px，否则高度低
    - 嵌入markdown文件时，转html格式，方便直接编辑，并与github同步！
 - 类似于[Gliffy](https://www.gliffy.com/) Diagrams for Confluence，[Chrome插件下载地址](https://www.crx4chrome.com/crx/1601/)，[web版本](https://go.gliffy.com/go/html5/launch)
 - mac下的绘图软件omnigraffle，类似visio
-- 参考
-   - [10款流程图工具](https://baijiahao.baidu.com/s?id=1668266730880239997)
+
+参考
+- [10款流程图工具](https://baijiahao.baidu.com/s?id=1668266730880239997)
 
 - 【2020-8-21】[如何绘制泳道图](https://www.jianshu.com/p/787d918c0120)，[processon泳道图示例](https://v3.processon.com/view/559632e3e4b018f0e50364a7)
 - [visual-paradigm](https://online.visual-paradigm.com/cn/)
 
 
-如何嵌入markdown？
+如何嵌入markdown？用draw.io绘制图后
 - （1）直接当做html文件include到md页面 —— 每次都需要新增文件，复杂
-- （2）用iframe嵌入md页面 —— 正常显示，但是页面渲染出问题，后面的内容无法展示
+- （2）嵌入 → iframe：嵌入md页面 —— 正常显示，但是页面渲染出问题，后面的内容无法展示
 - （3）复制html里的内容到md页面
   - 同时将 script脚本添加到 include/head.html中，避免重复导入，影响页面渲染速度
-
-做法
-- 用draw.io绘制图
-- 导出html文件
-- 复制body里面的代码即可，[参考](https://blog.jonslow.com/insert-draw-io-graph-into-markdown/)
+- （4）导出 → html文件，提取其中 body部分代码即可，[参考](https://blog.jonslow.com/insert-draw-io-graph-into-markdown/)
+- （5）<span style='color:green'>嵌入 → html</span> —— 直接获取 body代码，最有效，
 
 ```html
 <div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers tags lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-10-12T09:55:23.407Z\&quot; agent=\&quot;5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;iTw_U0KMZUyyGfZo4U-Q\&quot; version=\&quot;20.2.0\&quot;&gt;&lt;diagram id=\&quot;xdYpP7w1t2VaaceZiyqw\&quot; name=\&quot;第 1 页\&quot;&gt;7Zhdb5swFIZ/jS9bgc2HfQkhyVRp0rRMmnZJwQSvBKfEbZL9+h3ANKE4U7slTVclNzHvMWC/D+fYgMhosZlW8TL/LFNeIGylG0QihLGNiQN/tbJtFd+jrTCvRKo77YSZ+MW1aGn1QaR81euopCyUWPbFRJYlT1RPi6tKrvvdMln077qM53wgzJK4GKrfRaryVqXY3+mfuJjn3Z1tj7WRRdx11jNZ5XEq13sSGSMyqqRUbWuxGfGiNq/zpT1vciD6NLCKl+olJ1zdRLNxeSPWX507KT1+fx9lV6S9ymNcPOgJ68GqbecAXAXMhoNwnQvFZ8s4qSNr4A1arhYFHNnQjFfLlkAmNhxuGmayVJoorjtkoihGspBVc2GSZRlOEtBXqpJ3fC+Seree60FkOEc97UdeKb7Zk/Scp1wuuKq20EVHse1dY7c9a9s9W+Ta19J6BxV7OznfY7qvx/pxmj/dZ+c4NLTprwBgnxUA9w4A8NmtZR0JQJcAnfuONbDe9q2h70/i0U3HQ9PHHmIjFIzQmCJKUBg1DQcx+zQ8bGbgQRNu5nFLXcc9Fg/S54GtIQ8TjpPRsM04gAJ10dhHYYiC4DAOmLbq+963r5Qlf+a1luJCzEs4TMBMDnpYmyig9gc6sBBpWhwCXcmHMq2xRpYBbSVVrIQsdbgdUreCkOOQJFDHbNKHiYcwmQEmOQLM9fRHmAWiUN+cfFp++VlVwcJUzwAhDIF6TY4xFH5UlgNwBrwHWTqW9b5AmpLSR5TqGhnYiELDRTRAAW1CDAXsPyDqvIRofcJe/a1/k8lxSD9fD7FhPXxT0oY9IHBlpMlUB4WQsuRC+i9Ik+c5fW7SjoG0U2OuScNCa9dr7YXrq2v1ubm6xgyGHA2dJnGB8UTvcNnkgwK2LMac6EQl2jszYM8AmCEWIda+ucB67F4A/0NlPjdg3wDYq3dbMArI4LBJ5QvXV1fmc3Ol5hWX1nsoyGAKm6k/fGl4f4Df6nWIYKcH0j0ZRzjcfYNtYntfssn4Nw==&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
