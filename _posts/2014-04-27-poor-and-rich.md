@@ -92,6 +92,12 @@ mathjax: true
 
 救世主都说我不入地狱谁入地狱，众生皆苦吃的苦越多，越能达到更高的度，然而你却没说，得看我能不能扛得住。。
 
+
+【2022-7-4】国外版，为什么富不过三代？生于忧患死于安乐
+- 艰难时代造就**勇者**，勇者开创**安逸时代**，安逸时代产生**弱者**，弱者重返**艰难时代**！
+- tough time create strong man, strong man create easy times, easy time create weak man ,weak man create tough time .
+
+
 ## 社会阶层
 
 ### 社会分级
