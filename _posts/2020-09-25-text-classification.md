@@ -1485,6 +1485,23 @@ Encoder 都是基于 transformer 结构的预训练语言模型，包括了 Bert
 
 ## 情感分析
 
+### 情感分析方法
+
+- 目前舆情分析还是处于初级阶段。目前舆情分析还停留在以表层计量为主，配以浅层句子级情感分析和主题挖掘技术的分析。对于深层次事件演化以及对象级情感分析依旧还处于初级阶段。
+  - 【2021-3-14】情感分析五要素：（entity，aspect，opinion，holder，time）, entity + aspect -> target
+    - 示例：我觉得华为手机拍照非常牛逼。 → （华为手机，拍照，正面，我，\）
+    - ![](https://p1.pstatp.com/large/tos-cn-i-0022/8bd0117028624224811facc091b2ded2)
+
+### 情感分析进阶
+
+- 【2022-12-4】[脉脉](https://maimai.cn/web/gossip_detail/31331554?src=app&webid=&gid=31331554&egid=acd7b22790eb499cb467b3e9c6868f59&share_channel=2&share_euid=xIzg0vvUrlZY90OoDU4o75jIOi7hvHqNKywbUXdztGQWH8JKeRPJVyMW3Qynf0Hm&operation_id=98f6eaa0-e5d3-4755-878c-03b7ff3229c0&content_type=gossip) NLP中的情感分析是不是有点low啊？就是个sentence分类问题，再具体就是token classification，分为3类，positive，neu，negative，这情感分析是不是简单了点？
+- 情感分析主要还是针对业务场景看case设计策略+标注。这玩意儿模型真没啥好做的，随便一个文本分类模型都大差不差，剩下的讽刺、多重否定的难case，靠模型讲故事还行，真上线提升很有限
+- （1）情感工作不只是这种大粒度的，还有小粒度的，如憎恶，埋怨，嫌弃，鄙视等等。
+- （2）再者，情感分类只是最开始的一部分工作，紧接着后面还有情感归因，接着情绪安抚，结合安抚的对话生成等等。
+- 深入点：情感词抽取、三元组抽取、情感原因抽取
+
+### 情感分析实践
+
 - 【2020-11-23】大连理工工具包cncenti，[github地址](https://github.com/thunderhit/cnsenti)
 
 ```python
