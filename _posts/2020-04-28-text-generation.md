@@ -58,6 +58,7 @@ permalink: /text-generation
     - ①. 使用指针生成器网络(pointer-generator network)，通过指针从原文中拷贝词，这种方式可以在正确复述原文信息的同时，也能使用生成器生成一些新的词。
     - ②. 使用覆盖率(coverage) 机制，追踪哪些信息已经在摘要中了，通过这种方式以期避免生成具有重复片段的摘要。
     - 不足在于：概括的内容可能并非源文本的核心内容；生成的摘要都是相近的词或片段概括，没有更高层次的压缩概括；语句通畅性降低。
+    - ![](https://p3-sign.toutiaoimg.com/tos-cn-i-0022/f032ede80be342db930db99361fb9337~tplv-obj:1352:666.image?from=post&x-expires=1677859200&x-signature=2hvX%2BJx5qU2QQRqkKA1ReGJJYwY%3D)
   - 相比于抽取式，生成式的摘要更加灵活，强大，可以更好的引入外部知识。然而，生成过程往往缺少关键信息的控制和指导，无法很好地定位关键词语，难以生成流畅性的句子。
 - （3）**抽取**与**生成**相结合的方法
   - 考虑到抽取式和生成式各自的优缺点，目前很多研究已经将二者结合：用抽取的方式选择重要内容，基于重要内容指导生成网络的训练对内容进行改写。
@@ -207,7 +208,6 @@ Diffusion的本质
   - 疑问句式的回复
   - 回复的多样性较低
   - 一致性低
-
   - 上下文逻辑冲突；背景有关的一些信息，比如年龄其实不可控；
   - 安全回复居多，对话过程显得很无聊。
     - 训练时用到的数据都是人类的对话语料，往往充斥着已知和未知的背景信息，使得对话成为一个"一对多"的问题，比如问年龄和聊天气，回答包括不同的人针对同样的问题产生的不同的回复。
@@ -302,6 +302,8 @@ Diffusion的本质
 # GAN方向
 
 ![GAN](https://p1.pstatp.com/large/pgc-image/99ece025696c4b9a9ed96a2f364a4d21)
+- ![](https://p3-sign.toutiaoimg.com/pgc-image/99ece025696c4b9a9ed96a2f364a4d21~tplv-obj:1982:1006.image?from=post&x-expires=1677859200&x-signature=UOp4kjkox3HZnahTT8Se7HT6ktU%3D)
+- ![](https://p3-sign.toutiaoimg.com/pgc-image/87711cd4b8714dcdb7772907d69f8606~tplv-obj:1754:1026.image?from=post&x-expires=1677859200&x-signature=6IOpdA4S%2FvfjbJysUZa2QAvaIlU%3D)
 
 ## GAN家族
 
