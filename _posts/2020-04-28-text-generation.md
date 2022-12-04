@@ -747,6 +747,20 @@ train_perp = math.exp(float(mean_loss)) if mean_loss < 300 else math.inf
 
 ## 趣味文本生成
 
+### 写作
+
+【2022-12-4】[秘塔写作猫](https://xiezuocat.com)：AI写作、多人协作、文本校对、改写润色、自动配图等功能，使用 GPT-3，详见[资讯](https://www.toutiao.com/article/7171341127121895939)
+- 秘塔写作猫的这项 AI 生成功能，是中文 AI 生成文本内容的一项应用突破。
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/0881729a434e497d96469b1e7e933887~noop.image)
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/602e7dbbe43f48b8b1e8457258fb25d0~noop.image)
+
+AI生成效果：
+
+>- 降价房源急售
+>- 11月13日，读者王先生致电本报，反映小区降价了，这套房子是一套两居室。记者从王先生处了解到，他的母亲也想在这里买一套住房，就在小区里询问是否有合适的房源。“最近几天都是有房源在挂牌出售，看起来还不错，但是有些房子确实是有问题的。”王先生说。对于此事记者咨询了王先生所在小区物业工作人员，他表示：“如果是两居室的话，价格会比较便宜一些，三居室就会稍微贵一点。”
+
+
+
 ### 狗屁不通文章
 
 - 【2019-11-6】[狗屁不通文本生成器](https://suulnnka.github.io/BullshitGenerator/index.html); [这款“狗屁不通”文章生成器火了，效果确实比GPT 2差太远](https://www.sohu.com/a/352083213_99979179) 
