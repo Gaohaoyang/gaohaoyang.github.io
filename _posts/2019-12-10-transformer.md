@@ -45,13 +45,12 @@ permalink: /transformer
 
 ![](https://pic1.zhimg.com/50/v2-0411ccbcb5529b2855478d619ac78d9d_hd.webp?source=1940ef5c)
 
-
 空洞卷积 diolation
 - ![](https://pic1.zhimg.com/50/v2-9c531569460c694db396a7530d8e5ffc_hd.webp?source=1940ef5c)
 
 
 内部卷积 involution
-- [CVPR 2021 | Involution：超越 Convolution 和 Self-attention 的神经网络新算子](https://blog.csdn.net/BAAIBeijing/article/details/115222970), [论文地址](http://arxiv.org/abs/2103.06255)
+- [CVPR 2021 Involution：超越 Convolution 和 Self-attention 的神经网络新算子](https://blog.csdn.net/BAAIBeijing/article/details/115222970), [论文地址](http://arxiv.org/abs/2103.06255)
 - ![](https://img-blog.csdnimg.cn/img_convert/0f8c8ff1aa63b079025990418c20ea68.png)
 - ![](https://img-blog.csdn.net/20170730100057611?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTGVmdF9UaGluaw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 - ![](https://img-blog.csdnimg.cn/img_convert/b670881b8e5cd7b52b4ebe69ace1654b.png)
@@ -62,39 +61,111 @@ permalink: /transformer
 - 但是对于输入长度已知但**输出长度未知**的任务，比如机器翻译，上面提到的两个模型就不能满足要求。
 - 因此就有了Sequence to Sequence模型，简称 `Seq2Seq`
 
+Seq2Seq（Sequence to Sequence，序列到序列模型） 是一种**循环**神经网络的变种，包括`编码器` (Encoder) 和`解码器` (Decoder) 两部分。
+
+Seq2Seq 是自然语言处理中的一种重要模型，可以用于机器翻译、对话系统、自动文摘
+- ![](https://pic3.zhimg.com/80/v2-6df74cbdbdf5172486cd3f17900f38aa_1440w.webp)
+
+Seq2Seq模型是**输出长度不确定**时采用的模型，一般在机器翻译的任务中出现，将一句中文翻译成英文，那么这句英文的长度有可能会比中文短，也有可能会比中文长，所以输出的长度就不确定了。
+- 如：输入的中文长度为4，输出的英文长度为2。
+- ![](https://pic3.zhimg.com/80/v2-9be58c05cb3b0907e69bf4b45f576dda_1440w.webp)
+- 输入一个中文序列，然后输出它对应的中文翻译，输出的部分的结果预测后面，根据上面的例子，也就是先输出 "machine"，将"machine"作为下一次的输入，接着输出"learning",这样就能输出任意长的序列。
+
+应用示例
+- 机器翻译：输入(Hello) --->输出(你好)。
+- 人机对话：问机器 “你是谁？”，机器返回 “我是某某某”。
+  - 简单的邮件对话的场景，发送方问：“你明天是否有空”；接收方回答：“有空，怎么了？”。
+
+### RNN 结构
+
+- ![](https://pic3.zhimg.com/80/v2-5d6d8bf0d373cb1147af6c82bb92aa12_1440w.webp)
+
+RNN 基本模型如上图所示
+- 每个神经元接受的**输入**包括：前一个神经元的**隐藏层状态** h(用于记忆) 和**当前输入** x (当前信息)。
+- 神经元得到输入之后，会计算出新的**隐藏状态** h 和**输出** y
+- 然后再传递到下一个神经元。
+
+因为隐藏状态 h 的存在，使得 RNN 具有一定的记忆功能。
+
 ### 序列任务与RNN
 
-序列任务类型
-- （1）`N to N` 多对多
-  - 该模型处理的一般是输入和输出序列**长度相等**的任务，模型结构[图](https://img-blog.csdnimg.cn/20210420103950126.png)，应用如：
-    - 词性标注
-    - 语言模型（Language Modeling）
-- （2）`1 to N` 一对多
-  - 此类结构的输入长度为1，输出长度为N，一般又可以分为两种：
-    - 一种是将输入**只输入到第一个神经元**, [img](https://img-blog.csdnimg.cn/20210420104214211.png)
-    - 另一种将输入输入到**所有神经元**。[img](https://img-blog.csdnimg.cn/20210420104250996.png)
-  - 一般用于以下任务：
-    - 图像生成文字，一般输入 X 为图片，输出为一段图片描述性的文字；
-    - 输入音乐类别，生成对应的音乐
-    - 根据小说（新闻情感）类别，生成对应的文字
-- （3）`N to 1` 多对一
-  - 和1 to N相反，x是序列，y是单个数值，[img](https://img-blog.csdnimg.cn/20210420105020933.png)，一般常见任务有：
-    - 序列分类任务，如给定一段文本或语音序列，归类（情感分类，主题分类等）
-- （4）`N to M` 多对多
-  - `N to N`的扩展，RNN系列方法无法解决，此时采用 seq2seq 结构
+针对不同任务，通常要对 RNN 模型结构进行少量调整，根据输入和输出的**数量**，分为三种比较常见的结构：
+- N vs N
+- 1 vs N
+- N vs 1
 
-### Seq2Seq 模型介绍
+参考[Seq2Seq 模型知识总结](https://zhuanlan.zhihu.com/p/566073359)
 
-RNN结构大多对序列的**长度**比较局限，对于类似于机器翻译的任务，输入和输出长度并不对等，为 N to M 的结构，简单的RNN束手无策，因此便有了新的模型，`Encoder-Decoder模型`，也就是`Seq2Seq模型`。
+#### （1）`1 to N` 一对多
 
-模型一般由两部分组成：
-- 第一部分是`Encoder`部分，用于对输入的N长度的序列进行表征；
-- 第二部分是`Decoder`部分，用于将Encoder提取出的表征建立起到输出的M长度序列的**映射**。
+在 1 vs N 结构中，只有一个输入 x，和 N 个输出 y1, y2, ..., yN。
+
+有两种方式使用 1 vs N
+- 第一种，只将输入 x 传入**第一个** RNN 神经元
+  - ![](https://pic3.zhimg.com/80/v2-5f422c52d4812964e075e23c7a5f6aaa_1440w.webp)
+- 第二种，将输入 x 传入**所有** RNN 神经元。
+  - ![](https://pic3.zhimg.com/80/v2-7d8c4c6810c760506fb5f12cba57ccb2_1440w.webp)
+- 此类结构的输入长度为1，输出长度为N，一般又可以分为两种：
+  - 一种是将输入**只输入到第一个神经元**, [img](https://img-blog.csdnimg.cn/20210420104214211.png)
+  - 另一种将输入输入到**所有神经元**。[img](https://img-blog.csdnimg.cn/20210420104250996.png)
+
+1 vs N 结构适合用于以下任务：
+- 图像生成文字，一般输入 X 为图片，输出为一段图片描述性的文字；
+  - 输入 x 就是一张图片，输出就是一段图片的描述文字。根据音乐类别，生成对应的音乐。根据小说类别，生成相应的小说。
+- 输入音乐类别，生成对应的音乐
+- 根据小说（新闻情感）类别，生成对应的文字
+
+#### （2）`N to 1` 多对一
+
+和 1 to N 相反，N vs 1 结构中，x是序列，y是单个数值，[img](https://img-blog.csdnimg.cn/20210420105020933.png)
+- ![](https://pic2.zhimg.com/80/v2-0c8bcca238833b3ade8adddb3a4013c5_1440w.webp)
+
+N vs 1 结构适合用于以下任务：
+- 序列分类任务，一段语音、一段文字的类别，句子的情感分析。
+  - 如给定一段文本或语音序列，归类（情感分类，主题分类等）
+
+#### （3）`N to N` 多对多
+
+该模型处理的一般是输入和输出序列**长度相等**的任务，模型结构[图](https://img-blog.csdnimg.cn/20210420103950126.png)
+- ![](https://pic1.zhimg.com/80/v2-77b7baaa0878de28c9c2e5fe2f1c2ed4_1440w.webp)
+
+N vs N 结构，包含 **N个输入** x1, x2, ..., xN，和 **N个输出** y1, y2, ..., yN。
+
+N vs N 的结构中，输入和输出序列的长度是相等的，通常适合用于以下任务：
+- 词性标注
+  - 词性标注训练语言模型，使用之前的词预测下一个词等
+- 语言模型（Language Modeling）
+
+#### （4）`N to M` 多对多
+
+- `N to N`的扩展，RNN系列方法无法解决，此时采用 seq2seq 结构
+
+### Seq2Seq 介绍
+
+上面三种结构对于 RNN 的输入和输出**个数**都有一定的限制，但实际中很多任务的序列的长度是不固定的，例如
+- 机器翻译中，源语言、目标语言的句子长度不一样；
+- 对话系统中，问句和答案的句子长度不一样。
+
+RNN结构大多对序列的**长度**比较局限，输入和输出长度并不对等，为 N to M 的结构，简单的RNN束手无策，因此便有了新的模型，`Encoder-Decoder模型`，也就是`Seq2Seq模型`。
+
+Seq2Seq 是一种重要的 RNN 模型，也称为 `Encoder-Decoder` 模型，可以理解为一种 N×M 模型。
+
+模型包含两个部分：
+- Encoder 用于对输入的N长度的序列进行表征
+  - 编码序列的信息，将任意长度的序列信息编码到一个向量 c 里。
+- Decoder 用于将Encoder表征**映射**到到输出的M长度序列。
+  - 解码器得到上下文信息向量 c 之后可以将信息解码，并输出为序列。
 
 参考：
 - [Seq2Seq 模型详解](https://www.jianshu.com/p/80436483b13b)
 - [csdn](https://blog.csdn.net/angus_huang_xu/article/details/115873866)
 - [深度学习对话系统理论篇--seq2seq+Attention机制模型详](https://bigquant.com/wiki/doc/shendu-xitong-lilun-seq-2-jizhi-moxing-xiangjie-8WJqjtLtxW#h-seq-to-seq-with-attention%E5%90%84%E7%A7%8D%E5%8F%98%E5%BD%A2)
+
+Seq2Seq 提出于2014年，最早由两篇文章独立地阐述了主要思想，分别是
+- Google Brain 团队的《Sequence to Sequence Learning with Neural Networks》
+- Yoshua Bengio团队的《Learning Phrase Representation using RNN Encoder-Decoder for Statistical Machine Translation》。
+
+这两篇文章针对机器翻译的问题不谋而合地提出了相似的解决思路，Seq2Seq由此产生。
 
 Seq2Seq 是一种RNN模型，使用的是 **Encoder-Decoder**结构，可以理解为一种 N * M 的模型，即 **Encoder** 长度可以为N，**Decoder** 长度可以为M。多对多的序列结构
 - **Encoder** 用于编码序列的信息，将任意长度的序列信息编码到一个向量 **c** 里。
@@ -116,6 +187,16 @@ Seq2Seq的模型结构也有很多种，常见的有几种，**Encoder**都相�
 - （2）
 - （3）
 - （4）
+
+Seq2Seq 模型结构有很多种，下面是几种比较常见的：
+- 第一种: c 只与解码器**第一个**隐含层h连接
+  - ![](https://pic2.zhimg.com/80/v2-a164a0a00ca8fa0e44bbcfb8027bdb21_1440w.webp)
+- 第二种: c 与解码器**所有**隐含层h连接
+  - ![](https://pic1.zhimg.com/80/v2-58dbbb75221e149533b5946425046e90_1440w.webp)
+- 第三种: c 与解码器所有**隐含层**h、**输出**y连接
+  - ![](https://pic1.zhimg.com/80/v2-1ffd207cad70a355655346455f5964d4_1440w.webp)
+
+这三种 Seq2Seq 模型的主要区别在于 Decoder，它们的 Encoder 都是一样的
 
 #### 第一种Seq2Seq
 
@@ -213,10 +294,20 @@ Attention各种变形
 
 ### 训练优化
 
-训练技巧
+训练技巧: 参考[Seq2Seq 模型知识总结](https://zhuanlan.zhihu.com/p/566073359)
 - Teacher Forcing
+  - Teacher Forcing 用于训练阶段，主要针对上面第三种 Decoder 模型来说的，第三种 Decoder 模型神经元的输入包括了上一个神经元的输出 y'。如果上一个神经元的输出是错误的，则下一个神经元的输出也很容易错误，导致错误会一直传递下去。而 Teacher Forcing 可以在一定程度上缓解上面的问题，在训练 Seq2Seq 模型时，Decoder 的每一个神经元并非一定使用上一个神经元的输出，而是有一定的比例采用正确的序列作为输入。
+  - 举例，在翻译任务中，给定英文句子翻译为中文。"I have a cat" 翻译成 "我有一只猫"，下图是不使用 Teacher Forcing 的 Seq2Seq：
+  - ![](https://pic3.zhimg.com/80/v2-5b90927d91163d0f8ac2483f303c694a_1440w.webp)
+  - 如果使用 Teacher Forcing，则神经元直接使用正确的输出作为当前神经元的输入。
+  - ![](https://pic4.zhimg.com/80/v2-853ce64000a21c9370a81c840ad5dfa7_1440w.webp)
 - Attention 机制
+  - 在 Seq2Seq 模型，Encoder 总是将源句子的所有信息编码到一个固定长度的上下文向量 c中，然后在 Decoder 解码的过程中向量 c 都是不变的。这存在着不少缺陷(定长向量c表示能力有限)
+  - 与人类的注意力方式不同，即人类在阅读文章的时候，会把注意力放在当前的句子上。Attention 即注意力机制，是一种将模型的注意力放在当前翻译单词上的一种机制。例如翻译 "I have a cat"，翻译到 "我" 时，要将注意力放在源句子的 "I" 上，翻译到 "猫" 时要将注意力放在源句子的 "cat" 上。
+  - 使用了 Attention 后，Decoder 的输入就不是固定的上下文向量 c了，而是会根据当前翻译的信息，计算当前的 c。
+  - ![](https://pic3.zhimg.com/80/v2-8d2fe6640f028a39446fc6bb59c6f24e_1440w.webp)
 - 束搜索（Beam Search）
+  - beam search 方法不用于训练的过程，而是用在测试的。在每一个神经元中，我们都选取当前输出概率值最大的 top k个输出传递到下一个神经元。下一个神经元分别用这 k 个输出，计算出 L 个单词的概率 (L 为词汇表大小)，然后在 kL 个结果中得到 top k 个最大的输出，重复这一步骤。
 
 ### seq2seq实现
 
