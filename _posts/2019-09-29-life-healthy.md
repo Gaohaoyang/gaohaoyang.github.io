@@ -985,6 +985,8 @@ pie title 影响寿命的几大因素
 
 #### 成年人感染
 
+【2022-12-7】北京大学：[阳了怎么办](https://mp.weixin.qq.com/s/62ImP5QEbfY6JFiAV6zxfg)
+
 - ![](https://f.sinaimg.cn/sinakd20221207s/680/w1080h10000/20221207/da8f-63398f925d8b4f2f3cbf8598ada91695.png)
 
 
