@@ -56,6 +56,38 @@ permalink: /work
 - Freelancing is an ideal choice for older workers
 - 自由职业；freelance work、liberal professions
 
+## 北京上班族有多少
+
+【2018-05-31】[大数据：北京100个人中就有44个不工作，收入却很高](https://www.toutiao.com/article/6561664230267814414)，央视新闻公布了一组数据，通过随机抽取的100位北京人，了解生活在自己身边的都是些什么人？这些生活在北京的人都是些什么样的人？
+
+先看看100个人大概有多少，如果你坐地铁，不算早晚高峰，也不算深更半夜，通常状态下所在的车厢就有100个人。
+- 性别：有51个男的，49个女的。
+- 63个人有北京户口，37个人还没有；
+- 有56个人在工作，44个人不工作。
+
+很多人对一线城市的理解是收入高，开销大，看看这节车厢里的人都挣多少钱呢？
+- 在这56个工作的人里，有6个人收入2-3千，17个收入3-6千，16个人收入6千-1万，7个人收入1-1.5万，4个人收入1.5-2万，还有4个人收入2-3万，还有两个人超过3万元——挣这么多，大概也就不坐地铁了。
+
+- 学历，有四个是研究生学历，17个本科学历，13个人是专科，20个人是高中或中职学历，46个人是初中以下学历，还有两个15岁以上不识字的人。
+- 是否上网：有22个人不使用互联网。
+
+北京车多，那这100个人里有多少人有驾照呢？49个！
+- 听起来不少，快一半了，不过得等着摇号才能买车，真正有了车的只有21个人。
+
+如果随机在北京找到100个人，会有16个人超过60岁，好像老人还不是很多。但是如果只看有北京户口的人，那就非常老了，可以说是外来人口在维持着北京的年轻。
+
+|维度|A|B|图|
+|---|---|---|---|
+|性别|男 51|女 49|![](https://p3-sign.toutiaoimg.com/pgc-image/15277561822211cd71f3e8b~noop.image?_iz=58558&from=article.pc_detail&x-expires=1671623422&x-signature=ct2HS9pH5FXFhjBloNAXFvDIjUE%3D)|
+|京户|有 63|无 37|![](https://p3-sign.toutiaoimg.com/pgc-image/15277561961711989077400~noop.image?_iz=58558&from=article.pc_detail&x-expires=1671623422&x-signature=vmBrxe2yQLYZVWE2loW4aa29o4I%3D)|
+|工作|是 56|否 44|![](https://p3-sign.toutiaoimg.com/pgc-image/15277562036010c8fe1145e~noop.image?_iz=58558&from=article.pc_detail&x-expires=1671623422&x-signature=JZb9Sg6ku2JcjLCHP85C1WLS5nA%3D)|
+|上网|是 78|否 22|![](https://p3-sign.toutiaoimg.com/pgc-image/1527756271797c127dc022f~noop.image?_iz=58558&from=article.pc_detail&x-expires=1671623422&x-signature=MH%2BMZh7u%2FaPe9MSXnzI8I%2F9M3cU%3D)|
+|驾照|是 49|否 51|![](https://p3-sign.toutiaoimg.com/pgc-image/1527756281671ca823e2b45~noop.image?_iz=58558&from=article.pc_detail&x-expires=1671623422&x-signature=n7eXrZsDXGHKbU7BF%2FNGfEeg3ck%3D)|
+|有车|是 21|否 79||
+|老人|≥60 16|否 84||
+|收入|≥2w 6|不及 94|![](https://p3-sign.toutiaoimg.com/pgc-image/152775623041408fb4826f9~noop.image?_iz=58558&from=article.pc_detail&x-expires=1671623422&x-signature=1Se4qhV7wQUAS5tgh31BglJ78wc%3D)|
+|学历|≥本科 21|不及 79|![](https://p3-sign.toutiaoimg.com/pgc-image/1527756245726d8bde5d59c~noop.image?_iz=58558&from=article.pc_detail&x-expires=1671623422&x-signature=ZudZP4IZvm84XbJWIm7DTrTdkLQ%3D)|
+|识字|15岁以上识字 98|不识字 2|![](https://p3-sign.toutiaoimg.com/pgc-image/152775625609358b43444ea~noop.image?_iz=58558&from=article.pc_detail&x-expires=1671623422&x-signature=d7YGoyF0losb%2F3e24Du8TVHY19A%3D)|
 
 ## 引言
 
