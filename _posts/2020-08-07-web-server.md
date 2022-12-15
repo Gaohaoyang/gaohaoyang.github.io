@@ -6624,6 +6624,14 @@ if __name__ == "__main__":
 
 ### python生成前端代码
 
+详见：[Python专题](python##模型快速部署)
+
+#### Pynecone
+
+【2022-12-15】GitHub 上的开源 Python 全栈开发框架：[Pynecone](github.com/pynecone-io/pynecone)
+
+#### streamlit
+
 【2021-12-8】[详解一个Python库，用于构建精美数据可视化web app](https://www.toutiao.com/i7039182714125353479/). Python 库 Streamlit，它可以为机器学习和数据分析构建 web app。它的优势是入门容易、纯 Python 编码、开发效率高、UI精美。
 - ![](https://p6.toutiaoimg.com/origin/tos-cn-i-qvj2lq49k0/c26adac17c1d461cb4301318440c8045?from=pc)
 - 对于交互式的数据可视化需求，完全可以考虑用 Streamlit 实现。特别是在学习、工作汇报的时候，用它的效果远好于 PPT。因为 Streamlit 提供了很多前端交互的组件，所以也可以用它来做一些简单的web 应用。
@@ -6743,7 +6751,6 @@ st.write('选择了：', option)
 执行：streamlit run my_code.py ，streamlit 会启动 web 服务，加载指定的源文件。浏览器访问 http://localhost:8501/ 即可。
 
 当源代码被修改，无需重启服务，在页面上点击刷新按钮就可加载最新的代码，运行和调试都非常方便。
-
 
 - **页面布局**。之前我们写的 Streamlit 都是按照代码执行顺序从上至下展示组件，Streamlit 提供了 5 种布局：
   - sidebar：侧边栏，如：文章开头那张图，页面左侧模型参数选择
