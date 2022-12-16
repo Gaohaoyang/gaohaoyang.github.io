@@ -2536,7 +2536,20 @@ transcribe 参数说明
 [00:00.000 --> 00:16.000] 中央政务区的成立,东城区人口总量将会严格管控,坚决落实老城不再拆,保证单头的政委,使得二环内乃至东城区未来都将不再有新增土地。
 # verbose = False
 100%|██████████| 1767/1767 [00:04<00:00, 395.72frames/s]
+```
 
+【2022-12-15】whisper 批处理，[model.transcribe() modified to perform batch inference on audio files #662](https://github.com/openai/whisper/discussions/662)
+- 一次性推理多条语音信息，加速
+- 用户[改写版](https://github.com/Blair-Johnson/batch-whisper/tree/main)
+- ![](https://user-images.githubusercontent.com/43356315/206748537-8ee7fa90-277e-4fc4-806d-4533ae9ff43d.png)
+
+```py
+import whisper
+
+model = whisper.load_model("base")
+results = model.transcribe(["audio1.mp3", "audio2.mp3"])
+print(results[0]['text'])
+print(results[1]['text'])
 ```
 
 
@@ -2580,7 +2593,7 @@ transcribe 参数说明
 - 随着训练数据量的增加，多语言、多任务联合训练对英语本身的语音识别性能也是有帮助的
 
 Whisper 的意义
-- 指明了<span style='color:red'>只要有大规模数据，通过一个简单的 Transformer encoder–decoder 架构就能训练出可靠的语音识别模型</spam>。并且开源了他们的训练权重。
+- 指明了<span style='color:red'>只要有大规模数据，通过一个简单的 Transformer encoder–decoder 架构就能训练出可靠的语音识别模型</span>。并且开源了他们的训练权重。
 - 缺点也很明显，目前 Whisper 对推理基本无优化，Large 模型需要约 10 G 显存，速度也比较慢。不过在未来，肯定会有一系列工作从算法上或者从工程上来优化 Whisper 的推理部署。
 
 
@@ -2648,6 +2661,72 @@ print("模型加载时间：{:.2f}\nasr时间：{:.2f}".format(time_load, time_a
 print(result["text"])
 ```
 
+### 优化
+
+#### 实时 ASR
+
+[Really Real Time Speech To Text #608](https://github.com/openai/whisper/discussions/608)
+- the demo [here](https://github.com/davabase/whisper_real_time)
+
+[Real-time transcription with Whisper on a desktop app #246](https://github.com/openai/whisper/discussions/246)
+
+For many who would rather use a desktop app than a CLI, I made a cross-platform app called Buzz.
+- Here's a [demo](https://www.loom.com/share/564b753eb4d44b55b985b8abd26b55f7)
+- [Repo](https://github.com/chidiwilliams/buzz)
+
+#### 移动设备
+
+[On-device Whisper inference on mobile (iPhone 13 Mini) #407](https://github.com/openai/whisper/discussions/407)
+- 苹果手机上执行whisper
+
+#### 说话人识别
+
+Speaker identification 说话人识别功能实现的几种思路
+
+|序号|思路|详情|优点|缺点|
+|---|---|---|---|--|
+|1|单独用说话人识别|pyannote.audio识别说话人，逐个分片输入 whisper||开销大|
+|2|分离左右声道|将原始语音按左右声道分割成两个文件，分别调研 whisper 再合并|简单|时间信息丢失，难以合并|
+|3|||||
+|4|||||
+
+- 从声音中分离左右声道，再单独使用 whisper 识别，
+
+（1）方法一：pyannote.audio
+
+`pyannote.audio` is an open-source toolkit written in Python for speaker diarization.
+
+Based on PyTorch machine learning framework, it provides a set of trainable end-to-end neural building blocks that can be combined and jointly optimized to build speaker diarization pipelines.
+
+pyannote.audio also comes with pretrained models and pipelines covering a wide range of domains for voice activity detection, speaker segmentation, overlapped speech detection, speaker embedding reaching state-of-the-art performance for most of them.
+
+（2）方法二：声道分割【有问题】
+
+[Speaker diarization using stereo channels #585](https://github.com/openai/whisper/discussions/585)：Speaker diarization 说话人识别（分类）。I've found a series of steps that may work for me:
+1. Using ffmpeg mute one channel (doesnt matter which one) and save the audio file
+1. Using ffmpeg use silencedetect on the newly created audio file from step 1
+1. silencedetect can provide you with a series of start and end times where you can assume the silenced portions of this new audio file represent the "other" speaker.
+1. Use whisper to transcribe the original unmodified audio file
+1. Use the start and end times from step 3 and the timestamps from Whisper to correctly match the transcription to the right speaker.
+
+ffmpeg 分割音频文件为左声道、右声道，分别调用whisper转写，再拼接
+
+问题：分割声道后，时间维度丢失
+- The problem with splitting the channels is that you lose the time dimension. Each channel now has its own start and end times relative to its own audio file.
+
+Steps 1 - 3 on a four hour long audio file completed in under 20 seconds for me.
+
+
+
+（3）方法三
+
+[Transcription and diarization (speaker identification) #264](https://github.com/openai/whisper/discussions/264)
+
+
+[Speaker Prediction using Whisper - Lex Podcasts #624](https://github.com/openai/whisper/discussions/624)
+- I performed speaker prediction on Lex Fridman Podcast captions using hidden states from Whisper, which lead to reasonable results (F1-score of 93%). I explore using the hidden states of various encoder blocks in the Whisper transformer and train a classifier. Using hidden states of some encoder blocks lead to better results than others. I summarized my findings in this [repo](https://github.com/sidhantls/lexpod-speaker-prediction) and [Blog Post](https://sidhantls.github.io/lexpod-speaker-prediction)
+
+
 #### finetune
 
 fine-tune 实践
@@ -2714,11 +2793,260 @@ tts.mainloop()
 
 ## 音频处理
 
-### 音频格式转换
+
+### 音频文件格式
+
+#### 格式总结
+
+【2022-12-16】[10大常见音频文件格式，你知道几个？](https://www.sohu.com/a/468443848_120293876)
+
+所有音频格式中
+- （1）**未压缩**格式存储的文件。因为这些音频文件本质上是未被压缩的。只是将真实世界的声波转换成数字格式保存下来，而不需要进行任何处理。
+  - 未压缩音频格式最大的优点是真实，可以保留录制音频的详细信息，但需要占据较大的存储空间。
+  - 常见的未压缩音频文件格式有3种：wav、aiff、pcm
+- （2）**无损压缩**的音频格式：保持原来的信息，同时降低存储开销
+- （3）**有损压缩**的音频格式：允许损失部分信息，进一步降低存储开销
+
+#### （1）未压缩
+
+未压缩音频文件格式有下面3种：wav、aiff、pcm
+
+PCM、WAV与AIFF的差别
+- AIFF与WAV之间的实际差异并不突出，二者只是版权归属不同。WAV归微软所有，而AIFF归苹果所有。但二者的相同点是非常显著的，即这两种格式都需要依赖PCM技术将模拟声音转换为数字格式。
+- 也就是说，PCM是AIFF和WAV都包含的技术。而具体选择哪种格式主要取决于用户拥有的设备类型。
+
+##### 1. WAV文件格式
+
+- WAV格式是音频文件中使用最广泛的未压缩格式之一。全称是Waveform Audio格式，在1991年由微软和IBM共同推出。音频容器使用未压缩技术，主要用于在CD中存储录音。
+- 尽管这种格式在用户端不是很流行，但它仍然广泛运用于音频录制。因为WAV遵循标准的14位编码，并且采用未压缩技术，所以它的文件比较大。理想情况下，一分钟未压缩WAV文件的大小约为10 MB。不过，用户仍然可以选择使用**无损**压缩技术来压缩WAV文件。
+
+Waveform Audio File Format（WAVE，又或者是因为WAV后缀而被大众所知的）是最常见的声音文件格式之一，是微软公司专门为Windows开发的一种标准数字音频文件，该文件能记录各种**单声道**或**立体声**的声音信息，并能保证声音不失真。
+- 采用`RIFF`（Resource Interchange File Format）文件格式结构。通常用来保存PCM格式的**原始**音频数据，所以通常被称为**无损音频**。但是严格意义上来讲，WAV也可以存储其它压缩格式的音频数据。
+
+文件结构
+- WAV文件遵循RIFF规则，其内容以`区块`（chunk）为最小单位进行存储。
+- WAV文件一般由3个区块组成：**RIFF** chunk、**Format** chunk和**Data** chunk。另外，文件中还可能包含一些可选的区块，如：Fact chunk、Cue points chunk、Playlist chunk、Associated data list chunk等。
+- [wav音频文件解析](https://blog.51cto.com/lhDream/4562094)
+
+wav文件[编辑器](https://zh-cn.aiseesoft.com/resource/wav-editor.html), 该音频格式代表波形音频文件格式。 虽然 WAV文件 可能会占用很多存储空间，但是格式非常易于播放和编辑。 
+- Audacity 是免费和开源的 音频编辑程序
+- WavePad 来自NCH Software，已被广泛使用。 如果要在计算机中编辑WAV文件，此音频编辑器可以是一种直观的解决方案。 通过将不同的曲目和通过录制及全部录制的专业音乐混合在一起，您可以使用该工具来创建音乐融合。 WavePad确实支持几乎所有流行的音频格式，例如MP3，WAV，VOX，GSM，WMA， OGG，AAC等
+- Avid Pro Tools
+- Reaper是一个DAW
+- Abletion Live的一项重要功能是Ableton Live在制作音乐和编辑音频文件之间划清界限。
+- ![](https://www.aiseesoft.com/images/resource/best-audio-editing-software/audacity.jpg)
+
+##### 2. AIFF文件格式
+
+- 和WAV一样，AIFF文件也是未压缩的。AIFF文件格式基于IFF（可互换文件格式），最初由苹果公司推出，这也是苹果公司制造的设备主要支持该格式音频的原因。AIFF格式是在存储CD录音的WAV格式之前3年推出的。目前，苹果用户主要使用的AIFF-C格式就是AIFF格式的压缩版本。
+
+##### 3. PCM音频文件
+
+- PCM音频格式也是一种常用的未压缩格式，它主要用于把音频文件存储到CD和DVD中。PCM代表**脉冲编码调制**，是一种可以将**模拟**音频文件转换为**数字**格式的技术。为了达到理想情况，机器会以不同的间隔对音频文件进行采样，这就对应生成了文件的采样率。线性脉冲编码调制（LPCM）便是用于存储音频文件的PCM格式的子类型之一。
+
+
+#### 无损压缩
+
+未压缩的原始音频文件会占用大量空间，因此建议先压缩这些音频文件再进行存储。通过使用拥有高级算法的**无损压缩技术**，用户可以在缩小文件体积的同时保留原始数据。理想情况下，无损压缩技术可以使<span style='color:blue'>文件大小减小2到5倍</span>，同时仍保留原始数据。
+
+常见的无损压缩音频格式有下面3种：FLAC、ALAC与WMA
+
+FLAC、ALAC与WMA的差别
+- 在所有无损压缩音频文件格式中，最广泛的是FLAC。
+- 由于计算机设备的不同，苹果用户大都使用ALAC，而Windows用户更喜欢WMA。就文件自身而言，FLAC和ALAC都是免版税的压缩技术，而WMA则不是。
+- 此外，WMA遵循严格的DRM限制，传播性比不上FLAC、ALAC。
+
+##### 1. FLAC音频文件
+
+FLAC全称为Free Lossless Audio Codec，自2001年推出以来取得了巨大的发展进步。顾名思义，它是一种免费的开源压缩格式，适用于音频文件的日常存储。该格式可以将音频文件压缩到其原始大小的60％，而不会丢失任何位原始数据。目前，FLAC格式被认为是广为流行的MP3格式的最佳替代品，因为它能够最大程度上保留音频文件的原数据。
+
+##### 2. ALAC文件
+
+ALAC代表Apple无损音频编解码器，是苹果公司开发的一项无损音频压缩技术，于2004年首次推出。为了推广ALAC格式，苹果公司在2011年公开了它的压缩算法，该文件格式因此流行。ALAC编码的两个主要文件扩展名是.m4a和.caf，它们分别代表iOS和Mac的本机压缩格式。由于iOS设备不支持FLAC压缩，因此苹果用户默认使用ALAC扩展。该压缩技术保留了音频的元内容，文件的大小通常只有WAV音频的一半。
+
+##### 3. WMA无损文件
+
+WMA代全称为Windows Media Audio，由微软开发。WMA兼有无损和有损两种压缩模式可供用户选择。无损的WMA压缩技术仅支持DRM格式，不像FLAC和ALAC拥有良好的兼容性。此外，它主要由本机Windows用户使用。总之，WMA无损只是一种适用范围狭小的压缩技术，不建议用于数据传输或分发。
+
+
+#### 有损压缩
+
+有损压缩的音频格式
+
+日常生活中，大多数人并不希望音乐文件占用大量设备空间，因此人们常常使用**有损压损**的音频格式。它们采用有损压缩技术，可以大大减小文件体积，但音频的原始数据也会受到损害。有时，以此格式存储的音乐文件听起来甚至与原始音频毫不相像。
+
+MP3、OGG、AAC和WMA的区别
+- 这4种技术都采用有损压缩技术，但它们彼此之间完全不同。
+- 由于其**开源**优势，MP3是使用最广泛的格式之一，而OGG是最不受欢迎的。
+- AAC主要用于**流媒体**以及索尼和苹果的设备。
+- WMA则多为**微软**用户使用。
+- 虽然AAC和WMA提供的压缩文件质量比MP3更好，但不如MP3受欢迎。举一个最简单的例子，人们仍喜欢将音乐播放器称为“MP3播放器”而不是“AAC播放器”，这有力地证明了MP3格式无与伦比的普及度。
+
+##### 1. MP3文件格式
+
+MP3无疑是各种领先平台和设备都能接受的最流行的音频格式。它代表MPEG-1音频第3层，于1993年由运动图像专家组首次推出。该压缩技术消除了人耳无法听到的所有声音以及噪声，专注于实际音频数据，这可以将音频文件的体积减小75％到90％。MP3也被称为通用音乐扩展，因为几乎每个媒体设备都支持此种开放格式。
+
+##### 2. OGG文件
+
+OGG是一个免费的开源容器，主要与Vorbis文件相关联。由于Vorbis的发布，文件容器（和扩展）在21世纪初广为流行。虽然OGG的压缩技术非常复杂，但它并未取得成果，目前也没有在市场上被广泛使用。
+
+##### 3. AAC音频文件
+
+AAC代表高级音频编码，可用作常见扩展的容器，如.3gp，.m4a，.aac等。它是iTunes，iOS，Sony Walkmans，Playstations，YouTube等设备的默认编码技术。此压缩格式是在MP3发布后不久开发的，于1997年正式发布。虽然它不像MP3那么受欢迎，但人们普遍认为AAC文件的音质更好。
+
+##### 4. WMA有损文件
+
+自从1999年微软发布WMA格式以来，它经历了许多发展演变。WAM格式可以根据用户需求采用有损压缩技术或无损压缩技术。它可以在保留大部分数据的同时大幅减小音频文件的大小。虽然该格式的输出文件质量优于MP3，但它的版权独属微软并且使用受到DRM限制，因此没有受到广泛欢迎。
+
+
+### 格式转换
+
+#### 工具
 
 m4a → mp3：
 - [M4A转MP3 - 在线转换音频文件](https://www.aconvert.com/cn/audio/m4a-to-mp3/)，格式多，但下载受阻
 - [m4a->mp3](https://m4atomp3.net/zh)，可以下载
+
+#### Python处理音频
+
+【2022-12-16】[Python 多种音乐格式批量转换实战教程](https://www.51cto.com/article/716207.html)
+- Pydub 是一个基于 ffmpeg 的 Python 音频处理模块，封装了许多 ffmpeg 底层接口，因此用它来做音乐歌曲文件格式转换会非常方便。
+
+```py
+song = AudioSegment.from_wav("test_audio.wav") # wav 文件
+song.export("test_audio_wav-mp3.mp3", format="mp3")
+song = AudioSegment.from_ogg("test_audio.ogg") # ogg 文件
+song.export("test_audio_ogg-mp3.mp3", format="mp3")
+AudioSegment.from_file("test_audio.flac") # flac 文件
+song.export("test_audio_flac-mp3.mp3", format="mp3")
+```
+
+#### mp3转其他
+
+```py
+from pydub import AudioSegment
+
+def trans_mp3_to_any_audio(filepath, audio_type):
+   """
+   将mp3文件转化为任意音频文件格式
+   Args:
+       filepath (str): 文件路径
+       audio_type(str): 文件格式
+   """
+   song = AudioSegment.from_mp3(filepath)
+   filename = filepath.split(".")[0]
+   song.export(f"{filename}.{audio_type}", format=f"{audio_type}")
+# 调用
+trans_mp3_to_any_audio("Alone.mp3", "ogg")
+```
+
+只要是ffmpeg支持的音乐音频格式，它都可以转换，支持的格式长达几十个，下面我简单列一些：
+- wav,avi,mp4,flv,ogg,flac,ape,mp2,aiff,voc,au
+
+#### 任意格式间相互转换
+
+
+```py
+from pydub import AudioSegment
+
+def trans_any_audio_types(filepath, input_audio_type, output_audio_type):
+   """
+   将任意音频文件格式转化为任意音频文件格式
+   Args:
+       filepath (str): 文件路径
+       input_audio_type(str): 输入音频文件格式
+       output_audio_type(str): 输出音频文件格式
+   """
+   song = AudioSegment.from_file(filepath, input_audio_type)
+   filename = filepath.split(".")[0]
+   song.export(f"{filename}.{output_audio_type}", format=f"{output_audio_type}")
+# 调用
+trans_any_audio_types("Alone.ogg", "ogg", "flv")
+```
+
+#### 批量转换
+
+```py
+def trans_all_file(files_path, target="mp3"):
+   """
+   批量转化音频音乐格式
+   Args:
+       files_path (str): 文件夹路径
+       target (str, optional): 目标音乐格式. Defaults to "mp3".
+   """
+   for filepath in os.listdir(files_path):
+       # 路径处理
+       modpath = os.path.dirname(os.path.abspath(sys.argv[0]))
+       datapath = os.path.join(modpath, files_path + filepath)
+       # 分割为文件名字和后缀并载入文件
+       input_audio = os.path.splitext(datapath)
+       song = AudioSegment.from_file(datapath, input_audio[-1].split(".")[-1])
+       # 导出
+       song.export(f"{input_audio[0]}.{target}", format=target)
+# 调用
+trans_all_file("file/music/")
+```
+
+### 声道分离
+
+【2022-12-16】[语音处理：Python实现立体声音频的声道分离批量处理](https://zhuanlan.zhihu.com/p/455743503)
+- 语音处理任务中，有时需要对**立体声**或**多声道**音频文件，批量处理成单声道文件，然后送入算法模型进行处理。
+
+编码思路
+1. 用Python的 wavfile 包
+1. 先读取**多声道**音频到 data
+1. 将data中的**左右声道**分别提取到list中
+1. 将list数据写入新的**单声道**音频文件
+
+```py
+from scipy.io import wavfile
+
+def split_stereo(input_path, output_path):
+    # default stereo
+    samplerate, data = wavfile.read(input_path)
+    left = []
+    right = []
+    for item in data:
+        left.append(item[0])
+        right.append(item[1])
+    file_name = input_path.split('\\')[-1]
+    file_name = file_name.split('.')[0]
+    outfile_name = file_name + '_1ch_left.wav'
+    out_path_file = os.path.join(output_path, outfile_name)
+    wavfile.write(out_path_file, samplerate, np.array(left))
+    # wavfile.write('right.wav', samplerate, np.array(right))
+```
+
+注意
+- 这个代码只适用于未压缩的WAV声音文件！压缩文件会报错
+- 压缩文件使用soundfile
+
+```py
+import soundfile as sf
+
+musicFileName = "1016(37)_13733163362(4)_In_20190808140419.wav"
+sig, sample_rate = sf.read(musicFileName)
+print("采样率：%d" % sample_rate)    
+print("时长：", sig.shape[0]/sample_rate, '秒')    
+
+serviceData = sig.T[0]
+clientData = sig.T[1]
+print(serviceData)
+print(clientData)
+# -------- 可视化 ---------
+import matplotlib.pyplot as plt
+import numpy as np
+ 
+plt.figure()
+l=sig.shape[0]
+x = [i/8000 for i in range(l)]
+#plt.plot(x, clientData, c='r')
+plt.plot(x, serviceData, c='r', alpha=0.8)
+plt.plot(x, clientData, c='b', alpha=0.8)
+plt.show()
+```
+
+![](http://www.siyuanblog.com/wp-content/uploads/2019/08/serviceData-clientData.png)
 
 ### ffmpeg
 
