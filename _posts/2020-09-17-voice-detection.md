@@ -2697,6 +2697,9 @@ Based on PyTorch machine learning framework, it provides a set of trainable end-
 
 pyannote.audio also comes with pretrained models and pipelines covering a wide range of domains for voice activity detection, speaker segmentation, overlapped speech detection, speaker embedding reaching state-of-the-art performance for most of them.
 
+- 代码：[colab](https://colab.research.google.com/drive/12W6bR-C6NIEjAML19JubtzHPIlVxdaUq?usp=sharing#scrollTo=dRQPUW4Mzvfn)
+- 效果[Freeman Dyson - Pure mathematics at Cambridge: the influence of Besicovitch](https://majdoddin.github.io/dyson.html#00:03:42.65)
+
 （2）方法二：声道分割【有问题】
 
 [Speaker diarization using stereo channels #585](https://github.com/openai/whisper/discussions/585)：Speaker diarization 说话人识别（分类）。I've found a series of steps that may work for me:
