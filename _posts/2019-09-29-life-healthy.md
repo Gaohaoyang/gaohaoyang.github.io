@@ -1227,6 +1227,9 @@ pie title 影响寿命的几大因素
 - IgM抗体阳性，说明患者处于感染**早期**，IgG抗体阳性说明感染**过**新冠病毒，但不能确定其是否具有传染性。
 - 与`抗体检测`相比，`核酸检测`更加灵敏，也是实验室检测的“金标准”。
 
+当我们身体出现症状2天左右，抗体就已产生，否则我们的抗原检测也不会有反应。只是我们人体先产生的是短效抗体 lgM，晚几天才是长效抗体 lgG，而后者一般需要 2 周左右的时间才能达到一个较高水平。
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/TR0RxzzE78iUu5~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672712911&x-signature=4q2w3mft2Vjzl4ONwjG91xIG56A%3D)
+
 不测抗原不测核酸怎么判断“阳康”？怎么判断自己不再具有传染性 - [今日头条](https://m.toutiao.com/is/havPMDs/)
 
 核酸判断
