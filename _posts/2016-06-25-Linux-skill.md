@@ -4581,6 +4581,25 @@ set smartcase " 如果同时打开了ignorecase，那么对于只有一个大写
 - Jupyther notebook ,也就是一般说的 Ipython notebook，是一个可以把代码、图像、注释、公式和作图集于一处，从而实现可读性分析的一种灵活的工具。 
 - 默认情况下，Jupyter Notebook 使用Python内核，这就是为什么它原名 IPython Notebook。Jupyter notebook是Jupyter项目的产物——Jupyter这个名字是它要服务的三种语言的缩写：Julia，Python和R，这个名字与“木星（jupiter）”谐音。
 
+## jupyter 教程
+
+[Jupyter资源与工具库大全](https://github.com/HanXinzi-AI/awesome-jupyter-resources)
+
+- Notebook环境 13 个项目
+- 交互式小部件和可视化 49 个项目
+- Jupyter拓展 23 个项目
+- Jupyter-magic拓展 10 个项目
+- Jupyter内核 36 个项目
+- Jupyter-Notebook分享与格式转换 23 个项目
+- Jupyter-Notebook工具 24 个项目
+- JupyterLab渲染器 7 个项目
+- JupyterLab主题 8 个项目
+- JupyterLab扩展 50 个项目
+- JupyterHub认证 15 个项目
+- JupyterHub容器等 8 个项目
+- Jupyter组件 3 个项目
+- Others 4 个项目
+
 ## 安装
 
 - 安装：
@@ -4591,7 +4610,6 @@ pip install jupyter
 ```shell
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 ```
-
 
 ## 扩展功能：加强版+自定义主题
 
