@@ -62,11 +62,23 @@ mathjax: true
 
 ## 文本摘要
 
+### 文本摘要总数
+
+- 【2020-9-5】[文本摘要综述](https://github.com/xcfcode/What-I-Have-Read/blob/master/slides/presentation/%E6%96%87%E6%9C%AC%E6%91%98%E8%A6%81%E7%AE%80%E8%BF%B0.pdf)
+   - ACL 2020论文：Extractive Summarization as Text Matching，[文本摘要新框架，抽取式摘要“轻松”取得SOTA](https://zhuanlan.zhihu.com/p/133096909)，打破原有的解决抽取式摘要的思路，这里提出了一个全新的范式：将抽取式摘要任务转化为一个语义匹配的问题。代码[MatchSum](https://github.com/maszhongming/MatchSum)，eight Tesla-V100-16G GPUs to train our model, the training time is about 30 hours
+   - [Text Summarization on WikiHow](https://paperswithcode.com/sota/text-summarization-on-wikihow)，第一名[代码](https://github.com/nlpyang/PreSumm)
+
+### Demo
+
+- 【2022-12-29】[TLDR This](https://tldrthis.com/) helps you summarize any piece of text into concise, easy to digest content so you can free yourself from information overload.
+
+
 [Bert-MRC](https://github.com/jasoncao11/nlp-notebook/tree/master/3-1.Bert-MRC)
 
 文本摘要生成
 
 ### 1). 生成式
+
 - 4-1. [Seq2seq 模型](https://github.com/jasoncao11/nlp-notebook/tree/master/4-1.Seq2seq)
 - 4-2. [Seq2seq 模型+注意力机制](https://github.com/jasoncao11/nlp-notebook/tree/master/4-2.Seq2seq_Att)
 - 4-3. [Transformer 模型](https://github.com/jasoncao11/nlp-notebook/tree/master/4-3.Transformer)
@@ -74,6 +86,7 @@ mathjax: true
 - 4-5. [Bert-seq2seq](https://github.com/jasoncao11/nlp-notebook/tree/master/4-5.Bert-seq2seq)
 
 ### 2). 抽取式
+
 - 4-6. [Bert-extractive-summarizer](4-6.Bert-extractive-summarizer)
 
 # 分类
