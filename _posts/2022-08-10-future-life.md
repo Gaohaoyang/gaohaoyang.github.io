@@ -31,6 +31,13 @@ mathjax: true
 - ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/1edef7e8dd6a4079945322cd2a5cde3b~tplv-obj:1200:1850.image?from=post&x-expires=1673020800&x-signature=5toiLaZ6ScxqKerRwWlv1xGz7Gc%3D)
 
 
+### 2023年经济趋势
+
+【2022-12-29】路口大爷：[23年经济怎么看？别听专家，看企业怎么做](https://www.bilibili.com/video/BV1m14y1w72A)
+
+
+
+
 ## 新冠疫情对未来的影响
 
 
