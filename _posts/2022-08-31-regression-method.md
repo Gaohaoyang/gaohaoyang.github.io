@@ -558,6 +558,135 @@ evaluation(y,y_pred,index_name='enet_reg ')
 - 季节差分：计算观察值与同一季节的先前观察值之间的差异，yt‘ = yt – y(t-n)
 - 变换：变换用于对方差为非常数的序列进行平稳化。常用的变换方法包括幂变换、平方根变换和对数变换。
 
+### 如何衡量序列相似度
+
+【2022-12-30】[有哪些有效的可以衡量两段或多段时间序列相似度的方法？](https://www.zhihu.com/question/281783839/answer/2374454799)
+
+一个好的相似度度量方法(Similarity Measure)需要具备哪些好的性质？
+1. Similarity Measure 能够识别在感觉上比较相似、但是在数学意义上不完全一样的物体。
+  - ![](https://picx.zhimg.com/80/v2-79dfd3b2c6a9b3132d72442523279370_1440w.webp?source=1940ef5c)
+2. Similarity Measure 的结果应该**和人类直觉相符合**。如果枫叶和扇形叶子的形状很相似，那只能说扯蛋。
+3. Similarity Measure, 不管在**全局**(global)，还是**局部**(local)水平上，都应该重点关注一个物体的**显著特征**，而不是鸡毛蒜皮的无关细节。
+  - 比如说，枫叶和扇形叶子很相似，因为它们的边缘都是呈现**小锯齿状**(local feature)。
+  - 两片扇形叶子很相似，因为它们都是**扇形**(global feature)。有道理。 
+  - 但是枫叶和扇形叶子很相似，因为它们上面都有泥巴，只能说“我不关心这个”。
+  
+上面三点描述的是通用的Similarity Measure，现在来讨论 Time Series Similarity Measure.
+1. 除了以上的通用方面外，对于一个好的 Time Series Similarity Measure 来讲，它应该能够比较两个**长度不相等**的时间序列。(然而，如果两条时间序列长度相差太大，计算它们的相似度也会变得没有意义)
+2. 一个好的Time Series Similarity Measure的复杂度应该越低越好。换句话说，Time Complexity 和 Space Complexity 都要小。
+3. 一个好的Time Series Similarity Measure 应该对各种**扭曲**(distortion)和**变换**(transformation)不敏感。
+
+具体有哪些distortion和transformation呢？
+- ![](https://pic1.zhimg.com/80/v2-03404dbdbf4840b0a78dc00dac550b97_1440w.webp?source=1940ef5c)
+
+理想情况下，上面六对时间序列应该被看作是相似的。也就是说，一个好的Time Series Similarity Measure应该对这些扭曲和变换不敏感。
+
+```py
+# 用于复现上述distortion, transformation 的python代码
+import numpy as np
+import matplotlib.pyplot as plt
+fig, axs = plt.subplots(3,2)
+
+## Raw time series
+time = np.arange(0, 10, 0.1); 
+amplitude  = np.sin(time)
+
+axs[0,0].plot(time, amplitude, alpha = 0.5)
+axs[1,0].plot(time, amplitude, alpha = 0.5)
+axs[2,0].plot(time, amplitude, alpha = 0.5)
+axs[0,1].plot(time, amplitude, alpha = 0.5)
+axs[1,1].plot(time, amplitude, alpha = 0.5)
+axs[2,1].plot(time, amplitude, alpha = 0.5)
+
+## Amplitude shifting 
+time = np.arange(0, 10, 0.1); 
+amplitude  = np.sin(time)+2
+axs[0,0].plot(time, amplitude)
+axs[0,0].set_title("Amplitude shifting")
+
+## Uniform amplification
+time = np.arange(0, 10, 0.1); 
+amplitude  = np.sin(time)*2
+axs[1,0].plot(time, amplitude)
+axs[1,0].set_title("Uniform amplification")
+
+## Uniform time scaling
+time = np.arange(0, 10, 0.1); 
+amplitude  = np.sin(time*2)
+axs[2,0].plot(time, amplitude)
+axs[2,0].set_title("Uniform time scaling")
+
+## Dynamic amplification
+time = np.arange(0, 10, 0.1); 
+amplitude  = np.sin(time)*time
+axs[0,1].plot(time, amplitude)
+axs[0,1].set_title("Dynamic amplification")
+
+## Dynamic time scaling
+time = np.arange(0, 10, 0.1); 
+amplitude  = np.sin(time*time)
+axs[1,1].plot(time, amplitude)
+axs[1,1].set_title("Dynamic time scaling")
+
+## Noises
+time = np.arange(0, 10, 0.1); 
+amplitude  = np.sin(time)+np.random.normal(0,0.1,100)
+axs[2,1].plot(time, amplitude)
+axs[2,1].set_title("Noises")
+```
+
+现有的时间序列相似度度量方法(Time Series Similarity Measure)分类
+
+Time Series Similarity Measure大概可以分为四类：
+- 基于**形状**的(Shape Based Time Series Similarity Measure)
+  - 通过比较时间序列的整体形状来计算相似度。
+  - ![](https://picx.zhimg.com/80/v2-fa103e507762dc843695c57da4701c80_1440w.webp?source=1940ef5c)
+  - 这一类方法包括了大名鼎鼎的 Euclidean distance 和 DTW。主要包括以下方法：
+  - Euclidean Distance and other Lp norms. 
+  - Dynamic Time Warping (DTW)
+  - Spatial LB-Keogh (variant of DTW) 
+  - Assembling (SpADe)
+  - Optimal Bijection (OSB)DISSIM
+- 基于**编辑距离**的(Edit Based Time Series Similarity Measure)
+  - 通过计算“最少需要多少步基本操作来把一段时间序列变成另外一段时间序列”来衡量相似度。
+  - ![](https://pic1.zhimg.com/80/v2-b48b46db1fdefa94625b311cd6293633_1440w.webp?source=1940ef5c)
+  - 举个例子，给定两个序列：ABC，ABD，以及三个基本操作“删除、添加、替换”，我们最少需要一个基本操作“替换”(C替换成D)，将ABC编程ABD. 
+  - 主要包括以下方法：
+  - Levenshtein
+  - Weighted Levenshtein
+  - Edit with Real Penalty (ERP)
+  - Time Warp Edit Distance (TWED)
+  - Longest Common SubSeq (LCSS)
+  - Sequence Weighted Align (Swale)
+  - Edit Distance on Real(EDR)
+  - Extended Edit Distance(EED)
+  - Constraint Continuous  Edit(CCED)
+- 基于**特征**的(Feature Based Time Series Similarity Measure)
+  - 首先提取出时间序列的特征，比如说统计学特征(最大值、最小值、均值，方差等)，或者是通过FFT提取出Amplitude, Energy, Phase, Damping Ratio, Frequency)等特征，然后直接计算这些特征之间的Eclidean distance 然后再求和。
+  - ![](https://pic1.zhimg.com/80/v2-3854c707129d85dfabcb795fb408623a_1440w.webp?source=1940ef5c)
+  - 主要包括以下方法(也就是不同的特征提取和比较方法)：
+  - Likelihood
+  - Autocorrelation
+  - Vector quantization
+  - Threshold Queries (TQuest)
+  - Random Vectors
+  - Histogram 
+  - WARP
+- 基于**结构**的(Structure Based Time Series Similarity Measure)
+  - 上面三种时间序列相似度度量方法适用于**短**时间序列，对于较长的时间序列(比如说几万个点的时间序列)，前面三大类方法很可能会失效。于是，就有了第四类方法。前面三大类方法之所以失效，是因为它们过多关注**局部特征**(local feature)，而忽略了**全局特征**(Global feature)。
+  - 而第四类方法的基本思想是：关注**全局特征**。这一类方法可以进一步分为两类：基于**模型**的(model-based distance) 和 基于**压缩**的(Compression-based distance).
+  - Model-based distance假设时间序列服从某个分布/模型，然后估计模型参数，最后通过比较模型参数之间的差异来反映时间序列的相似度。主要包括以下方法：
+    - Markov Chain(MC)
+    - Hidden Markov Models(HMM)
+    - Auto-Regressive(ARMA)
+    - Kullback-Leibler
+  - Compression-based distance通过研究两个时间序列在一起压缩的压缩率来反映相似度。直观上，如果两个时间序列比较相似，则它们在一起压缩就比较容易。
+    - Compression Dissimilarity(CDM)
+    - Parsing-Based
+- 详见原文：[林德博格的回答](https://www.zhihu.com/question/281783839/answer/2374454799)
+
+
+
 ## 时间序列预测方法
 
 ### 数据集准备
