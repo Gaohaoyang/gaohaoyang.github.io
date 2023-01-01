@@ -635,6 +635,24 @@ pie title 影响寿命的几大因素
 
 # 医疗防护知识
 
+## 医院知识
+
+### 医院纪录片
+
+【2023-1-1】上海瑞金医院急诊室实拍，《人间世》，[视频合集](http://www.docuchina.cn/2017/04/05/VIDA0CKpxGgJhIlUCFjquxDW170405.shtml)
+- 《人间世》 [第一集 救命](http://www.docuchina.cn/2017/04/05/VIDEalYoTKi24hmjUCiYSF5u170405.shtml)
+- 《人间世》 [第二集 理解](http://www.docuchina.cn/2017/04/05/VIDE7eeO7eB88PC1S0I6Nb0K170405.shtml)
+- 《人间世》 [第三集 团圆](http://www.docuchina.cn/2017/04/05/VIDETBf5yPlHWogi26zcKn1P170405.shtml)
+- 《人间世》 [第四集 告别](http://www.docuchina.cn/2017/04/05/VIDEQ1F8qQHMZdlZUAHhI1KL170405.shtml)
+- 《人间世》 [第五集 选择](http://www.docuchina.cn/2017/04/05/VIDEzVErhTbPxCS0vmwbSsS2170405.shtml)
+- 《人间世》 [第六集 信任](http://www.docuchina.cn/2017/04/05/VIDEZr3xhvWd9ktfv9DHBjsY170405.shtml)
+- 《人间世》 [第七集 新生](http://www.docuchina.cn/2017/04/05/VIDEurUHN9ckAcNFdZmINqID170405.shtml)
+- 《人间世》 [第八集 坚持](http://www.docuchina.cn/2017/04/05/VIDEk0xpWFqn32RFMdcM63oN170405.shtml)
+- 《人间世》 [第九集 爱](http://www.docuchina.cn/2017/04/05/VIDEbebjAe2iLsn58frcC56E170405.shtml)
+- 《人间世》 [第十集 人间世](http://www.docuchina.cn/2017/04/05/VIDE1utQ95iv3obymYsZGhvl170405.shtml)
+
+
+
 ## 医院科室
 
 【2022-11-28】在医院各科室之中，流传着这样的一首[儿歌](https://v.ixigua.com/rWgt3Bm/)
