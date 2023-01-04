@@ -1263,7 +1263,30 @@ st->ldata->e
 - 来必力，源自韩国
 
 【2022-9-28】gitment和gitalk都出现故障，Error: Bad credentials，[gitment帖子](https://github.com/imsun/gitment/issues/145)，[gitalk帖子](https://github.com/gitalk/gitalk/issues/363)
+	
+#### utteranc.es
+	
+【2023-1-4】基于github的新插件 [https://utteranc.es/](https://utteranc.es/)，正常使用，见[示例](https://yangruoqi.site/golang-web-tips/)
+- A lightweight comments widget built on GitHub issues. Use GitHub issues for blog comments, wiki pages and more!
+- Open source. 🙌
+- No tracking, no ads, always free. 📡🚫
+- No lock-in. All data stored in GitHub issues. 🔓
+- Styled with Primer, the css toolkit that powers GitHub. 💅
+- Dark theme. 🌘
+- Lightweight. Vanilla TypeScript. No font downloads, JavaScript frameworks or polyfills for evergreen browsers. 🐦🌲
 
+#### giscus 
+
+[giscus](https://giscus.app/zh-CN) 由 GitHub Discussions 驱动的评论系统。让访客借助 GitHub 在你的网站上留下评论和反应. 本项目受 utterances 强烈启发。
+- 开源。🌏
+- 无跟踪，无广告，永久免费。📡 🚫
+- 无需数据库。全部数据均储存在 GitHub Discussions 中。:octocat:
+- 支持自定义主题！🌗
+- 支持多种语言。🌐
+- 高度可配置。🔧
+- 自动从 GitHub 拉取新评论与编辑。🔃
+- 可自建服务！🤳
+	
 #### 多说
 
 【2022-9-28】已失效
