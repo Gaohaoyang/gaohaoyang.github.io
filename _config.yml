@@ -22,12 +22,12 @@ github_home:  http://wqw547243068.github.com
 email: wqw547243068@163.com
 weibo_username: u/1232977597
 zhihu_username: wangqiwen
-linkedIn_username:
+linkedIn_username: 奇文-王-519888bb
 dribbble_username:
 
 description_footer: 学习资料汇总
 
-# ======= 评论插件 ============
+# ======= 评论插件 =========
 # [2023-1-5] 只保留utteranc.es和来必力
 # comments
 comments: true
@@ -38,7 +38,7 @@ gitment_open: 0 # gitment 插件，有故障
 # duoshuo_shortname: wqw547243068 # 【2022-9-28】duoshuo已失效
 disqus_shortname: wqw # [2019-04-29]vpn，通过google账号申请，https://wqw.disqus.com/admin/install/platforms/jekyll/
 
-livere_open: 0 # 来必力插件
+livere_open: 1 # 来必力插件
 # 【2019-07-25】韩国来必力评论系统 Support for LiveRe comments system.
 # You can get your uid from https://livere.com/insight/myCode (General web site)
 livere_uid: MTAyMC80NTU2OC8yMjA3OQ==
@@ -50,6 +50,7 @@ comment_gitalk_clientId: a34109f2e38d41848408
 comment_gitalk_clientSecret: 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
 #comment_gitalk_clientSecret: 36babd95c5defd040547c81bb1a12008194e73a6 # 新token导致gitalk无法完全展现
 comment_gitalk_repo: wqw547243068.github.io
+
 # ======== 网站统计 =========
 # statistic analysis 统计代码
 # 百度统计 id，将统计代码替换为自己的百度统计id，即
