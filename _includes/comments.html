@@ -1,4 +1,5 @@
 
+{% if site.utterance_open %}
 <!-- 【2023-1-4】github新插件utteranc.es -->
 <script src="https://utteranc.es/client.js"
         repo="{{site.github_username}}/{{site.github_reponame}}"
@@ -7,7 +8,28 @@
         crossorigin="anonymous"
         async>
 </script>
+{% endif %}
 
+{% if site.giscus_open %}
+<!-- 【2023-1-4】github新插件giscus, 暂未启用 -->
+<script src="https://giscus.app/client.js"
+        data-repo="{{site.github_username}}/{{site.github_reponame}}"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkxNDE3ODEwMzg="
+        data-category="Announcements"
+        data-category-id="DIC_kwDOCHNoLs4CRJjU"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
+{% endif %}
+
+{% if site.gitment_open %}
 <!-- Gitment评论插件: https://frankjkl.github.io/2019/01/08/blogbuild-%E5%9C%A8Jekyll%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0gitment%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/ -->
 <div id="gitmentContainer"></div>
 <!-- <link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css"> -->
@@ -30,11 +52,12 @@ var gitment = new Gitment({
 });
 gitment.render('gitmentContainer');
 </script>
+{% endif %}
 
+{% if site.gitalk_open %}
 <!-- gitalk评论插件: https://github.com/gitalk/gitalk/blob/master/readme-cn.md -->
 <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-
 <!-- Gitalk start -->
 <div id="gitalk-container"></div> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script> 
@@ -52,10 +75,10 @@ gitment.render('gitmentContainer');
     gitalk.render('gitalk-container')
 </script> 
 <!-- Gitalk end -->
-
-<p> --多说-- </p>
+{% endif %}
 
 {% if site.duoshuo_shortname %}
+<p> --多说-- </p>
 <!-- 多说评论框 start -->
 <div class="ds-thread" data-thread-key="{{ site.url }}{{ page.url }}" data-title="{{page.title}}" data-url="{{ site.url }}{{ page.url }}"></div>
 <!-- 多说评论框 end -->
@@ -76,9 +99,9 @@ gitment.render('gitmentContainer');
 <!-- 多说公共JS代码 end -->
 {% endif %}
 
-<p> --disqus-- </p>
 <!-- disqus插件 -->
 {% if site.disqus_shortname %}
+<p> --disqus-- </p>
 <div id="disqus_thread"></div>
 <script>
     /**
@@ -103,6 +126,7 @@ gitment.render('gitmentContainer');
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 {% endif %}
 
+{% if site.livere_open %}
 <p> --来必力-- </p>
 <!-- 来必力评论插件 -->
     {% if not (site.duoshuo and site.duoshuo.shortname) and not site.duoshuo_shortname and not site.disqus_shortname and not site.hypercomments_id and not site.gentie_productKey %}
@@ -138,5 +162,5 @@ gitment.render('gitmentContainer');
 <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
 </div>
 <!-- City版安装代码已完成 -->
-
+{% endif %}
 
