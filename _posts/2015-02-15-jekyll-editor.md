@@ -1662,6 +1662,8 @@ _includes文件夹下 head.html文件在 </head>之前添加
 
 ### 相关文章卡片
 
+【2023-1-6】[原博客](https://gaohaoyang.github.io/2022/10/15/ferris-wheel/)中有卡片轮播效果，具体哪里设置，未知
+
 【2022-11-10】[3分钟实现响应式卡片悬停效果 html+css](https://juejin.cn/post/6969204776437301261)
 - ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/399c76328c96419390ce48022a897415~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.image)
 
