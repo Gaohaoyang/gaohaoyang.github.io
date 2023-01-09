@@ -1726,6 +1726,230 @@ fmt.Println("三层取地址:",&copyWriteDict["female"][1]["real"]) //cannot tak
 - （1）不传指针 
 - （2）提前用临时变量缓存，再传非map类的地址
 
+
+### 有序map：orderedmap
+
+【2023-1-9】[如何有序遍历map](https://juejin.cn/post/7006197015319166990)
+
+#### map为什么无序
+
+原生的 Map 为什么无序？
+- 遍历 Map 的打印的时候，会注意到内容是无序的。
+- map中的元素迭代的时候是**无序**的，所以使用 encoding/json 进行**序列化**时，默认是按照**字典序**排序的。
+
+Map 底层实现原理：
+- 遍历 Map 时，是按顺序遍历 bucket ，然后再按顺序遍历 bucket 中 的 key（bucket 里面是个链表）。
+- 然而，Map 在扩容时，key 会发生迁移，从旧 bucket 迁移到新的 bucket，这种情况下，是做不到有序遍历的。
+
+map 核心元素是`桶`，key通过**哈希算法**被归入不同的bucket中，key是无序的
+- 很多应用场景可能需要map key有序（例如交易所订单撮合），C++ 的stl map实现了key有序，实际上是`TreeMap`是基于树（**红黑树**）的实现方式，即添加到一个有序列表，在O(logn)的复杂度内通过key值找到value，优点是空间要求低，但在时间上不如HashMap。
+
+- Go 官方直接在遍历开始，使用 fastrand 随机选一个 buckct 作为起始桶。
+
+#### 如何实现有序遍历
+
+思路一：实现快
+- 将 Map 中的 key 拿出来，放入 slice 中做**排序**
+
+```go
+func main() {
+	m := make(map[string]string)
+	m["name"] = "Bob"
+	m["age"] = "25"
+	m["gender"] = "male"
+	keys := make([]string, 0)
+	for k := range m {
+		keys = append(keys, k)
+	}
+	//排序 key
+	sort.Strings(keys)
+	for _, key := range keys {
+		println(m[key])
+	}
+}
+```
+
+思路二：一劳永逸
+- 利用官方库里的 list(链表) 封装一个结构体，实现一个有序的 K-V 存储结构，在里面维护一个 keys 的 list。
+
+为什么使用 list 而不是参考思路一用 slice 来保证有序？
+- 因为 list 可以实现 insertBefore、insertAfter 类似的方法，而 slice 实现相对复杂。
+- 参考: [orderedmap](https://github.com/elliotchance/orderedmap)
+
+```go
+package orderedmap
+import "container/list"
+
+//......更多细节请看源码
+//OrderedMap 核心数据结构
+type OrderedMap struct {
+   //存储 k-v,使用 *list.Element 当做 value 是利用 map O(1) 的性能找到 list 中的 element
+   kv map[interface{}]*list.Element 
+   //按顺序存储 k-v，保证插入、删除的时间复杂度O(1)
+   ll *list.List
+}
+//......更多细节请看源码
+```
+
+总结
+- Golang 中 Map之所以放弃**有序**遍历，也是出于**性能**和**复杂度**的考虑。
+- 这也是为什么上面的思路都或多或少地都比原生Map使用起来复杂了许多。
+
+#### orderedmap
+
+[go ordermap讲解](https://juejin.cn/post/7057389822477860900)
+
+源码说明
+
+1. orderedmap数据结构
+
+有序map包含三个元素。其中escapeHTML表示是否转义HTML字符，默认为true表示转义。可以调用SetEscapeHTML(false)方法来设置不转义HTML字符。
+
+```go
+type OrderedMap struct {
+   keys       []string // 存放所有的key，用来记录元素顺序
+   values     map[string]interface{} //存放key和value
+   escapeHTML bool //是否转义HTML字符。默认为true表示转义。
+}
+```
+
+2. 排序函数
+
+```go
+//对key进行排序
+// SortKeys Sort the map keys using your sort func
+func (o *OrderedMap) SortKeys(sortFunc func(keys []string)) {
+   sortFunc(o.keys)
+}
+
+//对value进行排序。其中结构体Pair实现了排序接口的Len()、Less()、Swap()这三个方法。可以直接使用标准库中的排序方法
+// Sort Sort the map using your sort func
+func (o *OrderedMap) Sort(lessFunc func(a *Pair, b *Pair) bool) {
+   pairs := make([]*Pair, len(o.keys))
+   for i, key := range o.keys {
+      pairs[i] = &Pair{key, o.values[key]}
+   }
+
+   sort.Sort(ByPair{pairs, lessFunc})
+
+   for i, pair := range pairs {
+      o.keys[i] = pair.key
+   }
+}
+```
+
+3. 序列化函数
+
+```go
+// 主要是分别序列化key和value，然后组装带一起
+func (o OrderedMap) MarshalJSON() ([]byte, error) {
+   var buf bytes.Buffer
+   buf.WriteByte('{')
+   encoder := json.NewEncoder(&buf)
+   encoder.SetEscapeHTML(o.escapeHTML)
+   for i, k := range o.keys {
+      if i > 0 {
+         buf.WriteByte(',')
+      }
+      // add key
+      if err := encoder.Encode(k); err != nil {
+         return nil, err
+      }
+      buf.WriteByte(':')
+      // add value
+      if err := encoder.Encode(o.values[k]); err != nil {
+         return nil, err
+      }
+   }
+   buf.WriteByte('}')
+   return buf.Bytes(), nil
+}
+```
+
+4. 反序列化函数
+
+```go
+func (o *OrderedMap) UnmarshalJSON(b []byte) error {
+   if o.values == nil {
+      o.values = map[string]interface{}{}
+   }
+   // 1. 先直接对整体进行反序列化
+   err := json.Unmarshal(b, &o.values)
+   if err != nil {
+      return err
+   }
+   dec := json.NewDecoder(bytes.NewReader(b))
+   if _, err = dec.Token(); err != nil { // skip '{'
+      return err
+   }
+   o.keys = make([]string, 0, len(o.values))
+   // 2. 解析出源数据中key，主要分为了map和slice两种情况分别解析
+   return decodeOrderedMap(dec, o)
+}
+```
+
+使用方法
+
+```go
+package main
+
+import (
+   "encoding/json"
+   "fmt"
+   "sort"
+
+   "github.com/iancoleman/orderedmap"
+)
+
+func start() {
+   o := orderedmap.New()
+   o.Set("name", "tom")
+   o.Set("age", "10")
+   o.Set("height", "170")
+   o.Set("hobby", "ball")
+   x, _ := json.Marshal(o)
+
+   var m map[string]interface{}
+   _ = json.Unmarshal(x, &m)
+   y, _ := json.Marshal(m)
+
+   fmt.Println("ordered map: ", string(x))
+   fmt.Println("map: ", string(y))
+
+   //ordered map:  {"name":"tom","age":"10","height":"170","hobby":"ball"}
+   //map:  {"age":"10","height":"170","hobby":"ball","name":"tom"} map序列化后默认按照key的字典序排序
+
+   //按照key的字典序升序排序
+   o.SortKeys(sort.Strings)
+   x, _ = json.Marshal(o)
+   fmt.Println("asc sort key: ", string(x))
+   //asc sort key:  {"age":"10","height":"170","hobby":"ball","name":"tom"} 这是就是标准库中的map序列化后结果一致
+
+   //按照key的字典序降序排序
+   o.SortKeys(func(keys []string) {
+      sort.Slice(keys, func(i, j int) bool {
+         return keys[i] > keys[j]
+      })
+   })
+   x, _ = json.Marshal(o)
+   fmt.Println("desc sort key: ", string(x))
+   //desc sort key:  {"name":"tom","hobby":"ball","height":"170","age":"10"}
+
+   //按照value的字典序升序排序
+   o.Sort(func(a *orderedmap.Pair, b *orderedmap.Pair) bool {
+      return a.Value().(string) < b.Value().(string)
+   })
+   x, _ = json.Marshal(o)
+   fmt.Println("sort value: ", string(x))
+   //sort value:  {"age":"10","height":"170","hobby":"ball","name":"tom"}
+}
+
+func main() {
+   start()
+}
+```
+
+
 ## 常量(Constants)
 
 不同于C，变量后面类型可有可无
