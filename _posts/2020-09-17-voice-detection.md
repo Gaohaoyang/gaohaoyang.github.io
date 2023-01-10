@@ -2182,7 +2182,6 @@ pip install playsound
 
 相比目前市面上的其他现有方法通常使用较小的、更紧密配对的「音频 - 文本」训练数据集，或使用广泛但无监督的音频预训练集。因为 Whisper 是在一个大型和多样化的数据集上训练的，而<span style='color:red'>没有针对任何特定的数据集进行微调</span>，虽然它没有击败专攻 LibriSpeech 性能的模型（著名的语音识别基准测试），然而在许多不同的数据集上测量 Whisper 的 Zero-shot（不需要对新数据集重新训练，就能得到很好的结果）性能时，研究人员发现它比那些模型要稳健得多，犯的错误要少 50%。
 
-#### Demo
 
 #### 实时转写
 
@@ -2263,6 +2262,59 @@ conda create -n whisper python=3.9
 conda activate whisper
 pip install git+https://github.com/openai/whisper.git
 whisper audio.mp3 --model medium --language Chinese # ASR
+```
+
+#### 代码解读
+
+whisper 代码结构
+- `assets` # 配置信息，gpt2，multilingual等
+- `normalizers` # 特殊字符归一化处理
+- `__init__.py` # 工具包导入时，加载依赖文件
+- `__main__.py` # cli命令
+- `audio.py` # 音频处理
+  - load_audio : 用ffmpeg加载音频文件(wav/mp3...)，重采样
+    - 如果是字符串（文件名），调用 load_audio 函数（ffmpeg工具）加载音频文件
+  - log_mel_spectrogram : 调用torch函数，计算梅尔倒谱系数
+  - pad_or_trim : 截断、填充
+- `decoding.py` # 解码
+  - detect_language 语种检测
+  - DecodingOptions 解码配置
+  - DecodingResult 解码结果
+  - Inference 推理
+  - PytorchInference 
+  - SequenceRanker
+  - MaximumlikelihoodRanker
+  - TokenDecoder
+  - GreedyDecoder
+  - BeamSearchDecoder
+  - LogitFilter
+  - SuppressBlank
+  - SuppressTokens
+  - ApplyTimestampRules
+  - DecodingTask
+  - decode : 重载 torch的decode函数，调用 DecodingTask
+- `model.py` # 模型文件
+- `tokenizer.py` # 分字、分词
+- `transcribe.py` # 转写、翻译
+- `utils.py` # 工具包，输出函数 write_text, write_srt
+
+whisper 代码调用关系
+
+\__init\__.py 内容
+
+```py
+# 导入相关文件
+from .audio import load_audio, log_mel_spectrogram, pad_or_trim
+from .decoding import DecodingOptions, DecodingResult, decode, detect_language
+from .model import Whisper, ModelDimensions
+from .transcribe import transcribe
+
+# 定义 load_model
+def load_model(name: str, device: Optional[Union[str, torch.device]] = None, download_root: str = None, in_memory: bool = False) -> Whisper:
+  ...
+  if name in _MODELS:
+    # 下载模型文件
+    checkpoint_file = _download(_MODELS[name], download_root, in_memory)
 ```
 
 #### 方法解读
@@ -2348,7 +2400,7 @@ Whisper's performance varies widely depending on the language. The figure below 
 
 #### 使用方法
 
-测试文件的ASR
+ASR的shell调用
 
 ```shell
 whisper "audio.mp3" --task transcribe --model base # 执行转写任务
@@ -2357,13 +2409,13 @@ whisper --language Chinese --model large audio.wav # 指定模型 large
 # [00:00.000 --> 00:08.000] 如果他们使用航空的方式运输货物在某些航线上可能要花几天的时间才能卸货和通关
 whisper --language Chinese --model large audio.wav --initial_prompt "以下是普通話的句子。"  # traditional 默认是繁体
 # [00:00.000 --> 00:08.000] 如果他們使用航空的方式運輸貨物,在某些航線上可能要花幾天的時間才能卸貨和通關。
-$ whisper --language Chinese --model large audio.wav --initial_prompt "以下是普通话的句子。"  # simplified 指定简体中文
+whisper --language Chinese --model large audio.wav --initial_prompt "以下是普通话的句子。"  # simplified 指定简体中文
 # [00:00.000 --> 00:08.000] 如果他们使用航空的方式运输货物,在某些航线上可能要花几天的时间才能卸货和通关。
 ```
 
 注
 - fp16是指采用2字节(16位)进行编码存储的一种数据类型；
-- 同理fp32是指采用4字节(32位)
+- 同理，fp32是指采用4字节(32位)
 - 使用简体中文，参考：[Simplified Chinese rather than traditional? ](https://github.com/openai/whisper/discussions/277)
 
 fp16和fp32相比对训练的优化：
@@ -2381,6 +2433,7 @@ import whisper
 
 model = whisper.load_model("base")
 voice_file = "audio.mp3"
+
 # jupyter 中播放语音
 import IPython
 IPython.display.Audio(audioPath, autoplay=True)
@@ -2395,6 +2448,14 @@ result = model.transcribe("audio.mp3")
 # result = model.transcribe(audioPath, task='translate',language='zh',verbose=True,initial_prompt=prompt)
 result = model.transcribe("audio.mp3", initial_prompt='vocabulary' )
 print(result["text"])
+# ------ 加时间 ------
+start_asr = time.time()
+result = model.transcribe(audioPath, task='translate',language='zh',verbose=True,initial_prompt=prompt)
+end_asr = time.time()
+time_load = start_asr - start_asr
+time_asr = end_asr - start_asr
+print("模型加载时间：{:.2f}\nasr时间：{:.2f}".format(time_load, time_asr))
+print(result["text"])
 ```
 
 【2022-11-21】提示, 参考: [Where do I use --initial-prompt in python code?](https://github.com/openai/whisper/discussions/355)
@@ -2403,28 +2464,29 @@ print(result["text"])
 - （2）批量生效
 
 ```py
-#    （1）一次性生效，临时配置
-result = model.transcribe(audioPath, language='zh',verbose=True,initial_prompt=prompt)
-#    （2）批量生效，使用全局配置
+#（1）一次性生效，临时配置
+result = model.transcribe(audioPath, language='zh', verbose=True, initial_prompt=prompt)
+#（2）批量生效，使用全局配置
 options = whisper.DecodingOptions(fp16=False)
 result = whisper.decode(model, mel, options)
 ```
+
 
 #### 参数详解
 
 ##### DecodingOptions
 
 [DecodingOptions](https://github.com/openai/whisper/blob/eff383b27b783e280c089475852ba83f20f64998/whisper/decoding.py#L72) 类定义：
-- task: 任务类型，transcribe（转写任务） 或 translate（翻译任务）
-- language: 语种，如果为空，自动启动语言检测任务
-- fp16: 使用GPU，False时表示CPU
+- `task`: 任务类型，transcribe（转写任务） 或 translate（翻译任务）
+- `language`: 语种，如果为空，自动启动语言检测任务
+- `fp16`: 使用GPU，False时表示CPU
 - 采样参数
   - temperature: 采样温度
   - sample_len: 最大采样长度
   - best_of: 独立样本数
   - beam_size: beam search数
   - patience: beam search里的耐心指数？
-- length_penalty: 生成（beam或n-best）候选句子排序中的长度惩罚
+- `length_penalty`: 生成（beam或n-best）候选句子排序中的长度惩罚
 - 提示、前缀、字符压缩
   - `prompt`: 上文提示
   - `prefix`: 当前句子前缀
@@ -2469,7 +2531,7 @@ Below shows where prompt and prefix go in the tokens:
 - ![](https://user-images.githubusercontent.com/266841/192138518-5e3e4e0d-3459-40f6-8402-f7251fb4c40c.png)
 
 initial_prompt 源码解读
-- 用 GPT2TokenizerFast 分词器，将 prompt 参数导入的文本分字
+- 用 GPT2 TokenizerFast 分词器，将 prompt 参数导入的文本分字
 
 ```py
 # prompt 文本里的字符扩充到token集合中
@@ -2528,6 +2590,16 @@ transcribe 参数说明
   - Keyword arguments to construct `DecodingOptions` instances
 
 
+使用注意
+- ① 指定`language`为zh（简体中文），要不然默认出繁体字
+- ② `verbose`可以先开着，能看到分句片段信息
+- ③ `initial_prompt`填入房产领域字典，分隔符随意（空格、逗号等）
+- ④ 模型`model`使用medium以上，最好是large，其它版本中文断句效果差
+- ⑤ `fp16` 使用GPU转写，cpu慢，一般5min音频耗时1-2min
+- ⑥ 音频格式：mp3或wav都行，mp3是有损压缩，比wav小
+
+输出结果
+
 ```s
 # verbose = True
 [00:00.000 --> 00:16.000] 中央政务区的成立,东城区人口总量将会严格管控,坚决落实老城不再拆,保证单头的政委,使得二环内乃至东城区未来都将不再有新增土地。
@@ -2544,11 +2616,11 @@ transcribe 参数说明
 import whisper
 
 model = whisper.load_model("base")
+# 批量撰写
 results = model.transcribe(["audio1.mp3", "audio2.mp3"])
 print(results[0]['text'])
 print(results[1]['text'])
 ```
-
 
 #### 转写结果
 
@@ -3067,6 +3139,54 @@ plt.show()
 
 ### ffmpeg
 
+ffmpeg [下载](http://ffmpeg.org/download.html)
+
+#### ffmpeg介绍
+
+【2023-1-10】
+- [ffmpeg的基本用法](https://segmentfault.com/a/1190000040982815)
+- [FFmpeg 视频处理入门教程](https://www.ruanyifeng.com/blog/2020/01/ffmpeg.html)
+
+ffmpeg主要组成部分
+- 1、libavformat：用于各种音视频封装格式的生成和解析，包括获取解码所需信息以生成解码上下文结构和读取音视频帧等功能，包含demuxers和muxer库；
+- 2、libavcodec：用于各种类型声音/图像编解码；
+- 3、libavutil：包含一些公共的工具函数；
+- 4、libswscale：用于视频场景比例缩放、色彩映射转换；
+- 5、libpostproc：用于后期效果处理；
+- 6、ffmpeg：是一个命令行工具，用来对视频文件转换格式，也支持对电视卡实时编码；
+- 7、ffsever：是一个HTTP多媒体实时广播流服务器，支持时光平移；
+- 8、ffplay：是一个简单的播放器，使用ffmpeg 库解析和解码，通过SDL显示；
+
+在这组成部分中，需要熟悉基础概念有
+- `容器`(Container): 容器就是一种文件格式，比如flv，mkv等。包含下面5种流以及文件头信息。
+  - 视频文件本身其实是一个`容器`（container），里面包括了`视频`和`音频`，也可能有`字幕`等其他内容。
+  - 视频格式：MP4，MKV，WebM，AVI。可以用 ffmpeg -formats 查看
+- `流`(Stream): 是一种视频数据信息的传输方式，5种流：音频，视频，字幕，附件，数据。
+- `帧`(Frame): 帧代表一幅静止的图像，分为I帧，P帧，B帧。
+- `编解码器`(Codec): 是对视频进行压缩或者解压缩，`CODEC` =COde （`编码`） +DECode（`解码`）
+  - 视频和音频都需要经过编码，才能保存成文件。不同的编码格式（CODEC），有不同的压缩率，会导致文件大小和清晰度的差异。
+  - 常用的视频编码格式：ffmpeg -codecs
+    - H.262、H.264、H.265 —— 有版权，但可以免费使用
+    - VP8、VP9、AV1 —— 无版权
+    - MP3、AAC —— 音频编码格式
+  - `编码器`（encoders）是实现某种编码格式的库文件。只有安装了某种格式的编码器，才能实现该格式视频/音频的编码和解码。
+  - FFmpeg 内置的视频编码器。
+    - libx264：最流行的开源 H.264 编码器
+    - NVENC：基于 NVIDIA GPU 的 H.264 编码器
+    - libx265：开源的 HEVC 编码器
+    - libvpx：谷歌的 VP8 和 VP9 编码器
+    - libaom：AV1 编码器
+  - 音频编码器: ffmpeg -encoders
+    - libfdk-aac
+    - aac
+- `复用`/`解复用`(mux/demux): 
+  - 把不同的流按照某种容器的规则放入容器，这种行为叫做`复用`（mux）
+  - 把不同的流从某种容器中解析出来，这种行为叫做`解复用`(demux)
+
+
+
+#### 测试
+
 [测试人工智能自动语音识别系统](https://cloud.tencent.com/developer/article/1644302)
 
 样本是这四句话：
@@ -3075,32 +3195,375 @@ plt.show()
 > - Can you suggest an alternative to the restructuring?
 > - We'll implement quality assurance processes before the final review.
 
-故意读得磕磕巴巴，每个音频大约在13秒。
+故意读得磕磕巴巴，每个音频大约在13秒。但是录制出来的是m4a格式，得转换下，这里用ffmpeg
 
-但是录制出来的是m4a格式，得转换下，这里用ffmpeg
 
-#### 一、ffmpeg安装
+
+#### ffmpeg安装
 
 1. ffmpeg[下载](http://ffmpeg.org/download.html)
 2. 解压到指定目录，将bin文件目录添加到path路径（电脑-属性-高级系统设置-环境变量-path-新建）
 3. 命令行（windows+r 输入cmd）输入：ffmpeg -version 出结果表示成功。
 
-#### 二、ffmpeg使用
+#### ffmpeg使用
+
+ffmpeg命令格式
+
+```sh
+ffmpeg {1} {2} -i {3} {4} {5}
+```
+
+五个部分的参数依次如下。
+1. 全局参数
+1. 输入文件参数
+1. 输入文件
+1. 输出文件参数
+1. 输出文件
+
+常用命令
+- 可用的bit流 ：ffmpeg –bsfs
+- 可用的编解码器：ffmpeg –codecs
+- 可用的解码器：ffmpeg –decoders
+- 可用的编码器：ffmpeg –encoders
+- 可用的过滤器：ffmpeg –filters
+- 可用的视频格式：ffmpeg –formats
+- 可用的声道布局：ffmpeg –layouts
+- 可用的license：ffmpeg –L
+- 可用的像素格式：ffmpeg –pix_fmts
+- 可用的协议：ffmpeg -protocals
 
 1. 视频格式转换：ffmpeg -i num.mp4 -codec copy num2.avi
-- 将num.mp4复制并转换为num2.avi
-- 注：-i 后表示要进行操作的文件
+  - 将num.mp4复制并转换为num2.avi
+  - 注：-i 后表示要进行操作的文件
 2. gif制作：ffmpeg -i num.mp4 -vframes 20 -y -f gif num3.gif
-- 将num.mp4的前20帧制作为gif并命名为num3
+  - 将num.mp4的前20帧制作为gif并命名为num3
 3. 视频截取：ffmpeg -i num.mp4 -ss 0 -t 3 -codec copy cut1.mp4
-- -ss后数字表示截取时刻，-t后数字表示截取时长
-- 截取视频某一时刻为图片：ffmpeg -i num.mp4 -y -f image2 -ss 2 -t 0.001 -s 400x300 pic.jpg
-- 将2s时刻截取为400x300大小的名为pic.jpg的图片（-ss后的数字为截取时刻）
+  - -ss后数字表示截取时刻，-t后数字表示截取时长
+  - 截取视频某一时刻为图片：ffmpeg -i num.mp4 -y -f image2 -ss 2 -t 0.001 -s 400x300 pic.jpg
+  - 将2s时刻截取为400x300大小的名为pic.jpg的图片（-ss后的数字为截取时刻）
 4. 每秒截取一张图片：ffmpeg -i num.mp4 -r 1 image%d.jpg
-- 将视频num.mp4进行每秒截取一张图片，并命名为imagei.jpg（i=1，2，3...）
-- 注：-r后的数字表示每隔多久截取一张。
+  - 将视频num.mp4进行每秒截取一张图片，并命名为imagei.jpg（i=1，2，3...）
+  - 注：-r后的数字表示每隔多久截取一张。
+
+##### 全局参数
+
+主要全局参数：
+- -i 设定输入流 
+- -f 设定输出格式 
+- -ss 开始时间 
+
+输出视频文件参数：
+- -b 设定视频流量(码率)，默认为200Kbit/s 
+- -r 设定帧速率，默认为25 
+- -s 设定画面的宽与高 
+- -aspect 设定画面的比例 
+- -vn 不处理视频 
+- -vcodec 设定视频编解码器，未设定时则使用与输入流相同的编解码器 
+- -qscale 0 保留原始的视频质量
+
+输出音频文件参数：
+- -ar 设定采样率 
+- -ac 设定声音的Channel数 
+- -acodec 设定声音编解码器，未设定时则使用与输入流相同的编解码器 
+- -an 不处理音频
+
+```yml
+-c：指定编码器
+-c copy：直接复制，不经过重新编码（这样比较快）
+-c:v：指定视频编码器
+-c:a：指定音频编码器
+-i：指定输入文件
+-an：去除音频流
+-vn： 去除视频流
+-preset：指定输出的视频质量，会影响文件的生成速度，有以下几个可用的值 ultrafast, superfast, veryfast, faster, fast, medium, slow, slower, veryslow。
+-y：不经过确认，输出时直接覆盖同名文件。
+```
 
 
+##### 获取媒体文件信息
+
+```sh
+ffmpeg -i file_name
+ffmpeg -i video_file.mp4
+ffmpeg -i audio_file.mp3
+ffmpeg -i video_file.mp4 -hide_banner # hide_banner 来隐藏掉ffmpeg本身的信息
+ffmpeg -i audio_file.mp3 -hide_banner
+```
+
+##### 转换文件格式
+
+转换媒体文件
+- ffmpeg 最有用的功能：在不同媒体格式之间进行自由转换。
+- 指明输入和输出文件名就行，ffmpeg 会从后缀名猜测格式，这个方法同时适用于视频和音频文件
+
+```sh
+ffmpeg -i video_input.mp4 video_output.avi 
+ffmpeg -i video_input.webm video_output.flv 
+ffmpeg -i audio_input.mp3 audio_output.ogg 
+ffmpeg -i audio_input.wav audio_output.flac
+# 同时指定多个输出后缀：这样会同时输出多个文件
+ffmpeg -i audio_input.wav audio_output_1.mp3 audio_output_2.ogg 
+ffmpeg -formats # 看支持的格式
+# 用 -hide_banner 来省略一些程序信息。
+# 用 -qscale 0 来保留原始的视频质量：
+ffmpeg -i video_input.wav -qscale 0 video_output.mp4
+```
+
+##### 视频中抽取音频
+
+为了从视频文件中抽取音频，直接加一个 **-vn** 参数就可以了
+- 一些常见的比特率有: 96k, 128k, 192k, 256k, 320k (mp3也可以使用最高的比特率)。
+- 其他常用参数: -ar (**采样率**: 22050, 441000, 48000), -ac (**声道数**), -f (**音频格式**, 通常会自动识别的). -ab 也可以使用 -b:a 来替代.
+
+```sh
+ffmpeg -i video.mp4 -vn audio.mp3
+# 复用原有文件的比特率，使用 -ab (音频比特率)来指定编码比特率比较好
+ffmpeg -i video.mp4 -vn -ab 128k audio.mp3
+ffmpeg -i video.mov -vn -ar 44100 -ac 2 -b:a 128k -f mp3 audio.mp3
+```
+
+##### 视频中抽取视频（让视频静音）
+
+用 -an 来获得**纯视频** (之前是 -vn)
+
+```sh
+ffmpeg -i video_input.mp4 -an -video_output.mp4
+ffmpeg -i input.mp4 -vcodec copy -an output.mp4
+# 这个 -an 标记会让所有的音频参数无效，因为最后没有音频会产生。
+```
+
+##### 视频中提取图片
+
+这个功能很实用
+- 一些幻灯片里面提取所有的图片
+
+```sh
+ffmpeg -i video.mp4 -r 1 -f image2 image-%3d.png
+```
+
+解释：
+- -r 代表了帧率（一秒内导出多少张图像，默认25）
+- -f 代表了输出格式 (image2 实际上上 image2 序列的意思）
+
+最后一个参数 (输出文件) 有一个有趣的命名：
+- 使用 %3d 来指示输出的图片有三位数字 (000, 001, 等等.)。
+- 也可以用 %2d (两位数字) 或者 %4d (4位数字) 
+
+Note: 同样也有将图片转变为视频/幻灯片的方式。
+
+##### 更改视频分辨率或长宽比
+
+用 -s 参数来缩放视频:
+
+```sh
+ffmpeg -i video_input.mov -s 1024x576 video_output.mp4
+# 用 -c:a 来保证音频编码是正确的:
+ffmpeg -i video_input.h264 -s 640x480 -c:a video_output.mov
+# 用-aspect 来更改长宽比:
+ffmpeg -i video_input.mp4 -aspect 4:3 video_output.mp4
+```
+
+##### 为音频增加封面图片
+
+音频变成视频，全程使用一张图片（比如专辑封面）。当想往某个网站上传音频，但那个网站又仅接受视频（比如YouTube, Facebook等）的情况下会非常有用。
+
+```sh
+ffmpeg -loop 1 -i image.jpg -i audio.wav -c:v libx264 -c:a aac -strict experimental -b:a 192k -shortest output.mp4
+# 只要改一下编码设置 (-c:v 是 视频编码， -c:a 是音频编码) 和文件的名称就能用了。
+```
+
+Note: 如果使用一个较新的ffmpeg版本（4.x），就可以不指定 -strict experimental
+
+##### 为视频增加字幕
+
+给视频增加字幕，比如一部外文电源，使用下面的命令：
+
+```sh
+ffmpeg -i video.mp4 -i subtitles.srt -c:v copy -c:a copy -preset veryfast -c:s mov_text -map 0 -map 1 output.mp4
+# 可以指定自己的编码器和任何其他的音频视频参数
+```
+
+##### 压缩媒体文件
+
+压缩文件可以极大减少文件的体积，节约存储空间，这对于文件传输尤为重要。通过ffmepg，有好几个方法来压缩文件体积。
+- 文件压缩的太厉害会让文件质量显著降低。
+
+首先，对于音频文件，可以通过降低比特率(使用 -b:a 或 -ab):
+
+```sh
+ffmpeg -i audio_input.mp3 -ab 128k audio_output.mp3
+ffmpeg -i audio_input.mp3 -b:a 192k audio_output.mp3
+```
+
+再次重申，一些常用的比特率有: 
+- 96k, 112k, 128k, 160k, 192k, 256k, 320k.
+- 值越大，文件所需要的体积就越大。
+
+对于视频文件，选项就多了，一个简单的方法是通过降低视频比特率 (通过 -b:v):
+
+```sh
+ffmpeg -i video_input.mp4 -b:v 1000k -bufsize 1000k video_output.mp4
+# 视频的比特率和音频是不同的（一般要大得多）。
+```
+
+也可以使用 -crf 参数 (恒定质量因子). 较小的crf 意味着较大的码率。同时使用 libx264 编码器也有助于减小文件体积。这里有个例子，压缩的不错，质量也不会显著变化：
+
+```sh
+ffmpeg -i video_input.mp4 -c:v libx264 -crf 28 video_output.mp4
+# crf 设置为20 到 30 是最常见的，不过您也可以尝试一些其他的值。
+# 降低帧率在有些情况下也能有效（不过这往往让视频看起来很卡）:
+ffmpeg -i video_input.mp4 -r 24 video_output.mp4
+# -r 指示了帧率 (这里是 24)。
+# 还可以通过压缩音频来降低视频文件的体积，比如设置为立体声或者降低比特率：
+ffmpeg -i video_input.mp4 -c:v libx264 -ac 2 -c:a aac -strict -2 -b:a 128k -crf 28 video_output.mp4
+# -strict -2 和 -ac 2 是来处理立体声部分的。
+```
+
+##### 裁剪媒体文件（基础）
+
+想要从开头开始剪辑一部分，使用T -t 参数来指定一个时间:
+
+```sh
+ffmpeg -i input_video.mp4 -t 5 output_video.mp4 
+ffmpeg -i input_audio.wav -t 00:00:05 output_audio.wav
+```
+
+这个参数对音频和视频都适用，上面两个命令做了类似的事情：保存一段5s的输出文件（文件开头开始算）。上面使用了两种不同的表示时间的方式，一个单纯的数字（描述）或者 HH:MM:SS (小时, 分钟, 秒). 第二种方式实际上指示了结束时间。
+
+也可以通过 -ss 给出一个开始时间，-to 给出结束时间：
+
+```sh
+ffmpeg -i input_audio.mp3 -ss 00:01:14 output_audio.mp3
+ffmpeg -i input_audio.wav -ss 00:00:30 -t 10 output_audio.wav 
+ffmpeg -i input_video.h264 -ss 00:01:30 -to 00:01:40 output_video.h264 
+ffmpeg -i input_audio.ogg -ss 5 output_audio.ogg
+```
+
+可以看到 开始时间 (-ss HH:MM:SS), 持续秒数 (-t duration), 结束时间 (-to HH:MM:SS), 和开始秒数 (-s duration)的用法.
+
+可以在媒体文件的任何部分使用这些命令。
+
+##### 输出YUV420原始数据
+
+对于一下做底层编解码的人来说，有时候常要提取视频的YUV原始数据。 
+- ffmpeg -i input.mp4 output.yuv
+
+只想要抽取某一帧YUV呢？ 简单，你先用上面的方法，先抽出jpeg图片，然后把jpeg转为YUV。 比如： 你先抽取10帧图片。 
+
+```sh
+ffmpeg -i input.mp4 -ss 00:00:20 -t 10 -r 1 -q:v 2 -f image2 pic-%03d.jpeg
+#结果：
+# -rw-rw-r-- 1 hackett hackett    296254  7月 20 16:08 pic-001.jpeg
+# -rw-rw-r-- 1 hackett hackett    300975  7月 20 16:08 pic-002.jpeg
+# -rw-rw-r-- 1 hackett hackett    310130  7月 20 16:08 pic-003.jpeg
+# -rw-rw-r-- 1 hackett hackett    268694  7月 20 16:08 pic-004.jpeg
+# -rw-rw-r-- 1 hackett hackett    301056  7月 20 16:08 pic-005.jpeg
+# 然后，随便挑一张，转为YUV: 
+ffmpeg -i pic-001.jpeg -s 1440x1440 -pix_fmt yuv420p xxx3.yuv
+# 如果-s参数不写，则输出大小与输入一样。当然了，YUV还有yuv422p啥的，你在-pix_fmt 换成yuv422p就行啦！
+```
+
+##### 视频添加logo
+
+```sh
+ffmpeg -i input.mp4 -i logo.png -filter_complex overlay output.mp4
+```
+
+##### 提取视频ES数据
+
+```sh
+ffmpeg –i input.mp4 –vcodec copy –an –f m4v output.h264
+```
+
+##### 视频编码格式转换
+
+比如一个视频的编码是MPEG4，想用H264编码，咋办？
+
+```sh
+ffmpeg -i input.mp4 -vcodec h264 output.mp4
+# 相反也一样
+ffmpeg -i input.mp4 -vcodec mpeg4 output.mp4
+```
+
+##### 添加字幕
+
+语法 –vf subtitles=file
+
+```sh
+ffmpeg -i jidu.mp4 -vf subtitles=rgb.srt output.mp4
+```
+
+#### ffmpeg 高级用法
+
+高级用法
+1. 分割媒体文件
+2. 拼接媒体文件
+3. 将图片转变为视频
+4. 录制屏幕
+5. 录制摄像头
+6. 录制声音
+7. 截图
+
+```sh
+# 分割: -t 00:00:30 为界分成两个文件（音频、视频都行）, 可以指定多个分割点
+ffmpeg -i video.mp4 -t 00:00:30 video_1.mp4 -ss 00:00:30 video_2.mp4
+# 拼接：concat, 把join.txt里的文件合并为 output.mp4
+ffmpeg -f concat -i join.txt output.mp4
+# 图片→视频：image2pipe 同一种格式（png或jpg）的图片文件
+cat my_photos/* | ffmpeg -f image2pipe -i - -c:v copy video.mkv
+cat my_photos/* | ffmpeg -framerate 1 -f image2pipe -i - -c:v copy video.mkv # 指定帧率，framerate
+cat my_photos/* | ffmpeg -framerate 0.40 -f image2pipe -i - -i audio.wav -c copy video.mkv # 加入声音 audio.wav
+# 录屏：x11grab，屏幕分辨率 (-s)，按 q 或者 CTRL+C 以结束录制屏幕
+ffmpeg -f x11grab -s 1920x1080 -i :0.0 output.mp4
+-s $(xdpyinfo | grep dimensions | awk '{print $2;}') # 获取真实分辨率
+ffmpeg -f x11grab -s $(xdpyinfo | grep dimensions | awk '{print $2;}') -i :0.0 output.mp4 # 完整写法
+# 录摄像头：q 或者 CTRL+C 来结束录制。
+ffmpeg -i /dev/video0 output.mkv 
+# 录声音：Linux上同时是使用 ALSA 和 pulseaudio 来处理声音的。 ffmpeg 可以录制两者
+# 在 pulseaudio, 必须强制指定(-f) alsa 然后指定 default 作为输入t (-i default):
+ffmpeg -f alsa -i default output.mp3
+ffmpeg -i /dev/video0 -f alsa -i default -c:v libx264 -c:a flac -r 30 output.mkv # 指定编码器及帧率
+ffmpeg -f x11grab -s $(xdpyinfo | grep dimensions | awk '{print $2;}') -i :0.0 -i audio.wav -c:a copy output.mp4 # 提供音频文件
+# 截图
+ffmpeg -i input.flv -f image2 -vf fps=fps=1 out%d.png # 每隔一秒截一张图
+ffmpeg -i input.flv -f image2 -vf fps=fps=1/20 out%d.png # 每隔20秒截一张图
+```
+
+过滤器 是 ffmpeg 中最为强大的功能。在ffmepg中有数不甚数的过滤器存在，可以满足各种编辑需要
+
+ffmpeg 过滤器：
+1. 视频缩放
+2. 视频裁剪
+3. 视频旋转
+4. 音频声道重映射
+5. 更改播放速度
+
+```sh
+# 过滤器基本结构
+# 指定视频过滤器 (-vf, -filter:v的简写) 和 音频过滤器 (-af, -filter:a的简写)，单引号连接
+ffmpeg -i input.mp4 -vf "filter=setting_1=value_1:setting_2=value_2,etc" output.mp4
+ffmpeg -i input.wav -af "filter=setting_1=value_1:setting_2=value_2,etc" output.wav
+# 视频缩放
+ffmpeg -i input.mp4 -vf "scale=w=800:h=600" output.mp4 # 绝对大小
+ffmpeg -i input.mkv -vf "scale=w=1/2*in_w:h=1/2*in_h" output.mkv # 数学运算，相对大小
+# 视频裁剪：除了w和h，还需要指定裁剪原点（视频中心）
+ffmpeg -i input.mp4 -vf "crop=w=1280:h=720:x=0:y=0" output.mp4 
+ffmpeg -i input.mkv -vf "crop=w=400:h=400" output.mkv
+ffmpeg -i input.mkv -vf "crop=w=3/4*in_w:h=3/4*in_h" output.mkv # 相对大小
+# 视频旋转
+ffmpeg -i input.avi -vf "rotate=90*PI/180" # 按照指定弧度顺时针旋转 90°
+ffmpeg -i input.mp4 -vf "rotate=PI" # 上下颠倒
+# 声道重映射
+ffmpeg -i input.mp3 -af "channelmap=1-0|1-1" output.mp3 # 将右声道（1）同时映射到左（0）右（1）两个声道（左边的数字是输入，右边的数字是输出）。
+# 更改音量
+ffmpeg -i input.wav -af "volume=1.5" output.wav  # 音量 1.5倍
+ffmpeg -i input.ogg -af "volume=0.75" output.ogg # 0.75倍
+# 视频播放速度：setpts（视频播放）、atempo（音频播放）
+ffmpeg -i input.mkv -vf "setpts=0.5*PTS" output.mkv # 视频加速
+ffmpeg -i input.mp4 -vf "setpts=2*PTS" output,mp4 # 视频减速一半
+ffmpeg -i input.wav -af "atempo=0.75" output.wav # 音频减速
+ffmpeg -i input.mp3 -af "atempo=2.0,atempo=2.0" ouutput.mp3 # 音频加速
+```
 
 # 结束
 
