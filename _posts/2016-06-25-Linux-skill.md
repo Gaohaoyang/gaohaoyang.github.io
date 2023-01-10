@@ -2745,6 +2745,34 @@ substr($3,6)     # 表示是从第3个字段里的第6个字符开始，一直�
 awk '$0 ~ /abc/ {gsub("a\d+c", "def", $0); print $1, $3}' abc.txt # 字符串替换，正则模式
 ```
 
+### 正则表达式
+
+【2023-1-10】awk的正则表达式，是属于：`扩展的正则表达式`（Extended Regular Expression 又叫 Extended RegEx 简称 EREs），[详见](https://www.cnblogs.com/chengmo/archive/2010/10/11/1847772.html)
+
+awk 常见调用正则表达式方法：
+- ① 直接过滤：使用
+- ② if条件判断
+- ③ 正则函数
+
+```sh
+# ① 
+awk '/REG/{action}'
+# /REG/为正则表达式，可以将$0中，满足条件记录 送入到：action进行处理.
+# ② 
+# awk正则运算语句(~,~!等同!~)
+awk 'BEGIN{info="this is a test";if( info ~ /test/){print "ok"}}'
+# ok
+```
+
+③ awk内置使用正则表达式函数
+- gsub( Ere, Repl, [ In ] )
+- sub( Ere, Repl, [ In ] )
+- match( String, Ere )
+- split( String, A, [ Ere] )
+
+详细函数使用，可以参照：[linux awk 内置函数详细介绍（实例）](http://www.cnblogs.com/chengmo/archive/2010/10/08/1845913.html)
+
+
 ### 多路输出
 
 - 代码：
