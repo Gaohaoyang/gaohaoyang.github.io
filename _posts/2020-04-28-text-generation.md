@@ -262,52 +262,71 @@ Diffusion的本质
 
 ### 控制主题、属性
 
-- （1）`Copy机制`
-  - 最初用于解决OOV问题
-  - ACL2017的《Get To The Point:  Summarization with Pointer-Generator Networks》，借鉴point network模型
-  - 思路：单词可以有两种来源：一种是通过普通seq2seq生成；另一种是从原文本拷贝过来。
-  ![](https://upload-images.jianshu.io/upload_images/18270108-8e6535933eb010d4.jpg)
-  - 实现：将每步输出的单词概率看作一个混合模型（生成的单词概率分布与拷贝原文的单词概率分布的混合），利用注意力得分作为拷贝单词的概率
-  ![](https://upload-images.jianshu.io/upload_images/18270108-66da872064bbc67f.jpg?imageMogr2/auto-orient/strip|imageView2/2/w/715/format/webp)
-  - 效果：回答的相关性和流畅性更高
-    - 问：“我老家是湖南的”
-    - 答：我也是 → 我也是湖南的
-- （2）`主题控制`
-  - 解决的问题：普通的seq2seq生成的内容，其实没有办法把控生成的语义信息
-  - 思路：通过增加关键词信息，用关键词去影响生成回复的语义（主题）
-    - 思路一：用关键词作为硬约束——<font color='blue'>一定出现</font>
-      - ACL 2016的《Sequence toBackward and Forward Sequences: A Content-Introducing Approach to GenerativeShort-Text Conversation》
-      - 步骤：
-        - 利用互信息进行预测，即取与问题互信息最大的词作为关键词。
-        - 生成回复：分两步：生成包含关键词的前半句话 → 生成后半句话；
-        ![](https://upload-images.jianshu.io/upload_images/18270108-8374dac99e9e7768.jpg)
-      - 不足：预测的单词不准，或者在对话中出现较少时，上下句可能衔接不够流畅。
-    - 思路二：用关键词作为软约束——<font color='blue'>不一定出现</font>
-      - Emnlp 2016的《Towards implicit content-introducing for generative short-textconversation systems》。
-      - 假设关键词在生成文本中不一定会出现，只作为额外信息输入到网络里；设计cue word gru单元，将关键词信息加入到每一步的状态更新；
-    - 思路三：用关键词同时约束主题与情感
-      - Emnlp 2018《A Syntactically Constrained Bidirectional-Asynchronous Approach for Emotional Conversation Generation》
-      ![](https://upload-images.jianshu.io/upload_images/18270108-8bdb50b960dc2dae.jpg)
-      - 先预测情感关键词与主题关键词，再生成文本
-- （3）`属性控制`
-  - 避免出现负面情感或疑问句式的回应
-  - 思路：学习到文本的属性信息（句式、情感信息），控制生成文本风格，使生成的回复更为可控
-    - 思路一：直接融合属性信息
-      - 输入的文本除了encoder的信息，还包括属性embedding的信息
-    - 思路二：用条件变分编码器
-      - Generating Informative Responses with Controlled Sentence Function
-      - 条件变分编码器的网络结构去控制回复的句式，使模型生成一些更有信息量的回复
-      - 约束中间隐变量z，使z更多地去编码句式属性的信息
+#### （1）`Copy机制`
+
+最初用于解决OOV问题
+- ACL2017的《Get To The Point:  Summarization with Pointer-Generator Networks》，借鉴point network模型
+
+思路：
+- 单词可以有两种来源：一种是通过普通seq2seq生成；另一种是从原文本拷贝过来。
+![](https://upload-images.jianshu.io/upload_images/18270108-8e6535933eb010d4.jpg)
+
+实现：
+- 将每步输出的单词概率看作一个混合模型（生成的单词概率分布与拷贝原文的单词概率分布的混合），利用注意力得分作为拷贝单词的概率
+- ![](https://upload-images.jianshu.io/upload_images/18270108-66da872064bbc67f.jpg?imageMogr2/auto-orient/strip|imageView2/2/w/715/format/webp)
+
+效果：
+- 回答的相关性和流畅性更高
+- 问：“我老家是湖南的”
+- 答：我也是 → 我也是湖南的
+
+#### （2）`主题控制`
+
+解决的问题：
+- 普通的seq2seq生成的内容，其实没有办法把控生成的语义信息
+
+思路：
+- 通过增加关键词信息，用关键词去影响生成回复的语义（主题）
+
+- 思路一：用关键词作为**硬约束**——<font color='blue'>一定出现</font>
+  - ACL 2016的《Sequence toBackward and Forward Sequences: A Content-Introducing Approach to GenerativeShort-Text Conversation》
+  - 步骤：
+    - 利用互信息进行预测，即取与问题互信息最大的词作为关键词。
+    - 生成回复：分两步：生成包含关键词的前半句话 → 生成后半句话；
+    - ![](https://upload-images.jianshu.io/upload_images/18270108-8374dac99e9e7768.jpg)
+  - 不足：预测的单词不准，或者在对话中出现较少时，上下句可能衔接不够流畅。
+- 思路二：用关键词作为**软约束**——<font color='blue'>不一定出现</font>
+  - Emnlp 2016的《Towards implicit content-introducing for generative short-textconversation systems》。
+  - 假设关键词在生成文本中不一定会出现，只作为额外信息输入到网络里；设计cue word gru单元，将关键词信息加入到每一步的状态更新；
+- 思路三：用关键词同时约束主题与情感
+  - Emnlp 2018《A Syntactically Constrained Bidirectional-Asynchronous Approach for Emotional Conversation Generation》
+  - ![](https://upload-images.jianshu.io/upload_images/18270108-8bdb50b960dc2dae.jpg)
+  - 先预测情感关键词与主题关键词，再生成文本
+
+#### （3）`属性控制`
+
+避免出现负面情感或疑问句式的回应
+
+思路：
+- 学习到文本的属性信息（句式、情感信息），控制生成文本风格，使生成的回复更为可控
+
+- 思路一：直接融合属性信息
+  - 输入的文本除了encoder的信息，还包括属性embedding的信息
+- 思路二：用条件变分编码器
+  - Generating Informative Responses with Controlled Sentence Function
+  - 条件变分编码器的网络结构去控制回复的句式，使模型生成一些更有信息量的回复
+  - 约束中间隐变量z，使z更多地去编码句式属性的信息
 
 ### 多样性
 
-（4）改进Beam Search——提高回复多样性
+#### （4）改进Beam Search——提高回复多样性
+
 - 思路一：通过增加惩罚项
   - 如对同一组的第二、第三选项进行降权，从而避免每次搜索结果都来自于同一路径。对于权重的选择，可以通过强化学习得到；也可以通过设置参数、调整参数来得到
-  ![](https://upload-images.jianshu.io/upload_images/18270108-9e78b6aba844eefa.jpg)
+  - ![](https://upload-images.jianshu.io/upload_images/18270108-9e78b6aba844eefa.jpg)
 - 思路二：计算每条路径的概率分
   - 如果后面生成的话跟第一组相似，就对该组进行降权，避免组与组之间相似度过高
-  ![](https://upload-images.jianshu.io/upload_images/18270108-9f21116b3d55bbb7.jpg)
+  - ![](https://upload-images.jianshu.io/upload_images/18270108-9f21116b3d55bbb7.jpg)
 
 ### 实验对比
 
@@ -316,6 +335,7 @@ Diffusion的本质
 - Copy机制+seq2seq：提高了回复相关性，但依然无法解决回复为否定句或负面情感的问题。
 - 主题控制+seq2seq：既提高回复相关性，也可以控制回复语义，提升回复效果，但可能出现回复不通顺的问题，并存在否定句式与负面回复。
 - 属性控制+seq2seq：比较能满足场景需要，但有一定比例的通用回复，可以通过改进Beam Search、后排序的办法来提高个性化回复的得分，从而提高回复多样性。
+
 ![](https://upload-images.jianshu.io/upload_images/18270108-f827dd6a328c6334.png)
 
 总结：
@@ -402,6 +422,7 @@ Diffusion的本质
 
 **复述**（paraphrase）是指：
 > “运用与原句不同的词汇、句式，重新写一个相同含义的句子。”
+
 para的意思是“另外的”，phrase是“陈述”。所以国内有人翻译为“**复述**”。但中文含义不同，叫“同义语”更合适
 
 文本复述研究的主要对象是‘**词语以上，句子以下**’的语言单元，不涉及到段落级的改写问题。
@@ -414,6 +435,14 @@ para的意思是“另外的”，phrase是“陈述”。所以国内有人翻�
 ## 文本复述方法
 
 常见的文本复述类型（英语）
+- 同义词替换：短语替换成同义短语
+- 定义替换：替换成词典中的注释
+- 语态替换：主动 与 被动，相互替换
+- 词性变换：动词、形容词等
+- 语序变换：移动原文中某些成分的位置
+- 结构变换：
+- 断句变换：句子拆分与合并
+- 基于推理的变换：结合背景知识才能识别、理解
 - ![英文复述类型](https://img-blog.csdnimg.cn/20191016195842986.png)
 
 ## 英文复述
@@ -423,6 +452,7 @@ para的意思是“另外的”，phrase是“陈述”。所以国内有人翻�
 示例：
 - ① You should learn paraphrasing, for it is very important.
 - ② Paraphrasing is extremely important, so it should be learned.
+
 改动点：
 - **单词**：very important → extremely
 - **词序**：前后互换，（A，因为B）→ （B，所以A）
