@@ -935,7 +935,7 @@ HydraNet 训练工作流程：
 
 [视频](https://vdn6.vzuu.com/SD/a0b51916-31a0-11ed-97a4-1699881d21b4.mp4?pkey=AAVK7YmKoiwJkmDfPQCMUaa_k31bSirVd99IuM4STrB9BYlHydIAa0913k7qnvt43uL9iF7TjI1VGjLSRSdwUf3L&c=avc.1.1&f=mp4&pu=078babd7&bu=078babd7&expiration=1673454462&v=ks6)是一个版本的 HydraNet 中处理单个图像得到的一些预测
 
-<embed width="500" height="300" src="https://vdn6.vzuu.com/SD/a0b51916-31a0-11ed-97a4-1699881d21b4.mp4?pkey=AAVK7YmKoiwJkmDfPQCMUaa_k31bSirVd99IuM4STrB9BYlHydIAa0913k7qnvt43uL9iF7TjI1VGjLSRSdwUf3L&c=avc.1.1&f=mp4&pu=078babd7&bu=078babd7&expiration=1673454462&v=ks6" />
+<embed width="800" height="600" src="https://vdn6.vzuu.com/SD/a0b51916-31a0-11ed-97a4-1699881d21b4.mp4?pkey=AAVK7YmKoiwJkmDfPQCMUaa_k31bSirVd99IuM4STrB9BYlHydIAa0913k7qnvt43uL9iF7TjI1VGjLSRSdwUf3L&c=avc.1.1&f=mp4&pu=078babd7&bu=078babd7&expiration=1673454462&v=ks6" />
 
 特斯拉如何训练 Hydranet?
 - 在 GPU 上训练一个有 48 个头的神经网络需 70,000 小时！差不多8年了，特斯拉团队为了解决这个问题，把训练模式从 “round robin”模式转换为“pool of workers”模式.这样就大大缩短了训练时间，且我们从HydraNets神经网络架构中知道，特斯拉还使用了双MCU架构，并行处理。
@@ -946,7 +946,7 @@ Transformer模型作为NLP与图片视频领域中，最重要的模型构架，
 
 [Transformer视频极速讲解]([https://vdn6.vzuu.com/SD/8e617f0a-18b6-11ed-a515-caa2f7fe3b8b.mp4](https://vdn6.vzuu.com/SD/8e617f0a-18b6-11ed-a515-caa2f7fe3b8b.mp4?pkey=AAUueFULRuG_6uD2Q02FRUhdfjMyp6FyxymFaW_-XWxvqXHc6okeEqAV0nNeMEHz8n-IipsQme7OkNApjLZ6QurG&c=avc.1.1&f=mp4&pu=078babd7&bu=078babd7&expiration=1673454650&v=ks6))
 
-<embed width="500" height="300" src="https://vdn6.vzuu.com/SD/8e617f0a-18b6-11ed-a515-caa2f7fe3b8b.mp4?pkey=AAUueFULRuG_6uD2Q02FRUhdfjMyp6FyxymFaW_-XWxvqXHc6okeEqAV0nNeMEHz8n-IipsQme7OkNApjLZ6QurG&c=avc.1.1&f=mp4&pu=078babd7&bu=078babd7&expiration=1673454650&v=ks6" />
+<embed width="800" height="600" src="https://vdn6.vzuu.com/SD/8e617f0a-18b6-11ed-a515-caa2f7fe3b8b.mp4?pkey=AAUueFULRuG_6uD2Q02FRUhdfjMyp6FyxymFaW_-XWxvqXHc6okeEqAV0nNeMEHz8n-IipsQme7OkNApjLZ6QurG&c=avc.1.1&f=mp4&pu=078babd7&bu=078babd7&expiration=1673454650&v=ks6" />
 
 
 
