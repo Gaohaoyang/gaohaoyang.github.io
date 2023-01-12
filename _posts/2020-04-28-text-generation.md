@@ -41,6 +41,21 @@ permalink: /text-generation
 
 # 文本生成
 
+文本生成（Text Generation）是自然语言处理（Natural Language Processing，NLP）领域的一项重要且具有挑战的任务。
+
+文本生成任务目的是生成近似于自然语言的文本序列，但仍可以根据输入数据进行分类。比如
+- 输入结构化数据的 Data-to-text Generation
+- 输入图片的 Image Caption
+- 输入视频的 Video Summarization
+- 输入音频的 Speech Recognition 等。
+
+文本生成文本的 Text-to-Text 任务，具体地包括神经机器翻译、智能问答、生成式文本摘要等。
+
+随着深度学习的发展，众多新兴技术已被**文本生成**任务所采用。比如
+- 为了解决文本生成中的长期依赖、超纲词（Out-of-Vocabulary，OOV）问题，注意力机制（Attention Mechanism），拷贝机制（Copy Mechanism）等应运而出；
+- 网络结构上使用了循环神经网络（Recurrent Neural Networks），卷积神经网络（Convolutional Neural Networks），图神经网络（Graph Neural Networks），Transformer 等。
+- 为了顺应“**预训练**-**精调**”范式的兴起，在海量语料上自监督地训练出的大体量**预训练语言模型**（Pre-trained Language Model；PLM），也被广泛应用在文本生成任务中。
+
 ## 方法总结
 
 【2022-9-7】[智能化自动生成文本总结的方法](https://www.toutiao.com/article/7110470206492901899)
@@ -130,6 +145,14 @@ permalink: /text-generation
 
 【2022-7-16】[腾讯刘天宇：可控、可靠的数据到文本生成技术](https://www.toutiao.com/article/7120933821176037888), 聚焦data2text任务
 
+### 可控文本生成数据集
+
+可控文本生成相关数据集
+- StylePTB：细粒度文本风格迁移基准数据集：https://github.com/lvyiwei1/StylePTB/
+- SongNet：格式可控的宋词生成任务：https://github.com/lipiji/SongNet
+- GPT-2 Output：可用于构造可控文本生成数据集的大体量语料库：https://github.com/openai/gpt-2-output-dataset
+- Inverse Prompting：公开领域的诗文生成，公开领域的长篇幅问答数据集：https://github.com/THUDM/iPrompt
+- GYAFC (Grammarly’s Yahoo Answers Formality Corpus)：雅虎问答形式迁移语料库：https://github.com/raosudha89/GYAFC-corpus
 
 ## 生成模型
 
@@ -138,6 +161,32 @@ permalink: /text-generation
 - 然而，这样的分布 $p(X)$ 无法直接获取，只能通过一个隐变量 $Z$ 来生成 $X$, 假设 $Z$ 服从正态分布，随便取一个 $Z$，用 $Z$ 和 $X$ 的关系计算 $p(X)$ 。
 - 公式：$p(X)=\sum_{Z} p(X \mid Z) p(Z)$
 - $p(X \mid Z)$ 是后验分布，$p(Z)$ 是先验分布 
+
+### 模型结构总结
+
+文本生成模型的结构常来自于人类撰写文本的启发。此处按照模型结构的特征，将主流文本生成模型分为如下几种：
+- ![](https://p7.itc.cn/images01/20210929/85d71f6ec568447ab9d650db27bdf4f6.png)
+- ![](https://p2.itc.cn/images01/20210929/3707637d242b4507888879729d0f45f1.png)
+
+#### Encoder-Decoder Framework
+
+“编码器-解码器框架”首先使用 encoder 编码文本，再使用 decoder 基于原文编码和部分解码输出，自回归地解码（Autoregressively Decoding）出文本。这类似于，人类首先理解素材（源文本、图片、视频等），然后基于对原文的理解和已写出的内容，逐字地撰写出文本。也是目前序列到序列任务中应用最广泛的框架结构。
+
+#### Auto-regressive Language Model
+
+标准的 left-to-right 的单向语言模型，也可以根据前文序列逐字地解码出文本序列，这种依赖于前文语境来建模未来状态的解码过程，叫做自回归解码（Auto-regressive Decoding）。不同于编码器-解码器框架”使用 encoder 编码源文本，用 decoder 编码已预测的部分序列，AR LM 用同一个模型编码源文本和已解码的部分序列。
+
+#### Hierarchical Encoder-Decoder
+
+对于文本素材，人类会先理解单个句子，再理解整篇文本。在撰写文本的过程中，也需要先构思句子的大概方向，再逐字地撰写出内容。这类模型往往需要一个层次编码器对源文本进行 intra-sentence 和 inter-sentence 的编码，对应地进行层次 sentence-level 和 token-level 的解码。在 RNN 时代，层次模型分别建模来局部和全局有不同粒度的信息，往往能够带来性能提升，而 Transformer 和预训练语言模型的时代，全连接的 Self-Attention 弱化了这种优势。
+
+#### Knowledge-Enriched Model
+
+知识增强的文本生成模型，引入了外部知识，因此除了针对源文本的文本编码器外，往往还需要针对外部知识的知识编码器。知识编码器的选择可以依据外部知识的数据结构，引入知识图谱、图片、文本作为外部知识时可以对应地选用图神经网络、卷积神经网络、预训练语言模型等。融合源文本编码与知识编码时，也可以考虑注意力机制，指针生成器网络（Pointer-Generator-Network），记忆网络（Memory Networks）等。
+
+#### Write-then-Edit Framework
+
+考虑到人工撰写稿件尚不能一次成文，那么文本生成可能同样需要有“修订”的过程。人工修订稿件时，需要基于原始素材和草稿撰写终稿，模型也需要根据源文本和解码出的草稿重新进行编解码。这种考虑了原文和草稿的模型能够产生更加合理的文本内容。当然也会增加计算需求，同时生成效率也会打折扣。
 
 ### 原理解读
 
@@ -267,10 +316,56 @@ Diffusion的本质
 
 ![](https://upload-images.jianshu.io/upload_images/18270108-9c904095e3c94f58.png)
 
+## 可控文本生成
+
+【2021-9-29】[ICBU可控文本生成技术详解](https://www.sohu.com/a/492765825_612370) 
+
+可控文本生成的目标是控制给定模型基于源文本产生特定属性的文本。
+- 特定属性包括文本的`风格`、`主题`、`情感`、`格式`、`语法`、`长度`等。
+- 根据源文本生成目标序列的文本生成任务，可以建模为 $ P(Target|Sourse) $；
+- 而考虑了控制信号的可控文本生成任务，则可以建模为 $ P(Target|Sourse,ControlSignal) $ 。
+
+目前可控文本生成已有大量的相关研究，比较有趣的研究有
+- SongNet（Tencent）控制输出诗词歌赋的字数、平仄和押韵；
+- StylePTB（CMU）按照控制信号改变句子的语法结构、单词形式、语义等；
+- CTRL（Salesforce）在预训练阶段加入了 control codes 与 prompts 作为控制信号，影响文本的领域、主题、实体和风格。
+
+### 可控文本生成技术的发展过程和趋势
+
+发展过程
+- 首先，在预训练语言模型的热度高涨之前，使用**解码策略**来控制文本属性的方案较为流行
+  - 比如，引入多个判别器影响 Beam Search 中的似然得分的 L2W，以及改进解码采样策略的 Nucleur Sampling（2019）。
+- 随着 GPT-2（2019）、T5（2019）的提出，使得**基于 Prompt** 来控制同一预训练语言模型来完成多种任务成为可能。
+  - 因其能够更有效地利用模型在预训练阶段习得的知识，Prompting LM 的方式受到了学术界的重视，Prefix-Tuning（2021）等也推动基于 Prompt 的文本生成向前一步。
+- 而针对于如何基于**预训练语言模型**做可控文本生成，学术界也一直往“低数据依赖、低算力需求、低时间消耗”方向上推进。
+  - CTRL（2019）凭借海量数据和大体量结构成为文本生成领域的代表性模型；
+  - PPLM （2019）则引入属性判别器，仅需精调小部分参数起到了“四两拨千斤”的效果；
+  - 而 GeDi（2020） 为了解决 PPLM 多次反传导致的解码效率低下，直接在解码阶段加入属性判别器来控制解码输出；
+  - CoCon（2021）同样仅精调插入 GPT-2 中的 CoCon 层来提高训练效率，并通过精巧的目标函数的设计来增强可控性能。
+
+
+### 可控文本生成模型
+
+可控文本生成模型等方案也多种多样，按进行可控的着手点和切入角度，将可控文本生成方案分为四类：
+- `构造` Control Codes、`设计` Prompt、加入`解码策略`（Decoding Strategy），以及 `Write-then-Edit` 
+
+详解
+- `构造` Control Codes: 引入一些符号或文本作为条件，训练条件语言模型
+- `设计` Prompt: 为预训练语言模型设计 Prompt 也能实现对 PLM 所执行文本任务的控制
+- 加入`解码策略`（Decoding Strategy）: 在解码阶段使用采样策略，也能够采样出具有特定属性的文本
+- `Write-then-Edit`: PPLM 引入属性判别模型来根据产生的草稿计算梯度并反向传播，基于更新后的隐含状态来产生最终文本序列
+
+具体方法详见：[ICBU可控文本生成技术详解](https://www.sohu.com/a/492765825_612370) 
+
+
 ## 改进方法
 
 
 ### 控制主题、属性
+
+【2023-1-12】可控文本生成
+
+![img](https://p5.itc.cn/images01/20210929/6aa2076d9669476586c19a6f8d4b9b2d.png)
 
 #### （1）`Copy机制`
 
@@ -515,10 +610,16 @@ para的意思是“另外的”，phrase是“陈述”。所以国内有人翻�
 
 # 评价方法
 
-- 【2021-3-25】文本生成评估方法综述：[Evaluation of Text Generation: A Survey](https://www.aminer.cn/pub/5ef9c12e91e011b84e1f8bfd/evaluation-of-text-generation-a-survey)
-  -  (1) human-centric evaluation metrics
-  -  (2) automaticmetrics that require no training
-  - (3) machine-learned metrics. 
+## 总结
+
+【2021-3-25】文本生成评估方法综述：[Evaluation of Text Generation: A Survey](https://www.aminer.cn/pub/5ef9c12e91e011b84e1f8bfd/evaluation-of-text-generation-a-survey)
+- (1) human-centric evaluation metrics：人工标注
+- (2) unsupervised automatic metrics：无监督自动评估，如 ROUGE-N, BLEU-N, Distinct-N，METEOR,PYRAMID
+- (3) machine-learned automatic metrics：机器学习自动评估，如 BERTScore、NLI model
+
+![](https://p9.itc.cn/images01/20210929/9d48fa7b3bca4c4eada43218492fc205.png)
+
+人工评价指标虽然灵活，不适合用于对海量样本评价。而无监督的自动评价指标，虽然能低成本地解决评测问题，但能够完成评价的角度甚少。“用模型来衡量模型”则是效率和灵活性之间的 trade-off。
 
 - NLG常用metrics：
   - BLEU: ngram precision；长度类似
