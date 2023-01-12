@@ -4716,6 +4716,63 @@ func BenchmarkAdd(b *testing.B) {  
 - BenchmarkAdd 2000000000 0.72 ns/op
 - ok github.com/my 1.528s
 
+## 调试 
+
+
+### 运行时间
+
+【2023-1-12】trace 包，跟踪函数执行时间
+
+代码
+
+```go
+package main
+import (
+    "fmt"
+    "os"
+    "runtime"
+    "runtime/trace"
+    "sync/atomic"
+    "time"
+)
+var (
+    stop  int32
+    count int64
+    sum   time.Duration
+)
+func concat() {
+    for n := 0; n < 100; n++ {
+        for i := 0; i < 8; i++ {
+            go func() {
+                s := "Go GC"
+                s += " " + "Hello"
+                s += " " + "World"
+                _ = s
+            }()
+        }
+    }
+}
+func main() {
+    f, _ := os.Create("trace.out")
+    defer f.Close()
+    trace.Start(f)
+    defer trace.Stop()
+    go func() {
+        var t time.Time
+        for atomic.LoadInt32(&stop) == 0 {
+            t = time.Now()
+            runtime.GC()
+            sum += time.Since(t)
+            count++
+        }
+        fmt.Printf("GC spend avg: %v\n", time.Duration(int64(sum)/count))
+    }()
+    concat()
+    atomic.StoreInt32(&stop, 1)
+}
+```
+
+
 ## 图片
 
 ### 动图生成
