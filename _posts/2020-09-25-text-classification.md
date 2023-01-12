@@ -138,6 +138,13 @@ pip install nlpcda
 - **多标签**分类：Jaccard相似系数, ... 
   - 为什么是jaccard？各类别不互（正交），不能用传统指标
 
+### 实践经验
+
+【2023-1-11】公司的数据集上
+- BERT fine tune，精度82%，训练：30小时fune tune。serving：单GPU 5000词每秒；
+- fasttext，精度81.5%，训练：1分钟，serving：单CPU 7万词每秒。
+
+bert效果好一点，但落地成本也比较高，需要权衡一下。一般先用简单模型搭基线。
 
 # 常规分类方法
 

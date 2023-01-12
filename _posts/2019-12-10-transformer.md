@@ -27,6 +27,10 @@ permalink: /transformer
 - 提升长程依赖的学习能力
 - 层次化建模
 
+[Transformer视频极速讲解]([https://vdn6.vzuu.com/SD/8e617f0a-18b6-11ed-a515-caa2f7fe3b8b.mp4](https://vdn6.vzuu.com/SD/8e617f0a-18b6-11ed-a515-caa2f7fe3b8b.mp4?pkey=AAUueFULRuG_6uD2Q02FRUhdfjMyp6FyxymFaW_-XWxvqXHc6okeEqAV0nNeMEHz8n-IipsQme7OkNApjLZ6QurG&c=avc.1.1&f=mp4&pu=078babd7&bu=078babd7&expiration=1673454650&v=ks6))
+
+<embed width="800" height="600" src="https://vdn6.vzuu.com/SD/8e617f0a-18b6-11ed-a515-caa2f7fe3b8b.mp4?pkey=AAUueFULRuG_6uD2Q02FRUhdfjMyp6FyxymFaW_-XWxvqXHc6okeEqAV0nNeMEHz8n-IipsQme7OkNApjLZ6QurG&c=avc.1.1&f=mp4&pu=078babd7&bu=078babd7&expiration=1673454650&v=ks6" />
+
 ## 卷积
 
 各类卷积讲解:[A Comprehensive Introduction to Different Types of Convolutions in Deep Learning](https://towardsdatascience.com/a-comprehensive-introduction-to-different-types-of-convolutions-in-deep-learning-669281e58215)
