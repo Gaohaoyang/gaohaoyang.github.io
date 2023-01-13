@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "目标检测--Obeject Detection"
+title:  "目标检测及跟踪--Obeject Detection&Tracing"
 date:   2020-03-08 18:30:00
 categories: 计算机视觉
 tags: 深度学习 计算机视觉 GAN  yolo cv 卡尔曼 滤波器
@@ -740,6 +740,322 @@ ReactDOM.render(React.createElement(App), domContainer);
 
 为了捕获这种相关性，用`协方差矩阵`。矩阵的每个值是第i个变量和第j个变量之间的相关程度（由于矩阵是对称的，i和j的位置可以随便交换）。用 Σ 表示协方差矩阵，在这个例子中，就是Σij。
 - ![](https://pic1.zhimg.com/80/v2-c0d94558ba4ee781291cefc855ea53f0_1440w.jpg)
+
+# 目标跟踪
+
+目标跟踪是计算机视觉领域的一个重要问题，目前广泛应用在体育赛事转播、安防监控和无人机、无人车、机器人等领域。
+- ![img](https://pica.zhimg.com/v2-669bcf28d4d647b6d832984adf059ac0_1440w.jpg?source=172ae18b)
+- [目标跟踪综述](https://zhuanlan.zhihu.com/p/148516834)
+
+## 目标跟踪应用
+
+|应用领域|内容|示意|
+|---|---|---|
+|体育赛事|比赛转播|![](https://pic1.zhimg.com/80/v2-531de42fb6687921041aa8a8e6cd2ce8_1440w.webp)|
+|无人车|车辆跟踪|![](https://pic1.zhimg.com/80/v2-deee3ca02a16a4ac0d098acb2390cfac_1440w.webp)|
+
+## 目标跟踪分类
+
+目标跟踪任务分类
+
+目标跟踪可以分为以下几种任务
+- 单目标跟踪 - 给定一个目标，追踪这个目标的位置。
+- 多目标跟踪 - 追踪多个目标的位置
+- Person Re-ID - 行人重识别，是利用计算机视觉技术判断图像或者视频序列中是否存在特定行人的技术。广泛被认为是一个图像检索的子问题。给定一个监控行人图像，检索跨设备下的该行人图像。旨在弥补固定的摄像头的视觉局限，并可与行人检测/行人跟踪技术相结合。
+- MTMCT - 多目标多摄像头跟踪（Multi-target Multi-camera Tracking），跟踪多个摄像头拍摄的多个人
+- 姿态跟踪 - 追踪人的姿态
+
+按照任务计算类型又可以分为以下2类。
+- 在线跟踪 - 在线跟踪需要实时处理任务，通过过去和现在帧来跟踪未来帧中物体的位置。
+- 离线跟踪 - 离线跟踪是离线处理任务，可以通过过去、现在和未来的帧来推断物体的位置，因此准确率会在线跟踪高。
+
+## 数据集
+
+- ![img](https://pic2.zhimg.com/80/v2-469a0d48774e9346242a5fa8e5bd1a39_1440w.webp)
+
+## 目标跟踪的困难点
+
+虽然目标追踪的应用前景非常广泛，但还是有一些问题限制了它的应用，我们看下有哪些问题呢？
+- 形态变化 - 姿态变化是目标跟踪中常见的干扰问题。运动目标发生姿态变化时, 会导致它的特征以及外观模型发生改变, 容易导致跟踪失败。例如:体育比赛中的运动员、马路上的行人。
+- 尺度变化 - 尺度的自适应也是目标跟踪中的关键问题。当目标尺度缩小时, 由于跟踪框不能自适应跟踪, 会将很多背景信息包含在内, 导致目标模型的更新错误:当目标尺度增大时, 由于跟踪框不能将目标完全包括在内, 跟踪框内目标信息不全, 也会导致目标模型的更新错误。因此, 实现尺度自适应跟踪是十分必要的。
+- 遮挡与消失 - 目标在运动过程中可能出现被遮挡或者短暂的消失情况。当这种情况发生时, 跟踪框容易将遮挡物以及背景信息包含在跟踪框内, 会导致后续帧中的跟踪目标漂移到遮挡物上面。若目标被完全遮挡时, 由于找不到目标的对应模型, 会导致跟踪失败。
+- 图像模糊 - 光照强度变化, 目标快速运动, 低分辨率等情况会导致图像模型, 尤其是在运动目标与背景相似的情况下更为明显。因此, 选择有效的特征对目标和背景进行区分非常必要。
+
+示例
+- 光照及模糊 [img](https://pic1.zhimg.com/80/v2-522e7bad45da314edb03ea3c7b26f260_1440w.webp)
+  - ![](https://pic1.zhimg.com/80/v2-522e7bad45da314edb03ea3c7b26f260_1440w.webp)
+- 形变及遮挡 [img](https://pic3.zhimg.com/80/v2-46f38d9ee2dd149639774ee598e4456a_1440w.webp)
+  - ![](https://pic3.zhimg.com/80/v2-46f38d9ee2dd149639774ee598e4456a_1440w.webp)
+
+
+## 目标跟踪算法
+
+
+### 目标跟踪算法总结
+
+目标跟踪的方法主要分为2大类，一类是**相关滤波**、一类是**深度学习**。[img](https://pic2.zhimg.com/80/v2-632a3a08c0f30f0abcdb8b06afbe346d_1440w.webp)
+- ![img](https://pic2.zhimg.com/80/v2-632a3a08c0f30f0abcdb8b06afbe346d_1440w.webp)
+- 相比于光流法、Kalman、Meanshift等传统算法，相关滤波类算法跟踪速度更快，深度学习类方法精度高.
+- 具有多特征融合以及深度特征的追踪器在跟踪精度方面的效果更好.
+- 使用强大的分类器是实现良好跟踪的基础.
+- 尺度的自适应以及模型的更新机制也影响着跟踪的精度.
+
+
+### 目标跟踪算法分类
+
+目标跟踪的方法按照**模式**划分为2类。
+- `生成式`模型 - 早期主要集中于**生成式**模型跟踪算法的研究, 如`光流法`、`粒子滤波`、`Meanshift`算法、`Camshift`算法等.
+  - 此类方法首先建立**目标模型**或者**提取目标特征**, 在后续帧中进行**相似特征搜索**. 逐步迭代实现目标定位.
+  - 明显缺点: 
+    - 图像的背景信息没有得到全面的利用.
+    - 目标本身的外观变化有随机性和多样性特点
+  - 因此, 通过**单一数学模型**描述待跟踪目标具有很大的局限性. 具体表现为**光照变化**, **运动模糊**, **分辨率低**, **目标旋转形变**等情况, 模型的建立会受到巨大的影响, 从而影响跟踪的准确性; 模型的建立没有有效地预测机制, 当出现目标遮挡情况时, 不能够很好地解决。
+- `鉴别式`模型 - 鉴别式模型将**目标模型**和**背景信息**同时考虑在内, 通过对比目标模型和背景信息的差异, 将目标模型提取出来, 从而得到当前帧中的目标位置.文献在对跟踪算法的评估中发现, 通过将背景信息引入跟踪模型, 可以很好地实现目标跟踪.因此鉴别式模型具有很大的优势.
+  - 2000年以来, 人们逐渐尝试使用经典的机器学习方法训练分类器, 例如MIL、TLD、支持向量机、结构化学习、随机森林、多实例学习、度量学习. 
+  - 2010年, 文献首次将通信领域的**相关滤波**方法引入到目标跟踪中.作为鉴别式方法的一种, 相关滤波无论在速度上还是准确率上, 都显示出更优越的性能. 然而, 相关滤波器用于目标跟踪是在2014年之后.
+  - 自2015年以后, 随着深度学习技术的广泛应用, 人们开始将深度学习技术用于目标跟踪。
+
+按照时间顺序，目标跟踪的方法经历了从经典算法到基于核相关滤波算法，再到基于深度学习的跟踪算法的过程。
+- 经典跟踪算法
+- 基于核相关滤波的跟踪算法
+- 基于深度学习的跟踪算法
+
+
+### 经典跟踪算法
+
+早期的目标跟踪算法主要是根据目标建模或者对目标特征进行跟踪
+- 基于**目标模型建模**的方法: 通过对目标外观模型进行建模, 然后在之后的帧中找到目标.例如, 区域匹配、特征点跟踪、基于主动轮廓的跟踪算法、光流法等.最常用的是特征匹配法, 首先提取目标特征, 然后在后续的帧中找到最相似的特征进行目标定位, 常用的特征有: SIFT特征、SURF特征、Harris角点等。
+- 基于**搜索**的方法: 随着研究的深入, 人们发现基于目标模型建模的方法对整张图片进行处理, 实时性差.人们将预测算法加入跟踪中, 在预测值附近进行目标搜索, 减少了搜索的范围.常见一类的预测算法有Kalman滤波、粒子滤波方法.另一种减小搜索范围的方法是内核方法:运用最速下降法的原理, 向梯度下降方向对目标模板逐步迭代, 直到迭代到最优位置.诸如, Meanshift、Camshift算法
+
+
+#### 光流法
+
+`光流法`(Lucas-Kanade)的概念首先在1950年提出, 它是针对外观模型对视频序列中的像素进行操作.通过利用视频序列在相邻帧之间的像素关系, 寻找像素的位移变化来判断目标的运动状态, 实现对运动目标的跟踪.但是, 光流法适用的范围较小, 需要满足三种假设:图像的光照强度保持不变; 空间一致性, 即每个像素在不同帧中相邻点的位置不变, 这样便于求得最终的运动矢量; 时间连续.光流法适用于目标运动相对于帧率是缓慢的, 也就是两帧之间的目标位移不能太大.
+
+
+#### Meanshift
+
+`Meanshift`方法是一种基于概率密度分布的跟踪方法，使目标的搜索一直沿着概率梯度上升的方向，迭代收敛到概率密度分布的局部峰值上。首先 Meanshift 会对目标进行建模，比如利用目标的颜色分布来描述目标，然后计算目标在下一帧图像上的概率分布，从而迭代得到局部最密集的区域。Meanshift 适用于目标的色彩模型和背景差异比较大的情形，早期也用于人脸跟踪。由于 Meanshift 方法的快速计算，它的很多改进方法也一直适用至今。
+
+#### 粒子滤波
+
+`粒子滤波`（Particle Filter）方法是一种基于粒子分布统计的方法。以跟踪为例，首先对跟踪目标进行建模，并定义一种相似度度量确定粒子与目标的匹配程度。在目标搜索的过程中，它会按照一定的分布（比如均匀分布或高斯分布）撒一些粒子，统计这些粒子的相似度，确定目标可能的位置。在这些位置上，下一帧加入更多新的粒子，确保在更大概率上跟踪上目标。Kalman Filter 常被用于描述目标的运动模型，它不对目标的特征建模，而是对目标的运动模型进行了建模，常用于估计目标在下一帧的位置。
+
+#### 优缺点
+
+可以看到，传统的目标跟踪算法存在两个致命**缺陷**:
+- 没有将**背景信息**考虑在内, 导致在目标遮挡, 光照变化以及运动模糊等干扰下容易出现跟踪失败.
+- 跟踪算法执行**速度慢**(每秒10帧左右), 无法满足实时性的要求.
+
+### 基于核相关滤波的跟踪算法
+
+接着，人们将通信领域的**相关滤波**(衡量两个信号的相似程度)引入到了目标跟踪中.
+- 一些基于相关滤波的跟踪算法(MOSSE、CSK、KCF、BACF、SAMF)等, 也随之产生, 速度可以达到数百帧每秒, 可以广泛地应用于**实时跟踪系统**中. 
+- 其中不乏一些跟踪性能优良的跟踪器, 诸如SAMF、BACF在OTB数据集和VOT2015竞赛中取得优异成绩。
+
+#### MOSSE
+
+本文提出的相关滤波器（Correlation Filter）通过MOSSE（Minimum Output Sum of Squared Error (MOSSE) filter）算法实现，基本思想：越是相似的两个目标相关值越大，也就是视频帧中与初始化目标越相似，得到的相应也就越大。下图所示通过对比UMACE,ASEF，MOSSE等相关滤波算法，使输出目标中心最大化。
+
+
+### 基于深度学习的跟踪算法
+
+随着深度学习方法的广泛应用, 人们开始考虑将其应用到目标跟踪中.人们开始使用**深度特征**并取得了很好的效果.之后, 人们开始考虑用深度学习建立全新的跟踪框架, 进行目标跟踪.
+
+在大数据背景下，利用深度学习训练网络模型，得到的卷积特征输出表达能力更强。
+- 在目标跟踪上，初期的应用方式是把网络学习到的**特征**，直接应用到**相关滤波**或 Struck的跟踪框架里面，从而得到更好的跟踪结果，比如前面提到的 DeepSRDCF 方法。本质上卷积输出得到的特征表达，更优于 HOG 或 CN 特征，这也是深度学习的优势之一，但同时也带来了计算量的增加。
+
+## 目标跟踪实践
+
+最新方法
+- 详细内容见：[Visual Tracking Paper List](https://github.com/foolwood/benchmark_results)
+
+
+### Recommendations
+
+:star2: Recommendations :star2:
+
+- Goutam Bhat, Martin Danelljan, Luc Van Gool, Radu Timofte.<br />
+  "Know Your Surroundings: Exploiting Scene Information for Object Tracking." Arxiv (2020).
+  [[paper](https://arxiv.org/pdf/2003.11014v1.pdf)] 
+
+### CVPR2020
+
+* **MAML:** Guangting Wang, Chong Luo, Xiaoyan Sun, Zhiwei Xiong, Wenjun Zeng.<br />
+  "Tracking by Instance Detection: A Meta-Learning Approach." CVPR (2020 **Oral**).
+  [[paper](https://arxiv.org/pdf/2004.00830v1.pdf)]
+
+* **Siam R-CNN:** Paul Voigtlaender, Jonathon Luiten, Philip H.S. Torr, Bastian Leibe.<br />
+  "Siam R-CNN: Visual Tracking by Re-Detection." CVPR (2020).
+  [[paper](https://arxiv.org/pdf/1911.12836.pdf)] 
+  [[code](https://www.vision.rwth-aachen.de/page/siamrcnn)]
+
+* **D3S:** Alan Lukežič, Jiří Matas, Matej Kristan.<br />
+  "D3S – A Discriminative Single Shot Segmentation Tracker." CVPR (2020).
+  [[paper](http://arxiv.org/pdf/1911.08862v2.pdf)]
+  [[code](https://github.com/alanlukezic/d3s)]
+
+* **PrDiMP:** Martin Danelljan, Luc Van Gool, Radu Timofte.<br />
+  "Probabilistic Regression for Visual Tracking." CVPR (2020).
+  [[paper](https://arxiv.org/pdf/2003.12565v1.pdf)]
+  [[code](https://github.com/visionml/pytracking)]
+
+* **ROAM:** Tianyu Yang, Pengfei Xu, Runbo Hu, Hua Chai, Antoni B. Chan.<br />
+  "ROAM: Recurrently Optimizing Tracking Model." CVPR (2020).
+  [[paper](https://arxiv.org/pdf/1907.12006v3.pdf)]
+
+* **AutoTrack:** Yiming Li, Changhong Fu, Fangqiang Ding, Ziyuan Huang, Geng Lu.<br />
+  "AutoTrack: Towards High-Performance Visual Tracking for UAV with Automatic Spatio-Temporal Regularization." CVPR (2020).
+  [[paper](https://arxiv.org/pdf/2003.12949.pdf)]
+  [[code](https://github.com/vision4robotics/AutoTrack)]
+
+* **SiamBAN:** Zedu Chen, Bineng Zhong, Guorong Li, Shengping Zhang, Rongrong Ji.<br />
+  "Siamese Box Adaptive Network for Visual Tracking." CVPR (2020).
+  [[paper](http://arxiv.org/pdf/1911.08862v2.pdf)]
+  [[code](https://github.com/hqucv/siamban)]
+
+* **SiamAttn:** Yuechen Yu, Yilei Xiong, Weilin Huang, Matthew R. Scott. <br />
+  "Deformable Siamese Attention Networks for Visual Object Tracking." CVPR (2020).
+  [[paper](https://arxiv.org/pdf/2004.06711v1.pdf)]
+
+* **CGACD:** Fei Du, Peng Liu, Wei Zhao, Xianglong Tang.<br />
+  "Correlation-Guided Attention for Corner Detection Based Visual Tracking." CVPR (2020).
+
+
+### AAAI 2020
+
+- **SiamFC++:** Yinda Xu, Zeyu Wang, Zuoxin Li, Ye Yuan, Gang Yu. <br />
+  "SiamFC++: Towards Robust and Accurate Visual Tracking with Target Estimation Guidelines." AAAI (2020).
+  [[paper](https://arxiv.org/pdf/1911.06188v4.pdf)]
+  [[code](https://github.com/MegviiDetection/video_analyst)]
+
+
+### ICCV2019
+
+* **DiMP:** Goutam Bhat, Martin Danelljan, Luc Van Gool, Radu Timofte.<br />
+  "Learning Discriminative Model Prediction for Tracking." ICCV (2019 **oral**). 
+  [[paper](http://openaccess.thecvf.com/content_ICCV_2019/papers/Bhat_Learning_Discriminative_Model_Prediction_for_Tracking_ICCV_2019_paper.pdf)]
+  [[code](https://github.com/visionml/pytracking)]
+
+* **GradNet:** Peixia Li, Boyu Chen, Wanli Ouyang, Dong Wang, Xiaoyun Yang, Huchuan Lu. <br />
+  "GradNet: Gradient-Guided Network for Visual Object Tracking." ICCV (2019 **oral**).
+  [[paper](http://openaccess.thecvf.com/content_ICCV_2019/papers/Li_GradNet_Gradient-Guided_Network_for_Visual_Object_Tracking_ICCV_2019_paper.pdf)]
+  [[code](https://github.com/LPXTT/GradNet-Tensorflow)]
+
+* **MLT:** Janghoon Choi, Junseok Kwon, Kyoung Mu Lee. <br />
+  "Deep Meta Learning for Real-Time Target-Aware Visual Tracking." ICCV (2019).
+  [[paper](http://openaccess.thecvf.com/content_ICCV_2019/papers/Choi_Deep_Meta_Learning_for_Real-Time_Target-Aware_Visual_Tracking_ICCV_2019_paper.pdf)]
+
+* **SPLT:** Bin Yan, Haojie Zhao, Dong Wang, Huchuan Lu, Xiaoyun Yang <br />
+  "'Skimming-Perusal' Tracking: A Framework for Real-Time and Robust Long-Term Tracking." ICCV (2019).
+  [[paper](http://openaccess.thecvf.com/content_ICCV_2019/papers/Yan_Skimming-Perusal_Tracking_A_Framework_for_Real-Time_and_Robust_Long-Term_Tracking_ICCV_2019_paper.pdf)]
+  [[code](https://github.com/iiau-tracker/SPLT)]
+
+* **ARCF:** Ziyuan Huang, Changhong Fu, Yiming Li, Fuling Lin, Peng Lu. <br />
+  "Learning Aberrance Repressed Correlation Filters for Real-Time UAV Tracking." ICCV (2019).
+  [[paper](http://openaccess.thecvf.com/content_ICCV_2019/papers/Huang_Learning_Aberrance_Repressed_Correlation_Filters_for_Real-Time_UAV_Tracking_ICCV_2019_paper.pdf)]
+  [[code](https://github.com/vision4robotics/ARCF-tracker)]
+
+* Lianghua Huang, Xin Zhao, Kaiqi Huang. <br />
+  "Bridging the Gap Between Detection and Tracking: A Unified Approach." ICCV (2019).
+  [[paper](http://openaccess.thecvf.com/content_ICCV_2019/papers/Huang_Bridging_the_Gap_Between_Detection_and_Tracking_A_Unified_Approach_ICCV_2019_paper.pdf)]
+
+* **UpdateNet:** Lichao Zhang, Abel Gonzalez-Garcia, Joost van de Weijer, Martin Danelljan, Fahad Shahbaz Khan. <br />
+  "Learning the Model Update for Siamese Trackers." ICCV (2019).
+  [[paper](http://openaccess.thecvf.com/content_ICCV_2019/papers/Zhang_Learning_the_Model_Update_for_Siamese_Trackers_ICCV_2019_paper.pdf)]
+  [[code](https://github.com/zhanglichao/updatenet)]
+
+* **PAT:** Rey Reza Wiyatno, Anqi Xu. <br />
+  "Physical Adversarial Textures That Fool Visual Object Tracking." ICCV (2019).
+  [[paper](http://openaccess.thecvf.com/content_ICCV_2019/papers/Wiyatno_Physical_Adversarial_Textures_That_Fool_Visual_Object_Tracking_ICCV_2019_paper.pdf)]
+
+* **GFS-DCF:** Tianyang Xu, Zhen-Hua Feng, Xiao-Jun Wu, Josef Kittler. <br />
+  "Joint Group Feature Selection and Discriminative Filter Learning for Robust Visual Object Tracking." ICCV (2019).
+  [[paper](http://openaccess.thecvf.com/content_ICCV_2019/papers/Xu_Joint_Group_Feature_Selection_and_Discriminative_Filter_Learning_for_Robust_ICCV_2019_paper.pdf)]
+  [[code](https://github.com/XU-TIANYANG/GFS-DCF)]
+
+* **CDTB:** Alan Lukežič, Ugur Kart, Jani Käpylä, Ahmed Durmush, Joni-Kristian Kämäräinen, Jiří Matas, Matej Kristan. <br />
+
+  "CDTB: A Color and Depth Visual Object Tracking Dataset and Benchmark." ICCV (2019).
+  [[paper](http://openaccess.thecvf.com/content_ICCV_2019/papers/Lukezic_CDTB_A_Color_and_Depth_Visual_Object_Tracking_Dataset_and_ICCV_2019_paper.pdf)]
+
+* **VOT2019:** Kristan, Matej, et al.<br />
+  "The Seventh Visual Object Tracking VOT2019 Challenge Results." ICCV workshops (2019).
+  [[paper](http://openaccess.thecvf.com/content_ICCVW_2019/papers/VOT/Kristan_The_Seventh_Visual_Object_Tracking_VOT2019_Challenge_Results_ICCVW_2019_paper.pdf)]
+
+
+### CVPR2019
+
+* **SiamMask:** Qiang Wang, Li Zhang, Luca Bertinetto, Weiming Hu, Philip H.S. Torr.<br />
+  "Fast Online Object Tracking and Segmentation: A Unifying Approach." CVPR (2019). 
+  [[paper](https://arxiv.org/pdf/1812.05050.pdf)]
+  [[project](http://www.robots.ox.ac.uk/~qwang/SiamMask/)]
+  [[code](https://github.com/foolwood/SiamMask)]
+
+* **SiamRPN++:** Bo Li, Wei Wu, Qiang Wang, Fangyi Zhang, Junliang Xing, Junjie Yan.<br />
+  "SiamRPN++: Evolution of Siamese Visual Tracking with Very Deep Networks." CVPR (2019 **oral**). 
+  [[paper](http://openaccess.thecvf.com/content_CVPR_2019/papers/Li_SiamRPN_Evolution_of_Siamese_Visual_Tracking_With_Very_Deep_Networks_CVPR_2019_paper.pdf)]
+  [[project](http://bo-li.info/SiamRPN++/)]
+
+* **ATOM:** Martin Danelljan, Goutam Bhat, Fahad Shahbaz Khan, Michael Felsberg. <br />
+  "ATOM: Accurate Tracking by Overlap Maximization." CVPR (2019 **oral**). 
+  [[paper](http://openaccess.thecvf.com/content_CVPR_2019/papers/Danelljan_ATOM_Accurate_Tracking_by_Overlap_Maximization_CVPR_2019_paper.pdf)]
+  [[code](https://github.com/visionml/pytracking)]
+
+* **SiamDW:** Zhipeng Zhang, Houwen Peng.<br />
+  "Deeper and Wider Siamese Networks for Real-Time Visual Tracking." CVPR (2019 **oral**). 
+  [[paper](http://openaccess.thecvf.com/content_CVPR_2019/papers/Zhang_Deeper_and_Wider_Siamese_Networks_for_Real-Time_Visual_Tracking_CVPR_2019_paper.pdf)]
+  [[code](https://github.com/researchmm/SiamDW)]
+
+* **GCT:** Junyu Gao, Tianzhu Zhang, Changsheng Xu.<br />
+  "Graph Convolutional Tracking." CVPR (2019 **oral**).
+  [[paper](http://openaccess.thecvf.com/content_CVPR_2019/papers/Gao_Graph_Convolutional_Tracking_CVPR_2019_paper.pdf)]
+  [[code](https://github.com/researchmm/SiamDW)]
+
+* **ASRCF:** Kenan Dai, Dong Wang, Huchuan Lu, Chong Sun, Jianhua Li. <br />
+  "Visual Tracking via Adaptive Spatially-Regularized Correlation Filters." CVPR (2019 **oral**).
+  [[paper](http://openaccess.thecvf.com/content_CVPR_2019/papers/Dai_Visual_Tracking_via_Adaptive_Spatially-Regularized_Correlation_Filters_CVPR_2019_paper.pdf)]
+  [[code](https://github.com/Daikenan/ASRCF)]
+
+* **UDT:** Ning Wang, Yibing Song, Chao Ma, Wengang Zhou, Wei Liu, Houqiang Li.<br />
+  "Unsupervised Deep Tracking." CVPR (2019). 
+  [[paper](https://arxiv.org/pdf/1904.01828.pdf)]
+  [[code](https://github.com/594422814/UDT)]
+
+* **TADT:** Xin Li, Chao Ma, Baoyuan Wu, Zhenyu He, Ming-Hsuan Yang.<br />
+  "Target-Aware Deep Tracking." CVPR (2019). 
+  [[paper](https://arxiv.org/pdf/1904.01772.pdf)]
+  [[project](https://xinli-zn.github.io/TADT-project-page/)]
+  [[code](https://github.com/XinLi-zn/TADT)]
+
+* **C-RPN:** Heng Fan, Haibin Ling.<br />
+  "Siamese Cascaded Region Proposal Networks for Real-Time Visual Tracking." CVPR (2019). 
+  [[paper](http://openaccess.thecvf.com/content_CVPR_2019/papers/Fan_Siamese_Cascaded_Region_Proposal_Networks_for_Real-Time_Visual_Tracking_CVPR_2019_paper.pdf)]
+
+* **SPM:** Guangting Wang, Chong Luo, Zhiwei Xiong, Wenjun Zeng.<br />
+  "SPM-Tracker: Series-Parallel Matching for Real-Time Visual Object Tracking." CVPR (2019). 
+  [[paper](http://openaccess.thecvf.com/content_CVPR_2019/papers/Wang_SPM-Tracker_Series-Parallel_Matching_for_Real-Time_Visual_Object_Tracking_CVPR_2019_paper.pdf)]
+
+* **OTR:** Ugur Kart, Alan Lukezic, Matej Kristan, Joni-Kristian Kamarainen, Jiri Matas. <br />
+  "Object Tracking by Reconstruction with View-Specific Discriminative Correlation Filters." CVPR (2019). 
+  [[paper](http://openaccess.thecvf.com/content_CVPR_2019/papers/Kart_Object_Tracking_by_Reconstruction_With_View-Specific_Discriminative_Correlation_Filters_CVPR_2019_paper.pdf)]
+  [[code](https://github.com/ugurkart/OTR)]
+
+* **RPCF:** Yuxuan Sun, Chong Sun, Dong Wang, Huchuan Lu, You He. <br />
+  "ROI Pooled Correlation Filters for Visual Tracking." CVPR (2019).
+  [[paper](http://openaccess.thecvf.com/content_CVPR_2019/papers/Sun_ROI_Pooled_Correlation_Filters_for_Visual_Tracking_CVPR_2019_paper.pdf)]
+
+* **LaSOT:** Heng Fan, Liting Lin, Fan Yang, Peng Chu, Ge Deng, Sijia Yu, Hexin Bai, Yong Xu, Chunyuan Liao, Haibin Ling.<br />
+  "LaSOT: A High-quality Benchmark for Large-scale Single Object Tracking." CVPR (2019). 
+  [[paper](https://arxiv.org/pdf/1809.07845.pdf)]
+  [[project](https://cis.temple.edu/lasot/)]
+
+### AAAI2019
+
+* **LDES:** Yang Li, Jianke Zhu, Steven C.H. Hoi, Wenjie Song, Zhefeng Wang, Hantang Liu.<br />
+  "Robust Estimation of Similarity Transformation for Visual Object Tracking." AAAI (2019). 
+  [[paper](https://arxiv.org/pdf/1712.05231.pdf)]
+  [[code](https://github.com/ihpdep/LDES)] 
 
 # 结束
 
