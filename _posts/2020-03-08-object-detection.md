@@ -1054,7 +1054,7 @@ merged measurement问题就是如果两个车辆在自车前方并行，二者�
 在大数据背景下，利用深度学习训练网络模型，得到的卷积特征输出表达能力更强。
 - 在目标跟踪上，初期的应用方式是把网络学习到的**特征**，直接应用到**相关滤波**或 Struck的跟踪框架里面，从而得到更好的跟踪结果，比如前面提到的 DeepSRDCF 方法。本质上卷积输出得到的特征表达，更优于 HOG 或 CN 特征，这也是深度学习的优势之一，但同时也带来了计算量的增加。
 
-## 目标跟踪实践
+## 目标跟踪前沿
 
 最新方法
 - 详细内容见：[Visual Tracking Paper List](https://github.com/foolwood/benchmark_results)
@@ -1245,6 +1245,236 @@ merged measurement问题就是如果两个车辆在自车前方并行，二者�
   "Robust Estimation of Similarity Transformation for Visual Object Tracking." AAAI (2019). 
   [[paper](https://arxiv.org/pdf/1712.05231.pdf)]
   [[code](https://github.com/ihpdep/LDES)] 
+
+
+## 目标跟踪实践
+
+
+### 单目标跟踪
+
+[opencv实现单目标跟踪](https://blog.csdn.net/LuohenYJ/article/details/89029816)
+
+通常在目标跟踪有以下方法：
+- 1）密集光流：这些算法有助于估计视频帧中每个像素的运动情况。
+- 2）稀疏光流：这些算法，如Kanade-Lucas-Tomashi（KLT）特征跟踪器，跟踪图像中几个特征点的位置。
+- 3）卡尔曼滤波：一种非常流行的信号处理算法，用于根据先前的运动信息预测运动物体的位置。该算法的早期应用之一是导弹制导！还提到这里，阿波罗11号登月舱的降落到月球车载计算机有一个卡尔曼滤波器。Engineers Look to Kalman Filtering for Guidance。
+- 4）均值偏移(Meanshift)和Camshift(Meanshift的改进，连续自适应的MeanShift算法)：这些是用于定位密度函数的最大值的算法。它们也用于跟踪。
+- 5）单目标跟踪算法：在此类跟踪器中，第一帧使用矩形表示我们要跟踪的对象的位置。然后使用跟踪算法在后续帧中跟踪对象。在大多数实际应用中，这些跟踪器与目标检测算法结合使用。
+- 6）多目标跟踪算法：在我们有快速对象检测器的情况下，检测每个帧中的多个对象然后运行跟踪查找算法来识别一个帧中的哪个矩形对应于下一帧中的矩形是很有效的。
+
+OpenCV 3中提供的8种不同的跟踪器BOOSTING，MIL，KCF，TLD，MEDIANFLOW，GOTURN，MOSSE和CSRT。
+
+
+Python版
+
+Python稍微很简单，先卸载安装的Opencv，然后直接pip/pip3安装contrib库：
+
+```py
+pip uninstall opencv-python
+pip install opencv-contrib-python
+```
+
+目标跟踪代码
+
+```py
+import cv2
+import sys
+ 
+ 
+if __name__ == '__main__' :
+ 
+    # Set up tracker.
+    # Instead of MIL, you can also use
+ 
+    tracker_types = ['BOOSTING', 'MIL','KCF', 'TLD', 'MEDIANFLOW', 'MOSSE', 'CSRT']
+    tracker_type = tracker_types[4]
+ 
+ 
+    if tracker_type == 'BOOSTING':
+        tracker = cv2.TrackerBoosting_create()
+    if tracker_type == 'MIL':
+        tracker = cv2.TrackerMIL_create()
+    if tracker_type == 'KCF':
+        tracker = cv2.TrackerKCF_create()
+    if tracker_type == 'TLD':
+        tracker = cv2.TrackerTLD_create()
+    if tracker_type == 'MEDIANFLOW':
+        tracker = cv2.TrackerMedianFlow_create()
+    if tracker_type == "CSRT":
+        tracker = cv2.TrackerCSRT_create()
+    if tracker_type == "MOSSE":
+    tracker = cv2.TrackerMOSSE_create()
+    # Read video
+    video = cv2.VideoCapture("video/chaplin.mp4")
+ 
+    # Exit if video not opened.
+    if not video.isOpened():
+        print("Could not open video")
+        sys.exit()
+ 
+    # Read first frame.
+    ok, frame = video.read()
+    if not ok:
+        print('Cannot read video file')
+        sys.exit()
+    
+    # Define an initial bounding box
+    bbox = (287, 23, 86, 320)
+ 
+    # Uncomment the line below to select a different bounding box
+    bbox = cv2.selectROI(frame, False)
+ 
+    # Initialize tracker with first frame and bounding box
+    ok = tracker.init(frame, bbox)
+ 
+    while True:
+        # Read a new frame
+        ok, frame = video.read()
+        if not ok:
+            break
+        
+        # Start timer
+        timer = cv2.getTickCount()
+ 
+        # Update tracker
+        ok, bbox = tracker.update(frame)
+ 
+        # Calculate Frames per second (FPS)
+        fps = cv2.getTickFrequency() / (cv2.getTickCount() - timer);
+ 
+        # Draw bounding box
+        if ok:
+            # Tracking success
+            p1 = (int(bbox[0]), int(bbox[1]))
+            p2 = (int(bbox[0] + bbox[2]), int(bbox[1] + bbox[3]))
+            cv2.rectangle(frame, p1, p2, (255,0,0), 2, 1)
+        else :
+            # Tracking failure
+            cv2.putText(frame, "Tracking failure detected", (100,80), cv2.FONT_HERSHEY_SIMPLEX, 0.75,(0,0,255),2)
+ 
+        # Display tracker type on frame
+        cv2.putText(frame, tracker_type + " Tracker", (100,20), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (50,170,50),2);
+    
+        # Display FPS on frame
+        cv2.putText(frame, "FPS : " + str(int(fps)), (100,50), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (50,170,50), 2);
+ 
+ 
+        # Display result
+        cv2.imshow("Tracking", frame)
+ 
+        # Exit if ESC pressed
+        k = cv2.waitKey(1) & 0xff
+        if k == 27 : break
+```
+
+C++版
+
+```c++
+// Opencv_Tracker.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
+//
+ 
+#include "pch.h"
+#include <opencv2/opencv.hpp>
+#include <opencv2/tracking.hpp>
+#include <opencv2/core/ocl.hpp>
+ 
+using namespace cv;
+using namespace std;
+ 
+int main()
+{
+	//跟踪算法类型
+	string trackerTypes[7] = { "BOOSTING", "MIL", "KCF", "TLD","MEDIANFLOW", "MOSSE", "CSRT" };
+ 
+	// Create a tracker 创建跟踪器
+	string trackerType = trackerTypes[5];
+ 
+	Ptr<Tracker> tracker;
+ 
+	if (trackerType == "BOOSTING")
+		tracker = TrackerBoosting::create();
+	if (trackerType == "MIL")
+		tracker = TrackerMIL::create();
+	if (trackerType == "KCF")
+		tracker = TrackerKCF::create();
+	if (trackerType == "TLD")
+		tracker = TrackerTLD::create();
+	if (trackerType == "MEDIANFLOW")
+		tracker = TrackerMedianFlow::create();
+	if (trackerType == "MOSSE")
+		tracker = TrackerMOSSE::create();
+	if (trackerType == "CSRT")
+		tracker = TrackerCSRT::create();
+ 
+	// Read video 读视频
+	VideoCapture video("video/chaplin.mp4");
+ 
+	// Exit if video is not opened 如果没有视频文件
+	if (!video.isOpened())
+	{
+		cout << "Could not read video file" << endl;
+		return 1;
+	}
+ 
+	// Read first frame 读图
+	Mat frame;
+	bool ok = video.read(frame);
+ 
+	// Define initial boundibg box 初始检测框
+	Rect2d bbox(287, 23, 86, 320);
+ 
+	// Uncomment the line below to select a different bounding box 手动在图像上画矩形框
+	//bbox = selectROI(frame, false);
+ 
+	// Display bounding box 展示画的2边缘框
+	rectangle(frame, bbox, Scalar(255, 0, 0), 2, 1);
+	imshow("Tracking", frame);
+ 
+	//跟踪器初始化
+	tracker->init(frame, bbox);
+ 
+	while (video.read(frame))
+	{
+		// Start timer 开始计时
+		double timer = (double)getTickCount();
+ 
+		// Update the tracking result 跟新跟踪器算法
+		bool ok = tracker->update(frame, bbox);
+ 
+		// Calculate Frames per second (FPS) 计算FPS
+		float fps = getTickFrequency() / ((double)getTickCount() - timer);
+ 
+		if (ok)
+		{
+			// Tracking success : Draw the tracked object 如果跟踪到目标画框
+			rectangle(frame, bbox, Scalar(255, 0, 0), 2, 1);
+		}
+		else
+		{
+			// Tracking failure detected. 没有就输出跟踪失败
+			putText(frame, "Tracking failure detected", Point(100, 80), FONT_HERSHEY_SIMPLEX, 0.75, Scalar(0, 0, 255), 2);
+		}
+ 
+		// Display tracker type on frame 展示检测算法类型
+		putText(frame, trackerType + " Tracker", Point(100, 20), FONT_HERSHEY_SIMPLEX, 0.75, Scalar(50, 170, 50), 2);
+ 
+		// Display FPS on frame 表示FPS
+		putText(frame, "FPS : " + to_string(int(fps)), Point(100, 50), FONT_HERSHEY_SIMPLEX, 0.75, Scalar(50, 170, 50), 2);
+ 
+		// Display frame.
+		imshow("Tracking", frame);
+ 
+		// Exit if ESC pressed.
+		int k = waitKey(1);
+		if (k == 27)
+		{
+			break;
+		}
+	}
+	return 0;
+}
+```
+
 
 # 结束
 
