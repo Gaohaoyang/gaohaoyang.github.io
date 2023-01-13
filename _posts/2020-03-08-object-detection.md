@@ -3,7 +3,7 @@ layout: post
 title:  "目标检测及跟踪--Obeject Detection&Tracing"
 date:   2020-03-08 18:30:00
 categories: 计算机视觉
-tags: 深度学习 计算机视觉 GAN  yolo cv 卡尔曼 滤波器
+tags: 深度学习 计算机视觉 GAN  yolo cv 卡尔曼 滤波器 目标跟踪
 excerpt: 计算机视觉之目标检测知识汇总
 author: 鹤啸九天
 mathjax: true
@@ -777,8 +777,64 @@ ReactDOM.render(React.createElement(App), domContainer);
 - 描述目标运动的**状态量**(eg：vel,heading)
 - 一些其他感兴趣的**特征**(eg：shape,class)
 
+#### Introduction of SOT
+
 本质上单目标跟踪就是一个滤波问题。[img](https://pic1.zhimg.com/80/v2-4ab11cc071f5f3c27df98746a7b4602c_1440w.webp)
 - ![img](https://pic1.zhimg.com/80/v2-4ab11cc071f5f3c27df98746a7b4602c_1440w.webp)
+
+[单目标追踪理论（SOT发展角度）](https://zhuanlan.zhihu.com/p/488468550)
+
+单目标追踪的任务：追踪博尔特任务, 在下[图](https://pic4.zhimg.com/80/v2-289043efa97d0e9cfd6f85414e022b47_1440w.webp)视频中
+- 第一帧中框定追踪目标（不局限于类别）作为人为先验信息（如博尔特），来确定追踪的目的
+- 最终在视频后续的所有帧中都能跟踪出在第一帧中框定的目标，达到长时间跟踪的目的，可能在第一帧场景变化小，但是如果切换到视频的一百帧甚至三百帧，场景变化大，此时能够根据在第一帧的认为先验性息来跟踪所有帧中乃至于不同视频中的目标是一个非常具有挑战性的任务。
+
+#### How to realize SOT(怎么追踪)
+
+按图索骥（找到与模板最相似的区域）
+- 人脸追踪[示意](https://pic3.zhimg.com/80/v2-73b81aea9fb573fded3d8e4a70c1b64e_1440w.webp)
+- ![](https://pic3.zhimg.com/80/v2-73b81aea9fb573fded3d8e4a70c1b64e_1440w.webp)
+
+以第一帧的先验信息为主，在后续帧中只需要在画面中找出最为相似的部分即可，如图1.2人脸追踪，在第一帧框定出人脸，在后续帧中只需要在周围区域进行锁定，找出相似区域即可。再回到我们的运动员博尔特追踪任务中，图1.3中白色框就是我们的候选区域，通过计算候选框与第一帧先验信息的相似性就可以判断出是否是我们需要跟踪的目标。
+- [候选框](https://pic3.zhimg.com/80/v2-b3df7797cd9a7c77a4bef288242b923a_1440w.webp)
+- ![](https://pic3.zhimg.com/80/v2-b3df7797cd9a7c77a4bef288242b923a_1440w.webp)
+
+问题：
+- 把整张图都纳入跟踪范围时，首先，以第一帧的先验信息为主与后续的目标逐一对比时，后续目标的选取怎么确定？是任意选还是整张图片构建？长宽比例该怎么确定？另外，当先验目标与候选框一个一个比较会带来巨大的运算资源消耗，效率低。
+
+按图索骥模型简单介绍
+ 
+在16年之后兴起的深度学习的按图索骥模型如[图](https://pic1.zhimg.com/80/v2-57426bfca371c0cd9f0fa55073afeb88_1440w.webp)，首先将第一帧框定的人为先验信息（Template）通过ResNet等网络提取出视觉特征z，作为对比的模板（卷积核），在后续帧中，不再是全图找候选框，而是在上一帧的周围进行跟踪（减少运算量）， 抽取出图像x，将特征z和提取出来的图像x进行卷积操作得到Channel为1的的二维的得分图，作为相似度对比的结果，大小为17x17x1的得分图中的一个像素点代表原图中15x15得到区域。
+- ![](https://pic1.zhimg.com/80/v2-57426bfca371c0cd9f0fa55073afeb88_1440w.webp)
+- 按图索骥网路结构图
+ 
+SOT可研究方向
+*   构建更好的特征提取器来表达视觉区域特征
+*   更好相似度匹配算法
+*   更精确的边界框标注
+*   长时间的目标追踪（第一帧模板是否适用于后续所有帧）
+
+单目标追踪模型发展
+- 1. More Precise BBox Annotation
+  - Anchor-based (Anchor Box)
+    - ![](https://pic4.zhimg.com/80/v2-d073fdc150d5f442d7139306c85e3fa7_1440w.webp)
+    - 引入Anchor-based思想的SOT模型: SiamRPN, SiamCAR
+  - Anchor-free
+    - ![](https://pic1.zhimg.com/80/v2-43af25514bd47c05959948a6360c6920_1440w.webp)
+- 2. Stronger Feature Extractor（更好的特征表征）：对于单目标追踪来说，使用更深的网络比如ResNet，性能不增反降。
+  - 如果一个像素的感受野太大，填充会导致移位（分数图与目标位置不匹配）
+  - 其次，Padding可能会给模板匹配带来一些偏差
+  - 怎么做？
+    - 裁剪掉多余的padding: 在论文《Deeper and Wider Siamese Networks for Real-Time Visual Tracking》中，作者提出裁剪掉多余padding的思想。
+    - 将目标的标注向周围偏移: 当没有padding时，得分计算时，卷积操作之后得到的特征图非常抽象，如下图，矩阵中的21，映射到原图中就是矩阵后两列
+- 3. More Fine-grained Matching（更细粒度的模板匹配）
+  - 细粒度提升方式一——分组卷积
+  - 细粒度提升方式二——transformer
+- 3. Traditional Methods（传统方法）
+  - Old but Strong Correlation Filter（19年之前）
+  - Older Motion Model（上世纪）
+    - LK Optical Flow（LP流光法）
+
+详见：[单目标追踪理论（SOT发展角度）](https://zhuanlan.zhihu.com/p/488468550)
 
 ### 多目标跟踪(MOT)
 
@@ -957,6 +1013,14 @@ merged measurement问题就是如果两个车辆在自车前方并行，二者�
 
 `光流法`(Lucas-Kanade)的概念首先在1950年提出, 它是针对外观模型对视频序列中的像素进行操作.通过利用视频序列在相邻帧之间的像素关系, 寻找像素的位移变化来判断目标的运动状态, 实现对运动目标的跟踪.但是, 光流法适用的范围较小, 需要满足三种假设:图像的光照强度保持不变; 空间一致性, 即每个像素在不同帧中相邻点的位置不变, 这样便于求得最终的运动矢量; 时间连续.光流法适用于目标运动相对于帧率是缓慢的, 也就是两帧之间的目标位移不能太大.
 
+假设条件：
+- **亮度恒定**: 像素点的亮度值在不同帧中恒定不变
+- **小运动**: 像素点位置在相邻帧间不会剧烈变化
+- **空间一致**: 前一帧中相邻像素点在后一帧中也相邻
+
+主要思想：
+- 根据追踪目标特征点(轮廓像素点)在时间域的变化和相邻帧的关联计算每个特征点的瞬时速度和方向，进而预测后续帧特征点位置，比如上[图](https://pic2.zhimg.com/80/v2-278b11128d0c6df577e158a236981789_1440w.webp)。
+- ![](https://pic2.zhimg.com/80/v2-278b11128d0c6df577e158a236981789_1440w.webp)
 
 #### Meanshift
 
