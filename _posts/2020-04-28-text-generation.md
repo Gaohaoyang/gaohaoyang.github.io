@@ -484,7 +484,7 @@ Diffusion的本质
 ## GAN文本生成
 
 - GAN为什么在文本上效果不佳？
-  - 图像和文本的核心区别在于图像的 Pixel 表示是连续的，而文本是由离散的 token 组成
+  - 图像和文本的核心区别在于图像的 Pixel 表示是**连续**的，而文本是由**离散**的 token 组成
   - 参数的微小改变不能对结果产生影响，或者说影响的方向也不对，这就导致 Discriminator 的梯度回传变得没有意义
 - GAN在NLP表现一般：
   - 语言不同于图像、语音，前者由人类制造，分布在**离散**空间中，后者天然存在于**连续**空间，结构化较好，所以，NLP中的embedding，**微小的改变不足以产生影响，甚至让反向传播失效** [img](https://p1.pstatp.com/large/pgc-image/87711cd4b8714dcdb7772907d69f8606)
@@ -520,6 +520,34 @@ Diffusion的本质
 
 - 从生成器端来为生成提供更多的信息，更多：[MaskGAN学习笔记](http://tobiaslee.top/2018/04/01/MaskGAN-Notes/)
 - 用了 Actor-Critic 来替换 Policy Gradient，相比 Monte Carlo，能够较好地对 reward function 做一个拟合
+
+
+### GAN 文本生成图像
+
+GAN可以文生图
+- 【2023-1-14】[GAN之根据文本描述生成图像](https://zhuanlan.zhihu.com/p/32137121)
+
+模型结构
+- ![gan-text2image](https://pic1.zhimg.com/80/v2-5bda6b67eb0b2f2da55a5cda8afc3564_1440w.webp)
+- 生成器：char-CNN-RNN结构来对文本做embedding，全连接层(Leaky-Relu激活)压缩到低维向量(128)，再和一个正态分布抽样的随机向量进行拼接，将其输入到deconvolution（反卷积）层做图像生成
+- 判别器：结构与生成器大致相反
+  - 实现的功能是：①判断生成的图像是否合理 ②判断图像与文本是否匹配
+  - 候选方法：
+    - ① 分阶段，先判断图像是否合理，然后再判断合理图像是否匹配
+    - ②一部到位，同时判断图文，此时需要补充样本（除了<假图，描述>和<真图，描述>外，补充<真图，不匹配描述>，对应网络：GAN-CLS）
+- 插值法学习：文生图本质是两种表示空间的映射，即高维流形，GAN里通过流形向量插值实现新样本生成，由于文本与图像的本质不同（离散+连续），需要特殊处理，通过线性插值做数据增强，对应网络：GAN-INT
+- 风格转换：生成器里融合文本+图像信息，自动识别图像维度信息（如：背景+位置）
+
+实验效果：测试在鸟类生成的效果
+- 整体效果
+  - ![](https://pic2.zhimg.com/80/v2-1581ac9c42735b5593ce59e28b4435bd_1440w.webp)
+- 风格转换
+  - ![](https://pic1.zhimg.com/80/v2-7c7b9880002fbdad57b3caa293f0635c_1440w.webp)
+- 插值图像
+  - ![](https://pic3.zhimg.com/80/v2-f68b38e4760fa1178e4c1abc2a8d6526_1440w.webp)
+
+以上信息源自[2017年的文章](https://zhuanlan.zhihu.com/p/32137121)，现在估计有新的迭代了
+
 
 # paraphrase 复述/同义语/改写
 
