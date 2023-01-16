@@ -407,12 +407,17 @@ YOLO（v2）做出了很多实现上的改进，将 mAP 值从第一次发布时
 ![](https://image.jiqizhixin.com/uploads/editor/0e8e87de-4082-4450-9e68-5a17cae766bd/1524810338854.jpg)
  
 _图源：https://arxiv.org/pdf/1612.08242.pdf_
- 
+
 以下是 YOLO 论文中不同检测器的 mAP 和 FPS 对比。YOLOv2 可以处理不同分辨率的输入图像。低分辨率的图像可以得到更高的 FPS，但 mAP 值更低。
  
 ![](https://image.jiqizhixin.com/uploads/editor/c8b94c58-c362-4593-a982-a42165f2bddc/1524810338786.jpg)
  
 _图源：https://arxiv.org/pdf/1612.08242.pdf_
+
+### yolo发展史
+
+【2023-1-16】[YOLO家族系列模型的演变：从v1到v8](https://www.toutiao.com/article/7189093101728825856)
+- ![img](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/e59cac57da8a4a609eae68c22510307d~noop.image?_iz=58558&from=article.pc_detail&x-expires=1674455486&x-signature=q2p2yJD%2FOK9Lh7BZZLvzU8OTZrw%3D)
 
  
 ## YOLOv3
