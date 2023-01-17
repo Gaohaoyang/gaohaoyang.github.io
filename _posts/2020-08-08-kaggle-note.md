@@ -46,6 +46,7 @@ permalink: /kaggle
 - 【2020-10-10】Data Science Challenge / Competition 数据科学挑战赛/数据科学竞赛，源自：[机器学习理论与数据竞赛实战](https://www.zhihu.com/column/DataAI)
 ![](https://pic3.zhimg.com/v2-af268652dc6a498641d8799862d61f2a_b.jpg)
 - 【2022-1-4】[coggle数据科学竞赛](https://coggle.club/)，汇总国内外竞赛信息，主办方、时间、题目、参赛人数等，[历次比赛经验总结](https://coggle.club/feed)
+- 【2023-1-17】[整理了190+场比赛TOP方案](https://mp.weixin.qq.com/s/B3Gs_1vRIMilHd6nZARNnQ)
 
 ## KDD CUP
 
