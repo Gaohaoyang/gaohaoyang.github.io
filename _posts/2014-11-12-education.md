@@ -393,6 +393,7 @@ permalink: /edu
 
 积分落户
 - 2021年有13w申请积分落户，只有6000人名额，真正排队落的只有5000人
+- [2021年北京积分落户完整分数排名表](https://zhuanlan.zhihu.com/p/452529301)，表格[数据](https://doc.weiyun.com/272e39c5a89077a3f6b292075ae533a3)
 
 [2022年积分落户手册](http://rsj.beijing.gov.cn/ywsite/jflh/fwzn/202007/P020220412448356478477.pdf)
 
