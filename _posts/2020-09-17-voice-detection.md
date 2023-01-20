@@ -3203,6 +3203,7 @@ ffmpeg [下载](http://ffmpeg.org/download.html)
 【2023-1-10】
 - [ffmpeg的基本用法](https://segmentfault.com/a/1190000040982815)
 - [FFmpeg 视频处理入门教程](https://www.ruanyifeng.com/blog/2020/01/ffmpeg.html)
+- [ffmpeg的图形化操作](https://ffmpeg.guide/graph/demo)
 
 ffmpeg主要组成部分
 - 1、libavformat：用于各种音视频封装格式的生成和解析，包括获取解码所需信息以生成解码上下文结构和读取音视频帧等功能，包含demuxers和muxer库；
