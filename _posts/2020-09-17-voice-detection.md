@@ -1794,6 +1794,63 @@ ELECTRA 的一个变体 ELECTRA-MLM 模型，不再输出 0 和 1，而是预测
 目前基于传统的语种识别，在复杂语种之间的识别率，只有80%左右；而基于深度学习的语种识别，理论上效果会更好。当然这和语种的多样性强相关，比如两种语言的语种识别，和十八种语言的语种识别，之间的难度是巨大的。
 - ![](http://image.woshipm.com/wp-files/2020/08/eFUNR6pqbfpgUjDkFr4J.png)
  
+
+#### 语种识别工具包
+
+【2023-1-20】[基于fasttext与langid文本语种识别的python代码实现](https://www.toutiao.com/article/7190550624449675837)
+
+Open AI开源的whisper语音识别系统，可以识别不同的语音、语种，但是whisper主要应用在**语音识别系统**上，且需要大型模型。当仅仅来识别不同的语言文字，且要识别出语言文字的语种时，可以使用小型的模型来识别，比如langid，fasttext等等。
+
+#### langid
+
+早期著名的语种识别库是 [langid](https://github.com/saffsd/langid.py)，一个小型的语种识别库，其模型只有2.5MB的大小，精度已经达到了**91.3**以上，虽然模型较小，但是功能确实是比较强大，且可以支持97种的文本语种检测。
+
+langid在如下数据集上面进行训练：
+- JRC-Acquis
+- ClueWeb 09
+- Wikipedia
+- Reuters RCV2
+- Debian i18n
+
+langid支持的97个语种：
+- af, am, an, ar, as, az, be, bg, bn, br, bs, ca, cs, cy, da, de, dz, el, en, eo, es, et, eu, fa, fi, fo, fr, ga, gl, gu, he, hi, hr, ht, hu, hy, id, is, it, ja, jv, ka, kk, km, kn, ko, ku, ky, la, lb, lo, lt, lv, mg, mk, ml, mn, mr, ms, mt, nb, ne, nl, nn, no, oc, or, pa, pl, ps, pt, qu, ro, ru, rw, se, si, sk, sl, sq, sr, sv, sw, ta, te, th, tl, tr, ug, uk, ur, vi, vo, wa, xh, zh, zu
+
+```sh
+pip install langid # 安装
+langid # 启用，提示需要输入的文本，直接输入不同语种的文本，langid会自动检测出文本的语种，并显示。
+>>> this is a test # ('en', -40.536659240722656) 识别正确
+>>> this is a test 这只是一个测试 # ('zh', -181.93558311462402) 识别不全
+>>> this is 测试 # ('la', -78.2670316696167) 识别错误
+```
+
+Python调用
+
+```py
+import langid
+langid.set_languages(['de','fr','it']) # 可以指定候选语种，加速识别
+langid.classify("This is a test") # ('en', -54.41310358047485)
+```
+
+#### fasttext
+
+Facebook发布[fasttext](https://fasttext.cc). 
+- fasttext是一个进行文本分类，识别以及单词编码的文本操作库
+- fasttext同样可以进行文本的语种分类操作
+
+fasttext small 小模型，其速度与精度都大大超过了 langid 模型。
+- 不仅在模型速度与精度的区别，其fasttext的文本语种检测数量更是达到了**176**种的语种识别, [文档](https://fasttext.cc/docs/en/language-identification.html)
+
+```py
+# pip install fasttext
+# https://fasttext.cc/docs/en/language-identification.html
+# lid.176.bin
+import fasttext
+model = fasttext.load_mode('lid.176.bin') # 加载模型
+text = 'this is the fasttext test'
+predict = model.predict(text,k=1) # 选择概率最大的一个语种
+```
+
+
 ### 3. 声纹识别（VPR）
  
 声纹识别也叫做说话人识别，是生物识别技术的一种，通过声音判别说话人身份的技术。其实和人脸识别的应用有些相似，都是根据特征来判断说话人身份的，只是一个是通过声音，一个是通过人脸。
@@ -3146,6 +3203,7 @@ ffmpeg [下载](http://ffmpeg.org/download.html)
 【2023-1-10】
 - [ffmpeg的基本用法](https://segmentfault.com/a/1190000040982815)
 - [FFmpeg 视频处理入门教程](https://www.ruanyifeng.com/blog/2020/01/ffmpeg.html)
+- [ffmpeg的图形化操作](https://ffmpeg.guide/graph/demo)
 
 ffmpeg主要组成部分
 - 1、libavformat：用于各种音视频封装格式的生成和解析，包括获取解码所需信息以生成解码上下文结构和读取音视频帧等功能，包含demuxers和muxer库；
