@@ -2762,10 +2762,19 @@ awk '/REG/{action}'
 # awk正则运算语句(~,~!等同!~)
 awk 'BEGIN{info="this is a test";if( info ~ /test/){print "ok"}}'
 # ok
+
+#1：仿豆瓣电影微信小程序 
+# https://github.com/zce/weapp-demo
+#
+#2：微信小程序移动端商城 
+# https://github.com/liuxuanqiang/wechat-weapp-mall
+
+# 两行合并，剔除空格
+cat m.txt | awk '{if($1~/^[1-9]+/){gsub("\s+","",$1);printf "["$1"]"}else{gsub("\s+","",$1);if($1)printf "("$1")\n"}}'
 ```
 
 ③ awk内置使用正则表达式函数
-- gsub( Ere, Repl, [ In ] )
+- gsub( Ere, Repl, [ In ] ) 原地替换
 - sub( Ere, Repl, [ In ] )
 - match( String, Ere )
 - split( String, A, [ Ere] )
