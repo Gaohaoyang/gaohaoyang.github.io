@@ -3,7 +3,7 @@ layout: post
 title:  "计算机发展史-Computer History"
 date:   2010-07-26 23:42:00
 categories: 计算机基础
-tags: 高德纳 图灵 冯·诺依曼 陈皓 少儿编程 网络 体系结构 CPU arm x86 OSI 编程语言 编码
+tags: 高德纳 图灵 冯·诺依曼 陈皓 少儿编程 网络 体系结构 CPU arm x86 OSI 编程语言 编码 32 64
 excerpt: 计算机发展历史，编程语言诞生过程，及几位关键人物
 mathjax: true
 permalink: /computer
@@ -266,25 +266,58 @@ H所处理的，本质上正是一种判定问题：某台图灵机在某输入�
 
 ## 计算机指令集
 
-CPU的指令及构架，X86架构，Arm架构，微架构，还有手机处理器上的76、A55这些都是什么东西，它们之间到底是什么样的关系
+CPU的指令及构架：`X86`架构，`Arm`架构，`微架构`，还有手机处理器上的`76`、`A55`这些都是什么东西，它们之间到底是什么样的关系
 
 参考：
 - [Arm vs x86: Instruction sets, architecture, and all key differences explained](https://www.androidauthority.com/arm-vs-x86-key-differences-explained-568718/), [中文版](https://www.google.ae/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwjf1tyj5ZzPAhWGWRQKHUoTDJAQFggaMAA&url=http%3A%2F%2Fwww.vaikan.com%2Farm-vs-x86-key-differences-explained%2F&usg=AFQjCNF1yxB0Q64ud33gwpMFqGz4gywKgg&bvm=bv.133178914,d.d24)
 - [一文看懂arm架构和x86架构有什么区别](https://blog.csdn.net/bleauchat/article/details/90114342)
 
-计算机的体系结构从指令集的复杂度上可以分两类
-- 一类是复杂指令集CISC，主要是X86架构。
-- 另一类是精简指令集RISC，这个比较多，主要是ARM、MIPS、PowerPC等。
+计算机的体系结构从指令集**复杂度**上可以分两类
+- 复杂指令集`CISC`，主要是`X86`架构。
+- 精简指令集`RISC`，这个比较多，主要是`ARM`、`MIPS`、`PowerPC`等。
 
-目前x86和arm的能耗比已经差不多了，关键还是生态。现在大家都用arm指令集，自然软件，操作系统都对arm有各种优化，现在突然来个x86，小的应用厂商已经建立起arm的开发体系和人才队伍了，要真让他们在支持x86，那真是太难为他们了。大厂，比如苹果三星，都自己做处理器，也是arm指令集的，更加没有必要用x86了。应该说x86在移动端已经很难挤进去了
+目前`x86`和`arm`的能耗比已经差不多了，关键还是**生态**。
+- 现在大家都用arm指令集，自然软件，操作系统都对arm有各种优化
+- 现在突然来个x86，小的应用厂商已经建立起arm的开发体系和人才队伍了，要真让他们在支持x86，那真是太难为他们了。
+- 大厂，比如苹果三星，都自己做处理器，也是arm指令集的，更加没有必要用x86了。应该说x86在**移动端**已经很难挤进去了
 
-从CPU发明到现在，有非常多种架构，从我们熟悉的X86，ARM，到不太熟悉的MIPS，IA64，它们之间的差距都非常大。但是从最基本的逻辑角度可以分两大类，即所谓的“**复杂指令集** CISC ”与“**精简指令集** RISC”系统。 Intel和ARM处理器的第一个区别是，前者使用复杂指令集（CISC)，而后者使用精简指令集（RISC）。属于这两种类中的各种架构之间最大的区别，在于它们的设计者考虑问题方式的不同。
+从CPU发明到现在，有非常多种架构，从熟悉的X86，ARM，到不太熟悉的MIPS，IA64，它们之间的差距都非常大。但是从最基本的逻辑角度可以分两大类，即所谓的“**复杂指令集** CISC ”与“**精简指令集** RISC”系统。 
+
+Intel和ARM处理器的第一个区别
+- intel 使用**复杂指令集**（CISC)，而 arm 使用**精简指令集**（RISC）。
+- 这是属于这两种类中的各种架构之间最大的区别，在于它们的设计者考虑问题方式的不同。
 
 作者：[波心荡](https://www.zhihu.com/question/20148756/answer/103220283)
 
 ## 如何查看linux体系结构
 
 [如何查看linux系统的体系结构](https://blog.csdn.net/lixuande19871015/article/details/90485929)
+
+### mac os 如何查看
+
+【2023-1-25】[怎么看mac是arm64还是x64](https://www.cnblogs.com/kala00k/p/16284974.html)
+- 下载苹果系统的软件，总会让选择软件包是 arm 版本还是 intel 版本
+
+如何查看？[img](https://img2022.cnblogs.com/blog/1011874/202205/1011874-20220519111815388-1417814021.png)
+- 点屏幕左上角苹果图标，点击关于本机
+- 看处理器一栏显示的是 Intel 还是 arm
+  -  如果是 Intel  就是选 x64 下载
+  -  如果是 Apple M1 就选 arm64来下载。
+- ![img](https://img2022.cnblogs.com/blog/1011874/202205/1011874-20220519111815388-1417814021.png)
+
+如mac book air的显示信息
+
+```sh
+macOS Catalina Version 10.15.7
+# 
+MacBook Air (Retina, 13-inch, 2018)
+# 处理器
+Precessor：1.6 GHz Dual-Core Intel Core i5 
+Memory: 8 GB 2133 MHz LPDDR3
+Graphics: Intel UHD Graphics 617 1536 MB
+```
+
+### arm 架构
 
 命令：
 
@@ -300,7 +333,11 @@ file /bin/bash
 arch
 # aarch64
 cat /proc/cpuinfo # 查看cpu信息
+```
 
+### x86 架构
+
+```sh
 # (2) x86架构
 uname -a
 # Linux ubuntu 4.4.0-21-generic #37-Ubuntu SMP Mon Apr 18 18:33:37 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux
@@ -310,7 +347,12 @@ file /bin/bash
 # /bin/bash: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 2.6.32, BuildID[sha1]=04eca96c5bf3e9a300952a29ef3218f00487d37b, stripped
 arch
 # x86_64 或i386
+```
 
+### MIPS 架构
+
+
+```sh
 # (3) MIPS架构
 uname -a
 # Linux DrogooBox 3.3.8 #33 Tue Mar 22 15:02:01 CST 2016 mips GNU/Linux
