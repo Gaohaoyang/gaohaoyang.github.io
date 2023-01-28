@@ -665,6 +665,12 @@ Tiktok的变现方式有很多种，目前我主要运营的是**短视频带货
 
 ## 技术创业
 
+【2023-1-24】chatGPT创业实践，[自宅创业 - #27 蹭热点的ChatGPT小程序](https://blog.guyskk.com/notes/onebiz-27)
+- 批量注册、卖opengai账号：做ChatGPT小程序，上线当天用户量突破1000，第一次做出这么火爆的产品
+  - 一个写程序批量注册，一个负责销售，收益分成。写好了程序，注册了一批ChatGPT账号，赚了一点钱。然后发现市场上ChatGPT账号价格越来越低，也很难批量销售出去。
+- 开发chatGPT小程序
+  - 做一个小程序，把ChatGPT的功能做到小程序上，打开就能直接用。不到3天小程序急速完成上线，上线当天用户量就突破1000，涨势非常好。正预想着日活过万，然后小程序就被举报封了，发布的两个小程序同时被封。举报人和我正好同在一个微信群里，虽然很难过，但还是接受了现实，大家都按丛林法则生存。
+
 ### 点子
 
 - 【2019-08-31】[写代码赚钱的路子](https://mp.weixin.qq.com/s?__biz=MzAxNjc1OTc2Mg==&mid=2653630305&idx=1&sn=92c21b99ead94dfa0ecc1e36547c13a4&chksm=803061dcb747e8ca5f4eab51cd96793fc8301749d9c774f85838f76719fd851f0f90091aebc3&mpshare=1&scene=23&srcid=&sharer_sharetime=1567125075551&sharer_shareid=b8d409494a5439418f4a89712efcd92a#rd),[awesome-indie](https://github.com/mezod/awesome-indie)

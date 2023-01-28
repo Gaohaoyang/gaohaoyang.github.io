@@ -325,6 +325,8 @@ permalink: /philosophy
 
 王阳明的心学的独特价值在于，<font color='red'>强调心的作用</font>，强调人的生命洒脱活泼的灵明的体验。因为，对于一个人来说，<font color='green'>心境澄澈，则心无挂碍，才能达到大境界</font>。
 
+【2023-1-25】[年少不懂王阳明，读懂已是局中人](https://mp.weixin.qq.com/s/MYk_CGr_cBwubd_Kz9qfYA)，简要介绍阳明生平事迹
+
 ### 心即理
 
 ![](https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=847327637,2572834983&fm=173&app=25&f=JPEG?w=400&h=562&s=5E8A72235816C7FF0699F1420100A0B1)
@@ -364,6 +366,7 @@ permalink: /philosophy
 阳明心学立足于人的内心，这是一种让人内心强大的哲学，也是襄助人走向成功走向圣境的力量。<font color='blue'>人为什么会焦虑，这来源于人的欲望和外在环境的不确定性</font>。只有收拾好内心，安定自己的内心，你才能达到苏东坡所说的“此心安处是吾乡”的境界，才能够在狼奔豕突的欲望中，在混乱复杂的社会中，找到一处安静、安然、淡然的精神家园！
 
 - [王阳明的心学是什么？为何能给人强大力量？一文秒懂心学！](https://baijiahao.baidu.com/s?id=1612838807117621314&wfr=spider&for=pc)
+
 
 ### 视频
 
