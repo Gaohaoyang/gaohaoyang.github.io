@@ -434,8 +434,6 @@ pie title 影响寿命的几大因素
 ### 酗酒危害
 
 - 【2021-6-8】[图](https://p6.toutiaoimg.com/img/tos-cn-i-0022/a6f9f129a58644868319f1771ddfe8e1~tplv-obj:349:16000.image?from=post)说酗酒的危害过程
-  - ![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/a6f9f129a58644868319f1771ddfe8e1~tplv-obj:349:16000.image?from=post)
-
 
 ## 癌症
 
