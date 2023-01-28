@@ -114,7 +114,7 @@ permalink: /healthy
 BMI（身体质量指数）是国际上衡量人体胖瘦程度以及是否健康的一个常用指标，BMI正常值在20~25之间，超过25为超重，30以上则属肥胖。
 - BMI＝体重(kg)➗身高²
 - 正常值:18.5～23.9
-- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/bfac31977629443388194049cf60dac1~noop.image)
+- [img](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/bfac31977629443388194049cf60dac1~noop.image)
 
 腰臀比，即腰围与臀围的比值——腰围/臀围。
 - 比如你的腰围是66厘米，臀围82厘米，那你的腰臀比就是66/82=0.8， 这个比值越低，腰越细，臀越大。
@@ -937,6 +937,7 @@ pie title 影响寿命的几大因素
    - 一类民用建筑室内甲醛限量为0.08mg/m³，住宅、幼儿园、医院、学校等重要场所，就属于一类民用建筑，
    - 二类民用建筑室内甲醛限量为0.10mg/m³。办公楼、旅馆、商店等。
 - 住宅室内甲醛限量应该为0.08mg/m³，而不是0.10mg/m³！
+
 ![](https://pic1.zhimg.com/80/v2-7b43b32e29aafce46b09217adf4cf2f6_720w.jpg)
 
 #### 甲醛检测
@@ -1077,9 +1078,9 @@ pie title 影响寿命的几大因素
 - 臭氧除甲醛（以毒攻毒）
    - 原理（参考：[臭氧能除甲醛吗？](https://www.zhihu.com/question/24336670)）
       - 臭氧是一种强氧化剂，臭氧（钛金蓝氧）与甲醛反应为2:1，把甲醛，苯等TVOC分解为无毒产物CO2和O2，产生二氧化碳和水，是一种快速高效去除甲醛的方法。
-      - HCHO+2O3=CO2+H2O+2O2，2HCHO+2O3=2CO2+2H2O+O2
+      - $ HCHO+2O_3=CO_2+H_2O+2O_2 $，$ 2HCHO+2O_3=2CO_2+2H_2O+O_2 $
       - 电晕法产生的臭氧，同时衍生**氮氧化物**（致癌物），氮氧化物会与臭氧反应消耗臭氧。因此，电晕法的臭氧与甲醛反应效果不理想。
-      - 注意，
+      - 注意
          - 臭氧（钛金蓝氧）和电晕法臭氧，都需要人员离开现场后除甲醛，避免对人员的伤害。约40分钟后，空间的臭氧会转化为氧气，安全无害！
          - 单纯使用臭氧的话只是去除游离甲醛和污染物，并不能从根本上去解决问题，也就是说可能存在甲醛超标反弹的问题。
          - 建议先用专业除甲醛产品渗透分解板材中的甲醛，最后再用臭氧机把游离甲醛去除掉，两者一定要结合起来，才能达到最大的效果
@@ -1164,8 +1165,7 @@ pie title 影响寿命的几大因素
 - ![](https://cniw.org/wp-content/uploads/2022/03/image-3.png)
 - [COVID-19奥密克戎变种相关问题问答](https://cniw.org/covid-19%E5%A5%A5%E5%AF%86%E5%85%8B%E6%88%8E%E5%8F%98%E7%A7%8D%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E9%97%AE%E7%AD%94/)
 
-【2022-12-15】我国不同地区流行毒株一览
-- ![](https://wx2.sinaimg.cn/large/007bsbOSly1h93sbkohhmj30u00y0n3t.jpg)
+【2022-12-15】我国不同地区流行毒株一览 [img](https://wx2.sinaimg.cn/large/007bsbOSly1h93sbkohhmj30u00y0n3t.jpg)
 
 ### 新冠病毒存活多久
 
@@ -1174,7 +1174,7 @@ pie title 影响寿命的几大因素
 - 2020年发表在Transbound Emerg Dis.上的一项综述，研究表明在适宜的条件下，在外科口罩外侧面最多可以存活7天，而在冷冻环境下，可能可以存活超过21天。
 
 2022年1月在生物学研究预印网站bioRxiv上有一篇文章，通过一系列新冠病毒的研究综述，对比了不同毒株常温下在塑料物品表面和人体皮肤表面的存活时间，发现随着新冠病毒的“更新迭代”，它们的生存力似乎变强了。
-- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/6d3c2d07d23e4cd58622294b22b0c927~noop.image?_iz=58558&from=article.pc_detail&x-expires=1671004346&x-signature=GIhiu0yBHqAi2RqeyBcUh7A2LqA%3D)
+- [img](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/6d3c2d07d23e4cd58622294b22b0c927~noop.image?_iz=58558&from=article.pc_detail&x-expires=1671004346&x-signature=GIhiu0yBHqAi2RqeyBcUh7A2LqA%3D)
 
 
 ### 新冠 vs 感冒 vs 流感
@@ -1242,7 +1242,8 @@ pie title 影响寿命的几大因素
   - 找到流感病毒小A对应的`B细胞`（终极帮手2），`B细胞`识别病毒碎片后迅速变身并产生追踪糖衣导弹（`抗体`，一种微小蛋白质），糖衣导弹追踪并固定新病毒，阻止病毒再次感染细胞。这时我们会咳嗽咳痰（排出病毒残片）。虽然我们并不会很快感觉舒适，但胜利在望。
 - 一个星期过去了，在各方努力下，病毒终于被击败，新的咽喉细胞不断生长，感冒好了，白细胞战士们也功成身退，默默守护。
 - 他们有句话让我一定带给你：亲爱的主人啊，你永远不是一个人在战斗。
-- ![](https://picx.zhimg.com/80/v2-a6f54b9972034176d1f86a8e16891f02_1440w.webp?source=1940ef5c)
+
+<img src="https://picx.zhimg.com/80/v2-a6f54b9972034176d1f86a8e16891f02_1440w.webp?source=1940ef5c" width=600>
 
 （2）抢滩登陆，迅速占领上呼吸道
 
@@ -1337,7 +1338,7 @@ pie title 影响寿命的几大因素
 - 与`抗体检测`相比，`核酸检测`更加灵敏，也是实验室检测的“金标准”。
 
 当我们身体出现症状2天左右，抗体就已产生，否则我们的抗原检测也不会有反应。只是我们人体先产生的是短效抗体 lgM，晚几天才是长效抗体 lgG，而后者一般需要 2 周左右的时间才能达到一个较高水平。
-- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/TR0RxzzE78iUu5~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672712911&x-signature=4q2w3mft2Vjzl4ONwjG91xIG56A%3D)
+- [img](https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/TR0RxzzE78iUu5~noop.image?_iz=58558&from=article.pc_detail&x-expires=1672712911&x-signature=4q2w3mft2Vjzl4ONwjG91xIG56A%3D)
 
 不测抗原不测核酸怎么判断“阳康”？怎么判断自己不再具有传染性 - [今日头条](https://m.toutiao.com/is/havPMDs/)
 
@@ -1367,7 +1368,7 @@ pie title 影响寿命的几大因素
   - 部分女性对POCT产品并不陌生，无论是备孕时使用的排卵测试纸，还是更广泛使用的验孕棒，都属于POCT产品。
 
 POCT产品的检测效果有多直观？它们通常以**一道杠**、**两道杠**的直观信号，明确检测结果是`阴性`、`阳性`或`无效`。
-- ![](https://bkimg.cdn.bcebos.com/pic/71cf3bc79f3df8dcd10065b20743658b4710b91282cf)
+- [img](https://bkimg.cdn.bcebos.com/pic/71cf3bc79f3df8dcd10065b20743658b4710b91282cf)
 - 通常两道杠意味着“阳性”结果，C区一道杠意味着“阴性”结果
 
 那么，POCT产品是如何画出这些小杠杠的？
@@ -1408,8 +1409,6 @@ POCT产品的检测效果有多直观？它们通常以**一道杠**、**两道�
 
 [阳过→阳康指南](https://mp.weixin.qq.com/s/XFc5lDSUG7X1Jerua8v4zg)
 
-
-
 #### 儿童感染
 
 【2022-12-7】[几乎没有潜伏期！“儿童新冠发病7日图](https://k.sina.com.cn/article_2011075080_77de9208019019lit.html)
@@ -1421,12 +1420,12 @@ POCT产品的检测效果有多直观？它们通常以**一道杠**、**两道�
 - 4、儿童热退伴有消化道症状。成人感染后症状主要集中在呼吸道，儿童除了呼吸道症状可能伴有呕吐、腹泻等胃肠道症状。
 
 感染7日图
-- ![](https://n.sinaimg.cn/sinakd20221207s/697/w1080h5217/20221207/a89a-3df8abba890ce5e08b3d01e8a1dd4929.jpg)
+- ![img](https://n.sinaimg.cn/sinakd20221207s/697/w1080h5217/20221207/a89a-3df8abba890ce5e08b3d01e8a1dd4929.jpg)
 
 #### 成年人感染
 
 【2022-12-7】北京大学：[阳了怎么办](https://mp.weixin.qq.com/s/62ImP5QEbfY6JFiAV6zxfg)
-- ![](https://f.sinaimg.cn/sinakd20221207s/680/w1080h10000/20221207/da8f-63398f925d8b4f2f3cbf8598ada91695.png)
+- [img](https://f.sinaimg.cn/sinakd20221207s/680/w1080h10000/20221207/da8f-63398f925d8b4f2f3cbf8598ada91695.png)
 
 
 ### 家人感染怎么办
@@ -1461,7 +1460,7 @@ POCT产品的检测效果有多直观？它们通常以**一道杠**、**两道�
 #### 新冠吃药顺序图
 
 “新冠吃药顺序图”列出了包括`四季抗病毒合剂`、`风寒感冒颗粒`、`复方氨酚烷胺片`、`布洛芬缓释胶囊`、`连花清瘟胶囊`在内的中成药和西药。
-- ![](https://imgcdn.yicai.com/uppics/images/2022/12/b24ecc7fd061093d26eb8f35d6941018.jpg)
+- [img](https://imgcdn.yicai.com/uppics/images/2022/12/b24ecc7fd061093d26eb8f35d6941018.jpg)
 
 上海中医药大学急危重症研究所所长、上海中医药大学附属龙华医院急诊科主任`方邦江`教授对第一财经记者表示：
 > “新冠肺炎治疗没有一个绝对的适合于所有人的吃药**顺序图**，这里列出来的大部分药物都是对症用的药物，并且只用于**治疗**的部分药物，这些药物只是用于**缓解**特定症状，例如发烧或者咳嗽等，而这些药物不是用来针对新冠肺炎病因治疗的特定药物。”
