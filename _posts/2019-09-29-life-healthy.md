@@ -1876,6 +1876,9 @@ POCT产品的检测效果有多直观？它们通常以**一道杠**、**两道�
 ### synext
 
 ![](https://pic3.zhimg.com/80/v2-5b19beafd7168a02455dc07a88cfd55e_1440w.webp)
+{: style="width:100%;height:400" class="center"}
+*澳洲小蓝瓶*
+{:.image-caption}
 
 Synext研发团队[孙博士](https://zhuanlan.zhihu.com/p/462190261)
 
