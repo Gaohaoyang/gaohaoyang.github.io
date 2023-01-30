@@ -157,6 +157,10 @@ useful_urls:
     name : 知识分子
     url : http://zhishifenzi.com/ 
     desc : 饶毅科学知识
+  -
+    name : 红杉
+    url : https://www.sequoiacap.com/ 
+    desc : 行业投资报告
   - 
     name : prajwalsouza可视化项目
     url : https://prajwalsouza.github.io/
