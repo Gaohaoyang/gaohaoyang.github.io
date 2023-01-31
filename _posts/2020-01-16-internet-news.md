@@ -1363,6 +1363,11 @@ tiktok营收对比
 
 ## 谷歌Google
 
+【2023-1-24】Google裁员，包含科学家[Dan Russell](https://www.linkedin.com/posts/dan-russell-6901a9_thejoyofsearch-google-activity-7022308252495319040-fXn2?utm_source=share&utm_medium=member_desktop)
+- Google最近裁了1.2w人，占6%员工，[资讯](https://www.businessinsider.com/google-layoffs-alphabet-jobs-pichai-email-slap-in-the-face-2023-1?utm_campaign=sf-insider-main&utm_medium=social&utm_source=facebook.com&fbclid=IwAR0oc8z2nofcP0T7s0JToppAJWixRgKdYxjKjzg77ZDw3uzkBbVRA_KTJVg)
+- Well... I'm also one of the 12,000 people laid off from Google today. I found out when I went to work at 4AM to finish up an important analysis, and my badge didn't work. After 17.5 years at Google, it was kind of a tough way to discover that I'd become a Xoogler. I still believe that Google's got a great mission. I still believe in #TheJoyOfSearch, but my enthusiasm was a little tempered this morning. #google We'll see what the days ahead bring.
+
+
 [ForTest](https://www.zhihu.com/question/24290336/answer/1852091010)
 
 吹 Google 的这么多，这里泼点冷水（自己 14-17 年在 Google，个人观感）
