@@ -3,7 +3,7 @@ layout: post
 title:  "【读书笔记】Ray Dalio 系列书籍: 原则 - The Principle"
 date:   2022-11-21 09:15:00
 categories: 读书笔记
-tags: 认知 励志 达利欧
+tags: 认知 励志 达利欧 openai
 excerpt: 桥水基金创始人 Ray Dalio（瑞-达利欧）的一本成本书籍
 author: 鹤啸九天
 mathjax: true
@@ -366,6 +366,26 @@ Ray Dalio分享了他最大的错误和他所学到的教训：糟糕的事情�
 大多数人的优点和最显著的弱点相连。
 
 成功不是要实现目标，努力追求的过程让个人变强。
+
+
+# Sam Altman 成功学
+
+- [Sam Altman](https://blog.samaltman.com/): [how to be successful](https://blog.samaltman.com/how-to-be-successful)（如何取得成功），13条特质并不是一个人必然取得成功的充分或必要条件。[Sam Altman的成功学中文版](https://zhuanlan.zhihu.com/p/601852717)
+- 1、选择“复利增长” Compound yourself
+- 2、要有绝对自信 Have almost too much self-belief
+- 3、学会独立思考 Learn to think independently
+- 4、做一个好“销售” Get good at “sales”
+- 5、要有冒险精神 Make it easy to take risks
+- 6、保持专注 Focus
+- 7、努力工作 Work hard
+- 8、大胆一点 Be bold
+- 9、足够坚定 Be willful
+- 10、保持强劲的市场竞争力 Be hard to compete with
+- 11、建立人际网络 Build a network
+- 12、资产决定财富 You get rich by owning things
+- 13、要有内驱力 Be internally driven
+
+
 
 # 结束
 
