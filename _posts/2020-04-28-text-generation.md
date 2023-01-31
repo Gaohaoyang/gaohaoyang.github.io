@@ -463,11 +463,24 @@ Diffusion的本质
     - 从带有“知识”的分布采样生成文本
 
 
-# GAN方向
+# GAN
+
+## GAN介绍
 
 ![GAN](https://p1.pstatp.com/large/pgc-image/99ece025696c4b9a9ed96a2f364a4d21)
 - ![](https://p3-sign.toutiaoimg.com/pgc-image/99ece025696c4b9a9ed96a2f364a4d21~tplv-obj:1982:1006.image?from=post&x-expires=1677859200&x-signature=UOp4kjkox3HZnahTT8Se7HT6ktU%3D)
 - ![](https://p3-sign.toutiaoimg.com/pgc-image/87711cd4b8714dcdb7772907d69f8606~tplv-obj:1754:1026.image?from=post&x-expires=1677859200&x-signature=6IOpdA4S%2FvfjbJysUZa2QAvaIlU%3D)
+
+【2023-1-31】[从ChatGPT说起，AIGC生成模型如何演进](https://m.gelonghui.com/p/572090)
+
+`GAN` 全称是： Generative A dversarial Networks，从名称不难读出“**对抗**（Adversarial）”是其成功之精髓。
+- 对抗思想受`博弈论`启发，在训练`生成器`（Generator）时，训练一个`判别器`（Discriminator）来判断输入是**真实**图像还是**生成**图像，两者在一个极小极大游戏中相互博弈不断变强。当从随机噪声生成足以“骗”过的图像时，我们认为较好地拟合出了真实图像的数据分布，通过采样可以生成大量逼真的图像。
+
+## GAN问题
+
+GAN 问题
+- 虽然GAN效果出众，但由于**博弈机制**的存在，其训练稳定性差且容易出现**模式崩溃**（Mode collapse），如何让模型平稳地达到博弈均衡点也是一个问题。
+- GAN在“创作”这个点上还存在一个死结，这个结恰恰是其自身的核心特点：根据GAN基本架构，判别器要判断产生的图像是否和已经提供给判别器的其他图像是同一个类别的，这就决定了在最好的情况下，<span style='color:red'>输出图像是对现有作品的模仿，而不是创新</span>。
 
 ## GAN家族
 
