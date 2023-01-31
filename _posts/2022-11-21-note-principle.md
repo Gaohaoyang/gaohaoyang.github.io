@@ -720,7 +720,7 @@ Eventually, you will define your success by performing excellent work in areas t
 
 ### 结语
 
-A comment response I wrote on HN:
+A comment response I wrote on HN: [HackerNews](https://news.ycombinator.com/newest)
 - One of the biggest reasons I'm excited about basic income is the amount of human potential it will unleash by freeing more people to take risks.
 Until then, if you aren't born lucky, you have to claw your way up for awhile before you can take big swings. If you are born in extreme poverty, then this is super difficult :(
 - It is obviously an incredible shame and waste that opportunity is so unevenly distributed. But I've witnessed enough people be born with the deck stacked badly against them and go on to incredible success to know it's possible.
