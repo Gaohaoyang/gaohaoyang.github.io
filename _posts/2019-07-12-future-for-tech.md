@@ -261,6 +261,8 @@ permalink: /future
 
 - [比高房价更可怕的是：35岁以后你还能干啥？中年危机，如何自救？](https://zhuanlan.zhihu.com/p/68189978?utm_medium=social&utm_source=wechat_session)
 
+【2023-1-31】[2022年回顾：一个37岁中年程序员的一百场面试](https://mp.weixin.qq.com/s/YcLmm96RYzZklWcCCy2yXg)
+
 ## 1. 35岁，职场上尴尬的年龄
 
 尴尬在于，这时你上有老、下有小，还有房贷、车贷等，是最需要用钱的时候，职场上却遭遇年龄带来的**系统性风险**。
