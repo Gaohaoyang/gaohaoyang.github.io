@@ -114,6 +114,10 @@ useful_urls:
     url : https://poloclub.github.io/
     desc : Human-Centered AI of Georgia Tech, 各类AI可视化工作，含GAN Lab
   -
+    name : Sam Altman
+    url : https://blog.samaltman.com/
+    desc : OpenAI CEO的成功学指南
+  -
     name : OpenAI研究员Lilian
     url : https://lilianweng.github.io/lil-log/
     desc : OpenAI机器人项目研究员的技术博客
