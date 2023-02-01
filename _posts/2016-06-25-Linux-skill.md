@@ -464,7 +464,14 @@ linux软件包：如yum、apt等
 
 #### apt
 
+```sh
+# 指定软件包版本
+apt-get install package=version 
+sudo apt-get install python=2.7 
+sudo apt-get install python3.10 # Ubuntu
+brew install python@3.10 # Mac
 
+```
 
 #### yum 安装
 
