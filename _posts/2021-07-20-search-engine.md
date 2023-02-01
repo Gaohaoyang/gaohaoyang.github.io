@@ -13,14 +13,27 @@ permalink: /search
 * content
 {:toc}
 
-# 总结
+# 搜索引擎
+
+## 趋势
 
 - 【2022-1-19】[搜索引擎api汇总](https://www.cnblogs.com/select/archive/2011/08/26/2154639.html)
 - 【2022-8-19】腾讯AI Lab开发的近义词查询工具：[近邻词汇检索](https://tool.mingdawoo.com/lang/nearby_word/search?q=%E7%A5%9E%E9%A9%AC&ds=1)
 - [img](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/2d04c2364fac4cdea886ef3ab1bf8ef0~noop.image)
 
+### Perplexity AI
 
-# 搜索引擎简介
+- 【2022-12-9】搜索引擎 [Perplexity.AI](https://www.perplexity.ai/) 发布，将LLM（Large Language Model）和搜索引擎结合来进行问答，[Perplexity.AI](https://www.perplexity.ai/) 发布的推广语是 LLM powered products for search。该引擎由大规模语言模型驱动，通过对话形式提供用户需要的答案。以对话交互作为检索形式的新方法，或将逐渐成为主流。无需登录，直接可用。
+- Aravind Srinivas是 [Perplexity.AI](https://www.perplexity.ai/) 创始人之一，毕业于加州大学伯克利分校。在创建Perplexity AI之前，他曾就职于OpenAI，研究语言和扩散生成模型。
+- Denis Yarats是Perplexity AI的另一位创始人，是纽约大学人工智能的博士生，同时还是加州大学伯克利分校的访问博士生，曾在Facebook AI Research工作六年。他的研究方向是通过学习有效的视觉表征，提高样本效率，使强化学习变得实用。
+- Perplexity 是一个基于 OpenAI API 的搜索引擎，但与 ChatGPT 不同的是它的答案中不仅包括训练数据，还包括来自互联网的内容。
+- 在答案中以脚注数字的形式引用了来源。
+- 但是他的问题与 You.com 类似，就是答案的质量仍然参差不齐。
+- 但是搜索结果和聊天响应的混合显示是引领潮流的。 可以想象未来的 Google 或 Bing 可能看起来像这样，或者至少是类似的东西。
+- Perplexity 不是聊天机器人，而是搜索引擎（或者更准确地说，是答案引擎），其输出中不包含过去的问题或搜索词。
+- 【2023-2-1】Magi创始人[季逸超](https://www.zhihu.com/people/ji-yi-chao)连夜实现了中文版 [如何评价perplexity ai，会是未来搜索的趋势吗？](https://www.zhihu.com/question/571409453/answer/2870072932)
+
+## 搜索引擎简介
 
 - [搜索引擎技术之概要预览](https://blog.csdn.net/v_july_v/article/details/6827391)
 
