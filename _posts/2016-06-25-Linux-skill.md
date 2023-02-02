@@ -680,6 +680,14 @@ wget –ftp-user=USERNAME –ftp-password=PASSWORD ${filename} # ftp使用账户
 
 ### ssh
 
+SSH连接服务器
+
+SSH提供了两种级别的安全验证：
+- 第一种级别是基于**密码**的**安全验证**，知道账号和密码就可以登陆到远程主机。
+  - Team的开发工作使用这种方式登陆编译服务器，或者开发机器。因为是在内网中，这种级别的安全验证已经足够了。
+- 第二种级别是基于 Public-key cryptography (公开密匙加密）机制的安全验证，原理如下图所示：
+  - 其优点在于无需共享的通用密钥，解密的私钥不发往任何用户。即使公钥在网上被截获，如果没有与其匹配的私钥，也无法解密，所截获的公钥是没有任何用处的。
+  - ![ssh](http://zuyunfei.com/images/public_key_cryptography.png)
 
 #### sshkey-gen
 
@@ -4136,6 +4144,21 @@ git blame filename
 【2021-4-1】[git思维导图](https://p6.toutiaoimg.com/img/tos-cn-i-0022/c661edf2db1e41ef97ff21347c8ca89a~tplv-obj:1674:4096.image?from=post)
 
 ![](https://p6.toutiaoimg.com/img/tos-cn-i-0022/c661edf2db1e41ef97ff21347c8ca89a~tplv-obj:1674:4096.image?from=post)
+
+### clone
+
+git中clone项目有两种方式：`HTTPS` 和 `SSH`，区别如下：
+- `HTTPS`：不管是谁，<span style='color:red'>拿到url随便clone</span>，但是在push的时候需要验证**用户名**和**密码**；
+- `SSH`：clone的项目必须是拥有者、管理员，而且在clone前添加SSH Key。SSH 在push的时候，是不需要输入用户名的，如果配置SSH key的时候设置了密码，则需要输入密码的，否则直接是不需要输入密码的。
+
+#### ssh
+
+在git中使用SSH Key的步骤：
+- 检查电脑是否存在SSH Key：$ cd ~/.ssh$ ls
+- 如果存在id_rsa.pub 或 id_dsa.pub 文件，说明文件以及存在，跳过创建SSH Key步骤。
+- 创建SSH Key
+- 将公共的SSH 放到远程仓库上
+
 
 ### fetch
 
