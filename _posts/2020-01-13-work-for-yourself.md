@@ -655,7 +655,7 @@ Tiktok的变现方式有很多种，目前我主要运营的是**短视频带货
 - 其他方法加速实现财务自由：在保持现有日常开销的基础上，依靠你的爱好增加收入
 
 
-### 自媒体
+### 做个人自媒体
 
 【2022-1-3】从字节离职，全职做B站up主，2个月粉丝10w。我是雨蒙蒙
 
@@ -663,7 +663,9 @@ Tiktok的变现方式有很多种，目前我主要运营的是**短视频带货
 
 # 自由职业
 
-## 个人品牌
+## 自媒体
+
+### 个人品牌计划
 
 【2023-2-1】个人品牌打造
 - （1）持续输入：密切跟进业务热点，技术变化等
@@ -672,6 +674,96 @@ Tiktok的变现方式有很多种，目前我主要运营的是**短视频带货
 
 <div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers tags lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2023-02-01T06:56:22.894Z\&quot; agent=\&quot;5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36\&quot; etag=\&quot;n0vRQJI7hMQqpi7czFZ7\&quot; version=\&quot;20.6.0\&quot;&gt;&lt;diagram id=\&quot;xdYpP7w1t2VaaceZiyqw\&quot; name=\&quot;第 1 页\&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
 <script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
+
+### 编辑指南
+
+#### 自媒体平台
+
+现在国内的自媒体平台，感觉已经超过100家了
+- 对于图文，真正适合自媒体人运营的，也就是公众号、今日头条、百家号这几个。
+- 对于短视频，应该考虑抖音、快手这些平台
+- 宣传、推广，那就玩搜狐、网易，因为不怎么赚钱，这些平台逐利的自媒体人比较少，整体环境和氛围要好一些。
+- 剑走偏锋，趣头条这样的平台也可尝试，毕竟没有新手期，对新人很友好。
+
+自媒体平台
+1. 微信公众号
+  - 微信公众号都是最值得进入的。因为只有公众号粉丝是真正的粉丝。在其他平台，你有十万粉丝，变现的途径也赶不上一万粉丝的公众号。所以大家会发现所有人都谈引流，不少人经营搜狐、知乎、豆瓣、简书这些平台的唯一目的，就是把关注度引到微信公众号，成为他的粉丝。
+  - 公众号有了粉丝，也就有阅读量，然后就有了各种各样的变现方式。
+  - 公众号文章要求有深度，有思想，能引起别人共鸣。这样才有人愿意在朋友圈分享，传播。它的文章在所有自媒体平台中，对质量要求是最高的。在其他平台一千字，如果标题取得好，就很可能是爆文，在公众号几乎不可能。
+1. 今日头条
+  - 字节跳动已经成长为阿里、腾讯之后的又一个大公司，好像有超越百度的趋势。未来前景非常看好，因为它有今日头条、抖音、悟空问答、西瓜视频、火山、微头条等多个玩法，是目前自媒体平台玩法最全面的。
+  - 不要拿单价来衡量是否做哪个平台。很多人会说百家号一万阅读单价高于头条。可是阅读量呢？再说了，挣钱并非主要靠流量，获得青云计划、月度优秀账号挣钱其实更多。
+  - 今日头条吸引了大量的自媒体人进入。头条有时候会略微有一些**混乱**，比如
+    - 因为青云计划吸引力太强（第一篇1000块钱），很多人为了挣这个钱，洗稿抄袭太多；
+    - 微头条扶持力度大，很多人毫无节操编一些情感段子，博取高阅读量，这些低劣的内容，会影响头条的吸引力；
+    - 这几个月通过新人训练营有很多粉丝几十、几百的人加了黄V，拿到原创，把这些持续创作能力并不强的人加为黄V，给原创，对创作者生态或许会是一个破坏。
+  - 总体上，头条目前是如日中天的。我相信它能发现这些问题，并进行自我调整。
+  - 头条有一个问题，就是不支持个人账号发布社会新闻评论的内容。只允许正式媒体发布
+1. 知乎
+  - 知乎社区的氛围很好，毕竟群体的素质比较高。
+  - 阅读量点赞量都不是很高，但是很实在，不像有些平台虚假繁荣。知乎还有一个好处就是不断升级，荣誉勋章，前面刚开始玩，每个周四等待评估，升级，虽然目前只是LV3，但觉得和自己的付出是匹配的。
+1. 百家号
+  - 百家号是百度旗下的，文章容易被百度引擎检索到。像今日头条、微信公众号的文章，百度引擎是搜不到的。而百度引擎这么重要的入口，肯定不能放过。
+  - 百家号对作者最大的吸引力就是单价，据说一万阅读量它最高。
+  - 百家号的文章审核机制比较严格，经常在其他平台能通过，在这里通不过。理由是各种各样的：有推广、疑似夸张......
+1. 企鹅号
+  - 企鹅号也是腾讯旗下的。据说主要在腾讯新闻、QQ看点推送。我大致看到我的文章主要在腾讯新闻客户端。
+1. 大鱼号
+  - 大鱼号是阿里旗下的。很多人非常推崇，说是流量高，补贴大。
+  - 大鱼号可以说是高开低走。从申请到通过新手期，几天就可以。保持每天发一篇文章，一个周就通过了。但是接下来拿原创和升级，就很难。截止目前我唯一没有拿到原创的平台，大鱼号的原创规则是邀请。
+  - 大鱼号的推荐也很可怜，刚开始还有一些四位数的阅读，现在基本上就是两位数和个位数了。
+  - 大鱼号还有一个缺点就是客服，反正我找不到人工的。企鹅号、百家号这种，就算再差，也还能排队找个人工客服咨询咨询。但是大鱼号永远都是机器人客服。截止目前只有一次和真人留言互动，这种客服方式，我觉得很难接受。
+1. 搜狐号
+  - 搜狐号、网易号、新浪看点是传统互联网门户网站，这几个平台特点是流量大，但是几乎没啥收益。
+  - 搜狐号是所有自媒体账号中唯一可以做推广的，审核迅速，宽松。我所有文章，截止目前没有审核不通过的，并且是秒过。它的文章是分级的，我的一般是三星，然后根据文章星级给流量。
+1. 网易号
+1. 新浪看点、微博
+  - 新浪看点也是基本上没啥收益
+1. 趣头条
+  - 趣头条是对标今日头条的一个产品，今日头条是小红，趣头条是小绿。但是市场主要定位在三四线城市及农村。我最早没想着玩趣头条，后来发现趣头条有个优点：就是没有新手期，直接发文直接赚钱。
+  - 趣头条APP到处都是赚金币的诱惑
+1. 搜狗号
+  - 搜狗号是搜狗旗下的。文章主要在搜狗浏览器和搜狗输入法推广。总体上流量不会太大，所以我没有主动申请。是平台邀请我开通的，直接给LV4的权益。
+1. 东方号
+  - 最大的困扰就是审核的严格，各种不通过。是我所有平台中，审核通过率最低的。
+1. 快传号
+  - 快传号是360旗下的。要做它的理由，就是它的文章是360搜索引擎检索入口。
+
+截至目前，就从今日头条挣了两万多。源自：[自媒体平台点评](https://zhuanlan.zhihu.com/p/133470376)
+
+#### 跨平台同步
+
+同步方法
+- （1）chrome浏览器插件
+  - [wechatsync](https://www.wechatsync.com/): 公众号吴文素材栏，预览页面可以看到同步该文章按钮。支持知乎、B站、IPFS备份
+  - [安装方法](https://www.wechatsync.com/#install)，[chrome应用商店](https://chrome.google.com/webstore/detail/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E5%90%8C%E6%AD%A5%E5%8A%A9%E6%89%8B/hchobocdmclopcbnibdnoafilagadion/related),[参考](https://zhuanlan.zhihu.com/p/395180376)
+- （2）第三方工具软件
+- （3）开启账户关联：如知乎上关联公众号，自动同步发表
+
+【2023-2-2】[文章一键发布到多个平台，视频一键上传，公司矩阵自媒体运营工具](https://zhuanlan.zhihu.com/p/107903773)
+
+很多朋友是自己单独在做公众号运营（选题、撰文、排版一肩挑），根本没有那么多时间和精力去其他平台推送内容
+
+自媒体多发辅助工具能一键将**公众号**文章同步推送到 10 余个其他平台
+1. `易媒助手`
+  - 推荐原因：支持40+平台**图文、视频**一键发送，自媒体号管理、每天实时更新所有数据。
+  - 一.针对员工做限制：可创建子账号、收益等数据不让员工查看、员工无法查看平台密码，轻松管理员工。
+  - 二.轻松支持图文、小视频30+平台同时分发，告别繁琐重复操作。
+  - 三.轻松安全管理200+自媒体账号，再不用总是担心账号乱七八糟。
+2. `新媒体管家`
+  - 一款小巧但近乎完美的浏览器插件，《7 款公众号图文排版小白神器》曾经提到过，今天要讲的是他的多账号管理、内容多发功能
+  - 当前支持8个同步媒体平台，包含微博、头条号、百家号、一点号、企鹅号、网易号、搜狐号、简书
+  - 同步的文章源只支持微信公众号内的文章，包括但不限于已经发布的文章、正在编辑的文章素材等，发文时同样会根据不同平台规则对文章作适当修改, 含有二维码及水印的图片可能会导致部分平台发文失败
+3. `微小宝`多平台助手
+  - 一款 PC 端软件，具有云端储存，一键分发，定时群发等强大的内容管理功能
+  - 支持 8个自媒体平台内容同步推送，包括公众号、百家号、头条号、企鹅号、大鱼号、一点号、搜狐号、网易号
+  - 同步内容源来自内置编辑器撰写或公众号内素材，内置编辑器还支持创建单图文（所有平台均可同步）、多图文（仅微信、QQ 平台可同步），内置素材库还支持搜索下载全网热文、爆文用于内容编辑
+4. `秒书`
+  - 第一款支持在手机端写作、排版、发布的自媒体辅助工具（PC 端也有）.
+  - 目前支持内容同步推送 9 个自媒体平台，包括朋友圈、公众号、QQ 空间、微博、头条号、天天快报、facebook 和 twitter
+  - 同步的内容源需要在秒书平台上创作完成，如果公众号未认证，则只能同步素材库，不能直接群发内容
+  - 除此之外，还内置了思维导图、图文排版、图片素材等功能
+
 
 ## 技术创业
 
