@@ -2786,6 +2786,11 @@ cat m.txt | awk '{if($1~/^[1-9]+/){gsub("\s+","",$1);printf "["$1"]"}else{gsub("
 - match( String, Ere )
 - split( String, A, [ Ere] )
 
+```sh
+# 将tab替换为 |
+cat a.txt | awk -F'\t' '{gsub("\t"," | ",$0);print "|"$0"|"}'
+```
+
 详细函数使用，可以参照：[linux awk 内置函数详细介绍（实例）](http://www.cnblogs.com/chengmo/archive/2010/10/08/1845913.html)
 
 
