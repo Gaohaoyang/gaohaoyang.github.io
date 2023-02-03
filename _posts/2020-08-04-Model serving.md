@@ -22,7 +22,7 @@ permalink: /model
 - 可以采用 Saver (python) + Serving (tensorflow serving) + Client (Java) 作为解决方案，从零开始记录线上模型部署流程。
 
 
-# 机器学习生命周期
+## 机器学习生命周期
 
 机器学习周期的三个阶段 [图](https://img-blog.csdnimg.cn/20210410095830948.png)
 - 数据准备
@@ -90,12 +90,29 @@ Ops=Operation，`MLOps`深刻继承了`DevOps`干活的思路与方法，都涉�
 - ①模型漂移：运行一段时间后，效果逐步下滑，如何做到自动更新模型？
 - ②自动降级：资源有限，根据不同的qps压力，适配不同版本的模型
 
-### 什么是Model Serving？
+### 什么是 Model Serving？
 
 一句话解释就是：
 > Model Serving解决的是模型离线训练好之后，如何进行线上实时推断的问题。
 
 在每个服务器节点动辄几千上万QPS的压力下，必然不可能在tensorflow，spark mllib等训练环境中进行实时推断。必须有一个模型服务器来承载模型相关的参数或者数据，进行几十毫秒级别的实时推断，这就是model serving面临的主要挑战。
+
+### 模型部署对比
+
+【2023-2-3】[AI模型部署落地综述（ONNX/NCNN/TensorRT等](https://www.toutiao.com/article/7189079539149144579)
+
+实际应用场景往往需要模型速度与精度能达到一个较好的平衡。因此这就需要在算法（剪枝，压缩等）与底层（手写加速算作）去优化模型。
+- ONNX、NCNN、OpenVINO、 TensorRT、Mediapipe
+
+对比，详见[原文](https://www.toutiao.com/article/7189079539149144579)
+
+| 模型部署 | 优点 | 缺点 |
+| --- | --- | --- |
+| ONNX  | |
+| NCNN  | |
+| OpenVINO  | |
+| TensorRT  | |
+| Mediapipe  | |
 
 ### 常见serving方法
 
