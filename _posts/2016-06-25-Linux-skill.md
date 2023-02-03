@@ -382,6 +382,8 @@ lastlog -u <user> # 展示指定用户最近的一次登录信息，默认显示
 
 useradd # 新增用户，只是创建了一个用户名，如 （useradd  +用户名 ），它并没有在/home目录下创建同名文件夹，也没有创建密码，因此利用这个用户登录系统，是登录不了的
 useradd -m wqw  # 添加用户：
+useradd -g nginx -M nginx # -M 参数用于不为nginx建立home目录
+
 passwd wqw # 设置密码
 passwd -d wqw # root权限下清楚用户wqw的密码
 passwd -l hadoop # 锁定用户hadoop不能更改密码；
@@ -503,6 +505,7 @@ sudo apt-get install build-essential
 sudo apt-get install yum
 ```
 
+
 【2022-11-9】失效
 
 #### yum 软件包
@@ -517,6 +520,8 @@ sudo apt install yum
 # 更新到新版
 yum check-update
 yum update
+yum -y update # 升级所有包，改变软件设置和系统设置,系统版本内核都升级
+yum -y upgrade # 升级所有包，不改变软件设置和系统设置，系统版本升级，内核不改变
 yum clean all
 ```
 
