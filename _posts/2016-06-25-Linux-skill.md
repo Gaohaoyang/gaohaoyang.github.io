@@ -383,6 +383,10 @@ lastlog -u <user> # 展示指定用户最近的一次登录信息，默认显示
 useradd # 新增用户，只是创建了一个用户名，如 （useradd  +用户名 ），它并没有在/home目录下创建同名文件夹，也没有创建密码，因此利用这个用户登录系统，是登录不了的
 useradd -m wqw  # 添加用户：
 passwd wqw # 设置密码
+passwd -d wqw # root权限下清楚用户wqw的密码
+passwd -l hadoop # 锁定用户hadoop不能更改密码；
+passwd -u hadoop # 解除锁定用户hadoop不能更改密码；
+passwd -S hadoop # 查询hadoop用户密码状态
 # ------ 用户切换 -------
 su wqw # 切换用户
 sudo -i -u aisearch # 【2022-1-16】root下切换账户
@@ -408,6 +412,21 @@ sudo 的执行流程大致为：
 - 若有 sudo 权限，则需要输入本用户的密码（root 用户执行 sudo 不需要密码）
 - 验证成功后执行命令
 - 因此，关键在于执行 sudo 的用户是否存在于 /etc/sudoers 文件内
+
+【2023-2-3】root 账户下输入 visudo 即可进入sudo配置，这个命令要比 vim /etc/sudoers 要好很多
+
+```sh
+# 找到这行
+root  ALL=(ALL)    ALL
+# 复制出来，改成新用户
+wqw  ALL=(ALL)    ALL
+# 保存，退出
+# 测试
+su liudiwei
+cd ~
+sudo mkdir test
+```
+
 
 su 是最简单的用户切换命令，通过该命令可以实现任何身份的切换，包括从普通用户切换为 root 用户、从 root 用户切换为普通用户以及普通用户之间的切换。
 - 普通用户之间切换
