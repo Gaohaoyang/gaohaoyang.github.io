@@ -3,7 +3,7 @@ layout: post
 title:  "文本生成&评价-Text Generation and Evaluation"
 date:   2020-04-28 21:39:00
 categories: 自然语言处理
-tags: 深度学习 NLP GAN Seq2seq 对话系统 文本评价 BLEU 多模态 好未来 paraphrase 复述 gpt VAE vae 扩散
+tags: 深度学习 NLP GAN Seq2seq 对话系统 文本评价 BLEU 多模态 好未来 paraphrase 复述 gpt VAE vae 扩散 chatgpt
 excerpt: 深度学习在NLP子领域——文本生成的应用汇总，如seq2seq、GAN系列
 author: 鹤啸九天
 mathjax: true
@@ -56,6 +56,7 @@ permalink: /text-generation
 - 网络结构上使用了循环神经网络（Recurrent Neural Networks），卷积神经网络（Convolutional Neural Networks），图神经网络（Graph Neural Networks），Transformer 等。
 - 为了顺应“**预训练**-**精调**”范式的兴起，在海量语料上自监督地训练出的大体量**预训练语言模型**（Pre-trained Language Model；PLM），也被广泛应用在文本生成任务中。
 
+
 ## 方法总结
 
 【2022-9-7】[智能化自动生成文本总结的方法](https://www.toutiao.com/article/7110470206492901899)
@@ -63,6 +64,77 @@ permalink: /text-generation
 - （2）用**文本生成模型**来生成文本总结
 - （3）**抽取**与**生成**相结合的方法
 - （4）将**预训练模型**用于总结的生成
+
+【2023-2-3】[基于知识的NLG综述](https://zhuanlan.zhihu.com/p/600247215)
+- 校设实验室向细或向空，公司实验室向大。校设实验室逐渐向大模型靠拢。由于训练资源不足，大量校设实验室将集中于prompt可解释性、即插即用方法、内部知识整合。训练资源尤其稀缺的校设实验室将集中在非常偏的任务。公司实验室会开始大模型竞争，RLHF的不同方向和规模将成为第一波low-fruit，外部知识整合会是第二波low-fruit。公司实验室的方法和参数保密性将进一步提升。公司实验室对系统架构和高效训练的人才的需求将迅速攀升。
+- 小任务整合入大任务。大量小任务会并入大任务，构造有监督数据集并微调不再是小任务的第一选择。大模型无法取得好结果的小任务将成为研究热点。换句话说，研究热点将从“大模型能做到什么”转换为“大模型做不到什么”。
+- 知识的挖掘和自监督学习成为NLP最前沿方向。大量基于RLHF的自监督基于知识的生成方法将被大实验室提出并实践，成果将大量发表在顶会。主流热点将主要focus在知识的数量、质量以及运用知识的方法。统计方法几乎完全取代规则方法，知识的地位将快速超越模型本身。这一浪潮将迅速影响到CV，今年必定有更多基于RLHF的CV方法发表于CV三大会。
+- 资本变向，算法岗地位下降。资本将变向涌入大模型方向，未来数年会保持较高热度。公司将合并大量业务，竞争训练大模型以抢占市场。大数据工程师、后端工程师、架构师的地位提高，算法工程师地位进一步下降。
+
+ChatGPT无非就是微调的GPT-3，唯一的不同不过是知识的**指向性**，或者说模型对特定知识的筛选。
+- GPT-3是用大量无指向性的非结构化文本训练的，而ChatGPT是在GPT-3的基础上用大量RLHF自监督的文本微调的。
+- 换句话说，**知识才是ChatGPT优于GPT-3的关键**。GPT-3的知识没有任何标签，因此本质是一个无监督学习；而ChatGPT使用RLHF生成符合人类指令要求的知识，因此本质是一个自监督学习。有了RLHF提供的监督信号，两个模型学习知识的质量就完全不同了。实验证明，使用质量高的知识，可以将GPT-3的模型规模压缩100倍。绕来绕去，NLG最后还是知识起了决定性作用。
+
+### 生成模型概览
+
+【2023-2-3】[2022生成模型进展有多快？新论文盘点9类生成模型代表作](https://www.toutiao.com/article/7193210190974714371)
+
+ChatGPT的出现，彻底将生成AI推向爆发。但AI生成模型可不止 ChatGPT 一个，光是基于**文本输入**的就有7种：图像、视频、代码、3D模型、音频、文本、科学知识 ……
+
+尤其2022年，效果好的AI生成模型层出不穷，又以 `OpenAI`、`Meta`、`DeepMind` 和 `谷歌` 等为核心，发了不少达到SOTA的模型。
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/7bf81e9821d44f828056b045ddab2fb3~noop.image?_iz=58558&from=article.pc_detail&x-expires=1675989263&x-signature=DYEyfQtpUfb0IyuUzfwhp2PQp%2Fg%3D)
+- `OpenAI`: DALL-E 2、ChatGPT、Jukebox、Whisper
+- `Google`: Imagen、Muse、DreamFusion、Phenaki、Minerva、AudioLM、LaMDA
+- `DeepMind`: Flamingo、AlphaCode、Alphatensor、GATO
+  - Alpha系列：AlphaCode、AlphaGo、AlphaFold
+- `Meta`: PEER、Speech From Brain、Galactica
+- `runway`: Stable Diffusion、Soundfly
+- `Nvidia`: Magic 3D
+
+论文对2022年新出现的主流生成模型进行了年终盘点
+- [ChatGPT is not all you need](https://arxiv.org/abs/2301.04655), [twiiter](https://twitter.com/1littlecoder/status/1615352215090384899)
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/7ae4ac40a3a84173ab52b5f2196fea14~noop.image?_iz=58558&from=article.pc_detail&x-expires=1675989263&x-signature=YRO2H1gdIfvBvmOPDX7Cxc6VPgg%3D)
+
+AI生成模型分成了9大类 详见[原文](https://www.toutiao.com/article/7193210190974714371)
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/a3d62347f83247f9906a379cabe57853~noop.image?_iz=58558&from=article.pc_detail&x-expires=1675989263&x-signature=ZDQPfUcGn5FvVrRVieY098WuEeE%3D)
+- Text-to-Text: ChatGPT3、LaMDA、PEE、Speech From Brain
+  - ChatGPT由OpenAI生成，是一个对话生成AI，懂得回答问题、拒绝不正当的问题请求并质疑不正确的问题前提，基于Transformer打造。它用人类打造的对话数据集、以及InstructGPT数据集的对话格式进行训练，此外也可以生成代码和进行简单数学运算。
+  - LaMDA基于Transformer打造，利用了其在文本中呈现的长程依赖关系能力。其具有1370亿参数，在1.56T的公共对话数据集和网页文本上进行训练，只有0.001%的训练数据被用于微调，这也是它效果好的原因之一。
+  - PEER由Meta AI打造，基于维基百科编辑历史进行训练，直到模型掌握完整的写作流程。具体来说，模型允许将写作任务分解成更多子任务，并允许人类随时干预，引导模型写出人类想要的作品。
+  - Speech from Brain由Meta AI打造，用于帮助无法通过语音、打字或手势进行交流的人，通过对比学习训练wave2vec 2.0自监督模型，基于非侵入式脑机接口发出的脑电波进行解读，并解码大脑生成的内容，从而合成对应语音。
+- Text-to-Code: Codex、AlphaCode
+  - Codex是OpenAI打造的编程模型，基于GPT-3微调，可以基于文本需求生成代码。首先模型会将问题分解成更简单的编程问题，随后从现有代码（包含库、API等）中找到对应的解决方案，基于GitHub数据进行训练。
+  - AlphaCode由DeepMind打造，基于Transformer模型打造，通过采用GitHub中715.1GB的代码进行预训练，并从Codeforces中引入一个数据集进行微调，随后基于Codecontests数据集进行模型验证，并进一步改善了模型输出性能。
+- Text-to-Image: DALL-E 2、Stable Diffusion、Imagen、Muse
+  - DALL·E2是来自OpenAI的生成模型，在零样本学习上做出大突破。与DALL·E一样，两点依旧是CLIP模型，除了训练数据庞大，CLIP基于Transformer对图像块建模，并采用对比学习训练，最终帮助DALL·E2取得了不错的生成效果。
+  - Imagen来自谷歌，基于Transformer模型搭建，其中语言模型在纯文本数据集上进行了预训练。Imagen增加了语言模型参数量，发现效果比提升扩散模型参数量更好。
+  - Stable Diffusion由慕尼黑大学的CompVis小组开发，基于潜在扩散模型打造，这个扩散模型可以通过在潜表示空间中迭代去噪以生成图像，并将结果解码成完整图像。
+  - Muse由谷歌开发，基于Transformer模型取得了比扩散模型更好的结果，只有900M参数，但在推理时间上比Stable Diffusion1.4版本快3倍，比Imagen-3B和Parti-3B快10倍。
+- Text-to-Audio: AudioLM、Whisper、Jukebox
+  - AudioLM由谷歌开发，将输入音频映射到一系列离散标记中，并将音频生成转换成语言建模任务，学会基于提示词产生自然连贯的音色。在人类评估中，认为它是人类语音的占51.2%、与合成语音比率接近，说明合成效果接近真人。
+  - Jukebox由OpenAI开发的音乐模型，可生成带有唱词的音乐。通过分层VQ-VAE体系将音频压缩到离散空间中，损失函数被设计为保留最大量信息，用于解决AI难以学习音频中的高级特征的问题。不过目前模型仍然局限于英语。
+  - Whisper由OpenAI开发，实现了多语言语音识别、翻译和语言识别，目前模型已经开源并可以用pip安装。模型基于68万小时标记音频数据训练，包括录音、扬声器、语音音频等，确保由人而非AI生成。
+- Text-to-Video: Phenaki、Soundify
+  - Phenaki由谷歌打造，基于新的编解码器架构C-ViViT将视频压缩为离散嵌入，能够在时空两个维度上压缩视频，在时间上保持自回归的同时，还能自回归生成任意长度的视频
+  - Soundify是Runway开发的一个系统，目的是将声音效果与视频进行匹配，即制作音效。具体包括分类、同步和混合三个模块，首先模型通过对声音进行分类，将效果与视频匹配，随后将效果与每一帧进行比较，插入对应的音效。
+- Text-to-3D: Dreamfusion、Magic 3D
+  - 没有把OpenAI的Point·E统计进去，可能是生成效果上没有达到SOTA
+  - DreamFusion由谷歌和UC伯克利开发，基于预训练文本-2D图像扩散模型实现文本生成3D模型。采用类似NeRF的三维场景参数化定义映射，无需任何3D数据或修改扩散模型，就能实现文本生成3D图像的效果。
+  - Magic3D由英伟达开发，旨在缩短DreamFusion图像生成时间、同时提升生成质量。具体来说，Magic3D可以在40分钟内创建高质量3D网格模型，比DreamFusion快2倍，同时实现了更高分辨率，并在人类评估中以61.7%的比率超过DreamFusion。
+- Text-to-Science: Galactica、Minerva
+  - Galatica是Meta AI推出的1200亿参数论文写作辅助模型，又被称之为“写论文的Copilot模型”，目的是帮助人们快速总结并从新增论文中得到新结论，在包括生成文本、数学公式、代码、化学式和蛋白质序列等任务上取得了不错的效果，然而一度因为内容生成不可靠被迫下架。
+  - Minerva由谷歌开发，目的是通过逐步推理解决数学定量问题，可以主动生成相关公式、常数和涉及数值计算的解决方案，也能生成LaTeX、MathJax等公式，而不需要借助计算器来得到最终数学答案。
+- Image-to-Text: Flamingo、VisualGPT
+  - Flamingo是DeepMind推出的小样本学习模型，基于可以分析视觉场景的视觉模型和执行基本推理的大语言模型打造，其中大语言模型基于文本数据集训练。输入带有图像或视频的问题后，模型会自动输出一段文本作为回答。
+  - VisualGPT是OpenAI制作的图像-文本模型，基于预训练GPT-2提出了一种新的注意力机制，来衔接不同模态之间的语义差异，无需大量图像-文本数据训练，就能提升文本生成效率。
+- Other Models: AlphaTensor、AlphaFold、GATO、Human Motion Diffusion Model
+  - AlphaTensor由DeepMind开发，懂得自己改进矩阵乘法并提升计算速度，不仅改进了目前最优的4×4矩阵解法，也提升了70多种不同大小矩阵的计算速度，基于“棋类AI”AlphaZero打造，其中棋盘代表要解决的乘法问题，下棋步骤代表解决问题的步骤。
+  - GATO由DeepMind开发，基于强化学习教会大模型完成600多个不同的任务，包含离散控制如Atari小游戏、推箱子游戏，以及连续控制如机器人、机械臂，还有NLP对话和视觉生成等，进一步加速了通用人工智能的进度。
+  - PhysDiff是英伟达推出的人体运动生成扩散模型，进一步解决了AI人体生成中漂浮、脚滑或穿模等问题，教会AI模仿使用物理模拟器生成的运行模型，并在大规模人体运动数据集上达到了最先进的效果。
+- 除了谷歌LaMDA和Muse以外，所有模型均为2022年发布。
+  - 谷歌LaMDA虽然是2021年发布的，但在2022年又爆火了一波；
+  - Muse则是2023年刚发布的，但论文声称自己在图像生成性能上达到SOTA，因此也统计了进去。
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/0796479323fd4f75914bd65906eb2af3~noop.image?_iz=58558&from=article.pc_detail&x-expires=1675989263&x-signature=gz99QiqjLcQ2VpXaqvf%2BsKkPwoY%3D)
 
 ### （1） 从原文中**抽取句子**组成文本总结
 
