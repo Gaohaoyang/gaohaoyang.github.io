@@ -429,6 +429,18 @@ cd ~
 sudo mkdir test
 ```
 
+[普通用户添加root权限方法总结](https://cloud.tencent.com/developer/article/1725832)
+- 用adduser命令添加一个普通用户 tommy
+- 赋予root权限
+  - 方法一： 修改 /etc/sudoers 文件，找到下面一行，把前面的注释（#）去掉
+    - \%wheel ALL=(ALL) ALL 
+    - 修改用户，使其属于root组（wheel），命令如下：usermod -g root wqw 
+    - 命令 su – ，即可获得root权限进行操作
+  - 方法二： 修改 /etc/sudoers 文件，找到下面一行，在root下面添加一行
+    -  tommy ALL=(ALL) ALL 
+  - 方法三： 修改 /etc/passwd 文件，找到如下行，把用户ID修改为 0
+    - tommy:x:500:500:tommy:/home/tommy:/bin/bash 
+    - tommy:x:0:500:tommy:/home/tommy:/bin/bash 
 
 su 是最简单的用户切换命令，通过该命令可以实现任何身份的切换，包括从普通用户切换为 root 用户、从 root 用户切换为普通用户以及普通用户之间的切换。
 - 普通用户之间切换
