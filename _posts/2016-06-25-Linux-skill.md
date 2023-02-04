@@ -971,7 +971,7 @@ lsof -i -U # 显示所有打开的端口和UNIX domain文件
 netstat -tunlp 用于显示 tcp，udp 的端口和进程等相关情况
 
 netstat 查看端口占用语法格式：
-- netstat -tunlp | grep 端口号
+- netstat -tunlp \| grep 端口号
 - 参数
   - -t (tcp) 仅显示tcp相关选项
   - -u (udp)仅显示udp相关选项
@@ -2232,11 +2232,23 @@ done
 for ((i = 0 ; i < 100 ; i++)); do
     echo $i
 done
+for i in `ls`;
+do 
+    echo $i is file name\! ;
+done
+# 字符串，[2023-2-4]注意：不能省略变量name_list，直接用字符串
+name_list="httpd-init.service  httpd.service  httpd.socket  httpd@.service httpd.service.d";
+for file in $name_list;
+do
+        echo "[$file]"
+done
 # 范围
 for i in {1..5}; do
 # for i in {5..50..5}; do # 设置步长
     echo "Welcome $i"
 done
+# awk版
+awk 'BEGIN{for(i=1; i<=10; i++) print i}'
 # 自动递增
 i=1
 while [[ $i -lt 4 ]]; do
