@@ -37,7 +37,6 @@ permalink: /skill
 - 【2022-10-6】只要利益不产生冲突，别人讲的话一般不需要反驳 —— 乔布斯
 - 【2023-1-15】成年人最高级的自律就是控制自己的**反驳欲**，这张嘴不是**赞美**就学会**闭嘴**
 
-
 ## 能人特质
 
 日常的平淡能杀灭所有自己的，给自己写日记，反复提醒自己：做难事必有所得，一定要做困难事，干自己没干过的事，否则被平淡淹没，没有挑战创造挑战，你的生命在这过程中才能绽放
@@ -72,43 +71,54 @@ permalink: /skill
 - 18、给自己留余地，懂的量力而行，欲望和能力控制的刚刚好。
 - 19、看人、看问题，直达本质。
 
+### 专注自己
+
+【2023-2-6】自己能影响的事情，自己可以做决定。别人的事情，要积极关注。根本无法抉择的事情就接纳，自己就变得很坦然
+
+人生控制图，解决你50%的焦虑
+- [人生控制图1](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/b96f653433e847818f13eac6e8db146c~tplv-obj:1080:1439.image?_iz=97245&from=post&x-expires=1683388800&x-signature=IdhNEq%2B%2FaFGX3fTuK0UqnM5LlNc%3D)
+- ![人生控制图1](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/b96f653433e847818f13eac6e8db146c~tplv-obj:1080:1439.image?_iz=97245&from=post&x-expires=1683388800&x-signature=IdhNEq%2B%2FaFGX3fTuK0UqnM5LlNc%3D)
+- [人生控制图2](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/ab2d0a58a3b84b42b15078b8ab61aa21~tplv-obj:827:1084.image?_iz=97245&from=post&x-expires=1683388800&x-signature=EPnzbqbIIuewXd4saJCpnk694%2B8%3D)
+- ![人生控制图2](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/ab2d0a58a3b84b42b15078b8ab61aa21~tplv-obj:827:1084.image?_iz=97245&from=post&x-expires=1683388800&x-signature=EPnzbqbIIuewXd4saJCpnk694%2B8%3D)
+
 
 ## 成功原则
 
-- 【2020-5-16】《成功的原则》[中文完整版](https://www.bilibili.com/video/BV1Ab411J73x),[英文版本](https://www.bilibili.com/video/BV1Yb411371J)
-   - 1. 你必须自己思考真相是什么？
-      - 犯错误，反思错误，总结出原因，改正错误
-      - 跳出舒适圈，有勇气为此付出行动
-      - 真相是取得良好结果的根本基础
-      - 梦想+现实+决心=成功的生活
-   - 2. 拥抱现实，应对现实
-      - 克服(错误、问题、弱点)
-      - 痛苦+反思=进步
-   - 3. 五步流程
-      - 制定目标(根据自身定目标)
-      - 发现问题
-      - 诊断问题(反思为什么会出现这种问题？)
-      - 规划方案(找到处理的办法)
-      - 执行方案
-      - 不断循环上述五个步骤
-   - 4. 深渊
-      - 客观面对失败
-      - 平衡风险与回报
-   - 5. 一切都是机器
-      - 类似情境的重现
-      - 每件事都因果关系的
-      - 眼界放宽，从历史中找到规律
-   - 6. 你的两大障碍
-      - 自我意识障碍(不要太自以为是，敢于接受缺点)
-      - 思维盲点障碍(接受不了自己认知以外的。每个人对事物、环境的理解不同，观点也不同。)
-   - 7. 做到头脑极致开放
-      - 不要只看对错，而是寻找真相
-      - 不要看重结论，要学习不同视角，看问题的思路
-      - 对不同观点的包容，才能发现自己看不见的问题，不是盲目听信
-   - 8. 奋力拼搏
-   - 中文版
+
+【2020-5-16】《成功的原则》[中文完整版](https://www.bilibili.com/video/BV1Ab411J73x),[英文版本](https://www.bilibili.com/video/BV1Yb411371J)
+- 1. 你必须自己思考真相是什么？
+   - 犯错误，反思错误，总结出原因，改正错误
+   - 跳出舒适圈，有勇气为此付出行动
+   - 真相是取得良好结果的根本基础
+   - 梦想+现实+决心=成功的生活
+- 2. 拥抱现实，应对现实
+   - 克服(错误、问题、弱点)
+   - 痛苦+反思=进步
+- 3. 五步流程
+   - 制定目标(根据自身定目标)
+   - 发现问题
+   - 诊断问题(反思为什么会出现这种问题？)
+   - 规划方案(找到处理的办法)
+   - 执行方案
+   - 不断循环上述五个步骤
+- 4. 深渊
+   - 客观面对失败
+   - 平衡风险与回报
+- 5. 一切都是机器
+   - 类似情境的重现
+   - 每件事都因果关系的
+   - 眼界放宽，从历史中找到规律
+- 6. 你的两大障碍
+   - 自我意识障碍(不要太自以为是，敢于接受缺点)
+   - 思维盲点障碍(接受不了自己认知以外的。每个人对事物、环境的理解不同，观点也不同。)
+- 7. 做到头脑极致开放
+   - 不要只看对错，而是寻找真相
+   - 不要看重结论，要学习不同视角，看问题的思路
+   - 对不同观点的包容，才能发现自己看不见的问题，不是盲目听信
+- 8. 奋力拼搏
+- 中文版
 <iframe src="//player.bilibili.com/player.html?aid=46828896&bvid=BV1Ab411J73x&cid=82024398&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
-   - 英文版
+- 英文版
 <iframe src="//player.bilibili.com/player.html?aid=50084312&bvid=BV1Yb411371J&cid=87672654&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
 ## 认知金句
