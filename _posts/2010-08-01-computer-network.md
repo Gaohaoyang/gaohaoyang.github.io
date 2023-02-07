@@ -108,6 +108,15 @@ MAC 地址：长度 48 位，固话在设备硬件上，用十六进制表示的
 
 <iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/6958363991613637133?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
 
+### 如何查看本机ip
+
+```sh
+# 方法一
+curl ifconfig.me # 查看非windows系统的公网ip
+# 方法二
+# 系统偏好 → 网络 → TCP/TP， ip地址
+```
+
 
 ### ip地址介绍
 
