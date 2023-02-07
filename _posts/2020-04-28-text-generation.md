@@ -60,7 +60,7 @@ permalink: /text-generation
 ## 方法总结
 
 【2022-9-7】[智能化自动生成文本总结的方法](https://www.toutiao.com/article/7110470206492901899)
-- （1） 从原文中**抽取句子**组成文本总结
+- （1）从原文中**抽取句子**组成文本总结
 - （2）用**文本生成模型**来生成文本总结
 - （3）**抽取**与**生成**相结合的方法
 - （4）将**预训练模型**用于总结的生成
@@ -78,6 +78,15 @@ ChatGPT无非就是微调的GPT-3，唯一的不同不过是知识的**指向性
 ### 生成模型概览
 
 【2023-2-3】[2022生成模型进展有多快？新论文盘点9类生成模型代表作](https://www.toutiao.com/article/7193210190974714371)
+- 参考[ChatGPT 持续创造历史记录：AIGC，人工智能的旷世之作](https://www.toutiao.com/article/7196594313236251196)
+- ![img](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/1122923c43d243f4aed78b7b533d66e2~noop.image?_iz=58558&from=article.pc_detail&x-expires=1676258271&x-signature=V3RsD1OVm3OdiEmWzloCJy3o%2Fho%3D)
+- 2014年，变分自动编码，VAE
+- 2014年，生成对抗网络，GAN
+- 2015年，基于流的生成模型，Flow-based models
+- 2015年，扩散模型，Diffusion Model
+- 2017年，Transformer模型
+- 2020年，神经辐射场，Neural Radiance Field
+- 2021年，CLIP（Contrastive Language-Image PreTraining模型）
 
 ChatGPT的出现，彻底将生成AI推向爆发。但AI生成模型可不止 ChatGPT 一个，光是基于**文本输入**的就有7种：图像、视频、代码、3D模型、音频、文本、科学知识 ……
 
@@ -90,6 +99,9 @@ ChatGPT的出现，彻底将生成AI推向爆发。但AI生成模型可不止 Ch
 - `Meta`: PEER、Speech From Brain、Galactica
 - `runway`: Stable Diffusion、Soundfly
 - `Nvidia`: Magic 3D
+
+AIGC预训练模型一览
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/11cb1660d4b04155910b5d4a625ababc~noop.image?_iz=58558&from=article.pc_detail&x-expires=1676258271&x-signature=rO%2FReI3%2FXscbMOm%2B2TEZKr2LLn4%3D)
 
 论文对2022年新出现的主流生成模型进行了年终盘点
 - [ChatGPT is not all you need](https://arxiv.org/abs/2301.04655), [twiiter](https://twitter.com/1littlecoder/status/1615352215090384899)
@@ -547,7 +559,6 @@ Diffusion的本质
 
 `GAN` 全称是： Generative A dversarial Networks，从名称不难读出“**对抗**（Adversarial）”是其成功之精髓。
 - 对抗思想受`博弈论`启发，在训练`生成器`（Generator）时，训练一个`判别器`（Discriminator）来判断输入是**真实**图像还是**生成**图像，两者在一个极小极大游戏中相互博弈不断变强。当从随机噪声生成足以“骗”过的图像时，我们认为较好地拟合出了真实图像的数据分布，通过采样可以生成大量逼真的图像。
-
 
 ## GAN问题
 
