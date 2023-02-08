@@ -351,6 +351,42 @@ Conversational AI发展方向
 
 ### 人工智障
 
+2017年10月，一个叫Sophia的机器人，被沙特阿拉伯授予了正式的公民身份。公民身份，这个评价比图灵测试还要牛。
+- Sophia in AI for Good Global Summit 2017. Source:  ITU
+- ![](https://img.huxiucdn.com/article/content/202205/10/123903680761.jpg?imageView2/2/w/1000/format/jpg/interlace/1/q/85)
+- Sophia经常参加各种会、“发表演讲”、“接受采访”，比如去联合国对话，表现出来非常类似人类的言谈；去和Will Smith拍MV；接受Good morning Britain之类的主流媒体的采访；甚至公司创始人参加Jim Fallon的访谈时一本正经的说Sophia是“basically alive”。
+- ![](https://img.huxiucdn.com/article/content/202205/10/123904043695.png?imageView2/2/w/1000/format/png/interlace/1/q/85)
+
+
+2018 年 11 月，小米 AIoT（人工智能 + 物联网）开发者大会上，「雷布斯」雷军骄傲地展示了新品智能音箱「小爱同学」。
+- ![](https://s3.ifanr.com/wp-content/uploads/2018/12/ifanr_collection_article-11402061544089106.gif)
+
+>- 雷军：「小爱，你能做什么？」
+>- 小爱：「人家还小嘛，这个问题太难了……」
+>- … …
+>- 雷军：「三个木叫什么？」
+>- 小爱：「木三分……」
+>- 雷军：「三个木叫什么？」
+>- 小爱：「你是电，你是光，你是唯一的神话。」
+>- 雷军：「三个木头的木叫什么？」
+>- 小爱：「粘树的木头，感觉你是个乐观……」
+>- 雷军：「小爱，是不是每次演示的时候你都要出错？」
+
+尴尬的雷军继续问小爱，「125 加 357 加 567 等于多少？」但小爱同学直接「下班」，不再回答，全场哄笑一片。
+
+【2018-12-6】[「人工智障」，我们还能忍你多久？](https://www.ifanr.com/1140206)
+
+[当你对着语音助手说友商的好话，它会有啥反应？](https://www.bilibili.com/video/BV15V411k76i)
+- <iframe src="//player.bilibili.com/player.html?aid=413595890&bvid=BV15V411k76i&cid=203748896&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600"> </iframe>
+
+贴心提示：
+- 华为用户可以试一下，让小艺给你点个外卖，你会震惊的！
+- 三星的的Bixby甚至能玩推理游戏。还会模仿情景声音，能把人吓死。
+- 和小爱同学说来一首威风堂堂，你会回来感谢我的。
+
+
+#### 智障案例
+
 【2023-2-8】知乎专题：[你见过哪些“人工智障”?](https://www.zhihu.com/question/65512123)
 
 |AI设备|品牌|智障特点|表现|备注|
@@ -381,14 +417,6 @@ Conversational AI发展方向
 |陪护机器人||行动能力欠缺|自己摔倒|[video](https://vdn3.vzuu.com/SD/36be1d5c-233b-11eb-9e7a-566c694b8669.mp4?disable_local_cache=1&bu=078babd7&c=avc.0.0&f=mp4&expiration=1675831534&auth_key=1675831534-0-0-8749dafa6f152c2ecddcb24b8ae5fc8d&v=tx&pu=078babd7)|
 |足球机器人||行动能力不足|无法站立|[video](https://vdn6.vzuu.com/SD/fd320820-2383-11eb-8741-964718266243.mp4?pkey=AAUTaOuH2yjejVcuxgpH7E8qwXvt2fAp3MIhbrOabMkXcs-9a7uiGoUg1ZJmzAAQkjqCZn9A7LEkeiFqMRNy92r3&c=avc.0.0&f=mp4&pu=078babd7&bu=078babd7&expiration=1675835153&v=ks6)|
 
-[当你对着语音助手说友商的好话，它会有啥反应？](https://www.bilibili.com/video/BV15V411k76i)
-- <iframe src="//player.bilibili.com/player.html?aid=413595890&bvid=BV15V411k76i&cid=203748896&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600"> </iframe>
-
-贴心提示：
-- 华为用户可以试一下，让小艺给你点个外卖，你会震惊的！
-- 三星的的Bixby甚至能玩推理游戏。还会模仿情景声音，能把人吓死。
-- 和小爱同学说来一首威风堂堂，你会回来感谢我的。
-
 
 
 ## 智能音箱
@@ -406,6 +434,8 @@ Conversational AI发展方向
 - 2016年谷歌也完成了它的对话产品-谷歌**assistant**。
 - 2017年，中国本土的对话产品开始觉醒、登场。17年下半年，阿里的**天猫精灵**、小米的**小爱**同学正式推出
 - 2018年，百度的**小度**智能音箱，以及华为AI音箱相继跟上，这些头部大厂率先抢占了市场和人心，而后第二梯队的思必驰、出门问问等产品又进一步参与了对话市场的瓜分。
+- 2018年5月的时候，Google I/O发布了Duplex的录音Demo，场景是Google Assistant代替用户打电话去订餐厅，和店员沟通，帮助用户预定位子。值得注意，这并不是Live demo。
+  - 【2022-05-10】[人工智障：你看到的AI与智能无关](https://m.huxiu.com/article/550999.html)
 - 2020年9月30日，百度将旗下智能生活事业群组业务小度科技拆分，完成独立融资。小度也被独立拆分
 - 2021年1月，阿里AI Lab解散，天猫精灵凉凉，阿里AI Labs成为国内主要互联网公司里第一个被关闭的人工智能实验室。
   - 阿里巴巴人工智能实验室成立于2016年，2017年7月5日首次公开亮相，巅峰的时候阿里AI Labs团队有上千人，旗下孵化出来的最重要的产品就是天猫精灵。
