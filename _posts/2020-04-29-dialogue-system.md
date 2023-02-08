@@ -349,6 +349,46 @@ Conversational AI发展方向
 - （3）多语言：
 - ![](https://p5.toutiaoimg.com/img/tos-cn-i-qvj2lq49k0/6c27f649bb874110bcff7ffd683f5bca~tplv-obj:1440:1080.image)
 
+### 人工智障
+
+【2023-2-8】知乎专题：[你见过哪些“人工智障”?](https://www.zhihu.com/question/65512123)
+
+|AI设备|品牌|智障特点|表现|备注|
+|---|---|---|---|---|
+|音箱|Alex|诡异|无缘无故发出怪笑声：“啊-哈-哈”的声音，听得人毛骨悚然|![img](https://picx.zhimg.com/80/v2-2f01e841a0335ca3ab2f4d9cda53b460_1440w.webp?source=1940ef5c)|
+|音箱||语义理解不足|“我是说，明天早上六点半的时候，叫我起床。”<br>“好的，明天早上六点半的时候，我将称呼你为‘起床’。”||
+|音箱|微软小娜|语义理解不足|“小娜！设置三点钟闹铃“”好的！已设置3：00闹铃！“<br>抱歉，我忘记小娜不知道什么是12小时制，我半夜三点被叫醒了！||
+|音箱|小米小爱|语义理解不足|“小爱同学，播放loveshot”<br>“好的，为你播放拉萨”<br>“小爱同学，播放七月的风”<br>“对不起，只能查询未来十五天天气情况”||
+|音箱|小米小爱|语义理解不足|放一首周杰伦的歌<br>小爱：无反应<br>放歌！<br>小爱：放谁的歌儿？||
+|音箱|Google Assistant|语义理解不足|理解不了，什么叫“不要”|![img](https://pic1.zhimg.com/80/v2-827a9f7239756d67ea410db9f552c23f_1440w.webp?source=1940ef5c)|
+|音箱|小米小爱|语义理解不足|“小爱同学，播放loveshot”||
+|个人助理|华为小艺|域外意图|频繁安全回复、道歉：很抱歉！小艺还在努力学习中,请您换个简单的问法吧|![img](https://picx.zhimg.com/80/v2-449d8226bb7077bee81cd37b63239d65_1440w.webp?source=1940ef5c)|
+|个人助理|Apple Siri|语义理解有误|用户：设置一个今早8点的闹钟<br>Siri：我打开了你6:00的闹钟|![img](https://pica.zhimg.com/80/v2-7ca5786e86e5927b896753acab0ab56b_1440w.webp?source=1940ef5c)|
+|个人助理|Apple Siri|语义理解有误|用户：siri，给xx发微信，告诉她我晚点到。<br>Siri：好的，我将给xx发消息：告诉她我晚点到。||
+|闲聊机器人|微软小冰|无法理解上文|什么？<br>bot: 什么额什么|![img](https://picx.zhimg.com/80/v2-cdc3ee61a2561d7f487e7c83741ba6b3_1440w.webp?source=1940ef5c)|
+|闲聊机器人|微软小冰|胡说八道|写的诗乱七八糟|![img](https://picx.zhimg.com/80/v2-7d9c11d301aed4644484c37d39bb4c42_1440w.webp?source=1940ef5c)|
+|智能客服|蛋卷|语义理解不足|客服机器人变复读机|![](https://picx.zhimg.com/80/v2-9cc577c198903b4ce6292821a4c4aa16_1440w.webp?source=1940ef5c)|
+|银行大厅机器人|快宝|人工操作|雇佣人工在后台处理|[视频地址](https://www.zhihu.com/zvideo/1298915131536560128)|
+|图像识别|华为P30|无法识别域外目标|将shit识别成food|![](https://pica.zhimg.com/80/v2-6bd2b26dad688b5f80e01b4afc805a02_1440w.webp?source=1940ef5c)|
+|陪护机器人||情绪表达欠缺|翻白眼|![img](https://picx.zhimg.com/50/v2-75c9c9c2e1ccca067efd2b167dd3554e_720w.webp?source=1940ef5c)|
+|扫地机器人||不会充电||![img](https://pic1.zhimg.com/80/v2-ab1e57530299420aa18c23b9aa59f53a_1440w.webp?source=1940ef5c)|
+|扫地机器人||离家出走|生是我的家用电器,死是我家的摆设，休想逃走！|![](https://picx.zhimg.com/80/v2-51a102db78e23780fb78c959edd7fcf7_1440w.webp?source=1940ef5c)|
+|扫地机器人||脾气大||![](https://pica.zhimg.com/80/v2-132aefb2ee7970cf2c0f4683440efb80_1440w.webp?source=1940ef5c)|
+|奶娃机器人||无法精确控制|机械臂伤人|[video](https://vdn6.vzuu.com/SD/3b0f7304-239c-11eb-b1c2-8e279300b67d.mp4?pkey=AAVeMW07lo942g6HBFpoC-MlZf_kn1eGvnrV0MOLofsoBvGs_B-q9WPkWgeprufNgSIzT7zIacW0wMzwkwUeV-ss&c=avc.0.0&f=mp4&pu=078babd7&bu=078babd7&expiration=1675834866&v=ks6)|
+|喂食机器人||机械控制障碍||[video](https://vdn3.vzuu.com/SD/3b129f6e-236c-11eb-a494-56dd061dbff2.mp4?disable_local_cache=1&bu=078babd7&c=avc.0.0&f=mp4&expiration=1675831365&auth_key=1675831365-0-0-ae34ee12b4fe5518a321af90305bddbd&v=tx&pu=078babd7)|
+|家政机器人||无法感知物体|撞门|![img](https://pic1.zhimg.com/50/v2-80796d0bd1d81eeeb593851f8615cd59_720w.webp?source=1940ef5c)|
+|家政机器人||无法感知电线|自己拔电源|![img](https://picx.zhimg.com/50/v2-3d76b042e7f54865bd329e1008c8972a_720w.webp?source=1940ef5c)|
+|陪护机器人||行动能力欠缺|自己摔倒|[video](https://vdn3.vzuu.com/SD/36be1d5c-233b-11eb-9e7a-566c694b8669.mp4?disable_local_cache=1&bu=078babd7&c=avc.0.0&f=mp4&expiration=1675831534&auth_key=1675831534-0-0-8749dafa6f152c2ecddcb24b8ae5fc8d&v=tx&pu=078babd7)|
+|足球机器人||行动能力不足|无法站立|[video](https://vdn6.vzuu.com/SD/fd320820-2383-11eb-8741-964718266243.mp4?pkey=AAUTaOuH2yjejVcuxgpH7E8qwXvt2fAp3MIhbrOabMkXcs-9a7uiGoUg1ZJmzAAQkjqCZn9A7LEkeiFqMRNy92r3&c=avc.0.0&f=mp4&pu=078babd7&bu=078babd7&expiration=1675835153&v=ks6)|
+
+[当你对着语音助手说友商的好话，它会有啥反应？](https://www.bilibili.com/video/BV15V411k76i)
+- <iframe src="//player.bilibili.com/player.html?aid=413595890&bvid=BV15V411k76i&cid=203748896&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600"> </iframe>
+
+贴心提示：
+- 华为用户可以试一下，让小艺给你点个外卖，你会震惊的！
+- 三星的的Bixby甚至能玩推理游戏。还会模仿情景声音，能把人吓死。
+- 和小爱同学说来一首威风堂堂，你会回来感谢我的。
+
 
 
 ## 智能音箱
