@@ -425,13 +425,16 @@ Conversational AI发展方向
 
 ### 发展历史
 
+
+![音箱时间线](https://image.woshipm.com/wp-files/2018/06/EFkOTSZqcMrSVd1Zy7tQ.png)
+
 - 【2021-3-9】[2021年了，对话系统凉透了吗？](https://mp.weixin.qq.com/s/d7Bt1gHIP_LXmMJuIKUL-A)
   - ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X2pwZy81ZmtuYjQxaWI5cUZwNWFEUTVqSXdPUVpZZ0JWaERmYWNuRVU4SGZvM2Q1c0hiTE1hM3VKZ2ZpYmZ2enhEdzlEaWJ4dlg3TkkxdERZNkpiVm1iWDVZdEZ2Zy82NDA?x-oss-process=image/format,png)
 - 2011年，世界闻名的人机大战主角——IBM的**Wastson**，在智力竞猜节目中战胜人类，向全世界宣告了计算机拥有了自然语言理解能力和人机对话能力。
-- 同年，乔布斯收购的**Siri**担起了苹果向AI领域进军的大旗，作为智能数字助理搭载在iPhone上。
+- 2011年，乔布斯收购的**Siri**担起了苹果向AI领域进军的大旗，作为智能数字助理搭载在iPhone上。
 - 2014年，微软在中国区发布会上发布了第一款个人智能助理**Cortana**（中文名小娜）；
-- 同年，亚马逊推出自己的智能语音助理**Alexa**和智能音箱**Echo**，凭借新颖性和稳定性迅速占据了全球市场。
-- 2016年谷歌也完成了它的对话产品-谷歌**assistant**。
+- 2014年，亚马逊推出自己的智能语音助理**Alexa**和智能音箱**Echo**，凭借新颖性和稳定性迅速占据了全球市场。
+- 2016年，谷歌也完成了它的对话产品-谷歌**Assistant**。
 - 2017年，中国本土的对话产品开始觉醒、登场。17年下半年，阿里的**天猫精灵**、小米的**小爱**同学正式推出
 - 2018年，百度的**小度**智能音箱，以及华为AI音箱相继跟上，这些头部大厂率先抢占了市场和人心，而后第二梯队的思必驰、出门问问等产品又进一步参与了对话市场的瓜分。
 - 2018年5月的时候，Google I/O发布了Duplex的录音Demo，场景是Google Assistant代替用户打电话去订餐厅，和店员沟通，帮助用户预定位子。值得注意，这并不是Live demo。
@@ -446,7 +449,7 @@ Conversational AI发展方向
 ### 知名音箱
 
 【2023-2-8】音箱大全：[img](https://image.woshipm.com/wp-files/2018/06/EFkOTSZqcMrSVd1Zy7tQ.png)
-- ![](https://image.woshipm.com/wp-files/2018/06/EFkOTSZqcMrSVd1Zy7tQ.png)
+- ![img](https://image.woshipm.com/wp-files/2018/06/EFkOTSZqcMrSVd1Zy7tQ.png)
 - [智能音箱调研报告-语音交互功能详析](https://www.woshipm.com/ai/1071191.html)
 
 语音技术厂商 [img](https://image.woshipm.com/wp-files/2018/06/lTwV0abjgPOMnPOLhjhB.png)
