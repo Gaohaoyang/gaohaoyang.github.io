@@ -375,13 +375,22 @@ Conversational AI发展方向
 
 ### 知名音箱
 
+【2023-2-8】音箱大全：[img](https://image.woshipm.com/wp-files/2018/06/EFkOTSZqcMrSVd1Zy7tQ.png)
+- ![](https://image.woshipm.com/wp-files/2018/06/EFkOTSZqcMrSVd1Zy7tQ.png)
+- [智能音箱调研报告-语音交互功能详析](https://www.woshipm.com/ai/1071191.html)
+
+语音技术厂商 [img](https://image.woshipm.com/wp-files/2018/06/lTwV0abjgPOMnPOLhjhB.png)
+- ![](https://image.woshipm.com/wp-files/2018/06/lTwV0abjgPOMnPOLhjhB.png)
+
+[国内主流智能音箱产品对比](https://www.woshipm.com/evaluating/911272.html)
+- ![img](https://image.woshipm.com/wp-files/2018/01/HnjLM31eIqgIaRyzW9ez.png)
+
 从数据层面，Google Home的表现不算差。
 - 在16年Q4季度，在全球智能音箱市场抢下**10%**的份额。
 - 这个份额也在不断扩大，到17年的4月底，Google Home占到全美语音类音箱份额的**23.8%**
 
 从8:1 到 3:1，背后的竞争格局的变化是致命。商业上，如果市场参与者的份额小于最大竞争者的1/4，是不可能有效地发起竞争攻击。亚马逊如果想保持一家独大的态势，务必把Google Home的份额遏制在20%以下。而现在，显然不行了。
-
-![](https://static.leiphone.com/uploads/new/article/740_740/201708/5991a83aa8315.png?imageMogr2/quality/90)
+- ![](https://static.leiphone.com/uploads/new/article/740_740/201708/5991a83aa8315.png?imageMogr2/quality/90)
 
 #### Amazon Echo
 
