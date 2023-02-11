@@ -3,7 +3,7 @@ layout: post
 title:  "文本生成&评价-Text Generation and Evaluation"
 date:   2020-04-28 21:39:00
 categories: 自然语言处理
-tags: 深度学习 NLP GAN Seq2seq 对话系统 文本评价 BLEU 多模态 好未来 paraphrase 复述 gpt VAE vae 扩散 chatgpt
+tags: 深度学习 NLP GAN Seq2seq 对话系统 文本评价 BLEU 多模态 好未来 paraphrase 复述 gpt VAE vae 扩散 chatgpt 编码器
 excerpt: 深度学习在NLP子领域——文本生成的应用汇总，如seq2seq、GAN系列
 author: 鹤啸九天
 mathjax: true
@@ -41,7 +41,7 @@ permalink: /text-generation
 
 # 文本生成
 
-文本生成（Text Generation）是自然语言处理（Natural Language Processing，NLP）领域的一项重要且具有挑战的任务。
+`文本生成`（Text Generation）是自然语言处理（Natural Language Processing，NLP）领域的一项重要且具有挑战的任务。
 
 文本生成任务目的是生成近似于自然语言的文本序列，但仍可以根据输入数据进行分类。比如
 - 输入结构化数据的 Data-to-text Generation
@@ -325,7 +325,133 @@ VAE和GAN一样，都是从隐变量 Z 生成目标数据 X 。
 GAN直接把这个度量标准也学过来就行，相当生猛。但问题是依然不可解释（interpretable），非常不优雅。
 - VAE的做法就优雅很多了，先来看VAE是怎么做的，理解了VAE以后再去理解Diffussion就很自然了。
 
+### 自编码器
+
+什么是自动编码器
+- `自动编码器` (AutoEncoder)最开始作为一种数据的压缩方法
+
+自动编码器的结构
+- ![img](https://pic2.zhimg.com/80/v2-e5745659cd57562c1dcfc3de7e2a4229_1440w.webp)
+
+结构上两个部分，第一个部分是`编码器`(Encoder)，第二个部分是`解码器`(Decoder)，`编码器`和`解码器`都可以是任意模型，通常使用神经网络模型作为`编码器`和`解码器`。
+
+输入的数据经过神经网络降维到一个`编码`(code)，接着又通过另外一个神经网络去解码得到一个与输入原数据一模一样的生成数据，然后通过去比较这两个数据，最小化之间的差异来训练这个网络中编码器和解码器的参数。这个过程训练完后，拿出这个解码器，随机传入一个`编码`(code)，通过解码器能够生成一个和原数据差不多的数据。
+- ![img](https://pic1.zhimg.com/80/v2-d72d012f50ad64ff3a7de3e7e6c56a64_1440w.webp)
+
+PyTorch来简单的实现一个自动编码器
+- 一个简单的４层网络作为编码器，中间使用ReLU激活函数，最后输出的维度是３维的，定义的解码器，输入三维的编码，输出一个28x28的图像数据，特别要注意最后使用的激活函数是Tanh，这个激活函数能够将最后的输出转换到-1 ～1之间，这是因为我们输入的图片已经变换到了-１～1之间了，这里的输出必须和其对应。
+- 训练过程比较简单，使用**最小均方误差**来作为**损失函数**，比较生成的图片与原始图片的每个像素点的差异。
+
+```py
+class autoencoder(nn.Module):
+    def __init__(self):
+        super(autoencoder, self).__init__()
+        self.encoder = nn.Sequential(
+            nn.Linear(28*28, 128),
+            nn.ReLU(True),
+            nn.Linear(128, 64),
+            nn.ReLU(True),
+            nn.Linear(64, 12),
+            nn.ReLU(True),
+            nn.Linear(12, 3)
+        )
+        self.decoder = nn.Sequential(
+            nn.Linear(3, 12),
+            nn.ReLU(True),
+            nn.Linear(12, 64),
+            nn.ReLU(True),
+            nn.Linear(64, 128),
+            nn.ReLU(True),
+            nn.Linear(128, 28*28),
+            nn.Tanh()
+        )
+
+    def forward(self, x):
+        x = self.encoder(x)
+        x = self.decoder(x)
+        return x
+```
+
+将多层感知器换成卷积神经网络，这样对图片的特征提取有着更好的效果。
+
+```py
+class autoencoder(nn.Module):
+    def __init__(self):
+        super(autoencoder, self).__init__()
+        self.encoder = nn.Sequential(
+            nn.Conv2d(1, 16, 3, stride=3, padding=1),  # b, 16, 10, 10
+            nn.ReLU(True),
+            nn.MaxPool2d(2, stride=2),  # b, 16, 5, 5
+            nn.Conv2d(16, 8, 3, stride=2, padding=1),  # b, 8, 3, 3
+            nn.ReLU(True),
+            nn.MaxPool2d(2, stride=1)  # b, 8, 2, 2
+        )
+        self.decoder = nn.Sequential(
+            nn.ConvTranspose2d(8, 16, 3, stride=2),  # b, 16, 5, 5
+            nn.ReLU(True),
+            nn.ConvTranspose2d(16, 8, 5, stride=3, padding=1),  # b, 8, 15, 15
+            nn.ReLU(True),
+            # nn.Linear(128, 28*28),
+            nn.ConvTranspose2d(8, 1, 2, stride=2, padding=1),  # b, 1, 28, 28
+            nn.Tanh()
+        )
+
+    def forward(self, x):
+        x = self.encoder(x)
+        x = self.decoder(x)
+        return x
+```
+
+使用了nn.ConvTranspose2d()，这可以看作是卷积的反操作，可以在某种意义上看作是反卷积。
+
+
 ### VAE核心 
+
+`变分自动编码器`(Variational Autoencoder)
+- 变分编码器是自动编码器的升级版本，其结构跟自动编码器是类似的，也由编码器和解码器构成
+- 在编码过程给它增加一些限制，迫使其生成的隐含向量能够粗略的遵循一个标准正态分布，这就是其与一般的自动编码器最大的不同。
+
+变分编码器使用了一个技巧“重新参数化”来解决KL divergence的计算问题。
+- ![img](https://pic4.zhimg.com/80/v2-8769151d6bd61bceead581d4aa0c2b37_1440w.webp)
+
+```py
+class VAE(nn.Module):
+    def __init__(self):
+        super(VAE, self).__init__()
+
+        self.fc1 = nn.Linear(784, 400)
+        self.fc21 = nn.Linear(400, 20)
+        self.fc22 = nn.Linear(400, 20)
+        self.fc3 = nn.Linear(20, 400)
+        self.fc4 = nn.Linear(400, 784)
+
+    def encode(self, x):
+        h1 = F.relu(self.fc1(x))
+        return self.fc21(h1), self.fc22(h1)
+
+    def reparametrize(self, mu, logvar):
+        std = logvar.mul(0.5).exp_()
+        if torch.cuda.is_available():
+            eps = torch.cuda.FloatTensor(std.size()).normal_()
+        else:
+            eps = torch.FloatTensor(std.size()).normal_()
+        eps = Variable(eps)
+        return eps.mul(std).add_(mu)
+
+    def decode(self, z):
+        h3 = F.relu(self.fc3(z))
+        return F.sigmoid(self.fc4(h3))
+
+    def forward(self, x):
+        mu, logvar = self.encode(x)
+        z = self.reparametrize(mu, logvar)
+        return self.decode(z), mu, logvar
+```
+
+|VAE|GAN|
+|---|---|
+|![vae](https://pic2.zhimg.com/80/v2-1d4fef666ab0fe9b403e4fb808252b8d_1440w.webp)|![gan](https://pic2.zhimg.com/80/v2-1d4fef666ab0fe9b403e4fb808252b8d_1440w.webp)|
+
 
 VAE的核心：不仅假设 $p(Z)$ 是正态分布，而且假设每个 $p(X_k \mid Z)$  也是正态分布。
 - ![](https://pic3.zhimg.com/80/v2-2d3bc38e5252d002fc03bba90a3d4ca2_1440w.jpg)
@@ -335,7 +461,7 @@ VAE的核心：不仅假设 $p(Z)$ 是正态分布，而且假设每个 $p(X_k \
 为什么VAE要在AE前面加一个Variational?
 - 希望方差能够持续存在，从而带来噪声！
 
-![](https://pic2.zhimg.com/80/v2-0a94951a280d38af6b69bbfb01ec701d_1440w.jpg)
+![img](https://pic2.zhimg.com/80/v2-0a94951a280d38af6b69bbfb01ec701d_1440w.jpg)
 
 VAE的本质：
 - VAE在AE的基础上对均值的encoder添加**高斯噪声**（正态分布的随机采样），使得decoder（就是右边那个生成器）有噪声鲁棒性；为了防止噪声消失，将所有 p(Z \mid X) 趋近于标准正态分布，将encoder的均值尽量降为 0，而将方差尽量保持住。这样当decoder训练的不好的时候，整个体系就可以降低噪声；当decoder逐渐拟合的时候，就会增加噪声。
