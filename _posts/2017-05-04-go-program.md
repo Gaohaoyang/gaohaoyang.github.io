@@ -96,6 +96,61 @@ Go有很多特性，有一些是独特的，有一些借鉴于一些其它编程
 
 ### go环境变量
 
+#### GOPATH 与 GOROOT
+
+不同于其他语言，go中没有项目的说法，只有包, 其中有两个重要的路径，GOROOT 和 GOPATH
+
+Go开发相关的环境变量如下：
+- `GOROOT`：GOROOT 是Go的安装目录（类似于java的JDK）
+  - GOROOT 下有`bin`，`doc`和`src`目录。bin目录下有熟悉的go和gofmt工具
+  - GOROOT在绝大多数情况下都不需要修改. 
+    - Mac中安装Go会自动配置好GOROOT，路径为/usr/local/go。
+    - Win中默认的GOROOT是在 C:\Go中，也可自己指定
+- `GOPATH`：GOPATH 是工作空间, 保存go项目代码和第三方依赖包. GOPATH是开发时的工作目录。用于：
+  - 保存编译后的二进制文件。
+  - go get和go install命令会下载go代码到GOPATH。
+  - import包时的搜索路径
+
+GOPATH可以设置多个，其中，第一个将会是**默认**包目录
+- 使用 go get 下载的包都会在第一个path中的src目录下
+- 使用 go install时，在哪个GOPATH中找到了这个包，就会在哪个GOPATH下的bin目录生成可执行文件
+
+使用GOPATH时，GO会在以下目录中搜索包：
+- GOROOT/src：该目录保存了Go标准库代码。
+- GOPATH/src：该目录保存了应用自身的代码和第三方依赖的代码。
+
+
+假设程序中引入了如下的包：
+
+```go
+// 自定义库
+import "Go-Player/src/chapter17/models"
+```
+
+查找顺序
+- 第一步：Go先去 GOROOT 的src目录中查找，很显然它不是标准库的包，没找到。
+- 第二步：继续在 GOPATH 的src目录去找，准确说是GOPATH/src/Go-Player/src/chapter17/models这个目录。如果该目录不存在，会报错找不到package。
+
+![img](https://www.topgoer.com/static/2/7.png)
+
+go modules 是 golang 1.11 新加的特性。Modules官方定义为：
+- **模块**是相关Go包的**集合**。modules是源代码交换和版本控制的单元。 
+- go命令直接支持使用modules，包括记录和解析对其他模块的依赖性。
+- modules替换旧方法：基于GOPATH的方法来指定在给定构建中使用哪些源文件。
+
+开启了GO111MODULE，仍然使用GOPATH模式的方法，在引入自定义模块时会报错。
+
+GO111MODULE 有三个值：off, on和auto（默认值）。
+- GO111MODULE=**off**，go命令行将不会支持module功能，寻找依赖包的方式将会沿用旧版本那种通过vendor目录或者GOPATH模式来查找。
+- GO111MODULE=**on**，go命令行会使用modules，而一点也不会去GOPATH目录下查找。
+- GO111MODULE=**auto**，默认值，go命令行将会根据当前目录来决定是否启用module功能。这种情况下可以分为两种情形：
+  - 当前目录在 GOPATH/src之外且该目录包含go.mod文件
+  - 当前文件在包含 go.mod 文件的目录下面。
+
+当modules 功能启用时，依赖包的存放位置变更为$GOPATH/pkg，允许同一个package多个版本并存，且多个项目可以共享缓存的 module。
+
+#### 环境变量设置
+
 - 环境变量：
 
 ```shell
@@ -111,6 +166,8 @@ export PATH=$PATH:$GOROOT/bin
 import "github.com/test"
 # 下载到 src/github.com/test
 ```
+
+
 
 ### helloworld
 
@@ -197,7 +254,7 @@ go install 只是将编译的中间文件放在 GOPATH 的 pkg 目录下，以�
 
 这个命令在内部实际上分成了两步操作：
 - 第一步是生成结果文件（可执行文件或者 .a 包）
-- 第二步会把编译好的结果移到 $GOPATH/pkg 或者 $GOPATH/bin。
+- 第二步会把编译好的结果移到 \$GOPATH/pkg 或者 \$GOPATH/bin。
 
 本小节需要用到的代码位置是./src/chapter11/goinstall。
 
@@ -267,7 +324,19 @@ cd /home/zhongzhanhui/GoProject/Seckill
 go mod init Seckill  	#Seckill是项目名
 ```
 
-此时项目根目录会出现一个 go.mod 文件，此时的 go.mod 文件只标识了项目名和go的版本,这是正常的,因为只是初始化了。 go.mod 文件内容如下：
+go.mod 文件一旦创建后，内容将会被go toolchain全面掌控。go 会自动生成一个 go.sum 文件来记录 dependency tree
+- go toolchain会在各类命令执行时，比如go get、go build、go mod等修改和维护go.mod文件。
+
+go.mod 提供了module, require、replace和exclude 四个命令
+- module 语句指定包的名字（路径）
+- require 语句指定的依赖项模块
+- replace 语句可以替换依赖项模块
+- exclude 语句可以忽略依赖项模块
+
+
+此时项目根目录会出现一个 go.mod 文件，此时的 go.mod 文件只标识了项目名和go的版本,这是正常的,因为只是初始化了。 
+
+go.mod 文件内容如下：
 
 ```go
 module SecKill
@@ -346,7 +415,7 @@ Go语言是编译型的静态语言（和C语言一样），所以在运行Go语
 go build test.go # 先编译再运行（推荐build）
 go run test.go # 直接运行
 # 可以自定义生成可执行文件名，在mac/linux上是可执行文件，在window下必须是.exe后缀
-go build -o 自定义文件名 test.go # 自定义名字
+go build -o 自定义文件名 test.go # 自定义名字. 【2023-2-12】注意：go源码文件放最后，否则报错，named files must be .go files: -o
 go build -o myHelloWorld HelloWorld.go # mac
 go build -o myHelloWorld.exe HelloWorld.go # win
 ```
@@ -438,7 +507,7 @@ src # 自己的代码
 
 ### go包介绍
 
-Go语言以“包”作为管理单位，每个 Go 源文件必须先声明它所属的包，所以我们会看到每个 Go 源文件的开头都是一个 package 声明
+Go语言以“包”作为管理单位，每个 Go 源文件必须先声明所属的包，所以会看到每个 Go 源文件的开头都是一个 package 声明
 
 Go语言的包与文件夹是一一对应的，它具有以下几点特性：
 - 一个目录下的同级文件属于同一个包。
@@ -446,11 +515,12 @@ Go语言的包与文件夹是一一对应的，它具有以下几点特性：
 - main 包 是Go语言程序的入口包，一个Go语言程序**必须**有且仅有一个 **main包**。如果一个程序没有 main 包，那么编译时将会出错，无法生成可执行文件。
 
 每个 Go 程序都是由包组成的。
-- 程序运行的入口是包 main 。
+- 程序运行的入口是包 `main` 。
 - 这个程序使用并导入了包 “fmt“ 和 “math/rand“ 。
-- 按照惯例，包名与导入路径的最后一个目录一致。例如，”math/rand“ 包由 package rand 语句开始。
+- 按惯例, 包名与导入路径的最后一个目录一致。例如，”math/rand“ 包由 package rand 语句开始。
+
 注意：
-- 这个程序的运行环境是确定性的，因此 rand.Intn 每次都会返回相同的数字。
+- 这个程序的运行环境是**确定性**的，因此 rand.Intn 每次都会返回相同的数字。
 - 导入的包中不能含有代码中没有使用到的包，否则Go编译器会报编译错误，例如 imported and not used: "xxx"，"xxx" 表示包名。
 
 Go 程序的执行（程序启动）顺序如下：
@@ -462,7 +532,7 @@ Go 程序的执行（程序启动）顺序如下：
 ### go包导入
 
 导入包的多种方式：三种模式：**正常**模式、**别名**模式、**简便**模式
-- **直接**根据 $GOPATH/src 目录导入 import "test/lib" (路径其实是 $GOPATH/src/test/lib )
+- **直接**根据 \$GOPATH/src 目录导入 import "test/lib" (路径其实是 \$GOPATH/src/test/lib )
 - **别名**导入：import alias_name "test/lib" ，这样使用的时候，可以直接使用别名
 - 使用**点号**导入：import . "test/lib"，作用是使用的时候直接省略包名
 - 使用**下划线**导入：improt _ "test/lib"，该操作其实只是引入该包。当导入一个包时，它所有的init()函数就会被执行，但有些时候并非真的需要使用这些包，仅仅是希望它的init()函数被执行而已。这个时候就可以使用_操作引用该包。即使用_操作引用包是无法通过包名来调用包中的导出函数，而是只是为了简单的调用其init函数()。往往这些init函数里面是注册自己包里面的引擎，让外部可以方便的使用，例如实现database/sql的包，在init函数里面都是调用了sql.Register(name string, driver driver.Driver)注册自己，然后外部就可以使用了。
@@ -494,7 +564,7 @@ func main() { // 括号必须这种方式，否则报错！
  }
 ```
 
-从go1.11开始，您可以使用新的模块系统;
+从go 1.11开始，您可以使用新的模块系统;
 - 切换到go mod模式后, 原先基于GOPATH方式的模块引用可能会不正常, 可用如下命令关闭：go env -w GO111MODULE=off
 
 生成go.mod包
