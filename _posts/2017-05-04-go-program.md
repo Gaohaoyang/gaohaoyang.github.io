@@ -3935,6 +3935,324 @@ func main() {
 }
 ```
 
+## 配置文件
+
+从配置文件读取信息
+
+### json
+
+JSON（Javascript Object Notation）是一种轻量级的数据交换语言，以文字为基础，具有自我描述性且易于让人阅读。
+
+在go语言中编码解码注意事项
+- Go语言中一些特殊的类型，比如 Channel、complex、function 是不能被解析成JSON的；
+- JSON对象只支持string作为key，所以要编码一个map，那么必须是map\[string\]T这种类型(T是Go语言中任意的类型)；
+- 嵌套的数据是不能编码的，不然会让JSON编码进入死循环；
+- 指针在编码的时候会输出指针指向的内容，而空指针会输出null。
+
+go这种强类型的语言中，对json取值比较麻烦，一般有三种方法
+- 把 json 映射为 `map` 格式
+- 把 json 映射为 `stuct` 格式
+- 借助于 第三方库，直接对 `json` 对象取值
+
+encoding/json 标准库用法, 
+- Valid-校验json是否合法
+- Marshal-json编码 **生成json**
+- Unmarshal-解码已知的json **解析json**
+- Indent-json字符串格式化输出
+- MarshalIndent-编码JSON后,带格式化的输出
+
+encoding/json 使用时需要预定义struct，原理是通过reflection和interface来完成工作, 性能低。
+
+```go
+//--------- 解析json ----------
+var jsonBlob = []byte(`[
+	{"Name": "Platypus", "Order": "Monotremata"},
+	{"Name": "Quoll",    "Order": "Dasyuromorphia"}
+]`)
+
+type Animal struct {
+    Name  string
+    Order string
+}
+var animals []Animal
+err := json.Unmarshal(jsonBlob, &animals) // 解析json
+if err != nil {
+    fmt.Println("error:", err)
+}
+fmt.Printf("%+v", animals)
+// [{Name:Platypus Order:Monotremata} {Name:Quoll Order:Dasyuromorphia}]
+// --------- 生成json -----------
+type ColorGroup struct {
+    ID     int
+    Name   string
+    Colors []string
+}
+group := ColorGroup{
+    ID:     1,
+    Name:   "Reds",
+    Colors: []string{"Crimson", "Red", "Ruby", "Maroon"},
+}
+
+b, err := json.Marshal(group) // 生成json
+if err != nil {
+    fmt.Println("error:", err)
+}
+os.Stdout.Write(b) 
+// {"ID":1,"Name":"Reds","Colors":["Crimson","Red","Ruby","Maroon"]}
+```
+
+标准库性能的瓶颈在反射。 `easyjson` , `ffjson` 并没有使用**反射方式**实现，而是在Go中为结构体生成静态 MarshalJSON 和 UnmarshalJSON函数，类似于预编译。
+- 调用编码解码时直接使用生成的函数，从而减少了对反射的依赖，所以通常快2到3倍。
+- 但相比标准JSON包，使用起来略为繁琐。
+
+使用步骤：[详见](https://www.cnblogs.com/52fhy/p/11830755.html)
+- 1、定义结构体，每个结构体注释里标注 //easyjson:json或者 //ffjson: skip；
+- 2、使用 easyjson或者ffjson命令将指定目录的go结构体文件生成带有Marshal、Unmarshal方法的新文件；
+- 3、代码里如果需要进行生成JSON或者解析JSON，调用生成文件的 Marshal、Unmarshal方法即可。
+
+
+```go
+package main
+
+import (
+	"encoding/json" // Marshal 和 Unmarshal
+	"fmt"
+	"github.com/tidwall/gjson"
+)
+
+func main() {
+	byt := []byte(`{
+        "num":6.13,
+        "strs":["a","b"],
+        "obj":{"foo":{"bar":"zip","zap":6}}
+    }`)
+	fmt.Println("func1**************************************")
+	jsonByMap(byt)
+	fmt.Println("func2**************************************")
+	jsonByStruct(byt)
+	fmt.Println("func3**************************************")
+	jsonBygjson(byt)
+}
+
+func jsonByMap(byt []byte) {
+	var dat map[string]interface{}
+	if err := json.Unmarshal(byt, &dat); err != nil {
+		panic(err)
+	}
+	//fmt.Println(dat)
+	num := dat["num"].(float64)
+	fmt.Println(num)
+
+	strs := dat["strs"].([]interface{})
+	str1 := strs[0].(string)
+	fmt.Println(str1)
+
+	obj := dat["obj"].(map[string]interface{})
+	obj2 := obj["foo"].(map[string]interface{})
+	fmt.Println(obj2)
+}
+
+func jsonByStruct(byt []byte) {
+	type ourData struct {
+		Num  float64                      `json:"num"`
+		Strs []string                     `json:"strs"`
+		Obj  map[string]map[string]string `json:"obj"`
+	}
+	res := ourData{}
+	json.Unmarshal(byt, &res)
+	fmt.Println(res.Num)
+	fmt.Println(res.Strs)
+	fmt.Println(res.Obj)
+}
+
+func jsonBygjson(byt []byte) {
+	//首先校验 json库是否合法
+	str := string(byt)
+	if !gjson.Valid(str) {
+		fmt.Println("json字符串不合法")
+		return
+	}
+	//从json中取string
+	value := gjson.Get(str, "obj.foo.bar")
+	fmt.Println(value.String())
+	//从json中取int
+	num := gjson.Get(str, "num")
+	fmt.Println(num.Int())
+	//json中取数组
+	strs := gjson.Get(str, "strs")
+	if strs.IsArray() {
+		for _, v := range strs.Array() {
+			fmt.Println("数组", v.String())
+		}
+	}
+	//json的链式调用
+	foo := gjson.Get(str, "obj.foo")
+	fmt.Println(foo.Get("zap"))
+}
+```
+
+其它用法
+
+```go
+package main
+
+/*
+	JSON 数据解析
+        注意：struct 类型数据 命名时 首字母大写，如果不大写会出现滞空，看不见变量后的数据
+*/
+
+import (
+	"bufio" // 读取文件，按行读取
+	"encoding/json"
+	"fmt"
+	"io/ioutil" // 读取文件
+	"os" // 处理命令行参数
+)
+// 注意：struct 类型数据 命名时 首字母大写
+// 第二层 JSON 的 struct 创建
+type Hello struct {
+	CubeType string
+	High     int
+	Width    int
+	Long     int
+}
+// 第一层 JSON 的 struct 创建
+type Study struct {
+	Name      string
+	Age       int
+	Skill     []string
+	SkillType map[string]string
+	// 在 A struct 中使用 B struct 就需要指定 B 的内存地址
+	Cube *Hello
+}
+// 创建一个错误处理函数，避免过多的 if err != nil{} 出现
+func dropErr(e error) {
+	if e != nil {
+		panic(e)
+	}
+}
+
+func main() {
+	fmt.Println("Hello,today we will study Golang read JSON data")
+	// 获取 参数，请传入一个文件路径
+	filePath := os.Args[1]
+	fmt.Printf("The file path is :%s\n", filePath)
+	// ioutil 方式读取，会一次性读取整个文件，在对大文件处理时会有内存压力
+	fileData, err := ioutil.ReadFile(filePath)
+	dropErr(err)
+	fmt.Println(string(fileData))
+	// bufio 读取
+	f, err := os.Open(filePath)
+	dropErr(err)
+	bio := bufio.NewReader(f)
+	// ReadLine() 方法一次尝试读取一行，如果过默认缓存值就会报错。默认遇见'\n'换行符会返回值。isPrefix 在查找到行尾标记后返回 false
+	bfRead, isPrefix, err := bio.ReadLine()
+	dropErr(err)
+	fmt.Printf("This mess is  [ %q ] [%v]\n", bfRead, isPrefix)
+	// 解析 JSON 数据使用 json.Unmarshal([]byte(JSON_DATA),JSON对应的结构体) ,也就是说我们在解析 JSON 的时候需要确定 JSON 的数据结构
+	res := &Study{}
+	json.Unmarshal([]byte(bfRead), &res)
+	fmt.Println(res.Cube)
+}
+```
+
+### yaml
+
+YAML是一种流行格式，用于以人类友好的格式**序列化**数据, 类似JSON但更易于阅读。由于其表达能力和可读性，YAML作为配置文件的格式很受欢迎。也用于更复杂的场景中，例如推动Ansible服务器自动化。
+
+标准库中没有用于处理YAML格式的软件包，但是社区库包括 gopkg.in/yaml.v2
+
+```sh
+# 先下载外部包
+go get -u gopkg.in/yaml.v2
+```
+
+yaml文件
+
+```yaml
+dependencies:
+  - name: apache
+    version: 1.2.3
+    repository: http://example.com/charts
+  - name: mysql
+    version: 3.2.1
+    repository: http://another.example.com/charts
+```
+
+YAML文件读取到Go结构中:
+
+YAML解码与JSON解码非常相似。
+- 如果知道YAML文件的结构，可以定义映射结构，并将指向顶级结构的结构指针传递给 yaml.Decoder.Decode() 函数(或从\[]进行解码的yaml.Unmarshal())。 字节片)。
+- YAML解码器在结构字段名称和YAML文件中的名称之间进行智能映射，以便 YAML中的名称值被解码为结构中的字段名称。
+- 最好使用yaml struct标签创建显式映射。 我仅在示例中省略了它们，以说明未指定它们时的行为。
+
+
+```go
+// Dependency describes a dependency
+type Dependency struct {
+    Name          string
+    Version       string
+    RepositoryURL string `yaml:"repository"`
+}
+
+type YAMLFile struct {
+    Dependencies []Dependency `yaml:"dependencies"`
+}
+
+f, err := os.Open("data.yml")
+if err != nil {
+    log.Fatalf("os.Open() failed with '%s'\n", err)
+}
+defer f.Close()
+
+dec := yaml.NewDecoder(f)
+
+var yamlFile YAMLFile
+err = dec.Decode(&yamlFile)
+if err != nil {
+    log.Fatalf("dec.Decode() failed with '%s'\n", err)
+}
+
+fmt.Printf("Decoded YAML dependencies: %#v\n", yamlFile.Dependencies)
+```
+
+写入yaml文件
+
+```go
+// 带有struct标签的自定义映射
+type Person struct {
+    fullName string // 未初始化
+    Name     string
+    Age      int    `yaml:"age"` // 指示YAML编码器/解码器将名称age用于表示字段Age的字典关键字。
+    City     string `yaml:"city"`
+}
+
+p := Person{
+    Name: "John",
+    Age:  37,
+    City: "SF",
+}
+// 序列化
+d, err := yaml.Marshal(&p) // yaml.Marshal 将 interface {}作为参数
+if err != nil {
+    log.Fatalf("yaml.Marshal failed with '%s'\n", err)
+}
+fmt.Printf("Person in YAML:\n%s\n", string(d))
+```
+
+yaml.Marshal 将 interface \{}作为参数。可以传递任何Go值，并将其类型包装到 interface \{}中。
+- Marshaller 将使用**反射**检查传递的值并将其编码为YAML字符串。
+- 在序列化结构时，仅对导出的字段(其名称以大写字母开头)进行**序列化**/**反序列化**。
+
+在示例中，未对fullName进行序列化。结构被序列化为YAML字典。 
+- 默认情况下，字典键与结构字段名称相同。结构字段名称在字典键名称下序列化。
+
+可以提供带有struct标签的自定义映射。将任意的struct标签字符串附加到struct字段。
+
+序列化结构时，将值和指针传递给它会产生相同的结果。
+- 传递指针效率更高，因为按值传递会创建不必要的副本。
+
+
 ## os库
 
 ```go
