@@ -326,6 +326,17 @@ yum groupinstall chinese-support # 或
 LANG="zh_CN.UTF-8"
 ```
 
+【2023-2-13】linux系统终端中文显示异常（方块或一堆？？），vim显示正常
+- 修复方法
+- 参考：[CentOS命令行中文显示方块](https://www.cnblogs.com/itfat/p/16009251.html)
+
+```sh
+echo 'export LC_ALL="zh_CN.UTF-8"' >> /etc/profile
+source /etc/profile
+echo 'LANG="zh_CN.UTF-8"' > /etc/locale.conf
+source /etc/locale.conf
+```
+
 #### debian系统中文乱码
 
 [Debian系统安装中文字体]()
