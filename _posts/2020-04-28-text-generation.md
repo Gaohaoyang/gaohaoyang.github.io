@@ -41,7 +41,19 @@ permalink: /text-generation
 
 # 文本生成
 
-`文本生成`（Text Generation）是自然语言处理（Natural Language Processing，NLP）领域的一项重要且具有挑战的任务。
+计算机要实现自然语言处理，主要有两方面的工作：`自然语言理解`（Natural Language Understanding，NLU）和`自然语言生成`（Natural Language Generation，NLG），这两方面工作遍布我们的生活。
+
+`文本生成`（Text Generation）是自然语言处理（Natural Language Processing，NLP）领域的一项重要且具有挑战的任务
+
+## 文本生成介绍
+
+文本生成是从非语言的表示生成人类可以理解的文本
+
+文本生成任务大概可以分为：
+- `机器翻译`（Machine Transiation）：从一种语言翻译到另一种语言，既有理解，又有生成；
+- `问答系统`（Dialogue Systems）：理解用户的表达，生成合理的回复；
+- `文本摘要`（Text Summarization）：给定一篇文档，生成文档主体内容的总结摘要；
+- `故事生成`（Story Telling）、诗句生成（Poetry Generation）等。
 
 文本生成任务目的是生成近似于自然语言的文本序列，但仍可以根据输入数据进行分类。比如
 - 输入结构化数据的 Data-to-text Generation
@@ -52,8 +64,8 @@ permalink: /text-generation
 文本生成文本的 Text-to-Text 任务，具体地包括神经机器翻译、智能问答、生成式文本摘要等。
 
 随着深度学习的发展，众多新兴技术已被**文本生成**任务所采用。比如
-- 为了解决文本生成中的长期依赖、超纲词（Out-of-Vocabulary，OOV）问题，注意力机制（Attention Mechanism），拷贝机制（Copy Mechanism）等应运而出；
-- 网络结构上使用了循环神经网络（Recurrent Neural Networks），卷积神经网络（Convolutional Neural Networks），图神经网络（Graph Neural Networks），Transformer 等。
+- 为了解决文本生成中的长期依赖、`超纲词`（Out-of-Vocabulary，OOV）问题，`注意力机制`（Attention Mechanism），`拷贝机制`（Copy Mechanism）等应运而出；
+- 网络结构上使用了`循环神经网络`（Recurrent Neural Networks），`卷积神经网络`（Convolutional Neural Networks），`图神经网络`（Graph Neural Networks），Transformer 等。
 - 为了顺应“**预训练**-**精调**”范式的兴起，在海量语料上自监督地训练出的大体量**预训练语言模型**（Pre-trained Language Model；PLM），也被广泛应用在文本生成任务中。
 
 
@@ -109,44 +121,44 @@ AIGC预训练模型一览
 
 AI生成模型分成了9大类 详见[原文](https://www.toutiao.com/article/7193210190974714371)
 - ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/a3d62347f83247f9906a379cabe57853~noop.image?_iz=58558&from=article.pc_detail&x-expires=1675989263&x-signature=ZDQPfUcGn5FvVrRVieY098WuEeE%3D)
-- Text-to-Text: ChatGPT3、LaMDA、PEE、Speech From Brain
+- `Text-to-Text`: ChatGPT3、LaMDA、PEE、Speech From Brain
   - ChatGPT由OpenAI生成，是一个对话生成AI，懂得回答问题、拒绝不正当的问题请求并质疑不正确的问题前提，基于Transformer打造。它用人类打造的对话数据集、以及InstructGPT数据集的对话格式进行训练，此外也可以生成代码和进行简单数学运算。
   - LaMDA基于Transformer打造，利用了其在文本中呈现的长程依赖关系能力。其具有1370亿参数，在1.56T的公共对话数据集和网页文本上进行训练，只有0.001%的训练数据被用于微调，这也是它效果好的原因之一。
   - PEER由Meta AI打造，基于维基百科编辑历史进行训练，直到模型掌握完整的写作流程。具体来说，模型允许将写作任务分解成更多子任务，并允许人类随时干预，引导模型写出人类想要的作品。
   - Speech from Brain由Meta AI打造，用于帮助无法通过语音、打字或手势进行交流的人，通过对比学习训练wave2vec 2.0自监督模型，基于非侵入式脑机接口发出的脑电波进行解读，并解码大脑生成的内容，从而合成对应语音。
-- Text-to-Code: Codex、AlphaCode
+- `Text-to-Code`: Codex、AlphaCode
   - Codex是OpenAI打造的编程模型，基于GPT-3微调，可以基于文本需求生成代码。首先模型会将问题分解成更简单的编程问题，随后从现有代码（包含库、API等）中找到对应的解决方案，基于GitHub数据进行训练。
   - AlphaCode由DeepMind打造，基于Transformer模型打造，通过采用GitHub中715.1GB的代码进行预训练，并从Codeforces中引入一个数据集进行微调，随后基于Codecontests数据集进行模型验证，并进一步改善了模型输出性能。
-- Text-to-Image: DALL-E 2、Stable Diffusion、Imagen、Muse
+- `Text-to-Image`: DALL-E 2、Stable Diffusion、Imagen、Muse
   - DALL·E2是来自OpenAI的生成模型，在零样本学习上做出大突破。与DALL·E一样，两点依旧是CLIP模型，除了训练数据庞大，CLIP基于Transformer对图像块建模，并采用对比学习训练，最终帮助DALL·E2取得了不错的生成效果。
   - Imagen来自谷歌，基于Transformer模型搭建，其中语言模型在纯文本数据集上进行了预训练。Imagen增加了语言模型参数量，发现效果比提升扩散模型参数量更好。
   - Stable Diffusion由慕尼黑大学的CompVis小组开发，基于潜在扩散模型打造，这个扩散模型可以通过在潜表示空间中迭代去噪以生成图像，并将结果解码成完整图像。
   - Muse由谷歌开发，基于Transformer模型取得了比扩散模型更好的结果，只有900M参数，但在推理时间上比Stable Diffusion1.4版本快3倍，比Imagen-3B和Parti-3B快10倍。
-- Text-to-Audio: AudioLM、Whisper、Jukebox
+- `Text-to-Audio`: AudioLM、Whisper、Jukebox
   - AudioLM由谷歌开发，将输入音频映射到一系列离散标记中，并将音频生成转换成语言建模任务，学会基于提示词产生自然连贯的音色。在人类评估中，认为它是人类语音的占51.2%、与合成语音比率接近，说明合成效果接近真人。
   - Jukebox由OpenAI开发的音乐模型，可生成带有唱词的音乐。通过分层VQ-VAE体系将音频压缩到离散空间中，损失函数被设计为保留最大量信息，用于解决AI难以学习音频中的高级特征的问题。不过目前模型仍然局限于英语。
   - Whisper由OpenAI开发，实现了多语言语音识别、翻译和语言识别，目前模型已经开源并可以用pip安装。模型基于68万小时标记音频数据训练，包括录音、扬声器、语音音频等，确保由人而非AI生成。
-- Text-to-Video: Phenaki、Soundify
+- `Text-to-Video`: Phenaki、Soundify
   - Phenaki由谷歌打造，基于新的编解码器架构C-ViViT将视频压缩为离散嵌入，能够在时空两个维度上压缩视频，在时间上保持自回归的同时，还能自回归生成任意长度的视频
   - Soundify是Runway开发的一个系统，目的是将声音效果与视频进行匹配，即制作音效。具体包括分类、同步和混合三个模块，首先模型通过对声音进行分类，将效果与视频匹配，随后将效果与每一帧进行比较，插入对应的音效。
-- Text-to-3D: Dreamfusion、Magic 3D
+- `Text-to-3D`: Dreamfusion、Magic 3D
   - 没有把OpenAI的Point·E统计进去，可能是生成效果上没有达到SOTA
   - DreamFusion由谷歌和UC伯克利开发，基于预训练文本-2D图像扩散模型实现文本生成3D模型。采用类似NeRF的三维场景参数化定义映射，无需任何3D数据或修改扩散模型，就能实现文本生成3D图像的效果。
   - Magic3D由英伟达开发，旨在缩短DreamFusion图像生成时间、同时提升生成质量。具体来说，Magic3D可以在40分钟内创建高质量3D网格模型，比DreamFusion快2倍，同时实现了更高分辨率，并在人类评估中以61.7%的比率超过DreamFusion。
-- Text-to-Science: Galactica、Minerva
+- `Text-to-Science`: Galactica、Minerva
   - Galatica是Meta AI推出的1200亿参数论文写作辅助模型，又被称之为“写论文的Copilot模型”，目的是帮助人们快速总结并从新增论文中得到新结论，在包括生成文本、数学公式、代码、化学式和蛋白质序列等任务上取得了不错的效果，然而一度因为内容生成不可靠被迫下架。
   - Minerva由谷歌开发，目的是通过逐步推理解决数学定量问题，可以主动生成相关公式、常数和涉及数值计算的解决方案，也能生成LaTeX、MathJax等公式，而不需要借助计算器来得到最终数学答案。
-- Image-to-Text: Flamingo、VisualGPT
+- `Image-to-Text`: Flamingo、VisualGPT
   - Flamingo是DeepMind推出的小样本学习模型，基于可以分析视觉场景的视觉模型和执行基本推理的大语言模型打造，其中大语言模型基于文本数据集训练。输入带有图像或视频的问题后，模型会自动输出一段文本作为回答。
   - VisualGPT是OpenAI制作的图像-文本模型，基于预训练GPT-2提出了一种新的注意力机制，来衔接不同模态之间的语义差异，无需大量图像-文本数据训练，就能提升文本生成效率。
-- Other Models: AlphaTensor、AlphaFold、GATO、Human Motion Diffusion Model
+- `Other Models`: AlphaTensor、AlphaFold、GATO、Human Motion Diffusion Model
   - AlphaTensor由DeepMind开发，懂得自己改进矩阵乘法并提升计算速度，不仅改进了目前最优的4×4矩阵解法，也提升了70多种不同大小矩阵的计算速度，基于“棋类AI”AlphaZero打造，其中棋盘代表要解决的乘法问题，下棋步骤代表解决问题的步骤。
   - GATO由DeepMind开发，基于强化学习教会大模型完成600多个不同的任务，包含离散控制如Atari小游戏、推箱子游戏，以及连续控制如机器人、机械臂，还有NLP对话和视觉生成等，进一步加速了通用人工智能的进度。
   - PhysDiff是英伟达推出的人体运动生成扩散模型，进一步解决了AI人体生成中漂浮、脚滑或穿模等问题，教会AI模仿使用物理模拟器生成的运行模型，并在大规模人体运动数据集上达到了最先进的效果。
 - 除了谷歌LaMDA和Muse以外，所有模型均为2022年发布。
   - 谷歌LaMDA虽然是2021年发布的，但在2022年又爆火了一波；
   - Muse则是2023年刚发布的，但论文声称自己在图像生成性能上达到SOTA，因此也统计了进去。
-- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/0796479323fd4f75914bd65906eb2af3~noop.image?_iz=58558&from=article.pc_detail&x-expires=1675989263&x-signature=gz99QiqjLcQ2VpXaqvf%2BsKkPwoY%3D)
+- ![img](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/0796479323fd4f75914bd65906eb2af3~noop.image?_iz=58558&from=article.pc_detail&x-expires=1675989263&x-signature=gz99QiqjLcQ2VpXaqvf%2BsKkPwoY%3D)
 
 ### （1） 从原文中**抽取句子**组成文本总结
 
@@ -191,6 +203,10 @@ AI生成模型分成了9大类 详见[原文](https://www.toutiao.com/article/71
 - 预训练模型可以应用在文本生成，文本分类，机器翻译等下游任务上
 
 ## 常见分类
+
+文本摘要的主流方法包括「`抽取式`」（Extractive Summarization）和「`生成式`」（Abstractive Summarization）
+
+### 生成模型方法
 
 生成一段对话回复的模型可以简单分为三类：
 - （1）`规则模板`。典型的技术就是AIML语言。这种回复实际上需要人为设定规则模板，对用户输入进行回复。
@@ -245,6 +261,33 @@ AI生成模型分成了9大类 详见[原文](https://www.toutiao.com/article/71
 - 然而，这样的分布 $p(X)$ 无法直接获取，只能通过一个隐变量 $Z$ 来生成 $X$, 假设 $Z$ 服从正态分布，随便取一个 $Z$，用 $Z$ 和 $X$ 的关系计算 $p(X)$ 。
 - 公式：$p(X)=\sum_{Z} p(X \mid Z) p(Z)$
 - $p(X \mid Z)$ 是后验分布，$p(Z)$ 是先验分布 
+
+
+「基于神经网络的文本生成」大致分为「**自回归**」和「**非自回归**」两种思路
+- **自回归**就是给定条件和已知的词逐步生成下一个词，例如，大名鼎鼎的「seq2seq + attention」，在讲解「seq2seq + attention」之前，先要了解什么是「`语言建模`」和「`解码器`」。
+- 「`语言建模`」完成的是源语句的编码，给定已知的词，来预测下一个词，模型输出一个词表上的概率分布，产生这种概率分布的系统称为「语言模型」，建模的总体思路是使用 RNN 作为编码器来构建句子的语义表示，之所以使用 RNN，是因为 RNN 擅长建模顺序性的信息。
+
+如何使用语言模型生成文本呢？用到了「解码器」：一种用于从语言模型生成文本的算法。目前主流解码器有三种：「`贪婪解码`」（Greedy Decoding）、「`集束搜索`」（Beam Search）、「`基于抽样`」（Sampling-based）。
+- 「`贪婪解码`」是通过在解码器上的每一步采用 argmax 来生成目标句子，简单粗暴，但是由于缺乏回溯，输出可能会很差，会出现句子不合语法、不自然、没有意义等问题，主要是因为并不是每一步解码的概率最大，整体结果的概率就会最大，概率最大的句子，在其中某一步解码的概率可能不是最大的；
+- 「`集束搜索`」的总体思路是在解码器的每一步，都要跟踪 Beam Size 个最有可能的部分序列，并不只是寻找当前步概率最大的序列。达到停止条件后，选择概率最高的序列，当然最终结果也不一定是最佳序列，因为存在一个选择范围，所以优于贪婪解码。集束搜索的关键是 Beam Size 的确定，小的 Beam Size 会有与贪婪解码相似的问题（极限 Beam Size = 1），Beam Size 越大表示考虑的假设越多，计算量也就越大，大 Beam Size 会使输出太过通用、太万金油，聊天会很无聊、被终结，同时对于神经机器翻译（NMT），增大 Beam Size 过多会降低 BLUE 得分；
+- 「`基于抽样`」方法又可以分为「纯采样」（Pure Sampling）和「头部采样」（Top-n Sampling），纯采样是在每个步骤 t，从概率分布 Pt 中随机采样以获得下一个单词。头部采样是在每个步骤 t，从 Pt 中随机抽样，仅限于前 n 个最可能的单词，当 n = 1 时，即为贪婪解码，n = V 时，即为纯采样，同时我们可以看出，增加 n 可以获得更加多样化、风险更高的输出，减少 n 可以获得更加安全、通用的输出。
+
+这三种解码器，`贪婪解码`是一种比较简单的方法，输出质量也比较低，`集束搜索`输出质量比`贪婪解码`更高，但是如果 beam size 太大，将返回不合适的输出，基于抽样的方法可以获得更多的多样性和随机性，适合开放式、创造性的创作，例如诗歌故事生成，通过 top-n 采样可以控制多样性的强弱。
+
+在语言建模和解码器的基础上，诞生了灵活的「seq2seq」生成架构，使用编码器 RNN 来产生源语句的表示，使用解码器 RNN 生成以编码为条件的目标句子。但是 seq2seq 的问题也很明显，源语句编码的「中间语义张量」需要捕获有关源语句的所有信息，短小而不精悍的「中间语义张量」限制了编码器的表示能力，这就是 seq2seq 的信息瓶颈。
+
+随着深度学习不断发展，attention 为 seq2seq 的瓶颈问题提供了解决方案，核心思想是在编码器的每个步骤，专注于源序列的特定部分，这样做还有助于解决梯度消失问题，这就是显赫的「seq2seq + attention」。
+
+再到后面，attention 再进一步，便产生了震惊世人的 Transformer，彻底解决了 RNN 中顺序计算无法并行化的问题，后面又有大佬机构陆续提出 GPT 系列生成模型。
+
+上述的这些自回归方法并不是完美的，存在以下三点不足：
+- 时间复杂度比较高；
+- 解码器的各个步骤必须顺序运行，不能并行运行；
+- 缺乏全局信息，这也是采用 Beam Search 的原因。
+
+针对自回归的这些不足，大佬们提出了「**非自回归**」方法，给定 来源 x 和 目标 y，确定目标序列 y 的长度，并行生成目标序列，优点是并行解码目标输出，不用前后词互相等待，所以快速（比自回归快 20 倍），缺点是生成的前后词是否约束匹配、是否能形成一句话，仍然存在很多问题，目前「非自回归」没有成为生成任务的主流。
+
+
 
 ### 模型结构总结
 
