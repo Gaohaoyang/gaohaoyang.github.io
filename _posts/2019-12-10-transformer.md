@@ -1044,32 +1044,33 @@ p.s. 后续有一个工作在attention中使用了“相对位置表示” ([Sel
 
 ## Transformer模型
 
-![](https://picb.zhimg.com/80/v2-6c292e2a4ed43894fc954ee625372c67_720w.jpg)
 
-在上图的下面部分，训练用的输入和输出数据的embedding，都会先加上一个position encoding来补充一下位置信息。
+- ![img](https://picb.zhimg.com/80/v2-6c292e2a4ed43894fc954ee625372c67_720w.jpg)
+
+上图下面部分，训练用的输入和输出数据的 embedding，都会先加上一个position encoding来补充一下位置信息。
 - `Encoder`
-   - 途中左侧部分是encoder块，encoder中6层相同结构堆叠而成，在每层中又可以分为2个子层，底下一层是multihead self-attention层，上面是一个FC feed-forward层，每一个子层都有residual connection，，然后在进行Layer Normalization. 为了引入redisual connenction简化计算，每个层的输入维数和embedding层保持一致。
+  - 途中左侧部分是encoder块，encoder中6层相同结构堆叠而成，在每层中又可以分为2个子层，底下一层是multihead self-attention层，上面是一个FC feed-forward层，每一个子层都有residual connection，，然后在进行Layer Normalization. 为了引入redisual connenction简化计算，每个层的输入维数和embedding层保持一致。
 - `Decoder`
-   - 同样是一个6层的堆叠，每层有三个子层，其中底下两层都是multihead self-attention层，最底下一层是有mask的，只有当前位置之前的输入有效，中间层是encode和decode的连接层，输出的self-attention层和输入的encoder输出同时作为MSA的输入，实现encoder和decoder的连接，最上层和encoder的最上层是一样的，不在单说，每个子层都有有residual connection，和Layer Normalization
+  - 同样是一个6层的堆叠，每层有三个子层，其中底下两层都是multihead self-attention层，最底下一层是有mask的，只有当前位置之前的输入有效，中间层是encode和decode的连接层，输出的self-attention层和输入的encoder输出同时作为MSA的输入，实现encoder和decoder的连接，最上层和encoder的最上层是一样的，不在单说，每个子层都有有residual connection，和Layer Normalization
 
 【2021-8-25】Transformer结构中，左边叫做**编码端**(Encoder)，右边叫做**解码端**(Decoder)。不要小看这两个部分，其中左边的编码端最后演化成了最后鼎鼎大名的**Bert**，右边的解码端在最近变成了无人不知的**GPT**模型。
 
 ### 亮点
 
 - `Self Attention`
-   - 传统的编解码结构中，将输入输入编码为一个定长语义编码，然后通过这个编码在生成对应的输出序列。它存在的一个问题在于：输入序列不论长短都会被编码成一个固定长度的向量表示，而解码则受限于该固定长度的向量表示
-   - attention机制: encoder的输出不是一个语义向量，是一个语义向量的序列
+  - 传统的编解码结构中，将输入输入编码为一个定长语义编码，然后通过这个编码在生成对应的输出序列。它存在的一个问题在于：输入序列不论长短都会被编码成一个固定长度的向量表示，而解码则受限于该固定长度的向量表示
+  - attention机制: encoder的输出不是一个语义向量，是一个语义向量的序列
    ![](https://upload-images.jianshu.io/upload_images/14911967-cadfa37d31342857.png?imageMogr2/auto-orient/strip|imageView2/2/w/568/format/webp)
-   - Transformer的Attenion函数称为scaled dot-Product Attention
+  - Transformer的Attenion函数称为scaled dot-Product Attention
    ![](https://upload-images.jianshu.io/upload_images/14911967-9fb3d576399e53e5.png?imageMogr2/auto-orient/strip|imageView2/2/w/455/format/webp)
 - `MultiHead Attention`
-   - self attention计算时会分为两个阶段，第一个阶段计算出softmax部分,第二部分是在乘以 Value部分，这样还是串行化的，并行化不够。
-   - MultiHeadAttention，对query，key，value各自进行一次不同的线性变换，然后在执行一次softmax操作，这样可以提升并行度，论文中的head数是8个
+  - self attention计算时会分为两个阶段，第一个阶段计算出softmax部分,第二部分是在乘以 Value部分，这样还是串行化的，并行化不够。
+  - MultiHeadAttention，对query，key，value各自进行一次不同的线性变换，然后在执行一次softmax操作，这样可以提升并行度，论文中的head数是8个
 
-![](https://upload-images.jianshu.io/upload_images/14911967-b31aa04d8628b8da.png?imageMogr2/auto-orient/strip|imageView2/2/w/600/format/webp)
+![img](https://upload-images.jianshu.io/upload_images/14911967-b31aa04d8628b8da.png?imageMogr2/auto-orient/strip|imageView2/2/w/600/format/webp)
 - position Encoding
-   - 语言是有序的，在cnn中，卷积的形状包含了位置信息，在rnn中，位置的先后顺序其实是通过送入模型的先后来保证。transformer抛弃了cnn和rnn，那么数据的位置信息怎么提供呢？
-   - Transformer通过position Encoding来额外的提供位置信息，每一个位置对应一个向量，这个向量和word embedding求和后作为 encoder和decoder的输入。这样，对于同一个词语来说，在不同的位置，他们送入encoder和decoder的向量不同。
+  - 语言是有序的，在cnn中，卷积的形状包含了位置信息，在rnn中，位置的先后顺序其实是通过送入模型的先后来保证。transformer抛弃了cnn和rnn，那么数据的位置信息怎么提供呢？
+  - Transformer通过position Encoding来额外的提供位置信息，每一个位置对应一个向量，这个向量和word embedding求和后作为 encoder和decoder的输入。这样，对于同一个词语来说，在不同的位置，他们送入encoder和decoder的向量不同。
 
 
 ### 总结
@@ -1109,29 +1110,42 @@ p.s. 后续有一个工作在attention中使用了“相对位置表示” ([Sel
 
 ## Encoder
 
-encoder由6层相同的层组成，每一层分别由两部分组成：
+Encoder 由6层相同的层组成，每一层分别由两部分组成：
 - * 第一部分是一个**multi-head self-attention mechanism**
 - * 第二部分是一个**position-wise feed-forward network**，是一个全连接层
 两个部分，都有一个　**残差连接(residual connection)**，然后接着一个**Layer Normalization**。
+- ![ENCODER](https://jalammar.github.io/images/xlnet/transformer-encoder-block-2.png)
+- An encoder block from the original transformer paper can take inputs up until a certain max sequence length (e.g. 512 tokens). It's okay if an input sequence is shorter than this limit, we can just pad the rest of the sequence.
 
-如果你是一个新手，你可能会问：
+新手可能会问：
 - * multi-head self-attention 是什么呢？
 - * 参差结构是什么呢？
 - * Layer Normalization又是什么？
 
-这些问题我们在后面会一一解答。
-
 ## Decoder
 
-和encoder类似，decoder由6个相同的层组成，每一个层包括以下3个部分：
-
+和 encoder 类似，decoder由6个相同的层组成，每层包括3个部分：
 * 第一个部分是**multi-head self-attention mechanism**
 * 第二部分是**multi-head context-attention mechanism**
 * 第三部分是一个**position-wise feed-forward network**
+- ![DECODER](https://jalammar.github.io/images/xlnet/transformer-decoder-block-2.png)
 
-还是和encoder类似，上面三个部分的每一个部分，都有一个**残差连接**，后接一个**Layer Normalization**。
+三个部分都有一个**残差连接**，后接一个**Layer Normalization**。
 
-但是，decoder出现了一个新的东西**multi-head context-attention mechanism**。这个东西其实也不复杂，理解了**multi-head self-attention**你就可以理解**multi-head context-attention**。这个我们后面会讲解。
+相同
+- 都有 自注意力层（self-attention）
+- 都有 前向全连接层（feed forward neural network）
+
+不同于 encoder：
+- `自注意力层`将待预测的token屏蔽掉（mask），所以是 masked self-attention。掩码方法不同于BERT的置为 \[MASK\]，而是继承到自注意力计算中。
+  - ![img](https://jalammar.github.io/images/gpt2/self-attention-and-masked-self-attention.png)
+- 新增 `编码器-解码器自注意力层`（encoder-decoder self-attention）
+
+但是，decoder出现了一个新的东西**multi-head context-attention mechanism**。这个东西其实也不复杂，理解了**multi-head self-attention** 可以理解**multi-head context-attention**。
+
+GPT-2 用的 Decoder 结构
+- ![decoder](https://jalammar.github.io/images/xlnet/transformer-decoder-intro.png)
+- 去掉 transformer decoder结构里的 `编码器-解码器自注意力层`
 
 ## Attention机制
 
