@@ -1044,7 +1044,6 @@ p.s. 后续有一个工作在attention中使用了“相对位置表示” ([Sel
 
 ## Transformer模型
 
-
 - ![img](https://picb.zhimg.com/80/v2-6c292e2a4ed43894fc954ee625372c67_720w.jpg)
 
 上图下面部分，训练用的输入和输出数据的 embedding，都会先加上一个position encoding来补充一下位置信息。
@@ -1054,6 +1053,13 @@ p.s. 后续有一个工作在attention中使用了“相对位置表示” ([Sel
   - 同样是一个6层的堆叠，每层有三个子层，其中底下两层都是multihead self-attention层，最底下一层是有mask的，只有当前位置之前的输入有效，中间层是encode和decode的连接层，输出的self-attention层和输入的encoder输出同时作为MSA的输入，实现encoder和decoder的连接，最上层和encoder的最上层是一样的，不在单说，每个子层都有有residual connection，和Layer Normalization
 
 【2021-8-25】Transformer结构中，左边叫做**编码端**(Encoder)，右边叫做**解码端**(Decoder)。不要小看这两个部分，其中左边的编码端最后演化成了最后鼎鼎大名的**Bert**，右边的解码端在最近变成了无人不知的**GPT**模型。
+
+【2023-2-15】transformer 出现后，迅速取代了 RNN系列 变种，跻身主流模型架构基础。
+
+transformer 结构分成：
+- （1）自回归系列：偏好 文本生成，示例：GPT-3；
+- （2）双向自编码系列：偏好 自然语言理解，示例：BERT，双向transformer+Mask自编码系列
+- （3）encoder-decoder系列：偏好 条件文本生成，示例：T5，双向/单向attention
 
 ### 亮点
 
