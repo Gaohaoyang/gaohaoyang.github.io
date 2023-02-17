@@ -56,6 +56,8 @@ permalink: /work
 - Freelancing is an ideal choice for older workers
 - 自由职业；freelance work、liberal professions
 
+【2023-2-17】[电鸭社区](https://eleduck.com/posts/v5fL5a)，只工作、不上班，自由职业接单信息发布平台
+
 ## 北京上班族有多少
 
 【2018-05-31】[大数据：北京100个人中就有44个不工作，收入却很高](https://www.toutiao.com/article/6561664230267814414)，央视新闻公布了一组数据，通过随机抽取的100位北京人，了解生活在自己身边的都是些什么人？这些生活在北京的人都是些什么样的人？
