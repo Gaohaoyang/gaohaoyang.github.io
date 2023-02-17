@@ -182,7 +182,7 @@ model.save_pretrained(save_directory) # 保存模型
 
 pipeline API可以快速体验 Transformers。它将模型的预处理、后处理等步骤包装起来，直接定义好任务名称后输出文本，得到结果。这是一个高级的API，可以领略到transformers 这个库的强大且友好。
 
-用 pipeline API，输入任务名称，默认会选择特定已经存好的模型文件，然后会进行下载并且缓存。
+用 [pipeline API](https://huggingface.co/docs/transformers/v4.26.1/en/main_classes/pipelines#pipelines)，输入任务名称，默认会选择特定已经存好的模型文件，然后会进行下载并且缓存。
 
 主要有以下三个步骤被包装起来了： **preprocess** -> **fit model** -> **postprocessing**
 - 输入文本被预处理成机器可以理解的格式
