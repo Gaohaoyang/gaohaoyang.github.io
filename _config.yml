@@ -122,6 +122,10 @@ useful_urls:
     url : https://lilianweng.github.io/lil-log/
     desc : OpenAI机器人项目研究员的技术博客
   -
+    name : Jason Wei
+    url : https://www.jasonwei.net/
+    desc : ChatGPT核心技术CoT发明人博客，Google Brain 员工 & CoT 发明人
+  -
     name : Lingdong
     url : https://lingdong.works/
     desc : CMU在读学生Lingdong的项目集合,含文言文写代码
