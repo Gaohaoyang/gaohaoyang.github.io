@@ -67,8 +67,10 @@ permalink: /ml
 - a feed-forward network with a single hidden layer containing a finite number of neurons can approximate any continuous function.
 - <span style='red'>**单隐层**神经网络即可任意逼近闭集上的任意连续函数，只要隐层节点数量足够多</span>
 - By approximate, we mean that by using enough hidden neurons, we can always find a neural network whose output $ g(x) $ satisfies $ |g(x)−f(x)|<ϵ $, for all inputs x.
+- In other words, the approximation will be good to within the desired accuracy for every possible input. And if a function is discontinuous, i.e., makes sudden, sharp jumps, then it won’t, in general, be possible to approximate using a neural net. 
 
-
+【2023-2-19】[Jason Wei](https://jasonwei20.github.io/posts/2018/1/blog-post-2/)的老师 Cybenko：
+- It was quite humorous when Professor Cybenko showed us a [blog post](https://vlomonaco.medium.com/what-i-learned-at-the-deep-learning-summer-school-2017-in-bilbao-c6eae2963554) in which he was accused of “substantially delaying the explosion of deep learning” because of his 1989 paper proving the Universal Approximation Theorem (basically says a one hidden layer neural net can approximate any function).
 
 ### 机器学习黑魔法
 
