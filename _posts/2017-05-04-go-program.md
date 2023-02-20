@@ -5,7 +5,7 @@ subtitle:  新语言
 date:   2017-05-04 15:17:00
 author:  wangqiwen
 categories: 编程语言
-tags: go Go web 输入提示 模型部署 hertz oop 面向对象 workflow 流程引擎
+tags: go Go web 输入提示 模型部署 hertz oop 面向对象 workflow 流程引擎 线程 进程 协程
 excerpt: 编程语言知识点
 mathjax: true
 header-img: img/post-bg-ios10.jpg
