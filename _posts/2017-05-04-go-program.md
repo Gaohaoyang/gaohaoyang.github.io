@@ -56,6 +56,8 @@ Go程序员常常被称为`地鼠`（gopher）, [img](https://go.dev/images/goph
 - 部署简单、学习成本低
 - <span style='color:blue'>内部RPC和HTTP框架推广</span>
 
+### go问题
+
 【2023-2-17】go的问题
 - 1）异常处理：写的挺难受的， if err != nil 各种一堆，希望接下来能优化
 - 2）想有OOP但不完全OOP的语法。定义结构体方法 func (o obj) method(...)...，定义在结构体外边但是仅这个结构体使用，这种语法不如直接在方法定义在结构体的{}里边。（这个可能是我OOP的思想毒害比较深...）
@@ -63,6 +65,78 @@ Go程序员常常被称为`地鼠`（gopher）, [img](https://go.dev/images/goph
 - 4）还有三目运算符。。。
 - 5）还有一些生态确实也很影响使用者的感受
 
+弱引用：几乎所有带GC的语言都有这个特性, 甚至Lua和JS这些小巧的脚本语言也支持, 唯独Go没有弱引用(或弱指针). Go只要持有某个指针那就是强引用, 无法自动或手动释放.
+
+goroutine的烦恼：无法指定goroutine跑在哪个线程上, 有时要N个goroutine像`协程`一样交替地跑在固定一个`线程`上, 这样不用考虑数据共享问题. 而且又不能因此设置GOMAXPROC=1, 因为需要其它goroutine能并行.
+
+interface的实现是胖指针, 也就是双字, 对于经常调试**并发**问题的老手不友好. 双字就代表读写非原子性, 对C++/Java/C#这些不用胖指针的语言来说, 即使不使用任何同步机制, 读写指针操作的本身都是安全的, 有时不需要实时性也是可以这么用的(尤其是对带GC的语言来说更能确保指针的有效性). 而胖指针就会导致读写胖指针弄不好得到了一个旧指针加一个新指针, 这种隐患带来的后果不堪设想.
+
+作者：[dwing](https://www.zhihu.com/question/311207855/answer/1986098967)
+
+【2023-2-20】go语言的问题
+
+1. **浅拷贝**： <span style='color:blue'>slice， map等赋值操作都是浅拷贝，并未实现clone，很容易线上bug</span>。 深层次来说，这不仅容易误用，而且给GC也带来了巨大的压力，还可能导致循环引用等问题。
+
+```go
+type S struct {
+    A string
+    B []string
+}
+
+func main() {
+    x := S{"x-A", []string{"x-B"}}
+    y := x // copy the struct
+    y.A = "y-A"
+    y.B[0] = "y-B"
+    fmt.Println(x, y)
+    // Outputs "{x-A [y-B]} {y-A [y-B]}" -- x 被修改
+}
+```
+
+2. Append黑魔法。<span style='color:blue'>通过Append修改slice，cap不够时，会出现类似"Copy On Write"的奇效</span>。 例子来自参考1.
+
+```go
+func doStuff(value []string) {
+    fmt.Printf("value=%v\n", value)
+    value2 := value[:]
+    value2 = append(value2, "b")
+    fmt.Printf("value=%v, value2=%v\n", value, value2)
+    value2[0] = "z"
+    fmt.Printf("value=%v, value2=%v\n", value, value2)
+}
+
+func main() {
+    slice1 := []string{"a"} // length 1, capacity 1
+    doStuff(slice1)
+    // Output:
+    // value=[a] -- ok
+    // value=[a], value2=[a b] -- ok: value unchanged, value2 updated
+    // value=[a], value2=[z b] -- ok: value unchanged, value2 updated
+    slice10 := make([]string, 1, 10) // length 1, capacity 10
+    slice10[0] = "a"
+    doStuff(slice10)
+    // Output:
+    // value=[a] -- ok
+    // value=[a], value2=[a b] -- ok: value unchanged, value2 updated
+    // value=[z], value2=[z b] -- WTF?!? value changed???
+}
+```
+
+3. <span style='color:blue'>空指针nil/除0问题想必困扰了大家不少，稍不留意就Panic</span>。更现代的语言会参考代数类型（参考4）来避免类型设计上的缺失。 例如Rust采用Option<T>代替T完成相关类型的常规计算，从逻辑层面控制消除可能存在的漏洞。
+
+4. <span style='color:blue'>错误处理，重复代码太高</span>。例子看参考2， 但是从 [官方](https://github.com/golang/go/issues/32437)来看， Golang将引入对应的try语法。
+
+5. 还是重复代码多，**首字母大写**，导致使用<span style='color:blue'>反射来序列化struct成json格式的时候，struct tags 99%的概率要手写</span>。例如：
+
+```go
+type User struct {
+    Id string    `json:"id"`
+    Email string `json:"email"`
+    Name string  `json:"name,omitempty"`
+}
+```
+
+最后推荐一个[flaws set](https://github.com/ksimka/go-is)
 
 ### go特点
 
@@ -6384,7 +6458,27 @@ defer语句并不会马上执行，而是会进入一个`栈`，函数return前�
   - `进程` → `线程` → `协程`
 - 协程最大的优势就是可以轻松的创建上百万个，而不会导致系统资源衰减
 
-详解请参考：进程、线程、协程
+<div class="mermaid">
+    graph LR
+    A(进程):::orange -->|轻量级,资源共享| B(线程):::green
+    B -->|轻量级,数量上万| C(协程):::blue
+
+    classDef red fill:#f02; 
+    classDef green fill:#5CF77B; 
+    classDef blue fill:#6BE0F7; 
+    classDef orange fill:#F7CF6B;
+</div>
+
+- `进程`拥有资源和独立运行，也是资源分配的最小单位。任务调度采用的是**时间片轮转**的`抢占式`调度方式
+- `线程`是处理器调度/分派的基本单位。一个`进程`可以有一个或多个`线程`，各个线程之间共享程序的内存空间(也就是所在进程的内存空间)
+- `线程`不拥有系统资源，除了必不可少的程序计数器、寄存器和栈，与同`进程`下其它线程共享资源
+- `线程`间通信主要通过共享内存，上下文切换很快，资源开销较少，但相比`进程`不够稳定容易丢失数据。
+- `协程`是一种**用户态**的轻量级线程，协程调度**完全**由用户控制。
+  - `线程`之上更加轻量级的存在，`协程`并不是取代`线程`, 而且抽象于线程之上，`线程`是`协程`的资源
+  - 一个`线程`可以多个`协程`，一个`进程`也可以单独拥有多个`协程`。
+  - 线程/进程都是**同步**机制，而协程则是**异步**
+  - `协程`能保留上一次调用时的状态
+  - `线程`是**抢占式**，而`协程`是**非抢占式**的
 
 ### 11、空结构体的作用
 
