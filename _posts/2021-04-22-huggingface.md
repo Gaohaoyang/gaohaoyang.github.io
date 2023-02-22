@@ -117,6 +117,9 @@ MODEL_PATH = "./transformr_files/bert-base-uncased/"
 tokenizer = transformers.BertTokenizer.from_pretrained(f"{MODEL_PATH}/bert-base-uncased-vocab.txt") 
 # b. 导入配置文件
 model_config = transformers.BertConfig.from_pretrained(MODEL_PATH)
+# 【2023-2-22】默认保存路径：~/.cache/huggingface/hub/
+tokenizer = BertTokenizer.from_pretrained(model_name, cache_dir='./transformers/')	# cache_dir表示将预训练文件下载到本地指定文件夹下，而不是默认路径
+
 # 修改配置
 model_config.output_hidden_states = True
 model_config.output_attentions = True
@@ -962,8 +965,9 @@ model_name = 'bert-base-uncased'
 model_name = 'bert-base-chinese' # 中文模型
 # ----------- 分词器 ------------
 # 读取模型对应的tokenizer
-tokenizer = BertTokenizer.from_pretrained(model_name)
-tokenizer = BertTokenizer.from_pretrained(model_name, cache_dir='./transformers/')	# cache_dir表示将预训练文件下载到本地指定文件夹下
+tokenizer = BertTokenizer.from_pretrained(model_name) 
+# 【2023-2-22】默认保存路径：~/.cache/huggingface/hub/
+tokenizer = BertTokenizer.from_pretrained(model_name, cache_dir='./transformers/')	# cache_dir表示将预训练文件下载到本地指定文件夹下，而不是默认路径
 # 获取词表
 vocab = tokenizer.get_vocab()
 print("vocab: ", len(vocab))
