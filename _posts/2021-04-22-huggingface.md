@@ -33,6 +33,8 @@ PyTorch实现了从语言中识别情绪情感反讽的DeepMoji模型：https://
 
 ## Transformers 库
 
+Transformers库 [GitHub](https://github.com/huggingface/transformers)
+
 ### 介绍
 
 - 这个库最初的名称是 pytorch-pretrained-bert，它随着BERT一起应运而生。
@@ -171,6 +173,20 @@ transformers库中RobertaTokenizer和BertTokenizer的不同
 tokenizer.save_pretrained(save_directory) # 保存词表
 model.save_pretrained(save_directory) # 保存模型
 ```
+
+### GPU
+
+【2023-2-22】[Efficient Training on Multiple GPUs](https://huggingface.co/docs/transformers/perf_train_gpu_many)
+
+The following is the brief description of the main concepts that will be described later in depth in this document.
+- DataParallel (`DP`) - the same setup is replicated multiple times, and each being fed a slice of the data. The processing is done in parallel and all setups are synchronized at the end of each training step.
+- TensorParallel (`TP`) - each tensor is split up into multiple chunks, so instead of having the whole tensor reside on a single gpu, each shard of the tensor resides on its designated gpu. During processing each shard gets processed separately and in parallel on different GPUs and the results are synced at the end of the step. This is what one may call horizontal parallelism, as the splitting happens on horizontal level.
+- PipelineParallel (`PP`) - the model is split up vertically (layer-level) across multiple GPUs, so that only one or several layers of the model are places on a single gpu. Each gpu processes in parallel different stages of the pipeline and working on a small chunk of the batch.
+- Zero Redundancy Optimizer (`ZeRO`) - Also performs sharding of the tensors somewhat similar to TP, except the whole tensor gets reconstructed in time for a forward or backward computation, therefore the model doesn’t need to be modified. It also supports various offloading techniques to compensate for limited GPU memory.
+- Sharded `DDP` - is another name for the foundational ZeRO concept as used by various other implementations of ZeRO.
+
+Before diving deeper into the specifics of each concept we first have a look at the rough decision process when training large models on a large infrastructure.
+
 
 ### 推理加速
 
@@ -341,6 +357,8 @@ classifier(
 ```
 
 #### Text generation
+
+[官方 generate 方法解释](https://huggingface.co/docs/transformers/main_classes/text_generation)
 
 文本生成任务，是指你输入开头的话术（prompt），然后让机器自动帮你生成完剩下的句子。Text generation 中包含了一些随机因子，因此每次生成的结果都可能不同。
 
