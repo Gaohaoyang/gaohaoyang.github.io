@@ -4404,6 +4404,109 @@ yaml.Marshal 将 interface \{}作为参数。可以传递任何Go值，并将其
 序列化结构时，将值和指针传递给它会产生相同的结果。
 - 传递指针效率更高，因为按值传递会创建不必要的副本。
 
+【2023-2-23】go 操作 yaml 文件示例
+- 从字符串解析yml
+
+```go
+package main
+
+import (
+        "fmt"
+        "log"
+        "gopkg.in/yaml.v2"
+)
+
+var data = `
+a: Easy!
+b:
+  c: 2
+  d: [3, 4]
+`
+// Note: struct fields must be public in order for unmarshal to correctly populate the data.
+type T struct {
+        A string
+        B struct {
+                RenamedC int   `yaml:"c"`
+                D        []int `yaml:",flow"`
+        }
+}
+
+func main() {
+        t := T{}
+        err := yaml.Unmarshal([]byte(data), &t) // 解析 yaml 文件
+        if err != nil {
+                log.Fatalf("error: %v", err)
+        }
+        fmt.Printf("--- t:\n%v\n\n", t)
+        d, err := yaml.Marshal(&t) // 生成 yaml字符串文件
+        if err != nil {
+                log.Fatalf("error: %v", err)
+        }
+        fmt.Printf("--- t dump:\n%s\n\n", string(d))
+        m := make(map[interface{}]interface{})
+        err = yaml.Unmarshal([]byte(data), &m)
+        if err != nil {
+                log.Fatalf("error: %v", err)
+        }
+        fmt.Printf("--- m:\n%v\n\n", m)
+        d, err = yaml.Marshal(&m)
+        if err != nil {
+                log.Fatalf("error: %v", err)
+        }
+        fmt.Printf("--- m dump:\n%s\n\n", string(d))
+}
+```
+
+go 亲测
+- 从文件解析yml
+
+```yml
+reply:
+  - 
+    "keyword":"hi"
+    "value":"...."
+```
+
+代码
+
+```go
+import (
+        "fmt"
+        "log"
+		"os"
+        "gopkg.in/yaml.v2"
+)
+
+type replyItem struct {
+    Key          string `yaml:"keyword"`
+    Value       string `yaml:"value"`
+}
+
+type YAMLFile struct {
+    ReplyList []replyItem `yaml:"reply"`
+}
+
+func main(){
+	f, err := os.Open("conf.yml")
+	if err != nil {
+	    log.Fatalf("os.Open() failed with '%s'\n", err)
+	}
+	defer f.Close()
+	// 解析 yaml 文件
+	dec := yaml.NewDecoder(f)
+	fmt.Println("打开文件...")	
+	var yamlFile YAMLFile
+	err = dec.Decode(&yamlFile)
+	if err != nil {
+	    log.Fatalf("dec.Decode() failed with '%s'\n", err)
+	}
+	fmt.Printf("Decoded YAML file: %#v\n", yamlFile.ReplyList)
+	for i,v:= range yamlFile.ReplyList{
+		fmt.Println(i, v.Key, v.Value)
+		//fmt.Println(i,v['Key'],v['Value'])
+	}
+}
+```
 
 ## os库
 
