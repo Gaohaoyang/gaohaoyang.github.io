@@ -2047,11 +2047,81 @@ map 实现的几种方案，Go 语言采用的是`哈希查找表`，并且使�
 
 ### go map
 
-`映射`(Map)，它将唯一键映射到值。 键是用于在检索值的对象。 给定一个键和一个值就可以在Map对象中设置值
+`映射`(Map)，它将唯一键映射到值。 
+- 键是用于在检索值的对象。 给定一个键和一个值就可以在Map对象中设置值
+
+Map 使用方法
+- ① 先声明map、再初始化、最后赋值
+- ② 直接创建(限方法内)、再赋值
+- ③ 初始化 + 赋值一体化（限方法内）
+
+```go
+package main
+import (
+    "fmt"
+)
+
+var AutoReply map[string]string
+
+func main(){
+    //================
+    // ① 先声明map、再初始化、最后赋值
+    var m1 map[string]string
+    // 再使用make函数创建一个非nil的map，nil map不能赋值
+    m1 = make(map[string]string)
+    // 最后给已声明的map赋值
+    m1["a"] = "aa"
+    m1["b"] = "bb"
+    // ② 直接创建(限方法内)、再赋值
+    m2 := make(map[string]string)
+    // 然后赋值
+    m2["a"] = "aa"
+    m2["b"] = "bb"
+    // ③ 初始化 + 赋值一体化（限方法内）
+    m3 := map[string]string{
+        "a": "aa",
+        "b": "bb",
+    }
+    // ------ 查找键值是否存在 ------
+    if v, ok := m1["a"]; ok {
+        fmt.Println(v)
+    } else {
+        fmt.Println("Key Not Found")
+    }
+    // 遍历map
+    for k, v := range m1 {
+        fmt.Println(k, v)
+    }
+    // ======== [2-23-2-24]实测 ==========
+    // 方法一：直接赋值
+    AutoReply = map[string]string{"":"什么也没输入..."}
+    // 方法二：使用make
+    AutoReply = make(map[string]string)
+    AutoReply[""] = "什么也没输入..."
+	for k,v:=range AutoReply{
+		fmt.Print(k, v)
+	}    
+	str := []string{"i", ""}
+	for i,v := range str{
+        // 格式化输出时，需使用 Printf，否则 %s 失效
+		fmt.Printf("开始检查:[%s]\n", v)
+		if res,ok := AutoReply[v];ok {
+			fmt.Printf("[res] %s 在字典%d中\n", v, i)
+		}else{
+			fmt.Printf("[res] %s 不在字典%d中\n", v, i)
+		}
+	}
+    fmt.Print("done")
+}
+```
+
+其它示例
 
 ```go
 var countryCapitalMap map[string]string  // 创建map
 countryCapitalMap = make(map[string]string) // string -> string
+// [2023-2-24] map 定义是要初始化，否则：panic: assignment to entry in nil map
+
 /* insert key-value pairs in the map*/    
 countryCapitalMap["France"] = "Paris" // 插入元素
 delete(countryCapitalMap,"France"); // 删除
@@ -2073,6 +2143,7 @@ for i, c := range "go" {  //字符串时遍历字符
    fmt.Println(i, c)     
 }
 m := map[string]map[string]string{} // 嵌套map
+// 字典判重
 mm, ok := m["kkk"]
 if !ok {
     mm = make(map[string]string)
@@ -2345,6 +2416,9 @@ go 变量的特殊之处：没有空值描述尚未分配值的变量的值。�
 两种定义变量的方法：
 - 经典方法（使用variable-keyword）
 - 简写语法
+
+注意
+- := 只能用于**方法内**，当定义**全局变量**时只能通过 var 关键字来定义
 
 ```go
 // ---- 经典方式 -----
