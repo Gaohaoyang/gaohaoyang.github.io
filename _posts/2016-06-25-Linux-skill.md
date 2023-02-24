@@ -2375,7 +2375,7 @@ ${FOO/from/to} # 替换第一个匹配项
 ${FOO//from/to} # 全部替换
 ${FOO/%from/to} # 替换后缀
 ${FOO/#from/to} # 替换前缀
-echo ${food:-Cake}  #=> $food or "Cake"
+echo ${food:-Cake}  #=> 如果没定义food变量，就赋默认值（Cake） $food or "Cake" 
 ${FOO:0:3} # 子串 (位置，长度)
 ${FOO:(-3):3} # 从右边开始的子串
 ${#FOO} # $FOO 的长度
