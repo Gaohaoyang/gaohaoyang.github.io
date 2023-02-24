@@ -703,17 +703,7 @@ Go 程序的执行（程序启动）顺序如下：
 - **相对路径**导入 : 
   - `import   "./model"`  //当前文件同一目录的model目录，但是不建议这种方式import
 
-
-Go 语言中 `init 函数`用于`包` (package) 的**初始化**，该函数是 Go 语言的一个重要特性
-- main 包中，init 函数优先于 main 函数。最后被导入的包会最先初始化并调用其 init() 函数。
-
-特征：
-- init 函数是用于程序执行前做包的初始化函数，比如初始化包里的变量等
-- 每个包可以拥有多个 init 函数
-- 包的每个源文件也可以拥有多个 init 函数
-- 同一个包中多个 init 函数的执行顺序 Go 语言没有明确的定义 (说明)
-- 不同包的 init 函数按照包导入的依赖关系决定该初始化函数的执行顺序
-- init 函数不能被其他函数调用，而是在 main 函数执行之前，自动被调用
+#### main函数
 
 
 ```go
@@ -748,6 +738,90 @@ func main() { // 括号必须这种方式，否则报错！
 
 生成go.mod包
 - go mod init suggestion
+
+
+#### init函数
+
+Go 语言中 `init 函数`用于`包` (package) 的**初始化**，该函数是 Go 语言的一个重要特性
+- main 包中，`init函数`优先于 `main函数`。最后被导入的包会最先初始化并调用其 init() 函数。
+
+特征：
+- init 函数是用于程序执行前做包的初始化函数，比如初始化包里的变量等
+- 每个包可以拥有多个 init 函数
+- 包的每个源文件也可以拥有多个 init 函数
+- 同一个包中多个 init 函数的执行顺序 Go 语言没有明确的定义 (说明)
+- 不同包的 init 函数按照包导入的依赖关系决定该初始化函数的执行顺序
+- init 函数不能被其他函数调用，而是在 main 函数执行之前，自动被调用
+- 【2023-2-24】<span style='color:red'>init 函数不能有返回值！</span>
+
+init函数
+- init 函数最主要的作用，就是完成一些初始化的工作
+- 每个源文件都可以包含一个 init  函数，该函数会在 main 函数执行前，被 Go 运行框架调用，也就是说 init 会在 main 函数前被调用
+- 如果文件同时包含全局变量定义，init  函数和 main  函数，则执行的流程是：
+  - 全局变量定义 -> init函数 -> main 函数。
+  - import --> const --> var --> init()
+
+```go
+package main
+import "fmt"
+
+var num = setNumber()
+func setNumber() int {
+  return 42
+}
+// init 函数不能有返回值！
+func init() {
+  num = 0
+  // return ... // 报错！
+}
+func main() {
+  fmt.Println(num) // => 0
+}
+
+// ----------------------
+var g_a int = 10 // 全局变量
+
+type new_type struct {
+	x int
+	y string
+}
+
+func init(){
+	fmt.Println("系统自动调用：main函数前")
+	fmt.Println("init: ", g_a)
+}
+
+func change(p *new_type){
+	p.x = 5
+	p.y = "changing ..."
+}
+
+func main(){
+	fmt.Println("hello")
+	s := new_type{x:3, y:"world"}
+	fmt.Println(s)
+	fmt.Println(s.y)
+	//change(s)
+	change(&s)
+	fmt.Println(s)
+	g_a = 30
+	fmt.Println("main: ", g_a)
+}
+
+```
+
+输出
+
+```shell
+系统自动调用：main函数前
+init:  10
+hello
+{3 world}
+world
+{5 changing ...}
+main:  30
+```
+
 
 ### 自定义包
 
@@ -2418,74 +2492,6 @@ func main() {
 ### 特殊函数
 
 自定义函数时要避开系统内置的特殊函数
-
-#### init函数
-
-init函数
-- init 函数最主要的作用，就是完成一些初始化的工作
-- 每个源文件都可以包含一个 init  函数，该函数会在 main 函数执行前，被 Go 运行框架调用，也就是说 init 会在 main 函数前被调用
-- 如果文件同时包含全局变量定义，init  函数和 main  函数，则执行的流程是：
-  - 全局变量定义 -> init函数 -> main 函数。
-  - import --> const --> var --> init()
-
-```go
-package main
-import "fmt"
-
-var num = setNumber()
-func setNumber() int {
-  return 42
-}
-func init() {
-  num = 0
-}
-func main() {
-  fmt.Println(num) // => 0
-}
-
-// ----------------------
-var g_a int = 10 // 全局变量
-
-type new_type struct {
-	x int
-	y string
-}
-
-func init(){
-	fmt.Println("系统自动调用：main函数前")
-	fmt.Println("init: ", g_a)
-}
-
-func change(p *new_type){
-	p.x = 5
-	p.y = "changing ..."
-}
-
-func main(){
-	fmt.Println("hello")
-	s := new_type{x:3, y:"world"}
-	fmt.Println(s)
-	fmt.Println(s.y)
-	//change(s)
-	change(&s)
-	fmt.Println(s)
-	g_a = 30
-	fmt.Println("main: ", g_a)
-}
-
-```
-
-输出
-
-```shell
-系统自动调用：main函数前
-init:  10
-hello
-{3 world}
-world
-{5 changing ...}
-main:  30
-```
 
 #### 关闭
 
