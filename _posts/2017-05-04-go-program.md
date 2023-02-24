@@ -375,106 +375,7 @@ go install chapter11/goinstall
                 └── mypkg.go
 ```
 
-### go vendor
 
-vendor 是 Go 1.5 版本引入的，用于在项目本地**缓存特定版本依赖包**的机制，在 go modules 机制引入前，基于vendor可以实现可重现的构建（reproducible build），保证基于同一源码构建出的可执行程序是等价的。
-
-
-### go mod
-
-go module 是go官方自带的go**依赖管理库**，在**1.13版本**正式推荐使用。
-- go module可以将某个项目(文件夹)下的所有依赖整理成一个go.mod 文件,写入了依赖的版本等
-  - 用go module之后<span style='color:red'>不用关心GOPATH，也不用将代码放置在src下了</span>。
-- go module 管理依赖后, 在项目根目录下生成两个文件 `go.mod`（记录当前项目的所依赖）和 `go.sum`（记录每个依赖库的版本和哈希值）
-
-GO111MODULE是 go modules 功能的开关
-- GO111MODULE=**off**: 不使用 modules 功能。
-- GO111MODULE=**on**: 使用 modules 功能，不会去 GOPATH 下面查找依赖包。
-- GO111MODULE=**auto**: Golang 自己检测是不是使用 modules 功能。这种情况下可以分为两种情形：
-  - （1）当前目录在GOPATH/src之外且该目录包含go.mod文件，开启模块支持。
-  - （2）当前文件在包含go.mod文件的目录下面。
-
-推荐使用 Go 模块时，将 GO111MODULE 设置为 on 而不是 atuo，将以下语句添加进 ~/bashrc 中，然后重开Terminal
-
-```shell
-gedit ~/.bashrc
-# 添加 
-export GO111MODULE=on
-```
-
-#### go mod 配置
-
-第一次使用 GO MODULE(项目中还没有go.mod文件) ，cd进入项目文件夹，初始化 MODULE
-
-```shell
-cd /home/zhongzhanhui/GoProject/Seckill   
-go mod init Seckill  	#Seckill是项目名
-```
-
-go.mod 文件一旦创建后，内容将会被go toolchain全面掌控。go 会自动生成一个 go.sum 文件来记录 dependency tree
-- go toolchain会在各类命令执行时，比如go get、go build、go mod等修改和维护go.mod文件。
-
-go.mod 提供了module, require、replace和exclude 四个命令
-- module 语句指定包的名字（路径）
-- require 语句指定的依赖项模块
-- replace 语句可以替换依赖项模块
-- exclude 语句可以忽略依赖项模块
-
-
-此时项目根目录会出现一个 go.mod 文件，此时的 go.mod 文件只标识了项目名和go的版本,这是正常的,因为只是初始化了。 
-
-go.mod 文件内容如下：
-
-```go
-module SecKill
-
-go 1.13
-```
-
-go mod tidy
-- tidy会检测该文件夹目录下所有引入的依赖,写入 go.mod 文件，写入后会发现 go.mod 文件有所变动
-
-```go
-module SecKill
-
-go 1.13
-
-require (
-	github.com/gin-contrib/sessions v0.0.1
-	github.com/gin-gonic/gin v1.5.0
-	github.com/jinzhu/gorm v1.9.11
-	github.com/kr/pretty v0.1.0 // indirect
-	gopkg.in/yaml.v2 v2.2.2
-)
-```
-
-【2022-9-29】[go安装依赖包（go get, go module）](https://blog.csdn.net/weixin_41519463/article/details/103501485)
-
-#### go mod命令
-
-```shell
-# 初始化模块：
-go mod init <项目模块名称>
-# 依赖关系处理，根据go.mod文件
-go mod tidy
-# 将依赖包复制到项目的vendor目录
-go mod vendor
-# 显示依赖关系
-go list -m all
-# 显示详细依赖关系
-go list -m -json all
-# 下载依赖
-go mod download [path@version]
-```
-
-
-#### go mod 错误信息
-
-【2022-9-30】如果设置为on，但是当前目录没有go.mod文件，就会出现错误信息，[详见](https://blog.csdn.net/longgeaisisi/article/details/121288696)
-> no required module provides package xxx: go.mod file not found in current directory or any parent directory; see 'go help modules'
-
-解决方法
-- go env -w GO111MODULE=auto
 
 ## go编译
 
@@ -609,12 +510,145 @@ src # 自己的代码
   - 可以放一些第三方的资源工具文件。
 - 还有一些/api、/example、/cmd等等
 
-## 包的使用
+## go包
 
 使用import导入包的3个好处：
 - 降低函数方法重名的可能，让函数保持简短和简洁。
 - 有效地组织代码，很方便导向到标的。
 - 只需重新编译小的程序块，从而加快编译速度。例如包fmt，我们不必在每次更改程序时都重新编译它。
+
+### go包管理
+
+#### 包管理历程
+
+Go语言的包管理工具随着开源社区的讨论、贡献不断进化: `GOPATH`--> `vendor`--->`go mod`
+- 从最初单一的 `GOPATH` 目录的"`GOPATH 模式`"
+- 到加入 `vendor目录`，用于将依赖包与工程保存到同一个目录树下
+- 最终官方结合社区版本的包管理工具正式将 `go mod` 融入 go 语言官方版本中，更好的支持多版本的依赖管理.
+
+[Go包管理迭代历程](https://zhuanlan.zhihu.com/p/311969770)
+- 2012年3月 Go 1 发布，此时没有版本的概念
+- 2013年 Golang 团队在 FAQ 中提议开发者保证相同 import path 的兼容性，后来成为一纸空文
+- 2013年10月 Godep
+- 2014年7月 glide
+- 2014年 有人提出 external packages 的概念，在项目的目录下增加一个 vendor 目录来存放外部的包
+- 2015年8月 Go 1.5 实验性质加入 vendor 机制
+- 2015年 有人提出了采用语义化版本的草案
+- 2016年2月 Go 1.6 vendor 机制 默认开启
+- 2016年5月 Go 团队的 Peter Bourgon 建立委员会，讨论依赖管理工具，也就是后面的 dep
+- 2016年8月 Go 1.7: vendor 目录永远启用
+- 2017年1月 Go 团队发布 Dep，作为准官方试验
+- 2018年8月 Go 1.11发布 Modules 作为官方试验
+- 2019年2月 Go 1.12发布 Modules 默认为 auto
+- 2019年9月 Go 1.13 版本默认开启 Go Mod 模式
+- ![](https://pic3.zhimg.com/80/v2-343d3352a25f21aeb7ffd9c597b5dfde_1440w.webp)
+- ![go](https://pic3.zhimg.com/80/v2-6894ae9c5aa28a509f49544a2e5d5a22_1440w.webp)
+
+#### go vendor
+
+vendor 是 Go 1.5 版本引入的，用于在项目本地**缓存特定版本依赖包**的机制，在 go modules 机制引入前，基于vendor可以实现可重现的构建（reproducible build），保证基于同一源码构建出的可执行程序是等价的。
+
+
+#### go mod
+
+go module 是go官方自带的go**依赖管理库**，在**1.13版本**正式推荐使用。
+- go module可以将某个项目(文件夹)下的所有依赖整理成一个go.mod 文件,写入了依赖的版本等
+  - 用go module之后<span style='color:red'>不用关心GOPATH，也不用将代码放置在src下了</span>。
+- go module 管理依赖后, 在项目根目录下生成两个文件 `go.mod`（记录当前项目的所依赖）和 `go.sum`（记录每个依赖库的版本和哈希值）
+
+GO111MODULE是 go modules 功能的开关
+- GO111MODULE=**off**: 不使用 modules 功能。
+- GO111MODULE=**on**: 使用 modules 功能，不会去 GOPATH 下面查找依赖包。
+- GO111MODULE=**auto**: Golang 自己检测是不是使用 modules 功能。这种情况下可以分为两种情形：
+  - （1）当前目录在GOPATH/src之外且该目录包含go.mod文件，开启模块支持。
+  - （2）当前文件在包含go.mod文件的目录下面。
+
+推荐使用 Go 模块时，将 GO111MODULE 设置为 on 而不是 atuo，将以下语句添加进 ~/bashrc 中，然后重开Terminal
+
+```shell
+gedit ~/.bashrc
+# 添加 
+export GO111MODULE=on
+```
+
+##### go mod 配置
+
+第一次使用 GO MODULE(项目中还没有go.mod文件) ，cd进入项目文件夹，初始化 MODULE
+
+```shell
+cd /home/zhongzhanhui/GoProject/Seckill   
+go mod init Seckill  	#Seckill是项目名
+```
+
+go.mod 文件一旦创建后，内容将会被go toolchain全面掌控。go 会自动生成一个 go.sum 文件来记录 dependency tree
+- go toolchain会在各类命令执行时，比如go get、go build、go mod等修改和维护go.mod文件。
+
+go.mod 提供了module, require、replace和exclude 四个命令
+- module 语句指定包的名字（路径）
+- require 语句指定的依赖项模块
+- replace 语句可以替换依赖项模块
+- exclude 语句可以忽略依赖项模块
+
+
+此时项目根目录会出现一个 go.mod 文件，此时的 go.mod 文件只标识了项目名和go的版本,这是正常的,因为只是初始化了。 
+
+go.mod 文件内容如下：
+
+```go
+module SecKill
+
+go 1.13
+```
+
+go mod tidy
+- tidy会检测该文件夹目录下所有引入的依赖,写入 go.mod 文件，写入后会发现 go.mod 文件有所变动
+
+```go
+module SecKill
+
+go 1.13
+
+require (
+	github.com/gin-contrib/sessions v0.0.1
+	github.com/gin-gonic/gin v1.5.0
+	github.com/jinzhu/gorm v1.9.11
+	github.com/kr/pretty v0.1.0 // indirect
+	gopkg.in/yaml.v2 v2.2.2
+)
+```
+
+【2022-9-29】[go安装依赖包（go get, go module）](https://blog.csdn.net/weixin_41519463/article/details/103501485)
+
+##### go mod命令
+
+```shell
+# 初始化模块：
+go mod init <项目模块名称>
+# 依赖关系处理，根据go.mod文件
+go mod tidy
+# 将依赖包复制到项目的vendor目录
+go mod vendor
+# 显示依赖关系
+go list -m all
+# 显示详细依赖关系
+go list -m -json all
+# 其它命令
+go mod download  # 下载 module 到本地
+go mod download [path@version]
+go mod edit     # 编辑 go.mod
+go mod graph    # 打印 modules 依赖图
+go mod verify   # 验证依赖
+go mod why      # 解释依赖使用
+```
+
+
+##### go mod 错误信息
+
+【2022-9-30】如果设置为on，但是当前目录没有go.mod文件，就会出现错误信息，[详见](https://blog.csdn.net/longgeaisisi/article/details/121288696)
+> no required module provides package xxx: go.mod file not found in current directory or any parent directory; see 'go help modules'
+
+解决方法
+- go env -w GO111MODULE=auto
 
 ### go包介绍
 
