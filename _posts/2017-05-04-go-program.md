@@ -1673,6 +1673,8 @@ import (
 func main() {    
     greetings :=  []string{"Hello","world!"}    
     fmt.Println(strings.Join(greetings, " "))  //字符串连接
+    fmt.Print('hhh') 
+    log.Print('hhh') //  输出字符串要用双引号，否则：more than one character in rune literal
 }
 ```
  
