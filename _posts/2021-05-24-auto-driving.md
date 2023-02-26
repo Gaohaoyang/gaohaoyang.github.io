@@ -3,7 +3,7 @@ layout: post
 title:  "车联网&自动驾驶-V2X & Auto Driving"
 date:   2021-05-24 10:30:00
 categories: 技术工具 新技术
-tags: IoT 物联网 车辆网 自动驾驶 无人驾驶 滴滴 何晓飞 飞步 造车 微软 黄埔军校 汽车 定位 北斗 gps geohash
+tags: IoT 物联网 车辆网 自动驾驶 无人驾驶 滴滴 何晓飞 飞步 造车 微软 黄埔军校 汽车 定位 北斗 gps geohash 特斯拉
 author : 鹤啸九天
 excerpt: 车联网及无人驾驶相关技术总结
 mathjax: true
@@ -949,8 +949,12 @@ Transformer模型作为NLP与图片视频领域中，最重要的模型构架，
 <embed width="800" height="600" src="https://vdn6.vzuu.com/SD/8e617f0a-18b6-11ed-a515-caa2f7fe3b8b.mp4?pkey=AAUueFULRuG_6uD2Q02FRUhdfjMyp6FyxymFaW_-XWxvqXHc6okeEqAV0nNeMEHz8n-IipsQme7OkNApjLZ6QurG&c=avc.1.1&f=mp4&pu=078babd7&bu=078babd7&expiration=1673454650&v=ks6" />
 
 
+## Nikola
 
+【2023-2-26】[【奇闻】新能源汽车惊天骗局-风口上的电动汽猪](https://www.bilibili.com/video/BV1oT4y1D7z5), [offer帮创始人Lindsay](https://offerbang.io?wpm=2.3.17.2), 米尔顿，市场营销背景，毫无技术准备，视频作假，电动货车，哄骗投资人，2020年跟壳公司一起上市，股价疯涨，一周翻5倍，尽管一辆车都没造出来，市值就超过了福特，直至被做空机构hindenberg research揭穿谎言：我从没有见过一家上市公司如此欺诈！美国司法部提起三项诉讼，判了25年，投资人的钱打了水漂。
+- 贾跃亭PPT造车，贾跃亭的大前辈——Nikola。 一辆车都没造出来，就吸引到上亿投资，甚至还上市了，它是如何做到的？
 
+<iframe src="//player.bilibili.com/player.html?aid=936711941&bvid=BV1oT4y1D7z5&cid=513690391&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" > </iframe>
 
 # 结束
 
