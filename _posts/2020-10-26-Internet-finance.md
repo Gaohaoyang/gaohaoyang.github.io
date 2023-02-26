@@ -3,7 +3,7 @@ layout: post
 title:  "互联网金融-Internet Finance"
 date:   2020-10-26 19:30:00
 categories: 人文科学
-tags: P2P 互联网 金融 四大行 股市 K线 对冲 股票 风控
+tags: P2P 互联网 金融 四大行 股市 K线 对冲 股票 风控 浑水 做空
 author : 鹤啸九天
 excerpt: 互联网金融未来发展
 mathjax: true
@@ -120,17 +120,20 @@ mathjax: true
 
 ### 做空
 
-【2023-2-10】瑞幸事件使很多人注意到美国成熟市场存在的一种独特的公司治理监督力量，那就是来自以盈利为目的的做空机构的市场监督。中国资本市场真的存在做空机制吗
+【2023-2-10】`瑞幸`事件使很多人注意到美国成熟市场存在的一种独特的公司治理监督力量，那就是来自以盈利为目的的做空机构的市场监督。中国资本市场真的存在做空机制吗
+- 被做空的公司：安然、瑞幸、nikola、乐视
 
-许多人听说过的，浑水（Muddy Water), 香橼（Citron Research), 匿名分析（Anonymous Analytics)
+许多人听说过的，`浑水`（Muddy Water), `香橼`（Citron Research), `匿名分析`（Anonymous Analytics)
 
 做空机构
-- 1、浑水（Muddy Water), 香橼（Citron Research)
-- 2、哥谭 glaucus
+- 1、`浑水`（Muddy Water), `香橼`（Citron Research)
+- 2、`哥谭` glaucus
 
 海外机构做空新套路：高估值、高浮筹、配合期权、持久战
 
 [做空机构是干什么的？](https://www.zhihu.com/question/20374082)
+
+【2023-2-26】[【奇闻】新能源汽车惊天骗局-风口上的电动汽猪](https://www.bilibili.com/video/BV1oT4y1D7z5)
 
 
 ## 金融制度运转
