@@ -301,6 +301,149 @@ Websites and contact information for individual tasks below.
 
 ![](http://img1.gtimg.com/tech/pics/hv1/251/216/901/58642856.jpg)
  
+## Kaggle kernel
+
+【2023-2-27】问题在于平台不是很灵活，比如上传文件之类的，而且速度很不稳定,时好时坏
+- 编程语言，默认支持 Python + R
+- 整个kernel相当于一个虚拟的环境
+- kernels运行代码不能超过6个小时
+  - 如果离开kernels界面时间超过一个小时，kernels就会重启，不管其中是否已经正在执行训练任务，这样是为了资源的合理利用…
+  - 如果执行超过1h，可以去页面的右上角得Commit按钮，将代码提交，就会在服务器后端执行，当执行完毕后页面就会加载。执行过程中的一些输出信息也会呈现出来。Commit后的代码可执行时间也是最长6小时
+
+### kaggle vs 天池
+
+[Kaggle Notebook](https://www.kaggle.com/notebooks)
+- ![](https://mmbiz.qpic.cn/mmbiz_png/uoTGEibAZUEiaOWROhRyBwUmGeadRKQ7nzS2LMuEcq74dr1JdvSRqReBSusge8ONgFibZOLNo9MO9NEccxncibOADQ/640?wx_fmt=png)
+
+Notebook：
+- 提供一个配置好环境的运行的环境，所有参赛选手免去在本地配置环境的环节；
+- 代码和思路的分享，比如比赛分析过程和解决方案的展示；
+- 比赛提交的入口，如比赛最终提交可以从Notebook提交；
+- 提供系列的学习资源和实践教材，可以作为在线教材；
+- 版本存储的功能，可以存储历史运行的代码；
+- 渲染Markdown、图片和公式的功能，展示方式更加灵活；
+- 与数据集和比赛交互的过程；
+- ![](https://mmbiz.qpic.cn/mmbiz_png/uoTGEibAZUEiaOWROhRyBwUmGeadRKQ7nziahJb3KHfQxcxoNa2F7L6emHJRUjozCH3wBwS0JKgrvKOKSLXaMqFXQ/640?wx_fmt=png)
+
+
+[天池Notebook（DSW）](https://tianchi.aliyun.com/notebook-ai/)
+- 天池 [notebook](https://tianchi.aliyun.com/lab/home?notebookLabId=452861&notebookId=522275)
+- ![](https://mmbiz.qpic.cn/mmbiz_png/uoTGEibAZUEiaOWROhRyBwUmGeadRKQ7nzmrxfOic8czwtqwr5ibKfXGaBYIZSt8ibicboLxz6kHmtvbGwQ9WaAS39PQ/640?wx_fmt=png)
+
+| 维度 | 天池DSW	| Kaggle Notebook |
+|---|---|---|
+| 界面 | Juypter Lab |	自定义网页 |
+| 使用时间 |	总共使用时间不限制<br>CPU和GPU单次链接8小时<br>每次链接可以运行多个Notebook |	CPU时间不限，GPU每周35小时<br>可以同时运行多个CPU Notebook<br>只能运行一个GPU Notebook |
+| 文件目录	| 工作目录与文件目录混合 | 工作目录与数据文件分开 |
+| 文件系统	| 多个Notebook共享	| 单个Notebook独占 |
+| Markdown目录	| 支持	| 不支持 |
+| 数据集	| 支持挂载数据集	| 支持挂载数据集 |
+| 内存	| 4G，多个Notebook共享	| 16G，单个Notebook独占 |
+| 显存	| 16G，多个Notebook共享	| 11G，单个一个Notebook独占 |
+| 联网	| CPU模型可以联网<br>GPU模型不可以联网 |	CPU和GPU都可以联网 |
+| 稳定性 | CPU较为稳定<br>GPU稳定性一般 |	较为稳定 |
+| Shell	| 支持	| 不支持 |
+| 上传文件 | 支持	| 不支持，可在Dataset页面上传 |
+| 发布	| 支持发布到天池论坛	| 支持发布到Kaggle论坛 |
+| 版本	| 支持版本管理，但不完善	| 支持版本管理，比较完善 |
+| Copy & Fork	| 支持	| 支持 |
+| 评论	| 支持	| 支持 |
+
+
+从上表对比可知，天池DSW与Kaggle Notebook环境虽然整体都为在线Notebook，但在使用上存在一定的差异性：
+- 资源分配：天池DSW环境可以同时运行多个Notebook，且多个Notebook资源共享；Kaggle Notebook每个资源独立，且文件各自不共享；
+- 使用方式：天池DSW环境与Juypter Lab比较类似，而Kaggle Notebook是固定好输入情况下的代码运行环境；
+
+从使用角度天池DSW比较灵活强大，而Kaggle Notebook每个功能比较单一。所以如果大家在国内，建议使用天池DSW。
+- [天池向左 Kaggle向右：Notebook使用对比](https://toutiao.io/posts/jjhuubz/preview)
+- 天池DSW是国内首个支持GPU和CPU的学习环境
+
+### 云环境
+
+```sh
+# UI可视目录
+ls /kaggle/input # 输入目录，存放上传的文件信息
+ls /kaggle/working # 输出目录
+```
+
+### 数据集
+
+可以搜索公用数据集，也可以自己上传数据集
+
+
+### python
+
+默认Python环境 3.7.12
+
+```sh
+python --version # Python 3.7.12
+```
+
+### shell
+
+Currently supported shells are:
+- bash
+- fish
+- tcsh
+- xonsh
+- zsh
+- powershell
+
+### conda 使用
+
+kaggle默认安装了conda
+- 创建虚拟环境
+
+```sh
+conda env list # 查看 conda环境
+conda create -n learn python=3.10 # 由于没有终端交互，流程卡在yes环节
+conda create -n learn python=3.10 --yes # 加上yes参数即可
+conda env list
+# conda environments:
+#
+# base                     /opt/conda
+# learn                    /opt/conda/envs/learn # 刚创建的虚拟环境
+```
+
+执行conda init失败
+
+```s
+CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.
+To initialize your shell, run
+
+    $ conda init <SHELL_NAME>
+```
+
+
+参考：
+- [How to accept a proceed in console](https://www.kaggle.com/questions-and-answers/146938)
+  - How do I interact with the console on a kaggle notebook, I am currently unable to respond with a yes.
+  - !conda install --yes seaborn
+  - !pip uninstall bert4keras --yes
+  - 或者 -y
+- [How to activate conda environment in kaggle notebook](https://www.kaggle.com/questions-and-answers/202529)
+
+### GPU
+
+kaggle 提供免费GPU计算资源，每个用户可以获得30小时的 GPU 加速
+- ![](https://pic1.zhimg.com/80/v2-663f14a5ff901abd1df84f22c0765348_1440w.webp)
+
+```sh
+!nvidia-smi # 查看 GPU 资源
+!nvcc -V # 查看 cuda 版本
+!gcc --version # gcc
+```
+
+计算资源（【2023-2-27】）
+- CPU
+- GPU T4*2
+- GPU P100
+- TPU V3-8
+- TPU VM V3-8
+
+注意
+- 训练完以后一定要 关闭事例，不然会一直计费
+
 ## Kaggle 基本介绍
  
 - Kaggle 于 2010 年创立，专注数据科学，机器学习竞赛的举办，是全球最大的数据科学社区和数据竞赛平台。
