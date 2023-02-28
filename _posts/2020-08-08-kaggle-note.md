@@ -410,6 +410,8 @@ python --version # Python 3.7.12
 
 #### 更改Python版本
 
+【2023-2-28】实验失败, 参考kaggle[问题](https://www.kaggle.com/questions-and-answers/379816)
+
 ```sh
 conda create -y -n yanjunenv python=3.8
 !conda env list # 列出conda管理的所有环境, conda info -e 
@@ -418,7 +420,7 @@ conda create -y -n yanjunenv python=3.8
 !conda activate py38 && python -c "import sys;print(sys.version)"
 ```
 
-【2023-2-28】实验失败
+
 
 ### shell
 
