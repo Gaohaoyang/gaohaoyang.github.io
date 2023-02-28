@@ -370,6 +370,35 @@ ls /kaggle/working # 输出目录
 
 可以搜索公用数据集，也可以自己上传数据集
 
+上传数据集成功，但Kaggle Processing data过程中会出错，信息为：
+>"Unfortunately, we could not create your dataset. Failed to check creation status. Please try again later."
+
+原因是：
+- 数据集中文件名包含非法字符如'&', ';', ','等，请统一更新为合法文件名 。
+- 文件名很长很长，Kaggle也不认识，请尽量变短你的文件名。
+
+
+kaggle中文显示乱码：
+- 在Kaggle中可以查看支持的所有字体：
+
+```py
+a=sorted([f.name for f in matplotlib.font_manager.fontManager.ttflist])
+print(a)
+# 没有支持中文（可能未来会有）
+```
+
+解决方法：[详见](https://www.jianshu.com/p/82480e6e2603)
+- 到 C:\Windows\Fonts中，选择几个字体文件，打成zip文件，创建一个字体文件数据集，接着通过Add data将字体文件数据集引入到当前notebook下
+- ![](https://upload-images.jianshu.io/upload_images/23648939-773a72f859e198a5.png?imageMogr2/auto-orient/strip|imageView2/2/w/566/format/webp)
+
+```py
+myfont =matplotlib.font_manager.FontProperties(fname=r'../input/chinesefonts/chinesefonts/STXINWEI.TTF')
+# 在显示中文的地方添加myfont即可：
+plt.subplot(3,4,1) #要生成三行四列，这是第一个图plt.subplot('行','列','编号')
+plt.plot(t,s,'b--')
+plt.title('前夕', fontproperties=myfont,size=14)
+plt.ylabel('y1')
+```
 
 ### python
 
@@ -378,6 +407,18 @@ ls /kaggle/working # 输出目录
 ```sh
 python --version # Python 3.7.12
 ```
+
+#### 更改Python版本
+
+```sh
+conda create -y -n yanjunenv python=3.8
+!conda env list # 列出conda管理的所有环境, conda info -e 
+!activate py38 # linux下激活虚拟环境conda activate
+#source deactivate
+!conda activate py38 && python -c "import sys;print(sys.version)"
+```
+
+【2023-2-28】实验失败
 
 ### shell
 
@@ -426,6 +467,8 @@ To initialize your shell, run
 ### GPU
 
 kaggle 提供免费GPU计算资源，每个用户可以获得30小时的 GPU 加速
+- Kaggle只提供一周**37小时**，Kaggle重设credit是**星期六**的0点
+- 训练时间不能超过**12小时**，否则Kaggle会自动停止你的运行任务
 - ![](https://pic1.zhimg.com/80/v2-663f14a5ff901abd1df84f22c0765348_1440w.webp)
 
 ```sh
