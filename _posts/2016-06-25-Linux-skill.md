@@ -4869,7 +4869,36 @@ some_func()
 
 ### 魔法操作介绍
 
-【2022-11-18】[魔法操作介绍](https://zhuanlan.zhihu.com/p/29942003)
+【2022-11-18】
+- [魔法操作介绍](https://zhuanlan.zhihu.com/p/29942003)
+- [玩转Jupyter Notebook3](https://zhuanlan.zhihu.com/p/259385775)
+- windows有8个默认指令：copy, echo, ldir, ls, mkdir, ren, rmdir
+- Linux下有16个默认指令: cat, clear, cp, ldir, less, ls, lk, ll, ls, lx, man, mkdir, mv, rm, rmdir
+
+```sh
+%lsmagic # 列出所有magics命令
+%alias? # 输出某个魔法命令（如 alias）详细帮助文档
+alias test echo "hello" # 设置别名
+# ---- line 魔法指令 ------
+%conda install package_names # conda 安装
+%dhist # 输出历史访问目录
+%history # 列出历史输入的指令
+%magic # 输出所有魔法指令帮助文档
+%matplotlib inline # 效果等价于plt.show()
+%notebook # 导出当前notebook历史输入到文件
+%notebook notebook.ipynb # 将所有历史输入导入notebook.ipynb文件中
+%pip # 在cell中使用pip指令
+%pwd # 输出当前路径
+%pycat # 预览文件，类似linux中cat
+%run # 执行脚本
+%time # 执行时间
+# ---- cell 魔法指令 ------
+%%writefile # 将当前cell中内容写入文件中
+%%latex # 写Latex公式
+%%script # 写bash、perl、javascript、js 等命令, 不过经过测试，在jupyter notebook中不友好，在ipython中没什么问题。
+%%script bash # bash环境
+%%script python2 # py2
+```
 
 IPython 有一个 %% script 魔法操作符, 可以在一个子进程中运行其它语言的解释器，包括: bash, ruby, perl, zsh, R, 等等
 
@@ -4893,6 +4922,31 @@ echo "hello from $BASH" # hello from /bin/bash
 ```
 
 ### shell
+
+!后面跟上终端命令即可执行
+- Jupyter uses a temporary subshell. If you want to change to another directory permanently, you have to use the magic command %cd.
+- jupyter启用子shell，执行命令，不会作用到全局，如果需要更改目录，使用 %cd
+
+单行代码
+- 值传递
+
+```py
+directory = !pwd # 变量赋值
+a = !ls
+```
+
+切换目录
+- %后面跟上命令
+- With the %automagic function, these can also be used without the preceding % character:
+
+```sh
+!pwd # 旧目录
+%cd .. # 切换目录
+!pwd # 新目录
+#--------
+%automagic # 开启自动识别，可以省略 %
+cd ..
+```
 
 shell 代码块
 
