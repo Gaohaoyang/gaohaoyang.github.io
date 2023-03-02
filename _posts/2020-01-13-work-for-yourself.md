@@ -888,6 +888,21 @@ BuiltWith 的运营，一人足矣
 [在欧洲当程序员是什么样的体验](https://www.zhihu.com/question/307317373/answer/2447558749)
 - 欧洲有哪些公司？瑞士的Google，英国的deepmind，爱尔兰的fb，阿姆斯特丹的Uber
 
+【2023-3-2】荷兰城市，[报告](https://www.pbl.nl/sites/default/files/downloads/Cities_in_the_Netherlands-web-DEF.pdf)
+- 阿姆斯特丹：首都，1700w人
+- 鹿特丹
+- 海牙：皇族、政府所在地
+- 格罗宁根：
+
+国外生活有好有坏，不同阶层感受不同，底层人生活有保障，荷兰有强制最低工资，比国内晚7小时，晴天可以放假，工作比国内轻松，但也有天花板，开公司当老板挣得多税也重，跟打工差不多… 
+- 政策制度上维护本地人，既得集团利益，让大部分人为此奔波… 
+- 中国人在国外生孩子依旧是中国籍，去使馆登记
+
+[荷兰：海上风车之国](https://www.bilibili.com/video/BV19q4y1q79y)
+- <iframe src="//player.bilibili.com/player.html?aid=592335448&bvid=BV19q4y1q79y&cid=461045593&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%"> </iframe>
+- 发达国家，人均身高184，世界第一，郁金香，芯片（AML），航海，世界第一个证券交易所
+- 吸毒、pc合法
+
 ### 新加坡
 
 【2022-12-29】互联网在干顶多三五年就被淘汰了，身边有些人选择去**国企**或者润**国外**
