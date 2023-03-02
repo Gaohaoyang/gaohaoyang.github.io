@@ -2235,9 +2235,10 @@ pip install playsound
 
 【2022-11-15】[whisper](https://github.com/openai/whisper)，Open AI [Introducing Whisper](https://openai.com/blog/whisper/) 强调 Whisper 的语音识别能力已达到人类水准。
 - Whisper is a general-purpose speech recognition model. It is trained on a large dataset of diverse audio and is also a multi-task model that can perform multilingual speech recognition as well as speech translation and language identification.
-- Whisper 是一个自动语音识别（ASR，Automatic Speech Recognition）系统，OpenAI 通过从网络上收集了 68 万小时的多语言（98 种语言）和多任务（multitask）监督数据对 Whisper 进行了训练。OpenAI 认为使用这样一个庞大而多样的数据集，可以提高对口音、背景噪音和技术术语的识别能力。除了可以用于语音识别，Whisper 还能实现多种语言的转录，以及将这些语言翻译成英语。OpenAI 开放模型和推理代码，希望开发者可以将 Whisper 作为建立有用的应用程序和进一步研究语音处理技术的基础。
+- Whisper 是一个自动语音识别（ASR，Automatic Speech Recognition）系统，OpenAI 通过从网络上收集了 68 万小时的`多语言`（98 种语言）和`多任务`（multitask）监督数据对 Whisper 进行了训练。
+- OpenAI 认为使用这样一个庞大而多样的数据集，可以提高对口音、背景噪音和技术术语的识别能力。除了可以用于语音识别，Whisper 还能实现多种语言的转录，以及将这些语言翻译成英语。OpenAI 开放模型和推理代码，希望开发者可以将 Whisper 作为建立有用的应用程序和进一步研究语音处理技术的基础。
 
-相比目前市面上的其他现有方法通常使用较小的、更紧密配对的「音频 - 文本」训练数据集，或使用广泛但无监督的音频预训练集。因为 Whisper 是在一个大型和多样化的数据集上训练的，而<span style='color:red'>没有针对任何特定的数据集进行微调</span>，虽然它没有击败专攻 LibriSpeech 性能的模型（著名的语音识别基准测试），然而在许多不同的数据集上测量 Whisper 的 Zero-shot（不需要对新数据集重新训练，就能得到很好的结果）性能时，研究人员发现它比那些模型要稳健得多，犯的错误要少 50%。
+相比目前市面上的其他现有方法通常使用较小的、更紧密配对的「音频 - 文本」训练数据集，或使用广泛但无监督的音频预训练集。因为 Whisper 是在一个大型和多样化的数据集上训练的，而<span style='color:red'>没有针对任何特定的数据集进行微调</span>，虽然它没有击败专攻 LibriSpeech 性能的模型（著名的语音识别基准测试），然而在许多不同的数据集上测量 Whisper 的 `Zero-shot`（不需要对新数据集重新训练，就能得到很好的结果）性能时，研究人员发现它比那些模型要稳健得多，犯的错误要少 50%。
 
 
 #### 实时转写
@@ -2319,6 +2320,22 @@ conda create -n whisper python=3.9
 conda activate whisper
 pip install git+https://github.com/openai/whisper.git
 whisper audio.mp3 --model medium --language Chinese # ASR
+```
+
+【2023-3-2】`Whisper` 是OpenAI 在 2022 年 9 月开源的**语音转文字**模型。
+- OpenAI 现在已经通过API提供了 `V2 模型`，它提供方便的按需访问，价格为0.006美元/分钟。
+- 开发人员现在可以在 API 中使用开源的 Whisper large-v2 模型，而且速度更快，成本效益更高
+- [Introducing ChatGPT and Whisper APIs](https://openai.com/blog/introducing-chatgpt-and-whisper-apis)
+- Whisper API is available through our transcriptions (transcribes in source language) or translations (transcribes into English) endpoints, and accepts a variety of formats (`m4a`, `mp3`, `mp4`, `mpeg`, `mpga`, `wav`, `webm`)
+
+
+```py
+import openai
+
+file = open("/path/to/file/openai.mp3", "rb")
+transcription = openai.Audio.transcribe("whisper-1", f)
+
+print(transcription)
 ```
 
 #### 代码解读
