@@ -517,7 +517,7 @@ brew install python@3.10 # Mac
 
 ```
 
-#### yum 安装
+#### yum
 
 debian安装yum
 
@@ -526,12 +526,10 @@ debian安装yum
 sudo apt-get update
 sudo apt-get install build-essential
 sudo apt-get install yum
+sudo yum install python38 # [2023--3-2] 阿里云服务器上安装 python
 ```
 
-
-【2022-11-9】失效
-
-#### yum 软件包
+软件包命令
 
 ```shell
 apt install yum # 通过apt安装yum
@@ -541,16 +539,8 @@ tar xvf yum-3.2.28.tar.gz
 cd yum-3.2.28
 sudo apt install yum
 # 更新到新版
-yum check-update
-yum update
 yum -y update # 升级所有包，改变软件设置和系统设置,系统版本内核都升级
 yum -y upgrade # 升级所有包，不改变软件设置和系统设置，系统版本升级，内核不改变
-yum clean all
-```
-
-yum软件包
-
-```shell
 yum check-update # 列出所有可更新的软件清单
 yum update # 安装所有更新软件
 yum update gcc # 安装gcc更新软件
