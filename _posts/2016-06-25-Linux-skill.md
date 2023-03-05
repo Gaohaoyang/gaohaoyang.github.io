@@ -4787,9 +4787,13 @@ jupyter notebook --generate-config
 ```python
 from notebook.auth import passwd;passwd() # python2
 from IPython.lib import passwd;passwd() # python3
+# python>3.8上述方法已失效：AttributeError: module 'IPython.lib' has no attribute 'passwd'
+python -c "from notebook.auth import passwd; print(passwd())" # python 3.10
 # 输入访问密码
 # 复制生成的密文：'sha:ce.....',
 ```
+
+【2023-3-4】[jupyternotebook](https://sunie.top/archives/si-you-fu-wu-qi--si-jupyternotebook)
 
 - 修改配置文件
 
@@ -4807,6 +4811,7 @@ c.NotebookApp.port =8888 # 随便指定一个端口
 ```shell
 # 执行：
 jupyter notebook --ip=10.84.154.79 # ip可以省略
+jupyter notebook --allow-root # 允许root账户
 # 扔后台：
 nohup jupyter notebook --ip=10.84.154.79 &
 ```
