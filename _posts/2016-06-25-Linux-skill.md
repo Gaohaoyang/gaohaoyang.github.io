@@ -773,20 +773,20 @@ ssh-add ~/.ssh/id_rsa
 
 **单向**登陆的操作过程：
 - 1、登录A机器 
-- 2、ssh-keygen -t [rsa|dsa]，将会生成密钥文件和私钥文件 id_rsa,id_rsa.pub或id_dsa,id_dsa.pub
-- 3、将 .pub 文件复制到B机器的 .ssh 目录， 并 cat id_dsa.pub >> ~/.ssh/authorized_keys
+- 2、ssh-keygen -t [rsa\|dsa]，将会生成密钥文件和私钥文件 `id_rsa`, `id_rsa.pub` 或 `id_dsa`, `id_dsa.pub`
+- 3、将 `.pub` 文件复制到B机器的 `.ssh` 目录， 并 `cat id_dsa.pub >> ~/.ssh/authorized_keys`
 - 4、大功告成，从A机器登录B机器的目标账户，不再需要密码了；（直接运行 #ssh 192.168.20.60 ）
 
 **双向**登陆的操作过程：
-- 1、ssh-keygen做密码验证可以使在向对方机器上ssh ,scp不用使用密码.具体方法如下:
-- 2、两个节点都执行操作：#ssh-keygen -t rsa 
+- 1、`ssh-keygen` 做密码验证可以使在向对方机器上ssh ,scp不用使用密码.具体方法如下:
+- 2、两个节点都执行操作：# `ssh-keygen -t rsa`
   - 然后全部回车,采用默认值.
-- 3、这样生成了一对密钥，存放在用户目录的~/.ssh下。
-  - 将公钥考到对方机器的用户目录下 ，并将其复制到~/.ssh/authorized_keys中（操作命令：#cat id_dsa.pub >> ~/.ssh/authorized_keys ）。
+- 3、这样生成了一对密钥，存放在用户目录的 `~/.ssh` 下。
+  - 将公钥考到对方机器的用户目录下 ，并将其复制到 `~/.ssh/authorized_keys` 中（操作命令：# `cat id_dsa.pub >> ~/.ssh/authorized_keys` ）。
 - 4、设置文件和目录权限：
-  - 设置authorized_keys权限: chmod 600 authorized_keys 
-  - 设置.ssh目录权限: chmod 700 -R .ssh
-- 5、要保证.ssh和authorized_keys都只有用户自己有写权限。否则验证无效。（今天就是遇到这个问题，找了好久问题所在），其实仔细想想，这样做是为了不会出现系统漏洞。
+  - 设置 authorized_keys 权限: `chmod 600 authorized_keys`
+  - 设置 .ssh 目录权限: `chmod 700 -R .ssh`
+- 5、要保证 .ssh 和 `authorized_keys` 都只有用户自己有写权限。否则验证无效。（今天就是遇到这个问题，找了好久问题所在），其实仔细想想，这样做是为了不会出现系统漏洞。
 
 [ssh-keygen使用及参数详解](https://www.jianshu.com/p/807ec99cea21)
 
