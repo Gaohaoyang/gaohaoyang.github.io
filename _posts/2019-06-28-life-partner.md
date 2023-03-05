@@ -2248,7 +2248,60 @@ pua男的五大特征
 简单来说，婚姻是我们想不到更好的维持稳定之前仅有的办法。如果婚姻走向消亡，有没有其他的形式可以替代呢？
 
 
+## 爱情三因论
 
+【2023-3-5】斯腾伯格的`爱情三因论`，或 `爱情三分理论`（Sternberg trangular theory of love）, [知乎](https://zhuanlan.zhihu.com/p/373767692)
 
+`爱情三角理论`是耶鲁大学心理学系成员`罗伯特·史坦伯格`所研究的爱理论。在任职教授时，史坦伯强调了他在智力、创造力、知识、领导力、思考方式、道德推理、爱和恨方面的研究。在人际关系中，「根据三角理论，爱的三个重要组成部分为亲密元素、激情元素和义务元素。」
+
+爱的三元素如下所示：
+- `激情`（Passion）：激情可以与生理唤醒或情绪刺激相关。激情在英文中以以下三种方式定义：
+  - 对某事或做某事的强烈的热情或兴奋感。
+  - 使人以危险的方式行动的强烈感情（如愤怒）。
+  - 对某人强烈的性或浪漫的感觉
+- `亲密`（Intimacy）：亲密关系被描述为亲密和彼此依恋的感觉。它可以巩固两个个体之间存在的紧密纽带。此外亲密感有助于创造彼此安逸的感觉，因为双方在感情上是相互的。
+  - 亲密关系主要定义为个人、私人的事物或亲近。
+- `承诺`（Commitment）：与其他两个概念不同，承诺涉及有意识地决定彼此坚持。继续承诺决定主要取决于伴侣从关系中获得的满意程度。承诺在英文中以以下三种方式定义：
+  - 承诺去做某事或给予某物
+  - 承诺忠于某人或某事
+  - 非常努力地工作或支持某事的人的态度
+
+> "人所经历的爱的数量取决于这三个元素的**绝对强度**，而个人所体验爱的类型取决于他们相对于彼此的长处。" 
+
+爱的不同阶段和类型可以解释为三要素的组合；
+- 例如，随著成人浪漫恋情的发展，每个组成部分的相对重点会随着时间而变化。
+- 基于单个元素的关系的延续时间不如基于两个或三个元素的关系的延续时间长。
+
+<div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers tags lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2023-03-05T12:16:47.384Z\&quot; agent=\&quot;5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36\&quot; etag=\&quot;BTaZQKKDiJSFo0zLQYlr\&quot; version=\&quot;20.8.23\&quot;&gt;&lt;diagram id=\&quot;xdYpP7w1t2VaaceZiyqw\&quot; name=\&quot;第 1 页\&quot;&gt;7Zlhj5owGMc/TV+aUIpQXlKGLku23HZLtts7AhXYgJraO3Wffq0UFaiJiXeeZlxMDv8ttDy//svDI0BhtZnzeJl/ZiktgW2lG4A+ANuGtmPLf0rZNornTxsh40WqOx2Ex+Iv1aKl1ecipatOR8FYKYplV0xYXdNEdLSYc7budluwsjvqMs7oQHhM4nKo/ihSkTcqtr2D/pEWWd6ODF2/aanitrO+k1Uep2x9JKEIoJAzJpqjahPSUgWvjUtz3uxE635inNbinBPW8yeyCIpSfHfyef3wm/OgmjjNVV7i8lnfMIimwHeBH4LIBUEIgp1CQoBnIPIAxoBA1YQRwBrlSmzbcAm6kZMhuahKKUB5uBKc/aEhKxmXSs1q2ZMsirLsSXFZZLX8msjboVInL5SLQoIIdENVpKkahqzzQtDHZZyoMddy2UmNs+c6pepOLXV5Vgu9lKCzaxWxKFitm5sptTiRPqGdD7CR+pvJOJJhjHXY1eTo5kjSMZ9TVlHBt7KLbrV91JzSGkAvh/VhNflayo8WEtJarNdvtr/wAbE80JTNxPm38usn13ezpy/R1po8/Py18SZwSHwAkRdxnZ2M9RHco8BOfKsHVgZysVjYSXJqFewdAfehHsTVEP3ToXa6ofaHoYaeIdZvF2zbYC8HkACQnauCGcDuHXjIP8dDrwGw5xVoDQkaAb4VP2Tg5wIisVn3tAdeix90u/xMDrwqP9PjTT7AHBCgnRGJ+oz8Wn4OujF+UwM/DwS+2kKVER3gR/99enIZ8jaT1cgRfOf8xDVbdgaIt+MKASYj8ot26Sm6LeSe+Skr86PG5fIlZER+GXLcS6ze+y0EG5BPFV1lbkeRlnv7iPySjd26MeS+0eVYPsIDtcMH1lhquPT1Cd/Yxt6O38vfemCV3zHA/q7yRNRCUMshUjnezTO34TnMX4Wt1U3NDbUNeM3UHBoKSaqkEQEcKshEHoy5+av62X53P5vqWcN6CLnLIpd7rSKJ13eygap3TSebqlxDgOQuSyfXoupAdGNUTbUvo1dHqudnVM6bUZVfD78F7tqOflFF0T8=&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
+
+三个部分交互并形成不同的爱情体验。
+
+亲密、激情和承诺的组合
+
+| 类型 | 亲密	| 激情 |	承诺 |
+| --- | ---	| --- | ---	|
+| 非爱恋关系	| × | ×	| × | 	 
+| 喜欢式爱情/友情	| ✅ | ×	| × | 	
+| 迷恋式爱情	| × | ✅ 	| × | 	
+| 空洞式爱情	| × | ×	| ✅  | 	
+| 浪漫式爱情  | ✅  | ✅ 	| × | 	
+| 友伴式爱情	| ✅  | ×	| ✅  | 	
+| 愚蠢式爱情	| × | ✅ 	| ✅  | 	
+| 完美式爱情	| ✅  | ✅ 	| ✅  | 	
+
+三角形大小来表示爱慕程度——三角形越大，爱慕越多。每个角落有着自己独特的爱慕类型并提供了不同的组合来创建不同类型的爱并给予标记。三角形的形状代表了爱慕风格，在感情过程中可能会发生改变：
+- `非爱慕关系`（Non love） 缺少任意三种爱的类型。无关联。对感情冷漠。
+- `喜欢式爱情`（Liking/friendship） 主要是`亲密`、没有激情和承诺。包括友情和熟人之间的关系。
+- `迷恋式爱情`（Infatuated love） 主要是`激情`，没有亲密和承诺，也被认为是初恋、"青春期恋爱"或没有投入真心的感情。浪漫关系通常以迷恋式爱情开始，并随着时间和亲密的发展成为浪漫式爱情。没有亲密和承诺之间的发展，迷恋式爱情可能随时土崩瓦解。
+- `空洞式爱情`（Empty love） 仅有`承诺`，没有亲密与激情。更强的爱情可能会恶化为空洞式爱情。在包办婚姻中，配偶的关系可能以空洞式爱情开始并发展成为另外一种形式，指示「空洞式爱情不需要成为长期关系的终点站…但可能是它的开端」。
+- `浪漫式爱情`（Romantic love） 有`激情`和`亲密`，没有承诺。一夜情可以考虑为浪漫式爱情。
+- `友伴式爱情`（Companionate love） 有`亲密`和`承诺`，没有激情。比友情关系强烈，因为拥有可以进行长期发展的责任元素。「这种爱在激情不再的长期婚姻存在」但深度的爱恋和责任仍存在。这种爱理想上作为一种友伴式爱情在家庭成员存在着，就像是有着柏拉图式恋爱强烈友情的死党之间的感情一样。
+- `愚蠢式爱情`（Fatuous love） 有`激情`与`承诺`，没有亲密。如闪恋闪婚、一见钟情等行为。
+- `完美式爱情`（Consummate love） 完整形式的爱情，代表着人们所向往的理想关系。爱的七种变体之中，`完美式爱情`是「完美恋人」所拥有的爱情。
+  - 据史坦伯称：这些恋人在陷入爱河的15年或更久之后也会保持着好的关系。他们无法想像与其他人度过如此漫长的时光，他们齐手并肩优雅地解决了一系列困难和享受了在一起的每一分每一秒的开心时光。
+  - 然而: 维系一个完美式爱情比做起来还要更难。他强调了将爱的元素转化为实际行动的重要性。他称，「没有感情，任何伟大的爱都将逝去」。若激情随时间流逝，感情将会变成友伴式爱情。完美式爱情是成人交际中最令人开心的一种因为其组合了三角形的每一片成为了这一种爱。这是情感关系的理想体。这种情感关系可以在长期之后或电影中的理想关系呈现。
+
+史坦伯的`爱情三因论`对他之后的爱理论奠定了坚实基础——`爱即故事`。在这个理论中，他解释道很多独特和不同的爱情故事传达出了理解爱的不同方式。他相信，随着实践的发展，这种暴露将会帮助人判定爱是什么和爱应是什么。这两种理论建立了史坦伯双爱情理论。
 
 # 结束
