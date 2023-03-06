@@ -1019,6 +1019,33 @@ export PATH=$PATH:$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH
 export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
 ```
 
+### wc
+
+wc命令 统计指定文件中的字节数、字数、行数，并将统计结果显示输出
+
+```sh
+-c # 统计字节数，或--bytes：显示Bytes数。
+-l # 统计行数，或--lines：显示列数。
+-m # 统计字符数，或--chars：显示字符数。 中文
+-w # 统计字数，或--words：显示字数。单词数, 一个字被定义为由空白、跳格或换行字符分隔的字符串。
+-L # 打印最长行的长度，或--max-line-length。
+-help     # 显示帮助信息。
+--version # 显示版本信息。
+```
+
+示例
+
+```sh
+wc test.txt
+# 输出结果
+7     8     70     test.txt
+# 行数 单词数 字节数  文件名
+# ------------
+wc -m # 字符数, 中文占3个字节(utf8), m可以统计中文
+wc -l *       # 统计当前目录下的所有文件行数及总计行数。
+wc -l *.js    # 统计当前目录下的所有 .js 后缀的文件行数及总计行数。
+find  . * | xargs wc -l # 当前目录以及子目录的所有文件行数及总计行数。
+```
 
 ## linux进程
 
