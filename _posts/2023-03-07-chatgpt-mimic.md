@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  ChatGPT复现之路
-date:   2023-03-07 12:00:00
+date:   2023-03-06 12:00:00
 categories: 深度学习 自然语言处理
 tags: gpt 文本生成 ChatGPT
 excerpt: ChatGPT复现笔记
