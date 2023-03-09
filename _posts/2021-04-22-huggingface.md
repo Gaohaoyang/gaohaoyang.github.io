@@ -16,10 +16,8 @@ permalink: /huggingface
 # Huggingface
 
 ![](https://huggingface.co/front/assets/huggingface_logo-noborder.svg)
-
-![logo](https://img-blog.csdnimg.cn/20200904202104322.png)
-
-[demo](https://transformer.huggingface.co/)
+- ![logo](https://img-blog.csdnimg.cn/20200904202104322.png)
+- [demo](https://transformer.huggingface.co/)
 
 ## Hugging face 简介
 
@@ -34,6 +32,7 @@ PyTorch实现了从语言中识别情绪情感反讽的DeepMoji模型：https://
 ## Transformers 库
 
 Transformers库 [GitHub](https://github.com/huggingface/transformers)
+- [huggingface 快速上手](https://zhuanlan.zhihu.com/p/610171544)
 
 ### 介绍
 
@@ -87,15 +86,28 @@ pip install transformers[torch]
 pip install transformers[tf-cpu]
 # 或源码安装
 pip install git+https://github.com/huggingface/transformers
-
+# 指定源
+pip install transformers --trusted-host pypi.tuna.tsinghua.edu.cn
 ```
 
 测试：
 
 ```python
-python -c "from transformers import pipeline; print(pipeline('sentiment-analysis')('I hate you'))"
+import transformers
+transformers.__version__
+import pipeline
+print(pipeline('sentiment-analysis')('I hate you'))"
 ```
 
+### 库结构
+
+HuggingFace主干库：
+- Transformer模型库
+- Datasets数据集库：下载/预处理
+- Tokenizer分词库：将sequence转变为一个id序列
+
+
+## 模型
 
 ### 模型下载
 
@@ -203,19 +215,86 @@ pipeline API可以快速体验 Transformers。它将模型的预处理、后处�
 
 用 [pipeline API](https://huggingface.co/docs/transformers/v4.26.1/en/main_classes/pipelines#pipelines)，输入任务名称，默认会选择特定已经存好的模型文件，然后会进行下载并且缓存。
 
-主要有以下三个步骤被包装起来了： **preprocess** -> **fit model** -> **postprocessing**
-- 输入文本被预处理成机器可以理解的格式
-  - 将输入的文本进行分词，例如变成：words，subwords，或者symbols，这些统称为token
+#### pipeline 流程
+
+接收文本后，通常有三步：**preprocess** （Tokenizer） -> **fit model**（训练模型） -> **postprocessing** 
+- （1）输入文本被预处理成机器可以理解的格式
+  - 将输入的文本进行分词（Tokenizer）
+    - 变成：words，subwords，或者symbols，这些统称为token
   - 将每个token映射为一个integer
   - 为输入添加模型需要的特殊字符。
-- 被处理后的输入被传入模型中
-- 模型的预测结果经过后处理，得到人类可以理解的结果
+- （2）被处理后的输入被传入模型中
+- （3）模型的预测结果经过后处理，得到人类可以理解的结果
 
 ![](https://pic2.zhimg.com/v2-d9b23d02a7e5e1988ba8f902d7da9c0d_r.jpg)
 
 注意：
 - 所有的预处理阶段（Preprocessing），都要**与模型预训练阶段保持一致**，所以要从Model Hub 中下载预处理的信息。
 - 用 AutoTokenizer 的 from_pretrained 方法进行tokenizer 的加载，通过把tokenizer 的checkpoint 导入，它可以自动获取tokenizer需要的数据并进行缓存（下次无需下载）。
+
+```py
+from transformers import AutoTokenizer
+from transformers import AutoModel
+
+checkpoint = "distilbert-base-uncased-finetuned-sst-2-english"
+tokenizer = AutoTokenizer.from_pretrained(checkpoint) # 加载分词器
+model = AutoModel.from_pretrained(checkpoint) # 加载模型
+
+raw_inputs = [
+    "I've been waiting for a HuggingFace course my whole life.",
+    "I hate this so much!",
+]
+# ----- 文本id化 -----
+# 指定返回的张量类型（PyTorch、TensorFlow 或普通 NumPy），用 return_tensors 参数
+inputs = tokenizer(raw_inputs, padding=True, truncation=True, return_tensors="pt")
+print(inputs) # 返回一个包含两个键的字典，input_ids和attention_mask
+# ----- 模型 ------
+outputs = model(**inputs)
+print(outputs.last_hidden_state.shape)
+# 输出 torch.Size([2, 16, 768])
+
+```
+
+返回
+
+```
+{
+    'input_ids': tensor([
+        [  101,  1045,  1005,  2310,  2042,  3403,  2005,  1037, 17662, 12172, 2607,  2026,  2878,  2166,  1012,   102],
+        [  101,  1045,  5223,  2023,  2061,  2172,   999,   102,     0,     0,     0,     0,     0,     0,     0,     0]
+    ]), 
+    'attention_mask': tensor([
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    ])
+}
+```
+
+![](https://pic3.zhimg.com/80/v2-f51f9dae359ec191229b35028d0897ca_1440w.webp)
+
+Transformers 中有许多不同的架构可用，每一种架构都围绕着处理特定任务而设计，清单：
+* Model (retrieve the hidden states)
+* ForCausalLM
+* ForMaskedLM
+* ForMultipleChoice
+* ForQuestionAnswering
+* ForSequenceClassification
+* ForTokenClassification
+* and others
+
+3）Post-Processing
+- 模型最后一层输出的原始非标准化分数。要转换为概率，它们需要经过一个SoftMax层（所有 Transformers 模型都输出 logits，因为用于训练的损耗函数一般会将最后的激活函数(如SoftMax)与实际损耗函数(如交叉熵)融合 
+
+```py
+import torch
+
+predictions = torch.nn.functional.softmax(outputs.logits, dim=-1)
+print(predictions)
+```
+
+
+
+#### pipeline 任务
 
 目前支持的pipeline 如下：
 - feature-extraction (get the vector representation of a text) 特征抽取
@@ -247,6 +326,21 @@ pipeline API可以快速体验 Transformers。它将模型的预处理、后处�
 - ZeroShotClassificationPipeline
 
 所有的API都可以通过 搜索，并且在线测试
+
+#### 任务模型
+
+主要的模型：
+- 自回归：GPT2、Transformer-XL、XLNet
+- 自编码：BERT、ALBERT、RoBERTa、ELECTRA
+- Seq2Seq：BART、Pegasus、T5
+
+各种任务的代表模型
+
+| Model	 | Examples	| Tasks |
+|---|---|---|
+| Encoder 编码器模型 | ALBERT, BERT, DistilBERT, ELECTRA, RoBERTa	| Sentence classification, named entity recognition, extractive question answering <br>适合需要理解完整句子的任务，例如句子分类、命名实体识别（以及更一般的单词分类）和提取式问答 |
+| Decoder 解码器模型 | CTRL, GPT, GPT-2, Transformer XL	| Text generation <br>解码器模型的预训练通常围绕预测句子中的下一个单词。这些模型最适合涉及文本生成的任务 |
+| Encoder-decoder 序列到序列模型 | BART, T5, Marian, mBART | Summarization, translation, generative question answering <br>序列到序列模型最适合围绕根据给定输入生成新句子的任务，例如摘要、翻译或生成式问答。|
 
 #### Text classification
 
