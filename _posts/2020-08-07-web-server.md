@@ -6630,6 +6630,76 @@ if __name__ == "__main__":
 
 【2022-12-15】GitHub 上的开源 Python 全栈开发框架：[Pynecone](github.com/pynecone-io/pynecone)
 
+#### Gradio 
+
+Gradio web demo
+- DEMO [examples](https://gradio.app/demos/) 
+
+```sh
+pip install gradio # 安装
+```
+
+接 OpenAI 接口 实现 ChatGPT
+
+```py
+import gradio as gr
+import openai
+
+openai.api_key = "sk-**"
+
+def question_answer(role, question):
+    if not question:
+        return "输入为空..."
+    completion = openai.ChatCompletion.create(
+      model="gpt-3.5-turbo", 
+      messages=[{
+          "role": "user", #  role (either “system”, “user”, or “assistant”) 
+          "content": question}
+      ]
+    )
+    # 返回信息
+    return (completion['choices'][0]['message']['role'], completion['choices'][0]['message']['content'])
+
+gr.Interface(fn=question_answer, 
+    # inputs=["text"], outputs=['text', "textbox"], # 简易用法
+    inputs=[gr.components.Dropdown(label="Role", placeholder="user", choices=['system', 'user', 'assistant']),
+        gr.inputs.Textbox(lines=5, label="Input Text", placeholder="问题/提示语(prompt)...")
+    ],
+    outputs=[gr.outputs.Textbox(label="Role"), gr.outputs.Textbox(label="Generated Text")],
+    # ["highlight", "json", "html"], # 定制返回结果格式，3种输出分别用3种形式展示
+    examples=[['你是谁？'], ['帮我算个数，六乘5是多少']],
+    cache_examples=True, # 缓存历史案例
+    title="ChatGPT Demo",
+    description="A simplified version of DEMO [examples](https://gradio.app/demos/) "
+).launch(share=True) # 启动 临时分享模式
+#).launch() # 仅本地访问
+```
+
+通过request请求实现QA
+
+```py
+import gradio as gr
+import requests
+
+def question_answer(question):
+    data = {"prompt": "默认: 北京朝阳区值得买吗？","max_new_tokens": 512}
+    if question:
+        data['prompt'] = question
+    url = 'http://10.135.177.134:9429/generation'
+    r = requests.post(url, json=data)
+    return json.loads(r.text)['text']
+
+gr.Interface(fn=question_answer, inputs=["text"], outputs=["textbox"],
+	examples=[['小区一周之内发生两次跳楼事件，刚交了三个月房租我是租还是搬走呢？'],
+              ['出租出去的房屋家电坏了，应该谁负责出维修费用？'],
+              ['女方婚前父母出资买房，登记在女方名下，父母还贷，婚后怎么划分？'],
+              ['退租房东不还押金怎么办？'],['小区环境太差，可以找物业吗'],
+    ]
+	).launch(share=True)
+	#).launch()
+  ```
+
+
 #### streamlit
 
 【2021-12-8】[详解一个Python库，用于构建精美数据可视化web app](https://www.toutiao.com/i7039182714125353479/). Python 库 Streamlit，它可以为机器学习和数据分析构建 web app。它的优势是入门容易、纯 Python 编码、开发效率高、UI精美。

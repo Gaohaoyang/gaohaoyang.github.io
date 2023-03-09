@@ -500,6 +500,36 @@ translator("Ce cours est produit par Hugging Face.")
 [{'translation_text': 'This course is produced by Hugging Face.'}]
 ```
 
+### generate
+
+文本生成方法 generate 
+
+Each framework has a generate method for text generation implemented in their respective GenerationMixin class:
+- PyTorch `generate`() is implemented in `GenerationMixin`.
+- TensorFlow `generate`() is implemented in `TFGenerationMixin`.
+- Flax/JAX `generate`() is implemented in `FlaxGenerationMixin`.
+
+Regardless of your framework of choice, you can parameterize the generate method with a GenerationConfig class instance. Please refer to this class for the complete list of generation parameters, which control the behavior of the generation method.
+
+<div class="mermaid">
+    flowchart LR
+    %% 节点颜色
+    classDef red fill:#f02;
+    classDef green fill:#5CF77B;
+    classDef blue fill:#6BE0F7;
+    classDef orange fill:#F7CF6B;
+    classDef grass fill:#C8D64B;
+    %%节点关系定义
+    A(GenerationMixin):::green -.->|PyTorch|M(generate方法):::orange
+    B(TFGenerationMixin):::green -.->|TensorFlow|M
+    C(FlaxGenerationMixin):::green -.->|Flax/JAX|M
+    G(GernarationConfig):::blue -.->|read|M
+    M-->O(自定义生成代码):::grass
+</div>
+
+
+参数说明：[text_generation](https://huggingface.co/docs/transformers/main_classes/text_generation)
+
 ### Demo发布（space）
 
 【2022-10-8】[Spaces](https://huggingface.co/spaces) ：Discover amazing ML apps made by the community! 展示各种DEMO
