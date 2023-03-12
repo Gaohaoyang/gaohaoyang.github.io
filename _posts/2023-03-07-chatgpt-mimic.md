@@ -921,7 +921,6 @@ Because training step 1 is a simple supervised finetune progress as many other m
     - torchrun --standalone --nproc_per_node=2 train_dummy.py --strategy colossalai_zero2
   - `train_dummy.py`: 
     - 步骤：<span style='color:blue'>策略参数 → 初始模型/奖励模型 → 优化器 → 分词器 → 策略封装 → 训练器(PPOTrainer) → 随机prompts → 开始训练 → 保存现场（模型+优化器）</span>
-    - 
     - torch 工具包
     - torch.\[optim\] 优化器: **Adam**
     - transformers 工具包
@@ -949,6 +948,10 @@ Because training step 1 is a simple supervised finetune progress as many other m
   - train_reward_model.py
 - (4) `inference.py` 推理: 选择模型(gpt2默认,bloom,opt)，指定版本 pretrain, 自定义文本长度 max_length
   - python inference.py --model='bloom' --max_length=1000 --pretrain='bigscience/bloomz-1b7'
+
+
+问题
+- 【2023-3-10】train_prompts.py 不含 reward model 加载，详见：[Load the reward model in Stage 3 training script of ChatGPT](https://github.com/hpcaitech/ColossalAI/issues/3011)
 
 
 ### Meta: LLaMA （大羊驼）
