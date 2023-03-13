@@ -1160,6 +1160,15 @@ huggingface
 - [GPT-NeoXT-Chat-Base-20B](https://huggingface.co/togethercomputer/GPT-NeoXT-Chat-Base-20B)
 
 
+### ChatRWKV
+
+【2023-3-13】[开源1.5/3/7B中文小说模型：显存3G就能跑7B模型，几行代码即可调用](https://zhuanlan.zhihu.com/p/609154637)
+- 1.5/3/7B中文小说模型，可以开源下载
+- 纯 RNN 实现
+
+[ChatRWKV](https://github.com/BlinkDL/ChatRWKV) is like ChatGPT but powered by RWKV (100% RNN) language model, and open source.
+- [RWKV-CHN](https://modelscope.cn/studios/BlinkDL/RWKV-CHN/summary) 在线体验
+
 ### FlexGen 加速
 
 【2023-2-22】[跑ChatGPT体量模型，从此只需一块GPU：加速百倍的方法来了](https://zhuanlan.zhihu.com/p/608513900)
