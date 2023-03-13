@@ -968,6 +968,10 @@ Because training step 1 is a simple supervised finetune progress as many other m
 - 目前LLaMA还没有在Meta旗下包括脸书和Instagram在内的产品中使用。该公司计划将这项技术提供给人工智能研究人员。Meta之前推出了一个名为OPT-175B的大型语言模型，但LLaMA是一个更新、更先进的系统。去年年底，Meta发布了另一款名为Galactica的模型，但因经常分享偏见和不准确的信息而遭到下架。
 - 参数量从 70 亿到 650 亿不等。这些模型的性能非常优异：具有 130 亿参数的 LLaMA 模型「在大多数基准上」可以胜过 GPT-3（ 参数量达 1750 亿），而且可以在**单块 V100 GPU** 上运行；而最大的 650 亿参数的 LLaMA 模型可以媲美谷歌的 Chinchilla-70B 和 PaLM-540B。
 
+【2023-3-13】[测试了下llama的效果](https://zhuanlan.zhihu.com/p/613419608)
+- Meta半开源的llama，也看了下国内大佬开源的[RWKV](https://github.com/BlinkDL/ChatRWKV)
+
+
 ### LAION：Open Assistant
 
 【2023-2-25】[Open Assistant 全流程训练细节（GPT3+RL）](https://zhuanlan.zhihu.com/p/609003237)
@@ -1122,6 +1126,38 @@ python trainer_rl.py --configs defaults_rlhf --cache_dir $DATA_PATH --rank_model
 ```
 
 经过上面三步整个训练流程就完全搞定啦！
+
+
+### OpenChatKit
+
+【2023-3-10】[ChatGPT开源替代来了！参数量200亿，在4300万条指令上微调而成](https://www.toutiao.com/article/7209917291104862731)，[Announcing OpenChatKit](https://www.together.xyz/blog/openchatkit)
+
+[OpenChatKit](https://github.com/togethercomputer/OpenChatKit) 是一个类 ChatGPT 开源工具包，内含一个 20B 参数量的大模型，而且该模型在 **4300万**条指令上进行了微调。
+- EleutherAI 开源 AI 研究团队一直在贡献开源大模型成果。
+- 2020 年 7 月成立以来，该团队先后开源了基于 GPT-3 的、包含 60 亿参数的 NLP 模型 `GPT-J`，类 GPT 的27 亿参数模型 `GPT-Neo`，以及 200 亿参数的`GPT-NeoX-20B`。最终目标是将开源模型的参数规模扩展到 1700 亿左右，就像 GPT-3 一样。
+- Together 组织基于 EleutherAI 开源的 GPT-Neo 和 GPT-J 构建了一个新的类 ChatGPT 开源项目 —— `OpenChatKit` 。
+
+[OpenChatKit](https://github.com/togethercomputer/OpenChatKit) 
+- 参数量达 20B 的开源模型，该模型基于 EleutherAI 的 GPT-NeoX-20B，在 4300 万条指令上进行了微调；
+- 参数量达 60 亿的**审核模型**（moderation model），可以帮模型过滤不当内容；
+- 可扩展的检索系统，可以帮模型检索维基百科等资源库，从而给出最新信息。
+- 重点放在几个任务上，如多轮对话、问答、分类、提取和总结。他们用 4300 万条高质量指令对模型进行了微调，并与 LAION 和 Ontocord 合作，创建了该模型所基于的 [OIG-43M 数据集](https://laion.ai/blog/oig-dataset)。
+
+OpenChatKit 有几个任务开箱即用：
+- 1、将一份长的文件总结成一句话，并回答与该文件相关的问题，问答可进行多轮；
+- 2、从非结构化文件中提取结构化信息，如下图所示；
+- 3、将一个句子或段落分为不同的类别（比如情绪是积极还是消极）。
+
+OpenChatKit 短板：
+- 基于知识的封闭式问答。该聊天机器人可能会给出不正确的结果，需要用户提供反馈；
+- 代码相关任务。由于训练数据中没有足够多的代码，因此该聊天机器人在代码方面表现欠佳；
+- 重复性。该聊天机器人有时会重复自己的回答，用户可以点击刷新，开始新的对话；
+- 上下文切换。该聊天机器人不太擅长转换话题。
+- 创意写作和较长的答案。该聊天机器人不会生成长的、有创意的文本，如论文或故事。
+
+huggingface 
+- [测试链接](https://huggingface.co/spaces/togethercomputer/OpenChatKit)
+- [GPT-NeoXT-Chat-Base-20B](https://huggingface.co/togethercomputer/GPT-NeoXT-Chat-Base-20B)
 
 
 ### FlexGen 加速
