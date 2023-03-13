@@ -969,6 +969,7 @@ Because training step 1 is a simple supervised finetune progress as many other m
 - 参数量从 70 亿到 650 亿不等。这些模型的性能非常优异：具有 130 亿参数的 LLaMA 模型「在大多数基准上」可以胜过 GPT-3（ 参数量达 1750 亿），而且可以在**单块 V100 GPU** 上运行；而最大的 650 亿参数的 LLaMA 模型可以媲美谷歌的 Chinchilla-70B 和 PaLM-540B。
 
 【2023-3-13】[测试了下llama的效果](https://zhuanlan.zhihu.com/p/613419608)
+- llama [huggingface 体验](https://huggingface.co/decapoda-research/llama-7b-hf)
 - Meta半开源的llama，也看了下国内大佬开源的[RWKV](https://github.com/BlinkDL/ChatRWKV)
 
 
