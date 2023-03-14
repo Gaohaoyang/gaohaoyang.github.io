@@ -49,9 +49,9 @@ mathjax: true
 
 光锥之外的事你无力掌控，甚至无力发现，你只有接收光锥之内传进来的信息，怎么应对是你的事，但传进来什么都是命运的安排....
 
-【2022-10-25】[为什么光锥之内皆是命运？](https://www.toutiao.com/video/7157937613758792200), [B站](https://www.bilibili.com/video/BV1nW4y1n79a)
+【2022-10-25】[为什么光锥之内皆是命运？](https://www.toutiao.com/video/7157937613758792200), B站: [【中英双语】为什么时间和空间在黑洞中互换](https://www.bilibili.com/video/BV14341157hE), [中文解说](https://www.bilibili.com/video/BV1nW4y1n79a)
 - <iframe src="//player.bilibili.com/player.html?aid=943735164&bvid=BV1nW4y1n79a&cid=850902324&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
-- 英文原版：[【中英双语】为什么时间和空间在黑洞中互换](https://www.bilibili.com/video/BV14341157hE)
+- <iframe src="//player.bilibili.com/player.html?aid=424533949&bvid=BV14341157hE&cid=544951856&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 - <iframe src="//player.bilibili.com/player.html?aid=424533949&bvid=BV14341157hE&cid=544951856&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 ## 相对论发现过程
