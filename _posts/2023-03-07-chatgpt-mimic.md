@@ -858,11 +858,30 @@ main_dir="ColossalAI/applications/ChatGPT"
 ```sh
 cd ColossalAI/applications/ChatGPT/examples
 sh train_dummy.sh 
+```
+
+#### 问题集锦
+
+汇总踩过的坑儿
+
+错误① : cuda库相关问题, `symbol cublasLtGetStatusString version libcublasLt.so.11 not defined` bug → pytorch+cuda版本不匹配问题
+
+```sh
 # 错误①: cuda库相关问题, symbol cublasLtGetStatusString version libcublasLt.so.11 not defined bug → pytorch+cuda版本不匹配问题
 conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.3 -c pytorch
+```
+
+错误② : `ModuleNotFoundError: No module named 'chardet'` → 缺失包
+
+```sh
 # 错误②: ModuleNotFoundError: No module named 'chardet' → 缺失包
 pip install chardet
-# 错误③ : RuntimeError: CUDA error: invalid device ordinal, issue: https://github.com/hpcaitech/ColossalAI/issues/2439
+```
+
+错误③ : `RuntimeError: CUDA error: invalid device ordinal`, [issue](https://github.com/hpcaitech/ColossalAI/issues/2439)
+
+```sh
+# 错误③ : RuntimeError: CUDA error: invalid device ordinal
 # 解法：只有1个GPU，需要更改 train_dummy.sh 默认配置 nproc_per_node=1
 torchrun --standalone --nproc_per_node=2 train_dummy.py --strategy colossalai_zero2
 # ------ 检测GPU集群总体信息 -------
@@ -874,6 +893,12 @@ nvidia-smi --query-gpu=index,name,uuid,serial --format=csv
 # 0, Tesla K40m, GPU-d0e093a0-c3b3-f458-5a55-6eb69fxxxxxx, 0323913xxxxxx
 # 1, Tesla K40m, GPU-d105b085-7239-3871-43ef-975ecaxxxxxx, 0324214xxxxxx
 ```
+
+错误④ : `No module named 'chatgpt.nn'`, [issue](https://github.com/hpcaitech/ColossalAI/issues/2810)
+- 原因A: 没有执行 `pip install .`, chatgpt并未真正安装
+- 原因B: colossal ai新版调整了目录结构, `chatgpt.nn` has been modified as `chatgpt.models`, 【2023-3-14】
+
+#### LoRA
 
 LoRA 是 Parameter Efficient 的方法之一。
 - 过度参数化的模型其实是位于一个低的**内在维度**上，所以作者假设在模型适应过程中的权重变化也具有较低的“内在等级”。
