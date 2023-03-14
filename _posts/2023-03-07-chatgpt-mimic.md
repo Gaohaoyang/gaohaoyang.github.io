@@ -684,7 +684,7 @@ ChatGPT之争已经超出了算法的范畴，它更是一个AI+云计算能力�
 
 谷歌唯一剩下的步骤是通过人类反馈使这个 LLM 与对话场景对齐（alignment）。如果他们很快发布类似 ChatGPT 的或者更好的聊天机器人，我不会感到惊讶 —— 尽管他们最近 “失败” 地展示了一版可能基于 LaMDA 的 Bard。
 
-## 案例
+## 复现案例
 
 ### 小冰链
 
@@ -954,7 +954,7 @@ Because training step 1 is a simple supervised finetune progress as many other m
 - 【2023-3-10】train_prompts.py 不含 reward model 加载，详见：[Load the reward model in Stage 3 training script of ChatGPT](https://github.com/hpcaitech/ColossalAI/issues/3011)
 
 
-### Meta: LLaMA （大羊驼）
+### Meta: LLaMA （羊驼）
 
 【Meta推出名为“LLaMA”的AI大型语言模型 与谷歌和微软竞争】
 - 【2023-2-25】Meta Platforms推出了一款用于构建人工智能(AL)聊天机器人和其他产品的研究工具，试图在一个最近主要由竞争对手谷歌和微软主导的领域为自己的技术造势。这款名为 LLaMA 的工具是Meta在大型语言模型领域的最新作品。
@@ -973,18 +973,31 @@ Because training step 1 is a simple supervised finetune progress as many other m
 - llama [huggingface 体验](https://huggingface.co/decapoda-research/llama-7b-hf)
 - Meta半开源的llama，也看了下国内大佬开源的[RWKV](https://github.com/BlinkDL/ChatRWKV)
 
-【2023-3-14】[Alpaca: A Strong Open-Source Instruction-Following Model](https://crfm.stanford.edu/2023/03/13/alpaca.html) 斯坦福微调了 7B LLaMA 模型，只用了 52K 的数据，达到了和达芬奇003类似的效果，并且可以跑在消费级设备上，比如树莓派。
+一位研究人员利用Meta泄露的LLaMA，创建了一个完全不受限制的「BasedGPT」聊天机器人。Discord上的这个聊天机器人经常会做出极端且愚蠢的回答。没有ChatGPT那么好，这是肯定的，但话说回来，它使用的计算能力少了1000倍。[参考](https://www.toutiao.com/article/7209928157732864552)
+
+### 斯坦福 Aplaca（基于LLaMA）
+
+【2023-3-14】[Alpaca: A Strong Open-Source Instruction-Following Model](https://crfm.stanford.edu/2023/03/13/alpaca.html) 斯坦福微调了 7B LLaMA 模型，只用了 52K 的数据，达到了和达芬奇003类似的效果，并且可以跑在消费级设备上，比如树莓派。[参考](https://www.toutiao.com/article/7210260080690889275)
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/f86ae0e26c1a4f36b41850ef19f059e3~noop.image?_iz=58558&from=article.pc_detail&x-expires=1679383800&x-signature=RYAjEKgrdJXvzVLRLPzQSsbQw2E%3D)
 - [Web Demo](https://crfm.stanford.edu/alpaca/), [GitHub](https://github.com/tatsu-lab/stanford_alpaca)
 - We emphasize that Alpaca is intended only for academic research and any commercial use is prohibited. 
 - ![](https://crfm.stanford.edu/static/img/posts/2023-03-13-alpaca/alpaca_main.jpg)
-- [self-instruct](https://github.com/yizhongw/self-instruct): [Self-Instruct: Aligning LM with Self Generated Instructions](https://arxiv.org/abs/2212.10560)
-  - ![](https://github.com/yizhongw/self-instruct/raw/main/docs/pipeline.JPG)
-  - 175个人工种子集，覆盖二分类、生成任务，然后，调用gpt-3模型生成指令、指令回答
-  - code : [generate_instruction.py](https://github.com/tatsu-lab/stanford_alpaca/blob/main/generate_instruction.py)
+
 - We performed a **blind pairwise comparison** between `text-davinci-003` and `Alpaca 7B`, and we found that these two models have very similar performance: `Alpaca` wins 90 versus 89 comparisons against `text-davinci-003`.
 - ![](https://crfm.stanford.edu/static/img/posts/2023-03-13-alpaca/alpaca_right_email.png)
 
-一位研究人员利用Meta泄露的LLaMA，创建了一个完全不受限制的「BasedGPT」聊天机器人。Discord上的这个聊天机器人经常会做出极端且愚蠢的回答。没有ChatGPT那么好，这是肯定的，但话说回来，它使用的计算能力少了1000倍。[参考](https://www.toutiao.com/article/7209928157732864552)
+#### self-instruct
+
+[self-instruct](https://github.com/yizhongw/self-instruct): [Self-Instruct: Aligning LM with Self Generated Instructions](https://arxiv.org/abs/2212.10560)
+- 斯坦福团队微调LLaMA的方法，来自华盛顿大学Yizhong Wang等去年底提出的Self-Instruct
+- ![](https://github.com/yizhongw/self-instruct/raw/main/docs/pipeline.JPG)
+- 175个人工种子集，覆盖二分类、生成任务，然后，调用gpt-3模型生成指令、指令回答
+- 以175个问题作为种子任务，让AI自己从中组合出新的问题以及生成配套答案实例，人工过滤掉低质量的，再把新任务添加到任务池里。所有这些任务，之后可以采用InstructGPT的方法让AI学会如何遵循人类指令。
+- 斯坦福版Alpaca花了不到500美元使用OpenAI API生成了5.2万个这样的示例搞出来的。
+- code : [generate_instruction.py](https://github.com/tatsu-lab/stanford_alpaca/blob/main/generate_instruction.py)
+
+
+
 
 ### LAION：Open Assistant
 
