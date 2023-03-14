@@ -969,9 +969,22 @@ Because training step 1 is a simple supervised finetune progress as many other m
 - 参数量从 70 亿到 650 亿不等。这些模型的性能非常优异：具有 130 亿参数的 LLaMA 模型「在大多数基准上」可以胜过 GPT-3（ 参数量达 1750 亿），而且可以在**单块 V100 GPU** 上运行；而最大的 650 亿参数的 LLaMA 模型可以媲美谷歌的 Chinchilla-70B 和 PaLM-540B。
 
 【2023-3-13】[测试了下llama的效果](https://zhuanlan.zhihu.com/p/613419608)
+- [LLaMA Implementation](https://github.com/huggingface/transformers/pull/21955), LLaMA 的 huggingface 实现
 - llama [huggingface 体验](https://huggingface.co/decapoda-research/llama-7b-hf)
 - Meta半开源的llama，也看了下国内大佬开源的[RWKV](https://github.com/BlinkDL/ChatRWKV)
 
+【2023-3-14】[Alpaca: A Strong Open-Source Instruction-Following Model](https://crfm.stanford.edu/2023/03/13/alpaca.html) 斯坦福微调了 7B LLaMA 模型，只用了 52K 的数据，达到了和达芬奇003类似的效果，并且可以跑在消费级设备上，比如树莓派。
+- [Web Demo](https://crfm.stanford.edu/alpaca/), [GitHub](https://github.com/tatsu-lab/stanford_alpaca)
+- We emphasize that Alpaca is intended only for academic research and any commercial use is prohibited. 
+- ![](https://crfm.stanford.edu/static/img/posts/2023-03-13-alpaca/alpaca_main.jpg)
+- [self-instruct](https://github.com/yizhongw/self-instruct): [Self-Instruct: Aligning LM with Self Generated Instructions](https://arxiv.org/abs/2212.10560)
+  - ![](https://github.com/yizhongw/self-instruct/raw/main/docs/pipeline.JPG)
+  - 175个人工种子集，覆盖二分类、生成任务，然后，调用gpt-3模型生成指令、指令回答
+  - code : [generate_instruction.py](https://github.com/tatsu-lab/stanford_alpaca/blob/main/generate_instruction.py)
+- We performed a **blind pairwise comparison** between `text-davinci-003` and `Alpaca 7B`, and we found that these two models have very similar performance: `Alpaca` wins 90 versus 89 comparisons against `text-davinci-003`.
+- ![](https://crfm.stanford.edu/static/img/posts/2023-03-13-alpaca/alpaca_right_email.png)
+
+一位研究人员利用Meta泄露的LLaMA，创建了一个完全不受限制的「BasedGPT」聊天机器人。Discord上的这个聊天机器人经常会做出极端且愚蠢的回答。没有ChatGPT那么好，这是肯定的，但话说回来，它使用的计算能力少了1000倍。[参考](https://www.toutiao.com/article/7209928157732864552)
 
 ### LAION：Open Assistant
 
