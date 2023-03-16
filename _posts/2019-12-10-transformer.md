@@ -316,10 +316,40 @@ Attention各种变形
 ### seq2seq实现
 
 TensorFlow版本：[直观理解并使用Tensorflow实现Seq2Seq模型的注意机制](https://www.toutiao.com/i6846902952590836235/), 在Tensorflow中实现、训练和测试一个英语到印地语机器翻译模型
+- ![](https://pic1.zhimg.com/80/v2-764d1b38f73ce3944c69f50197ca7ca4_1440w.webp)
 
 资料：
 - [Sequence to sequence Architecture with Attention](https://arxiv.org/abs/1409.0473)
 - Google神经机器翻译[官方讲解](https://www.tensorflow.org/tutorials/text/nmtwithattention)
+
+```py
+import tensorflow as tf
+
+class Seq2seq(object):
+    def __init__(self, config, w2i_target):
+        self.seq_inputs = tf.placeholder(shape=(config.batch_size, None), dtype=tf.int32, name='seq_inputs')
+	self.seq_inputs_length = tf.placeholder(shape=(config.batch_size,), dtype=tf.int32, name='seq_inputs_length')
+	self.seq_targets = tf.placeholder(shape=(config.batch_size, None), dtype=tf.int32, name='seq_targets')
+	self.seq_targets_length = tf.placeholder(shape=(config.batch_size,), dtype=tf.int32, name='seq_targets_length')
+        
+	with tf.variable_scope("encoder"):
+		encoder_embedding = tf.Variable(tf.random_uniform([config.source_vocab_size, config.embedding_dim]), dtype=tf.float32, name='encoder_embedding')
+		encoder_inputs_embedded = tf.nn.embedding_lookup(encoder_embedding, self.seq_inputs)
+		encoder_cell = tf.nn.rnn_cell.GRUCell(config.hidden_dim)
+		encoder_outputs, encoder_state = tf.nn.dynamic_rnn(cell=encoder_cell, inputs=encoder_inputs_embedded, sequence_length=self.seq_inputs_length, dtype=tf.float32, time_major=False)
+	
+	tokens_go = tf.ones([config.batch_size], dtype=tf.int32) * w2i_target["_GO"]
+	decoder_inputs = tf.concat([tf.reshape(tokens_go,[-1,1]), self.seq_targets[:,:-1]], 1)
+
+	with tf.variable_scope("decoder"):
+		decoder_embedding = tf.Variable(tf.random_uniform([config.target_vocab_size, config.embedding_dim]), dtype=tf.float32, name='decoder_embedding')
+		decoder_inputs_embedded = tf.nn.embedding_lookup(decoder_embedding, decoder_inputs)
+		decoder_cell = tf.nn.rnn_cell.GRUCell(config.hidden_dim)
+		decoder_outputs, decoder_state = tf.nn.dynamic_rnn(cell=decoder_cell, inputs=decoder_inputs_embedded, initial_state=encoder_state, sequence_length=self.seq_targets_length, dtype=tf.float32, time_major=False)
+
+	decoder_logits = tf.layers.dense(decoder_outputs.rnn_output, config.target_vocab_size)
+	self.out = tf.argmax(decoder_logits, 2)
+```
 
 
 #### 数据读入及预处理
@@ -665,22 +695,48 @@ NVidia K80 GPU Kaggle，在上面的代码。100个epoch，需要70分钟的训�
 
 ### Seq2Seq的优化技巧
 
+【2023-3-16】[Tensorflow中的Seq2Seq全家桶](https://zhuanlan.zhihu.com/p/47929039)
+
 #### 1、Teacher Forcing
 
-Teacher Forcing 用于训练阶段，预测过程是都是一样的。
+Teacher Forcing 用于**训练**阶段，预测过程是都是一样的。
 
 训练时：如果不使用 Teacher Forcing，输入包括了上一个神经元的输出 **y'**。如果上一个神经元的输出是错误的，则下一个神经元的输出也很容易错误，导致错误会一直传递下去。
 - ![img](https://gitee.com/summerrat/images/raw/master/img/20030902-a7cf394b2d40a052.png)
 
 使用 Teacher Forcing，神经元直接使用正确的输出作为当前神经元的输入。
 - ![img](https://gitee.com/summerrat/images/raw/master/img/20030902-1ed6e410da784c5e.png)
+- ![img](https://pic1.zhimg.com/80/v2-162d4ff280e1261544de57920eeab6e0_1440w.webp)
+
+好处：
+- 防止上一时刻的错误传到此刻，decode 出一个序列，要是第一个单词错了，整个序列就跑偏了，计算 loss 更新参数作用都很小了。用 Teacher Forcing 可以**阻断错误积累，斧正模型训练，加快参数收敛**
+- 提前把 decoder 的整个输入序列提前准备好，直接放到 dynamic_rnn 函数就能出结果，实现起来简单方便
+
+但带来的问题：
+- 到了测试阶段，不能用 Teacher Forcing，因为测试阶段看不到期望的输出序列，所以必须等着上一时刻输出一个单词，下一时刻才能确定该输入什么。不能提前把整个 decoder 的输入序列准备好，也就不能用 dynamic_rnn 函数了
+
+怎么办？
+- 用 raw_rnn 函数，手动补充 loop_fn 循环，手动去写在 decoder rnn 的每一个时间片上，先把上一个时间片的输出向量映射到词表上，再找出概率最大的词，再用 embedding 矩阵映射成向量成为这一时刻的输入，还要判断这个序列是否结束了，结束了还要拿“_PAD”作为输入……
+
+```py
+tokens_go = tf.ones([config.batch_size], dtype=tf.int32) * w2i_target["_GO"]
+decoder_embedding = tf.Variable(tf.random_uniform([config.target_vocab_size, config.embedding_dim]), dtype=tf.float32, name='decoder_embedding')
+decoder_cell = tf.nn.rnn_cell.GRUCell(config.hidden_dim)
+if useTeacherForcing:
+	decoder_inputs = tf.concat([tf.reshape(tokens_go,[-1,1]), self.seq_targets[:,:-1]], 1)
+	helper =tf.contrib.seq2seq.TrainingHelper(tf.nn.embedding_lookup(decoder_embedding, decoder_inputs), self.seq_targets_length)
+else:
+	helper = tf.contrib.seq2seq.GreedyEmbeddingHelper(decoder_embedding, tokens_go, w2i_target["_EOS"])
+decoder = tf.contrib.seq2seq.BasicDecoder(decoder_cell, helper, encoder_state, output_layer=tf.layers.Dense(config.target_vocab_size))
+decoder_outputs, decoder_state, final_sequence_lengths = tf.contrib.seq2seq.dynamic_decode(decoder, maximum_iterations=tf.reduce_max(self.seq_targets_length))
+```
 
 #### 2、Attention
 
-- 上面的Seq2Seq 模型中，**Encoder** 总是将源句子的所有信息编码到一个固定长度的上下文向量 **c** 中，然后在 **Decoder** 解码的过程中向量 **c** 都是不变的。这存在着不少缺陷：
-  - 对于比较长的句子，很难用一个定长的向量 **c** 完全表示其意义。
-  - RNN 存在长序列梯度消失的问题，只使用最后一个神经元得到的向量 **c** 效果不理想。
-  - 人在阅读文章的时候，会把注意力放在当前的句子上，这种结构没有利用这点。
+Seq2Seq 模型中，**Encoder** 总是将源句子的所有信息编码到一个固定长度的上下文向量 **c** 中，然后在 **Decoder** 解码的过程中向量 **c** 都是不变的。这存在着不少缺陷：
+- 对于比较长的句子，很难用一个定长的向量 **c** 完全表示其意义。
+- RNN 存在长序列梯度消失的问题，只使用最后一个神经元得到的向量 **c** 效果不理想。
+- 人在阅读文章的时候，会把注意力放在当前的句子上，这种结构没有利用这点。
 - 引入attention 机制，就是一种将模型的注意力放在当前翻译单词上的一种机制。
   - 例如翻译 "I have a cat"，翻译到 "我" 时，要将注意力放在源句子的 "I" 上，翻译到 "猫" 时要将注意力放在源句子的 "cat" 上。
 
@@ -688,6 +744,7 @@ Teacher Forcing 用于训练阶段，预测过程是都是一样的。
 - **Decoder** 的输入就不是固定的上下文向量 **c** 了
 - 而是会根据当前翻译的信息，计算当前的 **c**
 - ![img](https://gitee.com/summerrat/images/raw/master/img/20030902-3caa6122e9b613c5.png)
+- ![](https://pic4.zhimg.com/80/v2-53f94cc778e2dcbb4deb948c5d1a8a1b_1440w.webp)
 
 - Attention 需要保留 Encoder 每一个神经元的隐藏层向量 **h**
 - 然后 Decoder 的第 t 个神经元要根据上一个神经元的隐藏层向量 **h'**t-1 计算出当前状态与 Encoder 每一个神经元的相关性 **e**t
@@ -782,38 +839,92 @@ Python实现前缀树比较简单的方案就是利用字典结构来实现嵌�
 - 生成式任务比普通的分类、tagging等NLP任务复杂不少。生成时，模型的输出是一个时间步一个时间步依次获得，前面时间步的结果影响后面时间步的结果。即每一个时间步，模型给出的都是<font color='blue'>基于历史生成结果的条件概率</font>。
 - 生成完整的句子，需要一个称为`解码`的额外动作来融合模型多个时间步的输出，使得最终序列的每一步条件概率连乘起来最大。
 - 分析
-  - 每一个时间步可能的输出种类称为`字典大小`(vocabulary size，我们用v表示)
+  - 每一个时间步可能的输出种类称为`字典大小`(vocabulary size，用v表示)
   - 进行T步随机的生成可能获得的结果总共有vT种。
   - 拿中文文本生成来说，v的值大约是5000-6000，即常用汉字的个数。
 - 在如此大的基数下，遍历整个生成空间是不现实的。
+- ![](https://uploads-ssl.webflow.com/5fdc17d51dc102ed1cf87c05/60adb96dd09ceb13f5d35c3f_sequence.png)
 
+### 解码方法总结
+
+以 简化版 中英翻译任务为例
+>- 中文输入："我" "恨" "你"
+>- 英文输出："I" "H" "U", 假设输出字典只有3个
+>- 目标：得到最优的翻译序列 I-H-U
+
+解码方法
+- （1）exhaustive/brute search（`穷举搜索`/暴力搜索）：遍历所有可能得输出序列，最后选择概率最大的序列输出
+  - 示例：一共 $3^3=27$ 种排列组合
+  - 穷举搜索能保证**全局最优**，但计算复杂度太高，当输出词典稍微大一点根本无法使用。
+- （2）greedy search `贪心搜索`：每步选取概率**最大**的词，局部最优
+  - 示例：1种组合
+    - 第1个时间步：翻译"我"，发现候选"I"的条件概率最大为0.6，所以第一个步长直接翻译成了"I"。
+    - 第2个时间步：翻译"我恨"，发现II概率0.2，IH概率0.7，IU概率0.1，所以选择IH作为当前步长最优翻译结果。
+    - 第3个时间步：翻译"我恨你"，发现IHI概率0.05，IHH概率0.05，IHU概率0.9，所以选择IHU作为最终的翻译结果。
+    - ![](https://pic4.zhimg.com/80/v2-ade0d00a227b00c232dffad522566d9b_1440w.webp)
+  - 贪心算法每步选择当前最好的选择，希望通过局部最优策略期望产生全局最优解。但是贪心算法没有从整体最优上考虑，并不能保证最终一定全局最优。但是相对穷举搜索，搜索效率大大提升。
+- （3）beam search `集束搜索`：使用条件概率，每步选取概率最大的top k个词（beam width）
+  - beam search是对greedy search的一个改进算法，相对greedy search扩大了搜索空间，但远远不及穷举搜索指数级的搜索空间，是折中方案
+  - beam search有一个超参数 beam size（**束宽**），设为 k
+    - 每步选取当前条件概率最大的k个词，当做候选输出序列的第一个词。之后每个时间步，基于上步的输出序列，挑选出所有组合中条件概率最大的k个，作为该时间步下的候选输出序列。始终保持k个候选。最后从k个候选中挑出最优的。
+    - 第1步: I和H的概率是top2，所以将I和H加入到候选输出序列中。
+    - 第2步: 以I开头有三种候选 { II, IH, IU }，以H开头有三种候选 { HI, HH, HU } 从这6个候选中挑出条件概率最大的2个，即IH和HI，作为候选输出序列
+    - 第3步: 同理以IH开头有三种候选 {IHI, IHH, IHU}，以HI开头有三种候选 {HII, HIH, HIU}。从这6个候选中挑出条件概率最大的2个，即IHH和HIU，作为候选输出序列。
+    - 3步结束, 直接从IHH和IHU中挑选出最优值IHU作为最终的输出序列。
+    - ![](https://pic4.zhimg.com/80/v2-e28eda027a639a9034cb1c39a291056b_1440w.webp)
+- 总结
+  - beam search不保证全局最优，但是比greedy search搜索空间更大，一般结果比greedy search要好。
+  - greedy search 可以看做是 beam size = 1时的 beam search。
 
 ### 贪心 Greedy Search
 
-- `贪心搜索`，即每一个时间步都取条件概率最大的输出，再将从开始到当前步的结果作为输入去获得下一个时间步的输出，直到模型给出生成结束的标志。
-- 示例，生成序列[A,B,C]
-  - ![](http://www.wuyuanhao.com/wp-content/uploads/2020/03/greedy.png)
+`贪心搜索`，即每一个时间步都取条件概率**最大**的输出，再将从开始到当前步的结果作为输入，获得下一个时间步的输出，直到模型给出生成结束的标志。
+- 示例，生成序列: \[A,B,C\]
+  - ![img](http://www.wuyuanhao.com/wp-content/uploads/2020/03/greedy.png)
 
 分析
-- 优点
-- 原来指数级别的求解空间直接压缩到了与长度线性相关的大小。（指数级→线性级）
-- 缺点
-- 由于丢弃了绝大多数的可能解，这种关注当下的策略<font color='red'>无法保证最终序列概率是最优的</font>。
+- 优点: 原来指数级别的求解空间直接压缩到了与长度线性相关的大小。（指数级→线性级）
+- 缺点: 由于丢弃了绝大多数的可能解，这种关注当下的策略<font color='red'>无法保证最终序列概率是最优的</font>。
 
 ### 集束搜索 Beam Search
 
-- Beam search是对贪心策略一个改进。
+Beam search是对贪心策略一个改进。
 - 思路：稍微放宽一些考察的范围。
   - 在每一个时间步，不再只保留当前分数最高的1个输出，而是保留num_beams个。
   - 当num_beams=1时集束搜索就退化成了贪心搜索。
 - 示例
   - 每个时间步有ABCDE共5种可能的输出，即v=5v=5，图中的num_beams=2，也就是说每个时间步都会保留到当前步为止条件概率最优的2个序列
   - ![](http://www.wuyuanhao.com/wp-content/uploads/2020/03/beam-search.png)
-- 分析
-  - beam search在每一步需要考察的候选人数量是贪心搜索的num_beams倍
-  - BS是一种时间换性能的方法。
-  - 缺点
-    - 会遇到诸如词语重复问题
+  - ![](https://pic2.zhimg.com/80/v2-a760198d6b851fc38c8d21830d1f27c9_1440w.webp)
+  - 在第一个时间步，A和C是最优的两个，因此得到了两个结果\[A],\[C]，其他三个就被抛弃了；
+  - 第二步会基于这两个结果继续进行生成，在A这个分支可以得到5个候选人，\[AA],\[AB],\[AC],\[AD],\[AE]，C也同理得到5个，此时会对这10个进行统一排名，再保留最优的两个，即图中的\[AB]和\[CE]；
+  - 第三步同理，也会从新的10个候选人里再保留最好的两个，最后得到了\[ABD],\[CED]两个结果。
+  - ![](https://pic1.zhimg.com/80/v2-964bce7699b8ae813346015dc11c3e60_1440w.webp)
+
+分析
+- beam search在每一步需要考察的候选人数量是贪心搜索的num_beams倍
+- BS是一种**时间**换**性能**的方法。
+- 缺点
+  - 会遇到诸如词语**重复**问题
+
+代码实现
+- tensorflow 把 decoder 从 BasicDecoder 换成 BeamSearchDecoder
+- 因为用了 Beam Search，所以 decoder 的输入形状需要做 K 倍的扩展，tile_batch 就是用来干这个。如果和之前的 AttentionWrapper 搭配使用的话，还需要把encoder_outputs 和 sequence_length 都用 tile_batch 做一下扩展
+
+```py
+tokens_go = tf.ones([config.batch_size], dtype=tf.int32) * w2i_target["_GO"]
+decoder_cell = tf.nn.rnn_cell.GRUCell(config.hidden_dim)
+
+if useBeamSearch > 1:
+	decoder_initial_state = tf.contrib.seq2seq.tile_batch(encoder_state, multiplier=useBeamSearch)	
+	decoder = tf.contrib.seq2seq.BeamSearchDecoder(decoder_cell, decoder_embedding, tokens_go, w2i_target["_EOS"],  decoder_initial_state , beam_width=useBeamSearch, output_layer=tf.layers.Dense(config.target_vocab_size))
+else:
+	decoder_initial_state = encoder_state
+	decoder = tf.contrib.seq2seq.BasicDecoder(decoder_cell, helper, decoder_initial_state, output_layer=tf.layers.Dense(config.target_vocab_size))
+			
+decoder_outputs, decoder_state, final_sequence_lengths = tf.contrib.seq2seq.dynamic_decode(decoder, maximum_iterations=tf.reduce_max(self.seq_targets_length))
+```
+
 
 #### 序列扩展
 
@@ -828,11 +939,12 @@ Python实现前缀树比较简单的方案就是利用字典结构来实现嵌�
 
 ### Beam Search改进
 
-- Beam Search虽然比贪心有所改进，但还是会生成出空洞、重复、前后矛盾的文本。
+Beam Search虽然比贪心有所改进，但还是会生成<span style='color:red'>空洞、重复、前后矛盾</span>的文本。
 - 试图最大化序列条件概率的解码策略从根上就有问题
-- 人类选择的词（橙线）并不是像机器选择的（蓝线）那样总是那些条件概率最大的词。
-  - 总是选择概率大的词会发生正反馈从而陷入重复，从生成的结果也可以看出，机器生成的结果有大量重复。
-  - ![](http://www.wuyuanhao.com/wp-content/uploads/2020/03/probability.png)
+
+人类选择的词（橙线）并不是像机器选择的（蓝线）那样总是那些条件概率最大的词。
+- 总是选择概率大的词会发生正反馈从而陷入重复，从生成的结果也可以看出，机器生成的结果有大量重复。
+- ![](http://www.wuyuanhao.com/wp-content/uploads/2020/03/probability.png)
 - 参考：[解读Beam Search (2/2)](http://www.wuyuanhao.com/2020/03/23/%e8%a7%a3%e8%af%bbbeam-search-2/)
 - 以下思路主要源自ICLR 2020论文：[《The Curious Case of Neural Text Degeneration》](https://arxiv.org/abs/1904.09751)
 
@@ -914,6 +1026,29 @@ def top_k_top_p_filtering(logits, top_k=0, top_p=1.0, filter_value=-float("Inf")
     return logits
 ```
 
+## 序列损失 Sequence Loss
+
+seq2seq 训练中次要但值得一提的知识点。
+
+按照通常 loss 计算方法
+- 假设 batch size=4，max_seq_len=4，分别计算这 4*4 个位置上的 loss。
+- 但是实际上 “_PAD” 上的 loss 计算是没有用的，因为“_PAD”本身没有意义，也不指望 decoder 去输出这个字符，只是占位用的，计算 loss 反而带来副作用，影响参数的优化
+
+解法
+- 在 loss 上乘一个 mask 矩阵，这个矩阵可以把“_PAD”位置上的 loss 筛掉。
+- ![](https://pic3.zhimg.com/80/v2-ea507ec55529c366b371032979709e4a_1440w.webp)
+
+sequence_mask 矩阵之后（tensorflow 提供的函数 tf.sequence_mask 可以直接生成），直接乘在 loss 矩阵上就行
+
+```py
+# tf seq2seq 全家桶
+sequence_mask = tf.sequence_mask(self.seq_targets_length, dtype=tf.float32)
+self.loss = tf.contrib.seq2seq.sequence_loss(logits=decoder_logits, targets=self.seq_targets, weights=sequence_mask)
+# 如果不用全家桶：
+sequence_mask = tf.sequence_mask(self.seq_targets_length, dtype=tf.float32)
+loss = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=decoder_logits, labels=self.seq_targets)		
+self.loss = tf.reduce_mean(loss * sequence_mask)
+```
 
 ## Attention的细节
  
