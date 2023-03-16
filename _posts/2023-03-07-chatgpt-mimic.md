@@ -34,6 +34,19 @@ ChatGPT复现上
   - GPU分布式加速算法
 1. 效果评估
 
+OpenAI InstructGPT论文里有个惊奇的发现，即：1.3B小模型+RLHF 居然可以超越175B指令精调后的效果。有没有可能ChatGPT就是个小模型，结果最近OpenAI公开接口价格后让这种猜想的可能性又增加了。
+
+由于InstructGPT效果太好，RL+LM这个新范式能衍生出哪些研究方向？
+- (1) 花式魔改Reward：
+  - 监督学习在实际落地时，主要优化方法是加特征、洗数据。对于强化学习也是如此，优化实际RL效果的重点在加特征、调整reward
+  - OpenAI在做摘要任务的论文中，就在奖励上增加了KL散度，希望：
+    - ① 鼓励模型生成不一样的结果，避免和以前的模型变成一个
+    - ② 保证不会生成特别不一样的结果，不然RM都没见过就不知道怎么打分了
+  - DeepMind的Sparrow为了让模型遵从特定规则（比如不能说脏话），在Preference的基础上增加了`Rule Reward Modeling`
+    - Rule RM是一个分类器，输入Prompt+Response，预测模型违反预定规则的概率。训练的时候两个Reward会合并到一起进行反馈
+- (2) 
+- 
+
 ### 复现方案
 
 【2023-2-1】复现方案（参考:[chatGPT复刻方案](https://zhuanlan.zhihu.com/p/602485508)）
@@ -767,7 +780,7 @@ PromptCLUE 支持几十个不同类型的任务，具有较好的零样本学习
 - 基于高质量数据构建更加符合中文习惯的字典并从零训练中文大模型，模型性能效果更有保证；
 - 融合多种训练策略训练大模型，具备在中文上强大的泛化、迁移和生成能力。
 
-### Colossal AI
+### Colossal AI 夸父
 
 【2023-2-15】[开源方案复现ChatGPT流程！1.62GB显存即可体验，单机训练提速7.73倍](https://mp.weixin.qq.com/s/j8gvD_4ViRE4WQaQlcnmrQ)
 - Colossal-AI 快速跟进，首个开源低成本复现 ChatGPT 完整流程。
@@ -1210,6 +1223,58 @@ OpenChatKit 短板：
 huggingface 
 - [测试链接](https://huggingface.co/spaces/togethercomputer/OpenChatKit)
 - [GPT-NeoXT-Chat-Base-20B](https://huggingface.co/togethercomputer/GPT-NeoXT-Chat-Base-20B)
+
+
+### ChatGLM 清华
+
+[ChatGLM](https://chatglm.cn/)：开源双语对话语言模型
+
+【2023-3-14】ChatGLM-6B 是一个开源的、支持中英双语的对话语言模型，基于 General Language Model (GLM) 架构，具有 62 亿参数。
+- 结合模型量化技术，用户可以在消费级显卡上进行**本地部署**（INT4 量化级别下最低只需 6GB 显存）。 
+- ChatGLM-6B 使用了和 ChatGPT 相似的技术，针对中文问答和对话进行了优化。经过约 1T 标识符的中英双语训练，辅以监督微调、反馈自助、人类反馈强化学习等技术的加持，62 亿参数的 ChatGLM-6B 已经能生成相当符合人类偏好的回答
+
+ChatGLM 当前版本模型的能力提升主要来源于独特的千亿基座模型 `GLM-130B`。它不同于 BERT、GPT-3 以及 T5 的架构，是一个包含**多目标函数**的自回归预训练模型。
+
+2022 年 8 月，`清华大学`联合`智谱AI` 向研究界和工业界开放了拥有 1300 亿参数的中英双语稠密模型 `GLM-130B`，该模型有一些独特的优势：
+- 双语：同时支持中文和英文；
+- 高精度（英文）：在公开的英文自然语言榜单 LAMBADA、MMLU 和 Big-bench-lite 上优于 GPT-3 175B（API: davinci，基座模型）、OPT-175B 和 BLOOM-176B；
+- 高精度（中文）：在 7 个零样本 CLUE 数据集和 5 个零样本 FewCLUE 数据集上明显优于 ERNIE TITAN 3.0 260B 和 YUAN 1.0-245B；
+- 快速推理：首个实现 INT4 量化的千亿模型，支持用一台 4 卡 3090 或 8 卡 2080Ti 服务器进行快速且基本无损推理；
+- 可复现性：所有结果（超过 30 个任务）均可通过我们的开源代码和模型参数复现；
+- 跨平台：支持在国产的海光 DCU、华为昇腾 910 和申威处理器及美国的英伟达芯片上进行训练与推理。
+
+如今， 参考 ChatGPT 的设计思路， `ChatGLM` 在千亿基座模型 GLM-130B 中注入了代码预训练，通过`有监督微调`（Supervised Fine-Tuning）等技术实现人类意图对齐。
+
+`ChatGLM-6B` 是一个开源的、支持中英双语问答的对话语言模型，并针对中文进行了优化。该模型基于 General Language Model (`GLM`) 架构，具有 62 亿参数。结合模型量化技术，用户可以在消费级的显卡上进行本地部署（INT4 量化级别下最低只需 6GB 显存）。
+- `ChatGLM-6B` 使用了和 `ChatGLM` 相同的技术，针对中文问答和对话进行了优化。经过约 1T 标识符的中英双语训练，辅以`监督微调`、`反馈自助`、`人类反馈强化学习`等技术的加持，62 亿参数的 `ChatGLM-6B` 虽然规模不及千亿模型，但大大降低了推理成本，提升了效率，并且已经能生成相当符合人类偏好的回答。
+- [模型开源地址](https://github.com/THUDM/ChatGLM-6B)
+
+ChatGLM-6B 具备以下特点：
+- 充分的中英双语预训练：ChatGLM-6B 在 1:1 比例的中英语料上训练了 1T 的 token 量，兼具双语能力。
+- 优化的模型架构和大小：吸取 GLM-130B 训练经验，修正了二维 RoPE 位置编码实现，使用传统 FFN 结构。6B（62 亿）的参数大小，也使得研究者和个人开发者自己微调和部署 ChatGLM-6B 成为可能。
+- 较低的部署门槛：FP16 半精度下，ChatGLM-6B 需要至少 **13 GB** 的显存进行推理，结合模型量化技术，这一需求可以进一步降低到 **10GB**（INT8） 和 **6GB**（INT4），使得 ChatGLM-6B 可以部署在消费级显卡上。
+- 更长的序列长度：相比 GLM-10B（序列长度 1024），ChatGLM-6B 序列长度达 **2048**，支持更长对话和应用。
+- 人类意图对齐训练：使用了`监督微调`（Supervised Fine-Tuning）、`反馈自助`（Feedback Bootstrap）、`人类反馈强化学习`（Reinforcement Learning from Human Feedback）等方式，使模型初具理解人类指令意图的能力。输出格式为 markdown，方便展示。
+
+不过由于 ChatGLM-6B 模型的容量较小，不可避免的存在一些局限和不足，目前已知其具有相当多的局限性，如： 事实性/数学逻辑错误，可能生成有害/有偏见内容，较弱的上下文能力，自我认知混乱，以及对英文指示生成与中文指示完全矛盾的内容。
+
+包括：
+- 相对**较弱**的模型记忆和语言能力。在面对许多事实性知识任务时，`ChatGLM-6B` 可能会生成不正确的信息，也不太擅长逻辑类问题（如数学、编程）的解答。
+- 可能会产生有害说明或有偏见的内容：`ChatGLM-6B` 只是一个初步与人类意图对齐的语言模型，可能会生成有害、有偏见的内容。
+- 较弱的**多轮**对话能力：ChatGLM-6B 的上下文理解能力还不够充分，在面对长答案生成和多轮对话的场景时，可能会出现上下文丢失和理解错误的情况。
+- 参考：[清华系千亿基座对话模型ChatGLM启动内测，开源单卡版模型](https://www.jiqizhixin.com/articles/2023-03-15-3)
+- ![](https://image.jiqizhixin.com/uploads/editor/f1e9f5c9-25eb-46fa-80da-aa38e9658cbc/640.png)
+
+```py
+from transformers import AutoTokenizer, AutoModel
+tokenizer = AutoTokenizer.from_pretrained("THUDM/chatglm-6b", trust_remote_code=True)
+model = AutoModel.from_pretrained("THUDM/chatglm-6b", trust_remote_code=True).half().cuda()
+response, history = model.chat(tokenizer, "你好", history=[])
+print(response)
+# 你好👋!我是人工智能助手 ChatGLM-6B,很高兴见到你,欢迎问我任何问题。
+response, history = model.chat(tokenizer, "晚上睡不着应该怎么办", history=history)
+print(response)
+```
 
 
 ### ChatRWKV
