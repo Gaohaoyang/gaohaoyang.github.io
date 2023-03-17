@@ -174,6 +174,52 @@ mathjax: true
 - 尚未做大，就因为各种各样的原因而衰落，直至关闭。这样的例子数不胜数，2010-2020年之间诞生的社交应用有90%都是这样的。
 - 从未做大，但找到了一个细分赛道，得以在狭窄的范围内存活下去。这样的例子非常少见，豆瓣算一个（如果你认为豆瓣也有社交属性）。
 
+
+### 校园BBS
+
+【2023-3-17】北京地区bbs知名度
+- 水木社区 ＞ 北邮人
+
+发帖
+- ① 北邮人[帖子](https://bbs.byr.cn/#!article/JobInfo/954423)
+- ② 水木[帖子](https://www.mysmth.net/nForum/#!article/Career_Campus/638571)
+
+各大高校的BBS
+- [水木社区](http://www.hao360.cn/mcompany/company_14286.html)
+- [北京大学未名BBS](http://www.hao360.cn/mcompany/company_14268.html)
+- [天地人大BBS](http://www.hao360.cn/mcompany/company_14270.html)，
+  - 人大经济论坛，新名字：[经管之家](https://bbs.pinggu.org/jg/) 名声更大
+  - 金融类求职，公众号 陇金客
+  - 天地人大BBS站为中国教育网内三大BBS站之一，也是中国人民大学官方BBS。建立于2000年4月26日，起初定名为人文之光BBS站，后于2001年3月28日举行关于站名的投票，结果天地人大以微弱优势胜出，遂改名为天地人大。
+- [北邮人论坛](http://www.hao360.cn/mcompany/company_14283.html)
+- [北师大紫金香社区](http://www.hao360.cn/mcompany/company_14291.html)
+- [北航未来花园站](http://www.hao360.cn/mcompany/company_14292.html)
+- [北外星光站](http://www.hao360.cn/mcompany/company_14299.html)
+- [南京大学小百合BBS](http://www.hao360.cn/mcompany/company_14271.html)
+- [上海交大饮水思源站](http://www.hao360.cn/mcompany/company_14272.html)
+- [哈工大紫丁香社区](http://www.hao360.cn/mcompany/company_14274.html)
+- [复旦大学日月光华](http://www.hao360.cn/mcompany/company_14275.html)
+- [同济大学BBS-同舟共济](http://www.hao360.cn/mcompany/company_14276.html)
+- [天津大学求实BBS](http://www.hao360.cn/mcompany/company_14277.html)
+- [山东大学泉韵心声bbs](http://www.hao360.cn/mcompany/company_14278.html)
+- [武汉大学珞珈山水](http://www.hao360.cn/mcompany/company_14279.html)
+- [华中科技大学白云黄鹤](http://www.hao360.cn/mcompany/company_14280.html)
+- [南开大学我爱南开站](http://www.hao360.cn/mcompany/company_14281.html)
+- [中科大瀚海星云站](http://www.hao360.cn/mcompany/company_14282.html)
+- [浙江大学海纳百川](http://www.hao360.cn/mcompany/company_14284.html)
+- [东南大学虎踞龙盘](http://www.hao360.cn/mcompany/company_14287.html)
+- [南邮紫金飞鸿站](http://www.hao360.cn/mcompany/company_14288.html)
+- [中山大学逸仙时空BBS](http://www.hao360.cn/mcompany/company_14289.html)
+- [华南师范大学陶园站](http://www.hao360.cn/mcompany/company_14290.html)
+- [电子科技大学一往情深](http://www.hao360.cn/mcompany/company_14293.html)
+- [大连理工碧海青天](http://www.hao360.cn/mcompany/company_14295.html)
+- [华东理工梅陇客栈](http://www.hao360.cn/mcompany/company_14296.html)
+- [广东工业大学工大后院](http://www.hao360.cn/mcompany/company_14297.html)
+- [四川大学蓝色星空站](http://www.hao360.cn/mcompany/company_14298.html)
+- [上海外国语大学西索寓言](http://www.hao360.cn/mcompany/company_14302.html)
+- [兰州大学西北望站](http://www.hao360.cn/mcompany/company_14303.html)
+
+
 ### 社交领域
 
 垂直社交平台面临着三个非常巨大、几乎无解的阻碍，所以成长到一定规模之后，若不转型就必定衰落。
