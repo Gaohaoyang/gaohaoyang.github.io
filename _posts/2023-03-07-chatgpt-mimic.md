@@ -1299,7 +1299,8 @@ ChatGLM 当前版本模型的能力提升主要来源于独特的千亿基座模
 
 `ChatGLM-6B` 是一个开源的、支持中英双语问答的对话语言模型，并针对中文进行了优化。该模型基于 General Language Model (`GLM`) 架构，具有 62 亿参数。结合模型量化技术，用户可以在消费级的显卡上进行本地部署（INT4 量化级别下最低只需 6GB 显存）。
 - `ChatGLM-6B` 使用了和 `ChatGLM` 相同的技术，针对中文问答和对话进行了优化。经过约 1T 标识符的中英双语训练，辅以`监督微调`、`反馈自助`、`人类反馈强化学习`等技术的加持，62 亿参数的 `ChatGLM-6B` 虽然规模不及千亿模型，但大大降低了推理成本，提升了效率，并且已经能生成相当符合人类偏好的回答。
-- [模型开源地址](https://github.com/THUDM/ChatGLM-6B)
+- [模型开源地址](https://github.com/THUDM/ChatGLM-6B), [huggingface](https://huggingface.co/THUDM/chatglm-6b/tree/main)
+- finetune代码：[ChatGLM-Tuning](https://github.com/mymusise/ChatGLM-Tuning)
 
 ChatGLM-6B 具备以下特点：
 - 充分的中英双语预训练：ChatGLM-6B 在 1:1 比例的中英语料上训练了 1T 的 token 量，兼具双语能力。
