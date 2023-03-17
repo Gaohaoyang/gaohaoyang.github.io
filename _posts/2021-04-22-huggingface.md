@@ -622,38 +622,65 @@ Regardless of your framework of choice, you can parameterize the generate method
 </div>
 
 
+#### 输出参数
+
+如下
+- `num_return_sequences`(int, optional, defaults to 1) — The number of independently computed returned sequences for each element in the batch.
+- `output_attentions` (bool, optional, defaults to False) — Whether or not to return the attentions tensors of all attention layers. See attentions under returned tensors for more details.
+- `output_hidden_states` (bool, optional, defaults to False) — Whether or not to return the hidden states of all layers. See hidden_states under returned tensors for more details.
+- `output_scores` (bool, optional, defaults to False) — Whether or not to return the prediction scores. See scores under returned tensors for more details.
+- `return_dict_in_generate` (bool, optional, defaults to False) — Whether or not to return a ModelOutput instead of a plain tuple.
+
+
 #### 解码策略
 
-generate方法使用
+generate 解码参数
+- `do_sample`: 是否采样, 默认 False(对应贪心解码)
+- `num_beams`: 束宽，int, 默认 1（不用beam search）,集束搜索参数, 
+- `num_beam_groups`: int, 默认 1, 一组束宽，通过不同beam取值获取更好的多样性
+- `penalty_alpha`: float, 惩罚因子，用于contrastive search decoding，平衡模型置信度与退化惩罚
+- `use_cache`: 默认True, 是否使用上一个K/V注意力，用于解码提速
 
-```sh
-greedy decoding: greedy search, 触发条件: `num_beams=1` and `do_sample=False`
-contrastive search: contrastive_search, 触发条件: `penalty_alpha>0`` and `top_k>1`
-multinomial sampling: sample, 触发条件: `num_beams=1` and `do_sample=True`
-beam-search decoding: beam search, 触发条件: `num_beams>1` and `do_sample=False`
-beam-search multinomial sampling: beam sample, 触发条件: `num_beams>1` and `do_sample=True`
-diverse beam-search decoding: group_beam_search, 触发条件: `num_beams>1` and `num_beam_groups>1`
-constrained beam-search decoding: constrained_beam_search, 触发条件: `constraints!=None` or `force_words_ids!=None`
-```
+方法使用
+- greedy decoding: greedy search, 触发条件: `num_beams=1` and `do_sample=False`
+- contrastive search: contrastive_search, 触发条件: `penalty_alpha>0`` and `top_k>1`
+- multinomial sampling: sample, 触发条件: `num_beams=1` and `do_sample=True`
+- beam-search decoding: beam search, 触发条件: `num_beams>1` and `do_sample=False`
+- beam-search multinomial sampling: beam sample, 触发条件: `num_beams>1` and `do_sample=True`
+- diverse beam-search decoding: group_beam_search, 触发条件: `num_beams>1` and `num_beam_groups>1`
+- constrained beam-search decoding: constrained_beam_search, 触发条件: `constraints!=None` or `force_words_ids!=None`
 
 理论上，解码策略有几种
 - `贪心搜索`：greedy search
 - `集束搜索`：beam search
 - `全局搜索`：又称暴力搜索, brute search
+- ![](https://pica.zhimg.com/80/v2-ef3522dfec91840dcad6642981722b18_1440w.webp?source=1940ef5c)
 
 结合采样方法，可以衍生出多种解码策略
+- generation.GenerationMixin
 
 |generate类型|解码策略|参数`do_sample`|参数`num_beams`|其它参数| 触发条件 |
 |---|---|----|----|----|--------|
-| greedy decoding | greedy search | False | 1 | - | `num_beams=1` and `do_sample=False` |
-| contrastive search | contrastive search | - | - | - | `penalty_alpha>0` and `top_k>1` |
-| multinomial sampling | sample | true | 1 | - |`num_beams=1` and `do_sample=True` |
-| beam-search decoding | beam search | False | >1 | - | `num_beams>1` and `do_sample=False` |
-| beam-search multinomial sampling | beam sample | True | >1 | - | `num_beams>1` and `do_sample=True` |
-| diverse beam-search decoding | group_beam_search | - | >1 | - | `num_beams>1` and `num_beam_groups>1` |
-| constrained beam-search decoding | constrained_beam_search | 受限beam search | - | - |`constraints!=None` or `force_words_ids!=None` |
+| `greedy decoding` | greedy_search `贪心解码` | False | 1 | - | `num_beams=1` and `do_sample=False` |
+| `contrastive search` | contrastive_search | - | - | - | `penalty_alpha>0` and `top_k>1` |
+| `multinomial sampling` | sample `多样式采样` | true | 1 | - |`num_beams=1` and `do_sample=True` |
+| `beam-search decoding` | beam_search `集束解码` | False | >1 | - | `num_beams>1` and `do_sample=False` |
+| `beam-search multinomial sampling` | beam_sample `集束解码`+`多样式采样` | True | >1 | - | `num_beams>1` and `do_sample=True` |
+| `diverse beam-search decoding` | group_beam_search `多样性集束解码` | - | >1 | - | `num_beams>1` and `num_beam_groups>1` |
+| `constrained beam-search decoding` | constrained_beam_search `受限集束解码` | 受限beam search | - | - |`constraints!=None` or `force_words_ids!=None` |
 
-参数说明：[text_generation](https://huggingface.co/docs/transformers/main_classes/text_generation)
+参数：
+- [text_generation](https://huggingface.co/docs/transformers/main_classes/text_generation)函数说明
+- generation[源码](https://github.com/huggingface/transformers/tree/v4.26.1/src/transformers/generation)
+
+#### 哪种解码方法最好？
+
+没有一个普遍 "最佳"的解码方法。哪种方法最好取决于生成任务的性质。
+- 如果想执行**精确**的任务，如进行算术运算或提供一个特定问题的答案，那么**降低温度**或使用**确定性**方法，如`贪婪搜索`与`束搜索`相结合，以保证得到最可能的答案。
+- 如果想生成**更长**的文本，甚至有点**创造性**，那么改用**抽样方法**，并**提高温度**，或者使用top-k和核抽样的混合方法。
+
+作者：[致Great](https://www.zhihu.com/question/415657741/answer/2430106609)
+
 
 ### Demo发布（space）
 
