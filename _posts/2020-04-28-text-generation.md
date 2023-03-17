@@ -55,13 +55,14 @@ permalink: /text-generation
 - `文本摘要`（Text Summarization）：给定一篇文档，生成文档主体内容的总结摘要；
 - `故事生成`（Story Telling）、诗句生成（Poetry Generation）等。
 
-文本生成任务目的是生成近似于自然语言的文本序列，但仍可以根据输入数据进行分类。比如
-- 输入结构化数据的 Data-to-text Generation
-- 输入图片的 Image Caption
-- 输入视频的 Video Summarization
-- 输入音频的 Speech Recognition 等。
+文本生成任务是生成近似于自然语言的文本序列，但仍可以根据输入数据进行分类。比如
+- 输入**文本** text-to-text
+- 输入结构化**数据**的 Data-to-text Generation
+- 输入**图片**的 Image Caption
+- 输入**视频**的 Video Summarization
+- 输入**音频**的 Speech Recognition 等。
 
-文本生成文本的 Text-to-Text 任务，具体地包括神经机器翻译、智能问答、生成式文本摘要等。
+文本生成文本的 Text-to-Text 任务，具体地包括神经机器翻译、智能问答、文本摘要、古诗生成、文本复述等等。文本摘要又可以分为抽取式摘要和生成式摘要。 抽取式摘要通常包含信息抽取和规划等主要步骤。
 
 随着深度学习的发展，众多新兴技术已被**文本生成**任务所采用。比如
 - 为了解决文本生成中的长期依赖、`超纲词`（Out-of-Vocabulary，OOV）问题，`注意力机制`（Attention Mechanism），`拷贝机制`（Copy Mechanism）等应运而出；
@@ -470,29 +471,33 @@ Diffusion的本质
 
 # Seq2seq方向
 
-- 参考资料
-  - [对话生成：seq2seq模型原理及优化](https://zhuanlan.zhihu.com/p/69159062)
+参考资料
+- [对话生成：seq2seq模型原理及优化](https://zhuanlan.zhihu.com/p/69159062)
 
 ## seq2seq简介
 
-- 闲聊型任务，主要用seq2seq方案生成闲聊型机器人。
-  - 基本结构：
-  ![](https://upload-images.jianshu.io/upload_images/8111720-0333b20ef2d480ac.png)
-  ![](https://upload-images.jianshu.io/upload_images/18270108-0ef3be8fe90ca2c1.jpg)
+闲聊型任务，主要用seq2seq方案生成闲聊型机器人。
 
-  - `Encoder`：seq2seq的编码器是单层或多层的RNN（双向），对输入的文本编码成一个向量输出。
-  - `Decoder`：seq2seq的解码器，也是单层或多层的RNN（非双向），然后根据context信息对每一步进行解码，输出对应的文本。
-  - context，最简单的方法是直接拿encoder的最后一个状态，或整个状态进行加总，得到一个固定的向量。
-    - 问题：context是固定长度的向量，表达能力比较有限，所以引入了Attention机制。
-  - Attention机制：每步解码都会根据当前状态对encoder的文本进行动态权重计算，进行归一化。再算出一个当前加权后的context，作为decoder的context。表达能力更强。
+seq2seq的运行模式
+> input -> encoder -> context -> decoder -> output
+
+基本结构：
+- ![](https://upload-images.jianshu.io/upload_images/8111720-0333b20ef2d480ac.png)
+- ![](https://upload-images.jianshu.io/upload_images/18270108-0ef3be8fe90ca2c1.jpg)
+
+- `Encoder`：seq2seq的编码器是单层或多层的RNN（双向），对输入的文本编码成一个向量输出。
+- `Decoder`：seq2seq的解码器，也是单层或多层的RNN（非双向），然后根据context信息对每一步进行解码，输出对应的文本。
+- context，最简单的方法是直接拿encoder的最后一个状态，或整个状态进行加总，得到一个固定的向量。
+  - 问题：context是固定长度的向量，表达能力比较有限，所以引入了Attention机制。
+- Attention机制：每步解码都会根据当前状态对encoder的文本进行动态权重计算，进行归一化。再算出一个当前加权后的context，作为decoder的context。表达能力更强。
 ![](https://upload-images.jianshu.io/upload_images/18270108-591c3820b8cf0408.jpg)
-  - 损失函数：对每一步的单词计算一个交叉熵，然后把它给加起来，最后得到一个损失函数
-  ![](https://upload-images.jianshu.io/upload_images/18270108-1e6b47670b57080d.jpg)
-  - 优化算法：
-    - 贪心搜索：每一步搜索都取概率最大的分支，容易陷入局部最优解。比如，可能当前一步的概率很大，但后面的概率都很小，这样搜索出来的文本就不是全局的最优解。但如果对整个空间进行搜索，可能搜索空间太大，无法全部搜索。
-    - Beam Search：采取折中的办法，每次搜索只保留最优的k条路径，搜索结果优于贪心搜索，因为每一步并非按最大的去选一个；时间复杂度也可以根据对“K”的设置进行控制；（如下图：每次搜索只保留最优的2条路径）
-![](https://upload-images.jianshu.io/upload_images/18270108-ae24c57e7b299c97.jpg)
-    - Beam Search可能会产生的问题是：可能都是十分相近的句子。如：当用户说“我喜欢打篮球”，搜索出来的结果可能是“我也是。”“我也是！”“我也是……”只有标点符号不同，这样多样性依然很低。
+- 损失函数：对每一步的单词计算一个交叉熵，然后把它给加起来，最后得到一个损失函数
+  - ![](https://upload-images.jianshu.io/upload_images/18270108-1e6b47670b57080d.jpg)
+- 优化算法：
+  - 贪心搜索：每一步搜索都取概率最大的分支，容易陷入局部最优解。比如，可能当前一步的概率很大，但后面的概率都很小，这样搜索出来的文本就不是全局的最优解。但如果对整个空间进行搜索，可能搜索空间太大，无法全部搜索。
+  - Beam Search：采取折中的办法，每次搜索只保留最优的k条路径，搜索结果优于贪心搜索，因为每一步并非按最大的去选一个；时间复杂度也可以根据对“K”的设置进行控制；（如下图：每次搜索只保留最优的2条路径）
+  - ![](https://upload-images.jianshu.io/upload_images/18270108-ae24c57e7b299c97.jpg)
+  - Beam Search可能会产生的问题是：可能都是十分相近的句子。如：当用户说“我喜欢打篮球”，搜索出来的结果可能是“我也是。”“我也是！”“我也是……”只有标点符号不同，这样多样性依然很低。
 
 ## seq2seq问题
 
@@ -673,14 +678,23 @@ Diffusion的本质
     classDef orange fill:#F7CF6B;
     classDef grass fill:#C8D64B;
     %%节点关系定义
-    O(seq2seq)-->|多样性不足|A(seq2seq多样性):::orange
-    A-->|2015,斯坦福李纪为\n最大互信息MMI,提升多样性和趣味性|A1(MMI系列)
-    A1-->|2015,斯坦福李纪为\n1.Decoder候选重排|B(MMI-bidi):::green
-    A1-->|2015,斯坦福李纪为\n2.改进Beam Search,增加多样性惩罚|C(MMI-antiLM):::green
-    A-->|2016,北大Lili Mou\n3.引入内容,PMI点态互信息,关键词+补全|D(Seq2BF):::green
+    O(seq2seq)-->|多样性不足|Q1(OOV):::orange
+    O(seq2seq)-->|多样性不足|Q2(重复):::orange
+    O(seq2seq)-->|多样性不足|Q3(多样性):::orange
+    O(seq2seq)-->|多样性不足|Q4(解码效率):::orange
+
+    Q1-->|2017,See\n内容缺乏,注意力机制\n诞生指针网络|Q1A(Pointer Network):::green
+    Q2-->|2017,Zhou\ncoverage|Q2A(Coverage):::green
+    Q4-->|2017,Zhou\n选择门网络,selective gate network\n降低decoder负担|Q4A(选择门):::green
+
+    Q3-->|2015,斯坦福李纪为\n最大互信息MMI,提升多样性和趣味性|A(MMI系列)
+    A-->|2015,斯坦福李纪为\n1.Decoder候选重排|B(MMI-bidi):::green
+    A-->|2015,斯坦福李纪为\n2.改进Beam Search,增加多样性惩罚|C(MMI-antiLM):::green
+    Q3-->|2016,北大Lili Mou\n3.引入内容,PMI点态互信息,关键词+补全|D(Seq2BF):::green
     B-->|2016,斯坦福李纪为\n2.引入强化学习|E(Diverse RL):::green
     E-->|2018,Ashwin\n2.Beam Search分组,双贪婪|F(Diverse Beam Search-DBS):::green
-    A-->|2018,Ryo\n4.改动Decoder MLE损失函数\n少有的encoder训练改进|G(ITF-loss):::green
+    Q3-->|2018,Ryo\n4.改动Decoder MLE损失函数\n少有的encoder训练改进|G(ITF-loss):::green
+
 </div>
 
 
@@ -979,14 +993,30 @@ para的意思是“另外的”，phrase是“陈述”。所以国内有人翻�
 
 人工评价指标虽然灵活，不适合用于对海量样本评价。而无监督的自动评价指标，虽然能低成本地解决评测问题，但能够完成评价的角度甚少。“用模型来衡量模型”则是效率和灵活性之间的 trade-off。
 
-- NLG常用metrics：
-  - BLEU: ngram precision；长度类似
-  - ROUGE: ngram recall
-  - NIST/CIDEr: 降低频繁词的权重
-  - METEOR: 考虑同义词的F score；鼓励连续词匹配
-  - STM: 匹配语法树子树
-  - TER: 编辑的距离
-  - TERp: TER+同义替换
+Gkatzia总结2005-2014年, 常用的针对文本生成的评价方法，将其分为`内在评价`和`外在评价`方法。其中`内在评价`关注文本的正确性、流畅度和易理解性。常见的`内在评价`方法又可分为两类:
+- 1）采用BLEU、NIST和ROUGE等进行自动化评价，评估生成文本和参考文本间相似度来衡量生成质量。
+- 2）通过人工评价，从有用性等对文本进行打分。外在评价则关注生成文本在实际应用中的可用性。
+
+内在评价方法最为流行。
+- 2012-2015年间发表的论文**超半数**使用自动化评价指标进行评价
+- 但由于需要大量**对齐**语料，且对于对齐语料的质量很敏感，所以使用自动化评价指标的同时，研究者常常还会同时使用其它评价方法，如直观且易于操作（与外在评价方法相比）的`人工评价`生成文本的正确性、流畅性方法。
+
+【2022-3-30】[基于Seq2Seq的文本生成评价指标解析](https://blog.csdn.net/u012744245/article/details/112371565)
+
+NLG常用metrics：
+- `BLEU`:  (Bilingual Evaluation Understudy) ngram precision；长度类似
+  - 比较候选译文和参考译文里的 n-gram 的重合程度，重合程度越高就认为译文质量越高。
+  - unigram用于衡量单词翻译的准确性，高阶n-gram用于衡量句子翻译的流畅性。通常取N=1~4，再加权平均
+- `ROUGE`: n-gram recall
+  - `ROUGE-N` （将BLEU的精确率优化为**召回率**）
+  - `ROUGE-L` （将BLEU的n-gram优化为**公共子序列**）
+  - `ROUGE-W` （ROUGE-W 是 ROUGE-L 的**改进**版）
+  - `ROUGE-S` （Skip-Bigram Co-Occurrence Statistics）
+- `METEOR`: 考虑同义词的F score；鼓励连续词匹配
+- `NIST`/`CIDEr`: 降低频繁词的权重
+- `STM`: 匹配语法树子树
+- `TER`: 编辑的距离
+- `TERp`: TER+同义替换
 
 - 参考：
   - [文本生成13：万字长文梳理文本生成评价指标](https://zhuanlan.zhihu.com/p/144182853)
