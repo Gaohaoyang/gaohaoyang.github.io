@@ -641,14 +641,98 @@ Diffusion的本质
 
 ### 多样性
 
-#### （4）改进Beam Search——提高回复多样性
+从2015年以来，提高文本多样性的方法大致分为四类：
+- 第一类：采用新模型对Beam Search得到的候选序列进行**重排**，比如`MMI-bidi`等。
+- 第二类：引入内容形式，对输出文本先预测一个关键词，然后对其进行补全，比如`Seq2BF`等。
+- 第三类：直接修改Beam Search算法，对每个时间步的条件概率施加**多样性惩罚**，比如`MMI-antiLM`、`diverseRL`、`DBS`等。
+- 第四类：直接修改训练时的**损失函数**，比如`ITF-loss`等
 
-- 思路一：通过增加惩罚项
+总结吧：
+- `MMI`两种损失函数与传统的极大似然估计相比，可以提高文本生成的**多样性**和**趣味性**。
+- `MMI-antiLM`不需要额外训练一个模型，使用起来会方便一点。
+- `MMI-bidi`需要训练两个模型，训练时间翻了一倍，另外，对于最终输出句子的重排，还是受到Seq2Seq生成的候选句子的限制，如果生成的候选句子多样性差，那么就算重排之后，其实也不一定能提高多样性。
+- `Seq2BF`虽然通过预测关键词来提高文本生成的多样性，但是因为其关键词都限定为名词，而有些回复其实是不包含名词的，此时如果强制要求回复必须包含预测的名词，那可能会出现错误。
+
+[原文链接](https://blog.csdn.net/linchuhai/article/details/89643785)
+
+改进Beam Search——提高回复多样性
+
+- 思路一：通过增加**惩罚项**
   - 如对同一组的第二、第三选项进行降权，从而避免每次搜索结果都来自于同一路径。对于权重的选择，可以通过强化学习得到；也可以通过设置参数、调整参数来得到
-  - ![](https://upload-images.jianshu.io/upload_images/18270108-9e78b6aba844eefa.jpg)
+  - ![img](https://upload-images.jianshu.io/upload_images/18270108-9e78b6aba844eefa.jpg)
 - 思路二：计算每条路径的概率分
-  - 如果后面生成的话跟第一组相似，就对该组进行降权，避免组与组之间相似度过高
-  - ![](https://upload-images.jianshu.io/upload_images/18270108-9f21116b3d55bbb7.jpg)
+  - 如果后面生成的话跟第一组相似，就对该组进行**降权**，避免组与组之间相似度过高
+  - ![img](https://upload-images.jianshu.io/upload_images/18270108-9f21116b3d55bbb7.jpg)
+
+<div class="mermaid">
+    flowchart TD
+    %% 节点颜色
+    classDef red fill:#f02;
+    classDef green fill:#5CF77B;
+    classDef blue fill:#6BE0F7;
+    classDef orange fill:#F7CF6B;
+    classDef grass fill:#C8D64B;
+    %%节点关系定义
+    O(seq2seq)-->|多样性不足|A(seq2seq多样性):::orange
+    A-->|2015,斯坦福李纪为\n最大互信息MMI,提升多样性和趣味性|A1(MMI系列)
+    A1-->|2015,斯坦福李纪为\n1.Decoder候选重排|B(MMI-bidi):::green
+    A1-->|2015,斯坦福李纪为\n2.改进Beam Search,增加多样性惩罚|C(MMI-antiLM):::green
+    A-->|2016,北大Lili Mou\n3.引入内容,PMI点态互信息,关键词+补全|D(Seq2BF):::green
+    B-->|2016,斯坦福李纪为\n2.引入强化学习|E(Diverse RL):::green
+    E-->|2018,Ashwin\n2.Beam Search分组,双贪婪|F(Diverse Beam Search-DBS):::green
+    A-->|2018,Ryo\n4.改动Decoder MLE损失函数\n少有的encoder训练改进|G(ITF-loss):::green
+</div>
+
+
+#### 2015, MMI系列
+
+李纪为博士等人（2015）采用了**最大互信息**（Maximum Mutual Information，`MMI`）作为**目标损失函数**，在一定程度上提高了文本生成的多样性和趣味性。
+- MMI损失函数可以看成是在极大似然估计的基础上，添加了一项对输出句子概率的惩罚项
+- 不同损失函数对应方法：`MMI-antiLM`、`MMI-bidi`
+- 直接将`MMI-antiLM`和`MMI-bidi`两种损失函数作为损失函数，那么训练将会非常艰难，导致**语法紊乱**和**解码难**的问题，因此，作者在真实训练过程中，还是采用`极大似然估计`作为模型训练的损失函数，但是在预测时才采用`MMI`损失函数。
+- 论文地址：《[A Diversity-Promoting Objective Function for Neural Conversation Models](https://arxiv.org/pdf/1510.03055.pdf)》
+
+
+#### 2016, Seq2BF
+
+2016年，北大 Lili Mou 等人提出了一种新的方法，即`Seq2BF`模型
+- 基本思想: 在decoder之前，先根据`点态互信息`（Pointwise Mutual Information，PMI）计算出一个与输入句子最相关的名词，作为输出句子的关键词，然后采用两个Seq2Seq模型分别对该词的前文和后文进行decode补全，最后作为预测的输出句子。
+- 论文地址：《[Sequence to Backward and Forward Sequences: A Content-Introducing Approach to Generative Short-Text Conversation](https://arxiv.org/pdf/1607.00970.pdf)》
+
+步骤
+- 关键词预测
+- Seq2BF模型
+
+#### 2016, diverseRL
+
+2016年，李纪为博士在15年那篇的基础上又进行了改进, 引入强化学习
+- 直接对Beam_search方法进行修改，使得Beam_search的搜索结果多样性更强，并且其通用性更强，可以迁移到很多其他的任务上。在参数的选择方面，引进了强化学习的思想，使得该方法更加灵活。
+- 论文地址：《[A Simple, Fast Diverse Decoding Algorithm for Neural Generation](https://arxiv.org/pdf/1611.08562.pdf)》
+
+#### 2018, Diverse Beam Search (DBS)
+
+2018年，Ashwin K Vijayakumar 等人也提出了一种新的`Diverse Beam Search`，简称`DBS`，大致思想：
+- 将原先的 Beam Search 均分为 G个组，每个组含有 B′ = B / G 条候选路径，对每个组还是按照Beam Search的思想进行解码，但是每个组在解码时还要考虑解码后的序列与前面每个组已经解码的序列之间的**差异性**。
+- 该方法与李纪为博士的`diverseRL`方法、传统的Beam Search方法进行对比，发现在多个任务上都有效提升了文本生成的多样性。
+- 论文地址：《[DIVERSE BEAM SEARCH: DECODING DIVERSE SOLUTIONS FROM NEURAL SEQUENCE MODELS](https://arxiv.org/pdf/1610.02424.pdf)》
+
+Beam Search 搜索方式很容易导致生成的B条序列都<span style='color:blue'>集中在某几个父节点，输出序列有大部分都非常接近</span>。
+- 为了克服这个问题，`DBS` 每次解码时，在原先的概率公式上添加了一项**差异项**Δ(Y\[t])，用来衡量后续序列之间的多样性或差异性。
+- 计算序列的多样性只考虑当前组与前面组已经解码好的后续序列，因此，计算复杂度大大降低，该形式也因此被称为`双贪婪`（doubly greedy）的形式
+
+DBS引入了一些超参数，比如: 组数G、惩罚参数λ、差异性度量函数δ(⋅,⋅)。实验发现：
+- 随着组数G的增加，DBS的精度会不会提高，将组数G设置为B，即G = B 效果最好。
+- λ不宜过高或过低，一般设置在0.2~0.8效果比较好。
+- 对于差异项度量函数δ(⋅,⋅)，作者对比了 Hamming diversity、Cummulative diversity、n-gram diversity 和 Neural-embedding diversity四种计算方式，发现采用Hamming diversity效果相对比较好，该方法直接度量每个句子与其他组句子词汇使用的差异性。
+
+#### 2018, ITF-loss
+
+前面的方法都是在模型训练结束后，对decoder方式改动而成，而`Ryo Nakamura`等人在2018年提出的`ITF-loss`则直接改动训练时的`MLE`损失函数，该方法非常简单，不需要额外地训练其他模型，很容易迁移到各种模型当中。
+
+传统Seq2Seq一般会采用Softmax Cross Entropy（后文简记为`SCE`）作为损失值的计算函数
+
+高频的词汇的损失值越小，低频的词汇则会使损失值越大，从而使得**模型更关注低频词汇**的损失，其实该方法与focal loss非常类似。推理阶段，同样可以对每一步的输出施加一个权重
+
 
 ### 实验对比
 
