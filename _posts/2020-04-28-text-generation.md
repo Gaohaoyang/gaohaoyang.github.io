@@ -13,31 +13,6 @@ permalink: /text-generation
 * content
 {:toc}
 
-# 总结
-
-- 【2022-7-16】[腾讯刘天宇：可控、可靠的数据到文本生成技术](https://www.toutiao.com/article/7120933821176037888), 聚焦data2text 任务
-- 【2021-7-14】[WAIC 2021-好未来副总裁吴中勤：多模态机器学习与自动生成技术](https://www.toutiao.com/i6984303337013363212/)，好未来集团技术副总裁吴中勤发表主题演讲《多模态机器学习及大规模自动生成技术：算法框架、行业实践》，介绍了多模态深度学习以及大规模自动生成技术在教育领域的实践与应用，并介绍了好未来 AI 研究院的最新研究成果及成功案例。
-  - 多模态整个技术研究方向包括以下：
-  - `表征`，多个模态联合去做事物或者语义的联合表征；
-  - `转换`，在模态之间实现转换，例如输入文字出现画面，输入声音出现文字；
-  - `融合`，在做单模态识别之后做后端融合，把整个模态在分类阶段、工作阶段加以融合；
-  - `对齐`，比如一段文字、一个视频，怎么把其中物体和关系做对应；此外还包括模态之间的协同。
-  - [img](https://p1-tt.byteimg.com/origin/pgc-image/e0b83a3aaacf4296931db87706437308?from=pc)
-  - ![](https://p1-tt.byteimg.com/origin/pgc-image/e0b83a3aaacf4296931db87706437308?from=pc)
-  - GodEye 这套教学辅助系统，基于多模态深度学习理念打造的，可以针对课堂当中老师和学生各类行为进行智能识别，通过辅助授课老师在授课中视频片段、关键行为去定位老师和学生在课堂中的交互，最后提升学习效果。
-  - 一个小时之内可生成几十万道题，针对个性化去生成针对性的题目，生成题目速度超越人类千倍、万倍，生成题目也具有多样性和广泛性，而且随着学生的使用量越来越大，年限越来越强，学生都在一点点的进步。除了生成题目，该模型还能生成作文
-  - ![](https://p3-tt.byteimg.com/origin/pgc-image/35d0314282ac4edc9359836325677a04?from=pc)
-- 【2021-3-27】【可控的神经网络文本生成】《[Controllable Neural Text Generation](https://lilianweng.github.io/lil-log/2021/01/02/controllable-neural-text-generation.html)》by Lilian Weng 
-- 【2021-3-26】【用于生成阅读理解问题的NLP系统】'question_generator - An NLP system for generating reading comprehension questions' by Adam Montgomerie [GitHub](https://github.com/AMontgomerie/question_generator)
-- 【2020-7-6】清华孙茂松：九歌多样化古典诗歌机器写作模型[MixPoet](http://nlp.csai.tsinghua.edu.cn/news/)开源
-- 【2020-9-21】文本生成系列文章
-  - [文本生成12：4种融合知识的text generation](https://zhuanlan.zhihu.com/p/133266258)
-  - [文本生成13：万字长文梳理文本生成评价指标](https://zhuanlan.zhihu.com/p/144182853)
-- 【2021-1-4】[data2text](https://zhuanlan.zhihu.com/p/82054729)，【2021-3-29】解读[文本生成2：Data-to-text Generation with Entity Modeling](https://zhuanlan.zhihu.com/p/82054729), [论文](https://arxiv.org/abs/1906.03221)，[代码](https://github.com/ratishsp/data2text-entity-py)
-- 【2021-1-4】题目自动生成[data2text](https://zhuanlan.zhihu.com/p/82054729)
-  - 应用点是业务方设计题目时，不用再费劲编写题目，只需设置知识点，系统根据知识点+问题类型生成候选题目，业务方验证通过即可
-- 【2021-3-29】文本风格迁移综述，[一文超详细讲解文本风格迁移](https://zhuanlan.zhihu.com/p/159039652)
-  - ![](https://pic2.zhimg.com/80/v2-da58494400a380027e47ff97af6b97fd_1440w.jpg)
 
 # 文本生成
 
@@ -842,7 +817,7 @@ class Encoder(tf.keras.Model):
 encoder = Encoder(english_vocab_size, embedding_dim, hidden_units)
 ```
 
-### 解码器Decoder ( 未使用注意力机制)
+### 解码器Decoder
 
 注意:在本节中，我们将了解解码器的情况下，不涉及注意力机制。这对于理解稍后与解码器一起使用的注意力的作用非常重要。
 
@@ -892,7 +867,7 @@ class BasicDotProductAttention(tf.keras.layers.Layer):
 		return weighted_sum_of_encoder_outputs, attention_scores
 ```
 
-### 解码器Decoder ( 增加注意力机制)
+### 解码器Decoder (加注意力机制)
 
 代码在decoder类中增加了以下步骤。
 - 就像编码器一样，我们在这里也有一个嵌入层用于目标语言中的序列。序列中的每一个单词都在具有相似意义的相似单词的嵌入空间中表示。
@@ -974,17 +949,17 @@ self.loss = tf.reduce_mean(loss * sequence_mask)
 >- 目标：得到最优的翻译序列 I-H-U
 
 解码方法
-- （1）exhaustive/brute search（`穷举搜索`/暴力搜索）：遍历所有可能得输出序列，最后选择概率最大的序列输出
+- （1）`exhaustive/brute search`（`穷举搜索`/暴力搜索）：遍历所有可能得输出序列，最后选择概率最大的序列输出
   - 示例：一共 $3^3=27$ 种排列组合
   - 穷举搜索能保证**全局最优**，但计算复杂度太高，当输出词典稍微大一点根本无法使用。
-- （2）greedy search `贪心搜索`：每步选取概率**最大**的词，局部最优
+- （2）`greedy search` `贪心搜索`：每步选取概率**最大**的词，局部最优
   - 示例：1种组合
     - 第1个时间步：翻译"我"，发现候选"I"的条件概率最大为0.6，所以第一个步长直接翻译成了"I"。
     - 第2个时间步：翻译"我恨"，发现II概率0.2，IH概率0.7，IU概率0.1，所以选择IH作为当前步长最优翻译结果。
     - 第3个时间步：翻译"我恨你"，发现IHI概率0.05，IHH概率0.05，IHU概率0.9，所以选择IHU作为最终的翻译结果。
     - ![](https://pic4.zhimg.com/80/v2-ade0d00a227b00c232dffad522566d9b_1440w.webp)
   - 贪心算法每步选择当前最好的选择，希望通过局部最优策略期望产生全局最优解。但是贪心算法没有从整体最优上考虑，并不能保证最终一定全局最优。但是相对穷举搜索，搜索效率大大提升。
-- （3）beam search `集束搜索`：使用条件概率，每步选取概率最大的top k个词（beam width）
+- （3）`beam search` `集束搜索`：使用条件概率，每步选取概率最大的top k个词（beam width）
   - beam search是对greedy search的一个改进算法，相对greedy search扩大了搜索空间，但远远不及穷举搜索指数级的搜索空间，是折中方案
   - beam search有一个超参数 beam size（**束宽**），设为 k
     - 每步选取当前条件概率最大的k个词，当做候选输出序列的第一个词。之后每个时间步，基于上步的输出序列，挑选出所有组合中条件概率最大的k个，作为该时间步下的候选输出序列。始终保持k个候选。最后从k个候选中挑出最优的。
@@ -993,6 +968,7 @@ self.loss = tf.reduce_mean(loss * sequence_mask)
     - 第3步: 同理以IH开头有三种候选 {IHI, IHH, IHU}，以HI开头有三种候选 {HII, HIH, HIU}。从这6个候选中挑出条件概率最大的2个，即IHH和HIU，作为候选输出序列。
     - 3步结束, 直接从IHH和IHU中挑选出最优值IHU作为最终的输出序列。
     - ![](https://pic4.zhimg.com/80/v2-e28eda027a639a9034cb1c39a291056b_1440w.webp)
+- （4）`温度采样`方法（Temperature Sampling Methods）
 - 总结
   - beam search不保证全局最优，但是比greedy search搜索空间更大，一般结果比greedy search要好。
   - greedy search 可以看做是 beam size = 1时的 beam search。
@@ -1051,11 +1027,6 @@ decoder_outputs, decoder_state, final_sequence_lengths = tf.contrib.seq2seq.dyna
 
 - 序列扩展是beam search的核心过程
 - ![](http://www.wuyuanhao.com/wp-content/uploads/2020/03/seqextend-1024x695.png)
-
-#### 代码解析
-
-- NLP界著名Python包[Transformers](https://github.com/huggingface/transformers)
-- 解析过程见：[解读Beam Search (1/2)](http://www.wuyuanhao.com/2020/03/20/%e8%a7%a3%e8%af%bbbeam-search-1-2/)
 
 
 ### Beam Search改进
@@ -1146,6 +1117,268 @@ def top_k_top_p_filtering(logits, top_k=0, top_p=1.0, filter_value=-float("Inf")
         logits[indices_to_remove] = filter_value
     return logits
 ```
+
+### 代码实践
+
+- NLP界著名Python包[Transformers](https://github.com/huggingface/transformers)
+- 解析过程见：[解读Beam Search (1/2)](http://www.wuyuanhao.com/2020/03/20/%e8%a7%a3%e8%af%bbbeam-search-1-2/)
+
+huggingface里提供的GPT-2代码
+
+```py
+import torch
+from transformers import AutoTokenizer, AutoModelForCausalLM
+
+device = "cuda" if torch.cuda.is_available() else "cpu"
+model_name = "gpt2-xl"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForCausalLM.from_pretrained(model_name).to(device)
+
+import pandas as pd
+
+input_txt = "Transformers are the"
+input_ids = tokenizer(input_txt, return_tensors="pt")["input_ids"].to(device)
+iterations = []
+n_steps = 8 # 进行8步解码
+choices_per_step = 5 # 每一步候选数量
+
+with torch.no_grad():# eval模式
+    for _ in range(n_steps):# 每步解码
+        iteration = dict()
+        iteration["Input"] = tokenizer.decode(input_ids[0]) # 提示文本
+        output = model(input_ids=input_ids) # 将提示文本输入到模型进行解码
+        # Select logits of the first batch and the last token and apply softmax
+        next_token_logits = output.logits[0, -1, :]
+        next_token_probs = torch.softmax(next_token_logits, dim=-1)
+        sorted_ids = torch.argsort(next_token_probs, dim=-1, descending=True)
+        # Store tokens with highest probabilities
+        for choice_idx in range(choices_per_step): # 概率最大的五个token
+            token_id = sorted_ids[choice_idx]
+            token_prob = next_token_probs[token_id].cpu().numpy()
+            token_choice = (
+                f"{tokenizer.decode(token_id)} ({100 * token_prob:.2f}%)" # 取百分号两位数
+            )
+            iteration[f"Choice {choice_idx+1}"] = token_choice
+        # Append predicted next token to input
+        input_ids = torch.cat([input_ids, sorted_ids[None, 0, None]], dim=-1) # 将概率最大的字符拼接到提示文本
+        iterations.append(iteration)
+# 输出序列解码结果
+pd.DataFrame(iterations)
+```
+
+##### （1）贪婪搜索
+
+```py
+# （1）贪婪搜索
+input_ids = tokenizer(input_txt, return_tensors="pt")["input_ids"].to(device)
+output = model.generate(input_ids, max_new_tokens=n_steps, do_sample=False)
+print(tokenizer.decode(output[0]))
+# Transformers are the most popular toy line in the world,
+# 扩大长度
+max_length = 128
+input_txt = """In a shocking finding, scientist discovered a herd of unicorns living in a remote, previously unexplored valley, in the Andes Mountains. Even more surprising to the researchers was the fact that the unicorns spoke perfect English.\n\n
+"""
+input_ids = tokenizer(input_txt, return_tensors="pt")["input_ids"].to(device)
+output_greedy = model.generate(input_ids, max_length=max_length, do_sample=False)
+print(tokenizer.decode(output_greedy[0]))
+# Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+# In a shocking finding, scientist discovered a herd of unicorns living in a remote, previously unexplored valley, in the Andes Mountains. Even more surprising to the researchers was the fact that the unicorns spoke perfect English.​
+```
+
+贪婪搜索缺点：
+- 倾向于产生重复序列
+- 可能会错过整体概率较高的单词序列，只是因为高概率的单词刚好在低概率的单词之前。
+
+解法：集束搜索
+
+##### （2）集束搜索（beam search decoding）
+
+集束搜索每步解码是不选概率最高标记，而是记录**前b个**最有可能的下一个标记，其中b被称为`波束`或`路径个数`。
+- 下一组集束的选择是考虑现有集束的所有可能的下一个标记的扩展，并选择b个最可能的扩展。
+- 这个过程重复进行，直到达到**最大长度**或**EOS标记**
+- 然后根据对数概率对b个波束进行排序，选择最可能的序列
+- ![](https://pica.zhimg.com/80/v2-ef3522dfec91840dcad6642981722b18_1440w.webp?source=1940ef5c)
+
+为什么用`对数概率`而不是`条件概率`对序列进行评分？
+- 计算一个序列的总体概率 $P(y1，y2，...，yt\|x)$ 涉及计算条件概率 $P(yt\|y < t,x)$ 的乘积。由于每个条件概率通常是\[0，1\]范围内的小数字，取乘积会导致总概率很容易出现**下溢**。不能再精确地表示计算的结果。
+- ![](https://pic1.zhimg.com/80/v2-06d671883015295f2a493fb4f550f897_1440w.webp?source=1940ef5c)
+- 于是，使用`对数概率`替换`条件概率`
+
+```py
+import torch.nn.functional as F
+# 对数概率
+def log_probs_from_logits(logits, labels):
+    logp = F.log_softmax(logits, dim=-1)
+    logp_label = torch.gather(logp, 2, labels.unsqueeze(2)).squeeze(-1)
+    return logp_label
+# 序列总对数概率
+def sequence_logprob(model, labels, input_len=0):
+    with torch.no_grad():
+        output = model(labels)
+        log_probs = log_probs_from_logits(output.logits[:, :-1, :], labels[:, 1:]) # 不算首尾标记，非模型生成
+        # 只需要将每个标记的对数概率相加
+        seq_log_prob = torch.sum(log_probs[:, input_len:])
+    return seq_log_prob.cpu().numpy()
+# 调用
+logp = sequence_logprob(model, output_greedy, input_len=len(input_ids[0]))
+print(tokenizer.decode(output_greedy[0]))
+print(f"\nlog-prob: {logp:.2f}")
+# beam search, 5个
+output_beam = model.generate(input_ids, max_length=max_length, num_beams=5, do_sample=False)
+logp = sequence_logprob(model, output_beam, input_len=len(input_ids[0]))
+print(tokenizer.decode(output_beam[0]))
+print(f"\nlog-prob: {logp:.2f}")
+```
+
+波束越多，得到的结果就越好；然而，生成过程会变得更慢
+
+用集束搜索得到的对数概率（越高越好）比用简单的贪婪解码得到的要好。
+- 然而，集束搜索也受到重复文本的影响。
+
+一个解决方法
+- <span style='color:blue'>用 no_repeat_ngram_size 参数施加一个 n-gram惩罚</span>，跟踪哪些n-gram已经被看到，并将下一个token的概率设置为零，如果它将产生一个以前看到的n-gram
+
+```py
+output_beam = model.generate(input_ids, max_length=max_length, num_beams=5, do_sample=False, no_repeat_ngram_size=2) 
+logp = sequence_logprob(model, output_beam, input_len=len(input_ids[0])) 
+print(tokenizer.decode(output_beam[0])) 
+print(f"\nlog-prob: {logp:.2f}")
+```
+
+停止重复后，尽管产生了较低的分数，但文本仍然是连贯的。
+
+带n-gram惩罚的集束搜索是一种很好的方法，可以在关注**高概率标记**（用束搜索）和**减少重复**（用n-gram惩罚）之间找到一个**平衡点**
+- 通常用于总结或机器翻译等事实正确性很重要的应用中。当事实的正确性不如生成的输出的多样性重要时，例如在开放领域的闲聊或故事生成中，另一种减少重复同时提高多样性的方法是使用抽样。
+
+##### （3）温度采样方法（Temperature Sampling Methods）
+
+公式
+- ![img](https://picx.zhimg.com/80/v2-85841701ef0074344a545b4ece6fc3e1_1440w.webp?source=1940ef5c)
+- \|V\|表示词汇的cardinality。
+- 通过添加一个温度参数T来轻松控制输出的**多样性**，该参数在采取softmax之前重新调整对数：
+- ![img](https://picx.zhimg.com/80/v2-16883c3dda877b20a4b3269bccc37ffb_1440w.webp?source=1940ef5c)
+
+通过调整T控制概率分布的形状。
+- 当 T≪1 时，分布在原点周围变得尖锐，罕见的标记被压制。
+- 当 T≫1 时，分布变得平缓，每个令牌的可能性相同。
+
+温度对标记概率的影响。
+- 当 temperature→0，就变成`greedy search`；
+- 当 temperature→∞，就变成`均匀采样`（uniform sampling）。
+- ![img](https://picx.zhimg.com/80/v2-13462a3839b939f7a70ae0aaf80da28c_1440w.webp?source=1940ef5c)
+- 详见论文：The Curious Case of Neural Text Degeneration
+
+generate()函数中设置温度参数`temperature`,`top_k`，以T=2为例进行采样
+
+```py
+import matplotlib.pyplot as plt
+import numpy as np
+
+def softmax(logits, T=1):
+    e_x = np.exp(logits / T)
+    return e_x / e_x.sum()
+
+logits = np.exp(np.random.random(1000))
+sorted_logits = np.sort(logits)[::-1]
+x = np.arange(1000)
+
+for T in [0.5, 1.0, 2.0]:
+    plt.step(x, softmax(sorted_logits, T), label=f"T={T}")
+plt.legend(loc="best")
+plt.xlabel("Sorted token probabilities")
+plt.ylabel("Probability")
+plt.show()
+```
+
+调用
+
+```py
+torch.manual_seed(42);
+# 高温
+output_temp = model.generate(input_ids, max_length=max_length, do_sample=True, temperature=2.0, top_k=0)
+# 温度降下来
+output_temp = model.generate(input_ids, max_length=max_length, do_sample=True, temperature=0.5, top_k=0)
+print(tokenizer.decode(output_temp[0]))
+```
+
+高温产生了大部分的胡言乱语；
+- 通过调大罕见词汇出现的概率，使模型产生了奇怪的语法和相当多的生造词
+- 降温后，更有连贯性
+
+控制样本质量(**一致性**和**多样性**)的方法, 在**一致性**（低温）和**多样性**（高温）之间总有一个权衡
+- 温度
+- 截断词汇的分布
+
+随着温度自由地调整多样性，在更有限的范围内，排除那些在语境中过于奇怪的词（即低概率词）。有两种主要的方法：`top-k`和`nucleus`（或`top-p`）采样。
+
+tempreature的选择往往呈现如下规律：
+- 当 temperature 设置为较小或者0的值时， Temperature Sampling 等同于 每次选择最大概率的 Greedy Search。 
+- 小的temperature 会引发极大的 repetitive 和predictable文本，但是文本内容往往更贴合语料(highly realistic)，基本所有的词都来自与语料库。 当temperatures较大时, 生成的文本更具有随机性(random)、趣味性(interesting)，甚至创造性(creative); 甚至有些时候能发现一些新词(misspelled words) 。 
+- 当 设置高 temperature时，文本局部结构往往会被破坏，大多数词可能会时 semi-random strings 的形式。 
+- 实际应用中，往往experiment with multiple temperature values! 当保持了一定的随机性又能不破坏结构时，往往会得到有意思的生成文本。
+
+`Top-k`和`nucleus`（`top-p`）抽样是两种流行的替代方法/使用温度的扩展。
+- 基本思想: 限制每个时间步长中可以取样的可能标记数量。
+- ![](https://picx.zhimg.com/80/v2-20a086d6f1c3250a28dd567b4ac144e3_1440w.webp?source=1940ef5c)
+- 上图挑选概率最高的字符（10^-1处的孤立条）的概率是1/10。
+- 按概率降序排列标记，并计算前10,000个标记的累积总和（GPT-2的词汇中总共有50,257个标记）
+- 在概率最高的1,000个标记中，大约有96%的机会挑选任何一个标记。该概率迅速上升到90%以上，但在几千个标记之后才饱和，接近100%。该图 显示，有1/100的概率没有选到任何甚至不在前2000名的标记。
+
+这些数字乍看很小，但很重要，因为在生成文本时
+- 对每个标记取样一次, 只有1/100或1/1000的机会
+- 如果取样数百次，就有很大的机会在某一时刻选到一个不可能的标记，而且在取样时选到这样的标记会严重影响生成文本的质量。
+
+因此, 通常希望避免这些非常不可能的标记。top-k和top-p采样发挥作用的地方
+
+top-k抽样
+- 在Top-K Sampling中，将挑选出K个最有可能的下一个单词，并且仅在这K个下一个单词之间重新为它们分配概率。 
+- GPT2就是采用了这种采样方案，这也是其生成故事效果不错的原因之一。
+- ![](https://pic1.zhimg.com/80/v2-a165f4fbb64fcc76e8796bc3df82b4d9_1440w.webp?source=1940ef5c)
+- K=6，将采样最有可能的6个单词，记为V top-K  . 在第一步采样中，V top-K 包含了整体的2/3，第二步采样则包含了几乎全部，但是有效地去除了一些奇奇怪怪的单词。
+
+top-k抽样背后的想法
+- 通过只从概率最高的k个标记中抽样来避免低概率的选择。
+- 这就在分布的长尾上设置了一个固定的切口，确保我们只从可能的选择中取样。
+- top-k抽样相当于定义一条垂直线并从左边的标记中抽样。
+
+同样，generate()函数通过`top_k`参数提供了一个简单的方法来实现这一点:
+
+```py
+output_topk = model.generate(input_ids, max_length=max_length, do_sample=True, top_k=50)
+print(tokenizer.decode(output_topk[0]))
+```
+
+最终得到最像人类的文本
+
+如何选择k呢？
+- k的值是手动选择的，对序列中的每个选择都是一样的，与实际的输出分布无关。
+- 通过查看一些文本质量指标来找到一个好的k值
+
+动态截断
+- 在核抽样或顶抽样中，不选择一个固定的截断值，而是设定一个截断的时间条件。在选择中达到一定的概率质量时。
+
+top-p采样
+- 在Top-p采样中，不是从仅最可能的K个单词中采样，而是从其**累积概率**超过一个阈值p的最小可能单词集合中进行选择，然后将这组单词重新分配概率。 
+- 这样，单词集合的大小（也就是集合中单词的数量）可以根据下一个单词的概率分布动态地增加或减少。
+- ![](https://picx.zhimg.com/80/v2-0d091bc6c6d820a8715befa576fe3f42_1440w.webp?source=1940ef5c)
+- 设置p = 0.92 p = 0.92p=0.92，定义为V top-p ，所有单词累计概率超过0.92的最小单词子集。 在第一步采样中，包括了9个最有可能的单词，而在第二步采样中，只需选择前3个单词即可超过92％。
+- 当下一个单词的可预测性不确定时，保留了较多的单词
+
+generate()函数也提供了一个激活top-p抽样的参数
+
+```py
+torch.manual_seed(42)
+output_topp = model.generate(input_ids, max_length=max_length, do_sample=True, top_p=0.90)
+print(tokenizer.decode(output_topp[0]))
+```
+
+Top-p采样也产生了一个连贯的故事。把这两种抽样方法结合起来以获得最佳效果。
+- 设置top_k=50和top_p=0.9，相当于从最多50个标记的池子里选择概率质量为90%的标记的规则。
+
+使用抽样时，也可以用束搜索。与其贪婪地选择下一批候选标记，可以对它们进行抽样，并以同样的方式建立起波束。
+
+参考：[关于文本生成（text generation），有哪些提高生成多样性的方法？](https://www.zhihu.com/question/415657741/answer/2430106609)
+
 
 ### 训练
 
@@ -2485,6 +2718,31 @@ GPT 2 是 OpenAI 推出的一个中文生成模型，由加拿大工程师 Adam 
 
 - 更多[Demo地址](http://wqw547243068.github.io/demo)
 - 【2020-8-27】[E2Echallenge参赛模型汇总](https://blog.csdn.net/u012328476/article/details/108144226)
+
+- 【2022-7-16】[腾讯刘天宇：可控、可靠的数据到文本生成技术](https://www.toutiao.com/article/7120933821176037888), 聚焦data2text 任务
+- 【2021-7-14】[WAIC 2021-好未来副总裁吴中勤：多模态机器学习与自动生成技术](https://www.toutiao.com/i6984303337013363212/)，好未来集团技术副总裁吴中勤发表主题演讲《多模态机器学习及大规模自动生成技术：算法框架、行业实践》，介绍了多模态深度学习以及大规模自动生成技术在教育领域的实践与应用，并介绍了好未来 AI 研究院的最新研究成果及成功案例。
+  - 多模态整个技术研究方向包括以下：
+  - `表征`，多个模态联合去做事物或者语义的联合表征；
+  - `转换`，在模态之间实现转换，例如输入文字出现画面，输入声音出现文字；
+  - `融合`，在做单模态识别之后做后端融合，把整个模态在分类阶段、工作阶段加以融合；
+  - `对齐`，比如一段文字、一个视频，怎么把其中物体和关系做对应；此外还包括模态之间的协同。
+  - [img](https://p1-tt.byteimg.com/origin/pgc-image/e0b83a3aaacf4296931db87706437308?from=pc)
+  - ![](https://p1-tt.byteimg.com/origin/pgc-image/e0b83a3aaacf4296931db87706437308?from=pc)
+  - GodEye 这套教学辅助系统，基于多模态深度学习理念打造的，可以针对课堂当中老师和学生各类行为进行智能识别，通过辅助授课老师在授课中视频片段、关键行为去定位老师和学生在课堂中的交互，最后提升学习效果。
+  - 一个小时之内可生成几十万道题，针对个性化去生成针对性的题目，生成题目速度超越人类千倍、万倍，生成题目也具有多样性和广泛性，而且随着学生的使用量越来越大，年限越来越强，学生都在一点点的进步。除了生成题目，该模型还能生成作文
+  - ![](https://p3-tt.byteimg.com/origin/pgc-image/35d0314282ac4edc9359836325677a04?from=pc)
+- 【2021-3-27】【可控的神经网络文本生成】《[Controllable Neural Text Generation](https://lilianweng.github.io/lil-log/2021/01/02/controllable-neural-text-generation.html)》by Lilian Weng 
+- 【2021-3-26】【用于生成阅读理解问题的NLP系统】'question_generator - An NLP system for generating reading comprehension questions' by Adam Montgomerie [GitHub](https://github.com/AMontgomerie/question_generator)
+- 【2020-7-6】清华孙茂松：九歌多样化古典诗歌机器写作模型[MixPoet](http://nlp.csai.tsinghua.edu.cn/news/)开源
+- 【2020-9-21】文本生成系列文章
+  - [文本生成12：4种融合知识的text generation](https://zhuanlan.zhihu.com/p/133266258)
+  - [文本生成13：万字长文梳理文本生成评价指标](https://zhuanlan.zhihu.com/p/144182853)
+- 【2021-1-4】[data2text](https://zhuanlan.zhihu.com/p/82054729)，【2021-3-29】解读[文本生成2：Data-to-text Generation with Entity Modeling](https://zhuanlan.zhihu.com/p/82054729), [论文](https://arxiv.org/abs/1906.03221)，[代码](https://github.com/ratishsp/data2text-entity-py)
+- 【2021-1-4】题目自动生成[data2text](https://zhuanlan.zhihu.com/p/82054729)
+  - 应用点是业务方设计题目时，不用再费劲编写题目，只需设置知识点，系统根据知识点+问题类型生成候选题目，业务方验证通过即可
+- 【2021-3-29】文本风格迁移综述，[一文超详细讲解文本风格迁移](https://zhuanlan.zhihu.com/p/159039652)
+  - ![](https://pic2.zhimg.com/80/v2-da58494400a380027e47ff97af6b97fd_1440w.jpg)
+
 
 # 结束
 
