@@ -622,6 +622,37 @@ Regardless of your framework of choice, you can parameterize the generate method
 </div>
 
 
+#### 解码策略
+
+generate方法使用
+
+```sh
+greedy decoding: greedy search, 触发条件: `num_beams=1` and `do_sample=False`
+contrastive search: contrastive_search, 触发条件: `penalty_alpha>0`` and `top_k>1`
+multinomial sampling: sample, 触发条件: `num_beams=1` and `do_sample=True`
+beam-search decoding: beam search, 触发条件: `num_beams>1` and `do_sample=False`
+beam-search multinomial sampling: beam sample, 触发条件: `num_beams>1` and `do_sample=True`
+diverse beam-search decoding: group_beam_search, 触发条件: `num_beams>1` and `num_beam_groups>1`
+constrained beam-search decoding: constrained_beam_search, 触发条件: `constraints!=None` or `force_words_ids!=None`
+```
+
+理论上，解码策略有几种
+- `贪心搜索`：greedy search
+- `集束搜索`：beam search
+- `全局搜索`：又称暴力搜索, brute search
+
+结合采样方法，可以衍生出多种解码策略
+
+|generate类型|解码策略|参数`do_sample`|参数`num_beams`|其它参数| 触发条件 |
+|---|---|----|----|----|--------|
+| greedy decoding | greedy search | False | 1 | - | `num_beams=1` and `do_sample=False` |
+| contrastive search | contrastive search | - | - | - | `penalty_alpha>0` and `top_k>1` |
+| multinomial sampling | sample | true | 1 | - |`num_beams=1` and `do_sample=True` |
+| beam-search decoding | beam search | False | >1 | - | `num_beams>1` and `do_sample=False` |
+| beam-search multinomial sampling | beam sample | True | >1 | - | `num_beams>1` and `do_sample=True` |
+| diverse beam-search decoding | group_beam_search | - | >1 | - | `num_beams>1` and `num_beam_groups>1` |
+| constrained beam-search decoding | constrained_beam_search | 受限beam search | - | - |`constraints!=None` or `force_words_ids!=None` |
+
 参数说明：[text_generation](https://huggingface.co/docs/transformers/main_classes/text_generation)
 
 ### Demo发布（space）
