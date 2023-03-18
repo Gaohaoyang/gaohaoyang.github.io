@@ -1085,7 +1085,9 @@ Because training step 1 is a simple supervised finetune progress as many other m
 - code : [generate_instruction.py](https://github.com/tatsu-lab/stanford_alpaca/blob/main/generate_instruction.py)
 
 
-
+【2023-3-17】贝壳开源的 7b模型 [BELLE](https://github.com/LianjiaTech/BELLE), [huggingface](https://huggingface.co/jay68/BELLE-7B-0.2M)，限sft, rm、rlhf还没加，size太小调不出来，只能做特定任务，指令泛化理解都搞不定; Stanford方案复现中文版
+- [Exploring ChatGPT's Ability to Rank Content: A Preliminary Study on Consistency with Human Preferences](https://arxiv.org/abs/2303.07610)
+- ChatGPT's zero-shot ranking capability could be used to reduce annotation pressure in a number of ranking tasks
 
 ### LAION：Open Assistant
 
