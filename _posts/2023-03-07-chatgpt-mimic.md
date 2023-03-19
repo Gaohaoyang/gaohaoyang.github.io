@@ -1074,6 +1074,8 @@ Because training step 1 is a simple supervised finetune progress as many other m
 - We performed a **blind pairwise comparison** between `text-davinci-003` and `Alpaca 7B`, and we found that these two models have very similar performance: `Alpaca` wins 90 versus 89 comparisons against `text-davinci-003`.
 - ![](https://crfm.stanford.edu/static/img/posts/2023-03-13-alpaca/alpaca_right_email.png)
 
+
+
 #### self-instruct
 
 [self-instruct](https://github.com/yizhongw/self-instruct): [Self-Instruct: Aligning LM with Self Generated Instructions](https://arxiv.org/abs/2212.10560)
@@ -1088,6 +1090,8 @@ Because training step 1 is a simple supervised finetune progress as many other m
 【2023-3-17】贝壳开源的 7b模型 [BELLE](https://github.com/LianjiaTech/BELLE), [huggingface](https://huggingface.co/jay68/BELLE-7B-0.2M)，限sft, rm、rlhf还没加，size太小调不出来，只能做特定任务，指令泛化理解都搞不定; Stanford方案复现中文版
 - [Exploring ChatGPT's Ability to Rank Content: A Preliminary Study on Consistency with Human Preferences](https://arxiv.org/abs/2303.07610)
 - ChatGPT's zero-shot ranking capability could be used to reduce annotation pressure in a number of ranking tasks
+
+【2023-3-19】基于LLaMA用翻译语料训练中文Alpaca模型 - [李煜东的文章 - 知乎](https://zhuanlan.zhihu.com/p/614923816)
 
 ### LAION：Open Assistant
 
