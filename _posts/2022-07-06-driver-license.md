@@ -57,11 +57,6 @@ permalink: /car
     - [视频地址](https://vdn3.vzuu.com/SD/fd78b466-236d-11eb-b628-569c1e0f3e2c.mp4)
   - 转向不足：由于前部重，前轮又同时负责**转向**和**驱动** —— 方向盘重，转弯半径大，很容易出现转向不足。
 
-
-<video width="620" height="440" controls="controls" autoplay="autoplay">
-  <source src="https://vdn3.vzuu.com/SD/fd78b466-236d-11eb-b628-569c1e0f3e2c.mp4" type="video/mp4" />
-</video>
-
 ### 前置后驱
 
 **前置后驱**是指将发动机放置在车前部，并且采用**后轮**驱动，英文Front Engine Rearwheel Drive，简称FR。
@@ -72,10 +67,6 @@ permalink: /car
   - 不会后轮悬空：FR车型因为传动结构的原因，在重量分配上也比前驱车平均，可以达到那“传说中”的50：50重量配比，前轮负担低了，自然在极限状况下不会产生车头下沉、后轮悬空等现象，因此操控性、稳定性都相对好一些！
 - 缺点
   - 转弯过度：从理论上来说，后驱车在转弯时的最大时速会更高，但是由于前轮直接受到转向系统支配，在已经改变行驶方向的情况下，后轮仍然又一个向前的惯性 —— 出现转向过度！对于驾驶技术比较厉害的人来说，可控的转向过度也就是飘移，是一种驾驶乐趣
-
-<video width="620" height="440" controls="controls" autoplay="autoplay">
-  <source src="https://vdn6.vzuu.com/SD/307f8d1a-2366-11eb-8aa8-82d20bc5e0d1.mp4" type="video/mp4" />
-</video>
 
 一些高性能车和追求操控感的车都会采用后驱。而这些车一般会比较贵 —— 和前驱相比多了传动轴和后轮差速器，机械结构也更为复杂~
 
@@ -121,10 +112,6 @@ permalink: /car
   - 再次，后轴承载负荷大，超级超级超级容易出现转向过度。
 - RR车的起步、加速性能是所有驱动形式里最好的。
 
-<video width="620" height="440" controls="controls" autoplay="autoplay">
-  <source src="https://vdn.vzuu.com/SD/7a5cc946-2318-11eb-909f-9a794694b530.mp4" type="video/mp4" />
-</video>
-
 
 ## 方向盘
 
@@ -139,16 +126,13 @@ permalink: /car
 ### 方向盘与车轮：转向比
 
 转向系统中，**转向传动比**是一直非常重要的指标，是**方向盘**转向角度与**车轮**转向角度之比。
-- <img src="https://inews.gtimg.com/newsapp_match/0/4635853636/0" height="100%" width="300" />
 - 转向比越大意味着车轮转动同样的角度，需要打更多的方向盘。
 - 转向比越小的车子，指向性更精准，只需要打很少的方向就可以获得更多的转向。[图](https://inews.gtimg.com/newsapp_match/0/4635853605/0)
-- <img src="https://inews.gtimg.com/newsapp_match/0/4635853605/0" height="100%" width="300" />
 - 最直观的区别就是开大货车、客车和开私家车；货车和客车的方向盘都很大，司机完成一个转向动作需要扭转很大幅度的方向盘，而小车只需要很小的动作就可以完成操作。
 
 对于很多车来说，**转向传动比**这个参数是可以**动态变化**的，这也是老司机很容易觉察到的
 - 当车子处于静止或者**低速**状态下大角度转向，系统会默认给出一个较小的转向传动比，让车子更灵活；
 - 而当汽车处于**高速**行驶或小角度转向时，系统的转向传动比就会增大，提高汽车高速转向的稳定性。
-- <img src="https://inews.gtimg.com/newsapp_bt/0/14124401848/1000" height="100%" width="200" />
 
 一套好的转向系统就是要让驾驶者觉得**低速轻盈**、**高速稳健**。
 - 但是无论是**纯机械式**可变转向比系统还是**电子式可变**转向比系统，由于机械结构的存在，它们都有转向比的一个上限。
@@ -276,9 +260,11 @@ permalink: /car
 - [如何打方向盘才是正确的？-幻之影迹的回答](https://www.zhihu.com/question/462704496/answer/1920096998)
 - 视频：[方向盘特别篇，简单粗暴教你如何正确使用方向盘-西安驾校我知道的视频](https://www.zhihu.com/zvideo/1413139844747354112)
 
-<iframe src="//player.bilibili.com/player.html?aid=763713278&bvid=BV1kr4y1y7Zx&cid=429374226&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=763713278&bvid=BV1kr4y1y7Zx&cid=429374226&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"  sandbox="" >
 
-<iframe src="//player.bilibili.com/player.html?aid=60799404&bvid=BV1ft411j7dT&cid=105807728&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- <img src="https://inews.gtimg.com/newsapp_bt/0/14124401848/1000" height="100%" width="200" /> </iframe>
+
+<iframe src="//player.bilibili.com/player.html?aid=60799404&bvid=BV1ft411j7dT&cid=105807728&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%" autoplay=false> </iframe>
 
 
 如果你平时打方向盘很轻，现在越来越沉了，可能是你打方向盘的**错误习惯**导致的，打方向盘呢一定要注意以下三点：
