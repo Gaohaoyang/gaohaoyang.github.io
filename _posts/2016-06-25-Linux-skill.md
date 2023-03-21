@@ -4439,6 +4439,24 @@ git reset foo/bar.txt # 重置
 git checkout foo/bar.txt # 恢复本地
 ```
 
+### fatal: Not possible to fast-forward, aborting.
+
+【2023-3-21】 vscode上执行同步（git pull & git push）时，报错误信息
+> fatal: Not possible to fast-forward, aborting.
+
+[stackoverflow](https://stackoverflow.com/questions/13106179/error-fatal-not-possible-to-fast-forward-aborting): Why is Git not allowing me to fast forward merge anymore? If I try to force it using --ff-only, I get the message
+> fatal: Not possible to fast-forward, aborting.
+
+I realize that there are huge advantages to merge --no-ff, but I'm just puzzled why I can't --ff-only now?
+
+解法
+
+Use the option --no-ff to turn off fast-forwarding for one pull:
+
+```sh
+git pull --no-ff
+```
+
 ## github问题
 
 - 【2021-3-18】github访问受限，速度慢, 知乎专题：[github打开慢？无法访问？](https://zhuanlan.zhihu.com/p/356790236)
