@@ -267,7 +267,7 @@ permalink: /car
 <iframe src="//player.bilibili.com/player.html?aid=60799404&bvid=BV1ft411j7dT&cid=105807728&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%" autoplay=false> </iframe>
 
 
-如果你平时打方向盘很轻，现在越来越沉了，可能是你打方向盘的**错误习惯**导致的，打方向盘呢一定要注意以下三点：
+如果平时打方向盘很轻，现在越来越沉了，可能是打方向盘的**错误习惯**导致的，打方向盘呢一定要注意以下三点：
 - 第一，平常掉头时，不要把方向盘打死超过5秒，因为这样会造成助力泵磨损。
 - 第二熄火停车以后，一定要保证方向盘在回正的位置，否则时间长了容易跑偏。
 - 第三，不要经常原地打方向盘，因为这样不但会导致转向系统负荷过大，还会过早的磨损轮胎。
@@ -278,7 +278,7 @@ permalink: /car
 - 打死圈数：1.5圈方向的为新款方向助力车；非助力的则需要打两圈。
 - 外观区别：带助力的放向盘直接比较小，表示为四幅，中间有喇叭。非助力的放线盘则大很多，幅数也比较多，也有四幅的，两边都有喇叭。
 
-||助力|非助力|
+|维度|助力|非助力|
 |---|---|---|
 |打死圈数|1.5|2|
 |外观|方向盘小，四幅，中间喇叭|方向盘大，幅数多，两边喇叭|
@@ -303,17 +303,17 @@ permalink: /car
 变速器的位置位于发动机后方，其外壳通过螺丝固定在发动机上。
 
 变速器的作用
-- 1、改变传动比（决定发动机同转速下车子向前跑的速度快慢）
-- 2、改变力的方向（实现倒挡）
-- 3、实现空挡（原地怠速运转）。
+- 1、改变`传动比`（决定发动机同转速下车子向前跑的速度快慢）
+- 2、改变力的方向（实现`倒挡`）
+- 3、实现`空挡`（原地怠速运转）。
 
-变速器按类型分为手动变速器与自动变速器，他们的挂挡杆也不一样
+变速器按类型分为`手动变速器`与`自动变速器`，挂挡杆也不一样
 - ![](https://pic2.zhimg.com/80/v2-ef242b41cdb7ff12cb132e3a7d0a8165_720w.jpg)
 
-汽车分为前驱与后驱，变速器为了与之相适应，也分为横置变速器与纵置变速器。横置变速器对应前驱，纵置对应后驱。
+汽车分为`前驱`与`后驱`，`变速器`为了与之相适应，也分为`横置变速器`与`纵置变速器`。横置变速器对应`前驱`，纵置对应`后驱`。
 - ![](https://pic3.zhimg.com/80/v2-8908e199d3c9edf722d611b7f2d6e20e_720w.jpg)
 
-手动变速器的组成
+`手动变速器`的组成
 - 通常由输入轴、输出轴、中间轴、差速器与减速器（横置变速器的差减总成才与变速器集合在一起）、各挡位齿轮、轴承、同步器、换挡机构、拨叉、油封、润滑油、壳体、输出法兰等组成。
 - ![](https://pic1.zhimg.com/80/v2-ae0ed759d53b50a1d7361b23b841db78_720w.jpg)
 
@@ -370,26 +370,26 @@ C1和C2的测试难度：
 - **选驾校** ➡ **报名** ➡ 科目一 ➡ 科目二 ➡ 科目三 ➡ 科目四 ➡ **拿本** ➡ **新手上路**
 
 考驾照流程：
-- 报名
+- （1）报名
   - 带齐证件材料到驾校报名处报名学车，本地学员准备身份证原件和复印件和一寸免冠照片。报名后**十天**才可以预约科目一。
   - 默默教练轻车熟路地带领我们直奔体检的地方，有些人没带零钱，默默教练就直接给付了，感觉十几分钟就结束了十几个人的报名战斗。领去了一本学员手册、一本班车介绍、一本科一科四教材，还有一张计时预约卡（这张卡很重要，科二科三刷学时、坐班车都靠他）。八点之前全部搞定
-- 科目一考试（**理论考**）
+- （2）科目一考试（**理论考**）
   - 科目一可以网上学习，记得是16个课时，每天只能刷4个，所以需要**4天**。刷完以后预约考试，考试当天带身份证和预约卡到6号楼参加考试，第一次考试不过的话，当场就可以第二次补考，整个过程加排队也就一个多小时，流水考场还是很快的。
   - 科目一学时学满之后，学员自行在**车管所**网站上预约科目一考试，考场和考试时间都可以自主选择
   - 科目一考试是**电脑无纸化**考试形式，主要考核**交通法律**、**法规**的基本知识，考试当天必须携带身份证原件。
   - 考试当天共有2次考试机会，2次都没有通过则必须重新预约考试
-- 科目二练习和考试（**场地考**）
+- （3）科目二练习和考试（**场地考**）
   - 科目二考试包含5项：**直角转弯**、**曲线行驶**、**倒车入库**、**侧方位停车**、**坡道定点停车与起步**
   - 学员学车时必须严格记录学时，学时满后，才有资格预约科目二考试。
   - 考试当天共有2次考试机会，2次都没有通过则必须重新预约考试
   - 虽然我报的是**平时班**，但是也可以按照**速成班**来约车，所以约了7天，都是同一辆车。教我科二的白教练人非常好，也很有耐心，一直聊的很愉快，教的也很条理很有办法。只可惜我不太争气，第一次考试遇到极端天气，第二次考试脑子秀逗，第三次才过。海淀驾校服务很好，第一次考、第二次考前都有免费的集中训练，这个训练非常重要，一定要参加，到晚上还可以去考场里练一练熟悉环境。我的三个集中教练都很好，尤其是许教练，一直在鼓励我，集训的时候特意带我练了几圈。默默也一直在帮我，最后一次集训的时候帮我开小灶，所幸终于过了。
-- 科目三练习和考试（**路考**）
+- （4）科目三练习和考试（**路考**）
   - 科目二考试合格后，学员就可以进行科目三路考的训练，按照规定，科目三训练里程最低不得少于**300公里**
   - 科目三考试项目至少包含：夜间灯光模拟操作、上车准备、直线行驶、百米加减档、直线行驶、通过路口、通过人行横道、通过学校区域、通过公共汽车站台、变更车道、掉头、靠边停车
   - 考试当天共有2次考试机会，2次都没有通过则必须重新预约考试
   - 科二是个折磨，科三就好很多了，第二次上路的时候教练说你这是第几次出来，我说昨天练了两圈，他还说那你练得很不错。考前照例还是有集训，集训教练会讲一些注意事项，还是很重要的，一定要参加。不像科二那么紧张，又有默默的支持，科三一举拿下还是很开心的。提醒大家注意，科三一定是上路的课时和网络科目四的课时全部刷完以后才可以预约的。
   - [瑜儿](https://www.zhihu.com/question/19565516/answer/174714477)
-- 科目四考试（**理论考**）
+- （5）科目四考试（**理论考**）
   - 科目四考试主要考核**安全文明驾驶常识**，和科目一一样，也是电脑无纸化考试形式，比科目一多了多选择，动画题，案例分析题的题型领取驾驶证当科目四考试合格后，就可以等着车管所制证，当驾校通知驾驶证完成，学员持身份证到驾校报名点领取驾驶证
   - 科四就容易的很了，科三考完约联考，考完科四等两个小时左右就可以拿到小黑本了
 
@@ -896,32 +896,32 @@ B . 出库（右侧出库）
 - 左镜底过倒桩线（远）：刹车松离合
 
 [驾考科二倒车入库完整详细教学，倒库一直没感觉的同学可以多看几遍](https://www.bilibili.com/video/BV1mu411m76H?spm_id_from=333.337.search-card.all.click)
-- <iframe src="//player.bilibili.com/player.html?aid=507825144&bvid=BV1mu411m76H&cid=474767698&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- <iframe src="//player.bilibili.com/player.html?aid=507825144&bvid=BV1mu411m76H&cid=474767698&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
 #### （二）侧边停车
 
 [驾考科二侧方停车教学，第一视觉，全国通用](https://www.bilibili.com/video/BV1vg411P7a7?spm_id_from=333.337.search-card.all.click)
-- <iframe src="//player.bilibili.com/player.html?aid=507233988&bvid=BV1vg411P7a7&cid=457783450&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- <iframe src="//player.bilibili.com/player.html?aid=507233988&bvid=BV1vg411P7a7&cid=457783450&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 #### （三）直角转弯、曲线行驶
 
 [曲线行驶车内看点](https://www.bilibili.com/video/BV1Ht4y1W7kU?spm_id_from=333.999.0.0)
-- <iframe src="//player.bilibili.com/player.html?aid=982251470&bvid=BV1Ht4y1W7kU&cid=740083849&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- <iframe src="//player.bilibili.com/player.html?aid=982251470&bvid=BV1Ht4y1W7kU&cid=740083849&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 [科目二直角转弯，什么时候打方向](https://www.bilibili.com/video/BV19J411R7Lz/?spm_id_from=autoNext)
-- <iframe src="//player.bilibili.com/player.html?aid=76555919&bvid=BV19J411R7Lz&cid=130951838&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- <iframe src="//player.bilibili.com/player.html?aid=76555919&bvid=BV19J411R7Lz&cid=130951838&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 #### 直角转弯
 
 [科目二直角转弯车内点位讲解](https://www.bilibili.com/video/BV1QY4y1x7Tc?spm_id_from=333.999.0.0)
-- <iframe src="//player.bilibili.com/player.html?aid=639813948&bvid=BV1QY4y1x7Tc&cid=739515082&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- <iframe src="//player.bilibili.com/player.html?aid=639813948&bvid=BV1QY4y1x7Tc&cid=739515082&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
 ##### （四）半坡起步
 
 [科目二半坡起步](https://www.bilibili.com/video/BV1za411j7KV?spm_id_from=333.999.0.0)
-- <iframe src="//player.bilibili.com/player.html?aid=214559210&bvid=BV1za411j7KV&cid=734475965&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- <iframe src="//player.bilibili.com/player.html?aid=214559210&bvid=BV1za411j7KV&cid=734475965&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
 #### 海驾经验
@@ -1071,17 +1071,17 @@ B . 出库（右侧出库）
 - `离合`就是**水龙头**（开关），`油门`就是**水流**（动能），当你水龙头打开过快是不是容易冲的太快？或者把水龙头都冲掉？（熄火），所以先油门加点油（有动能了），离合器快速松到一半到半离合稳一下一下（慢慢开水龙头），离合器完全抬起，起步就又快又稳了。
 - 一定要记得把油门全松了，再踩离合，慢一点也能挂上档，油门不松全，转速会直接超2000转，直接就扣100分了
 
-<iframe src="//player.bilibili.com/player.html?aid=849429666&bvid=BV18L4y1p7n8&cid=450119878&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=849429666&bvid=BV18L4y1p7n8&cid=450119878&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 #### 模拟灯光考试
 
 
 科目三 夜间灯光考试模拟 （语音）
-- <iframe src="//player.bilibili.com/player.html?aid=499823390&bvid=BV1EK411N7rN&cid=242414463&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- <iframe src="//player.bilibili.com/player.html?aid=499823390&bvid=BV1EK411N7rN&cid=242414463&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 
 [科目三模拟灯光考试](https://www.bilibili.com/video/BV1oQ4y1q7Zo/?spm_id_from=autoNext) 注意事项
-- <iframe src="//player.bilibili.com/player.html?aid=721416472&bvid=BV1oQ4y1q7Zo&cid=433554708&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+- <iframe src="//player.bilibili.com/player.html?aid=721416472&bvid=BV1oQ4y1q7Zo&cid=433554708&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 1. 模拟灯光题目一定要背熟。
   -  误区：关心答案，忽视题目。
