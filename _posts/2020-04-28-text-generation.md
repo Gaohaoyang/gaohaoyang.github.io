@@ -1770,6 +1770,8 @@ Python实现前缀树比较简单的方案就是利用字典结构来实现嵌�
 
     Q1-->|2017,See\n内容缺乏,注意力机制\n诞生指针网络|Q1A(Pointer Network):::green
     Q2-->|2017,Zhou\ncoverage|Q2A(Coverage):::green
+    Q2-->|2022,Yixuan Su, 剑桥等\nSimCTG训练+CSD解码|Q2B(Contrastive Search Decoding):::green
+
     Q4-->|2017,Zhou\n选择门网络,selective gate network\n降低decoder负担|Q4A(选择门):::green
 
     Q3-->|2015,斯坦福李纪为\n最大互信息MMI,提升多样性和趣味性|A(MMI系列)
@@ -1831,6 +1833,30 @@ DBS引入了一些超参数，比如: 组数G、惩罚参数λ、差异性度量
 传统Seq2Seq一般会采用Softmax Cross Entropy（后文简记为`SCE`）作为损失值的计算函数
 
 高频的词汇的损失值越小，低频的词汇则会使损失值越大，从而使得**模型更关注低频词汇**的损失，其实该方法与focal loss非常类似。推理阶段，同样可以对每一步的输出施加一个权重
+
+##### 2022, 对比解码 Contrastive Search Decoding
+
+【2022-9-26】 Contrastive Search Decoding，对比搜索解码文本生成算法，详见[解读](https://blog.csdn.net/HUSTHY/article/details/125990877)
+- 论文: [《A Contrastive Framework for Neural Text Generation》](https://arxiv.org/pdf/2202.06417.pdf), 剑桥、腾讯、香港、DeepMind联合撰写
+- 摘要：生成结果不确定、重复
+- Text generation is of great importance to many natural language processing applications. However, maximization-based decoding methods (e.g., beam search) of neural language models often lead to degenerate solutions—the generated text is unnatural and contains undesirable repetitions. Existing approaches introduce stochasticity via sampling or modify training objectives to decrease the probabilities of certain tokens (e.g., unlikelihood training). However, they often lead to solutions that lack coherence. In this work, we show that an underlying reason for model degeneration is the **anisotropic** /anisotropic/ 各向异性 distribution of token representations. We present a contrastive solution: (i) SimCTG, a contrastive training objective to calibrate the model’s representation space, and (ii) a decoding method—contrastive search—to encourage diversity while maintaining coherence in the generated text. Extensive experiments and analyses on three benchmarks from two languages demonstrate that our proposed approach significantly outperforms current state-of-the-art text generation methods as evaluated by both human and automatic metrics.
+
+问题
+- GPT-2模型生成的token具有各异向性，使得token之间的相似性**非常接近没有区分度**，最后解码时造成了**文本重复**——text degeneration；
+- 提出了一种新的**训练**策略(`SimCTG`)+**解码**算法(`contrastive search`)，在多语言任务和实际的工业场景中进行人工评测，显著提升了文本生成的质量。
+- 论文提出的text degeneration的原因是text degeneration并不是SIMCTG提出的Contrastive Training，它并不能保证表征各向同质性，之所以在文本生成的质量上(少无意义的重复)有实实在在的提升，完全来自于新提出的解码策略——`contrastive search decoding`。
+
+contrastive search decoding是一种非topK、topP以及BeamSearch的解码策略，核心思想就是**对比**
+- 把当前要生成的token和已经生成的所有token做相似度计算，得到最大的相似度值；然后使得该token的概率与最大的相似度值的差值最大化的那个token就是要生成的token；
+- 当前轮次文本输入gpt2模型，使用hm得到新的k个候选生成tokens；然后把这些tokens和之前的文本拼接起来输入到下一轮模型，得到hm+1。这里的hm+1就是前面说的上一轮应该生成的token的embedding，通过解码公式的计算，选出最佳的hm+1也就得到了tm+1——当前轮最佳的那个token。按照上述流程循坏下去就可以得到生成一个句子了。
+- 代码及图表详见[原文](https://blog.csdn.net/HUSTHY/article/details/125990877)
+
+方案的缺陷
+- 一般都要求生成的句子具有**多样性**——有不同的生成，contrastive search decoding是一个**确定性**方案，每次只能生成固定的结果。
+- 作者有提出一个比较合适的方法：先用beamsearch + sample等方法生成部分句子，然后再使用contrastive search decoding对生成的句子进行补齐。
+- 还有一种方法，实现上比较麻烦，思想：就是那个公式中选择v的时候，不选最大的那一个，多选择几个，但是要小于K值。
+
+
 
 ## VAE：Variational AutoEncoder
 
