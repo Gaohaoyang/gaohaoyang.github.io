@@ -621,15 +621,25 @@ Regardless of your framework of choice, you can parameterize the generate method
     M-->O(自定义生成代码):::grass
 </div>
 
+#### 输入格式
+
+Special tokens that can be used at generation time
+- `pad_token_id` (int, optional) — 填充字符 The id of the padding token. 
+- `bos_token_id` (int, optional) — 开始字符 The id of the beginning-of-sequence token.
+- `eos_token_id` (Union[int, List[int]], optional) — 结束字符 The id of the end-of-sequence token. Optionally, use a list to set multiple end-of-sequence tokens.
+
+Generation parameters exclusive to encoder-decoder models 编码-解码模型独有参数
+- `encoder_no_repeat_ngram_size` (int, optional, defaults to 0) — If set to int > 0, all ngrams of that size that occur in the encoder_input_ids cannot occur in the `decoder_input_ids`.
+- `decoder_start_token_id` (int, optional) — If an encoder-decoder model starts decoding with a different token than bos, the id of that token.
 
 #### 输出参数
 
-如下
-- `num_return_sequences`(int, optional, defaults to 1) — The number of independently computed returned sequences for each element in the batch.
-- `output_attentions` (bool, optional, defaults to False) — Whether or not to return the attentions tensors of all attention layers. See attentions under returned tensors for more details.
-- `output_hidden_states` (bool, optional, defaults to False) — Whether or not to return the hidden states of all layers. See hidden_states under returned tensors for more details.
-- `output_scores` (bool, optional, defaults to False) — Whether or not to return the prediction scores. See scores under returned tensors for more details.
-- `return_dict_in_generate` (bool, optional, defaults to False) — Whether or not to return a ModelOutput instead of a plain tuple.
+Parameters that define the output variables of `generate`
+- `num_return_sequences`(int, optional, defaults to 1) — The number of independently computed returned sequences for each element in the batch. 返回句子数目
+- `output_attentions` (bool, optional, defaults to False) — Whether or not to return the attentions tensors of all attention layers. See attentions under returned tensors for more details. 所有层的注意力值
+- `output_hidden_states` (bool, optional, defaults to False) — Whether or not to return the hidden states of all layers. See hidden_states under returned tensors for more details. 所有曾的隐层状态
+- `output_scores` (bool, optional, defaults to False) — Whether or not to return the prediction scores. See scores under returned tensors for more details. 预测分值
+- `return_dict_in_generate` (bool, optional, defaults to False) — Whether or not to return a [ModelOutput](https://huggingface.co/docs/transformers/v4.26.1/en/main_classes/output#transformers.utils.ModelOutput) instead of a plain tuple.
 
 
 #### 解码策略
@@ -641,14 +651,15 @@ generate 解码参数
 - `penalty_alpha`: float, 惩罚因子，用于contrastive search decoding，平衡模型置信度与退化惩罚
 - `use_cache`: 默认True, 是否使用上一个K/V注意力，用于解码提速
 
-方法使用
-- greedy decoding: greedy search, 触发条件: `num_beams=1` and `do_sample=False`
-- contrastive search: contrastive_search, 触发条件: `penalty_alpha>0`` and `top_k>1`
-- multinomial sampling: sample, 触发条件: `num_beams=1` and `do_sample=True`
-- beam-search decoding: beam search, 触发条件: `num_beams>1` and `do_sample=False`
-- beam-search multinomial sampling: beam sample, 触发条件: `num_beams>1` and `do_sample=True`
-- diverse beam-search decoding: group_beam_search, 触发条件: `num_beams>1` and `num_beam_groups>1`
-- constrained beam-search decoding: constrained_beam_search, 触发条件: `constraints!=None` or `force_words_ids!=None`
+方法使用: can be used for text-decoder, text-to-text, speech-to-text, and vision-to-text models.
+- `greedy decoding` 贪心解码: [greedy search](https://huggingface.co/docs/transformers/v4.26.1/en/main_classes/text_generation#transformers.GenerationMixin.greedy_search), 触发条件: `num_beams=1` and `do_sample=False`
+- `contrastive search` 对比搜索: [contrastive_search](https://huggingface.co/docs/transformers/v4.26.1/en/main_classes/text_generation#transformers.GenerationMixin.contrastive_search), 触发条件: `penalty_alpha>0`` and `top_k>1`
+- `multinomial sampling` 多项式采样: [sample](https://huggingface.co/docs/transformers/v4.26.1/en/main_classes/text_generation#transformers.GenerationMixin.sample), 触发条件: `num_beams=1` and `do_sample=True`
+- `beam-search decoding` 集束解码: [beam search](https://huggingface.co/docs/transformers/v4.26.1/en/main_classes/text_generation#transformers.GenerationMixin.beam_search), 触发条件: `num_beams>1` and `do_sample=False`
+- `beam-search multinomial sampling` 集束多项式采样: [beam sample](https://huggingface.co/docs/transformers/v4.26.1/en/main_classes/text_generation#transformers.GenerationMixin.beam_sample), 触发条件: `num_beams>1` and `do_sample=True`
+- `diverse beam-search decoding` DBS解码: `DBS` [group_beam_search](https://huggingface.co/docs/transformers/v4.26.1/en/main_classes/text_generation#transformers.GenerationMixin.group_beam_search), 触发条件: `num_beams>1` and `num_beam_groups>1`
+  - DBS论文实现，将束宽均分成几组，小组内执行常规bs, 解码时考虑与前面序列的差异性，效果比diverseRL好，[详见](https://wqw547243068.github.io/text-generation?#2018-diverse-beam-search-dbs)
+- `constrained beam-search decoding` 对比集束解码: [constrained_beam_search](https://huggingface.co/docs/transformers/v4.26.1/en/main_classes/text_generation#transformers.GenerationMixin.constrained_beam_search), 触发条件: `constraints!=None` or `force_words_ids!=None`
 
 理论上，解码策略有几种
 - `贪心搜索`：greedy search
