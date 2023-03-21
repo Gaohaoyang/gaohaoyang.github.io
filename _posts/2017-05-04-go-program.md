@@ -1582,16 +1582,21 @@ Go语言中，行分隔符键是语句终止符，无需指明用;分割
 | 2| **数字**类型 | 算术类型，在整个程序中表示：<br>a)整数类型<br>b)浮点值。|
 | 3| **字符串**类型 | 字符串类型表示字符串值的集合。它的值是一个字节序列。 字符串是不可变的类型，一旦创建后，就不可能改变字符串的内容。预先声明的字符串类型是string。|
 | 4| **派生**类型 | 包括<br>(a)指针类型<br>(b)数组类型<br>(c)结构类型<br>(d)联合类型<br>(e)函数类型<br>(f)切片类型<br>(g)函数类型<br>(h)接口类型<br>(i) 类型|
+
  
 所有类型：
-- bool  
-- string  
-- int  int8(byte)  int16  int32(rune)  int64 
-- uint uint8 uint16 uint32 uint64 uintptr  
-- byte // uint8 的别名  
-- rune // int32 的别名。代表一个Unicode码  
-- float32 float64  
-- complex64 complex128
+
+```go
+bool  
+string  
+int  int8(byte)  int16  int32(rune)  int64 
+uint uint8 uint16 uint32 uint64 uintptr  
+byte // uint8 的别名  
+rune // int32 的别名。代表一个Unicode码  
+float32 float64  
+complex64 complex128
+```
+
 - int，uint 和 uintptr 类型在**32位**的系统上一般是32位，而在**64位**系统上是64位。当需要使用一个整数类型时，应该首选 int，仅当有特别的理由才使用定长整数类型或者无符号整数类型。
 
 ```go
@@ -1636,12 +1641,19 @@ f := float64(i)
 u := uint(i)
 // 将等于字符Z
 s := string(i)
-
 // int->字符串
 i := 90
 // 需要导入“strconv”
 s := strconv.Itoa(i)
 fmt.Println(s) // Outputs: 90
+// string转成int：
+int, err := strconv.Atoi(string)
+// string转成int64：
+int64, err := strconv.ParseInt(string, 10, 64)
+// int转成string：
+string := strconv.Itoa(int)
+// int64转成string：
+string := strconv.FormatInt(int64,10)
 ```
 
 ### 自定义类型 type
@@ -1676,10 +1688,12 @@ func main() {   
     fmt.Print('hhh') 
     log.Print('hhh') //  输出字符串要用双引号，否则：more than one character in rune literal
 }
+
+// 前缀：
+strings.HasPrefix("prefix", "pre")
+// 后缀：
+strings.HasSuffix("suffix", "fix")
 ```
- 
-- 前缀：strings.HasPrefix("prefix", "pre")
-- 后缀：strings.HasSuffix("suffix", "fix")
 
 ### 字符串格式化
 
@@ -4299,6 +4313,380 @@ func main() {
 ## 配置文件
 
 从配置文件读取信息
+
+### 文本文件
+
+【2023-3-21】文件的读写是编程语言的常见操作
+- [go lang 文件读写](https://segmentfault.com/a/1190000017918542)
+
+#### 读文件
+
+读取文件有三种方式：
+- （1）将文件**整体**读入内存
+- （2）按**字节**数读取
+- （3）按**行**读取
+
+（1）整体读入内存
+- 将文件整个读入内存，效率比较高，占用内存也最高。
+
+```go
+package main
+
+import (
+   "os"
+   "io/ioutil"
+   "fmt"
+)
+
+func main() {
+   filepath := "example/log.txt"
+   // 使用 os.Open
+   file, err := os.Open(filepath)
+   if err != nil {
+      panic(err)
+   }
+   defer file.Close()
+   content, err := ioutil.ReadAll(file)
+   fmt.Println(string(content))
+   // 或使用ReadFile
+   content ,err := ioutil.ReadFile(filepath)
+   if err !=nil {
+      panic(err)
+   }
+}
+```
+
+（2）按字节读取
+
+```go
+package main
+
+import (
+   "bufio"
+   "fmt"
+   "io"
+   "io/ioutil"
+   "os"
+)
+
+func main() {
+   filepath := "example/log.txt"
+   fi, err := os.Open(filepath)
+   if err != nil {
+      panic(err)
+   }
+   defer fi.Close()
+   r := bufio.NewReader(fi)
+
+   chunks := make([]byte, 0)
+   buf := make([]byte, 1024) //一次读取多少个字节
+   for {
+      n, err := r.Read(buf)
+      if err != nil && err != io.EOF {
+         panic(err)
+      }
+      fmt.Println(string(buf[:n]))
+      break
+      if 0 == n {
+         break
+      }
+      chunks = append(chunks, buf[:n]...)
+   }
+   fmt.Println(string(chunks))
+}
+```
+
+（3）按行读取
+
+```go
+package main
+
+import (
+   "bufio"
+   "fmt"
+   "io"
+   "io/ioutil"
+   "os"
+   "strings"
+)
+
+func main() {
+   filepath := "example/log.txt"
+   file, err := os.OpenFile(filepath, os.O_RDWR, 0666)
+   if err != nil {
+      fmt.Println("Open file error!", err)
+      return
+   }
+   defer file.Close()
+
+   stat, err := file.Stat()
+   if err != nil {
+      panic(err)
+   }
+   var size = stat.Size()
+   fmt.Println("file size=", size)
+
+   buf := bufio.NewReader(file)
+   for {
+      line, err := buf.ReadString('\n')
+      line = strings.TrimSpace(line)
+      fmt.Println(line)
+      if err != nil {
+         if err == io.EOF {
+            fmt.Println("File read ok!")
+            break
+         } else {
+            fmt.Println("Read file error!", err)
+            return
+         }
+      }
+   }
+
+}
+```
+
+#### 写文件
+
+写入方式
+- 1、ioutil.WriteFile
+- 2、os: io.WriteString
+- 3、os: 
+- 4、bufio
+
+1、ioutil.WriteFile
+
+```go
+package main
+
+import (
+   "io/ioutil"
+)
+
+func main() {
+
+   content := []byte("测试1\n测试2\n")
+   err := ioutil.WriteFile("test.txt", content, 0644)
+   if err != nil {
+      panic(err)
+   }
+}
+```
+
+这种方式每次都会覆盖 test.txt内容，如果test.txt文件不存在会创建。
+
+2、os
+- 在文件内容末尾添加新内容
+
+```go
+package main
+
+import (
+   "fmt"
+   "io"
+   "os"
+)
+
+func checkFileIsExist(filename string) bool {
+   if _, err := os.Stat(filename); os.IsNotExist(err) {
+      return false
+   }
+   return true
+}
+func main() {
+   var wireteString = "测试1\n测试2\n"
+   var filename = "./test.txt"
+   var f *os.File
+   var err1 error
+   if checkFileIsExist(filename) { //如果文件存在
+      f, err1 = os.OpenFile(filename, os.O_APPEND, 0666) //打开文件
+      fmt.Println("文件存在")
+   } else {
+      f, err1 = os.Create(filename) //创建文件
+      fmt.Println("文件不存在")
+   }
+```
+
+（3）
+
+```go
+package main
+
+import (
+   "fmt"
+   "os"
+)
+
+func checkFileIsExist(filename string) bool {
+   if _, err := os.Stat(filename); os.IsNotExist(err) {
+      return false
+   }
+   return true
+}
+func main() {
+   var str = "测试1\n测试2\n"
+   var filename = "./test.txt"
+   var f *os.File
+   var err1 error
+   if checkFileIsExist(filename) { //如果文件存在
+      f, err1 = os.OpenFile(filename, os.O_APPEND, 0666) //打开文件
+      fmt.Println("文件存在")
+   } else {
+      f, err1 = os.Create(filename) //创建文件
+      fmt.Println("文件不存在")
+   }
+   defer f.Close()
+   n, err1 := f.Write([]byte(str)) //写入文件(字节数组)
+
+   fmt.Printf("写入 %d 个字节n", n)
+   n, err1 = f.WriteString(str) //写入文件(字符串)
+   if err1 != nil {
+      panic(err1)
+   }
+   fmt.Printf("写入 %d 个字节n", n)
+   f.Sync()
+}
+```
+
+4、bufio
+
+```go
+package main
+
+import (
+   "bufio"
+   "fmt"
+   "os"
+)
+
+func checkFileIsExist(filename string) bool {
+   if _, err := os.Stat(filename); os.IsNotExist(err) {
+      return false
+   }
+   return true
+}
+func main() {
+   var str = "测试1\n测试2\n"
+   var filename = "./test.txt"
+   var f *os.File
+   var err1 error
+   if checkFileIsExist(filename) { //如果文件存在
+      f, err1 = os.OpenFile(filename, os.O_APPEND, 0666) //打开文件
+      fmt.Println("文件存在")
+   } else {
+      f, err1 = os.Create(filename) //创建文件
+      fmt.Println("文件不存在")
+   }
+   defer f.Close()
+   if err1 != nil {
+      panic(err1)
+   }
+   w := bufio.NewWriter(f) //创建新的 Writer 对象
+   n, _ := w.WriteString(str)
+   fmt.Printf("写入 %d 个字节n", n)
+   w.Flush()
+}
+```
+
+几种方法效率对比
+
+行结果：
+- Cost time 6.0003ms
+- Cost time 3.0002ms
+- Cost time 7.0004ms
+- Cost time 11.0006ms
+
+```go
+package main
+
+import (
+   "bufio"
+   "fmt"
+   "io"
+   "io/ioutil"
+   "os"
+   "time"
+)
+
+func read0(path string) string {
+   file, err := os.Open(path)
+   if err != nil {
+      panic(err)
+   }
+   defer file.Close()
+   content, err := ioutil.ReadAll(file)
+   return string(content)
+}
+
+func read1(path string) string {
+   content, err := ioutil.ReadFile(path)
+   if err != nil {
+      panic(err)
+   }
+   return string(content)
+}
+
+func read2(path string) string {
+   fi, err := os.Open(path)
+   if err != nil {
+      panic(err)
+   }
+   defer fi.Close()
+   r := bufio.NewReader(fi)
+
+   chunks := make([]byte, 0)
+   buf := make([]byte, 1024) //一次读取多少个字节
+   for {
+      n, err := r.Read(buf)
+      if err != nil && err != io.EOF {
+         panic(err)
+      }
+      if 0 == n {
+         break
+      }
+      chunks = append(chunks, buf[:n]...)
+   }
+   return string(chunks)
+}
+
+func read3(path string) string {
+   fi, err := os.Open(path)
+   if err != nil {
+      panic(err)
+   }
+   defer fi.Close()
+
+   chunks := make([]byte, 0)
+   buf := make([]byte, 1024)
+   for {
+      n, err := fi.Read(buf)
+      if err != nil && err != io.EOF {
+         panic(err)
+      }
+      if 0 == n {
+         break
+      }
+      chunks = append(chunks, buf[:n]...)
+   }
+   return string(chunks)
+}
+
+func main() {
+   file := "D:/gopath/src/example/example/log.txt"
+   start := time.Now()
+   read0(file)
+   t0 := time.Now()
+   fmt.Printf("Cost time %v\n", t0.Sub(start))
+   read1(file)
+   t1 := time.Now()
+   fmt.Printf("Cost time %v\n", t1.Sub(t0))
+   read2(file)
+   t2 := time.Now()
+   fmt.Printf("Cost time %v\n", t2.Sub(t1))
+   read3(file)
+   t3 := time.Now()
+   fmt.Printf("Cost time %v\n", t3.Sub(t2))
+}
+```
 
 ### json
 
