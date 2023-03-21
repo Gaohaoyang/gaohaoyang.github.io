@@ -263,7 +263,7 @@ permalink: /car
 - [如何打方向盘才是正确的？-幻之影迹的回答](https://www.zhihu.com/question/462704496/answer/1920096998)
 - 视频：[方向盘特别篇，简单粗暴教你如何正确使用方向盘-西安驾校我知道的视频](https://www.zhihu.com/zvideo/1413139844747354112)
 
-<iframe src="//player.bilibili.com/player.html?aid=763713278&bvid=BV1kr4y1y7Zx&cid=429374226&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"  sandbox="" >
+<iframe src="//player.bilibili.com/player.html?aid=763713278&bvid=BV1kr4y1y7Zx&cid=429374226&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%" >
 
 - <img src="https://inews.gtimg.com/newsapp_bt/0/14124401848/1000" height="100%" width="200" /> </iframe>
 
