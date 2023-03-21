@@ -826,6 +826,10 @@ pdf文件直接显示，800px不能省略px，否则高度低
 
 <iframe src="//player.bilibili.com/player.html?aid=26722471&cid=45968926&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
+【2023-3-21】嵌入视频默认自动播放，如何关闭？url里加&autoplay=0
+
+<iframe src="//player.bilibili.com/player.html?aid=26722471&cid=45968926&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+
 - [网易云课堂](http://open.163.com/movie/2006/1/1/9/M6HV755O6_M6HV8DF19.html)
 
 代码：
