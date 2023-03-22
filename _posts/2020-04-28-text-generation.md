@@ -3,7 +3,7 @@ layout: post
 title:  "文本生成&评价-Text Generation and Evaluation"
 date:   2020-04-28 21:39:00
 categories: 自然语言处理
-tags: 深度学习 NLP GAN Seq2seq 对话系统 文本评价 BLEU 多模态 好未来 paraphrase 复述 gpt VAE vae 扩散 chatgpt 编码器
+tags: 深度学习 NLP GAN Seq2seq 对话系统 文本评价 BLEU 多模态 好未来 paraphrase 复述 gpt VAE vae 扩散 chatgpt 编码器 各项同性 各项异性
 excerpt: 深度学习在NLP子领域——文本生成的应用汇总，如seq2seq、GAN系列
 author: 鹤啸九天
 mathjax: true
@@ -1891,6 +1891,16 @@ DBS引入了一些超参数，比如: 组数G、惩罚参数λ、差异性度量
 - 论文: [《A Contrastive Framework for Neural Text Generation》](https://arxiv.org/pdf/2202.06417.pdf), 剑桥、腾讯、香港、DeepMind联合撰写
 - 摘要：生成结果不确定、重复
 - Text generation is of great importance to many natural language processing applications. However, maximization-based decoding methods (e.g., beam search) of neural language models often lead to degenerate solutions—the generated text is unnatural and contains undesirable repetitions. Existing approaches introduce stochasticity via sampling or modify training objectives to decrease the probabilities of certain tokens (e.g., unlikelihood training). However, they often lead to solutions that lack coherence. In this work, we show that an underlying reason for model degeneration is the **anisotropic** /anisotropic/ 各向异性 distribution of token representations. We present a contrastive solution: (i) SimCTG, a contrastive training objective to calibrate the model’s representation space, and (ii) a decoding method—contrastive search—to encourage diversity while maintaining coherence in the generated text. Extensive experiments and analyses on three benchmarks from two languages demonstrate that our proposed approach significantly outperforms current state-of-the-art text generation methods as evaluated by both human and automatic metrics.
+
+补充：
+- `isotropic` 各向同性: 物体属性在各个方向都一致 Properties of a material are identical in all directions. 
+- `anisotropic` 各向异性: 物体属性在各个方向都不一样 Properties of a material depend on the direction; 
+- for example, wood. In a piece of wood, you can see lines going in one direction; this direction is referred to as "with the grain".
+
+论文
+- [ISOTROPY IN THE CONTEXTUAL EMBEDDING SPACE: CLUSTERS AND MANIFOLDS](https://openreview.net/pdf?id=xYGNO86OWDH)
+  -  a strong anisotropic space such that most of the vectors fall within a narrow cone
+  - BERT/ERNIE的上下文嵌入空间显示出较强的**各向异性**特征：大部分向量都在一个窄小的椎体里，导致cosine相似度较大。有必要将其变成**各向同性**：识别嵌入空间里的孤立的聚类簇和低维流形。
 
 问题
 - GPT-2模型生成的token具有各异向性，使得token之间的相似性**非常接近没有区分度**，最后解码时造成了**文本重复**——text degeneration；
