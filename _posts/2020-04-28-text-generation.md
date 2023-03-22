@@ -273,6 +273,38 @@ ChatGPT无非就是微调的GPT-3，唯一的不同不过是知识的**指向性
 
 - **机器翻译**是从RNN开始跨入神经网络机器翻译时代的，几个比较重要的阶段分别是: **Simple RNN**, **Contextualize RNN**, **Contextualized RNN with attention**, **Transformer**(2017)
 
+### RNN演变历史
+
+【2023-3-22】 整理RNN到Seq2Seq演变过程
+
+<div class="mermaid">
+    flowchart TD
+    %% 节点颜色
+    classDef red fill:#F75CE7;
+    classDef green fill:#5CF77B;
+    classDef blue fill:#6BE0F7;
+    classDef orange fill:#F7CF6B;
+    classDef grass fill:#C8D64B;
+    %%节点关系定义
+    O(FFN前馈神经网络)-->|时序场景,增加记忆能力\nyi=V*Uxi+V*Whi|R(RNN循环神经网络):::orange
+    O-->|视觉领域\n局部感受野+平移不变性|C(卷积神经网络)
+    R-->|应用类型|R0(序列到序列任务)
+    R-->|结构演化|RA(网络结构优化)-->|问题:RNN能力受限\n解法:1997,引入3个门控单元|L(LSTM长短时记忆网络):::blue-->|问题:LSTM计算复杂\n解法:2014,2个门控单元|G(GRU):::blue
+    L-->|双向序列结构|B(Bi-LSTM):::blue
+    RA-->|问题:Encoder输出逐步衰减\n解法:加上下文context|CR(Contextualized RNN):::blue
+    CR-->|注意力:2014, soft align|A(Attention机制):::blue-->S1
+    B-->|基础单元:RNN/LSTM/GRU/Bi-LSTM|S1
+    R0-->|一对多\n方式:\n1. x传给第一个神经元 2. x传给所有神经元\n示例:图像描述/类别生成音乐/小说|R1(1-to-N):::blue
+    R0-->|多对一\n序列分类\n示例:文本/语音分类|R2(N-to-1):::blue
+    R0-->|多对多\nx和y长度相同\n示例:词性标注pos/语言建模|R3(N-to-N):::blue
+    R3-->|多对多\nx和y长度不同\n示例:机器翻译|R4(N-to-M):::green
+    R4-->|RNN问题:无法处理变长序列,C向量记忆能力随着长度衰减|S(Encoder-Decoder)
+    S-->|2014,Encoder-Decoder结构实现\nInput->Encoder->Context->Decoder->Output\n多种:1. C只输给第一个h 2. C给所有h 3. C给所有h和y|S1(Seq2Seq):::green
+    S1-->|问题:Context向量表示能力有限\n解法:2015,加注意力,向量变矩阵|S2(Seq2Seq+Attention):::green
+    S1-->|问题:无法解决OOV\n解法:,复制+生成混用|S3(Seq2Seq+Copy):::green
+    S2-->|2017,多头注意力单元,多层,并行训练|T(Transformer):::red
+</div>
+
 ### Simple RNN
 
 - encoder-decoder模型结构中，encoder将整个源端序列(不论长度)压缩成一个向量(encoder output)，源端信息和decoder之间唯一的联系只是: encoder output会作为decoder的initial states的输入。这样带来一个显而易见的问题就是，随着decoder长度的增加，encoder output的信息会衰减。
@@ -283,15 +315,34 @@ ChatGPT无非就是微调的GPT-3，唯一的不同不过是知识的**指向性
 - 源端序列不论长短，都被统一压缩成一个**固定维度**的向量，并且显而易见的是这个向量中包含的信息中，关于源端序列末尾的token的信息更多，而如果序列很长，最终可能基本上<font color='red'>“遗忘”了序列开头的token的信息。</font>
 - 第二个问题同样由RNN的特性造成: 随着decoder timestep的信息的增加，initial hidden states中包含的<font color='blue'>encoder output相关信息也会衰减</font>，decoder会逐渐“遗忘”源端序列的信息，而更多地关注目标序列中在该timestep之前的token的信息。
 
+### LSTM
+
+LSTM(1997)主要用于解决**长期依赖**，在长序列中有更好的表现。相比于RNN只传递了一个**隐状态向量**(hidden state)h，LSTM额外传递了一个**隐状态向量**(cell state)c。
+- 先理解LSTM的图表示，LSTM首先将当前输入与隐状态向量h拼接，并输出四个状态向量（3个sigmoid激活的门控状态和1个tanh激活的状态向量），这4个状态向量分别用于：
+- 1、忘记节点，对传递的c进行选择性的忘记；
+- 2、选择记忆，通过一个门控状态和一个状态向量得到当前结果；
+- 3、输出阶段，通过一个门控状态向量来决定当前得到的c如何转换为输出到下一个节点的h。
+
+LSTM整体逻辑如下图所示，可以看到c与h都可以表示当前序列，但是c的变化是累加的，而h的变化由c通过门控状态向量得到，可能产生很大不同。显而易见，LSTM引入了多个需要训练的网络，参数量大。
+- ![](https://pic1.zhimg.com/80/v2-8f5073ab5f37172e8add5fbd9cbd6950_1440w.webp)
+
+
+### GRU
+
+GRU(2014)比LSTM的参数量更少。
+- GRU相对于LSTM，抛弃了cell state而将其整合到了隐状态向量h中，将GRU内部结构看做黑盒，那么GRU与RNN是具有相同结构的。
+- 相对来说，GRU比LSTM少一个门控单元，GRU有2个门控单元（reset gate和update gate）和1个状态向量。通过更新门实现了以z的权重保留当前的状态向量，并以（1-z）的权重保留传递的状态向量。我们可以粗暴地认为，LSTM通过两个隐状态向量c/h进行预测，但是GRU牺牲一个门控，从而在传递的隐状态向量h（GRU）中整合了c/h（LSTM）。
+- ![](https://pic3.zhimg.com/80/v2-b4e781e8512dda7b7c4bf8fa675a9a36_1440w.webp)
+
 ### Contextualized RNN
 
 - 为了解决上述第二个问题，即**encoder output随着decoder timestep增加而信息衰减**的问题，有人提出了一种加了context的RNN sequence to sequence模型：
-    - decoder在每个timestep的input上都会加上一个context。
-- 为了方便理解，我们可以把这看作是encoded source sentence。这样就可以在decoder的每一步，都把源端的整个句子的信息和target端当前的token一起输入到RNN中，防止源端的context信息随着timestep的增长而衰减。
+  - decoder在每个timestep的input上都会加上一个context。
+- 把这看作是encoded source sentence。这样就可以在decoder的每一步，都把源端的整个句子的信息和target端当前的token一起输入到RNN中，防止源端的context信息随着timestep的增长而衰减。
+- ![](https://pic4.zhimg.com/80/v2-305acd420c4192c43954aaa430f7910b_720w.jpg)
 
-![](https://pic4.zhimg.com/80/v2-305acd420c4192c43954aaa430f7910b_720w.jpg)
-
-- 但是这样依然有一个问题: context对于每个timestep都是静态的(encoder端的final hidden states，或者是所有timestep的output的平均值)。但是每个decoder端的token在解码时用到的context真的应该是一样的吗？在这样的背景下，Attention就应运而生了
+但是这样依然有一个问题: 
+- context对于每个timestep都是静态的(encoder端的final hidden states，或者是所有timestep的output的平均值)。但是每个decoder端的token在解码时用到的context真的应该是一样的吗？在这样的背景下，Attention 就应运而生了
 
 ### Contextualized RNN with soft align (Attention)
 
@@ -1856,7 +1907,19 @@ contrastive search decoding是一种非topK、topP以及BeamSearch的解码策�
 - 作者有提出一个比较合适的方法：先用beamsearch + sample等方法生成部分句子，然后再使用contrastive search decoding对生成的句子进行补齐。
 - 还有一种方法，实现上比较麻烦，思想：就是那个公式中选择v的时候，不选最大的那一个，多选择几个，但是要小于K值。
 
+### Transformer
 
+Transformer主要用于解决训练**并行**问题，在长期依赖上也有很好地效果。
+- 缺点是对于长序列，由于所有向量之间会进行self-attention，会引起**参数量过大**（Transformer XL对Self-attention的QK的连接进行了处理，控制了参数量）。
+
+Transformer在结构上引入了较多深度学习的元素和结构（残差网络、Norm、Encoder-Decoder、前馈网络、多头自注意力、位置编码、Embedding），但最主要的结构在于**多头自注意力**，而多头自注意力的基本单元即是Self-Attention。
+- Self-Attention通过让输入（多个向量组成的矩阵）两两之间计算Attention Value，实现每个向量能够关注到其它向量的信息。
+- 多头自注意力的多头在于，从不同的子维度对向量执行Self-Attention，再将concat结果作为输出。多头的目的目前没有太合理的解释，已有解释如：
+- 1、多头起到滤波器作用，从子维度提取到更丰富的信息；
+- 2、多头相当于多个基学习器集成，降低过拟合。
+- ![](https://pic1.zhimg.com/80/v2-0df7783a7771006844d678ef4a675f18_1440w.webp)
+
+详见：[Transformer专题](transformer)
 
 ## VAE：Variational AutoEncoder
 
