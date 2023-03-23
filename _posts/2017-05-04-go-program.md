@@ -705,6 +705,21 @@ Go 程序的执行（程序启动）顺序如下：
 
 #### main函数
 
+单个可执行的Go代码必须有一个main函数，而且对应main包
+
+```go
+// package src // main包
+package main
+
+import "fmt"
+
+func main(){
+	fmt.Print("hello go")
+}
+```
+
+否则报错：
+> package command-line-arguments is not a main package
 
 ```go
 package main  //必备，go程序在包中运行(每个包都有个相关的路径)
@@ -816,7 +831,7 @@ func main(){
 
 输出
 
-```shell
+```s
 系统自动调用：main函数前
 init:  10
 hello
@@ -830,7 +845,7 @@ main:  30
 ### 自定义包
 
 
-
+待定
 
 ### 安装第三方包
 
@@ -1674,6 +1689,10 @@ func main() {
 
 ### 字符串定义
 
+字符串
+- 单行定义: 使用双引号
+- 多行定义: 使用反引号
+
 ```go
 package main 
 import (
@@ -1682,11 +1701,17 @@ import (
   // s "strings" // 包别名
 )
 
-func main() {    
+func main() {
+    a := "这是单行测试字符串..."
+    /* // 或： "a " + "b" 模式
+    b := "这是多行测试字符串..." + 
+    "b, 第二行" */
+    b := `这是多行测试字符串...
+    b, 第二行`
     greetings :=  []string{"Hello","world!"}    
     fmt.Println(strings.Join(greetings, " "))  //字符串连接
-    fmt.Print('hhh') 
-    log.Print('hhh') //  输出字符串要用双引号，否则：more than one character in rune literal
+    fmt.Print(a) 
+    log.Print(b) //  输出字符串要用双引号，否则：more than one character in rune literal
 }
 
 // 前缀：
@@ -2599,14 +2624,22 @@ func main() {
 
 自定义函数时要避开系统内置的特殊函数
 
-Go 语言设计过程中保留了默认的两个函数，分别是 main() 和 init() 函数。
+Go 语言设计过程中保留了默认的两个函数，分别是 `main`() 和 `init`() 函数。
 
 两者的区别在于：
-- main() 函数只能使用于 main 包中，而且每个 main 包只能有 一个main() 函数
-- 但对于 init() 函数, 则能够使用在所有的包中。而且一个程序（甚至一个文件）中可以写任意多个 init() 函数。
+- `main`() 函数只能使用于 main 包中，而且每个 main 包只能有 一个 main() 函数
+- 但对于 `init`() 函数, 则能够使用在所有的包中。而且一个程序（甚至一个文件）中可以写任意多个 `init`() 函数。
 
 注意：
 - 一个程序（甚至一个文件）中可以写任意多个 init() 函数，但对于维护代码可读性、排查问题并没有任何好处
+
+#### main 函数
+
+详见：[main函数](#main函数)
+
+#### init 函数
+
+详见：[init函数](#init函数)
 
 #### 关闭
 
@@ -3362,7 +3395,7 @@ main function
 ### go routine 死锁
 
 并发安全性
-- goroutine有个特性，也就是说，如果一个goroutine没有被阻塞，那么别的goroutine就不会得到执行。这并不是真正的并发，如果你要真正的并发，你需要在你的main函数的第一行加上下面的这段代码：
+- goroutine有个特性，也就是说，如果一个goroutine没有被阻塞，那么别的goroutine就不会得到执行。这并不是真正的并发，如果你要真正的并发，在main函数的第一行加上下面的这段代码：
 
 ```go
 import "runtime"
