@@ -868,7 +868,7 @@ PromptCLUE 支持几十个不同类型的任务，具有较好的零样本学习
 
 Colossal-AI
 - 低成本微调的 `LoRA`：
-  - 低秩矩阵微调（LoRA）方法进行高效微调。LoRA 方法认为大语言模型是过参数化的，其在微调中的参数改变量是·一个低秩的矩阵，可以将其分解为两个更小的的矩阵的乘积
+  - 低秩矩阵微调（LoRA）方法进行高效微调。LoRA 方法认为大语言模型是过参数化的，其在微调中的参数改变量是一个低秩的矩阵，可以将其分解为两个更小的的矩阵的乘积
 - 减少内存冗余的 `ZeRO` + `Gemini`
   - Colossal-AI 支持使用无冗余优化器 (`ZeRO`) 来优化内存使用，这种方法可以有效减少内存冗余，并且相比传统的数据并行策略，不会牺牲计算粒度和通信效率，同时可以大幅提高内存使用效率。
   - Colossal-AI 的异构内存空间管理器 `Gemini` 支持将优化器状态从 GPU 卸载到 CPU ，以节省 GPU 内存占用。可以同时利用 GPU 内存、CPU 内存（由 CPU DRAM 或 NVMe SSD 内存组成）来突破单 GPU 内存墙的限制，进一步扩展了可训练模型规模。
@@ -984,7 +984,12 @@ nvidia-smi --query-gpu=index,name,uuid,serial --format=csv
 - 原因A: 没有执行 `pip install .`, chatgpt并未真正安装
 - 原因B: colossal ai新版调整了目录结构, `chatgpt.nn` has been modified as `chatgpt.models`, 【2023-3-14】
 
-#### LoRA
+#### LoRA 低秩适配
+
+2021 年，[LoRA: Low-Rank Adaption of Large Language Models]() 论文表明，可以通过**冻结**预训练权重，并创建查询和值层的注意力矩阵的低秩版本来对大型语言模型进行微调。这些低秩矩阵的参数**远少于**原始模型，因此可以使用更少的 GPU 内存进行微调。作者证明，低阶适配器的微调取得了与微调完整预训练模型相当的结果。
+
+这种技术允许使用小部分内存来微调 LLM。然而，也有缺点
+- 由于适配器层中的额外矩阵乘法，前向和反向传递的速度大约是原来的**两倍**。
 
 LoRA 是 Parameter Efficient 的方法之一。
 - 过度参数化的模型其实是位于一个低的**内在维度**上，所以作者假设在模型适应过程中的权重变化也具有较低的“内在等级”。
@@ -1011,6 +1016,20 @@ layer = lora.Linear(in_features, out_features, r=16)
 ```
 
 详见原文：[微软LoRA: Low-Rank Adaptation of Large Language Models 代码解读](https://zhuanlan.zhihu.com/p/515954218)
+
+
+#### PEFT
+
+Parameter-Efficient Fine-Tuning (`PEFT`) 是一个 Hugging Face 库，支持在 LLM 上创建和微调适配器层。
+- peft 与  🤗 Accelerate 无缝集成，用于利用了 DeepSpeed 和 Big Model Inference 的大规模模型。
+
+[Parameter-Efficient Fine-Tuning](https://github.com/huggingface/peft) (PEFT)
+
+单个 24GB GPU 上使用上述工具使用 RL 微调 20B 参数量的 LLM, 详见量化[quantization](https://hf.co/docs/transformers/main/en/main_classes/quantization)
+- 与全精度模型相比，以 **8位**精度加载模型最多可节省 **4倍**的内存
+- 调用 from_pretrained 方法时简单地添加标志 load_in_8bit=True
+
+详见：[在一张 24 GB 的消费级显卡上用 RLHF 微调 20B LLMs](https://mp.weixin.qq.com/s/7nmegO1UYObO0-eUDTKnMg)
 
 #### 代码解读
 
