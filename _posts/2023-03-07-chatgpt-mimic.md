@@ -1110,11 +1110,20 @@ Because training step 1 is a simple supervised finetune progress as many other m
 - code : [generate_instruction.py](https://github.com/tatsu-lab/stanford_alpaca/blob/main/generate_instruction.py)
 
 
+【2023-3-23】alpaca中文指令微调数据集 [alpaca-chinese-dataset](https://github.com/carbonz0/alpaca-chinese-dataset)
+
+#### 贝壳开源
+
 【2023-3-17】贝壳开源的 7b模型 [BELLE](https://github.com/LianjiaTech/BELLE), [huggingface](https://huggingface.co/jay68/BELLE-7B-0.2M)，限sft, rm、rlhf还没加，size太小调不出来，只能做特定任务，指令泛化理解都搞不定; Stanford方案复现中文版
 - [Exploring ChatGPT's Ability to Rank Content: A Preliminary Study on Consistency with Human Preferences](https://arxiv.org/abs/2303.07610)
 - ChatGPT's zero-shot ranking capability could be used to reduce annotation pressure in a number of ranking tasks
 
 【2023-3-19】基于LLaMA用翻译语料训练中文Alpaca模型 - [李煜东的文章 - 知乎](https://zhuanlan.zhihu.com/p/614923816)
+
+#### Alpaca-Lora 本地部署
+
+【2023-3-23】Alpaca-Lora (羊驼-Lora): [轻量级 ChatGPT 的开源实现](https://zhuanlan.zhihu.com/p/615646636)（对标 Standford Alpaca）
+- ChatGPT 轻量级的开源版本，它使用 Lora (Low-rank Adaptation) 技术在 Meta 的 LLaMA 7B 模型上微调，只需要训练很小一部分参数就可以获得媲美 Standford Alpaca 模型的效果
 
 ### LAION：Open Assistant
 
