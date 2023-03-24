@@ -169,7 +169,7 @@ instructGPT 分为如下三大步：
 | [nebuly-ai/nebullvm](https://github.com/nebuly-ai/nebullvm)	| 5700	| 388 |	100 |	1 | ChatLLaMA：<br>①一个完整的开源实现，使您能够基于预训练的 LLaMA 模型构建 ChatGPT 样式的服务。<br>②与原始的 ChatGPT 相比，利用 LLaMA 架构的较小尺寸，训练过程和单 GPU 推理更快、成本更低。<br>③ChatLLaMA 内置了对 DeepSpeed ZERO 的支持，以加速微调过程。<br>④该库还支持所有 LLaMA 模型架构（7B、13B、33B、65B），因此您可以根据自己对训练时间和推理性能的偏好对模型进行微调。|
 | [lucidrains/PaLM-rlhf-pytorch](https://github.com/lucidrains/PaLM-rlhf-pytorch) |	5400	| 412	| 24	| 0.2 | PaLM语言模型（称为 PaLM + RLHF）实施 RLHF, 只有PaLM架构和代码，没有预先训练好的权重<br>PaLM（Pathways Language Model）是谷歌2022年4月发布的5400亿参数全能大模型，基于Pathways系统训练，BERT之父Jacob Devlin为主要贡献者之一 |
 | [BlinkDL/RWKV-LM](https://github.com/BlinkDL/RWKV-LM)	| 1800	| 182	| 24	| 0.4 | 用 RWKV 架构（不是transformer结构）训练的chatgpt, 支持分布式训练. 开源了 14B 的模型，可以在 huggingface上面[试用](https://huggingface.co/spaces/yahma/rwkv-14b) |
-| [Ivwerra/trl](https://github.com/lvwerra/trl)	| 1700 |	180 |	73	| 1 | [文档](https://huggingface.co/docs/trl/index) PPO精调LLM的三个步骤: <br>![流程图](https://camo.githubusercontent.com/85d00cf9bca67e33c2d1270b51ff1ac01853b26a8d6bb226b711f859d065b4a6/68747470733a2f2f68756767696e67666163652e636f2f64617461736574732f74726c2d696e7465726e616c2d74657374696e672f6578616d706c652d696d616765732f7265736f6c76652f6d61696e2f696d616765732f74726c5f6f766572766965772e706e67)<BR>1. 用 codeparrot 数据训练 GPT-2 124.2M 模型<BR>2. 用sentiment训练奖励模型，模型用的是distilbert<br>3. RL训练 |
+| [Ivwerra/trl](https://github.com/lvwerra/trl)	| 1700 |	180 |	73	| 1 | [文档](https://huggingface.co/docs/trl/index) PPO精调LLM的三个步骤: <br>流程<BR>1. 用 codeparrot 数据训练 GPT-2 124.2M 模型<BR>2. 用sentiment训练奖励模型，模型用的是distilbert<br>3. RL训练 |
 | [HarderThenHarder/transformers_tasks](https://github.com/HarderThenHarder/transformers_tasks/tree/main/RLHF)	| 274	| 51	| 17	| 5 | 基于TRL, 增加了基于人工打分的Reward模型训练，还提供了Reward数据的标注平台<br>RM 模型训练: 基于 ernie-3.0-base-zh 继续训练的<br>RL 训练：① RM用的一个现成的情感分类模型，roberta-base-fintuned-jd-binary-chinese ②生成模型：用的gpt2-chinese-cluecorpussmall |
 | [allenai/RL4LMs](https://github.com/allenai/RL4LMs) |	971	| 87	| 27	| 30 | 包括较多 RL 算法（PPO，NLPO，A2C和TRPO），在 2000 个实验里做了 RL 在 LLM 上面的训练。RL4LMs当前的计划包括分布式训练更大的模型和新的RL算法。[paper](https://arxiv.org/abs/2210.01241) |
 
@@ -1533,6 +1533,16 @@ print(response)
 
 [ChatRWKV](https://github.com/BlinkDL/ChatRWKV) is like ChatGPT but powered by RWKV (100% RNN) language model, and open source.
 - [RWKV-CHN](https://modelscope.cn/studios/BlinkDL/RWKV-CHN/summary) 在线体验
+
+### trl
+
+[Ivwerra/trl](https://github.com/lvwerra/trl)，[文档](https://huggingface.co/docs/trl/index) 
+
+PPO精调LLM的三个步骤:
+- ![流程图](https://camo.githubusercontent.com/85d00cf9bca67e33c2d1270b51ff1ac01853b26a8d6bb226b711f859d065b4a6/68747470733a2f2f68756767696e67666163652e636f2f64617461736574732f74726c2d696e7465726e616c2d74657374696e672f6578616d706c652d696d616765732f7265736f6c76652f6d61696e2f696d616765732f74726c5f6f766572766965772e706e67)
+1. 用 codeparrot 数据训练 GPT-2 124.2M 模型
+2. 用sentiment训练奖励模型，模型用的是distilbert
+3. RL训练 
 
 ### FlexGen 加速
 
