@@ -1144,6 +1144,38 @@ Because training step 1 is a simple supervised finetune progress as many other m
 【2023-3-23】Alpaca-Lora (羊驼-Lora): [轻量级 ChatGPT 的开源实现](https://zhuanlan.zhihu.com/p/615646636)（对标 Standford Alpaca）
 - ChatGPT 轻量级的开源版本，它使用 Lora (Low-rank Adaptation) 技术在 Meta 的 LLaMA 7B 模型上微调，只需要训练很小一部分参数就可以获得媲美 Standford Alpaca 模型的效果
 
+#### Alpaca-cpp 本地部署
+
+[Alpaca-cpp（羊驼-cpp）: 可以本地运行的 Alpaca 大语言模型](https://zhuanlan.zhihu.com/p/616267309)
+
+从 `Stanford-Alpaca` 到 `Alpaca-Lora`，再到本篇要介绍的 `Alpaca-cpp`，都是为了寻找一种在资源约束下，能本地高效便捷运行大语言模型的方法。
+- （1）`Stanford-Alpaca`: 包含数据生成、模型训练等源代码，但微调的LLaMA模型参数还未放出
+- （2）`Alpaca-Lora`: 使用 Lora 技术微调出一个对标 Stanford-Alpaca 的模型，开源了 LLaMA+Lora 模型参数。本地CPU运行成功，但速度较慢
+- （3）`Alpaca-cpp`: 借助 llama-cpp 提供的强大工具，对 Alpaca-Lora 模型参数量化（int4或int8），本地CPU流畅运行
+
+Alpaca-cpp
+- 突破了 8G GPU 显存的限制，能直接使用 CPU 运行，那后续还可以尝试 30B 甚至更大参数的大语言模型
+- Alpaca-cpp 是基于 llama-cpp 这个项目，代码基本完全相同，差别在 Alpaca-cpp 对 Alpaca-Lora 的权重进行了量化等预处理，然后用 llama-cpp 提供的功能去加载量化后的权重。
+
+本地电脑 CPU 流畅运行大语言模型 Alpaca/LLaMA 的 C++/C 框架。相关资源如下：
+- [alpaca.cpp](https://github.com/antimatter15/alpaca.cpp)
+- [ggml-alpaca-7b-q4.bin](https://huggingface.co/Sosaka/Alpaca-native-4bit-ggml/blob/main/ggml-alpaca-7b-q4.bin) 量化后的Alpaca模型:
+- [llama.cpp](https://github.com/ggerganov/ll) （alpaca.cpp 是 fork 本项目，代码基本一致）
+
+安装方法
+
+```sh
+# 下载 alpaca.cpp 项目
+git clone https://github.com/antimatter15/alpaca.cpp
+# 进入 alpaca.cpp 后，到 https://huggingface.co/Sosaka/Alpaca-native-4bit-ggml/blob/main/ggml-alpaca-7b-q4.bin 下载量化后的模型 ggml-alpaca-7b-q4.bin，然后使用
+wget https://huggingface.co/Sosaka/Alpaca-native-4bit-ggml/blob/main/ggml-alpaca-7b-q4.bin
+# 编译
+make chat
+# 运行
+./chat
+```
+
+
 ### LAION：Open Assistant
 
 【2023-2-25】[Open Assistant 全流程训练细节（GPT3+RL）](https://zhuanlan.zhihu.com/p/609003237)
