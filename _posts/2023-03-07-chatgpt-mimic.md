@@ -1117,7 +1117,6 @@ Because training step 1 is a simple supervised finetune progress as many other m
 - ![](https://crfm.stanford.edu/static/img/posts/2023-03-13-alpaca/alpaca_right_email.png)
 
 
-
 #### self-instruct
 
 [self-instruct](https://github.com/yizhongw/self-instruct): [Self-Instruct: Aligning LM with Self Generated Instructions](https://arxiv.org/abs/2212.10560)
@@ -1139,10 +1138,28 @@ Because training step 1 is a simple supervised finetune progress as many other m
 
 【2023-3-19】基于LLaMA用翻译语料训练中文Alpaca模型 - [李煜东的文章 - 知乎](https://zhuanlan.zhihu.com/p/614923816)
 
-#### Alpaca-Lora 本地部署
+#### Alpaca-LoRA 本地部署
 
 【2023-3-23】Alpaca-Lora (羊驼-Lora): [轻量级 ChatGPT 的开源实现](https://zhuanlan.zhihu.com/p/615646636)（对标 Standford Alpaca）
 - ChatGPT 轻量级的开源版本，它使用 Lora (Low-rank Adaptation) 技术在 Meta 的 LLaMA 7B 模型上微调，只需要训练很小一部分参数就可以获得媲美 Standford Alpaca 模型的效果
+
+斯坦福的研究者 —— Eric J. Wang 使用 `LoRA`（low-rank adaptation）**低秩适配** 技术复现了 Alpaca 的结果。具体来说，Eric J. Wang 使用一块 RTX 4090 显卡，只用 5 个小时就训练了一个和 Alpaca 水平相当的模型，将这类模型对算力的需求降到了消费级。
+
+##### LoRA 低秩适配
+
+![](http://inews.gtimg.com/newsapp_bt/0/15765425454/641)
+
+LoRA 是在原始 PLM 旁边增加一个旁路，做一个降维再升维的操作，来模拟所谓的 intrinsic rank。训练的时候固定 PLM 的参数，只训练降维矩阵 A 与升维矩阵 B。而模型的输入输出维度不变，输出时将 BA 与 PLM 的参数叠加。用随机高斯分布初始化 A，用 0 矩阵初始化 B，保证训练的开始此旁路矩阵依然是 0 矩阵（引自：[loara](https://finisky.github.io/lora/)）。
+- Eric J. Wang 发布的 Alpaca-LoRA 项目。[项目地址](https://github.com/tloen/alpaca-lora)
+- LoRA 的最大优势是速度更快，使用的内存更少，因此可以在消费级硬件上运行。
+
+##### Alpaca-LoRA 中文版
+
+【2023-3-26】华中师范大学等机构的三位个人开发者开源的中文语言模型`骆驼` (Luotuo)，基于 LLaMA、Stanford Alpaca、Alpaca LoRA、Japanese-Alpaca-LoRA 等完成，**单卡**就能完成训练部署。
+- 参考：[训练个中文版ChatGPT没那么难：不用A100，开源Alpaca-LoRA＋RTX 4090就能搞定](https://view.inews.qq.com/a/20230326A02QO500)
+- 之所以将模型名字命名为骆驼，是因为 LLaMA（大羊驼）和 alpaca（羊驼）都属于偶蹄目 - 骆驼科。
+- 训练中文版 Alpaca LoRa 用了 3K 多条中文问答保险语料，实现过程使用了 LoRa 方法，并微调 Alpaca 7B 模型，耗时 240 分钟，最终 Loss 0.87 。
+- [项目地址](https://github.com/LC1332/Chinese-alpaca-lora), 释放了两个模型 luotuo-lora-7b-0.1、luotuo-lora-7b-0.3，还有一个模型在计划中
 
 #### Alpaca-cpp 本地部署
 
@@ -1159,7 +1176,7 @@ Alpaca-cpp
 
 本地电脑 CPU 流畅运行大语言模型 Alpaca/LLaMA 的 C++/C 框架。相关资源如下：
 - [alpaca.cpp](https://github.com/antimatter15/alpaca.cpp)
-- [ggml-alpaca-7b-q4.bin](https://huggingface.co/Sosaka/Alpaca-native-4bit-ggml/blob/main/ggml-alpaca-7b-q4.bin) 量化后的Alpaca模型:
+- [ggml-alpaca-7b-q4.bin](https://huggingface.co/Sosaka/Alpaca-native-4bit-ggml/blob/main/ggml-alpaca-7b-q4.bin) 量化后的Alpaca模型， [huggingface地址](https://huggingface.co/Sosaka/Alpaca-native-4bit-ggml/tree/main)
 - [llama.cpp](https://github.com/ggerganov/ll) （alpaca.cpp 是 fork 本项目，代码基本一致）
 
 安装方法
