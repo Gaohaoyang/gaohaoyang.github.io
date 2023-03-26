@@ -1120,13 +1120,13 @@ Because training step 1 is a simple supervised finetune progress as many other m
 #### self-instruct
 
 [self-instruct](https://github.com/yizhongw/self-instruct): [Self-Instruct: Aligning LM with Self Generated Instructions](https://arxiv.org/abs/2212.10560)
-- 斯坦福团队微调LLaMA的方法，来自华盛顿大学Yizhong Wang等去年底提出的Self-Instruct
+- 斯坦福团队微调LLaMA的方法，来自华盛顿大学Yizhong Wang等去年底提出的Self-Instruct, 一个半自动的过程，利用模型本身的指令信号对预训练的LM进行指令调整。
 - ![](https://github.com/yizhongw/self-instruct/raw/main/docs/pipeline.JPG)
 - 175个人工种子集，覆盖二分类、生成任务，然后，调用gpt-3模型生成指令、指令回答
 - 以175个问题作为种子任务，让AI自己从中组合出新的问题以及生成配套答案实例，人工过滤掉低质量的，再把新任务添加到任务池里。所有这些任务，之后可以采用InstructGPT的方法让AI学会如何遵循人类指令。
 - 斯坦福版Alpaca花了不到500美元使用OpenAI API生成了5.2万个这样的示例搞出来的。
 - code : [generate_instruction.py](https://github.com/tatsu-lab/stanford_alpaca/blob/main/generate_instruction.py)
-
+- 解读：[面向大模型微调的instruction指令自动化生成技术：SELF-INSTRUCT指令自动化生成框架工作介绍](https://mp.weixin.qq.com/s/Lo1f1knFFQWdHNLTNyFKDQ)
 
 【2023-3-23】alpaca中文指令微调数据集 [alpaca-chinese-dataset](https://github.com/carbonz0/alpaca-chinese-dataset)
 
