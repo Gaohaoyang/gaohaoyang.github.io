@@ -1130,6 +1130,32 @@ Because training step 1 is a simple supervised finetune progress as many other m
 
 【2023-3-23】alpaca中文指令微调数据集 [alpaca-chinese-dataset](https://github.com/carbonz0/alpaca-chinese-dataset)
 
+#### Aplaca进化
+
+【2023-3-27】Aplaca进化路线图
+
+<div class="mermaid">
+    flowchart TD
+    %% 节点颜色
+    classDef red fill:#f02;
+    classDef green fill:#5CF77B;
+    classDef blue fill:#6BE0F7;
+    classDef orange fill:#F7CF6B;
+    classDef grass fill:#C8D64B;
+    %%节点关系定义
+    G(GPT-3)-->|2023-2-24,META推出超越GPT-3的半开源模型\n提效:7b-65b,单GPU运行,1/10参数|L(LLaMA):::green
+    S(Self-Instruct\n自监督指令集方案):::blue
+    L-->|2023-3-14,斯坦福\n7b的LLaMA+52k微调,self-instruct\nAlpaca 7b达到davinci-003效果\n消费级GPU运行,如树莓派|A(Stanford-Alpaca):::green
+    S-->|2022-12,华盛顿大学\nYizhong Wang\ngpt-3模型生成指令+指令回答|A
+    LR(LoRA\n低秩适配):::blue -->|减少训练参数\n速度快,内存消耗少\n媲美 Standford Alpaca|AR(Alpaca-LoRA):::green
+    L -->|2023-3-21,7b的LLaMA\n斯坦福 Eric J. Wang|AR
+    A -->|2023-3-17,贝壳\n7b,bloom,200w中文语料| AB(BELLE):::grass
+    A -->|2023-3-26,华中师范\n7b,3k中文保险语料,4h| AL(Luotuo骆驼):::grass
+    LR --> AL
+    AR -->|2023-3-23,突破8G GPU 显存限制,直接用CPU运行\n1. LLaMA cpp项目\n2. Alpaca-LoRA权重量化| AC(Alpaca-cpp):::green
+</div>
+
+
 #### 贝壳开源
 
 【2023-3-17】贝壳开源的 7b模型 [BELLE](https://github.com/LianjiaTech/BELLE), [huggingface](https://huggingface.co/jay68/BELLE-7B-0.2M)，限sft, rm、rlhf还没加，size太小调不出来，只能做特定任务，指令泛化理解都搞不定; Stanford方案复现中文版
