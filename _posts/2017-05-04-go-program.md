@@ -1699,6 +1699,18 @@ func main() {
 - 使用下标索引字符串会产生字节
 - 要遍历 rune 类型的字符则使用 range 方法
 
+		
+字符串、字符、字节、位：
+- `位`bit：bit是计算机中最小的存储单位，一个bit表示一个二进制位，存储0或1。
+- `字节`byte：一个byte由8个bit组成。
+  - 在Go中，byte也是一种类型，其底层实际上是一种uint8类型的别名，主要是为了区分字节类型和uint8类型，可以指代一个ASCII的字符。
+- `字符`：字符表示一个可以正常显示的一个符号，譬如一个字符串abc，其中a、b、c都是字符，在Go中，一个字符对应一个rune类型值。
+- `字符串`string：Go中的字符串，实际上是只读的字节切片。
+- `Unicode码点`：实际上，字符的概念非常难以定义，在Unicode标准中，使用码点来代指，一个Unicode表示的个体。其表示是码点，其值是一串数字。
+- `rune类型`：其是Go中，用以表示一个字符的类型，是int32类型的别名，为了区别表示字符类型以及int32类型。
+
+字符串是字节的切片slice
+		
 ### byte 与 rune
 
 Go 语言中<span style='color:red'>没有字符类型</span>，字符只是整数的**特殊用例**。
@@ -1730,13 +1742,41 @@ fmt.Printf("字符 %c 的类型为 %T\n", runeC, runeC)
 - byte 占用一个字节，可用于表示 ASCII 字符。
 - 而 UTF-8 是一种**变长**的编码方法，字符长度从 1~4 个字节不等。byte 显然不擅长这样的表示，就算想用多个 byte 进行表示，也不知道要处理的 UTF-8 字符究竟占了几个字节。
 
+go采用utf-8来对Unicode进行编码
+- ![](https://pic3.zhimg.com/80/v2-5d9c97b94b0a98fc15d929997320d2f2_720w.webp)
+- 常用汉字一般使用3个字节
+- ![](https://pic3.zhimg.com/80/v2-cfcb991fd8922b4047a56e4cce3a2906_720w.webp)
+
+Go为字符定义了字符类型`rune`, int32类型的别名，主要用来处理Unicode字符。之所以对应的是int32类型，是因为utf-8编码，最大会产生4个字节的大小的值，故对应了int32类型。
+		
 ```go
 testString := "你好，世界"
 fmt.Println(testString[:2]) // 输出乱码，因为截取了前两个字节
 fmt.Println(testString[:3]) // 输出「你」，一个中文字符由三个字节表示
-// 用 []rune() 将字符串转为 Unicode 码点再进行截取，这样就无需考虑字符串中含有 UTF-8 字符
+// 用 []rune() 将字符串转为 Unicode 码点，再进行截取，无需考虑字符串中含有 UTF-8 字符
 fmt.Println(string([]rune(testString)[:2])) // 输出：「你好」
+		
+func test() {
+  s := "Hello,世界"
+  for _, val := range s {
+    fmt.Printf("%#U\n", val)
+  }
+}
+/*
+U+0048 'H'
+U+0065 'e'
+U+006C 'l'
+U+006C 'l'
+U+006F 'o'
+U+002C ','
+U+4E16 '世'
+U+754C '界'
+*/
+		
 ```
+
+除了range方法遍历，也可以用标准库对字符串进行处理，如unicode/utf8库中的DecodeRuneInString方法，输入一个字节切片，返回一个rune值和其使用utf-8编码的字节宽度。
+- 详见：[go字符串初探](https://zhuanlan.zhihu.com/p/137584683)
 
 ### 字符串定义
 
@@ -1918,7 +1958,13 @@ import "fmt"
 
 var p = fmt.Println//给 fmt.Println 一个短名字的别名，随后将会经常用到。
 func main() {
-//注意都是包中的函数，不是字符串对象自身的方法，调用时传递字符作为第一个参数进行传递。
+	// 从字符串中读取内容
+	cisco_cert_level := "CCIE CCNP CCNA"
+	cisco := strings.NewReader(cisco_cert_level)
+	fmt.Printf("%T\n", cisco)
+	fmt.Printf("%v\n", cisco)
+	fmt.Printf("%p\n", cisco)
+	//注意都是包中的函数，不是字符串对象自身的方法，调用时传递字符作为第一个参数进行传递。
     p("Contains:  ", s.Contains("test", "es")) // true,包含判断，注意s.Contains("", "")=true
     p(s.ContainsAny("test", "e")) // e&s(且),e|s(或)
     p(s.ContainsRune("我爱中国", '我'))  //字符匹配，注意是单引号！
@@ -1979,6 +2025,8 @@ func main() {
     p("Char:", "hello"[1])// 101 取字符
 }
 ```
+		
+类似于Python的strip()、rsrip()、lstrip()，Go的strings包也有TrimSpace()、TrimLeft()、TrimRight()
 
 参考：[go字符串操作示例](http://studygolang.com/articles/771)
 
