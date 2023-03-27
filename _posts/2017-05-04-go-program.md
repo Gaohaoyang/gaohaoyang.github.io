@@ -1560,9 +1560,9 @@ Go语言的字符串类型string在本质上就与其他语言的字符串类型
 即：一个Go语言字符串是一个**任意字节**的常量序列。
 
 Golang的双引号和反引号都可用于表示一个常量字符串，不同在于：
-- **双引号**用来创建可解析的字符串字面量(支持转义，但不能用来引用多行)
+- **双引号**用来创建可解析的字符串**字面量**(支持转义，但不能用来引用多行)
 - **反引号**用来创建原生的字符串字面量，这些字符串可能由多行组成(不支持任何转义序列)，原生的字符串字面量多用于书写多行消息、HTML以及正则表达式
-- **单引号**则用于表示Golang的一个特殊类型：rune，类似其他语言的byte但又不完全一样，是指：**码点字面量**（Unicode code point），不做任何转义的原始内容。
+- **单引号**则用于表示Golang的一个特殊类型：`rune`，类似其他语言的byte但又不完全一样，是指：**码点字面量**（Unicode code point），不做任何转义的原始内容。
 
 ## 分隔符
 
@@ -1706,7 +1706,6 @@ Go 语言中<span style='color:red'>没有字符类型</span>，字符只是整�
 >- Unicode 和 ASCII 一样，是一种字符集，UTF-8 则是一种编码方式
 
 
-
 ```go
 type byte = uint8
 type rune = int32
@@ -1748,6 +1747,8 @@ import (
 )
 
 func main() {
+    //x := 'a' // rune类型
+    //x := "a" // string
     a := "这是单行测试字符串..."
     /* // 或： "a " + "b" 模式
     b := "这是多行测试字符串..." + 
@@ -1897,6 +1898,11 @@ o 的类型是 int32
 
 ### 字符串操作大全
 
+strings判等
+- == 直接比较，区分大小写
+- strings.Compare(a,b) 该函数返回值为 int, 0 表示两数相等，1 表示 a>b, -1 表示 a< b。区分大小写
+- strings.EqualFold(a,b) 直接返回是否相等，不区分大小写。
+
 strings使用方法
 - Contains* 包含
 - Count 技术
@@ -1913,7 +1919,13 @@ import "fmt"
 
 var p = fmt.Println//给 fmt.Println 一个短名字的别名，随后将会经常用到。
 func main() {
-//注意都是包中的函数，不是字符串对象自身的方法，调用时传递字符作为第一个参数进行传递。
+    // 字符串判等
+    fmt.Println("go"=="go") // true ① ==，区分大小写，最简单
+    fmt.Println("GO"=="go") // false
+    fmt.Println(strings.Compare("GO","go")) // -1 Compare 区分大小写，速度慢于 ==
+    fmt.Println(strings.Compare("go","go")) // 0
+    fmt.Println(strings.EqualFold("GO","go")) // true 比较utf-8在小写情况下是否相等，不区分大小写
+    // 注意都是包中的函数，不是字符串对象自身的方法，调用时传递字符作为第一个参数进行传递。
     p("Contains:  ", s.Contains("test", "es")) // true,包含判断，注意s.Contains("", "")=true
     p(s.ContainsAny("test", "e")) // e&s(且),e|s(或)
     p(s.ContainsRune("我爱中国", '我'))  //字符匹配，注意是单引号！
@@ -1966,7 +1978,7 @@ func main() {
     fmt.Println(strings.ToTitle("loud noises"))
     p("ToLower:   ", s.ToLower("TEST"))//test 小写
     p("ToUpper:   ", s.ToUpper("test"))//TEST 大写
-    // 截断
+    // 截断，删除
     fmt.Printf("[%q]", strings.Trim(" !!! Achtung !!! ", "! ")) // ["Achtung"]
     fmt.Printf("[%q]", strings.TrimLeft(" !!! Achtung !!! ", "! ")) // ["Achtung !!! "]
     fmt.Println(strings.TrimSpace(" tn a lone gopher ntrn")) // a lone gopher
