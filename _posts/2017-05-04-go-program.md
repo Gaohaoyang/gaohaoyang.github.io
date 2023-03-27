@@ -1686,12 +1686,58 @@ func main() {
 
 ## 字符串
 
+总结
+- Go 语言中没有字符概念，一个字符就是一堆字节，可能是**单字节**（ASCII 字符集），也可能是**多字节**（Unicode 字符集）
+- byte 是 uint8 的别名，长度为 1 个字节，用于表示 ASCII 字符
+- rune 则是 int32 的别名，长度为 4 个字节，用于表示以 UTF-8 编码的 Unicode 码点
+- 字符串的截取是以字节为单位的
+- 使用下标索引字符串会产生字节
+- 要遍历 rune 类型的字符则使用 range 方法
+
+### byte 与 rune
+
+Go 语言中<span style='color:red'>没有字符类型</span>，字符只是整数的**特殊用例**。
+- 用于表示字符的 `byte` 和 `rune` 类型都是整型的**别名**。
+- `byte` 是 `uint8` 的别名，长度为 1 个字节，用于表示 ASCII 字符
+- `rune` 是 `int32` 的别名，长度为 4 个字节，用于表示以 UTF-8 编码的 Unicode 码点
+
+注意
+>- Unicode 从 0 开始，为每个符号指定一个编号，这叫做「码点」（code point）
+>- Unicode 和 ASCII 一样，是一种字符集，UTF-8 则是一种编码方式
+
+
+
+```go
+type byte = uint8
+type rune = int32
+// byte 指定字符变量
+var byteC byte = 'j' // byte 实质上是整型 uint8，所以可以直接转成整型值。
+fmt.Printf("字符 %c 对应的整型为 %d\n", byteC, byteC)
+// Output: 字符 j 对应的整型为 106
+//rune 与 byte 相同
+var runeC rune = 'J'
+// runeC := 'J' // 字符变量未指定类型时，默认是 rune 类型
+fmt.Printf("字符 %c 的类型为 %T\n", runeC, runeC)
+// Output: 字符 J 的类型为 int32
+```
+
+为什么要两种类型呢？
+- byte 占用一个字节，可用于表示 ASCII 字符。
+- 而 UTF-8 是一种**变长**的编码方法，字符长度从 1~4 个字节不等。byte 显然不擅长这样的表示，就算想用多个 byte 进行表示，也不知道要处理的 UTF-8 字符究竟占了几个字节。
+
+```go
+testString := "你好，世界"
+fmt.Println(testString[:2]) // 输出乱码，因为截取了前两个字节
+fmt.Println(testString[:3]) // 输出「你」，一个中文字符由三个字节表示
+// 用 []rune() 将字符串转为 Unicode 码点再进行截取，这样就无需考虑字符串中含有 UTF-8 字符
+fmt.Println(string([]rune(testString)[:2])) // 输出：「你好」
+```
 
 ### 字符串定义
 
 字符串
-- 单行定义: 使用双引号
-- 多行定义: 使用反引号
+- 单行定义: 使用**双引号**
+- 多行定义: 使用**反引号**
 
 ```go
 package main 
@@ -1785,6 +1831,69 @@ func main() {
 }
 ```
 
+### 字符串遍历
+
+
+字符串遍历有两种方式
+- 一种是下标遍历
+- 一种是使用 range
+
+#### 下标遍历
+
+字符串以 UTF-8 编码方式存储
+- 用 len() 函数获取字符串长度时，获取到的是该 UTF-8 编码字符串的字节**长度**
+- 通过下标索引字符串, 将会产生一个字节。
+
+因此，如果字符串中含有 UTF-8 编码字符，就会出现乱码
+
+```go
+testString := "Hello，世界"
+
+for i := 0; i < len(testString); i++ {
+    c := testString[i]
+    fmt.Printf("%c 的类型是 %s\n", c, reflect.TypeOf(c))
+}
+
+/* Output:
+H 的类型是 uint8（ASCII 字符返回正常）
+e 的类型是 uint8
+l 的类型是 uint8
+l 的类型是 uint8
+o 的类型是 uint8
+ï 的类型是 uint8（从这里开始出现了奇怪的乱码）
+¼ 的类型是 uint8
+ 的类型是 uint8
+ä 的类型是 uint8
+¸ 的类型是 uint8
+ 的类型是 uint8
+ç 的类型是 uint8
+ 的类型是 uint8
+ 的类型是 uint8
+*/
+```
+
+#### range遍历
+
+range 遍历则会得到 rune 类型的字符：
+
+```go
+testString := "Hello，世界"
+
+for _, c := range testString {
+    fmt.Printf("%c 的类型是 %s\n", c, reflect.TypeOf(c))
+}
+
+/* Output:
+H 的类型是 int32
+e 的类型是 int32
+l 的类型是 int32
+l 的类型是 int32
+o 的类型是 int32
+， 的类型是 int32
+世 的类型是 int32
+界 的类型是 int32
+*/
+```
 
 ### 字符串操作大全
 
