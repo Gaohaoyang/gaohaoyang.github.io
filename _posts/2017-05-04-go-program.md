@@ -175,6 +175,11 @@ Go有很多特性，有一些是独特的，有一些借鉴于一些其它编程
   - mac地址： wget https://go.dev/dl/go1.17.6.darwin-amd64.pkg
   - linux地址: wget https://go.dev/dl/go1.17.6.linux-amd64.tar.gz
 
+### go 在线体验
+	
+【2023-3-27】
+- [replit](https://replit.com/languages/go)
+- [codingground](https://www.tutorialspoint.com/execute_golang_online.php)
 
 ### go环境变量
 
