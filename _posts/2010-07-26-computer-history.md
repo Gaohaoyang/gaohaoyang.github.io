@@ -831,7 +831,7 @@ Go之父闪光点
 
 [Youtube地址](https://www.youtube.com/playlist?list=PL8dPuuaLjXtNlUrzyH5r6jN9ulIgZBpdo)
 
-<iframe src="//player.bilibili.com/player.html?aid=457294840&bvid=BV145411j7aH&cid=242822115&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=457294840&bvid=BV145411j7aH&cid=242822115&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
 ## 代码如何被CPU执行
 
@@ -1015,9 +1015,9 @@ func add(int a,int b) { #0x0020
 
 | 分类 |	编码标准	| 说明 |
 |---|---|---|
-| 单字节字符编码 | ISO-8859-1	| 最简单的编码规则，每一个字节直接作为一个 UNICODE 字符。比如，[0xD6, 0xD0] 这两个字节，通过 iso-8859-1 转化为字符串时，将直接得到 [0x00D6, 0x00D0] 两个 UNICODE 字符，即 "ÖÐ"。<br>反之，将 UNICODE 字符串通过 iso-8859-1 转化为字节串时，只能正常转化 0~255 范围的字符。|
-| ANSI 编码	GB2312,BIG5,Shift_JIS,ISO-8859-2 ……	| 把 UNICODE 字符串通过 ANSI 编码转化为“字节串”时，根据各自编码的规定，一个 UNICODE 字符可能转化成一个字节或多个字节。<br>反之，将字节串转化成字符串时，也可能多个字节转化成一个字符。比如，[0xD6, 0xD0] 这两个字节，通过 GB2312 转化为字符串时，将得到 \[0x4E2D\] 一个字符，即 '中' 字。<br>“ANSI 编码”的特点：<br>1. 这些“ANSI 编码标准”都只能处理各自语言范围之内的 UNICODE 字符。<br>2. “UNICODE 字符”与“转换出来的字节”之间的关系是人为规定的。|
-| UNICODE 编码 |	UTF-8,UTF-16, UnicodeBig ……	| 与“ANSI 编码”类似的，把字符串通过 UNICODE 编码转化成“字节串”时，一个 UNICODE 字符可能转化成一个字节或多个字节。<br>与“ANSI 编码”不同的是：<br>1. 这些“UNICODE 编码”能够处理所有的 UNICODE 字符。<br>2. “UNICODE 字符”与“转换出来的字节”之间是可以通过计算得到的。|
+| **单字节**字符编码 | ISO-8859-1	| 最简单的编码规则，每一个字节直接作为一个 UNICODE 字符。比如，[0xD6, 0xD0] 这两个字节，通过 iso-8859-1 转化为字符串时，将直接得到 [0x00D6, 0x00D0] 两个 UNICODE 字符，即 "ÖÐ"。<br>反之，将 UNICODE 字符串通过 iso-8859-1 转化为字节串时，只能正常转化 0~255 范围的字符。|
+| ANSI 编码	| GB2312,BIG5,Shift_JIS,ISO-8859-2 ……	| 把 UNICODE 字符串通过 ANSI 编码转化为“字节串”时，根据各自编码的规定，一个 UNICODE 字符可能转化成一个字节或多个字节。<br>反之，将字节串转化成字符串时，也可能多个字节转化成一个字符。比如，[0xD6, 0xD0] 这两个字节，通过 GB2312 转化为字符串时，将得到 \[0x4E2D\] 一个字符，即 '中' 字。<br>“ANSI 编码”的特点：<br>1. 这些“ANSI 编码标准”都只能处理各自语言范围之内的 UNICODE 字符。<br>2. “UNICODE 字符”与“转换出来的字节”之间的关系是人为规定的。|
+| **UNICODE** 编码 |	UTF-8,UTF-16, UnicodeBig ……	| 与“ANSI 编码”类似的，把字符串通过 UNICODE 编码转化成“字节串”时，一个 UNICODE 字符可能转化成一个字节或多个字节。<br>与“ANSI 编码”不同的是：<br>1. 这些“UNICODE 编码”能够处理所有的 UNICODE 字符。<br>2. “UNICODE 字符”与“转换出来的字节”之间是可以通过计算得到的。|
 
 实际上没有必要去深究每一种编码具体把某一个字符编码成了哪几个字节，我们只需要知道“编码”的概念就是把“字符”转化成“字节”就可以了。对于“UNICODE 编码”，由于它们是可以通过计算得到的，因此，在特殊的场合，我们可以去了解某一种“UNICODE 编码”是怎样的规则。
 
