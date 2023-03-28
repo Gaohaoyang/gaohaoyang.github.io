@@ -1759,6 +1759,35 @@ func main()  {
 
 字符串是字节的切片slice
 
+修改示例
+- 将中英文杂的字符串中特定字符（如：中,d）删除
+
+```go
+package main
+
+import "fmt"
+import "strings"
+
+func main() {
+	str := "a中文cddd" // string 类型
+	str_new := []rune(str)
+	//str_new := string([]rune(str)[:4]) // string 转 rune，再转回 string
+	fmt.Println(str_new) // 输出：[97 20013 25991 99 100]
+    // 设置一个特殊字符，用于后续替换
+    special_token := '㇎'
+	for i,v := range []rune(str) {
+		fmt.Printf("%d, %c\n", i, v)
+		if v == '中' || v == 'd' {
+			str_new[i] = special_token
+		}
+	}
+    // 一次性替换所有特殊字符, 等同于删除
+	str_out := strings.Replace(string(str_new), string(special_token), "", -1)
+	fmt.Printf("%s --> %s --> %s\n", str, string(str_new), str_out)
+}
+```
+
+
 ### 中文编码
 
 汉字 Unicode 编码范围：[参考](https://www.qqxiuzi.cn/zh/hanzi-unicode-bianma.php)
