@@ -1772,7 +1772,7 @@ func main() {
 	str := "a中文cddd" // string 类型
 	str_new := []rune(str)
 	//str_new := string([]rune(str)[:4]) // string 转 rune，再转回 string
-	fmt.Println(str_new) // 输出：[97 20013 25991 99 100]
+	fmt.Println(str_new) // 输出：[97 20013 25991 99 100 100 100]
     // 设置一个特殊字符，用于后续替换
     special_token := '㇎'
 	for i,v := range []rune(str) {
@@ -2178,6 +2178,10 @@ func main() {
 
 ## 数组（array）—— 固定大小
 
+数组
+- 数组支持 “==“、”!=” 操作符，因为内存总是被初始化过的
+- \[n]\*T 表示**指针数组**，\*\[n]T表示**数组指针**
+
 
 ```sh
 ┌────┬────┬────┬────┬─────┬─────┐
@@ -2282,26 +2286,62 @@ func main() {
 
 以下几个与数组相关的重要概念应该向Go程序员明确：
 
-| 概念| 描述|
+| 概念 | 描述 |
 |---|---|
-|多维数组|Go支持多维数组，多维数组的最简单的形式是二维数组。|
-| 将数组传递给函数| 可以通过指定数组的名称而不使用索引，将指向数组的指针传递给函数。|
+| 多维数组 | Go支持多维数组，多维数组的最简单的形式是二维数组。|
+| 将数组传递给函数 | 可以通过指定数组的名称而不使用索引，将指向数组的指针传递给函数。|
  
  
-## 切片(slice) —— 大小不定
+## 切片 (slice) —— 大小不定
  
-一个 slice 会指向一个序列的值，并且包含了长度信息。slice包含了array的基本操作
+数组长度不可变， 有很多局限性
+
+slice 是一个拥有相同类型元素的**可变长度**的序列，基于数组类型做的一层封装，支持自动扩容
+- 切片是一个**引用**类型，内部结构包含**地址**、**长度**和**容量**。切片一般用于快速地操作一块数据集合。
+- 一个 slice 会指向一个序列的值，并且包含了长度信息。slice包含了array的基本操作
+
+指定大小就是`array`，否则 `slice`
+
+典型方法
+- 长度信息： len() 实际长度, cap() 容量
+- 判空： nil
+- 切片操作
+- append()
+- copy() 函数
 
 ```go
 func main() {
-    x := [3]int{3,5,6} //指明大小就是array！否则slice
+    // array
+    x := [3]int{3,5,6} //指定大小就是array！否则slice
     x := [3]int{} // 数组
+    // 数组切片操作
+    var arr = [5]int{0, 1, 2, 3, 4}
+	s := arr[1:3]
+	fmt.Printf("s:%v len(s):%v cap(s):%v\n", s, len(s), cap(s)) //s:[1 2] len(s):2 cap(s):4
+	fmt.Printf("typeof s:%T\n", s)   //typeof s:[]int
+    // slice
     s := []int{2, 3, 5, 7, 11, 13} // slice
     a := make([]int, 5)  // len(a)=5,用make构造slice（默认取值0）
     b := make([]int, 0, 5) // len(b)=0, cap(b)=5，指定容量
+    if a == nil {
+        fmt.Printf("空slice\n")
+    }
     var z []int //nil slice空切片,z=nil
+    // var声明的零值切片可以在append()函数直接使用，无需初始化。
+    z := []int{}  // 没有必要初始化
+    var s = make([]int)  // 没有必要初始化
     z = append(z, 0) //append追加元素
+    //添加多个
     z = append(z, 1,4,3)//多个元素
+	n3 := []int{4, 5}
+	n2 = append(n2, n3...)
+	n2 = append(n2, 2, 3, 4)
+    z[2:]  // 等同于 z[2:len(a)]
+    z[:3]  // 等同于 z[0:3]
+    z[:]   // 等同于 z[0:len(a)]
+    // 复制
+    a := []int{1, 2, 3, 4, 5}
+	b := a
     copy(a,b) //复制
     fmt.Println("s ==", s)      
     fmt.Println("s[1:4] ==", s[1:4]) //s[:4],s[:5]同python
@@ -2313,6 +2353,9 @@ func main() {
         fmt.Printf("s[%d] == %d\n", i, s[i])  
             fmt.Printf("%s\n", strings.Join(s[i], " ")) //连接二维切片里的一维
     } 
+    // 删除切片元素：GO没有删除切片元素的方法，可用切片本身的特性来删除元素
+    aaa := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 1}
+	aaaa := append(aaa[:3], aaa[4:]...)
 }
 
 func test_array(array [5]int){ //array值传递，未改变原参数值 
@@ -5671,6 +5714,9 @@ fmt.Println("离现在过去了：", time.Since(startTime))
 ```
 
 ## 正则表达式（regexp）
+
+在线测试
+- [lddgo](https://www.lddgo.net/string/golangregex)
 
 代码示例
 
