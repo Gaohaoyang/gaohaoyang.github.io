@@ -1759,6 +1759,10 @@ func main()  {
 
 字符串是字节的切片slice
 
+### 中文编码
+
+汉字 Unicode 编码范围：[参考](https://www.qqxiuzi.cn/zh/hanzi-unicode-bianma.php)
+
 		
 ### byte 与 rune
 
