@@ -873,6 +873,11 @@ Colossal-AI
   - Colossal-AI 支持使用无冗余优化器 (`ZeRO`) 来优化内存使用，这种方法可以有效减少内存冗余，并且相比传统的数据并行策略，不会牺牲计算粒度和通信效率，同时可以大幅提高内存使用效率。
   - Colossal-AI 的异构内存空间管理器 `Gemini` 支持将优化器状态从 GPU 卸载到 CPU ，以节省 GPU 内存占用。可以同时利用 GPU 内存、CPU 内存（由 CPU DRAM 或 NVMe SSD 内存组成）来突破单 GPU 内存墙的限制，进一步扩展了可训练模型规模。
 
+ 【2023-3-28】colossal AI发布自己的聊天机器人：[ColossalChat](https://chat.colossalai.org/)，同时补充了 SFT 代码：train_sft.sh
+  
+  流程
+  - ![](https://github.com/hpcaitech/ColossalAI/blob/main/applications/Chat/assets/stage-3.jpeg?raw=true)
+  
 #### 尤洋介绍
 
 [尤洋](https://www.comp.nus.edu.sg/~youy/)：
