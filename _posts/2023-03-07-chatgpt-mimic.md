@@ -1200,6 +1200,7 @@ Because training step 1 is a simple supervised finetune progress as many other m
     L -->|2023-3-21,7b的LLaMA\n斯坦福 Eric J. Wang|AR
     A -->|2023-3-17,贝壳\n7b,bloom,200w中文语料| AB(BELLE):::grass
     A -->|2023-3-26,华中师范\n7b,3k中文保险语料,4h| AL(Luotuo骆驼):::grass
+    L -->|2023-3-29,深圳大学\n7b,中文语料| AC(ChatLLaMA):::grass
     LR --> AL
     AR -->|2023-3-23,突破8G GPU 显存限制,直接用CPU运行\n1. LLaMA cpp项目\n2. Alpaca-LoRA权重量化| AC(Alpaca-cpp):::green
 </div>
@@ -1266,6 +1267,22 @@ make chat
 # 运行
 ./chat
 ```
+
+#### ChatLLaMA
+
+【2023-3-29】[ChatLLaMA：用指令微调训练中文对话大模型](https://zhuanlan.zhihu.com/p/616748134)
+
+以非中文的预训练模型为基础，使用少量数据和计算量“撬动”模型的语言能力转向中文，以较低的成本实现中文预训练LLM。
+- 假设: 用中英文平行语料微调模型，能够对齐模型中英文在高维空间的表示，从而将模型在英文上的强大语言能力迁移到中文。
+- 模型及GitHub地址：[Chinese-ChatLLaMA](https://github.com/ydli-ai/Chinese-ChatLLaMA)
+
+基于[TencentPretrain](https://link.zhihu.com/?target=https%3A//github.com/Tencent/TencentPretrain)预训练框架，我们进行了以下实验：
+1.  基于LLaMA-7B权重在中文数据上进行无监督增量预训练。使用的数据包含各种[中文百科、社区互动、翻译语料](https://link.zhihu.com/?target=https%3A//github.com/brightmart/nlp_chinese_corpus)和[科学文献](https://link.zhihu.com/?target=https%3A//github.com/ydli-ai/CSL)数据，在32 * A100 40G GPU 上以 2e-4 学习率，3072 batch_size，训练一万步，得到LLaMA-7B-zh。
+2.  在中文预训练权重LLaMA-7B-zh上，使用已有的指令数据集的集合进行指令微调，数据集以及预处理代码整理在[Chinese-instruction-dataset](https://link.zhihu.com/?target=https%3A//github.com/ydli-ai/Chinese-instruction-dataset)。学习率为2e-5，训练2000步，最终得到Chat-LLaMA。
+ 
+训练LLaMA的详细方法可以参考[上一篇文章](https://zhuanlan.zhihu.com/p/612752963)，流程如下图所示：
+- ![](https://pic3.zhimg.com/80/v2-667a131609b04ef4a1fa8d84e980252e_1440w.webp)
+
 
 
 ### LAION：Open Assistant
