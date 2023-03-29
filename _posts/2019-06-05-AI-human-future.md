@@ -128,10 +128,13 @@ mathjax: true
 
 ## 资料
 
-- 【2022-1-6】顾凡及 和 Karl合著的书,一位德国工程师与一位中国科学家之间的对话
-  1. 《[脑研究的新大陆](https://book.douban.com/subject/34839897/)》
-  1. 《[意识之谜和心智上传的迷思](https://book.douban.com/subject/34922577/)》
-  1. 《人工智能的第三个春天》
+【2021-3-19】[AI笑话大全](https://www.huxiu.com/article/308769.html)
+- 挪木块: 一个机械手被要求把木块挪到桌子的指定地点，它的解法是：挪桌子
+- 赛跑: 长出特别长的腿，向前跌倒直接越过终点线。
+- 俄罗斯方块: 程序发现，只要暂停游戏就可以永远不输。
+
+- 【2020-7-12】[天道](https://www.ixigua.com/6805386709845410318)：透视社会有三个层面：`技术`、`制度`和`文化`，小到一个人，大到一个国家、民族，任何一种命运，都是一种文化属性的产物，强势文化造就强者，弱势文化造就弱者。这是规律，也可以理解为天道，不以人的意志为转移。强势文化在武学里称之为秘笈，弱势文化因为易学、易懂和易用，就成了流行品种。文学影视是扒拉灵魂的艺术，如果文学影视能够破解更高思维空间的文化密码，那它的功效就在于启迪人的觉悟，震撼人的灵魂，这就是众生所需。就是功德、名利和市场。精神拯救的暴利，和毒品麻醉的暴利，完全等值
+
 - 【2021-11-30】人工智能训练师」国家职业技能标准：五大级别，你是第几级？
   - 「人工智能训练师」职业技能标准也分为五个等级：从数据采集和处理、数据标注、智能系统运维、业务分析、智能训练、智能系统设计等维度，划分出 L5-L1 五个等级，并对各个等级的职业能力给出了具体的描述和要求。
   - 该职业包含数据标注员、人工智能算法测试员两个工种。2020 年 2 月，[「人工智能训练师」2021年版](http://www.mohrss.gov.cn/xxgk2020/fdzdgknr/rcrs_4225/jnrc/zyyjnpj/202111/W020211125403381394423.pdfs) 正式成为新职业并纳入国家职业分类目录。
@@ -149,9 +152,28 @@ mathjax: true
 
 ## 大脑工作原理
 
+【2022-1-6】顾凡及 和 Karl合著的书,一位德国工程师与一位中国科学家之间的对话
+1. 《[脑研究的新大陆](https://book.douban.com/subject/34839897/)》
+1. 《[意识之谜和心智上传的迷思](https://book.douban.com/subject/34922577/)》
+1. 《人工智能的第三个春天》
+
 - 【2021-5-7】[阿里巴巴达摩院司罗：NLP如何达到真正智能？视频](https://www.ixigua.com/i6929800183979052292/)，NLP达到人的程度，还有很远的路要走
-  - 智能分四个层面：计算智能→感知智能→认知智能→创造智能
+  - 智能分四个层面：计算智能 → 感知智能 → 认知智能 → 创造智能
 - 【2021-6-3】[Yoshua Bengio：新步伐，迈向鲁棒泛化的深度学习2.0](https://mp.weixin.qq.com/s/tnXKTCYK5uB-bTGZ_dPM7w),2021 年 6 月 1 日，Yoshua Bengio 在 2021 北京智源大会上发表了题为「Towards Robust Generalization in Machine Learning with System 2 Deep Learning」的主题演讲。
+
+- 【2020-7-28】实现AI一般有三条路径：
+  - 1）**神经**科学：自底向上，模仿生物；
+  - 2）**认知**科学：自顶向下，构建认知框架；
+  - 3）**计算**科学：模拟神经活动（例如DNN）。
+    - ![](https://p26-tt.byteimg.com/img/pgc-image/8c84b15be9c54b76acb45b5396b0242a~tplv-obj:523:291.image)
+- 最为理想的研究状态是：
+  - 首先由神经科学发现大脑的一些信息加工的机制；
+  - 然后用认知科学的方法对这种机制进行建模；
+  - 在此模型之上，计算科学抽象出算法，从而获得一套解决问题的方案。
+- 简单来说，即将认知神经科学与人工智能结合，分别从生物视觉的硬件层、模型层、算法层进行研究。
+
+### 大脑如何学习
+
 - 【2021-2-28】[Bengio、Hinton的不懈追求——深度学习算法揭示大脑如何学习](https://mp.weixin.qq.com/s/2-mTVY_pyHcYyaoJtR1Hsg)，[原文链接](https://www.quantamagazine.org/artificial-neural-nets-finally-yield-clues-to-how-brains-learn-20210218/)
   - [Hinton：我终于想明白大脑怎么工作了！神经学家花三十年，寻找反向传播的生物机制](https://mp.weixin.qq.com/s/nKPde5Hv4YoZCMOFvBXM1w)，更详细的解释，英文原文：[Artificial Neural Nets Finally Yield Clues to How Brains Learn](https://www.quantamagazine.org/artificial-neural-nets-finally-yield-clues-to-how-brains-learn-20210218/)
     - [神经元信号传递视频](https://d2r55xnwy6nx47.cloudfront.net/uploads/2021/02/Neuron_2880_Lede.mp4)
@@ -185,21 +207,10 @@ mathjax: true
   - ![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F0228%2F03d557fep00qp8evu0029d200fk00klg00fk00kl.png&thumbnail=650x2147483647&quality=80&type=jpg)
   - ![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F0228%2F98f17815p00qp8evu001kd200fk00cng00fk00cn.png&thumbnail=650x2147483647&quality=80&type=jpg)
   - ![](https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F0228%2F83ce12e7p00qp8evu002nd200fk00pgg00fk00pg.png&thumbnail=650x2147483647&quality=80&type=jpg)
-- 【2020-7-28】实现AI一般有三条路径：
-  - 1）**神经**科学：自底向上，模仿生物；
-  - 2）**认知**科学：自顶向下，构建认知框架；
-  - 3）**计算**科学：模拟神经活动（例如DNN）。
-    - ![](https://p26-tt.byteimg.com/img/pgc-image/8c84b15be9c54b76acb45b5396b0242a~tplv-obj:523:291.image)
-- 最为理想的研究状态是：
-  - 首先由神经科学发现大脑的一些信息加工的机制；
-  - 然后用认知科学的方法对这种机制进行建模；
-  - 在此模型之上，计算科学抽象出算法，从而获得一套解决问题的方案。
-- 简单来说，即将认知神经科学与人工智能结合，分别从生物视觉的硬件层、模型层、算法层进行研究。
+
 
 - 【2019-11-13】[综述：全面介绍脑连接研究的方法学](https://mp.weixin.qq.com/s?__biz=MzI2ODEyOTE3OQ==&mid=2649569369&idx=1&sn=210bb5d90c308ff5072fabb6645c85b9&chksm=f2eddeadc59a57bb7192738d35d5d4f8a078f7c20038c9bcce3183ce308fa3be74d10476ad5a&mpshare=1&scene=23&srcid&sharer_sharetime=1573616516238&sharer_shareid=b8d409494a5439418f4a89712efcd92a%23rd)
 - 【2021-3-15】[国内脑机接口平台「NeuraMatrix」获数百万美元Pre-A轮融资，自研芯片即将面世](https://www.toutiao.com/i6939667834477740552/),公司成立于2019年11月，是清华大学孵化企业。与国内的BrainCo、脑陆科技等非侵入式脑机接口产品不同，NeuraMatrix采用的是侵入式技术，公司定位于新一代脑机接口平台开发，规划版图涵盖脑机接口芯片、系统化设备、软硬一体化平台，以及针对医疗、科研等行业的专用解决方案。
-
-- 【2020-7-12】[天道](https://www.ixigua.com/6805386709845410318)：透视社会有三个层面：`技术`、`制度`和`文化`，小到一个人，大到一个国家、民族，任何一种命运，都是一种文化属性的产物，强势文化造就强者，弱势文化造就弱者。这是规律，也可以理解为天道，不以人的意志为转移。强势文化在武学里称之为秘笈，弱势文化因为易学、易懂和易用，就成了流行品种。文学影视是扒拉灵魂的艺术，如果文学影视能够破解更高思维空间的文化密码，那它的功效就在于启迪人的觉悟，震撼人的灵魂，这就是众生所需。就是功德、名利和市场。精神拯救的暴利，和毒品麻醉的暴利，完全等值
 
 - 【2020-7-30】[沈向洋：从深度学习到深度理解](https://www.toutiao.com/i6854955754193945096/?tt_from=mobile_qq&utm_campaign=client_share&timestamp=1596065543&app=news_article&utm_source=mobile_qq&utm_medium=toutiao_android&use_new_style=1&req_id=2020073007322301014412006713A3E050&group_id=6854955754193945096)
    - 现状：NLP需要更多参数，视觉需要更多层网络
@@ -216,18 +227,21 @@ mathjax: true
    - GTG模型与GPT模型对比也有比较大的优势：GPT是学习如何理解和生成自然语言，而GTG是学习预测对话状态，产生grounded responses（真实响应）来完成任务。
 
 - 【2020-9-5】[戴琼海：深度学习遭遇瓶颈，全脑观测启发下一代AI算法](https://www.toutiao.com/i6867958040830837256/)
-![](https://p6-tt.byteimg.com/origin/pgc-image/S9SNAiKA50i3tG?from=pc)
-![](https://p6-tt.byteimg.com/origin/pgc-image/S9SNAioHQBerMW?from=pc)
-![](https://p1-tt.byteimg.com/origin/pgc-image/S9SNAjF8XOMAe3?from=pc)
+  - ![](https://p6-tt.byteimg.com/origin/pgc-image/S9SNAiKA50i3tG?from=pc)
+  - ![](https://p6-tt.byteimg.com/origin/pgc-image/S9SNAioHQBerMW?from=pc)
+  - ![](https://p1-tt.byteimg.com/origin/pgc-image/S9SNAjF8XOMAe3?from=pc)
 - 利用脑观测成果启发人工智能理论应该还大有可为。
-![](https://p6-tt.byteimg.com/origin/pgc-image/S9SNAjdEmZVr3j?from=pc)
-![](https://p6-tt.byteimg.com/origin/pgc-image/S9SNAkC7SXcarK?from=pc)
+  - ![](https://p6-tt.byteimg.com/origin/pgc-image/S9SNAjdEmZVr3j?from=pc)
+  - ![](https://p6-tt.byteimg.com/origin/pgc-image/S9SNAkC7SXcarK?from=pc)
 - 近年来，脑科学和人工智能是两条平行线，互不相交。在未来，我们需要在两者之间构建一个桥梁，即认知计算。认知计算是通过先进神经技术揭示脑结构、脑功能与智能产生的多层次关联与多模态映射机制，从而建立认知模型与类脑智能体系的科学。
-![](https://p6-tt.byteimg.com/origin/pgc-image/S9SNDpiDatW4iK?from=pc)
+  - ![](https://p6-tt.byteimg.com/origin/pgc-image/S9SNDpiDatW4iK?from=pc)
 - 对1906年来脑科学和人工智能的重要成果进行了调研，这些研究分别探索了人类的思考模式以及机器的思考模式
-![](https://p1-tt.byteimg.com/origin/pgc-image/S9SNDqG1c4SWtO?from=pc)
-![](https://p6-tt.byteimg.com/origin/pgc-image/S9SNDrB5fGyDbI?from=pc)
-![](https://p1-tt.byteimg.com/origin/pgc-image/S9SNGvP81HYn4c?from=pc)
+  - ![](https://p1-tt.byteimg.com/origin/pgc-image/S9SNDqG1c4SWtO?from=pc)
+  - ![](https://p6-tt.byteimg.com/origin/pgc-image/S9SNDrB5fGyDbI?from=pc)
+  - ![](https://p1-tt.byteimg.com/origin/pgc-image/S9SNGvP81HYn4c?from=pc)
+
+
+### 机器学习与神经认知
 
 - 【2020-9-19】[颜水成&刘嘉：机器学习与认知神经的火花碰撞](https://mp.weixin.qq.com/s?__biz=MzI5MDUyMDIxNA==&mid=2247508222&idx=1&sn=fedb8b7883838c037f36b25f108541df&chksm=ec1c4d07db6bc4119a1c7c3e4523cb36ec826e7a9f7cc2fbb350d83144e7dff0c7057a4ca01b&mpshare=1&scene=23&srcid=0919C6RPLiswXQvHXKhCl0hB&sharer_sharetime=1600528849801&sharer_shareid=b8d409494a5439418f4a89712efcd92a#rd)
    - 刘嘉认为，通过对人脑的类比或仿真，科学家更易在创造智能体的工作上取得成功。科研领域的重大突破往往产生于**交叉领域**。因为在交叉地带，一个未知的领域，最可能产生新的东西。
@@ -235,7 +249,7 @@ mathjax: true
 - （1）一、GPT-3剖析
    - GPT-3非常了不起,可能是深度学习巅峰式的成果，但GTP-3和人的思维，在本质上是不一样的，它的推理方式更多的是一种**概率上的连接**，可能在训练的数据中出现了“脚”与“眼睛”的某种关联，它就学习出两者之间一种概率链接，在这个过程中，它并没理解“脚”和“眼睛”是什么。而人类则是先理解后推理。
    - GPT与非常庞大的知识图谱进行融合，这与我们大脑的运行机制越来越像，如果摔倒了，知识图谱推理出要受伤，但人的第一反应则是自己感到疼，这是一种共情能力，是基于我们对他人心理的一个推理，猜测他现在的感受
-- （2）二、System 1 & System 2
+- （2）二、`System 1` & `System 2`
    - Bengio等人提出人工智能将从System 1（潜意识，反应比较快，但不需要做推理） 转向 System 2（显意识，需要一个推理、判断的过程）。
       - 人类有两套系统，一套是皮层下系统，对应脑干等中枢系统；一套是皮层系统，对应大脑皮层。这种结构归因于人类的大脑是从低等动物一点点积累起来的。前者比较古老，主要掌管呼吸、心跳等比较初等但与我们生存有密切关系的活动，所以反应比较快，例如我们看到一个老虎出现，它会立刻加强肾上腺素，做出应激反应；而后者，更多的是去理解到底发生了什么事，然后做出推理和判断，例如我们发现原来这个老虎是人扮的，这时皮层系统就会告诉皮层下系统，从而调节原来的紧张。
       - 这两套系统物理上完全独立，但有交互
@@ -245,13 +259,13 @@ mathjax: true
 - （3）三、大脑如何处理视觉信息
    - 早在1968年，两个诺贝尔奖获得者Hubel和Wiesel他们对猫做实验，将细小的探针插入到神经元上去，然后给猫一个刺激，例如点、线以及其他复杂的图形，然后看不同的刺激会引起哪个脑区的兴奋。他们发现V1、V2、V3、V4等脑区，越往后面敏感的图形越复杂。这个研究说明，我们的大脑在处理视觉信息时，是将复杂的图像还原成局部元素，然后再进行合成的。这种方法事实上到现在仍然在用。
    - 图见原文
-- （4）四、关于记忆
+- （4）四、关于**记忆**
    - 人会经常忘记一些事情，特别是老年人。那么我们的记忆是真的从脑子里完全消失了，还是被打包存储在记忆深处某个地方了？
    - 两种情况都有
       - 不可能记得所有的事情，我们的大部分经历都会被忘掉
       - 记忆还在，但没有找到合适的途径把它提取出来
    - 目前普遍认为人类记忆有**三级加工模型**，分别为**感觉记忆**、**短时记忆**和**长时记忆**。如果一个信息不能转化为长时记忆，即引起神经元突出的持久改变（例如相邻神经元突出结构的变化、神经元胶质细胞数量的增加和神经元之间突出连接数量的增加），那么它就会被我们彻底地遗忘掉。
-- （5）五、神经元数目
+- （5）五、**神经元数目**
    - ① 脑神经元的数量从出生之后就不会再增长
       - 变化的是神经突触的数目以及神经元之间的连接。出生时，婴儿大脑皮层突触密度远低于成人；但出生后的几个月内，大脑皮层突触迅速增加，4岁左右，大脑皮层突触的密度会达到顶峰，约为成年人的150%。类比人工神经网络的话，你可以理解为一个全连接系统。随后，随着年龄和经验的增长，突触数目会慢慢减少，一些连接就会剪断。但也正是这样，我们反而变得更加聪明。（新生儿神经连接逐渐完善，见原文）
    - ② 神经元数目可能不一样。会因为神经元数量的多少，影响我们的智力水平吗？
@@ -264,7 +278,7 @@ mathjax: true
    - 通用智能其实不是人类所特有的，是所有生物体都有的。
       - 例如斑马鱼只有80万~100万个神经元；小鼠有1亿量级的神经元；狨猴神经元量级在10亿左右；恒河猴在百亿；而人类在千亿量级。但无论是斑马鱼也好，还是老鼠、狨猴、恒河猴，或者人类，它们都具有通用智能。图见原文
    - 生物智能应该有一套规则，这套规则本身与神经元数量无关，而正是这套规则使得我们生物具有了通用智能。也正是这样的规则使得斑马鱼与GPT-3有明显的区别。一旦把这种通用智能的规则搞清楚了，加上人工智能的无限可扩展能力，未来的人工智能发展，将不可限量。
-- （7）七、Baby Learning 有无生理基础？
+- （7）七、Baby Learning 有无**生理基础**？
    - 人类的学习过程，大多情况下是一种无监督学习，通过在物理世界中，跟环境接触/观察，从而引起突触的变化。这根GPT-3有很大差别
    - “Baby Learning”的概念，核心就是要摆脱现在依赖标签数据的现状，给一些数据，能够从数据中自动学习出一些知识来。现在人工智能里面也有两个方向
       - 一个叫自训练，也即从数据中预测标签，然后用预测标签作为新的标签，来帮助训练模型；
@@ -272,25 +286,25 @@ mathjax: true
    - 从发育的角度来看人类智能的发展，现在还处于一个比较分离的状态。
    - 大家目前的研究更多地集中在认知功能的变化上，但这些却缺少神经学上的证据。
    - 另一方面，我们对神经元突触之间的连接怎么搭建有了很好的研究，但却忽略了它功能上的变化，即为什么会这么搭，搭建之后发生了什么改变等，却不清楚。这是目前研究的一个空白点，背后的主要原因是**伦理的约束**。
-- （8）八、大脑噪声的模式
+- （8）八、**大脑噪声模式**
    - 什么因素让突触从原来连接状态变成不连接，或者反过来？
    - 上世纪50年代，一位神经生理学家唐纳德·赫布曾提出一个理论“`赫布理论`”，描述了突触可塑性的基本原理。简单来说就是“Cells that fire together, wire together”，即当两个神经元同时发放时，它们就会产生连接。
    - 大脑里有很多噪音，神经元一些自主地放电活动，即使处于静息状态也会有，这些噪音事实上消耗了大脑95%的能量。过去认为噪声就只是噪声。但大约在10年前，神经科学家们发现，其实这些噪音是有模式的，正是这种模式试图把不同的神经元进行沟通。图见原文
    - 两个神经元以同样的频率同步发放信号，那么他们就会保持一种连接状态；而如果它们是异步发放噪音，那么即使它们现在处于连接状态，这种连接也会慢慢衰退。
-- （9）九、认知的两套模型：规则+推理
+- （9）九、认知的两套模型：**规则+推理**
    - 如果某个样本只出现少数几次的话，最好的策略就是直接把这个样本存储下来，而非再用它去训练模型；需要的时候直接查询匹配即可；而对那些经常出现的样本，则需要训练模型，通过模型来查找。
    - 大脑就是采用的这种机制，我们称它为“混合模型”
-- （10）十、大脑中的跨感觉影响
+- （10）十、大脑中的**跨感觉**影响
    - 大脑对视觉和听觉的处理有显式分区，图见原文
    - 不同的感知信息处理模块之间，并不是完全独立的，而是随时在发生相互影响。
-- （11）十一、大脑中，常识是怎么存在的？
+- （11）十一、大脑中，**常识**是怎么存在的？
    - 最开始我们认为常识完全与后天经验有关，是一种知识。但现在逐渐意识到，常识可能不是一种知识，而是一套规则。
    - 有大量证据表明，许多常识来自于先天的基因。
-- （12）十二、记忆提取的野火模型
+- （12）十二、记忆提取的**野火模型**
    - 看到一位非常熟的人，但怎么也想不起他的名字，然后当有一个极小的线索出现的时候，一下子就想起来了。这个过程，在大脑中到底发生了什么？
    - 这种现象叫做“野火模型”（注：在心理学中常叫做“激活扩散模型”），从一点把火点起来，它就会往四周燃烧；一个线索的出现就会把相邻的东西给激活。
    - 智能的目的是什么。从认知神经科学角度的一个理解认为，智能的目的就是对变化环境的适应。从这个角度来评价重要性问题。
-- （13）十三、学习不是孤立的过程
+- （13）十三、学习不是孤立过程
 - （14）十四、精确测量每个神经元
    - 当前的技术可以精确地测量每一个神经元的Action吗？
    - 以前不可以，现在已经可以通过双光子显微成像技术等精确记录一个神经元及它的发放过程了。现在准确记录大脑所有神经元的每一刻活动只是一个时间和技术问题。
@@ -299,7 +313,7 @@ mathjax: true
 - （16）十六、大脑可以复制吗？
    - 记忆是否能够下载到一台计算机中？如果可以，那就意味着永生，因为记忆是我们最核心的东西。
    - 把大脑切片，切得足够精细，重现所有连接。但它会产生同样的功能吗？不会。
-- （17）十七、梦的解析
+- （17）十七、**梦的解析**
    - 睡觉的时候，其实大脑仍然在工作，会清洗掉一些信息，以便第二天继续工作。关于梦，从神经科学的角度怎么解释？
    - 人可能是动物中唯一一种有深度睡眠的动物。像鸟、马等，它们在睡觉的时候，其实不是两个半球同时沉睡，而是交替入睡。
    - 人类的这种睡眠模式，对人类智力的提升可能起到一个非常关键的作用。为什么呢？我们人类在睡觉的时候，其实大脑并没有完全休息，他在重放我们白天所经历的一些事情，把其中关键的信息提取出来，并遗忘掉哪些不重要的东西。我们白天所感知到的信息都是具象的，但经过我们大脑这种睡眠时的重放，就能够变成一种抽象的东西。这个过程，我们现在知道它发生在海马体，海马体与我们的记忆和学习有关。
@@ -312,10 +326,88 @@ mathjax: true
    - 一种是不管人脑怎么干，我们凭经验设计一套规则来做；
    - 另一种是看人的智能是怎么产生的，然后进行类比或仿真。
    - 我觉得后者成功的概率会更大一些。
-- 【2021-3-19】[AI笑话大全](https://www.huxiu.com/article/308769.html)
-  - 挪木块: 一个机械手被要求把木块挪到桌子的指定地点，它的解法是：挪桌子
-  - 赛跑: 长出特别长的腿，向前跌倒直接越过终点线。
-  - 俄罗斯方块: 程序发现，只要暂停游戏就可以永远不输。
+
+
+### 机器学习不是AGI
+
+【2023-3-24】Yann LeCun， 大型语言模型的意义和理解需要感官基础吗?剧透:是的!
+- ppt: “[Do large language models need sensory grounding for meaning and understanding?](https://drive.google.com/file/d/1BU5bV3X5w65DwSMapKcsr0ZvrMRU_Nbi/view?fbclid=IwAR2itiKMdM7LbpRs-YSKtLVFrHQLXKEEmNFAMI4xTY0SvROLJwN4bVKhs7M)”
+
+Machine Learning sucks! (compared to humans and animals)
+- `Supervised learning` (SL) requires large numbers of labeled samples.
+- `Reinforcement learning` (RL) requires insane amounts of trials.
+- `Self-Supervised Learning` (SSL) requires large numbers of unlabeled samples.
+
+Most current ML-based AI systems make stupid mistakes, do not reason nor plan
+
+Animals and humans:
+- Can learn new tasks very quickly.
+- Understand how the world works
+- Can reason and plan
+
+Humans and animals have common sense, current machines, not so much (it’s very superficial).
+
+与人、动物相比，机器学习为什么很差？
+- 监督学习需要大量标注样本
+- 强化学习需要大量试错样本
+- 自监督学习需要大量非标注样本
+
+而当前大部分基于机器学习的AI系统常常出现愚蠢错误，不会推理、规划
+
+动物或人：
+- 快速学习新任务
+- 理解环境运行逻辑
+- 推理、规划
+
+人和动物具备常识，而机器表现得很肤浅
+
+Auto-Regressive Large Language Models (AR-LLMs)
+- Outputs one text token after another
+- Tokens may represent words or subwords
+- Encoder/predictor is a transformer architecture
+  - With billions of parameters: typically from 1B to 500B
+  - Training data: 1 to 2 trillion tokens
+- LLMs for dialog/text generation:
+  - BlenderBot, Galactica, LLaMA (FAIR), Alpaca (Stanford), LaMDA/Bard(Google), Chinchilla (DeepMind), ChatGPT (OpenAI), GPT-4 ??...
+- Performance is amazing ... but ... they make stupid mistakes
+  - Factual errors, logical errors, inconsistency, limited reasoning, toxicity...
+- LLMs have no knowledge of the underlying reality
+  - They have no common sense & they can’t plan their answer
+
+Three challenges for AI & Machine Learning
+1. Learning representations and predictive models of the world
+  - Supervised and reinforcement learning require too many samples/trials
+  - Self-supervised learning / learning dependencies / to fill in the blanks
+    - learning to represent the world in a non task-specific way
+    - Learning predictive models for planning and control
+2. Learning to reason, like Daniel Kahneman’s “System 2”
+  - Beyond feed-forward, System 1 subconscious computation.
+  - Making reasoning compatible with learning.
+  - Reasoning and planning as energy minimization.
+3. Learning to plan complex action sequences
+  - Learning hierarchical representations of action plans
+
+A Cognitive Architecture capable of reasoning & planning
+
+Position paper:
+- [A path towards autonomous machine intelligence](https://openreview.net/forum?id=BZ5a1r-kVsf)
+- Longer talk: search “LeCun Berkeley” on YouTube
+
+Modular Architecture for Autonomous AI
+- `Configurator` 配置器
+  - Configures other modules for task
+- `Perception` 感知器
+  - Estimates state of the world
+- `World Model` 世界模型
+  - Predicts future world states
+- `Cost` 计算不舒适度
+  - Compute “discomfort”
+- `Actor` 演员
+  - Find optimal action sequences
+- `Short-Term Memory` 短时记忆
+  - Stores state-cost episodes
+- ![](https://i0.wp.com/bdtechtalks.com/wp-content/uploads/2022/03/Yann-LeCun-Meta-AI-world-model-architecture.jpeg?w=1392&ssl=1)
+- 详见博文：[Meta’s Yann LeCun on his vision for human-level AI](https://bdtechtalks.com/2022/03/07/yann-lecun-ai-self-supervised-learning/)
 
 ## 乌鸦智能
 
