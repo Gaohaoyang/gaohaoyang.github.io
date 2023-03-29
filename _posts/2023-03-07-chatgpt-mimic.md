@@ -1203,7 +1203,12 @@ Because training step 1 is a simple supervised finetune progress as many other m
     L -->|2023-3-29,深圳大学\n7b,中文语料| AC(ChatLLaMA):::grass
     LR --> AL
     AR -->|2023-3-23,突破8G GPU 显存限制,直接用CPU运行\n1. LLaMA cpp项目\n2. Alpaca-LoRA权重量化| AC(Alpaca-cpp):::green
+    GLM(ChatGLM)-->|2023-4-25, ChatGLM 6b, GLM架构\n仅限第一阶段SFT| GLM1(ChatGLM-Tuning):::grass
+    A -->|数据集| GLM1
+    LR --> GLM1
+
 </div>
+
 
 
 #### 贝壳开源
@@ -1528,6 +1533,13 @@ print(response)
 response, history = model.chat(tokenizer, "晚上睡不着应该怎么办", history=history)
 print(response)
 ```
+
+#### ChatGLM-Tuning
+
+【2023-3-25】ChatGLM-Tuning
+- 一种平价的chatgpt实现方案，基于清华的 [ChatGLM-6B](https://github.com/THUDM/ChatGLM-6B) + LoRA 进行finetune.
+- 数据集: [alpaca](https://github.com/tatsu-lab/stanford_alpaca)
+
 
 ### 文心一言
 
