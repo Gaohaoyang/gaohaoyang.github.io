@@ -331,7 +331,9 @@ mathjax: true
 ### 机器学习不是AGI
 
 【2023-3-24】Yann LeCun， 大型语言模型的意义和理解需要感官基础吗?剧透:是的!
+- 纽约大学深度学习哲学 [The Philosophy of Deep Learning](https://phildeeplearning.github.io/)
 - ppt: “[Do large language models need sensory grounding for meaning and understanding?](https://drive.google.com/file/d/1BU5bV3X5w65DwSMapKcsr0ZvrMRU_Nbi/view?fbclid=IwAR2itiKMdM7LbpRs-YSKtLVFrHQLXKEEmNFAMI4xTY0SvROLJwN4bVKhs7M)”
+- 【2023-3-27】评论：[GPT-4的研究路径没有前途？Yann LeCun给自回归判了死刑](https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650871958&idx=2&sn=0464339517424e3a18041f265551f9f9), Yann LeCun 延续了一贯的犀利风格，直言不讳地指出「Machine Learning sucks!」「Auto-Regressive Generative Models Suck!」最后话题自然是回到「世界模型」
 
 Machine Learning sucks! (compared to humans and animals)
 - `Supervised learning` (SL) requires large numbers of labeled samples.
@@ -387,7 +389,91 @@ Three challenges for AI & Machine Learning
 3. Learning to plan complex action sequences
   - Learning hierarchical representations of action plans
 
+当前机器学习研究者面前的有三大挑战：
+- 一是学习**世界表征**和**预测模型**；
+- 二是学习**推理**（LeCun 提到的 System 2 相关讨论参见 UCL[汪军教授报告](https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650866823&idx=3&sn=acab8851959257d96ab50ad8d1e48bcd&chksm=84e4c0f9b39349ef5eadf3343495c1c104cb952ab17d5f8e36826530c40fbebbe8ac2783fd1c&scene=21#wechat_redirect)）；
+- 三是学习计划复杂的动作序列。
+
+一些神经科学家包括研究深度学习的科学家提出了 `System 1` 和 `System 2` 的概念, 有`慢思考`（slowthinking）和`快思考`（fastthinking），`慢思考`是比较有**主观**意识的，可以进行规划、推理等。
+- System 1 是应激性的、非常快的，同时是没有主观意识的。虽然可以解决一些问题，但无法解决所有问题。
+
+大脑在人进行 System 1、System 2 或无意识、有意识做决策时，是不是用到了同一种机制呢？
+- 它在大脑里反映的东西是不是在同一个区域呢？答案是否定的。
+
+打电话时开车，开车这个动作只激活了大脑的一部分。当要有主观意识时，就变成了**全局性**的，即大脑的所有地方都被激活了。这时用现在的一些手段，比如 EEG、核磁共振大脑切片等，观察大脑哪个地方被激活以及哪个地方没有被激活。可以明显地观察到差别。
+
 A Cognitive Architecture capable of reasoning & planning
+
+LeCun 提出了构建「世界」模型的想法，并在一篇题为《A path towards autonomous machine intelligence》的论文中进行了详细阐述
+- [原视频链接](https://www.youtube.com/watch?v=DokLw1tILlw)
+- [PPT 链接](https://drive.google.com/file/d/1Txb9ykr03Lda-oTLXbnlQsEe46V8mGzi/view)
+
+构建一个能够进行推理和规划的认知架构。这个架构由 6 个独立的模块组成：
+- 配置器（Configurator）模块；
+- 感知模块（Perception module）；
+- 世界模型（World model）；
+- 成本模块（Cost module）；
+- actor 模块；
+- 短期记忆模块（Short-term memory module）。
+
+这些模块的具体信息，参考：[图灵奖获得者 Yann LeCun：未来几十年 AI 研究的最大挑战是「预测世界模型」](https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650839081&idx=1&sn=f014b639541de68d7a115aa1ad96b33f&chksm=84e55c57b392d54104e20026682164235cc95892c7313c12bc7219ca0010982de9d3afb6a9db&scene=21#wechat_redirect), 文章中包含视频讲解
+
+如何构建、训练世界模型？
+- 未来几十年阻碍人工智能发展的真正障碍是为**世界模型**设计架构以及训练范式。
+- 训练世界模型是自监督学习（SSL）中的一个典型例子，其基本思想是**模式补全**。对未来输入（或暂时未观察到的输入）的预测是模式补全的一个特例。
+
+世界只能部分地预测。首先，如何表征预测中的不确定性。一个预测模型如何能代表多种预测？
+
+**概率模型**在连续域中是难以实现的，而**生成式模型**必须预测世界的每一个细节。
+
+基于此，LeCun 给出了一种解决方案：`联合嵌入预测架构`（Joint-Embedding Predictive Architecture，JEPA）。
+- JEPA 不是生成式的，因为不能轻易地用于从 x 预测 y, 仅捕获 x 和 y 之间的依赖关系，而不显式生成 y 的预测。
+
+生成式架构会预测 y 的所有的细节，包括不相关的；而 JEPA 会预测 y 的抽象表征。
+
+有五种思路是需要「彻底抛弃」的：
+- 放弃生成式模型，支持联合嵌入架构；
+- 放弃自回归式生成；
+- 放弃概率模型，支持能量模型；
+- 放弃对比式方法，支持正则化方法；
+- 放弃强化学习，支持模型预测控制。
+
+他的建议是，只有在计划不能产生预测结果时才使用 RL，以调整世界模型或 critic。
+
+与能量模型一样，可以使用对比方法训练 JEPA。但是，对比方法在高维空间中效率很低，所以更适合用非对比方法来训练它们。在 JEPA 的情况下，可以通过四个标准来完成，如下图所示：
+1. 最大化 $s_x$ 关于 x 的信息量；
+2. 最大化 $s_y$ 关于 y 的信息量；
+3. 使 $s_y$ 容易从 $s_x$ 中预测；
+4. 最小化用于预测潜在变量 z 的信息含量。
+
+迈向自主式 AI 系统的步骤都有哪些？LeCun 也给出了自己的想法：
+- 1、自监督学习
+  - 学习世界的表征
+  - 学习世界的预测模型
+- 2、处理预测中的不确定性
+  - 联合嵌入的预测架构
+  - 能量模型框架
+- 3、从观察中学习世界模型
+  - 像动物和人类婴儿一样？
+- 4、推理和规划
+  - 与基于梯度的学习兼容
+  - 没有符号，没有逻辑→向量和连续函数
+
+其他的一些猜想包括：
+- 预测是智能的本质：学习世界的预测模型是常识的基础
+- 几乎所有的东西都是通过自监督学习得来的：低层次的特征、空间、物体、物理学、抽象表征...；几乎没有什么是通过强化、监督或模仿学习的
+- 推理 = 模拟 / 预测 + 目标的优化：在计算上比自回归生成更强大。
+- H-JEPA 与非对比性训练就是这样的：概率生成模型和对比方法是注定要失败的。
+- 内在成本和架构驱动行为并决定学习的内容
+- 情感是自主智能的必要条件：批评者或世界模型对结果的预期 + 内在的成本。
+
+LeCun 总结了 AI 研究的当前挑战：（推荐阅读：[思考总结 10 年，图灵奖得主 Yann LeCun 指明下一代 AI 方向：自主机器智能](http://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650849483&idx=2&sn=8fff61962a8a2eb02cda90cdedadf26d&chksm=84e504b5b3928da3f557ec2c0c2ed7edfb3769d33ccad48ab270479949eaddc44bd56d017309&scene=21#wechat_redirect)）
+- 从视频、图像、音频、文本中找到训练基于 H-JEPA 的世界模型的通用方法；
+- 设计替代成本以驱动 H-JEPA 学习相关表征（预测只是其中之一）；
+- 将 H-JEPA 集成到能够进行规划 / 推理的智能体中；
+- 为存在不确定性的推理程序（基于梯度的方法、波束搜索、 MCTS....) 分层规划设计推理程序；
+- 尽量减少在模型或批评者不准确的情况下使用 RL（这是不准确的，会导致不可预见的结）；
+
 
 Position paper:
 - [A path towards autonomous machine intelligence](https://openreview.net/forum?id=BZ5a1r-kVsf)
