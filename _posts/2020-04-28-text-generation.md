@@ -482,6 +482,10 @@ seq2seq的运行模式
 - StylePTB（CMU）按照控制信号改变句子的语法结构、单词形式、语义等；
 - CTRL（Salesforce）在预训练阶段加入了 control codes 与 prompts 作为控制信号，影响文本的领域、主题、实体和风格。
 
+【2021-1-2】翁丽莲的博客：[Controllable Neural Text Generation](https://lilianweng.github.io/posts/2021-01-02-controllable-text-generation/)
+
+
+
 #### 可控文本生成技术的发展过程和趋势
 
 发展过程
@@ -991,6 +995,36 @@ self.loss = tf.reduce_mean(loss * sequence_mask)
   - 拿中文文本生成来说，v的值大约是5000-6000，即常用汉字的个数。
 - 在如此大的基数下，遍历整个生成空间是不现实的。
 - ![](https://uploads-ssl.webflow.com/5fdc17d51dc102ed1cf87c05/60adb96dd09ceb13f5d35c3f_sequence.png)
+
+#### 解码原理
+
+【2021-1-2】翁丽莲的博客：[Controllable Neural Text Generation](https://lilianweng.github.io/posts/2021-01-02-controllable-text-generation/)
+
+Since the final layer of the model predicts logits o over the vocabulary space, the next token can be sampled by applying softmax with temperature T. The probability of sampling the i-th token is
+
+$p_i \propto \frac{\exp(o_i / T)}{\sum_j \exp(o_j/T)}$
+ 
+A low temperature would make the distribution sharper and a high value makes it softer.
+
+Decoding Strategies
+- **Greedy search**: Always pick the next token with the _highest_ probability, equivalent to setting temperature $T=0$. However, it tends to create repetitions of phrases, even for well-trained models.
+  - 贪心解码相当于 $T=0$, 容易导致短语重复
+- **Beam search**: It essentially does breadth-first search, one token per tree level, but with a limited bandwidth. At each level of the search tree, beam search keeps track of n (named “beam width”) best candidates and expands all the successors of these candidates in the next level. Beam search could stop expanding a node if it hits the EOS (end-of-sentence) token.
+   - 宽度优先搜索, 遇到结束符（EOS）停止；集束搜索不保证最优生成结果
+   - However, maximization-based decoding does not guarantee high-quality generation.
+   - ![](https://lilianweng.github.io/posts/2021-01-02-controllable-text-generation/beam_search_less_surprising.png)
+   - Fig. 1. The probability assigned to the next token by beam search versus by humans. The human selected tokens have much higher variance in predicted probability and thus more surprising. (Image source: [Holtzman et al. 2019](https://arxiv.org/abs/1904.09751))
+- **Top-k sampling** `Top-k采样` ([Fan et al., 2018](https://arxiv.org/abs/1805.04833)): At each sampling step, only the top k most likely tokens are selected and the probability mass is redistributed among them. In [Fan et al., 2018](https://arxiv.org/abs/1805.04833), the authors proposed to use _top-k random sampling_ where the next token is randomly selected among the top k most likely candidates and they argued that this approach can generate more novel and less repetitive content than beam search.
+  - 每步解码时，只选择 top-k 可能性的token，再重新计算概率分布。
+  - 好处：比beam search更容易生成新颖、少重复的内容
+- **Nucleus sampling** `Top-p采样` ([Holtzman et al. 2019](https://arxiv.org/abs/1904.09751)): Also known as “Top-p sampling”. One drawback of top-k sampling is that the predefined number k does not take into consideration how _skewed_ the probability distribution might be. The nucleus sampling selects the smallest set of top candidates with the cumulative probability exceeding a threshold (e.g. 0.95) and then the distribution is rescaled among selected candidates.
+  - Top-k采样的一个缺点是k值选取未考虑概率分布是否倾斜。
+  - Top-p采样选择超过一定阈值（如0.95）的最小字符集合，重新计算概率分布
+  - Both top-k and nucleus sampling have less repetitions with a proper set of hyperparameters.
+- **Penalized sampling** ([Keskar et al. 2019](https://arxiv.org/abs/1909.05858)): To avoid the common failure case of generating duplicate substrings, the [CTRL](https://arxiv.org/abs/1909.05858) paper proposed a new sampling method to penalize repetitions by discounting the scores of previously generated tokens. The probability distribution for the next token with repetition penalty is defined as:
+  - $p_i = \frac{\exp(o_i / (T \cdot \mathbb{1}(i \in g)))}{\sum_j \exp(o_j / (T \cdot \mathbb{1}(j \in g)))} \quad \mathbb{1}(c) = \theta \text{ if the condition }c\text{ is True else }1$
+  - 一种惩罚重复子串的采样方法，考虑之前生成过的字符
+  - where g contains a set of previously generated tokens, 𝟙1(.) is an identity function. θ=1.2 is found to yield a good balance between less repetition and truthful generation.
 
 #### 解码方法总结
 
