@@ -426,7 +426,7 @@ chatgpt在医疗诊断上是否通过图灵测试？
 #### ChatDoctor
 
 
-【2023-3-25】医疗问答机器人
+【2023-3-25】医疗问答机器人，医学领域的chatgpt。如果把默沙东医学指南拿进去继续训练，是不是就是一个私人医生了？
 - 论文：[ChatDoctor: A Medical Chat Model Fine-tuned on LLaMA Model using Medical Domain Knowledge](https://arxiv.org/abs/2303.14070)
 - [GitHub地址](https://github.com/Kent0n-Li/ChatDoctor)
 - [Demo Page](https://huggingface.co/spaces/ChatDoctor/ChatDoctor)
@@ -485,26 +485,7 @@ Resources List
 
 ### 数字人
 
-#### MetaMind
-
-【2023-3-1】[消息](https://zhuanlan.zhihu.com/p/610425193) 国内厂商(武汉深兰科技)发布了首款类 ChatGPT应用 [metamind](https://www.metamind.cn/) ，其具备多模态的AIGC创作能力，不仅支持像ChatGPT一样的对话能力，还能进行AI绘画，AI写作，AI视频创作等。主要现在还是处于免费阶段，没有 ChatGPT翻墙海外手机号注册等门槛。
-- 普通用户可以创建自己个人数字化的AI，可以进行个人及大数据训练，配合产品专属的记忆库存储的功能，最终打造个人的第二大脑，未来可期。
-- ![](https://pic3.zhimg.com/80/v2-e150159f0e0c9895f14dd8489835002e_1440w.webp)
-
-#### DID
-
-【2023-3-30】did+midjourney或stable diffusion创造的虚拟人物
-
-示例：
-- [使用ChatGPT指令方式](https://www.toutiao.com/video/7215460404061798968/)，视频里用生成的美女讲解
-
-
-
-
-【2023-3-29】问答数字人
-
-[问答数字人v0.02：自定义知识库](https://www.zhihu.com/zvideo/1624427959825166336?utm_source=wechat_session&utm_medium=social&utm_oi=27211553832960)
-
+详见 [数字人专题](aigc#数字人)
 
 
 # 结束
