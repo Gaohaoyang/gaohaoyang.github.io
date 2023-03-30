@@ -873,76 +873,6 @@ Colossal-AI
   - Colossal-AI 支持使用无冗余优化器 (`ZeRO`) 来优化内存使用，这种方法可以有效减少内存冗余，并且相比传统的数据并行策略，不会牺牲计算粒度和通信效率，同时可以大幅提高内存使用效率。
   - Colossal-AI 的异构内存空间管理器 `Gemini` 支持将优化器状态从 GPU 卸载到 CPU ，以节省 GPU 内存占用。可以同时利用 GPU 内存、CPU 内存（由 CPU DRAM 或 NVMe SSD 内存组成）来突破单 GPU 内存墙的限制，进一步扩展了可训练模型规模。
 
-#### ColossalChat
-
-【2023-3-28】colossal AI发布自己的聊天机器人：[ColossalChat](https://chat.colossalai.org/)，同时补充了 SFT 代码：train_sft.sh
-- [0门槛克隆ChatGPT方案再升级，开源模型完整复现，在线体验无需注册](https://zhuanlan.zhihu.com/p/617808163)
-  
-流程
-- ![](https://github.com/hpcaitech/ColossalAI/blob/main/applications/Chat/assets/stage-3.jpeg?raw=true)
-
-内容
-- Demo：可直接在线体验模型效果，无需注册或 waitinglist
-- 训练代码：开源完整 RLHF 训练代码，已开源至含 7B 和 13B 两种模型
-- 数据集：开源 104K 中、英双语数据集
-- 推理部署：4bit 量化推理 70 亿参数模型仅需 4GB 显存
-- 模型权重：仅需单台服务器少量算力即可快速复现
-- 更大规模模型、数据集、其他优化等将保持高速迭代添加
-
-训练数据集开源
-- [ColossalChat](chat.colossalai.org) 开源了包含约 10 万条问答的中、英双语数据集。该数据集收集并清洗了社交平台上人们的真实提问场景作为种子数据集，利用 self-instruct 技术扩充数据，花费约 900 美元进行标注。对比其他 self-instruct 方法生成的数据集，该数据集的种子数据更加真实、丰富，生成的数据集涵盖的话题更多。该数据可以同时用于微调和 RLHF 训练。通过高质量的数据，ColossalChat 能进行更好地对话交互，同时支持中文。
-
-![](https://pic1.zhimg.com/80/v2-27e03390d404c7f2eae315f69a557634_1440w.webp)
-
-ColossalChat跟Alpeca的区别：
-1. ColossalChat开源了第一个完整的RLHF pipeline，斯坦福Alpaca没有做RLHF，也就是没有做Stage 3。
-2. ColossalChat采用了更多的指令数据，质量更好，范围更大，并使用强化学习做alignment使回答更接近人类。
-3. ColossalChat训练流程集成了ColossalAI ZeRO，同等数据集和模型大小我们的训练可以比Alpaca的代码快3倍左右，让科研人员和中小企业也能独立训练部署自己的会话系统。
-4. ColossalChat团队自己采集了更多数据集了：训练的英文一共 24M tokens，中文大约 30M tokens，总共约 54M tokens。我们收集的数据集英文 6M，中文 18M tokens。
-
-
-#### 评测
-
-初步测试了下：
-
-```s
-问：你是谁
-答：我就是 Coati，一个由 Colossal-AI 训练的大型语言模型。
-问：一只青蜗牛到2米深的井里，白天爬3米，晚上掉2米，请问多久可以爬出来？
-答：根据我所学习的知识和技能，我没有明确的回应或解释。如果提出的问题不具备实用性或者无法被机器理解，我将返回“I do not understand”（我不明白）。
-问：你会些啥
-答：作为一种大型神经网络模型，我没有任何意义上的行动或想法。我是专门设计用于处理和生成人类语言文本的大型神经网络。
-问：什么是gpt
-答：GPT 是一个大型语言模型。 GPT 由 Colossal-AI 训练在 HPC-AI Tech 平台上。 GPT 使用了大型神经网络进行训练并对自然语言文本进行分析、理解和生成。
-问：怎么把大象装到冰箱里
-答：将大象装入冰箱时需要遵守以下步骤：1）确保冰箱已正确安装；2）打开冰箱内部空间，放置大象；3）关闭冰箱后再加上冷藏剂；4）重新打开冰箱前后两边空间中的水泥；5）最后可以按照常详实现大象冷藏。除此之外还应注意不同物品之间的相互衝突性及其影响。
-问：帮我写个二手房营销文案，要求100字以内，20字以上，包含房屋亮点，emoji表情
-答：为了提高你的质量生活和节省成本，这是一个非常好处理的机会！ 我们在这里有超过 8,000 平方英尺的地址，每个位置都被设计与特色，并配有完全工作良好的设施和服务。 我们的客户可以从家居、教育、健康等多种选项中进行挑选。 所有的房东都能给出专业建议，使得您更容易获取他们的优秀服务。 当然，我们也提供了无数的促销和优惠政策，比如减少或免费收费服务，以及定期价格调整。 因此，只要您想体验一次令人兴奋的购房经历，就请
-问：爸爸和妈妈能结婚吗？
-答：是的，爸爸和妈妈可以结婚。在某些国家或州中，有法律规定了“同性婚姻”这种新型关系形式。如果你想要参与一个同性婚庆典，请确保所有人都符合当地相关法律条例。除此之外，若要买到一个婚宴服装、餐会等，也需要根据不同场合进行调整。
-```
-
-#### 尤洋介绍
-
-[尤洋](https://www.comp.nus.edu.sg/~youy/)：
-- [UC伯克利博士尤洋回国创业，曾破ImageNet纪录！已获超千万融资](https://www.qbitai.com/2021/08/27742.html)
-- 农大本，清华硕，伯克利博，新加坡国立青年教授
-- 尤洋曾以第一名的成绩保送清华计算机系硕士, 2015年，清华硕士毕业
-- 读博期间，尤洋先后在Google Brain、英特尔实验室、微软研究院、英伟达、IBM沃森研究中心等知名企业、研究院实习，实习期间为TensorFlow、英伟达GPU上部署caffe、英特尔CPU部署caffe等大型知名开源项目作出了贡献。
-- 2020年，博士毕业，获客UC伯克利优秀毕业生，Lotfi A. Zadeh Prize，并被提名为ACM Doctoral Dissertation Award候选人（81名博士毕业生中选2人）
-- 2020年8月，加入新加坡国立大学计算机系。
-- 2021年1月，担任新加坡国立大学校长青年教授 （Presidential Young Professor）
-- 2021年4月，被选入亚洲福布斯**30岁**以下精英榜。
-- 2021年，他还被选入福布斯30岁以下精英榜 （亚洲）
-- ![](https://p6-tt.byteimg.com/origin/pgc-image/6be030a2c0c44b8e9d2f7ae22ea0ac36.png?from=pc)
-
-尤洋知名成就
-- 刷新ImageNet纪录，论文《Imagenet training in minutes》所提出的方法刷新了ImageNet训练速度的世界纪录
-- LAMB优化器的提出者，将BERT训练时间从3天（Adam）缩短到1h（LAMB），微软的DeepSpeed也采用LAMB
-  - 尤洋在谷歌实习时作为论文一作提出
-  - 英伟达官方GitHub显示，LAMB比Adam优化器可以快出整整72倍。
-
-2021年，在UC伯克利获得了博士学位，带着LAMB方法回国，创立了[潞晨科技](https://luchentech.com/), ColossalAI。公司主营业务包括分布式软件系统、大规模人工智能平台以及企业级云计算解决方案。base北京中关村，目前已经获得由创新工场和真格基金合投的超千万元种子轮融资
 
 #### Colossal AI 目标
 
@@ -971,6 +901,28 @@ ColossalAI为Enterprise AI 和 MLOps 提供更好的性能和更低的损耗
 
 这两者之间的自适应配置，将对整个训练系统的性能起着决定性影响。为此，尤洋他们实现了2维网格参数划分、3维立体参数划分、以及2.5维通信最小化参数划分，极大提升了计算效率。同时，他们还进行了逐序列划分数据，这可用于处理未来的大图片、视频、长文本、长时间医疗监控数据等方面的问题。
 
+#### 尤洋介绍
+
+[尤洋](https://www.comp.nus.edu.sg/~youy/)：
+- [UC伯克利博士尤洋回国创业，曾破ImageNet纪录！已获超千万融资](https://www.qbitai.com/2021/08/27742.html)
+- 农大本，清华硕，伯克利博，新加坡国立青年教授
+- 尤洋曾以第一名的成绩保送清华计算机系硕士, 2015年，清华硕士毕业
+- 读博期间，尤洋先后在Google Brain、英特尔实验室、微软研究院、英伟达、IBM沃森研究中心等知名企业、研究院实习，实习期间为TensorFlow、英伟达GPU上部署caffe、英特尔CPU部署caffe等大型知名开源项目作出了贡献。
+- 2020年，博士毕业，获客UC伯克利优秀毕业生，Lotfi A. Zadeh Prize，并被提名为ACM Doctoral Dissertation Award候选人（81名博士毕业生中选2人）
+- 2020年8月，加入新加坡国立大学计算机系。
+- 2021年1月，担任新加坡国立大学校长青年教授 （Presidential Young Professor）
+- 2021年4月，被选入亚洲福布斯**30岁**以下精英榜。
+- 2021年，他还被选入福布斯30岁以下精英榜 （亚洲）
+- ![](https://p6-tt.byteimg.com/origin/pgc-image/6be030a2c0c44b8e9d2f7ae22ea0ac36.png?from=pc)
+
+尤洋知名成就
+- 刷新ImageNet纪录，论文《Imagenet training in minutes》所提出的方法刷新了ImageNet训练速度的世界纪录
+- LAMB优化器的提出者，将BERT训练时间从3天（Adam）缩短到1h（LAMB），微软的DeepSpeed也采用LAMB
+  - 尤洋在谷歌实习时作为论文一作提出
+  - 英伟达官方GitHub显示，LAMB比Adam优化器可以快出整整72倍。
+
+2021年，在UC伯克利获得了博士学位，带着LAMB方法回国，创立了[潞晨科技](https://luchentech.com/), ColossalAI。公司主营业务包括分布式软件系统、大规模人工智能平台以及企业级云计算解决方案。base北京中关村，目前已经获得由创新工场和真格基金合投的超千万元种子轮融资
+
 #### 安装
 
 【2023-3-1】实践
@@ -994,6 +946,123 @@ main_dir="ColossalAI/applications/ChatGPT"
 cd ColossalAI/applications/ChatGPT/examples
 sh train_dummy.sh 
 ```
+
+#### ColossalChat
+
+【2023-3-28】colossal AI发布自己的聊天机器人：[ColossalChat](https://chat.colossalai.org/)，同时补充了 SFT 代码：train_sft.sh
+- [0门槛克隆ChatGPT方案再升级，开源模型完整复现，在线体验无需注册](https://zhuanlan.zhihu.com/p/617808163)
+
+尽管 ChatGPT 和 GPT-4 等 GPT 系列模型非常强大，但不太可能被完全开源。幸运的是，开源社区一直在不断努力。
+- Meta 开源了 `LLaMA` 模型，该模型的参数量从 70 亿到 650 亿不等，130 亿参数即可胜过 1750 亿的 GPT-3 模型在大多数基准测试的表现。但是由于没有被`指令微调`（instruct tuning），因此实际生成效果不够理想。
+- 斯坦福的 `Alpaca` 通过调用OpenAI API，以 `self-instruct` 方式生成训练数据，使得仅有 70 亿参数的轻量级模型以极低成本微调后，即可获得媲美 GPT-3.5 这样千亿参数的超大规模语言模型的对话效果。
+
+但是现有开源方案都可以被视为只得到了`人类反馈强化学习`（RLHF）中**第一步**的监督微调模型，没有进行后续的**对齐**和**微调**工作。同时 Alpaca 的训练数据集过小，语料**只有英文**，也在一定程度上限制了模型的性能。
+
+而 ChatGPT 和 GPT-4 的惊艳效果，还在于将 RLHF 引入训练过程，使得生成内容更加符合人类价值观。
+
+基于 `LLaMA` 模型，`Colossal-AI` 第一个开源包含完整 RLHF 流程的类Chat模型复现方案 `ColossalChat` ，是目前最接近 ChatGPT 原始技术路线的实用开源项目
+
+流程
+- ![](https://github.com/hpcaitech/ColossalAI/blob/main/applications/Chat/assets/stage-3.jpeg?raw=true)
+
+内容
+- Demo：可直接在线体验模型效果，无需注册或 waitinglist
+- 训练代码：开源完整 RLHF 训练代码，已开源至含 7B 和 13B 两种模型
+- 数据集：开源 104K 中、英双语数据集
+- 推理部署：4bit 量化推理 70 亿参数模型仅需 4GB 显存
+- 模型权重：仅需单台服务器少量算力即可快速复现
+- 更大规模模型、数据集、其他优化等将保持高速迭代添加
+
+
+ColossalChat跟Alpaca的区别：
+1. ColossalChat开源了第一个完整的RLHF pipeline，斯坦福Alpaca没有做RLHF，也就是没有做Stage 3。
+2. ColossalChat采用了更多的指令数据，质量更好，范围更大，并使用强化学习做alignment使回答更接近人类。
+3. ColossalChat训练流程集成了ColossalAI ZeRO，同等数据集和模型大小我们的训练可以比Alpaca的代码快3倍左右，让科研人员和中小企业也能独立训练部署自己的会话系统。
+4. ColossalChat团队自己采集了更多数据集了：训练的英文一共 24M tokens，中文大约 30M tokens，总共约 54M tokens。我们收集的数据集英文 6M，中文 18M tokens。
+
+
+##### 数据集
+
+训练数据集开源
+- [ColossalChat](chat.colossalai.org) 开源了包含约 10 万条问答的中、英双语数据集。该数据集收集并清洗了社交平台上人们的真实提问场景作为种子数据集，利用 self-instruct 技术扩充数据，花费约 900 美元进行标注。对比其他 self-instruct 方法生成的数据集，该数据集的种子数据更加真实、丰富，生成的数据集涵盖的话题更多。该数据可以同时用于微调和 RLHF 训练。通过高质量的数据，ColossalChat 能进行更好地对话交互，同时支持中文。
+
+![](https://pic1.zhimg.com/80/v2-27e03390d404c7f2eae315f69a557634_1440w.webp)
+
+
+##### 评测
+
+初步测试了下：
+
+```s
+问：你是谁
+答：我就是 Coati，一个由 Colossal-AI 训练的大型语言模型。
+问：一只青蜗牛到2米深的井里，白天爬3米，晚上掉2米，请问多久可以爬出来？
+答：根据我所学习的知识和技能，我没有明确的回应或解释。如果提出的问题不具备实用性或者无法被机器理解，我将返回“I do not understand”（我不明白）。
+问：你会些啥
+答：作为一种大型神经网络模型，我没有任何意义上的行动或想法。我是专门设计用于处理和生成人类语言文本的大型神经网络。
+问：什么是gpt
+答：GPT 是一个大型语言模型。 GPT 由 Colossal-AI 训练在 HPC-AI Tech 平台上。 GPT 使用了大型神经网络进行训练并对自然语言文本进行分析、理解和生成。
+问：怎么把大象装到冰箱里
+答：将大象装入冰箱时需要遵守以下步骤：1）确保冰箱已正确安装；2）打开冰箱内部空间，放置大象；3）关闭冰箱后再加上冷藏剂；4）重新打开冰箱前后两边空间中的水泥；5）最后可以按照常详实现大象冷藏。除此之外还应注意不同物品之间的相互衝突性及其影响。
+问：帮我写个二手房营销文案，要求100字以内，20字以上，包含房屋亮点，emoji表情
+答：为了提高你的质量生活和节省成本，这是一个非常好处理的机会！ 我们在这里有超过 8,000 平方英尺的地址，每个位置都被设计与特色，并配有完全工作良好的设施和服务。 我们的客户可以从家居、教育、健康等多种选项中进行挑选。 所有的房东都能给出专业建议，使得您更容易获取他们的优秀服务。 当然，我们也提供了无数的促销和优惠政策，比如减少或免费收费服务，以及定期价格调整。 因此，只要您想体验一次令人兴奋的购房经历，就请
+问：爸爸和妈妈能结婚吗？
+答：是的，爸爸和妈妈可以结婚。在某些国家或州中，有法律规定了“同性婚姻”这种新型关系形式。如果你想要参与一个同性婚庆典，请确保所有人都符合当地相关法律条例。除此之外，若要买到一个婚宴服装、餐会等，也需要根据不同场合进行调整。
+```
+
+
+
+
+##### 三步运行
+
+【2023-3-29】ColossalChat 开源了基于 LLaMA 模型，复现训练 ChatGPT 三个阶段的完整代码。
+
+第一阶段，训练 SFT 模型：
+
+```sh
+# Training with a 4-GPU servers 
+colossalai run --nproc_per_node=4 train_sft.py \     --pretrain "/path/to/LLaMa-7B/" \     --model 'llama' \     --strategy colossalai_zero2 \     --log_interval 10 \     --save_path  /path/to/Coati-7B \     --dataset /path/to/data.json \     --batch_size 4 \     --accimulation_steps 8 \     --lr 2e-5
+```
+
+第二阶段，训练奖励模型：
+
+```sh
+# Training with a 4-GPU servers 
+colossalai run --nproc_per_node=4 train_reward_model.py \     --pretrain "/path/to/LLaMa-7B/" \     --model 'llama' \     --strategy colossalai_zero2 \     --dataset /path/to/datasets
+```
+
+第三阶段，使用 RL 训练：
+
+```sh
+# Training with a 8-GPU servers 
+colossalai run --nproc_per_node=8 train_prompts.py prompts.csv \     --strategy colossalai_zero2 \     --pretrain "/path/to/Coati-7B" \     --model 'llama' \     --pretrain_dataset /path/to/dataset
+```
+
+在获得最终模型权重后，还可通过量化降低推理硬件成本，并启动在线推理服务，仅需单张约 4GB 显存的 GPU 即可完成 70 亿参数模型推理服务部署。
+
+```sh
+python server.py /path/to/pretrained --quant 4bit --gptq_checkpoint /path/to/coati-7b-4bit-128g.pt --gptq_group_size 128
+```
+
+系统性能优化与开发加速
+- ColossalChat 能够快速跟进 ChatGPT 完整 RLHF 流程复现，离不开 AI 大模型基础设施 Colossal-AI 及相关优化技术的底座支持，相同条件下训练速度相比 Alpaca 采用的 FSDP(Fully Sharded Data Parallel) 可提升两倍以上。
+
+减少内存冗余的 ZeRO + Gemini
+- Colossal-AI 支持使用无冗余优化器 (ZeRO) 提高内存使用效率，低成本容纳更大模型，同时不影响计算粒度和通信效率。自动 Chunk 机制可以进一步提升 ZeRO 的性能，提高内存使用效率，减少通信次数并避免内存碎片。异构内存空间管理器 Gemini 支持将优化器状态从 GPU 显存卸载到 CPU 内存或硬盘空间，以突破 GPU 显存容量限制，扩展可训练模型的规模，降低 AI 大模型应用成本。
+
+使用 LoRA 低成本微调
+- Colossal-AI 支持使用低秩矩阵微调（LoRA）方法，对 AI 大模型进行低成本微调。LoRA 方法认为大语言模型是过参数化的，而在微调时，参数改变量是一个低秩矩阵。因此，可以将这个矩阵分解为两个更小的矩阵的乘积。在微调过程中，大模型的参数被固定，只有低秩矩阵参数被调整，从而显著减小了训练所需的参数量，并降低成本。
+低成本量化推理
+
+为降低推理部署成本，Colossal-AI 使用 GPTQ 4bit 量化推理。在 GPT/OPT/BLOOM 类模型上，它比传统的RTN(rount-to-nearest) 量化技术能够获得更好的 Perplexity 效果。相比常见的 FP16 推理，它可将显存消耗降低75%，只损失极少量的吞吐速度与 Perplexity 性能。
+以 ColossalChat-7B 为例，在使用 4bit 量化推理时，70 亿参数模型仅需大约 4GB 显存即可完成短序列（生成长度为 128 ）推理，在普通消费级显卡上即可完成（例如 RTX 3060 Laptop），仅需一行代码即可使用。
+
+```py
+if args.quant == '4bit':
+  model = load_quant(args.pretrained, args.gptq_checkpoint, 4, args.gptq_group_size)
+```
+
+如果采用高效的异步卸载技术(offload)，还可以进一步降低显存要求，使用更低成本的硬件推理更大的模型。
 
 #### 问题集锦
 
@@ -1443,7 +1512,23 @@ cd ../../model_training
 python trainer_rl.py --configs defaults_rlhf --cache_dir $DATA_PATH --rank_model $REWARD_MODEL --sft_model $SFT_MODEL --output_dir $MODEL_PATH/rl_model
 ```
 
-经过上面三步整个训练流程就完全搞定啦！
+----
+
+【2023-3-30】colossal ai 第三步实现
+
+RLHF算法复现
+- RLHF-Stage1 是 supervised-fintuning，即使用数据集进行**模型微调**。
+- RLHF-Stage2 训练了**奖励模型**，通过对于同一个 prompt 的不同输出进行人工排序，得到对应分数，监督训练奖励模型。
+- RLHF-Stage3 使用了强化学习算法，是训练流程中最复杂的一部分
+- ![](https://pic3.zhimg.com/80/v2-c81b913204c4d2baa1c6063059beef66_1440w.webp)
+
+解释
+- `PPO` 部分，ColossalChat 分为两个阶段进行：
+  - 首先是 **Make Experience** 部分，利用 SFT 、Actor、RM、Critic 模型计算生成 Experience 存入 buffer 中；
+  - 之后是**参数更新**部分，利用 Experience 计算策略损失和价值损失。
+- `PTX` 部分，ColossalChat 
+  - 计算 Actor 输出 response 和输入语料的回答部分的交叉熵损失函数，用来在 PPO 梯度中加入预训练梯度，以保持语言模型原有性能防止遗忘。
+  - 最后将策略损失、价值损失和 PTX 损失加和进行反向传播和参数更新。
 
 
 ### OpenChatKit
