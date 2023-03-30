@@ -1,0 +1,510 @@
+---
+layout: post
+title:  ChatGPT应用
+date:   2023-03-30 19:10:00
+categories: 深度学习 自然语言处理
+tags: AIGC ChatGPT 
+excerpt: ChatGPT应用思考
+mathjax: true
+permalink: /chatgpt_application
+---
+
+* content
+{:toc}
+
+
+# ChatGPT应用
+
+
+
+## ChatGPT业界影响
+
+除微软外，谷歌、百度等搜索巨头亦在一边投资研发ChatGPT的竞争对手，一边筹备推出类似的搜索引擎“新物种”。按照坊间传闻，百度的新版搜索引擎可能会在今年3月份上线。而谷歌将在北京时间2月8日21点30分举办一场AI活动，说不定会做出对ChatGPT宣战的回应。
+
+### 行业观点
+
+微软公司的人工智能平台主管埃里克·博伊德表示：“ChatGPT的人工智能模型将改变人们与电脑互动的方式。与电脑对话，就像与人对话一样自然，这将彻底改变人们使用科技的日常体验。”
+
+【2023-2-11】[乔姆斯基谈ChatGPT与教育: 本质上是高科技剽窃](https://mp.weixin.qq.com/s/DlnLEGidueEj1zm6FFJMUg)，Noam Chomsky 关于ChatGPT的最新访谈：Chomsky on ChatGPT, Education, Russia and the unvaccinated
+
+ChatGPT is not all you need. [A State of the Art Review of large Generative AI models](https://arxiv.org/abs/2301.04655)
+
+【2023-2-11】[ChatGPT，一种更中心化的权力？](https://mp.weixin.qq.com/s/-qmccVnv_rpKVdFP6x4GNg), 无论你喜欢不喜欢，以ChatGPT为代表的AIGC（生成式人工智能）将改变世界. 以ChatGPT为代表的AIGC，将像水一样弥漫在我们周围。ChatGPT代表的是生产力的提升，是一次全新的生产力革命。
+
+【2023-2-26】B站UP主：硅谷101，[ChatGPT这一战，科技巨头将重新洗牌](https://www.bilibili.com/video/BV1Jo4y1i72j)
+
+<iframe src="//player.bilibili.com/player.html?aid=394397165&bvid=BV1Jo4y1i72j&cid=1008617222&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%" > </iframe>
+
+### ChatGPT 替换哪些行业
+
+
+
+### 微软
+
+微软已有多类产品计划整合OpenAI技术及ChatGPT，包括 Azure云服务、Office办公全家桶、Teams协作会议软件、Bing搜索引擎、Design设计软件、Dynamics 365业务软件等。微软用户很快就能让AI替写邮件、文稿、会议笔记等繁杂重复的标准文字工作。还有消息称，微软可能会在2024年上线的Windows 12操作系统中接入大量AI应用。
+
+此前微软已经用 Azure OpenAI服务为其自动编程工具GitHub Copilot提供动力。而ChatGPT将自动编程和检查bug变得更是前所未有的简单，你只要用英文写出自己的设想，AI就能将相应的完整代码送到你眼前。连特斯拉AI前负责人Andrej Karpathy都在推文上感慨说：“英语现在是最热门的新编程语言了。”
+
+【2023-2-26】全球第二大搜索引擎微软Bing悄然上新：集成ChatGPT的新版Bing短暂上线，部分幸运用户已经尝鲜。
+- ![img](https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/TV46RKr3UGNPd1~noop.image?_iz=58558&from=article.pc_detail&x-expires=1676360394&x-signature=p3a0A6rAUC8nCz4puIMkzYU%2Fc%2B0%3D)
+
+与传统搜索引擎不同，Bing的界面不是一条细长的搜索栏，而是一个尺寸更大的聊天框。你输入自己的问题或想查询的东西后，它就会以聊天的方式，直接将答案或建议回复给你。同时，传统的搜索栏选项也依然可用。
+- 与仅能回答**2021年前**数据的ChatGPT不同，Bing版本将能够访问当前信息，微软将在未来几周内正式发布新版改进的Bing搜索引擎。
+
+由于微软是OpenAI最大的投资方，在OpenAI推出每月20美元的ChatGPT Plus订阅服务后，OpenAI从ChatGPT收到的商业报酬越多，也就意味着微软能获取更大的回报。OpenAI预期今年收入将达到2亿美元，明年达10亿美元。
+- [OpenAI的投资回报结构图](https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/TV46S5PC1UL3KP~noop.image?_iz=58558&from=article.pc_detail&x-expires=1676360394&x-signature=E9JTb4SHLSIksl7J5iT3nlviYzE%3D)
+
+微软想要将包含ChatGPT在内的基于GPT-3.5和GPT-4的更高级功能，加入Azure、Office、Teams、Bing等产品，从而继续主导信息时代的生产力工具。
+
+### Meta
+
+【2023-1-27】[Yann LeCun：ChatGPT缺乏创新，没什么革命性；网友：早点离开Meta做出点突破吧](https://zhuanlan.zhihu.com/p/601182745)
+
+ChatGPT 仿佛是一个真正的「六边形战士」：不仅能拿来聊天、搜索、做翻译，还能写故事、写代码、debug，甚至开发小游戏、参加美国高考…… 
+- 有人戏称，从此以后人工智能模型只有两类 —— ChatGPT 和 其他。
+
+由于功能过于强大，ChatGPT 的火爆让顶级科技公司谷歌都如临大敌。
+- 谷歌内部将 ChatGPT 称为「red code」，担心它的出现会影响自家的搜索业务。因此，前段时间，许久不出山的两位谷歌创始人 —— 拉里・佩奇和谢尔盖・布林 —— 也被请了回来，就「聊天机器人搜索引擎」召开高层会议。
+- 当然，并不是所有的科技巨头都如此恐慌。在前段时间的一次小型媒体和高管在线聚会上，Meta 首席人工智能科学家 Yann LeCun 也发表了他对 ChatGPT 的看法。
+
+Yann LeCun : [twitter](https://twitter.com/ylecun/status/1617609026820542464), [ChatGPT is 'not particularly innovative,' and 'nothing revolutionary', says Meta's chief AI scientist](https://www.zdnet.com/article/ChatGPT-is-not-particularly-innovative-and-nothing-revolutionary-says-metas-chief-ai-scientist/)
+>- 「ChatGPT is 'not particularly innovative,' and 'nothing revolutionary', says Meta's chief AI scientist」
+>- 「就底层技术而言，ChatGPT 并没有什么特别的创新，」也不是「什么革命性的东西」。许多研究实验室正在使用同样的技术，开展同样的工作。
+
+【2023-1-25】
+>- To be clear: I'm not criticizing OpenAI's work nor their claims.
+>- I'm trying to correct a *perception* by the public & the media who see ChatGPT as this incredibly new, innovative, & unique technological breakthrough that is far ahead of everyone else.
+>- It's just not.
+
+过去很多公司和研究实验室都构建了这种数据驱动的人工智能系统，OpenAI不是孤军奋战，跟其他实验室相比，OpenAI并没有什么特别的进步；不仅仅是谷歌和 Meta，还有几家初创公司基本上都拥有非常相似的技术
+
+OpenAI 的 ChatGPT 还广泛使用了一种名为「RLHF（通过人类反馈进行强化学习」的技术，即让人类对机器的输出进行排名，以提高模型性能，就像谷歌的网页排名一样。他说，这种方法不是 OpenAI 首创的，而是谷歌旗下的 DeepMind。ChatGPT 和其他大型语言模型并不是凭空而来的，而是不同的人数十年贡献的结果。与其说 ChatGPT 是一个科学突破，不如说它是一个像样的工程实例。
+
+LeCun 组建的 Meta 人工智能团队 FAIR 是否会像 OpenAI 那样在公众心目中取得突破。
+- LeCun 的回答是肯定的。「不仅是文本生成，还有创作辅助工具，包括生成艺术，」Meta 将能够通过自动生成宣传品牌的媒体资料来帮助小企业进行自我宣传。
+
+为什么谷歌和 Meta 没有推出类似 ChatGPT 的系统
+- LeCun 回答：「因为谷歌和 Meta 都会因为推出编造东西的系统遭受巨大损失」。而 OpenAI 似乎没有什么可失去的。
+
+【2023-3-27】
+
+I have claimed that Auto-Regressive LLMs are exponentially diverging diffusion processes.
+
+Here is the argument:
+- Let `e` be the probability that any generated token exits the tree of "correct" answers.
+- Then the probability that an answer of length n is correct is `(1-e)^n`
+
+Errors accumulate. 错误不断累积
+- The probability of correctness decreases exponentially.
+- One can mitigate the problem by making e smaller (through training) but one simply cannot eliminate the problem entirely.
+- A solution would require to make LLMs non auto-regressive while preserving their fluency.
+
+Auto-Regressive Large Language Models (`AR-LLMs`)
+- Outputs one text token after another
+- Tokens may represent words or subwords
+- Encoder/predictor is a transformer architecture
+  - With billions of parameters: typically from 1B to 500B
+  - Training data: 1 to 2 trillion tokens
+- LLMs for dialog/text generation:
+  - BlenderBot, Galactica, LLaMA (FAIR), Alpaca (Stanford), LaMDA/Bard(Google), Chinchilla (DeepMind), ChatGPT (OpenAI), GPT-4 ??...
+- Performance is amazing ... but ... they make stupid mistakes
+  - Factual errors, logical errors, inconsistency, limited reasoning, toxicity...
+- LLMs have no knowledge of the underlying reality
+  - They have no common sense & they can’t plan their answer
+
+Unpopular Opinion about AR-LLMs
+- Auto-Regressive LLMs are doomed. 
+- They cannot be made factual, non-toxic, etc.
+- They are not controllable
+- Probability `e` that any produced token takes us outside of the set of correct answers
+- Probability that answer of length `n` is correct: $ P(correct) = (1-e)^n $
+
+This diverges exponentially. It’s not fixable.
+
+Auto-Regressive Generative Models Suck!
+
+AR-LLMs
+- Have a constant number of computational steps between input and output. Weak representational power.
+- Do not really reason. Do not really plan
+
+Humans and many animals
+- Understand how the world works.
+- Can predict the consequences of their actions.
+- Can perform chains of reasoning with an unlimited number of steps.
+- Can plan complex tasks by decomposing it into sequences of subtasks
+
+The full slide deck is [here](https://drive.google.com/file/d/1BU5bV3X5w65DwSMapKcsr0ZvrMRU_Nbi/view?fbclid=IwAR2itiKMdM7LbpRs-YSKtLVFrHQLXKEEmNFAMI4xTY0SvROLJwN4bVKhs7M)
+
+This was my introductory position statement to the philosophical debate 
+- “[Do large language models need sensory grounding for meaning and understanding?](https://drive.google.com/file/d/1BU5bV3X5w65DwSMapKcsr0ZvrMRU_Nbi/view?fbclid=IwAR2itiKMdM7LbpRs-YSKtLVFrHQLXKEEmNFAMI4xTY0SvROLJwN4bVKhs7M)”
+
+Which took place at NYU Friday evening.
+
+【2023-3-29】[Yann LeCun](https://www.facebook.com/yann.lecun?__cft__[0]=AZWxqCTGSsq16rkzWGzvyCX2L6tYvmuDvSqPiCBmusZVzK9GB4xmaSzPmElCb7-Cfle8Ahio85t32RbgdwIHFEllkfCNqSBEShuPK0GrVdTazsdfgVPqTW9aCJrwOxUkPPLmORDlMBK3iC4ptkcUY8ntw3poQipY_WNjMsiA-_hTaA&__tn__=-UC%2CP-R)： GPT-4并未达到人类智能，年轻人花20h练车就掌握了开车技能，即便有专业司机的海量训练数据、高级传感器的辅助，L5级别自动驾驶到现在还没实现
+>- If you think GPT-4 and similar systems approach human-level intelligence, ask yourself why any teenager can learn to drive a car in about 20 hours of practice and yet we still don't have Level-5 self-driving cars. This is despite having enormous amounts of training data from expert drivers and vehicles equipped with sensors with superhuman capabilities.
+>- I agree with former Meta-AI engineering manager and  VP of AI/ML at Cruise [Hussein Mehanna](https://www.facebook.com/hussein.mehanna?__cft__[0]=AZWxqCTGSsq16rkzWGzvyCX2L6tYvmuDvSqPiCBmusZVzK9GB4xmaSzPmElCb7-Cfle8Ahio85t32RbgdwIHFEllkfCNqSBEShuPK0GrVdTazsdfgVPqTW9aCJrwOxUkPPLmORDlMBK3iC4ptkcUY8ntw3poQipY_WNjMsiA-_hTaA&__tn__=-]K-R) : the real revolution in AI is still to come.
+
+what's missing in chatGPT to become human level intelligence
+1. 理解现实世界 An understanding of the real world.
+2. 推理规划能力 The ability to reason and plan
+3. 执行任务的代理人 Agency: the ability to take actions
+4. 产生有效答案的能力 The ability to produce answers that satisfy objectives, like factuality, non-toxicity, etc
+
+And probably a dozen other things that we don't yet realize are necessary for intelligence..
+
+<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fyann.lecun%2Fposts%2Fpfbid0Ytvf7jiSFGjtoMkGV4J8V7dmhVVZhA7rct9Fvg2mbuYTTRre3dC5yfN4Xi3fqQThl&show_text=true&width=500" width="500" height="603" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+
+### Google
+
+为了应对ChatGPT的威胁，已退出谷歌日常业务的两位谷歌联合创始人紧急重返公司，多次发起会议商讨对策。谷歌还向研发ChatGPT竞品的AI创企Anthropic投资了约3亿美元。而Anthropic创始成员曾为创造ChatGPT的OpenAI工作。
+
+2023年2月6日，谷歌投资人工智能初创企业 Anthropic 近4亿美元，同时，谷歌内部也同步研发了很多大模型产品，以此来加固自己的护城河。
+- 谷歌云正启动一个为 Atlas 的“**红色警报**”项目，以应对ChatGPT的威胁。另一个产品部门一直在测试一个可使用问答形式的新搜索页面。此外，谷歌还在测试一款采用谷歌对话AI语言模型LaMDA的聊天机器人Apprentice Bard。
+
+Apprentice Bard 和 ChatGPT 功能类似，待用户在对话框输入问题后，能够以更像人类问答的形式给出对应问题的详细答案。并且也如嵌入ChatGPT的新版Bing那样，Apprentice Bard据说能回答最近发生的事件。
+
+不过其回答的可靠程度仍有待提升。一个在谷歌内部流传的例子是，有位测试人员问Apprentice Bard：谷歌是否会进行又一轮裁员？
+- 2023年1月，谷歌宣布裁员12000人，占其员工总数的6%
+
+- 【2023-2-6】谷歌发布 BARD，[An important next step on our AI journey](https://blog.google/technology/ai/bard-google-ai-search-updates/?continueFlag=db431874167e6b7ed4c39d023c3b26b2)，We’ve been working on an experimental conversational AI service, powered by LaMDA, that we’re calling Bard
+- ![img](https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Frame_13213203313x.width-1000.format-webp.webp)
+
+谷歌AI负责人 Jeff Dean 此前曾告诉员工
+- 谷歌有能力做出媲美ChatGPT的产品，之所以迟迟不愿发布，是因为担心这类产品会因提供**错误信息**等缺陷而影响公司商誉，因此比“小型初创公司更加**保守**”。
+
+当前的紧迫形势已经逼得谷歌无法再等下去。谷歌母公司Alphabet的CEO桑达尔·皮查伊说
+- “我们将大胆地开展这项工作，但要怀着强烈的责任感。”
+- 谷歌将在“未来几周或几个月”推出类似ChatGPT的大型语言模型LaMDA，用户很快就能以“搜索伴侣”的形式使用该模型。
+
+
+## ChatGPT 应用领域
+
+ChatGPT 非常实用，能帮助普通人节省不少脑力和时间成本。
+- 回答后续问题、承认错误、挑战不正确的前提、拒绝不适当的请求。
+
+### 受益方
+
+相关受益方
+- 上游增加需求
+  - 算力芯片、数据标注、自然语言处理（NLP)等。
+- 下游相关受益应用，包括但不限于： 
+  - 无代码编程、小说生成、对话类搜索引擎、语音陪伴、语音工作助手、对话虚拟人、人工智能客服、机器翻译、芯片设计等。
+- 功能（C端）
+  - 一款激起新鲜感的**新奇玩具**，也是一款消磨无聊时光的**聊天高手**，也能成为生产力爆表的**效率工具**，更可以被用作上通天文下知地理的**知识宝库**。
+  - ChatGPT不仅在日常对话、专业问题回答、信息检索、内容续写、文学创作、音乐创作等方面展现出强大的能力，还具有生成代码、调试代码、为代码生成注释的能力。
+- ![img](https://pic2.zhimg.com/80/v2-b9ad448881e01271b30377a2be17caad_1440w.webp)
+
+人们源源不绝地挖掘ChatGPT的更多技能，包括替写代码、作业、论文、演讲稿、活动策划、广告文案、电影剧本等各类文本，或是给予家装设计、编程调试、人生规划等建议。
+- ![49个功能](https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/TV46RMq7ttyVO3~noop.image?_iz=58558&from=article.pc_detail&x-expires=1676360394&x-signature=PDoTaKf5nJWW3eO5rMA8a0GzyCw%3D)
+
+ChatGPT也可以与其他AIGC模型联合使用，获得更加炫酷实用的功能。这极大加强了AI应用与客户对话的能力，使我们看到了AI大规模落地的曙光。
+- 通过对话生成客厅设计图。
+- ![](https://pic2.zhimg.com/80/v2-cda1af4d2f17bd11dce94cafd580dd61_1440w.webp)
+
+【2023-3-2】[普通人如何用ChatGPT搞钱？](https://mp.weixin.qq.com/s/2vPOOsesAh8d5SUZqvVKgA)
+- 1、让ChatGPT写小说
+  - 著名大V半佛仙人表示人家已经提前试过，效果并没有那么理想：
+- 2、让ChatGPT做培训
+  - 其他行业我不清楚，但在计算机行业，用ChatGPT来指导学生写代码，纠正代码问题还是效果不错的，把ChatGPT包装成一个虚拟的培训老师，很有想法。
+- 3、山寨版ChatGPT
+  - 高能提醒: 违法! 发出来只是让大家提高警惕，别花冤枉钱被骗了！
+  - 有人在想着怎么用ChatGPT搞钱，而另外有人在想着：你们这么想用ChatGPT，如何利用这一点搞钱！
+- 4、让ChatGPT来做自媒体
+  - 大家刷短视频的话，经常看到模板化的套路，几句话，几分钟视频，看得人暴多。以后有了ChatGPT帮忙写稿，批量化做视频，一个人搞一堆短视频自媒体账号根本不是问题。
+- 5、开发一个ChatGPT面试系统
+  - 现在很多公司都允许远程面试，比如电话面试、视频面试，有人想到用这玩意来面试，接入一个语音识别，就可以实时帮助求职者通关面试了：
+  - 开发这么一个系统，你觉得会有市场吗？基于这个想法，还可以开发一个ChatGPT写作文系统、写简历系统、做PPT系统，以后说不定一堆淘宝卖家提供这样的服务。
+
+随着ChatGPT的不断迭代，以及国内外各大厂商的跟进，2023注定要掀起人工智能新的一波热潮。咱们程序员除了学习技术之外，也可以想想怎么在安全合法的情况下，利用这些AI做出一些有意思的东西，说不定就火了呢。
+
+### 商业变现
+
+方案
+1. 卖账号；
+2. 部署公众号，用户免费使用N次，分享海报，带来新关注，每个关注送N次；
+3. 部署小程序，用户免费使用N次，关注公众号可以送N次，每看一次激励视频可以送1次；
+4. 帮助其他人部署公众号/小程序，每个收费；
+5. 垂类产品，基于 ChatGPT 提供的能力，输出内容，卖内容或者卖服务
+6. 内容站点，收集热门搜索词，用 ChatGPT 提供的内容给搜索引擎收录，赚广告费；
+7. ChatGPT 机器人接入，收费。
+8. 创作类：总的来说，可以达到九年义务制教育的及格水平
+
+【2023-1-24】ChatGPT创业实践，[自宅创业 - #27 蹭热点的ChatGPT小程序](https://blog.guyskk.com/notes/onebiz-27)
+- 批量注册、卖opengai账号：做ChatGPT小程序，上线当天用户量突破1000，第一次做出这么火爆的产品
+  - 一个写程序批量注册，一个负责销售，收益分成。写好了程序，注册了一批ChatGPT账号，赚了一点钱。然后发现市场上ChatGPT账号价格越来越低，也很难批量销售出去。
+- 开发ChatGPT小程序
+  - 做一个小程序，把ChatGPT的功能做到小程序上，打开就能直接用。不到3天小程序急速完成上线，上线当天用户量就突破1000，涨势非常好。正预想着日活过万，然后小程序就被举报封了，发布的两个小程序同时被封。举报人和我正好同在一个微信群里，虽然很难过，但还是接受了现实，大家都按丛林法则生存。
+
+
+### 数据处理
+
+#### 语料扩充
+
+【2023-2-17】[unlocking-the-power-of-llms](https://github.com/howl-anderson/unlocking-the-power-of-llms)
+
+使用chatgpt生成mark表格
+
+| 文本           | 领域     | 实体映射      |
+| -------------- | -------- | ------------- |
+| 打开车门       | 设备控制 | 设备：车门    |
+| 关闭空调       | 设备控制 | 设备：空调    |
+| 导航到人民路   | 导航     | POI：人民路   |
+| 开车去郊野公园 | 导航     | POI：郊野公园 |
+
+也可以用空格
+- 直接从 Excel 中复制数据粘贴到文本框中，表格表示形式是：每个单元格都用空格隔开。（不推荐）
+
+生成的NER数据：
+
+| 文本                          | 领域     | 实体映射                                   |
+| ----------------------------- | -------- | ------------------------------------------ |
+| 打开后备箱                    | 设备控制 | 设备：后备箱                               |
+| 调高音量到80                  | 设备控制 | 设备：音响，属性：音量，数值：80           |
+| 导航到北京天安门广场          | 导航     | POI：北京天安门广场                        |
+| 开启车辆防盗系统              | 设备控制 | 设备：防盗系统                             |
+| 显示明天的天气                | 天气查询 | 时间：明天                                 |
+| 将客厅灯调暗一些              | 设备控制 | 设备：客厅灯，属性：亮度，数值：稍微暗一些 |
+| 播放周杰伦的七里香            | 娱乐     | 歌手：周杰伦，歌曲：七里香                 |
+| 打开窗户                      | 设备控制 | 设备：窗户                                 |
+| 降低空调温度到25度            | 设备控制 | 设备：空调，属性：温度，数值：25           |
+| 导航到附近的加油站            | 导航     | POI：加油站                                |
+| 调整座椅到舒适的位置          | 设备控制 | 设备：座椅，属性：位置，数值：舒适         |
+| 停止播放音乐                  | 娱乐     | 动作：停止播放音乐                         |
+| 打电话给张三                  | 通讯     | 对象：张三                                 |
+| 导航到机场                    | 导航     | POI：机场                                  |
+| 打开车窗                      | 设备控制 | 设备：车窗                                 |
+| 关闭车窗                      | 设备控制 | 设备：车窗                                 |
+| 升高座椅到合适的高度          | 设备控制 | 设备：座椅，属性：高度，数值：合适         |
+| 显示最近的通知                | 提醒事项 | 类型：通知                                 |
+| 播报今天的新闻                | 新闻     | 时间：今天                                 |
+| 显示路况                      | 导航     | 信息类型：路况                             |
+| 导航到附近的酒店              | 导航     | POI：酒店                                  |
+| 打开前灯                      | 设备控制 | 设备：前灯                                 |
+| 关闭后灯                      | 设备控制 | 设备：后灯                                 |
+| 设置提醒，下午3点有会议要参加 | 提醒事项 | 时间：下午3点，事件：参加会议              |
+| 显示今天的日程                | 提醒事   |                                            |
+
+#### 人工标注
+
+【2023-3-29】ChatGPT超过人工标注
+- [ChatGPT Outperforms Crowd-Workers for Text-Annotation Tasks](https://arxiv.org/abs/2303.15056?fbclid=IwAR2j7nL9y2pvxkHHkbZtbWbfEGuyaqiQ6NYVO39WkpUK5NGkBGZLjiMx0ho)
+
+- Many NLP applications require manual data annotations for a variety of tasks, notably to train classifiers or evaluate the performance of unsupervised models. Depending on the size and degree of complexity, the tasks may be conducted by crowd-workers on platforms such as MTurk as well as trained annotators, such as research assistants. Using a sample of 2,382 tweets, we demonstrate that ChatGPT outperforms crowd-workers for several annotation tasks, including relevance, stance, topics, and frames detection. Specifically, the zero-shot accuracy of ChatGPT exceeds that of crowd-workers for four out of five tasks, while ChatGPT's intercoder agreement exceeds that of both crowd-workers and trained annotators for all tasks. Moreover, the per-annotation cost of ChatGPT is less than $0.003 -- about twenty times cheaper than MTurk. These results show the potential of large language models to drastically increase the efficiency of text classification.
+
+苏黎世大学：ChatGPT标注数据比人类便宜20倍，80%任务上占优势
+
+在ChatGPT面前，无论成本还是效率，人类可以说是毫无优势：
+- 成本上，ChatGPT平均每个标注成本低于0.003美元，比众包平台便宜20倍；何况AI还能24*7无休。
+- 效率上，在相关性、立场、主题等任务中，ChatGPT也是以4:1的优势“碾压”人类。
+
+MTurk就是专门进行数据标注的一个众包平台。
+- 在MTurk这类众包平台内部，还会有更加精细的分工，比如说会有经过专业训练的数据标注者以及众包工作者。
+- 前者在产出高质量数据上具有优势，但自然成本也更高，而后者虽然更便宜但质量也会随任务难度波动。
+
+于是研究团队就开始着手研究大语言模型（LLM）在这方面的潜力，并且对比了没有额外训练（zero-shot）的ChatGPT（基于GPT-3.5）和MTurk在数据标注上的性能。这项对比基于研究团队此前收集到的2382条推文样本。
+
+ChatGPT和MTurk分别将推文以“相关性、立场、主题、政策、实用性”这五种任务进行标注。
+
+“生成训练数据需要人工”的说法已经成为过去式
+
+ChatGPT 用于 人工标注的 Web系统：[Weak Labeling Tool using ChatGPT](https://github.com/ainbr/chatgpt-weak-labeler-web-ui), [代码](https://github.com/ainbr/chatgpt-weak-labeler-web-ui/blob/master/app.py)
+- ![](https://github.com/ainbr/chatgpt-weak-labeler-web-ui/raw/master/misc/screenshot1.png)
+
+### NLP基础任务
+
+#### 信息抽取
+
+chatgpt做零样本信息抽取
+- 论文：[Zero-Shot Information Extraction via Chatting with ChatGPT](https://www.aminer.cn/pub/63f5887b90e50fcafd27b7c4/zero-shot-information-extraction-via-chatting-with-chatgpt)
+- we transform the zero-shot IE task into a multi-turn question-answering problem with a two-stage framework (ChatIE)
+- 使用两阶段框架（ChatIE）将零样本信息提取任务转换为多回合问答问题。
+
+#### NLP评估
+
+##### ChatEval
+
+会话评估：[ChatEval](https://chateval.org/)，University of Pennyslvania 宾夕法尼亚大学NLP团队开源，开放领域机器人评估框架，研究人员可以提交自己的模型，ChatEval会自动对比评估效果
+- 公开数据集: Neural Conversational Model, Open Subtitles, Cornell Movie Dialogue Corpus ...
+- 开源，代码：[chateval](https://github.com/chateval)
+
+chatgpt用于NLG评估
+- 论文：[Is ChatGPT a Good NLG Evaluator? A Preliminary Study](https://www.aminer.cn/pub/6407fd3e90e50fcafd2747e3/is-chatgpt-a-good-nlg-evaluator-a-preliminary-study)
+- we regard ChatGPT as a **human evaluator** and give **task-specific** (e.g., summarization) and **aspect-specific** (e.g., relevance) instruction to prompt ChatGPT to score the generation of NLG models. We conduct experiments on three widely-used NLG meta-evaluation datasets (including summarization, story generation and data-to-text tasks).
+- Experimental results show that compared with previous automatic metrics, ChatGPT achieves state-of-the-art or competitive correlation with golden human judgments. We hope our preliminary study could prompt the emergence of a general-purposed reliable NLG metric.
+
+复杂会话质量评估：东南大学网络科学与工程学院
+- 论文：[Evaluation of ChatGPT as a Question Answering System for Answering Complex Questions](https://www.aminer.cn/pub/641137fe90e50fcafd17bb5e/evaluation-of-chatgpt-as-a-question-answering-system-for-answering-complex-questions)
+-  we present a framework that evaluates its ability to answer complex questions. Our approach involves categorizing the potential features of complex questions and describing each test question with multiple labels to identify combinatorial reasoning. Following the black-box testing specifications of CheckList proposed by Ribeiro et.al, we develop an evaluation method to measure the functionality and reliability of ChatGPT in reasoning for answering complex questions.
+- We use the proposed framework to evaluate the performance of ChatGPT in question answering on 8 real-world KB-based CQA datasets, including 6 English and 2 multilingual datasets, with a total of approximately 190,000 test cases. We compare the evaluation results of ChatGPT, GPT-3.5, GPT-3, and FLAN-T5 to identify common long-term problems in LLMs.
+- The dataset and code are available at [Complex-Question-Answering-Evaluation-of-ChatGPT](https://github.com/tan92hl/Complex-Question-Answering-Evaluation-of-ChatGPT)
+
+Question
+- In various types of KBQA tasks, **complex question answering** (KB-based CQA) is a challenging task that requires question answering models to have the ability of compositional reasoning to answer questions that require multi-hop reasoning, attribute comparison, set operations, and other complex reasoning.
+- KBQA任务重，回答复杂问题很有挑战性，因为涉及这些问题要求多跳推理、属性对比、集合操作及其他复杂推理
+
+Overview
+
+To evaluate ChatGPT's ability to answer complex knowledge, we propose an evaluation framework: a feature-driven multi-label annotation method 特征驱动的多标签标注方法
+- First, we classify the **latent features** that constitute complex questions, and describe each question under test with multi-labels for identifying combinatorial reasoning. 
+- Secondly, following the black-box test specification of CheckList proposed by Microsoft, we design an **evaluation method** that introduces `CoT` hints to measure the reasoning function and reliability of large language models in answering complex questions. 
+
+Our evaluation uses 8 real complex question answering datasets, including **six** English datasets and **two** multilingual datasets, to further analyze the potential impact of language bias. We compared the evaluation results of `ChatGPT`, `GPT3.5`, `GPT3`, and `FLAN-T5` to identify persistent historical issues in `LLMs`. All data and results are available for further analysis.
+
+
+【2023-3-16】[Poe](https://poe.com/claude+) 各种机器人，sage, gpt-4, ChatGPT等，一次免费体验机会
+
+
+### Document QA
+
+【2023-3-27】文档问答
+
+#### PandasGPT
+
+- [PandaGPT](https://www.pandagpt.io/), 已有3w个文档，10w个问题
+- 上传文档，直接针对文档问答; 还能生成知识图谱，Generate Knowledge Graph
+- ![](https://uploads-ssl.webflow.com/6405047c9d73416a60b878b4/6405068dec8bf7442171f160_Screenshot%202023-03-05%20at%204.15.30%20PM.png)
+
+类似的，还有 AMiner 上的华智冰
+
+#### ChatDOC
+
+【2023-3-28】[ChatDOC](https://chatdoc.com/)文档阅读工具，支持中文！又快又免费！使用 ChatGPT 阅读文件的AI问答机器人
+- 基于 ChatGPT 的文件阅读助手，支持中英文，可以快速从上传研究论文、书籍、手册等文件中提取、定位和汇总文件信息，并通过聊天的方式在几秒钟内给出问题的答案。
+- ChatDOC 还可以理解文档中的表格或文字，优化其数据分析性能，并为每个回答提供直接引用的来源，方便核实AI的解读准确性。
+- ChatDOC 目前免费，文件大小限制为 200 页，最多可以上传 5 个文档。在即将更新的版本中，还支持跨多个文档的综合查询和问答。
+- ![](https://pic2.zhimg.com/80/v2-c73f17ecea423a82aad0ac7c110bd625_720w.webp)
+
+
+### 办公
+
+详见站内文章：[智能办公](aigc#智能办公)
+
+
+### 视觉应用
+
+【2023-3-14】[ChatGPT 有什么新奇的使用方式？](https://www.zhihu.com/question/582979328/answer/2933058469)
+
+#### Visual ChatGPT
+
+[Visual ChatGPT（一）: 除了语言问答，还能看图问答、AI画图、AI改图的超实用系统](https://zhuanlan.zhihu.com/p/612627818)
+- 2023.3.9，微软官方github放出Visual ChatGPT的系统实现，这篇paper通过利用**chatgpt api**和**开源模型**实现了一个**多模态**的**问答系统**，不仅可以语言问答，还可以输入一张图实现`VQA`视觉问答，还集成stable diffusion可以进行`AI绘画`！语言问答、看图问答、AI绘画，将AI届近期的3大热点集于一身
+- ![](https://pic4.zhimg.com/80/v2-3a99a918a6d29ffb759d82c359eff5bf_1440w.webp)
+
+实现的功能（详细的可以去看论文的附录A.Tool Details）：
+1.  获取图片的语言描述：[Salesforce/blip-image-captioning-base](https://huggingface.co/Salesforce/blip-image-captioning-base)
+2.  输入语言进行AI绘画：[runwayml/stable-diffusion-v1-5](https://huggingface.co/runwayml/stable-diffusion-v1-5)
+3.  去除或者替换图片上的某个东西：[runwayml/stable-diffusion-inpainting](https://huggingface.co/runwayml/stable-diffusion-inpainting)，[CIDAS/clipseg-rd64-refined](https://huggingface.co/CIDAS/clipseg-rd64-refined)
+4.  通过语言修改图片：[timbrooks/instruct-pix2pix](https://huggingface.co/timbrooks/instruct-pix2pix)
+5.  看图回答问题：[Salesforce/blip-vqa-base](https://huggingface.co/Salesforce/blip-vqa-base)
+6.  canny边缘检测/depth深度检测/HED边缘提取/mlsd线段识别/normal模型识别/openpose姿势识别/scribble黑白稿提取/seg语义分割和根据此画图：主要是各种开源的视觉任务模型VFMs，然后[ControlNet](https://github.com/lllyasviel/ControlNet.git)实现画图。
+
+### 语音应用
+
+#### Voice ChatGPT
+
+Chrome应用商店，输入“Chatgpt voice control”，Chrome应用商店，输入“Chatgpt voice control”
+- ![](https://pica.zhimg.com/80/v2-6077f93ee27145806307dbb6ab3da801_1440w.webp?source=1940ef5c)
+
+详见：[知乎](https://www.zhihu.com/question/582979328/answer/2912777383)
+
+- 【2023-2-11】[CCTV视频](https://www.toutiao.com/video/7198541558600499770/)里，台湾人在演示 [VoiceGPT](https://voicegpt.net/)，[VoiceGPT APK Download (version 1.35) 下载地址](https://voicegpt.net/voicegpt_135.apk) , 目前就安卓版，使用时需要代理
+
+#### ChatGPT改进论文
+
+【2023-3-16】AMIner论文
+
+
+### 医疗
+
+#### 医疗诊断
+
+chatgpt在医疗诊断上是否通过图灵测试？
+- 论文：[Using ChatGPT to write patient clinic letters.](https://www.aminer.cn/pub/640c5de090e50fcafd616cf0/using-chatgpt-to-write-patient-clinic-letters)
+- 论文：[Putting ChatGPT's Medical Advice to the (Turing) Test](https://www.aminer.cn/pub/63d340e890e50fcafd9107d1/putting-chatgpt-s-medical-advice-to-the-turing-test)
+- ChatGPT responses to patient questions were **weakly distinguishable** from provider responses. Laypeople(外行) appear to trust the use of chatbots to answer lower risk health questions.
+
+#### ChatDoctor
+
+
+【2023-3-25】医疗问答机器人
+- 论文：[ChatDoctor: A Medical Chat Model Fine-tuned on LLaMA Model using Medical Domain Knowledge](https://arxiv.org/abs/2303.14070)
+- [GitHub地址](https://github.com/Kent0n-Li/ChatDoctor)
+- [Demo Page](https://huggingface.co/spaces/ChatDoctor/ChatDoctor)
+
+Resources List
+- 200k real conversations between patients and doctors from HealthCareMagic.com HealthCareMagic-200k.
+- 26k real conversations between patients and doctors from icliniq.com icliniq-26k.
+- 5k generated conversations between patients and physicians from ChatGPT GenMedGPT-5k and disease database.
+- Checkpoints of ChatDoctor, fill this form.
+- Online hugging face demo application form.
+- Stanford Alpaca data for basic conversational capabilities. Alpaca link.
+
+#### 心理测评
+
+用chatgpt做MBTI心理测评
+- 论文：[Can ChatGPT Assess Human Personalities? A General Evaluation Framework](https://www.aminer.cn/pub/640166a590e50fcafd68b4ab/can-chatgpt-assess-human-personalities-a-general-evaluation-framework)
+- 提出了三个评估指标，以衡量最先进的LLMs（包括ChatGPT和InstructGPT）评估结果的`一致性`、`稳健性`和`公平性`。实验结果表明，ChatGPT具有评估人类个性的能力，平均结果表明，ChatGPT可以实现更为一致和公平的评估，尽管对提示偏差的鲁棒性较低，相比之下，InstructGPT的鲁棒性更高。
+
+### 新闻资讯
+
+【2023-1-31】[“美版今日头条”宣布用ChatGPT写稿，股价暴涨119%](https://mp.weixin.qq.com/s/jMxVBWjbIJzzOSaTlakx5A)
+- “美版今日头条”BuzzFeed宣布和OpenAI合作，未来将使用ChatGPT帮助创作内容。AI创作的内容将从研发阶段转变为核心业务的一部分。
+  - ChatGPT会根据测试主题，生成一系列提问，再根据用户的回答，制作他们的专属报告。
+- BuzzFeed是一家网络媒体公司，当年正是靠高度人工创作的内容逐渐打出名声，最终才成功上市。
+  - 引起病毒式传播的蓝黑or白金裙子
+  - 网络上流传甚广的“灾难中的女孩”meme
+
+### 房产行业
+
+【2023-1-29】[美房产中介们爱上ChatGPT：原先花1小时写房源文案，现在仅5秒](https://www.163.com/tech/article/HS83N8D000097U7T.html), 房地产中介在网上推介房子时，常常需要绞尽脑汁来介绍房源情况并突出诸如“理想的娱乐设施”和“有充分放松空间”等房屋卖点。
+- 如今OpenAI发布的人工智能聊天机器人ChatGPT可以帮助他们做到这一点，房地产中介JJ·约翰内斯(JJ Johannes)就尝到了甜头。他只需要输入几个关键词，ChatGPT不到5秒钟就创建了关于房源情况的描述。约翰内斯说，否则他自己要花一个多小时才能完成。在发表房源情况前,还会对ChatGPT生成的描述进行微调和润色。他说，“这并不完美，但是一个很好的起点。我的背景是经验和技术，写一些有说服力的东西需要时间。ChatGPT让一切变得简单多了。”
+- 很多房地产中介表示，ChatGPT已经改变了他们撰写房源情况、在社交媒体上发帖打广告以及起草房屋买卖法律文件等的工作方式。ChatGPT还可以用于自动完成重复性任务，比如回答客户提出的常见问题或进行复杂计算。
+- 利用ChatGPT起草具有法律约束力的附录和其他文件，并将其送交律师审批。“我用ChatGPT对各种草稿进行微调，”他说，“有时我会让ChatGPT把内容做得更短或更有趣，它会给你很多样本供挑选和编辑。”
+
+#### RoomGPT 装修设计 
+
+【2023-3-27】[RoomGPT](https://www.roomgpt.io/dream) 根据要求生成指定风格的装修，免费3次生成
+- 作者[twitter](https://twitter.com/nutlope/status/1635674124738523139?cxt=HHwWhsCz1ei8irMtAAAA)
+- 选择装修风格、房屋、实拍图，就可以生成设计图。
+- 主题：Modern（现代）, Minimalist（简约）, Professional（专业）, Tropical（热带）, Vintage（复古）, Industrial（工业）, Neoclassic（新古典主义）
+- 房屋类型：living room（客厅）, dining room（餐厅）, Office（办公室）, Bedroom（卧室）, Bathroom（浴室）, Basement（地下室）, Kitchen（厨房）, Gaming Room（游戏室）
+
+
+### 智能家居
+
+高级Web开发人员Mate Marschalko用短短不到1小时的时间，通过与ChatGPT背后的GPT-3大模型交互，结合Siri Shortcuts做出了一个更智能的语音助手。这个语音助手不仅能控制整个苹果HomeKit智能家居系统，而且能够以超低的延迟响应轻松回答生各种问题。
+
+他给予了ChatGPT极高评价，称尝试过这个产品后，包括苹果Siri、亚马逊Alexa、谷歌Home在内的所有“智能”助手，都显得如此愚蠢而没用。
+- Mate Marschalko演示新智能助手操纵苹果HomeKit智能家居系统
+- ![img](https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/TV46RMG9kDz4Bu~noop.image?_iz=58558&from=article.pc_detail&x-expires=1676360394&x-signature=tCxwmviN1wJeomk42ZXzv2DHEVI%3D)
+
+### 写小说
+
+【2023-2-14】[Generating Longer Stories With Recursive Reprompting and Revision](https://arxiv.org/pdf/2210.06774.pdf), Meta 田渊栋写小说
+- We consider the problem of automatically generating longer stories of over two thousand words. Compared to prior work on shorter stories, **long-range plot coherence and relevance** are more central challenges here. We propose the `Recursive Reprompting and Revision` framework ($Re^3$) to address these challenges
+
+### 数字人
+
+#### MetaMind
+
+【2023-3-1】[消息](https://zhuanlan.zhihu.com/p/610425193) 国内厂商(武汉深兰科技)发布了首款类 ChatGPT应用 [metamind](https://www.metamind.cn/) ，其具备多模态的AIGC创作能力，不仅支持像ChatGPT一样的对话能力，还能进行AI绘画，AI写作，AI视频创作等。主要现在还是处于免费阶段，没有 ChatGPT翻墙海外手机号注册等门槛。
+- 普通用户可以创建自己个人数字化的AI，可以进行个人及大数据训练，配合产品专属的记忆库存储的功能，最终打造个人的第二大脑，未来可期。
+- ![](https://pic3.zhimg.com/80/v2-e150159f0e0c9895f14dd8489835002e_1440w.webp)
+
+#### DID
+
+【2023-3-30】did+midjourney或stable diffusion创造的虚拟人物
+
+示例：
+- [使用ChatGPT指令方式](https://www.toutiao.com/video/7215460404061798968/)，视频里用生成的美女讲解
+
+
+
+
+【2023-3-29】问答数字人
+
+[问答数字人v0.02：自定义知识库](https://www.zhihu.com/zvideo/1624427959825166336?utm_source=wechat_session&utm_medium=social&utm_oi=27211553832960)
+
+
+
+# 结束
