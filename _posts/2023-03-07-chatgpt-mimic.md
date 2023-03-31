@@ -1235,32 +1235,8 @@ Because training step 1 is a simple supervised finetune progress as many other m
 
 一位研究人员利用Meta泄露的LLaMA，创建了一个完全不受限制的「BasedGPT」聊天机器人。Discord上的这个聊天机器人经常会做出极端且愚蠢的回答。没有ChatGPT那么好，这是肯定的，但话说回来，它使用的计算能力少了1000倍。[参考](https://www.toutiao.com/article/7209928157732864552)
 
-### 斯坦福 Aplaca（基于LLaMA）
 
-【2023-3-14】[Alpaca: A Strong Open-Source Instruction-Following Model](https://crfm.stanford.edu/2023/03/13/alpaca.html) 斯坦福微调了 7B LLaMA 模型，只用了 52K 的数据，达到了和达芬奇003类似的效果，并且可以跑在消费级设备上，比如树莓派。[参考](https://www.toutiao.com/article/7210260080690889275)
-- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/f86ae0e26c1a4f36b41850ef19f059e3~noop.image?_iz=58558&from=article.pc_detail&x-expires=1679383800&x-signature=RYAjEKgrdJXvzVLRLPzQSsbQw2E%3D)
-- [Web Demo](https://crfm.stanford.edu/alpaca/), [GitHub](https://github.com/tatsu-lab/stanford_alpaca)
-- We emphasize that Alpaca is intended only for academic research and any commercial use is prohibited. 
-- ![](https://crfm.stanford.edu/static/img/posts/2023-03-13-alpaca/alpaca_main.jpg)
-
-- We performed a **blind pairwise comparison** between `text-davinci-003` and `Alpaca 7B`, and we found that these two models have very similar performance: `Alpaca` wins 90 versus 89 comparisons against `text-davinci-003`.
-- ![](https://crfm.stanford.edu/static/img/posts/2023-03-13-alpaca/alpaca_right_email.png)
-
-
-#### self-instruct
-
-[self-instruct](https://github.com/yizhongw/self-instruct): [Self-Instruct: Aligning LM with Self Generated Instructions](https://arxiv.org/abs/2212.10560)
-- 斯坦福团队微调LLaMA的方法，来自华盛顿大学Yizhong Wang等去年底提出的Self-Instruct, 一个半自动的过程，利用模型本身的指令信号对预训练的LM进行指令调整。
-- ![](https://github.com/yizhongw/self-instruct/raw/main/docs/pipeline.JPG)
-- 175个人工种子集，覆盖二分类、生成任务，然后，调用gpt-3模型生成指令、指令回答
-- 以175个问题作为种子任务，让AI自己从中组合出新的问题以及生成配套答案实例，人工过滤掉低质量的，再把新任务添加到任务池里。所有这些任务，之后可以采用InstructGPT的方法让AI学会如何遵循人类指令。
-- 斯坦福版Alpaca花了不到500美元使用OpenAI API生成了5.2万个这样的示例搞出来的。
-- code : [generate_instruction.py](https://github.com/tatsu-lab/stanford_alpaca/blob/main/generate_instruction.py)
-- 解读：[面向大模型微调的instruction指令自动化生成技术：SELF-INSTRUCT指令自动化生成框架工作介绍](https://mp.weixin.qq.com/s/Lo1f1knFFQWdHNLTNyFKDQ)
-
-【2023-3-23】alpaca中文指令微调数据集 [alpaca-chinese-dataset](https://github.com/carbonz0/alpaca-chinese-dataset)
-
-#### Aplaca进化
+### LLaMA 进化
 
 【2023-3-27】Aplaca进化路线图
 
@@ -1288,8 +1264,40 @@ Because training step 1 is a simple supervised finetune progress as many other m
     A -->|数据集| GLM1
     LR --> GLM1
 
+    L -->|2023-3-31,伯克利\n开源FastChat达到ChatGPT 90%| V(Vicuna):::green
+    O(OPT):::blue -.->|OPT 1.3b模型| V
+
 </div>
 
+
+### 斯坦福 Aplaca（基于LLaMA）
+
+Meta开源了LLaMA系列模型，包含了参数量为7B/13B/33B/65B的不同模型，然而，原模型的效果较差（如生成的结果文不对题、以及无法自然地结束生成等）。
+
+斯坦福的 Alpaca 模型基于 LLaMA-7B 和指令微调，仅使用约 5 万条训练数据，就能达到类似 GPT-3.5 的效果。
+
+【2023-3-14】[Alpaca: A Strong Open-Source Instruction-Following Model](https://crfm.stanford.edu/2023/03/13/alpaca.html) 斯坦福微调了 7B LLaMA 模型，只用了 52K 的数据，达到了和达芬奇003类似的效果，并且可以跑在消费级设备上，比如树莓派。[参考](https://www.toutiao.com/article/7210260080690889275)
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/f86ae0e26c1a4f36b41850ef19f059e3~noop.image?_iz=58558&from=article.pc_detail&x-expires=1679383800&x-signature=RYAjEKgrdJXvzVLRLPzQSsbQw2E%3D)
+- [Web Demo](https://crfm.stanford.edu/alpaca/), [GitHub](https://github.com/tatsu-lab/stanford_alpaca)
+- We emphasize that Alpaca is intended only for academic research and any commercial use is prohibited. 
+- ![](https://crfm.stanford.edu/static/img/posts/2023-03-13-alpaca/alpaca_main.jpg)
+
+- We performed a **blind pairwise comparison** between `text-davinci-003` and `Alpaca 7B`, and we found that these two models have very similar performance: `Alpaca` wins 90 versus 89 comparisons against `text-davinci-003`.
+- ![](https://crfm.stanford.edu/static/img/posts/2023-03-13-alpaca/alpaca_right_email.png)
+
+
+#### self-instruct
+
+[self-instruct](https://github.com/yizhongw/self-instruct): [Self-Instruct: Aligning LM with Self Generated Instructions](https://arxiv.org/abs/2212.10560)
+- 斯坦福团队微调LLaMA的方法，来自华盛顿大学Yizhong Wang等去年底提出的Self-Instruct, 一个半自动的过程，利用模型本身的指令信号对预训练的LM进行指令调整。
+- ![](https://github.com/yizhongw/self-instruct/raw/main/docs/pipeline.JPG)
+- 175个人工种子集，覆盖二分类、生成任务，然后，调用gpt-3模型生成指令、指令回答
+- 以175个问题作为种子任务，让AI自己从中组合出新的问题以及生成配套答案实例，人工过滤掉低质量的，再把新任务添加到任务池里。所有这些任务，之后可以采用InstructGPT的方法让AI学会如何遵循人类指令。
+- 斯坦福版Alpaca花了不到500美元使用OpenAI API生成了5.2万个这样的示例搞出来的。
+- code : [generate_instruction.py](https://github.com/tatsu-lab/stanford_alpaca/blob/main/generate_instruction.py)
+- 解读：[面向大模型微调的instruction指令自动化生成技术：SELF-INSTRUCT指令自动化生成框架工作介绍](https://mp.weixin.qq.com/s/Lo1f1knFFQWdHNLTNyFKDQ)
+
+【2023-3-23】alpaca中文指令微调数据集 [alpaca-chinese-dataset](https://github.com/carbonz0/alpaca-chinese-dataset)
 
 
 #### 贝壳开源
@@ -1298,7 +1306,11 @@ Because training step 1 is a simple supervised finetune progress as many other m
 - [Exploring ChatGPT's Ability to Rank Content: A Preliminary Study on Consistency with Human Preferences](https://arxiv.org/abs/2303.07610)
 - ChatGPT's zero-shot ranking capability could be used to reduce annotation pressure in a number of ranking tasks
 
-【2023-3-19】基于LLaMA用翻译语料训练中文Alpaca模型 - [李煜东的文章 - 知乎](https://zhuanlan.zhihu.com/p/614923816)
+#### Alpaca 复现
+
+- 【2023-3-19】基于LLaMA用翻译语料训练中文Alpaca模型 - [李煜东的文章 - 知乎](https://zhuanlan.zhihu.com/p/614923816)
+- 【2023-3-31】[从0到1复现斯坦福羊驼](https://zhuanlan.zhihu.com/p/618321077)（Standford Alpaca 7B），8 卡 A800 80GB GPUs 。。。
+
 
 #### Alpaca-LoRA 本地部署
 
@@ -1369,6 +1381,44 @@ make chat
 训练LLaMA的详细方法可以参考[上一篇文章](https://zhuanlan.zhihu.com/p/612752963)，流程如下图所示：
 - ![](https://pic3.zhimg.com/80/v2-667a131609b04ef4a1fa8d84e980252e_1440w.webp)
 
+
+### Vicuna
+
+【2023-3-31】[Vicuna: An Open-Source Chatbot Impressing GPT-4 with 90%* ChatGPT Quality](https://vicuna.lmsys.org/)，伯克利中国人开发
+- github代码：[FastChat](https://github.com/lm-sys/FastChat), [demo](https://chat.lmsys.org/)
+- ![](https://github.com/lm-sys/FastChat/raw/main/assets/demo-narrow.gif)
+
+安装
+
+```sh
+git clone https://github.com/lm-sys/FastChat.git
+cd FastChat
+pip3 install -e .
+
+# Install the latest main branch of huggingface/transformers
+pip3 install git+https://github.com/huggingface/transformers
+```
+
+效果评测
+
+prompt
+>- 写个朋友圈二手房营销文案，要求不超过100字，突出房源重点，降价/急售/上新，三个主题选一个，带emoji表情，房源信息如下：育新东里二里，靠近西三旗商圈，89平米，海淀六小强学区，满五年，2000年的房子，户型东西向，有独立卫生间
+>- 写3个朋友圈二手房营销文案，要求不超过100字，突出房源重点，降价/急售/上新，带emoji表情，房源信息如下：育新东里二里，靠近西三旗商圈，89平米，海淀六小强学区，满五年，2000年的房子，户型东西向，有独立卫生间
+
+Vicuna
+>"🚨 急售！！🏠 育新东里二里，靠近西三旗商圈，89平米，海淀六小强学区，满五年，2000年的房子，户型东西向，有独立卫生间，价格降低，快来看看吧！！"
+
+chatgpt
+>- 急售！育新东里二里房源上新啦🚨！89平米，满五年，海淀六小强学区房，2000年房龄，东西向户型，独立卫生间🚪。靠近西三旗商圈，购物、餐饮、娱乐方便🍽️。价格超级优惠💰，快来看看吧！👀
+>- 降价啦！育新东里二里房源急售🏠！89平米，满五年，海淀六小强学区房🎓，2000年房龄，东西向户型，独立卫生间🚽。靠近西三旗商圈，购物、餐饮、娱乐方便🛍️。价格大幅降低💰，机会难得👍，赶紧联系我看房吧！📞
+
+prompt
+> 写3个朋友圈二手房营销文案，要求不超过100字，突出房源重点，降价/急售/上新，带emoji表情，房源信息如下：育新东里二里，靠近西三旗商圈，89平米，海淀六小强学区，满五年，2000年的房子，户型东西向，有独立卫生间
+
+chatgpt
+>- 上新！🏠 育新东里二里二手房，89平米，满五年，海淀六小强学区，东西向户型，独立卫生间🚪。紧邻西三旗商圈🛍️，购物、餐饮、娱乐一应俱全🎉。2000年的房子，价格实惠💰，速度联系我吧！📱
+>- 降价急售！🚨 育新东里二里二手房，89平米，满五年，海淀六小强学区，东西向户型，独立卫生间🚪。靠近西三旗商圈🏢，生活便利🚇。2000年的房子，价格大降，千万别错过！👀
+>- 限时优惠！💰 育新东里二里二手房，89平米，满五年，海淀六小强学区，东西向户型，独立卫生间🚪。紧邻西三旗商圈🛍️，购物、餐饮、娱乐应有尽有🎉。2000年的房子，价格优惠，抓紧时间看房吧！👀
 
 
 ### LAION：Open Assistant
