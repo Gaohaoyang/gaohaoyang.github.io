@@ -358,6 +358,48 @@ Our evaluation uses 8 real complex question answering datasets, including **six*
 
 【2023-3-27】文档问答
 
+作者：[强化学徒](https://www.zhihu.com/question/589726461/answer/2961450933)
+
+#### New Bing
+
+- 优势：免费，快捷，可以联网，支持中英文，可以阅读本地PDF和网络论文，可以持续问答交互
+- 缺点：不稳定，识别内容有限，甚至于信息量低于摘要的内容。经常会输出一半就断了。
+
+#### chatpdf
+
+- 优势：交互方便，容易上手，可以持续问答交互缺点：全文总结信息量较低，问答模式偏向于关键词定位，然后上下文翻译，且已经收费，每月5刀。只支持本地PDF文档上传。
+
+#### scispace
+
+- 优势：交互方便，容易上手，可以持续问答交互，支持本地论文上传，可以公式截图解析，可以解释伪代码
+- 缺点：对中文支持较差，全文总结效果较差。
+
+#### aminer.cn
+
+清华唐杰老师他们组的工作！
+- ![](https://pic1.zhimg.com/80/v2-33843cf159df1ca9e4a28fa32a15a759_1440w.webp?source=1940ef5c)
+- ![](https://pic1.zhimg.com/80/v2-765efacd5340b65de02e79087ee91a07_1440w.webp?source=1940ef5c)
+
+- 优势：有热点论文推送！有论文打分，和别人的提问记录
+- 缺点：语义理解有限
+
+#### ChatPaper 开源
+
+中科大出品：ChatPaper, Use ChatGPT to summarize the arXiv papers. 全流程加速科研，利用chatgpt进行论文总结+润色+审稿+审稿回复
+- 功能：论文（离线/在线）总结+论文润色+AI审稿+AI审稿回复等功能。
+- [github](https://github.com/kaixindelele/chatpaper), [demo](https://chatpaper.org/)
+
+问题：
+- 前面几款工具都面临一个问题，全文总结的信息量较低，因为GPTs的输入token是**远低于**论文的全文文本的，而简单的翻译总结摘要，又拿不到多少有效信息
+
+方案：
+- 将abstract和introduction进行压缩，然后输入给chat进行总结
+
+效果
+- 每篇文章，调用五次chat，可以获得7到8成的信息量，并且格式化输出成中国人容易看懂的文本，极大的降低了大家的阅读门槛。几乎可以达到，AI花一分钟总结，人花一分钟看总结，就可以判断这篇文章是否需要精读的效果。
+- 如果需要**精读**，则可以调用上面的各种工具，尤其推荐scispace和aminer.
+
+
 #### PandasGPT
 
 - [PandaGPT](https://www.pandagpt.io/), 已有3w个文档，10w个问题
