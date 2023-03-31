@@ -525,9 +525,9 @@ Modular Architecture for Autonomous AI
    - [恐怖谷现象如何产生](https://www.zhihu.com/question/25865403) 
    - ![](https://pic1.zhimg.com/80/v2-07c5d951387f2454d7ab9023e391227b_720w.jpg?source=1940ef5c)
    - [可爱与可怕仅一步之遥](https://www.bilibili.com/video/BV1Vk4y127bM)
-   - <iframe src="//player.bilibili.com/player.html?aid=754321911&bvid=BV1Vk4y127bM&cid=224994851&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+   - <iframe src="//player.bilibili.com/player.html?aid=754321911&bvid=BV1Vk4y127bM&cid=224994851&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
    - [恐怖谷理论的六种解释](https://www.bilibili.com/video/BV1Bk4y167nq)
-   - <iframe src="//player.bilibili.com/player.html?aid=753265971&bvid=BV1Bk4y167nq&cid=195539386&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+   - <iframe src="//player.bilibili.com/player.html?aid=753265971&bvid=BV1Bk4y167nq&cid=195539386&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 ## 莫拉韦茨悖论
 
@@ -719,7 +719,7 @@ Neuralink and the Brain’s Magical Future](https://waitbutwhy.com/2017/04/neura
 
 - 视频：
 
-<iframe src="//player.bilibili.com/player.html?aid=83746758&cid=143264316&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=83746758&cid=143264316&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 - 【2021-3-11】[复旦Nature论文实现《三体》科幻场景：把显示屏穿身上，还能导航、聊天那种](https://www.jiqizhixin.com/articles/2021-03-11-4)，新一期《Nature》杂志刊载了复旦大学高分子科学系教授彭慧胜团队的一项研究成果——《[大面积显示织物及其功能集成系统](https://www.nature.com/articles/s41586-021-03295-8)》。
   - 在处理器的帮助下，人类脑电波可被转换为可读信息，并显示在织物上. 发光经纱 + 导电纬纱 = 显示织物. 该织物系统包括显示屏、键盘和电源，因而可作为通信工具来使用。它可以用电池充电，甚至使用太阳能。最重要的是，它还具备输入、沟通和导航等功能，是真正意义上的「可穿戴设备」。可以说，穿上它，你就是街上最「亮」的仔。
@@ -750,7 +750,7 @@ Neuralink and the Brain’s Magical Future](https://waitbutwhy.com/2017/04/neura
 - [福柯、乔姆斯基的一场世纪辩论——关于人性、公正与权力](https://www.bilibili.com/video/BV1Ht411Y7Nd)
 - [诺姆·乔姆斯基访谈——语言与知识【中英文字幕】](https://www.bilibili.com/video/BV1ht411c79j)
 
-<iframe src="//player.bilibili.com/player.html?aid=61449523&bvid=BV1ht411c79j&cid=106886489&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=61449523&bvid=BV1ht411c79j&cid=106886489&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
 # [语文是一切科学之母](https://zhuanlan.zhihu.com/p/151675013)
 
@@ -1293,7 +1293,7 @@ ANN则是是从信息处理角度对人脑神经元网络进行抽象，目前�
 
 其实早在2016年，谷歌就曾在愚人节那天发布过一辆理想中的自动驾驶自行车。
 
-<iframe src="//player.bilibili.com/player.html?aid=11696654&cid=19323090&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=11696654&cid=19323090&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 - [无水印版](https://www.bilibili.com/video/av7135972)（中文字幕，无英文）
 
 在谷歌的想象中，这辆“自行车”不仅平衡力超高
@@ -1306,7 +1306,7 @@ ANN则是是从信息处理角度对人脑神经元网络进行抽象，目前�
 
 但作为“愚人节视频“发布，也说明了这一技术的难点和不易实现。
 
-<iframe src="//player.bilibili.com/player.html?aid=36837684&cid=64694826&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=36837684&cid=64694826&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
 而在今天，清华施路平团队终于初步实现了这一想象。这样的黑科技似乎也带着一丝科幻色彩，让人畅想AGI到来的那天。
 
