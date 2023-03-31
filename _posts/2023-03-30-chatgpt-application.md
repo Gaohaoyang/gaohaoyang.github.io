@@ -769,7 +769,18 @@ BloombergGPT的训练数据库名为FINPILE，由一系列英文金融信息组�
 
 对于ConvFinQA来说，这个差距尤为显著，因为它需要使用对话式输入来对表格进行推理并生成答案，具有一定挑战性。
 
-### API
+### 插件
+
+
+3月24日，OpenAI宣布解除了ChatGPT无法联网的限制，以第三方插件为中介，使ChatGPT能访问其他网站并获取实时信息，还支持执行计算。
+
+此前，ChatGPT只能从训练数据当中提取信息，导致其输出结果大大受限。OpenAI官方称，此次推出的插件不仅允许ChatGPT浏览网页，还能让它与开发人员定义的API进行交互，使其能执行诸如搜索实时新闻、检索知识库等更具体的操作。
+
+ChatGPT的第一批插件由Expedia、FiscalNote、Instacart、KAYAK、Klarna、Milo、OpenTable、Shopify、Slack、Speak、Wolfram和Zapier等公司提供，这些插件的具体功能包括推荐餐厅、制定出游计划、网上商店购物、企业办公、信息检索、语言教学等，涵盖日常生活的衣食住行各个方面。“插件商店（ChatGPT Plugins Store）”的推出意味着其他服务成为了ChatGPT的“眼睛和耳朵”。
+
+ChatGPT的“插件商城”
+
+ChatGPT集成第三方插件，成为聊天版“App Store”
 
 #### TaskMatrix
 
@@ -802,6 +813,16 @@ BloombergGPT的训练数据库名为FINPILE，由一系列英文金融信息组�
 搭建TaskMatrix的原因，从学术角度来说主要有两点。
 - 其一，扩大AI适用范围，如通过扩展API来提升可完成任务的类型和数量；
 - 其二，便于进一步提升AI可解释性，通过观察AI分配任务的方式就能理解它的“思路”。
+
+### 机器人
+
+【2023-3-23】[GPT机器人要来了？OpenAI领投挪威人形机器人公司1X](https://finance.sina.com.cn/stock/usstock/c/2023-03-27/doc-imynishv4555021.shtml)
+
+挪威人形机器人公司1X Technologies（前称为Halodi Robotics）宣布在OpenAI领投的A2轮融资中筹集了2350万美元。
+- 消息一出，便引发了外界对于GPT模型和机器人结合的无限遐想。其中一个景象便是，人形机器人管家从电影走入现实生活，它不仅能够帮助人类做家务，还可以理解人类的语言，识别人类的情绪，并做出真正智能化的回应。
+
+1X计划用这笔资金来加大力度研发双足机器人模型NEO，以及在挪威和北美量产其首款商用机器人EVE。
+- ![](https://n.sinaimg.cn/finance/crawl/59/w550h309/20230327/c263-22383f0bac24529609428a1f23eb2366.jpg)
 
 ## GPT 威胁
 
