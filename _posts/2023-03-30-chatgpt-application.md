@@ -448,6 +448,42 @@ ChatGPT也可以与其他AIGC模型联合使用，获得更加炫酷实用的功
 - 开发ChatGPT小程序
   - 做一个小程序，把ChatGPT的功能做到小程序上，打开就能直接用。不到3天小程序急速完成上线，上线当天用户量就突破1000，涨势非常好。正预想着日活过万，然后小程序就被举报封了，发布的两个小程序同时被封。举报人和我正好同在一个微信群里，虽然很难过，但还是接受了现实，大家都按丛林法则生存。
 
+### 应用图谱
+
+<div class="mermaid">
+    flowchart LR
+    %% 节点颜色
+    classDef red fill:#F09;
+    classDef green fill:#5CF77B;
+    classDef blue fill:#6BE0F7;
+    classDef orange fill:#F7CF6B;
+    classDef grass fill:#C8D64B;
+    %%节点关系定义
+    D(GPT-3):::grass
+    D-->|2022-2,OpenAI,反馈强化学习|E(Instruct GPT):::green
+    E-->|2022-11,OpenAI,聊天反馈|F(ChatGPT):::red
+    E-->|2023-3-15,多模态,图像理解|G(GPT-4):::green
+
+    D-->|2023-3-22,Action GPT|A(3D建模):::orange
+    D-->|2020-1-17,图像领域,GPT-2|IG(Image GPT):::orange
+
+    F-->|微软,搜索引擎\nNewBing\nBARD|F00(搜索引擎):::blue
+    F-->|2023-3-24,Office 365|F01(办公软件):::blue
+    F-->|2023-3-26,Coipilot\nCursor|F02(编程软件):::blue
+    F-->|语料扩充\nNLP评估\n标注平台|F03(NLP基础任务):::blue
+    F-->|2023-3-25,医疗问答,ChatDoctor\n心理测评|F1(领域问答助手):::blue
+    IG-->|2023-3-27,装修设计图生成 RoomGPT|F2(领域图像生成):::blue
+    V(扩散模型)-->F2
+    F-->|2023-3-31,金融知识BloombergGPT|F3(领域大模型):::blue
+    F-->|2023-3-24,Plugin|F4(插件商城):::blue
+    F-->|2023-3-31,TaskMatrix\n机器人+物联网|F5(API驱动):::blue
+    F-->|2023-3-9,微软,开源多模态问答系统\nVisual ChatGPT|F6(多模态问答):::blue
+    F-->|2023-3-9,文档聊天\nPandasGPT+ChatDOC\nChatPaper+ChatPDF|F7(DocumentQA):::blue
+</div>
+
+
+
+
 
 ### 数据处理
 
