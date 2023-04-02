@@ -305,6 +305,16 @@ ChatGPT无非就是微调的GPT-3，唯一的不同不过是知识的**指向性
     S2-->|2017,多头注意力单元,多层,并行训练|T(Transformer):::red
 </div>
 
+【2023-4-2】seq2seq演进过程：
+- `RNN`: 时序输入，但要求输入输出一一对应，能解决 1->N, N->N, N->1，而 N->M 无能为力
+- `Seq2Seq`: Encoder-Decoder结构（局部是RNN），将信息压缩到Context向量中, 实现 N->M的变长输入输出; 但 Context 存储信息量有限，如果句子太长，翻译精读就会下降。
+- `Seq2Seq`+`Attention`: Context向量升级为矩阵, 解码时自动获取最重要的单词上文,成功摆脱了对句子长度的限制；但 计算速度太慢
+- `Seq2Seq`+`Self-attention`(`Transformer`): 自注意力机制，先选取单词的意义，再根据顺序选取要生成的信息，支持并行计算，接近人类的翻译方式。
+
+<iframe src="//player.bilibili.com/player.html?aid=586825595&bvid=BV1Zz4y127h1&cid=302259616&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+参考：[什么是transformer？](https://www.bilibili.com/video/BV1Zz4y127h1/)
+
 ### Simple RNN
 
 - encoder-decoder模型结构中，encoder将整个源端序列(不论长度)压缩成一个向量(encoder output)，源端信息和decoder之间唯一的联系只是: encoder output会作为decoder的initial states的输入。这样带来一个显而易见的问题就是，随着decoder长度的增加，encoder output的信息会衰减。
