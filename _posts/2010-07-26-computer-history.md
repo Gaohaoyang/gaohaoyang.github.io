@@ -635,6 +635,10 @@ Go之父闪光点
     click I "https://wqw547243068.github.io/go" "go语言"
 </div>
 
+
+【2023-4-3】「计算机基础」编程语言[图解](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/4608a6df2dc34317a25f0e1cdaa9346e~tplv-obj:1570:1794.image?_iz=97245&from=post&x-expires=1688256000&x-signature=yT978WB%2F0mW03mvLYnYkMmcNUNM%3D)
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/4608a6df2dc34317a25f0e1cdaa9346e~tplv-obj:1570:1794.image?_iz=97245&from=post&x-expires=1688256000&x-signature=yT978WB%2F0mW03mvLYnYkMmcNUNM%3D)
+
 ### 语言汇总
 
 - TIOBE 公司，每月会发布一版编程语言的流行度[排行榜](https://www.tiobe.com/tiobe-index/)
