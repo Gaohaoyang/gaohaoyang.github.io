@@ -1635,7 +1635,7 @@ huggingface
 
 ChatGLM 当前版本模型的能力提升主要来源于独特的千亿基座模型 `GLM-130B`。它不同于 BERT、GPT-3 以及 T5 的架构，是一个包含**多目标函数**的自回归预训练模型。
 
-2022 年 8 月，`清华大学`联合`智谱AI` 向研究界和工业界开放了拥有 1300 亿参数的中英双语稠密模型 `GLM-130B`，该模型有一些独特的优势：
+2022 年 8 月，`清华大学`联合[智谱AI](https://www.zhipuai.cn/index.html)（唐杰、李涓子，公司名:[北京智谱华章科技有限公司](https://www.qcc.com/firm/3e6bd6d29872b6c3a14f72f4ef6b9197.html)） 向研究界和工业界开放了拥有 1300 亿参数的中英双语稠密模型 `GLM-130B`，该模型有一些独特的优势：
 - 双语：同时支持中文和英文；
 - 高精度（英文）：在公开的英文自然语言榜单 LAMBADA、MMLU 和 Big-bench-lite 上优于 GPT-3 175B（API: davinci，基座模型）、OPT-175B 和 BLOOM-176B；
 - 高精度（中文）：在 7 个零样本 CLUE 数据集和 5 个零样本 FewCLUE 数据集上明显优于 ERNIE TITAN 3.0 260B 和 YUAN 1.0-245B；
