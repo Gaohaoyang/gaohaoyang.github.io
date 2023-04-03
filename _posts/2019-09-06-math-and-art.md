@@ -917,6 +917,14 @@ K理论是代数与几何的有趣结合。最初是为了拓扑空间（向量�
 
 # 资料
 
+## 数学软件
+
+【2023-4-3】wolfram language 是图灵完备的编程语言, 计算机代数系统
+- mathematica软件擅长数学，科学计算；
+- MATLAB 是竞争对手.但是 MATLAB 不是图灵完备的, 编程能力比较差；
+
+近期还有用mathematica[实现chatgpt](https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/)
+
 ## 数列
 
 【2023-1-28】[数列推理问题常见解法](https://zhuanlan.zhihu.com/p/37848359)
