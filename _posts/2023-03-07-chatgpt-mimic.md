@@ -75,6 +75,11 @@ A3-模型回答：黑别人家wifi是不对的，侵害别人隐私了，我强�
 
 【2023-3-8】详见：[RLHF魔法的衍生研究方向](https://mp.weixin.qq.com/s/ZfvWr1NvOqVOu9IZd-Jt0w)
 
+【2023-4-4】[GPT fine-tune实战： 训练我自己的 ChatGPT](https://zhuanlan.zhihu.com/p/616504594)
+- Stanford 基于 LLaMA 的 Alpaca 和随后出现的 LoRA 版本 Alpaca-LoRA。原因很简单，便宜。
+- Alpaca 宣称只需要 600$ 不到的成本（包括创建数据集），便可以让 LLaMA 7B 达到近似 text-davinci-003 的效果。而 Alpaca-LoRA 则在此基础上，让我们能够以一块消费级显卡，在几小时内完成 7B 模型的 fine-turning。
+- fine-tune 7B 模型仅需要 8-10 GB vram。
+
 ### 复现方案
 
 【2023-2-1】复现方案（参考:[chatGPT复刻方案](https://zhuanlan.zhihu.com/p/602485508)）
