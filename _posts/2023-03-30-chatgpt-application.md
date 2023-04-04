@@ -476,7 +476,8 @@ ChatGPT也可以与其他AIGC模型联合使用，获得更加炫酷实用的功
     V(扩散模型)-->F2
     F-->|2023-3-31,金融知识BloombergGPT|F3(领域大模型):::blue
     F-->|2023-3-24,Plugin|F4(插件商城):::blue
-    F-->|2023-3-31,TaskMatrix\n机器人+物联网|F5(API驱动):::blue
+    F-->|2023-3-31,TaskMatrix\n2023-4-3,HuggingGPT,微软开源|F5(API驱动):::blue
+    F-->|2023-4-3,HuggingGPT,微软开源|F5(多模态封装):::blue
     F-->|2023-3-9,微软,开源多模态问答系统\nVisual ChatGPT|F6(多模态问答):::blue
     F-->|2023-3-9,文档聊天\nPandasGPT+ChatDOC\nChatPaper+ChatPDF|F7(DocumentQA):::blue
     F-->|2023-4-2,推荐系统\nChatREC|F8(推荐系统):::blue
@@ -860,6 +861,34 @@ ChatGPT集成第三方插件，成为聊天版“App Store”
 搭建TaskMatrix的原因，从学术角度来说主要有两点。
 - 其一，扩大AI适用范围，如通过扩展API来提升可完成任务的类型和数量；
 - 其二，便于进一步提升AI可解释性，通过观察AI分配任务的方式就能理解它的“思路”。
+
+#### HuggingGPT
+
+【2023-4-3】[HuggingGPT：一个ChatGPT控制所有AI模型，自动帮人完成AI任务](https://www.toutiao.com/article/7217680526839202307),浙大与微软亚研院的合作成果. 
+- [paper](https://arxiv.org/abs/2303.17580)
+- 项目已开源，名叫「贾维斯」,钢铁侠里的AI管家贾维斯（[JARVIS](https://github.com/microsoft/JARVIS)）。
+- 和3月份刚发布的Visual ChatGPT的思想非常像：后者HuggingGPT，主要是可调用的模型范围扩展到了更多，包括数量和类型。
+
+语言是通用的接口。于是，HuggingGPT就诞生了。工程流程分为四步：
+- 首先，任务规划。ChatGPT将用户的需求解析为任务列表，并确定任务之间的执行顺序和资源依赖关系。
+- 其次，模型选择。ChatGPT根据HuggingFace上托管的各专家模型的描述，为任务分配合适的模型。
+- 接着，任务执行。混合端点（包括本地推理和HuggingFace推理）上被选定的专家模型根据任务顺序和依赖关系执行分配的任务，并将执行信息和结果给到ChatGPT。
+- 最后，输出结果。由ChatGPT总结各模型的执行过程日志和推理结果，给出最终的输出。
+
+请求：
+> 请生成一个女孩正在看书的图片，她的姿势与example.jpg中的男孩相同。然后请用你的声音描述新图片。
+
+可以看到HuggingGPT是如何将它拆解为6个子任务，并分别选定模型执行得到最终结果的。
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/cef09fd55855447c80ebe387c3376566~noop.image?_iz=58558&from=article.pc_detail&x-expires=1681185700&x-signature=gCXw63eEBk%2FqSX6NUbCm2SAJLQo%3D)
+
+用gpt-3.5-turbo和text-davinci-003这俩可以通过OpenAI API公开访问的变体，进行了实测。如下图所示：
+- 在任务之间存在资源依赖关系的情况下，HuggingGPT可以根据用户的抽象请求正确解析出具体任务，完成图片转换。
+
+在音频和视频任务中，它也展现了组织模型之间合作的能力，通过分别并行和串行执行两个模型的方式，完了一段“宇航员在太空行走”的视频和配音作品。
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/e6db6415cbd348d19d0ddaa6cd25ec3a~noop.image?_iz=58558&from=article.pc_detail&x-expires=1681185700&x-signature=5kpy%2Bz12gyq1MjUpDM2ewDVw4pU%3D)
+
+还可以集成多个用户的输入资源执行简单的推理，比如在以下三张图片中，数出其中有多少匹斑马。
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/809148f403f3486eae6f7e1f9c172116~noop.image?_iz=58558&from=article.pc_detail&x-expires=1681185700&x-signature=x8aBJK6pJiGy309RKsS%2Bm52Kw2w%3D)
 
 ### 机器人
 
