@@ -479,9 +479,10 @@ ChatGPT也可以与其他AIGC模型联合使用，获得更加炫酷实用的功
     F-->|2023-3-31,TaskMatrix\n机器人+物联网|F5(API驱动):::blue
     F-->|2023-3-9,微软,开源多模态问答系统\nVisual ChatGPT|F6(多模态问答):::blue
     F-->|2023-3-9,文档聊天\nPandasGPT+ChatDOC\nChatPaper+ChatPDF|F7(DocumentQA):::blue
+    F-->|2023-4-2,推荐系统\nChatREC|F8(推荐系统):::blue
+
+
 </div>
-
-
 
 
 
@@ -665,6 +666,16 @@ Our evaluation uses 8 real complex question answering datasets, including **six*
 - ChatDOC 目前免费，文件大小限制为 200 页，最多可以上传 5 个文档。在即将更新的版本中，还支持跨多个文档的综合查询和问答。
 - ![](https://pic2.zhimg.com/80/v2-c73f17ecea423a82aad0ac7c110bd625_720w.webp)
 
+### 推荐系统
+
+【2023-4-4】[Chat-REC: 当推荐系统遇上 ChatGPT, 会发生什么奇妙反应](https://mp.weixin.qq.com/s/ulV8R72zSStdwwNfhtys_g)
+- [Chat-REC: Towards Interactive and Explainable LLMs-Augmented Recommender System](https://arxiv.org/abs/2303.14524)
+
+推荐系统已被广泛部署用于自动推断人们的偏好并提供高质量的推荐服务。然而大多数现有的推荐系统仍面临诸多缺陷，例如缺少交互性、可解释性，缺乏反馈机制，以及冷启动和跨域推荐。
+
+本文中提出了一种用 LLMs 增强传统推荐的范式 Chat-Rec（ChatGPT Augmented Recommender System）。通过将用户画像和历史交互转换为 Prompt，Chat-Rec 可以有效地学习用户的偏好，它不需要训练，而是完全依赖于上下文学习，并可以有效推理出用户和产品之间之间的联系。通过 LLM 的增强，在每次对话后都可以迭代用户偏好，更新候选推荐结果。
+
+此外，产品之间的用户偏好是相关联的，这允许更好的跨域产品推荐。Chat-Rec 为运用 ChatGPT 等对话 AI 进行多种推荐情景的应用提供了有希望的技术路线。
 
 ### 办公
 
