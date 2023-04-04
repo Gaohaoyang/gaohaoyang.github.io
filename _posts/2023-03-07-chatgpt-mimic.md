@@ -1155,8 +1155,22 @@ layer = lora.Linear(in_features, out_features, r=16)
 
 #### PEFT
 
-Parameter-Efficient Fine-Tuning (`PEFT`) 是一个 Hugging Face 库，支持在 LLM 上创建和微调适配器层。
+Parameter-Efficient Fine-Tuning (`PEFT`) 是HuggingFace 开源的一个高效微调大模型库，支持在 LLM 上创建和微调适配器层。
 - peft 与  🤗 Accelerate 无缝集成，用于利用了 DeepSpeed 和 Big Model Inference 的大规模模型。
+
+目前包含LoRA，Prefix Tuning，Prompt Tuning，P-Tuning 四种算法
+*   LoRA
+*   [Prefix Tuning](https://link.zhihu.com/?target=https%3A//arxiv.org/pdf/2110.07602.pdf)
+  - Prefix Tuning 算法是根据 下游任务 "前缀指令文本" 的所有层的embeding表示，学习到的前缀指令文本向量可以挖掘大模型的潜力去引导模型完成特定任务。
+  - ![](https://pic3.zhimg.com/80/v2-9a6b5792cf60079429d067fc629e65ae_1440w.webp)
+*   [P-Tuning](https://link.zhihu.com/?target=https%3A//arxiv.org/pdf/2103.10385.pdf)
+  - P-Tuning 算法和 Prefix Tuning 的想法很相似，想通过微调"指令文本",让指令文本去挖掘大模型的潜力去完成特定的任务。但是 P-Tuning 只学习 "指令文本" 输入层embeding的的表示。 为了增强 "指令文本"的连续性，采用了一个 MLP(LSTM) 的结果去encoding "指令文本"。从微调参数量来看只有 0.65% 比 Prefix Tuning 和 LoRA 这些在所有层都增加参数的方法要少。
+  - ![](https://pic3.zhimg.com/80/v2-7540fb5d913adcae8be308fce31befea_1440w.webp)
+*   [Prompt Tuning](https://link.zhihu.com/?target=https%3A//arxiv.org/pdf/2104.08691.pdf)
+  - Prompt Tuning 算法和 P-Tuning 很像，且更简单，就是是根据 下游任务 "指令文本" 输入层embeding的的表示。 Prompt Tuning 没有增加任何的层，直接使用微调指令文本(prompt) 的embeding向量。
+  - ![](https://pic3.zhimg.com/80/v2-b281f773be36787dddd0f06e782384b2_1440w.webp)
+
+[详见](https://zhuanlan.zhihu.com/p/618695885)
 
 [Parameter-Efficient Fine-Tuning](https://github.com/huggingface/peft) (PEFT)
 
