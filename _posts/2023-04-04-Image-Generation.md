@@ -141,7 +141,7 @@ stable_diffusion)
 
 ### 扩散模型不足
 
-- 原始扩散模型的三个主要缺点，采样速度慢，最大化似然差、数据泛化能力弱，并提出将的diffusion models改进研究分为对应的三类：采样速度提升、最大似然增强和数据泛化增强。我们首先说明改善的动机，再根据方法的特性将每个改进方向的研究进一步细化分类，从而清楚的展现方法之间的联系与区别。
+原始扩散模型的三个主要缺点，采样速度慢，最大化似然差、数据泛化能力弱，并提出将的diffusion models改进研究分为对应的三类：采样速度提升、最大似然增强和数据泛化增强。我们首先说明改善的动机，再根据方法的特性将每个改进方向的研究进一步细化分类，从而清楚的展现方法之间的联系与区别。
 - ![](https://pic3.zhimg.com/80/v2-fdd70cb55e77a157ba600b4329aa3796_1440w.webp)
 
 未来研究方向
@@ -149,6 +149,36 @@ stable_diffusion)
 - B. diffusion model已经成为一个强大的框架，可以在大多数应用中与生成对抗性网络（GAN）竞争，而无需诉诸对抗性训练。对于特定的任务，我们需要了解为什么以及何时扩散模型会比其他网络更加有效，理解扩散模型和其他生成模型的区别将有助于阐明为什么扩散模型能够产生优秀的样本同时拥有高似然值。另外，系统地确定扩散模型的各种超参数也是很重要的。
 - C. diffusion model如何在隐空间中提供良好的latent representation，以及如何将其用于data manipulation的任务也是值得研究的。
 - D. 将diffusion model和generative foundation model结合，探索更多类似于ChatGPT，GPT-4等有趣的AIGC应用
+
+### 模型改进
+
+#### ControlNet
+
+文本生成图像只需要用户输入文本(Prompts)就可以实现图像生成，但是由于扩散模型本身特性（diversity较强），生成的图像往往不受控制，不见得能精准满足用户的需求，如何提升生成的可控性？
+
+【2023-4-4】[ControlNet: 给以文生图模型添加条件约束](https://zhuanlan.zhihu.com/p/608161469)
+- Stable Diffusion (SD)模型，添加**额外**条件（Edge Map, Sketch, Depth Info, Segmentation Map, Human Pose, Normal Maps）做**受控**图像生成的方法，主要思路在SD模型中为添加与UNet结构类似的ControlNet以学习额外条件信息，映射进参数固定的SD模型中，完成条件生成。
+- 【2023-2-10】论文 [Adding Conditional Control to Text-to-Image Diffusion Models](https://arxiv.org/pdf/2302.05543.pdf)
+- [ControlNet代码](https://github.com/lllyasviel/ControlNet), [model](https://huggingface.co/lllyasviel/ControlNet/tree/main)
+- ![](https://pic4.zhimg.com/80/v2-a223547711e54464811ec00a01e6a367_1440w.webp)
+- 固定原始网络参数，复制一个可以训练的拷贝网络，对于输入的条件c，通过零卷积(zero convolution)，与网络原本的输入x进行特征加和，之后对于拷贝网络的输出，同样通过领卷积处理后与原始网络进行特征加和，输出最终的结果。
+- 零卷积(zero convolution):权重和偏置都是用0初始化的1 x 1卷积。
+- 零卷积的好处：在训练刚开始的阶段，controlNet的输出对原始网络没有影响，这样之后的任何优化基本上等同于在finetune这个模型，速度会比较快。
+- ![](https://pic4.zhimg.com/80/v2-a87dde8bbc7562ef282f4f7cc8f31e47_1440w.webp)
+
+实验效果
+
+|受控条件|效果|备注|
+|---|---|---|
+| Canny Edge | ![](https://pic4.zhimg.com/80/v2-94c287574b4f7dd8e66a94c21ae16df7_1440w.webp)||
+| Hough Lines| ![](https://pic2.zhimg.com/80/v2-a2b3d0aaa8c6e7d8dd07f84fb68ce81d_1440w.webp) ||
+| Human Scribbles | ![](https://pic2.zhimg.com/80/v2-166ee3740b1d8f5fbce1b5d9b812094d_1440w.webp)||
+| HED boundary map | ![](https://pic4.zhimg.com/80/v2-6e89cd43a5de03be8588a42da98ef2a3_1440w.webp)||
+| Human Pose | ![](https://pic1.zhimg.com/80/v2-98a946f44d307cab1500bb8b332261a4_1440w.webp) ||
+| Segmentation Map | ![](https://pic1.zhimg.com/80/v2-60c525ddbad89d196bd3f412b260d6a8_1440w.webp) ||
+| Cartoon Line Drawing | ![](https://pic1.zhimg.com/80/v2-d98b515e5991e6b040bb0eac31130e24_1440w.webp) ||
+
+
 
 ## AI 作画
 
@@ -161,6 +191,13 @@ stable_diffusion)
 - 于是，2022年以AI绘画为代表的各种生成式AI工具，如雨后春笋般疯狂冒尖，比如盗梦师、意间AI、6pen、novelAI等等。
 
 ### 汇总
+
+AI作画三巨头
+- Mid Journey : 地表最强AI
+- Stable Diffusion : 低调神秘慈善家
+- Dall-E 2 : 甲方终结者
+
+Midjourney 的内容限制确实比其他竞争对手（例如 OpenAI 的 DALL-E）更宽松，但目前的管控宽松之王仍然是 Stable Diffusion。
 
 可使用的AI作画平台
 - github: [awesome-ai-painting](https://github.com/hua1995116/awesome-ai-painting)
@@ -219,6 +256,107 @@ stable_diffusion)
 |爱作画 | 有免费次数 + 付费 |https://aizuohua.com/|
 |皮卡智能AI | 免费 |https://www.picup.shop/text2image.html#/ |
 
+### Stable Diffusion
+
+Stable Diffusion is a state of the art text-to-image model that generates images from text.
+- transformers上的 [Stable Diffusion Demo](https://huggingface.co/spaces/stabilityai/stable-diffusion)
+- For faster generation and forthcoming API access you can try [DreamStudio Beta](http://beta.dreamstudio.ai/)
+- <iframe src="https://beta.dreamstudio.ai/dream">
+
+本地部署
+- 模型比较大，所以必须要有NVIDIA GPU，至少4GB VRAM，本地磁盘至少有15GB的空间，我们打包的项目解压后需要11G的磁盘。
+
+【2023-4-3】[Kaggle Stable Diffusion赛题 高分思路](https://mp.weixin.qq.com/s/LDWa7sR__MFjbj0CTHajcA)
+
+#### 介绍
+
+Stable Diffusion 是以文本生成图像的 AI 工具，`慕尼黑大学`的CompVis小组开发，基于潜在扩散模型打造，也是**唯一**一款能部署在家用电脑上的 AI 绘图工具，可以在 6GB 显存显卡或无显卡（只依赖 CPU）下运行，并在几秒钟内生成图像，无需预处理和后处理。
+- [stability ai](https://stability.ai/) 公司以此为基础
+
+[Stable Diffusion](https://stablediffusionweb.com/)
+- Stable Diffusion is a latent text-to-image diffusion model capable of generating photo-realistic images given any text input, cultivates autonomous freedom to produce incredible imagery, empowers billions of people to create stunning art within seconds.
+- [demo](https://stablediffusionweb.com/#demo)
+
+#### 体验方法
+
+体验方法
+- （1）在线工具：[Hugging Face](https://huggingface.co/spaces/stabilityai/stable-diffusion) 和 [DreamStudio](https://beta.dreamstudio.ai/)。与本地部署相比
+  - [Hugging Face](https://huggingface.co/spaces/stabilityai/stable-diffusion)需排队，生成一张图约 5 分钟；
+  - [DreamStudio](https://beta.dreamstudio.ai/) 可免费生成 200 张图片，之后需要缴费。
+  - 注意：这类在线工具对图片的调教功能偏弱，无法批量生成图片，只能用于测试体验。
+- （2）本地部署：适合大批量使用，[参考](https://zhuanlan.zhihu.com/p/563073449)
+  - Docker Desktop 将 [Stable Diffusion WebUI Docker](https://github.com/AbdBarho/stable-diffusion-webui-docker) 部署在 Windows 系统，从而利用 NVIDIA 显卡免费实现 AI 文字绘画，不再被在线工具所限制。Mac 同样适用于该方法，并可省略下方的环境配置步骤。
+  - ![](https://pic4.zhimg.com/80/v2-3ee8f0fad4499798263ae5d8295574b3_1440w.webp)
+
+#### 如何画出好作品？
+
+官方文档描述文字的要素和标准。
+
+样例：
+> A beautiful painting (画作种类) of a singular lighthouse, shining its light across a tumultuous sea of blood (画面描述) by greg rutkowski and thomas kinkade (画家/画风), Trending on artstation (参考平台), yellow color scheme (配色)。
+
+要素
+- **画作种类**：ink painting（水墨画），oil painting（油画），comic（漫画），digital painting（数字印刷品），illustration（插画），realistic painting（写实画），portrait photo（肖像照）等等，可叠加多个种类描述。
+- **参考平台**：Trending on artstation，也可以替换为「Facebook」「Pixiv」「Pixbay」等等。下方提供相同参数下不同参考平台生成的图片风格。
+- **画家/画风**：成图更接近哪位画家的风格，此处可以输入不止一位画家，如「Van Gogh:3」and「Monet:2」，即作品三分像梵高，两分像莫奈；或直接描述风格种类，如 very coherent symmetrical artwork，将作品结构设为连贯对称的。
+- **配色**：yellow color scheme 指整个画面的主色调为黄色。
+- **画面描述**：除了对主题进行描述，还可以添加多个画面元素，如 beautiful background, forest, octane render, night；添加画面质量描述，如 highly detailed, digital painting, Trending on artstation, concept art, smooth, sharp focus, illustration,8k。
+
+
+### MidJourney
+
+Mid 是一款搭载在`discord`上的人工智能绘画聊天机器人
+- Midjourney 5 显著提高 了人物图像的描绘质量。例如，以往 AI 生成图像总是处理不好手部形态，这在新版本中已不再是问题。光照和面料质感更加真实，新系统还能生成无数名人和公众人物的形象。
+
+`Midjourney` 的工作机制与 `Stable Diffusion` 和 `DALL-E` 等图像合成器相近，它使用了经过数百万人造艺术作品训练的 AI 模型，根据称为“提示”的文本描述生成图像。
+
+【2023-3-17】Midjourney 发布了其商用 AI 图像合成服务的第 5 版。该服务可以生成非常逼真的图像，其质量水平极高，一些 AI 艺术爱好者认为这些输出令人毛骨悚然且“过于完美”。Midjourney v5 现在处于 alpha 测试阶段，提供给订阅 Midjourney 服务的客户，该服务可通过 Discord 获取。
+
+【2023-3-30】图像生成器 Midjourney 已叫停免费试用。公司创始人 CEO David Holz 在采访中表示，此举的主要原因是新用户的大量涌入，很多人为了回避付费而注册一次性账户。存在“怪异需求和试用滥用”，可能来自中国的一段操作教学视频，再加上 GPU 临时性短缺，导致付费用户的服务陷入了瘫痪
+- 跟 Midjourney 最近生成的一系列病毒式传播图像有关。包括 Trump 被捕和教皇身着时尚夹克的伪造图像，都被部分网民误认为真实存在。
+
+一个AI 生成算图工具，只需输入文字就会自动产生图像，Midjourney目前架设在Discord频道上，因此需要有Discord帐号才能使用。
+- [Discord](https://discord.com)是一款专为社群设计的免费通讯社交软体，类似于LINE或Slack，但功能更为强大，自带机器人与各种程式功能，能够在上面发开自己工具，有网页版与手机版APP。
+
+使用方法 [参考](https://zhuanlan.zhihu.com/p/527544265)
+- #Newbies从侧边栏中选择一个频道
+- 使用 /imagine 命令+空格输入关键词
+- ![](https://pic2.zhimg.com/80/v2-b99e9339ad0f79a68a152b0f7b71d965_1440w.webp)
+- 等待 MidJourney 机器人处理您的请求。 请求需要一分钟才能根据您的提示生成四个选项。
+
+
+### Disco Diffusion
+
+Disco Diffsion 存在问题
+
+基于多模态图像生成模型 Disco Diffusion（DD）进行 AI 创作目前存在以下几个问题：
+- （1）生成图像质量参差不齐：根据生成任务的难易程度，粗略估算描述内容较难的生成任务良品率 20%～30%，描述内容较容易的生成任务良品率 60%～70%，大多数任务良品率在 30～40% 之间。
+- （2）生成速度较慢+内存消耗较大：以迭代 250 steps 生成一张 1280*768 图像为例，需要大约花费 6分钟，以及使用 V100 16G 显存。
+- （3）严重依赖专家经验：选取一组合适的描述词需要经过大量文本内容试错及权重设置、画家画风及艺术社区的了解以及文本修饰词的选取等；调整参数需要对 DD 包含的 CLIP 引导次数/饱和度/对比度/噪点/切割次数/内外切/梯度大小/对称/... 等概念深刻了解，同时要有一定的美术功底。众多的参数也意味着需要较强的专家经验才能获得一张还不错的生成图像。
+
+
+### DALL·E
+
+DALL·E由OpenAI在2021年初提出，旨在训练一个输入文本到输出图像的自回归解码器。由CLIP的成功经验可知，文本特征和图像特征可以编码在同一特征空间中，因此我们可以使用Transformer将文本和图像特征自回归建模为单个数据流（“autoregressively models the text and image tokens as a single stream of data”）。
+
+DALL·E的训练过程分成两个阶段，一是训练一个变分自编码器用于图像编解码，二是训练一个文本和图像的自回归解码器用于预测生成图像的Tokens，如图所示。
+- ![](https://pic4.zhimg.com/80/v2-fe456ce3b3d44ca8b55130a9808587b7_1440w.webp)
+
+推理过程则比较直观，将文本Tokens用自回归Transformer逐步解码出图像Tokens，解码过程中我们可以通过分类概率采样多组样本，再将多组样本Tokens输入变分自编码中解码出多张生成图像，并通过CLIP相似性计算排序择优
+- ![](https://pic4.zhimg.com/80/v2-18c8e60881c49e29b2684a8d59890817_1440w.webp)
+
+### DALL·E 2
+
+为了进一步提升图像生成质量和探求文本-图像特征空间的可解释性，OpenAI结合扩散模型和CLIP在2022年4月提出了DALL·E 2，不仅将生成尺寸增加到了1024*1024，还通过特征空间的插值操作，可视化了文本-图像特征空间的迁移过程。
+
+如图所示，DALL·E 2将CLIP对比学习得到的text embedding、image embedding作为模型输入和预测对象，具体过程是学习一个先验Prior，从text预测对应的image embedding，文章分别用自回归Transformer和扩散模型两种方式训练，后者在各数据集上表现更好；再学习一个扩散模型解码器UnCLIP，可看做是CLIP图像编码器的逆向过程，将Prior预测得到的image embedding作为条件加入中实现控制，text embedding和文本内容作为可选条件，为了提升分辨率UnCLIP还增加了两个上采样解码器（CNN网络）用于逆向生成更大尺寸的图像。
+- ![](https://pic4.zhimg.com/80/v2-9c369b9f54f1491f8954928584de96d7_1440w.webp)
+
+### lexica
+
+【2023-3-30】[lexica](https://lexica.art/aperture)
+- 图片搜索：语义搜索
+- 图片生成：可控部分除了描述图片的文字，还可以设置负向提示（prompt）
 
 ### Tiktok
 
@@ -230,75 +368,12 @@ stable_diffusion)
 - 生成结果具有非常强的水彩/油画感觉，风格迁移 (style transfer) 的痕迹明显，而且用的颜色也都鲜亮明快，给人一种耳目一新的感受。
 - ![](https://p4.itc.cn/q_70/images03/20220816/902b3d3e8e8d45e0aba3be1bdf1694e6.png)
 
-### Disco Diffusion
+### IDEA 太乙
 
-Disco Diffsion 存在问题
+在StabilityAI发布Stable Diffusion模型之后不久，国内的`IDEA`研究院`封神榜`团队很快就训练出了名为“`太乙`”的中文版Stable Diffusion。与原版的Stable Diffusion不同，太乙Stable Diffusion可以更好地理解中文的语言文化环境。
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/TWUr4QTEmySohL~noop.image?_iz=58558&from=article.pc_detail&x-expires=1678177682&x-signature=gYfmYX%2FkWUzH%2F7pJHBy4fObMzkk%3D)
 
-基于多模态图像生成模型 Disco Diffusion（DD）进行 AI 创作目前存在以下几个问题：
-- （1）生成图像质量参差不齐：根据生成任务的难易程度，粗略估算描述内容较难的生成任务良品率 20%～30%，描述内容较容易的生成任务良品率 60%～70%，大多数任务良品率在 30～40% 之间。
-- （2）生成速度较慢+内存消耗较大：以迭代 250 steps 生成一张 1280*768 图像为例，需要大约花费 6分钟，以及使用 V100 16G 显存。
-- （3）严重依赖专家经验：选取一组合适的描述词需要经过大量文本内容试错及权重设置、画家画风及艺术社区的了解以及文本修饰词的选取等；调整参数需要对 DD 包含的 CLIP 引导次数/饱和度/对比度/噪点/切割次数/内外切/梯度大小/对称/... 等概念深刻了解，同时要有一定的美术功底。众多的参数也意味着需要较强的专家经验才能获得一张还不错的生成图像。
-
-### Stable Diffusion
-
-Stable Diffusion is a state of the art text-to-image model that generates images from text.
-
-- transformers上的 [Stable Diffusion Demo](https://huggingface.co/spaces/stabilityai/stable-diffusion)
-- For faster generation and forthcoming API access you can try [DreamStudio Beta](http://beta.dreamstudio.ai/)
-- <iframe src="https://beta.dreamstudio.ai/dream">
-
-本地部署
-- 模型比较大，所以必须要有NVIDIA GPU，至少4GB VRAM，本地磁盘至少有15GB的空间，我们打包的项目解压后需要11G的磁盘。
-
-【2023-4-3】[Kaggle Stable Diffusion赛题 高分思路](https://mp.weixin.qq.com/s/LDWa7sR__MFjbj0CTHajcA)
-
-
-#### ControlNet
-
-文本生成图像只需要用户输入文本(Prompts)就可以实现图像生成，但是由于扩散模型本身特性（diversity较强），生成的图像往往不受控制，不见得能精准满足用户的需求，如何提升生成的可控性？
-
-【2023-4-4】[ControlNet: 给以文生图模型添加条件约束](https://zhuanlan.zhihu.com/p/608161469)
-- Stable Diffusion (SD)模型，添加**额外**条件（Edge Map, Sketch, Depth Info, Segmentation Map, Human Pose, Normal Maps）做**受控**图像生成的方法，主要思路在SD模型中为添加与UNet结构类似的ControlNet以学习额外条件信息，映射进参数固定的SD模型中，完成条件生成。
-- 【2023-2-10】论文 [Adding Conditional Control to Text-to-Image Diffusion Models](https://arxiv.org/pdf/2302.05543.pdf)
-- [ControlNet代码](https://github.com/lllyasviel/ControlNet), [model](https://huggingface.co/lllyasviel/ControlNet/tree/main)
-- ![](https://pic4.zhimg.com/80/v2-a223547711e54464811ec00a01e6a367_1440w.webp)
-- 固定原始网络参数，复制一个可以训练的拷贝网络，对于输入的条件c，通过零卷积(zero convolution)，与网络原本的输入x进行特征加和，之后对于拷贝网络的输出，同样通过领卷积处理后与原始网络进行特征加和，输出最终的结果。
-- 零卷积(zero convolution):权重和偏置都是用0初始化的1 x 1卷积。
-- 零卷积的好处：在训练刚开始的阶段，controlNet的输出对原始网络没有影响，这样之后的任何优化基本上等同于在finetune这个模型，速度会比较快。
-- ![](https://pic4.zhimg.com/80/v2-a87dde8bbc7562ef282f4f7cc8f31e47_1440w.webp)
-
-实验效果
-
-|受控条件|效果|备注|
-|---|---|---|
-| Canny Edge | ![](https://pic4.zhimg.com/80/v2-94c287574b4f7dd8e66a94c21ae16df7_1440w.webp)||
-| Hough Lines| ![](https://pic2.zhimg.com/80/v2-a2b3d0aaa8c6e7d8dd07f84fb68ce81d_1440w.webp) ||
-| Human Scribbles | ![](https://pic2.zhimg.com/80/v2-166ee3740b1d8f5fbce1b5d9b812094d_1440w.webp)||
-| HED boundary map | ![](https://pic4.zhimg.com/80/v2-6e89cd43a5de03be8588a42da98ef2a3_1440w.webp)||
-| Human Pose | ![](https://pic1.zhimg.com/80/v2-98a946f44d307cab1500bb8b332261a4_1440w.webp) ||
-| Segmentation Map | ![](https://pic1.zhimg.com/80/v2-60c525ddbad89d196bd3f412b260d6a8_1440w.webp) ||
-| Cartoon Line Drawing | ![](https://pic1.zhimg.com/80/v2-d98b515e5991e6b040bb0eac31130e24_1440w.webp) ||
-
-#### DALL·E
-
-DALL·E由OpenAI在2021年初提出，旨在训练一个输入文本到输出图像的自回归解码器。由CLIP的成功经验可知，文本特征和图像特征可以编码在同一特征空间中，因此我们可以使用Transformer将文本和图像特征自回归建模为单个数据流（“autoregressively models the text and image tokens as a single stream of data”）。
-
-DALL·E的训练过程分成两个阶段，一是训练一个变分自编码器用于图像编解码，二是训练一个文本和图像的自回归解码器用于预测生成图像的Tokens，如图所示。
-- ![](https://pic4.zhimg.com/80/v2-fe456ce3b3d44ca8b55130a9808587b7_1440w.webp)
-
-推理过程则比较直观，将文本Tokens用自回归Transformer逐步解码出图像Tokens，解码过程中我们可以通过分类概率采样多组样本，再将多组样本Tokens输入变分自编码中解码出多张生成图像，并通过CLIP相似性计算排序择优
-- ![](https://pic4.zhimg.com/80/v2-18c8e60881c49e29b2684a8d59890817_1440w.webp)
-
-#### DALL·E 2
-
-为了进一步提升图像生成质量和探求文本-图像特征空间的可解释性，OpenAI结合扩散模型和CLIP在2022年4月提出了DALL·E 2，不仅将生成尺寸增加到了1024*1024，还通过特征空间的插值操作，可视化了文本-图像特征空间的迁移过程。
-
-如图所示，DALL·E 2将CLIP对比学习得到的text embedding、image embedding作为模型输入和预测对象，具体过程是学习一个先验Prior，从text预测对应的image embedding，文章分别用自回归Transformer和扩散模型两种方式训练，后者在各数据集上表现更好；再学习一个扩散模型解码器UnCLIP，可看做是CLIP图像编码器的逆向过程，将Prior预测得到的image embedding作为条件加入中实现控制，text embedding和文本内容作为可选条件，为了提升分辨率UnCLIP还增加了两个上采样解码器（CNN网络）用于逆向生成更大尺寸的图像。
-- ![](https://pic4.zhimg.com/80/v2-9c369b9f54f1491f8954928584de96d7_1440w.webp)
-
-
-
-#### 文心-一格
+### 文心一格
 
 - 【2022-8-23】[国产AI作画神器火了，更懂中文，竟然还能做周边](https://mp.weixin.qq.com/s/xh6Q0Pnv9OfP8Je3lDiyZg), “一句话生成画作”这个圈子里，又一个AI工具悄然火起来了,不是你以为的Disco Diffusion、DALL·E，再或者Imagen……而是全圈子都在讲中国话的那种, [文心·一格](https://yige.baidu.com/#/)
   - 操作界面上，Disco Diffusion开放的接口不能说很复杂，但确实有点门槛。它直接在谷歌Colab上运行，需要申请账号后使用（图片生成后保存在云盘），图像分辨率、尺寸需要手动输入，此外还有一些模型上的设置。好处是可更改的参数更多，对于高端玩家来说可操作性更强，只是比较适合专门研究AI算法的人群;相比之下，文心·一格的操作只需三个步骤：输入文字，鼠标选择风格&尺寸，点击生成。
@@ -330,11 +405,11 @@ git lfs pull
 - A robot Elon Musk in cyberpunk, driving on a Tesla Model X
 
 
-#### 微软
+### 【微软】images creator
 
 【2023-3-21】[images creator](https://cn.bing.com/images/create?FORM=GENILP)
 
-#### 自定义图片的text2image
+### 自定义图片的text2image
 
 【2022-9-7】[An Image is Worth One Word: Personalizing Text-to-Image Generation using Textual Inversion](https://textual-inversion.github.io/)
 - [github-textual_inversion](https://github.com/rinongal/textual_inversion)
