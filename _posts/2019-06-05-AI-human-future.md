@@ -13,6 +13,11 @@ mathjax: true
 
 # AI之路
 
+## AI 大人物
+
+业界四大天王（或者五大）都是谁，他们都作出了哪些贡献？
+- 祖师爷Jordan（刚加入阿里），Geoffrey Hinton（Google），Yoshua Bengio（目前唯一留在学术界的中立人士），Yann LeCun（Facebook），Andrew NG（离开百度，好像去了她媳妇相关的公司）等等，华人的骄傲Feifei Li（李飞飞）加入Google，负责Google cloud部门，她的高徒Andrej Karpathy加入Tesla，而Tesla老板，钢铁侠原型，Elon Musk一直反AI，特地成立之际的OpenAI，以防止AI为少数人控制，祸害人类
+- LSTM发明人：Jürgen Schmidhuber，199*年发明LSTM，但名气被埋没。2016年GAN演讲现场，怼Ian Goodfellow，[视频地址](https://www.youtube.com/watch?v=AJVyzd0rqdc&t=3778s)
 
 ## AI发展趋势
 
@@ -671,14 +676,10 @@ Modular Architecture for Autonomous AI
 我们已经进入一个崭新的时代。人工智能仍将充满希望，裹挟着炒作与浮躁。它所带来的，也许将远远超过个人计算和互联网在过去30年对世界造成的改变。带着对未来的期许，让我们回到图灵一开始提的问题：“机器能思考吗？”可能不需要再次历经70年的求索，答案也许就在这个十年。
 
 
-# AI 大人物
 
-业界四大天王（或者五大）都是谁，他们都作出了哪些贡献？
-- 祖师爷Jordan（刚加入阿里），Geoffrey Hinton（Google），Yoshua Bengio（目前唯一留在学术界的中立人士），Yann LeCun（Facebook），Andrew NG（离开百度，好像去了她媳妇相关的公司）等等，华人的骄傲Feifei Li（李飞飞）加入Google，负责Google cloud部门，她的高徒Andrej Karpathy加入Tesla，而Tesla老板，钢铁侠原型，Elon Musk一直反AI，特地成立之际的OpenAI，以防止AI为少数人控制，祸害人类
-- LSTM发明人：Jürgen Schmidhuber，199*年发明LSTM，但名气被埋没。2016年GAN演讲现场，怼Ian Goodfellow，[视频地址](https://www.youtube.com/watch?v=AJVyzd0rqdc&t=3778s)
+# 脑机接口
 
-
-# 人类唯一的出路：变成人工智能
+## 人类唯一的出路：变成人工智能
 
 - ![](https://28oa9i1t08037ue3m1l0i861-wpengine.netdna-ssl.com/wp-content/uploads/2015/03/Logo-sometimes-Pixelmator-577.png)
 
@@ -705,7 +706,7 @@ Modular Architecture for Autonomous AI
 Neuralink and the Brain’s Magical Future](https://waitbutwhy.com/2017/04/neuralink.html)
 > * Word文档版：[腾讯文档](https://share.weiyun.com/5y4D89d)
  
-# 实际案例
+## 实际案例
 
 - 【2021-7-8】[意念打字登Nature封面！每分钟写90个字符，准确率超99%](https://www.toutiao.com/i6961632792107123231)，一位截瘫患者，正在用“意念”打出一段话，0.5秒左右就能输出一个字母,他所需要做的，只是在脑中将字母“手写”出来，然后系统就会自动识别生成字母，一分钟可写90个字符。。[图](https://p6-tt.byteimg.com/origin/pgc-image/160795ad77884c3cbd594f4177e92d79?from=pc)
   - ![](https://p6-tt.byteimg.com/origin/pgc-image/160795ad77884c3cbd594f4177e92d79?from=pc)
@@ -713,20 +714,59 @@ Neuralink and the Brain’s Magical Future](https://waitbutwhy.com/2017/04/neura
 
 ![](https://mmbiz.qpic.cn/mmbiz_jpg/V1OJoKudbibamvvRKM6jYFt5Gf2wz9BHR92gRojGfZMFMR6ocnDNSicGKCfncAjtWClicU2rHDicmSt0OjibUFTLpjA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
 
-- 【2020-1-16】浙江大学：[国内首例植入式脑机接口让“意念”控制机器臂](https://mp.weixin.qq.com/s/X58bAYMPGDtw-IC7aOcAZg)
-   - 1月16日，浙江大学对外宣布“双脑计划”重要科研成果，求是高等研究院“脑机接口”团队与浙江大学医学院附属第二医院神经外科合作完成国内第一例植入式脑机接口临床研究，患者可以完全利用大脑运动皮层信号精准控制外部机械臂与机械手实现三维空间的运动，同时首次证明高龄患者利用植入式脑机接口进行复杂而有效的运动控制是可行的。
-   - 除了吃喝、社交、娱乐外，这项最新成果将有助于肢体瘫痪患者进行运动功能重建，从而提高生活质量，未来也将对辅助运动功能、失能者功能重建、老年机能增强等更多领域产生积极影响。
+
+### 机械臂
+
+【2020-1-16】浙江大学：[国内首例植入式脑机接口让“意念”控制机器臂](https://mp.weixin.qq.com/s/X58bAYMPGDtw-IC7aOcAZg)
+- 1月16日，浙江大学对外宣布“双脑计划”重要科研成果，求是高等研究院“脑机接口”团队与浙江大学医学院附属第二医院神经外科合作完成国内第一例植入式脑机接口临床研究，患者可以完全利用大脑运动皮层信号精准控制外部机械臂与机械手实现三维空间的运动，同时首次证明高龄患者利用植入式脑机接口进行复杂而有效的运动控制是可行的。
+- 除了吃喝、社交、娱乐外，这项最新成果将有助于肢体瘫痪患者进行运动功能重建，从而提高生活质量，未来也将对辅助运动功能、失能者功能重建、老年机能增强等更多领域产生积极影响。
 
 - 视频：
 
 <iframe src="//player.bilibili.com/player.html?aid=83746758&cid=143264316&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 
+### 生物显示屏
+
 - 【2021-3-11】[复旦Nature论文实现《三体》科幻场景：把显示屏穿身上，还能导航、聊天那种](https://www.jiqizhixin.com/articles/2021-03-11-4)，新一期《Nature》杂志刊载了复旦大学高分子科学系教授彭慧胜团队的一项研究成果——《[大面积显示织物及其功能集成系统](https://www.nature.com/articles/s41586-021-03295-8)》。
-  - 在处理器的帮助下，人类脑电波可被转换为可读信息，并显示在织物上. 发光经纱 + 导电纬纱 = 显示织物. 该织物系统包括显示屏、键盘和电源，因而可作为通信工具来使用。它可以用电池充电，甚至使用太阳能。最重要的是，它还具备输入、沟通和导航等功能，是真正意义上的「可穿戴设备」。可以说，穿上它，你就是街上最「亮」的仔。
-  - ![](https://image.jiqizhixin.com/uploads/editor/23ff36bb-6872-46da-9c40-1a74ba544857/640.gif)
+- 在处理器的帮助下，人类脑电波可被转换为可读信息，并显示在织物上. 发光经纱 + 导电纬纱 = 显示织物. 该织物系统包括显示屏、键盘和电源，因而可作为通信工具来使用。它可以用电池充电，甚至使用太阳能。最重要的是，它还具备输入、沟通和导航等功能，是真正意义上的「可穿戴设备」。可以说，穿上它，你就是街上最「亮」的仔。
+- ![](https://image.jiqizhixin.com/uploads/editor/23ff36bb-6872-46da-9c40-1a74ba544857/640.gif)
 
 
-# [语言的对决：乔姆斯基攻防战](https://www.guokr.com/article/156457/)
+### Neurosity
+
+【2023-3-27】一位名为[Fireship](https://fireship.io/)的独立开发者发了一段令人震撼的视频：他用 JavaScript 将他的大脑连接到 GPT-4。简单来说，他通过非侵入式脑机接口公司 [Neurosity](https://neurosity.co/) 提供的 JavaScript SDK和一个仪表板，通过脑机通信连接上了GPT-4。
+- YouTube: [I literally connected my brain to GPT-4 with JavaScript](https://www.youtube.com/watch?v=-HYbFm67Gs8)
+- ![](https://images.ctfassets.net/uwziq2n2fyp8/2mJ9nuyNXhpdcOZJ7eFCbF/f69db9a9bc5b77ff408d46d0200af14b/3a.png?h=750&fl=progressive&q=100)
+
+只要头戴 Neurosity 意念一动，大脑就可以连接到 GPT-4，从而使 GPT-4 的整个知识库触手可及。如果你使用过 GPT-4，想象一下有个人拥有一个用脑机接口连接到 GPT-4 的大脑。
+- [脑机接口让大脑连上了GPT-4](https://mp.weixin.qq.com/s/F8ut4A0SX0wW2_JgQHe1_A)
+
+大脑如何连接GPT-4的过程。
+- 通过不断地提示与训练，可以将自己转变为赛博格（半机械人），真正实现生物硅基的融合，应用在日常场景中，再借助设备，脑信号转文字，文字转语音，实现语音对话能力。
+- 正在考试时，不晓得答案只要想一想，GPT-4就在你大脑里敲字，然后通过脑机接口告诉你；
+- 上班迟到了，想要编一个借口，ChatGPT马上给你一个合理的理由...
+
+不过用在这些地方，就有些大材小用了. 还可以通过脑电波“监听”自己过去的思维模式，以此进行矫正或者训练。
+
+3月末，Neurosity 发布了一款名为 The Crown 的头戴式脑机接口。埃隆·马斯克前女友发推说想要的BCI设备， 这顶被誉为皇冠的BCI，戴上去像来自未来的人类。这款轻便的**非侵入式**脑机接口设备，可以监测人的脑电波，以辅助睡眠、学习、专注力等。
+
+还可以意念操控物体，比如上个月初，一名研究人员用它操控一辆特斯拉汽车，虽然短短十几秒，却让人看到了未来人机融合和交互的想象力
+
+Neurosity对这种对脑电波的理解，以及 Crown 的可编程性，开辟了 **脑机接口+AI** 世界的新领域 —— 生物硅基大脑驱动世界。
+
+大脑是一个电化学器官。一个功能完备的大脑可以产生多达 10 瓦的电力。如果所有 100 亿个相互连接的神经元同时放电，那么放置在人类头皮上的单个电极将记录大约百万分之五到百万分之五十伏特的电压。如果你有足够的头皮连接起来，你也许可以点亮手电筒灯泡。
+
+Neurosity 宣称 Crown 的计算模块与 MacBook Air 一样强大，配备四核 1.8Gz CPU，每秒可以从大脑中获取数千个数据点，而不会在传输过程中丢失数据。此外，新的传感器配置提供了对视觉皮层的访问，完成了对大脑所有四个叶(额叶、颞叶、顶叶、枕叶）的覆盖。
+
+而现在它可以让你的大脑连接到GPT-4，将人脑与机器、AI进行融合。人们可以通过训练算法来识别各种思维模式，以便选取最优的方案或者预测行为。
+
+这就像科幻电影里的半机械人，他们变得比人类还要强。不妨大胆畅想下，人们接入他人的记忆或者回忆梦境——这种《赛博朋克2077》的游戏里的剧情，似乎也可能实现。
+
+
+
+# 语言的对决：乔姆斯基攻防战
+
+[语言的对决：乔姆斯基攻防战](https://www.guokr.com/article/156457/)
 
 ## 乔姆斯基
 
@@ -752,8 +792,9 @@ Neuralink and the Brain’s Magical Future](https://waitbutwhy.com/2017/04/neura
 
 <iframe src="//player.bilibili.com/player.html?aid=61449523&bvid=BV1ht411c79j&cid=106886489&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  height="600" width="100%"> </iframe>
 
-# [语文是一切科学之母](https://zhuanlan.zhihu.com/p/151675013)
+# 语文是一切科学之母 
 
+[语文是一切科学之母](https://zhuanlan.zhihu.com/p/151675013)
 
 ## 艺术是最高境界
 
@@ -783,7 +824,8 @@ Neuralink and the Brain’s Magical Future](https://waitbutwhy.com/2017/04/neura
 - 【2019-10-24】[人工智能哲学笔记](https://yam.gift/2018/04/07/2018-04-07-AI-Philosophy-Note/)
 
 ## 背景
-- 来源：[复旦大学公开课：人工智能哲学_全 7 集_网易公开课](http://open.163.com/special/cuvocw/rengongzhinengzhexue.html)
+
+来源：[复旦大学公开课：人工智能哲学_全 7 集_网易公开课](http://open.163.com/special/cuvocw/rengongzhinengzhexue.html)
 - 讲师：徐英瑾教授
 - 课程介绍：本课程从人工智能科学发展的科学史概要出发，讨论了哲学思辨和人工智能研究之间的密切关系，并从人工智能的角度，重新审视了近代欧洲哲学对于 “机器是否能够思维” 这个问题的思辨结论。尔后，讨论了如何从当代计算机科学的角度来解读康德哲学，并从中得到一个关于类比推理的计算模型。本课程也讨论了当代美国哲学家塞尔对于 “计算模型如何获得关于符号的语义知识” 的忧虑，并进一步探讨了这一忧虑在计算机科学内部的表达形式：框架问题。
 
@@ -1134,9 +1176,9 @@ AI 是科学和工程学的一种奇妙结合，它并不以描述自然为终�
 - 哲学家必须更多关心工程学实践，工程师也必须更多地熟悉哲学，能够在两者之间搭建互相熟悉的桥梁。
 
 
-# [清华“天机”芯片登上Nature封面：全球首款异构融合类脑芯片](https://www.tmtpost.com/4099136.html)
+# 清华“天机”
 
-2019-08-01 16:25
+【2019-08-01】[清华“天机”芯片登上Nature封面：全球首款异构融合类脑芯片](https://www.tmtpost.com/4099136.html)
 
 摘要： 
 >这也是中国的人工智能芯片，首次登上Nature。
@@ -1323,18 +1365,19 @@ ANN则是是从信息处理角度对人脑神经元网络进行抽象，目前�
 
 许铁-巡洋舰科技
 
-7月31日Nature杂志封面刊登了清华类脑计算团队的最新成果： 天机芯片以及由其操控的自行车。
+7月31日，Nature杂志封面刊登了清华类脑计算团队的最新成果： 天机芯片以及由其操控的自行车。
 
 Towards artificial general intelligence with hybrid Tianjic chip architecture[1]
 
-Letter | Published: 31 July 2019
+Letter-Published: 31 July 2019
 
 Towards artificial general intelligence with hybrid Tianjic chip architecture
+
 这则信息在一天之内在AI圈子引起了热议，而大部分吃瓜群众的状态则是云里雾里。 这篇文章从脑与人工智能结合的潜力与背景， 看这系列最新工作的意义。
 
 我们说这个新工作的核心是能够同时在芯片上高效实现人工神经网络ANN和脉冲神经网络SNN， 所谓的ANN和SNN， 事实上是神经网络发展过程的两个分支。 欲了解其背景先了解其历史。
 
-### 神经网络家族的分合故事。
+### 神经网络家族的分合故事
 
 神经网络的故事从模拟单个神经元开始： 神经元是神经网络信息传输的“原子”。通过一定的方法连接这些原子，就可以得到具有智能的系统， 这算是整个人工智能“连接主义”流派的哲学根基。
 
