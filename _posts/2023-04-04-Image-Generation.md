@@ -150,7 +150,21 @@ stable_diffusion)
 - C. diffusion model如何在隐空间中提供良好的latent representation，以及如何将其用于data manipulation的任务也是值得研究的。
 - D. 将diffusion model和generative foundation model结合，探索更多类似于ChatGPT，GPT-4等有趣的AIGC应用
 
-### 模型改进
+### 可控生成
+
+可控生成是人工智能内容生成(AIGC)的最后一道高墙。
+
+#### LC-AIGC 介绍
+
+局部可控的图像生成（后续简称LC-AIGC）：[参考](https://zhuanlan.zhihu.com/p/618616522)
+- ![](https://pic4.zhimg.com/80/v2-dab50938ea1f50df02af75f7d0b66313_1440w.webp)
+- 在背景图片(background image)上给定一个边界框(bounding box)，提供所需的条件信息(condition)，在边界框内生成满足条件信息的前景物体，得到完整的真实自然的图片(generated image)。条件信息包括很多种类型，比如文本(text)、轮廓(sketch)、颜色(color)、图片(image)等等。
+- 其中和图像合成最相关的是将一张前景物体的图片作为条件信息，即在背景图片的边界框内生成该物体，并使其光照、阴影、视角和背景适配。
+
+LC-AIGC 问题
+- 边界框的自动生成。某些应用场景（比如数据增广）需要在背景图片上自动产生大量的合理的边界框。该任务叫**物体放置**(object placement),相关[资料](https://github.com/bcmi/Awesome-Object-Placement)。
+- 可控性。LC-AIGC虽然能够实现局部可控，但是在图片作为条件信息的情况下控制力度远远不够。总的来说，条件信息提供了前景物体的若干属性。如果条件信息是文本、轮廓、颜色，我们知道了前景物体的某个属性，而其他属性是未知的。LC-AIGC默认已知属性是合理的，然后根据背景信息补充其他未知属性，得到完整的前景物体。
+
 
 #### ControlNet
 
