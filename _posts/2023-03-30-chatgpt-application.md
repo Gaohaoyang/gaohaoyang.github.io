@@ -510,7 +510,7 @@ ChatGPT也可以与其他AIGC模型联合使用，获得更加炫酷实用的功
     F-->|2023-4-2,推荐系统\nChatREC|F8(推荐系统):::blue
     F-->|2023-4-4,阿里鸟鸟分鸟,天猫精灵|F9(角色模拟):::blue
     F-->|2023-3-27,Neurosity头戴设备Crown+GPT4,实现意念操控|F10(脑机接口):::blue
-
+    F-->|2023-3-31,Engineered Arts推出机器人Ameca+GPT-3,实现表情控制|F11(机器人):::blue
 </div>
 
 
@@ -875,6 +875,9 @@ ControlNet 的优点是：
 
 详见 [数字人专题](aigc#数字人)
 
+
+
+
 ### 金融 
 
 #### BloombergGPT
@@ -984,6 +987,20 @@ ChatGPT集成第三方插件，成为聊天版“App Store”
 
 1X计划用这笔资金来加大力度研发双足机器人模型NEO，以及在挪威和北美量产其首款商用机器人EVE。
 - ![](https://n.sinaimg.cn/finance/crawl/59/w550h309/20230327/c263-22383f0bac24529609428a1f23eb2366.jpg)
+
+#### 表情控制
+
+【2023-3-31】[当人形机器人通过GPT3控制表情](https://www.bilibili.com/video/BV19v4y1H732)
+
+<iframe src="//player.bilibili.com/player.html?aid=569400856&bvid=BV19v4y1H732&cid=1078697290&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="500" height="603"> </iframe>
+
+英国 [Engineered Arts](www.engineeredarts.co.uk) 公司设计的 Ameca人形机器人，Ameca是用于人工智能和人机交互的仿人机器人平台。
+- CES 2022美国拉斯维加斯国际消费类电子产品展览会上首次亮相，Ameca是用于人工智能和人机交互的仿人机器人平台，当然视频里只是预先编程的动作，但最终目标是将其与实际的AI集成。
+
+机器人Ameca是由GPT-3来选择的合适的面部表情，也尝试了GPT-4，4的处理时间更长，使Ameca看起来反应没那么快。
+
+此前官方发布的视频：BV1Xr4y1Q7kM
+
 
 ### 脑机接口
 
