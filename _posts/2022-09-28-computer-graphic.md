@@ -801,6 +801,22 @@ three.js不足之处
   - 3、ThingJS是一个完成的物联网可视化应用开发生态，提供CampusBuilder, CityBuilder等场景搭建SAAS、场景存储云空间（无需付费）和10万个场景资源……
 - 如果是你是初学者，three.js用起来更花费时间，就一个加载模型、调光、选择模型弹框的功能，就能写出Threejs上百行代码，ThingJS是更为上层的抽象，不用关心渲染、mesh、光线等复杂概念，更适合项目团队提高开发效率。
 
+### 人体建模
+
+【2023-4-5】SMPL: A Skinned Multi-Person Linear Model [知乎专题](https://www.zhihu.com/question/292017089/answer/2916154676)
+
+`SMPL` 是一种3D人体建模方法，现在几乎所有的`元宇宙`人体建模都是基于此类方法，还有自动驾驶等领域。
+- 它能估计出比较准确的人体**3D姿态**，得益于海量数据训练的人体3D先验。
+- 不仅仅是人体，包括手部，人脸，甚至是动物都能用此类方法进行建模。尤其是人脸，在此基础之上有了 MANO， FLAME 等方法。但这类方法问题也比较多，最令人头秃的莫过于3D pose的可视化，最大的问题在于很多人摸不着头脑，尤其是对于3D 图形学不是很了解的刚入门者，不知道预测出来的pose，要怎么可视化。很多人会推荐pyrender等上古库，这是一种极其不跨平台，而且非常不友好，依赖繁多，很多库都是给你 == 1.0.1 限定极速款强行写死的依赖。
+
+`SMPL`是一个可微分的模型，参数规范所以被广泛应用（SMPL在发布时，就已经可以支持很多工业应用软件）。
+- `SMPL`之外，还有`DMPL`（能够模拟soft tissue），`SMPL+H` (body+hand), `SMPL-x`（body, hand and face），等等。
+- 此外，SMPL支持**软组织动力学**。
+
+入门先学习一下blend skinning, 理解 blend shape。一般来说，构建mesh与骨架的关系时（使用骨架去驱动mesh进行形变），使用得最广泛的模型是 Linear Blend Skinning (Linear BS)。但是直观地说，如果直接基于LBS或者DQBS用skeleton去drive mesh进行形变的话，会出现Skin collapse, Candy wrapper artifacts等效果可见下图左一左二肘部。
+- ![](https://pic1.zhimg.com/80/v2-57b3c224d0d5e7c280a8ba45906b013d_1440w.webp?source=1940ef5c)
+
+作者：[Frank-D](https://www.zhihu.com/question/292017089/answer/1091565390)
 
 ## Three.js
 
