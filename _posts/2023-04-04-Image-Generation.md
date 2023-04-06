@@ -320,6 +320,25 @@ LC-AIGC 问题
 | Cartoon Line Drawing | ![](https://pic1.zhimg.com/80/v2-d98b515e5991e6b040bb0eac31130e24_1440w.webp) ||
 
 
+#### 阿里 Composer
+
+【2023-4-5】[阿里提出composer：AI绘画的可控生成](https://mp.weixin.qq.com/s/gBLt1sbPInK5VNa8nO1uaA)
+
+ControlNet 模型将可控性推上了新的高峰。同一时间，来自阿里巴巴和蚂蚁集团的研究者也在同一领域做出了成果
+- [论文地址](https://arxiv.org/pdf/2302.09778v2.pdf)
+- [项目地址](https://github.com/damo-vilab/composer)
+
+将图像分解为捕捉图像各个方面的去耦表征，并且描述了该任务中使用的八种表征，这几种表征都是在训练过程中实时提取的。
+- 说明（Caption）：研究直接使用图像 - 文本训练数据中的标题或描述信息（例如，LAION-5B (Schuhmann et al., 2022)）作为图像说明。当注释不可用时，还可以利用预训练好的图像说明模型。研究使用预训练的 CLIP ViT-L /14@336px (Radford et al., 2021) 模型提取的句子和单词嵌入来表征这些标题。
+- 语义和风格（Semantics and style）：研究使用预先训练的 CLIP ViT-L/14@336px 模型提取的图像嵌入来表征图像的语义和风格，类似于 unCLIP。
+- 颜色（Color）：研究使用平滑的 CIELab 直方图表征图像的颜色统计。将 CIELab 颜色空间量化为 11 个色调值，5 个饱和度和 5 个光值，使用平滑 sigma 为 10。经验所得，这样设置的效果更好。
+- 草图（Sketch）：研究应用边缘检测模型，然后使用草图简化算法来提取图像的草图。草图捕捉图像的局部细节，具有较少的语义。
+- 实例（Instances）：研究使用预训练的 YOLOv5 模型对图像应用实例分割来提取其实例掩码。实例分割掩码反映了视觉对象的类别和形状信息。
+- 深度图（Depthmap）：研究使用预训练的单目深度估计模型来提取图像的深度图，大致捕捉图像的布局。
+- 强度（Intensity）：研究引入原始灰度图像作为表征，迫使模型学习处理颜色的解纠缠自由度。为了引入随机性，研究统一从一组预定义的 RGB 通道权重中采样来创建灰度图像。
+- 掩码（Masking）：研究引入图像掩码，使 Composer 能够将图像生成或操作限制在可编辑的区域。使用 4 通道表征，其中前 3 个通道对应于掩码 RGB 图像，而最后一个通道对应于二进制掩码。
+
+虽然本文使用上述八种条件进行了实验，但用户可以使用 Composer 自由定制条件。
 
 ## AI 作画
 
@@ -330,6 +349,8 @@ LC-AIGC 问题
 从技术实现突破、到技术提升、再到规模化降低门槛，AI创作能力也不断提升。
 - 2022年10月，美国一名男子用AI绘画工具Midjourney，生成了一幅名为《太空歌剧院》的作品，并获得了第一名。这引起了一波不小的争论，也终于形成了一条新赛道。
 - 于是，2022年以AI绘画为代表的各种生成式AI工具，如雨后春笋般疯狂冒尖，比如盗梦师、意间AI、6pen、novelAI等等。
+
+
 
 ### 汇总
 
@@ -443,6 +464,10 @@ Stable Diffusion 是以文本生成图像的 AI 工具，`慕尼黑大学`的Com
 - **配色**：yellow color scheme 指整个画面的主色调为黄色。
 - **画面描述**：除了对主题进行描述，还可以添加多个画面元素，如 beautiful background, forest, octane render, night；添加画面质量描述，如 highly detailed, digital painting, Trending on artstation, concept art, smooth, sharp focus, illustration,8k。
 
+#### LoRA使用
+
+【2023-3-20】[AI作画的lora模型使用体验](https://www.zhihu.com/pin/1621129614524129280?utm_psn=1627101983164256256)
+- Stable Diffusion有个lora训练功能，可以在6G显存显卡上进行训练风格或者人物的模型，lora模型体积小，所以备受青睐。演示的图是一些lora模型，相互融合所作或者从大模型提取的lora模型而作，诸如人+水墨风格或者动漫风格参考图（扇子）而创作。
 
 ### MidJourney
 
