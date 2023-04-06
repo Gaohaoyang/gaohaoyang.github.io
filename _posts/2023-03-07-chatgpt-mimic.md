@@ -1119,66 +1119,6 @@ nvidia-smi --query-gpu=index,name,uuid,serial --format=csv
 - 原因A: 没有执行 `pip install .`, chatgpt并未真正安装
 - 原因B: colossal ai新版调整了目录结构, `chatgpt.nn` has been modified as `chatgpt.models`, 【2023-3-14】
 
-#### LoRA 低秩适配
-
-2021 年，[LoRA: Low-Rank Adaption of Large Language Models]() 论文表明，可以通过**冻结**预训练权重，并创建查询和值层的注意力矩阵的低秩版本来对大型语言模型进行微调。这些低秩矩阵的参数**远少于**原始模型，因此可以使用更少的 GPU 内存进行微调。作者证明，低阶适配器的微调取得了与微调完整预训练模型相当的结果。
-
-这种技术允许使用小部分内存来微调 LLM。然而，也有缺点
-- 由于适配器层中的额外矩阵乘法，前向和反向传递的速度大约是原来的**两倍**。
-
-LoRA 是 Parameter Efficient 的方法之一。
-- 过度参数化的模型其实是位于一个低的**内在维度**上，所以作者假设在模型适应过程中的权重变化也具有较低的“内在等级”。
-- [LoRA](https://github.com/microsoft/LoRA)的主要方法为**冻结**一个预训练模型的矩阵参数，并选择用A和B矩阵来替代，在下游任务时只更新A和B。
-- ![](https://pic4.zhimg.com/80/v2-67cd3e1e603a5bb674463ddc4db38d57_1440w.webp)
-- ![](https://pic2.zhimg.com/80/v2-f56b07afc29ccad77a6faffa130ab24d_1440w.webp)
-
-LoRA 已经被作者打包到了loralib中。
-- pip install loralib
-
-可以选择用loralib中实现的对应层来替换一些层。
-- 目前loralib只支持 nn.Linear、nn.Embedding 和 nn.Conv2d。
-- loralib还支持一个 MergedLinear，用于单个 nn.Linear 代表一个以上的层的情况，比如在一些关注 qkv 投影的实现中（self- attention）
-- ![](https://pic2.zhimg.com/80/v2-bcef352dc1adf7d6f2fad86e1fe892fd_1440w.webp)
-
-```py
-# ===== Before =====
-layer = nn.Linear(in_features, out_features)
-
-# ===== After ======
-import loralib as lora
-# Add a pair of low-rank adaptation matrices with rank r=16
-layer = lora.Linear(in_features, out_features, r=16)
-```
-
-详见原文：[微软LoRA: Low-Rank Adaptation of Large Language Models 代码解读](https://zhuanlan.zhihu.com/p/515954218)
-
-
-#### PEFT
-
-Parameter-Efficient Fine-Tuning (`PEFT`) 是HuggingFace 开源的一个高效微调大模型库，支持在 LLM 上创建和微调适配器层。
-- peft 与  🤗 Accelerate 无缝集成，用于利用了 DeepSpeed 和 Big Model Inference 的大规模模型。
-
-目前包含LoRA，Prefix Tuning，Prompt Tuning，P-Tuning 四种算法
-*   LoRA
-*   [Prefix Tuning](https://link.zhihu.com/?target=https%3A//arxiv.org/pdf/2110.07602.pdf)
-  - Prefix Tuning 算法是根据 下游任务 "前缀指令文本" 的所有层的embeding表示，学习到的前缀指令文本向量可以挖掘大模型的潜力去引导模型完成特定任务。
-  - ![](https://pic3.zhimg.com/80/v2-9a6b5792cf60079429d067fc629e65ae_1440w.webp)
-*   [P-Tuning](https://link.zhihu.com/?target=https%3A//arxiv.org/pdf/2103.10385.pdf)
-  - P-Tuning 算法和 Prefix Tuning 的想法很相似，想通过微调"指令文本",让指令文本去挖掘大模型的潜力去完成特定的任务。但是 P-Tuning 只学习 "指令文本" 输入层embeding的的表示。 为了增强 "指令文本"的连续性，采用了一个 MLP(LSTM) 的结果去encoding "指令文本"。从微调参数量来看只有 0.65% 比 Prefix Tuning 和 LoRA 这些在所有层都增加参数的方法要少。
-  - ![](https://pic3.zhimg.com/80/v2-7540fb5d913adcae8be308fce31befea_1440w.webp)
-*   [Prompt Tuning](https://link.zhihu.com/?target=https%3A//arxiv.org/pdf/2104.08691.pdf)
-  - Prompt Tuning 算法和 P-Tuning 很像，且更简单，就是是根据 下游任务 "指令文本" 输入层embeding的的表示。 Prompt Tuning 没有增加任何的层，直接使用微调指令文本(prompt) 的embeding向量。
-  - ![](https://pic3.zhimg.com/80/v2-b281f773be36787dddd0f06e782384b2_1440w.webp)
-
-[详见](https://zhuanlan.zhihu.com/p/618695885)
-
-[Parameter-Efficient Fine-Tuning](https://github.com/huggingface/peft) (PEFT)
-
-单个 24GB GPU 上使用上述工具使用 RL 微调 20B 参数量的 LLM, 详见量化[quantization](https://hf.co/docs/transformers/main/en/main_classes/quantization)
-- 与全精度模型相比，以 **8位**精度加载模型最多可节省 **4倍**的内存
-- 调用 from_pretrained 方法时简单地添加标志 load_in_8bit=True
-
-详见：[在一张 24 GB 的消费级显卡上用 RLHF 微调 20B LLMs](https://mp.weixin.qq.com/s/7nmegO1UYObO0-eUDTKnMg)
 
 #### 代码解读
 
@@ -1400,6 +1340,13 @@ make chat
 训练LLaMA的详细方法可以参考[上一篇文章](https://zhuanlan.zhihu.com/p/612752963)，流程如下图所示：
 - ![](https://pic3.zhimg.com/80/v2-667a131609b04ef4a1fa8d84e980252e_1440w.webp)
 
+#### GPT4All
+
+【2023-4-3】[GPT4All：一个能在笔记本运行的ChatGPT平替](https://mp.weixin.qq.com/s/J6DWk9Ac8lRYf2hc1g0A0Q)
+
+GPT4All 是一个使用包括代码、故事和对话在内的大量干净助手数据训练的聊天机器人。该项目提供演示、数据和代码，用于训练一个基于LLaMA 7B的助手式大型语言模型，包含约800k个基于GPT-3.5-Turbo生成的对话。M1 Mac、Windows 等环境都能运行。
+- [项目地址](https://github.com/nomic-ai/gpt4all)
+- [技术报告](https://s3.amazonaws.com/static.nomic.ai/gpt4all/2023_GPT4All_Technical_Report.pdf)
 
 ### Vicuna
 
