@@ -43,8 +43,9 @@ permalink: /image-generation
     M-->|文本+图像融合\n1.Image token+Text token输入到transformer\n2.再采样生成\n3.经过CLIP模型排序|D1(DALL-E 1):::grass
     D1-->|1.CLIP增加prior模块\n2.image decoder->GLIDE|D2(DALL-E 2):::grass
     M-->|超分辨率\n未开源|I1(Imagen)
-    I1-->|ps级别修改内容未开源|I2(Imagic)
+    I1-->|ps级别修改内容\n未开源|I2(Imagic)
     M-->|Stability AI开源\n加噪去噪对象:原图像\n去噪时文本信息引导生成->image tokens|S(Stable diffusion):::grass
+    S-->|2023-2,受控图像生成|C(ContrlNet)
 </div>
 
 
