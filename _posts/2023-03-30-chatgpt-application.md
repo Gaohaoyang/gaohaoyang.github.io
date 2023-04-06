@@ -512,14 +512,14 @@ ChatGPT也可以与其他AIGC模型联合使用，获得更加炫酷实用的功
     F-->|2023-3-31,金融知识BloombergGPT|F3(领域大模型):::blue
     F-->|2023-3-24,Plugin|F4(插件商城):::blue
     F-->|2023-3-31,TaskMatrix\n2023-4-3,HuggingGPT,微软开源|F5(API驱动):::blue
-    F-->|2023-4-3,HuggingGPT,微软开源|F5(多模态封装):::blue
-    F-->|2023-3-9,微软,开源多模态问答系统\nVisual ChatGPT|F6(多模态问答):::blue
-    F-->|2023-3-9,文档聊天\nPandasGPT+ChatDOC\nChatPaper+ChatPDF|F7(DocumentQA):::blue
-    F-->|2023-4-2,推荐系统\nChatREC|F8(推荐系统):::blue
-    F-->|2023-4-4,阿里鸟鸟分鸟,天猫精灵|F9(角色模拟):::blue
-    F-->|2023-3-27,Neurosity头戴设备Crown+GPT4,实现意念操控|F10(脑机接口):::blue
-    F-->|2023-3-31,Engineered Arts推出机器人Ameca+GPT-3,实现表情控制|F11(机器人):::blue
-    F-->|2023-3-27,VR眼镜|F12(可穿戴):::blue
+    F-->|2023-4-3,HuggingGPT,微软开源|F6(多模态封装):::blue
+    F-->|2023-3-9,微软,开源多模态问答系统\nVisual ChatGPT|F7(多模态问答):::blue
+    F-->|2023-3-9,文档聊天\nPandasGPT+ChatDOC\nChatPaper+ChatPDF|F8(DocumentQA):::blue
+    F-->|2023-4-2,推荐系统\nChatREC|F9(推荐系统):::blue
+    F-->|2023-4-4,阿里鸟鸟分鸟,天猫精灵|F10(角色模拟):::blue
+    G-->|2023-3-27,Neurosity头戴设备Crown+GPT4,实现意念操控|F11(脑机接口):::blue
+    F-->|2023-3-31,Engineered Arts推出机器人Ameca+GPT-3,实现表情控制|F12(机器人):::blue
+    F-->|2023-3-27,VR眼镜|F13(可穿戴):::blue
 </div>
 
 
