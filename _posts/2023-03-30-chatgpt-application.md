@@ -587,8 +587,25 @@ BloombergGPT的训练数据库名为FINPILE，由一系列英文金融信息组�
 ChatGPT的第一批插件由Expedia、FiscalNote、Instacart、KAYAK、Klarna、Milo、OpenTable、Shopify、Slack、Speak、Wolfram和Zapier等公司提供，这些插件的具体功能包括推荐餐厅、制定出游计划、网上商店购物、企业办公、信息检索、语言教学等，涵盖日常生活的衣食住行各个方面。“插件商店（ChatGPT Plugins Store）”的推出意味着其他服务成为了ChatGPT的“眼睛和耳朵”。
 
 ChatGPT的“插件商城”
+- ChatGPT集成第三方插件，成为聊天版“App Store”
 
-ChatGPT集成第三方插件，成为聊天版“App Store”
+#### LangChain
+
+[LangChain：Model as a Service粘合剂，被ChatGPT插件干掉了吗？](https://mp.weixin.qq.com/s/3coFhAdzr40tozn8f9Dc-w)
+
+LangChain 由前 Robust Intelligence 的机器学习工程师 Chase Harrison 在 22 年 10 月底推出，是一个封装了大量 LLM 应用开发逻辑和工具集成的开源 Python 库，有成为第一个被广泛认可的 LLM 应用开发框架的势头。
+- 随着 Harrison 为 LangChain 添加了很多实用的抽象，以及 23 年 1 月众多 AI Hackathon 决赛项目使用 LangChain，它的 Github Star 迅速破万，成为 LLM 应用开发者选择中间件时想到的第一个名字。
+- 产品：拼接好 LLM 的大脑和四肢
+- LangChain 身上有许多标签：开源的 Python 和 Typescript 库、第一个被广泛采用的 LLM 开发框架、Model as a Service 设想的中间件、AI 应用层的基础设施...... 
+
+从开发者视角看，LangChain 是个挺友好且优美的库：
+- • 它非常模块化，还通过 Chain、Agent、Memory 对 LLM 的抽象帮助开发者提高了构建较复杂逻辑应用的效率；而且每个模块有很好的可组合性，有点像“为 LLM 提供了本 SOP”，能实现 LLM 与其他工具的组合、Chain 与 Chain 的嵌套等逻辑；
+- • 它一站式集成了所有工具，从各种非结构化数据的预处理、不同的 LLM、中间的向量和图数据库和最后的模型部署，贡献者都帮 LangChain 跟各种工具完成了迅速、全面的集成。
+  - 作为成长期投资者看 LangChain，它本身还太早期，远没到成长逻辑。除此之外，我对它在商业层面未来发展的核心担忧在于：
+- • 我们不能直接套用旧时代的中间件视角，随着 ChatGPT Plug-In 出现和 OpenAI 的更多边界延伸，LangChain 的价值可能被取代，很快像机器学习历史上的其他明星库一样隐入尘埃；
+- • LangChain 本身的壁垒也比较薄，是“其他开源库身上的开源库”，没有太多技术壁垒，只是替大家省下来了码的时间。如果要收费使用，很多开发者可能会选择自己把 LangChain 这套东西码出来；
+- • 目前使用 LangChain 库的以个人开发者和极客的 side project 为主，还不是正经的企业级 LLM 集成工具，而稍微有点体量的公司都会选择 fork LangChain 的源码或者干脆自己再码套框架。
+
 
 #### TaskMatrix
 
