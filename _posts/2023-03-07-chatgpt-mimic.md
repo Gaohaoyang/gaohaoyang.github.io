@@ -1791,6 +1791,10 @@ print(response)
 
 我们要的是一个数字生命，以及这个新兴的数字生命与生态带来的新世界；还是又多了一个更方便地查询知识单元的工具。
 
+### 阿里 
+
+【2023-4-7】阿里大模型（[通义千问](https://tongyi.aliyun.com/)）内测申请，[官方](https://mp.weixin.qq.com/s/Zp23VMxQiWHZzsBZNUtPwQ)
+
 ### ChatRWKV
 
 【2023-3-13】[开源1.5/3/7B中文小说模型：显存3G就能跑7B模型，几行代码即可调用](https://zhuanlan.zhihu.com/p/609154637)
