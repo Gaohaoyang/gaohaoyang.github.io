@@ -1795,6 +1795,10 @@ print(response)
 
 【2023-4-7】阿里大模型（[通义千问](https://tongyi.aliyun.com/)）内测申请，[官方](https://mp.weixin.qq.com/s/Zp23VMxQiWHZzsBZNUtPwQ)
 
+阿里大模型[内部访谈](https://mp.weixin.qq.com/s/PhiuEZPKAYBc_6mhOseBRw)
+
+
+
 ### ChatRWKV
 
 【2023-3-13】[开源1.5/3/7B中文小说模型：显存3G就能跑7B模型，几行代码即可调用](https://zhuanlan.zhihu.com/p/609154637)
