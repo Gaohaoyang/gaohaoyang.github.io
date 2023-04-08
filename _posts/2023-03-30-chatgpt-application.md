@@ -388,6 +388,43 @@ Chrome应用商店，输入“Chatgpt voice control”，Chrome应用商店，�
 
 - 【2023-2-11】[CCTV视频](https://www.toutiao.com/video/7198541558600499770/)里，台湾人在演示 [VoiceGPT](https://voicegpt.net/)，[VoiceGPT APK Download (version 1.35) 下载地址](https://voicegpt.net/voicegpt_135.apk) , 目前就安卓版，使用时需要代理
 
+#### VALL·E 语音合成
+
+【2023-4-8】[3秒复制任何人的嗓音！微软音频版DALL·E细思极恐，连环境背景音也能模仿](https://zhuanlan.zhihu.com/p/598230971)
+- 微软最新AI成果——语音合成模型VALL·E，只需3秒语音，就能随意复制任何人的声音。
+- 脱胎于DALL·E，但专攻音频领域，语音合成效果在网上放出后火了：
+
+语音合成趋于成熟，但之前零样本语音合成效果并不好。
+- 主流语音合成方案基本是预训练+微调模式，如果用到零样本场景下，会导致生成语音相似度和自然度很差。
+
+基于此，VALL·E横空出世，相比主流语音模型提出了不太一样的思路。
+- 相比传统模型采用梅尔频谱提取特征，VALL·E直接将语音合成当成了语言模型的任务，前者是连续的，后者是离散化的。
+- 传统语音合成流程往往是“音素→梅尔频谱（mel-spectrogram）→波形”这样的路子。但VALL·E将这一流程变成了“音素→离散音频编码→波形”：
+- ![](https://pic1.zhimg.com/80/v2-0ab4e5b66e97e6c9d989054bff9fca5c_1440w.webp)
+
+VALL·E也和VQVAE类似，将音频量化成一系列离散tokens，其中第一个量化器负责捕捉音频内容和说话者身份特征，后几个量化器则负责细化信号，使之听起来更自然
+- ![](https://pic3.zhimg.com/80/v2-6172070562fa697099b031e98e28383a_1440w.webp)
+
+随后以文本和3秒钟的声音提示作为条件，自回归地输出离散音频编码：
+- ![](https://pic3.zhimg.com/80/v2-3ba4d709246941d063c9cd4f5da4480e_1440w.webp)
+
+VALL·E还是个全能选手，除了零样本语音合成，同时还支持语音编辑、与GPT-3结合的语音内容创建。
+
+那么在实际测试中，VALL·E的效果如何呢？
+- 根据已合成的语音效果来看，VALL·E能还原的绝不仅仅是说话人的音色。
+- 不仅语气模仿到位，而且还支持多种不同语速的选择，例如这是在两次说同一句话时，VALL·E给出的两种不同语速，但音色相似度仍然较高
+- 同时，连说话者的环境背景音也能准确还原。
+- 除此之外，VALL·E还能模仿说话者的多种情绪，包括愤怒、困倦、中立、愉悦和恶心等好几种类型。
+
+值得一提的是，VALL·E训练用的数据集不算特别大。
+- 相比OpenAI的Whisper用了68万小时的音频训练，在只用了7000多名演讲者、6万小时训练的情况下，VALL·E就在语音合成相似度上超过了经过预训练的语音合成模型YourTTS。
+
+而且，YourTTS在训练时，事先已经听过108个演讲者中的97人声音，但在实际测试中还是比不过VALL·E。
+
+VALL·E目前还没开源
+- paper: [Neural Codec Language Models are Zero-Shot Text to Speech Synthesizers](https://arxiv.org/abs/2301.02111)
+- [valle-demo](https://valle-demo.github.io/)
+
 ### 智能对话
 
 角色模拟
