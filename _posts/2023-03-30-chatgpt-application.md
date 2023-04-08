@@ -541,7 +541,15 @@ ControlNet 的优点是：
 - Mate Marschalko演示新智能助手操纵苹果HomeKit智能家居系统
 - ![img](https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/TV46RMG9kDz4Bu~noop.image?_iz=58558&from=article.pc_detail&x-expires=1676360394&x-signature=tCxwmviN1wJeomk42ZXzv2DHEVI%3D)
 
-### 写小说
+
+### 文本创作
+
+
+#### 文案创作
+
+【2023-4-8】创业产品：[AI百晓生](https://www.chengzijianzhan.com/tetris/page/7216273608124137509)，给视频生成文案，语音播报
+
+#### 写小说
 
 【2023-2-14】[Generating Longer Stories With Recursive Reprompting and Revision](https://arxiv.org/pdf/2210.06774.pdf), Meta 田渊栋写小说
 - We consider the problem of automatically generating longer stories of over two thousand words. Compared to prior work on shorter stories, **long-range plot coherence and relevance** are more central challenges here. We propose the `Recursive Reprompting and Revision` framework ($Re^3$) to address these challenges
