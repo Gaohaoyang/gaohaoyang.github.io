@@ -474,6 +474,13 @@ permalink: /philosophy
 
 【2023-3-12】央视出品：[中国风水](https://www.bilibili.com/video/BV1sv411H7Pu) 100集
 
+【2023-4-10】
+
+[东方风水流派鄙视链](https://resource-wqw.oss-cn-beijing.aliyuncs.com/img/xuanxue-pai.jpg)
+- ![东方风水流派鄙视链](https://resource-wqw.oss-cn-beijing.aliyuncs.com/img/xuanxue-pai.jpg)
+
+[玄学圈子鄙视链](https://resource-wqw.oss-cn-beijing.aliyuncs.com/img/fengshui-liupai.jpg)
+- ![玄学圈子鄙视链](https://resource-wqw.oss-cn-beijing.aliyuncs.com/img/fengshui-liupai.jpg)
 
 
 # 结束
