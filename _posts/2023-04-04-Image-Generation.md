@@ -215,6 +215,52 @@ stable_diffusion)
 准确来说，`DDPM`叫“**渐变模型**”更为准确一些，扩散模型这一名字反而容易造成理解上的误解，传统扩散模型的**能量模型**、**得分匹配**、`朗之万`方程等概念，其实跟DDPM及其后续变体都没什么关系。
 - DDPM的数学框架其实在ICML2015的论文《Deep Unsupervised Learning using Nonequilibrium Thermodynamics》就已经完成了，但DDPM是首次将它在高分辨率图像生成上调试出来了，从而引导出了后面的火热。由此可见，一个模型的诞生和流行，往往还需要时间和机遇
 
+#### 图解Stable Diffusion
+
+【2023-4-10】[图解Stable Diffusion](https://zhuanlan.zhihu.com/p/617713156)
+- jalammar的[illustrated-stable-diffusion](https://jalammar.github.io/illustrated-stable-diffusion/)
+
+Stable Diffusion的发布是AI 绘画领域的一个里程碑事件。它的出现使得普通人也能使用高性能的图像生成模型。
+- 生成的图像效果极佳，速度还很快，对硬件资源的要求相对较低。
+
+Stable Diffusion 用法
+- 文本生成图像 text2image
+- ![](https://pic3.zhimg.com/80/v2-ac5018aeb9b47d5083a2f51d72456f2e_1440w.webp)
+- 修改图像（此时输入为文本+图像）
+- ![](https://pic4.zhimg.com/80/v2-666a51f167fc14d37e0afa77b24dba03_1440w.webp)
+
+Stable Diffusion 是一个由多个**组件**和**模型**组成的系统， 而非一个整体的模型。
+- ![](https://pic2.zhimg.com/80/v2-fe7093a950de6c95c0317575c61c1cf5_1440w.webp)
+- `文本理解`（text-understanding）组件: 捕捉文本中的意图，将文本信息转换为模型能够理解的数值表示。
+  - 文本编码器是一种特殊的 Transformer 语言模型（CLIP 模型的文本编码器）。 获取输入文本并输出代表文本中每个单词/token 的数值表示（每个 token 由一个向量表示）
+- `图像生成器`（Image Generator），也由多个组件组成。由以下两个阶段组成：
+  - `图像信息生成器`（Image Information Creator）: Stable Diffusion 成功的秘诀，是性能和效率高于之前工作的原因。运行多步来生成图像信息。步数就是 Stable Diffusion 界面或库中的steps 参数，通常设为 50 或 100。图像信息生成器完全在图像信息空间（或者称为潜层空间 latent space）中进行工作. “扩散（diffusion）”描述的就是该组件的行为。该组件通过一步一步地对信息进行处理，从而得到最终的高质量图像（由接下来的图像解码器组件生成）。
+  - `图像解码器`（Image Decoder）: 根据图像信息生成器生成的信息画出图像。不同于多步运行的信息生成器，图像解码器仅运行一次，来生成最终的像素级图像。
+  - ![](https://pic3.zhimg.com/80/v2-52cbfea8baaf0385e1973b8baf15ccc2_1440w.webp)
+
+Stable Diffusion 的三个主要组件，各自由不同的神经网络组成：
+- ClipText 用于文本编码
+  - 输入：文本
+  - 输出：77 个 token 嵌入向量，每个向量 768 维
+- UNet + Scheduler 用于在潜层空间中逐步地地处理（或者说扩散）信息
+  - 输入：文本嵌入和一个高维噪声张量
+  - 输出：经过处理得到的信息张量
+- AutoEncoder Decoder 根据信息张量画出图像
+  - 输入：信息张量（维度：(4, 64, 64)）
+  - 输出：图像（维度：(3, 512, 512)）
+- ![](https://pic4.zhimg.com/80/v2-e7224e525a72fdf4ea2bcbe5470a42cb_1440w.webp)
+
+什么是扩散模型？
+
+扩散是发生在粉红色图像信息生成器组件内部的过程。 该组件的输入为用于表示输入文本信息的 token 嵌入，和一个起始的随机噪声图像信息张量，生成一个信息张量，图像解码器使用该信息张量绘制最终图像。
+- ![](https://pic4.zhimg.com/80/v2-ccbbd18c5fc37d3838a14edfc7a6a263_1440w.webp)
+- 这个过程以多步形式进行。每步添加更多的相关信息。为了直观地理解整个过程，将随机潜层张量（latent）传递给视觉解码器，看它是否转换为随机视觉噪声。
+- ![](https://pic2.zhimg.com/80/v2-41cdf8da7fa1c7a5b708459628403f7d_1440w.webp)
+- 扩散过程有多步，每步操作一个输入潜层张量，并生成一个新的潜层张量。新的张量更好地集成了输入文本和视觉信息，其中视觉信息来自模型训练集中的图像。
+- ![](https://pic2.zhimg.com/80/v2-475a085b3b302d3e674195e90479ce01_1440w.webp)
+- ![](https://pic2.zhimg.com/80/v2-e3cae41c28f1f0dd34f30bd9ef9cb4fd_1440w.webp)
+
+略，详见原文：[illustrated-stable-diffusion](https://jalammar.github.io/illustrated-stable-diffusion/)
 
 ### 扩散模型+预训练
 
@@ -318,6 +364,17 @@ LC-AIGC 问题
 | Human Pose | ![](https://pic1.zhimg.com/80/v2-98a946f44d307cab1500bb8b332261a4_1440w.webp) ||
 | Segmentation Map | ![](https://pic1.zhimg.com/80/v2-60c525ddbad89d196bd3f412b260d6a8_1440w.webp) ||
 | Cartoon Line Drawing | ![](https://pic1.zhimg.com/80/v2-d98b515e5991e6b040bb0eac31130e24_1440w.webp) ||
+
+
+##### 部署
+
+【2023-4-10】
+- 模型[下载](https://huggingface.co/lllyasviel/ControlNet)
+
+```sh
+
+```
+
 
 
 #### 阿里 Composer
