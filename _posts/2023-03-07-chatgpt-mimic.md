@@ -1791,13 +1791,15 @@ print(response)
 
 我们要的是一个数字生命，以及这个新兴的数字生命与生态带来的新世界；还是又多了一个更方便地查询知识单元的工具。
 
-### 阿里 
+### 阿里 通义千问
 
 【2023-4-7】阿里大模型（[通义千问](https://tongyi.aliyun.com/)）内测申请，[官方](https://mp.weixin.qq.com/s/Zp23VMxQiWHZzsBZNUtPwQ)
 
 阿里大模型[内部访谈](https://mp.weixin.qq.com/s/PhiuEZPKAYBc_6mhOseBRw)
 
+### 昆仑万维 天工
 
+【2023-4-10】昆仑万维和奇点智源合作发布[「天工」大模型4月17日启动邀测](https://mp.weixin.qq.com/s/yikVXp2sda4frtl_TrSKzw), 4月17日开始[内测申请](http://tiangong.kunlun.com)
 
 ### ChatRWKV
 
