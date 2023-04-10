@@ -223,41 +223,6 @@ train = tf.train.GradientDescentOptimizer(learning_rate=0.01).minimize(cost)
 ![](https://pic1.zhimg.com/80/v2-8b4ef9ca40ca7f03d14751fd421c59d4_720w.jpg)
 
 
-## Tensorboard使用
-
-- 理解训练过程、调试和优化TensorFlow程序，TensorFlow团队开发了一套名为TensorBoard的可视化工具，它是一套可以通过浏览器运行的Web应用程序。TensorBoard可用于可视化TensorFlow计算图，绘制有关计算图运行结果的量化指标，并显示其他数据（如通过它的图像）
-- ![](https://p3-tt.byteimg.com/origin/pgc-image/45b05322178c442f99b39199e17c1d55?from=pc)
-
-- 5个步骤
-
-```python
-# (1) From TF graph, decide which tensors you want to log
-w2_hist = tf.summary.histogram("weights2", W2)
-cost_summ = tf.summary.scalar("cost", cost)
-# (2) Merge all summaries
-summary = tf.summary.merge_all()
-# Create writer and add graph
-# (3) Create summary writer
-writer = tf.summary.FileWriter(‘./logs’)
-writer.add_graph(sess.graph)
-# (4) Run summary merge and add_summary
-s, _ = sess.run([summary, optimizer], feed_dict=feed_dict)
-writer.add_summary(s, global_step=global_step)
-# (5) Launch TensorBoard
-tensorboard --logdir=./logs
-# 端口映射，远程server调用本地日志
-#ssh -L local_port:127.0.0.1:remote_port username@server.com
-ssh -L 7007:121.0.0.0:6006 hunkim@server.com # local
-tensorboard —logdir=./logs/xor_logs # server
-# 访问：http://127.0.0.1:7007
-
-```
-
-- TensorBoard 常用API
-  - ![](https://p3-tt.byteimg.com/origin/pgc-image/12d38976fa274af69a66f711541398b8?from=pc)
-- tensorboard可视化: 通过 TensorFlow 程序运行过程中输出的日志文件可视化 TenorFlow 程序的运行状态d
-  - ![](https://p1-tt.byteimg.com/origin/pgc-image/28ff3eb0d23347b89c3b51ce7062a231?from=pc)
-
 ## 特征处理
 
 - 【2021-5-27】[推理性能提升一倍，TensorFlow Feature Column 性能优化实践](https://blog.csdn.net/weixin_38753262/article/details/116810950)，在 CTR(Click Through Rate) 点击率预估的推荐算法场景，TensorFlow Feature Column 被广泛应用到实践中。这一方面带来了模型特征处理的便利，另一方面也带来了一些线上推理服务的性能问题。
@@ -1841,64 +1806,6 @@ dataset = tfds.load("mnist", split=tfds.Split.TRAIN, as_supervised=True)
     - tf.train.Int64List ：整数，通过 int64_list 参数传入一个由整数数组初始化的 tf.train.Int64List 对象。
 
 
-
-## TensorFlow Board
-
-TensorFlow自带的一个强大的可视化工具
-
-查看模型训练过程中各个参数的变化情况（例如损失函数 loss 的值）。虽然可以通过命令行输出来查看，但有时显得不够直观。而 TensorBoard 就是一个能够帮助我们将训练过程可视化的工具。
-原理
-- 在运行过程中，记录结构化的数据
-- 运行一个本地服务器，监听6006端口
-- 请求时，分析记录的数据，绘制
-操作方法
-- 每运行一次 tf.summary.scalar() ，记录器就会向记录文件中写入一条记录。除了最简单的标量（scalar）以外，TensorBoard 还可以对其他类型的数据（如图像，音频等）进行可视化
-- 代码目录打开终端: tensorboard --logdir=./tensorboard
-- 默认情况下，TensorBoard 每 30 秒更新一次数据。不过也可以点击右上角的刷新按钮手动刷新。
-- ![](https://tf.wiki/_images/tensorboard.png)
-
-TensorFlow在MNIST实验数据上得到Tensorboard结果
-- Event: 展示训练过程中的统计数据（最值，均值等）变化情况
-- Image: 展示训练过程中记录的图像
-- Audio: 展示训练过程中记录的音频
-- Histogram: 展示训练过程中记录的数据的分布图
-
-注意事项：
-- 如果需要重新训练，需要删除掉记录文件夹内的信息并重启 TensorBoard（或者建立一个新的记录文件夹并开启 TensorBoard， --logdir 参数设置为新建立的文件夹）；
-- 记录文件夹目录保持全英文。
-
-```python
-import tensorflow as tf
-from zh.model.mnist.mlp import MLP
-from zh.model.utils import MNISTLoader
-
-num_batches = 1000
-batch_size = 50
-learning_rate = 0.001
-log_dir = 'tensorboard' # 记录文件所保存的目录
-
-model = MLP()
-data_loader = MNISTLoader()
-optimizer = tf.keras.optimizers.Adam(learning_rate=learning_rate)
-summary_writer = tf.summary.create_file_writer(log_dir)     # 实例化记录器
-#tf.summary.trace_on(profiler=True)  # 开启Trace（可选）
-tf.summary.trace_on(graph=True, profiler=True)  # 开启Trace，可以记录图结构和profile信息；如果使用了 tf.function 建立了计算图，也可以点击 “Graphs” 查看图结构。
-
-for batch_index in range(num_batches):
-    X, y = data_loader.get_batch(batch_size)
-    with tf.GradientTape() as tape:
-        y_pred = model(X)
-        loss = tf.keras.losses.sparse_categorical_crossentropy(y_true=y, y_pred=y_pred)
-        loss = tf.reduce_mean(loss)
-        print("batch %d: loss %f" % (batch_index, loss.numpy()))
-        with summary_writer.as_default():                           # 指定记录器
-            tf.summary.scalar("loss", loss, step=batch_index)       # 将当前损失函数的值写入记录器
-    grads = tape.gradient(loss, model.variables)
-    optimizer.apply_gradients(grads_and_vars=zip(grads, model.variables))
-with summary_writer.as_default():
-    tf.summary.trace_export(name="model_trace", step=0, profiler_outdir=log_dir)    # 保存Trace信息到文件（可选）
-```
-
 ## 示例
 
 ### 异或难题
@@ -2012,6 +1919,7 @@ print(a.value().numpy())
 print(a.numpy())
 print(a.read_value())
 ```
+
 
 ## TensorFlow 分布式训练
 
@@ -2514,6 +2422,160 @@ class CNN(tf.keras.Model):
         output = tf.nn.softmax(x)
         return output
 ```
+
+# 训练可视化
+
+
+## TensorBoard
+
+TensorFlow自带的一个强大的可视化工具
+
+查看模型训练过程中各个参数的变化情况（例如损失函数 loss 的值）。虽然可以通过命令行输出来查看，但有时显得不够直观。而 TensorBoard 就是一个能够帮助我们将训练过程可视化的工具。
+原理
+- 在运行过程中，记录结构化的数据
+- 运行一个本地服务器，监听6006端口
+- 请求时，分析记录的数据，绘制
+
+### TensorBoard 使用方法
+
+操作方法
+- 每运行一次 tf.summary.scalar() ，记录器就会向记录文件中写入一条记录。除了最简单的标量（scalar）以外，TensorBoard 还可以对其他类型的数据（如图像，音频等）进行可视化
+- 代码目录打开终端: tensorboard --logdir=./tensorboard
+- 默认情况下，TensorBoard 每 30 秒更新一次数据。不过也可以点击右上角的刷新按钮手动刷新。
+- ![](https://tf.wiki/_images/tensorboard.png)
+
+TensorFlow在MNIST实验数据上得到Tensorboard结果
+- Event: 展示训练过程中的统计数据（最值，均值等）变化情况
+- Image: 展示训练过程中记录的图像
+- Audio: 展示训练过程中记录的音频
+- Histogram: 展示训练过程中记录的数据的分布图
+
+注意事项：
+- 如果需要重新训练，需要删除掉记录文件夹内的信息并重启 TensorBoard（或者建立一个新的记录文件夹并开启 TensorBoard， --logdir 参数设置为新建立的文件夹）；
+- 记录文件夹目录保持全英文。
+
+```python
+import tensorflow as tf
+from zh.model.mnist.mlp import MLP
+from zh.model.utils import MNISTLoader
+
+num_batches = 1000
+batch_size = 50
+learning_rate = 0.001
+log_dir = 'tensorboard' # 记录文件所保存的目录
+
+model = MLP()
+data_loader = MNISTLoader()
+optimizer = tf.keras.optimizers.Adam(learning_rate=learning_rate)
+summary_writer = tf.summary.create_file_writer(log_dir)     # 实例化记录器
+#tf.summary.trace_on(profiler=True)  # 开启Trace（可选）
+tf.summary.trace_on(graph=True, profiler=True)  # 开启Trace，可以记录图结构和profile信息；如果使用了 tf.function 建立了计算图，也可以点击 “Graphs” 查看图结构。
+
+for batch_index in range(num_batches):
+    X, y = data_loader.get_batch(batch_size)
+    with tf.GradientTape() as tape:
+        y_pred = model(X)
+        loss = tf.keras.losses.sparse_categorical_crossentropy(y_true=y, y_pred=y_pred)
+        loss = tf.reduce_mean(loss)
+        print("batch %d: loss %f" % (batch_index, loss.numpy()))
+        with summary_writer.as_default():                           # 指定记录器
+            tf.summary.scalar("loss", loss, step=batch_index)       # 将当前损失函数的值写入记录器
+    grads = tape.gradient(loss, model.variables)
+    optimizer.apply_gradients(grads_and_vars=zip(grads, model.variables))
+with summary_writer.as_default():
+    tf.summary.trace_export(name="model_trace", step=0, profiler_outdir=log_dir)    # 保存Trace信息到文件（可选）
+```
+
+### Tensorboard使用
+
+- 理解训练过程、调试和优化TensorFlow程序，TensorFlow团队开发了一套名为TensorBoard的可视化工具，它是一套可以通过浏览器运行的Web应用程序。TensorBoard可用于可视化TensorFlow计算图，绘制有关计算图运行结果的量化指标，并显示其他数据（如通过它的图像）
+- ![](https://p3-tt.byteimg.com/origin/pgc-image/45b05322178c442f99b39199e17c1d55?from=pc)
+
+- 5个步骤
+
+```python
+# (1) From TF graph, decide which tensors you want to log
+w2_hist = tf.summary.histogram("weights2", W2)
+cost_summ = tf.summary.scalar("cost", cost)
+# (2) Merge all summaries
+summary = tf.summary.merge_all()
+# Create writer and add graph
+# (3) Create summary writer
+writer = tf.summary.FileWriter(‘./logs’)
+writer.add_graph(sess.graph)
+# (4) Run summary merge and add_summary
+s, _ = sess.run([summary, optimizer], feed_dict=feed_dict)
+writer.add_summary(s, global_step=global_step)
+# (5) Launch TensorBoard
+tensorboard --logdir=./logs
+# 端口映射，远程server调用本地日志
+#ssh -L local_port:127.0.0.1:remote_port username@server.com
+ssh -L 7007:121.0.0.0:6006 hunkim@server.com # local
+tensorboard —logdir=./logs/xor_logs # server
+# 访问：http://127.0.0.1:7007
+
+```
+
+- TensorBoard 常用API
+  - ![](https://p3-tt.byteimg.com/origin/pgc-image/12d38976fa274af69a66f711541398b8?from=pc)
+- tensorboard可视化: 通过 TensorFlow 程序运行过程中输出的日志文件可视化 TenorFlow 程序的运行状态d
+  - ![](https://p1-tt.byteimg.com/origin/pgc-image/28ff3eb0d23347b89c3b51ce7062a231?from=pc)
+
+
+## wandb
+
+【2023-4-10】[wandb使用教程(一)：基础用法](https://zhuanlan.zhihu.com/p/493093033)
+
+wandb是一个免费的，用于记录实验数据的工具。wandb相比于tensorboard之类的工具，有更加丰富的用户管理，团队管理功能，更加方便团队协作。使用wandb首先要在网站上创建team，然后在team下创建project，然后project下会记录每个实验的详细数据。
+
+### wandb 安装
+
+wandb是一个Python库，所以可以直接通过pip来安装：
+ 
+```sh
+pip install wandb
+```
+
+然后在[wandb官网](https://wandb.ai/)注册一个账号，然后获取该账号的[私钥](https://wandb.ai/authorize)。然后在命令行执行：
+ 
+```sh
+wandb login
+```
+
+根据提示输入私钥即可。
+ 
+以本教程中的代码为例，我们创建一个叫做tmarl的team，然后创建了一个叫做wandb_usage的project:
+- ![](https://pic4.zhimg.com/80/v2-99fe7d414e63332bca36bed98f5e7bd7_1440w.jpg)
+- wandb界面展示
+ 
+然后在代码里面只要指定该team和project，便可以把数据传输到对应的project下：
+ 
+```py
+import wandbwandb.init(config=all_args,
+               project=your\_project\_name,
+               entity=your\_team\_name,
+               notes=socket.gethostname(),
+               name=your\_experiment\_name
+               dir=run_dir,
+               job_type="training",
+               reinit=True)
+```
+
+### 使用方法
+
+wandb的基础功能就是跟踪训练过程，然后在wandb网站上查看训练数据。wandb通过通用的log()函数，可以展示丰富的数据类型，包括训练`曲线`，`图片`，`视频`，`表格`，`html`，`matplotlib图像`等。
+
+详细教程见：[wandb使用教程(一)：基础用法](https://zhuanlan.zhihu.com/p/493093033)，[本地部署](https://zhuanlan.zhihu.com/p/521663928)
+*   展示训练曲线示例: [test_curves.sh](https://github.com/huangshiyu13/wandb_tutorial/blob/main/basic/test_curves.sh)
+*   展示图片示例: [test_images.sh](https://github.com/huangshiyu13/wandb_tutorial/blob/main/basic/test_images.sh)
+*   展示视频示例: [test_videos.sh](https://github.com/huangshiyu13/wandb_tutorial/blob/main/basic/test_videos.sh)
+*   展示matplotlib画图示例：[test_matplot.sh](https://github.com/huangshiyu13/wandb_tutorial/blob/main/basic/test_matplot.sh)
+*   展示表格示例: [test_tables.sh](https://github.com/huangshiyu13/wandb_tutorial/blob/main/basic/test_tables.sh)
+*   展示多进程group示例: [test\_multi\_process.sh](https://github.com/huangshiyu13/wandb_tutorial/blob/main/basic/test_multi_process.sh)
+*   展示html示例: [test_html.sh](https://github.com/huangshiyu13/wandb_tutorial/blob/main/basic/test_html.sh)
+*   PyTorch集成示例: [test_pytorch.sh](https://github.com/huangshiyu13/wandb_tutorial/blob/main/basic/test_pytorch.sh)
+
+
 
 
 # 结束
