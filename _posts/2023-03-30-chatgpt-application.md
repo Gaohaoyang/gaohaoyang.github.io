@@ -199,6 +199,8 @@ ChatGPT也可以与其他AIGC模型联合使用，获得更加炫酷实用的功
 
 ### 数据处理
 
+数据是石油，LLM 明显把炼油能力增强了，高价值行业和企业内部曾经难记录、难处理的数据都可以被重新以前分析。数据和信息的重构也意味着 AI 能承担更多决策权。
+
 #### 语料扩充
 
 【2023-2-17】[unlocking-the-power-of-llms](https://github.com/howl-anderson/unlocking-the-power-of-llms)
@@ -270,6 +272,18 @@ ChatGPT和MTurk分别将推文以“相关性、立场、主题、政策、实�
 
 ChatGPT 用于 人工标注的 Web系统：[Weak Labeling Tool using ChatGPT](https://github.com/ainbr/chatgpt-weak-labeler-web-ui), [代码](https://github.com/ainbr/chatgpt-weak-labeler-web-ui/blob/master/app.py)
 - ![](https://github.com/ainbr/chatgpt-weak-labeler-web-ui/raw/master/misc/screenshot1.png)
+
+#### CRM
+
+CRM 记录姓名、电话等结构化数据
+
+##### Gong
+
+以 Gong 为代表的 AI-based CRM 则是记录分析 B2B 销售和客户录音。
+
+##### Segment
+
+Segment 的主要业务是提供**实时消费者数据**，传统的 CRM 的数据和业务之间其实并不直接衔接，因为过去 CRM 采集到的数据可能也有错的、并且也过时了，但在 LLM 基础上，Segment 其实反而提供更实时、更有效的数据。
 
 ### NLP基础任务
 
