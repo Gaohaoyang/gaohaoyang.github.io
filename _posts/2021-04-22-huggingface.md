@@ -768,9 +768,85 @@ BertTokenizer 有以下常用方法：
   - 对于**两个句子**输入（多个句子只取前两个），分解词并加入特殊词形成“\[CLS], x1, \[SEP], x2, \[SEP]”的结构并转换为下标列表；
 - `decode`：可以将encode方法的输出变为完整句子。
 
-#### 变换图解
+构建transformer分词器时, 通常生成两个文件，一个 **merges.txt** 和 **vocab.json** 文件。[transformers分词方法](https://zhuanlan.zhihu.com/p/424565138)
+- merges.txt用于把文本转换为单词
+- 通过vocab.json文件处理这些单词，该文件只是一个从单词到单词ID的映射文件：
 
-【2023-3-21】更新
+模型在使用之前需要进行**分词**和**编码**，每个模型都会自带`分词器`（tokenizer），熟悉分词器的使用将会提高模型构建的效率。
+- string 原始字符串： :hello world!"
+- tokens 单词串： [ "hello", "world", "!"]
+- token ids 串： [ 7592, 2088, 999]
+- ![](https://pic4.zhimg.com/80/v2-b1d35ce62b42d3416f8abe01a073f883_1440w.webp)
+
+```py
+from transformers import BertTokenizer
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+
+text = 'hello world!'
+# 字符串转换为单词列表
+token_ids = tokenizer(text) 
+# 单词列表转换为单词ID列表
+token_ids = tokenizer.convert_tokens_to_ids(tokenizer.tokenize(text)) 
+# 一步到位：字符串 → id列表
+# 如： [101, 7592, 2088, 999, 102]
+token_ids = tokenizer.encode(text)
+tokens = tokenizer.encode(text, max_length=512, padding='max_length', return_tensors='pt') # 使用更多参数
+# encode仅输出单词ID张量，encode_plus输出包含单词ID张量和附加张量的字典。
+# {'input_ids': [101, 7592, 2088, 999, 102], 'token_type_ids': [0, 0, 0, 0, 0], 'attention_mask': [1, 1, 1, 1, 1]}
+token_ids = tokenizer.encode_plus(text)
+# 批量转化
+# {'input_ids': [[101, 7592, 2088, 999, 102], [101, 7592, 7733, 999, 102]], 'token_type_ids': [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0]], 'attention_mask': [[1, 1, 1, 1, 1], [1, 1, 1, 1, 1]]}
+token_ids = tokenizer.batch_encode_plus([text])
+```
+
+#### 变换过程
+
+【2023-3-21】`string`、`tokens`、`ids` 三者转换
+- `string` → `tokens` **tokenize**(text: str, **kwargs)
+- `tokens` → `string` **convert_tokens_to_string**(tokens: List\[token])
+- `tokens` → `ids` **convert_tokens_to_ids**(tokens: List\[token])
+- `ids` → `tokens` **convert_ids_to_tokens**(ids: int or List\[int], skip_special_tokens=False)
+- `string` → `ids` **encode**(text, text_pair=None, add_special_tokens=True, padding=False, truncation=False, max_length=None, return_tensors=None)
+- `ids` → `string` **decode**(token_ids: List[int], skip_special_tokens=False, clean_up_tokenization_spaces=True)
+
+tokenizer用法：encode、encode_plus、batch_encode_plus等等
+- **encode_plus**:
+  - encode_plus(text, text_pair=None, add_special_tokens=True, padding=False, truncation=False, max_length=None, stride=0, is_pretokenized=False, pad_to_multiple_of=None, return_tensors=None, return_token_type_ids=None, return_attention_mask=None, return_overflowing_tokens=False, return_special_tokens_mask=False, return_offsets_mapping=False, return_length=False)
+- **batch_encode_plus**: 输入为 encode 输入的 batch，其它参数相同。注意，plus 是返回一个字典。
+- **batch_decode**: 输入是batch.
+
+```py
+#这里以bert模型为例，使用上述提到的函数
+
+from transformers import BertTokenizer
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+text = "It's a nice day today!"
+
+#tokenize,#仅用于分词
+seg_words = tokenizer.tokenize(text)  
+print("tokenize分词结果：\n",seg_words)
+
+#convert_tokens_to_ids，将token转化成id，在分词之后。
+#convert_ids_to_tokens,将id转化成token，通常用于模型预测出结果，查看时使用。
+seg_word_id = tokenizer.convert_tokens_to_ids(seg_words)  
+print("tokenize Id:\n",seg_word_id)
+
+#encode,进行分词和token转换，encode=tokenize+convert_tokens_to_ids
+encode_text = tokenizer.encode(text)
+print("encode结果：\n",encode_text)
+
+#encode_plus,在encode的基础之上生成input_ids、token_type_ids、attention_mask
+encode_plus_text = tokenizer.encode_plus(text)
+print("encode_plus结果：\n",encode_plus_text)
+
+#batch_encode_plus,在encode_plus的基础之上，能够批量梳理文本。
+batch_encode_plus_text = tokenizer.batch_encode_plus([text,text])
+print("batch_encode_plus结果：\n",batch_encode_plus_text)
+```
+
+[原文链接](https://blog.csdn.net/weixin_48030475/article/details/128688629)
+
+#### 变换图解
 
 <div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers tags lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2023-03-21T09:35:14.611Z\&quot; agent=\&quot;5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36\&quot; etag=\&quot;RBF3JRrHLDmxsSUVTnIQ\&quot; version=\&quot;21.0.7\&quot;&gt;&lt;diagram id=\&quot;Lw-1uFHNzwHmlxUDpAkU\&quot; name=\&quot;第 1 页\&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
 <script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
