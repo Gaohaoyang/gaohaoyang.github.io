@@ -273,17 +273,46 @@ ChatGPT和MTurk分别将推文以“相关性、立场、主题、政策、实�
 ChatGPT 用于 人工标注的 Web系统：[Weak Labeling Tool using ChatGPT](https://github.com/ainbr/chatgpt-weak-labeler-web-ui), [代码](https://github.com/ainbr/chatgpt-weak-labeler-web-ui/blob/master/app.py)
 - ![](https://github.com/ainbr/chatgpt-weak-labeler-web-ui/raw/master/misc/screenshot1.png)
 
-#### CRM
+### 内容管理/营销
 
 CRM 记录姓名、电话等结构化数据
 
-##### Gong
+#### Gong
 
 以 Gong 为代表的 AI-based CRM 则是记录分析 B2B 销售和客户录音。
 
-##### Segment
+#### Segment
 
 Segment 的主要业务是提供**实时消费者数据**，传统的 CRM 的数据和业务之间其实并不直接衔接，因为过去 CRM 采集到的数据可能也有错的、并且也过时了，但在 LLM 基础上，Segment 其实反而提供更实时、更有效的数据。
+
+#### Typeface
+
+【2023-4-10】[Typeface](https://www.typeface.ai/) 是一个 AI 营销内容生成平台，由前 Adobe CTO 创立。
+- The enterprise-grade generative AI app that empowers everyone to express their unique imagination.
+
+能力：
+- `Prompt`: Create engaging content in seconds
+  - A new visual vocabulary to express your ideas: Generate anything from a simple prompt, so you can easily create without a steep learning or time curve.
+  - 一个简单的提示语，就能生成特定领域里的营销内容（文字/图片）
+  - Spend more time on ideas, less on tasks: Tired of looking at a blank page?  Jump start projects by simply typing your idea. Stress test headlines, brainstorm campaigns, personalize pitches, and more.
+  - 将客户精力从具体任务转移到点子上：压力测试标题，头脑风暴活动，个性化宣传等等
+  - Write and edit any type of content: Click to add the elements you want – headlines, paragraphs, images, captions – to build the entire content flow on one visual canvas. Not sure where to start? Use a template and modify it however you need.
+  - ![](https://www.typeface.ai/images/Prompt-Visual-1-7.webp)
+  - 撰写、编辑各种类型的内容：只需要轻轻一点，就能添加标题、段落、图像、注释等元素，在同一个页面中完成内容创作。
+  - Flex to your style and collaborate faster: Develop multiple assets quickly and in parallel. Stylize your way with built-in formatting and image editing tools, such as filters, adjustments, and overlays. Share your work with collaborators across channels.
+  - 适配客户风格，协同工作
+  - ![](https://www.typeface.ai/images/Prompt-Visual-3-3.webp)
+- `Flow`: Extend and customize to your workflows, [flow](https://www.typeface.ai/features/flow.html)
+- `Blend`: Personalize to your brand and audiences, [blend](https://www.typeface.ai/features/blend.html)
+- `Safe`: Ensure brand safety and control; 
+  - 拼写检查、剽窃检测、真实性检测、品牌控制
+
+Typeface 最大的特点是能够学习企业客户的“专有数据”。客户将带有企业风格的专有数据导入 Typeface 供模型学习，基于这些专有数据，Typeface 可以输出更个性化的、满足企业实际需求的内容，做到让 AI “更懂用户”。
+
+为了实现这一点，Typeface 让每位客户拥有独有的 AI 模型和托管服务，以及原创内容检测、品牌契合度检测和文字上的语法检测等功能。而收集专有数据的意识也在行业内逐渐形成共识。
+
+
+
 
 ### NLP基础任务
 
