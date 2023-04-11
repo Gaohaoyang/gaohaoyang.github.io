@@ -50,12 +50,32 @@ ChatGPT2022年12月发布，但真正火到出圈，是春节后，尤其是3月
 
 ## ChatGPT 变现
 
+### 教人如何挣钱
+
 【2023-4-11】国内靠ChatGPT挣钱的[第一波人](https://www.toutiao.com/w/1762574053066767)，主要教别人怎么靠ChatGPT挣钱的。快速包装交付、精准找到愿意为这些信息差付费的客群
 - ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/cb048fac14c04e40914e28fbe538da2f~tplv-obj:823:813.image?_iz=97245&from=post&x-expires=1688947200&x-signature=LMhWJtDCvvO44zYNtOtnKVj%2BnQQ%3D)
 
 评论
 > 有钱赚他自己不赚，也不教给他父母兄弟姐妹去赚，他教给陌生的你？
 
+### Prompt 编写
+
+Prompt是在ChatGPT中输入的一些关键词，按照用户意愿生成出各种各样的内容，提高工作效率。
+- Prompt的好处是不仅可以大大减少思考时间，还可以让创造力更加丰富多彩。
+
+详见站内专题：[ChatGPT提示工程](https://wqw547243068.github.io/chatgpt#%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B)
+
+#### AIPRM
+
+有人组织了社区来工具化优质prompt，集人类智慧形成普惠大众的工具 —— AIPRM， 自动生成优质Prompt的工具
+- AIPRM 全称：Artificial Intelligence Project Resource Manager
+- 要解决的问题就是通过社区互助提高使用AI产品的生产力（比如chatGPT）
+- ![](https://pic3.zhimg.com/80/v2-24a428805505f96e183f040cf2397e02_1440w.webp)
+- ![](https://pic2.zhimg.com/80/v2-423bc023da6630c8cdd0cacaabd88145_1440w.webp)
+
+【2023-4-11】[终极写作工具：小白也会用的ChatGPT Prompt提示综合指南](https://zhuanlan.zhihu.com/p/611365958)
+- [AIPRM](https://www.aiprm.com/)
+- Chrome 插件：[aiprm-for-chatgp](https://chrome.google.com/webstore/detail/aiprm-for-chatgpt/ojnbohmppadfgpejeebfnmnknjdlckgj?hl=en)
 
 ## ChatGPT 应用领域
 
