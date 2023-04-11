@@ -496,6 +496,11 @@ OpenAI 官网显示，为 ChatGPT 项目做出贡献的人员共 87 人 (总人�
 - 性别特征：团队由男性主导，女性仅占 1 成
   - 9 位女性成员中，有 2 位是华人，即曾就读于北京大学的翁丽莲，以及 Steph Lin。
 
+OpenAI 的组织方式能够有自下而上的创新（ChatGPT 就是一个自下而上的 idea），也能在确定目标后集中力量朝一个方向努力，和传统科研机构单兵作战的方式不同。此外，OpenAI 给员工也有足够的激励，工资+期权平均成本 120 万美金/人/年，相对于 Google、Microsoft 等大厂也十分优渥。
+
+优秀人才的号召力、吸引人的组织氛围以及优渥的激励让 OpenAI 正在“掏空”整个硅谷的科学家和 Super Talents。
+
+
 #### GPT-4 团队
 
 【2023-3-18】[GPT-4背后的开发者：七大团队，三十余位华人](https://mp.weixin.qq.com/s/PIDqDLYoGO7xQPnaB7G6yA)
@@ -629,9 +634,6 @@ GPT-4 幕后的研发团队大致可分为七个部分：预训练（Pretraining
 此外，在 GPT-4 的开发上 OpenAI 也对微软表示了感谢，特别是微软 Azure 服务为模型训练提供了基础架构设计和管理方面的支持，微软必应团队、安全团队也对 GPT-4 的部署等工作作出了贡献。
 
 
-
-### 组织变化
-
 成立之初， OpenAI 只有10名成员，除了主要负责打理公司、招贤纳士的CTO `Greg Brockman`和上文所说的两位联合创始人外，其余7人都是AI技术领域的顶尖研究学者, 包括总揽研究事宜的原 Google Brain 研究科学家`Ilya Sutskever`。
 - [“钢铁侠”刚退出的OpenAI组织，了解一下？](https://zhuanlan.zhihu.com/p/34149980)
 
@@ -685,7 +687,7 @@ OpenAI 人才流失的因素不外乎十个字：理想很丰满，现实很骨�
 
 2017年6月，马斯克也终于动起了歪脑筋——直接从OpenAI挖人。被马斯克相中的人名叫`Andrej Karpathy`
 
-#### Andrej Karpathy
+#### Andrej Karpathy -- cv大牛
 
 `Andrej Karpathy` （江湖人称 `AK-47`）
 - 师从Google AI首席科学家的`李飞飞`，与`Ilya Sutskever`同样是OpenAI成立初期10人团队中的一员，且同样曾在`Google Brain`项目实习。
@@ -714,6 +716,15 @@ Andrej Karpathy履历
   - 【2023-2-9】[加入最火OpenAI，特斯拉前AI总监Andrej Karpathy自宣回归](https://mp.weixin.qq.com/s/S5Q9BWD90-_UqLP81iFttA)
 - OpenAI在网络中就被实锤了一个新的Tittle：特斯拉旗下人工智能研究机构。顶着“非营利性”的旗号，却成为了创始人马斯克的个人人才储备库
 
+cv大牛，OpenAI 做多模态的有力加速器
+
+
+#### Greg Brockman 大管家
+
+Greg Brockman：OpenAI 内部的大管家和冲锋队长，⼯程能⼒和基础设施的打造者。
+
+作为 OpenAI 的早期重要联创之一，Greg 是一位数一数二的工程天才，Greg 本人有 80% 的时间在写代码，我们了解到 OpenAI 内部的模型训练的 infra 架构基本都由 Greg 一个人完成，包括了 GPT-4 的 Infra。同时，Greg 也想一个冲锋队长，能在大家都不知如何下手时候带队冲锋。
+
 
 #### Ilya Sutskever 灵魂人物
 
@@ -721,6 +732,10 @@ Andrej Karpathy履历
 - ![img](https://pic1.zhimg.com/80/v2-b0d887fc1be786486a86afcd8d390144_1440w.webp)
 
 Ilya Sutskever 深度学习教父 Hinton 的学生， `AlexNet` 的作者，本身就是深度学习革命的开创者，拥有最强的远见力和最坚定的深度学习信仰
+
+DL 启蒙者，帮助 OpenAI 及时⾛上 Transformer 路线。
+
+Ilya 在 OpenAI 属于精神领袖的存在，他的技术直觉和品味很好，能够找到一些大家之前没有很重视的方向，比如 Scaling 能 work，三年前大家都不相信的时候特别坚持。
 
 履历
 - 1986年，出生于俄罗斯，加拿大籍。
@@ -751,7 +766,11 @@ Ilya Sutskever 深度学习教父 Hinton 的学生， `AlexNet` 的作者，本�
 - 因为早年 `Seq2Seq` 也是他搞出来的，所以当google把`transformer` 搞出来时，他的嗅觉最灵敏，知道这东西能解决`LSTM`存在的记忆问题，从而能够scale。而大部分人看到`transformer`并不会产生这种认知。
 - 而ChatGPT基本原理和之前的OpenAI Dota Five，Alphastar 没有本质区别，都是先`监督学习`再`强化学习`，只是**变成语言通用**场景了。单单这个认知也是太强了！
 
-#### Wojciech Zaremba
+#### Wojciech Zaremba 攻坚手
+
+Wojciech Zaremba 联创，攻坚手，亲自放弃机器人探索后打造 Codex。
+
+在 GPT-4 的研究中，Wojciech 创建了 GPT-4 的数据集并负责了强化学习和 Alignment 中的人类数据管理工作。很多人评价 GPT-4 之所以能和别的大语言模型拉开差距，模型很重要，数据更重要。
 
 `Wojciech Zaremba`也是最初加入到OpenAI团队中的一员，他师从于另一位深度学习三巨头`Yann LeCun`，并曾先后在`Google`和`Facebook`工作。在回忆起最终决定加入OpenAI的理由时，他曾这样说道：
 - 尽管我非常尊重Google和Facebook这样的大公司，然而这些公司近乎疯狂地**开高价留人**，让人很难不理解为: 这些企业是在从自身商业利益的角度考虑，在想着为自己公司的AI产品构建技术壁垒，所以我选择`OpenAI`。
@@ -767,6 +786,38 @@ Ilya Sutskever 深度学习教父 Hinton 的学生， `AlexNet` 的作者，本�
 - 第二款名为`Universe`。用于训练“解决通用问题的AI”的基础开发架构，在2016年12月首次发布。这一架构中包含了近千种AI训练环境，开发者可以利用这一工具将任何程序转换到Gym的环境下并进行训练。所以这款软件平台，也可以说是为Gym打开了一个万能的接口；
 - 第三款名为`Roboschool`。用于模拟机器人控制训练的开源软件，在2017年5月首次发布。这一软件再度整合了Gym平台，可以视为是专门针对“机器人”这个应用领域单独开设的免费训练平台；
 - 第四款名为`Blocksparse`。用于优化GPU神经网络运行效率的工具包，在2017年12月首次发布。这一软件主要是利用了数值分析中稀疏矩阵（Sparse matrix）的特性，通过减少不必要的运算量，来实现优化记忆神经网络的目的。
+
+
+#### John Schulman RLHF开创者
+
+John Schulman：RLHF 的开创者，打造了 OpenAI 的 RL 基础设施。
+
+John 在 Reinforcement Learning 的积累成就了目前的 ChatGPT。John 在 GPT-4 的开发过程中是 RL 和 Alignment 的带队人。
+
+
+#### Jan Leike 落地 instruct GPT
+
+Jan Leike：落地 instruct GPT , 把 alighment 带到新高度。
+
+Alignment 是 OpenAI  区别于 Google 等大厂的重要能力，Jan Leike 带领团队攻坚递归奖励模型、辩论、迭代放大三大研究，并主导落地了 Instruct GPT，在 GPT-4 的开发过程中也负责了 Alignment 部分。
+
+#### Mira Murati -- 新晋 CTO
+
+Mira Murati：OpenAI 新晋 CTO ，引领了 OpenAI 在 AI 安全上的探索。
+
+Mira 的背景十分有趣，在加入 OpenAI 之前，Mira 在 Leap Motion 负责产品和工程（Leap Motion  是 MidJourney  CEO 的上一个创业项目），Mira 在职业生涯早期还曾在 Tesla 担任产品。我们认为 Mira 可能是人机交互领域最重要的 PM 之一。
+
+#### Lilian Weng -- 前沿技术和应用研究
+
+• Lilian Weng：前沿技术和应用研究的桥梁，也是 OpenAI 高管团队中唯一的中国人。
+
+Lilian 是前沿技术和应用研究的桥梁，通过设计 API 拓宽了 GPT 的应用领域。在 GPT-4 项目中，她主导了应用领域的研究。在她的 Lil Log 中有很多研究的分享，是在 AI 从业者中很有影响力的博客。
+
+#### Jakub Pachocki -- 预训练专家
+
+• Jakub Pachocki：OpenAI 的预训练专家，Sam 在 GPT-4 发布后专门感谢的人。
+
+他参与了 OpenAI 几乎大部分成功项目——深度参与了 Gym 和 Dota 的研究，负责了其中核心技术的攻坚，后带领推理和深度学习组。作为 GPT-4 预训练和整个项目的负责人（整个项目一共有两位 overall lead），Sam Altman 在 GPT-4 发布后发布一条 Twitter：“GPT-4 预训练方法的成就离不开 Jakub 的领导力和远见。”
 
 #### Ian Goodfellow GAN之父
 
@@ -824,6 +875,8 @@ OpenAI首席执行官`山姆·奥特曼`谈推出 ChatGPT：
 
 通用人工智能（AGI）是驱动他所有行动的推力，ChatGPT不会取代搜索，但有一天某个人工智能系统可以。
 > “如果AGI真正完全实现，我可以想象它打破资本主义的所有这些方式。”
+
+当 2018 年 GPT-2 的论文被驳回时，Sam 在团队周会上将拒信的内容朗读给所有员工，并告诉大家在通往成功的路上总会有阻碍，但是大家一定要有信念。
 
 【2023-1-31】[Sam Altman的成功学](https://zhuanlan.zhihu.com/p/601852717)
 - 在硅谷创业教父Paul Graham的眼里，[Sam Altman](https://blog.samaltman.com/)是一位极具魄力的领导者和开拓者。如今，已成为OpenAI CEO的[Sam Altman](https://blog.samaltman.com/)是全球范围内当之无愧的科技领军人物
