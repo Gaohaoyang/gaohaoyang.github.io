@@ -660,6 +660,9 @@ BloombergGPT的训练数据库名为FINPILE，由一系列英文金融信息组�
 
 ### 插件
 
+Action 实现上，除了 OpenAI  的 Plugin，Adept 和 Inflection 这两家早期团队想以自然语言为基础，为用户打造新的 LUI （语言为基础的 UI）方式。
+
+#### Plugin
 
 3月24日，OpenAI宣布解除了ChatGPT无法联网的限制，以第三方插件为中介，使ChatGPT能访问其他网站并获取实时信息，还支持执行计算。
 
@@ -747,6 +750,11 @@ LangChain 由前 Robust Intelligence 的机器学习工程师 Chase Harrison 在
 
 还可以集成多个用户的输入资源执行简单的推理，比如在以下三张图片中，数出其中有多少匹斑马。
 - ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/809148f403f3486eae6f7e1f9c172116~noop.image?_iz=58558&from=article.pc_detail&x-expires=1681185700&x-signature=x8aBJK6pJiGy309RKsS%2Bm52Kw2w%3D)
+
+
+#### 创业公司
+
+Adept 和 Inflection 这两家早期团队想以自然语言为基础，为用户打造新的 **LUI** （语言为基础的 UI）方式。
 
 ### 机器人
 
