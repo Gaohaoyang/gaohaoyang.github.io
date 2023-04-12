@@ -2076,6 +2076,12 @@ predict = model.predict(text,k=1) # 选择概率最大的一个语种
   - <font color='red'>标贝 > 讯飞 > 阿里 > 百度 > 思必驰 > 灵云 </font>
 - 详细代码参考：[Python：TTS语音合成技术，市场各大平台对比以及实现](https://cloud.tencent.com/developer/article/1403570)
 
+### TTSMaker
+
+【2023-4-12】[TTSMaker](https://link.zhihu.com/?target=https%3A//ttsmaker.com/) 是一款免费的文本转语音工具，提供语音合成服务，支持多种语言，包括英语、法语、德语、西班牙语、阿拉伯语、中文、日语、韩语、越南语等，以及多种语音风格。
+
+可以用它大声朗读文本和电子书，或下载音频文件用于商业用途（完全免费），每周限制 20000 个字符（部分声音可支持无限制不限量使用）。
+
 ### pyttsx
 
 - 跨平台tts工具包
