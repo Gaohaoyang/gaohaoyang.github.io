@@ -787,12 +787,14 @@ ChatGPT之争已经超出了算法的范畴，它更是一个AI+云计算能力�
 | Colossal AI | [ColossalChat](https://chat.colossalai.org/) | 2023年3月28日 | 公开 | - |
 | 阿里 | [通义千问](https://tongyi.aliyun.com) | 2023年4月7日 | 企业用户内测 | https://tongyi.aliyun.com/ |
 | 360 | [360智脑](http://www.360dmodel.com/) | 2023年4月10日 | 企业用户内测 | http://www.360dmodel.com/ |
-| 商汤 | 商量 | SenseChat | 2023年4月10日 | 即将邀请内测 | https://www.sensecore.cn/ |
+| 微软 | [DeepSpeed Chat](https://github.com/microsoft/DeepSpeed)  | 2023年4月12日 | 发布，超过colossal ai |  |
+| 商汤 | [商量 SenseChat](https://www.sensecore.cn) | 2023年4月10日 | 即将邀请内测 | https://www.sensecore.cn/ |
 | 昆仑万维 | [天工3.5](https://www.sensecore.cn) | 2023年4月17日 | 即将邀请内测 | http://tiangong.kunlun.com |
 | 科大讯飞 | 1+N认知智能大模型 | 2023年5月6日 | 即将发布 |
 | 网友有道 | 子曰 | 近期 | 即将发布 | 消息来源：网易新闻 |
 | 京东 | 言犀 | 今年 | 未开放 | 消息来源：京东集团副总裁何晓冬 |
 | 腾讯 | // | // | 未开放 | 消息来源：腾讯集团高级执行副总裁汤道生 |
+
 
 
 ### 小冰链
@@ -1820,6 +1822,51 @@ print(response)
 ### 昆仑万维 天工
 
 【2023-4-10】昆仑万维和奇点智源合作发布[「天工」大模型4月17日启动邀测](https://mp.weixin.qq.com/s/yikVXp2sda4frtl_TrSKzw), 4月17日开始[内测申请](http://tiangong.kunlun.com)
+
+### 微软DeepSpeed Chat
+
+【2023-4-12】[微软DeepSpeed Chat震撼发布，一键RLHF训练千亿级大模型](https://mp.weixin.qq.com/s/G8W9nSQd600wesSJFE2dhw), 微软开源一个模型训练中加入完整RLHF流程的系统框架——[DeepSpeed Chat](https://github.com/microsoft/DeepSpeed)。
+- 由于OpenAI太不Open，开源社区为了让更多人能用上类ChatGPT模型，相继推出了LLaMa、Alpaca、Vicuna、Databricks-Dolly等模型。
+但由于缺乏一个支持端到端的RLHF规模化系统，目前类ChatGPT模型的训练仍然十分困难。而DeepSpeed Chat的出现，正好补全了这个「bug」,DeepSpeed Chat把成本大大地打了下来。
+- 只要花1620美元，就可以通过混合引擎DeepSpeed-HE，在2.1天内训练一个OPT-66B模型。如果使用多节点、多GPU系统，DeepSpeed-HE可以花320美元，在1.25小时内训练一个OPT-13B模型，花5120美元，就能在不到一天的时间内训练一个OPT-175B模型。
+
+DeepSpeed Chat具有以下三大核心功能：
+1. 简化ChatGPT类型模型的训练和强化推理体验
+  - 开发者只需一个脚本，就能实现多个训练步骤，并且在完成后还可以利用推理API进行对话式交互测试。
+2. DeepSpeed-RLHF模块
+  - DeepSpeed-RLHF复刻了InstructGPT论文中的训练模式，并提供了数据抽象和混合功能，支持开发者使用多个不同来源的数据源进行训练。
+3. DeepSpeed-RLHF系统
+  - 团队将DeepSpeed的训练（training engine）和推理能力（inference engine) 整合成了一个统一的混合引擎（DeepSpeed Hybrid Engine or DeepSpeed-HE）中，用于RLHF训练。由于，DeepSpeed-HE能够无缝地在推理和训练模式之间切换，因此可以利用来自DeepSpeed-Inference的各种优化。
+
+经过DeepSpeed-Chat的训练，13亿参数版「ChatGPT」在问答环节上的表现非常亮眼。不仅能get到问题的上下文关系，而且给出的答案也有模有样。多轮对话中，这个13亿参数版「ChatGPT」所展示出的性能，也完全超越了这个规模的固有印象
+
+#### 效果评估
+
+与Colossal-AI或HuggingFace-DDP等现有系统相比，DeepSpeed-Chat具有超过一个数量级的吞吐量，能够在相同的延迟预算下训练更大的演员模型或以更低的成本训练相似大小的模型。
+- 在单个GPU上，DeepSpeed使RLHF训练的吞吐量提高了10倍以上。虽然CAI-Coati和HF-DDP都可以运行1.3B的模型，但DeepSpeed可以在相同的硬件上运行6.5B模型，直接高出5倍。
+- 单个节点的多个GPU上，DeepSpeed-Chat在系统吞吐量方面比CAI-Coati提速6-19倍，HF-DDP提速1.4-10.5倍。
+
+DeepSpeed-Chat能够获得如此优异的结果，关键原因之一便是混合引擎在生成阶段提供的加速。
+
+#### 安装
+
+```sh
+git clone https://github.com/microsoft/DeepSpeed.git
+cd DeepSpeed
+pip install .
+# example
+git clone https://github.com/microsoft/DeepSpeedExamples.git
+cd DeepSpeedExamples/applications/DeepSpeed-Chat/
+pip install -r requirements.txt
+# 1.3B模型，1个消费级GPU, 耗时1-2h
+python train.py --actor-model facebook/opt-1.3b --reward-model facebook/opt-350m --num-gpus 1
+# 13b参数模型, 8个GPU，半天时间
+python train.py --actor-model facebook/opt-13b --reward-model facebook/opt-350m --num-gpus 8
+# 66B参数模型，64个GPU
+python train.py --actor-model facebook/opt-66b --reward-model facebook/opt-350m --num-gpus 64
+
+```
+
 
 ### ChatRWKV
 
