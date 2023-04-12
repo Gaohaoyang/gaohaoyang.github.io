@@ -773,7 +773,27 @@ ChatGPT之争已经超出了算法的范畴，它更是一个AI+云计算能力�
 
 谷歌唯一剩下的步骤是通过人类反馈使这个 LLM 与对话场景对齐（alignment）。如果他们很快发布类似 ChatGPT 的或者更好的聊天机器人，我不会感到惊讶 —— 尽管他们最近 “失败” 地展示了一版可能基于 LaMDA 的 Bard。
 
-## 复现案例
+## 复现详情
+
+### 汇总
+
+| 公司 | 产品 | 日期 | 阶段 | 链接 |
+| --- | --- | --- | --- | --- |
+| OpenAI | [ChatGPT](https://chat.openai.com/) | 2022年11月30日 | 开放注册 | https://chat.openai.com/ |
+| Google | [Bard](http://bard.google.com) | 2023年2月8日 | 公开测试 | http://bard.google.com/ |
+| 复旦大学 | [MOSS](https://moss.fastnlp.top) | 2023年2月20日 | 公开测试(目前升级中) | https://moss.fastnlp.top/ |
+| 清华大学 | [ChatGLB-6B](https://github.com/THUDM/ChatGLM-6B) | 2023年3月15日 | 已开源 | https://github.com/THUDM/ChatGLM-6B |
+| 百度 | [文心一言](https://yiyan.baidu.com) | 2023年3月16日 | 企业用户内测 | https://yiyan.baidu.com/ |
+| Colossal AI | [ColossalChat](https://chat.colossalai.org/) | 2023年3月28日 | 公开 | - |
+| 阿里 | [通义千问](https://tongyi.aliyun.com) | 2023年4月7日 | 企业用户内测 | https://tongyi.aliyun.com/ |
+| 360 | [360智脑](http://www.360dmodel.com/) | 2023年4月10日 | 企业用户内测 | http://www.360dmodel.com/ |
+| 商汤 | 商量 | SenseChat | 2023年4月10日 | 即将邀请内测 | https://www.sensecore.cn/ |
+| 昆仑万维 | [天工3.5](https://www.sensecore.cn) | 2023年4月17日 | 即将邀请内测 | http://tiangong.kunlun.com |
+| 科大讯飞 | 1+N认知智能大模型 | 2023年5月6日 | 即将发布 |
+| 网友有道 | 子曰 | 近期 | 即将发布 | 消息来源：网易新闻 |
+| 京东 | 言犀 | 今年 | 未开放 | 消息来源：京东集团副总裁何晓冬 |
+| 腾讯 | // | // | 未开放 | 消息来源：腾讯集团高级执行副总裁汤道生 |
+
 
 ### 小冰链
 
