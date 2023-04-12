@@ -801,9 +801,36 @@ LangChain 由前 Robust Intelligence 的机器学习工程师 Chase Harrison 在
 - ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/809148f403f3486eae6f7e1f9c172116~noop.image?_iz=58558&from=article.pc_detail&x-expires=1681185700&x-signature=x8aBJK6pJiGy309RKsS%2Bm52Kw2w%3D)
 
 
-#### 创业公司
+#### AutoGPT
+
+【2023-4-12】[AutoGPT 太火了，无需人类插手自主完成任务](https://mp.weixin.qq.com/s/bV1tPc7hNn2z06YOpzyanw)
+
+AutoGPT 的研究开始走进大众视野。
+- 一个实验性的开源应用程序，展示了 GPT-4 语言模型的功能。该程序由 GPT-4 驱动，可以自主实现用户设定的任何目标。
+- AutoGPT 相当于给基于 GPT 的模型一个内存和一个身体。有了它，你可以把一项任务交给 AI 智能体，让它自主地提出一个计划，然后执行计划。此外其还具有互联网访问、长期和短期内存管理、用于文本生成的 GPT-4 实例以及使用 GPT-3.5 进行文件存储和生成摘要等功能。AutoGPT 用处很多，可用来分析市场并提出交易策略、提供客户服务、进行营销等其他需要持续更新的任务。
+- [GitHub 地址](https://github.com/torantulino/auto-gpt)
+
+特斯拉前 AI 总监、刚刚回归 OpenAI 的 Andrej Karpathy 也为其大力宣传，并在推特赞扬：「AutoGPT 是 prompt 工程的下一个前沿。」
+
+#### AgentGPT -- 改进
+
+AgentGPT：浏览器中直接部署自主 AI 智能体
+- [项目主页](https://agentgpt.reworkd.ai)
+- [GitHub 地址](https://github.com/reworkd/AgentGPT)
+
+近日，又有开发者对 AutoGPT 展开了新的探索尝试，创建了一个可以在浏览器中组装、配置和部署自主 AI 智能体的项目 ——AgentGPT。项目主要贡献者之一为亚马逊软件工程师 Asim Shrestha
+
+AgentGPT 允许你为自定义 AI 命名，让它执行任何想要达成的目标。自定义 AI 会思考要完成的任务、执行任务并从结果中学习，试图达成目标。如下为 demo 示例：HustleGPT，设置目标为创立一个只有 100 美元资金的初创公司。
+
+用户在使用该工具时，同样需要输入自己的 OpenAI API 密钥。AgentGPT 目前处于 beta 阶段，并正致力于长期记忆、网页浏览、网站与用户之间的交互。
+
+#### Adept
 
 Adept 和 Inflection 这两家早期团队想以自然语言为基础，为用户打造新的 **LUI** （语言为基础的 UI）方式。
+
+#### Inflection
+
+待定
 
 ### 机器人
 
