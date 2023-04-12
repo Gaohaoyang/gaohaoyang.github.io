@@ -907,6 +907,21 @@ Neurosity 宣称 Crown 的计算模块与 MacBook Air 一样强大，配备四�
 中长期来看，首先能够加速城市领航辅助功能（毫末NOH）落地，而且是重感知不依赖高精地图量产方案，领先业内一年以上。
 
 
+### 游戏
+
+
+#### AI NPC
+
+【2023-4-12】[用ChatGPT控制NPC，行动逼真如正常人！斯坦福谷歌新研究炸场](https://www.toutiao.com/article/7220674479016526375)
+
+斯坦福和谷歌的一项新研究
+- 创造了25个AI NPC，每个NPC都有不同的身份和行动决策，并让它们在一个沙盒环境中共同生活，背后依靠ChatGPT大模型来完成行动决策。
+- 这些AI NPC不仅会像人一样生活，如作家就去写作、店主就去经营商店，而且他们彼此之间还会发生交互，甚至产生对话：
+
+- [试玩地址](https://reverie.herokuapp.com/arXiv_Demo/#)
+- [论文地址](https://arxiv.org/abs/2304.03442)
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/6e36e418fedd427b992d5a92dda32891~noop.image?_iz=58558&from=article.pc_detail&x-expires=1681873478&x-signature=CwolSxe%2FtcjUXzE0%2FGE5gz95BV4%3D)
+
 ## GPT 威胁
 
 【2023-3-29】[暂停GPT-5研发呼吁引激战！吴恩达、LeCun带头反对，Bengio站队支持](https://zhuanlan.zhihu.com/p/618208856)
