@@ -475,6 +475,35 @@ Midjourney 的内容限制确实比其他竞争对手（例如 OpenAI 的 DALL-E
 |爱作画 | 有免费次数 + 付费 |https://aizuohua.com/|
 |皮卡智能AI | 免费 |https://www.picup.shop/text2image.html#/ |
 
+
+### OpenAI Consistency Models
+
+【2023-4-13】终结扩散模型：OpenAI开源新模型代码，一步成图，1秒18张
+
+OpenAI 3月偷偷上传了一篇论文《 Consistency Models 》
+
+问题
+- 扩散模型依赖于迭代生成过程，这导致此类方法采样速度缓慢，进而限制了它们在实时应用中的潜力。
+
+OpenAI 的这项研究就是为了克服这个限制，提出了 Consistency Models，这是一类新的生成模型，无需对抗训练即可快速获得高质量样本。与此同时，OpenAI 还发布了 Consistency Models 实现以及权重。
+- 论文地址：[Consistency Models](https://arxiv.org/pdf/2303.01469.pdf)
+- 代码地址：[consistency_models](https://github.com/openai/consistency_models)
+
+Consistency Models 支持快速 one-step 生成，同时仍然允许 few-step 采样，以权衡计算量和样本质量。它们还支持零样本（zero-shot）数据编辑，例如图像修复、着色和超分辨率，而无需针对这些任务进行具体训练。Consistency Models 可以用蒸馏预训练扩散模型的方式进行训练，也可以作为独立的生成模型进行训练。
+
+研究团队通过实验证明 Consistency Models 在 one-step 和 few-step 生成中优于现有的扩散模型蒸馏方法。例如，在 one-step 生成方面，Consistency Models 在 CIFAR-10 上实现了新的 SOTA FID 3.55，在 ImageNet 64 x 64 上为 6.20。当作为独立生成模型进行训练时，Consistency Models 在 CIFAR-10、ImageNet 64 x 64 和 LSUN 256 x 256 等标准基准上的表现也优于 single-step、非对抗生成模型。
+
+Consistency Models 建立在连续时间扩散模型中的概率流 (PF) 常微分方程 (ODE) 之上。如下图 1 所示，给定一个将数据平滑地转换为噪声的 PF ODE，Consistency Models 学会在任何时间步（time step）将任意点映射成轨迹的初始点以进行生成式建模。Consistency Models 一个显著的特性是自洽性（self-consistency）：同一轨迹上的点会映射到相同的初始点。这也是模型被命名为 Consistency Models（一致性模型）的原因。
+
+生成速度，3.5 秒生成了 64 张分辨率 256×256 的图片，平均一秒生成 18 张
+- Consistency Model 可以根据人类要求生成图像（生成了有床和柜子的卧室）。
+  - ![](https://img.36krcdn.com/hsossms/20230413/v2_a8c2cff5c0ed487191555ff05a54e9b4@5091053_oswg622813oswg1080oswg511_img_000)
+- Consistency Model 图像修复功能：左边是经过掩码的图像，中间是 Consistency Model 修复的图像，最右边是参考图像：
+  - ![](https://img.36krcdn.com/hsossms/20230413/v2_af5a4bfc541b487ba3713d24c2775a84@5091053_oswg1534994oswg897oswg1109_img_000)
+- Consistency Model 生成高分辨率图像：左侧为分辨率 32 x 32 的下采样图像、中间为 Consistency Model 生成的 256 x 256 图像，右边为分辨率为 256x 256 的真值图像。相比于初始图像，Consistency Model 生成的图像更清晰。
+  - ![](https://img.36krcdn.com/hsossms/20230413/v2_cafab22a15e6411dac88798c5324d036@5091053_oswg1678063oswg914oswg1129_img_000)
+
+
 ### Stable Diffusion
 
 Stable Diffusion is a state of the art text-to-image model that generates images from text.
