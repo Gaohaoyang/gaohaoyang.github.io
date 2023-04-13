@@ -476,6 +476,46 @@ Midjourney 的内容限制确实比其他竞争对手（例如 OpenAI 的 DALL-E
 |皮卡智能AI | 免费 |https://www.picup.shop/text2image.html#/ |
 
 
+### Prompt技巧
+
+【2023-4-13】[无界AI](https://www.wujieai.com/)的[咒语生成器](https://www.wujieai.com/tag-generator)
+- [stable_diffusion_webUI使用教程](https://zhuanlan.zhihu.com/p/617997179)
+- 组合维度：人物,角色,五官,表情,头发,装饰,服装,鞋饰,尾&翅&角,姿势,动作,环境,风格,魔法
+
+| 参数 | 说明 |
+| --- | --- |
+| Prompt | 提示词（正向） |
+| Negative | prompt | 消极的提示词（反向） |
+| Width | & | Height | 要生成的图片尺寸。尺寸越大，越耗性能，耗时越久。 |
+| CFG | scale | AI | 对描述参数（Prompt）的倾向程度。值越小生成的图片越偏离你的描述，但越符合逻辑；值越大则生成的图片越符合你的描述，但可能不符合逻辑。 |
+| Sampling | method | 采样方法。有很多种，但只是采样算法上有差别，没有好坏之分，选用适合的即可。 |
+| Sampling | steps | 采样步长。太小的话采样的随机性会很高，太大的话采样的效率会很低，拒绝概率高(可以理解为没有采样到,采样的结果被舍弃了)。 |
+| Seed | 随机数种子。生成每张图片时的随机种子，这个种子是用来作为确定扩散初始状态的基础。不懂的话，用随机的即可。 |
+
+注：
+- 提示词（Prompt）越多，AI 绘图结果会更加精准
+- 目前中文提示词的效果不好，还得使用英文提示词。
+
+### 本地部署
+
+[stable_diffusion_webUI使用教程](https://zhuanlan.zhihu.com/p/617997179)
+- windows上运行stable-diffusion-webui和模型，需要足够大的显存，最低配置**4GB**显存，基本配置6GB显存，推荐配置12GB显存。 当然内存也不能太小，最好大于16GB，总之内存越大越好，显卡为NVIDIA GeForce GTX 1060 Ti ( 5GB / NVIDIA )，这个上古显卡跑AI绘画着实比较吃力，但也能将就用。
+
+- 没有 Nvidia 显卡，给 stable-diffusion-webui 指定运行参数 `--use-cpu sd`，让其使用 CPU 算力运行
+- Nvidia 显卡（配置越高，绘图越快）
+  - A卡不行，CPU 算力跟 GPU 算力相比简直天差地别，虽然可以通过改参来实现，但有条件直接上N卡吧
+  - 可能 GPU 只需要 10 秒就能绘制完成，而 CPU 却要 10 分钟
+- 4G 的显卡加上 --medvram 启动参数
+- 2G 的显卡加上 --lowvram 启动参数。
+
+```sh
+git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git 
+# 检测 cuda 安装
+nvcc --version
+```
+
+![](https://pic1.zhimg.com/80/v2-4a697415eb75e6e298c2567e09e2ecd0_1440w.webp)
+
 ### OpenAI Consistency Models
 
 【2023-4-13】终结扩散模型：OpenAI开源新模型代码，一步成图，1秒18张
