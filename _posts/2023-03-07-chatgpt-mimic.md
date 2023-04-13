@@ -1675,6 +1675,35 @@ print(response)
 - 一种平价的chatgpt实现方案，基于清华的 [ChatGLM-6B](https://github.com/THUDM/ChatGLM-6B) + LoRA 进行finetune.
 - 数据集: [alpaca](https://github.com/tatsu-lab/stanford_alpaca)
 
+#### ChatGLM-6B本地部署
+
+【2023-4-13】[清华ChatGLM-6B模型本地部署](https://mp.weixin.qq.com/s/PYFNUmR0119ucJvcHNDfmQ)
+
+```sh
+git clone https://github.com/THUDM/ChatGLM-6B.git
+pip install -r requirements.txt
+```
+
+使用
+
+```py
+from transformers import AutoTokenizer, AutoModel
+tokenizer = AutoTokenizer.from_pretrained("THUDM/chatglm-6b", trust_remote_code=True)
+model = AutoModel.from_pretrained("THUDM/chatglm-6b", trust_remote_code=True).half().quantize(4).cuda()
+model = model.eval()
+response, history = model.chat(tokenizer, "你是谁", history=[])
+# The dtype of attention mask (torch.int64) is not bool
+print(response)
+# 我是一个名为 ChatGLM-6B 的人工智能助手，是基于清华大学 KEG 实验室和智谱 AI 公司于 2023 年共同训练的语言模型开发的。我的任务是针对用户的问题和要求提供适当的答复和支持。
+response, history = model.chat(tokenizer, "你会什么", history=history)
+print(response)
+# ---------
+# 默认的
+model = AutoModel.from_pretrained("THUDM/chatglm-6b", trust_remote_code=True).half().cuda()
+# 我的 INT4的
+model = AutoModel.from_pretrained("THUDM/chatglm-6b", trust_remote_code=True).half().quantize(4).cuda()
+```
+
 
 ### 文心一言
 
@@ -1842,7 +1871,7 @@ DeepSpeed Chat具有以下三大核心功能：
 
 #### 效果评估
 
-与Colossal-AI或HuggingFace-DDP等现有系统相比，DeepSpeed-Chat具有超过一个数量级的吞吐量，能够在相同的延迟预算下训练更大的演员模型或以更低的成本训练相似大小的模型。
+与Colossal-AI或HuggingFace-DDP等现有系统相比，DeepSpeed-Chat具有超过一个数量级的吞吐量，能够在相同的延迟预算下训练更大的actor模型或以更低的成本训练相似大小的模型。
 - 在单个GPU上，DeepSpeed使RLHF训练的吞吐量提高了10倍以上。虽然CAI-Coati和HF-DDP都可以运行1.3B的模型，但DeepSpeed可以在相同的硬件上运行6.5B模型，直接高出5倍。
 - 单个节点的多个GPU上，DeepSpeed-Chat在系统吞吐量方面比CAI-Coati提速6-19倍，HF-DDP提速1.4-10.5倍。
 
