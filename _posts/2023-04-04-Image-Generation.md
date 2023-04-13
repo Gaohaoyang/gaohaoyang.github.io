@@ -570,11 +570,12 @@ Stable Diffusion 是以文本生成图像的 AI 工具，`慕尼黑大学`的Com
 体验方法
 - （1）在线工具：[Hugging Face](https://huggingface.co/spaces/stabilityai/stable-diffusion) 和 [DreamStudio](https://beta.dreamstudio.ai/)。与本地部署相比
   - [Hugging Face](https://huggingface.co/spaces/stabilityai/stable-diffusion)需排队，生成一张图约 5 分钟；
-  - [DreamStudio](https://beta.dreamstudio.ai/) 可免费生成 200 张图片，之后需要缴费。
+  - [DreamStudio](https://beta.dreamstudio.ai/) 可免费生成 200 张图片，之后需要缴费。[dreamstudio](https://beta.dreamstudio.ai/generate), [stability.ai](platform.stability.ai) 出品
   - 注意：这类在线工具对图片的调教功能偏弱，无法批量生成图片，只能用于测试体验。
 - （2）本地部署：适合大批量使用，[参考](https://zhuanlan.zhihu.com/p/563073449)
   - Docker Desktop 将 [Stable Diffusion WebUI Docker](https://github.com/AbdBarho/stable-diffusion-webui-docker) 部署在 Windows 系统，从而利用 NVIDIA 显卡免费实现 AI 文字绘画，不再被在线工具所限制。Mac 同样适用于该方法，并可省略下方的环境配置步骤。
   - ![](https://pic4.zhimg.com/80/v2-3ee8f0fad4499798263ae5d8295574b3_1440w.webp)
+
 
 #### 如何画出好作品？
 
@@ -653,6 +654,7 @@ DALL·E的训练过程分成两个阶段，一是训练一个变分自编码器�
 - 图片生成：可控部分除了描述图片的文字，还可以设置负向提示（prompt）
 
 【2023-4-7】类似的，还有 [fotor](https://www.fotor.com/features/ai-image-generator/)
+
 
 ### Tiktok
 
