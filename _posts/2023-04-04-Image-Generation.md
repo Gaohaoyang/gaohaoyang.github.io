@@ -648,6 +648,21 @@ git lfs pull
 - ![](https://textual-inversion.github.io/static/images/editing/teaser.JPG)
 - ![](https://textual-inversion.github.io/static/images/training/training.JPG)
 
+### 商汤秒画
+
+【2023-4-12】【商汤秒画】[打造AI画图“模型超市”，心想画成](https://mp.weixin.qq.com/s/xp14elNrCu09NUxjp5tWMQ)
+
+商汤“日日新SenseNova”大模型体系正式问世，基于该体系的AI内容创作社区平台“商汤秒画SenseMirage”也一并亮相。
+
+商汤科技董事长兼CEO徐立现场演示了“[商汤秒画SenseMirage](https://techday.sensetime.com/miaohua)”基于商汤自研AIGC模型的作画能力；
+- 秒画平台基于商汤大装置的GPU算力支撑，可帮助用户免除本地化部署流程，既能使用商汤自研作画模型高效地生成高质量内容，也可以将本地模型及其他第三方开源模型一键导入，生成更多样的内容。
+
+相比于Stable Diffusion，商汤作画大模型基于19年开始研发的通用大模型设计体系，采用更先进的大模型结构设计与大batch训练优化算法，模型参数量大小为前者数倍。核心技术包含了自研的 hierarchical inference experts, mixture of token experts, image quality-aware distributed training, texture-guided cross-attention learning等算法，使其具备更优的文本理解泛化性、图像生成风格广度以及图像高质量生成细节。
+
+秒画还提供特异性推理优化服务，开源模型导入后会自动采用秒画底层的模型编译技术进行加速，实测在本地RTX3070显卡需要10秒生成的图片通过秒画加速技术只需要2秒就可以生成。
+
+此外，秒画还支持用户上传本地图像，结合商汤自研作画模型或者开源模型来训练定制化LoRA模型，来高效地生成个性化内容。
+
 ## 如何鉴别生成图像
 
 【2023-4-7】[How to Tell If a Photo Is an AI-Generated Fake](https://www.scientificamerican.com/article/how-to-tell-if-a-photo-is-an-ai-generated-fake/)
