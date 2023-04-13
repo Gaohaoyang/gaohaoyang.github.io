@@ -1371,6 +1371,14 @@ GPT4All 是一个使用包括代码、故事和对话在内的大量干净助手
 - [项目地址](https://github.com/nomic-ai/gpt4all)
 - [技术报告](https://s3.amazonaws.com/static.nomic.ai/gpt4all/2023_GPT4All_Technical_Report.pdf)
 
+#### alpaca-CoT
+
+【2023-4-12】将CoT数据扩展到Alpaca以提高其推理能力
+
+[Alpaca-CoT数据集](https://huggingface.co/datasets/QingyiSi/Alpaca-CoT/tree/main)
+- The relative size of collected datasets can be shown by this graph:
+- ![](https://github.com/PhoebusSi/Alpaca-CoT/raw/main/figures/show.png)
+
 ### Vicuna
 
 【2023-3-31】[Vicuna: An Open-Source Chatbot Impressing GPT-4 with 90%* ChatGPT Quality](https://vicuna.lmsys.org/)，伯克利中国人开发
