@@ -292,6 +292,7 @@ print(sen_count_dict['person'])
 <iframe src="https://github.com/wqw547243068/Python-learning/blob/master/courses/chapter_3/heatmap_freq.html" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="400" width="600"> </iframe>
 
 ## 台词数目整体可视化
+
 - 场景台词分布
 - 人物台词分布
 
@@ -375,7 +376,9 @@ HTML(output_file)
 - ![](https://inews.gtimg.com/newsapp_bt/0/9091216116/641)
 - 分析结果[展示](https://wqw547243068.github.io/Python-learning/data_mining/huawei)
 - ![](http://pic.caixin.com/blog/Mon_1905/m_1558778021_IcqBAS.png)
+
 ## 目标
+
 - 词频统计：
    - 1.词频排名（选取Top10）
    - 2.生成词云：以Top500的词汇为基础
@@ -387,6 +390,7 @@ HTML(output_file)
 ## 数据准备
 - 从[github](https://github.com/benmahr/RenZhengfei)上下载任正非的历次讲话稿
 - 时间范围：1994-2018
+- 数据及代码下载[地址](https://share.weiyun.com/KdI9M5GS)
 
 ```python
 #!git clone https://github.com/benmahr/RenZhengfei.git
