@@ -1446,6 +1446,10 @@ export DATA_PATH=$PWD/.cache # 设置数据目录
 export MODEL_PATH=$PWD/.saved_models # 设置模型目录
 ```
 
+#### 本地部署
+
+【2023-4-13】[训练流程复现](https://mp.weixin.qq.com/s/8Yd_TcshuRdIqQ2bPOjedw)
+- trlx + open assistant 结合，复现chatgpt
 
 #### 第一步：训练 SFT
  
