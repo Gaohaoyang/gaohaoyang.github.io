@@ -789,13 +789,14 @@ ChatGPT之争已经超出了算法的范畴，它更是一个AI+云计算能力�
 | 360 | [360智脑](http://www.360dmodel.com/) | 2023年4月10日 | 企业用户内测 | http://www.360dmodel.com/ |
 | 微软 | [DeepSpeed Chat](https://github.com/microsoft/DeepSpeed)  | 2023年4月12日 | 发布，超过colossal ai |  |
 | 商汤 | [商量 SenseChat](https://www.sensecore.cn) | 2023年4月10日 | 即将邀请内测 | https://www.sensecore.cn/ |
+| 知乎 | 知海图AI | 2023年4月13日 | 尚无内测 |  |
 | 昆仑万维 | [天工3.5](https://www.sensecore.cn) | 2023年4月17日 | 即将邀请内测 | http://tiangong.kunlun.com |
 | 科大讯飞 | 1+N认知智能大模型 | 2023年5月6日 | 即将发布 |
 | 网友有道 | 子曰 | 近期 | 即将发布 | 消息来源：网易新闻 |
 | 京东 | 言犀 | 今年 | 未开放 | 消息来源：京东集团副总裁何晓冬 |
 | 腾讯 | // | // | 未开放 | 消息来源：腾讯集团高级执行副总裁汤道生 |
 
-
+知乎：知海图AI
 
 ### 小冰链
 
@@ -1900,6 +1901,10 @@ python train.py --actor-model facebook/opt-66b --reward-model facebook/opt-350m 
 
 ```
 
+### 知乎：知海图AI
+
+【2023-4-13】知乎发布大模型「知海图 AI」并内测「热榜摘要」，知乎发现大会介绍的 “知海图AI”大模型
+- “知海图AI”的训练基于面壁智能自主研发的 CPM企业级大模型 与 ModelForce大模型系统。
 
 ### ChatRWKV
 
