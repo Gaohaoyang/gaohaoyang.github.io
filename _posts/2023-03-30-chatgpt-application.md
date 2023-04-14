@@ -812,6 +812,28 @@ AutoGPT 的研究开始走进大众视野。
 
 特斯拉前 AI 总监、刚刚回归 OpenAI 的 Andrej Karpathy 也为其大力宣传，并在推特赞扬：「AutoGPT 是 prompt 工程的下一个前沿。」
 
+实践
+- [AUTOGPT INSTALLATION AND FEATURES](https://autogpt.net/autogpt-installation-and-features/)
+
+```sh
+# 准备Python 3.8以上的环境, 安装minicoda
+# source  ~/.bash_profile
+conda create -n py310 python=3.10 # 创建 3.10环境
+conda activate py310 # 激活环境
+# 下载autogpt代码
+git clone https://github.com/Torantulino/Auto-GPT.git
+cd 'Auto-GPT'
+pip install -r requirements.txt
+# 配置文件
+mv .env.template .env
+vim .env # 填入 openai key 到变量 OPENAI_API_KEY
+# python scripts/main.py
+# python scripts/main.py --debug # 调试模式
+# python scripts/main.py --speak # use TTS for Auto-GPT
+python3 scripts/main.py # 多个虚拟环境时，为了避免干扰
+```
+
+
 #### AgentGPT -- 改进
 
 AgentGPT：浏览器中直接部署自主 AI 智能体
