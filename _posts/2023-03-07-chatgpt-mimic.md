@@ -1924,6 +1924,14 @@ python train.py --actor-model facebook/opt-66b --reward-model facebook/opt-350m 
 【2023-4-13】知乎发布大模型「知海图 AI」并内测「热榜摘要」，知乎发现大会介绍的 “知海图AI”大模型
 - “知海图AI”的训练基于面壁智能自主研发的 CPM企业级大模型 与 ModelForce大模型系统。
 
+### Claude
+
+【2023-4-13】[「ChatGPT最强竞品」爆火：不限量不要钱免注册！](https://mp.weixin.qq.com/s/QB85YPjh6DMBTPla4NDfXg)
+- [introducing-claude](https://www.anthropic.com/index/introducing-claude), [Meet Claude: Anthropic’s Rival to ChatGPT](https://scale.com/blog/chatgpt-vs-claude)
+- [Constitutional AI: Harmlessness from AI Feedback](https://arxiv.org/abs/2212.08073)
+- 体验方式：[poe](https://poe.com/Claude-instant)
+- 申请：[Claude Early Access](https://www.anthropic.com/earlyaccess)
+
 ### ChatRWKV
 
 【2023-3-13】[开源1.5/3/7B中文小说模型：显存3G就能跑7B模型，几行代码即可调用](https://zhuanlan.zhihu.com/p/609154637)
