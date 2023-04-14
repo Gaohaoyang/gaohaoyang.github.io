@@ -1418,6 +1418,16 @@ chatgpt
 >- 限时优惠！💰 育新东里二里二手房，89平米，满五年，海淀六小强学区，东西向户型，独立卫生间🚪。紧邻西三旗商圈🛍️，购物、餐饮、娱乐应有尽有🎉。2000年的房子，价格优惠，抓紧时间看房吧！👀
 
 
+### Dolly（真开源）
+
+【2023-4-12】[世界首款真开源类ChatGPT大模型Dolly 2.0](https://www.toutiao.com/article/7221415818079355426)，可随意修改商用
+- [项目链接](https://huggingface.co/databricks/dolly-v2-12b)
+- [数据集](https://github.com/databrickslabs/dolly/tree/master/data)
+
+4 月 12 日，Databricks 发布了 Dolly 2.0，这是两周前发布的类 ChatGPT 人类交互性（指令遵循）大语言模型（LLM）的又一个新版本。
+- Dolly 2.0 是业内第一个**开源**、**遵循指令**的 LLM，它在透明且免费提供的数据集上进行了微调，该数据集也是开源的，可用于商业目的。这意味着 Dolly 2.0 可用于构建商业应用程序，无需支付 API 访问费用或与第三方共享数据。
+
+
 ### LAION：Open Assistant
 
 【2023-2-25】[Open Assistant 全流程训练细节（GPT3+RL）](https://zhuanlan.zhihu.com/p/609003237)
