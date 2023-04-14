@@ -496,6 +496,13 @@ Midjourney 的内容限制确实比其他竞争对手（例如 OpenAI 的 DALL-E
 - 提示词（Prompt）越多，AI 绘图结果会更加精准
 - 目前中文提示词的效果不好，还得使用英文提示词。
 
+【2023-4-14】[NovelAI](https://prompttool.com/NovelAI) 词图。作画软件：造梦笔，让AI助力你的创作灵感
+- 支持txt2img
+- 支持img2img
+- 支持inpaint
+- 支持超分算法
+- 更多功能开放中
+
 ### 本地部署
 
 [stable_diffusion_webUI使用教程](https://zhuanlan.zhihu.com/p/617997179)
