@@ -846,6 +846,19 @@ AgentGPT 允许你为自定义 AI 命名，让它执行任何想要达成的目�
 
 用户在使用该工具时，同样需要输入自己的 OpenAI API 密钥。AgentGPT 目前处于 beta 阶段，并正致力于长期记忆、网页浏览、网站与用户之间的交互。
 
+【2023-4-15】[免费的AutoGPT替代网站](https://zhuanlan.zhihu.com/p/622083666)
+
+- 第一个是最火的AutoGPT，性能最强的，但是安装起来也挺麻烦的，并且还需要各种API的权限，小白不建议。
+- 第二个AgentGPT，需要OpenAI的API，操作简单，在网页输入key就可以用。
+- 第三个和第四个暂时是免费的，想体验的可以赶紧了。
+
+| 名称 | 方案 | 特点 | 链接 |
+| --- | --- | --- | --- |
+| [AutoGPT](https://github.com/Torantulino/Auto-GPT) | 最复杂 | 需要安装开源代码 |  |
+| [AgentGPT](https://agentgpt.reworkd.ai/) | 需要Token | 通过简单的网页访问易于使用，具有相对简单的功能 | |
+| [Cognosys](http://cognosys.ai/) | 不需要Token | 性能不错，具有明确的任务组织 | |
+| [Godmode](https://godmode.space/) | 不需要Token | 操作更加直观，每个步骤需要用户权限 | |
+
 #### Adept
 
 Adept 和 Inflection 这两家早期团队想以自然语言为基础，为用户打造新的 **LUI** （语言为基础的 UI）方式。
