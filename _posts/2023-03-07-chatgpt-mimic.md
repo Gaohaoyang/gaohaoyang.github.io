@@ -1195,6 +1195,37 @@ Because training step 1 is a simple supervised finetune progress as many other m
 问题
 - 【2023-3-10】train_prompts.py 不含 reward model 加载，详见：[Load the reward model in Stage 3 training script of ChatGPT](https://github.com/hpcaitech/ColossalAI/issues/3011)
 
+【2023-4-2】ColossalAI, [平替chatGPT的开源方案](https://zhuanlan.zhihu.com/p/618926239)
+- 不限制预训练模型，公开预训练还是自研预训练模型即可，代码随意改，只要能符合跑通逻辑即可。
+- 所以改造成本高，但可控制，结合业务特点灵活改造都行，需要把源码逐行阅读后，才能改造起来。
+- 唯一缺点是**优势函数**没有按照论文落地的
+  - 论文： advantage = r + gamma * V(s') - V(s)
+  - 实际代码：advantage = r - V(s) ，缺少V(s') 即为下一个状态的值，考虑效率方面，具体原因可以再对比分析和跟作者沟通原因。
+
+核心代码有如下几个模块，分别是
+- train_sft.py、train_reward_model.py、train_prompts.py
+- 支持多机多卡和单机多卡等模式
+- 预训练模型有gpt-2、bloom、opt、llama等
+
+train_sft
+- 数据源：[104K双语中英文数据集](https://link.zhihu.com/?target=https%3A//github.com/XueFuzhao/InstructionWild)
+- 预训练模型：gpt-2、bloom、opt、llama
+- 其他：支持单机和分布式等模式
+- 源码运行shell脚本中模型是LLaMa-7B
+
+train_reward_model
+- ![](https://pic2.zhimg.com/80/v2-9c71227b305f7faad2202e8611e80415_1440w.webp)
+- 数据源：[Dahoas/rm-static](https://link.zhihu.com/?target=https%3A//huggingface.co/datasets/Anthropic/hh-rlhf)和[Anthropic/hh-rlhf](https://link.zhihu.com/?target=https%3A//huggingface.co/datasets/Dahoas/rm-static)
+- 中文：百科、知道问答、对联、古文、古诗词、微博新闻评论, [链接](https://pan.baidu.com/s/1m-OSxEHSGy3NzMZeMr_8rw), 提取码: ssng
+
+train_prompts
+- ![](https://pic4.zhimg.com/80/v2-c6fe23a8a6bf448c9fbed5e838cca987_1440w.webp)
+- critic模块来自预训练reward模型
+
+注：
+*   代码中transformers库不是官方的，是这家公司自己维护的，所以要安装来自 clone ttps://[http://github.com/hpcaitech/transformers](https://link.zhihu.com/?target=http%3A//github.com/hpcaitech/transformers) ，我之前用官方的4.20.1，但没有LLaMA models，无法正常运行
+*   代码过于面向对象设计，所以梳理代码逻辑，要切换父类和子类找核心代码，得细心看代码。
+*   运行代码，会出现某个文件找不到，是目录路径问题，需要手动调整
 
 ### Meta: LLaMA （羊驼）
 
@@ -1941,6 +1972,8 @@ python train.py --actor-model facebook/opt-66b --reward-model facebook/opt-350m 
 [ChatRWKV](https://github.com/BlinkDL/ChatRWKV) is like ChatGPT but powered by RWKV (100% RNN) language model, and open source.
 - [RWKV-CHN](https://modelscope.cn/studios/BlinkDL/RWKV-CHN/summary) 在线体验
 
+
+
 ### trl
 
 [Ivwerra/trl](https://github.com/lvwerra/trl)，[文档](https://huggingface.co/docs/trl/index) 
@@ -1950,6 +1983,17 @@ PPO精调LLM的三个步骤:
 1. 用 codeparrot 数据训练 GPT-2 124.2M 模型
 2. 用sentiment训练奖励模型，模型用的是distilbert
 3. RL训练 
+
+
+### RLHF
+
+中国人写的一套框架，基于transformers库实现的【过度依赖这套框架实现，核心要编写代码较少】，核心代码文件是train_sft.py、train_reward.py、train_rlhf.py等模块，使用apex和deepspeed等会加速模型训练
+- 预训练模型：支持Pangu和GLM为主，其他目前测试是不支持的
+- 数据源：百科、知道问答、对联、古文、古诗词、微博新闻评论等
+- 评测数据：CLUE Benchmark
+- 强化学习ppo：使用trlx框架实现的
+
+总体来说，做个demo是足够的，但灵活性不行。参考这个代码，结合自身业务，可快速实现一套方案。
 
 ### FlexGen 加速
 
