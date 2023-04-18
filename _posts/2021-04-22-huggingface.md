@@ -114,16 +114,35 @@ HuggingFace主干库：
 - 在[hugging face模型库](https://huggingface.co/models)里选择需要的预训练模型并下载。例如，点击bert-base-uncased以后点Files and versions进行手动下载。
 - 通常这样下载的模型会是有损的，后续无法使用，因此最好是通过git下载
 
+官方提供的下载[方法](https://huggingface.co/docs/hub/models-downloading)
+
+#### git lfs
+
+安装 git lfs
+
 ```shell
 # mac下
 brew install git-lfs
+apt get install git-lfs # ubuntu
 git lfs install
 git clone https://huggingface.co/bert-base-chinese
+# git clone https://huggingface.co/lmsys/vicuna-13b-delta-v0
+# git clone git@hf.co:bigscience/bloom
+GIT_LFS_SKIP_SMUDGE=1 # 只下载 pointer 文件，不下大文件
 ```
+
+#### 自动下载
 
 模型文件导入
 
 ```python
+from transformers import AutoTokenizer, AutoModelForCausalLM
+
+model_name = "distilgpt2"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForCausalLM.from_pretrained(model_name)
+
+# ---- 示例 -----
 import transformers
 
 MODEL_PATH = "./transformr_files/bert-base-uncased/"
@@ -139,6 +158,22 @@ model_config.output_hidden_states = True
 model_config.output_attentions = True
 # 通过配置和路径导入模型
 model = transformers.BertModel.from_pretrained(MODEL_PATH,config = model_config)
+```
+
+#### Hugging Face Client Library
+
+使用 [huggingface_hub](https://github.com/huggingface/huggingface_hub) 工具创建、删除、更新和索引模型库
+
+```py
+from huggingface_hub import hf_hub_download
+import joblib
+
+REPO_ID = "YOUR_REPO_ID"
+FILENAME = "sklearn_model.joblib"
+
+model = joblib.load(
+    hf_hub_download(repo_id=REPO_ID, filename=FILENAME)
+)
 ```
 
 #### 模型不同点
