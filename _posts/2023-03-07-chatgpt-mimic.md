@@ -1248,6 +1248,11 @@ train_prompts
 
 一位研究人员利用Meta泄露的LLaMA，创建了一个完全不受限制的「BasedGPT」聊天机器人。Discord上的这个聊天机器人经常会做出极端且愚蠢的回答。没有ChatGPT那么好，这是肯定的，但话说回来，它使用的计算能力少了1000倍。[参考](https://www.toutiao.com/article/7209928157732864552)
 
+#### LLaMA 下载
+
+【2023-4-18】下载出错
+- issue: [Tokenizer class LLaMATokenizer does not exist or is not currently imported](https://github.com/huggingface/transformers/issues/22222)
+
 
 ### LLaMA 进化
 
@@ -1277,7 +1282,7 @@ train_prompts
     A -->|数据集| GLM1
     LR --> GLM1
 
-    L -->|2023-3-31,伯克利\n开源FastChat达到ChatGPT 90%| V(Vicuna):::green
+    L -->|2023-3-31,伯克利\n开源FastChat达到ChatGPT 90%| V(Vicuna小羊驼):::green
     O(OPT):::blue -.->|OPT 1.3b模型| V
 
 </div>
@@ -1410,7 +1415,7 @@ GPT4All 是一个使用包括代码、故事和对话在内的大量干净助手
 - The relative size of collected datasets can be shown by this graph:
 - ![](https://github.com/PhoebusSi/Alpaca-CoT/raw/main/figures/show.png)
 
-### Vicuna
+### Vicuna 小羊驼 -- 92% 的 ChatGPT
 
 【2023-3-31】[Vicuna: An Open-Source Chatbot Impressing GPT-4 with 90%* ChatGPT Quality](https://vicuna.lmsys.org/)，伯克利中国人开发
 - github代码：[FastChat](https://github.com/lm-sys/FastChat), [demo](https://chat.lmsys.org/)
@@ -2028,10 +2033,33 @@ PPO精调LLM的三个步骤:
 
 ### miniGPT-4
 
-【2023-4-17】[MiniGPT-4 发布，代码模型开源了](https://mp.weixin.qq.com/s/WTTjXnczPkBNEBhuVG0SAA)
+【2023-4-17】[MiniGPT-4 发布，代码模型开源了](https://mp.weixin.qq.com/s/WTTjXnczPkBNEBhuVG0SAA)，阿卜杜拉国王科技大学的几位博士做的
+- GitHub: [MiniGPT-4](https://github.com/Vision-CAIR/MiniGPT-4)
 - [demo](https://minigpt-4.github.io/)
 
+GPT-4 所实现的多模态能力，在以前的视觉 - 语言模型中很少见，因此认为，GPT-4 先进的多模态生成能力，主要原因在于利用了更先进的大型语言模型。
 
+为了验证这一想法，团队成员将一个冻结的视觉编码器与一个冻结的 Vicuna 进行对齐，造出了 MiniGPT-4。
+- MiniGPT-4 具有许多类似于 GPT-4 的能力, 图像描述生成、从手写草稿创建网站等
+- MiniGPT-4 还能根据图像创作故事和诗歌，为图像中显示的问题提供解决方案，教用户如何根据食物照片做饭等。
+
+未来在图像、声音、视频等领域，基于这些大语言模型所造出来的应用，其实际效果都不会太差。
+
+这个项目证实了大语言模型在图像领域的可行性，接下来应该会有不少开发者入场，将 GPT-4 的能力进一步往音频、视频等领域延伸，进而让我们得以看到更多有趣、令人惊艳的 AI 应用。
+
+MiniGPT-4 在一些开源大模型基础上训练得到，fine tune 分为两个阶段
+- 先是在 4 个 A100 上用 500 万图文对训练
+- 然后再用一个小的高质量数据集训练，单卡 A100 训练只需要 7 分钟。
+- ![](https://cdnimg.redian.news/mmbiz_png/v1JN0W4OpXhgzibJjicibeABIRicPxrk3OGRiaMs0V21oZnSMcWHjiaB6x8qNNKc76b4tS10WKTo1XGhvhQXfPQ1qChQ/640?wx_fmt=png)
+
+BLIP-2 模型利用冻结预训练的图像编码器和大型语言模型，通过在它们之间训练一个轻量级的 12 层 Transformer 编码器，实现了各种视觉-语言任务的最先进性能。值得注意的是，在零样本 VQAv2 上，BLIP-2 相较于 80 亿参数的 Flamingo 模型，使用的可训练参数数量少了 54 倍，性能提升了 8.7 %。
+
+投影层（Projection Layer）是神经网络中的一种常见层类型，它将输入数据从一个空间映射到另一个空间。在自然语言处理中，投影层通常用于将高维词向量映射到低维空间，以减少模型参数数量和计算量。在图像处理中，投影层可以将高维图像特征向量映射到低维空间，以便于后续处理和分析。
+
+将一个冻结的视觉编码器和一个冻结的语言模型（如 Vicuna）通过一个投影层对齐意味着:
+- 两种模型保持其独立训练得到的特征表示能力，通过投影层获得了一个共同的更低维的表达空间。
+- 一个冻结的视觉编码器：指的是一个事先训练好的图像特征提取器，它将输入的图像转换成向量形式。
+- 一个冻结的 LLM (Vicuna)：指的是另一个事先训练好的大型语言模型，它可以生成文本或者对文本进行理解。
 
 # 结束
 
