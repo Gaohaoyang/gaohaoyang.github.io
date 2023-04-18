@@ -164,16 +164,23 @@ model = transformers.BertModel.from_pretrained(MODEL_PATH,config = model_config)
 
 使用 [huggingface_hub](https://github.com/huggingface/huggingface_hub) 工具创建、删除、更新和索引模型库
 
+
 ```py
+# python -m pip install huggingface_hub
 from huggingface_hub import hf_hub_download
 import joblib
 
-REPO_ID = "YOUR_REPO_ID"
+REPO_ID = "YOUR_REPO_ID" # 同 model_name
 FILENAME = "sklearn_model.joblib"
 
+hf_hub_download(repo_id="bigscience/T0_3B", filename="config.json", cache_dir="./your/path/bigscience_t0")
+# 或
 model = joblib.load(
     hf_hub_download(repo_id=REPO_ID, filename=FILENAME)
 )
+# 使用
+from transformers import AutoConfig
+config = AutoConfig.from_pretrained("./your/path/bigscience_t0/config.json")
 ```
 
 #### 模型不同点
