@@ -2026,6 +2026,12 @@ PPO精调LLM的三个步骤:
 上海秘塔网络科技有限公司成立于2018年4月，是人工智能领域的一家新锐科技公司，致力于将重复脑力劳动AI化，以AI为杠杆撬动专业场景的百倍生产力提升。
 
 
+### miniGPT-4
+
+【2023-4-17】[MiniGPT-4 发布，代码模型开源了](https://mp.weixin.qq.com/s/WTTjXnczPkBNEBhuVG0SAA)
+- [demo](https://minigpt-4.github.io/)
+
+
 
 # 结束
 
