@@ -667,6 +667,9 @@ ControlNet 的优点是：
 - 原始户型图，图像识别结果，矢量化重建结果与最终的3D重建结果
 - ![](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/de8b1aaaf8734e89801707bc2dc2e20a~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
+#### 实拍图美化
+
+【2023-4-18】[autoenhance](https://www.autoenhance.ai/#demo-video), Instant real estate photo editing, 房产领域图片美化：更换天气（阴天→蓝天）、对比度（模糊→清晰）、马赛克（模糊人脸/车牌）、角度调整（视角）、光线（暗→明）
 
 ### 智能家居
 
