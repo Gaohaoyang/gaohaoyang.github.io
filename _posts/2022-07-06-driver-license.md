@@ -1087,7 +1087,7 @@ B . 出库（右侧出库）
 
 聂各庄百度地图
 
-<iframe src="https://j.map.baidu.com/81/0YHg"  width='100%' height='100%' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
+<iframe src="https://j.map.baidu.com/81/0YHg"  width='100%' height='600' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
 
 
 #### 注意事项
