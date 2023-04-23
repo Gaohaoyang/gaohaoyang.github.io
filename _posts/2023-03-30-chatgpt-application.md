@@ -368,6 +368,99 @@ Our evaluation uses 8 real complex question answering datasets, including **six*
 
 作者：[强化学徒](https://www.zhihu.com/question/589726461/answer/2961450933)
 
+
+【2023-4-22】基于llama-index和ChatGPT API定制私有对话机器人的方式。
+
+方案
+- 1、fine-tunes微调。用大量数据对GPT模型进行微调，实现一个理解文档的模型。
+  - 但微调需要花费很多money，而且需要一个有实例的大数据集。也不可能在文件有变化时每次都进行微调。
+  - 微调不可能让模型 “知道“ 文档中的所有信息，而是要教给模型一种新的技能。
+  - 因此，微调不是一个好办法。
+- 2、将私有文本内容作为prompt的上下文，访问ChatGPT。
+  - openai api存在最大长度的限制，ChatGPT 3.5的最大token数为4096，如果超过长度限制，会直接对文档截断，存在上下文丢失的问题。
+  - 并且api的调用费用和token长度成正比，tokens数太大，则每次调用的成本也会很高。
+
+#### llama-index
+
+【2023-4-23】[定制自己的文档问答机器人](https://zhuanlan.zhihu.com/p/623523968)
+
+既然tokens有限制，那么有没有对文本内容进行**预处理**的工具？不超过token数限制。
+- 借助llama-index可以从文本中只提取出相关部分，然后将其反馈给prompt。
+- llama-index支持许多不同的数据源，如API、PDF、文档、SQL 、Google Docs等。
+
+安装
+
+```sh
+pip install openai
+pip install llama-index
+```
+
+调用代码
+- construct_index方法中，使用llama_index的相关方法，读取data_directory_path路径下的txt文档，并生成索引文件存储在index_cache_path文件中。
+
+```py
+from llama_index import SimpleDirectoryReader, GPTListIndex, GPTSimpleVectorIndex, LLMPredictor, PromptHelper,ServiceContext
+from langchain import OpenAI 
+import gradio as gr 
+import sys 
+import os 
+os.environ["OPENAI_API_KEY"] = 'your openai api key'
+data_directory_path = 'your txt data directory path'
+index_cache_path = 'your index file path'
+​
+#构建索引
+def construct_index(directory_path): 
+        max_input_size = 4096 
+        num_outputs = 2000 
+        max_chunk_overlap = 20 
+        chunk_size_limit = 500
+      
+        llm_predictor = LLMPredictor(llm=OpenAI(temperature=0, model_name="text-davinci-003", max_tokens=num_outputs))
+        # 按最大token数500来把原文档切分为多个小的chunk
+        service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor, chunk_size_limit=chunk_size_limit)
+        # 读取directory_path文件夹下的文档
+        documents = SimpleDirectoryReader(directory_path).load_data() 
+ 
+        index = GPTSimpleVectorIndex.from_documents(documents, service_context=service_context)
+        # 保存索引
+        index.save_to_disk(index_cache_path) 
+        return index 
+        
+def chatbot(input_text): 
+        # 加载索引
+        index = GPTSimpleVectorIndex.load_from_disk(index_cache_path) 
+        response = index.query(input_text, response_mode="compact") 
+        return response.response 
+        
+if __name__ == "__main__":
+        #使用gradio创建可交互ui  
+        iface = gr.Interface(fn=chatbot, 
+                        inputs=gr.inputs.Textbox(lines=7, label="Enter your text"), 
+                        outputs="text", 
+                        title="Text AI Chatbot") 
+        index = construct_index(data_directory_path) 
+        iface.launch(share=True)
+```
+
+llama-index的工作原理如下：
+- 创建文本块索引
+- 找到最相关的文本块
+- 使用相关的文本块向 GPT-3（或其他openai的模型） 提问
+- 在调用query接口的时候，llama-index默认会构造如下的prompt:
+
+```sh
+"Context information is below. \n"
+    "---------------------\n"
+    "{context_str}"
+    "\n---------------------\n"
+    "Given the context information and not prior knowledge, "
+    "answer the question: {query_str}\n"
+```
+
+使用以上prompt请求openai 的模型时，模型根据提供的上下文和提出的问题，使用其逻辑推理能力得到想要的答案。
+
+![](https://pic2.zhimg.com/80/v2-9aa943fe84bc25da03b866e7f52a940d_1440w.webp)
+
 #### New Bing
 
 - 优势：免费，快捷，可以联网，支持中英文，可以阅读本地PDF和网络论文，可以持续问答交互
@@ -423,6 +516,8 @@ Our evaluation uses 8 real complex question answering datasets, including **six*
 - ChatDOC 还可以理解文档中的表格或文字，优化其数据分析性能，并为每个回答提供直接引用的来源，方便核实AI的解读准确性。
 - ChatDOC 目前免费，文件大小限制为 200 页，最多可以上传 5 个文档。在即将更新的版本中，还支持跨多个文档的综合查询和问答。
 - ![](https://pic2.zhimg.com/80/v2-c73f17ecea423a82aad0ac7c110bd625_720w.webp)
+
+
 
 ### 推荐系统
 
