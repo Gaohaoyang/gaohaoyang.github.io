@@ -1989,7 +1989,12 @@ python train.py --actor-model facebook/opt-66b --reward-model facebook/opt-350m 
 
 出门问问推出的聊天机器人：[奇妙文](https://wen.moyin.com/)
 
+### StableLM
 
+【2023-4-20】[Stability开源类ChatGPT模型](https://zhuanlan.zhihu.com/p/623561495)！上线14小时，狂揽超4.8k星，支持商业化
+
+AI图像生成工具Stable Diffusion的初创公司Stability AI发布并开源该团队训练的大语言模型StableLM。该模型的Alpha版本有30亿和70亿个参数，接下来还将推出150亿至650亿参数的模型。用户已经可以从GitHub等开源平台上下载StableLM。
+- StableLM已展示出日常聊天、书信撰写、小说创作、代码编写等功能
 
 ### ChatRWKV
 
