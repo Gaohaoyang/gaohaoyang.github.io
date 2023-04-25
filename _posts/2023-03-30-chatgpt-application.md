@@ -327,6 +327,19 @@ chatgpt做零样本信息抽取
 - we transform the zero-shot IE task into a multi-turn question-answering problem with a two-stage framework (ChatIE)
 - 使用两阶段框架（ChatIE）将零样本信息提取任务转换为多回合问答问题。
 
+#### 机器翻译
+
+原文：
+> 翻译这段话:"人要是行,干一行行一行,一行行行行行。行行行干哪行都行。要是不行,干一行不行一行,一行不行行行不行,行行不行,干哪行都不行。要想行行,首先一行行。成为行业内的内行,行行成内行。行行行,你说我说得行不行。"
+
+普通翻译
+> Translate this passage: "If you can do it, do it one line at a time, one line at a time. You can do it all. If not, do it one line at a time, one line at a time, no line at a time, no line at a time, no line at all. If you want to do it, you must first do it one line at a time. Become an expert in the industry, and become an expert in the industry. Okay, you say what I say is okay."
+
+
+GPT-4翻译
+> Translate this passage: "If a person is capable, they can excel in any profession they choose. If they're not capable, they won't succeed in any profession, no matter which one they choose. If you want to be successful, you must first become proficient in one field. Become an expert in your industry, and you'll achieve success. Is what I'm saying reasonable?"
+
+
 #### NLP评估
 
 ##### ChatEval
