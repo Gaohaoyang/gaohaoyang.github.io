@@ -290,6 +290,14 @@ echo "done"
 - .rar 使用unrar命令解压
 - ![](https://p3-tt.byteimg.com/origin/pgc-image/0ffce7c93b324bed86a2e5dabdf92049?from=pc)
 
+```sh
+# 复制文件, vi ~/.bashrc 中 alias cp='cp -i'
+cp -rf zongguofeng linuxzgf # 遇到重复文件时，需要挨个提示
+# 免提示
+\cp -rf zongguofeng linuxzgf
+```
+
+
 ### 解压命令
 
 如下：
