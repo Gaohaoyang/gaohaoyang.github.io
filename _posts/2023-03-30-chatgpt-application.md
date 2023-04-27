@@ -335,6 +335,9 @@ chatgpt做零样本信息抽取
 普通翻译
 > Translate this passage: "If you can do it, do it one line at a time, one line at a time. You can do it all. If not, do it one line at a time, one line at a time, no line at a time, no line at a time, no line at all. If you want to do it, you must first do it one line at a time. Become an expert in the industry, and become an expert in the industry. Okay, you say what I say is okay."
 
+文心一言
+> If you are talented, you can excel in any field and excel in iit. If you are not talented, excel in just one field but cannot do it well, and if you are not skilled at just onefield, it cannot be done well. In any field, if you want to excel, you must first excel in it. Become an expertin your field, and then you become an expert in everything else related to that field. Being a good at a particulaar field enables you to understand all the others. Being good at multiple fields enables you to undersstand everything.
+
 
 GPT-4翻译
 > Translate this passage: "If a person is capable, they can excel in any profession they choose. If they're not capable, they won't succeed in any profession, no matter which one they choose. If you want to be successful, you must first become proficient in one field. Become an expert in your industry, and you'll achieve success. Is what I'm saying reasonable?"
