@@ -1996,7 +1996,11 @@ python train.py --actor-model facebook/opt-66b --reward-model facebook/opt-350m 
 AI图像生成工具Stable Diffusion的初创公司Stability AI发布并开源该团队训练的大语言模型StableLM。该模型的Alpha版本有30亿和70亿个参数，接下来还将推出150亿至650亿参数的模型。用户已经可以从GitHub等开源平台上下载StableLM。
 - StableLM已展示出日常聊天、书信撰写、小说创作、代码编写等功能
 
+### HuggingChat
 
+【2023-4-27】最大开源社区 Hugging Face 发布了 HuggingChat，有 300 亿参数。[详情](https://www.ithome.com/0/689/379.htm)
+- 既开源，还免费，互联网上随随便便就能用。 [网址](hf.co/chat)
+- [huggingchat](https://huggingface.co/spaces/huggingchat/chat-ui)
 
 
 ### ChatRWKV
