@@ -1996,6 +1996,9 @@ python train.py --actor-model facebook/opt-66b --reward-model facebook/opt-350m 
 AI图像生成工具Stable Diffusion的初创公司Stability AI发布并开源该团队训练的大语言模型StableLM。该模型的Alpha版本有30亿和70亿个参数，接下来还将推出150亿至650亿参数的模型。用户已经可以从GitHub等开源平台上下载StableLM。
 - StableLM已展示出日常聊天、书信撰写、小说创作、代码编写等功能
 
+
+
+
 ### ChatRWKV
 
 【2023-3-13】[开源1.5/3/7B中文小说模型：显存3G就能跑7B模型，几行代码即可调用](https://zhuanlan.zhihu.com/p/609154637)
