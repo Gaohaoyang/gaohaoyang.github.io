@@ -521,7 +521,8 @@ YA-3030大功率吸顶式无线AP，采用MIMO、OFDM、SDM、GI等技术，是�
 
 **千兆网**线就是 1000Mbps。换算成电脑的Bp/s（8b=1B. 1K=1024B ,1M=1024K.）那么(1000/8)=**125**MBps.
 
-中移动[千兆宽带测速注意事项](http://service.bj.10086.cn/m/mbjyd/kdzz/page2.html)
+中移动[千兆宽带测速注意事项](http://service.bj.10086.cn/m/mbjyd/kdzz/page2.html), [img](http://service.bj.10086.cn/m/mbjyd/kdzz/images/pic2-1.jpg)
+- ![](http://service.bj.10086.cn/m/mbjyd/kdzz/images/pic2-1.jpg)
 
 如何才能真正享受到千兆的网络体验呢?
 - 关键点1  务必使用**超五类**规格以上**网线**
