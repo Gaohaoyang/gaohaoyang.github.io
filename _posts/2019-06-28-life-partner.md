@@ -1271,6 +1271,10 @@ permalink: /partner
 >所谓的标准，都是给不喜欢的人看的；
 >一旦遇到合适的人，什么标准都不是标准
 
+### 婚恋纪录片
+
+#### 相亲实验
+
 韩国Solfa TV做了个社会实验：`1 VS 40 相亲，能找到对的人吗？`，邀请一位男生与 40 位女生同时相亲，通过群聊的形式，男生提出各种问题，不符合的女生就离场，可在不断严苛的限制条件下，真的能找到最合适自己的人吗？
 
 - [男版](https://www.bilibili.com/video/av23785599?zw)
@@ -1281,6 +1285,8 @@ permalink: /partner
 
 所以，不要列太多条条框框，尤其是外在条件，多从内心去判断。
 
+#### 谈婚论嫁
+
 - 2016年出品的纪录片，《[谈婚论嫁](https://www.bilibili.com/bangumi/play/ep151089)》，国内首部80后情感纪录片。15对主人公跟踪拍摄，100对夫妻真情访谈，425天生活真实记录。全片共5集，每集24分钟，从剩女相亲到裸婚闪婚，从异地长跑到跨国网恋，从走上红毯到生死相依，记录他们的故事，分享婚姻的智慧
   - 第一集：[我要找到你](https://www.bilibili.com/bangumi/play/ep151085)：美女鸿莲、高校女博士和拳击手（非诚勿扰选手）
   - 第二集：[我想有个家](https://www.bilibili.com/bangumi/play/ep151086)
@@ -1290,11 +1296,15 @@ permalink: /partner
 
 <iframe frameborder="0" src="https://v.qq.com/txp/iframe/player.html?vid=q0019q00vsg" allowFullScreen="true"  height="600" width="100%"></iframe>
 
+#### 剩女，盛女
+
 - 《剩女，盛女》：拍摄于2013年，2019年播出，历时近一年，跟踪拍摄了三位被俗称为“剩女”的深圳女性，她们分别为29岁的公司白领黄文娟、36岁的自由职业者何珊和40岁的企业高管张净，通过讲述三人各自的情感生活，展现了当下中国都市人群中某些优秀女性的失婚现象，力图由此引发观众对这一现状产生的社会背景、个人原因、以及不同应对心态的思索，是一部社会公共话题与个体心路历程有机融合的现实题材作品。[B站地址](https://www.bilibili.com/bangumi/play/ss22129)
   - 第1集 [探寻大龄单身女性的内心（上）](https://www.ixigua.com/6763438460549218824?id=6764372222195794446)
   - 第2集 [探寻大龄单身女性的内心（下）](https://www.ixigua.com/6763438460549218824)
   - 剩女更多的是主动选择，高度发展的今天，相夫教子不再是唯一需求，跨入不如意的婚姻生活是更大的问题→剩女
 - 【2021-5-4】[红娘最终版 - 985相亲平台：清北学霸谈恋爱方式，服了！](https://www.ixigua.com/6929548045738574340)
+
+#### 剩女
 
 【2021-11-14】国外PBS拍摄的中国纪录片leftover women《剩女》，[上](https://www.bilibili.com/video/BV1Si4y1x7Qi/)，[下](https://www.bilibili.com/video/BV1Si4y1x7Qi?p=2)
 - <iframe src="//player.bilibili.com/player.html?aid=540553332&bvid=BV1Si4y1x7Qi&cid=187030594&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
@@ -1302,6 +1312,47 @@ permalink: /partner
 - <iframe src="//player.bilibili.com/player.html?aid=540553332&bvid=BV1Si4y1x7Qi&cid=187030594&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
 - 来自山东的律师，家里人只有她接受过高等教育，思想层面的矛盾很难协调，家里长辈都是以自己认为的幸福定义孩子是否幸福，却忘了放手，忽略了人是独立的个体，长辈多用亲情绑架，很棘手。34岁时选择出国（法国）留学
 - 35岁以上算高龄高危，5倍风险，国内暂无冻卵子机构，国外有，泰国乌克兰
+
+#### 炼爱
+
+【2023-5-3】《炼爱》是董雪莹执导的纪录电影，于2021年6月在第24届上海国际电影节首映。 
+- [B站](https://www.bilibili.com/bangumi/play/ep508882?theme=movie&spm_id_from=333.337.0.0)，[文章](https://www.nfpeople.com/article/11272)
+- 该片真实地记录了生活在都市的五位单身女性，面对婚姻和生活的选择。
+
+<iframe src="//player.bilibili.com/player.html?aid=909438685&bvid=BV14M4y127Yd&cid=1081455568&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="600" width="100%"> </iframe>
+
+本片真实的记录了生活在都市的五位单身女性：
+- 有人想谈一场不分手的恋爱
+- 有人则相信冻卵才是“最有价值的投资”
+- 有人在家人催促中往返于各个婚恋活动
+- 有人则把希望寄托在社交软件
+- 还有人肩负起单亲妈妈的重任……
+
+不同的成长背景、迥异的价值体系，但她们正在面对人生中同样的 情感命题———在城市化，网络化的多元时代里，我们面对情感失去了什么？抛弃了什么？忽视了什么？
+- 《“炼”爱》首映礼后红梅，制片人Ruby，导演，Maggie，kitty
+- ![](https://img1.doubanio.com/view/thing_review/l/public/p7398500.webp)
+
+导演董雪莹：[《“炼”爱》女主现状](https://movie.douban.com/review/14386934/)
+
+红梅
+- 90年，人大毕业
+- 爱是恒久忍耐又有恩赐，爱是不嫉妒不自夸，不做害羞的事不张狂，爱是永不止息。
+
+Kitty
+- 董家琪把自己的英文名改成了Kitty，与三丽鸥公司上世纪推出的卡通人物Hello Kitty（凯蒂猫）同名，她们都喜欢粉色，都是天蝎座。Kitty家里收集了上万件Hello Kitty的物件，从挖耳勺到电视机，到现在也没有停止。
+
+月儿
+- 
+
+桃儿
+- 
+
+谈婧: “滴滴”事件引出的亚洲第一女车头
+- 十多岁从安徽合肥独自到北京上学，保送清华，从经济管理学院毕业后入职瑞银，七年后放弃百万年薪副董事职位与麻省理工学院offer加入优步中国创始团队，是优步上海第三号员工。
+
+【2017-6-6】[谈婧：选择1%的人走的路](https://www.tsinghua.org.cn/info/1953/12958.htm)
+- 谈婧，2003至2007就读于清华大学经济管理学院，获得金融学学士学位。 UBER中国创始团队成员、前中国战略运营主管、绰号“亚洲第一女车头”。曾任瑞士银行投资银行部副董事，连续7年主导多个中国企业的海外资本市场运作，后在分享经济领域连续创业，集“清华学霸、创业精英、独立互联网投资分析师、畅销书作家”等众多标签为一身。
+
 
 ## 交友活动
 
