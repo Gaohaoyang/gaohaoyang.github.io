@@ -3,7 +3,7 @@ layout: post
 title:  "如何选择人生伴侣-How to choose life partner"
 date:   2019-06-28 14:42:00
 categories: 人生规划
-tags: 人生伴侣 三观 选择 王志文 孤独 聊得来 约会 婚姻 pua
+tags: 人生伴侣 三观 选择 王志文 孤独 聊得来 约会 婚姻 pua 纪录片
 excerpt: 如何过好这一生
 mathjax: true
 permalink: /partner
@@ -1272,6 +1272,10 @@ permalink: /partner
 >一旦遇到合适的人，什么标准都不是标准
 
 ### 婚恋纪录片
+
+每个选择都是双刃剑
+- 想要自由，就得承受孤独的坚守
+- 想要婚姻，就得容忍生活的琐屑
 
 #### 相亲实验
 
