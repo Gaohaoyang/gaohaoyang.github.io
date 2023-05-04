@@ -3,7 +3,7 @@ layout: post
 title:  ChatGPT复现之路
 date:   2023-03-06 12:00:00
 categories: 深度学习 自然语言处理
-tags: gpt 文本生成 ChatGPT
+tags: gpt 文本生成 ChatGPT 评测
 excerpt: ChatGPT复现笔记
 mathjax: true
 permalink: /chatgpt_mimic
@@ -811,7 +811,7 @@ ChatGPT之争已经超出了算法的范畴，它更是一个AI+云计算能力�
 【2023-5-4】[UC伯克利发布大语言模型排行榜，Vicuna夺冠，清华ChatGLM进前5](https://www.36kr.com/p/2243109425885057)
 - [Chatbot Arena: Benchmarking LLMs in the Wild with Elo Ratings](https://lmsys.org/blog/2023-05-03-arena/)
 
-[LMSYS Org](https://arena.lmsys.org/)（UC伯克利主导）的研究人员又搞了个大新闻——大语言模型版排位赛！
+[LMSYS Org](https://arena.lmsys.org/)（UC伯克利主导，前小羊驼发明者, [twitter](https://twitter.com/lmsysorg)）的研究人员又搞了个大新闻——大语言模型版排位赛！
 - 130亿参数的Vicuna以1169分稳居第一
 - 同样130亿参数的Koala位列第二
 - LAION的Open Assistant排在第三
@@ -821,7 +821,7 @@ ChatGPT之争已经超出了算法的范畴，它更是一个AI+云计算能力�
 
 ![](https://img.36krcdn.com/hsossms/20230504/v2_836c211b37994a25877eeab82e27668a@1743780481_oswg166672oswg1080oswg550_img_000)
 
-定期更新排位赛榜单，而且还会优化算法和机制，并根据不同的任务类型提供更加细化的排名。
+定期更新排位赛[榜单](https://chat.lmsys.org/?leaderboard)，而且还会优化算法和机制，并根据不同的任务类型提供更加细化的排名。
 
 Elo ratings of popular open-source large language models.
  
@@ -835,6 +835,48 @@ Elo ratings of popular open-source large language models.
 | 7 |  [dolly-v2-12b](https://www.databricks.com/blog/2023/04/12| dolly-first-open-commercially-viable-instruction-tuned-llm)| 944 |  an instruction-tuned open large language model by Databricks | 
 | 8 |  [llama-13b](https://arxiv.org/abs/2302.13971) | 932 |  open and efficient foundation language models by Meta |
 | 9 |  [stablelm-tuned-alpha-7b](https://github.com/stability-AI/stableLM)|  858 | Stability AI language models |
+
+选择比较出名的9个开源聊天机器人。
+- 每次1v1对战，系统都会随机拉两个上场PK。
+- 用户同时和这两个机器人聊天，然后决定哪个聊天机器人聊的更好。
+- 提交投票之后，系统就会显示模型的名称。这时，用户可以继续聊天，或者选择新的模型重新开启一轮对战。
+
+经过一周的数据收集之后，团队共收获了4.7k个有效的匿名投票。
+- 先根据基准测试的结果，掌握了各个模型可能的排名。让模型去优先选择更合适的对手。
+- 然后，再通过**均匀采样**，获得对排名的更好总体覆盖。
+- 在排位赛结束时，团队又引入了一种新模型fastchat-t5-3b。
+
+大语言模型评估很难
+- 衡量一个模型好坏，一般基于学术benchmark，如在某个NLP任务上构建测试数据集，然后看测试数据集上准确率多少。
+
+然而，这些学术benchmark（如HELM）在大模型和聊天机器人上就不好用了。其原因在于：
+1. 由于评判聊天机器人聊得好不好这件事是非常主观的，因此现有的方法很难对其进行衡量。
+2. 这些大模型在训练的时候就几乎把整个互联网的数据都扫了一个遍，因此很难保证测试用的数据集没有被看到过。甚至更进一步，用测试集直接对模型进行「特训」，如此一来表现必然更好。
+3. 理论上我们可以和聊天机器人聊任何事情，但很多话题或者任务在现存的benchmark里面根本就不存在。
+
+另一条路：花钱请人来给模型打分。OpenAI就是这么搞的。但是这个方法明显很慢，还太贵……
+
+UC伯克利、UCSD、CMU团队发明了一种既**好玩又实用**的全新机制——`聊天机器人竞技场`（Chatbot Arena）。
+
+基于对战的基准系统具有以下优势：
+- 可扩展性（Scalability）: 当不能为所有潜在的模型对收集足够的数据时，系统应能扩展到尽可能多的模型。
+- 增量性（Incrementality）: 系统应能够使用相对较少的试验次数评估新模型。
+- 唯一顺序（Unique order）: 系统应为所有模型提供唯一顺序。给定任意两个模型，我们应该能够判断哪个排名更高或它们是否并列。
+
+Elo评分系统
+
+`Elo等级分制度`（Elo rating system）是一种计算玩家**相对技能水平**的方法，广泛应用在竞技游戏和各类运动当中。
+- Elo评分越高，这个玩家越厉害。
+  - 比如英雄联盟、Dota 2以及吃鸡等等，系统给玩家进行排名的就是这个机制。英雄联盟里面打了很多场排位赛后，就会出现一个隐藏分。这个隐藏分不仅决定了你的段位，也决定了你打排位时碰到的对手基本也是类似水平的。
+- Elo评分的数值是绝对的。
+  - 当未来加入新聊天机器人时，依然可以直接通过Elo的评分来判断哪个聊天机器人更厉害。
+  - 玩家A的评分为Ra，玩家B的评分为Rb，玩家A获胜概率的精确公式（使用以10为底的logistic曲线）为：
+  - ![](https://img.36krcdn.com/hsossms/20230504/v2_efd979ec32f14068bb315389e44ee4dd@1743780481_oswg5180oswg181oswg43_img_000)
+- 玩家的评分会在每场对战后线性更新。
+  - 假设玩家A（评分为Ra）预计获得Ea分，但实际获得Sa分。更新该玩家评分的公式为 ![](https://img.36krcdn.com/hsossms/20230504/v2_712763ece2b64d4bbe80c3a3846ff14d@1743780481_oswg5218oswg198oswg22_img_000)
+
+排位赛中每个模型的对战胜率以及使用Elo评分估算的预测对战胜率。
+- 结果显示，Elo评分确实可以相对准确地进行预测
 
 ### 小冰链
 
