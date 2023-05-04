@@ -878,6 +878,15 @@ Elo评分系统
 排位赛中每个模型的对战胜率以及使用Elo评分估算的预测对战胜率。
 - 结果显示，Elo评分确实可以相对准确地进行预测
 
+不同评测方法对比
+- [Comparison between different evaluation methods](https://lmsys.org/blog/2023-05-03-arena/)
+
+| 评测方法 | HELM/lm-evaluation-harness	| OpenAI/eval	| Alpaca Evaluation |	Vicuna Evaluation	| Chatbot Arena |
+| --- | ---	| ---	| ---- |	----	| ---- | 
+| Question Source	| Academic datasets	| Mixed	| Self-instruct evaluation set	| GPT-4 generated |	User prompts |
+| Evaluator	| Program	| Program/Model |	Human	| GPT-4	| User |
+| Metrics	| Basic metrics	| Basic metrics	| Win rate	| Win rate	| Elo ratings |
+
 ### 小冰链
 
 【2023-2-21】
