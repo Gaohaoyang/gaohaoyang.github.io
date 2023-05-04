@@ -994,6 +994,66 @@ Adept 和 Inflection 这两家早期团队想以自然语言为基础，为用�
 
 待定
 
+#### GPT4Free
+
+【2023-5-4】[GPT4Free](https://github.com/xtekky/gpt4free) ([discord](https://discord.com/invite/gpt4free)地址) 通过You.com、Quora和CoCalc等网站（OpenAI付费用户）提供的各种API地址，免费使用GPT-4和GPT-3.5模型。
+- GPT4Free 脚本会先访问 https://you.com/api/streamingSearch，并传送各种参数过去，然后获取返回的JSON并对其进行格式化。
+- GPT4Free仓库还有从Quora、Forefront和TheB等其他网站获取数据的脚本，任何开发者都可以基于这些脚本制作自己的聊天机器人。
+
+实测：
+- 安装
+  - 要求 Python 3.8以上
+  - 修改 requirements.txt 文件
+- [The requirements.txt need to be updated](https://github.com/xtekky/gpt4free/issues/419)
+
+```yml
+# pypasser # 原始
+pypasser>=0.0.5 # 指定版本，否则 pip install -r requirements.txt 提示冲突
+```
+
+UI部署正常，但点击“Think”后，出现新的[错误](https://github.com/xtekky/gpt4free/issues/406)：
+- Please make sure you are using a valid cloudflare clearance token and user agent.
+
+> An error occurred: failed to do request: Get "https://you.com/api/streamingSearch?q=hello&page=1&count=10&safeSearch=Moderate&onShoppingPage=False&mkt=&responseFilter=WebPages%2CTranslations%2CTimeZone%2CComputation%2CRelatedSearches&domain=youchat&queryTraceId=414f00ec-1837-406c-936a-c5ceeb0cd087&chat=%5B%5D": x509: â*.facebook.comâ certificate name does not match input. Please make sure you are using a valid cloudflare clearance token and user agent.
+
+
+安装
+
+```sh
+pip install gpt4free
+```
+
+程序调用
+
+```py
+import gpt4free
+from gpt4free import Provider, quora, forefront
+
+# usage You
+response = gpt4free.Completion.create(Provider.You, prompt='Write a poem on Lionel Messi')
+print(response)
+# usage Poe
+token = quora.Account.create(logging=False)
+response = gpt4free.Completion.create(Provider.Poe, prompt='Write a poem on Lionel Messi', token=token, model='ChatGPT')
+print(response)
+# usage forefront
+token = forefront.Account.create(logging=False)
+response = gpt4free.Completion.create(
+    Provider.ForeFront, prompt='Write a poem on Lionel Messi', model='gpt-4', token=token
+)
+print(response)
+print(f'END')
+# usage theb
+response = gpt4free.Completion.create(Provider.Theb, prompt='Write a poem on Lionel Messi')
+print(response)
+# usage cocalc
+response = gpt4free.Completion.create(Provider.CoCalc, prompt='Write a poem on Lionel Messi', cookie_input='')
+print(response)
+```
+
+错误信息
+> tls_client.exceptions.TLSClientExeption: failed to do request: Get "https://you.com/api/streamingSearch?q=Write+a+poem+on+Lionel+Messi&page=1&count=10&safeSearch=Moderate&onShoppingPage=False&mkt=&responseFilter=WebPages%2CTranslations%2CTimeZone%2CComputation%2CRelatedSearches&domain=youchat&queryTraceId=77ebaf4c-ba0c-4035-bad6-1dafc27fdc14&chat=%5B%5D": dial tcp 192.133.77.59:443: i/o timeout (Client.Timeout exceeded while awaiting headers)
+
 ### 机器人
 
 【2023-3-23】[GPT机器人要来了？OpenAI领投挪威人形机器人公司1X](https://finance.sina.com.cn/stock/usstock/c/2023-03-27/doc-imynishv4555021.shtml)
