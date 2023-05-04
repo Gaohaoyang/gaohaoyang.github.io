@@ -805,6 +805,24 @@ ChatGPT之争已经超出了算法的范畴，它更是一个AI+云计算能力�
 
 知乎：知海图AI
 
+
+### 排名
+
+【2023-5-4】[UC伯克利发布大语言模型排行榜，Vicuna夺冠，清华ChatGLM进前5](https://www.36kr.com/p/2243109425885057)
+
+[LMSYS Org](https://arena.lmsys.org/)（UC伯克利主导）的研究人员又搞了个大新闻——大语言模型版排位赛！
+- 130亿参数的Vicuna以1169分稳居第一
+- 同样130亿参数的Koala位列第二
+- LAION的Open Assistant排在第三
+- 清华提出的ChatGLM，虽然只有60亿参数，但依然冲进了前五，只比130亿参数的Alpaca落后了23分。
+- Meta原版的LLaMa只排到了第八（倒数第二）
+- 而Stability AI的StableLM则获得了唯一的800+分，排名倒数第一。
+
+![](https://img.36krcdn.com/hsossms/20230504/v2_836c211b37994a25877eeab82e27668a@1743780481_oswg166672oswg1080oswg550_img_000)
+
+定期更新排位赛榜单，而且还会优化算法和机制，并根据不同的任务类型提供更加细化的排名。
+
+
 ### 小冰链
 
 【2023-2-21】
