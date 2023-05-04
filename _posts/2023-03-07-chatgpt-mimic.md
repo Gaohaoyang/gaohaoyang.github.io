@@ -809,6 +809,7 @@ ChatGPT之争已经超出了算法的范畴，它更是一个AI+云计算能力�
 ### 排名
 
 【2023-5-4】[UC伯克利发布大语言模型排行榜，Vicuna夺冠，清华ChatGLM进前5](https://www.36kr.com/p/2243109425885057)
+- [Chatbot Arena: Benchmarking LLMs in the Wild with Elo Ratings](https://lmsys.org/blog/2023-05-03-arena/)
 
 [LMSYS Org](https://arena.lmsys.org/)（UC伯克利主导）的研究人员又搞了个大新闻——大语言模型版排位赛！
 - 130亿参数的Vicuna以1169分稳居第一
@@ -822,6 +823,18 @@ ChatGPT之争已经超出了算法的范畴，它更是一个AI+云计算能力�
 
 定期更新排位赛榜单，而且还会优化算法和机制，并根据不同的任务类型提供更加细化的排名。
 
+Elo ratings of popular open-source large language models.
+ 
+| Rank | Model | Elo Rating | Description |
+| 1 | 🥇 [vicuna-13b](https://vicuna.lmsys.org/) | 1169 | a chat assistant fine-tuned from LLaMA on user-shared conversations by LMSYS |  
+| 2 | 🥈 [koala-13b](https://bair.berkeley.edu/blog/2023/04/03/koala)|  1082 | a dialogue model for academic research by BAIR|
+| 3 | 🥉 [oasst-pythia-12b](https://open-assistant.io/)| 1065|  an Open Assistant for everyone by LAION|  
+| 4 |  [alpaca-13b](https://crfm.stanford.edu/2023/03/13/alpaca.html)| 1008|  a model fine-tuned from LLaMA on instruction-following demonstrations by Stanford|  
+| 5 |  [chatglm-6b](https://chatglm.cn/blog)|  985 | an open bilingual dialogue language model by Tsinghua University | 
+| 6 |  [fastchat-t5-3b](https://huggingface.co/lmsys/fastchat-t5-3b-v1.0)|  951 |  a chat assistant fine-tuned from FLAN-T5 by LMSYS|  
+| 7 |  [dolly-v2-12b](https://www.databricks.com/blog/2023/04/12| dolly-first-open-commercially-viable-instruction-tuned-llm)| 944 |  an instruction-tuned open large language model by Databricks | 
+| 8 |  [llama-13b](https://arxiv.org/abs/2302.13971) | 932 |  open and efficient foundation language models by Meta |
+| 9 |  [stablelm-tuned-alpha-7b](https://github.com/stability-AI/stableLM)|  858 | Stability AI language models |
 
 ### 小冰链
 
