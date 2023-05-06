@@ -2041,8 +2041,11 @@ python train.py --actor-model facebook/opt-1.3b --reward-model facebook/opt-350m
 python train.py --actor-model facebook/opt-13b --reward-model facebook/opt-350m --num-gpus 8
 # 66B参数模型，64个GPU
 python train.py --actor-model facebook/opt-66b --reward-model facebook/opt-350m --num-gpus 64
-
 ```
+
+问题
+- 数据量大时，出现OOM，原因是代码默认先把所有数据加载到内存，划分训练集和验证集，导致还没开始训练就OOM了
+- 已提交[issue](https://github.com/microsoft/DeepSpeed/issues/3214)，无回复
 
 ### 知乎：知海图AI
 
