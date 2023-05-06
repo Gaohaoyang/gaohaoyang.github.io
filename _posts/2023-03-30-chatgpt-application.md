@@ -384,6 +384,23 @@ Our evaluation uses 8 real complex question answering datasets, including **six*
 
 作者：[强化学徒](https://www.zhihu.com/question/589726461/answer/2961450933)
 
+#### 方法总结
+
+[作者](https://www.zhihu.com/question/591935281/answer/2961925796)
+
+常见的方法：
+- retrieve-then-generate：类ChatGPT Retrieval Plugin的技术方案
+  - 根据输入query来抽取相关外部文本，把抽取到的文本和query一起作为prompt再来做后续字符的推理。
+  - chatpdf这种产品的方法也类似，先把你输入的文档分成多个chunk分别做embedding放到向量数据库里，然后根据输入embedding的向量做匹配，再把匹配到的向量对应的chunk和输入一起作为prompt给LLM。
+  - 论文：【2020-2-10】[REALM: Retrieval-Augmented Language Model Pre-Training](https://arxiv.org/abs/2002.08909)
+- `Fine-tuning`：Fine-tuning是指在已经训练好的GPT/LLM模型基础上，使用**新数据集**再次训练。这种方法可以使模型针对特定任务或特定领域的语言使用情况进行优化，从而提高模型的效果。在Fine-tuning过程中，可以将**额外知识**作为新的数据集加入到训练中。
+- `Knowledge Distillation`：Knowledge Distillation是指将一个“大模型”的知识转移到一个“小模型”中。例如，可以将一个已经训练好的GPT/LLM模型的知识转移到一个小型的模型中，使得小型模型能够使用大型模型中的知识。这种方法可以通过将额外的知识加入到“大模型”中，从而使得“小模型”可以使用这些知识。
+- `数据增强`：数据增强是指在已有的数据集中，添加一些类似但不完全相同的数据来增加数据的数量和多样性。这种方法可以使得模型更加全面地学习到不同的语言使用情况，从而提高模型的效果。在数据增强的过程中，可以添加额外的知识，例如同义词、反义词、专业术语等。
+  - 词向量：将领域特定的词汇和词向量添加到模型的词汇表中。这些词汇可以是在目标领域中独有的词汇或者在常规数据集中缺失的词汇。
+  - 外部数据集：从外部数据集中收集与目标领域相关的数据，并将其添加到模型的训练数据中。这种方法需要找到与目标任务相关的高质量数据集，并使用适当的方法将其合并到模型的训练数据中。
+  - 外部知识库：将外部的知识库，如百科全书、知识图谱等，与模型集成，以便模型可以使用这些知识来辅助其生成文本。
+  - 人工标注：通过人工标注的方式，将领域特定的信息添加到训练数据中。这种方法需要大量的人力和时间，并且对于大型数据集来说可能不切实际。
+- `多任务学习`：多任务学习是指同时训练一个模型完成多个任务。例如，在训练GPT/LLM模型时，可以让模型同时完成文本分类、情感分析等任务，从而使得模型可以学习到更加多样化的知识。在多任务学习的过程中，可以将额外的知识添加到其他任务中，从而间接地影响到模型在主要任务上的表现。
 
 【2023-4-22】基于llama-index和ChatGPT API定制私有对话机器人的方式。
 
@@ -476,6 +493,137 @@ llama-index的工作原理如下：
 使用以上prompt请求openai 的模型时，模型根据提供的上下文和提出的问题，使用其逻辑推理能力得到想要的答案。
 
 ![](https://pic2.zhimg.com/80/v2-9aa943fe84bc25da03b866e7f52a940d_1440w.webp)
+
+【2023-4-13】[如何为GPT/LLM模型添加额外知识？](https://www.zhihu.com/question/591935281/answer/2979220793)
+
+#### retrieve-then-generate
+
+1、retrieve-then-generate：类ChatGPT Retrieval Plugin的技术方案
+ 
+核心：根据 输入query 检索本地/私有数据库/文档中的文档片段（检索可以是文本检索或基于向量的检索），作为扩充的上下文 context，通过 prompt template 组合成一个完整的输入，继而调用模型生成response。
+
+简版工作流：
+- chunk -> index -> retrieve -> construct input -> LLM
+ 
+推荐开源工具：
+- （1）OpenAI 的官方插件：[ChatGPT Retrieval Plugin](https://github.com/openai/chatgpt-retrieval-plugin)
+- （2）llama-index：[https://github.com/jerryjliu/llama_index](https://github.com/jerryjliu/llama_index)，提供了一个本地/私有数据收集（ingestion）和数据索引（indexing）的解决方案，构建起外部数据和 LLM 之间的接口。
+
+一个利用 llama-index 定制个人论文检索的示例：[llama_index/examples/paul_graham_essay at main · jerryjliu/llama_index](https://github.com/jerryjliu/llama_index/tree/main/examples/paul_graham_essay)。
+ 
+（在没有OpenAI API的情况下，llama-index 支持调用自定义的 LLM。）
+ 
+（3）LangChain：[langchain](https://github.com/hwchase17/langchain)，也是为了更好的构建外部数据、其他应用与 LLM 进行交互的接口层框架。
+
+LangChain应用参考示例：[GPT-4 & LangChain——PDF聊天机器人-地表最强全文搜索](https://www.bilibili.com/read/cv22589352)。
+ 
+llama-index 和 LangChain 可以组合使用，LangChain 中提供了 面向不同任务的 prompt template 和 prompt chain。
+ 
+#### 基于 fine-tuning 的方式
+
+2、基于 fine-tuning 的方式，相比于第一种方案，基于 fine-tuning 的方式需要额外的训练开销，同时还是会受限于LLM的最大长度限制。
+
+“让 LLM 具备理解定制数据库的能力”是很有挑战的目标，同时也会有很多应用场景。
+
+使用Hugging Face实现将维基百科的知识库添加到GPT-2模型中
+- 作者：[小斐实战](https://www.zhihu.com/question/591935281/answer/2960837503)
+
+```py
+import torch
+from transformers import GPT2LMHeadModel, GPT2Tokenizer, TextDataset, DataCollatorForLanguageModeling, Trainer, TrainingArguments
+
+# 加载预训练的GPT-2模型
+model = GPT2LMHeadModel.from_pretrained('gpt2')
+
+# 加载GPT-2的tokenizer
+tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+
+# 加载维基百科的文本文件，并将其转换为数据集
+dataset = TextDataset(
+    tokenizer=tokenizer,
+    file_path='path/to/wiki.txt',
+    block_size=128
+)
+
+# 创建data collator
+data_collator = DataCollatorForLanguageModeling(
+    tokenizer=tokenizer, 
+    mlm=False
+)
+
+# 设置训练参数
+training_args = TrainingArguments(
+    output_dir='./results',          # 输出目录
+    num_train_epochs=3,              # 训练的轮数
+    per_device_train_batch_size=8,   # 训练时每个GPU的batch size
+    per_device_eval_batch_size=8,    # 验证时每个GPU的batch size
+    evaluation_strategy='steps',     # 评估策略
+    save_steps=500,                  # 多少步保存一次模型
+    save_total_limit=2,              # 最多保存几个模型
+    logging_steps=500,               # 多少步记录一次日志
+    learning_rate=5e-5,              # 学习率
+# 创建Trainer对象
+trainer = Trainer(
+model=model,
+args=training_args,
+train_dataset=dataset,
+data_collator=data_collator,
+prediction_loss_only=True
+)
+
+# 开始训练
+trainer.train()
+
+# 保存微调后的模型
+trainer.save_model('./fine-tuned-model')
+```
+
+#### 知识图谱增强
+
+使用知识图谱增强GPT-2模型的示例代码：
+
+```python
+import torch
+from transformers import GPT2LMHeadModel, GPT2Tokenizer
+
+# 加载预训练的GPT-2模型
+model = GPT2LMHeadModel.from_pretrained('gpt2')
+# 加载GPT-2的tokenizer
+tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+# 加载知识图谱: 表示一些实体和它们之间的关系。
+knowledge_graph = {
+    'John': {
+        'is a': 'person',
+        'born in': 'New York',
+        'works at': 'Google'
+    },
+    'Google': {
+        'is a': 'company',
+        'headquartered in': 'California',
+        'founded by': 'Larry Page and Sergey Brin'
+    }
+}
+
+# 将知识图谱嵌入到模型中
+model.resize_token_embeddings(len(tokenizer))
+for entity in knowledge_graph.keys():
+    entity_id = tokenizer.convert_tokens_to_ids(entity)
+    entity_embedding = torch.randn(768)
+    model.transformer.wte.weight.data[entity_id] = entity_embedding
+
+# 生成句子
+input_text = 'John works at'
+input_ids = tokenizer.encode(input_text, return_tensors='pt')
+output = model.generate(
+    input_ids,
+    max_length=50,
+    do_sample=True,
+    top_k=50
+)
+output_text = tokenizer.decode(output[0], skip_special_tokens=True)
+print(output_text)
+```
+
 
 #### New Bing
 
