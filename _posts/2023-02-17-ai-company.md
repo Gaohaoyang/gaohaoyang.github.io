@@ -979,7 +979,7 @@ AlphaGo大战李世石。第三天，比赛进入高潮，谷歌创始人布林�
 
 【2023-5-6】[谷歌内部文件泄露：我们和OpenAI都没有护城河](https://www.huxiu.com/article/1439220.html)
 - Google 内部泄露的文件在 SemiAnalysis 博客传播: **开源 AI** 会击败 Google 与 OpenAI，获得最终的胜利。
-- 译文：“[我们没有护城河，OpenAI 也没有](https://mp.weixin.qq.com/s/JiA-HJXeZSgHGH6zHblIVA)”
+- 译文：我们没有护城河，OpenAI 也没有, [公众号](https://mp.weixin.qq.com/s/JiA-HJXeZSgHGH6zHblIVA)，[掘金](https://juejin.cn/post/7229593695653314597)
 - 原文：[We Have No Moat, And Neither Does OpenAI](https://www.semianalysis.com/p/google-we-have-no-moat-and-neither)
 
 大模型竞赛过程中，Google 一直显得谨小慎微，未能抢占先机。背后是 Google CEO 皮查伊倾向**渐进式**，而不是**大刀阔斧**的改进产品。部分高管也不听从他的调度，或许是因为，大权压根不在皮查伊手里。
@@ -1002,15 +1002,15 @@ Google 面临的问题，每一个都困难重重：
 - 比起开源社区需要 Google，Google 更需要开源社区。
 
 “重大问题”如今已经得到解决并投入使用。举几个例子：
-- 手机上的 LLM：人们可以在 Pixel 6 上以每秒 5 token 的速度运行基础模型；
-- 可扩展的个人 AI：你可以一个晚上就在笔记本电脑上微调一个个性化 AI；
-- 负责任的发布：这个问题不是“解决了”，而是“消除了”。互联网充满了没有限制的艺术模型，语言模型也要来了；
-- 多模态：当前的多模态 ScienceQA SOTA 在一小时内就能完成训练。
+- 手机上的 LLM：[人们可以在 Pixel 6 上以每秒 5 token 的速度运行基础模型](https://twitter.com/thiteanish/status/1635678053853536256)；
+- 可扩展的个人 AI：[你可以一个晚上就在笔记本电脑上微调一个个性化 AI](https://github.com/tloen/alpaca-lora)；
+- 负责任的发布：[这个问题不是“解决了”，而是“消除了”。互联网充满了没有限制的艺术模型，语言模型也要来了](https://civitai.com/)；
+- 多模态：[当前的多模态 ScienceQA SOTA 在一小时内就能完成训练](https://arxiv.org/pdf/2303.16199.pdf)。
 
-虽然我们的模型在质量方面仍然有优势，但差距正在以惊人的速度缩小。开源模型更快、更可定制、更私密，而且性能更强。他们用 100 美元和 130 亿参数做到了我们使用 1000 万美元和 5400 亿参数下也很难完成的事情。而且他们用的时间只有几周，而不是几个月。
+虽然大公司模型在质量方面仍然有优势，但差距正在以惊人的速度缩小。开源模型更快、更可定制、更私密，而且性能更强。他们用 100 美元和 130 亿参数做到了我们使用 1000 万美元和 5400 亿参数下也很难完成的事情。而且他们用的时间只有几周，而不是几个月。
 
 这意味着：
-- 我们没有秘密武器。最好的方法是向 Google 外的其他人学习并与他们合作，应该优先考虑启用第三方集成。
+- 大公司没有秘密武器。最好的方法是向 Google 外的其他人学习并与他们合作，应该优先考虑启用第三方集成。
 - 当有免费、无限制的替代品时，人们不会为受限制的模型付费，我们应该考虑我们真正的价值在哪里。
 - ![](https://img.huxiucdn.com/article/content/202305/05/171113428325.jpg?imageView2/2/w/1000/format/jpg/interlace/1/q/85)
 
