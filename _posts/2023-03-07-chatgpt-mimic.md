@@ -1418,6 +1418,54 @@ Meta开源了LLaMA系列模型，包含了参数量为7B/13B/33B/65B的不同模
 - 【2023-3-19】基于LLaMA用翻译语料训练中文Alpaca模型 - [李煜东的文章 - 知乎](https://zhuanlan.zhihu.com/p/614923816)
 - 【2023-3-31】[从0到1复现斯坦福羊驼](https://zhuanlan.zhihu.com/p/618321077)（Standford Alpaca 7B），8 卡 A800 80GB GPUs 。。。
 
+#### Alpaca-LoRA
+
+[alpaca-lora](https://github.com/tloen/alpaca-lora)
+
+```sh
+git clone https://github.com/tloen/alpaca-lora.git
+pip install -r requirements.txt
+```
+
+训练
+- 模型默认输出在“lora-alpaca”文件夹下
+- 可设置超参
+
+```sh
+
+python finetune.py \ # 默认参数
+# 自定义模型、数据、目录
+    --base_model 'decapoda-research/llama-7b-hf' \
+    --data_path 'yahma/alpaca-cleaned' \
+    --output_dir './lora-alpaca' # 模型保存目录
+# 或者更改超参信息
+    --batch_size 128 \
+    --micro_batch_size 4 \
+    --num_epochs 3 \
+    --learning_rate 1e-4 \
+    --cutoff_len 512 \
+    --val_set_size 2000 \
+    --lora_r 8 \
+    --lora_alpha 16 \
+    --lora_dropout 0.05 \
+    --lora_target_modules '[q_proj,v_proj]' \
+    --train_on_inputs \
+    --group_by_length
+```
+
+推理
+
+```sh
+python generate.py \
+    --load_8bit \
+    --base_model 'decapoda-research/llama-7b-hf' \
+    --lora_weights 'tloen/alpaca-lora-7b'
+# 启动推理服务（gradio）
+python inference.py
+# 使用自己的模型
+LORA_WEIGHTS = "tloen/alpaca-lora-7b"
+```
+
 
 #### Alpaca-LoRA 本地部署
 
