@@ -77,7 +77,7 @@ Prompt是在ChatGPT中输入的一些关键词，按照用户意愿生成出各�
 - [AIPRM](https://www.aiprm.com/)
 - Chrome 插件：[aiprm-for-chatgp](https://chrome.google.com/webstore/detail/aiprm-for-chatgpt/ojnbohmppadfgpejeebfnmnknjdlckgj?hl=en)
 
-## ChatGPT 应用领域
+## ChatGPT 应用
 
 ChatGPT 非常实用，能帮助普通人节省不少脑力和时间成本。
 - 回答后续问题、承认错误、挑战不正确的前提、拒绝不适当的请求。
@@ -272,6 +272,52 @@ ChatGPT和MTurk分别将推文以“相关性、立场、主题、政策、实�
 
 ChatGPT 用于 人工标注的 Web系统：[Weak Labeling Tool using ChatGPT](https://github.com/ainbr/chatgpt-weak-labeler-web-ui), [代码](https://github.com/ainbr/chatgpt-weak-labeler-web-ui/blob/master/app.py)
 - ![](https://github.com/ainbr/chatgpt-weak-labeler-web-ui/raw/master/misc/screenshot1.png)
+
+#### 数据分析
+
+【2023-5-6】[Pandas AI](https://github.com/gventuri/pandas-ai)
+- 将 Pandas 和 AI 结合，更方便地分析数据。
+
+代码：
+
+```py
+import pandas as pd
+from pandasai import PandasAI
+
+# Sample DataFrame
+df = pd.DataFrame({
+    "country": ["United States", "United Kingdom", "France", "Germany", "Italy", "Spain", "Canada", "Australia", "Japan", "China"],
+    "gdp": [21400000, 2940000, 2830000, 3870000, 2160000, 1350000, 1780000, 1320000, 516000, 14000000],
+    "happiness_index": [7.3, 7.2, 6.5, 7.0, 6.0, 6.3, 7.3, 7.3, 5.9, 8.0]
+})
+
+# Instantiate a LLM
+from pandasai.llm.openai import OpenAI
+llm = OpenAI()
+
+pandas_ai = PandasAI(llm)
+pandas_ai.run(df, prompt='Which are the 5 happiest countries?')
+```
+
+构造数据，然后输入 prompt：
+> Which are the 5 happiest countries?
+
+AI 根据输入的数据，处理数据，得到结果。
+
+```
+9             China
+0     United States
+6            Canada
+7         Australia
+1    United Kingdom
+Name: country, dtype: object
+```
+
+画个图：
+> Plot the histogram of countries showing for each the GDP, using different colors for each bar
+
+AI 根据需求，画一了各个国家的 GDP 条形图。
+- [img](https://mmbiz.qpic.cn/mmbiz_png/v1JN0W4OpXgoevdlbWGnibC449Dicxr2e0tQZtQPf571xu6T4cRcm2VBoIyibxoicp8iaoZoUEicxBwDN7wQNdEK3ZOA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1)
 
 ### 内容管理/营销
 
