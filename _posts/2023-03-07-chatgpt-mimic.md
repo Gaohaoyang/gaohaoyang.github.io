@@ -1467,7 +1467,7 @@ LORA_WEIGHTS = "tloen/alpaca-lora-7b"
 ```
 
 
-#### Alpaca-LoRA 本地部署
+##### Alpaca-LoRA 本地部署
 
 【2023-3-23】Alpaca-Lora (羊驼-Lora): [轻量级 ChatGPT 的开源实现](https://zhuanlan.zhihu.com/p/615646636)（对标 Standford Alpaca）
 - ChatGPT 轻量级的开源版本，它使用 Lora (Low-rank Adaptation) 技术在 Meta 的 LLaMA 7B 模型上微调，只需要训练很小一部分参数就可以获得媲美 Standford Alpaca 模型的效果
@@ -1482,9 +1482,10 @@ LoRA 是在原始 PLM 旁边增加一个旁路，做一个降维再升维的操�
 - Eric J. Wang 发布的 Alpaca-LoRA 项目。[项目地址](https://github.com/tloen/alpaca-lora)
 - LoRA 的最大优势是速度更快，使用的内存更少，因此可以在消费级硬件上运行。
 
-##### Alpaca-LoRA 中文版
+##### Alpaca-LoRA 中文版 Luotuo
 
 【2023-3-26】华中师范大学等机构的三位个人开发者开源的中文语言模型`骆驼` (Luotuo)，基于 LLaMA、Stanford Alpaca、Alpaca LoRA、Japanese-Alpaca-LoRA 等完成，**单卡**就能完成训练部署。
+- 骆驼:A Chinese finetuned instruction LLaMA. Developed by 陈启源 @ 华中师范大学 & 李鲁鲁 @ 商汤科技 & 冷子昂 @ 商汤科技
 - 参考：[训练个中文版ChatGPT没那么难：不用A100，开源Alpaca-LoRA＋RTX 4090就能搞定](https://view.inews.qq.com/a/20230326A02QO500)
 - 之所以将模型名字命名为骆驼，是因为 LLaMA（大羊驼）和 alpaca（羊驼）都属于偶蹄目 - 骆驼科。
 - 训练中文版 Alpaca LoRa 用了 3K 多条中文问答保险语料，实现过程使用了 LoRa 方法，并微调 Alpaca 7B 模型，耗时 240 分钟，最终 Loss 0.87 。
@@ -2141,6 +2142,11 @@ AI图像生成工具Stable Diffusion的初创公司Stability AI发布并开源�
 【2023-4-27】最大开源社区 Hugging Face 发布了 HuggingChat，有 300 亿参数。[详情](https://www.ithome.com/0/689/379.htm)
 - 既开源，还免费，互联网上随随便便就能用。 [网址](hf.co/chat)
 - [huggingchat](https://huggingface.co/spaces/huggingchat/chat-ui)
+
+
+### 星火 -- 科大讯飞
+
+【2023-5-6】科大讯飞大模型[发布](https://xinghuo.xfyun.cn/)，亲测效果还不错
 
 
 ### ChatRWKV
