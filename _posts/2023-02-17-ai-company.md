@@ -978,7 +978,9 @@ AlphaGo大战李世石。第三天，比赛进入高潮，谷歌创始人布林�
 ### 开源AI终究胜利
 
 【2023-5-6】[谷歌内部文件泄露：我们和OpenAI都没有护城河](https://www.huxiu.com/article/1439220.html)
-- Google 内部泄露的文件在 SemiAnalysis 博客传播: **开源 AI** 会击败 Google 与 OpenAI，获得最终的胜利。“我们没有护城河，OpenAI 也没有”
+- Google 内部泄露的文件在 SemiAnalysis 博客传播: **开源 AI** 会击败 Google 与 OpenAI，获得最终的胜利。
+- 译文：“[我们没有护城河，OpenAI 也没有](https://mp.weixin.qq.com/s/JiA-HJXeZSgHGH6zHblIVA)”
+- 原文：[We Have No Moat, And Neither Does OpenAI](https://www.semianalysis.com/p/google-we-have-no-moat-and-neither)
 
 大模型竞赛过程中，Google 一直显得谨小慎微，未能抢占先机。背后是 Google CEO 皮查伊倾向**渐进式**，而不是**大刀阔斧**的改进产品。部分高管也不听从他的调度，或许是因为，大权压根不在皮查伊手里。
 
@@ -1020,6 +1022,18 @@ LLaMA
 
 低成本的公众参与得以实现，因为有一种称为**低秩适应**（Low rank adaptation，LoRA）的微调机制大大降低了成本，结合规模方面的重大突破（图像合成的 Latent Diffusion，LLM 的 Chinchilla）。
 - LoRA 通过将模型更新表示为**低秩分解**（low-rank factorizations）来工作，将更新矩阵的大小减少了几千倍。这使得模型微调的成本和时间大大降低。
+
+开源AI是最后赢家，而不是OpenAI
+- 从头训练大模型成本太高，难以实施：LLaMA和LoRA出现
+  - 3月初，Meta 的 LLaMA 泄露，没有指令或对话调整，也没有 RLHF。
+  - 不到一个月，一系列改进版出现：指令调整、量化、质量改进、人类评估、多模态和 RLHF 等等变体。每个改进版间隔才几天时间
+  - 扩展问题解决后，一定程度上任何人都可以进行实验和调试。
+- 长期来看，大型模型并不更具优势，只用了几天时间
+- 数据质量比数据大小更重要
+- 直接与开源竞争是一个失败的命题
+- 个人受到许可证限制程度没有企业那么大
+- 客户比大模型提供商更了解业务应用
+- Meta已开始建设开源生态系统：闭源越多，开源需求越强烈，发展越快
 
 ## 清华大学
 
