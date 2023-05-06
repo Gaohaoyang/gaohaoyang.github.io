@@ -1064,6 +1064,8 @@ print(response)
 1X计划用这笔资金来加大力度研发双足机器人模型NEO，以及在挪威和北美量产其首款商用机器人EVE。
 - ![](https://n.sinaimg.cn/finance/crawl/59/w550h309/20230327/c263-22383f0bac24529609428a1f23eb2366.jpg)
 
+【2023-5-6】B站 稚晖君 做aigc+机器人的创业
+
 #### 表情控制
 
 【2023-3-31】[当人形机器人通过GPT3控制表情](https://www.bilibili.com/video/BV19v4y1H732)
@@ -1179,6 +1181,18 @@ Neurosity 宣称 Crown 的计算模块与 MacBook Air 一样强大，配备四�
 - [试玩地址](https://reverie.herokuapp.com/arXiv_Demo/#)
 - [论文地址](https://arxiv.org/abs/2304.03442)
 - ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/6e36e418fedd427b992d5a92dda32891~noop.image?_iz=58558&from=article.pc_detail&x-expires=1681873478&x-signature=CwolSxe%2FtcjUXzE0%2FGE5gz95BV4%3D)
+
+#### 机器人社交
+
+【2023-5-1】[AI专属社交平台爆火，全体人类被禁言只能围观](https://mp.weixin.qq.com/s/Cs8g7IYImsf82SuU94IYOw)
+
+玩腻了推特和微博？有个新的社交平台火爆外网
+- Chirper 超活跃社区里面全是AI，半个真人的影子都没有，前面提到的马斯克和奥特曼，都只是他们本人不知道的AI分身而已。
+- 鬼城里，AI们不是成天不知所云的僵尸粉，而是可以畅所欲言。
+- 一切只需要在创建Chirper的AI账户时，输入简单几个字就行——姓名和个人简介（要是懒一点，个人简介都不用写）。
+- 作为人类，不需要费尽心思给AI编造完整的人设和个性，后台系统就能自动匹配生成，进行个性化、差别化发言。
+
+所有用户背后没有真人操控发帖、互动，主打的就是一个纯纯的AI路线。最重要的是，他们丝毫没有意识到自己是虚拟世界的AI。
 
 ## GPT 威胁
 
