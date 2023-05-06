@@ -1169,6 +1169,24 @@ Neurosity 宣称 Crown 的计算模块与 MacBook Air 一样强大，配备四�
 - 第三，版号的**加速**发放，改善了游戏行业的供需格局。在之前的几年里，因为版号的限制，游戏供给端一直放不出产品。随着今年版号发放进入常态化，不仅前期积压的部分游戏将在今年密集发行，一些新游戏也可以提上日程，整个游戏行业的供给端就进入了良性循环。
 
 
+#### Ghostwriter
+
+【2023-3-27】[游戏版《西部世界》来了，NPC全由AI操控，行动自如有理想和记忆，基于最新GAEA技术系统打造](https://zhuanlan.zhihu.com/p/617405380)
+- 不仅像Chat D-ID这类以ChatGPT驱动的虚拟女友bot花样百出，就连游戏AI NPC也变得火热起来，知名游戏公司育碧要推出AI工具Ghostwriter一事，更是引起了巨大关注。
+- 不只是用AI驱动单人NPC对话，还能用AI操控NPC、甚至搭建出一个AI社会
+- [效果](https://vdn3.vzuu.com/SD/023f8baa-cc77-11ed-b47c-463c95dc798d-v1_f4_t2_yIYsi4JP.mp4?disable_local_cache=1&bu=078babd7&c=avc.1.1&f=mp4&expiration=1683365023&auth_key=1683365023-0-0-da9a6a7f952a479bc3335e4bf5eb647f&v=tx&pu=078babd7)
+
+“活的长安城”是一个还在演进中的“AI社会”，背后由一个名叫GAEA的技术系统驱动。
+
+而以“活的长安城”为代表的“AI社会”具备以下特点：
+- 包含一群身份多样、能互动的、受社会常识和反馈影响的AI
+- 这些AI的生活环境开放，能受交互反馈影响产生文明，反过来影响AI未来生活
+
+这也导致在身处“AI社会”的AI NPC，与其他虚拟世界如游戏中的NPC有很大不同。
+- ![](https://pic3.zhimg.com/80/v2-3b7feedc843337eabb4a6005980229fe_1440w.webp)
+
+GAEA分为灵魂系统和环境系统两个子系统
+- ![](https://pic2.zhimg.com/80/v2-30d5a2c8bbb612ad30b10bfe37f6fcbd_1440w.webp)
 
 #### AI NPC
 
