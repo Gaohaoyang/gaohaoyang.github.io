@@ -3,7 +3,7 @@ layout: post
 title:  ChatGPT应用
 date:   2023-03-30 19:10:00
 categories: 深度学习 自然语言处理
-tags: AIGC ChatGPT 
+tags: AIGC ChatGPT 智能客服
 excerpt: ChatGPT应用思考
 mathjax: true
 permalink: /chatgpt_application
@@ -430,6 +430,17 @@ Our evaluation uses 8 real complex question answering datasets, including **six*
 
 作者：[强化学徒](https://www.zhihu.com/question/589726461/answer/2961450933)
 
+【2023-5-9】[大语言模型实现智能客服知识库文档数据提取功能](https://www.toutiao.com/article/7231062779061502501)
+- 智能客服的知识库有两类：**机器人**知识库和**坐席**知识库，分别是为机器人和坐席进行服务时，提供数据的支撑。
+- 如何通过大语言模型，让企业的文档可批量上传，无需更多的整理，直接转化为有效的QA，供座席和机器人直接调用呢？
+
+当前的主流客服产品
+- 智能客服系统会标配知识库管理功能，常见的形式是树状结构，提供分类管理、知识库条目管理，并支持知识库的批量导入导出操作。
+- 使用中，企业需要经常性地维护管理知识库内容，将企业已有知识内容文档上传，但如果是将原文件上传，则系统最多能支持预览功能，使用者在操作界面只能点击打开全文检索。而如果是机器人知识库，直接上传文档是不可用的，需要操作者手工整理文档中的内容为机器人标准问答对。
+
+大模型时代
+- 所有企业的文档可以批量上传，无需更多的整理，直接可自动转化为有效的QA，供座席和机器人直接调用。
+
 #### 方法总结
 
 [作者](https://www.zhihu.com/question/591935281/answer/2961925796)
@@ -678,7 +689,13 @@ print(output_text)
 
 #### chatpdf
 
-- 优势：交互方便，容易上手，可以持续问答交互缺点：全文总结信息量较低，问答模式偏向于关键词定位，然后上下文翻译，且已经收费，每月5刀。只支持本地PDF文档上传。
+[ChatPDF](https://www.chatpdf.com) 界面干净，上传pdf后，直接对话。
+- 上传速度很快，对话响应也非常的快。
+- 对文档内容的解析很准确，包括一些隐藏在内部的知识点也可以快速搜索找到
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/TdjoY88FTkaxGc~noop.image?_iz=58558&from=article.pc_detail&x-expires=1684219771&x-signature=A9yfB6gzbQrwWdUHuBZ2o0bRZzM%3D)
+
+优势：
+- 交互方便，容易上手，可以持续问答交互缺点：全文总结信息量较低，问答模式偏向于关键词定位，然后上下文翻译，且已经收费，每月5刀。只支持本地PDF文档上传。
 
 #### scispace
 
@@ -713,9 +730,13 @@ print(output_text)
 
 #### PandasGPT
 
-- [PandaGPT](https://www.pandagpt.io/), 已有3w个文档，10w个问题
+[PandaGPT](https://www.pandagpt.io/), 访问速度偏慢，UI对话样式一言难尽，没有一个版块不是互相遮挡的
+- 已有3w个文档，10w个问题
 - 上传文档，直接针对文档问答; 还能生成知识图谱，Generate Knowledge Graph
 - ![](https://uploads-ssl.webflow.com/6405047c9d73416a60b878b4/6405068dec8bf7442171f160_Screenshot%202023-03-05%20at%204.15.30%20PM.png)
+
+- 问题回答基本到位，相比ChatPDF，略显啰嗦
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/TdjoY8iElGGYks~noop.image?_iz=58558&from=article.pc_detail&x-expires=1684219771&x-signature=BO6bt9JW5V%2Fsitc%2F%2FKWe6sBmUHY%3D)
 
 类似的，还有 AMiner 上的华智冰
 
@@ -727,6 +748,39 @@ print(output_text)
 - ChatDOC 目前免费，文件大小限制为 200 页，最多可以上传 5 个文档。在即将更新的版本中，还支持跨多个文档的综合查询和问答。
 - ![](https://pic2.zhimg.com/80/v2-c73f17ecea423a82aad0ac7c110bd625_720w.webp)
 
+
+#### typeset
+
+[typeset](https://typeset.io)
+- 主打论文检索，也支持pdf文档解读。
+- 上传、对话响应都十分缓慢，对话的效果差，很多知识点无法解读，一律回复无法找到这个问题的答案。
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/TdjoY9mB4FVHsf~noop.image?_iz=58558&from=article.pc_detail&x-expires=1684219771&x-signature=DjAXODUMrVrnilF7CAXPLSUT0qs%3D)
+
+
+#### 自研方案
+
+自研框架的选择
+- 基于OpenAIEmbeddings，官方给出了基于embeddings检索来解决GPT无法处理长文本和最新数据的问题的实现方案。[参考](https://www.datalearner.com/blog/1051681543488862)
+- 也可以使用 LangChain 框架。
+
+参考
+- [ChatGPT怎么建立私有知识库？](https://www.zhihu.com/question/596838257/answer/3004754396)
+- [利用LangChain和国产大模型ChatGLM实现基于本地知识库的自动问答](https://www.zhihu.com/zvideo/1630964532179812353)
+
+除了从文档中抓取数据，从指定网站URL抓取数据，实现智能客服外部知识库，可以借助ChatGPT写Python代码，PythonBeautiful Soup库的实现方式很成熟
+
+大厂产品截图：智能客服知识库建设
+- 企业资料库，关联大语言模型自动搜索
+- ![a](https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/TdjoYAg6aFUKbz~noop.image?_iz=58558&from=article.pc_detail&x-expires=1684219771&x-signature=5kqgHWkZX6LPdrX2H9Zq59m%2BwO0%3D)
+- 大模型文档知识抽取和“即搜即问”
+- ![b](https://p9-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/TdjoYkN7rAGx03~noop.image?_iz=58558&from=article.pc_detail&x-expires=1684219771&x-signature=gO%2FqHxavS7KVAfE08Mv0WayLjLQ%3D)
+- ![b](https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/TdjoYmX2ImA5oO~noop.image?_iz=58558&from=article.pc_detail&x-expires=1684219771&x-signature=rlim2GCZ8zsapnPyzA47LCHJkEo%3D)
+
+
+##### OpenAIEmbeddings
+
+
+##### LangChain
 
 
 ### 推荐系统
