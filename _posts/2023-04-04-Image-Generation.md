@@ -375,7 +375,58 @@ LC-AIGC 问题
 
 ```
 
+##### ControlNet Tile
 
+【2023-5-9】升级版发布：[ControlNet Tile](https://www.toutiao.com/article/7228100045885915651)，支持：
+1. 放大
+2. 修复
+3. 细节增强
+
+选其一，或其二，或是三者一起组合使用。
+
+Tile模型介绍
+
+图生图（img2img）里使用Tile模型有4个点：
+- (1) 参考图不是必须的，如果ControlNet里不填入参考图，tile模型会根据图生图里的参考图来做参考
+- (2) 预处理器选择 tile_resample
+- (3) 模型选择 control_v11f1e_sd15_tile，这里注意是v11f1e，如果找不到，请按照上面的下载/更新再来一次
+- (4) Tile 模型专属参数 Down Sampling Rate，意思是向下缩放取样系数。作用是系数越大，得到的参考图越小，取值细节越小，最终得到的效果图随机细节越多，与原图的关系越小。
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/0fe36be03c7a460b8430aa48c0b3b9e3~noop.image?_iz=58558&from=article.pc_detail&x-expires=1684219760&x-signature=is%2FWM7ssV4i7HvwXcTaDtn05hNA%3D)
+
+一张512*512的参考图，在Down Sampling Rate为2的情况下，得到的参考图为256*256；值为4的时候，得到128*128。
+- ![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/bf03be5b08af48d68e7e802fae5e5e22~noop.image?_iz=58558&from=article.pc_detail&x-expires=1684219760&x-signature=W4qpZhDRf8TTXU2lPnqO2HPpgsY%3D)
+
+ControlNet Tile 目前大家都喜欢在`图生图`（img2img）里使用，那为什么不喜欢在`文生图`（txt2img）里用？
+- 因为Tile模型的性质，修复和细节增强。
+
+`文生图`（txt2img）里，出图是随机的，也就是我们都不知道出来的图片是什么样子的，如果直接使用细节增强，那么会增加我们的出图时间，减少出图效率，让我们的可控性得不到保障。所以大家不太愿意这样花时间。
+
+`图生图`（img2img）的重绘强度（Denoising strength）是直接影响Tile模型致输入图和输出图之间变化强度的因子。数值越高，被修改的细节越多，反之则少。
+
+修复，把一张512*512的脸部和手部出现坏了的图片修复
+- (1) 第一步，inpaint 修复脸部和手部，重绘强度0.6：
+- (2) 第二步，使用图生图（img2img）全图修复，重绘强度0.6：
+
+|步骤|效果|备注|
+|---|---|---|
+|原图|![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/c150eb534f7644c8b3115a9f1d4ec94c~noop.image?_iz=58558&from=article.pc_detail&x-expires=1684219760&x-signature=mztemNJIqqjBIjy6UgTfvsvmMYE%3D)||
+|遮罩图|![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/e651edf9f2584889bc4f1e6c64a5507c~noop.image?_iz=58558&from=article.pc_detail&x-expires=1684219760&x-signature=jrKIKSOjbCwp19gYXolIOh3S6j4%3D)||
+|第一步|![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/8f9df6eb307247089931e26950087944~noop.image?_iz=58558&from=article.pc_detail&x-expires=1684219760&x-signature=PZkM1c3kJnDmHOxEMOkKDcbQNQE%3D)|脸部和手部得到很好的修复，背景和裤子上的纹理都没有改变。|
+|第二步|![](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/02a89c8e3ac24b5da7b84eec0b89d768~noop.image?_iz=58558&from=article.pc_detail&x-expires=1684219760&x-signature=W2Yynd3r6PphoKdk2Skq9Q5aXgY%3D)|衣服褶皱、裤子纹理、背景清晰度和光线都得到很好的修正|
+
+正向提示词：
+> a woman walking int the park, skirt ,shorts,
+
+反向提示词:
+
+```
+kitsch, ugly, oversaturated, grain, low-res, Deformed, blurry, blur, poorly drawn, mangled, surreal, text,by <bad-artist-anime:0.8> , by <bad-artist:0.8> , by <bad-hands-5:0.8>, by < bad_prompt_version2:0.8>
+
+Model: deliberate_v2
+Steps: 25, Sampler: DPM++ SDE Karras,
+
+CFG scale: 7, Seed: 734068303,Size: 1024x1024
+```
 
 #### 阿里 Composer
 
