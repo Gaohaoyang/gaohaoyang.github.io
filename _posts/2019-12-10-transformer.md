@@ -241,10 +241,43 @@ transformer 结构分成：
 - ![](https://camo.githubusercontent.com/88e8f36ce61dedfd2491885b8df2f68c4d1f92f5/687474703a2f2f696d6775722e636f6d2f316b72463252362e706e67)
 
 
-## [Transformer模型的PyTorch实现](https://luozhouyang.github.io/transformer/)
+## Transformer PyTorch实现
 
+[Transformer模型的PyTorch实现](https://luozhouyang.github.io/transformer/)
 - Google 2017年的论文 [Attention is all you need](https://arxiv.org/abs/1706.03762) 阐释了什么叫做大道至简！该论文提出了**Transformer**模型，完全基于**Attention mechanism**，抛弃了传统的**RNN**和**CNN**。
 - 我们根据论文的结构图，一步一步使用 [PyTorch](https://github.com/pytoch/pytorch) 实现这个**Transformer**模型。
+
+### 多头注意力实现
+
+【2023-5-10】点的self、cross注意力机制[实现](https://www.cnblogs.com/hellcat/p/15260145.html)
+
+```py
+def attention(query, key, value):
+    dim = query.shape[1]
+    scores = torch.einsum('bdhn,bdhm->bhnm', query, key) / dim**.5
+    prob = torch.nn.functional.softmax(scores, dim=-1)
+    return torch.einsum('bhnm,bdhm->bdhn', prob, value), prob
+
+
+class MultiHeadedAttention(nn.Module):
+    """ Multi-head attention to increase model expressivitiy """
+    def __init__(self, num_heads: int, d_model: int):
+        super().__init__()
+        assert d_model % num_heads == 0
+        self.dim = d_model // num_heads
+        self.num_heads = num_heads
+        self.merge = nn.Conv1d(d_model, d_model, kernel_size=1)
+        self.proj = nn.ModuleList([deepcopy(self.merge) for _ in range(3)])
+
+    def forward(self, query, key, value):
+        batch_dim = query.size(0)
+        query, key, value = [l(x).view(batch_dim, self.dim, self.num_heads, -1)
+                             for l, x in zip(self.proj, (query, key, value))]
+        x, prob = attention(query, key, value)
+        self.prob.append(prob)
+        return self.merge(x.contiguous().view(batch_dim, self.dim*self.num_heads, -1))
+```
+
 
 ## Transformer架构
 
@@ -306,8 +339,8 @@ GPT-2 用的 Decoder 结构
 通俗来说，**attention**是指，对于某个时刻的输出`y`，它在输入`x`上各个部分的注意力。这个注意力实际上可以理解为**权重**。
 
 attention机制也可以分成很多种。[Attention? Attention!](https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html) 一文有一张比较全面的表格：  
-![attention_mechanism](http://blog.stupidme.me/wp-content/uploads/2018/09/attention_mechanism_table.png)  
-*Figure 2. a summary table of several popular attention mechanisms.*  
+- ![attention_mechanism](http://blog.stupidme.me/wp-content/uploads/2018/09/attention_mechanism_table.png)  
+- *Figure 2. a summary table of several popular attention mechanisms.*  
 
 上面第一种**additive attention**你可能听过。以前我们的seq2seq模型里面，使用attention机制，这种**加性注意力(additive attention)**用的很多。Google的项目 [tensorflow/nmt](https://github.com/tensorflow/nmt) 里面这两种attention机制都有实现。
 
@@ -318,9 +351,10 @@ attention机制也可以分成很多种。[Attention? Attention!](https://lilian
 那么这种**乘性注意力机制**是怎么样的呢？从上表中的公式也可以看出来：**两个隐状态进行点积**！
 
 ### Self-attention是什么？
+
 到这里就可以解释什么是**self-attention**了。
 
-上面我们说attention机制的时候，都会说到两个隐状态，分别是$h_i$和$s_t$，前者是输入序列第i个位置产生的隐状态，后者是输出序列在第t个位置产生的隐状态。
+attention机制时，都会说到两个隐状态，分别是$h_i$和$s_t$，前者是输入序列第i个位置产生的隐状态，后者是输出序列在第t个位置产生的隐状态。
 
 所谓**self-attention**实际上就是，**输出序列**就是**输入序列**！因此，计算自己的attention得分，就叫做**self-attention**！
 
@@ -330,14 +364,13 @@ attention机制也可以分成很多种。[Attention? Attention!](https://lilian
 **context-attention**一词并不是本人原创，有些文章或者代码会这样描述，我觉得挺形象的，所以在此沿用这个称呼。其他文章可能会有其他名称，但是不要紧，我们抓住了重点即可，那就是**两个不同序列之间的attention**，与**self-attention**相区别。
 
 不管是**self-attention**还是**context-attention**，它们计算attention分数的时候，可以选择很多方式，比如上面表中提到的：
-
 * additive attention
 * local-base
 * general
 * dot-product
 * scaled dot-product
 
-那么我们的Transformer模型，采用的是哪种呢？答案是：**scaled dot-product attention**。
+那么Transformer模型采用的是哪种呢？答案是：**scaled dot-product attention**。
 
 ### Scaled dot-product attention是什么？
 
