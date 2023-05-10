@@ -899,6 +899,10 @@ Elo评分系统
 - [SuperCLUE](https://www.cluebenchmarks.com/superclue.html): A Benchmark for Foundation Models in Chinese
 - SuperCLUE基准计划按照月度进行更新，纳入更多可用中文大模型
 
+附录
+- [SuperGLUE](https://gluebenchmark.com/)，超（级）通用语言理解评估（Super General-Purpose Language Understanding Evaluation）
+- Facebook AI Research、Google DeepMind、华盛顿大学和纽约大学合作，共同推出了 SuperGLUE，用来衡量现代高性能语言理解 AI 表现的基准测试任务, [介绍](https://zhuanlan.zhihu.com/p/78304482)
+
 SuperCLUE的特点：
 - 1）多个维度能力考察（3大类，70+子能力）：从三个不同角度对中文大模型进行测试，以考察模型的综合能力；并且每一个子能力又含有十项或以上不同的细分能力。
 - 2）自动化测评（一键测评）：通过自动化测评方式以相对客观形式测试不同模型的效果，可以一键对大模型进行测评。
