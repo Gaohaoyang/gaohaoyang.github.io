@@ -1181,6 +1181,45 @@ Beam Search虽然比贪心有所改进，但还是会生成<span style='color:re
 
 - 为了解决重复问题，还有可以通过惩罚因子将出现过词的概率变小或者强制不使用重复词来解决。
 
+
+#### MoE
+
+问题
+- 解码任务中常用的Beam Search生成序列条件概率**最大**的句子，很容易导致生成句子的多样性不足
+
+现有解法
+- Diverse Beam Search通过对生成结果**分组**并加入**相似性惩罚**来提高多样性，一定程度缓解单一性问题，但并不彻底。
+- 另外，Sampling解码算法（如topp、topk）生成结果的**随机性**更大，多样性更好一些，但相应准确率也更差。
+
+MoE使用多个模型组合训练不同分布的数据，很适合解决多样性问题
+- 有[工作](https://dl.acm.org/doi/pdf/10.1145/3219819.3220007)用MoE结构来学习推荐中多任务模型各任务之间的相关性，解决不相关的任务导致模型效果差的问题。
+
+【2019-5-24】MoE in Text Generation -- 用于 byte push
+- [Mixture Models for Diverse Machine Translation: Tricks of the Trade](https://arxiv.org/pdf/1902.07816.pdf)
+- 用多种不同MoE策略，提出生成多样性的评估指标，在生成质量基本不降的情况下，多样性得到了很大改善。
+
+MoE (Mixture of Experts)模型的基本思想
+- 训练多个神经网络，每个网络（作为Expert）训练时使用数据集不同部分。
+- 数据集内部分布可能不同，单模型往往善于处理其中一部分数据，不善于处理另一部分数据，而**多专家系统**解决了这个问题：系统中每个Expert都会有一个擅长的数据区域，在这组区域上其要比其他Expert表现得好。
+
+常用的encoder-decoder结构，通过encoder得到hidden states，再输入进decoder得到生成结果
+- 鉴于诸如Beam Search解码导致的生成多样性问题，作者引入Multinomial Latent Variable 并分解生成模型的边际似然函数（z表示一个expert）
+- 训练阶段使用EM算法
+- 解码时用生成概率最大的那个Expert的结果作为最终结果
+
+实际使用中，这会导致两个严重的问题：
+- 在训练中可能只有一个Expert会被迭代，导致rich gets richer的问题；
+- Latent Variable失效；
+
+作者提出了两个改进方式：
+- hard/soft selection，即如何使用expert的权重进行迭代
+- learned/uniform prior，prior即前面提到的p(z|x; θ) 
+  - learned：设置一个gate网络，模型自己去学；
+  - uniform：所有experts权重统一
+
+作者提出Pairwise-BLEU，用于衡量多样性的指标，纵轴是bleu。
+- Pairwise-BLEU是对生成的多个结果两两计算BLEU，多样性越好，两两就越不相似，分数就越低
+
 #### 代码实现
 
 - 上述各种采样方式在HuggingFace的库里都已经实现了
