@@ -472,11 +472,88 @@ Our evaluation uses 8 real complex question answering datasets, including **six*
 
 #### llama-index
 
-【2023-4-23】[定制自己的文档问答机器人](https://zhuanlan.zhihu.com/p/623523968)
+【2023-4-23】参考
+- [定制自己的文档问答机器人](https://zhuanlan.zhihu.com/p/623523968)
+- [LlamaIndex ：面向QA 系统的全新文档摘要索引](https://mp.weixin.qq.com/s/orODrHefDpr-gHNyjxhXmg)
 
 既然tokens有限制，那么有没有对文本内容进行**预处理**的工具？不超过token数限制。
 - 借助llama-index可以从文本中只提取出相关部分，然后将其反馈给prompt。
-- llama-index支持许多不同的数据源，如API、PDF、文档、SQL 、Google Docs等。
+- [llama-index](https://github.com/jerryjliu/llama_index)支持许多不同的数据源，如API、PDF、文档、SQL 、Google Docs等。
+
+一种全新的 LlamaIndex 数据结构：**文档摘要索引**，与传统**语义搜索**相比，检索性能更好
+
+多数构建 LLM 支持的 QA 系统步骤：
+- 获取**源文档**，将每个文档拆分为**文本块**
+- 将**文本块**存储在**向量数据库**中
+- 查询时，通过**嵌入相似性** 和/或 **关键字过滤器**来检索文本块。
+- 执行响应并**汇总**答案
+
+由于各种原因，这种方法检索性能有限。
+- 文本块**缺乏全局上下文**。通常query上下文超出了特定块中索引的内容。
+- 仔细调整 top-k / 相似度分数阈值。
+  - 假设值太小，你会错过上下文。
+  - 假设值值太大，并且成本/延迟可能会随着更多不相关的上下文而增加，噪音增加。
+- 嵌入选择的上下文不一定最相关。
+  - 嵌入本质上是在文本和上下文之间分别确定的。
+
+添加**关键字过滤器**是增强检索结果的一种方法。
+- 但需要手动或通过 NLP 关键字提取/主题标记模型为每个文档充分确定合适的关键字。
+- 此外，还需要从查询中充分推断出正确的关键字。
+
+LlamaIndex中提出了一个新索引，为每个文档提取/索引**非结构化文本摘要**。
+- 该索引可以提高检索性能，超越现有的检索方法。有助于索引比单个文本块更多的信息，并且比关键字标签具有更多的语义。
+
+如何构建？
+- 提取每个文档，并使用 LLM 从每个文档中提取**摘要**。
+- 将文档拆分为**文本块**（节点）。摘要和节点都存储在文档存储抽象中。
+- 维护从**摘要**到**源文档/节点**的映射。
+
+在查询期间，根据摘要检索相关文档以进行查询：
+- 基于 **LLM** 的检索：向 LLM 提供文档摘要集，并要求 LLM 确定: 哪些文档是相关的+相关性分数。
+- 基于 **嵌入** 的检索：根据摘要嵌入相似性（使用 top-k 截止值）检索相关文档。
+
+注意
+- 检索文档**摘要**的方法不同于基于**嵌入**的文本块检索。**文档摘要索引**检索**任何**选定文档的所有节点，而不是返回节点级别的相关块。
+
+存储文档的摘要还可以实现基于 LLM 的检索。
+- 先让 LLM 检查简明的文档摘要，看看是否与查询相关，而不是一开始就将整个文档提供给 LLM。
+- 这利用了 LLM 的推理能力，它比基于嵌入的查找更先进，但避免了将整个文档提供给 LLM 的成本/延迟
+
+带**摘要**的文档检索是**语义搜索**和所有文档的强力摘要之间的“中间地带”。
+
+示例
+- 构建方法见原文：[LlamaIndex ：面向QA 系统的全新文档摘要索引](https://mp.weixin.qq.com/s/orODrHefDpr-gHNyjxhXmg)
+
+高级api
+
+```py
+query_engine = doc_summary_index.as_query_engine(
+  response_mode="tree_summarize", use_async=True
+)
+response = query_engine.query("What are the sports teams in Toronto?")
+print(response)
+```
+
+底层api
+
+```py
+# use retriever as part of a query engine
+from llama_index.query_engine import RetrieverQueryEngine
+
+# configure response synthesizer
+response_synthesizer = ResponseSynthesizer.from_args()
+
+# assemble query engine
+query_engine = RetrieverQueryEngine(
+    retriever=retriever,
+    response_synthesizer=response_synthesizer,
+)
+# query
+response = query_engine.query("What are the sports teams in Toronto?")
+print(response)
+```
+
+
 
 安装
 
