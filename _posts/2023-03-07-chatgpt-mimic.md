@@ -1686,6 +1686,29 @@ chatgpt
 - Dolly 2.0 是业内第一个**开源**、**遵循指令**的 LLM，它在透明且免费提供的数据集上进行了微调，该数据集也是开源的，可用于商业目的。这意味着 Dolly 2.0 可用于构建商业应用程序，无需支付 API 访问费用或与第三方共享数据。
 
 
+### LaMini-LM 蒸馏小模型
+
+【2023-5-11】LaMini-LM 蒸馏小模型，开源，将模型大小减少10倍，且保证性能
+- [LaMini-LM: A Diverse Herd of Distilled Models from Large-Scale Instructions](https://arxiv.org/pdf/2304.14402v1.pdf)
+- 1B小型语言模型LaMini，支持百万token输入的RMT
+- youtube视频：[LaMini-LM - Mini Models Maxi Data!](https://www.youtube.com/watch?v=TeJrG3juAL4)
+
+两个部分 [详情](https://zhuanlan.zhihu.com/p/626518078)
+- 第一进行数据生成
+  - 各种先前数据集的指令，例如：self-instruct、P3、FLAN和Alpaca。
+  - 此外，使用 ChatGPT (gpt-3.5-turbo) 来生成补充说明，强调在提示中遵守现有的人工编写说明的多样性。-- 又叫：示例引导指令生成
+  - 还引入了主题引导指令生成方法，进一步增加生成文本的多样性
+  - 接着，用 gpt-3.5-turbo 为每条指令生成响应
+  - 两种生成指令的策略，分别为`示例引导`和`主题引导`
+- 第二就是利用数据集对模型进行微调。
+  - 生成数据集后，作者微调了几个具有不同大小（从 61M 到 1.5B）和架构（encoder-decoder 和 decoder-only）的较小语言模型。
+
+整体方法如下所示：
+- ![](https://pic1.zhimg.com/80/v2-ac4334cb3ab218398849ceb79c866f2c_1440w.webp)
+
+
+
+
 ### LAION：Open Assistant
 
 【2023-2-25】[Open Assistant 全流程训练细节（GPT3+RL）](https://zhuanlan.zhihu.com/p/609003237)
