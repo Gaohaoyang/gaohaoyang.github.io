@@ -806,12 +806,13 @@ ChatGPT之争已经超出了算法的范畴，它更是一个AI+云计算能力�
 知乎：知海图AI
 
 
-### 排名
+
+### LLM 评测
 
 【2023-5-4】[UC伯克利发布大语言模型排行榜，Vicuna夺冠，清华ChatGLM进前5](https://www.36kr.com/p/2243109425885057)
 - [Chatbot Arena: Benchmarking LLMs in the Wild with Elo Ratings](https://lmsys.org/blog/2023-05-03-arena/)
 
-#### 国际大模型排行榜
+#### 国际大模型排行榜 -- LMSYS
 
 [LMSYS Org](https://arena.lmsys.org/)（UC伯克利主导，前小羊驼发明者, [twitter](https://twitter.com/lmsysorg)）的研究人员又搞了个大新闻——大语言模型版排位赛！
 - 130亿参数的Vicuna以1169分稳居第一
@@ -970,6 +971,40 @@ SuperCLUE首次全自动测评，为了谨慎起见，全部答案事后已由�
 
 注意
 > 评测方未公布数据集，结论存疑, [issue](https://github.com/CLUEbenchmark/SuperCLUE/issues)上有槽点，辩证看待
+
+【2023-5-11】[Panda](https://github.com/dandelionsllm/pandallm)：海外中文开源大语言模型
+- 基于 Llama-7B, -13B, -33B, -65B 进行中文领域上的持续预训练, 使用了接近 15M 条数据, 并针对推理能力在中文 benchmark 上进行了评测
+- 集成了 Deepspeed 加速框架，支持模型 pretrain，finetune，lora 以及 distillation (后续推出).
+
+
+#### PandaLM
+
+【2023-4-30】大语言模型对比评估：PandaLM, 本地评测，不用担心数据安全问题
+- [PandaLM: Reproducible and Automated Language Model Assessment](https://github.com/WeOpenML/PandaLM)
+- ![](https://github.com/WeOpenML/PandaLM/raw/main/figures/main-figure.png)
+- ![](https://github.com/WeOpenML/PandaLM/raw/main/figures/inst-tune-pipeline.png)
+
+（1）批量多模型对比
+
+```py
+from transformers import AutoTokenizer, AutoModelForCausalLM
+tokenizer = AutoTokenizer.from_pretrained("WeOpenML/PandaLM-7B-v1",use_fast=False)
+model = AutoModelForCausalLM.from_pretrained("WeOpenML/PandaLM-7B-v1")
+# ----------
+from pandalm import EvaluationPipeline
+
+pipeline = EvaluationPipeline(candidate_paths=["huggyllama/llama-7b", "bigscience/bloom-7b1", "facebook/opt-6.7b"], input_data_path="data/pipeline-sanity-check.json")
+print(pipeline.evaluate())
+```
+
+（2）本地部署 Web UI
+- 启动后，访问[链接](http://localhost:31228)
+
+```sh
+cd PandaLM/pandalm/ 
+CUDA_VISIBLE_DEVICES=0 python3 run-gradio.py --base_model=WeOpenML/PandaLM-7B-v1 --server_port=<your-server-port> --server_name=<your-server-name>
+```
+
 
 ### 小冰链
 
