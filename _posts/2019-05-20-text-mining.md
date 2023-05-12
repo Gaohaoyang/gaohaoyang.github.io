@@ -3,7 +3,7 @@ layout: post
 title:  "文本挖掘实战-Text Mining Implementation"
 date:   2019-05-20 13:00:00
 categories: 技术工具
-tags: 生活大爆炸 NLP 自然语言处理 台词 可视化 身份证 华为 微信 诗歌 simhash 实战
+tags: 生活大爆炸 NLP 自然语言处理 台词 可视化 身份证 华为 微信 诗歌 实战
 excerpt: 深入挖掘分析生活大爆炸（Big Bang）的台词信息，看看各个角色的常用词汇有哪些
 author: 鹤啸九天
 mathjax: true
@@ -26,118 +26,6 @@ permalink: /text-mining
     - ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9uSUFtMTZ5VWdQajJtamFJdzdLM1hxYld3elF0TTlNY3NMYWtrRmtuTHRmNFpMbFFTMmljSWV0c0R5UUhjdlFxdEdLZk1vM1hmZnVNdUo1U2JUOVhjV3cvNjQw?x-oss-process=image/format,png)
     - ![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9uSUFtMTZ5VWdQajJtamFJdzdLM1hxYld3elF0TTlNYzhPVVRwUGx0bjByNk5IT1VuNGhtZ0k0WERhZGljZGlhM21VRlJhYmliUjFqaWJyMWE1UkNOVWlhTmJ3LzY0MA?x-oss-process=image/format,png)
 
-## 编辑距离
-
-- 【2020-2-17】[python-Levenshtein包的一些用法总结](https://www.cnblogs.com/laogao123/p/11309490.html)
-   - sudo pip install python-Levenshtein
-- 编辑距离使用方式如下：
-
-```python
-#! /usr/bin/python
-# -*- coding: utf8 -*-
-# @Time    : 2018/8/30 10:11
-# @Author  : yukang
- 
-from Levenshtein import *
- 
-# 个人总结的 关于 Levenshtein 所有函数的用法 和 注释
-apply_edit()  #根据第一个参数editops（）给出的操作权重，对第一个字符串基于第二个字符串进行相对于权重的操作
-distance() #计算2个字符串之间需要操作的绝对距离
-editops() #找到将一个字符串转换成另外一个字符串的所有编辑操作序列
-hamming() #计算2个字符串不同字符的个数，这2个字符串长度必须相同
-inverse() #用于反转所有的编辑操作序列
-jaro() #计算2个字符串的相识度，这个给与相同的字符更高的权重指数
-jaro_winkler() #计算2个字符串的相识度，相对于jaro 他给相识的字符串添加了更高的权重指数，所以得出的结果会相对jaro更大（%百分比比更大）
-matching_blocks() #找到他们不同的块和相同的块，从第六个开始相同，那么返回截止5-5不相同的1，第8个后面也开始相同所以返回8-8-1，相同后面进行对比不同，最后2个对比相同返回0
-median() #找到一个列表中所有字符串中相同的元素，并且将这些元素整合，找到最接近这些元素的值，可以不是字符串中的值。
-median_improve() #通过扰动来改进近似的广义中值字符串。
-opcodes() #给出所有第一个字符串转换成第二个字符串需要权重的操作和操作详情会给出一个列表，列表的值为元祖，每个元祖中有5个值
-    #[('delete', 0, 1, 0, 0), ('equal', 1, 3, 0, 2), ('insert', 3, 3, 2, 3), ('replace', 3, 4, 3, 4)]
-    #第一个值是需要修改的权重，例如第一个元祖是要删除的操作,2和3是第一个字符串需要改变的切片起始位和结束位，例如第一个元祖是删除第一字符串的0-1这个下标的元素
-    #4和5是第二个字符串需要改变的切片起始位和结束位，例如第一个元祖是删除第一字符串的0-0这个下标的元素，所以第二个不需要删除
-quickmedian() #最快的速度找到最相近元素出现最多从新匹配出的一个新的字符串
-ratio() #计算2个字符串的相似度，它是基于最小编辑距离
-seqratio() #计算两个字符串序列的相似率。
-setmedian() #找到一个字符串集的中位数(作为序列传递)。 取最接近的一个字符串进行传递，这个字符串必须是最接近所有字符串，并且返回的字符串始终是序列中的字符串之一。
-setratio() #计算两个字符串集的相似率(作为序列传递)。
-subtract_edit() #从序列中减去一个编辑子序列。看例子这个比较主要的还是可以将第一个源字符串进行改变，并且是基于第二个字符串的改变，最终目的是改变成和第二个字符串更相似甚至一样
- 
-# print(hamming('Hello world!', 'Holly world!'))
-# print(jaro_winkler("yukangrtyu",'yukangrtyn'))
-# fixme = ['Levnhtein', 'Leveshein', 'Leenshten', 'Leveshtei', 'Lenshtein', 'Lvenstein', 'Levenhtin', 'evenshtei']
-# print(opcodes('spam', 'park'))
-# print(ratio('spam', 'spark'))
-# print(jaro_winkler('spam', 'spark'))
-# print(jaro('spam', 'spark'))
-# print(seqratio('spam', 'spark'))
-# print(seqratio(['newspaper', 'litter bin', 'tinny', 'antelope'],['caribou', 'sausage', 'gorn', 'woody']))
-# print(setratio(['newspaper', 'litter bin', 'tinny', 'antelope'],['caribou', 'sausage', 'gorn', 'woody']))
-# e = editops('man', 'scotsman')
-# e1 = e[:3]
-# bastard = apply_edit(e1, 'man', 'scotsman')
-# print(e)
-# print(e1)
-# print(bastard)
-# print(subtract_edit(e, e1))
-# print(apply_edit(subtract_edit(e, e1), bastard, 'scotsman'))
- 
-def acquaintance(a,b):
-    for i in a:
-        item = {}
-        for j in b:
-            if ratio(u"%s"%i,u"%s"%j):
-                item[ratio(u"%s"%i,u"%s"%j)] = (i,j)
-        d = item[max(list(item.keys()))]
-        c = '"%s"和"%s"-最相似---匹配度为：%f'%(d[0],d[1],max(list(item.keys())))
-        print(c)
- 
-a = ["你好",'hello,world','计算偏差大不大啊？','文本可以吗','请看这里']
-b = ['helloworld',"你好吗？",'可以吗','请这里','计算偏差大不大']
-acquaintance(a,b)
-```
-
-## simhash
-
-- 文本聚类，计算长文本相似度并聚类
-
-```python
-import jieba
-from simhash import Simhash
-import json
-#new = json.loads(df.loc[1]['room_info'])
-#new
-print(df.columns)
-output = open('/home/work/data/mian_out.txt', 'w')
-sim_list = []
-for line in df.loc[:,:].itertuples():
-    #print(line[4])
-    new = json.loads(line[4])
-    #print(new)
-    res = new['overall_review'].get('score', '-')
-    if res != '-':
-        out = [str(res['pass']), str(res['total_score']), 
-           '%s_%s'%(res['language']['score'], res['language']['name']),
-          '%s_%s'%(res['logic']['score'], res['logic']['name']),
-          '%s_%s'%(res['explain_ability']['score'], res['explain_ability']['name']),
-          '%s_%s'%(res['knowledge']['score'], res['knowledge']['name'])]
-    else:
-        out = ['-', '-', '-', '-', '-', '-']
-    # asr的key：['question_order', 'quest_weight', 'quest_score', 'second_category', 'asr_result', 'question_id', 'S3_url', 'tips', 'duration', 'difficulty', 'third_category', 'question_review', 'answer', 'judge_rule', 'std_duration', 'question_content', 'sub_score', 'readtime']
-    #print(new['questions'][0].keys())
-    ans_list = []
-    for item in new['questions']:
-        ans_list.append('&'.join(item['asr_result']['sentences']))
-        #print('\t'.join([str(item['question_id']),str(item['question_order']), str(item['quest_score']), item['question_content'][0], '&'.join(item['asr_result']['sentences'])])) # ['sentences']
-    ans_str = '|'.join(ans_list)
-    words = jieba.lcut(ans_str, cut_all=True)
-    sim = Simhash(words).value
-    sim_list.append([str(line[3]), line[5], new['room_id'],sim])
-    # [agent_id, time, room_id, sim, pass, total_score, s1,s2,s3,s4, ans_str]
-    #print('\t'.join([str(line[3]), line[5], new['room_id'], str(sim)]+out+[ans_str]))
-    output.writelines('\t'.join([str(line[3]), line[5], new['room_id'], str(sim)]+out+[ans_str])+'\n')
-output.close()
-print(len(sim_list))
-```
 
 # Big Bang台词分析
 
@@ -168,6 +56,7 @@ print(len(sim_list))
 - ![](https://pmcvariety.files.wordpress.com/2019/05/the-big-bang-theory-artisans.jpg?w=1000&h=563&crop=1)
 
 ### 其它
+
 - 官方台词[big bang theory transcripts](https://bigbangtrans.wordpress.com/)
 - 台词数据数据获取[地址](https://github.com/skashyap7/TBBTCorpus)
 - ![](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1558371710386&di=9a83fe8f4ed1302d9e341bb6dd50eaf9&imgtype=jpg&src=http%3A%2F%2Fimg1.imgtn.bdimg.com%2Fit%2Fu%3D20824956%2C3357565608%26fm%3D214%26gp%3D0.jpg)
