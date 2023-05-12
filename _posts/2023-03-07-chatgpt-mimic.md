@@ -2251,6 +2251,9 @@ python train.py --actor-model facebook/opt-66b --reward-model facebook/opt-350m 
 - 体验方式：[poe](https://poe.com/Claude-instant)
 - 申请：[Claude Early Access](https://www.anthropic.com/earlyaccess)
 
+【2023-5-12】[Introducing 100K Context Windows](https://www.anthropic.com/index/100k-context-windows)
+- We’ve expanded Claude’s context window from 9K to 100K tokens, corresponding to around 75,000 words
+- The average person can read 100,000 tokens of text in ~5+ hours[1], and then they might need substantially longer to digest, remember, and analyze that information. Claude can now do this in less than a minute. 
 
 ### TruthGPT
 
