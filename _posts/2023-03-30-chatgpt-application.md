@@ -82,6 +82,12 @@ Prompt是在ChatGPT中输入的一些关键词，按照用户意愿生成出各�
 - [AIPRM](https://www.aiprm.com/)
 - Chrome 插件：[aiprm-for-chatgp](https://chrome.google.com/webstore/detail/aiprm-for-chatgpt/ojnbohmppadfgpejeebfnmnknjdlckgj?hl=en)
 
+### 点子
+
+【2023-5-13】ChatGPT各类应用idea汇总，包含场景、当前解法、解决状态等，持续更新
+- [飞书文档](https://bytedance.feishu.cn/sheets/TcHTsRSczhda3BtpLQ4cMeVNnSf)
+
+
 ## ChatGPT 应用
 
 ChatGPT 非常实用，能帮助普通人节省不少脑力和时间成本。
