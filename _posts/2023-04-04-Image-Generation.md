@@ -432,6 +432,8 @@ CFG scale: 7, Seed: 734068303,Size: 1024x1024
 
 【2023-4-5】[阿里提出composer：AI绘画的可控生成](https://mp.weixin.qq.com/s/gBLt1sbPInK5VNa8nO1uaA)
 
+【2023-5-14】阿里通义文生图，玄恒（黄梁华）分享，composer基于dalle2开发而来…
+
 ControlNet 模型将可控性推上了新的高峰。同一时间，来自阿里巴巴和蚂蚁集团的研究者也在同一领域做出了成果
 - [论文地址](https://arxiv.org/pdf/2302.09778v2.pdf)
 - [项目地址](https://github.com/damo-vilab/composer)
