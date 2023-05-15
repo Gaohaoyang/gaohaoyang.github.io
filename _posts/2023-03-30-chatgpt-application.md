@@ -55,6 +55,10 @@ ChatGPT2022年12月发布，但真正火到出圈，是春节后，尤其是3月
 
 ## ChatGPT 变现
 
+### 行业观察
+
+【2023-5-7】陆奇：新范式新时代新机会, [完整ppt](https://miracleplus.feishu.cn/file/TGKRbW4yrosqmixCtprcUlAynzg)，[ppt+笔记](https://miracleplus.feishu.cn/docx/Mir6ddgPgoVs3KxF6sncOUaknNS)
+
 ### 教人如何挣钱
 
 【2023-4-11】国内靠ChatGPT挣钱的[第一波人](https://www.toutiao.com/w/1762574053066767)，主要教别人怎么靠ChatGPT挣钱的。快速包装交付、精准找到愿意为这些信息差付费的客群
