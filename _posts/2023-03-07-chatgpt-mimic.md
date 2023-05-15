@@ -1742,7 +1742,21 @@ chatgpt
 - ![](https://pic1.zhimg.com/80/v2-ac4334cb3ab218398849ceb79c866f2c_1440w.webp)
 
 
+### LLMTune
 
+【2023-5-15】[康奈尔大学发布在一张显卡上微调650亿参数大模型的框架：LLMTune](https://www.toutiao.com/article/7233186412303122977)
+- 为了降低大模型微调难度,Cornell Tech开源的LLMTune, 对于650亿参数的LLaMA模型微调仅需要40GB显存即可。
+
+LLMTune在底层实现了LoRA算法，该算法使用GPTQ压缩LLM，需要实现量化版本LLM的反向传递。
+
+LLMTune的功能包括：
+- 对多个LLM的模块化支持（目前支持MetaAI开源的2个模型，LLaMA和OPT）
+- 支持广泛的消费级NVIDIA的GPU显卡（包括RTX系列、A系列、GTX系列等）
+- 代码库微小且易于使用（整个源代码仅64k大小）
+
+LLMTune底层实现了LoRA算法，它依赖的库也很少
+- 依赖库：pytorch、sentencepieces（Google开源的无监督分词工具）、transformers、peft、databsets
+- LLMTune目前仅支持在NVIDIA显卡上的微调，所以上述PyTorch也需要cuda版本才可以使用
 
 ### LAION：Open Assistant
 
