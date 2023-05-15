@@ -1569,6 +1569,8 @@ GPT-4版AR眼镜 rizzGPT
 
 ### 脑机接口
 
+#### Fireship 链接 GPT-4
+
 【2023-3-27】一位名为[Fireship](https://fireship.io/)的独立开发者发了一段令人震撼的视频：他用 JavaScript 将他的大脑连接到 GPT-4。简单来说，他通过非侵入式脑机接口公司 [Neurosity](https://neurosity.co/) 提供的 JavaScript SDK和一个仪表板，通过脑机通信连接上了GPT-4。
 - YouTube: [I literally connected my brain to GPT-4 with JavaScript](https://www.youtube.com/watch?v=-HYbFm67Gs8)
 - ![](https://images.ctfassets.net/uwziq2n2fyp8/2mJ9nuyNXhpdcOZJ7eFCbF/f69db9a9bc5b77ff408d46d0200af14b/3a.png?h=750&fl=progressive&q=100)
@@ -1598,6 +1600,20 @@ Neurosity 宣称 Crown 的计算模块与 MacBook Air 一样强大，配备四�
 而现在它可以让你的大脑连接到GPT-4，将人脑与机器、AI进行融合。人们可以通过训练算法来识别各种思维模式，以便选取最优的方案或者预测行为。
 
 这就像科幻电影里的半机械人，他们变得比人类还要强。不妨大胆畅想下，人们接入他人的记忆或者回忆梦境——这种《赛博朋克2077》的游戏里的剧情，似乎也可能实现。
+
+#### 日本Araya
+
+【2023-5-15】[Araya](https://www.araya.org/publications/news20230512/)用EEG+ChatGPT发邮件
+
+Araya 公司的Sasai 团队成功使用高密度脑电图（EEG）设备和ChatGPT进行了 Gmail 实验操作。
+- 研究人员构建并测试了一个结合了脑电图和人工智能的系统。
+- 实验中，使用非侵入式高密度脑电图设备收集说话过程中的脑电数据，然后将脑电波转换成用 ChatGPT 能识别的信号，让ChatGPT来来回复 Gmail，并获得成功！
+
+目标：通过进一步发展这项研究，开发出能实现更多功能的脑机接口（BMI），为不同个体克服社会交流障碍，为障碍人士参与社会活动和交流提供更多选择。随着研究进展，他们将后续公布研究细节。
+- [演示视频](https://video.h5.weibo.cn/1034:4901414615318533/4901415334449860)
+- ![](https://www.araya.org/wp-content/uploads/2023/05/fig2.png)
+
+
 
 ### 自动驾驶
 
