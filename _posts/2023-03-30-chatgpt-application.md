@@ -403,6 +403,90 @@ chatgpt做零样本信息抽取
 - we transform the zero-shot IE task into a multi-turn question-answering problem with a two-stage framework (ChatIE)
 - 使用两阶段框架（ChatIE）将零样本信息提取任务转换为多回合问答问题。
 
+
+##### 视频摘要
+
+【2023-5-17】[基于ChatGPT的视频摘要应用开发](https://www.toutiao.com/article/7230786095158690362)
+- 视频摘要器: 将数小时的视频内容转换为几行准确的摘要文本
+
+视频摘要方案
+- 用ChatGPT 插件，将令人AI 连接到实时 YouTube 网站。 但只有少数商业开发人员可以访问 ChatGPT 插件，因此可行性不大。
+- 下载视频的抄本（字幕）并将其附加到提示中，然后语言模型发送提示来总结抄本文本。缺点：不能总结一个包含超过 4096 个标记的视频，这对于一个普通的谈话节目来说通常是 7 分钟左右。
+- 用**上下文学习**技术对转录本进行**向量化**，并使用向量向语言模型提示“摘要”查询。 这种方法可以生成准确的答案，指示转录文本的摘要，并且不限制视频长度。
+
+Video Summarizer应用程序以llama-index为基础，开发了一个Streamlit web应用程序，为用户提供视频URL的输入以及屏幕截图、文字记录和摘要内容的显示。
+
+用llamaIndex 工具包，不必担心 OpenAI 中的 API 调用，因为对嵌入使用的复杂性或提示大小限制的担忧很容易被其内部数据结构和 LLM 任务管理所覆盖。
+- 视频转录：开源 Python 库 youtube-transcript-api 将视频转文本
+- 当文档被送入 LLM 时，它会根据其大小分成块或节点。 然后将这些块转换为嵌入并存储为向量。
+- 当提示用户查询时，模型将搜索向量存储以找到最相关的块并根据这些特定块生成答案。 例如，如果你在大型文档（如 20 分钟的视频转录本）上查询“文章摘要”，模型可能只会生成最后 5 分钟的摘要，因为最后一块与上下文最相关 的“总结”。
+- ![image](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/d0a76dbf2a11400f97220283ea233fa9~noop.image?_iz=58558&from=article.pc_detail&x-expires=1684911936&x-signature=dohd7TRWXXfBH5PRvGLj3ldXBh0%3D)
+
+流程图
+- ![flow](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/38966bfef5f641f294301647b92def7e~noop.image?_iz=58558&from=article.pc_detail&x-expires=1684911936&x-signature=Mdb8NbIuzxqhc1X9FW60XawIOK0%3D)
+
+（1）视频转录
+
+```py
+# !pip install youtube-transcript-api
+from youtube_transcript_api import YouTubeTranscriptApi
+from youtube_transcript_api.formatters import JSONFormatter
+# 唯一应该强制提供的参数是 11 位视频 ID，在 v= 之后的每个 YouTube 视频的 URL 中找到它
+srt = YouTubeTranscriptApi.get_transcript("{video_id}", languages=['en'])
+formatter = JSONFormatter()
+json_formatted = formatter.format_transcript(srt)
+print(json_formatted)
+```
+
+（2）加载文档
+
+```sh
+!pip install llama-index
+```
+
+SimpleDirectoryReader 是 LlamaIndex 工具集中的文件加载器之一
+- 支持在用户提供的文件夹下加载多个文件
+- 支持解析各种文件类型，如.pdf、.jpg、.png、.docx等，让您不必自己将文件转换为文本。
+
+```py
+from llama_index import SimpleDirectoryReader
+SimpleDirectoryReader = download_loader("SimpleDirectoryReader")
+loader = SimpleDirectoryReader('./data', recursive=True, exclude_hidden=True)
+documents = loader.load_data()
+```
+
+构建索引
+- LlamaIndex 应与你定义的 LLM 交互以构建索引，在本演示的情况下，LlamaIndex 使用 gpt-3.5 聊天模型通过 OpenAI API 调用嵌入方法。
+
+```py
+from llama_index import LLMPredictor, GPTSimpleVectorIndex, PromptHelper, ServiceContext
+from langchain import ChatOpenAI
+
+# define LLM
+llm_predictor = LLMPredictor(llm=ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo", max_tokens=500))
+
+service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor)
+
+index = GPTSimpleVectorIndex.from_documents(
+    documents, service_context=service_context
+)
+```
+
+（3）查询索引
+
+通过建立索引，查询非常简单，无需上下文数据，直接输入即可。
+
+```py
+response = index.query("Summerize the video transcript")
+print(response)
+```
+
+完整代码见[原文](https://www.toutiao.com/article/7230786095158690362)
+
+```sh
+!python -m pip install openai streamlit llama-index langchain youtube-transcript-api html2image
+```
+
 #### 机器翻译
 
 原文：
@@ -509,6 +593,14 @@ Our evaluation uses 8 real complex question answering datasets, including **six*
 既然tokens有限制，那么有没有对文本内容进行**预处理**的工具？不超过token数限制。
 - 借助llama-index可以从文本中只提取出相关部分，然后将其反馈给prompt。
 - [llama-index](https://github.com/jerryjliu/llama_index)支持许多不同的数据源，如API、PDF、文档、SQL 、Google Docs等。
+
+【2023-5-17】[基于ChatGPT的视频摘要应用开发](https://www.toutiao.com/article/7230786095158690362)
+- 当文档被送入 LLM 时，它会根据其大小分成块或节点。 然后将这些块转换为嵌入并存储为向量。
+- 当提示用户查询时，模型将搜索向量存储以找到最相关的块并根据这些特定块生成答案。 例如，如果你在大型文档（如 20 分钟的视频转录本）上查询“文章摘要”，模型可能只会生成最后 5 分钟的摘要，因为最后一块与上下文最相关 的“总结”。
+- ![image](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/d0a76dbf2a11400f97220283ea233fa9~noop.image?_iz=58558&from=article.pc_detail&x-expires=1684911936&x-signature=dohd7TRWXXfBH5PRvGLj3ldXBh0%3D)
+
+流程图
+- ![flow](https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/38966bfef5f641f294301647b92def7e~noop.image?_iz=58558&from=article.pc_detail&x-expires=1684911936&x-signature=Mdb8NbIuzxqhc1X9FW60XawIOK0%3D)
 
 一种全新的 LlamaIndex 数据结构：**文档摘要索引**，与传统**语义搜索**相比，检索性能更好
 
