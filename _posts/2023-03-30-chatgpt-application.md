@@ -955,6 +955,25 @@ print(output_text)
 - 上传、对话响应都十分缓慢，对话的效果差，很多知识点无法解读，一律回复无法找到这个问题的答案。
 - ![](https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/TdjoY9mB4FVHsf~noop.image?_iz=58558&from=article.pc_detail&x-expires=1684219771&x-signature=DjAXODUMrVrnilF7CAXPLSUT0qs%3D)
 
+#### privateGPT (本地、离线)
+
+【2023-5-】开源的 [privateGPT](https://www.privategpt.io/), [privateGPT代码](https://github.com/imartinez/privateGPT)，它使用GPT的强大功能，可以在100%私密的情况下与本地文档进行私密交互，不会有任何数据泄漏。
+- 使用LLaMa、LangChain和GPT4All构建。
+- [Demo](https://docs.boosterframework.com/)
+
+The supported extensions are:
+- .csv: CSV,
+- .docx: Word Document,
+- .enex: EverNote,
+- .eml: Email,
+- .epub: EPub,
+- .html: HTML File,
+- .md: Markdown,
+- .msg: Outlook Message,
+- .odt: Open Document Text,
+- .pdf: Portable Document Format (PDF),
+- .pptx : PowerPoint Document,
+- .txt: Text file (UTF-8)
 
 #### 自研方案
 
