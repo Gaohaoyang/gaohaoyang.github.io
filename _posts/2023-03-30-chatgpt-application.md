@@ -957,7 +957,7 @@ print(output_text)
 
 #### privateGPT (本地、离线)
 
-【2023-5-】开源的 [privateGPT](https://www.privategpt.io/), [privateGPT代码](https://github.com/imartinez/privateGPT)，它使用GPT的强大功能，可以在100%私密的情况下与本地文档进行私密交互，不会有任何数据泄漏。
+【2023-5-17】开源的 [privateGPT](https://www.privategpt.io/), [privateGPT代码](https://github.com/imartinez/privateGPT)，它使用GPT的强大功能，可以在100%私密的情况下与本地文档进行私密交互，不会有任何数据泄漏。
 - 使用LLaMa、LangChain和GPT4All构建。
 - [Demo](https://docs.boosterframework.com/)
 
