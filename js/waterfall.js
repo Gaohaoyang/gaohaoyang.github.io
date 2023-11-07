@@ -21,6 +21,23 @@
       description: 'On the 5th anniversary, I use Three.js to render a rose for my wife.',
     },
     {
+      demo_link: 'https://gaohaoyang.github.io/lottie-test/',
+      img_link: 'https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pics/demos/lottieDemo.gif',
+      code_link: 'https://github.com/Gaohaoyang/lottie-test',
+      title: 'Lottie Demo',
+      core_tech: 'lottie animation',
+      description: 'Lottie Demo and animation controller',
+    },
+    {
+      demo_link:
+        'https://market.m.taobao.com/app/tmall-wireless/rax-life-progress/pages/index?wh_weex=true#/life',
+      img_link: 'https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pics/demos/lifeProgress.png',
+      // code_link: 'https://github.com/Gaohaoyang/threeJourney/tree/main/src/23-rose',
+      title: 'Life Progress Calculator',
+      core_tech: 'weex',
+      description: 'Early attempts on weex',
+    },
+    {
       demo_link: 'https://codepen.io/haoyang/pen/jrvrQq',
       img_link: 'https://ooo.0o0.ooo/2016/11/24/5836d81f48cd2.png',
       code_link: 'https://codepen.io/haoyang/pen/jrvrQq',
