@@ -21,6 +21,15 @@
       description: 'On the 5th anniversary, I use Three.js to render a rose for my wife.',
     },
     {
+      demo_link: 'https://gaohaoyang.github.io/demos/#/FerrisWheel',
+      img_link: 'https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pics/demos/ferrisWheel.gif',
+      code_link: 'https://github.com/Gaohaoyang/demos/tree/main/src/FerrisWheel',
+      title: 'Ferris Wheel',
+      core_tech: 'anime.js',
+      description:
+        'A Ferris Wheel animation with anime.js. You can change the speed and direction. See blog <a href="https://gaohaoyang.github.io/2022/10/15/ferris-wheel/">here</a>.',
+    },
+    {
       demo_link: 'https://gaohaoyang.github.io/lottie-test/',
       img_link: 'https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pics/demos/lottieDemo.gif',
       code_link: 'https://github.com/Gaohaoyang/lottie-test',
