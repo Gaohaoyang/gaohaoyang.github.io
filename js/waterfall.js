@@ -13,6 +13,13 @@
    */
   var demoContent = [
     {
+      demo_link: 'https://gaohaoyang.github.io/pics/animation/reactNativeAnimation.html',
+      img_link: 'https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pics/demos/animationInReactNative.png',
+      title: 'Slide: Animations in React Native',
+      core_tech: 'Slide',
+      description: 'A presentation about animations in React Native.',
+    },
+    {
       demo_link: 'https://gaohaoyang.github.io/threeJourney/23-rose/',
       img_link: 'https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pics/3d_rose.gif',
       code_link: 'https://github.com/Gaohaoyang/threeJourney/tree/main/src/23-rose',
