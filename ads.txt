@@ -1,3 +1,4 @@
+google.com, pub-9139027259917346, DIRECT, f08c47fec0942fa0
 disqus.com, 2579946, DIRECT
 zetaglobal.net, 100, DIRECT
 amxrtb.com, 105199574, DIRECT
