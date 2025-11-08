@@ -1,4 +1,4 @@
-name: Fix Obsidian Image Links
+name: Fix Obsidian Image Links for Web Publishing
 
 on:
   push:
@@ -11,21 +11,59 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Fix Markdown image links
+
+      - name: Fix Markdown image links (resolve attachments)
         run: |
           pip install pathlib
           python3 <<'EOF'
-          import re, pathlib
-          for md in pathlib.Path('.').rglob('*.md'):
-              text = md.read_text(encoding='utf-8')
-              new = re.sub(r'!\[\[([^\]]+)\]\]', r'![](images/\1)', text)
-              if new != text:
-                  md.write_text(new, encoding='utf-8')
+          import re, pathlib, os
+
+          vault_root = pathlib.Path('.')
+          for md_path in vault_root.rglob('*.md'):
+              text = md_path.read_text(encoding='utf-8')
+              # Find all Obsidian-style embeds: ![[filename.png]]
+              def replacer(match):
+                  filename = match.group(1)
+                  # Look for image file in any attachments or images folder nearby
+                  # Start from the md file's folder
+                  search_dirs = [
+                      md_path.parent / 'attachments',
+                      md_path.parent / 'images'
+                  ]
+                  found_path = None
+                  for d in search_dirs:
+                      candidate = d / filename
+                      if candidate.exists():
+                          found_path = candidate
+                          break
+                  if not found_path:
+                      # Try walking up to vault root and search for image folders
+                      for parent in md_path.parents:
+                          for folder in ['attachments', 'images']:
+                              candidate = parent / folder / filename
+                              if candidate.exists():
+                                  found_path = candidate
+                                  break
+                          if found_path:
+                              break
+                  # If found, build relative path
+                  if found_path:
+                      rel_path = os.path.relpath(found_path, md_path.parent)
+                      return f'![]({rel_path})'
+                  else:
+                      # If not found, fallback to images/filename.png (may be broken)
+                      return f'![](images/{filename})'
+
+              new_text = re.sub(r'!\[\[([^\]]+)\]\]', replacer, text)
+              if new_text != text:
+                  md_path.write_text(new_text, encoding='utf-8')
+
           EOF
-      - name: Push fixed files
+
+      - name: Commit and push fixed files
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add .
-          git diff --cached --quiet || git commit -m "Auto-fix image links for web publishing"
+          git diff --cached --quiet || git commit -m "Auto-fix image links for any folder structure"
           git push
