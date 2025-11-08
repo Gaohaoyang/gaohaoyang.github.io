@@ -5,4 +5,4 @@ Location:
 ---
 dasda
 
-![[Pasted image 20251108201734.png]]
+![](images/Pasted image 20251108201734.png)
