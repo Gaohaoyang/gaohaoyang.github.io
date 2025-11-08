@@ -11,11 +11,11 @@ tags:: [[+Daily Notes]]
 
 ---
 ### 📅 Daily Questions
-##### 🌜 Last night, after ![[Pasted image 20251108195548.png]]work, I...
+##### 🌜 Last night, after ![](images/Pasted image 20251108195548.png)work, I...
 - 
 
 ##### 🙌 One thing I'm excited about right now is...
-- ![[Pasted image 20251108195552.png]]
+- ![](images/Pasted image 20251108195552.png)
 
 ##### 🚀 One+ thing I plan to accomplish today is...
 - [ ] 
