@@ -1,0 +1,31 @@
+name: Fix Obsidian Image Links
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  fix-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Fix Markdown image links
+        run: |
+          pip install pathlib
+          python3 <<'EOF'
+          import re, pathlib
+          for md in pathlib.Path('.').rglob('*.md'):
+              text = md.read_text(encoding='utf-8')
+              new = re.sub(r'!\[\[([^\]]+)\]\]', r'![](images/\1)', text)
+              if new != text:
+                  md.write_text(new, encoding='utf-8')
+          EOF
+      - name: Push fixed files
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add .
+          git diff --cached --quiet || git commit -m "Auto-fix image links for web publishing"
+          git push
